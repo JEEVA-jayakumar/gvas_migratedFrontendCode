@@ -11,7 +11,7 @@
     <!--END: table title -->
     <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
       <div class="col-md-4">
-        <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio :options="aggregatorOptions"
+        <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio :options="aggregatorOptions"
           @input="getaggregator" />
       </div>
     </div> -->
@@ -61,17 +61,13 @@
           <span class="label">{{ props.row.lostOrStolenRemarks }}</span>
         </q-td>
         <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{
-            props.row.deviceStatusDate | moment("Do MMM Y")
-          }}</span>
+          <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
         </q-td>
         <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-        <span class="label">{{
-          props.row.deviceStatusDate | moment("Do MMM Y")
-        }}</span>
+        <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
       </q-td> -->
         <q-td v-slot:body-cell-action="props" :props="props">
-          <q-btn highlight push class="q-mx-sm" color="positive" size="sm"
+          <q-btn push class="q-mx-sm" color="positive" size="sm"
             @click="Aggregatorsloststolendevice(props.row)">Lost/Stolen</q-btn>
         </q-td>
         <!-- <q-td auto-width key="action" :props="props">
@@ -79,8 +75,7 @@
               highlight
               push
               class="q-mx-sm"
-              color="positive"
-               @click="openAcceptModel(props.row)"
+              color="positive" @click="openAcceptModel(props.row)"
               size="sm"
              >Accept</q-btn>
            </q-td>
@@ -89,23 +84,20 @@
         <template slot="top" class="bottom-border">
           <!--START: table filter,search,excel download -->
           <div class="col-5">
-            <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
-              float-label="Search Using TID, MID, Lead ID, Merchant Name" class="q-mr-lg q-py-sm" />
+            <q-input clearable v-model="filter" separator color="grey-9" class="placeholder="Type.."
+              label="Search Using TID, MID, Lead ID, Merchant Name" class="q-mr-lg q-py-sm" />
           </div>
         </template>
       </q-table>  
   <div
         class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >Add Your Remarks</div>
-       <q-table table-class="customTableClass" v-model:columns="columns1" :rows="tableData1" row-key="field" color="grey-9"
-        :filter="filter1" :rows-per-page-options="[5, 10, 15, 20, 25]" :pagination="paginationControl1"
+       <q-table table-class="customTableClass" v-model:columns="columns1" :rows="tableData1" row-key="field" color="grey-9" class=":filter="filter1" :rows-per-page-options="[5, 10, 15, 20, 25]" :pagination="paginationControl1"
         :loading="toggleAjaxLoadFilter1" @request="lostOrStolenLoadInfo" table-style="word-break: break-all"
         class="payment_verification_table capitalize">
 
         <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-        <span class="label">{{
-          props.row.deviceStatusDate | moment("Do MMM Y")
-        }}</span>
+        <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
       </q-td> -->
         <q-td v-slot:body-cell-updatedAt="props" :props="props">{{
           props.row.aggregatorRegionalInventory.updatedAt == null ? "NA" :
@@ -121,29 +113,25 @@
             Finance</span>
         </q-td> -->
         <q-td v-slot:body-cell-action="props" :props="props">
-          <q-btn v-if="props.row.aggregatorRegionalInventory.deviceStatus == 8" disable push color="purple-9"
-            size="sm">Waiting for Approval</q-btn>
-          <q-btn v-else-if="props.row.aggregatorRegionalInventory.deviceStatus == 7" highlight push disable color="blue"
-            size="sm">Submitted By SO</q-btn>
-          <q-btn v-else-if="props.row.aggregatorRegionalInventory.deviceStatus == 10" highlight push disable color="red"
-            size="sm">Rejected By Finance</q-btn>
+          <q-btn v-if="props.row.aggregatorRegionalInventory.deviceStatus == 8" disable push color="purple-9" size="sm">Waiting for Approval</q-btn>
+          <q-btn v-else-if="props.row.aggregatorRegionalInventory.deviceStatus == 7" push disable color="blue" size="sm">Submitted By SO</q-btn>
+          <q-btn v-else-if="props.row.aggregatorRegionalInventory.deviceStatus == 10" push disable color="red" size="sm">Rejected By Finance</q-btn>
         </q-td>
         <q-td v-slot:body-cell-action="props" :props="props">
-          <q-btn v-if="props.row.aggregatorRegionalInventory.deviceStatus == 10" highlight push color="red" size="sm"
+          <q-btn v-if="props.row.aggregatorRegionalInventory.deviceStatus == 10" push color="red" size="sm"
             @click="Aggregatorsloststolendevice(props.row)">Lost/Stolen</q-btn>
-          <q-btn v-if="props.row.aggregatorRegionalInventory.deviceStatus == 8" highlight push color="purple-9"
-            size="sm" @click="Aggregatorsloststolendevice(props.row)">Lost/Stolen</q-btn>
-          <q-btn v-else-if="props.row.aggregatorRegionalInventory.deviceStatus == 7" highlight push class="q-mx-sm"
+          <q-btn v-if="props.row.aggregatorRegionalInventory.deviceStatus == 8" push color="purple-9" size="sm" @click="Aggregatorsloststolendevice(props.row)">Lost/Stolen</q-btn>
+          <q-btn v-else-if="props.row.aggregatorRegionalInventory.deviceStatus == 7" push class="q-mx-sm"
             color="positive" size="sm" @click="Aggregatorsloststolendevice(props.row)">Lost/Stolen</q-btn>
         </q-td>
         <template slot="top" class="bottom-border">
           <div class="col-md-5">
             <q-input clearable color="grey-9" v-model="filter1" placeholder="Type.."
-              float-label="Search Using TID, MID " class="q-mr-lg q-py-sm" />
+              label="Search Using TID, MID " class="q-mr-lg q-py-sm" />
           </div>
           <div class="col-md-6">
 
-            <q-btn square outline color="purple-9" label="Download as Excel" class="q-mr-lg q-py-sm float-right"
+            <q-btn square outline color="purple-9" class="label="Download as Excel" class="q-mr-lg q-py-sm float-right"
               size="md" @click="downloadLostDatas" />
 
           </div>

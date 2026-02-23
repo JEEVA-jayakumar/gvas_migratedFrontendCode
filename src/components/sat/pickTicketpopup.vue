@@ -30,7 +30,7 @@
                 <div class="q-mb-md">
                   <q-item-label><b>SAT forwarded date:</b></q-item-label>
                   <div>
-                    {{this.propRowDetails.subTicketsList[0].moveToSatDate | moment("Do MMM Y")}}
+                    {{ $moment_format(this.propRowDetails.subTicketsList[0].moveToSatDate, "Do MMM Y") }}
                   </div>
                 </div>
               </div>
@@ -40,10 +40,9 @@
                   style="width: 300px"
                   filter
                   clearable
-                  color="grey-9"
-                  v-model="formData.so"
+                  color="grey-9" v-model="formData.so"
                   :options="assignToOptions"
-                  float-label="Select FSE Name*"
+                  label="Select FSE Name*"
                 />
               </div>
             </div>
@@ -57,8 +56,7 @@
               label="Assign"
               style="width: 90px"
               @click="fnAssignTickets(formData)"
-              color="blue"
-            />
+              color="blue" class="/>
             <q-btn
               highlight
               push
@@ -67,8 +65,7 @@
               class="q-mx-sm"
               align="center"
               @click="emitfnshowUpdateOpenedExternal()"
-              color="negative"
-            />
+              color="negative" class="/>
           </q-card-actions>
         </q-card>
       </div>
@@ -212,9 +209,7 @@ export default {
                 color: "negative",
                 position: "bottom",
                 message:
-                  error.body.message == null
-                    ? "Please Try Again Later !"
-                    : error.body.message,
+                  (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                 icon: "thumb_down"
               });
             });

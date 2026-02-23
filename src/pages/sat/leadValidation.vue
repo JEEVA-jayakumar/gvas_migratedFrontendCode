@@ -15,8 +15,7 @@
           :columns="columns" row-key="name" :filter="filter" :pagination="paginationControl"
           :rows-per-page-options="[5,10,15,20]" :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
           <!--START: table body modification -->
-          <q-td v-slot:body-cell-createdAt="props" :props="props">{{ props.row.date | moment("Do MMM Y")
-            }}</q-td>
+          <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment_format(props.row.date, "Do MMM Y") }}</q-td>
 
           <q-td v-slot:body-cell-leadNumber="props" :props="props" class="cursor-pointer"
             @click.native="toggleLeadInformation(props.row)">
@@ -62,33 +61,32 @@
             <span class="label text-negative" v-else>Pending</span>
           </q-td>
           <q-td v-slot:body-cell-action="props" :props="props">
-            <q-btn v-if="props.row.leadStatus == $LEAD_STATUS_DATA_ENTRY_PENDING" highlight push outline
+            <q-btn v-if="props.row.leadStatus == $LEAD_STATUS_DATA_ENTRY_PENDING" push outline
               color="purple-9" size="sm"
               @click="$router.push('/sat/lead/validation/'+ props.row.leadId+'/data/entry')">Data Entry</q-btn>
 
-            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_SUBMITED_TO_MARS" highlight push class="disabled"
+            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_SUBMITED_TO_MARS" push class="disabled"
               color="purple-9" size="sm">Pending with MARS</q-btn>
 
             <q-btn
               v-else-if="props.row.leadStatus == $LEAD_STATUS_SUBMIT_TO_SAT_LEAD && props.row.verifiedFinanceStatus == $VERIFIED_FINANCE_STATUS_SUCCESS"
-              highlight push outline color="purple-9" size="sm"
+              push outline color="purple-9" size="sm"
               :to="'/sat/lead/validation/'+ props.row.leadId">Validate</q-btn>
-            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_REFER_BACK" highlight push outline color="amber-9"
-              size="sm" @click="$router.push('/sat/lead/validation/'+ props.row.leadId)">Referred Back</q-btn>
-            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_MARS_SUB_TID_PENDING" highlight push outline
+            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_REFER_BACK" push outline color="amber-9" size="sm" @click="$router.push('/sat/lead/validation/'+ props.row.leadId)">Referred Back</q-btn>
+            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_MARS_SUB_TID_PENDING" push outline
               color="amber-9" size="sm"
               @click="$router.push('/sat/lead/validation/'+ props.row.leadId+'/data/entry')">Sub Tid Validation</q-btn>
-            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_BASE_TID_PENDING " highlight push outline
+            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_BASE_TID_PENDING " push outline
               color="amber-9" size="sm"
               @click="$router.push('/sat/lead/validation/'+ props.row.leadId+'/data/entry')">Sub Tid Validation</q-btn>
-            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_MARS_REFERRAL_BACK_DATA_ENTRY_PENDING" highlight push
+            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_MARS_REFERRAL_BACK_DATA_ENTRY_PENDING" push
               outline color="amber-9" size="sm"
               @click="$router.push('/sat/lead/validation/'+ props.row.leadId+'/data/entry')">RB - data entry</q-btn>
 
-            <q-btn v-else class="disabled" highlight push outline color="grey-9" size="sm">Validate</q-btn>
+            <q-btn v-else class="disabled" push outline color="grey-9" size="sm">Validate</q-btn>
           </q-td>
           <q-td v-slot:body-cell-rejectLead="props" :props="props">
-            <q-btn v-if="props.row.leadStatus == $LEAD_STATUS_SUBMIT_TO_SAT_LEAD  " highlight push outline
+            <q-btn v-if="props.row.leadStatus == $LEAD_STATUS_SUBMIT_TO_SAT_LEAD  " push outline
               class="q-mx-sm" color="negative" @click="openRejectLead(props.row)" size="sm">Reject Lead</q-btn>
           </q-td>
           <!-- END: table body modification -->
@@ -96,7 +94,7 @@
             <!--START: table filter,search -->
             <div class="col-md-5">
               <q-input clearable color="grey-9" v-model="filter" placeholder="Type.." :debounce="600"
-                class="q-mr-lg q-py-sm" float-label="Search By Merchant Name, Lead ID, Lead Source.." />
+                class="q-mr-lg q-py-sm" label="Search By Merchant Name, Lead ID, Lead Source.." />
             </div>
             <!--END: table filter,search -->
           </template>

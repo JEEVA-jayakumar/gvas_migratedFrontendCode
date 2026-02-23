@@ -11,21 +11,19 @@
         <div class="col-md-6">
           <q-input
             clearable
-            color="grey-9"
-            @blur="$v.formData.searchTerm.$touch"
-            :error="$v.formData.searchTerm.$error"
+            color="grey-9" class="@blur="v$.formData.searchTerm.$touch"
+            :error="v$.formData.searchTerm.$error"
             v-model="formData.searchTerm"
             placeholder="Type.."
-            float-label="Search .."
+            label="Search .."
             class="q-mr-lg q-py-sm"
           />
         </div>
         <div class="col-sm-2">
           <q-select
-            float-label="Select Any One"
+            label="Select Any One"
             placeholder="Select Any One"
-            color="grey-9"
-            v-model="formData.select"
+            color="grey-9" v-model="formData.select"
             separator
             :options="dropDown"
           />
@@ -35,8 +33,7 @@
             <q-radio
               v-for="(item, index) in flagOptions"
               :key="index"
-              color="grey-9"
-              v-model.trim="formData.flag"
+              color="grey-9" class="v-model.trim="formData.flag"
               :val="item.value"
               :label="item.label"
             />
@@ -45,8 +42,7 @@
             <q-radio
               v-for="(item, index) in flagOptions1"
               :key="index"
-              color="grey-9"
-              v-model.trim="formData.flag"
+              color="grey-9" class="v-model.trim="formData.flag"
               :val="item.value"
               :label="item.label"
             />
@@ -57,8 +53,7 @@
             class="auto"
             size="md"
             type="button"
-            color="purple-9"
-            @click="globalSearchSubmit(formData)"
+            color="purple-9" @click="globalSearchSubmit(formData)"
             >Submit
           </q-btn>
         </div>
@@ -940,9 +935,9 @@ export default {
       }
     },
     globalSearchSubmit({ pagination }) {
-      this.$v.formData.$touch();
+      this.v$.formData.$touch();
       console.log("formData",this.formData)
-      if (this.$v.formData.$error) {
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         console.log("this.paginationControl",this.paginationControl)

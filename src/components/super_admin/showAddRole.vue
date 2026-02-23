@@ -23,10 +23,9 @@
           <div class="col-md-8">
            <q-select
             v-model="formData.hierarchyId"
-            float-label="Hierarchy"
+            label="Hierarchy"
             placeholder="Select Hierarchy"
-            class="text-weight-regular text-grey-8" color="grey-9"
-            :options="getAllHierarchiesData"
+            class="text-weight-regular text-grey-8" color="grey-9" class=":options="getAllHierarchiesData"
               />
           </div>
           </div>
@@ -35,11 +34,10 @@
           <div class="column group q-py-sm">
           <div class="col-md-8">
             <q-input v-model="formData.role" 
-            @blur="$v.formData.role.$touch"
-            :error="$v.formData.role.$error"
+            @blur="v$.formData.role.$touch"
+            :error="v$.formData.role.$error"
             class="text-weight-regular text-grey-8" 
-            color="grey-9" 
-            float-label="Role"
+            color="grey-9" class="label="Role"
              placeholder="Role" /> 
           </div>
 
@@ -48,18 +46,16 @@
             <q-color 
               clearable
               v-model="formData.roleColor"
-              @blur="$v.formData.roleColor.$touch"
-             :error="$v.formData.roleColor.$error"
-              popover float-label="Choose a role color" color="grey-9"
-            />
+              @blur="v$.formData.roleColor.$touch"
+             :error="v$.formData.roleColor.$error"
+              popover label="Choose a role color" color="grey-9" class="/>
           </div>
         </div>
 
           <div class="group" align="right">
           <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitToggleMyAccount()">Cancel
           </q-btn>
-          <q-btn size="md" align="right" @click="fnAddRoleSubmit(formData)" color="purple-9">Save
-          </q-btn>
+          <q-btn size="md" align="right" @click="fnAddRoleSubmit(formData)" color="purple-9">Save" class="</q-btn>
         </div>
         
       </div>
@@ -151,9 +147,9 @@ export default {
 
     fnAddRoleSubmit(formData){
       
-      this.$v.formData.$touch();
+      this.v$.formData.$touch();
 
-      if (this.$v.formData.$error) {
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({
@@ -182,7 +178,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

@@ -21,8 +21,7 @@
         table-class="customTableClass"
         :columns="columns"
         :rows="tableData"
-        color="grey-9"
-        :filter="filterSearch"
+        color="grey-9" class=":filter="filterSearch"
         :pagination="paginationControl"
         :rows-per-page-options="[5,10,15,20,25]"
         :loading="toggleAjaxLoadFilter"
@@ -31,16 +30,15 @@
        <q-td
           v-slot:body-cell-updated_at="props"
           :props="props"
-        >{{ props.row.updatedAt ==null? "NA" : props.row.updatedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.updatedAt ==null? "NA" : props.row.updatedAt, "Do MMM Y") }}</q-td>
         <template slot="top">
           <!--START: table filter,search -->
           <div class="col-md-5">
             <q-input
               clearable
-              color="grey-9"
-              v-model="filterSearch"
+              color="grey-9" v-model="filterSearch"
               placeholder="Type.."
-              float-label="Search Using Device Serial Number"
+              label="Search Using Device Serial Number"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -49,8 +47,7 @@
             <q-btn 
             square 
             outline 
-            color="purple-9" 
-            label="Download as Excel" 
+            color="purple-9" class="label="Download as Excel"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloadLostOrStolenList()" />
@@ -205,7 +202,7 @@ export default {
     //   // document.body.appendChild(element);
 
     //   // element.click();
-    //   let link = document.createElement("a");
+    //   let clickable = document.createElement("a");
     //   link.href = window.URL.createObjectURL(file);
     //   link.download = "serialNumber.txt";
 

@@ -13,8 +13,7 @@
             outline
             round
             size="sm"
-            color="dark"
-            icon="clear"
+            color="dark" class="icon="clear"
             @click="emitToggleRemarks"
           />
         </div>
@@ -30,8 +29,7 @@
         </div>
       </div>
       <div class="col-md-12 group" align="right">
-        <q-btn align="right" @click="Download()" color="purple-9">Download</q-btn>
-      </div>
+        <q-btn align="right" @click="Download()" color="purple-9">Download</q-btn>" class="</div>
     </q-dialog>
   </div>
 </template>

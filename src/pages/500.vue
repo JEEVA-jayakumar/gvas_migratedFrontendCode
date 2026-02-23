@@ -8,8 +8,7 @@
     </p>
     <p class="text-faded">Sorry, something went wrong...</p>
     <q-btn
-      color="secondary"
-      style="width:200px;"
+      color="secondary" class="style="width:200px;"
       @click="$router.push('/')"
     >Go back</q-btn>
   </div>

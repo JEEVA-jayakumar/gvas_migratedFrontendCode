@@ -14,10 +14,9 @@
         <div class="col-md-12">
          <q-input
           v-model="formData.name"
-          :error="$v.formData.name.$error"
+          :error="v$.formData.name.$error"
          class="text-weight-regular text-grey-8"
-         color="grey-9"
-         float-label="Enter Status"
+         color="grey-9" class="label="Enter Status"
          placeholder="Enter Status"
         />
         </div>
@@ -62,8 +61,8 @@ export default {
 
     fnfinalsubmitAddCancelStatus (formData) {
       console.log('SUBMIT Sub Task RESPONSE', JSON.stringify(formData))
-      // this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      // this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify('Please review fields again.')
       } else {
         this.$q.loading.show({

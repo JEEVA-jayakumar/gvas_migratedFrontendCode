@@ -3,14 +3,18 @@
     <!-- content -->
     <div>
 
-      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1">
-        <q-tab default color="dark" name="active" slot="title" label="Active TID" />
-        <!-- <q-tab color="dark" name="deactive" slot="title" label="Deactive TID" /> -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1">" class="<q-tab default color="dark" name="active"  label="Active TID" />
+        <!-- <q-tab color="dark" class="name="deactive"  label="Deactive TID" /> -->
 
-        <q-tab-panel name="active">
+
+
+
+
+      </q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="active">
           <q-table :rows="getlsVasHostInstanceDetails" table-class="customSATableClass" :columns="columns" :filter="filterSearch"
-            :pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
-            @request="ajaxLoadAllLeadInfo">
+            :pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9" class="@request="ajaxLoadAllLeadInfo">
 
             <q-td v-slot:body-cell-action="props" :props="props">
               <div class="row no-wrap no-padding">
@@ -26,8 +30,8 @@
               <div class="col-md-12 group">
                 <div class="row">
                   <div class="col-md-6">
-                    <q-input clearable color="grey-9" v-model.trim="filterSearch" placeholder="Type.."
-                      float-label="Search by Plan Name" />
+                    <q-input clearable color="grey-9" class="v-model.trim="filterSearch" placeholder="Type.."
+                      label="Search by Plan Name" />
                   </div>
                 </div>
               </div>
@@ -41,10 +45,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-
-
-
-      </q-tabs>
+</q-tab-panels>
 
       <AddNewConfigurarions
        v-if="propShowAddNewConfigurarions" 

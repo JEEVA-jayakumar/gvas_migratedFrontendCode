@@ -9,7 +9,7 @@
         <div class="row items-center q-py-sm bottom-border">
           <div class="col">Document Viewer</div>
           <div class="col" align="right">
-            <q-btn outline round size="sm" color="dark" icon="clear" @click="emitToggleRemarks"/>
+            <q-btn outline round size="sm" color="dark" class="icon="clear" @click="emitToggleRemarks"/>
           </div>
         </div>
         <div class="row q-py-sm">

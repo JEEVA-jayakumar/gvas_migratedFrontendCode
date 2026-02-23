@@ -14,26 +14,25 @@
                 <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
                     <q-card style="width:250%">
                         <q-card-section>
-                            <q-list no-border>
+                            <q-list >
                                 <div class="col-md-12">
                                     <q-select filter clearable color="grey-9" v-model="formData.so" :options="assignToOptions"
-                                        float-label="Select SO*" />
+                                        label="Select SO*" />
                                 </div>
                                 <div class="col-md-12">
                                     <q-select color="grey-9" v-model="formData.Reassign" :options="ReasonListOptions"
-                                        float-label="Select Reason List*" />
+                                        label="Select Reason List*" />
                                 </div>
                                 <!-- {{formData.Reassign}} -->
                                 <div v-if="this.formData.Reassign == 'Other reason'">
-                                    <q-input type="textarea" placeholder="Reason Type.." class="q-my-md" color="grey-9"
-                                        align="left" value="" v-model="formData.reason" />
+                                    <q-input type="textarea" placeholder="Reason Type.." class="q-my-md" color="grey-9" class="align="left" value="" v-model="formData.reason" />
                                 </div>
                             </q-list>
                         </q-card-section>
                         <q-card-actions align="end">
                             <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8"
                                 @click="emitfnshowUpdateOpenedExternal()">Cancel</q-btn>
-                            <q-btn label="submit" @click="fnEDITREOPEN(formData)" color="purple-9" />
+                            <q-btn label="submit" @click="fnEDITREOPEN(formData)" color="purple-9" class="/>
                         </q-card-actions>
                     </q-card>
                 </div>
@@ -199,7 +198,7 @@ export default {
                             this.$q.notify({
                                 color: "negative",
                                 position: "bottom",
-                                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                                 icon: "thumb_down"
                             });
                         });

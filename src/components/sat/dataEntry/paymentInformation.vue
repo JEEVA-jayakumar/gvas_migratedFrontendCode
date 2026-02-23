@@ -5,12 +5,11 @@
         <p class="text-caption">Device Owned By</p>
         <div class="group">
           <q-radio
-            @blur="$v.merchant.paymentDetails.deviceOwnedBy.$touch"
-            :error="$v.merchant.paymentDetails.deviceOwnedBy.$error"
+            @blur="v$.merchant.paymentDetails.deviceOwnedBy.$touch"
+            :error="v$.merchant.paymentDetails.deviceOwnedBy.$error"
             v-for="(item,index) in deviceOwnedByOptions"
             :key="index"
-            color="grey-9"
-            v-model="merchant.paymentDetails.deviceOwnedBy"
+            color="grey-9" v-model="merchant.paymentDetails.deviceOwnedBy"
             :val="item.value"
             :label="item.label"
           />
@@ -18,35 +17,32 @@
       </div>
       <div class="col-md-6 col-sm-12">
         <q-input
-          color="grey-9"
-          type="number"
-          @blur="$v.merchant.paymentDetails.installationFee.$touch"
-          :error="$v.merchant.paymentDetails.installationFee.$error"
+          color="grey-9" class="type="number"
+          @blur="v$.merchant.paymentDetails.installationFee.$touch"
+          :error="v$.merchant.paymentDetails.installationFee.$error"
           v-model="merchant.paymentDetails.installationFee"
-          float-label="Installation Fee*"
+          label="Installation Fee*"
           placeholder="Installation Fee*"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
           placeholder="Choose from the below"
-          color="grey-9"
-          @blur="$v.merchant.paymentDetails.terminalModeCode.$touch"
-          :error="$v.merchant.paymentDetails.terminalModeCode.$error"
+          color="grey-9" class="@blur="v$.merchant.paymentDetails.terminalModeCode.$touch"
+          :error="v$.merchant.paymentDetails.terminalModeCode.$error"
           v-model="merchant.paymentDetails.terminalModeCode"
-          float-label="Terminal Model*"
+          label="Terminal Model*"
           :options="terminalModelSet"
         />
       </div>
       <div class="col-md-6 col-sm-12">
         <q-input
-          color="grey-9"
-          type="number"
+          color="grey-9" class="type="number"
           disable
-          @blur="$v.merchant.paymentDetails.numberOfTerminals.$touch"
-          :error="$v.merchant.paymentDetails.numberOfTerminals.$error"
+          @blur="v$.merchant.paymentDetails.numberOfTerminals.$touch"
+          :error="v$.merchant.paymentDetails.numberOfTerminals.$error"
           v-model="merchant.paymentDetails.numberOfTerminals"
-          float-label="No of Terminals*"
+          label="No of Terminals*"
           placeholder="No of Terminals*"
         />
       </div>
@@ -55,12 +51,11 @@
         <div class="group">
           <q-radio
             disable
-            @blur="$v.merchant.paymentDetails.cashAtPosEnabled.$touch"
-            :error="$v.merchant.paymentDetails.cashAtPosEnabled.$error"
+            @blur="v$.merchant.paymentDetails.cashAtPosEnabled.$touch"
+            :error="v$.merchant.paymentDetails.cashAtPosEnabled.$error"
             v-for="(item,index) in cashAtPosEnabledOptions"
             :key="index"
-            color="grey-9"
-            v-model="merchant.paymentDetails.cashAtPosEnabled"
+            color="grey-9" v-model="merchant.paymentDetails.cashAtPosEnabled"
             :val="item.value"
             :label="item.label"
           />
@@ -69,40 +64,36 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
           placeholder="Choose from the below*"
-          color="grey-9"
-          v-model="merchant.paymentDetails.rentalPlanCode"
-          float-label="Rental Plan*"
+          color="grey-9" v-model="merchant.paymentDetails.rentalPlanCode"
+          label="Rental Plan*"
           :options="rentalPlanSet"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
           placeholder="Choose from the below*"
-          color="grey-9"
-          v-model="merchant.paymentDetails.rentalMode"
-          float-label="Rental Mode*"
+          color="grey-9" v-model="merchant.paymentDetails.rentalMode"
+          label="Rental Mode*"
           :options="rentalModeOptions"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
           placeholder="Choose from the below*"
-          color="grey-9"
-          @blur="$v.merchant.paymentDetails.serviceProvider.$touch"
-          :error="$v.merchant.paymentDetails.serviceProvider.$error"
+          color="grey-9" class="@blur="v$.merchant.paymentDetails.serviceProvider.$touch"
+          :error="v$.merchant.paymentDetails.serviceProvider.$error"
           v-model="merchant.paymentDetails.serviceProvider"
-          float-label="Service provider*"
+          label="Service provider*"
           :options="serviceProviderListSet"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
           placeholder="Choose from the below*"
-          color="grey-9"
-          @blur="$v.merchant.paymentDetails.networkPreferred.$touch"
-          :error="$v.merchant.paymentDetails.networkPreferred.$error"
+          color="grey-9" class="@blur="v$.merchant.paymentDetails.networkPreferred.$touch"
+          :error="v$.merchant.paymentDetails.networkPreferred.$error"
           v-model="merchant.paymentDetails.networkPreferred"
-          float-label="Network provider*"
+          label="Network provider*"
           :options="networkProviderListSet"
         />
       </div>
@@ -110,12 +101,11 @@
         <p class="text-caption">Rental Type</p>
         <div class="group">
           <q-radio
-            @blur="$v.merchant.paymentDetails.rentalType.$touch"
-            :error="$v.merchant.paymentDetails.rentalType.$error"
+            @blur="v$.merchant.paymentDetails.rentalType.$touch"
+            :error="v$.merchant.paymentDetails.rentalType.$error"
             v-for="(item,index) in rentalTypeOptions"
             :key="index"
-            color="grey-9"
-            v-model="merchant.paymentDetails.rentalType"
+            color="grey-9" v-model="merchant.paymentDetails.rentalType"
             :val="item.value"
             :label="item.label"
             @input="merchant.paymentDetails.gracePeriod = 0"
@@ -124,34 +114,31 @@
       </div>
       <div v-if="merchant.paymentDetails.rentalType == 'R'" class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.paymentDetails.gracePeriod.$touch"
-          :error="$v.merchant.paymentDetails.gracePeriod.$error"
-          color="grey-9"
-          type="number"
+          @blur="v$.merchant.paymentDetails.gracePeriod.$touch"
+          :error="v$.merchant.paymentDetails.gracePeriod.$error"
+          color="grey-9" class="type="number"
           v-model="merchant.paymentDetails.gracePeriod"
-          float-label="Grace period*"
+          label="Grace period*"
           placeholder="Grace period*"
         />
       </div>
       <div v-if="merchant.paymentDetails.rentalType == 'A'" class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9"
-          type="number"
-          @blur="$v.merchant.paymentDetails.advanceRentCollected.$touch"
-          :error="$v.merchant.paymentDetails.advanceRentCollected.$error"
+          color="grey-9" class="type="number"
+          @blur="v$.merchant.paymentDetails.advanceRentCollected.$touch"
+          :error="v$.merchant.paymentDetails.advanceRentCollected.$error"
           v-model="merchant.paymentDetails.advanceRentCollected"
-          float-label="Advance Rent Collected*"
+          label="Advance Rent Collected*"
           placeholder="Advance Rent Collected*"
         />
       </div>
       <div v-if="merchant.paymentDetails.rentalType == 'A'" class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9"
-          type="number"
-          @blur="$v.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$touch"
-          :error="$v.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$error"
+          color="grey-9" class="type="number"
+          @blur="v$.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$touch"
+          :error="v$.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$error"
           v-model="merchant.paymentDetails.noOfMonthRentPaidInAdvance"
-          float-label="No. Of Month Rent Paid In Advance*"
+          label="No. Of Month Rent Paid In Advance*"
           placeholder="No. Of Month Rent Paid In Advance*"
         />
       </div>
@@ -159,12 +146,11 @@
         <p class="text-caption">Advanced Rent Mode</p>
         <div class="group">
           <q-radio
-            @blur="$v.merchant.paymentDetails.advanceRentMode.$touch"
-            :error="$v.merchant.paymentDetails.advanceRentMode.$error"
+            @blur="v$.merchant.paymentDetails.advanceRentMode.$touch"
+            :error="v$.merchant.paymentDetails.advanceRentMode.$error"
             v-for="(item,index) in advanceRentModeOptions"
             :key="index"
-            color="grey-9"
-            v-model="merchant.paymentDetails.advanceRentMode"
+            color="grey-9" v-model="merchant.paymentDetails.advanceRentMode"
             :val="item.value"
             :label="item.label"
           />
@@ -172,48 +158,44 @@
       </div>
       <div class="col-md-6 col-sm-12">
         <q-input
-          color="grey-9"
-          type="number"
-          @blur="$v.merchant.paymentDetails.devicePrice.$touch"
-          :error="$v.merchant.paymentDetails.devicePrice.$error"
+          color="grey-9" class="type="number"
+          @blur="v$.merchant.paymentDetails.devicePrice.$touch"
+          :error="v$.merchant.paymentDetails.devicePrice.$error"
           v-model="merchant.paymentDetails.devicePrice"
-          float-label="Device Price"
+          label="Device Price"
           placeholder="Device Price"
         />
       </div>
       <div class="col-md-6 col-sm-12">
         <q-input
-          color="grey-9"
-          type="number"
-          @blur="$v.merchant.paymentDetails.otherCharges.$touch"
-          :error="$v.merchant.paymentDetails.otherCharges.$error"
+          color="grey-9" class="type="number"
+          @blur="v$.merchant.paymentDetails.otherCharges.$touch"
+          :error="v$.merchant.paymentDetails.otherCharges.$error"
           v-model="merchant.paymentDetails.otherCharges"
-          float-label="Other Charges"
+          label="Other Charges"
           placeholder="Other Charges"
         />
       </div>
       <div class="col-md-6 col-sm-12">
         <q-input
-          color="grey-9"
-          type="number"
-          @blur="$v.merchant.paymentDetails.totalAmountPaid.$touch"
-          :error="$v.merchant.paymentDetails.totalAmountPaid.$error"
+          color="grey-9" class="type="number"
+          @blur="v$.merchant.paymentDetails.totalAmountPaid.$touch"
+          :error="v$.merchant.paymentDetails.totalAmountPaid.$error"
           v-model="merchant.paymentDetails.totalAmountPaid"
-          float-label="Total Amount Paid"
+          label="Total Amount Paid"
           placeholder="Total Amount Paid"
         />
       </div>
     </div>
     <q-stepper-navigation>
-      <q-btn color="primary" class="q-ma-xs" icon="check" @click="validate" label="Continue"/>
+      <q-btn color="primary" class="class="q-ma-xs" icon="check" @click="validate" label="Continue"/>
       <q-btn
-        color="amber-10"
-        class="q-ma-xs"
+        color="amber-10" class="class="q-ma-xs"
         icon="save"
         label="Save Partial"
         @click="$emit('saveData','paymentDetails',merchant)"
       />
-      <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="$emit('goBack')" label="Back"/>
+      <q-btn color="grey-7" class="class="q-ma-xs" icon="block" @click="$emit('goBack')" label="Back"/>
     </q-stepper-navigation>
     <div class="hidden">{{makePropsReactive}}</div>
   </div>
@@ -478,8 +460,8 @@ export default {
   },
   methods: {
     validate() {
-      this.$v.merchant.paymentDetails.$touch();
-      if (this.$v.merchant.paymentDetails.$error) {
+      this.v$.merchant.paymentDetails.$touch();
+      if (this.v$.merchant.paymentDetails.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$emit("goNext", "paymentDetails", this.merchant);

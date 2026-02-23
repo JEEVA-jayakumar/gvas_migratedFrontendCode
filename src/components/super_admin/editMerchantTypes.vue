@@ -18,11 +18,10 @@
           <div class="col-md-12">
             <q-input
               v-model="formData.merchantTypeName"
-              @blur="$v.formData.merchantTypeName.$touch"
-              :error="$v.formData.merchantTypeName.$error"
+              @blur="v$.formData.merchantTypeName.$touch"
+              :error="v$.formData.merchantTypeName.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="Merchant Type"
+              color="grey-9" class="label="Merchant Type"
               placeholder="Merchant Type"
               @keyup.enter="submitMerchantTypeData(formData)"
             />
@@ -30,11 +29,10 @@
           <div class="col-md-12">
             <q-input
               v-model="formData.marsAgreementId"
-              @blur="$v.formData.marsAgreementId.$touch"
-              :error="$v.formData.marsAgreementId.$error"
+              @blur="v$.formData.marsAgreementId.$touch"
+              :error="v$.formData.marsAgreementId.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="Mars Agreement Id"
+              color="grey-9" class="label="Mars Agreement Id"
               placeholder="Mars Agreement Id"
               @keyup.enter="submitMerchantTypeData(formData)"
             />
@@ -48,8 +46,7 @@
               class="bg-white text-weight-regular text-grey-8"
               @click="toggleModal()"
             >Cancel</q-btn>
-            <q-btn align="right" @click="submitMerchantTypeData(formData)" color="purple-9">Save</q-btn>
-          </div>
+            <q-btn align="right" @click="submitMerchantTypeData(formData)" color="purple-9">Save</q-btn>" class="</div>
         </div>
       </form>
     </q-dialog>
@@ -93,8 +90,8 @@ export default {
       this.$emit("emitfnForMerchantTypeTableRefresh");
     },
     submitMerchantTypeData() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
       } else {
         this.$q.loading.show({
           delay: 100, // ms
@@ -118,7 +115,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

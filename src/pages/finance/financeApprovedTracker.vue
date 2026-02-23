@@ -10,10 +10,14 @@
         </div>
         <!--END: table title -->
         <!-- table finance approved tracker -->
-        <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @select="goToQrMerchant">
-          <q-tab default color="dark" name="tab-1" slot="title" label="Pos Merchant" />
-        <q-tab color="dark" name="tab-2" slot="title" label="QR Merchant" />
-        <q-tab-panel name="tab-1">
+        <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" class="@select="goToQrMerchant">
+          <q-tab default color="dark" class="name="tab-1"  label="Pos Merchant" />
+        <q-tab color="dark" class="name="tab-2"  label="QR Merchant" />
+
+
+      </q-tabs>
+<q-tab-panels v-model="activeTab" animated>
+<q-tab-panel name="tab-1">
         <q-table
           table-class="customTableClass"
           :rows="tableData"
@@ -25,9 +29,7 @@
           row-key="name"
         >
           <q-td v-slot:body-cell-createdAt="props" :props="props">
-            <span class="capitalize">{{
-              props.row.submissionDate | moment("Do MMM Y")
-            }}</span>
+            <span class="capitalize">{{ $moment_format(props.row.submissionDate, "Do MMM Y") }}</span>
           </q-td>
           <!--START: Amount status -->
           <!-- <q-td v-slot:body-cell-amount_status="props" :props="props">
@@ -42,12 +44,10 @@
           <!--END: Amount status -->
           <!-- START: Lead Number -->
           <q-td v-slot:body-cell-approvedDate="props" :props="props">
-            <span class="label">{{ props.row.approvedDate | moment("Do MMM Y") }}</span>
+            <span class="label">{{ $moment_format(props.row.approvedDate, "Do MMM Y") }}</span>
           </q-td>
           <q-td v-slot:body-cell-submittedToFinanceDate="props" :props="props">
-            <span class="label">{{
-              props.row.submittedToFinanceDate | moment("Do MMM Y")
-            }}</span>
+            <span class="label">{{ $moment_format(props.row.submittedToFinanceDate, "Do MMM Y") }}</span>
           </q-td>
           <!-- END: Lead Number -->
           <!-- START: Lead Number -->
@@ -63,9 +63,7 @@
           <!-- START: TID -->
           <q-td v-slot:body-cell-updatedAt="props" :props="props">
             <!-- <span class="label text-primary"># {{props.row.tid}}</span> -->
-            <span class="label">{{
-              props.row.leadLastUpdated | moment("Do MMM Y")
-            }}</span>
+            <span class="label">{{ $moment_format(props.row.leadLastUpdated, "Do MMM Y") }}</span>
           </q-td>
           <!-- END: TID -->
           <!--START: table search, filter -->
@@ -74,10 +72,9 @@
             <div class="col-md-5">
               <q-input
                 clearable
-                color="grey-9"
-                v-model="filter"
+                color="grey-9" v-model="filter"
                 placeholder="Type.."
-                float-label="Search .. "
+                label="Search .. "
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -87,17 +84,17 @@
             <!--END: table filter dropdown -->
             <!--START: table excel download -->
             <!-- <div class="col-md-4" align="right">
-              <q-btn outline color="dark" label="Download as excel" @click="downloadReport" />
+              <q-btn outline color="dark" class="label="Download as excel" @click="downloadReport" />
             </div> -->
             <div class="col-md-4" align="right">
-              <q-btn outline color="dark" label="Download as excel" @click="downloadReport" />
+              <q-btn outline color="dark" class="label="Download as excel" @click="downloadReport" />
             </div>
             <!--END: table excel download -->
           </template>
           <!--END: table search, filter -->
         </q-table>
       </q-tab-panel>
-      <q-tab-panel name="tab-2">
+<q-tab-panel name="tab-2">
 
         <q-table
           table-class="customTableClass"
@@ -110,14 +107,14 @@
           row-key="name"
         >
           <q-td v-slot:body-cell-createdAt="props" :props="props">
-            <span class="capitalize">{{props.row.submissionDate | moment("Do MMM Y")}}</span>
+            <span class="capitalize">{{ $moment_format(props.row.submissionDate, "Do MMM Y") }}</span>
           </q-td>
          
           <q-td v-slot:body-cell-approvedDate="props" :props="props">
-            <span class="label">{{props.row.approvedDate | moment("Do MMM Y") }}</span>
+            <span class="label">{{ $moment_format(props.row.approvedDate, "Do MMM Y") }}</span>
           </q-td>
           <q-td v-slot:body-cell-submittedToFinanceDate="props" :props="props">
-            <span class="label">{{props.row.submittedToFinanceDate | moment("Do MMM Y") }}</span>
+            <span class="label">{{ $moment_format(props.row.submittedToFinanceDate, "Do MMM Y") }}</span>
           </q-td>
           <!-- END: Lead Number -->
           <!-- START: Lead Number -->
@@ -133,7 +130,7 @@
           <!-- START: TID -->
           <q-td v-slot:body-cell-updatedAt="props" :props="props">
             <!-- <span class="label text-primary"># {{props.row.tid}}</span> -->
-            <span class="label">{{props.row.leadLastUpdated | moment("Do MMM Y") }}</span>
+            <span class="label">{{ $moment_format(props.row.leadLastUpdated, "Do MMM Y") }}</span>
           </q-td>
           <!-- END: TID -->
           <!--START: table search, filter -->
@@ -142,10 +139,9 @@
             <div class="col-md-5">
               <q-input
                 clearable
-                color="grey-9"
-                v-model="filter1"
+                color="grey-9" v-model="filter1"
                 placeholder="Type.."
-                float-label="Search .. "
+                label="Search .. "
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -155,14 +151,14 @@
             <!--END: table filter dropdown -->
             <!--START: table excel download -->
             <div class="col-md-4" align="right">
-              <q-btn outline color="dark" label="Download as excel" @click="downloadQrReport" />
+              <q-btn outline color="dark" class="label="Download as excel" @click="downloadQrReport" />
             </div>
             <!--END: table excel download -->
           </template>
           <!--END: table search, filter -->
         </q-table>
       </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
       </q-pull-to-refresh>
       <!-- <download-financeapproval></download-financeapproval> -->
       <downloadFinanceapproval

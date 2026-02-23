@@ -39,8 +39,7 @@
                     :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
                     @click="props.toggleFullscreen"
                     class="q-mt-lg"
-                    color="grey-9"
-                    size="sm"
+                    color="grey-9" size="sm"
           />-->
           <!-- </div> -->
           <!--END: table fullscreen mode -->
@@ -51,9 +50,8 @@
               clearable
               v-model="filter"
               separator
-              color="grey-9"
-              placeholder="Type.."
-              float-label="SO Name,Region,DeviceType"
+              color="grey-9" class="placeholder="Type.."
+              label="SO Name,Region,DeviceType"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -63,7 +61,7 @@
           <div class="col-md-5">
             <q-select
               v-model="filter_values"
-              float-label="So Name"
+              label="So Name"
               class="q-mr-lg q-py-sm"
               :options="data"
             />

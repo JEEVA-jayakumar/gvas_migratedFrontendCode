@@ -7,7 +7,7 @@
           </div>
           <q-card style="width:1047px">
             <q-card-section>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <q-list no-border>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <q-list >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <q-item>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <q-item-section>
                    <textarea 
@@ -26,7 +26,7 @@
           <q-card-section>
                   <q-item-section align="center">
                     <q-btn class="common-btn"
-              color="purple-9" :disabled="this.formData.tokenLeadForm == ''" toggle-color="primary" size="15px" label="Submit"
+              color="purple-9" class=":disabled="this.formData.tokenLeadForm == ''" toggle-color="primary" size="15px" label="Submit"
                 @click="fnFinalSubmit(formData)" />
               </q-item-section>
             </q-card-section>
@@ -85,8 +85,8 @@
   
       fnFinalSubmit(request) {
         // console.log("fnFinalSubmit-------------->>>>",JSON.stringify(request.tokenLeadForm))
-        this.$v.formData.$touch();
-        if (this.$v.formData.$error) {
+        this.v$.formData.$touch();
+        if (this.v$.formData.$error) {
           this.$q.notify("Please review fields again.");
         } else {
           // let requestParams = {

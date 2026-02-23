@@ -57,7 +57,7 @@
           :props="props"
         >{{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}</q-td>
         <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{props.row.deviceStatusDate | moment("Do MMM Y")}}</span>
+          <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
         </q-td>
 
         <template slot="top" >
@@ -67,9 +67,8 @@
               clearable
               v-model="filter"
               separator
-              color="grey-9"
-              placeholder="Type.."
-              float-label="Search by MID, TID, Merchant Name"
+              color="grey-9" class="placeholder="Type.."
+              label="Search by MID, TID, Merchant Name"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -78,8 +77,7 @@
             <q-btn 
             square 
             outline 
-            color="purple-9" 
-            label="Download as Excel" 
+            color="purple-9" class="label="Download as Excel"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloadmastertrackerlist()" />

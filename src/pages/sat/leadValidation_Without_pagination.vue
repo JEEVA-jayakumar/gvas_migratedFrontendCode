@@ -30,7 +30,7 @@
           <q-td
             v-slot:body-cell-date="props"
             :props="props"
-          >{{ props.row.submitteSATDate | moment("Do MMM Y") }}</q-td>
+          >{{ $moment_format(props.row.submitteSATDate, "Do MMM Y") }}</q-td>
 
           <q-td
             v-slot:body-cell-lead_id="props"
@@ -102,8 +102,7 @@
               highlight
               push
               outline
-              color="purple-9"
-              size="sm"
+              color="purple-9" size="sm"
               @click="$router.push('/sat/lead/validation/'+ props.row.id+'/data/entry')"
             >Data Entry</q-btn>
 
@@ -112,8 +111,7 @@
               highlight
               push
               class="disabled"
-              color="purple-9"
-              size="sm"
+              color="purple-9" size="sm"
             >Pending with MARS</q-btn>
 
             <q-btn
@@ -121,8 +119,7 @@
               highlight
               push
               outline
-              color="purple-9"
-              size="sm"
+              color="purple-9" size="sm"
               :to="'/sat/lead/validation/'+ props.row.id"
             >Validate</q-btn>
             <q-btn
@@ -130,8 +127,7 @@
               highlight
               push
               outline
-              color="amber-9"
-              size="sm"
+              color="amber-9" size="sm"
               @click="$router.push('/sat/lead/validation/'+ props.row.id)"
             >Referred Back</q-btn>
             <q-btn
@@ -139,12 +135,11 @@
               highlight
               push
               outline
-              color="amber-9"
-              size="sm"
+              color="amber-9" size="sm"
               @click="$router.push('/sat/lead/validation/'+ props.row.id+'/data/entry')"
             >RB - data entry</q-btn>
 
-            <q-btn v-else class="disabled" highlight push outline color="grey-9" size="sm">Validate</q-btn>
+            <q-btn v-else class="disabled" push outline color="grey-9" size="sm">Validate</q-btn>
           </q-td>
           <!-- END: table body modification -->
           <template v-slot:top="props" class="bottom-border">
@@ -152,10 +147,9 @@
             <div class="col-md-5">
               <q-input
                 clearable
-                color="grey-9"
-                v-model="filter"
+                color="grey-9" v-model="filter"
                 placeholder="Type.."
-                float-label="Search by SO name, Merchant Name, Lead ID"
+                label="Search by SO name, Merchant Name, Lead ID"
                 class="q-mr-lg q-py-sm"
               />
             </div>

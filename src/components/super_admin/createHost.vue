@@ -18,11 +18,10 @@
             <div class="col-md-12">
               <q-input
                 v-model="formData.name"
-                @blur="$v.formData.name.$touch"
-                :error="$v.formData.name.$error"
+                @blur="v$.formData.name.$touch"
+                :error="v$.formData.name.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9"
-                float-label="Enter Host"
+                color="grey-9" class="label="Enter Host"
                 placeholder="Enter Host"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -30,11 +29,10 @@
             <div class="col-md-12">
             <q-input
               v-model="formData.hostRRCode"
-              @blur="$v.formData.hostRRCode.$touch"
-              :error="$v.formData.hostRRCode.$error"
+              @blur="v$.formData.hostRRCode.$touch"
+              :error="v$.formData.hostRRCode.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="Enter Host Code"
+              color="grey-9" class="label="Enter Host Code"
               placeholder="Enter Host Code"
               @keyup.enter="submitLeadSourceData(formData)"
               
@@ -43,11 +41,10 @@
             <!-- <div class="col-md-12">
               <p class="text-caption">Multi-TID</p>
                 <q-radio
-                      :error="$v.formData.multiTidEnabled.$error"
+                      :error="v$.formData.multiTidEnabled.$error"
                       v-for="(item, index) in multiTidFlagOptions"
                       :key="index"
-                      color="grey-9"
-                      v-model.trim="formData.multiTidEnabled"
+                      color="grey-9" class="v-model.trim="formData.multiTidEnabled"
                       :val="item.value"
                       :label="item.label"
                     />
@@ -56,11 +53,10 @@
              <!-- <div class="col-md-12">
               <q-input
                 v-model="formData.baseTidMidPrefix"
-                @blur="$v.formData.baseTidMidPrefix.$touch"
-                :error="$v.formData.baseTidMidPrefix.$error"
+                @blur="v$.formData.baseTidMidPrefix.$touch"
+                :error="v$.formData.baseTidMidPrefix.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9"
-                float-label="Tid/Mid Prefix"
+                color="grey-9" class="label="Tid/Mid Prefix"
                 placeholder="Tid/Mid Prefix"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -75,8 +71,7 @@
                 class="bg-white text-weight-regular text-grey-8"
                 @click="toggleModal()"
               >Cancel</q-btn>
-              <q-btn align="right" @click="submitHostData(formData)" color="purple-9">Save</q-btn>
-            </div>
+              <q-btn align="right" @click="submitHostData(formData)" color="purple-9">Save</q-btn>" class="</div>
           </div>
         </form>
       </q-dialog>
@@ -136,8 +131,8 @@
         this.$emit("emitfnshowHost");
       },
       submitHostData() {
-        this.$v.formData.$touch();
-        if (this.$v.formData.$error) {
+        this.v$.formData.$touch();
+        if (this.v$.formData.$error) {
         } else {
           this.$q.loading.show({
             delay: 100, // ms
@@ -161,7 +156,7 @@
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                 icon: "thumb_down"
               });
             });

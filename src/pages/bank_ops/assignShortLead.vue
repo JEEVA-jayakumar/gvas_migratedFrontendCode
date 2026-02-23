@@ -16,8 +16,7 @@
           no-caps
           push
           outline
-          color="purple-9"
-          to="/bank/ops/assign/short/lead/new"
+          color="purple-9" class="to="/bank/ops/assign/short/lead/new"
         >Add New Lead</q-btn>
       </div>
     </div>
@@ -33,7 +32,7 @@
     >
       <!--START: table body modification -->
       <q-td v-slot:body-cell-date="props" :props="props">
-        <span class="label">{{props.row.createdAt | moment("Do MMM Y")}}</span>
+        <span class="label">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</span>
       </q-td>
       <!--END: table body modification -->
       <!--START: table body modification -->
@@ -53,8 +52,7 @@
                 :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
                 @click="props.toggleFullscreen"
                 class="q-mt-lg"
-                color="grey-9"
-                size="sm"
+                color="grey-9" size="sm"
         />-->
         <!-- </div> -->
         <!--END: table fullscreen mode -->
@@ -62,10 +60,9 @@
         <div class="col-5">
           <q-input
             clearable
-            color="grey-9"
-            v-model="filter"
+            color="grey-9" v-model="filter"
             placeholder="Type.."
-            float-label="Search by SO name, Merchant Name, Lead ID"
+            label="Search by SO name, Merchant Name, Lead ID"
             class="q-mr-lg q-py-sm"
           />
         </div>
@@ -74,10 +71,9 @@
                   multiple
                   v-model="multipleSelect"
                   separator
-                  color="grey-9"
-                  :options="options"
+                  color="grey-9" class=":options="options"
                   placeholder="Select"
-                  float-label= "Filter By"
+                  label= "Filter By"
                   class="q-mr-lg q-py-sm "
                   size="sm"
                 />

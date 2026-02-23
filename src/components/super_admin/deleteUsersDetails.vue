@@ -10,7 +10,7 @@
     <div class="row items-center q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
       <div class="col text-h6">Action Sheet</div>
       <div class="col-auto">
-        <q-btn size="sm" round @click="emitToggleRemarks" outline color="dark" icon="clear"/>
+        <q-btn size="sm" round @click="emitToggleRemarks" outline color="dark" class="icon="clear"/>
       </div>
     </div>
     <!--END: table title -->
@@ -29,23 +29,20 @@
           <q-btn
             v-show="props.row.leadsCount == 0 && props.row.referencesCount == 0"
             no-caps
-            color="negative"
-            icon="clear"
+            color="negative" class="icon="clear"
             label="Disable"
           />
           <q-btn
             v-show="props.row.referencesCount > 0"
             no-caps
-            color="positive"
-            icon="refresh"
+            color="positive" class="icon="refresh"
             @click="toggleReAssignReferencesModal(props.row)"
             label="Re-assign refs"
           />
           <q-btn
             v-show="props.row.leadsCount > 0"
             no-caps
-            color="positive"
-            icon="refresh"
+            color="positive" class="icon="refresh"
             @click="toggleReAssignLeadsModal(props.row)"
             label="Re-assign leads"
           />
@@ -56,10 +53,9 @@
           <div class="col-md-5">
             <q-input
               clearable
-              color="grey-9"
-              v-model="filter"
+              color="grey-9" v-model="filter"
               placeholder="Type.."
-              float-label="Search by user name, email, phone"
+              label="Search by user name, email, phone"
               class="q-mr-lg q-py-sm"
             />
           </div>

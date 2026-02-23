@@ -15,8 +15,7 @@
               <q-btn
               outline
               label="Cancel"
-              color="negative"
-              />
+              color="negative" class="/>
           </div>
           <!--END: table title -->
       </div>
@@ -27,25 +26,22 @@
                 <q-select
                   @input="fnSetDevicesByDeviceId"
                   v-model="formData.device_type"
-                  float-label="Select Device Type"
+                  label="Select Device Type"
                   radio
-                  color="grey-9"
-                  :options="deviceOptions"
+                  color="grey-9" class=":options="deviceOptions"
               />
             </div>
           <!-- <div class="col-md-2" align="center">
                 <q-btn
                   @click="openScannerComp"
                   v-if="!scannerToggleOption"
-                  color="light-blue"
-                  class="q-py-xs" 
+                  color="light-blue" class="class="q-py-xs"
                   label="Scan"
               />
               <q-btn
                   @click="closeScannerComp"
                   v-if="scannerToggleOption"
-                  color="negative"
-                  class="q-py-xs" 
+                  color="negative" class="class="q-py-xs"
                   label="Stop"
               />
           </div> -->
@@ -63,7 +59,7 @@
       <div class="row text-weight-regular text-grey-9">
           <div class="col group" v-for="(item,index) in formData.scannedItems" :key="index">
           <q-card class="shadow-4">
-            <q-list highlight separator>
+            <q-list separator>
               <q-item-label header style="border-bottom: 1px solid #ccc;">
                 <q-icon style="color:#202c3f" name="fas fa-tablet-alt"/> {{item.device.name}} 
               </q-item-label header>
@@ -71,8 +67,8 @@
                 <q-item separator class=" text-light-blue" v-for="(subItem,subIndex) in item.deviceSerialNumbers" :key="subIndex">
                   <q-item-section class="text-body1">{{subItem.barcode}}</q-item-section>
                   <q-item-section>
-                    <q-btn flat v-if="subitem.checksum" round size="sm" color="positive" icon="check" />
-                    <q-btn flat v-if="!subitem.checksum" round size="sm" color="negative" icon="clear" />
+                    <q-btn flat v-if="subitem.checksum" round size="sm" color="positive" class="icon="check" />
+                    <q-btn flat v-if="!subitem.checksum" round size="sm" color="negative" class="icon="clear" />
                   </q-item-section>
                 </q-item>
               </div>

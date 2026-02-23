@@ -10,42 +10,38 @@
           <div class="col">
             <q-input
               v-model="formData.leadName"
-              @blur="$v.formData.leadName.$touch"
-              :error="$v.formData.leadName.$error"
-              float-label="Merchant Name"
+              @blur="v$.formData.leadName.$touch"
+              :error="v$.formData.leadName.$error"
+              label="Merchant Name"
               placeholder="Merchant Name"
-              color="grey-9"
-            />
+              color="grey-9" class="/>
           </div>
           <div class="col">
             <q-input
               v-model="formData.contactName"
-              @blur="$v.formData.contactName.$touch"
-              :error="$v.formData.contactName.$error"
-              float-label="Contact Name"
+              @blur="v$.formData.contactName.$touch"
+              :error="v$.formData.contactName.$error"
+              label="Contact Name"
               placeholder="Contact Name"
-              color="grey-9"
-            />
+              color="grey-9" class="/>
           </div>
           <div class="col">
             <q-input
               v-model="formData.contactNumber"
-              @blur="$v.formData.contactNumber.$touch"
-              :error="$v.formData.contactNumber.$error"
-              float-label="Contact Number"
+              @blur="v$.formData.contactNumber.$touch"
+              :error="v$.formData.contactNumber.$error"
+              label="Contact Number"
               placeholder="Contact Number"
-              color="grey-9"
-            />
+              color="grey-9" class="/>
           </div>
           <div class="col">
             <q-input
-              @blur="$v.formData.alternateContactNumber.$touch"
-              :error="$v.formData.alternateContactNumber.$error"
+              @blur="v$.formData.alternateContactNumber.$touch"
+              :error="v$.formData.alternateContactNumber.$error"
               v-model="formData.alternateContactNumber"
-              float-label="Alternate Contact Number"
+              label="Alternate Contact Number"
               placeholder="Alternate Contact Number"
-              color="grey-9"
-            />
+              color="grey-9" class="/>
           </div>
         </div>
 
@@ -53,20 +49,18 @@
           <div class="col">
             <q-input
               v-model="formData.leadAddress"
-              float-label="Merchant Address"
+              label="Merchant Address"
               placeholder="Merchant Address"
-              color="grey-9"
-            />
+              color="grey-9" class="/>
           </div>
           <div class="col">
             <q-input
               type="number"
-              :error="$v.formData.pincode.$error"
+              :error="v$.formData.pincode.$error"
               clearable
               @clear="fnClearStateCity"
-              color="grey-9"
-              v-model="formData.pincode"
-              float-label="Pincode"
+              color="grey-9" v-model="formData.pincode"
+              label="Pincode"
               placeholder="Pincode"
             >
               <q-autocomplete
@@ -81,23 +75,21 @@
             <q-input
               disable
               v-model="formData.city"
-              @blur="$v.formData.city.$touch"
-              :error="$v.formData.city.$error"
-              float-label="City/Town"
+              @blur="v$.formData.city.$touch"
+              :error="v$.formData.city.$error"
+              label="City/Town"
               placeholder="City/Town"
-              color="grey-9"
-            />
+              color="grey-9" class="/>
           </div>
           <div class="col">
             <q-input
               disable
               v-model="formData.state"
-              @blur="$v.formData.state.$touch"
-              :error="$v.formData.state.$error"
-              float-label="State"
+              @blur="v$.formData.state.$touch"
+              :error="v$.formData.state.$error"
+              label="State"
               placeholder="State"
-              color="grey-9"
-            />
+              color="grey-9" class="/>
           </div>
         </div>
 
@@ -105,13 +97,12 @@
         <div class="row group">
           <div class="col">
             <q-input
-              :error="$v.formData.leadSource.id.$error"
-              @blur="$v.formData.leadSource.id.$touch"
+              :error="v$.formData.leadSource.id.$error"
+              @blur="v$.formData.leadSource.id.$touch"
               clearable
               @clear="fnClearDeviceList"
-              color="grey-9"
-              v-model="formData.leadSource.name"
-              float-label="Lead Source"
+              color="grey-9" v-model="formData.leadSource.name"
+              label="Lead Source"
               placeholder="Lead Source"
             >
               <q-autocomplete
@@ -128,11 +119,10 @@
               :disable="deviceSelectOptions.length > 0"
               placeholder="Device Type"
               clearable
-              color="grey-9"
-              v-model="formData.device.id"
-              @blur="$v.formData.device.id.$touch"
-              :error="$v.formData.device.id.$error"
-              float-label="Type"
+              color="grey-9" v-model="formData.device.id"
+              @blur="v$.formData.device.id.$touch"
+              :error="v$.formData.device.id.$error"
+              label="Type"
               :options="deviceSelectOptions"
             />
             <p class="q-py-sm" v-if="deviceSelectOptions.length == 0">No data available</p>
@@ -140,13 +130,12 @@
           <div class="col">
             <q-input
               v-model="formData.deviceCount"
-              @blur="$v.formData.deviceCount.$touch"
-              :error="$v.formData.deviceCount.$error"
+              @blur="v$.formData.deviceCount.$touch"
+              :error="v$.formData.deviceCount.$error"
               type="number"
-              float-label="Count"
+              label="Count"
               placeholder="Device Count"
-              color="grey-9"
-            />
+              color="grey-9" class="/>
           </div>
         </div>
         <div class="text-body1 uppercase text-weight-medium text-grey-9 q-my-md">Assign To</div>
@@ -171,13 +160,12 @@
           <div class="col-md-4" v-if="formData.tempAssignedTo == 1">
             <q-select
               :disable="RSMselectOptions.length > 0"
-              @blur="$v.formData.assignedOpsTo.id.$touch"
-              :error="$v.formData.assignedOpsTo.id.$error"
+              @blur="v$.formData.assignedOpsTo.id.$touch"
+              :error="v$.formData.assignedOpsTo.id.$error"
               placeholder="Choose from the below"
               clearable
-              color="grey-9"
-              v-model="formData.assignedOpsTo.id"
-              float-label="RSM Name"
+              color="grey-9" v-model="formData.assignedOpsTo.id"
+              label="RSM Name"
               :options="RSMselectOptions"
             />
             <p class="q-py-sm" v-if="leadSourceSelectOptions.length == 0">No data available</p>
@@ -187,9 +175,8 @@
               :disable="getAllRegionsData.length > 0"
               placeholder="Choose Region"
               clearable
-              color="grey-9"
-              v-model="region"
-              float-label="Region"
+              color="grey-9" v-model="region"
+              label="Region"
               :options="getAllRegionsData"
               @clear="fnClearASMList"
               @input="fnFetchASMList()"
@@ -199,13 +186,12 @@
           <div class="col-md-4" v-if="formData.tempAssignedTo == 2">
             <q-select
               :disable="ASMselectOptions.length > 0"
-              @blur="$v.formData.assignedOpsTo.id.$touch"
-              :error="$v.formData.assignedOpsTo.id.$error"
+              @blur="v$.formData.assignedOpsTo.id.$touch"
+              :error="v$.formData.assignedOpsTo.id.$error"
               placeholder="Choose from the below"
               clearable
-              color="grey-9"
-              v-model="formData.assignedOpsTo.id"
-              float-label="ASM Name"
+              color="grey-9" v-model="formData.assignedOpsTo.id"
+              label="ASM Name"
               :options="ASMselectOptions"
             />
             <p class="q-py-xs" v-if="leadSourceSelectOptions.length == 0">No data available</p>
@@ -213,8 +199,8 @@
         </div>
         <div class="row">
           <div class="col group" align="right">
-            <q-btn icon="block" outline color="dark" label="Cancel"/>
-            <q-btn @click="fnSubmibAssignShortLead()" icon="check" color="info" label="Submit"/>
+            <q-btn icon="block" outline color="dark" class="label="Cancel"/>
+            <q-btn @click="fnSubmibAssignShortLead()" icon="check" color="info" class="label="Submit"/>
           </div>
         </div>
       </div>
@@ -460,7 +446,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           }
@@ -502,8 +488,8 @@ export default {
 
     // Function to final submit short lead
     fnSubmibAssignShortLead() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.CREATE_SHORT_LEAD(this.formData)
@@ -522,7 +508,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

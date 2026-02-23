@@ -21,7 +21,7 @@
         @request="ajaxLoadAllLeadInfo"
       >
          <q-td v-slot:body-cell-dateOfRecoveryReplacement="props" :props="props">
-          <span class="label">{{props.row.dateOfRecoveryReplacement | moment("Do MMM Y")}}</span>
+          <span class="label">{{ $moment_format(props.row.dateOfRecoveryReplacement, "Do MMM Y") }}</span>
         </q-td>
      
         <template v-slot:top="props" class="bottom-border">
@@ -29,10 +29,9 @@
           <div class="col">
             <q-input
               clearable
-              color="grey-9"
-              v-model="filter"
+              color="grey-9" v-model="filter"
               placeholder="Type.."
-              float-label="Search by MID, TID"
+              label="Search by MID, TID"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -41,8 +40,7 @@
             <q-btn 
             square 
             outline 
-            color="purple-9" 
-            label="Download as Excel" 
+            color="purple-9" class="label="Download as Excel"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloadRecoveryReplacementHist()" />

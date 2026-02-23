@@ -27,16 +27,15 @@
       </div>
       <!--END: table title -->
       <div v-if="shouldShowGivenPricefield">
-        <q-tabs inverted color="purple-9">
-          <!-- Tabs - notice slot="title" -->
+        <q-tabs color="purple-9">" class="<!-- Tabs - notice  -->
           <q-tab
             default
             :count="pricingExceptionCountForTab"
-            slot="title"
+
             name="tab-1"
             label="Pending"
           />
-          <q-tab slot="title" name="tab-2" label="History" />
+          <q-tab  name="tab-2" label="History" />
           <!-- Targets -->
           <q-tab-panel name="tab-1">
             <!--START: table lead validation -->
@@ -60,14 +59,13 @@
               <q-td
                 v-slot:body-cell-submittoRSMDate="props"
                 :props="props"
-              >{{ props.row.submittoRSMDate | moment("Do MMM Y") }}</q-td>
+              >{{ $moment_format(props.row.submittoRSMDate, "Do MMM Y") }}</q-td>
               <q-td v-slot:body-cell-action="props" :props="props">
                 <q-btn
                   highlight
                   push
                   outline
-                  color="purple-9"
-                  size="sm"
+                  color="purple-9" size="sm"
                   @click="pushToDetailedScreenRsm(props.row.id)"
                 >Review</q-btn>
               </q-td>
@@ -77,10 +75,9 @@
                 <div class="col-md-5">
                   <q-input
                     clearable
-                    color="grey-9"
-                    v-model="filter"
+                    color="grey-9" v-model="filter"
                     placeholder="Type.."
-                    float-label="Search by Merchant Name, Lead ID"
+                    label="Search by Merchant Name, Lead ID"
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -145,8 +142,7 @@
                   highlight
                   push
                   outline
-                  color="purple-9"
-                  size="sm"
+                  color="purple-9" size="sm"
                   @click="pushToDetailedScreen(props.row.id)"
                 >Review</q-btn>
               </q-td>
@@ -156,10 +152,9 @@
                 <div class="col-md-5">
                   <q-input
                     clearable
-                    color="grey-9"
-                    v-model="filter"
+                    color="grey-9" v-model="filter"
                     placeholder="Type.."
-                    float-label="Search by Merchant Name, Lead ID"
+                    label="Search by Merchant Name, Lead ID"
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -184,7 +179,7 @@
           <q-td
             v-slot:body-cell-submittoRSMDate="props"
             :props="props"
-          >{{ props.row.submittoRSMDate | moment("Do MMM Y") }}</q-td>
+          >{{ $moment_format(props.row.submittoRSMDate, "Do MMM Y") }}</q-td>
           <!--START: table body modification -->
           <q-td
             v-slot:body-cell-leadNumber="props"
@@ -199,8 +194,7 @@
               highlight
               push
               outline
-              color="purple-9"
-              size="sm"
+              color="purple-9" size="sm"
               @click="pushToDetailedScreenRsm(props.row.id)"
             >Review</q-btn>
           </q-td>
@@ -210,10 +204,9 @@
             <div class="col-md-5">
               <q-input
                 clearable
-                color="grey-9"
-                v-model="filter"
+                color="grey-9" v-model="filter"
                 placeholder="Type.."
-                float-label="Search by Merchant Name, Lead ID"
+                label="Search by Merchant Name, Lead ID"
                 class="q-mr-lg q-py-sm"
               />
             </div>

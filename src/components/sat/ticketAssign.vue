@@ -40,7 +40,7 @@
                 <q-separator />
                 <q-card-section>
                   <q-item dense>
-                    <q-item-section icon="attach_file" />
+                    <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
                     <q-item-section>{{ formData.fileSelected[0].name }}</q-item-section>
                     <q-item-section></q-item-section>
                   </q-item>
@@ -50,8 +50,7 @@
                   <q-btn
                     outline
                     size="sm"
-                    color="negative"
-                    @click="removeBulkUploadFile(formData)"
+                    color="negative" @click="removeBulkUploadFile(formData)"
                     label="Remove"
                     icon="clear"
                   />
@@ -62,8 +61,7 @@
           <div class="col-md-12 group" align="center">
             <q-btn
               type="button"
-              color="purple-9"
-              :disabled="formData.fileSelected.length == 0 "
+              color="purple-9" class=":disabled="formData.fileSelected.length == 0 "
               label="Upload"
               @click="uploadlist"
             />
@@ -132,7 +130,7 @@ export default {
         .then((response) => {
           var contentType = response.headers.map["content-type"][0];
           let blob = new Blob([response.data], { type: contentType });
-          let link = document.createElement("a");
+          let clickable = document.createElement("a");
           link.href = window.URL.createObjectURL(blob);
           link.download = "Assign_Status.xlsx";
           link.click();
@@ -151,28 +149,28 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null ? "Internal Server Error" : error.body.message,
+                (error.response?.data?.message || error.data?.message || "Internal Server Error"),
               icon: "thumb_down",
             });
           } else if (error.status == 400) {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Bad Request" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Bad Request"),
               icon: "thumb_down",
             });
           } else if (error.status == 404) {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Not Found" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Not Found"),
               icon: "thumb_down",
             });
           } else if (error.status == 406) {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Not Acceptable" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Not Acceptable"),
               icon: "thumb_down",
             });
           } else {
@@ -180,9 +178,7 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
+                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down",
             });
           }

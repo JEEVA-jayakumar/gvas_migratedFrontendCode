@@ -7,12 +7,11 @@
         <div class="row gutter-x-xs">
           <div class="col-3">
             <q-select
-              color="grey-9"
-              v-model="formData.merchantType"
+              color="grey-9" v-model="formData.merchantType"
               :options="activeMerchantType"
-              float-label="Select merchant type"
+              label="Select merchant type"
               placeholder="Merchant type"
-              :error="$v.formData.merchantType.$error"
+              :error="v$.formData.merchantType.$error"
               @input="merchantDocumentTypeActiveList"
             />
           </div>
@@ -23,18 +22,16 @@
               no-caps
               size="md"
               @click="fnManagemerchantTypes"
-              color="purple-9"
-              icon="add"
+              color="purple-9" class="icon="add"
               class="no-margin"
             />
           </div>
           <div class="col-3">
             <q-select
-              color="grey-9"
-              v-model="formData.parentIDtemp"
+              color="grey-9" v-model="formData.parentIDtemp"
               :options="activeDocumentMerchantType"
               @input="mapParentIdToSubDocument"
-              float-label="Merchant Document Type"
+              label="Merchant Document Type"
               placeholder="Merchant Document Type"
             />
           </div>
@@ -45,26 +42,23 @@
               no-caps
               size="md"
               @click="fnManagemerchanDocumentTypes"
-              color="purple-9"
-              icon="add"
+              color="purple-9" class="icon="add"
               class="no-margin"
             />
           </div>
           <div class="col-3">
             <q-input
-              color="grey-9"
-              v-model="formData.subDocumentType"
-              :error="$v.formData.subDocumentType.$error"
-              float-label="Merchant Sub Document Type"
+              color="grey-9" v-model="formData.subDocumentType"
+              :error="v$.formData.subDocumentType.$error"
+              label="Merchant Sub Document Type"
               placeholder="Merchant Sub Document Type"
             />
           </div>
           <div class="col-auto">
             <q-input
               type="number"
-              color="grey-9"
-              v-model="formData.marsDocumentId"
-              float-label="Mars document Id"
+              color="grey-9" v-model="formData.marsDocumentId"
+              label="Mars document Id"
               placeholder="Mars document Id"
             />
           </div>
@@ -73,8 +67,7 @@
           <div class="col-3">
             <q-btn
               label="Submit"
-              color="purple-9"
-              @click="submitMerchantSubDocumentType(formData)"
+              color="purple-9" @click="submitMerchantSubDocumentType(formData)"
             />
           </div>
         </div>
@@ -84,18 +77,17 @@
       <!-- START >> Setup fee and recurring fee -->
       <!-- START >> Table >> rental charge details -->
       <div class="col-md-12 col-sm-12 col-xs-12">
-        <q-tabs color="grey-9">
-          <!-- Tabs - notice slot="title" -->
+        <q-tabs color="grey-9">" class="<!-- Tabs - notice  -->
           <q-tab
             @select="fetchActiveMerchantTypes"
             default
-            slot="title"
+
             label="Active List"
             name="tab-1"
           />
           <q-tab
             @select="fetchDeActiveMerchantTypes"
-            slot="title"
+
             label="De-Actived List"
             name="tab-2"
           />
@@ -107,8 +99,7 @@
               :filter="filterSearch"
               :pagination="pagination"
               row-key="name"
-              color="grey-9"
-            >
+              color="grey-9" class=">
               <q-td v-slot:body-cell-action="props" :props="props">
                 <div class="row no-wrap no-padding">
                   <q-btn
@@ -140,10 +131,9 @@
                 <div class="col-md-5">
                   <q-input
                     clearable
-                    color="grey-9"
-                    v-model="filterSearch"
+                    color="grey-9" v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search by merchant type, document type, sub document type"
+                    label="Search by merchant type, document type, sub document type"
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -159,8 +149,7 @@
               :filter="filterSearch"
               :pagination="pagination"
               row-key="name"
-              color="grey-9"
-            >
+              color="grey-9" class=">
               <q-td v-slot:body-cell-action="props" :props="props">
                 <div class="row no-wrap no-padding">
                   <q-btn
@@ -192,10 +181,9 @@
                 <div class="col-md-5">
                   <q-input
                     clearable
-                    color="grey-9"
-                    v-model="filterSearch"
+                    color="grey-9" v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search by merchant type, document type, sub document type"
+                    label="Search by merchant type, document type, sub document type"
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -494,8 +482,8 @@ export default {
     },
     submitMerchantSubDocumentType(formData) {
       
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
       } else {
       formData.hasSubDoc = this.formData.viewType ;
       delete formData.parentIDtemp;
@@ -537,7 +525,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+            message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
             icon: "thumb_down"
           });
         });

@@ -6,23 +6,24 @@
       <q-tabs
         v-model="selectedTab"
         class="shadow-1"
-        color="grey-1"
-        @select="goToUnassignedTab"
+        color="grey-1" class="@select="goToUnassignedTab"
       >
         <q-tab
           default
-          color="dark"
-          name="active"
-          slot="title"
+          color="dark" class="name="active"
+
           label="Active MDR"
         />
         <q-tab
-          color="dark"
-          name="deactive"
-          slot="title"
+          color="dark" class="name="deactive"
+
           label="Deactived MDR"
         />
-        <q-tab-panel name="active">
+
+
+      </q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="active">
           <!--START: table Data -->
           <q-table
             :rows="activetableData"
@@ -34,8 +35,7 @@
             row-key="id"
             :loading="tableAjaxLoading"
             :rows-per-page-options="[5, 10, 15, 20]"
-            color="dark"
-            @request="ajaxLoadAllLeadInfo"
+            color="dark" class="@request="ajaxLoadAllLeadInfo"
           >
             <q-td
               v-slot:body-cell-leadSource="props"
@@ -255,8 +255,7 @@
                 no-wrap
                 no-caps
                 icon="fas fa-pencil-alt"
-                color="primary"
-                @click="editMerchantDetails(props.row)"
+                color="primary" @click="editMerchantDetails(props.row)"
                 :label="props.row.merchantCategory.merchantCategoryName"
                 class="capitalize"
               />
@@ -268,10 +267,9 @@
                   <div class="col-md-6">
                     <q-input
                       clearable
-                      color="grey-9"
-                      v-model.trim="filterSearch"
+                      color="grey-9" class="v-model.trim="filterSearch"
                       placeholder="Type.."
-                      float-label="Search by Plan Name"
+                      label="Search by Plan Name"
                     />
                   </div>
                 </div>
@@ -282,15 +280,14 @@
                   class="text-weight-regular"
                   @click="$router.push('/super/admin/manage/mdr/charges')"
                   label="Add New Mdr Charges"
-                  color="purple-9"
-                  size="md"
+                  color="purple-9" size="md"
                 />
               </div>
             </template>
           </q-table>
           <!--ENDv-model: table Data -->
         </q-tab-panel>
-        <q-tab-panel name="deactive">
+<q-tab-panel name="deactive">
           <!--START: table Data -->
           <q-table
             :rows="deActivetableData"
@@ -301,8 +298,7 @@
             row-key="id"
             :loading="tableAjaxLoading1"
             :rows-per-page-options="[5, 10, 15, 20]"
-            color="dark"
-            @request="ajaxLoadAllLeadInfo1"
+            color="dark" class="@request="ajaxLoadAllLeadInfo1"
           >
             <q-td
               v-slot:body-cell-leadSource="props"
@@ -365,7 +361,7 @@
             <q-td
               slot="body-cell-smallMerchantLessThanTwoDebit"
               align="center"
-              slot-scope="props"
+              v-slot="props"
               :props="props"
               class="cursor-pointer"
             >
@@ -474,10 +470,9 @@
                   <div class="col-md-6">
                     <q-input
                       clearable
-                      color="grey-9"
-                      v-model.trim="filterSearch1"
+                      color="grey-9" class="v-model.trim="filterSearch1"
                       placeholder="Type.."
-                      float-label="Search by Plan Name"
+                      label="Search by Plan Name"
                     />
                   </div>
                 </div>
@@ -486,7 +481,7 @@
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
       <div class="row items-center gutter-y-sm">
         <div class="col-md-9 col-sm-12 col-xs-12">
           <div class="row items-center"></div>

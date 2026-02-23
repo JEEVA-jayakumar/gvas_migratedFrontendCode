@@ -11,8 +11,8 @@
         </div>
         <div class="row gutter-sm q-py-sm items-center">
           <div class="col-md-12">
-            <q-input v-model="formData.serviceReqType.name" :error="$v.formData.serviceReqType.name.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" float-label="Enter Service Type Name"
+            <q-input v-model="formData.serviceReqType.name" :error="v$.formData.serviceReqType.name.$error"
+              class="text-weight-regular text-grey-8" color="grey-9" class="label="Enter Service Type Name"
               placeholder="Enter Service Type Name" />
           </div>
         </div>
@@ -42,8 +42,7 @@
           <div class="col-md-12 group" align="right">
             <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8"
               @click="emitfnShowAddNewServiceType()">Cancel</q-btn>
-            <q-btn align="right" @click="fnfinalsubmitAddSpareParts(formData)" color="purple-9">Save</q-btn>
-          </div>
+            <q-btn align="right" @click="fnfinalsubmitAddSpareParts(formData)" color="purple-9">Save</q-btn>" class="</div>
         </div>
       </form>
     </q-dialog>
@@ -149,8 +148,8 @@ export default {
 
     fnfinalsubmitAddSpareParts(formData) {
       // console.log("SUBMITTED VALUES_----------------->",JSON.stringify(formData))
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         // console.log("SUBMIT RESPONSE", JSON.stringify(formData))

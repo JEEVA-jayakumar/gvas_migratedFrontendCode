@@ -14,7 +14,7 @@
         <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
       <!--START: table title -->
       <!-- <div class="col-md-4">
-        <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
+        <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
           :options="aggregatorOptions" @input="getaggregator" />
       </div> -->
       <!--END: table title -->
@@ -24,8 +24,7 @@
           table-class="customTableClass"
         :columns="columns"
         :rows="tableData"
-        color="grey-9"
-        :filter="filterSearch"
+        color="grey-9" class=":filter="filterSearch"
         :pagination="paginationControl"
         :rows-per-page-options="[5,10,15,20,25]"
         :loading="toggleAjaxLoadFilter"
@@ -50,14 +49,13 @@
               <q-td auto-width key="serialNumber" :props="props">{{
                 props.row.serialNumber
               }}</q-td>
-              <q-td auto-width key="updated_at" :props="props">{{ props.row.updatedAt ==null? "NA" : props.row.updatedAt | moment("Do MMM Y") }}</q-td>
+              <q-td auto-width key="updated_at" :props="props">{{ $moment_format(props.row.updatedAt ==null? "NA" : props.row.updatedAt, "Do MMM Y") }}</q-td>
               <q-td auto-width key="action" :props="props">
                 <q-btn
                   highlight
                   push
                   class="q-mx-sm"
-                  color="positive"
-                  @click="openAcceptModel(props.row)"
+                  color="positive" @click="openAcceptModel(props.row)"
                   size="sm"
                   >Accept</q-btn
                 >
@@ -65,8 +63,7 @@
                   highlight
                   push
                   class="q-mx-sm"
-                  color="negative"
-                  @click="AggregatorsmoveToScrap(props.row)"
+                  color="negative" @click="AggregatorsmoveToScrap(props.row)"
                   size="sm"
                   >Moved To Scrap</q-btn
                 >
@@ -79,10 +76,9 @@
             <div class="col-md-5">
               <q-input
                 clearable
-                color="grey-9"
-                v-model="filterSearch"
+                color="grey-9" v-model="filterSearch"
                 placeholder="Type.."
-                float-label="Search Using Device Serial Number"
+                label="Search Using Device Serial Number"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -92,7 +88,7 @@
                 :fields="json_fields"
                 name="CentralInventory.xls"
               >
-                <q-btn outline color="grey-9" label="Download as excel" />
+                <q-btn outline color="grey-9" class="label="Download as excel" />
               </downloadExcel>
             </div> -->
              <div class="col-md-5">
@@ -100,8 +96,7 @@
             <q-btn 
             square 
             outline 
-            color="purple-9" 
-            label="Download as Excel" 
+            color="purple-9" class="label="Download as Excel"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloadAggregatorsSendToRepair()" />
@@ -110,8 +105,7 @@
             <div class="col-md-12" align="right">
               <q-btn
                 outline
-                color="grey-9"
-                icon="attach_file"
+                color="grey-9" class="icon="attach_file"
                 @click.native="fnOpenBulkModal"
                 label="Bulk Upload"
               />
@@ -340,7 +334,7 @@ export default {
       // document.body.appendChild(element);
 
       // element.click();
-      let link = document.createElement("a");
+      let clickable = document.createElement("a");
       link.href = window.URL.createObjectURL(file);
       link.download = "serialNumber.txt";
 

@@ -15,22 +15,25 @@
     <q-tabs
       v-model="selectedTab"
       class="shadow-1"
-      color="grey-1"
-      @select="goToUnassignedTab"
+      color="grey-1" class="@select="goToUnassignedTab"
     >
       <q-tab
         default
-        color="dark"
-        name="unassigned"
-        slot="title"
+        color="dark" class="name="unassigned"
+
         label="Un Assigned"
       />
-      <q-tab color="dark" name="assigned" slot="title" label="Assigned" />
-      <!-- <q-tab color="dark" name="ReOpened" slot="title" label="ReOpenend" /> -->
+      <q-tab color="dark" class="name="assigned"  label="Assigned" />
+      <!-- <q-tab color="dark" class="name="ReOpened"  label="ReOpenend" /> -->
 
-      <q-tab color="dark" name="completed" slot="title" label="Completed" />
+      <q-tab color="dark" class="name="completed"  label="Completed" />
 
-      <q-tab-panel name="unassigned">
+
+
+
+    </q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="unassigned">
         <q-card class="group q-pa-md">
           <div
             class="row items-center gutter-y-sm"
@@ -56,8 +59,7 @@
                 clearable
                 v-model="formData.assignTo.id"
                 separator
-                color="grey-9"
-                :disable="
+                color="grey-9" class=":disable="
                   formData.marsDeviceIdsCooked.length == 0
                 "
                 :options="assignToOptions"
@@ -74,8 +76,7 @@
                 clearable
                 v-model="formData.region"
                 separator
-                color="grey-9"
-                :disable="
+                color="grey-9" class=":disable="
                   formData.marsDeviceIdsCooked.length == 0
                 "
                 :options="assignToRegionOptions"
@@ -103,8 +104,7 @@
           row-key="id"
           :loading="tableAjaxLoading1"
           :rows-per-page-options="[5, 10, 15, 20]"
-          color="dark"
-          @request="ajaxLoadAllLeadInfo1"
+          color="dark" class="@request="ajaxLoadAllLeadInfo1"
         >
           <q-td
             v-slot:body-cell-leadNumber="props"
@@ -185,10 +185,9 @@
             <div class="col-md-5">
               <q-input
                 clearable
-                color="grey-9"
-                v-model="filterSearch1"
+                color="grey-9" v-model="filterSearch1"
                 placeholder="Type.."
-                float-label="Search By Mob No, VPA, Merchant Name"
+                label="Search By Mob No, VPA, Merchant Name"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -196,7 +195,7 @@
           </template>
         </q-table>
       </q-tab-panel>
-      <q-tab-panel name="assigned">
+<q-tab-panel name="assigned">
         <!--START: table Data -->
         <q-table
           :rows="tableData"
@@ -207,8 +206,7 @@
           row-key="id"
           :loading="tableAjaxLoading"
           :rows-per-page-options="[5, 10, 15, 20]"
-          color="dark"
-          @request="ajaxLoadAllLeadInfo"
+          color="dark" class="@request="ajaxLoadAllLeadInfo"
         >
           <!-- selection="multiple" -->
           <q-td
@@ -298,8 +296,7 @@
               highlight
               push
               class="q-mx-sm"
-              color="positive"
-              size="sm"
+              color="positive" size="sm"
               @click="fnReassignData(props.row)"
               >Re-Assign</q-btn
             >
@@ -309,10 +306,9 @@
             <div class="col-md-5">
               <q-input
                 clearable
-                color="grey-9"
-                v-model="filterSearch"
+                color="grey-9" v-model="filterSearch"
                 placeholder="Type.."
-                float-label="Search By Mob No, VPA, Merchant Name"
+                label="Search By Mob No, VPA, Merchant Name"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -320,7 +316,7 @@
         </q-table>
         <!--ENDv-model: table Data -->
       </q-tab-panel>
-      <q-tab-panel name="completed">
+<q-tab-panel name="completed">
         <q-table
           :rows="tableData2"
           :columns="completed"
@@ -331,8 +327,7 @@
           row-key="id"
           :loading="tableAjaxLoading2"
           :rows-per-page-options="[5, 10, 15, 20]"
-          color="dark"
-          @request="ajaxLoadAllLeadInfo2"
+          color="dark" class="@request="ajaxLoadAllLeadInfo2"
         >
           <q-td
             v-slot:body-cell-leadNumber="props"
@@ -436,10 +431,9 @@
           <template slot="top">
             <div class="col-md-5">
               <q-input
-                color="grey-9"
-                v-model="filterSearch2"
+                color="grey-9" v-model="filterSearch2"
                 placeholder="Type.."
-                float-label="Search By Merchant Name"
+                label="Search By Merchant Name"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -456,7 +450,7 @@
         </q-table>
         <!--END: table Data -->
       </q-tab-panel>
-    </q-tabs>
+</q-tab-panels>
     <div class="row items-center gutter-y-sm">
       <div class="col-md-9 col-sm-12 col-xs-12">
         <div class="row items-center"></div>
@@ -1203,7 +1197,7 @@ export default {
               this.$q.notify({
                 color: "positive",
                 position: "bottom",
-                message: res.body.data,
+                message: res.data.data,
                 icon: "thumb_up"
               });
               this.$q.loading.hide();
@@ -1215,7 +1209,7 @@ export default {
               self.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: res.body.data,
+                message: res.data.data,
                 icon: "thumb_down"
               });
               this.$q.loading.hide();
@@ -1226,7 +1220,7 @@ export default {
             self.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.data,
+              message: error.data.data,
               icon: "thumb_down"
             });
             this.$q.loading.hide();

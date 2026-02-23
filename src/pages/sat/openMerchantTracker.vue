@@ -25,10 +25,10 @@
         >
           <!--START: table body modification -->
           <q-td v-slot:body-cell-createdAt="props" :props="props">
-            <span class="label">{{props.row.createdAt | moment("Do MMM Y")}}</span>
+            <span class="label">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</span>
           </q-td>
           <q-td v-slot:body-cell-submitteSATDate="props" :props="props">
-            <span class="label">{{props.row.submitteSATDate | moment("Do MMM Y")}}</span>
+            <span class="label">{{ $moment_format(props.row.submitteSATDate, "Do MMM Y") }}</span>
           </q-td>
           <q-td v-slot:body-cell-applicationNumber="props" :props="props">
             <span class="label capitalize">{{props.row.applicationNumber}}</span>
@@ -40,7 +40,7 @@
             slot="body-cell-leadNumber"
             class="cursor-pointer"
             @click.native="toggleLeadInformation(props.row)"
-            slot-scope="props"
+            v-slot="props"
             :props="props"
           >
             <span class="label text-primary"># {{props.row.leadNumber}}</span>
@@ -67,8 +67,7 @@
             :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
             @click="props.toggleFullscreen"
             class="q-mt-lg"
-            color="grey-9"
-            size="sm"
+            color="grey-9" size="sm"
             />
             </div>-->
             <!--END: table fullscreen mode -->
@@ -78,19 +77,18 @@
                 clearable
                 v-model="filter"
                 separator
-                color="grey-9"
-                placeholder="Type.."
-                float-label="Search by Merchant Name, Lead ID"
+                color="grey-9" class="placeholder="Type.."
+                label="Search by Merchant Name, Lead ID"
                 class="q-mr-lg q-py-sm"
               />
             </div>
             <!-- <div class="col-3">
-              <q-input modal outline type="date" v-model="model" placeholder="Select Date" class="q-mr-lg q-py-sm " float-label="Filter By"
-                color="grey-9" />
+              <q-input modal outline type="date" v-model="model" placeholder="Select Date" class="q-mr-lg q-py-sm " label="Filter By"
+                color="grey-9" class="/>
             </div>-->
             <!-- <div class="col-md-4">
               <downloadExcel :rows="excelTableData" :fields="excelColumnData.field" name="Merchant Transaction Level.xls">
-                <q-btn outline color="grey-9" label="Download as Excel" class="q-mr-lg q-py-sm float-right" size="md" />
+                <q-btn outline color="grey-9" class="label="Download as Excel" class="q-mr-lg q-py-sm float-right" size="md" />
               </downloadExcel>
             </div>-->
             <!--END: table filter,search -->

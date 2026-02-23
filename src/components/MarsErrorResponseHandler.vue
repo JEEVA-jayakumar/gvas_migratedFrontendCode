@@ -1,7 +1,6 @@
 <template>
   <div class="q-py-xs group text-caption">
-    <q-chip color="primary">value</q-chip>
-    <span>{{error.value}}</span>
+    <q-chip color="primary">value</q-chip>" class="<span>{{error.value}}</span>
     <br>
     <q-chip color="amber-9">Issue</q-chip>
     <span>{{error.issue}}</span>

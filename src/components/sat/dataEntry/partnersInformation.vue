@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-for="(v,index) in $v.partnersArr.$each"
+      v-for="(v,index) in v$.partnersArr.$each"
       :key="index"
       class="row q-my-xs gutter-sm"
       ref="parentElement"
@@ -14,18 +14,16 @@
               Partner 0{{parseInt(index)+1}}
             </span>
           </div>
-          <div class="col-auto" v-if="Object.keys($v.partnersArr.$each).length > 1">
-            <q-btn round icon="delete" @click="removePartnerFromArr(v,index)" color="negative"/>
-          </div>
+          <div class="col-auto" v-if="Object.keys(v$.partnersArr.$each).length > 1">
+            <q-btn round icon="delete" @click="removePartnerFromArr(v,index)" color="negative"/>" class="</div>
         </div>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           :error="v.name.$anyError"
           @blur="v.name.$touch()"
-          color="grey-9"
-          v-model="v.$model.name"
-          float-label="Name*"
+          color="grey-9" v-model="v.$model.name"
+          label="Name*"
           placeholder="Name*"
         />
       </div>
@@ -34,9 +32,8 @@
           upper-case
           :error="v.pan.$anyError"
           @blur="v.pan.$touch()"
-          color="grey-9"
-          v-model="v.$model.pan"
-          float-label="Pan*"
+          color="grey-9" v-model="v.$model.pan"
+          label="Pan*"
           placeholder="Pan*"
         />
       </div>
@@ -44,9 +41,8 @@
         <q-input
           :error="v.address.$anyError"
           @blur="v.address.$touch()"
-          color="grey-9"
-          v-model="v.$model.address"
-          float-label="Address*"
+          color="grey-9" v-model="v.$model.address"
+          label="Address*"
           placeholder="Address*"
         />
       </div>
@@ -54,10 +50,9 @@
         <q-input
           :error="v.pin.$anyError"
           @blur="v.pin.$touch()"
-          color="grey-9"
-          type="number"
+          color="grey-9" class="type="number"
           v-model="v.$model.pin"
-          float-label="Pincode*"
+          label="Pincode*"
           placeholder="Pincode*"
         />
       </div>
@@ -65,9 +60,8 @@
         <q-input
           :error="v.cityRefLabel.$anyError || v.cityRefCode.$anyError"
           @blur="v.cityRefCode.$touch()"
-          color="grey-9"
-          v-model="v.$model.cityRefLabel"
-          float-label="City (type min 3 characters)*"
+          color="grey-9" v-model="v.$model.cityRefLabel"
+          label="City (type min 3 characters)*"
           placeholder="Start typing ..*"
         >
           <q-autocomplete
@@ -83,9 +77,8 @@
         <q-input
           :error="v.stateRefLabel.$anyError || v.stateRefCode.$anyError"
           @blur="v.stateRefCode.$touch()"
-          color="grey-9"
-          v-model="v.$model.stateRefLabel"
-          float-label="State (type min 3 characters)*"
+          color="grey-9" v-model="v.$model.stateRefLabel"
+          label="State (type min 3 characters)*"
           placeholder="Start typing ..*"
         >
           <q-autocomplete
@@ -101,10 +94,9 @@
         <q-input
           :error="v.contactMobile.$anyError"
           @blur="v.contactMobile.$touch()"
-          color="grey-9"
-          type="tel"
+          color="grey-9" class="type="tel"
           v-model="v.$model.contactMobile"
-          float-label="Mobile*"
+          label="Mobile*"
           placeholder="Mobile*"
         />
       </div>
@@ -112,26 +104,24 @@
         <q-input
           :error="v.contactEmail.$anyError"
           @blur="v.contactEmail.$touch()"
-          color="grey-9"
-          type="email"
+          color="grey-9" class="type="email"
           v-model="v.$model.contactEmail"
-          float-label="Email*"
+          label="Email*"
           placeholder="Email*"
         />
       </div>
     </div>
     <q-stepper-navigation>
-      <q-btn color="primary" class="q-ma-xs" icon="check" @click="validate()" label="Continue"/>
+      <q-btn color="primary" class="class="q-ma-xs" icon="check" @click="validate()" label="Continue"/>
       <q-btn
-        color="amber-10"
-        class="q-ma-xs"
+        color="amber-10" class="class="q-ma-xs"
         icon="save"
         label="Save Partial"
         @click="$emit('saveData','partnerInformation',partnersArr)"
       />
-      <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="$emit('goBack')" label="Back"/>
+      <q-btn color="grey-7" class="class="q-ma-xs" icon="block" @click="$emit('goBack')" label="Back"/>
       <q-btn
-        color="positive float-right"
+        color="positive" class="float-right"
         @click="addMorePartnersSet"
         class="q-ma-xs"
         icon="add"
@@ -222,14 +212,14 @@ export default {
 
     // Partners city selction
     partnerCitySelected(item, index) {
-      this.$v.partnersArr.$each[index].cityRefCode.$model = item.value;
-      this.$v.partnersArr.$each[index].cityRefLabel.$model = item.label;
+      this.v$.partnersArr.$each[index].cityRefCode.$model = item.value;
+      this.v$.partnersArr.$each[index].cityRefLabel.$model = item.label;
     },
 
     // Partners state selection
     partnerStateSelected(item, index) {
-      this.$v.partnersArr.$each[index].stateRefCode.$model = item.value;
-      this.$v.partnersArr.$each[index].stateRefLabel.$model = item.label;
+      this.v$.partnersArr.$each[index].stateRefCode.$model = item.value;
+      this.v$.partnersArr.$each[index].stateRefLabel.$model = item.label;
     },
 
     addMorePartnersSet() {
@@ -252,8 +242,8 @@ export default {
       this.partnersArr.splice(index, 1);
     },
     validate() {
-      this.$v.partnersArr.$touch();
-      if (this.$v.partnersArr.$error) {
+      this.v$.partnersArr.$touch();
+      if (this.v$.partnersArr.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$emit("goNext", "partnerInformation", {

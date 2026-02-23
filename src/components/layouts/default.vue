@@ -21,7 +21,7 @@
       }"
         :delay="1500"
       >
-        <q-list no-border link inset-delimiter highlight style="padding-top:65px">
+        <q-list  clickable  style="padding-top:65px">
           <div>
             <!-- Entry point for sat -->
             <div

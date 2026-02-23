@@ -16,8 +16,7 @@
             size="sm"
             @click="emitToggleRemarks"
             outline
-            color="dark"
-            icon="clear"
+            color="dark" class="icon="clear"
           />
         </div>
       </div>  
@@ -49,8 +48,7 @@
               <div class="row q-gutter-sm" style="display: flex; justify-content: flex-end">
                 <q-btn
                   @click="fnsubmit(formData)"
-                  color="purple-9"
-                  icon="check"
+                  color="purple-9" class="icon="check"
                   label="Confirm"
                 />
           </div>
@@ -123,8 +121,8 @@ export default {
 
     // },
     fnsubmit(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
    this.$q.loading.show({
@@ -149,7 +147,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
             this.$q.loading.hide();

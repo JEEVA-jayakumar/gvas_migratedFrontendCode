@@ -5,7 +5,7 @@
       <div class="row items-center bottom-border q-py-sm">
         <div class="col">Add Remarks</div>
         <div class="col-auto">
-          <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" icon="clear" />
+          <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" class="icon="clear" />
         </div>
 
       </div>
@@ -14,7 +14,7 @@
         <div class="column group">
           <div class="text-h6"></div>
           <div>
-            <q-editor @blur="$v.formData.crmRemark.$touch" :error="$v.formData.crmRemark.$error" color="grey-9" v-model="formData.crmRemark" float-label="Remarks" placeholder="Add remarks"
+            <q-editor @blur="v$.formData.crmRemark.$touch" :error="v$.formData.crmRemark.$error" color="grey-9" v-model="formData.crmRemark" label="Remarks" placeholder="Add remarks"
               :toolbar="[
                 ['bold', 'italic', 'strike', 'underline', 'subscript', 'superscript'],
                 ['token', 'hr', 'link', 'custom_btn'],
@@ -70,13 +70,12 @@
                 times_new_roman: 'Times New Roman',
                 verdana: 'Verdana'
               }" />
-            <!-- <q-input @blur="$v.formData.crmRemark.$touch" :error="$v.formData.crmRemark.$error" color="grey-9"
-              v-model="formData.crmRemark" float-label="Remarks" placeholder="Add remarks" /> -->
+            <!-- <q-input @blur="v$.formData.crmRemark.$touch" :error="v$.formData.crmRemark.$error" color="grey-9" v-model="formData.crmRemark" label="Remarks" placeholder="Add remarks" /> -->
           </div>
         </div>
 
         <div class="group" align="right">
-          <q-btn @click="fnsubmit(formData)" color="positive" icon="check" label="Save" />
+          <q-btn @click="fnsubmit(formData)" color="positive" class="icon="check" label="Save" />
         </div>
       </form>
     </q-dialog>
@@ -120,8 +119,8 @@ export default {
 
     // },
     fnsubmit(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.UPDATE_CRM_REMARKS(formData)
@@ -140,7 +139,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

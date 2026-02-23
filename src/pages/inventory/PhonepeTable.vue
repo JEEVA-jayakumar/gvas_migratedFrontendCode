@@ -14,7 +14,7 @@
 
       <!-- <div class="row bottom-border q-px-md q-py-sm items-center">
         <div class="col-md-4">
-          <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
+          <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
             :options="aggregatorOptions" @input="selectedAggregators" /> 
         </div>
       </div> -->
@@ -35,7 +35,7 @@
           </div>
           <div v-else class="row group">
             <div>
-              <q-banner color="primary" icon="info">No data available to display</q-banner>
+              <q-banner color="primary" class="icon="info">No data available to display</q-banner>
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@
             </div>
           </div>
           <div v-else class="row group">
-            <q-banner color="primary" icon="info">No data available to display</q-banner>
+            <q-banner color="primary" class="icon="info">No data available to display</q-banner>
           </div>
         </div>
       </div>
@@ -75,7 +75,7 @@
             </div>
           </div>
           <div v-else class="row group">
-            <q-banner color="primary" icon="info">No data available to display</q-banner>
+            <q-banner color="primary" class="icon="info">No data available to display</q-banner>
           </div>
         </div>
       </div>
@@ -95,7 +95,7 @@
             </div>
           </div>
           <div v-else class="row group">
-            <q-banner color="primary" icon="info">No data available to display</q-banner>
+            <q-banner color="primary" class="icon="info">No data available to display</q-banner>
           </div>
         </div>
       </div>
@@ -114,7 +114,7 @@
             </div>
           </div>
           <div v-else class="row group">
-            <q-banner color="primary" icon="info">No data available to display</q-banner>
+            <q-banner color="primary" class="icon="info">No data available to display</q-banner>
           </div>
         </div>
       </div>
@@ -134,7 +134,7 @@
             </div>
           </div>
           <div v-else class="row group">
-            <q-banner color="primary" icon="info">No data available to display</q-banner>
+            <q-banner color="primary" class="icon="info">No data available to display</q-banner>
           </div>
         </div>
       </div>

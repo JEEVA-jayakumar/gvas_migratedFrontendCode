@@ -34,15 +34,14 @@
               <q-radio
                 v-for="(item, index) in requestOptions"
                 :key="index"
-                color="grey-9"
-                v-model.trim="formData.serviceRequestMode"
+                color="grey-9" class="v-model.trim="formData.serviceRequestMode"
                 :val="item.value"
                 :label="item.label"
               />
             </div>
           </div> -->
           <!-- <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
-                        <q-select v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                        <q-select v-model="formData.assignTo.id" separator color="grey-9" class=":options="assignToOptions"
                             placeholder="Assign To" />
 
                     </div> -->
@@ -53,8 +52,7 @@
               clearable
               v-model="formData.assignTo.id"
               separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              color="grey-9" class=":disable="formData.marsDeviceIdsCooked.length == 0 "
               :options="assignToOptions"
               placeholder="Assign To"
             />
@@ -65,8 +63,7 @@
               clearable
               v-model="formData.assignTo.region"
               separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              color="grey-9" class=":disable="formData.marsDeviceIdsCooked.length == 0 "
               :options="assignToRegionOptions"
               placeholder="Assign To Region"
             />
@@ -95,25 +92,28 @@
       <q-tabs
         v-model="selectedTab"
         class="shadow-1"
-        color="grey-1"
-        @select="goToUnassignedTab"
+        color="grey-1" class="@select="goToUnassignedTab"
       >
         <q-tab
           default
-          color="dark"
-          name="unAssigned"
-          slot="title"
+          color="dark" class="name="unAssigned"
+
           label="Unassigned"
         />
-        <q-tab color="dark" name="assigned" slot="title" label="Assigned" />
+        <q-tab color="dark" class="name="assigned"  label="Assigned" />
         <!--                 
-                <q-tab color="dark" name="opened" slot="title" label="Opened" />
-                <q-tab color="dark" name="closed" slot="title" label="Closed" /> -->
+                <q-tab color="dark" class="name="opened"  label="Opened" />
+                <q-tab color="dark" class="name="closed"  label="Closed" /> -->
         <!-- 
-                  <q-tab-panel name="opened">
+                   -->
+
+
+      </q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="opened">
               <opened/>
-            </q-tab-panel> -->
-        <q-tab-panel name="unAssigned">
+            </q-tab-panel>
+<q-tab-panel name="unAssigned">
           <q-table
             :rows="tableData3"
             :columns="columnDataUnassigned"
@@ -125,8 +125,7 @@
             row-key="id"
             :loading="tableAjaxLoading1"
             :rows-per-page-options="[5, 10, 15, 20]"
-            color="dark"
-            @request="ajaxLoadAllLeadInfo1"
+            color="dark" class="@request="ajaxLoadAllLeadInfo1"
           >
             <q-td
               v-slot:body-cell-serviceReqTicketId="props"
@@ -142,12 +141,12 @@
             <q-td
               v-slot:body-cell-createdDate="props"
               :props="props"
-              >{{ props.row.createdDate | moment("Do MMM Y") }}</q-td
+              >{{ $moment_format(props.row.createdDate, "Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-updatedDate="props"
               :props="props"
-              >{{ props.row.updatedDate | moment("Do MMM Y") }}</q-td
+              >{{ $moment_format(props.row.updatedDate, "Do MMM Y") }}</q-td
             >
             <!-- <q-td v-slot:body-cell-serviceRequestSubTicketStatus="props" :props="props">
                             <span class="label text-positive"
@@ -233,17 +232,16 @@
               <div class="col-md-5">
                 <q-input
                   clearable
-                  color="grey-9"
-                  v-model="filterSearch1"
+                  color="grey-9" v-model="filterSearch1"
                   placeholder="Type.."
-                  float-label="Search By ServiceReqTicketId, TID .."
+                  label="Search By ServiceReqTicketId, TID .."
                   class="q-mr-lg q-py-sm"
                 />
               </div>
             </template>
           </q-table>
         </q-tab-panel>
-        <q-tab-panel name="assigned">
+<q-tab-panel name="assigned">
           <q-table
             :rows="tableData1"
             :columns="columnDataAssigned"
@@ -254,8 +252,7 @@
             row-key="id"
             :loading="tableAjaxLoading"
             :rows-per-page-options="[5, 10, 15, 20]"
-            color="dark"
-            @request="ajaxLoadAllLeadInfo"
+            color="dark" class="@request="ajaxLoadAllLeadInfo"
           >
             <!--START: table header -->
             <!-- <q-tr v-slot:top-row="props">
@@ -277,8 +274,7 @@
                   <q-checkbox
                     checked-icon="fas fa-chevron-up"
                     unchecked-icon="fas fa-chevron-down"
-                    color="grey-9"
-                    v-model="props.row.expand"
+                    color="grey-9" v-model="props.row.expand"
                     class="q-mr-md"
                     @input="expandRowPlease(props.row)"
                   />
@@ -290,10 +286,10 @@
                   <span v-else="props.row.mid == null">NA</span>
                 </q-td>
                 <q-td key="createdDate" :props="props">
-                  {{ props.row.createdDate | moment("Do MMM Y") }}
+                  {{ $moment_format(props.row.createdDate, "Do MMM Y") }}
                 </q-td>
                 <q-td key="updatedDate" :props="props">
-                  {{ props.row.updatedDate | moment("Do MMM Y") }}
+                  {{ $moment_format(props.row.updatedDate, "Do MMM Y") }}
                 </q-td>
                 <q-td key="meName" :props="props"> {{ props.row.meName }}</q-td>
                 <q-td key="address" :props="props"> {{ props.row.address }}</q-td>
@@ -388,8 +384,7 @@
                     highlight
                     push
                     class="q-mx-sm"
-                    color="positive"
-                    size="sm"
+                    color="positive" size="sm"
                     @click="fnReassignData(props.row)"
                     >Re-Assign</q-btn
                   >
@@ -881,17 +876,16 @@
               <div class="col-md-5">
                 <q-input
                   clearable
-                  color="grey-9"
-                  v-model="filterSearch"
+                  color="grey-9" v-model="filterSearch"
                   placeholder="Type.."
-                  float-label="Search By ServiceReqTicketId, TID .."
+                  label="Search By ServiceReqTicketId, TID .."
                   class="q-mr-lg q-py-sm"
                 />
               </div>
             </template>
           </q-table>
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
       <div class="row items-center gutter-y-sm">
         <div class="col-md-9 col-sm-12 col-xs-12">
           <div class="row items-center"></div>
@@ -1775,7 +1769,7 @@ export default {
               this.$q.notify({
                 color: "positive",
                 position: "bottom",
-                message: res.body.data,
+                message: res.data.data,
                 icon: "thumb_up"
               });
               this.$q.loading.hide();
@@ -1788,7 +1782,7 @@ export default {
               self.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: res.body.data,
+                message: res.data.data,
                 icon: "thumb_down"
               });
               this.$q.loading.hide();
@@ -1799,7 +1793,7 @@ export default {
             self.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.data,
+              message: error.data.data,
               icon: "thumb_down"
             });
             this.$q.loading.hide();

@@ -3,9 +3,8 @@
         <!-- content -->
         <div>
 
-            <q-tabs class="shadow-1" color="grey-1">
-                <q-tab default color="dark" name="active" slot="title" label="Active RegionsGroups" />
-                <!-- <q-tab color="dark" name="deactive" slot="title" label="Deactive Regions" /> -->
+            <q-tabs class="shadow-1" color="grey-1">" class="<q-tab default color="dark" name="active"  label="Active RegionsGroups" />
+                <!-- <q-tab color="dark" class="name="deactive"  label="Deactive Regions" /> -->
 
                 <q-tab-panel name="active">
                     <q-table 
@@ -16,8 +15,7 @@
                         :pagination="paginationControl"
                         :filter-method="myCustomSearchFilter" 
                         row-key="name" 
-                        color="grey-9">
-                        {{ activeTableData }}
+                        color="grey-9">" class="{{ activeTableData }}
                         <q-td v-slot:body-cell-regionGroup="props" :props="props">{{ props.row.regionName
                                 == null ? "NA" : props.row.regionName
                         }}</q-td>
@@ -41,7 +39,7 @@
 
                         <template v-slot:top="props">
                             <!-- <div class="col-md-6 q-my-md" align="right">
-            <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
+            <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9" class="icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
           </div>-->
                             <!--END: table title -->
                             <!--START: table filter,search -->
@@ -62,8 +60,7 @@
                 <!-- <q-tab-panel name="deactive">
                     <q-table :rows="deActiveTableData" table-class="customSATableClass" :columns="columns1"
                         :filter="filterSearch1" :pagination="paginationControl1"
-                        :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
-                        <q-td v-slot:body-cell-regionGroup="props" :props="props">{{ props.row.regionName
+                        :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">" class="<q-td v-slot:body-cell-regionGroup="props" :props="props">{{ props.row.regionName
                                 == null ? "NA" : props.row.regionName
                         }}</q-td>
                         <q-td v-slot:body-cell-action1="props" :props="props">
@@ -248,7 +245,7 @@ export default {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",
-                        message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                        message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                         icon: "thumb_down",
                     });
                 });

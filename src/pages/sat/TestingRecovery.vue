@@ -31,30 +31,29 @@
                 }}</q-td>
                 <template v-slot:top="props">
                     <div class="col-md-5">
-                        <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
-                            float-label="Search TID, MID" class="q-mr-lg q-py-sm" />
+                        <q-input clearable v-model="filter" separator color="grey-9" class="placeholder="Type.."
+                            label="Search TID, MID" class="q-mr-lg q-py-sm" />
                     </div>
                     <div class="col-md-2">
 
-                        <q-btn square outline color="purple-9" label="Download as Excel"
+                        <q-btn square outline color="purple-9" class="label="Download as Excel"
                             class="q-mr-lg q-py-sm float-right" size="md" @click="downloadDeviceRecovery()" />
 
 
                     </div>
                     <div class="col-md-5">
-                        <q-btn-dropdown outline no-caps class="text-weight-regular" color="purple-9"
-                        label="Add Phonepe Device Recovery Manufacturer">
+                        <q-btn-dropdown outline no-caps class="text-weight-regular" color="purple-9" class="label="Add Phonepe Device Recovery Manufacturer">
                         <q-list link>
                             <q-item to="DeviceRecoveryUpload">
-                                <q-item-section icon="search" />
+                                <q-item-section avatar><q-icon name="search"  /></q-item-section>
                                 <q-item-section>
-                                    <q-item-label label>Scan and Upload</q-item-label>
+                                    <q-item-label>Scan and Upload</q-item-label>
                                 </q-item-section>
                             </q-item>
                             <q-item @click.native="fnPhonePeBulkUpload">
-                                <q-item-section icon="attach_file" />
+                                <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
                                 <q-item-section>
-                                    <q-item-label label>Bulk upload</q-item-label>
+                                    <q-item-label>Bulk upload</q-item-label>
                                 </q-item-section>
                             </q-item>
                         </q-list>
@@ -62,12 +61,12 @@
                     </div>
                  
                     <!-- <div class="col-md-3">
-                        <q-btn square outline color="purple-9" label="Single Scan And Upload"
+                        <q-btn square outline color="purple-9" class="label="Single Scan And Upload"
                             class="q-mr-lg q-py-sm float-right" size="md"  @click="$router.push('/sat/DeviceRecoveryUpload')" />
                           
                     </div>
                     <div class="col">
-                        <q-btn square outline color="purple-9" label="Bulk Upload"
+                        <q-btn square outline color="purple-9" class="label="Bulk Upload"
                             class="q-mr-lg q-py-sm float-right" size="md"  @click.native="fnPhonePeBulkUpload" />
                     </div> -->
 

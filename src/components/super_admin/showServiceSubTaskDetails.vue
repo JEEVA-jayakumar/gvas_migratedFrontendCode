@@ -19,10 +19,9 @@
             <q-input
               disable
               v-model="formData.id"
-              :error="$v.formData.id.$error"
+              :error="v$.formData.id.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="Service Request Id"
+              color="grey-9" class="label="Service Request Id"
               placeholder="Service Request Id"
             />
           </div>
@@ -31,19 +30,17 @@
               disable
               v-model="service_req_data"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="Service Request "
+              color="grey-9" class="label="Service Request "
               placeholder="Service Request "
             />
           </div>
           <div class="col-md-12">
             <q-select
               v-model="formData.issue_reason"
-              :error="$v.formData.issue_reason.$error"
-              float-label="Select Subtask"
+              :error="v$.formData.issue_reason.$error"
+              label="Select Subtask"
               radio
-              color="grey-9"
-              :options="subtaskDetails"
+              color="grey-9" class=":options="subtaskDetails"
             />
           </div>
         </div>
@@ -59,8 +56,7 @@
             <q-btn
               align="right"
               @click="fnfinalsubmitEditedSpareParts(formData)"
-              color="purple-9"
-              >Save</q-btn
+              color="purple-9" class=">Save</q-btn
             >
           </div>
         </div>
@@ -154,8 +150,8 @@ export default {
     // },
     fnfinalsubmitEditedSpareParts(formData) {
       console.log("FORMDATA DETAILS----------",JSON.stringify(formData));
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();
@@ -180,9 +176,7 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
+                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

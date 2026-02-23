@@ -13,8 +13,7 @@
           :rows="tableData"
           :columns="columns"
           row-key="field"
-          color="grey-9"
-          :filter="filter"
+          color="grey-9" class=":filter="filter"
           :pagination="paginationControl"
           :rows-per-page-options="[5,10,15,20]"
           @request="ajaxLoadAllPaymentTrackerInfo"
@@ -33,8 +32,7 @@
               <!--START: table expand button :Checkbox -->
               <q-td auto-width key="id" :props="props">
                 <q-checkbox
-                  color="grey-9"
-                  v-model="props.row.expand"
+                  color="grey-9" v-model="props.row.expand"
                   checked-icon="fas fa-chevron-up"
                   unchecked-icon="fas fa-chevron-down"
                   class="q-mr-md"
@@ -72,8 +70,7 @@
                   push
                   outline
                   class="q-mx-sm"
-                  color="negative"
-                  @click="openRejectModel(props.row)"
+                  color="negative" @click="openRejectModel(props.row)"
                   size="sm"
                 >Reject</q-btn>
                 <q-btn
@@ -81,8 +78,7 @@
                   push
                   outline
                   class="q-mx-sm"
-                  color="purple-9"
-                  size="sm"
+                  color="purple-9" size="sm"
                   @click="financeApproveSubmit(props.row.id)"
                 >Approve</q-btn>
               </q-td>
@@ -114,7 +110,7 @@
                       class="cursor-pointer"
                     >
                       <div @click="fnPDFViewModal(props.row.paymentDocumentFile)">
-                        <q-icon name="fas fa-file-pdf" color="primary" />
+                        <q-icon name="fas fa-file-pdf" color="primary" class="/>
                         &nbsp;{{props.row.paymentDocumentFile}}
                       </div>
                     </div>
@@ -133,7 +129,7 @@
                             style="max-width:100%"
                           />
                         </viewer>
-                        <q-icon name="fas fa-image" color="amber-9" />
+                        <q-icon name="fas fa-image" color="amber-9" class="/>
                         &nbsp;{{props.row.paymentDocumentFile}}
                       </div>
                     </div>
@@ -150,7 +146,7 @@
                   class="text-left"
                   v-if="props.row.paymentMadeon == '' || props.row.paymentMadeon == null"
                 >NA</div>
-                <div class="text-left" v-else>{{ props.row.paymentMadeon | moment("Do MMM Y") }}</div>
+                <div class="text-left" v-else>{{ $moment_format(props.row.paymentMadeon, "Do MMM Y") }}</div>
               </q-td>
               <q-td>
                 <div class="text-left text-caption text-grey-8 text-weight-medium">Payment Reference</div>
@@ -175,7 +171,7 @@
                     <div
                       @click="fnPDFViewModal(fnShowBankUploadedDocumentBySat(props.row.leadVerificationStatus)[0].bankAttachedFile)"
                     >
-                      <q-icon name="fas fa-file-pdf" color="primary" />
+                      <q-icon name="fas fa-file-pdf" color="primary" class="/>
                       &nbsp;{{fnShowBankUploadedDocumentBySat(props.row.leadVerificationStatus)[0].bankAttachedFile}}
                     </div>
                   </div>
@@ -196,7 +192,7 @@
                           style="max-width:100%"
                         />
                       </viewer>
-                      <q-icon name="fas fa-image" color="amber-9" />
+                      <q-icon name="fas fa-image" color="amber-9" class="/>
                       &nbsp;{{fnShowBankUploadedDocumentBySat(props.row.leadVerificationStatus)[0].bankAttachedFile}}
                     </div>
                   </div>
@@ -214,10 +210,9 @@
             <div class="col-md-5">
               <q-input
                 clearable
-                color="grey-9"
-                v-model="filter"
+                color="grey-9" v-model="filter"
                 placeholder="Type.."
-                float-label="Search"
+                label="Search"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -506,7 +501,7 @@ export default {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                 icon: "thumb_down"
               });
             });

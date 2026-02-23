@@ -15,8 +15,7 @@
         <div class="col-auto text-h6">Reassign History</div>
         <q-btn
           flat
-          color="red"
-          round
+          color="red" class="round
           size="md"
           icon="close"
           @click="emitAssignHistoryList(toggleModel)"
@@ -30,7 +29,7 @@
         row-key="name"
       >
         <q-td v-slot:body-cell-date="props" :props="props">
-          {{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+          {{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td
         >
         <q-td v-slot:body-cell-agentname="props" :props="props">{{
           props.row.soUser.name == null ? "NA" : props.row.soUser.name

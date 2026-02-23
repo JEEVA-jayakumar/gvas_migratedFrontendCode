@@ -17,24 +17,24 @@
                 <q-item>
                 <q-item-section>
                   <q-select color="grey-9" v-model="formData.leadSourceDeviceVasMapping.leadSource" :options="dropDown.leadSourceOptions"
-                    float-label="Select lead source" placeholder="Lead source" />
+                    label="Select lead source" placeholder="Lead source" />
                 </q-item-section>
               </q-item>
               <q-item>
                 <q-item-section>
                   <q-select color="grey-9" v-model="formData.leadSourceDeviceVasMapping.device" :options="dropDown.deviceOptions"
-                    float-label="Select Device" placeholder="Select Device" />
+                    label="Select Device" placeholder="Select Device" />
                 </q-item-section>
               </q-item>
               <q-item>
                 <q-item-section>
                   <q-select multiple color="grey-9" v-model="formData.vasList" :options="dropDown.vasOptions"
-                    float-label="Select VAS" placeholder="Select VAS" />
+                    label="Select VAS" placeholder="Select VAS" />
                 </q-item-section>
               </q-item>
               </q-card-section>
               <q-card-actions vertical align="end">
-               <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" />
+               <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" class="/>
               </q-card-actions>
             </q-card>
           </div>
@@ -167,8 +167,8 @@ import {
     fnsubmit(request) {
       console.log(" fnsubmit------------------", JSON.stringify(request))
 
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify({
           color: "negative",
           position: "bottom",
@@ -206,9 +206,7 @@ import {
               color: "amber-9",
               position: "bottom",
               message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
+                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down",
             });
             var self = this;

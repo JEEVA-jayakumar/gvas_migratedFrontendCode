@@ -7,83 +7,77 @@
 
       <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
         <q-card style="width:100%">
-          <q-card-separator />
-          <q-card-main>
+          <q-separator />
+          <q-card-section>
             <q-item>
-              <q-item-main>
+              <q-item-section>
                 <q-select
-                  color="grey-9"
-                  v-model="formData.leadSource"
+                  color="grey-9" v-model="formData.leadSource"
                   :options="dropDown.leadSourceOptions"
-                  float-label="Select lead source"
+                  label="Select lead source"
                   placeholder="Lead source"
                 />
-              </q-item-main>
+              </q-item-section>
             </q-item>
 
             <q-item>
-              <q-item-main>
+              <q-item-section>
                 <q-select
-                  color="grey-9"
-                  v-model="formData.device"
+                  color="grey-9" v-model="formData.device"
                   :options="dropDown.deviceOptions"
-                  float-label="Select device"
+                  label="Select device"
                   placeholder="Device"
                 />
-              </q-item-main>
+              </q-item-section>
             </q-item>
 
             <q-item>
-              <q-item-main>
+              <q-item-section>
                 <q-select
-                  color="grey-9"
-                  v-model="formData.marsDevice"
+                  color="grey-9" v-model="formData.marsDevice"
                   :options="dropDown.marsDeviceOptions"
-                  float-label="Mars Device Model"
+                  label="Mars Device Model"
                 />
-              </q-item-main>
+              </q-item-section>
             </q-item>
 
             <q-item>
-              <q-item-main>
+              <q-item-section>
                 <q-select
-                  color="grey-9"
-                  v-model="formData.plan"
+                  color="grey-9" v-model="formData.plan"
                   :options="dropDown.planOptions"
-                  float-label="Select plan"
+                  label="Select plan"
                   placeholder="Plan"
                   @input="fnCategoryBasedRental(formData)"
                 />
-              </q-item-main>
+              </q-item-section>
             </q-item>
 
             <q-item>
-              <q-item-main>
+              <q-item-section>
                 <q-input
-                  color="grey-9"
-                  type="number"
+                  color="grey-9" class="type="number"
                   v-model="formData.setupFees"
                   placeholder="Setup fee"
-                  float-label="Enter Setup fee"
+                  label="Enter Setup fee"
                 />
-              </q-item-main>
+              </q-item-section>
             </q-item>
 
             <q-item>
-              <q-item-main>
+              <q-item-section>
                 <q-input
-                  color="grey-9"
-                  type="number"
+                  color="grey-9" class="type="number"
                   v-model="formData.monthlyFees"
                   placeholder="Recurring fee"
-                  float-label="Enter recurring fee"
+                  label="Enter recurring fee"
                 />
-              </q-item-main>
+              </q-item-section>
             </q-item>
-          </q-card-main>
+          </q-card-section>
 
           <q-card-actions vertical align="end">
-            <q-btn label="submit" @click="fnEditRentalPlan(formData)" color="purple-9" />
+            <q-btn label="submit" @click="fnEditRentalPlan(formData)" color="purple-9" class="/>
           </q-card-actions>
         </q-card>
       </div>

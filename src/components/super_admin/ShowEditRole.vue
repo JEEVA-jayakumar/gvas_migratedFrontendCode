@@ -19,12 +19,11 @@
             <q-select
             disable
             v-model="formData.rolePermissions.hierarchyId"
-            @blur="$v.formData.rolePermissions.hierarchyId.$touch"      
-            :error="$v.formData.rolePermissions.hierarchyId.$error" 
-            float-label="Hierarchy"
+            @blur="v$.formData.rolePermissions.hierarchyId.$touch"
+            :error="v$.formData.rolePermissions.hierarchyId.$error"
+            label="Hierarchy"
             placeholder="Select Hierarchy"
-            class="text-weight-regular text-grey-8" color="grey-9"
-            :options="propGetAllHierarchiesData"
+            class="text-weight-regular text-grey-8" color="grey-9" class=":options="propGetAllHierarchiesData"
               />
           </div>
         </div>
@@ -32,10 +31,10 @@
         <div class="column group q-py-sm">
           <div class="col-md-8">
             <q-input v-model="formData.rolePermissions.role" 
-              @blur="$v.formData.rolePermissions.role.$touch"      
+              @blur="v$.formData.rolePermissions.role.$touch"
               @keyup.enter="fnSubmitShowAddUser"
-              :error="$v.formData.rolePermissions.role.$error" 
-              class="text-weight-regular text-grey-8" color="grey-9" float-label="Role" placeholder="Role" />
+              :error="v$.formData.rolePermissions.role.$error"
+              class="text-weight-regular text-grey-8" color="grey-9" class="label="Role" placeholder="Role" />
           </div>
         </div>
       
@@ -44,18 +43,16 @@
             <q-color 
               clearable
               v-model="formData.rolePermissions.roleColor"
-              @blur="$v.formData.rolePermissions.roleColor.$touch"      
-              :error="$v.formData.rolePermissions.roleColor.$error" 
-              popover float-label="Choose a role color" color="grey-9"
-            />
+              @blur="v$.formData.rolePermissions.roleColor.$touch"
+              :error="v$.formData.rolePermissions.roleColor.$error"
+              popover label="Choose a role color" color="grey-9" class="/>
           </div>
         </div>
 
         <div class="group" align="right">
           <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnEditrolePermissions(showEditRoleToggle)">Cancel
           </q-btn>
-          <q-btn size="md" align="right" @click="fnEditRoleSubmit(formData.rolePermissions)" color="purple-9">Save
-          </q-btn>
+          <q-btn size="md" align="right" @click="fnEditRoleSubmit(formData.rolePermissions)" color="purple-9">Save" class="</q-btn>
         </div>
     </q-dialog>
   </div>
@@ -127,9 +124,9 @@ export default {
 
     //Role creation final submit
     fnEditRoleSubmit(formData) {
-      this.$v.formData.$touch();
+      this.v$.formData.$touch();
 
-      if (this.$v.formData.$error) {
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({
@@ -155,7 +152,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down",
             });
           });

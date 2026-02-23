@@ -3,7 +3,7 @@
     <div>
       <div class="col-md-9 col-sm-12 col-xs-12">
                 <div v-if="RegionalInventoryQrCount.length > 0" class="row">
-                  <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" height="35px" width="35px" v-for="menu in RegionalInventoryQrCount" :key="menu">
+                  <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" class="height="35px" width="35px" v-for="menu in RegionalInventoryQrCount" :key="menu">
                     <div>
                       <big :style="'color'">{{ menu.label.requestCount == '' ? menu.label.requestCount = 0
                         :menu.label.requestCount
@@ -18,29 +18,33 @@
                 </div>
                 <div v-else class="row group">
                   <div>
-                    <q-banner color="purple-9" icon="info">No data available to display</q-banner>
+                    <q-banner color="purple-9" class="icon="info">No data available to display</q-banner>
                   </div>
                 </div>
               </div>
       <div>
-        <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @select="goToCompleteTab">
-          <q-tab default color="dark" name="tab-1" slot="title" label="Pending QR" />
-          <q-tab color="dark" name="tab-2" slot="title" label="Approved QR" />
-          <q-tab color="dark" name="tab-3" slot="title" label="Allocate To SO" />
-          <q-tab-panel name="tab-1">
+        <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" class="@select="goToCompleteTab">
+          <q-tab default color="dark" class="name="tab-1"  label="Pending QR" />
+          <q-tab color="dark" class="name="tab-2"  label="Approved QR" />
+          <q-tab color="dark" class="name="tab-3"  label="Allocate To SO" />
+
+
+
+
+
+            </q-tabs>
+<q-tab-panels v-model="activeTab" animated>
+<q-tab-panel name="tab-1">
             <div class="row items-center">
             
               <div class="col-8"></div>
-              <q-input class="col-4" clearable color="grey-9" placeholder="Type.." v-model="filter"
-                float-label="Search By POD Number" />
+              <q-input class="col-4" clearable color="grey-9" class="placeholder="Type.." v-model="filter"
+                label="Search By POD Number" />
             </div>
             <q-table table-class="customTableClass" class="q-py-none" :rows="tableData" :columns="columns"
               :filter="filter" :rows-per-page-options="[5, 10, 15]" :pagination="paginationControl"
               :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
-              <q-td v-slot:body-cell-updatedAt="props" :props="props">{{
-                props.row == null ? "NA" : props.row.updatedAt |
-              moment("Do MMM Y")
-              }}</q-td>
+              <q-td v-slot:body-cell-updatedAt="props" :props="props">{{ $moment_format(props.row == null ? "NA" : props.row.updatedAt, "Do MMM Y") }}</q-td>
               <q-td v-slot:body-cell-Action="props" :props="props">
                 <q-btn dense no-caps no-wrap label="Approve" icon="edit" size="md" @click="ApproveIncomingData(props.row)"
                   flat class="text-primary">
@@ -49,27 +53,24 @@
               </q-td>
             </q-table>
           </q-tab-panel>
-          <q-tab-panel name="tab-2">
+<q-tab-panel name="tab-2">
             <div class="row">
               <div class="col-8"></div>
-              <q-input class="col-4" v-model="filter1" clearable color="grey-9" placeholder="Type.."
-                float-label="Search By POD Number" />
+              <q-input class="col-4" v-model="filter1" clearable color="grey-9" class="placeholder="Type.."
+                label="Search By POD Number" />
             </div>
             <q-table table-class="customTableClass" class="q-py-none" :rows="tableData1" :columns="columns2"
               :filter="filter1" :rows-per-page-options="[5, 10, 15]" :pagination="paginationControl1"
               :loading="toggleAjaxLoadFilter1" @request="ajaxLoadAllLeadInfo1">
-              <q-td v-slot:body-cell-updatedAt="props" :props="props">{{
-                props.row.updatedAt |
-                moment("Do MMM Y")
-              }}</q-td>
+              <q-td v-slot:body-cell-updatedAt="props" :props="props">{{ $moment_format(props.row.updatedAt, "Do MMM Y") }}</q-td>
             </q-table>
 
           </q-tab-panel>
-          <q-tab-panel name="tab-3">
+<q-tab-panel name="tab-3">
             <div>
               <!-- <div class="col-md-9 col-sm-12 col-xs-12">
                 <div v-if="this.formData.count != null" class="row">
-                  <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" height="35px" width="35px">
+                  <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" class="height="35px" width="35px">
                     <div>
                     </div>
                     <div>
@@ -81,7 +82,7 @@
                 </div>
                 <div v-else class="row group">
                   <div>
-                    <q-banner color="purple-9" icon="info">No data available to display</q-banner>
+                    <q-banner color="purple-9" class="icon="info">No data available to display</q-banner>
                   </div>
                 </div>
               </div> -->
@@ -93,8 +94,8 @@
                   </strong>
                 </article>
                 <div class="col-md-3">
-                  <q-select clearable float-label="Select Bank"  v-model.trim="formData.id" :error="$v.formData.id.$error" 
-                    color="grey-9" :options="bankListOptions" />
+                  <q-select clearable label="Select Bank"  v-model.trim="formData.id" :error="v$.formData.id.$error"
+                    color="grey-9" class=":options="bankListOptions" />
                 </div>
 
               </div>
@@ -108,8 +109,7 @@
                   </strong>
                 </div>
                 <div class="col-md-3">
-                  <q-select :disable="this.formData.id == ''" filter clearable float-label="Select SO" v-model="formData.soList" :error="$v.formData.soList.$error"  color="grey-9"
-                    :options="SoListData" @request="regionBasedSoLoad" />
+                  <q-select :disable="this.formData.id == ''" filter clearable label="Select SO" v-model="formData.soList" :error="v$.formData.soList.$error"  color="grey-9" class=":options="SoListData" @request="regionBasedSoLoad" />
                 </div>
               </div>
               <br />
@@ -121,7 +121,7 @@
                   <span>Enter no of QR </span>
                 </strong>
               </div>
-              <q-input type="number" min="1" :disable="this.formData.soList == ''" oninput="this.value = Math.abs(this.value)"  :error="$v.formData.count.$error"  float-label="Enter no of QR" v-model.trim="formData.count" color="grey-9" />
+              <q-input type="number" min="1" :disable="this.formData.soList == ''" oninput="this.value = Math.abs(this.value)"  :error="v$.formData.count.$error"  label="Enter no of QR" v-model.trim="formData.count" color="grey-9" class="/>
             </div>
             <br />
             <div class="row">
@@ -130,7 +130,7 @@
                   <span>Enter POD</span>
                 </strong>
               </div>
-              <q-input disable float-label="Enter POD" :error="$v.formData.podNumber.$error" v-model.trim="formData.podNumber" color="grey-9" />
+              <q-input disable label="Enter POD" :error="v$.formData.podNumber.$error" v-model.trim="formData.podNumber" color="grey-9" class="/>
             </div>
             <br />
             <div class="row">
@@ -139,56 +139,47 @@
               </div>
             </div>
             &nbsp;
-            <q-tabs v-model="tab" class="shadow-1" color="grey" @select="goToApproveTab">
-              <q-tab default color="dark" name="tab-4" slot="title" label="Pending List" />
-              <q-tab default color="dark" name="tab-5" slot="title" label="Approved List" />
-              <q-tab default color="dark" name="tab-6" slot="title" label="Rejected List" />
+            <q-tabs v-model="tab" class="shadow-1" color="grey" class="@select="goToApproveTab">
+              <q-tab default color="dark" class="name="tab-4"  label="Pending List" />
+              <q-tab default color="dark" class="name="tab-5"  label="Approved List" />
+              <q-tab default color="dark" class="name="tab-6"  label="Rejected List" />
               <q-tab-panel name="tab-4">
                 <div class="row">
               <div class="col-8"></div>
-              <q-input class="col-4" v-model="filter4" clearable color="grey-9" placeholder="Type.."
-                float-label="Search By POD Number" />
+              <q-input class="col-4" v-model="filter4" clearable color="grey-9" class="placeholder="Type.."
+                label="Search By POD Number" />
             </div>
             <q-table table-class="customTableClass" class="q-py-none" :rows="tableData4" :columns="columns4"
               :filter="filter4" :rows-per-page-options="[5, 10, 15]" :pagination="paginationControl4"
               :loading="toggleAjaxLoadFilter4" @request="ajaxLoadAllLeadInfo4">
-              <q-td v-slot:body-cell-createdAt="props" :props="props">{{
-                props.row.createdAt |
-                moment("Do MMM Y")
-              }}</q-td>
+              <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
             </q-table>
               </q-tab-panel>
-              <q-tab-panel name="tab-5">
+<q-tab-panel name="tab-5">
                 <div class="row">
               <div class="col-8"></div>
-              <q-input class="col-4" v-model="filter5" clearable color="grey-9" placeholder="Type.."
-                float-label="Search By POD Number" />
+              <q-input class="col-4" v-model="filter5" clearable color="grey-9" class="placeholder="Type.."
+                label="Search By POD Number" />
             </div>
             <q-table table-class="customTableClass" class="q-py-none" :rows="tableData5" :columns="columns5"
               :filter="filter5" :rows-per-page-options="[5, 10, 15]" :pagination="paginationControl5"
               :loading="toggleAjaxLoadFilter5" @request="ajaxLoadAllLeadInfo5">
-              <q-td v-slot:body-cell-createdAt="props" :props="props">{{
-                props.row.createdAt |
-                moment("Do MMM Y")
-              }}</q-td>
+              <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
             </q-table>
               </q-tab-panel>
-              <q-tab-panel name="tab-6">
+<q-tab-panel name="tab-6">
                 <div class="row">
               <div class="col-8"></div>
-              <q-input class="col-4" v-model="filter6" clearable color="grey-9" placeholder="Type.."
-                float-label="Search By POD Number" />
+              <q-input class="col-4" v-model="filter6" clearable color="grey-9" class="placeholder="Type.."
+                label="Search By POD Number" />
             </div>
             <q-table table-class="customTableClass" class="q-py-none" :rows="tableData6" :columns="columns6"
               :filter="filter6" :rows-per-page-options="[5, 10, 15]" :pagination="paginationControl6"
               :loading="toggleAjaxLoadFilter6" @request="ajaxLoadAllLeadInfo6">
-              <q-td v-slot:body-cell-createdAt="props" :props="props">{{
-                props.row.createdAt |
-                moment("Do MMM Y")
-              }}</q-td>
+              <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
             </q-table>
               </q-tab-panel>
-            </q-tabs>
+</q-tab-panels>
           </q-tab-panel>
         </q-tabs>
       </div>
@@ -619,8 +610,8 @@ export default {
     ...mapActions('staticQrInventory', ['FETCH_UNAPPROVED_QR_LIST','FETCH_UNAPPROVED_QR_LIST_OF_SO', 'FETCH_APPROVED_QR_LIST_OF_SO','FETCH_REJECTED_QR_LIST_OF_SO','FETCH_APPROVED_QR_LIST', 'FETCH_STATIC_QR_REGIONAL_INVENTORY_COUNT']),
     ...mapActions('generateQR', ['FETCH_BANK_LIST','ASSIGN_SO']), 
     fnAssignsubmit(){
-      this.$v.formData.$touch()
-      if(this.$v.formData.$error){
+      this.v$.formData.$touch()
+      if(this.v$.formData.$error){
         this.$q.notify('Please review fields again.')
       }else{
      console.log("SO LIST",JSON.stringify(this.formData.soList));

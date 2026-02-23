@@ -23,7 +23,7 @@
                       <span class="text-h4 text-grey-9 q-mr-sm text-weight-medium">{{getAllDashboardCount.totalUserCount}}</span>
                       <span class="text-caption text-grey-7 text-weight-light">Users</span>
                     </div>
-                    <q-icon size="32px" color="white" class="bg-purple-9 q-pa-md border-radius-10 shadow-2" name="fas fa-user-plus" />
+                    <q-icon size="32px" color="white" class="class="bg-purple-9 q-pa-md border-radius-10 shadow-2" name="fas fa-user-plus" />
                   </div>
                 </q-card-section>
               </q-card>
@@ -46,7 +46,7 @@
                           <span class="text-h5 text-grey-9 q-mr-sm text-weight-medium">{{roleItem.count}}</span>
                           <span class="text-caption text-grey-7 text-weight-light">Users</span>
                         </div>
-                        <q-icon size="28px" color="white" :style="{background:roleItem.roleColor}" class="q-pa-md border-radius-10 shadow-1" name="fas fa-user" />
+                        <q-icon size="28px" color="white" class=":style="{background:roleItem.roleColor}" class="q-pa-md border-radius-10 shadow-1" name="fas fa-user" />
                       </div>
                     </q-card-section>
                   </q-card>

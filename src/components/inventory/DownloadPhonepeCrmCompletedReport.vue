@@ -25,7 +25,7 @@
                 :min="yesterday"
                 :max="tomorrow"
                 type="date"
-                float-label="From Date"
+                label="From Date"
               />
             </div>
             <div class="col-md-12">
@@ -36,7 +36,7 @@
                 :min="yesterday"
                 :max="tomorrow"
                 type="date"
-                float-label="To Date"
+                label="To Date"
               />
             </div>
             <div class="col-md-12 group" align="right">
@@ -51,8 +51,7 @@
               <q-btn
                 align="right"
                 @click="downloadHistory(formData)"
-                color="purple-9"
-                >Download</q-btn
+                color="purple-9" class=">Download</q-btn
               >
             </div>
           </div>

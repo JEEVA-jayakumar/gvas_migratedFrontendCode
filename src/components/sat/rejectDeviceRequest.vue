@@ -18,27 +18,24 @@
             <q-input
               type="textarea"
               placeholder="Type.."
-              @blur="$v.remarks.$touch"
-              :error="$v.remarks.$error"
+              @blur="v$.remarks.$touch"
+              :error="v$.remarks.$error"
               class="q-my-md"
-              color="grey-9"
-              align="left"
+              color="grey-9" class="align="left"
               value=""
               v-model="remarks"
               @input="fnMapRemarks"
             />
           </div>
           <q-btn
-            color="positive"
-            class="q-ma-sm float-right"
+            color="positive" class="class="q-ma-sm float-right"
             @click="rejectSelfAssign(formData.data)"
             align="right"
             label="Submit"
           />
           <q-btn
             align="right"
-            color="grey-9"
-            class="float-right q-ma-sm"
+            color="grey-9" class="class="float-right q-ma-sm"
             @click="emitToggleLost(showRequestModal)"
             >Cancel
           </q-btn>
@@ -112,8 +109,8 @@
           selfAssignmentId:reqData.id,
           remarks:this.remarks
         }
-          this.$v.remarks.$touch();
-          if (this.$v.remarks.$error) {
+          this.v$.remarks.$touch();
+          if (this.v$.remarks.$error) {
             this.$q.notify("Please enter reason.");
           }
           else {
@@ -148,7 +145,7 @@
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
-                  message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                  message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                   icon: "thumb_down"
                 });
               });

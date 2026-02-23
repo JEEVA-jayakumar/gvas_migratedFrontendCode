@@ -22,10 +22,9 @@
             <div class="col-md-12">
               <q-input
                 v-model="formData.name"
-                :error="$v.formData.name.$error"
+                :error="v$.formData.name.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9"
-                float-label="Issue Mapping"
+                color="grey-9" class="label="Issue Mapping"
                 placeholder="Issue Mapping"
               />
             </div>
@@ -56,8 +55,7 @@
               :disable="this.selectedItem == ''"
                 align="right"
                 @click="fnfinalsubmitIssueMapping(formData)"
-                color="purple-9"
-                >Save</q-btn
+                color="purple-9" class=">Save</q-btn
               >
             </div>
           </div>
@@ -185,9 +183,7 @@
                 color: "negative",
                 position: "bottom",
                 message:
-                  error.body.message == null
-                    ? "Please Try Again Later !"
-                    : error.body.message,
+                  (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                 icon: "thumb_down"
               });
               this.$q.loading.hide();

@@ -18,7 +18,7 @@
         @request="ajaxLoadAllLeadInfo"
       >
         <q-td v-slot:body-cell-createdDate="props" :props="props">
-          <span class="label">{{ props.row.createdDate | moment("Do MMM Y") }}</span>
+          <span class="label">{{ $moment_format(props.row.createdDate, "Do MMM Y") }}</span>
         </q-td>
         <q-td v-slot:body-cell-tid="props" :props="props">
           <span class="label text-primary"># {{ props.row.serviceRequestData.tid }}</span>
@@ -53,7 +53,7 @@
             class="cursor-pointer"
           >
             <div @click="fnPDFViewModal(props.row.implementationForm)">
-              <q-icon name="fas fa-file-pdf" color="primary" />
+              <q-icon name="fas fa-file-pdf" color="primary" class="/>
             </div>
           </div>
           <div
@@ -83,7 +83,7 @@
             class="cursor-pointer"
           >
             <div @click="fnPDFViewModal(props.row.pictureOfShop)">
-              <q-icon name="fas fa-file-pdf" color="primary" />
+              <q-icon name="fas fa-file-pdf" color="primary" class="/>
             </div>
           </div>
           <div
@@ -105,7 +105,7 @@
           <div v-else>NA Document</div>
         </q-td>
         <q-td v-slot:body-cell-closedate="props" :props="props">
-          <span class="label">{{ props.row.updatedDate | moment("Do MMM Y") }}</span>
+          <span class="label">{{ $moment_format(props.row.updatedDate, "Do MMM Y") }}</span>
         </q-td>
 
         <q-td v-slot:body-cell-status="props" :props="props">
@@ -141,8 +141,7 @@
             icon="done"
             size="md"
             @click="fnshowservice(props.row)"
-            color="green-7"
-          ></q-btn>
+            color="green-7" class="></q-btn>
         </q-td>
         <q-td v-slot:body-cell-data="props" :props="props">
           <q-btn
@@ -153,8 +152,7 @@
             icon="close"
             size="md"
             @click="fnShowConvertReject(props.row)"
-            color="red-5"
-          ></q-btn>
+            color="red-5" class="></q-btn>
         </q-td>
 
         <template slot="top">
@@ -163,9 +161,8 @@
               clearable
               v-model="filter"
               separator
-              color="grey-9"
-              placeholder="Type.."
-              float-label="Search by  TID,Ticket ID, Merchant Name"
+              color="grey-9" class="placeholder="Type.."
+              label="Search by  TID,Ticket ID, Merchant Name"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -425,9 +422,7 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              error.body.message == null
-                ? "Please Try Again Later !"
-                : error.body.message,
+              (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
             icon: "thumb_down",
           });
           this.$q.loading.hide();
@@ -463,9 +458,7 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              error.body.message == null
-                ? "Please Try Again Later !"
-                : error.body.message,
+              (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
             icon: "thumb_down",
           });
           this.$q.loading.hide();

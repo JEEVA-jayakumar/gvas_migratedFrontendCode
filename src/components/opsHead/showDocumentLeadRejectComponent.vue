@@ -10,26 +10,23 @@
     >
       <div class="text-h6 q-mb-sm">{{propDocumentDetails.documentType}}</div>
       <q-input
-        @blur="$v.formData.leadDetails.reason.$touch"
-        :error="$v.formData.leadDetails.reason.$error"
+        @blur="v$.formData.leadDetails.reason.$touch"
+        :error="v$.formData.leadDetails.reason.$error"
         placedholder="Type.."
-        float-label="Reason"
-        color="grey-9"
-        align="left"
+        label="Reason"
+        color="grey-9" class="align="left"
         v-model="formData.leadDetails.reason"
       />
       <q-btn
         icon="clear"
-        color="negative"
-        class="q-ma-sm float-right"
+        color="negative" class="class="q-ma-sm float-right"
         @click="fnRejectLeadFinal(formData,propToggleDocumentRejectModal)"
         align="right"
         label="Reject"
       />
       <q-btn
         icon="block"
-        color="grey-5"
-        @click="emitToggleRemarks()"
+        color="grey-5" @click="emitToggleRemarks()"
         class="q-ma-sm float-right text-dark"
         align="right"
         v-close-overlay
@@ -106,8 +103,8 @@ export default {
     },
 
     fnRejectLeadFinal(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({

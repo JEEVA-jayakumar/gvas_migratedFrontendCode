@@ -13,23 +13,20 @@
           <div>
             <q-input
               v-model="formData.leadInformation.reason"
-              float-label="Remarks"
-              color="primary"
-            />
+              label="Remarks"
+              color="primary" class="/>
           </div>
           <div class="group">
             <q-btn
               icon="done"
-              color="positive"
-              class="q-ma-sm float-right"
+              color="positive" class="class="q-ma-sm float-right"
               @click="sendRemarks(formData)"
               align="right"
               label="Approve"
             />
             <q-btn
               icon="block"
-              color="grey-5"
-              @click="emitToggleRemarks()"
+              color="grey-5" @click="emitToggleRemarks()"
               class="q-ma-sm float-right text-dark"
               align="right"
               v-close-overlay

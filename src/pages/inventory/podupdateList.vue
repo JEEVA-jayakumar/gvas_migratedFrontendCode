@@ -10,8 +10,7 @@
         :pagination="serverPagination"
         :rows-per-page-options="[5,10,15,20]"
         row-key="name"
-        color="grey-9"
-      >
+        color="grey-9" class=">
         <q-td v-slot:body-cell-action="props" :props="props">
           <div class="row no-wrap no-padding">
             <q-btn
@@ -33,11 +32,11 @@
         <q-td
           v-slot:body-cell-receivedAt="props"
           :props="props"
-        >{{ props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.receivedAt, "Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-DeviceList="props"
           :props="props"
-        >{{ props.row.device.createDate | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.device.createDate, "Do MMM Y") }}</q-td>
 
         <template v-slot:top="props">
           <div class="col-md-5">
@@ -45,9 +44,8 @@
               clearable
               v-model="filter"
               separator
-              color="grey-9"
-              placeholder="Type.."
-              float-label="Pod Number, Device Type"
+              color="grey-9" class="placeholder="Type.."
+              label="Pod Number, Device Type"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -195,7 +193,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+            message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
             icon: "thumb_down"
           });
         });
@@ -250,7 +248,7 @@ export default {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                 icon: "thumb_down"
               });
             });

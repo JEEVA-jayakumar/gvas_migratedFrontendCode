@@ -8,8 +8,7 @@
           <div class="row gutter-x-xs">
             <div class="col-lg-4 col-md-6 col-sm-12">
               <div>
-                <q-card class="border-radius-10 q-py-xs" color="purple-9">
-                  <q-list>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">" class="<q-list>
                     <q-item>
                       <q-item-section>
                         <q-item-label color="white">
@@ -33,16 +32,13 @@
                       <div class="row">
                         <div class="col-md-4 q-my-xs">
                           <div class="text-caption">KYC Exception</div>
-                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
-                        </div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>" class="</div>
                         <div class="col-md-4 q-my-xs">
                           <div class="text-caption">Pricing Exception</div>
-                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
-                        </div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>" class="</div>
                         <div class="col-md-4 q-my-xs">
                           <div class="text-caption">Bank Subvention</div>
-                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
-                        </div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>" class="</div>
                       </div>
                     </q-item-section>
                   </q-item>
@@ -52,8 +48,7 @@
 
             <div class="col-lg-4 col-md-6 col-sm-12">
               <div>
-                <q-card class="border-radius-10 q-py-xs" color="purple-9">
-                  <q-list>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">" class="<q-list>
                     <q-item>
                       <q-item-section>
                         <q-item-label color="white">
@@ -77,16 +72,13 @@
                       <div class="row">
                         <div class="col-md-4 q-my-xs">
                           <div class="text-caption">KYC Exception</div>
-                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
-                        </div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>" class="</div>
                         <div class="col-md-4 q-my-xs">
                           <div class="text-caption">Pricing Exception</div>
-                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
-                        </div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>" class="</div>
                         <div class="col-md-4 q-my-xs">
                           <div class="text-caption">Bank Subvention</div>
-                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
-                        </div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>" class="</div>
                       </div>
                     </q-item-section>
                   </q-item>
@@ -96,8 +88,7 @@
 
             <div class="col-lg-4 col-md-6 col-sm-12">
               <div>
-                <q-card class="border-radius-10 q-py-xs" color="purple-9">
-                  <q-list>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">" class="<q-list>
                     <q-item>
                       <q-item-section>
                         <q-item-label color="white">
@@ -228,15 +219,14 @@
 
               <q-tabs
                 v-model="agingTrackerPending.tabsModel"
-                inverted
-                color="white"
-                no-pane-border
+
+                color="white" class="no-pane-border
                 class="relative-position"
               >
                 <q-tab
                   class="q-pa-sm"
                   :name="tab.name"
-                  slot="title"
+
                   v-for="tab in          agingTrackerPending.tabs"
                   :key="tab.tabTitle"
                 >
@@ -247,7 +237,10 @@
                   >{{tab.tabTitle}}</q-chip>
                 </q-tab>
 
-                <q-tab-panel
+
+              </q-tabs>
+<q-tab-panels v-model="agingTrackerPending.tabsModel" animated>
+<q-tab-panel
                   :name="tabPaneItem.name"
                   v-for="tabPaneItem in agingTrackerPending.tabItems"
                   :key="tabPaneItem.name"
@@ -255,7 +248,7 @@
                 >
                   <div class="row">
                     <div class="full-width">
-                      <q-list no-border separator class="col-md-12">
+                      <q-list  separator class="col-md-12">
                         <q-item
                           class="full-width no-padding q-py-md"
                           v-for="tabItemDetail in tabPaneItem.tabItemDetails"
@@ -279,8 +272,7 @@
                                 <span class="text-primary">
                                   <q-icon
                                     v-if="tabItemDetail.alert"
-                                    color="purple-9"
-                                    size="8px"
+                                    color="purple-9" size="8px"
                                     name="fas fa-dot-circle"
                                   />
                                 </span>
@@ -302,7 +294,7 @@
                     </div>
                   </div>
                 </q-tab-panel>
-              </q-tabs>
+</q-tab-panels>
               <router-link to="/sat/aging/tracker/pending" class="text-grey-8">
                 <p>View more</p>
               </router-link>
@@ -313,15 +305,14 @@
               </div>
               <q-tabs
                 v-model="agingTrackerPending.tabsModel"
-                inverted
-                color="white"
-                no-pane-border
+
+                color="white" class="no-pane-border
                 class="relative-position"
               >
                 <q-tab
                   class="q-pa-sm"
                   :name="tab.name"
-                  slot="title"
+
                   v-for="tab in          agingTrackerPending.tabs"
                   :key="tab.tabTitle"
                 >
@@ -332,7 +323,10 @@
                   >{{tab.tabTitle}}</q-chip>
                 </q-tab>
 
-                <q-tab-panel
+
+              </q-tabs>
+<q-tab-panels v-model="agingTrackerPending.tabsModel" animated>
+<q-tab-panel
                   :name="tabPaneItem.name"
                   v-for="tabPaneItem in agingTrackerPending.tabItems"
                   :key="tabPaneItem.name"
@@ -340,7 +334,7 @@
                 >
                   <div class="row">
                     <div class="full-width">
-                      <q-list no-border separator class="col-md-12">
+                      <q-list  separator class="col-md-12">
                         <q-item
                           class="full-width no-padding q-py-md"
                           v-for="tabItemDetail in tabPaneItem.tabItemDetails"
@@ -364,8 +358,7 @@
                                 <span class="text-primary">
                                   <q-icon
                                     v-if="tabItemDetail.alert"
-                                    color="purple-9"
-                                    size="8px"
+                                    color="purple-9" size="8px"
                                     name="fas fa-dot-circle"
                                   />
                                 </span>
@@ -387,7 +380,7 @@
                     </div>
                   </div>
                 </q-tab-panel>
-              </q-tabs>
+</q-tab-panels>
               <router-link to="/sat/aging/tracker/pending" class="text-grey-8">
                 <p>View more</p>
               </router-link>

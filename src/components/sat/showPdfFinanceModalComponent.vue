@@ -13,8 +13,7 @@
             outline
             round
             size="sm"
-            color="dark"
-            icon="clear"
+            color="dark" class="icon="clear"
             @click="emitToggleRemarks"
           />
         </div>

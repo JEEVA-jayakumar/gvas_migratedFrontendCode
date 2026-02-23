@@ -11,43 +11,43 @@
         <div class="row gutter-sm q-py-sm items-center">
           <div class="col-md-12">
             <q-select v-model="formData.leadSourceDeviceVasMapping.leadSource"
-              @blur="$v.formData.leadSourceDeviceVasMapping.leadSource.$touch"
-              :error="$v.formData.leadSourceDeviceVasMapping.leadSource.$error" :options="dropDown.leadSourceOptions"
-              class="text-weight-regular text-grey-8" color="grey-9" float-label="Select Lead Source"
+              @blur="v$.formData.leadSourceDeviceVasMapping.leadSource.$touch"
+              :error="v$.formData.leadSourceDeviceVasMapping.leadSource.$error" :options="dropDown.leadSourceOptions"
+              class="text-weight-regular text-grey-8" color="grey-9" class="label="Select Lead Source"
               placeholder="Select Lead Source" />
           </div>
           <div class="col-md-12">
             <q-select v-model="formData.leadSourceDeviceVasMapping.device"
-              @blur="$v.formData.leadSourceDeviceVasMapping.device.$touch"
-              :error="$v.formData.leadSourceDeviceVasMapping.device.$error" :options="dropDown.deviceOptions"
-              class="text-weight-regular text-grey-8" color="grey-9" float-label="Select Device"
+              @blur="v$.formData.leadSourceDeviceVasMapping.device.$touch"
+              :error="v$.formData.leadSourceDeviceVasMapping.device.$error" :options="dropDown.deviceOptions"
+              class="text-weight-regular text-grey-8" color="grey-9" class="label="Select Device"
               placeholder="Select Device" />
           </div>
           <div class="col-md-12">
-            <q-select multiple v-model="formData.vasList" @blur="$v.formData.vasList.$touch"
-              :error="$v.formData.vasList.$error" :options="dropDown.vasOptions" class="text-weight-regular text-grey-8"
-              color="grey-9" float-label="Select Vas" placeholder="Select Vas" />
+            <q-select multiple v-model="formData.vasList" @blur="v$.formData.vasList.$touch"
+              :error="v$.formData.vasList.$error" :options="dropDown.vasOptions" class="text-weight-regular text-grey-8"
+              color="grey-9" class="label="Select Vas" placeholder="Select Vas" />
           </div>
         </div>
         <q-card-section>
-          <q-list no-border>
+          <q-list >
 
             <!-- <q-item>
               <q-item-section>
                 <q-select color="grey-9" v-model="formData.leadSourceDeviceVasMapping.leadSource"
-                  :options="dropDown.leadSourceOptions" float-label="Select lead source" placeholder="Lead source" />
+                  :options="dropDown.leadSourceOptions" label="Select lead source" placeholder="Lead source" />
               </q-item-section>
             </q-item> -->
             <!-- <q-item>
               <q-item-section>
                 <q-select color="grey-9" v-model="formData.leadSourceDeviceVasMapping.device"
-                  :options="dropDown.deviceOptions" float-label="Select Device" placeholder="Select Device" />
+                  :options="dropDown.deviceOptions" label="Select Device" placeholder="Select Device" />
               </q-item-section>
             </q-item> -->
             <!-- <q-item>
               <q-item-section>
                 <q-select multiple color="grey-9" v-model="formData.vasList" :options="dropDown.vasOptions"
-                  float-label="Select VAS" placeholder="Select VAS" />
+                  label="Select VAS" placeholder="Select VAS" />
               </q-item-section>
             </q-item> -->
           </q-list>
@@ -56,8 +56,7 @@
           <div class="col-md-12 group" align="right">
             <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="toggleModal()">Cancel
             </q-btn>
-            <q-btn align="right" @click="submitModifiedData(formData)" color="purple-9">Save</q-btn>
-          </div>
+            <q-btn align="right" @click="submitModifiedData(formData)" color="purple-9">Save</q-btn>" class="</div>
         </div>
       </form>
     </q-dialog>
@@ -192,8 +191,8 @@ export default {
       this.$emit("emitfnForLeadSourceTableRefresh");
     },
     submitModifiedData(request) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
       } else {
         this.$q.loading.show({
           delay: 100, // ms
@@ -232,7 +231,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

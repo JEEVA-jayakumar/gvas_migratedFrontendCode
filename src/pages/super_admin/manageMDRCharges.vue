@@ -8,16 +8,15 @@
       <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
         <q-card style="width:100%">
           <q-card-section>
-            <q-list no-border>
+            <q-list >
               <q-item>
                 <q-item-section>
                   <q-select
-                    color="grey-9"
-                    v-model="formData.leadSource"
+                    color="grey-9" v-model="formData.leadSource"
                     :options="dropDown.leadSourceOptions"
-                    float-label="Select lead source"
-                    :error="$v.formData.leadSource.$error"
-                    @blur="$v.formData.leadSource.$touch"
+                    label="Select lead source"
+                    :error="v$.formData.leadSource.$error"
+                    @blur="v$.formData.leadSource.$touch"
                   />
                 </q-item-section>
                 <q-item-section right>
@@ -26,8 +25,7 @@
                     @click="fnManageLeadSource"
                     size="sm"
                     icon="add"
-                    color="purple-9"
-                  />
+                    color="purple-9" class="/>
                 </q-item-section>
               </q-item>
               <q-item>
@@ -37,9 +35,9 @@
                     v-model="formData.device"
                     @input="onChange(formData.device)"
                     :options="dropDown.deviceOptions"
-                    float-label="Select device"
-                    :error="$v.formData.device.$error"
-                    @blur="$v.formData.device.$touch"
+                    label="Select device"
+                    :error="v$.formData.device.$error"
+                    @blur="v$.formData.device.$touch"
                   />
                 </q-item-section>
                 <q-item-section right>
@@ -48,8 +46,7 @@
                     @click="fnManageDevice"
                     size="sm"
                     icon="add"
-                    color="purple-9"
-                  />
+                    color="purple-9" class="/>
                 </q-item-section>
               </q-item>
               <q-item>
@@ -58,13 +55,13 @@
                     color="grey-9"
                     v-model="formData.marsDeviceModel"
                     :options="dropDown.marsDeviceOptions"
-                    float-label="Mars Device Model"
-                    :error="$v.formData.marsDeviceModel.$error"
-                    @blur="$v.formData.marsDeviceModel.$touch"
+                    label="Mars Device Model"
+                    :error="v$.formData.marsDeviceModel.$error"
+                    @blur="v$.formData.marsDeviceModel.$touch"
                   />
                 </q-item-section>
                 <!-- <q-item-section right>
-                  <q-btn round @click="fnManageDevice" size="sm" icon="add" color="purple-9" />
+                  <q-btn round @click="fnManageDevice" size="sm" icon="add" color="purple-9" class="/>
                 </q-item-section>-->
               </q-item>
               <q-item>
@@ -73,15 +70,14 @@
                     color="grey-9"
                     v-model="formData.merchantType"
                     :options="dropDown.merchantTypesOptions"
-                    float-label="Select merchant category type"
+                    label="Select merchant category type"
                     @input="fnCategoryBasedMdr(formData)"
-                    :error="$v.formData.merchantType.$error"
-                    @blur="$v.formData.merchantType.$touch"
+                    :error="v$.formData.merchantType.$error"
+                    @blur="v$.formData.merchantType.$touch"
                   />
                 </q-item-section>
                 <!-- <q-item-section right>
-                  <q-btn round @click="fnManageMerchantType" size="sm" icon="add" color="purple-9"/>
-                </q-item-section>-->
+                  <q-btn round @click="fnManageMerchantType" size="sm" icon="add" color="purple-9"/>" class="</q-item-section>-->
               </q-item>
               <q-item>
                 <q-item-section>
@@ -90,9 +86,9 @@
                     type="text"
                     v-model="formData.mdrPlanName"
                     placeholder="Mdr Plan Name"
-                    float-label="Mdr Plan Name"
-                    :error="$v.formData.mdrPlanName.$error"
-                    @blur="$v.formData.mdrPlanName.$touch"
+                    label="Mdr Plan Name"
+                    :error="v$.formData.mdrPlanName.$error"
+                    @blur="v$.formData.mdrPlanName.$touch"
                   />
                 </q-item-section>
               </q-item>
@@ -100,27 +96,26 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.debitLessthanAmount"
                       placeholder="Debit <= 2000 %"
-                      float-label="Debit <= 2000 %"
-                      :error="$v.formData.debitLessthanAmount.$error"
-                      @blur="$v.formData.debitLessthanAmount.$touch"
+                      label="Debit <= 2000 %"
+                      :error="v$.formData.debitLessthanAmount.$error"
+                      @blur="v$.formData.debitLessthanAmount.$touch"
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.debitLessthanAmount.$error"
+                    v-if="v$.formData.debitLessthanAmount.$error"
                     class="error-tooltip"
                     :class="{
-                      'error-highlight': $v.formData.debitLessthanAmount.$error,
+                      'error-highlight': v$.formData.debitLessthanAmount.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.debitLessthanAmount.$model &&
-                        ($v.formData.debitLessthanAmount.$model < 0 ||
-                          $v.formData.debitLessthanAmount.$model > 100)
+                        v$.formData.debitLessthanAmount.$model &&
+                        (v$.formData.debitLessthanAmount.$model < 0 ||
+                          v$.formData.debitLessthanAmount.$model > 100)
                       "
                     >
                       Debit <= 2000 % must be between 0 and 100.
@@ -130,27 +125,26 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.debitGreaterthanAmount"
-                      float-label="Debit > 2000 %"
+                      label="Debit > 2000 %"
                       placeholder="Debit > 2000 %"
-                      :error="$v.formData.debitGreaterthanAmount.$error"
-                      @blur="$v.formData.debitGreaterthanAmount.$touch"
+                      :error="v$.formData.debitGreaterthanAmount.$error"
+                      @blur="v$.formData.debitGreaterthanAmount.$touch"
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.debitGreaterthanAmount.$error"
+                    v-if="v$.formData.debitGreaterthanAmount.$error"
                     class="error-tooltip"
                     :class="{
-                      'error-highlight': $v.formData.debitGreaterthanAmount.$error,
+                      'error-highlight': v$.formData.debitGreaterthanAmount.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.debitGreaterthanAmount.$model &&
-                        ($v.formData.debitGreaterthanAmount.$model < 0 ||
-                          $v.formData.debitGreaterthanAmount.$model > 100)
+                        v$.formData.debitGreaterthanAmount.$model &&
+                        (v$.formData.debitGreaterthanAmount.$model < 0 ||
+                          v$.formData.debitGreaterthanAmount.$model > 100)
                       "
                     >
                       Debit > 2000 % must be between 0 and 100.
@@ -160,26 +154,25 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.stdCC"
-                      float-label="Std CC %"
+                      label="Std CC %"
                       placeholder="Std CC %"
-                      :error="$v.formData.stdCC.$error"
-                      @blur="$v.formData.stdCC.$touch"
+                      :error="v$.formData.stdCC.$error"
+                      @blur="v$.formData.stdCC.$touch"
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.stdCC.$error"
+                    v-if="v$.formData.stdCC.$error"
                     class="error-tooltip"
                     :class="{
-                      'error-highlight': $v.formData.stdCC.$error,
+                      'error-highlight': v$.formData.stdCC.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.stdCC.$model &&
-                        ($v.formData.stdCC.$model < 0 || $v.formData.stdCC.$model > 100)
+                        v$.formData.stdCC.$model &&
+                        (v$.formData.stdCC.$model < 0 || v$.formData.stdCC.$model > 100)
                       "
                     >
                       Std CC % must be between 0 and 100.
@@ -189,27 +182,26 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.premiumCC"
-                      float-label="Premium CC %"
+                      label="Premium CC %"
                       placeholder="Premium CC %"
-                      :error="$v.formData.premiumCC.$error"
-                      @blur="$v.formData.premiumCC.$touch"
+                      :error="v$.formData.premiumCC.$error"
+                      @blur="v$.formData.premiumCC.$touch"
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.premiumCC.$error"
+                    v-if="v$.formData.premiumCC.$error"
                     class="error-tooltip"
                     :class="{
-                      'error-highlight': $v.formData.premiumCC.$error,
+                      'error-highlight': v$.formData.premiumCC.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.premiumCC.$model &&
-                        ($v.formData.premiumCC.$model < 0 ||
-                          $v.formData.premiumCC.$model > 100)
+                        v$.formData.premiumCC.$model &&
+                        (v$.formData.premiumCC.$model < 0 ||
+                          v$.formData.premiumCC.$model > 100)
                       "
                     >
                       Premium CC % must be between 0 and 100.
@@ -219,26 +211,25 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.corpCC"
-                      float-label="Corp Pre CC %"
+                      label="Corp Pre CC %"
                       placeholder="Corp Pre CC %"
-                      :error="$v.formData.corpCC.$error"
-                      @blur="$v.formData.corpCC.$touch"
+                      :error="v$.formData.corpCC.$error"
+                      @blur="v$.formData.corpCC.$touch"
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.corpCC.$error"
+                    v-if="v$.formData.corpCC.$error"
                     class="error-tooltip"
                     :class="{
-                      'error-highlight': $v.formData.corpCC.$error,
+                      'error-highlight': v$.formData.corpCC.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.corpCC.$model &&
-                        ($v.formData.corpCC.$model < 0 || $v.formData.corpCC.$model > 100)
+                        v$.formData.corpCC.$model &&
+                        (v$.formData.corpCC.$model < 0 || v$.formData.corpCC.$model > 100)
                       "
                     >
                       Corp Pre CC % must be between 0 and 100.
@@ -248,26 +239,25 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.intlCC"
-                      float-label="Intl Pre CC %"
+                      label="Intl Pre CC %"
                       placeholder="Intl Pre CC %"
-                      :error="$v.formData.intlCC.$error"
-                      @blur="$v.formData.intlCC.$touch"
+                      :error="v$.formData.intlCC.$error"
+                      @blur="v$.formData.intlCC.$touch"
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.intlCC.$error"
+                    v-if="v$.formData.intlCC.$error"
                     class="error-tooltip"
                     :class="{
-                      'error-highlight': $v.formData.intlCC.$error,
+                      'error-highlight': v$.formData.intlCC.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.intlCC.$model &&
-                        ($v.formData.intlCC.$model < 0 || $v.formData.intlCC.$model > 100)
+                        v$.formData.intlCC.$model &&
+                        (v$.formData.intlCC.$model < 0 || v$.formData.intlCC.$model > 100)
                       "
                     >
                       Intl Pre CC % must be between 0 and 100.
@@ -277,27 +267,26 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.superPremiumlCC"
-                      float-label="Super Pre CC %"
+                      label="Super Pre CC %"
                       placeholder="Super Pre CC %"
-                      :error="$v.formData.superPremiumlCC.$error"
-                      @blur="$v.formData.superPremiumlCC.$touch"
+                      :error="v$.formData.superPremiumlCC.$error"
+                      @blur="v$.formData.superPremiumlCC.$touch"
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.superPremiumlCC.$error"
+                    v-if="v$.formData.superPremiumlCC.$error"
                     class="error-tooltip"
                     :class="{
-                      'error-highlight': $v.formData.superPremiumlCC.$error,
+                      'error-highlight': v$.formData.superPremiumlCC.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.superPremiumlCC.$model &&
-                        ($v.formData.superPremiumlCC.$model < 0 ||
-                          $v.formData.superPremiumlCC.$model > 100)
+                        v$.formData.superPremiumlCC.$model &&
+                        (v$.formData.superPremiumlCC.$model < 0 ||
+                          v$.formData.superPremiumlCC.$model > 100)
                       "
                     >
                       Super Pre CC % must be between 0 and 100.
@@ -307,27 +296,26 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.amexDomestic"
-                      float-label="amex Domestic %"
+                      label="amex Domestic %"
                       placeholder="amex Domestic %"
-                      :error="$v.formData.amexDomestic.$error"
-                      @blur="$v.formData.amexDomestic.$touch"
+                      :error="v$.formData.amexDomestic.$error"
+                      @blur="v$.formData.amexDomestic.$touch"
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.amexDomestic.$error"
+                    v-if="v$.formData.amexDomestic.$error"
                     class="error-tooltip"
                     :class="{
-                      'error-highlight': $v.formData.amexDomestic.$error,
+                      'error-highlight': v$.formData.amexDomestic.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.amexDomestic.$model &&
-                        ($v.formData.amexDomestic.$model < 0 ||
-                          $v.formData.amexDomestic.$model > 100)
+                        v$.formData.amexDomestic.$model &&
+                        (v$.formData.amexDomestic.$model < 0 ||
+                          v$.formData.amexDomestic.$model > 100)
                       "
                     >
                       amex Domestic % must be between 0 and 100.
@@ -337,27 +325,26 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.amexInternational"
-                      float-label="amex International %"
+                      label="amex International %"
                       placeholder="amex International %"
-                      :error="$v.formData.amexInternational.$error"
-                      @blur="$v.formData.amexInternational.$touch"
+                      :error="v$.formData.amexInternational.$error"
+                      @blur="v$.formData.amexInternational.$touch"
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.amexInternational.$error"
+                    v-if="v$.formData.amexInternational.$error"
                     class="error-tooltip"
                     :class="{
-                      'error-highlight': $v.formData.amexInternational.$error,
+                      'error-highlight': v$.formData.amexInternational.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.amexInternational.$model &&
-                        ($v.formData.amexInternational.$model < 0 ||
-                          $v.formData.amexInternational.$model > 100)
+                        v$.formData.amexInternational.$model &&
+                        (v$.formData.amexInternational.$model < 0 ||
+                          v$.formData.amexInternational.$model > 100)
                       "
                     >
                       amex International % must be between 0 and 100.
@@ -367,27 +354,26 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.upiDebitCardUpTo2000"
-                      float-label="UPI Debit Card UpTo 2000 %"
+                      label="UPI Debit Card UpTo 2000 %"
                       placeholder="UPI Debit Card UpTo 2000 %"
-                      :error="$v.formData.upiDebitCardUpTo2000.$error"
-                      @blur="$v.formData.upiDebitCardUpTo2000.$touch"
+                      :error="v$.formData.upiDebitCardUpTo2000.$error"
+                      @blur="v$.formData.upiDebitCardUpTo2000.$touch"
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.upiDebitCardUpTo2000.$error"
+                    v-if="v$.formData.upiDebitCardUpTo2000.$error"
                     class="error-tooltip"
                     :class="{
-                      'error-highlight': $v.formData.upiDebitCardUpTo2000.$error,
+                      'error-highlight': v$.formData.upiDebitCardUpTo2000.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.upiDebitCardUpTo2000.$model &&
-                        ($v.formData.upiDebitCardUpTo2000.$model < 0 ||
-                          $v.formData.upiDebitCardUpTo2000.$model > 100)
+                        v$.formData.upiDebitCardUpTo2000.$model &&
+                        (v$.formData.upiDebitCardUpTo2000.$model < 0 ||
+                          v$.formData.upiDebitCardUpTo2000.$model > 100)
                       "
                     >
                       UPI Debit Card UpTo 2000 % must be between 0 and 100.
@@ -397,27 +383,26 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.upiDebitCardAbove2000"
-                      float-label="UPI Debit Card Above 2000 %"
+                      label="UPI Debit Card Above 2000 %"
                       placeholder="UPI Debit Card Above 2000 %"
-                      :error="$v.formData.upiDebitCardAbove2000.$error"
-                      @blur="$v.formData.upiDebitCardAbove2000.$touch"
+                      :error="v$.formData.upiDebitCardAbove2000.$error"
+                      @blur="v$.formData.upiDebitCardAbove2000.$touch"
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.upiDebitCardAbove2000.$error"
+                    v-if="v$.formData.upiDebitCardAbove2000.$error"
                     class="error-tooltip"
                     :class="{
-                      'error-highlight': $v.formData.upiDebitCardAbove2000.$error,
+                      'error-highlight': v$.formData.upiDebitCardAbove2000.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.upiDebitCardAbove2000.$model &&
-                        ($v.formData.upiDebitCardAbove2000.$model < 0 ||
-                          $v.formData.upiDebitCardAbove2000.$model > 100)
+                        v$.formData.upiDebitCardAbove2000.$model &&
+                        (v$.formData.upiDebitCardAbove2000.$model < 0 ||
+                          v$.formData.upiDebitCardAbove2000.$model > 100)
                       "
                     >
                       UPI Debit Card Above 2000 % must be between 0 and 100.
@@ -427,27 +412,26 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.upiPrepaidCreditCardsUpTo2000"
-                      float-label="UPI Prepaid Credit Cards UpTo 2000 %"
+                      label="UPI Prepaid Credit Cards UpTo 2000 %"
                       placeholder="UPI Prepaid Credit Cards UpTo 2000 %"
-                      :error="$v.formData.upiPrepaidCreditCardsUpTo2000.$error"
-                      @blur="$v.formData.upiPrepaidCreditCardsUpTo2000.$touch"
+                      :error="v$.formData.upiPrepaidCreditCardsUpTo2000.$error"
+                      @blur="v$.formData.upiPrepaidCreditCardsUpTo2000.$touch"
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.upiPrepaidCreditCardsUpTo2000.$error"
+                    v-if="v$.formData.upiPrepaidCreditCardsUpTo2000.$error"
                     class="error-tooltip"
                     :class="{
-                      'error-highlight': $v.formData.upiPrepaidCreditCardsUpTo2000.$error,
+                      'error-highlight': v$.formData.upiPrepaidCreditCardsUpTo2000.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.upiPrepaidCreditCardsUpTo2000.$model &&
-                        ($v.formData.upiPrepaidCreditCardsUpTo2000.$model < 0 ||
-                          $v.formData.upiPrepaidCreditCardsUpTo2000.$model > 100)
+                        v$.formData.upiPrepaidCreditCardsUpTo2000.$model &&
+                        (v$.formData.upiPrepaidCreditCardsUpTo2000.$model < 0 ||
+                          v$.formData.upiPrepaidCreditCardsUpTo2000.$model > 100)
                       "
                     >
                       UPI Prepaid Credit Cards UpTo 2000 % must be between 0 and 100.
@@ -457,28 +441,27 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.upiPrepaidCreditCardsAbove2000"
-                      float-label="UPI Prepaid Credit Cards Above 2000 %"
+                      label="UPI Prepaid Credit Cards Above 2000 %"
                       placeholder="UPI Prepaid Credit Cards Above 2000 %"
-                      :error="$v.formData.upiPrepaidCreditCardsAbove2000.$error"
-                      @blur="$v.formData.upiPrepaidCreditCardsAbove2000.$touch"
+                      :error="v$.formData.upiPrepaidCreditCardsAbove2000.$error"
+                      @blur="v$.formData.upiPrepaidCreditCardsAbove2000.$touch"
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.upiPrepaidCreditCardsAbove2000.$error"
+                    v-if="v$.formData.upiPrepaidCreditCardsAbove2000.$error"
                     class="error-tooltip"
                     :class="{
                       'error-highlight':
-                        $v.formData.upiPrepaidCreditCardsAbove2000.$error,
+                        v$.formData.upiPrepaidCreditCardsAbove2000.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.upiPrepaidCreditCardsAbove2000.$model &&
-                        ($v.formData.upiPrepaidCreditCardsAbove2000.$model < 0 ||
-                          $v.formData.upiPrepaidCreditCardsAbove2000.$model > 100)
+                        v$.formData.upiPrepaidCreditCardsAbove2000.$model &&
+                        (v$.formData.upiPrepaidCreditCardsAbove2000.$model < 0 ||
+                          v$.formData.upiPrepaidCreditCardsAbove2000.$model > 100)
                       "
                     >
                       UPI Prepaid Credit Cards Above 2000 % must be between 0 and 100.
@@ -491,27 +474,26 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.smallMerchantLessThanTwoDebit"
-                      float-label="Small Merchant < 2000 % debit Card"
+                      label="Small Merchant < 2000 % debit Card"
                       placeholder="Small Merchant < 2000 % debit Card"
-                      :error="$v.formData.smallMerchantLessThanTwoDebit.$error"
-                      @blur="$v.formData.smallMerchantLessThanTwoDebit.$touch"
+                      :error="v$.formData.smallMerchantLessThanTwoDebit.$error"
+                      @blur="v$.formData.smallMerchantLessThanTwoDebit.$touch"
                     />
                     <div
-                      v-if="$v.formData.smallMerchantLessThanTwoDebit.$error"
+                      v-if="v$.formData.smallMerchantLessThanTwoDebit.$error"
                       class="error-tooltip"
                       :class="{
                         'error-highlight':
-                          $v.formData.smallMerchantLessThanTwoDebit.$error,
+                          v$.formData.smallMerchantLessThanTwoDebit.$error,
                       }"
                     >
                       <span
                         v-if="
-                          $v.formData.smallMerchantLessThanTwoDebit.$model &&
-                          ($v.formData.smallMerchantLessThanTwoDebit.$model < 0 ||
-                            $v.formData.smallMerchantLessThanTwoDebit.$model > 100)
+                          v$.formData.smallMerchantLessThanTwoDebit.$model &&
+                          (v$.formData.smallMerchantLessThanTwoDebit.$model < 0 ||
+                            v$.formData.smallMerchantLessThanTwoDebit.$model > 100)
                         "
                       >
                         Small Merchant < 2000 % debit Card must be between 0 and 100.
@@ -522,28 +504,27 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.smallMerchantGreaterThanTwoDebit"
-                      float-label="Small Merchant > 2000 % debit Card"
+                      label="Small Merchant > 2000 % debit Card"
                       placeholder="Small Merchant > 2000 % debit Card"
-                      :error="$v.formData.smallMerchantGreaterThanTwoDebit.$error"
-                      @blur="$v.formData.smallMerchantGreaterThanTwoDebit.$touch"
+                      :error="v$.formData.smallMerchantGreaterThanTwoDebit.$error"
+                      @blur="v$.formData.smallMerchantGreaterThanTwoDebit.$touch"
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.smallMerchantGreaterThanTwoDebit.$error"
+                    v-if="v$.formData.smallMerchantGreaterThanTwoDebit.$error"
                     class="error-tooltip"
                     :class="{
                       'error-highlight':
-                        $v.formData.smallMerchantGreaterThanTwoDebit.$error,
+                        v$.formData.smallMerchantGreaterThanTwoDebit.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.smallMerchantGreaterThanTwoDebit.$model &&
-                        ($v.formData.smallMerchantGreaterThanTwoDebit.$model < 0 ||
-                          $v.formData.smallMerchantGreaterThanTwoDebit.$model > 100)
+                        v$.formData.smallMerchantGreaterThanTwoDebit.$model &&
+                        (v$.formData.smallMerchantGreaterThanTwoDebit.$model < 0 ||
+                          v$.formData.smallMerchantGreaterThanTwoDebit.$model > 100)
                       "
                     >
                       Small Merchant > 2000 % debit Card must be between 0 and 100.
@@ -553,29 +534,28 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.smallMerchantLessThanTwoCreditAndPrepaid"
-                      float-label="Small Merchant < 2000 % credit and prepaid card"
+                      label="Small Merchant < 2000 % credit and prepaid card"
                       placeholder="Small Merchant < 2000 % credit and prepaid card"
-                      :error="$v.formData.smallMerchantLessThanTwoCreditAndPrepaid.$error"
-                      @blur="$v.formData.smallMerchantLessThanTwoCreditAndPrepaid.$touch"
+                      :error="v$.formData.smallMerchantLessThanTwoCreditAndPrepaid.$error"
+                      @blur="v$.formData.smallMerchantLessThanTwoCreditAndPrepaid.$touch"
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.smallMerchantLessThanTwoCreditAndPrepaid.$error"
+                    v-if="v$.formData.smallMerchantLessThanTwoCreditAndPrepaid.$error"
                     class="error-tooltip"
                     :class="{
                       'error-highlight':
-                        $v.formData.smallMerchantLessThanTwoCreditAndPrepaid.$error,
+                        v$.formData.smallMerchantLessThanTwoCreditAndPrepaid.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.smallMerchantLessThanTwoCreditAndPrepaid.$model &&
-                        ($v.formData.smallMerchantLessThanTwoCreditAndPrepaid.$model <
+                        v$.formData.smallMerchantLessThanTwoCreditAndPrepaid.$model &&
+                        (v$.formData.smallMerchantLessThanTwoCreditAndPrepaid.$model <
                           0 ||
-                          $v.formData.smallMerchantLessThanTwoCreditAndPrepaid.$model >
+                          v$.formData.smallMerchantLessThanTwoCreditAndPrepaid.$model >
                             100)
                       "
                     >
@@ -587,33 +567,32 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.smallMerchantGreaterThanTwoCreditAndPrepaid"
-                      float-label="Small Merchant > 2000 % credit and prepaid card"
+                      label="Small Merchant > 2000 % credit and prepaid card"
                       placeholder="Small Merchant > 2000 % credit and prepaid card"
                       :error="
-                        $v.formData.smallMerchantGreaterThanTwoCreditAndPrepaid.$error
+                        v$.formData.smallMerchantGreaterThanTwoCreditAndPrepaid.$error
                       "
                       @blur="
-                        $v.formData.smallMerchantGreaterThanTwoCreditAndPrepaid.$touch
+                        v$.formData.smallMerchantGreaterThanTwoCreditAndPrepaid.$touch
                       "
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.smallMerchantGreaterThanTwoCreditAndPrepaid.$error"
+                    v-if="v$.formData.smallMerchantGreaterThanTwoCreditAndPrepaid.$error"
                     class="error-tooltip"
                     :class="{
                       'error-highlight':
-                        $v.formData.smallMerchantGreaterThanTwoCreditAndPrepaid.$error,
+                        v$.formData.smallMerchantGreaterThanTwoCreditAndPrepaid.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.smallMerchantGreaterThanTwoCreditAndPrepaid.$model &&
-                        ($v.formData.smallMerchantGreaterThanTwoCreditAndPrepaid.$model <
+                        v$.formData.smallMerchantGreaterThanTwoCreditAndPrepaid.$model &&
+                        (v$.formData.smallMerchantGreaterThanTwoCreditAndPrepaid.$model <
                           0 ||
-                          $v.formData.smallMerchantGreaterThanTwoCreditAndPrepaid.$model >
+                          v$.formData.smallMerchantGreaterThanTwoCreditAndPrepaid.$model >
                             100)
                       "
                     >
@@ -625,27 +604,26 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.largeMerchantLessThanTwoDebit"
-                      float-label="Large Merchant < 2000 % debit Card"
+                      label="Large Merchant < 2000 % debit Card"
                       placeholder="Large Merchant < 2000 % debit Card"
-                      :error="$v.formData.largeMerchantLessThanTwoDebit.$error"
-                      @blur="$v.formData.largeMerchantLessThanTwoDebit.$touch"
+                      :error="v$.formData.largeMerchantLessThanTwoDebit.$error"
+                      @blur="v$.formData.largeMerchantLessThanTwoDebit.$touch"
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.largeMerchantLessThanTwoDebit.$error"
+                    v-if="v$.formData.largeMerchantLessThanTwoDebit.$error"
                     class="error-tooltip"
                     :class="{
-                      'error-highlight': $v.formData.largeMerchantLessThanTwoDebit.$error,
+                      'error-highlight': v$.formData.largeMerchantLessThanTwoDebit.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.largeMerchantLessThanTwoDebit.$model &&
-                        ($v.formData.largeMerchantLessThanTwoDebit.$model < 0 ||
-                          $v.formData.largeMerchantLessThanTwoDebit.$model > 100)
+                        v$.formData.largeMerchantLessThanTwoDebit.$model &&
+                        (v$.formData.largeMerchantLessThanTwoDebit.$model < 0 ||
+                          v$.formData.largeMerchantLessThanTwoDebit.$model > 100)
                       "
                     >
                       Large Merchant < 2000 % debit Card must be between 0 and 100.
@@ -655,27 +633,26 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.largeMerchantGreaterThanTwoDebit"
-                      float-label="Large Merchant > 2000 % debit Card"
+                      label="Large Merchant > 2000 % debit Card"
                       placeholder="Large Merchant > 2000 % debit Card"
-                      :error="$v.formData.largeMerchantGreaterThanTwoDebit.$error"
-                      @blur="$v.formData.largeMerchantGreaterThanTwoDebit.$touch"
+                      :error="v$.formData.largeMerchantGreaterThanTwoDebit.$error"
+                      @blur="v$.formData.largeMerchantGreaterThanTwoDebit.$touch"
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.largeMerchantGreaterThanTwoDebit.$error"
+                    v-if="v$.formData.largeMerchantGreaterThanTwoDebit.$error"
                     class="error-tooltip"
                     :class="{
-                      'error-highlight': $v.formData.largeMerchantGreaterThanTwoDebit.$error,
+                      'error-highlight': v$.formData.largeMerchantGreaterThanTwoDebit.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.largeMerchantGreaterThanTwoDebit.$model &&
-                        ($v.formData.largeMerchantGreaterThanTwoDebit.$model < 0 ||
-                          $v.formData.largeMerchantGreaterThanTwoDebit.$model > 100)
+                        v$.formData.largeMerchantGreaterThanTwoDebit.$model &&
+                        (v$.formData.largeMerchantGreaterThanTwoDebit.$model < 0 ||
+                          v$.formData.largeMerchantGreaterThanTwoDebit.$model > 100)
                       "
                     >
                       Large Merchant > 2000 % debit Card must be between 0 and 100.
@@ -685,27 +662,26 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.largeMerchantLessThanTwoCreditandPrepaid"
-                      float-label="Large Merchant < 2000 % credit and prepaid card"
+                      label="Large Merchant < 2000 % credit and prepaid card"
                       placeholder="Large Merchant < 2000 % credit and prepaid card"
-                      :error="$v.formData.largeMerchantLessThanTwoCreditandPrepaid.$error"
-                      @blur="$v.formData.largeMerchantLessThanTwoCreditandPrepaid.$touch"
+                      :error="v$.formData.largeMerchantLessThanTwoCreditandPrepaid.$error"
+                      @blur="v$.formData.largeMerchantLessThanTwoCreditandPrepaid.$touch"
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.largeMerchantLessThanTwoCreditandPrepaid.$error"
+                    v-if="v$.formData.largeMerchantLessThanTwoCreditandPrepaid.$error"
                     class="error-tooltip"
                     :class="{
-                      'error-highlight': $v.formData.largeMerchantLessThanTwoCreditandPrepaid.$error,
+                      'error-highlight': v$.formData.largeMerchantLessThanTwoCreditandPrepaid.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.largeMerchantLessThanTwoCreditandPrepaid.$model &&
-                        ($v.formData.largeMerchantLessThanTwoCreditandPrepaid.$model < 0 ||
-                          $v.formData.largeMerchantLessThanTwoCreditandPrepaid.$model > 100)
+                        v$.formData.largeMerchantLessThanTwoCreditandPrepaid.$model &&
+                        (v$.formData.largeMerchantLessThanTwoCreditandPrepaid.$model < 0 ||
+                          v$.formData.largeMerchantLessThanTwoCreditandPrepaid.$model > 100)
                       "
                     >
                      Large Merchant < 2000 % credit and prepaid card must be between 0 and 100.
@@ -715,31 +691,30 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9"
-                      type="number"
+                      color="grey-9" class="type="number"
                       v-model="formData.largeMerchantGreaterThanTwoCreditandPrepaid"
-                      float-label="Large Merchant > 2000 % credit and prepaid card"
+                      label="Large Merchant > 2000 % credit and prepaid card"
                       placeholder="Large Merchant > 2000 % credit and prepaid card"
                       :error="
-                        $v.formData.largeMerchantGreaterThanTwoCreditandPrepaid.$error
+                        v$.formData.largeMerchantGreaterThanTwoCreditandPrepaid.$error
                       "
                       @blur="
-                        $v.formData.largeMerchantGreaterThanTwoCreditandPrepaid.$touch
+                        v$.formData.largeMerchantGreaterThanTwoCreditandPrepaid.$touch
                       "
                     />
                   </q-item-section>
                   <div
-                    v-if="$v.formData.largeMerchantGreaterThanTwoCreditandPrepaid.$error"
+                    v-if="v$.formData.largeMerchantGreaterThanTwoCreditandPrepaid.$error"
                     class="error-tooltip"
                     :class="{
-                      'error-highlight': $v.formData.largeMerchantGreaterThanTwoCreditandPrepaid.$error,
+                      'error-highlight': v$.formData.largeMerchantGreaterThanTwoCreditandPrepaid.$error,
                     }"
                   >
                     <span
                       v-if="
-                        $v.formData.largeMerchantGreaterThanTwoCreditandPrepaid.$model &&
-                        ($v.formData.largeMerchantGreaterThanTwoCreditandPrepaid.$model < 0 ||
-                          $v.formData.largeMerchantGreaterThanTwoCreditandPrepaid.$model > 100)
+                        v$.formData.largeMerchantGreaterThanTwoCreditandPrepaid.$model &&
+                        (v$.formData.largeMerchantGreaterThanTwoCreditandPrepaid.$model < 0 ||
+                          v$.formData.largeMerchantGreaterThanTwoCreditandPrepaid.$model > 100)
                       "
                     >
                       Large Merchant > 2000 % credit and prepaid card must be between 0 and 100.
@@ -750,13 +725,12 @@
             </q-list>
           </q-card-section>
           <q-card-actions vertical align="end">
-            <!-- <q-btn label="EXSITING MDR PLAN" @click="fnEditMdrPlan(formData)" color="purple-9" /> -->
+            <!-- <q-btn label="EXSITING MDR PLAN" @click="fnEditMdrPlan(formData)" color="purple-9" class="/> -->
             <q-btn
               :disabled="Submitdata"
               label="submit"
               @click="fnsubmit(formData)"
-              color="purple-9"
-            />
+              color="purple-9" class="/>
           </q-card-actions>
         </q-card>
       </div>
@@ -770,8 +744,7 @@
           :filter="filterSearch"
           :pagination="paginationControl"
           row-key="name"
-          color="grey-9"
-        >
+          color="grey-9" class=">
           <q-td v-slot:body-cell-action="props" :props="props">
             <div class="row no-wrap no-padding">
               <q-btn
@@ -804,10 +777,9 @@
         <!-- <div class="col"> -->
         <!-- <q-input
                 clearable
-                color="grey-9"
-                v-model="filterSearch"
+                color="grey-9" v-model="filterSearch"
                 placeholder="Type.."
-                float-label="Search by name, short name"
+                label="Search by name, short name"
         class="q-mr-lg"-->
         <!-- /> -->
         <!-- </div> -->
@@ -1155,8 +1127,8 @@ export default {
         });
     },
     fnsubmit(request) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({

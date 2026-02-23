@@ -16,24 +16,22 @@
           </div>
           <div class="col-12 col-sm-10 col-md-8">
             <q-input v-model.trim="formData.email" @blur="v$.formData.email.$touch" :error="v$.formData.email.$error"
-              label="Email" color="grey-9" placeholder="Enter your email id"
+              label="Email" color="grey-9" class="placeholder="Enter your email id"
               @keyup.enter="fuSubmitLoginDetails(formData)" />
           </div>
           <div class="col-12 col-sm-10 col-md-8">
             <q-input v-model="formData.password" @blur="v$.formData.password.$touch"
               :error="v$.formData.password.$error" placeholder="Enter your password"
-              @keyup.enter="fuSubmitLoginDetails(formData)" type="password" label="Password" color="grey-9" />
+              @keyup.enter="fuSubmitLoginDetails(formData)" type="password" label="Password" color="grey-9" class="/>
           </div>
           <div class="col-12 col-sm-10 col-md-8">
-            <q-checkbox v-model="formData.rememberPassword" color="purple-9" label="Remember Password" />
+            <q-checkbox v-model="formData.rememberPassword" color="purple-9" class="label="Remember Password" />
           </div>
           <div class="col-12 col-sm-10 col-md-8" align="center">
-            <q-btn class="full-width text-weight-regular q-pa-md" no-caps color="purple-9"
-              @click="fuSubmitLoginDetails(formData)" style="max-width:300px">Log In</q-btn>
+            <q-btn class="full-width text-weight-regular q-pa-md" no-caps color="purple-9" @click="fuSubmitLoginDetails(formData)" style="max-width:300px">Log In</q-btn>
           </div>
           <div class="col-12 col-sm-10 col-md-8" align="center">
-            <q-btn flat no-caps class="text-purple-9 text-weight-regular" color="white"
-              @click="fnShowForgetPasswordModal">Forgot your password?</q-btn>
+            <q-btn flat no-caps class="text-purple-9 text-weight-regular" color="white" @click="fnShowForgetPasswordModal">Forgot your password?</q-btn>
           </div>
         </div>
       </div>

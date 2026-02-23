@@ -14,60 +14,54 @@
         <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
           <q-card style="width:150%">
             <q-card-section>
-              <q-list no-border>
+              <q-list >
                 <div class="col-md-12">
                   <q-select
-                    color="grey-9"
-                    v-model="formData.leadSource"
+                    color="grey-9" v-model="formData.leadSource"
                     :options="dropDown.leadSourceOptions"
-                    float-label="Select lead source"
+                    label="Select lead source"
                     @input="fnleadSource"
                   />
                 </div>
                 <div class="col-md-12">
                   <q-select
-                    color="grey-9"
-                    v-model="formData.device"
+                    color="grey-9" v-model="formData.device"
                     :options="dropDown.deviceOptions"
-                    float-label="Select device"
+                    label="Select device"
                     @input="fnDevice"
                   />
                 </div>
                 <div class="col-md-12">
                   <q-select
-                    color="grey-9"
-                    v-model="formData.marsDeviceModel"
+                    color="grey-9" v-model="formData.marsDeviceModel"
                     :options="dropDown.marsDeviceOptions"
-                    float-label="Mars Device Model"
+                    label="Mars Device Model"
                     @input="fnMarsDeviceModel"
                   />
                 </div>
                 <div class="col-md-12">
                   <q-select
-                    color="grey-9"
-                    v-model="formData.plan"
+                    color="grey-9" v-model="formData.plan"
                     :options="dropDown.planOptions"
-                    float-label="Select plan"
+                    label="Select plan"
                     placeholder="Plan"
                     @input="fnCategoryBasedRental"
                   />
                 </div>
                 <div class="col-md-12">
                   <q-input
-                    color="grey-9"
-                    type="number"
+                    color="grey-9" class="type="number"
                     v-model="formData.setupFees"
                     placeholder="Setup fee"
-                    float-label="Enter Setup fee"
+                    label="Enter Setup fee"
                   />
                 </div>
                 <div class="col-md-12">
                   <q-input
-                    color="grey-9"
-                    type="number"
+                    color="grey-9" class="type="number"
                     v-model="formData.monthlyFees"
                     placeholder="Recurring fee"
-                    float-label="Enter recurring fee"
+                    label="Enter recurring fee"
                   />
                 </div>
               </q-list>
@@ -82,8 +76,7 @@
               <q-btn
                 label="submit"
                 @click="fnEditRentalPlan(formData)"
-                color="purple-9"
-              />
+                color="purple-9" class="/>
             </q-card-actions>
           </q-card>
         </div>

@@ -28,8 +28,7 @@
               clearable
               v-model="formData.assignTo"
               separator
-              color="grey-9"
-              :options="assignToOptions"
+              color="grey-9" class=":options="assignToOptions"
               placeholder="Assign To"
             />
           </div>
@@ -58,8 +57,7 @@
         row-key="id"
         :loading="toggleAjaxLoadFilter"
         :rows-per-page-options="[5, 10, 15, 20]"
-        color="dark"
-        @request="ajaxLoadAllLeadInfo"
+        color="dark" class="@request="ajaxLoadAllLeadInfo"
       >
         <q-tr v-slot:top-row="props">
           <q-th v-for="col in props.columns" :key="col.name" :props="props">{{
@@ -87,9 +85,8 @@
               clearable
               v-model="filter"
               separator
-              color="grey-9"
-              placeholder="Type.."
-              float-label="Search Using MID"
+              color="grey-9" class="placeholder="Type.."
+              label="Search Using MID"
               class="q-mr-lg q-py-sm"
             />
           </div>

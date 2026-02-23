@@ -6,108 +6,122 @@
             <q-tabs
               no-pane-border
               v-model="inventoryOptionSelected"
-              color="dark"
-              inverted
-              class="shadow-1"
+              color="dark" class="class="shadow-1"
             >
-              <q-tab default name="spare" label="Spare Parts" slot="title" />
-              <!-- <q-tab name="spareSo" label="Spare Parts So" slot="title" /> -->
-              <q-tab name="count" label="Inventory Count" slot="title" />
-              <!-- <q-tab name="Socount" label="Inventory So Count" slot="title" /> -->
-              <q-tab name="dispatch" label="Disptached Inventory" slot="title" />
-              <q-tab name="damage" label="Add Damaged Devices" slot="title" />
-              <!-- <q-tab name="faulty" label="Add Faulty Devices" slot="title" /> -->
-              <q-tab name="allocatetoso" label="Allocate to So" slot="title" />
+              <q-tab default name="spare" label="Spare Parts"  />
+              <!-- <q-tab name="spareSo" label="Spare Parts So"  /> -->
+              <q-tab name="count" label="Inventory Count"  />
+              <!-- <q-tab name="Socount" label="Inventory So Count"  /> -->
+              <q-tab name="dispatch" label="Disptached Inventory"  />
+              <q-tab name="damage" label="Add Damaged Devices"  />
+              <!-- <q-tab name="faulty" label="Add Faulty Devices"  /> -->
+              <q-tab name="allocatetoso" label="Allocate to So"  />
               
-              <q-tab name="AllocateSotoSo" label="Allocate SO to SO" slot="title" />
+              <q-tab name="AllocateSotoSo" label="Allocate SO to SO"  />
             
               <q-tab
                 name="inventorywithResellar"
                 label="Allocate to Reseller"
-                slot="title"
+
               />
               <q-tab
                 name="inventorywithSo"
                 label="Inventory with SO"
-                slot="title"
+
               />
               <q-tab
                 name="inventorywithResellarDetails"
                 label="Inventory with Reseller"
-                slot="title"
+
               />
-                <q-tab name="simStatus" label="Sim Status" slot="title" />
-              <q-tab name="deviceAllocationRequest" label="REQUEST" slot="title" />
-              <q-tab-panel name="spare">
+                <q-tab name="simStatus" label="Sim Status"  />
+              <q-tab name="deviceAllocationRequest" label="REQUEST"  />
+
+              <!-- -->
+
+
+
+
+
+
+              <!-- -->
+
+
+
+
+
+
+
+
+
+
+            </q-tabs>
+<q-tab-panels v-model="inventoryOptionSelected" animated>
+<q-tab-panel name="spare">
                 <spareParts
                   @emittedForTotalSerialNumbers="
                     fnAjaxFetchAllDeviceDetailsWithCount
                   "
                 />
               </q-tab-panel>
-              <!--<q-tab-panel name="spareSo">
+<q-tab-panel name="spareSo">
                 <sparePartsSo
                   @emittedForTotalSerialNumbers="
                     fnAjaxFetchAllDeviceDetailsWithCount
                   "
                 />
-              </q-tab-panel> -->
-              <q-tab-panel name="count">
+              </q-tab-panel>
+<q-tab-panel name="count">
                 <inventoryCount
                   @emittedForTotalSerialNumbers="
                     fnAjaxFetchAllDeviceDetailsWithCount
                   "
                 />
               </q-tab-panel>
-  
-              <q-tab-panel name="Socount">
+<q-tab-panel name="Socount">
                 <inventoryCount
                   @emittedForTotalSerialNumbers="
                     fnAjaxFetchAllDeviceDetailsWithCount
                   "
                 />
               </q-tab-panel>
-  
-              <q-tab-panel name="dispatch">
+<q-tab-panel name="dispatch">
                 <dispatchedInventory
                   @fetchDeviceDetailsWithCount="
                     fnAjaxFetchAllDeviceDetailsWithCount
                   "
                 />
               </q-tab-panel>
-              <q-tab-panel name="damage">
+<q-tab-panel name="damage">
                 <showAddDamagedDevices
                   :propDeviceTypes="getAllRegionalInventoryDeviceDetailsWithCount"
                 />
               </q-tab-panel>
-              <!-- <q-tab-panel name="faulty">
+<q-tab-panel name="faulty">
                 <inventoryFaulty />
-              </q-tab-panel>-->
-  
-              <q-tab-panel name="allocatetoso">
+              </q-tab-panel>
+<q-tab-panel name="allocatetoso">
                 <inventoryallocatetoso />
               </q-tab-panel>
-  
-              <q-tab-panel name="inventorywithSo">
+<q-tab-panel name="inventorywithSo">
                 <inventorywithso />
               </q-tab-panel>
-  
-              <q-tab-panel name="inventorywithResellar">
+<q-tab-panel name="inventorywithResellar">
                 <inventorywithResellar />
               </q-tab-panel>
-              <q-tab-panel name="inventorywithResellarDetails">
+<q-tab-panel name="inventorywithResellarDetails">
                 <inventorywithResellarDetails />
               </q-tab-panel>
-              <q-tab-panel name="AllocateSotoSo">
+<q-tab-panel name="AllocateSotoSo">
                 <allocateSOtoSO />
               </q-tab-panel>
-              <q-tab-panel name="simStatus">
+<q-tab-panel name="simStatus">
                 <simStatus/>
               </q-tab-panel>
-              <q-tab-panel name="deviceAllocationRequest">
+<q-tab-panel name="deviceAllocationRequest">
                 <deviceAllocationRequest />
               </q-tab-panel>
-            </q-tabs>
+</q-tab-panels>
           </div>
         </div>
       </div>

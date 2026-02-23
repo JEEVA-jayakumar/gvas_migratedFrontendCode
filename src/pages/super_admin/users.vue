@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <div>
-      <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @update:model-value="changeTabs">
+      <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" class="@update:model-value="changeTabs">
         <q-tab name="tab-1" label="Active Users" />
         <q-tab name="tab-2" label="De-activated Users" />
       </q-tabs>
@@ -21,8 +21,7 @@
             :loading="tableAjaxLoading"
             :filter-method="myCustomSearchFilter"
             row-key="userId"
-            color="grey-9"
-          >
+            color="grey-9" class=">
 
             <!-- Name column -->
             <template v-slot:body-cell-name="props">
@@ -33,8 +32,7 @@
                 no-wrap
                 no-caps
                 icon="fas fa-pencil-alt"
-                color="primary"
-                @click="fnShowEditUser(props.row.userId)"
+                color="primary" @click="fnShowEditUser(props.row.userId)"
                 :label="props.row.user.name"
                 class="capitalize"
               />
@@ -43,7 +41,7 @@
             <!-- Role column -->
             <template v-slot:body-cell-role="props">
               <div class="row no-wrap group" v-for="role in props.row.roles" :key="role.role">
-                <q-chip color="light" class="text-dark">
+                <q-chip color="light" class="class="text-dark">
                   <span>{{ role.hierarchy.hierarchyCode }}</span> | {{ role.role }}
                 </q-chip>
               </div>
@@ -59,8 +57,7 @@
                     <q-input
                       clearable
                       dense
-                      color="grey-9"
-                      v-model.trim="filterSearch"
+                      color="grey-9" class="v-model.trim="filterSearch"
                       placeholder="Type.."
                       label="Search by Name, Merchant Name, Lead ID"
                     />
@@ -72,8 +69,7 @@
                     <q-select
                       clearable
                       v-model="filter_values"
-                      color="grey-9"
-                      label="Filter By"
+                      color="grey-9" class="label="Filter By"
                       @clear="ajaxLoadDataForAllUsersList"
                       @update:model-value="ajaxLoadDataForRoleIdFilter"
                       :options="getAllRoles"
@@ -108,8 +104,7 @@
                         <q-btn
                           :disabled="formData.selectedUsersToDelete.length === 0"
                           flat
-                          color="white"
-                          class="text-grey-9"
+                          color="white" class="class="text-grey-9"
                           @click="activate_deactivate_users(formData.selectedUsersToDelete)"
                           icon="far fa-trash-alt"
                         />
@@ -117,7 +112,7 @@
 
                       <div class="col-auto q-px-xs">
                         <downloadExcel :data="getAllUsers" :fields="json_fields" name="UserDetails.xls">
-                          <q-btn outline color="grey-9" label="Download as excel" />
+                          <q-btn outline color="grey-9" class="label="Download as excel" />
                         </downloadExcel>
                       </div>
 
@@ -126,8 +121,7 @@
                           no-caps
                           @click="$router.push('/super/admin/users/add/user')"
                           label="Add User"
-                          color="purple-9"
-                        />
+                          color="purple-9" class="/>
                       </div>
 
                     </div>
@@ -153,8 +147,7 @@
             :loading="tableAjaxLoading"
             :filter-method="myCustomSearchFilter"
             row-key="userId"
-            color="grey-9"
-          >
+            color="grey-9" class=">
 
             <template v-slot:body-cell-name="props">
               <q-btn
@@ -164,15 +157,14 @@
                 no-wrap
                 no-caps
                 icon="fas fa-pencil-alt"
-                color="primary"
-                @click="fnShowEditUser(props.row.userId)"
+                color="primary" @click="fnShowEditUser(props.row.userId)"
                 :label="props.row.user.name"
               />
             </template>
 
             <template v-slot:body-cell-role="props">
               <div class="row no-wrap group" v-for="role in props.row.roles" :key="role.role">
-                <q-chip color="light" class="text-dark">
+                <q-chip color="light" class="class="text-dark">
                   <span>{{ role.hierarchy.hierarchyCode }}</span> | {{ role.role }}
                 </q-chip>
               </div>
@@ -187,8 +179,7 @@
                   <q-btn
                     :disabled="formData.selectedUsersToDelete.length === 0"
                     flat
-                    color="white"
-                    class="text-grey-9 q-mr-md"
+                    color="white" class="class="text-grey-9 q-mr-md"
                     @click="activate_deactivate_users(formData.selectedUsersToDelete)"
                     icon="far fa-trash-alt"
                   />
@@ -474,9 +465,7 @@ export default {
                     color: "negative",
                     position: "bottom",
                     message:
-                      error.body.message == null
-                        ? "Please Try Again Later !"
-                        : error.body.message,
+                      (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                     icon: "thumb_down"
                   });
                 });
@@ -500,9 +489,7 @@ export default {
                     color: "negative",
                     position: "bottom",
                     message:
-                      error.body.message == null
-                        ? "Please Try Again Later !"
-                        : error.body.message,
+                      (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                     icon: "thumb_down"
                   });
                 });
@@ -565,7 +552,7 @@ export default {
     //   // document.body.appendChild(element);
 
     //   // element.click();
-    //    let link = document.createElement("a");
+    //    let clickable = document.createElement("a");
     //         link.href = window.URL.createObjectURL(file);
     //         link.download = "serialNumber.txt"
 

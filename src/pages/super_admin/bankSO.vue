@@ -8,8 +8,7 @@
           no-wrap
           label="Upload Bank List"
           class="q-mt-lg text-weight-regular"
-          color="purple-9"
-          icon="add"
+          color="purple-9" class="icon="add"
           size="md"
           @click="
 fnShowCreateUploadFile()"
@@ -17,8 +16,7 @@ fnShowCreateUploadFile()"
         <!-- <q-btn
           icon="cloud_upload"
           class="q-ma-sm"
-          color="positive"
-          label="Upload Bank List"
+          color="positive" class="label="Upload Bank List"
           @click="fnUploadDocumentAndSubmit"
         />-->
       </div>
@@ -31,22 +29,21 @@ fnShowCreateUploadFile()"
             <div class="col-md-6">
               <q-input
                 v-model.trim="formData.location"
-                @blur="$v.formData.location.$touch"
-                :error="$v.formData.location.$error"
+                @blur="v$.formData.location.$touch"
+                :error="v$.formData.location.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9"
-                float-label="*Location"
+                color="grey-9" class="label="*Location"
                 placeholder="Location"
               />
             </div>
             <div class="col-md-6">
               <q-select
                 v-model.trim="formData.bank"
-                @blur="$v.formData.bank.$touch"
-                :error="$v.formData.bank.$error"
+                @blur="v$.formData.bank.$touch"
+                :error="v$.formData.bank.$error"
                 class="text-weight-regular text-grey-8"
                 :options="dropDown.leadSourceOptions"
-                float-label="*Bank"
+                label="*Bank"
                 placeholder="Bank"
               />
             </div>
@@ -54,10 +51,9 @@ fnShowCreateUploadFile()"
               <q-input
                 v-model.trim="formData.branch_code"
                 class="text-weight-regular text-grey-8"
-                color="grey-9"
-                @blur="$v.formData.branch_code.$touch"
-                :error="$v.formData.branch_code.$error"
-                float-label="*Branch_Code"
+                color="grey-9" class="@blur="v$.formData.branch_code.$touch"
+                :error="v$.formData.branch_code.$error"
+                label="*Branch_Code"
                 placeholder="Branch_Code"
               />
             </div>
@@ -65,11 +61,10 @@ fnShowCreateUploadFile()"
             <div class="col-md-6">
               <q-input
                 v-model.trim="formData.so_name"
-                @blur="$v.formData.so_name.$touch"
-                :error="$v.formData.so_name.$error"
+                @blur="v$.formData.so_name.$touch"
+                :error="v$.formData.so_name.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9"
-                float-label="*So_Name"
+                color="grey-9" class="label="*So_Name"
                 placeholder="So_Name"
               />
             </div>
@@ -77,33 +72,30 @@ fnShowCreateUploadFile()"
             <div class="col-md-6">
               <q-input
                 v-model.trim="formData.mail_id"
-                @blur="$v.formData.mail_id.$touch"
-                :error="$v.formData.mail_id.$error"
+                @blur="v$.formData.mail_id.$touch"
+                :error="v$.formData.mail_id.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9"
-                float-label="*Mail_Id"
+                color="grey-9" class="label="*Mail_Id"
                 placeholder="Mail_Id"
               />
             </div>
             <div class="col-md-6">
               <q-input
                 v-model.trim="formData.emp_id"
-                @blur="$v.formData.emp_id.$touch"
-                :error="$v.formData.emp_id.$error"
+                @blur="v$.formData.emp_id.$touch"
+                :error="v$.formData.emp_id.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9"
-                float-label="*Emp_Id"
+                color="grey-9" class="label="*Emp_Id"
                 placeholder="Emp_Id"
               />
             </div>
             <div class="col-md-6">
               <q-select
                 v-model.trim="formData.bank_enable"
-                @blur="$v.formData.bank_enable.$touch"
-                :error="$v.formData.bank_enable.$error"
+                @blur="v$.formData.bank_enable.$touch"
+                :error="v$.formData.bank_enable.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9"
-                float-label="Bank_Enable"
+                color="grey-9" class="label="Bank_Enable"
                 placeholder="Bank_Enable"
                 :options="selectBankEnableOptions"
               />
@@ -115,8 +107,7 @@ fnShowCreateUploadFile()"
         <q-btn
           size="md"
           type="button"
-          color="purple-9"
-          @click="fnSubmitBankDetails(formData)"
+          color="purple-9" @click="fnSubmitBankDetails(formData)"
         >Submit</q-btn>
       </div>
     </form>
@@ -212,8 +203,8 @@ export default {
     ...mapActions("leadSource", ["LEAD_SOURCE_ACTIVE_LIST"]),
     ...mapActions("Bank_SO", ["SAVE_BANK_SO"]),
     fnSubmitBankDetails(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
         return;
       } else {

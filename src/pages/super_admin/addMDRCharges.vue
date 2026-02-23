@@ -17,8 +17,7 @@
                   <q-select
                     dense
                     outlined
-                    color="grey-9"
-                    v-model="formData.leadSource"
+                    color="grey-9" v-model="formData.leadSource"
                     :options="dropDown.leadSourceOptions"
                     label="Select lead source"
                     emit-value
@@ -30,8 +29,7 @@
                     round
                     size="sm"
                     icon="add"
-                    color="purple-9"
-                    @click="fnManageLeadSource"
+                    color="purple-9" @click="fnManageLeadSource"
                   />
                 </q-item-section>
               </q-item>
@@ -42,8 +40,7 @@
                   <q-select
                     dense
                     outlined
-                    color="grey-9"
-                    v-model="formData.device"
+                    color="grey-9" v-model="formData.device"
                     :options="dropDown.deviceOptions"
                     label="Select device"
                     emit-value
@@ -55,8 +52,7 @@
                     round
                     size="sm"
                     icon="add"
-                    color="purple-9"
-                    @click="fnManageDevice"
+                    color="purple-9" @click="fnManageDevice"
                   />
                 </q-item-section>
               </q-item>
@@ -67,8 +63,7 @@
                   <q-select
                     dense
                     outlined
-                    color="grey-9"
-                    v-model="formData.marsDevice"
+                    color="grey-9" v-model="formData.marsDevice"
                     :options="dropDown.marsDeviceOptions"
                     label="Mars Device Model"
                     emit-value
@@ -83,8 +78,7 @@
                   <q-select
                     dense
                     outlined
-                    color="grey-9"
-                    v-model="formData.merchantType"
+                    color="grey-9" v-model="formData.merchantType"
                     :options="dropDown.merchantTypesOptions"
                     label="Select merchant category type"
                     emit-value
@@ -100,8 +94,7 @@
                     dense
                     outlined
                     type="number"
-                    color="grey-9"
-                    v-model="formData[field.model]"
+                    color="grey-9" v-model="formData[field.model]"
                     :label="field.label"
                   />
                 </q-item-section>
@@ -113,8 +106,7 @@
           <q-card-actions vertical align="end">
             <q-btn
               label="Submit"
-              color="purple-9"
-              @click="fnsubmit"
+              color="purple-9" @click="fnsubmit"
             />
           </q-card-actions>
         </q-card>

@@ -14,11 +14,10 @@
             </div>
             <div class="col-md-8 q-py-md" align="left">
               <q-select
-                color="grey-9"
-                @blur="$v.formData.deviceType.$touch"
-                :error="$v.formData.deviceType.$error"
+                color="grey-9" class="@blur="v$.formData.deviceType.$touch"
+                :error="v$.formData.deviceType.$error"
                 v-model="formData.deviceType"
-                float-label="Select Device Type"
+                label="Select Device Type"
                 radio
                 :options="rawDevicesTypes"
               />
@@ -57,7 +56,7 @@
                   <q-separator />
                   <q-card-section>
                     <q-item dense>
-                      <q-item-section icon="attach_file" />
+                      <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
                       <q-item-section>{{
                         formData.fileSelected[0].name || ""
                       }}</q-item-section>
@@ -69,8 +68,7 @@
                     <q-btn
                       outline
                       size="sm"
-                      color="negative"
-                      @click="removeBulkUploadFile"
+                      color="negative" @click="removeBulkUploadFile"
                       label="Remove"
                       icon="clear"
                     />
@@ -81,13 +79,11 @@
             <div class="col-md-12 group" align="right">
               <q-btn
                 outline
-                color="dark"
-                label="Cancel"
+                color="dark" class="label="Cancel"
                 @click="emitToggleinventoryBulkUpload"
               />
               <q-btn
-                color="positive"
-                label="Upload"
+                color="positive" class="label="Upload"
                 @click="uploadFileForBulkUpload"
               />
             </div>
@@ -173,8 +169,8 @@
       },
   
       uploadFileForBulkUpload(formData) {
-        this.$v.formData.$touch();
-        if (this.$v.formData.$error) {
+        this.v$.formData.$touch();
+        if (this.v$.formData.$error) {
           this.$q.notify({
             color: "amber-9",
             position: "bottom",
@@ -214,7 +210,7 @@
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                 icon: "thumb_down"
               });
             });

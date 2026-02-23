@@ -24,15 +24,18 @@
         <q-tabs
           v-model="selectedTab"
           class="shadow-1"
-          color="grey-1"
-          @select="goToUnassignedTab"
+          color="grey-1" class="@select="goToUnassignedTab"
         >
-          <q-tab default color="dark" name="statusTab" slot="title" label="TID & MID STATUS"/>
-          <!-- <q-tab color="dark" name="rejectedTab" slot="title" label="Rejected Leads" /> -->
-          <q-tab-panel name="rejectedTab">
+          <q-tab default color="dark" class="name="statusTab"  label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" class="name="rejectedTab"  label="Rejected Leads" /> -->
+
+
+        </q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="rejectedTab">
               <varaneekRejectedLead/>
             </q-tab-panel>
-          <q-tab-panel name="statusTab">
+<q-tab-panel name="statusTab">
             <q-table
              :rows="tableData1"
               :columns="columnData"
@@ -43,8 +46,7 @@
               row-key="id"
               :rows-per-page-options="[10,20,50,100,150,200]"
               :loading="tableAjaxLoading1"
-              color="dark"
-              @request="ajaxLoadAllLeadInfo1"
+              color="dark" class="@request="ajaxLoadAllLeadInfo1"
             >
               <q-td
                 v-slot:body-cell-leadNumber="props"
@@ -59,14 +61,12 @@
               <q-td
                 v-slot:body-cell-submitToMarsDate="props"
                 :props="props"
-                >{{
-                  props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-                }}</q-td
+                >{{ $moment_format(props.row.leadInformation.submitToMarsDate, "Do MMM Y") }}</q-td
               >
               <q-td
                 v-slot:body-cell-createdAt="props"
                 :props="props"
-                >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+                >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td
               >
               <q-td
                 v-slot:body-cell-mid="props"
@@ -80,10 +80,9 @@
                 <div class="col-md-5">
                   <q-input
                     clearable
-                    color="grey-9"
-                    v-model="filterSearch"
+                    color="grey-9" v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search By MID, TID"
+                    label="Search By MID, TID"
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -91,7 +90,7 @@
             </q-table>
             <!--ENDv-model: table Data -->
           </q-tab-panel>
-        </q-tabs>
+</q-tab-panels>
   
         <!--END: table Footer -->
         <!-- START >> COMPONENT: Update device address  -->

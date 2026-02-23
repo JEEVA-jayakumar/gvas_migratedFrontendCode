@@ -18,7 +18,7 @@
       <div class="row items-center bottom-border q-py-sm">
         <div class="col">Lead Information</div>
         <div class="col-auto">
-          <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" icon="clear"/>
+          <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" class="icon="clear"/>
         </div>
       </div>
 
@@ -36,7 +36,7 @@
         <q-td
           v-slot:body-cell-createdAt="props"
           :props="props"
-        >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
 
         <q-td
           v-slot:body-cell-lead_id="props"
@@ -104,10 +104,9 @@
           <div class="col-md-5">
             <q-input
               clearable
-              color="grey-9"
-              v-model="filter"
+              color="grey-9" v-model="filter"
               placeholder="Type.."
-              float-label="Search by SO name, Merchant Name, Lead ID"
+              label="Search by SO name, Merchant Name, Lead ID"
               class="q-mr-lg q-py-sm"
             />
           </div>

@@ -30,18 +30,16 @@
             outline
             no-caps
             v-model="filter"
-             float-label="Select  a Region"
+             label="Select  a Region"
             radio
-            color="grey-9"
-            :options="getFaultyDevicesMenuOptions"
+            color="grey-9" class=":options="getFaultyDevicesMenuOptions"
            />
            </div>
            <div class="col-md-7">
             <q-btn
               square
               outline
-              color="purple-9"
-              label="Download as Excel"
+              color="purple-9" class="label="Download as Excel"
               class="q-mr-lg q-py-sm float-right"
               size="md"
               @click="downloadInventorySummaryInfoMenu()"
@@ -298,7 +296,7 @@ export default {
     //         this.$q.notify({
     //           color: "negative",
     //           position: "bottom",
-    //           message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+    //           message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
     //           icon: "thumb_down"
     //         });
     //       });

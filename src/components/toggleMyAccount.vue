@@ -14,59 +14,54 @@
         <div class="col-12">
           <q-input
             type="password"
-            color="grey-9"
-            v-model="formData.currentPassword"
-            @blur="$v.formData.currentPassword.$touch"
-            :error="$v.formData.currentPassword.$error"
-            float-label="Current Password*"
+            color="grey-9" v-model="formData.currentPassword"
+            @blur="v$.formData.currentPassword.$touch"
+            :error="v$.formData.currentPassword.$error"
+            label="Current Password*"
           />
         </div>
         <div class="col-12">
           <q-input
             type="password"
-            color="grey-9"
-            v-model="formData.newpassword"
-            @blur="$v.formData.newpassword.$touch"
-            :error="$v.formData.newpassword.$error"
-            float-label="New Password*"
+            color="grey-9" v-model="formData.newpassword"
+            @blur="v$.formData.newpassword.$touch"
+            :error="v$.formData.newpassword.$error"
+            label="New Password*"
           />
-          <!-- <p class="error1" v-if="!$v.formData.newpassword.required">this field is required</p>
+          <!-- <p class="error1" v-if="!v$.formData.newpassword.required">this field is required</p>
           <br />-->
           <p
             class="error1"
-            v-if="!$v.formData.newpassword.strongPassword"
+            v-if="!v$.formData.newpassword.strongPassword"
           >Strong passwords need to have a letter, a number, a special character, and be more than 8 characters long.</p>
         </div>
         <br />
         <div class="col-12">
           <q-input
             type="password"
-            color="grey-9"
-            v-model="formData.retypepassword"
-            @blur="$v.formData.retypepassword.$touch"
-            :error="$v.formData.retypepassword.$error"
-            float-label="Confirm New Password*"
+            color="grey-9" v-model="formData.retypepassword"
+            @blur="v$.formData.retypepassword.$touch"
+            :error="v$.formData.retypepassword.$error"
+            label="Confirm New Password*"
           />
-          <!-- <p class="error1" v-if="!$v.formData.retypepassword.required">this field is required</p>
+          <!-- <p class="error1" v-if="!v$.formData.retypepassword.required">this field is required</p>
           <br />-->
 
           <p
             class="error1"
-            v-if="!$v.formData.retypepassword.strongPassword"
+            v-if="!v$.formData.retypepassword.strongPassword"
           >Strong passwords need to have a letter, a number, a special character, and be more than 8 characters long.</p>
         </div>
         <div class="col-12 group">
           <q-btn
-            color="primary"
-            class="q-ma-sm float-right"
+            color="primary" class="class="q-ma-sm float-right"
             @click="submitPasswordChangeRequest(formData)"
             align="right"
             label="Submit"
           />
           <q-btn
             outline
-            color="dark"
-            class="q-ma-sm float-right"
+            color="dark" class="class="q-ma-sm float-right"
             @click="emitToggleMyAccount()"
             align="right"
             label="Cancel"
@@ -132,12 +127,12 @@ export default {
       this.$emit("propsToggleModal");
     },
     submitPasswordChangeRequest(finalFormData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else if (
-        this.$v.formData.newpassword.$modal !=
-        this.$v.formData.retypepassword.$modal
+        this.v$.formData.newpassword.$modal !=
+        this.v$.formData.retypepassword.$modal
       ) {
         // this.$q.notify("Oops! password didn't match.");
         this.$q.notify("old and new password must be same.");
@@ -157,7 +152,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

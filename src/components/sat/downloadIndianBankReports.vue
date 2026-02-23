@@ -25,7 +25,7 @@
               :min="yesterday"
               :max="tomorrow"
               type="date"
-              float-label="From Date"
+              label="From Date"
             />
           </div>
           <div class="col-md-12">
@@ -36,20 +36,18 @@
               :min="yesterday"
               :max="tomorrow"
               type="date"
-              float-label="To Date"
+              label="To Date"
             />
           </div>
           <div class="col-md-12 group" align="right">
             <q-btn
               align="right"
-              color="negative"
-              @click="emitfnHitachiIndianBank()"
+              color="negative" @click="emitfnHitachiIndianBank()"
               >Cancel</q-btn
             >
             <q-btn
               align="right"
-              color="positive"
-              @click="downloadIndianBankReport(formData)"
+              color="positive" @click="downloadIndianBankReport(formData)"
               >Download</q-btn
             >
           </div>

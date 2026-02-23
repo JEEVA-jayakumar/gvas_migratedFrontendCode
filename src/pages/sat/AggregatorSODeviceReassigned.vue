@@ -24,9 +24,7 @@
       }}</q-td>
 
       <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-        <span class="label">{{
-          props.row.deviceStatusDate | moment("Do MMM Y")
-        }}</span>
+        <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
       </q-td>   -->
       <q-td v-slot:body-cell-action="props" :props="props">
         <q-btn
@@ -34,8 +32,7 @@
           highlight
           push
           class="q-mx-sm"
-          color="positive"
-          size="sm"
+          color="positive" size="sm"
           @click="approveDeviceReques(props.row)"
           >Approve</q-btn
         >
@@ -44,8 +41,7 @@
           highlight
           push
           class="q-mx-sm"
-          color="negative"
-          size="sm"
+          color="negative" size="sm"
           @click="deviceRequest(props.row)"
           >Reject</q-btn
         >
@@ -64,9 +60,8 @@
             clearable
             v-model="filter"
             separator
-            color="grey-9"
-            placeholder="Type.."
-            float-label="Search Using POD, Serial No, Merchant Name"
+            color="grey-9" class="placeholder="Type.."
+            label="Search Using POD, Serial No, Merchant Name"
             class="q-mr-lg q-py-sm"
           />
         </div>
@@ -326,8 +321,8 @@ export default {
       this.AGGREGATOR_SELF_ASSIGNMENT_TRACKER({ pagination, filter })
         .then(res => {
           console.log("AGGREGATOR", JSON.stringify(res));
-          console.log("RESPONSE REQUEST", JSON.stringify(res.body));
-          let responseData = res.body;
+          console.log("RESPONSE REQUEST", JSON.stringify(res.data));
+          let responseData = res.data;
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 
@@ -438,9 +433,7 @@ export default {
                 color: "negative",
                 position: "bottom",
                 message:
-                  error.body.message == null
-                    ? "Please Try Again Later !"
-                    : error.body.message,
+                  (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                 icon: "thumb_down"
               });
             });

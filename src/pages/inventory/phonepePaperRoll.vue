@@ -4,24 +4,26 @@
       <q-tabs
         v-model="activeTab"
         class="shadow-1"
-        color="grey-1"
-        @select="goToCompleteTab"
+        color="grey-1" class="@select="goToCompleteTab"
       >
         <q-tab
           default
-          color="dark"
-          name="tab-1"
-          slot="title"
+          color="dark" class="name="tab-1"
+
           label="Pending Tickets"
         />
         <q-tab
-          color="dark"
-          name="tab-2"
-          slot="title"
+          color="dark" class="name="tab-2"
+
           label="Completed Tickets"
         />
-        <q-tab color="dark" name="tab-3" slot="title" label="RTO Tickets" />
-        <q-tab-panel name="tab-1">
+        <q-tab color="dark" class="name="tab-3"  label="RTO Tickets" />
+
+
+
+      </q-tabs>
+<q-tab-panels v-model="activeTab" animated>
+<q-tab-panel name="tab-1">
           <div class="row items-center">
             <div class="col">
               <strong>
@@ -32,8 +34,7 @@
               class="col"
               v-model.trim="formData.date"
               :options="dateType"
-              color="grey"
-              @input="dateClick"
+              color="grey" class="@input="dateClick"
             >
             </q-select>
 
@@ -41,10 +42,9 @@
             <q-input
               class="col-5"
               clearable
-              color="grey-9"
-              v-model="filter"
+              color="grey-9" v-model="filter"
               placeholder="Type.."
-              float-label="Search By Ticket No, Merchant No..."
+              label="Search By Ticket No, Merchant No..."
             />
           </div>
           <q-table
@@ -116,15 +116,14 @@
             >
           </q-table>
         </q-tab-panel>
-        <q-tab-panel name="tab-2">
+<q-tab-panel name="tab-2">
           <div class="row">
             <q-input
               class="col-4"
               clearable
-              color="grey-9"
-              v-model="filter1"
+              color="grey-9" v-model="filter1"
               placeholder="Type.."
-              float-label="Search By Ticket No, Merchant No..."
+              label="Search By Ticket No, Merchant No..."
             />
           </div>
           <q-table
@@ -173,15 +172,14 @@
             </q-td>
           </q-table>
         </q-tab-panel>
-        <q-tab-panel name="tab-3">
+<q-tab-panel name="tab-3">
           <div class="row">
             <q-input
               class="col-4"
               clearable
-              color="grey-9"
-              v-model="filter2"
+              color="grey-9" v-model="filter2"
               placeholder="Type.."
-              float-label="Search By Ticket No, Merchant No..."
+              label="Search By Ticket No, Merchant No..."
             />
           </div>
           <q-table
@@ -224,7 +222,7 @@
             >
           </q-table>
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
     </div>
     <phonepePaperRollScan
       v-if="propToggleScan"
@@ -920,9 +918,7 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              error.body.message == null
-                ? "Please Try Again Later !"
-                : error.body.message,
+              (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
             icon: "thumb_down"
           });
         });
@@ -970,20 +966,20 @@ export default {
           console.log("REQUEST", request.serviceReqTicketId);
           this.PHONEPE_PAPER_ROLL_SUBMIT(request.serviceReqTicketId).then(
             response => {
-              console.log("RSPONSE", response.body.message);
+              console.log("RSPONSE", response.data.message);
               //
-              if (response.body.data != null) {
+              if (response.data.data != null) {
                 this.$q.notify({
                   color: "positive",
                   position: "bottom",
-                  message: response.body.message,
+                  message: response.data.message,
                   icon: "thumb_up"
                 });
               } else {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
-                  message: response.body.message,
+                  message: response.data.message,
                   icon: "thumb_down"
                 });
               }
@@ -1023,9 +1019,7 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              error.body.message == null
-                ? "Please Try Again Later !"
-                : error.body.message,
+              (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
             icon: "thumb_down"
           });
         });

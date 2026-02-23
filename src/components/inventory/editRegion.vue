@@ -16,20 +16,18 @@
           <div class="col-md-12">
             <q-input
               v-model="formData.pod"
-              :error="$v.formData.pod.$error"
+              :error="v$.formData.pod.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="Pod Number"
+              color="grey-9" class="label="Pod Number"
               placeholder="Pod NUmber"
             />
           </div>
           <div class="col-md-12">
             <q-select
               v-model="formData.region"
-              color="grey-9"
-              :options="inventoryData.regionFilterOptions"
+              color="grey-9" class=":options="inventoryData.regionFilterOptions"
               placeholder="Region"
-              float-label="Region"
+              label="Region"
             />
           </div>
           <div class="col-md-12 group" align="right">
@@ -39,8 +37,7 @@
               class="bg-white text-weight-regular text-grey-8"
               @click="emitfnshowEditRegion()"
             >Cancel</q-btn>
-            <q-btn align="right" @click="submitRegion(formData)" color="purple-9">Save</q-btn>
-          </div>
+            <q-btn align="right" @click="submitRegion(formData)" color="purple-9">Save</q-btn>" class="</div>
         </div>
       </form>
     </q-dialog>
@@ -93,8 +90,8 @@ export default {
     },
     //Permission creation final submit
     submitRegion(request) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         let params = {
@@ -125,7 +122,7 @@ export default {
             this.$q.notify({
               color: "amber",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

@@ -15,8 +15,7 @@
               @click="$router.push('/inventory/PhonepeInventory')"
               outline
               label="Cancel Allocation"
-              color="negative"
-            />
+              color="negative" class="/>
         </div>
           <div class="col-6 col-sm-8 col-md-4" align="right"></div>
           <!--END: table title -->
@@ -31,15 +30,14 @@
               :disabled="formData.device_type != ''"
               :class="[formData.device_type != '' ? 'no-pointer-events' : '']"
               v-model="formData.region"
-              float-label="Select Region"
+              label="Select Region"
               radio
-              color="grey-9"
-              :options="regionOptions"
+              color="grey-9" class=":options="regionOptions"
               @input="regionBasedSoLoad"
             />
           </div>
           <!-- <div class="col-md-2">
-          <q-select color="grey-9" :disable="formData.region == ''" v-model="aggregator" float-label="Select Aggregator" radio
+          <q-select color="grey-9" class=":disable="formData.region == ''" v-model="aggregator" label="Select Aggregator" radio
             :options="aggregatorOptions" @input="selectedAggregators" />
         </div> -->
           <div class="col-md-2">
@@ -48,10 +46,9 @@
               filter 
               clearable
               v-model="formData.so"
-              float-label="Select SO"
+              label="Select SO"
               radio
-              color="grey-9"
-              :options="regionBasedSo"
+              color="grey-9" class=":options="regionBasedSo"
             />
           </div>
           <div class="col-md-2">
@@ -61,10 +58,9 @@
               @clear="fnClearingDeviceTypeSelection"
               @input="fnSetDevicesByDeviceId"
               v-model="formData.device_type"
-              float-label="Select Device Type"
+              label="Select Device Type"
               radio
-              color="grey-9"
-              :options="deviceOptions"
+              color="grey-9" class=":options="deviceOptions"
             />
           </div>
   
@@ -73,8 +69,7 @@
               :disabled="formData.device_type == '' || formData.region == ''"
               @click="openScannerComp"
               v-if="scannerToggleOption"
-              color="light-blue"
-              class="q-py-xs"
+              color="light-blue" class="class="q-py-xs"
               label="Start scan"
             />
             <q-btn
@@ -151,8 +146,7 @@
                         <q-btn
                           round
                           size="sm"
-                          color="negative"
-                          icon="clear"
+                          color="negative" class="icon="clear"
                           @click="fnRemoveScannedItems(index, subIndex)"
                         />
                       </q-item-section>
@@ -166,8 +160,7 @@
                         <q-btn
                           round
                           size="sm"
-                          color="negative"
-                          @click="fnRemoveDeviceTypeFromList(index)"
+                          color="negative" @click="fnRemoveDeviceTypeFromList(index)"
                           icon="clear"
                         />
                       </q-item-section>

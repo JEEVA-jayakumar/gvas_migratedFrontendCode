@@ -6,15 +6,15 @@
       <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
         <q-card style="width:150%">
           <q-card-section>
-            <q-list no-border>
+            <q-list >
 
               <q-item>
                 <q-item-section>
-                  <q-input color="grey-9" v-model="formData.Address" @blur="$v.formData.Address.$touch"
-                    :error="$v.formData.Address.$error" float-label="Address" />
+                  <q-input color="grey-9" v-model="formData.Address" @blur="v$.formData.Address.$touch"
+                    :error="v$.formData.Address.$error" label="Address" />
                     
                     <div>
-                    <q-btn label="Search Address" @click="fnAddress(formData)" color="purple-9" />
+                    <q-btn label="Search Address" @click="fnAddress(formData)" color="purple-9" class="/>
                   </div>
 
                 </q-item-section>
@@ -23,23 +23,23 @@
               <q-item>
                 <q-item-section>
                   <q-input color="grey-9" type="double" disable v-model="formData.latitude"
-                    @blur="$v.formData.latitude.$touch" :error="$v.formData.latitude.$error"
-                    float-label="Enter Latitude" placeholder="Add Latitude" />
+                    @blur="v$.formData.latitude.$touch" :error="v$.formData.latitude.$error"
+                    label="Enter Latitude" placeholder="Add Latitude" />
                 </q-item-section>
               </q-item>
 
               <q-item>
                 <q-item-section>
-                  <q-input color="grey-9" type="double" disable v-model="formData.longitude"
-                    @blur="$v.formData.longitude.$touch" :error="$v.formData.longitude.$error"
-                    float-label="Enter Longitude" placeholder="Add Longitude" />
+                  <q-input color="grey-9" class="type="double" disable v-model="formData.longitude"
+                    @blur="v$.formData.longitude.$touch" :error="v$.formData.longitude.$error"
+                    label="Enter Longitude" placeholder="Add Longitude" />
                 </q-item-section>
               </q-item>
             </q-list>
           </q-card-section>
 
           <q-card-actions vertical align="end">
-            <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" />
+            <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" class="/>
           </q-card-actions>
         </q-card>
       </div>
@@ -194,9 +194,7 @@ export default {
               color: "amber-9",
               position: "bottom",
               message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
+                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down",
             });
           });
@@ -204,8 +202,8 @@ export default {
     },
 
     fnsubmit(request) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify({
           color: "negative",
           position: "bottom",
@@ -243,9 +241,7 @@ export default {
               color: "amber-9",
               position: "bottom",
               message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
+                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down",
             });
           });

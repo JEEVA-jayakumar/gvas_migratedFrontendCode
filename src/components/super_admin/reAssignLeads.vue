@@ -20,7 +20,7 @@
       <div class="row items-center q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
         <div class="col text-h6">Lead Details</div>
         <div class="col-auto">
-          <q-btn size="sm" round @click="emitToggleRemarks" outline color="dark" icon="clear" />
+          <q-btn size="sm" round @click="emitToggleRemarks" outline color="dark" class="icon="clear" />
         </div>
       </div>
       <!--END: table title -->
@@ -41,7 +41,7 @@
         <q-td
           v-slot:body-cell-createdAt="props"
           :props="props"
-        >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-lead_id="props"
           :props="props"
@@ -82,10 +82,9 @@
           <div class="col-12 col-lg-6">
             <q-input
               clearable
-              color="grey-9"
-              v-model="filter"
+              color="grey-9" v-model="filter"
               placeholder="Type.."
-              float-label="Search by SO name, Merchant Name, Lead ID"
+              label="Search by SO name, Merchant Name, Lead ID"
               class="q-ma-xs"
             />
           </div>
@@ -93,13 +92,13 @@
             <q-select
               placeholder="Select .."
               v-model="formData.reassignToNewSo"
-              float-label="Choose a user from below"
+              label="Choose a user from below"
               :options="dropDown.regionwiseUsers"
               class="q-ma-xs"
             />
           </div>
           <div class="col-12 col-lg-auto" align="right">
-            <q-btn icon="check" color="positive" class="q-ma-xs" label="Assign" @click="fnAssign" />
+            <q-btn icon="check" color="positive" class="class="q-ma-xs" label="Assign" @click="fnAssign" />
           </div>
           <!--END: table filter,search -->
         </template>

@@ -18,27 +18,24 @@
             <q-input
               type="textarea"
               placeholder="Type.."
-              @blur="$v.remarks.$touch"
-              :error="$v.remarks.$error"
+              @blur="v$.remarks.$touch"
+              :error="v$.remarks.$error"
               class="q-my-md"
-              color="grey-9"
-              align="left"
+              color="grey-9" class="align="left"
               value=""
               v-model="remarks"
               @input="fnMapRemarks"
             />
           </div>
           <q-btn
-            color="positive"
-            class="q-ma-sm float-right"
+            color="positive" class="class="q-ma-sm float-right"
             @click="AggregatorsMovedToScrap(formData.data)"
             align="right"
             label="Submit"
           />
           <q-btn
             align="right"
-            color="grey-9"
-            class="float-right q-ma-sm"
+            color="grey-9" class="class="float-right q-ma-sm"
             @click="emitToggleScrap(showScrapModel)"
             >Cancel
           </q-btn>
@@ -99,8 +96,8 @@
         this.formData.data.lostOrStolenRemarks = val;
       },
       AggregatorsMovedToScrap(reqData) {
-        //   this.$v.formData.$touch();
-        //   if (this.$v.formData.$error) {
+        //   this.v$.formData.$touch();
+        //   if (this.v$.formData.$error) {
         //     this.$q.notify("Please review fields again.");
         //   }
         //   else {

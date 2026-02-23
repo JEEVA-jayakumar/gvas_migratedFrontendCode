@@ -14,10 +14,9 @@
               class="shadow-1"
               animated
               swipeable
-              color="tertiary"
-              align="justify"
+              color="tertiary" class="align="justify"
             >
-              <q-tab class="size1" label="UPLOAD CSV FILE" slot="title" />
+              <q-tab class="size1" label="UPLOAD CSV FILE"  />
               <div>
                 <div class="q-pa-md">
                   <div class="row text-center justify-center">
@@ -63,7 +62,7 @@
                           <q-separator />
                           <q-card-section>
                             <q-item dense>
-                              <q-item-section icon="attach_file" />
+                              <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
                               <q-item-section>{{
                                 formData.fileSelected[0].name
                               }}</q-item-section>
@@ -75,8 +74,7 @@
                             <q-btn
                               size="10px"
                               type="button"
-                              color="negative"
-                              @click="removeBulkUploadFile"
+                              color="negative" @click="removeBulkUploadFile"
                               label="Remove"
                               icon="clear"
                             />
@@ -107,8 +105,8 @@
       <div class="text-grey-9">
         <div class="row bottom-border q-pa-sm items-center">
           <div class="col">
-            <q-tabs class="shadow-1" animated swipeable color="tertiary" align="justify" >
-              <q-tab class="size1" label="Onboarding Existing Merchants" slot="title" />
+            <q-tabs class="shadow-1" animated swipeable color="tertiary" class="align="justify" >
+              <q-tab class="size1" label="Onboarding Existing Merchants"  />
               <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
                 <div class="row items-center gutter-y-sm">
                   <div
@@ -129,8 +127,7 @@
                         formData.marsDeviceIdsCooked.length == 0
                       "
                       separator
-                      color="grey-9"
-                      :options="assignToOptions"
+                      color="grey-9" class=":options="assignToOptions"
                       placeholder="Assign To"
                     />
                   </div>
@@ -158,23 +155,24 @@
               <q-tabs
                 v-model="selectedTab"
                 class="shadow-1"
-                color="grey-1"
-                @select="goToUnassignedTab"
+                color="grey-1" class="@select="goToUnassignedTab"
               >
                 <q-tab
                   default
-                  color="dark"
-                  name="unAssigned"
-                  slot="title"
+                  color="dark" class="name="unAssigned"
+
                   label="Unassigned"
                 />
                 <q-tab
-                  color="dark"
-                  name="assigned"
-                  slot="title"
+                  color="dark" class="name="assigned"
+
                   label="Assigned"
                 />
-                <q-tab-panel name="assigned">
+
+
+              </q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="assigned">
                   <div class="row items-center gutter-y-sm">
                     <div
                       class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
@@ -197,16 +195,14 @@
 
                             "
                             separator
-                            color="grey-9"
-                            :options="assignToOptions"
+                            color="grey-9" class=":options="assignToOptions"
                             placeholder="Assign To"
                           />
                         </div>
                         <!-- <div class="col-md-4 col-sm-6 col-xs-6">
                 <q-checkbox
                   v-model="formData.triggerWelcomeMail"
-                  color="dark"
-                  label="Trigger welcome email"
+                  color="dark" class="label="Trigger welcome email"
                 />
               </div> -->
                         <div class="col-md-4 col-sm-6 col-xs-6 group">
@@ -252,8 +248,7 @@
                     row-key="id"
                     :loading="tableAjaxLoading"
                     :rows-per-page-options="[5, 10, 15, 20]"
-                    color="dark"
-                    @request="ajaxLoadAllLeadInfo"
+                    color="dark" class="@request="ajaxLoadAllLeadInfo"
                   >
                     <!-- selection="multiple" -->
                     <!-- <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-leadNumber="props"
@@ -261,11 +256,9 @@
                             @click.native="toggleLeadInformation(props.row.leadInformation)">
                             <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
                         </q-td> -->
-                    <!-- <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-submitToMarsDate="props" :props="props">{{
-                                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-                            }}</q-td> -->
+                    <!-- <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-submitToMarsDate="props" :props="props">{{ $moment_format(props.row.leadInformation.submitToMarsDate, "Do MMM Y") }}</q-td> -->
                     <!-- <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-createdAt="props"
-                            :props="props">{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+                            :props="props">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
                         <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-deviceAddress="props"
                             :props="props" class="customTd customCellLength">
                             <div>{{ props.row.deviceAddress }}</div>
@@ -292,10 +285,9 @@
                       <div class="col-md-5">
                         <q-input
                           clearable
-                          color="grey-9"
-                          v-model="filterSearch"
+                          color="grey-9" v-model="filterSearch"
                           placeholder="Type.."
-                          float-label="Search By Merchant Name, TID, MID ..."
+                          label="Search By Merchant Name, TID, MID ..."
                           class="q-mr-lg q-py-sm"
                         />
                       </div>
@@ -303,7 +295,7 @@
                   </q-table>
                   <!--ENDv-model: table Data -->
                 </q-tab-panel>
-                <q-tab-panel name="unAssigned">
+<q-tab-panel name="unAssigned">
                   <!--START: table Data -->
                   <q-table
                     :rows="tableData1"
@@ -316,19 +308,16 @@
                     row-key="id"
                     :loading="tableAjaxLoading1"
                     :rows-per-page-options="[5, 10, 15, 20]"
-                    color="dark"
-                    @request="ajaxLoadAllLeadInfo1"
+                    color="dark" class="@request="ajaxLoadAllLeadInfo1"
                   >
                     <!-- <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-leadNumber="props"
                             :props="props" class="cursor-pointer"
                             @click.native="toggleLeadInformation(props.row.leadInformation)">
                             <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
                         </q-td>
-                        <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-submitToMarsDate="props" :props="props">{{
-                                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-                            }}</q-td>
+                        <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-submitToMarsDate="props" :props="props">{{ $moment_format(props.row.leadInformation.submitToMarsDate, "Do MMM Y") }}</q-td>
                         <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-createdAt="props"
-                            :props="props">{{ props.row.createdAt | moment("Do MMM Y") }}</q-td> -->
+                            :props="props">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td> -->
                     <q-td
                       v-slot:body-cell-tid="props"
                       :props="props"
@@ -357,10 +346,9 @@
                       <div class="col-md-5">
                         <q-input
                           clearable
-                          color="grey-9"
-                          v-model="filterSearch1"
+                          color="grey-9" v-model="filterSearch1"
                           placeholder="Type.."
-                          float-label="Search By Merchant Name, TID, MID ..."
+                          label="Search By Merchant Name, TID, MID ..."
                           class="q-mr-lg q-py-sm"
                         />
                       </div>
@@ -368,7 +356,7 @@
                   </q-table>
                   <!--END: table Data -->
                 </q-tab-panel>
-              </q-tabs>
+</q-tab-panels>
               <div class="row items-center gutter-y-sm">
                 <div class="col-md-9 col-sm-12 col-xs-12">
                   <div class="row items-center"></div>
@@ -673,9 +661,7 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
+                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
             // this.formData.fileSelected = []

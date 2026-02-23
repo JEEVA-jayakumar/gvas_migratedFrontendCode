@@ -48,10 +48,9 @@
             <div class="col-md-6 col-sm-12 col-xs-12">
               <q-select
                 placeholder="Choose from the below"
-                color="grey-9"
-                v-model.trim="formdata.paymentMode"
-                :error="$v.formdata.paymentMode.$error"
-                float-label="Payment mode"
+                color="grey-9" class="v-model.trim="formdata.paymentMode"
+                :error="v$.formdata.paymentMode.$error"
+                label="Payment mode"
                 :options="paymnentModeOptions"
               />
             </div>
@@ -66,10 +65,9 @@
             <div class="col-md-6 col-sm-12 col-xs-12">
               <q-select
                 placeholder="Choose from the below"
-                color="grey-9"
-                v-model.trim="formdata.combinedSettlementFlag"
-                :error="$v.formdata.combinedSettlementFlag.$error"
-                float-label="Combined Settlement Flag "
+                color="grey-9" class="v-model.trim="formdata.combinedSettlementFlag"
+                :error="v$.formdata.combinedSettlementFlag.$error"
+                label="Combined Settlement Flag "
                 :options="combinedSettlementFlagOptions"
               />
             </div>
@@ -84,10 +82,9 @@
             <div class="col-md-6 col-sm-12 col-xs-12">
               <q-select
                 placeholder="Choose from the below"
-                color="grey-9"
-                v-model.trim="formdata.ONBOARDING_REQD"
-                :error="$v.formdata.ONBOARDING_REQD.$error"
-                float-label="Select Yes Or No"
+                color="grey-9" class="v-model.trim="formdata.ONBOARDING_REQD"
+                :error="v$.formdata.ONBOARDING_REQD.$error"
+                label="Select Yes Or No"
                 :options="onboardingRequestOptions"
               />
             </div>
@@ -97,24 +94,21 @@
         <div align="right">
           <q-btn
             v-if="this.propShowRejectComponent.data.institutionCode != '104'"
-            color="positive"
-            class="q-ma-sm float-right"
+            color="positive" class="class="q-ma-sm float-right"
             @click="finalFormSubmit(formdata)"
             align="right"
             label="Submit To Mars"
           />
           <q-btn
             v-if="this.propShowRejectComponent.data.institutionCode == '104'"
-            color="teal"
-            class="q-ma-sm float-right"
+            color="teal" class="class="q-ma-sm float-right"
             @click="OpenAdditionalInfo()"
             align="right"
             label="Additional Info"
           />
           <q-btn
             align="right"
-            color="grey-9"
-            class="float-right q-ma-sm"
+            color="grey-9" class="class="float-right q-ma-sm"
             @click="emitToggleReject(showRejectModel)"
             >Cancel
           </q-btn>
@@ -477,8 +471,8 @@ components: {
             color: "negative",
             position: "bottom",
             message:
-              error.body != null
-                ? error.body.message
+              error.data != null
+                ? error.data.message
                 : "Lead Information status update failed!",
             icon: "clear",
           });
@@ -487,8 +481,8 @@ components: {
     },
     OpenAdditionalInfo(token) {
       // this.showRejectAdditionalInfo = !this.showRejectAdditionalInfo;
-      this.$v.formdata.$touch();
-      if (this.$v.formdata.$error) {
+      this.v$.formdata.$touch();
+      if (this.v$.formdata.$error) {
         this.$q.notify({
           color: "negative",
           position: "bottom",
@@ -517,10 +511,10 @@ components: {
           this.$q.notify({
             color: "positive",
             position: "bottom",
-            message: response.body.message,
+            message: response.data.message,
             icon: "thumb_up",
           });
-          let res = response.body.data;
+          let res = response.data.data;
           this.listAllSubTidDetails = res;
         })
         .catch((error) => {
@@ -698,8 +692,8 @@ components: {
     // MARS DATA STORING END
 
     finalFormSubmit(request) {
-      this.$v.formdata.$touch();
-      if (this.$v.formdata.$error) {
+      this.v$.formdata.$touch();
+      if (this.v$.formdata.$error) {
         this.$q.notify({
           color: "negative",
           position: "bottom",
@@ -891,7 +885,7 @@ components: {
                     merchantRefCode: this.propLeadDeatils.merchantRefCode,
                   };
                 } else {
-                  feed_paramaters = response.body;
+                  feed_paramaters = response.data;
                 }
                 self.$q.loading.show({
                   delay: 0, // ms
@@ -1033,7 +1027,7 @@ components: {
                         .slice(1, 2);
                       let computeSplitted = splitted[splitted.length - 1];
                       let fieldErrorFound = eval(`
-                        OThis.$v.viewBinding.partnersArr.$each[
+                        OThis.v$.viewBinding.partnersArr.$each[
                           ${findPartnersErrorIndex}
                         ].${computeSplitted}`);
                       fieldErrorFound.$model = "";
@@ -1047,7 +1041,7 @@ components: {
                       generateErrorMessage.issue = actual.issue;
                       generateErrorMessage.value = actual.value;
                     } else {
-                      let splittingErrorField = `OThis.$v.${splitted.join(".")}`;
+                      let splittingErrorField = `OThis.v$.${splitted.join(".")}`;
                       let fieldErrorFound = eval(splittingErrorField);
                       fieldErrorFound.$model = "";
                       OThis.$set(OThis.error.tab, splitted[1], true);

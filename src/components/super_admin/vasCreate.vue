@@ -18,11 +18,10 @@
             <div class="col-md-12">
               <q-input
                 v-model="formData.name"
-                @blur="$v.formData.name.$touch"
-                :error="$v.formData.name.$error"
+                @blur="v$.formData.name.$touch"
+                :error="v$.formData.name.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9"
-                float-label="Enter VAS"
+                color="grey-9" class="label="Enter VAS"
                 placeholder="Enter VAS"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -30,11 +29,10 @@
             <div class="col-md-12">
             <q-input
               v-model="formData.vasCode"
-              @blur="$v.formData.vasCode.$touch"
-              :error="$v.formData.vasCode.$error"
+              @blur="v$.formData.vasCode.$touch"
+              :error="v$.formData.vasCode.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="Enter VAS Code"
+              color="grey-9" class="label="Enter VAS Code"
               placeholder="Enter VAS Code"
               @keyup.enter="submitLeadSourceData(formData)"
               
@@ -51,8 +49,7 @@
                 class="bg-white text-weight-regular text-grey-8"
                 @click="toggleModal()"
               >Cancel</q-btn>
-              <q-btn align="right" @click="submitVasData(formData)" color="purple-9">Save</q-btn>
-            </div>
+              <q-btn align="right" @click="submitVasData(formData)" color="purple-9">Save</q-btn>" class="</div>
           </div>
         </form>
       </q-dialog>
@@ -112,8 +109,8 @@
         this.$emit("emitfnshowVas");
       },
       submitVasData(request) {
-        this.$v.formData.$touch();
-        if (this.$v.formData.$error) {
+        this.v$.formData.$touch();
+        if (this.v$.formData.$error) {
         } else {
           this.$q.loading.show({
             delay: 100, // ms
@@ -137,7 +134,7 @@
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                 icon: "thumb_down"
               });
             });

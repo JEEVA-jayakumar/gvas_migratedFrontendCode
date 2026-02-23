@@ -18,22 +18,20 @@
           <div class="col-md-12">
             <q-input
               v-model="formData.HierarchyDetails.hierarchy"
-              @blur="$v.formData.HierarchyDetails.hierarchy.$touch"
-              :error="$v.formData.HierarchyDetails.hierarchy.$error"
+              @blur="v$.formData.HierarchyDetails.hierarchy.$touch"
+              :error="v$.formData.HierarchyDetails.hierarchy.$error"
               class="text-weight-regular text-grey-8 q-my-sm"
-              color="grey-9"
-              float-label="Hierarchy"
+              color="grey-9" class="label="Hierarchy"
               placeholder="Hierarchy"
             />
           </div>
           <div class="col-md-12">
             <q-input
               v-model="formData.HierarchyDetails.hierarchyCode"
-              @blur="$v.formData.HierarchyDetails.hierarchyCode.$touch"
-              :error="$v.formData.HierarchyDetails.hierarchyCode.$error"
+              @blur="v$.formData.HierarchyDetails.hierarchyCode.$touch"
+              :error="v$.formData.HierarchyDetails.hierarchyCode.$error"
               class="text-weight-regular text-grey-8 q-my-sm"
-              color="grey-9"
-              float-label="Hierarchy Code"
+              color="grey-9" class="label="Hierarchy Code"
               placeholder="Hierarchy Code"
             />
           </div>
@@ -51,8 +49,7 @@
               size="md"
               align="right"
               @click="fnCreateHierarchySubmit(formData.HierarchyDetails)"
-              color="purple-9"
-            >Save</q-btn>
+              color="purple-9" class=">Save</q-btn>
           </div>
         </div>
       </form>
@@ -112,9 +109,9 @@ export default {
 
     //Hierarchy creation final submit
     fnCreateHierarchySubmit(formData) {
-      this.$v.formData.HierarchyDetails.$touch();
+      this.v$.formData.HierarchyDetails.$touch();
 
-      if (this.$v.formData.HierarchyDetails.$error) {
+      if (this.v$.formData.HierarchyDetails.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         console.log("formData >> ", formData);
@@ -142,7 +139,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

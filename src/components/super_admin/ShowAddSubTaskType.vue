@@ -18,10 +18,9 @@
                 <div class="col-md-12">
                         <q-select
                           v-model="formData."   
-                          :error="$v.formData.issue_req_type.$error" 
+                          :error="v$.formData.issue_req_type.$error"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Select Service Request" 
+                          color="grey-9" class="label="Select Service Request"
                           :options="selectServiceReqType"
                           placeholder="Select Service Request" 
                         />
@@ -31,10 +30,9 @@
                      <div class="col-md-12">
                         <q-input
                           v-model="formData.name"   
-                          :error="$v.formData.name.$error" 
+                          :error="v$.formData.name.$error"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Enter Sub Task Name" 
+                          color="grey-9" class="label="Enter Sub Task Name"
                           placeholder="Enter Sub Task Name" 
                         />
                     </div>
@@ -42,8 +40,7 @@
                 <div class="row gutter-sm q-py-sm items-center">
                     <div class="col-md-12 group" align="right">
                         <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowAddNewSubTaskType()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitAddSubTaskType(formData)" color="purple-9">Save</q-btn>
-                    </div>
+                        <q-btn align="right" @click="fnfinalsubmitAddSubTaskType(formData)" color="purple-9">Save</q-btn>" class="</div>
                 </div>
             </form>
         </q-dialog>
@@ -121,8 +118,8 @@ fnAddSubTaskDetails(){
 
     fnfinalsubmitAddSubTaskType(formData) {
          console.log("SUBMIT Sub Task RESPONSE",JSON.stringify(formData))
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
           console.log("SUBMIT RESPONSE",JSON.stringify(formData))

@@ -6,8 +6,7 @@
          <!-- <q-btn
             icon="cloud_upload"
             class="q-ma-sm"
-            color="positive"
-            label="Upload Bank List"
+            color="positive" class="label="Upload Bank List"
             @click="fnUploadDocumentAndSubmit"
           />-->
         </div>
@@ -21,11 +20,10 @@
           <div class="q-pa-md">
             <div class="row gutter-sm q-py-sm">
               <div class="col-md-6">
-                  <q-input :error="$v.formData.tid.$error"
+                  <q-input :error="v$.formData.tid.$error"
                               clearable
-                              color="grey-9"
-                              v-model.trim="formData.tid"
-                              float-label="TID"
+                              color="grey-9" class="v-model.trim="formData.tid"
+                              label="TID"
                               placeholder="TID"
                             >
                               <q-autocomplete
@@ -37,21 +35,19 @@
                             </q-input>
               </div>
                           <div class="col-md-6">
-                  <q-input disable :error="$v.formData.serialNumber.$error"
+                  <q-input disable :error="v$.formData.serialNumber.$error"
                               clearable
-                              color="grey-9"
-                              v-model.trim="formData.serialNumber"
-                              float-label="serialNumber"
+                              color="grey-9" class="v-model.trim="formData.serialNumber"
+                              label="serialNumber"
                               placeholder="serialNumber"
                             >
                             </q-input>
               </div>
                                       <div class="col-md-6">
-                  <q-input :error="$v.formData.newSerialNumber.$error"
+                  <q-input :error="v$.formData.newSerialNumber.$error"
                               clearable
-                              color="grey-9"
-                              v-model.trim="formData.newSerialNumber"
-                              float-label="New Serial Number"
+                              color="grey-9" class="v-model.trim="formData.newSerialNumber"
+                              label="New Serial Number"
                               placeholder="New Serial Number"
                             >
                             </q-input>
@@ -63,8 +59,7 @@
           <q-btn
             size="md"
             type="button"
-            color="purple-9"
-            @click="fnSubmitBankDetails(formData)"
+            color="purple-9" @click="fnSubmitBankDetails(formData)"
           >Submit</q-btn>
         </div>
       </form>
@@ -128,8 +123,8 @@
       ...mapActions("AggregatorTid", ["FETCH_AGGREGATOR_TID","FETCH_AGGREGATOR_TID_SERIAL_NUMBER","UPDATE_AGGREGATOR_SERIAL_NUMBER"]),
    
       fnSubmitBankDetails(formData) {
-        this.$v.formData.$touch();
-        if (this.$v.formData.$error) {
+        this.v$.formData.$touch();
+        if (this.v$.formData.$error) {
           this.$q.notify("Please review fields again.");
           return;
         } else {

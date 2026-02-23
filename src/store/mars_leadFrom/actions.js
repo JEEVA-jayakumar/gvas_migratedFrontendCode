@@ -15,6 +15,6 @@ export const LEAD_FROM_FROM_MARS = ({
 
 // .get("https://qaapp.bijlipay.co.in:8085/staticApi/rental-plan-details/" + request.leadSource + "/" + request.device + "/" + request.plan, request)
 //     .then(response => {  
-//       commit("SET_DEVICE_MODEL_FROM_MARS", response.body.data.marsDeviceModel);
+//       commit("SET_DEVICE_MODEL_FROM_MARS", response.data.data.marsDeviceModel);
 //       return response
 //     })

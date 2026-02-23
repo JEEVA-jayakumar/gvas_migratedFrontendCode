@@ -3,7 +3,7 @@
     <div>
       <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-md-4">
-          <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
+          <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
             v-model:options="aggregatorOptions" @input="getaggregator" />
         </div>
       </div> -->
@@ -20,12 +20,12 @@
           }}</q-td>
           <template v-slot:top="props">
             <div class="col-md-5">
-              <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
-                float-label="Pod Number, Device Type" class="q-mr-lg q-py-sm" />
+              <q-input clearable v-model="filter" separator color="grey-9" class="placeholder="Type.."
+                label="Pod Number, Device Type" class="q-mr-lg q-py-sm" />
             </div>
             <div class="col-md-5">
 
-              <q-btn square outline color="purple-9" label="Download as Excel" class="q-mr-lg q-py-sm float-right"
+              <q-btn square outline color="purple-9" class="label="Download as Excel" class="q-mr-lg q-py-sm float-right"
                 size="md" @click="downloadAggregatorsInventoryWithSoList" />
 
             </div>

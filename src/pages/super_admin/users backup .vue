@@ -7,23 +7,18 @@
       <pre>{{ getAllUsers }}</pre>
       <h2>tttt</h2>
       <pre>{{ testData }}</pre>
-			<q-table :rows="getAllUsers" :columns="columns" :filter="filterSearch" selection="multiple" :selected="selectedSecond" v-model:pagination="paginationControl" :loading="tableAjaxLoading" row-key="name" color="grey-9">
-				
-				<q-td v-slot:body-cell-sales="props" :props="props">
+			<q-table :rows="getAllUsers" :columns="columns" :filter="filterSearch" selection="multiple" :selected="selectedSecond" v-model:pagination="paginationControl" :loading="tableAjaxLoading" row-key="name" color="grey-9">" class="<q-td v-slot:body-cell-sales="props" :props="props">
 					<img :src="props.row.profilePicture" class="avatar">
 				</q-td>
 
 				<q-td v-slot:body-cell-role="props" :props="props">
 					<div class="row no-wrap">
 						<div v-for="role in props.row.roles" :key="role.role">
-							<!-- <q-chip v-if="role.role == 'RSM'" color="light-blue">
-								{{role.role}}
+							<!-- <q-chip v-if="role.role == 'RSM'" color="light-blue">" class="{{role.role}}
 							</q-chip>
-							<q-chip v-else-if="role.role == 'ASM'" color="amber-9">
-								{{role.role}}
+							<q-chip v-else-if="role.role == 'ASM'" color="amber-9">" class="{{role.role}}
 							</q-chip>
-							<q-chip v-else-if="role.role == 'TL'" color="light-blue">
-								{{role.role}}
+							<q-chip v-else-if="role.role == 'TL'" color="light-blue">" class="{{role.role}}
 							</q-chip> -->
 								<q-chip color="light-blue">
 								{{role.role}}
@@ -35,7 +30,7 @@
 				 <q-td v-slot:body-cell-permission="props" :props="props">
 					<div class="row no-wrap">
 						<div v-for="role in props.row.roles" :key="role.role">
-							<q-chip v-for="rolePermission in role.permission" :key="rolePermission.permission" color="grey-5" class="text-grey-9">
+							<q-chip v-for="rolePermission in role.permission" :key="rolePermission.permission" color="grey-5" class="class="text-grey-9">
 								{{rolePermission.permission}}
 							</q-chip>
 						</div>
@@ -52,10 +47,9 @@
 					<div class="col-md-6">
 						<q-input
 							clearable
-							color="grey-9"
-							v-model="filter"
+							color="grey-9" v-model="filter"
 							placeholder="Type.."
-							float-label="Search by SO name, Merchant Name, Lead ID"
+							label="Search by SO name, Merchant Name, Lead ID"
 							class="q-mt-lg q-mr-lg"
 						/>
 					</div>
@@ -65,7 +59,7 @@
 					<div class="col-md-6">
 						<div class="q-my-md">
 
-							<q-btn v-for="tab in filtertabs" :key="tab.name" color="blue-grey-2 q-mx-xs" class="text-black" size="sm" rounded :label="tab.name">
+							<q-btn v-for="tab in filtertabs" :key="tab.name" color="blue-grey-2" class="q-mx-xs" class="text-black" size="sm" rounded :label="tab.name">
 							</q-btn>
 
 						</div>
@@ -74,17 +68,15 @@
 						<q-select
 							v-model="filter_values"
 							separator
-							color="grey-9"
-							placeholder="Select"
-							float-label="Filter By"
+							color="grey-9" class="placeholder="Select"
+							label="Filter By"
 							:options="filterRoles"
 						/>
 					</div>
 					<div class="col-md-3 q-my-md" align="right">
 						<q-btn  
 						flat
-						color="white" 
-						class="text-grey-9 q-mr-md"
+						color="white" class="class="text-grey-9 q-mr-md"
 						size="md"
 						@click="fnDeleteUser"
 						icon="far fa-trash-alt" 
@@ -92,8 +84,7 @@
 						<q-btn 
 						@click="fnShowAddUser"
 						label="Add User"
-						color="purple-9" 
-						size="md"
+						color="purple-9" size="md"
 						/>
 					</div>
 					<!--END: Tabs -->

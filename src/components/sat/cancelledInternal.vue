@@ -4,8 +4,7 @@
             <q-table :rows="tableData2" :columns="columnDataclosed"
                         table-class="customTableClass" :filter=" filterSearch" 
                         :selected="formData.marsDeviceIdsCooked" v-model:pagination=" paginationControl" row-key="id"
-                        :loading="tableAjaxLoading" :rows-per-page-options="[5, 10, 15, 20]" color="dark"
-                        @request=" ajaxLoadAllLeadInfo">
+                        :loading="tableAjaxLoading" :rows-per-page-options="[5, 10, 15, 20]" color="dark" class="@request=" ajaxLoadAllLeadInfo">
                        
                          <!--START: table header -->
                          <q-tr v-slot:top-row="props">
@@ -29,9 +28,9 @@
                                     <span v-if="props.row.mid != null">{{ props.row.mid }}</span>
                                     <span v-else="props.row.mid == null">NA</span>
                                 </q-td>
-                                <q-td key="createdDate" :props="props"> {{ props.row.createdDate | moment("Do MMM Y") }}
+                                <q-td key="createdDate" :props="props"> {{ $moment_format(props.row.createdDate, "Do MMM Y") }}
                                 </q-td>
-                                <q-td key="updatedDate" :props="props"> {{ props.row.updatedDate | moment("Do MMM Y") }}
+                                <q-td key="updatedDate" :props="props"> {{ $moment_format(props.row.updatedDate, "Do MMM Y") }}
                                 </q-td>
                                 <q-td key="meName" :props="props"> {{ props.row.meName }}</q-td>
                                 <q-td key="bpRegion" :props="props"> {{ props.row.bpRegion.regionAreaName }} </q-td>
@@ -275,7 +274,7 @@
                         <template slot="top">
                             <div class="col-md-5">
                                 <q-input clearable color="grey-9" v-model=" filterSearch" placeholder="Type.."
-                                float-label="Search By ServiceReqTicketId, TID .." class="q-mr-lg q-py-sm" />
+                                label="Search By ServiceReqTicketId, TID .." class="q-mr-lg q-py-sm" />
                             </div>
                         </template>
                     </q-table>

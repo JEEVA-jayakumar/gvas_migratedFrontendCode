@@ -23,8 +23,7 @@
             round
             size="sm"
             @click="emitfnReferBackRemarks"
-            color="red"
-            icon="clear"
+            color="red" class="icon="clear"
           />
         </div>
       </div>
@@ -38,8 +37,7 @@
             readonly
             v-model="satToSoRemarks"
             type="textarea"
-            color="red-12"
-            label="Textarea with shadow text"
+            color="red-12" class="label="Textarea with shadow text"
             hint="Press TAB to autocomplete suggested value or ESC to cancel suggestion"
             :shadow-text="textareaShadowText"
             @keydown="processTextareaFill"
@@ -57,8 +55,7 @@
             readonly
             v-model="marsRemarks"
             type="textarea"
-            color="red-12"
-            label="Textarea with shadow text"
+            color="red-12" class="label="Textarea with shadow text"
             hint="Press TAB to autocomplete suggested value or ESC to cancel suggestion"
             :shadow-text="textareaShadowText"
             @keydown="processTextareaFill"
@@ -76,8 +73,7 @@
             readonly
             v-model="satToSoRemarks"
             type="textarea"
-            color="red-12"
-            label="Textarea with shadow text"
+            color="red-12" class="label="Textarea with shadow text"
             hint="Press TAB to autocomplete suggested value or ESC to cancel suggestion"
             :shadow-text="textareaShadowText"
             @keydown="processTextareaFill"

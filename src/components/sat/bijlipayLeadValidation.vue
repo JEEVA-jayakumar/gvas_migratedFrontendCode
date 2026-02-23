@@ -33,7 +33,7 @@
           <q-td
             v-slot:body-cell-createdAt="props"
             :props="props"
-          >{{ props.row.date | moment("Do MMM Y") }}</q-td>
+          >{{ $moment_format(props.row.date, "Do MMM Y") }}</q-td>
 
           <q-td
             v-slot:body-cell-leadNumber="props"
@@ -101,8 +101,7 @@
               highlight
               push
               outline
-              color="purple-9"
-              size="sm"
+              color="purple-9" size="sm"
               @click="$router.push('/sat/lead/validation/'+ props.row.leadId+'/data/entry')"
             >Data Entry</q-btn>
 
@@ -111,8 +110,7 @@
               highlight
               push
               class="disabled"
-              color="purple-9"
-              size="sm"
+              color="purple-9" size="sm"
             >Pending with MARS</q-btn>
 
             <q-btn
@@ -120,8 +118,7 @@
               highlight
               push
               outline
-              color="purple-9"
-              size="sm"
+              color="purple-9" size="sm"
               :to="'/sat/lead/validation/'+ props.row.leadId"
             >Validate</q-btn>
             <q-btn
@@ -129,8 +126,7 @@
               highlight
               push
               outline
-              color="amber-9"
-              size="sm"
+              color="amber-9" size="sm"
               @click="$router.push('/sat/lead/validation/'+ props.row.leadId)"
             >Referred Back</q-btn>
             <q-btn
@@ -138,12 +134,11 @@
               highlight
               push
               outline
-              color="amber-9"
-              size="sm"
+              color="amber-9" size="sm"
               @click="$router.push('/sat/lead/validation/'+ props.row.leadId+'/data/entry')"
             >RB - data entry</q-btn>
 
-            <q-btn v-else class="disabled" highlight push outline color="grey-9" size="sm">Validate</q-btn>
+            <q-btn v-else class="disabled" push outline color="grey-9" size="sm">Validate</q-btn>
           </q-td>
           <q-td v-slot:body-cell-rejectLead="props" :props="props">
              <q-btn
@@ -152,8 +147,7 @@
                   push
                   outline
                   class="q-mx-sm"
-                  color="negative"
-                  @click="openRejectLead(props.row)"
+                  color="negative" @click="openRejectLead(props.row)"
                   size="sm"
             >Reject Lead</q-btn>
           </q-td>
@@ -163,12 +157,11 @@
             <div class="col-md-5">
               <q-input
                 clearable
-                color="grey-9"
-                v-model="filter"
+                color="grey-9" v-model="filter"
                 placeholder="Type.."
                 :debounce="600"
                 class="q-mr-lg q-py-sm"
-                float-label="Search .. "
+                label="Search .. "
               />
             </div>
             <!--END: table filter,search -->

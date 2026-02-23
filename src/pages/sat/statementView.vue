@@ -14,8 +14,7 @@
         <div class="row ">
           <div class="col-md-6 text-grey-9">
             <q-input 
-              color="grey-9"
-              float-label="TID" 
+              color="grey-9" class="label="TID"
               v-model="formData.statementDetails.tid" 
             />
           </div>
@@ -24,8 +23,7 @@
         <div class="row">
           <div class="col-md-6 text-grey-9">
             <q-input 
-              color="grey-9"
-              float-label="MID" 
+              color="grey-9" class="label="MID"
               v-model="formData.statementDetails.mid" 
             />
           </div>
@@ -39,9 +37,8 @@
                 <q-input
                    v-model="formData.statementDetails.fromDate" 
                   :min="today"
-                  float-label="From Date"
-                   color="grey-9"
-                />
+                  label="From Date"
+                   color="grey-9" class="/>
               </q-field>
           </div>
         </div>
@@ -54,9 +51,8 @@
                 <q-input
                   v-model="formData.statementDetails.toDate" 
                   :min="today"
-                  float-label="To Date"
-                   color="grey-9"
-                />
+                  label="To Date"
+                   color="grey-9" class="/>
               </q-field>
           </div>
         </div>

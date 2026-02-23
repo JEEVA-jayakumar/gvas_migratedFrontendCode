@@ -1,28 +1,29 @@
 <template>
     <q-page>
         <div>
-            <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @select="goToCompleteTab">
-                <q-tab default color="dark" name="tab-1" slot="title" label="Pending Tickets" />
-                <q-tab color="dark" name="tab-2" slot="title" label="Completed Tickets" />
-                <q-tab-panel name="tab-1">
+            <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" class="@select="goToCompleteTab">
+                <q-tab default color="dark" class="name="tab-1"  label="Pending Tickets" />
+                <q-tab color="dark" class="name="tab-2"  label="Completed Tickets" />
+
+
+            </q-tabs>
+<q-tab-panels v-model="activeTab" animated>
+<q-tab-panel name="tab-1">
                     <div class="row items-center">
                         <div class="col">
                             <strong> Open For </strong>
                         </div>
                         <q-select class="col" v-model.trim="formData.date" :options="dateType" 
-                            color="grey" @input="dateClick">
+                            color="grey" class="@input="dateClick">
                         </q-select>
                         <div class="col-5"></div>
-                        <q-input class="col-5" clearable color="grey-9" placeholder="Type.." v-model="filter"
-                        float-label="Search By Ticket No, Merchant No..." />
+                        <q-input class="col-5" clearable color="grey-9" class="placeholder="Type.." v-model="filter"
+                        label="Search By Ticket No, Merchant No..." />
                     </div>
                     <q-table table-class="customTableClass" class="q-py-none" :rows="tableData" :columns="columns"
                         :filter="filter" :rows-per-page-options="[5, 10, 15]" :pagination="paginationControl"
                         :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
-                        <q-td v-slot:body-cell-Date="props" :props="props">{{
-                                props.row == null ? "NA" : props.row.createdDate |
-                                    moment("Do MMM Y")
-                        }}</q-td>
+                        <q-td v-slot:body-cell-Date="props" :props="props">{{ $moment_format(props.row == null ? "NA" : props.row.createdDate, "Do MMM Y") }}</q-td>
                         <q-td v-slot:body-cell-action="props" :props="props">
                             <div class="row no-wrap no-padding">
                                 <q-btn :disable="props.row.serviceRequestTicketStatus != 1" dense no-caps no-wrap
@@ -50,10 +51,10 @@
                         }}</q-td>
                     </q-table>
                 </q-tab-panel>
-                <q-tab-panel name="tab-2">
+<q-tab-panel name="tab-2">
                     <div class="row">
-                        <q-input class="col-4" v-model="filter1" clearable color="grey-9" placeholder="Type.."
-                        float-label="Search By Ticket No, Merchant No..." />
+                        <q-input class="col-4" v-model="filter1" clearable color="grey-9" class="placeholder="Type.."
+                        label="Search By Ticket No, Merchant No..." />
                     </div>
                     <q-table table-class="customTableClass" class="q-py-none" :rows="tableData1" :columns="columns2"
                         :filter="filter1" :rows-per-page-options="[5, 10, 15]" :pagination="paginationControl1"
@@ -65,16 +66,12 @@
                                 <span class="q-ma-sm" v-else="props.row.crmRemark == null">NA</span>
                             </div>
                         </q-td>
-                        <q-td v-slot:body-cell-createdDate="props" :props="props">{{ props.row.createdDate |
-                                moment("Do MMM Y")
-                        }}</q-td>
-                        <q-td v-slot:body-cell-updatedDate="props" :props="props">{{ props.row.updatedDate |
-                                moment("Do MMM Y")
-                        }}</q-td>
+                        <q-td v-slot:body-cell-createdDate="props" :props="props">{{ $moment_format(props.row.createdDate, "Do MMM Y") }}</q-td>
+                        <q-td v-slot:body-cell-updatedDate="props" :props="props">{{ $moment_format(props.row.updatedDate, "Do MMM Y") }}</q-td>
                     </q-table>
 
                 </q-tab-panel>
-            </q-tabs>
+</q-tab-panels>
 
         </div>
         <bijlipayAddRemarks v-if="propToggleRemarks" :remarksInfo="addBasicInformation"

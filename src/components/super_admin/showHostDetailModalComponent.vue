@@ -16,9 +16,8 @@
         <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
       </div>
     </div>
-    <q-tabs color="grey-9">
-      <!-- Tabs - notice slot="title" -->
-      <q-tab @select="leadSourceActiveList" default slot="title" label="Host List" name="tab-1"/>
+    <q-tabs color="grey-9">" class="<!-- Tabs - notice  -->
+      <q-tab @select="leadSourceActiveList" default  label="Host List" name="tab-1"/>
       <q-tab-panel name="tab-1">
         <q-table
           :rows="tableData"
@@ -26,8 +25,7 @@
           :columns="activatedColumns"
           :filter="activeFilterSearch"
           row-key="id"
-          color="grey-9"
-          @request="ajaxLoadAllLeadInfo"
+          color="grey-9" class="@request="ajaxLoadAllLeadInfo"
         >
           <q-td v-slot:body-cell-action="props" :props="props">
             <div class="row no-wrap no-padding">
@@ -60,10 +58,9 @@
             <div class="col-8">
               <q-input
                 clearable
-                color="grey-9"
-                v-model="activeFilterSearch"
+                color="grey-9" v-model="activeFilterSearch"
                 placeholder="Type.."
-                float-label="Search lead source"
+                label="Search lead source"
               />
             </div>
             <div class="col-4" align="right">
@@ -72,8 +69,7 @@
                 no-wrap
                 label="Add New"
                 class="text-weight-regular"
-                color="purple-9"
-                icon="far fa-plus-square"
+                color="purple-9" class="icon="far fa-plus-square"
                 @click="hostCreate()"
               />
             </div>

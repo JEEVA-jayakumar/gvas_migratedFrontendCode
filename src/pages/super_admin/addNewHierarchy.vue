@@ -5,41 +5,39 @@
       <!-- START >> Setup MDR details -->
       <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
         <q-card style="width:100%">
-          <q-card-main>
-            <q-list no-border>
+          <q-card-section>
+            <q-list >
               <q-item>
-                <q-item-main>
+                <q-item-section>
                   <q-input
-                    color="grey-9"
-                    type="text"
+                    color="grey-9" class="type="text"
                     v-model="formData.hierarchy"
-                    @blur="$v.formData.hierarchy.$touch"
-                    :error="$v.formData.hierarchy.$error"
-                    float-label="Enter New Hierarchy"
+                    @blur="v$.formData.hierarchy.$touch"
+                    :error="v$.formData.hierarchy.$error"
+                    label="Enter New Hierarchy"
                     placeholder="Add New Hierarchy"
                   />
-                </q-item-main>
+                </q-item-section>
               </q-item>
 
               <q-item>
-                <q-item-main>
+                <q-item-section>
                   <q-input
-                    color="grey-9"
-                    type="text"
+                    color="grey-9" class="type="text"
                     v-model="formData.hierarchyCode"
-                    @blur="$v.formData.hierarchyCode.$touch"
-                    :error="$v.formData.hierarchyCode.$error"
-                    float-label="Enter New Hierarchy Code"
+                    @blur="v$.formData.hierarchyCode.$touch"
+                    :error="v$.formData.hierarchyCode.$error"
+                    label="Enter New Hierarchy Code"
                     placeholder="Add New Hierarchy Code"
                   />
-                </q-item-main>
+                </q-item-section>
               </q-item>
             </q-list>
-          </q-card-main>
+          </q-card-section>
 
           <q-card-actions vertical align="end">
-            <q-btn label="submit" @click="fnAddHierarchy(formData)" color="purple-9" />
-            <!-- <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" /> -->
+            <q-btn label="submit" @click="fnAddHierarchy(formData)" color="purple-9" class="/>
+            <!-- <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" class="/> -->
           </q-card-actions>
         </q-card>
       </div>
@@ -166,8 +164,8 @@ export default {
     fnAddHierarchy(request) {
       console.log("Hierarchy request:", JSON.stringify(request));
 
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify({
           color: "negative",
           position: "bottom",
@@ -198,7 +196,7 @@ export default {
               type: "warning",
               color: "amber-9",
               position: "bottom",
-              message: error.body?.message ?? "Please Try Again Later !",
+              message: error.data?.message ?? "Please Try Again Later !",
               icon: "thumb_down"
             });
           });

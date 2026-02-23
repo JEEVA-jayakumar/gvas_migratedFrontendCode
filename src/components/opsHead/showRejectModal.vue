@@ -12,7 +12,7 @@
                       <div class="text-h6 text-weight-regular">Reject Exception</div>
                   </div>
                   <div class="col-md-12 q-pt-md" align="left">
-                      <q-input type="textarea" color="grey-9" v-model="formData.leadVerificationStatus.reason" float-label="Enter reason for reject" placeholder="type.." />
+                      <q-input type="textarea" color="grey-9" v-model="formData.leadVerificationStatus.reason" label="Enter reason for reject" placeholder="type.." />
                   </div>
                   <div class="col-md-12 col-md-6 q-pt-md group" align="right">
                       <q-btn

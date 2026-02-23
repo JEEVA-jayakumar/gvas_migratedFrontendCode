@@ -29,7 +29,7 @@
           </div>
           <div v-else class="row group">
             <div>
-              <q-banner color="primary" icon="info">No data available to display</q-banner>
+              <q-banner color="primary" class="icon="info">No data available to display</q-banner>
             </div>
           </div>
         </div>
@@ -54,7 +54,7 @@
             </div>
           </div>
           <div v-else class="row group">
-            <q-banner color="primary" icon="info">No data available to display</q-banner>
+            <q-banner color="primary" class="icon="info">No data available to display</q-banner>
           </div>
         </div>
         <div v-if="inventoryData.regionalItems.length > 0" class="col-md-6">
@@ -68,17 +68,15 @@
               :pagination="paginationControl"
               row-key="index"
               :loading="tableAjaxLoading"
-              color="primary"
-            >
+              color="primary" class=">
               <template v-slot:top="props">
                 <!--START: table filter,search -->
                 <div class="col-md-6">
                   <q-input
                     clearable
-                    color="grey-9"
-                    v-model="filterSearch"
+                    color="grey-9" v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search .."
+                    label="Search .."
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -86,10 +84,9 @@
                 <div class="col-md-6">
                   <!-- <q-input
                     clearable
-                    color="grey-9"
-                    v-model="filterSearch"
+                    color="grey-9" v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search .."
+                    label="Search .."
                     class="q-mr-lg q-py-sm"
                   />-->
                   <downloadExcel
@@ -97,7 +94,7 @@
                     :fields="json_fields"
                     name="Central Inventory Region.xls"
                   >
-                    <q-btn outline color="grey-9" label="Download as excel" />
+                    <q-btn outline color="grey-9" class="label="Download as excel" />
                   </downloadExcel>
                   <!-- @click="downloadReport" -->
                 </div>
@@ -110,11 +107,10 @@
         <div class="col">
           <q-select
             v-model="inventoryData.region"
-            color="grey-9"
-            @input="filterInventoryCountByRegion"
+            color="grey-9" class="@input="filterInventoryCountByRegion"
             :options="inventoryData.regionFilterOptions"
             placeholder="Select"
-            float-label="Filter By Region Wise"
+            label="Filter By Region Wise"
           />
         </div>
       </div>
@@ -136,7 +132,7 @@
             </div>
           </div>
           <div v-else class="row group">
-            <q-banner color="primary" icon="info">No data available to display</q-banner>
+            <q-banner color="primary" class="icon="info">No data available to display</q-banner>
           </div>
         </div>
         <div class="col">
@@ -144,10 +140,9 @@
             filter
             clearable
             v-model="inventoryData.so"
-            color="grey-9"
-            :options="inventoryData.SOFilterOptions"
+            color="grey-9" class=":options="inventoryData.SOFilterOptions"
             placeholder="Select"
-            float-label="Filter By SO Wise"
+            label="Filter By SO Wise"
             @input="filterInventoryCountBySO"
           />
         </div>
@@ -170,7 +165,7 @@
             </div>
           </div>
           <div v-else class="row group">
-            <q-banner color="primary" icon="info">No data available to display</q-banner>
+            <q-banner color="primary" class="icon="info">No data available to display</q-banner>
           </div>
         </div>
       </div>
@@ -192,7 +187,7 @@
             </div>
           </div>
           <div v-else class="row group">
-            <q-banner color="primary" icon="info">No data available to display</q-banner>
+            <q-banner color="primary" class="icon="info">No data available to display</q-banner>
           </div>
         </div>
       </div>
@@ -214,7 +209,7 @@
             </div>
           </div>
           <div v-else class="row group">
-            <q-banner color="primary" icon="info">No data available to display</q-banner>
+            <q-banner color="primary" class="icon="info">No data available to display</q-banner>
           </div>
         </div>
       </div>
@@ -236,7 +231,7 @@
             </div>
           </div>
           <div v-else class="row group">
-            <q-banner color="primary" icon="info">No data available to display</q-banner>
+            <q-banner color="primary" class="icon="info">No data available to display</q-banner>
           </div>
         </div>
       </div>

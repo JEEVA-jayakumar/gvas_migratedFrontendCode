@@ -11,39 +11,39 @@
         <div class="row gutter-sm q-py-sm items-center">
           <q-card style="width:100%">
             <q-card-section>
-              <q-list no-border>
+              <q-list >
 
                 <q-item>
                   <q-item-section>
                     <q-select color="grey-9" v-model="formData.leadSource" :options="dropDown.leadSourceOptions"
-                      float-label="Select lead source" placeholder="Lead source" />
+                      label="Select lead source" placeholder="Lead source" />
                   </q-item-section>
                 </q-item>
                 <q-item>
                   <q-item-section>
-                    <q-input color="grey-9" v-model="formData.prefix" @blur="$v.formData.prefix.$touch"
-                      :error="$v.formData.prefix.$error" float-label="Enter prefix* (3 digits)"
+                    <q-input color="grey-9" v-model="formData.prefix" @blur="v$.formData.prefix.$touch"
+                      :error="v$.formData.prefix.$error" label="Enter prefix* (3 digits)"
                       placeholder="Enter prefix* (3 digits)" />
-                    <div class="text-negative q-py-xs group text-caption" v-if="$v.formData.prefix.$error">
+                    <div class="text-negative q-py-xs group text-caption" v-if="v$.formData.prefix.$error">
                       <div v-if="
-                        $v.formData.prefix.$params
+                        v$.formData.prefix.$params
                           .required
                       ">
-                        <q-icon color="negative" name="warning" />&nbsp;Required
+                        <q-icon color="negative" class="name="warning" />&nbsp;Required
                       </div>
                       <div v-if="
-                        $v.formData.prefix.$params
+                        v$.formData.prefix.$params
                           .minLength
                       ">
-                        <q-icon color="negative" name="warning" />
+                        <q-icon color="negative" class="name="warning" />
                         &nbsp;Length should be between
                         {{
-                            $v.formData.prefix.$params
+                            v$.formData.prefix.$params
                               .minLength.min
                         }}
                         and
                         {{
-                            $v.formData.prefix.$params
+                            v$.formData.prefix.$params
                               .maxLength.max
                         }}
                       </div>
@@ -59,8 +59,7 @@
           <div class="col-md-12 group" align="right">
             <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="toggleModal()">Cancel
             </q-btn>
-            <q-btn align="right" @click="submitCreatePrefix(formData)" color="purple-9">Save</q-btn>
-          </div>
+            <q-btn align="right" @click="submitCreatePrefix(formData)" color="purple-9">Save</q-btn>" class="</div>
         </div>
       </form>
     </q-dialog>
@@ -181,8 +180,8 @@ export default {
       //   })
     },
     submitCreatePrefix() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
       } else {
         this.$q.loading.show({
           delay: 100, // ms
@@ -206,7 +205,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

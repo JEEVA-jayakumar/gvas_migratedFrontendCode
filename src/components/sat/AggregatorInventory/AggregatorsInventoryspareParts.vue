@@ -8,8 +8,7 @@
                 <br>
                 <div class="col-md-9 col-sm-12 col-xs-12">
                     <div v-if="regionSpareCount.length > 0" class="row">
-                        <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9"
-                            v-for="menu in regionSpareCount" :key="menu" height="35px" width="35px">
+                        <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" class="v-for="menu in regionSpareCount" :key="menu" height="35px" width="35px">
                             <div>
                                 <big :style="'color'">{{ menu.value.count }} </big>
                             </div>
@@ -22,7 +21,7 @@
 
                     <div v-else class="row group">
                         <div>
-                            <q-banner color="primary" icon="info">No data available to display</q-banner>
+                            <q-banner color="primary" class="icon="info">No data available to display</q-banner>
                         </div>
                     </div>
                     <!-- </q-card> -->
@@ -31,23 +30,30 @@
             </div>
             <!-- <pre>{{getAllRegionsData}}</pre> -->
             <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
-            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToSelectedTab">
-                <q-tab default color="dark" name="incomingPods" slot="title" label="Incoming Pod's" />
-                <q-tab color="dark" name="stocks" slot="title" label="Stocks" />
-                <q-tab color="dark" name="SoPodList" slot="title" label="So Pod List" />
-                <q-tab color="dark" name="createSoPod" slot="title" label="Create So Pod" />
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" class="@select="goToSelectedTab">
+                <q-tab default color="dark" class="name="incomingPods"  label="Incoming Pod's" />
+                <q-tab color="dark" class="name="stocks"  label="Stocks" />
+                <q-tab color="dark" class="name="SoPodList"  label="So Pod List" />
+                <q-tab color="dark" class="name="createSoPod"  label="Create So Pod" />
 
-                <q-tab-panel name="SoPodList">
+
+                <!--  -->
+
+
+
+                <!--  -->
+
+            </q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="SoPodList">
                     <PhonepeSoPodList />
                 </q-tab-panel>
-                <!-- <q-tab-panel name="SoPodList" @click="this.$router.push({namev-model:'PhonepeSparePartsSoPodList'})">
-                </q-tab-panel> -->
-
-                <q-tab-panel name="incomingPods">
+<q-tab-panel name="SoPodList" @click="this.$router.push({namev-model:'PhonepeSparePartsSoPodList'})">
+                </q-tab-panel>
+<q-tab-panel name="incomingPods">
                     <q-table :rows="tableData" table-class="customSATableClass" :columns="columns"
                         :filter="filterSearch" :pagination="paginationControl"
-                        :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
-                        @request="ajaxLoadAllLeadInfo">
+                        :filter-method="myCustomSearchFilter" row-key="name" color="grey-9" class="@request="ajaxLoadAllLeadInfo">
                         <q-td v-slot:body-cell-createdAt="props" :props="props">{{
                             props.row.created_date == null
                                 ? "NA"
@@ -96,24 +102,23 @@
            Incoming Pod
           </div> -->
                             <!-- <div class="col-md-6 q-my-md" align="right">
-            <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
+            <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9" class="icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
           </div>-->
                             <!--END: table title -->
                             <!--START: table filter,search
             @click="fnShowAddNewServiceType(props.row)" -->
                             <div class="col-3">
-                                <q-input clearable color="grey-9" v-model="filterSearch" float-label="Search By POD Number" placeholder="Type.."
+                                <q-input clearable color="grey-9" v-model="filterSearch" label="Search By POD Number" placeholder="Type.."
                                     class="q-mr-lg" />
                             </div>
                             <!--ENDv-model: table filter,search -->
                         </template>
                     </q-table>
                 </q-tab-panel>
-                <q-tab-panel name="stocks">
+<q-tab-panel name="stocks">
                     <q-table :rows="tableData1" table-class="customSATableClass" :columns="columns1"
                         :filter="filterSearch1" :pagination="paginationControl1"
-                        :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
-                        @request="ajaxLoadAllLeadInfo1">
+                        :filter-method="myCustomSearchFilter" row-key="name" color="grey-9" class="@request="ajaxLoadAllLeadInfo1">
                         <q-td v-slot:body-cell-createdAt="props" :props="props">{{
                             props.row.created_date == null
                                 ? "NA"
@@ -154,12 +159,12 @@
             Stocks
           </div> -->
                             <!-- <div class="col-md-6 q-my-md" align="right">
-            <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
+            <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9" class="icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
           </div>-->
                             <!--END: table title -->
                             <!--START: table filter,search -->
                             <div class="col-3">
-                                <q-input clearable color="grey-9" v-model="filterSearch1" float-label="Search By POD Number" placeholder="Type.."
+                                <q-input clearable color="grey-9" v-model="filterSearch1" label="Search By POD Number" placeholder="Type.."
                                     class="q-mr-lg" />
                             </div>
                             <!-- <div class="col-3" align="right">
@@ -168,8 +173,7 @@
                   class="text-weight-regular"
                   label="Assigned To So"
                   @click="$router.push('/sat/sparePartsAssignedToSoDetails')"
-                  color="purple-9"
-                  size="md"
+                  color="purple-9" size="md"
                 />
               </div> -->
                             <!--END: table filter,search -->
@@ -179,18 +183,16 @@
               class="text-weight-regular"
               label="Add Sub Task"
               @click="fnShowAddNewSubTaskType(props.row)"
-              color="purple-9"
-              size="md"
+              color="purple-9" size="md"
             />
           </div> :rows="tableData2"-->
                         </template>
                     </q-table>
                 </q-tab-panel>
-                <!-- <q-tab-panel name="allocatedSo">
+<q-tab-panel name="allocatedSo">
          
           <q-table :rows="tableData2" table-class="customSATableClass" :columns="columns2" :filter="filterSearch2"
-            :pagination="paginationControl2" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
-            @request="ajaxLoadAllLeadInfo2">
+            :pagination="paginationControl2" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9" class="@request="ajaxLoadAllLeadInfo2">
             <q-td v-slot:body-cell-createdAt="props" :props="props">{{
                 props.row.created_date == null
                   ? "NA"
@@ -231,14 +233,14 @@
               </div>
             </template>
           </q-table>
-        </q-tab-panel> -->
-                <q-tab-panel name="createSoPod">
+        </q-tab-panel>
+<q-tab-panel name="createSoPod">
                     <template>
                         <div class="col-sm-3">
                             <div class="row">
-                                <q-select filter clearable v-model="formData.allocate_so" @blur="$v.formData.allocate_so.$touch"
-                                    :error="$v.formData.allocate_so.$error" float-label="Select SO" class="col-md-3"
-                                    radio color="grey-9" :options="regionBasedSo" @request="regionBasedSoLoad" />
+                                <q-select filter clearable v-model="formData.allocate_so" @blur="v$.formData.allocate_so.$touch"
+                                    :error="v$.formData.allocate_so.$error" label="Select SO" class="col-md-3"
+                                    radio color="grey-9" class=":options="regionBasedSo" @request="regionBasedSoLoad" />
                             </div>
                             <div class="col-md-7">
                                 <p class="caption">Spare Parts Type*</p>
@@ -261,28 +263,27 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-5">
-                                    <q-input disable v-model="formData.pod_number" float-label="Pod Number" radio
-                                        color="grey-9" />
+                                    <q-input disable v-model="formData.pod_number" label="Pod Number" radio
+                                        color="grey-9" class="/>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-5">
-                                    <q-input disable v-model="formData.total_count" float-label="Total Count" radio
-                                        color="grey-9" />
+                                    <q-input disable v-model="formData.total_count" label="Total Count" radio
+                                        color="grey-9" class="/>
                                 </div>
                             </div>
 
                             <div class="full-width group" align="center" id="formData">
-                                <q-btn :disable="this.formData.total_count == 0" regionBasedSo size="md" type="button" color="purple-9"
-                                    @click="fnSubmitBankDetails(formData)">
+                                <q-btn :disable="this.formData.total_count == 0" regionBasedSo size="md" type="button" color="purple-9" @click="fnSubmitBankDetails(formData)">
                                     Submit</q-btn>
                             </div>
 
                         </div>
                     </template>
                 </q-tab-panel>
-            </q-tabs>
+</q-tab-panels>
 
 
             <!-- START REJECT fnRejectPodDetails-->
@@ -859,7 +860,7 @@ export default {
         //           this.$q.notify({
         //             color: "negative",
         //             position: "bottom",
-        //             message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+        //             message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
         //             icon: "thumb_down"
         //           });
         //         });
@@ -958,7 +959,7 @@ export default {
                                     this.$q.notify({
                                         color: 'negative',
                                         position: 'bottom',
-                                        message: error.body.message == null ? 'Please Try Again Later !' : error.body.message,
+                                        message: error.data.message == null ? 'Please Try Again Later !' : error.data.message,
                                         icon: 'thumb_down'
                                     })
                                 })
@@ -968,7 +969,7 @@ export default {
                             this.$q.notify({
                                 color: 'negative',
                                 position: 'bottom',
-                                message: error.body.message == null ? 'Please Try Again Later !' : error.body.message,
+                                message: error.data.message == null ? 'Please Try Again Later !' : error.data.message,
                                 icon: 'thumb_down'
                             })
                         })
@@ -1109,8 +1110,8 @@ export default {
             //     : this.formData.allocate_region);
             this.formData.allocate_region = JSON.parse(localStorage.getItem('u_i')).region
             this.formData.allocate_reseller = JSON.parse(this.formData.allocate_reseller == '' ? null : this.formData.allocate_reseller)
-            this.$v.formData.$touch();
-            if (this.$v.formData.$error) {
+            this.v$.formData.$touch();
+            if (this.v$.formData.$error) {
                 this.$q.notify({
                     color: "negative",
                     position: "bottom",
@@ -1138,9 +1139,9 @@ export default {
                             color: 'negative',
                             position: 'bottom',
                             message:
-                                error.body.message == null
+                                error.data.message == null
                                     ? 'Please Try Again Later !'
-                                    : error.body.message,
+                                    : error.data.message,
                             icon: 'thumb_down'
                         })
                     })
