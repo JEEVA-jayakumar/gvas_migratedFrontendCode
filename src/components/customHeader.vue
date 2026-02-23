@@ -1,58 +1,76 @@
 <template>
-  <q-toolbar class="bg-custom-light-grey bottom-border" color="grey-9" flat inverted>
+  <q-toolbar class="bg-white q-px-md" style="height: 64px; border-bottom: 1px solid #edf2f7">
     <q-btn
       flat
       dense
       round
       @click="triggerSideMenu"
       aria-label="Menu"
+      color="grey-7"
       v-if="getRole != 'KSN'"
     >
       <q-icon name="menu" />
     </q-btn>
-    <q-toolbar-title class>
-      <div class="row items-center vertical-middle">
-        <!-- {{localStorage.getItem('selectedTab')}} -->
-        <div class="col-auto">
+    <q-toolbar-title>
+      <div class="row items-center no-wrap">
+        <div class="col-auto q-ml-sm">
           <img
             v-if="leftDrawerOpen"
             class="cursor-pointer"
             src="~assets/images/logo.png"
-            style="height:38px;"
+            style="height:32px; filter: grayscale(0.2)"
           />
         </div>
-        <div class="col float-right" align="right">
-          <q-btn flat color="grey-9" icon="far fa-bell" />
-          <q-btn flat color="grey-9 vertical-middle">
-            <span class="mobile-hide capitalize text-weight-regular">{{getUserNAme}}</span>
-            <img
-              src="~assets/images/user.png"
-              style="height:30px; width:30px; padding: 5px"
-              class="vertical-middle"
-            />
-            <!-- Direct child of target -->
+        <q-space />
+        <div class="col-auto row items-center no-wrap">
+          <q-btn flat round dense color="grey-7" icon="notifications_none" class="q-mr-sm">
+            <q-badge color="negative" floating rounded style="padding: 3px; min-height: unset;" />
+          </q-btn>
+
+          <div class="row items-center cursor-pointer q-pl-md q-ml-md" style="border-left: 1px solid #edf2f7">
+            <div class="column q-mr-md text-right gt-xs">
+              <span class="text-subtitle2 text-weight-bold text-grey-9 lh-1">{{getUserNAme}}</span>
+              <span class="text-caption text-grey-6 lh-1">{{getRoleName}}</span>
+            </div>
+            <q-avatar size="36px" class="bg-grey-2">
+              <img src="~assets/images/user.png" />
+            </q-avatar>
             <q-menu
-              class="shadow-8"
-              anchor="bottom middle"
-              self="top middle"
-              style="min-width:350px"
+              class="shadow-16 rounded-lg"
+              anchor="bottom right"
+              self="top right"
+              style="min-width: 240px"
+              transition-show="jump-down"
+              transition-hide="jump-up"
             >
-              <q-list separator link class="no-padding">
-                <q-item v-close-popup @click="openMyAccount()">
-                  <q-item-section icon="fas fa-user" inverted color="dark" />
+              <div class="q-pa-md bg-grey-1 text-center">
+                <q-avatar size="64px" class="q-mb-sm shadow-2">
+                  <img src="~assets/images/user.png" />
+                </q-avatar>
+                <div class="text-weight-bold">{{getUserNAme}}</div>
+                <div class="text-caption text-grey-7">{{getRoleName}}</div>
+              </div>
+              <q-list padding class="text-grey-8">
+                <q-item clickable v-close-popup @click="openMyAccount()">
+                  <q-item-section avatar>
+                    <q-icon name="lock_outline" size="20px" />
+                  </q-item-section>
                   <q-item-section>
-                    <q-item-label label>Change Password</q-item-label>
+                    <q-item-label>Change Password</q-item-label>
                   </q-item-section>
                 </q-item>
-                <q-item v-close-popup @click="clearLocalStorageData()">
-                  <q-item-section icon="fas fa-sign-out-alt" inverted color="dark" />
+                <q-separator spaced />
+                <q-item clickable v-close-popup @click="clearLocalStorageData()" class="text-negative">
+                  <q-item-section avatar>
+                    <q-icon name="logout" size="20px" />
+                  </q-item-section>
                   <q-item-section>
-                    <q-item-label label>Logout</q-item-label>
+                    <q-item-label>Logout</q-item-label>
                   </q-item-section>
                 </q-item>
               </q-list>
             </q-menu>
-          </q-btn>
+          </div>
         </div>
       </div>
     </q-toolbar-title>
@@ -105,14 +123,24 @@ export default {
   },
   computed: {
     getUserNAme() {
-      return JSON.parse(localStorage.getItem("u_i")).user.name;
+      const ui = localStorage.getItem("u_i");
+      return ui ? JSON.parse(ui).user.name : "User";
     },
     getRole() {
-      if (JSON.parse(localStorage.getItem("u_i")).roles[0].role == "KSN") {
+      const ui = localStorage.getItem("u_i");
+      if (!ui) return "";
+      const parsed = JSON.parse(ui);
+      if (parsed.roles && parsed.roles.length > 0 && parsed.roles[0].role == "KSN") {
         this.$emit("fnToggleSideMenu");
       }
-      return JSON.parse(localStorage.getItem("u_i")).roles[0].role;
+      return parsed.roles && parsed.roles.length > 0 ? parsed.roles[0].role : "";
     },
+    getRoleName() {
+      const ui = localStorage.getItem("u_i");
+      if (!ui) return "";
+      const parsed = JSON.parse(ui);
+      return parsed.roles && parsed.roles.length > 0 ? parsed.roles[0].role : "Staff";
+    }
   },
 };
 </script>
