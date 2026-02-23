@@ -1,39 +1,70 @@
 <template>
-  <q-page>
-    <!-- content -->
-    <div class="row items-center window-height">
-      <div class="col-md-5 gt-sm bg-grey-4" align="center">
-        <div class="row items-center window-height full-width inline" align="center">
-          <div class="col-auto no-padding full-width" align="center">
-            <img src="~assets/images/logo.png" class="responsive vertical-align" style="width:200px" />
-          </div>
+  <q-page class="bg-grey-1 flex flex-center">
+    <div class="row full-width justify-center items-stretch" style="max-width: 1100px; min-height: 640px">
+      <!-- Image / Branding Side -->
+      <div class="col-12 col-md-6 gt-sm bg-brand rounded-left-lg flex flex-center relative-position overflow-hidden shadow-10">
+        <div class="absolute-full opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
+        <div class="text-center q-pa-xl relative-position">
+           <q-avatar size="140px" class="bg-white q-mb-xl shadow-10">
+              <img src="~assets/images/logo.png" style="width: 80%" />
+           </q-avatar>
+           <div class="text-h3 text-white text-weight-bolder q-mb-sm ls-1">BIJLIPAY</div>
+           <div class="text-h6 text-white opacity-70 text-weight-light">World-class digital payment solutions for modern businesses.</div>
         </div>
       </div>
-      <div class="col-12 col-md-7 q-px-xl">
-        <div class="row justify-center q-col-gutter-md">
-          <div class="col-12 col-sm-10 col-md-8" align="center">
-            <div class="text-h4 text-grey-9 text-weight-medium q-py-lg">Please Log In </div>
+
+      <!-- Login Form Side -->
+      <div class="col-12 col-md-5 bg-white rounded-right-lg shadow-10 flex flex-center">
+        <div class="full-width q-pa-xl" style="max-width: 450px">
+          <div class="q-mb-xl">
+             <div class="text-h4 text-weight-bolder text-grey-9 q-mb-sm">Welcome Back</div>
+             <div class="text-body1 text-grey-6">Please log in to your account to continue</div>
           </div>
-          <div class="col-12 col-sm-10 col-md-8">
-            <q-input v-model.trim="formData.email" @blur="v$.formData.email.$touch" :error="v$.formData.email.$error"
-              label="Email" color="grey-9" placeholder="Enter your email id"
-              @keyup.enter="fuSubmitLoginDetails(formData)" />
+
+          <div class="column q-gutter-y-lg">
+            <q-input
+              v-model.trim="formData.email"
+              outlined
+              @blur="v$.formData.email.$touch"
+              :error="v$.formData.email.$error"
+              label="Email Address"
+              color="primary"
+              placeholder="name@company.com"
+              @keyup.enter="fuSubmitLoginDetails(formData)"
+            >
+              <template v-slot:prepend><q-icon name="mail_outline" /></template>
+            </q-input>
+
+            <q-input
+              v-model="formData.password"
+              outlined
+              @blur="v$.formData.password.$touch"
+              :error="v$.formData.password.$error"
+              placeholder="Enter your password"
+              @keyup.enter="fuSubmitLoginDetails(formData)"
+              type="password"
+              label="Password"
+              color="primary"
+            >
+              <template v-slot:prepend><q-icon name="lock_open" /></template>
+            </q-input>
+
+            <div class="row items-center justify-between">
+              <q-checkbox v-model="formData.rememberPassword" color="primary" label="Remember me" class="text-grey-7" />
+              <q-btn flat no-caps color="primary" label="Forgot Password?" @click="fnShowForgetPasswordModal" class="text-weight-bold" />
+            </div>
+
+            <q-btn
+              unelevated
+              color="primary"
+              class="full-width q-py-md text-subtitle1 text-weight-bold shadow-2"
+              label="Sign In"
+              @click="fuSubmitLoginDetails(formData)"
+            />
           </div>
-          <div class="col-12 col-sm-10 col-md-8">
-            <q-input v-model="formData.password" @blur="v$.formData.password.$touch"
-              :error="v$.formData.password.$error" placeholder="Enter your password"
-              @keyup.enter="fuSubmitLoginDetails(formData)" type="password" label="Password" color="grey-9" />
-          </div>
-          <div class="col-12 col-sm-10 col-md-8">
-            <q-checkbox v-model="formData.rememberPassword" color="purple-9" label="Remember Password" />
-          </div>
-          <div class="col-12 col-sm-10 col-md-8" align="center">
-            <q-btn class="full-width text-weight-regular q-pa-md" no-caps color="purple-9"
-              @click="fuSubmitLoginDetails(formData)" style="max-width:300px">Log In</q-btn>
-          </div>
-          <div class="col-12 col-sm-10 col-md-8" align="center">
-            <q-btn flat no-caps class="text-purple-9 text-weight-regular" color="white"
-              @click="fnShowForgetPasswordModal">Forgot your password?</q-btn>
+
+          <div class="q-mt-xl text-center">
+             <div class="text-caption text-grey-5 uppercase ls-1">© 2024 BIJLIPAY SOLUTIONS</div>
           </div>
         </div>
       </div>

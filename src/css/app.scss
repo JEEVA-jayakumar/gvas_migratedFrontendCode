@@ -1,1 +1,88 @@
 // app global css
+
+body {
+  font-family: 'Inter', -apple-system, Helvetica Neue, Helvetica, Arial, sans-serif;
+  background-color: #f4f7f9;
+  color: #2c3e50;
+}
+
+// Global UI consistency
+.q-card {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.q-btn {
+  border-radius: 8px !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.01em;
+}
+
+.q-field--outlined .q-field__control {
+  border-radius: 8px !important;
+}
+
+// Sidebar overrides
+.q-drawer {
+  background: #ffffff !important;
+  border-right: 1px solid #eef2f6 !important;
+}
+
+.q-item {
+  border-radius: 8px;
+  margin: 2px 8px;
+  min-height: 44px;
+  transition: all 0.3s ease;
+}
+
+.q-item.q-router-link--active, .q-item--active {
+  background-color: rgba(97, 17, 106, 0.08) !important;
+  color: #61116a !important;
+  font-weight: 600;
+}
+
+.q-item:hover {
+  background-color: #f8f9fa;
+}
+
+// Table styling
+.q-table th {
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
+  color: #64748b !important;
+  background-color: #f8fafc !important;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.q-table td {
+  font-size: 0.9rem !important;
+  color: #334155 !important;
+}
+
+// Custom Utility Classes
+.text-brand { color: #61116a !important; }
+.bg-brand { background: #61116a !important; }
+
+.shadow-subtle {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03) !important;
+}
+
+.rounded-lg {
+  border-radius: 12px !important;
+}
+
+.rounded-md {
+  border-radius: 8px !important;
+}
+
+// Overriding some styles from legacy style.css if they exist
+.bg-custom-light-grey {
+  background: #f8fafc !important;
+}
+
+.bottom-border {
+  border-bottom: 1px solid #e2e8f0 !important;
+}
