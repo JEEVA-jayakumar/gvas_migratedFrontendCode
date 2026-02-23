@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-list no-border class="no-padding">
+    <q-list  class="no-padding">
       <q-item
         class="no-padding"
         v-if="Object.keys(propLeadDocumentInformation).length >= 0"
@@ -11,7 +11,7 @@
               <div class="col-md-12 text-body1">
                 <q-expansion-item separator indent opened class="full-width">
                   <template slot="header">
-                    <q-item-section icon="apps" />
+                    <q-item-section avatar><q-icon name="apps"  /></q-item-section>
                     <q-item-section class="text-body1" :sublabel="'FORMS'" />
                   </template>
                   <b><label>Agreement Form & Application Form</label></b>
@@ -35,8 +35,7 @@
                               round
                               size="sm"
                               icon="fas fa-file-pdf"
-                              color="primary"
-                            />
+                              color="primary" class="/>
                             &nbsp;{{ propGetShortInfo.aggrementForm }}
                           </div>
                         </div>
@@ -70,7 +69,7 @@
                             @click="fnViewHandedOverFileImageAgreement()"
                             class="ellipsis"
                           >
-                            <q-icon name="fas fa-image" color="amber-9" />
+                            <q-icon name="fas fa-image" color="amber-9" class="/>
                             &nbsp;{{ propGetShortInfo.aggrementForm }}
                           </div>
                         </div>
@@ -102,8 +101,7 @@
                               round
                               size="sm"
                               icon="fas fa-file-pdf"
-                              color="primary"
-                            />
+                              color="primary" class="/>
                             &nbsp;{{ propGetShortInfo.applicationForm }}
                           </div>
                         </div>
@@ -137,7 +135,7 @@
                             @click="fnViewHandedOverFileImageApplication()"
                             class="ellipsis"
                           >
-                            <q-icon name="fas fa-image" color="amber-9" />
+                            <q-icon name="fas fa-image" color="amber-9" class="/>
                             &nbsp;{{ propGetShortInfo.applicationForm }}
                           </div>
                         </div>
@@ -169,8 +167,7 @@
                               round
                               size="sm"
                               icon="fas fa-file-pdf"
-                              color="primary"
-                            />
+                              color="primary" class="/>
                             &nbsp;{{ propGetShortInfo.chequeLeafForm }}
                           </div>
                         </div>
@@ -204,7 +201,7 @@
                             @click="fnViewHandedOverFileImageCheque()"
                             class="ellipsis"
                           >
-                            <q-icon name="fas fa-image" color="amber-9" />
+                            <q-icon name="fas fa-image" color="amber-9" class="/>
                             &nbsp;{{ propGetShortInfo.chequeLeafForm }}
                           </div>
                         </div>
@@ -238,8 +235,7 @@
                               round
                               size="sm"
                               icon="fas fa-file-pdf"
-                              color="primary"
-                            />
+                              color="primary" class="/>
                             &nbsp;{{ propGetShortInfo.implementationForm }}
                           </div>
                         </div>
@@ -273,7 +269,7 @@
                             @click="fnViewHandedOverFileImageImplementation()"
                             class="ellipsis"
                           >
-                            <q-icon name="fas fa-image" color="amber-9" />
+                            <q-icon name="fas fa-image" color="amber-9" class="/>
                             &nbsp;{{ propGetShortInfo.implementationForm }}
                           </div>
                         </div>
@@ -305,8 +301,7 @@
                               round
                               size="sm"
                               icon="fas fa-file-pdf"
-                              color="primary"
-                            />
+                              color="primary" class="/>
                             &nbsp;{{ propGetShortInfo.pictureOfShop }}
                           </div>
                         </div>
@@ -340,7 +335,7 @@
                             @click="fnViewHandedOverFileImagePicture()"
                             class="ellipsis"
                           >
-                            <q-icon name="fas fa-image" color="amber-9" />
+                            <q-icon name="fas fa-image" color="amber-9" class="/>
                             &nbsp;{{ propGetShortInfo.pictureOfShop }}
                           </div>
                         </div>
@@ -387,8 +382,7 @@
             round
             size="sm"
             icon="fas fa-file-pdf"
-            color="primary"
-          />
+            color="primary" class="/>
           &nbsp;{{ propGetShortInfo.aggrementForm }}
         </div>
       </div>
@@ -404,7 +398,7 @@
           @click="fnViewHandedOverFileImageAgreement()"
           class="ellipsis"
         >
-          <q-icon name="fas fa-image" color="amber-9" />
+          <q-icon name="fas fa-image" color="amber-9" class="/>
           &nbsp;{{ propGetShortInfo.aggrementForm }}
         </div>
       </div>
@@ -447,8 +441,7 @@
             round
             size="sm"
             icon="fas fa-file-pdf"
-            color="primary"
-          />
+            color="primary" class="/>
           &nbsp;{{ propGetShortInfo.applicationForm }}
         </div>
       </div>
@@ -464,7 +457,7 @@
           @click="fnViewHandedOverFileImageApplication()"
           class="ellipsis"
         >
-          <q-icon name="fas fa-image" color="amber-9" />
+          <q-icon name="fas fa-image" color="amber-9" class="/>
           &nbsp;{{ propGetShortInfo.applicationForm }}
         </div>
       </div>
@@ -508,8 +501,7 @@
                           round
                           size="sm"
                           icon="fas fa-file-pdf"
-                          color="primary"
-                        />
+                          color="primary" class="/>
                         &nbsp;{{ propGetShortInfo.chequeLeafForm }}
                       </div>
                     </div>
@@ -525,7 +517,7 @@
                         @click="fnViewHandedOverFileImageCheque()"
                         class="ellipsis"
                       >
-                        <q-icon name="fas fa-image" color="amber-9" />
+                        <q-icon name="fas fa-image" color="amber-9" class="/>
                         &nbsp;{{ propGetShortInfo.chequeLeafForm }}
                       </div>
                     </div>
@@ -568,8 +560,7 @@
                         round
                         size="sm"
                         icon="fas fa-file-pdf"
-                        color="primary"
-                      />
+                        color="primary" class="/>
                       &nbsp;{{ propGetShortInfo.implementationForm }}
                     </div>
                   </div>
@@ -585,7 +576,7 @@
                       @click="fnViewHandedOverFileImageImplementation()"
                       class="ellipsis"
                     >
-                      <q-icon name="fas fa-image" color="amber-9" />
+                      <q-icon name="fas fa-image" color="amber-9" class="/>
                       &nbsp;{{ propGetShortInfo.implementationForm }}
                       </div>
                     </div>
@@ -627,8 +618,7 @@
                       round
                       size="sm"
                       icon="fas fa-file-pdf"
-                      color="primary"
-                    />
+                      color="primary" class="/>
                     &nbsp;{{ propGetShortInfo.pictureOfShop }}
                    </div>
                  </div>
@@ -645,7 +635,7 @@
                     @click="fnViewHandedOverFileImagePicture()"
                     class="ellipsis"
                   >
-                    <q-icon name="fas fa-image" color="amber-9" />
+                    <q-icon name="fas fa-image" color="amber-9" class="/>
                     &nbsp;{{ propGetShortInfo.pictureOfShop }}
                   </div>
                 </div>
@@ -665,7 +655,7 @@
                 <div class="col-md-12 text-body1">
                   <q-expansion-item separator indent opened class="full-width">
                     <template slot="header">
-                      <q-item-section icon="apps" />
+                      <q-item-section avatar><q-icon name="apps"  /></q-item-section>
                       <q-item-section
                         class="text-body1"
                         :sublabel="
@@ -707,8 +697,7 @@
                                 round
                                 size="xs"
                                 class="q-ma-xs"
-                                color="green"
-                                icon="fas fa-check"
+                                color="green" class="icon="fas fa-check"
                                 @click.stop="
                                   fnDocumentApproveModal(subDocument)
                                 "
@@ -717,16 +706,14 @@
                                 round
                                 size="xs"
                                 class="q-ma-xs"
-                                color="red"
-                                icon="fas fa-times"
+                                color="red" class="icon="fas fa-times"
                                 @click.stop="fnDocumentRejectModal(subDocument)"
                               />
                               <q-btn
                               round
                               size="xs"
                               class="q-ma-xs"
-                              color="primary"
-                              icon="fas fa-plus"
+                              color="primary" class="icon="fas fa-plus"
                               @click.stop="fileUploadForUsingMerchantId(subDocument.merchantDocumentType)"
                             />
                             </q-item-section>
@@ -746,8 +733,7 @@
                                   round
                                   size="xs"
                                   class="q-ma-xs"
-                                  color="green"
-                                  icon="fas fa-check"
+                                  color="green" class="icon="fas fa-check"
                                   @click.stop="
                                     fnDocumentApproveModal(subDocument)
                                   "
@@ -756,8 +742,7 @@
                                   round
                                   size="xs"
                                   class="q-ma-xs"
-                                  color="red"
-                                  icon="fas fa-times"
+                                  color="red" class="icon="fas fa-times"
                                   @click.stop="
                                     fnDocumentRejectModal(subDocument)
                                   "
@@ -781,8 +766,7 @@
                                     round
                                     size="sm"
                                     icon="fas fa-file-pdf"
-                                    color="primary"
-                                  />
+                                    color="primary" class="/>
                                   &nbsp;{{ item.fileName }}
                                 </div>
                               </div>
@@ -937,8 +921,7 @@
                                   >
                                     <q-icon
                                       name="fas fa-file-pdf"
-                                      color="negative"
-                                    />
+                                      color="negative" class="/>
                                     &nbsp;{{ filesAttachedEarlier.fileName }}
                                   </div>
                                 </div>
@@ -978,8 +961,7 @@
                                   >
                                     <q-icon
                                       name="fas fa-image"
-                                      color="amber-9"
-                                    />
+                                      color="amber-9" class="/>
                                     &nbsp;{{ filesAttachedEarlier.fileName }}
                                   </div>
                                 </div>
@@ -996,8 +978,7 @@
                                   )
                                 "
                                 round
-                                color="negative"
-                                label="Remove"
+                                color="negative" class="label="Remove"
                               />
                             </q-item-section>
                           </q-item>
@@ -1125,8 +1106,7 @@
                                   >
                                     <q-icon
                                       name="fas fa-file-pdf"
-                                      color="negative"
-                                    />
+                                      color="negative" class="/>
                                     &nbsp;{{ filesAttachedEarlier.fileName }}
                                   </div>
                                 </div>
@@ -1166,8 +1146,7 @@
                                   >
                                     <q-icon
                                       name="fas fa-image"
-                                      color="amber-9"
-                                    />
+                                      color="amber-9" class="/>
                                     &nbsp;{{ filesAttachedEarlier.fileName }}
                                   </div>
                                 </div>
@@ -1183,8 +1162,7 @@
                                   )
                                 "
                                 round
-                                color="negative"
-                                label="Remove"
+                                color="negative" class="label="Remove"
                               />
                             </q-item-section>
                           </q-item>
@@ -1293,8 +1271,7 @@
                                   >
                                     <q-icon
                                       name="fas fa-file-pdf"
-                                      color="negative"
-                                    />
+                                      color="negative" class="/>
                                     &nbsp;{{ filesAttachedEarlier.fileName }}
                                   </div>
                                 </div>
@@ -1334,8 +1311,7 @@
                                   >
                                     <q-icon
                                       name="fas fa-image"
-                                      color="amber-9"
-                                    />
+                                      color="amber-9" class="/>
                                     &nbsp;{{ filesAttachedEarlier.fileName }}
                                   </div>
                                 </div>
@@ -1352,8 +1328,7 @@
                                   )
                                 "
                                 round
-                                color="negative"
-                                label="Remove"
+                                color="negative" class="label="Remove"
                               />
                             </q-item-section>
                           </q-item>
@@ -1481,8 +1456,7 @@
                                   >
                                     <q-icon
                                       name="fas fa-file-pdf"
-                                      color="negative"
-                                    />
+                                      color="negative" class="/>
                                     &nbsp;{{ filesAttachedEarlier.fileName }}
                                   </div>
                                 </div>
@@ -1522,8 +1496,7 @@
                                   >
                                     <q-icon
                                       name="fas fa-image"
-                                      color="amber-9"
-                                    />
+                                      color="amber-9" class="/>
                                     &nbsp;{{ filesAttachedEarlier.fileName }}
                                   </div>
                                 </div>
@@ -1539,8 +1512,7 @@
                                   )
                                 "
                                 round
-                                color="negative"
-                                label="Remove"
+                                color="negative" class="label="Remove"
                               />
                             </q-item-section>
                           </q-item>
@@ -2045,7 +2017,7 @@ export default {
 //       this.$q.notify({
 //         color: "negative",
 //         position: "bottom",
-//         message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+//         message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
 //         icon: "thumb_down"
 //       });
 //     });
@@ -2149,7 +2121,7 @@ saveformsLists(fileName, mimeType, formTypeToUpdate) {
       this.$q.notify({
         color: "negative",
         position: "bottom",
-        message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+        message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
         icon: "thumb_down"
       });
     });
@@ -2326,9 +2298,7 @@ saveformsLists(fileName, mimeType, formTypeToUpdate) {
                 color: "negative",
                 position: "bot  tom",
                 message:
-                  error.body.message == null
-                    ? "Please Try Again Later !"
-                    : error.body.message,
+                  (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                 icon: "thumb_down"
               });
             });

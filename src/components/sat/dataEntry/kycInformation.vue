@@ -53,9 +53,8 @@
     <div class="row group q-py-md items-center">
       <div class="col-6">
         <q-input
-          color="grey-9"
-          v-model="leadDataEntryRemarks"
-          float-label="Remarks"
+          color="grey-9" v-model="leadDataEntryRemarks"
+          label="Remarks"
           placeholder="Remarks"
         />
       </div>
@@ -66,15 +65,14 @@
       </div>
     </div>
     <q-stepper-navigation>
-      <q-btn color="primary" class="q-ma-xs" icon="check" @click="validate" label="Submit"/>
+      <q-btn color="primary" class="class="q-ma-xs" icon="check" @click="validate" label="Submit"/>
       <q-btn
-        color="amber-10"
-        class="q-ma-xs"
+        color="amber-10" class="class="q-ma-xs"
         icon="save"
         label="Save Partial"
         @click="$emit('saveData','kyc',merchant)"
       />
-      <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="$emit('goBack')" label="Back"/>
+      <q-btn color="grey-7" class="class="q-ma-xs" icon="block" @click="$emit('goBack')" label="Back"/>
     </q-stepper-navigation>
   </div>
 </template>
@@ -139,8 +137,8 @@ export default {
       });
     },
     validate() {
-      this.$v.merchant.companyInformation.$touch();
-      if (this.$v.merchant.companyInformation.$error) {
+      this.v$.merchant.companyInformation.$touch();
+      if (this.v$.merchant.companyInformation.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$emit("submit", "kyc", this.merchant);

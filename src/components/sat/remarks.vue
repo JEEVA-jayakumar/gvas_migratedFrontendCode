@@ -13,28 +13,25 @@
           <div class="col-12 text-h6 q-py-md">Save with remarks</div>
           <div class="col-12">
             <q-input
-              color="grey-9"
-              v-model="formData.remarks"
-              @blur="$v.formData.remarks.$touch"
-              :error="$v.formData.remarks.$error"
+              color="grey-9" v-model="formData.remarks"
+              @blur="v$.formData.remarks.$touch"
+              :error="v$.formData.remarks.$error"
               type="textarea"
-              float-label="Remarks"
+              label="Remarks"
               :max-height="100"
             />
           </div>
           <div class="col-12 group">
             <q-btn
               icon="save"
-              color="amber-9"
-              class="q-ma-sm float-right"
+              color="amber-9" class="class="q-ma-sm float-right"
               @click="saveRemarks(formData)"
               align="right"
               label="Save"
             />
             <q-btn
               icon="block"
-              color="grey-5"
-              @click="emitToggleRemarks()"
+              color="grey-5" @click="emitToggleRemarks()"
               class="q-ma-sm float-right text-dark"
               align="right"
               v-close-overlay
@@ -83,8 +80,8 @@ export default {
       this.$emit("toggleLeadModal");
     },
     saveRemarks(finalFormData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({
@@ -109,7 +106,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

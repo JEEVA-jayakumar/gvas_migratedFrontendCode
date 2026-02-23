@@ -5,7 +5,7 @@
         <div class="row items-center bottom-border q-py-sm">
           <div class="col">Add Remarks</div>
           <div class="col-auto">
-            <q-btn round size="sm" @click="emitToggleViewRemarks" outline color="dark" icon="clear" />
+            <q-btn round size="sm" @click="emitToggleViewRemarks" outline color="dark" class="icon="clear" />
           </div>
   
         </div>
@@ -14,7 +14,7 @@
         <div>
           <div>
             <q-scroll-area style="width: 300px; height: 150px;">
-              <q-input class="row" v-model="area"  type="textarea" float-label="Add remarks" />
+              <q-input class="row" v-model="area"  type="textarea" label="Add remarks" />
               <div class="row">
                 <!-- <div class="col-md-4"></div> -->
                 <div class="col-md-4"/>
@@ -23,7 +23,7 @@
                     <div class="col">
                     </div>
                   </div>
-                    <q-btn color="purple" label="Submit" />
+                    <q-btn color="purple" class="label="Submit" />
                   </div>
                 </div>
   

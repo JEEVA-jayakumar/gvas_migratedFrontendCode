@@ -20,8 +20,7 @@
             row-key="id"
             :loading="tableAjaxLoading"
             :rows-per-page-options="[10,20,50,100,150,200]"
-            color="dark"
-            @request="ajaxLoadAllLeadInfo"
+            color="dark" class="@request="ajaxLoadAllLeadInfo"
           >
             <q-td
               v-slot:body-cell-leadNumber="props"
@@ -36,18 +35,15 @@
             <q-td
               v-slot:body-cell-submitToMarsDate="props"
               :props="props"
-              >{{
-                props.row.submitToMarsDate | moment("Do MMM Y")
-              }}</q-td
+              >{{ $moment_format(props.row.submitToMarsDate, "Do MMM Y") }}</q-td
             >
             <template v-slot:top="props">
               <div class="col-md-5">
                 <q-input
                   clearable
-                  color="grey-9"
-                  v-model="filterSearch"
+                  color="grey-9" v-model="filterSearch"
                   placeholder="Type.."
-                  float-label="Search By Lead Number"
+                  label="Search By Lead Number"
                   class="q-mr-lg q-py-sm"
                 />
               </div>

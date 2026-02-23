@@ -51,9 +51,7 @@
                 : props.row.leadInformation.leadAddress
           }}</q-td>
           <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-            <span class="label">{{
-                props.row.deviceStatusDate | moment("Do MMM Y")
-            }}</span>
+            <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
           </q-td>
           <q-td v-slot:body-cell-viewDocument="props" :props="props">
   
@@ -62,7 +60,7 @@
               props.row.implementationFormMimeType.includes('application/pdf')
             " class="cursor-pointer">
               <div @click="fnPDFViewModal(props.row.implementationForm)">
-                <q-icon name="fas fa-file-pdf" color="primary" />
+                <q-icon name="fas fa-file-pdf" color="primary" class="/>
                 <!-- <a href>{{GLOBAL_FILE_FETCH_URL+ '/'+props.row.implementationForm}}</a> -->
                 &nbsp;{{ props.row.implementationForm }}
               </div>
@@ -81,7 +79,7 @@
                     GLOBAL_FILE_FETCH_URL + '/' + props.row.implementationForm,
                   ]" style="max-width: 15%" />
                 </viewer>
-                <!-- <q-icon name="fas fa-image" color="amber-9" />
+                <!-- <q-icon name="fas fa-image" color="amber-9" class="/>
                 &nbsp;{{ props.row.implementationForm }} -->
               </div>
             </div>
@@ -98,11 +96,11 @@
                   style="max-width:100%"
                 />
               </viewer>
-              <q-icon name="fas fa-image" color="amber-9" />
+              <q-icon name="fas fa-image" color="amber-9" class="/>
               &nbsp;{{props.row.pictureOfShop}}
             </div>-->
             <!-- <div @click="fnPDFViewModal(props.row.pictureOfShop)">
-              <q-icon name="fas fa-file-pdf" color="primary" />
+              <q-icon name="fas fa-file-pdf" color="primary" class="/>
               &nbsp;{{props.row.pictureOfShop}}
             </div>-->
             <div v-if="
@@ -110,7 +108,7 @@
               props.row.pictureOfShopMimeType.includes('application/pdf')
             " class="cursor-pointer">
               <div @click="fnPDFViewModal(props.row.pictureOfShop)">
-                <q-icon name="fas fa-file-pdf" color="primary" />
+                <q-icon name="fas fa-file-pdf" color="primary" class="/>
                 <!-- <a href>{{GLOBAL_FILE_FETCH_URL+ '/'+props.row.pictureOfShop}}</a> -->
                 &nbsp;{{ props.row.pictureOfShop }}
               </div>
@@ -148,12 +146,12 @@
                   style="max-width:100%"
                 />
               </viewer>
-              <q-icon name="fas fa-image" color="amber-9" />
+              <q-icon name="fas fa-image" color="amber-9" class="/>
               &nbsp;{{props.row.cpvForm}}
             </div>-->
   
             <!-- <div @click="fnPDFViewModal(props.row.cpvForm)">
-              <q-icon name="fas fa-file-pdf" color="primary" />
+              <q-icon name="fas fa-file-pdf" color="primary" class="/>
               &nbsp;{{props.row.cpvForm}}
             </div>-->
             <div v-if="
@@ -161,7 +159,7 @@
               props.row.cpvFormMimeType.includes('application/pdf')
             " class="cursor-pointer">
               <div @click="fnPDFViewModal(props.row.cpvForm)">
-                <q-icon name="fas fa-file-pdf" color="primary" />
+                <q-icon name="fas fa-file-pdf" color="primary" class="/>
                 <!-- <a href>{{GLOBAL_FILE_FETCH_URL+ '/'+props.row.pictureOfShop}}</a> -->
                 &nbsp;{{ props.row.cpvForm }}
               </div>
@@ -200,8 +198,7 @@
             </div>
             <div v-else>
               <q-btn dense no-caps no-wrap label="Approve" icon="done" size="md" @click="fnShowConvertToSat(props.row)"
-                color="green-5"></q-btn>
-              <!-- @click="$router.push('/sat/inventory/'+ props.row.tid+'/edit/data')" -->
+                color="green-5"></q-btn>" class="<!-- @click="$router.push('/sat/inventory/'+ props.row.tid+'/edit/data')" -->
             </div>
           </q-td>
           <q-td v-slot:body-cell-data="props" :props="props">
@@ -211,8 +208,7 @@
             </div>
             <div v-else>
               <q-btn dense no-caps no-wrap label="Reject" icon="close" size="md" @click="fnShowConvertReject(props.row)"
-                color="red-5"></q-btn>
-            </div>
+                color="red-5"></q-btn>" class="</div>
           </q-td>
           <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative">
           </q-btn>-->
@@ -223,8 +219,8 @@
           <template slot="top">
             <!--START: table filter,search,excel download -->
             <div class="col-5">
-              <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
-                float-label="Search by MID, TID, Merchant Name" class="q-mr-lg q-py-sm" />
+              <q-input clearable v-model="filter" separator color="grey-9" class="placeholder="Type.."
+                label="Search by MID, TID, Merchant Name" class="q-mr-lg q-py-sm" />
        </div>
      <div class="col-2">
             <q-input
@@ -232,7 +228,7 @@
               v-model="formData.fromDate"
               :min="yesterday"
               :max="tomorrow"
-              float-label="From Date"
+              label="From Date"
             />
           </div>
           <div class="col-2">
@@ -241,14 +237,13 @@
               v-model="formData.toDate"
               :min="yesterday"
               :max="tomorrow"
-              float-label="To Date"
+              label="To Date"
             />
           </div>
           <div class="col-2">
             <q-btn
               align="right"
-              color="purple-9"
-              :disabled="
+              color="purple-9" class=":disabled="
                 formData.fromDate == '' ||
                 formData.fromDate == null ||
                 formData.toDate == '' ||
@@ -258,7 +253,7 @@
               @click="SubmitData(formData)"
               >Submit</q-btn
             >
-            <q-btn color="red" v-if="selectedRow" @click="DeleteData">
+            <q-btn color="red" class="v-if="selectedRow" @click="DeleteData">
               <q-icon name="delete" />
             </q-btn>
      </div>

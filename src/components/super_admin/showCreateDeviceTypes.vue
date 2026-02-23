@@ -9,17 +9,16 @@
     >
       <form>
         <div class="text-h6 text-weight-regular q-py-md bottom-border items-center">
-          <q-icon name="add_box" size="25px" color="purple-9"/>Add Device
+          <q-icon name="add_box" size="25px" color="purple-9"/>Add" class="Device
         </div>
         <div class="column-inline q-py-md gutter-sm items-center">
           <div>
             <q-input
               v-model="formData.deviceName"
-              @blur="$v.formData.deviceName.$touch"
-              :error="$v.formData.deviceName.$error"
+              @blur="v$.formData.deviceName.$touch"
+              :error="v$.formData.deviceName.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="Device Type"
+              color="grey-9" class="label="Device Type"
               placeholder="Device Type"
             />
           </div>
@@ -28,12 +27,11 @@
               <div class="col">
                 <q-color
                   v-model="formData.colorCode"
-                  @blur="$v.formData.colorCode.$touch"
-                  :error="$v.formData.colorCode.$error"
+                  @blur="v$.formData.colorCode.$touch"
+                  :error="v$.formData.colorCode.$error"
                   popover
-                  float-label="Choose a role color"
-                  color="grey-9"
-                />
+                  label="Choose a role color"
+                  color="grey-9" class="/>
               </div>
               <div class="col-auto">
                 <q-btn round :style="'background:'+formData.colorCode"/>
@@ -44,18 +42,17 @@
             <q-input
               v-model="formData.serialNumberLength"
               type="number"
-              @blur="$v.formData.serialNumberLength.$touch"
-              :error="$v.formData.serialNumberLength.$error"
+              @blur="v$.formData.serialNumberLength.$touch"
+              :error="v$.formData.serialNumberLength.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="Serial Number Length"
+              color="grey-9" class="label="Serial Number Length"
               placeholder="Serial Number Length"
             />
           </div>
           <div>
-            <q-radio v-for="(item, index) in device.flagOptions" :key="index" color="grey-9" v-model.trim="formData.isDevice"
-            @blur="$v.formData.isDevice.$touch"
-              :error="$v.formData.isDevice.$error"
+            <q-radio v-for="(item, index) in device.flagOptions" :key="index" color="grey-9" class="v-model.trim="formData.isDevice"
+            @blur="v$.formData.isDevice.$touch"
+              :error="v$.formData.isDevice.$error"
           :val="item.value" :label="item.label" />
           </div>
           <div class="group" align="right">
@@ -64,16 +61,14 @@
               align="right"
               icon="block"
               class="text-weight-regular text-grey-8"
-              color="grey-6"
-              @click="emitfnshowAddDeviceType()"
+              color="grey-6" @click="emitfnshowAddDeviceType()"
               label="Cancel"
             />
             <q-btn
               align="right"
               icon="check"
               @click="fnfinalsubmitDeviceType(formData)"
-              color="purple-9"
-              label="save"
+              color="purple-9" class="label="save"
             />
           </div>
         </div>
@@ -143,8 +138,8 @@ export default {
       this.$emit("emitfnForDeviceTypeTable");
     },
     fnfinalsubmitDeviceType(requestParams) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();

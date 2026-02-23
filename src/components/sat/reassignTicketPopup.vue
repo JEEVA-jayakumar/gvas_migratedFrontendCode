@@ -29,7 +29,7 @@
                 </div>
                 <div class="q-mb-md">
                   <q-item-label><b>SAT forwarded date:</b></q-item-label>
-                  <div>{{this.propRowDetails.subTicketsList[0].moveToSatDate | moment("Do MMM Y")}}</div>
+                  <div>{{ $moment_format(this.propRowDetails.subTicketsList[0].moveToSatDate, "Do MMM Y") }}</div>
                 </div>
                 <br />
                 <div class="q-mb-md">
@@ -38,8 +38,7 @@
                     <textarea
                       placeholder="Reason Type.."
                       class="q-my-md custom-textarea"
-                      color="grey-9"
-                      align="left"
+                      color="grey-9" class="align="left"
                       v-model="formData.reason"
                       :style="{ width: '60%', height: '56px' }"
                     ></textarea>
@@ -52,10 +51,9 @@
                   style="width: 300px"
                   filter
                   clearable
-                  color="grey-9"
-                  v-model="formData.so"
+                  color="grey-9" v-model="formData.so"
                   :options="assignToOptions"
-                  float-label="Select FSE Name*"
+                  label="Select FSE Name*"
                 /><br /><br />
                 <div class="q-mb-md row justify-end items-center">
                   <q-item-label><b>Reassign Count:</b></q-item-label>
@@ -66,8 +64,7 @@
                   <q-btn
                     label="Assign History"
                     @click="fnAssignHistoryPopup(props)"
-                    color="purple-9"
-                  />
+                    color="purple-9" class="/>
                 </div>
               </div>
             </div>
@@ -80,8 +77,7 @@
               style="width: 90px"
               label="Re-Assign"
               @click="fnReassignTickets(formData)"
-              color="blue"
-            />
+              color="blue" class="/>
             <q-btn
               highlight
               push
@@ -89,8 +85,7 @@
               style="width: 90px"
               align="center"
               @click="emitfnshowUpdateOpenedExternal()"
-              color="negative"
-            />
+              color="negative" class="/>
           </q-card-actions>
         </q-card>
       </div>
@@ -273,9 +268,7 @@ export default {
                 color: "negative",
                 position: "bottom",
                 message:
-                  error.body.message == null
-                    ? "Please Try Again Later !"
-                    : error.body.message,
+                  (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                 icon: "thumb_down"
               });
             });

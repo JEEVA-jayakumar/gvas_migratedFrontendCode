@@ -17,7 +17,7 @@
         <q-td
           v-slot:body-cell-updatedAt="props"
           :props="props"
-        >{{ props.row.leadInformation.updatedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.leadInformation.updatedAt, "Do MMM Y") }}</q-td>
         <q-td v-slot:body-cell-Status="props" :props="props">
           <span
             class="label text-positive"
@@ -75,8 +75,7 @@
             highlight
             push
             outline
-            color="purple-9"
-            size="sm"
+            color="purple-9" size="sm"
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
           >Data Entry</q-btn>
           <q-btn
@@ -84,8 +83,7 @@
             highlight
             push
             outline
-            color="purple-9"
-            size="sm"
+            color="purple-9" size="sm"
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data/rejectfinance')"
           >Data Entry</q-btn>
           <q-btn
@@ -93,8 +91,7 @@
             highlight
             push
             outline
-            color="purple-9"
-            size="sm"
+            color="purple-9" size="sm"
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data/reject')"
           >Data Entry</q-btn>
           <q-btn
@@ -102,8 +99,7 @@
             highlight
             push
             outline
-            color="purple-9"
-            size="sm"
+            color="purple-9" size="sm"
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data/rejectrsm')"
           >Data Entry</q-btn>
           <q-btn
@@ -111,8 +107,7 @@
             v-else-if="props.row.leadInformation.cmsLeadStatus== 23"
             highlight
             push
-            color="purple-9"
-            size="sm"
+            color="purple-9" size="sm"
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
           >Submitted To Mars</q-btn>
           <q-btn
@@ -121,8 +116,7 @@
             highlight
             outline
             push
-            color="purple-9"
-            size="sm"
+            color="purple-9" size="sm"
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
           >Data Entry</q-btn>
         </q-td>
@@ -131,12 +125,11 @@
           <div class="col-md-5">
             <q-input
               clearable
-              color="grey-9"
-              v-model="filter1"
+              color="grey-9" v-model="filter1"
               placeholder="Type.."
               :debounce="600"
               class="q-mr-lg q-py-sm"
-              float-label="Search By MID/TID/Merchant Name "
+              label="Search By MID/TID/Merchant Name "
             />
           </div>
           <!--END: table filter,search -->
@@ -167,8 +160,7 @@
             highlight
             push
             outline
-            color="purple-9"
-            size="sm"
+            color="purple-9" size="sm"
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
           >Data Entry</q-btn>
         </q-td>
@@ -178,12 +170,11 @@
           <div class="col-md-5">
             <q-input
               clearable
-              color="grey-9"
-              v-model="filter"
+              color="grey-9" v-model="filter"
               placeholder="Type.."
               :debounce="600"
               class="q-mr-lg q-py-sm"
-              float-label="Search By MID/TID/Merchant Name"
+              label="Search By MID/TID/Merchant Name"
             />
           </div>
           <!--END: table filter,search -->

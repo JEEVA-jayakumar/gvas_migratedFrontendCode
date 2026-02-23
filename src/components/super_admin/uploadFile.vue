@@ -47,8 +47,7 @@
             <q-btn
               dense
               outline
-              color="grey-7"
-              size="sm"
+              color="grey-7" size="sm"
               class="file-return text-faded no-pointer-events"
             >{{uploadFileName}}</q-btn>
           </div>
@@ -57,8 +56,7 @@
           <q-btn
             icon="done"
             v-if="sendForDataEntry"
-            color="positive"
-            class="center"
+            color="positive" class="class="center"
             @click="finalFileUploadAndSubmit()"
             align="right"
             label="Submit"
@@ -66,8 +64,7 @@
           <q-btn
             icon="done"
             v-if="sendForDataEntry"
-            color="positive"
-            class="center"
+            color="positive" class="class="center"
             @click="finalFileUploadAndSubmit()"
             align="right"
             label="cancel"

@@ -12,31 +12,29 @@
           <div align="left" class="text-weight-light text-grey-8 q-mb-md">Reason</div>
           <div class="gutter-xs">
             <q-radio 
-            @blur="$v.formData.qrLeadVerificationStatus.reasonType.$touch"      
-            :error="$v.formData.qrLeadVerificationStatus.reasonType.$error" v-model="formData.qrLeadVerificationStatus.reasonType" val="Short Fund" color="grey-9" label="Short Fund" />
-            <q-radio @blur="$v.formData.qrLeadVerificationStatus.reasonType.$touch"      
-            :error="$v.formData.qrLeadVerificationStatus.reasonType.$error" v-model="formData.qrLeadVerificationStatus.reasonType" val="Excess Fund" color="grey-9" label="Excess Fund" />
-            <q-radio @blur="$v.formData.qrLeadVerificationStatus.reasonType.$touch"      
-            :error="$v.formData.qrLeadVerificationStatus.reasonType.$error" v-model="formData.qrLeadVerificationStatus.reasonType" val="Cheque Bounce" color="grey-9" label="Cheque Bounce" />
-            <q-radio @blur="$v.formData.qrLeadVerificationStatus.reasonType.$touch"      
-            :error="$v.formData.qrLeadVerificationStatus.reasonType.$error" v-model="formData.qrLeadVerificationStatus.reasonType" val="No Fund" color="grey-9" label="No Fund" />
-            <q-radio @blur="$v.formData.qrLeadVerificationStatus.reasonType.$touch"      
-            :error="$v.formData.qrLeadVerificationStatus.reasonType.$error" v-model="formData.qrLeadVerificationStatus.reasonType" val="Others" color="grey-9" label="Others" />
+            @blur="v$.formData.qrLeadVerificationStatus.reasonType.$touch"
+            :error="v$.formData.qrLeadVerificationStatus.reasonType.$error" v-model="formData.qrLeadVerificationStatus.reasonType" val="Short Fund" color="grey-9" class="label="Short Fund" />
+            <q-radio @blur="v$.formData.qrLeadVerificationStatus.reasonType.$touch"
+            :error="v$.formData.qrLeadVerificationStatus.reasonType.$error" v-model="formData.qrLeadVerificationStatus.reasonType" val="Excess Fund" color="grey-9" class="label="Excess Fund" />
+            <q-radio @blur="v$.formData.qrLeadVerificationStatus.reasonType.$touch"
+            :error="v$.formData.qrLeadVerificationStatus.reasonType.$error" v-model="formData.qrLeadVerificationStatus.reasonType" val="Cheque Bounce" color="grey-9" class="label="Cheque Bounce" />
+            <q-radio @blur="v$.formData.qrLeadVerificationStatus.reasonType.$touch"
+            :error="v$.formData.qrLeadVerificationStatus.reasonType.$error" v-model="formData.qrLeadVerificationStatus.reasonType" val="No Fund" color="grey-9" class="label="No Fund" />
+            <q-radio @blur="v$.formData.qrLeadVerificationStatus.reasonType.$touch"
+            :error="v$.formData.qrLeadVerificationStatus.reasonType.$error" v-model="formData.qrLeadVerificationStatus.reasonType" val="Others" color="grey-9" class="label="Others" />
           </div>
           <q-input
             type="textarea"
             placeholder="Type.."
-            @blur="$v.formData.qrLeadVerificationStatus.reason.$touch"      
-            :error="$v.formData.qrLeadVerificationStatus.reason.$error" 
+            @blur="v$.formData.qrLeadVerificationStatus.reason.$touch"
+            :error="v$.formData.qrLeadVerificationStatus.reason.$error"
             class="q-my-md"
-            color="grey-9"
-            align="left"
+            color="grey-9" class="align="left"
             value=""
             v-model="formData.qrLeadVerificationStatus.reason"
           />
-          <q-btn color="negative" class="q-ma-sm float-right" @click="financeRejectSubmit(formData)" align="right" label="Reject" />
-          <q-btn align="right" color="grey-9" 
-            class="float-right q-ma-sm" @click="emitToggleReject(showQrRejectModel)">Cancel
+          <q-btn color="negative" class="class="q-ma-sm float-right" @click="financeRejectSubmit(formData)" align="right" label="Reject" />
+          <q-btn align="right" color="grey-9" class="class="float-right q-ma-sm" @click="emitToggleReject(showQrRejectModel)">Cancel
           </q-btn>
         </div>
       </q-dialog>
@@ -98,8 +96,8 @@ export default {
       this.$emit("closeQrRejectModel", "reloadQrPaymentTrackerData");
     },
     financeRejectSubmit(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q
@@ -132,7 +130,7 @@ export default {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
-                  message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                  message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                   icon: "thumb_down"
                 });
               });

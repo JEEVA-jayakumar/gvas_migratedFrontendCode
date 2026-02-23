@@ -19,23 +19,23 @@
         <!-- <q-td
           v-slot:body-cell-createdAt="props"
           :props="props"
-        >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-receivedAt="props"
           :props="props"
-        >{{ props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.receivedAt, "Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-receivedAt="props"
           :props="props"
-        >{{ props.row.receivedAt ==null? "NA" : props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.receivedAt ==null? "NA" : props.row.receivedAt, "Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-DeviceList="props"
           :props="props"
-        >{{ props.row.device.createDate | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.device.createDate, "Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-ModifyDate="props"
           :props="props"
-        >{{ props.row.device.modifyDate | moment("Do MMM Y") }}</q-td>-->
+        >{{ $moment_format(props.row.device.modifyDate, "Do MMM Y") }}</q-td>-->
 
         <template v-slot:top="props">
           <div class="col-md-5">
@@ -43,9 +43,8 @@
               clearable
               v-model="filter"
               separator
-              color="grey-9"
-              placeholder="Type.."
-              float-label="Sim Number"
+              color="grey-9" class="placeholder="Type.."
+              label="Sim Number"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -68,7 +67,7 @@
               :fields="json_fields"
               name="InventoryWithReseller.xls"
             >
-              <q-btn outline color="grey-9" label="Download as excel" />
+              <q-btn outline color="grey-9" class="label="Download as excel" />
             </downloadExcel> -->
           </div>
           <!--END: table excel download -->

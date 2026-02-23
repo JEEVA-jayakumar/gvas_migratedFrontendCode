@@ -19,9 +19,9 @@
             <div class="row q-py-md">
               <div class="col-md-12">
                 <q-select
-                @blur="$v.formData.device.$touch"   
-                :error="$v.formData.device.$error" 
-                float-label="Select a device"
+                @blur="v$.formData.device.$touch"
+                :error="v$.formData.device.$error"
+                label="Select a device"
                 placeholder="Available devices"
                 v-model="formData.device"
                 :options="fnDeviceTypes(propDeviceTypes)"
@@ -51,11 +51,10 @@
             <div class="row q-py-md">
               <div class="col-md-12">
                 <q-input v-model.trim="formData.serialNumber" 
-                @blur="$v.formData.serialNumber.$touch"   
-                :error="$v.formData.serialNumber.$error" 
+                @blur="v$.formData.serialNumber.$touch"
+                :error="v$.formData.serialNumber.$error"
                 class="text-weight-regular text-grey-8" 
-                color="grey-9" 
-                float-label="Enter Serial Number Manually" 
+                color="grey-9" class="label="Enter Serial Number Manually"
                 placeholder="Serial Number" 
                 />
               </div>
@@ -64,7 +63,7 @@
               <div class="col-md-12" align="right">
                 <q-btn flat class="bg-white text-weight-regular text-grey-8 q-px-lg"  @click="emitfaultyInventoryComponent()">Cancel
                 </q-btn>
-                <q-btn class="q-px-lg" @click="fnSubmitDamagedDevice(formData)" color="purple-9" style="color: #e3e4e5;background: #1f2c3f !important;">Add
+                <q-btn class="q-px-lg" @click="fnSubmitDamagedDevice(formData)" color="purple-9" class="style="color: #e3e4e5;background: #1f2c3f !important;">Add
                 </q-btn>
               </div>
             </div>
@@ -149,8 +148,8 @@ export default {
     },
 
     fnSubmitDamagedDevice(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.FEED_FAULTY_DEVICES_INVENTORY(formData)
@@ -176,7 +175,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

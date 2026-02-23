@@ -6,8 +6,7 @@
        <!-- <q-btn
           icon="cloud_upload"
           class="q-ma-sm"
-          color="positive"
-          label="Upload Bank List"
+          color="positive" class="label="Upload Bank List"
           @click="fnUploadDocumentAndSubmit"
         />-->
       </div>
@@ -20,22 +19,21 @@
             <div class="col-md-6">
               <q-select
                 v-model.trim="formData.bank"
-                @blur="$v.formData.bank.$touch"
-                :error="$v.formData.bank.$error"
+                @blur="v$.formData.bank.$touch"
+                :error="v$.formData.bank.$error"
                 class="text-weight-regular text-grey-8"
                 :options="dropDown.leadSourceOptions"
-                float-label="*Select TID"
+                label="*Select TID"
                 
               />
             </div>
               <div class="col-md-6">
               <q-input
                 v-model.trim="formData.emp_id"
-                @blur="$v.formData.emp_id.$touch"
-                :error="$v.formData.emp_id.$error"
+                @blur="v$.formData.emp_id.$touch"
+                :error="v$.formData.emp_id.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9"
-                float-label="*Enter Serial Number"
+                color="grey-9" class="label="*Enter Serial Number"
                 
               />
               </div>
@@ -47,8 +45,7 @@
         <q-btn
           size="md"
           type="button"
-          color="purple-9"
-          @click="fnSubmitBankDetails(formData)"
+          color="purple-9" @click="fnSubmitBankDetails(formData)"
         >Submit</q-btn>
       </div>
     </form>
@@ -144,8 +141,8 @@ export default {
     ...mapActions("leadSource", ["LEAD_SOURCE_ACTIVE_LIST"]),
     ...mapActions("Bank_SO", ["SAVE_BANK_SO"]),
     fnSubmitBankDetails(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
         return;
       } else {

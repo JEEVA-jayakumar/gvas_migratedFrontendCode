@@ -11,10 +11,9 @@
           <div align="center" class="text-light-blue text-h6 q-mb-md">#{{propShowRejectLeadComponent.leadNumber}}</div>
            <div class="col-md-12">
                      <q-input
-                    color="grey-9"
-                    disable
+                    color="grey-9" class="disable
                     v-model="formData.device"
-                    float-label="Selected device"
+                    label="Selected device"
                      @request="ajaxLoadShortLeadInfo"
                     
                     
@@ -22,9 +21,8 @@
         </div>
           
          
-          <q-btn color="negative" class="q-ma-sm float-right" @click="leadRejectSubmit(formData)" align="right" label="Reject" />
-          <q-btn align="right" color="grey-9" 
-            class="float-right q-ma-sm" @click="emitToggleReject(showRejectLeadModel)">Cancel
+          <q-btn color="negative" class="class="q-ma-sm float-right" @click="leadRejectSubmit(formData)" align="right" label="Reject" />
+          <q-btn align="right" color="grey-9" class="class="float-right q-ma-sm" @click="emitToggleReject(showRejectLeadModel)">Cancel
           </q-btn>
         </div>
       </q-dialog>
@@ -124,8 +122,8 @@ export default {
     // },
     leadRejectSubmit(formData) {
         // let 
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q
@@ -161,7 +159,7 @@ export default {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
-                  message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                  message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                   icon: "thumb_down"
                 });
               });

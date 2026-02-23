@@ -19,8 +19,8 @@
   </div>
   <div class="row gutter-sm q-py-sm items-center">
     <div class="col-md-12">
-      <q-input v-model="formData.name" :error="$v.formData.name.$error" class="text-weight-regular text-grey-8"
-        color="grey-9" float-label="Service Status Name" placeholder="Service Status Name" />
+      <q-input v-model="formData.name" :error="v$.formData.name.$error" class="text-weight-regular text-grey-8"
+        color="grey-9" class="label="Service Status Name" placeholder="Service Status Name" />
     </div>
   </div>
   <div class="row gutter-sm q-py-sm items-center">
@@ -61,8 +61,8 @@ export default {
       this.$emit('emitShowEditServiceCancelStatus')
     },
     fnfinalsubmitEditedServiceCancelStatus(formData) {
-      this.$v.formData.$touch()
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch()
+      if (this.v$.formData.$error) {
         this.$q.notify('Please review fields again.')
       } else {
         this.$q.loading.show()
@@ -87,9 +87,9 @@ export default {
               color: 'negative',
               position: 'bottom',
               message:
-                error.body.message == null
+                error.data.message == null
                   ? 'Please Try Again Later !'
-                  : error.body.message,
+                  : error.data.message,
               icon: 'thumb_down'
             })
           })

@@ -5,7 +5,7 @@
       <div class="row items-center bottom-border q-py-sm">
         <div class="col"><b>Ticket</b></div>
         <div class="col-auto">
-          <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" icon="clear" />
+          <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" class="icon="clear" />
         </div>
       </div>
 
@@ -24,16 +24,16 @@
           <div class="row">
             <div class="col-sm-9">
               <!-- <q-option-group v-model="selectedOption" :options="options" type="radio" class="radio" inline
-                color="purple-9" /> -->
+                color="purple-9" class="/> -->
               <q-option-group v-model="selectedOption" :options="optionsData" type="radio" class="radio" inline @input="getselectedOptionBasedData($event)"
-                color="purple-9" />
+                color="purple-9" class="/>
             </div>
         
             <div class="col-sm-3">
-              <q-btn icon="call_received" color="purple-9" label="Add Call Log" @click="callLogs()" />
+              <q-btn icon="call_received" color="purple-9" class="label="Add Call Log" @click="callLogs()" />
             </br>
             </br>
-              <q-btn icon="phone" color="purple-9" label="View Call Logs" @click="viewcallLogs()" />
+              <q-btn icon="phone" color="purple-9" class="label="View Call Logs" @click="viewcallLogs()" />
             </div>
             <!-- <div class="col-sm-3">
               
@@ -42,19 +42,18 @@
           <div v-if="selectedOption == 1">
             <div class="row">
               <div class="col-sm-5">
-                <q-select stack-label="Resolved Status" inverted-light color="none"
-                  v-model="issueResolved.resolvedStatus"  separator :options="resolutionOptionList" @input="issueresolvedAction($event)"  />
+                <q-select stack-label="Resolved Status"  color="none" v-model="issueResolved.resolvedStatus"  separator :options="resolutionOptionList" @input="issueresolvedAction($event)"  />
               </div>
             </div>
             <div class="row">
               <div class="col-sm-5">
-                <q-select stack-label="Actual Issue"  inverted-light color="none" v-model="issueResolved.actualIssue" 
+                <q-select stack-label="Actual Issue"   color="none" v-model="issueResolved.actualIssue"
                   separator :options="issueOptionList"  />
               </div>
             </div>
             <div class="row">
               <div class="col-sm-5">
-                <q-select stack-label="Action Taken" :disable="issueResolved.actualIssue == '' " inverted-light color="none" v-model="issueResolved.actionTaken"
+                <q-select stack-label="Action Taken" :disable="issueResolved.actualIssue == '' "  color="none" v-model="issueResolved.actionTaken"
                   separator :options="issueActionList" />
               </div>
             </div>
@@ -66,28 +65,27 @@
 
             <div class="row q-gutter-sm" style="display: flex; justify-content: flex-end">
 
-              <q-btn @click="issueResolveSave(issueResolved)" color="purple-9" icon="save" label="Save" />
+              <q-btn @click="issueResolveSave(issueResolved)" color="purple-9" class="icon="save" label="Save" />
               &nbsp;
-              <q-btn @click="fnIssueResolveSubmit(formData)" :disabled="disableFlag" color="purple-9" icon="send" label="submit" />
+              <q-btn @click="fnIssueResolveSubmit(formData)" :disabled="disableFlag" color="purple-9" class="icon="send" label="submit" />
             </div>
           </div>
 
           <div v-if="selectedOption == 2">
             <div class="row">
               <div class="col-sm-5">
-                <q-select stack-label="Resolved Status" inverted-light color="none"
-                  v-model="IssueNotResolved.resolvedStatus" separator :options="resolutionOptionList" @input="issueNotresolvedFetchAction($event)" />
+                <q-select stack-label="Resolved Status"  color="none" v-model="IssueNotResolved.resolvedStatus" separator :options="resolutionOptionList" @input="issueNotresolvedFetchAction($event)" />
               </div>
             </div>
             <div class="row">
               <div class="col-sm-5">
-                <q-select stack-label="Actual Issue" inverted-light color="none" v-model="IssueNotResolved.actualIssue" 
+                <q-select stack-label="Actual Issue"  color="none" v-model="IssueNotResolved.actualIssue"
                   separator :options="issueOptionList" />
               </div>
             </div>
             <div class="row">
               <div class="col-sm-5">
-                <q-select stack-label="Action Taken" :disable="IssueNotResolved.actualIssue == '' " inverted-light color="none" v-model="IssueNotResolved.actiontaken"
+                <q-select stack-label="Action Taken" :disable="IssueNotResolved.actualIssue == '' "  color="none" v-model="IssueNotResolved.actiontaken"
                   separator :options="issueActionList" />
               </div>
             </div>
@@ -95,9 +93,9 @@
 
             <div class="row q-gutter-sm" style="display: flex; justify-content: flex-end">
 
-              <q-btn @click="fnIssueNotResolved(formData)" color="purple-9" icon="save" label="Save" />
+              <q-btn @click="fnIssueNotResolved(formData)" color="purple-9" class="icon="save" label="Save" />
               &nbsp;
-              <q-btn @click="fnIssueNotResolveSubmit(formData)" :disabled="disableFlag" color="purple-9" icon="send" label="submit" />
+              <q-btn @click="fnIssueNotResolveSubmit(formData)" :disabled="disableFlag" color="purple-9" class="icon="send" label="submit" />
 
 
 
@@ -117,9 +115,9 @@
 
             <div class="row q-gutter-sm" style="display: flex; justify-content: flex-end">
 
-              <q-btn @click="fnMovedToSat()" color="purple-9" icon="save" label="Save" />
+              <q-btn @click="fnMovedToSat()" color="purple-9" class="icon="save" label="Save" />
               &nbsp;
-              <q-btn @click="fnmoveToSatRemarks(formData)" color="purple-9" icon="send" :disabled="disableFlag" label="Move to SAT" />
+              <q-btn @click="fnmoveToSatRemarks(formData)" color="purple-9" class="icon="send" :disabled="disableFlag" label="Move to SAT" />
 
 
 
@@ -526,8 +524,8 @@ this.disableFlag = false
         if(data == 1){
           this.$emit("closeActionBarInfo");
         }
-        this.$v.issueResolved.$touch();
-      if (this.$v.issueResolved.$error) {
+        this.v$.issueResolved.$touch();
+      if (this.v$.issueResolved.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.propToggleResolveRemarks = !this.propToggleResolveRemarks
@@ -537,8 +535,8 @@ this.disableFlag = false
       },
 
       fnIssueNotResolveSubmit(){
-        this.$v.IssueNotResolved.$touch();
-      if (this.$v.IssueNotResolved.$error) {
+        this.v$.IssueNotResolved.$touch();
+      if (this.v$.IssueNotResolved.$error) {
         this.$q.notify("Please review fields again.");
 
       } else {
@@ -576,7 +574,7 @@ this.disableFlag = false
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
             this.$q.loading.hide();

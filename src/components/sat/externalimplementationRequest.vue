@@ -42,15 +42,13 @@
               clearable
               v-model="formData.assignTo"
               separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              color="grey-9" class=":disable="formData.marsDeviceIdsCooked.length == 0 "
               :options="assignToOptions"
               placeholder="Assign To"
             />
              <q-checkbox
               v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
+              color="dark" class="label="Courier Device"
             />
           </div>
           <div class="col-md-3 col-sm-6 col-xs-6" align="right">
@@ -95,107 +93,17 @@
                 </div>
             </q-card>
 
-      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToUnassignedTab" >
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" class="@select="goToUnassignedTab" >
 
-        <q-tab default color="dark" name="unAssigned" slot="title" label="Unassigned" />
-        <q-tab color="dark" name="assigned" slot="title" label="Assigned" />
-        <q-tab color="dark" name="cancelledMerchants" slot="title" label="Cancelled Merchants" />
+        <q-tab default color="dark" class="name="unAssigned"  label="Unassigned" />
+        <q-tab color="dark" class="name="assigned"  label="Assigned" />
+        <q-tab color="dark" class="name="cancelledMerchants"  label="Cancelled Merchants" />
         
-         <q-tab-panel name="assigned">
-              <Phonepeassigned/>
-            </q-tab-panel>
-
-            <!-- <q-tab-panel name="cancelledMerchants">
-              <CancelledMerchants/>
-            </q-tab-panel> -->
-
-              <q-tab-panel name="unAssigned">
-          <!--STARTv-model: table Data   :rows="getPhonepeImplementationQueueUnassignedList"  -->
-          <q-table
-           :rows="tableData1"
-            :columns="columnDataUnassigned"
-            table-class="customTableClass"
-            :filter="filterSearch"
-            selection="multiple"
-            :selected="formData.marsDeviceIdsCooked"
-            v-model:pagination="paginationControl1"
-            row-key="id"
-            :rows-per-page-options="[10,20,50,100,150,200]"
-            :loading="tableAjaxLoading1"
-            color="dark"
-            @request="ajaxLoadAllLeadInfo1"
-          >
-            <q-td
-              v-slot:body-cell-leadNumber="props"
-              :props="props"
-              class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row.leadInformation)"
-            >
-              <span class="label text-primary"
-                ># {{ props.row.leadInformation.leadNumber }}</span
-              >
 
 
-            </q-td>
-            <q-td
-              v-slot:body-cell-submitToMarsDate="props"
-              :props="props"
-              >{{
-                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-              }}</q-td
-            >
-            <q-td
-              v-slot:body-cell-createdAt="props"
-              :props="props"
-              >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
-            >
-            <!-- <q-td
-              v-slot:body-cell-tid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.tid }}</div>
-            </q-td> -->
-            <q-td
-              v-slot:body-cell-mid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.mid }}</div>
-            </q-td>
-            <q-td
-              v-slot:body-cell-deviceAddress="props"
-              :props="props"
-              class="customTd customCellLength"
-            >
-              <div>
-                <q-btn
-                  no-caps
-                  icon="edit"
-                  color="purple-9"
-                  size="xs"
-                  round
-                  @click="UpdateDeviceAddress(props.row)"
-                />
-                {{ props.row.deviceAddress }}
-              </div>
-            </q-td>
-            <template v-slot:top="props">
-              <!--START: table filter,search -->
-              <div class="col-md-5">
-                <q-input
-                  clearable
-                  color="grey-9"
-                  v-model="filterSearch"
-                  placeholder="Type.."
-                  float-label="Search By MID, Merchant Name.."
-                  class="q-mr-lg q-py-sm"
-                />
-              </div>
-              <!--END: table filter,search -->
-            </template>
-          </q-table>
-        </q-tab-panel>
+            <!--  -->
+
+
 
       <q-card class="group q-pa-md" v-if="selectedTab == 'cancelledMerchants'">
         <div class="row items-center gutter-y-sm">
@@ -219,21 +127,31 @@
         </div>
       </q-card>
 
-      <q-tab-panel name="cancelledMerchants">
-      <q-table :rows="tableData2"
-                      :columns="columnDataMerchants"
-                       table-class="customTableClass"
-                      :filter="filterSearch2" 
-                      :pagination="paginationControl2"
-                      selection="multiple"
-                      v-model:selected="formData.marsDeviceIdsCookedCancelled"
-                      row-key="id" 
-                      :loading="tableAjaxLoading2"
-                      :rows-per-page-options="[5, 10, 15, 20]" 
-                      color="dark" 
-                      @request="ajaxLoadAllLeadInfo2"
-                      >
-                      <q-td
+
+        </q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="assigned">
+              <Phonepeassigned/>
+            </q-tab-panel>
+<q-tab-panel name="cancelledMerchants">
+              <CancelledMerchants/>
+            </q-tab-panel>
+<q-tab-panel name="unAssigned">
+          <!--STARTv-model: table Data   :rows="getPhonepeImplementationQueueUnassignedList"  -->
+          <q-table
+           :rows="tableData1"
+            :columns="columnDataUnassigned"
+            table-class="customTableClass"
+            :filter="filterSearch"
+            selection="multiple"
+            :selected="formData.marsDeviceIdsCooked"
+            v-model:pagination="paginationControl1"
+            row-key="id"
+            :rows-per-page-options="[10,20,50,100,150,200]"
+            :loading="tableAjaxLoading1"
+            color="dark" class="@request="ajaxLoadAllLeadInfo1"
+          >
+            <q-td
               v-slot:body-cell-leadNumber="props"
               :props="props"
               class="cursor-pointer"
@@ -242,18 +160,18 @@
               <span class="label text-primary"
                 ># {{ props.row.leadInformation.leadNumber }}</span
               >
+
+
             </q-td>
             <q-td
               v-slot:body-cell-submitToMarsDate="props"
               :props="props"
-              >{{
-                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-              }}</q-td
+              >{{ $moment_format(props.row.leadInformation.submitToMarsDate, "Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-createdAt="props"
               :props="props"
-              >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+              >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td
             >
             <!-- <q-td
               v-slot:body-cell-tid="props"
@@ -278,8 +196,85 @@
                 <q-btn
                   no-caps
                   icon="edit"
-                  color="purple-9"
-                  size="xs"
+                  color="purple-9" size="xs"
+                  round
+                  @click="UpdateDeviceAddress(props.row)"
+                />
+                {{ props.row.deviceAddress }}
+              </div>
+            </q-td>
+            <template v-slot:top="props">
+              <!--START: table filter,search -->
+              <div class="col-md-5">
+                <q-input
+                  clearable
+                  color="grey-9" v-model="filterSearch"
+                  placeholder="Type.."
+                  label="Search By MID, Merchant Name.."
+                  class="q-mr-lg q-py-sm"
+                />
+              </div>
+              <!--END: table filter,search -->
+            </template>
+          </q-table>
+        </q-tab-panel>
+<q-tab-panel name="cancelledMerchants">
+      <q-table :rows="tableData2"
+                      :columns="columnDataMerchants"
+                       table-class="customTableClass"
+                      :filter="filterSearch2" 
+                      :pagination="paginationControl2"
+                      selection="multiple"
+                      v-model:selected="formData.marsDeviceIdsCookedCancelled"
+                      row-key="id" 
+                      :loading="tableAjaxLoading2"
+                      :rows-per-page-options="[5, 10, 15, 20]" 
+                      color="dark" class="@request="ajaxLoadAllLeadInfo2"
+                      >
+                      <q-td
+              v-slot:body-cell-leadNumber="props"
+              :props="props"
+              class="cursor-pointer"
+              @click.native="toggleLeadInformation(props.row.leadInformation)"
+            >
+              <span class="label text-primary"
+                ># {{ props.row.leadInformation.leadNumber }}</span
+              >
+            </q-td>
+            <q-td
+              v-slot:body-cell-submitToMarsDate="props"
+              :props="props"
+              >{{ $moment_format(props.row.leadInformation.submitToMarsDate, "Do MMM Y") }}</q-td
+            >
+            <q-td
+              v-slot:body-cell-createdAt="props"
+              :props="props"
+              >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td
+            >
+            <!-- <q-td
+              v-slot:body-cell-tid="props"
+              :props="props"
+              class="customTd"
+            >
+              <div class="text-primary">{{ props.row.tid }}</div>
+            </q-td> -->
+            <q-td
+              v-slot:body-cell-mid="props"
+              :props="props"
+              class="customTd"
+            >
+              <div class="text-primary">{{ props.row.mid }}</div>
+            </q-td>
+            <q-td
+              v-slot:body-cell-deviceAddress="props"
+              :props="props"
+              class="customTd customCellLength"
+            >
+              <div>
+                <q-btn
+                  no-caps
+                  icon="edit"
+                  color="purple-9" size="xs"
                   round
                   @click="UpdateDeviceAddress(props.row)"
                 />
@@ -289,14 +284,14 @@
 
             <template v-slot:top="props">
               <div class="col-md-5">
-                <q-input clearable color="grey-9" v-model="filterSearch2" placeholder="Type.." float-label="Search By MID, Merchant Name.."
+                <q-input clearable color="grey-9" v-model="filterSearch2" placeholder="Type.." label="Search By MID, Merchant Name.."
                   class="q-mr-lg q-py-sm" />
               </div>
             </template>
             
             </q-table>
           </q-tab-panel>
-        </q-tabs>
+</q-tab-panels>
       <!--ENDv-model: table Footer -->
       <!-- START >> COMPONENT: Update device address  -->
       <DeviceAddressModal

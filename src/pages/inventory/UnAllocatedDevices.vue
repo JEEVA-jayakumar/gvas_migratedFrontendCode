@@ -30,18 +30,16 @@
             outline
             no-caps
             v-model="filter"
-             float-label="Select  a Region"
+             label="Select  a Region"
             radio
-            color="grey-9"
-            :options="getUnAllocatedDevicesMenuOptions"
+            color="grey-9" class=":options="getUnAllocatedDevicesMenuOptions"
            />
           </div>
           <div class="col-md-7">
             <q-btn
               square
               outline
-              color="purple-9"
-              label="Download as Excel"
+              color="purple-9" class="label="Download as Excel"
               class="q-mr-lg q-py-sm float-right"
               size="md"
               @click="downloadInventorySummaryInfoMenu()"

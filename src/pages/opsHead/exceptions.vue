@@ -26,7 +26,7 @@
           :class="[props.row.__index === activeId ? 'bg-grey-3' : '']"
         >
           <q-td key="leadInformation.updatedAt" :props="props">
-            <span class="label capitalize">{{props.row.updatedAt | moment("MMMM Do YYYY") }}</span>
+            <span class="label capitalize">{{ $moment_format(props.row.updatedAt, "MMMM Do YYYY") }}</span>
           </q-td>
           <q-td key="leadInformation.leadNumber" :props="props">
             <span
@@ -50,7 +50,7 @@
             <span class="label capitalize">{{props.row.kycSatRemark}}</span>
           </q-td>
           <q-td key="expectedSubmitDate" :props="props">
-            <span class="label capitalize">{{props.row.expectedSubmitDate | moment("MMMM Do YYYY")}}</span>
+            <span class="label capitalize">{{ $moment_format(props.row.expectedSubmitDate, "MMMM Do YYYY") }}</span>
           </q-td>
         </q-tr>
 
@@ -61,9 +61,8 @@
               clearable
               v-model="filter"
               separator
-              color="grey-9"
-              placeholder="Type.."
-              float-label="Search .."
+              color="grey-9" class="placeholder="Type.."
+              label="Search .."
               class="q-mr-lg q-py-sm"
             />
           </div>

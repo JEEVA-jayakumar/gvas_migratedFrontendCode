@@ -463,8 +463,7 @@
           <div class="col-md-6">
             <q-input
               clearable
-              color="grey-9"
-              v-model="filter"
+              color="grey-9" v-model="filter"
               placeholder="Search by SO Name, Serial Number"
               class="q-mr-lg q-py-sm"
             />
@@ -475,7 +474,7 @@
               :fields="json_fields"
               name="InventoryWithSO.xls"
             >
-              <q-btn outline color="grey-9" label="Download as excel" />
+              <q-btn outline color="grey-9" class="label="Download as excel" />
             </downloadExcel>
           </div>
         </template>

@@ -4,25 +4,27 @@
       <q-tabs
         v-model="activeTab"
         class="shadow-1"
-        color="grey-1"
-        @select="goToCompleteTab"
+        color="grey-1" class="@select="goToCompleteTab"
       >
         <q-tab
           default
-          color="dark"
-          name="tab-1"
-          slot="title"
+          color="dark" class="name="tab-1"
+
           label="PPE Service Request"
         />
         <q-tab
-          color="dark"
-         
-          name="tab-3"
-          slot="title"
+          color="dark" class="name="tab-3"
+
           label="Phonepe Paper Roll"
         >
         </q-tab>
-        <q-tab-panel name="tab-1">
+
+
+
+
+          </q-tabs>
+<q-tab-panels v-model="activeTab" animated>
+<q-tab-panel name="tab-1">
           <div class="row items-center">
             <div class="col">
               <strong>
@@ -33,16 +35,14 @@
               class="col"
               v-model.trim="formData.date"
               :options="dateType"
-              color="grey"
-              @input="dateClick"
+              color="grey" class="@input="dateClick"
             >
             </q-select>
             <div class="col-md-3">
               <q-btn
                 square
                 icon="fa fa-download"
-                color="purple-9"
-                label="Download"
+                color="purple-9" class="label="Download"
                 class="q-mr-lg q-py-sm float-right"
                 size="md"
                 @click="downloadPhonepeCallback()"
@@ -52,10 +52,9 @@
             <q-input
               class="col-3"
               clearable
-              color="grey-9"
-              v-model="filter"
+              color="grey-9" v-model="filter"
               placeholder="Type.."
-              float-label="Search By Ticket No, Merchant No..."
+              label="Search By Ticket No, Merchant No..."
             />
           </div>
           <q-table
@@ -73,8 +72,7 @@
               <div class="row no-wrap no-padding">
                 <q-btn
                 v-if="props.row.serviceRequestTicketStatus != 5 && props.row.serviceRequestTicketStatus != 3 && props.row.serviceRequestTicketStatus != 8 && props.row.serviceRequestTicketStatus != 2"
-                  color="purple-9"
-                  icon="assignment_turned_in"
+                  color="purple-9" class="icon="assignment_turned_in"
                   label="Pick Ticket"
                   @click="toggleActionBar(props.row)"
                   size="sm"
@@ -82,8 +80,7 @@
                 />
                 <!-- <q-btn
                   v-if="props.row.serviceRequestTicketStatus == 5"
-                  color="red"
-                  icon="star"
+                  color="red" class="icon="star"
                   label="Moved to SAT"
                   size="sm"
                   no-wrap
@@ -95,8 +92,7 @@
               > 
                 <!-- <q-btn
                 v-if="props.row.serviceRequestTicketStatus == 3"
-                  color="positive"
-                  icon="check_circle"
+                  color="positive" class="icon="check_circle"
                   label="Completed"
                   size="sm"
                   no-wrap
@@ -108,8 +104,7 @@
               > 
                 <!-- <q-btn
                 v-if="props.row.serviceRequestTicketStatus == 2"
-                  color="secondary"
-                  icon="event_available"
+                  color="secondary" class="icon="event_available"
                   label="Assigned"
                   size="sm"
                   no-wrap
@@ -121,8 +116,7 @@
               > 
                 <q-btn
                   v-if="props.row.serviceRequestTicketStatus == 8"
-                  color="primary"
-                  icon="arrow_forward"
+                  color="primary" class="icon="arrow_forward"
                   label="Continue"
                   @click="toggleActionBar(props.row)"
                   size="sm"
@@ -139,8 +133,7 @@
                   :disable="props.row.serviceRequestTicketStatus != 1"
                   no-caps
                   icon="edit"
-                  color="purple-9"
-                  size="xs"
+                  color="purple-9" size="xs"
                   round
                   @click="toggleAddremarks(props.row)"
                 />
@@ -175,22 +168,20 @@
 
           </q-table>
         </q-tab-panel>
-        <q-tab-panel name="tab-2">
+<q-tab-panel name="tab-2">
           <div class="row">
             <q-input
               class="col-4"
               clearable
-              color="grey-9"
-              v-model="filter1"
+              color="grey-9" v-model="filter1"
               placeholder="Type.."
-              float-label="Search By Ticket No, Merchant No..."
+              label="Search By Ticket No, Merchant No..."
             />
             <div class="col-md-6">
               <q-btn
                 square
                 icon="fa fa-download"
-                color="purple-9"
-                label="Download"
+                color="purple-9" class="label="Download"
                 class="q-mr-lg q-py-sm float-right"
                 size="md"
                 @click="downloadPhonepeCompletedTicket()"
@@ -243,24 +234,21 @@
             >
           </q-table>
         </q-tab-panel>
-        <q-tab-panel name="tab-3">
+<q-tab-panel name="tab-3">
           <q-tabs
             v-model="paperRollActiveTab"
             class="shadow-1"
-            color="grey-1"
-            @select="goToPaperRollActiveTab"
+            color="grey-1" class="@select="goToPaperRollActiveTab"
           >
             <q-tab
               default
-              color="dark"
-              name="tab-4"
-              slot="title"
+              color="dark" class="name="tab-4"
+
               label="Pending Tickets"
             />
             <q-tab
-              color="dark"
-              name="tab-5"
-              slot="title"
+              color="dark" class="name="tab-5"
+
               label="Completed Tickets"
             />
             <q-tab-panel name="tab-4">
@@ -274,18 +262,16 @@
                   class="col"
                   v-model.trim="formData.date1"
                   :options="dateTypePaperRoll"
-                  color="grey"
-                  @input="dateClickPaperRoll"
+                  color="grey" class="@input="dateClickPaperRoll"
                 >
                 </q-select>
                 <div class="col-5"></div>
                 <q-input
                   class="col-5"
                   clearable
-                  color="grey-9"
-                  v-model="filter3"
+                  color="grey-9" v-model="filter3"
                   placeholder="Type.."
-                  float-label="Search By Ticket No, Merchant No..."
+                  label="Search By Ticket No, Merchant No..."
                 />
               </div>
               <q-table
@@ -310,15 +296,14 @@
                 >
               </q-table>
             </q-tab-panel>
-            <q-tab-panel name="tab-5">
+<q-tab-panel name="tab-5">
               <div class="row">
                 <q-input
                   class="col-4"
                   clearable
-                  color="grey-9"
-                  v-model="filter4"
+                  color="grey-9" v-model="filter4"
                   placeholder="Type.."
-                  float-label="Search By Ticket No, Merchant No..."
+                  label="Search By Ticket No, Merchant No..."
                 />
               </div>
               <q-table
@@ -352,7 +337,7 @@
                 >
               </q-table>
             </q-tab-panel>
-          </q-tabs>
+</q-tab-panels>
         </q-tab-panel>
       </q-tabs>
     </div>
@@ -1012,9 +997,7 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
+                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
             this.tableData = []

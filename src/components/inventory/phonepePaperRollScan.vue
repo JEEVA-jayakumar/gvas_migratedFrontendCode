@@ -6,7 +6,7 @@
           <div class="col">Scan POD Number</div>
           <div class="col-auto">
            
-            <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" icon="clear" />
+            <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" class="icon="clear" />
           </div>
 
         </div>
@@ -20,7 +20,7 @@
           <q-input v-model="formData.podNumber.podNumber" readonly  label="POD Number"/>
           <div class="group" >
             <q-btn @click="fnsubmit(formData)"  icon="check" label="Save" style="float:inline-end; color: white; background-color: #61116a;" />
-            <q-btn @click="openScannerComp" v-if="scannerToggleOption"  color="blue" outline class="q-py-xs " label="Start scan" style="float: inline-end;"/>
+            <q-btn @click="openScannerComp" v-if="scannerToggleOption"  color="blue" class="outline class="q-py-xs " label="Start scan" style="float: inline-end;"/>
           </div>
         </form>
       </q-dialog>
@@ -97,7 +97,7 @@
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                 icon: "thumb_down"
               });
             });

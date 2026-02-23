@@ -1,5 +1,5 @@
 <template>
-  <q-toolbar class="bg-custom-light-grey bottom-border" color="grey-9" flat inverted>
+  <q-toolbar class="bg-custom-light-grey bottom-border text-grey-9" flat>
     <q-btn
       flat
       dense
@@ -22,8 +22,8 @@
           />
         </div>
         <div class="col float-right" align="right">
-          <q-btn flat color="grey-9" icon="far fa-bell" />
-          <q-btn flat color="grey-9 vertical-middle">
+          <q-btn flat color="grey-9" class="icon="far fa-bell" />
+          <q-btn flat color="grey-9" class="class="vertical-middle">
             <span class="mobile-hide capitalize text-weight-regular">{{getUserNAme}}</span>
             <img
               src="~assets/images/user.png"
@@ -37,17 +37,21 @@
               self="top middle"
               style="min-width:350px"
             >
-              <q-list separator link class="no-padding">
-                <q-item v-close-popup @click="openMyAccount()">
-                  <q-item-section icon="fas fa-user" inverted color="dark" />
+              <q-list separator class="no-padding">
+                <q-item v-close-popup clickable @click="openMyAccount()">
+                  <q-item-section avatar>
+                    <q-icon name="fas fa-user" color="dark" class="/>
+                  </q-item-section>
                   <q-item-section>
-                    <q-item-label label>Change Password</q-item-label>
+                    <q-item-label>Change Password</q-item-label>
                   </q-item-section>
                 </q-item>
-                <q-item v-close-popup @click="clearLocalStorageData()">
-                  <q-item-section icon="fas fa-sign-out-alt" inverted color="dark" />
+                <q-item v-close-popup clickable @click="clearLocalStorageData()">
+                  <q-item-section avatar>
+                    <q-icon name="fas fa-sign-out-alt" color="dark" class="/>
+                  </q-item-section>
                   <q-item-section>
-                    <q-item-label label>Logout</q-item-label>
+                    <q-item-label>Logout</q-item-label>
                   </q-item-section>
                 </q-item>
               </q-list>

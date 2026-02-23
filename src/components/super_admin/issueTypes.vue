@@ -1,10 +1,17 @@
 <template>
   <q-page>
     <div>
-      <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" >
-         <q-tab @select="ajaxSpareData" default  color="dark" name="tab-3" slot="title" label="Active Issue Types" />
-          <q-tab  color="dark" name="tab-4" slot="title" label="Deactive Issue Types" />
-        <!-- <q-tab-panel name="tab-1">
+      <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" class=">
+         <q-tab @select="ajaxSpareData" default  color="dark" class="name="tab-3"  label="Active Issue Types" />
+          <q-tab  color="dark" class="name="tab-4"  label="Deactive Issue Types" />
+        <!--
+         -->
+
+
+
+      </q-tabs>
+<q-tab-panels v-model="activeTab" animated>
+<q-tab-panel name="tab-1">
           <q-table 
           :rows="ActivetableData"
           table-class="customSATableClass" 
@@ -13,11 +20,10 @@
           :pagination="paginationControl"
           :filter-method="myCustomSearchFilter" 
           row-key="name" 
-          color="grey-9"
-          >
+          color="grey-9" class=">
             <q-td v-slot:body-cell-serviceReqIssueTypeSets="props" :props="props">
               <div class="row no-wrap group" v-for="menu in props.row.serviceReqIssueTypeSets" :key="menu.id">
-                <q-chip color="light" class="text-dark">
+                <q-chip color="light" class="class="text-dark">
                   {{ menu.serviceReqIssueType.name}}
                 </q-chip>
               </div>
@@ -25,7 +31,7 @@
 
             <q-td v-slot:body-cell-serviceRequestStatusSets="props" :props="props">
               <div class="row no-wrap group" v-for="menu in props.row.serviceRequestStatusSets" :key="menu.id">
-                <q-chip color="light" class="text-dark">
+                <q-chip color="light" class="class="text-dark">
                   {{ menu.name}}
                 </q-chip>
               </div>
@@ -51,7 +57,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-        <q-tab-panel name="tab-2">
+<q-tab-panel name="tab-2">
           <q-table 
           :rows="DeactivetableData"
           table-class="customSATableClass" 
@@ -60,11 +66,10 @@
           :pagination="paginationControl"
           :filter-method="myCustomSearchFilter" 
           row-key="name" 
-          color="grey-9"
-          >
+          color="grey-9" class=">
             <q-td v-slot:body-cell-serviceReqIssueTypeSets="props" :props="props">
               <div class="row no-wrap group" v-for="menu in props.row.serviceReqIssueTypeSets" :key="menu.id">
-                <q-chip color="light" class="text-dark">
+                <q-chip color="light" class="class="text-dark">
                   {{ menu.serviceReqIssueType.name}}
                 </q-chip>
               </div>
@@ -72,7 +77,7 @@
 
             <q-td v-slot:body-cell-serviceRequestStatusSets="props" :props="props">
               <div class="row no-wrap group" v-for="menu in props.row.serviceRequestStatusSets" :key="menu.id">
-                <q-chip color="light" class="text-dark">
+                <q-chip color="light" class="class="text-dark">
                   {{ menu.name}}
                 </q-chip>
               </div>
@@ -91,17 +96,11 @@
               </div>
             </template>
           </q-table>
-        </q-tab-panel> -->
-
-        <q-tab-panel name="tab-3">
+        </q-tab-panel>
+<q-tab-panel name="tab-3">
           <q-table :rows="ActivetableData" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1"
-            :pagination="paginationControl" :filter-method="myCustomSearchFilter1" row-key="name" color="grey-9">
-            <q-td v-slot:body-cell-createdDate="props" :props="props">{{
-                props.row.createdDate | moment("Do MMM Y")
-            }}</q-td>
-            <q-td v-slot:body-cell-updatedDate="props" :props="props">{{
-                props.row.updatedDate | moment("Do MMM Y")
-            }}</q-td>
+            :pagination="paginationControl" :filter-method="myCustomSearchFilter1" row-key="name" color="grey-9">" class="<q-td v-slot:body-cell-createdDate="props" :props="props">{{ $moment_format(props.row.createdDate, "Do MMM Y") }}</q-td>
+            <q-td v-slot:body-cell-updatedDate="props" :props="props">{{ $moment_format(props.row.updatedDate, "Do MMM Y") }}</q-td>
 
             <q-td v-slot:body-cell-action1="props" :props="props">
               <div class="row no-wrap no-padding">
@@ -123,7 +122,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-        <q-tab-panel name="tab-4">
+<q-tab-panel name="tab-4">
           <q-table 
           :rows="DeactivetableData"
           table-class="customSATableClass" 
@@ -132,14 +131,9 @@
           :pagination="paginationControl2"
           :filter-method="myCustomSearchFilter2" 
           row-key="name" 
-          color="grey-9"
-          >
-            <q-td v-slot:body-cell-createdDate="props" :props="props">{{
-                props.row.createdDate | moment("Do MMM Y")
-            }}</q-td>
-            <q-td v-slot:body-cell-updatedDate="props" :props="props">{{
-                props.row.updatedDate | moment("Do MMM Y")
-            }}</q-td>
+          color="grey-9" class=">
+            <q-td v-slot:body-cell-createdDate="props" :props="props">{{ $moment_format(props.row.createdDate, "Do MMM Y") }}</q-td>
+            <q-td v-slot:body-cell-updatedDate="props" :props="props">{{ $moment_format(props.row.updatedDate, "Do MMM Y") }}</q-td>
 
             <q-td v-slot:body-cell-action2="props" :props="props">
               <div class="row no-wrap no-padding">
@@ -155,7 +149,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
       <!--START: Show edit  service Parts -->
       <showEditServiceType v-if="propShowEditServiceType" :propShowEditServiceType="propShowEditServiceType"
         :propRowDetails="propRowDetails" @emitfnshowEditServiceType="fnShowEditServiceType" />
@@ -430,9 +424,7 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
+                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });
@@ -476,9 +468,7 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
+                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });
@@ -510,9 +500,9 @@ export default {
     //           color: "negative",
     //           position: "bottom",
     //           message:
-    //             error.body.message == null
+    //             error.data.message == null
     //               ? "Please Try Again Later !"
-    //               : error.body.message,
+    //               : error.data.message,
     //           icon: "thumb_down"
     //         });
     //       });

@@ -18,22 +18,20 @@
                      <!-- <div class="col-md-12">
                         <q-select
                           v-model="formData.regionGroup"   
-                          :error="$v.formData.regionGroup.$error" 
+                          :error="v$.formData.regionGroup.$error"
                         
                           :options="regionGroupOptions"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Region Group" 
+                          color="grey-9" class="label="Region Group"
                           placeholder="Region Group" 
                         />
                     </div> -->
                     <div class="col-md-12">
                         <q-input 
                         v-model="formData.regionName" 
-                          :error="$v.formData.regionName.$error"
+                          :error="v$.formData.regionName.$error"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Region" 
+                          color="grey-9" class="label="Region"
                           placeholder="Region" 
                         />
                     </div>
@@ -41,8 +39,7 @@
                 <div class="row gutter-sm q-py-sm items-center">
                     <div class="col-md-12 group" align="right">
                         <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowAddNewRegionsGroups()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitAddNewRegionGroup(formData)" color="purple-9">Save</q-btn>
-                    </div>
+                        <q-btn align="right" @click="fnfinalsubmitAddNewRegionGroup(formData)" color="purple-9">Save</q-btn>" class="</div>
                 </div>
             </form>
         </q-dialog>
@@ -101,8 +98,8 @@ computed:{
     },
     fnfinalsubmitAddNewRegionGroup(formData){
 console.log("FINAL SUBMITTED VALUES--------->",JSON.stringify(formData))
-   this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+   this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();
@@ -123,7 +120,7 @@ console.log("FINAL SUBMITTED VALUES--------->",JSON.stringify(formData))
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down",
             });
           });
@@ -131,8 +128,8 @@ console.log("FINAL SUBMITTED VALUES--------->",JSON.stringify(formData))
     },
     // fnfinalsubmitAddNewRegion(formData) {
     //   console.log("FINAL SUBMITTED VALUES--------->",JSON.stringify(formData))
-    //   this.$v.formData.$touch();
-    //   if (this.$v.formData.$error) {
+    //   this.v$.formData.$touch();
+    //   if (this.v$.formData.$error) {
     //     this.$q.notify("Please review fields again.");
     //   } else {
     //     this.$q.loading.show();
@@ -153,7 +150,7 @@ console.log("FINAL SUBMITTED VALUES--------->",JSON.stringify(formData))
     //         this.$q.notify({
     //           color: "negative",
     //           position: "bottom",
-    //           message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+    //           message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
     //           icon: "thumb_down",
     //         });
     //       });

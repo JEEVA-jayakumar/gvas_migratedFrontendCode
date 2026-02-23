@@ -12,61 +12,54 @@
             <div class="row group">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
-                  @blur="$v.formData.leadName.$touch"
-                  :error="$v.formData.leadName.$error"
-                  color="grey-9"
-                  v-model="formData.leadName"
-                  float-label="Merchant Name*"
+                  @blur="v$.formData.leadName.$touch"
+                  :error="v$.formData.leadName.$error"
+                  color="grey-9" v-model="formData.leadName"
+                  label="Merchant Name*"
                   placeholder="Merchant Name"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9"
-                  @blur="$v.formData.contactName.$touch"
-                  :error="$v.formData.contactName.$error"
+                  color="grey-9" class="@blur="v$.formData.contactName.$touch"
+                  :error="v$.formData.contactName.$error"
                   v-model="formData.contactName"
-                  float-label="Contact Name*"
+                  label="Contact Name*"
                   placeholder="Contact Name"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9"
-                  @blur="$v.formData.contactNumber.$touch"
-                  :error="$v.formData.contactNumber.$error"
+                  color="grey-9" class="@blur="v$.formData.contactNumber.$touch"
+                  :error="v$.formData.contactNumber.$error"
                   v-model="formData.contactNumber"
                   type="number"
-                  float-label="Contact Number*"
+                  label="Contact Number*"
                   placeholder="Contact Number"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9"
-                  v-model="formData.alternateContactNumber"
+                  color="grey-9" v-model="formData.alternateContactNumber"
                   type="number"
-                  float-label="Alternate Contact Number"
+                  label="Alternate Contact Number"
                   placeholder="Alternate Contact Number"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
                   type="email"
-                  color="grey-9"
-                
-                  v-model="formData.email"
-                  float-label="Email"
+                  color="grey-9" v-model="formData.email"
+                  label="Email"
                   placeholder="Email"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9"
-                  @blur="$v.formData.leadAddress.$touch"
-                  :error="$v.formData.leadAddress.$error"
+                  color="grey-9" class="@blur="v$.formData.leadAddress.$touch"
+                  :error="v$.formData.leadAddress.$error"
                   v-model="formData.leadAddress"
-                  float-label="Merchant Address"
+                  label="Merchant Address"
                   placeholder="Merchant Address"
                 />
               </div>
@@ -75,23 +68,21 @@
                 placeholder="Select Pincode" 
                 filter
                 clearable
-                color="grey-9"
-                @blur="$v.formData.pincodeObj.$touch"   
-                :error="$v.formData.pincodeObj.$error" 
+                color="grey-9" class="@blur="v$.formData.pincodeObj.$touch"
+                :error="v$.formData.pincodeObj.$error"
                 v-model="formData.pincodeObj"
                 @input="fnPopulateStateCity"	
                 @clear="fnClearStateCity"
-                float-label="Pincode"
+                label="Pincode"
                 :options="getAllStatesData"
                 />-->
                 <q-input
                   type="number"
-                  :error="$v.formData.pincodeObj.$error"
+                  :error="v$.formData.pincodeObj.$error"
                   clearable
                   @clear="fnClearStateCity"
-                  color="grey-9"
-                  v-model.trim="formData.pincodeObj"
-                  float-label="Pincode"
+                  color="grey-9" class="v-model.trim="formData.pincodeObj"
+                  label="Pincode"
                   placeholder="Pincode"
                 >
                   <q-autocomplete
@@ -105,22 +96,20 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
                   disable
-                  color="grey-9"
-                  @blur="$v.formData.city.$touch"
-                  :error="$v.formData.city.$error"
+                  color="grey-9" class="@blur="v$.formData.city.$touch"
+                  :error="v$.formData.city.$error"
                   v-model="formData.city"
-                  float-label="City/Town"
+                  label="City/Town"
                   placeholder="Merchant Address"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
                   disable
-                  color="grey-9"
-                  @blur="$v.formData.state.$touch"
-                  :error="$v.formData.state.$error"
+                  color="grey-9" class="@blur="v$.formData.state.$touch"
+                  :error="v$.formData.state.$error"
                   v-model="formData.state"
-                  float-label="State"
+                  label="State"
                   placeholder="State"
                 />
               </div>
@@ -130,12 +119,11 @@
             <div class="row group">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
-                  color="grey-9"
-                  @input="fnAjaxRequestPopulateDeviceListData"
-                  @blur="$v.formData.leadSource.id.$touch"
-                  :error="$v.formData.leadSource.id.$error"
+                  color="grey-9" class="@input="fnAjaxRequestPopulateDeviceListData"
+                  @blur="v$.formData.leadSource.id.$touch"
+                  :error="v$.formData.leadSource.id.$error"
                   v-model="formData.leadSource.id"
-                  float-label="Lead Source*"
+                  label="Lead Source*"
                   placeholder="Lead Source"
                   radio
                   :options="leadSourceOptions"
@@ -143,11 +131,10 @@
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
-                  color="grey-9"
-                  @blur="$v.formData.device.id.$touch"
-                  :error="$v.formData.device.id.$error"
+                  color="grey-9" class="@blur="v$.formData.device.id.$touch"
+                  :error="v$.formData.device.id.$error"
                   v-model="formData.device.id"
-                  float-label="Device Type"
+                  label="Device Type"
                   radio
                   :disable="isDeviceTypeSelectionDisabled"
                   :options="deviceTypeOptions"
@@ -156,19 +143,17 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
                   type="number"
-                  color="grey-9"
-                  @blur="$v.formData.deviceCount.$touch"
-                  :error="$v.formData.deviceCount.$error"
+                  color="grey-9" class="@blur="v$.formData.deviceCount.$touch"
+                  :error="v$.formData.deviceCount.$error"
                   v-model="formData.deviceCount"
-                  float-label="Device Count*"
+                  label="Device Count*"
                   placeholder="Device Count"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
                   @input="fnGetAllUsersByHidUidRSM"
-                  color="grey-9"
-                  v-model="currentAssingedToRSM"
+                  color="grey-9" v-model="currentAssingedToRSM"
                   placeholder="--RSM--"
                   stack-label="Select RSM"
                   radio
@@ -179,8 +164,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
                   @input="fnGetAllUsersByHidUidASM"
-                  color="grey-9"
-                  v-model="currentAssingedToASM"
+                  color="grey-9" v-model="currentAssingedToASM"
                   placeholder="--ASM--"
                   stack-label="Select ASM"
                   radio
@@ -191,8 +175,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
                   @input="fnGetAllUsersByHidUidTL"
-                  color="grey-9"
-                  v-model="assignTo"
+                  color="grey-9" v-model="assignTo"
                   placeholder="--TL--"
                   stack-label="Select TL"
                   radio
@@ -204,9 +187,8 @@
                 <q-select
                   filter 
                   clearable
-                  color="grey-9"
-                  @blur="$v.formData.assignedTo.id.$touch"
-                  :error="$v.formData.assignedTo.id.$error"
+                  color="grey-9" class="@blur="v$.formData.assignedTo.id.$touch"
+                  :error="v$.formData.assignedTo.id.$error"
                   v-model="formData.assignedTo.id"
                   placeholder="--SO--"
                   stack-label="Select SO"
@@ -237,8 +219,7 @@
                                 <q-btn
                                   v-for="file in formData.businessProof"
                                   :key="file"
-                                  color="blue-grey-10"
-                                  size="sm"
+                                  color="blue-grey-10" size="sm"
                                   class="q-mr-sm"
                                   label="View"
                                   @click="previewDocument(file)"
@@ -251,8 +232,7 @@
                                 <q-btn
                                   v-for="file in formData.merchantAgreement"
                                   :key="file"
-                                  color="blue-grey-10"
-                                  size="sm"
+                                  color="blue-grey-10" size="sm"
                                   class="q-mr-sm"
                                   label="View"
                                   @click="previewDocument(file)"
@@ -265,8 +245,7 @@
                                 <q-btn
                                   v-for="file in formData.bankApprovalLetter"
                                   :key="file"
-                                  color="blue-grey-10"
-                                  size="sm"
+                                  color="blue-grey-10" size="sm"
                                   class="q-mr-sm"
                                   label="View"
                                   @click="previewDocument(file)"
@@ -671,7 +650,7 @@ export default {
           self.$q.notify({
             color: "negative",
             position: "bottom",
-            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+            message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
             icon: "thumb_down",
           });
         });
@@ -706,7 +685,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down",
             });
           }
@@ -728,8 +707,8 @@ export default {
 
     // Function to create new lead and allocate
     fnFinalSubmit(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.UPDATE_SHORT_LEAD_SALES_INFO(formData)
@@ -746,7 +725,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down",
             });
           });

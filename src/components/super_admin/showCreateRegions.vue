@@ -20,10 +20,9 @@
                   <div class="row q-col-gutter-md">
                     <div class="col-12">
                       <q-input outlined dense v-model="formData.regionAreaName" 
-                          @blur="$v.formData.regionAreaName.$touch"      
-                          :error="$v.formData.regionAreaName.$error" 
-                          label="Region Name" color="purple-9" 
-                          class="q-mt-sm"
+                          @blur="v$.formData.regionAreaName.$touch"
+                          :error="v$.formData.regionAreaName.$error"
+                          label="Region Name" color="purple-9" class="class="q-mt-sm"
                       />
                     </div>
                   </div>
@@ -71,8 +70,8 @@ export default {
       this.$emit("emitfnshowRegions", "emitfnForRegionTable");
     },
     fnfinalsubmitRegion(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();
@@ -93,7 +92,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down",
             });
           });

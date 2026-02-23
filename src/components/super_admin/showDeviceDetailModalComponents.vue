@@ -22,16 +22,14 @@
         <div class="column group">
           <div>
             <q-input v-model="formData.device" 
-              @blur="$v.formData.device.$touch"      
-              :error="$v.formData.device.$error" 
-              @keyup.enter="$v.formData.device.$touch"
-              class="text-weight-regular text-grey-8" color="grey-9" float-label="Device" placeholder="Device" 
+              @blur="v$.formData.device.$touch"
+              :error="v$.formData.device.$error"
+              @keyup.enter="v$.formData.device.$touch"
+              class="text-weight-regular text-grey-8" color="grey-9" class="label="Device" placeholder="Device"
             />
           </div>
           <div align="right">
-            <q-btn align="right" v-if="makeUpdateElementActive" @click="fnFinalUpdate(formData)" color="purple-9">Update</q-btn>
-            <q-btn align="right" v-else @click="fnFinalCreate(formData)" color="purple-9">Save</q-btn>
-          </div>
+            <q-btn align="right" v-if="makeUpdateElementActive" @click="fnFinalUpdate(formData)" color="purple-9">Update</q-btn>" class="<q-btn align="right" v-else @click="fnFinalCreate(formData)" color="purple-9">Save</q-btn>" class="</div>
         </div>
       </q-card-section>
     </q-card>-->
@@ -43,8 +41,7 @@
       :pagination="paginationControl"
       :filter-method="myCustomSearchFilter"
       row-key="name"
-      color="grey-9"
-    >
+      color="grey-9" class=">
       <q-td v-slot:body-cell-action="props" :props="props">
         <div class="row no-wrap no-padding">
           <q-btn
@@ -77,10 +74,9 @@
         <div class="col-8">
           <q-input
             clearable
-            color="grey-9"
-            v-model="filterSearch"
+            color="grey-9" v-model="filterSearch"
             placeholder="Type.."
-            float-label="Search by name, short name"
+            label="Search by name, short name"
           />
         </div>
         <div class="col-4" align="right">
@@ -89,8 +85,7 @@
             no-wrap
             label="Add New"
             class="text-weight-regular"
-            color="purple-9"
-            icon="far fa-plus-square"
+            color="purple-9" class="icon="far fa-plus-square"
             @click="fnshowCreateDeviceType()"
           />
         </div>

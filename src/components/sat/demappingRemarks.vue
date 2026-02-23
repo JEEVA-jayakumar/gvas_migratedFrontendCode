@@ -18,16 +18,15 @@
         <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
           <q-card style="width:250%">
             <q-card-section>
-              <q-list no-border>
+              <q-list >
                 <div class="col-md-12">
                   <q-input
                     type="textarea"
                     placeholder="Reason Type.."
-                    :error="$v.formData.reason.$error"
-                    @blur="$v.formData.reason.$touch"
+                    :error="v$.formData.reason.$error"
+                    @blur="v$.formData.reason.$touch"
                     class="q-my-md"
-                    color="grey-9"
-                    align="left"
+                    color="grey-9" class="align="left"
                     value=""
                     v-model="formData.reason"
                   />
@@ -45,8 +44,7 @@
               <q-btn
                 label="submit"
                 @click="fnReasonRemarks(formData)"
-                color="purple-9"
-              />
+                color="purple-9" class="/>
 
             </q-card-actions>
           </q-card>
@@ -112,8 +110,8 @@ export default {
     },
 
     fnReasonRemarks(request) {
-        this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+        this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         let param = {
@@ -145,7 +143,7 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-              error.body.message == null ? "Please Try Again Later !": error.body.message,
+              (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

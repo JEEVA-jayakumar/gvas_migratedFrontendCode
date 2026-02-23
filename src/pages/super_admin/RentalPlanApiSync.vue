@@ -7,7 +7,7 @@
           </div>
           <q-card style="width:1047px">
             <q-card-section>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <q-list no-border>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <q-list >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <q-item>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <q-item-section>
                    <textarea 
@@ -26,7 +26,7 @@
           <q-card-section>
                   <q-item-section align="center">
                     <q-btn class="common-btn"
-              color="purple-9" toggle-color="primary" size="15px" label="Submit"
+              color="purple-9" class="toggle-color="primary" size="15px" label="Submit"
                 @click="fnFinalSubmit(formData)" />
               </q-item-section>
             </q-card-section>

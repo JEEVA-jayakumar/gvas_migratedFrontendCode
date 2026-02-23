@@ -8,20 +8,19 @@
             <div class="col-md-6">
               <q-select
                 v-model.trim="formData.categoryType"
-                @blur="$v.formData.categoryType.$touch"
-                :error="$v.formData.categoryType.$error"
+                @blur="v$.formData.categoryType.$touch"
+                :error="v$.formData.categoryType.$error"
                 class="text-weight-regular text-grey-8"
                 :options="leadSourceOptions"
-                float-label="*Notification Category"
+                label="*Notification Category"
                 placeholder="Notification Category"
               />
             </div>
             <div class="col-md-6">
-              <q-chips-input  @blur="$v.formData.tids.$touch" :error="$v.formData.tids.$error"
+              <q-chips-input  @blur="v$.formData.tids.$touch" :error="v$.formData.tids.$error"
                             clearable
-                            color="grey-9"
-                            v-model.trim="formData.tids"
-                            float-label="TID"
+                            color="grey-9" class="v-model.trim="formData.tids"
+                            label="TID"
                             placeholder="Search TID"
                           >
                             <q-autocomplete
@@ -36,19 +35,17 @@
             <div class="col-md-7">
               <q-input
                 v-model.trim="formData.notificationText"
-                @blur="$v.formData.notificationText.$touch"
-                :error="$v.formData.notificationText.$error"
+                @blur="v$.formData.notificationText.$touch"
+                :error="v$.formData.notificationText.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9"
-                float-label="*Notification Text"
+                color="grey-9" class="label="*Notification Text"
               />
             </div>
             <div class="col-md-5">
                     <q-btn
           size="md"
           type="button"
-          color="purple-9"
-          @click="fnSaveMerchant(formData)"
+          color="purple-9" @click="fnSaveMerchant(formData)"
         >Submit</q-btn>
         </div>
           </div>
@@ -127,8 +124,8 @@ export default {
     ...mapActions("leadSource", ["LEAD_SOURCE_ACTIVE_LIST"]),
      ...mapActions("Merchant", ["FETCH_ALL_MERCHANTTID","SAVE_MERCHANT"]),
     fnSaveMerchant(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
         return;
       } else {

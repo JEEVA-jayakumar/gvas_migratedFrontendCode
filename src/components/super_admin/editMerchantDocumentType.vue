@@ -14,23 +14,21 @@
         <div class="text-h6 text-weight-regular q-py-md">Edit Merchant Document Type</div>
         <div>
           <q-select
-            color="grey-9"
-            @blur="$v.formData.url.merchantType.$touch"
-            :error="$v.formData.url.merchantType.$error"
+            color="grey-9" class="@blur="v$.formData.url.merchantType.$touch"
+            :error="v$.formData.url.merchantType.$error"
             v-model="formData.url.merchantType"
             :options="activeMerchantType"
-            float-label="Select merchant type"
+            label="Select merchant type"
             placeholder="Merchant type"
           />
         </div>
         <div>
           <q-input
             v-model="formData.params.documentType"
-            @blur="$v.formData.params.documentType.$touch"
-            :error="$v.formData.params.documentType.$error"
+            @blur="v$.formData.params.documentType.$touch"
+            :error="v$.formData.params.documentType.$error"
             class="text-weight-regular text-grey-8"
-            color="grey-9"
-            float-label="Merchant Document Type"
+            color="grey-9" class="label="Merchant Document Type"
             placeholder="Merchant Document Type"
             @keyup.enter="submitMerchantDcoumentTypeData(formData)"
           />
@@ -38,12 +36,11 @@
         <div>
           <q-input
             v-model="formData.params.marsDocumentId"
-            @blur="$v.formData.params.marsDocumentId.$touch"
-            :error="$v.formData.params.marsDocumentId.$error"
+            @blur="v$.formData.params.marsDocumentId.$touch"
+            :error="v$.formData.params.marsDocumentId.$error"
             class="text-weight-regular text-grey-8"
-            color="grey-9"
-            type="number"
-            float-label="Mars Agreement Id"
+            color="grey-9" class="type="number"
+            label="Mars Agreement Id"
             placeholder="Mars Agreement Id"
             @keyup.enter="submitMerchantDcoumentTypeData(formData)"
           />
@@ -54,16 +51,14 @@
             @input="getViewTypeValue"
             v-model="formData.params.viewType"
             class="text-weight-regular text-grey-8"
-            color="grey-9"
-            label="Yes"
+            color="grey-9" class="label="Yes"
             :val="false"
           />
           <q-radio
             @input="getViewTypeValue"
             v-model="formData.params.viewType"
             class="text-weight-regular text-grey-8"
-            color="grey-9"
-            label="No"
+            color="grey-9" class="label="No"
             :val="true"
           />
         </div>
@@ -72,15 +67,13 @@
           <q-radio
             v-model="formData.params.required"
             class="text-weight-regular text-grey-8"
-            color="grey-9"
-            label="Yes"
+            color="grey-9" class="label="Yes"
             :val="true"
           />
           <q-radio
             v-model="formData.params.required"
             class="text-weight-regular text-grey-8"
-            color="grey-9"
-            label="No"
+            color="grey-9" class="label="No"
             :val="false"
           />
         </div>
@@ -94,8 +87,7 @@
           <q-btn
             align="right"
             @click="submitMerchantDcoumentTypeData(formData)"
-            color="purple-9"
-          >Save</q-btn>
+            color="purple-9" class=">Save</q-btn>
         </div>
       </div>
     </q-dialog>
@@ -167,8 +159,8 @@ export default {
       this.formData.url.hasSubDoc = val ? 0 : 1;
     },
     submitMerchantDcoumentTypeData() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
       } else {
         this.$q.loading.show({
           delay: 100, // ms
@@ -192,7 +184,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

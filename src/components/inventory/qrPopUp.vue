@@ -12,8 +12,8 @@
       <p><b>{{ this.count }}</b> QR from {{ this.bank }} Bank generated Successfully</p>
       <strong> Batch ID :{{ this.batchId }} </strong>
       <div class="group alignsize" align="right">
-        <q-btn @click="emitToggleRemarks()" color="negative" icon="close" label="Dismiss" />
-        <q-btn @click="fnsubmit()" color="positive" icon="check" label="Download" />
+        <q-btn @click="emitToggleRemarks()" color="negative" class="icon="close" label="Dismiss" />
+        <q-btn @click="fnsubmit()" color="positive" class="icon="check" label="Download" />
       </div>
     </q-dialog>
   </div>

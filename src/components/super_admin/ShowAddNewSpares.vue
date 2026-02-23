@@ -18,22 +18,20 @@
                      <div class="col-md-12">
                         <q-input
                           v-model="formData.spareName"   
-                          :error="$v.formData.spareName.$error" 
+                          :error="v$.formData.spareName.$error"
                         
                         
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Enter Spare Parts Name*" 
+                          color="grey-9" class="label="Enter Spare Parts Name*"
                           placeholder="Enter Spare Parts Name*" 
                         />
                     </div>
                     <!-- <div class="col-md-12">
                         <q-input 
                         v-model="formData.regionAreaName" 
-                          :error="$v.formData.regionAreaName.$error"
+                          :error="v$.formData.regionAreaName.$error"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Region" 
+                          color="grey-9" class="label="Region"
                           placeholder="Region" 
                         />
                     </div> -->
@@ -41,8 +39,7 @@
                 <div class="row gutter-sm q-py-sm items-center">
                     <div class="col-md-12 group" align="right">
                         <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowAddNewSpares()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitAddNewRegion(formData)" color="purple-9">Save</q-btn>
-                    </div>
+                        <q-btn align="right" @click="fnfinalsubmitAddNewRegion(formData)" color="purple-9">Save</q-btn>" class="</div>
                 </div>
             </form>
         </q-dialog>
@@ -90,8 +87,8 @@ computed:{
       this.$emit("emitfnShowAddNewSpares");
     },
     fnfinalsubmitAddNewRegion(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();
@@ -112,7 +109,7 @@ computed:{
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down",
             });
           });

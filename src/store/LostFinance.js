@@ -120,7 +120,7 @@ const Finance = {
           .then(response => {
             // START=> COMMIT with data received'
             response.data.data.content.map(function (value, index) {
-              Vue.set(value, "expand", false);
+              value["expand"] = false;
             });
             commit("SET_LOST_FINANCE_DATAS", response.data.data);
             console.log("FInance DATAS---------------->" + JSON.stringify(response.data.data))
@@ -146,7 +146,7 @@ const Finance = {
           .then(response => {
             // START=> COMMIT with data received'
             response.data.data.content.map(function (value, index) {
-              Vue.set(value, "expand", false);
+              value["expand"] = false;
             });
             commit("SET_LOST_FINANCE_DATAS", response.data.data);
             console.log("FInance DATAS---------------->" + JSON.stringify(response.data.data))
@@ -169,7 +169,7 @@ const Finance = {
           .then(response => {
             // START=> COMMIT with data received'
             response.data.data.content.map(function (value, index) {
-              Vue.set(value, "expand", false);
+              value["expand"] = false;
             });
             commit("SET_POS_INVENTORY_FINANCE", response.data.data);
             console.log("FInance DATAS---------------->" + JSON.stringify(response.data.data))
@@ -195,7 +195,7 @@ const Finance = {
           .then(response => {
             // START=> COMMIT with data received'
             response.data.data.content.map(function (value, index) {
-              Vue.set(value, "expand", false);
+              value["expand"] = false;
             });
             commit("SET_POS_INVENTORY_FINANCE", response.data.data);
             console.log("FInance DATAS---------------->" + JSON.stringify(response.data.data))
@@ -220,7 +220,7 @@ const Finance = {
           .then(response => {
             // START=> COMMIT with data received'
             response.data.data.content.map(function (value, index) {
-              Vue.set(value, "expand", false);
+              value["expand"] = false;
             });
             commit("SET_PHONEPE_LOST_FINANCE_DATAS", response.data.data);
             console.log("FInance DATAS---------------->" + JSON.stringify(response.data.data))
@@ -246,7 +246,7 @@ const Finance = {
           .then(response => {
             // START=> COMMIT with data received'
             response.data.data.content.map(function (value, index) {
-              Vue.set(value, "expand", false);
+              value["expand"] = false;
             });
             commit("SET_PHONEPE_LOST_FINANCE_DATAS", response.data.data);
             console.log("FInance DATAS---------------->" + JSON.stringify(response.data.data))

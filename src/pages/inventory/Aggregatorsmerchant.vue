@@ -7,7 +7,7 @@
       <!--END: table title -->
       <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-md-4">
-          <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
+          <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
             :options="aggregatorOptions" @input="getaggregator" />
         </div>
       </div> -->
@@ -19,13 +19,13 @@
         :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
         <!-- :rows-per-page-options="[100,200,300,400,500]" -->
         <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{ props.row.deviceStatusDate | moment("Do MMM Y") }}</span>
+          <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
         </q-td>
         <template slot="top" class="bottom-border">
           <!--START: table filter,search -->
           <div class="col">
             <q-input clearable color="grey-9" v-model="filter" placeholder="Type.."
-              float-label="Search by Device Serial Number, MID, TID, Merchant Name" class="q-mr-lg q-py-sm" />
+              label="Search by Device Serial Number, MID, TID, Merchant Name" class="q-mr-lg q-py-sm" />
           </div>
 
           <!-- <div class="col-4">
@@ -34,15 +34,14 @@
               @clear="filterMasterTrackerClear()"
               @input="filterMasterTrackerByRegionId"
               v-model="regionFilter"
-              color="grey-9"
-              :options="getAllRegionsData"
+              color="grey-9" class=":options="getAllRegionsData"
               placeholder="Select"
-              float-label="Filter By"
+              label="Filter By"
             />
           </div>-->
           <div class="col-md-6">
 
-            <q-btn square outline color="purple-9" label="Download as Excel" class="q-mr-lg q-py-sm float-right"
+            <q-btn square outline color="purple-9" class="label="Download as Excel" class="q-mr-lg q-py-sm float-right"
               size="md" @click="downloadAggregatorsInventoryWithMerchant" />
 
           </div>
@@ -50,13 +49,12 @@
             <!-- <q-btn
               @click="downloadMasterInventory()"
               outline
-              color="grey-9"
-              label="Download as Excel"
+              color="grey-9" class="label="Download as Excel"
               class="q-mr-lg q-py-sm float-right"
               size="md"
             />-->
             <!-- <downloadExcel :rows="tableData" :fields="json_fields" name="InventoryWithMerchant.xls">
-              <q-btn outline color="grey-9" label="Download as excel" />
+              <q-btn outline color="grey-9" class="label="Download as excel" />
             </downloadExcel> -->
           </div>
 

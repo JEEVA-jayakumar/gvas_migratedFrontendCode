@@ -9,48 +9,46 @@
                 <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
                     <q-card style="width:225%">
                         <q-card-section>
-                            <q-list no-border>
+                            <q-list >
                                 <!-- <div class="col-md-5">
-                                    <q-input color="grey-9" disable type="text" v-model="additionalTerminal.mid"
-                                        placeholder="Enter MID" float-label="Enter MID" />
+                                    <q-input color="grey-9" class="disable type="text" v-model="additionalTerminal.mid"
+                                        placeholder="Enter MID" label="Enter MID" />
                                 </div>
                                 <div class="col-md-5">
-                                    <q-input color="grey-9" disable type="text" v-model="additionalTerminal.tid"
-                                        placeholder="Enter TID" float-label="Enter TID" />
+                                    <q-input color="grey-9" class="disable type="text" v-model="additionalTerminal.tid"
+                                        placeholder="Enter TID" label="Enter TID" />
                                 </div>
                                 <div class="col-md-5">
-                                    <q-input color="grey-9" disable type="text" v-model="additionalTerminal.institutionCode"
-                                        placeholder="Institution code*" float-label="Institution code*" />
+                                    <q-input color="grey-9" class="disable type="text" v-model="additionalTerminal.institutionCode"
+                                        placeholder="Institution code*" label="Institution code*" />
                                 </div>
                                 <div class="col-md-6">
-                                    <q-input color="grey-9" :disable="this.propsAdditionalData.merchantRefCode != null
+                                    <q-input color="grey-9" class=":disable="this.propsAdditionalData.merchantRefCode != null
                                     " v-model.trim="additionalTerminal.merchantRefCode"
-                                        float-label="Merchant RefCode*" />
+                                        label="Merchant RefCode*" />
                                 </div>
                                 <div class="col-md-5">
-                                    <q-input color="grey-9" disable v-model.trim="additionalTerminal.applicationNumber"
-                                        float-label="Application Number*" />
+                                    <q-input color="grey-9" class="disable v-model.trim="additionalTerminal.applicationNumber"
+                                        label="Application Number*" />
                                 </div>
                                 <div class="col-md-5">
-                                    <q-input color="grey-9"
-                                        v-model.trim="additionalTerminal.AdditionalTerminalDetails.numberOfTerminals"
-                                        float-label="Enter Number Of Terminals" />
+                                    <q-input color="grey-9" class="v-model.trim="additionalTerminal.AdditionalTerminalDetails.numberOfTerminals"
+                                        label="Enter Number Of Terminals" />
                                 </div>
                                 <div class="col-md-5">
-                                    <q-input color="grey-9" disable
+                                    <q-input color="grey-9" class="disable
                                         v-model.trim="additionalTerminal.AdditionalTerminalDetails.address"
-                                        float-label="Address*" />
+                                        label="Address*" />
                                 </div>
                                 <div class="col-md-6">
-                                    <q-input color="grey-9" disable v-model.trim="
+                                    <q-input color="grey-9" class="disable v-model.trim="
                                         additionalTerminal.AdditionalTerminalDetails
                                             .pinCode
-                                    " float-label="Pincode*" />
+                                    " label="Pincode*" />
                                 </div>
                                 <div class="col-md-5">
-                                    <q-input @blur="fnClrCity" color="grey-9"
-                                        v-model.trim="additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel"
-                                        @input="fninputTyping($event, 1)" float-label="City (type min 3 characters)*"
+                                    <q-input @blur="fnClrCity" color="grey-9" class="v-model.trim="additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel"
+                                        @input="fninputTyping($event, 1)" label="City (type min 3 characters)*"
                                         placeholder="Start typing ..*">
 
                                         <q-autocomplete separator @search="marsCitySearch" :debounce="10"
@@ -58,69 +56,67 @@
                                     </q-input>
                                 </div>
                                 <div class="col-md-5">
-                                    <q-input @blur="fnClrState" color="black-9"
-                                        v-model.trim="additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel"
-                                        @input="fninputTyping($event, 2)" float-label="state (type min 3 characters)*"
+                                    <q-input @blur="fnClrState" color="black-9" class="v-model.trim="additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel"
+                                        @input="fninputTyping($event, 2)" label="state (type min 3 characters)*"
                                         placeholder="Start typing ..*">
                                         <q-autocomplete separator @search="marsStateSearch" :debounce="10"
                                             :min-characters="3" @selected="partnerStateSelected" />
                                     </q-input>
                                 </div> -->
                                 <div class="col-md-6">
-                                    <q-input color="grey-9" disable v-model.trim="additionalTerminal.mid"
-                                        float-label="MID*" />
+                                    <q-input color="grey-9" class="disable v-model.trim="additionalTerminal.mid"
+                                        label="MID*" />
                                 </div>
                                 <div class="col-md-6">
-                                    <q-input color="grey-9" disable v-model.trim="additionalTerminal.tid"
-                                        float-label="TID*" />
+                                    <q-input color="grey-9" class="disable v-model.trim="additionalTerminal.tid"
+                                        label="TID*" />
                                 </div>
                                 <div class="col-md-6">
-                                    <q-input color="grey-9" disable v-model.trim="additionalTerminal.institutionCode"
-                                        float-label="Institution code*" />
+                                    <q-input color="grey-9" class="disable v-model.trim="additionalTerminal.institutionCode"
+                                        label="Institution code*" />
                                 </div>
                                 <div class="col-md-6">
-                                    <q-input color="grey-9" :disable="
+                                    <q-input color="grey-9" class=":disable="
                                         this.propsAdditionalData
                                             .merchantRefCode
 
-                                    " v-model.trim="additionalTerminal.merchantRefCode" :error="$v.additionalTerminal.merchantRefCode.$error
-" float-label="Merchant RefCode*" />
+                                    " v-model.trim="additionalTerminal.merchantRefCode" :error="v$.additionalTerminal.merchantRefCode.$error
+" label="Merchant RefCode*" />
                                 </div>
                                 <div class="col-md-6">
-                                    <q-input color="grey-9" disable v-model.trim="additionalTerminal.applicationNumber"
-                                        float-label="Application Number*" />
+                                    <q-input color="grey-9" class="disable v-model.trim="additionalTerminal.applicationNumber"
+                                        label="Application Number*" />
                                 </div>
                                 <div class="col-md-6">
                                     <q-input v-model.trim="
                                         additionalTerminal.AdditionalTerminalDetails
                                             .numberOfTerminals
                                     " @blur="
-    $v.additionalTerminal.AdditionalTerminalDetails
+    v$.additionalTerminal.AdditionalTerminalDetails
         .numberOfTerminals.$touch;
                    " :error="
-                       $v.additionalTerminal.AdditionalTerminalDetails
+                       v$.additionalTerminal.AdditionalTerminalDetails
                            .numberOfTerminals.$error
-                   " class="text-weight-regular text-grey-8" color="grey-9" float-label="*Number Of Terminals"
+                   " class="text-weight-regular text-grey-8" color="grey-9" class="label="*Number Of Terminals"
                                         placeholder="Number Of Terminals" />
                                 </div>
                                 <div class="col-md-6">
-                                    <q-input color="grey-9" disable v-model.trim="
+                                    <q-input color="grey-9" class="disable v-model.trim="
                                         additionalTerminal.AdditionalTerminalDetails
                                             .address
-                                    " float-label="Address*" />
+                                    " label="Address*" />
                                 </div>
 
                                 <div class="col-md-6">
-                                    <q-input color="grey-9" disable v-model.trim="
+                                    <q-input color="grey-9" class="disable v-model.trim="
                                         additionalTerminal.AdditionalTerminalDetails
                                             .pinCode
-                                    " float-label="Pincode*" />
+                                    " label="Pincode*" />
                                 </div>
 
                                 <div class="col-md-6">
-                                    <q-input @blur="fnClrCity" color="grey-9"
-                                        v-model.trim="additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel"
-                                        @input="fninputTyping($event, 1)" float-label="City (type min 3 characters)*"
+                                    <q-input @blur="fnClrCity" color="grey-9" class="v-model.trim="additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel"
+                                        @input="fninputTyping($event, 1)" label="City (type min 3 characters)*"
                                         placeholder="Start typing ..*">
 
                                         <q-autocomplete separator @search="marsCitySearch" :debounce="10"
@@ -128,9 +124,8 @@
                                     </q-input>
                                 </div>
                                 <div class="col-md-6">
-                                    <q-input @blur="fnClrState" color="black-9"
-                                        v-model.trim="additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel"
-                                        @input="fninputTyping($event, 2)" float-label="state (type min 3 characters)*"
+                                    <q-input @blur="fnClrState" color="black-9" class="v-model.trim="additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel"
+                                        @input="fninputTyping($event, 2)" label="state (type min 3 characters)*"
                                         placeholder="Start typing ..*">
                                         <q-autocomplete separator @search="marsStateSearch" :debounce="10"
                                             :min-characters="3" @selected="partnerStateSelected" />
@@ -141,7 +136,7 @@
                         <q-card-actions align="end">
                             <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8"
                                 @click="closeRejectModel()">Cancel</q-btn>
-                            <q-btn label="submit" @click="fnAdditionalSubmit(additionalTerminal)" color="purple-9" />
+                            <q-btn label="submit" @click="fnAdditionalSubmit(additionalTerminal)" color="purple-9" class="/>
                         </q-card-actions>
                     </q-card>
                 </div>
@@ -362,8 +357,8 @@ export default {
 
 
         fnAdditionalSubmit(request) {
-            this.$v.additionalTerminal.$touch();
-            if (this.$v.additionalTerminal.$error) {
+            this.v$.additionalTerminal.$touch();
+            if (this.v$.additionalTerminal.$error) {
                 this.$q.notify({
                     color: "negative",
                     position: "bottom",
@@ -463,7 +458,7 @@ export default {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",
-                        message: error.body != null ? error.body.message : "Lead Information status update failed!",
+                        message: error.data != null ? error.data.message : "Lead Information status update failed!",
                         icon: "clear"
                     });
                     this.$q.loading.hide();
@@ -606,10 +601,10 @@ export default {
                 this.$q.notify({
                     color: "positive",
                     position: "bottom",
-                    message: response.body.message,
+                    message: response.data.message,
                     icon: "thumb_up"
                 });
-                let res = response.body.data;
+                let res = response.data.data;
                 this.listAllSubTidDetails = res;
             }).catch(error => {
                 this.$q.loading.hide();
@@ -900,7 +895,7 @@ export default {
                                     merchantRefCode: this.propLeadDeatils.merchantRefCode
                                 };
                             } else {
-                                feed_paramaters = response.body;
+                                feed_paramaters = response.data;
                             }
                             self.$q.loading.show({
                                 delay: 0, // ms
@@ -1043,7 +1038,7 @@ export default {
                                             .slice(1, 2);
                                         let computeSplitted = splitted[splitted.length - 1];
                                         let fieldErrorFound = eval(`
-                        OThis.$v.viewBinding.partnersArr.$each[
+                        OThis.v$.viewBinding.partnersArr.$each[
                           ${findPartnersErrorIndex}
                         ].${computeSplitted}`);
                                         fieldErrorFound.$model = "";
@@ -1057,7 +1052,7 @@ export default {
                                         generateErrorMessage.issue = actual.issue;
                                         generateErrorMessage.value = actual.value;
                                     } else {
-                                        let splittingErrorField = `OThis.$v.${splitted.join(
+                                        let splittingErrorField = `OThis.v$.${splitted.join(
                                             "."
                                         )}`;
                                         let fieldErrorFound = eval(splittingErrorField);

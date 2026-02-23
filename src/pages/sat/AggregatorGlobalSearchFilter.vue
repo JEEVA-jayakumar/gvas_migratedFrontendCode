@@ -7,12 +7,12 @@
         </div>
         <div class="row gutter-x-xs gutter-y-xs q-pt-md justify-around items-end">
           <div class="col-md-6">
-            <q-input clearable color="grey-9" v-model="formData.searchTerm" placeholder="Type.." float-label="Search .."
+            <q-input clearable color="grey-9" v-model="formData.searchTerm" placeholder="Type.." label="Search .."
               class="q-mr-lg q-py-sm" />
           </div>
           <div class="col-md-3">
             <div class="group">
-              <q-radio v-for="(item, index) in flagOptions" :key="index" color="grey-9" v-model.trim="formData.flag"
+              <q-radio v-for="(item, index) in flagOptions" :key="index" color="grey-9" class="v-model.trim="formData.flag"
                 :val="item.value" :label="item.label" />
             </div>
           </div>

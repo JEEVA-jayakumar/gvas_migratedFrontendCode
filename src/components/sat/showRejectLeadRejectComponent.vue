@@ -18,21 +18,19 @@
             <q-input
               class=" no-pointer-events"
               v-model="formData.soReason"
-              float-label="SO Remarks"
-              color="light-blue" 
-            />
+              label="SO Remarks"
+              color="light-blue" class="/>
           </div>
           <div>
             <q-input
               v-model="formData.leadInformation.kycSatRemark"
-              @blur="$v.formData.leadInformation.kycSatRemark.$touch"      
-              :error="$v.formData.leadInformation.kycSatRemark.$error" 
-              float-label="SAT Remarks"
-              color="light-blue" 
-            />
+              @blur="v$.formData.leadInformation.kycSatRemark.$touch"
+              :error="v$.formData.leadInformation.kycSatRemark.$error"
+              label="SAT Remarks"
+              color="light-blue" class="/>
           </div>
           <div class="group">
-            <q-btn icon="clear" color="negative" class="q-ma-sm float-right" @click="sendRemarks(formData)" align="right" label="Reject" />
+            <q-btn icon="clear" color="negative" class="class="q-ma-sm float-right" @click="sendRemarks(formData)" align="right" label="Reject" />
             <q-btn icon="block" color="grey-5" @click="emitToggleRemarks()" class="q-ma-sm float-right text-dark" align="right" v-close-overlay label="Cancel" />
           </div>
         </div>
@@ -84,8 +82,8 @@ export default {
       this.$emit("toggleLeadModal");
     },
     sendRemarks(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({
@@ -109,7 +107,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

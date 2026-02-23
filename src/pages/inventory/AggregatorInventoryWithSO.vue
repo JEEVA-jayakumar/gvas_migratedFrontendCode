@@ -6,7 +6,7 @@
       <!--START: table lead validation -->
       <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-md-4">
-          <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
+          <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
             :options="aggregatorOptions" @input="getaggregator" />
         </div>
       </div> -->
@@ -16,24 +16,24 @@
           <!-- <q-td
           v-slot:body-cell-createdAt="props"
           :props="props"
-        >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-receivedAt="props"
           :props="props"
-        >{{ props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.receivedAt, "Do MMM Y") }}</q-td>
 
         <q-td
           v-slot:body-cell-receivedAt="props"
           :props="props"
-        >{{ props.row.receivedAt ==null? "NA" : props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.receivedAt ==null? "NA" : props.row.receivedAt, "Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-DeviceList="props"
           :props="props"
-        >{{ props.row.device.createDate | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.device.createDate, "Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-ModifyDate="props"
           :props="props"
-        >{{ props.row.device.modifyDate | moment("Do MMM Y") }}</q-td>-->
+        >{{ $moment_format(props.row.device.modifyDate, "Do MMM Y") }}</q-td>-->
           <q-td v-slot:body-cell-created_at="props" :props="props">{{
             props.row.created_at == null ? "NA" :
               props.row.created_at | moment("Do MMM Y")
@@ -44,22 +44,21 @@
           }}</q-td>
           <template v-slot:top="props">
             <div class="col-md-5">
-              <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
-              float-label="Pod Number, Device Type, Serial Number" class="q-mr-lg q-py-sm" />
+              <q-input clearable v-model="filter" separator color="grey-9" class="placeholder="Type.."
+              label="Pod Number, Device Type, Serial Number" class="q-mr-lg q-py-sm" />
             </div>
             <div class="col-md-5">
 
-              <q-btn square outline color="purple-9" label="Download as Excel" class="q-mr-lg q-py-sm float-right"
+              <q-btn square outline color="purple-9" class="label="Download as Excel" class="q-mr-lg q-py-sm float-right"
                 size="md" @click="downloadInventoryWithSoList" />
 
             </div>
             <div class="col-md-5">
               <!-- <q-input
                     clearable
-                    color="grey-9"
-                    v-model="filterSearch"
+                    color="grey-9" v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search .."
+                    label="Search .."
                     class="q-mr-lg q-py-sm"
             />-->
               <!-- <div class="col-md-5">
@@ -69,7 +68,7 @@
                 :fields="json_fields"
                 name="InventoryWithSO.xls"
               >
-                <q-btn outline color="grey-9" label="Download as excel" />
+                <q-btn outline color="grey-9" class="label="Download as excel" />
               </downloadExcel>
               @click="downloadReport"
             </div> -->

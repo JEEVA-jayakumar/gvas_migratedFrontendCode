@@ -8,52 +8,52 @@
             </div>
             <!-- Document related form -->
             <div class="col-md-8 q-pa-xs">
-                <q-stepper color="purple-9" ref="stepper" contractable text alternative-labels>
+                <q-stepper color="purple-9" class="ref="stepper" contractable text alternative-labels>
                     <q-step default name="first" title="Sales" subtitle="Info">
                         <div class="row gutter-sm">
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-select 
-                            @blur="$v.merchant.salesInformation.institutionCode.$touch"      
-                            :error="$v.merchant.salesInformation.institutionCode.$error" 
-                            placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.institutionCode" float-label="Institution Code" :options="institutionCodeOptions" @input="fetchAllDropdownValuesFromMARSapi"/>
+                            @blur="v$.merchant.salesInformation.institutionCode.$touch"
+                            :error="v$.merchant.salesInformation.institutionCode.$error"
+                            placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.institutionCode" label="Institution Code" :options="institutionCodeOptions" @input="fetchAllDropdownValuesFromMARSapi"/>
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-select 
-                            @blur="$v.merchant.salesInformation.applicationType.$touch"      
-                            :error="$v.merchant.salesInformation.applicationType.$error" 
-                            placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.applicationType" float-label="Application Type" :options="applicationTypeOptions" />
+                            @blur="v$.merchant.salesInformation.applicationType.$touch"
+                            :error="v$.merchant.salesInformation.applicationType.$error"
+                            placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.applicationType" label="Application Type" :options="applicationTypeOptions" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.salesInformation.applicationNumber.$touch"      
-                            :error="$v.merchant.salesInformation.applicationNumber.$error" 
-                            color="grey-9" v-model="merchant.salesInformation.applicationNumber"  float-label="Application Number" placeholder="Application Number" />
+                            @blur="v$.merchant.salesInformation.applicationNumber.$touch"
+                            :error="v$.merchant.salesInformation.applicationNumber.$error"
+                            color="grey-9" v-model="merchant.salesInformation.applicationNumber"  label="Application Number" placeholder="Application Number" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input
-                            @blur="$v.merchant.salesInformation.applicationDate.$touch"      
-                            :error="$v.merchant.salesInformation.applicationDate.$error"
-                            color="grey-9" minimal v-model="merchant.salesInformation.applicationDate" :default-value	="new Date()" type="date" float-label="Application Date" placeholder="Application Date" />
+                            @blur="v$.merchant.salesInformation.applicationDate.$touch"
+                            :error="v$.merchant.salesInformation.applicationDate.$error"
+                            color="grey-9" class="minimal v-model="merchant.salesInformation.applicationDate" :default-value	="new Date()" type="date" label="Application Date" placeholder="Application Date" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input
-                            color="grey-9" minimal v-model="merchant.salesInformation.aggreementDate" :default-value	="new Date()" type="date" float-label="Application Date" placeholder="Application Date" />
+                            color="grey-9" class="minimal v-model="merchant.salesInformation.aggreementDate" :default-value	="new Date()" type="date" label="Application Date" placeholder="Application Date" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-select 
-                            @blur="$v.merchant.salesInformation.merchantType.$touch"      
-                            :error="$v.merchant.salesInformation.merchantType.$error"
-                            placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.merchantType" float-label="Merchant Type" :options="merchantTypeOptions" />
+                            @blur="v$.merchant.salesInformation.merchantType.$touch"
+                            :error="v$.merchant.salesInformation.merchantType.$error"
+                            placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.merchantType" label="Merchant Type" :options="merchantTypeOptions" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-select 
-                            placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.salesPersonCode" float-label="Sales Person" :options="salesPersonOptions" />
+                            placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.salesPersonCode" label="Sales Person" :options="salesPersonOptions" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.region" float-label="Region" :options="regionOptions" />
+                            <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.region" label="Region" :options="regionOptions" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.leadFrom" float-label="Lead From" :options="leadFromOptions" />
+                            <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.leadFrom" label="Lead From" :options="leadFromOptions" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <p class="text-caption">Subvention Type</p>
@@ -73,51 +73,51 @@
                         class="row gutter-sm q-my-xs">
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-select 
-                            @blur="$v.merchant.salesInformation.sharingPartnerCode.$touch"      
-                            :error="$v.merchant.salesInformation.sharingPartnerCode.$error"
-                            placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.sharingPartnerCode" float-label="Sharing partner" :options="sharingPartnerOptions" />
+                            @blur="v$.merchant.salesInformation.sharingPartnerCode.$touch"
+                            :error="v$.merchant.salesInformation.sharingPartnerCode.$error"
+                            placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.sharingPartnerCode" label="Sharing partner" :options="sharingPartnerOptions" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.salesInformation.dailyFixedAmount.$touch"      
-                            :error="$v.merchant.salesInformation.dailyFixedAmount.$error"
-                            color="grey-9" v-model="merchant.salesInformation.dailyFixedAmount"  float-label="Daily fixed amount" type="number" placeholder="Daily fixed amount" />
+                            @blur="v$.merchant.salesInformation.dailyFixedAmount.$touch"
+                            :error="v$.merchant.salesInformation.dailyFixedAmount.$error"
+                            color="grey-9" v-model="merchant.salesInformation.dailyFixedAmount"  label="Daily fixed amount" type="number" placeholder="Daily fixed amount" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.salesInformation.loanDisbursementPercentage.$touch"      
-                            :error="$v.merchant.salesInformation.loanDisbursementPercentage.$error"
-                            color="grey-9" v-model="merchant.salesInformation.loanDisbursementPercentage"  float-label="Percentage" type="number" placeholder="Percentage" />
+                            @blur="v$.merchant.salesInformation.loanDisbursementPercentage.$touch"
+                            :error="v$.merchant.salesInformation.loanDisbursementPercentage.$error"
+                            color="grey-9" v-model="merchant.salesInformation.loanDisbursementPercentage"  label="Percentage" type="number" placeholder="Percentage" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                               <q-input
-                              @blur="$v.merchant.salesInformation.loanDisbursementAmount.$touch"      
-                              :error="$v.merchant.salesInformation.loanDisbursementAmount.$error"
-                                color="grey-9" v-model="merchant.salesInformation.loanDisbursementAmount"  float-label="Loan disbursement value" type="number" placeholder="Loan disbursement value" />
+                              @blur="v$.merchant.salesInformation.loanDisbursementAmount.$touch"
+                              :error="v$.merchant.salesInformation.loanDisbursementAmount.$error"
+                                color="grey-9" v-model="merchant.salesInformation.loanDisbursementAmount"  label="Loan disbursement value" type="number" placeholder="Loan disbursement value" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input
-                            @blur="$v.merchant.salesInformation.loanDisbursementDate.$touch"      
-                            :error="$v.merchant.salesInformation.loanDisbursementDate.$error"
-                            color="grey-9" minimal v-model="merchant.salesInformation.loanDisbursementDate" :default-value	="new Date()" type="date" float-label="Disbursement Date" placeholder="Disbursement Date" />
+                            @blur="v$.merchant.salesInformation.loanDisbursementDate.$touch"
+                            :error="v$.merchant.salesInformation.loanDisbursementDate.$error"
+                            color="grey-9" class="minimal v-model="merchant.salesInformation.loanDisbursementDate" :default-value	="new Date()" type="date" label="Disbursement Date" placeholder="Disbursement Date" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.salesInformation.tenureMonth.$touch"      
-                            :error="$v.merchant.salesInformation.tenureMonth.$error"
-                            color="grey-9" v-model="merchant.salesInformation.tenureMonth"  float-label="Tenure (in months)" type="number" placeholder="Tenure (in months)" />
+                            @blur="v$.merchant.salesInformation.tenureMonth.$touch"
+                            :error="v$.merchant.salesInformation.tenureMonth.$error"
+                            color="grey-9" v-model="merchant.salesInformation.tenureMonth"  label="Tenure (in months)" type="number" placeholder="Tenure (in months)" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.salesInformation.tenureDay.$touch"      
-                            :error="$v.merchant.salesInformation.tenureDay.$error"
-                            color="grey-9" v-model="merchant.salesInformation.tenureDay"  float-label="Tenure (in days)" type="number" placeholder="Tenure (in days)" />
+                            @blur="v$.merchant.salesInformation.tenureDay.$touch"
+                            :error="v$.merchant.salesInformation.tenureDay.$error"
+                            color="grey-9" v-model="merchant.salesInformation.tenureDay"  label="Tenure (in days)" type="number" placeholder="Tenure (in days)" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input
-                            @blur="$v.merchant.salesInformation.tenureStartDate.$touch"      
-                            :error="$v.merchant.salesInformation.tenureStartDate.$error"
-                            color="grey-9" minimal v-model="merchant.salesInformation.tenureStartDate" :default-value	="new Date()" type="date" float-label="Start Date" placeholder="Tenure Start Date" />
+                            @blur="v$.merchant.salesInformation.tenureStartDate.$touch"
+                            :error="v$.merchant.salesInformation.tenureStartDate.$error"
+                            color="grey-9" class="minimal v-model="merchant.salesInformation.tenureStartDate" :default-value	="new Date()" type="date" label="Start Date" placeholder="Tenure Start Date" />
                           </div>
                         </div>
                         <!-- M => MDR/cash@pos/rent -->
@@ -125,54 +125,54 @@
                         class="row gutter-sm q-my-xs">
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-select
-                            @blur="$v.merchant.salesInformation.sharingPartnerCode.$touch"      
-                            :error="$v.merchant.salesInformation.sharingPartnerCode.$error"
-                            placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.sharingPartnerCode" float-label="Sharing partner" :options="sharingPartnerOptions" />
+                            @blur="v$.merchant.salesInformation.sharingPartnerCode.$touch"
+                            :error="v$.merchant.salesInformation.sharingPartnerCode.$error"
+                            placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.sharingPartnerCode" label="Sharing partner" :options="sharingPartnerOptions" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.salesInformation.rentPercentage.$touch"      
-                            :error="$v.merchant.salesInformation.rentPercentage.$error"
-                            color="grey-9" v-model="merchant.salesInformation.rentPercentage"  float-label="Rent %" type="number" placeholder="Rent %" />
+                            @blur="v$.merchant.salesInformation.rentPercentage.$touch"
+                            :error="v$.merchant.salesInformation.rentPercentage.$error"
+                            color="grey-9" v-model="merchant.salesInformation.rentPercentage"  label="Rent %" type="number" placeholder="Rent %" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.salesInformation.rentFixed.$touch"      
-                            :error="$v.merchant.salesInformation.rentFixed.$error"
-                            color="grey-9" v-model="merchant.salesInformation.rentFixed"  float-label="Rent fixed" type="number" placeholder="Rent fixed" />
+                            @blur="v$.merchant.salesInformation.rentFixed.$touch"
+                            :error="v$.merchant.salesInformation.rentFixed.$error"
+                            color="grey-9" v-model="merchant.salesInformation.rentFixed"  label="Rent fixed" type="number" placeholder="Rent fixed" />
                           </div>
                         </div>
                         <!-- Navigation for this step at the end of QStep-->
                         <q-stepper-navigation>
-                          <q-btn color="primary" class="q-ma-xs" icon="check" @click="validatebeforeNavigate('salesInformation')" label="Continue" />
-                          <q-btn color="amber-10" class="q-ma-xs" icon="save" label="Save Partial" />
+                          <q-btn color="primary" class="class="q-ma-xs" icon="check" @click="validatebeforeNavigate('salesInformation')" label="Continue" />
+                          <q-btn color="amber-10" class="class="q-ma-xs" icon="save" label="Save Partial" />
                         </q-stepper-navigation>
                     </q-step>
                     <q-step name="second" title="Details">
                         <div class="row gutter-sm">
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.companyInformation.legalName.$touch"      
-                            :error="$v.merchant.companyInformation.legalName.$error"
-                            color="grey-9" v-model="merchant.companyInformation.legalName" float-label="Legal Name" placeholder="Legal Name" />
+                            @blur="v$.merchant.companyInformation.legalName.$touch"
+                            :error="v$.merchant.companyInformation.legalName.$error"
+                            color="grey-9" v-model="merchant.companyInformation.legalName" label="Legal Name" placeholder="Legal Name" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.companyInformation.dbaName.$touch"      
-                            :error="$v.merchant.companyInformation.dbaName.$error" 
-                            color="grey-9" v-model="merchant.companyInformation.dbaName" float-label="DBA Name" placeholder="DBA Name" />
+                            @blur="v$.merchant.companyInformation.dbaName.$touch"
+                            :error="v$.merchant.companyInformation.dbaName.$error"
+                            color="grey-9" v-model="merchant.companyInformation.dbaName" label="DBA Name" placeholder="DBA Name" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.companyInformation.registeredAddress.$touch"      
-                            :error="$v.merchant.companyInformation.registeredAddress.$error"
-                            color="grey-9" v-model="merchant.companyInformation.registeredAddress" float-label="Registered Address" placeholder="Registered Address" />
+                            @blur="v$.merchant.companyInformation.registeredAddress.$touch"
+                            :error="v$.merchant.companyInformation.registeredAddress.$error"
+                            color="grey-9" v-model="merchant.companyInformation.registeredAddress" label="Registered Address" placeholder="Registered Address" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.companyInformation.registeredCityName.$touch"      
-                            :error="$v.merchant.companyInformation.registeredCityName.$error"
-                            color="grey-9" v-model="merchant.companyInformation.registeredCityName" float-label="Registered city" placeholder="Registered city">
+                            @blur="v$.merchant.companyInformation.registeredCityName.$touch"
+                            :error="v$.merchant.companyInformation.registeredCityName.$error"
+                            color="grey-9" v-model="merchant.companyInformation.registeredCityName" label="Registered city" placeholder="Registered city">
                                 <q-autocomplete
                                 @search="residentCitySearch"
                                 :debounce="500"
@@ -183,9 +183,9 @@
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.companyInformation.registeredStateName.$touch"      
-                            :error="$v.merchant.companyInformation.registeredStateName.$error"
-                            color="grey-9" v-model="merchant.companyInformation.registeredStateName" float-label="Registered state" placeholder="Registered state">
+                            @blur="v$.merchant.companyInformation.registeredStateName.$touch"
+                            :error="v$.merchant.companyInformation.registeredStateName.$error"
+                            color="grey-9" v-model="merchant.companyInformation.registeredStateName" label="Registered state" placeholder="Registered state">
                                 <q-autocomplete
                                 @search="residentStateSearch"
                                 :debounce="500"
@@ -196,45 +196,45 @@
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.companyInformation.registeredPin.$touch"      
-                            :error="$v.merchant.companyInformation.registeredPin.$error"
-                            color="grey-9" type="number" v-model="merchant.companyInformation.registeredPin" float-label="PIN" placeholder="PIN" />
+                            @blur="v$.merchant.companyInformation.registeredPin.$touch"
+                            :error="v$.merchant.companyInformation.registeredPin.$error"
+                            color="grey-9" class="type="number" v-model="merchant.companyInformation.registeredPin" label="PIN" placeholder="PIN" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-select 
-                            @blur="$v.merchant.companyInformation.constitution.$touch"      
-                            :error="$v.merchant.companyInformation.constitution.$error"
-                            placeholder="Choose from the below" color="grey-9" v-model="merchant.companyInformation.constitution" float-label="Type of business entity" :options="constitutionOptions" />
+                            @blur="v$.merchant.companyInformation.constitution.$touch"
+                            :error="v$.merchant.companyInformation.constitution.$error"
+                            placeholder="Choose from the below" color="grey-9" v-model="merchant.companyInformation.constitution" label="Type of business entity" :options="constitutionOptions" />
                           </div>
                           <!-- <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-input color="grey-9" v-model="merchant.companyInformation.constitutionDescription" float-label="Constitution description" placeholder="Constitution description" />
+                            <q-input color="grey-9" v-model="merchant.companyInformation.constitutionDescription" label="Constitution description" placeholder="Constitution description" />
                           </div> -->
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-input color="grey-9" minimal v-model="merchant.companyInformation.establishYear" :default-value	="new Date()" type="date" float-label="Year of Establishment" placeholder="Year of Establishment" />
+                            <q-input color="grey-9" class="minimal v-model="merchant.companyInformation.establishYear" :default-value	="new Date()" type="date" label="Year of Establishment" placeholder="Year of Establishment" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-input color="grey-9" v-model="merchant.companyInformation.registerNumber" float-label="Establish Number" placeholder="Establish Number" />
+                            <q-input color="grey-9" v-model="merchant.companyInformation.registerNumber" label="Establish Number" placeholder="Establish Number" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-input color="grey-9" v-model="merchant.companyInformation.tin" float-label="TIN" placeholder="TIN" />
+                            <q-input color="grey-9" v-model="merchant.companyInformation.tin" label="TIN" placeholder="TIN" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-input color="grey-9" v-model="merchant.companyInformation.pan" float-label="Company PAN" placeholder="Company PAN" />
+                            <q-input color="grey-9" v-model="merchant.companyInformation.pan" label="Company PAN" placeholder="Company PAN" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-input color="grey-9" v-model="merchant.companyInformation.tan" float-label="TAN" placeholder="TAN" />
+                            <q-input color="grey-9" v-model="merchant.companyInformation.tan" label="TAN" placeholder="TAN" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-input color="grey-9" v-model="merchant.companyInformation.businessNature" float-label="Nature of Business" placeholder="Nature of Business" />
+                            <q-input color="grey-9" v-model="merchant.companyInformation.businessNature" label="Nature of Business" placeholder="Nature of Business" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.companyInformation.businessType" float-label="Type of Business" :options="businessTypeOptions" />
+                            <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.companyInformation.businessType" label="Type of Business" :options="businessTypeOptions" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.companyInformation.mccname.$touch"      
-                            :error="$v.merchant.companyInformation.mccname.$error"
-                            color="amber" v-model="merchant.companyInformation.mccname" float-label="MCC" placeholder="MCC">
+                            @blur="v$.merchant.companyInformation.mccname.$touch"
+                            :error="v$.merchant.companyInformation.mccname.$error"
+                            color="amber" v-model="merchant.companyInformation.mccname" label="MCC" placeholder="MCC">
                                 <q-autocomplete
                                 @search="mccSearch"
                                 :debounce="500"
@@ -244,25 +244,25 @@
                             </q-input>
                           </div>
                           <!-- <div class="col-md-6 col-sm-12 col-xs-12">
-                              <q-input color="grey-9" type="number" v-model="merchant.companyInformation.tcc" float-label="TCC" placeholder="TCC" />
+                              <q-input color="grey-9" class="type="number" v-model="merchant.companyInformation.tcc" label="TCC" placeholder="TCC" />
                           </div> -->
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.companyInformation.residentialAddress.$touch"      
-                            :error="$v.merchant.companyInformation.residentialAddress.$error"
-                            color="grey-9" v-model="merchant.companyInformation.residentialAddress" float-label="Residential Address" placeholder="Residential Address" />
+                            @blur="v$.merchant.companyInformation.residentialAddress.$touch"
+                            :error="v$.merchant.companyInformation.residentialAddress.$error"
+                            color="grey-9" v-model="merchant.companyInformation.residentialAddress" label="Residential Address" placeholder="Residential Address" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.companyInformation.residentialPin.$touch"      
-                            :error="$v.merchant.companyInformation.residentialPin.$error"
-                            color="grey-9" type="number" v-model="merchant.companyInformation.residentialPin" float-label="PIN" placeholder="PIN" />
+                            @blur="v$.merchant.companyInformation.residentialPin.$touch"
+                            :error="v$.merchant.companyInformation.residentialPin.$error"
+                            color="grey-9" class="type="number" v-model="merchant.companyInformation.residentialPin" label="PIN" placeholder="PIN" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.companyInformation.residentCityName.$touch"      
-                            :error="$v.merchant.companyInformation.residentCityName.$error"
-                            color="grey-9" v-model="merchant.companyInformation.residentCityName" float-label="City" placeholder="City">
+                            @blur="v$.merchant.companyInformation.residentCityName.$touch"
+                            :error="v$.merchant.companyInformation.residentCityName.$error"
+                            color="grey-9" v-model="merchant.companyInformation.residentCityName" label="City" placeholder="City">
                                 <q-autocomplete
                                 @search="residentCitySearch"
                                 :debounce="500"
@@ -273,9 +273,9 @@
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input
-                            @blur="$v.merchant.companyInformation.residentStateName.$touch"      
-                            :error="$v.merchant.companyInformation.residentStateName.$error"
-                            color="grey-9" v-model="merchant.companyInformation.residentStateName" float-label="State" placeholder="State">
+                            @blur="v$.merchant.companyInformation.residentStateName.$touch"
+                            :error="v$.merchant.companyInformation.residentStateName.$error"
+                            color="grey-9" v-model="merchant.companyInformation.residentStateName" label="State" placeholder="State">
                                 <q-autocomplete
                                 @search="residentStateSearch"
                                 :debounce="500"
@@ -286,34 +286,34 @@
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.companyInformation.contactName.$touch"      
-                            :error="$v.merchant.companyInformation.contactName.$error"
-                            color="grey-9" v-model="merchant.companyInformation.contactName" float-label="contactName" placeholder="contactName" />
+                            @blur="v$.merchant.companyInformation.contactName.$touch"
+                            :error="v$.merchant.companyInformation.contactName.$error"
+                            color="grey-9" v-model="merchant.companyInformation.contactName" label="contactName" placeholder="contactName" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.companyInformation.contactMobile.$touch"      
-                            :error="$v.merchant.companyInformation.contactMobile.$error"
-                            color="grey-9" type="number" v-model="merchant.companyInformation.contactMobile" float-label="Contact mobile" placeholder="Contact Mobile" />
+                            @blur="v$.merchant.companyInformation.contactMobile.$touch"
+                            :error="v$.merchant.companyInformation.contactMobile.$error"
+                            color="grey-9" class="type="number" v-model="merchant.companyInformation.contactMobile" label="Contact mobile" placeholder="Contact Mobile" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-input color="grey-9" type="tel" v-model="merchant.companyInformation.contactAlternateMobile" float-label="Contact Alt Mobile" placeholder="Contact Alt Mobile" />
+                            <q-input color="grey-9" class="type="tel" v-model="merchant.companyInformation.contactAlternateMobile" label="Contact Alt Mobile" placeholder="Contact Alt Mobile" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-input color="grey-9" type="tel" v-model="merchant.companyInformation.contactPhone" float-label="Contact Phone" placeholder="Contact Phone" />
+                            <q-input color="grey-9" class="type="tel" v-model="merchant.companyInformation.contactPhone" label="Contact Phone" placeholder="Contact Phone" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
-                            @blur="$v.merchant.companyInformation.contactEmail.$touch"      
-                            :error="$v.merchant.companyInformation.contactEmail.$error"
-                            color="grey-9" type="email" v-model="merchant.companyInformation.contactEmail" float-label="Contact Email" placeholder="Contact Email" />
+                            @blur="v$.merchant.companyInformation.contactEmail.$touch"
+                            :error="v$.merchant.companyInformation.contactEmail.$error"
+                            color="grey-9" class="type="email" v-model="merchant.companyInformation.contactEmail" label="Contact Email" placeholder="Contact Email" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <div class="text-caption">Statement type</div>
                             <div class="group">
                               <q-radio 
-                              @blur="$v.merchant.companyInformation.statementType.$touch"      
-                              :error="$v.merchant.companyInformation.statementType.$error"
+                              @blur="v$.merchant.companyInformation.statementType.$touch"
+                              :error="v$.merchant.companyInformation.statementType.$error"
                               v-for="(item,index) in viewBinding.statementType" :key="index" color="grey-9" v-model="merchant.companyInformation.statementType" :val="item.value" :label="item.label"
                                 />
                             </div>
@@ -322,53 +322,53 @@
                             <p class="text-caption">Statement frequency</p>
                             <div class="group">
                               <q-radio 
-                              @blur="$v.merchant.companyInformation.statementFrequency.$touch"      
-                              :error="$v.merchant.companyInformation.statementFrequency.$error"
+                              @blur="v$.merchant.companyInformation.statementFrequency.$touch"
+                              :error="v$.merchant.companyInformation.statementFrequency.$error"
                               v-for="(item,index) in viewBinding.statementFrequency" :key="index" color="grey-9" v-model="merchant.companyInformation.statementFrequency" :val="item.value" :label="item.label" />
                             </div>
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-chips-input v-model="merchant.companyInformation.statementEmail" color="grey-9" float-label="Statement Email" placeholder="Statement Email"/>
+                            <q-chips-input v-model="merchant.companyInformation.statementEmail" color="grey-9" class="label="Statement Email" placeholder="Statement Email"/>
                           </div>
                       </div>
                       <q-stepper-navigation>
-                        <q-btn color="primary" class="q-ma-xs" icon="check" @click="validatebeforeNavigate('companyInformation')" label="Continue" />
-                        <q-btn color="amber-10" class="q-ma-xs" icon="save" label="Save Partial" />
-                        <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="$refs.stepper.previous()" label="Back" />
+                        <q-btn color="primary" class="class="q-ma-xs" icon="check" @click="validatebeforeNavigate('companyInformation')" label="Continue" />
+                        <q-btn color="amber-10" class="class="q-ma-xs" icon="save" label="Save Partial" />
+                        <q-btn color="grey-7" class="class="q-ma-xs" icon="block" @click="$refs.stepper.previous()" label="Back" />
                       </q-stepper-navigation>
                     </q-step>
                     <q-step name="third" title="Partners" v-if="merchant.companyInformation.constitution == 'PL'">
-                      <!-- <pre>{{$v.viewBinding.partnersArr.$each}}</pre> -->
-                        <div v-for="(v,index) in $v.viewBinding.partnersArr.$each" :key="index" class="row q-my-xs gutter-sm">
+                      <!-- <pre>{{v$.viewBinding.partnersArr.$each}}</pre> -->
+                        <div v-for="(v,index) in v$.viewBinding.partnersArr.$each" :key="index" class="row q-my-xs gutter-sm">
                           <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="row group items-center">
                               <div class="col">
                                 <span class="q-pa-sm bg-light text-dark"><q-icon name="people" /> Partner 0{{index+1}}</span>
                               </div>
                               <div class="col-auto">
-                                <q-btn round icon="delete" @click="removePartnerFromArr(v,index)" color="negative"  />
+                                <q-btn round icon="delete" @click="removePartnerFromArr(v,index)" color="negative" class="/>
                               </div>
                             </div>
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input :error="v.name.$error"
-                            color="grey-9" v-model="v.name.$model" float-label="Name" placeholder="Name" />
+                            color="grey-9" v-model="v.name.$model" label="Name" placeholder="Name" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input :error="v.pan.$error"
-                            color="grey-9" v-model="v.pan.$model" float-label="Pan" placeholder="Pan" />
+                            color="grey-9" v-model="v.pan.$model" label="Pan" placeholder="Pan" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input :error="v.address.$error"
-                            color="grey-9" v-model="v.address.$model" float-label="Address" placeholder="Address" />
+                            color="grey-9" v-model="v.address.$model" label="Address" placeholder="Address" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input :error="v.pin.$error"
-                            color="grey-9" type="number" v-model="v.pin.$model" float-label="Pincode" placeholder="Pincode" />
+                            color="grey-9" class="type="number" v-model="v.pin.$model" label="Pincode" placeholder="Pincode" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input :error="v.cityRefCode.$error"
-                            color="grey-9" v-model="v.cityRefCode.$model" float-label="City" placeholder="City">
+                            color="grey-9" v-model="v.cityRefCode.$model" label="City" placeholder="City">
                                 <q-autocomplete
                                 @search="residentCitySearch"
                                 :debounce="500"
@@ -379,7 +379,7 @@
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input :error="v.stateRefCode.$error" 
-                            color="grey-9" v-model="v.stateRefCode.$model" float-label="State" placeholder="State">
+                            color="grey-9" v-model="v.stateRefCode.$model" label="State" placeholder="State">
                                 <q-autocomplete
                                 @search="residentStateSearch"
                                 :debounce="500"
@@ -390,69 +390,69 @@
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input :error="v.contactMobile.$error"
-                            color="grey-9" type="tel" v-model="v.contactMobile.$model" float-label="Mobile" placeholder="Mobile" />
+                            color="grey-9" class="type="tel" v-model="v.contactMobile.$model" label="Mobile" placeholder="Mobile" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input :error="v.contactEmail.$error" 
-                            color="grey-9" type="email"  v-model="v.contactEmail.$model" float-label="Email" placeholder="Email" />
+                            color="grey-9" class="type="email"  v-model="v.contactEmail.$model" label="Email" placeholder="Email" />
                           </div>
                         </div>
                         <q-stepper-navigation>
-                          <q-btn color="primary" class="q-ma-xs" icon="check" @click="validatebeforeNavigate('partners')" label="Continue" />
-                          <q-btn color="amber-10" class="q-ma-xs" icon="save" label="Save Partial" />
-                          <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="$refs.stepper.previous()" label="Back" />
-                          <q-btn color="positive float-right" @click="addMorePartnersSet()" class="q-ma-xs" icon="add" label="Add More" />
+                          <q-btn color="primary" class="class="q-ma-xs" icon="check" @click="validatebeforeNavigate('partners')" label="Continue" />
+                          <q-btn color="amber-10" class="class="q-ma-xs" icon="save" label="Save Partial" />
+                          <q-btn color="grey-7" class="class="q-ma-xs" icon="block" @click="$refs.stepper.previous()" label="Back" />
+                          <q-btn color="positive" class="float-right" @click="addMorePartnersSet()" class="q-ma-xs" icon="add" label="Add More" />
                         </q-stepper-navigation>
                     </q-step>
                     <q-step name="fourth" title="Business" subtitle="Info">
                       <div class="row gutter-sm">
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.businessInformation.weekdayStartHour" float-label="Weekday start hour" placeholder="Weekday start hour" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.businessInformation.weekdayStartHour" label="Weekday start hour" placeholder="Weekday start hour" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.businessInformation.weekdayEndHour" float-label="Weekday end hour" placeholder="Weekday end hour" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.businessInformation.weekdayEndHour" label="Weekday end hour" placeholder="Weekday end hour" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.businessInformation.weekendStartHour" float-label="Weekend start hour" placeholder="Weekend start hour" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.businessInformation.weekendStartHour" label="Weekend start hour" placeholder="Weekend start hour" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.businessInformation.weekendEndHour" float-label="Weekend end hour" placeholder="Weekend end hour" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.businessInformation.weekendEndHour" label="Weekend end hour" placeholder="Weekend end hour" />
                         </div>
                         <!-- <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-input color="grey-9" type="number" v-model="merchant.businessInformation.weekdayStartHour" float-label="Business Income" placeholder="Business Income" />
+                            <q-input color="grey-9" class="type="number" v-model="merchant.businessInformation.weekdayStartHour" label="Business Income" placeholder="Business Income" />
                         </div> -->
                         <div class="col-md-6 col-sm-12 col-xs-12 col-xs-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.businessInformation.lastTurnoverYear" float-label="Last turnover year" placeholder="Last turnover year" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.businessInformation.lastTurnoverYear" label="Last turnover year" placeholder="Last turnover year" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.businessInformation.lastTurnoverAmount" float-label="Turnover during last year" placeholder="Turnover during last year" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.businessInformation.lastTurnoverAmount" label="Turnover during last year" placeholder="Turnover during last year" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.businessInformation.expectedCardBusiness" float-label="Expected Card Business" placeholder="Expected Card Business" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.businessInformation.expectedCardBusiness" label="Expected Card Business" placeholder="Expected Card Business" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.businessInformation.averageBillAmount" float-label="Average Bill Amount" placeholder="Average Bill Amount" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.businessInformation.averageBillAmount" label="Average Bill Amount" placeholder="Average Bill Amount" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" v-model="merchant.businessInformation.gstId" float-label="GST ID" placeholder="GST ID" />
+                          <q-input color="grey-9" v-model="merchant.businessInformation.gstId" label="GST ID" placeholder="GST ID" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" v-model="merchant.businessInformation.currentPosName" float-label="Name of the other POS Currentlly Used" placeholder="Name of the other POS Currentlly Used" />
+                          <q-input color="grey-9" v-model="merchant.businessInformation.currentPosName" label="Name of the other POS Currentlly Used" placeholder="Name of the other POS Currentlly Used" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.businessInformation.debitCardMdr" float-label="Debit Card" placeholder="Debit Card" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.businessInformation.debitCardMdr" label="Debit Card" placeholder="Debit Card" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.businessInformation.creditCardMdr" float-label="Credit Card" placeholder="Credit Card" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.businessInformation.creditCardMdr" label="Credit Card" placeholder="Credit Card" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.businessInformation.memberSince" float-label="Member since" placeholder="Member since" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.businessInformation.memberSince" label="Member since" placeholder="Member since" />
                         </div>
                       </div>
                       <q-stepper-navigation>
-                        <q-btn color="primary" class="q-ma-xs" icon="check" @click="validatebeforeNavigate('businessInformation')" label="Continue" />
-                        <q-btn color="amber-10" class="q-ma-xs" icon="save" label="Save Partial" />
-                        <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="$refs.stepper.previous()" label="Back" />
+                        <q-btn color="primary" class="class="q-ma-xs" icon="check" @click="validatebeforeNavigate('businessInformation')" label="Continue" />
+                        <q-btn color="amber-10" class="class="q-ma-xs" icon="save" label="Save Partial" />
+                        <q-btn color="grey-7" class="class="q-ma-xs" icon="block" @click="$refs.stepper.previous()" label="Back" />
                       </q-stepper-navigation>
                     </q-step>
                     <q-step name="fifth" title="Payment" subtitle="Details">
@@ -461,84 +461,84 @@
                           <p class="text-caption">Device Owned By</p>
                           <div class="group">
                             <q-radio 
-                            @blur="$v.merchant.paymentDetails.deviceOwnedBy.$touch"      
-                            :error="$v.merchant.paymentDetails.deviceOwnedBy.$error" 
+                            @blur="v$.merchant.paymentDetails.deviceOwnedBy.$touch"
+                            :error="v$.merchant.paymentDetails.deviceOwnedBy.$error"
                             v-for="(item,index) in deviceOwnedByOptions" :key="index" color="grey-9" v-model="merchant.paymentDetails.deviceOwnedBy" :val="item.value" :label="item.label" 
                             />
                           </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                           <q-input 
-                          color="grey-9" type="number" v-model="merchant.paymentDetails.installationFee" float-label="Installation Fee" placeholder="Installation Fee" 
+                          color="grey-9" class="type="number" v-model="merchant.paymentDetails.installationFee" label="Installation Fee" placeholder="Installation Fee"
                           />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.paymentDetails.terminalModeCode" float-label="Terminal Model" :options="terminalModelSet" />
+                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.paymentDetails.terminalModeCode" label="Terminal Model" :options="terminalModelSet" />
                         </div>
                         <div class="col-md-6 col-sm-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.paymentDetails.numberOfTerminals" float-label="No of Terminals" placeholder="No of Terminals" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.paymentDetails.numberOfTerminals" label="No of Terminals" placeholder="No of Terminals" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
                             <p class="text-caption">Cash @POS Enabled?</p>
                             <div class="group">
                               <q-radio 
-                              @blur="$v.merchant.paymentDetails.cashAtPosEnabled.$touch"      
-                              :error="$v.merchant.paymentDetails.cashAtPosEnabled.$error" 
+                              @blur="v$.merchant.paymentDetails.cashAtPosEnabled.$touch"
+                              :error="v$.merchant.paymentDetails.cashAtPosEnabled.$error"
                               v-for="(item,index) in cashAtPosEnabledOptions" :key="index" color="grey-9" v-model="merchant.paymentDetails.cashAtPosEnabled" :val="item.value" :label="item.label"
                               />
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.paymentDetails.rentalPlanCode" float-label="Rental Plan" :options="rentalPlanSet" />
+                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.paymentDetails.rentalPlanCode" label="Rental Plan" :options="rentalPlanSet" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.paymentDetails.rentalModeCode" float-label="Rental Mode" :options="rentalModeOptions" />
+                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.paymentDetails.rentalModeCode" label="Rental Mode" :options="rentalModeOptions" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
                             <p class="text-caption">Rental Type</p>
                             <div class="group">
                               <q-radio 
-                              @blur="$v.merchant.paymentDetails.rentalType.$touch"      
-                              :error="$v.merchant.paymentDetails.rentalType.$error" 
+                              @blur="v$.merchant.paymentDetails.rentalType.$touch"
+                              :error="v$.merchant.paymentDetails.rentalType.$error"
                               v-for="(item,index) in rentalTypeOptions" :key="index" 
                               color="grey-9" v-model="merchant.paymentDetails.rentalType" :val="item.value" :label="item.label" />
                             </div>
                         </div>
 
                         <div v-if="merchant.paymentDetails.rentalType == 'R'" class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.paymentDetails.gracePeriod" float-label="Grace period" placeholder="Grace period" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.paymentDetails.gracePeriod" label="Grace period" placeholder="Grace period" />
                         </div>
                         <div v-if="merchant.paymentDetails.rentalType == 'A'"  class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.paymentDetails.advanceRentCollected" float-label="Advance Rent Collected" placeholder="Advance Rent Collected" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.paymentDetails.advanceRentCollected" label="Advance Rent Collected" placeholder="Advance Rent Collected" />
                         </div>
                         <div v-if="merchant.paymentDetails.rentalType == 'A'"  class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.paymentDetails.noOfMonthRentPaidInAdvance" float-label="No. Of Month Rent Paid In Advance" placeholder="No. Of Month Rent Paid In Advance" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.paymentDetails.noOfMonthRentPaidInAdvance" label="No. Of Month Rent Paid In Advance" placeholder="No. Of Month Rent Paid In Advance" />
                         </div>
                         <div v-if="merchant.paymentDetails.rentalType == 'A'"  class="col-md-6 col-sm-12 col-xs-12">
                             <p class="text-caption">Advanced Rent Mode</p>
                             <div class="group">
                               <q-radio 
-                              @blur="$v.merchant.paymentDetails.advancedRentMode.$touch"      
-                              :error="$v.merchant.paymentDetails.advancedRentMode.$error" 
+                              @blur="v$.merchant.paymentDetails.advancedRentMode.$touch"
+                              :error="v$.merchant.paymentDetails.advancedRentMode.$error"
                               v-for="(item,index) in advancedRentModeOptions" :key="index" 
                               color="grey-9" v-model="merchant.paymentDetails.advancedRentMode" :val="item.value" :label="item.label" />
                             </div>
                         </div>
 
                         <div class="col-md-6 col-sm-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.paymentDetails.devicePrice" float-label="Device Price" placeholder="Device Price" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.paymentDetails.devicePrice" label="Device Price" placeholder="Device Price" />
                         </div>
                         <div class="col-md-6 col-sm-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.paymentDetails.otherCharges" float-label="Other Charges" placeholder="Other Charges" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.paymentDetails.otherCharges" label="Other Charges" placeholder="Other Charges" />
                         </div>
                         <div class="col-md-6 col-sm-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.paymentDetails.totalAmountPaid" float-label="Total Amount Paid" placeholder="Total Amount Paid" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.paymentDetails.totalAmountPaid" label="Total Amount Paid" placeholder="Total Amount Paid" />
                         </div>
                       </div>
                       <q-stepper-navigation>
-                        <q-btn color="primary" class="q-ma-xs" icon="check" @click="validatebeforeNavigate('paymentDetails')" label="Continue" />
-                        <q-btn color="amber-10" class="q-ma-xs" icon="save" label="Save Partial" />
-                        <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="$refs.stepper.previous()" label="Back" />
+                        <q-btn color="primary" class="class="q-ma-xs" icon="check" @click="validatebeforeNavigate('paymentDetails')" label="Continue" />
+                        <q-btn color="amber-10" class="class="q-ma-xs" icon="save" label="Save Partial" />
+                        <q-btn color="grey-7" class="class="q-ma-xs" icon="block" @click="$refs.stepper.previous()" label="Back" />
                       </q-stepper-navigation>
                     </q-step>
                     <q-step name="sixth" title="Discount" subtitle="Rate">
@@ -557,13 +557,13 @@
                                       <div class="text-caption text-weight-medium q-py-sm" align="center">Merchant Disc Fee</div>
                                       <div class="row group bg-green-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
@@ -571,13 +571,13 @@
                                       <div class="text-caption text-weight-medium q-py-sm" align="center">Provider Disc Fee</div>
                                       <div class="row group bg-yellow-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
@@ -589,26 +589,26 @@
                                   <div class="col">
                                       <div class="row group bg-green-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
                                   <div class="col">
                                       <div class="row group bg-yellow-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
@@ -622,26 +622,26 @@
                                   <div class="col">
                                       <div class="row group bg-green-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
                                   <div class="col">
                                       <div class="row group bg-yellow-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
@@ -653,26 +653,26 @@
                                   <div class="col">
                                       <div class="row group bg-green-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
                                   <div class="col">
                                       <div class="row group bg-yellow-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
@@ -684,26 +684,26 @@
                                   <div class="col">
                                       <div class="row group bg-green-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
                                   <div class="col">
                                       <div class="row group bg-yellow-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
@@ -715,26 +715,26 @@
                                   <div class="col">
                                       <div class="row group bg-green-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
                                   <div class="col">
                                       <div class="row group bg-yellow-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
@@ -746,26 +746,26 @@
                                   <div class="col">
                                       <div class="row group bg-green-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
                                   <div class="col">
                                       <div class="row group bg-yellow-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
@@ -777,26 +777,26 @@
                                   <div class="col">
                                       <div class="row group bg-green-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
                                   <div class="col">
                                       <div class="row group bg-yellow-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
@@ -808,26 +808,26 @@
                                   <div class="col">
                                       <div class="row group bg-green-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
                                   <div class="col">
                                       <div class="row group bg-yellow-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
@@ -839,26 +839,26 @@
                                   <div class="col">
                                       <div class="row group bg-green-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
                                   <div class="col">
                                       <div class="row group bg-yellow-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
@@ -870,26 +870,26 @@
                                   <div class="col">
                                       <div class="row group bg-green-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
                                   <div class="col">
                                       <div class="row group bg-yellow-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
@@ -901,26 +901,26 @@
                                   <div class="col">
                                       <div class="row group bg-green-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
                                   <div class="col">
                                       <div class="row group bg-yellow-2">
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Fixed" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Fixed" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="%" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="%" />
                                           </div>
                                           <div class="col">
-                                              <q-input color="grey-9" type="number" v-model="text" placeholder="Max" />
+                                              <q-input color="grey-9" class="type="number" v-model="text" placeholder="Max" />
                                           </div>
                                       </div>
                                   </div>
@@ -928,9 +928,9 @@
                           </div>
                       </div>
                       <q-stepper-navigation>
-                        <q-btn color="primary" class="q-ma-xs" icon="check" @click="$refs.stepper.next()" label="Continue" />
-                        <q-btn color="amber-10" class="q-ma-xs" icon="save" label="Save Partial" />
-                        <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="$refs.stepper.previous()" label="Back" />
+                        <q-btn color="primary" class="class="q-ma-xs" icon="check" @click="$refs.stepper.next()" label="Continue" />
+                        <q-btn color="amber-10" class="class="q-ma-xs" icon="save" label="Save Partial" />
+                        <q-btn color="grey-7" class="class="q-ma-xs" icon="block" @click="$refs.stepper.previous()" label="Back" />
                       </q-stepper-navigation>
                       </q-step>
                     <q-step name="seventh" title="Bank & Collection" subtitle="Details">
@@ -939,32 +939,31 @@
                           <div class="text-h6">Merchant Bank Details</div>
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" v-model="merchant.bankInformation.bankDetails.ifsc" float-label="IFSC Code" placeholder="IFSC Code" />
+                          <q-input color="grey-9" v-model="merchant.bankInformation.bankDetails.ifsc" label="IFSC Code" placeholder="IFSC Code" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" v-model="merchant.bankInformation.bankDetails.branchName" float-label="Branch Name" placeholder="IFSC Code" />
+                          <q-input color="grey-9" v-model="merchant.bankInformation.bankDetails.branchName" label="Branch Name" placeholder="IFSC Code" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.bankInformation.bankDetails.feeType" float-label="Fee Type" :options="feeTypeOptions" />
+                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.bankInformation.bankDetails.feeType" label="Fee Type" :options="feeTypeOptions" />
                         </div>
                         <div v-if="merchant.bankInformation.bankDetails.feeType == 'N' || merchant.bankInformation.bankDetails.feeType == 'S'" class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" 
-                            type="number" v-model="merchant.bankInformation.bankDetails.settlementOrNeftFee" float-label="NEFT/Settlement Fee Inclusive of Tax" placeholder="NEFT/Settlement Fee Inclusive of Tax" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.bankInformation.bankDetails.settlementOrNeftFee" label="NEFT/Settlement Fee Inclusive of Tax" placeholder="NEFT/Settlement Fee Inclusive of Tax" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" v-model="merchant.bankInformation.bankDetails.chequeDepositedDate" float-label="Cheque Deposited Date" placeholder="Cheque Deposited Date" />
+                          <q-input color="grey-9" v-model="merchant.bankInformation.bankDetails.chequeDepositedDate" label="Cheque Deposited Date" placeholder="Cheque Deposited Date" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.bankInformation.bankDetails.micr" float-label="MICR" placeholder="MICR" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.bankInformation.bankDetails.micr" label="MICR" placeholder="MICR" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" v-model="merchant.bankInformation.bankDetails.bankName" float-label="Bank Name" placeholder="Bank Name" />
+                          <q-input color="grey-9" v-model="merchant.bankInformation.bankDetails.bankName" label="Bank Name" placeholder="Bank Name" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.bankInformation.bankDetails.payment_mode" float-label="Payment mode" :options="paymnentModeOptions" />
+                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.bankInformation.bankDetails.payment_mode" label="Payment mode" :options="paymnentModeOptions" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" v-model="merchant.bankInformation.bankDetails.bankCityName" float-label="City" placeholder="City">
+                          <q-input color="grey-9" v-model="merchant.bankInformation.bankDetails.bankCityName" label="City" placeholder="City">
                             <q-autocomplete
                             @search="residentCitySearch"
                             :debounce="500"
@@ -974,7 +973,7 @@
                           </q-input>
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" v-model="merchant.bankInformation.bankDetails.bankStateName" float-label="State" placeholder="State">
+                          <q-input color="grey-9" v-model="merchant.bankInformation.bankDetails.bankStateName" label="State" placeholder="State">
                             <q-autocomplete
                             @search="residentStateSearch"
                             :debounce="500"
@@ -984,15 +983,15 @@
                           </q-input>
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.bankInformation.bankDetails.accountType" float-label="Account Type" :options="accountTypeOptions" />
+                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.bankInformation.bankDetails.accountType" label="Account Type" :options="accountTypeOptions" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" type="number" v-model="merchant.bankInformation.bankDetails.accountNumber" float-label="Bank A/c Number" placeholder="Bank A/c Number" />
+                          <q-input color="grey-9" class="type="number" v-model="merchant.bankInformation.bankDetails.accountNumber" label="Bank A/c Number" placeholder="Bank A/c Number" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-checkbox color="grey-9" true-value="Y" false-value="N"
+                          <q-checkbox color="grey-9" class="true-value="Y" false-value="N"
                           v-model="merchant.bankInformation.bankDetails.bankStatementAttached" label="Bank Statement Attached" />
-                          <q-checkbox color="grey-9" true-value="Y" false-value="N" v-model="merchant.bankInformation.bankDetails.cancelChequeAttached" label="Cancelled Cheque Lead Attached" />
+                          <q-checkbox color="grey-9" class="true-value="Y" false-value="N" v-model="merchant.bankInformation.bankDetails.cancelChequeAttached" label="Cancelled Cheque Lead Attached" />
                         </div>
                       </div>
                       <div class="row gutter-sm items-center">
@@ -1000,31 +999,31 @@
                           <div class="text-h6">Payment Collection Details</div>
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" v-model="merchant.bankInformation.collectionDetails.swipeAmount" float-label="Swipe Amount" placeholder="Swipe Amount" />
+                          <q-input color="grey-9" v-model="merchant.bankInformation.collectionDetails.swipeAmount" label="Swipe Amount" placeholder="Swipe Amount" />
                         </div>
                         <div class="col-md-4 col-sm-12">
-                          <q-input color="grey-9" format-model="number" v-model="merchant.bankInformation.collectionDetails.collectedDate" minimal float-label="Swipe Date" />
+                          <q-input color="grey-9" class="format-model="number" v-model="merchant.bankInformation.collectionDetails.collectedDate" minimal label="Swipe Date" />
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" v-model="merchant.bankInformation.collectionDetails.swipeTerminal" float-label="Swiped on the terminal of" placeholder="Swiped on the terminal of" />
+                          <q-input color="grey-9" v-model="merchant.bankInformation.collectionDetails.swipeTerminal" label="Swiped on the terminal of" placeholder="Swiped on the terminal of" />
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" v-model="merchant.bankInformation.collectionDetails.chequeAmount" float-label="Cheque Amount" placeholder="Cheque Amount" />
+                          <q-input color="grey-9" v-model="merchant.bankInformation.collectionDetails.chequeAmount" label="Cheque Amount" placeholder="Cheque Amount" />
                         </div>
                         <div class="col-md-4 col-sm-12">
-                          <q-input color="grey-9" format-model="number" v-model="merchant.bankInformation.collectionDetails.chequeDate" minimal float-label="Cheque Date" />
+                          <q-input color="grey-9" class="format-model="number" v-model="merchant.bankInformation.collectionDetails.chequeDate" minimal label="Cheque Date" />
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12">
-                          <q-input color="grey-9" v-model="merchant.bankInformation.collectionDetails.chequeNumber" float-label="Cheque/UTR No" placeholder="Cheque/UTR No" />
+                          <q-input color="grey-9" v-model="merchant.bankInformation.collectionDetails.chequeNumber" label="Cheque/UTR No" placeholder="Cheque/UTR No" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.bankInformation.collectionDetails.acquirerBank" float-label="Bank Name" :options="selectOptions" />
+                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.bankInformation.collectionDetails.acquirerBank" label="Bank Name" :options="selectOptions" />
                         </div>
                       </div>
                       <q-stepper-navigation>
-                        <q-btn color="primary" class="q-ma-xs" icon="check" @click="$refs.stepper.next()" label="Continue" />
-                        <q-btn color="amber-10" class="q-ma-xs" icon="save" label="Save Partial" />
-                        <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="$refs.stepper.previous()" label="Back" />
+                        <q-btn color="primary" class="class="q-ma-xs" icon="check" @click="$refs.stepper.next()" label="Continue" />
+                        <q-btn color="amber-10" class="class="q-ma-xs" icon="save" label="Save Partial" />
+                        <q-btn color="grey-7" class="class="q-ma-xs" icon="block" @click="$refs.stepper.previous()" label="Back" />
                       </q-stepper-navigation>
                     </q-step>
                 </q-stepper>
@@ -1879,7 +1878,7 @@ export default {
     },
     removePartnerFromArr(item) {
       let self = this;
-      _.map(self.$v.viewBinding.partnersArr.$each, function(oo) {
+      _.map(self.v$.viewBinding.partnersArr.$each, function(oo) {
         if (_.isEqual(oo.$model, item.$model)) {
           var index = self.viewBinding.partnersArr.indexOf(oo.$model);
           if (index !== -1) {
@@ -1890,22 +1889,22 @@ export default {
     },
     validatebeforeNavigate(step) {
       if (step == "salesInformation") {
-        this.$v.merchant.salesInformation.$touch();
-        if (this.$v.merchant.salesInformation.$error) {
+        this.v$.merchant.salesInformation.$touch();
+        if (this.v$.merchant.salesInformation.$error) {
           this.$q.notify("Please review fields again.");
         } else {
           this.$refs.stepper.next();
         }
       } else if (step == "companyInformation") {
-        this.$v.merchant.companyInformation.$touch();
-        if (this.$v.merchant.companyInformation.$error) {
+        this.v$.merchant.companyInformation.$touch();
+        if (this.v$.merchant.companyInformation.$error) {
           this.$q.notify("Please review fields again.");
         } else {
           this.$refs.stepper.next();
         }
       } else if (step == "partners") {
-        this.$v.viewBinding.partnersArr.$touch();
-        if (this.$v.viewBinding.partnersArr.$error) {
+        this.v$.viewBinding.partnersArr.$touch();
+        if (this.v$.viewBinding.partnersArr.$error) {
           this.$q.notify("Please review fields again.");
         } else {
           this.$refs.stepper.next();
@@ -1913,8 +1912,8 @@ export default {
       } else if (step == "businessInformation") {
         this.$refs.stepper.next();
       } else if ((step = "paymentDetails")) {
-        this.$v.merchant.paymentDetails.$touch();
-        if (this.$v.merchant.paymentDetails.$error) {
+        this.v$.merchant.paymentDetails.$touch();
+        if (this.v$.merchant.paymentDetails.$error) {
           this.$q.notify("Please review fields again.");
         } else {
           this.$refs.stepper.next();

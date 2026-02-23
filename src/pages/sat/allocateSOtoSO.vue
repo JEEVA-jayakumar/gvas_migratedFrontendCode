@@ -14,10 +14,9 @@
               :disabled="formData.device_type != ''"
               :class="[formData.device_type != '' ? 'no-pointer-events' : '']"
               v-model="formData.region"
-              float-label="Select Region"
+              label="Select Region"
               radio
-              color="grey-9"
-              :options="regionOptions"
+              color="grey-9" class=":options="regionOptions"
               @input="regionBasedSO"
             />
           </div> -->
@@ -26,10 +25,9 @@
               filter 
               clearable
               v-model="formData.so"
-              float-label="Select SO"
+              label="Select SO"
               radio
-              color="grey-9"
-              :options="assignToOptions"
+              color="grey-9" class=":options="assignToOptions"
               @input="fnSelectSO"
             />
           </div>
@@ -40,10 +38,9 @@
               @clear="fnClearingDeviceTypeSelection"
               @input="fnSetDevicesByDeviceId"
               v-model="formData.device_type"
-              float-label="Select Device Type"
+              label="Select Device Type"
               radio
-              color="grey-9"
-              :options="deviceOptions"
+              color="grey-9" class=":options="deviceOptions"
             />
           </div> -->
   
@@ -53,8 +50,7 @@
               @click="openScannerComp"
               :disabled="formData.so == ''"
               v-if="scannerToggleOption"
-              color="light-blue"
-              class="q-py-xs"
+              color="light-blue" class="class="q-py-xs"
               label="Start scan"
             />
             <q-btn
@@ -113,8 +109,7 @@
                         <q-btn
                           round
                           size="sm"
-                          color="negative"
-                          icon="clear"
+                          color="negative" class="icon="clear"
                           @click="fnRemoveScannedItems(index,subIndex)"
                         />
                       </q-item-section>
@@ -127,8 +122,7 @@
                         <q-btn
                           round
                           size="sm"
-                          color="negative"
-                          @click="fnRemoveDeviceTypeFromList(index)"
+                          color="negative" @click="fnRemoveDeviceTypeFromList(index)"
                           icon="clear"
                         />
                       </q-item-section>
@@ -289,13 +283,13 @@ import { email } from '@vuelidate/validators';
             barcode: barcode
           })
             .then(response  => {
-              console.log("Error-1",JSON.stringify(response.body.data.user));
+              console.log("Error-1",JSON.stringify(response.data.data.user));
               // self.userName = null
-              self.userName = response.body.data.user.username
+              self.userName = response.data.data.user.username
               console.log("USER NAME",self.userName);
               assumeArr.deviceSerialNumbers.push(barcode);
               assumeArr.userName.push(self.userName)
-              this.formData.assignedUserId = response.body.data.user.id
+              this.formData.assignedUserId = response.data.data.user.id
             })
             .catch(error => {
               let message = error.data.message

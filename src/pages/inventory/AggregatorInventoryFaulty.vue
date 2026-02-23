@@ -6,43 +6,41 @@
         <!--START: table title -->
         <div class="col-6 col-md-6 text-h6 text-weight-regular text-grey-9">Aggregator Faulty Inventory</div>
         <div class="col-6 col-md-6" align="right">
-          <q-btn icon="attach_file" @click="bulkUploadFaultyDevices" outline color="dark" label="Bulk upload" />
+          <q-btn icon="attach_file" @click="bulkUploadFaultyDevices" outline color="dark" class="label="Bulk upload" />
         </div>
         <!--END: table title -->
       </div>
       <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-md-4">
-          <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
+          <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
             :options="aggregatorOptions" @input="getaggregator" />
         </div>
       </div> -->
       <div >
         <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
           <div class="col-6 col-md-6">
-            <q-input v-model="podNumber" float-label="Enter POD number" color="grey-9" />
+            <q-input v-model="podNumber" label="Enter POD number" color="grey-9" class="/>
           </div>
           <div class="col-6 col-md-6" align="right">
-            <q-btn @click="fnAjaxFaultyInventoryData" color="light-blue" class="q-py-xs" label="Submit" />
+            <q-btn @click="fnAjaxFaultyInventoryData" color="light-blue" class="class="q-py-xs" label="Submit" />
           </div>
         </div>
         <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
           <!--START: table title -->
           <div class="col-6 col-md-6">
             <q-select :disable="disableDeviceTypeSelection" @input="fnSetDevicesByDeviceId"
-              v-model="formData.device_type" float-label="Select Device Type" color="grey-9" :options="deviceOptions" />
+              v-model="formData.device_type" label="Select Device Type" color="grey-9" class=":options="deviceOptions" />
           </div>
           <div class="col-6 col-md-6" align="right">
             <q-btn :disabled="formData.device_type == '' || formData.region == ''" @click="openScannerComp"
-              v-if="scannerToggleOption" color="light-blue" class="q-py-xs" label="Start scan" />
+              v-if="scannerToggleOption" color="light-blue" class="class="q-py-xs" label="Start scan" />
           </div>
         </div>
         <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
           <div class="col-12 group" align="right">
-            <q-btn :disabled="disabledButton" class="q-py-xs" icon="build" outline color="amber-9"
-              label="Send to repair" @click="fnFinalFaultySubmit(1)" />
+            <q-btn :disabled="disabledButton" class="q-py-xs" icon="build" outline color="amber-9" class="label="Send to repair" @click="fnFinalFaultySubmit(1)" />
 
-            <q-btn :disabled="disabledButton" class="q-py-xs" icon="check" outline color="positive"
-              label="Accept Devices" @click="fnFinalFaultySubmit(2)" />
+            <q-btn :disabled="disabledButton" class="q-py-xs" icon="check" outline color="positive" class="label="Accept Devices" @click="fnFinalFaultySubmit(2)" />
           </div>
           <!--END: table title -->
         </div>
@@ -53,8 +51,8 @@
           <q-td v-slot:body-cell-deviceType="props" :props="props">{{ props.row.device.name }}</q-td>
           <q-td v-slot:body-cell-serialNumber="props" :props="props">{{ props.row.serialNumber }}</q-td>
           <q-td v-slot:body-cell-status="props" :props="props">
-            <q-btn flat v-if="props.row.status == true" icon="check" color="positive" />
-            <q-btn flat v-else-if="props.row.status == false" icon="clear" color="negative" />
+            <q-btn flat v-if="props.row.status == true" icon="check" color="positive" class="/>
+            <q-btn flat v-else-if="props.row.status == false" icon="clear" color="negative" class="/>
             <q-btn flat color="amber-9" v-else icon="warning" />
           </q-td>
           <!-- END: table body modification -->
@@ -62,7 +60,7 @@
             <!--START: table filter,search -->
             <div class="col-md-5">
               <q-input clearable color="grey-9" v-model="filter" placeholder="Type.."
-                float-label="Search by SO name, Merchant Name, Lead ID" class="q-mr-lg q-py-sm" />
+                label="Search by SO name, Merchant Name, Lead ID" class="q-mr-lg q-py-sm" />
             </div>
             <!--END: table filter,search -->
           </template>

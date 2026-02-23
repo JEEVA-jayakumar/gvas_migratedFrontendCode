@@ -17,7 +17,7 @@
             <q-input
               disable
               class="no-margin"
-              float-label="TID"
+              label="TID"
               v-model.trim="formData.tid"
             />
           </div>
@@ -25,7 +25,7 @@
             <q-input
               disable
               class="no-margin"
-              float-label="TICKET ID"
+              label="TICKET ID"
               v-model.trim="formData.ticketid"
             />
           </div>
@@ -38,8 +38,7 @@
               @click="emitfnshowservice()"
               >Cancel</q-btn
             >
-            <q-btn align="right" @click="submitShortLead()" color="purple-9"
-              >submit</q-btn
+            <q-btn align="right" @click="submitShortLead()" color="purple-9" class=">submit</q-btn
             >
           </div>
         </div>
@@ -97,9 +96,7 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              error.body.message == null
-                ? "Please Try Again Later !"
-                : error.body.message,
+              (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
             icon: "thumb_down",
           });
         });

@@ -3,123 +3,111 @@
     <div class="row gutter-sm">
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9"
-          @blur="$v.merchant.businessInformation.weekdayStartHour.$touch"
-          :error="$v.merchant.businessInformation.weekdayStartHour.$error"
+          color="grey-9" class="@blur="v$.merchant.businessInformation.weekdayStartHour.$touch"
+          :error="v$.merchant.businessInformation.weekdayStartHour.$error"
           v-model="merchant.businessInformation.weekdayStartHour"
-          float-label="Weekday start hour (00.00)"
+          label="Weekday start hour (00.00)"
           placeholder="Weekday start hour"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9"
-          @blur="$v.merchant.businessInformation.weekdayEndHour.$touch"
-          :error="$v.merchant.businessInformation.weekdayEndHour.$error"
+          color="grey-9" class="@blur="v$.merchant.businessInformation.weekdayEndHour.$touch"
+          :error="v$.merchant.businessInformation.weekdayEndHour.$error"
           v-model="merchant.businessInformation.weekdayEndHour"
-          float-label="Weekday end hour (00.00)"
+          label="Weekday end hour (00.00)"
           placeholder="Weekday end hour"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9"
-          @blur="$v.merchant.businessInformation.weekendStartHour.$touch"
-          :error="$v.merchant.businessInformation.weekendStartHour.$error"
+          color="grey-9" class="@blur="v$.merchant.businessInformation.weekendStartHour.$touch"
+          :error="v$.merchant.businessInformation.weekendStartHour.$error"
           v-model="merchant.businessInformation.weekendStartHour"
-          float-label="Weekend start hour (00.00)"
+          label="Weekend start hour (00.00)"
           placeholder="Weekend start hour"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9"
-          @blur="$v.merchant.businessInformation.weekendEndHour.$touch"
-          :error="$v.merchant.businessInformation.weekendEndHour.$error"
+          color="grey-9" class="@blur="v$.merchant.businessInformation.weekendEndHour.$touch"
+          :error="v$.merchant.businessInformation.weekendEndHour.$error"
           v-model="merchant.businessInformation.weekendEndHour"
-          float-label="Weekend end hour (00.00)"
+          label="Weekend end hour (00.00)"
           placeholder="Weekend end hour"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12 col-xs-12">
         <q-input
-          color="grey-9"
-          @blur="$v.merchant.businessInformation.lastTurnoverYear.$touch"
-          :error="$v.merchant.businessInformation.lastTurnoverYear.$error"
+          color="grey-9" class="@blur="v$.merchant.businessInformation.lastTurnoverYear.$touch"
+          :error="v$.merchant.businessInformation.lastTurnoverYear.$error"
           v-model="merchant.businessInformation.lastTurnoverYear"
-          float-label="Last turnover year"
+          label="Last turnover year"
           placeholder="Last turnover year"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9"
-          type="number"
-          @blur="$v.merchant.businessInformation.lastTurnoverAmount.$touch"
-          :error="$v.merchant.businessInformation.lastTurnoverAmount.$error"
+          color="grey-9" class="type="number"
+          @blur="v$.merchant.businessInformation.lastTurnoverAmount.$touch"
+          :error="v$.merchant.businessInformation.lastTurnoverAmount.$error"
           v-model="merchant.businessInformation.lastTurnoverAmount"
-          float-label="Turnover during last year"
+          label="Turnover during last year"
           placeholder="Turnover during last year"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9"
-          type="number"
-          @blur="$v.merchant.businessInformation.expectedCardBusiness.$touch"
-          :error="$v.merchant.businessInformation.expectedCardBusiness.$error"
+          color="grey-9" class="type="number"
+          @blur="v$.merchant.businessInformation.expectedCardBusiness.$touch"
+          :error="v$.merchant.businessInformation.expectedCardBusiness.$error"
           v-model="merchant.businessInformation.expectedCardBusiness"
-          float-label="Expected Card Business"
+          label="Expected Card Business"
           placeholder="Expected Card Business"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9"
-          type="number"
-          @blur="$v.merchant.businessInformation.averageBillAmount.$touch"
-          :error="$v.merchant.businessInformation.averageBillAmount.$error"
+          color="grey-9" class="type="number"
+          @blur="v$.merchant.businessInformation.averageBillAmount.$touch"
+          :error="v$.merchant.businessInformation.averageBillAmount.$error"
           v-model="merchant.businessInformation.averageBillAmount"
-          float-label="Average Bill Amount"
+          label="Average Bill Amount"
           placeholder="Average Bill Amount"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           upper-case
-          color="grey-9"
-          @blur="$v.merchant.businessInformation.gstId.$touch"
-          :error="$v.merchant.businessInformation.gstId.$error"
+          color="grey-9" class="@blur="v$.merchant.businessInformation.gstId.$touch"
+          :error="v$.merchant.businessInformation.gstId.$error"
           v-model="merchant.businessInformation.gstId"
-          float-label="GST ID"
+          label="GST ID"
           placeholder="GST ID"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9"
-          v-model="merchant.businessInformation.currentPosName"
-          float-label="Name of the other POS Currentlly Used"
+          color="grey-9" v-model="merchant.businessInformation.currentPosName"
+          label="Name of the other POS Currentlly Used"
           placeholder="Name of the other POS Currentlly Used"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9"
-          @blur="$v.merchant.businessInformation.debitCardMdr.$touch"
-          :error="$v.merchant.businessInformation.debitCardMdr.$error"
+          color="grey-9" class="@blur="v$.merchant.businessInformation.debitCardMdr.$touch"
+          :error="v$.merchant.businessInformation.debitCardMdr.$error"
           v-model="merchant.businessInformation.debitCardMdr"
-          float-label="Debit Card MDR"
+          label="Debit Card MDR"
           placeholder="Debit Card MDR"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9"
-          @blur="$v.merchant.businessInformation.creditCardMdr.$touch"
-          :error="$v.merchant.businessInformation.creditCardMdr.$error"
+          color="grey-9" class="@blur="v$.merchant.businessInformation.creditCardMdr.$touch"
+          :error="v$.merchant.businessInformation.creditCardMdr.$error"
           v-model="merchant.businessInformation.creditCardMdr"
-          float-label="Credit Card MDR"
+          label="Credit Card MDR"
           placeholder="Credit Card MDR"
         />
       </div>
@@ -127,26 +115,24 @@
         <q-input
           format="DD/MM/YYYY"
           format-model="number"
-          @blur="$v.merchant.businessInformation.memberSince.$touch"
-          :error="$v.merchant.businessInformation.memberSince.$error"
-          color="grey-9"
-          modal
+          @blur="v$.merchant.businessInformation.memberSince.$touch"
+          :error="v$.merchant.businessInformation.memberSince.$error"
+          color="grey-9" class="modal
           v-model="merchant.businessInformation.memberSince"
-          float-label="Member since"
+          label="Member since"
           placeholder="Member since"
         />
       </div>
     </div>
     <q-stepper-navigation>
-      <q-btn color="primary" class="q-ma-xs" icon="check" @click="validate" label="Continue"/>
+      <q-btn color="primary" class="class="q-ma-xs" icon="check" @click="validate" label="Continue"/>
       <q-btn
-        color="amber-10"
-        class="q-ma-xs"
+        color="amber-10" class="class="q-ma-xs"
         icon="save"
         label="Save Partial"
         @click="$emit('saveData')"
       />
-      <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="$emit('goBack')" label="Back"/>
+      <q-btn color="grey-7" class="class="q-ma-xs" icon="block" @click="$emit('goBack')" label="Back"/>
     </q-stepper-navigation>
     <div class="hidden">{{makePropsReactive}}</div>
   </div>
@@ -240,8 +226,8 @@ export default {
   },
   methods: {
     validate() {
-      this.$v.merchant.businessInformation.$touch();
-      if (this.$v.merchant.businessInformation.$error) {
+      this.v$.merchant.businessInformation.$touch();
+      if (this.v$.merchant.businessInformation.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$emit("goNext", "businessInformation", this.merchant);

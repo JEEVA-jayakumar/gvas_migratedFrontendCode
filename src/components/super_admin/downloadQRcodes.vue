@@ -18,7 +18,7 @@
         <q-td
           v-slot:body-cell-createDate="props"
           :props="props"
-        >{{ props.row.createDate | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.createDate, "Do MMM Y") }}</q-td>
         <q-td v-slot:body-cell-action="props" :props="props">
           <div class="row no-wrap no-padding">
             <q-btn
@@ -41,14 +41,13 @@
               clearable
               v-model.trim="filter"
               separator
-              color="grey-9"
-              placeholder="Search by Batch no/ QR API source"
+              color="grey-9" class="placeholder="Search by Batch no/ QR API source"
               class="q-mr-lg q-py-sm"
             />
           </div>
           <!-- <div class="col-md-5">
             <downloadExcel :rows="getAllPodList" :fields="json_fields" name="QRList.xls">
-              <q-btn outline color="grey-9" label="Download as excel" />
+              <q-btn outline color="grey-9" class="label="Download as excel" />
             </downloadExcel>
           </div>-->
           <div class="col-md-4"></div>
@@ -61,8 +60,7 @@
         <div class="col group" align="right">
           <q-btn
             :disabled="formData.selectQRDownload.length == 0"
-            color="green"
-            class="text-black q-mr-md"
+            color="green" class="class="text-black q-mr-md"
             size="md"
             label="Download QR Strings"
             @click="selectQRCodeBasedDownload(formData.selectQRDownload)"

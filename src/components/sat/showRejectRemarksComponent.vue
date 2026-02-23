@@ -5,51 +5,46 @@
       modal
       format="YYYY-MM-DD"
       v-model="formData.leadVerificationStatus.expectedSubmitDate"
-      @blur="$v.formData.leadVerificationStatus.expectedSubmitDate.$touch"
-      :error="$v.formData.leadVerificationStatus.expectedSubmitDate.$error"
-      float-label="Expected date of Doc Submission"
+      @blur="v$.formData.leadVerificationStatus.expectedSubmitDate.$touch"
+      :error="v$.formData.leadVerificationStatus.expectedSubmitDate.$error"
+      label="Expected date of Doc Submission"
       type="date"
       class="q-mt-lg"
-      color="red-6"
-    />
+      color="red-6" class="/>
     <q-input
       v-model="formData.leadVerificationStatus.soReason"
       type="textarea"
       disabled
       readonly
-      float-label="SO's Remarks"
+      label="SO's Remarks"
       :max-height="100"
       class="q-mt-lg"
       rows="1"
-      color="red-6"
-    />
+      color="red-6" class="/>
     <q-input
       v-model="formData.leadVerificationStatus.reason"
-      @blur="$v.formData.leadVerificationStatus.reason.$touch"
-      :error="$v.formData.leadVerificationStatus.reason.$error"
+      @blur="v$.formData.leadVerificationStatus.reason.$touch"
+      :error="v$.formData.leadVerificationStatus.reason.$error"
       type="textarea"
       class="q-mt-lg"
-      float-label="SAT Remarks"
+      label="SAT Remarks"
       :max-height="100"
       rows="1"
-      color="red-6"
-    />
+      color="red-6" class="/>
     <q-btn
       size="sm"
       align="right"
       @click="sendRemarks(formData,item)"
       rounded
       outline
-      color="red-9"
-      class="float-right q-mx-sm q-my-md"
+      color="red-9" class="class="float-right q-mx-sm q-my-md"
     >Send</q-btn>
     <q-btn
       size="sm"
       align="right"
       rounded
       outline
-      color="grey-9"
-      class="float-right q-mx-sm q-my-md"
+      color="grey-9" class="class="float-right q-mx-sm q-my-md"
       @click="emitToggleRemarks(item)"
     >Cancel</q-btn>
   </div>
@@ -117,8 +112,8 @@ export default {
       this.$emit("toggleRemarks", item);
     },
     sendRemarks(formData, item) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.TOGGLE_COMMON_LOADER(true);
@@ -140,7 +135,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

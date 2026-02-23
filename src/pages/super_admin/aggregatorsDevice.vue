@@ -3,14 +3,12 @@
         <!-- content -->
         <div>
 
-            <q-tabs class="shadow-1" color="grey-1">
-                <q-tab default color="dark" name="active" slot="title" label="Active Aggregators Device" />
-                <q-tab color="dark" name="deactive" slot="title" label="Deactive Aggregators Device" />
+            <q-tabs class="shadow-1" color="grey-1">" class="<q-tab default color="dark" name="active"  label="Active Aggregators Device" />
+                <q-tab color="dark" class="name="deactive"  label="Deactive Aggregators Device" />
                 <q-tab-panel name="active">
                     <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns"
                         :filter="filterSearch" :pagination="paginationControl"
-                        :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
-                        <q-td v-slot:body-cell-name="props" :props="props">{{ props.row.aggregator
+                        :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">" class="<q-td v-slot:body-cell-name="props" :props="props">{{ props.row.aggregator
                                 == null ? "NA" : props.row.aggregator.name
                         }}</q-td>
                         <q-td v-slot:body-cell-action="props" :props="props">
@@ -41,8 +39,7 @@
                 <q-tab-panel name="deactive">
                     <q-table :rows="deActiveTableData" table-class="customSATableClass" :columns="columns1"
                         :filter="filterSearch" :pagination="paginationControl"
-                        :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
-                        <q-td v-slot:body-cell-name="props" :props="props">{{ props.row.aggregator
+                        :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">" class="<q-td v-slot:body-cell-name="props" :props="props">{{ props.row.aggregator
                                 == null ? "NA" : props.row.aggregator.name
                         }}</q-td>
                         <q-td v-slot:body-cell-action1="props" :props="props">
@@ -237,7 +234,7 @@ export default {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",
-                        message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                        message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                         icon: "thumb_down",
                     });
                 });

@@ -30,23 +30,23 @@
 
         <div class="row group">
           <div class="col">
-            <div class="text-body1 font-weight-medium q-py-sm"><q-icon color="light-blue" name="phone" size="20px"/> Contact</div>
+            <div class="text-body1 font-weight-medium q-py-sm"><q-icon color="light-blue" class="name="phone" size="20px"/> Contact</div>
             <p class="no-margin">+91 9874563210</p>
             <p>+91 9856214700</p>
           </div>
 
           <div class="col">
-            <div class="text-body1 font-weight-medium q-py-sm"><q-icon color="light-blue" name="location_on" size="20px"/> Address</div>
+            <div class="text-body1 font-weight-medium q-py-sm"><q-icon color="light-blue" class="name="location_on" size="20px"/> Address</div>
             <p>13A, Haddows Road, Nungambakkam, Chennai, Tamilnadu</p>
           </div>
 
           <div class="col">
-            <div class="text-body1 font-weight-medium q-py-sm"><q-icon color="light-blue" name="map" size="20px"/> State</div>
+            <div class="text-body1 font-weight-medium q-py-sm"><q-icon color="light-blue" class="name="map" size="20px"/> State</div>
             <p>Tamilnadu</p>
           </div>
 
           <div class="col">
-            <div class="text-body1 font-weight-medium q-py-sm"><q-icon color="light-blue" name="date_range" size="20px"/> Date of onboarding</div>
+            <div class="text-body1 font-weight-medium q-py-sm"><q-icon color="light-blue" class="name="date_range" size="20px"/> Date of onboarding</div>
             <p>20 Oct, 2017</p>
           </div>
         </div>
@@ -70,10 +70,9 @@
             <div class="col-md-12">
               <q-input
                 clearable
-                color="grey-9"
-                v-model="filter"
+                color="grey-9" v-model="filter"
                 placeholder="Type.."
-                float-label= "Search"
+                label= "Search"
                 class="q-mt-lg q-mr-lg"
               />
             </div>

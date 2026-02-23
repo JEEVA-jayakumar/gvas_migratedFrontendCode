@@ -14,44 +14,40 @@
         <div>
           <q-select
             disable
-            color="grey-9"
-            @blur="$v.formData.url.merchantType.$touch"
-            :error="$v.formData.url.merchantType.$error"
+            color="grey-9" class="@blur="v$.formData.url.merchantType.$touch"
+            :error="v$.formData.url.merchantType.$error"
             v-model="formData.url.merchantType"
             :options="activeMerchantType"
-            float-label="Select merchant type"
+            label="Select merchant type"
             placeholder="Merchant type"
           />
         </div>
         <div>
        
           <q-select
-            color="grey-9"
-            @blur="$v.formData.params.documentType.$touch"
-            :error="$v.formData.params.documentType.$error"
+            color="grey-9" class="@blur="v$.formData.params.documentType.$touch"
+            :error="v$.formData.params.documentType.$error"
             v-model="formData.params.documentType"
             :options="activeDocumentMerchantType"
-            float-label="Select merchant document type"
+            label="Select merchant document type"
             placeholder="Merchant document type"
           />
         </div>
         <div>
           <q-input
-            color="grey-9"
-            v-model="formData.params.subDocumentType"
-            float-label="Merchant Sub Document Type"
+            color="grey-9" v-model="formData.params.subDocumentType"
+            label="Merchant Sub Document Type"
             placeholder="Merchant Sub Document Type"
           />
         </div>
         <div>
           <q-input
             v-model="formData.params.marsDocumentId"
-            @blur="$v.formData.params.marsDocumentId.$touch"
-            :error="$v.formData.params.marsDocumentId.$error"
+            @blur="v$.formData.params.marsDocumentId.$touch"
+            :error="v$.formData.params.marsDocumentId.$error"
             class="text-weight-regular text-grey-8"
-            color="grey-9"
-            type="number"
-            float-label="Mars Agreement Id"
+            color="grey-9" class="type="number"
+            label="Mars Agreement Id"
             placeholder="Mars Agreement Id"
             @keyup.enter="submitMerchantSubDocumentTypeData(formData)"
           />
@@ -66,8 +62,7 @@
           <q-btn
             align="right"
             @click="submitMerchantSubDocumentTypeData(formData)"
-            color="purple-9"
-          >Save</q-btn>
+            color="purple-9" class=">Save</q-btn>
         </div>
       </div>
     </q-dialog>
@@ -151,8 +146,8 @@ export default {
       _.map(this.propActiveDocumentMerchantType, item => {});
     },
     submitMerchantSubDocumentTypeData() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
       } else {
         this.$q.loading.show({
           delay: 100, // ms
@@ -176,7 +171,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

@@ -10,11 +10,10 @@
           <q-input
             clearable
             v-model.trim="formData.tid"
-            @blur="$v.formData.tid.$touch"
-            :error="$v.formData.tid.$error"
+            @blur="v$.formData.tid.$touch"
+            :error="v$.formData.tid.$error"
             class="text-weight-regular text-grey-8"
-            color="grey-9"
-            float-label="*Enter TID"
+            color="grey-9" class="label="*Enter TID"
             placeholder="Enter TID"
             maxlength="8"
             onkeypress="return (event.charCode > 47 && event.charCode < 59) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
@@ -68,8 +67,8 @@ export default {
   methods: {
     ...mapActions("appDevice", ["VERIFY_KSN"]),
     fnSubmittid(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review field again.");
         return;
       } else {
@@ -86,7 +85,7 @@ export default {
               this.$q.notify({
                 color: "positive",
                 position: "bottom",
-                message: this.ksnresponse.body.message,
+                message: this.ksnresponse.data.message,
                 icon: "thumb_up",
               });
               this.$router.push({ name: "KsnEnable" });
@@ -96,7 +95,7 @@ export default {
                 type: "warning",
                 color: "amber-9",
                 position: "bottom",
-                message: this.ksnresponse.body.message,
+                message: this.ksnresponse.data.message,
                 icon: "thumb_up",
               });
             }

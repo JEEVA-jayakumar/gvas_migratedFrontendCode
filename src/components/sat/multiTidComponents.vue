@@ -8,11 +8,11 @@
                     class=" text-h6 q-px-lg q-py-md text-center justify-center text-weight-regular bottom-border text-grey-9 ">
                     <div class="col text-h6">Base-Tid Configurations</div>
                     <div align="right">
-                        <q-btn round @click="goToValidationPage()" outline color="dark" icon="clear" />
+                        <q-btn round @click="goToValidationPage()" outline color="dark" class="icon="clear" />
                     </div>
                 </div>
                 <div v-if="this.baseTidFlag == true" error-icon="warning" name="eleven" title="Multi" subtitle="TID">
-                    <q-btn color="primary" class="q-ma-xs" icon="check" @click="fnCreateOrGetBaseTid()"
+                    <q-btn color="primary" class="class="q-ma-xs" icon="check" @click="fnCreateOrGetBaseTid()"
                         label="Create Base TID" />
                 </div>
                 <div v-if="this.SubTidField == true">
@@ -80,18 +80,18 @@
                                     </q-td>
                                     <q-td v-slot:body-cell-action="props" :props="props">
                                         <!-- v-if="props.row.upiEnabled != true" -->
-                                        <q-btn   highlight push class="q-mx-sm" color="positive" size="sm"
+                                        <q-btn   push class="q-mx-sm" color="positive" size="sm"
                                             @click="finalFormSubmit(props.row)" :disabled="props.row.submittedToMars">
                                             Submit
                                             To Mars </q-btn>
                                             <!-- <div v-if="props.row.upiEnabled == true">
-                                            <q-btn class="q-mx-sm" highlight push  color="teal" size="sm" :disabled="props.row.tid == null || props.row.mid == null " 
+                                            <q-btn class="q-mx-sm" push  color="teal" size="sm" :disabled="props.row.tid == null || props.row.mid == null "
                                             @click="additionalTid(listAllSubTidDetails)"> Additional Tid
                                             </q-btn>
                                            </div> -->
                                     </q-td>
                                 </q-table>
-                                <q-btn color="primary" :disabled="fndisable" class="text-center justify-center" @click="finalSubmit()"
+                                <q-btn color="primary" class=":disabled="fndisable" class="text-center justify-center" @click="finalSubmit()"
                                 label="Final Submit" />
                             </q-card>
                         </div>
@@ -390,11 +390,11 @@ export default {
                     this.$q.notify({
                         color: "positive",
                         position: "bottom",
-                        message: response.body.message,
+                        message: response.data.message,
                         icon: "thumb_up"
                     });
                     this.baseAndSubTidList = [];
-                    let res = response.body.data;
+                    let res = response.data.data;
                     res.baseTids.map(bTids => {
                         this.baseAndSubTidList.push({ baseTidList: bTids, subTidConfsList: res.subTidConfs })
                     })
@@ -414,7 +414,7 @@ export default {
                 // this.$q.notify({
                 //     color: "negative",
                 //     position: "bottom",
-                //     message: error.body != null ? error.body.message : "Base TID creation failed!",
+                //     message: error.data != null ? error.data.message : "Base TID creation failed!",
                 //     icon: "clear"
                 // });
                 this.$q.loading.hide();
@@ -443,7 +443,7 @@ export default {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",
-                        message: error.body != null ? error.body.message : "Lead Information status update failed!",
+                        message: error.data != null ? error.data.message : "Lead Information status update failed!",
                         icon: "clear"
                     });
                     this.$q.loading.hide();
@@ -456,13 +456,13 @@ export default {
                     this.$q.notify({
                         color: "positive",
                         position: "bottom",
-                        message: response.body.message,
+                        message: response.data.message,
                         icon: "thumb_up"
                     });
                     this.subTidDuplicateData = [];
-                    let res = response.body.data;
+                    let res = response.data.data;
                     this.listAllSubTidDetails = res;
-                    let res1 = response.body.data.submittedToMars;
+                    let res1 = response.data.data.submittedToMars;
                     this.disabledListAllSubTidDetails = res1;
                     this.genSubTidFlag = true;
                     this.SubTidField = false;
@@ -483,10 +483,10 @@ export default {
                             this.$q.notify({
                                 color: "positive",
                                 position: "bottom",
-                                message: response.body.message,
+                                message: response.data.message,
                                 icon: "thumb_up"
                             });
-                            let res = response.body.data;
+                            let res = response.data.data;
                             this.listAllSubTidDetails = res;
                             this.genSubTidFlag = true;
                             this.SubTidField = false;
@@ -504,7 +504,7 @@ export default {
                         this.$q.notify({
                             color: "negative",
                             position: "bottom",
-                            message: error.body != null ? error.body.message : "Sub TID creation failed!",
+                            message: error.data != null ? error.data.message : "Sub TID creation failed!",
                             icon: "clear"
                         });
                         this.$q.loading.hide();
@@ -514,7 +514,7 @@ export default {
                 this.$q.notify({
                     color: "negative",
                     position: "bottom",
-                    message: error.body != null ? error.body.message : "Sub TID generation failed!",
+                    message: error.data != null ? error.data.message : "Sub TID generation failed!",
                     icon: "clear"
                 });
                 this.$q.loading.hide();
@@ -526,10 +526,10 @@ export default {
                 this.$q.notify({
                     color: "positive",
                     position: "bottom",
-                    message: response.body.message,
+                    message: response.data.message,
                     icon: "thumb_up"
                 });
-                let res = response.body.data;
+                let res = response.data.data;
                 this.listAllSubTidDetails = res;
             }).catch(error => {
                 this.$q.loading.hide();
@@ -569,7 +569,7 @@ export default {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",
-                        message: error.body != null ? error.body.message : "Base TID creation failed!",
+                        message: error.data != null ? error.data.message : "Base TID creation failed!",
                         icon: "clear"
                     });
                     this.$q.loading.hide();
@@ -626,11 +626,11 @@ export default {
                     this.$q.notify({
                         color: "positive",
                         position: "bottom",
-                        message: response.body.message,
+                        message: response.data.message,
                         icon: "thumb_up"
                     });
                     this.baseAndSubTidList = [];
-                    let res = response.body.data;
+                    let res = response.data.data;
                     res.baseTids.map(bTids => {
                         this.baseAndSubTidList.push({ baseTidList: bTids, subTidConfsList: res.subTidConfs })
                     })
@@ -769,7 +769,7 @@ export default {
         //                             merchantRefCode: this.propLeadDeatils.merchantRefCode
         //                         };
         //                     } else {
-        //                         feed_paramaters = response.body;
+        //                         feed_paramaters = response.data;
         //                     }
         //                     self.$q.loading.show({
         //                         delay: 0, // ms
@@ -903,7 +903,7 @@ export default {
         //                                     .slice(1, 2);
         //                                 let computeSplitted = splitted[splitted.length - 1];
         //                                 let fieldErrorFound = eval(`
-        //                 OThis.$v.viewBinding.partnersArr.$each[
+        //                 OThis.v$.viewBinding.partnersArr.$each[
         //                   ${findPartnersErrorIndex}
         //                 ].${computeSplitted}`);
         //                                 fieldErrorFound.$model = "";
@@ -917,7 +917,7 @@ export default {
         //                                 generateErrorMessage.issue = actual.issue;
         //                                 generateErrorMessage.value = actual.value;
         //                             } else {
-        //                                 let splittingErrorField = `OThis.$v.${splitted.join(
+        //                                 let splittingErrorField = `OThis.v$.${splitted.join(
         //                                     "."
         //                                 )}`;
         //                                 let fieldErrorFound = eval(splittingErrorField);

@@ -9,47 +9,44 @@
           </div>
           <div class="col-md-8">
             <q-input
-              @blur="$v.formData.requestParam.password.$touch"
-              :error="$v.formData.requestParam.password.$error"
+              @blur="v$.formData.requestParam.password.$touch"
+              :error="v$.formData.requestParam.password.$error"
               v-model="formData.requestParam.password"
               type="password"
-              float-label="Enter new password"
-              color="grey-9"
-            />
+              label="Enter new password"
+              color="grey-9" class="/>
             <p
               class="error"
-              v-if="!$v.formData.requestParam.password.required"
+              v-if="!v$.formData.requestParam.password.required"
             >this field is required</p>
             <br />
 
             <p
               class="error"
-              v-if="!$v.formData.requestParam.password.strongPassword"
+              v-if="!v$.formData.requestParam.password.strongPassword"
             >Strong passwords need to have a letter, a number, a special character, and be more than 8 characters long.</p>
           </div>
           <div class="col-md-8">
             <q-input
-              @blur="$v.formData.passwordRe.$touch"
-              :error="$v.formData.passwordRe.$error"
+              @blur="v$.formData.passwordRe.$touch"
+              :error="v$.formData.passwordRe.$error"
               v-model="formData.passwordRe"
               type="password"
-              float-label="Re-enter new password"
-              color="grey-9"
-            />
-            <p class="error" v-if="!$v.formData.passwordRe.required">this field is required</p>
+              label="Re-enter new password"
+              color="grey-9" class="/>
+            <p class="error" v-if="!v$.formData.passwordRe.required">this field is required</p>
             <br />
 
             <p
               class="error"
-              v-if="!$v.formData.passwordRe.strongPassword"
+              v-if="!v$.formData.passwordRe.strongPassword"
             >Strong passwords need to have a letter, a number, a special character, and be more than 8 characters long.</p>
           </div>
           <div class="col-md-8" align="center">
             <q-btn
               class="full-width text-weight-regular q-pa-md"
               no-caps
-              color="purple-9"
-              @click="fnSubmitForgetPassword(formData)"
+              color="purple-9" @click="fnSubmitForgetPassword(formData)"
               style="max-width:300px"
             >Submit</q-btn>
           </div>
@@ -124,7 +121,7 @@ export default {
   methods: {
     ...mapActions("Authentication", ["FEED_AFTER_RESET_PASSWORD_INFO"]),
     fnSubmitForgetPassword(values) {
-      if (this.$v.formData.$error) {
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         if (values.requestParam.password == values.passwordRe) {

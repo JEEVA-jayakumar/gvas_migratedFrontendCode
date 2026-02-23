@@ -16,16 +16,15 @@
         <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
       </div>
     </div>
-    <q-tabs color="grey-9">
-      <!-- Tabs - notice slot="title" -->
+    <q-tabs color="grey-9">" class="<!-- Tabs - notice  -->
       <q-tab
         @select="merchantTypeActiveList"
         default
-        slot="title"
+
         label="Active List"
         name="tab-1"
       />
-      <q-tab @select="merchantTypeDeActiveList" slot="title" label="De-Actived List" name="tab-2"/>
+      <q-tab @select="merchantTypeDeActiveList"  label="De-Actived List" name="tab-2"/>
       <q-tab-panel name="tab-1">
         <q-table
           :rows="activeMerchantTypeList"
@@ -33,8 +32,7 @@
           :columns="activatedColumns"
           :filter="activeFilterSearch"
           row-key="name"
-          color="grey-9"
-        >
+          color="grey-9" class=">
           <q-td v-slot:body-cell-action="props" :props="props">
             <div class="row no-wrap no-padding">
               <q-btn
@@ -66,10 +64,9 @@
             <div class="col">
               <q-input
                 clearable
-                color="grey-9"
-                v-model="activeFilterSearch"
+                color="grey-9" v-model="activeFilterSearch"
                 placeholder="Type.."
-                float-label="Search by name, short name"
+                label="Search by name, short name"
                 class="q-mr-lg"
               />
             </div>
@@ -85,8 +82,7 @@
           :filter="deActivatedFilterSearch"
           :pagination="paginationControl"
           row-key="id"
-          color="grey-9"
-        >
+          color="grey-9" class=">
           <q-td v-slot:body-cell-action="props" :props="props">
             <div class="row no-wrap no-padding">
               <q-btn
@@ -107,10 +103,9 @@
             <div class="col">
               <q-input
                 clearable
-                color="grey-9"
-                v-model="deActivatedFilterSearch"
+                color="grey-9" v-model="deActivatedFilterSearch"
                 placeholder="Type.."
-                float-label="Search by name"
+                label="Search by name"
                 class="q-mr-lg"
               />
             </div>

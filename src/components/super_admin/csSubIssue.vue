@@ -1,18 +1,17 @@
 <template>
     <q-page>
       <div>
-        <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" >
-           <q-tab @select="ajaxSpareData" default  color="dark" name="tab-3" slot="title" label="Active CS Sub Issue" />
-            <q-tab  color="dark" name="tab-4" slot="title" label="Deactive CS Sub Issue" />
-          <q-tab-panel name="tab-3">
+        <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" class=">
+           <q-tab @select="ajaxSpareData" default  color="dark" class="name="tab-3"  label="Active CS Sub Issue" />
+            <q-tab  color="dark" class="name="tab-4"  label="Deactive CS Sub Issue" />
+
+
+        </q-tabs>
+<q-tab-panels v-model="activeTab" animated>
+<q-tab-panel name="tab-3">
             <q-table :rows="ActivetableData" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1"
-              :pagination="paginationControl" :filter-method="myCustomSearchFilter1" row-key="name" color="grey-9">
-              <q-td v-slot:body-cell-createdAt="props" :props="props">{{
-                  props.row.createdAt | moment("Do MMM Y")
-              }}</q-td>
-              <q-td v-slot:body-cell-updatedAt="props" :props="props">{{
-                  props.row.updatedAt | moment("Do MMM Y")
-              }}</q-td>
+              :pagination="paginationControl" :filter-method="myCustomSearchFilter1" row-key="name" color="grey-9">" class="<q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
+              <q-td v-slot:body-cell-updatedAt="props" :props="props">{{ $moment_format(props.row.updatedAt, "Do MMM Y") }}</q-td>
   
               <q-td v-slot:body-cell-action1="props" :props="props">
                 <div class="row no-wrap no-padding">
@@ -34,7 +33,7 @@
               </template>
             </q-table>
           </q-tab-panel>
-          <q-tab-panel name="tab-4">
+<q-tab-panel name="tab-4">
             <q-table 
             :rows="DeactivetableData"
             table-class="customSATableClass" 
@@ -43,14 +42,9 @@
             :pagination="paginationControl2"
             :filter-method="myCustomSearchFilter2" 
             row-key="name" 
-            color="grey-9"
-            >
-              <q-td v-slot:body-cell-createdAt="props" :props="props">{{
-                  props.row.createdAt | moment("Do MMM Y")
-              }}</q-td>
-              <q-td v-slot:body-cell-updatedAt="props" :props="props">{{
-                  props.row.updatedAt | moment("Do MMM Y")
-              }}</q-td>
+            color="grey-9" class=">
+              <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
+              <q-td v-slot:body-cell-updatedAt="props" :props="props">{{ $moment_format(props.row.updatedAt, "Do MMM Y") }}</q-td>
   
               <q-td v-slot:body-cell-action2="props" :props="props">
                 <div class="row no-wrap no-padding">
@@ -66,7 +60,7 @@
               </template>
             </q-table>
           </q-tab-panel>
-        </q-tabs>
+</q-tab-panels>
 
         <!--START: Show edit  Sub Task  -->
         <ShowEditCSSubIssue v-if="propShowEditCsSubIssue" :propShowEditCsSubIssue="propShowEditCsSubIssue"
@@ -322,9 +316,7 @@ import { required } from '@vuelidate/validators';
                 color: "negative",
                 position: "bottom",
                 message:
-                  error.body.message == null
-                    ? "Please Try Again Later !"
-                    : error.body.message,
+                  (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                 icon: "thumb_down"
               });
               this.$q.loading.hide();

@@ -20,8 +20,7 @@
               @keyup.enter="submitShortLead(formData)"
               v-model="formData.id"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="leadId"
+              color="grey-9" class="label="leadId"
               placeholder="leadId"
             />
           </div>
@@ -30,10 +29,9 @@
               disable
               @keyup.enter="submitShortLead(formData)"
               v-model="formData.leadName"
-              :error="$v.formData.leadName.$error"
+              :error="v$.formData.leadName.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="leadName"
+              color="grey-9" class="label="leadName"
               placeholder="leadName"
             />
           </div>
@@ -42,10 +40,9 @@
               disable
               @keyup.enter="submitShortLead(formData)"
               v-model="formData.leadNumber"
-              :error="$v.formData.leadNumber.$error"
+              :error="v$.formData.leadNumber.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="leadNumber"
+              color="grey-9" class="label="leadNumber"
               placeholder="leadNumber"
             />
           </div>
@@ -54,10 +51,9 @@
               disable
               @keyup.enter="submitShortLead(formData)"
               v-model="formData.shortleadDate"
-              :error="$v.formData.shortleadDate.$error"
+              :error="v$.formData.shortleadDate.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="shortleadDate"
+              color="grey-9" class="label="shortleadDate"
               placeholder="shortleadDate"
             />
           </div>
@@ -66,10 +62,9 @@
               disable
               @keyup.enter="submitShortLead(formData)"
               v-model="formData.contactNumber"
-              :error="$v.formData.contactNumber.$error"
+              :error="v$.formData.contactNumber.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="contactNumber"
+              color="grey-9" class="label="contactNumber"
               placeholder="contactNumber"
             />
           </div>
@@ -81,8 +76,7 @@
               class="bg-white text-weight-regular text-grey-8"
               @click="emitfnshowEditShortLead()"
             >Cancel</q-btn>
-            <q-btn align="right" @click="submitShortLead(formData)" color="purple-9">Save</q-btn>
-          </div>
+            <q-btn align="right" @click="submitShortLead(formData)" color="purple-9">Save</q-btn>" class="</div>
         </div>
       </form>
     </q-dialog>
@@ -136,8 +130,8 @@ export default {
     },
     //Permission creation final submit
     submitShortLead(request) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         let params = {
@@ -176,7 +170,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

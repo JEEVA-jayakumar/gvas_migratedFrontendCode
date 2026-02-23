@@ -24,7 +24,7 @@
               v-model="formData.fromDate"
               :min="yesterday"
               :max="tomorrow"
-              float-label="From Date"
+              label="From Date"
             />
           </div>
           <div class="col-md-12">
@@ -34,7 +34,7 @@
               v-model="formData.toDate"
               :min="yesterday"
               :max="tomorrow"
-              float-label="To Date"
+              label="To Date"
             />
           </div>
           <div class="col-md-12 group" align="right">
@@ -49,8 +49,7 @@
               align="right"
               @click="downloadPodList(formData)"
               :disabled="submitDisabled"
-              color="purple-9"
-              >Download</q-btn
+              color="purple-9" class=">Download</q-btn
             >
           </div>
         </div>

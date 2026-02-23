@@ -16,8 +16,7 @@
               size="sm"
               @click="emitToggleResolve"
               outline
-              color="dark"
-              icon="clear"
+              color="dark" class="icon="clear"
             />
           </div>
         </div>
@@ -26,9 +25,8 @@
           <div class="col-sm-5">
             <q-select
               stack-label="Issues"
-              inverted-light
-              color="light"
-              v-model.trim="formData.issue"
+
+              color="light" class="v-model.trim="formData.issue"
               separator
               :options="dropDown.issueOptions"
               @input="issueDocumentType"
@@ -39,9 +37,8 @@
             <q-select
               :disable="this.formData.issue == ''"
               stack-label="Sub Issues"
-              inverted-light
-              color="light"
-              v-model.trim="formData.subIssue"
+
+              color="light" class="v-model.trim="formData.subIssue"
               separator
               :options="dropDown.subIssueOptions"
             />
@@ -53,9 +50,8 @@
             <q-select
             :disable="this.formData.subIssue == ''"
               stack-label="Default Remarks"
-              inverted-light
-              color="light"
-              v-model.trim="formData.remarks"
+
+              color="light" class="v-model.trim="formData.remarks"
               separator
               :options="dropDown.remarksOptions"
             />
@@ -64,7 +60,7 @@
         <div class="row">
           <div class="col-sm-5"></div>
           <div class="col-sm-5">
-            <q-btn color="purple" :disable="this.formData.remarks == '' || this.formData.subIssue == ''" style="margin-top: 20px;" label="Submit" @click="fnPPE(resolveDataCallback)" />
+            <q-btn color="purple" class=":disable="this.formData.remarks == '' || this.formData.subIssue == ''" style="margin-top: 20px;" label="Submit" @click="fnPPE(resolveDataCallback)" />
           </div>
         </div>
       </q-dialog>

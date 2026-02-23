@@ -12,20 +12,19 @@
             </div>
           </div>
           <!-- <div class="col-md-8 q-py-md" align="left">
-            <q-select color="grey-9" v-model="formData.aggregator" float-label="Select Aggregator" radio
+            <q-select color="grey-9" v-model="formData.aggregator" label="Select Aggregator" radio
               :options="dropdDown.aggregatorOptions" @input="getaggregator" />
           </div> -->
           <!-- <div class="col-md-8 q-py-md" align="left">
-            <q-select color="grey-9" v-model="formData.deviceType" float-label="Select Device Type" radio
+            <q-select color="grey-9" v-model="formData.deviceType" label="Select Device Type" radio
               :options="deviceOption" />
           </div> -->
           <div class="col-md-8" align="center">
 
             <q-select
   class="text-weight-regular text-grey-8"
-  color="grey-9"
-  v-model="formData.sim"
-  float-label="Select Network"
+  color="grey-9" v-model="formData.sim"
+  label="Select Network"
   placeholder="Select Network"
   :options="networkOptions"
 />
@@ -69,7 +68,7 @@
                 <q-separator />
                 <q-card-section>
                   <q-item dense>
-                    <q-item-section icon="attach_file" />
+                    <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
                     <q-item-section>{{
                       formData.fileSelected[0].name
                     }}</q-item-section>
@@ -81,8 +80,7 @@
                   <q-btn
                     outline
                     size="sm"
-                    color="negative"
-                    @click="removeBulkUploadFile"
+                    color="negative" @click="removeBulkUploadFile"
                     label="Remove"
                     icon="clear"
                   />
@@ -93,8 +91,7 @@
           <div class="col-md-12 group" align="right">
             <q-btn
               outline
-              color="dark"
-              label="Cancel"
+              color="dark" class="label="Cancel"
               @click="emitfnshowSimDeActivationList()"
             />
             <q-btn
@@ -236,7 +233,7 @@ export default {
           var contentType = response.headers.map['content-type'][0]
           let blob = new Blob([response.data], { type:  contentType });
           // const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }
-          let link = document.createElement("a");
+          let clickable = document.createElement("a");
           link.href = window.URL.createObjectURL(blob);
           link.download = "Sim_upload_Remarks.xlsx";  
           link.click();
@@ -248,9 +245,7 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
+                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
             // this.formData.fileSelected = []

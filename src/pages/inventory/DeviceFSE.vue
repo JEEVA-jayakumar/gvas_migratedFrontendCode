@@ -17,10 +17,10 @@
         @request="ajaxLoadAllLeadInfo"
       >
        <q-td v-slot:body-cell-TidCreationDate="props" :props="props">
-          <span class="label">{{props.row.TidCreationDate | moment("Do MMM Y")}}</span>
+          <span class="label">{{ $moment_format(props.row.TidCreationDate, "Do MMM Y") }}</span>
         </q-td>
         <q-td v-slot:body-cell-ReceivedDate="props" :props="props">
-          <span class="label">{{props.row.ReceivedDate | moment("Do MMM Y")}}</span>
+          <span class="label">{{ $moment_format(props.row.ReceivedDate, "Do MMM Y") }}</span>
         </q-td>
         
        <template v-slot:top="props" class="bottom-border">
@@ -32,10 +32,9 @@
             v-model="filter"
             filter 
             clearable
-            float-label="Select SO"
+            label="Select SO"
             radio
-            color="grey-9"
-            :options="soMenulistOptions"
+            color="grey-9" class=":options="soMenulistOptions"
            
           />
         </div>
@@ -43,15 +42,14 @@
             <q-btn
               @click="downloadSoMenu()"
               outline
-              color="grey-9"
-              label="Download as Excel"
+              color="grey-9" class="label="Download as Excel"
               class="q-mr-lg q-py-sm float-right"
               size="md"
             />
           </div> -->
             <div class="col-md-6">
            
-            <q-btn square outline color="purple-9" label="Download as Excel" class="q-mr-lg q-py-sm float-right" size="md" @click="downloadSoMenu()" />
+            <q-btn square outline color="purple-9" class="label="Download as Excel" class="q-mr-lg q-py-sm float-right" size="md" @click="downloadSoMenu()" />
            
           </div>
           <!--END: table filter,search -->

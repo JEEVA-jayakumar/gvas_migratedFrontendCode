@@ -23,11 +23,10 @@
           <div>
             <q-input
               v-model="formData.planName"
-              @blur="$v.formData.planName.$touch"
-              :error="$v.formData.planName.$error"
+              @blur="v$.formData.planName.$touch"
+              :error="v$.formData.planName.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="Plan"
+              color="grey-9" class="label="Plan"
               placeholder="Plan"
             />
           </div>
@@ -36,10 +35,8 @@
               align="right"
               v-if="makeUpdateElementActive"
               @click="fnFinalUpdate(formData)"
-              color="purple-9"
-            >Update</q-btn>
-            <q-btn align="right" v-else @click="fnFinalCreate(formData)" color="purple-9">Save</q-btn>
-          </div>
+              color="purple-9" class=">Update</q-btn>
+            <q-btn align="right" v-else @click="fnFinalCreate(formData)" color="purple-9">Save</q-btn>" class="</div>
         </div>
       </q-card-section>
     </q-card>
@@ -54,8 +51,7 @@
           :pagination="paginationControl"
           :filter-method="myCustomSearchFilter"
           row-key="name"
-          color="grey-9"
-        >
+          color="grey-9" class=">
           <q-td v-slot:body-cell-action="props" :props="props">
             <div class="row no-wrap no-padding">
               <q-btn
@@ -87,10 +83,9 @@
             <div class="col">
               <q-input
                 clearable
-                color="grey-9"
-                v-model="filterSearch"
+                color="grey-9" v-model="filterSearch"
                 placeholder="Type.."
-                float-label="Search by name, short name"
+                label="Search by name, short name"
                 class="q-mr-lg"
               />-
             </div>

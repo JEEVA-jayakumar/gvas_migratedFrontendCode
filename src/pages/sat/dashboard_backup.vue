@@ -11,15 +11,14 @@
                   <q-item class="bg-purple-9 q-pa-md border-radius-10">
                     <q-item-section>
                       <q-item-label
-                        color="white"
-                        class="text-weight-medium q-display-1 text-center"
+                        color="white" class="class="text-weight-medium q-display-1 text-center"
                       >28</q-item-label>
-                      <q-item-label color="white" class="text-weight-light text-center">
+                      <q-item-label color="white" class="class="text-weight-light text-center">
                         <small>Total</small>
                       </q-item-label>
                     </q-item-section>
                     <q-item-section>
-                      <q-item-label color="white" class="q-mx-lg">
+                      <q-item-label color="white" class="class="q-mx-lg">
                         <div class="text-weight-light">Exception</div>
                       </q-item-label>
                     </q-item-section>
@@ -48,17 +47,15 @@
                   <q-item class="bg-purple-9 q-pa-md border-radius-10">
                     <q-item-section>
                       <q-item-label
-                        color="white"
-                        class="text-weight-medium q-display-1 text-center"
+                        color="white" class="class="text-weight-medium q-display-1 text-center"
                       >100</q-item-label>
-                      <q-item-label color="white" class="text-weight-light text-center">
+                      <q-item-label color="white" class="class="text-weight-light text-center">
                         <small>Total</small>
                       </q-item-label>
                     </q-item-section>
                     <q-item-section>
                       <q-item-label
-                        color="white"
-                        class="q-mx-lg text-weight-light"
+                        color="white" class="class="q-mx-lg text-weight-light"
                       >Inventory Allocation</q-item-label>
                     </q-item-section>
                   </q-item>
@@ -86,15 +83,14 @@
                   <q-item class="bg-purple-9 q-pa-md border-radius-10">
                     <q-item-section>
                       <q-item-label
-                        color="white"
-                        class="text-center text-weight-medium q-display-1"
+                        color="white" class="class="text-center text-weight-medium q-display-1"
                       >28</q-item-label>
-                      <q-item-label color="white" class="text-weight-light text-center">
+                      <q-item-label color="white" class="class="text-weight-light text-center">
                         <small>Total</small>
                       </q-item-label>
                     </q-item-section>
                     <q-item-section>
-                      <q-item-label color="white" class="q-mx-lg text-weight-light">Implementation</q-item-label>
+                      <q-item-label color="white" class="class="q-mx-lg text-weight-light">Implementation</q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-item class="q-pa-xs">
@@ -105,8 +101,7 @@
                         </div>
                         <div class="col-6">
                           <p class="text-caption q-ma-none">Unallocated/70
-                            <q-icon name="fa fa-bell" color="yellow-10"/>
-                          </p>
+                            <q-icon name="fa fa-bell" color="yellow-10"/>" class="</p>
                         </div>
                       </div>
                     </q-item-section>
@@ -122,7 +117,7 @@
             <q-list class="bg-amber-7 q-pa-md border-radius-10">
               <q-item>
                 <q-item-section>
-                  <q-item-label color="white" class="text-weight-medium q-display-1 text-center">
+                  <q-item-label color="white" class="class="text-weight-medium q-display-1 text-center">
                     <div class="q-display-1">150</div>
                     <div class="text-caption">Total</div>
                   </q-item-label>
@@ -130,7 +125,7 @@
               </q-item>
               <q-item>
                 <q-item-section>
-                  <q-item-label color="white" class="text-center">
+                  <q-item-label color="white" class="class="text-center">
                     <div class="text-weight-light text-subtitle1">Application Pending</div>
                   </q-item-label>
                 </q-item-section>

@@ -20,8 +20,7 @@
                     </q-btn>
                   </div>
                   <div class="col-md-2">
-                    <q-btn size="md" align="right" @click="fnCreateRoleSubmit(formData.rolePermissions)" color="purple-9">Save
-                    </q-btn>
+                    <q-btn size="md" align="right" @click="fnCreateRoleSubmit(formData.rolePermissions)" color="purple-9">Save" class="</q-btn>
                   </div>
                 </div>
               </div>
@@ -34,12 +33,11 @@
                   <q-select
                   filter
                     v-model="formData.rolePermissions.hierarchyId"
-                    @blur="$v.formData.rolePermissions.hierarchyId.$touch"      
-                    :error="$v.formData.rolePermissions.hierarchyId.$error" 
-                    float-label="Hierarchy"
+                    @blur="v$.formData.rolePermissions.hierarchyId.$touch"
+                    :error="v$.formData.rolePermissions.hierarchyId.$error"
+                    label="Hierarchy"
                     placeholder="Select Hierarchy"
-                    class="text-weight-regular text-grey-8" color="grey-9"
-                    :options="propGetAllHierarchiesData"
+                    class="text-weight-regular text-grey-8" color="grey-9" class=":options="propGetAllHierarchiesData"
                   />
                 </div> 
               </div>
@@ -49,9 +47,9 @@
               <div class="column gutter-sm q-py-sm items-center">
                 <div class="col-md-8">
                    <q-input v-model.trim="formData.rolePermissions.name" 
-                    @blur="$v.formData.rolePermissions.name.$touch"      
-                    :error="$v.formData.rolePermissions.name.$error" 
-                    class="text-weight-regular text-grey-8" color="grey-9" float-label="Role" placeholder="Role" />
+                    @blur="v$.formData.rolePermissions.name.$touch"
+                    :error="v$.formData.rolePermissions.name.$error"
+                    class="text-weight-regular text-grey-8" color="grey-9" class="label="Role" placeholder="Role" />
                 </div>
               </div>
             </div>  
@@ -62,10 +60,9 @@
                   <q-color 
                   clearable
                   v-model="formData.rolePermissions.roleColor"
-                  @blur="$v.formData.rolePermissions.roleColor.$touch"      
-                  :error="$v.formData.rolePermissions.roleColor.$error" 
-                  popover float-label="Choose a role color" color="grey-9"
-                  />
+                  @blur="v$.formData.rolePermissions.roleColor.$touch"
+                  :error="v$.formData.rolePermissions.roleColor.$error"
+                  popover label="Choose a role color" color="grey-9" class="/>
                 </div>
               </div>
             </div>  
@@ -139,8 +136,8 @@ export default {
 
     //Role creation final submit
     fnCreateRoleSubmit(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         let cookedRole = formData.name.toUpperCase().replace(/ /g, "_");

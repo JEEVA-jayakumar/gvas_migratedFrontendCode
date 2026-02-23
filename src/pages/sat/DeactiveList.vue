@@ -46,7 +46,7 @@
           props.row.leadInformation == null ? "NA" : props.row.leadInformation.leadAddress
         }}</q-td>
         <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{ props.row.deviceStatusDate | moment("Do MMM Y") }}</span>
+          <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
         </q-td>
         <q-td v-slot:body-cell-viewDocument="props" :props="props">
           <div
@@ -57,7 +57,7 @@
             class="cursor-pointer"
           >
             <div @click="fnPDFViewModal(props.row.implementationForm)">
-              <q-icon name="fas fa-file-pdf" color="primary" />
+              <q-icon name="fas fa-file-pdf" color="primary" class="/>
               &nbsp;{{ props.row.implementationForm }}
             </div>
           </div>
@@ -88,7 +88,7 @@
             class="cursor-pointer"
           >
             <div @click="fnPDFViewModal(props.row.pictureOfShop)">
-              <q-icon name="fas fa-file-pdf" color="primary" />
+              <q-icon name="fas fa-file-pdf" color="primary" class="/>
               &nbsp;{{ props.row.pictureOfShop }}
             </div>
           </div>
@@ -119,7 +119,7 @@
             class="cursor-pointer"
           >
             <div @click="fnPDFViewModal(props.row.cpvForm)">
-              <q-icon name="fas fa-file-pdf" color="primary" />
+              <q-icon name="fas fa-file-pdf" color="primary" class="/>
               &nbsp;{{ props.row.cpvForm }}
             </div>
           </div>
@@ -153,9 +153,8 @@
               clearable
               v-model="filter"
               separator
-              color="grey-9"
-              placeholder="Type.."
-              float-label="Search by MID, TID, Merchant Name"
+              color="grey-9" class="placeholder="Type.."
+              label="Search by MID, TID, Merchant Name"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -165,7 +164,7 @@
               v-model="formData.fromDate"
               :min="yesterday"
               :max="tomorrow"
-              float-label="From Date"
+              label="From Date"
             />
           </div>
           <div class="col-2">
@@ -174,14 +173,13 @@
               v-model="formData.toDate"
               :min="yesterday"
               :max="tomorrow"
-              float-label="To Date"
+              label="To Date"
             />
           </div>
           <div class="col-2">
             <q-btn
               align="right"
-              color="purple-9"
-              :disabled="
+              color="purple-9" class=":disabled="
                 formData.fromDate == '' ||
                 formData.fromDate == null ||
                 formData.toDate == '' ||
@@ -191,7 +189,7 @@
               @click="SubmitData(formData)"
               >Submit</q-btn
             >
-             <q-btn color="red" v-if="selectedRow" @click="DeleteData">
+             <q-btn color="red" class="v-if="selectedRow" @click="DeleteData">
               <q-icon name="delete" />
             </q-btn>
           </div>

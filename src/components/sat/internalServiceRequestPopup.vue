@@ -6,7 +6,7 @@
       <div class="row items-center bottom-border q-py-sm">
         <div class="col">Lead Information</div>
         <div class="col-auto">
-          <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" icon="clear" />
+          <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" class="icon="clear" />
         </div>
       </div>
 

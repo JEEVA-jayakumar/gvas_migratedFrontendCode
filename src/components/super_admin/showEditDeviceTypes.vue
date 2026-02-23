@@ -10,18 +10,17 @@
     >
       <form>
         <div class="text-h6 text-weight-regular q-py-md bottom-border">
-          <q-icon name="border_color" size="25px" color="purple-9"/>Modify Device
+          <q-icon name="border_color" size="25px" color="purple-9"/>Modify" class="Device
         </div>
 
         <div class="column-inline q-py-md gutter-sm items-center">
           <div>
             <q-input
               v-model="formData.deviceName"
-              @blur="$v.formData.deviceName.$touch"
-              :error="$v.formData.deviceName.$error"
+              @blur="v$.formData.deviceName.$touch"
+              :error="v$.formData.deviceName.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="Device Type"
+              color="grey-9" class="label="Device Type"
               placeholder="Device Type"
             />
           </div>
@@ -31,12 +30,11 @@
                 <q-color
                   clearable
                   v-model="formData.colorCode"
-                  @blur="$v.formData.colorCode.$touch"
-                  :error="$v.formData.colorCode.$error"
+                  @blur="v$.formData.colorCode.$touch"
+                  :error="v$.formData.colorCode.$error"
                   popover
-                  float-label="Choose a role color"
-                  color="grey-9"
-                  @input="createDuplicateResult"
+                  label="Choose a role color"
+                  color="grey-9" class="@input="createDuplicateResult"
                 />
               </div>
               <div class="col-auto">
@@ -52,11 +50,10 @@
             <q-input
               v-model="formData.serialNumberLength"
               type="number"
-              @blur="$v.formData.serialNumberLength.$touch"
-              :error="$v.formData.serialNumberLength.$error"
+              @blur="v$.formData.serialNumberLength.$touch"
+              :error="v$.formData.serialNumberLength.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="Serial Number Length"
+              color="grey-9" class="label="Serial Number Length"
               placeholder="Serial Number Length"
             />
           </div>
@@ -66,16 +63,14 @@
               align="right"
               icon="block"
               class="text-weight-regular text-grey-8"
-              color="grey-6"
-              @click="emitfnshowEditDeviceTypes()"
+              color="grey-6" @click="emitfnshowEditDeviceTypes()"
               label="Cancel"
             />
             <q-btn
               align="right"
               icon="check"
               @click="fnfinalsubmitDeviceType(formData)"
-              color="purple-9"
-              label="save"
+              color="purple-9" class="label="save"
             />
           </div>
         </div>
@@ -134,8 +129,8 @@ export default {
       this.formData.colorCode = item;
     },
     fnfinalsubmitDeviceType(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();
@@ -157,7 +152,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

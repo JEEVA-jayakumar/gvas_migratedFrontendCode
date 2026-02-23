@@ -18,23 +18,21 @@
                   <!-- <div class="col-md-12">
                         <q-select
                           v-model="formData.regionGroup"   
-                          :error="$v.formData.regionGroup.$error" 
+                          :error="v$.formData.regionGroup.$error"
                            :options="regionGroupOptions"
                         
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Region Group" 
+                          color="grey-9" class="label="Region Group"
                           placeholder="Region Group" 
                         />
                     </div> -->
                     <div class="col-md-12">
                         <q-input v-model="formData.regionArea" 
-                          @blur="$v.formData.regionArea.$touch"      
-                          :error="$v.formData.regionArea.$error" 
-                          @keyup.enter="$v.formData.regionArea.$touch"
+                          @blur="v$.formData.regionArea.$touch"
+                          :error="v$.formData.regionArea.$error"
+                          @keyup.enter="v$.formData.regionArea.$touch"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Region" 
+                          color="grey-9" class="label="Region"
                           placeholder="Region" 
                         />
                     </div>
@@ -42,8 +40,7 @@
                 <div class="row gutter-sm q-py-sm items-center">
                     <div class="col-md-12 group" align="right">
                         <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnshowRegionsGroup()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitRegionGroup(formData)" color="purple-9">Save</q-btn>
-                    </div>
+                        <q-btn align="right" @click="fnfinalsubmitRegionGroup(formData)" color="purple-9">Save</q-btn>" class="</div>
                 </div>
             </form>
         </q-dialog>
@@ -126,8 +123,8 @@ export default {
     fnfinalsubmitRegionGroup(formData) {
       console.log("FINAL SUBMITRED-------->",JSON.stringify(formData))
       
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();
@@ -151,7 +148,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down",
             });
           });

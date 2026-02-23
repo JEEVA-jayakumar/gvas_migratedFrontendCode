@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-list no-border class="no-padding">
+    <q-list  class="no-padding">
       <!-- START >> (Mandatory) Application form  -->
       <q-item separator class="text-body1 text-dark bg-grey-4 text-weight-medium">
         <q-item-section>Application Form</q-item-section>
@@ -14,8 +14,7 @@
               v-if="propGetShortInfo.applicationFileMimeType.includes('pdf')"
             >
               <div @click="fnPDFViewModal(propGetShortInfo.applicationFile)">
-                <q-btn round size="sm" icon="fas fa-file-pdf" color="primary"/>
-                &nbsp;{{propGetShortInfo.applicationFile}}
+                <q-btn round size="sm" icon="fas fa-file-pdf" color="primary"/>" class="&nbsp;{{propGetShortInfo.applicationFile}}
               </div>
             </div>
             <!-- END >>If document type is PDF format -->
@@ -35,8 +34,7 @@
                 >
               </viewer>
               <div @click="fnViewHandedOverFileImage()" class="ellipsis">
-                <q-icon name="fas fa-image" color="amber-9"/>
-                &nbsp;{{propGetShortInfo.applicationFile}}
+                <q-icon name="fas fa-image" color="amber-9"/>" class="&nbsp;{{propGetShortInfo.applicationFile}}
               </div>
             </div>
             <!-- END >>If document type is image format -->
@@ -62,8 +60,7 @@
                 <q-expansion-item separator opened multiline class="full-width">
                   <template slot="header">
                     <q-item-section
-                      :color="documents[0].kycException?'amber-9':''"
-                      :icon="documents[0].kycException? 'warning' :'attach_file'"
+                      :color="documents[0].kycException?'amber-9':''" class=":icon="documents[0].kycException? 'warning' :'attach_file'"
                     />
                     <q-item-section
                       class="text-body1"
@@ -75,24 +72,21 @@
                         round
                         size="xs"
                         class="q-ma-xs"
-                        color="green"
-                        icon="fas fa-check"
+                        color="green" class="icon="fas fa-check"
                         @click.stop="fnDocumentApproveModal(documents[0])"
                       />
                       <q-btn
                         round
                         size="xs"
                         class="q-ma-xs"
-                        color="red"
-                        icon="fas fa-times"
+                        color="red" class="icon="fas fa-times"
                         @click.stop="fnDocumentRejectModal(documents[0])"
                       />
                       <q-btn
                         round
                         size="xs"
                         class="q-ma-xs"
-                        color="primary"
-                        icon="fas fa-plus"
+                        color="primary" class="icon="fas fa-plus"
                         @click.stop="fileUploadForUsingMerchantId(documents[0].merchantDocumentType)"
                       />
                     </q-item-section>
@@ -110,24 +104,21 @@
                           round
                           size="xs"
                           class="q-ma-xs"
-                          color="green"
-                          icon="fas fa-check"
+                          color="green" class="icon="fas fa-check"
                           @click.stop="fnDocumentApproveModal(documents[0].merchantDocumentType)"
                         />
                         <q-btn
                           round
                           size="xs"
                           class="q-ma-xs"
-                          color="red"
-                          icon="fas fa-times"
+                          color="red" class="icon="fas fa-times"
                           @click.stop="fnDocumentRejectModal(documents[0].merchantDocumentType)"
                         />
                         <q-btn
                           round
                           size="xs"
                           class="q-ma-xs"
-                          color="primary"
-                          icon="fas fa-plus"
+                          color="primary" class="icon="fas fa-plus"
                           @click.stop="fileUploadForUsingMerchantId(documents[0].merchantDocumentType)"
                         />
                       </div>
@@ -141,8 +132,7 @@
                     >
                       <div v-if="item.mimeType.includes('application')">
                         <div @click="fnPDFViewModal(item.fileName)" class="ellipsis">
-                          <q-btn round size="sm" icon="fas fa-file-pdf" color="primary"/>
-                          &nbsp;{{item.fileName}}
+                          <q-btn round size="sm" icon="fas fa-file-pdf" color="primary"/>" class="&nbsp;{{item.fileName}}
                         </div>
                       </div>
                       <div v-else-if="item.mimeType.includes('image')" class="q-pa-md">
@@ -166,7 +156,7 @@
               <div class="col-md-12 text-body1">
                 <q-expansion-item separator indent opened class="full-width">
                   <template slot="header">
-                    <q-item-section icon="apps"/>
+                    <q-item-section avatar><q-icon name="apps"  /></q-item-section>
                     <q-item-section
                       class="text-body1"
                       :sublabel="documents.length + 'Type(s)'"
@@ -177,16 +167,14 @@
                         round
                         size="xs"
                         class="q-ma-xs"
-                        color="green"
-                        icon="fas fa-check"
+                        color="green" class="icon="fas fa-check"
                         @click.stop="fnDocumentApproveModal(documents[0])"
                       />
                       <q-btn
                         round
                         size="xs"
                         class="q-ma-xs"
-                        color="red"
-                        icon="fas fa-times"
+                        color="red" class="icon="fas fa-times"
                         @click.stop="fnDocumentRejectModal(documents[0])"
                       />
                     </q-item-section>
@@ -216,8 +204,7 @@
                       >
                         <template slot="header">
                           <q-item-section
-                            :color="subDocument.kycException?'amber-9':''"
-                            :icon="subDocument.kycException? 'warning' :'attach_file'"
+                            :color="subDocument.kycException?'amber-9':''" class=":icon="subDocument.kycException? 'warning' :'attach_file'"
                           />
                           <q-item-section
                             class="text-body1"
@@ -232,24 +219,21 @@
                               round
                               size="xs"
                               class="q-ma-xs"
-                              color="green"
-                              icon="fas fa-check"
+                              color="green" class="icon="fas fa-check"
                               @click.stop="fnDocumentApproveModal(subDocument)"
                             />
                             <q-btn
                               round
                               size="xs"
                               class="q-ma-xs"
-                              color="red"
-                              icon="fas fa-times"
+                              color="red" class="icon="fas fa-times"
                               @click.stop="fnDocumentRejectModal(subDocument)"
                             />
                             <q-btn
                               round
                               size="xs"
                               class="q-ma-xs"
-                              color="primary"
-                              icon="fas fa-plus"
+                              color="primary" class="icon="fas fa-plus"
                               @click.stop="fileUploadForUsingMerchantId(subDocument.merchantDocumentType)"
                             />
                           </q-item-section>
@@ -269,24 +253,21 @@
                                 round
                                 size="xs"
                                 class="q-ma-xs"
-                                color="green"
-                                icon="fas fa-check"
+                                color="green" class="icon="fas fa-check"
                                 @click.stop="fnDocumentApproveModal(subDocument)"
                               />
                               <q-btn
                                 round
                                 size="xs"
                                 class="q-ma-xs"
-                                color="red"
-                                icon="fas fa-times"
+                                color="red" class="icon="fas fa-times"
                                 @click.stop="fnDocumentRejectModal(subDocument)"
                               />
                               <q-btn
                                 round
                                 size="xs"
                                 class="q-ma-xs"
-                                color="primary"
-                                icon="fas fa-plus"
+                                color="primary" class="icon="fas fa-plus"
                                 @click.stop="fileUploadForUsingMerchantId(subDocument.merchantDocumentType)"
                               />
                             </div>
@@ -300,8 +281,7 @@
                           >
                             <div v-if="item.mimeType.includes('application')">
                               <div @click="fnPDFViewModal(item.fileName)" class="ellipsis">
-                                <q-btn round size="sm" icon="fas fa-file-pdf" color="primary"/>
-                                &nbsp;{{item.fileName}}
+                                <q-btn round size="sm" icon="fas fa-file-pdf" color="primary"/>" class="&nbsp;{{item.fileName}}
                               </div>
                             </div>
                             <div v-else-if="item.mimeType.includes('image')" class="q-pa-md">

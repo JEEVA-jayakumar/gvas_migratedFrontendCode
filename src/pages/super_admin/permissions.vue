@@ -3,9 +3,7 @@
     <!-- content -->
     <div>
       <!-- <pre>{{getAllHierarchiesData}}</pre> -->
-      <q-table :rows="getAllPermissionData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" :pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
-
-        <q-td v-slot:body-cell-Permission="props" :props="props">
+      <q-table :rows="getAllPermissionData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" :pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">" class="<q-td v-slot:body-cell-Permission="props" :props="props">
           {{props.row.label}}
         </q-td>
         <q-td v-slot:body-cell-PermissionCode="props" :props="props">
@@ -26,7 +24,7 @@
             <div class="col-12 text-h6 q-my-lg text-weight-regular">Permissions</div>
 
             <!-- <div class="col-md-6 q-my-md" align="right">
-              <q-btn no-caps no-wrap label="Add New Permission" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreatePermission()"/>
+              <q-btn no-caps no-wrap label="Add New Permission" class="q-mt-lg text-weight-regular" color="purple-9" class="icon="far fa-plus-square" size="md" @click="fnshowCreatePermission()"/>
             </div> -->
             <!--END: table title -->
 
@@ -34,8 +32,7 @@
             <div class="col-md-6">
               <q-input
                 clearable
-                color="grey-9"
-                v-model="filterSearch"
+                color="grey-9" v-model="filterSearch"
                 placeholder="Type.."
                 class="q-mr-lg"
               />
@@ -161,7 +158,7 @@ export default {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                 icon: "thumb_down",
               });
             });
@@ -193,7 +190,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+            message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
             icon: "thumb_down",
           });
         });

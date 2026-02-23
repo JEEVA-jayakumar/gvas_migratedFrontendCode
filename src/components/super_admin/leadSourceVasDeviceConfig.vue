@@ -3,16 +3,18 @@
     <!-- content -->
     <div>
 
-      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="changeTabs">
-        <q-tab default color="dark" name="active" slot="title" label="Active" />
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" class="@select="changeTabs">
+        <q-tab default color="dark" class="name="active"  label="Active" />
         <!--:rows="activeTableData"-->
-        <q-tab-panel name="active">
+
+      </q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="active">
           <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch"
-            :pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
-            @request="ajaxLoadData">
+            :pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9" class="@request="ajaxLoadData">
 
             <q-td v-slot:body-cell-vas="props" :props="props">
-              <div inline color="light" class="row no-wrap group text-dark" v-for="vas in props.row.vasList">{{vas.name}}</div>
+              <div inline color="light" class="class="row no-wrap group text-dark" v-for="vas in props.row.vasList">{{vas.name}}</div>
             </q-td>
             <q-td v-slot:body-cell-action="props" :props="props">
               <div class="row no-wrap no-padding">
@@ -35,7 +37,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
 
       <!--START: Show create Hierarchy -->
       <showAddLeadSOurceVasDevice 
@@ -186,7 +188,7 @@ export default {
     //       this.$q.notify({
     //         color: "negative",
     //         position: "bottom",
-    //         message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+    //         message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
     //         icon: "thumb_down",
     //       });
     //     });
@@ -331,7 +333,7 @@ export default {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                 icon: "thumb_down",
               });
             });
@@ -368,7 +370,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+            message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
             icon: "thumb_down",
           });
         });

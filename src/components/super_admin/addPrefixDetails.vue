@@ -16,10 +16,9 @@
           <q-btn outline round color="dark" size="sm" icon="clear" @click="emitToggleModal"/>
         </div>
       </div>
-      <q-tabs color="grey-9">
-        <!-- Tabs - notice slot="title" -->
-        <q-tab @select="leadSourceActiveList" default slot="title" label="Active List" name="tab-1"/>
-        <q-tab @select="leadSourceDeActiveList" slot="title" label="De-Actived List" name="tab-2"/>
+      <q-tabs color="grey-9">" class="<!-- Tabs - notice  -->
+        <q-tab @select="leadSourceActiveList" default  label="Active List" name="tab-1"/>
+        <q-tab @select="leadSourceDeActiveList"  label="De-Actived List" name="tab-2"/>
         <q-tab-panel name="tab-1">
           <q-table
             :rows="getActiveLeadSource"
@@ -27,8 +26,7 @@
             :columns="activatedColumns"
             :filter="activeFilterSearch"
             row-key="id"
-            color="grey-9"
-          >
+            color="grey-9" class=">
             <q-td v-slot:body-cell-action="props" :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
@@ -60,10 +58,9 @@
               <div class="col-8">
                 <q-input
                   clearable
-                  color="grey-9"
-                  v-model="activeFilterSearch"
+                  color="grey-9" v-model="activeFilterSearch"
                   placeholder="Type.."
-                  float-label="Search lead source"
+                  label="Search lead source"
                 />
               </div>
               <div class="col-4" align="right">
@@ -72,8 +69,7 @@
                   no-wrap
                   label="Add Prefix"
                   class="text-weight-regular"
-                  color="purple-9"
-                  icon="far fa-plus-square"
+                  color="purple-9" class="icon="far fa-plus-square"
                   @click="fnCreatePrefix()"
                 />
               </div>
@@ -89,8 +85,7 @@
             :filter="deActivatedFilterSearch"
             :pagination="paginationControl"
             row-key="id"
-            color="grey-9"
-          >
+            color="grey-9" class=">
             <q-td v-slot:body-cell-action="props" :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
@@ -111,10 +106,9 @@
               <div class="col">
                 <q-input
                   clearable
-                  color="grey-9"
-                  v-model="deActivatedFilterSearch"
+                  color="grey-9" v-model="deActivatedFilterSearch"
                   placeholder="Type.."
-                  float-label="Search by name"
+                  label="Search by name"
                   class="q-mr-lg"
                 />
               </div>

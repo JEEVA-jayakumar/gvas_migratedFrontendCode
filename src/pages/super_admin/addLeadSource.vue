@@ -19,8 +19,7 @@
           <q-btn
             outline
             round
-            color="dark"
-            size="sm"
+            color="dark" size="sm"
             icon="clear"
             @click="emitModalClose"
           />
@@ -30,10 +29,8 @@
       <!-- Tabs -->
       <q-tabs
         v-model="tab"
-        color="grey-9"
-        active-color="primary"
-        indicator-color="primary"
-      >
+        color="grey-9" class="active-color="primary"
+        indicator-color="primary" class=">
         <q-tab
           name="tab-1"
           label="Active List"
@@ -58,8 +55,7 @@
             row-key="id"
             :filter="activeFilterSearch"
             table-class="customSATableClass"
-            color="grey-9"
-          >
+            color="grey-9" class=">
 
             <!-- Top Slot -->
             <template v-slot:top>
@@ -72,16 +68,14 @@
                     v-model="activeFilterSearch"
                     placeholder="Type.."
                     label="Search lead source"
-                    color="grey-9"
-                  />
+                    color="grey-9" class="/>
                 </div>
 
                 <div class="col-4 text-right">
                   <q-btn
                     no-caps
                     label="Add New"
-                    color="purple-9"
-                    icon="far fa-plus-square"
+                    color="purple-9" class="icon="far fa-plus-square"
                     @click="leadSourceCreate()"
                   />
                 </div>
@@ -127,8 +121,7 @@
             :filter="deActivatedFilterSearch"
             v-model:pagination="paginationControl"
             table-class="customSATableClass"
-            color="grey-9"
-          >
+            color="grey-9" class=">
 
             <!-- Top Slot -->
             <template v-slot:top>

@@ -10,11 +10,11 @@
 
           <div class="col-md-12">
             <q-input disable @keyup.enter="submitShortLead(formData)" v-model="data.data"
-              class="text-weight-regular text-grey-8" color="grey-9" float-label="leadId" placeholder="leadId" />
+              class="text-weight-regular text-grey-8" color="grey-9" class="label="leadId" placeholder="leadId" />
           </div>
           <div class="col-md-12">
             <q-input disable v-model="merchant.paymentDetails.deviceSerialNumber" class="no-margin"
-              float-label="Serial Number" />
+              label="Serial Number" />
           </div>
           <!-- <div class="col-md-12">
            
@@ -22,7 +22,7 @@
               format="DD/MM/YYYY"
               v-model="merchant.paymentDetails.installationDate"
               class="no-margin"
-              float-label="Installation Date"
+              label="Installation Date"
             />
           </div> -->
           <!-- <div class="col-md-12">
@@ -32,7 +32,7 @@
                 format="DD/MM/YYYY"
                 v-model="merchant.paymentDetails.deinstallationDate"
                 class="no-margin"
-                float-label="DeInstallation Date"
+                label="DeInstallation Date"
               />
               
             </div>
@@ -40,8 +40,7 @@
           <div class="col-md-12 group" align="right">
             <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8"
               @click="emitfnshowConvertToSat()">Cancel</q-btn>
-            <q-btn align="right" @click="submitShortLead(merchant)" color="purple-9">submit</q-btn>
-          </div>
+            <q-btn align="right" @click="submitShortLead(merchant)" color="purple-9">submit</q-btn>" class="</div>
         </div>
       </form>
     </q-dialog>
@@ -351,7 +350,7 @@
       //   //     this.$q.notify({
       //   //       color: "negative",
       //   //       position: "bottom",
-      //   //       message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+      //   //       message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
       //   //       icon: "thumb_down"
       //   //     });
       //   //
@@ -581,7 +580,7 @@
       //   //     this.$q.notify({
       //   //       color: "negative",
       //   //       position: "bottom",
-      //   //       message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+      //   //       message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
       //   //       icon: "thumb_down"
       //   //     });
       //   //
@@ -694,7 +693,7 @@
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down",
             });
             // this.$router.push("sat/lead/lead/view/audocuments");

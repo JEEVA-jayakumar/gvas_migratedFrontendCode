@@ -8,7 +8,7 @@ export const FETCH_SHARING_MODEL_BASED_SHARING_PARTNER_CODE = ({
     .get(rootState.GlobalVariables.STATE_MARS_API + "sharing-partner/" + request)
     .then(response => {
       let sharingModeBasedSharingPartner = [];
-      if (JSON.stringify(response.body) != JSON.stringify({})) {
+      if (JSON.stringify(response.data) != JSON.stringify({})) {
         response.data.items.map(function (value, key) {
           console.log("FETCH_SHARING_MODEL_BASED_SHARING_PARTNER_CODE response.data.items ----->",JSON.stringify(value))
           sharingModeBasedSharingPartner.push({

@@ -41,7 +41,7 @@
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list separator no-border class="no-padding text-body1">
+                  <q-list separator  class="no-padding text-body1">
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>Plan</q-item-section>
                       <q-item-section>{{formData.shortLead.plan.planName}}</q-item-section>
@@ -71,7 +71,7 @@
                 </q-card-section>
                 <q-separator/>
                 <q-card-section class="q-pa-sm text-grey-9">
-                  <q-list separator no-border class="no-padding">
+                  <q-list separator  class="no-padding">
                     <q-item class="q-pa-sm">
                       <q-item-section class="text-body1">Payment mode:</q-item-section>
                       <q-item-section class="text-dark text-body1" align="center">
@@ -94,8 +94,7 @@
                         <q-btn
                           size="sm"
                           :outline="!showOpenPaymentChequeDocumentInfo"
-                          color="dark"
-                          label="View Document"
+                          color="dark" class="label="View Document"
                           icon="attach_file"
                           @click="fnPDFViewModal(formData.shortLead.paymentDocumentFile,'CHEQUE')"
                         ></q-btn>
@@ -106,14 +105,13 @@
                         <q-btn
                           :outline="!showOpenPaymentChequeInfo"
                           size="sm"
-                          color="dark"
-                          label="View Document"
+                          color="dark" class="label="View Document"
                           icon="attach_file"
                           @click="fnOpenPaymentChequeInfo(formData.shortLead.paymentDocumentFile)"
                         />
                       </div>
                       <div v-else class="text-grey-9">
-                        <q-icon name="clear" color="negative"/>No document attached
+                        <q-icon name="clear" color="negative"/>No" class="document attached
                       </div>
                     </q-item>
                     <q-item v-if="showOpenPaymentChequeInfo">
@@ -139,12 +137,11 @@
                   <span class="text-body1 text-weight-medium">MDR</span>
                 </q-card-section>
                 <q-card-section class="q-pa-sm text-grey-9">
-                  <q-list no-border class="no-padding">
+                  <q-list  class="no-padding">
                     <q-item class="q-pa-sm">
                       <q-item-section>
                         <q-input
-                          color="grey-9"
-                          float-label="Debit < 2000 (%)"
+                          color="grey-9" class="label="Debit < 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.debitLessthanAmount"
@@ -152,8 +149,7 @@
                       </q-item-section>
                       <q-item-section>
                         <q-input
-                          color="grey-9"
-                          float-label="Debit < 2000 (%)"
+                          color="grey-9" class="label="Debit < 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.debitGreaterthanAmount"
@@ -163,8 +159,7 @@
                     <q-item class="q-pa-sm">
                       <q-item-section>
                         <q-input
-                          color="grey-9"
-                          float-label="Std CC (%)"
+                          color="grey-9" class="label="Std CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.stdCC"
@@ -172,8 +167,7 @@
                       </q-item-section>
                       <q-item-section>
                         <q-input
-                          color="grey-9"
-                          float-label="Premium CC (%)"
+                          color="grey-9" class="label="Premium CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.premiumCC"
@@ -183,8 +177,7 @@
                     <q-item class="q-pa-sm">
                       <q-item-section>
                         <q-input
-                          color="grey-9"
-                          float-label="Corp Pre CC (%)"
+                          color="grey-9" class="label="Corp Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.corpCC"
@@ -192,8 +185,7 @@
                       </q-item-section>
                       <q-item-section>
                         <q-input
-                          color="grey-9"
-                          float-label="Intl Pre CC (%)"
+                          color="grey-9" class="label="Intl Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.intlCC"
@@ -203,8 +195,7 @@
                     <q-item class="q-pa-sm">
                       <q-item-section>
                         <q-input
-                          color="grey-9"
-                          float-label="Super Pre CC (%)"
+                          color="grey-9" class="label="Super Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.superPremiumlCC"
@@ -215,8 +206,7 @@
                       <q-checkbox
                         v-model="formData.shortLead.posEnable"
                         class="no-pointer-events"
-                        color="purple-9"
-                      >
+                        color="purple-9" class=">
                         <small class="text-caption">Enable Cash@POS Cash @POS incentive Rs.5</small>
                       </q-checkbox>
                     </q-item>
@@ -233,7 +223,7 @@
                   <span class="text-body1 text-weight-medium">Details</span>
                 </q-card-section>
                 <q-card-section class="q-pa-sm text-grey-9">
-                  <q-list separator no-border class="no-padding">
+                  <q-list separator  class="no-padding">
                     <q-item class="q-pa-sm" multiline>
                       <q-item-section>SO name</q-item-section>
                       <q-item-section
@@ -270,7 +260,7 @@
                         <span
                           class="label capitalize"
                           v-if="getKycExceptionInfoById.leadVerificationStatus.length > 0"
-                        >{{sortArraysForExpectedSubmitDate(getKycExceptionInfoById.leadVerificationStatus) | moment("MMMM Do YYYY")}}</span>
+                        >{{ $moment_format(sortArraysForExpectedSubmitDate(getKycExceptionInfoById.leadVerificationStatus), "MMMM Do YYYY") }}</span>
                         <span class="label capitalize" v-else>NA</span>
                       </q-item-section>
                     </q-item>
@@ -364,7 +354,7 @@
                   <span class="text-body1 text-weight-medium">Documents</span>
                 </q-card-section>
                 <q-card-section class="no-padding">
-                  <q-list no-border class="no-padding">
+                  <q-list  class="no-padding">
                     <!-- START >>Application document view -->
                     <q-item class="text-body1">
                       <q-item-section class="text-body1">
@@ -382,8 +372,7 @@
                             @click="fnPDFViewModal(formData.shortLead.applicationFile)"
                             class="ellipsis"
                           >
-                            <q-icon name="fas fa-file-pdf" color="negative"/>
-                            &nbsp;{{formData.shortLead.applicationFile}}
+                            <q-icon name="fas fa-file-pdf" color="negative"/>" class="&nbsp;{{formData.shortLead.applicationFile}}
                           </div>
                         </div>
                         <!-- END >>If document type is PDF format -->
@@ -403,8 +392,7 @@
                             >
                           </viewer>
                           <div @click="fnViewHandedOverFileImage()" class="ellipsis">
-                            <q-btn round size="sm" icon="fas fa-image" color="amber-9"/>
-                            &nbsp;{{formData.shortLead.applicationFile}}
+                            <q-btn round size="sm" icon="fas fa-image" color="amber-9"/>" class="&nbsp;{{formData.shortLead.applicationFile}}
                           </div>
                         </div>
                         <!-- END >>If document type is image format -->
@@ -433,8 +421,7 @@
                               <q-expansion-item separator indent multiline class="full-width">
                                 <template slot="header">
                                   <q-item-section
-                                    :color="documents[0].kycException?'amber-9':''"
-                                    :icon="documents[0].kycException? 'warning' :'attach_file'"
+                                    :color="documents[0].kycException?'amber-9':''" class=":icon="documents[0].kycException? 'warning' :'attach_file'"
                                   />
                                   <q-item-section
                                     class="text-body1"
@@ -449,16 +436,14 @@
                                       round
                                       size="xs"
                                       class="q-ma-xs"
-                                      color="green"
-                                      icon="fas fa-check"
+                                      color="green" class="icon="fas fa-check"
                                       @click.stop="fnDocumentApproveModal(documents[0])"
                                     />
                                     <q-btn
                                       round
                                       size="xs"
                                       class="q-ma-xs"
-                                      color="red"
-                                      icon="fas fa-times"
+                                      color="red" class="icon="fas fa-times"
                                       @click.stop="fnDocumentRejectModal(documents[0])"
                                     />
                                   </q-item-section>
@@ -484,8 +469,7 @@
                                         @click="fnPDFViewModal(item.fileName)"
                                         class="cursor-pointer no-underline ellipsis"
                                       >
-                                        <q-icon name="fas fa-file-pdf" color="negative"/>
-                                        &nbsp;{{item.fileNameOriginal}}
+                                        <q-icon name="fas fa-file-pdf" color="negative"/>" class="&nbsp;{{item.fileNameOriginal}}
                                       </div>
                                     </div>
                                     <div v-else-if="item.mimeType.includes('image')">
@@ -513,7 +497,7 @@
                             <div class="col-md-12 text-body1">
                               <q-expansion-item separator indent icon-toggle opened class="full-width">
                                 <template slot="header">
-                                  <q-item-section icon="apps"/>
+                                  <q-item-section avatar><q-icon name="apps"  /></q-item-section>
                                   <q-item-section
                                     class="text-body1"
                                     :sublabel="documents.length + 'Type(s)'"
@@ -534,8 +518,7 @@
                                     >
                                       <template slot="header">
                                         <q-item-section
-                                          :color="subDocument.kycException?'amber-9':''"
-                                          :icon="subDocument.kycException? 'warning' :'attach_file'"
+                                          :color="subDocument.kycException?'amber-9':''" class=":icon="subDocument.kycException? 'warning' :'attach_file'"
                                         />
                                         <q-item-section
                                           class="text-body1"
@@ -550,16 +533,14 @@
                                             round
                                             size="xs"
                                             class="q-ma-xs"
-                                            color="green"
-                                            icon="fas fa-check"
+                                            color="green" class="icon="fas fa-check"
                                             @click.stop="fnDocumentApproveModal(subDocument)"
                                           />
                                           <q-btn
                                             round
                                             size="xs"
                                             class="q-ma-xs"
-                                            color="red"
-                                            icon="fas fa-times"
+                                            color="red" class="icon="fas fa-times"
                                             @click.stop="fnDocumentRejectModal(subDocument)"
                                           />
                                         </q-item-section>
@@ -585,8 +566,7 @@
                                               @click="fnPDFViewModal(item.fileName)"
                                               class="cursor-pointer no-underline ellipsis"
                                             >
-                                              <q-icon name="fas fa-file-pdf" color="negative"/>
-                                              &nbsp;{{item.fileNameOriginal}}
+                                              <q-icon name="fas fa-file-pdf" color="negative"/>" class="&nbsp;{{item.fileNameOriginal}}
                                             </div>
                                           </div>
                                           <div v-else-if="item.mimeType.includes('image')">
@@ -634,8 +614,7 @@
           <!-- START >> Cancel button to go back -->
           <q-btn
             icon="block"
-            color="grey-5"
-            class="q-ma-sm text-dark"
+            color="grey-5" class="class="q-ma-sm text-dark"
             @click="$router.go(-1)"
             label="Cancel"
           />
@@ -643,8 +622,7 @@
           <!-- START >> Approved button on condition, refer => computed properties -->
           <q-btn
             icon="check"
-            color="positive"
-            class="q-ma-sm"
+            color="positive" class="class="q-ma-sm"
             @click="fnApproveLeadData(getKycExceptionInfoById)"
             label="Approve"
           />
@@ -653,8 +631,7 @@
           <q-btn
             icon="clear"
             class="q-ma-sm"
-            color="negative"
-            label="Reject"
+            color="negative" class="label="Reject"
             @click="fnToggleRejectLeadComp"
           />
           <!-- END >> Rejected button on condition, refer => computed properties -->

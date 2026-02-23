@@ -10,29 +10,26 @@
         <!-- START >> Give reason to reject(mandatory) document -->
         <div class="text-h6 q-mb-sm">{{document}}</div>
         <q-input
-          @blur="$v.formData.leadDetails.reason.$touch"
-          :error="$v.formData.leadDetails.reason.$error"
+          @blur="v$.formData.leadDetails.reason.$touch"
+          :error="v$.formData.leadDetails.reason.$error"
           type="textarea"
           placedholder="Type.."
           :max-height="100"
           rows="3"
-          float-label="Reason"
-          color="grey-9"
-          align="left"
+          label="Reason"
+          color="grey-9" class="align="left"
           v-model="formData.leadDetails.reason"
         />
         <q-btn
           icon="clear"
-          color="negative"
-          class="q-ma-sm float-right"
+          color="negative" class="class="q-ma-sm float-right"
           @click="fnRejectLeadFinal(formData,toggleModel)"
           align="right"
           label="Reject"
         />
         <q-btn
           icon="block"
-          color="grey-5"
-          @click="emitToggleRemarks()"
+          color="grey-5" @click="emitToggleRemarks()"
           class="q-ma-sm float-right text-dark"
           align="right"
           v-close-overlay
@@ -102,8 +99,8 @@
       },
   
       fnRejectLeadFinal(formData) {
-        this.$v.formData.$touch();
-        if (this.$v.formData.$error) {
+        this.v$.formData.$touch();
+        if (this.v$.formData.$error) {
           this.$q.notify("Please review fields again.");
         } else {
           this.$q.loading.show({

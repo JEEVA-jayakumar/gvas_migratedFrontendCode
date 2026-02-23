@@ -31,8 +31,7 @@
                 clearable
                 v-model="formData.assignTo"
                 separator
-                color="grey-9"
-                :options="assignToOptions"
+                color="grey-9" class=":options="assignToOptions"
                 placeholder="Assign To"
               />
             </div>
@@ -62,12 +61,15 @@
         <q-tabs
           v-model="selectedTab"
           class="shadow-1"
-          color="grey-1"
-          @select="goToUnassignedTab"
+          color="grey-1" class="@select="goToUnassignedTab"
         >
-          <q-tab default color="dark" name="unAssigned" slot="title" label="Unassigned" />
-          <q-tab color="dark" name="assigned" slot="title" label="Assigned" />
-          <q-tab-panel name="assigned">
+          <q-tab default color="dark" class="name="unAssigned"  label="Unassigned" />
+          <q-tab color="dark" class="name="assigned"  label="Assigned" />
+
+
+        </q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="assigned">
             <!--START: table Data -->
             <q-table
               :rows="tableData"
@@ -79,8 +81,7 @@
               row-key="id"
               :loading="tableAjaxLoading"
               :rows-per-page-options="[5,10,15,20]"
-              color="dark"
-              @request="ajaxLoadAllLeadInfo"
+              color="dark" class="@request="ajaxLoadAllLeadInfo"
             >
               <!-- selection="multiple" -->
               <q-td
@@ -98,15 +99,13 @@
               v-if="props.row.leadInformation != null"
                 v-slot:body-cell-submitToMarsDate="props"
                 :props="props"
-                >{{
-                  props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-                }}</q-td
+                >{{ $moment_format(props.row.leadInformation.submitToMarsDate, "Do MMM Y") }}</q-td
               >
               <q-td
               v-if="props.row.leadInformation != null"
                 v-slot:body-cell-createdAt="props"
                 :props="props"
-                >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+                >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td
               >
               
               <q-td
@@ -140,10 +139,9 @@
                 <div class="col-md-5">
                   <q-input
                     clearable
-                    color="grey-9"
-                    v-model="filterSearch"
+                    color="grey-9" v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search By TID, MID, Merchant Name .."
+                    label="Search By TID, MID, Merchant Name .."
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -151,7 +149,7 @@
             </q-table>
             <!--ENDv-model: table Data -->
           </q-tab-panel>
-          <q-tab-panel name="unAssigned">
+<q-tab-panel name="unAssigned">
             <!--START: table Data -->
             <q-table
               :rows="tableData1"
@@ -164,8 +162,7 @@
               row-key="id"
               :loading="tableAjaxLoading1"
               :rows-per-page-options="[5,10,15,20]"
-              color="dark"
-              @request="ajaxLoadAllLeadInfo1"
+              color="dark" class="@request="ajaxLoadAllLeadInfo1"
             >
               <q-td
               v-if="props.row.leadInformation != null"
@@ -182,15 +179,13 @@
               v-if="props.row.leadInformation != null"
                 v-slot:body-cell-submitToMarsDate="props"
                 :props="props"
-                >{{
-                    props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-                }}</q-td
+                >{{ $moment_format(props.row.leadInformation.submitToMarsDate, "Do MMM Y") }}</q-td
               >
               <q-td
               v-if="props.row.leadInformation != null"
                 v-slot:body-cell-createdAt="props"
                 :props="props"
-                >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+                >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td
               >
               <q-td
               v-if="props.row.leadInformation != null"
@@ -225,10 +220,9 @@
                 <div class="col-md-5">
                   <q-input
                     clearable
-                    color="grey-9"
-                    v-model="filterSearch1"
+                    color="grey-9" v-model="filterSearch1"
                     placeholder="Type.."
-                    float-label="Search By TID, MID, Merchant Name .."
+                    label="Search By TID, MID, Merchant Name .."
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -237,7 +231,7 @@
             </q-table>
             <!--END: table Data -->
           </q-tab-panel>
-        </q-tabs>
+</q-tab-panels>
         <div class="row items-center gutter-y-sm">
           <div class="col-md-9 col-sm-12 col-xs-12">
             <div class="row items-center"></div>

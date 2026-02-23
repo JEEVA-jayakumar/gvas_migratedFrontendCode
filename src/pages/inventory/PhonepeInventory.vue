@@ -10,15 +10,15 @@
           <q-btn-dropdown outline no-caps class="text-weight-regular" label="Add Refurbished Device" >
             <q-list link>
               <!-- <q-item to="phonepeRefurbishmentAddDeviceScan">
-                <q-item-section icon="search" />
+                <q-item-section avatar><q-icon name="search"  /></q-item-section>
                 <q-item-section>
-                  <q-item-label label>Scan and Upload</q-item-label>
+                  <q-item-label>Scan and Upload</q-item-label>
                 </q-item-section>
               </q-item> -->
               <q-item @click.native="fnPhonePeOpenRefurbishedBulkUploadModal">
-                <q-item-section icon="attach_file" />
+                <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
                 <q-item-section>
-                  <q-item-label label>Bulk upload</q-item-label>
+                  <q-item-label>Bulk upload</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -29,15 +29,15 @@
           <q-btn-dropdown outline no-caps class="text-weight-regular" label="Add new device from manufacturer" >
             <q-list link>
               <q-item to="PhonepeAddDeviceScan">
-                <q-item-section icon="search" />
+                <q-item-section avatar><q-icon name="search"  /></q-item-section>
                 <q-item-section>
-                  <q-item-label label>Scan and Upload</q-item-label>
+                  <q-item-label>Scan and Upload</q-item-label>
                 </q-item-section>
               </q-item>
               <q-item @click.native="fnPhonePeOpenBulkUploadModal">
-                <q-item-section icon="attach_file" />
+                <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
                 <q-item-section>
-                  <q-item-label label>Bulk upload</q-item-label>
+                  <q-item-label>Bulk upload</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -52,15 +52,15 @@
           >
             <q-list link>
               <q-item to="PhonepeDeviceRecoveryScan">
-                <q-item-section icon="search" />
+                <q-item-section avatar><q-icon name="search"  /></q-item-section>
                 <q-item-section>
-                  <q-item-label label>Scan and Upload</q-item-label>
+                  <q-item-label>Scan and Upload</q-item-label>
                 </q-item-section>
               </q-item>
               <q-item @click.native="fnOpenBulkUploadModal">
-                <q-item-section icon="attach_file" />
+                <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
                 <q-item-section>
-                  <q-item-label label>Bulk upload</q-item-label>
+                  <q-item-label>Bulk upload</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -71,7 +71,7 @@
       <!--Aggregator select List-->
       <!-- <div class="row bottom-border q-px-md q-py-sm items-center">
         <div class="col-md-4">
-          <q-select color="grey-9" v-model="formData.aggregator" float-label="Select Aggregator" radio
+          <q-select color="grey-9" v-model="formData.aggregator" label="Select Aggregator" radio
             :options="dropdDown.aggregatorOptions" @input="selectedAggregators" />
         </div>
       </div> -->
@@ -94,26 +94,24 @@
             <q-table :rows="getAllPhonepeInventoryDevicesData" :columns="columnData"
               table-class="customTableClass shadow-0" :filter="filterSearch" 
              
-              row-key="index" :loading="tableAjaxLoading" color="primary">
-              <template slot="top">
+              row-key="index" :loading="tableAjaxLoading" color="primary">" class="<template slot="top">
                 <!--START: table filter,search  :pagination="paginationControl"-->
                 <div class="col-md-5">
-                  <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." float-label="Search By Device Serail Number.."
+                  <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search By Device Serail Number.."
                     class="q-mr-lg q-py-sm" />
                 </div>
 
                 <div class="col-md-5">
                   <!-- <q-input
                       clearable
-                      color="grey-9"
-                      v-model="filterSearch"
+                      color="grey-9" v-model="filterSearch"
                       placeholder="Type.."
-                      float-label="Search .."
+                      label="Search .."
                       class="q-mr-lg q-py-sm"
                     />-->
                   <downloadExcel :rows="getAllPhonepeInventoryDevicesData" :fields="json_fields"
                     name="CentralInventory.xls">
-                    <q-btn outline color="grey-9" label="Download as excel" />
+                    <q-btn outline color="grey-9" class="label="Download as excel" />
                     <!-- @click="fndownload() -->
                   </downloadExcel>
                   <!-- @click="downloadReport" -->
@@ -329,7 +327,7 @@ export default {
       // document.body.appendChild(element);
 
       // element.click();
-      let link = document.createElement("a");
+      let clickable = document.createElement("a");
       link.href = window.URL.createObjectURL(file);
       link.download = "serialNumber.txt"
 

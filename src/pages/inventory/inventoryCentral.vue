@@ -47,15 +47,15 @@
             <!-- dropdown content -->
             <q-list link>
               <q-item to="central/add/device/scan">
-                <q-item-section icon="search" />
+                <q-item-section avatar><q-icon name="search"  /></q-item-section>
                 <q-item-section>
-                  <q-item-label label>Scan and Upload</q-item-label>
+                  <q-item-label>Scan and Upload</q-item-label>
                 </q-item-section>
               </q-item>
               <q-item @click.native="fnOpenBulkUploadModal">
-                <q-item-section icon="attach_file" />
+                <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
                 <q-item-section>
-                  <q-item-label label>Bulk upload</q-item-label>
+                  <q-item-label>Bulk upload</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -92,17 +92,15 @@
               :pagination="paginationControl"
               row-key="index"
               :loading="tableAjaxLoading"
-              color="primary"
-            >
+              color="primary" class=">
               <template slot="top" >
                 <!--START: table filter,search -->
                 <div class="col-md-5">
                   <q-input
                     clearable
-                    color="grey-9"
-                    v-model="filterSearch"
+                    color="grey-9" v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search By Device Serail Number.."
+                    label="Search By Device Serail Number.."
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -110,10 +108,9 @@
                 <div class="col-md-5">
                   <!-- <q-input
                     clearable
-                    color="grey-9"
-                    v-model="filterSearch"
+                    color="grey-9" v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search .."
+                    label="Search .."
                     class="q-mr-lg q-py-sm"
                   />-->
                   <downloadExcel
@@ -121,7 +118,7 @@
                     :fields="json_fields"
                     name="CentralInventory.xls"
                   >
-                    <q-btn outline color="grey-9" label="Download as excel"/>
+                    <q-btn outline color="grey-9" class="label="Download as excel"/>
                     <!-- @click="fndownload() -->
                   </downloadExcel>
                   <!-- @click="downloadReport" -->
@@ -275,7 +272,7 @@ export default {
       // document.body.appendChild(element);
       
       // element.click();
-       let link = document.createElement("a");
+       let clickable = document.createElement("a");
             link.href = window.URL.createObjectURL(file);
             link.download = "serialNumber.txt"
            

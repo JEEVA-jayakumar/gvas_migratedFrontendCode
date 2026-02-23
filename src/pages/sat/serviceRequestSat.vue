@@ -6,23 +6,25 @@
           <q-tabs
             no-pane-border
             v-model="inventoryOptionSelected"
-            color="dark"
-            inverted
-            class="shadow-1"
+            color="dark" class="class="shadow-1"
           >
-            <q-tab default name="internal" label="Bijlipay Service Request" slot="title" />
-            <!-- <q-tab name="spareSo" label="Spare Parts So" slot="title" /> -->
-            <q-tab name="external" label="Aggregator Service Request" slot="title" />
+            <q-tab default name="internal" label="Bijlipay Service Request"  />
+            <!-- <q-tab name="spareSo" label="Spare Parts So"  /> -->
+            <q-tab name="external" label="Aggregator Service Request"  />
            
            
-            <q-tab-panel name="internal">
+
+
+
+          </q-tabs>
+<q-tab-panels v-model="inventoryOptionSelected" animated>
+<q-tab-panel name="internal">
               <internalserviceRequest/>
             </q-tab-panel>
-           
-            <q-tab-panel name="external">
+<q-tab-panel name="external">
               <externalserviceRequest/>
             </q-tab-panel>
-          </q-tabs>
+</q-tab-panels>
         </div>
       </div>
     </div>

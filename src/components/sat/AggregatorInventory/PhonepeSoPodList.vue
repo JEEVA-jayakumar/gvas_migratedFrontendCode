@@ -1,17 +1,21 @@
 <template>
     <q-page>
         <div>
-            <q-tabs no-pane-border v-model="selectedTab" color="dark" inverted class="shadow-1"
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" class="class="shadow-1"
                 @select="goToSelectedTab">
-                <q-tab default color="dark" name="tab-1" slot="title" label="Approved Pod" />
-                <q-tab color="dark" name="tab-2" slot="title" label="Rejected Pod" />
-                <q-tab color="dark" name="tab-3" slot="title" label=" Allocated Pod" />
+                <q-tab default color="dark" class="name="tab-1"  label="Approved Pod" />
+                <q-tab color="dark" class="name="tab-2"  label="Rejected Pod" />
+                <q-tab color="dark" class="name="tab-3"  label=" Allocated Pod" />
 
-                <q-tab-panel name="tab-1">
+
+
+
+            </q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="tab-1">
                     <q-table :rows="tableData" table-class="customSATableClass" :columns="columns"
                         :filter="filterSearch" :pagination="paginationControl"
-                        :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
-                        @request="ajaxLoadAllLeadInfo">
+                        :filter-method="myCustomSearchFilter" row-key="name" color="grey-9" class="@request="ajaxLoadAllLeadInfo">
                         <q-td v-slot:body-cell-createdAt="props" :props="props">{{
                                 props.row.created_date == null
                                     ? "NA"
@@ -60,24 +64,23 @@
                Incoming Pod
               </div> -->
                             <!-- <div class="col-md-6 q-my-md" align="right">
-               <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
+               <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9" class="icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
               </div>-->
                             <!--END: table title -->
                             <!--START: table filter,search
                 @click="fnShowAddNewServiceType(props.row)" -->
                             <div class="col-3">
-                                <q-input clearable color="grey-9" v-model="filterSearch" float-label="Search By POD Number" placeholder="Type.."
+                                <q-input clearable color="grey-9" v-model="filterSearch" label="Search By POD Number" placeholder="Type.."
                                     class="q-mr-lg" />
                             </div>
                             <!--ENDv-model: table filter,search -->
                         </template>
                     </q-table>
                 </q-tab-panel>
-                <q-tab-panel name="tab-2">
+<q-tab-panel name="tab-2">
                     <q-table :rows="tableData1" table-class="customSATableClass" :columns="columns1"
                         :filter="filterSearch1" :pagination="paginationControl1"
-                        :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
-                        @request="ajaxLoadAllLeadInfo1">
+                        :filter-method="myCustomSearchFilter" row-key="name" color="grey-9" class="@request="ajaxLoadAllLeadInfo1">
                         <q-td v-slot:body-cell-createdAt="props" :props="props">{{
                                 props.row.created_date == null
                                     ? "NA"
@@ -131,12 +134,12 @@
                  Stocks
                  </div> -->
                             <!-- <div class="col-md-6 q-my-md" align="right">
-                    <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
+                    <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9" class="icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
                   </div>-->
                             <!--END: table title -->
                             <!--START: table filter,search -->
                             <div class="col-3">
-                                <q-input clearable color="grey-9" v-model="filterSearch1" float-label="Search By POD Number" placeholder="Type.."
+                                <q-input clearable color="grey-9" v-model="filterSearch1" label="Search By POD Number" placeholder="Type.."
                                     class="q-mr-lg" />
                             </div>
                             <!-- <div class="col-3" align="right">
@@ -145,8 +148,7 @@
                   class="text-weight-regular"
                   label="Assigned To So"
                   @click="$router.push('/sat/sparePartsAssignedToSoDetails')"
-                  color="purple-9"
-                  size="md"
+                  color="purple-9" size="md"
                 />
               </div> -->
                             <!--END: table filter,search -->
@@ -156,19 +158,17 @@
               class="text-weight-regular"
               label="Add Sub Task"
               @click="fnShowAddNewSubTaskType(props.row)"
-              color="purple-9"
-              size="md"
+              color="purple-9" size="md"
              />
              </div> :rows="tableData2"-->
                         </template>
                     </q-table>
                 </q-tab-panel>
-                <q-tab-panel name="tab-3">
+<q-tab-panel name="tab-3">
 
                     <q-table :rows="tableData2" table-class="customSATableClass" :columns="columns2"
                         :filter="filterSearch2" :pagination="paginationControl2"
-                        :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
-                        @request="ajaxLoadAllLeadInfo2">
+                        :filter-method="myCustomSearchFilter" row-key="name" color="grey-9" class="@request="ajaxLoadAllLeadInfo2">
                         <q-td v-slot:body-cell-createdAt="props" :props="props">{{
                                 props.row.created_date == null
                                     ? "NA"
@@ -212,13 +212,13 @@
                         <template v-slot:top="props">
 
                             <div class="col-3">
-                                <q-input clearable color="grey-9" v-model="filterSearch2" float-label="Search By POD Number" placeholder="Type.."
+                                <q-input clearable color="grey-9" v-model="filterSearch2" label="Search By POD Number" placeholder="Type.."
                                     class="q-mr-lg" />
                             </div>
                         </template>
                     </q-table>
                 </q-tab-panel>
-            </q-tabs>
+</q-tab-panels>
         </div>
     </q-page>
 </template>
@@ -693,7 +693,7 @@ export default {
         //                     this.$q.notify({
         //                         color: "negative",
         //                         position: "bottom",
-        //                         message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+        //                         message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
         //                         icon: "thumb_down"
         //                     });
         //                 });
@@ -770,7 +770,7 @@ export default {
                             this.$q.notify({
                                 color: "negative",
                                 position: "bottom",
-                                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                                 icon: "thumb_down"
                             });
                         });
@@ -945,9 +945,7 @@ export default {
                         color: "negative",
                         position: "bottom",
                         message:
-                            error.body.message == null
-                                ? "Please Try Again Later !"
-                                : error.body.message,
+                            (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                         icon: "thumb_down"
                     });
                 });

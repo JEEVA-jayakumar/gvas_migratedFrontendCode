@@ -47,8 +47,7 @@
               <div class="q-py-sm">
                 <q-btn
                   @click="fetchCurrentUserLeads(activeUserId,$SALES_MANAGER_STATUS_SHORT_LEADS)"
-                  color="purple-9"
-                  size="md"
+                  color="purple-9" size="md"
                   round
                 >{{statusCount.shortLeadCount == undefined ? 0 : statusCount.shortLeadCount}}</q-btn>
               </div>
@@ -58,8 +57,7 @@
               <div class="q-py-sm">
                 <q-btn
                   @click="fetchCurrentUserLeads(activeUserId,$SALES_MANAGER_STATUS_WIP_LEADS)"
-                  color="purple-9"
-                  size="md"
+                  color="purple-9" size="md"
                   round
                 >{{statusCount.wipLeadCount == undefined ? 0 : statusCount.wipLeadCount}}</q-btn>
               </div>
@@ -69,8 +67,7 @@
               <div class="q-py-sm">
                 <q-btn
                   @click="fetchCurrentUserLeads(activeUserId,$SALES_MANAGER_STATUS_REJECTED_LEADS)"
-                  color="purple-9"
-                  size="md"
+                  color="purple-9" size="md"
                   round
                 >{{statusCount.rejectedLeadCount == undefined ? 0 : statusCount.rejectedLeadCount}}</q-btn>
               </div>
@@ -80,8 +77,7 @@
               <div class="q-py-sm">
                 <q-btn
                   @click="fetchCurrentUserLeads(activeUserId,$SALES_MANAGER_STATUS_IMPLEMENTATION_LEADS)"
-                  color="purple-9"
-                  size="md"
+                  color="purple-9" size="md"
                   round
                 >{{statusCount.implementationCount == undefined ? 0 : statusCount.implementationCount}}</q-btn>
               </div>
@@ -91,8 +87,7 @@
               <div class="q-py-sm">
                 <q-btn
                   @click="fetchCurrentUserLeads(activeUserId,$SALES_MANAGER_STATUS_SUBMIT_TO_SAT_LEADS)"
-                  color="purple-9"
-                  size="md"
+                  color="purple-9" size="md"
                   round
                 >{{statusCount.submitToSatCount == undefined ? 0 : statusCount.submitToSatCount}}</q-btn>
               </div>
@@ -113,9 +108,8 @@
             clearable
             v-model="filter"
             separator
-            color="grey-9"
-            placeholder="Type.."
-            float-label="Search"
+            color="grey-9" class="placeholder="Type.."
+            label="Search"
           />
         </div>
         <!--ENDv-model: table search -->
@@ -146,8 +140,7 @@
       <q-tabs
         v-if="!viewTableFormatAndNotTabs"
         v-model="tabsModel"
-        text-color="grey-14"
-        color="white"
+        text-color="grey-14" class="color="white"
         two-lines
         no-pane-border
       >
@@ -159,12 +152,16 @@
           :name="tabHeader.value"
           :label="tabHeader.label"
           class="text-dark"
-          slot="title"
+
         />
      
         <!--END: tabs header -->
         <!--START: tabs body -->
-        <q-tab-panel
+
+        <!--END: tabs body -->
+      </q-tabs>
+<q-tab-panels v-model="tabsModel" animated>
+<q-tab-panel
           v-for="tBodyContent in tabs.tabsBody"
           :key="tBodyContent.value"
           :name="tBodyContent.value"
@@ -181,7 +178,7 @@
             <q-td
               v-slot:body-cell-shortleadDate="props"
               :props="props"
-            >{{props.row.shortleadDate | moment("Do MMM Y")}}</q-td>
+            >{{ $moment_format(props.row.shortleadDate, "Do MMM Y") }}</q-td>
             <q-td
               v-slot:body-cell-id="props"
               :props="props"
@@ -193,8 +190,7 @@
           </q-table>
           <!--END: table table aging pending/reject -->
         </q-tab-panel>
-        <!--END: tabs body -->
-      </q-tabs>
+</q-tab-panels>
     </div>
   </q-page>
 </template>
@@ -693,7 +689,7 @@ export default {
           self.$q.notify({
             color: "negative",
             position: "bottom",
-            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+            message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
             icon: "thumb_down"
           });
           this.$q.loading.hide();

@@ -9,7 +9,7 @@
         :propToggleLeadInformationPop="propToggleLeadInformation" @closeLeadInformation="toggleLeadInformation" />
       <!-- content -->
       <!--START: table lead validation -->
-      <q-table table-class="customTableClass" :columns="columns" :rows="tableData" color="grey-9" :filter="filterSearch"
+      <q-table table-class="customTableClass" :columns="columns" :rows="tableData" color="grey-9" class=":filter="filterSearch"
         :pagination="paginationControl" :rows-per-page-options="[5, 10, 15, 20, 25]"
         :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
         <q-td v-slot:body-cell-updated_date="props" :props="props">{{
@@ -44,7 +44,7 @@
         </q-td>
 
         <q-td v-slot:body-cell-action="props" :props="props">
-          <q-btn highlight push class="q-mx-sm" color="positive" size="sm"
+          <q-btn push class="q-mx-sm" color="positive" size="sm"
             :disable="props.row.status == 1 || props.row.status == 3 || props.row.status == 5 || props.row.status == 6 && props.row.owner == 2 || props.row.status == undefined"
             @click="updatePodDetails(props.row)">Update</q-btn>
         </q-td>
@@ -52,15 +52,14 @@
           <!--START: table filter,search -->
           <div class="col-md-5">
             <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.."
-              float-label="Search Using POD Number" class="q-mr-lg q-py-sm" />
+              label="Search Using POD Number" class="q-mr-lg q-py-sm" />
           </div>
           <!--<div class="col-md-5">
            
             <q-btn 
             square 
             outline 
-            color="purple-9" 
-            label="Add New Spare" 
+            color="purple-9" class="label="Add New Spare"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloadLostOrStolenList()" />
@@ -68,8 +67,7 @@
           </div> -->
           <div class="col-md-5">
             <q-btn no-caps class="text-weight-regular"
-              @click="$router.push('/inventory/master/PhonepesparePartsInventory')" label="Add Spare" color="purple-9"
-              size="md" />
+              @click="$router.push('/inventory/master/PhonepesparePartsInventory')" label="Add Spare" color="purple-9" size="md" />
           </div>
           <!--END: table filter,search -->
         </template>
@@ -332,7 +330,7 @@ export default {
     //   // document.body.appendChild(element);
 
     //   // element.click();
-    //   let link = document.createElement("a");
+    //   let clickable = document.createElement("a");
     //   link.href = window.URL.createObjectURL(file);
     //   link.download = "serialNumber.txt";
 

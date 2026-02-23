@@ -6,7 +6,7 @@
         <!--START: table title -->
         <div class="col-md-8 text-h6 text-weight-regular text-grey-9">Bijlipay Add New Devices - Scan & Upload</div>
         <div class="col-md-12 col-md-6 q-pt-md group" align="right">
-          <q-btn @click="$router.push('/inventory/central')" outline label="Cancel Allocation" color="negative" />
+          <q-btn @click="$router.push('/inventory/central')" outline label="Cancel Allocation" color="negative" class="/>
         </div>
         <!--END: table title -->
       </div>
@@ -14,17 +14,17 @@
         <!--START: table title -->
         <div class="col" ref="clickHeretoStartParent">
           <q-select ref="clickHeretoStartChild" @input="fnDisableDeviceTypeSelection"
-            :disable="tempTableData.length > 0" v-model="formData.device.id" float-label="Select Device Type" radio
-            color="grey-9" :options="deviceOptions" />
+            :disable="tempTableData.length > 0" v-model="formData.device.id" label="Select Device Type" radio
+            color="grey-9" class=":options="deviceOptions" />
         </div>
         <!-- Invoice Number Field with margin -->
         <div class="col q-ml-md">
-          <q-input type="text" :disable="tempTableData.length > 0" float-label="Invoice Number" color="grey-9" @blur="$v.formData.invoiceNumber.$touch"
-            :error="$v.formData.invoiceNumber.$error" v-model="formData.invoiceNumber" />
+          <q-input type="text" :disable="tempTableData.length > 0" label="Invoice Number" color="grey-9" class="@blur="v$.formData.invoiceNumber.$touch"
+            :error="v$.formData.invoiceNumber.$error" v-model="formData.invoiceNumber" />
         </div>
         <!-- Final upload button toggle -->
         <div class="col group" align="right">
-          <q-btn :disabled="!isScanButtonEnabled"  v-if="scanningActive" color="primary" label="Start scan"
+          <q-btn :disabled="!isScanButtonEnabled"  v-if="scanningActive" color="primary" class="label="Start scan"
             @click="fnStartScanner" />
           <q-btn v-if="tempTableData.length > 0" class="common-btn q-py-xs" label="Upload" @click="finalSubmit" />
           <q-btn v-else class="disabled common-btn q-py-xs no-pointer-events" label="Upload" @click="finalSubmit" />
@@ -34,14 +34,13 @@
       <!--START: table Data -->
       <q-table :rows="tempTableData" :columns="columnData" table-class="customTableClass shadow-0"
         :filter="filterSearch" :pagination="paginationControl" row-key="index" :loading="tableAjaxLoading"
-        color="light-blue">
-        <q-td v-slot:body-cell-action="props" :props="props">
+        color="light-blue">" class="<q-td v-slot:body-cell-action="props" :props="props">
           <q-btn @click="removeScannedItems(props.row)" label="Remove" icon="close" color="red-6" size="sm" />
         </q-td>
         <template slot="top">
           <!--START: table filter,search -->
           <div class="col-md-5">
-            <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." float-label="Search .."
+            <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search .."
               class="q-mr-lg q-py-sm" />
           </div>
           <!--END: table filter,search -->

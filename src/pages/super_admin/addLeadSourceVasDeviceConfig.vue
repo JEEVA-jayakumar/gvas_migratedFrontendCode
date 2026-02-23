@@ -16,8 +16,7 @@
                   <q-select
                     dense
                     outlined
-                    color="grey-9"
-                    v-model="formData.leadSourceDeviceVasMapping.leadSource"
+                    color="grey-9" v-model="formData.leadSourceDeviceVasMapping.leadSource"
                     :options="dropDown.leadSourceOptions"
                     label="Select lead source"
                     emit-value
@@ -32,8 +31,7 @@
                   <q-select
                     dense
                     outlined
-                    color="grey-9"
-                    v-model="formData.leadSourceDeviceVasMapping.device"
+                    color="grey-9" v-model="formData.leadSourceDeviceVasMapping.device"
                     :options="dropDown.deviceOptions"
                     label="Select Device"
                     emit-value
@@ -49,8 +47,7 @@
                     dense
                     outlined
                     multiple
-                    color="grey-9"
-                    v-model="formData.vasList"
+                    color="grey-9" v-model="formData.vasList"
                     :options="dropDown.vasOptions"
                     label="Select VAS"
                     emit-value
@@ -65,8 +62,7 @@
           <q-card-actions vertical align="end">
             <q-btn
               label="Submit"
-              color="purple-9"
-              @click="fnsubmit"
+              color="purple-9" @click="fnsubmit"
             />
           </q-card-actions>
         </q-card>
@@ -160,9 +156,9 @@ export default {
     },
 
     async fnsubmit() {
-      this.$v.$touch();
+      this.v$.$touch();
 
-      if (this.$v.$invalid) {
+      if (this.v$.$invalid) {
         this.$q.notify({
           color: "negative",
           position: "bottom",
@@ -210,7 +206,7 @@ export default {
         },
         vasList: []
       };
-      this.$v.$reset();
+      this.v$.$reset();
     }
   }
 };

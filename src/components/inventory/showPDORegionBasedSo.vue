@@ -14,9 +14,8 @@
           </div>
           <div class="col-md-8 q-pt-md" align="left">
             <q-input
-              color="grey-9"
-              v-model="formData.podNumber"
-              float-label="Enter POD Number"
+              color="grey-9" v-model="formData.podNumber"
+              label="Enter POD Number"
               placeholder="POD Number"
             />
             
@@ -104,7 +103,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
             this.$q.loading.hide();

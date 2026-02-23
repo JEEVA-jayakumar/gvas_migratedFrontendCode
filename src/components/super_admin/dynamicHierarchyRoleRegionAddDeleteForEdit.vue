@@ -15,18 +15,18 @@
           <pre>{{userMapping}}</pre>
             <div class="col-md-12 col-sm-12 col-xs-12">
               <q-select
-                float-label="Choose a region"
+                label="Choose a region"
                 v-model="userMapping.regionId"
-                :error="$v.userMapping.regionId.$error"
+                :error="v$.userMapping.regionId.$error"
                 :options="propGetAllRegionsData"
               />
           </div>
           <div class="col-md-12 col-sm-12 col-xs-12">
               <q-select
                 @input="fnPopulateRolesByHeirarchy(userMapping.hierarchy)"
-                float-label="Choose a hierarchy"
+                label="Choose a hierarchy"
                 v-model="userMapping.hierarchy"
-                :error="$v.userMapping.hierarchy.$error"
+                :error="v$.userMapping.hierarchy.$error"
                 :options="propGetAllHierarchiesData"
               />
           </div>
@@ -36,9 +36,9 @@
                 :disabled=disableRolesSelection
                 :class="[disableRolesSelection?'no-pointer-events':'']"
                 @input="fnPopulateUsersByRole"
-                float-label="Choose a role"
+                label="Choose a role"
                 v-model="userMapping.roleId"
-                :error="$v.userMapping.roleId.$error"
+                :error="v$.userMapping.roleId.$error"
                 :options="filterRoles"
               />
           </div>
@@ -47,9 +47,9 @@
                 :readonly=disablePreceederSelection
                 :disabled=disablePreceederSelection
                 :class="[disablePreceederSelection?'no-pointer-events':'']"
-                float-label="Choose a predecessor"
+                label="Choose a predecessor"
                 v-model="userMapping.predecessorId"
-                :error="$v.userMapping.predecessorId.$error"
+                :error="v$.userMapping.predecessorId.$error"
                 :options="filterUsers"
               />
           </div>
@@ -132,8 +132,8 @@ export default {
     ]),
     //Emit functions
     emitfnToggleModel(userMapping) {
-      this.$v.userMapping.$touch();
-      if (this.$v.userMapping.$error) {
+      this.v$.userMapping.$touch();
+      if (this.v$.userMapping.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$emit("emitfnToggleModelWithParams", userMapping);

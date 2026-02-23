@@ -18,11 +18,10 @@
             <q-input
               @keyup.enter="submitPincode(formData)"
               v-model="formData.pincode"
-              :error="$v.formData.pincode.$error"
+              :error="v$.formData.pincode.$error"
               class="text-weight-regular text-grey-8"
               type="number"
-              color="grey-9"
-              float-label="Pincode"
+              color="grey-9" class="label="Pincode"
               placeholder="Pincode"
             />
           </div>
@@ -30,10 +29,9 @@
             <q-input
               @keyup.enter="submitPincode(formData)"
               v-model="formData.stateName"
-              :error="$v.formData.stateName.$error"
+              :error="v$.formData.stateName.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="State name"
+              color="grey-9" class="label="State name"
               placeholder="State name"
             />
           </div>
@@ -41,10 +39,9 @@
             <q-input
               @keyup.enter="submitPincode(formData)"
               v-model="formData.cityName"
-              :error="$v.formData.cityName.$error"
+              :error="v$.formData.cityName.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9"
-              float-label="City name"
+              color="grey-9" class="label="City name"
               placeholder="City name"
             />
           </div>
@@ -56,8 +53,7 @@
               class="bg-white text-weight-regular text-grey-8"
               @click="emitfnshowEditPincode()"
             >Cancel</q-btn>
-            <q-btn align="right" @click="submitPincode(formData)" color="purple-9">Save</q-btn>
-          </div>
+            <q-btn align="right" @click="submitPincode(formData)" color="purple-9">Save</q-btn>" class="</div>
         </div>
       </form>
     </q-dialog>
@@ -105,8 +101,8 @@ export default {
     },
     //Permission creation final submit
     submitPincode(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({
@@ -133,7 +129,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
           });

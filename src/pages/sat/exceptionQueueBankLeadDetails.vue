@@ -70,7 +70,7 @@
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list separator no-border class="no-padding text-body1">
+                  <q-list separator  class="no-padding text-body1">
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>Plan</q-item-section>
                       <q-item-section>{{formData.shortLead.plan.planName}}</q-item-section>
@@ -103,7 +103,7 @@
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list no-border separator class="no-padding">
+                  <q-list  separator class="no-padding">
                     <q-item class="q-pa-sm">
                       <q-item-section class="text-body1">Mode of payment</q-item-section>
                       <q-item-section class="text-body1">
@@ -138,8 +138,7 @@
                         <q-btn
                           size="sm"
                           :outline="!showOpenPaymentChequeDocumentInfo"
-                          color="dark"
-                          label="View Document"
+                          color="dark" class="label="View Document"
                           icon="attach_file"
                           @click="fnPDFViewModal(formData.shortLead.paymentDocumentFile,'CHEQUE')"
                         ></q-btn>
@@ -150,14 +149,13 @@
                         <q-btn
                           :outline="!showOpenPaymentChequeInfo"
                           size="sm"
-                          color="dark"
-                          label="View Document"
+                          color="dark" class="label="View Document"
                           icon="attach_file"
                           @click="fnOpenPaymentChequeInfo(formData.shortLead.paymentDocumentFile)"
                         />
                       </div>
                       <div v-else class="text-grey-9">
-                        <q-icon name="clear" color="negative" />No document attached
+                        <q-icon name="clear" color="negative" class="/>No document attached
                       </div>
                     </q-item>
                     <q-item v-if="showOpenPaymentChequeInfo">
@@ -182,12 +180,11 @@
                   <span class="text-body1 text-weight-medium">MDR</span>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list no-border class="no-padding">
+                  <q-list  class="no-padding">
                     <q-item class="q-pa-sm">
                       <q-item-section>
                         <q-input
-                          color="grey-9"
-                          float-label="Debit < 2000 (%)"
+                          color="grey-9" class="label="Debit < 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelLesserThan"
@@ -195,8 +192,7 @@
                       </q-item-section>
                       <q-item-section>
                         <q-input
-                          color="grey-9"
-                          float-label="Debit > 2000 (%)"
+                          color="grey-9" class="label="Debit > 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelGreaterThan"
@@ -206,8 +202,7 @@
                     <q-item class="q-pa-sm">
                       <q-item-section>
                         <q-input
-                          color="grey-9"
-                          float-label="Std CC (%)"
+                          color="grey-9" class="label="Std CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelStdCC"
@@ -215,8 +210,7 @@
                       </q-item-section>
                       <q-item-section>
                         <q-input
-                          color="grey-9"
-                          float-label="Premium CC (%)"
+                          color="grey-9" class="label="Premium CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelPremiumCC"
@@ -226,8 +220,7 @@
                     <q-item class="q-pa-sm">
                       <q-item-section>
                         <q-input
-                          color="grey-9"
-                          float-label="Corp Pre CC (%)"
+                          color="grey-9" class="label="Corp Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelCorpCC"
@@ -235,8 +228,7 @@
                       </q-item-section>
                       <q-item-section>
                         <q-input
-                          color="grey-9"
-                          float-label="Intl Pre CC (%)"
+                          color="grey-9" class="label="Intl Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelIntlCC"
@@ -246,8 +238,7 @@
                     <q-item class="q-pa-sm">
                       <q-item-section>
                         <q-input
-                          color="grey-9"
-                          float-label="Super Pre CC (%)"
+                          color="grey-9" class="label="Super Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelSuperPremiumCC"
@@ -255,8 +246,7 @@
                       </q-item-section>
                       <q-item-section>
                         <q-input
-                          color="grey-9"
-                          float-label="Upi Debit Card UpTo 2000 (%)"
+                          color="grey-9" class="label="Upi Debit Card UpTo 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="upiDebitCardUpTo2000"
@@ -266,8 +256,7 @@
                     <q-item class="q-pa-sm">
                        <q-item-section>
                         <q-input
-                          color="grey-9"
-                          float-label="Upi Debit Card Above 2000 (%)"
+                          color="grey-9" class="label="Upi Debit Card Above 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="upiDebitCardAbove2000"
@@ -275,8 +264,7 @@
                       </q-item-section>
                       <q-item-section>
                         <q-input
-                          color="grey-9"
-                          float-label="Upi Prepaid Credit Cards UpTo 2000 (%)"
+                          color="grey-9" class="label="Upi Prepaid Credit Cards UpTo 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="upiPrepaidCreditCardsUpTo2000"
@@ -286,8 +274,7 @@
                     <q-item class="q-pa-sm">
                        <q-item-section>
                         <q-input
-                          color="grey-9"
-                          float-label="Upi Prepaid Credit Cards Above 2000 (%)"
+                          color="grey-9" class="label="Upi Prepaid Credit Cards Above 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="upiPrepaidCreditCardsAbove2000"
@@ -299,8 +286,7 @@
                       <q-checkbox
                         v-model="formData.shortLead.posEnable"
                         class="no-pointer-events"
-                        color="purple-9"
-                      >
+                        color="purple-9" class=">
                         <small class="text-caption">Enable Cash@POS Cash @POS incentive Rs.5</small>
                       </q-checkbox>
                     </q-item>
@@ -315,7 +301,7 @@
                   <span class="text-body1 text-weight-medium">Remarks</span>
                 </q-card-section>
                 <q-card-section class="q-pa-sm text-grey-9">
-                  <q-list separator no-border class="no-padding">
+                  <q-list separator  class="no-padding">
                     <q-item
                       class="q-pa-sm align-middle"
                       multiline
@@ -324,7 +310,7 @@
                       :key="index"
                     >
                       <q-item-section class="text-dark capitalize">{{item.remarks}}</q-item-section>
-                      <q-item-section>{{item.createdAt | moment("Do MMM Y")}}</q-item-section>
+                      <q-item-section>{{ $moment_format(item.createdAt, "Do MMM Y") }}</q-item-section>
                     </q-item>
                     <q-item
                       v-show="getShortLeadInfo.bankSubventionTracker.length == 0"
@@ -426,8 +412,7 @@
                               round
                               size="sm"
                               icon="fas fa-file-pdf"
-                              color="primary"
-                            />
+                              color="primary" class="/>
                             &nbsp;{{ formData.shortLead.applicationFile }}
                           </div>
                         </div>
@@ -447,7 +432,7 @@
                             @click="fnViewHandedOverFileImageApplication()"
                             class="ellipsis"
                           >
-                            <q-icon name="fas fa-image" color="amber-9" />
+                            <q-icon name="fas fa-image" color="amber-9" class="/>
                             &nbsp;{{ formData.shortLead.applicationFile }}
                           </div>
                         </div>
@@ -467,7 +452,7 @@
                   <span class="text-body1 text-weight-medium"></span>
                 </q-card-section>
                 <q-card-section class="q-pa-xs">
-                  <q-list no-border class="no-padding">
+                  <q-list  class="no-padding">
                     <q-item class="no-padding">
                       <q-item-section>
                         <div
@@ -488,7 +473,7 @@
                                 class="full-width"
                               >
                                 <template slot="header">
-                                  <q-item-section icon="attach_file" />
+                                  <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
                                   <q-item-section
                                     class="text-body1"
                                     :sublabel="documents[0].uploadedDocuments.length + 'Document(s)'"
@@ -509,8 +494,7 @@
                                         round
                                         size="sm"
                                         icon="fas fa-file-pdf"
-                                        color="primary"
-                                      />
+                                        color="primary" class="/>
                                       &nbsp;{{item.fileNameOriginal}}
                                     </div>
                                   </div>
@@ -541,7 +525,7 @@
                                 class="full-width"
                               >
                                 <template slot="header">
-                                  <q-item-section icon="apps" />
+                                  <q-item-section avatar><q-icon name="apps"  /></q-item-section>
                                   <q-item-section
                                     class="text-body1"
                                     :sublabel="documents.length + 'Type(s)'"
@@ -563,7 +547,7 @@
                                       indent
                                     >
                                       <template slot="header">
-                                        <q-item-section icon="attach_file" />
+                                        <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
                                         <q-item-section
                                           class="text-body1"
                                           :sublabel="subDocument.uploadedDocuments.length + 'Document(s)'"
@@ -584,8 +568,7 @@
                                               round
                                               size="sm"
                                               icon="fas fa-file-pdf"
-                                              color="primary"
-                                            />
+                                              color="primary" class="/>
                                             &nbsp;{{item.fileNameOriginal}}
                                           </div>
                                         </div>
@@ -624,25 +607,22 @@
         <div class="col-md-12" align="right">
           <q-btn
             icon="block"
-            color="grey-5"
-            class="q-ma-sm text-dark"
+            color="grey-5" class="class="q-ma-sm text-dark"
             @click="$router.go(-1)"
             label="Cancel"
           />
-          <q-btn icon="save" class="q-ma-sm" color="amber-9" label="Save" @click="saveRemarks" />
+          <q-btn icon="save" class="q-ma-sm" color="amber-9" class="label="Save" @click="saveRemarks" />
           <q-btn
             icon="clear"
             class="q-ma-sm"
-            color="negative"
-            label="Reject"
+            color="negative" class="label="Reject"
             @click="fnUploadDocumentAndSubmitRejection"
           />
           <q-btn
             v-if="this.formData.shortLead.leadSource.id != 114 && this.formData.shortLead.leadSource.id != 115"
             icon="cloud_upload"
             class="q-ma-sm"
-            color="positive"
-            label="Upload bank subvention letter"
+            color="positive" class="label="Upload bank subvention letter"
             @click="fnUploadDocumentAndSubmit"
           />
         </div>

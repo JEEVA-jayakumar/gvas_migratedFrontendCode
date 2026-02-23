@@ -15,8 +15,7 @@
             size="sm"
             @click="emitToggleRemarks"
             outline
-            color="dark"
-            icon="clear"
+            color="dark" class="icon="clear"
           />
         </div>
       </div>
@@ -130,8 +129,7 @@ export default {
             size="sm"
             @click="emitToggleRemarks"
             outline
-            color="dark"
-            icon="clear"
+            color="dark" class="icon="clear"
           />
         </div>
       </div>
@@ -139,7 +137,7 @@ export default {
       <q-table :rows="callLogs" :columns="columns" @request="fetchLogs">
    
           <q-td v-slot:body-cell-inputDate="props" :props="props">
-            {{ props.row.inputDate | moment("Do MMM Y") }}
+            {{ $moment_format(props.row.inputDate, "Do MMM Y") }}
           </q-td>
           <!-- <q-td :props="props" field="remarks">
             {{ props.row.remarks }}

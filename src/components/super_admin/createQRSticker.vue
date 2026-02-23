@@ -6,8 +6,7 @@
           <!--START: table title -->
           <div class="col-md-6">
             <strong>
-              <q-chip color="primary">
-                <span align="center">Batch number : BatchNo_000{{getAllQRList1.batchCount}}</span>
+              <q-chip color="primary">" class="<span align="center">Batch number : BatchNo_000{{getAllQRList1.batchCount}}</span>
               </q-chip>
             </strong>
             <br />
@@ -29,12 +28,11 @@
           <div class="col-md-6">
             <q-select
               clearable
-              float-label="Select QR API"
+              label="Select QR API"
               v-model.trim="formdata.leadSource"
-              color="grey-9"
-              :options="dropDown.leadSourceOptions"
+              color="grey-9" class=":options="dropDown.leadSourceOptions"
             />
-            <!--   :error="$v.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata.leadSource.$error" -->
           </div>
         </div>
         <br />
@@ -53,19 +51,17 @@
               type="number"
               onkeydown="javascript: return event.keyCode === 8 ||
               event.keyCode === 46 ? true : !isNaN(Number(event.key))"
-              float-label="Enter numbers of QR count"
+              label="Enter numbers of QR count"
               v-model.trim="formdata.count"
-              color="grey-9"
-            />
-            <!-- :error="$v.formdata.count.$error" -->
+              color="grey-9" class="/>
+            <!-- :error="v$.formdata.count.$error" -->
           </div>
         </div>
         <div class="row group">
           <div class="col" align="right">
             <q-btn
               :disabled="submitDisabled"
-              color="light-blue"
-              class="q-py-xs"
+              color="light-blue" class="class="q-py-xs"
               label="Create QR"
               @click="fnsubmit(formdata)"
             />
@@ -156,7 +152,7 @@ export default {
       });
     },
     fnsubmit(request) {
-      this.$v.formdata.$touch();
+      this.v$.formdata.$touch();
       // if (this.formdata.leadSource == "" && this.formdata.count == "") {
       //   this.$q.notify("Please enter all fields");
       // } else {

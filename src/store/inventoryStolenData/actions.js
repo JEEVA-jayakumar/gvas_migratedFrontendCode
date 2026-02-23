@@ -9,7 +9,7 @@ import api from '../api.js';
 //         .then(response => {
 //           // START=> COMMIT with data received'
 //         //   response.data.data.content.map(function (value, index) {
-//         //     Vue.set(value, "expand", false);
+//         //     value["expand"] = false;
 //         //   });
 //           commit("SET_INVENTORY_STOLEN_DATA", response.data.data);
 //           console.log("Inventory DATAS---------------->"+JSON.stringify(response.data.data))

@@ -10,13 +10,12 @@
           <div class="text-h6 text-weight-regular q-py-sm">Update Received QR Count</div>
           </div>
           <div class="col-md-8 q-pt-md" align="left">
-            <q-input type="number" color="grey-9"
-             v-model="formData.recievedCount" min="1" oninput="this.value = Math.abs(this.value)" :error="$v.formData.recievedCount.$error"
-              float-label="Update Count"
+            <q-input type="number" color="grey-9" v-model="formData.recievedCount" min="1" oninput="this.value = Math.abs(this.value)" :error="v$.formData.recievedCount.$error"
+              label="Update Count"
               placeholder="Update Count" />
         </div>
         <div class="col-md-12 col-md-6 q-pt-md group" align="right">
-          <q-btn icon="block" outline color="dark" label="Cancel" @click="emitToggleCheque" />
+          <q-btn icon="block" outline color="dark" class="label="Cancel" @click="emitToggleCheque" />
           <q-btn label="Update" color="purple-9" @click="fnSubmitCount()" />
         </div>
       </div>
@@ -55,8 +54,8 @@
         ...mapActions('generateQR', ['SUBMIT_QR_COUNT']),
     
         fnSubmitCount() {
-          this.$v.formData.$touch()
-      if(this.$v.formData.$error){
+          this.v$.formData.$touch()
+      if(this.v$.formData.$error){
         this.$q.notify('Please review fields again.')
       }else{
             let updatecount = {

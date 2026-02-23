@@ -2,10 +2,14 @@
   <q-page>
     <div>
       <!--@select="goToUnassignedTab"-->
-      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToUnassignedTab">
-        <q-tab default color="dark" name="active" slot="title" label="Active Rental Charges" />
-        <q-tab color="dark" name="deactive" slot="title" label="DeActived Rental Charges" />
-        <q-tab-panel name="active">
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" class="@select="goToUnassignedTab">
+        <q-tab default color="dark" class="name="active"  label="Active Rental Charges" />
+        <q-tab color="dark" class="name="deactive"  label="DeActived Rental Charges" />
+
+
+      </q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="active">
           <!--STARTv-model: table Data -->
           <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filterSearch"
             :pagination="paginationControl" row-key="name" :loading="toggleAjaxLoadFilter"
@@ -34,8 +38,7 @@
               </div>
             </q-td>
             <q-td v-slot:body-cell-plan="props" :props="props">
-              <q-btn align="left" dense flat no-wrap no-caps icon="fas fa-pencil-alt" color="primary"
-                @click="editPlanDetails(props.row)" :label="props.row.plan.planName" class="capitalize" />
+              <q-btn align="left" dense flat no-wrap no-caps icon="fas fa-pencil-alt" color="primary" @click="editPlanDetails(props.row)" :label="props.row.plan.planName" class="capitalize" />
             </q-td>
 
             <template v-slot:top="props">
@@ -43,8 +46,8 @@
               <div class="col-md-12 group">
                 <div class="row">
                   <div class="col-md-6">
-                    <q-input clearable color="grey-9" v-model.trim="filterSearch" placeholder="Type.."
-                      float-label="Search by Plan Name" />
+                    <q-input clearable color="grey-9" class="v-model.trim="filterSearch" placeholder="Type.."
+                      label="Search by Plan Name" />
                   </div>
                 </div>
               </div>
@@ -56,7 +59,7 @@
           </q-table>
           <!--ENDv-model: table Data -->
         </q-tab-panel>
-        <q-tab-panel name="deactive">
+<q-tab-panel name="deactive">
           <!--START: table Data -->
           <q-table table-class="customTableClass" :rows="deactiveTableData" :columns="columnsDeactive"
             :filter="filterSearch1" :pagination="paginationControl1" row-key="name"
@@ -90,8 +93,8 @@
               <div class="col-md-12 group">
                 <div class="row">
                   <div class="col-md-6">
-                    <q-input clearable color="grey-9" v-model.trim="filterSearch1" placeholder="Type.."
-                      float-label="Search by Plan Name" />
+                    <q-input clearable color="grey-9" class="v-model.trim="filterSearch1" placeholder="Type.."
+                      label="Search by Plan Name" />
                   </div>
                 </div>
               </div>
@@ -103,7 +106,7 @@
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
 
       <EditRentalCharges v-if="propShoweditPlanDetails" :propShoweditPlanDetails="propShoweditPlanDetails"
         :propRowDetails="propRowDetails"  @emitfnshowEditRental="editPlanDetails"></EditRentalCharges>

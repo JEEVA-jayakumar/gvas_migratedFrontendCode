@@ -15,8 +15,7 @@
             size="sm"
             @click="emitToggleRemarks"
             outline
-            color="dark"
-            icon="clear"
+            color="dark" class="icon="clear"
           />
         </div>
       </div>
@@ -28,7 +27,7 @@
         <q-input
           readonly
           v-model="formData.scanQRNumber.scanQRNumber"
-          float-label="Scan QR Number"
+          label="Scan QR Number"
         />
         <div class="group">
           <q-btn
@@ -41,8 +40,7 @@
           <q-btn
             @click="startScan"
             v-if="scannerToggleOption"
-            color="blue"
-            outline
+            color="blue" class="outline
             class="q-py-xs "
             label="Start scan"
             style="float: inline-end;"
@@ -95,8 +93,8 @@ export default {
     ...mapActions("phonePeCrm", ["UPDATE_SCAN_QR_NUMBER"]),
     fnsubmit(formData) {
 
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();
@@ -126,9 +124,7 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
+                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
               icon: "thumb_down"
             });
             this.$q.loading.hide();

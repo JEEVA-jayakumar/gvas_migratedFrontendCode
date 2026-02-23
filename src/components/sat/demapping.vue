@@ -37,8 +37,7 @@
         row-key="id"
         :loading="toggleAjaxLoadFilter"
         :rows-per-page-options="[5, 10, 15, 20, 25]"
-        color="dark"
-        @request="ajaxLoadAllLeadInfo"
+        color="dark" class="@request="ajaxLoadAllLeadInfo"
       >
         <q-td
           v-slot:body-cell-leadNumber="props"
@@ -59,9 +58,8 @@
               clearable
               v-model="filter"
               separator
-              color="grey-9"
-              placeholder="Type.."
-              float-label="Search By Device Serial Number"
+              color="grey-9" class="placeholder="Type.."
+              label="Search By Device Serial Number"
               class="q-mr-lg q-py-sm"
             />
           </div>

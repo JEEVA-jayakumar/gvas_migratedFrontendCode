@@ -8,22 +8,20 @@
       <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
         <div class="col-sm-5">
           <q-select
-            color="grey-9"
-            v-model="formData.allocate_region"
+            color="grey-9" v-model="formData.allocate_region"
             :options="regionOptions"
-            float-label="Select Region"
+            label="Select Region"
             @input="regionBasedSoLoad"
           />
         </div>
         <div class="col-md-5">
           <q-select
             v-model="formData.allocate_so"
-            float-label="Select SO"
+            label="Select SO"
             radio
             filter
             clearable
-            color="grey-9"
-            :options="regionBasedSo"
+            color="grey-9" class=":options="regionBasedSo"
           />
         </div>
         <div class="row">
@@ -50,19 +48,17 @@
           <q-input
             disable
             v-model="formData.pod_number"
-            float-label="Pod Number"
+            label="Pod Number"
             radio
-            color="grey-9"
-          />
+            color="grey-9" class="/>
         </div>
         <div class="col-md-7">
           <q-input
             disable
             v-model="formData.total_count"
-            float-label="Total Count"
+            label="Total Count"
             radio
-            color="grey-9"
-          />
+            color="grey-9" class="/>
         </div>
       </div>
 
@@ -70,22 +66,19 @@
         <!-- <q-btn
           size="md"
           type="button"
-          color="red"
-          @click="fnSubmitRejectDetails(formData)"
+          color="red" @click="fnSubmitRejectDetails(formData)"
           >Reject</q-btn
         > -->
         <q-btn
           size="md"
           type="button"
-          color="purple-9"
-          @click="fnSubmitBankDetails(formData)"
+          color="purple-9" @click="fnSubmitBankDetails(formData)"
           >Update</q-btn
         >
         <!-- <q-btn
           size="md"
           type="button"
-          color="green"
-          @click="fnSubmitApproveDetails(formData)"
+          color="green" @click="fnSubmitApproveDetails(formData)"
           >Approve</q-btn
         > -->
       </div>
@@ -273,9 +266,7 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              error.body.message == null
-                ? "Please Try Again Later !"
-                : error.body.message,
+              (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
             icon: "thumb_down"
           });
         });
@@ -299,9 +290,9 @@ export default {
     //         color: "negative",
     //         position: "bottom",
     //         message:
-    //           error.body.message == null
+    //           error.data.message == null
     //             ? "Please Try Again Later !"
-    //             : error.body.message,
+    //             : error.data.message,
     //         icon: "thumb_down"
     //       });
     //     });
@@ -325,9 +316,9 @@ export default {
     //         color: "negative",
     //         position: "bottom",
     //         message:
-    //           error.body.message == null
+    //           error.data.message == null
     //             ? "Please Try Again Later !"
-    //             : error.body.message,
+    //             : error.data.message,
     //         icon: "thumb_down"
     //       });
     //     });

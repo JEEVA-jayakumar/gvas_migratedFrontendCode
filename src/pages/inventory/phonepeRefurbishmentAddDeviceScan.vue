@@ -10,25 +10,24 @@
               @click="$router.push('/inventory/PhonepeInventory')"
               outline
               label="Cancel Allocation"
-              color="negative"
-            />
+              color="negative" class="/>
         </div>
         <!--END: table title -->
       </div>
       <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <!--START: table title -->
         <!-- <div class="col-md-4">
-          <q-select color="grey-9" v-model="formData.aggregator" float-label="Select Aggregator" radio
+          <q-select color="grey-9" v-model="formData.aggregator" label="Select Aggregator" radio
             :options="dropdDown.aggregatorOptions" @input="getaggregator" />
         </div> -->
         <div class="col-md-4">
           <!-- <pre>{{tempTableData}}</pre>  ref="clickHeretoStartParent"  ref="clickHeretoStartChild"      -->
-          <q-select @input="fnDisableDeviceTypeSelection"  v-model="formData.device.id" float-label="Select Device Type"
-            radio color="grey-9" :options="deviceOptions" />
+          <q-select @input="fnDisableDeviceTypeSelection"  v-model="formData.device.id" label="Select Device Type"
+            radio color="grey-9" class=":options="deviceOptions" />
         </div>
         <!-- Final upload button toggle -->
         <div class="col-12 col-lg-4 group" align="right">
-          <q-btn :disabled="formData.device.id == ''" v-if="scanningActive" color="primary" label="Start scan"
+          <q-btn :disabled="formData.device.id == ''" v-if="scanningActive" color="primary" class="label="Start scan"
             @click="fnStartScanner" />
           <q-btn v-if="tempTableData.length > 0" class="common-btn q-py-xs" label="Upload" @click="finalSubmit" />
           <q-btn v-else class="disabled common-btn q-py-xs no-pointer-events" label="Upload" @click="finalSubmit" />
@@ -38,14 +37,13 @@
       <!--START: table Data -->
       <q-table :rows="tempTableData" :columns="columnData" table-class="customTableClass shadow-0"
         :filter="filterSearch" :pagination="paginationControl" row-key="index" :loading="tableAjaxLoading"
-        color="light-blue">
-        <q-td v-slot:body-cell-action="props" :props="props">
+        color="light-blue">" class="<q-td v-slot:body-cell-action="props" :props="props">
           <q-btn @click="removeScannedItems(props.row)" label="Remove" icon="close" color="red-6" size="sm" />
         </q-td>
         <template slot="top">
           <!--START: table filter,search -->
           <div class="col-md-5">
-            <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." float-label="Search .."
+            <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search .."
               class="q-mr-lg q-py-sm" />
           </div>
           <!--END: table filter,search -->

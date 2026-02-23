@@ -14,11 +14,11 @@
             </div>
           </div>
           <!-- <div class="col-md-8 q-py-md" align="left">
-            <q-select color="grey-9" v-model="formData.aggregator" float-label="Select Aggregator" radio
+            <q-select color="grey-9" v-model="formData.aggregator" label="Select Aggregator" radio
               :options="dropdDown.aggregatorOptions" @input="getaggregator" />
           </div> -->
           <!-- <div class="col-md-8 q-py-md" align="left">
-            <q-select color="grey-9" v-model="formData.deviceType" float-label="Select Device Type" radio
+            <q-select color="grey-9" v-model="formData.deviceType" label="Select Device Type" radio
               :options="deviceOption" />
           </div> -->
           <div class="col-md-8" align="center">
@@ -62,7 +62,7 @@
                 <q-separator />
                 <q-card-section>
                   <q-item dense>
-                    <q-item-section icon="attach_file" />
+                    <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
                     <q-item-section>{{
                       formData.fileSelected[0].name
                     }}</q-item-section>
@@ -74,8 +74,7 @@
                   <q-btn
                     outline
                     size="sm"
-                    color="negative"
-                    @click="removeBulkUploadFile"
+                    color="negative" @click="removeBulkUploadFile"
                     label="Remove"
                     icon="clear"
                   />
@@ -86,8 +85,7 @@
           <div class="col-md-12 group" align="right">
             <q-btn
               outline
-              color="dark"
-              label="Cancel"
+              color="dark" class="label="Cancel"
               @click="emitToggleinventoryBulkUpload"
             />
             <q-btn

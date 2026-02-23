@@ -21,10 +21,9 @@
             <div class="col-md-12">
               <q-input
                 v-model="formData.name"
-                :error="$v.formData.name.$error"
+                :error="v$.formData.name.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9"
-                float-label="Enter CS Sub Issue"
+                color="grey-9" class="label="Enter CS Sub Issue"
                 placeholder="Enter CS Sub Issue"
               />
             </div>
@@ -41,8 +40,7 @@
               <q-btn
                 align="right"
                 @click="fnfinalsubmitCsSubIssue(formData)"
-                color="purple-9"
-                >Save</q-btn
+                color="purple-9" class=">Save</q-btn
               >
             </div>
           </div>
@@ -117,8 +115,8 @@
         this.propRowDetails = rowDetails;
       },
       fnfinalsubmitCsSubIssue(formData) {
-        this.$v.formData.$touch();
-        if (this.$v.formData.$error) {
+        this.v$.formData.$touch();
+        if (this.v$.formData.$error) {
           this.$q.notify("Please review fields again.");
         } else {
           this.$q.loading.show();
@@ -143,9 +141,7 @@
                 color: "negative",
                 position: "bottom",
                 message:
-                  error.body.message == null
-                    ? "Please Try Again Later !"
-                    : error.body.message,
+                  (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
                 icon: "thumb_down"
               });
             });

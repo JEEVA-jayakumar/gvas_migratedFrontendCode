@@ -11,12 +11,11 @@
           <div class="text-h6 q-mb-sm">{{propDocumentDetails.documentType}}</div>
             <q-input
                 placedholder="Type.." 
-                float-label="Reason"
-                color="grey-9"
-                align="left"
+                label="Reason"
+                color="grey-9" class="align="left"
                 v-model="formData.leadDetails.reason"
             />
-            <q-btn icon="done" color="positive" class="q-ma-sm float-right" @click="fnApproveLeadFinal(formData)" align="right" label="Approve" />
+            <q-btn icon="done" color="positive" class="class="q-ma-sm float-right" @click="fnApproveLeadFinal(formData)" align="right" label="Approve" />
             <q-btn icon="block" color="grey-5" @click="emitToggleRemarks()" class="q-ma-sm float-right text-dark" align="right" v-close-overlay label="Cancel" />
         </q-dialog>
   </div>

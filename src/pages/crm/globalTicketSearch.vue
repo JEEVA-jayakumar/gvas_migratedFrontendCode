@@ -7,9 +7,8 @@
       <div class="row gutter-x-xs gutter-y-xs q-pt-md  items-end">
         <div class="col-md-4">
           <q-input
-            inverted-light
-            color="light"
-            clearable
+
+            color="light" class="clearable
             v-model="formData.searchTerm"
             placeholder="Search By Ticket ID..."
             @clear="handleClear"
@@ -20,8 +19,7 @@
             class="auto"
             size="md"
             type="button"
-            color="purple-9"
-            @click="globalSearchSubmit(formData)"
+            color="purple-9" @click="globalSearchSubmit(formData)"
             :disable="this.formData.searchTerm == ''"
             >Submit
           </q-btn>
@@ -135,17 +133,13 @@
                     <span class="col-md-4 text-weight-medium">{{
                       fieldKeys.ticketStatus.createdDate.label
                     }}</span>
-                    <span class="col-md-8 text-wrap text-primary">{{
-                      tableData.createdDate | moment("Do MMM Y")
-                    }}</span>
+                    <span class="col-md-8 text-wrap text-primary">{{ $moment_format(tableData.createdDate, "Do MMM Y") }}</span>
                   </div>
                   <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                     <span class="col-md-4 text-weight-medium">{{
                       fieldKeys.ticketStatus.updatedDate.label
                     }}</span>
-                    <span class="col-md-8 text-wrap text-primary">{{
-                      tableData.updatedDate | moment("Do MMM Y")
-                    }}</span>
+                    <span class="col-md-8 text-wrap text-primary">{{ $moment_format(tableData.updatedDate, "Do MMM Y") }}</span>
                   </div>
                   <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                     <span class="col-md-4 text-weight-medium">{{
