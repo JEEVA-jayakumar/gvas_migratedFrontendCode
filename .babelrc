@@ -1,0 +1,11 @@
+{
+  "presets": [
+    [
+      "@quasar/babel-preset-app",
+      {
+        "useBuiltIns": "usage",
+        "corejs": 3
+      }
+    ]
+  ]
+}
