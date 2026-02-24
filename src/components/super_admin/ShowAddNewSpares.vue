@@ -22,7 +22,8 @@
                         
                         
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" class="label="Enter Spare Parts Name*"
+                          color="grey-9"
+                          label="Enter Spare Parts Name*"
                           placeholder="Enter Spare Parts Name*" 
                         />
                     </div>
@@ -31,7 +32,8 @@
                         v-model="formData.regionAreaName" 
                           :error="v$.formData.regionAreaName.$error"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" class="label="Region"
+                          color="grey-9"
+                          label="Region"
                           placeholder="Region" 
                         />
                     </div> -->
@@ -39,7 +41,8 @@
                 <div class="row gutter-sm q-py-sm items-center">
                     <div class="col-md-12 group" align="right">
                         <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowAddNewSpares()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitAddNewRegion(formData)" color="purple-9">Save</q-btn>" class="</div>
+                        <q-btn align="right" @click="fnfinalsubmitAddNewRegion(formData)" color="purple-9">Save</q-btn>
+                    </div>
                 </div>
             </form>
         </q-dialog>
@@ -109,7 +112,7 @@ computed:{
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down",
             });
           });

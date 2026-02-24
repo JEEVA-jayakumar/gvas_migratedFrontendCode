@@ -49,7 +49,7 @@
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list separator  class="no-padding text-body1">
+                  <q-list separator no-border class="no-padding text-body1">
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>Plan</q-item-section>
                       <q-item-section>{{formData.shortLead.plan.planName}}</q-item-section>
@@ -96,7 +96,7 @@
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list  separator class="no-padding">
+                  <q-list no-border separator class="no-padding">
                     <q-item class="q-pa-sm">
                       <q-item-section class="text-body1">Mode of payment</q-item-section>
                       <q-item-section class="text-body1">
@@ -131,7 +131,8 @@
                         <q-btn
                           size="sm"
                           :outline="!showOpenPaymentChequeDocumentInfo"
-                          color="dark" class="label="View Document"
+                          color="dark"
+                          label="View Document"
                           icon="attach_file"
                           @click="fnPDFViewModal(formData.shortLead.paymentDocumentFile)"
                         ></q-btn>
@@ -142,13 +143,14 @@
                         <q-btn
                           :outline="!showOpenPaymentChequeInfo"
                           size="sm"
-                          color="dark" class="label="View Document"
+                          color="dark"
+                          label="View Document"
                           icon="attach_file"
                           @click="fnOpenPaymentChequeInfo(formData.shortLead.paymentDocumentFile)"
                         />
                       </div>
                       <div v-else class="text-grey-9">
-                        <q-icon name="clear" color="negative" class="/>No document attached
+                        <q-icon name="clear" color="negative" />No document attached
                       </div>
                     </q-item>
                     <q-item v-if="showOpenPaymentChequeInfo">
@@ -179,11 +181,12 @@
                   </span>
                 </q-card-section>
                 <q-card-section>
-                  <q-list  class="no-padding">
+                  <q-list no-border class="no-padding">
                     <q-item class="q-pa-sm">
                       <q-item-section>
                         <q-input
-                          color="grey-9" class="label="Debit <= 2000 (%)"
+                          color="grey-9"
+                          label="Debit <= 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelLesserThan"
@@ -191,7 +194,8 @@
                       </q-item-section>
                       <q-item-section>
                         <q-input
-                          color="grey-9" class="label="Debit > 2000 (%)"
+                          color="grey-9"
+                          label="Debit > 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelGreaterThan"
@@ -201,7 +205,8 @@
                     <q-item class="q-pa-sm">
                       <q-item-section>
                         <q-input
-                          color="grey-9" class="label="Std CC (%)"
+                          color="grey-9"
+                          label="Std CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelStdCC"
@@ -209,7 +214,8 @@
                       </q-item-section>
                       <q-item-section>
                         <q-input
-                          color="grey-9" class="label="Premium CC (%)"
+                          color="grey-9"
+                          label="Premium CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelPremiumCC"
@@ -219,7 +225,8 @@
                     <q-item class="q-pa-sm">
                       <q-item-section>
                         <q-input
-                          color="grey-9" class="label="Corp Pre CC (%)"
+                          color="grey-9"
+                          label="Corp Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelCorpCC"
@@ -227,7 +234,8 @@
                       </q-item-section>
                       <q-item-section>
                         <q-input
-                          color="grey-9" class="label="Intl Pre CC (%)"
+                          color="grey-9"
+                          label="Intl Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelIntlCC"
@@ -237,7 +245,8 @@
                     <q-item class="q-pa-sm">
                       <q-item-section>
                         <q-input
-                          color="grey-9" class="label="Super Pre CC (%)"
+                          color="grey-9"
+                          label="Super Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelSuperPremiumCC"
@@ -245,7 +254,8 @@
                       </q-item-section>
                       <q-item-section>
                         <q-input
-                          color="grey-9" class="label="Upi Debit Card UpTo 2000 (%)"
+                          color="grey-9"
+                          label="Upi Debit Card UpTo 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="upiDebitCardUpTo2000"
@@ -255,7 +265,8 @@
                     <q-item class="q-pa-sm">
                        <q-item-section>
                         <q-input
-                          color="grey-9" class="label="Upi Debit Card Above 2000 (%)"
+                          color="grey-9"
+                          label="Upi Debit Card Above 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="upiDebitCardAbove2000"
@@ -263,7 +274,8 @@
                       </q-item-section>
                       <q-item-section>
                         <q-input
-                          color="grey-9" class="label="Upi Prepaid Credit Cards UpTo 2000 (%)"
+                          color="grey-9"
+                          label="Upi Prepaid Credit Cards UpTo 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="upiPrepaidCreditCardsUpTo2000"
@@ -273,7 +285,8 @@
                     <q-item class="q-pa-sm">
                       <q-item-section>
                         <q-input
-                          color="grey-9" class="label="Upi Prepaid Credit Cards Above 2000 (%)"
+                          color="grey-9"
+                          label="Upi Prepaid Credit Cards Above 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="upiPrepaidCreditCardsAbove2000"
@@ -284,7 +297,8 @@
                       <q-checkbox
                         v-model="formData.shortLead.posEnable"
                         class="no-pointer-events"
-                        color="purple-9" class=">
+                        color="purple-9"
+                      >
                         <small class="text-caption">Enable Cash@POS Cash @POS incentive Rs.5</small>
                       </q-checkbox>
                     </q-item>
@@ -303,7 +317,7 @@
                   <q-scroll-area
                     :style="formData.shortLead.leadVerificationStatus.length > 4?'width: 100%; height:400px;':'width: 100%; height:100px;'"
                   >
-                    <q-list  class="no-padding">
+                    <q-list no-border class="no-padding">
                       <q-item
                         dense
                         v-for="(item,index) in formData.shortLead.leadVerificationStatus"
@@ -311,10 +325,12 @@
                         class="q-pa-sm"
                       >
                         <q-item-section
-                          color="purple-9" class=":letter="item.createdBy.name.charAt(0)"
+                          color="purple-9"
+                          inverted
+                          :letter="item.createdBy.name.charAt(0)"
                         />
                         <q-item-section>
-                          <q-item-label>{{item.reason}}</q-item-label>
+                          <q-item-label label>{{item.reason}}</q-item-label>
                           <q-item-label sublabel>{{item.createdBy.name}}</q-item-label>
                           <q-item-label sublabel>{{item.fieldName}}</q-item-label>
                           <q-item-label stamp>{{ $moment_format(item.updatedAt, "Do MMM Y") }}</q-item-label>
@@ -439,7 +455,7 @@
                   >KYC Exception Case</span>
                 </q-card-section>
                 <q-card-section class="no-padding">
-                  <q-list  class="no-padding">
+                  <q-list no-border class="no-padding">
                     <uploadLeadDocumentsComponent
                       v-if="formData.shortLead.documentUploadedType == 1 && formData.shortLead.kyc === false"
                       class="full-width text-body1 no-padding"
@@ -467,20 +483,23 @@
         <div class="col-md-12" align="right">
           <q-btn
             icon="block"
-            color="grey-5" class="class="q-ma-sm text-dark"
+            color="grey-5"
+            class="q-ma-sm text-dark"
             @click="$router.go(-1)"
             label="Cancel"
           />
           <q-btn
             icon="check"
-            color="tertiary" class="class="q-ma-sm"
+            color="tertiary"
+            class="q-ma-sm"
             @click="fnApproveLeadData(getShortLeadInfo)"
             label="Proceed to data entry"
           />
           <q-btn
             icon="clear"
             class="q-ma-sm"
-            color="negative" class="label="REJECT"
+            color="negative"
+            label="REJECT"
             @click="fnToggleRejectLeadComp(getShortLeadInfo)"
           />
         </div>

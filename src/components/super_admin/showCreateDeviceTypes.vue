@@ -9,7 +9,7 @@
     >
       <form>
         <div class="text-h6 text-weight-regular q-py-md bottom-border items-center">
-          <q-icon name="add_box" size="25px" color="purple-9"/>Add" class="Device
+          <q-icon name="add_box" size="25px" color="purple-9"/>Add Device
         </div>
         <div class="column-inline q-py-md gutter-sm items-center">
           <div>
@@ -18,7 +18,8 @@
               @blur="v$.formData.deviceName.$touch"
               :error="v$.formData.deviceName.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Device Type"
+              color="grey-9"
+              label="Device Type"
               placeholder="Device Type"
             />
           </div>
@@ -31,7 +32,8 @@
                   :error="v$.formData.colorCode.$error"
                   popover
                   label="Choose a role color"
-                  color="grey-9" class="/>
+                  color="grey-9"
+                />
               </div>
               <div class="col-auto">
                 <q-btn round :style="'background:'+formData.colorCode"/>
@@ -45,12 +47,13 @@
               @blur="v$.formData.serialNumberLength.$touch"
               :error="v$.formData.serialNumberLength.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Serial Number Length"
+              color="grey-9"
+              label="Serial Number Length"
               placeholder="Serial Number Length"
             />
           </div>
           <div>
-            <q-radio v-for="(item, index) in device.flagOptions" :key="index" color="grey-9" class="v-model.trim="formData.isDevice"
+            <q-radio v-for="(item, index) in device.flagOptions" :key="index" color="grey-9" v-model.trim="formData.isDevice"
             @blur="v$.formData.isDevice.$touch"
               :error="v$.formData.isDevice.$error"
           :val="item.value" :label="item.label" />
@@ -61,14 +64,16 @@
               align="right"
               icon="block"
               class="text-weight-regular text-grey-8"
-              color="grey-6" @click="emitfnshowAddDeviceType()"
+              color="grey-6"
+              @click="emitfnshowAddDeviceType()"
               label="Cancel"
             />
             <q-btn
               align="right"
               icon="check"
               @click="fnfinalsubmitDeviceType(formData)"
-              color="purple-9" class="label="save"
+              color="purple-9"
+              label="save"
             />
           </div>
         </div>

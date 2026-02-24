@@ -39,7 +39,8 @@
                 clearable
                 v-model="filter"
                 separator
-                color="grey-9" class="placeholder="Type.."
+                color="grey-9"
+                placeholder="Type.."
                 label= "Search"
                 class="q-mr-lg q-py-sm"
                 />
@@ -49,7 +50,8 @@
           <!--END: table table aging pending/reject -->
         </div>
         <div class="col-md-7 col-sm-6 col-xs-12">
-          <q-card flat class="q-pa-xs" color="light-blue">" class="<div class="row items-center">
+          <q-card flat class="q-pa-xs" color="light-blue">
+            <div class="row items-center">
               <div class="col-md-3 col-sm-3 col-xs-6 q-pa-md" align="center" style="border-right:1px solid #cecece">
                 <q-icon size="30px" name="fas fa-money-check-alt"/>
               </div>
@@ -62,7 +64,7 @@
             </div>
           </q-card>
           <div class="items-center">
-            <q-list class="group" multiline 	>
+            <q-list class="group" multiline no-border	>
               <q-item class="q-pa-lg" multiline>
                 <q-item-section>
                   <q-item-label>
@@ -90,7 +92,7 @@
                 </q-item-section>
               </q-item>
               <q-item class="q-pa-lg items-center" multiline>
-                <q-item-section class="vertical-middle">
+                <q-item-section vertical-middle">
                   <q-item-label>
                     Revenue percentage from target
                   </q-item-label>

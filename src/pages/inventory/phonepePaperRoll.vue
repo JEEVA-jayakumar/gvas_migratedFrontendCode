@@ -4,26 +4,24 @@
       <q-tabs
         v-model="activeTab"
         class="shadow-1"
-        color="grey-1" class="@select="goToCompleteTab"
+        color="grey-1"
+        @select="goToCompleteTab"
       >
         <q-tab
           default
-          color="dark" class="name="tab-1"
+          color="dark"
+          name="tab-1"
 
           label="Pending Tickets"
         />
         <q-tab
-          color="dark" class="name="tab-2"
+          color="dark"
+          name="tab-2"
 
           label="Completed Tickets"
         />
-        <q-tab color="dark" class="name="tab-3"  label="RTO Tickets" />
-
-
-
-      </q-tabs>
-<q-tab-panels v-model="activeTab" animated>
-<q-tab-panel name="tab-1">
+        <q-tab color="dark" name="tab-3"  label="RTO Tickets" />
+        <q-tab-panel name="tab-1">
           <div class="row items-center">
             <div class="col">
               <strong>
@@ -34,7 +32,8 @@
               class="col"
               v-model.trim="formData.date"
               :options="dateType"
-              color="grey" class="@input="dateClick"
+              color="grey"
+              @input="dateClick"
             >
             </q-select>
 
@@ -42,7 +41,8 @@
             <q-input
               class="col-5"
               clearable
-              color="grey-9" v-model="filter"
+              color="grey-9"
+              v-model="filter"
               placeholder="Type.."
               label="Search By Ticket No, Merchant No..."
             />
@@ -116,12 +116,13 @@
             >
           </q-table>
         </q-tab-panel>
-<q-tab-panel name="tab-2">
+        <q-tab-panel name="tab-2">
           <div class="row">
             <q-input
               class="col-4"
               clearable
-              color="grey-9" v-model="filter1"
+              color="grey-9"
+              v-model="filter1"
               placeholder="Type.."
               label="Search By Ticket No, Merchant No..."
             />
@@ -172,12 +173,13 @@
             </q-td>
           </q-table>
         </q-tab-panel>
-<q-tab-panel name="tab-3">
+        <q-tab-panel name="tab-3">
           <div class="row">
             <q-input
               class="col-4"
               clearable
-              color="grey-9" v-model="filter2"
+              color="grey-9"
+              v-model="filter2"
               placeholder="Type.."
               label="Search By Ticket No, Merchant No..."
             />
@@ -222,7 +224,7 @@
             >
           </q-table>
         </q-tab-panel>
-</q-tab-panels>
+      </q-tabs>
     </div>
     <phonepePaperRollScan
       v-if="propToggleScan"
@@ -918,7 +920,9 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              error.body.message == null
+                ? "Please Try Again Later !"
+                : error.body.message,
             icon: "thumb_down"
           });
         });
@@ -966,20 +970,20 @@ export default {
           console.log("REQUEST", request.serviceReqTicketId);
           this.PHONEPE_PAPER_ROLL_SUBMIT(request.serviceReqTicketId).then(
             response => {
-              console.log("RSPONSE", response.data.message);
+              console.log("RSPONSE", response.body.message);
               //
-              if (response.data.data != null) {
+              if (response.body.data != null) {
                 this.$q.notify({
                   color: "positive",
                   position: "bottom",
-                  message: response.data.message,
+                  message: response.body.message,
                   icon: "thumb_up"
                 });
               } else {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
-                  message: response.data.message,
+                  message: response.body.message,
                   icon: "thumb_down"
                 });
               }
@@ -1019,7 +1023,9 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              error.body.message == null
+                ? "Please Try Again Later !"
+                : error.body.message,
             icon: "thumb_down"
           });
         });

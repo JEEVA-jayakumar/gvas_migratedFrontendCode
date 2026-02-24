@@ -21,7 +21,8 @@
               @blur="v$.formData.sourceName.$touch"
               :error="v$.formData.sourceName.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Lead Source"
+              color="grey-9"
+              label="Lead Source"
               placeholder="Lead Source"
               @keyup.enter="submitLeadSourceData(formData)"
             />
@@ -32,7 +33,8 @@
               @blur="v$.formData.sourceCode.$touch"
               :error="v$.formData.sourceCode.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Enter Source Code"
+              color="grey-9"
+              label="Enter Source Code"
               placeholder="Enter Source Code"
               @keyup.enter="submitLeadSourceData(formData)"
               
@@ -45,7 +47,8 @@
                     :error="v$.formData.multiTidEnabled.$error"
                     v-for="(item, index) in multiTidFlagOptions"
                     :key="index"
-                    color="grey-9" class="v-model.trim="formData.multiTidEnabled"
+                    color="grey-9"
+                    v-model.trim="formData.multiTidEnabled"
                     :val="item.value"
                     :label="item.label"
                   />
@@ -58,7 +61,8 @@
               @blur="v$.formData.baseTidMidPrefix.$touch"
               :error="v$.formData.baseTidMidPrefix.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Tid/Mid Prefix"
+              color="grey-9"
+              label="Tid/Mid Prefix"
               placeholder="Tid/Mid Prefix"
               @keyup.enter="submitLeadSourceData(formData)"
             />
@@ -70,7 +74,8 @@
               @blur="v$.formData.lastBaseTid.$touch"
               :error="v$.formData.lastBaseTid.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="last Base Tid"
+              color="grey-9"
+              label="last Base Tid"
               placeholder="last Base Tid"
               @keyup.enter="submitLeadSourceData(formData)"
             />
@@ -82,7 +87,8 @@
               @blur="v$.formData.lastBaseMid.$touch"
               :error="v$.formData.lastBaseMid.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="last Base Mid"
+              color="grey-9"
+              label="last Base Mid"
               placeholder="last Base Mid"
               @keyup.enter="submitLeadSourceData(formData)"
             />
@@ -96,7 +102,8 @@
               class="bg-white text-weight-regular text-grey-8"
               @click="toggleModal()"
             >Cancel</q-btn>
-            <q-btn align="right" @click="submitLeadSourceData(formData)" color="purple-9">Save</q-btn>" class="</div>
+            <q-btn align="right" @click="submitLeadSourceData(formData)" color="purple-9">Save</q-btn>
+          </div>
         </div>
       </form>
     </q-dialog>
@@ -195,7 +202,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

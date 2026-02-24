@@ -21,17 +21,18 @@
                           <label>Request Mode</label>
                       </b>
                       <div class="col-md-2 col-sm-6 col-xs-6">
-                          <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9" class="v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                          <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                              v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
                       </div>
                   </div>
                   <!-- <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6"/> -->
                       <!-- <div>
-                      <q-select v-model="formData.assignTo.id" separator color="grey-9" class=":options="assignToOptions"
+                      <q-select v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
                           placeholder="Assign To" />
 
                   </div> -->
                   <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
-                      <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" class=":options="assignToOptions"
+                      <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
                           placeholder="Assign To" />
                   </div>
                   <div class="col-md-3 col-sm-6 col-xs-6" align="right">
@@ -51,26 +52,21 @@
               </div>
           </q-card>
           <!--END: table Footer -->
-          <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" class="@select="goToUnassignedTab">
-              <q-tab default color="dark" class="name="unAssigned"  label="Unassigned" />
-              <q-tab color="dark" class="name="assigned"  label="Assigned" />
+          <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToUnassignedTab">
+              <q-tab default color="dark" name="unAssigned"  label="Unassigned" />
+              <q-tab color="dark" name="assigned"  label="Assigned" />
               <!--
-              <q-tab color="dark" class="name="opened"  label="Opened" />
-              <q-tab color="dark" class="name="closed"  label="Closed" /> -->
+              <q-tab color="dark" name="opened"  label="Opened" />
+              <q-tab color="dark" name="closed"  label="Closed" /> -->
               <!--
-                 -->
-
-
-          </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="opened">
+                <q-tab-panel name="opened">
             <opened/>
-          </q-tab-panel>
-<q-tab-panel name="unAssigned">
+          </q-tab-panel> -->
+              <q-tab-panel name="unAssigned">
                   <q-table :rows="tableData3" :columns="columnDataUnassigned" table-class="customTableClass"
                       :filter="filterSearch1" selection="multiple" :selected="formData.marsDeviceIdsCooked"
                       v-model:pagination="paginationControl1" row-key="id" :loading="tableAjaxLoading1"
-                      :rows-per-page-options="[5, 10, 15, 20]" color="dark" class="@request="ajaxLoadAllLeadInfo1">
+                      :rows-per-page-options="[5, 10, 15, 20]" color="dark" @request="ajaxLoadAllLeadInfo1">
 
                       <q-td v-slot:body-cell-serviceReqTicketId="props" :props="props"
                           class="cursor-pointer" @click.native="toggleServiceRequest(props.row)">
@@ -125,11 +121,11 @@
                       </template>
                   </q-table>
               </q-tab-panel>
-<q-tab-panel name="assigned">
+              <q-tab-panel name="assigned">
                   <q-table :rows="tableData1" :columns="columnDataAssigned" table-class="customTableClass"
                       :filter="filterSearch" :pagination="paginationControl"
                       v-model:selected="formData.marsDeviceIdsCookedUnAssinged" row-key="id" :loading="tableAjaxLoading"
-                      :rows-per-page-options="[5, 10, 15, 20]" color="dark" class="@request="ajaxLoadAllLeadInfo">
+                      :rows-per-page-options="[5, 10, 15, 20]" color="dark" @request="ajaxLoadAllLeadInfo">
 
                       <!--START: table header -->
                       <q-tr v-slot:top-row="props">
@@ -429,7 +425,7 @@
                       </template>
                   </q-table>
               </q-tab-panel>
-</q-tab-panels>
+          </q-tabs>
           <div class="row items-center gutter-y-sm">
               <div class="col-md-9 col-sm-12 col-xs-12">
                   <div class="row items-center"></div>

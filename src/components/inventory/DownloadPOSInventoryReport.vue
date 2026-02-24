@@ -23,7 +23,8 @@
               @click="emitfnshowDeviceHistory()">
               Cancel
             </q-btn>
-            <q-btn align="right" @click="downloadHistory(formData)" :disabled="submitDisabled" color="purple-9">" class="Download
+            <q-btn align="right" @click="downloadHistory(formData)" :disabled="submitDisabled" color="purple-9">
+              Download
             </q-btn>
           </div>
         </div>

@@ -6,7 +6,8 @@
           @blur="v$.merchant.salesInformation.institutionCode.$touch"
           :error="v$.merchant.salesInformation.institutionCode.$error"
           placeholder="Choose from the below"
-          color="grey-9" v-model="merchant.salesInformation.institutionCode"
+          color="grey-9"
+          v-model="merchant.salesInformation.institutionCode"
           label="Institution Code*"
           :options="[{
             label: 'GPRS',
@@ -19,7 +20,8 @@
           @blur="v$.merchant.salesInformation.applicationType.$touch"
           :error="v$.merchant.salesInformation.applicationType.$error"
           placeholder="Choose from the below*"
-          color="grey-9" v-model="merchant.salesInformation.applicationType"
+          color="grey-9"
+          v-model="merchant.salesInformation.applicationType"
           label="Application Type*"
           :options="applicationTypeOptions"
         />
@@ -28,7 +30,8 @@
         <q-input
           @blur="v$.merchant.salesInformation.applicationNumber.$touch"
           :error="v$.merchant.salesInformation.applicationNumber.$error"
-          color="grey-9" v-model="merchant.salesInformation.applicationNumber"
+          color="grey-9"
+          v-model="merchant.salesInformation.applicationNumber"
           label="Application Number*"
           placeholder="Application Number*"
         />
@@ -36,7 +39,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           modal
-          color="grey-9" class="format="DD/MM/YYYY"
+          color="grey-9"
+          format="DD/MM/YYYY"
           label="Application Date*"
           placeholder="Application Date*"
           @blur="v$.merchant.salesInformation.applicationDate.$touch"
@@ -47,7 +51,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           modal
-          color="grey-9" class="format="DD/MM/YYYY"
+          color="grey-9"
+          format="DD/MM/YYYY"
           @blur="v$.merchant.salesInformation.aggreementDate.$touch"
           :error="v$.merchant.salesInformation.aggreementDate.$error"
           v-model="merchant.salesInformation.aggreementDate"
@@ -60,7 +65,8 @@
           @blur="v$.merchant.salesInformation.merchantType.$touch"
           :error="v$.merchant.salesInformation.merchantType.$error"
           placeholder="Choose from the below*"
-          color="grey-9" v-model="merchant.salesInformation.merchantType"
+          color="grey-9"
+          v-model="merchant.salesInformation.merchantType"
           label="Merchant Type*"
           :options="merchantTypeOptions"
         />
@@ -70,7 +76,8 @@
           @blur="v$.merchant.salesInformation.categoryType.$touch"
           :error="v$.merchant.salesInformation.categoryType.$error"
           placeholder="Choose from the below*"
-          color="grey-9" v-model="merchant.salesInformation.categoryType"
+          color="grey-9"
+          v-model="merchant.salesInformation.categoryType"
           label="Category Type*"
           :options="categoryTypeOptions"
         />
@@ -78,7 +85,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
           placeholder="Choose from the below*"
-          color="grey-9" class="@blur="v$.merchant.salesInformation.salesPersonCode.$touch"
+          color="grey-9"
+          @blur="v$.merchant.salesInformation.salesPersonCode.$touch"
           :error="v$.merchant.salesInformation.salesPersonCode.$error"
           v-model="merchant.salesInformation.salesPersonCode"
           label="Sales Person*"
@@ -88,7 +96,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
           placeholder="Choose from the below*"
-          color="grey-9" class="@blur="v$.merchant.salesInformation.region.$touch"
+          color="grey-9"
+          @blur="v$.merchant.salesInformation.region.$touch"
           :error="v$.merchant.salesInformation.region.$error"
           v-model="merchant.salesInformation.region"
           label="Region*"
@@ -98,7 +107,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
           placeholder="Choose from the below*"
-          color="grey-9" class="@blur="v$.merchant.salesInformation.leadFrom.$touch"
+          color="grey-9"
+          @blur="v$.merchant.salesInformation.leadFrom.$touch"
           :error="v$.merchant.salesInformation.leadFrom.$error"
           v-model="merchant.salesInformation.leadFrom"
           label="Lead From*"
@@ -109,7 +119,8 @@
         <p class="text-caption">Sharing Model</p>
         <div v-for="(item,index) in viewBinding.sharingModelCode" :key="index">
           <q-radio
-            color="grey-9" v-model="merchant.salesInformation.sharingModelCode"
+            color="grey-9"
+            v-model="merchant.salesInformation.sharingModelCode"
             :val="item.value"
             :label="item.label"
           />
@@ -123,7 +134,8 @@
           @blur="v$.merchant.salesInformation.sharingPartnerCode.$touch"
           :error="v$.merchant.salesInformation.sharingPartnerCode.$error"
           placeholder="Choose from the below*"
-          color="grey-9" v-model="merchant.salesInformation.sharingPartnerCode"
+          color="grey-9"
+          v-model="merchant.salesInformation.sharingPartnerCode"
           label="Sharing partner*"
           :options="sharingPartnerOptions"
         />
@@ -132,7 +144,8 @@
         <q-input
           @blur="v$.merchant.salesInformation.dailyFixedAmount.$touch"
           :error="v$.merchant.salesInformation.dailyFixedAmount.$error"
-          color="grey-9" v-model="merchant.salesInformation.dailyFixedAmount"
+          color="grey-9"
+          v-model="merchant.salesInformation.dailyFixedAmount"
           label="Daily fixed amount*"
           type="number"
           placeholder="Daily fixed amount*"
@@ -142,7 +155,8 @@
         <q-input
           @blur="v$.merchant.salesInformation.loanDisbursementPercentage.$touch"
           :error="v$.merchant.salesInformation.loanDisbursementPercentage.$error"
-          color="grey-9" v-model="merchant.salesInformation.loanDisbursementPercentage"
+          color="grey-9"
+          v-model="merchant.salesInformation.loanDisbursementPercentage"
           label="Percentage*"
           type="number"
           placeholder="Percentage*"
@@ -154,7 +168,8 @@
           format-model="date"
           @blur="v$.merchant.salesInformation.loanDisbursementAmount.$touch"
           :error="v$.merchant.salesInformation.loanDisbursementAmount.$error"
-          color="grey-9" v-model="merchant.salesInformation.loanDisbursementAmount"
+          color="grey-9"
+          v-model="merchant.salesInformation.loanDisbursementAmount"
           label="Loan disbursement value*"
           type="number"
           placeholder="Loan disbursement value*"
@@ -166,7 +181,8 @@
           format-model="date"
           @blur="v$.merchant.salesInformation.loanDisbursementDate.$touch"
           :error="v$.merchant.salesInformation.loanDisbursementDate.$error"
-          color="grey-9" class="minimal
+          color="grey-9"
+          minimal
           v-model="merchant.salesInformation.loanDisbursementDate"
           label="Disbursement Date*"
           placeholder="Disbursement Date*"
@@ -176,7 +192,8 @@
         <q-input
           @blur="v$.merchant.salesInformation.tenureMonth.$touch"
           :error="v$.merchant.salesInformation.tenureMonth.$error"
-          color="grey-9" v-model="merchant.salesInformation.tenureMonth"
+          color="grey-9"
+          v-model="merchant.salesInformation.tenureMonth"
           label="Tenure (in months)*"
           type="number"
           placeholder="Tenure (in months)*"
@@ -186,7 +203,8 @@
         <q-input
           @blur="v$.merchant.salesInformation.tenureDay.$touch"
           :error="v$.merchant.salesInformation.tenureDay.$error"
-          color="grey-9" v-model="merchant.salesInformation.tenureDay"
+          color="grey-9"
+          v-model="merchant.salesInformation.tenureDay"
           label="Tenure (in days)*"
           type="number"
           placeholder="Tenure (in days)*"
@@ -198,7 +216,8 @@
           format-model="date"
           @blur="v$.merchant.salesInformation.tenureStartDate.$touch"
           :error="v$.merchant.salesInformation.tenureStartDate.$error"
-          color="grey-9" class="minimal
+          color="grey-9"
+          minimal
           v-model="merchant.salesInformation.tenureStartDate"
           label="Start Date*"
           placeholder="Tenure Start Date*"
@@ -212,7 +231,8 @@
           @blur="v$.merchant.salesInformation.sharingPartnerCode.$touch"
           :error="v$.merchant.salesInformation.sharingPartnerCode.$error"
           placeholder="Choose from the below*"
-          color="grey-9" v-model="merchant.salesInformation.sharingPartnerCode"
+          color="grey-9"
+          v-model="merchant.salesInformation.sharingPartnerCode"
           label="Sharing partner*"
           :options="sharingPartnerOptions"
         />
@@ -221,7 +241,8 @@
         <q-input
           @blur="v$.merchant.salesInformation.rentPercentage.$touch"
           :error="v$.merchant.salesInformation.rentPercentage.$error"
-          color="grey-9" v-model="merchant.salesInformation.rentPercentage"
+          color="grey-9"
+          v-model="merchant.salesInformation.rentPercentage"
           label="Rent %*"
           type="number"
           placeholder="Rent %*"
@@ -231,7 +252,8 @@
         <q-input
           @blur="v$.merchant.salesInformation.rentFixed.$touch"
           :error="v$.merchant.salesInformation.rentFixed.$error"
-          color="grey-9" v-model="merchant.salesInformation.rentFixed"
+          color="grey-9"
+          v-model="merchant.salesInformation.rentFixed"
           label="Rent fixed*"
           type="number"
           placeholder="Rent fixed*"
@@ -239,9 +261,10 @@
       </div>
     </div>
     <q-stepper-navigation>
-      <q-btn color="primary" class="class="q-ma-xs" icon="check" @click="validate" label="Continue" />
+      <q-btn color="primary" class="q-ma-xs" icon="check" @click="validate" label="Continue" />
       <q-btn
-        color="amber-10" class="class="q-ma-xs"
+        color="amber-10"
+        class="q-ma-xs"
         icon="save"
         label="Save Partial"
         @click="$emit('saveData','salesInformation',merchant, {mdrCode:mdrCode,customStepper: false})"

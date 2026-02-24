@@ -36,7 +36,8 @@
               highlight
               push
               class="remarksbtn"
-              color="purple-9" size="sm"
+              color="purple-9"
+              size="sm"
               @click="fnReassignData(formData.qrShortLead)"
               >Remarks</q-btn
             >
@@ -54,7 +55,7 @@
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list separator  class="no-padding text-body1">
+                  <q-list separator no-border class="no-padding text-body1">
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>Application Number</q-item-section>
                       <q-input
@@ -361,7 +362,8 @@
                           @blur="validatePincode"
                           style="width: 220px"
                           clearable
-                          color="grey-9" class="v-model.trim="formData.qrShortLead.pincode"
+                          color="grey-9"
+                          v-model.trim="formData.qrShortLead.pincode"
                           label="Pincode"
                           placeholder="Pincode"
                         >
@@ -410,7 +412,8 @@
                           :error="v$.formData.qrShortLead.state.$error"
                           @blur="validateStateInput"
                           style="width: 220px"
-                          color="grey-9" v-model="formData.qrShortLead.state"
+                          color="grey-9"
+                          v-model="formData.qrShortLead.state"
                           label="State*"
                         >
                           <q-autocomplete
@@ -450,7 +453,8 @@
                           @blur="validateCityInput"
                           :error="v$.formData.qrShortLead.city.$error"
                           style="width: 220px"
-                          color="grey-9" v-model="formData.qrShortLead.city"
+                          color="grey-9"
+                          v-model="formData.qrShortLead.city"
                           label="City*"
                         >
                           <q-autocomplete
@@ -523,7 +527,8 @@
                             .$error
                         "
                         style="width: 220px"
-                        color="grey-9" v-model="
+                        color="grey-9"
+                        v-model="
                           formData.qrShortLead.merchantIndustry.industryName
                         "
                         label="MCC*"
@@ -673,7 +678,8 @@
                             v$.formData.qrShortLead.salesPersonName.$error
                           "
                           style="width: 220px"
-                          color="grey-9" v-model="formData.qrShortLead.salesPersonName"
+                          color="grey-9"
+                          v-model="formData.qrShortLead.salesPersonName"
                           label="Sales Person*"
                           :options="dropDown.salesPersonOptions"
                           @selected="salesSelected"
@@ -703,7 +709,8 @@
                         @blur="v$.formData.qrShortLead.regionCode.$touch"
                         :error="v$.formData.qrShortLead.regionCode.$error"
                         style="width: 220px"
-                        color="grey-9" v-model="formData.qrShortLead.regionCode"
+                        color="grey-9"
+                        v-model="formData.qrShortLead.regionCode"
                         label="Region*"
                         :options="regionOptions"
                         @selected="regionSelected"
@@ -728,7 +735,7 @@
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list separator  class="no-padding text-body1">
+                  <q-list separator no-border class="no-padding text-body1">
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
@@ -792,7 +799,8 @@
                             v$.formData.qrShortLead.personalInfoCity.$error
                           "
                           style="width: 220px"
-                          color="grey-9" v-model="formData.qrShortLead.personalInfoCity"
+                          color="grey-9"
+                          v-model="formData.qrShortLead.personalInfoCity"
                           label="City*"
                         >
                           <q-autocomplete
@@ -833,7 +841,8 @@
                           :error="v$.formData.qrShortLead.personalInfoState.$error"
                           @blur="validatePersonalStateInput"
                           style="width: 220px"
-                          color="grey-9" v-model="formData.qrShortLead.personalInfoState"
+                          color="grey-9"
+                          v-model="formData.qrShortLead.personalInfoState"
                           label="State*"
                         >
                           <q-autocomplete
@@ -880,7 +889,8 @@
                           @blur="validatePin"
                           style="width: 220px"
                           clearable
-                          color="grey-9" class="v-model.trim="
+                          color="grey-9"
+                          v-model.trim="
                             formData.qrShortLead.personalInfoPincode
                           "
                           label="Pincode*"
@@ -1220,7 +1230,7 @@
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list separator  class="no-padding text-body1">
+                  <q-list separator no-border class="no-padding text-body1">
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>Business Hours WeekDay Start</q-item-section>
                       <q-input
@@ -1407,7 +1417,7 @@
                 </q-card-section>
 
                 <q-card-section class="q-pa-sm">
-                  <q-list separator  class="no-padding text-body1">
+                  <q-list separator no-border class="no-padding text-body1">
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>SO Rental Plan Name</q-item-section>
                       <q-input
@@ -1435,7 +1445,8 @@
                           :error="
                             v$.formData.qrShortLead.marsRentalPlanName.$error
                           "
-                          color="grey-9" class="style="width: 220px"
+                          color="grey-9"
+                          style="width: 220px"
                           v-model="formData.qrShortLead.marsRentalPlanName"
                           :options="dropDown.rentalplan"
                           label="Select Plan*"
@@ -1470,7 +1481,8 @@
                           @blur="v$.formData.qrShortLead.rentalMode.$touch"
                           :error="v$.formData.qrShortLead.rentalMode.$error"
                           placeholder="Choose from the below*"
-                          color="grey-9" class="style="width: 220px"
+                          color="grey-9"
+                          style="width: 220px"
                           v-model="formData.qrShortLead.rentalMode"
                           label="Rental Mode*"
                           :options="rentalModeOptions"
@@ -1504,7 +1516,8 @@
                     :error="v$.formData.qrShortLead.rentalType.$error"
                     v-for="(item, index) in rentalTypeOptions"
                     :key="index"
-                    color="grey-9" class="style="width: 103px"
+                    color="grey-9"
+                    style="width: 103px"
                     v-model="formData.qrShortLead.rentalType"
                     :val="item.value"
                     :label="item.label"
@@ -1578,7 +1591,7 @@
                 </q-card-section>
 
                 <q-card-section class="q-pa-sm">
-                  <q-list separator  class="no-padding text-body1">
+                  <q-list separator no-border class="no-padding text-body1">
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>Merchant Category</q-item-section>
                       <q-input
@@ -1924,7 +1937,7 @@
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list separator  class="no-padding text-body1">
+                  <q-list separator no-border class="no-padding text-body1">
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>Cheque Number</q-item-section>
                       <q-input
@@ -1977,7 +1990,7 @@
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list separator  class="no-padding text-body1">
+                  <q-list separator no-border class="no-padding text-body1">
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
@@ -2155,7 +2168,7 @@
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list separator  class="no-padding text-body1">
+                  <q-list separator no-border class="no-padding text-body1">
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
@@ -2228,7 +2241,7 @@
               >
             </q-card-section>
             <q-card-section class="no-padding">
-              <q-list  class="no-padding">
+              <q-list no-border class="no-padding">
                 <viewQrLeadDocument
                   v-if="formData.qrShortLead.qrLeadStatus == 4 || 9"
                   v-model:propLeadDocumentInformation="
@@ -2244,7 +2257,8 @@
         </div>
         <div v-if="formData.qrShortLead.qrLeadCategory">
           <q-banner
-            color="purple-9" class="icon="notifications_active"
+            color="purple-9"
+            icon="notifications_active"
             enter="bounceInLeft"
             leave="bounceOutRight"
             appear
@@ -2258,25 +2272,29 @@
           <q-stepper-navigation>
             <q-btn
               icon="arrow_back"
-              color="dark" class="class="q-ma-xs"
+              color="dark"
+              class="q-ma-xs"
               @click="$router.go(-1)"
               label="Back"
             />
             <q-btn
               icon="clear"
               class="q-ma-xs"
-              color="negative" class="label="REJECT"
+              color="negative"
+              label="REJECT"
               @click="fnToggleQrRejectLeadComp()"
             />
             <q-btn
               :disable="formData.qrShortLead.qrLeadStatus == 9"
-              color="blue" class="class="q-ma-xs"
+              color="blue"
+              class="q-ma-xs"
               icon="inbox"
               label="Refer Back"
               @click="referBackAndEnableProceed"
             />
             <q-btn
-              color="amber-10" class="class="q-ma-xs"
+              color="amber-10"
+              class="q-ma-xs"
               icon="inbox"
               label="Save Partial"
               @click="savePartialAndEnableProceed"
@@ -2289,7 +2307,8 @@
               :disable="this.flag || !partialSaved"
               icon="send"
               class="q-ma-xs"
-              color="green" class="label="Proceed To mars"
+              color="green"
+              label="Proceed To mars"
               @click="documentValidation()"
             />
             <q-btn
@@ -2297,7 +2316,8 @@
               :disable="this.flag || !partialSaved"
               icon="send"
               class="q-ma-xs"
-              color="green" class="label="Proceed To mars"
+              color="green"
+              label="Proceed To mars"
               @click="proceedToMars()"
             />
             <q-btn
@@ -2305,7 +2325,8 @@
               :disable="!partialSaved"
               icon="send"
               class="q-ma-xs"
-              color="green" class="label="Proceed To mars"
+              color="green"
+              label="Proceed To mars"
               @click="documentValidation()"
             />
           </q-stepper-navigation>
@@ -4049,7 +4070,7 @@ loadUpdate(){
         plan: this.propLeadDeatils.plan.id
       };
       this.DEVICE_MODEL_FROM_MARS(param).then(response => {
-        let obj = response.data.data.marsDeviceModel;
+        let obj = response.body.data.marsDeviceModel;
         this.terminalModelSet = [];
         this.terminalModelSet.push({
           label: obj.name,
@@ -4338,7 +4359,7 @@ loadUpdate(){
                   merchantRefCode: this.propLeadDeatils.merchantRefCode
                 };
               } else {
-                feed_paramaters = response.data;
+                feed_paramaters = response.body;
               }
               this.PROCEED_TO_MARS({
                 request: feed_paramaters,
@@ -4401,7 +4422,7 @@ loadUpdate(){
                   merchantRefCode: this.propLeadDeatils.merchantRefCode
                 };
               } else {
-                feed_paramaters = response.data;
+                feed_paramaters = response.body;
               }
               this.PROCEED_TO_MARS({
                 request: feed_paramaters,
@@ -4796,7 +4817,9 @@ loadUpdate(){
               color: "negative",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                error.body.message == null
+                  ? "Please Try Again Later !"
+                  : error.body.message,
               icon: "thumb_down"
             });
           });
@@ -4840,7 +4863,9 @@ loadUpdate(){
               color: "negative",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                error.body.message == null
+                  ? "Please Try Again Later !"
+                  : error.body.message,
               icon: "thumb_down"
             });
           });
@@ -4891,7 +4916,9 @@ loadUpdate(){
               color: "negative",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                error.body.message == null
+                  ? "Please Try Again Later !"
+                  : error.body.message,
               icon: "thumb_down"
             });
           });

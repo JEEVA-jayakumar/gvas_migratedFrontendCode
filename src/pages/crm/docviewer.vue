@@ -9,7 +9,8 @@
           <q-input
             clearable
             @clear="fnClearing"
-            color="grey-9" class="@blur="v$.formData.searchTerm.$touch"
+            color="grey-9"
+            @blur="v$.formData.searchTerm.$touch"
             :error="v$.formData.searchTerm.$error"
             v-model="formData.searchTerm"
             placeholder="Type.."
@@ -19,7 +20,7 @@
         </div>
         <div class="col-md-3">
           <div class="group">
-            <q-radio v-for="(item, index) in flagOptions" :key="index" color="grey-9" class="v-model.trim="formData.flag" :val="item.value" :label="item.label"/>
+            <q-radio v-for="(item, index) in flagOptions" :key="index" color="grey-9" v-model.trim="formData.flag" :val="item.value" :label="item.label"/>
           </div>
         </div>
         <div class="col-md-2">
@@ -43,7 +44,7 @@
         <q-td v-slot:body-cell-viewDocument="props" :props="props">
           <div v-if="props.row.implementationFormMimeType == null || props.row.implementationFormMimeType.includes('application/pdf')" class="cursor-pointer">
             <div @click="fnPDFViewModal(props.row.implementationForm)">
-              <q-icon name="fas fa-file-pdf" color="primary" class="/>
+              <q-icon name="fas fa-file-pdf" color="primary" />
             </div>
           </div>
           <div v-else-if="props.row.implementationFormMimeType == null || props.row.implementationFormMimeType.includes('image/*')" class="cursor-pointer">
@@ -62,7 +63,7 @@
             class="cursor-pointer"
           >
             <div @click="fnPDFViewModal(props.row.pictureOfShop)">
-              <q-icon name="fas fa-file-pdf" color="primary" class="/>
+              <q-icon name="fas fa-file-pdf" color="primary" />
             </div>
           </div>
           <div v-else-if="props.row.pictureOfShopMimeType == null || props.row.pictureOfShopMimeType.includes('image/*')" class="cursor-pointer">
@@ -81,7 +82,7 @@
             class="cursor-pointer"
           >
             <div @click="fnPDFViewModal(props.row.cpvForm)">
-              <q-icon name="fas fa-file-pdf" color="primary" class="/>
+              <q-icon name="fas fa-file-pdf" color="primary" />
             </div>
           </div>
           <div v-else-if="props.row.cpvFormMimeType == null ||props.row.cpvFormMimeType.includes('image/*')" class="cursor-pointer">
@@ -116,7 +117,7 @@
             class="cursor-pointer"
           >
             <div @click="fnPDFViewModal(props.row.pictureOfShop)">
-              <q-icon name="fas fa-file-pdf" color="primary" class="/>
+              <q-icon name="fas fa-file-pdf" color="primary" />
             </div>
           </div>
           <div v-else-if="props.row.pictureOfShopMimeType == null || props.row.pictureOfShopMimeType.includes('image/*')" class="cursor-pointer">
@@ -134,7 +135,7 @@
             class="cursor-pointer"
           >
             <div @click="fnPDFViewModal(props.row.implementationForm)">
-              <q-icon name="fas fa-file-pdf" color="primary" class="/>
+              <q-icon name="fas fa-file-pdf" color="primary" />
             </div>
           </div>
           <div v-else-if="props.row.implementationFormMimeType == null ||props.row.implementationFormMimeType.includes('image/*')" class="cursor-pointer">
@@ -365,7 +366,7 @@ export default {
                   this.$q.notify({
                     color: "negative",
                     position: "bottom",
-                    message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                    message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                     icon: "thumb_down"
                   });
               });
@@ -385,7 +386,7 @@ export default {
                     this.$q.notify({
                       color: "negative",
                       position: "bottom",
-                      message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                      message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                       icon: "thumb_down"
                     });
                   });
@@ -407,7 +408,7 @@ export default {
           this.$q.notify({
           color: "negative",
           position: "bottom",
-          message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+          message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
           icon: "thumb_down"
           });
           this.toggleAjaxLoadFilter = false;
@@ -438,7 +439,7 @@ export default {
           this.$q.notify({
           color: "negative",
           position: "bottom",
-          message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+          message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
           icon: "thumb_down"
           });
           this.$q.loading.hide();
@@ -468,7 +469,7 @@ export default {
           this.$q.notify({
           color: "negative",
           position: "bottom",
-          message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+          message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
           icon: "thumb_down"
           });
           this.$q.loading.hide();

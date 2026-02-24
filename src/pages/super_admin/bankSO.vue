@@ -8,7 +8,8 @@
           no-wrap
           label="Upload Bank List"
           class="q-mt-lg text-weight-regular"
-          color="purple-9" class="icon="add"
+          color="purple-9"
+          icon="add"
           size="md"
           @click="
 fnShowCreateUploadFile()"
@@ -16,7 +17,8 @@ fnShowCreateUploadFile()"
         <!-- <q-btn
           icon="cloud_upload"
           class="q-ma-sm"
-          color="positive" class="label="Upload Bank List"
+          color="positive"
+          label="Upload Bank List"
           @click="fnUploadDocumentAndSubmit"
         />-->
       </div>
@@ -32,7 +34,8 @@ fnShowCreateUploadFile()"
                 @blur="v$.formData.location.$touch"
                 :error="v$.formData.location.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*Location"
+                color="grey-9"
+                label="*Location"
                 placeholder="Location"
               />
             </div>
@@ -51,7 +54,8 @@ fnShowCreateUploadFile()"
               <q-input
                 v-model.trim="formData.branch_code"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="@blur="v$.formData.branch_code.$touch"
+                color="grey-9"
+                @blur="v$.formData.branch_code.$touch"
                 :error="v$.formData.branch_code.$error"
                 label="*Branch_Code"
                 placeholder="Branch_Code"
@@ -64,7 +68,8 @@ fnShowCreateUploadFile()"
                 @blur="v$.formData.so_name.$touch"
                 :error="v$.formData.so_name.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*So_Name"
+                color="grey-9"
+                label="*So_Name"
                 placeholder="So_Name"
               />
             </div>
@@ -75,7 +80,8 @@ fnShowCreateUploadFile()"
                 @blur="v$.formData.mail_id.$touch"
                 :error="v$.formData.mail_id.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*Mail_Id"
+                color="grey-9"
+                label="*Mail_Id"
                 placeholder="Mail_Id"
               />
             </div>
@@ -85,7 +91,8 @@ fnShowCreateUploadFile()"
                 @blur="v$.formData.emp_id.$touch"
                 :error="v$.formData.emp_id.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*Emp_Id"
+                color="grey-9"
+                label="*Emp_Id"
                 placeholder="Emp_Id"
               />
             </div>
@@ -95,7 +102,8 @@ fnShowCreateUploadFile()"
                 @blur="v$.formData.bank_enable.$touch"
                 :error="v$.formData.bank_enable.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="Bank_Enable"
+                color="grey-9"
+                label="Bank_Enable"
                 placeholder="Bank_Enable"
                 :options="selectBankEnableOptions"
               />
@@ -107,7 +115,8 @@ fnShowCreateUploadFile()"
         <q-btn
           size="md"
           type="button"
-          color="purple-9" @click="fnSubmitBankDetails(formData)"
+          color="purple-9"
+          @click="fnSubmitBankDetails(formData)"
         >Submit</q-btn>
       </div>
     </form>

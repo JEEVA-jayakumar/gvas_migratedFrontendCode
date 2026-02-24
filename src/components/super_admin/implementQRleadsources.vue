@@ -12,7 +12,8 @@
             <q-item>
               <q-item-section>
                 <q-select
-                  color="grey-9" v-model="formData.leadSource"
+                  color="grey-9"
+                  v-model="formData.leadSource"
                   :options="dropDown.leadSourceOptions"
                   label="Select Lead bank"
                 />
@@ -23,7 +24,8 @@
                   no-caps
                   size="md"
                   @click="fnAddLeadSource(formData)"
-                  color="purple-9" class="label="Add Lead Source"
+                  color="purple-9"
+                  label="Add Lead Source"
                   class="no-margin"
                 />
               </q-item-section>

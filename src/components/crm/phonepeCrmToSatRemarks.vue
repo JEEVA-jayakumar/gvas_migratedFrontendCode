@@ -16,7 +16,8 @@
             size="sm"
             @click="emitToggleRemarks"
             outline
-            color="dark" class="icon="clear"
+            color="dark"
+            icon="clear"
           />
         </div>
       </div>  
@@ -48,7 +49,8 @@
               <div class="row q-gutter-sm" style="display: flex; justify-content: flex-end">
                 <q-btn
                   @click="fnsubmit(formData)"
-                  color="purple-9" class="icon="check"
+                  color="purple-9"
+                  icon="check"
                   label="Confirm"
                 />
           </div>
@@ -147,7 +149,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
             this.$q.loading.hide();

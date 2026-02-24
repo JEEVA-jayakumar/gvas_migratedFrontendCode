@@ -31,7 +31,7 @@
             </div>
             <div class="col-md-6">
 
-              <q-btn square outline color="purple-9" class="label="Download as Excel" class="q-mr-lg q-py-sm float-right"
+              <q-btn square outline color="purple-9" label="Download as Excel" class="q-mr-lg q-py-sm float-right"
                 size="md" @click="downloaddeviceHist" />
 
             </div>

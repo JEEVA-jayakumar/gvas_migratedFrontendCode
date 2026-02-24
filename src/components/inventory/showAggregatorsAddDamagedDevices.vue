@@ -3,14 +3,15 @@
     <div class="row items-center q-pa-md text-weight-regular bottom-border text-grey-9">
       <div class="col-md-8 text-h6 text-weight-regular text-grey-9">Aggregator Faulty Device</div>
       <!-- <div class="col-auto">
-        <q-btn round @click="$emit('emitRefreshList')" outline color="dark" class="icon="clear"/>
+        <q-btn round @click="$emit('emitRefreshList')" outline color="dark" icon="clear"/>
       </div> -->
       <div class="col-md-12 col-md-6 q-pt-md group" align="right">
           <q-btn
               @click="$router.push('/inventory/PhonepeInventory')"
               outline
               label="Cancel Allocation"
-              color="negative" class="/>
+              color="negative"
+            />
         </div>
     </div>
     <div class="q-pa-sm group">
@@ -23,12 +24,12 @@
         <div class="col-md-2">
           <q-select clearable  @clear="fnClearingDeviceTypeSelection"
             @input="fnSetDevicesByDeviceId" v-model="formData.device_type" label="Select Device Type"
-            color="grey-9" class=":options="deviceOptions" />
+            color="grey-9" :options="deviceOptions" />
         </div>
         <div class="col-12 col-lg-6 group" align="right">
           <q-btn :disabled="formData.device_type == ''" @click="openScannerComp()" v-if="scannerToggleOption"
-            color="light-blue" class="label="Start scan" />
-          <q-btn color="amber-9" class="class="q-py-xs" :disable="formData.scannedItems.length == 0" label="Send to repair"
+            color="light-blue" label="Start scan" />
+          <q-btn color="amber-9" class="q-py-xs" :disable="formData.scannedItems.length == 0" label="Send to repair"
             @click="toggleDamagedDevices()" />
         </div>
       </div>
@@ -36,7 +37,7 @@
       <div class="row text-weight-regular text-grey-9">
         <div class="col group" v-for="(item, index) in formData.scannedItems" :key="index">
           <q-card class="shadow-4">
-            <q-list separator>
+            <q-list highlight separator>
               <q-item-label header style="border-bottom: 1px solid #ccc;">
                 <q-icon style="color:#202c3f" name="fas fa-tablet-alt" />
                 {{ item.device.deviceName }}
@@ -53,7 +54,7 @@
                     :key="subIndex">
                     <q-item-section class="text-body1">{{ subItem }}</q-item-section>
                     <q-item-section>
-                      <q-btn round size="sm" color="negative" class="icon="clear"
+                      <q-btn round size="sm" color="negative" icon="clear"
                         @click="fnRemoveScannedItems(index, subIndex)" />
                     </q-item-section>
                   </q-item>

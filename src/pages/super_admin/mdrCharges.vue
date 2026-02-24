@@ -6,24 +6,23 @@
       <q-tabs
         v-model="selectedTab"
         class="shadow-1"
-        color="grey-1" class="@select="goToUnassignedTab"
+        color="grey-1"
+        @select="goToUnassignedTab"
       >
         <q-tab
           default
-          color="dark" class="name="active"
+          color="dark"
+          name="active"
 
           label="Active MDR"
         />
         <q-tab
-          color="dark" class="name="deactive"
+          color="dark"
+          name="deactive"
 
           label="Deactived MDR"
         />
-
-
-      </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="active">
+        <q-tab-panel name="active">
           <!--START: table Data -->
           <q-table
             :rows="activetableData"
@@ -35,7 +34,8 @@
             row-key="id"
             :loading="tableAjaxLoading"
             :rows-per-page-options="[5, 10, 15, 20]"
-            color="dark" class="@request="ajaxLoadAllLeadInfo"
+            color="dark"
+            @request="ajaxLoadAllLeadInfo"
           >
             <q-td
               v-slot:body-cell-leadSource="props"
@@ -255,7 +255,8 @@
                 no-wrap
                 no-caps
                 icon="fas fa-pencil-alt"
-                color="primary" @click="editMerchantDetails(props.row)"
+                color="primary"
+                @click="editMerchantDetails(props.row)"
                 :label="props.row.merchantCategory.merchantCategoryName"
                 class="capitalize"
               />
@@ -267,7 +268,8 @@
                   <div class="col-md-6">
                     <q-input
                       clearable
-                      color="grey-9" class="v-model.trim="filterSearch"
+                      color="grey-9"
+                      v-model.trim="filterSearch"
                       placeholder="Type.."
                       label="Search by Plan Name"
                     />
@@ -280,14 +282,15 @@
                   class="text-weight-regular"
                   @click="$router.push('/super/admin/manage/mdr/charges')"
                   label="Add New Mdr Charges"
-                  color="purple-9" size="md"
+                  color="purple-9"
+                  size="md"
                 />
               </div>
             </template>
           </q-table>
           <!--ENDv-model: table Data -->
         </q-tab-panel>
-<q-tab-panel name="deactive">
+        <q-tab-panel name="deactive">
           <!--START: table Data -->
           <q-table
             :rows="deActivetableData"
@@ -298,7 +301,8 @@
             row-key="id"
             :loading="tableAjaxLoading1"
             :rows-per-page-options="[5, 10, 15, 20]"
-            color="dark" class="@request="ajaxLoadAllLeadInfo1"
+            color="dark"
+            @request="ajaxLoadAllLeadInfo1"
           >
             <q-td
               v-slot:body-cell-leadSource="props"
@@ -361,7 +365,7 @@
             <q-td
               slot="body-cell-smallMerchantLessThanTwoDebit"
               align="center"
-              v-slot="props"
+              slot-scope="props"
               :props="props"
               class="cursor-pointer"
             >
@@ -470,7 +474,8 @@
                   <div class="col-md-6">
                     <q-input
                       clearable
-                      color="grey-9" class="v-model.trim="filterSearch1"
+                      color="grey-9"
+                      v-model.trim="filterSearch1"
                       placeholder="Type.."
                       label="Search by Plan Name"
                     />
@@ -481,7 +486,7 @@
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-</q-tab-panels>
+      </q-tabs>
       <div class="row items-center gutter-y-sm">
         <div class="col-md-9 col-sm-12 col-xs-12">
           <div class="row items-center"></div>

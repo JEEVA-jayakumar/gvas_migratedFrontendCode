@@ -15,7 +15,8 @@
             <div class="col-12 q-py-md">
               <span v-if="itemDetails == null">
                 <q-banner
-                    color="primary" class="icon="info"
+                    color="primary"
+                    icon="info"
                     appear
                     class="q-mb-sm"
                 >
@@ -25,7 +26,7 @@
               <span v-else>{{itemDetails}}</span>
             </div>
             <div class="col-12 text-h6 q-py-md" align="right">
-             <q-btn icon="clear" color="grey-5" class="class="text-dark" @click="emitToggleRemarks" label="Close"/>
+             <q-btn icon="clear" color="grey-5" class="text-dark" @click="emitToggleRemarks" label="Close"/>
             </div>
         </div>
     </q-dialog>

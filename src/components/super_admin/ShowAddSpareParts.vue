@@ -20,7 +20,8 @@
                           v-model="formData.spare_parts_types"   
                           :error="v$.formData.spare_parts_types.$error"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" class="label="Enter Spare Parts Name"
+                          color="grey-9"
+                          label="Enter Spare Parts Name"
                           placeholder="Enter Spare Parts Name" 
                         />
                     </div>
@@ -28,7 +29,8 @@
                 <div class="row gutter-sm q-py-sm items-center">
                     <div class="col-md-12 group" align="right">
                         <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowAddNewSpareParts()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitAddSpareParts(formData)" color="purple-9">Save</q-btn>" class="</div>
+                        <q-btn align="right" @click="fnfinalsubmitAddSpareParts(formData)" color="purple-9">Save</q-btn>
+                    </div>
                 </div>
             </form>
         </q-dialog>

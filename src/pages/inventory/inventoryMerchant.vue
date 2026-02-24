@@ -28,7 +28,8 @@
           <div class="col">
             <q-input
               clearable
-              color="grey-9" v-model="filter"
+              color="grey-9"
+              v-model="filter"
               placeholder="Type.."
               label="Search by Device Serial Number, MID, TID, Merchant Name"
               class="q-mr-lg q-py-sm"
@@ -41,7 +42,8 @@
               @clear="filterMasterTrackerClear()"
               @input="filterMasterTrackerByRegionId"
               v-model="regionFilter"
-              color="grey-9" class=":options="getAllRegionsData"
+              color="grey-9"
+              :options="getAllRegionsData"
               placeholder="Select"
               label="Filter By"
             />
@@ -51,7 +53,8 @@
             <q-btn 
             square 
             outline 
-            color="purple-9" class="label="Download as Excel"
+            color="purple-9"
+            label="Download as Excel"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloadInventoryWithMerchant()" />
@@ -61,12 +64,13 @@
             <!-- <q-btn
               @click="downloadMasterInventory()"
               outline
-              color="grey-9" class="label="Download as Excel"
+              color="grey-9"
+              label="Download as Excel"
               class="q-mr-lg q-py-sm float-right"
               size="md"
             />-->
             <!-- <downloadExcel :rows="tableData" :fields="json_fields" name="InventoryWithMerchant.xls">
-              <q-btn outline color="grey-9" class="label="Download as excel" />
+              <q-btn outline color="grey-9" label="Download as excel" />
             </downloadExcel> -->
           </div>
 

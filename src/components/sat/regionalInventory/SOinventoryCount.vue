@@ -339,7 +339,8 @@
           <div class="col-md-8">
             <q-input
               clearable
-              color="grey-9" v-model="filter"
+              color="grey-9"
+              v-model="filter"
               placeholder="Search by device name, serial no"
               class="q-mr-lg q-py-sm"
             />

@@ -13,7 +13,8 @@
         <div class="text-h6 text-weight-regular q-py-md">Add Merchant Document Type</div>
         <div>
           <q-select
-            color="grey-9" class="@blur="v$.formData.url.merchantType.$touch"
+            color="grey-9"
+            @blur="v$.formData.url.merchantType.$touch"
             :error="v$.formData.url.merchantType.$error"
             v-model="formData.url.merchantType"
             :options="activeMerchantType"
@@ -27,7 +28,8 @@
             @blur="v$.formData.params.documentType.$touch"
             :error="v$.formData.params.documentType.$error"
             class="text-weight-regular text-grey-8"
-            color="grey-9" class="label="Merchant Document Type"
+            color="grey-9"
+            label="Merchant Document Type"
             placeholder="Merchant Document Type"
             @keyup.enter="submitMerchantDcoumentTypeData(formData)"
           />
@@ -38,7 +40,8 @@
             @blur="v$.formData.params.marsDocumentId.$touch"
             :error="v$.formData.params.marsDocumentId.$error"
             class="text-weight-regular text-grey-8"
-            color="grey-9" class="type="number"
+            color="grey-9"
+            type="number"
             label="Mars Agreement Id"
             placeholder="Mars Agreement Id"
             @keyup.enter="submitMerchantDcoumentTypeData(formData)"
@@ -50,14 +53,16 @@
             @input="getViewTypeValue"
             v-model="formData.params.viewType"
             class="text-weight-regular text-grey-8"
-            color="grey-9" class="label="Yes"
+            color="grey-9"
+            label="Yes"
             :val="0"
           />
           <q-radio
             @input="getViewTypeValue"
             v-model="formData.params.viewType"
             class="text-weight-regular text-grey-8"
-            color="grey-9" class="label="No"
+            color="grey-9"
+            label="No"
             :val="1"
           />
         </div>
@@ -66,13 +71,15 @@
           <q-radio
             v-model="formData.params.required"
             class="text-weight-regular text-grey-8"
-            color="grey-9" class="label="Yes"
+            color="grey-9"
+            label="Yes"
             :val="1"
           />
           <q-radio
             v-model="formData.params.required"
             class="text-weight-regular text-grey-8"
-            color="grey-9" class="label="No"
+            color="grey-9"
+            label="No"
             :val="0"
           />
         </div>
@@ -86,7 +93,8 @@
           <q-btn
             align="right"
             @click="submitMerchantDcoumentTypeData(formData)"
-            color="purple-9" class=">Save</q-btn>
+            color="purple-9"
+          >Save</q-btn>
         </div>
       </div>
     </q-dialog>
@@ -178,7 +186,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

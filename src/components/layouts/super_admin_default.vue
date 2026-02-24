@@ -3,8 +3,9 @@
      <q-header style="margin-left:0px" class="shadow-0 z-top" flat>
       <q-toolbar
     class="bg-custom-light-grey bottom-border"
-    color="grey-9" class="flat
-
+    color="grey-9"
+    flat
+    inverted
   >
     <q-btn
     flat
@@ -22,23 +23,23 @@
         <img v-if="leftDrawerOpen" class="cursor-pointer" src="~assets/images/logo.png" style="height:38px;">
         </div>
         <div class="col float-right" align="right">
-          <q-btn flat color="grey-9" class="icon="far fa-bell"/>
-          <q-btn flat color="grey-9" class="vertical-middle">
+          <q-btn flat color="grey-9" icon="far fa-bell"/>
+          <q-btn flat color="grey-9 vertical-middle">
             <span class="mobile-hide capitalize text-weight-regular">{{getUserName}}</span>
-            <img src="https://pdc.techinasia.com/wp-content/uploads/2018/03/user60.png" style="height:30px;width:30px" class="vertical-middle">
+            <img src="https://pdc.techinasia.com/wp-content/uploads/2018/03/user60.png" style="height:30px;width:30px" vertical-middle">
             <!-- Direct child of target -->
             <q-menu class="shadow-8 " anchor="bottom middle" self="top middle" style="min-width:350px">
-              <q-list separator clickable class="no-padding">
+              <q-list separator link class="no-padding">
                 <q-item v-close-overlay @click.native="showNotification">
-                  <q-item-section avatar><q-icon name="fas fa-user" color="dark" class="/></q-item-section>
+                  <q-item-section icon="fas fa-user" inverted color="dark" />
                   <q-item-section>
-                    <q-item-label>My Account</q-item-label>
+                    <q-item-label label>My Account</q-item-label>
                   </q-item-section>
                 </q-item>
                 <q-item v-close-overlay @click.native="$router.push('/login')">
-                  <q-item-section avatar><q-icon name="fas fa-sign-out-alt" color="dark" class="/></q-item-section>
+                  <q-item-section icon="fas fa-sign-out-alt" inverted color="dark" />
                   <q-item-section>
-                    <q-item-label>Logout</q-item-label>
+                    <q-item-label label>Logout</q-item-label>
                   </q-item-section>
                 </q-item>
               </q-list>
@@ -57,9 +58,9 @@
       :content-style="{background: '#531b64',width:'250px'}"
     >
      <q-list
-
+        no-border
         link
-
+        inset-delimiter
         highlight
         style="padding-top:65px"
       >

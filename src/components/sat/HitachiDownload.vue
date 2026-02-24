@@ -49,7 +49,8 @@
               align="right"
               @click="downloadEMI(formData)"
               :disabled="submitDisabled"
-              color="purple-9" class=">Download</q-btn
+              color="purple-9"
+              >Download</q-btn
             >
           </div>
         </div>

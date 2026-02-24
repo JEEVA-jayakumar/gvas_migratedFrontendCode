@@ -34,7 +34,7 @@
                                 </div>
                             </q-card-section>
                             <q-card-section class="q-pa-sm">
-                                <q-list separator  class="no-padding text-body1">
+                                <q-list separator no-border class="no-padding text-body1">
                                     <q-item class="q-pa-sm text-body1">
                                         <q-item-section>
                                             Plan
@@ -83,7 +83,7 @@
                                 </div>
                             </q-card-section>
                             <q-card-section class="q-pa-sm">
-                                <q-list  separator class="no-padding">
+                                <q-list no-border separator class="no-padding">
                                     <q-item class="q-pa-sm">
                                         <q-item-section class="text-body1">
                                             Mode of payment
@@ -104,13 +104,13 @@
                                     </q-item>
                                     <q-item v-if="formData.shortLead.paymentOption == 2">
                                         <div v-if="formData.shortLead.paymentDocumentMimeType != null && formData.shortLead.paymentDocumentMimeType.includes('pdf')">
-                                            <q-btn size="sm" :outline="!showOpenPaymentChequeDocumentInfo" color="dark" class="label="View Document" icon="attach_file" @click="fnPDFViewModal(formData.shortLead.paymentDocumentFile,'CHEQUE')"></q-btn>
+                                            <q-btn size="sm" :outline="!showOpenPaymentChequeDocumentInfo" color="dark" label="View Document" icon="attach_file" @click="fnPDFViewModal(formData.shortLead.paymentDocumentFile,'CHEQUE')"></q-btn>
                                         </div>
                                         <div v-else-if="formData.shortLead.paymentDocumentMimeType != null && formData.shortLead.paymentDocumentMimeType.includes('image')">
-                                            <q-btn :outline="!showOpenPaymentChequeInfo" size="sm" color="dark" class="label="View Document" icon="attach_file" @click="fnOpenPaymentChequeInfo(formData.shortLead.paymentDocumentFile)" />
+                                            <q-btn :outline="!showOpenPaymentChequeInfo" size="sm" color="dark" label="View Document" icon="attach_file" @click="fnOpenPaymentChequeInfo(formData.shortLead.paymentDocumentFile)" />
                                         </div>
                                         <div v-else class="text-grey-9">
-                                            <q-icon name="clear" color="negative"/>" class="No document attached
+                                            <q-icon name="clear" color="negative"/> No document attached
                                         </div>
                                     </q-item>
                                     <q-item v-if="showOpenPaymentChequeInfo">
@@ -130,38 +130,39 @@
                                 <span class="text-body1 text-weight-medium">MDR</span>
                             </q-card-section>
                             <q-card-section>
-                                <q-list  class="no-padding">
+                                <q-list no-border class="no-padding">
                                     <q-item class="no-padding q-py-sm">
                                         <q-item-section>
-                                            <q-input color="grey-9" class="label="Debit < 2000 (%)" readonly class="no-pointer-events" v-model="formData.shortLead.debitLessthanAmount" />
+                                            <q-input color="grey-9" label="Debit < 2000 (%)" readonly class="no-pointer-events" v-model="formData.shortLead.debitLessthanAmount" />
                                         </q-item-section>
                                         <q-item-section>
-                                            <q-input color="grey-9" class="label="Debit < 2000 (%)" readonly class="no-pointer-events" v-model="formData.shortLead.debitGreaterthanAmount" />
+                                            <q-input color="grey-9" label="Debit < 2000 (%)" readonly class="no-pointer-events" v-model="formData.shortLead.debitGreaterthanAmount" />
                                         </q-item-section>
                                     </q-item>
                                     <q-item class="no-padding q-py-sm">
                                         <q-item-section>
-                                            <q-input color="grey-9" class="label="Std CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.stdCC" />
+                                            <q-input color="grey-9" label="Std CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.stdCC" />
                                         </q-item-section>
                                         <q-item-section>
-                                            <q-input color="grey-9" class="label="Premium CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.premiumCC" />
-                                        </q-item-section>
-                                    </q-item>
-                                    <q-item class="no-padding q-py-sm">
-                                        <q-item-section>
-                                            <q-input color="grey-9" class="label="Corp Pre CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.corpCC" />
-                                        </q-item-section>
-                                        <q-item-section>
-                                            <q-input color="grey-9" class="label="Intl Pre CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.intlCC" />
+                                            <q-input color="grey-9" label="Premium CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.premiumCC" />
                                         </q-item-section>
                                     </q-item>
                                     <q-item class="no-padding q-py-sm">
                                         <q-item-section>
-                                            <q-input color="grey-9" class="label="Super Pre CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.superPremiumlCC" />
+                                            <q-input color="grey-9" label="Corp Pre CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.corpCC" />
+                                        </q-item-section>
+                                        <q-item-section>
+                                            <q-input color="grey-9" label="Intl Pre CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.intlCC" />
+                                        </q-item-section>
+                                    </q-item>
+                                    <q-item class="no-padding q-py-sm">
+                                        <q-item-section>
+                                            <q-input color="grey-9" label="Super Pre CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.superPremiumlCC" />
                                         </q-item-section>
                                     </q-item>
                                     <q-item class="items-start q-pa-sm" v-if="formData.shortLead.posEnable">
-                                        <q-checkbox v-model="formData.shortLead.posEnable" class="no-pointer-events" color="purple-9">" class="<small class="text-caption">Enable Cash@POS Cash @POS incentive Rs.5</small>
+                                        <q-checkbox v-model="formData.shortLead.posEnable" class="no-pointer-events" color="purple-9">
+                                            <small class="text-caption">Enable Cash@POS Cash @POS incentive Rs.5</small>
                                         </q-checkbox>
                                     </q-item>
                                 </q-list>
@@ -245,7 +246,7 @@
                                 <span class="text-body1 text-weight-medium">Documents</span>
                             </q-card-section>
                             <q-card-section class="q-pa-xs">
-                                <q-list  class="no-padding">
+                                <q-list no-border class="no-padding">
                                     <q-item class="no-padding">
                                         <q-item-section>
                                             <div v-for="(documents,index) in formData.shortLead.leadDocuments" :key="index" >
@@ -254,13 +255,13 @@
                                                     <div class="col-md-12 text-body1">
                                                         <q-expansion-item separator indent icon-toggle opened group="closeOnOpen" multiline class="full-width">
                                                             <template slot="header">
-                                                                <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                                                                <q-item-section icon="attach_file" />
                                                                 <q-item-section class="text-body1" :sublabel="documents[0].uploadedDocuments.length + 'Document(s)'" :label="index" />
                                                             </template>
                                                             <div v-for="(item,subIndex) in documents[0].uploadedDocuments" :key="subIndex" class="q-py-sm">
                                                                 <div v-if="item.mimeType.includes('application')">
                                                                     <div @click="fnPDFViewModal(item.fileName)" class="cursor-pointer no-underline">
-                                                                        <q-icon name="fas fa-file-pdf" color="negative" class="/>
+                                                                        <q-icon name="fas fa-file-pdf" color="negative" />
                                                                         &nbsp;{{item.fileNameOriginal}}
                                                                     </div>
                                                                 </div>
@@ -291,7 +292,7 @@
                                                                 <div class="col-md-12 text-body1">
                                                                     <q-expansion-item separator icon-toggle opened group="closeOnOpenSubDocument" multiline class="full-width" indent>
                                                                         <template slot="header">
-                                                                            <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                                                                            <q-item-section icon="attach_file" />
                                                                             <q-item-section class="text-body1"
                                                                             :sublabel="subDocument.uploadedDocuments.length + 'Document(s)'"
                                                                             :label="subDocument.subDocumentType" />
@@ -299,7 +300,7 @@
                                                                         <div v-for="(item,subIndex) in subDocument.uploadedDocuments" :key="subIndex" class="q-py-sm">
                                                                             <div v-if="item.mimeType.includes('application')">
                                                                             <div @click="fnPDFViewModal(item.fileName)" class="cursor-pointer no-underline">
-                                                                                <q-icon name="fas fa-file-pdf" color="negative" class="/>
+                                                                                <q-icon name="fas fa-file-pdf" color="negative" />
                                                                                 &nbsp;{{item.fileNameOriginal}}
                                                                             </div>
                                                                             </div>
@@ -335,14 +336,16 @@
             <div class="col-md-12" align="right">
                  <q-btn
                     icon="block"
-                    color="grey-5" class="class="q-ma-sm text-dark"
+                    color="grey-5"
+                    class="q-ma-sm text-dark"
                     @click="$router.go(-1)"
                     label="Cancel"
                 />
                 <q-btn
                     icon="cloud_upload"
                     class="q-ma-sm"
-                    color="positive" class="label="Upload Document"
+                    color="positive"
+                    label="Upload Document"
                     @click="fnUploadDocumentAndSubmit"
                 />
             </div>

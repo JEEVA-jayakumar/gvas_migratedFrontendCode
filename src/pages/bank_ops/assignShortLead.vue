@@ -16,7 +16,8 @@
           no-caps
           push
           outline
-          color="purple-9" class="to="/bank/ops/assign/short/lead/new"
+          color="purple-9"
+          to="/bank/ops/assign/short/lead/new"
         >Add New Lead</q-btn>
       </div>
     </div>
@@ -52,7 +53,8 @@
                 :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
                 @click="props.toggleFullscreen"
                 class="q-mt-lg"
-                color="grey-9" size="sm"
+                color="grey-9"
+                size="sm"
         />-->
         <!-- </div> -->
         <!--END: table fullscreen mode -->
@@ -60,7 +62,8 @@
         <div class="col-5">
           <q-input
             clearable
-            color="grey-9" v-model="filter"
+            color="grey-9"
+            v-model="filter"
             placeholder="Type.."
             label="Search by SO name, Merchant Name, Lead ID"
             class="q-mr-lg q-py-sm"
@@ -71,7 +74,8 @@
                   multiple
                   v-model="multipleSelect"
                   separator
-                  color="grey-9" class=":options="options"
+                  color="grey-9"
+                  :options="options"
                   placeholder="Select"
                   label= "Filter By"
                   class="q-mr-lg q-py-sm "

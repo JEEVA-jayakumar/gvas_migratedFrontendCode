@@ -104,7 +104,8 @@
               :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
               @click="props.toggleFullscreen"
               class="q-mt-lg"
-              color="grey-9" size="sm"
+              color="grey-9"
+              size="sm"
         />-->
         <!-- </div> -->
         <!--END: table fullscreen mode -->
@@ -112,7 +113,8 @@
         <!-- <div class="col-md-5">
             <q-input
               clearable
-              color="grey-9" v-model="filter"
+              color="grey-9"
+              v-model="filter"
               placeholder="Type.."
               label= "Search by SO name, Merchant Name, Lead ID"
               class="q-mr-lg q-py-sm"
@@ -122,7 +124,8 @@
             <q-select
               v-model="selectBankSource"
               separator
-              color="grey-9" class=":options="sourceBankOptions"
+              color="grey-9"
+              :options="sourceBankOptions"
               placeholder="Filter By Bank"
               label="Filter By Bank"
               class="q-mr-lg q-py-sm "
@@ -133,7 +136,8 @@
             <q-select
               v-model="selectSource"
               separator
-              color="grey-9" class=":options="sourceOptions"
+              color="grey-9"
+              :options="sourceOptions"
               placeholder="Select"
               label= "Filter By"
               class="q-mr-lg q-py-sm "
@@ -146,7 +150,8 @@
               label="Date Filter"
               type="date"
               class="q-mr-lg q-py-sm"
-              color="grey-9" class="/>
+              color="grey-9"
+            />
         </div>-->
         <!--END: table filter,search -->
       </template>

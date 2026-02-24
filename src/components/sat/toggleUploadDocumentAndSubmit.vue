@@ -48,7 +48,8 @@
             <q-btn
               dense
               outline
-              color="grey-7" size="sm"
+              color="grey-7"
+              size="sm"
               class="file-return text-faded no-pointer-events"
             >{{uploadFileName}}</q-btn>
           </div>
@@ -57,7 +58,8 @@
           <q-btn
             icon="done"
             v-if="!sendForDataEntry"
-            color="grey-5" class="class="q-ma-sm float-right text-dark no-pointer-events disabled"
+            color="grey-5"
+            class="q-ma-sm float-right text-dark no-pointer-events disabled"
             align="right"
             label="Submit"
           />
@@ -65,7 +67,8 @@
           <q-btn
             icon="done"
             v-if="sendForDataEntry"
-            color="positive" class="class="q-ma-sm float-right"
+            color="positive"
+            class="q-ma-sm float-right"
             @click="finalFileUploadAndSubmit(itemDetails)"
             align="right"
             label="Submit"
@@ -74,7 +77,8 @@
           <q-btn
             v-if="!cancelConfirmation"
             icon="block"
-            color="grey-5" @click="emitToggleRemarks()"
+            color="grey-5"
+            @click="emitToggleRemarks()"
             class="q-ma-sm float-right text-dark"
             align="right"
             :v-close-overlay="cancelConfirmation"
@@ -84,7 +88,8 @@
           <q-btn
             v-if="cancelConfirmation"
             icon="block"
-            color="negative" @click="emitToggleRemarks()"
+            color="negative"
+            @click="emitToggleRemarks()"
             class="q-ma-sm float-right"
             align="right"
             v-close-overlay
@@ -177,7 +182,7 @@ export default {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down"
               });
             });

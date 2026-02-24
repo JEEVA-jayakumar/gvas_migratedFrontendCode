@@ -12,7 +12,7 @@
       <div class="row items-center q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
         <div class="col text-h6">References Details</div>
         <div class="col-auto">
-          <q-btn size="sm" round @click="emitToggleRemarks" outline color="dark" class="icon="clear"/>
+          <q-btn size="sm" round @click="emitToggleRemarks" outline color="dark" icon="clear"/>
         </div>
       </div>
       <!-- <pre>{{propRowDetails.hierarchyList}}</pre> -->
@@ -47,7 +47,8 @@
               <div class="col-md-5">
                 <q-input
                   clearable
-                  color="grey-9" v-model="filter"
+                  color="grey-9"
+                  v-model="filter"
                   placeholder="Type.."
                   label="Search by SO name, Merchant Name, Lead ID"
                   class="q-ma-xs"
@@ -56,14 +57,15 @@
               <div class="col-md-4">
                 <q-select
                   placeholder="Select .."
-                  color="grey-9" v-model="formData.userId"
+                  color="grey-9"
+                  v-model="formData.userId"
                   label="Choose a user from below"
                   :options="[]"
                   class="q-ma-xs"
                 />
               </div>
               <div class="col-md-3" align="middle">
-                <q-btn icon="check" color="positive" class="class="q-ma-xs" label="Assign"/>
+                <q-btn icon="check" color="positive" class="q-ma-xs" label="Assign"/>
               </div>
               <!--END: table filter,search -->
             </template>

@@ -85,7 +85,8 @@
             highlight
             push
             class="q-mx-sm"
-            color="positive" size="sm"
+            color="positive"
+            size="sm"
             @click="lostStolenDevice(props.row)"
             >Lost/Stolen</q-btn
           >
@@ -95,7 +96,8 @@
                 highlight
                 push
                 class="q-mx-sm"
-                color="positive" @click="openAcceptModel(props.row)"
+                color="positive"
+                 @click="openAcceptModel(props.row)"
                 size="sm"
                >Accept</q-btn>
              </q-td>
@@ -108,7 +110,8 @@
               clearable
               v-model="filter"
               separator
-              color="grey-9" class="placeholder="Type.."
+              color="grey-9"
+              placeholder="Type.."
               label="Search Using TID, MID, Lead ID, Merchant Name"
               class="q-mr-lg q-py-sm"
             />
@@ -123,7 +126,8 @@
         v-model:columns="columns1"
         :rows="tableData1"
         row-key="field"
-        color="grey-9" class=":filter="filter1"
+        color="grey-9"
+        :filter="filter1"
         :rows-per-page-options="[5, 10, 15, 20, 25]"
         :pagination="paginationControl1"
         :loading="toggleAjaxLoadFilter1"
@@ -161,7 +165,8 @@
             v-if="props.row.regionalInventory.deviceStatus == 8"
             disable
             push
-            color="purple-9" size="sm"
+            color="purple-9"
+            size="sm"
             >Waiting for Approval</q-btn
           >
           <q-btn
@@ -169,7 +174,8 @@
             highlight
             push
             disable
-            color="blue" size="sm"
+            color="blue"
+            size="sm"
             >Submitted By SO</q-btn
           >
           <q-btn
@@ -177,7 +183,8 @@
             highlight
             push
             disable
-            color="red" size="sm"
+            color="red"
+            size="sm"
             >Rejected By Finance</q-btn
           >
         </q-td>
@@ -186,7 +193,8 @@
             v-if="props.row.regionalInventory.deviceStatus == 10"
             highlight
             push
-            color="red" size="sm"
+            color="red"
+            size="sm"
             @click="loststolendevice(props.row)"
             >Lost/Stolen</q-btn
           >
@@ -194,7 +202,8 @@
             v-if="props.row.regionalInventory.deviceStatus == 8"
             highlight
             push
-            color="purple-9" size="sm"
+            color="purple-9"
+            size="sm"
             @click="loststolendevice(props.row)"
             >Lost/Stolen</q-btn
           >
@@ -203,7 +212,8 @@
             highlight
             push
             class="q-mx-sm"
-            color="positive" size="sm"
+            color="positive"
+            size="sm"
             @click="loststolendevice(props.row)"
             >Lost/Stolen</q-btn
           >
@@ -212,7 +222,8 @@
           <div class="col-md-5">
             <q-input
               clearable
-              color="grey-9" v-model="filter1"
+              color="grey-9"
+              v-model="filter1"
               placeholder="Type.."
               label="Search Using TID, MID "
               class="q-mr-lg q-py-sm"
@@ -223,7 +234,8 @@
               <q-btn 
               square 
               outline 
-              color="purple-9" class="label="Download as Excel"
+              color="purple-9"
+              label="Download as Excel"
               class="q-mr-lg q-py-sm float-right" 
               size="md" 
               @click="downloadLostDatas()" />

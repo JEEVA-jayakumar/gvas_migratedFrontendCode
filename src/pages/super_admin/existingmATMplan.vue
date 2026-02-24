@@ -46,7 +46,8 @@
             no-wrap
             no-caps
             icon="fas fa-pencil-alt"
-            color="primary" @click="editPlanDetails(props.row)"
+            color="primary"
+            @click="editPlanDetails(props.row)"
             :label="props.row.planName"
             class="capitalize"
           />
@@ -56,7 +57,8 @@
             highlight
             push
             class="q-mx-sm"
-            color="positive" size="sm"
+            color="positive"
+            size="sm"
             @click="editPlanDetails(props.row)"
           >Edit Plan Details</q-btn>
         </q-td> -->
@@ -65,7 +67,8 @@
             highlight
             push
             class="q-mx-sm"
-            color="positive" size="sm"
+            color="positive"
+            size="sm"
             @click="deletePlanDetails(props.row)"
           >Delete Plan Details</q-btn>
         </q-td>
@@ -77,7 +80,8 @@
               <div class="col-md-6">
                 <q-input
                   clearable
-                  color="grey-9" class="v-model.trim="filterSearch"
+                  color="grey-9"
+                  v-model.trim="filterSearch"
                   placeholder="Type.."
                   label="Search by Plan Name"
                 />

@@ -14,7 +14,8 @@
           </div>
           <div class="col-md-8 q-py-md" align="left">
             <q-select
-              color="grey-9" class="@blur="v$.formData.deviceType.$touch"
+              color="grey-9"
+              @blur="v$.formData.deviceType.$touch"
               :error="v$.formData.deviceType.$error"
               v-model="formData.deviceType"
               label="Select Device Type"
@@ -56,7 +57,7 @@
                 <q-separator />
                 <q-card-section>
                   <q-item dense>
-                    <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                    <q-item-section icon="attach_file" />
                     <q-item-section>{{
                       formData.fileSelected[0].name || ""
                     }}</q-item-section>
@@ -68,7 +69,8 @@
                   <q-btn
                     outline
                     size="sm"
-                    color="negative" @click="removeBulkUploadFile"
+                    color="negative"
+                    @click="removeBulkUploadFile"
                     label="Remove"
                     icon="clear"
                   />
@@ -79,11 +81,13 @@
           <div class="col-md-12 group" align="right">
             <q-btn
               outline
-              color="dark" class="label="Cancel"
+              color="dark"
+              label="Cancel"
               @click="emitToggleinventoryBulkUpload"
             />
             <q-btn
-              color="positive" class="label="Upload"
+              color="positive"
+              label="Upload"
               @click="uploadFileForBulkUpload"
             />
           </div>
@@ -210,7 +214,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

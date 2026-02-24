@@ -52,7 +52,8 @@
           <div class="col">
             <q-input
               clearable
-              color="grey-9" v-model="filter"
+              color="grey-9"
+              v-model="filter"
               placeholder="Type.."
               label="Search by Request Number"
               class="q-mr-lg q-py-sm"
@@ -63,7 +64,8 @@
             <q-btn 
             square 
             outline 
-            color="purple-9" class="label="Download Report"
+            color="purple-9"
+            label="Download Report"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloadPOSReport()" />
@@ -77,7 +79,8 @@
                     v-if ="props.row.status == 0"
                     push
                     class="q-mx-sm fixed-width-btn"
-                    color="positive" size="sm"
+                    color="positive"
+                    size="sm"
                     @click="fnApproveFinance(props.row)"
                     >Approve</q-btn
                   >
@@ -86,7 +89,8 @@
                     disable
                     push
                     class="q-mx-sm fixed-width-btn"
-                    color="purple-9" size="sm"
+                    color="purple-9"
+                    size="sm"
                     >View Invoice Copy</q-btn
                   >
                   <q-btn
@@ -94,7 +98,8 @@
                     disable
                     push
                     class="q-mx-sm fixed-width-btn"
-                    color="negative" size="sm"
+                    color="negative"
+                    size="sm"
                     >Already Approved</q-btn
                   >
                   <q-btn
@@ -102,7 +107,8 @@
                     highlight
                     push
                     class="q-mx-sm fixed-width-btn"
-                    color="purple-9" size="sm"
+                    color="purple-9"
+                    size="sm"
                     @click="fnPDFViewModal(props.row)"
                     >View Invoice Copy</q-btn
                   >
@@ -112,7 +118,8 @@
                highlight
                push
                class="q-mx-sm"
-               color="positive" @click="openAccept(props.row)"
+               color="positive"
+               @click="openAccept(props.row)"
                size="sm"
                >Approve</q-btn>
             </q-td> -->
@@ -122,7 +129,8 @@
                 clearable
                 v-model="filter"
                 separator
-                color="grey-9" class="placeholder="Type.."
+                color="grey-9"
+                placeholder="Type.."
                 label="Search By Device Type..."
                 class="q-mr-lg q-py-sm"
               />

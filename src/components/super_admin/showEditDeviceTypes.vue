@@ -10,7 +10,7 @@
     >
       <form>
         <div class="text-h6 text-weight-regular q-py-md bottom-border">
-          <q-icon name="border_color" size="25px" color="purple-9"/>Modify" class="Device
+          <q-icon name="border_color" size="25px" color="purple-9"/>Modify Device
         </div>
 
         <div class="column-inline q-py-md gutter-sm items-center">
@@ -20,7 +20,8 @@
               @blur="v$.formData.deviceName.$touch"
               :error="v$.formData.deviceName.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Device Type"
+              color="grey-9"
+              label="Device Type"
               placeholder="Device Type"
             />
           </div>
@@ -34,7 +35,8 @@
                   :error="v$.formData.colorCode.$error"
                   popover
                   label="Choose a role color"
-                  color="grey-9" class="@input="createDuplicateResult"
+                  color="grey-9"
+                  @input="createDuplicateResult"
                 />
               </div>
               <div class="col-auto">
@@ -53,7 +55,8 @@
               @blur="v$.formData.serialNumberLength.$touch"
               :error="v$.formData.serialNumberLength.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Serial Number Length"
+              color="grey-9"
+              label="Serial Number Length"
               placeholder="Serial Number Length"
             />
           </div>
@@ -63,14 +66,16 @@
               align="right"
               icon="block"
               class="text-weight-regular text-grey-8"
-              color="grey-6" @click="emitfnshowEditDeviceTypes()"
+              color="grey-6"
+              @click="emitfnshowEditDeviceTypes()"
               label="Cancel"
             />
             <q-btn
               align="right"
               icon="check"
               @click="fnfinalsubmitDeviceType(formData)"
-              color="purple-9" class="label="save"
+              color="purple-9"
+              label="save"
             />
           </div>
         </div>
@@ -152,7 +157,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

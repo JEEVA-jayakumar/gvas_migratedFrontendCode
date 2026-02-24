@@ -14,7 +14,7 @@
                 <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
                     <q-card style="width:250%">
                         <q-card-section>
-                            <q-list >
+                            <q-list no-border>
                                 <div class="col-md-12">
                                     <q-select filter clearable color="grey-9" v-model="formData.so" :options="assignToOptions"
                                         label="Select SO*" />
@@ -25,14 +25,15 @@
                                 </div>
                                 <!-- {{formData.Reassign}} -->
                                 <div v-if="this.formData.Reassign == 'Other reason'">
-                                    <q-input type="textarea" placeholder="Reason Type.." class="q-my-md" color="grey-9" class="align="left" value="" v-model="formData.reason" />
+                                    <q-input type="textarea" placeholder="Reason Type.." class="q-my-md" color="grey-9"
+                                        align="left" value="" v-model="formData.reason" />
                                 </div>
                             </q-list>
                         </q-card-section>
                         <q-card-actions align="end">
                             <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8"
                                 @click="emitfnshowUpdateOpenedExternal()">Cancel</q-btn>
-                            <q-btn label="submit" @click="fnEDITREOPEN(formData)" color="purple-9" class="/>
+                            <q-btn label="submit" @click="fnEDITREOPEN(formData)" color="purple-9" />
                         </q-card-actions>
                     </q-card>
                 </div>
@@ -198,7 +199,7 @@ export default {
                             this.$q.notify({
                                 color: "negative",
                                 position: "bottom",
-                                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                                 icon: "thumb_down"
                             });
                         });

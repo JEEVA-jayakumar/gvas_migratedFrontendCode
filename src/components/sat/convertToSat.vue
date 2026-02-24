@@ -12,19 +12,21 @@
             <div class="text-h6 text-weight-regular">Edit WIP List</div>
           </div>
           <!-- <div class="text-h6 text-weight-regular">Edit WIP List</div>
-            <q-chip square color="secondary">{{" class="formData}}</q-chip> -->
+            <q-chip square color="secondary">{{ formData}}</q-chip> -->
 
           <div class="col-md-12">
             <q-input @keyup.enter="submitShortLead(formData)" v-model="formData.id"
-              class="text-weight-regular text-grey-8" disable color="grey-9" class="label="leadId" placeholder="leadId" />
+              class="text-weight-regular text-grey-8" disable color="grey-9" label="leadId" placeholder="leadId" />
           </div>
           <div class="col-md-12">
             <q-input @keyup.enter="submitShortLead(formData)" v-model="formData.leadName"
-              :error="v$.formData.leadName.$error" class="text-weight-regular text-grey-8" color="grey-9" class="label="leadName" placeholder="leadName" />
+              :error="v$.formData.leadName.$error" class="text-weight-regular text-grey-8" color="grey-9"
+              label="leadName" placeholder="leadName" />
           </div>
           <div class="col-md-12">
             <q-input @keyup.enter="submitShortLead(formData)" v-model="formData.leadNumber"
-              :error="v$.formData.leadNumber.$error" class="text-weight-regular text-grey-8" color="grey-9" class="label="leadNumber" placeholder="leadNumber" disable />
+              :error="v$.formData.leadNumber.$error" class="text-weight-regular text-grey-8" color="grey-9"
+              label="leadNumber" placeholder="leadNumber" disable />
           </div>
           <!-- <div class="col-md-12">
             <q-input
@@ -32,7 +34,8 @@
               v-model="formData.ownerFirstName"
               :error="v$.formData.ownerFirstName.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Owner 1 First Name*"
+              color="grey-9"
+              label="Owner 1 First Name*"
               placeholder="Owner 1 First Name*"
             />
           </div> -->
@@ -42,7 +45,8 @@
               v-model="formData.shortleadDate"
               :error="v$.formData.shortleadDate.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="shortleadDate"
+              color="grey-9"
+              label="shortleadDate"
               placeholder="shortleadDate"
             />
           </div>-->
@@ -50,37 +54,40 @@
             <q-input type="number" onkeydown="javascript: return event.keyCode === 8 ||
               event.keyCode === 46 ? true : !isNaN(Number(event.key))" @keyup.enter="submitShortLead(formData)"
               v-model="formData.contactNumber" :error="v$.formData.contactNumber.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="contactNumber"
+              class="text-weight-regular text-grey-8" color="grey-9" label="contactNumber"
               placeholder="contactNumber" />
           </div>
           <div class="col-md-12">
             <q-input type="number" onkeydown="javascript: return event.keyCode === 8 ||
                event.keyCode === 46 ? true : !isNaN(Number(event.key))" @keyup.enter="submitShortLead(formData)"
-              v-model="formData.alternateContactNumber" class="text-weight-regular text-grey-8" color="grey-9" class="label="alternateContactNumber" placeholder="alternateContactNumber" />
+              v-model="formData.alternateContactNumber" class="text-weight-regular text-grey-8" color="grey-9"
+              label="alternateContactNumber" placeholder="alternateContactNumber" />
             <!-- :error="v$.formData.alternateContactNumber.$error" -->
           </div>
           <div class="col-md-12">
             <q-input @keyup.enter="submitShortLead(formData)" v-model="formData.email" :error="v$.formData.email.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="email" placeholder="email" />
+              class="text-weight-regular text-grey-8" color="grey-9" label="email" placeholder="email" />
           </div>
           <div class="col-md-12">
             <q-input @keyup.enter="submitShortLead(formData)" v-model="formData.leadAddress"
-              :error="v$.formData.leadAddress.$error" class="text-weight-regular text-grey-8" color="grey-9" class="label="leadAddress" placeholder="leadAddress" />
+              :error="v$.formData.leadAddress.$error" class="text-weight-regular text-grey-8" color="grey-9"
+              label="leadAddress" placeholder="leadAddress" />
           </div>
           <div class="col-md-12">
             <q-input type="number" onkeydown="javascript: return event.keyCode === 8 ||
             event.keyCode === 46 ? true : !isNaN(Number(event.key))" @keyup.enter="submitShortLead(formData)"
               v-model="formData.pincode" :error="v$.formData.pincode.$error" class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="pincode" placeholder="pincode" />
+              color="grey-9" label="pincode" placeholder="pincode" />
           </div>
           <div class="col-md-12">
             <q-input @keyup.enter="submitShortLead(formData)" disable v-model="formData.city"
-              :error="v$.formData.city.$error" class="text-weight-regular text-grey-8" color="grey-9" class="label="city"
+              :error="v$.formData.city.$error" class="text-weight-regular text-grey-8" color="grey-9" label="city"
               placeholder="city" />
           </div>
           <div class="col-md-12">
             <q-input @keyup.enter="submitShortLead(formData)" disable v-model="formData.state"
-              :error="v$.formData.state.$error" class="text-weight-regular text-grey-8" color="grey-9" class="label="state" placeholder="state" />
+              :error="v$.formData.state.$error" class="text-weight-regular text-grey-8" color="grey-9"
+              label="state" placeholder="state" />
           </div>
           <div class="col-md-12">Merchant Tier Mapping</div>
           <div class="col-md-12">
@@ -110,7 +117,8 @@
           </div>
           <!--:options="getMerchantTierMappingVillageTierDetails"  :options="dropDown.merchantTierDetails"-->
           <div class="col-md-12">
-            <q-input disable v-model="formData.tier" class="text-weight-regular text-grey-8" color="grey-9" class="label="Merchant Tier" placeholder="Merchant Tier"  />
+            <q-input disable v-model="formData.tier" class="text-weight-regular text-grey-8" color="grey-9"
+              label="Merchant Tier" placeholder="Merchant Tier"  />
           </div>
           <!-- <div class="col-md-12">
             <q-input v-model="formData.leadCategory" label="Lead Category" />
@@ -135,15 +143,16 @@
             </div>
             <div class="col-md-12">
               <q-input disable v-model.trim="formData.incentivePercentage" class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*percentage" placeholder="percentage" />
+                color="grey-9" label="*percentage" placeholder="percentage" />
             </div>
             <div class="col-md-12">
-              <q-input disable v-model.trim="formData.minTxnVal" class="text-weight-regular text-grey-8" color="grey-9" class="label="*minimum" placeholder="minimum" />
+              <q-input disable v-model.trim="formData.minTxnVal" class="text-weight-regular text-grey-8" color="grey-9"
+                label="*minimum" placeholder="minimum" />
             </div>
 
             <div class="col-md-12">
               <q-input disable v-model.trim="formData.maxIncPerTxn" class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*maximumTxnValue" placeholder="maximumTxnValue" />
+                color="grey-9" label="*maximumTxnValue" placeholder="maximumTxnValue" />
             </div>
           </div>
 
@@ -153,70 +162,72 @@
               @input="fnMerchantCategory" />
           </div>
            <div class="col-md-12">
-            <q-select color="grey-9" v-model="mdrPlan"
+            <q-select color="grey-9"
+            v-model="mdrPlan"
               :options="dropDown.mdrOptions" label="Select MDR Plan"
               @input="fnFillMdr(mdrPlan)" />
           </div>
 
           <div class="col-md-12">
             <q-input disable v-model.trim="formData.debitLessthanAmount" :error="v$.formData.debitLessthanAmount.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*debitLessthanAmount"
+              class="text-weight-regular text-grey-8" color="grey-9" label="*debitLessthanAmount"
               placeholder="debitLessthanAmount" />
           </div>
           <div class="col-md-12">
             <q-input disable v-model.trim="formData.debitGreaterthanAmount"
-              :error="v$.formData.debitGreaterthanAmount.$error" class="text-weight-regular text-grey-8" color="grey-9" class="label="*debitGreaterthanAmount" placeholder="debitGreaterthanAmount" />
+              :error="v$.formData.debitGreaterthanAmount.$error" class="text-weight-regular text-grey-8" color="grey-9"
+              label="*debitGreaterthanAmount" placeholder="debitGreaterthanAmount" />
           </div>
           <div class="col-md-12">
             <q-input disable v-model.trim="formData.stdCC" :error="v$.formData.stdCC.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*stdCC" placeholder="stdCC" />
+              class="text-weight-regular text-grey-8" color="grey-9" label="*stdCC" placeholder="stdCC" />
           </div>
           <div class="col-md-12">
             <q-input disable v-model.trim="formData.premiumCC" :error="v$.formData.premiumCC.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*premiumCC" placeholder="premiumCC" />
+              class="text-weight-regular text-grey-8" color="grey-9" label="*premiumCC" placeholder="premiumCC" />
           </div>
           <div class="col-md-12">
             <q-input disable v-model.trim="formData.corpCC" :error="v$.formData.corpCC.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*corpCC" placeholder="corpCC" />
+              class="text-weight-regular text-grey-8" color="grey-9" label="*corpCC" placeholder="corpCC" />
           </div>
           <div class="col-md-12">
             <q-input disable v-model.trim="formData.intlCC" :error="v$.formData.intlCC.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*intlCC" placeholder="intlCC" />
+              class="text-weight-regular text-grey-8" color="grey-9" label="*intlCC" placeholder="intlCC" />
           </div>
           <div class="col-md-12">
             <q-input disable v-model.trim="formData.superPremiumlCC" :error="v$.formData.superPremiumlCC.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*superPremiumlCC"
+              class="text-weight-regular text-grey-8" color="grey-9" label="*superPremiumlCC"
               placeholder="superPremiumlCC" />
           </div>
           <div class="col-md-12">
             <q-input disable v-model.trim="formData.amexDomestic" :error="v$.formData.amexDomestic.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*amexDomestic"
+              class="text-weight-regular text-grey-8" color="grey-9" label="*amexDomestic"
               placeholder="amexDomestic" />
           </div>
           <div class="col-md-12">
             <q-input disable v-model.trim="formData.amexInternational" :error="v$.formData.amexInternational.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*amexInternational"
+              class="text-weight-regular text-grey-8" color="grey-9" label="*amexInternational"
               placeholder="amexInternational" />
           </div>
            <div class="col-md-12">
             <q-input disable v-model.trim="formData.upiDebitCardUpTo2000" :error="v$.formData.upiDebitCardUpTo2000.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*upiDebitCardUpTo2000"
+              class="text-weight-regular text-grey-8" color="grey-9" label="*upiDebitCardUpTo2000"
               placeholder="upiDebitCardUpTo2000" />
           </div>
           <div class="col-md-12">
             <q-input disable v-model.trim="formData.upiDebitCardAbove2000" :error="v$.formData.upiDebitCardAbove2000.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*upiDebitCardAbove2000"
+              class="text-weight-regular text-grey-8" color="grey-9" label="*upiDebitCardAbove2000"
               placeholder="upiDebitCardAbove2000" />
           </div>
 
            <div class="col-md-12">
             <q-input disable v-model.trim="formData.upiPrepaidCreditCardsUpTo2000" :error="v$.formData.upiPrepaidCreditCardsUpTo2000.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*upiPrepaidCreditCardsUpTo2000"
+              class="text-weight-regular text-grey-8" color="grey-9" label="*upiPrepaidCreditCardsUpTo2000"
               placeholder="upiPrepaidCreditCardsUpTo2000" />
           </div>
           <div class="col-md-12">
             <q-input disable v-model.trim="formData.upiPrepaidCreditCardsAbove2000" :error="v$.formData.upiPrepaidCreditCardsAbove2000.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*upiPrepaidCreditCardsAbove2000"
+              class="text-weight-regular text-grey-8" color="grey-9" label="*upiPrepaidCreditCardsAbove2000"
               placeholder="upiPrepaidCreditCardsAbove2000" />
           </div>
           <div class="col-md-12">
@@ -226,12 +237,12 @@
 
           <div class="col-md-12">
             <q-input disable v-model.trim="formData.setupFees" :error="v$.formData.setupFees.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*setUp fees"
+              class="text-weight-regular text-grey-8" color="grey-9" label="*setUp fees"
               placeholder="setUp fees" />
           </div>
           <div class="col-md-12">
             <q-input disable v-model.trim="formData.recurringFees" :error="v$.formData.recurringFees.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*Recurring Fees"
+              class="text-weight-regular text-grey-8" color="grey-9" label="*Recurring Fees"
               placeholder="Recurring Fees" />
           </div>
           <div class="col-md-12">
@@ -242,12 +253,12 @@
           <div class="col-md-12">Payement Option</div>
           <div class="col-md-12">
             <q-input v-model.trim="formData.amountCollected" :error="v$.formData.amountCollected.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*Amout Collected"
+              class="text-weight-regular text-grey-8" color="grey-9" label="*Amout Collected"
               placeholder="Amout Collected" />
           </div>
           <div class="col-md-12">
             <q-input v-model.trim="formData.paymentMadeon" :error="v$.formData.paymentMadeon.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*Transaction Made ON"
+              class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON"
               placeholder="Transaction Made ON" />
           </div>
           <div class="col-md-12">Payement Type</div>
@@ -257,12 +268,12 @@
           </div>
           <div class="col-md-12" v-if="formData.paymentOption == 1">
             <q-input v-model.trim="formData.referenceNumber" :error="v$.formData.referenceNumber.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*NEFT Number"
+              class="text-weight-regular text-grey-8" color="grey-9" label="*NEFT Number"
               placeholder="Enter the NEFT Number" />
           </div>
           <div class="col-md-12" v-if="formData.paymentOption == 2">
             <q-input v-model.trim="formData.referenceNumber" :error="v$.formData.referenceNumber.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*CHEQUE Number"
+              class="text-weight-regular text-grey-8" color="grey-9" label="*CHEQUE Number"
               placeholder="Enter the Cheque Number" />
           </div>
           <div class="col-xs-12" v-if="formData.paymentOption == 2">
@@ -279,7 +290,7 @@
           </div>
           <div class="col-md-12" v-if="formData.paymentOption == 3">
             <q-input v-model.trim="formData.referenceNumber" :error="v$.formData.referenceNumber.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="*SWIPE Number"
+              class="text-weight-regular text-grey-8" color="grey-9" label="*SWIPE Number"
               placeholder="Enter the SWIPE Number" />
           </div>
           <div class="col-md-12">
@@ -290,7 +301,7 @@
           <div class="col-md-12 group" align="right">
             <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8"
               @click="emitfnzEditshowConvertToSat(toggleModel)">Cancel</q-btn>
-            <q-btn align="right" @click="submitShortLead(formData)" color="purple-9">submit" class="to sat</q-btn>
+            <q-btn align="right" @click="submitShortLead(formData)" color="purple-9">submit to sat</q-btn>
           </div>
         </div>
       </form>
@@ -802,7 +813,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down",
             });
             this.$q.loading.hide();

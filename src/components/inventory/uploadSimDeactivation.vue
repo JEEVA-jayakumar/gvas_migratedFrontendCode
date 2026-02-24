@@ -61,7 +61,7 @@
                 <q-separator />
                 <q-card-section>
                   <q-item dense>
-                    <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                    <q-item-section icon="attach_file" />
                     <q-item-section>{{
                       formData.fileSelected[0].name
                     }}</q-item-section>
@@ -73,7 +73,8 @@
                   <q-btn
                     outline
                     size="sm"
-                    color="negative" @click="removeBulkUploadFile"
+                    color="negative"
+                    @click="removeBulkUploadFile"
                     label="Remove"
                     icon="clear"
                   />
@@ -84,7 +85,8 @@
           <div class="col-md-12 group" align="right">
             <q-btn
               outline
-              color="dark" class="label="Cancel"
+              color="dark"
+              label="Cancel"
               @click="emitfnshowSimDeActivationList()"
             />
             <q-btn
@@ -213,7 +215,7 @@ export default {
            this.emitfnshowSimDeActivationList()
           var contentType = response.headers.map['content-type'][0]
           let blob = new Blob([response.data], { type:  contentType });
-          let clickable = document.createElement("a");
+          let link = document.createElement("a");
           link.href = window.URL.createObjectURL(blob);
           link.download = "Sim_upload_Remarks.xlsx";  
           link.click();
@@ -236,7 +238,9 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                error.body.message == null
+                  ? "Please Try Again Later !"
+                  : error.body.message,
               icon: "thumb_down"
             });
             // this.formData.fileSelected = []

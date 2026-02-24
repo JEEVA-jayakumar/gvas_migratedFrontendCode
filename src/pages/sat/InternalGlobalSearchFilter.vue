@@ -11,7 +11,8 @@
         <div class="col-md-6">
           <q-input
             clearable
-            color="grey-9" class="@blur="v$.formData.searchTerm.$touch"
+            color="grey-9"
+            @blur="v$.formData.searchTerm.$touch"
             :error="v$.formData.searchTerm.$error"
             v-model="formData.searchTerm"
             placeholder="Type.."
@@ -23,7 +24,8 @@
           <q-select
             label="Select Any One"
             placeholder="Select Any One"
-            color="grey-9" v-model="formData.select"
+            color="grey-9"
+            v-model="formData.select"
             separator
             :options="dropDown"
           />
@@ -33,7 +35,8 @@
             <q-radio
               v-for="(item, index) in flagOptions"
               :key="index"
-              color="grey-9" class="v-model.trim="formData.flag"
+              color="grey-9"
+              v-model.trim="formData.flag"
               :val="item.value"
               :label="item.label"
             />
@@ -42,7 +45,8 @@
             <q-radio
               v-for="(item, index) in flagOptions1"
               :key="index"
-              color="grey-9" class="v-model.trim="formData.flag"
+              color="grey-9"
+              v-model.trim="formData.flag"
               :val="item.value"
               :label="item.label"
             />
@@ -53,7 +57,8 @@
             class="auto"
             size="md"
             type="button"
-            color="purple-9" @click="globalSearchSubmit(formData)"
+            color="purple-9"
+            @click="globalSearchSubmit(formData)"
             >Submit
           </q-btn>
         </div>

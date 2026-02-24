@@ -61,7 +61,8 @@
               clearable
               v-model="filter"
               separator
-              color="grey-9" class="placeholder="Type.."
+              color="grey-9"
+              placeholder="Type.."
               label="Search .."
               class="q-mr-lg q-py-sm"
             />

@@ -10,7 +10,8 @@
       label="Expected date of Doc Submission"
       type="date"
       class="q-mt-lg"
-      color="red-6" class="/>
+      color="red-6"
+    />
     <q-input
       v-model="formData.leadVerificationStatus.soReason"
       type="textarea"
@@ -20,7 +21,8 @@
       :max-height="100"
       class="q-mt-lg"
       rows="1"
-      color="red-6" class="/>
+      color="red-6"
+    />
     <q-input
       v-model="formData.leadVerificationStatus.reason"
       @blur="v$.formData.leadVerificationStatus.reason.$touch"
@@ -30,21 +32,24 @@
       label="SAT Remarks"
       :max-height="100"
       rows="1"
-      color="red-6" class="/>
+      color="red-6"
+    />
     <q-btn
       size="sm"
       align="right"
       @click="sendRemarks(formData,item)"
       rounded
       outline
-      color="red-9" class="class="float-right q-mx-sm q-my-md"
+      color="red-9"
+      class="float-right q-mx-sm q-my-md"
     >Send</q-btn>
     <q-btn
       size="sm"
       align="right"
       rounded
       outline
-      color="grey-9" class="class="float-right q-mx-sm q-my-md"
+      color="grey-9"
+      class="float-right q-mx-sm q-my-md"
       @click="emitToggleRemarks(item)"
     >Cancel</q-btn>
   </div>
@@ -135,7 +140,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

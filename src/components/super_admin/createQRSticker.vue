@@ -6,7 +6,8 @@
           <!--START: table title -->
           <div class="col-md-6">
             <strong>
-              <q-chip color="primary">" class="<span align="center">Batch number : BatchNo_000{{getAllQRList1.batchCount}}</span>
+              <q-chip color="primary">
+                <span align="center">Batch number : BatchNo_000{{getAllQRList1.batchCount}}</span>
               </q-chip>
             </strong>
             <br />
@@ -30,7 +31,8 @@
               clearable
               label="Select QR API"
               v-model.trim="formdata.leadSource"
-              color="grey-9" class=":options="dropDown.leadSourceOptions"
+              color="grey-9"
+              :options="dropDown.leadSourceOptions"
             />
             <!--   :error="v$.formdata.leadSource.$error" -->
           </div>
@@ -53,7 +55,8 @@
               event.keyCode === 46 ? true : !isNaN(Number(event.key))"
               label="Enter numbers of QR count"
               v-model.trim="formdata.count"
-              color="grey-9" class="/>
+              color="grey-9"
+            />
             <!-- :error="v$.formdata.count.$error" -->
           </div>
         </div>
@@ -61,7 +64,8 @@
           <div class="col" align="right">
             <q-btn
               :disabled="submitDisabled"
-              color="light-blue" class="class="q-py-xs"
+              color="light-blue"
+              class="q-py-xs"
               label="Create QR"
               @click="fnsubmit(formdata)"
             />

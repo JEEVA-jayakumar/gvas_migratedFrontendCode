@@ -76,7 +76,8 @@ LOST
             highlight
             push
             outline
-            color="purple-9" size="sm"
+            color="purple-9"
+            size="sm"
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
           >Data Entry</q-btn>
           <q-btn
@@ -84,7 +85,8 @@ LOST
             highlight
             push
             outline
-            color="purple-9" size="sm"
+            color="purple-9"
+            size="sm"
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data/rejectfinance')"
           >Data Entry</q-btn>
           <q-btn
@@ -92,7 +94,8 @@ LOST
             highlight
             push
             outline
-            color="purple-9" size="sm"
+            color="purple-9"
+            size="sm"
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data/reject')"
           >Data Entry</q-btn>
           <q-btn
@@ -100,7 +103,8 @@ LOST
             highlight
             push
             outline
-            color="purple-9" size="sm"
+            color="purple-9"
+            size="sm"
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data/rejectrsm')"
           >Data Entry</q-btn>
           <q-btn
@@ -108,7 +112,8 @@ LOST
             v-else-if="props.row.leadInformation.cmsLeadStatus== 23"
             highlight
             push
-            color="purple-9" size="sm"
+            color="purple-9"
+            size="sm"
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
           >Submitted To Mars</q-btn>
           <q-btn
@@ -117,7 +122,8 @@ LOST
             highlight
             outline
             push
-            color="purple-9" size="sm"
+            color="purple-9"
+            size="sm"
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
           >Data Entry</q-btn>
         </q-td> --> 
@@ -126,7 +132,8 @@ LOST
           <div class="col-md-5">
             <q-input
               clearable
-              color="grey-9" v-model="filter1"
+              color="grey-9"
+              v-model="filter1"
               placeholder="Type.."
               :debounce="600"
               class="q-mr-lg q-py-sm"
@@ -147,7 +154,8 @@ LOST
        <div class="col">
           <q-input
             v-model="Add"
-            color="grey-9" class="placeholder="Add"
+            color="grey-9"
+            placeholder="Add"
             label="Enter Device Serial Number/TID"
             @keyup.enter="fnCookDispatchedHistoryDetails()"
             class="text-weight-regular text-grey-8 q-py-sm"
@@ -167,7 +175,8 @@ LOST
           <div class="col-md-5">
           <q-input
             v-model="text"
-            color="grey-9" class="placeholder="Add"
+            color="grey-9"
+            placeholder="Add"
             label="Enter Device Serial Number/TID"
             @keyup.enter="fnCookDispatchedHistoryDetails()"
             class="text-weight-regular text-grey-8 q-py-sm"
@@ -205,13 +214,15 @@ LOST
             highlight
             push
             outline
-            color="purple-9" size="sm"
+            color="purple-9"
+            size="sm"
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/dataInfo')"
           >Data Entry</q-btn> -->
           <!-- <q-btn highlight
             push
             outline
-            color="purple-9" size="sm"
+            color="purple-9"
+            size="sm"
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
           >Data Entry</q-btn> -->
         </q-td>
@@ -221,7 +232,8 @@ LOST
           <div class="col-md-5">
             <q-input
               clearable
-              color="grey-9" v-model="filter"
+              color="grey-9"
+              v-model="filter"
               placeholder="Type.."
               :debounce="600"
               class="q-mr-lg q-py-sm"
@@ -232,7 +244,8 @@ LOST
             <q-btn
               @click="downloadBpRegionsMenu()"
               outline
-              color="grey-9" class="label="Download as Excel"
+              color="grey-9"
+              label="Download as Excel"
               class="q-mr-lg q-py-sm float-right"
               size="md"
             />

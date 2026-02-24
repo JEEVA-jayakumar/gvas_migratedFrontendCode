@@ -19,7 +19,8 @@
                   size="sm"
                   @click="emitToggleinventoryBulkUpload(toggleModal)"
                   outline
-                  color="dark" class="icon="clear"
+                  color="dark"
+                  icon="clear"
                 />
               </div>
             </div>
@@ -69,13 +70,14 @@
                     :key="index"
                   >
                     <q-item dense>
-                      <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                      <q-item-section icon="attach_file" />
                       <q-item-section>{{ file.name }}</q-item-section>
                       <q-item-section>
                         <q-btn
                           class="fa fa-close"
                           size="sm"
-                          color="negative" @click="removeBulkUploadFile(index)"
+                          color="negative"
+                          @click="removeBulkUploadFile(index)"
                           label="Remove"
                           icon="clear"
                         />

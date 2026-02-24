@@ -12,7 +12,7 @@
               <div class="col-md-4 text-h6 text-weight-regular text-grey-9">
                 <div class="row">
                    <div class="col-md-12">
-                    <q-list class="no-padding" 	separator>
+                    <q-list class="no-padding" no-border	separator>
                       <q-item-label header style="border-bottom: 1px solid #ccc;">Device Info</q-item-label header>
                     </q-list>
                    </div>
@@ -72,7 +72,7 @@
               <div class="col-md-8 text-h6 text-weight-regular text-grey-9">
                 <div class="row items-center">
                   <div class="col-md-3">
-                      <q-list class="no-padding"  separator>
+                      <q-list class="no-padding" no-border separator>
                           <q-item-label header style="border-bottom: 1px solid #ccc;">mPOS ({{scannedItems.mpos.length}})</q-item-label header>
                           <q-item v-for="(item,index) in scannedItems.mpos" :key="index">
                               <q-item-section class="text-caption" :label="item" />
@@ -80,7 +80,7 @@
                       </q-list>
                   </div>
                   <div class="col-md-3">
-                      <q-list class="no-padding" 	separator>
+                      <q-list class="no-padding" no-border	separator>
                           <q-item-label header style="border-bottom: 1px solid #ccc;">GPRS ({{scannedItems.gprs.length}})</q-item-label header>
                           <q-item v-for="(item,index) in scannedItems.gprs" :key="index">
                               <q-item-section class="text-caption" :label="item" />
@@ -88,7 +88,7 @@
                       </q-list>
                   </div>
                   <div class="col-md-3">
-                      <q-list class="no-padding" 	separator>
+                      <q-list class="no-padding" no-border	separator>
                           <q-item-label header style="border-bottom: 1px solid #ccc;">mGPRS ({{scannedItems.mgprs.length}})</q-item-label header>
                           <q-item v-for="(item,index) in scannedItems.mgprs" :key="index">
                               <q-item-section class="text-caption" :label="item" />
@@ -96,7 +96,7 @@
                       </q-list>
                   </div>
                   <div class="col-md-3">
-                      <q-list class="no-padding" 	separator>
+                      <q-list class="no-padding" no-border	separator>
                           <q-item-label header style="border-bottom: 1px solid #ccc;">dGPRS ({{scannedItems.dgprs.length}})</q-item-label header>
                           <q-item v-for="(item,index) in scannedItems.dgprs" :key="index">
                               <q-item-section class="text-caption" :label="item" />

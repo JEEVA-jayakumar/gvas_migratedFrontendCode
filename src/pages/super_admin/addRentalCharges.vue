@@ -7,12 +7,13 @@
 
       <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
         <q-card style="width:100%">
-          <q-separator />
-          <q-card-section>
+          <q-card-separator />
+          <q-card-main>
             <q-item>
               <q-item-section>
                 <q-select
-                  color="grey-9" v-model="formData.leadSource"
+                  color="grey-9"
+                  v-model="formData.leadSource"
                   :options="dropDown.leadSourceOptions"
                   label="Select lead source"
                   placeholder="Lead source"
@@ -23,7 +24,8 @@
             <q-item>
               <q-item-section>
                 <q-select
-                  color="grey-9" v-model="formData.device"
+                  color="grey-9"
+                  v-model="formData.device"
                   :options="dropDown.deviceOptions"
                   label="Select device"
                   placeholder="Device"
@@ -34,7 +36,8 @@
             <q-item>
               <q-item-section>
                 <q-select
-                  color="grey-9" v-model="formData.marsDevice"
+                  color="grey-9"
+                  v-model="formData.marsDevice"
                   :options="dropDown.marsDeviceOptions"
                   label="Mars Device Model"
                 />
@@ -44,7 +47,8 @@
             <q-item>
               <q-item-section>
                 <q-select
-                  color="grey-9" v-model="formData.plan"
+                  color="grey-9"
+                  v-model="formData.plan"
                   :options="dropDown.planOptions"
                   label="Select plan"
                   placeholder="Plan"
@@ -56,7 +60,8 @@
             <q-item>
               <q-item-section>
                 <q-input
-                  color="grey-9" class="type="number"
+                  color="grey-9"
+                  type="number"
                   v-model="formData.setupFees"
                   placeholder="Setup fee"
                   label="Enter Setup fee"
@@ -67,17 +72,18 @@
             <q-item>
               <q-item-section>
                 <q-input
-                  color="grey-9" class="type="number"
+                  color="grey-9"
+                  type="number"
                   v-model="formData.monthlyFees"
                   placeholder="Recurring fee"
                   label="Enter recurring fee"
                 />
               </q-item-section>
             </q-item>
-          </q-card-section>
+          </q-card-main>
 
           <q-card-actions vertical align="end">
-            <q-btn label="submit" @click="fnEditRentalPlan(formData)" color="purple-9" class="/>
+            <q-btn label="submit" @click="fnEditRentalPlan(formData)" color="purple-9" />
           </q-card-actions>
         </q-card>
       </div>

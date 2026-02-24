@@ -14,7 +14,8 @@
               :error="v$.formData.leadName.$error"
               label="Merchant Name"
               placeholder="Merchant Name"
-              color="grey-9" class="/>
+              color="grey-9"
+            />
           </div>
           <div class="col">
             <q-input
@@ -23,7 +24,8 @@
               :error="v$.formData.contactName.$error"
               label="Contact Name"
               placeholder="Contact Name"
-              color="grey-9" class="/>
+              color="grey-9"
+            />
           </div>
           <div class="col">
             <q-input
@@ -32,7 +34,8 @@
               :error="v$.formData.contactNumber.$error"
               label="Contact Number"
               placeholder="Contact Number"
-              color="grey-9" class="/>
+              color="grey-9"
+            />
           </div>
           <div class="col">
             <q-input
@@ -41,7 +44,8 @@
               v-model="formData.alternateContactNumber"
               label="Alternate Contact Number"
               placeholder="Alternate Contact Number"
-              color="grey-9" class="/>
+              color="grey-9"
+            />
           </div>
         </div>
 
@@ -51,7 +55,8 @@
               v-model="formData.leadAddress"
               label="Merchant Address"
               placeholder="Merchant Address"
-              color="grey-9" class="/>
+              color="grey-9"
+            />
           </div>
           <div class="col">
             <q-input
@@ -59,7 +64,8 @@
               :error="v$.formData.pincode.$error"
               clearable
               @clear="fnClearStateCity"
-              color="grey-9" v-model="formData.pincode"
+              color="grey-9"
+              v-model="formData.pincode"
               label="Pincode"
               placeholder="Pincode"
             >
@@ -79,7 +85,8 @@
               :error="v$.formData.city.$error"
               label="City/Town"
               placeholder="City/Town"
-              color="grey-9" class="/>
+              color="grey-9"
+            />
           </div>
           <div class="col">
             <q-input
@@ -89,7 +96,8 @@
               :error="v$.formData.state.$error"
               label="State"
               placeholder="State"
-              color="grey-9" class="/>
+              color="grey-9"
+            />
           </div>
         </div>
 
@@ -101,7 +109,8 @@
               @blur="v$.formData.leadSource.id.$touch"
               clearable
               @clear="fnClearDeviceList"
-              color="grey-9" v-model="formData.leadSource.name"
+              color="grey-9"
+              v-model="formData.leadSource.name"
               label="Lead Source"
               placeholder="Lead Source"
             >
@@ -119,7 +128,8 @@
               :disable="deviceSelectOptions.length > 0"
               placeholder="Device Type"
               clearable
-              color="grey-9" v-model="formData.device.id"
+              color="grey-9"
+              v-model="formData.device.id"
               @blur="v$.formData.device.id.$touch"
               :error="v$.formData.device.id.$error"
               label="Type"
@@ -135,7 +145,8 @@
               type="number"
               label="Count"
               placeholder="Device Count"
-              color="grey-9" class="/>
+              color="grey-9"
+            />
           </div>
         </div>
         <div class="text-body1 uppercase text-weight-medium text-grey-9 q-my-md">Assign To</div>
@@ -164,7 +175,8 @@
               :error="v$.formData.assignedOpsTo.id.$error"
               placeholder="Choose from the below"
               clearable
-              color="grey-9" v-model="formData.assignedOpsTo.id"
+              color="grey-9"
+              v-model="formData.assignedOpsTo.id"
               label="RSM Name"
               :options="RSMselectOptions"
             />
@@ -175,7 +187,8 @@
               :disable="getAllRegionsData.length > 0"
               placeholder="Choose Region"
               clearable
-              color="grey-9" v-model="region"
+              color="grey-9"
+              v-model="region"
               label="Region"
               :options="getAllRegionsData"
               @clear="fnClearASMList"
@@ -190,7 +203,8 @@
               :error="v$.formData.assignedOpsTo.id.$error"
               placeholder="Choose from the below"
               clearable
-              color="grey-9" v-model="formData.assignedOpsTo.id"
+              color="grey-9"
+              v-model="formData.assignedOpsTo.id"
               label="ASM Name"
               :options="ASMselectOptions"
             />
@@ -199,8 +213,8 @@
         </div>
         <div class="row">
           <div class="col group" align="right">
-            <q-btn icon="block" outline color="dark" class="label="Cancel"/>
-            <q-btn @click="fnSubmibAssignShortLead()" icon="check" color="info" class="label="Submit"/>
+            <q-btn icon="block" outline color="dark" label="Cancel"/>
+            <q-btn @click="fnSubmibAssignShortLead()" icon="check" color="info" label="Submit"/>
           </div>
         </div>
       </div>
@@ -446,7 +460,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           }
@@ -508,7 +522,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

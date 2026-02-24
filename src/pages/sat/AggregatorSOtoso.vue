@@ -6,19 +6,20 @@
           <!-- <div class="col-md-2">
             <q-select :disabled="formData.device_type != ''"
               :class="[formData.device_type != '' ? 'no-pointer-events' : '']" v-model="formData.region"
-              label="Select Region" radio color="grey-9" class=":options="regionOptions" @input="regionBasedSO" />
+              label="Select Region" radio color="grey-9" :options="regionOptions" @input="regionBasedSO" />
           </div> -->
           <div class="col-md-2">
-            <q-select filter clearable  v-model="formData.so" label="Select SO" radio color="grey-9" class=":options="assignToOptions" @input="SelectedSo" />
+            <q-select filter clearable  v-model="formData.so" label="Select SO" radio color="grey-9"
+              :options="assignToOptions" @input="SelectedSo" />
           </div>
           <!-- <div class="col-md-2">
             <q-select clearable @clear="fnClearingDeviceTypeSelection"
               @input="fnSetDevicesByDeviceId" v-model="formData.device_type" label="Select Device Type" radio
-              color="grey-9" class=":options="deviceOptions" />
+              color="grey-9" :options="deviceOptions" />
           </div> -->
           <div class="col-12 col-lg-4 group" align="right">
             <q-btn :disabled="formData.so == ''" @click="openScannerComp"
-              v-if="scannerToggleOption" color="light-blue" class="class="q-py-xs" label="Start scan" />
+              v-if="scannerToggleOption" color="light-blue" class="q-py-xs" label="Start scan" />
             <q-btn icon="shopping_cart" outline class="q-py-xs" label="Re-Assign" @click="fnAllocateDeviceToSO" />
           </div>
           <!--END: table title -->
@@ -27,7 +28,7 @@
           <div class="col group" v-for="(item, index) in formData.scannedItems" :key="index">
             <q-card class="shadow-4"
               :style="'border:' + [formData.device_type.id == item.device.id ? '2px solid #61116a' : 'unset']">
-              <q-list separator class="q-pa-none"
+              <q-list highlight separator class="q-pa-none"
                 :class="[formData.device_type.id == item.device.id ? 'activeDeviceTab' : '']">
                 <q-item-label header style="border-bottom: 1px solid #ccc;">
                   <q-icon :style="'color:'[formData.device_type.id == item.device.id ? '#fff' : '#202c3f']"
@@ -47,7 +48,7 @@
                       <q-item-section class="text-body1">{{ subItem }}</q-item-section>
                       <q-item-section class="text-body1">{{item.userName[0]}}</q-item-section>
                       <q-item-section>
-                        <q-btn round size="sm" color="negative" class="icon="clear"
+                        <q-btn round size="sm" color="negative" icon="clear"
                           @click="fnRemoveScannedItems(index, subIndex)" />
                       </q-item-section>
                     </q-item>
@@ -290,14 +291,14 @@ import { email } from '@vuelidate/validators';
             barcode: barcode
           })
             .then(response  => {
-              console.log("Error-1",JSON.stringify(response.data.data.user));
+              console.log("Error-1",JSON.stringify(response.body.data.user));
               // self.userName = null
               this.scannerToggleOption = false;
-              self.userName = response.data.data.user.username
+              self.userName = response.body.data.user.username
               console.log("USER NAME",self.userName);
               assumeArr.deviceSerialNumbers.push(barcode);
               assumeArr.userName.push(self.userName)
-              this.formData.assignedUserId = response.data.data.user.id
+              this.formData.assignedUserId = response.body.data.user.id
             })
             .catch(error => {
               let message = error.data.message

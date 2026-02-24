@@ -3,7 +3,7 @@
     <div class="text-grey-9">
       <div class="row bottom-border q-pa-sm items-center">
         <div class="col">
-          <q-tabs no-pane-border v-model="QRselected" color="dark" class="class="shadow-1">
+          <q-tabs no-pane-border v-model="QRselected" color="dark" inverted class="shadow-1">
             <q-tab name="createQRSticker" label="Create QR Ref No"  />
             <!-- <q-tab name="Socount" label="Inventory So Count"  /> -->
             <q-tab name="downloadQRcodes" label="Download QR Codes"  />
@@ -12,23 +12,18 @@
               label="Implement QR for Lead Sources"
 
             />
-
-
-
-
-
-          </q-tabs>
-<q-tab-panels v-model="QRselected" animated>
-<q-tab-panel name="createQRSticker">
+            <q-tab-panel name="createQRSticker">
               <createQRSticker />
             </q-tab-panel>
-<q-tab-panel name="downloadQRcodes">
+
+            <q-tab-panel name="downloadQRcodes">
               <downloadQRcodes />
             </q-tab-panel>
-<q-tab-panel name="implementQRleadsources">
+
+            <q-tab-panel name="implementQRleadsources">
               <implementQRleadsources />
             </q-tab-panel>
-</q-tab-panels>
+          </q-tabs>
         </div>
       </div>
     </div>

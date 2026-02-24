@@ -3,15 +3,12 @@
     <div class="text-grey-9">
       <div class="row bottom-border q-pa-sm items-center">
         <div class="col">
-          <q-tabs no-pane-border v-model="QRselected" color="dark" class="class="shadow-1">
+          <q-tabs no-pane-border v-model="QRselected" color="dark" inverted class="shadow-1">
             <q-tab name="HitachiUpload" label="Upload And Download"  />
-
-          </q-tabs>
-<q-tab-panels v-model="QRselected" animated>
-<q-tab-panel name="HitachiUpload">
+            <q-tab-panel name="HitachiUpload">
               <HitachiUpload />
             </q-tab-panel>
-</q-tab-panels>
+          </q-tabs>
         </div>
       </div>
     </div>
@@ -117,7 +114,7 @@ export default {
               <q-separator />
               <q-card-section>
                 <q-item dense>
-                  <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                  <q-item-section icon="attach_file" />
                   <q-item-section>{{ formData.fileSelected[0].name }}</q-item-section>
                   <q-item-section></q-item-section>
                 </q-item>
@@ -127,7 +124,8 @@ export default {
                 <q-btn
                   outline
                   size="sm"
-                  color="negative" @click="removeBulkUploadFile"
+                  color="negative"
+                  @click="removeBulkUploadFile"
                   label="Remove"
                   icon="clear"
                 />
@@ -252,7 +250,9 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              error.body.message == null
+                ? "Please Try Again Later !"
+                : error.body.message,
             icon: "thumb_down"
           });
         });

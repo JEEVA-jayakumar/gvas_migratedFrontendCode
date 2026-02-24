@@ -1,6 +1,7 @@
 <template>
   <q-page padding>
-    <q-stepper flat ref="stepper" v-model="step" color="primary">" class="<q-step default name="campaign" title="Edit Rental Details">
+    <q-stepper flat ref="stepper" v-model="step" color="primary">
+      <q-step default name="campaign" title="Edit Rental Details">
         {{this.info.datainfo1}}
         {{this.getImplementedQueue.leadInformation.merchantType.merchantTypeName}}
        
@@ -74,7 +75,8 @@
               <q-checkbox
                 v-model="check"
                 :disable="this.getImplementedQueue.leadInformation.cmsLeadStatus==15"
-                color="positive" class="label="Pricing Exception"
+                color="positive"
+                label="Pricing Exception"
                 left-label
               />
             </div>
@@ -129,7 +131,8 @@
               <q-checkbox
                 v-model="check"
                 :disable="this.getImplementedQueue.leadInformation.cmsLeadStatus==15"
-                color="positive" class="label="Pricing Exception"
+                color="positive"
+                label="Pricing Exception"
                 left-label
               />
             </div>
@@ -158,7 +161,8 @@
               :error="v$.formdata.paymentMadeon.$error"
               v-model.trim="formdata.paymentMadeon"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="*Transaction Made ON"
+              color="grey-9"
+              label="*Transaction Made ON"
               placeholder="Transaction Made ON"
             />
           </div>
@@ -168,7 +172,8 @@
               :error="v$.formdata.referenceNumber.$error"
               v-model.trim="formdata.referenceNumber"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Cheque Reference Number"
+              color="grey-9"
+              label="Cheque Reference Number"
             />
           </div>
         </div>
@@ -179,7 +184,8 @@
               :error="v$.formdata.referenceNumber.$error"
               v-model.trim="formdata.referenceNumber"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="*NEFT Reference Number"
+              color="grey-9"
+              label="*NEFT Reference Number"
             />
           </div>
           <div class="col-xs-12 col-sm-6">
@@ -188,7 +194,8 @@
               :error="v$.formdata.paymentMadeon.$error"
               v-model.trim="formdata.paymentMadeon"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="*Transaction Made ON"
+              color="grey-9"
+              label="*Transaction Made ON"
             />
           </div>
         </div>
@@ -199,7 +206,8 @@
               :error="v$.formdata.referenceNumber.$error"
               v-model.trim="formdata.referenceNumber"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="*Swipe Reference Number"
+              color="grey-9"
+              label="*Swipe Reference Number"
             />
           </div>
           <div class="col-xs-12 col-sm-6">
@@ -208,7 +216,8 @@
               :error="v$.formdata.paymentMadeon.$error"
               v-model.trim="formdata.paymentMadeon"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="*Transaction Made ON"
+              color="grey-9"
+              label="*Transaction Made ON"
             />
           </div>
         </div>
@@ -223,7 +232,8 @@
             >Send to mars</q-btn>-->
             <q-btn class="q-ml-sm" color="primary" @click="sendtoFinance(formdata)">Send to Finance</q-btn>
             <!-- <q-btn
-                color="negative" class="class="q-ma-xs"
+                color="negative"
+                class="q-ma-xs"
                 icon="backspace"
                 label="Back to document validation"
                 @click="goBackToDocumentVerificationStage()"
@@ -238,7 +248,8 @@
             >Send to mars</q-btn>-->
             <q-btn class="q-ml-sm" color="primary" @click="sendtoFinance(formdata)">Send to Finance</q-btn>
             <!-- <q-btn
-                color="negative" class="class="q-ma-xs"
+                color="negative"
+                class="q-ma-xs"
                 icon="backspace"
                 label="Back to document validation"
                 @click="goBackToDocumentVerificationStage()"
@@ -253,7 +264,8 @@
             >Send to mars</q-btn>-->
             <q-btn class="q-ml-sm" color="primary" @click="sendtoNH(formdata1)">Send to RSM</q-btn>
             <!-- <q-btn
-                color="negative" class="class="q-ma-xs"
+                color="negative"
+                class="q-ma-xs"
                 icon="backspace"
                 label="Back to document validation"
                 @click="goBackToDocumentVerificationStage()"
@@ -267,7 +279,8 @@
             <!-- &&(formdata.paymentOption == 1 || formdata.paymentOption == 2 || formdata.paymentOption == 3) -->
             <q-btn class="q-ml-sm" color="primary" @click="sendtoFinance(formdata)">Send to Finance</q-btn>
             <!-- <q-btn
-                color="negative" class="class="q-ma-xs"
+                color="negative"
+                class="q-ma-xs"
                 icon="backspace"
                 label="Back to document validation"
                 @click="goBackToDocumentVerificationStage()"
@@ -279,7 +292,8 @@
           >
             <q-btn class="q-ml-sm" color="primary" @click="sendtoNH(formdata1)">Send to RSM</q-btn>
             <!-- <q-btn
-                color="negative" class="class="q-ma-xs"
+                color="negative"
+                class="q-ma-xs"
                 icon="backspace"
                 label="Back to document validation"
                 @click="goBackToDocumentVerificationStage()"
@@ -329,7 +343,8 @@
           <div class="col-xs-12 col-sm-6">
             <q-input
               
-              color="grey-9" class="v-model.trim="merchant.companyinformation.registeredCityName"
+              color="grey-9"
+              v-model.trim="merchant.companyinformation.registeredCityName"
               label="City (type min 3 characters)*"
               placeholder="Start typing ..*"
             >
@@ -346,7 +361,8 @@
           <div class="col-xs-12 col-sm-6">
             <q-input
               
-              color="grey-9" class="v-model.trim="merchant.companyinformation.registeredStateName"
+              color="grey-9"
+              v-model.trim="merchant.companyinformation.registeredStateName"
               label="state (type min 3 characters)*"
               placeholder="Start typing ..*"
             >
@@ -403,7 +419,8 @@
           <div class="col-xs-12 col-sm-6">
             <q-input
               upper-case
-              color="grey-9" class="@blur="v$.merchant.companyinformation.pan.$touch"
+              color="grey-9"
+              @blur="v$.merchant.companyinformation.pan.$touch"
               :error="v$.merchant.companyinformation.pan.$error"
               v-model="merchant.companyinformation.pan"
               class="no-margin"
@@ -417,10 +434,10 @@
               v-if="v$.merchant.companyinformation.pan.$error"
             >
               <div>
-                <q-icon color="negative" class="name="warning" />&nbsp;Required - Provide valid PAN Number
+                <q-icon color="negative" name="warning" />&nbsp;Required - Provide valid PAN Number
               </div>
               <div v-if="v$.merchant.companyinformation.pan.$params.minLength">
-                <q-icon color="negative" class="name="warning" />
+                <q-icon color="negative" name="warning" />
                 &nbsp;Length should be between {{v$.merchant.companyinformation.pan.$params.minLength.min}} and {{ v$.merchant.companyinformation.pan.$params.maxLength.max }}
               </div>
             </div>
@@ -428,7 +445,8 @@
           <div class="col-xs-12 col-sm-6">
             <q-input
               upper-case
-              color="grey-9" class="@blur="v$.merchant.businessInformation.gstId.$touch"
+              color="grey-9"
+              @blur="v$.merchant.businessInformation.gstId.$touch"
               :error="v$.merchant.businessInformation.gstId.$error"
               v-model="merchant.businessInformation.gstId"
               class="no-margin"
@@ -443,10 +461,10 @@
               v-if="v$.merchant.businessInformation.gstId.$error"
             >
               <div>
-                <q-icon color="negative" class="name="warning" />&nbsp;Required - Provide valid GST Number
+                <q-icon color="negative" name="warning" />&nbsp;Required - Provide valid GST Number
               </div>
               <div v-if="v$.merchant.businessInformation.gstId.$params.minLength">
-                <q-icon color="negative" class="name="warning" />
+                <q-icon color="negative" name="warning" />
                 &nbsp;Length should be between {{v$.merchant.businessInformation.gstId.$params.minLength.min}} and {{ v$.merchant.businessInformation.gstId.$params.maxLength.max }}
               </div>
             </div>
@@ -458,7 +476,8 @@
             <q-input
               
               upper-case
-              color="grey-9" class="@blur="populateBankDetails"
+              color="grey-9"
+              @blur="populateBankDetails"
               v-model.trim="merchant.bankInformation.bankDetails.ifsc"
               label="IFSC Code*"
               placeholder="Enter IFSC*"
@@ -468,7 +487,8 @@
             <q-input
               
               upper-case
-              color="grey-9" class="v-model.trim="merchant.bankInformation.bankDetails.bankName"
+              color="grey-9"
+              v-model.trim="merchant.bankInformation.bankDetails.bankName"
               label="Bank Name*"
               placeholder="Enter IFSC*"
             />
@@ -477,7 +497,8 @@
             <q-select
               
               placeholder="Choose from the below"
-              color="grey-9" class="v-model.trim="merchant.bankInformation.bankDetails.paymentMode"
+              color="grey-9"
+              v-model.trim="merchant.bankInformation.bankDetails.paymentMode"
               label="Payment mode"
               :options="paymnentModeOptions"
             />
@@ -485,7 +506,8 @@
           <!-- <div class="col-xs-12 col-sm-6">
               <q-select
                   placeholder="Choose from the below*"
-                  color="grey-9" class="v-model.trim="merchant.paymentDetails.rentalPlanCode"
+                  color="grey-9"
+                  v-model.trim="merchant.paymentDetails.rentalPlanCode"
                   label="Rental Plan*"
                   :options="rentalPlanSet"
                 />
@@ -494,7 +516,8 @@
             <q-select
               
               placeholder="Choose from the below"
-              color="grey-9" class="v-model.trim="merchant.bankInformation.bankDetails.accountType"
+              color="grey-9"
+              v-model.trim="merchant.bankInformation.bankDetails.accountType"
               label="Account Type"
               :options="accountTypeOptions"
             />
@@ -511,7 +534,8 @@
               <q-radio
                 v-for="(item,index) in autoormanualOptions"
                 :key="index"
-                color="grey-9" class="v-model.trim="merchant.paymentDetails.settlementType"
+                color="grey-9"
+                v-model.trim="merchant.paymentDetails.settlementType"
                 :val="item.value"
                 :label="item.label"
               />
@@ -526,7 +550,8 @@
               <q-radio
                 v-for="(item,index) in preauthOptions"
                 :key="index"
-                color="grey-9" class="v-model.trim="merchant.paymentDetails.preAuth"
+                color="grey-9"
+                v-model.trim="merchant.paymentDetails.preAuth"
                 :val="item.value"
                 :label="item.label"
               />
@@ -538,7 +563,8 @@
               <q-radio
                 v-for="(item,index) in cashandposOptions"
                 :key="index"
-                color="grey-9" class="v-model.trim="merchant.paymentDetails.cashAtPosEnabled"
+                color="grey-9"
+                v-model.trim="merchant.paymentDetails.cashAtPosEnabled"
                 :val="item.value"
                 :label="item.label"
               />
@@ -550,7 +576,8 @@
               <q-radio
                 v-for="(item,index) in internationalcardOptions"
                 :key="index"
-                color="grey-9" class="v-model.trim="merchant.paymentDetails.intlCardAcceptance"
+                color="grey-9"
+                v-model.trim="merchant.paymentDetails.intlCardAcceptance"
                 :val="item.value"
                 :label="item.label"
               />
@@ -562,7 +589,8 @@
               <q-radio
                 v-for="(item,index) in tipOptions"
                 :key="index"
-                color="grey-9" class="v-model.trim="merchant.paymentDetails.tipEnabled"
+                color="grey-9"
+                v-model.trim="merchant.paymentDetails.tipEnabled"
                 :val="item.value"
                 :label="item.label"
               />
@@ -611,10 +639,10 @@
 
         <q-stepper-navigation>
           <!-- <q-btn color="primary" @click="$refs.stepper.next()">Submit</q-btn> -->
-          <!-- <q-btn class="q-ml-sm" color="secondary" @click="finalMerchant(merchant)">Submit to Mars Merchant Details</q-btn> -->
+          <!-- <q-btn class="q-ml-sm" color="secondary"  @click="finalMerchant(merchant)">Submit to Mars Merchant Details</q-btn> -->
           <q-btn class="q-ml-sm" color="primary" @click="next()">Continue</q-btn>
 
-          <q-btn class="q-ml-sm" color="primary" class="flat @click="$refs.stepper.previous()">Back</q-btn>
+          <q-btn class="q-ml-sm" color="primary" flat @click="$refs.stepper.previous()">Back</q-btn>
         </q-stepper-navigation>
       </q-step>
       <q-step name="mdrdetails" title="MDR Changes">
@@ -633,21 +661,24 @@
                 <div class="row group bg-green-2">
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.domesticDebitUpTo2000.fixed"
                       placeholder="Fixed"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.domesticDebitUpTo2000.percentage"
                       placeholder="%"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.domesticDebitUpTo2000.minimum"
                       placeholder="Max"
                     />
@@ -665,21 +696,24 @@
                 <div class="row group bg-green-2">
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.domesticDebitAbove2000.fixed"
                       placeholder="Fixed"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.domesticDebitAbove2000.percentage"
                       placeholder="%"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.domesticDebitAbove2000.minimum"
                       placeholder="Max"
                     />
@@ -697,21 +731,24 @@
                 <div class="row group bg-green-2">
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.standardOrClassic.fixed"
                       placeholder="Fixed"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.standardOrClassic.percentage"
                       placeholder="%"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.standardOrClassic.minimum"
                       placeholder="Max"
                     />
@@ -729,21 +766,24 @@
                 <div class="row group bg-green-2">
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.premiumOrPlatinum.fixed"
                       placeholder="Fixed"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.premiumOrPlatinum.percentage"
                       placeholder="%"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.premiumOrPlatinum.minimum"
                       placeholder="Max"
                     />
@@ -761,21 +801,24 @@
                 <div class="row group bg-green-2">
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.superPremiumOrSignature.fixed"
                       placeholder="Fixed"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.superPremiumOrSignature.percentage"
                       placeholder="%"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.superPremiumOrSignature.minimum"
                       placeholder="Max"
                     />
@@ -793,21 +836,24 @@
                 <div class="row group bg-green-2">
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.commercialOrCorporate.fixed"
                       placeholder="Fixed"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.commercialOrCorporate.percentage"
                       placeholder="%"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.commercialOrCorporate.minimum"
                       placeholder="Max"
                     />
@@ -825,21 +871,24 @@
                 <div class="row group bg-green-2">
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.internationalDebitCard.fixed"
                       placeholder="Fixed"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.internationalDebitCard.percentage"
                       placeholder="%"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.internationalDebitCard.minimum"
                       placeholder="Max"
                     />
@@ -857,21 +906,24 @@
                 <div class="row group bg-green-2">
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.internationalCreditCard.fixed"
                       placeholder="Fixed"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.internationalCreditCard.percentage"
                       placeholder="%"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.internationalCreditCard.minimum"
                       placeholder="Max"
                     />
@@ -889,21 +941,24 @@
                 <div class="row group bg-green-2">
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.onus.fixed"
                       placeholder="Fixed"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.onus.percentage"
                       placeholder="%"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.onus.minimum"
                       placeholder="Max"
                     />
@@ -921,21 +976,24 @@
                 <div class="row group bg-green-2">
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.diners.fixed"
                       placeholder="Fixed"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.diners.percentage"
                       placeholder="%"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.diners.minimum"
                       placeholder="Max"
                     />
@@ -953,21 +1011,24 @@
                 <div class="row group bg-green-2">
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.masterPass.fixed"
                       placeholder="Fixed"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.masterPass.percentage"
                       placeholder="%"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.masterPass.minimum"
                       placeholder="Max"
                     />
@@ -985,21 +1046,24 @@
                 <div class="row group bg-green-2">
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.cashAtPos.fixed"
                       placeholder="Fixed"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.cashAtPos.percentage"
                       placeholder="%"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.cashAtPos.minimum"
                       placeholder="Max"
                     />
@@ -1017,21 +1081,24 @@
                 <div class="row group bg-green-2">
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.convenientFee.fixed"
                       placeholder="Fixed"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.convenientFee.percentage"
                       placeholder="%"
                     />
                   </div>
                   <div class="col">
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model.trim="merchant.mdrPlan.convenientFee.minimum"
                       placeholder="Max"
                     />
@@ -1042,7 +1109,8 @@
             <!-- <div class="row group">
                     <div class="col-md-4">
                       <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           v-model.trim="merchant.mdrPlan.remarks"
                           placeholder="Mdr Remarks"
                         />
@@ -1054,10 +1122,10 @@
         </div>
 
         <q-stepper-navigation>
-          <!-- <q-btn class="q-ml-sm" color="secondary" @click="finalFormSubmit(merchant)">Submit to Mars MDR</q-btn> -->
+          <!-- <q-btn class="q-ml-sm" color="secondary"  @click="finalFormSubmit(merchant)">Submit to Mars MDR</q-btn> -->
           <!-- <q-btn class="q-ml-sm" color="primary" @click="next()">Continue</q-btn> -->
           <q-btn class="q-ml-sm" color="primary" @click="$refs.stepper.next()">Continue</q-btn>
-          <q-btn class="q-ml-sm" color="primary" class="flat @click="$refs.stepper.previous()">Back</q-btn>
+          <q-btn class="q-ml-sm" color="primary" flat @click="$refs.stepper.previous()">Back</q-btn>
         </q-stepper-navigation>
       </q-step>
        <q-step name="zata" title="Attach Documents">
@@ -1094,7 +1162,7 @@
                   v-if="getShortLeadInfo.applicationFileMimeType==null"
                 >
                   <div @click="fnPDFViewModal(getShortLeadInfo.applicationFile)" class="ellipsis">
-                    <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" class="/>
+                    <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" />
                     &nbsp;{{getShortLeadInfo.applicationFile}}
                   </div>
                 </div>
@@ -1103,7 +1171,7 @@
                   v-else-if="getShortLeadInfo.applicationFileMimeType.includes('pdf')"
                 >
                   <div @click="fnPDFViewModal(getShortLeadInfo.applicationFile)" class="ellipsis">
-                    <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" class="/>
+                    <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" />
                     &nbsp;{{getShortLeadInfo.applicationFile}}
                   </div>
                 </div>
@@ -1122,7 +1190,7 @@
                     />
                   </viewer>
                   <div @click="fnViewHandedOverFileImage()" class="ellipsis">
-                    <q-icon name="fas fa-image" color="amber-9" class="/>
+                    <q-icon name="fas fa-image" color="amber-9" />
                     &nbsp;{{getShortLeadInfo.applicationFile}}
                   </div>
                 </div>
@@ -1193,7 +1261,7 @@
                               @click="fnPDFViewModal(filesAttachedEarlier.fileName)"
                               class="ellipsis"
                             >
-                              <q-icon name="fas fa-file-pdf" color="negative" class="/>
+                              <q-icon name="fas fa-file-pdf" color="negative" />
                               &nbsp;{{filesAttachedEarlier.fileName}}
                             </div>
                           </div>
@@ -1215,7 +1283,7 @@
                               @click="fnViewAttachedFileImage(filesAttachedEarlierIndex)"
                               class="ellipsis"
                             >
-                              <q-icon name="fas fa-image" color="amber-9" class="/>
+                              <q-icon name="fas fa-image" color="amber-9" />
                               &nbsp;{{filesAttachedEarlier.fileName}}
                             </div>
                           </div>
@@ -1228,7 +1296,8 @@
                           icon="clear"
                           @click="fnDeleteAlreadyAttachedFile(filesAttachedEarlier)"
                           round
-                          color="negative" class="label="Remove"
+                          color="negative"
+                          label="Remove"
                         />
                       </q-item-section>
                     </q-item>
@@ -1308,7 +1377,7 @@
                             @click="fnPDFViewModal(filesAttachedEarlier.fileName)"
                             class="ellipsis"
                           >
-                            <q-icon name="fas fa-file-pdf" color="negative" class="/>
+                            <q-icon name="fas fa-file-pdf" color="negative" />
                             &nbsp;{{filesAttachedEarlier.fileName}}
                           </div>
                         </div>
@@ -1330,7 +1399,7 @@
                             @click="fnViewMultiAttachedFileImage(filesAttachedEarlierIndex)"
                             class="ellipsis"
                           >
-                            <q-icon name="fas fa-image" color="amber-9" class="/>
+                            <q-icon name="fas fa-image" color="amber-9" />
                             &nbsp;{{filesAttachedEarlier.fileName}}
                           </div>
                         </div>
@@ -1342,7 +1411,8 @@
                         icon="clear"
                         @click="fnDeleteAlreadyAttachedFile(filesAttachedEarlier)"
                         round
-                        color="negative" class="label="Remove"
+                        color="negative"
+                        label="Remove"
                       />
                     </q-item-section>
                   </q-item>
@@ -1355,7 +1425,8 @@
             <div class="row group">
               <div class="col-md-4">
                 <q-input
-                  color="grey-9" class="v-model.trim="merchant.kyc.remarks"
+                  color="grey-9"
+                  v-model.trim="merchant.kyc.remarks"
                   placeholder="KYC Document Remarks"
                 />
               </div>
@@ -1371,12 +1442,13 @@
         <q-stepper-navigation>
           <!-- <q-btn
             class="q-ml-sm"
-            color="secondary" @click="finalFormSubmitKyc(merchant)"
+            color="secondary"
+            @click="finalFormSubmitKyc(merchant)"
           >Submit to Mars</q-btn> -->
           <q-btn class="q-ml-sm" color="primary" @click="next1()">Continue</q-btn>
           <!-- <q-btn class="q-ml-sm" color="primary" @click="fnsubmitTOmars()">Submit to Mars</q-btn> -->
 
-          <q-btn class="q-ml-sm" color="primary" class="flat @click="$refs.stepper.previous()">Back</q-btn>
+          <q-btn class="q-ml-sm" color="primary" flat @click="$refs.stepper.previous()">Back</q-btn>
         </q-stepper-navigation>
       </q-step>
      
@@ -1391,7 +1463,8 @@
                 <q-checkbox
                 v-for="(item,index) in formdata.mid"
                 :key="index"
-                color="grey-9" class="v-model.trim="formdata.tid"
+                color="grey-9"
+                v-model.trim="formdata.tid"
                 :val="item"
                 :label="item"
               />
@@ -1452,7 +1525,8 @@
           <div class="col-md-6">
            <q-select :disable="this.getImplementedQueue.leadInformation.cmsLeadStatus==22"
                   placeholder="Choose from the below*"
-                  color="grey-9" class="v-model.trim="merchant.paymentDetails.rentalPlanCode"
+                  color="grey-9"
+                  v-model.trim="merchant.paymentDetails.rentalPlanCode"
                   label="Rental Plan*"
                   :options="rentalPlanSet"
                 />
@@ -1473,7 +1547,8 @@
                          <q-radio
                 v-for="(item,index) in autoormanualOptions"
                 :key="index"
-                color="grey-9" class="v-model.trim="merchant.paymentDetails.settlementType"
+                color="grey-9"
+                v-model.trim="merchant.paymentDetails.settlementType"
                 :val="item.value"
                 :label="item.label"
               />
@@ -1495,7 +1570,8 @@
             <q-radio
                 v-for="(item,index) in preauthOptions"
                 :key="index"
-                color="grey-9" class="v-model.trim="merchant.paymentDetails.preAuth"
+                color="grey-9"
+                v-model.trim="merchant.paymentDetails.preAuth"
                 :val="item.value"
                 :label="item.label"
               />
@@ -1517,7 +1593,8 @@
                 <q-radio
                 v-for="(item,index) in cashandposOptions"
                 :key="index"
-                color="grey-9" class="v-model.trim="merchant.paymentDetails.cashAtPosEnabled"
+                color="grey-9"
+                v-model.trim="merchant.paymentDetails.cashAtPosEnabled"
                 :val="item.value"
                 :label="item.label"
               />
@@ -1539,7 +1616,8 @@
                     <q-radio
                 v-for="(item,index) in internationalcardOptions"
                 :key="index"
-                color="grey-9" class="v-model.trim="merchant.paymentDetails.intlCardAcceptance"
+                color="grey-9"
+                v-model.trim="merchant.paymentDetails.intlCardAcceptance"
                 :val="item.value"
                 :label="item.label"
               />
@@ -1561,7 +1639,8 @@
             <q-radio
                 v-for="(item,index) in tipOptions"
                 :key="index"
-                color="grey-9" class="v-model.trim="merchant.paymentDetails.tipEnabled"
+                color="grey-9"
+                v-model.trim="merchant.paymentDetails.tipEnabled"
                 :val="item.value"
                 :label="item.label"
               />
@@ -1579,12 +1658,13 @@
         <q-stepper-navigation>
           <q-btn
             class="q-ml-sm"
-            color="secondary" @click="finalFormSubmitKyc(merchant)"
+            color="secondary"
+            @click="finalFormSubmitKyc(merchant)"
           >Submit to Mars</q-btn>
           
           <!-- <q-btn class="q-ml-sm" color="primary" @click="fnsubmitTOmars()">Submit to Mars</q-btn> -->
 
-          <q-btn class="q-ml-sm" color="primary" class="flat @click="$refs.stepper.previous()">Back</q-btn>
+          <q-btn class="q-ml-sm" color="primary" flat @click="$refs.stepper.previous()">Back</q-btn>
         </q-stepper-navigation>
       </q-step>
     </q-stepper>
@@ -2846,7 +2926,7 @@ export default {
               innerSelf.$q.notify({
                 color: "negative",
                 position: "bot  tom",
-                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down",
               });
             });

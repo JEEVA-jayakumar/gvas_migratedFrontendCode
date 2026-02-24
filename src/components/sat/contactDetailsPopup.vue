@@ -49,7 +49,8 @@
               class="q-mx-sm"
               align="center"
               @click="emitfnshowUpdateOpenedExternal()"
-              color="negative" class="/>
+              color="negative"
+            />
           </q-card-actions>
         </q-card>
       </div>

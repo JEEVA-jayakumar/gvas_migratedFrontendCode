@@ -38,7 +38,8 @@
                     <textarea
                       placeholder="Reason Type.."
                       class="q-my-md custom-textarea"
-                      color="grey-9" class="align="left"
+                      color="grey-9"
+                      align="left"
                       v-model="formData.reason"
                       :style="{ width: '60%', height: '56px' }"
                     ></textarea>
@@ -51,7 +52,8 @@
                   style="width: 300px"
                   filter
                   clearable
-                  color="grey-9" v-model="formData.so"
+                  color="grey-9"
+                  v-model="formData.so"
                   :options="assignToOptions"
                   label="Select FSE Name*"
                 /><br /><br />
@@ -64,7 +66,8 @@
                   <q-btn
                     label="Assign History"
                     @click="fnAssignHistoryPopup(props)"
-                    color="purple-9" class="/>
+                    color="purple-9"
+                  />
                 </div>
               </div>
             </div>
@@ -77,7 +80,8 @@
               style="width: 90px"
               label="Re-Assign"
               @click="fnReassignTickets(formData)"
-              color="blue" class="/>
+              color="blue"
+            />
             <q-btn
               highlight
               push
@@ -85,7 +89,8 @@
               style="width: 90px"
               align="center"
               @click="emitfnshowUpdateOpenedExternal()"
-              color="negative" class="/>
+              color="negative"
+            />
           </q-card-actions>
         </q-card>
       </div>
@@ -268,7 +273,9 @@ export default {
                 color: "negative",
                 position: "bottom",
                 message:
-                  (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                  error.body.message == null
+                    ? "Please Try Again Later !"
+                    : error.body.message,
                 icon: "thumb_down"
               });
             });

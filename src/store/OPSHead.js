@@ -146,7 +146,7 @@ const OPSHead = {
             return document.documentType;
           }
         );
-        response.data.data["leadDocuments"] = groupDocuments;
+        Vue.set(response.data.data, "leadDocuments", groupDocuments);
 
         // START=> COMMIT with data received'
         commit("SET_ALL_EXCEPTION_KYC_BY_ID_DATA", response.data.data);

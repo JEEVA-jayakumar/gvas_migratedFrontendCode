@@ -5,9 +5,9 @@
       <!-- <pre>{{getAllRegionsData}}</pre> -->
       <!-- <pre>{{getAllHierarchiesData}}</pre> -->
       <div class="col-12 text-h6 q-my-lg text-weight-regular">Spare Parts Types</div>
-      <q-tabs class="shadow-1" color="grey-1" class=">
+      <q-tabs class="shadow-1" color="grey-1" >
         <q-tab default color="dark" name="active"  label="Active " />
-        <q-tab color="dark" class="name="deactive"  label="Deactive" />
+        <q-tab color="dark" name="deactive"  label="Deactive" />
         <q-tab-panel name="active">
           <q-table
          :rows="activeTableData"
@@ -17,7 +17,8 @@
           :pagination="paginationControl"
           :filter-method="myCustomSearchFilter"
           row-key="name"
-          color="grey-9" class=">
+          color="grey-9"
+>
 <q-td
     v-slot:body-cell-created_date="props"
     :props="props"
@@ -57,14 +58,15 @@
   <!--START: table title -->
  
   <!-- <div class="col-md-6 q-my-md" align="right">
-    <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9" class="icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
+    <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
   </div>-->
   <!--END: table title -->
   <!--START: table filter,search -->
   <div class="col-6">
     <q-input
       clearable
-      color="grey-9" v-model="filterSearch"
+      color="grey-9"
+      v-model="filterSearch"
       placeholder="Type.."
       class="q-mr-lg"
     />
@@ -76,7 +78,8 @@
           class="text-weight-regular"
           label="Add Spare Type"
           @click="fnShowAddNewSpareParts(props.row)"
-          color="purple-9" size="md"
+          color="purple-9"
+          size="md"
         />
       </div>
 </template>
@@ -91,7 +94,8 @@
           :pagination="paginationControl"
           :filter-method="myCustomSearchFilter"
           row-key="name"
-          color="grey-9" class="@select="ajaxSpareData"
+          color="grey-9"
+          @select="ajaxSpareData"
 >
 <q-td
     v-slot:body-cell-created_date="props"
@@ -121,14 +125,15 @@
   <!--START: table title -->
  
   <!-- <div class="col-md-6 q-my-md" align="right">
-    <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9" class="icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
+    <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
   </div>-->
   <!--END: table title -->
   <!--START: table filter,search -->
   <div class="col-6">
     <q-input
       clearable
-      color="grey-9" v-model="filterSearch"
+      color="grey-9"
+      v-model="filterSearch"
       placeholder="Type.."
       class="q-mr-lg"
     />

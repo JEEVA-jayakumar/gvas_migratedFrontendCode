@@ -15,7 +15,8 @@
             size="sm"
             @click="emitToggleEscalateToSat"
             outline
-            color="dark" class="icon="clear"
+            color="dark"
+            icon="clear"
           />
         </div>
       </div>
@@ -24,8 +25,9 @@
         <div class="col-sm-5">
           <q-select
             stack-label="Issues"
-
-            color="light" v-model="formData.issue"
+            inverted-light
+            color="light"
+            v-model="formData.issue"
             separator
             :options="dropDown.issueOptions"
             @input="issueDocumentType"
@@ -36,8 +38,9 @@
           <q-select
             :disable="this.formData.issue == ''"
             stack-label="Sub Issues"
-
-            color="light" v-model="formData.subIssue"
+            inverted-light
+            color="light"
+            v-model="formData.subIssue"
             separator
             :options="dropDown.subIssueOptions"
           />
@@ -47,7 +50,7 @@
       <div class="row">
         <div class="col-sm-5"></div>
         <div class="col-sm-5">
-          <q-btn color="purple" class=":disable="this.formData.subIssue == ''" style="margin-top: 20px;" label="Submit" @click="fnEscalateToSat(escalateToSatData)" />
+          <q-btn color="purple" :disable="this.formData.subIssue == ''" style="margin-top: 20px;" label="Submit" @click="fnEscalateToSat(escalateToSatData)" />
         </div>
       </div>
     </q-dialog>

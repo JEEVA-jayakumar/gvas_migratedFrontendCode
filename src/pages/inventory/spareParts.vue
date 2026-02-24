@@ -6,30 +6,28 @@
           <q-tabs
             no-pane-border
             v-model="inventoryOptionSelected"
-            color="dark" class="class="shadow-1"
+            color="dark"
+            inverted
+            class="shadow-1"
           >
             <q-tab name="sparePartsInventory" label="Spare Parts Inventory"  />
              <q-tab name="sparePodList" label="Spare Pod List"  />
             
-
-
-          </q-tabs>
-<q-tab-panels v-model="inventoryOptionSelected" animated>
-<q-tab-panel name="sparePartsInventory">
+            <q-tab-panel name="sparePartsInventory">
               <sparePartsAddStocks
                 @emittedForTotalSerialNumbers="
                   fnAjaxFetchAllDeviceDetailsWithCount
                 "
               />
             </q-tab-panel>
-<q-tab-panel name="sparePodList">
+            <q-tab-panel name="sparePodList">
               <sparePartsPodList
                 @emittedForTotalSerialNumbers="
                   fnAjaxFetchAllDeviceDetailsWithCount
                 "
               />
             </q-tab-panel>
-</q-tab-panels>
+          </q-tabs>
         </div>
       </div>
     </div>

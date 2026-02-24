@@ -31,7 +31,8 @@
               <q-radio
                 v-for="(item, index) in requestOptions"
                 :key="index"
-                color="grey-9" class="v-model.trim="formData.requestMode"
+                color="grey-9"
+                v-model.trim="formData.requestMode"
                 :val="item.value"
                 :label="item.label"
               />
@@ -45,7 +46,8 @@
             <q-input
               v-model.trim="formData.podNumber"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Enter Pod Number*"
+              color="grey-9"
+              label="Enter Pod Number*"
               placeholder="Enter Pod Number*"
             />
           </div>
@@ -55,7 +57,8 @@
               <q-select
                 v-model="formData.assignTo"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class=":options="assignToOptions"
+                color="grey-9"
+                :options="assignToOptions"
                 placeholder="Assign To"
               />
             </div>
@@ -68,7 +71,8 @@
             <q-select
               v-model="formData.assignTo"
               separator
-              color="grey-9" class=":options="assignToOptions"
+              color="grey-9"
+              :options="assignToOptions"
               filter
               clearable
               placeholder="Assign To"
@@ -83,7 +87,8 @@
                 clearable
                 v-model="formData.assignTo"
                 separator
-                color="grey-9" class=":options="assignToOptions"
+                color="grey-9"
+                :options="assignToOptions"
                 placeholder="Assign To"
               />
             </div>
@@ -124,23 +129,17 @@
       <q-tabs
         v-model="selectedTab"
         class="shadow-1"
-        color="grey-1" class="@select="goToUnassignedTab"
+        color="grey-1"
+        @select="goToUnassignedTab"
       >
         <q-tab
           default
-          color="dark" class="name="unAssigned"
+          color="dark"
+          name="unAssigned"
 
           label="Unassigned"
         />
-
-        <q-tab color="dark" class="name="assigned"  label="Assigned" />
-
-
-        <q-tab color="dark" class="name="closed"  label="Closed" />
-
-      </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="unAssigned">
+        <q-tab-panel name="unAssigned">
           <!--START: table Data    :rows="tableData1" -->
           <q-table
             :columns="columnDataUnassigned"
@@ -152,7 +151,8 @@
             row-key="id"
             :loading="tableAjaxLoading1"
             :rows-per-page-options="[5, 10, 15, 20]"
-            color="dark" class="@request="ajaxLoadAllLeadInfo1"
+            color="dark"
+            @request="ajaxLoadAllLeadInfo1"
           >
             <q-td
               v-slot:body-cell-leadNumber="props"
@@ -202,7 +202,8 @@
               <!-- <div class="col-md-5">
                 <q-input
                   clearable
-                  color="grey-9" v-model="filterSearch1"
+                  color="grey-9"
+                  v-model="filterSearch1"
                   placeholder="Type.."
                   label="Search .."
                   class="q-mr-lg q-py-sm"
@@ -213,7 +214,9 @@
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-<q-tab-panel name="assigned">
+        <q-tab color="dark" name="assigned"  label="Assigned" />
+
+        <q-tab-panel name="assigned">
           <!--START: table Data    :rows="tableData" -->
           <q-table
             :columns="columnDataAssigned"
@@ -224,7 +227,8 @@
             row-key="id"
             :loading="tableAjaxLoading"
             :rows-per-page-options="[5, 10, 15, 20]"
-            color="dark" class="@request="ajaxLoadAllLeadInfo"
+            color="dark"
+            @request="ajaxLoadAllLeadInfo"
           >
             <!-- selection="multiple" -->
             <!-- <template v-slot:body="props">
@@ -280,7 +284,8 @@
                 push
                 outline
                 class="q-mx-sm"
-                color="purple-9" size="sm"
+                color="purple-9"
+                size="sm"
                 @click="financeApproveSubmit(props.row.leadId)"
                 >Approve</q-btn
               >
@@ -289,7 +294,8 @@
                 push
                 outline
                 class="q-mx-sm"
-                color="negative" @click="openRejectModel(props.row)"
+                color="negative"
+                @click="openRejectModel(props.row)"
                 size="sm"
                 >Reject</q-btn
               >
@@ -300,7 +306,8 @@
               <!-- <div class="col-md-5">
                 <q-input
                   clearable
-                  color="grey-9" v-model="filterSearch"
+                  color="grey-9"
+                  v-model="filterSearch"
                   placeholder="Type.."
                   label="Search .."
                   class="q-mr-lg q-py-sm"
@@ -310,7 +317,8 @@
           </q-table>
           <!--ENDv-model: table Data -->
         </q-tab-panel>
-<q-tab-panel name="closed">
+        <q-tab color="dark" name="closed"  label="Closed" />
+        <q-tab-panel name="closed">
           <!--START: table Data -->
           <q-table
             :rows="closedDatas"
@@ -322,7 +330,8 @@
             row-key="id"
             :loading="tableAjaxLoading"
             :rows-per-page-options="[5, 10, 15, 20]"
-            color="dark" class="@request="ajaxLoadAllLeadInfoClosed"
+            color="dark"
+            @request="ajaxLoadAllLeadInfoClosed"
           >
             <!-- selection="multiple" -->
             <!-- <template v-slot:body="props">
@@ -378,7 +387,8 @@
                 push
                 outline
                 class="q-mx-sm"
-                color="purple-9" size="sm"
+                color="purple-9"
+                size="sm"
                 @click="financeApproveSubmit(props.row.leadId)"
                 >Approve</q-btn
               >
@@ -387,7 +397,8 @@
                 push
                 outline
                 class="q-mx-sm"
-                color="negative" @click="openRejectModel(props.row)"
+                color="negative"
+                @click="openRejectModel(props.row)"
                 size="sm"
                 >Reject</q-btn
               >
@@ -398,7 +409,8 @@
               <!-- <div class="col-md-5">
                 <q-input
                   clearable
-                  color="grey-9" v-model="filterSearch2"
+                  color="grey-9"
+                  v-model="filterSearch2"
                   placeholder="Type.."
                   label="Search .."
                   class="q-mr-lg q-py-sm"
@@ -408,7 +420,7 @@
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-</q-tab-panels>
+      </q-tabs>
       <div class="row items-center gutter-y-sm">
         <div class="col-md-9 col-sm-12 col-xs-12">
           <div class="row items-center"></div>

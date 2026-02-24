@@ -6,7 +6,9 @@
             <q-tabs
               no-pane-border
               v-model="inventoryOptionSelected"
-              color="dark" class="class="shadow-1"
+              color="dark"
+              inverted
+              class="shadow-1"
             >
               <q-tab name="Replacement" label="Replacement/Recovery"  />
               <q-tab name="DeviceHistory" label="DeviceHistory"  />
@@ -15,29 +17,22 @@
               <q-tab name="InventorySummary" label="Inventory Summary"  />
             
   
-
-
-
-
-
-            </q-tabs>
-<q-tab-panels v-model="inventoryOptionSelected" animated>
-<q-tab-panel name="Replacement">
+              <q-tab-panel name="Replacement">
                 <Replacement />
               </q-tab-panel>
-<q-tab-panel name="DeviceHistory">
+              <q-tab-panel name="DeviceHistory">
                 <DeviceHistory />
               </q-tab-panel>
-<q-tab-panel name="DeviceFSE">
+              <q-tab-panel name="DeviceFSE">
                 <DeviceFSE />
               </q-tab-panel>
-<q-tab-panel name="DeviceBP">
+              <q-tab-panel name="DeviceBP">
                 <DeviceBP />
               </q-tab-panel>
-<q-tab-panel name="InventorySummary">
+              <q-tab-panel name="InventorySummary">
                 <InventorySummary />
               </q-tab-panel>
-</q-tab-panels>
+            </q-tabs>
           </div>
         </div>
       </div>

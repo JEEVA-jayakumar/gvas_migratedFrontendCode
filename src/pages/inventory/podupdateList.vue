@@ -10,7 +10,8 @@
         :pagination="serverPagination"
         :rows-per-page-options="[5,10,15,20]"
         row-key="name"
-        color="grey-9" class=">
+        color="grey-9"
+      >
         <q-td v-slot:body-cell-action="props" :props="props">
           <div class="row no-wrap no-padding">
             <q-btn
@@ -44,7 +45,8 @@
               clearable
               v-model="filter"
               separator
-              color="grey-9" class="placeholder="Type.."
+              color="grey-9"
+              placeholder="Type.."
               label="Pod Number, Device Type"
               class="q-mr-lg q-py-sm"
             />
@@ -193,7 +195,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
             icon: "thumb_down"
           });
         });
@@ -248,7 +250,7 @@ export default {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down"
               });
             });

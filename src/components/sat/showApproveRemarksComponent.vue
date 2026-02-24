@@ -22,14 +22,16 @@
               :min="currentDateForDocumentSubmission"
               label="Expected date of Doc Submission"
               type="date"
-              color="light-blue" class="/>
+              color="light-blue"
+            />
           </div>
           <div>
             <q-input
               class="no-pointer-events"
               v-model="formData.soReason"
               label="SO Remarks"
-              color="light-blue" class="/>
+              color="light-blue"
+            />
           </div>
           <div>
             <q-input
@@ -37,19 +39,22 @@
               @blur="v$.formData.leadInformation.kycSatRemark.$touch"
               :error="v$.formData.leadInformation.kycSatRemark.$error"
               label="SAT Remarks"
-              color="light-blue" class="/>
+              color="light-blue"
+            />
           </div>
           <div class="group">
             <q-btn
               icon="done"
-              color="positive" class="class="q-ma-sm float-right"
+              color="positive"
+              class="q-ma-sm float-right"
               @click="sendRemarks(formData)"
               align="right"
               label="Approve"
             />
             <q-btn
               icon="block"
-              color="grey-5" @click="emitToggleRemarks()"
+              color="grey-5"
+              @click="emitToggleRemarks()"
               class="q-ma-sm float-right text-dark"
               align="right"
               v-close-overlay
@@ -158,7 +163,7 @@ export default {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down"
               });
             }

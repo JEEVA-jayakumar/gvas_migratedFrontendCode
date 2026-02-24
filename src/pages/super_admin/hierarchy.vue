@@ -5,7 +5,8 @@
       <q-tabs
         v-model="selectedTab"
         class="shadow-1"
-        active-color="dark" class="indicator-color="dark"
+        active-color="dark"
+        indicator-color="dark"
         align="left"
         @update:model-value="changeTabs"
       >
@@ -26,7 +27,8 @@
             :filter="filterSearch"
             v-model:pagination="paginationControl"
             :filter-method="myCustomSearchFilter"
-            color="grey-9" class=">
+            color="grey-9"
+          >
 
             <!-- ACTION COLUMN -->
             <template v-slot:body-cell-action="props">
@@ -53,7 +55,8 @@
                   <q-input
                     dense
                     clearable
-                    color="grey-9" v-model="filterSearch"
+                    color="grey-9"
+                    v-model="filterSearch"
                     placeholder="Type.."
                     class="q-mr-lg"
                   />
@@ -64,7 +67,8 @@
                     no-caps
                     class="text-weight-regular"
                     label="Add New Hierarchy"
-                    color="purple-9" @click="$router.push('/super/admin/add/New/Hierarchy')"
+                    color="purple-9"
+                    @click="$router.push('/super/admin/add/New/Hierarchy')"
                   />
                 </div>
 
@@ -85,7 +89,8 @@
             :filter="filterSearch1"
             v-model:pagination="paginationControl1"
             :filter-method="myCustomSearchFilter"
-            color="grey-9" class=">
+            color="grey-9"
+          >
 
             <!-- ACTION COLUMN -->
             <template v-slot:body-cell-action="props">
@@ -112,7 +117,8 @@
                   <q-input
                     dense
                     clearable
-                    color="grey-9" v-model="filterSearch1"
+                    color="grey-9"
+                    v-model="filterSearch1"
                     placeholder="Type.."
                     class="q-mr-lg"
                   />
@@ -280,7 +286,7 @@ export default {
     //       this.$q.notify({
     //         color: "negative",
     //         position: "bottom",
-    //         message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+    //         message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
     //         icon: "thumb_down",
     //       });
     //     });
@@ -427,7 +433,7 @@ export default {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down",
               });
             });
@@ -464,7 +470,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
             icon: "thumb_down",
           });
         });

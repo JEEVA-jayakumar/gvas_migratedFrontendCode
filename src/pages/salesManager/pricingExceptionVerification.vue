@@ -27,7 +27,8 @@
       </div>
       <!--END: table title -->
       <div v-if="shouldShowGivenPricefield">
-        <q-tabs color="purple-9">" class="<!-- Tabs - notice  -->
+        <q-tabs inverted color="purple-9">
+          <!-- Tabs - notice  -->
           <q-tab
             default
             :count="pricingExceptionCountForTab"
@@ -65,7 +66,8 @@
                   highlight
                   push
                   outline
-                  color="purple-9" size="sm"
+                  color="purple-9"
+                  size="sm"
                   @click="pushToDetailedScreenRsm(props.row.id)"
                 >Review</q-btn>
               </q-td>
@@ -75,7 +77,8 @@
                 <div class="col-md-5">
                   <q-input
                     clearable
-                    color="grey-9" v-model="filter"
+                    color="grey-9"
+                    v-model="filter"
                     placeholder="Type.."
                     label="Search by Merchant Name, Lead ID"
                     class="q-mr-lg q-py-sm"
@@ -142,7 +145,8 @@
                   highlight
                   push
                   outline
-                  color="purple-9" size="sm"
+                  color="purple-9"
+                  size="sm"
                   @click="pushToDetailedScreen(props.row.id)"
                 >Review</q-btn>
               </q-td>
@@ -152,7 +156,8 @@
                 <div class="col-md-5">
                   <q-input
                     clearable
-                    color="grey-9" v-model="filter"
+                    color="grey-9"
+                    v-model="filter"
                     placeholder="Type.."
                     label="Search by Merchant Name, Lead ID"
                     class="q-mr-lg q-py-sm"
@@ -194,7 +199,8 @@
               highlight
               push
               outline
-              color="purple-9" size="sm"
+              color="purple-9"
+              size="sm"
               @click="pushToDetailedScreenRsm(props.row.id)"
             >Review</q-btn>
           </q-td>
@@ -204,7 +210,8 @@
             <div class="col-md-5">
               <q-input
                 clearable
-                color="grey-9" v-model="filter"
+                color="grey-9"
+                v-model="filter"
                 placeholder="Type.."
                 label="Search by Merchant Name, Lead ID"
                 class="q-mr-lg q-py-sm"

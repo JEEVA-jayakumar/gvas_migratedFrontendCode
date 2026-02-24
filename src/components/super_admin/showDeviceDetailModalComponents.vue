@@ -25,11 +25,13 @@
               @blur="v$.formData.device.$touch"
               :error="v$.formData.device.$error"
               @keyup.enter="v$.formData.device.$touch"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="Device" placeholder="Device"
+              class="text-weight-regular text-grey-8" color="grey-9" label="Device" placeholder="Device"
             />
           </div>
           <div align="right">
-            <q-btn align="right" v-if="makeUpdateElementActive" @click="fnFinalUpdate(formData)" color="purple-9">Update</q-btn>" class="<q-btn align="right" v-else @click="fnFinalCreate(formData)" color="purple-9">Save</q-btn>" class="</div>
+            <q-btn align="right" v-if="makeUpdateElementActive" @click="fnFinalUpdate(formData)" color="purple-9">Update</q-btn>
+            <q-btn align="right" v-else @click="fnFinalCreate(formData)" color="purple-9">Save</q-btn>
+          </div>
         </div>
       </q-card-section>
     </q-card>-->
@@ -41,7 +43,8 @@
       :pagination="paginationControl"
       :filter-method="myCustomSearchFilter"
       row-key="name"
-      color="grey-9" class=">
+      color="grey-9"
+    >
       <q-td v-slot:body-cell-action="props" :props="props">
         <div class="row no-wrap no-padding">
           <q-btn
@@ -74,7 +77,8 @@
         <div class="col-8">
           <q-input
             clearable
-            color="grey-9" v-model="filterSearch"
+            color="grey-9"
+            v-model="filterSearch"
             placeholder="Type.."
             label="Search by name, short name"
           />
@@ -85,7 +89,8 @@
             no-wrap
             label="Add New"
             class="text-weight-regular"
-            color="purple-9" class="icon="far fa-plus-square"
+            color="purple-9"
+            icon="far fa-plus-square"
             @click="fnshowCreateDeviceType()"
           />
         </div>

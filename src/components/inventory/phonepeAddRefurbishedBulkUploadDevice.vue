@@ -62,7 +62,7 @@
                 <q-separator />
                 <q-card-section>
                   <q-item dense>
-                    <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                    <q-item-section icon="attach_file" />
                     <q-item-section>{{
                       formData.fileSelected[0].name
                     }}</q-item-section>
@@ -74,7 +74,8 @@
                   <q-btn
                     outline
                     size="sm"
-                    color="negative" @click="removeBulkUploadFile"
+                    color="negative"
+                    @click="removeBulkUploadFile"
                     label="Remove"
                     icon="clear"
                   />
@@ -85,7 +86,8 @@
           <div class="col-md-12 group" align="right">
             <q-btn
               outline
-              color="dark" class="label="Cancel"
+              color="dark"
+              label="Cancel"
               @click="emitToggleinventoryBulkUpload"
             />
             <q-btn

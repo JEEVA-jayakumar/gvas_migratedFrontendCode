@@ -34,19 +34,22 @@
               clearable
               v-model="formData.assignTo"
               separator
-              color="grey-9" class=":disable="formData.marsDeviceIdsCooked.length == 0 "
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
               :options="assignToOptions"
               placeholder="Assign To"
             />
             <q-checkbox
               v-model="formData.courier"
-              color="dark" class="label="Courier Device"
+              color="dark"
+              label="Courier Device"
             />
           </div>
           <div class="col-md-3 col-sm-6 col-xs-6" align="right">
             <q-checkbox
               v-model="formData.triggerWelcomeMail"
-              color="dark" class="label="Trigger welcome email"
+              color="dark"
+              label="Trigger welcome email"
             />
           </div>
           <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
@@ -75,28 +78,27 @@
       <q-tabs
         v-model="selectedTab"
         class="shadow-1"
-        color="grey-1" class="@select="goToUnassignedTab"
+        color="grey-1"
+        @select="goToUnassignedTab"
       >
         <q-tab
           default
-          color="dark" class="name="unAssigned"
+          color="dark"
+          name="unAssigned"
 
           label="Unassigned"
         />
-        <q-tab color="dark" class="name="assigned"  label="Assigned" />
+        <q-tab color="dark" name="assigned"  label="Assigned" />
         <!-- <q-tab 
-          color="dark" class="name="canceled"
+          color="dark"
+          name="canceled"
 
           label="CANCELED MERCHANTS"
         /> -->
-
-
-      </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="assigned">
+        <q-tab-panel name="assigned">
           <assigned />
         </q-tab-panel>
-<q-tab-panel name="unAssigned">
+        <q-tab-panel name="unAssigned">
           <!--START: table Data   :rows="getImplementationQueueUnassignedList"  -->
           <q-table
             :rows="tableData1"
@@ -109,7 +111,8 @@
             row-key="id"
             :rows-per-page-options="[10, 20, 50, 100, 150, 200]"
             :loading="tableAjaxLoading1"
-            color="dark" class="@request="ajaxLoadAllLeadInfo1"
+            color="dark"
+            @request="ajaxLoadAllLeadInfo1"
           >
             <q-td
               v-slot:body-cell-leadNumber="props"
@@ -166,7 +169,8 @@
                 <q-btn
                   no-caps
                   icon="edit"
-                  color="purple-9" size="xs"
+                  color="purple-9"
+                  size="xs"
                   round
                   @click="UpdateDeviceAddress(props.row)"
                 />
@@ -178,7 +182,8 @@
               <div class="col-md-5">
                 <q-input
                   clearable
-                  color="grey-9" v-model="filterSearch"
+                  color="grey-9"
+                  v-model="filterSearch"
                   placeholder="Type.."
                   label="Search By MID, Merchant Name.."
                   class="q-mr-lg q-py-sm"
@@ -188,7 +193,7 @@
           </q-table>
           <!--ENDv-model: table Data -->
         </q-tab-panel>
-</q-tab-panels>
+      </q-tabs>
 
       <!--END: table Footer -->
       <!-- START >> COMPONENT: Update device address  -->

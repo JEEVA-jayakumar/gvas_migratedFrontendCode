@@ -11,7 +11,8 @@
           <div align="center" class="text-light-blue text-h6 q-mb-md">#{{propShowRejectLeadComponent.leadNumber}}</div>
            <div class="col-md-12">
                      <q-input
-                    color="grey-9" class="disable
+                    color="grey-9"
+                    disable
                     v-model="formData.device"
                     label="Selected device"
                      @request="ajaxLoadShortLeadInfo"
@@ -21,8 +22,9 @@
         </div>
           
          
-          <q-btn color="negative" class="class="q-ma-sm float-right" @click="leadRejectSubmit(formData)" align="right" label="Reject" />
-          <q-btn align="right" color="grey-9" class="class="float-right q-ma-sm" @click="emitToggleReject(showRejectLeadModel)">Cancel
+          <q-btn color="negative" class="q-ma-sm float-right" @click="leadRejectSubmit(formData)" align="right" label="Reject" />
+          <q-btn align="right" color="grey-9"
+            class="float-right q-ma-sm" @click="emitToggleReject(showRejectLeadModel)">Cancel
           </q-btn>
         </div>
       </q-dialog>
@@ -159,7 +161,7 @@ export default {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
-                  message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                  message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                   icon: "thumb_down"
                 });
               });

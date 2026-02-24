@@ -18,8 +18,8 @@
       </div>
       <div class="row q-pa-md">
         <div class="col-6 group">
-          <q-input type="date" modal v-model="formData.from" color="grey-9" class="label="Start date"/>
-          <q-input type="date" modal v-model="formData.to" color="grey-9" class="label="End date"/>
+          <q-input type="date" modal v-model="formData.from" color="grey-9" label="Start date"/>
+          <q-input type="date" modal v-model="formData.to" color="grey-9" label="End date"/>
         </div>
         <div class="col-12 group">
           <q-btn class="common-dark-blue" @click="downloadReport()" label="Download" />

@@ -5,27 +5,22 @@
         class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       > Bijlipay Service Request</div>
         <div>
-            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" class="@select="goToUnassignedTab">
-               <q-tab default color="dark" class="name="opened"  label="Opened" />
-                <q-tab color="dark" class="name="closed"  label="Closed" />
-                <q-tab color="dark" class="name="cancel"  label="cancelled" />
-
-
-
-            </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="opened">
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToUnassignedTab">
+               <q-tab default color="dark" name="opened"  label="Opened" />
+                <q-tab color="dark" name="closed"  label="Closed" />
+                <q-tab color="dark" name="cancel"  label="cancelled" />
+                  <q-tab-panel name="opened">
               <opened/>
             </q-tab-panel>
-<q-tab-panel name="cancel">
+            <q-tab-panel name="cancel">
               <cancelledInternal/>
             </q-tab-panel>
-<q-tab-panel name="closed">
+                <q-tab-panel name="closed">
                     <!--STARTv-model: table Data -->
                     <q-table :rows="internalClosedTableData" :columns="columnDataclosed" table-class="customTableClass"
                         :filter="filterSearch" :pagination="paginationControl2"
                         v-model:selected="formData.marsDeviceIdsCookedUnAssinged" row-key="id" :loading="tableAjaxLoading"
-                        :rows-per-page-options="[5, 10, 15, 20]" color="dark" class="@request="ajaxLoadAllLeadInfo2">
+                        :rows-per-page-options="[5, 10, 15, 20]" color="dark" @request="ajaxLoadAllLeadInfo2">
 
                         <!--START: table header -->
                         <q-tr v-slot:top-row="props">
@@ -301,7 +296,7 @@
                         </q-table>
                     <!--END: table Data -->
                 </q-tab-panel>
-</q-tab-panels>
+            </q-tabs>
             <div class="row items-center gutter-y-sm">
                 <div class="col-md-9 col-sm-12 col-xs-12">
                     <div class="row items-center"></div>

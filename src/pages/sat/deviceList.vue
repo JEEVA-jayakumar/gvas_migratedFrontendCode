@@ -39,7 +39,8 @@
                     :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
                     @click="props.toggleFullscreen"
                     class="q-mt-lg"
-                    color="grey-9" size="sm"
+                    color="grey-9"
+                    size="sm"
           />-->
           <!-- </div> -->
           <!--END: table fullscreen mode -->
@@ -50,7 +51,8 @@
               clearable
               v-model="filter"
               separator
-              color="grey-9" class="placeholder="Type.."
+              color="grey-9"
+              placeholder="Type.."
               label="SO Name,Region,DeviceType"
               class="q-mr-lg q-py-sm"
             />

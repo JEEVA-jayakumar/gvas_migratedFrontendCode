@@ -9,11 +9,13 @@
             @click="openScannerComp"
             v-if="!scannerToggleOption"
             label="Start Scan"
-            color="positive" class="/>
+            color="positive"
+          />
           <q-btn
             @click="closeScannerComp"
             v-if="scannerToggleOption"
-            color="negative" class="class="q-py-xs"
+            color="negative"
+            class="q-py-xs"
             label="Stop Scan"
           />
         </div>
@@ -29,7 +31,8 @@
         :pagination="paginationControl"
         row-key="index"
         :loading="tableAjaxLoading"
-        color="light-blue" class=">
+        color="light-blue"
+      >
         <q-td v-slot:body-cell-action="props" :props="props">
           <q-btn label="send" icon="close" color="red-6" size="sm" />
           <!-- @click="removeScannedItems(props.row)" -->
@@ -39,7 +42,8 @@
           <div class="col-md-5">
             <q-input
               clearable
-              color="grey-9" v-model="filterSearch"
+              color="grey-9"
+              v-model="filterSearch"
               placeholder="Type.."
               label="Search .."
               class="q-mr-lg q-py-sm"

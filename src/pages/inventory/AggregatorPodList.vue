@@ -31,12 +31,12 @@
         <q-td v-slot:body-cell-ModifyDate="props" :props="props">{{ $moment_format(props.row.device.modifyDate, "Do MMM Y") }}</q-td>
         <template v-slot:top="props">
           <div class="col-md-5">
-            <q-input clearable v-model="filter" separator color="grey-9" class="placeholder="Type.."
+            <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
             label="Search By Pod Number, BP Region" class="q-mr-lg q-py-sm" />
           </div>
           <div class="col-md-6">
 
-            <q-btn square outline color="purple-9" class="label="Download as Excel" class="q-mr-lg q-py-sm float-right"
+            <q-btn square outline color="purple-9" label="Download as Excel" class="q-mr-lg q-py-sm float-right"
               size="md" @click="downloadPodList" />
 
           </div>

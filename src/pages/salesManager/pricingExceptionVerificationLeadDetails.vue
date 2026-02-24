@@ -38,7 +38,7 @@
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list separator  class="no-padding text-body1">
+                  <q-list separator no-border class="no-padding text-body1">
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>Plan</q-item-section>
                       <q-item-section>{{shortLead.plan.planName}}</q-item-section>
@@ -67,12 +67,13 @@
                   <span class="text-body1 text-weight-medium">MDR</span>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list >
+                  <q-list no-border>
                     <q-item class="q-pa-sm">
                       <q-item-section>
                         <q-input
                           type="number"
-                          color="grey-9" class="label="Debit <= 2000 (%)"
+                          color="grey-9"
+                          label="Debit <= 2000 (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.debitLessthanAmount"
@@ -81,7 +82,8 @@
                       <q-item-section>
                         <q-input
                           type="number"
-                          color="grey-9" class="label="Debit > 2000 (%)"
+                          color="grey-9"
+                          label="Debit > 2000 (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.debitGreaterthanAmount"
@@ -92,7 +94,8 @@
                       <q-item-section>
                         <q-input
                           type="number"
-                          color="grey-9" class="label="Std CC (%)"
+                          color="grey-9"
+                          label="Std CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.stdCC"
@@ -101,7 +104,8 @@
                       <q-item-section>
                         <q-input
                           type="number"
-                          color="grey-9" class="label="Premium CC (%)"
+                          color="grey-9"
+                          label="Premium CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.premiumCC"
@@ -112,7 +116,8 @@
                       <q-item-section>
                         <q-input
                           type="number"
-                          color="grey-9" class="label="Corp Pre CC (%)"
+                          color="grey-9"
+                          label="Corp Pre CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.corpCC"
@@ -121,7 +126,8 @@
                       <q-item-section>
                         <q-input
                           type="number"
-                          color="grey-9" class="label="Intl Pre CC (%)"
+                          color="grey-9"
+                          label="Intl Pre CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.intlCC"
@@ -132,7 +138,8 @@
                       <q-item-section>
                         <q-input
                           type="number"
-                          color="grey-9" class="label="Super Pre CC (%)"
+                          color="grey-9"
+                          label="Super Pre CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.superPremiumlCC"
@@ -142,7 +149,8 @@
                     <q-item class="items-start q-pa-sm">
                       <q-checkbox
                         v-model="shortLead.posEnable"
-                        color="purple-9" class=":readonly="!shouldShowGivenPricefield"
+                        color="purple-9"
+                        :readonly="!shouldShowGivenPricefield"
                       >
                         <small class="text-caption">Enable Cash@POS Cash @POS incentive Rs.5</small>
                       </q-checkbox>
@@ -160,7 +168,7 @@
               <span class="text-body1 text-weight-medium">Price Details</span>
             </q-card-section>
             <q-card-section>
-              <q-list multiline >
+              <q-list multiline no-border>
                 <q-item>
                   <q-item-section>
                     <q-item-label>Expected Setup Price</q-item-label>
@@ -210,7 +218,8 @@
                         v-model="formData.leadInformation.recurringFees"
                         @blur="v$.formData.leadInformation.recurringFees.$touch"
                         :error="v$.formData.leadInformation.recurringFees.$error"
-                        color="grey-9" class="@input="fnCheckPrice(formData)"
+                        color="grey-9"
+                        @input="fnCheckPrice(formData)"
                         label="Given recurring fees"
                         type="number"
                       />
@@ -234,7 +243,8 @@
                         v-model="formData.leadInformation.setupFees"
                         @blur="v$.formData.leadInformation.setupFees.$touch"
                         :error="v$.formData.leadInformation.setupFees.$error"
-                        color="grey-9" class="@input="fnCheckPrice(formData)"
+                        color="grey-9"
+                        @input="fnCheckPrice(formData)"
                         label="Given Setup Price"
                         type="number"
                       />
@@ -259,7 +269,8 @@
                         v-model="formData.leadVerificationStatus.reason"
                         @blur="v$.formData.leadVerificationStatus.reason.$touch"
                         :error="v$.formData.leadVerificationStatus.reason.$error"
-                        color="grey-9" class="label="Remarks"
+                        color="grey-9"
+                        label="Remarks"
                       />
                     </q-item-label>
                   </q-item-section>
@@ -272,7 +283,8 @@
                         v-model="formData.leadVerificationStatus.reason"
                         @blur="v$.formData.leadVerificationStatus.reason.$touch"
                         :error="v$.formData.leadVerificationStatus.reason.$error"
-                        color="grey-9" class="label="Remarks"
+                        color="grey-9"
+                        label="Remarks"
                       />
                     </q-item-label>
                   </q-item-section>
@@ -287,27 +299,31 @@
         <div class="col-md-12" align="right">
           <q-btn
             icon="block"
-            color="grey-5" class="class="q-ma-sm text-dark"
+            color="grey-5"
+            class="q-ma-sm text-dark"
             @click="$router.go(-1)"
             label="Cancel"
           />
           <q-btn
             icon="clear"
-            color="negative" class="class="q-ma-sm"
+            color="negative"
+            class="q-ma-sm"
             label="Reject"
             @click="leadVerificationReject()"
           />
           <q-btn
             v-if="!shouldShowGivenPricefield"
             icon="check"
-            color="positive" class="class="q-ma-sm"
+            color="positive"
+            class="q-ma-sm"
             label="Send to NH"
             @click="leadVerificationApprove()"
           />
           <q-btn
             v-if="shouldShowGivenPricefield"
             icon="check"
-            color="positive" class="class="q-ma-sm"
+            color="positive"
+            class="q-ma-sm"
             label="Approve"
             @click="leadVerificationNHApprove()"
           />
@@ -493,7 +509,7 @@ export default {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
-                  message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                  message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                   icon: "thumb_down",
                 });
               });
@@ -543,7 +559,7 @@ export default {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
-                  message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                  message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                   icon: "thumb_down",
                 });
                 this.$q.loading.hide();
@@ -587,7 +603,7 @@ export default {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
-                  message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                  message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                   icon: "thumb_down",
                 });
               });

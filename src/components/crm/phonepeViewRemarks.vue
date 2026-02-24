@@ -5,7 +5,7 @@
         <div class="row items-center bottom-border q-py-sm">
           <div class="col">Add Remarks</div>
           <div class="col-auto">
-            <q-btn round size="sm" @click="emitToggleViewRemarks" outline color="dark" class="icon="clear" />
+            <q-btn round size="sm" @click="emitToggleViewRemarks" outline color="dark" icon="clear" />
           </div>
   
         </div>
@@ -23,7 +23,7 @@
                     <div class="col">
                     </div>
                   </div>
-                    <q-btn color="purple" class="label="Submit" />
+                    <q-btn color="purple" label="Submit" />
                   </div>
                 </div>
   

@@ -20,14 +20,15 @@
             @keyup.enter="fnEditPermissionSubmit(formData.permissionDetails)"
             v-model="formData.permissionDetails.permission" 
             :error="v$.formData.permissionDetails.permission.$error"
-            class="text-weight-regular text-grey-8 q-my-sm" color="grey-9" class="label="Permission" placeholder="Permission" />
+            class="text-weight-regular text-grey-8 q-my-sm" color="grey-9" label="Permission" placeholder="Permission" />
           </div>
         </div>
         <div class="row gutter-sm q-pa-md">
           <div class="col-md-12" align="right">
             <q-btn flat size="md" align="right" class="bg-white q-mr-sm text-weight-regular text-grey-8" @click="emitfnshowAddPermissions(propShowCreatePermission)">Cancel
             </q-btn>
-            <q-btn size="md" align="right" @click="fnEditPermissionSubmit(formData.permissionDetails)" color="purple-9">Save" class="</q-btn>
+            <q-btn size="md" align="right" @click="fnEditPermissionSubmit(formData.permissionDetails)" color="purple-9">Save
+            </q-btn>
           </div>
         </div>
       </form>
@@ -99,7 +100,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

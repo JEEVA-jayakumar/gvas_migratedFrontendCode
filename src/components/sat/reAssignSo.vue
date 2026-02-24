@@ -14,7 +14,8 @@
             </div>
             <div class="col-md-8 q-pt-md" align="left">
               <q-input
-                color="grey-9" v-model="formData.podNumber"
+                color="grey-9"
+                v-model="formData.podNumber"
                 label="Enter POD Number"
                 placeholder="POD Number"
               />
@@ -24,7 +25,8 @@
               filled
               clearable
               type="textarea"
-              color="red-12" class="label="Enter Remarks"
+              color="red-12"
+              label="Enter Remarks"
               placeholder="Enter Remarks"
                label="Textarea with shadow text"
             />
@@ -115,7 +117,7 @@
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down"
               });
               this.$q.loading.hide();

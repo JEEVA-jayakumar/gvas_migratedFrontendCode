@@ -101,7 +101,7 @@ const Finance = {
           .then(response => {
             // START=> COMMIT with data received'
             response.data.data.content.map(function (value, index) {
-              value["expand"] = false;
+              Vue.set(value, "expand", false);
             });
             commit("SET_ALL_PAYMENT_VERIFICATION_DATA", response.data.data);
             // END=> COMMIT with data received'
@@ -126,7 +126,7 @@ const Finance = {
           .then(response => {
             // START=> COMMIT with data received'
             response.data.data.content.map(function (value, index) {
-              value["expand"] = false;
+              Vue.set(value, "expand", false);
             });
             commit("SET_ALL_PAYMENT_VERIFICATION_DATA", response.data.data);
             // END=> COMMIT with data received'

@@ -11,19 +11,22 @@
         <q-input
           v-model.trim="formData.email"
           class="text-weight-regular text-grey-8 q-py-md"
-          color="grey-9" class="@blur="v$.formData.email.$touch"
+          color="grey-9"
+          @blur="v$.formData.email.$touch"
           :error="v$.formData.email.$error"
           placeholder="Enter your email"
         />
         <q-btn
-          color="negative" class="class="q-ma-sm float-right"
+          color="negative"
+          class="q-ma-sm float-right"
           @click="fnSendforgetPasswordSubmit(formData)"
           align="right"
           label="Send Email"
         />
         <q-btn
           align="right"
-          color="grey-9" class="class="float-right q-ma-sm"
+          color="grey-9"
+          class="float-right q-ma-sm"
           @click="emitForgotPasswordToggle(toggleModal)"
         >Cancel</q-btn>
       </div>
@@ -90,7 +93,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

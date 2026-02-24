@@ -17,7 +17,8 @@
               @keyup.enter="submitShortLead(formData)"
               v-model="formData.reason"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Enter the Reason"
+              color="grey-9"
+              label="Enter the Reason"
               placeholder="reason"
             />
           </div>
@@ -28,7 +29,8 @@
               class="bg-white text-weight-regular text-grey-8"
               @click="emitfnshowConvertToSat()"
             >Cancel</q-btn>
-            <q-btn align="right" @click="submitShortLead(formData)" color="purple-9">submit</q-btn>" class="</div>
+            <q-btn align="right" @click="submitShortLead(formData)" color="purple-9">submit</q-btn>
+          </div>
         </div>
       </form>
     </q-dialog>
@@ -98,7 +100,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
             icon: "thumb_down"
           });
           // this.$router.push("sat/lead/lead/view/audocuments");

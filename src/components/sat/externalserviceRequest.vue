@@ -31,7 +31,8 @@
               clearable
               v-model="formData.assignTo.id"
               separator
-              color="grey-9" class=":disable="formData.marsDeviceIdsCooked.length == 0 "
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
               :options="assignToOptions"
               placeholder="Assign To"
             />
@@ -43,7 +44,8 @@
               clearable
               v-model="formData.assignTo.region"
               separator
-              color="grey-9" class=":disable="formData.marsDeviceIdsCooked.length == 0 "
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
               :options="assignToRegionOptions"
               placeholder="Assign To Region"
             />
@@ -74,26 +76,24 @@
       <q-tabs
         v-model="selectedTab"
         class="shadow-1"
-        color="grey-1" class="@select="goToUnassignedTab"
+        color="grey-1"
+        @select="goToUnassignedTab"
       >
         <q-tab
           default
-          color="dark" class="name="unAssigned"
+          color="dark"
+          name="unAssigned"
 
           label="Opened"
         />
         <q-tab
-          color="dark" class="name="assigned"
+          color="dark"
+          name="assigned"
 
           label="Resolved Tickets"
         />
-        <q-tab color="dark" class="name="Ticket"  label="Ticket Bulk Assign/Reassign" />
-
-
-
-      </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="assigned">
+        <q-tab color="dark" name="Ticket"  label="Ticket Bulk Assign/Reassign" />
+        <q-tab-panel name="assigned">
           <!--START: table Data -->
           <q-table
             :rows="tableData"
@@ -105,7 +105,8 @@
             row-key="id"
             :loading="tableAjaxLoading"
             :rows-per-page-options="[5, 10, 15, 20]"
-            color="dark" class="@request="ajaxLoadAllLeadInfo"
+            color="dark"
+            @request="ajaxLoadAllLeadInfo"
           >
             <template v-slot:body="props">
               <!--START: table rows -->
@@ -119,7 +120,8 @@
                     highlight
                     push
                     class="q-mx-sm"
-                    color="blue" size="sm"
+                    color="blue"
+                    size="sm"
                     @click="fnContactDetails(props.row)"
                     >Click to View</q-btn
                   >
@@ -137,7 +139,8 @@
                     highlight
                     push
                     class="q-mx-sm"
-                    color="blue" size="sm"
+                    color="blue"
+                    size="sm"
                     @click="fnCrmLogsView(props.row)"
                     >Click to View</q-btn
                   >
@@ -147,7 +150,8 @@
                     highlight
                     push
                     class="q-mx-sm"
-                    color="negative" size="sm"
+                    color="negative"
+                    size="sm"
                     @click="fnReslovedClose(props.row)"
                     >Closed</q-btn
                   >
@@ -158,7 +162,8 @@
               <div class="col-md-5">
                 <q-input
                   clearable
-                  color="grey-9" v-model="filterSearch"
+                  color="grey-9"
+                  v-model="filterSearch"
                   placeholder="Type.."
                   label="Search By TID ..."
                   class="q-mr-lg q-py-sm"
@@ -168,7 +173,7 @@
           </q-table>
           <!--ENDv-model: table Data -->
         </q-tab-panel>
-<q-tab-panel name="unAssigned">
+        <q-tab-panel name="unAssigned">
           <!--START: table Data -->
           <q-table
             :rows="tableData1"
@@ -181,7 +186,8 @@
             selection="multiple"
             :loading="tableAjaxLoading1"
             :rows-per-page-options="[5, 10, 15, 20]"
-            color="dark" class="@request="ajaxLoadAllLeadInfo1"
+            color="dark"
+            @request="ajaxLoadAllLeadInfo1"
           >
      
               <!--START: table rows -->
@@ -213,7 +219,8 @@
                     highlight
                     push
                     class="q-mx-sm"
-                    color="blue" size="sm"
+                    color="blue"
+                    size="sm"
                     @click="fnContactDetails(props.row)"
                     >Click to View</q-btn
                   >
@@ -236,7 +243,8 @@
                     highlight
                     push
                     class="q-mx-sm"
-                    color="blue" size="sm"
+                    color="blue"
+                    size="sm"
                     @click="fnCrmLogsView(props.row)"
                     >Click to View</q-btn
                   >
@@ -252,7 +260,8 @@
                     highlight
                     push
                     class="q-mx-sm"
-                    color="positive" size="sm"
+                    color="positive"
+                    size="sm"
                     @click="fnPickTicket(props.row)"
                     >Pick Ticket</q-btn
                   >
@@ -268,7 +277,8 @@
                     highlight
                     push
                     class="q-mx-sm"
-                    color="negative" size="sm"
+                    color="negative"
+                    size="sm"
                     @click="fnReassignTicket(props.row)"
                     >Re-Assign</q-btn
                   >
@@ -279,7 +289,8 @@
               <div class="col-md-5">
                 <q-input
                   clearable
-                  color="grey-9" v-model="filterSearch1"
+                  color="grey-9"
+                  v-model="filterSearch1"
                   placeholder="Type.."
                   label="Search By Ticket ID, TID ..."
                   class="q-mr-lg q-py-sm"
@@ -289,10 +300,10 @@
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-<q-tab-panel name="Ticket">
+        <q-tab-panel name="Ticket">
           <ticketAssign />
         </q-tab-panel>
-</q-tab-panels>
+      </q-tabs>
       <div class="row items-center gutter-y-sm">
         <div class="col-md-9 col-sm-12 col-xs-12">
           <div class="row items-center"></div>
@@ -681,7 +692,7 @@ export default {
               this.$q.notify({
                 color: "positive",
                 position: "bottom",
-                message: res.data.data,
+                message: res.body.data,
                 icon: "thumb_up"
               });
               this.$q.loading.hide();
@@ -694,7 +705,7 @@ export default {
               self.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: res.data.data,
+                message: res.body.data,
                 icon: "thumb_down"
               });
               this.$q.loading.hide();
@@ -705,7 +716,7 @@ export default {
             self.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.data.data,
+              message: error.body.data,
               icon: "thumb_down"
             });
             this.$q.loading.hide();

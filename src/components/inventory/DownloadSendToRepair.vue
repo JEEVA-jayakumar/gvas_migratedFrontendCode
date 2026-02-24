@@ -24,7 +24,8 @@
               class="bg-white text-weight-regular text-grey-8"
               @click="emitfnshowSendToRepair()"
             >Cancel</q-btn>
-            <q-btn align="right" @click="downloadSendToRepair(formData)" :disabled="submitDisabled" color="purple-9">Download</q-btn>" class="</div>
+            <q-btn align="right" @click="downloadSendToRepair(formData)" :disabled="submitDisabled" color="purple-9">Download</q-btn>
+          </div>
         </div>
       </form>
     </q-dialog>

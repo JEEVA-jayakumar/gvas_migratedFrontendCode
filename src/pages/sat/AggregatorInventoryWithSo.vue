@@ -20,12 +20,12 @@
           }}</q-td>
           <template v-slot:top="props">
             <div class="col-md-5">
-              <q-input clearable v-model="filter" separator color="grey-9" class="placeholder="Type.."
+              <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
                 label="Pod Number, Device Type" class="q-mr-lg q-py-sm" />
             </div>
             <div class="col-md-5">
 
-              <q-btn square outline color="purple-9" class="label="Download as Excel" class="q-mr-lg q-py-sm float-right"
+              <q-btn square outline color="purple-9" label="Download as Excel" class="q-mr-lg q-py-sm float-right"
                 size="md" @click="downloadAggregatorsInventoryWithSoList" />
 
             </div>

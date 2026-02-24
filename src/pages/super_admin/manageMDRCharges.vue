@@ -8,11 +8,12 @@
       <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
         <q-card style="width:100%">
           <q-card-section>
-            <q-list >
+            <q-list no-border>
               <q-item>
                 <q-item-section>
                   <q-select
-                    color="grey-9" v-model="formData.leadSource"
+                    color="grey-9"
+                    v-model="formData.leadSource"
                     :options="dropDown.leadSourceOptions"
                     label="Select lead source"
                     :error="v$.formData.leadSource.$error"
@@ -25,7 +26,8 @@
                     @click="fnManageLeadSource"
                     size="sm"
                     icon="add"
-                    color="purple-9" class="/>
+                    color="purple-9"
+                  />
                 </q-item-section>
               </q-item>
               <q-item>
@@ -46,7 +48,8 @@
                     @click="fnManageDevice"
                     size="sm"
                     icon="add"
-                    color="purple-9" class="/>
+                    color="purple-9"
+                  />
                 </q-item-section>
               </q-item>
               <q-item>
@@ -61,7 +64,7 @@
                   />
                 </q-item-section>
                 <!-- <q-item-section right>
-                  <q-btn round @click="fnManageDevice" size="sm" icon="add" color="purple-9" class="/>
+                  <q-btn round @click="fnManageDevice" size="sm" icon="add" color="purple-9" />
                 </q-item-section>-->
               </q-item>
               <q-item>
@@ -77,7 +80,8 @@
                   />
                 </q-item-section>
                 <!-- <q-item-section right>
-                  <q-btn round @click="fnManageMerchantType" size="sm" icon="add" color="purple-9"/>" class="</q-item-section>-->
+                  <q-btn round @click="fnManageMerchantType" size="sm" icon="add" color="purple-9"/>
+                </q-item-section>-->
               </q-item>
               <q-item>
                 <q-item-section>
@@ -96,7 +100,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.debitLessthanAmount"
                       placeholder="Debit <= 2000 %"
                       label="Debit <= 2000 %"
@@ -125,7 +130,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.debitGreaterthanAmount"
                       label="Debit > 2000 %"
                       placeholder="Debit > 2000 %"
@@ -154,7 +160,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.stdCC"
                       label="Std CC %"
                       placeholder="Std CC %"
@@ -182,7 +189,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.premiumCC"
                       label="Premium CC %"
                       placeholder="Premium CC %"
@@ -211,7 +219,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.corpCC"
                       label="Corp Pre CC %"
                       placeholder="Corp Pre CC %"
@@ -239,7 +248,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.intlCC"
                       label="Intl Pre CC %"
                       placeholder="Intl Pre CC %"
@@ -267,7 +277,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.superPremiumlCC"
                       label="Super Pre CC %"
                       placeholder="Super Pre CC %"
@@ -296,7 +307,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.amexDomestic"
                       label="amex Domestic %"
                       placeholder="amex Domestic %"
@@ -325,7 +337,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.amexInternational"
                       label="amex International %"
                       placeholder="amex International %"
@@ -354,7 +367,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.upiDebitCardUpTo2000"
                       label="UPI Debit Card UpTo 2000 %"
                       placeholder="UPI Debit Card UpTo 2000 %"
@@ -383,7 +397,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.upiDebitCardAbove2000"
                       label="UPI Debit Card Above 2000 %"
                       placeholder="UPI Debit Card Above 2000 %"
@@ -412,7 +427,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.upiPrepaidCreditCardsUpTo2000"
                       label="UPI Prepaid Credit Cards UpTo 2000 %"
                       placeholder="UPI Prepaid Credit Cards UpTo 2000 %"
@@ -441,7 +457,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.upiPrepaidCreditCardsAbove2000"
                       label="UPI Prepaid Credit Cards Above 2000 %"
                       placeholder="UPI Prepaid Credit Cards Above 2000 %"
@@ -474,7 +491,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.smallMerchantLessThanTwoDebit"
                       label="Small Merchant < 2000 % debit Card"
                       placeholder="Small Merchant < 2000 % debit Card"
@@ -504,7 +522,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.smallMerchantGreaterThanTwoDebit"
                       label="Small Merchant > 2000 % debit Card"
                       placeholder="Small Merchant > 2000 % debit Card"
@@ -534,7 +553,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.smallMerchantLessThanTwoCreditAndPrepaid"
                       label="Small Merchant < 2000 % credit and prepaid card"
                       placeholder="Small Merchant < 2000 % credit and prepaid card"
@@ -567,7 +587,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.smallMerchantGreaterThanTwoCreditAndPrepaid"
                       label="Small Merchant > 2000 % credit and prepaid card"
                       placeholder="Small Merchant > 2000 % credit and prepaid card"
@@ -604,7 +625,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.largeMerchantLessThanTwoDebit"
                       label="Large Merchant < 2000 % debit Card"
                       placeholder="Large Merchant < 2000 % debit Card"
@@ -633,7 +655,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.largeMerchantGreaterThanTwoDebit"
                       label="Large Merchant > 2000 % debit Card"
                       placeholder="Large Merchant > 2000 % debit Card"
@@ -662,7 +685,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.largeMerchantLessThanTwoCreditandPrepaid"
                       label="Large Merchant < 2000 % credit and prepaid card"
                       placeholder="Large Merchant < 2000 % credit and prepaid card"
@@ -691,7 +715,8 @@
                 <q-item>
                   <q-item-section>
                     <q-input
-                      color="grey-9" class="type="number"
+                      color="grey-9"
+                      type="number"
                       v-model="formData.largeMerchantGreaterThanTwoCreditandPrepaid"
                       label="Large Merchant > 2000 % credit and prepaid card"
                       placeholder="Large Merchant > 2000 % credit and prepaid card"
@@ -725,12 +750,13 @@
             </q-list>
           </q-card-section>
           <q-card-actions vertical align="end">
-            <!-- <q-btn label="EXSITING MDR PLAN" @click="fnEditMdrPlan(formData)" color="purple-9" class="/> -->
+            <!-- <q-btn label="EXSITING MDR PLAN" @click="fnEditMdrPlan(formData)" color="purple-9" /> -->
             <q-btn
               :disabled="Submitdata"
               label="submit"
               @click="fnsubmit(formData)"
-              color="purple-9" class="/>
+              color="purple-9"
+            />
           </q-card-actions>
         </q-card>
       </div>
@@ -744,7 +770,8 @@
           :filter="filterSearch"
           :pagination="paginationControl"
           row-key="name"
-          color="grey-9" class=">
+          color="grey-9"
+        >
           <q-td v-slot:body-cell-action="props" :props="props">
             <div class="row no-wrap no-padding">
               <q-btn
@@ -777,7 +804,8 @@
         <!-- <div class="col"> -->
         <!-- <q-input
                 clearable
-                color="grey-9" v-model="filterSearch"
+                color="grey-9"
+                v-model="filterSearch"
                 placeholder="Type.."
                 label="Search by name, short name"
         class="q-mr-lg"-->

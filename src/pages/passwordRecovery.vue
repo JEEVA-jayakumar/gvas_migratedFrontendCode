@@ -14,7 +14,8 @@
               v-model="formData.requestParam.password"
               type="password"
               label="Enter new password"
-              color="grey-9" class="/>
+              color="grey-9"
+            />
             <p
               class="error"
               v-if="!v$.formData.requestParam.password.required"
@@ -33,7 +34,8 @@
               v-model="formData.passwordRe"
               type="password"
               label="Re-enter new password"
-              color="grey-9" class="/>
+              color="grey-9"
+            />
             <p class="error" v-if="!v$.formData.passwordRe.required">this field is required</p>
             <br />
 
@@ -46,7 +48,8 @@
             <q-btn
               class="full-width text-weight-regular q-pa-md"
               no-caps
-              color="purple-9" @click="fnSubmitForgetPassword(formData)"
+              color="purple-9"
+              @click="fnSubmitForgetPassword(formData)"
               style="max-width:300px"
             >Submit</q-btn>
           </div>

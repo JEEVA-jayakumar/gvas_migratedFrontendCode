@@ -8,7 +8,9 @@
           <q-tabs
             no-pane-border
             v-model="inventoryOptionSelected"
-            color="dark" class="class="shadow-1"
+            color="dark"
+            inverted
+            class="shadow-1"
           >
           
             <q-tab name="AllocatedDevices" label="Allocated Devices"  />
@@ -19,7 +21,8 @@
             <q-btn
               @click="downloadInventorySummaryInfoMenu()"
               outline
-              color="grey-9" class="label="Download as Excel"
+              color="grey-9"
+              label="Download as Excel"
               class="q-mr-lg q-py-sm float-right"
               size="md"
             />
@@ -28,25 +31,20 @@
         
            
             
-
-
-
-
-
-                       </q-tabs>
-<q-tab-panels v-model="inventoryOptionSelected" animated>
-<q-tab-panel name="AllocatedDevices">
+            <q-tab-panel name="AllocatedDevices">
               <AllocatedDevices @emittedForTotalSerialNumbers="this.fnAjaxAllocatedDevice" />
             </q-tab-panel>
-<q-tab-panel name="UnAllocatedDevices">
+
+            <q-tab-panel name="UnAllocatedDevices">
               <UnAllocatedDevices @emittedForTotalSerialNumbers="fnAjaxFetchAllDeviceDetailsWithCount" />
             </q-tab-panel>
-<q-tab-panel name="FaultyDevices">
+
+            <q-tab-panel name="FaultyDevices">
               <FaultyDevices
                 @fetchDeviceDetailsWithCount="fnAjaxFetchAllDeviceDetailsWithCount"
               />
             </q-tab-panel>
-</q-tab-panels>
+                       </q-tabs>
         </div>
       </div>
     </div>

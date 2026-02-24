@@ -16,7 +16,8 @@
         <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
       </div>
     </div>
-    <q-tabs color="grey-9">" class="<!-- Tabs - notice  -->
+    <q-tabs color="grey-9">
+      <!-- Tabs - notice  -->
       <q-tab
         @select="merchantTypeActiveList"
         default
@@ -32,7 +33,8 @@
           :columns="activatedColumns"
           :filter="activeFilterSearch"
           row-key="name"
-          color="grey-9" class=">
+          color="grey-9"
+        >
           <q-td v-slot:body-cell-action="props" :props="props">
             <div class="row no-wrap no-padding">
               <q-btn
@@ -64,7 +66,8 @@
             <div class="col">
               <q-input
                 clearable
-                color="grey-9" v-model="activeFilterSearch"
+                color="grey-9"
+                v-model="activeFilterSearch"
                 placeholder="Type.."
                 label="Search by name, short name"
                 class="q-mr-lg"
@@ -82,7 +85,8 @@
           :filter="deActivatedFilterSearch"
           :pagination="paginationControl"
           row-key="id"
-          color="grey-9" class=">
+          color="grey-9"
+        >
           <q-td v-slot:body-cell-action="props" :props="props">
             <div class="row no-wrap no-padding">
               <q-btn
@@ -103,7 +107,8 @@
             <div class="col">
               <q-input
                 clearable
-                color="grey-9" v-model="deActivatedFilterSearch"
+                color="grey-9"
+                v-model="deActivatedFilterSearch"
                 placeholder="Type.."
                 label="Search by name"
                 class="q-mr-lg"

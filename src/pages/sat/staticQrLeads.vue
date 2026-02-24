@@ -212,7 +212,8 @@
               :disabled="props.row.verifiedFinanceStatus != 1"
               highlight
               push
-              color="purple-9" size="sm"
+              color="purple-9"
+              size="sm"
               :to="'qrLead/validation/' + props.row.leadId"
               >Validate</q-btn
             >
@@ -222,7 +223,8 @@
               highlight
               push
               outline
-              color="blue" size="sm"
+              color="blue"
+              size="sm"
               :to="'qrLead/validation/' + props.row.leadId"
               >Re-submit</q-btn
             >
@@ -232,7 +234,8 @@
               highlight
               push
               outline
-              color="green" size="sm"
+              color="green"
+              size="sm"
               :to="'qrLead/validation/' + props.row.leadId"
               >MARS ReferBack</q-btn
             >
@@ -242,7 +245,8 @@
               v-else-if="props.row.leadStatus == 6"
               highlight
               push
-              color="red" size="sm"
+              color="red"
+              size="sm"
               >Pending With Mars</q-btn
             >
             <q-btn
@@ -250,7 +254,8 @@
               disable
               highlight
               push
-              color="green" size="sm"
+              color="green"
+              size="sm"
               >Mars Approved</q-btn
             >
             <q-btn
@@ -259,7 +264,8 @@
               highlight
               push
               outline
-              color="amber" size="sm"
+              color="amber"
+              size="sm"
               >Reffer Back</q-btn
             >
           </q-td>
@@ -289,7 +295,8 @@
             <div class="col-md-4">
               <q-input
                 clearable
-                color="grey-9" v-model="filter"
+                color="grey-9"
+                v-model="filter"
                 placeholder="Type.."
                 :debounce="300"
                 class="q-mr-lg q-py-sm"
@@ -301,7 +308,8 @@
                 <q-btn
                   square
                   outline
-                  color="purple-9" class="label="Download as Excel"
+                  color="purple-9"
+                  label="Download as Excel"
                   size="md"
                   @click="downloadFiles()"
                 />
@@ -310,7 +318,8 @@
                   square
                   icon="attach_file"
                   @click="excelFileUpload"
-                  color="purple-9" class="label="File Upload"
+                  color="purple-9"
+                  label="File Upload"
                 />
               </q-stepper-navigation>
             </div> -->

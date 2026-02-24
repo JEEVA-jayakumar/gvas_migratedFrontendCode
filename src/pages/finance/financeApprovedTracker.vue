@@ -10,14 +10,10 @@
         </div>
         <!--END: table title -->
         <!-- table finance approved tracker -->
-        <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" class="@select="goToQrMerchant">
-          <q-tab default color="dark" class="name="tab-1"  label="Pos Merchant" />
-        <q-tab color="dark" class="name="tab-2"  label="QR Merchant" />
-
-
-      </q-tabs>
-<q-tab-panels v-model="activeTab" animated>
-<q-tab-panel name="tab-1">
+        <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @select="goToQrMerchant">
+          <q-tab default color="dark" name="tab-1"  label="Pos Merchant" />
+        <q-tab color="dark" name="tab-2"  label="QR Merchant" />
+        <q-tab-panel name="tab-1">
         <q-table
           table-class="customTableClass"
           :rows="tableData"
@@ -72,7 +68,8 @@
             <div class="col-md-5">
               <q-input
                 clearable
-                color="grey-9" v-model="filter"
+                color="grey-9"
+                v-model="filter"
                 placeholder="Type.."
                 label="Search .. "
                 class="q-mr-lg q-py-sm"
@@ -84,17 +81,17 @@
             <!--END: table filter dropdown -->
             <!--START: table excel download -->
             <!-- <div class="col-md-4" align="right">
-              <q-btn outline color="dark" class="label="Download as excel" @click="downloadReport" />
+              <q-btn outline color="dark" label="Download as excel" @click="downloadReport" />
             </div> -->
             <div class="col-md-4" align="right">
-              <q-btn outline color="dark" class="label="Download as excel" @click="downloadReport" />
+              <q-btn outline color="dark" label="Download as excel" @click="downloadReport" />
             </div>
             <!--END: table excel download -->
           </template>
           <!--END: table search, filter -->
         </q-table>
       </q-tab-panel>
-<q-tab-panel name="tab-2">
+      <q-tab-panel name="tab-2">
 
         <q-table
           table-class="customTableClass"
@@ -139,7 +136,8 @@
             <div class="col-md-5">
               <q-input
                 clearable
-                color="grey-9" v-model="filter1"
+                color="grey-9"
+                v-model="filter1"
                 placeholder="Type.."
                 label="Search .. "
                 class="q-mr-lg q-py-sm"
@@ -151,14 +149,14 @@
             <!--END: table filter dropdown -->
             <!--START: table excel download -->
             <div class="col-md-4" align="right">
-              <q-btn outline color="dark" class="label="Download as excel" @click="downloadQrReport" />
+              <q-btn outline color="dark" label="Download as excel" @click="downloadQrReport" />
             </div>
             <!--END: table excel download -->
           </template>
           <!--END: table search, filter -->
         </q-table>
       </q-tab-panel>
-</q-tab-panels>
+      </q-tabs>
       </q-pull-to-refresh>
       <!-- <download-financeapproval></download-financeapproval> -->
       <downloadFinanceapproval

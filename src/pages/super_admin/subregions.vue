@@ -11,7 +11,8 @@
         row-key="name"
         :loading="loading"
         @request="searchRequest"
-        color="grey-9" class=">
+        color="grey-9"
+      >
         <q-td v-slot:body-cell-action="props" :props="props">
           <div class="row no-wrap no-padding">
             <q-btn
@@ -40,7 +41,8 @@
               no-wrap
               label="Add New Regions"
               class="q-mt-lg text-weight-regular"
-              color="purple-9" class="icon="far fa-plus-square"
+              color="purple-9"
+              icon="far fa-plus-square"
               size="md"
               @click="fnshowCreatePincodes()"
             />
@@ -51,7 +53,8 @@
           <div class="col-md-5">
             <q-input
               clearable
-              color="grey-9" v-model="filter"
+              color="grey-9"
+              v-model="filter"
               placeholder="Type.."
               class="q-mr-lg"
             />
@@ -173,7 +176,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
             icon: "thumb_down"
           });
         });
@@ -231,7 +234,7 @@ export default {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down"
               });
             });

@@ -8,7 +8,8 @@
               class="shadow-1"
               animated
               swipeable
-              color="tertiary" class="align="justify"
+              color="tertiary"
+              align="justify"
             >
               <q-tab class="size1" label="UPLOAD CSV FILE"  />
               <div>
@@ -46,7 +47,7 @@
                           <q-separator />
                           <q-card-section>
                             <q-item dense>
-                              <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                              <q-item-section icon="attach_file" />
                               <q-item-section>{{
                                 formData.fileSelected[0].name
                               }}</q-item-section>
@@ -58,7 +59,8 @@
                             <q-btn
                               size="10px"
                               type="button"
-                              color="negative" @click="removeBulkUploadFile"
+                              color="negative"
+                              @click="removeBulkUploadFile"
                               label="Remove"
                               icon="clear"
                             />
@@ -70,7 +72,8 @@
                       <q-btn
                         :disabled="formData.fileSelected.length == 0 "
                         type="button"
-                        color="purple-9" class="label="Submit"
+                        color="purple-9"
+                        label="Submit"
                         @click="uploadFileForBulkUpload"
                       />
                     </div>
@@ -90,7 +93,8 @@
               class="shadow-1"
               animated
               swipeable
-              color="tertiary" class="align="justify"
+              color="tertiary"
+              align="justify"
               v-model="selectedTab"
               @select="goToUnassignedTab"
             >
@@ -106,19 +110,18 @@
               <!-- <q-tabs
                 v-model="selectedTab"
                 class="shadow-1"
-                color="grey-1" class="@select="goToUnassignedTab"
+                color="grey-1"
+                @select="goToUnassignedTab"
               > -->
               <!-- <q-tab
                   default
                   class="size1" 
-                  color="dark" class="name="unAssigned"
+                  color="dark"
+                  name="unAssigned"
 
                   label="Hitachi Onboarding Merchants"
                 /> -->
-
-            </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="unAssigned">
+              <q-tab-panel name="unAssigned">
                 <!--START: table Data -->
                 <q-table
                   :rows="tableData1"
@@ -130,7 +133,8 @@
                   row-key="id"
                   :loading="tableAjaxLoading1"
                   :rows-per-page-options="[5, 10, 15, 20]"
-                  color="dark" class="@request="ajaxLoadAllLeadInfo1"
+                  color="dark"
+                  @request="ajaxLoadAllLeadInfo1"
                 >
                   <q-td
                     v-slot:body-cell-tid="props"
@@ -161,14 +165,16 @@
                       disable
                       highlight
                       push
-                      color="positive" size="sm"
+                      color="positive"
+                      size="sm"
                       >Success</q-btn
                     >
                     <q-btn
                       v-if="props.row.isStatus == 2"
                       highlight
                       push
-                      color="negative" size="sm"
+                      color="negative"
+                      size="sm"
                       @click="OGSPendingStatus(props.row)"
                       >Re-Submit</q-btn
                     >
@@ -176,7 +182,8 @@
                       v-if="props.row.isStatus == 3"
                       highlight
                       push
-                      color="negative" size="sm"
+                      color="negative"
+                      size="sm"
                       @click="OGSPendingStatus(props.row)"
                       >Re-Submit</q-btn
                     >
@@ -186,14 +193,16 @@
                       disable
                       highlight
                       push
-                      color="purple-9" size="sm"
+                      color="purple-9"
+                      size="sm"
                       >Installed</q-btn
                     >
                     <q-btn
                       v-if="props.row.isStatus == null"
                       highlight
                       push
-                      color="purple-9" size="sm"
+                      color="purple-9"
+                      size="sm"
                       @click="OGSPendingStatus(props.row)"
                       >Re-Submit</q-btn
                     >
@@ -202,7 +211,8 @@
                     <div class="col-md-4">
                       <q-input
                         clearable
-                        color="grey-9" v-model="filterSearch1"
+                        color="grey-9"
+                        v-model="filterSearch1"
                         placeholder="Type.."
                         label="Search by MerchantName, TID, MID..."
                         class="q-mr-lg q-py-sm"
@@ -211,7 +221,8 @@
 
                     <div class="col-md-6">
                     <q-btn
-                      color="purple-9" class="label="Download as Excel"
+                      color="purple-9"
+                      label="Download as Excel"
                       class="q-mr-lg q-py-sm float-right"
                       size="md"
                       @click="downloadHitachiIndianBank()"
@@ -222,7 +233,7 @@
                 </q-table>
                 <!--END: table Data -->
               </q-tab-panel>
-</q-tab-panels>
+            </q-tabs>
             <div class="row items-center gutter-y-sm">
               <div class="col-md-9 col-sm-12 col-xs-12">
                 <div class="row items-center"></div>
@@ -502,7 +513,9 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                error.body.message == null
+                  ? "Please Try Again Later !"
+                  : error.body.message,
               icon: "thumb_down"
             });
           });
@@ -660,7 +673,9 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              error.body.message == null
+                ? "Please Try Again Later !"
+                : error.body.message,
             icon: "thumb_down"
           });
         });

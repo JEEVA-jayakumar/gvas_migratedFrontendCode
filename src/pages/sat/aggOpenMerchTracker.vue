@@ -40,7 +40,7 @@
             slot="body-cell-leadNumber"
             class="cursor-pointer"
             @click.native="toggleLeadInformation(props.row)"
-            v-slot="props"
+            slot-scope="props"
             :props="props"
           >
             <span class="label text-primary"># {{props.row.leadNumber}}</span>
@@ -67,7 +67,8 @@
             :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
             @click="props.toggleFullscreen"
             class="q-mt-lg"
-            color="grey-9" size="sm"
+            color="grey-9"
+            size="sm"
             />
             </div>-->
             <!--END: table fullscreen mode -->
@@ -77,18 +78,19 @@
                 clearable
                 v-model="filter"
                 separator
-                color="grey-9" class="placeholder="Type.."
+                color="grey-9"
+                placeholder="Type.."
                 label="Search by Merchant Name, Lead ID"
                 class="q-mr-lg q-py-sm"
               />
             </div>
             <!-- <div class="col-3">
               <q-input modal outline type="date" v-model="model" placeholder="Select Date" class="q-mr-lg q-py-sm " label="Filter By"
-                color="grey-9" class="/>
+                color="grey-9" />
             </div>-->
             <!-- <div class="col-md-4">
               <downloadExcel :rows="excelTableData" :fields="excelColumnData.field" name="Merchant Transaction Level.xls">
-                <q-btn outline color="grey-9" class="label="Download as Excel" class="q-mr-lg q-py-sm float-right" size="md" />
+                <q-btn outline color="grey-9" label="Download as Excel" class="q-mr-lg q-py-sm float-right" size="md" />
               </downloadExcel>
             </div>-->
             <!--END: table filter,search -->

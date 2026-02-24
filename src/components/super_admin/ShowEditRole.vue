@@ -23,7 +23,8 @@
             :error="v$.formData.rolePermissions.hierarchyId.$error"
             label="Hierarchy"
             placeholder="Select Hierarchy"
-            class="text-weight-regular text-grey-8" color="grey-9" class=":options="propGetAllHierarchiesData"
+            class="text-weight-regular text-grey-8" color="grey-9"
+            :options="propGetAllHierarchiesData"
               />
           </div>
         </div>
@@ -34,7 +35,7 @@
               @blur="v$.formData.rolePermissions.role.$touch"
               @keyup.enter="fnSubmitShowAddUser"
               :error="v$.formData.rolePermissions.role.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="Role" placeholder="Role" />
+              class="text-weight-regular text-grey-8" color="grey-9" label="Role" placeholder="Role" />
           </div>
         </div>
       
@@ -45,14 +46,16 @@
               v-model="formData.rolePermissions.roleColor"
               @blur="v$.formData.rolePermissions.roleColor.$touch"
               :error="v$.formData.rolePermissions.roleColor.$error"
-              popover label="Choose a role color" color="grey-9" class="/>
+              popover label="Choose a role color" color="grey-9"
+            />
           </div>
         </div>
 
         <div class="group" align="right">
           <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnEditrolePermissions(showEditRoleToggle)">Cancel
           </q-btn>
-          <q-btn size="md" align="right" @click="fnEditRoleSubmit(formData.rolePermissions)" color="purple-9">Save" class="</q-btn>
+          <q-btn size="md" align="right" @click="fnEditRoleSubmit(formData.rolePermissions)" color="purple-9">Save
+          </q-btn>
         </div>
     </q-dialog>
   </div>
@@ -152,7 +155,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down",
             });
           });

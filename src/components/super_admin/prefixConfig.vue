@@ -8,10 +8,12 @@
       <div class="row bottom-border group q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <!--START: table title   :disable="disableDeviceTypeSelection" -->
         <div class="col-md-4">
-          <q-select v-model="formData.leadSource" label="Select LeadSource" radio color="grey-9" class="@input="filterByLeadSource(formData)" :options="dropDown.leadSourceOptions" />
+          <q-select v-model="formData.leadSource" label="Select LeadSource" radio color="grey-9"
+            @input="filterByLeadSource(formData)" :options="dropDown.leadSourceOptions" />
         </div>
         <div class="col-md-12" align="right">
-          <q-btn no-caps class="text-weight-regular" @click="fnaddprefix()" label="Add New" color="purple-9" size="md" />
+          <q-btn no-caps class="text-weight-regular" @click="fnaddprefix()" label="Add New" color="purple-9"
+            size="md" />
         </div>
 
       </div>

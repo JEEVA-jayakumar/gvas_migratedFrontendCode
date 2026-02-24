@@ -12,7 +12,7 @@
       </div>
       <!-- Document related form -->
       <div id="rightSidePane" class="col-md-7 q-pa-xs block relative">
-        <q-stepper color="purple-9" class="ref="stepper" contractable text alternative-labels>
+        <q-stepper color="purple-9" ref="stepper" contractable text alternative-labels>
           <q-step error-icon="warning" name="first" title="Sales" subtitle="Info">
             <salesInformation
               :regionOptions="regionOptions"
@@ -751,7 +751,7 @@ export default {
                 });
                 self
                   .MARS_DATA_EXTERNAL_SUBMIT_RESPONSE({
-                    request: response.data,
+                    request: response.body,
                     leadId: self.$route.params.id
                   })
                   .then(response => {

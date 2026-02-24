@@ -54,7 +54,8 @@
                 @blur="v$.formData.serialNumber.$touch"
                 :error="v$.formData.serialNumber.$error"
                 class="text-weight-regular text-grey-8" 
-                color="grey-9" class="label="Enter Serial Number Manually"
+                color="grey-9"
+                label="Enter Serial Number Manually"
                 placeholder="Serial Number" 
                 />
               </div>
@@ -63,7 +64,7 @@
               <div class="col-md-12" align="right">
                 <q-btn flat class="bg-white text-weight-regular text-grey-8 q-px-lg"  @click="emitfaultyInventoryComponent()">Cancel
                 </q-btn>
-                <q-btn class="q-px-lg" @click="fnSubmitDamagedDevice(formData)" color="purple-9" class="style="color: #e3e4e5;background: #1f2c3f !important;">Add
+                <q-btn class="q-px-lg" @click="fnSubmitDamagedDevice(formData)" color="purple-9" style="color: #e3e4e5;background: #1f2c3f !important;">Add
                 </q-btn>
               </div>
             </div>
@@ -175,7 +176,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

@@ -15,11 +15,11 @@
           <div class="row q-py-sm">
             <div class="group">
               <div>Permissions</div>
-              <q-checkbox color="purple-9" class="label="Read" v-model="formData.addUserDetails.hasReadPermission" />
-              <q-checkbox color="purple-9" class="label="Write" v-model="formData.addUserDetails.hasWritePermission" />
-              <q-checkbox color="purple-9" class="label="Update" v-model="formData.addUserDetails.hasEditPermission" />
-              <q-checkbox color="purple-9" class="label="Delete" v-model="formData.addUserDetails.hasDeletePermission" />
-              <q-checkbox color="purple-9" class="label="Download" v-model="formData.addUserDetails.hasDownloadPermission" />
+              <q-checkbox color="purple-9" label="Read" v-model="formData.addUserDetails.hasReadPermission" />
+              <q-checkbox color="purple-9" label="Write" v-model="formData.addUserDetails.hasWritePermission" />
+              <q-checkbox color="purple-9" label="Update" v-model="formData.addUserDetails.hasEditPermission" />
+              <q-checkbox color="purple-9" label="Delete" v-model="formData.addUserDetails.hasDeletePermission" />
+              <q-checkbox color="purple-9" label="Download" v-model="formData.addUserDetails.hasDownloadPermission" />
             </div>
           </div>
         </div>
@@ -27,26 +27,28 @@
           <div class="row gutter-sm q-py-sm">
             <div class="col-md-6">
               <q-select :disabled="formData.disableRegionSelection"
-                :class="[formData.disableRegionSelection ? 'no-pointer-events' : '']" color="grey-9" class="label="Choose a region" v-model="formData.addUserDetails.region.id"
+                :class="[formData.disableRegionSelection ? 'no-pointer-events' : '']" color="grey-9"
+                label="Choose a region" v-model="formData.addUserDetails.region.id"
                 :error="v$.formData.addUserDetails.region.id.$error" @blur="v$.formData.addUserDetails.region.id.$touch"
                 :options="getAllRegionsData" />
             </div>
 
             <div class="col-md-6">
               <q-input v-model.trim="formData.addUserDetails.name" @blur="v$.formData.addUserDetails.name.$touch"
-                :error="v$.formData.addUserDetails.name.$error" class="text-weight-regular text-grey-8" color="grey-9" class="label="*Name" placeholder="Name" />
+                :error="v$.formData.addUserDetails.name.$error" class="text-weight-regular text-grey-8" color="grey-9"
+                label="*Name" placeholder="Name" />
             </div>
 
             <div class="col-md-6">
               <q-input v-model.trim="formData.addUserDetails.employeeID"
                 @blur="v$.formData.addUserDetails.employeeID.$touch"
                 :error="v$.formData.addUserDetails.employeeID.$error" class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*Employee ID" placeholder="Employee ID" />
+                color="grey-9" label="*Employee ID" placeholder="Employee ID" />
             </div>
 
             <div class="col-md-6">
               <q-input disable v-model.trim="formData.addUserDetails.email" class="text-weight-regular text-grey-8"
-                color="grey-9" class="@blur="v$.formData.addUserDetails.email.$touch"
+                color="grey-9" @blur="v$.formData.addUserDetails.email.$touch"
                 :error="v$.formData.addUserDetails.email.$error" label="*Email" placeholder="Email" />
             </div>
 
@@ -54,14 +56,14 @@
               <q-input v-model.trim="formData.addUserDetails.contactNumber"
                 @blur="v$.formData.addUserDetails.contactNumber.$touch"
                 :error="v$.formData.addUserDetails.contactNumber.$error" class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*Contact Number" placeholder="Contact Number" />
+                color="grey-9" label="*Contact Number" placeholder="Contact Number" />
             </div>
 
             <div class="col-md-6">
               <q-input v-model.trim="formData.addUserDetails.alternateContactNumber"
                 @blur="v$.formData.addUserDetails.alternateContactNumber.$touch"
                 :error="v$.formData.addUserDetails.alternateContactNumber.$error"
-                class="text-weight-regular text-grey-8" color="grey-9" class="label="Alt Contact Number"
+                class="text-weight-regular text-grey-8" color="grey-9" label="Alt Contact Number"
                 placeholder="Alt Contact Number" />
             </div>
 
@@ -69,12 +71,12 @@
               <q-input v-model.trim="formData.addUserDetails.userAddress"
                 @blur="v$.formData.addUserDetails.userAddress.$touch"
                 :error="v$.formData.addUserDetails.userAddress.$error" class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*Address" placeholder="Address" />
+                color="grey-9" label="*Address" placeholder="Address" />
             </div>
 
             <div class="col-md-6">
               <q-input type="number" :error="v$.formData.addUserDetails.pincodeTemp.$error" clearable
-                @clear="fnGetCityAndState" color="grey-9" class="v-model.trim="formData.addUserDetails.pincodeTemp"
+                @clear="fnGetCityAndState" color="grey-9" v-model.trim="formData.addUserDetails.pincodeTemp"
                 label="Pincode" placeholder="Pincode">
                 <q-autocomplete @search="pincodeSearch" :debounce="500" :min-characters="1"
                   @selected="pincodeSelected" />
@@ -82,12 +84,12 @@
             </div>
             <div class="col-md-6">
               <q-input disable v-model.trim="formData.addUserDetails.state" class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*State" placeholder="State" />
+                color="grey-9" label="*State" placeholder="State" />
             </div>
 
             <div class="col-md-6">
               <q-input disable v-model.trim="formData.addUserDetails.city" class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*City" placeholder="City" />
+                color="grey-9" label="*City" placeholder="City" />
             </div>
           </div>
           <div class="row group" v-for="(item, index) in getAllHierarchiesAndRolesData" :key="index">
@@ -96,18 +98,19 @@
                 :label="item.hierarchy" />
             </div>
             <div class="col">
-              <q-select :disable="!item.checked" color="grey-9" class="placeholder="Choose a role" v-model="item.roleChecked"
+              <q-select :disable="!item.checked" color="grey-9" placeholder="Choose a role" v-model="item.roleChecked"
                 :options="item.roles" @input="getPredecessorList(item)" />
             </div>
             <div class="col">
-              <q-select :disable="!item.checked" disaply-value color="grey-9" class=":placeholder="item.predecessor.length == 0 ? 'No data available to display' : 'Choose a predecessor'"
+              <q-select :disable="!item.checked" disaply-value color="grey-9"
+                :placeholder="item.predecessor.length == 0 ? 'No data available to display' : 'Choose a predecessor'"
                 v-model="item.predecessorChecked" :options="item.predecessor" />
             </div>
           </div>
           <div v-if="formData.showBankOpsList" class="row gutter-sm q-py-sm">
             <!-- <pre>{{formData.addUserDetails.banksList}}</pre> -->
             <div class="col-md-6">
-              <q-select multiple color="grey-9" class="label="Choose bank (can be multiple)"
+              <q-select multiple color="grey-9" label="Choose bank (can be multiple)"
                 v-model="formData.addUserDetails.banksList" :error="v$.formData.addUserDetails.banksList.$error"
                 @blur="v$.formData.addUserDetails.banksList.$touch" :options="leadSourceOptions" />
             </div>
@@ -120,7 +123,8 @@
             <label> Lead Source Enable? </label>
             <div class="col-md-9">
 
-              <q-radio v-for="(item, index) in LeadSourceOptions1" :key="index" color="grey-9" class="v-model.trim="formData.addUserDetails.leadSource" @blur="v$.formData.addUserDetails.leadSource.$touch"
+              <q-radio v-for="(item, index) in LeadSourceOptions1" :key="index" color="grey-9"
+                v-model.trim="formData.addUserDetails.leadSource" @blur="v$.formData.addUserDetails.leadSource.$touch"
                 :error="v$.formData.addUserDetails.leadSource.$error" :val="item.value" :label="item.label" />
             </div>
           </div>

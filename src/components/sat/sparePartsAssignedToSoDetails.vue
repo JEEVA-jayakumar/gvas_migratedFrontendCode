@@ -35,7 +35,8 @@
             v-model="formData.allocate_so"
             label="Select SO"
             radio
-            color="grey-9" class=":options="regionBasedSo"
+            color="grey-9"
+            :options="regionBasedSo"
             @request="regionBasedSoLoad"
           />
         </div>
@@ -82,7 +83,8 @@
             v-model="formData.pod_number"
             label="Pod Number"
             radio
-            color="grey-9" class="/>
+            color="grey-9"
+          />
         </div>
 
         <div class="col-md-7">
@@ -91,7 +93,8 @@
             v-model="formData.total_count"
             label="Total Count"
             radio
-            color="grey-9" class="/>
+            color="grey-9"
+          />
         </div>
 
         <div class="full-width group" align="center" id="formData">
@@ -99,7 +102,8 @@
           <q-btn
             size="md"
             type="button"
-            color="purple-9" @click="fnSubmitBankDetails(formData)"
+            color="purple-9"
+            @click="fnSubmitBankDetails(formData)"
             >Submit</q-btn
           >
         </div>
@@ -339,7 +343,9 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              error.body.message == null
+                ? "Please Try Again Later !"
+                : error.body.message,
             icon: "thumb_down"
           });
         });

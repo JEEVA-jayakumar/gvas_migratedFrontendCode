@@ -32,7 +32,8 @@
           highlight
           push
           class="q-mx-sm"
-          color="positive" size="sm"
+          color="positive"
+          size="sm"
           @click="approveDeviceReques(props.row)"
           >Approve</q-btn
         >
@@ -41,7 +42,8 @@
           highlight
           push
           class="q-mx-sm"
-          color="negative" size="sm"
+          color="negative"
+          size="sm"
           @click="deviceRequest(props.row)"
           >Reject</q-btn
         >
@@ -60,7 +62,8 @@
             clearable
             v-model="filter"
             separator
-            color="grey-9" class="placeholder="Type.."
+            color="grey-9"
+            placeholder="Type.."
             label="Search Using POD, Serial No, Merchant Name"
             class="q-mr-lg q-py-sm"
           />
@@ -321,8 +324,8 @@ export default {
       this.AGGREGATOR_SELF_ASSIGNMENT_TRACKER({ pagination, filter })
         .then(res => {
           console.log("AGGREGATOR", JSON.stringify(res));
-          console.log("RESPONSE REQUEST", JSON.stringify(res.data));
-          let responseData = res.data;
+          console.log("RESPONSE REQUEST", JSON.stringify(res.body));
+          let responseData = res.body;
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 
@@ -433,7 +436,9 @@ export default {
                 color: "negative",
                 position: "bottom",
                 message:
-                  (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                  error.body.message == null
+                    ? "Please Try Again Later !"
+                    : error.body.message,
                 icon: "thumb_down"
               });
             });

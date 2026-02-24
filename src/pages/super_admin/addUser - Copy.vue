@@ -18,7 +18,8 @@
               v-for="(value,index) in formData.addUserDetails.userMapSets"
               :key="index"
             >
-              <q-card class="q-pa-sm group shadow-6 text-dark" color="grey-3">" class="<div class="row bottom-border q-pa-xs capitalize">
+              <q-card class="q-pa-sm group shadow-6 text-dark" color="grey-3">
+                <div class="row bottom-border q-pa-xs capitalize">
                   <div class="col-md-6">Hierarchy</div>
                   <div class="capitalize">{{fnGetHierarchyTitle(value.hierarchy)}}</div>
                 </div>
@@ -39,7 +40,8 @@
                     <q-btn
                       size="sm"
                       round
-                      color="negative" class="v-if="formData.addUserDetails.userMapSets.length >0"
+                      color="negative"
+                      v-if="formData.addUserDetails.userMapSets.length >0"
                       @click="deleteDynamicComponentDeletion(index)"
                       icon="clear"
                       label="Remove"
@@ -48,7 +50,8 @@
                     <q-btn
                       size="sm"
                       round
-                      color="amber-9" class="v-if="formData.addUserDetails.userMapSets.length >0"
+                      color="amber-9"
+                      v-if="formData.addUserDetails.userMapSets.length >0"
                       @click="fnShowDynamicHierarchyRoleRegionAddDeleteForEdit(value,index)"
                       icon="edit"
                       label="Edit"
@@ -65,7 +68,8 @@
             <div class="group">
               <q-btn
                 outline
-                color="dark" class=":class="[isRoleEmpty? 'animate-scale':'']"
+                color="dark"
+                :class="[isRoleEmpty? 'animate-scale':'']"
                 @click="fnShowDynamicHierarchyRoleRegionAddDelete"
                 icon="add"
                 label="Add Mapping"
@@ -85,7 +89,8 @@
                 @blur="v$.formData.addUserDetails.name.$touch"
                 :error="v$.formData.addUserDetails.name.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*Name"
+                color="grey-9"
+                label="*Name"
                 placeholder="Name"
               />
             </div>
@@ -96,7 +101,8 @@
                 @blur="v$.formData.addUserDetails.employeeID.$touch"
                 :error="v$.formData.addUserDetails.employeeID.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*Employee ID"
+                color="grey-9"
+                label="*Employee ID"
                 placeholder="Employee ID"
               />
             </div>
@@ -105,7 +111,8 @@
               <q-input
                 v-model.trim="formData.addUserDetails.email"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="@blur="v$.formData.addUserDetails.email.$touch"
+                color="grey-9"
+                @blur="v$.formData.addUserDetails.email.$touch"
                 :error="v$.formData.addUserDetails.email.$error"
                 label="*Email"
                 placeholder="Email"
@@ -118,7 +125,8 @@
                 @blur="v$.formData.addUserDetails.contactNumber.$touch"
                 :error="v$.formData.addUserDetails.contactNumber.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*Contact Number"
+                color="grey-9"
+                label="*Contact Number"
                 placeholder="Contact Number"
               />
             </div>
@@ -129,7 +137,8 @@
                 @blur="v$.formData.addUserDetails.alternateContactNumber.$touch"
                 :error="v$.formData.addUserDetails.alternateContactNumber.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="Alt Contact Number"
+                color="grey-9"
+                label="Alt Contact Number"
                 placeholder="Alt Contact Number"
               />
             </div>
@@ -140,7 +149,8 @@
                 @blur="v$.formData.addUserDetails.userAddress.$touch"
                 :error="v$.formData.addUserDetails.userAddress.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*Address"
+                color="grey-9"
+                label="*Address"
                 placeholder="Address"
               />
             </div>
@@ -163,7 +173,8 @@
                 :error="v$.formData.addUserDetails.pincodeTemp.$error"
                 @input="fnGetCityAndState()"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class=":options="getAllStatesData"
+                color="grey-9"
+                :options="getAllStatesData"
               />
             </div>
             <div class="col-md-6">
@@ -171,7 +182,8 @@
                 disable
                 v-model.trim="formData.addUserDetails.state"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*State"
+                color="grey-9"
+                label="*State"
                 placeholder="State"
               />
             </div>
@@ -181,7 +193,8 @@
                 disable
                 v-model.trim="formData.addUserDetails.city"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*City"
+                color="grey-9"
+                label="*City"
                 placeholder="City"
               />
             </div>
@@ -428,7 +441,7 @@ export default {
         //   // this.$q.notify({
         //   //   color: "negative",
         //   //   position: "bottom",
-        //   //   message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+        //   //   message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
         //   //   icon: "thumb_down"
         //   // });
         // });

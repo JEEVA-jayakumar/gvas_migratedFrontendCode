@@ -10,7 +10,8 @@
             <q-item>
               <q-item-section>
                 <q-select
-                  color="grey-9" v-model="formData.leadSource"
+                  color="grey-9"
+                  v-model="formData.leadSource"
                   :options="dropDown.leadSourceOptions"
                   label="Select lead source"
                   placeholder="Lead source"
@@ -23,7 +24,8 @@
                   no-caps
                   size="md"
                   @click="fnManageLeadSource"
-                  color="purple-9" class="icon="add"
+                  color="purple-9"
+                  icon="add"
                   class="no-margin"
                 />
               </q-item-section> -->
@@ -31,7 +33,8 @@
             <q-item>
               <q-item-section>
                 <q-select
-                  color="grey-9" v-model="formData.device"
+                  color="grey-9"
+                  v-model="formData.device"
                   :options="dropDown.deviceOptions"
                   label="Select device"
                   placeholder="Device"
@@ -44,7 +47,8 @@
                   no-caps
                   size="md"
                   @click="fnManageDevice"
-                  color="purple-9" class="icon="add"
+                  color="purple-9"
+                  icon="add"
                   class="no-margin"
                 />
               </q-item-section> -->
@@ -52,7 +56,8 @@
             <!-- <q-item>
               <q-item-section>
                 <q-select
-                  color="grey-9" v-model="formData.plan"
+                  color="grey-9"
+                  v-model="formData.plan"
                   :options="dropDown.planOptions"
                   label="Select plan"
                   placeholder="Plan"
@@ -66,7 +71,8 @@
                   no-caps
                   size="md"
                   @click="fnManagePlan"
-                  color="purple-9" class="icon="add"
+                  color="purple-9"
+                  icon="add"
                   class="no-margin"
                 />
               </q-item-section>
@@ -74,7 +80,8 @@
             <q-item>
               <q-item-section>
                 <q-input
-                  color="grey-9" class="type="text"
+                  color="grey-9"
+                  type="text"
                    v-model.trim="formData.planName"
                   placeholder="Enter Your Plan"
                   label="Enter Your Plan"
@@ -85,7 +92,8 @@
               <q-item-section>
                 <div class="col">
                   <q-input
-                    color="grey-9" class="type="number"
+                    color="grey-9"
+                    type="number"
                      v-model.trim="formData.incentivePercentage"
                     placeholder="%"
                     label="Incentive Percentage *"
@@ -97,7 +105,8 @@
               <q-item-section>
                 <div class="col">
                   <q-input
-                    color="grey-9" class="type="number"
+                    color="grey-9"
+                    type="number"
                     v-model.trim="formData.minTxnVal "
                     placeholder="Minimum Transaction Value*"
                     label="Minimum Transaction Value*"
@@ -109,7 +118,8 @@
               <q-item-section>
                 <div class="col">
                   <q-input
-                    color="grey-9" class="type="number"
+                    color="grey-9"
+                    type="number"
                     v-model.trim="formData.maxIncPerTxn"
                     placeholder="Maximum Incentive Per Transaction *"
                     label="Maximum Incentive Per Transaction *"
@@ -122,8 +132,9 @@
             <!-- <q-btn
               label="EXSITING RENTAL PLAN"
               @click="fnEditRentalPlan(formData)"
-              color="purple-9" class="/>-->
-            <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" class="/>
+              color="purple-9"
+            />-->
+            <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" />
           </q-card-actions>
         </q-card>
       </div>
@@ -139,7 +150,8 @@
           :pagination="paginationControl"
           :filter-method="myCustomSearchFilter"
           row-key="name"
-          color="grey-9" class=">
+          color="grey-9"
+        >
           <q-td v-slot:body-cell-action="props" :props="props">
             <div class="row no-wrap no-padding">
               <q-btn
@@ -172,7 +184,8 @@
       <!-- <div class="col">
               <q-input
                 clearable
-                color="grey-9" v-model="filterSearch"
+                color="grey-9"
+                v-model="filterSearch"
                 placeholder="Type.."
                 label="Search by name, short name"
                 class="q-mr-lg"

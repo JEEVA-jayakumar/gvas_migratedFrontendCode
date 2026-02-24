@@ -10,21 +10,21 @@
         <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
           <q-card style="width:250%">
             <q-card-section>
-              <q-list >
+              <q-list no-border>
                 <div class="col-md-12">
                   <q-input type="textarea" label="Device Purchase Cost" placeholder="Device Purchase Cost"
-                    class="q-my-md" color="grey-9" class="align="left" @blur="v$.formData.devicePurchaseCost.$touch"
+                    class="q-my-md" color="grey-9" align="left" @blur="v$.formData.devicePurchaseCost.$touch"
                     :error="v$.formData.devicePurchaseCost.$error" v-model="formData.devicePurchaseCost" />
                 </div>
                 <div class="col-md-12">
                   <q-input type="textarea" label="Total Life of Device in Days"
-                    placeholder="Total Life of Device in Days" class="q-my-md" color="grey-9" class="align="left"
+                    placeholder="Total Life of Device in Days" class="q-my-md" color="grey-9" align="left"
                     @blur="v$.formData.deviceLife.$touch" :error="v$.formData.deviceLife.$error"
                     v-model="formData.deviceLife" />
                 </div>
                 <div class="col-md-12">
                   <q-input type="textarea" label="Invoice Number" placeholder="Invoice Number" class="q-my-md"
-                    color="grey-9" class="align="left" @blur="v$.formData.invoiceNumbers.$touch"
+                    color="grey-9" align="left" @blur="v$.formData.invoiceNumbers.$touch"
                     :error="v$.formData.invoiceNumbers.$error" v-model="formData.invoiceNumbers" />
                 </div>
                 <div class="col">
@@ -56,7 +56,7 @@
                       <q-card-section>
                         <div v-for="(file, index) in formData.fileSelected" :key="index">
                           <q-item dense>
-                            <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                            <q-item-section icon="attach_file" />
                             <q-item-section>{{ file.name }}</q-item-section>
                             <q-item-section>
                               <q-btn class="fa fa-close" size="sm" color="negative" @click="removeUploadedFiles(index)"
@@ -72,7 +72,7 @@
             </q-card-section>
             <q-card-actions align="end">
               <q-btn push label="Cancel" align="right" color="negative" @click="emitfnshowPosInventory()" />
-              <q-btn push label="Submit" @click="PosFinanceSubmit(formData)" color="purple-9" class="/>
+              <q-btn push label="Submit" @click="PosFinanceSubmit(formData)" color="purple-9" />
             </q-card-actions>
           </q-card>
         </div>
@@ -159,7 +159,7 @@
         this.GET_INVOICE_NUMBER_FROM_INVENTORY(res)
           .then((response) => {
            // Safe extraction without optional chaining
-      const invoiceNumber = response.data && response.data.InvoiceNumber ? response.data.InvoiceNumber : "";
+      const invoiceNumber = response.body && response.body.InvoiceNumber ? response.body.InvoiceNumber : "";
 
 this.formData.invoiceNumbers = invoiceNumber;
           })
@@ -341,9 +341,9 @@ this.formData.invoiceNumbers = invoiceNumber;
       //             color: "negative",
       //             position: "bottom",
       //             message:
-      //               error.data.message == null
+      //               error.body.message == null
       //                 ? "Please Try Again Later !"
-      //                 : error.data.message,
+      //                 : error.body.message,
       //             icon: "thumb_down"
       //           });
       //         });

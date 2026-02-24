@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- START >> Display attached documents -->
-    <q-list  class="no-padding">
+    <q-list no-border class="no-padding">
       <!-- START >> (Mandatory) Application form  -->
       <q-item separator class="text-body1 text-dark bg-grey-4 text-weight-medium">
         <q-item-section>Application Form</q-item-section>
@@ -15,7 +15,8 @@
               v-if="propGetShortInfo.applicationFileMimeType.includes('pdf')"
             >
               <div @click="fnPDFViewModal(propGetShortInfo.applicationFile)" class="ellipsis">
-                <q-btn round size="sm" icon="fas fa-file-pdf" color="primary"/>" class="&nbsp;{{propGetShortInfo.applicationFile}}
+                <q-btn round size="sm" icon="fas fa-file-pdf" color="primary"/>
+                &nbsp;{{propGetShortInfo.applicationFile}}
               </div>
             </div>
             <!-- END >>If document type is PDF format -->
@@ -35,7 +36,8 @@
                 >
               </viewer>
               <div @click="fnViewHandedOverFileImage()" class="ellipsis">
-                <q-icon name="fas fa-image" color="amber-9"/>" class="&nbsp;{{propGetShortInfo.applicationFile}}
+                <q-icon name="fas fa-image" color="amber-9"/>
+                &nbsp;{{propGetShortInfo.applicationFile}}
               </div>
             </div>
             <!-- END >>If document type is image format -->
@@ -59,7 +61,7 @@
               <div class="col-md-12 text-body1">
                 <q-expansion-item separator indent icon-toggle opened multiline class="full-width">
                   <template slot="header">
-                    <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                    <q-item-section icon="attach_file"/>
                     <q-item-section
                       class="text-body1"
                       :sublabel="documents[0].uploadedDocuments.length + 'Document(s)'"
@@ -73,14 +75,16 @@
                         round
                         size="xs"
                         class="q-ma-xs"
-                        color="green" class="icon="fas fa-check"
+                        color="green"
+                        icon="fas fa-check"
                         @click="fnDocumentApproveModal(documents[0])"
                       />
                       <q-btn
                         round
                         size="xs"
                         class="q-ma-xs"
-                        color="red" class="icon="fas fa-times"
+                        color="red"
+                        icon="fas fa-times"
                         @click="fnDocumentRejectModal(documents[0])"
                       />
                     </q-item-section>
@@ -103,7 +107,8 @@
                     >
                       <div v-if="item.mimeType.includes('application')">
                         <div @click="fnPDFViewModal(item.fileName)" class="ellipsis">
-                          <q-btn round size="sm" icon="fas fa-file-pdf" color="primary"/>" class="&nbsp;{{item.fileName}}
+                          <q-btn round size="sm" icon="fas fa-file-pdf" color="primary"/>
+                          &nbsp;{{item.fileName}}
                         </div>
                       </div>
                       <div v-else-if="item.mimeType.includes('image')" class="q-pa-md">
@@ -127,7 +132,7 @@
               <div class="col-md-12 text-body1">
                 <q-expansion-item separator indent icon-toggle opened class="full-width">
                   <template slot="header">
-                    <q-item-section avatar><q-icon name="apps"  /></q-item-section>
+                    <q-item-section icon="apps"/>
                     <q-item-section
                       class="text-body1"
                       :sublabel="documents.length + 'Type(s)'"
@@ -148,7 +153,7 @@
                         class="full-width"
                       >
                         <template slot="header">
-                          <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                          <q-item-section icon="attach_file"/>
                           <q-item-section
                             class="text-body1"
                             :sublabel="subDocument.uploadedDocuments.length + 'Document(s)'"
@@ -162,14 +167,16 @@
                               round
                               size="xs"
                               class="q-ma-xs"
-                              color="green" class="icon="fas fa-check"
+                              color="green"
+                              icon="fas fa-check"
                               @click="fnDocumentApproveModal(subDocument)"
                             />
                             <q-btn
                               round
                               size="xs"
                               class="q-ma-xs"
-                              color="red" class="icon="fas fa-times"
+                              color="red"
+                              icon="fas fa-times"
                               @click="fnDocumentRejectModal(subDocument)"
                             />
                           </q-item-section>
@@ -194,7 +201,8 @@
                           >
                             <div v-if="item.mimeType.includes('application')" class="ellipsis">
                               <div @click="fnPDFViewModal(item.fileName)">
-                                <q-btn round size="sm" icon="fas fa-file-pdf" color="primary"/>" class="&nbsp;{{item.fileName}}
+                                <q-btn round size="sm" icon="fas fa-file-pdf" color="primary"/>
+                                &nbsp;{{item.fileName}}
                               </div>
                             </div>
                             <div v-else-if="item.mimeType.includes('image')" class="q-pa-md">

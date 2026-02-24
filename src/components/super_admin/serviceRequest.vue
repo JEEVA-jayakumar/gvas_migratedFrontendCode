@@ -1,15 +1,10 @@
 <template>
   <q-page>
     <div>
-      <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" class=">
-        <q-tab @select="ajaxSpareData" default color="dark" class="name="tab-1"  label="Active Service Request" />
-        <q-tab  color="dark" class="name="tab-2"  label="Deactive Service Request" />
-
-
-
-              </q-tabs>
-<q-tab-panels v-model="activeTab" animated>
-<q-tab-panel name="tab-1">
+      <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" >
+        <q-tab @select="ajaxSpareData" default color="dark" name="tab-1"  label="Active Service Request" />
+        <q-tab  color="dark" name="tab-2"  label="Deactive Service Request" />
+        <q-tab-panel name="tab-1">
           <q-table 
           :rows="ActivetableData"
           table-class="customSATableClass" 
@@ -18,7 +13,8 @@
           :pagination="paginationControl"
           :filter-method="myCustomSearchFilter1" 
           row-key="name" 
-          color="grey-9" class=">
+          color="grey-9"
+          >
 
           <q-td v-slot:body-cell-action="props" :props="props">
               <div class="row no-wrap no-padding">
@@ -31,14 +27,14 @@
 
             <q-td v-slot:body-cell-serviceReqIssueTypeSets="props" :props="props">
               <div class="row no-wrap group" v-for="menu in props.row.serviceReqIssueTypeSets" >
-                <q-chip color="light" class="class="text-dark">
+                <q-chip color="light" class="text-dark">
                   {{ menu.serviceReqIssueType.name}}
                 </q-chip>
               </div>
             </q-td>
             <q-td v-slot:body-cell-serviceRequestStatusSets="props" :props="props">
               <div class="row no-wrap group" v-for="menu in props.row.serviceRequestStatusSets" >
-                <q-chip color="light" class="class="text-dark">
+                <q-chip color="light" class="text-dark">
                   {{ menu.serviceRequestStatus != null ? menu.serviceRequestStatus.name : "NA" }}
                 </q-chip>
               </div>
@@ -55,7 +51,8 @@
             </template>
           </q-table>
         </q-tab-panel>
-<q-tab-panel name="tab-2">
+
+        <q-tab-panel name="tab-2">
           <q-table 
           :rows="DeactivetableData"
           table-class="customSATableClass" 
@@ -64,18 +61,19 @@
           :pagination="paginationControl2"
           :filter-method="myCustomSearchFilter2" 
           row-key="name" 
-          color="grey-9" class=">
+          color="grey-9"
+          >
 
             <q-td v-slot:body-cell-serviceReqIssueTypeSets="props" :props="props">
               <div class="row no-wrap group" v-for="menu in props.row.serviceReqIssueTypeSets" >
-                <q-chip color="light" class="class="text-dark">
+                <q-chip color="light" class="text-dark">
                   {{ menu.serviceReqIssueType.name}}
                 </q-chip>
               </div>
             </q-td>
              <q-td v-slot:body-cell-serviceRequestStatusSets="props" :props="props">
               <div class="row no-wrap group" v-for="menu in props.row.serviceRequestStatusSets" >
-                <q-chip color="light" class="class="text-dark">
+                <q-chip color="light" class="text-dark">
                   {{ menu.serviceRequestStatus != null ? menu.serviceRequestStatus.name : "NA"}}
                 </q-chip>
               </div>
@@ -96,7 +94,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-</q-tab-panels>
+              </q-tabs>
               
       <!--START: Show edit  service Parts -->
       <showEditServiceType v-if="propShowEditServiceType" :propShowEditServiceType="propShowEditServiceType"
@@ -330,7 +328,9 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                error.body.message == null
+                  ? "Please Try Again Later !"
+                  : error.body.message,
               icon: "thumb_down"
             });
           });
@@ -369,7 +369,9 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                error.body.message == null
+                  ? "Please Try Again Later !"
+                  : error.body.message,
               icon: "thumb_down"
             });
           });

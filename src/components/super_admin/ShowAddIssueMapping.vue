@@ -12,7 +12,7 @@
           <div class="row gutter-sm q-py-sm items-center">
             <div class="col-md-12">
               <q-input v-model="formData.name" :error="v$.formData.name.$error"
-                class="text-weight-regular text-grey-8" color="grey-9" class="label="Enter Issue Mapping Name"
+                class="text-weight-regular text-grey-8" color="grey-9" label="Enter Issue Mapping Name"
                 placeholder="Enter Issue Mapping Name" />
             </div>
           </div>
@@ -33,7 +33,8 @@
             <div class="col-md-12 group" align="right">
               <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8"
                 @click="emitfnShowAddNewIssueMapping()">Cancel</q-btn>
-              <q-btn :disable="this.selectedItem == ''" align="right" @click="fnfinalsubmitIssueMapping(formData)" color="purple-9">Save</q-btn>" class="</div>
+              <q-btn :disable="this.selectedItem == ''" align="right" @click="fnfinalsubmitIssueMapping(formData)" color="purple-9">Save</q-btn>
+            </div>
           </div>
         </form>
       </q-dialog>

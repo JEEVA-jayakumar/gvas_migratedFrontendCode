@@ -16,10 +16,11 @@
            </div>
            <div>
             <q-input
-              class=" no-pointer-events"
+              no-pointer-events"
               v-model="formData.soReason"
               label="SO Remarks"
-              color="light-blue" class="/>
+              color="light-blue"
+            />
           </div>
           <div>
             <q-input
@@ -27,10 +28,11 @@
               @blur="v$.formData.leadInformation.kycSatRemark.$touch"
               :error="v$.formData.leadInformation.kycSatRemark.$error"
               label="SAT Remarks"
-              color="light-blue" class="/>
+              color="light-blue"
+            />
           </div>
           <div class="group">
-            <q-btn icon="clear" color="negative" class="class="q-ma-sm float-right" @click="sendRemarks(formData)" align="right" label="Reject" />
+            <q-btn icon="clear" color="negative" class="q-ma-sm float-right" @click="sendRemarks(formData)" align="right" label="Reject" />
             <q-btn icon="block" color="grey-5" @click="emitToggleRemarks()" class="q-ma-sm float-right text-dark" align="right" v-close-overlay label="Cancel" />
           </div>
         </div>
@@ -107,7 +109,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

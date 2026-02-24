@@ -40,7 +40,8 @@
                     :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
                     @click="props.toggleFullscreen"
                     class="q-mt-lg"
-                    color="grey-9" size="sm"
+                    color="grey-9"
+                    size="sm"
                   /> -->
                 <!-- </div> -->
                 <!--END: table fullscreen mode -->
@@ -51,7 +52,8 @@
                       clearable
                       v-model="filter"
                       separator
-                      color="grey-9" class="placeholder="Type.."
+                      color="grey-9"
+                      placeholder="Type.."
                       label= "Search by MID, TID, Merchant Name, MCC,UTR Number, Device Type"
                       class="q-mr-lg q-py-sm"
                     />
@@ -65,7 +67,8 @@
                     label="Date Filter"
                     type="date"
                     class="q-mr-lg q-py-sm"
-                    color="grey-9" class="/>
+                    color="grey-9"
+                  />
                 </div>
                 <!--END: table filter dropdown -->
       
@@ -77,7 +80,8 @@
                   name="Merchant Tracker - TID.xls">
                     <q-btn 
                       outline  
-                      color="grey-9" class="label="Download as Excel"
+                      color="grey-9"
+                      label="Download as Excel"
                       class="q-mr-lg q-py-sm float-right"
                       size="md"
                     />

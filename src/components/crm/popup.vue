@@ -20,7 +20,8 @@
             />
           </div>
           <div class="col-md-1 group" align="right">
-            <q-btn align="right" @click="Download()" color="purple-9">Download</q-btn>" class="</div>
+            <q-btn align="right" @click="Download()" color="purple-9">Download</q-btn>
+          </div>
         </div>
       </form>
     </q-dialog>
@@ -64,7 +65,7 @@ export default {
           if (!contentType) {
             throw new Error("Content-Type header is missing");
           }
-          const blob = new Blob([response.data], { type: contentType });
+          const blob = new Blob([response.body], { type: contentType });
 
           let extension = "";
           switch (contentType) {

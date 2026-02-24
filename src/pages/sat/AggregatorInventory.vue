@@ -6,7 +6,9 @@
             <q-tabs
               no-pane-border
               v-model="inventoryOptionSelected"
-              color="dark" class="class="shadow-1"
+              color="dark"
+              inverted
+              class="shadow-1"
             >
             <!-- <q-btn outline no-caps class="text-weight-regular" label="Allocate to SO" to="PhonepeallocateToSo" /> -->
               <q-tab default name="Aggregatorspare" label="Spare Parts"  />
@@ -21,47 +23,37 @@
               <q-tab name="AggregatorAllocateSotoso" label="Allocate SO to SO"  />
               <q-tab name="RequestSOList" label="REQUEST"  />
   
-
-
-
-
-
-
-
-
-
-
-
-            </q-tabs>
-<q-tab-panels v-model="inventoryOptionSelected" animated>
-<q-tab-panel name="Aggregatorspare">
+              <q-tab-panel name="Aggregatorspare">
                 <AggregatorsInventoryspareParts/>
               </q-tab-panel>
-<q-tab-panel name="Aggregatorcount">
+
+              <q-tab-panel name="Aggregatorcount">
                 <AggregatorinventoryCount  />
               </q-tab-panel>
-<q-tab-panel name="AggregatorDispatch">
+
+              <q-tab-panel name="AggregatorDispatch">
                 <AggregatorDispatchedInventory
                 />
               </q-tab-panel>
-<q-tab-panel name="AggregatorDamagedDevices">
+              <q-tab-panel name="AggregatorDamagedDevices">
               <AggregatorshowAddDamagedDevices
                 :propDeviceTypes="getAllRegionalInventoryDeviceDetailsWithCount"
               />
             </q-tab-panel>
-<q-tab-panel name="AggregatorAllocatetoso">
+
+              <q-tab-panel name="AggregatorAllocatetoso">
                 <AggregatorInventoryallocatetoso />
               </q-tab-panel>
-<q-tab-panel name="AggregatorAllocateSotoso">
+              <q-tab-panel name="AggregatorAllocateSotoso">
                 <AggregatorSOtoso />
               </q-tab-panel>
-<q-tab-panel name="AggregatorInventoryWithSo">
+              <q-tab-panel name="AggregatorInventoryWithSo">
                   <AggregatorInventoryWithSo />
               </q-tab-panel>
-<q-tab-panel name="RequestSOList">
+              <q-tab-panel name="RequestSOList">
                 <AggregatorSODeviceReassigned />
               </q-tab-panel>
-</q-tab-panels>
+            </q-tabs>
           </div>
         </div>
       </div>

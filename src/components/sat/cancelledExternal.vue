@@ -10,7 +10,8 @@
         row-key="id"
         :loading="tableAjaxLoading"
         :rows-per-page-options="[5, 10, 15, 20]"
-        color="dark" class="@request="ajaxLoadAllClosedInfo"
+        color="dark"
+        @request="ajaxLoadAllClosedInfo"
       >
         <!--START: table header -->
         <q-tr v-slot:top-row="props">
@@ -28,7 +29,8 @@
               <q-checkbox
                 checked-icon="fas fa-chevron-up"
                 unchecked-icon="fas fa-chevron-down"
-                color="grey-9" v-model="props.row.expand"
+                color="grey-9"
+                v-model="props.row.expand"
                 class="q-mr-md"
                 @input="expandRowPlease(props.row)"
               />
@@ -524,7 +526,8 @@
           <div class="col-md-5">
             <q-input
               clearable
-              color="grey-9" v-model="filterSearch"
+              color="grey-9"
+              v-model="filterSearch"
               placeholder="Type.."
               label="Search By ServiceReqTicketId, TID .."
               class="q-mr-lg q-py-sm"

@@ -5,11 +5,11 @@
       <div>
         <div class="row q-px-md q-py-md items-center">
           <!--START: table title -->
-          <div class=" col-6 col-sm-4 col-md-8 text-h6 text-weight-regular text-grey-9 ">
+          <div col-6 col-sm-4 col-md-8 text-h6 text-weight-regular text-grey-9 ">
           </div>
         </div>
   
-        <div class=" row bottom-border group  q-px-md q-py-md items-center text-weight-regular text-grey-9 ">
+        <div row bottom-border group  q-px-md q-py-md items-center text-weight-regular text-grey-9 ">
           <div class="col-md-7">
             <p class="caption">Aggregator Spare Parts Types*</p>
             <div class="row">
@@ -23,7 +23,7 @@
               <div :id="menu.value.id + '_DV'" style="display: none" @click="finding(menu.value.id)">
                 <label>{{ menu.value.spare_parts_types }}</label>
                 <input :id="menu.value.id + '_IP'" type="number" min="1" max="5000" @blur="getAllCounts($event, menu)" />
-                <q-btn type="button" align="center" size="sm" color="purple" class=":disabled="dis()" @click="fnSubmit(formData)">Submit</q-btn>
+                <q-btn type="button" align="center" size="sm" color="purple" :disabled="dis()" @click="fnSubmit(formData)">Submit</q-btn>
               </div>
             </div>
           </div>
@@ -39,7 +39,8 @@
             Aggregator Stock List
           </div>
           <q-table :rows="tableData" table-class="customSATableClass" :columns="columns"
-            :pagination="paginationControl" row-key="name" color="grey-9">" class="<q-td v-slot:body-cell-created_date="props" :props="props">{{ $moment_format(props.row.created_date, "Do MMM Y") }}</q-td>
+            :pagination="paginationControl" row-key="name" color="grey-9">
+            <q-td v-slot:body-cell-created_date="props" :props="props">{{ $moment_format(props.row.created_date, "Do MMM Y") }}</q-td>
             <q-td v-slot:body-cell-updated_date="props" :props="props">{{ $moment_format(props.row.updated_date, "Do MMM Y") }}</q-td>
           </q-table>
         </div>

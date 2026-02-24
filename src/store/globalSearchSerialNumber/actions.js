@@ -28,7 +28,7 @@ export const FETCH_GLOBAL_SEARCH_DATAS = ({ commit }, request) => {
       )
       .then(response => {
         commit("API_RESPONSE_LOG", response);
-        commit("SET_FETCH_GLOBAL_SEARCH_DATAS", response.data.data);
+        commit("SET_FETCH_GLOBAL_SEARCH_DATAS", response.body.data);
       });
     }
     else{
@@ -54,7 +54,7 @@ export const FETCH_GLOBAL_SEARCH_DATAS = ({ commit }, request) => {
         )
         .then(response => {
           commit("API_RESPONSE_LOG", response);
-          commit("SET_FETCH_GLOBAL_SEARCH_DATAS", response.data.data);
+          commit("SET_FETCH_GLOBAL_SEARCH_DATAS", response.body.data);
         });
       }
       else{
@@ -77,7 +77,7 @@ export const FETCH_GLOBAL_SEARCH_DATAS = ({ commit }, request) => {
         )
         .then(response => {
           commit("API_RESPONSE_LOG", response);
-          commit("SET_FETCH_GLOBAL_SEARCH_DATAS", response.data.data);
+          commit("SET_FETCH_GLOBAL_SEARCH_DATAS", response.body.data);
         });
       }
      
@@ -90,8 +90,8 @@ export const FETCH_DOC_VIEW = ({ commit }, request) => {
       "crm-request/getTidDetails/" + request.searchTerm
     )
     .then(response => {
-      commit("SET_FETCH_DOC_VIEW", response.data.data);
-      return response.data.data;
+      commit("SET_FETCH_DOC_VIEW", response.body.data);
+      return response.body.data;
     });
 };
 export const FETCH_DOC_VIEW_TICKET = ({ commit }, request) => {
@@ -101,7 +101,7 @@ export const FETCH_DOC_VIEW_TICKET = ({ commit }, request) => {
       "crm-request/getTicketDetails/" + request.searchTerm
     )
     .then(response => {
-      commit("SET_FETCH_DOC_VIEW_TICKET", response.data.data);
+      commit("SET_FETCH_DOC_VIEW_TICKET", response.body.data);
     });
 };
 
@@ -144,9 +144,9 @@ return api
       sorting
   )
   .then(response => {
-    console.log("API Response : ", response.data.data);
+    console.log("API Response : ", response.body.data);
     commit("API_RESPONSE_LOG", response);
-    commit("SET_FETCH_PHONE_PE_GLOBAL_SEARCH_DATAS", response.data.data);
+    commit("SET_FETCH_PHONE_PE_GLOBAL_SEARCH_DATAS", response.body.data);
   //   return response;
   });
 };

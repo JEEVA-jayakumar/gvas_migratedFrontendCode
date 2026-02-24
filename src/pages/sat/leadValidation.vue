@@ -61,32 +61,33 @@
             <span class="label text-negative" v-else>Pending</span>
           </q-td>
           <q-td v-slot:body-cell-action="props" :props="props">
-            <q-btn v-if="props.row.leadStatus == $LEAD_STATUS_DATA_ENTRY_PENDING" push outline
+            <q-btn v-if="props.row.leadStatus == $LEAD_STATUS_DATA_ENTRY_PENDING" highlight push outline
               color="purple-9" size="sm"
               @click="$router.push('/sat/lead/validation/'+ props.row.leadId+'/data/entry')">Data Entry</q-btn>
 
-            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_SUBMITED_TO_MARS" push class="disabled"
+            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_SUBMITED_TO_MARS" highlight push class="disabled"
               color="purple-9" size="sm">Pending with MARS</q-btn>
 
             <q-btn
               v-else-if="props.row.leadStatus == $LEAD_STATUS_SUBMIT_TO_SAT_LEAD && props.row.verifiedFinanceStatus == $VERIFIED_FINANCE_STATUS_SUCCESS"
-              push outline color="purple-9" size="sm"
+              highlight push outline color="purple-9" size="sm"
               :to="'/sat/lead/validation/'+ props.row.leadId">Validate</q-btn>
-            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_REFER_BACK" push outline color="amber-9" size="sm" @click="$router.push('/sat/lead/validation/'+ props.row.leadId)">Referred Back</q-btn>
-            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_MARS_SUB_TID_PENDING" push outline
+            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_REFER_BACK" highlight push outline color="amber-9"
+              size="sm" @click="$router.push('/sat/lead/validation/'+ props.row.leadId)">Referred Back</q-btn>
+            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_MARS_SUB_TID_PENDING" highlight push outline
               color="amber-9" size="sm"
               @click="$router.push('/sat/lead/validation/'+ props.row.leadId+'/data/entry')">Sub Tid Validation</q-btn>
-            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_BASE_TID_PENDING " push outline
+            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_BASE_TID_PENDING " highlight push outline
               color="amber-9" size="sm"
               @click="$router.push('/sat/lead/validation/'+ props.row.leadId+'/data/entry')">Sub Tid Validation</q-btn>
-            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_MARS_REFERRAL_BACK_DATA_ENTRY_PENDING" push
+            <q-btn v-else-if="props.row.leadStatus == $LEAD_STATUS_MARS_REFERRAL_BACK_DATA_ENTRY_PENDING" highlight push
               outline color="amber-9" size="sm"
               @click="$router.push('/sat/lead/validation/'+ props.row.leadId+'/data/entry')">RB - data entry</q-btn>
 
-            <q-btn v-else class="disabled" push outline color="grey-9" size="sm">Validate</q-btn>
+            <q-btn v-else class="disabled" highlight push outline color="grey-9" size="sm">Validate</q-btn>
           </q-td>
           <q-td v-slot:body-cell-rejectLead="props" :props="props">
-            <q-btn v-if="props.row.leadStatus == $LEAD_STATUS_SUBMIT_TO_SAT_LEAD  " push outline
+            <q-btn v-if="props.row.leadStatus == $LEAD_STATUS_SUBMIT_TO_SAT_LEAD  " highlight push outline
               class="q-mx-sm" color="negative" @click="openRejectLead(props.row)" size="sm">Reject Lead</q-btn>
           </q-td>
           <!-- END: table body modification -->

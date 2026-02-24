@@ -7,7 +7,8 @@
         <div class="row gutter-x-xs">
           <div class="col-3">
             <q-select
-              color="grey-9" v-model="formData.merchantType"
+              color="grey-9"
+              v-model="formData.merchantType"
               :options="activeMerchantType"
               label="Select merchant type"
               placeholder="Merchant type"
@@ -22,13 +23,15 @@
               no-caps
               size="md"
               @click="fnManagemerchantTypes"
-              color="purple-9" class="icon="add"
+              color="purple-9"
+              icon="add"
               class="no-margin"
             />
           </div>
           <div class="col-3">
             <q-select
-              color="grey-9" v-model="formData.parentIDtemp"
+              color="grey-9"
+              v-model="formData.parentIDtemp"
               :options="activeDocumentMerchantType"
               @input="mapParentIdToSubDocument"
               label="Merchant Document Type"
@@ -42,13 +45,15 @@
               no-caps
               size="md"
               @click="fnManagemerchanDocumentTypes"
-              color="purple-9" class="icon="add"
+              color="purple-9"
+              icon="add"
               class="no-margin"
             />
           </div>
           <div class="col-3">
             <q-input
-              color="grey-9" v-model="formData.subDocumentType"
+              color="grey-9"
+              v-model="formData.subDocumentType"
               :error="v$.formData.subDocumentType.$error"
               label="Merchant Sub Document Type"
               placeholder="Merchant Sub Document Type"
@@ -57,7 +62,8 @@
           <div class="col-auto">
             <q-input
               type="number"
-              color="grey-9" v-model="formData.marsDocumentId"
+              color="grey-9"
+              v-model="formData.marsDocumentId"
               label="Mars document Id"
               placeholder="Mars document Id"
             />
@@ -67,7 +73,8 @@
           <div class="col-3">
             <q-btn
               label="Submit"
-              color="purple-9" @click="submitMerchantSubDocumentType(formData)"
+              color="purple-9"
+              @click="submitMerchantSubDocumentType(formData)"
             />
           </div>
         </div>
@@ -77,7 +84,8 @@
       <!-- START >> Setup fee and recurring fee -->
       <!-- START >> Table >> rental charge details -->
       <div class="col-md-12 col-sm-12 col-xs-12">
-        <q-tabs color="grey-9">" class="<!-- Tabs - notice  -->
+        <q-tabs color="grey-9">
+          <!-- Tabs - notice  -->
           <q-tab
             @select="fetchActiveMerchantTypes"
             default
@@ -99,7 +107,8 @@
               :filter="filterSearch"
               :pagination="pagination"
               row-key="name"
-              color="grey-9" class=">
+              color="grey-9"
+            >
               <q-td v-slot:body-cell-action="props" :props="props">
                 <div class="row no-wrap no-padding">
                   <q-btn
@@ -131,7 +140,8 @@
                 <div class="col-md-5">
                   <q-input
                     clearable
-                    color="grey-9" v-model="filterSearch"
+                    color="grey-9"
+                    v-model="filterSearch"
                     placeholder="Type.."
                     label="Search by merchant type, document type, sub document type"
                     class="q-mr-lg q-py-sm"
@@ -149,7 +159,8 @@
               :filter="filterSearch"
               :pagination="pagination"
               row-key="name"
-              color="grey-9" class=">
+              color="grey-9"
+            >
               <q-td v-slot:body-cell-action="props" :props="props">
                 <div class="row no-wrap no-padding">
                   <q-btn
@@ -181,7 +192,8 @@
                 <div class="col-md-5">
                   <q-input
                     clearable
-                    color="grey-9" v-model="filterSearch"
+                    color="grey-9"
+                    v-model="filterSearch"
                     placeholder="Type.."
                     label="Search by merchant type, document type, sub document type"
                     class="q-mr-lg q-py-sm"
@@ -525,7 +537,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
             icon: "thumb_down"
           });
         });

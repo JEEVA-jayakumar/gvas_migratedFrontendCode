@@ -15,7 +15,8 @@
         <div class="col-auto text-h6">CRM LOGS_Merchant Name</div>
         <q-btn
           flat
-          color="red" class="round
+          color="red"
+          round
           size="md"
           icon="close"
           @click="emitCrmLogsMerchantName(toggleModel)"

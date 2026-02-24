@@ -16,7 +16,8 @@
           </div>
           <div class="col-12">
             <q-select
-              color="grey-9" class="placeholder="Merchant type"
+              color="grey-9"
+              placeholder="Merchant type"
               :options="activeMerchantType"
               v-model="formData.merchantType"
               label="Select merchant type"
@@ -48,11 +49,7 @@
       />
 
       <!-- Targets -->
-
-
-    </q-tabs>
-<q-tab-panels v-model="currentListTabulation" animated>
-<q-tab-panel name="tab-1">
+      <q-tab-panel name="tab-1">
         <q-table
           :rows="merchantDocumentTypesList"
           table-class="customSATableClass"
@@ -61,7 +58,8 @@
           :pagination="paginationControl"
           :filter-method="myCustomSearchFilter"
           row-key="name"
-          color="grey-9" class=">
+          color="grey-9"
+        >
           <q-td v-slot:body-cell-action="props" :props="props">
             <div class="row no-wrap no-padding">
               <q-btn
@@ -94,7 +92,8 @@
             <div class="col-8">
               <q-input
                 clearable
-                color="grey-9" v-model="filterSearch"
+                color="grey-9"
+                v-model="filterSearch"
                 placeholder="Type.."
                 label="Search merchant type"
               />
@@ -105,7 +104,8 @@
                 no-wrap
                 label="Add New"
                 class="text-weight-regular"
-                color="purple-9" class="icon="far fa-plus-square"
+                color="purple-9"
+                icon="far fa-plus-square"
                 @click="fnshowCreateMerchantDocumentType()"
               />
             </div>
@@ -113,7 +113,7 @@
           </template>
         </q-table>
       </q-tab-panel>
-<q-tab-panel name="tab-2">
+      <q-tab-panel name="tab-2">
         <q-table
           :rows="merchantDocumentTypesDeactivatedList"
           table-class="customSATableClass"
@@ -122,7 +122,8 @@
           :pagination="paginationControl"
           :filter-method="myCustomSearchFilter"
           row-key="name"
-          color="grey-9" class=">
+          color="grey-9"
+        >
           <q-td v-slot:body-cell-action="props" :props="props">
             <div class="row no-wrap no-padding">
               <q-btn
@@ -144,7 +145,8 @@
             <div class="col-8">
               <q-input
                 clearable
-                color="grey-9" v-model="deActivatedSearch"
+                color="grey-9"
+                v-model="deActivatedSearch"
                 placeholder="Type.."
                 label="Search merchant type"
               />
@@ -153,7 +155,7 @@
           </template>
         </q-table>
       </q-tab-panel>
-</q-tab-panels>
+    </q-tabs>
 
     <!--START: Show create MerchantDocumentTypes -->
     <showCreateMerchantDocumentType

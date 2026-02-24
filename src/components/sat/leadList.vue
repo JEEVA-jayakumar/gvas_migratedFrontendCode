@@ -18,7 +18,7 @@
       <div class="row items-center q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
         <div class="col text-h6">Lead Details</div>
         <div class="col-auto">
-          <q-btn round @click="emitToggleRemarks" outline color="dark" class="icon="clear"/>
+          <q-btn round @click="emitToggleRemarks" outline color="dark" icon="clear"/>
         </div>
       </div>
       <!--END: table title -->
@@ -81,7 +81,8 @@
             highlight
             push
             outline
-            color="purple-9" size="sm"
+            color="purple-9"
+            size="sm"
             @click="$router.push('/sat/lead/validation/'+ props.row.leadId+'/data/entry')"
           >Data Entry</q-btn>
 
@@ -90,7 +91,8 @@
             highlight
             push
             class="disabled"
-            color="purple-9" size="sm"
+            color="purple-9"
+            size="sm"
           >Pending with MARS</q-btn>
 
           <q-btn
@@ -98,10 +100,11 @@
             highlight
             push
             outline
-            color="purple-9" size="sm"
+            color="purple-9"
+            size="sm"
             :to="'/sat/lead/validation/'+ props.row.leadId"
           >Validate</q-btn>
-          <q-btn v-else class="disabled" push outline color="grey-9" size="sm">Validate</q-btn>
+          <q-btn v-else class="disabled" highlight push outline color="grey-9" size="sm">Validate</q-btn>
         </q-td>
         <!-- END: table body modification -->
         <template v-slot:top="props" class="bottom-border">
@@ -109,7 +112,8 @@
           <div class="col-md-5">
             <q-input
               clearable
-              color="grey-9" v-model="filter"
+              color="grey-9"
+              v-model="filter"
               :debounce="600"
               placeholder="Type.."
               label="Search .. "

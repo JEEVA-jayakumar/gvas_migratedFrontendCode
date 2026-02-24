@@ -15,12 +15,14 @@
           </div>
           <div class="col-md-8 q-pt-md" align="left">
             <q-input
-              color="grey-9" v-model="formData.podNumber"
+              color="grey-9"
+              v-model="formData.podNumber"
               label="Enter POD Number"
               placeholder="POD Number"
             />
               <q-input
-              color="grey-9" v-model="formData.totalDevices"
+              color="grey-9"
+              v-model="formData.totalDevices"
               label="Total Allocated Devices "
               placeholder="Total Allocated Devices "
             />
@@ -31,7 +33,8 @@
           </div>
           <div class="col-md-8 q-pt-md" align="left">
             <q-input
-              color="grey-9" v-model="formData.scannedDevices"
+              color="grey-9"
+              v-model="formData.scannedDevices"
               label="Device Count "
               placeholder="Device Count "
             />
@@ -136,7 +139,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

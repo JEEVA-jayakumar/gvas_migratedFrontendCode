@@ -171,7 +171,7 @@ export const AGGREGATOR_IMPLEMENTED_VERIFICATION_QUEUE = ({
                 sorting
             )
             .then(response => {
-                console.log("API Response : ", response.data.data);
+                console.log("API Response : ", response.body.data);
                 commit("SET_AGGREGATOR_IMPLEMENTED_VERIFICATION_QUEUE", response.data.data);
                 console.log("SET_AGGREGATOR_IMPLEMENTED_VERIFICATION_QUEUE : ", response.data.data);
 

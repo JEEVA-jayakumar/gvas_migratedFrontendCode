@@ -5,7 +5,8 @@
         <q-input
           @blur="v$.merchant.companyInformation.legalName.$touch"
           :error="v$.merchant.companyInformation.legalName.$error"
-          color="grey-9" v-model="merchant.companyInformation.legalName"
+          color="grey-9"
+          v-model="merchant.companyInformation.legalName"
           label="Legal Name*"
           placeholder="Legal Name*"
         />
@@ -14,7 +15,8 @@
         <q-input
           @blur="v$.merchant.companyInformation.dbaName.$touch"
           :error="v$.merchant.companyInformation.dbaName.$error"
-          color="grey-9" v-model="merchant.companyInformation.dbaName"
+          color="grey-9"
+          v-model="merchant.companyInformation.dbaName"
           label="DBA Name*"
           placeholder="DBA Name*"
         />
@@ -23,7 +25,8 @@
         <q-input
           @blur="v$.merchant.companyInformation.registeredAddress.$touch"
           :error="v$.merchant.companyInformation.registeredAddress.$error"
-          color="grey-9" v-model="merchant.companyInformation.registeredAddress"
+          color="grey-9"
+          v-model="merchant.companyInformation.registeredAddress"
           label="Registered Address*"
           placeholder="Registered Address*"
         />
@@ -32,7 +35,8 @@
         <q-input
           @blur="v$.merchant.companyInformation.registeredCityRefCode.$touch"
           :error="v$.merchant.companyInformation.registeredCityRefCode.$anyError|| v$.merchant.companyInformation.registeredCityName.$anyError"
-          color="grey-9" v-model="merchant.companyInformation.registeredCityName"
+          color="grey-9"
+          v-model="merchant.companyInformation.registeredCityName"
           label="Registered city (type min 3 characters)*"
           placeholder="Start typing ..*"
         >
@@ -49,7 +53,8 @@
         <q-input
           @blur="v$.merchant.companyInformation.registeredStateRefCode.$touch"
           :error="v$.merchant.companyInformation.registeredStateRefCode.$anyError|| v$.merchant.companyInformation.registeredStateName.$anyError"
-          color="grey-9" v-model="merchant.companyInformation.registeredStateName"
+          color="grey-9"
+          v-model="merchant.companyInformation.registeredStateName"
           label="Registered state (type min 3 characters)*"
           placeholder="Start typing ..*"
         >
@@ -66,7 +71,8 @@
         <q-input
           @blur="v$.merchant.companyInformation.registeredPin.$touch"
           :error="v$.merchant.companyInformation.registeredPin.$error"
-          color="grey-9" class="type="number"
+          color="grey-9"
+          type="number"
           v-model="merchant.companyInformation.registeredPin"
           label="PIN*"
           placeholder="PIN*"
@@ -75,7 +81,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           disable
-          color="grey-9" v-model="merchant.companyInformation.constitutionName"
+          color="grey-9"
+          v-model="merchant.companyInformation.constitutionName"
           label="Type of Business Entity"
         />
       </div>
@@ -83,7 +90,8 @@
         <q-input
           format="DD/MM/YYYY"
           format-model="number"
-          color="grey-9" class="modal
+          color="grey-9"
+          modal
           @blur="v$.merchant.companyInformation.establishYear.$touch"
           :error="v$.merchant.companyInformation.establishYear.$error"
           v-model="merchant.companyInformation.establishYear"
@@ -93,7 +101,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9" class="@blur="v$.merchant.companyInformation.registerNumber.$touch"
+          color="grey-9"
+          @blur="v$.merchant.companyInformation.registerNumber.$touch"
           :error="v$.merchant.companyInformation.registerNumber.$error"
           v-model="merchant.companyInformation.registerNumber"
           label="Establish Number"
@@ -104,7 +113,8 @@
         <q-input
           @blur="v$.merchant.companyInformation.tin.$touch"
           :error="v$.merchant.companyInformation.tin.$error"
-          color="grey-9" v-model="merchant.companyInformation.tin"
+          color="grey-9"
+          v-model="merchant.companyInformation.tin"
           label="TIN"
           placeholder="TIN"
         />
@@ -114,7 +124,8 @@
           upper-case
           @blur="v$.merchant.companyInformation.pan.$touch"
           :error="v$.merchant.companyInformation.pan.$error"
-          color="grey-9" v-model="merchant.companyInformation.pan"
+          color="grey-9"
+          v-model="merchant.companyInformation.pan"
           label="Company PAN*"
           placeholder="Company PAN*"
         />
@@ -124,14 +135,16 @@
           upper-case
           @blur="v$.merchant.companyInformation.tan.$touch"
           :error="v$.merchant.companyInformation.tan.$error"
-          color="grey-9" v-model="merchant.companyInformation.tan"
+          color="grey-9"
+          v-model="merchant.companyInformation.tan"
           label="TAN"
           placeholder="TAN"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9" v-model="merchant.companyInformation.businessNature"
+          color="grey-9"
+          v-model="merchant.companyInformation.businessNature"
           label="Nature of Business"
           placeholder="Nature of Business"
         />
@@ -139,7 +152,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
           placeholder="Choose from the below*"
-          color="grey-9" v-model="merchant.companyInformation.businessType"
+          color="grey-9"
+          v-model="merchant.companyInformation.businessType"
           label="Type of Business"
           :options="businessTypeOptions"
         />
@@ -148,7 +162,8 @@
         <q-input
           @blur="v$.merchant.companyInformation.mcc.$touch"
           :error="v$.merchant.companyInformation.mcc.$error || v$.merchant.companyInformation.mccname.$error"
-          color="grey-9" v-model="merchant.companyInformation.mccname"
+          color="grey-9"
+          v-model="merchant.companyInformation.mccname"
           label="MCC (type min 3 characters)"
           placeholder="Start typing ..*"
         >
@@ -165,7 +180,8 @@
         <q-input
           @blur="v$.merchant.companyInformation.residentialAddress.$touch"
           :error="v$.merchant.companyInformation.residentialAddress.$error"
-          color="grey-9" v-model="merchant.companyInformation.residentialAddress"
+          color="grey-9"
+          v-model="merchant.companyInformation.residentialAddress"
           label="Residential Address*"
           placeholder="Residential Address*"
         />
@@ -174,7 +190,8 @@
         <q-input
           @blur="v$.merchant.companyInformation.residentialPin.$touch"
           :error="v$.merchant.companyInformation.residentialPin.$error"
-          color="grey-9" class="type="number"
+          color="grey-9"
+          type="number"
           v-model="merchant.companyInformation.residentialPin"
           label="PIN*"
           placeholder="PIN*"
@@ -184,7 +201,8 @@
         <q-input
           @blur="v$.merchant.companyInformation.residentialCityRefCode.$touch"
           :error="v$.merchant.companyInformation.residentialCityRefCode.$anyError|| v$.merchant.companyInformation.residentCityName.$anyError"
-          color="grey-9" v-model="merchant.companyInformation.residentCityName"
+          color="grey-9"
+          v-model="merchant.companyInformation.residentCityName"
           label="City (type min 3 characters)*"
           placeholder="Start typing ..*"
         >
@@ -201,7 +219,8 @@
         <q-input
           @blur="v$.merchant.companyInformation.residentialStateRefCode.$touch"
           :error="v$.merchant.companyInformation.residentialStateRefCode.$anyError|| v$.merchant.companyInformation.residentStateName.$anyError"
-          color="grey-9" v-model="merchant.companyInformation.residentStateName"
+          color="grey-9"
+          v-model="merchant.companyInformation.residentStateName"
           label="State (type min 3 characters)*"
           placeholder="Start typing ..*"
         >
@@ -218,7 +237,8 @@
         <q-input
           @blur="v$.merchant.companyInformation.contactName.$touch"
           :error="v$.merchant.companyInformation.contactName.$error"
-          color="grey-9" v-model="merchant.companyInformation.contactName"
+          color="grey-9"
+          v-model="merchant.companyInformation.contactName"
           label="Contact Name*"
           placeholder="Contact Name*"
         />
@@ -227,14 +247,16 @@
         <q-input
           @blur="v$.merchant.companyInformation.contactMobile.$touch"
           :error="v$.merchant.companyInformation.contactMobile.$error"
-          color="grey-9" v-model="merchant.companyInformation.contactMobile"
+          color="grey-9"
+          v-model="merchant.companyInformation.contactMobile"
           label="Contact mobile*"
           placeholder="Contact Mobile*"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9" class="type="tel"
+          color="grey-9"
+          type="tel"
           @blur="v$.merchant.companyInformation.contactAlternateMobile.$touch"
           :error="v$.merchant.companyInformation.contactAlternateMobile.$error"
           v-model="merchant.companyInformation.contactAlternateMobile"
@@ -244,7 +266,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9" class="type="tel"
+          color="grey-9"
+          type="tel"
           @blur="v$.merchant.companyInformation.contactPhone.$touch"
           :error="v$.merchant.companyInformation.contactPhone.$error"
           v-model="merchant.companyInformation.contactPhone"
@@ -256,7 +279,8 @@
         <q-input
           @blur="v$.merchant.companyInformation.contactEmail.$touch"
           :error="v$.merchant.companyInformation.contactEmail.$error"
-          color="grey-9" class="type="email"
+          color="grey-9"
+          type="email"
           v-model="merchant.companyInformation.contactEmail"
           label="Contact Email*"
           placeholder="Contact Email*"
@@ -270,7 +294,8 @@
             :error="v$.merchant.companyInformation.statementType.$error"
             v-for="(item,index) in viewBinding.statementType"
             :key="index"
-            color="grey-9" v-model="merchant.companyInformation.statementType"
+            color="grey-9"
+            v-model="merchant.companyInformation.statementType"
             :val="item.value"
             :label="item.label"
           />
@@ -284,7 +309,8 @@
             :error="v$.merchant.companyInformation.statementFrequency.$error"
             v-for="(item,index) in viewBinding.statementFrequency"
             :key="index"
-            color="grey-9" v-model="merchant.companyInformation.statementFrequency"
+            color="grey-9"
+            v-model="merchant.companyInformation.statementFrequency"
             :val="item.value"
             :label="item.label"
           />
@@ -292,7 +318,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9" class="label="Statement Email"
+          color="grey-9"
+          label="Statement Email"
           placeholder="Statement Email"
           @blur="v$.merchant.companyInformation.statementEmail.$touch"
           :error="v$.merchant.companyInformation.statementEmail.$error"
@@ -301,14 +328,15 @@
       </div>
     </div>
     <q-stepper-navigation>
-      <q-btn color="primary" class="class="q-ma-xs" icon="check" @click="validate" label="Continue"/>
+      <q-btn color="primary" class="q-ma-xs" icon="check" @click="validate" label="Continue"/>
       <q-btn
-        color="amber-10" class="class="q-ma-xs"
+        color="amber-10"
+        class="q-ma-xs"
         icon="save"
         label="Save Partial"
         @click="$emit('saveData','companyInformation',merchant)"
       />
-      <q-btn color="grey-7" class="class="q-ma-xs" icon="block" @click="$emit('goBack')" label="Back"/>
+      <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="$emit('goBack')" label="Back"/>
     </q-stepper-navigation>
     <div class="hidden">{{makePropsReactive}}</div>
   </div>

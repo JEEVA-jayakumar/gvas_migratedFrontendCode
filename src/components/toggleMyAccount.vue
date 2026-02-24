@@ -14,7 +14,8 @@
         <div class="col-12">
           <q-input
             type="password"
-            color="grey-9" v-model="formData.currentPassword"
+            color="grey-9"
+            v-model="formData.currentPassword"
             @blur="v$.formData.currentPassword.$touch"
             :error="v$.formData.currentPassword.$error"
             label="Current Password*"
@@ -23,7 +24,8 @@
         <div class="col-12">
           <q-input
             type="password"
-            color="grey-9" v-model="formData.newpassword"
+            color="grey-9"
+            v-model="formData.newpassword"
             @blur="v$.formData.newpassword.$touch"
             :error="v$.formData.newpassword.$error"
             label="New Password*"
@@ -39,7 +41,8 @@
         <div class="col-12">
           <q-input
             type="password"
-            color="grey-9" v-model="formData.retypepassword"
+            color="grey-9"
+            v-model="formData.retypepassword"
             @blur="v$.formData.retypepassword.$touch"
             :error="v$.formData.retypepassword.$error"
             label="Confirm New Password*"
@@ -54,14 +57,16 @@
         </div>
         <div class="col-12 group">
           <q-btn
-            color="primary" class="class="q-ma-sm float-right"
+            color="primary"
+            class="q-ma-sm float-right"
             @click="submitPasswordChangeRequest(formData)"
             align="right"
             label="Submit"
           />
           <q-btn
             outline
-            color="dark" class="class="q-ma-sm float-right"
+            color="dark"
+            class="q-ma-sm float-right"
             @click="emitToggleMyAccount()"
             align="right"
             label="Cancel"
@@ -152,7 +157,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

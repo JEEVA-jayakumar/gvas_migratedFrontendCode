@@ -5,7 +5,7 @@
       <div class="row items-center bottom-border q-py-sm">
         <div class="col">Add Remarks</div>
         <div class="col-auto">
-          <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" class="icon="clear" />
+          <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" icon="clear" />
         </div>
 
       </div>
@@ -70,12 +70,13 @@
                 times_new_roman: 'Times New Roman',
                 verdana: 'Verdana'
               }" />
-            <!-- <q-input @blur="v$.formData.crmRemark.$touch" :error="v$.formData.crmRemark.$error" color="grey-9" v-model="formData.crmRemark" label="Remarks" placeholder="Add remarks" /> -->
+            <!-- <q-input @blur="v$.formData.crmRemark.$touch" :error="v$.formData.crmRemark.$error" color="grey-9"
+              v-model="formData.crmRemark" label="Remarks" placeholder="Add remarks" /> -->
           </div>
         </div>
 
         <div class="group" align="right">
-          <q-btn @click="fnsubmit(formData)" color="positive" class="icon="check" label="Save" />
+          <q-btn @click="fnsubmit(formData)" color="positive" icon="check" label="Save" />
         </div>
       </form>
     </q-dialog>
@@ -139,7 +140,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

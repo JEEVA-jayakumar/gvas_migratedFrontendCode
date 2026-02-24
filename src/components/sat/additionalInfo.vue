@@ -19,7 +19,8 @@
               <div class="col-md-6">
                 <q-select
                   placeholder="Choose from the below*"
-                  color="grey-9" class="@blur="v$.formdata.branchZone.$touch;"
+                  color="grey-9"
+                  @blur="v$.formdata.branchZone.$touch;"
                   :error="v$.formdata.branchZone.$error"
                   v-model.trim="formdata.branchZone"
                   label="Zone*"
@@ -31,7 +32,8 @@
               <div class="col-md-6">
                 <q-select
                   placeholder="Choose from the below*"
-                  color="grey-9" class="@blur="v$.formdata.iaDistrict.$touch;"
+                  color="grey-9"
+                  @blur="v$.formdata.iaDistrict.$touch;"
                   :error="v$.formdata.iaDistrict.$error"
                   v-model.trim="formdata.iaDistrict"
                   label="IA_District*"
@@ -43,7 +45,8 @@
                 <q-select
                   disable
                   placeholder="Choose from the below*"
-                  color="grey-9" class="v-model.trim="formdata.raDistrict"
+                  color="grey-9"
+                  v-model.trim="formdata.raDistrict"
                   label="RA_District*"
                   :options="getAllDistrict"
                   @clear="fnClearZone"
@@ -54,7 +57,8 @@
                 <q-select
                   disable
                   placeholder="Choose from the below*"
-                  color="grey-9" class="v-model.trim="formdata.od1District"
+                  color="grey-9"
+                  v-model.trim="formdata.od1District"
                   label="OD1_District*"
                   :options="getAllDistrict"
                   @clear="fnClearZone"
@@ -65,7 +69,8 @@
                 <q-select
                   disable
                   placeholder="Choose from the below*"
-                  color="grey-9" class="v-model.trim="formdata.od2District"
+                  color="grey-9"
+                  v-model.trim="formdata.od2District"
                   label="OD2_District*"
                   :options="getAllDistrict"
                 />
@@ -73,7 +78,8 @@
               <div class="col-md-6">
                 <q-select
                   placeholder="Choose from the below*"
-                  color="grey-9" class="@blur="v$.formdata.installationBranchCode.$touch;"
+                  color="grey-9"
+                  @blur="v$.formdata.installationBranchCode.$touch;"
                   :error="v$.formdata.installationBranchCode.$error"
                   v-model.trim="formdata.installationBranchCode"
                   label="InstallationBranchName*"
@@ -82,7 +88,8 @@
               </div>
               <div class="col-md-6">
                 <q-input
-                  color="grey-9" class="@blur="v$.formdata.lorState.$touch;"
+                  color="grey-9"
+                  @blur="v$.formdata.lorState.$touch;"
                   :error="v$.formdata.lorState.$error"
                   v-model.trim="formdata.lorState"
                   label="IOR_STATE(type min 3 characters)*"
@@ -98,7 +105,8 @@
               </div>
               <div class="col-md-6">
                 <q-input
-                  color="grey-9" class="@blur="v$.formdata.pin.$touch;"
+                  color="grey-9"
+                  @blur="v$.formdata.pin.$touch;"
                   :error="v$.formdata.pin.$error"
                   v-model.trim="formdata.pin"
                   label="Pincode"
@@ -116,7 +124,8 @@
               <div class="col-md-6">
                 <q-select
                   placeholder="Choose from the below*"
-                  color="grey-9" class="v-model.trim="formdata.state"
+                  color="grey-9"
+                  v-model.trim="formdata.state"
                   label="State*"
                   @input="pincodeandDistrictBasedCity"
                   :options="getPincodeBasedDistrict"
@@ -125,7 +134,8 @@
               <div class="col-md-6">
                 <q-select
                   placeholder="Choose from the below*"
-                  color="grey-9" class="@blur="v$.formdata.city.$touch;"
+                  color="grey-9"
+                  @blur="v$.formdata.city.$touch;"
                   :error="v$.formdata.city.$error"
                   v-model.trim="formdata.city"
                   label="City*"
@@ -136,7 +146,8 @@
               <div class="col-md-6">
                 <q-select
                   placeholder="Choose from the below*"
-                  color="grey-9" class="v-model.trim="formdata.iaLocation"
+                  color="grey-9"
+                  v-model.trim="formdata.iaLocation"
                   label="IA_LOCATION*"
                   :options="getCityBasedLocation"
                 />
@@ -144,7 +155,8 @@
               <div class="col-md-6">
                 <q-select
                   placeholder="Choose from the below*"
-                  color="grey-9" class="v-model.trim="formdata.iaSalutation"
+                  color="grey-9"
+                  v-model.trim="formdata.iaSalutation"
                   label="IA_Salution*"
                   :options="iaSalutationOptions"
                 />
@@ -152,7 +164,8 @@
               <div class="col-md-6">
                 <q-select
                   placeholder="Choose from the below*"
-                  color="grey-9" class="v-model.trim="formdata.iaGender"
+                  color="grey-9"
+                  v-model.trim="formdata.iaGender"
                   label="IA_Gender*"
                   :options="iaGenderOptions"
                 />
@@ -160,7 +173,8 @@
               <div class="col-md-6">
                 <q-select
                   placeholder="Choose from the below*"
-                  color="grey-9" class="v-model.trim="formdata.od1Salutation"
+                  color="grey-9"
+                  v-model.trim="formdata.od1Salutation"
                   label="OD1_Salutation*"
                   :options="od1SalutationOptions"
                 />
@@ -168,7 +182,8 @@
               <div class="col-md-6">
                 <q-select
                   placeholder="Choose from the below*"
-                  color="grey-9" class="v-model.trim="formdata.od1Gender"
+                  color="grey-9"
+                  v-model.trim="formdata.od1Gender"
                   label="OD1_Gender*"
                   :options="od1GenderOptions"
                 />
@@ -176,7 +191,8 @@
               <div class="col-md-6">
                 <q-select
                   placeholder="Choose from the below*"
-                  color="grey-9" class="v-model.trim="formdata.od2Salutation"
+                  color="grey-9"
+                  v-model.trim="formdata.od2Salutation"
                   label="OD2_Salutation*"
                   :options="od2SalutationOptions"
                 />
@@ -184,7 +200,8 @@
               <div class="col-md-6">
                 <q-select
                   placeholder="Choose from the below*"
-                  color="grey-9" class="v-model.trim="formdata.od2Gender"
+                  color="grey-9"
+                  v-model.trim="formdata.od2Gender"
                   label="OD2_Gender*"
                   :options="od2GenderOptions"
                 />
@@ -193,14 +210,16 @@
           </div>
           <div align="right">
             <q-btn
-              color="positive" class="class="q-ma-sm float-right"
+              color="positive"
+              class="q-ma-sm float-right"
               @click="finalFormSubmit(formdata)"
               align="right"
               label="Submit To Mars"
             />
             <q-btn
               align="right"
-              color="grey-9" class="class="float-right q-ma-sm"
+              color="grey-9"
+              class="float-right q-ma-sm"
               @click="emitToggleReject(showRejectAdditionalInfo)"
               >Cancel
             </q-btn>
@@ -532,8 +551,8 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              error.data != null
-                ? error.data.message
+              error.body != null
+                ? error.body.message
                 : "Lead Information status update failed!",
             icon: "clear",
           });
@@ -716,7 +735,7 @@ export default {
                     merchantRefCode: this.propLeadDeatils.merchantRefCode,
                   };
                 } else {
-                  feed_paramaters = response.data;
+                  feed_paramaters = response.body;
                 }
                 self.$q.loading.show({
                   delay: 0, // ms

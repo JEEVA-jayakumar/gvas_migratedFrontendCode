@@ -40,13 +40,13 @@
           <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
         </q-td>
         <q-td v-slot:body-cell-action="props" :props="props">
-          <q-btn push class="q-mx-sm" color="positive" @click="openReject(props.row)" size="sm">Reject</q-btn>
-          <q-btn push class="q-mx-sm" color="negative" @click="openAccept(props.row)" size="sm">Approve</q-btn>
+          <q-btn highlight push class="q-mx-sm" color="positive" @click="openReject(props.row)" size="sm">Reject</q-btn>
+          <q-btn highlight push class="q-mx-sm" color="negative" @click="openAccept(props.row)" size="sm">Approve</q-btn>
         </q-td>
         <template v-slot:top="props" class="bottom-border">
           <!--START: table filter,search,excel download -->
           <div class="col-5">
-            <q-input clearable v-model="filter" separator color="grey-9" class="placeholder="Type.."
+            <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
               label="Search Using Device Serial Number/TID" class="q-mr-lg q-py-sm" />
           </div>
         </template>

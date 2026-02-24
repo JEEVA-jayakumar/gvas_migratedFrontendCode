@@ -33,7 +33,8 @@
                 <div class="row gutter-sm q-py-sm items-center bottom-border">
                   <div v-for="radioSale in propGetAllHierarchiesData" :key="radioSale.id">
                     <q-radio v-model="formData.addUserDetails.hierarchy.id"
-                    class="no-pointer-events"  input="fnChangeRoleBasedOnHeirarchy(radioSale.value)" :val="radioSale.value" color="purple-9">" class="<q-chip color="blue-grey-2" class="text-weight-regular text-grey-8">
+                    class="no-pointer-events"  input="fnChangeRoleBasedOnHeirarchy(radioSale.value)" :val="radioSale.value" color="purple-9">
+                      <q-chip color="blue-grey-2" class="text-weight-regular text-grey-8">
                         {{radioSale.label}}
                       </q-chip>
                     </q-radio>
@@ -51,7 +52,7 @@
                      @blur="v$.formData.addUserDetails.name.$touch"
                     @keyup.enter="fnSubmitShowAddUser"
                     :error="v$.formData.addUserDetails.name.$error"
-                    class="text-weight-regular text-grey-8" color="grey-9" class="label="*Username" placeholder="Username" />
+                    class="text-weight-regular text-grey-8" color="grey-9" label="*Username" placeholder="Username" />
                   </div>
 
                   <div class="col-md-6">
@@ -59,11 +60,12 @@
                      @blur="v$.formData.addUserDetails.employeeID.$touch"
                     @keyup.enter="fnSubmitShowAddUser"
                     :error="v$.formData.addUserDetails.employeeID.$error"
-                    class="text-weight-regular text-grey-8" color="grey-9" class="label="*Employee ID" placeholder="Employee ID" />
+                    class="text-weight-regular text-grey-8" color="grey-9" label="*Employee ID" placeholder="Employee ID" />
                   </div>
 
                   <div class="col-md-6">
-                    <q-input v-model="formData.addUserDetails.email" class="text-weight-regular text-grey-8" color="grey-9" class="@blur="v$.formData.addUserDetails.email.$touch"
+                    <q-input v-model="formData.addUserDetails.email" class="text-weight-regular text-grey-8" color="grey-9"
+                    @blur="v$.formData.addUserDetails.email.$touch"
                     @keyup.enter="fnSubmitShowAddUser"
                     :error="v$.formData.addUserDetails.email.$error"
                     label="*Email" placeholder="Email" />
@@ -74,7 +76,7 @@
                       @blur="v$.formData.addUserDetails.contactNumber.$touch"
                     @keyup.enter="fnSubmitShowAddUser"
                     :error="v$.formData.addUserDetails.contactNumber.$error"
-                    class="text-weight-regular text-grey-8" color="grey-9" class="label="*Contact Number" placeholder="Contact Number" />
+                    class="text-weight-regular text-grey-8" color="grey-9" label="*Contact Number" placeholder="Contact Number" />
                   </div>
 
                   <div class="col-md-6">
@@ -82,7 +84,7 @@
                      @blur="v$.formData.addUserDetails.alternateContactNumber.$touch"
                     @keyup.enter="fnSubmitShowAddUser"
                     :error="v$.formData.addUserDetails.alternateContactNumber.$error"
-                     class="text-weight-regular text-grey-8" color="grey-9" class="label="Alt Contact Number" placeholder="Alt Contact Number" />
+                     class="text-weight-regular text-grey-8" color="grey-9" label="Alt Contact Number" placeholder="Alt Contact Number" />
                   </div>
 
                   <div class="col-md-6">
@@ -90,7 +92,7 @@
                      @blur="v$.formData.addUserDetails.userAddress.$touch"
                     @keyup.enter="fnSubmitShowAddUser"
                     :error="v$.formData.addUserDetails.userAddress.$error"
-                     class="text-weight-regular text-grey-8" color="grey-9" class="label="*Address" placeholder="Address" />
+                     class="text-weight-regular text-grey-8" color="grey-9" label="*Address" placeholder="Address" />
                   </div>
 
                   <div class="col-md-6">
@@ -98,7 +100,7 @@
                      @blur="v$.formData.addUserDetails.city.$touch"
                     @keyup.enter="fnSubmitShowAddUser"
                     :error="v$.formData.addUserDetails.city.$error"
-                    class="text-weight-regular text-grey-8" color="grey-9" class="label="*City" placeholder="City" />
+                    class="text-weight-regular text-grey-8" color="grey-9" label="*City" placeholder="City" />
                   </div>
 
                   <div class="col-md-6">
@@ -106,7 +108,8 @@
                       v-model="formData.addUserDetails.state.id"
                       label="*State"
                       radio
-                      class="text-weight-regular text-grey-8" color="grey-9" class=":options="propGetAllStatesData"
+                      class="text-weight-regular text-grey-8" color="grey-9"
+                      :options="propGetAllStatesData"
                     />
                   </div>
 
@@ -124,7 +127,8 @@
                       @change="v$.formData.formData.addUserDetails.tempRoles.$touch()"
                       :error="v$.formData.addUserDetails.tempRoles.$error"
                       :val="propFilterRole.label" 
-                      color="purple-9">" class="<q-chip color="blue-grey-2" class="text-weight-regular text-grey-8">
+                      color="purple-9">
+                      <q-chip color="blue-grey-2" class="text-weight-regular text-grey-8">
                         {{propFilterRole.label}}
                       </q-chip>
                     </q-checkbox>
@@ -296,7 +300,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

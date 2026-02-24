@@ -6,7 +6,9 @@
           <q-tabs
             no-pane-border
             v-model="inventoryOptionSelected"
-            color="dark" class="class="shadow-1"
+            color="dark"
+            inverted
+            class="shadow-1"
           >
             <q-tab default name="serviceRequest" label="Service Request"  />
             <!-- <q-tab name="spareSo" label="Spare Parts So"  /> -->
@@ -16,38 +18,29 @@
             <q-tab name="serviceResolutionRemarks" label="Service Resolution Remarks"  />
             <q-tab name="issueMapping" label="Issue Mapping"  />
             <q-tab name="csSubIssue" label="CS Sub Issue"  />
-
-
-
-
-
-
-
-
-          </q-tabs>
-<q-tab-panels v-model="inventoryOptionSelected" animated>
-<q-tab-panel name="serviceRequest">
+            <q-tab-panel name="serviceRequest">
               <serviceRequest/>
             </q-tab-panel>
-<q-tab-panel name="issueTypes">
+            <q-tab-panel name="issueTypes">
               <issueTypes/>
             </q-tab-panel>
-<q-tab-panel name="serviceStatus">
+            <q-tab-panel name="serviceStatus">
               <serviceStatus/>
             </q-tab-panel>
-<q-tab-panel name="cancelled">
+
+            <q-tab-panel name="cancelled">
               <cancelled/>
             </q-tab-panel>
-<q-tab-panel name="serviceResolutionRemarks">
+            <q-tab-panel name="serviceResolutionRemarks">
               <serviceResolutionRemarks/>
             </q-tab-panel>
-<q-tab-panel name="issueMapping">
+            <q-tab-panel name="issueMapping">
               <issueMapping/>
             </q-tab-panel>
-<q-tab-panel name="csSubIssue">
+            <q-tab-panel name="csSubIssue">
               <csSubIssue/>
             </q-tab-panel>
-</q-tab-panels>
+          </q-tabs>
         </div>
       </div>
     </div>

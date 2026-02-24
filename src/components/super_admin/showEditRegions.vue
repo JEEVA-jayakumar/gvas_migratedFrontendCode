@@ -22,7 +22,8 @@
                            :options="regionGroupOptions"
                         
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" class="label="Region Group"
+                          color="grey-9"
+                          label="Region Group"
                           placeholder="Region Group" 
                         />
                     </div>
@@ -32,7 +33,8 @@
                           :error="v$.formData.regionAreaName.$error"
                           @keyup.enter="v$.formData.regionAreaName.$touch"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" class="label="Region"
+                          color="grey-9"
+                          label="Region"
                           placeholder="Region" 
                         />
                     </div>
@@ -40,7 +42,8 @@
                 <div class="row gutter-sm q-py-sm items-center">
                     <div class="col-md-12 group" align="right">
                         <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnshowEditRegions()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitRegion(formData)" color="purple-9">Save</q-btn>" class="</div>
+                        <q-btn align="right" @click="fnfinalsubmitRegion(formData)" color="purple-9">Save</q-btn>
+                    </div>
                 </div>
             </form>
         </q-dialog>
@@ -150,7 +153,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down",
             });
           });

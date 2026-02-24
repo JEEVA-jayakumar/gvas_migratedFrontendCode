@@ -25,7 +25,8 @@ Inventory with Reseller File</strong></p></div>
               class="bg-white text-weight-regular text-grey-8"
               @click="emitfnshowInventoryResellerList()"
             >Cancel</q-btn>
-            <q-btn align="right" @click="downloadInventoryResellerList(formData)" :disabled="submitDisabled" color="purple-9">Download</q-btn>" class="</div>
+            <q-btn align="right" @click="downloadInventoryResellerList(formData)" :disabled="submitDisabled" color="purple-9">Download</q-btn>
+          </div>
         </div>
       </form>
     </q-dialog>

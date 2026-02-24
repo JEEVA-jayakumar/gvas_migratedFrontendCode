@@ -21,7 +21,8 @@
               @blur="v$.formData.HierarchyDetails.hierarchy.$touch"
               :error="v$.formData.HierarchyDetails.hierarchy.$error"
               class="text-weight-regular text-grey-8 q-my-sm"
-              color="grey-9" class="label="Hierarchy"
+              color="grey-9"
+              label="Hierarchy"
               placeholder="Hierarchy"
             />
           </div>
@@ -31,7 +32,8 @@
               @blur="v$.formData.HierarchyDetails.hierarchyCode.$touch"
               :error="v$.formData.HierarchyDetails.hierarchyCode.$error"
               class="text-weight-regular text-grey-8 q-my-sm"
-              color="grey-9" class="label="Hierarchy Code"
+              color="grey-9"
+              label="Hierarchy Code"
               placeholder="Hierarchy Code"
             />
           </div>
@@ -49,7 +51,8 @@
               size="md"
               align="right"
               @click="fnCreateHierarchySubmit(formData.HierarchyDetails)"
-              color="purple-9" class=">Save</q-btn>
+              color="purple-9"
+            >Save</q-btn>
           </div>
         </div>
       </form>
@@ -139,7 +142,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

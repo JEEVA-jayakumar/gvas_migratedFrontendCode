@@ -3,16 +3,13 @@
     <!-- content -->
     <div>
 
-      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" class="@select="changeTabs">
-        <q-tab default color="dark" class="name="active"  label="Active Roles" />
-        <q-tab color="dark" class="name="deactive"  label="Deactive Roles" />
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="changeTabs">
+        <q-tab default color="dark" name="active"  label="Active Roles" />
+        <q-tab color="dark" name="deactive"  label="Deactive Roles" />
 
-
-
-      </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="active">
-           <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" :pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">" class="<q-td v-slot:body-cell-action="props" :props="props">
+         <q-tab-panel name="active">
+           <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" :pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
+        <q-td v-slot:body-cell-action="props" :props="props">
           <div class="row no-wrap no-padding">
             <q-btn dense no-caps no-wrap label="Modify Role/Permissions" icon="far fa-plus-square" size="md" @click="fnShowEditRole(props.row)" flat class="text-light-blue">
             </q-btn>
@@ -30,7 +27,7 @@
 
             <!-- Can be enabled in future for adding new role to application-->
             <!-- <div class="col-md-6 q-my-md" align="right">
-              <q-btn no-caps no-wrap label="Add New Role" class="q-mt-lg text-weight-regular" color="purple-9" class="icon="far fa-plus-square" size="md" @click="fnshowCreateRole()"/>
+              <q-btn no-caps no-wrap label="Add New Role" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreateRole()"/>
             </div> -->
             <!-- Can be enabled in future for adding new role to application -->
 
@@ -40,7 +37,8 @@
             <div class="col-6">
               <q-input
                 clearable
-                color="grey-9" v-model="filterSearch"
+                color="grey-9"
+                v-model="filterSearch"
                 placeholder="Type.."
                 class="q-mr-lg"
               />
@@ -51,7 +49,8 @@
               class="text-weight-regular"
               @click="fnshowAddRole(props.row)"
               label="Add New Role"
-              color="purple-9" size="md"
+              color="purple-9"
+              size="md"
             />
           </div>
             <!--ENDv-model: table filter,search -->
@@ -60,8 +59,9 @@
 
       </q-table>
          </q-tab-panel>
-<q-tab-panel name="deactive">
-           <q-table :rows="deactivatedTableData" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1" :pagination="paginationControl1" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">" class="<q-td v-slot:body-cell-action="props" :props="props">
+         <q-tab-panel name="deactive">
+           <q-table :rows="deactivatedTableData" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1" :pagination="paginationControl1" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
+        <q-td v-slot:body-cell-action="props" :props="props">
           <div class="row no-wrap no-padding">
             <!-- <q-btn dense no-caps no-wrap label="Modify Role/Permissions" icon="far fa-plus-square" size="md" @click="fnShowEditRole(props.row)" flat class="text-light-blue">
             </q-btn> -->
@@ -78,7 +78,7 @@
 
             <!-- Can be enabled in future for adding new role to application-->
             <!-- <div class="col-md-6 q-my-md" align="right">
-              <q-btn no-caps no-wrap label="Add New Role" class="q-mt-lg text-weight-regular" color="purple-9" class="icon="far fa-plus-square" size="md" @click="fnshowCreateRole()"/>
+              <q-btn no-caps no-wrap label="Add New Role" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreateRole()"/>
             </div> -->
             <!-- Can be enabled in future for adding new role to application -->
 
@@ -88,7 +88,8 @@
             <div class="col-6">
               <q-input
                 clearable
-                color="grey-9" v-model="filterSearch1"
+                color="grey-9"
+                v-model="filterSearch1"
                 placeholder="Type.."
                 class="q-mr-lg"
               />
@@ -99,7 +100,7 @@
 
       </q-table>
          </q-tab-panel>
-</q-tab-panels>
+      </q-tabs>
 
        <!--START: Show create role -->
       <showCreateRole 
@@ -315,7 +316,7 @@ export default {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down",
               });
             });
@@ -354,7 +355,7 @@ export default {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down",
               });
             });
@@ -390,7 +391,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
             icon: "thumb_down",
           });
         });

@@ -1,7 +1,8 @@
 <template>
   <q-page>
     <div>
-      <q-tabs v-model="activeTab" color="purple-9">" class="<!-- Tabs - notice  -->
+      <q-tabs v-model="activeTab" color="purple-9">
+        <!-- Tabs - notice  -->
         <q-tab
           @select="ajaxLoadDataForAllUsersList"
           default
@@ -17,11 +18,7 @@
         />
 
         <!-- Targets -->
-
-
-      </q-tabs>
-<q-tab-panels v-model="activeTab" animated>
-<q-tab-panel class="no-padding" name="tab-1">
+        <q-tab-panel class="no-padding" name="tab-1">
           <q-table
             :rows="getAllUsers"
             :columns="columns"
@@ -33,7 +30,8 @@
             :loading="tableAjaxLoading"
             :filter-method="myCustomSearchFilter"
             row-key="userId"
-            color="grey-9" class=">
+            color="grey-9"
+          >
             <q-td v-slot:body-cell-name="props" :props="props">
               <q-btn
                 align="left"
@@ -42,7 +40,8 @@
                 no-wrap
                 no-caps
                 icon="fas fa-pencil-alt"
-                color="primary" @click="fnShowEditUser(props.row.userId)"
+                color="primary"
+                @click="fnShowEditUser(props.row.userId)"
                 :label="props.row.user.name"
                 class="capitalize"
               />
@@ -51,7 +50,7 @@
             <q-td v-slot:body-cell-role="props" :props="props">
               <div class="row no-wrap group" v-for="role in props.row.roles" :key="role.role">
                 <!-- <q-chip :style="{ background: role.roleColor}"> -->
-                <q-chip color="light" class="class="text-dark">
+                <q-chip color="light" class="text-dark">
                   <span>{{role.hierarchy.hierarchyCode}}</span>
                   | {{role.role}}
                 </q-chip>
@@ -65,7 +64,8 @@
                   <div class="col-md-6">
                     <q-input
                       clearable
-                      color="grey-9" class="v-model.trim="filterSearch"
+                      color="grey-9"
+                      v-model.trim="filterSearch"
                       placeholder="Type.."
                       label="Search by SO name, Merchant Name, Lead ID"
                     />
@@ -76,7 +76,8 @@
                       clearable
                       v-model="filter_values"
                       separator
-                      color="grey-9" class="placeholder="Select"
+                      color="grey-9"
+                      placeholder="Select"
                       label="Filter By"
                       @clear="ajaxLoadDataForAllUsersList"
                       @input="ajaxLoadDataForRoleIdFilter()"
@@ -106,7 +107,8 @@
                     <q-btn
                       :disabled="formData.selectedUsersToDelete.length == 0"
                       flat
-                      color="white" class="class="text-grey-9 q-mr-md"
+                      color="white"
+                      class="text-grey-9 q-mr-md"
                       size="md"
                       @click="activate_deactivate_users(formData.selectedUsersToDelete)"
                       icon="far fa-trash-alt"
@@ -118,7 +120,8 @@
                       class="text-weight-regular"
                       @click="$router.push('/super/admin/users/add/user')"
                       label="Add User"
-                      color="purple-9" size="md"
+                      color="purple-9"
+                      size="md"
                     />
                   </div>
                 </div>
@@ -127,7 +130,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-<q-tab-panel class="no-padding" name="tab-2">
+        <q-tab-panel class="no-padding" name="tab-2">
           <q-table
             :rows="getAllUsers"
             :columns="columns"
@@ -139,13 +142,14 @@
             :loading="tableAjaxLoading"
             :filter-method="myCustomSearchFilter"
             row-key="userId"
-            color="grey-9" class=">
+            color="grey-9"
+          >
             <q-td v-slot:body-cell-name="props" :props="props">{{props.row.user.name}}</q-td>
 
             <q-td v-slot:body-cell-role="props" :props="props">
               <div class="row no-wrap group" v-for="role in props.row.roles" :key="role.role">
                 <!-- <q-chip :style="{ background: role.roleColor}"> -->
-                <q-chip color="light" class="class="text-dark">
+                <q-chip color="light" class="text-dark">
                   <span>{{role.hierarchy.hierarchyCode}}</span>
                   | {{role.role}}
                 </q-chip>
@@ -159,7 +163,8 @@
                   <div class="col-md-6">
                     <q-input
                       clearable
-                      color="grey-9" class="v-model.trim="filterSearchDeactivated"
+                      color="grey-9"
+                      v-model.trim="filterSearchDeactivated"
                       placeholder="Type.."
                       label="Search by SO name, Merchant Name, Lead ID"
                     />
@@ -170,14 +175,16 @@
                       clearable
                       v-model="filter_values"
                       separator
-                      color="grey-9" class="placeholder="Select"
+                      color="grey-9"
+                      placeholder="Select"
                       label="Filter By"
                       @clear="ajaxLoadDataForAllUsersList"
                       @input="ajaxLoadDataForRoleIdFilter()"
                       :options="getAllRoles"
                     />-->
                     <q-btn
-                      color="amber-9" @click="activate_deactivate_users(formData.selectedUsersToDelete)"
+                      color="amber-9"
+                      @click="activate_deactivate_users(formData.selectedUsersToDelete)"
                       no-caps
                       label="Activate"
                     />
@@ -202,7 +209,7 @@
                     />
                   </div>
                   <div class="col-auto">
-                    <q-btn color="amber-9" class="no-caps label="Activate"/>
+                    <q-btn color="amber-9" no-caps label="Activate"/>
                   </div>
                 </div>
               </div>-->
@@ -210,7 +217,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-</q-tab-panels>
+      </q-tabs>
       <deleteUsersDetails
         v-if="showDeleteUserDetails"
         :propDeteledUsers="deteledUsers"
@@ -429,7 +436,7 @@ export default {
                   this.$q.notify({
                     color: "negative",
                     position: "bottom",
-                    message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                    message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                     icon: "thumb_down"
                   });
                 });
@@ -453,7 +460,7 @@ export default {
                   this.$q.notify({
                     color: "negative",
                     position: "bottom",
-                    message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                    message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                     icon: "thumb_down"
                   });
                 });

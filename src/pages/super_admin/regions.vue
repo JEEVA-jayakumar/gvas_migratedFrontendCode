@@ -3,9 +3,9 @@
     <!-- content -->
     <div>
 
-      <q-tabs class="shadow-1" color="grey-1" class=">
+      <q-tabs class="shadow-1" color="grey-1" >
         <q-tab default color="dark" name="active"  label="Active Regions" />
-        <q-tab color="dark" class="name="deactive"  label="Deactive Regions" />
+        <q-tab color="dark" name="deactive"  label="Deactive Regions" />
         
         <q-tab-panel name="active">
         <q-table
@@ -16,7 +16,8 @@
         :pagination="paginationControl"
         :filter-method="myCustomSearchFilter"
         row-key="name"
-        color="grey-9" class=">
+        color="grey-9"
+      >
         <q-td
           v-slot:body-cell-regionGroup="props"
           :props="props"
@@ -59,7 +60,7 @@
                 </q-input>
               </div>
               <div class="col-12 col-sm-6 text-right">
-                <q-btn unelevated no-caps color="purple-9" class="icon="add" label="Add New Region" @click="fnShowAddNewRegions(props.row)" />
+                <q-btn unelevated no-caps color="purple-9" icon="add" label="Add New Region" @click="fnShowAddNewRegions(props.row)" />
               </div>
             </div>
           </div>
@@ -75,7 +76,8 @@
         :pagination="paginationControl1"
         :filter-method="myCustomSearchFilter"
         row-key="name"
-        color="grey-9" class=">
+        color="grey-9"
+      >
         <q-td
           v-slot:body-cell-regionGroup="props"
           :props="props"
@@ -110,14 +112,15 @@
         <template v-slot:top="props">
          
           <!-- <div class="col-md-6 q-my-md" align="right">
-            <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9" class="icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
+            <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
           </div>-->
           <!--END: table title -->
           <!--START: table filter,search -->
           <div class="col-6">
             <q-input
               clearable
-              color="grey-9" v-model="filterSearch1"
+              color="grey-9"
+              v-model="filterSearch1"
               placeholder="Type.."
               class="q-mr-lg"
             />
@@ -291,7 +294,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
             icon: "thumb_down",
           });
         });

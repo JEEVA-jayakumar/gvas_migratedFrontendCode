@@ -15,15 +15,16 @@
         </div> -->
         <div class="col-md-4">
           <!-- <pre>{{tempTableData}}</pre>  ref="clickHeretoStartParent"  ref="clickHeretoStartChild"      -->
-          <q-select v-model="formData.device.id" label="Select Device Type" radio color="grey-9" class=":options="deviceOptions" />
+          <q-select v-model="formData.device.id" label="Select Device Type" radio color="grey-9"
+            :options="deviceOptions" />
         </div>
         <div class="col-md-4">
           <q-select :disabled="formData.device.id == ''" v-model="action" label="Select Device Status" radio
-            color="grey-9" class=":options="actionOptions" @input="fnDisableDeviceTypeSelection" />
+            color="grey-9" :options="actionOptions" @input="fnDisableDeviceTypeSelection" />
         </div>
         <!-- Final upload button toggle -->
         <div class="col-12 col-lg-4 group" align="right">
-          <q-btn :disabled="formData.device.id == ''" v-if="scanningActive" color="primary" class="label="Start scan"
+          <q-btn :disabled="formData.device.id == ''" v-if="scanningActive" color="primary" label="Start scan"
             @click="fnStartScanner" />
           <q-btn v-if="tempTableData.length > 0" class="common-btn q-py-xs" label="Upload" @click="finalSubmit" />
           <q-btn v-else class="disabled common-btn q-py-xs no-pointer-events" label="Upload" @click="finalSubmit" />
@@ -33,7 +34,8 @@
       <!--START: table Data -->
       <q-table :rows="tempTableData" :columns="columnData" table-class="customTableClass shadow-0"
         :filter="filterSearch" :pagination="paginationControl" row-key="index" :loading="tableAjaxLoading"
-        color="light-blue">" class="<q-td v-slot:body-cell-action="props" :props="props">
+        color="light-blue">
+        <q-td v-slot:body-cell-action="props" :props="props">
           <q-btn @click="removeScannedItems(props.row)" label="Remove" icon="close" color="red-6" size="sm" />
         </q-td>
         <template slot="top">

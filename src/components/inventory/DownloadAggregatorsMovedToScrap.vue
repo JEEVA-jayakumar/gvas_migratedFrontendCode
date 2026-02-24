@@ -24,7 +24,8 @@
                 class="bg-white text-weight-regular text-grey-8"
                 @click="emitfnshowMovedToScrapList()"
               >Cancel</q-btn>
-              <q-btn align="right" @click="downloadMovedToScrapList(formData)" :disabled="submitDisabled" color="purple-9">Download</q-btn>" class="</div>
+              <q-btn align="right" @click="downloadMovedToScrapList(formData)" :disabled="submitDisabled" color="purple-9">Download</q-btn>
+            </div>
           </div>
         </form>
       </q-dialog>

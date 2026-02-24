@@ -3,7 +3,7 @@
     <div>
       <div class="col-md-9 col-sm-12 col-xs-12">
                 <div v-if="RegionalInventoryQrCount.length > 0" class="row">
-                  <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" class="height="35px" width="35px" v-for="menu in RegionalInventoryQrCount" :key="menu">
+                  <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" height="35px" width="35px" v-for="menu in RegionalInventoryQrCount" :key="menu">
                     <div>
                       <big :style="'color'">{{ menu.label.requestCount == '' ? menu.label.requestCount = 0
                         :menu.label.requestCount
@@ -18,27 +18,20 @@
                 </div>
                 <div v-else class="row group">
                   <div>
-                    <q-banner color="purple-9" class="icon="info">No data available to display</q-banner>
+                    <q-banner color="purple-9" icon="info">No data available to display</q-banner>
                   </div>
                 </div>
               </div>
       <div>
-        <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" class="@select="goToCompleteTab">
-          <q-tab default color="dark" class="name="tab-1"  label="Pending QR" />
-          <q-tab color="dark" class="name="tab-2"  label="Approved QR" />
-          <q-tab color="dark" class="name="tab-3"  label="Allocate To SO" />
-
-
-
-
-
-            </q-tabs>
-<q-tab-panels v-model="activeTab" animated>
-<q-tab-panel name="tab-1">
+        <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @select="goToCompleteTab">
+          <q-tab default color="dark" name="tab-1"  label="Pending QR" />
+          <q-tab color="dark" name="tab-2"  label="Approved QR" />
+          <q-tab color="dark" name="tab-3"  label="Allocate To SO" />
+          <q-tab-panel name="tab-1">
             <div class="row items-center">
             
               <div class="col-8"></div>
-              <q-input class="col-4" clearable color="grey-9" class="placeholder="Type.." v-model="filter"
+              <q-input class="col-4" clearable color="grey-9" placeholder="Type.." v-model="filter"
                 label="Search By POD Number" />
             </div>
             <q-table table-class="customTableClass" class="q-py-none" :rows="tableData" :columns="columns"
@@ -53,10 +46,10 @@
               </q-td>
             </q-table>
           </q-tab-panel>
-<q-tab-panel name="tab-2">
+          <q-tab-panel name="tab-2">
             <div class="row">
               <div class="col-8"></div>
-              <q-input class="col-4" v-model="filter1" clearable color="grey-9" class="placeholder="Type.."
+              <q-input class="col-4" v-model="filter1" clearable color="grey-9" placeholder="Type.."
                 label="Search By POD Number" />
             </div>
             <q-table table-class="customTableClass" class="q-py-none" :rows="tableData1" :columns="columns2"
@@ -66,11 +59,11 @@
             </q-table>
 
           </q-tab-panel>
-<q-tab-panel name="tab-3">
+          <q-tab-panel name="tab-3">
             <div>
               <!-- <div class="col-md-9 col-sm-12 col-xs-12">
                 <div v-if="this.formData.count != null" class="row">
-                  <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" class="height="35px" width="35px">
+                  <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" height="35px" width="35px">
                     <div>
                     </div>
                     <div>
@@ -82,7 +75,7 @@
                 </div>
                 <div v-else class="row group">
                   <div>
-                    <q-banner color="purple-9" class="icon="info">No data available to display</q-banner>
+                    <q-banner color="purple-9" icon="info">No data available to display</q-banner>
                   </div>
                 </div>
               </div> -->
@@ -95,7 +88,7 @@
                 </article>
                 <div class="col-md-3">
                   <q-select clearable label="Select Bank"  v-model.trim="formData.id" :error="v$.formData.id.$error"
-                    color="grey-9" class=":options="bankListOptions" />
+                    color="grey-9" :options="bankListOptions" />
                 </div>
 
               </div>
@@ -109,7 +102,8 @@
                   </strong>
                 </div>
                 <div class="col-md-3">
-                  <q-select :disable="this.formData.id == ''" filter clearable label="Select SO" v-model="formData.soList" :error="v$.formData.soList.$error"  color="grey-9" class=":options="SoListData" @request="regionBasedSoLoad" />
+                  <q-select :disable="this.formData.id == ''" filter clearable label="Select SO" v-model="formData.soList" :error="v$.formData.soList.$error"  color="grey-9"
+                    :options="SoListData" @request="regionBasedSoLoad" />
                 </div>
               </div>
               <br />
@@ -121,7 +115,7 @@
                   <span>Enter no of QR </span>
                 </strong>
               </div>
-              <q-input type="number" min="1" :disable="this.formData.soList == ''" oninput="this.value = Math.abs(this.value)"  :error="v$.formData.count.$error"  label="Enter no of QR" v-model.trim="formData.count" color="grey-9" class="/>
+              <q-input type="number" min="1" :disable="this.formData.soList == ''" oninput="this.value = Math.abs(this.value)"  :error="v$.formData.count.$error"  label="Enter no of QR" v-model.trim="formData.count" color="grey-9" />
             </div>
             <br />
             <div class="row">
@@ -130,7 +124,7 @@
                   <span>Enter POD</span>
                 </strong>
               </div>
-              <q-input disable label="Enter POD" :error="v$.formData.podNumber.$error" v-model.trim="formData.podNumber" color="grey-9" class="/>
+              <q-input disable label="Enter POD" :error="v$.formData.podNumber.$error" v-model.trim="formData.podNumber" color="grey-9" />
             </div>
             <br />
             <div class="row">
@@ -139,14 +133,14 @@
               </div>
             </div>
             &nbsp;
-            <q-tabs v-model="tab" class="shadow-1" color="grey" class="@select="goToApproveTab">
-              <q-tab default color="dark" class="name="tab-4"  label="Pending List" />
-              <q-tab default color="dark" class="name="tab-5"  label="Approved List" />
-              <q-tab default color="dark" class="name="tab-6"  label="Rejected List" />
+            <q-tabs v-model="tab" class="shadow-1" color="grey" @select="goToApproveTab">
+              <q-tab default color="dark" name="tab-4"  label="Pending List" />
+              <q-tab default color="dark" name="tab-5"  label="Approved List" />
+              <q-tab default color="dark" name="tab-6"  label="Rejected List" />
               <q-tab-panel name="tab-4">
                 <div class="row">
               <div class="col-8"></div>
-              <q-input class="col-4" v-model="filter4" clearable color="grey-9" class="placeholder="Type.."
+              <q-input class="col-4" v-model="filter4" clearable color="grey-9" placeholder="Type.."
                 label="Search By POD Number" />
             </div>
             <q-table table-class="customTableClass" class="q-py-none" :rows="tableData4" :columns="columns4"
@@ -155,10 +149,10 @@
               <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
             </q-table>
               </q-tab-panel>
-<q-tab-panel name="tab-5">
+              <q-tab-panel name="tab-5">
                 <div class="row">
               <div class="col-8"></div>
-              <q-input class="col-4" v-model="filter5" clearable color="grey-9" class="placeholder="Type.."
+              <q-input class="col-4" v-model="filter5" clearable color="grey-9" placeholder="Type.."
                 label="Search By POD Number" />
             </div>
             <q-table table-class="customTableClass" class="q-py-none" :rows="tableData5" :columns="columns5"
@@ -167,10 +161,10 @@
               <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
             </q-table>
               </q-tab-panel>
-<q-tab-panel name="tab-6">
+              <q-tab-panel name="tab-6">
                 <div class="row">
               <div class="col-8"></div>
-              <q-input class="col-4" v-model="filter6" clearable color="grey-9" class="placeholder="Type.."
+              <q-input class="col-4" v-model="filter6" clearable color="grey-9" placeholder="Type.."
                 label="Search By POD Number" />
             </div>
             <q-table table-class="customTableClass" class="q-py-none" :rows="tableData6" :columns="columns6"
@@ -179,7 +173,7 @@
               <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
             </q-table>
               </q-tab-panel>
-</q-tab-panels>
+            </q-tabs>
           </q-tab-panel>
         </q-tabs>
       </div>

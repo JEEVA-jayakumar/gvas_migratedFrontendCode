@@ -12,7 +12,7 @@
           </div>
           <div class="col-md-3">
             <div class="group">
-              <q-radio v-for="(item, index) in flagOptions" :key="index" color="grey-9" class="v-model.trim="formData.flag"
+              <q-radio v-for="(item, index) in flagOptions" :key="index" color="grey-9" v-model.trim="formData.flag"
                 :val="item.value" :label="item.label" />
             </div>
           </div>

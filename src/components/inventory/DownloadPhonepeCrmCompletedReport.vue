@@ -51,7 +51,8 @@
               <q-btn
                 align="right"
                 @click="downloadHistory(formData)"
-                color="purple-9" class=">Download</q-btn
+                color="purple-9"
+                >Download</q-btn
               >
             </div>
           </div>

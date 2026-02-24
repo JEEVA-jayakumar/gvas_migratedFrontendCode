@@ -32,18 +32,21 @@
             <q-select
               v-model="formData.assignTo"
               separator
-              color="grey-9" class=":options="assignToOptions"
+              color="grey-9"
+              :options="assignToOptions"
               placeholder="Assign To"
             />
              <q-checkbox
               v-model="formData.courierDevice"
-              color="dark" class="label="Courier Device"
+              color="dark"
+              label="Courier Device"
             />
           </div>
           <div class="col-md-3 col-sm-6 col-xs-6" align="right">
             <q-checkbox
               v-model="formData.triggerWelcomeMail"
-              color="dark" class="label="Trigger welcome email"
+              color="dark"
+              label="Trigger welcome email"
             />
           </div>
           <div class="col-md-3 col-sm-6 col-xs-6" align="right">
@@ -78,7 +81,8 @@
                   clearable
                   v-model="formData.assignTo"
                   separator
-                  color="grey-9" class=":disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 "
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 "
                   :options="assignToOptions"
                   placeholder="Assign To"
                 />
@@ -86,7 +90,8 @@
               <div class="col-md-4 col-sm-6 col-xs-6">
                 <q-checkbox
                   v-model="formData.triggerWelcomeMail"
-                  color="dark" class="label="Trigger welcome email"
+                  color="dark"
+                  label="Trigger welcome email"
                 />
               </div>
               <div class="col-md-4 col-sm-6 col-xs-6 group">
@@ -120,20 +125,18 @@
       <q-tabs
         v-model="selectedTab"
         class="shadow-1"
-        color="grey-1" class="@select="goToUnassignedTab"
+        color="grey-1"
+        @select="goToUnassignedTab"
       >
         <q-tab
           default
-          color="dark" class="name="assigned"
+          color="dark"
+          name="assigned"
 
           label="Normal"
         />
-        <q-tab color="dark" class="name="courier"  label="Courier" />
-
-
-      </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="assigned">
+        <q-tab color="dark" name="courier"  label="Courier" />
+        <q-tab-panel name="assigned">
           <q-table
             :rows="tableData"
             :columns="columnDataAssigned"
@@ -145,7 +148,8 @@
             row-key="id"
             :loading="tableAjaxLoading"
             :rows-per-page-options="[10, 20, 50, 100, 150, 200]"
-            color="dark" class="@request="ajaxLoadAllLeadInfo"
+            color="dark"
+            @request="ajaxLoadAllLeadInfo"
           >
             <q-td
               v-slot:body-cell-leadNumber="props"
@@ -205,7 +209,8 @@
               <div class="col-md-5">
                 <q-input
                   clearable
-                  color="grey-9" v-model="filterSearch"
+                  color="grey-9"
+                  v-model="filterSearch"
                   placeholder="Type.."
                   label="Search By MID, Merchant Name.."
                   class="q-mr-lg q-py-sm"
@@ -214,7 +219,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-<q-tab-panel name="courier">
+        <q-tab-panel name="courier">
           <!--STARTv-model: table Data   :rows="getImplementationQueueUnassignedList" selection="multiple"
             :selected="formData.marsDeviceIdsCooked" -->
           <q-table
@@ -226,7 +231,8 @@
             row-key="id"
             :rows-per-page-options="[10, 20, 50, 100, 150, 200]"
             :loading="tableAjaxLoading1"
-            color="dark" class="@request="ajaxLoadAllLeadInfo1"
+            color="dark"
+            @request="ajaxLoadAllLeadInfo1"
           >
             <q-td
               v-slot:body-cell-leadNumber="props"
@@ -290,7 +296,8 @@
                 <q-btn
                   no-caps
                   icon="edit"
-                  color="purple-9" size="xs"
+                  color="purple-9"
+                  size="xs"
                   round
                   @click="UpdateDeviceAddress(props.row)"
                 />
@@ -306,7 +313,8 @@
               <div class="col-md-5">
                 <q-input
                   clearable
-                  color="grey-9" v-model="filterSearch"
+                  color="grey-9"
+                  v-model="filterSearch"
                   placeholder="Type.."
                   label="Search By MID, Merchant Name.."
                   class="q-mr-lg q-py-sm"
@@ -318,14 +326,15 @@
                 label="Select Date"
                 type="date"
                 class="q-mr-lg q-py-sm"
-                color="grey-9" class="/>
+                color="grey-9"
+                />
               </div>-->
               <!--ENDv-model: table filter,search -->
             </template>
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-</q-tab-panels>
+      </q-tabs>
 
       <!--END: table Footer -->
       <!-- START >> COMPONENT: Update device address  -->

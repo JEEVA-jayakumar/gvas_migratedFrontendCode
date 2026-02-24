@@ -40,7 +40,7 @@
                 <q-separator />
                 <q-card-section>
                   <q-item dense>
-                    <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                    <q-item-section icon="attach_file" />
                     <q-item-section>{{
                       formData.fileSelected[0].name
                     }}</q-item-section>
@@ -55,7 +55,7 @@
             </div>
           </div>
           <div class="col-md-12 group" align="right">
-            <q-btn outline color="dark" class="label="Cancel" @click="emitToggleinventoryBulkUpload" />
+            <q-btn outline color="dark" label="Cancel" @click="emitToggleinventoryBulkUpload" />
             <q-btn class="common-btn" label="Upload" @click="uploadFileForBulkUpload" />
           </div>
         </div>
@@ -223,7 +223,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
             icon: "thumb_down"
           });
         });

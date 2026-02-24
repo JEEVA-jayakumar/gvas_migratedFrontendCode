@@ -22,7 +22,8 @@
               v-model="formData.name"
               :error="v$.formData.name.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Enter Service Resolution Remarks"
+              color="grey-9"
+              label="Enter Service Resolution Remarks"
               placeholder="Enter Service Resolution Remarks"
             />
           </div>
@@ -31,7 +32,8 @@
               class="alignsize"
               v-for="(item, index) in option.flagOptions"
               :key="index"
-              color="grey-9" class="v-model.trim="formData.category"
+              color="grey-9"
+              v-model.trim="formData.category"
               :val="item.value"
               :label="item.label"
             />
@@ -49,7 +51,8 @@
             <q-btn
               align="right"
               @click="fnfinalsubmitServiceResolutionRemarks(formData)"
-              color="purple-9" class=">Save</q-btn
+              color="purple-9"
+              >Save</q-btn
             >
           </div>
         </div>
@@ -156,7 +159,9 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                error.body.message == null
+                  ? "Please Try Again Later !"
+                  : error.body.message,
               icon: "thumb_down"
             });
           });

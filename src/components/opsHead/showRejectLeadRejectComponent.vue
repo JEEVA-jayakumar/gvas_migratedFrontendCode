@@ -16,19 +16,22 @@
               @blur="v$.formData.leadInformation.reason.$touch"
               :error="v$.formData.leadInformation.reason.$error"
               label="Remarks"
-              color="primary" class="/>
+              color="primary"
+            />
           </div>
           <div class="group">
             <q-btn
               icon="clear"
-              color="negative" class="class="q-ma-sm float-right"
+              color="negative"
+              class="q-ma-sm float-right"
               @click="sendRemarks(formData)"
               align="right"
               label="Reject"
             />
             <q-btn
               icon="block"
-              color="grey-5" @click="emitToggleRemarks()"
+              color="grey-5"
+              @click="emitToggleRemarks()"
               class="q-ma-sm float-right text-dark"
               align="right"
               v-close-overlay
@@ -118,7 +121,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

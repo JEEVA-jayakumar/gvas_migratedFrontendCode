@@ -10,7 +10,8 @@
                     @click="$router.push('/inventory/central')"
                     outline
                     label="Go Back"
-                    color="black" class="/>
+                    color="black"
+                   />
                 </div>
                 <!--END: table title -->
             </div>
@@ -22,20 +23,23 @@
                         v-model="formData.device_type"
                         label="Select Device Type"
                         radio
-                        color="grey-9" class="v-model:options="deviceOptions"
+                        color="grey-9"
+                        v-model:options="deviceOptions"
                     />
                 </div>
                 <div class="col-md-3" align="center">
                       <q-btn
                         @click="openScannerComp"
                         v-if="!scannerToggleOption"
-                        color="light-blue" class="class="q-py-xs"
+                        color="light-blue"
+                        class="q-py-xs"
                         label="Start Scan"
                     />
                     <q-btn
                         @click="closeScannerComp"
                         v-if="scannerToggleOption"
-                        color="negative" class="class="q-py-xs"
+                        color="negative"
+                        class="q-py-xs"
                         label="Stop Scan"
                     />
                 </div>
@@ -51,12 +55,15 @@
 
              <!--START: table Data -->
             <q-table :rows="getAddDeviceScannedItems" :columns="columnData" table-class="customTableClass shadow-0" :filter="filterSearch" :pagination="paginationControl" row-key="index" :loading="tableAjaxLoading"
-            color="light-blue">" class="<q-td v-slot:body-cell-action="props" :props="props">
+            color="light-blue">
+
+                <q-td v-slot:body-cell-action="props" :props="props">
                    <q-btn
                    @click="removeScannedItems(props.row)"
                     label="Remove"
                     icon="close"
-                    color="red-6" size="sm"
+                    color="red-6"
+                    size="sm"
                    />
                 </q-td>
 
@@ -65,7 +72,8 @@
                     <div class="col-md-5">
                     <q-input
                         clearable
-                        color="grey-9" v-model="filterSearch"
+                        color="grey-9"
+                        v-model="filterSearch"
                         placeholder="Type.."
                         label="Search .."
                         class="q-mr-lg q-py-sm"

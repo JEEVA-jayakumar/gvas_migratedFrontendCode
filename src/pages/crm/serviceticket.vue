@@ -4,20 +4,18 @@
       <q-tabs
         v-model="activeTab"
         class="shadow-1"
-        color="grey-1" class="@select="goToCompleteTab"
+        color="grey-1"
+        @select="goToCompleteTab"
       >
         <q-tab
           default
-          color="dark" class="name="tab-1"
+          color="dark"
+          name="tab-1"
 
           label="Create Bulk Ticket "
         />
-        <q-tab color="dark" class="name="tab-2"  label="Close Bulk Ticket" />
-
-
-      </q-tabs>
-<q-tab-panels v-model="activeTab" animated>
-<q-tab-panel name="tab-1">
+        <q-tab color="dark" name="tab-2"  label="Close Bulk Ticket" />
+        <q-tab-panel name="tab-1">
           <div class="q-pa-md">
             <div class="row text-center justify-center">
               <div class="col-md-12 q-py-sm bottom-border custom-background">
@@ -59,7 +57,7 @@
                     <q-separator />
                     <q-card-section>
                       <q-item dense>
-                        <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                        <q-item-section icon="attach_file" />
                         <q-item-section>{{ formData.fileSelected[0].name }}</q-item-section>
                         <q-item-section></q-item-section>
                       </q-item>
@@ -69,7 +67,8 @@
                       <q-btn
                         outline
                         size="sm"
-                        color="negative" @click="removeBulkUploadFile(formData)"
+                        color="negative"
+                        @click="removeBulkUploadFile(formData)"
                         label="Remove"
                         icon="clear"
                       />
@@ -80,7 +79,8 @@
               <div class="col-md-12 group" align="center">
                 <q-btn
                   type="button"
-                  color="purple-9" class=":disabled="formData.fileSelected.length == 0 "
+                  color="purple-9"
+                  :disabled="formData.fileSelected.length == 0 "
                   label="Upload"
                   @click="uploadlist"
                 />
@@ -88,7 +88,7 @@
             </div>
           </div>
         </q-tab-panel>
-<q-tab-panel name="tab-2">
+        <q-tab-panel name="tab-2">
           <div class="q-pa-md">
             <div class="row text-center justify-center">
               <div class="col-md-12 q-py-sm bottom-border custom-background">
@@ -130,7 +130,7 @@
                     <q-separator />
                     <q-card-section>
                       <q-item dense>
-                        <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                        <q-item-section icon="attach_file" />
                         <q-item-section>{{ formData1.fileSelected[0].name }}</q-item-section>
                         <q-item-section></q-item-section>
                       </q-item>
@@ -140,7 +140,8 @@
                       <q-btn
                         outline
                         size="sm"
-                        color="negative" @click="removeBulkUploadFile(formData1)"
+                        color="negative"
+                        @click="removeBulkUploadFile(formData1)"
                         label="Remove"
                         icon="clear"
                       />
@@ -151,7 +152,8 @@
               <div class="col-md-12 group" align="center">
                 <q-btn
                   type="button"
-                  color="purple-9" class=":disabled="formData1.fileSelected.length == 0 "
+                  color="purple-9"
+                  :disabled="formData1.fileSelected.length == 0 "
                   label="Upload"
                   @click="uploadlist1(formData1)"
                 />
@@ -159,7 +161,7 @@
             </div>
           </div>
         </q-tab-panel>
-</q-tab-panels>
+      </q-tabs>
     </div>
     <div
       v-if="toggleAjaxLoadFilter || toggleAjaxLoadFilter1"
@@ -232,7 +234,7 @@ export default {
         .then((response) => {
           var contentType = response.headers.map["content-type"][0];
           let blob = new Blob([response.data], { type: contentType });
-          let clickable = document.createElement("a");
+          let link = document.createElement("a");
           link.href = window.URL.createObjectURL(blob);
           link.download = "Updated_Tickets.xlsx";
           link.click();
@@ -251,28 +253,28 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Internal Server Error"),
+                error.body.message == null ? "Internal Server Error" : error.body.message,
               icon: "thumb_down",
             });
           } else if (error.status == 400) {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Bad Request"),
+              message: error.body.message == null ? "Bad Request" : error.body.message,
               icon: "thumb_down",
             });
           } else if (error.status == 404) {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Not Found"),
+              message: error.body.message == null ? "Not Found" : error.body.message,
               icon: "thumb_down",
             });
           } else if (error.status == 406) {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Not Acceptable"),
+              message: error.body.message == null ? "Not Acceptable" : error.body.message,
               icon: "thumb_down",
             });
           } else {
@@ -280,7 +282,9 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                error.body.message == null
+                  ? "Please Try Again Later !"
+                  : error.body.message,
               icon: "thumb_down",
             });
           }
@@ -300,7 +304,7 @@ export default {
         .then((response) => {
           var contentType = response.headers.map["content-type"][0];
           let blob = new Blob([response.data], { type: contentType });
-          let clickable = document.createElement("a");
+          let link = document.createElement("a");
           link.href = window.URL.createObjectURL(blob);
           link.download = "Updated_Closing_Tickets.xlsx";
           link.click();
@@ -319,28 +323,28 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Internal Server Error"),
+                error.body.message == null ? "Internal Server Error" : error.body.message,
               icon: "thumb_down",
             });
           } else if (error.status == 400) {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Bad Request"),
+              message: error.body.message == null ? "Bad Request" : error.body.message,
               icon: "thumb_down",
             });
           } else if (error.status == 404) {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Not Found"),
+              message: error.body.message == null ? "Not Found" : error.body.message,
               icon: "thumb_down",
             });
           } else if (error.status == 406) {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Not Acceptable"),
+              message: error.body.message == null ? "Not Acceptable" : error.body.message,
               icon: "thumb_down",
             });
           } else {
@@ -348,7 +352,9 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                error.body.message == null
+                  ? "Please Try Again Later !"
+                  : error.body.message,
               icon: "thumb_down",
             });
           }

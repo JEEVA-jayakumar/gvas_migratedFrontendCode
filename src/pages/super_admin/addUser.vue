@@ -13,7 +13,12 @@
         <div class="q-pa-md">
           <div class="group">
             <div class="q-mb-sm">Permissions</div>
-            <q-checkbox v-model="formData.addUserDetails.hasReadPermission" label="Read" color="purple-9"/>" class="<q-checkbox v-model="formData.addUserDetails.hasWritePermission" label="Write" color="purple-9"/>" class="<q-checkbox v-model="formData.addUserDetails.hasEditPermission" label="Update" color="purple-9"/>" class="<q-checkbox v-model="formData.addUserDetails.hasDeletePermission" label="Delete" color="purple-9"/>" class="<q-checkbox v-model="formData.addUserDetails.hasDownloadPermission" label="Download" color="purple-9"/>" class="</div>
+            <q-checkbox v-model="formData.addUserDetails.hasReadPermission" label="Read" color="purple-9"/>
+            <q-checkbox v-model="formData.addUserDetails.hasWritePermission" label="Write" color="purple-9"/>
+            <q-checkbox v-model="formData.addUserDetails.hasEditPermission" label="Update" color="purple-9"/>
+            <q-checkbox v-model="formData.addUserDetails.hasDeletePermission" label="Delete" color="purple-9"/>
+            <q-checkbox v-model="formData.addUserDetails.hasDownloadPermission" label="Download" color="purple-9"/>
+          </div>
         </div>
 
         <!-- Basic Details -->
@@ -190,7 +195,7 @@
         <!-- Actions -->
         <div class="q-pa-md text-right">
           <q-btn flat label="Cancel" @click="$router.go(-1)" class="q-mr-sm"/>
-          <q-btn color="purple-9" class="label="Submit" @click="fnSubmitShowAddUser(formData.addUserDetails)" />
+          <q-btn color="purple-9" label="Submit" @click="fnSubmitShowAddUser(formData.addUserDetails)" />
         </div>
 
       </div>
@@ -690,7 +695,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
             icon: "thumb_down"
           });
         });

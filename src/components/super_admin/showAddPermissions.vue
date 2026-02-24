@@ -21,7 +21,8 @@
                     </q-btn>
                   </div>
                   <div class="col-md-2">
-                    <q-btn size="md" align="right"  color="purple-9">Add" class="</q-btn>
+                    <q-btn size="md" align="right"  color="purple-9">Add
+                    </q-btn>
                   </div>
                 </div>
               </div>
@@ -63,7 +64,8 @@
                         <div class="text-h6 text-weight-regular">Set Permission</div>
                         </div>
                         <div v-for="radioPermission in radioPermissions" :key="radioPermission.id">
-                        <q-radio v-model="radioPermissionChecked" color="purple-9">" class="<q-chip color="blue-grey-1" class="text-weight-regular text-grey-8">
+                        <q-radio v-model="radioPermissionChecked" color="purple-9">
+                            <q-chip color="blue-grey-1" class="text-weight-regular text-grey-8">
                             {{radioPermission.label}}
                             </q-chip>
                         </q-radio>
@@ -87,16 +89,19 @@
           <form>
             <div>
               <div>
-                <q-radio v-model="checked" color="purple-9">" class="<q-chip color="blue-grey-2 " class="text-black">
+                <q-radio v-model="checked" color="purple-9">
+                  <q-chip color="blue-grey-2 " class="text-black">
                     q-chip
                   </q-chip>
                 </q-radio>
               </div>
             </div>
 
-            <q-btn size="sm" align="right" rounded outline color="purple-9" class="class="float-right q-mx-sm q-my-md">Send
+            <q-btn size="sm" align="right" rounded outline color="purple-9"
+                class="float-right q-mx-sm q-my-md">Send
             </q-btn>
-            <q-btn size="sm" align="right" rounded outline color="grey-7" class="class="float-right q-mx-sm q-my-md" @click="emitfnshowAddPermissions(propShowAddPermissions)">Cancel
+            <q-btn size="sm" align="right" rounded outline color="grey-7"
+                class="float-right q-mx-sm q-my-md" @click="emitfnshowAddPermissions(propShowAddPermissions)">Cancel
             </q-btn>
         </form>
     </q-dialog>

@@ -9,49 +9,57 @@
         <div class="col-6 group">
           <p>Choose one from the below or you can choose start and end date manually</p>
           <q-radio
-            color="grey-9" v-model="formData.option"
+            color="grey-9"
+            v-model="formData.option"
             @input="calculateDate"
             :val="1"
             label="Past 6 months"
           />
           <q-radio
-            color="grey-9" v-model="formData.option"
+            color="grey-9"
+            v-model="formData.option"
             @input="calculateDate"
             :val="2"
             label="Past 3 months"
           />
           <q-radio
-            color="grey-9" v-model="formData.option"
+            color="grey-9"
+            v-model="formData.option"
             @input="calculateDate"
             :val="3"
             label="Past 1 month"
           />
           <q-radio
-            color="grey-9" v-model="formData.option"
+            color="grey-9"
+            v-model="formData.option"
             @input="calculateDate"
             :val="4"
             label="Past 4 weeks"
           />
           <q-radio
-            color="grey-9" v-model="formData.option"
+            color="grey-9"
+            v-model="formData.option"
             @input="calculateDate"
             :val="5"
             label="Past 3 weeks"
           />
           <q-radio
-            color="grey-9" v-model="formData.option"
+            color="grey-9"
+            v-model="formData.option"
             @input="calculateDate"
             :val="6"
             label="Past 2 weeks"
           />
           <q-radio
-            color="grey-9" v-model="formData.option"
+            color="grey-9"
+            v-model="formData.option"
             @input="calculateDate"
             :val="7"
             label="Past 1 week"
           />
           <q-radio
-            color="grey-9" v-model="formData.option"
+            color="grey-9"
+            v-model="formData.option"
             @input="calculateDate"
             :val="8"
             label="Today"
@@ -64,13 +72,15 @@
             type="date"
             modal
             v-model="formData.from"
-            color="grey-9" class="label="Start date"
+            color="grey-9"
+            label="Start date"
           />
           <q-input
             type="date"
             modal
             v-model="formData.to"
-            color="grey-9" class="label="End date"
+            color="grey-9"
+            label="End date"
           />
         </div>
         <div class="col-12 group">

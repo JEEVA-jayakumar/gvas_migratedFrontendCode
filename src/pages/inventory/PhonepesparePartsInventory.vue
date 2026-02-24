@@ -14,11 +14,11 @@
 
         <div class="col-md-5" align="row">
           <div class="group">
-            <q-radio v-for="(item, index) in flagOptions" :key="index" color="grey-9" class="v-model.trim="flag"
+            <q-radio v-for="(item, index) in flagOptions" :key="index" color="grey-9" v-model.trim="flag"
               @blur="v$.flag.$touch" :error="v$.flag.$error" :val="item.value" :label="item.label" />
             <div class="text-negative q-py-xs group text-caption" v-if="v$.flag.$error" align="right" width="25px">
               <div>
-                <q-icon color="negative" class="name="warning" />&nbsp;Required Field
+                <q-icon color="negative" name="warning" />&nbsp;Required Field
               </div>
             </div>
           </div>
@@ -35,13 +35,16 @@
         ">
         <!--START: table title -->
         <div v-if="flag == '0' || flag == '1'" class="col-md-4">
-          <q-select v-model="formData.allocate_region" label="Select Region" radio color="grey-9" class=":options="regionOptions" @input="regionBasedSoLoad" />
+          <q-select v-model="formData.allocate_region" label="Select Region" radio color="grey-9"
+            :options="regionOptions" @input="regionBasedSoLoad" />
         </div>
         <div v-if="flag == '1'" class="col-md-3">
-          <q-select filter clearable v-model="formData.allocate_so" label="Select SO" radio color="grey-9" class=":options="regionBasedSo" />
+          <q-select filter clearable v-model="formData.allocate_so" label="Select SO" radio color="grey-9"
+            :options="regionBasedSo" />
         </div>
         <div v-if="flag == '2'" class="col-md-3">
-          <q-select v-model="formData.allocate_reseller" label="Select allocate_reseller" radio color="grey-9" class=":options="resellarOptions" />
+          <q-select v-model="formData.allocate_reseller" label="Select allocate_reseller" radio color="grey-9"
+            :options="resellarOptions" />
         </div>
         <div class="col-md-7">
           <p class="caption">Spare Parts Type*</p>
@@ -60,18 +63,19 @@
           </div>
         </div>
         <div class="col-md-7">
-          <q-input disable v-model="formData.pod_number" label="Pod Number" radio color="grey-9" class="/>
+          <q-input disable v-model="formData.pod_number" label="Pod Number" radio color="grey-9" />
         </div>
 
         <div class="col-md-7">
-          <q-input disable v-model="formData.total_count" label="Total Count" radio color="grey-9" class="/>
+          <q-input disable v-model="formData.total_count" label="Total Count" radio color="grey-9" />
         </div>
 
         <div class="full-width group" align="center" id="formData">
           <!--<q-btn
             size="md"
             type="button"
-            color="purple-9" @click="myPrint('myfrm')"
+            color="purple-9"
+            @click="myPrint('myfrm')"
             >Print</q-btn
           > -->
           <q-btn :disable="this.formData.total_count == 0" size="md" type="button" color="purple-9" @click="fnSubmitBankDetails(formData)">Submit</q-btn>
@@ -392,7 +396,9 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                error.body.message == null
+                  ? "Please Try Again Later !"
+                  : error.body.message,
               icon: "thumb_down"
             });
           });

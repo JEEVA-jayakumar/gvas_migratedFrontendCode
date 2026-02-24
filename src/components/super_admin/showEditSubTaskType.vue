@@ -23,7 +23,8 @@
               v-model="formData.name"
               :error="v$.formData.name.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Service Sub Task Name"
+              color="grey-9"
+              label="Service Sub Task Name"
               placeholder="Service Sub Task Name"
             />
           </div>
@@ -40,7 +41,8 @@
             <q-btn
               align="right"
               @click="fnfinalsubmitEditedSpareParts(formData)"
-              color="purple-9" class=">Save</q-btn
+              color="purple-9"
+              >Save</q-btn
             >
           </div>
         </div>
@@ -154,7 +156,9 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                error.body.message == null
+                  ? "Please Try Again Later !"
+                  : error.body.message,
               icon: "thumb_down"
             });
           });

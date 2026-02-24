@@ -8,7 +8,8 @@
       <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
         <div class="col-sm-5">
           <q-select
-            color="grey-9" v-model="formData.allocate_region"
+            color="grey-9"
+            v-model="formData.allocate_region"
             :options="regionOptions"
             label="Select Region"
             @input="regionBasedSoLoad"
@@ -21,7 +22,8 @@
             radio
             filter
             clearable
-            color="grey-9" class=":options="regionBasedSo"
+            color="grey-9"
+            :options="regionBasedSo"
           />
         </div>
         <div class="row">
@@ -50,7 +52,8 @@
             v-model="formData.pod_number"
             label="Pod Number"
             radio
-            color="grey-9" class="/>
+            color="grey-9"
+          />
         </div>
         <div class="col-md-7">
           <q-input
@@ -58,7 +61,8 @@
             v-model="formData.total_count"
             label="Total Count"
             radio
-            color="grey-9" class="/>
+            color="grey-9"
+          />
         </div>
       </div>
 
@@ -66,19 +70,22 @@
         <!-- <q-btn
           size="md"
           type="button"
-          color="red" @click="fnSubmitRejectDetails(formData)"
+          color="red"
+          @click="fnSubmitRejectDetails(formData)"
           >Reject</q-btn
         > -->
         <q-btn
           size="md"
           type="button"
-          color="purple-9" @click="fnSubmitBankDetails(formData)"
+          color="purple-9"
+          @click="fnSubmitBankDetails(formData)"
           >Update</q-btn
         >
         <!-- <q-btn
           size="md"
           type="button"
-          color="green" @click="fnSubmitApproveDetails(formData)"
+          color="green"
+          @click="fnSubmitApproveDetails(formData)"
           >Approve</q-btn
         > -->
       </div>
@@ -266,7 +273,9 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              error.body.message == null
+                ? "Please Try Again Later !"
+                : error.body.message,
             icon: "thumb_down"
           });
         });
@@ -290,9 +299,9 @@ export default {
     //         color: "negative",
     //         position: "bottom",
     //         message:
-    //           error.data.message == null
+    //           error.body.message == null
     //             ? "Please Try Again Later !"
-    //             : error.data.message,
+    //             : error.body.message,
     //         icon: "thumb_down"
     //       });
     //     });
@@ -316,9 +325,9 @@ export default {
     //         color: "negative",
     //         position: "bottom",
     //         message:
-    //           error.data.message == null
+    //           error.body.message == null
     //             ? "Please Try Again Later !"
-    //             : error.data.message,
+    //             : error.body.message,
     //         icon: "thumb_down"
     //       });
     //     });

@@ -48,7 +48,8 @@
             <div class="col-md-6 col-sm-12 col-xs-12">
               <q-select
                 placeholder="Choose from the below"
-                color="grey-9" class="v-model.trim="formdata.paymentMode"
+                color="grey-9"
+                v-model.trim="formdata.paymentMode"
                 :error="v$.formdata.paymentMode.$error"
                 label="Payment mode"
                 :options="paymnentModeOptions"
@@ -65,7 +66,8 @@
             <div class="col-md-6 col-sm-12 col-xs-12">
               <q-select
                 placeholder="Choose from the below"
-                color="grey-9" class="v-model.trim="formdata.combinedSettlementFlag"
+                color="grey-9"
+                v-model.trim="formdata.combinedSettlementFlag"
                 :error="v$.formdata.combinedSettlementFlag.$error"
                 label="Combined Settlement Flag "
                 :options="combinedSettlementFlagOptions"
@@ -82,7 +84,8 @@
             <div class="col-md-6 col-sm-12 col-xs-12">
               <q-select
                 placeholder="Choose from the below"
-                color="grey-9" class="v-model.trim="formdata.ONBOARDING_REQD"
+                color="grey-9"
+                v-model.trim="formdata.ONBOARDING_REQD"
                 :error="v$.formdata.ONBOARDING_REQD.$error"
                 label="Select Yes Or No"
                 :options="onboardingRequestOptions"
@@ -94,21 +97,24 @@
         <div align="right">
           <q-btn
             v-if="this.propShowRejectComponent.data.institutionCode != '104'"
-            color="positive" class="class="q-ma-sm float-right"
+            color="positive"
+            class="q-ma-sm float-right"
             @click="finalFormSubmit(formdata)"
             align="right"
             label="Submit To Mars"
           />
           <q-btn
             v-if="this.propShowRejectComponent.data.institutionCode == '104'"
-            color="teal" class="class="q-ma-sm float-right"
+            color="teal"
+            class="q-ma-sm float-right"
             @click="OpenAdditionalInfo()"
             align="right"
             label="Additional Info"
           />
           <q-btn
             align="right"
-            color="grey-9" class="class="float-right q-ma-sm"
+            color="grey-9"
+            class="float-right q-ma-sm"
             @click="emitToggleReject(showRejectModel)"
             >Cancel
           </q-btn>
@@ -471,8 +477,8 @@ components: {
             color: "negative",
             position: "bottom",
             message:
-              error.data != null
-                ? error.data.message
+              error.body != null
+                ? error.body.message
                 : "Lead Information status update failed!",
             icon: "clear",
           });
@@ -511,10 +517,10 @@ components: {
           this.$q.notify({
             color: "positive",
             position: "bottom",
-            message: response.data.message,
+            message: response.body.message,
             icon: "thumb_up",
           });
-          let res = response.data.data;
+          let res = response.body.data;
           this.listAllSubTidDetails = res;
         })
         .catch((error) => {
@@ -885,7 +891,7 @@ components: {
                     merchantRefCode: this.propLeadDeatils.merchantRefCode,
                   };
                 } else {
-                  feed_paramaters = response.data;
+                  feed_paramaters = response.body;
                 }
                 self.$q.loading.show({
                   delay: 0, // ms

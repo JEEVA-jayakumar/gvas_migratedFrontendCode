@@ -14,7 +14,8 @@
               class="shadow-1"
               animated
               swipeable
-              color="tertiary" class="align="justify"
+              color="tertiary"
+              align="justify"
             >
               <q-tab class="size1" label="UPLOAD CSV FILE"  />
               <div>
@@ -62,7 +63,7 @@
                           <q-separator />
                           <q-card-section>
                             <q-item dense>
-                              <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                              <q-item-section icon="attach_file" />
                               <q-item-section>{{
                                 formData.fileSelected[0].name
                               }}</q-item-section>
@@ -74,7 +75,8 @@
                             <q-btn
                               size="10px"
                               type="button"
-                              color="negative" @click="removeBulkUploadFile"
+                              color="negative"
+                              @click="removeBulkUploadFile"
                               label="Remove"
                               icon="clear"
                             />
@@ -105,7 +107,7 @@
       <div class="text-grey-9">
         <div class="row bottom-border q-pa-sm items-center">
           <div class="col">
-            <q-tabs class="shadow-1" animated swipeable color="tertiary" class="align="justify" >
+            <q-tabs class="shadow-1" animated swipeable color="tertiary" align="justify" >
               <q-tab class="size1" label="Onboarding Existing Merchants"  />
               <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
                 <div class="row items-center gutter-y-sm">
@@ -127,7 +129,8 @@
                         formData.marsDeviceIdsCooked.length == 0
                       "
                       separator
-                      color="grey-9" class=":options="assignToOptions"
+                      color="grey-9"
+                      :options="assignToOptions"
                       placeholder="Assign To"
                     />
                   </div>
@@ -155,24 +158,23 @@
               <q-tabs
                 v-model="selectedTab"
                 class="shadow-1"
-                color="grey-1" class="@select="goToUnassignedTab"
+                color="grey-1"
+                @select="goToUnassignedTab"
               >
                 <q-tab
                   default
-                  color="dark" class="name="unAssigned"
+                  color="dark"
+                  name="unAssigned"
 
                   label="Unassigned"
                 />
                 <q-tab
-                  color="dark" class="name="assigned"
+                  color="dark"
+                  name="assigned"
 
                   label="Assigned"
                 />
-
-
-              </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="assigned">
+                <q-tab-panel name="assigned">
                   <div class="row items-center gutter-y-sm">
                     <div
                       class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
@@ -195,14 +197,16 @@
 
                             "
                             separator
-                            color="grey-9" class=":options="assignToOptions"
+                            color="grey-9"
+                            :options="assignToOptions"
                             placeholder="Assign To"
                           />
                         </div>
                         <!-- <div class="col-md-4 col-sm-6 col-xs-6">
                 <q-checkbox
                   v-model="formData.triggerWelcomeMail"
-                  color="dark" class="label="Trigger welcome email"
+                  color="dark"
+                  label="Trigger welcome email"
                 />
               </div> -->
                         <div class="col-md-4 col-sm-6 col-xs-6 group">
@@ -248,7 +252,8 @@
                     row-key="id"
                     :loading="tableAjaxLoading"
                     :rows-per-page-options="[5, 10, 15, 20]"
-                    color="dark" class="@request="ajaxLoadAllLeadInfo"
+                    color="dark"
+                    @request="ajaxLoadAllLeadInfo"
                   >
                     <!-- selection="multiple" -->
                     <!-- <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-leadNumber="props"
@@ -285,7 +290,8 @@
                       <div class="col-md-5">
                         <q-input
                           clearable
-                          color="grey-9" v-model="filterSearch"
+                          color="grey-9"
+                          v-model="filterSearch"
                           placeholder="Type.."
                           label="Search By Merchant Name, TID, MID ..."
                           class="q-mr-lg q-py-sm"
@@ -295,7 +301,7 @@
                   </q-table>
                   <!--ENDv-model: table Data -->
                 </q-tab-panel>
-<q-tab-panel name="unAssigned">
+                <q-tab-panel name="unAssigned">
                   <!--START: table Data -->
                   <q-table
                     :rows="tableData1"
@@ -308,7 +314,8 @@
                     row-key="id"
                     :loading="tableAjaxLoading1"
                     :rows-per-page-options="[5, 10, 15, 20]"
-                    color="dark" class="@request="ajaxLoadAllLeadInfo1"
+                    color="dark"
+                    @request="ajaxLoadAllLeadInfo1"
                   >
                     <!-- <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-leadNumber="props"
                             :props="props" class="cursor-pointer"
@@ -346,7 +353,8 @@
                       <div class="col-md-5">
                         <q-input
                           clearable
-                          color="grey-9" v-model="filterSearch1"
+                          color="grey-9"
+                          v-model="filterSearch1"
                           placeholder="Type.."
                           label="Search By Merchant Name, TID, MID ..."
                           class="q-mr-lg q-py-sm"
@@ -356,7 +364,7 @@
                   </q-table>
                   <!--END: table Data -->
                 </q-tab-panel>
-</q-tab-panels>
+              </q-tabs>
               <div class="row items-center gutter-y-sm">
                 <div class="col-md-9 col-sm-12 col-xs-12">
                   <div class="row items-center"></div>
@@ -661,7 +669,9 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                error.body.message == null
+                  ? "Please Try Again Later !"
+                  : error.body.message,
               icon: "thumb_down"
             });
             // this.formData.fileSelected = []

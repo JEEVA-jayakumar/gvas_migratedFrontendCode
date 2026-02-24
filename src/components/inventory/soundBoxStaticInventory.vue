@@ -15,7 +15,8 @@
             size="sm"
             @click="emitToggleRemarks"
             outline
-            color="dark" class="icon="clear"
+            color="dark"
+            icon="clear"
           />
         </div>
       </div>
@@ -40,7 +41,8 @@
           <q-btn
             @click="startScan"
             v-if="scannerToggleOption"
-            color="blue" class="outline
+            color="blue"
+            outline
             class="q-py-xs "
             label="Start scan"
             style="float: inline-end;"
@@ -122,7 +124,9 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                error.body.message == null
+                  ? "Please Try Again Later !"
+                  : error.body.message,
               icon: "thumb_down"
             });
             this.$q.loading.hide();

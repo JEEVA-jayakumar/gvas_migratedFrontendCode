@@ -21,7 +21,8 @@
                 @blur="v$.formData.institutionName.$touch"
                 :error="v$.formData.institutionName.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="Institution Name"
+                color="grey-9"
+                label="Institution Name"
                 placeholder="Institution Name"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -32,7 +33,8 @@
               @blur="v$.formData.institutionRRCode.$touch"
               :error="v$.formData.institutionRRCode.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Institution RR Code"
+              color="grey-9"
+              label="Institution RR Code"
               placeholder="Institution RR Code"
               @keyup.enter="submitLeadSourceData(formData)"
               
@@ -44,7 +46,8 @@
               @blur="v$.formData.institutionCode.$touch"
               :error="v$.formData.institutionCode.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Institution Code"
+              color="grey-9"
+              label="Institution Code"
               placeholder="Institution Code"
               @keyup.enter="submitLeadSourceData(formData)"
               
@@ -56,7 +59,8 @@
                       :error="v$.formData.multiTidEnabled.$error"
                       v-for="(item, index) in multiTidFlagOptions"
                       :key="index"
-                      color="grey-9" class="v-model.trim="formData.multiTidEnabled"
+                      color="grey-9"
+                      v-model.trim="formData.multiTidEnabled"
                       :val="item.value"
                       :label="item.label"
                     />
@@ -68,7 +72,8 @@
                 @blur="v$.formData.baseTidMidPrefix.$touch"
                 :error="v$.formData.baseTidMidPrefix.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="Tid/Mid Prefix"
+                color="grey-9"
+                label="Tid/Mid Prefix"
                 placeholder="Tid/Mid Prefix"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -83,7 +88,8 @@
                 class="bg-white text-weight-regular text-grey-8"
                 @click="toggleModal()"
               >Cancel</q-btn>
-              <q-btn align="right" @click="submitInstanceData(formData)" color="purple-9">Save</q-btn>" class="</div>
+              <q-btn align="right" @click="submitInstanceData(formData)" color="purple-9">Save</q-btn>
+            </div>
           </div>
         </form>
       </q-dialog>
@@ -173,7 +179,7 @@
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down"
               });
             });

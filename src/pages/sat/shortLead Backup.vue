@@ -42,7 +42,8 @@
                                             <q-btn
                                             size="xs"
                                             outline
-                                            color="positive" class="round
+                                            color="positive"
+                                            round
                                             icon="check" 
                                             />
                                         Approved</span>
@@ -50,12 +51,13 @@
                                 </div>
                             </q-card-section>
                              <q-card-section>
-                                <q-list  class="no-padding">
+                                <q-list no-border class="no-padding">
                                     <q-item multiline>
                                         <q-item-section>
                                           <q-item-label>
                                             <q-input 
-                                              color="grey-9" class="label="Debit < 2000 (%)"
+                                              color="grey-9"
+                                              label="Debit < 2000 (%)"
                                               readonly
                                             class="no-pointer-events" v-model="formData.shortLead.debitLessthanAmount"
                                             />
@@ -64,7 +66,8 @@
                                         <q-item-section>
                                           <q-item-label>
                                             <q-input 
-                                              color="grey-9" class="label="Debit < 2000 (%)"
+                                              color="grey-9"
+                                              label="Debit < 2000 (%)"
                                               readonly
                                             class="no-pointer-events" v-model="formData.shortLead.debitGreaterthanAmount" 
                                             />
@@ -76,7 +79,8 @@
                                       <q-item-section>
                                         <q-item-label>
                                             <q-input 
-                                                color="grey-9" class="label="Std CC (%)"
+                                                color="grey-9"
+                                                label="Std CC (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="formData.shortLead.stdCC" 
                                             /> 
@@ -85,7 +89,8 @@
                                       <q-item-section>
                                         <q-item-label>
                                             <q-input 
-                                                color="grey-9" class="label="Premium CC (%)"
+                                                color="grey-9"
+                                                label="Premium CC (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="formData.shortLead.premiumCC" 
                                             />
@@ -94,7 +99,8 @@
                                       <q-item-section>
                                         <q-item-label>
                                             <q-input 
-                                                color="grey-9" class="label="Corp (%)"
+                                                color="grey-9"
+                                                label="Corp (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="formData.shortLead.corpIntlCC" 
                                             />
@@ -103,7 +109,8 @@
                                       <q-item-section>
                                         <q-item-label>
                                             <q-input 
-                                                color="grey-9" class="label="Intl (%)"
+                                                color="grey-9"
+                                                label="Intl (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="formData.shortLead.corpIntlCC" 
                                             />
@@ -112,7 +119,8 @@
                                       <q-item-section>
                                         <q-item-label>
                                             <q-input 
-                                                color="grey-9" class="label="Super Pre CC (%)"
+                                                color="grey-9"
+                                                label="Super Pre CC (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="formData.shortLead.corpIntlCC" 
                                             />
@@ -120,7 +128,8 @@
                                          </q-item-section>
                                     </q-item>
                                     <q-item class="items-start q-pa-sm" v-if="formData.shortLead.posEnable">
-                                        <q-checkbox v-model="formData.shortLead.posEnable" class="no-pointer-events" color="purple-9">" class="<small class="text-caption">Enable Cash@POS Cash @POS incentive Rs.5</small>
+                                        <q-checkbox v-model="formData.shortLead.posEnable" class="no-pointer-events" color="purple-9">
+                                            <small class="text-caption">Enable Cash@POS Cash @POS incentive Rs.5</small>
                                         </q-checkbox>
                                     </q-item>
                                 </q-list>
@@ -140,11 +149,12 @@
                                         <span v-if="formData.shortLead.paymentOption == 3">Swipe</span>
                                     </div>
                                     <div class="col text-body1 text-weight-medium" align="right">
-                                    <span v-if="formData.shortLead.verifiedPricingStatus == 1" class="  text-positive text-body1 ">
+                                    <span v-if="formData.shortLead.verifiedPricingStatus == 1"  text-positive text-body1 ">
                                         <q-btn
                                         size="xs"
                                         outline
-                                        color="positive" class="round
+                                        color="positive"
+                                        round
                                         icon="check" 
                                         />
                                         Approved</span>
@@ -152,31 +162,35 @@
                                         <q-btn
                                         size="xs"
                                         outline
-                                        color="amber-9" class="round
+                                        color="amber-9"
+                                        round
                                         icon="warning" 
                                         />
                                         OP Pending</span>
-                                    <span v-if="formData.shortLead.verifiedPricingStatus == 3" class=" text-negative text-body1 ">
+                                    <span v-if="formData.shortLead.verifiedPricingStatus == 3" text-negative text-body1 ">
                                         <q-btn
                                         size="xs"
                                         outline
-                                        color="negative" class="round
+                                        color="negative"
+                                        round
                                         icon="clear" 
                                         />
                                         OP Rejected</span>
-                                    <span v-if="formData.shortLead.verifiedPricingStatus == 4" class=" text-amber-9  text-body1">
+                                    <span v-if="formData.shortLead.verifiedPricingStatus == 4" text-amber-9  text-body1">
                                         <q-btn
                                         size="xs"
                                         outline
-                                        color="amber-9" class="round
+                                        color="amber-9"
+                                        round
                                         icon="warning" 
                                         />
                                         Finance Pending</span>
-                                    <span v-if="formData.shortLead.verifiedPricingStatus == 5" class=" text-negative text-body1 ">
+                                    <span v-if="formData.shortLead.verifiedPricingStatus == 5" text-negative text-body1 ">
                                         <q-btn
                                         size="xs"
                                         outline
-                                        color="negative" class="round
+                                        color="negative"
+                                        round
                                         icon="clear" 
                                         />
                                         Finance Reject</span>
@@ -184,7 +198,7 @@
                                 </div>
                             </q-card-section>
                             <q-card-section class="q-pa-sm">
-                                <q-list  class="no-padding">
+                                <q-list no-border class="no-padding">
                                     <q-item class="items-start q-pa-sm">
                                         <q-item-section class="col-md-6 text-caption">
                                             Payment mode:
@@ -199,7 +213,7 @@
                 
                                     <q-item class="items-start">
                                         <q-item-section class="col-md-12 text-caption">
-                                            <div v-if="formData.shortLead.paymentDocumentFile == null || formData.shortLead.paymentDocumentFile == ''"><q-icon name="clear" color="negative" class="/> No image attached</div>
+                                            <div v-if="formData.shortLead.paymentDocumentFile == null || formData.shortLead.paymentDocumentFile == ''"><q-icon name="clear" color="negative" /> No image attached</div>
                                             <div v-else>
                                                 <q-btn 
                                                     flat
@@ -207,7 +221,8 @@
                                                     size="sm"
                                                     class="bg-white"
                                                     @click="toggleChequeImage(formData.shortLead.paymentDocumentFile)" 
-                                                    color="light-blue">" class="View Image &nbsp;
+                                                    color="light-blue">
+                                                    View Image &nbsp;
                                                     <span v-if="!toggleChequeImageResult"><i class="fas fa-angle-down"></i></span>
                                                     <span v-if="toggleChequeImageResult"><i class="fas fa-angle-up"></i></span>
                                                 </q-btn>
@@ -226,20 +241,22 @@
                                 <span class="text-body1 text-weight-medium">MDR</span>
                             </q-card-section>
                             <q-card-section>
-                                <q-list  class="no-padding">
+                                <q-list no-border class="no-padding">
                                     <q-item class="no-padding">
                                         <q-item-section>
                                             <div class="row group">
                                                 <div class="col-md-5">
                                                     <q-input 
-                                                        color="grey-9" class="label="Debit < 2000 (%)"
+                                                        color="grey-9"
+                                                        label="Debit < 2000 (%)"
                                                         readonly
                                                         class="no-pointer-events" v-model="formData.shortLead.debitLessthanAmount"
                                                     />
                                                 </div>
                                                 <div class="col-md-5">
                                                     <q-input 
-                                                        color="grey-9" class="label="Debit < 2000 (%)"
+                                                        color="grey-9"
+                                                        label="Debit < 2000 (%)"
                                                         readonly
                                                         class="no-pointer-events" v-model="formData.shortLead.debitGreaterthanAmount" 
                                                     />
@@ -253,21 +270,24 @@
                                             <div class="row group">
                                                 <div class="col-md-3">
                                                     <q-input 
-                                                        color="grey-9" class="label="Std CC (%)"
+                                                        color="grey-9"
+                                                        label="Std CC (%)"
                                                         readonly
                                                         class="no-pointer-events" v-model="formData.shortLead.stdCC" 
                                                     /> 
                                                 </div>
                                                 <div class="col-md-3">
                                                     <q-input 
-                                                        color="grey-9" class="label="Premium CC (%)"
+                                                        color="grey-9"
+                                                        label="Premium CC (%)"
                                                         readonly
                                                         class="no-pointer-events" v-model="formData.shortLead.premiumCC" 
                                                     />
                                                 </div>
                                                 <div class="col-md-5">
                                                     <q-input 
-                                                        color="grey-9" class="label="Corp/Intl/Super Pre CC (%)"
+                                                        color="grey-9"
+                                                        label="Corp/Intl/Super Pre CC (%)"
                                                         readonly
                                                         class="no-pointer-events" v-model="formData.shortLead.corpIntlCC" 
                                                     />
@@ -276,7 +296,8 @@
                                         </q-item-section>
                                     </q-item>
                                     <q-item class="items-start q-pa-sm" v-if="formData.shortLead.posEnable">
-                                        <q-checkbox v-model="formData.shortLead.posEnable" class="no-pointer-events" color="purple-9">" class="<small class="text-caption">Enable Cash@POS Cash @POS incentive Rs.5</small>
+                                        <q-checkbox v-model="formData.shortLead.posEnable" class="no-pointer-events" color="purple-9">
+                                            <small class="text-caption">Enable Cash@POS Cash @POS incentive Rs.5</small>
                                         </q-checkbox>
                                     </q-item>
                                 </q-list>
@@ -297,40 +318,45 @@
                                             Exception KYC
                                         </div>
                                         <div class="col text-body1 text-weight-medium" align="right">
-                                            <span v-if="formData.shortLead.verifiedKycStatus == 1" class="  text-positive">
+                                            <span v-if="formData.shortLead.verifiedKycStatus == 1"  text-positive">
                                                 <q-btn
                                                 size="xs"
                                                 outline
-                                                color="positive" class="round
+                                                color="positive"
+                                                round
                                                 icon="check" 
                                                 />
                                                 Approved</span>
-                                            <span v-if="formData.shortLead.verifiedKycStatus == 2" class="  text-amber-9">
+                                            <span v-if="formData.shortLead.verifiedKycStatus == 2"  text-amber-9">
                                                 <q-btn
                                                 size="xs"
                                                 outline
-                                                color="amber-9" class="round
+                                                color="amber-9"
+                                                round
                                                 icon="warning" 
                                                 />
                                                 OP Pending</span>
-                                            <span v-if="formData.shortLead.verifiedKycStatus == 3" class="  text-negative"><q-btn
+                                            <span v-if="formData.shortLead.verifiedKycStatus == 3"  text-negative"><q-btn
                                                 size="xs"
                                                 outline
-                                                color="negative" class="round
+                                                color="negative"
+                                                round
                                                 icon="clear" 
                                                 />
                                                 OP Rejected</span>
-                                            <span v-if="formData.shortLead.verifiedKycStatus == 4" class="  text-amber-9"><q-btn
+                                            <span v-if="formData.shortLead.verifiedKycStatus == 4"  text-amber-9"><q-btn
                                                 size="xs"
                                                 outline
-                                                color="amber-9" class="round
+                                                color="amber-9"
+                                                round
                                                 icon="warning" 
                                                 />
                                                 Finance Pending</span>
-                                            <span v-if="formData.shortLead.verifiedKycStatus == 5" class="  text-negative"><q-btn
+                                            <span v-if="formData.shortLead.verifiedKycStatus == 5"  text-negative"><q-btn
                                                 size="xs"
                                                 outline
-                                                color="negative" class="round
+                                                color="negative"
+                                                round
                                                 icon="clear" 
                                                 />
                                                 Finance Reject</span>
@@ -357,11 +383,12 @@
                                             Exception Bank Subvention
                                         </div>
                                         <div class="col text-body1 text-weight-medium" align="right">
-                                            <span v-if="formData.shortLead.verifiedBanksubventionStatus == 1" class="  text-positive text-body1 ">
+                                            <span v-if="formData.shortLead.verifiedBanksubventionStatus == 1"  text-positive text-body1 ">
                                                 <q-btn
                                                 size="xs"
                                                 outline
-                                                color="positive" class="round
+                                                color="positive"
+                                                round
                                                 icon="check" 
                                                 />
                                                 Approved</span>
@@ -369,31 +396,35 @@
                                                 <q-btn
                                                 size="xs"
                                                 outline
-                                                color="amber-9" class="round
+                                                color="amber-9"
+                                                round
                                                 icon="warning" 
                                                 />
                                                 OP Pending</span>
-                                            <span v-if="formData.shortLead.verifiedBanksubventionStatus == 3" class=" text-negative text-body1 ">
+                                            <span v-if="formData.shortLead.verifiedBanksubventionStatus == 3" text-negative text-body1 ">
                                                 <q-btn
                                                 size="xs"
                                                 outline
-                                                color="negative" class="round
+                                                color="negative"
+                                                round
                                                 icon="clear" 
                                                 />
                                                 OP Rejected</span>
-                                            <span v-if="formData.shortLead.verifiedBanksubventionStatus == 4" class=" text-amber-9  text-body1">
+                                            <span v-if="formData.shortLead.verifiedBanksubventionStatus == 4" text-amber-9  text-body1">
                                                 <q-btn
                                                 size="xs"
                                                 outline
-                                                color="amber-9" class="round
+                                                color="amber-9"
+                                                round
                                                 icon="warning" 
                                                 />
                                                 Finance Pending</span>
-                                            <span v-if="formData.shortLead.verifiedBanksubventionStatus == 5" class=" text-negative text-body1 ">
+                                            <span v-if="formData.shortLead.verifiedBanksubventionStatus == 5" text-negative text-body1 ">
                                                 <q-btn
                                                 size="xs"
                                                 outline
-                                                color="negative" class="round
+                                                color="negative"
+                                                round
                                                 icon="clear" 
                                                 />
                                                 Finance Reject</span>
@@ -419,11 +450,12 @@
                                             Exception Pricing
                                         </div>
                                         <div class="col text-body1 text-weight-medium" align="right">
-                                            <span v-if="formData.shortLead.verifiedPricingStatus == 1" class="  text-positive text-body1 ">
+                                            <span v-if="formData.shortLead.verifiedPricingStatus == 1"  text-positive text-body1 ">
                                                 <q-btn
                                                 size="xs"
                                                 outline
-                                                color="positive" class="round
+                                                color="positive"
+                                                round
                                                 icon="check" 
                                                 />
                                                 Approved</span>
@@ -431,31 +463,35 @@
                                                 <q-btn
                                                 size="xs"
                                                 outline
-                                                color="amber-9" class="round
+                                                color="amber-9"
+                                                round
                                                 icon="warning" 
                                                 />
                                                 OP Pending</span>
-                                            <span v-if="formData.shortLead.verifiedPricingStatus == 3" class=" text-negative text-body1 ">
+                                            <span v-if="formData.shortLead.verifiedPricingStatus == 3" text-negative text-body1 ">
                                                 <q-btn
                                                 size="xs"
                                                 outline
-                                                color="negative" class="round
+                                                color="negative"
+                                                round
                                                 icon="clear" 
                                                 />
                                                 OP Rejected</span>
-                                            <span v-if="formData.shortLead.verifiedPricingStatus == 4" class=" text-amber-9  text-body1">
+                                            <span v-if="formData.shortLead.verifiedPricingStatus == 4" text-amber-9  text-body1">
                                                 <q-btn
                                                 size="xs"
                                                 outline
-                                                color="amber-9" class="round
+                                                color="amber-9"
+                                                round
                                                 icon="warning" 
                                                 />
                                                 Finance Pending</span>
-                                            <span v-if="formData.shortLead.verifiedPricingStatus == 5" class=" text-negative text-body1 ">
+                                            <span v-if="formData.shortLead.verifiedPricingStatus == 5" text-negative text-body1 ">
                                                 <q-btn
                                                 size="xs"
                                                 outline
-                                                color="negative" class="round
+                                                color="negative"
+                                                round
                                                 icon="clear" 
                                                 />
                                                 Finance Reject</span>
@@ -483,7 +519,7 @@
                                 <span class="text-body1 text-weight-medium">Document</span>
                             </q-card-section>
                             <q-card-section class="q-pa-xs">
-                                <q-list  class="no-padding">
+                                <q-list no-border class="no-padding">
                                     <q-item class="no-padding">
                                         <q-item-section>
                                             <div v-if="formData.shortLead.documentUploadedType == 1">
@@ -506,14 +542,14 @@
                                                         <div class="col-md-12" v-if="primaryItem.showSingleDocumentUpload">
                                                             <q-list dense>
                                                                 <q-item dense>
-                                                                    <q-item-section avatar><q-icon name="blur_on"  /></q-item-section>
+                                                                    <q-item-section icon="blur_on"/>
                                                                     <q-item-section class="text-body1 text-weight-medium">
                                                                         {{primaryItem.documentType}}
                                                                     </q-item-section>
                                                                 </q-item>
                                                                  <q-separator />
                                                                 <q-item dense v-for="(secondaryItem,subIndex) in primaryItem.documents" :key="subIndex">
-                                                                    <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                                                                    <q-item-section icon="attach_file"/>
                                                                     <q-item-section class="text-caption">
                                                                         {{secondaryItem.subDocumentType}}
                                                                     </q-item-section>
@@ -542,14 +578,14 @@
                                                             <div v-if="primaryItem.documentTypeSelection != null" class="full-width q-py-md">
                                                                 <q-list dense>
                                                                     <q-item dense>
-                                                                        <q-item-section avatar><q-icon name="blur_on"  /></q-item-section>
+                                                                        <q-item-section icon="blur_on"/>
                                                                         <q-item-section class="text-body1 text-weight-medium">
                                                                             {{primaryItem.documentType}}
                                                                         </q-item-section>
                                                                     </q-item>
                                                                     <q-separator />
                                                                     <q-item dense >
-                                                                        <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                                                                        <q-item-section icon="attach_file"/>
                                                                         <q-item-section class="text-caption">
                                                                             {{
                                                                                 primaryItem.documentTypeSelection.subDocumentType
@@ -575,33 +611,35 @@
                                                 <div class="full-width" v-if="index.toString()==documents[0].subDocumentType">
                                                     <q-expansion-item separator indent icon-toggle opened group="closeOnOpen" multiline class="full-width">
                                                         <template slot="header">
-                                                            <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                                                            <q-item-section icon="attach_file" />
                                                             <q-item-section class="text-body1" :sublabel="documents[0].uploadedDocuments.length + 'Document(s)'" :label="index" />
                                                             <q-item-section v-if="documents[0].documentVerifiedStatus == 2" right>
                                                                 <q-btn
                                                                     round 
                                                                     size="xs"
                                                                     class="q-ma-xs"
-                                                                    color="green" class="icon="fas fa-check"
+                                                                    color="green"
+                                                                    icon="fas fa-check"
                                                                     @click="fnDocumentApproveModal(documents[0])"
                                                                 />
                                                                 <q-btn 
                                                                     round 
                                                                     size="xs"
                                                                     class="q-ma-xs"
-                                                                    color="red" class="icon="fas fa-times"
+                                                                    color="red"
+                                                                    icon="fas fa-times"
                                                                     @click="fnDocumentRejectModal(documents[0])"
                                                                 />
                                                             </q-item-section>
                                                             <q-item-section v-else right>
-                                                                <span v-if="documents[0].documentVerifiedStatus == 1" class="  text-body1 text-weight-medium text-positive">Approved</span>
-                                                                <span v-if="documents[0].documentVerifiedStatus == 3" class="  text-body1 text-weight-medium text-negative">Rejected</span>
+                                                                <span v-if="documents[0].documentVerifiedStatus == 1"  text-body1 text-weight-medium text-positive">Approved</span>
+                                                                <span v-if="documents[0].documentVerifiedStatus == 3"  text-body1 text-weight-medium text-negative">Rejected</span>
                                                             </q-item-section>
                                                         </template>
                                                         <div v-for="(item,subIndex) in documents[0].uploadedDocuments" :key="subIndex" class="q-py-sm">
                                                             <div v-if="item.mimeType.includes('application')">
                                                                 <div @click="fnPDFViewModal(item.fileName)" class="cursor-pointer no-underline">
-                                                                    <q-icon name="fas fa-file-pdf" color="negative" class="/>
+                                                                    <q-icon name="fas fa-file-pdf" color="negative" />
                                                                     &nbsp;{{item.fileName}}
                                                                 </div>
                                                             </div>
@@ -629,7 +667,7 @@
                                                             <div class="col-md-12 text-body1">
                                                                 <q-expansion-item separator icon-toggle opened group="closeOnOpenSubDocument" multiline class="full-width" indent>
                                                                     <template slot="header">
-                                                                        <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                                                                        <q-item-section icon="attach_file" />
                                                                         <q-item-section class="text-body1"
                                                                         :sublabel="subDocument.uploadedDocuments.length + 'Document(s)'"
                                                                         :label="subDocument.subDocumentType" />
@@ -638,26 +676,28 @@
                                                                                 round 
                                                                                 size="xs"
                                                                                 class="q-ma-xs"
-                                                                                color="green" class="icon="fas fa-check"
+                                                                                color="green"
+                                                                                icon="fas fa-check"
                                                                                 @click="fnDocumentApproveModal(subDocument)"
                                                                             />
                                                                             <q-btn 
                                                                                 round 
                                                                                 size="xs"
                                                                                 class="q-ma-xs"
-                                                                                color="red" class="icon="fas fa-times"
+                                                                                color="red"
+                                                                                icon="fas fa-times"
                                                                                 @click="fnDocumentRejectModal(subDocument)"
                                                                             />
                                                                         </q-item-section>
                                                                         <q-item-section v-else right>
                                                                             <span v-if="subDocument.documentVerifiedStatus == 1" class="text-body1 text-weight-medium  text-positive">Approved</span>
-                                                                            <span v-if="subDocument.documentVerifiedStatus == 3" class=" text-body1 text-weight-medium text-negative">Rejected</span>
+                                                                            <span v-if="subDocument.documentVerifiedStatus == 3" text-body1 text-weight-medium text-negative">Rejected</span>
                                                                         </q-item-section>
                                                                     </template>
                                                                     <div v-for="(item,subIndex) in subDocument.uploadedDocuments" :key="subIndex" class="q-py-sm">
                                                                         <div v-if="item.mimeType.includes('pdf')">
                                                                         <div @click="fnPDFViewModal(item.fileName)" class="cursor-pointer no-underline">
-                                                                            <q-icon name="fas fa-file-pdf" color="negative" class="/>
+                                                                            <q-icon name="fas fa-file-pdf" color="negative" />
                                                                             &nbsp;{{item.fileName}}
                                                                         </div>
                                                                         </div>
@@ -694,7 +734,8 @@
             <div class="col-md-12" align="right">
                 <q-btn
                     icon="block"
-                    color="grey-5" class="class="q-ma-sm text-dark"
+                    color="grey-5"
+                    class="q-ma-sm text-dark"
                     @click="$router.go(-1)"
                     label="Cancel"
                 />
@@ -707,7 +748,8 @@
                 />
                 <q-btn
                     icon="check"
-                    color="tertiary" class="class="q-ma-sm disabled no-pointer-events"
+                    color="tertiary"
+                    class="q-ma-sm disabled no-pointer-events"
                     @click="fnApproveLeadData(getShortLeadInfo)"
                     label="PROCEED TO DATA ENTRY"
                      v-if="!showProceedToDataEntryButton"
@@ -715,7 +757,8 @@
                 <q-btn
                     icon="clear"
                     class="q-ma-sm"
-                    color="negative" class="label="REJECT"
+                    color="negative"
+                    label="REJECT"
                     @click="fnToggleRejectLeadComp"
                 />
             </div>

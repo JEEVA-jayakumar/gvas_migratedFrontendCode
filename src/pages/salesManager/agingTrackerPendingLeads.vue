@@ -24,7 +24,8 @@
               :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
               @click="props.toggleFullscreen"
               class="q-mt-lg"
-              color="grey-9" size="sm"
+              color="grey-9"
+              size="sm"
             />
           </div>-->
           <!--END: table fullscreen mode -->
@@ -32,7 +33,8 @@
           <div class="col-md-5">
             <q-input
               clearable
-              color="grey-9" v-model="filter"
+              color="grey-9"
+              v-model="filter"
               placeholder="Type.."
               label="Search by SO name, Merchant Name, Lead ID"
               class="q-mr-lg q-py-sm"

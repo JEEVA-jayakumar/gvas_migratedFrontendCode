@@ -47,7 +47,8 @@
               <div class="q-py-sm">
                 <q-btn
                   @click="fetchCurrentUserLeads(activeUserId,$SALES_MANAGER_STATUS_SHORT_LEADS)"
-                  color="purple-9" size="md"
+                  color="purple-9"
+                  size="md"
                   round
                 >{{statusCount.shortLeadCount == undefined ? 0 : statusCount.shortLeadCount}}</q-btn>
               </div>
@@ -57,7 +58,8 @@
               <div class="q-py-sm">
                 <q-btn
                   @click="fetchCurrentUserLeads(activeUserId,$SALES_MANAGER_STATUS_WIP_LEADS)"
-                  color="purple-9" size="md"
+                  color="purple-9"
+                  size="md"
                   round
                 >{{statusCount.wipLeadCount == undefined ? 0 : statusCount.wipLeadCount}}</q-btn>
               </div>
@@ -67,7 +69,8 @@
               <div class="q-py-sm">
                 <q-btn
                   @click="fetchCurrentUserLeads(activeUserId,$SALES_MANAGER_STATUS_REJECTED_LEADS)"
-                  color="purple-9" size="md"
+                  color="purple-9"
+                  size="md"
                   round
                 >{{statusCount.rejectedLeadCount == undefined ? 0 : statusCount.rejectedLeadCount}}</q-btn>
               </div>
@@ -77,7 +80,8 @@
               <div class="q-py-sm">
                 <q-btn
                   @click="fetchCurrentUserLeads(activeUserId,$SALES_MANAGER_STATUS_IMPLEMENTATION_LEADS)"
-                  color="purple-9" size="md"
+                  color="purple-9"
+                  size="md"
                   round
                 >{{statusCount.implementationCount == undefined ? 0 : statusCount.implementationCount}}</q-btn>
               </div>
@@ -87,7 +91,8 @@
               <div class="q-py-sm">
                 <q-btn
                   @click="fetchCurrentUserLeads(activeUserId,$SALES_MANAGER_STATUS_SUBMIT_TO_SAT_LEADS)"
-                  color="purple-9" size="md"
+                  color="purple-9"
+                  size="md"
                   round
                 >{{statusCount.submitToSatCount == undefined ? 0 : statusCount.submitToSatCount}}</q-btn>
               </div>
@@ -108,7 +113,8 @@
             clearable
             v-model="filter"
             separator
-            color="grey-9" class="placeholder="Type.."
+            color="grey-9"
+            placeholder="Type.."
             label="Search"
           />
         </div>
@@ -140,7 +146,8 @@
       <q-tabs
         v-if="!viewTableFormatAndNotTabs"
         v-model="tabsModel"
-        text-color="grey-14" class="color="white"
+        text-color="grey-14"
+        color="white"
         two-lines
         no-pane-border
       >
@@ -157,11 +164,7 @@
      
         <!--END: tabs header -->
         <!--START: tabs body -->
-
-        <!--END: tabs body -->
-      </q-tabs>
-<q-tab-panels v-model="tabsModel" animated>
-<q-tab-panel
+        <q-tab-panel
           v-for="tBodyContent in tabs.tabsBody"
           :key="tBodyContent.value"
           :name="tBodyContent.value"
@@ -190,7 +193,8 @@
           </q-table>
           <!--END: table table aging pending/reject -->
         </q-tab-panel>
-</q-tab-panels>
+        <!--END: tabs body -->
+      </q-tabs>
     </div>
   </q-page>
 </template>
@@ -689,7 +693,7 @@ export default {
           self.$q.notify({
             color: "negative",
             position: "bottom",
-            message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
             icon: "thumb_down"
           });
           this.$q.loading.hide();

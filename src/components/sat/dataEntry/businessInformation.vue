@@ -3,7 +3,8 @@
     <div class="row gutter-sm">
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9" class="@blur="v$.merchant.businessInformation.weekdayStartHour.$touch"
+          color="grey-9"
+          @blur="v$.merchant.businessInformation.weekdayStartHour.$touch"
           :error="v$.merchant.businessInformation.weekdayStartHour.$error"
           v-model="merchant.businessInformation.weekdayStartHour"
           label="Weekday start hour (00.00)"
@@ -12,7 +13,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9" class="@blur="v$.merchant.businessInformation.weekdayEndHour.$touch"
+          color="grey-9"
+          @blur="v$.merchant.businessInformation.weekdayEndHour.$touch"
           :error="v$.merchant.businessInformation.weekdayEndHour.$error"
           v-model="merchant.businessInformation.weekdayEndHour"
           label="Weekday end hour (00.00)"
@@ -21,7 +23,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9" class="@blur="v$.merchant.businessInformation.weekendStartHour.$touch"
+          color="grey-9"
+          @blur="v$.merchant.businessInformation.weekendStartHour.$touch"
           :error="v$.merchant.businessInformation.weekendStartHour.$error"
           v-model="merchant.businessInformation.weekendStartHour"
           label="Weekend start hour (00.00)"
@@ -30,7 +33,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9" class="@blur="v$.merchant.businessInformation.weekendEndHour.$touch"
+          color="grey-9"
+          @blur="v$.merchant.businessInformation.weekendEndHour.$touch"
           :error="v$.merchant.businessInformation.weekendEndHour.$error"
           v-model="merchant.businessInformation.weekendEndHour"
           label="Weekend end hour (00.00)"
@@ -39,7 +43,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12 col-xs-12">
         <q-input
-          color="grey-9" class="@blur="v$.merchant.businessInformation.lastTurnoverYear.$touch"
+          color="grey-9"
+          @blur="v$.merchant.businessInformation.lastTurnoverYear.$touch"
           :error="v$.merchant.businessInformation.lastTurnoverYear.$error"
           v-model="merchant.businessInformation.lastTurnoverYear"
           label="Last turnover year"
@@ -48,7 +53,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9" class="type="number"
+          color="grey-9"
+          type="number"
           @blur="v$.merchant.businessInformation.lastTurnoverAmount.$touch"
           :error="v$.merchant.businessInformation.lastTurnoverAmount.$error"
           v-model="merchant.businessInformation.lastTurnoverAmount"
@@ -58,7 +64,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9" class="type="number"
+          color="grey-9"
+          type="number"
           @blur="v$.merchant.businessInformation.expectedCardBusiness.$touch"
           :error="v$.merchant.businessInformation.expectedCardBusiness.$error"
           v-model="merchant.businessInformation.expectedCardBusiness"
@@ -68,7 +75,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9" class="type="number"
+          color="grey-9"
+          type="number"
           @blur="v$.merchant.businessInformation.averageBillAmount.$touch"
           :error="v$.merchant.businessInformation.averageBillAmount.$error"
           v-model="merchant.businessInformation.averageBillAmount"
@@ -79,7 +87,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           upper-case
-          color="grey-9" class="@blur="v$.merchant.businessInformation.gstId.$touch"
+          color="grey-9"
+          @blur="v$.merchant.businessInformation.gstId.$touch"
           :error="v$.merchant.businessInformation.gstId.$error"
           v-model="merchant.businessInformation.gstId"
           label="GST ID"
@@ -88,14 +97,16 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9" v-model="merchant.businessInformation.currentPosName"
+          color="grey-9"
+          v-model="merchant.businessInformation.currentPosName"
           label="Name of the other POS Currentlly Used"
           placeholder="Name of the other POS Currentlly Used"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9" class="@blur="v$.merchant.businessInformation.debitCardMdr.$touch"
+          color="grey-9"
+          @blur="v$.merchant.businessInformation.debitCardMdr.$touch"
           :error="v$.merchant.businessInformation.debitCardMdr.$error"
           v-model="merchant.businessInformation.debitCardMdr"
           label="Debit Card MDR"
@@ -104,7 +115,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          color="grey-9" class="@blur="v$.merchant.businessInformation.creditCardMdr.$touch"
+          color="grey-9"
+          @blur="v$.merchant.businessInformation.creditCardMdr.$touch"
           :error="v$.merchant.businessInformation.creditCardMdr.$error"
           v-model="merchant.businessInformation.creditCardMdr"
           label="Credit Card MDR"
@@ -117,7 +129,8 @@
           format-model="number"
           @blur="v$.merchant.businessInformation.memberSince.$touch"
           :error="v$.merchant.businessInformation.memberSince.$error"
-          color="grey-9" class="modal
+          color="grey-9"
+          modal
           v-model="merchant.businessInformation.memberSince"
           label="Member since"
           placeholder="Member since"
@@ -125,14 +138,15 @@
       </div>
     </div>
     <q-stepper-navigation>
-      <q-btn color="primary" class="class="q-ma-xs" icon="check" @click="validate" label="Continue"/>
+      <q-btn color="primary" class="q-ma-xs" icon="check" @click="validate" label="Continue"/>
       <q-btn
-        color="amber-10" class="class="q-ma-xs"
+        color="amber-10"
+        class="q-ma-xs"
         icon="save"
         label="Save Partial"
         @click="$emit('saveData')"
       />
-      <q-btn color="grey-7" class="class="q-ma-xs" icon="block" @click="$emit('goBack')" label="Back"/>
+      <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="$emit('goBack')" label="Back"/>
     </q-stepper-navigation>
     <div class="hidden">{{makePropsReactive}}</div>
   </div>

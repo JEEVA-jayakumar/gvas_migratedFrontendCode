@@ -14,7 +14,8 @@
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
               <q-select
-              color="grey-9" class="label="Choose a region"
+              color="grey-9"
+              label="Choose a region"
               v-model="userMapping.region.id"
               :error="v$.userMapping.region.id.$error"
               @blur="v$.userMapping.region.id.$touch"
@@ -23,7 +24,8 @@
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
               <q-select
-              color="grey-9" class="@input="fnPopulateRolesByHeirarchy(userMapping.hierarchy.id)"
+              color="grey-9"
+              @input="fnPopulateRolesByHeirarchy(userMapping.hierarchy.id)"
               label="Choose a hierarchy"
               v-model="userMapping.hierarchy.id"
               :error="v$.userMapping.hierarchy.id.$error"
@@ -33,7 +35,8 @@
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
               <q-select
-              color="grey-9" class=":readonly=disableRolesSelection
+              color="grey-9"
+              :readonly=disableRolesSelection
               :disabled=disableRolesSelection
               :class="[disableRolesSelection?'no-pointer-events':'']"
               @input="fnPopulateUsersByRole"
@@ -46,7 +49,8 @@
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
               <q-select
-              color="grey-9" class=":readonly=disablePreceederSelection
+              color="grey-9"
+              :readonly=disablePreceederSelection
               :disabled=disablePreceederSelection
               :class="[disablePreceederSelection?'no-pointer-events':'']"
               label="Choose a predecessor"

@@ -16,10 +16,11 @@
               :max-height="100"
               rows="3"
               label="Reason"
-              color="grey-9" class="align="left"
+              color="grey-9"
+              align="left"
               v-model="formData.leadDetails.reason"
           />
-          <q-btn icon="done" color="positive" class="class="q-ma-sm float-right" @click="fnApproveLeadDocumentFinal(formData)" align="right" label="Approve" />
+          <q-btn icon="done" color="positive" class="q-ma-sm float-right" @click="fnApproveLeadDocumentFinal(formData)" align="right" label="Approve" />
           <q-btn icon="block" color="grey-5" @click="emitToggleRemarks" class="q-ma-sm float-right text-dark" align="right" v-close-overlay label="Cancel" />
           <!-- END >> Give reason to approve(optional) document -->
           <!-- <pre>{{formData}}</pre> -->

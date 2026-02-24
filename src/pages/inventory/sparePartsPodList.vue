@@ -19,7 +19,8 @@
         table-class="customTableClass"
         :columns="columns"
         :rows="tableData"
-        color="grey-9" class=":filter="filterSearch"
+        color="grey-9"
+        :filter="filterSearch"
         :pagination="paginationControl"
         :rows-per-page-options="[5, 10, 15, 20, 25]"
         :loading="toggleAjaxLoadFilter"
@@ -75,7 +76,8 @@
             highlight
             push
             class="q-mx-sm"
-            color="positive" size="sm"
+            color="positive"
+            size="sm"
             :disable="props.row.status == 1 || props.row.status == 3 || props.row.status == 5 || props.row.status ==6 && props.row.owner ==2 ||  props.row.status ==undefined"
             @click="updatePodDetails(props.row)"
             >Update</q-btn
@@ -86,7 +88,8 @@
           <div class="col-md-5">
             <q-input
               clearable
-              color="grey-9" v-model="filterSearch"
+              color="grey-9"
+              v-model="filterSearch"
               placeholder="Type.."
               label="Search Using POD Number"
               class="q-mr-lg q-py-sm"
@@ -97,7 +100,8 @@
             <q-btn 
             square 
             outline 
-            color="purple-9" class="label="Add New Spare"
+            color="purple-9"
+            label="Add New Spare"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloadLostOrStolenList()" />
@@ -109,7 +113,8 @@
               class="text-weight-regular"
               @click="$router.push('/inventory/master/sparePartsInventory')"
               label="Add Spare"
-              color="purple-9" size="md"
+              color="purple-9"
+              size="md"
             />
           </div>
           <!--END: table filter,search -->
@@ -382,7 +387,7 @@ export default {
     //   // document.body.appendChild(element);
 
     //   // element.click();
-    //   let clickable = document.createElement("a");
+    //   let link = document.createElement("a");
     //   link.href = window.URL.createObjectURL(file);
     //   link.download = "serialNumber.txt";
 

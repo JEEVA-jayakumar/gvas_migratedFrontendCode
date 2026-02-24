@@ -15,7 +15,8 @@
         <div class="col-auto text-h6">Reassign History</div>
         <q-btn
           flat
-          color="red" class="round
+          color="red"
+          round
           size="md"
           icon="close"
           @click="emitAssignHistoryList(toggleModel)"

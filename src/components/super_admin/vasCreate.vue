@@ -21,7 +21,8 @@
                 @blur="v$.formData.name.$touch"
                 :error="v$.formData.name.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="Enter VAS"
+                color="grey-9"
+                label="Enter VAS"
                 placeholder="Enter VAS"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -32,7 +33,8 @@
               @blur="v$.formData.vasCode.$touch"
               :error="v$.formData.vasCode.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Enter VAS Code"
+              color="grey-9"
+              label="Enter VAS Code"
               placeholder="Enter VAS Code"
               @keyup.enter="submitLeadSourceData(formData)"
               
@@ -49,7 +51,8 @@
                 class="bg-white text-weight-regular text-grey-8"
                 @click="toggleModal()"
               >Cancel</q-btn>
-              <q-btn align="right" @click="submitVasData(formData)" color="purple-9">Save</q-btn>" class="</div>
+              <q-btn align="right" @click="submitVasData(formData)" color="purple-9">Save</q-btn>
+            </div>
           </div>
         </form>
       </q-dialog>
@@ -134,7 +137,7 @@
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down"
               });
             });

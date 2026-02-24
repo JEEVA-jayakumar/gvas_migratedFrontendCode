@@ -6,7 +6,8 @@
        <!-- <q-btn
           icon="cloud_upload"
           class="q-ma-sm"
-          color="positive" class="label="Upload Bank List"
+          color="positive"
+          label="Upload Bank List"
           @click="fnUploadDocumentAndSubmit"
         />-->
       </div>
@@ -33,7 +34,8 @@
                 @blur="v$.formData.emp_id.$touch"
                 :error="v$.formData.emp_id.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*Enter Serial Number"
+                color="grey-9"
+                label="*Enter Serial Number"
                 
               />
               </div>
@@ -45,7 +47,8 @@
         <q-btn
           size="md"
           type="button"
-          color="purple-9" @click="fnSubmitBankDetails(formData)"
+          color="purple-9"
+          @click="fnSubmitBankDetails(formData)"
         >Submit</q-btn>
       </div>
     </form>

@@ -1,23 +1,19 @@
 <template>
     <q-page>
         <div>
-            <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" class="@select="goToCompleteTab">
-                <q-tab default color="dark" class="name="tab-1"  label="Pending Tickets" />
-                <q-tab color="dark" class="name="tab-2"  label="Completed Tickets" />
-
-
-            </q-tabs>
-<q-tab-panels v-model="activeTab" animated>
-<q-tab-panel name="tab-1">
+            <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @select="goToCompleteTab">
+                <q-tab default color="dark" name="tab-1"  label="Pending Tickets" />
+                <q-tab color="dark" name="tab-2"  label="Completed Tickets" />
+                <q-tab-panel name="tab-1">
                     <div class="row items-center">
                         <div class="col">
                             <strong> Open For </strong>
                         </div>
                         <q-select class="col" v-model.trim="formData.date" :options="dateType" 
-                            color="grey" class="@input="dateClick">
+                            color="grey" @input="dateClick">
                         </q-select>
                         <div class="col-5"></div>
-                        <q-input class="col-5" clearable color="grey-9" class="placeholder="Type.." v-model="filter"
+                        <q-input class="col-5" clearable color="grey-9" placeholder="Type.." v-model="filter"
                         label="Search By Ticket No, Merchant No..." />
                     </div>
                     <q-table table-class="customTableClass" class="q-py-none" :rows="tableData" :columns="columns"
@@ -51,9 +47,9 @@
                         }}</q-td>
                     </q-table>
                 </q-tab-panel>
-<q-tab-panel name="tab-2">
+                <q-tab-panel name="tab-2">
                     <div class="row">
-                        <q-input class="col-4" v-model="filter1" clearable color="grey-9" class="placeholder="Type.."
+                        <q-input class="col-4" v-model="filter1" clearable color="grey-9" placeholder="Type.."
                         label="Search By Ticket No, Merchant No..." />
                     </div>
                     <q-table table-class="customTableClass" class="q-py-none" :rows="tableData1" :columns="columns2"
@@ -71,7 +67,7 @@
                     </q-table>
 
                 </q-tab-panel>
-</q-tab-panels>
+            </q-tabs>
 
         </div>
         <bijlipayAddRemarks v-if="propToggleRemarks" :remarksInfo="addBasicInformation"

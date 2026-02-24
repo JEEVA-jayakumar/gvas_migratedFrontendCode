@@ -38,7 +38,8 @@
               @click="emitfnshowservice()"
               >Cancel</q-btn
             >
-            <q-btn align="right" @click="submitShortLead()" color="purple-9" class=">submit</q-btn
+            <q-btn align="right" @click="submitShortLead()" color="purple-9"
+              >submit</q-btn
             >
           </div>
         </div>
@@ -96,7 +97,9 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              error.body.message == null
+                ? "Please Try Again Later !"
+                : error.body.message,
             icon: "thumb_down",
           });
         });

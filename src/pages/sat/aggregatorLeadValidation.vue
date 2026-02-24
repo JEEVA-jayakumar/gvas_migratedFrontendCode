@@ -83,7 +83,8 @@
               highlight
               push
               class="disabled"
-              color="positive" size="sm"
+              color="positive"
+              size="sm"
             >Mars Approved</q-btn>
 
             <span
@@ -99,7 +100,8 @@
               highlight
               push
               class="disabled"
-              color="purple-9" size="sm"
+              color="purple-9"
+              size="sm"
             >Submitted To Mars</q-btn>
 
             <span class="label text-negative" v-else>Pending</span>
@@ -132,7 +134,8 @@
             highlight
             push
             class="q-mx-sm"
-            color="positive" size="sm"
+            color="positive"
+            size="sm"
             @click="additionalTid(props.row)"
           >Additional TID</q-btn>
         </q-td> -->
@@ -143,7 +146,8 @@
               clearable
               v-model="filter"
               separator
-              color="grey-9" class="placeholder="Type.."
+              color="grey-9"
+              placeholder="Type.."
               label="Search By Merchant Name, Lead ID.."
               class="q-mr-lg q-py-sm"
             />

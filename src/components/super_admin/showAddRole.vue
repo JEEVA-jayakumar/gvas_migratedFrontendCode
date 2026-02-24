@@ -25,7 +25,8 @@
             v-model="formData.hierarchyId"
             label="Hierarchy"
             placeholder="Select Hierarchy"
-            class="text-weight-regular text-grey-8" color="grey-9" class=":options="getAllHierarchiesData"
+            class="text-weight-regular text-grey-8" color="grey-9"
+            :options="getAllHierarchiesData"
               />
           </div>
           </div>
@@ -37,7 +38,8 @@
             @blur="v$.formData.role.$touch"
             :error="v$.formData.role.$error"
             class="text-weight-regular text-grey-8" 
-            color="grey-9" class="label="Role"
+            color="grey-9"
+            label="Role"
              placeholder="Role" /> 
           </div>
 
@@ -48,14 +50,16 @@
               v-model="formData.roleColor"
               @blur="v$.formData.roleColor.$touch"
              :error="v$.formData.roleColor.$error"
-              popover label="Choose a role color" color="grey-9" class="/>
+              popover label="Choose a role color" color="grey-9"
+            />
           </div>
         </div>
 
           <div class="group" align="right">
           <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitToggleMyAccount()">Cancel
           </q-btn>
-          <q-btn size="md" align="right" @click="fnAddRoleSubmit(formData)" color="purple-9">Save" class="</q-btn>
+          <q-btn size="md" align="right" @click="fnAddRoleSubmit(formData)" color="purple-9">Save
+          </q-btn>
         </div>
         
       </div>
@@ -178,7 +182,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

@@ -53,7 +53,7 @@
                 <q-separator />
                 <q-card-section>
                   <q-item dense>
-                    <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                    <q-item-section icon="attach_file" />
                     <q-item-section>{{
                       formData.fileSelected[0].name
                     }}</q-item-section>
@@ -65,7 +65,8 @@
                   <q-btn
                     outline
                     size="sm"
-                    color="negative" @click="removeBulkUploadFile"
+                    color="negative"
+                    @click="removeBulkUploadFile"
                     label="Remove"
                     icon="clear"
                   />
@@ -163,7 +164,8 @@
                 clearable
                 v-model="filter"
                 separator
-                color="grey-9" class="placeholder="Type.."
+                color="grey-9"
+                placeholder="Type.."
                 label="Search Using MID"
                 class="q-mr-lg q-py-sm"
               />
@@ -511,7 +513,9 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              error.body.message == null
+                ? "Please Try Again Later !"
+                : error.body.message,
             icon: "thumb_down"
           });
         });

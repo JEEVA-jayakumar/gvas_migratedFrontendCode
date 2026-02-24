@@ -20,7 +20,8 @@
             row-key="id"
             :loading="tableAjaxLoading"
             :rows-per-page-options="[10,20,50,100,150,200]"
-            color="dark" class="@request="ajaxLoadAllLeadInfo"
+            color="dark"
+            @request="ajaxLoadAllLeadInfo"
           >
             <q-td
               v-slot:body-cell-leadNumber="props"
@@ -41,7 +42,8 @@
               <div class="col-md-5">
                 <q-input
                   clearable
-                  color="grey-9" v-model="filterSearch"
+                  color="grey-9"
+                  v-model="filterSearch"
                   placeholder="Type.."
                   label="Search By Lead Number"
                   class="q-mr-lg q-py-sm"

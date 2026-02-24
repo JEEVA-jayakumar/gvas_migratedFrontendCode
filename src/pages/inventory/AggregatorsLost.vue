@@ -19,7 +19,8 @@
           :propToggleLeadInformationPop="propToggleLeadInformation" @closeLeadInformation="toggleLeadInformation" />
         <!-- content -->
         <!--START: table lead validation -->
-        <q-table table-class="customTableClass" :columns="columns" :rows="tableData" color="grey-9" class=":filter="filterSearch" :pagination="paginationControl" :rows-per-page-options="[5, 10, 15, 20, 25]"
+        <q-table table-class="customTableClass" :columns="columns" :rows="tableData" color="grey-9"
+          :filter="filterSearch" :pagination="paginationControl" :rows-per-page-options="[5, 10, 15, 20, 25]"
           :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
           <q-td v-slot:body-cell-updated_at="props" :props="props">{{
             props.row.updatedAt == null ? "NA" :
@@ -33,7 +34,7 @@
             </div>
             <div class="col-md-5">
 
-              <q-btn square outline color="purple-9" class="label="Download as Excel" class="q-mr-lg q-py-sm float-right"
+              <q-btn square outline color="purple-9" label="Download as Excel" class="q-mr-lg q-py-sm float-right"
                 size="md" @click="downloadAggregatorsLostOrStolenList" />
 
             </div>
@@ -218,7 +219,7 @@ export default {
     //   // document.body.appendChild(element);
 
     //   // element.click();
-    //   let clickable = document.createElement("a");
+    //   let link = document.createElement("a");
     //   link.href = window.URL.createObjectURL(file);
     //   link.download = "serialNumber.txt";
 

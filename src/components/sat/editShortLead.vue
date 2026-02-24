@@ -20,7 +20,8 @@
               @keyup.enter="submitShortLead(formData)"
               v-model="formData.id"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="leadId"
+              color="grey-9"
+              label="leadId"
               placeholder="leadId"
             />
           </div>
@@ -31,7 +32,8 @@
               v-model="formData.leadName"
               :error="v$.formData.leadName.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="leadName"
+              color="grey-9"
+              label="leadName"
               placeholder="leadName"
             />
           </div>
@@ -42,7 +44,8 @@
               v-model="formData.leadNumber"
               :error="v$.formData.leadNumber.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="leadNumber"
+              color="grey-9"
+              label="leadNumber"
               placeholder="leadNumber"
             />
           </div>
@@ -53,7 +56,8 @@
               v-model="formData.shortleadDate"
               :error="v$.formData.shortleadDate.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="shortleadDate"
+              color="grey-9"
+              label="shortleadDate"
               placeholder="shortleadDate"
             />
           </div>
@@ -64,7 +68,8 @@
               v-model="formData.contactNumber"
               :error="v$.formData.contactNumber.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="contactNumber"
+              color="grey-9"
+              label="contactNumber"
               placeholder="contactNumber"
             />
           </div>
@@ -76,7 +81,8 @@
               class="bg-white text-weight-regular text-grey-8"
               @click="emitfnshowEditShortLead()"
             >Cancel</q-btn>
-            <q-btn align="right" @click="submitShortLead(formData)" color="purple-9">Save</q-btn>" class="</div>
+            <q-btn align="right" @click="submitShortLead(formData)" color="purple-9">Save</q-btn>
+          </div>
         </div>
       </form>
     </q-dialog>
@@ -170,7 +176,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

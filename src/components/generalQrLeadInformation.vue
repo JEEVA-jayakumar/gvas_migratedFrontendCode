@@ -10,7 +10,7 @@
         <div class="row items-center bottom-border q-py-sm">
           <div class="col">Lead Information</div>
           <div class="col-auto">
-            <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" class="icon="clear"/>
+            <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" icon="clear"/>
           </div>
         </div>
   
@@ -27,12 +27,14 @@
                 </q-item> -->
                 <!-- <q-item multiline v-if="propLeadInformation.leadCategory == 2">
                   <q-item-section v-if="propLeadInformation.kyc">
-                    <q-chip icon="warning" color="primary">KYC</q-chip>" class="</q-item-section>
+                    <q-chip icon="warning" color="primary">KYC</q-chip>
+                  </q-item-section>
                   <q-item-section v-if="propLeadInformation.bankSubvention">
-                    <q-chip icon="warning" color="primary">Bank" class="Subvention</q-chip>
+                    <q-chip icon="warning" color="primary">Bank Subvention</q-chip>
                   </q-item-section>
                   <q-item-section v-if="propLeadInformation.pricing">
-                    <q-chip icon="warning" color="primary">Pricing</q-chip>" class="</q-item-section>
+                    <q-chip icon="warning" color="primary">Pricing</q-chip>
+                  </q-item-section>
                 </q-item> -->
                 <!-- <q-item multiline>
                   <q-item-section

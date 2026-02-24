@@ -16,7 +16,8 @@
         <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
       </div>
     </div>
-    <q-tabs color="grey-9">" class="<!-- Tabs - notice  -->
+    <q-tabs color="grey-9">
+      <!-- Tabs - notice  -->
       <q-tab @select="fetchMerchantTypeList" default  label="Active List" name="tab-1"/>
       <q-tab
         @select="fetchMerchantTypeDeActivatedList"
@@ -35,7 +36,8 @@
           :pagination="paginationControl"
           :filter-method="myCustomSearchFilter"
           row-key="name"
-          color="grey-9" class=">
+          color="grey-9"
+        >
           <q-td v-slot:body-cell-action="props" :props="props">
             <div class="row no-wrap no-padding">
               <q-btn
@@ -68,7 +70,8 @@
             <div class="col-8">
               <q-input
                 clearable
-                color="grey-9" v-model="filterSearch"
+                color="grey-9"
+                v-model="filterSearch"
                 placeholder="Type.."
                 label="Search merchant type"
               />
@@ -79,7 +82,8 @@
                 no-wrap
                 label="Add New"
                 class="text-weight-regular"
-                color="purple-9" class="icon="far fa-plus-square"
+                color="purple-9"
+                icon="far fa-plus-square"
                 @click="fnshowCreateMerchantType()"
               />
             </div>
@@ -96,7 +100,8 @@
           :pagination="paginationControl"
           :filter-method="myCustomSearchFilter"
           row-key="name"
-          color="grey-9" class=">
+          color="grey-9"
+        >
           <q-td v-slot:body-cell-action="props" :props="props">
             <div class="row no-wrap no-padding">
               <q-btn
@@ -118,7 +123,8 @@
             <div class="col-8">
               <q-input
                 clearable
-                color="grey-9" v-model="deActivatedSearch"
+                color="grey-9"
+                v-model="deActivatedSearch"
                 placeholder="Type.."
                 label="Search merchant type"
               />

@@ -11,7 +11,7 @@
         <div class="row gutter-sm q-py-sm items-center">
           <q-card style="width:100%">
             <q-card-section>
-              <q-list >
+              <q-list no-border>
 
                 <q-item>
                   <q-item-section>
@@ -29,13 +29,13 @@
                         v$.formData.prefix.$params
                           .required
                       ">
-                        <q-icon color="negative" class="name="warning" />&nbsp;Required
+                        <q-icon color="negative" name="warning" />&nbsp;Required
                       </div>
                       <div v-if="
                         v$.formData.prefix.$params
                           .minLength
                       ">
-                        <q-icon color="negative" class="name="warning" />
+                        <q-icon color="negative" name="warning" />
                         &nbsp;Length should be between
                         {{
                             v$.formData.prefix.$params
@@ -59,7 +59,8 @@
           <div class="col-md-12 group" align="right">
             <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="toggleModal()">Cancel
             </q-btn>
-            <q-btn align="right" @click="submitCreatePrefix(formData)" color="purple-9">Save</q-btn>" class="</div>
+            <q-btn align="right" @click="submitCreatePrefix(formData)" color="purple-9">Save</q-btn>
+          </div>
         </div>
       </form>
     </q-dialog>
@@ -205,7 +206,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

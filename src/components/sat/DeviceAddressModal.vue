@@ -29,23 +29,23 @@
           </q-input>
         </div>
         <div>
-         <q-input color="grey-9" class="disable v-model="formData.marsDeviceAddress.state" label="State" placeholder="State" />
+         <q-input color="grey-9" disable v-model="formData.marsDeviceAddress.state" label="State" placeholder="State" />
         </div>
         <div>
-          <q-input color="grey-9" class="disable v-model="formData.marsDeviceAddress.city" label="City" placeholder="City" />
+          <q-input color="grey-9" disable v-model="formData.marsDeviceAddress.city" label="City" placeholder="City" />
         </div>
         <div>
-          <q-radio color="grey-9" class="v-if="[0,1].includes(selectedLeadItems.length)" v-model="formData.action" :val="1" label="Change in current occurrence only" />
+          <q-radio color="grey-9" v-if="[0,1].includes(selectedLeadItems.length)" v-model="formData.action" :val="1" label="Change in current occurrence only" />
         </div>
         <div>
-          <q-radio color="grey-9" class="v-if="selectedLeadItems.length > 1" v-model="formData.action" :val="2" label="Change in all selected occurrences" />
+          <q-radio color="grey-9" v-if="selectedLeadItems.length > 1" v-model="formData.action" :val="2" label="Change in all selected occurrences" />
         </div>
         <div>
           <q-radio color="grey-9" v-model="formData.action" :val="3" label="Change in all occurrences of this merchant" />
         </div>
         <div class="group" align="right">
-          <q-btn @click="closeModal" color="grey-6" class="icon="block" label="Cancel"/>
-          <q-btn @click="UpdateDeviceAddress(formData)" color="positive" class="icon="check" label="Save"/>
+          <q-btn @click="closeModal" color="grey-6" icon="block" label="Cancel"/>
+          <q-btn @click="UpdateDeviceAddress(formData)" color="positive" icon="check" label="Save"/>
         </div>
       </div>
     </form>
@@ -158,7 +158,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

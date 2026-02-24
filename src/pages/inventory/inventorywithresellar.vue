@@ -47,7 +47,8 @@
               clearable
               v-model="filter"
               separator
-              color="grey-9" class="placeholder="Type.."
+              color="grey-9"
+              placeholder="Type.."
               label="Pod Number, Device Type"
               class="q-mr-lg q-py-sm"
             />
@@ -56,7 +57,8 @@
            <q-btn 
             square 
             outline 
-            color="purple-9" class="label="Download as Excel"
+            color="purple-9"
+            label="Download as Excel"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloadInventoryResellerList()" />
@@ -66,7 +68,7 @@
               :fields="json_fields"
               name="InventoryWithReseller.xls"
             >
-              <q-btn outline color="grey-9" class="label="Download as excel" />
+              <q-btn outline color="grey-9" label="Download as excel" />
             </downloadExcel> -->
           </div>
           <!--END: table excel download -->

@@ -20,7 +20,8 @@
                     </q-btn>
                   </div>
                   <div class="col-md-2">
-                    <q-btn size="md" align="right" @click="fnCreateRoleSubmit(formData.rolePermissions)" color="purple-9">Save" class="</q-btn>
+                    <q-btn size="md" align="right" @click="fnCreateRoleSubmit(formData.rolePermissions)" color="purple-9">Save
+                    </q-btn>
                   </div>
                 </div>
               </div>
@@ -37,7 +38,8 @@
                     :error="v$.formData.rolePermissions.hierarchyId.$error"
                     label="Hierarchy"
                     placeholder="Select Hierarchy"
-                    class="text-weight-regular text-grey-8" color="grey-9" class=":options="propGetAllHierarchiesData"
+                    class="text-weight-regular text-grey-8" color="grey-9"
+                    :options="propGetAllHierarchiesData"
                   />
                 </div> 
               </div>
@@ -49,7 +51,7 @@
                    <q-input v-model.trim="formData.rolePermissions.name" 
                     @blur="v$.formData.rolePermissions.name.$touch"
                     :error="v$.formData.rolePermissions.name.$error"
-                    class="text-weight-regular text-grey-8" color="grey-9" class="label="Role" placeholder="Role" />
+                    class="text-weight-regular text-grey-8" color="grey-9" label="Role" placeholder="Role" />
                 </div>
               </div>
             </div>  
@@ -62,7 +64,8 @@
                   v-model="formData.rolePermissions.roleColor"
                   @blur="v$.formData.rolePermissions.roleColor.$touch"
                   :error="v$.formData.rolePermissions.roleColor.$error"
-                  popover label="Choose a role color" color="grey-9" class="/>
+                  popover label="Choose a role color" color="grey-9"
+                  />
                 </div>
               </div>
             </div>  

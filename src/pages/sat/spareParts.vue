@@ -4,7 +4,8 @@
         <div class="col">
             <q-input
              label="Select POD Number"
-          color="grey-9" class="/>
+          color="grey-9"
+            />
 
         </div>
      <div class="col" align="right">

@@ -22,7 +22,8 @@
                           v-model="formData.id"   
                           :error="v$.formData.id.$error"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" class="label="Spare Parts Id"
+                          color="grey-9"
+                          label="Spare Parts Id"
                           placeholder="Spare Parts Id" 
                         />
                     </div>
@@ -31,7 +32,8 @@
                           v-model="formData.spare_parts_types"   
                           :error="v$.formData.spare_parts_types.$error"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" class="label="Spare Parts Id"
+                          color="grey-9"
+                          label="Spare Parts Id"
                           placeholder="Spare Parts Id" 
                         />
                     </div>
@@ -39,7 +41,8 @@
                 <div class="row gutter-sm q-py-sm items-center">
                     <div class="col-md-12 group" align="right">
                         <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnshowEditSpareParts()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitEditedSpareParts(formData)" color="purple-9">Save</q-btn>" class="</div>
+                        <q-btn align="right" @click="fnfinalsubmitEditedSpareParts(formData)" color="purple-9">Save</q-btn>
+                    </div>
                 </div>
             </form>
         </q-dialog>
@@ -127,7 +130,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down",
             });
           });

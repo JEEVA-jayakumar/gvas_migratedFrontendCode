@@ -43,7 +43,8 @@
               clearable
               v-model="filter"
               separator
-              color="grey-9" class="placeholder="Type.."
+              color="grey-9"
+              placeholder="Type.."
               label="Sim Number"
               class="q-mr-lg q-py-sm"
             />
@@ -67,7 +68,7 @@
               :fields="json_fields"
               name="InventoryWithReseller.xls"
             >
-              <q-btn outline color="grey-9" class="label="Download as excel" />
+              <q-btn outline color="grey-9" label="Download as excel" />
             </downloadExcel> -->
           </div>
           <!--END: table excel download -->

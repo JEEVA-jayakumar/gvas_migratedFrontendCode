@@ -17,20 +17,21 @@
                            :options="regionGroupOptions"
                         
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" class="label="Region Group"
+                          color="grey-9"
+                          label="Region Group"
                           placeholder="Region Group" 
                         />
                     </div> -->
                     <div class="col-md-12">
                         <q-input v-model="formData.device" @blur="v$.formData.device.$touch"
                             :error="v$.formData.device.$error" @keyup.enter="v$.formData.device.$touch"
-                            class="text-weight-regular text-grey-8" color="grey-9" class="label="Modify Device Name"
+                            class="text-weight-regular text-grey-8" color="grey-9" label="Modify Device Name"
                             placeholder="Modify Device Name" />
                     </div>
                     <div class="col-md-12">
                         <q-input disable v-model="formData.name" @blur="v$.formData.name.$touch"
                             :error="v$.formData.name.$error" @keyup.enter="v$.formData.name.$touch"
-                            class="text-weight-regular text-grey-8" color="grey-9" class="label="Modify Aggregator Name"
+                            class="text-weight-regular text-grey-8" color="grey-9" label="Modify Aggregator Name"
                             placeholder="Modify Aggregator Name" />
                     </div>
                 </div>
@@ -38,7 +39,8 @@
                     <div class="col-md-12 group" align="right">
                         <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8"
                             @click="emitfnShowEditAggregatorDevice()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitEdittedList(formData)" color="purple-9">Save</q-btn>" class="</div>
+                        <q-btn align="right" @click="fnfinalsubmitEdittedList(formData)" color="purple-9">Save</q-btn>
+                    </div>
                 </div>
             </form>
         </q-dialog>

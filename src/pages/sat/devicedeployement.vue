@@ -1,6 +1,7 @@
 <template>
   <q-page padding>
-    <q-stepper flat ref="stepper" v-model="step" color="secondary">" class="<q-step default name="campaign" title="Device Deployment">
+    <q-stepper flat ref="stepper" v-model="step" color="secondary">
+      <q-step default name="campaign" title="Device Deployment">
         <div>
           {{getImplementedQueue.cpvForm}}
           <div class="row gutter-sm q-my-xs">

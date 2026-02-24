@@ -14,7 +14,8 @@
         <div>
           <q-select
             disable
-            color="grey-9" class="@blur="v$.formData.url.merchantType.$touch"
+            color="grey-9"
+            @blur="v$.formData.url.merchantType.$touch"
             :error="v$.formData.url.merchantType.$error"
             v-model="formData.url.merchantType"
             :options="activeMerchantType"
@@ -25,7 +26,8 @@
         <div>
        
           <q-select
-            color="grey-9" class="@blur="v$.formData.params.documentType.$touch"
+            color="grey-9"
+            @blur="v$.formData.params.documentType.$touch"
             :error="v$.formData.params.documentType.$error"
             v-model="formData.params.documentType"
             :options="activeDocumentMerchantType"
@@ -35,7 +37,8 @@
         </div>
         <div>
           <q-input
-            color="grey-9" v-model="formData.params.subDocumentType"
+            color="grey-9"
+            v-model="formData.params.subDocumentType"
             label="Merchant Sub Document Type"
             placeholder="Merchant Sub Document Type"
           />
@@ -46,7 +49,8 @@
             @blur="v$.formData.params.marsDocumentId.$touch"
             :error="v$.formData.params.marsDocumentId.$error"
             class="text-weight-regular text-grey-8"
-            color="grey-9" class="type="number"
+            color="grey-9"
+            type="number"
             label="Mars Agreement Id"
             placeholder="Mars Agreement Id"
             @keyup.enter="submitMerchantSubDocumentTypeData(formData)"
@@ -62,7 +66,8 @@
           <q-btn
             align="right"
             @click="submitMerchantSubDocumentTypeData(formData)"
-            color="purple-9" class=">Save</q-btn>
+            color="purple-9"
+          >Save</q-btn>
         </div>
       </div>
     </q-dialog>
@@ -171,7 +176,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

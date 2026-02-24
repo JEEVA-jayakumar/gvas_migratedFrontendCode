@@ -53,7 +53,8 @@
     <div class="row group q-py-md items-center">
       <div class="col-6">
         <q-input
-          color="grey-9" v-model="leadDataEntryRemarks"
+          color="grey-9"
+          v-model="leadDataEntryRemarks"
           label="Remarks"
           placeholder="Remarks"
         />
@@ -65,14 +66,15 @@
       </div>
     </div>
     <q-stepper-navigation>
-      <q-btn color="primary" class="class="q-ma-xs" icon="check" @click="validate" label="Submit"/>
+      <q-btn color="primary" class="q-ma-xs" icon="check" @click="validate" label="Submit"/>
       <q-btn
-        color="amber-10" class="class="q-ma-xs"
+        color="amber-10"
+        class="q-ma-xs"
         icon="save"
         label="Save Partial"
         @click="$emit('saveData','kyc',merchant)"
       />
-      <q-btn color="grey-7" class="class="q-ma-xs" icon="block" @click="$emit('goBack')" label="Back"/>
+      <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="$emit('goBack')" label="Back"/>
     </q-stepper-navigation>
   </div>
 </template>

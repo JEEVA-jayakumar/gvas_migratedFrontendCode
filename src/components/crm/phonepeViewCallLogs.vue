@@ -15,7 +15,8 @@
             size="sm"
             @click="emitToggleRemarks"
             outline
-            color="dark" class="icon="clear"
+            color="dark"
+            icon="clear"
           />
         </div>
       </div>
@@ -129,7 +130,8 @@ export default {
             size="sm"
             @click="emitToggleRemarks"
             outline
-            color="dark" class="icon="clear"
+            color="dark"
+            icon="clear"
           />
         </div>
       </div>

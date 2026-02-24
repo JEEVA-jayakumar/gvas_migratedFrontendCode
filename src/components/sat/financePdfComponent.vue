@@ -14,13 +14,14 @@
             outline
             round
             size="sm"
-            color="dark" class="icon="clear"
+            color="dark"
+            icon="clear"
             @click="emitToggleRemarks"
           />
         </div>
       </div>
       <div class="row q-py-sm">
-        <!-- <q-list  class="no-padding"> -->
+        <!-- <q-list no-border class="no-padding"> -->
         <div class="full-width" v-if="isImage">
           <div class="image-container" >
             <img :src="pictureOfImageSource" alt="Zoomable Image"    @click="showZoom = true"  :height="'400px'"
@@ -45,7 +46,8 @@
                 />
               </viewer>
               <div @click="fnViewInvoiceImage()" class="ellipsis">
-                <q-icon name="fas fa-image" color="amber-9"/>" class="&nbsp;{{ itemDetail.invoiceName }}
+                <q-icon name="fas fa-image" color="amber-9"/>
+                &nbsp;{{ itemDetail.invoiceName }}
               </div>
             </div>
             <div v-else  class="full-width">

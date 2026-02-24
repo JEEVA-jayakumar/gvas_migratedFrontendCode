@@ -18,14 +18,16 @@
               v-model="formData.pod"
               :error="v$.formData.pod.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Pod Number"
+              color="grey-9"
+              label="Pod Number"
               placeholder="Pod NUmber"
             />
           </div>
           <div class="col-md-12">
             <q-select
               v-model="formData.region"
-              color="grey-9" class=":options="inventoryData.regionFilterOptions"
+              color="grey-9"
+              :options="inventoryData.regionFilterOptions"
               placeholder="Region"
               label="Region"
             />
@@ -37,7 +39,8 @@
               class="bg-white text-weight-regular text-grey-8"
               @click="emitfnshowEditRegion()"
             >Cancel</q-btn>
-            <q-btn align="right" @click="submitRegion(formData)" color="purple-9">Save</q-btn>" class="</div>
+            <q-btn align="right" @click="submitRegion(formData)" color="purple-9">Save</q-btn>
+          </div>
         </div>
       </form>
     </q-dialog>
@@ -122,7 +125,7 @@ export default {
             this.$q.notify({
               color: "amber",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

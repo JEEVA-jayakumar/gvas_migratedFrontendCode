@@ -52,7 +52,8 @@
             highlight
             push
             class="q-mx-sm"
-            color="positive" size="sm"
+            color="positive"
+            size="sm"
             @click="additionalTid(props.row)"
           >Additional TID</q-btn>
         </q-td>
@@ -63,7 +64,8 @@
               clearable
               v-model="filter"
               separator
-              color="grey-9" class="placeholder="Type.."
+              color="grey-9"
+              placeholder="Type.."
               label="Search Using MID"
               class="q-mr-lg q-py-sm"
             />

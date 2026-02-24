@@ -22,7 +22,8 @@
               class="bg-white text-weight-regular text-grey-8"
               @click="emitfnshowFinanceapproval()"
             >Cancel</q-btn>
-            <q-btn align="right" @click="downloadApproval(formData)" :disabled="submitDisabled" color="purple-9">Download</q-btn>" class="</div>
+            <q-btn align="right" @click="downloadApproval(formData)" :disabled="submitDisabled" color="purple-9">Download</q-btn>
+          </div>
         </div>
       </form>
     </q-dialog>

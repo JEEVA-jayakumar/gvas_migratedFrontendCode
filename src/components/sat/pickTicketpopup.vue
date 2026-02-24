@@ -40,7 +40,8 @@
                   style="width: 300px"
                   filter
                   clearable
-                  color="grey-9" v-model="formData.so"
+                  color="grey-9"
+                  v-model="formData.so"
                   :options="assignToOptions"
                   label="Select FSE Name*"
                 />
@@ -56,7 +57,8 @@
               label="Assign"
               style="width: 90px"
               @click="fnAssignTickets(formData)"
-              color="blue" class="/>
+              color="blue"
+            />
             <q-btn
               highlight
               push
@@ -65,7 +67,8 @@
               class="q-mx-sm"
               align="center"
               @click="emitfnshowUpdateOpenedExternal()"
-              color="negative" class="/>
+              color="negative"
+            />
           </q-card-actions>
         </q-card>
       </div>
@@ -209,7 +212,9 @@ export default {
                 color: "negative",
                 position: "bottom",
                 message:
-                  (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                  error.body.message == null
+                    ? "Please Try Again Later !"
+                    : error.body.message,
                 icon: "thumb_down"
               });
             });

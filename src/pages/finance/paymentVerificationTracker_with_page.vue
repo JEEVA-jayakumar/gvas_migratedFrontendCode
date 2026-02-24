@@ -13,7 +13,8 @@
           :rows="tableData"
           :columns="columns"
           row-key="field"
-          color="grey-9" class=":filter="filter"
+          color="grey-9"
+          :filter="filter"
           :pagination="paginationControl"
           :rows-per-page-options="[5,10,15,20]"
           @request="ajaxLoadAllPaymentTrackerInfo"
@@ -32,7 +33,8 @@
               <!--START: table expand button :Checkbox -->
               <q-td auto-width key="id" :props="props">
                 <q-checkbox
-                  color="grey-9" v-model="props.row.expand"
+                  color="grey-9"
+                  v-model="props.row.expand"
                   checked-icon="fas fa-chevron-up"
                   unchecked-icon="fas fa-chevron-down"
                   class="q-mr-md"
@@ -70,7 +72,8 @@
                   push
                   outline
                   class="q-mx-sm"
-                  color="negative" @click="openRejectModel(props.row)"
+                  color="negative"
+                  @click="openRejectModel(props.row)"
                   size="sm"
                 >Reject</q-btn>
                 <q-btn
@@ -78,7 +81,8 @@
                   push
                   outline
                   class="q-mx-sm"
-                  color="purple-9" size="sm"
+                  color="purple-9"
+                  size="sm"
                   @click="financeApproveSubmit(props.row.id)"
                 >Approve</q-btn>
               </q-td>
@@ -110,7 +114,7 @@
                       class="cursor-pointer"
                     >
                       <div @click="fnPDFViewModal(props.row.paymentDocumentFile)">
-                        <q-icon name="fas fa-file-pdf" color="primary" class="/>
+                        <q-icon name="fas fa-file-pdf" color="primary" />
                         &nbsp;{{props.row.paymentDocumentFile}}
                       </div>
                     </div>
@@ -129,7 +133,7 @@
                             style="max-width:100%"
                           />
                         </viewer>
-                        <q-icon name="fas fa-image" color="amber-9" class="/>
+                        <q-icon name="fas fa-image" color="amber-9" />
                         &nbsp;{{props.row.paymentDocumentFile}}
                       </div>
                     </div>
@@ -171,7 +175,7 @@
                     <div
                       @click="fnPDFViewModal(fnShowBankUploadedDocumentBySat(props.row.leadVerificationStatus)[0].bankAttachedFile)"
                     >
-                      <q-icon name="fas fa-file-pdf" color="primary" class="/>
+                      <q-icon name="fas fa-file-pdf" color="primary" />
                       &nbsp;{{fnShowBankUploadedDocumentBySat(props.row.leadVerificationStatus)[0].bankAttachedFile}}
                     </div>
                   </div>
@@ -192,7 +196,7 @@
                           style="max-width:100%"
                         />
                       </viewer>
-                      <q-icon name="fas fa-image" color="amber-9" class="/>
+                      <q-icon name="fas fa-image" color="amber-9" />
                       &nbsp;{{fnShowBankUploadedDocumentBySat(props.row.leadVerificationStatus)[0].bankAttachedFile}}
                     </div>
                   </div>
@@ -210,7 +214,8 @@
             <div class="col-md-5">
               <q-input
                 clearable
-                color="grey-9" v-model="filter"
+                color="grey-9"
+                v-model="filter"
                 placeholder="Type.."
                 label="Search"
                 class="q-mr-lg q-py-sm"
@@ -501,7 +506,7 @@ export default {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down"
               });
             });

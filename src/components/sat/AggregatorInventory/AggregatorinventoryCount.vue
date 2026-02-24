@@ -240,7 +240,7 @@
                         <div class="col-md-5">
                             <downloadExcel :rows="getAllAggregatorsRegionalInventorySerialNumbersByDevice"
                                 :fields="json_fields" name="InventoryWithSO.xls">
-                                <q-btn outline color="grey-9" class="label="Download as excel" />
+                                <q-btn outline color="grey-9" label="Download as excel" />
                             </downloadExcel>
                         </div>
                     </template>

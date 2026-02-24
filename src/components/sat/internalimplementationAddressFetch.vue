@@ -6,7 +6,7 @@
       <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
         <q-card style="width:150%">
           <q-card-section>
-            <q-list >
+            <q-list no-border>
 
               <q-item>
                 <q-item-section>
@@ -14,7 +14,7 @@
                     :error="v$.formData.Address.$error" label="Address" />
                     
                     <div>
-                    <q-btn label="Search Address" @click="fnAddress(formData)" color="purple-9" class="/>
+                    <q-btn label="Search Address" @click="fnAddress(formData)" color="purple-9" />
                   </div>
 
                 </q-item-section>
@@ -30,7 +30,7 @@
 
               <q-item>
                 <q-item-section>
-                  <q-input color="grey-9" class="type="double" disable v-model="formData.longitude"
+                  <q-input color="grey-9" type="double" disable v-model="formData.longitude"
                     @blur="v$.formData.longitude.$touch" :error="v$.formData.longitude.$error"
                     label="Enter Longitude" placeholder="Add Longitude" />
                 </q-item-section>
@@ -39,7 +39,7 @@
           </q-card-section>
 
           <q-card-actions vertical align="end">
-            <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" class="/>
+            <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" />
           </q-card-actions>
         </q-card>
       </div>
@@ -194,7 +194,9 @@ export default {
               color: "amber-9",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                error.body.message == null
+                  ? "Please Try Again Later !"
+                  : error.body.message,
               icon: "thumb_down",
             });
           });
@@ -241,7 +243,9 @@ export default {
               color: "amber-9",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                error.body.message == null
+                  ? "Please Try Again Later !"
+                  : error.body.message,
               icon: "thumb_down",
             });
           });

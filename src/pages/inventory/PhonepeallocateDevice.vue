@@ -10,28 +10,29 @@
               @click="$router.push('/inventory/PhonepeInventory')"
               outline
               label="Cancel Allocation"
-              color="negative" class="/>
+              color="negative"
+            />
         </div>
       </div>
       <div class="row bottom-border group q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-md-2">
           <q-select :disabled="formData.device_type != ''"
             :class="[formData.device_type != '' ? 'no-pointer-events' : '']" v-model="formData.region"
-            label="Select Region" radio color="grey-9" class=":options="regionOptions" />
+            label="Select Region" radio color="grey-9" :options="regionOptions" />
 
         </div>
         <!-- <div class="col-md-2">
-          <q-select color="grey-9" class=":disable="formData.region == ''" v-model="aggregator" label="Select Aggregator" radio
+          <q-select color="grey-9" :disable="formData.region == ''" v-model="aggregator" label="Select Aggregator" radio
             :options="aggregatorOptions" @input="selectedAggregators" />
         </div> -->
         <div class="col-md-2">
           <q-select clearable :disable="formData.region == ''" @clear="fnClearingDeviceTypeSelection"
             @input="fnSetDevicesByDeviceId" v-model="formData.device_type" label="Select Device Type" radio
-            color="grey-9" class=":options="deviceOptions" />
+            color="grey-9" :options="deviceOptions" />
         </div>
         <div class="col-12 col-lg-4 group" align="right">
           <q-btn :disabled="formData.device_type == '' || formData.region == ''" @click="openScannerComp"
-            v-if="scannerToggleOption" color="light-blue" class="class="q-py-xs" label="Start scan" />
+            v-if="scannerToggleOption" color="light-blue" class="q-py-xs" label="Start scan" />
           <q-btn icon="shopping_cart" outline class="q-py-xs" label="Add to cart" @click="fnAllocateDeviceToRegion" />
         </div>
         <!--END: table title -->
@@ -41,7 +42,7 @@
         <div class="col group" v-for="(item, index) in formData.scannedItems" :key="index">
           <q-card class="shadow-4"
             :style="'border:' + [formData.device_type.id == item.device.id ? '2px solid #61116a' : 'unset']">
-            <q-list separator class="q-pa-none"
+            <q-list highlight separator class="q-pa-none"
               :class="[formData.device_type.id == item.device.id ? 'activeDeviceTab' : '']">
               <q-item-label header style="border-bottom: 1px solid #ccc;">
                 <q-icon :style="'color:'[formData.device_type.id == item.device.id ? '#fff' : '#202c3f']"
@@ -54,7 +55,7 @@
                     :key="subIndex">
                     <q-item-section class="text-body1">{{ subItem }}</q-item-section>
                     <q-item-section>
-                      <q-btn round size="sm" color="negative" class="icon="clear"
+                      <q-btn round size="sm" color="negative" icon="clear"
                         @click="fnRemoveScannedItems(index, subIndex)" />
                     </q-item-section>
                   </q-item>
@@ -186,7 +187,7 @@ export default {
     //         this.$q.notify({
     //           color: "negative",
     //           position: "bottom",
-    //           message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+    //           message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
     //           icon: "thumb_down"
     //         });
     //       });

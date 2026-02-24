@@ -10,7 +10,8 @@
             <q-item>
               <q-item-section>
                 <q-select
-                  color="grey-9" v-model="formData.leadSource"
+                  color="grey-9"
+                  v-model="formData.leadSource"
                   :options="dropDown.leadSourceOptions"
                   label="Select lead source"
                   placeholder="Lead source"
@@ -23,7 +24,8 @@
                   no-caps
                   size="md"
                   @click="fnManageLeadSource"
-                  color="purple-9" class="icon="add"
+                  color="purple-9"
+                  icon="add"
                   class="no-margin"
                 />
               </q-item-section>
@@ -31,7 +33,8 @@
             <q-item>
               <q-item-section>
                 <q-select
-                  color="grey-9" v-model="formData.device"
+                  color="grey-9"
+                  v-model="formData.device"
                   :options="dropDown.deviceOptions"
                   label="Select device"
                   placeholder="Device"
@@ -44,7 +47,8 @@
                   no-caps
                   size="md"
                   @click="fnManageDevice"
-                  color="purple-9" class="icon="add"
+                  color="purple-9"
+                  icon="add"
                   class="no-margin"
                 />
               </q-item-section>
@@ -52,13 +56,14 @@
             <q-item>
                 <q-item-section>
                   <q-select
-                    color="grey-9" v-model="formData.marsDevice"
+                    color="grey-9"
+                    v-model="formData.marsDevice"
                     :options="dropDown.marsDeviceOptions"
                     label="Mars Device Model"
                   />
                 </q-item-section>
                 <!-- <q-item-section right>
-                  <q-btn round @click="fnManageDevice" size="sm" icon="add" color="purple-9" class="/>
+                  <q-btn round @click="fnManageDevice" size="sm" icon="add" color="purple-9" />
                 </q-item-section>-->
               </q-item>
             <q-item>
@@ -79,7 +84,8 @@
                   no-caps
                   size="md"
                   @click="fnManagePlan"
-                  color="purple-9" class="icon="add"
+                  color="purple-9"
+                  icon="add"
                   class="no-margin"
                 />
               </q-item-section>
@@ -87,7 +93,8 @@
             <q-item>
               <q-item-section>
                 <q-input
-                  color="grey-9" class="type="number"
+                  color="grey-9"
+                  type="number"
                   v-model="formData.setupFees"
                   placeholder="Setup fee"
                   label="Enter Setup fee"
@@ -98,7 +105,8 @@
               <q-item-section>
                 <div class="col">
                   <q-input
-                    color="grey-9" class="type="number"
+                    color="grey-9"
+                    type="number"
                     v-model="formData.monthlyFees"
                     placeholder="Recurring fee"
                     label="Enter recurring fee"
@@ -111,8 +119,9 @@
             <!-- <q-btn
               label="EXSITING RENTAL PLAN"
               @click="fnEditRentalPlan(formData)"
-              color="purple-9" class="/>-->
-            <q-btn label="submit" :disabled="Submitdata" @click="fnsubmit(formData)" color="purple-9" class="/>
+              color="purple-9"
+            />-->
+            <q-btn label="submit" :disabled="Submitdata" @click="fnsubmit(formData)" color="purple-9" />
           </q-card-actions>
         </q-card>
       </div>
@@ -128,7 +137,8 @@
           :pagination="paginationControl"
           :filter-method="myCustomSearchFilter"
           row-key="name"
-          color="grey-9" class=">
+          color="grey-9"
+        >
           <q-td v-slot:body-cell-action="props" :props="props">
             <div class="row no-wrap no-padding">
               <q-btn
@@ -161,7 +171,8 @@
       <!-- <div class="col">
               <q-input
                 clearable
-                color="grey-9" v-model="filterSearch"
+                color="grey-9"
+                v-model="filterSearch"
                 placeholder="Type.."
                 label="Search by name, short name"
                 class="q-mr-lg"

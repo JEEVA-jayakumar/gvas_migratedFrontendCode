@@ -6,25 +6,23 @@
           <q-tabs
             no-pane-border
             v-model="inventoryOptionSelected"
-            color="dark" class="class="shadow-1"
+            color="dark"
+            inverted
+            class="shadow-1"
           >
             <q-tab default name="internal" label="Bijlipay Regional Inventory"  />
             <!-- <q-tab name="spareSo" label="Spare Parts So"  /> -->
             <q-tab name="external" label="Phonepe Regional Inventory"  />
            
            
-
-
-
-          </q-tabs>
-<q-tab-panels v-model="inventoryOptionSelected" animated>
-<q-tab-panel name="internal">
+            <q-tab-panel name="internal">
               <internalRegionalInventory/>
             </q-tab-panel>
-<q-tab-panel name="external">
+
+            <q-tab-panel name="external">
               <AggregatorInventory/>
             </q-tab-panel>
-</q-tab-panels>
+          </q-tabs>
         </div>
       </div>
     </div>

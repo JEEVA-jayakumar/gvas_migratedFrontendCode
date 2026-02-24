@@ -32,7 +32,8 @@
             v-model="filter"
              label="Select a Region"
             radio
-            color="grey-9" class=":options="getAllocatedDevicesRegionMenu"
+            color="grey-9"
+            :options="getAllocatedDevicesRegionMenu"
            />
 
            </div>
@@ -40,7 +41,8 @@
             <q-btn
               square
               outline
-              color="purple-9" class="label="Download as Excel"
+              color="purple-9"
+              label="Download as Excel"
               class="q-mr-lg q-py-sm float-right"
               size="md"
               @click="downloadInventorySummaryInfoMenu()"

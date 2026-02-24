@@ -19,7 +19,8 @@
             <div class="col-md-6">
               <q-chips-input  @blur="v$.formData.tids.$touch" :error="v$.formData.tids.$error"
                             clearable
-                            color="grey-9" class="v-model.trim="formData.tids"
+                            color="grey-9"
+                            v-model.trim="formData.tids"
                             label="TID"
                             placeholder="Search TID"
                           >
@@ -38,14 +39,16 @@
                 @blur="v$.formData.notificationText.$touch"
                 :error="v$.formData.notificationText.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="*Notification Text"
+                color="grey-9"
+                label="*Notification Text"
               />
             </div>
             <div class="col-md-5">
                     <q-btn
           size="md"
           type="button"
-          color="purple-9" @click="fnSaveMerchant(formData)"
+          color="purple-9"
+          @click="fnSaveMerchant(formData)"
         >Submit</q-btn>
         </div>
           </div>

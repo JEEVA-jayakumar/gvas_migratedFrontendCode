@@ -34,14 +34,15 @@
               @clear="filterMasterTrackerClear()"
               @input="filterMasterTrackerByRegionId"
               v-model="regionFilter"
-              color="grey-9" class=":options="getAllRegionsData"
+              color="grey-9"
+              :options="getAllRegionsData"
               placeholder="Select"
               label="Filter By"
             />
           </div>-->
           <div class="col-md-6">
 
-            <q-btn square outline color="purple-9" class="label="Download as Excel" class="q-mr-lg q-py-sm float-right"
+            <q-btn square outline color="purple-9" label="Download as Excel" class="q-mr-lg q-py-sm float-right"
               size="md" @click="downloadAggregatorsInventoryWithMerchant" />
 
           </div>
@@ -49,12 +50,13 @@
             <!-- <q-btn
               @click="downloadMasterInventory()"
               outline
-              color="grey-9" class="label="Download as Excel"
+              color="grey-9"
+              label="Download as Excel"
               class="q-mr-lg q-py-sm float-right"
               size="md"
             />-->
             <!-- <downloadExcel :rows="tableData" :fields="json_fields" name="InventoryWithMerchant.xls">
-              <q-btn outline color="grey-9" class="label="Download as excel" />
+              <q-btn outline color="grey-9" label="Download as excel" />
             </downloadExcel> -->
           </div>
 

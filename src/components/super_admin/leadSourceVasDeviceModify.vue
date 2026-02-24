@@ -13,24 +13,24 @@
             <q-select v-model="formData.leadSourceDeviceVasMapping.leadSource"
               @blur="v$.formData.leadSourceDeviceVasMapping.leadSource.$touch"
               :error="v$.formData.leadSourceDeviceVasMapping.leadSource.$error" :options="dropDown.leadSourceOptions"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="Select Lead Source"
+              class="text-weight-regular text-grey-8" color="grey-9" label="Select Lead Source"
               placeholder="Select Lead Source" />
           </div>
           <div class="col-md-12">
             <q-select v-model="formData.leadSourceDeviceVasMapping.device"
               @blur="v$.formData.leadSourceDeviceVasMapping.device.$touch"
               :error="v$.formData.leadSourceDeviceVasMapping.device.$error" :options="dropDown.deviceOptions"
-              class="text-weight-regular text-grey-8" color="grey-9" class="label="Select Device"
+              class="text-weight-regular text-grey-8" color="grey-9" label="Select Device"
               placeholder="Select Device" />
           </div>
           <div class="col-md-12">
             <q-select multiple v-model="formData.vasList" @blur="v$.formData.vasList.$touch"
               :error="v$.formData.vasList.$error" :options="dropDown.vasOptions" class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Select Vas" placeholder="Select Vas" />
+              color="grey-9" label="Select Vas" placeholder="Select Vas" />
           </div>
         </div>
         <q-card-section>
-          <q-list >
+          <q-list no-border>
 
             <!-- <q-item>
               <q-item-section>
@@ -56,7 +56,8 @@
           <div class="col-md-12 group" align="right">
             <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="toggleModal()">Cancel
             </q-btn>
-            <q-btn align="right" @click="submitModifiedData(formData)" color="purple-9">Save</q-btn>" class="</div>
+            <q-btn align="right" @click="submitModifiedData(formData)" color="purple-9">Save</q-btn>
+          </div>
         </div>
       </form>
     </q-dialog>
@@ -231,7 +232,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

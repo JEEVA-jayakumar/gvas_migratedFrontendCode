@@ -1,16 +1,11 @@
 <template>
   <q-page>
     <div>
-      <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" class=">
-         <q-tab @select="ajaxSpareData" default  color="dark" class="name="tab-3"  label="Active Service Status" />
-          <q-tab  color="dark" class="name="tab-4"  label="Deactive Service Status" />
+      <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" >
+         <q-tab @select="ajaxSpareData" default  color="dark" name="tab-3"  label="Active Service Status" />
+          <q-tab  color="dark" name="tab-4"  label="Deactive Service Status" />
 
-
-
-
-      </q-tabs>
-<q-tab-panels v-model="activeTab" animated>
-<q-tab-panel name="tab-3">
+          <q-tab-panel name="tab-3">
           <q-table
           :rows="ActivetableData"
           table-class="customSATableClass"
@@ -19,7 +14,8 @@
           :pagination="paginationControl"
           :filter-method="myCustomSearchFilter1"
           row-key="name"
-          color="grey-9" class=">
+          color="grey-9"
+          >
           <q-td v-slot:body-cell-createdDate="props" :props="props">{{ $moment_format(props.row.createdDate, "Do MMM Y") }}</q-td>
             <q-td v-slot:body-cell-updatedDate="props" :props="props">{{ $moment_format(props.row.updatedDate, "Do MMM Y") }}</q-td>
 
@@ -45,7 +41,8 @@
             </template>
           </q-table>
         </q-tab-panel>
-<q-tab-panel name="tab-4">
+
+        <q-tab-panel name="tab-4">
           <q-table
           :rows="DeactivetableData"
           table-class="customSATableClass"
@@ -54,7 +51,8 @@
           :pagination="paginationControl2"
           :filter-method="myCustomSearchFilter2"
           row-key="name"
-          color="grey-9" class=">
+          color="grey-9"
+          >
             <q-td v-slot:body-cell-createdDate="props" :props="props">{{ $moment_format(props.row.createdDate, "Do MMM Y") }}</q-td>
             <q-td v-slot:body-cell-updatedDate="props" :props="props">{{ $moment_format(props.row.updatedDate, "Do MMM Y") }}</q-td>
 
@@ -72,7 +70,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-</q-tab-panels>
+      </q-tabs>
 
       <!--START: Show AddServiceStatus -->
       <ShowAddServiceStatus v-if="propShowAddServiceStatus" :propShowAddServiceStatus="propShowAddServiceStatus"
@@ -274,9 +272,9 @@ export default {
             color: 'negative',
             position: 'bottom',
             message:
-                error.data.message == null
+                error.body.message == null
                   ? 'Please Try Again Later !'
-                  : error.data.message,
+                  : error.body.message,
             icon: 'thumb_down'
           })
         })

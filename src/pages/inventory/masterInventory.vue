@@ -20,7 +20,8 @@
           <div class="col">
             <q-input
             clearable
-            color="grey-9" v-model="filter"
+            color="grey-9"
+            v-model="filter"
             placeholder="Type.."
             label= "Search by serial no, tid, merchant name, device type"
             class="q-mr-lg q-py-sm"
@@ -33,7 +34,8 @@
             @clear="filterMasterTrackerClear()"
             @input="filterMasterTrackerByRegionId"
             v-model="regionFilter"
-            color="grey-9" class=":options="regionOptions"
+            color="grey-9"
+            :options="regionOptions"
             placeholder="Select"
             label= "Filter By"
             />
@@ -42,7 +44,8 @@
             <q-btn 
             @click="downloadMasterInventory()"
             outline  
-            color="grey-9" class="label="Download as Excel"
+            color="grey-9"
+            label="Download as Excel"
             class="q-mr-lg q-py-sm float-right"
             size="md"
             />

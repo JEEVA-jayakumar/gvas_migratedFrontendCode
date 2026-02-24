@@ -22,7 +22,8 @@
                       <q-input outlined dense v-model="formData.regionAreaName" 
                           @blur="v$.formData.regionAreaName.$touch"
                           :error="v$.formData.regionAreaName.$error"
-                          label="Region Name" color="purple-9" class="class="q-mt-sm"
+                          label="Region Name" color="purple-9"
+                          class="q-mt-sm"
                       />
                     </div>
                   </div>
@@ -92,7 +93,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down",
             });
           });

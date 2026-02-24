@@ -24,7 +24,8 @@
               class="bg-white text-weight-regular text-grey-8"
               @click="emitfnshowDeviceMerchant()"
             >Cancel</q-btn>
-            <q-btn align="right" @click="downloadMerchant(formData)"  color="purple-9">Download</q-btn>" class="</div>
+            <q-btn align="right" @click="downloadMerchant(formData)"  color="purple-9">Download</q-btn>
+          </div>
           <!-- :disabled="submitDisabled" -->
         </div>
       </form>

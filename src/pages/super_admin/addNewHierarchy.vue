@@ -5,12 +5,13 @@
       <!-- START >> Setup MDR details -->
       <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
         <q-card style="width:100%">
-          <q-card-section>
-            <q-list >
+          <q-card-main>
+            <q-list no-border>
               <q-item>
                 <q-item-section>
                   <q-input
-                    color="grey-9" class="type="text"
+                    color="grey-9"
+                    type="text"
                     v-model="formData.hierarchy"
                     @blur="v$.formData.hierarchy.$touch"
                     :error="v$.formData.hierarchy.$error"
@@ -23,7 +24,8 @@
               <q-item>
                 <q-item-section>
                   <q-input
-                    color="grey-9" class="type="text"
+                    color="grey-9"
+                    type="text"
                     v-model="formData.hierarchyCode"
                     @blur="v$.formData.hierarchyCode.$touch"
                     :error="v$.formData.hierarchyCode.$error"
@@ -33,11 +35,11 @@
                 </q-item-section>
               </q-item>
             </q-list>
-          </q-card-section>
+          </q-card-main>
 
           <q-card-actions vertical align="end">
-            <q-btn label="submit" @click="fnAddHierarchy(formData)" color="purple-9" class="/>
-            <!-- <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" class="/> -->
+            <q-btn label="submit" @click="fnAddHierarchy(formData)" color="purple-9" />
+            <!-- <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" /> -->
           </q-card-actions>
         </q-card>
       </div>
@@ -196,7 +198,7 @@ export default {
               type: "warning",
               color: "amber-9",
               position: "bottom",
-              message: error.data?.message ?? "Please Try Again Later !",
+              message: error.body?.message ?? "Please Try Again Later !",
               icon: "thumb_down"
             });
           });

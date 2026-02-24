@@ -57,7 +57,7 @@
             class="cursor-pointer"
           >
             <div @click="fnPDFViewModal(props.row.implementationForm)">
-              <q-icon name="fas fa-file-pdf" color="primary" class="/>
+              <q-icon name="fas fa-file-pdf" color="primary" />
               &nbsp;{{ props.row.implementationForm }}
             </div>
           </div>
@@ -88,7 +88,7 @@
             class="cursor-pointer"
           >
             <div @click="fnPDFViewModal(props.row.pictureOfShop)">
-              <q-icon name="fas fa-file-pdf" color="primary" class="/>
+              <q-icon name="fas fa-file-pdf" color="primary" />
               &nbsp;{{ props.row.pictureOfShop }}
             </div>
           </div>
@@ -119,7 +119,7 @@
             class="cursor-pointer"
           >
             <div @click="fnPDFViewModal(props.row.cpvForm)">
-              <q-icon name="fas fa-file-pdf" color="primary" class="/>
+              <q-icon name="fas fa-file-pdf" color="primary" />
               &nbsp;{{ props.row.cpvForm }}
             </div>
           </div>
@@ -153,7 +153,8 @@
               clearable
               v-model="filter"
               separator
-              color="grey-9" class="placeholder="Type.."
+              color="grey-9"
+              placeholder="Type.."
               label="Search by MID, TID, Merchant Name"
               class="q-mr-lg q-py-sm"
             />
@@ -179,7 +180,8 @@
           <div class="col-2">
             <q-btn
               align="right"
-              color="purple-9" class=":disabled="
+              color="purple-9"
+              :disabled="
                 formData.fromDate == '' ||
                 formData.fromDate == null ||
                 formData.toDate == '' ||
@@ -189,7 +191,7 @@
               @click="SubmitData(formData)"
               >Submit</q-btn
             >
-             <q-btn color="red" class="v-if="selectedRow" @click="DeleteData">
+             <q-btn color="red" v-if="selectedRow" @click="DeleteData">
               <q-icon name="delete" />
             </q-btn>
           </div>

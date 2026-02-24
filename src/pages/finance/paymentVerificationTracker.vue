@@ -6,25 +6,22 @@
         <div
           class="col-md-12 capitalize text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
         >Finance</div>
-        <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" class="@select="goToQrMerchant">
-          <q-tab default color="dark" class="name="tab-1"  label="Pos Merchant" />
-        <q-tab color="dark" class="name="tab-2"  label="QR Merchant" />
+        <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @select="goToQrMerchant">
+          <q-tab default color="dark" name="tab-1"  label="Pos Merchant" />
+        <q-tab color="dark" name="tab-2"  label="QR Merchant" />
      
 
         <!--END: table title -->
         <!-- table payment verification tracker -->
-
-
-    </q-tabs>
-<q-tab-panels v-model="activeTab" animated>
-<q-tab-panel name="tab-1">
+        <q-tab-panel name="tab-1">
         <q-table
           table-class="customTableClass"
           :rows="tableData"
           :columns="columns"
           :filter="filter"
           row-key="field"
-          color="grey-9" class=":pagination="paginationControl"
+          color="grey-9"
+          :pagination="paginationControl"
           :rows-per-page-options="[5,10,15,20]"
           @request="ajaxLoadAllPaymentTrackerInfo"
           table-style="word-break: break-all"
@@ -42,7 +39,8 @@
               <!--START: table expand button :Checkbox -->
               <q-td key="leadInformation.leadNumber" :props="props">
                 <q-checkbox
-                  color="grey-9" v-model="props.row.expand"
+                  color="grey-9"
+                  v-model="props.row.expand"
                   checked-icon="fas fa-chevron-up"
                   unchecked-icon="fas fa-chevron-down"
                   class="q-mr-md"
@@ -72,7 +70,8 @@
                   push
                   outline
                   class="q-mx-sm"
-                  color="negative" @click="openRejectModel(props.row)"
+                  color="negative"
+                  @click="openRejectModel(props.row)"
                   size="sm"
                 >Reject</q-btn>
                 <q-btn
@@ -80,7 +79,8 @@
                   push
                   outline
                   class="q-mx-sm"
-                  color="purple-9" size="sm"
+                  color="purple-9"
+                  size="sm"
                   @click="financeApproveSubmit(props.row.leadId)"
                 >Approve</q-btn>
               </q-td>
@@ -112,7 +112,7 @@
                       class="cursor-pointer"
                     >
                       <div @click="fnPDFViewModal(props.row.paymentDocumentFile)">
-                        <q-icon name="fas fa-file-pdf" color="primary" class="/>
+                        <q-icon name="fas fa-file-pdf" color="primary" />
                         &nbsp;{{props.row.paymentDocumentFile}}
                       </div>
                     </div>
@@ -131,7 +131,7 @@
                             style="max-width:100%"
                           />
                         </viewer>
-                        <q-icon name="fas fa-image" color="amber-9" class="/>
+                        <q-icon name="fas fa-image" color="amber-9" />
                         &nbsp;{{props.row.paymentDocumentFile}}
                       </div>
                     </div>
@@ -165,9 +165,10 @@
                   class="text-left"
                   v-if="props.row.referenceNumbercount == '' || props.row.referenceNumbercount == null"
                 >
-                  <q-chip square color="purple">NA</q-chip>" class="</div>
+                  <q-chip square color="purple">NA</q-chip>
+                </div>
                 <div class="text-left" v-else>
-                  <q-chip square color="purple">{{" class="props.row.referenceNumbercount }}</q-chip>
+                  <q-chip square color="purple">{{ props.row.referenceNumbercount }}</q-chip>
                 </div>
               </q-td>
               <q-td colspan="2">
@@ -183,7 +184,7 @@
                     class="cursor-pointer"
                   >
                     <div @click="fnPDFViewModal(props.row.leadVerificationStatusBankAttachedFile)">
-                      <q-icon name="fas fa-file-pdf" color="primary" class="/>
+                      <q-icon name="fas fa-file-pdf" color="primary" />
                       &nbsp;{{props.row.leadVerificationStatusBankAttachedFile}}
                     </div>
                   </div>
@@ -204,7 +205,7 @@
                           style="max-width:100%"
                         />
                       </viewer>
-                      <q-icon name="fas fa-image" color="amber-9" class="/>
+                      <q-icon name="fas fa-image" color="amber-9" />
                       &nbsp;{{props.row.leadVerificationStatusBankAttachedFile}}
                     </div>
                   </div>
@@ -222,7 +223,8 @@
             <div class="col-md-5">
               <q-input
                 clearable
-                color="grey-9" v-model="filter"
+                color="grey-9"
+                v-model="filter"
                 placeholder="Type.."
                 label="Search .. "
                 class="q-mr-lg q-py-sm"
@@ -236,14 +238,15 @@
           <!--END: table search, filter -->
         </q-table>
       </q-tab-panel>
-<q-tab-panel name="tab-2">
+      <q-tab-panel name="tab-2">
         <q-table
           table-class="customTableClass"
           :rows="tableData1"
           :columns="columns1"
           :filter="filter1"
           row-key="field"
-          color="grey-9" class=":pagination="paginationControl1"
+          color="grey-9"
+          :pagination="paginationControl1"
           :rows-per-page-options="[5,10,15,20]"
           @request="ajaxLoadAllPaymentTrackerInfo1"
           table-style="word-break: break-all"
@@ -261,7 +264,8 @@
               <!--START: table expand button :Checkbox -->
               <q-td key="qrLeadNumber" :props="props">
                 <q-checkbox
-                  color="grey-9" v-model="props.row.expand"
+                  color="grey-9"
+                  v-model="props.row.expand"
                   checked-icon="fas fa-chevron-up"
                   unchecked-icon="fas fa-chevron-down"
                   class="q-mr-md"
@@ -291,7 +295,8 @@
                   push
                   outline
                   class="q-mx-sm"
-                  color="negative" @click="openQrRejectModel(props.row)"
+                  color="negative"
+                  @click="openQrRejectModel(props.row)"
                   size="sm"
                 >Reject</q-btn>
                 <q-btn
@@ -299,7 +304,8 @@
                   push
                   outline
                   class="q-mx-sm"
-                  color="purple-9" size="sm"
+                  color="purple-9"
+                  size="sm"
                   @click="qrFinanceApproveSubmit(props.row.id)"
                 >Approve</q-btn>
               </q-td>
@@ -331,7 +337,7 @@
                       class="cursor-pointer"
                     >
                       <div @click="fnPDFViewModal(props.row.paymentDocumentFile)">
-                        <q-icon name="fas fa-file-pdf" color="primary" class="/>
+                        <q-icon name="fas fa-file-pdf" color="primary" />
                         &nbsp;{{props.row.paymentDocumentFile}}
                       </div>
                     </div>
@@ -352,7 +358,7 @@
                             @click="fnViewHandedOverFileImageCheque()"
                             class="ellipsis"
                           >
-                        <q-icon name="fas fa-image" color="amber-9" class="/>
+                        <q-icon name="fas fa-image" color="amber-9" />
                         &nbsp;{{props.row.paymentDocumentFile}}
                         </div>
                       </div>
@@ -386,9 +392,10 @@
                   class="text-left"
                   v-if="props.row.referenceNumbercount == '' || props.row.referenceNumbercount == null"
                 >
-                  <q-chip square color="purple">NA</q-chip>" class="</div>
+                  <q-chip square color="purple">NA</q-chip>
+                </div>
                 <div class="text-left" v-else>
-                  <q-chip square color="purple">{{" class="props.row.referenceNumbercount }}</q-chip>
+                  <q-chip square color="purple">{{ props.row.referenceNumbercount }}</q-chip>
                 </div>
               </q-td> -->
               <!-- <q-td colspan="2">
@@ -404,7 +411,7 @@
                     class="cursor-pointer"
                   >
                     <div @click="fnPDFViewModal(props.row.leadVerificationStatusBankAttachedFile)">
-                      <q-icon name="fas fa-file-pdf" color="primary" class="/>
+                      <q-icon name="fas fa-file-pdf" color="primary" />
                       &nbsp;{{props.row.leadVerificationStatusBankAttachedFile}}
                     </div>
                   </div>
@@ -425,7 +432,7 @@
                           style="max-width:100%"
                         />
                       </viewer>
-                      <q-icon name="fas fa-image" color="amber-9" class="/>
+                      <q-icon name="fas fa-image" color="amber-9" />
                       &nbsp;{{props.row.leadVerificationStatusBankAttachedFile}}
                     </div>
                   </div>
@@ -443,7 +450,8 @@
             <div class="col-md-5">
               <q-input
                 clearable
-                color="grey-9" v-model="filter1"
+                color="grey-9"
+                v-model="filter1"
                 placeholder="Type.."
                 label="Search .. "
                 class="q-mr-lg q-py-sm"
@@ -457,7 +465,7 @@
           <!--END: table search, filter -->
         </q-table>
       </q-tab-panel>
-</q-tab-panels>
+    </q-tabs>
       </q-pull-to-refresh>
      
       <!-- //Common lead information in popup -->
@@ -878,7 +886,7 @@ export default {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down"
               });
             });
@@ -937,7 +945,7 @@ export default {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down"
               });
             });

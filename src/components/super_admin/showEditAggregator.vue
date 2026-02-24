@@ -22,7 +22,8 @@
                            :options="regionGroupOptions"
                         
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" class="label="Region Group"
+                          color="grey-9"
+                          label="Region Group"
                           placeholder="Region Group" 
                         />
                     </div> -->
@@ -32,7 +33,8 @@
                           :error="v$.formData.name.$error"
                           @keyup.enter="v$.formData.name.$touch"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" class="label="Modify Aggregator Name"
+                          color="grey-9"
+                          label="Modify Aggregator Name"
                           placeholder="Modify Aggregator Name" 
                         />
                     </div>
@@ -40,7 +42,8 @@
                 <div class="row gutter-sm q-py-sm items-center">
                     <div class="col-md-12 group" align="right">
                         <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowEditAggregator()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitEdittedList(formData)" color="purple-9">Save</q-btn>" class="</div>
+                        <q-btn align="right" @click="fnfinalsubmitEdittedList(formData)" color="purple-9">Save</q-btn>
+                    </div>
                 </div>
             </form>
         </q-dialog>

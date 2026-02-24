@@ -52,7 +52,8 @@
                 clearable
                 v-model="filter"
                 separator
-                color="grey-9" class="placeholder="Type.."
+                color="grey-9"
+                placeholder="Type.."
                 label="Search by MID, TID, Merchant Name"
                 class="q-mr-lg q-py-sm"
               />
@@ -62,7 +63,8 @@
               <q-btn 
               square 
               outline 
-              color="purple-9" class="label="Download as Excel"
+              color="purple-9"
+              label="Download as Excel"
               class="q-mr-lg q-py-sm float-right" 
               size="md" 
               @click="downloadAggrmastertrackerlist()" />

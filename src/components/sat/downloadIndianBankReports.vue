@@ -42,12 +42,14 @@
           <div class="col-md-12 group" align="right">
             <q-btn
               align="right"
-              color="negative" @click="emitfnHitachiIndianBank()"
+              color="negative"
+              @click="emitfnHitachiIndianBank()"
               >Cancel</q-btn
             >
             <q-btn
               align="right"
-              color="positive" @click="downloadIndianBankReport(formData)"
+              color="positive"
+              @click="downloadIndianBankReport(formData)"
               >Download</q-btn
             >
           </div>

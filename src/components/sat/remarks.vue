@@ -13,7 +13,8 @@
           <div class="col-12 text-h6 q-py-md">Save with remarks</div>
           <div class="col-12">
             <q-input
-              color="grey-9" v-model="formData.remarks"
+              color="grey-9"
+              v-model="formData.remarks"
               @blur="v$.formData.remarks.$touch"
               :error="v$.formData.remarks.$error"
               type="textarea"
@@ -24,14 +25,16 @@
           <div class="col-12 group">
             <q-btn
               icon="save"
-              color="amber-9" class="class="q-ma-sm float-right"
+              color="amber-9"
+              class="q-ma-sm float-right"
               @click="saveRemarks(formData)"
               align="right"
               label="Save"
             />
             <q-btn
               icon="block"
-              color="grey-5" @click="emitToggleRemarks()"
+              color="grey-5"
+              @click="emitToggleRemarks()"
               class="q-ma-sm float-right text-dark"
               align="right"
               v-close-overlay
@@ -106,7 +109,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

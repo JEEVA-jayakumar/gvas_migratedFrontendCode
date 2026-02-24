@@ -8,7 +8,8 @@
           <div class="row gutter-x-xs gutter-y-xs items-center justify-center">
             <div class="col-lg-4 col-md-6 col-sm-12">
               <div>
-                <q-card class="border-radius-10 q-pa-md" color="purple-9">" class="<div class="row items-center justify-center">
+                <q-card class="border-radius-10 q-pa-md" color="purple-9">
+                  <div class="row items-center justify-center">
                     <div class="col-lg-4 col-md-8 col-sm-12 items-center text-center">
                       <div class="text-h5 sm-text-caption text-center">{{ exceptionCount.totalExceptionCount }}</div>
                     </div>
@@ -25,18 +26,19 @@
                     <div class="col-md-4 q-my-xs">
                       <div class="text-caption text-grey-10">KYC Exception</div>
                       <q-chip class="cursor-pointer" @click="retrieveLeadsList(exceptionCount.kycPendingLeadIds)"
-                        color="purple-9">{{" class="exceptionCount.kycPendingCount }}</q-chip>
+                        color="purple-9">{{ exceptionCount.kycPendingCount }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
                       <div class="text-caption text-grey-10">Bank Exception</div>
                       <q-chip class="cursor-pointer"
-                        @click="retrieveLeadsList(exceptionCount.banksubventionPendingLeadIds)" color="purple-9">{{" class="exceptionCount.banksubventionPendingCount
+                        @click="retrieveLeadsList(exceptionCount.banksubventionPendingLeadIds)" color="purple-9">{{
+                          exceptionCount.banksubventionPendingCount
                         }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
                       <div class="text-caption text-grey-10">Pricing Subvention</div>
                       <q-chip class="cursor-pointer" @click="retrieveLeadsList(exceptionCount.pricingPendingLeadIds)"
-                        color="purple-9">{{" class="exceptionCount.pricingPendingCount }}</q-chip>
+                        color="purple-9">{{ exceptionCount.pricingPendingCount }}</q-chip>
                     </div>
                   </div>
                 </q-card>
@@ -45,7 +47,8 @@
 
             <div class="col-lg-4 col-md-6 col-sm-12">
               <div>
-                <q-card class="border-radius-10 q-pa-md" color="purple-9">" class="<div class="row items-center justify-center">
+                <q-card class="border-radius-10 q-pa-md" color="purple-9">
+                  <div class="row items-center justify-center">
                     <div class="col-lg-4 col-md-8 col-sm-12 items-center text-center">
                       <div class="text-h5 sm-text-caption text-center">{{ regionalInventoryCount.totalDevice }}</div>
                     </div>
@@ -62,15 +65,15 @@
                   <div class="row items-center text-center" style="min-height:75px">
                     <div class="col-md-4 q-my-xs">
                       <div class="text-caption text-grey-10">Allocated Devices</div>
-                      <q-chip class color="purple-9">{{" class="regionalInventoryCount.allocatedDeviceCount }}</q-chip>
+                      <q-chip class color="purple-9">{{ regionalInventoryCount.allocatedDeviceCount }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
                       <div class="text-caption text-grey-10">Pending Devices</div>
-                      <q-chip class color="purple-9">{{" class="regionalInventoryCount.pendingDeviceCount }}</q-chip>
+                      <q-chip class color="purple-9">{{ regionalInventoryCount.pendingDeviceCount }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
                       <div class="text-caption text-grey-10">Damaged Devices</div>
-                      <q-chip class color="purple-9">{{" class="regionalInventoryCount.damagedDeviceCount }}</q-chip>
+                      <q-chip class color="purple-9">{{ regionalInventoryCount.damagedDeviceCount }}</q-chip>
                     </div>
                   </div>
                 </q-card>
@@ -79,7 +82,8 @@
 
             <div class="col-lg-4 col-md-6 col-sm-12">
               <div>
-                <q-card class="border-radius-10 q-pa-md" color="purple-9">" class="<div class="row items-center justify-center">
+                <q-card class="border-radius-10 q-pa-md" color="purple-9">
+                  <div class="row items-center justify-center">
                     <div class="col-lg-4 col-md-8 col-sm-12 items-center text-center">
                       <div class="text-h5 sm-text-caption text-center">{{ marsDeviceCount.totalMarsDeviceCount }}</div>
                     </div>
@@ -99,7 +103,7 @@
                     </div>
                     <div class="col-md-6 q-my-xs">
                       <div class="text-caption text-negative">
-                        <q-icon color="amber-9" class="name="fa fa-bell" />
+                        <q-icon color="amber-9" name="fa fa-bell" />
                         Unassigned/{{ marsDeviceCount.unassignedDeviceCount }}
                       </div>
                     </div>
@@ -120,7 +124,8 @@
               </q-card-section>
                <div class="row gutter-x-xs gutter-y-xs items-center justify-center q-mt-md">
             <div class="col">
-              <q-card class="border-radius-10 q-pa-md" color="purple-9">" class="<div class="row items-center justify-center">
+              <q-card class="border-radius-10 q-pa-md" color="purple-9">
+                <div class="row items-center justify-center">
                   <div class="col-lg-4 col-md-8 col-sm-12 items-center text-center">
                     <div class="text-h5 sm-text-caption text-center">{{ aggregatorCount.totalDevice }}</div>
                   </div>
@@ -137,16 +142,18 @@
                   <div class="col-md-4 q-my-xs">
                     <div class="text-caption text-grey-10">Pending Device</div>
 
-                    <q-chip class="cursor-pointer" color="purple-9">{{" class="aggregatorCount.pendingDeviceCount }}</q-chip>
+                    <q-chip class="cursor-pointer" color="purple-9">{{ aggregatorCount.pendingDeviceCount }}</q-chip>
                   </div>
                   <div class="col-md-4 q-my-xs">
                     <div class="text-caption text-grey-10">Allocated Device</div>
-                    <q-chip class="cursor-pointer" color="purple-9">{{" class="aggregatorCount.allocatedDeviceCount
+                    <q-chip class="cursor-pointer" color="purple-9">{{
+                      aggregatorCount.allocatedDeviceCount
                     }}</q-chip>
                   </div>
                   <div class="col-md-4 q-my-xs">
                     <div class="text-caption text-grey-10">Damaged Device</div>
-                    <q-chip class="cursor-pointer" color="purple-9">{{" class="aggregatorCount.damagedDeviceCount
+                    <q-chip class="cursor-pointer" color="purple-9">{{
+                      aggregatorCount.damagedDeviceCount
                     }}</q-chip>
                   </div>
                 </div>
@@ -157,7 +164,8 @@
           </div>-->
           <div class="row gutter-x-xs gutter-y-xs items-center justify-center q-mt-md">
             <div class="col">
-              <q-card class="border-radius-10 q-pa-md" color="purple-9">" class="<div class="row items-center justify-center">
+              <q-card class="border-radius-10 q-pa-md" color="purple-9">
+                <div class="row items-center justify-center">
                   <div class="col-lg-4 col-md-8 col-sm-12 items-center text-center">
                     <div class="text-h5 sm-text-caption text-center">{{ serviceRequestCount.total }}</div>
                   </div>
@@ -179,37 +187,43 @@
                   <div class="row text-center justify-center" style="min-height:75px">
                     <div class="col-md-4 q-my-xs">
                       <div class="text-caption text-grey-10">closed</div>
-                      <q-chip class color="purple-9">{{" class="serviceRequestCount.internal.closed == null ? 0
+                      <q-chip class color="purple-9">{{
+                        serviceRequestCount.internal.closed == null ? 0
                           : serviceRequestCount.internal.closed
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
                       <div class="text-caption text-grey-10">assigned</div>
-                      <q-chip class color="purple-9">{{" class="serviceRequestCount.internal.assigned == null ? 0 :
+                      <q-chip class color="purple-9">{{
+                        serviceRequestCount.internal.assigned == null ? 0 :
                           serviceRequestCount.internal.assigned
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
                       <div class="text-caption text-grey-10">unassigned</div>
-                      <q-chip class color="purple-9">{{" class="serviceRequestCount.internal.unassigned == null ? 0 :
+                      <q-chip class color="purple-9">{{
+                        serviceRequestCount.internal.unassigned == null ? 0 :
                           serviceRequestCount.internal.unassigned
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
                       <div class="text-caption text-grey-10">Total</div>
-                      <q-chip class color="purple-9">{{" class="serviceRequestCount.intTotal == null ? 0 :
+                      <q-chip class color="purple-9">{{
+                        serviceRequestCount.intTotal == null ? 0 :
                           serviceRequestCount.intTotal
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
                       <div class="text-caption text-grey-10">ReOpenAssigned</div>
-                      <q-chip class color="purple-9">{{" class="serviceRequestCount.internal.ReOpenAssigned == null ? 0 :
+                      <q-chip class color="purple-9">{{
+                        serviceRequestCount.internal.ReOpenAssigned == null ? 0 :
                           serviceRequestCount.internal.ReOpenAssigned
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
                       <div class="text-caption text-grey-10">ReOpenedUnAssigned</div>
-                      <q-chip class color="purple-9">{{" class="serviceRequestCount.internal.ReOpenedUnAssigned == null ? 0 :
+                      <q-chip class color="purple-9">{{
+                        serviceRequestCount.internal.ReOpenedUnAssigned == null ? 0 :
                           serviceRequestCount.internal.ReOpenedUnAssigned
                       }}</q-chip>
                     </div>
@@ -225,37 +239,43 @@
                   <div class="row text-center justify-center" style="min-height:75px">
                     <div class="col-md-4 q-my-xs">
                       <div class="text-caption text-grey-10">closed</div>
-                      <q-chip class color="purple-9">{{" class="serviceRequestCount.external.closed == null ? 0
+                      <q-chip class color="purple-9">{{
+                        serviceRequestCount.external.closed == null ? 0
                           : serviceRequestCount.external.closed
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
                       <div class="text-caption text-grey-10">assigned</div>
-                      <q-chip class color="purple-9">{{" class="serviceRequestCount.external.assigned == null ? 0 :
+                      <q-chip class color="purple-9">{{
+                        serviceRequestCount.external.assigned == null ? 0 :
                           serviceRequestCount.external.assigned
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
                       <div class="text-caption text-grey-10">unassigned</div>
-                      <q-chip class color="purple-9">{{" class="serviceRequestCount.external.unassigned == null ? 0 :
+                      <q-chip class color="purple-9">{{
+                        serviceRequestCount.external.unassigned == null ? 0 :
                           serviceRequestCount.external.unassigned
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
                       <div class="text-caption text-grey-10">Total</div>
-                      <q-chip class color="purple-9">{{" class="serviceRequestCount.extTotal == null ? 0 :
+                      <q-chip class color="purple-9">{{
+                        serviceRequestCount.extTotal == null ? 0 :
                           serviceRequestCount.extTotal
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
                       <div class="text-caption text-grey-10">ReOpenAssigned</div>
-                      <q-chip class color="purple-9">{{" class="serviceRequestCount.external.ReOpenAssigned == null ? 0 :
+                      <q-chip class color="purple-9">{{
+                        serviceRequestCount.external.ReOpenAssigned == null ? 0 :
                           serviceRequestCount.external.ReOpenAssigned
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
                       <div class="text-caption text-grey-10">ReOpenedUnAssigned</div>
-                      <q-chip class color="purple-9">{{" class="serviceRequestCount.external.ReOpenedUnAssigned == null ? 0 :
+                      <q-chip class color="purple-9">{{
+                        serviceRequestCount.external.ReOpenedUnAssigned == null ? 0 :
                           serviceRequestCount.external.ReOpenedUnAssigned
                       }}</q-chip>
                     </div>
@@ -283,7 +303,7 @@
                     </div>
                     <div class="col-12 col-lg-3">
                       <div class="text-subtitle1 text-bold">
-                        <q-select color="purple-9" class=":value="dateSelection" @change="changeMerchantTrackerData"
+                        <q-select inverted color="purple-9" :value="dateSelection" @change="changeMerchantTrackerData"
                           :options="[{ label: 'Days', value: 'DAYS' }, { label: 'Week', value: 'WEEK' }, { label: 'Month', value: 'MONTH' }, { label: 'Year', value: 'YEAR' }]" />
                       </div>
                     </div>

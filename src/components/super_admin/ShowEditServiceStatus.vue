@@ -23,7 +23,8 @@
               v-model="formData.name"
               :error="v$.formData.name.$error"
                 class="text-weight-regular text-grey-8"
-                color="grey-9" class="label="Service Status Name"
+                color="grey-9"
+                label="Service Status Name"
                 placeholder="Service Status Name"
               />
             </div>
@@ -40,7 +41,8 @@
               <q-btn
                 align="right"
                 @click="fnfinalsubmitEditedServiceStatus(formData)"
-                color="purple-9" class=">Save</q-btn
+                color="purple-9"
+                >Save</q-btn
               >
             </div>
           </div>
@@ -149,9 +151,9 @@ export default {
               color: 'negative',
               position: 'bottom',
               message:
-                  error.data.message == null
+                  error.body.message == null
                     ? 'Please Try Again Later !'
-                    : error.data.message,
+                    : error.body.message,
               icon: 'thumb_down'
             })
           })

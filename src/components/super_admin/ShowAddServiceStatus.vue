@@ -20,7 +20,8 @@
                           v-model="formData.name"
                           :error="v$.formData.name.$error"
                           class="text-weight-regular text-grey-8"
-                          color="grey-9" class="label="Enter Service Status"
+                          color="grey-9"
+                          label="Enter Service Status"
                           placeholder="Enter Service Status"
                         />
                     </div>

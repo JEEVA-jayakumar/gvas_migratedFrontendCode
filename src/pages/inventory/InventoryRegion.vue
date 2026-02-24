@@ -9,17 +9,18 @@
             <div class="row bottom-border group q-px-md q-py-md items-center text-weight-regular text-grey-9">
                 <!--START: table title   :disable="disableDeviceTypeSelection" -->
                 <div class="col-md-4">
-                    <q-select v-model="formData.region" label="Select Region" radio color="grey-9" class="@input="filterInventoryByRegion" :options="regionOptions" />
+                    <q-select v-model="formData.region" label="Select Region" radio color="grey-9"
+                        @input="filterInventoryByRegion" :options="regionOptions" />
                 </div>
 
                 <div class="col-md-4 col-lg-4 group">
                     <q-select :disable="formData.region == undefined" v-model="formData.device_type"
-                        label="Filter By Device" radio color="grey-9" class="@input="filterByDevice"
+                        label="Filter By Device" radio color="grey-9" @input="filterByDevice"
                         :options="deviceOptions" />
                 </div>
                 <div class="col-auto q-px-xs">
                         <downloadExcel :rows="regionalItems" :fields="json_fields" name="InventoryWithRegion.xls">
-                          <q-btn outline color="grey-9" class="label="Download as excel" />
+                          <q-btn outline color="grey-9" label="Download as excel" />
                         </downloadExcel>
                       </div>
                 <!-- @input="filterByDeviceName(formData)" -->

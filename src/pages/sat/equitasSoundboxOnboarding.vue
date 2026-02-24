@@ -15,25 +15,22 @@
     <q-tabs
       v-model="selectedTab"
       class="shadow-1"
-      color="grey-1" class="@select="goToUnassignedTab"
+      color="grey-1"
+      @select="goToUnassignedTab"
     >
       <q-tab
         default
-        color="dark" class="name="unassigned"
+        color="dark"
+        name="unassigned"
 
         label="Un Assigned"
       />
-      <q-tab color="dark" class="name="assigned"  label="Assigned" />
-      <!-- <q-tab color="dark" class="name="ReOpened"  label="ReOpenend" /> -->
+      <q-tab color="dark" name="assigned"  label="Assigned" />
+      <!-- <q-tab color="dark" name="ReOpened"  label="ReOpenend" /> -->
 
-      <q-tab color="dark" class="name="completed"  label="Completed" />
+      <q-tab color="dark" name="completed"  label="Completed" />
 
-
-
-
-    </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="unassigned">
+      <q-tab-panel name="unassigned">
         <q-card class="group q-pa-md">
           <div
             class="row items-center gutter-y-sm"
@@ -59,7 +56,8 @@
                 clearable
                 v-model="formData.assignTo.id"
                 separator
-                color="grey-9" class=":disable="
+                color="grey-9"
+                :disable="
                   formData.marsDeviceIdsCooked.length == 0
                 "
                 :options="assignToOptions"
@@ -76,7 +74,8 @@
                 clearable
                 v-model="formData.region"
                 separator
-                color="grey-9" class=":disable="
+                color="grey-9"
+                :disable="
                   formData.marsDeviceIdsCooked.length == 0
                 "
                 :options="assignToRegionOptions"
@@ -104,7 +103,8 @@
           row-key="id"
           :loading="tableAjaxLoading1"
           :rows-per-page-options="[5, 10, 15, 20]"
-          color="dark" class="@request="ajaxLoadAllLeadInfo1"
+          color="dark"
+          @request="ajaxLoadAllLeadInfo1"
         >
           <q-td
             v-slot:body-cell-leadNumber="props"
@@ -185,7 +185,8 @@
             <div class="col-md-5">
               <q-input
                 clearable
-                color="grey-9" v-model="filterSearch1"
+                color="grey-9"
+                v-model="filterSearch1"
                 placeholder="Type.."
                 label="Search By Mob No, VPA, Merchant Name"
                 class="q-mr-lg q-py-sm"
@@ -195,7 +196,7 @@
           </template>
         </q-table>
       </q-tab-panel>
-<q-tab-panel name="assigned">
+      <q-tab-panel name="assigned">
         <!--START: table Data -->
         <q-table
           :rows="tableData"
@@ -206,7 +207,8 @@
           row-key="id"
           :loading="tableAjaxLoading"
           :rows-per-page-options="[5, 10, 15, 20]"
-          color="dark" class="@request="ajaxLoadAllLeadInfo"
+          color="dark"
+          @request="ajaxLoadAllLeadInfo"
         >
           <!-- selection="multiple" -->
           <q-td
@@ -296,7 +298,8 @@
               highlight
               push
               class="q-mx-sm"
-              color="positive" size="sm"
+              color="positive"
+              size="sm"
               @click="fnReassignData(props.row)"
               >Re-Assign</q-btn
             >
@@ -306,7 +309,8 @@
             <div class="col-md-5">
               <q-input
                 clearable
-                color="grey-9" v-model="filterSearch"
+                color="grey-9"
+                v-model="filterSearch"
                 placeholder="Type.."
                 label="Search By Mob No, VPA, Merchant Name"
                 class="q-mr-lg q-py-sm"
@@ -316,7 +320,7 @@
         </q-table>
         <!--ENDv-model: table Data -->
       </q-tab-panel>
-<q-tab-panel name="completed">
+      <q-tab-panel name="completed">
         <q-table
           :rows="tableData2"
           :columns="completed"
@@ -327,7 +331,8 @@
           row-key="id"
           :loading="tableAjaxLoading2"
           :rows-per-page-options="[5, 10, 15, 20]"
-          color="dark" class="@request="ajaxLoadAllLeadInfo2"
+          color="dark"
+          @request="ajaxLoadAllLeadInfo2"
         >
           <q-td
             v-slot:body-cell-leadNumber="props"
@@ -431,7 +436,8 @@
           <template slot="top">
             <div class="col-md-5">
               <q-input
-                color="grey-9" v-model="filterSearch2"
+                color="grey-9"
+                v-model="filterSearch2"
                 placeholder="Type.."
                 label="Search By Merchant Name"
                 class="q-mr-lg q-py-sm"
@@ -450,7 +456,7 @@
         </q-table>
         <!--END: table Data -->
       </q-tab-panel>
-</q-tab-panels>
+    </q-tabs>
     <div class="row items-center gutter-y-sm">
       <div class="col-md-9 col-sm-12 col-xs-12">
         <div class="row items-center"></div>
@@ -1197,7 +1203,7 @@ export default {
               this.$q.notify({
                 color: "positive",
                 position: "bottom",
-                message: res.data.data,
+                message: res.body.data,
                 icon: "thumb_up"
               });
               this.$q.loading.hide();
@@ -1209,7 +1215,7 @@ export default {
               self.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: res.data.data,
+                message: res.body.data,
                 icon: "thumb_down"
               });
               this.$q.loading.hide();
@@ -1220,7 +1226,7 @@ export default {
             self.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.data.data,
+              message: error.body.data,
               icon: "thumb_down"
             });
             this.$q.loading.hide();

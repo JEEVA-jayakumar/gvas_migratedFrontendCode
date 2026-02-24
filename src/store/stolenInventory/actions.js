@@ -12,7 +12,7 @@
 //         .then(response => {
 //           // START=> COMMIT with data received'
 //         //   response.data.data.content.map(function (value, index) {
-//         //     value["expand"] = false;
+//         //     Vue.set(value, "expand", false);
 //         //   });
 //           commit("SET_STOLEN_INVENTORY_DATAS", response.data.data);
 //           console.log("Inventory DATAS---------------->"+JSON.stringify(response.data.data))

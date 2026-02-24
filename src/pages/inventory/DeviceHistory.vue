@@ -33,7 +33,8 @@
           <div class="col">
             <q-input
               clearable
-              color="grey-9" v-model="filter"
+              color="grey-9"
+              v-model="filter"
               placeholder="Type.."
               label="Search by MID, TID"
               class="q-mr-lg q-py-sm"
@@ -44,7 +45,8 @@
             <q-btn 
             square 
             outline 
-            color="purple-9" class="label="Download as Excel"
+            color="purple-9"
+            label="Download as Excel"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloaddeviceHist()" />

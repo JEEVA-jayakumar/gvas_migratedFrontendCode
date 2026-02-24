@@ -16,7 +16,8 @@
         <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
       </div>
     </div>
-    <q-tabs color="grey-9">" class="<!-- Tabs - notice  -->
+    <q-tabs color="grey-9">
+      <!-- Tabs - notice  -->
       <q-tab @select="leadSourceActiveList" default  label="Active Vas List" name="tab-1"/>
       <!-- <q-tab @select="leadSourceDeActiveList"   label="Deactive Vas List" name="tab-2"/> -->
       <q-tab-panel name="tab-1">
@@ -26,7 +27,8 @@
           :columns="activatedColumns"
           :filter="activeFilterSearch"
           row-key="id"
-          color="grey-9" class="@request="ajaxLoadAllLeadInfo"
+          color="grey-9"
+          @request="ajaxLoadAllLeadInfo"
         >
           <q-td v-slot:body-cell-action="props" :props="props">
             <div class="row no-wrap no-padding">
@@ -59,7 +61,8 @@
             <div class="col-8">
               <q-input
                 clearable
-                color="grey-9" v-model="activeFilterSearch"
+                color="grey-9"
+                v-model="activeFilterSearch"
                 placeholder="Type.."
                 label="Search lead source"
               />
@@ -70,7 +73,8 @@
                 no-wrap
                 label="Add New"
                 class="text-weight-regular"
-                color="purple-9" class="icon="far fa-plus-square"
+                color="purple-9"
+                icon="far fa-plus-square"
                 @click="vasCreate()"
               />
             </div>

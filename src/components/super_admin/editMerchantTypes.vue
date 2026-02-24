@@ -21,7 +21,8 @@
               @blur="v$.formData.merchantTypeName.$touch"
               :error="v$.formData.merchantTypeName.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Merchant Type"
+              color="grey-9"
+              label="Merchant Type"
               placeholder="Merchant Type"
               @keyup.enter="submitMerchantTypeData(formData)"
             />
@@ -32,7 +33,8 @@
               @blur="v$.formData.marsAgreementId.$touch"
               :error="v$.formData.marsAgreementId.$error"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Mars Agreement Id"
+              color="grey-9"
+              label="Mars Agreement Id"
               placeholder="Mars Agreement Id"
               @keyup.enter="submitMerchantTypeData(formData)"
             />
@@ -46,7 +48,8 @@
               class="bg-white text-weight-regular text-grey-8"
               @click="toggleModal()"
             >Cancel</q-btn>
-            <q-btn align="right" @click="submitMerchantTypeData(formData)" color="purple-9">Save</q-btn>" class="</div>
+            <q-btn align="right" @click="submitMerchantTypeData(formData)" color="purple-9">Save</q-btn>
+          </div>
         </div>
       </form>
     </q-dialog>
@@ -115,7 +118,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

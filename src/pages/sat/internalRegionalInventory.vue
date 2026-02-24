@@ -6,7 +6,9 @@
             <q-tabs
               no-pane-border
               v-model="inventoryOptionSelected"
-              color="dark" class="class="shadow-1"
+              color="dark"
+              inverted
+              class="shadow-1"
             >
               <q-tab default name="spare" label="Spare Parts"  />
               <!-- <q-tab name="spareSo" label="Spare Parts So"  /> -->
@@ -36,92 +38,76 @@
               />
                 <q-tab name="simStatus" label="Sim Status"  />
               <q-tab name="deviceAllocationRequest" label="REQUEST"  />
-
-              <!-- -->
-
-
-
-
-
-
-              <!-- -->
-
-
-
-
-
-
-
-
-
-
-            </q-tabs>
-<q-tab-panels v-model="inventoryOptionSelected" animated>
-<q-tab-panel name="spare">
+              <q-tab-panel name="spare">
                 <spareParts
                   @emittedForTotalSerialNumbers="
                     fnAjaxFetchAllDeviceDetailsWithCount
                   "
                 />
               </q-tab-panel>
-<q-tab-panel name="spareSo">
+              <!--<q-tab-panel name="spareSo">
                 <sparePartsSo
                   @emittedForTotalSerialNumbers="
                     fnAjaxFetchAllDeviceDetailsWithCount
                   "
                 />
-              </q-tab-panel>
-<q-tab-panel name="count">
+              </q-tab-panel> -->
+              <q-tab-panel name="count">
                 <inventoryCount
                   @emittedForTotalSerialNumbers="
                     fnAjaxFetchAllDeviceDetailsWithCount
                   "
                 />
               </q-tab-panel>
-<q-tab-panel name="Socount">
+
+              <q-tab-panel name="Socount">
                 <inventoryCount
                   @emittedForTotalSerialNumbers="
                     fnAjaxFetchAllDeviceDetailsWithCount
                   "
                 />
               </q-tab-panel>
-<q-tab-panel name="dispatch">
+
+              <q-tab-panel name="dispatch">
                 <dispatchedInventory
                   @fetchDeviceDetailsWithCount="
                     fnAjaxFetchAllDeviceDetailsWithCount
                   "
                 />
               </q-tab-panel>
-<q-tab-panel name="damage">
+              <q-tab-panel name="damage">
                 <showAddDamagedDevices
                   :propDeviceTypes="getAllRegionalInventoryDeviceDetailsWithCount"
                 />
               </q-tab-panel>
-<q-tab-panel name="faulty">
+              <!-- <q-tab-panel name="faulty">
                 <inventoryFaulty />
-              </q-tab-panel>
-<q-tab-panel name="allocatetoso">
+              </q-tab-panel>-->
+
+              <q-tab-panel name="allocatetoso">
                 <inventoryallocatetoso />
               </q-tab-panel>
-<q-tab-panel name="inventorywithSo">
+
+              <q-tab-panel name="inventorywithSo">
                 <inventorywithso />
               </q-tab-panel>
-<q-tab-panel name="inventorywithResellar">
+
+              <q-tab-panel name="inventorywithResellar">
                 <inventorywithResellar />
               </q-tab-panel>
-<q-tab-panel name="inventorywithResellarDetails">
+              <q-tab-panel name="inventorywithResellarDetails">
                 <inventorywithResellarDetails />
               </q-tab-panel>
-<q-tab-panel name="AllocateSotoSo">
+              <q-tab-panel name="AllocateSotoSo">
                 <allocateSOtoSO />
               </q-tab-panel>
-<q-tab-panel name="simStatus">
+              <q-tab-panel name="simStatus">
                 <simStatus/>
               </q-tab-panel>
-<q-tab-panel name="deviceAllocationRequest">
+              <q-tab-panel name="deviceAllocationRequest">
                 <deviceAllocationRequest />
               </q-tab-panel>
-</q-tab-panels>
+            </q-tabs>
           </div>
         </div>
       </div>

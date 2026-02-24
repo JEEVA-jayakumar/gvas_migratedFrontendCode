@@ -6,7 +6,9 @@
             <q-tabs
               no-pane-border
               v-model="MarsApiOptionSelected"
-              color="dark" class="class="shadow-1"
+              color="dark"
+              inverted
+              class="shadow-1"
             >
               <q-tab name="DeviceModelApiSync" label="DeviceModel"  />
               <q-tab name="CityApiSync" label="City"  />
@@ -16,33 +18,25 @@
               <q-tab name="StateApiSync" label="State"  />
             
   
-
-
-
-
-
-
-            </q-tabs>
-<q-tab-panels v-model="MarsApiOptionSelected" animated>
-<q-tab-panel name="DeviceModelApiSync">
+              <q-tab-panel name="DeviceModelApiSync">
                 <DeviceModelApiSync />
               </q-tab-panel>
-<q-tab-panel name="CityApiSync">
+              <q-tab-panel name="CityApiSync">
                 <CityApiSync />
               </q-tab-panel>
-<q-tab-panel name="RegionApiSync">
+              <q-tab-panel name="RegionApiSync">
                 <RegionApiSync />
               </q-tab-panel>
-<q-tab-panel name="RentalPlanApiSync">
+              <q-tab-panel name="RentalPlanApiSync">
                 <RentalPlanApiSync />
               </q-tab-panel>
-<q-tab-panel name="LeadFormApiSync">
+              <q-tab-panel name="LeadFormApiSync">
                 <LeadFormApiSync />
               </q-tab-panel>
-<q-tab-panel name="StateApiSync">
+              <q-tab-panel name="StateApiSync">
                 <StateApiSync />
               </q-tab-panel>
-</q-tab-panels>
+            </q-tabs>
           </div>
         </div>
       </div>

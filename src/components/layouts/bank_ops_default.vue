@@ -10,9 +10,9 @@
       :content-style="{background: '#202c3f',width:'250px'}"
     >
       <q-list
-
+        no-border
         link
-
+        inset-delimiter
         highlight
         style="padding-top:65px"
       >

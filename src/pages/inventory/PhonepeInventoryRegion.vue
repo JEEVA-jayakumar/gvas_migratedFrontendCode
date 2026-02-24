@@ -10,22 +10,23 @@
             <div class="row bottom-border group q-px-md q-py-md items-center text-weight-regular text-grey-9">
                 <!--START: table title   :disable="disableDeviceTypeSelection" -->
                 <div class="col-md-2">
-                    <q-select v-model="formData.region" label="Select Region" radio color="grey-9" class=":options="regionOptions" @input="selectedAggregators" />
+                    <q-select v-model="formData.region" label="Select Region" radio color="grey-9"
+                        :options="regionOptions" @input="selectedAggregators" />
                 </div>
                 <!--@input="filterInventoryByRegion" -->
                 <!-- <div class="col-md-2">
-                    <q-select color="grey-9" class=":disable="formData.region == undefined" v-model="aggregator"
+                    <q-select color="grey-9" :disable="formData.region == undefined" v-model="aggregator"
                         label="Select Aggregator" radio :options="aggregatorOptions"
                         @input="selectedAggregators" />
                 </div> -->
                 <div class="col-md-2">
                     <q-select :disable="formData.region == ''" v-model="formData.device_type"
-                        label="Filter By Device" radio color="grey-9" class="@input="filterByDevice"
+                        label="Filter By Device" radio color="grey-9" @input="filterByDevice"
                         :options="deviceOptions" />
                 </div>
                 <div class="col-auto q-px-xs">
                     <downloadExcel :rows="regionalItems" :fields="json_fields" name="InventoryWithRegion.xls">
-                        <q-btn outline color="grey-9" class="label="Download as excel" />
+                        <q-btn outline color="grey-9" label="Download as excel" />
                     </downloadExcel>
                 </div>
                 <!-- @input="filterByDeviceName(formData)" -->

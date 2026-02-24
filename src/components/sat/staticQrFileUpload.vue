@@ -50,7 +50,7 @@
                   <q-separator />
                   <q-card-section>
                     <q-item dense>
-                      <q-item-section avatar><q-icon name="attach_file"  /></q-item-section>
+                      <q-item-section icon="attach_file" />
                       <q-item-section>{{
                         formData.fileSelected[0].name || ""
                       }}</q-item-section>
@@ -61,7 +61,8 @@
                   <q-card-actions align="end">
                     <q-btn
                       size="sm"
-                      color="negative" @click="removeUploadFile"
+                      color="negative"
+                      @click="removeUploadFile"
                       label="Remove"
                       icon="clear"
                     />
@@ -71,11 +72,13 @@
             </div>
             <div class="col-md-12 group" align="right">
               <q-btn
-                color="dark" class="label="Cancel"
+                color="dark"
+                label="Cancel"
                 @click="emitToggleStaticQrFileUpload"
               />
               <q-btn
-                color="purple-9" class="label="Upload"
+                color="purple-9"
+                label="Upload"
                 :disabled="formData.fileSelected.length == 0 "
                 @click="uploadFileForUpload"
               />
@@ -182,7 +185,7 @@
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down"
               });
               this.$q.loading.hide();

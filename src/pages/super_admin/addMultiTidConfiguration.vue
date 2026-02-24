@@ -27,7 +27,8 @@
                       <q-select
                         dense
                         outlined
-                        color="grey-9" v-model="formData.leadSource"
+                        color="grey-9"
+                        v-model="formData.leadSource"
                         :options="dropDown.leadSourceOptions"
                         label="Select lead source"
                         emit-value
@@ -41,7 +42,8 @@
                         dense
                         size="md"
                         icon="add"
-                        color="purple-9" @click="fnManageLeadSource"
+                        color="purple-9"
+                        @click="fnManageLeadSource"
                       />
                     </q-item-section>
                   </q-item>
@@ -52,7 +54,8 @@
                       <q-select
                         dense
                         outlined
-                        color="grey-9" v-model="formData.vas"
+                        color="grey-9"
+                        v-model="formData.vas"
                         :options="dropDown.vasOptions"
                         label="Select VAS"
                         emit-value
@@ -66,7 +69,8 @@
                         dense
                         size="md"
                         icon="add"
-                        color="purple-9" @click="fnManageTxnType"
+                        color="purple-9"
+                        @click="fnManageTxnType"
                       />
                     </q-item-section>
                   </q-item>
@@ -77,7 +81,8 @@
                       <q-select
                         dense
                         outlined
-                        color="grey-9" v-model="formData.masterHost"
+                        color="grey-9"
+                        v-model="formData.masterHost"
                         :options="dropDown.hostOptions"
                         label="Select Host"
                         emit-value
@@ -91,7 +96,8 @@
                         dense
                         size="md"
                         icon="add"
-                        color="purple-9" @click="fnManageHost"
+                        color="purple-9"
+                        @click="fnManageHost"
                       />
                     </q-item-section>
                   </q-item>
@@ -102,7 +108,8 @@
                       <q-select
                         dense
                         outlined
-                        color="grey-9" v-model="formData.institution"
+                        color="grey-9"
+                        v-model="formData.institution"
                         :options="dropDown.marsinstitutionOptions"
                         label="Select Mars Instance"
                         emit-value
@@ -116,7 +123,8 @@
                         dense
                         size="md"
                         icon="add"
-                        color="purple-9" @click="fnManageInstance"
+                        color="purple-9"
+                        @click="fnManageInstance"
                       />
                     </q-item-section>
                   </q-item>
@@ -126,7 +134,8 @@
                 <q-card-actions vertical align="end">
                   <q-btn
                     label="Submit"
-                    color="purple-9" @click="fnsubmit"
+                    color="purple-9"
+                    @click="fnsubmit"
                   />
                 </q-card-actions>
 

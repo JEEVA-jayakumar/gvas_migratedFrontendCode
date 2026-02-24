@@ -13,14 +13,16 @@
             @click="$router.push('/inventory/central')"
             outline
             label="Cancel Allocation"
-            color="negative" class="/>
+            color="negative"
+          />
         </div> -->
         <div class="col-6 col-sm-8 col-md-4" align="right">
           <!-- <q-btn
             @click="$router.push('/inventory/central')"
             outline
             label="Cancel Allocation"
-            color="negative" class="/>-->
+            color="negative"
+          />-->
         </div>
         <!--END: table title -->
       </div>
@@ -36,7 +38,8 @@
             v-model="formData.region"
             label="Select Region"
             radio
-            color="grey-9" class=":options="regionOptions"
+            color="grey-9"
+            :options="regionOptions"
             @input="regionBasedSO"
           />
         </div>
@@ -45,7 +48,8 @@
             v-model="formData.resellar"
             label="Select Resellar"
             radio
-            color="grey-9" class=":options="resellarOptions"
+            color="grey-9"
+            :options="resellarOptions"
           />
         </div>
         <div class="col-md-4">
@@ -57,7 +61,8 @@
             v-model="formData.device_type"
             label="Select Device Type"
             radio
-            color="grey-9" class=":options="deviceOptions"
+            color="grey-9"
+            :options="deviceOptions"
           />
         </div>
 
@@ -66,7 +71,8 @@
             :disabled="formData.device_type == '' || formData.region == ''"
             @click="openScannerComp"
             v-if="scannerToggleOption"
-            color="light-blue" class="class="q-py-xs"
+            color="light-blue"
+            class="q-py-xs"
             label="Start scan"
           />
           <q-btn
@@ -122,7 +128,8 @@
                       <q-btn
                         round
                         size="sm"
-                        color="negative" class="icon="clear"
+                        color="negative"
+                        icon="clear"
                         @click="fnRemoveScannedItems(index,subIndex)"
                       />
                     </q-item-section>
@@ -135,7 +142,8 @@
                       <q-btn
                         round
                         size="sm"
-                        color="negative" @click="fnRemoveDeviceTypeFromList(index)"
+                        color="negative"
+                        @click="fnRemoveDeviceTypeFromList(index)"
                         icon="clear"
                       />
                     </q-item-section>

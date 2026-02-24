@@ -15,14 +15,16 @@
             </span>
           </div>
           <div class="col-auto" v-if="Object.keys(v$.partnersArr.$each).length > 1">
-            <q-btn round icon="delete" @click="removePartnerFromArr(v,index)" color="negative"/>" class="</div>
+            <q-btn round icon="delete" @click="removePartnerFromArr(v,index)" color="negative"/>
+          </div>
         </div>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           :error="v.name.$anyError"
           @blur="v.name.$touch()"
-          color="grey-9" v-model="v.$model.name"
+          color="grey-9"
+          v-model="v.$model.name"
           label="Name*"
           placeholder="Name*"
         />
@@ -32,7 +34,8 @@
           upper-case
           :error="v.pan.$anyError"
           @blur="v.pan.$touch()"
-          color="grey-9" v-model="v.$model.pan"
+          color="grey-9"
+          v-model="v.$model.pan"
           label="Pan*"
           placeholder="Pan*"
         />
@@ -41,7 +44,8 @@
         <q-input
           :error="v.address.$anyError"
           @blur="v.address.$touch()"
-          color="grey-9" v-model="v.$model.address"
+          color="grey-9"
+          v-model="v.$model.address"
           label="Address*"
           placeholder="Address*"
         />
@@ -50,7 +54,8 @@
         <q-input
           :error="v.pin.$anyError"
           @blur="v.pin.$touch()"
-          color="grey-9" class="type="number"
+          color="grey-9"
+          type="number"
           v-model="v.$model.pin"
           label="Pincode*"
           placeholder="Pincode*"
@@ -60,7 +65,8 @@
         <q-input
           :error="v.cityRefLabel.$anyError || v.cityRefCode.$anyError"
           @blur="v.cityRefCode.$touch()"
-          color="grey-9" v-model="v.$model.cityRefLabel"
+          color="grey-9"
+          v-model="v.$model.cityRefLabel"
           label="City (type min 3 characters)*"
           placeholder="Start typing ..*"
         >
@@ -77,7 +83,8 @@
         <q-input
           :error="v.stateRefLabel.$anyError || v.stateRefCode.$anyError"
           @blur="v.stateRefCode.$touch()"
-          color="grey-9" v-model="v.$model.stateRefLabel"
+          color="grey-9"
+          v-model="v.$model.stateRefLabel"
           label="State (type min 3 characters)*"
           placeholder="Start typing ..*"
         >
@@ -94,7 +101,8 @@
         <q-input
           :error="v.contactMobile.$anyError"
           @blur="v.contactMobile.$touch()"
-          color="grey-9" class="type="tel"
+          color="grey-9"
+          type="tel"
           v-model="v.$model.contactMobile"
           label="Mobile*"
           placeholder="Mobile*"
@@ -104,7 +112,8 @@
         <q-input
           :error="v.contactEmail.$anyError"
           @blur="v.contactEmail.$touch()"
-          color="grey-9" class="type="email"
+          color="grey-9"
+          type="email"
           v-model="v.$model.contactEmail"
           label="Email*"
           placeholder="Email*"
@@ -112,16 +121,17 @@
       </div>
     </div>
     <q-stepper-navigation>
-      <q-btn color="primary" class="class="q-ma-xs" icon="check" @click="validate()" label="Continue"/>
+      <q-btn color="primary" class="q-ma-xs" icon="check" @click="validate()" label="Continue"/>
       <q-btn
-        color="amber-10" class="class="q-ma-xs"
+        color="amber-10"
+        class="q-ma-xs"
         icon="save"
         label="Save Partial"
         @click="$emit('saveData','partnerInformation',partnersArr)"
       />
-      <q-btn color="grey-7" class="class="q-ma-xs" icon="block" @click="$emit('goBack')" label="Back"/>
+      <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="$emit('goBack')" label="Back"/>
       <q-btn
-        color="positive" class="float-right"
+        color="positive float-right"
         @click="addMorePartnersSet"
         class="q-ma-xs"
         icon="add"

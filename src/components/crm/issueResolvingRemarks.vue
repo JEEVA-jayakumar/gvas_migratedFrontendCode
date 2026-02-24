@@ -16,7 +16,8 @@
             size="sm"
             @click="emitToggleRemarks"
             outline
-            color="dark" class="icon="clear"
+            color="dark"
+            icon="clear"
           />
         </div>
       </div>  
@@ -50,7 +51,8 @@
    
                 <q-btn
                   @click="fnsubmit(formData)"
-                  color="purple-9" class="icon="check"
+                  color="purple-9"
+                  icon="check"
                   label="Confirm"
                 />
                          
@@ -74,7 +76,7 @@
             </div>
             <div class="col-sm-1"></div>
             <div class="col-sm-2">
-              <q-btn icon="call_received" color="primary" class="label="Call Log"  @click="callLogs()" />
+              <q-btn icon="call_received" color="primary" label="Call Log"  @click="callLogs()" />
             </div>
           </div> -->
 
@@ -82,8 +84,9 @@
             <div class="col-sm-5">
               <q-select
                 stack-label="Issues"
-
-                color="none" v-model="formData.issue"
+                inverted-light
+                color="none"
+                v-model="formData.issue"
                 separator
                 :options="options"
                 @input="issueDocumentType"
@@ -94,8 +97,9 @@
             <div class="col-sm-5">
               <q-select
                 stack-label="Sub Issues"
-
-                color="none" v-model="formData.issue"
+                inverted-light
+                color="none"
+                v-model="formData.issue"
                 separator
                 :options="options"
               />
@@ -198,7 +202,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
             this.$q.loading.hide();

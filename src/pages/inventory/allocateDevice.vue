@@ -2,7 +2,7 @@
   <q-page>
     <!-- content -->
     <div class="row bottom-border q-px-md q-py-md items-center">
-    <q-radio class="radio" v-for="(item, index) in formData.flagOptions" :key="index" color="grey-9" class="v-model.trim="formData.flag"
+    <q-radio class="radio" v-for="(item, index) in formData.flagOptions" :key="index" color="grey-9" v-model.trim="formData.flag"
           :val="item.value" :label="item.label" />
           </div>
           <div>
@@ -15,7 +15,8 @@
             @click="$router.push('/inventory/central')"
             outline
             label="Cancel Allocation"
-            color="negative" class="/>
+            color="negative"
+          />
         </div>
         <!--END: table title -->
       </div>
@@ -29,7 +30,8 @@
             v-model="formData.region"
             label="Select Region"
             radio
-            color="grey-9" class=":options="regionOptions"
+            color="grey-9"
+            :options="regionOptions"
           />
           
         </div>
@@ -42,7 +44,8 @@
             v-model="formData.device_type"
             label="Select Device Type"
             radio
-            color="grey-9" class=":options="deviceOptions"
+            color="grey-9"
+            :options="deviceOptions"
           />
         </div>
          <!-- <div class="col-md-12 col-md-6 q-pt-md group" align="right">
@@ -70,7 +73,8 @@
             :disabled="formData.device_type == '' || formData.region == ''"
             @click="openScannerComp"
             v-if="scannerToggleOption"
-            color="light-blue" class="class="q-py-xs"
+            color="light-blue"
+            class="q-py-xs"
             label="Start scan"
           />
           <q-btn
@@ -126,7 +130,8 @@
                       <q-btn
                         round
                         size="sm"
-                        color="negative" class="icon="clear"
+                        color="negative"
+                        icon="clear"
                         @click="fnRemoveScannedItems(index,subIndex)"
                       />
                     </q-item-section>
@@ -139,7 +144,8 @@
                       <q-btn
                         round
                         size="sm"
-                        color="negative" @click="fnRemoveDeviceTypeFromList(index)"
+                        color="negative"
+                        @click="fnRemoveDeviceTypeFromList(index)"
                         icon="clear"
                       />
                     </q-item-section>
@@ -160,7 +166,7 @@
               >Bijlipay Allocate QR</div>
             </div>
               <div v-if="this.formData.count != null" class="row">
-                <q-card class="card" align="center" color="purple-9" class=">
+                <q-card class="card" align="center" color="purple-9"  >
                   <div>
                     <big class="alignbtn"  :style="'color'">{{ this.remainingCount == '' ? this.remainingCount = 0 : this.remainingCount
                     }} </big>
@@ -174,7 +180,7 @@
               </div>
               <div v-else class="row group">
                 <div>
-                  <q-banner color="purple-9" class="icon="info">No data available to display</q-banner>
+                  <q-banner color="purple-9" icon="info">No data available to display</q-banner>
                 </div>
               </div>
             </div>
@@ -183,7 +189,7 @@
               <label class="qrlabel"><b>Select Bank</b></label>
               <div class="col-md-3">
                 <q-select class="sizeBank" clearable label="Select Bank"  @input="showChannel($event)" v-model.trim="formData.bank" :error="v$.formData.bank.$error"
-                  color="grey-9" class=":options="bankListOptions" />
+                  color="grey-9" :options="bankListOptions" />
               </div>
             </div>
             <div class="col-md-9 col-sm-12 col-xs-12">
@@ -191,37 +197,35 @@
             <div class="row">
               <label class="qrlabel" ><b>Select Region</b></label>
               <div class="col-md-3">
-                <q-select class="sizeRegion" clearable :disable="this.formData.bank == ''" label="Select Region" v-model.trim="formData.regionList" :error="v$.formData.regionList.$error" color="grey-9" class=":options="RegionOptionIcici" />
+                <q-select class="sizeRegion" clearable :disable="this.formData.bank == ''" label="Select Region" v-model.trim="formData.regionList" :error="v$.formData.regionList.$error" color="grey-9"
+                  :options="RegionOptionIcici" />
               </div>
             </div>
         
           </div>
           <div class="row">
             <label class="qrlabel" for="input-id"><b>Enter No Of QR</b></label>
-            <q-input class="sizeQR" type="number" :disable="this.formData.regionList == ''" label="Enter no of QR" min="1" oninput="this.value = Math.abs(this.value)"  v-model.trim="formData.count" :error="v$.formData.count.$error"  @blur="v$.formData.count.$touch" color="grey-9" class="/>
+            <q-input class="sizeQR" type="number" :disable="this.formData.regionList == ''" label="Enter no of QR" min="1" oninput="this.value = Math.abs(this.value)"  v-model.trim="formData.count" :error="v$.formData.count.$error"  @blur="v$.formData.count.$touch" color="grey-9" />
           </div>
           <br />
           <div class="row">
             <label class="qrlabel" for="input-id"><b>Enter POD</b></label>
-            <q-input class="alignPOD" disable label="Enter POD" v-model.trim="formData.podNumber" :error="v$.formData.podNumber.$error"  @blur="v$.formData.podNumber.$touch"  color="grey-9" class="/>
+            <q-input class="alignPOD" disable label="Enter POD" v-model.trim="formData.podNumber" :error="v$.formData.podNumber.$error"  @blur="v$.formData.podNumber.$touch"  color="grey-9" />
           </div>
           <br />
           <div class="row">
             <div class="col-md-6" align="right">
-              <q-btn color="purple-9" class=":disable="this.formData.count == ''" label="Assign" @click="fnAssignsubmit()" />
+              <q-btn color="purple-9" :disable="this.formData.count == ''" label="Assign" @click="fnAssignsubmit()" />
             </div>
           </div>
           &nbsp;&nbsp;&nbsp;
           <div class="col-4">
-            <q-tabs v-model="activeTab" class="shadow-1" color="grey-1">" class="<q-tab color="dark" name="tab-1"  label="Pending QR" />
-              <q-tab color="dark" class="name="tab-2"  label="Approved QR" />
-
-
-            </q-tabs>
-<q-tab-panels v-model="activeTab" animated>
-<q-tab-panel name="tab-1">
+            <q-tabs v-model="activeTab" class="shadow-1" color="grey-1">
+              <q-tab color="dark" name="tab-1"  label="Pending QR" />
+              <q-tab color="dark" name="tab-2"  label="Approved QR" />
+              <q-tab-panel name="tab-1">
                 <div>
-                  <q-input class="col-5 search" clearable color="grey-9" class="placeholder="Type.." v-model="filter"
+                  <q-input class="col-5 search" clearable color="grey-9" placeholder="Type.." v-model="filter"
                     label="Search By POD Number" />
                 </div>
                 <q-table table-class="customTableClass" :rows="tableData" :columns="columns"
@@ -259,8 +263,8 @@
                   </q-td>
                 </q-table>
               </q-tab-panel>
-<q-tab-panel name="tab-2">
-                <q-input class="col-5 search" clearable color="grey-9" class="placeholder="Type.." v-model="filter1"
+              <q-tab-panel name="tab-2">
+                <q-input class="col-5 search" clearable color="grey-9" placeholder="Type.." v-model="filter1"
                   label="Search By POD Number" />
                 <q-table table-class="customTableClass" :rows="tableData1" :columns="columns1"
                   :pagination="paginationControl1" :filter="filter1" row-key="id" :loading="toggleAjaxLoadFilter1"
@@ -283,7 +287,7 @@
                   }}</q-td>
                 </q-table>
               </q-tab-panel>
-</q-tab-panels>
+            </q-tabs>
 
           </div>
         </div>
@@ -771,7 +775,7 @@ export default {
     //         this.$q.notify({
     //           color: "negative",
     //           position: "bottom",
-    //           message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+    //           message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
     //           icon: "thumb_down"
     //         });
     //       });

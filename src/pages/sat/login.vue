@@ -47,7 +47,8 @@
 
                     </div>
                     <div class="col-md-8" align="center">
-                        <q-btn class="full-width text-weigth-regular q-pa-md" no-caps color="purple-9" class="style="max-width:300px" @click="fnsubmit(FormData)">Submit</q-btn>
+                        <q-btn class="full-width text-weigth-regular q-pa-md" no-caps color="purple-9"
+                            style="max-width:300px" @click="fnsubmit(FormData)">Submit</q-btn>
                     </div>
 
                 </div>

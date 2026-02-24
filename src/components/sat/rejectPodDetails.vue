@@ -11,22 +11,22 @@
                 <!-- <div class="gutter-xs">
             <q-radio 
             @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
-            :error="v$.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="Short Fund" color="grey-9" class="label="Short Fund" />
+            :error="v$.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="Short Fund" color="grey-9" label="Short Fund" />
             <q-radio @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
-            :error="v$.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="Excess Fund" color="grey-9" class="label="Excess Fund" />
+            :error="v$.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="Excess Fund" color="grey-9" label="Excess Fund" />
             <q-radio @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
-            :error="v$.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="Cheque Bounce" color="grey-9" class="label="Cheque Bounce" />
+            :error="v$.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="Cheque Bounce" color="grey-9" label="Cheque Bounce" />
             <q-radio @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
-            :error="v$.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="No Fund" color="grey-9" class="label="No Fund" />
+            :error="v$.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="No Fund" color="grey-9" label="No Fund" />
             <q-radio @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
-            :error="v$.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="Others" color="grey-9" class="label="Others" />
+            :error="v$.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="Others" color="grey-9" label="Others" />
           </div> -->
                 <q-input type="textarea" placeholder="Type.." @blur="v$.formData.regionRemarks.$touch"
-                    :error="v$.formData.regionRemarks.$error" class="q-my-md" color="grey-9" class="align="left" value=""
+                    :error="v$.formData.regionRemarks.$error" class="q-my-md" color="grey-9" align="left" value=""
                     v-model="formData.regionRemarks" />
-                <q-btn color="negative" class="class="q-ma-sm float-right" @click="PodRejectDetails(formData)" align="right"
+                <q-btn color="negative" class="q-ma-sm float-right" @click="PodRejectDetails(formData)" align="right"
                     label="Reject" />
-                <q-btn align="right" color="grey-9" class="class="float-right q-ma-sm"
+                <q-btn align="right" color="grey-9" class="float-right q-ma-sm"
                     @click="emitToggleReject(showRejectModel)">Cancel
                 </q-btn>
             </div>
@@ -140,7 +140,9 @@ export default {
                                         color: "negative",
                                         position: "bottom",
                                         message:
-                                            (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                                            error.body.message == null
+                                                ? "Please Try Again Later !"
+                                                : error.body.message,
                                         icon: "thumb_down"
                                     });
                                 });
@@ -152,7 +154,9 @@ export default {
                                     color: "negative",
                                     position: "bottom",
                                     message:
-                                        (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                                        error.body.message == null
+                                            ? "Please Try Again Later !"
+                                            : error.body.message,
                                     icon: "thumb_down"
                                 });
                             });

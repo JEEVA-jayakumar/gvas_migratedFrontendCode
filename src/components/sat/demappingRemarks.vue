@@ -18,7 +18,7 @@
         <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
           <q-card style="width:250%">
             <q-card-section>
-              <q-list >
+              <q-list no-border>
                 <div class="col-md-12">
                   <q-input
                     type="textarea"
@@ -26,7 +26,8 @@
                     :error="v$.formData.reason.$error"
                     @blur="v$.formData.reason.$touch"
                     class="q-my-md"
-                    color="grey-9" class="align="left"
+                    color="grey-9"
+                    align="left"
                     value=""
                     v-model="formData.reason"
                   />
@@ -44,7 +45,8 @@
               <q-btn
                 label="submit"
                 @click="fnReasonRemarks(formData)"
-                color="purple-9" class="/>
+                color="purple-9"
+              />
 
             </q-card-actions>
           </q-card>
@@ -143,7 +145,7 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-              (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              error.body.message == null ? "Please Try Again Later !": error.body.message,
               icon: "thumb_down"
             });
           });

@@ -14,19 +14,22 @@
         :error="v$.formData.leadDetails.reason.$error"
         placedholder="Type.."
         label="Reason"
-        color="grey-9" class="align="left"
+        color="grey-9"
+        align="left"
         v-model="formData.leadDetails.reason"
       />
       <q-btn
         icon="clear"
-        color="negative" class="class="q-ma-sm float-right"
+        color="negative"
+        class="q-ma-sm float-right"
         @click="fnRejectLeadFinal(formData,propToggleDocumentRejectModal)"
         align="right"
         label="Reject"
       />
       <q-btn
         icon="block"
-        color="grey-5" @click="emitToggleRemarks()"
+        color="grey-5"
+        @click="emitToggleRemarks()"
         class="q-ma-sm float-right text-dark"
         align="right"
         v-close-overlay

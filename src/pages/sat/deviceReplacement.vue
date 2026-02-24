@@ -21,7 +21,7 @@ formData.marsDeviceIdsCooked.length
 </div>
 <div class="col-md-3 col-sm-6 col-xs-6">
 <q-select filter clearable v-model="formData.assignTo" :options="assignToOptions"
-placeholder="Assign To" separator color="grey-9" class="/>
+placeholder="Assign To" separator color="grey-9" />
 </div>
 <div class="col-md-3 col-sm-6 col-xs-6" align="right">
 <q-btn no-caps :disabled="
@@ -41,7 +41,7 @@ formData.marsDeviceIdsCooked.length == 0
 <!-- Select Box -->
 <div class="col-md-3 col-sm-6 col-xs-6">
 <q-select filter clearable v-model="formData.assignToReassign" :options="assignToOptions"
-placeholder="Re-Assign To" separator color="grey-9" class=":disable="isReAssignDropdownDisabled"
+placeholder="Re-Assign To" separator color="grey-9" :disable="isReAssignDropdownDisabled"
 @click.native="handleReAssignDropdownClick" />
 
 </div>
@@ -65,19 +65,15 @@ placeholder="Re-Assign To" separator color="grey-9" class=":disable="isReAssignD
 </div>
 </q-card>
 <!--END: table Footer -->
-<q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" class="@select="goToUnassignedTab">
-<q-tab default color="dark" class="name="unAssigned"  label="Unassigned" />
-<q-tab color="dark" class="name="assigned"  label="Assigned" />
-
-
-</q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
+<q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToUnassignedTab">
+<q-tab default color="dark" name="unAssigned"  label="Unassigned" />
+<q-tab color="dark" name="assigned"  label="Assigned" />
 <q-tab-panel name="assigned">
 <!--START: table Data -->
 <q-table :rows="tableData" :columns="columnDataAssigned" selection="multiple"
 table-class="customTableClass" :filter="filterSearch" :pagination="paginationControl"
 v-model:selected="formData.marsDeviceIdsCookedUnAssinged" row-key="id" :loading="tableAjaxLoading"
-:rows-per-page-options="[5, 10, 15, 20]" color="dark" class="@request="ajaxLoadAllLeadInfo">
+:rows-per-page-options="[5, 10, 15, 20]" color="dark" @request="ajaxLoadAllLeadInfo">
 <!-- selection="multiple" -->
 <q-td v-if="
 props.row.leadInformation != null ||
@@ -153,7 +149,7 @@ label="Search By TID, MID" class="q-mr-lg q-py-sm" />
 <q-table :rows="tableData1" :columns="columnDataUnassigned" table-class="customTableClass"
 :filter="filterSearch1" selection="multiple" :selected="formData.marsDeviceIdsCooked"
 v-model:pagination="paginationControl1" row-key="id" :loading="tableAjaxLoading1"
-:rows-per-page-options="[5, 10, 15, 20]" color="dark" class="@request="ajaxLoadAllLeadInfo1">
+:rows-per-page-options="[5, 10, 15, 20]" color="dark" @request="ajaxLoadAllLeadInfo1">
 <q-td v-if="
 props.row.leadInformation != null ||
 props.row.qrLeadInformation != null
@@ -224,7 +220,7 @@ label="Search By TID, MID" class="q-mr-lg q-py-sm" />
 </q-table>
 <!--END: table Data -->
 </q-tab-panel>
-</q-tab-panels>
+</q-tabs>
 <div class="row items-center gutter-y-sm">
 <div class="col-md-9 col-sm-12 col-xs-12">
 <div class="row items-center"></div>

@@ -7,7 +7,8 @@
             <!-- <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
         <div class="col-md-2">
           <q-select
-            color="grey-9" v-model="formData.allocate_region"
+            color="grey-9"
+            v-model="formData.allocate_region"
             :options="regionOptions"
             label="Select Region"
             @input="regionBasedSoLoad"
@@ -18,7 +19,8 @@
             v-model="formData.allocate_so"
             label="Select SO"
             radio
-            color="grey-9" class=":options="regionBasedSo"
+            color="grey-9"
+            :options="regionBasedSo"
           />
         </div>
         <div class="row">
@@ -46,7 +48,8 @@
             v-model="formData.pod_number"
             label="Pod Number"
             radio
-            color="grey-9" class="/>
+            color="grey-9"
+          />
         </div>
         <div class="col-md-7">
           <q-input
@@ -54,7 +57,8 @@
             v-model="formData.total_count"
             label="Total Count"
             radio
-            color="grey-9" class="/>
+            color="grey-9"
+          />
         </div>
       </div> -->
             <div class="row bottom-border group q-px-md q-py-md items-center text-weight-regular text-grey-9">
@@ -63,7 +67,8 @@
                         label="Select Region" @input="regionBasedSoLoad" />
                 </div>
                 <div class="col-md-2">
-                    <q-select filter clearable :disable="this.propRowDetails.allocate_so == null" v-model="formData.allocate_so" label="Select SO" radio color="grey-9" class=":options="regionBasedSo" />
+                    <q-select filter clearable :disable="this.propRowDetails.allocate_so == null" v-model="formData.allocate_so" label="Select SO" radio color="grey-9"
+                        :options="regionBasedSo" />
                 </div>
                  <div class="col-md-2">
                     <div v-for="menu in sparePartsTypes" :key="menu.id" :to="menu.to">
@@ -78,10 +83,10 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <q-input disable v-model="formData.pod_number" label="Pod Number" radio color="grey-9" class="/>
+                    <q-input disable v-model="formData.pod_number" label="Pod Number" radio color="grey-9" />
                 </div>
                 <div class="col-md-2">
-                    <q-input disable v-model="formData.total_count" label="Total Count" radio color="grey-9" class="/>
+                    <q-input disable v-model="formData.total_count" label="Total Count" radio color="grey-9" />
                 </div> 
             </div>
             <div class="full-width group" align="center">
@@ -269,7 +274,9 @@ export default {
                         color: "negative",
                         position: "bottom",
                         message:
-                            (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                            error.body.message == null
+                                ? "Please Try Again Later !"
+                                : error.body.message,
                         icon: "thumb_down"
                     });
                 });
@@ -293,9 +300,9 @@ export default {
         //         color: "negative",
         //         position: "bottom",
         //         message:
-        //           error.data.message == null
+        //           error.body.message == null
         //             ? "Please Try Again Later !"
-        //             : error.data.message,
+        //             : error.body.message,
         //         icon: "thumb_down"
         //       });
         //     });
@@ -319,9 +326,9 @@ export default {
         //         color: "negative",
         //         position: "bottom",
         //         message:
-        //           error.data.message == null
+        //           error.body.message == null
         //             ? "Please Try Again Later !"
-        //             : error.data.message,
+        //             : error.body.message,
         //         icon: "thumb_down"
         //       });
         //     });

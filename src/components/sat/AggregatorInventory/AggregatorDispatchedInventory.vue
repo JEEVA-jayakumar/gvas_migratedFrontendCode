@@ -5,7 +5,7 @@
             <div class="col-md-4" style="border-right: 1px solid #ccc;">
                 <!-- <div class="row group items-baseline">
                     <div class="col-12">
-                        <q-chip color="purple-9">Step" class="-1</q-chip>&nbsp; Select Aggregator
+                        <q-chip color="purple-9">Step -1</q-chip>&nbsp; Select Aggregator
                     </div>
                     <div class="col">
                         <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
@@ -15,11 +15,11 @@
                 </div> -->
                 <div class="row group items-baseline">
                     <div class="col-12">
-                        <q-chip color="purple-9">Step" class="-1</q-chip>&nbsp; Enter POD number and submit
+                        <q-chip color="purple-9">Step -1</q-chip>&nbsp; Enter POD number and submit
                     </div>
                     <!--aggregator == ''-->
                     <div class="col">
-                        <q-input  v-model="podNumber" color="grey-9" class="placeholder="POD Number"
+                        <q-input  v-model="podNumber" color="grey-9" placeholder="POD Number"
                             label="Enter POD Number" />
                     </div>
                     <div class="col-auto" align="right">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="row">
                     <div class="q-pa-sm col-12">
-                        <q-chip color="purple-9">Step" class="-2</q-chip>&nbsp; Select a device type
+                        <q-chip color="purple-9">Step -2</q-chip>&nbsp; Select a device type
                     </div>
                     <div class="col-md-12">
                         <div class="q-pa-sm cursor-pointer" v-for="(item, index) in deviceTableData" :key="index"
@@ -58,7 +58,7 @@
             <div class="col-md-8">
                 <div class="q-pa-sm">
                     <p>
-                        <q-chip color="purple-9">Step" class="-3</q-chip>&nbsp; Click on scan
+                        <q-chip color="purple-9">Step -3</q-chip>&nbsp; Click on scan
                     </p>
                     <p>
                         <q-chip color="purple-9">Step -4</q-chip>&nbsp; Once scanning is done, click on upload to
@@ -71,8 +71,8 @@
                     :rows="deviceregionalInventoryList" :columns="columnData" :filter="filter"
                     :pagination="paginationControl" :loading="toggleAjaxLoadFilter" row-key="name">
                     <q-td v-slot:body-cell-inboundVerified="props" :props="props">
-                        <q-btn flat v-if="props.row.inboundVerifiedStatus == 1" icon="check" color="positive" class="/>
-                        <q-btn flat v-else-if="props.row.inboundVerifiedStatus == 2" icon="clear" color="negative" class="/>
+                        <q-btn flat v-if="props.row.inboundVerifiedStatus == 1" icon="check" color="positive" />
+                        <q-btn flat v-else-if="props.row.inboundVerifiedStatus == 2" icon="clear" color="negative" />
                         <q-btn flat color="amber-9" v-else icon="warning" />
                     </q-td>
                     <template v-slot:top="props" class="bottom-border">

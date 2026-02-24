@@ -13,7 +13,8 @@
             @blur="v$.formData.otp.$touch"
             :error="v$.formData.otp.$error"
             class="text-weight-regular text-grey-8"
-            color="grey-9" class="label="*Enter OTP"
+            color="grey-9"
+            label="*Enter OTP"
             placeholder="Enter OTP"
             maxlength="6"
             onkeypress="return (event.charCode > 47 && event.charCode < 59)"
@@ -25,7 +26,8 @@
           :disable="this.formData.otp.length != 6"
           size="md"
           type="button"
-          color="purple-9" @click="fnSubmitotp(formData)"
+          color="purple-9"
+          @click="fnSubmitotp(formData)"
           >Submit</q-btn
         >
       </div>
@@ -91,7 +93,7 @@ export default {
               this.$q.notify({
                 color: "positive",
                 position: "bottom",
-                message: this.otpresponse.data.message,
+                message: this.otpresponse.body.message,
                 icon: "thumb_up",
               });
               this.$router.push({ name: "KsnEnable" });
@@ -101,7 +103,7 @@ export default {
                 type: "warning",
                 color: "amber-9",
                 position: "bottom",
-                message: this.otpresponse.data.message,
+                message: this.otpresponse.body.message,
                 icon: "thumb_up",
               });
             }
@@ -143,7 +145,7 @@ export default {
                   this.$q.notify({
                     color: "positive",
                     position: "bottom",
-                    message: this.otpresponse.data.message,
+                    message: this.otpresponse.body.message,
                     icon: "thumb_up",
                   });
                 } else {
@@ -152,7 +154,7 @@ export default {
                     type: "warning",
                     color: "amber-9",
                     position: "bottom",
-                    message: this.otpresponse.data.message,
+                    message: this.otpresponse.body.message,
                     icon: "thumb_up",
                   });
                 }
@@ -172,13 +174,13 @@ export default {
               type: "warning",
               color: "amber-9",
               position: "bottom",
-              message: this.mobiledata.data.message,
+              message: this.mobiledata.body.message,
               icon: "thumb_up",
             });
           }
         })
         .catch((error) => {
-          if (error.data.message == "Value already present") {
+          if (error.body.message == "Value already present") {
             this.$q.loading.show({
               delay: 100,
               spinnerColor: "purple-9",
@@ -192,7 +194,7 @@ export default {
                   this.$q.notify({
                     color: "positive",
                     position: "bottom",
-                    message: this.otpresponse.data.message,
+                    message: this.otpresponse.body.message,
                     icon: "thumb_up",
                   });
                 } else {
@@ -201,7 +203,7 @@ export default {
                     type: "warning",
                     color: "amber-9",
                     position: "bottom",
-                    message: this.otpresponse.data.message,
+                    message: this.otpresponse.body.message,
                     icon: "thumb_up",
                   });
                 }

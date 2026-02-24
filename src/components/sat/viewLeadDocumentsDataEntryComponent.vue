@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-list  class="no-padding">
+    <q-list no-border class="no-padding">
       <!-- START >> (Mandatory) Application form  -->
       <q-expansion-item
         separator
@@ -15,7 +15,7 @@
         <q-item v-if="showDocumentPreview" separator class="text-body1">
           <q-item-section v-if="propGetShortInfo.applicationFileMimeType.includes('pdf')">
             <div @click="fnDocumentUrl(propGetShortInfo.applicationFile)" class="ellipsis">
-              <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" class="/>
+              <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" />
               &nbsp;{{propGetShortInfo.applicationFile}}
             </div>
           </q-item-section>
@@ -62,7 +62,8 @@
                 >
                   <template slot="header">
                     <q-item-section
-                      :color="documents[0].kycException?'amber-9':''" class=":icon="documents[0].kycException? 'warning' :'attach_file'"
+                      :color="documents[0].kycException?'amber-9':''"
+                      :icon="documents[0].kycException? 'warning' :'attach_file'"
                     />
                     <q-item-section
                       class="text-body1"
@@ -74,14 +75,16 @@
                         round
                         size="xs"
                         class="q-ma-xs"
-                        color="green" class="icon="fas fa-check"
+                        color="green"
+                        icon="fas fa-check"
                         @click="fnDocumentApproveModal(documents[0])"
                       />
                       <q-btn
                         round
                         size="xs"
                         class="q-ma-xs"
-                        color="red" class="icon="fas fa-times"
+                        color="red"
+                        icon="fas fa-times"
                         @click="fnDocumentRejectModal(documents[0])"
                       />
                     </q-item-section>
@@ -108,7 +111,7 @@
                         v-if="item.mimeType.includes('application')"
                         class="ellipsis"
                       >
-                        <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" class="/>
+                        <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" />
                         &nbsp;{{propGetShortInfo.applicationFile}}
                       </q-item-section>
                       <q-item-section v-else-if="item.mimeType.includes('image')">
@@ -138,7 +141,7 @@
               <div class="col-md-12 text-body1">
                 <q-expansion-item separator opened :group="toggleCollapsible" class="full-width">
                   <template slot="header">
-                    <q-item-section avatar><q-icon name="apps"  /></q-item-section>
+                    <q-item-section icon="apps" />
                     <q-item-section
                       class="text-body1"
                       :sublabel="documents.length + 'Type(s)'"
@@ -149,14 +152,16 @@
                         round
                         size="xs"
                         class="q-ma-xs"
-                        color="green" class="icon="fas fa-check"
+                        color="green"
+                        icon="fas fa-check"
                         @click="fnDocumentApproveModal(documents[0])"
                       />
                       <q-btn
                         round
                         size="xs"
                         class="q-ma-xs"
-                        color="red" class="icon="fas fa-times"
+                        color="red"
+                        icon="fas fa-times"
                         @click="fnDocumentRejectModal(documents[0])"
                       />
                     </q-item-section>
@@ -181,7 +186,8 @@
                       <q-expansion-item separator opened multiline class="full-width">
                         <template slot="header">
                           <q-item-section
-                            :color="subDocument.kycException?'amber-9':''" class=":icon="subDocument.kycException? 'warning' :'attach_file'"
+                            :color="subDocument.kycException?'amber-9':''"
+                            :icon="subDocument.kycException? 'warning' :'attach_file'"
                           />
                           <q-item-section
                             class="text-body1"
@@ -193,14 +199,16 @@
                               round
                               size="xs"
                               class="q-ma-xs"
-                              color="green" class="icon="fas fa-check"
+                              color="green"
+                              icon="fas fa-check"
                               @click="fnDocumentApproveModal(subDocument)"
                             />
                             <q-btn
                               round
                               size="xs"
                               class="q-ma-xs"
-                              color="red" class="icon="fas fa-times"
+                              color="red"
+                              icon="fas fa-times"
                               @click="fnDocumentRejectModal(subDocument)"
                             />
                           </q-item-section>
@@ -227,7 +235,7 @@
                               v-if="item.mimeType.includes('application')"
                               class="ellipsis"
                             >
-                              <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" class="/>
+                              <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" />
                               &nbsp;{{item.fileName}}
                             </q-item-section>
                             <q-item-section v-else-if="item.mimeType.includes('image')">

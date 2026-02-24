@@ -34,7 +34,7 @@
               </q-item>
               </q-card-section>
               <q-card-actions vertical align="end">
-               <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" class="/>
+               <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" />
               </q-card-actions>
             </q-card>
           </div>
@@ -206,7 +206,9 @@ import {
               color: "amber-9",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                error.body.message == null
+                  ? "Please Try Again Later !"
+                  : error.body.message,
               icon: "thumb_down",
             });
             var self = this;

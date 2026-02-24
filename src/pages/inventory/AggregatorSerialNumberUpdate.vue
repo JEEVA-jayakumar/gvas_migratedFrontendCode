@@ -6,7 +6,8 @@
          <!-- <q-btn
             icon="cloud_upload"
             class="q-ma-sm"
-            color="positive" class="label="Upload Bank List"
+            color="positive"
+            label="Upload Bank List"
             @click="fnUploadDocumentAndSubmit"
           />-->
         </div>
@@ -22,7 +23,8 @@
               <div class="col-md-6">
                   <q-input :error="v$.formData.tid.$error"
                               clearable
-                              color="grey-9" class="v-model.trim="formData.tid"
+                              color="grey-9"
+                              v-model.trim="formData.tid"
                               label="TID"
                               placeholder="TID"
                             >
@@ -37,7 +39,8 @@
                           <div class="col-md-6">
                   <q-input disable :error="v$.formData.serialNumber.$error"
                               clearable
-                              color="grey-9" class="v-model.trim="formData.serialNumber"
+                              color="grey-9"
+                              v-model.trim="formData.serialNumber"
                               label="serialNumber"
                               placeholder="serialNumber"
                             >
@@ -46,7 +49,8 @@
                                       <div class="col-md-6">
                   <q-input :error="v$.formData.newSerialNumber.$error"
                               clearable
-                              color="grey-9" class="v-model.trim="formData.newSerialNumber"
+                              color="grey-9"
+                              v-model.trim="formData.newSerialNumber"
                               label="New Serial Number"
                               placeholder="New Serial Number"
                             >
@@ -59,7 +63,8 @@
           <q-btn
             size="md"
             type="button"
-            color="purple-9" @click="fnSubmitBankDetails(formData)"
+            color="purple-9"
+            @click="fnSubmitBankDetails(formData)"
           >Submit</q-btn>
         </div>
       </form>

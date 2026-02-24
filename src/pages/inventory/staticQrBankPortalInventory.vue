@@ -4,23 +4,19 @@
       <q-tabs
         v-model="activeTab"
         class="shadow-1"
-        color="grey-1" class="@select="goToCompleteTab"
+        color="grey-1"
+        @select="goToCompleteTab"
       >
-        <q-tab default color="dark" class="name="tab-1"  label="New Requests" />
-        <q-tab color="dark" class="name="tab-2"  label="Courier" />
-        <q-tab color="dark" class="name="tab-3"  label="Failure Onboarding" />
-
-
-
-
-      </q-tabs>
-<q-tab-panels v-model="activeTab" animated>
-<q-tab-panel name="tab-1">
+        <q-tab default color="dark" name="tab-1"  label="New Requests" />
+        <q-tab color="dark" name="tab-2"  label="Courier" />
+        <q-tab color="dark" name="tab-3"  label="Failure Onboarding" />
+        <q-tab-panel name="tab-1">
           <div class="row items-center">
             <q-input
               class="col-5"
               clearable
-              color="grey-9" v-model="filter"
+              color="grey-9"
+              v-model="filter"
               placeholder="Type.."
               label="Search LeadNo, ContactName, LegalName, MerchantNumber..."
             />
@@ -103,7 +99,8 @@
                   "
                   highlight
                   push
-                  color="purple" size="sm"
+                  color="purple"
+                  size="sm"
                   @click="newRequestSumbit(props.row)"
                   >Submit</q-btn
                 >
@@ -111,7 +108,7 @@
             </q-td>
           </q-table>
         </q-tab-panel>
-<q-tab-panel name="tab-2">
+        <q-tab-panel name="tab-2">
           <q-table
             table-class="customTableClass"
             class="q-py-none"
@@ -142,7 +139,8 @@
                   highlight
                   :disable="props.row.podNumber == '' || props.row.podNumber == null"
                   push
-                  color="purple" size="sm"
+                  color="purple"
+                  size="sm"
                   @click="courierSumbit(props.row)"
                   >Submit</q-btn
                 >
@@ -150,7 +148,8 @@
             </q-td>
           </q-table>
         </q-tab-panel>
-<q-tab-panel name="tab-3">
+
+        <q-tab-panel name="tab-3">
           <q-table
             table-class="customTableClass"
             class="q-py-none"
@@ -167,7 +166,8 @@
                 <q-btn
                   highlight
                   push
-                  color="purple" size="sm"
+                  color="purple"
+                  size="sm"
                   @click="ReferBackSumbit(props.row)"
                   >RE-Submit</q-btn
                 >
@@ -175,7 +175,7 @@
             </q-td>
           </q-table>
         </q-tab-panel>
-</q-tab-panels>
+      </q-tabs>
     </div>
     <ScanStaticInventory
       v-if="propToggleScan"
@@ -846,20 +846,20 @@ export default {
     //       // console.log("REQUEST", request.serviceReqTicketId);
     //       this.PHONEPE_PAPER_ROLL_SUBMIT(request.serviceReqTicketId).then(
     //         response => {
-    //           console.log("RSPONSE", response.data.message);
+    //           console.log("RSPONSE", response.body.message);
     //           //
-    //           if (response.data.data != null) {
+    //           if (response.body.data != null) {
     //             this.$q.notify({
     //               color: "positive",
     //               position: "bottom",
-    //               message: response.data.message,
+    //               message: response.body.message,
     //               icon: "thumb_up"
     //             });
     //           } else {
     //             this.$q.notify({
     //               color: "negative",
     //               position: "bottom",
-    //               message: response.data.message,
+    //               message: response.body.message,
     //               icon: "thumb_down"
     //             });
     //           }
@@ -946,7 +946,9 @@ export default {
             position: "bottom",
             // message: "Error in Updating Courier!",
             message:
-              (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              error.body.message == null
+                ? "Please Try Again Later !"
+                : error.body.message,
             icon: "thumb_down",
           });
           this.$q.loading.hide();

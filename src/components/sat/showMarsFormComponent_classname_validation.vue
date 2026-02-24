@@ -11,7 +11,7 @@
       </div>
       <!-- Document related form -->
       <div id="rightSidePane" class="col-md-7 q-pa-xs block relative merchant">
-        <q-stepper color="purple-9" class="ref="stepper" contractable text alternative-labels>
+        <q-stepper color="purple-9" ref="stepper" contractable text alternative-labels>
           <q-step
             class="salesInformation"
             error-icon="warning"
@@ -27,7 +27,8 @@
                   @blur="v$.merchant.salesInformation.institutionCode.$touch"
                   :error="v$.merchant.salesInformation.institutionCode.$error"
                   placeholder="Choose from the below"
-                  color="grey-9" class="v-model.trim="merchant.salesInformation.institutionCode"
+                  color="grey-9"
+                  v-model.trim="merchant.salesInformation.institutionCode"
                   label="Institution Code*"
                   :options="institutionCodeOptions"
                   @input="fetchAllDropdownValuesFromMARSapi"
@@ -39,7 +40,8 @@
                   @blur="v$.merchant.salesInformation.applicationType.$touch"
                   :error="v$.merchant.salesInformation.applicationType.$error"
                   placeholder="Choose from the below*"
-                  color="grey-9" class="v-model.trim="merchant.salesInformation.applicationType"
+                  color="grey-9"
+                  v-model.trim="merchant.salesInformation.applicationType"
                   label="Application Type*"
                   :options="applicationTypeOptions"
                 />
@@ -49,7 +51,8 @@
                   class="applicationNumber"
                   @blur="v$.merchant.salesInformation.applicationNumber.$touch"
                   :error="v$.merchant.salesInformation.applicationNumber.$error"
-                  color="grey-9" class="v-model.trim="merchant.salesInformation.applicationNumber"
+                  color="grey-9"
+                  v-model.trim="merchant.salesInformation.applicationNumber"
                   label="Application Number*"
                   placeholder="Application Number*"
                 />
@@ -59,7 +62,8 @@
                   class="applicationDate"
                   @blur="v$.merchant.salesInformation.applicationDate.$touch"
                   :error="v$.merchant.salesInformation.applicationDate.$error"
-                  color="grey-9" class="format="DD/MM/YYYY"
+                  color="grey-9"
+                  format="DD/MM/YYYY"
                   format-model="number"
                   modal
                   v-model.trim="merchant.salesInformation.applicationDate"
@@ -74,7 +78,8 @@
                   format-model="number"
                   @blur="v$.merchant.salesInformation.aggreementDate.$touch"
                   :error="v$.merchant.salesInformation.aggreementDate.$error"
-                  color="grey-9" class="modal
+                  color="grey-9"
+                  modal
                   v-model.trim="merchant.salesInformation.aggreementDate"
                   label="Agreement Date*"
                   placeholder="Agreement Date*"
@@ -86,7 +91,8 @@
                   @blur="v$.merchant.salesInformation.merchantType.$touch"
                   :error="v$.merchant.salesInformation.merchantType.$error"
                   placeholder="Choose from the below*"
-                  color="grey-9" class="v-model.trim="merchant.salesInformation.merchantType"
+                  color="grey-9"
+                  v-model.trim="merchant.salesInformation.merchantType"
                   label="Merchant Type*"
                   :options="merchantTypeOptions"
                 />
@@ -97,7 +103,8 @@
                   @blur="v$.merchant.salesInformation.categoryType.$touch"
                   :error="v$.merchant.salesInformation.categoryType.$error"
                   placeholder="Choose from the below*"
-                  color="grey-9" class="v-model.trim="merchant.salesInformation.categoryType"
+                  color="grey-9"
+                  v-model.trim="merchant.salesInformation.categoryType"
                   label="Category Type*"
                   :options="categoryTypeOptions"
                 />
@@ -106,7 +113,8 @@
                 <q-select
                   class="salesPersonCode"
                   placeholder="Choose from the below*"
-                  color="grey-9" class="@blur="v$.merchant.salesInformation.salesPersonCode.$touch"
+                  color="grey-9"
+                  @blur="v$.merchant.salesInformation.salesPersonCode.$touch"
                   :error="v$.merchant.salesInformation.salesPersonCode.$error"
                   v-model.trim="merchant.salesInformation.salesPersonCode"
                   label="Sales Person*"
@@ -117,7 +125,8 @@
                 <q-select
                   class="region"
                   placeholder="Choose from the below*"
-                  color="grey-9" class="@blur="v$.merchant.salesInformation.region.$touch"
+                  color="grey-9"
+                  @blur="v$.merchant.salesInformation.region.$touch"
                   :error="v$.merchant.salesInformation.region.$error"
                   v-model.trim="merchant.salesInformation.region"
                   label="Region*"
@@ -128,7 +137,8 @@
                 <q-select
                   class="leadFrom"
                   placeholder="Choose from the below*"
-                  color="grey-9" class="@blur="v$.merchant.salesInformation.leadFrom.$touch"
+                  color="grey-9"
+                  @blur="v$.merchant.salesInformation.leadFrom.$touch"
                   :error="v$.merchant.salesInformation.leadFrom.$error"
                   v-model.trim="merchant.salesInformation.leadFrom"
                   label="Lead From*"
@@ -143,7 +153,8 @@
                   class="sharingModelCode"
                 >
                   <q-radio
-                    color="grey-9" class="v-model.trim="merchant.salesInformation.sharingModelCode"
+                    color="grey-9"
+                    v-model.trim="merchant.salesInformation.sharingModelCode"
                     :val="item.value"
                     :label="item.label"
                   />
@@ -161,7 +172,8 @@
                   @blur="v$.merchant.salesInformation.sharingPartnerCode.$touch"
                   :error="v$.merchant.salesInformation.sharingPartnerCode.$error"
                   placeholder="Choose from the below*"
-                  color="grey-9" class="v-model.trim="merchant.salesInformation.sharingPartnerCode"
+                  color="grey-9"
+                  v-model.trim="merchant.salesInformation.sharingPartnerCode"
                   label="Sharing partner*"
                   :options="sharingPartnerOptions"
                 />
@@ -171,7 +183,8 @@
                   class="dailyFixedAmount"
                   @blur="v$.merchant.salesInformation.dailyFixedAmount.$touch"
                   :error="v$.merchant.salesInformation.dailyFixedAmount.$error"
-                  color="grey-9" class="v-model.trim="merchant.salesInformation.dailyFixedAmount"
+                  color="grey-9"
+                  v-model.trim="merchant.salesInformation.dailyFixedAmount"
                   label="Daily fixed amount*"
                   type="number"
                   placeholder="Daily fixed amount*"
@@ -182,7 +195,8 @@
                   class="loanDisbursementPercentage"
                   @blur="v$.merchant.salesInformation.loanDisbursementPercentage.$touch"
                   :error="v$.merchant.salesInformation.loanDisbursementPercentage.$error"
-                  color="grey-9" class="v-model.trim="merchant.salesInformation.loanDisbursementPercentage"
+                  color="grey-9"
+                  v-model.trim="merchant.salesInformation.loanDisbursementPercentage"
                   label="Percentage*"
                   type="number"
                   placeholder="Percentage*"
@@ -193,7 +207,8 @@
                   class="loanDisbursementAmount"
                   @blur="v$.merchant.salesInformation.loanDisbursementAmount.$touch"
                   :error="v$.merchant.salesInformation.loanDisbursementAmount.$error"
-                  color="grey-9" class="v-model.trim="merchant.salesInformation.loanDisbursementAmount"
+                  color="grey-9"
+                  v-model.trim="merchant.salesInformation.loanDisbursementAmount"
                   label="Loan disbursement value*"
                   type="number"
                   placeholder="Loan disbursement value*"
@@ -206,7 +221,8 @@
                   class="loanDisbursementDate"
                   @blur="v$.merchant.salesInformation.loanDisbursementDate.$touch"
                   :error="v$.merchant.salesInformation.loanDisbursementDate.$error"
-                  color="grey-9" class="modal
+                  color="grey-9"
+                  modal
                   v-model.trim="merchant.salesInformation.loanDisbursementDate"
                   label="Disbursement Date*"
                   placeholder="Disbursement Date*"
@@ -216,7 +232,8 @@
                 <q-input
                   @blur="v$.merchant.salesInformation.tenureMonth.$touch"
                   :error="v$.merchant.salesInformation.tenureMonth.$error"
-                  color="grey-9" class="class="tenureMonth"
+                  color="grey-9"
+                  class="tenureMonth"
                   v-model.trim="merchant.salesInformation.tenureMonth"
                   label="Tenure (in months)*"
                   type="number"
@@ -228,7 +245,8 @@
                   class="tenureDay"
                   @blur="v$.merchant.salesInformation.tenureDay.$touch"
                   :error="v$.merchant.salesInformation.tenureDay.$error"
-                  color="grey-9" class="v-model.trim="merchant.salesInformation.tenureDay"
+                  color="grey-9"
+                  v-model.trim="merchant.salesInformation.tenureDay"
                   label="Tenure (in days)*"
                   type="number"
                   placeholder="Tenure (in days)*"
@@ -241,7 +259,8 @@
                   format-model="number"
                   @blur="v$.merchant.salesInformation.tenureStartDate.$touch"
                   :error="v$.merchant.salesInformation.tenureStartDate.$error"
-                  color="grey-9" class="modal
+                  color="grey-9"
+                  modal
                   v-model.trim="merchant.salesInformation.tenureStartDate"
                   label="Start Date*"
                   placeholder="Tenure Start Date*"
@@ -259,7 +278,8 @@
                   @blur="v$.merchant.salesInformation.sharingPartnerCode.$touch"
                   :error="v$.merchant.salesInformation.sharingPartnerCode.$error"
                   placeholder="Choose from the below*"
-                  color="grey-9" class="v-model.trim="merchant.salesInformation.sharingPartnerCode"
+                  color="grey-9"
+                  v-model.trim="merchant.salesInformation.sharingPartnerCode"
                   label="Sharing partner*"
                   :options="sharingPartnerOptions"
                 />
@@ -269,7 +289,8 @@
                   class="rentPercentage"
                   @blur="v$.merchant.salesInformation.rentPercentage.$touch"
                   :error="v$.merchant.salesInformation.rentPercentage.$error"
-                  color="grey-9" class="v-model.trim="merchant.salesInformation.rentPercentage"
+                  color="grey-9"
+                  v-model.trim="merchant.salesInformation.rentPercentage"
                   label="Rent %*"
                   type="number"
                   placeholder="Rent %*"
@@ -280,7 +301,8 @@
                   class="rentFixed"
                   @blur="v$.merchant.salesInformation.rentFixed.$touch"
                   :error="v$.merchant.salesInformation.rentFixed.$error"
-                  color="grey-9" class="v-model.trim="merchant.salesInformation.rentFixed"
+                  color="grey-9"
+                  v-model.trim="merchant.salesInformation.rentFixed"
                   label="Rent fixed*"
                   type="number"
                   placeholder="Rent fixed*"
@@ -290,13 +312,15 @@
             <!-- Navigation for this step at the end of QStep-->
             <q-stepper-navigation>
               <q-btn
-                color="primary" class="class="q-ma-xs"
+                color="primary"
+                class="q-ma-xs"
                 icon="check"
                 @click="validatebeforeNavigate('salesInformation')"
                 label="Continue"
               />
               <q-btn
-                color="amber-10" class="class="q-ma-xs"
+                color="amber-10"
+                class="q-ma-xs"
                 icon="save"
                 label="Save Partial"
                 @click="saveCurrentChanges()"
@@ -316,7 +340,8 @@
                   class="legalName"
                   @blur="v$.merchant.companyInformation.legalName.$touch"
                   :error="v$.merchant.companyInformation.legalName.$error"
-                  color="grey-9" class="v-model.trim="merchant.companyInformation.legalName"
+                  color="grey-9"
+                  v-model.trim="merchant.companyInformation.legalName"
                   label="Legal Name*"
                   placeholder="Legal Name*"
                 />
@@ -326,7 +351,8 @@
                   class="dbaName"
                   @blur="v$.merchant.companyInformation.dbaName.$touch"
                   :error="v$.merchant.companyInformation.dbaName.$error"
-                  color="grey-9" class="v-model.trim="merchant.companyInformation.dbaName"
+                  color="grey-9"
+                  v-model.trim="merchant.companyInformation.dbaName"
                   label="DBA Name*"
                   placeholder="DBA Name*"
                 />
@@ -334,7 +360,8 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
                   class="registeredAddress"
-                  color="grey-9" class="label="Registered Address* (max 120 characters)"
+                  color="grey-9"
+                  label="Registered Address* (max 120 characters)"
                   placeholder="Registered Address*"
                   v-model.trim="merchant.companyInformation.registeredAddress"
                   @blur="v$.merchant.companyInformation.registeredAddress.$touch"
@@ -346,7 +373,8 @@
                   class="registeredCityRefCode"
                   @blur="v$.merchant.companyInformation.registeredCityRefCode.$touch"
                   :error="autoCompleteError(v$.merchant.companyInformation.registeredCityRefCode,v$.merchant.companyInformation.registeredCityName)"
-                  color="grey-9" class="v-model.trim="merchant.companyInformation.registeredCityName"
+                  color="grey-9"
+                  v-model.trim="merchant.companyInformation.registeredCityName"
                   label="Registered city (type min 3 characters)*"
                   placeholder="Start typing ..*"
                 >
@@ -364,7 +392,8 @@
                   class="registeredStateRefCode"
                   @blur="v$.merchant.companyInformation.registeredStateRefCode.$touch"
                   :error="autoCompleteError(v$.merchant.companyInformation.registeredStateRefCode,v$.merchant.companyInformation.registeredStateName)"
-                  color="grey-9" class="v-model.trim="merchant.companyInformation.registeredStateName"
+                  color="grey-9"
+                  v-model.trim="merchant.companyInformation.registeredStateName"
                   label="Registered state (type min 3 characters)*"
                   placeholder="Start typing ..*"
                 >
@@ -382,7 +411,8 @@
                   class="registeredPin"
                   @blur="v$.merchant.companyInformation.registeredPin.$touch"
                   :error="v$.merchant.companyInformation.registeredPin.$error"
-                  color="grey-9" class="type="number"
+                  color="grey-9"
+                  type="number"
                   v-model.trim="merchant.companyInformation.registeredPin"
                   label="PIN*"
                   placeholder="PIN*"
@@ -392,7 +422,8 @@
                 <q-input
                   disable
                   class="constitutionName"
-                  color="grey-9" class="v-model.trim="merchant.companyInformation.constitutionName"
+                  color="grey-9"
+                  v-model.trim="merchant.companyInformation.constitutionName"
                   label="Type of Business Entity"
                 />
               </div>
@@ -400,7 +431,8 @@
                 <q-input
                   format="DD/MM/YYYY"
                   format-model="number"
-                  color="grey-9" class="modal
+                  color="grey-9"
+                  modal
                   class="establishYear"
                   @blur="v$.merchant.companyInformation.establishYear.$touch"
                   :error="v$.merchant.companyInformation.establishYear.$error"
@@ -411,7 +443,8 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="class="registerNumber"
+                  color="grey-9"
+                  class="registerNumber"
                   @blur="v$.merchant.companyInformation.registerNumber.$touch"
                   :error="v$.merchant.companyInformation.registerNumber.$error"
                   v-model.trim="merchant.companyInformation.registerNumber"
@@ -423,7 +456,8 @@
                 <q-input
                   @blur="v$.merchant.companyInformation.tin.$touch"
                   :error="v$.merchant.companyInformation.tin.$error"
-                  color="grey-9" class="class="tin"
+                  color="grey-9"
+                  class="tin"
                   v-model.trim="merchant.companyInformation.tin"
                   label="TIN"
                   placeholder="TIN"
@@ -435,7 +469,8 @@
                   class="pan"
                   @blur="v$.merchant.companyInformation.pan.$touch"
                   :error="v$.merchant.companyInformation.pan.$error"
-                  color="grey-9" class="v-model.trim="merchant.companyInformation.pan"
+                  color="grey-9"
+                  v-model.trim="merchant.companyInformation.pan"
                   label="Company PAN*"
                   placeholder="Company PAN*"
                 />
@@ -446,14 +481,16 @@
                   class="tan"
                   @blur="v$.merchant.companyInformation.tan.$touch"
                   :error="v$.merchant.companyInformation.tan.$error"
-                  color="grey-9" class="v-model.trim="merchant.companyInformation.tan"
+                  color="grey-9"
+                  v-model.trim="merchant.companyInformation.tan"
                   label="TAN"
                   placeholder="TAN"
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="class="businessNature"
+                  color="grey-9"
+                  class="businessNature"
                   v-model.trim="merchant.companyInformation.businessNature"
                   label="Nature of Business"
                   placeholder="Nature of Business"
@@ -463,7 +500,8 @@
                 <q-select
                   placeholder="Choose from the below*"
                   class="businessType"
-                  color="grey-9" class="v-model.trim="merchant.companyInformation.businessType"
+                  color="grey-9"
+                  v-model.trim="merchant.companyInformation.businessType"
                   label="Type of Business"
                   :options="businessTypeOptions"
                 />
@@ -472,7 +510,8 @@
                 <q-input
                   @blur="v$.merchant.companyInformation.mcc.$touch"
                   :error="autoCompleteError(v$.merchant.companyInformation.mcc,v$.merchant.companyInformation.mccname)"
-                  color="grey-9" class="class="mcc"
+                  color="grey-9"
+                  class="mcc"
                   v-model.trim="merchant.companyInformation.mccname"
                   label="MCC (type min 3 characters)"
                   placeholder="Start typing ..*"
@@ -491,7 +530,8 @@
                   class="residentialAddress"
                   @blur="v$.merchant.companyInformation.residentialAddress.$touch"
                   :error="v$.merchant.companyInformation.residentialAddress.$error"
-                  color="grey-9" class="v-model.trim="merchant.companyInformation.residentialAddress"
+                  color="grey-9"
+                  v-model.trim="merchant.companyInformation.residentialAddress"
                   label="Residential Address* (max 120 characters)"
                   placeholder="Residential Address*"
                 />
@@ -501,7 +541,8 @@
                   class="residentialPin"
                   @blur="v$.merchant.companyInformation.residentialPin.$touch"
                   :error="v$.merchant.companyInformation.residentialPin.$error"
-                  color="grey-9" class="type="number"
+                  color="grey-9"
+                  type="number"
                   v-model.trim="merchant.companyInformation.residentialPin"
                   label="PIN*"
                   placeholder="PIN*"
@@ -512,7 +553,8 @@
                   class="residentialCityRefCode"
                   @blur="v$.merchant.companyInformation.residentialCityRefCode.$touch"
                   :error="autoCompleteError(v$.merchant.companyInformation.residentialCityRefCode,v$.merchant.companyInformation.residentCityName)"
-                  color="grey-9" class="v-model.trim="merchant.companyInformation.residentCityName"
+                  color="grey-9"
+                  v-model.trim="merchant.companyInformation.residentCityName"
                   label="City (type min 3 characters)*"
                   placeholder="Start typing ..*"
                 >
@@ -530,7 +572,8 @@
                   class="residentialStateRefCode"
                   @blur="v$.merchant.companyInformation.residentialStateRefCode.$touch"
                   :error="autoCompleteError(v$.merchant.companyInformation.residentialStateRefCode,v$.merchant.companyInformation.residentStateName)"
-                  color="grey-9" class="v-model.trim="merchant.companyInformation.residentStateName"
+                  color="grey-9"
+                  v-model.trim="merchant.companyInformation.residentStateName"
                   label="State (type min 3 characters)*"
                   placeholder="Start typing ..*"
                 >
@@ -548,7 +591,8 @@
                   class="contactName"
                   @blur="v$.merchant.companyInformation.contactName.$touch"
                   :error="v$.merchant.companyInformation.contactName.$error"
-                  color="grey-9" class="v-model.trim="merchant.companyInformation.contactName"
+                  color="grey-9"
+                  v-model.trim="merchant.companyInformation.contactName"
                   label="Contact Name*"
                   placeholder="Contact Name*"
                 />
@@ -558,14 +602,16 @@
                   class="contactMobile"
                   @blur="v$.merchant.companyInformation.contactMobile.$touch"
                   :error="v$.merchant.companyInformation.contactMobile.$error"
-                  color="grey-9" class="v-model.trim="merchant.companyInformation.contactMobile"
+                  color="grey-9"
+                  v-model.trim="merchant.companyInformation.contactMobile"
                   label="Contact mobile*"
                   placeholder="Contact Mobile*"
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="type="tel"
+                  color="grey-9"
+                  type="tel"
                   class="contactAlternateMobile"
                   @blur="v$.merchant.companyInformation.contactAlternateMobile.$touch"
                   :error="v$.merchant.companyInformation.contactAlternateMobile.$error"
@@ -576,7 +622,8 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="type="tel"
+                  color="grey-9"
+                  type="tel"
                   class="contactPhone"
                   @blur="v$.merchant.companyInformation.contactPhone.$touch"
                   :error="v$.merchant.companyInformation.contactPhone.$error"
@@ -590,7 +637,8 @@
                   class="contactEmail"
                   @blur="v$.merchant.companyInformation.contactEmail.$touch"
                   :error="v$.merchant.companyInformation.contactEmail.$error"
-                  color="grey-9" class="type="email"
+                  color="grey-9"
+                  type="email"
                   v-model.trim="merchant.companyInformation.contactEmail"
                   label="Contact Email*"
                   placeholder="Contact Email*"
@@ -604,7 +652,8 @@
                     :error="v$.merchant.companyInformation.statementType.$error"
                     v-for="(item,index) in viewBinding.statementType"
                     :key="index"
-                    color="grey-9" class="v-model.trim="merchant.companyInformation.statementType"
+                    color="grey-9"
+                    v-model.trim="merchant.companyInformation.statementType"
                     :val="item.value"
                     :label="item.label"
                   />
@@ -618,7 +667,8 @@
                     :error="v$.merchant.companyInformation.statementFrequency.$error"
                     v-for="(item,index) in viewBinding.statementFrequency"
                     :key="index"
-                    color="grey-9" class="v-model.trim="merchant.companyInformation.statementFrequency"
+                    color="grey-9"
+                    v-model.trim="merchant.companyInformation.statementFrequency"
                     :val="item.value"
                     :label="item.label"
                   />
@@ -626,7 +676,8 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="class="statementEmail"
+                  color="grey-9"
+                  class="statementEmail"
                   label="Statement Email"
                   placeholder="Statement Email"
                   @blur="v$.merchant.companyInformation.statementEmail.$touch"
@@ -637,19 +688,22 @@
             </div>
             <q-stepper-navigation>
               <q-btn
-                color="primary" class="class="q-ma-xs"
+                color="primary"
+                class="q-ma-xs"
                 icon="check"
                 @click="validatebeforeNavigate('companyInformation')"
                 label="Continue"
               />
               <q-btn
-                color="amber-10" class="class="q-ma-xs"
+                color="amber-10"
+                class="q-ma-xs"
                 icon="save"
                 label="Save Partial"
                 @click="saveCurrentChanges()"
               />
               <q-btn
-                color="grey-7" class="class="q-ma-xs"
+                color="grey-7"
+                class="q-ma-xs"
                 icon="block"
                 @click="$refs.stepper.previous()"
                 label="Back"
@@ -687,7 +741,8 @@
                       round
                       icon="delete"
                       @click="removePartnerFromArr(v,index)"
-                      color="negative" class="/>
+                      color="negative"
+                    />
                   </div>
                 </div>
               </div>
@@ -696,7 +751,8 @@
                   class="name"
                   :error="v.name.$anyError"
                   @blur="() => v.name.$anyError"
-                  color="grey-9" class="v-model.trim="v.$model.name"
+                  color="grey-9"
+                  v-model.trim="v.$model.name"
                   label="Name*"
                   placeholder="Name*"
                 />
@@ -707,7 +763,8 @@
                   class="pan"
                   :error="v.pan.$anyError"
                   @blur="() => v.pan.$anyError"
-                  color="grey-9" class="v-model.trim="v.$model.pan"
+                  color="grey-9"
+                  v-model.trim="v.$model.pan"
                   label="Pan*"
                   placeholder="Pan*"
                 />
@@ -717,7 +774,8 @@
                   class="address"
                   :error="v.address.$anyError"
                   @blur="() => v.address.$anyError"
-                  color="grey-9" class="v-model.trim="v.$model.address"
+                  color="grey-9"
+                  v-model.trim="v.$model.address"
                   label="Address* (max 120 characters)"
                   placeholder="Address*"
                 />
@@ -727,7 +785,8 @@
                   class="pin"
                   :error="v.pin.$anyError"
                   @blur="() => v.pin.$anyError"
-                  color="grey-9" class="type="number"
+                  color="grey-9"
+                  type="number"
                   v-model.trim="v.$model.pin"
                   label="Pincode*"
                   placeholder="Pincode*"
@@ -738,7 +797,8 @@
                   class="cityRefCode"
                   :error="autoCompleteError(v.cityRefLabel,v.cityRefCode)"
                   @blur="v.cityRefLabel.$touch()"
-                  color="grey-9" class="v-model.trim="v.$model.cityRefLabel"
+                  color="grey-9"
+                  v-model.trim="v.$model.cityRefLabel"
                   label="City (type min 3 characters)*"
                   placeholder="Start typing ..*"
                 >
@@ -756,7 +816,8 @@
                   class="stateRefCode"
                   :error="autoCompleteError(v.stateRefLabel,v.stateRefCode)"
                   @blur="v.stateRefLabel.$touch()"
-                  color="grey-9" class="v-model.trim="v.$model.stateRefLabel"
+                  color="grey-9"
+                  v-model.trim="v.$model.stateRefLabel"
                   label="State (type min 3 characters)*"
                   placeholder="Start typing ..*"
                 >
@@ -774,7 +835,8 @@
                   class="contactMobile"
                   :error="v.contactMobile.$anyError"
                   @blur="() => v.contactMobile.$anyError"
-                  color="grey-9" class="type="tel"
+                  color="grey-9"
+                  type="tel"
                   v-model.trim="v.$model.contactMobile"
                   label="Mobile*"
                   placeholder="Mobile*"
@@ -785,7 +847,8 @@
                   class="contactEmail"
                   :error="v.contactEmail.$anyError"
                   @blur="() => v.contactEmail.$anyError"
-                  color="grey-9" class="type="email"
+                  color="grey-9"
+                  type="email"
                   v-model.trim="v.$model.contactEmail"
                   label="Email*"
                   placeholder="Email*"
@@ -794,25 +857,28 @@
             </div>
             <q-stepper-navigation>
               <q-btn
-                color="primary" class="class="q-ma-xs"
+                color="primary"
+                class="q-ma-xs"
                 icon="check"
                 @click="validatebeforeNavigate('partners')"
                 label="Continue"
               />
               <q-btn
-                color="amber-10" class="class="q-ma-xs"
+                color="amber-10"
+                class="q-ma-xs"
                 icon="save"
                 label="Save Partial"
                 @click="saveCurrentChanges()"
               />
               <q-btn
-                color="grey-7" class="class="q-ma-xs"
+                color="grey-7"
+                class="q-ma-xs"
                 icon="block"
                 @click="$refs.stepper.previous()"
                 label="Back"
               />
               <q-btn
-                color="positive" class="float-right"
+                color="positive float-right"
                 @click="addMorePartnersSet()"
                 class="q-ma-xs"
                 icon="add"
@@ -831,7 +897,8 @@
             <div class="row gutter-sm">
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="class="weekdayStartHour"
+                  color="grey-9"
+                  class="weekdayStartHour"
                   @blur="v$.merchant.businessInformation.weekdayStartHour.$touch"
                   :error="v$.merchant.businessInformation.weekdayStartHour.$error"
                   v-model.trim="merchant.businessInformation.weekdayStartHour"
@@ -841,7 +908,8 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="class="weekdayEndHour"
+                  color="grey-9"
+                  class="weekdayEndHour"
                   @blur="v$.merchant.businessInformation.weekdayEndHour.$touch"
                   :error="v$.merchant.businessInformation.weekdayEndHour.$error"
                   v-model.trim="merchant.businessInformation.weekdayEndHour"
@@ -851,7 +919,8 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="class="weekendStartHour"
+                  color="grey-9"
+                  class="weekendStartHour"
                   @blur="v$.merchant.businessInformation.weekendStartHour.$touch"
                   :error="v$.merchant.businessInformation.weekendStartHour.$error"
                   v-model.trim="merchant.businessInformation.weekendStartHour"
@@ -861,7 +930,8 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="class="weekendEndHour"
+                  color="grey-9"
+                  class="weekendEndHour"
                   @blur="v$.merchant.businessInformation.weekendEndHour.$touch"
                   :error="v$.merchant.businessInformation.weekendEndHour.$error"
                   v-model.trim="merchant.businessInformation.weekendEndHour"
@@ -870,11 +940,12 @@
                 />
               </div>
               <!-- <div class="col-md-6 col-sm-12 col-xs-12">
-                  <q-input color="grey-9" class="type="number" v-model.trim="merchant.businessInformation.weekdayStartHour" label="Business Income" placeholder="Business Income" />
+                  <q-input color="grey-9" type="number" v-model.trim="merchant.businessInformation.weekdayStartHour" label="Business Income" placeholder="Business Income" />
               </div>-->
               <div class="col-md-6 col-sm-12 col-xs-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="class="lastTurnoverYear"
+                  color="grey-9"
+                  class="lastTurnoverYear"
                   @blur="v$.merchant.businessInformation.lastTurnoverYear.$touch"
                   :error="v$.merchant.businessInformation.lastTurnoverYear.$error"
                   v-model.trim="merchant.businessInformation.lastTurnoverYear"
@@ -884,7 +955,8 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="type="number"
+                  color="grey-9"
+                  type="number"
                   class="lastTurnoverAmount"
                   @blur="v$.merchant.businessInformation.lastTurnoverAmount.$touch"
                   :error="v$.merchant.businessInformation.lastTurnoverAmount.$error"
@@ -895,7 +967,8 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="type="number"
+                  color="grey-9"
+                  type="number"
                   class="expectedCardBusiness"
                   @blur="v$.merchant.businessInformation.expectedCardBusiness.$touch"
                   :error="v$.merchant.businessInformation.expectedCardBusiness.$error"
@@ -906,7 +979,8 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="type="number"
+                  color="grey-9"
+                  type="number"
                   class="averageBillAmount"
                   @blur="v$.merchant.businessInformation.averageBillAmount.$touch"
                   :error="v$.merchant.businessInformation.averageBillAmount.$error"
@@ -918,7 +992,8 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
                   upper-case
-                  color="grey-9" class="class="gstId"
+                  color="grey-9"
+                  class="gstId"
                   @blur="v$.merchant.businessInformation.gstId.$touch"
                   :error="v$.merchant.businessInformation.gstId.$error"
                   v-model.trim="merchant.businessInformation.gstId"
@@ -929,7 +1004,8 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="class="currentPosName"
+                  color="grey-9"
+                  class="currentPosName"
                   v-model.trim="merchant.businessInformation.currentPosName"
                   label="Name of the other POS Currentlly Used"
                   placeholder="Name of the other POS Currentlly Used"
@@ -937,7 +1013,8 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="class="debitCardMdr"
+                  color="grey-9"
+                  class="debitCardMdr"
                   @blur="v$.merchant.businessInformation.debitCardMdr.$touch"
                   :error="v$.merchant.businessInformation.debitCardMdr.$error"
                   v-model.trim="merchant.businessInformation.debitCardMdr"
@@ -947,7 +1024,8 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="class="creditCardMdr"
+                  color="grey-9"
+                  class="creditCardMdr"
                   @blur="v$.merchant.businessInformation.creditCardMdr.$touch"
                   :error="v$.merchant.businessInformation.creditCardMdr.$error"
                   v-model.trim="merchant.businessInformation.creditCardMdr"
@@ -962,7 +1040,8 @@
                   class="memberSince"
                   @blur="v$.merchant.businessInformation.memberSince.$touch"
                   :error="v$.merchant.businessInformation.memberSince.$error"
-                  color="grey-9" class="modal
+                  color="grey-9"
+                  modal
                   v-model.trim="merchant.businessInformation.memberSince"
                   label="Member since"
                   placeholder="Member since"
@@ -971,19 +1050,22 @@
             </div>
             <q-stepper-navigation>
               <q-btn
-                color="primary" class="class="q-ma-xs"
+                color="primary"
+                class="q-ma-xs"
                 icon="check"
                 @click="validatebeforeNavigate('businessInformation')"
                 label="Continue"
               />
               <q-btn
-                color="amber-10" class="class="q-ma-xs"
+                color="amber-10"
+                class="q-ma-xs"
                 icon="save"
                 label="Save Partial"
                 @click="saveCurrentChanges()"
               />
               <q-btn
-                color="grey-7" class="class="q-ma-xs"
+                color="grey-7"
+                class="q-ma-xs"
                 icon="block"
                 @click="$refs.stepper.previous()"
                 label="Back"
@@ -1007,7 +1089,8 @@
                     :error="v$.merchant.paymentDetails.deviceOwnedBy.$error"
                     v-for="(item,index) in deviceOwnedByOptions"
                     :key="index"
-                    color="grey-9" class="v-model.trim="merchant.paymentDetails.deviceOwnedBy"
+                    color="grey-9"
+                    v-model.trim="merchant.paymentDetails.deviceOwnedBy"
                     :val="item.value"
                     :label="item.label"
                   />
@@ -1015,7 +1098,8 @@
               </div>
               <div class="col-md-6 col-sm-12">
                 <q-input
-                  color="grey-9" class="type="number"
+                  color="grey-9"
+                  type="number"
                   class="installationFee"
                   @blur="v$.merchant.paymentDetails.installationFee.$touch"
                   :error="v$.merchant.paymentDetails.installationFee.$error"
@@ -1027,7 +1111,8 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select
                   placeholder="Choose from the below"
-                  color="grey-9" class="class="terminalModeCode"
+                  color="grey-9"
+                  class="terminalModeCode"
                   @blur="v$.merchant.paymentDetails.terminalModeCode.$touch"
                   :error="v$.merchant.paymentDetails.terminalModeCode.$error"
                   v-model.trim="merchant.paymentDetails.terminalModeCode"
@@ -1037,7 +1122,8 @@
               </div>
               <div class="col-md-6 col-sm-12">
                 <q-input
-                  color="grey-9" class="type="number"
+                  color="grey-9"
+                  type="number"
                   disable
                   class="numberOfTerminals"
                   @blur="v$.merchant.paymentDetails.numberOfTerminals.$touch"
@@ -1056,7 +1142,8 @@
                     :error="v$.merchant.paymentDetails.cashAtPosEnabled.$error"
                     v-for="(item,index) in cashAtPosEnabledOptions"
                     :key="index"
-                    color="grey-9" class="v-model.trim="merchant.paymentDetails.cashAtPosEnabled"
+                    color="grey-9"
+                    v-model.trim="merchant.paymentDetails.cashAtPosEnabled"
                     :val="item.value"
                     :label="item.label"
                   />
@@ -1065,7 +1152,8 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select
                   placeholder="Choose from the below*"
-                  color="grey-9" class="class="rentalPlanCode"
+                  color="grey-9"
+                  class="rentalPlanCode"
                   v-model.trim="merchant.paymentDetails.rentalPlanCode"
                   label="Rental Plan*"
                   :options="rentalPlanSet"
@@ -1074,7 +1162,8 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select
                   placeholder="Choose from the below*"
-                  color="grey-9" class="class="rentalMode"
+                  color="grey-9"
+                  class="rentalMode"
                   v-model.trim="merchant.paymentDetails.rentalMode"
                   label="Rental Mode*"
                   :options="rentalModeOptions"
@@ -1083,7 +1172,8 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select
                   placeholder="Choose from the below*"
-                  color="grey-9" class="class="serviceProvider"
+                  color="grey-9"
+                  class="serviceProvider"
                   @blur="v$.merchant.paymentDetails.serviceProvider.$touch"
                   :error="v$.merchant.paymentDetails.serviceProvider.$error"
                   v-model.trim="merchant.paymentDetails.serviceProvider"
@@ -1094,7 +1184,8 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select
                   placeholder="Choose from the below*"
-                  color="grey-9" class="class="networkPreferred"
+                  color="grey-9"
+                  class="networkPreferred"
                   @blur="v$.merchant.paymentDetails.networkPreferred.$touch"
                   :error="v$.merchant.paymentDetails.networkPreferred.$error"
                   v-model.trim="merchant.paymentDetails.networkPreferred"
@@ -1110,7 +1201,8 @@
                     :error="v$.merchant.paymentDetails.rentalType.$error"
                     v-for="(item,index) in rentalTypeOptions"
                     :key="index"
-                    color="grey-9" v-model="merchant.paymentDetails.rentalType"
+                    color="grey-9"
+                    v-model="merchant.paymentDetails.rentalType"
                     :val="item.value"
                     :label="item.label"
                     @input="selectCurrentType()"
@@ -1124,7 +1216,8 @@
                 <q-input
                   @blur="v$.merchant.paymentDetails.gracePeriod.$touch"
                   :error="v$.merchant.paymentDetails.gracePeriod.$error"
-                  color="grey-9" class="type="number"
+                  color="grey-9"
+                  type="number"
                   class="gracePeriod"
                   v-model.trim="merchant.paymentDetails.gracePeriod"
                   label="Grace period*"
@@ -1136,7 +1229,8 @@
                 class="col-md-6 col-sm-12 col-xs-12"
               >
                 <q-input
-                  color="grey-9" class="type="number"
+                  color="grey-9"
+                  type="number"
                   class="advanceRentCollected"
                   @blur="v$.merchant.paymentDetails.advanceRentCollected.$touch"
                   :error="v$.merchant.paymentDetails.advanceRentCollected.$error"
@@ -1150,7 +1244,8 @@
                 class="col-md-6 col-sm-12 col-xs-12"
               >
                 <q-input
-                  color="grey-9" class="type="number"
+                  color="grey-9"
+                  type="number"
                   class="noOfMonthRentPaidInAdvance"
                   @blur="v$.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$touch"
                   :error="v$.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$error"
@@ -1170,7 +1265,8 @@
                     :error="v$.merchant.paymentDetails.advanceRentMode.$error"
                     v-for="(item,index) in advanceRentModeOptions"
                     :key="index"
-                    color="grey-9" class="v-model.trim="merchant.paymentDetails.advanceRentMode"
+                    color="grey-9"
+                    v-model.trim="merchant.paymentDetails.advanceRentMode"
                     :val="item.value"
                     :label="item.label"
                   />
@@ -1178,7 +1274,8 @@
               </div>
               <div class="col-md-6 col-sm-12">
                 <q-input
-                  color="grey-9" class="type="number"
+                  color="grey-9"
+                  type="number"
                   class="devicePrice"
                   @blur="v$.merchant.paymentDetails.devicePrice.$touch"
                   :error="v$.merchant.paymentDetails.devicePrice.$error"
@@ -1189,7 +1286,8 @@
               </div>
               <div class="col-md-6 col-sm-12">
                 <q-input
-                  color="grey-9" class="type="number"
+                  color="grey-9"
+                  type="number"
                   class="otherCharges"
                   @blur="v$.merchant.paymentDetails.otherCharges.$touch"
                   :error="v$.merchant.paymentDetails.otherCharges.$error"
@@ -1200,7 +1298,8 @@
               </div>
               <div class="col-md-6 col-sm-12">
                 <q-input
-                  color="grey-9" class="type="number"
+                  color="grey-9"
+                  type="number"
                   class="totalAmountPaid"
                   @blur="v$.merchant.paymentDetails.totalAmountPaid.$touch"
                   :error="v$.merchant.paymentDetails.totalAmountPaid.$error"
@@ -1212,19 +1311,22 @@
             </div>
             <q-stepper-navigation>
               <q-btn
-                color="primary" class="class="q-ma-xs"
+                color="primary"
+                class="q-ma-xs"
                 icon="check"
                 @click="validatebeforeNavigate('paymentDetails')"
                 label="Continue"
               />
               <q-btn
-                color="amber-10" class="class="q-ma-xs"
+                color="amber-10"
+                class="q-ma-xs"
                 icon="save"
                 label="Save Partial"
                 @click="saveCurrentChanges()"
               />
               <q-btn
-                color="grey-7" class="class="q-ma-xs"
+                color="grey-7"
+                class="q-ma-xs"
                 icon="block"
                 @click="$refs.stepper.previous()"
                 label="Back"
@@ -1253,7 +1355,8 @@
                     <div class="row group bg-green-2 domesticDebitUpTo2000">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="class="fixed"
+                          color="grey-9"
+                          class="fixed"
                           type="number"
                           @blur="v$.merchant.mdrPlan.domesticDebitUpTo2000.fixed.$touch"
                           :error="v$.merchant.mdrPlan.domesticDebitUpTo2000.fixed.$error"
@@ -1263,7 +1366,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="class="percentage"
+                          color="grey-9"
+                          class="percentage"
                           type="number"
                           @blur="v$.merchant.mdrPlan.domesticDebitUpTo2000.percentage.$touch"
                           :error="v$.merchant.mdrPlan.domesticDebitUpTo2000.percentage.$error"
@@ -1273,7 +1377,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.mdrPlan.domesticDebitUpTo2000.minimum.$touch"
                           :error="v$.merchant.mdrPlan.domesticDebitUpTo2000.minimum.$error"
@@ -1291,7 +1396,8 @@
                     <div class="row group bg-yellow-2 domesticDebitUpTo2000">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.SharingDiscountFee.domesticDebitUpTo2000.fixed.$touch"
                           :error="v$.merchant.SharingDiscountFee.domesticDebitUpTo2000.fixed.$error"
@@ -1301,7 +1407,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.SharingDiscountFee.domesticDebitUpTo2000.percentage.$touch"
                           :error="v$.merchant.SharingDiscountFee.domesticDebitUpTo2000.percentage.$error"
@@ -1311,7 +1418,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.SharingDiscountFee.domesticDebitUpTo2000.minimum.$touch"
                           :error="v$.merchant.SharingDiscountFee.domesticDebitUpTo2000.minimum.$error"
@@ -1330,7 +1438,8 @@
                     <div class="row group bg-green-2 domesticDebitAbove2000">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.mdrPlan.domesticDebitAbove2000.fixed.$touch"
                           :error="v$.merchant.mdrPlan.domesticDebitAbove2000.fixed.$error"
@@ -1340,7 +1449,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.mdrPlan.domesticDebitAbove2000.percentage.$touch"
                           :error="v$.merchant.mdrPlan.domesticDebitAbove2000.percentage.$error"
@@ -1350,7 +1460,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.mdrPlan.domesticDebitAbove2000.minimum.$touch"
                           :error="v$.merchant.mdrPlan.domesticDebitAbove2000.minimum.$error"
@@ -1364,7 +1475,8 @@
                     <div class="row group bg-yellow-2 domesticDebitAbove2000">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.SharingDiscountFee.domesticDebitAbove2000.fixed.$touch"
                           :error="v$.merchant.SharingDiscountFee.domesticDebitAbove2000.fixed.$error"
@@ -1374,7 +1486,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           @blur="v$.merchant.SharingDiscountFee.domesticDebitAbove2000.percentage.$touch"
                           :error="v$.merchant.SharingDiscountFee.domesticDebitAbove2000.percentage.$error"
                           v-model.trim="merchant.SharingDiscountFee.domesticDebitAbove2000.percentage"
@@ -1383,7 +1496,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           @blur="v$.merchant.SharingDiscountFee.domesticDebitAbove2000.minimum.$touch"
                           :error="v$.merchant.SharingDiscountFee.domesticDebitAbove2000.minimum.$error"
                           v-model.trim="merchant.SharingDiscountFee.domesticDebitAbove2000.minimum"
@@ -1402,7 +1516,8 @@
                     <div class="row group bg-green-2 standardOrClassic">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.mdrPlan.standardOrClassic.fixed.$touch"
                           :error="v$.merchant.mdrPlan.standardOrClassic.fixed.$error"
@@ -1412,7 +1527,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.mdrPlan.standardOrClassic.percentage.$touch"
                           :error="v$.merchant.mdrPlan.standardOrClassic.percentage.$error"
@@ -1422,7 +1538,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.mdrPlan.standardOrClassic.minimum.$touch"
                           :error="v$.merchant.mdrPlan.standardOrClassic.minimum.$error"
@@ -1436,7 +1553,8 @@
                     <div class="row group bg-yellow-2 standardOrClassic">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.SharingDiscountFee.standardOrClassic.fixed.$touch"
                           :error="v$.merchant.SharingDiscountFee.standardOrClassic.fixed.$error"
@@ -1446,7 +1564,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.SharingDiscountFee.standardOrClassic.percentage.$touch"
                           :error="v$.merchant.SharingDiscountFee.standardOrClassic.percentage.$error"
@@ -1456,7 +1575,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.SharingDiscountFee.standardOrClassic.minimum.$touch"
                           :error="v$.merchant.SharingDiscountFee.standardOrClassic.minimum.$error"
@@ -1475,7 +1595,8 @@
                     <div class="row group bg-green-2 premiumOrPlatinum">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.mdrPlan.premiumOrPlatinum.fixed.$touch"
                           :error="v$.merchant.mdrPlan.premiumOrPlatinum.fixed.$error"
@@ -1485,7 +1606,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.mdrPlan.premiumOrPlatinum.percentage.$touch"
                           :error="v$.merchant.mdrPlan.premiumOrPlatinum.percentage.$error"
@@ -1495,7 +1617,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.mdrPlan.premiumOrPlatinum.minimum.$touch"
                           :error="v$.merchant.mdrPlan.premiumOrPlatinum.minimum.$error"
@@ -1509,7 +1632,8 @@
                     <div class="row group bg-yellow-2 premiumOrPlatinum">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.SharingDiscountFee.premiumOrPlatinum.fixed.$touch"
                           :error="v$.merchant.SharingDiscountFee.premiumOrPlatinum.fixed.$error"
@@ -1519,7 +1643,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.SharingDiscountFee.premiumOrPlatinum.percentage.$touch"
                           :error="v$.merchant.SharingDiscountFee.premiumOrPlatinum.percentage.$error"
@@ -1529,7 +1654,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.SharingDiscountFee.premiumOrPlatinum.minimum.$touch"
                           :error="v$.merchant.SharingDiscountFee.premiumOrPlatinum.minimum.$error"
@@ -1548,7 +1674,8 @@
                     <div class="row group bg-green-2 superPremiumOrSignature">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.mdrPlan.superPremiumOrSignature.fixed.$touch"
                           :error="v$.merchant.mdrPlan.superPremiumOrSignature.fixed.$error"
@@ -1558,7 +1685,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.mdrPlan.superPremiumOrSignature.percentage.$touch"
                           :error="v$.merchant.mdrPlan.superPremiumOrSignature.percentage.$error"
@@ -1568,7 +1696,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.mdrPlan.superPremiumOrSignature.minimum.$touch"
                           :error="v$.merchant.mdrPlan.superPremiumOrSignature.minimum.$error"
@@ -1582,7 +1711,8 @@
                     <div class="row group bg-yellow-2 superPremiumOrSignature">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.SharingDiscountFee.superPremiumOrSignature.fixed.$touch"
                           :error="v$.merchant.SharingDiscountFee.superPremiumOrSignature.fixed.$error"
@@ -1592,7 +1722,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.SharingDiscountFee.superPremiumOrSignature.percentage.$touch"
                           :error="v$.merchant.SharingDiscountFee.superPremiumOrSignature.percentage.$error"
@@ -1602,7 +1733,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.SharingDiscountFee.superPremiumOrSignature.minimum.$touch"
                           :error="v$.merchant.SharingDiscountFee.superPremiumOrSignature.minimum.$error"
@@ -1621,7 +1753,8 @@
                     <div class="row group bg-green-2 commercialOrCorporate">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.mdrPlan.commercialOrCorporate.fixed.$touch"
                           :error="v$.merchant.mdrPlan.commercialOrCorporate.fixed.$error"
@@ -1631,7 +1764,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.mdrPlan.commercialOrCorporate.percentage.$touch"
                           :error="v$.merchant.mdrPlan.commercialOrCorporate.percentage.$error"
@@ -1641,7 +1775,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.mdrPlan.commercialOrCorporate.minimum.$touch"
                           :error="v$.merchant.mdrPlan.commercialOrCorporate.minimum.$error"
@@ -1655,7 +1790,8 @@
                     <div class="row group bg-yellow-2 commercialOrCorporate">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.SharingDiscountFee.commercialOrCorporate.fixed.$touch"
                           :error="v$.merchant.SharingDiscountFee.commercialOrCorporate.fixed.$error"
@@ -1665,7 +1801,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.SharingDiscountFee.commercialOrCorporate.percentage.$touch"
                           :error="v$.merchant.SharingDiscountFee.commercialOrCorporate.percentage.$error"
@@ -1675,7 +1812,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.SharingDiscountFee.commercialOrCorporate.minimum.$touch"
                           :error="v$.merchant.SharingDiscountFee.commercialOrCorporate.minimum.$error"
@@ -1694,7 +1832,8 @@
                     <div class="row group bg-green-2 internationalDebitCard">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.mdrPlan.internationalDebitCard.fixed.$touch"
                           :error="v$.merchant.mdrPlan.internationalDebitCard.fixed.$error"
@@ -1704,7 +1843,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.mdrPlan.internationalDebitCard.percentage.$touch"
                           :error="v$.merchant.mdrPlan.internationalDebitCard.percentage.$error"
@@ -1714,7 +1854,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.mdrPlan.internationalDebitCard.minimum.$touch"
                           :error="v$.merchant.mdrPlan.internationalDebitCard.minimum.$error"
@@ -1728,7 +1869,8 @@
                     <div class="row group bg-yellow-2">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.SharingDiscountFee.internationalDebitCard.fixed.$touch"
                           :error="v$.merchant.SharingDiscountFee.internationalDebitCard.fixed.$error"
@@ -1738,7 +1880,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.SharingDiscountFee.internationalDebitCard.percentage.$touch"
                           :error="v$.merchant.SharingDiscountFee.internationalDebitCard.percentage.$error"
@@ -1748,7 +1891,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.SharingDiscountFee.internationalDebitCard.minimum.$touch"
                           :error="v$.merchant.SharingDiscountFee.internationalDebitCard.minimum.$error"
@@ -1767,7 +1911,8 @@
                     <div class="row group bg-green-2 internationalCreditCard">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.mdrPlan.internationalCreditCard.fixed.$touch"
                           :error="v$.merchant.mdrPlan.internationalCreditCard.fixed.$error"
@@ -1777,7 +1922,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.mdrPlan.internationalCreditCard.percentage.$touch"
                           :error="v$.merchant.mdrPlan.internationalCreditCard.percentage.$error"
@@ -1787,7 +1933,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.mdrPlan.internationalCreditCard.minimum.$touch"
                           :error="v$.merchant.mdrPlan.internationalCreditCard.minimum.$error"
@@ -1801,7 +1948,8 @@
                     <div class="row group bg-yellow-2 internationalCreditCard">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.SharingDiscountFee.internationalCreditCard.fixed.$touch"
                           :error="v$.merchant.SharingDiscountFee.internationalCreditCard.fixed.$error"
@@ -1811,7 +1959,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.SharingDiscountFee.internationalCreditCard.percentage.$touch"
                           :error="v$.merchant.SharingDiscountFee.internationalCreditCard.percentage.$error"
@@ -1821,7 +1970,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.SharingDiscountFee.internationalCreditCard.minimum.$touch"
                           :error="v$.merchant.SharingDiscountFee.internationalCreditCard.minimum.$error"
@@ -1840,7 +1990,8 @@
                     <div class="row group bg-green-2 onus">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.mdrPlan.onus.fixed.$touch"
                           :error="v$.merchant.mdrPlan.onus.fixed.$error"
@@ -1850,7 +2001,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.mdrPlan.onus.percentage.$touch"
                           :error="v$.merchant.mdrPlan.onus.percentage.$error"
@@ -1860,7 +2012,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.mdrPlan.onus.minimum.$touch"
                           :error="v$.merchant.mdrPlan.onus.minimum.$error"
@@ -1874,7 +2027,8 @@
                     <div class="row group bg-yellow-2 onus">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.SharingDiscountFee.onus.fixed.$touch"
                           :error="v$.merchant.SharingDiscountFee.onus.fixed.$error"
@@ -1884,7 +2038,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.SharingDiscountFee.onus.percentage.$touch"
                           :error="v$.merchant.SharingDiscountFee.onus.percentage.$error"
@@ -1894,7 +2049,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.SharingDiscountFee.onus.minimum.$touch"
                           :error="v$.merchant.SharingDiscountFee.onus.minimum.$error"
@@ -1913,7 +2069,8 @@
                     <div class="row group bg-green-2 mVisa">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.mdrPlan.mVisa.fixed.$touch"
                           :error="v$.merchant.mdrPlan.mVisa.fixed.$error"
@@ -1923,7 +2080,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.mdrPlan.mVisa.percentage.$touch"
                           :error="v$.merchant.mdrPlan.mVisa.percentage.$error"
@@ -1933,7 +2091,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.mdrPlan.mVisa.minimum.$touch"
                           :error="v$.merchant.mdrPlan.mVisa.minimum.$error"
@@ -1947,7 +2106,8 @@
                     <div class="row group bg-yellow-2 mVisa">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.SharingDiscountFee.mVisa.fixed.$touch"
                           :error="v$.merchant.SharingDiscountFee.mVisa.fixed.$error"
@@ -1957,7 +2117,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.SharingDiscountFee.mVisa.percentage.$touch"
                           :error="v$.merchant.SharingDiscountFee.mVisa.percentage.$error"
@@ -1967,7 +2128,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.SharingDiscountFee.mVisa.minimum.$touch"
                           :error="v$.merchant.SharingDiscountFee.mVisa.minimum.$error"
@@ -1986,7 +2148,8 @@
                     <div class="row group bg-green-2 masterPass">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.mdrPlan.masterPass.fixed.$touch"
                           :error="v$.merchant.mdrPlan.masterPass.fixed.$error"
@@ -1996,7 +2159,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.mdrPlan.masterPass.percentage.$touch"
                           :error="v$.merchant.mdrPlan.masterPass.percentage.$error"
@@ -2006,7 +2170,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.mdrPlan.masterPass.minimum.$touch"
                           :error="v$.merchant.mdrPlan.masterPass.minimum.$error"
@@ -2020,7 +2185,8 @@
                     <div class="row group bg-yellow-2 masterPass">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.SharingDiscountFee.masterPass.fixed.$touch"
                           :error="v$.merchant.SharingDiscountFee.masterPass.fixed.$error"
@@ -2030,7 +2196,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.SharingDiscountFee.masterPass.percentage.$touch"
                           :error="v$.merchant.SharingDiscountFee.masterPass.percentage.$error"
@@ -2040,7 +2207,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.SharingDiscountFee.masterPass.minimum.$touch"
                           :error="v$.merchant.SharingDiscountFee.masterPass.minimum.$error"
@@ -2059,7 +2227,8 @@
                     <div class="row group bg-green-2 cashAtPos">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.mdrPlan.cashAtPos.fixed.$touch"
                           :error="v$.merchant.mdrPlan.cashAtPos.fixed.$error"
@@ -2069,7 +2238,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.mdrPlan.cashAtPos.percentage.$touch"
                           :error="v$.merchant.mdrPlan.cashAtPos.percentage.$error"
@@ -2079,7 +2249,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.mdrPlan.cashAtPos.minimum.$touch"
                           :error="v$.merchant.mdrPlan.cashAtPos.minimum.$error"
@@ -2093,7 +2264,8 @@
                     <div class="row group bg-yellow-2 cashAtPos">
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="fixed"
                           @blur="v$.merchant.SharingDiscountFee.cashAtPos.fixed.$touch"
                           :error="v$.merchant.SharingDiscountFee.cashAtPos.fixed.$error"
@@ -2103,7 +2275,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="percentage"
                           @blur="v$.merchant.SharingDiscountFee.cashAtPos.percentage.$touch"
                           :error="v$.merchant.SharingDiscountFee.cashAtPos.percentage.$error"
@@ -2113,7 +2286,8 @@
                       </div>
                       <div class="col">
                         <q-input
-                          color="grey-9" class="type="number"
+                          color="grey-9"
+                          type="number"
                           class="minimum"
                           @blur="v$.merchant.SharingDiscountFee.cashAtPos.minimum.$touch"
                           :error="v$.merchant.SharingDiscountFee.cashAtPos.minimum.$error"
@@ -2128,19 +2302,22 @@
             </div>
             <q-stepper-navigation>
               <q-btn
-                color="primary" class="class="q-ma-xs"
+                color="primary"
+                class="q-ma-xs"
                 icon="check"
                 @click="validatebeforeNavigate('mdr')"
                 label="Continue"
               />
               <q-btn
-                color="amber-10" class="class="q-ma-xs"
+                color="amber-10"
+                class="q-ma-xs"
                 icon="save"
                 label="Save Partial"
                 @click="saveCurrentChanges()"
               />
               <q-btn
-                color="grey-7" class="class="q-ma-xs"
+                color="grey-7"
+                class="q-ma-xs"
                 icon="block"
                 @click="$refs.stepper.previous()"
                 label="Back"
@@ -2163,7 +2340,8 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
                   upper-case
-                  color="grey-9" class="class="ifsc"
+                  color="grey-9"
+                  class="ifsc"
                   :error="v$.merchant.bankInformation.bankDetails.ifsc.$error"
                   @blur="populateBankDetails"
                   v-model.trim="merchant.bankInformation.bankDetails.ifsc"
@@ -2174,7 +2352,8 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
                   class="branchName"
-                  color="grey-9" class="@blur="v$.merchant.bankInformation.bankDetails.branchName.$touch"
+                  color="grey-9"
+                  @blur="v$.merchant.bankInformation.bankDetails.branchName.$touch"
                   :error="v$.merchant.bankInformation.bankDetails.branchName.$error"
                   v-model.trim="merchant.bankInformation.bankDetails.branchName"
                   label="Branch Name*"
@@ -2184,7 +2363,8 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select
                   placeholder="Choose from the below"
-                  color="grey-9" class="class="feeType"
+                  color="grey-9"
+                  class="feeType"
                   v-model.trim="merchant.bankInformation.bankDetails.feeType"
                   label="Fee Type"
                   :options="feeTypeOptions"
@@ -2196,7 +2376,8 @@
                 class="col-md-6 col-sm-12 col-xs-12"
               >
                 <q-input
-                  color="grey-9" class="class="settlementOrNeftFee"
+                  color="grey-9"
+                  class="settlementOrNeftFee"
                   @blur="v$.merchant.bankInformation.bankDetails.settlementOrNeftFee.$touch"
                   :error="v$.merchant.bankInformation.bankDetails.settlementOrNeftFee.$error"
                   v-model.trim="merchant.bankInformation.bankDetails.settlementOrNeftFee"
@@ -2206,7 +2387,8 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="class="micr"
+                  color="grey-9"
+                  class="micr"
                   @blur="v$.merchant.bankInformation.bankDetails.micr.$touch"
                   :error="v$.merchant.bankInformation.bankDetails.micr.$error"
                   v-model.trim="merchant.bankInformation.bankDetails.micr"
@@ -2216,7 +2398,8 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="class="bankName"
+                  color="grey-9"
+                  class="bankName"
                   @blur="v$.merchant.bankInformation.bankDetails.bankName.$touch"
                   :error="v$.merchant.bankInformation.bankDetails.bankName.$error"
                   v-model.trim="merchant.bankInformation.bankDetails.bankName"
@@ -2228,14 +2411,16 @@
                 <q-select
                   class="paymentMode"
                   placeholder="Choose from the below"
-                  color="grey-9" class="v-model.trim="merchant.bankInformation.bankDetails.paymentMode"
+                  color="grey-9"
+                  v-model.trim="merchant.bankInformation.bankDetails.paymentMode"
                   label="Payment mode"
                   :options="paymnentModeOptions"
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="class="bankCityRefCode"
+                  color="grey-9"
+                  class="bankCityRefCode"
                   @blur="v$.merchant.bankInformation.bankDetails.bankCityRefCode.$touch"
                   :error="autoCompleteError(v$.merchant.bankInformation.bankDetails.bankCityName,v$.merchant.bankInformation.bankDetails.bankCityRefCode)"
                   v-model.trim="merchant.bankInformation.bankDetails.bankCityName"
@@ -2253,7 +2438,8 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="class="bankStateRefCode"
+                  color="grey-9"
+                  class="bankStateRefCode"
                   @blur="v$.merchant.bankInformation.bankDetails.bankStateRefCode.$touch"
                   :error="autoCompleteError(v$.merchant.bankInformation.bankDetails.bankStateName,v$.merchant.bankInformation.bankDetails.bankStateRefCode)"
                   v-model.trim="merchant.bankInformation.bankDetails.bankStateName"
@@ -2273,14 +2459,16 @@
                 <q-select
                   class="accountType"
                   placeholder="Choose from the below"
-                  color="grey-9" class="v-model.trim="merchant.bankInformation.bankDetails.accountType"
+                  color="grey-9"
+                  v-model.trim="merchant.bankInformation.bankDetails.accountType"
                   label="Account Type"
                   :options="accountTypeOptions"
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
-                  color="grey-9" class="class="accountNumber"
+                  color="grey-9"
+                  class="accountNumber"
                   @blur="v$.merchant.bankInformation.bankDetails.accountNumber.$touch"
                   :error="v$.merchant.bankInformation.bankDetails.accountNumber.$error"
                   v-model.trim="merchant.bankInformation.bankDetails.accountNumber"
@@ -2291,13 +2479,15 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="bankStatementAttached">
                   <q-checkbox
-                    color="grey-9" class="true-value="Y"
+                    color="grey-9"
+                    true-value="Y"
                     false-value="N"
                     v-model.trim="merchant.bankInformation.bankDetails.bankStatementAttached"
                     label="Bank Statement Attached"
                   />
                   <q-checkbox
-                    color="grey-9" class="true-value="Y"
+                    color="grey-9"
+                    true-value="Y"
                     false-value="N"
                     v-model.trim="merchant.bankInformation.bankDetails.cancelChequeAttached"
                     label="Cancelled Cheque Lead Attached"
@@ -2314,7 +2504,8 @@
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-input
                       class="chequeNumber"
-                      color="grey-9" class="@blur="v$.merchant.bankInformation.collectionDetails.chequeNumber.$touch"
+                      color="grey-9"
+                      @blur="v$.merchant.bankInformation.collectionDetails.chequeNumber.$touch"
                       :error="v$.merchant.bankInformation.collectionDetails.chequeNumber.$error"
                       v-model.trim="merchant.bankInformation.collectionDetails.chequeNumber"
                       label="Cheque/UTR No*"
@@ -2327,7 +2518,8 @@
                 <div class="row">
                   <div class="col-md-4 col-sm-12 col-xs-12">
                     <q-input
-                      color="grey-9" class="class="swipeAmount"
+                      color="grey-9"
+                      class="swipeAmount"
                       @blur="v$.merchant.bankInformation.collectionDetails.swipeAmount.$touch"
                       :error="v$.merchant.bankInformation.collectionDetails.swipeAmount.$error"
                       v-model.trim="merchant.bankInformation.collectionDetails.swipeAmount"
@@ -2339,7 +2531,8 @@
                     <q-input
                       format="DD/MM/YYYY"
                       format-model="number"
-                      color="grey-9" class="modal
+                      color="grey-9"
+                      modal
                       class="collectedDate"
                       @blur="v$.merchant.bankInformation.collectionDetails.collectedDate.$touch"
                       :error="v$.merchant.bankInformation.collectionDetails.collectedDate.$error"
@@ -2350,7 +2543,8 @@
                   </div>
                   <div class="col-md-4 col-sm-12 col-xs-12">
                     <q-input
-                      color="grey-9" class="class="swipeTerminal"
+                      color="grey-9"
+                      class="swipeTerminal"
                       @blur="v$.merchant.bankInformation.collectionDetails.swipeTerminal.$touch"
                       :error="v$.merchant.bankInformation.collectionDetails.swipeTerminal.$error"
                       v-model.trim="merchant.bankInformation.collectionDetails.swipeTerminal"
@@ -2364,7 +2558,8 @@
                 <div class="row">
                   <div class="col-md-3 col-sm-12 col-xs-12">
                     <q-input
-                      color="grey-9" class="class="chequeAmount"
+                      color="grey-9"
+                      class="chequeAmount"
                       @blur="v$.merchant.bankInformation.collectionDetails.chequeAmount.$touch"
                       :error="v$.merchant.bankInformation.collectionDetails.chequeAmount.$error"
                       v-model.trim="merchant.bankInformation.collectionDetails.chequeAmount"
@@ -2376,7 +2571,8 @@
                     <q-input
                       format="DD/MM/YYYY"
                       format-model="number"
-                      color="grey-9" class="class="chequeDate"
+                      color="grey-9"
+                      class="chequeDate"
                       modal
                       @blur="v$.merchant.bankInformation.collectionDetails.chequeDate.$touch"
                       :error="v$.merchant.bankInformation.collectionDetails.chequeDate.$error"
@@ -2389,7 +2585,8 @@
                     <q-input
                       format="DD/MM/YYYY"
                       format-model="number"
-                      color="grey-9" class="modal
+                      color="grey-9"
+                      modal
                       class="chequeDepositedDate"
                       @blur="v$.merchant.bankInformation.collectionDetails.chequeDepositedDate.$touch"
                       :error="v$.merchant.bankInformation.collectionDetails.chequeDepositedDate.$error"
@@ -2400,7 +2597,8 @@
                   </div>
                   <div class="col-md-3 col-sm-12 col-xs-12">
                     <q-input
-                      color="grey-9" class="class="chequeNumber"
+                      color="grey-9"
+                      class="chequeNumber"
                       @blur="v$.merchant.bankInformation.collectionDetails.chequeNumber.$touch"
                       :error="v$.merchant.bankInformation.collectionDetails.chequeNumber.$error"
                       v-model.trim="merchant.bankInformation.collectionDetails.chequeNumber"
@@ -2415,7 +2613,8 @@
                   clearable
                   class="acquirerBank"
                   placeholder="Choose from the below"
-                  color="grey-9" class="v-model.trim="merchant.bankInformation.collectionDetails.acquirerBank"
+                  color="grey-9"
+                  v-model.trim="merchant.bankInformation.collectionDetails.acquirerBank"
                   label="Bank Name"
                   :options="bankListSet"
                 />
@@ -2423,19 +2622,22 @@
             </div>
             <q-stepper-navigation>
               <q-btn
-                color="primary" class="class="q-ma-xs"
+                color="primary"
+                class="q-ma-xs"
                 icon="check"
                 @click="validatebeforeNavigate('bank')"
                 label="Continue"
               />
               <q-btn
-                color="amber-10" class="class="q-ma-xs"
+                color="amber-10"
+                class="q-ma-xs"
                 icon="save"
                 label="Save Partial"
                 @click="saveCurrentChanges()"
               />
               <q-btn
-                color="grey-7" class="class="q-ma-xs"
+                color="grey-7"
+                class="q-ma-xs"
                 icon="block"
                 @click="$refs.stepper.previous()"
                 label="Back"
@@ -2496,32 +2698,36 @@
             <div class="row group q-py-md items-center">
               <div class="col-6">
                 <q-input
-                  color="grey-9" class="v-model.trim="leadDataEntryRemarks"
+                  color="grey-9"
+                  v-model.trim="leadDataEntryRemarks"
                   label="Remarks"
                   placeholder="Remarks"
                 />
               </div>
               <div class="col-6">
                 <p class="q-ma-0">Hold payment?</p>
-                <q-radio color="grey-9" class="v-model.trim="holdPayment" :val="1" label="Yes"/>
-                <q-radio color="grey-9" class="v-model.trim="holdPayment" :val="0" label="No"/>
+                <q-radio color="grey-9" v-model.trim="holdPayment" :val="1" label="Yes"/>
+                <q-radio color="grey-9" v-model.trim="holdPayment" :val="0" label="No"/>
               </div>
             </div>
             <q-stepper-navigation>
               <q-btn
-                color="primary" class="class="q-ma-xs"
+                color="primary"
+                class="q-ma-xs"
                 icon="check"
                 @click="finalFormSubmit()"
                 label="Submit"
               />
               <q-btn
-                color="amber-10" class="class="q-ma-xs"
+                color="amber-10"
+                class="q-ma-xs"
                 icon="save"
                 label="Save Partial"
                 @click="saveCurrentChanges()"
               />
               <q-btn
-                color="grey-7" class="class="q-ma-xs"
+                color="grey-7"
+                class="q-ma-xs"
                 icon="block"
                 @click="$refs.stepper.previous()"
                 label="Back"
@@ -5117,7 +5323,7 @@ export default {
                     merchantRefCode: this.propLeadDeatils.merchantRefCode
                   };
                 } else {
-                  feed_paramaters = response.data;
+                  feed_paramaters = response.body;
                 }
                 self.$q.loading.show({
                   delay: 0, // ms

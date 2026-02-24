@@ -24,18 +24,15 @@
         <q-tabs
           v-model="selectedTab"
           class="shadow-1"
-          color="grey-1" class="@select="goToUnassignedTab"
+          color="grey-1"
+          @select="goToUnassignedTab"
         >
-          <q-tab default color="dark" class="name="statusTab"  label="TID & MID STATUS"/>
-          <!-- <q-tab color="dark" class="name="rejectedTab"  label="Rejected Leads" /> -->
-
-
-        </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="rejectedTab">
+          <q-tab default color="dark" name="statusTab"  label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab"  label="Rejected Leads" /> -->
+          <q-tab-panel name="rejectedTab">
               <varaneekRejectedLead/>
             </q-tab-panel>
-<q-tab-panel name="statusTab">
+          <q-tab-panel name="statusTab">
             <q-table
              :rows="tableData1"
               :columns="columnData"
@@ -46,7 +43,8 @@
               row-key="id"
               :rows-per-page-options="[10,20,50,100,150,200]"
               :loading="tableAjaxLoading1"
-              color="dark" class="@request="ajaxLoadAllLeadInfo1"
+              color="dark"
+              @request="ajaxLoadAllLeadInfo1"
             >
               <q-td
                 v-slot:body-cell-leadNumber="props"
@@ -80,7 +78,8 @@
                 <div class="col-md-5">
                   <q-input
                     clearable
-                    color="grey-9" v-model="filterSearch"
+                    color="grey-9"
+                    v-model="filterSearch"
                     placeholder="Type.."
                     label="Search By MID, TID"
                     class="q-mr-lg q-py-sm"
@@ -90,7 +89,7 @@
             </q-table>
             <!--ENDv-model: table Data -->
           </q-tab-panel>
-</q-tab-panels>
+        </q-tabs>
   
         <!--END: table Footer -->
         <!-- START >> COMPONENT: Update device address  -->

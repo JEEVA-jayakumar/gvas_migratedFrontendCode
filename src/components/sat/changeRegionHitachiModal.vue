@@ -15,7 +15,8 @@
               size="sm"
               @click="emitToggleRemarks"
               outline
-              color="dark" class="icon="clear"
+              color="dark"
+              icon="clear"
             />
           </div>
         </div>
@@ -38,7 +39,8 @@
           <div class="col-sm-6">
             <q-select
               class="text-weight-regular text-grey-8"
-              color="grey-9" v-model="formData.region"
+              color="grey-9"
+              v-model="formData.region"
               label="Select Region"
               placeholder="Select Region"
               :options="regionOptions"
@@ -57,7 +59,8 @@
                 filled
           clearable
           type="textarea"
-          color="red-12" class="label="Textarea with shadow text"
+          color="red-12"
+          label="Textarea with shadow text"
           hint="Press TAB to autocomplete suggested value or ESC to cancel suggestion"
           :shadow-text="textareaShadowText"
           @keydown="processTextareaFill"
@@ -168,7 +171,9 @@
               color: "negative",
               position: "bottom",
               message:
-                (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                error.body.message == null
+                  ? "Please Try Again Later !"
+                  : error.body.message,
               icon: "thumb_down"
             });
           });

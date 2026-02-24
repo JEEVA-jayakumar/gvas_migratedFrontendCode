@@ -4,8 +4,8 @@
       <customHeader @fnToggleSideMenu="fnMainToggleSideMenu"></customHeader>
     </q-header>
 
-    <q-drawer class="no-shadow" v-model="leftDrawerOpen"
-      :style="{ background: getComputedColor }" :width="250">
+    <q-drawer class="no-shadow" v-model="leftDrawerOpen" content-class="no-shadow"
+      :content-style="{ background: getComputedColor, width: '250px' }">
       <q-scroll-area style="height: 100vh" :thumb-style="{
         right: '4px',
         borderRadius: '5px',
@@ -13,7 +13,7 @@
         width: '5px',
         opacity: 0.5
       }" :delay="1500">
-        <q-list style="padding-top:65px">
+        <q-list no-border link inset-delimiter highlight style="padding-top:65px">
           <div>
             <!-- Entry point for sat -->
             <div v-if="
@@ -44,20 +44,19 @@
                   <div class="col-md-12">
                     <div
                       class="col-md-12"
-                      color="light" class="text-color="light"
+                      color="light"
+                      text-color="light"
                       v-if="(menu.name == 'Bijlipay')"
                     >
                       <q-select
+                        inverted-light
                         v-model="selectedValueSat"
                         label="Please Select"
                         placeholder="Please Select"
-                        dark
-                        dense
-                        emit-value
-                        map-options
+                        color="light"
                         class="cursor-pointer menu-item-color"
                         :options="options"
-                        @update:model-value="fnclickdropdownSat"
+                        @input="fnclickdropdownSat"
                       />
                     </div>
                     <!--@input="fnclickdropdown"-->
@@ -116,20 +115,19 @@
                   <div class="col-md-12">
                     <div
                       class="col-md-12"
-                      color="light" class="text-color="light"
+                      color="light"
+                      text-color="light"
                       v-if="(menu.name == 'Bijlipay')"
                     >
                       <q-select
+                        inverted-light
                         v-model="selectedValue"
                         label="Please Select"
                         placeholder="Please Select"
-                        dark
-                        dense
-                        emit-value
-                        map-options
+                        color="light"
                         class="cursor-pointer menu-item-color"
                         :options="options"
-                        @update:model-value="fnclickdropdown"
+                        @input="fnclickdropdown"
                       />
                     </div>
                     <!--@input="fnclickdropdown"-->

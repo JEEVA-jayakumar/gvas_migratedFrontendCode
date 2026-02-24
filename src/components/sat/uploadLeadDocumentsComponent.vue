@@ -34,7 +34,7 @@
             v-if="getShortLeadInfo.applicationFileMimeType.includes('pdf')"
           >
             <div @click="fnPDFViewModal(getShortLeadInfo.applicationFile)" class="ellipsis">
-              <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" class="/>
+              <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" />
               &nbsp;{{getShortLeadInfo.applicationFile}}
             </div>
           </div>
@@ -53,7 +53,7 @@
               />
             </viewer>
             <div @click="fnViewHandedOverFileImage()" class="ellipsis">
-              <q-icon name="fas fa-image" color="amber-9" class="/>
+              <q-icon name="fas fa-image" color="amber-9" />
               &nbsp;{{getShortLeadInfo.applicationFile}}
             </div>
           </div>
@@ -78,7 +78,7 @@
             v-if="getShortLeadInfo.paymentDocumentMimeType.includes('pdf')"
           >
             <div @click="fnPDFViewModal(getShortLeadInfo.paymentDocumentFile)" class="ellipsis">
-              <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" class="/>
+              <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" />
               &nbsp;{{getShortLeadInfo.paymentDocumentFile}}
             </div>
           </div>
@@ -97,7 +97,7 @@
               />
             </viewer>
             <div @click="fnViewbankUploadedLetterImage()" class="ellipsis">
-              <q-icon name="fas fa-image" color="amber-9" class="/>
+              <q-icon name="fas fa-image" color="amber-9" />
               &nbsp;{{getShortLeadInfo.paymentDocumentFile}}
             </div>
           </div>
@@ -182,7 +182,7 @@
                         @click="fnPDFViewModal(filesAttachedEarlier.fileName)"
                         class="ellipsis"
                       >
-                        <q-icon name="fas fa-file-pdf" color="negative" class="/>
+                        <q-icon name="fas fa-file-pdf" color="negative" />
                         &nbsp;{{filesAttachedEarlier.fileName}}
                       </div>
                     </div>
@@ -204,7 +204,7 @@
                         @click="fnViewAttachedFileImage(filesAttachedEarlierIndex)"
                         class="ellipsis"
                       >
-                        <q-icon name="fas fa-image" color="amber-9" class="/>
+                        <q-icon name="fas fa-image" color="amber-9" />
                         &nbsp;{{filesAttachedEarlier.fileName}}
                       </div>
                     </div>
@@ -217,7 +217,8 @@
                     icon="clear"
                     @click="fnDeleteAlreadyAttachedFile(filesAttachedEarlier)"
                     round
-                    color="negative" class="label="Remove"
+                    color="negative"
+                    label="Remove"
                   />
                 </q-item-section>
               </q-item>
@@ -306,7 +307,7 @@
                       @click="fnPDFViewModal(filesAttachedEarlier.fileName)"
                       class="ellipsis"
                     >
-                      <q-icon name="fas fa-file-pdf" color="negative" class="/>
+                      <q-icon name="fas fa-file-pdf" color="negative" />
                       &nbsp;{{filesAttachedEarlier.fileName}}
                     </div>
                   </div>
@@ -328,7 +329,7 @@
                       @click="fnViewMultiAttachedFileImage(filesAttachedEarlierIndex)"
                       class="ellipsis"
                     >
-                      <q-icon name="fas fa-image" color="amber-9" class="/>
+                      <q-icon name="fas fa-image" color="amber-9" />
                       &nbsp;{{filesAttachedEarlier.fileName}}
                     </div>
                   </div>
@@ -340,7 +341,8 @@
                   icon="clear"
                   @click="fnDeleteAlreadyAttachedFile(filesAttachedEarlier)"
                   round
-                  color="negative" class="label="Remove"
+                  color="negative"
+                  label="Remove"
                 />
               </q-item-section>
             </q-item>
@@ -650,7 +652,7 @@ export default {
               innerSelf.$q.notify({
                 color: "negative",
                 position: "bot  tom",
-                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down"
               });
             });

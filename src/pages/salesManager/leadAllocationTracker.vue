@@ -16,7 +16,8 @@
         >Lead Allocation Tracker</div>
         <div class="col-auto q-px-lg q-py-sm">
           <q-btn
-            color="dark" class="label="Lead Allocation"
+            color="dark"
+            label="Lead Allocation"
             icon="add"
             @click="$router.push('/sales/manager/lead/allocation/tracker/add/new')"
           />
@@ -60,7 +61,7 @@
           :props="props"
         >{{props.row.assignedTo == null? 'NA':props.row.assignedTo.name}}</q-td>
         <q-td v-slot:body-cell-action="props" :props="props">
-          <q-btn label="Edit" color="amber-9" class="icon="edit" @click="navigateToEditScreen(props.row)"/>
+          <q-btn label="Edit" color="amber-9" icon="edit" @click="navigateToEditScreen(props.row)"/>
         </q-td>
 
         <template v-slot:top="props" class="bottom-border">
@@ -70,7 +71,8 @@
               :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
               @click="props.toggleFullscreen"
               class="q-mt-lg"
-              color="grey-9" size="sm"
+              color="grey-9"
+              size="sm"
             />
           </div>-->
           <!--END: table fullscreen mode -->
@@ -78,7 +80,8 @@
           <div class="col-md-5">
             <q-input
               clearable
-              color="grey-9" v-model="filter"
+              color="grey-9"
+              v-model="filter"
               placeholder="Type.."
               label="Search by SO name, Merchant Name, Lead ID"
               class="q-mr-lg q-py-sm"
@@ -89,7 +92,8 @@
             multiple
             v-model="multipleSelect"
             separator
-            color="grey-9" class=":options="options"
+            color="grey-9"
+            :options="options"
             placeholder="Select"
             label= "Filter By"
             class="q-mr-lg q-py-sm"

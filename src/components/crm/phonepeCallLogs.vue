@@ -16,7 +16,8 @@
             size="sm"
             @click="emitToggleRemarks"
             outline
-            color="dark" class="icon="clear"
+            color="dark"
+            icon="clear"
           />
         </div>
       </div>
@@ -30,7 +31,8 @@
                 <q-input
                   v-model="selectedDate"
                   label="From Date"
-                  color="purple-9" class=":max="maxDate"
+                  color="purple-9"
+                  :max="maxDate"
                   @input="onDateChange"
                   type="datetime"
                   format24h
@@ -58,13 +60,15 @@
             >
               <q-btn
                 @click="reset"
-                color="purple-9" class="icon="refresh"
+                color="purple-9"
+                icon="refresh"
                 label="Reset"
               />
               &nbsp;
               <q-btn
                 @click="fnsubmit"
-                color="purple-9" class="icon="save"
+                color="purple-9"
+                icon="save"
                 label="Save"
               />
             </div>
@@ -144,7 +148,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: error.data.message || "Please try again later.",
+            message: error.body.message || "Please try again later.",
             icon: "thumb_down"
           });
           this.$q.loading.hide();

@@ -28,7 +28,7 @@
                     <div class="row group content-stretch">
                         <!-- Device -->
                         <div class="col">
-                            <q-card class=" border-1 q-custom-class" flat>
+                            <q-card border-1 q-custom-class" flat>
                                 <q-card-section class="q-pa-sm items-center bottom-border-dark bg-grey-4">
                                     <div class="row items-center">
                                         <div class="col text-caption text-weight-medium">
@@ -40,7 +40,7 @@
                                 </q-card-section>
                                 <q-separator />
                                 <q-card-section class="q-pa-sm text-grey-9">
-                                    <q-list separator  class="no-padding">
+                                    <q-list separator no-border class="no-padding">
                                         <q-item>
                                             <q-item-section class="text-caption">
                                                 <q-item-label>Plan</q-item-label>
@@ -81,7 +81,7 @@
                         <!-- Exception -->
                         <div v-if="formData.shortLead.leadCategory == 2" class="col">
                             <div class="group">
-                                <q-card v-if="formData.shortLead.kyc" class=" border-1" flat>
+                                <q-card v-if="formData.shortLead.kyc" border-1" flat>
                                     <q-card-section class="q-pa-sm bottom-border-dark bg-grey-4">
                                         <div class="row items-center">
                                             <div class="col-auto text-caption text-weight-medium">
@@ -153,7 +153,7 @@
 
                         <!-- Payment -->
                         <div class="col">
-                            <q-card class=" border-1 q-custom-class" flat>
+                            <q-card border-1 q-custom-class" flat>
                                 <q-card-section class="q-pa-sm bottom-border-dark bg-grey-4">
                                     <div class="col-auto text-caption text-weight-medium ">
                                         Payment
@@ -161,7 +161,7 @@
                                 </q-card-section>
                                 <q-separator />
                                 <q-card-section class="q-pa-sm text-grey-9">
-                                    <q-list dense  class="no-padding">
+                                    <q-list dense no-border class="no-padding">
                                         <q-item class="q-pa-sm">
                                             <q-item-section class="text-caption">
                                                 Payment mode:
@@ -183,13 +183,13 @@
                                     </q-list>
                                     <q-item v-if="formData.shortLead.paymentOption == 2">
                                         <div v-if="formData.shortLead.paymentDocumentMimeType != null && formData.shortLead.paymentDocumentMimeType.includes('pdf')">
-                                            <q-btn size="sm" :outline="!showOpenPaymentChequeDocumentInfo" color="dark" class="label="View Document" icon="attach_file" @click="fnPDFViewModal(formData.shortLead.paymentDocumentFile,'CHEQUE')"></q-btn>
+                                            <q-btn size="sm" :outline="!showOpenPaymentChequeDocumentInfo" color="dark" label="View Document" icon="attach_file" @click="fnPDFViewModal(formData.shortLead.paymentDocumentFile,'CHEQUE')"></q-btn>
                                         </div>
                                         <div v-else-if="formData.shortLead.paymentDocumentMimeType != null && formData.shortLead.paymentDocumentMimeType.includes('image')">
-                                            <q-btn :outline="!showOpenPaymentChequeInfo" size="sm" color="dark" class="label="View Document" icon="attach_file" @click="fnOpenPaymentChequeInfo(formData.shortLead.paymentDocumentFile)" />
+                                            <q-btn :outline="!showOpenPaymentChequeInfo" size="sm" color="dark" label="View Document" icon="attach_file" @click="fnOpenPaymentChequeInfo(formData.shortLead.paymentDocumentFile)" />
                                         </div>
                                         <div v-else class="text-grey-9">
-                                            <q-icon name="clear" color="negative" class="/> No document attached
+                                            <q-icon name="clear" color="negative" /> No document attached
                                         </div>
                                     </q-item>
                                     <q-item v-if="showOpenPaymentChequeInfo">
@@ -203,7 +203,7 @@
 
                         <!-- MDR -->
                         <div class="col">
-                            <q-card class=" border-1 q-custom-class" flat>
+                            <q-card border-1 q-custom-class" flat>
                                 <q-card-section class="q-pa-sm bottom-border-dark bg-grey-4">
                                     <div class="col-auto text-caption text-weight-medium">
                                         MDR
@@ -211,7 +211,7 @@
                                 </q-card-section>
                                 <q-separator />
                                 <q-card-section class="q-pa-sm text-grey-9">
-                                    <q-list separator dense  class="no-padding">
+                                    <q-list separator dense no-border class="no-padding">
                                         <q-item>
                                             <q-item-section class="text-caption">Debit &lt;= 2000</q-item-section>
                                             <q-item-section class="text-caption" align="center">
@@ -273,7 +273,8 @@
                                             </q-item-section>
                                         </q-item>
                                         <q-item class="q-pa-sm" v-if="formData.shortLead.posEnable">
-                                            <q-checkbox v-model="formData.shortLead.posEnable" disable readonly color="grey-9">" class="<small class="text-caption">Enable Cash@POS Cash @POS incentive Rs. 5" </small>
+                                            <q-checkbox v-model="formData.shortLead.posEnable" disable readonly color="grey-9">
+                                                <small class="text-caption">Enable Cash@POS Cash @POS incentive Rs. 5" </small>
                                             </q-checkbox>
                                         </q-item>
                                     </q-list>

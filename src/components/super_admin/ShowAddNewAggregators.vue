@@ -20,7 +20,8 @@
                         v-model="formData.name" 
                           :error="v$.formData.name.$error"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" class="label="Enter Aggregator *"
+                          color="grey-9"
+                          label="Enter Aggregator *"
                           placeholder="Enter Aggregator *" 
                         />
                     </div>
@@ -28,7 +29,8 @@
                 <div class="row gutter-sm q-py-sm items-center">
                     <div class="col-md-12 group" align="right">
                         <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowAddNewAggregators()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitAddNewAggregators(formData)" color="purple-9">Save</q-btn>" class="</div>
+                        <q-btn align="right" @click="fnfinalsubmitAddNewAggregators(formData)" color="purple-9">Save</q-btn>
+                    </div>
                 </div>
             </form>
         </q-dialog>
@@ -99,7 +101,7 @@ console.log("FINAL SUBMITTED VALUES--------->",JSON.stringify(formData))
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down",
             });
           });

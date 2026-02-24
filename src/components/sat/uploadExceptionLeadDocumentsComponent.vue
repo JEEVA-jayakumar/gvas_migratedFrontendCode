@@ -37,7 +37,8 @@
                 v-if="getShortLeadInfo.applicationFileMimeType.includes('pdf')"
               >
                 <div @click="fnPDFViewModal(getShortLeadInfo.applicationFile)" class="ellipsis">
-                  <q-btn round size="sm" icon="fas fa-file-pdf" color="primary"/>" class="&nbsp;{{getShortLeadInfo.applicationFile}}
+                  <q-btn round size="sm" icon="fas fa-file-pdf" color="primary"/>
+                  &nbsp;{{getShortLeadInfo.applicationFile}}
                 </div>
               </div>
               <div
@@ -55,7 +56,8 @@
                   >
                 </viewer>
                 <div @click="fnViewHandedOverFileImage()" class="ellipsis">
-                  <q-icon name="fas fa-image" color="amber-9"/>" class="&nbsp;{{getShortLeadInfo.applicationFile}}
+                  <q-icon name="fas fa-image" color="amber-9"/>
+                  &nbsp;{{getShortLeadInfo.applicationFile}}
                 </div>
               </div>
               <div v-else>Invalid document type/ No document available</div>
@@ -75,7 +77,8 @@
                 v-if="getShortLeadInfo.paymentDocumentMimeType.includes('pdf')"
               >
                 <div @click="fnPDFViewModal(getShortLeadInfo.paymentDocumentFile)" class="ellipsis">
-                  <q-btn round size="sm" icon="fas fa-file-pdf" color="primary"/>" class="&nbsp;{{getShortLeadInfo.paymentDocumentFile}}
+                  <q-btn round size="sm" icon="fas fa-file-pdf" color="primary"/>
+                  &nbsp;{{getShortLeadInfo.paymentDocumentFile}}
                 </div>
               </div>
               <div
@@ -93,7 +96,8 @@
                   >
                 </viewer>
                 <div @click="fnViewbankUploadedLetterImage()" class="ellipsis">
-                  <q-icon name="fas fa-image" color="amber-9"/>" class="&nbsp;{{getShortLeadInfo.paymentDocumentFile}}
+                  <q-icon name="fas fa-image" color="amber-9"/>
+                  &nbsp;{{getShortLeadInfo.paymentDocumentFile}}
                 </div>
               </div>
               <div v-else>Invalid document type/ No document available</div>
@@ -128,7 +132,8 @@
                 :disabled="computeAndToggleCheckboxForSingleDocument(document)"
                 :class="[computeAndToggleCheckboxForSingleDocument(document)? 'no-pointer-events':'']"
                 v-model="document.isKycChecked"
-                color="dark" class="@input="fnCookKYCdocumentArr(document)"
+                color="dark"
+                @input="fnCookKYCdocumentArr(document)"
               />
             </q-item-section>
             <q-item-section>{{document.subDocumentType}}</q-item-section>
@@ -162,14 +167,16 @@
                 round
                 size="xs"
                 class="q-ma-xs"
-                color="green" class="icon="fas fa-check"
+                color="green"
+                icon="fas fa-check"
                 @click="fnDocumentApproveModal(document)"
               />
               <q-btn
                 round
                 size="xs"
                 class="q-ma-xs"
-                color="red" class="icon="fas fa-times"
+                color="red"
+                icon="fas fa-times"
                 @click="fnDocumentRejectModal(document)"
               />
             </q-item-section>
@@ -214,7 +221,8 @@
                         @click="fnPDFViewModal(filesAttachedEarlier.fileName)"
                         class="wrapWord ellipsis"
                       >
-                        <q-icon name="fas fa-file-pdf" color="negative"/>" class="&nbsp;{{filesAttachedEarlier.fileName}}
+                        <q-icon name="fas fa-file-pdf" color="negative"/>
+                        &nbsp;{{filesAttachedEarlier.fileName}}
                       </div>
                     </div>
                     <div
@@ -235,7 +243,8 @@
                         class="wrapWord ellipsis"
                         @click="fnViewAttachedFileImage(filesAttachedEarlierIndex)"
                       >
-                        <q-icon name="fas fa-image" color="amber-9"/>" class="&nbsp;{{filesAttachedEarlier.fileName}}
+                        <q-icon name="fas fa-image" color="amber-9"/>
+                        &nbsp;{{filesAttachedEarlier.fileName}}
                       </div>
                     </div>
                   </q-item-label>
@@ -247,7 +256,8 @@
                     icon="clear"
                     @click="fnDeleteAlreadyAttachedFile(filesAttachedEarlier)"
                     round
-                    color="negative" class="label="Remove"
+                    color="negative"
+                    label="Remove"
                   />
                 </q-item-section>
               </q-item>
@@ -278,7 +288,8 @@
                 :disabled="computeAndToggleCheckbox(multipleDocument)"
                 :class="[computeAndToggleCheckbox(multipleDocument)? 'no-pointer-events':'']"
                 v-model="multipleDocument.isKycChecked"
-                color="dark" class="@input="fnCookKYCdocumentArr(multipleDocument)"
+                color="dark"
+                @input="fnCookKYCdocumentArr(multipleDocument)"
                 :label="multipleDocument.documentType"
               />
               <span v-else>{{multipleDocument.documentType}}</span>
@@ -300,14 +311,16 @@
                   round
                   size="xs"
                   class="q-mx-xs"
-                  color="green" class="icon="fas fa-check"
+                  color="green"
+                  icon="fas fa-check"
                   @click="fnDocumentApproveModal(getShortLeadInfo.leadDocuments[multipleDocument.documentType][0])"
                 />
                 <q-btn
                   round
                   size="xs"
                   class="q-mx-xs"
-                  color="red" class="icon="fas fa-times"
+                  color="red"
+                  icon="fas fa-times"
                   @click="fnDocumentRejectModal(getShortLeadInfo.leadDocuments[multipleDocument.documentType][0])"
                 />
               </span>
@@ -389,7 +402,8 @@
                       @click="fnPDFViewModal(filesAttachedEarlier.fileName)"
                       class="wrapWord ellipsis"
                     >
-                      <q-icon name="fas fa-file-pdf" color="negative"/>" class="&nbsp;{{filesAttachedEarlier.fileName}}
+                      <q-icon name="fas fa-file-pdf" color="negative"/>
+                      &nbsp;{{filesAttachedEarlier.fileName}}
                     </div>
                   </div>
                   <div
@@ -410,7 +424,8 @@
                       @click="fnViewMultiAttachedFileImage(filesAttachedEarlierIndex)"
                       class="wrapWord ellipsis"
                     >
-                      <q-icon name="fas fa-image" color="amber-9"/>" class="&nbsp;{{filesAttachedEarlier.fileName}}
+                      <q-icon name="fas fa-image" color="amber-9"/>
+                      &nbsp;{{filesAttachedEarlier.fileName}}
                     </div>
                   </div>
                 </q-item-label>
@@ -421,7 +436,8 @@
                   icon="clear"
                   @click="fnDeleteAlreadyAttachedFile(filesAttachedEarlier)"
                   round
-                  color="negative" class="label="Remove"
+                  color="negative"
+                  label="Remove"
                 />
               </q-item-section>
               <!-- END >> Will be displayed if reprocess key => true -->
@@ -460,7 +476,8 @@
     <!-- END >> COMPONENT: View PDF -->
     <!-- START >> Inner loader for document section, since values are dynamic  -->
     <q-inner-loading :visible="toggleAjaxLoadFilter">
-      <q-spinner-gears size="50px" color="primary"></q-spinner-gears>" class="</q-inner-loading>
+      <q-spinner-gears size="50px" color="primary"></q-spinner-gears>
+    </q-inner-loading>
     <!-- END >> Inner loader for document section, since values are dynamic  -->
   </div>
 </template>
@@ -945,7 +962,7 @@ export default {
               this.$q.notify({
                 color: "negative",
                 position: "bot  tom",
-                message: (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down"
               });
             });

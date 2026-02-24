@@ -20,12 +20,13 @@
                           v-model="formData.name"   
                           :error="v$.formData.name.$error"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" class="label="Enter Service Resolution Remarks"
+                          color="grey-9"
+                          label="Enter Service Resolution Remarks"
                           placeholder="Enter Service Resolution Remarks" 
                         />
                     </div>
                     <div>
-            <q-radio class="alignsize" v-for="(item, index) in option.flagOptions" :key="index" color="grey-9" class="v-model.trim="formData.category"
+            <q-radio class="alignsize" v-for="(item, index) in option.flagOptions" :key="index" color="grey-9" v-model.trim="formData.category"
             @blur="v$.formData.category.$touch"
               :error="v$.formData.category.$error"
           :val="item.value" :label="item.label" />
@@ -34,7 +35,8 @@
                 <div class="row gutter-sm q-py-sm items-center">
                     <div class="col-md-12 group" align="right">
                         <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowAddServiceResolutionRemarks()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitAddServiceResolutionRemarks(formData)" color="purple-9">Save</q-btn>" class="</div>
+                        <q-btn align="right" @click="fnfinalsubmitAddServiceResolutionRemarks(formData)" color="purple-9">Save</q-btn>
+                    </div>
                 </div>
             </form>
         </q-dialog>

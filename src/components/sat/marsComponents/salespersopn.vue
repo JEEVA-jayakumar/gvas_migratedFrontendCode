@@ -2,7 +2,8 @@
   <div>
     <q-select
       placeholder="Choose from the below*"
-      color="grey-9" class="@blur="v$.merchant.salesInformation.salesPersonCode.$touch"
+      color="grey-9"
+      @blur="v$.merchant.salesInformation.salesPersonCode.$touch"
       :error="v$.merchant.salesInformation.salesPersonCode.$error"
       v-model="merchant.salesInformation.salesPersonCode"
       label="Sales Person*"

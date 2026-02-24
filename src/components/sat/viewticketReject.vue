@@ -16,7 +16,8 @@
             <q-input
               v-model="formData.reason"
               class="text-weight-regular text-grey-8"
-              color="grey-9" class="label="Enter the Reason"
+              color="grey-9"
+              label="Enter the Reason"
               placeholder="reason"
             />
           </div>
@@ -32,7 +33,8 @@
               align="right"
               :disabled="submitDisabled()"
               @click="submitShortLead(formData)"
-              color="purple-9" class=">submit</q-btn
+              color="purple-9"
+              >submit</q-btn
             >
           </div>
         </div>
@@ -99,7 +101,9 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              (error.response?.data?.message || error.data?.message || "Please Try Again Later !"),
+              error.body.message == null
+                ? "Please Try Again Later !"
+                : error.body.message,
             icon: "thumb_down",
           });
         });

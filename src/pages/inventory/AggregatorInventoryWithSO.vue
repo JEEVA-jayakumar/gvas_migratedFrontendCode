@@ -44,19 +44,20 @@
           }}</q-td>
           <template v-slot:top="props">
             <div class="col-md-5">
-              <q-input clearable v-model="filter" separator color="grey-9" class="placeholder="Type.."
+              <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
               label="Pod Number, Device Type, Serial Number" class="q-mr-lg q-py-sm" />
             </div>
             <div class="col-md-5">
 
-              <q-btn square outline color="purple-9" class="label="Download as Excel" class="q-mr-lg q-py-sm float-right"
+              <q-btn square outline color="purple-9" label="Download as Excel" class="q-mr-lg q-py-sm float-right"
                 size="md" @click="downloadInventoryWithSoList" />
 
             </div>
             <div class="col-md-5">
               <!-- <q-input
                     clearable
-                    color="grey-9" v-model="filterSearch"
+                    color="grey-9"
+                    v-model="filterSearch"
                     placeholder="Type.."
                     label="Search .."
                     class="q-mr-lg q-py-sm"
@@ -68,7 +69,7 @@
                 :fields="json_fields"
                 name="InventoryWithSO.xls"
               >
-                <q-btn outline color="grey-9" class="label="Download as excel" />
+                <q-btn outline color="grey-9" label="Download as excel" />
               </downloadExcel>
               @click="downloadReport"
             </div> -->
