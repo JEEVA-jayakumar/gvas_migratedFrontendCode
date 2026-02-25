@@ -52,8 +52,8 @@
               </div>
           </q-card>
           <!--END: table Footer -->
-          <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToUnassignedTab">
-              <q-tab default color="dark" name="unAssigned" label="Unassigned" />
+          <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+              <q-tab color="dark" name="unAssigned" label="Unassigned" />
               <q-tab color="dark" name="assigned" label="Assigned" />
               <q-tab color="dark" name="opened" label="Opened" />
               <q-tab color="dark" name="closed" label="Closed" /> -->

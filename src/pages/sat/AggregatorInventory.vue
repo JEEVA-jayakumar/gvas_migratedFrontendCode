@@ -11,7 +11,7 @@
               class="shadow-1"
             >
             <!-- <q-btn outline no-caps class="text-weight-regular" label="Allocate to SO" to="PhonepeallocateToSo" /> -->
-              <q-tab default name="Aggregatorspare" label="Spare Parts" />
+              <q-tab name="Aggregatorspare" label="Spare Parts" />
               <q-tab name="Aggregatorcount" label="Inventory Count" />
               <q-tab name="AggregatorDispatch" label="Disptached Inventory" />
               <q-tab name="AggregatorDamagedDevices" label="Add Damaged Devices" />

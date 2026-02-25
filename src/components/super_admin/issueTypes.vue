@@ -2,7 +2,7 @@
   <q-page>
     <div>
       <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" >
-         <q-tab @select="ajaxSpareData" default  color="dark" name="tab-3" label="Active Issue Types" />
+         <q-tab @click="ajaxSpareData"  color="dark" name="tab-3" label="Active Issue Types" />
           <q-tab  color="dark" name="tab-4" label="Deactive Issue Types" />
 </q-tabs>
 <q-tab-panels v-model="activeTab" animated>

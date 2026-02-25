@@ -126,10 +126,10 @@
         v-model="selectedTab"
         class="shadow-1"
         color="grey-1"
-        @select="goToUnassignedTab"
+        @click="goToUnassignedTab"
       >
         <q-tab
-          default
+
           color="dark"
           name="assigned"
           label="Normal"

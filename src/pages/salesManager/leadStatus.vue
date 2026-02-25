@@ -152,7 +152,7 @@
       >
         <!--START: tabs header -->
         <q-tab
-          @select="fnLoadSOTableData"
+          @click="fnLoadSOTableData"
           v-for="tabHeader in tabs.tabsHeader"
           :key="tabHeader.value"
           :name="tabHeader.value"

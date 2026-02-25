@@ -2,8 +2,8 @@
 <template>
   <q-page>
     <div>
-      <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @select="goToDownloadTab">
-        <q-tab default color="dark" name="tab-1" label="Generate QR" />
+      <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @update:model-value="goToDownloadTab">
+        <q-tab color="dark" name="tab-1" label="Generate QR" />
         <q-tab color="dark" name="tab-2" label="Download/View QR" />
         <!-- <q-tab color="dark" name="tab-3" label="Request" /> -->
 </q-tabs>

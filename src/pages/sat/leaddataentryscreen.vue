@@ -3,7 +3,7 @@
     <div class="text-grey-9">
       <div class="row bottom-border q-pa-sm items-center">
         <div class="col">
-          <q-tabs class="shadow-1" color="white" align="justify" v-model="shortlead"  @select="goToSelectedTab">
+          <q-tabs class="shadow-1" color="white" align="justify" v-model="shortlead"  @update:model-value="goToSelectedTab">
             <q-tab name="shortlead" color="black" label="Short Lead" />
             <q-tab name="wiplead" color="black" label="WIP Lead" @update:model-value="fetchappData" />
 </q-tabs>

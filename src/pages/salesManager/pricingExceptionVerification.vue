@@ -27,10 +27,10 @@
       </div>
       <!--END: table title -->
       <div v-if="shouldShowGivenPricefield">
-        <q-tabs filled color="purple-9">
-          <!-- Tabs - notice slot="title" -->
+        <q-tabs v-model="tab" filled color="purple-9">
+          <!-- Tabs - notice  -->
           <q-tab
-            default
+
             :count="pricingExceptionCountForTab"
             name="tab-1"
             label="Pending"
@@ -38,7 +38,7 @@
           <q-tab name="tab-2" label="History" />
           <!-- Targets -->
 </q-tabs>
-<q-tab-panels animated>
+<q-tab-panels v-model="tab" animated>
 <q-tab-panel name="tab-1">
             <!--START: table lead validation -->
             <q-table
@@ -235,6 +235,7 @@ export default {
   },
   data() {
     return {
+      tab: 'tab-1',
       shouldShowGivenPricefield: false,
       toggleAjaxLoadFilter: false,
       pricingExceptionCountForTab: 0,

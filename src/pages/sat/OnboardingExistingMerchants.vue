@@ -5,7 +5,7 @@
       <div class="text-grey-9">
         <div class="row bottom-border q-pa-sm items-center">
           <div class="col">
-            <q-tabs
+            <q-tabs v-model="tab"
               class="shadow-1"
               color="purple-9"
               align="justify"
@@ -100,7 +100,7 @@
       <div class="text-grey-9">
         <div class="row bottom-border q-pa-sm items-center">
           <div class="col">
-            <q-tabs class="shadow-1" color="purple-9" align="justify" >
+            <q-tabs v-model="tab" class="shadow-1" color="purple-9" align="justify" >
               <q-tab class="size1" label="Onboarding Existing Merchants" name="onboarding" />
             </q-tabs>
 
@@ -326,6 +326,7 @@ export default {
   name: "implementationQueue",
   data() {
     return {
+      tab: 'upload',
       propToggleLeadInformation: false,
       addtnLeadInformation: null,
       filterSearch: "",

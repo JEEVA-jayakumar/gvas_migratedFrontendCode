@@ -10,8 +10,8 @@
         </div>
         <!--END: table title -->
         <!-- table finance approved tracker -->
-        <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @select="goToQrMerchant">
-          <q-tab default color="dark" name="tab-1" label="Pos Merchant" />
+        <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @update:model-value="goToQrMerchant">
+          <q-tab color="dark" name="tab-1" label="Pos Merchant" />
         <q-tab color="dark" name="tab-2" label="QR Merchant" />
 </q-tabs>
 <q-tab-panels v-model="activeTab" animated>

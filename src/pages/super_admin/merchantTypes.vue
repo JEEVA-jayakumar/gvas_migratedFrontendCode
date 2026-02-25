@@ -84,21 +84,21 @@
       <!-- START >> Setup fee and recurring fee -->
       <!-- START >> Table >> rental charge details -->
       <div class="col-md-12 col-sm-12 col-xs-12">
-        <q-tabs color="grey-9">
-          <!-- Tabs - notice slot="title" -->
+        <q-tabs v-model="tab" color="grey-9">
+          <!-- Tabs - notice  -->
           <q-tab
-            @select="fetchActiveMerchantTypes"
-            default
+            @click="fetchActiveMerchantTypes"
+
             label="Active List"
             name="tab-1"
           />
           <q-tab
-            @select="fetchDeActiveMerchantTypes"
+            @click="fetchDeActiveMerchantTypes"
             label="De-Actived List"
             name="tab-2"
           />
 </q-tabs>
-<q-tab-panels animated>
+<q-tab-panels v-model="tab" animated>
 <q-tab-panel name="tab-1">
             <q-table
               table-class="customTableClass"
@@ -251,6 +251,7 @@ export default {
   },
   data() {
     return {
+      tab: 'tab-1',
       activeMerchantType: [],
       activeDocumentMerchantType: [],
       toggleMerchantSubdocumentTypes: false,

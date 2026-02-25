@@ -5,11 +5,11 @@
       <!-- <pre>{{getAllRegionsData}}</pre> -->
       <!-- <pre>{{getAllHierarchiesData}}</pre> -->
       <div class="col-12 text-h6 q-my-lg text-weight-regular">Spare Parts Types</div>
-      <q-tabs class="shadow-1" color="grey-1" >
-        <q-tab default color="dark" name="active" label="Active " />
+      <q-tabs v-model="tab" class="shadow-1" color="grey-1" >
+        <q-tab color="dark" name="active" label="Active " />
         <q-tab color="dark" name="deactive" label="Deactive" />
 </q-tabs>
-<q-tab-panels animated>
+<q-tab-panels v-model="tab" animated>
 <q-tab-panel name="active">
           <q-table
          :rows="activeTableData"
@@ -95,7 +95,7 @@
           :filter-method="myCustomSearchFilter"
           row-key="name"
           color="grey-9"
-          @select="ajaxSpareData"
+          @click="ajaxSpareData"
 >
 <q-td
     v-slot:body-cell-created_date="props"
@@ -182,6 +182,7 @@ export default {
 
   data() {
     return {
+      tab: 'active',
      
       propShowAddSpareParts: false,
       propShowEditSpareParts: false,

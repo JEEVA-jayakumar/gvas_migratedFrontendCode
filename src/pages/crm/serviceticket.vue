@@ -5,10 +5,10 @@
         v-model="activeTab"
         class="shadow-1"
         color="grey-1"
-        @select="goToCompleteTab"
+        @click="goToCompleteTab"
       >
         <q-tab
-          default
+
           color="dark"
           name="tab-1"
           label="Create Bulk Ticket "

@@ -16,12 +16,12 @@
           <q-btn outline round color="dark" size="sm" icon="clear" @click="emitToggleModal"/>
         </div>
       </div>
-      <q-tabs color="grey-9">
-        <!-- Tabs - notice slot="title" -->
-        <q-tab @select="leadSourceActiveList" default label="Active List" name="tab-1"/>
-        <q-tab @select="leadSourceDeActiveList" label="De-Actived List" name="tab-2"/>
+      <q-tabs v-model="tab" color="grey-9">
+        <!-- Tabs - notice  -->
+        <q-tab @click="leadSourceActiveList" label="Active List" name="tab-1"/>
+        <q-tab @click="leadSourceDeActiveList" label="De-Actived List" name="tab-2"/>
 </q-tabs>
-<q-tab-panels animated>
+<q-tab-panels v-model="tab" animated>
 <q-tab-panel name="tab-1">
           <q-table
             :rows="getActiveLeadSource"
@@ -156,6 +156,7 @@
     },
     data() {
       return {
+      tab: 'tab-1',
         toggleModal: this.propToggleModal,
   
         propShowCreatePrefix: false,

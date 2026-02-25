@@ -2,8 +2,8 @@
   <q-page>
     <div>
       <!--@select="goToUnassignedTab"-->
-      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToUnassignedTab">
-        <q-tab default color="dark" name="active" label="Active Rental Charges" />
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+        <q-tab color="dark" name="active" label="Active Rental Charges" />
         <q-tab color="dark" name="deactive" label="DeActived Rental Charges" />
 </q-tabs>
 <q-tab-panels v-model="selectedTab" animated>

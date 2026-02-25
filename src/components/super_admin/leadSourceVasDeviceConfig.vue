@@ -3,8 +3,8 @@
     <!-- content -->
     <div>
 
-      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="changeTabs">
-        <q-tab default color="dark" name="active" label="Active" />
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="changeTabs">
+        <q-tab color="dark" name="active" label="Active" />
         <!--:rows="activeTableData"-->
 </q-tabs>
 <q-tab-panels v-model="selectedTab" animated>

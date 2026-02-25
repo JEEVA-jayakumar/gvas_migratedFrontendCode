@@ -5,10 +5,9 @@
         v-model="activeTab"
         class="shadow-1"
         color="grey-1"
-        @select="goToCompleteTab"
+        @update:model-value="goToCompleteTab"
       >
         <q-tab
-          default
           color="dark"
           name="tab-1"
           label="PPE Service Request"
@@ -17,11 +16,10 @@
           color="dark"
           name="tab-3"
           label="Phonepe Paper Roll"
-        >
-        </q-tab>
-</q-tabs>
-<q-tab-panels v-model="activeTab" animated>
-<q-tab-panel name="tab-1">
+        />
+      </q-tabs>
+      <q-tab-panels v-model="activeTab" animated>
+        <q-tab-panel name="tab-1">
           <div class="row items-center">
             <div class="col">
               <strong>
@@ -173,7 +171,7 @@
 
           </q-table>
         </q-tab-panel>
-<q-tab-panel name="tab-2">
+        <q-tab-panel name="tab-2">
           <div class="row">
             <q-input
               class="col-4"
@@ -240,15 +238,14 @@
             >
           </q-table>
         </q-tab-panel>
-<q-tab-panel name="tab-3">
+        <q-tab-panel name="tab-3">
           <q-tabs
             v-model="paperRollActiveTab"
             class="shadow-1"
             color="grey-1"
-            @select="goToPaperRollActiveTab"
+            @update:model-value="goToPaperRollActiveTab"
           >
             <q-tab
-              default
               color="dark"
               name="tab-4"
               label="Pending Tickets"
@@ -258,11 +255,9 @@
               name="tab-5"
               label="Completed Tickets"
             />
-</q-tab-panels>
-        </q-tab-panel>
-</q-tabs>
-<q-tab-panels v-model="paperRollActiveTab" animated>
-<q-tab-panel name="tab-4">
+          </q-tabs>
+          <q-tab-panels v-model="paperRollActiveTab" animated>
+            <q-tab-panel name="tab-4">
               <div class="row items-center">
                 <div class="col">
                   <strong>
@@ -308,7 +303,7 @@
                 >
               </q-table>
             </q-tab-panel>
-<q-tab-panel name="tab-5">
+            <q-tab-panel name="tab-5">
               <div class="row">
                 <q-input
                   class="col-4"
@@ -349,7 +344,9 @@
                 >
               </q-table>
             </q-tab-panel>
-</q-tab-panels>
+          </q-tab-panels>
+        </q-tab-panel>
+      </q-tab-panels>
     </div>
     <phonepeRemarks
       v-if="propToggleRemarks"
@@ -1252,9 +1249,9 @@ export default {
 
     ajaxLoadAllLeadInfo4({ pagination, filter }) {
       this.$q.loading.show({
-        delay: 0,
+        delay: 0, // ms
         spinnerColor: "purple-9",
-        message: "Fetching data .."
+        message: "Fetching data ..",
       });
       this.FETCH_PHONEPE_PAPER_ROLL_COMPLETED_DATA({ pagination, filter }).then(res => {
           this.paginationControl4 = pagination;

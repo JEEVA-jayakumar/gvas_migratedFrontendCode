@@ -16,17 +16,17 @@
         <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
       </div>
     </div>
-    <q-tabs color="grey-9">
-      <!-- Tabs - notice slot="title" -->
+    <q-tabs v-model="tab" color="grey-9">
+      <!-- Tabs - notice  -->
       <q-tab
-        @select="merchantTypeActiveList"
-        default
+        @click="merchantTypeActiveList"
+
         label="Active List"
         name="tab-1"
       />
-      <q-tab @select="merchantTypeDeActiveList" label="De-Actived List" name="tab-2"/>
+      <q-tab @click="merchantTypeDeActiveList" label="De-Actived List" name="tab-2"/>
 </q-tabs>
-<q-tab-panels animated>
+<q-tab-panels v-model="tab" animated>
 <q-tab-panel name="tab-1">
         <q-table
           :rows="activeMerchantTypeList"
@@ -151,6 +151,7 @@ export default {
   },
   data() {
     return {
+      tab: 'tab-1',
       toggleModal: this.propToggleModal,
       makeUpdateElementActive: false,
 

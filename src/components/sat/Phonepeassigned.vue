@@ -107,8 +107,8 @@
         </div>
       </q-card>
       <!--END: table Footer -->
-      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToUnassignedTab">
-        <q-tab default color="dark" name="assigned" label="Normal" />
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+        <q-tab color="dark" name="assigned" label="Normal" />
         <q-tab  color="dark" name="courier" label="Courier" />
 </q-tabs>
 <q-tab-panels v-model="selectedTab" animated>

@@ -2,8 +2,8 @@
     <q-page>
         <div>
             <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
-                @select="goToSelectedTab">
-                <q-tab default color="dark" name="tab-1" label="Approved Pod" />
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
                 <q-tab color="dark" name="tab-2" label="Rejected Pod" />
                 <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
 </q-tabs>
