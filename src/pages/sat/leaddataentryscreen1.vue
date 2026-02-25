@@ -38,8 +38,8 @@
           icon="info"
           group="primary"
           label="Merchant details"
-          sublabel="Device, Exceptions, Payment, MDR"
-          inset-separator
+          caption="Device, Exceptions, Payment, MDR"
+          inset
         >
           <div>
             <!-- Device, Exception, Payment, MDR -->
@@ -325,8 +325,8 @@
           icon="file_copy"
           group="primary"
           label="Documents"
-          sublabel="Related documents"
-          inset-separator
+          caption="Related documents"
+          inset
         >
           <showMarsForm :propLeadDeatils="formData.shortLead"></showMarsForm>
         </q-expansion-item>

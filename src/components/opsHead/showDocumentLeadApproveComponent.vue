@@ -11,7 +11,7 @@
           <div class="text-h6 q-mb-sm">{{propDocumentDetails.documentType}}</div>
             <q-input
                 placedholder="Type.." 
-                float-label="Reason"
+                label="Reason"
                 color="grey-9"
                 align="left"
                 v-model="formData.leadDetails.reason"

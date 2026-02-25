@@ -18,7 +18,7 @@
             <q-input
               class=" no-pointer-events"
               v-model="formData.soReason"
-              float-label="SO Remarks"
+              label="SO Remarks"
               color="light-blue" 
             />
           </div>
@@ -27,7 +27,7 @@
               v-model="formData.leadInformation.kycSatRemark"
               @blur="$v.formData.leadInformation.kycSatRemark.$touch"      
               :error="$v.formData.leadInformation.kycSatRemark.$error" 
-              float-label="SAT Remarks"
+              label="SAT Remarks"
               color="light-blue" 
             />
           </div>

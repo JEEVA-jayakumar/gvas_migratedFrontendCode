@@ -5,8 +5,7 @@
         table-class="customTableClass"
         :rows="tableData"
         :columns="columns"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         row-key="name"
         :loading="toggleAjaxLoadFilter"
         :rows-per-page-options="[5,10,15,20]"
@@ -26,7 +25,7 @@
           v-slot:body-cell-sourceName="props"
           :props="props"
           class="cursor-pointer"
-          @click.native="toggleLeadInformation(props.row.leadSourceId.sourceName)"
+          @click="toggleLeadInformation(props.row.leadSourceId.sourceName)"
         >
           <span class="label text-primary"> {{props.row.leadSourceId.sourceName}}</span>
         </q-td>
@@ -34,7 +33,7 @@
           v-slot:body-cell-deviceName="props"
           :props="props"
           class="cursor-pointer"
-          @click.native="toggleLeadInformation(props.row.deviceId.deviceName)"
+          @click="toggleLeadInformation(props.row.deviceId.deviceName)"
         >
           <span class="label text-primary"> {{props.row.deviceId.deviceName}}</span>
         </q-td>
@@ -83,7 +82,7 @@
                   color="grey-9"
                   v-model.trim="filterSearch"
                   placeholder="Type.."
-                  float-label="Search by Plan Name"
+                  label="Search by Plan Name"
                 />
               </div>
              
@@ -313,8 +312,7 @@ export default {
           message: "Are You Sure want to Deactive the User?",
           ok: "Ok",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.DEACTIVATE_MATM_USER_DETAILS(id).then(() => {
             this.FETCH_ALL_MATM_DATAS();
               this.$q.notify({
@@ -324,8 +322,7 @@ export default {
                 icon: "thumb_up"
               });
           });
-        })
-        .catch(() => {
+        }).onCancel(() => {
 
         });
     },
@@ -336,8 +333,7 @@ export default {
           message: "Are You Sure want to active the User?",
           ok: "Ok",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.ACTIVATE_MATM_USER_DETAILS(id).then(() => {
             this.FETCH_ALL_MATM_DATAS();
           this.$q.notify({
@@ -347,8 +343,7 @@ export default {
                 icon: "thumb_up"
               });
           });
-        })
-        .catch(() => {
+        }).onCancel(() => {
  
          
         });
@@ -370,7 +365,7 @@ export default {
               icon: "thumb_up"
         })
        })
-         .catch(error => {
+         .onCancel(error => {
             console.log(error);
             this.$q.loading.hide();
             this.$q.notify({
@@ -391,8 +386,7 @@ export default {
           message: 'Are you sure want to Edit Plans?',
           ok: 'Continue',
           cancel: 'Cancel'
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: 'purple-9',
@@ -414,8 +408,7 @@ export default {
         spinnerColor: 'purple-9',
         message: 'Fetching data ..'
       });
-      this.FETCH_ALL_MATM_DATAS({ pagination, filter })
-        .then(res => {
+      this.FETCH_ALL_MATM_DATAS({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           // this.paginationControl = pagination;
 
@@ -433,8 +426,7 @@ export default {
           // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
           
-        })
-        .catch(() => {
+        }).catch(() => {
           this.$q.loading.hide();
         });
     },

@@ -39,8 +39,7 @@ const FileDownload1 = {
       return await api
       .get( "download-indian-implementation-report?from=" + request.from + "&to=" + request.to, {
         responseType: 'arraybuffer'
-      })
-      .then(response => {
+      }).then(response => {
         let blob = COMMON_FILE_DOWNLOAD(response);
         let link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
@@ -56,8 +55,7 @@ const FileDownload1 = {
       return await  api
       .get("download-indian-implementation-report", {
         responseType: 'arraybuffer'
-      })
-      .then(response => {
+      }).then(response => {
           console.log("FIle name : -- : ", response.headers["Content-Disposition"])
         let blob = COMMON_FILE_DOWNLOAD(response);
         let link = document.createElement("a");

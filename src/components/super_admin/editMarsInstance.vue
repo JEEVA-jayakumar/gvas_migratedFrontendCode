@@ -12,19 +12,19 @@
           <div class="col-md-12">
             <q-input v-model="formData.institutionName" @blur="$v.formData.institutionName.$touch"
               :error="$v.formData.institutionName.$error" class="text-weight-regular text-grey-8" color="grey-9"
-              float-label="Institution Name" placeholder="Institution Name"
+              label="Institution Name" placeholder="Institution Name"
               @keyup.enter="submitLeadSourceData(formData)" />
           </div>
           <div class="col-md-12">
             <q-input v-model="formData.institutionRRCode" @blur="$v.formData.institutionRRCode.$touch"
               :error="$v.formData.institutionRRCode.$error" class="text-weight-regular text-grey-8" color="grey-9"
-              float-label="Institution RR Code" placeholder="Institution RR Code"
+              label="Institution RR Code" placeholder="Institution RR Code"
               @keyup.enter="submitLeadSourceData(formData)" />
           </div>
           <div class="col-md-12">
             <q-input disable v-model="formData.institutionCode" @blur="$v.formData.institutionCode.$touch"
               :error="$v.formData.institutionCode.$error" class="text-weight-regular text-grey-8" color="grey-9"
-              float-label="Institution  Code" placeholder="Institution  Code"
+              label="Institution  Code" placeholder="Institution  Code"
               @keyup.enter="submitLeadSourceData(formData)" />
           </div>
           <!-- <div class="col-md-12">
@@ -49,7 +49,7 @@
                 :error="$v.formData.baseTidMidPrefix.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Tid/Mid Prefix"
+                label="Tid/Mid Prefix"
                 placeholder="Tid/Mid Prefix"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -62,7 +62,7 @@
                 :error="$v.formData.lastBaseTid.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="last Base Tid"
+                label="last Base Tid"
                 placeholder="last Base Tid"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -75,7 +75,7 @@
                 :error="$v.formData.lastBaseMid.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="last Base Mid"
+                label="last Base Mid"
                 placeholder="last Base Mid"
                 @keyup.enter="submitLeadSourceData(formData)"
               />

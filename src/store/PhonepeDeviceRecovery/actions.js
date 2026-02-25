@@ -103,8 +103,7 @@ export const DOWNLOAD_PHONEPE_DEVICE_RECOVERY_DATAS = async ({ commit }, request
     return await api
       .get("aggregator-inventory/agg-download-device-recovery-data-list", {
         responseType: "arraybuffer",
-      })
-      .then(response => {
+      }).then(response => {
         let blob = COMMON_FILE_DOWNLOAD(response);
         let link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
@@ -116,8 +115,7 @@ export const DOWNLOAD_PHONEPE_DEVICE_RECOVERY_DATAS = async ({ commit }, request
     return await api
       .get("aggregator-inventory/agg-download-device-recovery-list", {
         responseType: "arraybuffer",
-      })
-      .then(response => {
+      }).then(response => {
         let blob = COMMON_FILE_DOWNLOAD(response);
         let link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
@@ -163,8 +161,7 @@ export const FEED_PHONEPE_RECOVERY_DEVICE_BULK_UPLOAD_DATA = ({
         "Authorization": "Token " + localStorage.getItem(
           "auth_token")
       }
-    })
-    .then(response => {
+    }).then(response => {
       commit("API_RESPONSE_LOG", true);
     })
 };

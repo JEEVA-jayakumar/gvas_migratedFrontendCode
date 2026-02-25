@@ -12,8 +12,7 @@ export const FETCH_ALL_DISTRICT = ({
     //   // START >> Commit response data
     //   commit("SET_ALL_DISTRICT", response.data.data)
     //   // END >> Commit response data
-    // })
-    .then(response => {
+    // }).then(response => {
       let allDistick = [];
       response.data.district.map(function (value, key) {
         allDistick.push({

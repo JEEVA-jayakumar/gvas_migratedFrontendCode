@@ -255,8 +255,7 @@ export default {
               label: item.deviceName
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           self.FETCH_APP_LEADSOURCE_DATA().then(() => {
             return _.map(self.getAllAppLeadSource, item => {
               self.dropDown.leadSourceOptions.push({

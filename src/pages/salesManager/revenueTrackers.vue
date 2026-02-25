@@ -24,10 +24,9 @@
             table-class="customTableClass"
             :rows="tableData.userList"
             v-model:columns="column"
-            :filter="filter"
-            :pagination="paginationControl"
+            :filter="filter" v-model:pagination="paginationControl"
             row-key="name">
-            <q-tr v-slot:body="props" :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']" :props="props" @mouseover.native="rowHover(props.row.__index)" @click.native="rowClick(props.row)" class="cursor-pointer">
+            <q-tr v-slot:body="props" :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']" :props="props" @mouseover="rowHover(props.row.__index)" @click="rowClick(props.row)" class="cursor-pointer">
               <q-td v-for="col in props.cols" :key="col.name" :props="props">
                 {{ col.value }}
               </q-td>
@@ -41,7 +40,7 @@
                 separator
                 color="grey-9"
                 placeholder="Type.."
-                float-label= "Search"
+                label= "Search"
                 class="q-mr-lg q-py-sm"
                 />
               </div>

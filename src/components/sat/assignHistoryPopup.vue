@@ -30,7 +30,7 @@
         row-key="name"
       >
         <q-td v-slot:body-cell-date="props" :props="props">
-          {{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+          {{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
         >
         <q-td v-slot:body-cell-agentname="props" :props="props">{{
           props.row.soUser.name == null ? "NA" : props.row.soUser.name

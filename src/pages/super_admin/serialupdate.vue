@@ -24,7 +24,7 @@
                 :error="$v.formData.bank.$error"
                 class="text-weight-regular text-grey-8"
                 :options="dropDown.leadSourceOptions"
-                float-label="*Select TID"
+                label="*Select TID"
                 
               />
             </div>
@@ -35,7 +35,7 @@
                 :error="$v.formData.emp_id.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="*Enter Serial Number"
+                label="*Enter Serial Number"
                 
               />
               </div>

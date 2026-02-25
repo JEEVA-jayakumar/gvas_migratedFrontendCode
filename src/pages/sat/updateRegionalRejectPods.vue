@@ -11,14 +11,14 @@
             color="grey-9"
             v-model="formData.allocate_region"
             :options="regionOptions"
-            float-label="Select Region"
-            @input="regionBasedSoLoad"
+            label="Select Region"
+            @update:model-value="regionBasedSoLoad"
           />
         </div>
         <div class="col-md-5">
           <q-select
             v-model="formData.allocate_so"
-            float-label="Select SO"
+            label="Select SO"
             radio
             filter
             clearable
@@ -50,7 +50,7 @@
           <q-input
             disable
             v-model="formData.pod_number"
-            float-label="Pod Number"
+            label="Pod Number"
             radio
             color="grey-9"
           />
@@ -59,7 +59,7 @@
           <q-input
             disable
             v-model="formData.total_count"
-            float-label="Total Count"
+            label="Total Count"
             radio
             color="grey-9"
           />

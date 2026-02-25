@@ -4,11 +4,12 @@
     <div>
 
       <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="changeTabs">
-        <q-tab default color="dark" name="active" slot="title" label="Active Roles" />
-        <q-tab color="dark" name="deactive" slot="title" label="Deactive Roles" />
-
-         <q-tab-panel name="active">
-           <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" :pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
+        <q-tab default color="dark" name="active" label="Active Roles" />
+        <q-tab color="dark" name="deactive" label="Deactive Roles" />
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="active">
+           <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
         <q-td v-slot:body-cell-action="props" :props="props">
           <div class="row no-wrap no-padding">
             <q-btn dense no-caps no-wrap label="Modify Role/Permissions" icon="far fa-plus-square" size="md" @click="fnShowEditRole(props.row)" flat class="text-light-blue">
@@ -59,8 +60,8 @@
 
       </q-table>
          </q-tab-panel>
-         <q-tab-panel name="deactive">
-           <q-table :rows="deactivatedTableData" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1" :pagination="paginationControl1" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
+<q-tab-panel name="deactive">
+           <q-table :rows="deactivatedTableData" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1" v-model:pagination="paginationControl1" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
         <q-td v-slot:body-cell-action="props" :props="props">
           <div class="row no-wrap no-padding">
             <!-- <q-btn dense no-caps no-wrap label="Modify Role/Permissions" icon="far fa-plus-square" size="md" @click="fnShowEditRole(props.row)" flat class="text-light-blue">
@@ -100,7 +101,7 @@
 
       </q-table>
          </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
 
        <!--START: Show create role -->
       <showCreateRole 
@@ -293,8 +294,7 @@ export default {
           message: "Are you sure want to active role?",
           ok: "Continue",
           cancel: "Cancel",
-        })
-        .then(() => {
+        }).onOk(() => {
           let param = {
             id: roleId.id,
             role: roleId.role,
@@ -311,8 +311,7 @@ export default {
                 icon: "thumb_up",
               });
               this.ajaxLoadDataForRolesPermissions();
-            })
-            .catch(() => {
+            }).onCancel(() => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -321,7 +320,7 @@ export default {
               });
             });
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -338,8 +337,7 @@ export default {
           message: "Are you sure want to delete role?",
           ok: "Continue",
           cancel: "Cancel",
-        })
-        .then(() => {
+        }).onOk(() => {
           this.DELETE_ROLE_BY_ROLE_ID_DATA(roleId)
             .then(response => {
               this.FETCH_ALL_ROLES_PERMISSIONS_DATA();
@@ -350,8 +348,7 @@ export default {
                 icon: "thumb_up",
               });
               this.ajaxLoadDataForRolesPermissions();
-            })
-            .catch(() => {
+            }).onCancel(() => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -360,7 +357,7 @@ export default {
               });
             });
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

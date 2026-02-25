@@ -13,8 +13,7 @@
         class="q-py-none"
         :rows="tableData"
         :columns="columns"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         row-key="name"
       >
         <template v-slot:top="props" class="bottom-border">
@@ -36,7 +35,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search by SO name, Merchant Name, Lead ID"
+              label="Search by SO name, Merchant Name, Lead ID"
               class="q-mr-lg q-py-sm"
             />
           </div>

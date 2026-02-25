@@ -52,7 +52,7 @@
                      @blur="$v.formData.addUserDetails.name.$touch"      
                     @keyup.enter="fnSubmitShowAddUser"
                     :error="$v.formData.addUserDetails.name.$error" 
-                    class="text-weight-regular text-grey-8" color="grey-9" float-label="*Username" placeholder="Username" />
+                    class="text-weight-regular text-grey-8" color="grey-9" label="*Username" placeholder="Username" />
                   </div>
 
                   <div class="col-md-6">
@@ -60,7 +60,7 @@
                      @blur="$v.formData.addUserDetails.employeeID.$touch"      
                     @keyup.enter="fnSubmitShowAddUser"
                     :error="$v.formData.addUserDetails.employeeID.$error" 
-                    class="text-weight-regular text-grey-8" color="grey-9" float-label="*Employee ID" placeholder="Employee ID" />
+                    class="text-weight-regular text-grey-8" color="grey-9" label="*Employee ID" placeholder="Employee ID" />
                   </div>
 
                   <div class="col-md-6">
@@ -68,7 +68,7 @@
                     @blur="$v.formData.addUserDetails.email.$touch"      
                     @keyup.enter="fnSubmitShowAddUser"
                     :error="$v.formData.addUserDetails.email.$error" 
-                    float-label="*Email" placeholder="Email" />
+                    label="*Email" placeholder="Email" />
                   </div>
 
                   <div class="col-md-6">
@@ -76,7 +76,7 @@
                       @blur="$v.formData.addUserDetails.contactNumber.$touch"      
                     @keyup.enter="fnSubmitShowAddUser"
                     :error="$v.formData.addUserDetails.contactNumber.$error" 
-                    class="text-weight-regular text-grey-8" color="grey-9" float-label="*Contact Number" placeholder="Contact Number" />
+                    class="text-weight-regular text-grey-8" color="grey-9" label="*Contact Number" placeholder="Contact Number" />
                   </div>
 
                   <div class="col-md-6">
@@ -84,7 +84,7 @@
                      @blur="$v.formData.addUserDetails.alternateContactNumber.$touch"      
                     @keyup.enter="fnSubmitShowAddUser"
                     :error="$v.formData.addUserDetails.alternateContactNumber.$error" 
-                     class="text-weight-regular text-grey-8" color="grey-9" float-label="Alt Contact Number" placeholder="Alt Contact Number" />
+                     class="text-weight-regular text-grey-8" color="grey-9" label="Alt Contact Number" placeholder="Alt Contact Number" />
                   </div>
 
                   <div class="col-md-6">
@@ -92,7 +92,7 @@
                      @blur="$v.formData.addUserDetails.userAddress.$touch"      
                     @keyup.enter="fnSubmitShowAddUser"
                     :error="$v.formData.addUserDetails.userAddress.$error" 
-                     class="text-weight-regular text-grey-8" color="grey-9" float-label="*Address" placeholder="Address" />
+                     class="text-weight-regular text-grey-8" color="grey-9" label="*Address" placeholder="Address" />
                   </div>
 
                   <div class="col-md-6">
@@ -100,13 +100,13 @@
                      @blur="$v.formData.addUserDetails.city.$touch"      
                     @keyup.enter="fnSubmitShowAddUser"
                     :error="$v.formData.addUserDetails.city.$error" 
-                    class="text-weight-regular text-grey-8" color="grey-9" float-label="*City" placeholder="City" />
+                    class="text-weight-regular text-grey-8" color="grey-9" label="*City" placeholder="City" />
                   </div>
 
                   <div class="col-md-6">
                     <q-select
                       v-model="formData.addUserDetails.state.id"
-                      float-label="*State"
+                      label="*State"
                       radio
                       class="text-weight-regular text-grey-8" color="grey-9"
                       :options="propGetAllStatesData"

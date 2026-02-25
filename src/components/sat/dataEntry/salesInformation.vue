@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row gutter-sm">
+    <div class="row q-col-gutter-sm">
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
           @blur="$v.merchant.salesInformation.institutionCode.$touch"
@@ -8,7 +8,7 @@
           placeholder="Choose from the below"
           color="grey-9"
           v-model="merchant.salesInformation.institutionCode"
-          float-label="Institution Code*"
+          label="Institution Code*"
           :options="[{
             label: 'GPRS',
             value: 3
@@ -22,7 +22,7 @@
           placeholder="Choose from the below*"
           color="grey-9"
           v-model="merchant.salesInformation.applicationType"
-          float-label="Application Type*"
+          label="Application Type*"
           :options="applicationTypeOptions"
         />
       </div>
@@ -32,7 +32,7 @@
           :error="$v.merchant.salesInformation.applicationNumber.$error"
           color="grey-9"
           v-model="merchant.salesInformation.applicationNumber"
-          float-label="Application Number*"
+          label="Application Number*"
           placeholder="Application Number*"
         />
       </div>
@@ -41,7 +41,7 @@
           modal
           color="grey-9"
           format="DD/MM/YYYY"
-          float-label="Application Date*"
+          label="Application Date*"
           placeholder="Application Date*"
           @blur="$v.merchant.salesInformation.applicationDate.$touch"
           :error="$v.merchant.salesInformation.applicationDate.$error"
@@ -56,7 +56,7 @@
           @blur="$v.merchant.salesInformation.aggreementDate.$touch"
           :error="$v.merchant.salesInformation.aggreementDate.$error"
           v-model="merchant.salesInformation.aggreementDate"
-          float-label="Agreement Date*"
+          label="Agreement Date*"
           placeholder="Agreement Date*"
         />
       </div>
@@ -67,7 +67,7 @@
           placeholder="Choose from the below*"
           color="grey-9"
           v-model="merchant.salesInformation.merchantType"
-          float-label="Merchant Type*"
+          label="Merchant Type*"
           :options="merchantTypeOptions"
         />
       </div>
@@ -78,7 +78,7 @@
           placeholder="Choose from the below*"
           color="grey-9"
           v-model="merchant.salesInformation.categoryType"
-          float-label="Category Type*"
+          label="Category Type*"
           :options="categoryTypeOptions"
         />
       </div>
@@ -89,7 +89,7 @@
           @blur="$v.merchant.salesInformation.salesPersonCode.$touch"
           :error="$v.merchant.salesInformation.salesPersonCode.$error"
           v-model="merchant.salesInformation.salesPersonCode"
-          float-label="Sales Person*"
+          label="Sales Person*"
           :options="salesPersonOptions"
         />
       </div>
@@ -100,7 +100,7 @@
           @blur="$v.merchant.salesInformation.region.$touch"
           :error="$v.merchant.salesInformation.region.$error"
           v-model="merchant.salesInformation.region"
-          float-label="Region*"
+          label="Region*"
           :options="regionOptions"
         />
       </div>
@@ -111,7 +111,7 @@
           @blur="$v.merchant.salesInformation.leadFrom.$touch"
           :error="$v.merchant.salesInformation.leadFrom.$error"
           v-model="merchant.salesInformation.leadFrom"
-          float-label="Lead From*"
+          label="Lead From*"
           :options="leadFromOptions"
         />
       </div>
@@ -136,7 +136,7 @@
           placeholder="Choose from the below*"
           color="grey-9"
           v-model="merchant.salesInformation.sharingPartnerCode"
-          float-label="Sharing partner*"
+          label="Sharing partner*"
           :options="sharingPartnerOptions"
         />
       </div>
@@ -146,7 +146,7 @@
           :error="$v.merchant.salesInformation.dailyFixedAmount.$error"
           color="grey-9"
           v-model="merchant.salesInformation.dailyFixedAmount"
-          float-label="Daily fixed amount*"
+          label="Daily fixed amount*"
           type="number"
           placeholder="Daily fixed amount*"
         />
@@ -157,7 +157,7 @@
           :error="$v.merchant.salesInformation.loanDisbursementPercentage.$error"
           color="grey-9"
           v-model="merchant.salesInformation.loanDisbursementPercentage"
-          float-label="Percentage*"
+          label="Percentage*"
           type="number"
           placeholder="Percentage*"
         />
@@ -170,7 +170,7 @@
           :error="$v.merchant.salesInformation.loanDisbursementAmount.$error"
           color="grey-9"
           v-model="merchant.salesInformation.loanDisbursementAmount"
-          float-label="Loan disbursement value*"
+          label="Loan disbursement value*"
           type="number"
           placeholder="Loan disbursement value*"
         />
@@ -184,7 +184,7 @@
           color="grey-9"
           minimal
           v-model="merchant.salesInformation.loanDisbursementDate"
-          float-label="Disbursement Date*"
+          label="Disbursement Date*"
           placeholder="Disbursement Date*"
         />
       </div>
@@ -194,7 +194,7 @@
           :error="$v.merchant.salesInformation.tenureMonth.$error"
           color="grey-9"
           v-model="merchant.salesInformation.tenureMonth"
-          float-label="Tenure (in months)*"
+          label="Tenure (in months)*"
           type="number"
           placeholder="Tenure (in months)*"
         />
@@ -205,7 +205,7 @@
           :error="$v.merchant.salesInformation.tenureDay.$error"
           color="grey-9"
           v-model="merchant.salesInformation.tenureDay"
-          float-label="Tenure (in days)*"
+          label="Tenure (in days)*"
           type="number"
           placeholder="Tenure (in days)*"
         />
@@ -219,7 +219,7 @@
           color="grey-9"
           minimal
           v-model="merchant.salesInformation.tenureStartDate"
-          float-label="Start Date*"
+          label="Start Date*"
           placeholder="Tenure Start Date*"
         />
       </div>
@@ -233,7 +233,7 @@
           placeholder="Choose from the below*"
           color="grey-9"
           v-model="merchant.salesInformation.sharingPartnerCode"
-          float-label="Sharing partner*"
+          label="Sharing partner*"
           :options="sharingPartnerOptions"
         />
       </div>
@@ -243,7 +243,7 @@
           :error="$v.merchant.salesInformation.rentPercentage.$error"
           color="grey-9"
           v-model="merchant.salesInformation.rentPercentage"
-          float-label="Rent %*"
+          label="Rent %*"
           type="number"
           placeholder="Rent %*"
         />
@@ -254,7 +254,7 @@
           :error="$v.merchant.salesInformation.rentFixed.$error"
           color="grey-9"
           v-model="merchant.salesInformation.rentFixed"
-          float-label="Rent fixed*"
+          label="Rent fixed*"
           type="number"
           placeholder="Rent fixed*"
         />

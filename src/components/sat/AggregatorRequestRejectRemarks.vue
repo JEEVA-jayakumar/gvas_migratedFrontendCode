@@ -25,7 +25,7 @@
               align="left"
               value=""
               v-model="remarks"
-              @input="fnMapRemarks"
+              @update:model-value="fnMapRemarks"
             />
           </div>
           <q-btn
@@ -120,9 +120,7 @@
             message: "Are you sure want to Reject?",
             ok: "Continue",
             cancel: "Cancel"
-          })
-     
-          .then(() => {
+          }).onOk(() => {
             this.$q.loading.show({
               delay: 0, // ms
               spinnerColor: "purple-9",
@@ -139,8 +137,7 @@
                   message: "Successfully Rejected!",
                   icon: "thumb_up"
                 });
-              })
-              .catch(error => {
+              }).onCancel(error => {
                 this.$q.loading.hide();
                 this.$q.notify({
                   color: "negative",

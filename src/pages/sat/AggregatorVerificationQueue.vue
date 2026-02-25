@@ -15,8 +15,7 @@
           table-class="customTableClass"
           :rows="tableData"
           :columns="columns" 
-          :filter="filter"
-          :pagination="paginationControl"
+          :filter="filter" v-model:pagination="paginationControl"
           row-key="name" 
           :loading="toggleAjaxLoadFilter"
           :rows-per-page-options="[5, 10, 15, 20]" 
@@ -33,7 +32,7 @@
             :props="props"
           >{{props.row.leadInformation.leadName}}</q-td>-->
           <q-td v-slot:body-cell-leadNumber="props" :props="props" class="cursor-pointer"
-            @click.native="toggleLeadInformation(props.row)">
+            @click="toggleLeadInformation(props.row)">
             <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
           </q-td>
           <!-- <q-td
@@ -51,9 +50,7 @@
                 : props.row.leadInformation.leadAddress
           }}</q-td>
           <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-            <span class="label">{{
-                props.row.deviceStatusDate | moment("Do MMM Y")
-            }}</span>
+            <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
           </q-td>
           <q-td v-slot:body-cell-viewDocument="props" :props="props">
   
@@ -224,7 +221,7 @@
             <!--START: table filter,search,excel download -->
             <div class="col-5">
               <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
-                float-label="Search by MID, TID, Merchant Name" class="q-mr-lg q-py-sm" />
+                label="Search by MID, TID, Merchant Name" class="q-mr-lg q-py-sm" />
        </div>
      <div class="col-2">
             <q-input
@@ -232,7 +229,7 @@
               v-model="formData.fromDate"
               :min="yesterday"
               :max="tomorrow"
-              float-label="From Date"
+              label="From Date"
             />
           </div>
           <div class="col-2">
@@ -241,7 +238,7 @@
               v-model="formData.toDate"
               :min="yesterday"
               :max="tomorrow"
-              float-label="To Date"
+              label="To Date"
             />
           </div>
           <div class="col-2">
@@ -682,8 +679,7 @@ const { startOfDate, addToDate, subtractFromDate } = date;
         pagination,
         filter: this.filter,
         formData: this.formData1,
-      })
-        .then((res) => {
+      }).then((res) => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 

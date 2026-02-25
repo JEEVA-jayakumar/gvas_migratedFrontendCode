@@ -111,8 +111,7 @@ const InventoryBulkUploadDevice = {
             "Authorization": "Token " + localStorage.getItem(
               "auth_token")
           }
-        })
-        .then(response => {
+        }).then(response => {
           commit("API_RESPONSE_LOG", true);
         })
     },
@@ -128,8 +127,7 @@ const InventoryBulkUploadDevice = {
             "Authorization": "Token " + localStorage.getItem(
               "auth_token")
           }
-        })
-        .then(response => {
+        }).then(response => {
           commit("API_RESPONSE_LOG", true);
         })
     },
@@ -147,8 +145,7 @@ const InventoryBulkUploadDevice = {
             "Authorization": "Token " + localStorage.getItem(
               "auth_token")
           }
-        })
-        .then(response => {
+        }).then(response => {
           commit("API_RESPONSE_LOG", true);
         })
     },
@@ -163,8 +160,7 @@ const InventoryBulkUploadDevice = {
             "Authorization": "Token " + localStorage.getItem(
               "auth_token")
           }
-        })
-        .then(response => {
+        }).then(response => {
           commit("API_RESPONSE_LOG", true);
         })
     },

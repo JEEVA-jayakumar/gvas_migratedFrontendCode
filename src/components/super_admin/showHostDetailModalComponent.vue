@@ -18,8 +18,10 @@
     </div>
     <q-tabs color="grey-9">
       <!-- Tabs - notice slot="title" -->
-      <q-tab @select="leadSourceActiveList" default slot="title" label="Host List" name="tab-1"/>
-      <q-tab-panel name="tab-1">
+      <q-tab @select="leadSourceActiveList" default label="Host List" name="tab-1"/>
+</q-tabs>
+<q-tab-panels animated>
+<q-tab-panel name="tab-1">
         <q-table
           :rows="tableData"
           table-class="customSATableClass"
@@ -63,7 +65,7 @@
                 color="grey-9"
                 v-model="activeFilterSearch"
                 placeholder="Type.."
-                float-label="Search lead source"
+                label="Search lead source"
               />
             </div>
             <div class="col-4" align="right">
@@ -81,7 +83,7 @@
           </template>
         </q-table>
       </q-tab-panel>
-    </q-tabs>
+</q-tab-panels>
     <!--START: Show create LeadSources -->
     <showCreateHost
       v-if="propShowCreateHost"
@@ -262,8 +264,7 @@ export default {
           message: "Are you sure want to disable Host?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -279,8 +280,7 @@ export default {
                 message: "Host deactivated",
                 icon: "thumb_up"
               });
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -290,7 +290,7 @@ export default {
             });
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -306,8 +306,7 @@ export default {
           message: "Are you sure want to disable lead source?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -325,8 +324,7 @@ export default {
                 } has been enabled`,
                 icon: "thumb_up"
               });
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -336,7 +334,7 @@ export default {
             });
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

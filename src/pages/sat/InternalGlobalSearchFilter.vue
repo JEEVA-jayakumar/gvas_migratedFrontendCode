@@ -16,13 +16,13 @@
             :error="$v.formData.searchTerm.$error"
             v-model="formData.searchTerm"
             placeholder="Type.."
-            float-label="Search .."
+            label="Search .."
             class="q-mr-lg q-py-sm"
           />
         </div>
         <div class="col-sm-2">
           <q-select
-            float-label="Select Any One"
+            label="Select Any One"
             placeholder="Select Any One"
             color="grey-9"
             v-model="formData.select"

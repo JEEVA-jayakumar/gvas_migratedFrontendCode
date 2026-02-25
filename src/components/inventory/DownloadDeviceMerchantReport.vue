@@ -12,10 +12,26 @@
             <div class="text-h6 text-weight-regular"><p align="center"><strong>Download Device Merchant File</strong></p></div>
           </div>
           <div class="col-md-12">
-             <q-input hide-underline class="q-mr-lg q-py-sm" v-model="formData.from" :min="yesterday" :max="tomorrow" type="date" float-label='From Date' />
+             <q-input filled v-model="formData.from" label="Date" color="grey-9">
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="formData.from" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
           </div>
         <div class="col-md-12">
-           <q-input hide-underline class="q-mr-lg q-py-sm" v-model="formData.to" :min="yesterday" :max="tomorrow" type="date" float-label='To Date' />
+           <q-input filled v-model="formData.to" label="Date" color="grey-9">
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="formData.to" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
            </div>
         <div class="col-md-12 group" align="right">
             <q-btn

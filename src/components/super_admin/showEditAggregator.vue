@@ -23,7 +23,7 @@
                         
                           class="text-weight-regular text-grey-8" 
                           color="grey-9" 
-                          float-label="Region Group" 
+                          label="Region Group"
                           placeholder="Region Group" 
                         />
                     </div> -->
@@ -34,7 +34,7 @@
                           @keyup.enter="$v.formData.name.$touch"
                           class="text-weight-regular text-grey-8" 
                           color="grey-9" 
-                          float-label="Modify Aggregator Name" 
+                          label="Modify Aggregator Name"
                           placeholder="Modify Aggregator Name" 
                         />
                     </div>

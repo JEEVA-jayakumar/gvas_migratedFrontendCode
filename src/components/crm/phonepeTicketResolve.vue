@@ -26,12 +26,12 @@
         <div class="col-sm-5">
           <q-select
             stack-label="Issues"
-            inverted-light
+            filled-light
             color="light"
             v-model.trim="formData.issue"
             separator
             :options="dropDown.issueOptions"
-            @input="issueDocumentType"
+            @update:model-value="issueDocumentType"
           />
         </div>
 
@@ -39,7 +39,7 @@
           <q-select
             :disable="this.formData.issue == ''"
             stack-label="Sub Issues"
-            inverted-light
+            filled-light
             color="light"
             v-model.trim="formData.subIssue"
             separator
@@ -53,7 +53,7 @@
           <q-select
           :disable="this.formData.subIssue == ''"
             stack-label="Default Remarks"
-            inverted-light
+            filled-light
             color="light"
             v-model.trim="formData.remarks"
             separator
@@ -201,8 +201,7 @@ export default {
                     message: "Are you sure ?",
                     ok: "Yes",
                     cancel: "Cancel",
-                })
-                .then(() => {
+                }).onOk(() => {
                   this.$q.loading.show({
                         delay: 0, // ms
                         spinnerColor: "purple-9",
@@ -234,8 +233,7 @@ export default {
                         this.$q.loading.hide();
                         })
 
-                })
-                .catch(() => {
+                }).catch(() => {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",

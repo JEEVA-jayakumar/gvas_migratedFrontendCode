@@ -19,7 +19,7 @@
             :error="$v.formData.url.merchantType.$error"
             v-model="formData.url.merchantType"
             :options="activeMerchantType"
-            float-label="Select merchant type"
+            label="Select merchant type"
             placeholder="Merchant type"
           />
         </div>
@@ -31,7 +31,7 @@
             :error="$v.formData.params.documentType.$error"
             v-model="formData.params.documentType"
             :options="activeDocumentMerchantType"
-            float-label="Select merchant document type"
+            label="Select merchant document type"
             placeholder="Merchant document type"
           />
         </div>
@@ -39,7 +39,7 @@
           <q-input
             color="grey-9"
             v-model="formData.params.subDocumentType"
-            float-label="Merchant Sub Document Type"
+            label="Merchant Sub Document Type"
             placeholder="Merchant Sub Document Type"
           />
         </div>
@@ -51,7 +51,7 @@
             class="text-weight-regular text-grey-8"
             color="grey-9"
             type="number"
-            float-label="Mars Agreement Id"
+            label="Mars Agreement Id"
             placeholder="Mars Agreement Id"
             @keyup.enter="submitMerchantSubDocumentTypeData(formData)"
           />

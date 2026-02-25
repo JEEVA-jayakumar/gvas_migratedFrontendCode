@@ -8,39 +8,38 @@
         table-class="customTableClass"
         :rows="getAllInventoryWithResellar"
         :columns="columns"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         row-key="name"
       >
         <!-- <q-td
           v-slot:body-cell-createdAt="props"
           :props="props"
-        >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-receivedAt="props"
           :props="props"
-        >{{ props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.receivedAt).format("Do MMM Y") }}</q-td>
 
         <q-td
           v-slot:body-cell-receivedAt="props"
           :props="props"
-        >{{ props.row.receivedAt ==null? "NA" : props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.receivedAt ==null? "NA" : props.row.receivedAt).format("Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-DeviceList="props"
           :props="props"
-        >{{ props.row.device.createDate | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.device.createDate).format("Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-ModifyDate="props"
           :props="props"
-        >{{ props.row.device.modifyDate | moment("Do MMM Y") }}</q-td>-->
+        >{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</q-td>-->
         <q-td
           v-slot:body-cell-createDate="props"
           :props="props"
-        >{{ props.row.createDate ==null? "NA" : props.row.createDate | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.createDate ==null? "NA" : props.row.createDate).format("Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-modifyDate="props"
           :props="props"
-        >{{ props.row.modifyDate ==null? "NA" : props.row.modifyDate | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.modifyDate ==null? "NA" : props.row.modifyDate).format("Do MMM Y") }}</q-td>
         <template v-slot:top="props">
           <div class="col-md-5">
             <q-input
@@ -49,7 +48,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Pod Number, Device Type"
+              label="Pod Number, Device Type"
               class="q-mr-lg q-py-sm"
             />
           </div>

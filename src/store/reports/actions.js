@@ -22,8 +22,7 @@ export const REPORT_LEAD_APPROVAL_TRACKER = async ({ commit }, request) => {
     return await api
       .get("download/lead-approval-tracker", {
         responseType: "arraybuffer",
-      })
-      .then(response => {
+      }).then(response => {
         let blob = COMMON_FILE_DOWNLOAD(response);
         let link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
@@ -62,8 +61,7 @@ export const REPORT_SOURCEWISE_LEAD_TRACKER = async ({ commit }, request) => {
     return await api
       .get("download/sourcewise-lead-tracker", {
         responseType: "arraybuffer",
-      })
-      .then(response => {
+      }).then(response => {
         let blob = COMMON_FILE_DOWNLOAD(response);
         let link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
@@ -102,8 +100,7 @@ export const REPORT_SOURCE_REGION_DEVICE = async ({ commit }, request) => {
     return await api
       .get("download/source-region-device", {
         responseType: "arraybuffer",
-      })
-      .then(response => {
+      }).then(response => {
         let blob = COMMON_FILE_DOWNLOAD(response);
         let link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
@@ -142,8 +139,7 @@ export const REPORT_INACTIVE_MERCHANT = async ({ commit }, request) => {
     return await api
       .get("download/inactive-merchant", {
         responseType: "arraybuffer",
-      })
-      .then(response => {
+      }).then(response => {
         let blob = COMMON_FILE_DOWNLOAD(response);
         let link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
@@ -182,8 +178,7 @@ export const REPORT_PROXY_LEAD_MISSELLING = async ({ commit }, request) => {
     return await api
       .get("download/proxy-lead-misselling", {
         responseType: "arraybuffer",
-      })
-      .then(response => {
+      }).then(response => {
         let blob = COMMON_FILE_DOWNLOAD(response);
         let link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
@@ -221,8 +216,7 @@ export const REPORT_FINANCE_APPROVED = async ({ commit }, request) => {
   return await api
     .get("finance-tracker-list-download", {
       responseType: "arraybuffer",
-    })
-    .then(response => {
+    }).then(response => {
       let blob = COMMON_FILE_DOWNLOAD(response);
       let link = document.createElement("a");
       link.href = window.URL.createObjectURL(blob);
@@ -236,8 +230,7 @@ export const REPORT_QR_FINANCE_APPROVED = async ({ commit }, request) => {
   return await api
     .get("finance-qr-tracker-list-download", {
       responseType: "arraybuffer",
-    })
-    .then(response => {
+    }).then(response => {
       let blob = COMMON_FILE_DOWNLOAD(response);
       let link = document.createElement("a");
       link.href = window.URL.createObjectURL(blob);
@@ -251,8 +244,7 @@ export const POD_LIST_DOWNLOAD = async ({ commit }, request) => {
   return await api
     .get("download/pod-list", {
       responseType: "arraybuffer",
-    })
-    .then(response => {
+    }).then(response => {
       let blob = COMMON_FILE_DOWNLOAD(response);
       let link = document.createElement("a");
       link.href = window.URL.createObjectURL(blob);
@@ -265,8 +257,7 @@ export const AGGREGATOR_POD_LIST_DOWNLOAD = async ({ commit }, request) => {
   return await api
     .get("download/pod-list", {
       responseType: "arraybuffer",
-    })
-    .then(response => {
+    }).then(response => {
       let blob = COMMON_FILE_DOWNLOAD(response);
       let link = document.createElement("a");
       link.href = window.URL.createObjectURL(blob);
@@ -279,8 +270,7 @@ export const INVENTORY_WITH_SO_LIST_DOWNLOAD = async ({ commit }, request) => {
   return await api
     .get("download/so-list", {
       responseType: "arraybuffer",
-    })
-    .then(response => {
+    }).then(response => {
       let blob = COMMON_FILE_DOWNLOAD(response);
       let link = document.createElement("a");
       link.href = window.URL.createObjectURL(blob);
@@ -293,8 +283,7 @@ export const AGGREGATOR_INVENTORY_WITH_SO_LIST_DOWNLOAD = async ({ commit }, req
   return await api
     .get("download/so-list", {
       responseType: "arraybuffer",
-    })
-    .then(response => {
+    }).then(response => {
       let blob = COMMON_FILE_DOWNLOAD(response);
       let link = document.createElement("a");
       link.href = window.URL.createObjectURL(blob);
@@ -307,8 +296,7 @@ export const QR_LIST_DOWNLOAD = async ({ commit }, request) => {
   return await api
     .post("download/qr-implementation-report", request.params, {
       responseType: "arraybuffer",
-    })
-    .then(response => {
+    }).then(response => {
       let blob = COMMON_FILE_DOWNLOAD(response);
       let link = document.createElement("a");
       link.href = window.URL.createObjectURL(blob);
@@ -320,8 +308,7 @@ export const INVENTORY_WITH_RESELLER_LIST_ = async ({ commit }, request) => {
   return await api
     .get("download/reseller-list", {
       responseType: "arraybuffer",
-    })
-    .then(response => {
+    }).then(response => {
       let blob = COMMON_FILE_DOWNLOAD(response);
       let link = document.createElement("a");
       link.href = window.URL.createObjectURL(blob);
@@ -333,8 +320,7 @@ export const INVENTORY_WITH_CENTRAL = async ({ commit }, request) => {
   return await api
     .get("download/inventory-central", {
       responseType: "arraybuffer",
-    })
-    .then(response => {
+    }).then(response => {
       let blob = COMMON_FILE_DOWNLOAD(response);
       let link = document.createElement("a");
       link.href = window.URL.createObjectURL(blob);

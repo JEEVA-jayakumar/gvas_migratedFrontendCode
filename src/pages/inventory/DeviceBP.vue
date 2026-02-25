@@ -16,8 +16,7 @@
         table-class="customTableClass"
         :rows="tableData"
         :columns="columns"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         row-key="name"
         :loading="toggleAjaxLoadFilter"
         :rows-per-page-options="[5,10,15,20,25]"
@@ -27,9 +26,7 @@
           v-slot:body-cell-TidCreationDate="props"
           :props="props"
         >
-          <span class="label">{{
-            props.row.TidCreationDate | moment("Do MMM Y")
-          }}</span>
+          <span class="label">{{ $moment(props.row.TidCreationDate).format("Do MMM Y") }}</span>
         </q-td>
 
         <template slot="top"  class="bottom-border">
@@ -37,7 +34,7 @@
           <div class="col-md-4">
             <q-select
               v-model="filter"
-              float-label="Select a Region"
+              label="Select a Region"
               radio
               color="grey-9"
               :options="getBpRegionsMenuOptions"
@@ -272,8 +269,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.DEVICE_WITH_BPREGION({ pagination, filter })
-        .then(res => {
+      this.DEVICE_WITH_BPREGION({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 

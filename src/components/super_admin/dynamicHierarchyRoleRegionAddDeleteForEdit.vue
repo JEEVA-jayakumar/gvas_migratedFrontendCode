@@ -15,7 +15,7 @@
           <pre>{{userMapping}}</pre>
             <div class="col-md-12 col-sm-12 col-xs-12">
               <q-select
-                float-label="Choose a region"
+                label="Choose a region"
                 v-model="userMapping.regionId"
                 :error="$v.userMapping.regionId.$error"
                 :options="propGetAllRegionsData"
@@ -23,8 +23,8 @@
           </div>
           <div class="col-md-12 col-sm-12 col-xs-12">
               <q-select
-                @input="fnPopulateRolesByHeirarchy(userMapping.hierarchy)"
-                float-label="Choose a hierarchy"
+                @update:model-value="fnPopulateRolesByHeirarchy(userMapping.hierarchy)"
+                label="Choose a hierarchy"
                 v-model="userMapping.hierarchy"
                 :error="$v.userMapping.hierarchy.$error"
                 :options="propGetAllHierarchiesData"
@@ -35,8 +35,8 @@
                 :readonly=disableRolesSelection
                 :disabled=disableRolesSelection
                 :class="[disableRolesSelection?'no-pointer-events':'']"
-                @input="fnPopulateUsersByRole"
-                float-label="Choose a role"
+                @update:model-value="fnPopulateUsersByRole"
+                label="Choose a role"
                 v-model="userMapping.roleId"
                 :error="$v.userMapping.roleId.$error"
                 :options="filterRoles"
@@ -47,7 +47,7 @@
                 :readonly=disablePreceederSelection
                 :disabled=disablePreceederSelection
                 :class="[disablePreceederSelection?'no-pointer-events':'']"
-                float-label="Choose a predecessor"
+                label="Choose a predecessor"
                 v-model="userMapping.predecessorId"
                 :error="$v.userMapping.predecessorId.$error"
                 :options="filterUsers"

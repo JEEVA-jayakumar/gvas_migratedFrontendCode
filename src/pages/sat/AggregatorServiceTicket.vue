@@ -10,15 +10,14 @@
         table-class="customTableClass"
         :rows="tableData"
         :columns="columns"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         row-key="name"
         :loading="toggleAjaxLoadFilter"
         :rows-per-page-options="[5, 10, 15, 20]"
         @request="ajaxLoadAllLeadInfo"
       >
         <q-td v-slot:body-cell-createdDate="props" :props="props">
-          <span class="label">{{ props.row.createdDate | moment("Do MMM Y") }}</span>
+          <span class="label">{{ $moment(props.row.createdDate).format("Do MMM Y") }}</span>
         </q-td>
         <q-td v-slot:body-cell-tid="props" :props="props">
           <span class="label text-primary"># {{ props.row.serviceRequestData.tid }}</span>
@@ -105,7 +104,7 @@
           <div v-else>NA Document</div>
         </q-td>
         <q-td v-slot:body-cell-closedate="props" :props="props">
-          <span class="label">{{ props.row.updatedDate | moment("Do MMM Y") }}</span>
+          <span class="label">{{ $moment(props.row.updatedDate).format("Do MMM Y") }}</span>
         </q-td>
 
         <q-td v-slot:body-cell-status="props" :props="props">
@@ -165,7 +164,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search by  TID,Ticket ID, Merchant Name"
+              label="Search by  TID,Ticket ID, Merchant Name"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -446,8 +445,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.SERVICE_TICKET_LIST({ pagination, filter })
-        .then((res) => {
+      this.SERVICE_TICKET_LIST({ pagination, filter }).then((res) => {
           this.paginationControl = pagination;
           this.paginationControl.rowsNumber = this.getserviceticketlist.totalElements;
           this.paginationControl.page = this.getserviceticketlist.number + 1;

@@ -22,7 +22,7 @@
                 :error="$v.formData.name.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Enter VAS"
+                label="Enter VAS"
                 placeholder="Enter VAS"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -34,7 +34,7 @@
               :error="$v.formData.vasCode.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Enter VAS Code"
+              label="Enter VAS Code"
               placeholder="Enter VAS Code"
               @keyup.enter="submitLeadSourceData(formData)"
               

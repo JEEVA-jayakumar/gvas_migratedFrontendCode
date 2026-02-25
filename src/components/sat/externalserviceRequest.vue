@@ -83,24 +83,23 @@
           default
           color="dark"
           name="unAssigned"
-          slot="title"
           label="Opened"
         />
         <q-tab
           color="dark"
           name="assigned"
-          slot="title"
           label="Resolved Tickets"
         />
-        <q-tab color="dark" name="Ticket" slot="title" label="Ticket Bulk Assign/Reassign" />
-        <q-tab-panel name="assigned">
+        <q-tab color="dark" name="Ticket" label="Ticket Bulk Assign/Reassign" />
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="assigned">
           <!--START: table Data -->
           <q-table
             :rows="tableData"
             :columns="columnDataAssigned"
             table-class="customTableClass"
-            :filter="filterSearch"
-            :pagination="paginationControl"
+            :filter="filterSearch" v-model:pagination="paginationControl"
             v-model:selected="formData.marsDeviceIdsCookedUnAssinged"
             row-key="id"
             :loading="tableAjaxLoading"
@@ -127,7 +126,7 @@
                   >
                 </q-td>
                 <q-td key="dateCreated" :props="props">
-                  {{ props.row.createdDate | moment("Do MMM Y") }}
+                  {{ $moment(props.row.createdDate).format("Do MMM Y") }}
                 </q-td>
                 <q-td key="tat" :props="props">
                   <span :style="getHoursAgoColor(props.row.createdDate)">{{
@@ -165,7 +164,7 @@
                   color="grey-9"
                   v-model="filterSearch"
                   placeholder="Type.."
-                  float-label="Search By TID ..."
+                  label="Search By TID ..."
                   class="q-mr-lg q-py-sm"
                 />
               </div>
@@ -173,7 +172,7 @@
           </q-table>
           <!--ENDv-model: table Data -->
         </q-tab-panel>
-        <q-tab-panel name="unAssigned">
+<q-tab-panel name="unAssigned">
           <!--START: table Data -->
           <q-table
             :rows="tableData1"
@@ -228,7 +227,7 @@
                 <q-td v-slot:body-cell-dateCreated="props"
                 :props="props"
                 class="cursor-pointer">
-                  {{ props.row.createdDate | moment("Do MMM Y") }}
+                  {{ $moment(props.row.createdDate).format("Do MMM Y") }}
                 </q-td>
                 <q-td v-slot:body-cell-tat="props"
                 :props="props"
@@ -292,7 +291,7 @@
                   color="grey-9"
                   v-model="filterSearch1"
                   placeholder="Type.."
-                  float-label="Search By Ticket ID, TID ..."
+                  label="Search By Ticket ID, TID ..."
                   class="q-mr-lg q-py-sm"
                 />
               </div>
@@ -300,10 +299,10 @@
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-        <q-tab-panel name="Ticket">
+<q-tab-panel name="Ticket">
           <ticketAssign />
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
       <div class="row items-center gutter-y-sm">
         <div class="col-md-9 col-sm-12 col-xs-12">
           <div class="row items-center"></div>
@@ -865,8 +864,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_PHONEPE_OPENED_TICKETS({ pagination, filter })
-        .then(res => {
+      this.FETCH_PHONEPE_OPENED_TICKETS({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl1 = pagination;
 
@@ -900,8 +898,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_PHONEPE_RESOLVED_TICKET({ pagination, filter })
-        .then(res => {
+      this.FETCH_PHONEPE_RESOLVED_TICKET({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 

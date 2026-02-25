@@ -9,13 +9,13 @@
             <div class="row bottom-border group q-px-md q-py-md items-center text-weight-regular text-grey-9">
                 <!--START: table title   :disable="disableDeviceTypeSelection" -->
                 <div class="col-md-4">
-                    <q-select v-model="formData.region" float-label="Select Region" radio color="grey-9"
-                        @input="filterInventoryByRegion" :options="regionOptions" />
+                    <q-select v-model="formData.region" label="Select Region" radio color="grey-9"
+                        @update:model-value="filterInventoryByRegion" :options="regionOptions" />
                 </div>
 
                 <div class="col-md-4 col-lg-4 group">
                     <q-select :disable="formData.region == undefined" v-model="formData.device_type"
-                        float-label="Filter By Device" radio color="grey-9" @input="filterByDevice"
+                        label="Filter By Device" radio color="grey-9" @update:model-value="filterByDevice"
                         :options="deviceOptions" />
                 </div>
                 <div class="col-auto q-px-xs">
@@ -23,7 +23,7 @@
                           <q-btn outline color="grey-9" label="Download as excel" />
                         </downloadExcel>
                       </div>
-                <!-- @input="filterByDeviceName(formData)" -->
+                <!-- @update:model-value="filterByDeviceName(formData)" -->
 
             </div>
 
@@ -31,7 +31,7 @@
 
             <!--STARTv-model: table lead validation -->
             <q-table row-key="name" :filter="filter" :rows="regionalItems" class="q-py-none" :columns="columns"
-                title="Lead Validation" table-class="customTableClass" :pagination="paginationControl">
+                title="Lead Validation" table-class="customTableClass" v-model:pagination="paginationControl">
                 <!--START: table body modification  device-->
                 <q-td v-slot:body-cell-region="props" :props="props">{{ props.row.region == null ?
                         'NA' : props.row.region.regionAreaName
@@ -53,7 +53,7 @@
                     <!--START: table filter,search -->
                     <div class="col-md-5">
                         <q-input clearable color="grey-9" v-model="filter" placeholder="Type.."
-                            float-label="Search SerialNumber & podNumber..." class="q-mr-lg q-py-sm" />
+                            label="Search SerialNumber & podNumber..." class="q-mr-lg q-py-sm" />
                     </div>
                     <!--END: table filter,search -->
                 </template>

@@ -65,7 +65,7 @@ export default {
           if (!contentType) {
             throw new Error("Content-Type header is missing");
           }
-          const blob = new Blob([response.body], { type: contentType });
+          const blob = new Blob([response.data], { type: contentType });
 
           let extension = "";
           switch (contentType) {

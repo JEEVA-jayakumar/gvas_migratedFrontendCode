@@ -115,7 +115,7 @@
             separator
             color="grey-9"
             placeholder="Type.."
-            float-label="Search"
+            label="Search"
           />
         </div>
         <!--ENDv-model: table search -->
@@ -126,16 +126,15 @@
         table-class="customTableClass"
         :rows="tableDataNormal"
         :columns="columns"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         row-key="name"
       >
         <q-tr
           v-slot:body="props"
           :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']"
           :props="props"
-          @mouseover.native="rowHover(props.row.__index)"
-          @click.native="rowClick(props.row)"
+          @mouseover="rowHover(props.row.__index)"
+          @click="rowClick(props.row)"
           class="cursor-pointer"
         >
           <q-td v-for="col in props.cols" :key="col.name" :props="props">{{ col.value }}</q-td>
@@ -159,12 +158,13 @@
           :name="tabHeader.value"
           :label="tabHeader.label"
           class="text-dark"
-          slot="title"
         />
-     
         <!--END: tabs header -->
         <!--START: tabs body -->
-        <q-tab-panel
+        <!--END: tabs body -->
+</q-tabs>
+<q-tab-panels v-model="tabsModel" animated>
+<q-tab-panel
           v-for="tBodyContent in tabs.tabsBody"
           :key="tBodyContent.value"
           :name="tBodyContent.value"
@@ -174,27 +174,25 @@
             table-class="customTableClass"
             :rows="tBodyContent.customData.tableData"
             :columns="tBodyContent.customData.columns"
-            v-model:filter="filter"
-            :pagination="paginationControl"
+            v-model:filter="filter" v-model:pagination="paginationControl"
             row-key="name"
           >
             <q-td
               v-slot:body-cell-shortleadDate="props"
               :props="props"
-            >{{props.row.shortleadDate | moment("Do MMM Y")}}</q-td>
+            >{{ $moment(props.row.shortleadDate).format("Do MMM Y") }}</q-td>
             <q-td
               v-slot:body-cell-id="props"
               :props="props"
               class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row)"
+              @click="toggleLeadInformation(props.row)"
             >
               <span class="label text-primary">#{{props.row.leadNumber}}</span>
             </q-td>
           </q-table>
           <!--END: table table aging pending/reject -->
         </q-tab-panel>
-        <!--END: tabs body -->
-      </q-tabs>
+</q-tab-panels>
     </div>
   </q-page>
 </template>

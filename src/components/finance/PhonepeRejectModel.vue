@@ -90,8 +90,7 @@ export default {
             message: "Are you sure want to reject the lead?",
             ok: "Continue",
             cancel: "Cancel"
-          })
-          .then(() => {
+          }).onOk(() => {
             this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: "purple-9",
@@ -109,8 +108,7 @@ export default {
                   icon: "clear"
                 });
                 self.$q.loading.hide();
-              })
-              .catch(error => {
+              }).onCancel(error => {
                 this.$q.loading.hide()
                 this.$q.notify({
                   color: "negative",

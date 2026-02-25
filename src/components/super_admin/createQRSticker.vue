@@ -29,7 +29,7 @@
           <div class="col-md-6">
             <q-select
               clearable
-              float-label="Select QR API"
+              label="Select QR API"
               v-model.trim="formdata.leadSource"
               color="grey-9"
               :options="dropDown.leadSourceOptions"
@@ -53,7 +53,7 @@
               type="number"
               onkeydown="javascript: return event.keyCode === 8 ||
               event.keyCode === 46 ? true : !isNaN(Number(event.key))"
-              float-label="Enter numbers of QR count"
+              label="Enter numbers of QR count"
               v-model.trim="formdata.count"
               color="grey-9"
             />

@@ -4,8 +4,9 @@
       <customHeader @fnToggleSideMenu="fnMainToggleSideMenu"></customHeader>
     </q-header>
 
-    <q-drawer class="no-shadow" v-model="leftDrawerOpen" content-class="no-shadow"
-      :content-style="{ background: getComputedColor, width: '250px' }">
+    <q-drawer class="no-shadow" v-model="leftDrawerOpen"
+      :width="250"
+      :style="{ background: getComputedColor }">
       <q-scroll-area style="height: 100vh" :thumb-style="{
         right: '4px',
         borderRadius: '5px',
@@ -13,7 +14,7 @@
         width: '5px',
         opacity: 0.5
       }" :delay="1500">
-        <q-list no-border link inset-delimiter highlight style="padding-top:65px">
+        <q-list class="no-border" style="padding-top:65px">
           <div>
             <!-- Entry point for sat -->
             <div v-if="
@@ -25,6 +26,7 @@
                     v-for="menu in menus.varaneekSat"
                     :key="menu.id"
                     :to="menu.to"
+                    clickable
                     class="menu-main-item-color"
                   >
                     <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
@@ -36,30 +38,30 @@
                 <q-item
                   v-if="!menu.subItems || menu.subItems.length === 0"
                   :to="menu.to"
+                  clickable
                   class="menu-main-item-color"
                 >
                   <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
                 </q-item>
-                <q-item v-else>
-                  <div class="col-md-12">
+                <q-item v-else class="no-padding">
+                  <div class="col-12">
                     <div
-                      class="col-md-12"
-                      color="light"
-                      text-color="light"
+                      class="col-12"
                       v-if="(menu.name == 'Bijlipay')"
                     >
                       <q-select
-                        inverted-light
+                        filled
                         v-model="selectedValueSat"
-                        float-label="Please Select"
-                        placeholder="Please Select"
-                        color="light"
+                        label="Please Select"
+                        color="white"
+                        dark
                         class="cursor-pointer menu-item-color"
                         :options="options"
-                        @input="fnclickdropdownSat"
+                        emit-value
+                        map-options
+                        @update:model-value="fnclickdropdownSat"
                       />
                     </div>
-                    <!--@input="fnclickdropdown"-->
                     <div
                       v-if="selectedValueSat == menuListNameSat && menu.name == menuListNameSat"
                       align="left"
@@ -68,6 +70,7 @@
                         v-for="subItem in menu.subItems"
                         :key="subItem.id"
                         :to="subItem.to"
+                        clickable
                         class="menu-main-item-color"
                       >
                         <q-item-section class="cursor-pointer menu-item-color">{{ subItem.name }}</q-item-section>
@@ -81,6 +84,7 @@
                         v-for="subItem in menu.subItems"
                         :key="subItem.id"
                         :to="subItem.to"
+                        clickable
                         class="menu-main-item-color"
                       >
                         <q-item-section class="cursor-pointer menu-item-color">{{ subItem.name }}</q-item-section>
@@ -95,7 +99,7 @@
             <!-- Entry point for finance manager -->
             <div
               v-if="$q.localStorage.getItem('u_i') != undefined && (showMenu.includes($ROLE_HIERARCHY_FINANCE_HEAD) || showMenu.includes($ROLE_HIERARCHY_FINANCE_MANAGER) || showMenu.includes($ROLE_HIERARCHY_FINANCE_EXECUTIVE))">
-              <q-item v-for="menu in menus.finance" :key="menu.id" :to="menu.to" class="menu-main-item-color">
+              <q-item v-for="menu in menus.finance" :key="menu.id" :to="menu.to" clickable class="menu-main-item-color">
                 <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
               </q-item>
             </div>
@@ -107,30 +111,30 @@
                 <q-item
                   v-if="!menu.subItems || menu.subItems.length === 0"
                   :to="menu.to"
+                  clickable
                   class="menu-main-item-color"
                 >
                   <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
                 </q-item>
-                <q-item v-else>
-                  <div class="col-md-12">
+                <q-item v-else class="no-padding">
+                  <div class="col-12">
                     <div
-                      class="col-md-12"
-                      color="light"
-                      text-color="light"
+                      class="col-12"
                       v-if="(menu.name == 'Bijlipay')"
                     >
                       <q-select
-                        inverted-light
+                        filled
                         v-model="selectedValue"
-                        float-label="Please Select"
-                        placeholder="Please Select"
-                        color="light"
+                        label="Please Select"
+                        color="white"
+                        dark
                         class="cursor-pointer menu-item-color"
                         :options="options"
-                        @input="fnclickdropdown"
+                        emit-value
+                        map-options
+                        @update:model-value="fnclickdropdown"
                       />
                     </div>
-                    <!--@input="fnclickdropdown"-->
                     <div
                       v-if="selectedValue == menuListName && menu.name == menuListName"
                       align="left"
@@ -139,12 +143,12 @@
                         v-for="subItem in menu.subItems"
                         :key="subItem.id"
                         :to="subItem.to"
+                        clickable
                         class="menu-main-item-color"
                       >
                         <q-item-section class="cursor-pointer menu-item-color">{{ subItem.name }}</q-item-section>
                       </q-item>
                     </div>
-                    <!-- && menu.name == menuListName -->
                     <div
                       v-else-if="selectedValue == menuListName && selectedValue != 'Bijlipay' && selectedValue != '' && menu.name == 'Others'"
                       align="left"
@@ -153,6 +157,7 @@
                         v-for="subItem in menu.subItems"
                         :key="subItem.id"
                         :to="subItem.to"
+                        clickable
                         class="menu-main-item-color"
                       >
                         <q-item-section class="cursor-pointer menu-item-color">{{ subItem.name }}</q-item-section>
@@ -175,6 +180,7 @@
                 v-for="menu in menus.ksn"
                 :key="menu.id"
                 :to="menu.to"
+                clickable
                 class="menu-main-item-color"
               >
                 <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
@@ -188,16 +194,17 @@
                 <q-item
                   v-if="!menu.subItems || menu.subItems.length === 0"
                   :to="menu.to"
+                  clickable
                   class="menu-main-item-color"
                 >
                   <q-item-section class="cursor-pointer menu-item-color">{{ menu.name }}</q-item-section>
                 </q-item>
-                <q-item v-else>
+                <q-item v-else class="no-padding">
                   <q-item-section class="menu-item-color">
                     <q-expansion-item
                       dense
                       class="no-padding"
-                      header-class="no-padding"
+                      header-class="no-padding menu-item-color"
                       header-style="font-size:14px"
                       label="Reports"
                     >
@@ -205,6 +212,7 @@
                         v-for="subItem in menu.subItems"
                         :key="subItem.id"
                         :to="subItem.to"
+                        clickable
                         class="menu-main-item-color"
                       >
                         <q-item-section class="cursor-pointer menu-item-color">{{ subItem.name }}</q-item-section>
@@ -218,27 +226,27 @@
             <!-- Entry point for sales manager => RSM/ASM -->
             <div
               v-if="$q.localStorage.getItem('u_i') != undefined && (showMenu.includes($ROLE_HIERARCHY_SALES_RSM) || showMenu.includes($ROLE_HIERARCHY_SALES_ASM) || showMenu.includes($ROLE_HIERARCHY_SALES_NATIONAL_HEAD))">
-              <q-item v-for="menu in menus.salesManager" :key="menu.id" :to="menu.to" class="menu-main-item-color">
+              <q-item v-for="menu in menus.salesManager" :key="menu.id" :to="menu.to" clickable class="menu-main-item-color">
                 <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
               </q-item>
             </div>
 
             <!-- Entry point for sales manager => bank ops -->
             <div v-if="$q.localStorage.getItem('u_i') != undefined && showMenu.includes($ROLE_HIERARCHY_BANK_OPS)">
-              <q-item v-for="menu in menus.bankOps" :key="menu.id" :to="menu.to" class="menu-main-item-color">
+              <q-item v-for="menu in menus.bankOps" :key="menu.id" :to="menu.to" clickable class="menu-main-item-color">
                 <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
               </q-item>
             </div>
 
             <!-- Entry point for CRM USERS -->
             <div v-if="$q.localStorage.getItem('u_i') != undefined && showMenu.includes($HIERARCHY_CRM1)">
-              <q-item v-for="menu in menus.crm" :key="menu.id" :to="menu.to" class="menu-main-item-color">
+              <q-item v-for="menu in menus.crm" :key="menu.id" :to="menu.to" clickable class="menu-main-item-color">
                 <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
               </q-item>
             </div>
             <!-- Entry point for super admin/bijlipay managemnet -->
             <div v-if="$q.localStorage.getItem('u_i') != undefined && showMenu.includes($ROLE_BIJLIPAY_MANAGER)">
-              <q-item v-for="menu in menus.superAdmin" :key="menu.id" :to="menu.to">
+              <q-item v-for="menu in menus.superAdmin" :key="menu.id" :to="menu.to" clickable>
                 <q-item-section class="menu-item-color-SA">{{ menu.name}}</q-item-section>
               </q-item>
             </div>
@@ -254,8 +262,6 @@
 </template>
 
 <script>
-import { and } from '@vuelidate/validators';
-
 import { mapGetters, mapActions } from "vuex"; 
 import customHeader from '../components/customHeader.vue';
 import customBody from '../components/customBody.vue';
@@ -270,7 +276,6 @@ export default {
     return {
       leftDrawerOpen: this.$q.platform.is.desktop
         ? this.$route.name != 'leadDataEntry'
-
         : false,
       propShowDatas: false,
       menuListName: '',
@@ -312,11 +317,6 @@ export default {
                 name: "Dashboard",
                 subItems: [],
               },
-              // {
-              //   id: 1,
-              //   to: '/sat/lead/validation',
-              //   name: 'Lead Validation'
-              // },
               {
                 id: 1,
                 to: "/sat/lead/validation",
@@ -335,11 +335,6 @@ export default {
                 name: "Change Management",
                 subItems: [],
               },
-              //     {
-              //   id: 15,
-              //   to: "/sat/change/management/terminal",
-              //   name: "Update Terminal Data",
-              // },
               {
                 id: 20,
                 to: "/sat/internalLostOrStolen",
@@ -365,51 +360,12 @@ export default {
                 name: "Open Merchant tracker",
                 subItems: [],
               },
-              // {
-              //   id: 4,
-              //   to: "/sat/merchant/tracker",
-              //   name: "Merchant Tracker - TID",
-              // },
-              // {
-              //   id: 5,
-              //   to: "/sat/merchant/transaction/level",
-              //   name: "Merchant Tracker - Transaction Level",
-              // },
-              // {
-              //   id: 6,
-              //   to: "/sat/statement/view",
-              //   name: "Statement View",
-              // },
               {
                 id: 7,
                 to: "/sat/internalRegionalInventory",
                 name: "Regional Inventory",
                 subItems: [],
               },
-              // {
-              //   id: 40,
-              //   to: '/sat/Phonepe/deviceRecovery',
-              //   name: 'Device Recovery',
-              //   subItems: []
-              // },
-              // {
-              //   id: 41,
-              //   to: '/sat/TestingRecovery',
-              //   name: 'Device Recovery',
-              //   subItems: []
-              // },
-              // {
-              //   id: 17,
-              //   to: '/sat/Aggregator/inventory',
-              //   name: 'Aggregator Inventory',
-              //   subItems: []
-              // },
-              // {
-              //   id: 18,
-              //   to: '/sat/AggregatorsLostOrStolen',
-              //   name: 'Aggregators Lost Or Stolen',
-              //   subItems: []
-              // },
               {
                 id: 8,
                 to: "/sat/internalimplementationRequest",
@@ -428,11 +384,6 @@ export default {
                 name: "Device Recovery Tracker",
                 subItems: [],
               },
-              // {
-              //   id: 11,
-              //   to: "/sat/device/recovery",
-              //   name: "Device Recovery"
-              // },
               {
                 id: 12,
                 to: "/sat/lead/lead/dataentry",
@@ -493,39 +444,6 @@ export default {
                 to:"/sat/equitasSoundboxOnboarding",
                 name: "Equitas SoundBox Onboarding",
               }
-              // {
-              //   id: 38,
-              //   to: '/sat/demapping',
-              //   name: 'DE-Mapping',
-              //   subItems: []
-              // },
-              // {
-              //   id: 15,
-              //   to: "/sat/change/management",
-              //   name: "Change Management"
-              // },
-              // {
-              //   id: 28,
-              //   to: '/sat/internalserviceRequest',
-              //   name: 'Service Request',
-              //   subItems: []
-              // }
-              // {
-              //   id: 15,
-              //   to: "/sat/change/management",
-              //   name: "Change Management"
-              // }
-
-              // {
-              //   id: 12,
-              //   to: "/sat/lead/device",
-              //   name: "SO Device List"
-              // }
-              // {
-              //   id: 11,
-              //   to: "/sat/lead/information",
-              //   name: "Lead Dat"
-              // }
             ],
           },
 
@@ -536,33 +454,16 @@ export default {
             subItems: [
               {
                 id: 30,
-                to: "/sat/dashboardPhonepe" || "/sat/dashboardMobikwik",
+                to: "/sat/dashboardPhonepe",
                 name: "Dashboard",
                 subItems: [],
               },
-              // {
-              //   id: 1,
-              //   to: '/sat/lead/validation',
-              //   name: 'Lead Validation'
-              // },
               {
                 id: 31,
                 to: "/sat/aggregator/lead/validation",
                 name: "Lead Validation",
                 subItems: [],
               },
-              // {
-              //   id: 21,
-              //   to: '/sat/additionalTid',
-              //   name: 'Additional Terminals',
-              //   subItems: []
-              // },
-              // {
-              //   id: 15,
-              //   to: '/sat/change/management',
-              //   name: 'Change Management',
-              //   subItems: []
-              // },
               {
                 id: 32,
                 to: "/sat/AggregatorsLostOrStolen",
@@ -575,13 +476,6 @@ export default {
                 name: "Global Serial Number/TID Search",
                 subItems: [],
               },
-
-              // {
-              //   id: 2,
-              //   to: '/sat/exception/queue',
-              //   name: 'Exception Queue',
-              //   subItems: []
-              // },
               {
                 id: 3,
                 to: "/sat/aggOpenMerchantTracker",
@@ -622,18 +516,6 @@ export default {
                 name: "SAT - Service Verification",
                 subItems: [],
               },
-              // {
-              //   id: 10,
-              //   to: '/sat/device/recovery/tracker',
-              //   name: 'Device Recovery Tracker',
-              //   subItems: []
-              // },
-              // {
-              //   id: 12,
-              //   to: '/sat/lead/lead/dataentry',
-              //   name: 'Lead Creation',
-              //   subItems: []
-              // },
               {
                 id: 13,
                 to: "/sat/AggregatorVerificationQueue",
@@ -646,12 +528,6 @@ export default {
                 name: "Aggregator De-Active List ",
                 subItems: []
               },
-              // {
-              //   id: 14,
-              //   to: '/sat/device/replacement',
-              //   name: 'Device Replacement',
-              //   subItems: []
-              // },
               {
                 id: 36,
                 to: "/sat/externalserviceRequest",
@@ -684,22 +560,16 @@ export default {
             to: "/finance/finance/approved/tracker",
             name: "Finance Approved Tracker ",
           },
-          // {
-          //   id: 3,
-          //   to: '/finance/LostOrStolen',
-          //   name: 'Lost Or Stolen'
-          // }
           {
             id: 3,
             to: "/finance/lost/finance",
             name: "Lost/Stolen",
           },
           {
-            id: 3,
+            id: 4,
             to: '/finance/PosInventory',
             name: 'Pos Inventory'
           }
-          // LostOrStolen
         ],
         inventory: [
           {
@@ -792,12 +662,6 @@ export default {
                 name: "Inventory with Resellar",
                 subItems: [],
               },
-              // {
-              //   id: 11,
-              //   to: "/inventory/master/serialnumberupdate",
-              //   name: "Serial Number Update",
-              //   subItems: [],
-              // },
               {
                 id: 12,
                 to: "/inventory/master/Reports",
@@ -826,7 +690,7 @@ export default {
             subItems: [
               {
                 id: 1,
-                to: "/inventory/Phonepehome" || "/inventory/Mobikwikhome",
+                to: "/inventory/Phonepehome",
                 name: "Dashboard",
                 subItems: [],
               },
@@ -842,12 +706,6 @@ export default {
                 name: "Send To Repair",
                 subItems: [],
               },
-              // {
-              //   id: 4,
-              //   to: '/inventory/AggregatorsMovedToScrap',
-              //   name: ' MovedToScrap',
-              //   subItems: []
-              // },
               {
                 id: 64,
                 to: "/inventory/master/AggregatorsspareParts",
@@ -874,7 +732,6 @@ export default {
                 name: "Global Serial Number/TID Search",
                 subItems: [],
               },
-              // PhonepeInventoryRegion
               {
                 id: 21,
                 to: "/inventory/master/PhonepeInventoryRegion",
@@ -887,20 +744,6 @@ export default {
                 name: "Inventory with Merchant",
                 subItems: [],
               },
-
-              // {
-              //   id: 6,
-              //   to: '/inventory/faulty',
-              //   name: 'Regional return & Faulty Inventory',
-              //   subItems: []
-              // },
-
-              // {
-              //   id: 8,
-              //   to: '/inventory/podlist',
-              //   name: 'POD Updated List',
-              //   subItems: []
-              // },
               {
                 id: 38,
                 to: "/inventory/AggregatorInventoryFaulty",
@@ -932,69 +775,6 @@ export default {
                 name: "Phonepe Paper Roll",
                 subItems: [],
               },
-              // {
-              //   id: 10,
-              //   to: '/inventory/inventorywithresellar',
-              //   name: 'Inventory with Resellar',
-              //   subItems: []
-              // },
-              // {
-              //   id: 33,
-              //   to: '/inventory/master/AggregatorSerialNumberUpdate',
-              //   name: 'Serial Number Update',
-              //   subItems: []
-              // },
-
-              // {
-              //   id: 12,
-              //   to: '/inventory/master/Reports',
-              //   name: 'Reports',
-              //   subItems: []
-              // }
-              // {
-              //   id: 11,
-              //   to: '/inventory/master/Replacement',
-              //   name: 'Reports',
-              //   subItems: [
-
-              //     {
-              //       id: 1,
-              //       name: 'Replacement/Recovery',
-              //       to: '/inventory/master/Replacement'
-              //     },
-              //     {
-              //       id: 2,
-              //       name: 'Device History',
-              //       to: '/inventory/master/DeviceHistory'
-              //     },
-              //     // {
-              //     //   id: 3,
-              //     //   name: 'Device With Merchants',
-              //     //   to: '/inventory/master/DeviceMerchant'
-              //     // },
-              //     {
-              //       id: 4,
-              //       name: 'Device With FSE/SO',
-              //       to: '/inventory/master/DeviceFSE'
-              //     },
-              //     {
-              //       id: 5,
-              //       name: 'Device With BP Regions',
-              //       to: '/inventory/master/DeviceBP'
-              //     },
-              //     {
-              //       id: 6,
-              //       name: 'Inventory Summary',
-              //       to: '/inventory/master/InventorySummary'
-              //     }
-
-              //     //  {
-              //     //   id: 7,
-              //     //   name: "Inventory Time",
-              //     //   to: "/inventory/master/InventoryTime",
-              //     // },
-              //   ]
-              // }
             ],
           },
 
@@ -1021,37 +801,31 @@ export default {
         crm: [
           {
             id: 1,
-            to: "phonepePendingCrm",
+            to: "/crm/phonepePendingCrm",
             name: "Phonepe Service Request",
           },
           {
             id: 2,
-            to: "bijlipayCrm",
+            to: "/crm/bijlipayCrm",
             name: "Bijlipay Service Request",
           },
           {
-            id: 2,
-            to: "globalTicketSearch",
+            id: 3,
+            to: "/crm/globalTicketSearch",
             name: "Global Ticket Search",
           },
           {
             id: 288,
-            to: "docviewer",
+            to: "/crm/docviewer",
             name: "DOC View",
           },
           {
             id: 888,
-            to: "serviceticket",
+            to: "/crm/serviceticket",
             name: "Service Ticket",
           },
         ],
         opsHead: [
-          // {
-          //   id: 1,
-          //   to: '/ops/head/dashboard',
-          //   name: 'Dashboard',
-          //   subItems: []
-          // },
           {
             id: 2,
             to: "/ops/head/exceptions",
@@ -1117,11 +891,6 @@ export default {
             to: "/sales/manager/pricing/exception/verification",
             name: "Pricing Exception Verification",
           },
-          // {
-          //   id: 5,
-          //   to: "/sales/manager/leads/pending/assignment",
-          //   name: "Leads Pending Assignment"
-          // },
           {
             id: 6,
             to: "/sales/manager/aging/tracker/pending/leads",
@@ -1164,12 +933,6 @@ export default {
             to: "/super/admin/regionGroup/",
             name: "RegionGroup",
           },
-          //16mars2022
-          // {
-          //   id: 7,
-          //   to: "/super/admin/subregions/",
-          //   name: "subRegions"
-          // },
           {
             id: 8,
             to: "/super/admin/pincodes",
@@ -1190,43 +953,11 @@ export default {
             to: "/super/admin/manage/newRentalCharges",
             name: "Rental Charges",
           },
-          //16mars2022
-          // {
-          //   id: 20,
-          //   to: "/super/admin/manage/vasUpdates",
-          //   name: "VAS"
-          // },
-          // {
-          //   id: 10,
-          //   to: '/super/admin/manage/mdr/charges',
-          //   name: 'Add New MDR Charges'
-          // },
-          // {
-          //   id: 11,
-          //   to: '/super/admin/manage/rental/charges',
-          //   name: 'Add New Rental Charges'
-          // },
-          // {
-          //   id: 12,
-          //   to: '/super/admin/manage/add/mdr/charges',
-          //   name: 'Exisiting MDR Charges'
-          // },
-          // {
-          //   id: 13,
-          //   to: '/super/admin/manage/add/rental/charges',
-          //   name: 'Exisiting Rental Charges'
-          // },
           {
             id: 14,
             to: "/super/admin/manage/mdr/bankSO",
             name: "Bank SO",
           },
-          //16mars2022
-          // {
-          //   id: 15,
-          //   to: "/super/admin/manage/serialupdate",
-          //   name: "Serial Update",
-          // },
           {
             id: 16,
             to: "/super/admin/manage/notifications",
@@ -1237,11 +968,6 @@ export default {
             to: "/super/admin/manage/QR/Sticker",
             name: "QRSticker",
           },
-          //  {
-          //   id: 18,
-          //   to: "/super/admin/manage/mATMplan",
-          //   name: "Add M-ATM plan"
-          // },
           {
             id: 19,
             to: "/super/admin/manage/existingmATMplan",
@@ -1277,22 +1003,6 @@ export default {
             to: "/super/admin/manage/aggregatorsDevice",
             name: "Aggregators Device",
           },
-          //   {
-          //   id: 3,
-          //   to: "/super/admin/hierarchy/",
-          //   name: "Hierarchy",
-          // },
-          // {
-          //   id: 20,
-          //   to: "/super/admin/manage/mdrCharges",
-          //   name: "MDR Charges"
-          // },
-          //  {
-          //   id: 21,
-          //   to: "/super/admin/manage/newRentalCharges",
-          //   name: "Rental Charges"
-          // },
-
           {
             id: 38,
             to: "/super/admin/manage/APISync",
@@ -1412,7 +1122,7 @@ export default {
             subItems: [
               {
                 id: 1,
-                to: "/inventory/Phonepehome" || "/inventory/Mobikwikhome",
+                to: "/inventory/Phonepehome",
                 name: "Dashboard",
                 subItems: [],
               },
@@ -1428,12 +1138,6 @@ export default {
                 name: "Send To Repair",
                 subItems: [],
               },
-              // {
-              //   id: 4,
-              //   to: '/inventory/AggregatorsMovedToScrap',
-              //   name: ' MovedToScrap',
-              //   subItems: []
-              // },
               {
                 id: 64,
                 to: "/inventory/master/AggregatorsspareParts",
@@ -1460,7 +1164,6 @@ export default {
                 name: "Global Serial Number/TID Search",
                 subItems: [],
               },
-              // PhonepeInventoryRegion
               {
                 id: 21,
                 to: "/inventory/master/PhonepeInventoryRegion",
@@ -1473,20 +1176,6 @@ export default {
                 name: "Inventory with Merchant",
                 subItems: [],
               },
-
-              // {
-              //   id: 6,
-              //   to: '/inventory/faulty',
-              //   name: 'Regional return & Faulty Inventory',
-              //   subItems: []
-              // },
-
-              // {
-              //   id: 8,
-              //   to: '/inventory/podlist',
-              //   name: 'POD Updated List',
-              //   subItems: []
-              // },
               {
                 id: 38,
                 to: "/inventory/AggregatorInventoryFaulty",
@@ -1519,69 +1208,6 @@ export default {
                 name: "Phonepe Paper Roll",
                 subItems: [],
               },
-              // {
-              //   id: 10,
-              //   to: '/inventory/inventorywithresellar',
-              //   name: 'Inventory with Resellar',
-              //   subItems: []
-              // },
-              // {
-              //   id: 33,
-              //   to: '/inventory/master/AggregatorSerialNumberUpdate',
-              //   name: 'Serial Number Update',
-              //   subItems: []
-              // },
-
-              // {
-              //   id: 12,
-              //   to: '/inventory/master/Reports',
-              //   name: 'Reports',
-              //   subItems: []
-              // }
-              // {
-              //   id: 11,
-              //   to: '/inventory/master/Replacement',
-              //   name: 'Reports',
-              //   subItems: [
-
-              //     {
-              //       id: 1,
-              //       name: 'Replacement/Recovery',
-              //       to: '/inventory/master/Replacement'
-              //     },
-              //     {
-              //       id: 2,
-              //       name: 'Device History',
-              //       to: '/inventory/master/DeviceHistory'
-              //     },
-              //     // {
-              //     //   id: 3,
-              //     //   name: 'Device With Merchants',
-              //     //   to: '/inventory/master/DeviceMerchant'
-              //     // },
-              //     {
-              //       id: 4,
-              //       name: 'Device With FSE/SO',
-              //       to: '/inventory/master/DeviceFSE'
-              //     },
-              //     {
-              //       id: 5,
-              //       name: 'Device With BP Regions',
-              //       to: '/inventory/master/DeviceBP'
-              //     },
-              //     {
-              //       id: 6,
-              //       name: 'Inventory Summary',
-              //       to: '/inventory/master/InventorySummary'
-              //     }
-
-              //     //  {
-              //     //   id: 7,
-              //     //   name: "Inventory Time",
-              //     //   to: "/inventory/master/InventoryTime",
-              //     // },
-              //   ]
-              // }
             ],
           },
         ],
@@ -1601,31 +1227,23 @@ export default {
       return this.$route.fullPath.includes("super/admin") ? "#773581" : "#202c3f";
     },
     menuList() {
-      return JSON.parse(localStorage.getItem("u_i")).roles;
+      const userInfo = localStorage.getItem("u_i");
+      return userInfo ? JSON.parse(userInfo).roles : [];
     },
   },
   methods: {
     ...mapActions("superAdminAggregators", ["GET_ACTIVE_CREATED_AGGREGATORS_LIST"]),
     findMenuAuth() {
-      // Declaring roles ad array from local storage
-      let authUserRoles = JSON.parse(localStorage.getItem("u_i")).roles;
-      /* variables:
-      authUserRoles => contains user info, which is saved in local storage of browser
-      hierarchyRoleLevel =>  contains current object of roles array */
-      let menuArr = [];
-      _.map(authUserRoles, function (oo) {
-        menuArr.push(oo.hierarchyRoleLevel);
-      });
-      this.showMenu = menuArr;
+      const userInfo = localStorage.getItem("u_i");
+      if (userInfo) {
+        let authUserRoles = JSON.parse(userInfo).roles;
+        let menuArr = [];
+        _.map(authUserRoles, function (oo) {
+          menuArr.push(oo.hierarchyRoleLevel);
+        });
+        this.showMenu = menuArr;
+      }
     },
-    // fnselectedValues(value){
-
-    //  console.log("fnselectedValues ------->", value)
-    //   // if(value == Bijlipay){
-    //   //
-    //   // }
-    //   // /inventory/master/Bijlipay
-    // },
     fnclickdropdown(request) {
       this.array = this.menus.Phonepeinventory[1].subItems;
       this.$q.localStorage.set("selectedTab", request);
@@ -1641,14 +1259,12 @@ export default {
           (item) => item.id !== 26
         );
         this.menuListName = request;
-        console.log("menuListName CHECK REQUEST", JSON.stringify(this.menuListName));
         this.$router.push("/inventory/Mobikwikhome");
       }
     },
 
     fnclickdropdownSat(request) {
       this.$q.localStorage.set("selectedTab", request);
-      console.log("REQUEST FUNCTION DETAILED------------>>>>", JSON.stringify(request));
       if (request == "Bijlipay") {
         this.menuListNameSat = request;
         this.$router.push("/sat/dashboard");
@@ -1672,7 +1288,6 @@ export default {
               value: "Bijlipay",
             },
           ];
-          // console.log("MENU LIST", JSON.stringify(response));
           this.getActiveCreatedAggregatorList.map(function (value) {
             assumeArr.push({
               label: value.name,
@@ -1680,7 +1295,6 @@ export default {
             });
           });
           this.options = assumeArr;
-          console.log("MENU LIST NAMES", JSON.stringify(this.options));
         })
         .catch(() => {
           this.options = [];

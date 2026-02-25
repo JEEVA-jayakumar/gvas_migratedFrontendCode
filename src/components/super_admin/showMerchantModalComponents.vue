@@ -21,12 +21,13 @@
       <q-tab
         @select="merchantTypeActiveList"
         default
-        slot="title"
         label="Active List"
         name="tab-1"
       />
-      <q-tab @select="merchantTypeDeActiveList" slot="title" label="De-Actived List" name="tab-2"/>
-      <q-tab-panel name="tab-1">
+      <q-tab @select="merchantTypeDeActiveList" label="De-Actived List" name="tab-2"/>
+</q-tabs>
+<q-tab-panels animated>
+<q-tab-panel name="tab-1">
         <q-table
           :rows="activeMerchantTypeList"
           table-class="customSATableClass"
@@ -69,7 +70,7 @@
                 color="grey-9"
                 v-model="activeFilterSearch"
                 placeholder="Type.."
-                float-label="Search by name, short name"
+                label="Search by name, short name"
                 class="q-mr-lg"
               />
             </div>
@@ -77,13 +78,12 @@
           </template>
         </q-table>
       </q-tab-panel>
-      <q-tab-panel name="tab-2">
+<q-tab-panel name="tab-2">
         <q-table
           :rows="deActiveMerchantTypeList"
           table-class="customSATableClass"
           :columns="deActivatedColumns"
-          :filter="deActivatedFilterSearch"
-          :pagination="paginationControl"
+          :filter="deActivatedFilterSearch" v-model:pagination="paginationControl"
           row-key="id"
           color="grey-9"
         >
@@ -110,7 +110,7 @@
                 color="grey-9"
                 v-model="deActivatedFilterSearch"
                 placeholder="Type.."
-                float-label="Search by name"
+                label="Search by name"
                 class="q-mr-lg"
               />
             </div>
@@ -118,7 +118,7 @@
           </template>
         </q-table>
       </q-tab-panel>
-    </q-tabs>
+</q-tab-panels>
     <!--START: Show create MerchantTypes -->
     <showCreateMerchantType
       v-if="propShowCreateMerchantType"
@@ -267,8 +267,7 @@ export default {
           message: "Are you sure want to disable Merchant type?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -284,8 +283,7 @@ export default {
                 message: "Merchant type deactivated",
                 icon: "thumb_up"
               });
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -295,7 +293,7 @@ export default {
             });
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -311,8 +309,7 @@ export default {
           message: "Are you sure want to disable Merchant type?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -330,8 +327,7 @@ export default {
                 } has been enabled`,
                 icon: "thumb_up"
               });
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -341,7 +337,7 @@ export default {
             });
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

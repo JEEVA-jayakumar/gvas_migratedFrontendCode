@@ -20,8 +20,7 @@
           table-class="customTableClass"
           :rows="tableData"
           :columns="columns"
-          :filter="filter"
-          :pagination="paginationControl"
+          :filter="filter" v-model:pagination="paginationControl"
           row-key="name"
           :loading="toggleAjaxLoadFilter"
           :rows-per-page-options="[5,10,15,20]"
@@ -45,7 +44,7 @@
 
 
           <q-td v-slot:body-cell-dateofSubmission="props" :props="props">
-            <span class="label">{{props.row.financeSubmissionDate | moment("Do MMM Y")}}</span>
+            <span class="label">{{ $moment(props.row.financeSubmissionDate).format("Do MMM Y") }}</span>
           </q-td>
           <template v-slot:top="props" class="bottom-border">
           <!--START: table  :rows-per-page-options="[5,10,15,20,25]"filter,search -->
@@ -55,7 +54,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search by Request Number"
+              label="Search by Request Number"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -131,7 +130,7 @@
                 separator
                 color="grey-9"
                 placeholder="Type.."
-                float-label="Search By Device Type..."
+                label="Search By Device Type..."
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -293,8 +292,7 @@ import { required, or } from '@vuelidate/validators';
           spinnerColor: "purple-9",
           message: "Fetching data .."
         });
-        this.FETCH_POS_INVENTORY_FINANCE({ pagination, filter })
-          .then(res => {
+        this.FETCH_POS_INVENTORY_FINANCE({ pagination, filter }).then(res => {
             // updating pagination to reflect in the UI
             this.paginationControl = pagination;
   

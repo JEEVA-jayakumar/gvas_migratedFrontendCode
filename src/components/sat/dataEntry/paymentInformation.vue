@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row gutter-sm">
+    <div class="row q-col-gutter-sm">
       <div class="col-md-6 col-sm-12 col-xs-12">
         <p class="text-caption">Device Owned By</p>
         <div class="group">
@@ -23,7 +23,7 @@
           @blur="$v.merchant.paymentDetails.installationFee.$touch"
           :error="$v.merchant.paymentDetails.installationFee.$error"
           v-model="merchant.paymentDetails.installationFee"
-          float-label="Installation Fee*"
+          label="Installation Fee*"
           placeholder="Installation Fee*"
         />
       </div>
@@ -34,7 +34,7 @@
           @blur="$v.merchant.paymentDetails.terminalModeCode.$touch"
           :error="$v.merchant.paymentDetails.terminalModeCode.$error"
           v-model="merchant.paymentDetails.terminalModeCode"
-          float-label="Terminal Model*"
+          label="Terminal Model*"
           :options="terminalModelSet"
         />
       </div>
@@ -46,7 +46,7 @@
           @blur="$v.merchant.paymentDetails.numberOfTerminals.$touch"
           :error="$v.merchant.paymentDetails.numberOfTerminals.$error"
           v-model="merchant.paymentDetails.numberOfTerminals"
-          float-label="No of Terminals*"
+          label="No of Terminals*"
           placeholder="No of Terminals*"
         />
       </div>
@@ -71,7 +71,7 @@
           placeholder="Choose from the below*"
           color="grey-9"
           v-model="merchant.paymentDetails.rentalPlanCode"
-          float-label="Rental Plan*"
+          label="Rental Plan*"
           :options="rentalPlanSet"
         />
       </div>
@@ -80,7 +80,7 @@
           placeholder="Choose from the below*"
           color="grey-9"
           v-model="merchant.paymentDetails.rentalMode"
-          float-label="Rental Mode*"
+          label="Rental Mode*"
           :options="rentalModeOptions"
         />
       </div>
@@ -91,7 +91,7 @@
           @blur="$v.merchant.paymentDetails.serviceProvider.$touch"
           :error="$v.merchant.paymentDetails.serviceProvider.$error"
           v-model="merchant.paymentDetails.serviceProvider"
-          float-label="Service provider*"
+          label="Service provider*"
           :options="serviceProviderListSet"
         />
       </div>
@@ -102,7 +102,7 @@
           @blur="$v.merchant.paymentDetails.networkPreferred.$touch"
           :error="$v.merchant.paymentDetails.networkPreferred.$error"
           v-model="merchant.paymentDetails.networkPreferred"
-          float-label="Network provider*"
+          label="Network provider*"
           :options="networkProviderListSet"
         />
       </div>
@@ -118,7 +118,7 @@
             v-model="merchant.paymentDetails.rentalType"
             :val="item.value"
             :label="item.label"
-            @input="merchant.paymentDetails.gracePeriod = 0"
+            @update:model-value="merchant.paymentDetails.gracePeriod = 0"
           />
         </div>
       </div>
@@ -129,7 +129,7 @@
           color="grey-9"
           type="number"
           v-model="merchant.paymentDetails.gracePeriod"
-          float-label="Grace period*"
+          label="Grace period*"
           placeholder="Grace period*"
         />
       </div>
@@ -140,7 +140,7 @@
           @blur="$v.merchant.paymentDetails.advanceRentCollected.$touch"
           :error="$v.merchant.paymentDetails.advanceRentCollected.$error"
           v-model="merchant.paymentDetails.advanceRentCollected"
-          float-label="Advance Rent Collected*"
+          label="Advance Rent Collected*"
           placeholder="Advance Rent Collected*"
         />
       </div>
@@ -151,7 +151,7 @@
           @blur="$v.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$touch"
           :error="$v.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$error"
           v-model="merchant.paymentDetails.noOfMonthRentPaidInAdvance"
-          float-label="No. Of Month Rent Paid In Advance*"
+          label="No. Of Month Rent Paid In Advance*"
           placeholder="No. Of Month Rent Paid In Advance*"
         />
       </div>
@@ -177,7 +177,7 @@
           @blur="$v.merchant.paymentDetails.devicePrice.$touch"
           :error="$v.merchant.paymentDetails.devicePrice.$error"
           v-model="merchant.paymentDetails.devicePrice"
-          float-label="Device Price"
+          label="Device Price"
           placeholder="Device Price"
         />
       </div>
@@ -188,7 +188,7 @@
           @blur="$v.merchant.paymentDetails.otherCharges.$touch"
           :error="$v.merchant.paymentDetails.otherCharges.$error"
           v-model="merchant.paymentDetails.otherCharges"
-          float-label="Other Charges"
+          label="Other Charges"
           placeholder="Other Charges"
         />
       </div>
@@ -199,7 +199,7 @@
           @blur="$v.merchant.paymentDetails.totalAmountPaid.$touch"
           :error="$v.merchant.paymentDetails.totalAmountPaid.$error"
           v-model="merchant.paymentDetails.totalAmountPaid"
-          float-label="Total Amount Paid"
+          label="Total Amount Paid"
           placeholder="Total Amount Paid"
         />
       </div>

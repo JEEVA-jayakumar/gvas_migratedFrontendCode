@@ -12,7 +12,7 @@
                 :error="$v.formData.categoryType.$error"
                 class="text-weight-regular text-grey-8"
                 :options="leadSourceOptions"
-                float-label="*Notification Category"
+                label="*Notification Category"
                 placeholder="Notification Category"
               />
             </div>
@@ -21,7 +21,7 @@
                             clearable
                             color="grey-9"
                             v-model.trim="formData.tids"
-                            float-label="TID"
+                            label="TID"
                             placeholder="Search TID"
                           >
                             <q-autocomplete
@@ -40,7 +40,7 @@
                 :error="$v.formData.notificationText.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="*Notification Text"
+                label="*Notification Text"
               />
             </div>
             <div class="col-md-5">

@@ -21,7 +21,7 @@
               :error="$v.formData.deviceName.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Device Type"
+              label="Device Type"
               placeholder="Device Type"
             />
           </div>
@@ -34,9 +34,9 @@
                   @blur="$v.formData.colorCode.$touch"
                   :error="$v.formData.colorCode.$error"
                   popover
-                  float-label="Choose a role color"
+                  label="Choose a role color"
                   color="grey-9"
-                  @input="createDuplicateResult"
+                  @update:model-value="createDuplicateResult"
                 />
               </div>
               <div class="col-auto">
@@ -56,7 +56,7 @@
               :error="$v.formData.serialNumberLength.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Serial Number Length"
+              label="Serial Number Length"
               placeholder="Serial Number Length"
             />
           </div>

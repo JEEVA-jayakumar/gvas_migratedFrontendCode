@@ -64,8 +64,7 @@
               :rows="getAllRegionalInventorySerialNumbersByDevice"
               :columns="columnData"
               table-class="customTableClass shadow-0"
-              :filter="filterSearch"
-              :pagination="paginationControl"
+              :filter="filterSearch" v-model:pagination="paginationControl"
               row-key="index"
               :loading="tableAjaxLoading"
               color="primary"
@@ -78,7 +77,7 @@
                     color="grey-9"
                     v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search .."
+                    label="Search .."
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -89,7 +88,7 @@
                     color="grey-9"
                     v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search .."
+                    label="Search .."
                     class="q-mr-lg q-py-sm"
                   />-->
                   <downloadExcel
@@ -111,10 +110,10 @@
           <q-select
             v-model="inventoryData.region"
             color="grey-9"
-            @input="filterInventoryCountByRegion"
+            @update:model-value="filterInventoryCountByRegion"
             :options="inventoryData.regionFilterOptions"
             placeholder="Select"
-            float-label="Filter By Region Wise"
+            label="Filter By Region Wise"
           />
         </div>
       </div>
@@ -147,8 +146,8 @@
             color="grey-9"
             :options="inventoryData.SOFilterOptions"
             placeholder="Select"
-            float-label="Filter By SO Wise"
-            @input="filterInventoryCountBySO"
+            label="Filter By SO Wise"
+            @update:model-value="filterInventoryCountBySO"
           />
         </div>
       </div>

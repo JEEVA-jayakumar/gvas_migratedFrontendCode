@@ -8,31 +8,31 @@
           <q-card-main>
             <q-list no-border>
               <q-item>
-                <q-item-main>
+                <q-item-section>
                   <q-input
                     color="grey-9"
                     type="text"
                     v-model="formData.hierarchy"
                     @blur="$v.formData.hierarchy.$touch"
                     :error="$v.formData.hierarchy.$error"
-                    float-label="Enter New Hierarchy"
+                    label="Enter New Hierarchy"
                     placeholder="Add New Hierarchy"
                   />
-                </q-item-main>
+                </q-item-section>
               </q-item>
 
               <q-item>
-                <q-item-main>
+                <q-item-section>
                   <q-input
                     color="grey-9"
                     type="text"
                     v-model="formData.hierarchyCode"
                     @blur="$v.formData.hierarchyCode.$touch"
                     :error="$v.formData.hierarchyCode.$error"
-                    float-label="Enter New Hierarchy Code"
+                    label="Enter New Hierarchy Code"
                     placeholder="Add New Hierarchy Code"
                   />
-                </q-item-main>
+                </q-item-section>
               </q-item>
             </q-list>
           </q-card-main>

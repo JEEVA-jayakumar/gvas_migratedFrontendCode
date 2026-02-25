@@ -17,19 +17,19 @@
                 <q-item>
                 <q-item-section>
                   <q-select color="grey-9" v-model="formData.leadSourceDeviceVasMapping.leadSource" :options="dropDown.leadSourceOptions"
-                    float-label="Select lead source" placeholder="Lead source" />
+                    label="Select lead source" placeholder="Lead source" />
                 </q-item-section>
               </q-item>
               <q-item>
                 <q-item-section>
                   <q-select color="grey-9" v-model="formData.leadSourceDeviceVasMapping.device" :options="dropDown.deviceOptions"
-                    float-label="Select Device" placeholder="Select Device" />
+                    label="Select Device" placeholder="Select Device" />
                 </q-item-section>
               </q-item>
               <q-item>
                 <q-item-section>
                   <q-select multiple color="grey-9" v-model="formData.vasList" :options="dropDown.vasOptions"
-                    float-label="Select VAS" placeholder="Select VAS" />
+                    label="Select VAS" placeholder="Select VAS" />
                 </q-item-section>
               </q-item>
               </q-card-section>
@@ -140,8 +140,7 @@ import {
               label: item.sourceName
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           self.FETCH_DEVICES_DATA()
             .then(() => {
               return _.map(self.getAllDevicesInfo, item => {
@@ -151,8 +150,7 @@ import {
                 });
               });
             })
-        })
-        .then(() => {
+        }).then(() => {
           self.GET_ALL_VAS_DETAILS().then(() => {
             return _.map(self.getAllVasDetails, item => {
               console.log("GET_ALL_VAS_DETAILS, item: --->", JSON.stringify(item))

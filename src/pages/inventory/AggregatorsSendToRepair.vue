@@ -14,8 +14,8 @@
         <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
       <!--START: table title -->
       <!-- <div class="col-md-4">
-        <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
-          :options="aggregatorOptions" @input="getaggregator" />
+        <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
+          :options="aggregatorOptions" @update:model-value="getaggregator" />
       </div> -->
       <!--END: table title -->
     </div>
@@ -25,8 +25,7 @@
         :columns="columns"
         :rows="tableData"
         color="grey-9"
-        :filter="filterSearch"
-        :pagination="paginationControl"
+        :filter="filterSearch" v-model:pagination="paginationControl"
         :rows-per-page-options="[5,10,15,20,25]"
         :loading="toggleAjaxLoadFilter"
         @request="ajaxLoadAllLeadInfo2"
@@ -50,7 +49,7 @@
               <q-td auto-width key="serialNumber" :props="props">{{
                 props.row.serialNumber
               }}</q-td>
-              <q-td auto-width key="updated_at" :props="props">{{ props.row.updatedAt ==null? "NA" : props.row.updatedAt | moment("Do MMM Y") }}</q-td>
+              <q-td auto-width key="updated_at" :props="props">{{ $moment(props.row.updatedAt ==null? "NA" : props.row.updatedAt).format("Do MMM Y") }}</q-td>
               <q-td auto-width key="action" :props="props">
                 <q-btn
                   highlight
@@ -82,7 +81,7 @@
                 color="grey-9"
                 v-model="filterSearch"
                 placeholder="Type.."
-                float-label="Search Using Device Serial Number"
+                label="Search Using Device Serial Number"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -112,7 +111,7 @@
                 outline
                 color="grey-9"
                 icon="attach_file"
-                @click.native="fnOpenBulkModal"
+                @click="fnOpenBulkModal"
                 label="Bulk Upload"
               />
             </div>
@@ -363,8 +362,7 @@ export default {
       });
       // this.GET_ACTIVE_CREATED_AGGREGATORS_LIST(aggregators)
       // .then((response) => {
-      this.FETCH_AGGREGATORS_SEND_TO_REPAIR_DETAILS({ pagination, filter})
-        .then(res => {
+      this.FETCH_AGGREGATORS_SEND_TO_REPAIR_DETAILS({ pagination, filter}).then(res => {
            this.paginationControl = pagination;
 
           // we also set (or update) rowsNumber
@@ -407,8 +405,7 @@ export default {
           message: "Are you sure want to approve ?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: "purple-9",
@@ -425,8 +422,7 @@ export default {
                 message: "Successfully Approved!",
                 icon: "thumb_up"
               });
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",

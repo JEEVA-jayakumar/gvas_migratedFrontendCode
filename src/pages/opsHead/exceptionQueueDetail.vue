@@ -144,7 +144,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Debit < 2000 (%)"
+                          label="Debit < 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.debitLessthanAmount"
@@ -153,7 +153,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Debit < 2000 (%)"
+                          label="Debit < 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.debitGreaterthanAmount"
@@ -164,7 +164,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Std CC (%)"
+                          label="Std CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.stdCC"
@@ -173,7 +173,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Premium CC (%)"
+                          label="Premium CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.premiumCC"
@@ -184,7 +184,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Corp Pre CC (%)"
+                          label="Corp Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.corpCC"
@@ -193,7 +193,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Intl Pre CC (%)"
+                          label="Intl Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.intlCC"
@@ -204,7 +204,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Super Pre CC (%)"
+                          label="Super Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.superPremiumlCC"
@@ -270,7 +270,7 @@
                         <span
                           class="label capitalize"
                           v-if="getKycExceptionInfoById.leadVerificationStatus.length > 0"
-                        >{{sortArraysForExpectedSubmitDate(getKycExceptionInfoById.leadVerificationStatus) | moment("MMMM Do YYYY")}}</span>
+                        >{{ $moment(sortArraysForExpectedSubmitDate(getKycExceptionInfoById.leadVerificationStatus)).format("MMMM Do YYYY") }}</span>
                         <span class="label capitalize" v-else>NA</span>
                       </q-item-section>
                     </q-item>
@@ -438,7 +438,7 @@
                                   />
                                   <q-item-section
                                     class="text-body1"
-                                    :sublabel="documents[0].uploadedDocuments.length + 'Document(s)'"
+                                    :caption="documents[0].uploadedDocuments.length + 'Document(s)'"
                                     :label="documents[0].subDocumentType"
                                   />
                                   <q-item-section
@@ -516,7 +516,7 @@
                                   <q-item-section icon="apps"/>
                                   <q-item-section
                                     class="text-body1"
-                                    :sublabel="documents.length + 'Type(s)'"
+                                    :caption="documents.length + 'Type(s)'"
                                     :label="index"
                                   />
                                 </template>
@@ -539,7 +539,7 @@
                                         />
                                         <q-item-section
                                           class="text-body1"
-                                          :sublabel="subDocument.uploadedDocuments.length + 'Document(s)'"
+                                          :caption="subDocument.uploadedDocuments.length + 'Document(s)'"
                                           :label="subDocument.subDocumentType"
                                         />
                                         <q-item-section
@@ -884,8 +884,7 @@ export default {
       this.VERIFY_LEAD_DOCUMENTS({
         id: this.$route.params.id,
         params: []
-      })
-        .then(response => {
+      }).then(response => {
           this.toggleApproveLeadModal = !this.toggleApproveLeadModal;
           this.$q.loading.hide();
         })
@@ -945,8 +944,7 @@ export default {
       });
       this.VERIFY_REJECT_LEAD_DOCUMENTS({
         id: this.$route.params.id
-      })
-        .then(response => {
+      }).then(response => {
           this.toggleLeadRejectModal = !this.toggleLeadRejectModal;
           this.$q.loading.hide();
         })

@@ -7,36 +7,36 @@
               no-pane-border
               v-model="MarsApiOptionSelected"
               color="dark"
-              inverted
+              filled
               class="shadow-1"
             >
-              <q-tab name="DeviceModelApiSync" label="DeviceModel" slot="title" />
-              <q-tab name="CityApiSync" label="City" slot="title" />
-              <q-tab name="RegionApiSync" label="Region" slot="title" />
-              <q-tab name="RentalPlanApiSync" label="RentalPlan" slot="title" />
-              <q-tab name="LeadFormApiSync" label="LeadForm" slot="title" />
-              <q-tab name="StateApiSync" label="State" slot="title" />
-            
-  
-              <q-tab-panel name="DeviceModelApiSync">
+              <q-tab name="DeviceModelApiSync" label="DeviceModel" />
+              <q-tab name="CityApiSync" label="City" />
+              <q-tab name="RegionApiSync" label="Region" />
+              <q-tab name="RentalPlanApiSync" label="RentalPlan" />
+              <q-tab name="LeadFormApiSync" label="LeadForm" />
+              <q-tab name="StateApiSync" label="State" />
+</q-tabs>
+<q-tab-panels v-model="MarsApiOptionSelected" animated>
+<q-tab-panel name="DeviceModelApiSync">
                 <DeviceModelApiSync />
               </q-tab-panel>
-              <q-tab-panel name="CityApiSync">
+<q-tab-panel name="CityApiSync">
                 <CityApiSync />
               </q-tab-panel>
-              <q-tab-panel name="RegionApiSync">
+<q-tab-panel name="RegionApiSync">
                 <RegionApiSync />
               </q-tab-panel>
-              <q-tab-panel name="RentalPlanApiSync">
+<q-tab-panel name="RentalPlanApiSync">
                 <RentalPlanApiSync />
               </q-tab-panel>
-              <q-tab-panel name="LeadFormApiSync">
+<q-tab-panel name="LeadFormApiSync">
                 <LeadFormApiSync />
               </q-tab-panel>
-              <q-tab-panel name="StateApiSync">
+<q-tab-panel name="StateApiSync">
                 <StateApiSync />
               </q-tab-panel>
-            </q-tabs>
+</q-tab-panels>
           </div>
         </div>
       </div>

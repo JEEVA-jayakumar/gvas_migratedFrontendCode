@@ -19,16 +19,15 @@
           table-class="customTableClass"
           :rows="tableData"
           :columns="columns"
-          :filter="filter"
-          :pagination="paginationControl"
+          :filter="filter" v-model:pagination="paginationControl"
           row-key="name"
         >
           <!--START: table body modification -->
           <q-td v-slot:body-cell-createdAt="props" :props="props">
-            <span class="label">{{props.row.createdAt | moment("Do MMM Y")}}</span>
+            <span class="label">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</span>
           </q-td>
           <q-td v-slot:body-cell-submitteSATDate="props" :props="props">
-            <span class="label">{{props.row.submitteSATDate | moment("Do MMM Y")}}</span>
+            <span class="label">{{ $moment(props.row.submitteSATDate).format("Do MMM Y") }}</span>
           </q-td>
           <q-td v-slot:body-cell-applicationNumber="props" :props="props">
             <span class="label capitalize">{{props.row.applicationNumber}}</span>
@@ -37,9 +36,9 @@
             <span class="label capitalize">{{props.row.leadName}}</span>
           </q-td>
           <q-td
-            slot="body-cell-leadNumber"
+            v-slot:body-cell-leadNumber="props"
             class="cursor-pointer"
-            @click.native="toggleLeadInformation(props.row)"
+            @click="toggleLeadInformation(props.row)"
             slot-scope="props"
             :props="props"
           >
@@ -80,13 +79,20 @@
                 separator
                 color="grey-9"
                 placeholder="Type.."
-                float-label="Search by Merchant Name, Lead ID"
+                label="Search by Merchant Name, Lead ID"
                 class="q-mr-lg q-py-sm"
               />
             </div>
             <!-- <div class="col-3">
-              <q-input modal outline type="date" v-model="model" placeholder="Select Date" class="q-mr-lg q-py-sm " float-label="Filter By"
-                color="grey-9" />
+              <q-input filled v-model="model" label="Filter By" color="grey-9">
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="model" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
             </div>-->
             <!-- <div class="col-md-4">
               <downloadExcel :rows="excelTableData" :fields="excelColumnData.field" name="Merchant Transaction Level.xls">

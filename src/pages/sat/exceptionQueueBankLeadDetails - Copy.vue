@@ -133,31 +133,31 @@
                                 <q-list no-border class="no-padding">
                                     <q-item class="no-padding q-py-sm">
                                         <q-item-section>
-                                            <q-input color="grey-9" float-label="Debit < 2000 (%)" readonly class="no-pointer-events" v-model="formData.shortLead.debitLessthanAmount" />
+                                            <q-input color="grey-9" label="Debit < 2000 (%)" readonly class="no-pointer-events" v-model="formData.shortLead.debitLessthanAmount" />
                                         </q-item-section>
                                         <q-item-section>
-                                            <q-input color="grey-9" float-label="Debit < 2000 (%)" readonly class="no-pointer-events" v-model="formData.shortLead.debitGreaterthanAmount" />
-                                        </q-item-section>
-                                    </q-item>
-                                    <q-item class="no-padding q-py-sm">
-                                        <q-item-section>
-                                            <q-input color="grey-9" float-label="Std CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.stdCC" /> 
-                                        </q-item-section>
-                                        <q-item-section>
-                                            <q-input color="grey-9" float-label="Premium CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.premiumCC" />
+                                            <q-input color="grey-9" label="Debit < 2000 (%)" readonly class="no-pointer-events" v-model="formData.shortLead.debitGreaterthanAmount" />
                                         </q-item-section>
                                     </q-item>
                                     <q-item class="no-padding q-py-sm">
                                         <q-item-section>
-                                            <q-input color="grey-9" float-label="Corp Pre CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.corpCC" />
+                                            <q-input color="grey-9" label="Std CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.stdCC" />
                                         </q-item-section>
                                         <q-item-section>
-                                            <q-input color="grey-9" float-label="Intl Pre CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.intlCC" />
+                                            <q-input color="grey-9" label="Premium CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.premiumCC" />
                                         </q-item-section>
                                     </q-item>
                                     <q-item class="no-padding q-py-sm">
                                         <q-item-section>
-                                            <q-input color="grey-9" float-label="Super Pre CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.superPremiumlCC" />
+                                            <q-input color="grey-9" label="Corp Pre CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.corpCC" />
+                                        </q-item-section>
+                                        <q-item-section>
+                                            <q-input color="grey-9" label="Intl Pre CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.intlCC" />
+                                        </q-item-section>
+                                    </q-item>
+                                    <q-item class="no-padding q-py-sm">
+                                        <q-item-section>
+                                            <q-input color="grey-9" label="Super Pre CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.superPremiumlCC" />
                                         </q-item-section>
                                     </q-item>
                                     <q-item class="items-start q-pa-sm" v-if="formData.shortLead.posEnable">
@@ -256,7 +256,7 @@
                                                         <q-expansion-item separator indent icon-toggle opened group="closeOnOpen" multiline class="full-width">
                                                             <template slot="header">
                                                                 <q-item-section icon="attach_file" />
-                                                                <q-item-section class="text-body1" :sublabel="documents[0].uploadedDocuments.length + 'Document(s)'" :label="index" />
+                                                                <q-item-section class="text-body1" :caption="documents[0].uploadedDocuments.length + 'Document(s)'" :label="index" />
                                                             </template>
                                                             <div v-for="(item,subIndex) in documents[0].uploadedDocuments" :key="subIndex" class="q-py-sm">
                                                                 <div v-if="item.mimeType.includes('application')">
@@ -285,7 +285,7 @@
                                                             <template slot="header">
                                                                 <q-item-section  icon="apps" />
                                                                 <q-item-section class="text-body1"
-                                                                :sublabel="documents.length + 'Type(s)'"
+                                                                :caption="documents.length + 'Type(s)'"
                                                                  :label="index" />
                                                             </template>
                                                             <div class="row items-center full-width" v-for="(subDocument,subIndex) in documents" :key="subIndex">
@@ -294,7 +294,7 @@
                                                                         <template slot="header">
                                                                             <q-item-section icon="attach_file" />
                                                                             <q-item-section class="text-body1"
-                                                                            :sublabel="subDocument.uploadedDocuments.length + 'Document(s)'"
+                                                                            :caption="subDocument.uploadedDocuments.length + 'Document(s)'"
                                                                             :label="subDocument.subDocumentType" />
                                                                         </template>
                                                                         <div v-for="(item,subIndex) in subDocument.uploadedDocuments" :key="subIndex" class="q-py-sm">

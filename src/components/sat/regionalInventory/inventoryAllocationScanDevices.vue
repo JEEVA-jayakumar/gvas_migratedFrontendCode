@@ -25,9 +25,9 @@
           <!--START: table title -->
             <div class="col-md-3">
                 <q-select
-                  @input="fnSetDevicesByDeviceId"
+                  @update:model-value="fnSetDevicesByDeviceId"
                   v-model="formData.device_type"
-                  float-label="Select Device Type"
+                  label="Select Device Type"
                   radio
                   color="grey-9"
                   :options="deviceOptions"

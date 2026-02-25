@@ -21,7 +21,7 @@
                 <q-select
                 @blur="$v.formData.device.$touch"   
                 :error="$v.formData.device.$error" 
-                float-label="Select a device"
+                label="Select a device"
                 placeholder="Available devices"
                 v-model="formData.device"
                 :options="fnDeviceTypes(propDeviceTypes)"
@@ -55,7 +55,7 @@
                 :error="$v.formData.serialNumber.$error" 
                 class="text-weight-regular text-grey-8" 
                 color="grey-9" 
-                float-label="Enter Serial Number Manually" 
+                label="Enter Serial Number Manually"
                 placeholder="Serial Number" 
                 />
               </div>

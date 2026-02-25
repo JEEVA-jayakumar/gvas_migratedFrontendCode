@@ -67,7 +67,7 @@
                     />
                     <q-item-section
                       class="text-body1"
-                      :sublabel="documents[0].uploadedDocuments.length + 'Document(s)'"
+                      :caption="documents[0].uploadedDocuments.length + 'Document(s)'"
                       :label="index"
                     />
                     <q-item-section v-if="documents[0].documentVerifiedStatus == 2" right>
@@ -144,7 +144,7 @@
                     <q-item-section icon="apps" />
                     <q-item-section
                       class="text-body1"
-                      :sublabel="documents.length + 'Type(s)'"
+                      :caption="documents.length + 'Type(s)'"
                       :label="index"
                     />
                     <q-item-section v-if="fnToggleVerificationButtonStatus(documents)" right>
@@ -191,7 +191,7 @@
                           />
                           <q-item-section
                             class="text-body1"
-                            :sublabel="subDocument.uploadedDocuments.length + 'Document(s)'"
+                            :caption="subDocument.uploadedDocuments.length + 'Document(s)'"
                             :label="subDocument.subDocumentType"
                           />
                           <q-item-section v-if="subDocument.documentVerifiedStatus == 2" right>

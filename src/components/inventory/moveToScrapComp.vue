@@ -25,7 +25,7 @@
             align="left"
             value=""
             v-model="remarks"
-            @input="fnMapRemarks"
+            @update:model-value="fnMapRemarks"
           />
         </div>
         <q-btn
@@ -115,8 +115,7 @@ export default {
           message: "Are you sure Move to Scrap ?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: "purple-9",
@@ -134,8 +133,7 @@ export default {
                 message: "Successfully  Moved!",
                 icon: "thumb_up"
               });
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",

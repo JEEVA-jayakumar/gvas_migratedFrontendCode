@@ -11,11 +11,12 @@
           default
           color="dark"
           name="tab-1"
-          slot="title"
           label="Create Bulk Ticket "
         />
-        <q-tab color="dark" name="tab-2" slot="title" label="Close Bulk Ticket" />
-        <q-tab-panel name="tab-1">
+        <q-tab color="dark" name="tab-2" label="Close Bulk Ticket" />
+</q-tabs>
+<q-tab-panels v-model="activeTab" animated>
+<q-tab-panel name="tab-1">
           <div class="q-pa-md">
             <div class="row text-center justify-center">
               <div class="col-md-12 q-py-sm bottom-border custom-background">
@@ -88,7 +89,7 @@
             </div>
           </div>
         </q-tab-panel>
-        <q-tab-panel name="tab-2">
+<q-tab-panel name="tab-2">
           <div class="q-pa-md">
             <div class="row text-center justify-center">
               <div class="col-md-12 q-py-sm bottom-border custom-background">
@@ -161,7 +162,7 @@
             </div>
           </div>
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
     </div>
     <div
       v-if="toggleAjaxLoadFilter || toggleAjaxLoadFilter1"

@@ -16,7 +16,7 @@
               <q-input
                 color="grey-9"
                 v-model="formData.podNumber"
-                float-label="Enter POD Number"
+                label="Enter POD Number"
                 placeholder="POD Number"
               />
               <br>
@@ -26,9 +26,8 @@
               clearable
               type="textarea"
               color="red-12"
-              float-label="Enter Remarks"
+              label="Enter Remarks"
               placeholder="Enter Remarks"
-               label="Textarea with shadow text"
             />
             </div>
             <div class="col-md-12 col-md-6 q-pt-md group" align="right">

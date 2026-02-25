@@ -30,10 +30,10 @@
               <div class="col-sm-4">
                 <q-input
                   v-model="selectedDate"
-                  float-label="From Date"
+                  label="From Date"
                   color="purple-9"
                   :max="maxDate"
-                  @input="onDateChange"
+                  @update:model-value="onDateChange"
                   type="datetime"
                   format24h
                 />

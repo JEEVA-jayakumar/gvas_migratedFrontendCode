@@ -22,7 +22,7 @@
               :error="$v.formData.merchantTypeName.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Merchant Type"
+              label="Merchant Type"
               placeholder="Merchant Type"
               @keyup.enter="submitMerchantTypeData(formData)"
             />
@@ -34,7 +34,7 @@
               :error="$v.formData.marsAgreementId.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Mars Agreement Id"
+              label="Mars Agreement Id"
               placeholder="Mars Agreement Id"
               @keyup.enter="submitMerchantTypeData(formData)"
             />

@@ -9,14 +9,12 @@
             no-pane-border
             v-model="inventoryOptionSelected"
             color="dark"
-            inverted
+            filled
             class="shadow-1"
           >
-          
-            <q-tab name="AllocatedDevices" label="Allocated Devices" slot="title" />
-            <q-tab name="UnAllocatedDevices" label="UnAllocated Devices" slot="title" /> 
-            <q-tab name="FaultyDevices" label="Faulty Devices" slot="title" />
-            
+            <q-tab name="AllocatedDevices" label="Allocated Devices" />
+            <q-tab name="UnAllocatedDevices" label="UnAllocated Devices" />
+            <q-tab name="FaultyDevices" label="Faulty Devices" />
               <!-- <div class="col-auto">
             <q-btn
               @click="downloadInventorySummaryInfoMenu()"
@@ -27,24 +25,20 @@
               size="md"
             />
           </div> -->
-
-        
-           
-            
-            <q-tab-panel name="AllocatedDevices">
+</q-tabs>
+<q-tab-panels v-model="inventoryOptionSelected" animated>
+<q-tab-panel name="AllocatedDevices">
               <AllocatedDevices @emittedForTotalSerialNumbers="this.fnAjaxAllocatedDevice" />
             </q-tab-panel>
-
-            <q-tab-panel name="UnAllocatedDevices">
+<q-tab-panel name="UnAllocatedDevices">
               <UnAllocatedDevices @emittedForTotalSerialNumbers="fnAjaxFetchAllDeviceDetailsWithCount" />
             </q-tab-panel>
-
-            <q-tab-panel name="FaultyDevices">
+<q-tab-panel name="FaultyDevices">
               <FaultyDevices
                 @fetchDeviceDetailsWithCount="fnAjaxFetchAllDeviceDetailsWithCount"
               />
             </q-tab-panel>
-                       </q-tabs>
+</q-tab-panels>
         </div>
       </div>
     </div>

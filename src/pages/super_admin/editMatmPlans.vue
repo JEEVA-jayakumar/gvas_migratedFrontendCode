@@ -11,7 +11,7 @@
               :error="$v.formData.plan.$error"
               @blur="$v.formData.plan.$touch"
               v-model.trim="formData.plan"
-              float-label="Name of the Plan*"
+              label="Name of the Plan*"
               :options="getinstitutionCode"
                @selected="selectedPlan"
             />
@@ -28,7 +28,7 @@
                 :error="$v.formData.planName.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Name of the Plan*"
+                label="Name of the Plan*"
                 placeholder="Name of the Plan*"
               />
             </div>
@@ -39,7 +39,7 @@
               v-model.trim="formData.incentivePercentage"
               @blur="$v.formData.incentivePercentage.$touch"
               :error="$v.formData.incentivePercentage.$error"
-              float-label="Incentive Percentage *"
+              label="Incentive Percentage *"
               color="grey-9"
             />
           </div>
@@ -50,7 +50,7 @@
               v-model.trim="formData.minTxnVal "
               @blur="$v.formData.minTxnVal.$touch"
               :error="$v.formData.minTxnVal.$error"
-              float-label="Minimum Transaction Value*"
+              label="Minimum Transaction Value*"
               color="grey-9"
              
             />
@@ -61,7 +61,7 @@
               v-model.trim="formData.maxIncPerTxn"
               @blur="$v.formData.maxIncPerTxn.$touch"
               :error="$v.formData.maxIncPerTxn.$error"
-              float-label="Maximum Incentive Per Transaction *"
+              label="Maximum Incentive Per Transaction *"
               color="grey-9"
              
             />

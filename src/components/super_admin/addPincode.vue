@@ -21,7 +21,7 @@
               :error="$v.formData.pincode.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Pincode*"
+              label="Pincode*"
               placeholder="Pincode*"
             />
           </div>
@@ -32,7 +32,7 @@
               :error="$v.formData.stateName.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="State name"
+              label="State name"
               placeholder="State name"
             />
           </div>
@@ -43,7 +43,7 @@
               :error="$v.formData.cityName.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="City name"
+              label="City name"
               placeholder="City name"
             />
           </div>

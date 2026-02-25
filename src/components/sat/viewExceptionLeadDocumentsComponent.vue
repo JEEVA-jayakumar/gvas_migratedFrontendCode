@@ -64,7 +64,7 @@
                     <q-item-section icon="attach_file"/>
                     <q-item-section
                       class="text-body1"
-                      :sublabel="documents[0].uploadedDocuments.length + 'Document(s)'"
+                      :caption="documents[0].uploadedDocuments.length + 'Document(s)'"
                       :label="index"
                     />
                     <q-item-section
@@ -135,7 +135,7 @@
                     <q-item-section icon="apps"/>
                     <q-item-section
                       class="text-body1"
-                      :sublabel="documents.length + 'Type(s)'"
+                      :caption="documents.length + 'Type(s)'"
                       :label="index"
                     />
                   </template>
@@ -156,7 +156,7 @@
                           <q-item-section icon="attach_file"/>
                           <q-item-section
                             class="text-body1"
-                            :sublabel="subDocument.uploadedDocuments.length + 'Document(s)'"
+                            :caption="subDocument.uploadedDocuments.length + 'Document(s)'"
                             :label="subDocument.subDocumentType"
                           />
                           <q-item-section

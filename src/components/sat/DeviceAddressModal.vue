@@ -15,11 +15,11 @@
         <!-- <pre>{{stateInformation}}</pre> -->
         <div>
           <q-input @blur="$v.formData.marsDeviceAddress.deviceAddress.$touch"      
-          :error="$v.formData.marsDeviceAddress.deviceAddress.$error"  color="grey-9" v-model="formData.marsDeviceAddress.deviceAddress" float-label="Address" placeholder="Address" />
+          :error="$v.formData.marsDeviceAddress.deviceAddress.$error"  color="grey-9" v-model="formData.marsDeviceAddress.deviceAddress" label="Address" placeholder="Address" />
         </div>
         <div>
           <q-input :error="$v.formData.marsDeviceAddress.pincode.$error" 
-          color="grey-9" v-model="formData.marsDeviceAddress.pincode" float-label="Pincode" placeholder="Pincode">
+          color="grey-9" v-model="formData.marsDeviceAddress.pincode" label="Pincode" placeholder="Pincode">
             <q-autocomplete
             @search="pincodeSearch"
             :debounce="500"
@@ -29,10 +29,10 @@
           </q-input>
         </div>
         <div>
-         <q-input color="grey-9" disable v-model="formData.marsDeviceAddress.state" float-label="State" placeholder="State" />
+         <q-input color="grey-9" disable v-model="formData.marsDeviceAddress.state" label="State" placeholder="State" />
         </div>
         <div>
-          <q-input color="grey-9" disable v-model="formData.marsDeviceAddress.city" float-label="City" placeholder="City" />
+          <q-input color="grey-9" disable v-model="formData.marsDeviceAddress.city" label="City" placeholder="City" />
         </div>
         <div>
           <q-radio color="grey-9" v-if="[0,1].includes(selectedLeadItems.length)" v-model="formData.action" :val="1" label="Change in current occurrence only" />

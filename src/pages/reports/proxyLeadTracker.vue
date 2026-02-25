@@ -11,56 +11,56 @@
           <q-radio
             color="grey-9"
             v-model="formData.option"
-            @input="calculateDate"
+            @update:model-value="calculateDate"
             :val="1"
             label="Past 6 months"
           />
           <q-radio
             color="grey-9"
             v-model="formData.option"
-            @input="calculateDate"
+            @update:model-value="calculateDate"
             :val="2"
             label="Past 3 months"
           />
           <q-radio
             color="grey-9"
             v-model="formData.option"
-            @input="calculateDate"
+            @update:model-value="calculateDate"
             :val="3"
             label="Past 1 month"
           />
           <q-radio
             color="grey-9"
             v-model="formData.option"
-            @input="calculateDate"
+            @update:model-value="calculateDate"
             :val="4"
             label="Past 4 weeks"
           />
           <q-radio
             color="grey-9"
             v-model="formData.option"
-            @input="calculateDate"
+            @update:model-value="calculateDate"
             :val="5"
             label="Past 3 weeks"
           />
           <q-radio
             color="grey-9"
             v-model="formData.option"
-            @input="calculateDate"
+            @update:model-value="calculateDate"
             :val="6"
             label="Past 2 weeks"
           />
           <q-radio
             color="grey-9"
             v-model="formData.option"
-            @input="calculateDate"
+            @update:model-value="calculateDate"
             :val="7"
             label="Past 1 week"
           />
           <q-radio
             color="grey-9"
             v-model="formData.option"
-            @input="calculateDate"
+            @update:model-value="calculateDate"
             :val="8"
             label="Today"
           />
@@ -68,20 +68,24 @@
       </div>
       <div class="row q-pa-md">
         <div class="col-6 group">
-          <q-input
-            type="date"
-            modal
-            v-model="formData.from"
-            color="grey-9"
-            float-label="Start date"
-          />
-          <q-input
-            type="date"
-            modal
-            v-model="formData.to"
-            color="grey-9"
-            float-label="End date"
-          />
+          <q-input filled v-model="formData.from" label="Start date" color="grey-9">
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="formData.from" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
+          <q-input filled v-model="formData.to" label="End date" color="grey-9">
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="formData.to" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
         </div>
         <div class="col-12 group">
           <q-btn class="common-dark-blue" @click="downloadReport()" label="Download"/>

@@ -20,8 +20,8 @@
                     color="grey-9"
                     v-model="formData.leadSource"
                     :options="dropDown.leadSourceOptions"
-                    float-label="Select lead source"
-                    @input="fnleadSource"
+                    label="Select lead source"
+                    @update:model-value="fnleadSource"
                   />
                 </div>
                 <div class="col-md-12">
@@ -29,8 +29,8 @@
                     color="grey-9"
                     v-model="formData.device"
                     :options="dropDown.deviceOptions"
-                    float-label="Select device"
-                    @input="fnDevice"
+                    label="Select device"
+                    @update:model-value="fnDevice"
                   />
                 </div>
                 <div class="col-md-12">
@@ -38,8 +38,8 @@
                     color="grey-9"
                     v-model="formData.marsDeviceModel"
                     :options="dropDown.marsDeviceOptions"
-                    float-label="Mars Device Model"
-                    @input="fnMarsDeviceModel"
+                    label="Mars Device Model"
+                    @update:model-value="fnMarsDeviceModel"
                   />
                 </div>
                 <div class="col-md-12">
@@ -47,9 +47,9 @@
                     color="grey-9"
                     v-model="formData.plan"
                     :options="dropDown.planOptions"
-                    float-label="Select plan"
+                    label="Select plan"
                     placeholder="Plan"
-                    @input="fnCategoryBasedRental"
+                    @update:model-value="fnCategoryBasedRental"
                   />
                 </div>
                 <div class="col-md-12">
@@ -58,7 +58,7 @@
                     type="number"
                     v-model="formData.setupFees"
                     placeholder="Setup fee"
-                    float-label="Enter Setup fee"
+                    label="Enter Setup fee"
                   />
                 </div>
                 <div class="col-md-12">
@@ -67,7 +67,7 @@
                     type="number"
                     v-model="formData.monthlyFees"
                     placeholder="Recurring fee"
-                    float-label="Enter recurring fee"
+                    label="Enter recurring fee"
                   />
                 </div>
               </q-list>
@@ -244,9 +244,7 @@ export default {
               value: JSON.stringify(item)
             });
           });
-        })
-
-        .then(() => {
+        }).then(() => {
           self.LEAD_SOURCE_ACTIVE_LIST(leadSource).then(() => {
             return _.map(self.getActiveLeadSource, item => {
               console.log("Drop down values : --- : ", JSON.stringify(item))
@@ -256,8 +254,7 @@ export default {
               });
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           self.PLAN_ACTIVE_LIST(plan).then(() => {
             return _.map(self.getActivePlan, item => {
               self.dropDown.planOptions.push({

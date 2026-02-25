@@ -9,8 +9,7 @@
         :propToggleLeadInformationPop="propToggleLeadInformation" @closeLeadInformation="toggleLeadInformation" />
       <!-- content -->
       <!--START: table lead validation -->
-      <q-table table-class="customTableClass" :columns="columns" :rows="tableData" color="grey-9" :filter="filterSearch"
-        :pagination="paginationControl" :rows-per-page-options="[5, 10, 15, 20, 25]"
+      <q-table table-class="customTableClass" :columns="columns" :rows="tableData" color="grey-9" :filter="filterSearch" v-model:pagination="paginationControl" :rows-per-page-options="[5, 10, 15, 20, 25]"
         :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
         <q-td v-slot:body-cell-updated_date="props" :props="props">{{
           props.row.updated_date == null
@@ -52,7 +51,7 @@
           <!--START: table filter,search -->
           <div class="col-md-5">
             <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.."
-              float-label="Search Using POD Number" class="q-mr-lg q-py-sm" />
+              label="Search Using POD Number" class="q-mr-lg q-py-sm" />
           </div>
           <!--<div class="col-md-5">
            
@@ -282,8 +281,7 @@ export default {
           message: "Are you sure want to Update?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: "purple-9",
@@ -345,8 +343,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_PHONEPE_SPARE_PARTS_POD_LIST_INVENTORY_DETAILS({ pagination, filter })
-        .then(res => {
+      this.FETCH_PHONEPE_SPARE_PARTS_POD_LIST_INVENTORY_DETAILS({ pagination, filter }).then(res => {
           this.paginationControl = pagination;
 
           // we also set (or update) rowsNumber
@@ -366,8 +363,7 @@ export default {
           );
           // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
-        })
-        .catch(() => {
+        }).catch(() => {
           this.$q.loading.hide();
         });
     },

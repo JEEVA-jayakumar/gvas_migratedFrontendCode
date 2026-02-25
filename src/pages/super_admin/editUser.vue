@@ -28,7 +28,7 @@
             <div class="col-md-6">
               <q-select :disabled="formData.disableRegionSelection"
                 :class="[formData.disableRegionSelection ? 'no-pointer-events' : '']" color="grey-9"
-                float-label="Choose a region" v-model="formData.addUserDetails.region.id"
+                label="Choose a region" v-model="formData.addUserDetails.region.id"
                 :error="$v.formData.addUserDetails.region.id.$error" @blur="$v.formData.addUserDetails.region.id.$touch"
                 :options="getAllRegionsData" />
             </div>
@@ -36,34 +36,34 @@
             <div class="col-md-6">
               <q-input v-model.trim="formData.addUserDetails.name" @blur="$v.formData.addUserDetails.name.$touch"
                 :error="$v.formData.addUserDetails.name.$error" class="text-weight-regular text-grey-8" color="grey-9"
-                float-label="*Name" placeholder="Name" />
+                label="*Name" placeholder="Name" />
             </div>
 
             <div class="col-md-6">
               <q-input v-model.trim="formData.addUserDetails.employeeID"
                 @blur="$v.formData.addUserDetails.employeeID.$touch"
                 :error="$v.formData.addUserDetails.employeeID.$error" class="text-weight-regular text-grey-8"
-                color="grey-9" float-label="*Employee ID" placeholder="Employee ID" />
+                color="grey-9" label="*Employee ID" placeholder="Employee ID" />
             </div>
 
             <div class="col-md-6">
               <q-input disable v-model.trim="formData.addUserDetails.email" class="text-weight-regular text-grey-8"
                 color="grey-9" @blur="$v.formData.addUserDetails.email.$touch"
-                :error="$v.formData.addUserDetails.email.$error" float-label="*Email" placeholder="Email" />
+                :error="$v.formData.addUserDetails.email.$error" label="*Email" placeholder="Email" />
             </div>
 
             <div class="col-md-6">
               <q-input v-model.trim="formData.addUserDetails.contactNumber"
                 @blur="$v.formData.addUserDetails.contactNumber.$touch"
                 :error="$v.formData.addUserDetails.contactNumber.$error" class="text-weight-regular text-grey-8"
-                color="grey-9" float-label="*Contact Number" placeholder="Contact Number" />
+                color="grey-9" label="*Contact Number" placeholder="Contact Number" />
             </div>
 
             <div class="col-md-6">
               <q-input v-model.trim="formData.addUserDetails.alternateContactNumber"
                 @blur="$v.formData.addUserDetails.alternateContactNumber.$touch"
                 :error="$v.formData.addUserDetails.alternateContactNumber.$error"
-                class="text-weight-regular text-grey-8" color="grey-9" float-label="Alt Contact Number"
+                class="text-weight-regular text-grey-8" color="grey-9" label="Alt Contact Number"
                 placeholder="Alt Contact Number" />
             </div>
 
@@ -71,35 +71,35 @@
               <q-input v-model.trim="formData.addUserDetails.userAddress"
                 @blur="$v.formData.addUserDetails.userAddress.$touch"
                 :error="$v.formData.addUserDetails.userAddress.$error" class="text-weight-regular text-grey-8"
-                color="grey-9" float-label="*Address" placeholder="Address" />
+                color="grey-9" label="*Address" placeholder="Address" />
             </div>
 
             <div class="col-md-6">
               <q-input type="number" :error="$v.formData.addUserDetails.pincodeTemp.$error" clearable
                 @clear="fnGetCityAndState" color="grey-9" v-model.trim="formData.addUserDetails.pincodeTemp"
-                float-label="Pincode" placeholder="Pincode">
+                label="Pincode" placeholder="Pincode">
                 <q-autocomplete @search="pincodeSearch" :debounce="500" :min-characters="1"
                   @selected="pincodeSelected" />
               </q-input>
             </div>
             <div class="col-md-6">
               <q-input disable v-model.trim="formData.addUserDetails.state" class="text-weight-regular text-grey-8"
-                color="grey-9" float-label="*State" placeholder="State" />
+                color="grey-9" label="*State" placeholder="State" />
             </div>
 
             <div class="col-md-6">
               <q-input disable v-model.trim="formData.addUserDetails.city" class="text-weight-regular text-grey-8"
-                color="grey-9" float-label="*City" placeholder="City" />
+                color="grey-9" label="*City" placeholder="City" />
             </div>
           </div>
           <div class="row group" v-for="(item, index) in getAllHierarchiesAndRolesData" :key="index">
             <div class="col">
-              <q-checkbox color="purple-9" v-model="item.checked" @input="getRoleCheckedItem(item)"
+              <q-checkbox color="purple-9" v-model="item.checked" @update:model-value="getRoleCheckedItem(item)"
                 :label="item.hierarchy" />
             </div>
             <div class="col">
               <q-select :disable="!item.checked" color="grey-9" placeholder="Choose a role" v-model="item.roleChecked"
-                :options="item.roles" @input="getPredecessorList(item)" />
+                :options="item.roles" @update:model-value="getPredecessorList(item)" />
             </div>
             <div class="col">
               <q-select :disable="!item.checked" disaply-value color="grey-9"
@@ -110,7 +110,7 @@
           <div v-if="formData.showBankOpsList" class="row gutter-sm q-py-sm">
             <!-- <pre>{{formData.addUserDetails.banksList}}</pre> -->
             <div class="col-md-6">
-              <q-select multiple color="grey-9" float-label="Choose bank (can be multiple)"
+              <q-select multiple color="grey-9" label="Choose bank (can be multiple)"
                 v-model="formData.addUserDetails.banksList" :error="$v.formData.addUserDetails.banksList.$error"
                 @blur="$v.formData.addUserDetails.banksList.$touch" :options="leadSourceOptions" />
             </div>
@@ -131,26 +131,26 @@
           <div v-if="this.getAllUserByUserIdData.roles[0].hierarchy.hierarchyCode == 'SC'"
             class="row gutter-sm q-py-sm">
             <div class="col-md-6">
-              <q-input float-label="Please enter authMethod....."
+              <q-input label="Please enter authMethod....."
                 v-model="formData.addUserDetails.serviceReqClients.authMethod"
                 :error="$v.formData.addUserDetails.serviceReqClients.authMethod.$error"
                 @blur="$v.formData.addUserDetails.serviceReqClients.authMethod.$touch" />
 
             </div>
             <div class="col-md-6">
-              <q-input float-label="Please enter authKey....."
+              <q-input label="Please enter authKey....."
                 v-model="formData.addUserDetails.serviceReqClients.authKey"
                 :error="$v.formData.addUserDetails.serviceReqClients.authKey.$error"
                 @blur="$v.formData.addUserDetails.serviceReqClients.authKey.$touch" />
             </div>
             <div class="col-md-6">
-              <q-input float-label="Please enter authValue....."
+              <q-input label="Please enter authValue....."
                 v-model="formData.addUserDetails.serviceReqClients.authValue"
                 :error="$v.formData.addUserDetails.serviceReqClients.authValue.$error"
                 @blur="$v.formData.addUserDetails.serviceReqClients.authValue.$touch" />
             </div>
             <div class="col-md-6">
-              <q-input float-label="Please enter callBackUrl....."
+              <q-input label="Please enter callBackUrl....."
                 v-model="formData.addUserDetails.serviceReqClients.callBackUrl"
                 :error="$v.formData.addUserDetails.serviceReqClients.callBackUrl.$error"
                 @blur="$v.formData.addUserDetails.serviceReqClients.callBackUrl.$touch" />

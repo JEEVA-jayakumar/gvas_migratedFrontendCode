@@ -6,13 +6,12 @@
       <!--START: table lead validation -->
       <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-md-4">
-          <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
-            :options="aggregatorOptions" @input="getaggregator" />
+          <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
+            :options="aggregatorOptions" @update:model-value="getaggregator" />
         </div>
       </div> -->
 
-      <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filter"
-        :pagination="paginationControl" :rows-per-page-options="[5, 10, 15, 20, 25]" row-key="name"
+      <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filter" v-model:pagination="paginationControl" :rows-per-page-options="[5, 10, 15, 20, 25]" row-key="name"
         :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
         <q-td v-slot:body-cell-action="props" :props="props">
           <div class="row no-wrap no-padding">
@@ -20,28 +19,19 @@
               @click="fnShowEditRegion(props.row)" flat class="text-light-blue"></q-btn>
           </div>
         </q-td>
-        <q-td v-slot:body-cell-createdAt="props" :props="props">{{
-          props.row.createdAt | moment("Do MMM Y")
-        }}</q-td>
-        <q-td v-slot:body-cell-receivedAt="props" :props="props">{{
-          props.row.receivedAt | moment("Do MMM Y")
-        }}</q-td>
+        <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
+        <q-td v-slot:body-cell-receivedAt="props" :props="props">{{ $moment(props.row.receivedAt).format("Do MMM Y") }}</q-td>
 
         <q-td v-slot:body-cell-receivedAt="props" :props="props">{{
           props.row.receivedAt == null ? "NA" :
             props.row.receivedAt | moment("Do MMM Y")
         }}</q-td>
-        <q-td v-slot:body-cell-DeviceList="props" :props="props">{{
-          props.row.createdAt | moment("Do MMM Y")
-        }}</q-td>
-        <q-td v-slot:body-cell-ModifyDate="props" :props="props">{{
-          props.row.device.modifyDate |
-            moment("Do MMM Y")
-        }}</q-td>
+        <q-td v-slot:body-cell-DeviceList="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
+        <q-td v-slot:body-cell-ModifyDate="props" :props="props">{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</q-td>
         <template v-slot:top="props">
           <div class="col-md-5">
             <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
-            float-label="Search By Pod Number, BP Region" class="q-mr-lg q-py-sm" />
+            label="Search By Pod Number, BP Region" class="q-mr-lg q-py-sm" />
           </div>
           <div class="col-md-6">
 
@@ -251,8 +241,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_AGGREGATOR_POD_LIST({ pagination, filter})
-        .then(res => {
+      this.FETCH_AGGREGATOR_POD_LIST({ pagination, filter}).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 

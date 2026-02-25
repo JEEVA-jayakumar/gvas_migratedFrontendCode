@@ -2,103 +2,96 @@
   <q-page>
     <!-- content -->
     <q-card>
-      <!-- <div
-        class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-      >
-        <b><h1 style="font-size:18px;">UPLOAD CSV FILE</h1></b>
-      </div> -->
       <div class="text-grey-9">
         <div class="row bottom-border q-pa-sm items-center">
           <div class="col">
             <q-tabs
               class="shadow-1"
-              animated
-              swipeable
-              color="tertiary"
+              color="purple-9"
               align="justify"
             >
-              <q-tab class="size1" label="UPLOAD CSV FILE" slot="title" />
-              <div>
-                <div class="q-pa-md">
-                  <div class="row text-center justify-center">
-                    <div class="col-md-8 q-py-md" align="center">
-                      <div class="col-md-5 align1" align="center">
-                        <a
-                          href="statics/files/iciciExistingMerchantOnboardingTemplate.xlsx"
-                          class="hide-underline"
-                          >Click here to download the template</a
-                        >
-                      </div>
-                      <div
-                        v-if="formData.fileSelected.length == 0"
-                        :class="[
-                          uploaderHovered
-                            ? 'toggleBulkUploadDisable'
-                            : 'toggleBulkUploadActive'
-                        ]"
-                        class="drop display-inline align-center  cursor-pointer"
-                        @dragover.prevent="dragAndDropCustomAnimate(true)"
-                        @dragleave.prevent="dragAndDropCustomAnimate(false)"
-                        @drop="onDrop"
-                      >
-                        <label
-                          style="width: auto;"
-                          class="btn display-inline cursor-pointer "
-                        >
-                          Drag & Drop Or Click Here To Open A File
-                          <input
-                            type="file"
-                            name="image"
-                            @change="onChange"
-                            ref="deviceBulkUpload"
-                            accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                          />
-                        </label>
-                      </div>
-                      <div v-else align="left">
-                        <q-card dense class="q-pa-xs">
-                          <q-card-section>
-                            Uploaded File
-                          </q-card-section>
-                          <q-separator />
-                          <q-card-section>
-                            <q-item dense>
-                              <q-item-section icon="attach_file" />
-                              <q-item-section>{{
-                                formData.fileSelected[0].name
-                              }}</q-item-section>
-                              <q-item-section></q-item-section>
-                            </q-item>
-                          </q-card-section>
-                          <q-separator />
-                          <q-card-actions align="end">
-                            <q-btn
-                              size="10px"
-                              type="button"
-                              color="negative"
-                              @click="removeBulkUploadFile"
-                              label="Remove"
-                              icon="clear"
-                            />
-                          </q-card-actions>
-                        </q-card>
-                      </div>
-                    </div>
-                    <div class="col-md-12 group align2" align="center">
-                      <q-btn
-                        :disabled="
-                          formData.fileSelected.length == 0
-                        "
-                        type="button"
-                        class="common-dark-blue"
-                        label="Submit"
-                        @click="uploadFileForBulkUpload"
+              <q-tab class="size1" label="UPLOAD CSV FILE" name="upload" />
+            </q-tabs>
+            <div class="q-pa-md">
+              <div class="row text-center justify-center">
+                <div class="col-md-8 q-py-md" align="center">
+                  <div class="col-md-5 align1" align="center">
+                    <a
+                      href="statics/files/iciciExistingMerchantOnboardingTemplate.xlsx"
+                      class="hide-underline"
+                      >Click here to download the template</a
+                    >
+                  </div>
+                  <div
+                    v-if="formData.fileSelected.length == 0"
+                    :class="[
+                      uploaderHovered
+                        ? 'toggleBulkUploadDisable'
+                        : 'toggleBulkUploadActive'
+                    ]"
+                    class="drop display-inline align-center  cursor-pointer"
+                    @dragover.prevent="dragAndDropCustomAnimate(true)"
+                    @dragleave.prevent="dragAndDropCustomAnimate(false)"
+                    @drop="onDrop"
+                  >
+                    <label
+                      style="width: auto;"
+                      class="btn display-inline cursor-pointer "
+                    >
+                      Drag & Drop Or Click Here To Open A File
+                      <input
+                        type="file"
+                        name="image"
+                        @change="onChange"
+                        ref="deviceBulkUpload"
+                        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                       />
-                    </div>
+                    </label>
+                  </div>
+                  <div v-else align="left">
+                    <q-card dense class="q-pa-xs">
+                      <q-card-section class="text-h6">
+                        Uploaded File
+                      </q-card-section>
+                      <q-separator />
+                      <q-card-section>
+                        <q-item dense>
+                          <q-item-section avatar>
+                            <q-icon name="attach_file" />
+                          </q-item-section>
+                          <q-item-section>{{
+                            formData.fileSelected[0].name
+                          }}</q-item-section>
+                          <q-item-section></q-item-section>
+                        </q-item>
+                      </q-card-section>
+                      <q-separator />
+                      <q-card-actions align="end">
+                        <q-btn
+                          size="10px"
+                          type="button"
+                          color="negative"
+                          @click="removeBulkUploadFile"
+                          label="Remove"
+                          icon="clear"
+                        />
+                      </q-card-actions>
+                    </q-card>
                   </div>
                 </div>
+                <div class="col-md-12 group align2" align="center">
+                  <q-btn
+                    :disabled="
+                      formData.fileSelected.length == 0
+                    "
+                    type="button"
+                    class="common-dark-blue"
+                    label="Submit"
+                    @click="uploadFileForBulkUpload"
+                  />
+                </div>
               </div>
-            </q-tabs>
+            </div>
           </div>
         </div>
       </div>
@@ -107,274 +100,219 @@
       <div class="text-grey-9">
         <div class="row bottom-border q-pa-sm items-center">
           <div class="col">
-            <q-tabs class="shadow-1" animated swipeable color="tertiary" align="justify" >
-              <q-tab class="size1" label="Onboarding Existing Merchants" slot="title" />
-              <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+            <q-tabs class="shadow-1" color="purple-9" align="justify" >
+              <q-tab class="size1" label="Onboarding Existing Merchants" name="onboarding" />
+            </q-tabs>
+
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+              <div class="row items-center gutter-y-sm">
+                <div
+                  class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium"
+                  align="left"
+                >
+                  <span class="q-display-2 size2">{{
+                    formData.marsDeviceIdsCooked.length
+                  }}</span>
+                  / selected
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                  <q-select
+                    filter
+                    clearable
+                    v-model="formData.assignTo"
+                    :disable="
+                      formData.marsDeviceIdsCooked.length == 0
+                    "
+                    separator
+                    color="grey-9"
+                    :options="assignToOptions"
+                    placeholder="Assign To"
+                  />
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                  <q-btn
+                    :disabled="this.formData.assignTo == ''"
+                    type="button"
+                    label="Assign"
+                    class="common-dark-blue"
+                    @click="assignImplementationUser"
+                  />
+                </div>
+              </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+              <div class="row items-center gutter-y-sm">
+                <div class="col-md-9 col-sm-12 col-xs-12">
+                  <div class="row items-center">
+                    <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                  </div>
+                </div>
+              </div>
+            </q-card>
+
+            <q-tabs
+              v-model="selectedTab"
+              class="shadow-1"
+              color="grey-1"
+              @update:model-value="goToUnassignedTab"
+            >
+              <q-tab
+                color="dark"
+                name="unAssigned"
+                label="Unassigned"
+              />
+              <q-tab
+                color="dark"
+                name="assigned"
+                label="Assigned"
+              />
+            </q-tabs>
+
+            <q-tab-panels v-model="selectedTab" animated>
+              <q-tab-panel name="assigned">
                 <div class="row items-center gutter-y-sm">
                   <div
-                    class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium"
+                    class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
                     align="left"
                   >
                     <span class="q-display-2 size2">{{
-                      formData.marsDeviceIdsCooked.length
+                      formData.marsDeviceIdsCookedUnAssinged.length
                     }}</span>
                     / selected
                   </div>
-                  <div class="col-md-3 col-sm-6 col-xs-6">
-                    <q-select
-                      filter
-                      clearable
-                      v-model="formData.assignTo"
-                      :disable="
-                        formData.marsDeviceIdsCooked.length == 0
-                      "
-                      separator
-                      color="grey-9"
-                      :options="assignToOptions"
-                      placeholder="Assign To"
-                    />
-                  </div>
-                  <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-                    <q-btn
-                      :disabled="this.formData.assignTo == ''"
-                      type="button"
-                      label="Assign"
-                      class="common-dark-blue"
-                      @click="assignImplementationUser"
-                    />
-                  </div>
-                </div>
-              </q-card>
-              <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-                <div class="row items-center gutter-y-sm">
                   <div class="col-md-9 col-sm-12 col-xs-12">
                     <div class="row items-center">
-                      <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-                    </div>
-                  </div>
-                </div>
-              </q-card>
-              <!--END: table Footer -->
-              <q-tabs
-                v-model="selectedTab"
-                class="shadow-1"
-                color="grey-1"
-                @select="goToUnassignedTab"
-              >
-                <q-tab
-                  default
-                  color="dark"
-                  name="unAssigned"
-                  slot="title"
-                  label="Unassigned"
-                />
-                <q-tab
-                  color="dark"
-                  name="assigned"
-                  slot="title"
-                  label="Assigned"
-                />
-                <q-tab-panel name="assigned">
-                  <div class="row items-center gutter-y-sm">
-                    <div
-                      class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
-                      align="left"
-                    >
-                      <span class="q-display-2 size2">{{
-                        formData.marsDeviceIdsCookedUnAssinged.length
-                      }}</span
-                      >/ selected
-                    </div>
-                    <div class="col-md-9 col-sm-12 col-xs-12">
-                      <div class="row items-center">
-                        <div class="col-md-4 col-sm-6 col-xs-6">
-                          <q-select
-                            filter
-                            clearable
-                            v-model="formData.assignTo"
-                            :disable="
-                              formData.marsDeviceIdsCookedUnAssinged.length == 0
-
+                      <div class="col-md-4 col-sm-6 col-xs-6">
+                        <q-select
+                          filter
+                          clearable
+                          v-model="formData.assignTo"
+                          :disable="
+                            formData.marsDeviceIdsCookedUnAssinged.length == 0
+                          "
+                          separator
+                          color="grey-9"
+                          :options="assignToOptions"
+                          placeholder="Assign To"
+                        />
+                      </div>
+                      <div class="col-md-4 col-sm-6 col-xs-6 group">
+                        <div>
+                          <q-btn
+                            no-caps
+                            :disabled="
+                              formData.marsDeviceIdsCookedUnAssinged.length ==
+                              0
+                                 || this.formData.assignTo == ''
                             "
-                            separator
-                            color="grey-9"
-                            :options="assignToOptions"
-                            placeholder="Assign To"
+                            label="Re-Assign"
+                            class="common-dark-blue"
+                            @click="reAssignImplementationUser"
                           />
                         </div>
-                        <!-- <div class="col-md-4 col-sm-6 col-xs-6">
-                <q-checkbox
-                  v-model="formData.triggerWelcomeMail"
-                  color="dark"
-                  label="Trigger welcome email"
-                />
-              </div> -->
-                        <div class="col-md-4 col-sm-6 col-xs-6 group">
-                          <div>
-                            <q-btn
-                              no-caps
-                              :disabled="
-                                formData.marsDeviceIdsCookedUnAssinged.length ==
-                                0
-                                   || this.formData.assignTo == ''
-                              "
-                              label="Re-Assign"
-                              class="common-dark-blue"
-                              @click="reAssignImplementationUser"
-                            />
-                          </div>
-                          <div>
-                            <q-btn
-                              no-caps
-                              :disabled="
-                                formData.marsDeviceIdsCookedUnAssinged.length ==
-                                0
-
-                              "
-                              label="Un-Assign"
-                              class="common-dark-blue"
-                              @click="unAssignImplementationUser"
-                            />
-                          </div>
+                        <div>
+                          <q-btn
+                            no-caps
+                            :disabled="
+                              formData.marsDeviceIdsCookedUnAssinged.length ==
+                              0
+                            "
+                            label="Un-Assign"
+                            class="common-dark-blue"
+                            @click="unAssignImplementationUser"
+                          />
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!--START: table Data -->
-                  <q-table
-                    :rows="tableData"
-                    :columns="columnDataAssigned"
-                    table-class="customTableClass"
-                    :filter="filterSearch"
-                    selection="multiple"
-                    :pagination="paginationControl"
-                    v-model:selected="formData.marsDeviceIdsCookedUnAssinged"
-                    row-key="id"
-                    :loading="tableAjaxLoading"
-                    :rows-per-page-options="[5, 10, 15, 20]"
-                    color="dark"
-                    @request="ajaxLoadAllLeadInfo"
-                  >
-                    <!-- selection="multiple" -->
-                    <!-- <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-leadNumber="props"
-                            :props="props" class="cursor-pointer"
-                            @click.native="toggleLeadInformation(props.row.leadInformation)">
-                            <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
-                        </q-td> -->
-                    <!-- <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-submitToMarsDate="props" :props="props">{{
-                                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-                            }}</q-td> -->
-                    <!-- <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-createdAt="props"
-                            :props="props">{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
-                        <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-deviceAddress="props"
-                            :props="props" class="customTd customCellLength">
-                            <div>{{ props.row.deviceAddress }}</div>
-                        </q-td> -->
-                    <q-td
-                      v-slot:body-cell-tid="props"
-                      :props="props"
-                      class="customTd"
-                    >
+                </div>
+                <!--START: table Data -->
+                <q-table
+                  :rows="tableData"
+                  :columns="columnDataAssigned"
+                  table-class="customTableClass"
+                  :filter="filterSearch"
+                  selection="multiple"
+                  v-model:pagination="paginationControl"
+                  v-model:selected="formData.marsDeviceIdsCookedUnAssinged"
+                  row-key="id"
+                  :loading="tableAjaxLoading"
+                  :rows-per-page-options="[5, 10, 15, 20]"
+                  color="dark"
+                  @request="ajaxLoadAllLeadInfo"
+                >
+                  <template v-slot:body-cell-tid="props">
+                    <q-td :props="props" class="customTd">
                       <div class="text-primary">
                         {{ props.row.tid == null ? "NA" : props.row.tid }}
                       </div>
                     </q-td>
-                    <q-td
-                      v-slot:body-cell-mid="props"
-                      :props="props"
-                      class="customTd"
-                    >
+                  </template>
+                  <template v-slot:body-cell-mid="props">
+                    <q-td :props="props" class="customTd">
                       <div class="text-primary">
                         {{ props.row.mid == null ? "NA" : props.row.mid }}
                       </div>
                     </q-td>
-                    <template slot="top">
-                      <div class="col-md-5">
-                        <q-input
-                          clearable
-                          color="grey-9"
-                          v-model="filterSearch"
-                          placeholder="Type.."
-                          float-label="Search By Merchant Name, TID, MID ..."
-                          class="q-mr-lg q-py-sm"
-                        />
-                      </div>
-                    </template>
-                  </q-table>
-                  <!--ENDv-model: table Data -->
-                </q-tab-panel>
-                <q-tab-panel name="unAssigned">
-                  <!--START: table Data -->
-                  <q-table
-                    :rows="tableData1"
-                    :columns="columnDataUnassigned"
-                    table-class="customTableClass"
-                    :filter="filterSearch1"
-                    selection="multiple"
-                    :selected="formData.marsDeviceIdsCooked"
-                    v-model:pagination="paginationControl1"
-                    row-key="id"
-                    :loading="tableAjaxLoading1"
-                    :rows-per-page-options="[5, 10, 15, 20]"
-                    color="dark"
-                    @request="ajaxLoadAllLeadInfo1"
-                  >
-                    <!-- <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-leadNumber="props"
-                            :props="props" class="cursor-pointer"
-                            @click.native="toggleLeadInformation(props.row.leadInformation)">
-                            <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
-                        </q-td>
-                        <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-submitToMarsDate="props" :props="props">{{
-                                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-                            }}</q-td>
-                        <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-createdAt="props"
-                            :props="props">{{ props.row.createdAt | moment("Do MMM Y") }}</q-td> -->
-                    <q-td
-                      v-slot:body-cell-tid="props"
-                      :props="props"
-                      class="customTd"
-                    >
+                  </template>
+                  <template v-slot:top>
+                    <div class="col-md-5">
+                      <q-input
+                        clearable
+                        color="grey-9"
+                        v-model="filterSearch"
+                        placeholder="Type.."
+                        label="Search By Merchant Name, TID, MID ..."
+                        class="q-mr-lg q-py-sm"
+                      />
+                    </div>
+                  </template>
+                </q-table>
+              </q-tab-panel>
+              <q-tab-panel name="unAssigned">
+                <q-table
+                  :rows="tableData1"
+                  :columns="columnDataUnassigned"
+                  table-class="customTableClass"
+                  :filter="filterSearch1"
+                  selection="multiple"
+                  v-model:selected="formData.marsDeviceIdsCooked"
+                  v-model:pagination="paginationControl1"
+                  row-key="id"
+                  :loading="tableAjaxLoading1"
+                  :rows-per-page-options="[5, 10, 15, 20]"
+                  color="dark"
+                  @request="ajaxLoadAllLeadInfo1"
+                >
+                  <template v-slot:body-cell-tid="props">
+                    <q-td :props="props" class="customTd">
                       <div class="text-primary">
                         {{ props.row.tid == "" ? "NA" : props.row.tid }}
                       </div>
                     </q-td>
-                    <q-td
-                      v-slot:body-cell-mid="props"
-                      :props="props"
-                      class="customTd"
-                    >
+                  </template>
+                  <template v-slot:body-cell-mid="props">
+                    <q-td :props="props" class="customTd">
                       <div class="text-primary">
                         {{ props.row.mid == "" ? "NA" : props.row.mid }}
                       </div>
                     </q-td>
-                    <!-- <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-deviceAddress="props"
-                            :props="props" class="customTd customCellLength">
-                            <div>
-                                {{ props.row.deviceAddress }}
-                            </div>
-                        </q-td> -->
-                    <template slot="top">
-                      <div class="col-md-5">
-                        <q-input
-                          clearable
-                          color="grey-9"
-                          v-model="filterSearch1"
-                          placeholder="Type.."
-                          float-label="Search By Merchant Name, TID, MID ..."
-                          class="q-mr-lg q-py-sm"
-                        />
-                      </div>
-                    </template>
-                  </q-table>
-                  <!--END: table Data -->
-                </q-tab-panel>
-              </q-tabs>
-              <div class="row items-center gutter-y-sm">
-                <div class="col-md-9 col-sm-12 col-xs-12">
-                  <div class="row items-center"></div>
-                </div>
-              </div>
-            </q-tabs>
+                  </template>
+                  <template v-slot:top>
+                    <div class="col-md-5">
+                      <q-input
+                        clearable
+                        color="grey-9"
+                        v-model="filterSearch1"
+                        placeholder="Type.."
+                        label="Search By Merchant Name, TID, MID ..."
+                        class="q-mr-lg q-py-sm"
+                      />
+                    </div>
+                  </template>
+                </q-table>
+              </q-tab-panel>
+            </q-tab-panels>
           </div>
         </div>
       </div>
@@ -576,18 +514,9 @@ export default {
     ...mapGetters("ImplementationExecutive", ["getImplementationExecutiveList"])
   },
   beforeMount() {
-    console.log("CHECK LENGTH", JSON.stringify(this.formData));
-    console.log(
-      "FILE CHECKSUM DETAILS-------------->>>>",
-      JSON.stringify(this.fileCheckSum)
-    );
   },
   mounted() {
     this.getPincodeInformations();
-    console.log(
-      "File Selected--------->>>>",
-      JSON.stringify(this.formData.fileSelected)
-    );
   },
   methods: {
     ...mapActions("OnboardingExistingMerchants", [
@@ -616,7 +545,6 @@ export default {
       this.fileCheckSum(e.dataTransfer.files);
     },
     fileCheckSum(file) {
-      console.log(file);
       let re = /(\.csv|\.xlsx|\.xls)$/i;
       if (!re.exec(file[0].name)) {
         this.formData.fileSelected = [];
@@ -678,7 +606,6 @@ export default {
                   : error.body.message,
               icon: "thumb_down"
             });
-            // this.formData.fileSelected = []
           });
       }
     },
@@ -686,44 +613,22 @@ export default {
       this.FETCH_ALL_STATES_DATA();
     },
     ajaxLoadAllLeadInfo1({ pagination, filter }) {
-      // we set QTable to "loading" state
       this.$q.loading.show({
         delay: 0, // ms
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.ONBOARDING_MERCHANT_UNASSIGNED_LIST({ pagination, filter })
-        .then(res => {
-          // updating pagination to reflect in the UI
+      this.ONBOARDING_MERCHANT_UNASSIGNED_LIST({ pagination, filter }).then(res => {
           this.paginationControl1 = pagination;
-
-          // we also set (or update) rowsNumber
           this.paginationControl1.rowsNumber = this.getOnboardingMerchantUnassignedList.totalElements;
           this.paginationControl1.page =
             this.getOnboardingMerchantUnassignedList.number + 1;
-
-          // then we update the rows with the fetched ones
           this.tableData1 = this.getOnboardingMerchantUnassignedList.content;
-          console.log(
-            "TABLE DATA1------------------------>>>>>",
-            JSON.stringify(this.tableData1)
-          );
           if (this.getOnboardingMerchantUnassignedList.sort != null) {
-            console.log(
-              "Sort is not null : ---------- : " +
-                JSON.stringify(this.getOnboardingMerchantUnassignedList.sort)
-            );
             this.paginationControl1.sortBy = this.getOnboardingMerchantUnassignedList.sort[0].property;
             this.paginationControl1.descending = this.getOnboardingMerchantUnassignedList.sort[0].ascending;
-            console.log(
-              "Pagination Control modified : -------- : " +
-                JSON.stringify(this.paginationControl1)
-            );
           } else {
-            console.log("Sort is null : ---------- : ");
             this.paginationControl1.sortBy = "createdAt";
-            this.paginationControl1.descending = !this.paginationControl1
-              .descending;
           }
           this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
             let assumeArr = [];
@@ -736,8 +641,6 @@ export default {
             });
             this.assignToOptions = assumeArr;
           });
-
-          // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
         })
         .catch(() => {
@@ -745,14 +648,12 @@ export default {
         });
     },
     ajaxLoadAllLeadInfo({ pagination, filter }) {
-      // we set QTable to "loading" state
       this.$q.loading.show({
         delay: 0, // ms
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.ONBOARDING_MERCHANT_ASSIGNED_LIST({ pagination, filter })
-        .then(res => {
+      this.ONBOARDING_MERCHANT_ASSIGNED_LIST({ pagination, filter }).then(res => {
           this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
             let assumeArr = [];
             this.getImplementationExecutiveList.map(function(value) {
@@ -764,14 +665,10 @@ export default {
             });
             this.assignToOptions = assumeArr;
           });
-          // updating pagination to reflect in the UI
           this.paginationControl = pagination;
-
-          // we also set (or update) rowsNumber
           this.paginationControl.rowsNumber = this.getOnboardingMerchantAssignedList.totalElements;
           this.paginationControl.page =
             this.getOnboardingMerchantAssignedList.number + 1;
-          // then we update the rows with the fetched ones
           this.tableData = this.getOnboardingMerchantAssignedList.content;
           if (this.getOnboardingMerchantAssignedList.sort != null) {
             this.paginationControl.sortBy = this.getOnboardingMerchantAssignedList.sort[0].property;
@@ -783,7 +680,6 @@ export default {
           this.$q.loading.hide();
         });
     },
-    //Load all short lead info while page loading
     goToUnassignedTab(tab) {
       if (tab == "unAssigned") {
         this.ajaxLoadAllLeadInfo1({
@@ -802,48 +698,6 @@ export default {
         this.formData.assignTo = "";
       }
     },
-    // Function to open device address pop up
-    UpdateDeviceAddress(currentDeviceInfo) {
-      this.currentDeviceInfo = [];
-      this.showDeviceAddressModal = !this.showDeviceAddressModal;
-      if (this.formData.marsDeviceIdsCooked.length == 0) {
-        let assumeObj = {
-          id: [currentDeviceInfo.id],
-          marsDeviceAddress: {
-            deviceAddress: currentDeviceInfo.deviceAddress,
-            latitude: 0,
-            longitude: 0,
-            pincode: currentDeviceInfo.pincode,
-            city: currentDeviceInfo.city,
-            state: currentDeviceInfo.state
-          }
-        };
-        this.currentDeviceInfo = assumeObj;
-      } else {
-        let marsDeviceIdsCooked = [];
-        this.formData.marsDeviceIdsCooked.map(function(value) {
-          marsDeviceIdsCooked.push(value.id);
-        });
-        let assumeObj = {
-          id: marsDeviceIdsCooked,
-          marsDeviceAddress: {
-            deviceAddress: currentDeviceInfo.deviceAddress,
-            latitude: 0,
-            longitude: 0,
-            pincode: currentDeviceInfo.pincode,
-            city: currentDeviceInfo.city,
-            state: currentDeviceInfo.state
-          }
-        };
-        this.currentDeviceInfo = assumeObj;
-      }
-    },
-    // Function to open device address pop up
-    UpdateDeviceAddressAfterEmit(pagination) {
-      this.showDeviceAddressModal = !this.showDeviceAddressModal;
-      this.paginationControl = pagination;
-    },
-    // Function to assign implementation manager in implementation queue
     assignImplementationUser() {
       let self = this;
       if (self.formData.marsDeviceIdsCooked.length == 0) {
@@ -895,7 +749,6 @@ export default {
           });
       }
     },
-    // Function to unAssignImplementationUser in implementation queue
     unAssignImplementationUser() {
       let self = this;
       if (self.formData.marsDeviceIdsCookedUnAssinged.length == 0) {
@@ -942,8 +795,6 @@ export default {
           });
       }
     },
-
-    // Function to unAssignImplementationUser in implementation queue
     reAssignImplementationUser() {
       let self = this;
       if (self.formData.marsDeviceIdsCookedUnAssinged.length == 0) {

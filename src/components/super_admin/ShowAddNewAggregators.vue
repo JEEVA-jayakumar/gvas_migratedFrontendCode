@@ -21,7 +21,7 @@
                           :error="$v.formData.name.$error"
                           class="text-weight-regular text-grey-8" 
                           color="grey-9" 
-                          float-label="Enter Aggregator *" 
+                          label="Enter Aggregator *"
                           placeholder="Enter Aggregator *" 
                         />
                     </div>

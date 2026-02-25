@@ -3,13 +3,12 @@
     <div>
       <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-md-4">
-          <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
-            v-model:options="aggregatorOptions" @input="getaggregator" />
+          <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
+            v-model:options="aggregatorOptions" @update:model-value="getaggregator" />
         </div>
       </div> -->
       <div>
-        <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filter"
-          :pagination="paginationControl" row-key="name" @request="ajaxLoadAllLeadInfo">
+        <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filter" v-model:pagination="paginationControl" row-key="name" @request="ajaxLoadAllLeadInfo">
           <q-td v-slot:body-cell-created_at="props" :props="props">{{
             props.row.created_at == null ? "NA" :
               props.row.created_at | moment("Do MMM Y")
@@ -21,7 +20,7 @@
           <template v-slot:top="props">
             <div class="col-md-5">
               <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
-                float-label="Pod Number, Device Type" class="q-mr-lg q-py-sm" />
+                label="Pod Number, Device Type" class="q-mr-lg q-py-sm" />
             </div>
             <div class="col-md-5">
 

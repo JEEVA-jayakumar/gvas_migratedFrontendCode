@@ -14,8 +14,7 @@
             :rows="tableData"
             :columns="columnData"
             table-class="customTableClass"
-            :filter="filterSearch"
-            :pagination="paginationControl"
+            :filter="filterSearch" v-model:pagination="paginationControl"
             v-model:selected="formData.marsDeviceIdsCookedUnAssinged"
             row-key="id"
             :loading="tableAjaxLoading"
@@ -27,7 +26,7 @@
               v-slot:body-cell-leadNumber="props"
               :props="props"
               class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row.leadNumber)"
+              @click="toggleLeadInformation(props.row.leadNumber)"
             >
               <span class="label text-primary"
                 ># {{ props.row.leadNumber }}</span
@@ -36,9 +35,7 @@
             <q-td
               v-slot:body-cell-submitToMarsDate="props"
               :props="props"
-              >{{
-                props.row.submitToMarsDate | moment("Do MMM Y")
-              }}</q-td
+              >{{ $moment(props.row.submitToMarsDate).format("Do MMM Y") }}</q-td
             >
             <template v-slot:top="props">
               <div class="col-md-5">
@@ -47,7 +44,7 @@
                   color="grey-9"
                   v-model="filterSearch"
                   placeholder="Type.."
-                  float-label="Search By Lead Number"
+                  label="Search By Lead Number"
                   class="q-mr-lg q-py-sm"
                 />
               </div>
@@ -180,8 +177,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.REJECT_STATUS_LIST({ pagination, filter })
-        .then((response) => {
+      this.REJECT_STATUS_LIST({ pagination, filter }).then((response) => {
           this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
             let assumeArr = [];
             this.getImplementationExecutiveList.map(function(value) {

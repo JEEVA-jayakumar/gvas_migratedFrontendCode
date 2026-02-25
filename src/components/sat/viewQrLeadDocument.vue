@@ -12,7 +12,7 @@
                 <q-expansion-item separator indent opened class="full-width">
                   <template slot="header">
                     <q-item-section icon="apps" />
-                    <q-item-section class="text-body1" :sublabel="'FORMS'" />
+                    <q-item-section class="text-body1" :caption="'FORMS'" />
                   </template>
                   <b><label>Agreement Form & Application Form</label></b>
                   <q-item separator class="text-body1">
@@ -668,7 +668,7 @@
                       <q-item-section icon="apps" />
                       <q-item-section
                         class="text-body1"
-                        :sublabel="
+                        :caption="
                           propLeadDocumentInformation.length + 'Type(s)'
                         "
                       />
@@ -689,7 +689,7 @@
                           <template slot="header">
                             <q-item-section
                               class="text-body1"
-                              :sublabel="
+                              :caption="
                                 subDocument.uploadedDocuments.length +
                                   'Document(s)'
                               "
@@ -1223,7 +1223,7 @@
                         </q-item-section>
 
                         <!-- <q-item-section>
-             @input="docuValue(document)"
+             @update:model-value="docuValue(document)"
             </q-item-section> -->
 
                         <q-item-section>
@@ -1825,8 +1825,7 @@ export default {
           return this.fnGetMerchantTypeValue(
             this.propGetShortInfo.qrMerchantType.merchantTypeName
           );
-        })
-        .then(response => {
+        }).then(response => {
           this.formData.documentType = this.getQrShortLeadInfoDocumentTypes;
           console.log(
             "LEAD DETAILS",
@@ -2295,8 +2294,7 @@ saveformsLists(fileName, mimeType, formTypeToUpdate) {
           message: "Are you sure want to delete uploaded document?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: "purple-9",
@@ -2319,8 +2317,7 @@ saveformsLists(fileName, mimeType, formTypeToUpdate) {
               //   innerSelf.merchantTypeSelection
               // );
               this.$q.loading.hide();
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.loading.hide();
               innerSelf.$q.notify({
                 color: "negative",

@@ -4,16 +4,16 @@
       <div class="col-12 text-h6 q-pa-md text-weight-regular bottom-border">Manage Document Types</div>
       <!-- START >> Setup MDR details -->
       <div class="col-md-12 col-sm-12 col-xs-12 q-pa-sm group">
-        <div class="row gutter-x-xs">
+        <div class="row q-col-gutter-x-xs">
           <div class="col-3">
             <q-select
               color="grey-9"
               v-model="formData.merchantType"
               :options="activeMerchantType"
-              float-label="Select merchant type"
+              label="Select merchant type"
               placeholder="Merchant type"
               :error="$v.formData.merchantType.$error"
-              @input="merchantDocumentTypeActiveList"
+              @update:model-value="merchantDocumentTypeActiveList"
             />
           </div>
           <div class="col-auto">
@@ -33,8 +33,8 @@
               color="grey-9"
               v-model="formData.parentIDtemp"
               :options="activeDocumentMerchantType"
-              @input="mapParentIdToSubDocument"
-              float-label="Merchant Document Type"
+              @update:model-value="mapParentIdToSubDocument"
+              label="Merchant Document Type"
               placeholder="Merchant Document Type"
             />
           </div>
@@ -55,7 +55,7 @@
               color="grey-9"
               v-model="formData.subDocumentType"
               :error="$v.formData.subDocumentType.$error"
-              float-label="Merchant Sub Document Type"
+              label="Merchant Sub Document Type"
               placeholder="Merchant Sub Document Type"
             />
           </div>
@@ -64,12 +64,12 @@
               type="number"
               color="grey-9"
               v-model="formData.marsDocumentId"
-              float-label="Mars document Id"
+              label="Mars document Id"
               placeholder="Mars document Id"
             />
           </div>
         </div>
-        <div class="row gutter-x-xs">
+        <div class="row q-col-gutter-x-xs">
           <div class="col-3">
             <q-btn
               label="Submit"
@@ -89,23 +89,22 @@
           <q-tab
             @select="fetchActiveMerchantTypes"
             default
-            slot="title"
             label="Active List"
             name="tab-1"
           />
           <q-tab
             @select="fetchDeActiveMerchantTypes"
-            slot="title"
             label="De-Actived List"
             name="tab-2"
           />
-          <q-tab-panel name="tab-1">
+</q-tabs>
+<q-tab-panels animated>
+<q-tab-panel name="tab-1">
             <q-table
               table-class="customTableClass"
               :rows="activatedTableData"
               :columns="activatedColumns"
-              :filter="filterSearch"
-              :pagination="pagination"
+              :filter="filterSearch" v-model:pagination="pagination"
               row-key="name"
               color="grey-9"
             >
@@ -143,7 +142,7 @@
                     color="grey-9"
                     v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search by merchant type, document type, sub document type"
+                    label="Search by merchant type, document type, sub document type"
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -151,13 +150,12 @@
               </template>
             </q-table>
           </q-tab-panel>
-          <q-tab-panel name="tab-2">
+<q-tab-panel name="tab-2">
             <q-table
               table-class="customTableClass"
               :rows="deActivatedTableData"
               :columns="deActivatedColumns"
-              :filter="filterSearch"
-              :pagination="pagination"
+              :filter="filterSearch" v-model:pagination="pagination"
               row-key="name"
               color="grey-9"
             >
@@ -195,7 +193,7 @@
                     color="grey-9"
                     v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search by merchant type, document type, sub document type"
+                    label="Search by merchant type, document type, sub document type"
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -203,7 +201,7 @@
               </template>
             </q-table>
           </q-tab-panel>
-        </q-tabs>
+</q-tab-panels>
       </div>
       <!-- END >> Table >> MDR details -->
       <!--START: Show lead source -->
@@ -407,8 +405,7 @@ export default {
           message: "Are you sure want to delete merchant type?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -426,8 +423,7 @@ export default {
                 } has been deactivated`,
                 icon: "thumb_up"
               });
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -437,7 +433,7 @@ export default {
             });
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -568,8 +564,7 @@ export default {
       this.MERCHANT_DOCUMENT_TYPE_ACTIVE_LIST({
         merchantTypeId: this.formData.merchantType,
         parentId: 0 //for primary document
-      })
-        .then(() => {
+      }).then(() => {
           this.activeDocumentMerchantType = [];
           return _.map(this.getActiveMerchantDocumentTypes, value => {
             this.activeDocumentMerchantType.push({
@@ -577,8 +572,7 @@ export default {
               value: value
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           this.fetchActiveMerchantTypes(this.formData.merchantType);
         });
     },

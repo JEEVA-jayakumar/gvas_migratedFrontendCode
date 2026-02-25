@@ -15,7 +15,7 @@
                   color="grey-9"
                   v-model="formData.leadSource"
                   :options="dropDown.leadSourceOptions"
-                  float-label="Select Lead bank"
+                  label="Select Lead bank"
                 />
               </q-item-section>
               <q-item-section right>
@@ -43,8 +43,7 @@
     <q-table
       table-class="customTableClass"
       :rows="getActiveandDeactiveLeadSource"
-      :columns="columns"
-      :pagination="paginationControl"
+      :columns="columns" v-model:pagination="paginationControl"
       row-key="id"
     >
       <q-td v-slot:body-cell-action="props" :props="props">
@@ -258,8 +257,7 @@ export default {
           message: "Are you sure want to delete QR Bank?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -275,8 +273,7 @@ export default {
                 message: "Successfully Deleted",
                 icon: "thumb_up"
               });
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -286,7 +283,7 @@ export default {
             });
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

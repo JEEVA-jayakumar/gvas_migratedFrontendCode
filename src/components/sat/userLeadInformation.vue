@@ -36,13 +36,13 @@
         <q-td
           v-slot:body-cell-createdAt="props"
           :props="props"
-        >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
 
         <q-td
           v-slot:body-cell-lead_id="props"
           :props="props"
           class="cursor-pointer"
-          @click.native="toggleLeadInformation(props.row)"
+          @click="toggleLeadInformation(props.row)"
         >
           <span
             class="label"
@@ -107,7 +107,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search by SO name, Merchant Name, Lead ID"
+              label="Search by SO name, Merchant Name, Lead ID"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -252,8 +252,7 @@ export default {
       this.FETCH_ALL_SALES_MANAGER_LEAD_VALIDATIONS_DATA({
         userId: this.propUserId,
         action: this.propAction
-      })
-        .then(response => {
+      }).then(response => {
           this.toggleAjaxLoadFilter = false;
           this.$q.loading.hide();
           if (this.propAction == this.$SALES_MANAGER_STATUS_SHORT_LEADS) {

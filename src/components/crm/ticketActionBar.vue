@@ -25,7 +25,7 @@
             <div class="col-sm-9">
               <!-- <q-option-group v-model="selectedOption" :options="options" type="radio" class="radio" inline
                 color="purple-9" /> -->
-              <q-option-group v-model="selectedOption" :options="optionsData" type="radio" class="radio" inline @input="getselectedOptionBasedData($event)"
+              <q-option-group v-model="selectedOption" :options="optionsData" type="radio" class="radio" inline @update:model-value="getselectedOptionBasedData($event)"
                 color="purple-9" />
             </div>
         
@@ -42,19 +42,19 @@
           <div v-if="selectedOption == 1">
             <div class="row">
               <div class="col-sm-5">
-                <q-select stack-label="Resolved Status" inverted-light color="none"
-                  v-model="issueResolved.resolvedStatus"  separator :options="resolutionOptionList" @input="issueresolvedAction($event)"  />
+                <q-select stack-label="Resolved Status" filled-light color="none"
+                  v-model="issueResolved.resolvedStatus"  separator :options="resolutionOptionList" @update:model-value="issueresolvedAction($event)"  />
               </div>
             </div>
             <div class="row">
               <div class="col-sm-5">
-                <q-select stack-label="Actual Issue"  inverted-light color="none" v-model="issueResolved.actualIssue" 
+                <q-select stack-label="Actual Issue"  filled-light color="none" v-model="issueResolved.actualIssue"
                   separator :options="issueOptionList"  />
               </div>
             </div>
             <div class="row">
               <div class="col-sm-5">
-                <q-select stack-label="Action Taken" :disable="issueResolved.actualIssue == '' " inverted-light color="none" v-model="issueResolved.actionTaken"
+                <q-select stack-label="Action Taken" :disable="issueResolved.actualIssue == '' " filled-light color="none" v-model="issueResolved.actionTaken"
                   separator :options="issueActionList" />
               </div>
             </div>
@@ -75,19 +75,19 @@
           <div v-if="selectedOption == 2">
             <div class="row">
               <div class="col-sm-5">
-                <q-select stack-label="Resolved Status" inverted-light color="none"
-                  v-model="IssueNotResolved.resolvedStatus" separator :options="resolutionOptionList" @input="issueNotresolvedFetchAction($event)" />
+                <q-select stack-label="Resolved Status" filled-light color="none"
+                  v-model="IssueNotResolved.resolvedStatus" separator :options="resolutionOptionList" @update:model-value="issueNotresolvedFetchAction($event)" />
               </div>
             </div>
             <div class="row">
               <div class="col-sm-5">
-                <q-select stack-label="Actual Issue" inverted-light color="none" v-model="IssueNotResolved.actualIssue" 
+                <q-select stack-label="Actual Issue" filled-light color="none" v-model="IssueNotResolved.actualIssue"
                   separator :options="issueOptionList" />
               </div>
             </div>
             <div class="row">
               <div class="col-sm-5">
-                <q-select stack-label="Action Taken" :disable="IssueNotResolved.actualIssue == '' " inverted-light color="none" v-model="IssueNotResolved.actiontaken"
+                <q-select stack-label="Action Taken" :disable="IssueNotResolved.actualIssue == '' " filled-light color="none" v-model="IssueNotResolved.actiontaken"
                   separator :options="issueActionList" />
               </div>
             </div>

@@ -8,7 +8,7 @@
                         <q-chip color="purple-9">Step -1</q-chip>&nbsp; Select Aggregator
                     </div>
                     <div class="col">
-                        <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
+                        <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
                             :options="aggregatorOptions" />
 
                     </div>
@@ -20,7 +20,7 @@
                     <!--aggregator == ''-->
                     <div class="col">
                         <q-input  v-model="podNumber" color="grey-9" placeholder="POD Number"
-                            float-label="Enter POD Number" />
+                            label="Enter POD Number" />
                     </div>
                     <div class="col-auto" align="right">
                         <q-btn :disabled="podNumber == ''" label="Submit"
@@ -42,7 +42,7 @@
                                     <div class="row text-dark">
                                         <div class="col-md-8">
                                             <div>{{ item.aggregatorDevice.deviceName }}</div>
-                                            <div>{{ item.aggregatorDevice.createDate | moment("MMMM Do YYYY") }}</div>
+                                            <div>{{ $moment(item.aggregatorDevice.createDate).format("MMMM Do YYYY") }}</div>
                                         </div>
                                         <div class="col-md-4" align="right">
                                             <div>Count</div>
@@ -68,8 +68,7 @@
                 </div>
                 <!--STARTv-model: table damaged device -->
                 <q-table title="Lead Validation" table-class="customTableClass" class="q-py-none"
-                    :rows="deviceregionalInventoryList" :columns="columnData" :filter="filter"
-                    :pagination="paginationControl" :loading="toggleAjaxLoadFilter" row-key="name">
+                    :rows="deviceregionalInventoryList" :columns="columnData" :filter="filter" v-model:pagination="paginationControl" :loading="toggleAjaxLoadFilter" row-key="name">
                     <q-td v-slot:body-cell-inboundVerified="props" :props="props">
                         <q-btn flat v-if="props.row.inboundVerifiedStatus == 1" icon="check" color="positive" />
                         <q-btn flat v-else-if="props.row.inboundVerifiedStatus == 2" icon="clear" color="negative" />

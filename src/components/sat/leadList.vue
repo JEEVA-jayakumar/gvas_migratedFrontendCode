@@ -29,8 +29,7 @@
         class="q-py-none"
         :rows="tableData"
         :columns="columns"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         :rows-per-page-options="[5,10,15,20]"
         @request="ajaxLoadAllLeadInfo"
         row-key="nam6"
@@ -39,13 +38,13 @@
         <q-td
           v-slot:body-cell-createdAt="props"
           :props="props"
-        >{{ props.row.date | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.date).format("Do MMM Y") }}</q-td>
 
         <q-td
           v-slot:body-cell-leadNumber="props"
           :props="props"
           class="cursor-pointer"
-          @click.native="toggleLeadInformation(props.row)"
+          @click="toggleLeadInformation(props.row)"
         >
           <span
             class="label"
@@ -116,7 +115,7 @@
               v-model="filter"
               :debounce="600"
               placeholder="Type.."
-              float-label="Search .. "
+              label="Search .. "
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -249,8 +248,7 @@ export default {
         pagination: pagination,
         filter: filter,
         leadIdList: { leadIdList: this.propLeadInformation }
-      })
-        .then(res => {
+      }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 

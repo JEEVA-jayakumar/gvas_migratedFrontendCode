@@ -85,20 +85,20 @@
           default
           color="dark"
           name="unAssigned"
-          slot="title"
           label="Unassigned"
         />
-        <q-tab color="dark" name="assigned" slot="title" label="Assigned" />
+        <q-tab color="dark" name="assigned" label="Assigned" />
         <!-- <q-tab 
           color="dark"
           name="canceled"
-          slot="title"
           label="CANCELED MERCHANTS"
         /> -->
-        <q-tab-panel name="assigned">
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="assigned">
           <assigned />
         </q-tab-panel>
-        <q-tab-panel name="unAssigned">
+<q-tab-panel name="unAssigned">
           <!--START: table Data   :rows="getImplementationQueueUnassignedList"  -->
           <q-table
             :rows="tableData1"
@@ -118,7 +118,7 @@
               v-slot:body-cell-leadNumber="props"
               :props="props"
               class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row.leadInformation)"
+              @click="toggleLeadInformation(props.row.leadInformation)"
             >
               <span class="label text-primary"
                 ># {{ props.row.leadInformation.leadNumber }}</span
@@ -139,14 +139,12 @@
             <q-td
               v-slot:body-cell-submitToMarsDate="props"
               :props="props"
-              >{{
-                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-              }}</q-td
+              >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-createdAt="props"
               :props="props"
-              >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+              >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
             >
             <!-- <q-td
               v-slot:body-cell-tid="props"
@@ -187,7 +185,7 @@
                   color="grey-9"
                   v-model="filterSearch"
                   placeholder="Type.."
-                  float-label="Search By MID, Merchant Name.."
+                  label="Search By MID, Merchant Name.."
                   class="q-mr-lg q-py-sm"
                 />
               </div>
@@ -195,7 +193,7 @@
           </q-table>
           <!--ENDv-model: table Data -->
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
 
       <!--END: table Footer -->
       <!-- START >> COMPONENT: Update device address  -->
@@ -548,8 +546,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.IMPLEMENTATION_QUEUE_UNASSIGNED_LIST({ pagination, filter })
-        .then(res => {
+      this.IMPLEMENTATION_QUEUE_UNASSIGNED_LIST({ pagination, filter }).then(res => {
           this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
             let assumeArr = [];
             this.getImplementationExecutiveList.map(function(value) {
@@ -590,8 +587,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.IMPLEMENTATION_QUEUE_ASSIGNED_LIST({ pagination, filter })
-        .then(response => {
+      this.IMPLEMENTATION_QUEUE_ASSIGNED_LIST({ pagination, filter }).then(response => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 

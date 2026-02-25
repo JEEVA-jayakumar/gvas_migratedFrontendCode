@@ -16,8 +16,7 @@ if(res == 104){
   .post(rootState.GlobalVariables.STATE_MARS_AXIS_ON_BOARD_API_URL + 'additionalTerminals',request,
   { 
     headers: headers
-  })
-  .then(response => {
+  }).then(response => {
     commit("SET_ADDITIONAL_TID_FROM_MARS", response.data.data);
       console.log("Action Datas------------------>"+JSON.stringify(response.data.data))
     return response
@@ -27,8 +26,7 @@ if(res == 104){
   .post(rootState.GlobalVariables.STATE_MARS_ON_BOARD_API_URL + 'additionalTerminals',request,
   { 
     headers: headers
-  })
-  .then(response => {
+  }).then(response => {
     commit("SET_ADDITIONAL_TID_FROM_MARS", response.data.data);
       console.log("Action Datas------------------>"+JSON.stringify(response.data.data))
     return response

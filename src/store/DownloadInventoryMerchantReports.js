@@ -42,8 +42,7 @@ const FileDownload1 = {
             "&search=" +
             "&to=" + request.toDate, {
             responseType: 'arraybuffer'
-          })
-          .then(response => {
+          }).then(response => {
             console.log("FIle name : -- : ", response)
             let blob = COMMON_FILE_DOWNLOAD(response);
             let link = document.createElement("a");
@@ -58,8 +57,7 @@ const FileDownload1 = {
         return await api
           .get("download-inventory-with-merchant-list", {
             responseType: 'arraybuffer'
-          })
-          .then(response => {
+          }).then(response => {
             console.log("FIle name : -- : ", response.headers["Content-Disposition"])
             let blob = COMMON_FILE_DOWNLOAD(response);
             let link = document.createElement("a");
@@ -233,8 +231,7 @@ const FileDownload1 = {
             "&search=" +
             "&to=" + request.toDate, {
             responseType: 'arraybuffer'
-          })
-          .then(response => {
+          }).then(response => {
             console.log("FIle name : -- : ", response)
             let blob = COMMON_FILE_DOWNLOAD(response);
             let link = document.createElement("a");
@@ -249,8 +246,7 @@ const FileDownload1 = {
         return await api
           .get("aggregator-inventory/agg-download-inventory-with-merchant-list/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]), {
             responseType: 'arraybuffer'
-          })
-          .then(response => {
+          }).then(response => {
             console.log("FIle name : -- : ", response.headers["Content-Disposition"])
             let blob = COMMON_FILE_DOWNLOAD(response);
             let link = document.createElement("a");

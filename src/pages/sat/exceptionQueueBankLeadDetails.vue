@@ -187,7 +187,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Debit < 2000 (%)"
+                          label="Debit < 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelLesserThan"
@@ -196,7 +196,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Debit > 2000 (%)"
+                          label="Debit > 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelGreaterThan"
@@ -207,7 +207,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Std CC (%)"
+                          label="Std CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelStdCC"
@@ -216,7 +216,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Premium CC (%)"
+                          label="Premium CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelPremiumCC"
@@ -227,7 +227,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Corp Pre CC (%)"
+                          label="Corp Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelCorpCC"
@@ -236,7 +236,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Intl Pre CC (%)"
+                          label="Intl Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelIntlCC"
@@ -247,7 +247,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Super Pre CC (%)"
+                          label="Super Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="debitModelSuperPremiumCC"
@@ -256,7 +256,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Upi Debit Card UpTo 2000 (%)"
+                          label="Upi Debit Card UpTo 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="upiDebitCardUpTo2000"
@@ -267,7 +267,7 @@
                        <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Upi Debit Card Above 2000 (%)"
+                          label="Upi Debit Card Above 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="upiDebitCardAbove2000"
@@ -276,7 +276,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Upi Prepaid Credit Cards UpTo 2000 (%)"
+                          label="Upi Prepaid Credit Cards UpTo 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="upiPrepaidCreditCardsUpTo2000"
@@ -287,7 +287,7 @@
                        <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Upi Prepaid Credit Cards Above 2000 (%)"
+                          label="Upi Prepaid Credit Cards Above 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="upiPrepaidCreditCardsAbove2000"
@@ -324,7 +324,7 @@
                       :key="index"
                     >
                       <q-item-section class="text-dark capitalize">{{item.remarks}}</q-item-section>
-                      <q-item-section>{{item.createdAt | moment("Do MMM Y")}}</q-item-section>
+                      <q-item-section>{{ $moment(item.createdAt).format("Do MMM Y") }}</q-item-section>
                     </q-item>
                     <q-item
                       v-show="getShortLeadInfo.bankSubventionTracker.length == 0"
@@ -491,7 +491,7 @@
                                   <q-item-section icon="attach_file" />
                                   <q-item-section
                                     class="text-body1"
-                                    :sublabel="documents[0].uploadedDocuments.length + 'Document(s)'"
+                                    :caption="documents[0].uploadedDocuments.length + 'Document(s)'"
                                     :label="index"
                                   />
                                 </template>
@@ -544,7 +544,7 @@
                                   <q-item-section icon="apps" />
                                   <q-item-section
                                     class="text-body1"
-                                    :sublabel="documents.length + 'Type(s)'"
+                                    :caption="documents.length + 'Type(s)'"
                                     :label="index"
                                   />
                                 </template>
@@ -566,7 +566,7 @@
                                         <q-item-section icon="attach_file" />
                                         <q-item-section
                                           class="text-body1"
-                                          :sublabel="subDocument.uploadedDocuments.length + 'Document(s)'"
+                                          :caption="subDocument.uploadedDocuments.length + 'Document(s)'"
                                           :label="subDocument.subDocumentType"
                                         />
                                       </template>

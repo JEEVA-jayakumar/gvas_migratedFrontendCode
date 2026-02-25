@@ -6,8 +6,7 @@
         :rows="getAllPodList"
         table-class="customSATableClass"
         :columns="columns"
-        :filter="filter"
-        :pagination="serverPagination"
+        :filter="filter" v-model:pagination="serverPagination"
         :rows-per-page-options="[5,10,15,20]"
         row-key="name"
         color="grey-9"
@@ -33,11 +32,11 @@
         <q-td
           v-slot:body-cell-receivedAt="props"
           :props="props"
-        >{{ props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.receivedAt).format("Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-DeviceList="props"
           :props="props"
-        >{{ props.row.device.createDate | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.device.createDate).format("Do MMM Y") }}</q-td>
 
         <template v-slot:top="props">
           <div class="col-md-5">
@@ -47,7 +46,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Pod Number, Device Type"
+              label="Pod Number, Device Type"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -234,8 +233,7 @@ export default {
           message: "Are you sure want to delete Pincode?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.DELETE_PERMISSION_BY_PERMISSION_ID_DATA(PermissionId)
             .then(response => {
               this.FETCH_ALL_PINCODES();
@@ -245,8 +243,7 @@ export default {
                 message: "Successfully Deleted!",
                 icon: "thumb_up"
               });
-            })
-            .catch(() => {
+            }).onCancel(() => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -255,7 +252,7 @@ export default {
               });
             });
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

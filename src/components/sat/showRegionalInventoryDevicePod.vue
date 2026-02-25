@@ -24,7 +24,7 @@
             <q-input
               color="grey-9"
               v-model="formData.podNumber"
-              float-label="Enter POD Number"
+              label="Enter POD Number"
               placeholder="POD Number"
             />
             

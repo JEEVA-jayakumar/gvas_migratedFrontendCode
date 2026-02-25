@@ -14,8 +14,7 @@
           :columns="columns"
           row-key="field"
           color="grey-9"
-          :filter="filter"
-          :pagination="paginationControl"
+          :filter="filter" v-model:pagination="paginationControl"
           :rows-per-page-options="[5,10,15,20]"
           @request="ajaxLoadAllPaymentTrackerInfo"
           table-style="word-break: break-all"
@@ -38,7 +37,7 @@
                   checked-icon="fas fa-chevron-up"
                   unchecked-icon="fas fa-chevron-down"
                   class="q-mr-md"
-                  @input="expandRowPlease(props.row)"
+                  @update:model-value="expandRowPlease(props.row)"
                 />
                 <span
                   class="cursor-pointer"
@@ -150,7 +149,7 @@
                   class="text-left"
                   v-if="props.row.paymentMadeon == '' || props.row.paymentMadeon == null"
                 >NA</div>
-                <div class="text-left" v-else>{{ props.row.paymentMadeon | moment("Do MMM Y") }}</div>
+                <div class="text-left" v-else>{{ $moment(props.row.paymentMadeon).format("Do MMM Y") }}</div>
               </q-td>
               <q-td>
                 <div class="text-left text-caption text-grey-8 text-weight-medium">Payment Reference</div>
@@ -217,7 +216,7 @@
                 color="grey-9"
                 v-model="filter"
                 placeholder="Type.."
-                float-label="Search"
+                label="Search"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -435,8 +434,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_ALL_PAYMENT_TRACKER_DATA({ pagination, filter })
-        .then(response => {
+      this.FETCH_ALL_PAYMENT_TRACKER_DATA({ pagination, filter }).then(response => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 
@@ -472,8 +470,7 @@ export default {
           message: "Are you sure want to approve the lead?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: "purple-9",
@@ -500,8 +497,7 @@ export default {
                 message: "Successfully Approved!",
                 icon: "thumb_up"
               });
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",

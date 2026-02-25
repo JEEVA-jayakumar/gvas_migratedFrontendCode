@@ -13,7 +13,7 @@
                   color="grey-9"
                   v-model="formData.leadSource"
                   :options="dropDown.leadSourceOptions"
-                  float-label="Select lead source"
+                  label="Select lead source"
                   placeholder="Lead source"
                 />
               </q-item-section>
@@ -36,7 +36,7 @@
                   color="grey-9"
                   v-model="formData.device"
                   :options="dropDown.deviceOptions"
-                  float-label="Select device"
+                  label="Select device"
                   placeholder="Device"
                 />
               </q-item-section>
@@ -59,7 +59,7 @@
                     color="grey-9"
                     v-model="formData.marsDevice"
                     :options="dropDown.marsDeviceOptions"
-                    float-label="Mars Device Model"
+                    label="Mars Device Model"
                   />
                 </q-item-section>
                 <!-- <q-item-section right>
@@ -72,9 +72,9 @@
                   color="grey-9"
                   v-model="formData.plan"
                   :options="dropDown.planOptions"
-                  float-label="Select plan"
+                  label="Select plan"
                   placeholder="Plan"
-                  @input="fnCategoryBasedRental(formData)"
+                  @update:model-value="fnCategoryBasedRental(formData)"
                 />
               </q-item-section>
               <q-item-section right>
@@ -97,7 +97,7 @@
                   type="number"
                   v-model="formData.setupFees"
                   placeholder="Setup fee"
-                  float-label="Enter Setup fee"
+                  label="Enter Setup fee"
                 />
               </q-item-section>
             </q-item>
@@ -109,7 +109,7 @@
                     type="number"
                     v-model="formData.monthlyFees"
                     placeholder="Recurring fee"
-                    float-label="Enter recurring fee"
+                    label="Enter recurring fee"
                   />
                 </div>
               </q-item-section>
@@ -133,8 +133,7 @@
           :rows="tableData"
           table-class="customSATableClass"
           :columns="columns"
-          :filter="filterSearch"
-          :pagination="paginationControl"
+          :filter="filterSearch" v-model:pagination="paginationControl"
           :filter-method="myCustomSearchFilter"
           row-key="name"
           color="grey-9"
@@ -174,7 +173,7 @@
                 color="grey-9"
                 v-model="filterSearch"
                 placeholder="Type.."
-                float-label="Search by name, short name"
+                label="Search by name, short name"
                 class="q-mr-lg"
               />
             </div>
@@ -375,8 +374,7 @@ export default {
               label: item.deviceName
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           self.LEAD_SOURCE_ACTIVE_LIST().then(() => {
             return _.map(self.getActiveLeadSource, item => {
               self.dropDown.leadSourceOptions.push({
@@ -385,8 +383,7 @@ export default {
               });
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           self.PLAN_ACTIVE_LIST().then(() => {
             return _.map(self.getActivePlan, item => {
               self.dropDown.planOptions.push({

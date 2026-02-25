@@ -44,8 +44,7 @@ const FileDownload1 = {
         return await api
         .get("download-master-tracker-list/"+request.fromDate+"/"+request.toDate, {
           responseType: 'arraybuffer'
-        })
-        .then(response => {
+        }).then(response => {
             console.log("FIle name : -- : ", response)
           let blob = COMMON_FILE_DOWNLOAD(response);
           let link = document.createElement("a");
@@ -60,8 +59,7 @@ const FileDownload1 = {
         return await  api
         .get("download-master-tracker-list", {
           responseType: 'arraybuffer'
-        })
-        .then(response => {
+        }).then(response => {
             console.log("FIle name : -- : ", response.headers["Content-Disposition"])
           let blob = COMMON_FILE_DOWNLOAD(response);
           let link = document.createElement("a");
@@ -82,8 +80,7 @@ const FileDownload1 = {
         return await api
         .get("aggregator-inventory/agg-download-master-tracker-list/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/"+request.fromDate+"/"+request.toDate, {
           responseType: 'arraybuffer'
-        })
-        .then(response => {
+        }).then(response => {
             console.log("FIle name : -- : ", response)
           let blob = COMMON_FILE_DOWNLOAD(response);
           let link = document.createElement("a");
@@ -98,8 +95,7 @@ const FileDownload1 = {
         return await  api
         .get("download-master-tracker-listaggregator-inventory/agg-download-master-tracker-list/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]), {
           responseType: 'arraybuffer'
-        })
-        .then(response => {
+        }).then(response => {
             console.log("FIle name : -- : ", response.headers["Content-Disposition"])
           let blob = COMMON_FILE_DOWNLOAD(response);
           let link = document.createElement("a");
@@ -123,8 +119,7 @@ const FileDownload1 = {
         return await api
         .get("finance-tracker-list-download-date-based?from="+request.fromDate+"&to="+request.toDate, {
           responseType: 'arraybuffer'
-        })
-        .then(response => {
+        }).then(response => {
             console.log("FIle name : -- : ", response)
           let blob = COMMON_FILE_DOWNLOAD(response);
           let link = document.createElement("a");
@@ -139,8 +134,7 @@ const FileDownload1 = {
         return await  api
         .get("download-master-tracker-list", {
           responseType: 'arraybuffer'
-        })
-        .then(response => {
+        }).then(response => {
             console.log("FIle name : -- : ", response.headers["Content-Disposition"])
           let blob = COMMON_FILE_DOWNLOAD(response);
           let link = document.createElement("a");

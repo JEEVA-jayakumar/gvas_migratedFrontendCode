@@ -10,14 +10,14 @@
             color="grey-9"
             v-model="formData.allocate_region"
             :options="regionOptions"
-            float-label="Select Region"
-            @input="regionBasedSoLoad"
+            label="Select Region"
+            @update:model-value="regionBasedSoLoad"
           />
         </div>
         <div class="col-md-5">
           <q-select
             v-model="formData.allocate_so"
-            float-label="Select SO"
+            label="Select SO"
             radio
             color="grey-9"
             :options="regionBasedSo"
@@ -46,7 +46,7 @@
           <q-input
             disable
             v-model="formData.pod_number"
-            float-label="Pod Number"
+            label="Pod Number"
             radio
             color="grey-9"
           />
@@ -55,7 +55,7 @@
           <q-input
             disable
             v-model="formData.total_count"
-            float-label="Total Count"
+            label="Total Count"
             radio
             color="grey-9"
           />
@@ -64,10 +64,10 @@
             <div class="row bottom-border group q-px-md q-py-md items-center text-weight-regular text-grey-9">
                 <div class="col-md-2">
                     <q-select color="grey-9" v-model="formData.allocate_region" :options="regionOptions"
-                        float-label="Select Region" @input="regionBasedSoLoad" />
+                        label="Select Region" @update:model-value="regionBasedSoLoad" />
                 </div>
                 <div class="col-md-2">
-                    <q-select filter clearable :disable="this.propRowDetails.allocate_so == null" v-model="formData.allocate_so" float-label="Select SO" radio color="grey-9"
+                    <q-select filter clearable :disable="this.propRowDetails.allocate_so == null" v-model="formData.allocate_so" label="Select SO" radio color="grey-9"
                         :options="regionBasedSo" />
                 </div>
                  <div class="col-md-2">
@@ -83,10 +83,10 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <q-input disable v-model="formData.pod_number" float-label="Pod Number" radio color="grey-9" />
+                    <q-input disable v-model="formData.pod_number" label="Pod Number" radio color="grey-9" />
                 </div>
                 <div class="col-md-2">
-                    <q-input disable v-model="formData.total_count" float-label="Total Count" radio color="grey-9" />
+                    <q-input disable v-model="formData.total_count" label="Total Count" radio color="grey-9" />
                 </div> 
             </div>
             <div class="full-width group" align="center">

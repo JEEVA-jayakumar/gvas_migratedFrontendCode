@@ -3,12 +3,14 @@
     <div class="text-grey-9">
       <div class="row bottom-border q-pa-sm items-center">
         <div class="col">
-          <q-tabs no-pane-border v-model="QRselected" color="dark" inverted class="shadow-1">
-            <q-tab name="HitachiUpload" label="Upload And Download" slot="title" />
-            <q-tab-panel name="HitachiUpload">
+          <q-tabs no-pane-border v-model="QRselected" color="dark" filled class="shadow-1">
+            <q-tab name="HitachiUpload" label="Upload And Download" />
+</q-tabs>
+<q-tab-panels v-model="QRselected" animated>
+<q-tab-panel name="HitachiUpload">
               <HitachiUpload />
             </q-tab-panel>
-          </q-tabs>
+</q-tab-panels>
         </div>
       </div>
     </div>

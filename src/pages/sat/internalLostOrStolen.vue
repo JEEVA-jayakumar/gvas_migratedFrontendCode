@@ -23,8 +23,7 @@
         table-class="customTableClass"
         :rows="tableData"
         :columns="columns"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         row-key="name"
         :loading="toggleAjaxLoadFilter"
         :rows-per-page-options="[5, 10, 15, 20]"
@@ -52,7 +51,7 @@
           v-slot:body-cell-leadNumber="props"
           :props="props"
           class="cursor-pointer"
-          @click.native="toggleLeadInformation(props.row.leadInformation)"
+          @click="toggleLeadInformation(props.row.leadInformation)"
         >
           <span class="label text-primary"
             ># {{ props.row.leadInformation.leadNumber }}</span
@@ -75,14 +74,10 @@
           <span class="label">{{ props.row.lostOrStolenRemarks }}</span>
         </q-td>
         <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{
-            props.row.deviceStatusDate | moment("Do MMM Y")
-          }}</span>
+          <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
         </q-td>
         <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{
-            props.row.deviceStatusDate | moment("Do MMM Y")
-          }}</span>
+          <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
         </q-td> -->
         <q-td v-slot:body-cell-action="props" :props="props">
           <q-btn
@@ -116,7 +111,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search Using TID, MID, Lead ID, Merchant Name"
+              label="Search Using TID, MID, Lead ID, Merchant Name"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -132,8 +127,7 @@
         row-key="field"
         color="grey-9"
         :filter="filter1"
-        :rows-per-page-options="[5, 10, 15, 20, 25]"
-        :pagination="paginationControl1"
+        :rows-per-page-options="[5, 10, 15, 20, 25]" v-model:pagination="paginationControl1"
         :loading="toggleAjaxLoadFilter1"
         @request="lostOrStolenLoadInfo"
         table-style="word-break: break-all"
@@ -141,14 +135,12 @@
       >
       
         <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{
-            props.row.deviceStatusDate | moment("Do MMM Y")
-          }}</span>
+          <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
         </q-td> -->
         <q-td
             v-slot:body-cell-updated_at="props"
             :props="props"
-          >{{ props.row.updatedAt ==null? "NA" : props.row.updatedAt | moment("Do MMM Y") }}</q-td>
+          >{{ $moment(props.row.updatedAt ==null? "NA" : props.row.updatedAt).format("Do MMM Y") }}</q-td>
         <q-td v-slot:body-cell-Status="props" :props="props">
           <span
             class="label text-positive"
@@ -231,7 +223,7 @@
               color="grey-9"
               v-model="filter1"
               placeholder="Type.."
-              float-label="Search Using TID, MID "
+              label="Search Using TID, MID "
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -605,8 +597,7 @@ import { required, or } from '@vuelidate/validators';
           spinnerColor: "purple-9",
           message: "Fetching data .."
         });
-        this.MASTER_TRACKER_LIST({ pagination, filter })
-          .then(res => {
+        this.MASTER_TRACKER_LIST({ pagination, filter }).then(res => {
             // updating pagination to reflect in the UI
             this.paginationControl = pagination;
   
@@ -643,8 +634,7 @@ import { required, or } from '@vuelidate/validators';
           spinnerColor: "purple-9",
           message: "Fetching data .."
         });
-        this.FETCH_ALL_LOST_DEVICES_DATAS({ pagination, filter })
-          .then(res => {
+        this.FETCH_ALL_LOST_DEVICES_DATAS({ pagination, filter }).then(res => {
             console.log("INSIDE LOAD ALL LEAD INFO 1 :::::::::::::::::::::");
             console.log(
               "Table Datas 1---------------------->" +

@@ -171,7 +171,7 @@ export const AGGREGATOR_IMPLEMENTED_VERIFICATION_QUEUE = ({
                 sorting
             )
             .then(response => {
-                console.log("API Response : ", response.body.data);
+                console.log("API Response : ", response.data.data);
                 commit("SET_AGGREGATOR_IMPLEMENTED_VERIFICATION_QUEUE", response.data.data);
                 console.log("SET_AGGREGATOR_IMPLEMENTED_VERIFICATION_QUEUE : ", response.data.data);
 
@@ -295,8 +295,7 @@ export const SERVICE_TICKET_LIST = ({
 export const SERVICE_TICKET_APPROVE = ({
     commit
 }, request) => {
-    return api.put("service-request/approve-service-ticket/" + request.id + "/1", {})
-        .then(response => {
+    return api.put("service-request/approve-service-ticket/" + request.id + "/1", {}).then(response => {
             commit("SET_SERVICE_TICKET_APPROVE", response);
         });
 };
@@ -304,8 +303,7 @@ export const SERVICE_TICKET_REJECT = ({
     commit
 }, request) => {
     console.log(request)
-    return api.put("service-request/approve-service-ticket/" + request.id + "/2", request.reason, {})
-        .then(response => {
+    return api.put("service-request/approve-service-ticket/" + request.id + "/2", request.reason, {}).then(response => {
             commit("SET_SERVICE_TICKET_REJECT", response);
         });
 };

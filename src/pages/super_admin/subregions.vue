@@ -6,8 +6,7 @@
         :rows="getAllPincodes"
         table-class="customSATableClass"
         :columns="columns"
-        :filter="filter"
-        :pagination="serverPagination"
+        :filter="filter" v-model:pagination="serverPagination"
         row-key="name"
         :loading="loading"
         @request="searchRequest"
@@ -218,8 +217,7 @@ export default {
           message: "Are you sure want to delete Pincode?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.DELETE_PERMISSION_BY_PERMISSION_ID_DATA(PermissionId)
             .then(response => {
               this.FETCH_ALL_PINCODES();
@@ -229,8 +227,7 @@ export default {
                 message: "Successfully Deleted!",
                 icon: "thumb_up"
               });
-            })
-            .catch(() => {
+            }).onCancel(() => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -239,7 +236,7 @@ export default {
               });
             });
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

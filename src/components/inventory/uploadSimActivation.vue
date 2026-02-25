@@ -14,11 +14,11 @@
                     
           </div>
           <!-- <div class="col-md-8 q-py-md" align="left">
-            <q-select color="grey-9" v-model="formData.aggregator" float-label="Select Aggregator" radio
-              :options="dropdDown.aggregatorOptions" @input="getaggregator" />
+            <q-select color="grey-9" v-model="formData.aggregator" label="Select Aggregator" radio
+              :options="dropdDown.aggregatorOptions" @update:model-value="getaggregator" />
           </div> -->
           <!-- <div class="col-md-8 q-py-md" align="left">
-            <q-select color="grey-9" v-model="formData.deviceType" float-label="Select Device Type" radio
+            <q-select color="grey-9" v-model="formData.deviceType" label="Select Device Type" radio
               :options="deviceOption" />
           </div> -->
     

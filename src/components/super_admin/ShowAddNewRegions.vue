@@ -23,7 +23,7 @@
                           :options="regionGroupOptions"
                           class="text-weight-regular text-grey-8" 
                           color="grey-9" 
-                          float-label="Region Group" 
+                          label="Region Group"
                           placeholder="Region Group" 
                         />
                     </div>
@@ -33,7 +33,7 @@
                           :error="$v.formData.regionAreaName.$error"
                           class="text-weight-regular text-grey-8" 
                           color="grey-9" 
-                          float-label="Region" 
+                          label="Region"
                           placeholder="Region" 
                         />
                     </div>

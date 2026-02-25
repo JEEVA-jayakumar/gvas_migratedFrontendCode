@@ -7,27 +7,28 @@
               no-pane-border
               v-model="inventoryOptionSelected"
               color="dark"
-              inverted
+              filled
               class="shadow-1"
             >
-              <q-tab name="PhonepespareParts" label="Aggregator Spare Parts" slot="title" />
-               <q-tab name="PhonepesparePodList" label="Aggregator Spare Pod List" slot="title" />
-              
-              <q-tab-panel name="PhonepespareParts">
+              <q-tab name="PhonepespareParts" label="Aggregator Spare Parts" />
+               <q-tab name="PhonepesparePodList" label="Aggregator Spare Pod List" />
+</q-tabs>
+<q-tab-panels v-model="inventoryOptionSelected" animated>
+<q-tab-panel name="PhonepespareParts">
                 <PhonepesparePartsAddStocks
                   @emittedForTotalSerialNumbers="
                     fnAjaxFetchAllDeviceDetailsWithCount
                   "
                 />
               </q-tab-panel>
-              <q-tab-panel name="PhonepesparePodList">
+<q-tab-panel name="PhonepesparePodList">
                 <PhonepesparePartsPodList
                   @emittedForTotalSerialNumbers="
                     fnAjaxFetchAllDeviceDetailsWithCount
                   "
                 />
               </q-tab-panel>
-            </q-tabs>
+</q-tab-panels>
           </div>
         </div>
       </div>

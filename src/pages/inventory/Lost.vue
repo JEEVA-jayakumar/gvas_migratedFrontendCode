@@ -22,8 +22,7 @@
         :columns="columns"
         :rows="tableData"
         color="grey-9"
-        :filter="filterSearch"
-        :pagination="paginationControl"
+        :filter="filterSearch" v-model:pagination="paginationControl"
         :rows-per-page-options="[5,10,15,20,25]"
         :loading="toggleAjaxLoadFilter"
         @request="ajaxLoadAllLeadInfo"
@@ -31,7 +30,7 @@
        <q-td
           v-slot:body-cell-updated_at="props"
           :props="props"
-        >{{ props.row.updatedAt ==null? "NA" : props.row.updatedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.updatedAt ==null? "NA" : props.row.updatedAt).format("Do MMM Y") }}</q-td>
         <template slot="top">
           <!--START: table filter,search -->
           <div class="col-md-5">
@@ -40,7 +39,7 @@
               color="grey-9"
               v-model="filterSearch"
               placeholder="Type.."
-              float-label="Search Using Device Serial Number"
+              label="Search Using Device Serial Number"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -218,8 +217,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_INVENTORY_STOLEN_DATA({ pagination, filter })
-        .then(res => {
+      this.FETCH_INVENTORY_STOLEN_DATA({ pagination, filter }).then(res => {
            this.paginationControl = pagination;
 
           // we also set (or update) rowsNumber

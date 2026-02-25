@@ -102,18 +102,17 @@
           default
           color="dark"
           name="unAssigned"
-          slot="title"
           label="Unassigned"
         />
-        <q-tab color="dark" name="assigned" slot="title" label="Assigned" />
-        <!--                 
-                <q-tab color="dark" name="opened" slot="title" label="Opened" />
-                <q-tab color="dark" name="closed" slot="title" label="Closed" /> -->
-        <!-- 
-                  <q-tab-panel name="opened">
+        <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="opened">
               <opened/>
-            </q-tab-panel> -->
-        <q-tab-panel name="unAssigned">
+            </q-tab-panel>
+<q-tab-panel name="unAssigned">
           <q-table
             :rows="tableData3"
             :columns="columnDataUnassigned"
@@ -132,7 +131,7 @@
               v-slot:body-cell-serviceReqTicketId="props"
               :props="props"
               class="cursor-pointer"
-              @click.native="toggleServiceRequest(props.row)"
+              @click="toggleServiceRequest(props.row)"
             >
               <span class="label text-primary"
                 ># {{ props.row.serviceReqTicketId }}</span
@@ -142,12 +141,12 @@
             <q-td
               v-slot:body-cell-createdDate="props"
               :props="props"
-              >{{ props.row.createdDate | moment("Do MMM Y") }}</q-td
+              >{{ $moment(props.row.createdDate).format("Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-updatedDate="props"
               :props="props"
-              >{{ props.row.updatedDate | moment("Do MMM Y") }}</q-td
+              >{{ $moment(props.row.updatedDate).format("Do MMM Y") }}</q-td
             >
             <!-- <q-td v-slot:body-cell-serviceRequestSubTicketStatus="props" :props="props">
                             <span class="label text-positive"
@@ -236,20 +235,19 @@
                   color="grey-9"
                   v-model="filterSearch1"
                   placeholder="Type.."
-                  float-label="Search By ServiceReqTicketId, TID .."
+                  label="Search By ServiceReqTicketId, TID .."
                   class="q-mr-lg q-py-sm"
                 />
               </div>
             </template>
           </q-table>
         </q-tab-panel>
-        <q-tab-panel name="assigned">
+<q-tab-panel name="assigned">
           <q-table
             :rows="tableData1"
             :columns="columnDataAssigned"
             table-class="customTableClass"
-            :filter="filterSearch"
-            :pagination="paginationControl"
+            :filter="filterSearch" v-model:pagination="paginationControl"
             v-model:selected="formData.marsDeviceIdsCookedUnAssinged"
             row-key="id"
             :loading="tableAjaxLoading"
@@ -280,7 +278,7 @@
                     color="grey-9"
                     v-model="props.row.expand"
                     class="q-mr-md"
-                    @input="expandRowPlease(props.row)"
+                    @update:model-value="expandRowPlease(props.row)"
                   />
                   <span>{{ props.row.serviceReqTicketId }}</span>
                 </q-td>
@@ -290,10 +288,10 @@
                   <span v-else="props.row.mid == null">NA</span>
                 </q-td>
                 <q-td key="createdDate" :props="props">
-                  {{ props.row.createdDate | moment("Do MMM Y") }}
+                  {{ $moment(props.row.createdDate).format("Do MMM Y") }}
                 </q-td>
                 <q-td key="updatedDate" :props="props">
-                  {{ props.row.updatedDate | moment("Do MMM Y") }}
+                  {{ $moment(props.row.updatedDate).format("Do MMM Y") }}
                 </q-td>
                 <q-td key="meName" :props="props"> {{ props.row.meName }}</q-td>
                 <q-td key="address" :props="props"> {{ props.row.address }}</q-td>
@@ -884,14 +882,14 @@
                   color="grey-9"
                   v-model="filterSearch"
                   placeholder="Type.."
-                  float-label="Search By ServiceReqTicketId, TID .."
+                  label="Search By ServiceReqTicketId, TID .."
                   class="q-mr-lg q-py-sm"
                 />
               </div>
             </template>
           </q-table>
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
       <div class="row items-center gutter-y-sm">
         <div class="col-md-9 col-sm-12 col-xs-12">
           <div class="row items-center"></div>
@@ -1482,8 +1480,7 @@ export default {
       this.FETCH_PHONEPE_UNASSIGNED_SERVICE_REQUEST_DATAS1({
         pagination,
         filter
-      })
-        .then(res => {
+      }).then(res => {
           this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
             let assumeArr = [];
             this.getImplementationExecutiveList.map(function(value) {
@@ -1538,8 +1535,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_PHONEPE_ASSIGNED_SERVICE_REQUEST_DATAS({ pagination, filter })
-        .then(res => {
+      this.FETCH_PHONEPE_ASSIGNED_SERVICE_REQUEST_DATAS({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 

@@ -425,8 +425,7 @@ export default {
       this.MARS_DATA_SUBMIT_INTERNAL({
         merchant: this.merchant,
         action: 1
-      })
-        .then(response => {
+      }).then(response => {
           if (
             extras != undefined &&
             extras.hasOwnProperty("customStepper") &&
@@ -467,8 +466,7 @@ export default {
           return self.regionsFromMars.items.map(oo => {
             self.regionOptions.push({ label: oo.name, value: oo.code });
           });
-        })
-        .then(() => {
+        }).then(() => {
           /* API call to fetch sharing partner */
           return self
             .SHARING_PARTNER_FROM_MARS(institutionCode)
@@ -481,8 +479,7 @@ export default {
                 });
               });
             });
-        })
-        .then(() => {
+        }).then(() => {
           /* API call to fetch sharing partner */
           return self.LEAD_FROM_FROM_MARS(institutionCode).then(response => {
             self.leadFromOptions = [];
@@ -490,8 +487,7 @@ export default {
               self.leadFromOptions.push({ label: oo.name, value: oo.name });
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           /* API call to fetch sales person */
           return self.SALES_PERSON_FROM_MARS(institutionCode).then(response => {
             self.salesPersonOptions = [];
@@ -499,8 +495,7 @@ export default {
               self.salesPersonOptions.push({ label: oo.name, value: oo.code });
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           /* API call to fetch city */
           return self.CITY_FROM_MARS().then(response => {
             self.cityOptions = [];
@@ -508,8 +503,7 @@ export default {
               self.cityOptions.push({ label: oo.name, value: oo.code });
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           /* API call to fetch state */
           return self.STATE_FROM_MARS().then(response => {
             self.stateOptions = [];
@@ -517,8 +511,7 @@ export default {
               self.stateOptions.push({ label: oo.name, value: oo.code });
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           /* API call to fetch state */
           return self.MCC_FROM_MARS().then(response => {
             self.mccSearchSet = [];
@@ -529,8 +522,7 @@ export default {
               });
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           /* API call to fetch device model */
           return self.DEVICE_MODEL_FROM_MARS(institutionCode).then(response => {
             self.terminalModelSet = [];
@@ -538,8 +530,7 @@ export default {
               self.terminalModelSet.push({ label: oo.name, value: oo.code });
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           /* API call to fetch rental plan */
           return self.RENTAL_PLAN_FROM_MARS(institutionCode).then(response => {
             self.rentalPlanSet = [];
@@ -547,8 +538,7 @@ export default {
               self.rentalPlanSet.push({ label: oo.name, value: oo.code });
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           /* API call to fetch bank list */
           return self.BANK_LIST_FROM_MARS(institutionCode).then(response => {
             // let bankList = [];
@@ -556,8 +546,7 @@ export default {
               self.bankListSet.push({ label: oo, value: oo });
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           /* API call to fetch bank list */
           return self.NETWORK_PROVIDER(institutionCode).then(response => {
             // let bankList = [];
@@ -568,8 +557,7 @@ export default {
               });
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           /* API call to fetch bank list */
           return self.SERVICE_PROVIDER(institutionCode).then(response => {
             // let bankList = [];
@@ -580,14 +568,12 @@ export default {
               });
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           let marsFormSubmitAction = this.propLeadDeatils.marsFormSubmitAction;
           if ([1, 2].includes(marsFormSubmitAction)) {
             return this.FETCH_SAVED_DATA_FROM_OWN_DB({
               leadId: this.$route.params.id
-            })
-              .then(res => {
+            }).then(res => {
                 //Date formatting for MARS
                 res.salesInformation["applicationDate"] = this.commonDateFormat(res.salesInformation.applicationDate;
                 );
@@ -628,8 +614,7 @@ export default {
                 res.businessInformation["memberSince"] = this.commonDateFormat(res.businessInformation.memberSince;
                 );
                 return res;
-              })
-              .then(res => {
+              }).then(res => {
                 this.merchant = {
                   salesInformation: res.salesInformation,
                   companyInformation: res.companyInformation,
@@ -682,8 +667,7 @@ export default {
             mdrPlan.internationalCreditCard.percentage = leadDetails.intlCC;
             paymentDetails.numberOfTerminals = leadDetails.deviceCount;
           }
-        })
-        .then(() => {
+        }).then(() => {
           this.$q.loading.hide();
         })
         .catch(() => {
@@ -742,8 +726,7 @@ export default {
                 params: finalRequest,
                 leadStatus: this.propLeadDeatils.leadStatus,
                 refNumber: this.propLeadDeatils.merchantRefCode
-              })
-              .then(response => {
+              }).then(response => {
                 self.$q.loading.show({
                   delay: 0, // ms
                   spinnerColor: "purple-9",
@@ -751,10 +734,9 @@ export default {
                 });
                 self
                   .MARS_DATA_EXTERNAL_SUBMIT_RESPONSE({
-                    request: response.body,
+                    request: response.data,
                     leadId: self.$route.params.id
-                  })
-                  .then(response => {
+                  }).then(response => {
                     self.$q.notify({
                       color: "positive",
                       position: "bottom",

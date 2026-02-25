@@ -11,7 +11,7 @@
               color="tertiary"
               align="justify"
             >
-              <q-tab class="size1" label="UPLOAD CSV FILE" slot="title" />
+              <q-tab class="size1" label="UPLOAD CSV FILE" />
               <div>
                 <div class="q-pa-md">
                   <div class="row text-center justify-center">
@@ -101,7 +101,6 @@
               <q-tab
                 class="size1"
                 label="Hitachi Onboarding Merchants"
-                slot="title"
                 default
                 name="unAssigned"
               />
@@ -118,10 +117,11 @@
                   class="size1" 
                   color="dark"
                   name="unAssigned"
-                  slot="title"
                   label="Hitachi Onboarding Merchants"
                 /> -->
-              <q-tab-panel name="unAssigned">
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="unAssigned">
                 <!--START: table Data -->
                 <q-table
                   :rows="tableData1"
@@ -153,7 +153,7 @@
                   <q-td
                     v-slot:body-cell-createdAt="props"
                     :props="props"
-                    >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+                    >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
                   >
                   <q-td
                     v-slot:body-cell-assign="props"
@@ -214,7 +214,7 @@
                         color="grey-9"
                         v-model="filterSearch1"
                         placeholder="Type.."
-                        float-label="Search by MerchantName, TID, MID..."
+                        label="Search by MerchantName, TID, MID..."
                         class="q-mr-lg q-py-sm"
                       />
                     </div>
@@ -233,7 +233,7 @@
                 </q-table>
                 <!--END: table Data -->
               </q-tab-panel>
-            </q-tabs>
+</q-tab-panels>
             <div class="row items-center gutter-y-sm">
               <div class="col-md-9 col-sm-12 col-xs-12">
                 <div class="row items-center"></div>
@@ -531,8 +531,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.HITACHI_INDIAN_ONBOARDING_LIST({ pagination, filter })
-        .then(res => {
+      this.HITACHI_INDIAN_ONBOARDING_LIST({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl1 = pagination;
 

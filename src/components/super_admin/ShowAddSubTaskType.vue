@@ -21,7 +21,7 @@
                           :error="$v.formData.issue_req_type.$error" 
                           class="text-weight-regular text-grey-8" 
                           color="grey-9" 
-                          float-label="Select Service Request" 
+                          label="Select Service Request"
                           :options="selectServiceReqType"
                           placeholder="Select Service Request" 
                         />
@@ -34,7 +34,7 @@
                           :error="$v.formData.name.$error" 
                           class="text-weight-regular text-grey-8" 
                           color="grey-9" 
-                          float-label="Enter Sub Task Name" 
+                          label="Enter Sub Task Name"
                           placeholder="Enter Sub Task Name" 
                         />
                     </div>

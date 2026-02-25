@@ -11,7 +11,7 @@
         <div class="row gutter-sm q-py-sm items-center">
           <div class="col-md-12">
             <q-input v-model="formData.name" @blur="$v.formData.name.$touch" :error="$v.formData.name.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" float-label="Host Name" placeholder="Host Name"
+              class="text-weight-regular text-grey-8" color="grey-9" label="Host Name" placeholder="Host Name"
               @keyup.enter="submitLeadSourceData(formData)" />
           </div>
           <!-- <div class="col-md-12">
@@ -31,7 +31,7 @@
           <div class="col-md-12">
             <q-input  v-model="formData.hostRRCode" @blur="$v.formData.hostRRCode.$touch"
               :error="$v.formData.hostRRCode.$error" class="text-weight-regular text-grey-8" color="grey-9"
-              float-label="Host Code" placeholder="Host Code" @keyup.enter="submitLeadSourceData(formData)" />
+              label="Host Code" placeholder="Host Code" @keyup.enter="submitLeadSourceData(formData)" />
           </div>
           <!-- <div class="col-md-12">
               <q-input
@@ -41,7 +41,7 @@
                 :error="$v.formData.lastBaseTid.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="last Base Tid"
+                label="last Base Tid"
                 placeholder="last Base Tid"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -54,7 +54,7 @@
                 :error="$v.formData.lastBaseMid.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="last Base Mid"
+                label="last Base Mid"
                 placeholder="last Base Mid"
                 @keyup.enter="submitLeadSourceData(formData)"
               />

@@ -8,8 +8,7 @@
       table-class="customTableClass"
       :rows="tableData"
       :columns="columns"
-      :filter="filter"
-      :pagination="paginationControl"
+      :filter="filter" v-model:pagination="paginationControl"
       :loading="toggleAjaxLoadFilter"
       :rows-per-page-options="[5, 10, 15, 20]"
       @request="ajaxLoadAllLeadInfo"
@@ -22,9 +21,7 @@
       }}</q-td>
    
       <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-        <span class="label">{{
-          props.row.deviceStatusDate | moment("Do MMM Y")
-        }}</span>
+        <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
       </q-td>   -->
        <q-td v-slot:body-cell-action="props" :props="props">
         <q-btn 
@@ -77,7 +74,7 @@
             separator
             color="grey-9"
             placeholder="Type.."
-            float-label="Search Using POD,Serial No, Merchant Name"
+            label="Search Using POD,Serial No, Merchant Name"
             class="q-mr-lg q-py-sm"
           />
         </div>
@@ -297,8 +294,7 @@ export default {
         message: "Fetching data .."
       });
       
-      this.BIJLIPAY_SELF_ASSIGNMENT_TRACKER({ pagination, filter })
-        .then(res => {
+      this.BIJLIPAY_SELF_ASSIGNMENT_TRACKER({ pagination, filter }).then(res => {
           console.log("RESPONSE REQUEST",JSON.stringify(res.body));
          let responseData = res.body
           // updating pagination to reflect in the UI
@@ -346,8 +342,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_ALL_LOST_DEVICES_DATAS({ pagination, filter })
-        .then(res => {
+      this.FETCH_ALL_LOST_DEVICES_DATAS({ pagination, filter }).then(res => {
           console.log("INSIDE LOAD ALL LEAD INFO 1 :::::::::::::::::::::");
           console.log(
             "Table Datas 1---------------------->" +
@@ -396,9 +391,7 @@ export default {
             message: "Are you sure want to Approve the lead?",
             ok: "Continue",
             cancel: "Cancel"
-          })
-
-          .then(() => {
+          }).onOk(() => {
             this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: "purple-9",
@@ -418,8 +411,7 @@ export default {
                   icon: "clear"
                 });
                 self.$q.loading.hide();
-              })
-              .catch(error => {
+              }).onCancel(error => {
                 this.$q.loading.hide()
                 this.$q.notify({
                   color: "negative",

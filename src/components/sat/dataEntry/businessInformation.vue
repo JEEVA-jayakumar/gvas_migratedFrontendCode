@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="row gutter-sm">
+    <div class="row q-col-gutter-sm">
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           color="grey-9"
           @blur="$v.merchant.businessInformation.weekdayStartHour.$touch"
           :error="$v.merchant.businessInformation.weekdayStartHour.$error"
           v-model="merchant.businessInformation.weekdayStartHour"
-          float-label="Weekday start hour (00.00)"
+          label="Weekday start hour (00.00)"
           placeholder="Weekday start hour"
         />
       </div>
@@ -17,7 +17,7 @@
           @blur="$v.merchant.businessInformation.weekdayEndHour.$touch"
           :error="$v.merchant.businessInformation.weekdayEndHour.$error"
           v-model="merchant.businessInformation.weekdayEndHour"
-          float-label="Weekday end hour (00.00)"
+          label="Weekday end hour (00.00)"
           placeholder="Weekday end hour"
         />
       </div>
@@ -27,7 +27,7 @@
           @blur="$v.merchant.businessInformation.weekendStartHour.$touch"
           :error="$v.merchant.businessInformation.weekendStartHour.$error"
           v-model="merchant.businessInformation.weekendStartHour"
-          float-label="Weekend start hour (00.00)"
+          label="Weekend start hour (00.00)"
           placeholder="Weekend start hour"
         />
       </div>
@@ -37,7 +37,7 @@
           @blur="$v.merchant.businessInformation.weekendEndHour.$touch"
           :error="$v.merchant.businessInformation.weekendEndHour.$error"
           v-model="merchant.businessInformation.weekendEndHour"
-          float-label="Weekend end hour (00.00)"
+          label="Weekend end hour (00.00)"
           placeholder="Weekend end hour"
         />
       </div>
@@ -47,7 +47,7 @@
           @blur="$v.merchant.businessInformation.lastTurnoverYear.$touch"
           :error="$v.merchant.businessInformation.lastTurnoverYear.$error"
           v-model="merchant.businessInformation.lastTurnoverYear"
-          float-label="Last turnover year"
+          label="Last turnover year"
           placeholder="Last turnover year"
         />
       </div>
@@ -58,7 +58,7 @@
           @blur="$v.merchant.businessInformation.lastTurnoverAmount.$touch"
           :error="$v.merchant.businessInformation.lastTurnoverAmount.$error"
           v-model="merchant.businessInformation.lastTurnoverAmount"
-          float-label="Turnover during last year"
+          label="Turnover during last year"
           placeholder="Turnover during last year"
         />
       </div>
@@ -69,7 +69,7 @@
           @blur="$v.merchant.businessInformation.expectedCardBusiness.$touch"
           :error="$v.merchant.businessInformation.expectedCardBusiness.$error"
           v-model="merchant.businessInformation.expectedCardBusiness"
-          float-label="Expected Card Business"
+          label="Expected Card Business"
           placeholder="Expected Card Business"
         />
       </div>
@@ -80,7 +80,7 @@
           @blur="$v.merchant.businessInformation.averageBillAmount.$touch"
           :error="$v.merchant.businessInformation.averageBillAmount.$error"
           v-model="merchant.businessInformation.averageBillAmount"
-          float-label="Average Bill Amount"
+          label="Average Bill Amount"
           placeholder="Average Bill Amount"
         />
       </div>
@@ -91,7 +91,7 @@
           @blur="$v.merchant.businessInformation.gstId.$touch"
           :error="$v.merchant.businessInformation.gstId.$error"
           v-model="merchant.businessInformation.gstId"
-          float-label="GST ID"
+          label="GST ID"
           placeholder="GST ID"
         />
       </div>
@@ -99,7 +99,7 @@
         <q-input
           color="grey-9"
           v-model="merchant.businessInformation.currentPosName"
-          float-label="Name of the other POS Currentlly Used"
+          label="Name of the other POS Currentlly Used"
           placeholder="Name of the other POS Currentlly Used"
         />
       </div>
@@ -109,7 +109,7 @@
           @blur="$v.merchant.businessInformation.debitCardMdr.$touch"
           :error="$v.merchant.businessInformation.debitCardMdr.$error"
           v-model="merchant.businessInformation.debitCardMdr"
-          float-label="Debit Card MDR"
+          label="Debit Card MDR"
           placeholder="Debit Card MDR"
         />
       </div>
@@ -119,7 +119,7 @@
           @blur="$v.merchant.businessInformation.creditCardMdr.$touch"
           :error="$v.merchant.businessInformation.creditCardMdr.$error"
           v-model="merchant.businessInformation.creditCardMdr"
-          float-label="Credit Card MDR"
+          label="Credit Card MDR"
           placeholder="Credit Card MDR"
         />
       </div>
@@ -132,7 +132,7 @@
           color="grey-9"
           modal
           v-model="merchant.businessInformation.memberSince"
-          float-label="Member since"
+          label="Member since"
           placeholder="Member since"
         />
       </div>

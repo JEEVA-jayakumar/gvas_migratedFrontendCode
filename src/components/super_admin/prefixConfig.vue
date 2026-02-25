@@ -8,8 +8,8 @@
       <div class="row bottom-border group q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <!--START: table title   :disable="disableDeviceTypeSelection" -->
         <div class="col-md-4">
-          <q-select v-model="formData.leadSource" float-label="Select LeadSource" radio color="grey-9"
-            @input="filterByLeadSource(formData)" :options="dropDown.leadSourceOptions" />
+          <q-select v-model="formData.leadSource" label="Select LeadSource" radio color="grey-9"
+            @update:model-value="filterByLeadSource(formData)" :options="dropDown.leadSourceOptions" />
         </div>
         <div class="col-md-12" align="right">
           <q-btn no-caps class="text-weight-regular" @click="fnaddprefix()" label="Add New" color="purple-9"
@@ -22,15 +22,11 @@
 
       <!--STARTv-model: table lead validation -->
       <q-table row-key="name" :filter="filter" :rows="tableData" class="q-py-none" :columns="columns"
-        title="Lead Validation" table-class="customTableClass" :pagination="paginationControl"
+        title="Lead Validation" table-class="customTableClass" v-model:pagination="paginationControl"
         @request="ajaxLoadAllLeadInfo">
         <!--START: table body modification  device-->
-        <q-td v-slot:body-cell-createdAt="props" :props="props">{{
-        props.row.createdAt | moment("Do MMM Y")
-        }}</q-td>
-        <q-td v-slot:body-cell-updatedAt="props" :props="props">{{
-        props.row.updatedAt | moment("Do MMM Y")
-        }}</q-td>
+        <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
+        <q-td v-slot:body-cell-updatedAt="props" :props="props">{{ $moment(props.row.updatedAt).format("Do MMM Y") }}</q-td>
         <!-- <q-td v-slot:body-cell-action="props" :props="props">
           <div class="row no-wrap no-padding">
             <div v-if="props.row.lastBaseMid == null && props.row.lastBaseTid == null">
@@ -45,7 +41,7 @@
         <template slot="top" class="bottom-border">
           <!--START: table filter,search -->
           <div class="col-md-5">
-            <q-input clearable color="grey-9" v-model="filter" placeholder="Type.." float-label="Search Lead Source..."
+            <q-input clearable color="grey-9" v-model="filter" placeholder="Type.." label="Search Lead Source..."
               class="q-mr-lg q-py-sm" />
           </div>
           <!--END: table filter,search -->

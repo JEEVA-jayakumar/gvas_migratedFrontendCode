@@ -17,19 +17,18 @@
       table-class="customTableClass"
       :rows="getAllMerchantTrackerInfo"
       :columns="columns"
-      :filter="filter"
-      :pagination="paginationControl"
+      :filter="filter" v-model:pagination="paginationControl"
       row-key="name"
     >
       <!--START: table body modification -->
       <q-td
         v-slot:body-cell-createdAt="props"
         :props="props"
-      >{{props.row.createdAt | moment("Do MMM Y")}}</q-td>
+      >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
       <q-td
         v-slot:body-cell-shortleadDate="props"
         :props="props"
-      >{{props.row.shortleadDate | moment("Do MMM Y")}}</q-td>
+      >{{ $moment(props.row.shortleadDate).format("Do MMM Y") }}</q-td>
       <q-td
         v-slot:body-cell-leadSource="props"
         :props="props"
@@ -38,7 +37,7 @@
         v-slot:body-cell-lead_id="props"
         :props="props"
         class="cursor-pointer"
-        @click.native="toggleLeadInformation(props.row)"
+        @click="toggleLeadInformation(props.row)"
       >
         <span class="label text-primary"># {{props.row.leadNumber}}</span>
       </q-td>
@@ -116,7 +115,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label= "Search by SO name, Merchant Name, Lead ID"
+              label= "Search by SO name, Merchant Name, Lead ID"
               class="q-mr-lg q-py-sm"
             />
         </div>-->
@@ -127,7 +126,7 @@
               color="grey-9"
               :options="sourceBankOptions"
               placeholder="Filter By Bank"
-              float-label="Filter By Bank"
+              label="Filter By Bank"
               class="q-mr-lg q-py-sm "
               size="sm"
             />
@@ -139,19 +138,21 @@
               color="grey-9"
               :options="sourceOptions"
               placeholder="Select"
-              float-label= "Filter By"
+              label= "Filter By"
               class="q-mr-lg q-py-sm "
               size="sm"
             />
           </div>
           <div class="col-md-3">
-            <q-input
-              v-model="model" 
-              float-label="Date Filter"
-              type="date"
-              class="q-mr-lg q-py-sm"
-              color="grey-9" 
-            />
+            <q-input filled v-model="model" label="Date Filter" color="grey-9">
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="model" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
         </div>-->
         <!--END: table filter,search -->
       </template>

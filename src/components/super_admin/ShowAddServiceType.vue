@@ -12,7 +12,7 @@
         <div class="row gutter-sm q-py-sm items-center">
           <div class="col-md-12">
             <q-input v-model="formData.serviceReqType.name" :error="$v.formData.serviceReqType.name.$error"
-              class="text-weight-regular text-grey-8" color="grey-9" float-label="Enter Service Type Name"
+              class="text-weight-regular text-grey-8" color="grey-9" label="Enter Service Type Name"
               placeholder="Enter Service Type Name" />
           </div>
         </div>

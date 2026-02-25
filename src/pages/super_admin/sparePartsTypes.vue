@@ -6,15 +6,16 @@
       <!-- <pre>{{getAllHierarchiesData}}</pre> -->
       <div class="col-12 text-h6 q-my-lg text-weight-regular">Spare Parts Types</div>
       <q-tabs class="shadow-1" color="grey-1" >
-        <q-tab default color="dark" name="active" slot="title" label="Active " />
-        <q-tab color="dark" name="deactive" slot="title" label="Deactive" />
-        <q-tab-panel name="active">
+        <q-tab default color="dark" name="active" label="Active " />
+        <q-tab color="dark" name="deactive" label="Deactive" />
+</q-tabs>
+<q-tab-panels animated>
+<q-tab-panel name="active">
           <q-table
          :rows="activeTableData"
           table-class="customSATableClass"
           :columns="columns"
-          :filter="filterSearch"
-          :pagination="paginationControl"
+          :filter="filterSearch" v-model:pagination="paginationControl"
           :filter-method="myCustomSearchFilter"
           row-key="name"
           color="grey-9"
@@ -22,11 +23,11 @@
 <q-td
     v-slot:body-cell-created_date="props"
     :props="props"
-  >{{ props.row.created_date | moment("Do MMM Y") }}</q-td>
+  >{{ $moment(props.row.created_date).format("Do MMM Y") }}</q-td>
   <q-td
     v-slot:body-cell-updated_date="props"
     :props="props"
-  >{{ props.row.updated_date | moment("Do MMM Y") }}</q-td>
+  >{{ $moment(props.row.updated_date).format("Do MMM Y") }}</q-td>
 <q-td v-slot:body-cell-action="props" :props="props">
   <div class="row no-wrap no-padding">
     <q-btn
@@ -90,8 +91,7 @@
          :rows="deActiveTableData"
           table-class="customSATableClass"
           :columns="columns1"
-          :filter="filterSearch"
-          :pagination="paginationControl"
+          :filter="filterSearch" v-model:pagination="paginationControl"
           :filter-method="myCustomSearchFilter"
           row-key="name"
           color="grey-9"
@@ -100,11 +100,11 @@
 <q-td
     v-slot:body-cell-created_date="props"
     :props="props"
-  >{{ props.row.created_date | moment("Do MMM Y") }}</q-td>
+  >{{ $moment(props.row.created_date).format("Do MMM Y") }}</q-td>
   <q-td
     v-slot:body-cell-updated_date="props"
     :props="props"
-  >{{ props.row.updated_date | moment("Do MMM Y") }}</q-td>
+  >{{ $moment(props.row.updated_date).format("Do MMM Y") }}</q-td>
 <q-td v-slot:body-cell-action="props" :props="props">
   <div class="row no-wrap no-padding">
     <q-btn
@@ -142,7 +142,7 @@
 </template>
 </q-table>
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
      
 
       <!--START: Show edit  Spare Parts -->
@@ -339,8 +339,7 @@ export default {
           message: "Are you sure want to delete region?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -358,8 +357,7 @@ export default {
                 icon: "thumb_up"
               });
             })
-        })
-        .catch(() => {
+        }).onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -378,8 +376,7 @@ export default {
           message: "Are you sure want to Active?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -406,8 +403,7 @@ export default {
                 icon: "thumb_up"
               });
             })
-        })
-        .catch(() => {
+        }).onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

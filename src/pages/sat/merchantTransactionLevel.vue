@@ -11,11 +11,10 @@
       table-class="customTableClass"
       :rows="tableData"
       :columns="columns"
-      :filter="filter"
-      :pagination="paginationControl"
+      :filter="filter" v-model:pagination="paginationControl"
       row-key="name"
     >
-      <q-tr v-slot:body="props" :props="props" @click.native="rowClick(props.row)" class="cursor-pointer">
+      <q-tr v-slot:body="props" :props="props" @click="rowClick(props.row)" class="cursor-pointer">
         <q-td v-for="col in props.cols" :key="col.name" :props="props" >
            <div v-if="col.field == 'tid'" >
               <span class="label text-primary"># {{ col.value }}</span>
@@ -56,21 +55,20 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label= "Search by MID, TID, Merchant Name, MCC,UTR Number, Device Type"
+              label= "Search by MID, TID, Merchant Name, MCC,UTR Number, Device Type"
               class="q-mr-lg q-py-sm"
               />
             </div>
             <div class="col-3">
-              <q-input
-              modal
-              outline
-              type="date"
-              v-model="filter_values" 
-              placeholder="Select Date"
-              class="q-mr-lg q-py-sm "
-              float-label= "Filter By"
-              color="grey-9" 
-              />
+              <q-input filled v-model="filter_values" label="Date" color="grey-9">
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="filter_values" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
             </div>
             <div class="col-md-4">
                 <downloadExcel

@@ -18,7 +18,7 @@
       </div>
       <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-6 col-md-6">
-          <q-input v-model="podNumber" float-label="Enter POD number" color="grey-9" />
+          <q-input v-model="podNumber" label="Enter POD number" color="grey-9" />
         </div>
         <div class="col-6 col-md-6" align="right">
           <q-btn
@@ -34,9 +34,9 @@
         <div class="col-6 col-md-6">
           <q-select
             :disable="disableDeviceTypeSelection"
-            @input="fnSetDevicesByDeviceId"
+            @update:model-value="fnSetDevicesByDeviceId"
             v-model="formData.device_type"
-            float-label="Select Device Type"
+            label="Select Device Type"
             color="grey-9"
             :options="deviceOptions"
           />
@@ -122,8 +122,7 @@
         class="q-py-none"
         :columns="columns"
         title="Lead Validation"
-        table-class="customTableClass"
-        :pagination="paginationControl"
+        table-class="customTableClass" v-model:pagination="paginationControl"
       >
         <!--START: table body modification -->
         <q-td
@@ -148,7 +147,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search by SO name, Merchant Name, Lead ID"
+              label="Search by SO name, Merchant Name, Lead ID"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -329,8 +328,7 @@ export default {
         this.DEVICE_VERIFICATION_ON_SCAN_USING_DEVICE_TYPE_ID({
           device: self.formData.device_type.id,
           barcode: barcode
-        })
-          .then(() => {
+        }).then(() => {
             assumeArr.deviceSerialNumbers.push(barcode);
             let findDeviceSerialNumber = _.find(this.tableData, function(oo) {
               return (
@@ -426,8 +424,7 @@ export default {
             "?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -454,8 +451,7 @@ export default {
                 message: "Devices has been updated successfully",
                 icon: "thumb_up"
               });
-            })
-            .catch(() => {
+            }).onCancel(() => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",

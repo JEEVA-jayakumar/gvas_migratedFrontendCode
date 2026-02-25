@@ -319,8 +319,7 @@ export default {
           message: "Are you sure want to delete hierarchy?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -339,8 +338,7 @@ export default {
               this.ajaxLoadDataForHierarchyTable();
               this.$router.push("/super/admin/hierarchy/");
               this.$q.loading.hide();
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -360,8 +358,7 @@ export default {
           message: "Are you sure want to Active hierarchy?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -385,8 +382,7 @@ export default {
               });
               this.ajaxLoadDataForHierarchyTable();
               this.$q.loading.hide();
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -417,8 +413,7 @@ export default {
           message: "Are you sure want to delete Hierarchy?",
           ok: "Continue",
           cancel: "Cancel",
-        })
-        .then(() => {
+        }).onOk(() => {
           this.DELETE_HIERARCHY_BY_HIERARCHY_ID_DATA(HierarchyId)
             .then(response => {
               this.FETCH_ALL_HIERARCHIES_DATA();
@@ -428,8 +423,7 @@ export default {
                 message: "Successfully Deleted!",
                 icon: "thumb_up",
               });
-            })
-            .catch(() => {
+            }).onCancel(() => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -438,7 +432,7 @@ export default {
               });
             });
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

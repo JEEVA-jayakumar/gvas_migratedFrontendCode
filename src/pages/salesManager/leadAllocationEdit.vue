@@ -16,7 +16,7 @@
                   :error="$v.formData.leadName.$error"
                   color="grey-9"
                   v-model="formData.leadName"
-                  float-label="Merchant Name*"
+                  label="Merchant Name*"
                   placeholder="Merchant Name"
                 />
               </div>
@@ -26,7 +26,7 @@
                   @blur="$v.formData.contactName.$touch"
                   :error="$v.formData.contactName.$error"
                   v-model="formData.contactName"
-                  float-label="Contact Name*"
+                  label="Contact Name*"
                   placeholder="Contact Name"
                 />
               </div>
@@ -37,7 +37,7 @@
                   :error="$v.formData.contactNumber.$error"
                   v-model="formData.contactNumber"
                   type="number"
-                  float-label="Contact Number*"
+                  label="Contact Number*"
                   placeholder="Contact Number"
                 />
               </div>
@@ -46,7 +46,7 @@
                   color="grey-9"
                   v-model="formData.alternateContactNumber"
                   type="number"
-                  float-label="Alternate Contact Number"
+                  label="Alternate Contact Number"
                   placeholder="Alternate Contact Number"
                 />
               </div>
@@ -56,7 +56,7 @@
                   color="grey-9"
                 
                   v-model="formData.email"
-                  float-label="Email"
+                  label="Email"
                   placeholder="Email"
                 />
               </div>
@@ -66,7 +66,7 @@
                   @blur="$v.formData.leadAddress.$touch"
                   :error="$v.formData.leadAddress.$error"
                   v-model="formData.leadAddress"
-                  float-label="Merchant Address"
+                  label="Merchant Address"
                   placeholder="Merchant Address"
                 />
               </div>
@@ -79,9 +79,9 @@
                 @blur="$v.formData.pincodeObj.$touch"   
                 :error="$v.formData.pincodeObj.$error" 
                 v-model="formData.pincodeObj"
-                @input="fnPopulateStateCity"	
+                @update:model-value="fnPopulateStateCity"
                 @clear="fnClearStateCity"
-                float-label="Pincode"
+                label="Pincode"
                 :options="getAllStatesData"
                 />-->
                 <q-input
@@ -91,7 +91,7 @@
                   @clear="fnClearStateCity"
                   color="grey-9"
                   v-model.trim="formData.pincodeObj"
-                  float-label="Pincode"
+                  label="Pincode"
                   placeholder="Pincode"
                 >
                   <q-autocomplete
@@ -109,7 +109,7 @@
                   @blur="$v.formData.city.$touch"
                   :error="$v.formData.city.$error"
                   v-model="formData.city"
-                  float-label="City/Town"
+                  label="City/Town"
                   placeholder="Merchant Address"
                 />
               </div>
@@ -120,7 +120,7 @@
                   @blur="$v.formData.state.$touch"
                   :error="$v.formData.state.$error"
                   v-model="formData.state"
-                  float-label="State"
+                  label="State"
                   placeholder="State"
                 />
               </div>
@@ -131,11 +131,11 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
                   color="grey-9"
-                  @input="fnAjaxRequestPopulateDeviceListData"
+                  @update:model-value="fnAjaxRequestPopulateDeviceListData"
                   @blur="$v.formData.leadSource.id.$touch"
                   :error="$v.formData.leadSource.id.$error"
                   v-model="formData.leadSource.id"
-                  float-label="Lead Source*"
+                  label="Lead Source*"
                   placeholder="Lead Source"
                   radio
                   :options="leadSourceOptions"
@@ -147,7 +147,7 @@
                   @blur="$v.formData.device.id.$touch"
                   :error="$v.formData.device.id.$error"
                   v-model="formData.device.id"
-                  float-label="Device Type"
+                  label="Device Type"
                   radio
                   :disable="isDeviceTypeSelectionDisabled"
                   :options="deviceTypeOptions"
@@ -160,13 +160,13 @@
                   @blur="$v.formData.deviceCount.$touch"
                   :error="$v.formData.deviceCount.$error"
                   v-model="formData.deviceCount"
-                  float-label="Device Count*"
+                  label="Device Count*"
                   placeholder="Device Count"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
-                  @input="fnGetAllUsersByHidUidRSM"
+                  @update:model-value="fnGetAllUsersByHidUidRSM"
                   color="grey-9"
                   v-model="currentAssingedToRSM"
                   placeholder="--RSM--"
@@ -178,7 +178,7 @@
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
-                  @input="fnGetAllUsersByHidUidASM"
+                  @update:model-value="fnGetAllUsersByHidUidASM"
                   color="grey-9"
                   v-model="currentAssingedToASM"
                   placeholder="--ASM--"
@@ -190,7 +190,7 @@
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
-                  @input="fnGetAllUsersByHidUidTL"
+                  @update:model-value="fnGetAllUsersByHidUidTL"
                   color="grey-9"
                   v-model="assignTo"
                   placeholder="--TL--"

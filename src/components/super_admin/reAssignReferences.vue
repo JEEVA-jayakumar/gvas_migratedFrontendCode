@@ -25,7 +25,7 @@
               v-for="(item, index) in propRowDetails.hierarchyList"
               :key="index"
               :class="activeIndex == index?'bg-purple-9 text-white':''"
-              @click.native="populateReferencesList(item,index)"
+              @click="populateReferencesList(item,index)"
             >{{item.hierarchy.hierarchy}}</q-item>
           </q-list>
         </div>
@@ -38,8 +38,7 @@
             :columns="columns"
             selection="multiple"
             :selected="formData.selectedReferencesToReAssign"
-            v-model:filter="filter"
-            :pagination="paginationControl"
+            v-model:filter="filter" v-model:pagination="paginationControl"
             row-key="id"
           >
             <template v-slot:top="props" class="bottom-border">
@@ -50,7 +49,7 @@
                   color="grey-9"
                   v-model="filter"
                   placeholder="Type.."
-                  float-label="Search by SO name, Merchant Name, Lead ID"
+                  label="Search by SO name, Merchant Name, Lead ID"
                   class="q-ma-xs"
                 />
               </div>
@@ -59,7 +58,7 @@
                   placeholder="Select .."
                   color="grey-9"
                   v-model="formData.userId"
-                  float-label="Choose a user from below"
+                  label="Choose a user from below"
                   :options="[]"
                   class="q-ma-xs"
                 />
@@ -193,11 +192,9 @@ export default {
           message: "Are you sure want to leave this page?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$emit("closeReferencesList");
-        })
-        .catch(() => {});
+        }).onCancel(() => {});
     }
   }
 };

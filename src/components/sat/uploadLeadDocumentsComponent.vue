@@ -135,7 +135,7 @@
               </q-item-section>
           
             <!-- <q-item-section>
-               @input="docuValue(document)"
+               @update:model-value="docuValue(document)"
               </q-item-section> -->
 
             <q-item-section>
@@ -424,8 +424,7 @@ export default {
           return this.fnGetMerchantTypeValue(
             this.propMerchantTypeFromSO.merchantType.merchantTypeName
           );
-        })
-        .then(response => {
+        }).then(response => {
           this.formData.documentType = this.getShortLeadInfoDocumentTypes;
           // console.log("VALUE FOR DOCUMENT------------->>>>",JSON.stringify(this.getShortLeadInfoDocumentTypes.uploadedDocuments.forSingleDocument))
           // console.log("DOCUMENT Deatils------------->>>>",JSON.stringify(this.getShortLeadInfoDocumentTypes.uploadedDocuments)) 
@@ -623,8 +622,7 @@ export default {
           message: "Are you sure want to delete uploaded document?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: "purple-9",
@@ -646,8 +644,7 @@ export default {
                 innerSelf.merchantTypeSelection
               );
               this.$q.loading.hide();
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.loading.hide();
               innerSelf.$q.notify({
                 color: "negative",

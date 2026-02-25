@@ -529,8 +529,7 @@ const InventoryCentral = {
         return await api
           .get("download/master-inventory-report", {
             responseType: "arraybuffer"
-          })
-          .then(response => {
+          }).then(response => {
             let blob = COMMON_FILE_DOWNLOAD(response);
             let link = document.createElement("a");
             link.href = window.URL.createObjectURL(blob);
@@ -543,8 +542,7 @@ const InventoryCentral = {
         return await api
           .get("download/master-inventory-report/" + request, {
             responseType: "arraybuffer"
-          })
-          .then(response => {
+          }).then(response => {
             let blob = COMMON_FILE_DOWNLOAD(response);
             let link = document.createElement("a");
             link.href = window.URL.createObjectURL(blob);
@@ -618,8 +616,7 @@ const InventoryCentral = {
       return await api
         .get("download-InventorySummaryInfoMenu/1", {
           responseType: "arraybuffer"
-        })
-        .then(response => {
+        }).then(response => {
           let blob = COMMON_FILE_DOWNLOAD(response);
           let link = document.createElement("a");
           link.href = window.URL.createObjectURL(blob);
@@ -631,8 +628,7 @@ const InventoryCentral = {
       return await api
         .get("download-InventorySummaryInfoMenu/2", {
           responseType: "arraybuffer"
-        })
-        .then(response => {
+        }).then(response => {
           let blob = COMMON_FILE_DOWNLOAD(response);
           let link = document.createElement("a");
           link.href = window.URL.createObjectURL(blob);
@@ -644,8 +640,7 @@ const InventoryCentral = {
       return await api
         .get("download-InventorySummaryInfoMenu/3", {
           responseType: "arraybuffer"
-        })
-        .then(response => {
+        }).then(response => {
           let blob = COMMON_FILE_DOWNLOAD(response);
           let link = document.createElement("a");
           link.href = window.URL.createObjectURL(blob);
@@ -821,8 +816,7 @@ const InventoryCentral = {
       return await api
         .get("download-master-tracker-list", {
           responseType: "arraybuffer"
-        })
-        .then(response => {
+        }).then(response => {
           let blob = COMMON_FILE_DOWNLOAD(response);
           let link = document.createElement("a");
           link.href = window.URL.createObjectURL(blob);

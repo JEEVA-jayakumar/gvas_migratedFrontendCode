@@ -42,7 +42,7 @@ formData.marsDeviceIdsCooked.length == 0
 <div class="col-md-3 col-sm-6 col-xs-6">
 <q-select filter clearable v-model="formData.assignToReassign" :options="assignToOptions"
 placeholder="Re-Assign To" separator color="grey-9" :disable="isReAssignDropdownDisabled"
-@click.native="handleReAssignDropdownClick" />
+@click="handleReAssignDropdownClick" />
 
 </div>
 
@@ -66,12 +66,14 @@ placeholder="Re-Assign To" separator color="grey-9" :disable="isReAssignDropdown
 </q-card>
 <!--END: table Footer -->
 <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToUnassignedTab">
-<q-tab default color="dark" name="unAssigned" slot="title" label="Unassigned" />
-<q-tab color="dark" name="assigned" slot="title" label="Assigned" />
+<q-tab default color="dark" name="unAssigned" label="Unassigned" />
+<q-tab color="dark" name="assigned" label="Assigned" />
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
 <q-tab-panel name="assigned">
 <!--START: table Data -->
 <q-table :rows="tableData" :columns="columnDataAssigned" selection="multiple"
-table-class="customTableClass" :filter="filterSearch" :pagination="paginationControl"
+table-class="customTableClass" :filter="filterSearch" v-model:pagination="paginationControl"
 v-model:selected="formData.marsDeviceIdsCookedUnAssinged" row-key="id" :loading="tableAjaxLoading"
 :rows-per-page-options="[5, 10, 15, 20]" color="dark" @request="ajaxLoadAllLeadInfo">
 <!-- selection="multiple" -->
@@ -79,7 +81,7 @@ v-model:selected="formData.marsDeviceIdsCookedUnAssinged" row-key="id" :loading=
 props.row.leadInformation != null ||
 props.row.qrLeadInformation != null
 " v-slot:body-cell-leadNumber="props" :props="props" class="cursor-pointer"
-@click.native="toggleLeadInformation(props.row.leadInformation)">
+@click="toggleLeadInformation(props.row.leadInformation)">
 <span class="label text-primary">#
 {{
 props.row.leadInformation == null
@@ -104,7 +106,7 @@ props.row.qrLeadInformation.submitMarsDate != null
 <q-td v-if="
 props.row.leadInformation != null ||
 props.row.qrLeadInformation != null
-" v-slot:body-cell-createdAt="props" :props="props">{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+" v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
 
 <q-td v-if="
 props.row.leadInformation != null ||
@@ -138,7 +140,7 @@ props.row.qrLeadInformation != null
 <!--START: table filter,search -->
 <div class="col-md-5">
 <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.."
-float-label="Search By TID, MID" class="q-mr-lg q-py-sm" />
+label="Search By TID, MID" class="q-mr-lg q-py-sm" />
 </div>
 </template>
 </q-table>
@@ -154,7 +156,7 @@ v-model:pagination="paginationControl1" row-key="id" :loading="tableAjaxLoading1
 props.row.leadInformation != null ||
 props.row.qrLeadInformation != null
 " v-slot:body-cell-leadNumber="props" :props="props" class="cursor-pointer"
-@click.native="toggleLeadInformation(props.row.leadInformation)">
+@click="toggleLeadInformation(props.row.leadInformation)">
 <span class="label text-primary">#
 {{
 props.row.leadInformation == null
@@ -178,7 +180,7 @@ props.row.qrLeadInformation.submitMarsDate != null
 <q-td v-if="
 props.row.leadInformation != null ||
 props.row.qrLeadInformation != null
-" v-slot:body-cell-createdAt="props" :props="props">{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+" v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
 <q-td v-if="
 props.row.leadInformation != null ||
 props.row.qrLeadInformation != null
@@ -213,14 +215,14 @@ props.row.qrLeadInformation != null
 <!--START: table filter,search -->
 <div class="col-md-5">
 <q-input clearable color="grey-9" v-model="filterSearch1" placeholder="Type.."
-float-label="Search By TID, MID" class="q-mr-lg q-py-sm" />
+label="Search By TID, MID" class="q-mr-lg q-py-sm" />
 </div>
 <!--END: table filter,search -->
 </template>
 </q-table>
 <!--END: table Data -->
 </q-tab-panel>
-</q-tabs>
+</q-tab-panels>
 <div class="row items-center gutter-y-sm">
 <div class="col-md-9 col-sm-12 col-xs-12">
 <div class="row items-center"></div>
@@ -822,8 +824,7 @@ delay: 0, // ms
 spinnerColor: "purple-9",
 message: "Fetching data .."
 });
-this.DEVICE_REPLACEMENT_QUEUE_UNASSIGNED_LIST({ pagination, filter })
-.then(res => {
+this.DEVICE_REPLACEMENT_QUEUE_UNASSIGNED_LIST({ pagination, filter }).then(res => {
 this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
 let assumeArr = [];
 this.getImplementationExecutiveList.map(function (value) {
@@ -868,8 +869,7 @@ delay: 0, // ms
 spinnerColor: "purple-9",
 message: "Fetching data .."
 });
-this.DEVICE_REPLACEMENT_QUEUE_ASSIGNED_LIST({ pagination, filter })
-.then(res => {
+this.DEVICE_REPLACEMENT_QUEUE_ASSIGNED_LIST({ pagination, filter }).then(res => {
 // updating pagination to reflect in the UI
 this.paginationControl = pagination;
 

@@ -1,5 +1,5 @@
 <template>
-  <q-toolbar class="bg-custom-light-grey bottom-border" color="grey-9" flat inverted>
+  <q-toolbar class="bg-custom-light-grey bottom-border" color="grey-9" flat>
     <q-btn
       flat
       dense
@@ -7,12 +7,12 @@
       @click="triggerSideMenu"
       aria-label="Menu"
       v-if="getRole != 'KSN'"
+      color="grey-9"
     >
       <q-icon name="menu" />
     </q-btn>
-    <q-toolbar-title class>
+    <q-toolbar-title>
       <div class="row items-center vertical-middle">
-        <!-- {{localStorage.getItem('selectedTab')}} -->
         <div class="col-auto">
           <img
             v-if="leftDrawerOpen"
@@ -23,31 +23,34 @@
         </div>
         <div class="col float-right" align="right">
           <q-btn flat color="grey-9" icon="far fa-bell" />
-          <q-btn flat color="grey-9 vertical-middle">
+          <q-btn flat color="grey-9" class="vertical-middle">
             <span class="mobile-hide capitalize text-weight-regular">{{getUserNAme}}</span>
             <img
               src="~assets/images/user.png"
               style="height:30px; width:30px; padding: 5px"
               class="vertical-middle"
             />
-            <!-- Direct child of target -->
             <q-menu
               class="shadow-8"
               anchor="bottom middle"
               self="top middle"
               style="min-width:350px"
             >
-              <q-list separator link class="no-padding">
-                <q-item v-close-popup @click="openMyAccount()">
-                  <q-item-section icon="fas fa-user" inverted color="dark" />
+              <q-list separator class="no-padding">
+                <q-item clickable v-close-popup @click="openMyAccount()">
+                  <q-item-section avatar>
+                    <q-icon name="fas fa-user" color="dark" />
+                  </q-item-section>
                   <q-item-section>
-                    <q-item-label label>Change Password</q-item-label>
+                    <q-item-label>Change Password</q-item-label>
                   </q-item-section>
                 </q-item>
-                <q-item v-close-popup @click="clearLocalStorageData()">
-                  <q-item-section icon="fas fa-sign-out-alt" inverted color="dark" />
+                <q-item clickable v-close-popup @click="clearLocalStorageData()">
+                  <q-item-section avatar>
+                    <q-icon name="fas fa-sign-out-alt" color="dark" />
+                  </q-item-section>
                   <q-item-section>
-                    <q-item-label label>Logout</q-item-label>
+                    <q-item-label>Logout</q-item-label>
                   </q-item-section>
                 </q-item>
               </q-list>
@@ -62,30 +65,22 @@
       @propsToggleModal="openMyAccount"
     />
   </q-toolbar>
-<!-- </q-dialog> -->
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
 import toggleMyAccount from "./toggleMyAccount.vue";
 export default {
-  // props: ["propRowDetails"],
-  name: "LayoutDefault",
+  name: "CustomHeader",
   components: {
     toggleMyAccount
   },
   data() {
     return {
       toggleMyAccount: false,
-      // toggleModel: this.propShowDatas,
       leftDrawerOpen: this.$q.platform.is.desktop,
-   
-        // fnvalue:"",selectedTab
     };
   },
- 
   methods: {
     triggerSideMenu() {
-      // this.leftDrawerOpen = !this.leftDrawerOpen;
       this.$emit("fnToggleSideMenu");
     },
     clearLocalStorageData() {
@@ -105,13 +100,19 @@ export default {
   },
   computed: {
     getUserNAme() {
-      return JSON.parse(localStorage.getItem("u_i")).user.name;
+      const userInfo = localStorage.getItem("u_i");
+      return userInfo ? JSON.parse(userInfo).user.name : '';
     },
     getRole() {
-      if (JSON.parse(localStorage.getItem("u_i")).roles[0].role == "KSN") {
-        this.$emit("fnToggleSideMenu");
+      const userInfo = localStorage.getItem("u_i");
+      if (userInfo) {
+        const parsed = JSON.parse(userInfo);
+        if (parsed.roles && parsed.roles[0].role == "KSN") {
+          this.$emit("fnToggleSideMenu");
+        }
+        return parsed.roles[0].role;
       }
-      return JSON.parse(localStorage.getItem("u_i")).roles[0].role;
+      return '';
     },
   },
 };

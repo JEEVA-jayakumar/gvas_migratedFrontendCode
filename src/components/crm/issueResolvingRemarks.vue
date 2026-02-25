@@ -84,12 +84,12 @@
             <div class="col-sm-5">
               <q-select
                 stack-label="Issues"
-                inverted-light
+                filled-light
                 color="none"
                 v-model="formData.issue"
                 separator
                 :options="options"
-                @input="issueDocumentType"
+                @update:model-value="issueDocumentType"
               />
             </div>
           </div>
@@ -97,7 +97,7 @@
             <div class="col-sm-5">
               <q-select
                 stack-label="Sub Issues"
-                inverted-light
+                filled-light
                 color="none"
                 v-model="formData.issue"
                 separator

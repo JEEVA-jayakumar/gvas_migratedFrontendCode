@@ -24,7 +24,7 @@
               :error="$v.formData.name.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Service Status Name"
+                label="Service Status Name"
                 placeholder="Service Status Name"
               />
             </div>

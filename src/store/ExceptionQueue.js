@@ -160,8 +160,7 @@ const ExceptionQueue = {
             "Authorization": "Token " + localStorage.getItem(
               "auth_token")
           }
-        })
-        .then(response => {
+        }).then(response => {
           let data = {
             apiStatusCode: response.status,
             apiPending: false,

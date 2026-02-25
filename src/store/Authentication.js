@@ -209,8 +209,7 @@ const Authentication = {
           commit("SET_USER_AUTH_DATA", response.data);
           // END=> COMMIT with data received'
           return response;
-        })
-        .then(beforeResponse => {
+        }).then(beforeResponse => {
           return api.get("user/profile").then(response => {
             // Guard against unexpected payloads to avoid storing "undefined"
             if (response && response.data && response.data.data) {
@@ -261,8 +260,7 @@ const Authentication = {
           headers: {
             Authorization: "kjkj",
           },
-        })
-        .then(response => {
+        }).then(response => {
           commit("SET_SEND_MAIL_DATA", response.data.data);
         });
     },

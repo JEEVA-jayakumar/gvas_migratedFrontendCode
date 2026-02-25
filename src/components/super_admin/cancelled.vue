@@ -2,26 +2,22 @@
   <q-page>
     <div>
       <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" >
-         <q-tab @select="ajaxSpareData" default  color="dark" name="tab-5" slot="title" label="Active Cancelled" />
-          <q-tab  color="dark" name="tab-6" slot="title" label="Deactive Cancelled" />
-
-          <q-tab-panel name="tab-5">
+         <q-tab @select="ajaxSpareData" default  color="dark" name="tab-5" label="Active Cancelled" />
+          <q-tab  color="dark" name="tab-6" label="Deactive Cancelled" />
+</q-tabs>
+<q-tab-panels v-model="activeTab" animated>
+<q-tab-panel name="tab-5">
           <q-table
           :rows="ActivetableData"
           table-class="customSATableClass"
           :columns="columns1"
-          :filter="filterSearch"
-          :pagination="paginationControl"
+          :filter="filterSearch" v-model:pagination="paginationControl"
           :filter-method="myCustomSearchFilter1"
           row-key="name"
           color="grey-9"
           >
-          <q-td v-slot:body-cell-createdAt="props" :props="props">{{
-              props.row.createdAt | moment("Do MMM Y")
-          }}</q-td>
-            <q-td v-slot:body-cell-updatedAt="props" :props="props">{{
-                props.row.updatedAt | moment("Do MMM Y")
-            }}</q-td>
+          <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
+            <q-td v-slot:body-cell-updatedAt="props" :props="props">{{ $moment(props.row.updatedAt).format("Do MMM Y") }}</q-td>
 
             <q-td v-slot:body-cell-action="props" :props="props">
               <div class="row no-wrap no-padding">
@@ -45,24 +41,18 @@
             </template>
           </q-table>
         </q-tab-panel>
-
-        <q-tab-panel name="tab-6">
+<q-tab-panel name="tab-6">
           <q-table
           :rows="DeactivetableData"
           table-class="customSATableClass"
           :columns="columns4"
-          :filter="filterSearch"
-          :pagination="paginationControl2"
+          :filter="filterSearch" v-model:pagination="paginationControl2"
           :filter-method="myCustomSearchFilter2"
           row-key="name"
           color="grey-9"
           >
-            <q-td v-slot:body-cell-createdAt="props" :props="props">{{
-                props.row.createdAt | moment("Do MMM Y")
-            }}</q-td>
-            <q-td v-slot:body-cell-updatedAt="props" :props="props">{{
-                props.row.updatedAt | moment("Do MMM Y")
-            }}</q-td>
+            <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
+            <q-td v-slot:body-cell-updatedAt="props" :props="props">{{ $moment(props.row.updatedAt).format("Do MMM Y") }}</q-td>
 
             <q-td v-slot:body-cell-action1="props" :props="props">
               <div class="row no-wrap no-padding">
@@ -78,7 +68,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
 
       <!--START: Show AddServiceStatus -->
     
@@ -256,8 +246,7 @@ export default {
           message: 'Are you sure want to delete?',
           ok: 'Continue',
           cancel: 'Cancel'
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: 'Please Wait',
@@ -276,8 +265,7 @@ export default {
               this.$q.loading.hide()
               this.ajaxSpareData()
             })
-        })
-        .catch(error => {
+        }).onCancel(error => {
           this.$q.loading.hide()
           this.$q.notify({
             color: 'negative',
@@ -299,8 +287,7 @@ export default {
           message: 'Are you sure want to delete?',
           ok: 'Continue',
           cancel: 'Cancel'
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: 'Please Wait',
@@ -319,8 +306,7 @@ export default {
               this.$q.loading.hide()
               this.ajaxSpareData()
             })
-        })
-        .catch(() => {
+        }).onCancel(() => {
           this.$q.notify({
             color: 'negative',
             position: 'bottom',

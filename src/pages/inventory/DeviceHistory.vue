@@ -15,16 +15,15 @@
         :columns="columns"
         :rows="tableData"
         :filter="filter"
-        :rows-per-page-options="[100,200,300,400,500]"
-        :pagination="paginationControl"
+        :rows-per-page-options="[100,200,300,400,500]" v-model:pagination="paginationControl"
         :loading="toggleAjaxLoadFilter"
         @request="ajaxLoadAllLeadInfo"
       >
          <q-td v-slot:body-cell-installationDate="props" :props="props">
-          <span class="label">{{props.row.installationDate | moment("Do MMM Y")}}</span>
+          <span class="label">{{ $moment(props.row.installationDate).format("Do MMM Y") }}</span>
         </q-td>
           <q-td v-slot:body-cell-deInstallationDate="props" :props="props">
-          <span class="label">{{props.row.deInstallationDate | moment("Do MMM Y")}}</span>
+          <span class="label">{{ $moment(props.row.deInstallationDate).format("Do MMM Y") }}</span>
         </q-td>
         
      
@@ -36,7 +35,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search by MID, TID"
+              label="Search by MID, TID"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -211,8 +210,7 @@ methods: {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.DEVICE_WITH_HISTORY({ pagination, filter })
-        .then(res => {
+      this.DEVICE_WITH_HISTORY({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 

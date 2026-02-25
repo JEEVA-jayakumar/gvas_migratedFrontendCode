@@ -17,8 +17,8 @@
           <!--END: table title -->
           <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
             <div class="col-md-4">
-              <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
-                :options="aggregatorOptions" @input="getaggregator" />
+              <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
+                :options="aggregatorOptions" @update:model-value="getaggregator" />
             </div>
           </div> -->
           <!--END: table title -->
@@ -29,8 +29,7 @@
               :columns="columns" 
               :rows="tableData"
               color="grey-9"
-              :filter="filterSearch" 
-              :pagination="paginationControl"
+              :filter="filterSearch" v-model:pagination="paginationControl"
               :rows-per-page-options="[5, 10, 15, 20, 25]"
               :loading="toggleAjaxLoadFilter"
                @request="ajaxLoadAllLeadInfo"
@@ -52,7 +51,7 @@
                     color="grey-9"
                     v-model="filterSearch" 
                     placeholder="Type.."
-                    float-label="Search Using Device Serial Number " class="q-mr-lg q-py-sm" 
+                    label="Search Using Device Serial Number " class="q-mr-lg q-py-sm"
                   />
                 </div>
                 <!--END: table search -->
@@ -222,8 +221,7 @@ import { required, or } from '@vuelidate/validators';
           spinnerColor: "purple-9",
           message: "Fetching data ..",
         });
-        this.FETCH_ALL_MOVED_TO_SCRAP_DATA({ pagination, filter})
-          .then((res) => {
+        this.FETCH_ALL_MOVED_TO_SCRAP_DATA({ pagination, filter}).then((res) => {
             this.paginationControl = pagination;
   
             // we also set (or update) rowsNumber

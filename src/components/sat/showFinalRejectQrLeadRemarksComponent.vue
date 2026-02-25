@@ -18,7 +18,7 @@
                 @blur="$v.formData.leadInformation.reason.$touch"
                 :error="$v.formData.leadInformation.reason.$error"
                 type="textarea"
-                float-label="Remarks"
+                label="Remarks"
                 :max-height="100"
               />
             </div>

@@ -22,7 +22,7 @@
               :error="$v.formData.HierarchyDetails.hierarchy.$error"
               class="text-weight-regular text-grey-8 q-my-sm"
               color="grey-9"
-              float-label="Hierarchy"
+              label="Hierarchy"
               placeholder="Hierarchy"
             />
           </div>
@@ -33,7 +33,7 @@
               :error="$v.formData.HierarchyDetails.hierarchyCode.$error"
               class="text-weight-regular text-grey-8 q-my-sm"
               color="grey-9"
-              float-label="Hierarchy Code"
+              label="Hierarchy Code"
               placeholder="Hierarchy Code"
             />
           </div>

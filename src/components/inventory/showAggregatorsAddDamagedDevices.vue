@@ -18,12 +18,12 @@
       <div class="row items-center">
         <!--START: table title -->
         <!-- <div class="col-md-2">
-          <q-select color="grey-9" v-model="aggregator" @clear="fnClearingAggregators" float-label="Select Aggregator"
-            radio :options="aggregatorOptions" @input="selectedAggregators" />
+          <q-select color="grey-9" v-model="aggregator" @clear="fnClearingAggregators" label="Select Aggregator"
+            radio :options="aggregatorOptions" @update:model-value="selectedAggregators" />
         </div> -->
         <div class="col-md-2">
           <q-select clearable  @clear="fnClearingDeviceTypeSelection"
-            @input="fnSetDevicesByDeviceId" v-model="formData.device_type" float-label="Select Device Type"
+            @update:model-value="fnSetDevicesByDeviceId" v-model="formData.device_type" label="Select Device Type"
             color="grey-9" :options="deviceOptions" />
         </div>
         <div class="col-12 col-lg-6 group" align="right">
@@ -218,8 +218,7 @@ export default {
         this.AGGREAGATORS_DEVICE_VERIFICATION_IN_CENTRAL_FOR_ACTIVE({
           device: self.formData.device_type.id,
           barcode: barcode
-        })
-          .then(() => {
+        }).then(() => {
             assumeArr.deviceSerialNumbers.push(barcode);
           })
           .catch(() => {

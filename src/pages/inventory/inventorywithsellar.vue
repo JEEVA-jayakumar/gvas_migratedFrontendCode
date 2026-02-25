@@ -36,17 +36,17 @@
             :disabled="formData.device_type != ''"
             :class="[formData.device_type != '' ? 'no-pointer-events' : '']"
             v-model="formData.region"
-            float-label="Select Region"
+            label="Select Region"
             radio
             color="grey-9"
             :options="regionOptions"
-            @input="regionBasedSO"
+            @update:model-value="regionBasedSO"
           />
         </div>
         <div class="col-md-3">
           <q-select
             v-model="formData.resellar"
-            float-label="Select Resellar"
+            label="Select Resellar"
             radio
             color="grey-9"
             :options="resellarOptions"
@@ -57,9 +57,9 @@
             clearable
             :disable="formData.region == ''"
             @clear="fnClearingDeviceTypeSelection"
-            @input="fnSetDevicesByDeviceId"
+            @update:model-value="fnSetDevicesByDeviceId"
             v-model="formData.device_type"
-            float-label="Select Device Type"
+            label="Select Device Type"
             radio
             color="grey-9"
             :options="deviceOptions"
@@ -286,8 +286,7 @@ export default {
         this.DEVICE_VERIFICATION_ON_SCAN_USING_DEVICE_TYPE_ID_ALLOCATION({
           device: self.formData.device_type.id,
           barcode: barcode
-        })
-          .then(() => {
+        }).then(() => {
             console.log("Error-1");
             assumeArr.deviceSerialNumbers.push(barcode);
           })

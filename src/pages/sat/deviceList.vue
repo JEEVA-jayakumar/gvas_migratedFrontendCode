@@ -12,8 +12,7 @@
         table-class="customTableClass"
         :rows="tableData"
         :columns="columns"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         row-key="name"
       >
         <q-td v-slot:body-cell-tid="props" :props="props">
@@ -53,7 +52,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="SO Name,Region,DeviceType"
+              label="SO Name,Region,DeviceType"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -63,7 +62,7 @@
           <div class="col-md-5">
             <q-select
               v-model="filter_values"
-              float-label="So Name"
+              label="So Name"
               class="q-mr-lg q-py-sm"
               :options="data"
             />

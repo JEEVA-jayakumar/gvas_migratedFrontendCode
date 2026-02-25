@@ -12,45 +12,45 @@
                             <q-list no-border>
                                 <!-- <div class="col-md-5">
                                     <q-input color="grey-9" disable type="text" v-model="additionalTerminal.mid"
-                                        placeholder="Enter MID" float-label="Enter MID" />
+                                        placeholder="Enter MID" label="Enter MID" />
                                 </div>
                                 <div class="col-md-5">
                                     <q-input color="grey-9" disable type="text" v-model="additionalTerminal.tid"
-                                        placeholder="Enter TID" float-label="Enter TID" />
+                                        placeholder="Enter TID" label="Enter TID" />
                                 </div>
                                 <div class="col-md-5">
                                     <q-input color="grey-9" disable type="text" v-model="additionalTerminal.institutionCode"
-                                        placeholder="Institution code*" float-label="Institution code*" />
+                                        placeholder="Institution code*" label="Institution code*" />
                                 </div>
                                 <div class="col-md-6">
                                     <q-input color="grey-9" :disable="this.propsAdditionalData.merchantRefCode != null
                                     " v-model.trim="additionalTerminal.merchantRefCode"
-                                        float-label="Merchant RefCode*" />
+                                        label="Merchant RefCode*" />
                                 </div>
                                 <div class="col-md-5">
                                     <q-input color="grey-9" disable v-model.trim="additionalTerminal.applicationNumber"
-                                        float-label="Application Number*" />
+                                        label="Application Number*" />
                                 </div>
                                 <div class="col-md-5">
                                     <q-input color="grey-9"
                                         v-model.trim="additionalTerminal.AdditionalTerminalDetails.numberOfTerminals"
-                                        float-label="Enter Number Of Terminals" />
+                                        label="Enter Number Of Terminals" />
                                 </div>
                                 <div class="col-md-5">
                                     <q-input color="grey-9" disable
                                         v-model.trim="additionalTerminal.AdditionalTerminalDetails.address"
-                                        float-label="Address*" />
+                                        label="Address*" />
                                 </div>
                                 <div class="col-md-6">
                                     <q-input color="grey-9" disable v-model.trim="
                                         additionalTerminal.AdditionalTerminalDetails
                                             .pinCode
-                                    " float-label="Pincode*" />
+                                    " label="Pincode*" />
                                 </div>
                                 <div class="col-md-5">
                                     <q-input @blur="fnClrCity" color="grey-9"
                                         v-model.trim="additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel"
-                                        @input="fninputTyping($event, 1)" float-label="City (type min 3 characters)*"
+                                        @update:model-value="fninputTyping($event, 1)" label="City (type min 3 characters)*"
                                         placeholder="Start typing ..*">
 
                                         <q-autocomplete separator @search="marsCitySearch" :debounce="10"
@@ -60,7 +60,7 @@
                                 <div class="col-md-5">
                                     <q-input @blur="fnClrState" color="black-9"
                                         v-model.trim="additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel"
-                                        @input="fninputTyping($event, 2)" float-label="state (type min 3 characters)*"
+                                        @update:model-value="fninputTyping($event, 2)" label="state (type min 3 characters)*"
                                         placeholder="Start typing ..*">
                                         <q-autocomplete separator @search="marsStateSearch" :debounce="10"
                                             :min-characters="3" @selected="partnerStateSelected" />
@@ -68,15 +68,15 @@
                                 </div> -->
                                 <div class="col-md-6">
                                     <q-input color="grey-9" disable v-model.trim="additionalTerminal.mid"
-                                        float-label="MID*" />
+                                        label="MID*" />
                                 </div>
                                 <div class="col-md-6">
                                     <q-input color="grey-9" disable v-model.trim="additionalTerminal.tid"
-                                        float-label="TID*" />
+                                        label="TID*" />
                                 </div>
                                 <div class="col-md-6">
                                     <q-input color="grey-9" disable v-model.trim="additionalTerminal.institutionCode"
-                                        float-label="Institution code*" />
+                                        label="Institution code*" />
                                 </div>
                                 <div class="col-md-6">
                                     <q-input color="grey-9" :disable="
@@ -84,11 +84,11 @@
                                             .merchantRefCode
 
                                     " v-model.trim="additionalTerminal.merchantRefCode" :error="$v.additionalTerminal.merchantRefCode.$error
-" float-label="Merchant RefCode*" />
+" label="Merchant RefCode*" />
                                 </div>
                                 <div class="col-md-6">
                                     <q-input color="grey-9" disable v-model.trim="additionalTerminal.applicationNumber"
-                                        float-label="Application Number*" />
+                                        label="Application Number*" />
                                 </div>
                                 <div class="col-md-6">
                                     <q-input v-model.trim="
@@ -100,27 +100,27 @@
                    " :error="
                        $v.additionalTerminal.AdditionalTerminalDetails
                            .numberOfTerminals.$error
-                   " class="text-weight-regular text-grey-8" color="grey-9" float-label="*Number Of Terminals"
+                   " class="text-weight-regular text-grey-8" color="grey-9" label="*Number Of Terminals"
                                         placeholder="Number Of Terminals" />
                                 </div>
                                 <div class="col-md-6">
                                     <q-input color="grey-9" disable v-model.trim="
                                         additionalTerminal.AdditionalTerminalDetails
                                             .address
-                                    " float-label="Address*" />
+                                    " label="Address*" />
                                 </div>
 
                                 <div class="col-md-6">
                                     <q-input color="grey-9" disable v-model.trim="
                                         additionalTerminal.AdditionalTerminalDetails
                                             .pinCode
-                                    " float-label="Pincode*" />
+                                    " label="Pincode*" />
                                 </div>
 
                                 <div class="col-md-6">
                                     <q-input @blur="fnClrCity" color="grey-9"
                                         v-model.trim="additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel"
-                                        @input="fninputTyping($event, 1)" float-label="City (type min 3 characters)*"
+                                        @update:model-value="fninputTyping($event, 1)" label="City (type min 3 characters)*"
                                         placeholder="Start typing ..*">
 
                                         <q-autocomplete separator @search="marsCitySearch" :debounce="10"
@@ -130,7 +130,7 @@
                                 <div class="col-md-6">
                                     <q-input @blur="fnClrState" color="black-9"
                                         v-model.trim="additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel"
-                                        @input="fninputTyping($event, 2)" float-label="state (type min 3 characters)*"
+                                        @update:model-value="fninputTyping($event, 2)" label="state (type min 3 characters)*"
                                         placeholder="Start typing ..*">
                                         <q-autocomplete separator @search="marsStateSearch" :debounce="10"
                                             :min-characters="3" @selected="partnerStateSelected" />
@@ -413,8 +413,7 @@ export default {
                                 message: "Merchant Details successfully Updated",
                             });
 
-                            this.ADDITIONAL_TID_FROM_BACK_END({ params })
-                                .then((response) => {
+                            this.ADDITIONAL_TID_FROM_BACK_END({ params }).then((response) => {
                                     this.$q.loading.hide();
                                     this.$emit("closeRejectModel");
                                     this.$q.notify({
@@ -531,8 +530,7 @@ export default {
                         if (oo.code != "" && oo.code != " ")
                             this.additionalTerminal.AdditionalTerminalDetails.citySerNumber = oo.code;
                     });
-                })
-                .then(() => {
+                }).then(() => {
                     /* API call to fetch state */
                     return self.STATE_FROM_ADDITIONAL_TID(stateSerNumberLabel).then((response) => {
                         self.stateOptions = [];
@@ -606,10 +604,10 @@ export default {
                 this.$q.notify({
                     color: "positive",
                     position: "bottom",
-                    message: response.body.message,
+                    message: response.data.message,
                     icon: "thumb_up"
                 });
-                let res = response.body.data;
+                let res = response.data.data;
                 this.listAllSubTidDetails = res;
             }).catch(error => {
                 this.$q.loading.hide();
@@ -890,9 +888,7 @@ export default {
                             params: finalRequest,
                             leadStatus: this.propLeadDeatils.leadStatus,
                             refNumber: this.propLeadDeatils.merchantRefCode
-                        })
-
-                        .then(response => {
+                        }).then(response => {
                             let feed_paramaters;
                             if (response.status == 204) {
                                 feed_paramaters = {
@@ -900,7 +896,7 @@ export default {
                                     merchantRefCode: this.propLeadDeatils.merchantRefCode
                                 };
                             } else {
-                                feed_paramaters = response.body;
+                                feed_paramaters = response.data;
                             }
                             self.$q.loading.show({
                                 delay: 0, // ms
@@ -927,8 +923,7 @@ export default {
                                 .MARS_DATA_EXTERNAL_SUBMIT_RESPONSE({
                                     request: feed_paramaters,
                                     leadId: self.$route.params.id
-                                })
-                                .then(response => {
+                                }).then(response => {
                                     self.$q.notify({
                                         color: "positive",
                                         position: "bottom",

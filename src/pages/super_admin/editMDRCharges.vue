@@ -26,8 +26,8 @@
                     color="grey-9"
                     v-model="formData.leadSource"
                     :options="dropDown.leadSourceOptions"
-                    float-label="Select lead source"
-                    @input="fnleadSource"
+                    label="Select lead source"
+                    @update:model-value="fnleadSource"
                   />
                 </div>
                 <div class="col-md-12">
@@ -35,8 +35,8 @@
                     color="grey-9"
                     v-model="formData.device"
                     :options="dropDown.deviceOptions"
-                    float-label="Select device"
-                    @input="fnDevice"
+                    label="Select device"
+                    @update:model-value="fnDevice"
                   />
                 </div>
                 <div class="col-md-12">
@@ -44,8 +44,8 @@
                     color="grey-9"
                     v-model="formData.marsDeviceModel"
                     :options="dropDown.marsDeviceOptions"
-                    float-label="Mars Device Model"
-                    @input="fnMarsDeviceModel"
+                    label="Mars Device Model"
+                    @update:model-value="fnMarsDeviceModel"
                   />
                 </div>
                 <div class="col-md-12">
@@ -53,8 +53,8 @@
                     color="grey-9"
                     v-model="formData.merchantCategory"
                     :options="dropDown.merchantTypesOptions"
-                    float-label="Select merchant category type"
-                    @input="fnMerchantCategory(formData)"
+                    label="Select merchant category type"
+                    @update:model-value="fnMerchantCategory(formData)"
                   />
                 </div>
                 <div class="col-md-12">
@@ -63,7 +63,7 @@
                     type="text"
                     v-model="formData.mdrPlanName"
                     placeholder="Mdr Plan Name"
-                    float-label="Mdr Plan Name"
+                    label="Mdr Plan Name"
                   />
                 </div>
                 <div v-if="this.propRowDetails.device.isDevice == 1">
@@ -76,7 +76,7 @@
                           type="number"
                           v-model="formData.debitLessthanAmount"
                           placeholder="Debit <= 2000 %"
-                          float-label="Debit <= 2000 %"
+                          label="Debit <= 2000 %"
                           :error="$v.formData.debitLessthanAmount.$error"
                           @blur="$v.formData.debitLessthanAmount.$touch"
                         />
@@ -108,7 +108,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.debitGreaterthanAmount"
-                          float-label="Debit > 2000 %"
+                          label="Debit > 2000 %"
                           placeholder="Debit > 2000 %"
                           :error="$v.formData.debitGreaterthanAmount.$error"
                           @blur="$v.formData.debitGreaterthanAmount.$touch"
@@ -140,7 +140,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.stdCC"
-                          float-label="Std CC %"
+                          label="Std CC %"
                           placeholder="Std CC %"
                           :error="$v.formData.stdCC.$error"
                           @blur="$v.formData.stdCC.$touch"
@@ -173,7 +173,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.premiumCC"
-                          float-label="Premium CC %"
+                          label="Premium CC %"
                           placeholder="Premium CC %"
                           :error="$v.formData.premiumCC.$error"
                           @blur="$v.formData.premiumCC.$touch"
@@ -205,7 +205,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.corpCC"
-                          float-label="Corp Pre CC %"
+                          label="Corp Pre CC %"
                           placeholder="Corp Pre CC %"
                           :error="$v.formData.corpCC.$error"
                           @blur="$v.formData.corpCC.$touch"
@@ -237,7 +237,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.intlCC"
-                          float-label="Intl Pre CC %"
+                          label="Intl Pre CC %"
                           placeholder="Intl Pre CC %"
                           :error="$v.formData.intlCC.$error"
                           @blur="$v.formData.intlCC.$touch"
@@ -269,7 +269,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.superPremiumlCC"
-                          float-label="Super Pre CC %"
+                          label="Super Pre CC %"
                           placeholder="Super Pre CC %"
                           :error="$v.formData.superPremiumlCC.$error"
                           @blur="$v.formData.superPremiumlCC.$touch"
@@ -301,7 +301,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.amexDomestic"
-                          float-label="Amex Domestic %"
+                          label="Amex Domestic %"
                           placeholder="Amex Domestic %"
                           :error="$v.formData.amexDomestic.$error"
                           @blur="$v.formData.amexDomestic.$touch"
@@ -333,7 +333,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.amexInternational"
-                          float-label="Amex International %"
+                          label="Amex International %"
                           placeholder="Amex International %"
                           :error="$v.formData.amexInternational.$error"
                           @blur="$v.formData.amexInternational.$touch"
@@ -365,7 +365,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.upiDebitCardUpTo2000"
-                          float-label="UPI Debit Card UpTo 2000 %"
+                          label="UPI Debit Card UpTo 2000 %"
                           placeholder="UPI Debit Card UpTo 2000 %"
                           :error="$v.formData.upiDebitCardUpTo2000.$error"
                           @blur="$v.formData.upiDebitCardUpTo2000.$touch"
@@ -397,7 +397,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.upiDebitCardAbove2000"
-                          float-label="UPI Debit Card Above 2000 %"
+                          label="UPI Debit Card Above 2000 %"
                           placeholder="UPI Debit Card Above 2000 %"
                           :error="$v.formData.upiDebitCardAbove2000.$error"
                           @blur="$v.formData.upiDebitCardAbove2000.$touch"
@@ -429,7 +429,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.upiPrepaidCreditCardsUpTo2000"
-                          float-label="UPI Prepaid Credit Cards UpTo 2000 %"
+                          label="UPI Prepaid Credit Cards UpTo 2000 %"
                           placeholder="UPI Prepaid Credit Cards UpTo 2000 %"
                           :error="$v.formData.upiPrepaidCreditCardsUpTo2000.$error"
                           @blur="$v.formData.upiPrepaidCreditCardsUpTo2000.$touch"
@@ -462,7 +462,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.upiPrepaidCreditCardsAbove2000"
-                          float-label="UPI Prepaid Credit Cards Above 2000 %"
+                          label="UPI Prepaid Credit Cards Above 2000 %"
                           placeholder="UPI Prepaid Credit Cards Above 2000 %"
                           :error="$v.formData.upiPrepaidCreditCardsAbove2000.$error"
                           @blur="$v.formData.upiPrepaidCreditCardsAbove2000.$touch"
@@ -497,7 +497,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.smallMerchantLessThanTwoDebit"
-                          float-label="Small Merchant < 2000 % debit Card"
+                          label="Small Merchant < 2000 % debit Card"
                           placeholder="Small Merchant < 2000 % debit Card"
                           :error="$v.formData.smallMerchantLessThanTwoDebit.$error"
                           @blur="$v.formData.smallMerchantLessThanTwoDebit.$touch"
@@ -530,7 +530,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.smallMerchantGreaterThanTwoDebit"
-                          float-label="Small Merchant > 2000 % debit Card"
+                          label="Small Merchant > 2000 % debit Card"
                           placeholder="Small Merchant > 2000 % debit Card"
                           :error="$v.formData.smallMerchantGreaterThanTwoDebit.$error"
                           @blur="$v.formData.smallMerchantGreaterThanTwoDebit.$touch"
@@ -563,7 +563,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.smallMerchantLessThanTwoCreditAndPrepaid"
-                          float-label="Small Merchant < 2000 % credit and prepaid card"
+                          label="Small Merchant < 2000 % credit and prepaid card"
                           placeholder="Small Merchant < 2000 % credit and prepaid card"
                           :error="
                             $v.formData.smallMerchantLessThanTwoCreditAndPrepaid.$error
@@ -603,7 +603,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.smallMerchantGreaterThanTwoCreditAndPrepaid"
-                          float-label="Small Merchant > 2000 % credit and prepaid card"
+                          label="Small Merchant > 2000 % credit and prepaid card"
                           placeholder="Small Merchant > 2000 % credit and prepaid card"
                           :error="
                             $v.formData.smallMerchantGreaterThanTwoCreditAndPrepaid.$error
@@ -647,7 +647,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.largeMerchantLessThanTwoDebit"
-                          float-label="Large Merchant < 2000 % debit Card"
+                          label="Large Merchant < 2000 % debit Card"
                           placeholder="Large Merchant < 2000 % debit Card"
                           :error="$v.formData.largeMerchantLessThanTwoDebit.$error"
                           @blur="$v.formData.largeMerchantLessThanTwoDebit.$touch"
@@ -680,7 +680,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.largeMerchantGreaterThanTwoDebit"
-                          float-label="Large Merchant > 2000 % debit Card"
+                          label="Large Merchant > 2000 % debit Card"
                           placeholder="Large Merchant > 2000 % debit Card"
                           :error="$v.formData.largeMerchantGreaterThanTwoDebit.$error"
                           @blur="$v.formData.largeMerchantGreaterThanTwoDebit.$touch"
@@ -713,7 +713,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.largeMerchantLessThanTwoCreditandPrepaid"
-                          float-label="Large Merchant < 2000 % credit and prepaid card"
+                          label="Large Merchant < 2000 % credit and prepaid card"
                           placeholder="Large Merchant < 2000 % credit and prepaid card"
                           :error="
                             $v.formData.largeMerchantLessThanTwoCreditandPrepaid.$error
@@ -753,7 +753,7 @@
                           color="grey-9"
                           type="number"
                           v-model="formData.largeMerchantGreaterThanTwoCreditandPrepaid"
-                          float-label="Large Merchant > 2000 % credit and prepaid card"
+                          label="Large Merchant > 2000 % credit and prepaid card"
                           placeholder="Large Merchant > 2000 % credit and prepaid card"
                           :error="
                             $v.formData.largeMerchantGreaterThanTwoCreditandPrepaid.$error
@@ -797,7 +797,7 @@
                     color="grey-9"
                     type="number"
                     v-model="formData.superPremiumlCC"
-                    float-label="Super Pre CC %"
+                    label="Super Pre CC %"
                     placeholder="Super Pre CC %"
                   />
                 </div>
@@ -806,7 +806,7 @@
                     color="grey-9"
                     type="number"
                     v-model="formData.debitGreaterthanAmount"
-                    float-label="Debit > 2000 %"
+                    label="Debit > 2000 %"
                     placeholder="Debit > 2000 %"
                   />
                 </div>
@@ -815,7 +815,7 @@
                     color="grey-9"
                     type="number"
                     v-model="formData.stdCC"
-                    float-label="Std CC %"
+                    label="Std CC %"
                     placeholder="Std CC %"
                   />
                 </div>
@@ -824,7 +824,7 @@
                     color="grey-9"
                     type="number"
                     v-model="formData.premiumCC"
-                    float-label="Premium CC %"
+                    label="Premium CC %"
                     placeholder="Premium CC %"
                   />
                 </div>
@@ -833,7 +833,7 @@
                     color="grey-9"
                     type="number"
                     v-model="formData.corpCC"
-                    float-label="Corp Pre CC %"
+                    label="Corp Pre CC %"
                     placeholder="Corp Pre CC %"
                   />
                 </div>
@@ -842,7 +842,7 @@
                     color="grey-9"
                     type="number"
                     v-model="formData.intlCC"
-                    float-label="Intl Pre CC %"
+                    label="Intl Pre CC %"
                     placeholder="Intl Pre CC %"
                   />
                 </div>
@@ -851,7 +851,7 @@
                   color="grey-9"
                   type="number"
                   v-model="formData.superPremiumlCC"
-                  float-label="Super Pre CC %"
+                  label="Super Pre CC %"
                   placeholder="Super Pre CC %"
                 />
               </div>
@@ -862,7 +862,7 @@
                   color="grey-9"
                   type="number"
                   v-model="formData.staticUpiLessThanTwo"
-                  float-label="Staic Upi < 2000"
+                  label="Staic Upi < 2000"
                   placeholder="Staic Upi < 2000"
                 />
               </div>
@@ -871,7 +871,7 @@
                   color="grey-9"
                   type="number"
                   v-model="formData.staticUpigreaterThanTwo"
-                  float-label="Staic Upi > 2000"
+                  label="Staic Upi > 2000"
                   placeholder="Staic Upi > 2000"
                 />
               </div>
@@ -880,7 +880,7 @@
                   color="grey-9"
                   type="number"
                   v-model="formData.staticUpiDebitCard"
-                  float-label="Staic Upi debit card"
+                  label="Staic Upi debit card"
                   placeholder="Staic Upi debit card"
                 />
               </div>
@@ -889,7 +889,7 @@
                   color="grey-9"
                   type="number"
                   v-model="formData.staticUpicreditCardAndPrepaid"
-                  float-label="Staic Upi credit card & prepaid"
+                  label="Staic Upi credit card & prepaid"
                   placeholder="Staic Upi credit card & prepaid"
                 />
               </div>
@@ -1191,8 +1191,7 @@ export default {
               value: JSON.stringify(item),
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           self.LEAD_SOURCE_ACTIVE_LIST(leadSource).then(() => {
             return _.map(self.getActiveLeadSource, (item) => {
               self.dropDown.leadSourceOptions.push({
@@ -1201,8 +1200,7 @@ export default {
               });
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           self.MERCHANT_CATEGORY_ACTIVE_LIST(merchantCategory).then(() => {
             return _.map(self.getActiveMerchantCategory, (item) => {
               self.dropDown.merchantTypesOptions.push({

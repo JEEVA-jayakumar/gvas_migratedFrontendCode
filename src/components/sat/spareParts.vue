@@ -32,18 +32,17 @@
       <!-- <pre>{{getAllRegionsData}}</pre> -->
       <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
       <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToSelectedTab">
-        <q-tab default color="dark" name="incomingPods" slot="title" label="Incoming Pod's" />
-        <q-tab color="dark" name="stocks" slot="title" label="Stocks" />
-        <q-tab color="dark" name="allocatedSo" slot="title" label="So Pod List" />
-        <q-tab color="dark" name="createSoPod" slot="title" label="Create So Pod" />
-
-        <q-tab-panel name="allocatedSo">
+        <q-tab default color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="allocatedSo">
           <allocatedSo />
         </q-tab-panel>
-
-        <q-tab-panel name="incomingPods">
-          <q-table :rows="tableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch"
-            :pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
+<q-tab-panel name="incomingPods">
+          <q-table :rows="tableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
             @request="ajaxLoadAllLeadInfo">
             <q-td v-slot:body-cell-createdAt="props" :props="props">{{
                 props.row.created_date == null
@@ -99,15 +98,14 @@
               <!--START: table filter,search
             @click="fnShowAddNewServiceType(props.row)" -->
               <div class="col-3">
-                <q-input clearable color="grey-9" v-model="filterSearch" float-label="Search By POD Number" placeholder="Type.." class="q-mr-lg" />
+                <q-input clearable color="grey-9" v-model="filterSearch" label="Search By POD Number" placeholder="Type.." class="q-mr-lg" />
               </div>
               <!--ENDv-model: table filter,search -->
             </template>
           </q-table>
         </q-tab-panel>
-        <q-tab-panel name="stocks">
-          <q-table :rows="tableData1" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1"
-            :pagination="paginationControl1" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
+<q-tab-panel name="stocks">
+          <q-table :rows="tableData1" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1" v-model:pagination="paginationControl1" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
             @request="ajaxLoadAllLeadInfo1">
             <q-td v-slot:body-cell-createdAt="props" :props="props">{{
                 props.row.created_date == null
@@ -154,7 +152,7 @@
               <!--END: table title -->
               <!--START: table filter,search -->
               <div class="col-3">
-                <q-input clearable color="grey-9" v-model="filterSearch1" float-label="Search By POD Number" placeholder="Type.." class="q-mr-lg" />
+                <q-input clearable color="grey-9" v-model="filterSearch1" label="Search By POD Number" placeholder="Type.." class="q-mr-lg" />
               </div>
               <!-- <div class="col-3" align="right">
                 <q-btn
@@ -180,11 +178,11 @@
             </template>
           </q-table>
         </q-tab-panel>
-        <q-tab-panel name="createSoPod">
+<q-tab-panel name="createSoPod">
           <template>
             <div class="col-sm-3">
               <div class="row">
-                <q-select filter clearable v-model="formData.allocate_so" float-label="Select SO" class="col-md-3" radio color="grey-9"
+                <q-select filter clearable v-model="formData.allocate_so" label="Select SO" class="col-md-3" radio color="grey-9"
                   :options="regionBasedSo" @request="regionBasedSoLoad" />
               </div>
               <div class="col-md-7">
@@ -206,13 +204,13 @@
               </div>
               <div class="row">
                 <div class="col-md-5">
-                  <q-input disable v-model="formData.pod_number" float-label="Pod Number" radio color="grey-9" />
+                  <q-input disable v-model="formData.pod_number" label="Pod Number" radio color="grey-9" />
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-5">
-                  <q-input disable v-model="formData.total_count" float-label="Total Count" radio color="grey-9" />
+                  <q-input disable v-model="formData.total_count" label="Total Count" radio color="grey-9" />
                 </div>
               </div>
 
@@ -224,7 +222,7 @@
             </div>
           </template>
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
        
 
        <!-- START REJECT fnRejectPodDetails-->
@@ -711,8 +709,7 @@ export default {
           message: "Are you sure want to Approve?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.FETCH_SINGLE_POD_DETAILS(reqdata)
             .then(response => {
               let param = {
@@ -741,8 +738,7 @@ export default {
                     filter: this.filterSearch
                   })
                   this.fnregionSpareCount()
-                })
-                .catch(error => {
+                }).catch(error => {
                   this.$q.loading.hide()
                   this.$q.notify({
                     color: 'negative',
@@ -1054,8 +1050,7 @@ export default {
           message: 'Are you sure want to delete?',
           ok: 'Continue',
           cancel: 'Cancel'
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: 'Please Wait',
@@ -1071,8 +1066,7 @@ export default {
             })
           })
           this.$q.loading.hide()
-        })
-        .catch(() => {
+        }).onCancel(() => {
           this.$q.notify({
             color: 'negative',
             position: 'bottom',
@@ -1088,8 +1082,7 @@ export default {
           message: 'Are you sure want to delete?',
           ok: 'Continue',
           cancel: 'Cancel'
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: 'Please Wait',
@@ -1105,8 +1098,7 @@ export default {
             })
           })
           this.$q.loading.hide()
-        })
-        .catch(() => {
+        }).onCancel(() => {
           this.$q.notify({
             color: 'negative',
             position: 'bottom',
@@ -1122,7 +1114,7 @@ export default {
           this.tableData = this.getserviceRequestGetTypes
         
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide()
         })
     },

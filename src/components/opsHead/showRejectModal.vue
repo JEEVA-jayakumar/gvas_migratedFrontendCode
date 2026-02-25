@@ -12,7 +12,7 @@
                       <div class="text-h6 text-weight-regular">Reject Exception</div>
                   </div>
                   <div class="col-md-12 q-pt-md" align="left">
-                      <q-input type="textarea" color="grey-9" v-model="formData.leadVerificationStatus.reason" float-label="Enter reason for reject" placeholder="type.." />
+                      <q-input type="textarea" color="grey-9" v-model="formData.leadVerificationStatus.reason" label="Enter reason for reject" placeholder="type.." />
                   </div>
                   <div class="col-md-12 col-md-6 q-pt-md group" align="right">
                       <q-btn
@@ -77,8 +77,7 @@ export default {
           message: "Are you sure want to reject exception?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.TOGGLE_COMMON_LOADER(true);
           this.FEED_EQ_KYC_FEEDBACK(formData)
             .then(response => {
@@ -92,8 +91,7 @@ export default {
               });
               this.FETCH_ALL_EXCEPTION_KYC_DATA();
               this.emitModalToggle();
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -103,7 +101,7 @@ export default {
             });
           this.TOGGLE_COMMON_LOADER(false);
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

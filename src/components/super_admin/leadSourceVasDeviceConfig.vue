@@ -4,11 +4,12 @@
     <div>
 
       <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="changeTabs">
-        <q-tab default color="dark" name="active" slot="title" label="Active" />
+        <q-tab default color="dark" name="active" label="Active" />
         <!--:rows="activeTableData"-->
-        <q-tab-panel name="active">
-          <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch"
-            :pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="active">
+          <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
             @request="ajaxLoadData">
 
             <q-td v-slot:body-cell-vas="props" :props="props">
@@ -35,7 +36,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
 
       <!--START: Show create Hierarchy -->
       <showAddLeadSOurceVasDevice 
@@ -259,8 +260,7 @@ export default {
           message: "Are you sure want to Active hierarchy?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -283,8 +283,7 @@ export default {
                 icon: "thumb_up"
               });
               this.$q.loading.hide();
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -315,8 +314,7 @@ export default {
           message: "Are you sure want to delete Hierarchy?",
           ok: "Continue",
           cancel: "Cancel",
-        })
-        .then(() => {
+        }).onOk(() => {
           this.DELETE_HIERARCHY_BY_HIERARCHY_ID_DATA(HierarchyId)
             .then(response => {
               this.FETCH_ALL_HIERARCHIES_DATA();
@@ -326,8 +324,7 @@ export default {
                 message: "Successfully Deleted!",
                 icon: "thumb_up",
               });
-            })
-            .catch(() => {
+            }).onCancel(() => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -336,7 +333,7 @@ export default {
               });
             });
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

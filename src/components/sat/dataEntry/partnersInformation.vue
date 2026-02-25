@@ -25,7 +25,7 @@
           @blur="v.name.$touch()"
           color="grey-9"
           v-model="v.$model.name"
-          float-label="Name*"
+          label="Name*"
           placeholder="Name*"
         />
       </div>
@@ -36,7 +36,7 @@
           @blur="v.pan.$touch()"
           color="grey-9"
           v-model="v.$model.pan"
-          float-label="Pan*"
+          label="Pan*"
           placeholder="Pan*"
         />
       </div>
@@ -46,7 +46,7 @@
           @blur="v.address.$touch()"
           color="grey-9"
           v-model="v.$model.address"
-          float-label="Address*"
+          label="Address*"
           placeholder="Address*"
         />
       </div>
@@ -57,7 +57,7 @@
           color="grey-9"
           type="number"
           v-model="v.$model.pin"
-          float-label="Pincode*"
+          label="Pincode*"
           placeholder="Pincode*"
         />
       </div>
@@ -67,7 +67,7 @@
           @blur="v.cityRefCode.$touch()"
           color="grey-9"
           v-model="v.$model.cityRefLabel"
-          float-label="City (type min 3 characters)*"
+          label="City (type min 3 characters)*"
           placeholder="Start typing ..*"
         >
           <q-autocomplete
@@ -85,7 +85,7 @@
           @blur="v.stateRefCode.$touch()"
           color="grey-9"
           v-model="v.$model.stateRefLabel"
-          float-label="State (type min 3 characters)*"
+          label="State (type min 3 characters)*"
           placeholder="Start typing ..*"
         >
           <q-autocomplete
@@ -104,7 +104,7 @@
           color="grey-9"
           type="tel"
           v-model="v.$model.contactMobile"
-          float-label="Mobile*"
+          label="Mobile*"
           placeholder="Mobile*"
         />
       </div>
@@ -115,7 +115,7 @@
           color="grey-9"
           type="email"
           v-model="v.$model.contactEmail"
-          float-label="Email*"
+          label="Email*"
           placeholder="Email*"
         />
       </div>

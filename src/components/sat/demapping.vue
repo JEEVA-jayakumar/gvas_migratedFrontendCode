@@ -30,8 +30,7 @@
         table-class="customTableClass"
         :rows="tableData"
         :columns="columns"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         selection="multiple"
         v-model:selected="formData.marsDeviceIdsDemapping"
         row-key="id"
@@ -44,7 +43,7 @@
           v-slot:body-cell-leadNumber="props"
           :props="props"
           class="cursor-pointer"
-          @click.native="toggleLeadInformation(props.row.leadInformation)"
+          @click="toggleLeadInformation(props.row.leadInformation)"
         >
           <span class="label text-primary"
             ># {{ props.row.leadInformation.leadNumber }}</span
@@ -61,7 +60,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search By Device Serial Number"
+              label="Search By Device Serial Number"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -199,8 +198,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.DEMAPPING_STATUS_LIST({ pagination, filter })
-        .then(res => {
+      this.DEMAPPING_STATUS_LIST({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 

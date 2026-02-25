@@ -116,12 +116,12 @@
             <div class="col-md-7 q-pa-xs">
                 <q-stepper color="light-blue" ref="stepper" contractable text alternative-labels>
                     <q-step default name="first" title="Sales" subtitle="Info">
-                        <div class="row gutter-sm">
+                        <div class="row q-col-gutter-sm">
                             <div class="col-md-6 col-sm-12">
                                 <q-select
                                 color="grey-9"
                                 v-model="onBoardDetails.merchant.salesInfo.institutionCode"
-                                float-label="Application Type"
+                                label="Application Type"
                                 radio
                                 :options="institutionCodeOptions"
                                 />
@@ -130,22 +130,30 @@
                                 <q-select
                                 color="grey-9"
                                 v-model="onBoardDetails.merchant.salesInfo.applicationType"
-                                float-label="Application Type"
+                                label="Application Type"
                                 radio
                                 :options="applicationTypeOptions"
                                 />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" v-model="text" type="number" float-label="Application Number" placeholder="Application Number" />
+                                <q-input color="grey-9" v-model="text" type="number" label="Application Number" placeholder="Application Number" />
                             </div>
                             <div class="col-md-6">
-                                <q-input minimal color="grey-9" v-model="onBoardDetails.merchant.salesInfo.applicationDate" type="date" float-label="Application Date" placeholder="Application Date" />
+                                <q-input filled v-model="onBoardDetails.merchant.salesInfo.applicationDate" label="Application Date" color="grey-9">
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="onBoardDetails.merchant.salesInfo.applicationDate" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
                             </div>
                             <div class="col-md-6">
                                 <q-select
                                 color="grey-9"
                                 v-model="select"
-                                float-label="Merchant Type"
+                                label="Merchant Type"
                                 radio
                                 :options="selectOptions"
                                 />
@@ -154,7 +162,7 @@
                                 <q-select
                                 color="grey-9"
                                 v-model="select"
-                                float-label="Sales Person"
+                                label="Sales Person"
                                 radio
                                 :options="selectOptions"
                                 />
@@ -163,7 +171,7 @@
                                 <q-select
                                 color="grey-9"
                                 v-model="select"
-                                float-label="Region"
+                                label="Region"
                                 radio
                                 :options="selectOptions"
                                 />
@@ -172,7 +180,7 @@
                                 <q-select
                                 color="grey-9"
                                 v-model="select"
-                                float-label="Lead From"
+                                label="Lead From"
                                 radio
                                 :options="selectOptions"
                                 />
@@ -196,32 +204,32 @@
                         </q-stepper-navigation>
                     </q-step>
                     <q-step name="second" title="Company" subtitle="Info">
-                        <div class="row gutter-sm">
+                        <div class="row q-col-gutter-sm">
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" v-model="onBoardDetails.companyInfo.legalName" float-label="Legal name" placeholder="Legal name" />
+                                <q-input color="grey-9" v-model="onBoardDetails.companyInfo.legalName" label="Legal name" placeholder="Legal name" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" v-model="onBoardDetails.companyInfo.dbaName" float-label="DBA name" placeholder="DBA name" />
+                                <q-input color="grey-9" v-model="onBoardDetails.companyInfo.dbaName" label="DBA name" placeholder="DBA name" />
                             </div>
                             <div class="col-md-12">
                                 <q-input
                                 color="grey-9"
                                 v-model="onBoardDetails.companyInfo.registeredAddress"
                                 type="textarea"
-                                float-label="Registered Address"
+                                label="Registered Address"
                                 placeholder="Registered Address"
                                 :max-height="100"
                                 rows="1"
                                 />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" type="number" v-model="onBoardDetails.companyInfo.registeredPin" float-label="PIN" placeholder="PIN" />
+                                <q-input color="grey-9" type="number" v-model="onBoardDetails.companyInfo.registeredPin" label="PIN" placeholder="PIN" />
                             </div>
                             <div class="col-md-6">
                                 <q-select
                                 color="grey-9"
                                 v-model="onBoardDetails.companyInfo.registeredCityRefCode"
-                                float-label="City"
+                                label="City"
                                 placeholder="City"
                                 radio
                                 :options="selectCityOptions"
@@ -231,7 +239,7 @@
                                 <q-select
                                 color="grey-9"
                                 v-model="onBoardDetails.companyInfo.registeredStateRefCode"
-                                float-label="State"
+                                label="State"
                                 placeholder="State"
                                 radio
                                 :options="selectStateOptions"
@@ -241,7 +249,7 @@
                                 <q-select
                                 color="grey-9"
                                 v-model="select"
-                                float-label="Type of Business Entity"
+                                label="Type of Business Entity"
                                 radio
                                 :options="selectOptions"
                                 />
@@ -250,26 +258,26 @@
                                 <q-select
                                 color="grey-9"
                                 v-model="select"
-                                float-label="Year of Establishment"
+                                label="Year of Establishment"
                                 radio
                                 :options="selectOptions"
                                 />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" type="number" v-model="onBoardDetails.companyInfo.registerNumber" float-label="Establish Number" placeholder="Establish Number" />
+                                <q-input color="grey-9" type="number" v-model="onBoardDetails.companyInfo.registerNumber" label="Establish Number" placeholder="Establish Number" />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" type="number" v-model="onBoardDetails.companyInfo.tin" float-label="TIN" placeholder="TIN" />
+                                <q-input color="grey-9" type="number" v-model="onBoardDetails.companyInfo.tin" label="TIN" placeholder="TIN" />
                             </div>
 
                             <div class="col-md-6">
-                                <q-input color="grey-9" type="number" v-model="onBoardDetails.companyInfo.pan" float-label="Company PAN" placeholder="Company PAN" />
+                                <q-input color="grey-9" type="number" v-model="onBoardDetails.companyInfo.pan" label="Company PAN" placeholder="Company PAN" />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" type="number" v-model="onBoardDetails.companyInfo.tan" float-label="TAN" placeholder="TAN" />
+                                <q-input color="grey-9" type="number" v-model="onBoardDetails.companyInfo.tan" label="TAN" placeholder="TAN" />
                             </div>
                             <div class="col-md-12">
-                                <q-input color="grey-9" type="number" v-model="onBoardDetails.companyInfo.businessNature" float-label="Name of Business" placeholder="Name of Business" />
+                                <q-input color="grey-9" type="number" v-model="onBoardDetails.companyInfo.businessNature" label="Name of Business" placeholder="Name of Business" />
                             </div>
                             <div class="col-md-6">
                                 <p class="text-caption">Type of Business</p>
@@ -278,30 +286,30 @@
                                 <q-radio color="grey-9" v-model="onBoardDetails.companyInfo.businessType" val="L" label="Leased" />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" type="number" v-model="text" float-label="MCC" placeholder="MCC" />
+                                <q-input color="grey-9" type="number" v-model="text" label="MCC" placeholder="MCC" />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" type="number" v-model="text" float-label="TCC" placeholder="TCC" />
+                                <q-input color="grey-9" type="number" v-model="text" label="TCC" placeholder="TCC" />
                             </div>
                             <div class="col-md-12">
                                 <q-input
                                 color="grey-9"
                                 v-model="text"
                                 type="textarea"
-                                float-label="Residential Address"
+                                label="Residential Address"
                                 placeholder="Residential Address"
                                 :max-height="100"
                                 rows="1"
                                 />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" type="number" v-model="text" float-label="PIN" placeholder="PIN" />
+                                <q-input color="grey-9" type="number" v-model="text" label="PIN" placeholder="PIN" />
                             </div>
                             <div class="col-md-6">
                                 <q-select
                                 color="grey-9"
                                 v-model="select"
-                                float-label="City"
+                                label="City"
                                 radio
                                 :options="selectOptions"
                                 />
@@ -310,28 +318,28 @@
                                 <q-select
                                 color="grey-9"
                                 v-model="select"
-                                float-label="State"
+                                label="State"
                                 radio
                                 :options="selectOptions"
                                 />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" v-model="text" float-label="Contact Name" placeholder="Contact Name" />
+                                <q-input color="grey-9" v-model="text" label="Contact Name" placeholder="Contact Name" />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" type="number" v-model="text" float-label="Mobile" placeholder="Mobile" />
+                                <q-input color="grey-9" type="number" v-model="text" label="Mobile" placeholder="Mobile" />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" type="tel" v-model="text" float-label="Alt Mobile" placeholder="Alt Mobile" />
+                                <q-input color="grey-9" type="tel" v-model="text" label="Alt Mobile" placeholder="Alt Mobile" />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" type="tel" v-model="text" float-label="Alt Mobile" placeholder="Alt Mobile" />
+                                <q-input color="grey-9" type="tel" v-model="text" label="Alt Mobile" placeholder="Alt Mobile" />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" type="tel" v-model="text" float-label="Telephone" placeholder="Telephone" />
+                                <q-input color="grey-9" type="tel" v-model="text" label="Telephone" placeholder="Telephone" />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" type="email" v-model="text" float-label="Email" placeholder="Email" />
+                                <q-input color="grey-9" type="email" v-model="text" label="Email" placeholder="Email" />
                             </div>
                             <div class="col-md-6">
                                 <p class="text-caption">Statement Type</p>
@@ -354,24 +362,24 @@
                         </q-stepper-navigation>
                     </q-step>
                     <q-step name="third" title="Partners">
-                        <div class="row gutter-sm">
+                        <div class="row q-col-gutter-sm">
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" v-model="text" float-label="Name" placeholder="Name" />
+                                <q-input color="grey-9" v-model="text" label="Name" placeholder="Name" />
                             </div>
                             <div class="col-md-12">
-                                <q-input color="grey-9" type="textarea" v-model="text" float-label="Address" placeholder="Address" />
+                                <q-input color="grey-9" type="textarea" v-model="text" label="Address" placeholder="Address" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" v-model="text" float-label="PAN" placeholder="PAN" />
+                                <q-input color="grey-9" v-model="text" label="PAN" placeholder="PAN" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" type="number" v-model="text" float-label="PIN" placeholder="PIN" />
+                                <q-input color="grey-9" type="number" v-model="text" label="PIN" placeholder="PIN" />
                             </div>
                             <div class="col-md-6">
                                 <q-select
                                 color="grey-9"
                                 v-model="select"
-                                float-label="City"
+                                label="City"
                                 radio
                                 :options="selectOptions"
                                 />
@@ -380,16 +388,16 @@
                                 <q-select
                                 color="grey-9"
                                 v-model="select"
-                                float-label="State"
+                                label="State"
                                 radio
                                 :options="selectOptions"
                                 />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" type="tel" v-model="text" float-label="Mobile" placeholder="Mobile" />
+                                <q-input color="grey-9" type="tel" v-model="text" label="Mobile" placeholder="Mobile" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" type="email" v-model="text" float-label="Email" placeholder="Email" />
+                                <q-input color="grey-9" type="email" v-model="text" label="Email" placeholder="Email" />
                             </div>
                         </div>
                         <q-stepper-navigation>
@@ -399,52 +407,68 @@
                         </q-stepper-navigation>
                     </q-step>
                     <q-step name="fourth" title="Business" subtitle="Info">
-                        <div class="row gutter-sm">
+                        <div class="row q-col-gutter-sm">
                             <div class="col-md-6 col-sm-12">
                                 <p class="text-caption">Business Hours(Week Days)</p>
-                                <q-input color="grey-9" format-model="number"	v-model="date2" type="time" format24h float-label="From" />
+                                <q-input color="grey-9" format-model="number"	v-model="date2" type="time" format24h label="From" />
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <p class="text-caption">Business Hours(Week Days)</p>
-                                <q-input color="grey-9" format-model="number"	v-model="date2" type="time" format24h float-label="To" />
+                                <q-input color="grey-9" format-model="number"	v-model="date2" type="time" format24h label="To" />
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <p class="text-caption">Business Hours(Weekends)</p>
-                                <q-input color="grey-9" format-model="number"	v-model="date2" type="time" format24h float-label="From" />
+                                <q-input color="grey-9" format-model="number"	v-model="date2" type="time" format24h label="From" />
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <p class="text-caption">Business Hours(Weekends)</p>
-                                <q-input color="grey-9" format-model="number"	v-model="date2" type="time" format24h float-label="To" />
+                                <q-input color="grey-9" format-model="number"	v-model="date2" type="time" format24h label="To" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" type="number" v-model="text" float-label="Business Income" placeholder="Business Income" />
+                                <q-input color="grey-9" type="number" v-model="text" label="Business Income" placeholder="Business Income" />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" v-model="text" type="date" float-label="Turning During Later Year" placeholder="Application Date" />
+                                <q-input filled v-model="text" label="Turning During Later Year" color="grey-9">
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="text" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" type="number" v-model="text" float-label="Amount" placeholder="Amount" />
+                                <q-input color="grey-9" type="number" v-model="text" label="Amount" placeholder="Amount" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" type="number" v-model="text" float-label="Expected Card Business" placeholder="Expected Card Business" />
+                                <q-input color="grey-9" type="number" v-model="text" label="Expected Card Business" placeholder="Expected Card Business" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" type="number" v-model="text" float-label="Average Bill Amount" placeholder="Average Bill Amount" />
+                                <q-input color="grey-9" type="number" v-model="text" label="Average Bill Amount" placeholder="Average Bill Amount" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" v-model="text" float-label="GST ID" placeholder="GST ID" />
+                                <q-input color="grey-9" v-model="text" label="GST ID" placeholder="GST ID" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" v-model="text" float-label="Name of the other POS Currentlly Used" placeholder="Name of the other POS Currentlly Used" />
+                                <q-input color="grey-9" v-model="text" label="Name of the other POS Currentlly Used" placeholder="Name of the other POS Currentlly Used" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" type="number" v-model="text" float-label="Debit Card" placeholder="Debit Card" />
+                                <q-input color="grey-9" type="number" v-model="text" label="Debit Card" placeholder="Debit Card" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" type="number" v-model="text" float-label="Credit Card" placeholder="Credit Card" />
+                                <q-input color="grey-9" type="number" v-model="text" label="Credit Card" placeholder="Credit Card" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" format-model="number"	v-model="date2" type="date" format24h float-label="Member Since" />
+                                <q-input filled v-model="date2" label="Member Since" color="grey-9">
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="date2" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
                             </div>
                         </div>
                         <q-stepper-navigation>
@@ -454,26 +478,26 @@
                         </q-stepper-navigation>
                     </q-step>
                     <q-step name="fifth" title="Payment" subtitle="Details">
-                            <div class="row gutter-sm">
+                            <div class="row q-col-gutter-sm">
                             <div class="col-md-6">
                                 <p class="text-caption">Device Owned By</p>
                                 <q-radio color="grey-9" v-model="option" val="opt2" label="Bijlipay" />
                                 <q-radio color="grey-9" v-model="option" val="opt2" label="Merchant" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" type="number" v-model="text" float-label="Installation Fee" placeholder="Installation Fee" />
+                                <q-input color="grey-9" type="number" v-model="text" label="Installation Fee" placeholder="Installation Fee" />
                             </div>
                             <div class="col-md-6">
                                 <q-select
                                 color="grey-9"
                                 v-model="select"
-                                float-label="Terminal Model"
+                                label="Terminal Model"
                                 radio
                                 :options="selectOptions"
                                 />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" type="number" v-model="text" float-label="No of Terminals" placeholder="No of Terminals" />
+                                <q-input color="grey-9" type="number" v-model="text" label="No of Terminals" placeholder="No of Terminals" />
                             </div>
                             <div class="col-md-6">
                                 <p class="text-caption">Cash @POS Enabled?</p>
@@ -484,7 +508,7 @@
                                 <q-select
                                 color="grey-9"
                                 v-model="select"
-                                float-label="Rental Plan"
+                                label="Rental Plan"
                                 radio
                                 :options="selectOptions"
                                 />
@@ -493,7 +517,7 @@
                                 <q-select
                                 color="grey-9"
                                 v-model="select"
-                                float-label="Rental Mode"
+                                label="Rental Mode"
                                 radio
                                 :options="selectOptions"
                                 />
@@ -504,13 +528,13 @@
                                 <q-radio color="grey-9" v-model="option" val="opt2" label="Regular" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" type="number" v-model="text" float-label="Device Price" placeholder="Device Price" />
+                                <q-input color="grey-9" type="number" v-model="text" label="Device Price" placeholder="Device Price" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" type="number" v-model="text" float-label="Other Charges" placeholder="Other Charges" />
+                                <q-input color="grey-9" type="number" v-model="text" label="Other Charges" placeholder="Other Charges" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" type="number" v-model="text" float-label="Total Amount Paid" placeholder="Total Amount Paid" />
+                                <q-input color="grey-9" type="number" v-model="text" label="Total Amount Paid" placeholder="Total Amount Paid" />
                             </div>
                         </div>
                         <q-stepper-navigation>
@@ -525,22 +549,22 @@
                                 <p class="text-caption">Merchant Bank Details</p>
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" v-model="text" float-label="IFSC Code" placeholder="IFSC Code" />
+                                <q-input color="grey-9" v-model="text" label="IFSC Code" placeholder="IFSC Code" />
                             </div> 
                             <div class="col-md-6">
-                                <q-input color="grey-9" type="number" v-model="text" float-label="MICR" placeholder="MICR" />
+                                <q-input color="grey-9" type="number" v-model="text" label="MICR" placeholder="MICR" />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" v-model="text" float-label="Bank Name" placeholder="Bank Name" />
+                                <q-input color="grey-9" v-model="text" label="Bank Name" placeholder="Bank Name" />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" v-model="text" float-label="Branch Name" placeholder="Branch Name" />
+                                <q-input color="grey-9" v-model="text" label="Branch Name" placeholder="Branch Name" />
                             </div>
                             <div class="col-md-6">
                                 <q-select
                                 color="grey-9"
                                 v-model="select"
-                                float-label="City"
+                                label="City"
                                 radio
                                 :options="selectOptions"
                                 />
@@ -549,7 +573,7 @@
                                 <q-select
                                 color="grey-9"
                                 v-model="select"
-                                float-label="State"
+                                label="State"
                                 radio
                                 :options="selectOptions"
                                 />
@@ -558,13 +582,13 @@
                                 <q-select
                                 color="grey-9"
                                 v-model="select"
-                                float-label="Account Type"
+                                label="Account Type"
                                 radio
                                 :options="selectOptions"
                                 />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" v-model="text" type="number" float-label="Bank A/c Number" placeholder="Bank A/c Number" />
+                                <q-input color="grey-9" v-model="text" type="number" label="Bank A/c Number" placeholder="Bank A/c Number" />
                             </div>
                             <div class="col-md-6">
                                 <q-checkbox color="grey-9" v-model="checked" label="Bank Statement Attached" />
@@ -574,31 +598,31 @@
                                 <p class="text-caption">Payment Collection Details</p>
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" v-model="text" float-label="Swipe Amount" placeholder="Swipe Amount" />
+                                <q-input color="grey-9" v-model="text" label="Swipe Amount" placeholder="Swipe Amount" />
                             </div> 
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" format-model="number"	v-model="date2" type="time" format24h float-label="Swipe Date" />
+                                <q-input color="grey-9" format-model="number"	v-model="date2" type="time" format24h label="Swipe Date" />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" v-model="text" float-label="Swiped on the terminal of" placeholder="Swiped on the terminal of" />
+                                <q-input color="grey-9" v-model="text" label="Swiped on the terminal of" placeholder="Swiped on the terminal of" />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" v-model="text" float-label="Cheque Amount" placeholder="Cheque Amount" />
+                                <q-input color="grey-9" v-model="text" label="Cheque Amount" placeholder="Cheque Amount" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-input color="grey-9" format-model="number"	v-model="date2" type="time" format24h float-label="Cheque Date" />
+                                <q-input color="grey-9" format-model="number"	v-model="date2" type="time" format24h label="Cheque Date" />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" format-model="number"	v-model="date2" type="time" format24h float-label="Cheque Deposited Date" />
+                                <q-input color="grey-9" format-model="number"	v-model="date2" type="time" format24h label="Cheque Deposited Date" />
                             </div>
                             <div class="col-md-6">
-                                <q-input color="grey-9" v-model="text" float-label="Cheque/UTR No" placeholder="Cheque/UTR No" />
+                                <q-input color="grey-9" v-model="text" label="Cheque/UTR No" placeholder="Cheque/UTR No" />
                             </div>
                             <div class="col-md-6">
                                 <q-select
                                 color="grey-9"
                                 v-model="select"
-                                float-label="Bank Name"
+                                label="Bank Name"
                                 radio
                                 :options="selectOptions"
                                 />

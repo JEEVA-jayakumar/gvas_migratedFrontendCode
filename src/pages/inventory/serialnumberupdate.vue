@@ -27,7 +27,7 @@
                             clearable
                             color="grey-9"
                             v-model.trim="formData.tid"
-                            float-label="TID"
+                            label="TID"
                             placeholder="TID"
                           >
                             <q-autocomplete
@@ -43,7 +43,7 @@
                             clearable
                             color="grey-9"
                             v-model.trim="formData.serialNumber"
-                            float-label="Serial Number"
+                            label="Serial Number"
                             placeholder="Serial Number"
                           >
                           </q-input>
@@ -53,7 +53,7 @@
                             clearable
                             color="grey-9"
                             v-model.trim="formData.newSerialNumber"
-                            float-label="New Serial Number"
+                            label="New Serial Number"
                             placeholder="New Serial Number"
                           >
                           </q-input>

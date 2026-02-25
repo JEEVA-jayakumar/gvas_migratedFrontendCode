@@ -13,20 +13,20 @@
             <q-select v-model="formData.leadSourceDeviceVasMapping.leadSource"
               @blur="$v.formData.leadSourceDeviceVasMapping.leadSource.$touch"
               :error="$v.formData.leadSourceDeviceVasMapping.leadSource.$error" :options="dropDown.leadSourceOptions"
-              class="text-weight-regular text-grey-8" color="grey-9" float-label="Select Lead Source"
+              class="text-weight-regular text-grey-8" color="grey-9" label="Select Lead Source"
               placeholder="Select Lead Source" />
           </div>
           <div class="col-md-12">
             <q-select v-model="formData.leadSourceDeviceVasMapping.device"
               @blur="$v.formData.leadSourceDeviceVasMapping.device.$touch"
               :error="$v.formData.leadSourceDeviceVasMapping.device.$error" :options="dropDown.deviceOptions"
-              class="text-weight-regular text-grey-8" color="grey-9" float-label="Select Device"
+              class="text-weight-regular text-grey-8" color="grey-9" label="Select Device"
               placeholder="Select Device" />
           </div>
           <div class="col-md-12">
             <q-select multiple v-model="formData.vasList" @blur="$v.formData.vasList.$touch"
               :error="$v.formData.vasList.$error" :options="dropDown.vasOptions" class="text-weight-regular text-grey-8"
-              color="grey-9" float-label="Select Vas" placeholder="Select Vas" />
+              color="grey-9" label="Select Vas" placeholder="Select Vas" />
           </div>
         </div>
         <q-card-section>
@@ -35,19 +35,19 @@
             <!-- <q-item>
               <q-item-section>
                 <q-select color="grey-9" v-model="formData.leadSourceDeviceVasMapping.leadSource"
-                  :options="dropDown.leadSourceOptions" float-label="Select lead source" placeholder="Lead source" />
+                  :options="dropDown.leadSourceOptions" label="Select lead source" placeholder="Lead source" />
               </q-item-section>
             </q-item> -->
             <!-- <q-item>
               <q-item-section>
                 <q-select color="grey-9" v-model="formData.leadSourceDeviceVasMapping.device"
-                  :options="dropDown.deviceOptions" float-label="Select Device" placeholder="Select Device" />
+                  :options="dropDown.deviceOptions" label="Select Device" placeholder="Select Device" />
               </q-item-section>
             </q-item> -->
             <!-- <q-item>
               <q-item-section>
                 <q-select multiple color="grey-9" v-model="formData.vasList" :options="dropDown.vasOptions"
-                  float-label="Select VAS" placeholder="Select VAS" />
+                  label="Select VAS" placeholder="Select VAS" />
               </q-item-section>
             </q-item> -->
           </q-list>
@@ -162,8 +162,7 @@ export default {
               label: item.sourceName
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           self.FETCH_DEVICES_DATA()
             .then(() => {
               return _.map(self.getAllDevicesInfo, item => {

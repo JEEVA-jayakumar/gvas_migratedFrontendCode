@@ -8,26 +8,26 @@
       <!--START: table lead validation -->
       <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-md-4">
-          <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
-            :options="aggregatorOptions" @input="getaggregator" />
+          <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
+            :options="aggregatorOptions" @update:model-value="getaggregator" />
         </div>
       </div> -->
     
         <q-table table-class="customTableClass" class="q-py-none" :columns="columns" :rows="tableData" :filter="filter"
-          :rows-per-page-options="[100, 200, 300, 400, 500]" :pagination="paginationControl"
+          :rows-per-page-options="[100, 200, 300, 400, 500]" v-model:pagination="paginationControl"
           :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
           <q-td v-slot:body-cell-installationDate="props" :props="props">
-            <span class="label">{{ props.row.installationDate | moment("Do MMM Y") }}</span>
+            <span class="label">{{ $moment(props.row.installationDate).format("Do MMM Y") }}</span>
           </q-td>
           <q-td v-slot:body-cell-deInstallationDate="props" :props="props">
-            <span class="label">{{ props.row.deInstallationDate | moment("Do MMM Y") }}</span>
+            <span class="label">{{ $moment(props.row.deInstallationDate).format("Do MMM Y") }}</span>
           </q-td>
           
           <template v-slot:top="props" class="bottom-border">
             <!--START: table  :rows-per-page-options="[5,10,15,20,25]"filter,search -->
             <div class="col-md-3">
               <q-input clearable color="grey-9" v-model="filter" placeholder="Type.."
-                float-label="Search by MID, TID" class="q-mr-lg q-py-sm" />
+                label="Search by MID, TID" class="q-mr-lg q-py-sm" />
             </div>
             <div class="col-md-6">
 
@@ -225,8 +225,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.AGGREGATORS_DEVICE_WITH_HISTORY({ pagination, filter})
-        .then(res => {
+      this.AGGREGATORS_DEVICE_WITH_HISTORY({ pagination, filter}).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 

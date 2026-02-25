@@ -2,7 +2,7 @@ const { configure } = require('quasar/wrappers');
 const path = require('path');
 module.exports = configure(function (ctx) {
   return {
-    boot: ['i18n', 'axios', 'GlobalVariables', 'vuelidate', 'moment', 'image-viewer', 'stubs'],
+    boot: ['i18n', 'axios', 'GlobalVariables', 'vuelidate', 'moment', 'image-viewer', 'chartjs', 'vue-resource', 'barcode-scanner', 'json-excel', 'stubs'],
     css: ['app.scss'],
     extras: ['roboto-font', 'material-icons', 'fontawesome-v5'],
     build: {
@@ -12,11 +12,11 @@ module.exports = configure(function (ctx) {
       extendWebpack (cfg) {
         cfg.resolve.alias = {
           ...cfg.resolve.alias,
-          'vue-barcode-scanner': path.resolve(__dirname, './src/stubs/index.js'),
-          'vue-pdfjs': path.resolve(__dirname, './src/stubs/index.js'),
-          'vue-json-excel': path.resolve(__dirname, './src/stubs/index.js'),
-          'vue-radial-progress': path.resolve(__dirname, './src/stubs/index.js'),
-          'vue-chartjs': path.resolve(__dirname, './src/stubs/index.js'),
+          'vue-barcode-scanner': 'vue3-barcode-scanner',
+          'vue-json-excel': 'vue-json-excel3',
+          'vue-radial-progress': 'vue3-radial-progress',
+          'vue-pdfjs': path.resolve(__dirname, './src/components/wrappers/vue-pdfjs-shim.js'),
+          'vue-chartjs': 'vue-chartjs',
           'vuetify': path.resolve(__dirname, './src/stubs/index.js'),
           'babel-types': path.resolve(__dirname, './src/stubs/index.js'),
           'vue-resource': path.resolve(__dirname, './src/stubs/index.js'),

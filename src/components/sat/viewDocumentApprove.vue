@@ -10,11 +10,11 @@
 
           <div class="col-md-12">
             <q-input disable @keyup.enter="submitShortLead(formData)" v-model="data.data"
-              class="text-weight-regular text-grey-8" color="grey-9" float-label="leadId" placeholder="leadId" />
+              class="text-weight-regular text-grey-8" color="grey-9" label="leadId" placeholder="leadId" />
           </div>
           <div class="col-md-12">
             <q-input disable v-model="merchant.paymentDetails.deviceSerialNumber" class="no-margin"
-              float-label="Serial Number" />
+              label="Serial Number" />
           </div>
           <!-- <div class="col-md-12">
            
@@ -22,7 +22,7 @@
               format="DD/MM/YYYY"
               v-model="merchant.paymentDetails.installationDate"
               class="no-margin"
-              float-label="Installation Date"
+              label="Installation Date"
             />
           </div> -->
           <!-- <div class="col-md-12">
@@ -32,7 +32,7 @@
                 format="DD/MM/YYYY"
                 v-model="merchant.paymentDetails.deinstallationDate"
                 class="no-margin"
-                float-label="DeInstallation Date"
+                label="DeInstallation Date"
               />
               
             </div>
@@ -599,8 +599,7 @@
           spinnerColor: "purple-9",
           message: "Fetching data ..",
         });
-        this.EQUITAS_TRACKER_LIST({ pagination, filter })
-          .then((res) => {
+        this.EQUITAS_TRACKER_LIST({ pagination, filter }).then((res) => {
             // updating pagination to reflect in the UI
             this.paginationControl = pagination;
 

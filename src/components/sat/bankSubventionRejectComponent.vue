@@ -13,7 +13,7 @@
         <div>
           <q-input
             v-model="formData.leadVerificationStatus.reason"
-            float-label="SAT Remarks"
+            label="SAT Remarks"
             color="grey-9"
           />
         </div>

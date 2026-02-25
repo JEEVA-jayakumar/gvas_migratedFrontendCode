@@ -13,7 +13,7 @@
           <div>
             <q-input
               v-model="formData.leadInformation.reason"
-              float-label="Remarks"
+              label="Remarks"
               color="primary"
             />
           </div>

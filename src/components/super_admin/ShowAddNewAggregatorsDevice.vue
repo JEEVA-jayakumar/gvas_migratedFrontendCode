@@ -10,18 +10,18 @@
                     <div>
                         <q-input v-model="formData.deviceName" @blur="$v.formData.deviceName.$touch"
                             :error="$v.formData.deviceName.$error" class="text-weight-regular text-grey-8"
-                            color="grey-9" float-label="Device Type" placeholder="Device Type" />
+                            color="grey-9" label="Device Type" placeholder="Device Type" />
                     </div>
                     <div>
                         <q-select color="grey-9" v-model="formData.aggregator" :options="dropDown.aggregatorOptions"
                             @blur="$v.formData.aggregator.$touch" :error="$v.formData.aggregator.$error"
-                            float-label="Select Aggregator List" />
+                            label="Select Aggregator List" />
                     </div>
                     <div>
                         <div class="row">
                             <div class="col">
                                 <q-color v-model="formData.colorCode" @blur="$v.formData.colorCode.$touch"
-                                    :error="$v.formData.colorCode.$error" popover float-label="Choose a role color"
+                                    :error="$v.formData.colorCode.$error" popover label="Choose a role color"
                                     color="grey-9" />
                             </div>
                             <div class="col-auto">
@@ -32,7 +32,7 @@
                     <div>
                         <q-input v-model="formData.serialNumberLength" type="number"
                             @blur="$v.formData.serialNumberLength.$touch" :error="$v.formData.serialNumberLength.$error"
-                            class="text-weight-regular text-grey-8" color="grey-9" float-label="Serial Number Length"
+                            class="text-weight-regular text-grey-8" color="grey-9" label="Serial Number Length"
                             placeholder="Serial Number Length" />
                     </div>
                     <div class="group" align="right">

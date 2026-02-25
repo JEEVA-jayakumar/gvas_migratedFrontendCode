@@ -20,8 +20,7 @@
         :columns="columns"
         :rows="tableData"
         color="grey-9"
-        :filter="filterSearch"
-        :pagination="paginationControl"
+        :filter="filterSearch" v-model:pagination="paginationControl"
         :rows-per-page-options="[5, 10, 15, 20, 25]"
         :loading="toggleAjaxLoadFilter"
         @request="ajaxLoadAllLeadInfo"
@@ -91,7 +90,7 @@
               color="grey-9"
               v-model="filterSearch"
               placeholder="Type.."
-              float-label="Search Using POD Number"
+              label="Search Using POD Number"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -334,8 +333,7 @@ export default {
           message: "Are you sure want to Update?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: "purple-9",
@@ -400,8 +398,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_SPARE_PARTS_POD_LIST_INVENTORY_DETAILS({ pagination, filter })
-        .then(res => {
+      this.FETCH_SPARE_PARTS_POD_LIST_INVENTORY_DETAILS({ pagination, filter }).then(res => {
           this.paginationControl = pagination;
 
           // we also set (or update) rowsNumber
@@ -421,8 +418,7 @@ export default {
           );
           // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
-        })
-        .catch(() => {
+        }).catch(() => {
           this.$q.loading.hide();
         });
     },

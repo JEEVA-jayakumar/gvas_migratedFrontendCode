@@ -139,7 +139,7 @@ export default {
       <q-table :rows="callLogs" :columns="columns" @request="fetchLogs">
    
           <q-td v-slot:body-cell-inputDate="props" :props="props">
-            {{ props.row.inputDate | moment("Do MMM Y") }}
+            {{ $moment(props.row.inputDate).format("Do MMM Y") }}
           </q-td>
           <!-- <q-td :props="props" field="remarks">
             {{ props.row.remarks }}

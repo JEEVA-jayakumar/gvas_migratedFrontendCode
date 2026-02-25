@@ -10,52 +10,55 @@
           <q-btn
             outline
             no-caps
-            class="text-weight-regular"
+            class="text-weight-regular q-ma-xs"
             label="Allocate to SO"
-            to="central/allocate/device/so"
+            to="/inventory/central/allocate/device/so"
           ></q-btn>
 
           <q-btn
             outline
             no-caps
-            class="text-weight-regular"
+            class="text-weight-regular q-ma-xs"
             label="Allocate to Region"
-            to="central/allocate/device/region"
+            to="/inventory/central/allocate/device/region"
           />
           <q-btn
             outline
             no-caps
-            class="text-weight-regular"
+            class="text-weight-regular q-ma-xs"
             label="Allocate to Reseller"
-            to="central/allocate/device/resellar"
+            to="/inventory/central/allocate/device/resellar"
           />
 
           <q-btn
             outline
             no-caps
-            class="text-weight-regular"
+            class="text-weight-regular q-ma-xs"
             label="Add Faulty Device"
             @click="fnShowAddDevice"
-            to="showAddDamagedDevices"
           />
           <q-btn-dropdown
             outline
             no-caps
-            class="text-weight-regular"
+            class="text-weight-regular q-ma-xs"
             label="Add new device from manufacturer"
           >
             <!-- dropdown content -->
-            <q-list link>
-              <q-item to="central/add/device/scan">
-                <q-item-section icon="search" />
+            <q-list>
+              <q-item clickable to="/inventory/central/add/device/scan">
+                <q-item-section avatar>
+                  <q-icon name="search" />
+                </q-item-section>
                 <q-item-section>
-                  <q-item-label label>Scan and Upload</q-item-label>
+                  <q-item-label>Scan and Upload</q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item @click.native="fnOpenBulkUploadModal">
-                <q-item-section icon="attach_file" />
+              <q-item clickable @click="fnOpenBulkUploadModal">
+                <q-item-section avatar>
+                  <q-icon name="attach_file" />
+                </q-item-section>
                 <q-item-section>
-                  <q-item-label label>Bulk upload</q-item-label>
+                  <q-item-label>Bulk upload</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -67,7 +70,7 @@
       <div class="row">
         <div class="col-md-3 group q-pa-md">
           <div
-            class="q-pa-md cursor-pointer"
+            class="q-pa-md q-ma-xs cursor-pointer border-radius-10"
             :class="[activeItemId === index ? 'shadow-5 bg-grey-5' : 'shadow-0']"
             @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index,deviceInfo)"
             v-for="(deviceInfo,index) in getAllInventoryDevicesTypesWithCountData"
@@ -76,55 +79,46 @@
             align="center"
           >
             <div>
-              <big>{{deviceInfo.count}}</big>
+              <big class="text-weight-bold">{{deviceInfo.count}}</big>
             </div>
-            <div>{{deviceInfo.device.deviceName}}</div>
+            <div class="text-caption">{{deviceInfo.device.deviceName}}</div>
           </div>
         </div>
         <div class="col-md-9">
           <div>
-            <!--STARTv-model: table Data -->
+            <!--START: table Data -->
             <q-table
               :rows="getAllInventoryDevicesData"
               :columns="columnData"
               table-class="customTableClass shadow-0"
               :filter="filterSearch"
-              :pagination="paginationControl"
+              v-model:pagination="paginationControl"
               row-key="index"
               :loading="tableAjaxLoading"
               color="primary"
             >
-              <template slot="top" >
+              <template v-slot:top>
                 <!--START: table filter,search -->
                 <div class="col-md-5">
                   <q-input
                     clearable
+                    dense
                     color="grey-9"
                     v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search By Device Serail Number.."
+                    label="Search By Device Serial Number.."
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
 
                 <div class="col-md-5">
-                  <!-- <q-input
-                    clearable
-                    color="grey-9"
-                    v-model="filterSearch"
-                    placeholder="Type.."
-                    float-label="Search .."
-                    class="q-mr-lg q-py-sm"
-                  />-->
                   <downloadExcel
-                    :rows="getAllInventoryDevicesData"
+                    :data="getAllInventoryDevicesData"
                     :fields="json_fields"
                     name="CentralInventory.xls"
                   >
                     <q-btn outline color="grey-9" label="Download as excel"/>
-                    <!-- @click="fndownload() -->
                   </downloadExcel>
-                  <!-- @click="downloadReport" -->
                 </div>
                 <!--END: table filter,search -->
               </template>
@@ -133,7 +127,6 @@
           </div>
         </div>
       </div>
-      <!-- <pre>{{getAllInventoryDevicesTypesData}}</pre> -->
       <!--START: Open openAddBulkDeviceModelComp model -->
       <openAddBulkDeviceModelComp
         v-if="openBulkUploadModal"
@@ -143,34 +136,25 @@
         @emitToggleinventoryBulkUploadOnSuccess="fnReloadPageInformation"
       ></openAddBulkDeviceModelComp>
       <!--END: Open openAddBulkDeviceModelComp model -->
-      <!--START >>  Show Add Device Component -->
-      <!-- <faultyInventoryComponent
-        v-if="faultyInventoryComponent"
-        @emitfaultyInventoryComponent="fnShowAddDevice"
-        :propfaultyInventoryComponent="faultyInventoryComponent"
-        :propDeviceTypes="getAllInventoryDevicesTypesData"
-      />-->
-      <!--START >>  Show Add Device Component -->
+
       <showAddDamagedDevices
         v-if="faultyInventoryComponent"
         :faultyInventoryComponent="faultyInventoryComponent"
         @emitRefreshList="fnAjaxPopulateAllDevicesWithCount"
+        @closeModel="fnShowAddDevice"
       />
-      <!--END >>  Show Add Device Component -->
-      <!--END >>  Show Add Device Component -->
     </div>
   </q-page>
 </template>
 
 <script>
-import { required, and } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
-import downloadExcel from "vue-json-excel";
+import downloadExcel from "vue-json-excel3";
 import openAddBulkDeviceModelComp from "../../components/inventory/openAddBulkDeviceModelComp.vue";
-import faultyInventoryComponent from "../../components/inventory/faultyInventoryComponent.vue";
 import showAddDamagedDevices from "../../components/inventory/showAddDamagedDevices.vue";
+
 export default {
-  name: "inventoryCentral",
+  name: "InventoryCentral",
   components: {
     openAddBulkDeviceModelComp,
     showAddDamagedDevices,
@@ -180,7 +164,6 @@ export default {
     return {
       faultyInventoryComponent: false,
       sideInnerDeviceMenu: {},
-      //Toggle bulk upload modal
       activeItemId: 0,
       openBulkUploadModal: false,
       tableAjaxLoading: false,
@@ -189,8 +172,6 @@ export default {
         SerialNumber: "serialNumber",
         DeviceType: "device.deviceName"
       },
-
-      // table column data
       columnData: [
         {
           name: "serialNumber",
@@ -200,25 +181,20 @@ export default {
           field: "serialNumber",
           sortable: true
         },
-                {
+        {
           name: "device",
           required: true,
           label: "Device Type",
           align: "center",
-          field: row => {
-            return row.device.deviceName;
-          },
+          field: row => row.device.deviceName,
           sortable: true
         },
       ],
-
-      // table pagination control
       paginationControl: {
         rowsPerPage: 10
       }
     };
   },
-
   computed: {
     ...mapGetters("InventoryCentral", [
       "getAllInventoryDevicesData",
@@ -226,147 +202,66 @@ export default {
       "getAllInventoryDevicesTypesWithCountData"
     ])
   },
-
   created() {
-    //Call to trigger api to get all devices information
     this.fnAjaxPopulateAllDevicesWithCount();
-
-    // //Call to trigger api to get all devices information
     this.fnAjaxPopulateAllDevices();
-
-    //Call to trigger api to get all devices information
     this.fnAjaxPopulateAllDevicesList();
   },
-
   methods: {
     ...mapActions("InventoryCentral", [
       "FETCH_ALL_INVENTORY_DEVICES_BY_DEVICE_TYPE",
       "FETCH_ALL_INVENTORY_DEVICES_TYPES_DATA",
       "FETCH_ALL_INVENTORY_DEVICES_TYPES_WITH_COUNT_DATA"
     ]),
-    ...mapActions("reports", ["INVENTORY_WITH_CENTRAL"]),
-
-    //API for table device filter data using device id
     ajaxLoadDataForCentralInventoryByDeviceIdFilter(itemIndex, deviceInfo) {
       this.activeItemId = itemIndex;
       this.fnAjaxPopulateAllDevicesList(deviceInfo);
     },
-    fndownload(){
-       const datas =this.getAllInventoryDevicesData;
-      let output = '';
-      console.log(datas);
-      // while (index < datas.length) {
-      //   console.log(datas[index].stan);
-      //   output += datas[index].stan;
-      //   output += '\r\n';
-      //   index += 1;
-      // }
-      datas.forEach(element => {
-        
-        output += element.serialNumber;
-        output += '\r\n';
-      });
-     
-      const file = new Blob([output],
-      
-        { type: 'text/plain;charset=utf-8' });
-      // element.href = URL.createObjectURL(file);
-      // element.download = "serialNumber.txt";
-      // document.body.appendChild(element);
-      
-      // element.click();
-       let link = document.createElement("a");
-            link.href = window.URL.createObjectURL(file);
-            link.download = "serialNumber.txt"
-           
-            link.click();
-    },
-
-    //Function to open bulk upload modal
     fnOpenBulkUploadModal() {
       this.openBulkUploadModal = !this.openBulkUploadModal;
     },
-
-    //Function to populate ajax device list with count info
     fnAjaxPopulateAllDevicesWithCount() {
       this.tableAjaxLoading = true;
       this.FETCH_ALL_INVENTORY_DEVICES_TYPES_WITH_COUNT_DATA().then(() => {
         this.FETCH_ALL_INVENTORY_DEVICES_BY_DEVICE_TYPE().then(() => {
-          let allDevicesCount = {
-            count: this.getAllInventoryDevicesData.length,
-            device: {
-              deviceName: "Total",
-              colorCode: "666"
-            }
-          };
-          this.getAllInventoryDevicesTypesWithCountData.unshift(
-            allDevicesCount
-          );
+          if (this.getAllInventoryDevicesTypesWithCountData[0]?.device?.deviceName !== "Total") {
+            let allDevicesCount = {
+              count: this.getAllInventoryDevicesData.length,
+              device: {
+                deviceName: "Total",
+                colorCode: "#eee"
+              }
+            };
+            this.getAllInventoryDevicesTypesWithCountData.unshift(allDevicesCount);
+          }
         });
       });
       this.tableAjaxLoading = false;
-      if (this.faultyInventoryComponent) {
-        this.faultyInventoryComponent = false;
-      }
+      this.faultyInventoryComponent = false;
     },
-
-    //Function to populate ajax device list
     fnAjaxPopulateAllDevicesList(deviceInfo) {
       this.tableAjaxLoading = true;
       this.FETCH_ALL_INVENTORY_DEVICES_BY_DEVICE_TYPE(deviceInfo);
       this.tableAjaxLoading = false;
     },
-
-    // Function to reload all data after bulk upload
     fnReloadPageInformation() {
-      //Call to trigger api to get all devices information
       this.fnAjaxPopulateAllDevicesWithCount();
-
-      //Call to trigger api to get all devices information
       this.fnAjaxPopulateAllDevices();
-
-      //Call to trigger api to get all devices information
-      // this.fnAjaxPopulateAllDevicesList();
     },
-
-    //Function to populate ajax device list for add device popup
     fnAjaxPopulateAllDevices() {
       this.tableAjaxLoading = true;
       this.FETCH_ALL_INVENTORY_DEVICES_TYPES_DATA();
       this.tableAjaxLoading = false;
     },
-
-    // Function to show add devices for damaged queue
     fnShowAddDevice() {
       this.faultyInventoryComponent = !this.faultyInventoryComponent;
-    },
-    downloadReport() {
-      this.$q.loading.show({
-        delay: 100 // ms
-      });
-      this.INVENTORY_WITH_CENTRAL(this.formData)
-        .then(() => {
-          this.$q.loading.hide();
-          this.$q.notify({
-            color: "positive",
-            position: "bottom",
-            message: "Success, file has been downloaded",
-            icon: "check"
-          });
-        })
-        .catch(error => {
-          this.$q.loading.hide();
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "Please try again",
-            icon: "thumb_down"
-          });
-        });
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
+.border-radius-10 {
+  border-radius: 10px;
+}
 </style>
