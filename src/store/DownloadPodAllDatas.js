@@ -41,8 +41,7 @@ const FileDownload1 = {
         return await api
           .get("download-pod-details/" + request.fromDate + "/" + request.toDate, {
             responseType: 'arraybuffer'
-          })
-          .then(response => {
+          }).then(response => {
             console.log("FIle name : -- : ", response.headers)
             console.log("FIle name : -- : ", response["Access-Control-Expose-Headers"])
             let blob = COMMON_FILE_DOWNLOAD(response);
@@ -59,8 +58,7 @@ const FileDownload1 = {
         return await api
           .get("download-pod-details", {
             responseType: 'arraybuffer'
-          })
-          .then(response => {
+          }).then(response => {
             console.log("FIle name : -- : ", response)
             let blob = COMMON_FILE_DOWNLOAD(response);
             let link = document.createElement("a");
@@ -134,8 +132,7 @@ const FileDownload1 = {
         return await api
           .get("aggregator-inventory/agg-download-pod-details/" + request.fromDate + "/" + request.toDate + "/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]), {
             responseType: 'arraybuffer'
-          })
-          .then(response => {
+          }).then(response => {
             console.log("FIle name : -- : ", response.headers)
             console.log("FIle name : -- : ", response["Access-Control-Expose-Headers"])
             let blob = COMMON_FILE_DOWNLOAD(response);
@@ -152,8 +149,7 @@ const FileDownload1 = {
         return await api
           .get("aggregator-inventory/agg-download-pod-details/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]), {
             responseType: 'arraybuffer'
-          })
-          .then(response => {
+          }).then(response => {
             console.log("FIle name : -- : ", response)
             let blob = COMMON_FILE_DOWNLOAD(response);
             let link = document.createElement("a");

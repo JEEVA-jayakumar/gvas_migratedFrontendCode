@@ -12,8 +12,7 @@ LOST
         :rows="tableData"
         :columns="columns"
         row-key="name"
-        :filter="filter1"
-        :pagination="paginationControlchange"
+        :filter="filter1" v-model:pagination="paginationControlchange"
         :rows-per-page-options="[5,10,15]"
         :loading="toggleAjaxLoadFilter"
         @request="ajaxLoadAllCMS"
@@ -137,7 +136,7 @@ LOST
               placeholder="Type.."
               :debounce="600"
               class="q-mr-lg q-py-sm"
-              float-label="Search By MID/TID/Merchant Name "
+              label="Search By MID/TID/Merchant Name "
             />
           </div>
 
@@ -156,7 +155,7 @@ LOST
             v-model="Add"
             color="grey-9"
             placeholder="Add"
-            float-label="Enter Device Serial Number/TID"
+            label="Enter Device Serial Number/TID"
             @keyup.enter="fnCookDispatchedHistoryDetails()"
             class="text-weight-regular text-grey-8 q-py-sm"
           />
@@ -177,7 +176,7 @@ LOST
             v-model="text"
             color="grey-9"
             placeholder="Add"
-            float-label="Enter Device Serial Number/TID"
+            label="Enter Device Serial Number/TID"
             @keyup.enter="fnCookDispatchedHistoryDetails()"
             class="text-weight-regular text-grey-8 q-py-sm"
           />
@@ -200,8 +199,7 @@ LOST
         :rows="tableData1"
         :columns="columns1"
         row-key="name"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         :rows-per-page-options="[5,10,15,20]"
         :loading="toggleAjaxLoadFilter1"
         @request="ajaxLoadAllLeadInfo"
@@ -237,7 +235,7 @@ LOST
               placeholder="Type.."
               :debounce="600"
               class="q-mr-lg q-py-sm"
-              float-label="Search By MID/TID/Merchant Name"
+              label="Search By MID/TID/Merchant Name"
             />
           </div>
           <div class="col">
@@ -620,8 +618,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.CHANGE_MANAGEMENT_LIST({ pagination, filter })
-        .then((res) => {
+      this.CHANGE_MANAGEMENT_LIST({ pagination, filter }).then((res) => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 
@@ -650,8 +647,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.CMS_LIST({ pagination, filter })
-        .then((res) => {
+      this.CMS_LIST({ pagination, filter }).then((res) => {
           // updating pagination to reflect in the UI
           this.paginationControlchange = pagination;
 
@@ -837,8 +833,7 @@ export default {
           message: "Are you sure want to Edit Lead?",
           ok: "Continue",
           cancel: "Cancel",
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -862,8 +857,7 @@ export default {
                 message: "Successfully Edited" + "-" + rowDetails,
                 icon: "thumb_up",
               });
-            })
-            .catch((error) => {
+            }).onCancel((error) => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",

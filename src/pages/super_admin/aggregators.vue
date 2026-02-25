@@ -4,11 +4,14 @@
         <div>
 
             <q-tabs class="shadow-1" color="grey-1">
-                <q-tab default color="dark" name="active" slot="title" label="Active Aggregators" />
-                <q-tab color="dark" name="deactive" slot="title" label="Deactive Aggregators" />
-                <q-tab-panel name="active">
+                <q-tab default color="dark" name="active" label="Active Aggregators" />
+                <q-tab color="dark" name="deactive" label="Deactive Aggregators" />
+                <!-- We can't disable regiongroup because existing flow through errors-->
+</q-tabs>
+<q-tab-panels animated>
+<q-tab-panel name="active">
                     <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns"
-                        :filter="filterSearch" :pagination="paginationControl"
+                        :filter="filterSearch" v-model:pagination="paginationControl"
                         :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
                         <!-- <q-td v-slot:body-cell-regionGroup="props" :props="props">{{ props.row.regionName
                                 == null ? "NA" : props.row.regionName
@@ -37,10 +40,9 @@
                         </template>
                     </q-table>
                 </q-tab-panel>
-
-                <q-tab-panel name="deactive">
+<q-tab-panel name="deactive">
                     <q-table :rows="deActiveTableData" table-class="customSATableClass" :columns="columns1"
-                        :filter="filterSearch" :pagination="paginationControl"
+                        :filter="filterSearch" v-model:pagination="paginationControl"
                         :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
                         <!-- <q-td v-slot:body-cell-regionGroup="props" :props="props">{{ props.row.regionName
                                 == null ? "NA" : props.row.regionName
@@ -69,10 +71,7 @@
                         </template>
                     </q-table>
                 </q-tab-panel>
-                <!-- We can't disable regiongroup because existing flow through errors-->
-
-
-            </q-tabs>
+</q-tab-panels>
 
             <!--START: Show create Regions -->
             <showCreateRegion v-if="propShowCreateRegions" :propShowCreateRegions="propShowCreateRegions"
@@ -227,8 +226,7 @@ export default {
                     message: "Are you sure want to active?",
                     ok: "Continue",
                     cancel: "Cancel"
-                })
-                .then(() => {
+                }).onOk(() => {
                     this.$q.loading.show({
                         delay: 100, // ms
                         message: "Please Wait",
@@ -246,8 +244,7 @@ export default {
                             });
                             this.ajaxLoadDataForRegionTable();
                             this.$router.push({ name: "aggregators" });
-                        })
-                        .catch(error => {
+                        }).onCancel(error => {
                             this.$q.notify({
                                 color: "negative",
                                 position: "bottom",
@@ -274,8 +271,7 @@ export default {
                     message: "Are you sure want to delete region?",
                     ok: "Continue",
                     cancel: "Cancel"
-                })
-                .then(() => {
+                }).onOk(() => {
                     this.$q.loading.show({
                         delay: 100, // ms
                         message: "Please Wait",
@@ -293,8 +289,7 @@ export default {
                             });
                             this.ajaxLoadDataForRegionTable();
                             this.$router.push({ name: "aggregators" });
-                        })
-                        .catch(error => {
+                        }).onCancel(error => {
                             this.$q.notify({
                                 color: "negative",
                                 position: "bottom",
@@ -325,8 +320,7 @@ export default {
                     message: "Are you sure want to Active Region?",
                     ok: "Continue",
                     cancel: "Cancel"
-                })
-                .then(() => {
+                }).onOk(() => {
                     this.$q.loading.show({
                         delay: 100, // ms
                         message: "Please Wait",
@@ -348,8 +342,7 @@ export default {
                                 icon: "thumb_up"
                             });
                             this.$q.loading.hide();
-                        })
-                        .catch(error => {
+                        }).catch(error => {
                             this.$q.notify({
                                 color: "warning",
                                 position: "bottom",
@@ -382,8 +375,7 @@ export default {
                     message: "Are you sure want to delete region?",
                     ok: "Continue",
                     cancel: "Cancel"
-                })
-                .then(() => {
+                }).onOk(() => {
                     this.$q.loading.show({
                         delay: 100, // ms
                         message: "Please Wait",
@@ -399,8 +391,7 @@ export default {
                                 message: "Successfully removed",
                                 icon: "thumb_up"
                             });
-                        })
-                        .catch(error => {
+                        }).onCancel(error => {
                             this.$q.notify({
                                 color: "negative",
                                 position: "bottom",

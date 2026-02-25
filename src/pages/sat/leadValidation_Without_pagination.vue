@@ -22,21 +22,20 @@
           class="q-py-none"
           :rows="tableData"
           :columns="columns"
-          :filter="filter"
-          :pagination="paginationControl"
+          :filter="filter" v-model:pagination="paginationControl"
           row-key="name"
         >
           <!--START: table body modification -->
           <q-td
             v-slot:body-cell-date="props"
             :props="props"
-          >{{ props.row.submitteSATDate | moment("Do MMM Y") }}</q-td>
+          >{{ $moment(props.row.submitteSATDate).format("Do MMM Y") }}</q-td>
 
           <q-td
             v-slot:body-cell-lead_id="props"
             :props="props"
             class="cursor-pointer"
-            @click.native="toggleLeadInformation(props.row)"
+            @click="toggleLeadInformation(props.row)"
           >
             <span
               class="label"
@@ -155,7 +154,7 @@
                 color="grey-9"
                 v-model="filter"
                 placeholder="Type.."
-                float-label="Search by SO name, Merchant Name, Lead ID"
+                label="Search by SO name, Merchant Name, Lead ID"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -329,8 +328,7 @@ export default {
       this.FETCH_ALL_LEAD_VALIDATIONS_DATA()
         .then(() => {
           this.tableData = this.getAllLeadsValidationInfo;
-        })
-        .then(() => {
+        }).then(() => {
           done();
         })
         .catch(error => {

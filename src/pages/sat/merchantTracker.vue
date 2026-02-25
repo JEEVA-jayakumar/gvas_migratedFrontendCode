@@ -11,8 +11,7 @@
             table-class="customTableClass"
             :rows="tableData"
             :columns="columns"
-            :filter="filter"
-            :pagination="paginationControl"
+            :filter="filter" v-model:pagination="paginationControl"
             row-key="name">
             <q-td v-slot:body-cell-tid="props" :props="props">
                 <span class="label text-primary"># {{props.row.tid}}</span>
@@ -54,7 +53,7 @@
                       separator
                       color="grey-9"
                       placeholder="Type.."
-                      float-label= "Search by MID, TID, Merchant Name, MCC,UTR Number, Device Type"
+                      label= "Search by MID, TID, Merchant Name, MCC,UTR Number, Device Type"
                       class="q-mr-lg q-py-sm"
                     />
                 </div>
@@ -62,13 +61,15 @@
 
                 <!--START: table filter dropdown -->
                 <div class="col-md-3">
-                  <q-input
-                    v-model="filter_values" 
-                    float-label="Date Filter"
-                    type="date"
-                    class="q-mr-lg q-py-sm"
-                    color="grey-9" 
-                  />
+                  <q-input filled v-model="filter_values" label="Date Filter" color="grey-9">
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="filter_values" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
                 </div>
                 <!--END: table filter dropdown -->
       

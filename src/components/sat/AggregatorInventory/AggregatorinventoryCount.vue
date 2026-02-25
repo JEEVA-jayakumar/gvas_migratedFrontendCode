@@ -1,10 +1,10 @@
 <template>
-    <!-- :options="dropdDown.aggregatorOptions" @input="selectedAggregators"-->
+    <!-- :options="dropdDown.aggregatorOptions" @update:model-value="selectedAggregators"-->
     <div>
         <!-- <div class="row bottom-border q-px-md q-py-sm items-center">
             <div class="col-md-4">
-                <q-select color="grey-9" v-model="formData.aggregator" float-label="Select Aggregator" radio
-                    :options="dropdDown.aggregatorOptions" @input="selectedAggregators" />
+                <q-select color="grey-9" v-model="formData.aggregator" label="Select Aggregator" radio
+                    :options="dropdDown.aggregatorOptions" @update:model-value="selectedAggregators" />
             </div>
 
         </div> -->
@@ -35,7 +35,7 @@
                             </div>
                         </q-card>
                     </div>
-                    <div class="row gutter-md">
+                    <div class="row q-col-gutter-md">
                         <div class="col-md-6">
                             <q-card role="button" class="no-shadow cursor-pointer">
                                 <q-card-section class="no-padding">
@@ -154,7 +154,7 @@
                     </div>
                 </div>
                 <div class="q-ma-md">
-                    <div class="row gutter-md">
+                    <div class="row q-col-gutter-md">
                         <div class="col-md-6"
                             v-for="(item, index) in getAllPhonePeRegionalInventoryDeviceDetailsWithCount.inventryCount"
                             :key="index">
@@ -182,7 +182,7 @@
                   </strong>
               </div>
               <div class="q-ma-md">
-                  <div class="row gutter-md">
+                  <div class="row q-col-gutter-md">
                       <div class="col-md-6"
                           v-for="(item, index) in getAllPhonePeRegionalInventoryDeviceDetailsWithCount.BillPartnerList"
                           :key="index">
@@ -216,7 +216,7 @@
                 <!--STARTv-model: table lead validation -->
                 <q-table title="Lead Validation" table-class="customTableClass" class="q-py-none"
                     :rows="getAllAggregatorsRegionalInventorySerialNumbersByDevice" :columns="columnData"
-                    :filter="filter" :pagination="paginationControl" :loading="toggleAjaxLoadFilter"
+                    :filter="filter" v-model:pagination="paginationControl" :loading="toggleAjaxLoadFilter"
                     row-key="name">
                     <q-td v-slot:body-cell-action="props" :props="props" v-if="info == 6">
                         <div class="row no-wrap no-padding">
@@ -524,8 +524,7 @@ export default {
                     message: "Are You want to submit Usable Device?",
                     ok: "Submit",
                     cancel: "Cancel"
-                })
-                .then(() => {
+                }).onOk(() => {
                     this.$q.loading.show({
                         delay: 100, // ms
                         message: "Please Wait",
@@ -554,8 +553,7 @@ export default {
                                     message: "Successfully Submitted",
                                     icon: "thumb_up"
                                 });
-                        })
-                        .catch(error => {
+                        }).catch(error => {
                             this.$q.notify({
                                 color: "negative",
                                 position: "bottom",
@@ -581,8 +579,7 @@ export default {
                     message: "Are You want to submit Faulty Device?",
                     ok: "Submit",
                     cancel: "Cancel"
-                })
-                .then(() => {
+                }).onOk(() => {
                     this.$q.loading.show({
                         delay: 100, // ms
                         message: "Please Wait",
@@ -613,8 +610,7 @@ export default {
                                     message: "Successfully Submitted",
                                     icon: "thumb_up"
                                 });
-                        })
-                        .catch(error => {
+                        }).catch(error => {
                             this.$q.notify({
                                 color: "negative",
                                 position: "bottom",

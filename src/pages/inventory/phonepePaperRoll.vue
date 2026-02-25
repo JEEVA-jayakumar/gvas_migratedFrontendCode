@@ -11,17 +11,17 @@
           default
           color="dark"
           name="tab-1"
-          slot="title"
           label="Pending Tickets"
         />
         <q-tab
           color="dark"
           name="tab-2"
-          slot="title"
           label="Completed Tickets"
         />
-        <q-tab color="dark" name="tab-3" slot="title" label="RTO Tickets" />
-        <q-tab-panel name="tab-1">
+        <q-tab color="dark" name="tab-3" label="RTO Tickets" />
+</q-tabs>
+<q-tab-panels v-model="activeTab" animated>
+<q-tab-panel name="tab-1">
           <div class="row items-center">
             <div class="col">
               <strong>
@@ -33,7 +33,7 @@
               v-model.trim="formData.date"
               :options="dateType"
               color="grey"
-              @input="dateClick"
+              @update:model-value="dateClick"
             >
             </q-select>
 
@@ -44,7 +44,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search By Ticket No, Merchant No..."
+              label="Search By Ticket No, Merchant No..."
             />
           </div>
           <q-table
@@ -53,8 +53,7 @@
             :rows="tableData"
             :columns="columns"
             :filter="filter"
-            :rows-per-page-options="[5, 10, 15]"
-            :pagination="paginationControl"
+            :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl"
             :loading="toggleAjaxLoadFilter"
             @request="ajaxLoadAllLeadInfo"
           >
@@ -116,7 +115,7 @@
             >
           </q-table>
         </q-tab-panel>
-        <q-tab-panel name="tab-2">
+<q-tab-panel name="tab-2">
           <div class="row">
             <q-input
               class="col-4"
@@ -124,7 +123,7 @@
               color="grey-9"
               v-model="filter1"
               placeholder="Type.."
-              float-label="Search By Ticket No, Merchant No..."
+              label="Search By Ticket No, Merchant No..."
             />
           </div>
           <q-table
@@ -133,8 +132,7 @@
             :rows="tableData1"
             :columns="columns2"
             :filter="filter1"
-            :rows-per-page-options="[5, 10, 15]"
-            :pagination="paginationControl1"
+            :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl1"
             :loading="toggleAjaxLoadFilter1"
             @request="ajaxLoadAllLeadInfo1"
           >
@@ -173,7 +171,7 @@
             </q-td>
           </q-table>
         </q-tab-panel>
-        <q-tab-panel name="tab-3">
+<q-tab-panel name="tab-3">
           <div class="row">
             <q-input
               class="col-4"
@@ -181,7 +179,7 @@
               color="grey-9"
               v-model="filter2"
               placeholder="Type.."
-              float-label="Search By Ticket No, Merchant No..."
+              label="Search By Ticket No, Merchant No..."
             />
           </div>
           <q-table
@@ -190,8 +188,7 @@
             :rows="tableData2"
             :columns="columns3"
             :filter="filter2"
-            :rows-per-page-options="[5, 10, 15]"
-            :pagination="paginationControl2"
+            :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl2"
             :loading="toggleAjaxLoadFilter2"
             @request="ajaxLoadAllLeadInfo2"
           >
@@ -224,7 +221,7 @@
             >
           </q-table>
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
     </div>
     <phonepePaperRollScan
       v-if="propToggleScan"
@@ -845,8 +842,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_PHONEPE_PAPER_ROLL_COMPLETED_DATA({ pagination, filter })
-        .then(res => {
+      this.FETCH_PHONEPE_PAPER_ROLL_COMPLETED_DATA({ pagination, filter }).then(res => {
           this.paginationControl1 = pagination;
           this.paginationControl1.rowsNumber = this.getphonepeCompletedPaperRoll.totalElements;
           this.paginationControl1.page =
@@ -891,8 +887,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_PHONEPE_RTO_TICKET({ pagination, filter })
-        .then(res => {
+      this.FETCH_PHONEPE_RTO_TICKET({ pagination, filter }).then(res => {
           this.paginationControl2 = pagination;
           this.paginationControl2.rowsNumber = this.getphonepeRtoTicket.totalElements;
           this.paginationControl2.page = this.getphonepeRtoTicket.number + 1;
@@ -960,8 +955,7 @@ export default {
           message: "Are you sure ?",
           ok: "Yes",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 0,
             spinnerColor: "purple-9",
@@ -970,20 +964,20 @@ export default {
           console.log("REQUEST", request.serviceReqTicketId);
           this.PHONEPE_PAPER_ROLL_SUBMIT(request.serviceReqTicketId).then(
             response => {
-              console.log("RSPONSE", response.body.message);
+              console.log("RSPONSE", response.data.message);
               //
-              if (response.body.data != null) {
+              if (response.data.data != null) {
                 this.$q.notify({
                   color: "positive",
                   position: "bottom",
-                  message: response.body.message,
+                  message: response.data.message,
                   icon: "thumb_up"
                 });
               } else {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
-                  message: response.body.message,
+                  message: response.data.message,
                   icon: "thumb_down"
                 });
               }
@@ -996,8 +990,7 @@ export default {
               this.$q.loading.hide();
             }
           );
-        })
-        .catch(() => {
+        }).catch(() => {
           this.$q.loading.hide();
         });
     },

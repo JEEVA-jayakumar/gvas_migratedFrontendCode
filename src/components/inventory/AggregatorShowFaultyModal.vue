@@ -13,7 +13,7 @@
                       <div class="text-h6 text-weight-regular q-py-sm">POD Number</div>
                   </div>
                   <div class="col-md-8 q-pt-md" align="left">
-                      <q-input color="grey-9" v-model="formData.podNumber" float-label="Enter POD Number" placeholder="POD Number" />
+                      <q-input color="grey-9" v-model="formData.podNumber" label="Enter POD Number" placeholder="POD Number" />
                   </div>
                   <div class="col-md-12 col-md-6 q-pt-md group" align="right">
                       <q-btn

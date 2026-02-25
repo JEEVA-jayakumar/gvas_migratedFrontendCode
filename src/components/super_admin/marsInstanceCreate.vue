@@ -22,7 +22,7 @@
                 :error="$v.formData.institutionName.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Institution Name"
+                label="Institution Name"
                 placeholder="Institution Name"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -34,7 +34,7 @@
               :error="$v.formData.institutionRRCode.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Institution RR Code"
+              label="Institution RR Code"
               placeholder="Institution RR Code"
               @keyup.enter="submitLeadSourceData(formData)"
               
@@ -47,7 +47,7 @@
               :error="$v.formData.institutionCode.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Institution Code"
+              label="Institution Code"
               placeholder="Institution Code"
               @keyup.enter="submitLeadSourceData(formData)"
               
@@ -73,7 +73,7 @@
                 :error="$v.formData.baseTidMidPrefix.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Tid/Mid Prefix"
+                label="Tid/Mid Prefix"
                 placeholder="Tid/Mid Prefix"
                 @keyup.enter="submitLeadSourceData(formData)"
               />

@@ -177,7 +177,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Debit < 2000 (%)"
+                          label="Debit < 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.debitLessthanAmount"
@@ -186,7 +186,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Debit < 2000 (%)"
+                          label="Debit < 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.debitGreaterthanAmount"
@@ -197,7 +197,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Std CC (%)"
+                          label="Std CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.stdCC"
@@ -206,7 +206,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Premium CC (%)"
+                          label="Premium CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.premiumCC"
@@ -217,7 +217,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Corp Pre CC (%)"
+                          label="Corp Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.corpCC"
@@ -226,7 +226,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Intl Pre CC (%)"
+                          label="Intl Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.intlCC"
@@ -237,7 +237,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Super Pre CC (%)"
+                          label="Super Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.superPremiumlCC"
@@ -246,7 +246,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Upi Debit Card UpTo 2000 (%)"
+                          label="Upi Debit Card UpTo 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.upiDebitCardUpTo2000"
@@ -257,7 +257,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Upi Debit Card Above 2000 (%)"
+                          label="Upi Debit Card Above 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.upiDebitCardAbove2000"
@@ -266,7 +266,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Upi Prepaid Credit Cards UpTo 2000 (%)"
+                          label="Upi Prepaid Credit Cards UpTo 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.upiPrepaidCreditCardsUpTo2000"
@@ -277,7 +277,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Upi Prepaid Credit Cards Above 2000 (%)"
+                          label="Upi Prepaid Credit Cards Above 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.upiPrepaidCreditCardsAbove2000"
@@ -634,8 +634,7 @@ export default {
       this.VERIFY_LEAD_DOCUMENTS({
         id: this.$route.params.id,
         params: this.merchantDocumentIds
-      })
-        .then(response => {
+      }).then(response => {
           this.toggleApproveLeadModal = !this.toggleApproveLeadModal;
           this.$q.loading.hide();
         })
@@ -704,8 +703,7 @@ export default {
       } else {
         this.VERIFY_REJECT_LEAD_DOCUMENTS({
           id: this.$route.params.id
-        })
-          .then(response => {
+        }).then(response => {
             this.toggleLeadRejectModal = !this.toggleLeadRejectModal;
             this.$q.loading.hide();
           })

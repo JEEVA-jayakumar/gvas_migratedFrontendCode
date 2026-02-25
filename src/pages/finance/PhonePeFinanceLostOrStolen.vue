@@ -5,8 +5,7 @@
         :propToggleLeadInformationPop="propToggleLeadInformation" @closeLeadInformation="toggleLeadInformation" />
       <!-- content -->
       <!--START: table lead validation -->
-      <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filter"
-        :pagination="paginationControl" row-key="name" :loading="toggleAjaxLoadFilter"
+      <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filter" v-model:pagination="paginationControl" row-key="name" :loading="toggleAjaxLoadFilter"
         :rows-per-page-options="[5, 10, 15, 20]" @request="ajaxLoadAllLeadInfo">
         <!--START: table header -->
         <q-tr v-slot:top-row="props">
@@ -25,7 +24,7 @@
             :props="props"
           >{{props.row.leadInformation.leadName}}</q-td>-->
         <q-td v-slot:body-cell-leadNumber="props" :props="props" class="cursor-pointer"
-          @click.native="toggleLeadInformation(props.row.leadInformation)">
+          @click="toggleLeadInformation(props.row.leadInformation)">
           <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
         </q-td>
         <q-td v-slot:body-cell-mobileNumber="props" :props="props">{{
@@ -37,7 +36,7 @@
             'NA' : props.row.leadInformation.leadAddress
         }}</q-td>
         <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{ props.row.deviceStatusDate | moment("Do MMM Y") }}</span>
+          <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
         </q-td>
         <q-td v-slot:body-cell-action="props" :props="props">
           <q-btn highlight push class="q-mx-sm" color="positive" @click="openReject(props.row)" size="sm">Reject</q-btn>
@@ -47,7 +46,7 @@
           <!--START: table filter,search,excel download -->
           <div class="col-5">
             <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
-              float-label="Search Using Device Serial Number/TID" class="q-mr-lg q-py-sm" />
+              label="Search Using Device Serial Number/TID" class="q-mr-lg q-py-sm" />
           </div>
         </template>
       </q-table>
@@ -271,8 +270,7 @@ import { required, or } from '@vuelidate/validators';
           spinnerColor: "purple-9",
           message: "Fetching data .."
         });
-        this.FETCH_PHONEPE_LOST_FINANCE_DATAS({ pagination, filter })
-          .then(res => {
+        this.FETCH_PHONEPE_LOST_FINANCE_DATAS({ pagination, filter }).then(res => {
             // updating pagination to reflect in the UI
             this.paginationControl = pagination;
   
@@ -302,8 +300,7 @@ import { required, or } from '@vuelidate/validators';
             message: 'Are you sure want to Move Lost/Stolen?',
             ok: 'Continue',
             cancel: 'Cancel'
-          })
-          .then(() => {
+          }).onOk(() => {
             this.$q.loading.show({
               delay: 0, // ms
               spinnerColor: 'purple-9',
@@ -326,8 +323,7 @@ import { required, or } from '@vuelidate/validators';
                   message: 'Successfully Approved!',
                   icon: 'thumb_up'
                 })
-              })
-              .catch(error => {
+              }).onCancel(error => {
                 this.$q.loading.hide();
                 this.$q.notify({
                   color: 'negative',

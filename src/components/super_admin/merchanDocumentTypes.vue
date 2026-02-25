@@ -20,8 +20,8 @@
               placeholder="Merchant type"
               :options="activeMerchantType"
               v-model="formData.merchantType"
-              float-label="Select merchant type"
-              @input="currentListTabulation == 'tab-1'?fetchMerchantDocumentTypeActivatedList():fetchMerchantDocumentTypeDeActivatedList()"
+              label="Select merchant type"
+              @update:model-value="currentListTabulation == 'tab-1'?fetchMerchantDocumentTypeActivatedList():fetchMerchantDocumentTypeDeActivatedList()"
               @blur="$v.formData.merchantType.$touch"
               :error="$v.formData.merchantType.$error"
             />
@@ -37,25 +37,23 @@
       <q-tab
         @select="fetchMerchantDocumentTypeActivatedList"
         default
-        slot="title"
         label="Active List"
         name="tab-1"
       />
       <q-tab
         @select="fetchMerchantDocumentTypeDeActivatedList"
-        slot="title"
         label="De-Actived List"
         name="tab-2"
       />
-
       <!-- Targets -->
-      <q-tab-panel name="tab-1">
+</q-tabs>
+<q-tab-panels v-model="currentListTabulation" animated>
+<q-tab-panel name="tab-1">
         <q-table
           :rows="merchantDocumentTypesList"
           table-class="customSATableClass"
           :columns="merchantActiveDocumentcolumns"
-          :filter="filterSearch"
-          :pagination="paginationControl"
+          :filter="filterSearch" v-model:pagination="paginationControl"
           :filter-method="myCustomSearchFilter"
           row-key="name"
           color="grey-9"
@@ -95,7 +93,7 @@
                 color="grey-9"
                 v-model="filterSearch"
                 placeholder="Type.."
-                float-label="Search merchant type"
+                label="Search merchant type"
               />
             </div>
             <div class="col-4" align="right">
@@ -113,13 +111,12 @@
           </template>
         </q-table>
       </q-tab-panel>
-      <q-tab-panel name="tab-2">
+<q-tab-panel name="tab-2">
         <q-table
           :rows="merchantDocumentTypesDeactivatedList"
           table-class="customSATableClass"
           :columns="merchantDeactiveDocumentcolumns"
-          :filter="deActivatedSearch"
-          :pagination="paginationControl"
+          :filter="deActivatedSearch" v-model:pagination="paginationControl"
           :filter-method="myCustomSearchFilter"
           row-key="name"
           color="grey-9"
@@ -148,14 +145,14 @@
                 color="grey-9"
                 v-model="deActivatedSearch"
                 placeholder="Type.."
-                float-label="Search merchant type"
+                label="Search merchant type"
               />
             </div>
             <!--END: table filter,search -->
           </template>
         </q-table>
       </q-tab-panel>
-    </q-tabs>
+</q-tab-panels>
 
     <!--START: Show create MerchantDocumentTypes -->
     <showCreateMerchantDocumentType
@@ -301,8 +298,7 @@ export default {
               label: item.merchantTypeName
             });
           });
-        })
-        .then(() => {
+        }).then(() => {
           this.fetchMerchantDocumentTypeActivatedList();
         });
     },
@@ -375,8 +371,7 @@ export default {
           message: "Are you sure want to delete merchant type?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -394,8 +389,7 @@ export default {
                 } has been deactivated`,
                 icon: "thumb_up"
               });
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -405,7 +399,7 @@ export default {
             });
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -421,8 +415,7 @@ export default {
           message: "Are you sure want to enable merchant type?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -436,8 +429,7 @@ export default {
             id: rowDetails.id,
             params: rowDetails,
             parentId: rowDetails.parentID
-          })
-            .then(response => {
+          }).then(response => {
               this.fetchMerchantDocumentTypeDeActivatedList();
               this.$q.notify({
                 color: "positive",
@@ -447,8 +439,7 @@ export default {
                 } has been activated`,
                 icon: "thumb_up"
               });
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",

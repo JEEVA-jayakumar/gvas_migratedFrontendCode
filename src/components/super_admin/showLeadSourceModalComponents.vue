@@ -18,9 +18,11 @@
     </div>
     <q-tabs color="grey-9">
       <!-- Tabs - notice slot="title" -->
-      <q-tab @select="leadSourceActiveList" default slot="title" label="Active List" name="tab-1"/>
-      <q-tab @select="leadSourceDeActiveList" slot="title" label="De-Actived List" name="tab-2"/>
-      <q-tab-panel name="tab-1">
+      <q-tab @select="leadSourceActiveList" default label="Active List" name="tab-1"/>
+      <q-tab @select="leadSourceDeActiveList" label="De-Actived List" name="tab-2"/>
+</q-tabs>
+<q-tab-panels animated>
+<q-tab-panel name="tab-1">
         <q-table
           :rows="getActiveLeadSource"
           table-class="customSATableClass"
@@ -63,7 +65,7 @@
                 color="grey-9"
                 v-model="activeFilterSearch"
                 placeholder="Type.."
-                float-label="Search lead source"
+                label="Search lead source"
               />
             </div>
             <div class="col-4" align="right">
@@ -81,13 +83,12 @@
           </template>
         </q-table>
       </q-tab-panel>
-      <q-tab-panel name="tab-2">
+<q-tab-panel name="tab-2">
         <q-table
           :rows="deActiveLeadSourceList"
           table-class="customSATableClass"
           :columns="deActivatedColumns"
-          :filter="deActivatedFilterSearch"
-          :pagination="paginationControl"
+          :filter="deActivatedFilterSearch" v-model:pagination="paginationControl"
           row-key="id"
           color="grey-9"
         >
@@ -114,7 +115,7 @@
                 color="grey-9"
                 v-model="deActivatedFilterSearch"
                 placeholder="Type.."
-                float-label="Search by name"
+                label="Search by name"
                 class="q-mr-lg"
               />
             </div>
@@ -122,7 +123,7 @@
           </template>
         </q-table>
       </q-tab-panel>
-    </q-tabs>
+</q-tab-panels>
     <!--START: Show create LeadSources -->
     <showCreateLeadSource
       v-if="propShowCreateLeadSource"
@@ -274,8 +275,7 @@ export default {
           message: "Are you sure want to disable lead source?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -291,8 +291,7 @@ export default {
                 message: "Lead source deactivated",
                 icon: "thumb_up"
               });
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -302,7 +301,7 @@ export default {
             });
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -318,8 +317,7 @@ export default {
           message: "Are you sure want to disable lead source?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -337,8 +335,7 @@ export default {
                 } has been enabled`,
                 icon: "thumb_up"
               });
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -348,7 +345,7 @@ export default {
             });
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

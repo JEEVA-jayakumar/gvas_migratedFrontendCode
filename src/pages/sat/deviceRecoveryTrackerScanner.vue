@@ -31,8 +31,7 @@
         :rows="getDeviceScannedItems"
         :columns="columnData"
         table-class="customTableClass shadow-0"
-        :filter="filterSearch"
-        :pagination="paginationControl"
+        :filter="filterSearch" v-model:pagination="paginationControl"
         row-key="index"
         :loading="tableAjaxLoading"
         color="light-blue"
@@ -55,7 +54,7 @@
               color="grey-9"
               v-model="filterSearch"
               placeholder="Type.."
-              float-label="Search .."
+              label="Search .."
               class="q-mr-lg q-py-sm"
             />
           </div>

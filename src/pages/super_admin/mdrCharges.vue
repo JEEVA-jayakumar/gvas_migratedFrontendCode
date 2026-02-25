@@ -13,23 +13,22 @@
           default
           color="dark"
           name="active"
-          slot="title"
           label="Active MDR"
         />
         <q-tab
           color="dark"
           name="deactive"
-          slot="title"
           label="Deactived MDR"
         />
-        <q-tab-panel name="active">
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="active">
           <!--START: table Data -->
           <q-table
             :rows="activetableData"
             :columns="columns"
             table-class="customTableClass"
-            :filter="filterSearch"
-            :pagination="paginationControl"
+            :filter="filterSearch" v-model:pagination="paginationControl"
             v-model:selected="formData.marsDeviceIdsCookedUnAssinged"
             row-key="id"
             :loading="tableAjaxLoading"
@@ -41,7 +40,7 @@
               v-slot:body-cell-leadSource="props"
               :props="props"
               class="cursor-pointer"
-              @click.native="
+              @click="
                 toggleLeadInformation(props.row.leadSource.sourceName)
               "
             >
@@ -68,7 +67,7 @@
               v-slot:body-cell-device="props"
               :props="props"
               class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row.device.deviceName)"
+              @click="toggleLeadInformation(props.row.device.deviceName)"
             >
               <span class="label text-primary">{{
                 props.row.device.deviceName
@@ -233,7 +232,7 @@
               v-slot:body-cell-merchantCategory="props"
               :props="props"
               class="cursor-pointer"
-              @click.native="
+              @click="
                 toggleLeadInformation(
                   props.row.merchantCategory.merchantCategoryName
                 )
@@ -271,7 +270,7 @@
                       color="grey-9"
                       v-model.trim="filterSearch"
                       placeholder="Type.."
-                      float-label="Search by Plan Name"
+                      label="Search by Plan Name"
                     />
                   </div>
                 </div>
@@ -290,14 +289,13 @@
           </q-table>
           <!--ENDv-model: table Data -->
         </q-tab-panel>
-        <q-tab-panel name="deactive">
+<q-tab-panel name="deactive">
           <!--START: table Data -->
           <q-table
             :rows="deActivetableData"
             :columns="columnDataDiabled"
             table-class="customTableClass"
-            :filter="filterSearch1"
-            :pagination="paginationControl1"
+            :filter="filterSearch1" v-model:pagination="paginationControl1"
             row-key="id"
             :loading="tableAjaxLoading1"
             :rows-per-page-options="[5, 10, 15, 20]"
@@ -308,7 +306,7 @@
               v-slot:body-cell-leadSource="props"
               :props="props"
               class="cursor-pointer"
-              @click.native="
+              @click="
                 toggleLeadInformation(props.row.leadSource.sourceName)
               "
             >
@@ -335,7 +333,7 @@
               v-slot:body-cell-device="props"
               :props="props"
               class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row.device.deviceName)"
+              @click="toggleLeadInformation(props.row.device.deviceName)"
             >
               <span class="label text-primary">{{
                 props.row.device.deviceName
@@ -363,7 +361,7 @@
               }}</span>
             </q-td>
             <q-td
-              slot="body-cell-smallMerchantLessThanTwoDebit"
+              v-slot:body-cell-smallMerchantLessThanTwoDebit="props"
               align="center"
               slot-scope="props"
               :props="props"
@@ -457,7 +455,7 @@
               v-slot:body-cell-merchantCategory="props"
               :props="props"
               class="cursor-pointer"
-              @click.native="
+              @click="
                 toggleLeadInformation(
                   props.row.merchantCategory.merchantCategoryName
                 )
@@ -477,7 +475,7 @@
                       color="grey-9"
                       v-model.trim="filterSearch1"
                       placeholder="Type.."
-                      float-label="Search by Plan Name"
+                      label="Search by Plan Name"
                     />
                   </div>
                 </div>
@@ -486,7 +484,7 @@
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
       <div class="row items-center gutter-y-sm">
         <div class="col-md-9 col-sm-12 col-xs-12">
           <div class="row items-center"></div>
@@ -1110,8 +1108,7 @@ export default {
           message: "Are you sure, do you want to enable this MDR?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -1131,8 +1128,7 @@ export default {
               icon: "thumb_up"
             });
           });
-        })
-        .catch(() => {
+        }).onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -1148,8 +1144,7 @@ export default {
           message: "Are you sure want to delete MDR?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -1169,8 +1164,7 @@ export default {
               icon: "thumb_up"
             });
           });
-        })
-        .catch(() => {
+        }).onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -1186,8 +1180,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_ALL_DEACTIVATED_MDR_PLAN_DETAILS({ pagination, filter })
-        .then(res => {
+      this.FETCH_ALL_DEACTIVATED_MDR_PLAN_DETAILS({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl1 = pagination;
 
@@ -1219,8 +1212,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_ALL_MDR_PLAN_DETAILS({ pagination, filter })
-        .then(res => {
+      this.FETCH_ALL_MDR_PLAN_DETAILS({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
           // we also set (or update) rowsNumber

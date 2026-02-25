@@ -10,7 +10,7 @@
             v-model="podNumber"
             color="grey-9"
             placeholder="POD Number"
-            float-label="Enter POD Number"
+            label="Enter POD Number"
             @keyup.enter="fnCookDispatchedHistoryDetails()"
             class="text-weight-regular text-grey-8 q-py-sm"
           />
@@ -44,7 +44,7 @@
                 <div class="row text-dark">
                   <div class="col-md-8">
                     <div>{{item.device.deviceName}}</div>
-                    <div>{{item.device.createDate | moment("MMMM Do YYYY")}}</div>
+                    <div>{{ $moment(item.device.createDate).format("MMMM Do YYYY") }}</div>
                   </div>
                   <div class="col-md-4" align="right">
                     <div>Count</div>
@@ -73,8 +73,7 @@
         class="q-py-none"
         :rows="getAllRegionalInventoryPDOBasedDevicesWithCount.regionalInventoryList"
         v-model:columns="columnData"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         :loading="toggleAjaxLoadFilter"
         row-key="name"
       >

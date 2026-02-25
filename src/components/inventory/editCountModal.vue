@@ -13,7 +13,7 @@
         <q-input type="number" color="grey-9"
          v-model="formData.recievedCount"
          oninput="this.value = Math.abs(this.value)" :error="$v.formData.recievedCount.$error"
-          float-label="Update Count"
+          label="Update Count"
           placeholder="Update Count" />
     </div>
     <div class="col-md-12 col-md-6 q-pt-md group" align="right">

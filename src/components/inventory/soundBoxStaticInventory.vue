@@ -28,7 +28,7 @@
         <q-input
           v-model="formData.soundBoxNumber.soundBoxNumber"
           readonly
-          float-label="Scan Soundbox Number"
+          label="Scan Soundbox Number"
         />
         <div class="group">
           <q-btn

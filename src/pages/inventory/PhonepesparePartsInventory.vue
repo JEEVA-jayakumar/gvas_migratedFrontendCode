@@ -35,15 +35,15 @@
         ">
         <!--START: table title -->
         <div v-if="flag == '0' || flag == '1'" class="col-md-4">
-          <q-select v-model="formData.allocate_region" float-label="Select Region" radio color="grey-9"
-            :options="regionOptions" @input="regionBasedSoLoad" />
+          <q-select v-model="formData.allocate_region" label="Select Region" radio color="grey-9"
+            :options="regionOptions" @update:model-value="regionBasedSoLoad" />
         </div>
         <div v-if="flag == '1'" class="col-md-3">
-          <q-select filter clearable v-model="formData.allocate_so" float-label="Select SO" radio color="grey-9"
+          <q-select filter clearable v-model="formData.allocate_so" label="Select SO" radio color="grey-9"
             :options="regionBasedSo" />
         </div>
         <div v-if="flag == '2'" class="col-md-3">
-          <q-select v-model="formData.allocate_reseller" float-label="Select allocate_reseller" radio color="grey-9"
+          <q-select v-model="formData.allocate_reseller" label="Select allocate_reseller" radio color="grey-9"
             :options="resellarOptions" />
         </div>
         <div class="col-md-7">
@@ -63,11 +63,11 @@
           </div>
         </div>
         <div class="col-md-7">
-          <q-input disable v-model="formData.pod_number" float-label="Pod Number" radio color="grey-9" />
+          <q-input disable v-model="formData.pod_number" label="Pod Number" radio color="grey-9" />
         </div>
 
         <div class="col-md-7">
-          <q-input disable v-model="formData.total_count" float-label="Total Count" radio color="grey-9" />
+          <q-input disable v-model="formData.total_count" label="Total Count" radio color="grey-9" />
         </div>
 
         <div class="full-width group" align="center" id="formData">

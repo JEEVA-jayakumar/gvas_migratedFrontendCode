@@ -4,12 +4,12 @@
     <div>
 
       <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1">
-        <q-tab default color="dark" name="active" slot="title" label="Active TID" />
-        <!-- <q-tab color="dark" name="deactive" slot="title" label="Deactive TID" /> -->
-
-        <q-tab-panel name="active">
-          <q-table :rows="getlsVasHostInstanceDetails" table-class="customSATableClass" :columns="columns" :filter="filterSearch"
-            :pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
+        <q-tab default color="dark" name="active" label="Active TID" />
+        <!-- <q-tab color="dark" name="deactive" label="Deactive TID" /> -->
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="active">
+          <q-table :rows="getlsVasHostInstanceDetails" table-class="customSATableClass" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
             @request="ajaxLoadAllLeadInfo">
 
             <q-td v-slot:body-cell-action="props" :props="props">
@@ -27,7 +27,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <q-input clearable color="grey-9" v-model.trim="filterSearch" placeholder="Type.."
-                      float-label="Search by Plan Name" />
+                      label="Search by Plan Name" />
                   </div>
                 </div>
               </div>
@@ -41,10 +41,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-
-
-
-      </q-tabs>
+</q-tab-panels>
 
       <AddNewConfigurarions
        v-if="propShowAddNewConfigurarions" 
@@ -290,8 +287,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_DEACTIVATED_RENTAL_PLAN_DETAILS({ pagination, filter })
-        .then(res => {
+      this.FETCH_DEACTIVATED_RENTAL_PLAN_DETAILS({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl1 = pagination;
 

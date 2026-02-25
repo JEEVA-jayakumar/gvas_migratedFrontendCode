@@ -22,7 +22,7 @@
               :error="$v.formData.sourceName.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Lead Source"
+              label="Lead Source"
               placeholder="Lead Source"
               @keyup.enter="submitLeadSourceData(formData)"
             />
@@ -34,7 +34,7 @@
               :error="$v.formData.sourceCode.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Enter Source Code"
+              label="Enter Source Code"
               placeholder="Enter Source Code"
               @keyup.enter="submitLeadSourceData(formData)"
               
@@ -62,7 +62,7 @@
               :error="$v.formData.baseTidMidPrefix.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Tid/Mid Prefix"
+              label="Tid/Mid Prefix"
               placeholder="Tid/Mid Prefix"
               @keyup.enter="submitLeadSourceData(formData)"
             />
@@ -75,7 +75,7 @@
               :error="$v.formData.lastBaseTid.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="last Base Tid"
+              label="last Base Tid"
               placeholder="last Base Tid"
               @keyup.enter="submitLeadSourceData(formData)"
             />
@@ -88,7 +88,7 @@
               :error="$v.formData.lastBaseMid.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="last Base Mid"
+              label="last Base Mid"
               placeholder="last Base Mid"
               @keyup.enter="submitLeadSourceData(formData)"
             />

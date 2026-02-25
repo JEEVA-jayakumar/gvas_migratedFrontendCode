@@ -55,7 +55,7 @@
 							color="grey-9"
 							v-model="filter"
 							placeholder="Type.."
-							float-label="Search by SO name, Merchant Name, Lead ID"
+							label="Search by SO name, Merchant Name, Lead ID"
 							class="q-mt-lg q-mr-lg"
 						/>
 					</div>
@@ -76,7 +76,7 @@
 							separator
 							color="grey-9"
 							placeholder="Select"
-							float-label="Filter By"
+							label="Filter By"
 							:options="filterRoles"
 						/>
 					</div>
@@ -288,16 +288,14 @@ export default {
           message: "Are you sure want to delete users?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.notify({
             color: "positive",
             position: "bottom",
             message: "Deleted successfully!",
             icon: "thumb_up"
           });
-        })
-        .catch(() => {
+        }).onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

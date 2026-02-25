@@ -13,18 +13,17 @@
         class="q-py-none"
         :rows="tableData"
         :columns="columns"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         row-key="name"
         :loading="toggleAjaxLoadFilter"
         :rows-per-page-options="[5,10,15,20]"
         @request="ajaxLoadAllLeadInfo"
       >
        <q-td v-slot:body-cell-implementedDate="props" :props="props">
-          <span class="label">{{props.row.implementedDate | moment("Do MMM Y")}}</span>
+          <span class="label">{{ $moment(props.row.implementedDate).format("Do MMM Y") }}</span>
         </q-td>
         <!-- <q-td v-slot:body-cell-installationDate="props" :props="props">
-          <span class="label">{{props.row.installationDate | moment("Do MMM Y")}}</span>
+          <span class="label">{{ $moment(props.row.installationDate).format("Do MMM Y") }}</span>
         </q-td> -->
            <!-- <q-td key="action" :props="props">
                 <div class="q-gutter-sm">
@@ -42,7 +41,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search by MID, TID"
+              label="Search by MID, TID"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -254,8 +253,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.DEVICE_WITH_MERCHANT({ pagination, filter })
-        .then(res => {
+      this.DEVICE_WITH_MERCHANT({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 

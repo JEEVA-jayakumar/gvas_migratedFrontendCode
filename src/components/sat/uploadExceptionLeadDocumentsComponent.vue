@@ -133,7 +133,7 @@
                 :class="[computeAndToggleCheckboxForSingleDocument(document)? 'no-pointer-events':'']"
                 v-model="document.isKycChecked"
                 color="dark"
-                @input="fnCookKYCdocumentArr(document)"
+                @update:model-value="fnCookKYCdocumentArr(document)"
               />
             </q-item-section>
             <q-item-section>{{document.subDocumentType}}</q-item-section>
@@ -289,7 +289,7 @@
                 :class="[computeAndToggleCheckbox(multipleDocument)? 'no-pointer-events':'']"
                 v-model="multipleDocument.isKycChecked"
                 color="dark"
-                @input="fnCookKYCdocumentArr(multipleDocument)"
+                @update:model-value="fnCookKYCdocumentArr(multipleDocument)"
                 :label="multipleDocument.documentType"
               />
               <span v-else>{{multipleDocument.documentType}}</span>
@@ -934,8 +934,7 @@ export default {
           message: "Are you sure want to delete uploaded document?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: "purple-9",
@@ -956,8 +955,7 @@ export default {
                 message: "Successfully removed!",
                 icon: "thumb_up"
               });
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",

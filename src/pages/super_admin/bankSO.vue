@@ -35,7 +35,7 @@ fnShowCreateUploadFile()"
                 :error="$v.formData.location.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="*Location"
+                label="*Location"
                 placeholder="Location"
               />
             </div>
@@ -46,7 +46,7 @@ fnShowCreateUploadFile()"
                 :error="$v.formData.bank.$error"
                 class="text-weight-regular text-grey-8"
                 :options="dropDown.leadSourceOptions"
-                float-label="*Bank"
+                label="*Bank"
                 placeholder="Bank"
               />
             </div>
@@ -57,7 +57,7 @@ fnShowCreateUploadFile()"
                 color="grey-9"
                 @blur="$v.formData.branch_code.$touch"
                 :error="$v.formData.branch_code.$error"
-                float-label="*Branch_Code"
+                label="*Branch_Code"
                 placeholder="Branch_Code"
               />
             </div>
@@ -69,7 +69,7 @@ fnShowCreateUploadFile()"
                 :error="$v.formData.so_name.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="*So_Name"
+                label="*So_Name"
                 placeholder="So_Name"
               />
             </div>
@@ -81,7 +81,7 @@ fnShowCreateUploadFile()"
                 :error="$v.formData.mail_id.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="*Mail_Id"
+                label="*Mail_Id"
                 placeholder="Mail_Id"
               />
             </div>
@@ -92,7 +92,7 @@ fnShowCreateUploadFile()"
                 :error="$v.formData.emp_id.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="*Emp_Id"
+                label="*Emp_Id"
                 placeholder="Emp_Id"
               />
             </div>
@@ -103,7 +103,7 @@ fnShowCreateUploadFile()"
                 :error="$v.formData.bank_enable.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Bank_Enable"
+                label="Bank_Enable"
                 placeholder="Bank_Enable"
                 :options="selectBankEnableOptions"
               />

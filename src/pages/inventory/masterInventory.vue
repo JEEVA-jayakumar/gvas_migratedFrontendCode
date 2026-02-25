@@ -12,8 +12,7 @@
         class="q-py-none"
         :rows="tableData"
         :columns="columns"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         row-key="name">
         <template v-slot:top="props" class="bottom-border">
           <!--START: table filter,search -->
@@ -23,7 +22,7 @@
             color="grey-9"
             v-model="filter"
             placeholder="Type.."
-            float-label= "Search by serial no, tid, merchant name, device type"
+            label= "Search by serial no, tid, merchant name, device type"
             class="q-mr-lg q-py-sm"
             />
           </div>
@@ -32,12 +31,12 @@
             <q-select
             clearable
             @clear="filterMasterTrackerClear()"
-            @input="filterMasterTrackerByRegionId"
+            @update:model-value="filterMasterTrackerByRegionId"
             v-model="regionFilter"
             color="grey-9"
             :options="regionOptions"
             placeholder="Select"
-            float-label= "Filter By"
+            label= "Filter By"
             />
           </div>
           <div class="col-auto">

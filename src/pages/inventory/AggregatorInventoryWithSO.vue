@@ -6,34 +6,34 @@
       <!--START: table lead validation -->
       <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-md-4">
-          <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
-            :options="aggregatorOptions" @input="getaggregator" />
+          <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
+            :options="aggregatorOptions" @update:model-value="getaggregator" />
         </div>
       </div> -->
      
         <q-table table-class="customTableClass" :rows="this.getInventoryWithSOAggregatorList" v-model:columns="columns"
-          :filter="filter" :pagination="paginationControl" row-key="name">
+          :filter="filter" v-model:pagination="paginationControl" row-key="name">
           <!-- <q-td
           v-slot:body-cell-createdAt="props"
           :props="props"
-        >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-receivedAt="props"
           :props="props"
-        >{{ props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.receivedAt).format("Do MMM Y") }}</q-td>
 
         <q-td
           v-slot:body-cell-receivedAt="props"
           :props="props"
-        >{{ props.row.receivedAt ==null? "NA" : props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.receivedAt ==null? "NA" : props.row.receivedAt).format("Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-DeviceList="props"
           :props="props"
-        >{{ props.row.device.createDate | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.device.createDate).format("Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-ModifyDate="props"
           :props="props"
-        >{{ props.row.device.modifyDate | moment("Do MMM Y") }}</q-td>-->
+        >{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</q-td>-->
           <q-td v-slot:body-cell-created_at="props" :props="props">{{
             props.row.created_at == null ? "NA" :
               props.row.created_at | moment("Do MMM Y")
@@ -45,7 +45,7 @@
           <template v-slot:top="props">
             <div class="col-md-5">
               <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
-              float-label="Pod Number, Device Type, Serial Number" class="q-mr-lg q-py-sm" />
+              label="Pod Number, Device Type, Serial Number" class="q-mr-lg q-py-sm" />
             </div>
             <div class="col-md-5">
 
@@ -59,7 +59,7 @@
                     color="grey-9"
                     v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search .."
+                    label="Search .."
                     class="q-mr-lg q-py-sm"
             />-->
               <!-- <div class="col-md-5">

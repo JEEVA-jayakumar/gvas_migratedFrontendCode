@@ -89,7 +89,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search Using MID"
+              label="Search Using MID"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -329,8 +329,7 @@ export default {
       let param= {
         userId: JSON.parse(localStorage.getItem("u_i")).region.id
       };
-      this.FETCH_SPARE_PARTS_REGIONAL_INVENTORY_DETAILS({ pagination, filter, param})
-        .then(res => {
+      this.FETCH_SPARE_PARTS_REGIONAL_INVENTORY_DETAILS({ pagination, filter, param}).then(res => {
 
            this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
                 let assumeArr = [];

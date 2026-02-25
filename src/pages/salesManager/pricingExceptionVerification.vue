@@ -27,25 +27,25 @@
       </div>
       <!--END: table title -->
       <div v-if="shouldShowGivenPricefield">
-        <q-tabs inverted color="purple-9">
+        <q-tabs filled color="purple-9">
           <!-- Tabs - notice slot="title" -->
           <q-tab
             default
             :count="pricingExceptionCountForTab"
-            slot="title"
             name="tab-1"
             label="Pending"
           />
-          <q-tab slot="title" name="tab-2" label="History" />
+          <q-tab name="tab-2" label="History" />
           <!-- Targets -->
-          <q-tab-panel name="tab-1">
+</q-tabs>
+<q-tab-panels animated>
+<q-tab-panel name="tab-1">
             <!--START: table lead validation -->
             <q-table
               table-class="customTableClass"
               :rows="getPricingExceptionList"
               :columns="columns"
-              :filter="filter"
-              :pagination="paginationControl"
+              :filter="filter" v-model:pagination="paginationControl"
               row-key="name"
             >
               <!--START: table body modification -->
@@ -53,14 +53,14 @@
                 v-slot:body-cell-leadNumber="props"
                 :props="props"
                 class="cursor-pointer"
-                @click.native="toggleLeadInformation(props.row)"
+                @click="toggleLeadInformation(props.row)"
               >
                 <span class="label text-primary"># {{props.row.leadNumber}}</span>
               </q-td>
               <q-td
                 v-slot:body-cell-submittoRSMDate="props"
                 :props="props"
-              >{{ props.row.submittoRSMDate | moment("Do MMM Y") }}</q-td>
+              >{{ $moment(props.row.submittoRSMDate).format("Do MMM Y") }}</q-td>
               <q-td v-slot:body-cell-action="props" :props="props">
                 <q-btn
                   highlight
@@ -80,7 +80,7 @@
                     color="grey-9"
                     v-model="filter"
                     placeholder="Type.."
-                    float-label="Search by Merchant Name, Lead ID"
+                    label="Search by Merchant Name, Lead ID"
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -89,23 +89,22 @@
             </q-table>
             <!--END: table lead validation -->
           </q-tab-panel>
-          <q-tab-panel name="tab-2">
+<q-tab-panel name="tab-2">
             <!--START: table data -->
             <q-table
               v-if=" getRoleForTableToggleRsmList == false"
               table-class="customTableClass"
               :rows="getPricingRsmList"
               :columns="rsmcolumns"
-              :filter="filter"
-              :pagination="paginationControl"
+              :filter="filter" v-model:pagination="paginationControl"
               row-key="name"
             >
               <q-tr
                 v-slot:body="props"
                 :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']"
                 :props="props"
-                @mouseover.native="rowHover(props.row.__index)"
-                @click.native="rowClick(props.row)"
+                @mouseover="rowHover(props.row.__index)"
+                @click="rowClick(props.row)"
                 class="cursor-pointer"
               >
                 <q-td v-for="col in props.cols" :key="col.name" :props="props">{{ col.value }}</q-td>
@@ -119,8 +118,7 @@
               table-class="customTableClass"
               :rows="pricingExceptionByRsmIDList"
               :columns="rsmcolumnsLeads"
-              :filter="filter"
-              :pagination="paginationControl"
+              :filter="filter" v-model:pagination="paginationControl"
               row-key="name"
             >
               <!--START: table body modification -->
@@ -128,7 +126,7 @@
                 v-slot:body-cell-leadNumber="props"
                 :props="props"
                 class="cursor-pointer"
-                @click.native="toggleLeadInformation(props.row)"
+                @click="toggleLeadInformation(props.row)"
               >
                 <span class="label text-primary"># {{props.row.leadNumber}}</span>
               </q-td>
@@ -159,7 +157,7 @@
                     color="grey-9"
                     v-model="filter"
                     placeholder="Type.."
-                    float-label="Search by Merchant Name, Lead ID"
+                    label="Search by Merchant Name, Lead ID"
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -169,7 +167,7 @@
             <!--END: table lead validation -->
             <!--END: table data -->
           </q-tab-panel>
-        </q-tabs>
+</q-tab-panels>
       </div>
       <div v-else>
         <!--START: table lead validation -->
@@ -177,20 +175,19 @@
           table-class="customTableClass"
           :rows="getPricingExceptionList"
           :columns="columns"
-          :filter="filter"
-          :pagination="paginationControl"
+          :filter="filter" v-model:pagination="paginationControl"
           row-key="name"
         >
           <q-td
             v-slot:body-cell-submittoRSMDate="props"
             :props="props"
-          >{{ props.row.submittoRSMDate | moment("Do MMM Y") }}</q-td>
+          >{{ $moment(props.row.submittoRSMDate).format("Do MMM Y") }}</q-td>
           <!--START: table body modification -->
           <q-td
             v-slot:body-cell-leadNumber="props"
             :props="props"
             class="cursor-pointer"
-            @click.native="toggleLeadInformation(props.row)"
+            @click="toggleLeadInformation(props.row)"
           >
             <span class="label text-primary"># {{props.row.leadNumber}}</span>
           </q-td>
@@ -213,7 +210,7 @@
                 color="grey-9"
                 v-model="filter"
                 placeholder="Type.."
-                float-label="Search by Merchant Name, Lead ID"
+                label="Search by Merchant Name, Lead ID"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -502,8 +499,7 @@ export default {
       this.PRICING_EXCEPTION_LIST()
         .then(() => {
           this.pricingExceptionCountForTab = this.getPricingExceptionList.length;
-        })
-        .then(() => {
+        }).then(() => {
           this.PRICING_RSM_LIST();
           this.$q.loading.hide();
         })

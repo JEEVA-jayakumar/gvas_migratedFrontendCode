@@ -8,8 +8,7 @@
         table-class="customTableClass"
         :rows="getAllQRList"
         :columns="columns"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         row-key="name"
         v-model:filter-method="myCustomSearchFilter"
       >
@@ -18,7 +17,7 @@
         <q-td
           v-slot:body-cell-createDate="props"
           :props="props"
-        >{{ props.row.createDate | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.createDate).format("Do MMM Y") }}</q-td>
         <q-td v-slot:body-cell-action="props" :props="props">
           <div class="row no-wrap no-padding">
             <q-btn

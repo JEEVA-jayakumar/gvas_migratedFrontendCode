@@ -18,9 +18,11 @@
     </div>
     <q-tabs color="grey-9">
       <!-- Tabs - notice slot="title" -->
-      <q-tab @select="leadSourceActiveList" default slot="title" label="Active Vas List" name="tab-1"/>
-      <!-- <q-tab @select="leadSourceDeActiveList"  slot="title" label="Deactive Vas List" name="tab-2"/> -->
-      <q-tab-panel name="tab-1">
+      <q-tab @select="leadSourceActiveList" default label="Active Vas List" name="tab-1"/>
+      <!-- <q-tab @select="leadSourceDeActiveList" label="Deactive Vas List" name="tab-2"/> -->
+</q-tabs>
+<q-tab-panels animated>
+<q-tab-panel name="tab-1">
         <q-table
           :rows="tableData"
           table-class="customSATableClass"
@@ -64,7 +66,7 @@
                 color="grey-9"
                 v-model="activeFilterSearch"
                 placeholder="Type.."
-                float-label="Search lead source"
+                label="Search lead source"
               />
             </div>
             <div class="col-4" align="right">
@@ -82,7 +84,7 @@
           </template>
         </q-table>
       </q-tab-panel>
-    </q-tabs>
+</q-tab-panels>
     <!--START: Show create LeadSources -->
     <showVasCreate
       v-if="propShowVasCreate"

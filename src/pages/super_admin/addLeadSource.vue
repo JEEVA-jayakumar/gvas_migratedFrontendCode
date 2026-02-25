@@ -313,8 +313,7 @@ export default {
               position: "bottom",
               message: "Lead source deactivated"
             });
-          })
-          .catch(() => {
+          }).onCancel(() => {
             this.$q.notify({
               color: "warning",
               position: "bottom",
@@ -349,8 +348,7 @@ export default {
               position: "bottom",
               message: `Lead source: ${rowDetails.sourceName} has been enabled`
             });
-          })
-          .catch(() => {
+          }).onCancel(() => {
             this.$q.notify({
               color: "warning",
               position: "bottom",

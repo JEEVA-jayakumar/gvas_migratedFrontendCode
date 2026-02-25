@@ -8,8 +8,7 @@
         table-class="customTableClass"
         :rows="tableData"
         :columns="columns"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         :rows-per-page-options="[5,10,15,20,25]"
         row-key="name"
         :loading="toggleAjaxLoadFilter"
@@ -34,24 +33,24 @@
         <q-td
           v-slot:body-cell-createdAt="props"
           :props="props"
-        >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-receivedAt="props"
           :props="props"
-        >{{ props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.receivedAt).format("Do MMM Y") }}</q-td>
 
         <q-td
           v-slot:body-cell-receivedAt="props"
           :props="props"
-        >{{ props.row.receivedAt ==null? "NA" : props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.receivedAt ==null? "NA" : props.row.receivedAt).format("Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-DeviceList="props"
           :props="props"
-        >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-ModifyDate="props"
           :props="props"
-        >{{ props.row.device.modifyDate | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</q-td>
         <template v-slot:top="props">
           <div class="col-md-5">
             <q-input
@@ -60,7 +59,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search By Pod Number, BP Region"
+              label="Search By Pod Number, BP Region"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -263,8 +262,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_POD_LIST({ pagination, filter })
-        .then(res => {
+      this.FETCH_POD_LIST({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 

@@ -3,7 +3,7 @@
     <!-- content -->
     <div>
       <!-- <pre>{{getAllHierarchiesData}}</pre> -->
-      <q-table :rows="getAllPermissionData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" :pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
+      <q-table :rows="getAllPermissionData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
 
         <q-td v-slot:body-cell-Permission="props" :props="props">
           {{props.row.label}}
@@ -145,8 +145,7 @@ export default {
           message: "Are you sure want to delete Permission?",
           ok: "Continue",
           cancel: "Cancel",
-        })
-        .then(() => {
+        }).onOk(() => {
           this.DELETE_PERMISSION_BY_PERMISSION_ID_DATA(PermissionId)
             .then(response => {
               this.FETCH_ALL_PERMISSIONS_DATA();
@@ -156,8 +155,7 @@ export default {
                 message: "Successfully Deleted!",
                 icon: "thumb_up",
               });
-            })
-            .catch(() => {
+            }).onCancel(() => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -166,7 +164,7 @@ export default {
               });
             });
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

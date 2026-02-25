@@ -15,7 +15,7 @@
                   <q-item-label label>Scan and Upload</q-item-label>
                 </q-item-section>
               </q-item> -->
-              <q-item @click.native="fnPhonePeOpenRefurbishedBulkUploadModal">
+              <q-item @click="fnPhonePeOpenRefurbishedBulkUploadModal">
                 <q-item-section icon="attach_file" />
                 <q-item-section>
                   <q-item-label label>Bulk upload</q-item-label>
@@ -34,7 +34,7 @@
                   <q-item-label label>Scan and Upload</q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item @click.native="fnPhonePeOpenBulkUploadModal">
+              <q-item @click="fnPhonePeOpenBulkUploadModal">
                 <q-item-section icon="attach_file" />
                 <q-item-section>
                   <q-item-label label>Bulk upload</q-item-label>
@@ -57,7 +57,7 @@
                   <q-item-label label>Scan and Upload</q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item @click.native="fnOpenBulkUploadModal">
+              <q-item @click="fnOpenBulkUploadModal">
                 <q-item-section icon="attach_file" />
                 <q-item-section>
                   <q-item-label label>Bulk upload</q-item-label>
@@ -71,8 +71,8 @@
       <!--Aggregator select List-->
       <!-- <div class="row bottom-border q-px-md q-py-sm items-center">
         <div class="col-md-4">
-          <q-select color="grey-9" v-model="formData.aggregator" float-label="Select Aggregator" radio
-            :options="dropdDown.aggregatorOptions" @input="selectedAggregators" />
+          <q-select color="grey-9" v-model="formData.aggregator" label="Select Aggregator" radio
+            :options="dropdDown.aggregatorOptions" @update:model-value="selectedAggregators" />
         </div>
       </div> -->
       <!--END: table title -->
@@ -98,7 +98,7 @@
               <template slot="top">
                 <!--START: table filter,search  :pagination="paginationControl"-->
                 <div class="col-md-5">
-                  <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." float-label="Search By Device Serail Number.."
+                  <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search By Device Serail Number.."
                     class="q-mr-lg q-py-sm" />
                 </div>
 
@@ -108,7 +108,7 @@
                       color="grey-9"
                       v-model="filterSearch"
                       placeholder="Type.."
-                      float-label="Search .."
+                      label="Search .."
                       class="q-mr-lg q-py-sm"
                     />-->
                   <downloadExcel :rows="getAllPhonepeInventoryDevicesData" :fields="json_fields"

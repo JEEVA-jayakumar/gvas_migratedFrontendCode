@@ -14,35 +14,35 @@
                         <div class="q-display-1 text-grey-9 text-weight-medium q-py-lg ">Please SignUp</div>
                     </div>
                     <div class="col-md-8">
-                        <q-input v-model="FormData.fname" placeholder="Enter Name" float-label="Enter Name"
+                        <q-input v-model="FormData.fname" placeholder="Enter Name" label="Enter Name"
                             @blur="$v.FormData.fname.$touch" :error="$v.FormData.fname.$error" />
 
                     </div>
                     <div class="col-md-8">
-                        <q-input v-model="FormData.email" placeholder="Enter Email" float-label="Enter Email"
+                        <q-input v-model="FormData.email" placeholder="Enter Email" label="Enter Email"
                             @blur="$v.FormData.email.$touch" :error="$v.FormData.email.$error" />
 
                     </div>
                     <div class="col-md-8">
-                        <q-input v-model="FormData.dob" placeholder="Select DOB" float-label="Select DOB"
+                        <q-input v-model="FormData.dob" placeholder="Select DOB" label="Select DOB"
                             @blur="$v.FormData.dob.$touch" :error="$v.FormData.dob.$error" />
 
                     </div>
                     <div class="col-md-8">
-                        <q-select v-model="FormData.gender" float-label="Select Gender" placeholder="Select Gender"
+                        <q-select v-model="FormData.gender" label="Select Gender" placeholder="Select Gender"
                             @blur="$v.FormData.gender.$touch" :error="$v.FormData.gender.$error"
                             :options="selectGender" />
 
                     </div>
                     <div class="col-md-8">
                         <q-input v-model="FormData.password" type="password" placeholder="Enter Password"
-                            float-label="Enter Password" @blur="$v.FormData.password.$touch"
+                            label="Enter Password" @blur="$v.FormData.password.$touch"
                             :error="$v.FormData.password.$error" />
 
                     </div>
                     <div class="col-md-8">
                         <q-input v-model="FormData.repassword" type="password" placeholder="Re-Enter Password"
-                            float-label="Re-Enter Password" @blur="$v.FormData.repassword.$touch"
+                            label="Re-Enter Password" @blur="$v.FormData.repassword.$touch"
                             :error="$v.FormData.repassword.$error" />
 
                     </div>

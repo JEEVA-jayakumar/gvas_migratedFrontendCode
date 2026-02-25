@@ -45,11 +45,17 @@ export default boot(({ app, router }) => {
     return Promise.reject(error);
   });
 
-  api.interceptors.response.use(r => r, e => {
-    if (e.response && e.response.status === 401) {
-      localStorage.removeItem("auth_token");
-      localStorage.removeItem("u_i");
-      router.push({ name: "login" });
+  api.interceptors.response.use(r => {
+    r.body = r.data;
+    return r;
+  }, e => {
+    if (e.response) {
+      e.body = e.response.data;
+      if (e.response.status === 401) {
+        localStorage.removeItem("auth_token");
+        localStorage.removeItem("u_i");
+        router.push({ name: "login" });
+      }
     }
     return Promise.reject(e);
   });

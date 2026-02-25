@@ -53,32 +53,28 @@
           </q-card>
           <!--END: table Footer -->
           <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToUnassignedTab">
-              <q-tab default color="dark" name="unAssigned" slot="title" label="Unassigned" />
-              <q-tab color="dark" name="assigned" slot="title" label="Assigned" />
-              <!--
-              <q-tab color="dark" name="opened" slot="title" label="Opened" />
-              <q-tab color="dark" name="closed" slot="title" label="Closed" /> -->
-              <!--
-                <q-tab-panel name="opened">
+              <q-tab default color="dark" name="unAssigned" label="Unassigned" />
+              <q-tab color="dark" name="assigned" label="Assigned" />
+              <q-tab color="dark" name="opened" label="Opened" />
+              <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="opened">
             <opened/>
-          </q-tab-panel> -->
-              <q-tab-panel name="unAssigned">
+          </q-tab-panel>
+<q-tab-panel name="unAssigned">
                   <q-table :rows="tableData3" :columns="columnDataUnassigned" table-class="customTableClass"
                       :filter="filterSearch1" selection="multiple" :selected="formData.marsDeviceIdsCooked"
                       v-model:pagination="paginationControl1" row-key="id" :loading="tableAjaxLoading1"
                       :rows-per-page-options="[5, 10, 15, 20]" color="dark" @request="ajaxLoadAllLeadInfo1">
 
                       <q-td v-slot:body-cell-serviceReqTicketId="props" :props="props"
-                          class="cursor-pointer" @click.native="toggleServiceRequest(props.row)">
+                          class="cursor-pointer" @click="toggleServiceRequest(props.row)">
                           <span class="label text-primary"># {{ props.row.serviceReqTicketId }}</span>
                       </q-td>
 
-                      <q-td v-slot:body-cell-createdDate="props" :props="props">{{
-                              props.row.createdDate | moment("Do MMM Y")
-                      }}</q-td>
-                      <q-td v-slot:body-cell-updatedDate="props" :props="props">{{
-                              props.row.updatedDate | moment("Do MMM Y")
-                      }}</q-td>
+                      <q-td v-slot:body-cell-createdDate="props" :props="props">{{ $moment(props.row.createdDate).format("Do MMM Y") }}</q-td>
+                      <q-td v-slot:body-cell-updatedDate="props" :props="props">{{ $moment(props.row.updatedDate).format("Do MMM Y") }}</q-td>
                       <q-td v-slot:body-cell-serviceRequestSubTicketStatus="props" :props="props">
                           <span class="label text-positive"
                               v-if="props.row.serviceRequestSubTicketStatus == 1">SR_TICKET_RAISED</span>
@@ -111,29 +107,23 @@
                               v-else-if="props.row.serviceRequestTicketStatus == 3">REQUEST_CLOSED</span>
                           <span class="label" v-else>NA</span>
                       </q-td>
-                      <q-td v-slot:body-cell-kaptureDueDate="props" :props="props">{{
-                              props.row.kaptureDueDate == null ? "NA" : props.row.kaptureDueDate | moment("Do MMM Y")
-                      }}</q-td>
-                      <q-td v-slot:body-cell-appointmentDate="props" :props="props">{{
-                              props.row.appointmentDate == null ? "NA" : props.row.appointmentDate | moment("Do MMM Y")
-                      }}</q-td>
-                      <q-td v-slot:body-cell-courierDueDate="props" :props="props">{{
-                              props.row.courierDueDate == null ? "NA" : props.row.courierDueDate | moment("Do MMM Y")
-                      }}</q-td>
+                      <q-td v-slot:body-cell-kaptureDueDate="props" :props="props">{{ $moment(props.row.kaptureDueDate == null ? "NA" : props.row.kaptureDueDate).format("Do MMM Y") }}</q-td>
+                      <q-td v-slot:body-cell-appointmentDate="props" :props="props">{{ $moment(props.row.appointmentDate == null ? "NA" : props.row.appointmentDate).format("Do MMM Y") }}</q-td>
+                      <q-td v-slot:body-cell-courierDueDate="props" :props="props">{{ $moment(props.row.courierDueDate == null ? "NA" : props.row.courierDueDate).format("Do MMM Y") }}</q-td>
                       <q-td v-slot:body-cell-scheduleDate="props" :props="props">{{ props.row.scheduleDate
                               == null ? "NA" : props.row.scheduleDate | moment("Do MMM Y")
                       }}</q-td>
                       <template slot="top">
                           <div class="col-md-5">
                               <q-input clearable color="grey-9" v-model="filterSearch1" placeholder="Type.."
-                              float-label="Search By ServiceReqTicketId, TID .." class="q-mr-lg q-py-sm" />
+                              label="Search By ServiceReqTicketId, TID .." class="q-mr-lg q-py-sm" />
                           </div>
                       </template>
                   </q-table>
               </q-tab-panel>
-              <q-tab-panel name="assigned">
+<q-tab-panel name="assigned">
                   <q-table :rows="tableData1" :columns="columnDataAssigned" table-class="customTableClass"
-                      :filter="filterSearch" :pagination="paginationControl"
+                      :filter="filterSearch" v-model:pagination="paginationControl"
                       v-model:selected="formData.marsDeviceIdsCookedUnAssinged" row-key="id" :loading="tableAjaxLoading"
                       :rows-per-page-options="[5, 10, 15, 20]" color="dark" @request="ajaxLoadAllLeadInfo">
 
@@ -150,7 +140,7 @@
                               <q-td key="serviceReqTicketId">
                                   <q-checkbox checked-icon="fas fa-chevron-up" unchecked-icon="fas fa-chevron-down"
                                       color="grey-9" v-model="props.row.expand" class="q-mr-md"
-                                      @input="expandRowPlease(props.row)" />
+                                      @update:model-value="expandRowPlease(props.row)" />
                                   <span>{{ props.row.serviceReqTicketId }}</span>
                               </q-td>
                               <q-td key="tid" :props="props"> {{ props.row.tid }}</q-td>
@@ -158,9 +148,9 @@
                                   <span v-if="props.row.mid != null">{{ props.row.mid }}</span>
                                   <span v-else="props.row.mid == null">NA</span>
                               </q-td>
-                              <q-td key="createdDate" :props="props"> {{ props.row.createdDate | moment("Do MMM Y") }}
+                              <q-td key="createdDate" :props="props"> {{ $moment(props.row.createdDate).format("Do MMM Y") }}
                               </q-td>
-                              <q-td key="updatedDate" :props="props"> {{ props.row.updatedDate | moment("Do MMM Y") }}
+                              <q-td key="updatedDate" :props="props"> {{ $moment(props.row.updatedDate).format("Do MMM Y") }}
                               </q-td>
                               <q-td key="meName" :props="props"> {{ props.row.meName }}</q-td>
                               <q-td key="bpRegion" :props="props"> {{ props.row.bpRegion.regionAreaName }} </q-td>
@@ -430,12 +420,12 @@
                       <template slot="top">
                           <div class="col-md-5">
                               <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.."
-                                  float-label="Search .." class="q-mr-lg q-py-sm" />
+                                  label="Search .." class="q-mr-lg q-py-sm" />
                           </div>
                       </template>
                   </q-table>
               </q-tab-panel>
-          </q-tabs>
+</q-tab-panels>
           <div class="row items-center gutter-y-sm">
               <div class="col-md-9 col-sm-12 col-xs-12">
                   <div class="row items-center"></div>
@@ -910,8 +900,7 @@ methods: {
       spinnerColor: 'purple-9',
       message: 'Fetching data ..'
     })
-    this.FETCH_PHONEPE_REOPEN_TICKET({ pagination, filter })
-      .then((res) => {
+    this.FETCH_PHONEPE_REOPEN_TICKET({ pagination, filter }).then((res) => {
         this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
           let assumeArr = []
           this.getImplementationExecutiveList.map(function (value) {
@@ -952,8 +941,7 @@ methods: {
       spinnerColor: 'purple-9',
       message: 'Fetching data ..'
     })
-    this.FETCH_PHONEPE_REOPENED_ASSIGNED_TICKET({ pagination, filter })
-      .then((res) => {
+    this.FETCH_PHONEPE_REOPENED_ASSIGNED_TICKET({ pagination, filter }).then((res) => {
         // updating pagination to reflect in the UI
         this.paginationControl = pagination
 

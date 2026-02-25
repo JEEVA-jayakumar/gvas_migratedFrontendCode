@@ -20,8 +20,7 @@
         table-class="customTableClass"
         :rows="tableData"
         :columns="columns"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         row-key="name"
         :loading="toggleAjaxLoadFilter"
         :rows-per-page-options="[5,10,15,20]"
@@ -39,7 +38,7 @@
           v-slot:body-cell-leadNumber="props"
           :props="props"
           class="cursor-pointer"
-          @click.native="toggleLeadInformation(props.row.leadInformation)"
+          @click="toggleLeadInformation(props.row.leadInformation)"
         >
           <span class="label text-primary"># {{props.row.leadInformation.leadNumber}}</span>
         </q-td>
@@ -66,7 +65,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search Using MID"
+              label="Search Using MID"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -209,8 +208,7 @@ export default {
         spinnerColor: 'purple-9',
         message: 'Fetching data ..'
       });
-      this.FETCH_ADDITIONAL_TID_DATAS({ pagination, filter })
-        .then(res => {
+      this.FETCH_ADDITIONAL_TID_DATAS({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 
@@ -241,8 +239,7 @@ export default {
           message: 'Are you sure want to Move Additional Tid?',
           ok: 'Continue',
           cancel: 'Cancel'
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: 'purple-9',

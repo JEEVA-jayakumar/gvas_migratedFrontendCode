@@ -15,7 +15,7 @@
               v-model="formData.leadInformation.reason"
               @blur="$v.formData.leadInformation.reason.$touch"
               :error="$v.formData.leadInformation.reason.$error"
-              float-label="Remarks"
+              label="Remarks"
               color="primary"
             />
           </div>

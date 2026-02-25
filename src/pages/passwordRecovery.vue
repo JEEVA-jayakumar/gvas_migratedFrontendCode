@@ -13,7 +13,7 @@
               :error="$v.formData.requestParam.password.$error"
               v-model="formData.requestParam.password"
               type="password"
-              float-label="Enter new password"
+              label="Enter new password"
               color="grey-9"
             />
             <p
@@ -33,7 +33,7 @@
               :error="$v.formData.passwordRe.$error"
               v-model="formData.passwordRe"
               type="password"
-              float-label="Re-enter new password"
+              label="Re-enter new password"
               color="grey-9"
             />
             <p class="error" v-if="!$v.formData.passwordRe.required">this field is required</p>

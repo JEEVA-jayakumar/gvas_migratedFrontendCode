@@ -23,7 +23,7 @@
           <div class="col-md-8">
            <q-select
             v-model="formData.hierarchyId"
-            float-label="Hierarchy"
+            label="Hierarchy"
             placeholder="Select Hierarchy"
             class="text-weight-regular text-grey-8" color="grey-9"
             :options="getAllHierarchiesData"
@@ -39,7 +39,7 @@
             :error="$v.formData.role.$error"
             class="text-weight-regular text-grey-8" 
             color="grey-9" 
-            float-label="Role"
+            label="Role"
              placeholder="Role" /> 
           </div>
 
@@ -50,7 +50,7 @@
               v-model="formData.roleColor"
               @blur="$v.formData.roleColor.$touch"
              :error="$v.formData.roleColor.$error"
-              popover float-label="Choose a role color" color="grey-9"
+              popover label="Choose a role color" color="grey-9"
             />
           </div>
         </div>

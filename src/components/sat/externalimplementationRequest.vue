@@ -96,20 +96,38 @@
             </q-card>
 
       <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToUnassignedTab" >
-
-        <q-tab default color="dark" name="unAssigned" slot="title" label="Unassigned" />
-        <q-tab color="dark" name="assigned" slot="title" label="Assigned" />
-        <q-tab color="dark" name="cancelledMerchants" slot="title" label="Cancelled Merchants" />
-        
-         <q-tab-panel name="assigned">
+        <q-tab default color="dark" name="unAssigned" label="Unassigned" />
+        <q-tab color="dark" name="assigned" label="Assigned" />
+        <q-tab color="dark" name="cancelledMerchants" label="Cancelled Merchants" />
+            <!--  -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'cancelledMerchants'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium" align="left">
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedCancelled.length
+            }}</span>/ selected
+          </div>
+          <div class="side1" align="right">
+            <q-btn no-caps :disabled="
+                    formData.marsDeviceIdsCookedCancelled.length == 0
+                  " label="Cancel" class="common-dark-blue" @click="cancelImplementationUser" />
+                  </div>
+                  <div class="side2">
+            <q-btn no-caps :disabled="
+                    formData.marsDeviceIdsCookedCancelled.length == 0
+                  " label="Re assign" class="common-dark-blue" @click="reAssignImplementationUser" />
+        </div>
+        </div>
+      </q-card>
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="assigned">
               <Phonepeassigned/>
             </q-tab-panel>
-
-            <!-- <q-tab-panel name="cancelledMerchants">
+<q-tab-panel name="cancelledMerchants">
               <CancelledMerchants/>
-            </q-tab-panel> -->
-
-              <q-tab-panel name="unAssigned">
+            </q-tab-panel>
+<q-tab-panel name="unAssigned">
           <!--STARTv-model: table Data   :rows="getPhonepeImplementationQueueUnassignedList"  -->
           <q-table
            :rows="tableData1"
@@ -129,7 +147,7 @@
               v-slot:body-cell-leadNumber="props"
               :props="props"
               class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row.leadInformation)"
+              @click="toggleLeadInformation(props.row.leadInformation)"
             >
               <span class="label text-primary"
                 ># {{ props.row.leadInformation.leadNumber }}</span
@@ -140,14 +158,12 @@
             <q-td
               v-slot:body-cell-submitToMarsDate="props"
               :props="props"
-              >{{
-                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-              }}</q-td
+              >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-createdAt="props"
               :props="props"
-              >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+              >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
             >
             <!-- <q-td
               v-slot:body-cell-tid="props"
@@ -188,7 +204,7 @@
                   color="grey-9"
                   v-model="filterSearch"
                   placeholder="Type.."
-                  float-label="Search By MID, Merchant Name.."
+                  label="Search By MID, Merchant Name.."
                   class="q-mr-lg q-py-sm"
                 />
               </div>
@@ -196,35 +212,11 @@
             </template>
           </q-table>
         </q-tab-panel>
-
-      <q-card class="group q-pa-md" v-if="selectedTab == 'cancelledMerchants'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium" align="left">
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCookedCancelled.length
-            }}</span>/ selected
-          </div>
-          <div class="side1" align="right">
-            <q-btn no-caps :disabled="
-                    formData.marsDeviceIdsCookedCancelled.length == 0
-
-                  " label="Cancel" class="common-dark-blue" @click="cancelImplementationUser" />
-                  </div>
-                  <div class="side2">
-            <q-btn no-caps :disabled="
-                    formData.marsDeviceIdsCookedCancelled.length == 0
-
-                  " label="Re assign" class="common-dark-blue" @click="reAssignImplementationUser" />
-        </div>
-        </div>
-      </q-card>
-
-      <q-tab-panel name="cancelledMerchants">
+<q-tab-panel name="cancelledMerchants">
       <q-table :rows="tableData2"
                       :columns="columnDataMerchants"
                        table-class="customTableClass"
-                      :filter="filterSearch2" 
-                      :pagination="paginationControl2"
+                      :filter="filterSearch2" v-model:pagination="paginationControl2"
                       selection="multiple"
                       v-model:selected="formData.marsDeviceIdsCookedCancelled"
                       row-key="id" 
@@ -237,7 +229,7 @@
               v-slot:body-cell-leadNumber="props"
               :props="props"
               class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row.leadInformation)"
+              @click="toggleLeadInformation(props.row.leadInformation)"
             >
               <span class="label text-primary"
                 ># {{ props.row.leadInformation.leadNumber }}</span
@@ -246,14 +238,12 @@
             <q-td
               v-slot:body-cell-submitToMarsDate="props"
               :props="props"
-              >{{
-                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-              }}</q-td
+              >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-createdAt="props"
               :props="props"
-              >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+              >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
             >
             <!-- <q-td
               v-slot:body-cell-tid="props"
@@ -289,14 +279,14 @@
 
             <template v-slot:top="props">
               <div class="col-md-5">
-                <q-input clearable color="grey-9" v-model="filterSearch2" placeholder="Type.." float-label="Search By MID, Merchant Name.."
+                <q-input clearable color="grey-9" v-model="filterSearch2" placeholder="Type.." label="Search By MID, Merchant Name.."
                   class="q-mr-lg q-py-sm" />
               </div>
             </template>
             
             </q-table>
           </q-tab-panel>
-        </q-tabs>
+</q-tab-panels>
       <!--ENDv-model: table Footer -->
       <!-- START >> COMPONENT: Update device address  -->
       <DeviceAddressModal
@@ -847,8 +837,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.PHONEPE_IMPLEMENTATION_QUEUE_UNASSIGNED_LIST({ pagination, filter })
-        .then((res) => {
+      this.PHONEPE_IMPLEMENTATION_QUEUE_UNASSIGNED_LIST({ pagination, filter }).then((res) => {
           this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
             let assumeArr = [];
             this.getImplementationExecutiveList.map(function(value) {
@@ -884,8 +873,7 @@ export default {
               spinnerColor: "purple-9",
               message: "Fetching data ..",
           });
-          this.PHONEPE_CANCELLED_MERCHANTS({ pagination, filter })
-              .then((res) => {
+          this.PHONEPE_CANCELLED_MERCHANTS({ pagination, filter }).then((res) => {
                   // updating pagination to reflect in the UI
                   this.paginationControl2 = pagination;
 

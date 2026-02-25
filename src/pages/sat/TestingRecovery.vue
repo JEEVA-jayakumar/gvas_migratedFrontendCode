@@ -3,8 +3,7 @@
         <div>
             <div class="col-md-6 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">Aggregator Device
                 Recovery</div>
-            <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filter"
-                :pagination="paginationControl" row-key="name" @request="fnajaxLoadingData">
+            <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filter" v-model:pagination="paginationControl" row-key="name" @request="fnajaxLoadingData">
                 <q-td v-slot:body-cell-serialNumber="props" :props="props">{{
                     props.row.aggregatorRegionalInventory == null ? "NA" :
                         props.row.aggregatorRegionalInventory.serialNumber
@@ -32,7 +31,7 @@
                 <template v-slot:top="props">
                     <div class="col-md-5">
                         <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
-                            float-label="Search TID, MID" class="q-mr-lg q-py-sm" />
+                            label="Search TID, MID" class="q-mr-lg q-py-sm" />
                     </div>
                     <div class="col-md-2">
 
@@ -51,7 +50,7 @@
                                     <q-item-label label>Scan and Upload</q-item-label>
                                 </q-item-section>
                             </q-item>
-                            <q-item @click.native="fnPhonePeBulkUpload">
+                            <q-item @click="fnPhonePeBulkUpload">
                                 <q-item-section icon="attach_file" />
                                 <q-item-section>
                                     <q-item-label label>Bulk upload</q-item-label>
@@ -68,7 +67,7 @@
                     </div>
                     <div class="col">
                         <q-btn square outline color="purple-9" label="Bulk Upload"
-                            class="q-mr-lg q-py-sm float-right" size="md"  @click.native="fnPhonePeBulkUpload" />
+                            class="q-mr-lg q-py-sm float-right" size="md"  @click="fnPhonePeBulkUpload" />
                     </div> -->
 
                     <!--END: table excel download -->
@@ -299,8 +298,7 @@ export default {
                 spinnerColor: 'purple-9',
                 message: 'Fetching data ..'
             });
-            this.FETCH_PHONEPE_DEVICE_RECOVERY_DATAS({ pagination, filter })
-                .then(res => {
+            this.FETCH_PHONEPE_DEVICE_RECOVERY_DATAS({ pagination, filter }).then(res => {
                     //     console.log("getPhonepeDeviceRecoveryDatas ------>",JSON.stringify(this.getPhonepeDeviceRecoveryDatas))
                     //   this.tableData = this.getPhonepeDeviceRecoveryDatas.content;
                     //   console.log("FETCH_PHONEPE_DEVICE_RECOVERY_DATAS ------>",JSON.stringify(this.tableData))

@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="col-12 col-md-7 q-px-xl">
-        <div class="row justify-center q-col-gutter-md">
+        <div class="row justify-center q-gutter-md">
           <div class="col-12 col-sm-10 col-md-8" align="center">
             <div class="text-h4 text-grey-9 text-weight-medium q-py-lg">Please Log In </div>
           </div>
@@ -32,7 +32,7 @@
               @click="fuSubmitLoginDetails(formData)" style="max-width:300px">Log In</q-btn>
           </div>
           <div class="col-12 col-sm-10 col-md-8" align="center">
-            <q-btn flat no-caps class="text-purple-9 text-weight-regular" color="white"
+            <q-btn flat no-caps class="text-purple-9 text-weight-regular"
               @click="fnShowForgetPasswordModal">Forgot your password?</q-btn>
           </div>
         </div>
@@ -49,12 +49,7 @@ import { mapGetters, mapActions } from "vuex";
 import { useVuelidate } from '@vuelidate/core'
 import {
   required,
-  email,
-  minLength,
-  maxLength,
-  alpha,
-  alphaNum,
-  numeric
+  email
 } from "@vuelidate/validators";
 import showForgetPasswordComp from "../components/forgetPassword.vue";
 import * as CryptoJS from "crypto-js";
@@ -69,7 +64,6 @@ AesUtil.prototype.generateKey = function (salt, passPhrase) {
   var key = CryptoJS.PBKDF2(passPhrase, CryptoJS.enc.Hex.parse(salt), {
     keySize: this.keySize,
     iterations: this.iterationCount,
-    // IMPORTANT: backend expects PBKDF2(HMAC-SHA1), not the CryptoJS default in some versions.
     hasher: CryptoJS.algo.SHA1
   });
   return key;
@@ -83,19 +77,8 @@ AesUtil.prototype.encrypt = function (salt, iv, passPhrase, plainText) {
   return encrypted.ciphertext.toString(CryptoJS.enc.Base64);
 };
 
-AesUtil.prototype.decrypt = function (salt, iv, passPhrase, cipherText) {
-  var key = this.generateKey(salt, passPhrase);
-  var cipherParams = CryptoJS.lib.CipherParams.create({
-    ciphertext: CryptoJS.enc.Base64.parse(cipherText)
-  });
-  var decrypted = CryptoJS.AES.decrypt(cipherParams, key, {
-    iv: CryptoJS.enc.Hex.parse(iv)
-  });
-  return decrypted.toString(CryptoJS.enc.Utf8);
-};
-
 export default {
-  name: "login",
+  name: "LoginPage",
   components: {
     showForgetPasswordComp
   },
@@ -135,7 +118,6 @@ export default {
     ]),
 
     fnNavigate(routeName, fallbackPath) {
-      // Vue Router 4: named route may be missing if route registration changed during migration.
       if (this.$router && typeof this.$router.hasRoute === "function") {
         if (this.$router.hasRoute(routeName)) {
           return this.$router.push({ name: routeName });
@@ -159,7 +141,7 @@ export default {
         let ciphertext = aesUtil.encrypt(
           salt,
           iv,
-          "BijliWeAreMakers", // Correct passphrase
+          "BijliWeAreMakers",
           this.formData.password
         );
         let aesPassword = iv + "::" + salt + "::" + ciphertext;
@@ -180,9 +162,6 @@ export default {
           .then(response => {
             this.FETCH_LOGGEDIN_USER_DATA()
               .then((userInfo) => {
-                /* variables:
-                authUserRoles => contains user info, which is saved in local storage of browser
-                hierarchyRoleLevel =>  contains current object of roles array */
                 let menuArr = [];
                 const roles = (userInfo && Array.isArray(userInfo.roles)) ? userInfo.roles : [];
                 _.map(roles, function (oo) {
@@ -284,10 +263,7 @@ export default {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
-                  message:
-                    (error && error.response && error.response.data && (error.response.data.message || error.response.data.error)) ||
-                    (error && error.message) ||
-                    "Something went wrong! Contact administrator",
+                  message: "Something went wrong! Contact administrator",
                   icon: "thumb_down",
                 });
               });
@@ -311,9 +287,8 @@ export default {
                 color: "negative",
                 position: "bottom",
                 message:
-                  (error.response && error.response.data && error.response.data.message) == null
-                    ? "Please Try Again Later !"
-                    : error.response.data.message,
+                  (error.response && error.response.data && error.response.data.message) ||
+                  "Please Try Again Later !",
                 icon: "thumb_down",
               });
             }

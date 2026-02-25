@@ -18,26 +18,26 @@
             </div>
           </div>
           <div class="col-md-12">
-            <q-input
-              hide-underline
-              class="q-mr-lg q-py-sm"
-              v-model="formData.fromDate"
-              :min="yesterday"
-              :max="tomorrow"
-              type="date"
-              float-label="From Date"
-            />
+            <q-input filled v-model="formData.fromDate" label="From Date" color="grey-9">
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="formData.fromDate" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
           </div>
           <div class="col-md-12">
-            <q-input
-              hide-underline
-              class="q-mr-lg q-py-sm"
-              v-model="formData.toDate"
-              :min="yesterday"
-              :max="tomorrow"
-              type="date"
-              float-label="To Date"
-            />
+            <q-input filled v-model="formData.toDate" label="To Date" color="grey-9">
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="formData.toDate" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
           </div>
           <div class="col-md-12 group" align="right">
             <q-btn

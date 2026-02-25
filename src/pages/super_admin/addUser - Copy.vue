@@ -90,7 +90,7 @@
                 :error="$v.formData.addUserDetails.name.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="*Name"
+                label="*Name"
                 placeholder="Name"
               />
             </div>
@@ -102,7 +102,7 @@
                 :error="$v.formData.addUserDetails.employeeID.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="*Employee ID"
+                label="*Employee ID"
                 placeholder="Employee ID"
               />
             </div>
@@ -114,7 +114,7 @@
                 color="grey-9"
                 @blur="$v.formData.addUserDetails.email.$touch"
                 :error="$v.formData.addUserDetails.email.$error"
-                float-label="*Email"
+                label="*Email"
                 placeholder="Email"
               />
             </div>
@@ -126,7 +126,7 @@
                 :error="$v.formData.addUserDetails.contactNumber.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="*Contact Number"
+                label="*Contact Number"
                 placeholder="Contact Number"
               />
             </div>
@@ -138,7 +138,7 @@
                 :error="$v.formData.addUserDetails.alternateContactNumber.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Alt Contact Number"
+                label="Alt Contact Number"
                 placeholder="Alt Contact Number"
               />
             </div>
@@ -150,7 +150,7 @@
                 :error="$v.formData.addUserDetails.userAddress.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="*Address"
+                label="*Address"
                 placeholder="Address"
               />
             </div>
@@ -168,10 +168,10 @@
               <q-select
                 filter
                 v-model.trim="formData.addUserDetails.pincodeTemp"
-                float-label="*Pincode"
+                label="*Pincode"
                 radio
                 :error="$v.formData.addUserDetails.pincodeTemp.$error"
-                @input="fnGetCityAndState()"
+                @update:model-value="fnGetCityAndState()"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
                 :options="getAllStatesData"
@@ -183,7 +183,7 @@
                 v-model.trim="formData.addUserDetails.state"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="*State"
+                label="*State"
                 placeholder="State"
               />
             </div>
@@ -194,7 +194,7 @@
                 v-model.trim="formData.addUserDetails.city"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="*City"
+                label="*City"
                 placeholder="City"
               />
             </div>

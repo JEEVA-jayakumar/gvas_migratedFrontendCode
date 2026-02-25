@@ -22,7 +22,7 @@
               :error="$v.formData.id.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Service Request Id"
+              label="Service Request Id"
               placeholder="Service Request Id"
             />
           </div>
@@ -32,7 +32,7 @@
               v-model="service_req_data"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Service Request "
+              label="Service Request "
               placeholder="Service Request "
             />
           </div>
@@ -40,7 +40,7 @@
             <q-select
               v-model="formData.issue_reason"
               :error="$v.formData.issue_reason.$error"
-              float-label="Select Subtask"
+              label="Select Subtask"
               radio
               color="grey-9"
               :options="subtaskDetails"

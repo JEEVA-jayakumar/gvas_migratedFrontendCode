@@ -61,8 +61,7 @@ const InventoryCentral = {
       return await api
         .get("download-file", {
           responseType: "arraybuffer"
-        })
-        .then(response => {
+        }).then(response => {
           let blob = COMMON_FILE_DOWNLOAD(response);
           let link = document.createElement("a");
           link.href = window.URL.createObjectURL(blob);
@@ -82,8 +81,7 @@ const InventoryCentral = {
             "Authorization": "Token " + localStorage.getItem(
               "auth_token")
           }
-        })
-        .then(response => {
+        }).then(response => {
           commit("API_RESPONSE_LOG", true);
         })
     },

@@ -21,7 +21,7 @@
                           :error="$v.formData.name.$error" 
                           class="text-weight-regular text-grey-8" 
                           color="grey-9" 
-                          float-label="Enter CS Sub Issue" 
+                          label="Enter CS Sub Issue"
                           placeholder="Enter CS Sub Issue" 
                         />
                     </div>

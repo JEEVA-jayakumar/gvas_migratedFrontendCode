@@ -30,7 +30,7 @@
                 <div class="q-mb-md">
                   <q-item-label><b>SAT forwarded date:</b></q-item-label>
                   <div>
-                    {{this.propRowDetails.subTicketsList[0].moveToSatDate | moment("Do MMM Y")}}
+                    {{ $moment(this.propRowDetails.subTicketsList[0].moveToSatDate).format("Do MMM Y") }}
                   </div>
                 </div>
               </div>
@@ -43,7 +43,7 @@
                   color="grey-9"
                   v-model="formData.so"
                   :options="assignToOptions"
-                  float-label="Select FSE Name*"
+                  label="Select FSE Name*"
                 />
               </div>
             </div>

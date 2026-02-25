@@ -12,17 +12,17 @@
                     <div class="col-md-12">
                         <q-input disable @keyup.enter="submitPincode(formData)" v-model="formData.podNumber"
                             :error="$v.formData.podNumber.$error" class="text-weight-regular text-grey-8" color="grey-9"
-                            float-label="Enter PodNumber" placeholder="Enter PodNumber" />
+                            label="Enter PodNumber" placeholder="Enter PodNumber" />
                     </div>
                     <div class="col-md-12">
                         <q-select @keyup.enter="submitPincode(formData)" v-model="formData.device"
                             :error="$v.formData.device.$error" class="text-weight-regular text-grey-8" color="grey-9"
-                            float-label="Select DeviceName" placeholder="Select DeviceName" :options="deviceOptions" />
+                            label="Select DeviceName" placeholder="Select DeviceName" :options="deviceOptions" />
                     </div>
                     <div class="col-md-12">
                         <q-select @keyup.enter="submitPincode(formData)" v-model="formData.region"
                             :error="$v.formData.region.$error" class="text-weight-regular text-grey-8" color="grey-9"
-                            float-label="Select Region" placeholder="Select Region " :options="regionOptions" />
+                            label="Select Region" placeholder="Select Region " :options="regionOptions" />
                     </div>
 
                     <div class="col-md-12 group" align="right">

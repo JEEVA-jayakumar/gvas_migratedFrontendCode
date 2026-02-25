@@ -21,7 +21,7 @@
                 <div class="col-md-4">
                      <q-select
                         v-model="formData.device_type"
-                        float-label="Select Device Type"
+                        label="Select Device Type"
                         radio
                         color="grey-9"
                         v-model:options="deviceOptions"
@@ -54,7 +54,7 @@
             </div>
 
              <!--START: table Data -->
-            <q-table :rows="getAddDeviceScannedItems" :columns="columnData" table-class="customTableClass shadow-0" :filter="filterSearch" :pagination="paginationControl" row-key="index" :loading="tableAjaxLoading"
+            <q-table :rows="getAddDeviceScannedItems" :columns="columnData" table-class="customTableClass shadow-0" :filter="filterSearch" v-model:pagination="paginationControl" row-key="index" :loading="tableAjaxLoading"
             color="light-blue">
 
                 <q-td v-slot:body-cell-action="props" :props="props">
@@ -75,7 +75,7 @@
                         color="grey-9"
                         v-model="filterSearch"
                         placeholder="Type.."
-                        float-label="Search .."
+                        label="Search .."
                         class="q-mr-lg q-py-sm"
                     />
                     </div>

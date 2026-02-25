@@ -8,8 +8,8 @@
       <!--END: table title -->
       <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-md-4">
-          <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
-            :options="aggregatorOptions" @input="getaggregator" />
+          <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
+            :options="aggregatorOptions" @update:model-value="getaggregator" />
         </div>
       </div> -->
      
@@ -20,7 +20,7 @@
         <!-- content -->
         <!--START: table lead validation -->
         <q-table table-class="customTableClass" :columns="columns" :rows="tableData" color="grey-9"
-          :filter="filterSearch" :pagination="paginationControl" :rows-per-page-options="[5, 10, 15, 20, 25]"
+          :filter="filterSearch" v-model:pagination="paginationControl" :rows-per-page-options="[5, 10, 15, 20, 25]"
           :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
           <q-td v-slot:body-cell-updated_at="props" :props="props">{{
             props.row.updatedAt == null ? "NA" :
@@ -30,7 +30,7 @@
             <!--START: table filter,search -->
             <div class="col-md-5">
               <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.."
-                float-label="Search Using Device Serial Number" class="q-mr-lg q-py-sm" />
+                label="Search Using Device Serial Number" class="q-mr-lg q-py-sm" />
             </div>
             <div class="col-md-5">
 
@@ -232,8 +232,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_AGGREGATORS_INVENTORY_STOLEN_DATA({ pagination, filter})
-        .then(res => {
+      this.FETCH_AGGREGATORS_INVENTORY_STOLEN_DATA({ pagination, filter}).then(res => {
           this.paginationControl = pagination;
 
           // we also set (or update) rowsNumber

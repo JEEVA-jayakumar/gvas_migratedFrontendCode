@@ -19,13 +19,13 @@
                     <q-input v-model="formData.HierarchyDetails.hierarchy" 
                     @blur="$v.formData.HierarchyDetails.hierarchy.$touch"      
                     :error="$v.formData.HierarchyDetails.hierarchy.$error" 
-                    class="text-weight-regular text-grey-8 q-my-sm" color="grey-9" float-label="Hierarchy" placeholder="Hierarchy" />
+                    class="text-weight-regular text-grey-8 q-my-sm" color="grey-9" label="Hierarchy" placeholder="Hierarchy" />
                 </div>
                 <div class="col-md-12">
                     <q-input v-model="formData.HierarchyDetails.hierarchyCode" 
                     @blur="$v.formData.HierarchyDetails.hierarchyCode.$touch"      
                     :error="$v.formData.HierarchyDetails.hierarchyCode.$error" 
-                    class="text-weight-regular text-grey-8 q-my-sm" color="grey-9" float-label="Hierarchy Code" placeholder="Hierarchy Code" />
+                    class="text-weight-regular text-grey-8 q-my-sm" color="grey-9" label="Hierarchy Code" placeholder="Hierarchy Code" />
                 </div>
             </div>
              <div class="row gutter-sm q-pa-md">

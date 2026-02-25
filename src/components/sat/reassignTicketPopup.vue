@@ -29,7 +29,7 @@
                 </div>
                 <div class="q-mb-md">
                   <q-item-label><b>SAT forwarded date:</b></q-item-label>
-                  <div>{{this.propRowDetails.subTicketsList[0].moveToSatDate | moment("Do MMM Y")}}</div>
+                  <div>{{ $moment(this.propRowDetails.subTicketsList[0].moveToSatDate).format("Do MMM Y") }}</div>
                 </div>
                 <br />
                 <div class="q-mb-md">
@@ -55,7 +55,7 @@
                   color="grey-9"
                   v-model="formData.so"
                   :options="assignToOptions"
-                  float-label="Select FSE Name*"
+                  label="Select FSE Name*"
                 /><br /><br />
                 <div class="q-mb-md row justify-end items-center">
                   <q-item-label><b>Reassign Count:</b></q-item-label>
@@ -215,8 +215,7 @@ export default {
           message: "Are you sure want to Re-Assign the lead?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: "purple-9",
@@ -266,8 +265,7 @@ export default {
                 message: "Updated Successfully",
                 icon: "thumb_up"
               });
-            })
-            .catch(error => {
+            }).catch(error => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",

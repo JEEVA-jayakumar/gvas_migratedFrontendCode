@@ -7,37 +7,37 @@
       <!--END: table title -->
       <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-md-4">
-          <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
-            :options="aggregatorOptions" @input="getaggregator" />
+          <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
+            :options="aggregatorOptions" @update:model-value="getaggregator" />
         </div>
       </div> -->
 
 
       <!--START: table lead validation -->
       <q-table table-class="customTableClass" class="q-py-none" :rows="tableData" :columns="columns" :filter="filter"
-        :rows-per-page-options="[100, 200, 300, 400, 500]" :pagination="paginationControl"
+        :rows-per-page-options="[100, 200, 300, 400, 500]" v-model:pagination="paginationControl"
         :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
         <!-- :rows-per-page-options="[100,200,300,400,500]" -->
         <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{ props.row.deviceStatusDate | moment("Do MMM Y") }}</span>
+          <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
         </q-td>
         <template slot="top" class="bottom-border">
           <!--START: table filter,search -->
           <div class="col">
             <q-input clearable color="grey-9" v-model="filter" placeholder="Type.."
-              float-label="Search by Device Serial Number, MID, TID, Merchant Name" class="q-mr-lg q-py-sm" />
+              label="Search by Device Serial Number, MID, TID, Merchant Name" class="q-mr-lg q-py-sm" />
           </div>
 
           <!-- <div class="col-4">
             <q-select
               clearable
               @clear="filterMasterTrackerClear()"
-              @input="filterMasterTrackerByRegionId"
+              @update:model-value="filterMasterTrackerByRegionId"
               v-model="regionFilter"
               color="grey-9"
               :options="getAllRegionsData"
               placeholder="Select"
-              float-label="Filter By"
+              label="Filter By"
             />
           </div>-->
           <div class="col-md-6">
@@ -284,8 +284,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_AGGREGATORS_INVENTORY_WITH_MERCHANT_DATA({ pagination, filter})
-        .then(res => {
+      this.FETCH_AGGREGATORS_INVENTORY_WITH_MERCHANT_DATA({ pagination, filter}).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 

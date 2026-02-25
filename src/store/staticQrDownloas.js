@@ -24,8 +24,7 @@ function COMMON_FILE_DOWNLOAD(response) {
             return await  api
             .get("qr-gen/downloadString/"+request,{
               responseType: 'arraybuffer'
-            })
-            .then(response => {
+            }).then(response => {
                // console.log("FIle name : -- : ", response.headers["Content-Disposition"])
                 const contentDisposition = response.headers.get('Content-Disposition');
                 const filenameIndex = contentDisposition.indexOf('filename=');
@@ -48,8 +47,7 @@ function COMMON_FILE_DOWNLOAD(response) {
               return await  api
               .get("equitas-completedLeads",{
                 responseType: 'arraybuffer'
-              })
-              .then(response => {
+              }).then(response => {
                  // console.log("FIle name : -- : ", response.headers["Content-Disposition"])
                   const contentDisposition = response.headers.get('Content-Disposition');
                   const filenameIndex = contentDisposition.indexOf('filename=');
@@ -70,8 +68,7 @@ function COMMON_FILE_DOWNLOAD(response) {
               return await  api
               .get("download-equitas-errorLeads",{
                 responseType: 'arraybuffer'
-              })
-              .then(response => {
+              }).then(response => {
                  // console.log("FIle name : -- : ", response.headers["Content-Disposition"])
                   const contentDisposition = response.headers.get('Content-Disposition');
                   const filenameIndex = contentDisposition.indexOf('filename=');

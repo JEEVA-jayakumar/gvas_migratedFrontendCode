@@ -6,7 +6,7 @@
       @blur="$v.merchant.salesInformation.salesPersonCode.$touch"
       :error="$v.merchant.salesInformation.salesPersonCode.$error"
       v-model="merchant.salesInformation.salesPersonCode"
-      float-label="Sales Person*"
+      label="Sales Person*"
       :options="salesPersonOptions"
     />
   </div>

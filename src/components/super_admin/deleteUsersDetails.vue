@@ -21,8 +21,7 @@
         class="q-py-none"
         :rows="tableData"
         :columns="columns"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         row-key="nam6"
       >
         <q-td v-slot:body-cell-action="props" class="group" :props="props">
@@ -59,7 +58,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search by user name, email, phone"
+              label="Search by user name, email, phone"
               class="q-mr-lg q-py-sm"
             />
           </div>

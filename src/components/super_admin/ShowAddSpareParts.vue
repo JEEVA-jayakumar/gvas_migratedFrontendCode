@@ -21,7 +21,7 @@
                           :error="$v.formData.spare_parts_types.$error" 
                           class="text-weight-regular text-grey-8" 
                           color="grey-9" 
-                          float-label="Enter Spare Parts Name" 
+                          label="Enter Spare Parts Name"
                           placeholder="Enter Spare Parts Name" 
                         />
                     </div>

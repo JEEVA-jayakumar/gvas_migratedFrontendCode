@@ -12,11 +12,11 @@
             </div>
           </div>
           <!-- <div class="col-md-8 q-py-md" align="left">
-            <q-select color="grey-9" v-model="formData.aggregator" float-label="Select Aggregator" radio
-              :options="dropdDown.aggregatorOptions" @input="getaggregator" />
+            <q-select color="grey-9" v-model="formData.aggregator" label="Select Aggregator" radio
+              :options="dropdDown.aggregatorOptions" @update:model-value="getaggregator" />
           </div> -->
           <!-- <div class="col-md-8 q-py-md" align="left">
-            <q-select color="grey-9" v-model="formData.deviceType" float-label="Select Device Type" radio
+            <q-select color="grey-9" v-model="formData.deviceType" label="Select Device Type" radio
               :options="deviceOption" />
           </div> -->
           <div class="col-md-8" align="center">
@@ -25,7 +25,7 @@
   class="text-weight-regular text-grey-8"
   color="grey-9"
   v-model="formData.sim"
-  float-label="Select Network"
+  label="Select Network"
   placeholder="Select Network"
   :options="networkOptions"
 />

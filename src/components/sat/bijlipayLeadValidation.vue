@@ -23,8 +23,7 @@
           :rows="tableData"
           :columns="columns"
           row-key="name"
-          :filter="filter"
-          :pagination="paginationControl"
+          :filter="filter" v-model:pagination="paginationControl"
           :rows-per-page-options="[5,10,15,20]"
           :loading="toggleAjaxLoadFilter"
           @request="ajaxLoadAllLeadInfo"
@@ -33,13 +32,13 @@
           <q-td
             v-slot:body-cell-createdAt="props"
             :props="props"
-          >{{ props.row.date | moment("Do MMM Y") }}</q-td>
+          >{{ $moment(props.row.date).format("Do MMM Y") }}</q-td>
 
           <q-td
             v-slot:body-cell-leadNumber="props"
             :props="props"
             class="cursor-pointer"
-            @click.native="toggleLeadInformation(props.row)"
+            @click="toggleLeadInformation(props.row)"
           >
             <span
               class="label"
@@ -168,7 +167,7 @@
                 placeholder="Type.."
                 :debounce="600"
                 class="q-mr-lg q-py-sm"
-                float-label="Search .. "
+                label="Search .. "
               />
             </div>
             <!--END: table filter,search -->
@@ -325,8 +324,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_ALL_LEAD_VALIDATIONS_DATA({ pagination, filter })
-        .then(res => {
+      this.FETCH_ALL_LEAD_VALIDATIONS_DATA({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 

@@ -39,8 +39,7 @@ const FileDownload1 = {
         return await api
           .get("download-central-inventory-device-by-status/3" + "?from=" + request.from + "&to=" + request.to, {
             responseType: 'arraybuffer'
-          })
-          .then(response => {
+          }).then(response => {
             console.log("FIle name : -- : ", response)
             let blob = COMMON_FILE_DOWNLOAD(response);
             let link = document.createElement("a");
@@ -55,8 +54,7 @@ const FileDownload1 = {
         return await api
           .get("download-central-inventory-device-by-status/3", {
             responseType: 'arraybuffer'
-          })
-          .then(response => {
+          }).then(response => {
             console.log("FIle name : -- : ", response.headers["Content-Disposition"])
             let blob = COMMON_FILE_DOWNLOAD(response);
             let link = document.createElement("a");
@@ -226,8 +224,7 @@ const FileDownload1 = {
         return await api
           .get("aggregator-inventory/agg-download-central-inventory-device-by-status/3/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+ "?from=" + request.from + "&to=" + request.to, {
             responseType: 'arraybuffer'
-          })
-          .then(response => {
+          }).then(response => {
             console.log("FIle name : -- : ", response)
             let blob = COMMON_FILE_DOWNLOAD(response);
             let link = document.createElement("a");
@@ -242,8 +239,7 @@ const FileDownload1 = {
         return await api
           .get("aggregator-inventory/agg-download-central-inventory-device-by-status/3/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]), {
             responseType: 'arraybuffer'
-          })
-          .then(response => {
+          }).then(response => {
             console.log("FIle name : -- : ", response.headers["Content-Disposition"])
             let blob = COMMON_FILE_DOWNLOAD(response);
             let link = document.createElement("a");

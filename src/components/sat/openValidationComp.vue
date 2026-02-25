@@ -14,7 +14,7 @@
                     color="grey-9"
                     disable
                     v-model="formData.device"
-                    float-label="Selected device"
+                    label="Selected device"
                      @request="ajaxLoadShortLeadInfo"
                     
                     
@@ -134,8 +134,7 @@ export default {
             message: "Are you sure want to reject the lead?",
             ok: "Continue",
             cancel: "Cancel"
-          })
-          .then(() => {
+          }).onOk(() => {
             this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: "purple-9",
@@ -154,8 +153,7 @@ export default {
                  this.$router.push('/sat/lead/validation');
                 // this.$router.push('/sat/rejected/Lead/Details');
                 
-              })
-              .catch(error => {
+              }).onCancel(error => {
                 this.$q.loading.hide();
                  this.$emit("closeRejectLeadModel");
                 this.$q.notify({

@@ -51,8 +51,7 @@ const FileDownload1 = {
         return await api
           .get("download-depreciation-report" + "/" + request.from, {
             responseType: 'arraybuffer'
-          })
-          .then(response => {
+          }).then(response => {
             console.log("FIle name : -- : ", response)
             let blob = COMMON_FILE_DOWNLOAD(response);
             let link = document.createElement("a");

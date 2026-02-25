@@ -18,16 +18,16 @@
         <div class="col-md-2">
           <q-select :disabled="formData.device_type != ''"
             :class="[formData.device_type != '' ? 'no-pointer-events' : '']" v-model="formData.region"
-            float-label="Select Region" radio color="grey-9" :options="regionOptions" />
+            label="Select Region" radio color="grey-9" :options="regionOptions" />
 
         </div>
         <!-- <div class="col-md-2">
-          <q-select color="grey-9" :disable="formData.region == ''" v-model="aggregator" float-label="Select Aggregator" radio
-            :options="aggregatorOptions" @input="selectedAggregators" />
+          <q-select color="grey-9" :disable="formData.region == ''" v-model="aggregator" label="Select Aggregator" radio
+            :options="aggregatorOptions" @update:model-value="selectedAggregators" />
         </div> -->
         <div class="col-md-2">
           <q-select clearable :disable="formData.region == ''" @clear="fnClearingDeviceTypeSelection"
-            @input="fnSetDevicesByDeviceId" v-model="formData.device_type" float-label="Select Device Type" radio
+            @update:model-value="fnSetDevicesByDeviceId" v-model="formData.device_type" label="Select Device Type" radio
             color="grey-9" :options="deviceOptions" />
         </div>
         <div class="col-12 col-lg-4 group" align="right">
@@ -244,8 +244,7 @@ export default {
         this.PHONE_PE_DEVICE_VERIFICATION_ON_SCAN_USING_DEVICE_TYPE_ID_ALLOCATION({
           device: self.formData.device_type.id,
           barcode: barcode
-        })
-          .then(() => {
+        }).then(() => {
             console.log("Error-1");
             assumeArr.deviceSerialNumbers.push(barcode);
           })

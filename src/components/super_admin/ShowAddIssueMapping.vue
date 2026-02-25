@@ -12,7 +12,7 @@
           <div class="row gutter-sm q-py-sm items-center">
             <div class="col-md-12">
               <q-input v-model="formData.name" :error="$v.formData.name.$error"
-                class="text-weight-regular text-grey-8" color="grey-9" float-label="Enter Issue Mapping Name"
+                class="text-weight-regular text-grey-8" color="grey-9" label="Enter Issue Mapping Name"
                 placeholder="Enter Issue Mapping Name" />
             </div>
           </div>
@@ -22,7 +22,7 @@
             <p>CS Sub Issue*</p>
             <div class="col-md-12">
               <div class="row items-center" v-for="menu in csSubIssueType" :key="menu.id" :to="menu.to">
-                <input style="width: 18px; height: 18px" type="checkbox" :value="menu" v-model="selectedItem" @input="getSelectedDetails($event, menu)" />
+                <input style="width: 18px; height: 18px" type="checkbox" :value="menu" v-model="selectedItem" @update:model-value="getSelectedDetails($event, menu)" />
                 <label>{{ menu.name}}</label>
                 </div>
               </div>

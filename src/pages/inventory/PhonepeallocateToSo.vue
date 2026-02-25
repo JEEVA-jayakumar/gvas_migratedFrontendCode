@@ -31,16 +31,16 @@
               :disabled="formData.device_type != ''"
               :class="[formData.device_type != '' ? 'no-pointer-events' : '']"
               v-model="formData.region"
-              float-label="Select Region"
+              label="Select Region"
               radio
               color="grey-9"
               :options="regionOptions"
-              @input="regionBasedSoLoad"
+              @update:model-value="regionBasedSoLoad"
             />
           </div>
           <!-- <div class="col-md-2">
-          <q-select color="grey-9" :disable="formData.region == ''" v-model="aggregator" float-label="Select Aggregator" radio
-            :options="aggregatorOptions" @input="selectedAggregators" />
+          <q-select color="grey-9" :disable="formData.region == ''" v-model="aggregator" label="Select Aggregator" radio
+            :options="aggregatorOptions" @update:model-value="selectedAggregators" />
         </div> -->
           <div class="col-md-2">
             <q-select
@@ -48,7 +48,7 @@
               filter 
               clearable
               v-model="formData.so"
-              float-label="Select SO"
+              label="Select SO"
               radio
               color="grey-9"
               :options="regionBasedSo"
@@ -59,9 +59,9 @@
               clearable
               :disable="formData.region == ''"
               @clear="fnClearingDeviceTypeSelection"
-              @input="fnSetDevicesByDeviceId"
+              @update:model-value="fnSetDevicesByDeviceId"
               v-model="formData.device_type"
-              float-label="Select Device Type"
+              label="Select Device Type"
               radio
               color="grey-9"
               :options="deviceOptions"
@@ -365,8 +365,7 @@ import { email } from '@vuelidate/validators';
           this.PHONE_PE_DEVICE_VERIFICATION_ON_SCAN_USING_DEVICE_TYPE_ID_ALLOCATION({
             device: self.formData.device_type.id,
             barcode: barcode
-          })
-            .then(() => {
+          }).then(() => {
               console.log("Error-1");
               assumeArr.deviceSerialNumbers.push(barcode);
             })

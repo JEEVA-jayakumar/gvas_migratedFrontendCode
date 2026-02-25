@@ -18,7 +18,7 @@ export const REGIONAL_SUMMARY_LIST =({
   //   return api.get("sim/getSimStatusByRegion").then(response => {
     
   //     // START=> COMMIT with data received'
-  //     commit("SET_FETCH_ALL_SIM_STATUS_BY_REGION", response.body.data);
+  //     commit("SET_FETCH_ALL_SIM_STATUS_BY_REGION", response.data.data);
   //     // END=> COMMIT with data received'
   //   });
     

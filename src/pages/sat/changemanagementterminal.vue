@@ -8,8 +8,7 @@
         :rows="tableData"
         :columns="columns"
         row-key="name"
-        :filter="filter1"
-        :pagination="paginationControlchange"
+        :filter="filter1" v-model:pagination="paginationControlchange"
         :rows-per-page-options="[5,10,15]"
         :loading="toggleAjaxLoadFilter"
         @request="ajaxLoadAllCMS"
@@ -17,7 +16,7 @@
         <q-td
           v-slot:body-cell-updatedAt="props"
           :props="props"
-        >{{ props.row.leadInformation.updatedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.leadInformation.updatedAt).format("Do MMM Y") }}</q-td>
         <q-td v-slot:body-cell-Status="props" :props="props">
           <span
             class="label text-positive"
@@ -136,7 +135,7 @@
               placeholder="Type.."
               :debounce="600"
               class="q-mr-lg q-py-sm"
-              float-label="Search By MID/TID/Merchant Name "
+              label="Search By MID/TID/Merchant Name "
             />
           </div>
           <!--END: table filter,search -->
@@ -153,8 +152,7 @@
         :rows="tableData1"
         :columns="columns1"
         row-key="name"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         :rows-per-page-options="[5,10,15,20]"
         :loading="toggleAjaxLoadFilter1"
         @request="ajaxLoadAllLeadInfo"
@@ -183,7 +181,7 @@
               placeholder="Type.."
               :debounce="600"
               class="q-mr-lg q-py-sm"
-              float-label="Search By MID/TID/Merchant Name"
+              label="Search By MID/TID/Merchant Name"
             />
           </div>
           <!--END: table filter,search -->
@@ -575,8 +573,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.CHANGE_MANAGEMENT_LIST({ pagination, filter })
-        .then((res) => {
+      this.CHANGE_MANAGEMENT_LIST({ pagination, filter }).then((res) => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 
@@ -605,8 +602,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.CMS_LIST({ pagination, filter })
-        .then((res) => {
+      this.CMS_LIST({ pagination, filter }).then((res) => {
           // updating pagination to reflect in the UI
           this.paginationControlchange = pagination;
 
@@ -792,8 +788,7 @@ export default {
           message: "Are you sure want to Edit Lead?",
           ok: "Continue",
           cancel: "Cancel",
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -817,8 +812,7 @@ export default {
                 message: "Successfully Edited" + "-" + rowDetails,
                 icon: "thumb_up",
               });
-            })
-            .catch((error) => {
+            }).onCancel((error) => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",

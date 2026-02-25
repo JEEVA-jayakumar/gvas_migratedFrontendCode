@@ -18,7 +18,7 @@
                 @blur="$v.formData.deviceType.$touch"
                 :error="$v.formData.deviceType.$error"
                 v-model="formData.deviceType"
-                float-label="Select Device Type"
+                label="Select Device Type"
                 radio
                 :options="rawDevicesTypes"
               />

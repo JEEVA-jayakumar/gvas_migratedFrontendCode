@@ -21,7 +21,7 @@
                                 <q-td key="serviceReqTicketId">
                                     <q-checkbox checked-icon="fas fa-chevron-up" unchecked-icon="fas fa-chevron-down"
                                         color="grey-9" v-model="props.row.expand" class="q-mr-md"
-                                        @input="expandRowPlease(props.row)" />
+                                        @update:model-value="expandRowPlease(props.row)" />
                                     <span>{{ props.row.serviceReqTicketId }}</span>
                                 </q-td>
                                 <q-td key="tid" :props="props"> {{ props.row.tid }}</q-td>
@@ -29,9 +29,9 @@
                                     <span v-if="props.row.mid != null">{{ props.row.mid }}</span>
                                     <span v-else="props.row.mid == null">NA</span>
                                 </q-td>
-                                <q-td key="createdDate" :props="props"> {{ props.row.createdDate | moment("Do MMM Y") }}
+                                <q-td key="createdDate" :props="props"> {{ $moment(props.row.createdDate).format("Do MMM Y") }}
                                 </q-td>
-                                <q-td key="updatedDate" :props="props"> {{ props.row.updatedDate | moment("Do MMM Y") }}
+                                <q-td key="updatedDate" :props="props"> {{ $moment(props.row.updatedDate).format("Do MMM Y") }}
                                 </q-td>
                                 <q-td key="meName" :props="props"> {{ props.row.meName }}</q-td>
                                 <q-td key="bpRegion" :props="props"> {{ props.row.bpRegion.regionAreaName }} </q-td>
@@ -275,7 +275,7 @@
                         <template slot="top">
                             <div class="col-md-5">
                                 <q-input clearable color="grey-9" v-model=" filterSearch" placeholder="Type.."
-                                float-label="Search By ServiceReqTicketId, TID .." class="q-mr-lg q-py-sm" />
+                                label="Search By ServiceReqTicketId, TID .." class="q-mr-lg q-py-sm" />
                             </div>
                         </template>
                     </q-table>
@@ -737,8 +737,7 @@ export default {
                 spinnerColor: "purple-9",
                 message: "Fetching data ..",
             });
-            this.FETCH_CANCELLED_SERVICE_REQUEST_DATAS({ pagination, filter })
-                .then((res) => {
+            this.FETCH_CANCELLED_SERVICE_REQUEST_DATAS({ pagination, filter }).then((res) => {
                     // updating pagination to reflect in the UI
                     this. paginationControl = pagination;
 

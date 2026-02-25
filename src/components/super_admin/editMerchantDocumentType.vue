@@ -19,7 +19,7 @@
             :error="$v.formData.url.merchantType.$error"
             v-model="formData.url.merchantType"
             :options="activeMerchantType"
-            float-label="Select merchant type"
+            label="Select merchant type"
             placeholder="Merchant type"
           />
         </div>
@@ -30,7 +30,7 @@
             :error="$v.formData.params.documentType.$error"
             class="text-weight-regular text-grey-8"
             color="grey-9"
-            float-label="Merchant Document Type"
+            label="Merchant Document Type"
             placeholder="Merchant Document Type"
             @keyup.enter="submitMerchantDcoumentTypeData(formData)"
           />
@@ -43,7 +43,7 @@
             class="text-weight-regular text-grey-8"
             color="grey-9"
             type="number"
-            float-label="Mars Agreement Id"
+            label="Mars Agreement Id"
             placeholder="Mars Agreement Id"
             @keyup.enter="submitMerchantDcoumentTypeData(formData)"
           />
@@ -51,7 +51,7 @@
         <div>
           <p>Does it contain sub documents?</p>
           <q-radio
-            @input="getViewTypeValue"
+            @update:model-value="getViewTypeValue"
             v-model="formData.params.viewType"
             class="text-weight-regular text-grey-8"
             color="grey-9"
@@ -59,7 +59,7 @@
             :val="false"
           />
           <q-radio
-            @input="getViewTypeValue"
+            @update:model-value="getViewTypeValue"
             v-model="formData.params.viewType"
             class="text-weight-regular text-grey-8"
             color="grey-9"

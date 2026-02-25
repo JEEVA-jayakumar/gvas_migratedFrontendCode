@@ -23,10 +23,10 @@
                   @blur="$v.formdata.branchZone.$touch;"
                   :error="$v.formdata.branchZone.$error"
                   v-model.trim="formdata.branchZone"
-                  float-label="Zone*"
+                  label="Zone*"
                   :options="getAllZone"
                   @clear="fnClearZone"
-                  @input="fnFetchZone()"
+                  @update:model-value="fnFetchZone()"
                 />
               </div>
               <div class="col-md-6">
@@ -36,9 +36,9 @@
                   @blur="$v.formdata.iaDistrict.$touch;"
                   :error="$v.formdata.iaDistrict.$error"
                   v-model.trim="formdata.iaDistrict"
-                  float-label="IA_District*"
+                  label="IA_District*"
                   :options="getAllDistrict"
-                  @input="fnFetchBranchName()"
+                  @update:model-value="fnFetchBranchName()"
                 />
               </div>
               <div class="col-md-6">
@@ -47,10 +47,10 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.raDistrict"
-                  float-label="RA_District*"
+                  label="RA_District*"
                   :options="getAllDistrict"
                   @clear="fnClearZone"
-                  @input="fnFetchZone()"
+                  @update:model-value="fnFetchZone()"
                 />
               </div>
               <div class="col-md-6">
@@ -59,10 +59,10 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.od1District"
-                  float-label="OD1_District*"
+                  label="OD1_District*"
                   :options="getAllDistrict"
                   @clear="fnClearZone"
-                  @input="fnFetchZone()"
+                  @update:model-value="fnFetchZone()"
                 />
               </div>
               <div class="col-md-6">
@@ -71,7 +71,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.od2District"
-                  float-label="OD2_District*"
+                  label="OD2_District*"
                   :options="getAllDistrict"
                 />
               </div>
@@ -82,7 +82,7 @@
                   @blur="$v.formdata.installationBranchCode.$touch;"
                   :error="$v.formdata.installationBranchCode.$error"
                   v-model.trim="formdata.installationBranchCode"
-                  float-label="InstallationBranchName*"
+                  label="InstallationBranchName*"
                   :options="getAllBranchName"
                 />
               </div>
@@ -92,7 +92,7 @@
                   @blur="$v.formdata.lorState.$touch;"
                   :error="$v.formdata.lorState.$error"
                   v-model.trim="formdata.lorState"
-                  float-label="IOR_STATE(type min 3 characters)*"
+                  label="IOR_STATE(type min 3 characters)*"
                   placeholder="Start typing ..*"
                 >
                   <q-autocomplete
@@ -109,9 +109,9 @@
                   @blur="$v.formdata.pin.$touch;"
                   :error="$v.formdata.pin.$error"
                   v-model.trim="formdata.pin"
-                  float-label="Pincode"
+                  label="Pincode"
                   placeholder="Start typing ..*"
-                  @input="pincodeBasedDistrict"
+                  @update:model-value="pincodeBasedDistrict"
                 >
                   <q-autocomplete
                     separator
@@ -126,8 +126,8 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.state"
-                  float-label="State*"
-                  @input="pincodeandDistrictBasedCity"
+                  label="State*"
+                  @update:model-value="pincodeandDistrictBasedCity"
                   :options="getPincodeBasedDistrict"
                 />
               </div>
@@ -138,9 +138,9 @@
                   @blur="$v.formdata.city.$touch;"
                   :error="$v.formdata.city.$error"
                   v-model.trim="formdata.city"
-                  float-label="City*"
+                  label="City*"
                   :options="getPincodeDistrict"
-                  @input="citybasedlocation"
+                  @update:model-value="citybasedlocation"
                 />
               </div>
               <div class="col-md-6">
@@ -148,7 +148,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.iaLocation"
-                  float-label="IA_LOCATION*"
+                  label="IA_LOCATION*"
                   :options="getCityBasedLocation"
                 />
               </div>
@@ -157,7 +157,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.iaSalutation"
-                  float-label="IA_Salution*"
+                  label="IA_Salution*"
                   :options="iaSalutationOptions"
                 />
               </div>
@@ -166,7 +166,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.iaGender"
-                  float-label="IA_Gender*"
+                  label="IA_Gender*"
                   :options="iaGenderOptions"
                 />
               </div>
@@ -175,7 +175,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.od1Salutation"
-                  float-label="OD1_Salutation*"
+                  label="OD1_Salutation*"
                   :options="od1SalutationOptions"
                 />
               </div>
@@ -184,7 +184,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.od1Gender"
-                  float-label="OD1_Gender*"
+                  label="OD1_Gender*"
                   :options="od1GenderOptions"
                 />
               </div>
@@ -193,7 +193,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.od2Salutation"
-                  float-label="OD2_Salutation*"
+                  label="OD2_Salutation*"
                   :options="od2SalutationOptions"
                 />
               </div>
@@ -202,7 +202,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.od2Gender"
-                  float-label="OD2_Gender*"
+                  label="OD2_Gender*"
                   :options="od2GenderOptions"
                 />
               </div>
@@ -725,9 +725,7 @@ export default {
                 params: finalRequest,
                 leadStatus: this.propLeadDeatils.leadStatus,
                 refNumber: this.propLeadDeatils.merchantRefCode,
-              })
-
-              .then((response) => {
+              }).then((response) => {
                 let feed_paramaters;
                 if (response.status == 204) {
                   feed_paramaters = {
@@ -735,7 +733,7 @@ export default {
                     merchantRefCode: this.propLeadDeatils.merchantRefCode,
                   };
                 } else {
-                  feed_paramaters = response.body;
+                  feed_paramaters = response.data;
                 }
                 self.$q.loading.show({
                   delay: 0, // ms
@@ -764,8 +762,7 @@ export default {
                   .MARS_DATA_EXTERNAL_SUBMIT_RESPONSE({
                     request: feed_paramaters,
                     leadId: self.$route.params.id,
-                  })
-                  .then((response) => {
+                  }).then((response) => {
                     self.$q.notify({
                       color: "positive",
                       position: "bottom",

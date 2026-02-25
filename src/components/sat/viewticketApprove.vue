@@ -17,7 +17,7 @@
             <q-input
               disable
               class="no-margin"
-              float-label="TID"
+              label="TID"
               v-model.trim="formData.tid"
             />
           </div>
@@ -25,7 +25,7 @@
             <q-input
               disable
               class="no-margin"
-              float-label="TICKET ID"
+              label="TICKET ID"
               v-model.trim="formData.ticketid"
             />
           </div>

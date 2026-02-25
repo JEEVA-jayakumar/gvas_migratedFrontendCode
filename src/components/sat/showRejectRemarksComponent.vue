@@ -1,23 +1,20 @@
 <template>
   <div>
-    <q-input
-      minimal
-      modal
-      format="YYYY-MM-DD"
-      v-model="formData.leadVerificationStatus.expectedSubmitDate"
-      @blur="$v.formData.leadVerificationStatus.expectedSubmitDate.$touch"
-      :error="$v.formData.leadVerificationStatus.expectedSubmitDate.$error"
-      float-label="Expected date of Doc Submission"
-      type="date"
-      class="q-mt-lg"
-      color="red-6"
-    />
+    <q-input filled v-model="formData.leadVerificationStatus.expectedSubmitDate" label="Expected date of Doc Submission" color="grey-9">
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="formData.leadVerificationStatus.expectedSubmitDate" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
     <q-input
       v-model="formData.leadVerificationStatus.soReason"
       type="textarea"
       disabled
       readonly
-      float-label="SO's Remarks"
+      label="SO's Remarks"
       :max-height="100"
       class="q-mt-lg"
       rows="1"
@@ -29,7 +26,7 @@
       :error="$v.formData.leadVerificationStatus.reason.$error"
       type="textarea"
       class="q-mt-lg"
-      float-label="SAT Remarks"
+      label="SAT Remarks"
       :max-height="100"
       rows="1"
       color="red-6"

@@ -16,7 +16,7 @@
         <q-input
           color="grey-9"
           v-model="formData.device"
-          float-label="Device Type"
+          label="Device Type"
         />
       </div>
       <div class="col-md-12">
@@ -144,8 +144,7 @@ export default {
             message: "Are you sure want to reject the lead?",
             ok: "Continue",
             cancel: "Cancel"
-          })
-          .then(() => {
+          }).onOk(() => {
             this.$q.loading.show({
               delay: 0, // ms
               spinnerColor: "purple-9",
@@ -162,8 +161,7 @@ export default {
                   message: "Rejected lead #" + formData.leadId,
                   icon: "clear"
                 });
-              })
-              .catch(error => {
+              }).onCancel(error => {
                 this.$q.loading.hide();
                 this.$emit("closeRejectLeadDetailsModel");
                 this.$q.notify({

@@ -12,18 +12,18 @@
             <q-card-section>
               <q-list no-border>
                 <div class="col-md-12">
-                  <q-input type="textarea" float-label="Device Purchase Cost" placeholder="Device Purchase Cost"
+                  <q-input type="textarea" label="Device Purchase Cost" placeholder="Device Purchase Cost"
                     class="q-my-md" color="grey-9" align="left" @blur="$v.formData.devicePurchaseCost.$touch"
                     :error="$v.formData.devicePurchaseCost.$error" v-model="formData.devicePurchaseCost" />
                 </div>
                 <div class="col-md-12">
-                  <q-input type="textarea" float-label="Total Life of Device in Days"
+                  <q-input type="textarea" label="Total Life of Device in Days"
                     placeholder="Total Life of Device in Days" class="q-my-md" color="grey-9" align="left"
                     @blur="$v.formData.deviceLife.$touch" :error="$v.formData.deviceLife.$error"
                     v-model="formData.deviceLife" />
                 </div>
                 <div class="col-md-12">
-                  <q-input type="textarea" float-label="Invoice Number" placeholder="Invoice Number" class="q-my-md"
+                  <q-input type="textarea" label="Invoice Number" placeholder="Invoice Number" class="q-my-md"
                     color="grey-9" align="left" @blur="$v.formData.invoiceNumbers.$touch"
                     :error="$v.formData.invoiceNumbers.$error" v-model="formData.invoiceNumbers" />
                 </div>
@@ -159,7 +159,7 @@
         this.GET_INVOICE_NUMBER_FROM_INVENTORY(res)
           .then((response) => {
            // Safe extraction without optional chaining
-      const invoiceNumber = response.body && response.body.InvoiceNumber ? response.body.InvoiceNumber : "";
+      const invoiceNumber = response.data && response.data.InvoiceNumber ? response.data.InvoiceNumber : "";
 
 this.formData.invoiceNumbers = invoiceNumber;
           })

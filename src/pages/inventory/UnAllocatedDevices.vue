@@ -15,8 +15,7 @@
         :rows="tableData"
         :columns="columns"
         :filter="filter"
-        :rows-per-page-options="[5,10,15,20,25]"
-        :pagination="paginationControl"
+        :rows-per-page-options="[5,10,15,20,25]" v-model:pagination="paginationControl"
         :loading="toggleAjaxLoadFilter"
         @request="ajaxLoadAllLeadInfo"
       >
@@ -30,7 +29,7 @@
             outline
             no-caps
             v-model="filter"
-             float-label="Select  a Region"
+             label="Select  a Region"
             radio
             color="grey-9"
             :options="getUnAllocatedDevicesMenuOptions"
@@ -193,8 +192,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.UNALLOCATED_DEVICE({ pagination, filter })
-        .then(res => {
+      this.UNALLOCATED_DEVICE({ pagination, filter }).then(res => {
         
           this.paginationControl = pagination;
 

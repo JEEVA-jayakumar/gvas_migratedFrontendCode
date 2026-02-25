@@ -12,14 +12,14 @@
       </div>
       <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-md-4">
-          <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
-            :options="aggregatorOptions" @input="getaggregator" />
+          <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
+            :options="aggregatorOptions" @update:model-value="getaggregator" />
         </div>
       </div> -->
       <div >
         <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
           <div class="col-6 col-md-6">
-            <q-input v-model="podNumber" float-label="Enter POD number" color="grey-9" />
+            <q-input v-model="podNumber" label="Enter POD number" color="grey-9" />
           </div>
           <div class="col-6 col-md-6" align="right">
             <q-btn @click="fnAjaxFaultyInventoryData" color="light-blue" class="q-py-xs" label="Submit" />
@@ -28,8 +28,8 @@
         <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
           <!--START: table title -->
           <div class="col-6 col-md-6">
-            <q-select :disable="disableDeviceTypeSelection" @input="fnSetDevicesByDeviceId"
-              v-model="formData.device_type" float-label="Select Device Type" color="grey-9" :options="deviceOptions" />
+            <q-select :disable="disableDeviceTypeSelection" @update:model-value="fnSetDevicesByDeviceId"
+              v-model="formData.device_type" label="Select Device Type" color="grey-9" :options="deviceOptions" />
           </div>
           <div class="col-6 col-md-6" align="right">
             <q-btn :disabled="formData.device_type == '' || formData.region == ''" @click="openScannerComp"
@@ -48,7 +48,7 @@
         </div>
         <!--START: table lead validation -->
         <q-table row-key="name" :filter="filter" :rows="tableData" class="q-py-none" :columns="columns"
-          title="Lead Validation" table-class="customTableClass" :pagination="paginationControl">
+          title="Lead Validation" table-class="customTableClass" v-model:pagination="paginationControl">
           <!--START: table body modification -->
           <q-td v-slot:body-cell-deviceType="props" :props="props">{{ props.row.device.name }}</q-td>
           <q-td v-slot:body-cell-serialNumber="props" :props="props">{{ props.row.serialNumber }}</q-td>
@@ -62,7 +62,7 @@
             <!--START: table filter,search -->
             <div class="col-md-5">
               <q-input clearable color="grey-9" v-model="filter" placeholder="Type.."
-                float-label="Search by SO name, Merchant Name, Lead ID" class="q-mr-lg q-py-sm" />
+                label="Search by SO name, Merchant Name, Lead ID" class="q-mr-lg q-py-sm" />
             </div>
             <!--END: table filter,search -->
           </template>
@@ -283,8 +283,7 @@ export default {
         this.AGGREGATOR_DEVICE_VERIFICATION_ON_SCAN_USING_DEVICE_TYPE_ID({
           device: self.formData.device_type.id,
           barcode: barcode
-        })
-          .then(() => {
+        }).then(() => {
             assumeArr.deviceSerialNumbers.push(barcode);
             let findDeviceSerialNumber = _.find(this.tableData, function (oo) {
               return (
@@ -380,8 +379,7 @@ export default {
             "?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -408,8 +406,7 @@ export default {
                 message: "Devices has been updated successfully",
                 icon: "thumb_up"
               });
-            })
-            .catch(() => {
+            }).onCancel(() => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",

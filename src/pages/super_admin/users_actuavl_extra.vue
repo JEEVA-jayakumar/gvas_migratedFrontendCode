@@ -6,19 +6,18 @@
         <q-tab
           @select="ajaxLoadDataForAllUsersList"
           default
-          slot="title"
           label="Active Users"
           name="tab-1"
         />
         <q-tab
           @select="ajaxLoadDataForAllUsersList"
-          slot="title"
           label="De-Actived Users"
           name="tab-2"
         />
-
         <!-- Targets -->
-        <q-tab-panel class="no-padding" name="tab-1">
+</q-tabs>
+<q-tab-panels v-model="activeTab" animated>
+<q-tab-panel class="no-padding" name="tab-1">
           <q-table
             :rows="getAllUsers"
             :columns="columns"
@@ -67,7 +66,7 @@
                       color="grey-9"
                       v-model.trim="filterSearch"
                       placeholder="Type.."
-                      float-label="Search by SO name, Merchant Name, Lead ID"
+                      label="Search by SO name, Merchant Name, Lead ID"
                     />
                   </div>
                   <div class="col-md-3"></div>
@@ -78,9 +77,9 @@
                       separator
                       color="grey-9"
                       placeholder="Select"
-                      float-label="Filter By"
+                      label="Filter By"
                       @clear="ajaxLoadDataForAllUsersList"
-                      @input="ajaxLoadDataForRoleIdFilter()"
+                      @update:model-value="ajaxLoadDataForRoleIdFilter()"
                       :options="getAllRoles"
                     />
                   </div>
@@ -130,7 +129,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-        <q-tab-panel class="no-padding" name="tab-2">
+<q-tab-panel class="no-padding" name="tab-2">
           <q-table
             :rows="getAllUsers"
             :columns="columns"
@@ -166,7 +165,7 @@
                       color="grey-9"
                       v-model.trim="filterSearchDeactivated"
                       placeholder="Type.."
-                      float-label="Search by SO name, Merchant Name, Lead ID"
+                      label="Search by SO name, Merchant Name, Lead ID"
                     />
                   </div>
                   <div class="col-md-3"></div>
@@ -177,9 +176,9 @@
                       separator
                       color="grey-9"
                       placeholder="Select"
-                      float-label="Filter By"
+                      label="Filter By"
                       @clear="ajaxLoadDataForAllUsersList"
-                      @input="ajaxLoadDataForRoleIdFilter()"
+                      @update:model-value="ajaxLoadDataForRoleIdFilter()"
                       :options="getAllRoles"
                     />-->
                     <q-btn
@@ -217,7 +216,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
       <deleteUsersDetails
         v-if="showDeleteUserDetails"
         :propDeteledUsers="deteledUsers"
@@ -404,8 +403,7 @@ export default {
                 : "Are you sure want to delete users?",
             ok: "Continue",
             cancel: "Cancel"
-          })
-          .then(() => {
+          }).onOk(() => {
             this.$q.loading.show({
               delay: 100, // ms
               message: "Please Wait",
@@ -430,8 +428,7 @@ export default {
                     message: "Successfully Activated!",
                     icon: "thumb_up"
                   });
-                })
-                .catch(error => {
+                }).onCancel(error => {
                   this.$q.loading.hide();
                   this.$q.notify({
                     color: "negative",

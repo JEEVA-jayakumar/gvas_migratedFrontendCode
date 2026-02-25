@@ -21,7 +21,7 @@
               v-model="formData.id"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="leadId"
+              label="leadId"
               placeholder="leadId"
             />
           </div>
@@ -33,7 +33,7 @@
               :error="$v.formData.leadName.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="leadName"
+              label="leadName"
               placeholder="leadName"
             />
           </div>
@@ -45,7 +45,7 @@
               :error="$v.formData.leadNumber.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="leadNumber"
+              label="leadNumber"
               placeholder="leadNumber"
             />
           </div>
@@ -57,7 +57,7 @@
               :error="$v.formData.shortleadDate.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="shortleadDate"
+              label="shortleadDate"
               placeholder="shortleadDate"
             />
           </div>
@@ -69,7 +69,7 @@
               :error="$v.formData.contactNumber.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="contactNumber"
+              label="contactNumber"
               placeholder="contactNumber"
             />
           </div>

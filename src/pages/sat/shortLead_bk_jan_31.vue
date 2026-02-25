@@ -166,7 +166,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Debit <= 2000 (%)"
+                          label="Debit <= 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.debitLessthanAmount"
@@ -175,7 +175,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Debit > 2000 (%)"
+                          label="Debit > 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.debitGreaterthanAmount"
@@ -186,7 +186,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Std CC (%)"
+                          label="Std CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.stdCC"
@@ -195,7 +195,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Premium CC (%)"
+                          label="Premium CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.premiumCC"
@@ -206,7 +206,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Corp Pre CC (%)"
+                          label="Corp Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.corpCC"
@@ -215,7 +215,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Intl Pre CC (%)"
+                          label="Intl Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.intlCC"
@@ -226,7 +226,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Super Pre CC (%)"
+                          label="Super Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.superPremiumlCC"
@@ -266,14 +266,14 @@
                       >
                         <q-item-section
                           color="purple-9"
-                          inverted
+                          filled
                           :letter="item.createdBy.name.charAt(0)"
                         />
                         <q-item-section>
                           <q-item-label label>{{item.reason}}</q-item-label>
                           <q-item-label sublabel>{{item.createdBy.name}}</q-item-label>
                           <q-item-label sublabel>{{item.fieldName}}</q-item-label>
-                          <q-item-label stamp>{{item.updatedAt | moment("Do MMM Y")}}</q-item-label>
+                          <q-item-label stamp>{{ $moment(item.updatedAt).format("Do MMM Y") }}</q-item-label>
                         </q-item-section>
                       </q-item>
                       <q-separator/>
@@ -691,8 +691,7 @@ export default {
             message: "Are you sure want to proceed to data entry?",
             ok: "Continue",
             cancel: "Cancel"
-          })
-          .then(() => {
+          }).onOk(() => {
             this.$q.loading.show({
               delay: 0, // ms
               spinnerColor: "purple-9",
@@ -712,8 +711,7 @@ export default {
                     "/data/entry"
                 );
                 this.$q.loading.hide();
-              })
-              .catch(error => {
+              }).onCancel(error => {
                 if (error.status == 422) {
                   this.$q.notify({
                     color: "primary",

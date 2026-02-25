@@ -10,12 +10,12 @@
         <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
           <!--START: table title -->
           <!-- <div class="col-md-4">
-            <q-select color="grey-9" v-model="formData.aggregator" float-label="Select Aggregator" radio
-              :options="dropdDown.aggregatorOptions" @input="getaggregator" />
+            <q-select color="grey-9" v-model="formData.aggregator" label="Select Aggregator" radio
+              :options="dropdDown.aggregatorOptions" @update:model-value="getaggregator" />
           </div> -->
           <div class="col-md-2">
             <!-- <pre>{{tempTableData}}</pre>  ref="clickHeretoStartParent"  ref="clickHeretoStartChild"      -->
-            <q-select @input="fnDisableDeviceTypeSelection"  v-model="formData.device.id" float-label="Select Device Type"
+            <q-select @update:model-value="fnDisableDeviceTypeSelection"  v-model="formData.device.id" label="Select Device Type"
               radio color="grey-9" :options="deviceOptions" />
           </div>
           <!-- Final upload button toggle -->
@@ -29,7 +29,7 @@
         </div>
         <!--START: table Data -->
         <q-table :rows="tempTableData" :columns="columnData" table-class="customTableClass shadow-0"
-          :filter="filterSearch" :pagination="paginationControl" row-key="index" :loading="tableAjaxLoading"
+          :filter="filterSearch" v-model:pagination="paginationControl" row-key="index" :loading="tableAjaxLoading"
           color="light-blue">
           <q-td v-slot:body-cell-action="props" :props="props">
             <q-btn @click="removeScannedItems(props.row)" label="Remove" icon="close" color="red-6" size="sm" />
@@ -37,7 +37,7 @@
           <template slot="top">
             <!--START: table filter,search -->
             <div class="col-md-5">
-              <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." float-label="Search .."
+              <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search .."
                 class="q-mr-lg q-py-sm" />
             </div>
             <!--END: table filter,search -->
@@ -202,8 +202,7 @@ import { required } from '@vuelidate/validators';
           this.AGGREGATORS_VERIFY_DEVICE_BEFORE_ADDING_CENTRAL_INVENTORY({
             device: this.formData.device.id,
             barcode: barcode
-          })
-            .then(response => {
+          }).then(response => {
               this.tempTableData.push({
                 deviceSerialNumbers: barcode
               });

@@ -28,7 +28,7 @@
         <q-input
           readonly
           v-model="formData.scanQRNumber.scanQRNumber"
-          float-label="Scan QR Number"
+          label="Scan QR Number"
         />
         <div class="group">
           <q-btn

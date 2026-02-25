@@ -12,12 +12,12 @@
         <q-stepper color="purple-9" ref="stepper" contractable text alternative-labels>
           <q-step error-icon="warning" :error="error.tab.salesInformation" name="first" title="Sales" subtitle="Info">
             <!-- {{this.merchant.paymentDetails.amountCollected}} -->
-            <div class="row gutter-sm">
+            <div class="row q-col-gutter-sm">
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input color="grey-9" disable v-model.trim="leadSourceApp.sourceName" float-label="Lead Source*" />
+                <q-input color="grey-9" disable v-model.trim="leadSourceApp.sourceName" label="Lead Source*" />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input color="grey-9" disable v-model.trim="deviceTypeApp.deviceName" float-label="Device Type*" />
+                <q-input color="grey-9" disable v-model.trim="deviceTypeApp.deviceName" label="Device Type*" />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select :class="{
@@ -25,8 +25,8 @@
   }" :disabled="this.propLeadDeatils.leadStatus == 102 || this.propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'"
                   :error="$v.merchant.salesInformation.institutionCode.$error" placeholder="Choose from the below"
                   color="grey-9" v-model.trim="merchant.salesInformation.institutionCode"
-                  float-label="Institution Code*" :options="getinstitutionCode"
-                  @input="fetchAllDropdownValuesFromMARSapi" />
+                  label="Institution Code*" :options="getinstitutionCode"
+                  @update:model-value="fetchAllDropdownValuesFromMARSapi" />
                 <div class="text-negative" v-if="
                     error.field.merchant.salesInformation.institutionCode.alert
                   ">
@@ -47,91 +47,91 @@
               <div v-if="merchant.salesInformation.institutionCode == 104" class="row gutter-sm q-my-xs">
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.branchZone" float-label="ZONE*" :options="getAllZone"
-                    @clear="fnClearZone" @input="fnFetchZone()" />
+                    v-model.trim="merchant.additionalInfo.branchZone" label="ZONE*" :options="getAllZone"
+                    @clear="fnClearZone" @update:model-value="fnFetchZone()" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.iaDistrict" float-label="IA_District*"
-                    :options="getAllDistrict" @input="fnFetchBranchName()" />
+                    v-model.trim="merchant.additionalInfo.iaDistrict" label="IA_District*"
+                    :options="getAllDistrict" @update:model-value="fnFetchBranchName()" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select disable placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.raDistrict" float-label="RA_District*"
-                    :options="getAllDistrict" @clear="fnClearZone" @input="fnFetchZone()" />
+                    v-model.trim="merchant.additionalInfo.raDistrict" label="RA_District*"
+                    :options="getAllDistrict" @clear="fnClearZone" @update:model-value="fnFetchZone()" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select disable placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.od1District" float-label="OD1_District*"
-                    :options="getAllDistrict" @clear="fnClearZone" @input="fnFetchZone()" />
+                    v-model.trim="merchant.additionalInfo.od1District" label="OD1_District*"
+                    :options="getAllDistrict" @clear="fnClearZone" @update:model-value="fnFetchZone()" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select disable placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.od2District" float-label="OD2_District*"
+                    v-model.trim="merchant.additionalInfo.od2District" label="OD2_District*"
                     :options="getAllDistrict" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9" v-model.trim="
                       merchant.additionalInfo.installationBranchCode
-                    " float-label="InstallationBranchName*" :options="getAllBranchName" />
+                    " label="InstallationBranchName*" :options="getAllBranchName" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input color="grey-9" v-model.trim="merchant.additionalInfo.lorState"
-                    float-label="IOR_STATE(type min 3 characters)*" placeholder="Start typing ..*">
+                    label="IOR_STATE(type min 3 characters)*" placeholder="Start typing ..*">
                     <q-autocomplete separator @search="searchIorState" :debounce="10" :min-characters="3" />
                   </q-input>
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                  <q-input color="grey-9" v-model.trim="merchant.additionalInfo.pin" float-label="Pincode"
-                    placeholder="Start typing ..*" @input="pincodeBasedDistrict">
+                  <q-input color="grey-9" v-model.trim="merchant.additionalInfo.pin" label="Pincode"
+                    placeholder="Start typing ..*" @update:model-value="pincodeBasedDistrict">
                     <q-autocomplete separator @search="searchAxisBankPincode" :min-characters="3" />
                   </q-input>
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.state" float-label="State*"
-                    @input="pincodeandDistrictBasedCity" :options="getPincodeBasedDistrict" />
+                    v-model.trim="merchant.additionalInfo.state" label="State*"
+                    @update:model-value="pincodeandDistrictBasedCity" :options="getPincodeBasedDistrict" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.city" float-label="City*" :options="getPincodeDistrict"
-                    @input="citybasedlocation" />
+                    v-model.trim="merchant.additionalInfo.city" label="City*" :options="getPincodeDistrict"
+                    @update:model-value="citybasedlocation" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.iaLocation" float-label="IA_LOCATION*"
+                    v-model.trim="merchant.additionalInfo.iaLocation" label="IA_LOCATION*"
                     :options="getCityBasedLocation" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.iaSalutation" float-label="IA_Salution*"
+                    v-model.trim="merchant.additionalInfo.iaSalutation" label="IA_Salution*"
                     :options="iaSalutationOptions" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.iaGender" float-label="IA_Gender*"
+                    v-model.trim="merchant.additionalInfo.iaGender" label="IA_Gender*"
                     :options="iaGenderOptions" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.od1Salutation" float-label="OD1_Salutation*"
+                    v-model.trim="merchant.additionalInfo.od1Salutation" label="OD1_Salutation*"
                     :options="od1SalutationOptions" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.od1Gender" float-label="OD1_Gender*"
+                    v-model.trim="merchant.additionalInfo.od1Gender" label="OD1_Gender*"
                     :options="od1GenderOptions" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.od2Salutation" float-label="OD2_Salutation*"
+                    v-model.trim="merchant.additionalInfo.od2Salutation" label="OD2_Salutation*"
                     :options="od2SalutationOptions" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.od2Gender" float-label="OD2_Gender*"
+                    v-model.trim="merchant.additionalInfo.od2Gender" label="OD2_Gender*"
                     :options="od2GenderOptions" />
                 </div>
               </div>
@@ -140,7 +140,7 @@
                 <q-select @blur="$v.merchant.salesInformation.applicationType.$touch"
                   :error="$v.merchant.salesInformation.applicationType.$error" placeholder="Choose from the below*"
                   color="grey-9" v-model.trim="merchant.salesInformation.applicationType"
-                  float-label="Application Type*" :options="applicationTypeOptions" />
+                  label="Application Type*" :options="applicationTypeOptions" />
                 <div class="text-negative" v-if="
                     error.field.merchant.salesInformation.applicationType.alert
                   ">
@@ -161,7 +161,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input readonly @blur="$v.merchant.salesInformation.applicationNumber.$touch"
                   :error="$v.merchant.salesInformation.applicationNumber.$error" color="grey-9"
-                  v-model.trim="merchant.salesInformation.applicationNumber" float-label="Application Number*"
+                  v-model.trim="merchant.salesInformation.applicationNumber" label="Application Number*"
                   placeholder="Application Number*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.salesInformation.applicationNumber
@@ -185,7 +185,7 @@
                 <q-input @blur="$v.merchant.salesInformation.applicationDate.$touch"
                   :error="$v.merchant.salesInformation.applicationDate.$error" color="grey-9" format="DD/MM/YYYY"
                   format-model="number" modal v-model.trim="merchant.salesInformation.applicationDate"
-                  float-label="Application Date*" placeholder="Application Date*" />
+                  label="Application Date*" placeholder="Application Date*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.salesInformation.applicationDate.alert
                   ">
@@ -207,7 +207,7 @@
                 <q-input format="DD/MM/YYYY" format-model="number"
                   @blur="$v.merchant.salesInformation.aggreementDate.$touch"
                   :error="$v.merchant.salesInformation.aggreementDate.$error" color="grey-9" modal
-                  v-model.trim="merchant.salesInformation.aggreementDate" float-label="Agreement Date*"
+                  v-model.trim="merchant.salesInformation.aggreementDate" label="Agreement Date*"
                   placeholder="Agreement Date*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.salesInformation.aggreementDate.alert
@@ -229,7 +229,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select @blur="$v.merchant.salesInformation.merchantType.$touch"
                   :error="$v.merchant.salesInformation.merchantType.$error" placeholder="Choose from the below*"
-                  color="grey-9" v-model.trim="merchant.salesInformation.merchantType" float-label="Merchant Type*"
+                  color="grey-9" v-model.trim="merchant.salesInformation.merchantType" label="Merchant Type*"
                   :options="merchantTypeOptions" />
                 <div class="text-negative" v-if="
                     error.field.merchant.salesInformation.merchantType.alert
@@ -248,7 +248,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select @blur="$v.merchant.salesInformation.categoryType.$touch"
                   :error="$v.merchant.salesInformation.categoryType.$error" placeholder="Choose from the below*"
-                  color="grey-9" v-model.trim="merchant.salesInformation.categoryType" float-label="Category Type*"
+                  color="grey-9" v-model.trim="merchant.salesInformation.categoryType" label="Category Type*"
                   :options="categoryTypeOptions" />
                 <div class="text-negative" v-if="
                     error.field.merchant.salesInformation.categoryType.alert
@@ -267,7 +267,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select placeholder="Choose from the below*" color="grey-9"
                   @blur="$v.merchant.salesInformation.region.$touch" :error="$v.merchant.salesInformation.region.$error"
-                  v-model.trim="merchant.salesInformation.region" float-label="Region*" :options="regionOptions" />
+                  v-model.trim="merchant.salesInformation.region" label="Region*" :options="regionOptions" />
                 <div class="text-negative" v-if="error.field.merchant.salesInformation.region.alert">
                   <MarsErrorResponse :error="error.field.merchant.salesInformation.region" />
                 </div>
@@ -283,7 +283,7 @@
                 <q-select placeholder="Choose from the below*" color="grey-9" filter clearable
                   @blur="$v.merchant.salesInformation.salesPersonName.$touch"
                   :error="$v.merchant.salesInformation.salesPersonName.$error"
-                  v-model.trim="merchant.salesInformation.salesPersonName" float-label="Sales Person*"
+                  v-model.trim="merchant.salesInformation.salesPersonName" label="Sales Person*"
                   :options="salesPersonOptions" />
 
                 <div class="text-negative" v-if="
@@ -309,7 +309,7 @@
                 <q-select placeholder="Choose from the below*" color="grey-9"
                   @blur="$v.merchant.salesInformation.leadFrom.$touch"
                   :error="$v.merchant.salesInformation.leadFrom.$error"
-                  v-model.trim="merchant.salesInformation.leadFrom" float-label="Lead From*" :options="leadFromOptions"
+                  v-model.trim="merchant.salesInformation.leadFrom" label="Lead From*" :options="leadFromOptions"
                   :disabled="this.propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'" :class="{
     'readonly-select': propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'
   }" />
@@ -329,7 +329,7 @@
                 <p class="text-caption">Sharing Model</p>
                 <div v-for="(item, index) in viewBinding.sharingModelCode" :key="index">
                   <q-radio color="grey-9" v-model.trim="merchant.salesInformation.sharingModelCode" :val="item.value"
-                    :label="item.label" @input="sharemodebasedonSharingMode()" />
+                    :label="item.label" @update:model-value="sharemodebasedonSharingMode()" />
                 </div>
                 <div class="text-negative" v-if="
                     error.field.merchant.salesInformation.sharingModelCode.alert
@@ -346,7 +346,7 @@
                 <q-select @blur="$v.merchant.salesInformation.sharingPartnerCode.$touch" :error="
                     $v.merchant.salesInformation.sharingPartnerCode.$error
                   " placeholder="Choose from the below*" color="grey-9"
-                  v-model.trim="merchant.salesInformation.sharingPartnerCode" float-label="Sharing partner*"
+                  v-model.trim="merchant.salesInformation.sharingPartnerCode" label="Sharing partner*"
                   :options="sharingPartnerCode" />
                 <div class="text-negative" v-if="
                     error.field.merchant.salesInformation.sharingPartnerCode.alert
@@ -368,7 +368,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input @blur="$v.merchant.salesInformation.dailyFixedAmount.$touch"
                   :error="$v.merchant.salesInformation.dailyFixedAmount.$error" color="grey-9"
-                  v-model.trim="merchant.salesInformation.dailyFixedAmount" float-label="Daily fixed amount*"
+                  v-model.trim="merchant.salesInformation.dailyFixedAmount" label="Daily fixed amount*"
                   type="number" placeholder="Daily fixed amount*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.salesInformation.dailyFixedAmount.alert
@@ -414,7 +414,7 @@
                       .$error
                   " color="grey-9" v-model.trim="
                     merchant.salesInformation.loanDisbursementPercentage
-                  " float-label="Percentage*" type="number" placeholder="Percentage*" />
+                  " label="Percentage*" type="number" placeholder="Percentage*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.salesInformation
                       .loanDisbursementPercentage.alert
@@ -461,7 +461,7 @@
                     $v.merchant.salesInformation.loanDisbursementAmount.$error
                   " color="grey-9" v-model.trim="
                     merchant.salesInformation.loanDisbursementAmount
-                  " float-label="Loan disbursement value*" type="number" placeholder="Loan disbursement value*" />
+                  " label="Loan disbursement value*" type="number" placeholder="Loan disbursement value*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.salesInformation.loanDisbursementAmount
                       .alert
@@ -506,7 +506,7 @@
                   " :error="
                     $v.merchant.salesInformation.loanDisbursementDate.$error
                   " color="grey-9" modal v-model.trim="merchant.salesInformation.loanDisbursementDate"
-                  float-label="Disbursement Date*" placeholder="Disbursement Date*" />
+                  label="Disbursement Date*" placeholder="Disbursement Date*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.salesInformation.loanDisbursementDate
                       .alert
@@ -529,7 +529,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input @blur="$v.merchant.salesInformation.tenureMonth.$touch"
                   :error="$v.merchant.salesInformation.tenureMonth.$error" color="grey-9"
-                  v-model.trim="merchant.salesInformation.tenureMonth" float-label="Tenure (in months)*" type="number"
+                  v-model.trim="merchant.salesInformation.tenureMonth" label="Tenure (in months)*" type="number"
                   placeholder="Tenure (in months)*" />
                 <div class="text-negative" v-if="error.field.merchant.salesInformation.tenureMonth.alert">
                   <MarsErrorResponse :error="error.field.merchant.salesInformation.tenureMonth" />
@@ -546,7 +546,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input @blur="$v.merchant.salesInformation.tenureDay.$touch"
                   :error="$v.merchant.salesInformation.tenureDay.$error" color="grey-9"
-                  v-model.trim="merchant.salesInformation.tenureDay" float-label="Tenure (in days)*" type="number"
+                  v-model.trim="merchant.salesInformation.tenureDay" label="Tenure (in days)*" type="number"
                   placeholder="Tenure (in days)*" />
                 <div class="text-negative" v-if="error.field.merchant.salesInformation.tenureDay.alert">
                   <MarsErrorResponse :error="error.field.merchant.salesInformation.tenureDay" />
@@ -563,7 +563,7 @@
                 <q-input format="DD/MM/YYYY" format-model="number"
                   @blur="$v.merchant.salesInformation.tenureStartDate.$touch"
                   :error="$v.merchant.salesInformation.tenureStartDate.$error" color="grey-9" modal
-                  v-model.trim="merchant.salesInformation.tenureStartDate" float-label="Start Date*"
+                  v-model.trim="merchant.salesInformation.tenureStartDate" label="Start Date*"
                   placeholder="Tenure Start Date*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.salesInformation.tenureStartDate.alert
@@ -589,7 +589,7 @@
                 <q-select @blur="$v.merchant.salesInformation.sharingPartnerCode.$touch" :error="
                     $v.merchant.salesInformation.sharingPartnerCode.$error
                   " placeholder="Choose from the below*" color="grey-9"
-                  v-model.trim="merchant.salesInformation.sharingPartnerCode" float-label="Sharing partner*"
+                  v-model.trim="merchant.salesInformation.sharingPartnerCode" label="Sharing partner*"
                   :options="sharingPartnerCode" />
                 <div class="text-negative" v-if="
                     error.field.merchant.salesInformation.sharingPartnerCode
@@ -612,7 +612,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input @blur="$v.merchant.salesInformation.rentPercentage.$touch"
                   :error="$v.merchant.salesInformation.rentPercentage.$error" color="grey-9"
-                  v-model.trim="merchant.salesInformation.rentPercentage" float-label="Rent %*" type="number"
+                  v-model.trim="merchant.salesInformation.rentPercentage" label="Rent %*" type="number"
                   placeholder="Rent %*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.salesInformation.rentPercentage.alert
@@ -652,7 +652,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input @blur="$v.merchant.salesInformation.rentFixed.$touch"
                   :error="$v.merchant.salesInformation.rentFixed.$error" color="grey-9"
-                  v-model.trim="merchant.salesInformation.rentFixed" float-label="Rent fixed*" type="number"
+                  v-model.trim="merchant.salesInformation.rentFixed" label="Rent fixed*" type="number"
                   placeholder="Rent fixed*" />
                 <div class="text-negative" v-if="error.field.merchant.salesInformation.rentFixed.alert">
                   <MarsErrorResponse :error="error.field.merchant.salesInformation.rentFixed" />
@@ -692,11 +692,11 @@
             </q-stepper-navigation>
           </q-step>
           <q-step error-icon="warning" name="second" :error="error.tab.companyInformation" title="Details">
-            <div class="row gutter-sm">
+            <div class="row q-col-gutter-sm">
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input type="text" @blur="$v.merchant.companyInformation.legalName.$touch"
                   :error="$v.merchant.companyInformation.legalName.$error" color="grey-9"
-                  v-model.trim="merchant.companyInformation.legalName" float-label="Legal Name*"
+                  v-model.trim="merchant.companyInformation.legalName" label="Legal Name*"
                   placeholder="Legal Name*" />
                 <div class="text-negative" v-if="error.field.merchant.companyInformation.legalName.alert">
                   <MarsErrorResponse :error="error.field.merchant.companyInformation.legalName" />
@@ -742,7 +742,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input @blur="$v.merchant.companyInformation.dbaName.$touch"
                   :error="$v.merchant.companyInformation.dbaName.$error" color="grey-9"
-                  v-model.trim="merchant.companyInformation.dbaName" float-label="DBA Name*" placeholder="DBA Name*" />
+                  v-model.trim="merchant.companyInformation.dbaName" label="DBA Name*" placeholder="DBA Name*" />
                 <div class="text-negative" v-if="error.field.merchant.companyInformation.dbaName.alert">
                   <MarsErrorResponse :error="error.field.merchant.companyInformation.dbaName" />
                 </div>
@@ -791,7 +791,7 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input color="grey-9" float-label="Registered Address* (max 120 characters)"
+                <q-input color="grey-9" label="Registered Address* (max 120 characters)"
                   placeholder="Registered Address*" v-model.trim="merchant.companyInformation.registeredAddress" @blur="
                     $v.merchant.companyInformation.registeredAddress.$touch
                   " :error="
@@ -837,7 +837,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input color="grey-9" type="text" @blur="$v.merchant.companyInformation.cityzone.$touch"
                   :error="$v.merchant.companyInformation.cityzone.$error"
-                  v-model.trim="merchant.companyInformation.cityzone" float-label="Merchant City Zone"
+                  v-model.trim="merchant.companyInformation.cityzone" label="Merchant City Zone"
                   placeholder="Merchant City Zone" />
                 <div class="text-negative" v-if="error.field.merchant.companyInformation.cityzone.alert">
                   <MarsErrorResponse :error="error.field.merchant.companyInformation.cityzone" />
@@ -867,7 +867,7 @@
                       $v.merchant.companyInformation.registeredCityName
                     )
                   " color="grey-9" v-model.trim="merchant.companyInformation.registeredCityName"
-                  @input="fninputTyping($event, 1)" float-label="Registered city (type min 3 characters)*"
+                  @update:model-value="fninputTyping($event, 1)" label="Registered city (type min 3 characters)*"
                   placeholder="Start typing ..*">
                   <q-autocomplete separator @search="residentCitySearch" :debounce="10" :min-characters="3"
                     @selected="registeredCitySelected" />
@@ -896,7 +896,7 @@
                 <q-select @blur="$v.merchant.companyInformation.statezone.$touch"
                   :error="$v.merchant.companyInformation.statezone.$error" placeholder="Choose from the below*"
                   color="grey-9" v-model.trim="merchant.companyInformation.statezone"
-                  float-label=" Merchant State Zone*" :options="statezoneOptions" />
+                  label=" Merchant State Zone*" :options="statezoneOptions" />
 
                 <div class="text-negative" v-if="error.field.merchant.companyInformation.statezone.alert">
                   <MarsErrorResponse :error="error.field.merchant.companyInformation.statezone" />
@@ -918,7 +918,7 @@
                       $v.merchant.companyInformation.registeredStateName
                     )
                   " color="grey-9" v-model.trim="merchant.companyInformation.registeredStateName"
-                  @input="fninputTyping($event, 2)" float-label="Registered state (type min 3 characters)*"
+                  @update:model-value="fninputTyping($event, 2)" label="Registered state (type min 3 characters)*"
                   placeholder="Start typing ..*">
                   <q-autocomplete separator @search="residentStateSearch" :debounce="10" :min-characters="1"
                     @selected="registeredStateSelected" />
@@ -946,7 +946,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input @blur="$v.merchant.companyInformation.registeredPin.$touch"
                   :error="$v.merchant.companyInformation.registeredPin.$error" color="grey-9" type="number"
-                  v-model.trim="merchant.companyInformation.registeredPin" float-label="PIN*" placeholder="PIN*" />
+                  v-model.trim="merchant.companyInformation.registeredPin" label="PIN*" placeholder="PIN*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation.registeredPin.alert
                   ">
@@ -984,7 +984,7 @@
                 <q-select @blur="$v.merchant.companyInformation.constitutionName.$touch" :error="
                     $v.merchant.companyInformation.constitutionName.$error
                   " placeholder="Choose from the below*" color="grey-9"
-                  v-model.trim="merchant.companyInformation.constitutionName" float-label="Type of Business Entity*"
+                  v-model.trim="merchant.companyInformation.constitutionName" label="Type of Business Entity*"
                   :options="merchantOptions" />
 
                 <div class="text-negative" v-if="
@@ -1009,7 +1009,7 @@
                 <q-input format="DD/MM/YYYY" format-model="number" color="grey-9" modal
                   @blur="$v.merchant.companyInformation.establishYear.$touch"
                   :error="$v.merchant.companyInformation.establishYear.$error"
-                  v-model.trim="merchant.companyInformation.establishYear" float-label="Year of Establishment*"
+                  v-model.trim="merchant.companyInformation.establishYear" label="Year of Establishment*"
                   placeholder="Year of Establishment*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation.establishYear.alert
@@ -1031,7 +1031,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input color="grey-9" @blur="$v.merchant.companyInformation.registerNumber.$touch"
                   :error="$v.merchant.companyInformation.registerNumber.$error"
-                  v-model.trim="merchant.companyInformation.registerNumber" float-label="Establish Number*"
+                  v-model.trim="merchant.companyInformation.registerNumber" label="Establish Number*"
                   placeholder="Establish Number*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation.registerNumber.alert
@@ -1070,7 +1070,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input @blur="$v.merchant.companyInformation.tin.$touch"
                   :error="$v.merchant.companyInformation.tin.$error" color="grey-9"
-                  v-model.trim="merchant.companyInformation.tin" float-label="TIN" placeholder="TIN" />
+                  v-model.trim="merchant.companyInformation.tin" label="TIN" placeholder="TIN" />
                 <div class="text-negative" v-if="error.field.merchant.companyInformation.tin.alert">
                   <MarsErrorResponse :error="error.field.merchant.companyInformation.tin" />
                 </div>
@@ -1095,7 +1095,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input upper-case @blur="$v.merchant.companyInformation.pan.$touch"
                   :error="$v.merchant.companyInformation.pan.$error" color="grey-9"
-                  v-model.trim="merchant.companyInformation.pan" float-label="Company PAN*"
+                  v-model.trim="merchant.companyInformation.pan" label="Company PAN*"
                   placeholder="Company PAN*" />
                 <div class="text-negative" v-if="error.field.merchant.companyInformation.pan.alert">
                   <MarsErrorResponse :error="error.field.merchant.companyInformation.pan" />
@@ -1121,7 +1121,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input upper-case @blur="$v.merchant.companyInformation.tan.$touch"
                   :error="$v.merchant.companyInformation.tan.$error" color="grey-9"
-                  v-model.trim="merchant.companyInformation.tan" float-label="TAN" placeholder="TAN" />
+                  v-model.trim="merchant.companyInformation.tan" label="TAN" placeholder="TAN" />
                 <div class="text-negative" v-if="error.field.merchant.companyInformation.tan.alert">
                   <MarsErrorResponse :error="error.field.merchant.companyInformation.tan" />
                 </div>
@@ -1145,7 +1145,7 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input color="grey-9" v-model.trim="merchant.companyInformation.businessNature"
-                  float-label="Nature of Business" placeholder="Nature of Business" />
+                  label="Nature of Business" placeholder="Nature of Business" />
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation.businessNature.alert
                   ">
@@ -1156,7 +1156,7 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select placeholder="Choose from the below*" color="grey-9"
-                  v-model.trim="merchant.companyInformation.businessType" float-label="Type of Business"
+                  v-model.trim="merchant.companyInformation.businessType" label="Type of Business"
                   :options="businessTypeOptions" />
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation.businessType.alert
@@ -1173,7 +1173,7 @@
                       $v.merchant.companyInformation.mccname
                     )
                   " color="grey-9" v-model.trim="merchant.companyInformation.mccname"
-                  float-label="MCC (type min 3 characters)" placeholder="Start typing ..*">
+                  label="MCC (type min 3 characters)" placeholder="Start typing ..*">
                   <q-autocomplete separator @search="mccSearch" :debounce="10" :min-characters="3"
                     @selected="mccSelected" />
                 </q-input>
@@ -1196,7 +1196,7 @@
                   " :error="
                     $v.merchant.companyInformation.residentialAddress.$error
                   " color="grey-9" v-model.trim="merchant.companyInformation.residentialAddress"
-                  float-label="Residential Address* (max 120 characters)" placeholder="Residential Address*" />
+                  label="Residential Address* (max 120 characters)" placeholder="Residential Address*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation.residentialAddress
                       .alert
@@ -1209,7 +1209,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input @blur="$v.merchant.companyInformation.residentialPin.$touch"
                   :error="$v.merchant.companyInformation.residentialPin.$error" color="grey-9" type="number"
-                  v-model.trim="merchant.companyInformation.residentialPin" float-label="Pincode*"
+                  v-model.trim="merchant.companyInformation.residentialPin" label="Pincode*"
                   placeholder="Pincode*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation.residentialPin.alert
@@ -1228,7 +1228,7 @@
                       $v.merchant.companyInformation.residentCityName
                     )
                   " color="grey-9" v-model.trim="merchant.companyInformation.residentCityName"
-                  float-label="City (type min 3 characters)*" placeholder="Start typing ..*">
+                  label="City (type min 3 characters)*" placeholder="Start typing ..*">
                   <q-autocomplete separator @search="residentCitySearch" :debounce="10" :min-characters="3"
                     @selected="residentCitySelected" />
                 </q-input>
@@ -1262,7 +1262,7 @@
                       $v.merchant.companyInformation.residentStateName
                     )
                   " color="grey-9" v-model.trim="merchant.companyInformation.residentStateName"
-                  float-label="State (type min 3 characters)*" placeholder="Start typing ..*">
+                  label="State (type min 3 characters)*" placeholder="Start typing ..*">
                   <q-autocomplete separator @search="residentStateSearch" :debounce="10" :min-characters="1"
                     @selected="residentStateSelected" />
                 </q-input>
@@ -1290,7 +1290,7 @@
                 <q-input @blur="$v.merchant.companyInformation.contactName.$touch"
                   :error="$v.merchant.companyInformation.contactName.$error"
                   onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
-                  color="grey-9" v-model.trim="merchant.companyInformation.contactName" float-label="Contact Name*"
+                  color="grey-9" v-model.trim="merchant.companyInformation.contactName" label="Contact Name*"
                   placeholder="Contact Name*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation.contactName.alert
@@ -1326,7 +1326,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input @blur="$v.merchant.companyInformation.contactMobile.$touch"
                   :error="$v.merchant.companyInformation.contactMobile.$error" color="grey-9"
-                  v-model.trim="merchant.companyInformation.contactMobile" float-label="Contact mobile*"
+                  v-model.trim="merchant.companyInformation.contactMobile" label="Contact mobile*"
                   placeholder="Contact Mobile*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation.contactMobile.alert
@@ -1368,7 +1368,7 @@
                     $v.merchant.companyInformation.contactAlternateMobile.$error
                   " v-model.trim="
                     merchant.companyInformation.contactAlternateMobile
-                  " float-label="Contact Alt Mobile" placeholder="Contact Alt Mobile" />
+                  " label="Contact Alt Mobile" placeholder="Contact Alt Mobile" />
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation
                       .contactAlternateMobile.alert
@@ -1408,7 +1408,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input color="grey-9" type="tel" @blur="$v.merchant.companyInformation.contactPhone.$touch"
                   :error="$v.merchant.companyInformation.contactPhone.$error"
-                  v-model.trim="merchant.companyInformation.contactPhone" float-label="Contact Phone* (12 digits)"
+                  v-model.trim="merchant.companyInformation.contactPhone" label="Contact Phone* (12 digits)"
                   placeholder="Contact Phone* (12 digits)" />
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation.contactPhone.alert
@@ -1446,7 +1446,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input @blur="$v.merchant.companyInformation.contactEmail.$touch"
                   :error="$v.merchant.companyInformation.contactEmail.$error" color="grey-9" type="email"
-                  v-model.trim="merchant.companyInformation.contactEmail" float-label="Contact Email*"
+                  v-model.trim="merchant.companyInformation.contactEmail" label="Contact Email*"
                   placeholder="Contact Email*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation.contactEmail.alert
@@ -1508,7 +1508,7 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input color="grey-9" float-label="Statement Email" placeholder="Statement Email"
+                <q-input color="grey-9" label="Statement Email" placeholder="Statement Email"
                   @blur="$v.merchant.companyInformation.statementEmail.$touch"
                   :error="$v.merchant.companyInformation.statementEmail.$error"
                   v-model.trim="merchant.companyInformation.statementEmail" />
@@ -1567,7 +1567,7 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input :error="v.name.$anyError" @blur="v.name.$touch()" color="grey-9" v-model.trim="v.$model.name"
-                  float-label="Name*" placeholder="Name*" />
+                  label="Name*" placeholder="Name*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.partnerInformation[index].name.alert
                   ">
@@ -1583,16 +1583,16 @@
                 <q-input @blur="$v.merchant.salesInformation.applicationDate.$touch"
                   :error="$v.merchant.salesInformation.applicationDate.$error" color="grey-9" format="DD/MM/YYYY"
                   format-model="number" modal v-model.trim="merchant.salesInformation.applicationDate"
-                  float-label="Application Date*" placeholder="Application Date*" /> 
+                  label="Application Date*" placeholder="Application Date*" />
               </div> -->
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input :min="past" :max="future" format="DD/MM/YYYY" format-model="number" modal
                   :error="v.dob.$anyError" @blur="v.dob.$touch()" color="grey-9" v-model.trim="v.$model.dob"
-                  float-label="PAN DOB *" placeholder="PAN DOB *" />
+                  label="PAN DOB *" placeholder="PAN DOB *" />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input upper-case :error="v.pan.$anyError" @blur="v.pan.$touch()" color="grey-9"
-                  v-model.trim="v.$model.pan" float-label="Pan*" placeholder="Pan*" />
+                  v-model.trim="v.$model.pan" label="Pan*" placeholder="Pan*" />
                 <div class="textf-negative" v-if="
                     error.field.merchant.partnerInformation[index].pan.alert
                   ">
@@ -1611,7 +1611,7 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input :error="v.address.$anyError" @blur="v.address.$touch()" color="grey-9"
-                  v-model.trim="v.$model.address" float-label="Address* (max 120 characters)" placeholder="Address*" />
+                  v-model.trim="v.$model.address" label="Address* (max 120 characters)" placeholder="Address*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.partnerInformation[index].address.alert
                   ">
@@ -1625,7 +1625,7 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input :error="v.pin.$anyError" @blur="v.pin.$touch()" color="grey-9" type="number"
-                  v-model.trim="v.$model.pin" float-label="Pincode*" placeholder="Pincode*" />
+                  v-model.trim="v.$model.pin" label="Pincode*" placeholder="Pincode*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.partnerInformation[index].pin.alert
                   ">
@@ -1644,7 +1644,7 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input :error="autoCompleteError(v.cityRefLabel, v.cityRefCode)" color="grey-9"
-                  v-model.trim="v.$model.cityRefLabel" float-label="City (type min 3 characters)*"
+                  v-model.trim="v.$model.cityRefLabel" label="City (type min 3 characters)*"
                   placeholder="Start typing ..*">
                   <q-autocomplete separator @search="partnerCitySearch" :debounce="10" :min-characters="3"
                     @selected="(obj) => partnerCitySelected(obj, index)" />
@@ -1664,7 +1664,7 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input :error="autoCompleteError(v.stateRefLabel, v.stateRefCode)" @blur="v.stateRefLabel.$touch()"
-                  color="grey-9" v-model.trim="v.$model.stateRefLabel" float-label="State (type min 3 characters)*"
+                  color="grey-9" v-model.trim="v.$model.stateRefLabel" label="State (type min 3 characters)*"
                   placeholder="Start typing ..*">
                   <q-autocomplete separator @search="partnerStateSearch" :debounce="10" :min-characters="1"
                     @selected="(obj) => partnerStateSelected(obj, index)" />
@@ -1685,7 +1685,7 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input :error="v.contactMobile.$anyError" @blur="v.contactMobile.$touch()" color="grey-9" type="tel"
-                  v-model.trim="v.$model.contactMobile" float-label="Mobile*" placeholder="Mobile*" />
+                  v-model.trim="v.$model.contactMobile" label="Mobile*" placeholder="Mobile*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.partnerInformation[index].contactMobile
                       .alert
@@ -1705,7 +1705,7 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input :error="v.contactEmail.$anyError" @blur="v.contactEmail.$touch()" color="grey-9" type="email"
-                  v-model.trim="v.$model.contactEmail" float-label="Email*" placeholder="Email*" />
+                  v-model.trim="v.$model.contactEmail" label="Email*" placeholder="Email*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.partnerInformation[index].contactEmail
                       .alert
@@ -1733,14 +1733,14 @@
           </q-step>
           <q-step error-icon="warning" name="fourth" :error="error.tab.businessInformation" title="Business"
             subtitle="Info">
-            <div class="row gutter-sm">
+            <div class="row q-col-gutter-sm">
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select color="grey-9" @blur="
                     $v.merchant.businessInformation.weekdayStartHour.$touch
                   " :error="
                     $v.merchant.businessInformation.weekdayStartHour.$error
                   " v-model.trim="merchant.businessInformation.weekdayStartHour"
-                  float-label="Weekday start hour (00.00)*" :options="BusinessHourFromOptions"
+                  label="Weekday start hour (00.00)*" :options="BusinessHourFromOptions"
                   placeholder="Weekday start hour" />
                 <div class="text-negative" v-if="
                     error.field.merchant.businessInformation.weekdayStartHour
@@ -1754,7 +1754,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select color="grey-9" @blur="$v.merchant.businessInformation.weekdayEndHour.$touch"
                   :error="$v.merchant.businessInformation.weekdayEndHour.$error"
-                  v-model.trim="merchant.businessInformation.weekdayEndHour" float-label="Weekday end hour (00.00)*"
+                  v-model.trim="merchant.businessInformation.weekdayEndHour" label="Weekday end hour (00.00)*"
                   :options="BusinessHourToOptions" placeholder="Weekday end hour" />
                 <div class="text-negative" v-if="
                     error.field.merchant.businessInformation.weekdayEndHour
@@ -1771,7 +1771,7 @@
                   " :error="
                     $v.merchant.businessInformation.weekendStartHour.$error
                   " v-model.trim="merchant.businessInformation.weekendStartHour"
-                  float-label="Weekend start hour (00.00)*" :options="BusinessHourFromOptions"
+                  label="Weekend start hour (00.00)*" :options="BusinessHourFromOptions"
                   placeholder="Weekend start hour" />
                 <div class="text-negative" v-if="
                     error.field.merchant.businessInformation.weekendStartHour
@@ -1792,7 +1792,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select color="grey-9" @blur="$v.merchant.businessInformation.weekendEndHour.$touch"
                   :error="$v.merchant.businessInformation.weekendEndHour.$error"
-                  v-model.trim="merchant.businessInformation.weekendEndHour" float-label="Weekend end hour (00.00)*"
+                  v-model.trim="merchant.businessInformation.weekendEndHour" label="Weekend end hour (00.00)*"
                   :options="BusinessHourToOptions" placeholder="Weekend end hour" />
                 <div class="text-negative" v-if="
                     error.field.merchant.businessInformation.weekendEndHour
@@ -1811,7 +1811,7 @@
                 </div>
               </div>
               <!--<div class="col-md-6 col-sm-12 col-xs-12">
-                  <q-input color="grey-9" type="number" v-model.trim="merchant.businessInformation.weekdayStartHour" float-label="Business Income" placeholder="Business Income" />
+                  <q-input color="grey-9" type="number" v-model.trim="merchant.businessInformation.weekdayStartHour" label="Business Income" placeholder="Business Income" />
               </div>-->
 
               <div class="col-md-6 col-sm-12 col-xs-12 col-xs-12">
@@ -1819,7 +1819,7 @@
                     $v.merchant.businessInformation.lastTurnoverYear.$touch
                   " :error="
                     $v.merchant.businessInformation.lastTurnoverYear.$error
-                  " v-model.trim="merchant.businessInformation.lastTurnoverYear" float-label="Last turnover year"
+                  " v-model.trim="merchant.businessInformation.lastTurnoverYear" label="Last turnover year"
                   placeholder="Last turnover year" />
                 <div class="text-negative" v-if="
                     error.field.merchant.businessInformation.lastTurnoverYear
@@ -1845,7 +1845,7 @@
                     $v.merchant.businessInformation.maximumMonthlyUsage.$error
                   " v-model.trim="
                     merchant.businessInformation.maximumMonthlyUsage
-                  " float-label="Maximum Monthly Usage*" placeholder="Maximum Monthly Usage*" />
+                  " label="Maximum Monthly Usage*" placeholder="Maximum Monthly Usage*" />
 
                 <div class="text-negative" v-if="
                     error.field.merchant.businessInformation.maximumMonthlyUsage
@@ -1863,7 +1863,7 @@
                   " :error="
                     $v.merchant.businessInformation.merchantTypeCode.$error
                   " placeholder="Choose from the below*" color="grey-9"
-                  v-model.trim="merchant.businessInformation.merchantTypeCode" float-label="merchant Category*"
+                  v-model.trim="merchant.businessInformation.merchantTypeCode" label="merchant Category*"
                   :options="merchantTypeCodeOptions" />
                 <div class="text-negative" v-if="
                     error.field.merchant.businessInformation.merchantTypeCode
@@ -1889,7 +1889,7 @@
                   " :error="
                     $v.merchant.businessInformation.lastTurnoverAmount.$error
                   " v-model.trim="merchant.businessInformation.lastTurnoverAmount"
-                  float-label="Turnover during last year" placeholder="Turnover during last year" />
+                  label="Turnover during last year" placeholder="Turnover during last year" />
                 <div class="text-negative" v-if="
                     error.field.merchant.businessInformation.lastTurnoverAmount
                       .alert
@@ -1927,7 +1927,7 @@
                     $v.merchant.businessInformation.expectedCardBusiness.$error
                   " v-model.trim="
                     merchant.businessInformation.expectedCardBusiness
-                  " float-label="Expected Card Business*" placeholder="Expected Card Business*" />
+                  " label="Expected Card Business*" placeholder="Expected Card Business*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.businessInformation
                       .expectedCardBusiness.alert
@@ -1963,7 +1963,7 @@
                     $v.merchant.businessInformation.averageBillAmount.$touch
                   " :error="
                     $v.merchant.businessInformation.averageBillAmount.$error
-                  " v-model.trim="merchant.businessInformation.averageBillAmount" float-label="Average Bill Amount"
+                  " v-model.trim="merchant.businessInformation.averageBillAmount" label="Average Bill Amount"
                   placeholder="Average Bill Amount" />
                 <div class="text-negative" v-if="
                     error.field.merchant.businessInformation.averageBillAmount
@@ -1998,7 +1998,7 @@
                 <q-input upper-case color="grey-9" @blur="$v.merchant.businessInformation.gstId.$touch"
                   :error="$v.merchant.businessInformation.gstId.$error"
                   v-model.trim="merchant.businessInformation.gstId" @change="marsRequiredFormattingofGST"
-                  float-label="GST ID" placeholder="GST ID" />
+                  label="GST ID" placeholder="GST ID" />
                 <div class="text-negative" v-if="error.field.merchant.businessInformation.gstId.alert">
                   <MarsErrorResponse :error="error.field.merchant.businessInformation.gstId" />
                 </div>
@@ -2026,14 +2026,14 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select placeholder="Choose from the below*" color="grey-9"
-                  v-model.trim="merchant.businessInformation.currentPosName" float-label="Already having a mPOS/POS*"
+                  v-model.trim="merchant.businessInformation.currentPosName" label="Already having a mPOS/POS*"
                   :options="currentPosOptions" />
               </div>
 
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input color="grey-9" @blur="$v.merchant.businessInformation.debitCardMdr.$touch"
                   :error="$v.merchant.businessInformation.debitCardMdr.$error"
-                  v-model.trim="merchant.businessInformation.debitCardMdr" float-label="Debit Card MDR"
+                  v-model.trim="merchant.businessInformation.debitCardMdr" label="Debit Card MDR"
                   placeholder="Debit Card MDR" />
                 <div class="text-negative" v-if="
                     error.field.merchant.businessInformation.debitCardMdr.alert
@@ -2065,7 +2065,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input color="grey-9" @blur="$v.merchant.businessInformation.creditCardMdr.$touch"
                   :error="$v.merchant.businessInformation.creditCardMdr.$error"
-                  v-model.trim="merchant.businessInformation.creditCardMdr" float-label="Credit Card MDR"
+                  v-model.trim="merchant.businessInformation.creditCardMdr" label="Credit Card MDR"
                   placeholder="Credit Card MDR" />
                 <div class="text-negative" v-if="
                     error.field.merchant.businessInformation.creditCardMdr.alert
@@ -2098,7 +2098,7 @@
                 <q-input format="DD/MM/YYYY" format-model="number"
                   @blur="$v.merchant.businessInformation.memberSince.$touch"
                   :error="$v.merchant.businessInformation.memberSince.$error" color="grey-9" modal
-                  v-model.trim="merchant.businessInformation.memberSince" float-label="Member since*"
+                  v-model.trim="merchant.businessInformation.memberSince" label="Member since*"
                   placeholder="Member since*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.businessInformation.memberSince.alert
@@ -2120,7 +2120,7 @@
           </q-step>
           <q-step error-icon="warning" name="fifth" :error="error.tab.paymentDetails" title="Payment"
             subtitle="Details">
-            <div class="row gutter-sm">
+            <div class="row q-col-gutter-sm">
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <p class="text-caption">Device Owned By</p>
                 <div class="group">
@@ -2140,8 +2140,8 @@
                 <q-select @blur="VasSelected" placeholder="Choose from the below" color="grey-9"
                   :error="$v.merchant.paymentDetails.terminalModeCode.$error"
                   v-model="merchant.paymentDetails.terminalModeCode" :options="terminalModelSet"
-                  float-label="Terminal Model*" />
-                <!-- @input="mccbasedSelect" -->
+                  label="Terminal Model*" />
+                <!-- @update:model-value="mccbasedSelect" -->
                 <div class="text-negative" v-if="
                     error.field.merchant.paymentDetails.terminalModeCode.alert
                   ">
@@ -2162,7 +2162,7 @@
                 " class="col-md-6 col-sm-12 col-xs-12">
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.paymentDetails.cardAcceptance" float-label="Card Acceptance"
+                    v-model.trim="merchant.paymentDetails.cardAcceptance" label="Card Acceptance"
                     :options="cardAcceptanceOptions" />
                 </div>
               </div>
@@ -2170,9 +2170,9 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select @blur="$v.merchant.paymentDetails.terminalType.$touch"
                   :error="$v.merchant.paymentDetails.terminalType.$error" placeholder="Choose from the below*"
-                  color="grey-9" v-model.trim="merchant.paymentDetails.terminalType" float-label="Terminal Type*"
+                  color="grey-9" v-model.trim="merchant.paymentDetails.terminalType" label="Terminal Type*"
                   :options="terminalTypeOptions" />
-                <!-- @input="terminalBased" -->
+                <!-- @update:model-value="terminalBased" -->
                 <div class="text-negative" v-if="error.field.merchant.paymentDetails.terminalType.alert">
                   <MarsErrorResponse :error="error.field.merchant.paymentDetails.terminalType" />
                 </div>
@@ -2188,32 +2188,32 @@
               <div v-if="merchant.paymentDetails.terminalType == 'MPOS'" class="row gutter-sm q-my-xs">
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.state" float-label="STATE*" :options="getMposState"
-                    @input="fnMposStatebasedCity()" />
+                    v-model.trim="merchant.additionalInfo.state" label="STATE*" :options="getMposState"
+                    @update:model-value="fnMposStatebasedCity()" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.city" float-label="CITY*" :options="getMposCity" />
+                    v-model.trim="merchant.additionalInfo.city" label="CITY*" :options="getMposCity" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.fillingType" float-label="FillingTypes*"
+                    v-model.trim="merchant.additionalInfo.fillingType" label="FillingTypes*"
                     :options="getAllFillingTypes" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.category" float-label="Category*" :options="getMposCategory"
-                    @input="categoryBasedSubCategory" />
+                    v-model.trim="merchant.additionalInfo.category" label="Category*" :options="getMposCategory"
+                    @update:model-value="categoryBasedSubCategory" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9"
-                    v-model.trim="merchant.additionalInfo.subCategory" float-label="SubCategory*"
+                    v-model.trim="merchant.additionalInfo.subCategory" label="SubCategory*"
                     :options="getMposSubCategory" />
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input format="DD/MM/YYYY" format-model="number" color="grey-9" modal
-                    v-model.trim="merchant.additionalInfo.ownerDOB" float-label="Date Of Birth*"
+                    v-model.trim="merchant.additionalInfo.ownerDOB" label="Date Of Birth*"
                     placeholder="Date Of Birth*" />
                 </div>
 
@@ -2230,13 +2230,13 @@
                         <div class="col">
                           <q-input color="grey-9" type="number" v-model.trim="
                               merchant.customIncentiveRates[0].mechantFixed
-                            " placeholder="Merchant - A" @input="populateCustom" />
+                            " placeholder="Merchant - A" @update:model-value="populateCustom" />
                         </div>
 
                         <div class="col">
                           <q-input color="grey-9" type="number" v-model.trim="
                               merchant.customIncentiveRates[0].sharingFixed
-                            " placeholder="Distributor - B" @input="populateCustom" />
+                            " placeholder="Distributor - B" @update:model-value="populateCustom" />
                         </div>
                       </div>
                     </div>
@@ -2254,12 +2254,12 @@
                         <div class="col">
                           <q-input color="grey-9" type="number" v-model.trim="
                               merchant.customIncentiveRates[1].mechantFixed
-                            " placeholder="Merchant - A" @input="populateCustom1" />
+                            " placeholder="Merchant - A" @update:model-value="populateCustom1" />
                         </div>
                         <div class="col">
                           <q-input color="grey-9" type="number" v-model.trim="
                               merchant.customIncentiveRates[1].sharingFixed
-                            " placeholder="Distributor - B" @input="populateCustom1" />
+                            " placeholder="Distributor - B" @update:model-value="populateCustom1" />
                         </div>
                       </div>
                     </div>
@@ -2277,12 +2277,12 @@
                         <div class="col">
                           <q-input color="grey-9" type="number" v-model.trim="
                               merchant.customIncentiveRates[2].mechantFixed
-                            " placeholder="Merchant - A" @input="populateCustom2" />
+                            " placeholder="Merchant - A" @update:model-value="populateCustom2" />
                         </div>
                         <div class="col">
                           <q-input color="grey-9" type="number" v-model.trim="
                               merchant.customIncentiveRates[2].sharingFixed
-                            " placeholder="Distributor - B" @input="populateCustom2" />
+                            " placeholder="Distributor - B" @update:model-value="populateCustom2" />
                         </div>
                       </div>
                     </div>
@@ -2300,12 +2300,12 @@
                         <div class="col">
                           <q-input color="grey-9" type="number" v-model.trim="
                               merchant.customIncentiveRates[3].mechantFixed
-                            " placeholder="Merchant - A" @input="populateCustom3" />
+                            " placeholder="Merchant - A" @update:model-value="populateCustom3" />
                         </div>
                         <div class="col">
                           <q-input color="grey-9" type="number" v-model.trim="
                               merchant.customIncentiveRates[3].sharingFixed
-                            " placeholder="Distributor - B" @input="populateCustom3" />
+                            " placeholder="Distributor - B" @update:model-value="populateCustom3" />
                         </div>
                       </div>
                     </div>
@@ -2323,13 +2323,13 @@
                         <div class="col">
                           <q-input color="grey-9" type="number" v-model.trim="
                               merchant.customIncentiveRates[4].mechantFixed
-                            " placeholder="Merchant - A" @input="populateCustom4" />
+                            " placeholder="Merchant - A" @update:model-value="populateCustom4" />
                         </div>
 
                         <div class="col">
                           <q-input color="grey-9" type="number" v-model.trim="
                               merchant.customIncentiveRates[4].sharingFixed
-                            " placeholder="Distributor - B" @input="populateCustom4" />
+                            " placeholder="Distributor - B" @update:model-value="populateCustom4" />
                         </div>
                       </div>
                     </div>
@@ -2341,7 +2341,7 @@
                 <q-input color="grey-9" type="number" disable
                   @blur="$v.merchant.paymentDetails.numberOfTerminals.$touch"
                   :error="$v.merchant.paymentDetails.numberOfTerminals.$error"
-                  v-model.trim="merchant.paymentDetails.numberOfTerminals" float-label="No of Terminals*"
+                  v-model.trim="merchant.paymentDetails.numberOfTerminals" label="No of Terminals*"
                   placeholder="No of Terminals*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.paymentDetails.numberOfTerminals.alert
@@ -2417,12 +2417,12 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input color="grey-9" v-model.trim="merchant.paymentDetails.tipPercentage"
-                  float-label="Tip Percentage" placeholder="Tip Percentage" />
+                  label="Tip Percentage" placeholder="Tip Percentage" />
               </div>
               <div class="col-md-6 col-sm-12">
                 <q-input color="grey-9" type="number" @blur="$v.merchant.paymentDetails.installationFee.$touch"
                   :error="$v.merchant.paymentDetails.installationFee.$error"
-                  v-model.trim="merchant.paymentDetails.installationFee" float-label="Installation Fee*"
+                  v-model.trim="merchant.paymentDetails.installationFee" label="Installation Fee*"
                   placeholder="Installation Fee*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.paymentDetails.installationFee.alert
@@ -2452,7 +2452,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select filter clearable placeholder="Choose from the below*" color="grey-9"
                   v-model.trim="merchant.paymentDetails.rentalPlanCode"
-                  :error="$v.merchant.paymentDetails.rentalPlanCode.$error" float-label="Rental Plan*"
+                  :error="$v.merchant.paymentDetails.rentalPlanCode.$error" label="Rental Plan*"
                   :options="rentalPlanSet" />
                 <div class="text-negative" v-if="
                     error.field.merchant.paymentDetails.rentalPlanCode.alert
@@ -2468,26 +2468,26 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input readOnly color="grey-9" v-model.trim="merchant.paymentDetails.recurringFees"
-                  float-label="Recurring Fees*" />
+                  label="Recurring Fees*" />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select placeholder="Choose from the below*" color="grey-9"
-                  v-model.trim="merchant.paymentDetails.rentalMode" float-label="Rental Mode*"
-                  :options="rentalModeOptions" @input="handleInputrentalMode" />
+                  v-model.trim="merchant.paymentDetails.rentalMode" label="Rental Mode*"
+                  :options="rentalModeOptions" @update:model-value="handleInputrentalMode" />
                 <div class="text-negative" v-if="error.field.merchant.paymentDetails.rentalMode.alert">
                   <MarsErrorResponse :error="error.field.merchant.paymentDetails.rentalMode" />
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12" v-if="merchant.paymentDetails.rentalMode == 'IB'">
                 <q-input readOnly color="grey-9" v-model.trim="bankFee" type="number"
-                  float-label="Bank rental (Without GST)*" />
+                  label="Bank rental (Without GST)*" />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12" v-if="merchant.paymentDetails.rentalMode == 'SB'">
-                <q-input readOnly color="grey-9" v-model.trim="bankFee" float-label="Rental Amount (Without GST)*" />
+                <q-input readOnly color="grey-9" v-model.trim="bankFee" label="Rental Amount (Without GST)*" />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12" v-if="merchant.paymentDetails.rentalMode == 'SB'">
-                <q-input color="grey-9" v-model.trim="subventionBankFeeData" float-label="Bank rental (Without GST)*"
-                  type="text" @input="handleInput" />
+                <q-input color="grey-9" v-model.trim="subventionBankFeeData" label="Bank rental (Without GST)*"
+                  type="text" @update:model-value="handleInput" />
 
                 <div class="text-negative" v-if="
                     subventionBankFeeData > propLeadDeatils.recurringFees / 1.18
@@ -2511,7 +2511,7 @@
                   <q-radio @blur="$v.merchant.paymentDetails.rentalType.$touch"
                     :error="$v.merchant.paymentDetails.rentalType.$error" v-for="(item, index) in rentalTypeOptions"
                     :key="index" color="grey-9" v-model="merchant.paymentDetails.rentalType" :val="item.value"
-                    :label="item.label" @input="selectCurrentType()" />
+                    :label="item.label" @update:model-value="selectCurrentType()" />
                   <div class="text-negative" v-if="error.field.merchant.paymentDetails.rentalType.alert">
                     <MarsErrorResponse :error="error.field.merchant.paymentDetails.rentalType" />
                   </div>
@@ -2520,7 +2520,7 @@
               <div v-if="merchant.paymentDetails.rentalType == 'E'" class="col-md-6 col-sm-12 col-xs-12">
                 <q-input @blur="$v.merchant.paymentDetails.totalEmiAmount.$touch"
                   :error="$v.merchant.paymentDetails.totalEmiAmount.$error" color="grey-9" type="number"
-                  v-model.trim="merchant.paymentDetails.totalEmiAmount" float-label="Total Emi Amount*"
+                  v-model.trim="merchant.paymentDetails.totalEmiAmount" label="Total Emi Amount*"
                   placeholder="Total Emi Amount*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.paymentDetails.totalEmiAmount.alert
@@ -2531,7 +2531,7 @@
               <div v-if="merchant.paymentDetails.rentalType == 'E'" class="col-md-6 col-sm-12 col-xs-12">
                 <q-input @blur="$v.merchant.paymentDetails.emiTenure.$touch"
                   :error="$v.merchant.paymentDetails.emiTenure.$error" color="grey-9" type="number"
-                  v-model.trim="merchant.paymentDetails.emiTenure" float-label="Emi Tenure*"
+                  v-model.trim="merchant.paymentDetails.emiTenure" label="Emi Tenure*"
                   placeholder="Emi Tenure*" />
                 <div class="text-negative" v-if="error.field.merchant.paymentDetails.emiTenure.alert">
                   <MarsErrorResponse :error="error.field.merchant.paymentDetails.emiTenure" />
@@ -2541,7 +2541,7 @@
                 <q-input format="DD/MM/YYYY" format-model="number"
                   @blur="$v.merchant.paymentDetails.emiStartDate.$touch"
                   :error="$v.merchant.paymentDetails.emiStartDate.$error" color="grey-9" modal
-                  v-model.trim="merchant.paymentDetails.emiStartDate" float-label="Emi Start Date*"
+                  v-model.trim="merchant.paymentDetails.emiStartDate" label="Emi Start Date*"
                   placeholder="Emi Start Date*" />
                 <div class="text-negative" v-if="error.field.merchant.paymentDetails.emiStartDate.alert">
                   <MarsErrorResponse :error="error.field.merchant.paymentDetails.emiStartDate" />
@@ -2558,7 +2558,7 @@
               <div v-if="merchant.paymentDetails.rentalType == 'R'" class="col-md-6 col-sm-12 col-xs-12">
                 <q-input @blur="$v.merchant.paymentDetails.gracePeriod.$touch"
                   :error="$v.merchant.paymentDetails.gracePeriod.$error" color="grey-9" type="number"
-                  v-model.trim="merchant.paymentDetails.gracePeriod" float-label="Grace period*"
+                  v-model.trim="merchant.paymentDetails.gracePeriod" label="Grace period*"
                   placeholder="Grace period*" />
                 <div class="text-negative" v-if="error.field.merchant.paymentDetails.gracePeriod.alert">
                   <MarsErrorResponse :error="error.field.merchant.paymentDetails.gracePeriod" />
@@ -2586,7 +2586,7 @@
                 <q-input color="grey-9" type="number" @blur="$v.merchant.paymentDetails.advanceRentCollected.$touch"
                   :error="
                     $v.merchant.paymentDetails.advanceRentCollected.$error
-                  " v-model.trim="merchant.paymentDetails.advanceRentCollected" float-label="Advance Rent Collected*"
+                  " v-model.trim="merchant.paymentDetails.advanceRentCollected" label="Advance Rent Collected*"
                   placeholder="Advance Rent Collected*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.paymentDetails.advanceRentCollected
@@ -2623,7 +2623,7 @@
                     $v.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$error
                   " v-model.trim="
                     merchant.paymentDetails.noOfMonthRentPaidInAdvance
-                  " float-label="No. Of Month Rent Paid In Advance*"
+                  " label="No. Of Month Rent Paid In Advance*"
                   placeholder="No. Of Month Rent Paid In Advance*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.paymentDetails
@@ -2672,13 +2672,13 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input color="grey-9" v-model.trim="devicePrice" float-label="Device Price*"
+                <q-input color="grey-9" v-model.trim="devicePrice" label="Device Price*"
                   placeholder="Device Price*" />
               </div>
               <div class="col-md-6 col-sm-12">
                 <q-input color="grey-9" type="number" @blur="$v.merchant.paymentDetails.otherCharges.$touch"
                   :error="$v.merchant.paymentDetails.otherCharges.$error"
-                  v-model.trim="merchant.paymentDetails.otherCharges" float-label="Other Charges"
+                  v-model.trim="merchant.paymentDetails.otherCharges" label="Other Charges"
                   placeholder="Other Charges" />
                 <div class="text-negative" v-if="error.field.merchant.paymentDetails.otherCharges.alert">
                   <MarsErrorResponse :error="error.field.merchant.paymentDetails.otherCharges" />
@@ -2706,7 +2706,7 @@
               <div class="col-md-6 col-sm-12">
                 <q-input color="grey-9" type="number" @blur="$v.merchant.paymentDetails.totalAmountPaid.$touch"
                   :error="$v.merchant.paymentDetails.totalAmountPaid.$error"
-                  v-model.trim="merchant.paymentDetails.totalAmountPaid" float-label="Total Amount Paid"
+                  v-model.trim="merchant.paymentDetails.totalAmountPaid" label="Total Amount Paid"
                   placeholder="Total Amount Paid" />
                 <div class="text-negative" v-if="
                     error.field.merchant.paymentDetails.totalAmountPaid.alert
@@ -2737,7 +2737,7 @@
                 <q-select placeholder="Choose from the below*" color="grey-9"
                   @blur="$v.merchant.paymentDetails.serviceProvider.$touch"
                   :error="$v.merchant.paymentDetails.serviceProvider.$error"
-                  v-model.trim="merchant.paymentDetails.serviceProvider" float-label="Service provider*"
+                  v-model.trim="merchant.paymentDetails.serviceProvider" label="Service provider*"
                   :options="serviceProviderListSet" />
                 <div class="text-negative" v-if="
                     error.field.merchant.paymentDetails.serviceProvider.alert
@@ -2749,7 +2749,7 @@
                 <q-select placeholder="Choose from the below*" color="grey-9"
                   @blur="$v.merchant.paymentDetails.networkPreferred.$touch"
                   :error="$v.merchant.paymentDetails.networkPreferred.$error"
-                  v-model.trim="merchant.paymentDetails.networkPreferred" float-label="Network provider*"
+                  v-model.trim="merchant.paymentDetails.networkPreferred" label="Network provider*"
                   :options="networkProviderListSet" />
                 <div class="text-negative" v-if="
                     error.field.merchant.paymentDetails.networkPreferred.alert
@@ -5152,7 +5152,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input upper-case color="grey-9" :error="$v.merchant.bankInformation.bankDetails.ifsc.$error"
                   @blur="populateBankDetails" v-model.trim="merchant.bankInformation.bankDetails.ifsc"
-                  float-label="IFSC Code*" placeholder="Enter IFSC*" />
+                  label="IFSC Code*" placeholder="Enter IFSC*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.bankInformation.bankDetails.ifsc.alert
                   ">
@@ -5174,7 +5174,7 @@
                     $v.merchant.bankInformation.bankDetails.branchName.$touch
                   " :error="
                     $v.merchant.bankInformation.bankDetails.branchName.$error
-                  " v-model.trim="merchant.bankInformation.bankDetails.branchName" float-label="Branch Name*"
+                  " v-model.trim="merchant.bankInformation.bankDetails.branchName" label="Branch Name*"
                   placeholder="Branch Name* " />
                 <div class="text-negative" v-if="
                     error.field.merchant.bankInformation.bankDetails.branchName
@@ -5196,17 +5196,17 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input color="grey-9" v-model.trim="merchant.bankInformation.bankDetails.branchCode"
-                  float-label="Branch Code" placeholder="Branch Code" />
+                  label="Branch Code" placeholder="Branch Code" />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input color="grey-9" v-model.trim="merchant.bankInformation.bankDetails.branchZone"
-                  float-label="Branch Zone" placeholder="Branch Zone" />
+                  label="Branch Zone" placeholder="Branch Zone" />
               </div>
 
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select placeholder="Choose from the below" color="grey-9"
-                  v-model.trim="merchant.bankInformation.bankDetails.feeType" float-label="Fee Type"
-                  :options="feeTypeOptions" @input="
+                  v-model.trim="merchant.bankInformation.bankDetails.feeType" label="Fee Type"
+                  :options="feeTypeOptions" @update:model-value="
                     merchant.bankInformation.bankDetails.settlementOrNeftFee =
                       ''
                   " />
@@ -5231,7 +5231,7 @@
                       .$error
                   " v-model.trim="
                     merchant.bankInformation.bankDetails.settlementOrNeftFee
-                  " float-label="NEFT/Settlement Fee Inclusive of Tax*"
+                  " label="NEFT/Settlement Fee Inclusive of Tax*"
                   placeholder="NEFT/Settlement Fee Inclusive of Tax*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.bankInformation.bankDetails
@@ -5246,7 +5246,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input color="grey-9" @blur="$v.merchant.bankInformation.bankDetails.micr.$touch"
                   :error="$v.merchant.bankInformation.bankDetails.micr.$error"
-                  v-model.trim="merchant.bankInformation.bankDetails.micr" float-label="MICR*" placeholder="MICR*" />
+                  v-model.trim="merchant.bankInformation.bankDetails.micr" label="MICR*" placeholder="MICR*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.bankInformation.bankDetails.micr.alert
                   ">
@@ -5267,7 +5267,7 @@
                     $v.merchant.bankInformation.bankDetails.bankName.$touch
                   " :error="
                     $v.merchant.bankInformation.bankDetails.bankName.$error
-                  " v-model.trim="merchant.bankInformation.bankDetails.bankName" float-label="Bank Name*"
+                  " v-model.trim="merchant.bankInformation.bankDetails.bankName" label="Bank Name*"
                   placeholder="Bank Name*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.bankInformation.bankDetails.bankName
@@ -5288,7 +5288,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select placeholder="Choose from the below" color="grey-9" v-model.trim="
                     merchant.bankInformation.bankDetails.paymentMode
-                  " float-label="Payment mode" :options="paymnentModeOptions" />
+                  " label="Payment mode" :options="paymnentModeOptions" />
                 <div class="text-negative" v-if="
                     error.field.merchant.bankInformation.bankDetails.paymentMode
                       .alert
@@ -5310,7 +5310,7 @@
                     )
                   " v-model.trim="
                     merchant.bankInformation.bankDetails.bankCityName
-                  " float-label="City (type min 3 characters)*" placeholder="Start typing ..*">
+                  " label="City (type min 3 characters)*" placeholder="Start typing ..*">
                   <q-autocomplete separator @search="residentCitySearch" :debounce="10" :min-characters="3"
                     @selected="bankCitySelected" />
                 </q-input>
@@ -5345,7 +5345,7 @@
                     )
                   " v-model.trim="
                     merchant.bankInformation.bankDetails.bankStateName
-                  " float-label="State (type min 3 characters)*" placeholder="Start typing ..*">
+                  " label="State (type min 3 characters)*" placeholder="Start typing ..*">
                   <q-autocomplete separator @search="residentStateSearch" :debounce="10" :min-characters="1"
                     @selected="bankStateSelected" />
                 </q-input>
@@ -5407,7 +5407,7 @@
   }" :disabled="this.propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'" placeholder="Choose from the below"
                   color="grey-9" v-model="
                     merchant.bankInformation.bankDetails.accountType
-                  " float-label="Account Type" :options="accountTypeOptions" />
+                  " label="Account Type" :options="accountTypeOptions" />
                 <div class="text-negative" v-if="
                     error.field.merchant.bankInformation.bankDetails.accountType
                       .alert
@@ -5425,7 +5425,7 @@
                     $v.merchant.bankInformation.bankDetails.accountNumber.$error
                   " v-model.trim="
                     merchant.bankInformation.bankDetails.accountNumber
-                  " float-label="Bank A/c Number*" placeholder="Bank A/c Number*" />
+                  " label="Bank A/c Number*" placeholder="Bank A/c Number*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.bankInformation.bankDetails
                       .accountNumber.alert
@@ -5494,7 +5494,7 @@
                           .chequeNumber.$error
                       " v-model.trim="
                         merchant.bankInformation.collectionDetails.chequeNumber
-                      " float-label="Cheque/UTR No*" placeholder="Cheque/UTR No*" />
+                      " label="Cheque/UTR No*" placeholder="Cheque/UTR No*" />
                     <div class="text-negative" v-if="
                         error.field.merchant.bankInformation.collectionDetails
                           .chequeNumber.alert
@@ -5543,7 +5543,7 @@
                           .$error
                       " v-model.trim="
                         merchant.bankInformation.collectionDetails.upiLink
-                      " float-label="UPI Link*" placeholder="UPI Link*" />
+                      " label="UPI Link*" placeholder="UPI Link*" />
                     <div class="text-negative" v-if="
                         error.field.merchant.bankInformation.collectionDetails
                           .upiLink.alert
@@ -5592,7 +5592,7 @@
                           .swipeAmount.$error
                       " v-model.trim="
                         merchant.bankInformation.collectionDetails.swipeAmount
-                      " float-label="Swipe Amount*" placeholder="Swipe Amount*" />
+                      " label="Swipe Amount*" placeholder="Swipe Amount*" />
                     <div class="text-negative" v-if="
                         error.field.merchant.bankInformation.collectionDetails
                           .swipeAmount.alert
@@ -5621,7 +5621,7 @@
                           .collectedDate.$error
                       " v-model.trim="
                         merchant.bankInformation.collectionDetails.collectedDate
-                      " float-label="Swipe Date*" placeholder="Swipe Date*" />
+                      " label="Swipe Date*" placeholder="Swipe Date*" />
                     <div class="text-negative" v-if="
                         error.field.merchant.bankInformation.collectionDetails
                           .collectedDate.alert
@@ -5649,7 +5649,7 @@
                           .swipeTerminal.$error
                       " v-model.trim="
                         merchant.bankInformation.collectionDetails.swipeTerminal
-                      " float-label="Swiped on the terminal of*" placeholder="Swiped on the terminal of*" />
+                      " label="Swiped on the terminal of*" placeholder="Swiped on the terminal of*" />
                     <div class="text-negative" v-if="
                         error.field.merchant.bankInformation.collectionDetails
                           .swipeTerminal.alert
@@ -5681,7 +5681,7 @@
                           .chequeAmount.$error
                       " v-model.trim="
                         merchant.bankInformation.collectionDetails.chequeAmount
-                      " float-label="Cheque Amount*" placeholder="Cheque Amount*" />
+                      " label="Cheque Amount*" placeholder="Cheque Amount*" />
                     <div class="text-negative" v-if="
                         error.field.merchant.bankInformation.collectionDetails
                           .chequeAmount.alert
@@ -5709,7 +5709,7 @@
                           .$error
                       " v-model.trim="
                         merchant.bankInformation.collectionDetails.chequeDate
-                      " float-label="Cheque Date*" placeholder="Cheque Date*" />
+                      " label="Cheque Date*" placeholder="Cheque Date*" />
                     <div class="text-negative" v-if="
                         error.field.merchant.bankInformation.collectionDetails
                           .chequeDate.alert
@@ -5738,7 +5738,7 @@
                       " v-model.trim="
                         merchant.bankInformation.collectionDetails
                           .chequeDepositedDate
-                      " float-label="Cheque Deposited Date*" placeholder="Cheque Deposited Date*" />
+                      " label="Cheque Deposited Date*" placeholder="Cheque Deposited Date*" />
                     <div class="text-negative" v-if="
                         error.field.merchant.bankInformation.collectionDetails
                           .chequeDepositedDate.alert
@@ -5766,7 +5766,7 @@
                           .chequeNumber.$error
                       " v-model.trim="
                         merchant.bankInformation.collectionDetails.chequeNumber
-                      " float-label="Cheque/UTR No*" placeholder="Cheque/UTR No*" />
+                      " label="Cheque/UTR No*" placeholder="Cheque/UTR No*" />
                     <div class="text-negative" v-if="
                         error.field.merchant.bankInformation.collectionDetails
                           .chequeNumber.alert
@@ -5807,7 +5807,7 @@
               <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                 <q-select clearable placeholder="Choose from the below" color="grey-9" v-model.trim="
                     merchant.bankInformation.collectionDetails.acquirerBank
-                  " float-label="Bank Name" :options="bankListSet" />
+                  " label="Bank Name" :options="bankListSet" />
                 <div class="text-negative" v-if="
                     error.field.merchant.bankInformation.collectionDetails
                       .acquirerBank.alert
@@ -5830,7 +5830,7 @@
           </q-step>
           <q-step error-icon="warning" :error="error.tab.revParameters" name="ten" title="Rev Param & Lead"
             subtitle="Info">
-            <div class="row gutter-sm">
+            <div class="row q-col-gutter-sm">
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <p class="caption">Merchant Requested Vas</p>
                 <li v-for="sVas in soSelectedVas.split(',')" :key="sVas">
@@ -5848,7 +5848,7 @@
                   class="text-weight-regular text-grey-8" color="grey-9" :options="vasBasedOnInstance" /> -->
                 <!-- <q-option-group :key="vasKey" inline type="checkbox" v-model="tmpVasMapping"
                   :options="vasBasedOnInstance" color="grey-9" class="text-weight-regular text-grey-8" /> -->
-                <q-option-group inline type="checkbox" @input="handleVasChange" :value="tmpVasMapping"
+                <q-option-group inline type="checkbox" @update:model-value="handleVasChange" :value="tmpVasMapping"
                   class="text-weight-regular text-grey-8" color="grey-9" :disable="vasDisableFlag"
                   :options="vasBasedOnInstance" />
                 <!-- <q-select multiple checked type ="checkbox" v-model.trim="tmpVasMapping" :options="vasBasedOnInstance" class="text-weight-regular text-grey-8"
@@ -6013,7 +6013,7 @@
             </div>
             <div class="row group q-py-md items-center">
               <div class="col-6">
-                <q-input color="grey-9" v-model.trim="merchant.remarks" float-label="Remarks" placeholder="Remarks" />
+                <q-input color="grey-9" v-model.trim="merchant.remarks" label="Remarks" placeholder="Remarks" />
               </div>
               <div class="col-6">
                 <p class="q-ma-0">Hold payment?</p>
@@ -12053,11 +12053,11 @@
               this.$q.notify({
                 color: "positive",
                 position: "bottom",
-                message: response.body.message,
+                message: response.data.message,
                 icon: "thumb_up",
               });
               this.baseAndSubTidList = [];
-              let res = response.body.data;
+              let res = response.data.data;
               res.baseTids.map((bTids) => {
                 this.baseAndSubTidList.push({
                   baseTidList: bTids,
@@ -12151,11 +12151,11 @@
               this.$q.notify({
                 color: "positive",
                 position: "bottom",
-                message: response.body.message,
+                message: response.data.message,
                 icon: "thumb_up",
               });
-              let res = response.body.data;
-              let res1 = response.body.data.submittedToMars;
+              let res = response.data.data;
+              let res1 = response.data.data.submittedToMars;
               this.disabledListAllSubTidDetails = res1;
               this.listAllSubTidDetails = res;
               this.genSubTidFlag = true;
@@ -12179,10 +12179,10 @@
                     this.$q.notify({
                       color: "positive",
                       position: "bottom",
-                      message: response.body.message,
+                      message: response.data.message,
                       icon: "thumb_up",
                     });
-                    let res = response.body.data;
+                    let res = response.data.data;
                     this.listAllSubTidDetails = res;
                     this.genSubTidFlag = true;
                     this.SubTidField = false;
@@ -12716,14 +12716,12 @@
                 message: "Are you sure GSTID is not available?",
                 ok: "Yes",
                 cancel: "No",
-              })
-              .then(() => {
+              }).onOk(() => {
                 this.saveCurrentChanges();
                 this.fetchMarsDeviceDetails();
                 this.$refs.stepper.next();
                 // }
-              })
-              .catch(() => { });
+              }).onCancel(() => { });
           } else {
             this.saveCurrentChanges();
             this.fetchMarsDeviceDetails();
@@ -13055,8 +13053,7 @@
               "Are you sure want to proceed to document verification stage?",
             ok: "Continue",
             cancel: "Cancel",
-          })
-          .then(() => {
+          }).onOk(() => {
             this.$q.loading.show({
               delay: 0, // ms
               spinnerColor: "purple-9",
@@ -13067,8 +13064,7 @@
               this.$router.push("/sat/lead/validation/" + this.$route.params.id);
               this.$q.loading.hide();
             });
-          })
-          .catch((error) => {
+          }).onCancel((error) => {
             this.$q.loading.hide();
           });
       },
@@ -13081,7 +13077,7 @@
           plan: this.getShortLeadInfo.plan.id,
         };
         this.DEVICE_MODEL_FROM_MARS(param).then((response) => {
-          let obj = response.body.data.marsDeviceModel;
+          let obj = response.data.data.marsDeviceModel;
           this.terminalModelSet = [];
           this.terminalModelSet.push({
             label: obj.name,
@@ -13106,8 +13102,7 @@
             return self.regionsFromMars.items.map((oo) => {
               self.regionOptions.push({ label: oo.name, value: oo.code });
             });
-          })
-          .then(() => {
+          }).then(() => {
             /* API call to fetch sharing partner */
             return self.LEAD_FROM_FROM_MARS(institutionCode).then((response) => {
               self.leadFromOptions = [];
@@ -13128,8 +13123,7 @@
               self.merchant.salesInformation.leadFrom =
                 this.propLeadDeatils.leadSource.sourceName;
             });
-          })
-          .then(() => {
+          }).then(() => {
             /* API call to fetch sales person */
             return self
               .SALES_PERSON_FROM_MARS(institutionCode)
@@ -13149,8 +13143,7 @@
 
                 // self.salesPersonOptions = salesPerson;
               });
-          })
-          .then(() => {
+          }).then(() => {
             /* API call to fetch city */
             return self.CITY_FROM_MARS().then((response) => {
               self.cityOptions = [];
@@ -13159,8 +13152,7 @@
               });
               // self.cityOptions = city;
             });
-          })
-          .then(() => {
+          }).then(() => {
             /* API call to fetch state */
             return self.STATE_FROM_MARS().then((response) => {
               self.stateOptions = [];
@@ -13169,8 +13161,7 @@
               });
               // self.stateOptions = stateArr;
             });
-          })
-          .then(() => {
+          }).then(() => {
             /* API call to fetch state */
             return self.MCC_FROM_MARS().then((response) => {
               self.mccSearchSet = [];
@@ -13190,8 +13181,7 @@
               });
               // self.mccSearchSet = mccSubArr;
             });
-          })
-          .then(() => {
+          }).then(() => {
             /* API call to fetch rental plan */
             return self
               .RENTAL_PLAN_FROM_MARS(institutionCode)
@@ -13202,8 +13192,7 @@
                 });
                 // self.rentalPlanSet = rentalPlan;
               });
-          })
-          .then(() => {
+          }).then(() => {
             /* API call to fetch bank list */
             return self.BANK_LIST_FROM_MARS(institutionCode).then((response) => {
               // let bankList = [];
@@ -13213,8 +13202,7 @@
               // self.bankListSet = bankList;
             });
             return true;
-          })
-          .then(() => {
+          }).then(() => {
             /* API call to fetch bank list */
             return self.NETWORK_PROVIDER(institutionCode).then((response) => {
               // let bankList = [];
@@ -13227,8 +13215,7 @@
               // self.networkProviderListSet = bankList;
             });
             return true;
-          })
-          .then(() => {
+          }).then(() => {
             /* API call to fetch bank list */
             return self.SERVICE_PROVIDER(institutionCode).then((response) => {
               // let bankList = [];
@@ -13241,16 +13228,14 @@
               // self.bankListSet = bankList;
             });
             return true;
-          })
-          .then(() => {
+          }).then(() => {
             if (
               this.propLeadDeatils.marsFormSubmitAction == 1 ||
               this.propLeadDeatils.marsFormSubmitAction == 2
             ) {
               return this.FETCH_SAVED_DATA_FROM_OWN_DB({
                 leadId: this.$route.params.id,
-              })
-                .then(() => {
+              }).then(() => {
                   this.merchant.additionalInfo.branchZone = JSON.parse(
                     this.marsSavedDataFromInternal.additionalInfo
                   ).branchZone;
@@ -13317,8 +13302,7 @@
                         .applicationDate
                     )
                   );
-                })
-                .then(() => {
+                }).then(() => {
                   return this.$set(
                     this.marsSavedDataFromInternal.salesInformation,
                     "aggreementDate",
@@ -13327,8 +13311,7 @@
                         .aggreementDate
                     )
                   );
-                })
-                .then(() => {
+                }).then(() => {
                   return this.$set(
                     this.marsSavedDataFromInternal.salesInformation,
                     "loanDisbursementDate",
@@ -13337,8 +13320,7 @@
                         .loanDisbursementDate
                     )
                   );
-                })
-                .then(() => {
+                }).then(() => {
                   return this.$set(
                     this.marsSavedDataFromInternal.salesInformation,
                     "tenureStartDate",
@@ -13347,8 +13329,7 @@
                         .tenureStartDate
                     )
                   );
-                })
-                .then(() => {
+                }).then(() => {
                   return this.$set(
                     this.marsSavedDataFromInternal.companyInformation,
                     "establishYear",
@@ -13357,8 +13338,7 @@
                         .establishYear
                     )
                   );
-                })
-                .then(() => {
+                }).then(() => {
                   return this.$set(
                     this.marsSavedDataFromInternal.bankInformation
                       .collectionDetails,
@@ -13368,8 +13348,7 @@
                         .collectionDetails.chequeDepositedDate
                     )
                   );
-                })
-                .then(() => {
+                }).then(() => {
                   return this.$set(
                     this.marsSavedDataFromInternal.bankInformation
                       .collectionDetails,
@@ -13379,8 +13358,7 @@
                         .collectionDetails.collectedDate
                     )
                   );
-                })
-                .then(() => {
+                }).then(() => {
                   return this.$set(
                     this.marsSavedDataFromInternal.bankInformation
                       .collectionDetails,
@@ -13390,8 +13368,7 @@
                         .collectionDetails.chequeDate
                     )
                   );
-                })
-                .then(() => {
+                }).then(() => {
                   return this.$set(
                     this.marsSavedDataFromInternal.businessInformation,
                     "memberSince",
@@ -13400,9 +13377,7 @@
                         .memberSince
                     )
                   );
-                })
-
-                .then(() => {
+                }).then(() => {
                   return this.$set(
                     this.marsSavedDataFromInternal.businessInformation,
                     "lastTurnoverYear",
@@ -13411,8 +13386,7 @@
                         .lastTurnoverYear
                     )
                   );
-                })
-                .then(() => {
+                }).then(() => {
                   delete this.marsSavedDataFromInternal.salesInformation
                     .salesPersonCode;
                   this.merchant.salesInformation =
@@ -13514,8 +13488,7 @@
             } else {
               return true;
             }
-          })
-          .then(() => {
+          }).then(() => {
             this.merchant.paymentDetails.cashAtPosEnabled = this.propLeadDeatils
               .posEnable
               ? "Y"
@@ -13622,7 +13595,7 @@
               message: "Vas Mapping Successfully Created",
               icon: "thumb_up",
             });
-            let nameOfVas = response.body.data.map((leadInfoVas) =>
+            let nameOfVas = response.data.data.map((leadInfoVas) =>
               JSON.stringify(leadInfoVas.vas)
             );
             this.tmpVasMapping = nameOfVas;
@@ -13684,8 +13657,7 @@
         this.merchant["leadId"] = this.$route.params.id;
         this.merchant["partnerInformation"] = this.viewBinding.partnersArr;
         this.merchant["revParamAndLeadInfo"] = this.revParamAndLeadInfo;
-        this.MARS_DATA_SUBMIT_INTERNAL({ merchant: this.merchant, action: 1 })
-          .then((response) => {
+        this.MARS_DATA_SUBMIT_INTERNAL({ merchant: this.merchant, action: 1 }).then((response) => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "positive",
@@ -13970,9 +13942,7 @@
                     params: finalRequest,
                     leadStatus: this.propLeadDeatils.leadStatus,
                     refNumber: this.propLeadDeatils.merchantRefCode,
-                  })
-
-                  .then((response) => {
+                  }).then((response) => {
                     let feed_paramaters;
                     if (response.status == 204) {
                       feed_paramaters = {
@@ -13980,7 +13950,7 @@
                         merchantRefCode: this.propLeadDeatils.merchantRefCode,
                       };
                     } else {
-                      feed_paramaters = response.body;
+                      feed_paramaters = response.data;
                     }
                     self.$q.loading.show({
                       delay: 0, // ms
@@ -14013,8 +13983,7 @@
                       .MARS_DATA_EXTERNAL_SUBMIT_RESPONSE({
                         request: feed_paramaters,
                         leadId: self.$route.params.id,
-                      })
-                      .then((response) => {
+                      }).then((response) => {
                         self.$q.notify({
                           color: "positive",
                           position: "bottom",
@@ -14172,8 +14141,8 @@
                   .MARS_CHECK_STATUS_API(finalRequest)
                   .then(response => {
                     let feed_paramaters = {
-                      applicationNumber: response.body.applicationNumber,
-                      merchantRefCode: response.body.merchantRefCode,
+                      applicationNumber: response.data.applicationNumber,
+                      merchantRefCode: response.data.merchantRefCode,
                       merchantId: null,
                       terminalId: null,
                       remarks: null,
@@ -14184,8 +14153,7 @@
                       .MARS_DATA_EXTERNAL_SUBMIT_RESPONSE({
                         request: feed_paramaters,
                         leadId: self.$route.params.id
-                      })
-                      .then(response => {
+                      }).then(response => {
                         self.$q.notify({
                           color: "positive",
                           position: "bottom",
@@ -14301,9 +14269,7 @@
                           params: finalRequest,
                           leadStatus: this.propLeadDeatils.leadStatus,
                           refNumber: this.propLeadDeatils.merchantRefCode
-                        })
-
-                        .then(response => {
+                        }).then(response => {
                           let feed_paramaters;
                           if (response.status == 204) {
                             feed_paramaters = {
@@ -14313,7 +14279,7 @@
                                 .merchantRefCode
                             };
                           } else {
-                            feed_paramaters = response.body;
+                            feed_paramaters = response.data;
                           }
                           self.$q.loading.show({
                             delay: 0, // ms
@@ -14346,8 +14312,7 @@
                             .MARS_DATA_EXTERNAL_SUBMIT_RESPONSE({
                               request: feed_paramaters,
                               leadId: self.$route.params.id
-                            })
-                            .then(response => {
+                            }).then(response => {
                               self.$q.notify({
                                 color: "positive",
                                 position: "bottom",

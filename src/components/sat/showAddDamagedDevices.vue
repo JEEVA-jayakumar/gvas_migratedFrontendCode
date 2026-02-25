@@ -7,9 +7,9 @@
           clearable
           :disable="formData.region == ''"
           @clear="fnClearingDeviceTypeSelection"
-          @input="fnSetDevicesByDeviceId"
+          @update:model-value="fnSetDevicesByDeviceId"
           v-model="formData.device_type"
-          float-label="Select Device Type"
+          label="Select Device Type"
           color="grey-9"
           :options="deviceOptions"
         />
@@ -197,8 +197,7 @@ export default {
         this.VERIFY_DEVICE_ON_REGIONAL_TO_CENTRAL_FOR_FAULTY({
           device: self.formData.device_type.id,
           barcode: barcode
-        })
-          .then(() => {
+        }).then(() => {
             assumeArr.deviceSerialNumbers.push(barcode);
           })
           .catch(() => {

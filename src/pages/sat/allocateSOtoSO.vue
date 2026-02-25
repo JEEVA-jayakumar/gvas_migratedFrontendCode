@@ -14,11 +14,11 @@
               :disabled="formData.device_type != ''"
               :class="[formData.device_type != '' ? 'no-pointer-events' : '']"
               v-model="formData.region"
-              float-label="Select Region"
+              label="Select Region"
               radio
               color="grey-9"
               :options="regionOptions"
-              @input="regionBasedSO"
+              @update:model-value="regionBasedSO"
             />
           </div> -->
           <div class="col-md-3">
@@ -26,11 +26,11 @@
               filter 
               clearable
               v-model="formData.so"
-              float-label="Select SO"
+              label="Select SO"
               radio
               color="grey-9"
               :options="assignToOptions"
-              @input="fnSelectSO"
+              @update:model-value="fnSelectSO"
             />
           </div>
           <!-- <div class="col-md-4">
@@ -38,9 +38,9 @@
               clearable
               :disable="formData.so == ''"
               @clear="fnClearingDeviceTypeSelection"
-              @input="fnSetDevicesByDeviceId"
+              @update:model-value="fnSetDevicesByDeviceId"
               v-model="formData.device_type"
-              float-label="Select Device Type"
+              label="Select Device Type"
               radio
               color="grey-9"
               :options="deviceOptions"
@@ -287,15 +287,14 @@ import { email } from '@vuelidate/validators';
           this.DEVICE_VERIFICATION_ON_SCAN_USING_DEVICE_TYPE_ID_SO_TO_SO_ALLOCATION({
             device: self.formData.device_type.id,
             barcode: barcode
-          })
-            .then(response  => {
-              console.log("Error-1",JSON.stringify(response.body.data.user));
+          }).then(response  => {
+              console.log("Error-1",JSON.stringify(response.data.data.user));
               // self.userName = null
-              self.userName = response.body.data.user.username
+              self.userName = response.data.data.user.username
               console.log("USER NAME",self.userName);
               assumeArr.deviceSerialNumbers.push(barcode);
               assumeArr.userName.push(self.userName)
-              this.formData.assignedUserId = response.body.data.user.id
+              this.formData.assignedUserId = response.data.data.user.id
             })
             .catch(error => {
               let message = error.data.message

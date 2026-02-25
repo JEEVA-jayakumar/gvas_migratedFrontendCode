@@ -15,7 +15,7 @@
             <div class="row">
               <div class="row items-center" v-for="menu in sparePartsTypes" :key="menu.value.id" :to="menu.to">
                 <input style="width: 18px; height: 18px" type="checkbox" :id="menu.value.id + '_CB'"
-                  :name="menu.value.spare_parts_types" @input="clearEvent($event)" @click="getSelectedDetails($event, sparePartsTypes, menu.value)" />
+                  :name="menu.value.spare_parts_types" @update:model-value="clearEvent($event)" @click="getSelectedDetails($event, sparePartsTypes, menu.value)" />
                 <label>{{ menu.value.spare_parts_types }}</label>
               </div>
             </div>
@@ -38,10 +38,9 @@
             ">
             Aggregator Stock List
           </div>
-          <q-table :rows="tableData" table-class="customSATableClass" :columns="columns"
-            :pagination="paginationControl" row-key="name" color="grey-9">
-            <q-td v-slot:body-cell-created_date="props" :props="props">{{ props.row.created_date | moment("Do MMM Y") }}</q-td>
-            <q-td v-slot:body-cell-updated_date="props" :props="props">{{ props.row.updated_date | moment("Do MMM Y") }}</q-td>
+          <q-table :rows="tableData" table-class="customSATableClass" :columns="columns" v-model:pagination="paginationControl" row-key="name" color="grey-9">
+            <q-td v-slot:body-cell-created_date="props" :props="props">{{ $moment(props.row.created_date).format("Do MMM Y") }}</q-td>
+            <q-td v-slot:body-cell-updated_date="props" :props="props">{{ $moment(props.row.updated_date).format("Do MMM Y") }}</q-td>
           </q-table>
         </div>
       </div>

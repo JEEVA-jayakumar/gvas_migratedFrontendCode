@@ -11,16 +11,15 @@
         :rows="tableData"
         :columns="columns"
         :filter="filter"
-        :rows-per-page-options="[5,10,15,20,25]"
-        :pagination="paginationControl"
+        :rows-per-page-options="[5,10,15,20,25]" v-model:pagination="paginationControl"
         :loading="toggleAjaxLoadFilter"
         @request="ajaxLoadAllLeadInfo"
       >
        <q-td v-slot:body-cell-TidCreationDate="props" :props="props">
-          <span class="label">{{props.row.TidCreationDate | moment("Do MMM Y")}}</span>
+          <span class="label">{{ $moment(props.row.TidCreationDate).format("Do MMM Y") }}</span>
         </q-td>
         <q-td v-slot:body-cell-ReceivedDate="props" :props="props">
-          <span class="label">{{props.row.ReceivedDate | moment("Do MMM Y")}}</span>
+          <span class="label">{{ $moment(props.row.ReceivedDate).format("Do MMM Y") }}</span>
         </q-td>
         
        <template v-slot:top="props" class="bottom-border">
@@ -32,7 +31,7 @@
             v-model="filter"
             filter 
             clearable
-            float-label="Select SO"
+            label="Select SO"
             radio
             color="grey-9"
             :options="soMenulistOptions"
@@ -273,8 +272,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.DEVICE_WITH_FSE({ pagination, filter })
-        .then(res => {
+      this.DEVICE_WITH_FSE({ pagination, filter }).then(res => {
            // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 

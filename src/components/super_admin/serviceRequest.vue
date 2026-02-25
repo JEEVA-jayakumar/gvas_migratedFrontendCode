@@ -2,15 +2,16 @@
   <q-page>
     <div>
       <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" >
-        <q-tab @select="ajaxSpareData" default color="dark" name="tab-1" slot="title" label="Active Service Request" />
-        <q-tab  color="dark" name="tab-2" slot="title" label="Deactive Service Request" />
-        <q-tab-panel name="tab-1">
+        <q-tab @select="ajaxSpareData" default color="dark" name="tab-1" label="Active Service Request" />
+        <q-tab  color="dark" name="tab-2" label="Deactive Service Request" />
+</q-tabs>
+<q-tab-panels v-model="activeTab" animated>
+<q-tab-panel name="tab-1">
           <q-table 
           :rows="ActivetableData"
           table-class="customSATableClass" 
           :columns="columns2" 
-          :filter="filterSearch"
-          :pagination="paginationControl"
+          :filter="filterSearch" v-model:pagination="paginationControl"
           :filter-method="myCustomSearchFilter1" 
           row-key="name" 
           color="grey-9"
@@ -51,14 +52,12 @@
             </template>
           </q-table>
         </q-tab-panel>
-        
-        <q-tab-panel name="tab-2">
+<q-tab-panel name="tab-2">
           <q-table 
           :rows="DeactivetableData"
           table-class="customSATableClass" 
           :columns="columns1" 
-          :filter="filterSearch1"
-          :pagination="paginationControl2"
+          :filter="filterSearch1" v-model:pagination="paginationControl2"
           :filter-method="myCustomSearchFilter2" 
           row-key="name" 
           color="grey-9"
@@ -94,7 +93,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-              </q-tabs>
+</q-tab-panels>
               
       <!--START: Show edit  service Parts -->
       <showEditServiceType v-if="propShowEditServiceType" :propShowEditServiceType="propShowEditServiceType"
@@ -301,8 +300,7 @@ export default {
           message: "Are you sure want to delete?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -321,8 +319,7 @@ export default {
             this.$q.loading.hide();
                this.ajaxSpareData();
             });
-          })
-          .catch(error => {
+          }).onCancel(error => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
@@ -343,8 +340,7 @@ export default {
           message: "Are you sure want to active this issue?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
             this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -362,8 +358,7 @@ export default {
             });
             this.emitfnshowEditServiceType();
           })
-        })
-        .catch(error => {
+        }).onCancel(error => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
@@ -385,8 +380,7 @@ export default {
           message: "Are you sure want to delete?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -406,8 +400,7 @@ export default {
                this.ajaxSpareData();
             });
          
-        })
-        .catch(() => {
+        }).onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

@@ -7,53 +7,49 @@
               no-pane-border
               v-model="inventoryOptionSelected"
               color="dark"
-              inverted
+              filled
               class="shadow-1"
             >
-              <q-tab name="prefix" label="Prfix Config" slot="title" />
-              <!-- <q-tab name="Socount" label="Inventory So Count" slot="title" /> -->
-              <q-tab name="vasDevLs" label="LeadSource And Vas Device Config" slot="title" />
-  
-              <!-- <q-tab-panel name="count">
+              <q-tab name="prefix" label="Prfix Config" />
+              <!-- <q-tab name="Socount" label="Inventory So Count" /> -->
+              <q-tab name="vasDevLs" label="LeadSource And Vas Device Config" />
+</q-tabs>
+<q-tab-panels v-model="inventoryOptionSelected" animated>
+<q-tab-panel name="count">
                 <inventoryCount @emittedForTotalSerialNumbers="fnAjaxFetchAllDeviceDetailsWithCount" />
               </q-tab-panel>
-  
-              <q-tab-panel name="Socount">
+<q-tab-panel name="Socount">
                 <inventoryCount @emittedForTotalSerialNumbers="fnAjaxFetchAllDeviceDetailsWithCount" />
               </q-tab-panel>
-  
-              <q-tab-panel name="dispatch">
+<q-tab-panel name="dispatch">
                 <dispatchedInventory
                   @fetchDeviceDetailsWithCount="fnAjaxFetchAllDeviceDetailsWithCount"
                 />
               </q-tab-panel>
-              <q-tab-panel name="damage">
+<q-tab-panel name="damage">
                 <showAddDamagedDevices
                   :propDeviceTypes="getAllRegionalInventoryDeviceDetailsWithCount"
                 />
-              </q-tab-panel> -->
-              <q-tab-panel name="prefix">
+              </q-tab-panel>
+<q-tab-panel name="prefix">
                 <prefix />
               </q-tab-panel>
-              <q-tab-panel name="vasDevLs">
+<q-tab-panel name="vasDevLs">
                 <vasDevLs />
               </q-tab-panel>
-<!--   
-              <q-tab-panel name="allocatetoso">
+<q-tab-panel name="allocatetoso">
                 <inventoryallocatetoso />
               </q-tab-panel>
-  
-              <q-tab-panel name="inventorywithSo">
+<q-tab-panel name="inventorywithSo">
                 <inventorywithso />
               </q-tab-panel>
-  
-              <q-tab-panel name="inventorywithResellar">
+<q-tab-panel name="inventorywithResellar">
                 <inventorywithResellar />
               </q-tab-panel>
-              <q-tab-panel name="inventorywithResellarDetails">
+<q-tab-panel name="inventorywithResellarDetails">
                 <inventorywithResellarDetails />
-              </q-tab-panel> -->
-            </q-tabs>
+              </q-tab-panel>
+</q-tab-panels>
           </div>
         </div>
       </div>

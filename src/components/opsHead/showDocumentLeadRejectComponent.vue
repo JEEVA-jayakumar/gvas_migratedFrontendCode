@@ -13,7 +13,7 @@
         @blur="$v.formData.leadDetails.reason.$touch"
         :error="$v.formData.leadDetails.reason.$error"
         placedholder="Type.."
-        float-label="Reason"
+        label="Reason"
         color="grey-9"
         align="left"
         v-model="formData.leadDetails.reason"

@@ -14,7 +14,7 @@
         <div>
           <div>
             <q-scroll-area style="width: 300px; height: 150px;">
-              <q-input class="row" v-model="area"  type="textarea" float-label="Add remarks" />
+              <q-input class="row" v-model="area"  type="textarea" label="Add remarks" />
               <div class="row">
                 <!-- <div class="col-md-4"></div> -->
                 <div class="col-md-4"/>

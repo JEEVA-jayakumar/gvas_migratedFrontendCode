@@ -23,7 +23,7 @@
                           :error="$v.formData.id.$error" 
                           class="text-weight-regular text-grey-8" 
                           color="grey-9" 
-                          float-label="Spare Parts Id" 
+                          label="Spare Parts Id"
                           placeholder="Spare Parts Id" 
                         />
                     </div>
@@ -33,7 +33,7 @@
                           :error="$v.formData.spare_parts_types.$error" 
                           class="text-weight-regular text-grey-8" 
                           color="grey-9" 
-                          float-label="Spare Parts Id" 
+                          label="Spare Parts Id"
                           placeholder="Spare Parts Id" 
                         />
                     </div>

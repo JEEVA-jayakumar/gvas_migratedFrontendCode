@@ -12,16 +12,15 @@
         :rows="getKycExceptionInfo"
         :columns="columns"
         :filter="filterSearch"
-        :filter-method="myCustomSearchFilter"
-        :pagination="paginationControl"
+        :filter-method="myCustomSearchFilter" v-model:pagination="paginationControl"
         row-key="name"
       >
         <q-tr
           v-slot:body="props"
           :props="props"
-          @click.native="fnRowClick(props.row)"
-          @mouseover.native="fnRowMouseOver(props.row.__index)"
-          @mouseleave.native="fnRowMouseLeave(props.row.__index)"
+          @click="fnRowClick(props.row)"
+          @mouseover="fnRowMouseOver(props.row.__index)"
+          @mouseleave="fnRowMouseLeave(props.row.__index)"
           class="cursor-pointer"
           :class="[props.row.__index === activeId ? 'bg-grey-3' : '']"
         >
@@ -30,7 +29,7 @@
             <span
               v-if="col.name == 'dateOfUpdation'"
               class="label capitalize"
-            >{{props.row.submitteSATDate | moment("MMMM Do YYYY") }}</span>
+            >{{ $moment(props.row.submitteSATDate).format("MMMM Do YYYY") }}</span>
             <span
               v-if="col.name == 'leadId'"
               class="label capitalize text-primary cursor-pointer"
@@ -57,7 +56,7 @@
               <span
                 class="label capitalize"
                 v-if="props.row.leadVerificationStatus.length > 0"
-              >{{sortArraysForExpectedSubmitDate(props.row.leadVerificationStatus) | moment("MMMM Do YYYY")}}</span>
+              >{{ $moment(sortArraysForExpectedSubmitDate(props.row.leadVerificationStatus)).format("MMMM Do YYYY") }}</span>
               <span class="label capitalize" v-else>NA</span>
             </div>
           </q-td>
@@ -83,21 +82,22 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search by MID, TID, Merchant Name, MCC,UTR Number, Device Type"
+              label="Search by MID, TID, Merchant Name, MCC,UTR Number, Device Type"
               class="q-mr-lg q-py-sm"
             />
           </div>
           <!--END: table search -->
           <!--START: table filter dropdown -->
           <!-- <div class="col-md-3">
-                  <q-input
-                    v-model="filters.filter_date" 
-                    float-label="Date Filter"
-                    type="date"
-                    class="q-mr-lg q-py-sm"
-                    color="grey-9" 
-                    minimal
-                  />
+                  <q-input filled v-model="filters.filter_date" label="Date Filter" color="grey-9">
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="filters.filter_date" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
           </div>-->
           <!--END: table filter dropdown -->
           <!--START: table excel download -->

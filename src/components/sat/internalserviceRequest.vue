@@ -6,19 +6,21 @@
       > Bijlipay Service Request</div>
         <div>
             <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToUnassignedTab">
-               <q-tab default color="dark" name="opened" slot="title" label="Opened" />
-                <q-tab color="dark" name="closed" slot="title" label="Closed" />
-                <q-tab color="dark" name="cancel" slot="title" label="cancelled" />
-                  <q-tab-panel name="opened">
+               <q-tab default color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" />
+                <q-tab color="dark" name="cancel" label="cancelled" />
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="opened">
               <opened/>
             </q-tab-panel>
-            <q-tab-panel name="cancel">
+<q-tab-panel name="cancel">
               <cancelledInternal/>
             </q-tab-panel>
-                <q-tab-panel name="closed">
+<q-tab-panel name="closed">
                     <!--STARTv-model: table Data -->
                     <q-table :rows="internalClosedTableData" :columns="columnDataclosed" table-class="customTableClass"
-                        :filter="filterSearch" :pagination="paginationControl2"
+                        :filter="filterSearch" v-model:pagination="paginationControl2"
                         v-model:selected="formData.marsDeviceIdsCookedUnAssinged" row-key="id" :loading="tableAjaxLoading"
                         :rows-per-page-options="[5, 10, 15, 20]" color="dark" @request="ajaxLoadAllLeadInfo2">
 
@@ -36,7 +38,7 @@
                                 <q-td key="serviceReqTicketId">
                                     <q-checkbox checked-icon="fas fa-chevron-up" unchecked-icon="fas fa-chevron-down"
                                         color="grey-9" v-model="props.row.expand" class="q-mr-md"
-                                        @input="expandRowPlease(props.row)" />
+                                        @update:model-value="expandRowPlease(props.row)" />
                                     <span>{{ props.row.serviceReqTicketId }}</span>
                                 </q-td>
                                 <q-td key="tid" :props="props"> {{ props.row.tid }}</q-td>
@@ -44,9 +46,9 @@
                                     <span v-if="props.row.mid != null">{{ props.row.mid }}</span>
                                     <span v-else="props.row.mid == null">NA</span>
                                 </q-td>
-                                <q-td key="createdDate" :props="props"> {{ props.row.createdDate | moment("Do MMM Y") }}
+                                <q-td key="createdDate" :props="props"> {{ $moment(props.row.createdDate).format("Do MMM Y") }}
                                 </q-td>
-                                <q-td key="updatedDate" :props="props"> {{ props.row.updatedDate | moment("Do MMM Y") }}
+                                <q-td key="updatedDate" :props="props"> {{ $moment(props.row.updatedDate).format("Do MMM Y") }}
                                 </q-td>
                                 <q-td key="meName" :props="props"> {{ props.row.meName }}</q-td>
                                 <q-td key="bpRegion" :props="props"> {{ props.row.bpRegion.regionAreaName }} </q-td>
@@ -290,13 +292,13 @@
                             <template slot="top">
                                 <div class="col-md-5">
                                     <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.."
-                                    float-label="Search By ServiceReqTicketId, TID .." class="q-mr-lg q-py-sm" />
+                                    label="Search By ServiceReqTicketId, TID .." class="q-mr-lg q-py-sm" />
                                 </div>
                             </template>
                         </q-table>
                     <!--END: table Data -->
                 </q-tab-panel>
-            </q-tabs>
+</q-tab-panels>
             <div class="row items-center gutter-y-sm">
                 <div class="col-md-9 col-sm-12 col-xs-12">
                     <div class="row items-center"></div>
@@ -884,8 +886,7 @@ export default {
                 spinnerColor: "purple-9",
                 message: "Fetching data ..",
             });
-            this.FETCH_CLOSED_SERVICE_REQUEST_DATAS({ pagination, filter })
-                .then((res) => {
+            this.FETCH_CLOSED_SERVICE_REQUEST_DATAS({ pagination, filter }).then((res) => {
                     // updating pagination to reflect in the UI
                     this.paginationControl2 = pagination;
 

@@ -73,7 +73,7 @@
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Debit <= 2000 (%)"
+                          label="Debit <= 2000 (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.debitLessthanAmount"
@@ -83,7 +83,7 @@
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Debit > 2000 (%)"
+                          label="Debit > 2000 (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.debitGreaterthanAmount"
@@ -95,7 +95,7 @@
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Std CC (%)"
+                          label="Std CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.stdCC"
@@ -105,7 +105,7 @@
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Premium CC (%)"
+                          label="Premium CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.premiumCC"
@@ -117,7 +117,7 @@
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Corp Pre CC (%)"
+                          label="Corp Pre CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.corpCC"
@@ -127,7 +127,7 @@
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Intl Pre CC (%)"
+                          label="Intl Pre CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.intlCC"
@@ -139,7 +139,7 @@
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Super Pre CC (%)"
+                          label="Super Pre CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.superPremiumlCC"
@@ -219,8 +219,8 @@
                         @blur="$v.formData.leadInformation.recurringFees.$touch"
                         :error="$v.formData.leadInformation.recurringFees.$error"
                         color="grey-9"
-                        @input="fnCheckPrice(formData)"
-                        float-label="Given recurring fees"
+                        @update:model-value="fnCheckPrice(formData)"
+                        label="Given recurring fees"
                         type="number"
                       />
                     </q-item-label>
@@ -244,8 +244,8 @@
                         @blur="$v.formData.leadInformation.setupFees.$touch"
                         :error="$v.formData.leadInformation.setupFees.$error"
                         color="grey-9"
-                        @input="fnCheckPrice(formData)"
-                        float-label="Given Setup Price"
+                        @update:model-value="fnCheckPrice(formData)"
+                        label="Given Setup Price"
                         type="number"
                       />
                     </q-item-label>
@@ -270,7 +270,7 @@
                         @blur="$v.formData.leadVerificationStatus.reason.$touch"
                         :error="$v.formData.leadVerificationStatus.reason.$error"
                         color="grey-9"
-                        float-label="Remarks"
+                        label="Remarks"
                       />
                     </q-item-label>
                   </q-item-section>
@@ -284,7 +284,7 @@
                         @blur="$v.formData.leadVerificationStatus.reason.$touch"
                         :error="$v.formData.leadVerificationStatus.reason.$error"
                         color="grey-9"
-                        float-label="Remarks"
+                        label="Remarks"
                       />
                     </q-item-label>
                   </q-item-section>
@@ -486,8 +486,7 @@ export default {
             message: "Are you sure want to reject lead?",
             ok: "Continue",
             cancel: "Cancel",
-          })
-          .then(() => {
+          }).onOk(() => {
             let requestParams = {
               leadId: this.$route.params.id,
               action: 0,
@@ -504,8 +503,7 @@ export default {
                 this.$router.push(
                   "/sales/manager/pricing/exception/verification"
                 );
-              })
-              .catch((error) => {
+              }).onCancel((error) => {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
@@ -529,8 +527,7 @@ export default {
             message: "Are you sure want to approve lead?",
             ok: "Continue",
             cancel: "Cancel",
-          })
-          .then(() => {
+          }).onOk(() => {
             let requestParams = {
               leadId: this.$route.params.id,
               action: 1,
@@ -554,8 +551,7 @@ export default {
                 this.$router.push(
                   "/sales/manager/pricing/exception/verification"
                 );
-              })
-              .catch((error) => {
+              }).onCancel((error) => {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
@@ -580,8 +576,7 @@ export default {
             message: "Are you sure want to approve lead?",
             ok: "Continue",
             cancel: "Cancel",
-          })
-          .then(() => {
+          }).onOk(() => {
             let requestParams = {
               leadId: this.$route.params.id,
               action: 1,
@@ -598,8 +593,7 @@ export default {
                 this.$router.push(
                   "/sales/manager/pricing/exception/verification"
                 );
-              })
-              .catch((error) => {
+              }).onCancel((error) => {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",

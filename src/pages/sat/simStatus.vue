@@ -8,8 +8,7 @@
         table-class="customTableClass"
         v-model:columns="columns"
         :filter="filter"
-         :rows="tableData"
-        :pagination="paginationControl"
+         :rows="tableData" v-model:pagination="paginationControl"
         row-key="id"
          :rows-per-page-options="[5, 10, 15, 20]"
          :loading="toggleAjaxLoadFilter"
@@ -19,23 +18,23 @@
         <!-- <q-td
           v-slot:body-cell-createdAt="props"
           :props="props"
-        >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-receivedAt="props"
           :props="props"
-        >{{ props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.receivedAt).format("Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-receivedAt="props"
           :props="props"
-        >{{ props.row.receivedAt ==null? "NA" : props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.receivedAt ==null? "NA" : props.row.receivedAt).format("Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-DeviceList="props"
           :props="props"
-        >{{ props.row.device.createDate | moment("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.device.createDate).format("Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-ModifyDate="props"
           :props="props"
-        >{{ props.row.device.modifyDate | moment("Do MMM Y") }}</q-td>-->
+        >{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</q-td>-->
 
         <template v-slot:top="props">
           <div class="col-md-5">
@@ -45,7 +44,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Sim Number"
+              label="Sim Number"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -276,8 +275,7 @@ this.propSimDeactivation =! this.propSimDeactivation
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_ALL_SIM_STATUS_BY_REGION({ pagination, filter })
-        .then(res => {
+      this.FETCH_ALL_SIM_STATUS_BY_REGION({ pagination, filter }).then(res => {
       console.log("SIM STATUS",JSON.stringify(this.getSimStatus))
 
           this.paginationControl = pagination;

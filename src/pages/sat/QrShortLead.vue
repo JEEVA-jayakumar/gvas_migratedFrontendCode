@@ -113,7 +113,7 @@
                           type="text"
                           style="width: 220px"
                           v-model="formData.qrShortLead.legalName"
-                          @input="handlelegalname($event)"
+                          @update:model-value="handlelegalname($event)"
                         />
                         <!-- @keydown="nameKeydown($event)" -->
                       </q-item-section>
@@ -146,7 +146,7 @@
                         type="text"
                         style="width: 220px"
                         v-model="formData.qrShortLead.marketingName"
-                        @input="handlemarketing($event)"
+                        @update:model-value="handlemarketing($event)"
                       />
                       <!-- @keydown="nameKeydown($event)" -->
                       <div
@@ -166,7 +166,7 @@
                       <q-input
                         type="text"
                         style="width: 220px"
-                        float-label="GST Number"
+                        label="GST Number"
                         placeholder="GST Number"
                         v-model="formData.qrShortLead.gstNumber"
                         @keydown="nameKeydown($event)"
@@ -196,7 +196,7 @@
                           :error="$v.formData.qrShortLead.gstNumber.$error"
                           type="text"
                           style="width: 220px"
-                          float-label="GST Number"
+                          label="GST Number"
                           placeholder="GST Number"
                           v-model="formData.qrShortLead.gstNumber"
                           @keydown="nameKeydown($event)"
@@ -208,7 +208,7 @@
                       <q-input
                         type="text"
                         style="width: 220px"
-                        float-label="Contact Email*"
+                        label="Contact Email*"
                         placeholder="Contact Email*"
                         :error="$v.formData.qrShortLead.contactEmail.$error"
                         @blur="$v.formData.qrShortLead.contactEmail.$touch"
@@ -244,7 +244,7 @@
                       <q-input
                         type="number"
                         style="width: 220px"
-                        float-label="Contact Number*"
+                        label="Contact Number*"
                         placeholder="Contact Number*"
                         :error="$v.formData.qrShortLead.contactNumber.$error"
                         @blur="$v.formData.qrShortLead.contactNumber.$touch"
@@ -281,7 +281,7 @@
                       <q-input
                         type="number"
                         style="width: 220px"
-                        float-label="Alternate Number"
+                        label="Alternate Number"
                         placeholder="Alternate Number"
                         v-model="formData.qrShortLead.alternateContactNumber"
                         @keydown="nameKeydown($event)"
@@ -364,7 +364,7 @@
                           clearable
                           color="grey-9"
                           v-model.trim="formData.qrShortLead.pincode"
-                          float-label="Pincode"
+                          label="Pincode"
                           placeholder="Pincode"
                         >
                           <q-autocomplete
@@ -414,7 +414,7 @@
                           style="width: 220px"
                           color="grey-9"
                           v-model="formData.qrShortLead.state"
-                          float-label="State*"
+                          label="State*"
                         >
                           <q-autocomplete
                             separator
@@ -455,7 +455,7 @@
                           style="width: 220px"
                           color="grey-9"
                           v-model="formData.qrShortLead.city"
-                          float-label="City*"
+                          label="City*"
                         >
                           <q-autocomplete
                             separator
@@ -531,7 +531,7 @@
                         v-model="
                           formData.qrShortLead.merchantIndustry.industryName
                         "
-                        float-label="MCC*"
+                        label="MCC*"
                       >
                         <q-autocomplete
                           separator
@@ -566,7 +566,7 @@
                         type="text"
                         style="width: 220px"
                         v-model="formData.qrShortLead.natureOfBusiness"
-                        @input="handleInput($event)"
+                        @update:model-value="handleInput($event)"
                       />
                       <!-- @keydown="nameKeydown($event)" -->
                     </q-item>
@@ -680,10 +680,10 @@
                           style="width: 220px"
                           color="grey-9"
                           v-model="formData.qrShortLead.salesPersonName"
-                          float-label="Sales Person*"
+                          label="Sales Person*"
                           :options="dropDown.salesPersonOptions"
                           @selected="salesSelected"
-                          @input="saveFieldData"
+                          @update:model-value="saveFieldData"
                         />
                         <div
                           v-if="$v.formData.qrShortLead.salesPersonName.$error"
@@ -711,10 +711,10 @@
                         style="width: 220px"
                         color="grey-9"
                         v-model="formData.qrShortLead.regionCode"
-                        float-label="Region*"
+                        label="Region*"
                         :options="regionOptions"
                         @selected="regionSelected"
-                        @input="saveFieldData"
+                        @update:model-value="saveFieldData"
                       />
                     </q-item-section>
                     </q-item> -->
@@ -754,7 +754,7 @@
                           "
                           type="text"
                           style="width: 220px"
-                          float-label="Address*"
+                          label="Address*"
                           placeholder="Address*"
                           v-model="formData.qrShortLead.personalAddress"
                         />
@@ -801,7 +801,7 @@
                           style="width: 220px"
                           color="grey-9"
                           v-model="formData.qrShortLead.personalInfoCity"
-                          float-label="City*"
+                          label="City*"
                         >
                           <q-autocomplete
                             separator
@@ -843,7 +843,7 @@
                           style="width: 220px"
                           color="grey-9"
                           v-model="formData.qrShortLead.personalInfoState"
-                          float-label="State*"
+                          label="State*"
                         >
                           <q-autocomplete
                             separator
@@ -893,7 +893,7 @@
                           v-model.trim="
                             formData.qrShortLead.personalInfoPincode
                           "
-                          float-label="Pincode*"
+                          label="Pincode*"
                           placeholder="Pincode*"
                         >
                           <q-autocomplete
@@ -943,7 +943,7 @@
                         <q-input
                           type="number"
                           style="width: 220px"
-                          float-label="Mobile*"
+                          label="Mobile*"
                           placeholder="Mobile*"
                           :error="
                             $v.formData.qrShortLead.personalInfoMobile.$error
@@ -992,7 +992,7 @@
                         <q-input
                           type="text"
                           style="width: 220px"
-                          float-label="Email ID*"
+                          label="Email ID*"
                           placeholder="Email ID*"
                           :error="
                             $v.formData.qrShortLead.personalInfoEmail.$error
@@ -1043,7 +1043,7 @@
                         <q-input
                           @blur="$v.formData.qrShortLead.panNumber.$touch"
                           :error="$v.formData.qrShortLead.panNumber.$error"
-                          float-label="PAN*"
+                          label="PAN*"
                           placeholder="PAN*"
                           type="text"
                           style="width: 220px"
@@ -1089,7 +1089,7 @@
                           v-model="formData.qrShortLead.dateOfBirth"
                           :max="tomorrow"
                           style="width: 220px"
-                          float-label="DOB*"
+                          label="DOB*"
                           placeholder="DOB*"
                           :format="'DD/MM/YYYY'"
                         /> -->
@@ -1133,7 +1133,7 @@
                       <q-input
                         type="text"
                         style="width: 220px"
-                        float-label="Passport Number"
+                        label="Passport Number"
                         placeholder="Passport Number"
                         v-model="formData.qrShortLead.passportNumber"
                       />
@@ -1146,7 +1146,7 @@
                       <q-input
                         type="text"
                         style="width: 220px"
-                        float-label="Passport Expiry Date"
+                        label="Passport Expiry Date"
                         placeholder="Passport Expiry Date"
                         v-model="formData.qrShortLead.passportExpiryDate"
                       />
@@ -1179,7 +1179,7 @@
 
                       <q-select
                         v-model="formData.qrShortLead.ownHouse"
-                        float-label="Own House*"
+                        label="Own House*"
                         :options="ownHouseOptions"
                         style="width: 220px"
                         @selected="houseSelected"
@@ -1238,7 +1238,7 @@
                         style="width: 220px"
                         v-model="formData.qrShortLead.hoursWeekdayStart"
                         @keydown="nameKeydownhoursWeekdayStart"
-                        @input="handleNumericInputhoursWeekdayStart"
+                        @update:model-value="handleNumericInputhoursWeekdayStart"
                       />
                       <div
                         v-if="$v.formData.qrShortLead.hoursWeekdayStart.$error"
@@ -1260,7 +1260,7 @@
                         style="width: 220px"
                         v-model="formData.qrShortLead.hoursWeekdayEnd"
                         @keydown="nameKeydownhoursWeekdayEnd"
-                        @input="handleNumericInputhoursWeekdayEnd"
+                        @update:model-value="handleNumericInputhoursWeekdayEnd"
                       />
 
                       <div
@@ -1283,7 +1283,7 @@
                         style="width: 220px"
                         v-model="formData.qrShortLead.hoursWeekendStart"
                         @keydown="nameKeydownhoursWeekendStart"
-                        @input="handleNumericInputhoursWeekendStart"
+                        @update:model-value="handleNumericInputhoursWeekendStart"
                       />
                       <div
                         v-if="$v.formData.qrShortLead.hoursWeekendStart.$error"
@@ -1305,7 +1305,7 @@
                         style="width: 220px"
                         v-model="formData.qrShortLead.hoursWeekendEnd"
                         @keydown="nameKeydownhoursWeekendEnd"
-                        @input="handleNumericInputhoursWeekendEnd"
+                        @update:model-value="handleNumericInputhoursWeekendEnd"
                       />
                       <div
                         v-if="$v.formData.qrShortLead.hoursWeekendEnd.$error"
@@ -1449,9 +1449,9 @@
                           style="width: 220px"
                           v-model="formData.qrShortLead.marsRentalPlanName"
                           :options="dropDown.rentalplan"
-                          float-label="Select Plan*"
+                          label="Select Plan*"
                           @selected="rentalPlanSelected"
-                          @input="saveFieldData"
+                          @update:model-value="saveFieldData"
                         />
                       </q-item-section>
                       <div
@@ -1484,7 +1484,7 @@
                           color="grey-9"
                           style="width: 220px"
                           v-model="formData.qrShortLead.rentalMode"
-                          float-label="Rental Mode*"
+                          label="Rental Mode*"
                           :options="rentalModeOptions"
                         />
                       </q-item-section>
@@ -1883,7 +1883,7 @@
                         style="width: 220px"
                         type="number"
                         v-model="formData.qrShortLead.mdrFixed"
-                        float-label="Fixed"
+                        label="Fixed"
                         placeholder="Fixed"
                       />
                       <div
@@ -1904,7 +1904,7 @@
                         type="number"
                         style="width: 220px"
                         v-model="formData.qrShortLead.maxMdrPerTransaction"
-                        float-label="Max MDR per transaction"
+                        label="Max MDR per transaction"
                         placeholder="Max MDR per transaction"
                       />
                       <div
@@ -1944,7 +1944,7 @@
                         style="width: 220px"
                         type="text"
                         v-model="formData.qrShortLead.chequeNumber"
-                        float-label="Cheque Number"
+                        label="Cheque Number"
                         placeholder="Cheque Number"
                         @keydown="nameKeydown($event)"
                       />
@@ -1962,7 +1962,7 @@
                         style="width: 220px"
                         type="text"
                         v-model="formData.qrShortLead.neftId"
-                        float-label="NEFT ID"
+                        label="NEFT ID"
                         placeholder="NEFT ID"
                         @keydown="nameKeydown($event)"
                       />
@@ -2007,7 +2007,7 @@
                           @blur="$v.formData.qrShortLead.accountNumber.$touch"
                           :error="$v.formData.qrShortLead.accountNumber.$error"
                           style="width: 220px"
-                          float-label="Account Number"
+                          label="Account Number"
                           placeholder="Account Number"
                           v-model="formData.qrShortLead.accountNumber"
                           @keydown="nameKeydownacc($event)"
@@ -2051,7 +2051,7 @@
                           :error="$v.formData.qrShortLead.ifscCode.$error"
                           style="width: 220px"
                           type="text"
-                          float-label="IFSC Code"
+                          label="IFSC Code"
                           placeholder="IFSC Code"
                           v-model="formData.qrShortLead.ifscCode"
                           @keydown="nameKeydown($event)"
@@ -2094,7 +2094,7 @@
                           :error="$v.formData.qrShortLead.bankName.$error"
                           style="width: 220px"
                           type="text"
-                          float-label="Bank Name"
+                          label="Bank Name"
                           placeholder="Bank Name"
                           v-model="formData.qrShortLead.bankName"
                         />
@@ -2187,7 +2187,7 @@
                           "
                           style="width: 220px"
                           type="text"
-                          float-label="Remarks"
+                          label="Remarks"
                           placeholder="Remarks"
                           v-model="formData.qrShortLead.satToMarsRemarks"
                         />
@@ -2216,7 +2216,7 @@
                         :error="$v.formData.qrShortLead.satToMarsRemarks.$error"
                         style="width: 220px"
                         type="text"
-                        float-label="Remarks"
+                        label="Remarks"
                         placeholder="Remarks"
                         v-model="formData.qrShortLead.satToMarsRemarks"
                       />
@@ -4070,7 +4070,7 @@ loadUpdate(){
         plan: this.propLeadDeatils.plan.id
       };
       this.DEVICE_MODEL_FROM_MARS(param).then(response => {
-        let obj = response.body.data.marsDeviceModel;
+        let obj = response.data.data.marsDeviceModel;
         this.terminalModelSet = [];
         this.terminalModelSet.push({
           label: obj.name,
@@ -4255,8 +4255,7 @@ loadUpdate(){
         spinnerColor: "purple-9",
         message: "Validating .."
       });
-      this.VERIFY_QR_LEAD_DOCUMENTS({ id: this.$route.params.id, params: [] })
-        .then(response => {
+      this.VERIFY_QR_LEAD_DOCUMENTS({ id: this.$route.params.id, params: [] }).then(response => {
           this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: "purple-9",
@@ -4350,8 +4349,7 @@ loadUpdate(){
 
             refNumber: this.propLeadDeatils.merchantRefCode,
             qrLeadStatus: this.propLeadDeatils.qrLeadStatus
-          })
-            .then(response => {
+          }).then(response => {
               let feed_paramaters;
               if (response.status == 204) {
                 feed_paramaters = {
@@ -4359,13 +4357,12 @@ loadUpdate(){
                   merchantRefCode: this.propLeadDeatils.merchantRefCode
                 };
               } else {
-                feed_paramaters = response.body;
+                feed_paramaters = response.data;
               }
               this.PROCEED_TO_MARS({
                 request: feed_paramaters,
                 leadId: this.$route.params.id
-              })
-                .then(response => {
+              }).then(response => {
                   this.$router.push("/sat/staticQrLeads");
                   this.$q.notify({
                     color: "positive",
@@ -4413,8 +4410,7 @@ loadUpdate(){
             params: request,
             refNumber: this.propLeadDeatils.merchantRefCode,
             qrLeadStatus: this.propLeadDeatils.qrLeadStatus
-          })
-            .then(response => {
+          }).then(response => {
               let feed_paramaters;
               if (response.status == 204) {
                 feed_paramaters = {
@@ -4422,13 +4418,12 @@ loadUpdate(){
                   merchantRefCode: this.propLeadDeatils.merchantRefCode
                 };
               } else {
-                feed_paramaters = response.body;
+                feed_paramaters = response.data;
               }
               this.PROCEED_TO_MARS({
                 request: feed_paramaters,
                 leadId: this.$route.params.id
-              })
-                .then(response => {
+              }).then(response => {
                   this.$router.push("/sat/staticQrLeads");
                   this.$q.notify({
                     color: "positive",

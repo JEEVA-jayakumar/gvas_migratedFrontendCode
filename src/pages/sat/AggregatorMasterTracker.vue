@@ -14,8 +14,7 @@
           table-class="customTableClass"
           :rows="tableData"
           :columns="columns"
-          :filter="filter"
-          :pagination="paginationControl"
+          :filter="filter" v-model:pagination="paginationControl"
           row-key="name"
           :loading="toggleAjaxLoadFilter"
           :rows-per-page-options="[5,10,15,20,25]"
@@ -31,7 +30,7 @@
             v-slot:body-cell-leadNumber="props"
             :props="props"
             class="cursor-pointer"
-            @click.native="toggleLeadInformation(props.row.leadInformation)"
+            @click="toggleLeadInformation(props.row.leadInformation)"
           >
             <span class="label text-primary"># {{props.row.leadInformation.leadNumber}}</span>
           </q-td>
@@ -44,7 +43,7 @@
             :props="props"
           >{{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}</q-td>
           <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-            <span class="label">{{props.row.deviceStatusDate | moment("Do MMM Y")}}</span>
+            <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
           </q-td>
           <template slot="top" >
             <div class="col-5">
@@ -54,7 +53,7 @@
                 separator
                 color="grey-9"
                 placeholder="Type.."
-                float-label="Search by MID, TID, Merchant Name"
+                label="Search by MID, TID, Merchant Name"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -300,8 +299,7 @@ import { required } from '@vuelidate/validators';
           spinnerColor: "purple-9",
           message: "Fetching data .."
         });
-        this.AGGREGATORS_MASTER_TRACKER_LIST({ pagination, filter })
-          .then(res => {
+        this.AGGREGATORS_MASTER_TRACKER_LIST({ pagination, filter }).then(res => {
             this.paginationControl = pagination;
             this.paginationControl.rowsNumber = this.getAggregatorsMasterTrackerList.totalElements;
             this.paginationControl.page = this.getAggregatorsMasterTrackerList.number + 1;

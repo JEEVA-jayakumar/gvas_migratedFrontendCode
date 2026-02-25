@@ -27,7 +27,7 @@
               :error="$v.formData.planName.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Plan"
+              label="Plan"
               placeholder="Plan"
             />
           </div>
@@ -50,8 +50,7 @@
           :rows="tableData"
           table-class="customSATableClass"
           :columns="columns"
-          :filter="filterSearch"
-          :pagination="paginationControl"
+          :filter="filterSearch" v-model:pagination="paginationControl"
           :filter-method="myCustomSearchFilter"
           row-key="name"
           color="grey-9"
@@ -90,7 +89,7 @@
                 color="grey-9"
                 v-model="filterSearch"
                 placeholder="Type.."
-                float-label="Search by name, short name"
+                label="Search by name, short name"
                 class="q-mr-lg"
               />-
             </div>

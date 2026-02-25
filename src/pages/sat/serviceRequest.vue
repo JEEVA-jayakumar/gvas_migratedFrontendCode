@@ -47,7 +47,7 @@
               v-model.trim="formData.podNumber"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Enter Pod Number*"
+              label="Enter Pod Number*"
               placeholder="Enter Pod Number*"
             />
           </div>
@@ -136,10 +136,13 @@
           default
           color="dark"
           name="unAssigned"
-          slot="title"
           label="Unassigned"
         />
-        <q-tab-panel name="unAssigned">
+        <q-tab color="dark" name="assigned" label="Assigned" />
+        <q-tab color="dark" name="closed" label="Closed" />
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="unAssigned">
           <!--START: table Data    :rows="tableData1" -->
           <q-table
             :columns="columnDataUnassigned"
@@ -158,7 +161,7 @@
               v-slot:body-cell-leadNumber="props"
               :props="props"
               class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row.leadInformation)"
+              @click="toggleLeadInformation(props.row.leadInformation)"
             >
               <span class="label text-primary"
                 ># {{ props.row.leadInformation.leadNumber }}</span
@@ -167,14 +170,12 @@
             <q-td
               v-slot:body-cell-submitToMarsDate="props"
               :props="props"
-              >{{
-                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-              }}</q-td
+              >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-createdAt="props"
               :props="props"
-              >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+              >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-tid="props"
@@ -207,7 +208,7 @@
                   color="grey-9"
                   v-model="filterSearch1"
                   placeholder="Type.."
-                  float-label="Search .."
+                  label="Search .."
                   class="q-mr-lg q-py-sm"
                 />
               </div> -->
@@ -216,15 +217,12 @@
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-        <q-tab color="dark" name="assigned" slot="title" label="Assigned" />
-
-        <q-tab-panel name="assigned">
+<q-tab-panel name="assigned">
           <!--START: table Data    :rows="tableData" -->
           <q-table
             :columns="columnDataAssigned"
             table-class="customTableClass"
-            :filter="filterSearch"
-            :pagination="paginationControl"
+            :filter="filterSearch" v-model:pagination="paginationControl"
             v-model:selected="formData.marsDeviceIdsCookedUnAssinged"
             row-key="id"
             :loading="tableAjaxLoading"
@@ -242,7 +240,7 @@
               v-slot:body-cell-leadNumber="props"
               :props="props"
               class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row.leadInformation)"
+              @click="toggleLeadInformation(props.row.leadInformation)"
             >
               <span class="label text-primary"
                 ># {{ props.row.leadInformation.leadNumber }}</span
@@ -251,14 +249,12 @@
             <q-td
               v-slot:body-cell-submitToMarsDate="props"
               :props="props"
-              >{{
-                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-              }}</q-td
+              >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-createdAt="props"
               :props="props"
-              >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+              >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-deviceAddress="props"
@@ -313,7 +309,7 @@
                   color="grey-9"
                   v-model="filterSearch"
                   placeholder="Type.."
-                  float-label="Search .."
+                  label="Search .."
                   class="q-mr-lg q-py-sm"
                 />
               </div> -->
@@ -321,15 +317,13 @@
           </q-table>
           <!--ENDv-model: table Data -->
         </q-tab-panel>
-        <q-tab color="dark" name="closed" slot="title" label="Closed" />
-        <q-tab-panel name="closed">
+<q-tab-panel name="closed">
           <!--START: table Data -->
           <q-table
             :rows="closedDatas"
             :columns="columns"
             table-class="customTableClass"
-            :filter="filterSearch2"
-            :pagination="paginationControl2"
+            :filter="filterSearch2" v-model:pagination="paginationControl2"
             v-model:selected="formData.marsDeviceIdsCookedUnAssinged"
             row-key="id"
             :loading="tableAjaxLoading"
@@ -347,7 +341,7 @@
               v-slot:body-cell-leadNumber="props"
               :props="props"
               class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row.leadInformation)"
+              @click="toggleLeadInformation(props.row.leadInformation)"
             >
               <span class="label text-primary"
                 ># {{ props.row.leadInformation.leadNumber }}</span
@@ -356,14 +350,12 @@
             <q-td
               v-slot:body-cell-submitToMarsDate="props"
               :props="props"
-              >{{
-                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-              }}</q-td
+              >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-createdAt="props"
               :props="props"
-              >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+              >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-deviceAddress="props"
@@ -418,7 +410,7 @@
                   color="grey-9"
                   v-model="filterSearch2"
                   placeholder="Type.."
-                  float-label="Search .."
+                  label="Search .."
                   class="q-mr-lg q-py-sm"
                 />
               </div> -->
@@ -426,7 +418,7 @@
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
       <div class="row items-center gutter-y-sm">
         <div class="col-md-9 col-sm-12 col-xs-12">
           <div class="row items-center"></div>
@@ -1006,8 +998,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.DEVICE_REPLACEMENT_QUEUE_UNASSIGNED_LIST({ pagination, filter })
-        .then((res) => {
+      this.DEVICE_REPLACEMENT_QUEUE_UNASSIGNED_LIST({ pagination, filter }).then((res) => {
           this.IMPLEMENTATION_EXECUTIVE_LIST().then((response) => {
             let assumeArr = [];
             this.getImplementationExecutiveList.map(function (value) {
@@ -1048,8 +1039,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.DEVICE_REPLACEMENT_QUEUE_ASSIGNED_LIST({ pagination, filter })
-        .then((res) => {
+      this.DEVICE_REPLACEMENT_QUEUE_ASSIGNED_LIST({ pagination, filter }).then((res) => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 
@@ -1082,8 +1072,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.DEVICE_REPLACEMENT_QUEUE_ASSIGNED_LIST({ pagination, filter })
-        .then((res) => {
+      this.DEVICE_REPLACEMENT_QUEUE_ASSIGNED_LIST({ pagination, filter }).then((res) => {
           // updating pagination to reflect in the UI
           this.paginationControl2 = pagination;
 

@@ -3,9 +3,9 @@
     <!--START: content -->
     <div class="q-pa-md">
       <!-- START: Dashboard wrapper -->
-      <div class="row gutter-x-xs">
+      <div class="row q-col-gutter-x-xs">
         <div class="col-lg-8">
-          <div class="row gutter-x-xs">
+          <div class="row q-col-gutter-x-xs">
             <div class="col-lg-4 col-md-6 col-sm-12">
               <div>
                 <q-card class="border-radius-10 q-py-xs" color="purple-9">
@@ -132,7 +132,7 @@
               </div>
             </div>
           </div>
-          <div class="row gutter-x-xs">
+          <div class="row q-col-gutter-x-xs">
             <div class="col-lg-12">
               <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
                 <q-card-section>
@@ -162,7 +162,7 @@
         </div>
 
         <div class="col-lg-4">
-          <div class="row gutter-sm">
+          <div class="row q-col-gutter-sm">
             <div class="col-lg-5">
               <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
                 <q-card-section>
@@ -228,7 +228,7 @@
 
               <q-tabs
                 v-model="agingTrackerPending.tabsModel"
-                inverted
+                filled
                 color="white"
                 no-pane-border
                 class="relative-position"
@@ -236,7 +236,6 @@
                 <q-tab
                   class="q-pa-sm"
                   :name="tab.name"
-                  slot="title"
                   v-for="tab in          agingTrackerPending.tabs"
                   :key="tab.tabTitle"
                 >
@@ -246,8 +245,9 @@
                     class="q-px-sm q-pa-sm text-caption text-weight-light capitalize"
                   >{{tab.tabTitle}}</q-chip>
                 </q-tab>
-
-                <q-tab-panel
+</q-tabs>
+<q-tab-panels v-model="agingTrackerPending.tabsModel" animated>
+<q-tab-panel
                   :name="tabPaneItem.name"
                   v-for="tabPaneItem in agingTrackerPending.tabItems"
                   :key="tabPaneItem.name"
@@ -302,7 +302,7 @@
                     </div>
                   </div>
                 </q-tab-panel>
-              </q-tabs>
+</q-tab-panels>
               <router-link to="/sat/aging/tracker/pending" class="text-grey-8">
                 <p>View more</p>
               </router-link>
@@ -313,7 +313,7 @@
               </div>
               <q-tabs
                 v-model="agingTrackerPending.tabsModel"
-                inverted
+                filled
                 color="white"
                 no-pane-border
                 class="relative-position"
@@ -321,7 +321,6 @@
                 <q-tab
                   class="q-pa-sm"
                   :name="tab.name"
-                  slot="title"
                   v-for="tab in          agingTrackerPending.tabs"
                   :key="tab.tabTitle"
                 >
@@ -331,8 +330,9 @@
                     class="q-px-sm q-pa-sm text-caption text-weight-light capitalize"
                   >{{tab.tabTitle}}</q-chip>
                 </q-tab>
-
-                <q-tab-panel
+</q-tabs>
+<q-tab-panels v-model="agingTrackerPending.tabsModel" animated>
+<q-tab-panel
                   :name="tabPaneItem.name"
                   v-for="tabPaneItem in agingTrackerPending.tabItems"
                   :key="tabPaneItem.name"
@@ -387,7 +387,7 @@
                     </div>
                   </div>
                 </q-tab-panel>
-              </q-tabs>
+</q-tab-panels>
               <router-link to="/sat/aging/tracker/pending" class="text-grey-8">
                 <p>View more</p>
               </router-link>

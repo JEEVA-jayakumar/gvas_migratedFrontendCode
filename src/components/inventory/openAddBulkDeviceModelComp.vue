@@ -15,7 +15,7 @@
             <q-select
               color="grey-9"
               v-model="formData.deviceType"
-              float-label="Select Device Type"
+              label="Select Device Type"
               radio
               :options="selectOption"
             />
@@ -24,7 +24,7 @@
             <q-input
               color="grey-9"
               v-model="formData.invoiceNumber"
-              float-label="Invoice Number"
+              label="Invoice Number"
             />
           </div>
           <div class="col-md-8" align="left">

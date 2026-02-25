@@ -22,7 +22,7 @@
                 :error="$v.formData.name.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Enter Prefix"
+                label="Enter Prefix"
                 placeholder="Enter Prefix"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -34,7 +34,7 @@
               :error="$v.formData.hostCode.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Enter VAS Code"
+              label="Enter VAS Code"
               placeholder="Enter VAS Code"
               @keyup.enter="submitLeadSourceData(formData)"
               
@@ -60,7 +60,7 @@
                 :error="$v.formData.baseTidMidPrefix.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Tid/Mid Prefix"
+                label="Tid/Mid Prefix"
                 placeholder="Tid/Mid Prefix"
                 @keyup.enter="submitLeadSourceData(formData)"
               />

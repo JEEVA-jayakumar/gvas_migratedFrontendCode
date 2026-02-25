@@ -441,8 +441,7 @@ export default {
                 : "Are you sure want to delete users?",
             ok: "Continue",
             cancel: "Cancel"
-          })
-          .then(() => {
+          }).onOk(() => {
             this.$q.loading.show({
               delay: 100, // ms
               message: "Please Wait",
@@ -467,8 +466,7 @@ export default {
                     message: "Successfully Activated!",
                     icon: "thumb_up"
                   });
-                })
-                .catch(error => {
+                }).onCancel(error => {
                   this.$q.loading.hide();
                   this.$q.notify({
                     color: "negative",

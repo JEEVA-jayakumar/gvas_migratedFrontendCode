@@ -55,7 +55,7 @@
         <q-input
           color="grey-9"
           v-model="leadDataEntryRemarks"
-          float-label="Remarks"
+          label="Remarks"
           placeholder="Remarks"
         />
       </div>

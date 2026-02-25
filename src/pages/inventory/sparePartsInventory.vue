@@ -52,11 +52,11 @@
         <div v-if="flag == '0' || flag == '1'" class="col-md-4">
           <q-select
             v-model="formData.allocate_region"
-            float-label="Select Region"
+            label="Select Region"
             radio
             color="grey-9"
             :options="regionOptions"
-            @input="regionBasedSoLoad"
+            @update:model-value="regionBasedSoLoad"
           />
         </div>
         <div v-if="flag == '1'" class="col-md-3">
@@ -64,7 +64,7 @@
             filter 
             clearable
             v-model="formData.allocate_so"
-            float-label="Select SO"
+            label="Select SO"
             radio
             color="grey-9"
             :options="regionBasedSo"
@@ -73,7 +73,7 @@
         <div v-if="flag == '2'" class="col-md-3">
           <q-select
             v-model="formData.allocate_reseller"
-            float-label="Select allocate_reseller"
+            label="Select allocate_reseller"
             radio
             color="grey-9"
             :options="resellarOptions"
@@ -119,7 +119,7 @@
           <q-input
             disable
             v-model="formData.pod_number"
-            float-label="Pod Number"
+            label="Pod Number"
             radio
             color="grey-9"
           />
@@ -129,7 +129,7 @@
           <q-input
             disable
             v-model="formData.total_count"
-            float-label="Total Count"
+            label="Total Count"
             radio
             color="grey-9"
           />

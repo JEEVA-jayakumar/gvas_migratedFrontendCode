@@ -5,7 +5,7 @@
     class="bg-custom-light-grey bottom-border"
     color="grey-9"
     flat
-    inverted
+    filled
   >
     <q-btn
     flat
@@ -30,14 +30,14 @@
             <!-- Direct child of target -->
             <q-menu class="shadow-8 " anchor="bottom middle" self="top middle" style="min-width:350px">
               <q-list separator link class="no-padding">
-                <q-item v-close-overlay @click.native="showNotification">
-                  <q-item-section icon="fas fa-user" inverted color="dark" />
+                <q-item v-close-overlay @click="showNotification">
+                  <q-item-section icon="fas fa-user" filled color="dark" />
                   <q-item-section>
                     <q-item-label label>My Account</q-item-label>
                   </q-item-section>
                 </q-item>
-                <q-item v-close-overlay @click.native="$router.push('/login')">
-                  <q-item-section icon="fas fa-sign-out-alt" inverted color="dark" />
+                <q-item v-close-overlay @click="$router.push('/login')">
+                  <q-item-section icon="fas fa-sign-out-alt" filled color="dark" />
                   <q-item-section>
                     <q-item-label label>Logout</q-item-label>
                   </q-item-section>

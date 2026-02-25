@@ -20,7 +20,7 @@
             @keyup.enter="fnEditPermissionSubmit(formData.permissionDetails)"
             v-model="formData.permissionDetails.permission" 
             :error="$v.formData.permissionDetails.permission.$error" 
-            class="text-weight-regular text-grey-8 q-my-sm" color="grey-9" float-label="Permission" placeholder="Permission" />
+            class="text-weight-regular text-grey-8 q-my-sm" color="grey-9" label="Permission" placeholder="Permission" />
           </div>
         </div>
         <div class="row gutter-sm q-pa-md">

@@ -1,15 +1,16 @@
 <template>
     <q-page>
         <div>
-            <q-tabs no-pane-border v-model="selectedTab" color="dark" inverted class="shadow-1"
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
                 @select="goToSelectedTab">
-                <q-tab default color="dark" name="tab-1" slot="title" label="Approved Pod" />
-                <q-tab color="dark" name="tab-2" slot="title" label="Rejected Pod" />
-                <q-tab color="dark" name="tab-3" slot="title" label=" Allocated Pod" />
-
-                <q-tab-panel name="tab-1">
+                <q-tab default color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="tab-1">
                     <q-table :rows="tableData" table-class="customSATableClass" :columns="columns"
-                        :filter="filterSearch" :pagination="paginationControl"
+                        :filter="filterSearch" v-model:pagination="paginationControl"
                         :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
                         @request="ajaxLoadAllLeadInfo">
                         <q-td v-slot:body-cell-createdAt="props" :props="props">{{
@@ -73,9 +74,9 @@
                         </template>
                     </q-table>
                 </q-tab-panel>
-                <q-tab-panel name="tab-2">
+<q-tab-panel name="tab-2">
                     <q-table :rows="tableData1" table-class="customSATableClass" :columns="columns1"
-                        :filter="filterSearch1" :pagination="paginationControl1"
+                        :filter="filterSearch1" v-model:pagination="paginationControl1"
                         :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
                         @request="ajaxLoadAllLeadInfo1">
                         <q-td v-slot:body-cell-createdAt="props" :props="props">{{
@@ -163,10 +164,10 @@
                         </template>
                     </q-table>
                 </q-tab-panel>
-                <q-tab-panel name="tab-3">
+<q-tab-panel name="tab-3">
 
                     <q-table :rows="tableData2" table-class="customSATableClass" :columns="columns2"
-                        :filter="filterSearch2" :pagination="paginationControl2"
+                        :filter="filterSearch2" v-model:pagination="paginationControl2"
                         :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
                         @request="ajaxLoadAllLeadInfo2">
                         <q-td v-slot:body-cell-createdAt="props" :props="props">{{
@@ -218,7 +219,7 @@
                         </template>
                     </q-table>
                 </q-tab-panel>
-            </q-tabs>
+</q-tab-panels>
         </div>
     </q-page>
 </template>
@@ -614,8 +615,7 @@ export default {
           message: "Are you sure want to Update?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: "purple-9",
@@ -720,8 +720,7 @@ export default {
                     message: "Are you sure want to Approve?",
                     ok: "Continue",
                     cancel: "Cancel"
-                })
-                .then(() => {
+                }).onOk(() => {
                     this.$q.loading.show({
                         delay: 0, // ms
                         spinnerColor: "purple-9",
@@ -764,8 +763,7 @@ export default {
                                 message: "Successfully Approved!",
                                 icon: "thumb_up"
                             });
-                        })
-                        .catch(error => {
+                        }).catch(error => {
                             this.$q.loading.hide();
                             this.$q.notify({
                                 color: "negative",
@@ -1051,8 +1049,7 @@ export default {
                     message: "Are you sure want to delete?",
                     ok: "Continue",
                     cancel: "Cancel"
-                })
-                .then(() => {
+                }).onOk(() => {
                     this.$q.loading.show({
                         delay: 100, // ms
                         message: "Please Wait",
@@ -1068,8 +1065,7 @@ export default {
                         });
                     });
                     this.$q.loading.hide();
-                })
-                .catch(() => {
+                }).onCancel(() => {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",
@@ -1086,8 +1082,7 @@ export default {
                     message: "Are you sure want to delete?",
                     ok: "Continue",
                     cancel: "Cancel"
-                })
-                .then(() => {
+                }).onOk(() => {
                     this.$q.loading.show({
                         delay: 100, // ms
                         message: "Please Wait",
@@ -1103,8 +1098,7 @@ export default {
                         });
                     });
                     this.$q.loading.hide();
-                })
-                .catch(() => {
+                }).onCancel(() => {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",

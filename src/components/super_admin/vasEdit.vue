@@ -22,7 +22,7 @@
                 :error="$v.formData.name.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Enter Vas"
+                label="Enter Vas"
                 placeholder="Enter VAs"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -48,7 +48,7 @@
                 :error="$v.formData.vasCode.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Vas Code"
+                label="Vas Code"
                 placeholder="Vas Code"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -61,7 +61,7 @@
                 :error="$v.formData.lastBaseTid.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="last Base Tid"
+                label="last Base Tid"
                 placeholder="last Base Tid"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -74,7 +74,7 @@
                 :error="$v.formData.lastBaseMid.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="last Base Mid"
+                label="last Base Mid"
                 placeholder="last Base Mid"
                 @keyup.enter="submitLeadSourceData(formData)"
               />

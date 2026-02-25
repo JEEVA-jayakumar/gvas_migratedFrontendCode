@@ -22,7 +22,7 @@
                 <!-- <q-item multiline>
                   <q-item-section
                     label="Category"
-                    :sublabel="propLeadInformation.leadCategory == 1? 'Normal':propLeadInformation.leadCategory == 2? 'Exception': propLeadInformation.leadCategory == 3? 'Aggregator': 'NA'"
+                    :caption="propLeadInformation.leadCategory == 1? 'Normal':propLeadInformation.leadCategory == 2? 'Exception': propLeadInformation.leadCategory == 3? 'Aggregator': 'NA'"
                   />
                 </q-item> -->
                 <!-- <q-item multiline v-if="propLeadInformation.leadCategory == 2">
@@ -39,73 +39,73 @@
                 <!-- <q-item multiline>
                   <q-item-section
                     label="Document upload type"
-                    :sublabel="propLeadInformation.documentUploadedType == 1? 'Handover to SAT': 'Full document upload'"
+                    :caption="propLeadInformation.documentUploadedType == 1? 'Handover to SAT': 'Full document upload'"
                   />
                 </q-item> -->
                 <q-item multiline>
                   <q-item-section
                     label="SO Name"
-                    :sublabel="propLeadInformation.createdBy== null?'NA':propLeadInformation.createdBy.name"
+                    :caption="propLeadInformation.createdBy== null?'NA':propLeadInformation.createdBy.name"
                   />
                 </q-item>
                 <q-item multiline>
-                  <q-item-section label="Merchant Name" :sublabel="propLeadInformation.merchantName"/>
+                  <q-item-section label="Merchant Name" :caption="propLeadInformation.merchantName"/>
                 </q-item>
                 <q-item multiline>
                   <q-item-section
                     label="Source"
                     v-if="'leadSource' in propLeadInformation"
-                    :sublabel="propLeadInformation.leadSource.sourceName"
+                    :caption="propLeadInformation.leadSource.sourceName"
                   />
                 </q-item>
                 <q-item multiline>
-                  <q-item-section label="Contact Name" :sublabel="propLeadInformation.contactName"/>
+                  <q-item-section label="Contact Name" :caption="propLeadInformation.contactName"/>
                 </q-item>
                 <q-item multiline>
-                  <q-item-section label="Contact Number" :sublabel="propLeadInformation.contactNumber"/>
+                  <q-item-section label="Contact Number" :caption="propLeadInformation.contactNumber"/>
                 </q-item>
                 <!-- <q-item multiline>
                   <q-item-section
                     label="Alternate Contact Number"
-                    :sublabel="propLeadInformation.alternateContactNumber || 'NA'"
+                    :caption="propLeadInformation.alternateContactNumber || 'NA'"
                   />
                 </q-item> -->
                 <q-item multiline>
-                  <q-item-section label="Contact Email" :sublabel="propLeadInformation.contactEmail || 'NA'"/>
+                  <q-item-section label="Contact Email" :caption="propLeadInformation.contactEmail || 'NA'"/>
                 </q-item>
                 <q-item multiline>
                   <q-item-section
                     lines="5"
                     label="Address"
-                    :sublabel="propLeadInformation.contactAddress+', '+propLeadInformation.city+', '+propLeadInformation.state+', '+propLeadInformation.pincode"
+                    :caption="propLeadInformation.contactAddress+', '+propLeadInformation.city+', '+propLeadInformation.state+', '+propLeadInformation.pincode"
                   />
                 </q-item>
                 <q-item multiline>
                   <q-item-section
                     label="Device Type"
                     v-if="'device' in propLeadInformation"
-                    :sublabel="propLeadInformation.device.deviceName"
+                    :caption="propLeadInformation.device.deviceName"
                   />
                 </q-item>
                 <q-item multiline>
                   <q-item-section
                     label="Plan"
-                    :sublabel="propLeadInformation.plan == null? 'NA':propLeadInformation.plan.planName"
+                    :caption="propLeadInformation.plan == null? 'NA':propLeadInformation.plan.planName"
                   />
                 </q-item>
                 <q-item multiline>
-                  <q-item-section label="Setup Fees" :sublabel="'Rs. '+propLeadInformation.setupFees"/>
+                  <q-item-section label="Setup Fees" :caption="'Rs. '+propLeadInformation.setupFees"/>
                 </q-item>
                 <q-item multiline>
                   <q-item-section
                     label="Recurring Fees"
-                    :sublabel="'Rs. '+propLeadInformation.recurringFees"
+                    :caption="'Rs. '+propLeadInformation.recurringFees"
                   />
                 </q-item>
                 <!-- <q-item multiline>
                   <q-item-section
                     label="Amount Collected"
-                    :sublabel="'Rs. '+propLeadInformation.amountCollected"
+                    :caption="'Rs. '+propLeadInformation.amountCollected"
                   />
                 </q-item> -->
                 <q-item
@@ -114,26 +114,26 @@
                 >
                   <q-item-section
                     label="Merchant Type"
-                    :sublabel="propLeadInformation.qrMerchantType.qrMerchantType"
+                    :caption="propLeadInformation.qrMerchantType.qrMerchantType"
                   />
                 </q-item>
                 <!-- <q-item multiline>
                   <q-item-section
                     label="Static UPI > 2000"
-                    :sublabel="propLeadInformation.staticUpigreaterThanTwo+' %'"
+                    :caption="propLeadInformation.staticUpigreaterThanTwo+' %'"
                   />
                 </q-item>
                 <q-item multiline>
                   <q-item-section
                     label="Static UPI < 2000"
-                    :sublabel="propLeadInformation.staticUpiLessThanTwo+' %'"
+                    :caption="propLeadInformation.staticUpiLessThanTwo+' %'"
                   />
                 </q-item>
                 <q-item multiline>
-                  <q-item-section label="Static UPI debit Card" :sublabel="propLeadInformation.staticUpiDebitCard+' %'"/>
+                  <q-item-section label="Static UPI debit Card" :caption="propLeadInformation.staticUpiDebitCard+' %'"/>
                 </q-item>
                 <q-item multiline>
-                  <q-item-section label="Static UPI Credit Card and Prepaid" :sublabel="propLeadInformation.staticUpicreditCardAndPrepaid+' %'"/>
+                  <q-item-section label="Static UPI Credit Card and Prepaid" :caption="propLeadInformation.staticUpicreditCardAndPrepaid+' %'"/>
                 </q-item> -->
               </q-list>
             </q-scroll-area>

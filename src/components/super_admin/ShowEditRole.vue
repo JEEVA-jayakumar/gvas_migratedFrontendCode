@@ -21,7 +21,7 @@
             v-model="formData.rolePermissions.hierarchyId"
             @blur="$v.formData.rolePermissions.hierarchyId.$touch"      
             :error="$v.formData.rolePermissions.hierarchyId.$error" 
-            float-label="Hierarchy"
+            label="Hierarchy"
             placeholder="Select Hierarchy"
             class="text-weight-regular text-grey-8" color="grey-9"
             :options="propGetAllHierarchiesData"
@@ -35,7 +35,7 @@
               @blur="$v.formData.rolePermissions.role.$touch"      
               @keyup.enter="fnSubmitShowAddUser"
               :error="$v.formData.rolePermissions.role.$error" 
-              class="text-weight-regular text-grey-8" color="grey-9" float-label="Role" placeholder="Role" />
+              class="text-weight-regular text-grey-8" color="grey-9" label="Role" placeholder="Role" />
           </div>
         </div>
       
@@ -46,7 +46,7 @@
               v-model="formData.rolePermissions.roleColor"
               @blur="$v.formData.rolePermissions.roleColor.$touch"      
               :error="$v.formData.rolePermissions.roleColor.$error" 
-              popover float-label="Choose a role color" color="grey-9"
+              popover label="Choose a role color" color="grey-9"
             />
           </div>
         </div>

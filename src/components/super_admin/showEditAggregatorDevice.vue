@@ -18,20 +18,20 @@
                         
                           class="text-weight-regular text-grey-8" 
                           color="grey-9" 
-                          float-label="Region Group" 
+                          label="Region Group"
                           placeholder="Region Group" 
                         />
                     </div> -->
                     <div class="col-md-12">
                         <q-input v-model="formData.device" @blur="$v.formData.device.$touch"
                             :error="$v.formData.device.$error" @keyup.enter="$v.formData.device.$touch"
-                            class="text-weight-regular text-grey-8" color="grey-9" float-label="Modify Device Name"
+                            class="text-weight-regular text-grey-8" color="grey-9" label="Modify Device Name"
                             placeholder="Modify Device Name" />
                     </div>
                     <div class="col-md-12">
                         <q-input disable v-model="formData.name" @blur="$v.formData.name.$touch"
                             :error="$v.formData.name.$error" @keyup.enter="$v.formData.name.$touch"
-                            class="text-weight-regular text-grey-8" color="grey-9" float-label="Modify Aggregator Name"
+                            class="text-weight-regular text-grey-8" color="grey-9" label="Modify Aggregator Name"
                             placeholder="Modify Aggregator Name" />
                     </div>
                 </div>

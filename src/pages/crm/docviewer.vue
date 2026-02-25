@@ -14,7 +14,7 @@
             :error="$v.formData.searchTerm.$error"
             v-model="formData.searchTerm"
             placeholder="Type.."
-            float-label="Search By Ticket ID / TID..."
+            label="Search By Ticket ID / TID..."
             class="q-mr-lg q-py-sm"
           />
         </div>
@@ -31,7 +31,7 @@
     </div>
   
     <div v-if="tableData.length != 0">
-      <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :pagination="paginationControl" row-key="name" :loading="toggleAjaxLoadFilter" :rows-per-page-options="[5, 10, 15, 20]" @request="ajaxLoadAllLeadInfo">
+      <q-table table-class="customTableClass" :rows="tableData" :columns="columns" v-model:pagination="paginationControl" row-key="name" :loading="toggleAjaxLoadFilter" :rows-per-page-options="[5, 10, 15, 20]" @request="ajaxLoadAllLeadInfo">
         <q-td v-slot:body-cell-tid="props" :props="props">
           <span class="label text-primary"># {{ props.row.tid }}</span>
         </q-td>
@@ -95,7 +95,7 @@
       </q-table>
     </div>
     <div v-else-if="tableData1.length != 0">
-      <q-table table-class="customTableClass" :rows="tableData1" :columns="columns1" row-key="name" :pagination="paginationControlchange" :rows-per-page-options="[5,10,15,20]" :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo1">
+      <q-table table-class="customTableClass" :rows="tableData1" :columns="columns1" row-key="name" v-model:pagination="paginationControlchange" :rows-per-page-options="[5,10,15,20]" :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo1">
        <q-td v-slot:body-cell-tid="props" :props="props">
           <span class="label text-primary"># {{ props.row.serviceRequestData.tid }}</span>
         </q-td>
@@ -420,8 +420,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.FETCH_DOC_VIEW({ pagination, filter })
-        .then((res) => {
+      this.FETCH_DOC_VIEW({ pagination, filter }).then((res) => {
           this.paginationControl = pagination;
           this.paginationControl.rowsNumber = this.getaggImplementedverificationqueue.totalElements;
           this.paginationControl.page =
@@ -451,8 +450,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.FETCH_DOC_VIEW({ pagination, filter })
-        .then((res) => {
+      this.FETCH_DOC_VIEW({ pagination, filter }).then((res) => {
           this.paginationControl = pagination;
           this.paginationControl.rowsNumber = this.getaggImplementedverificationqueue.totalElements;
           this.paginationControl.page =

@@ -57,7 +57,7 @@
                                           <q-item-label>
                                             <q-input 
                                               color="grey-9"
-                                              float-label="Debit < 2000 (%)" 
+                                              label="Debit < 2000 (%)"
                                               readonly
                                             class="no-pointer-events" v-model="formData.shortLead.debitLessthanAmount"
                                             />
@@ -67,7 +67,7 @@
                                           <q-item-label>
                                             <q-input 
                                               color="grey-9"
-                                              float-label="Debit < 2000 (%)"
+                                              label="Debit < 2000 (%)"
                                               readonly
                                             class="no-pointer-events" v-model="formData.shortLead.debitGreaterthanAmount" 
                                             />
@@ -80,7 +80,7 @@
                                         <q-item-label>
                                             <q-input 
                                                 color="grey-9"
-                                                float-label="Std CC (%)" 
+                                                label="Std CC (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="formData.shortLead.stdCC" 
                                             /> 
@@ -90,7 +90,7 @@
                                         <q-item-label>
                                             <q-input 
                                                 color="grey-9"
-                                                float-label="Premium CC (%)" 
+                                                label="Premium CC (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="formData.shortLead.premiumCC" 
                                             />
@@ -100,7 +100,7 @@
                                         <q-item-label>
                                             <q-input 
                                                 color="grey-9"
-                                                float-label="Corp (%)" 
+                                                label="Corp (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="formData.shortLead.corpIntlCC" 
                                             />
@@ -110,7 +110,7 @@
                                         <q-item-label>
                                             <q-input 
                                                 color="grey-9"
-                                                float-label="Intl (%)" 
+                                                label="Intl (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="formData.shortLead.corpIntlCC" 
                                             />
@@ -120,7 +120,7 @@
                                         <q-item-label>
                                             <q-input 
                                                 color="grey-9"
-                                                float-label="Super Pre CC (%)" 
+                                                label="Super Pre CC (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="formData.shortLead.corpIntlCC" 
                                             />
@@ -248,7 +248,7 @@
                                                 <div class="col-md-5">
                                                     <q-input 
                                                         color="grey-9"
-                                                        float-label="Debit < 2000 (%)" 
+                                                        label="Debit < 2000 (%)"
                                                         readonly
                                                         class="no-pointer-events" v-model="formData.shortLead.debitLessthanAmount"
                                                     />
@@ -256,7 +256,7 @@
                                                 <div class="col-md-5">
                                                     <q-input 
                                                         color="grey-9"
-                                                        float-label="Debit < 2000 (%)"
+                                                        label="Debit < 2000 (%)"
                                                         readonly
                                                         class="no-pointer-events" v-model="formData.shortLead.debitGreaterthanAmount" 
                                                     />
@@ -271,7 +271,7 @@
                                                 <div class="col-md-3">
                                                     <q-input 
                                                         color="grey-9"
-                                                        float-label="Std CC (%)" 
+                                                        label="Std CC (%)"
                                                         readonly
                                                         class="no-pointer-events" v-model="formData.shortLead.stdCC" 
                                                     /> 
@@ -279,7 +279,7 @@
                                                 <div class="col-md-3">
                                                     <q-input 
                                                         color="grey-9"
-                                                        float-label="Premium CC (%)" 
+                                                        label="Premium CC (%)"
                                                         readonly
                                                         class="no-pointer-events" v-model="formData.shortLead.premiumCC" 
                                                     />
@@ -287,7 +287,7 @@
                                                 <div class="col-md-5">
                                                     <q-input 
                                                         color="grey-9"
-                                                        float-label="Corp/Intl/Super Pre CC (%)" 
+                                                        label="Corp/Intl/Super Pre CC (%)"
                                                         readonly
                                                         class="no-pointer-events" v-model="formData.shortLead.corpIntlCC" 
                                                     />
@@ -612,7 +612,7 @@
                                                     <q-expansion-item separator indent icon-toggle opened group="closeOnOpen" multiline class="full-width">
                                                         <template slot="header">
                                                             <q-item-section icon="attach_file" />
-                                                            <q-item-section class="text-body1" :sublabel="documents[0].uploadedDocuments.length + 'Document(s)'" :label="index" />
+                                                            <q-item-section class="text-body1" :caption="documents[0].uploadedDocuments.length + 'Document(s)'" :label="index" />
                                                             <q-item-section v-if="documents[0].documentVerifiedStatus == 2" right>
                                                                 <q-btn
                                                                     round 
@@ -660,7 +660,7 @@
                                                         <template slot="header">
                                                             <q-item-section  icon="apps" />
                                                             <q-item-section class="text-body1"
-                                                            :sublabel="documents.length + 'Type(s)'"
+                                                            :caption="documents.length + 'Type(s)'"
                                                                 :label="index" />
                                                         </template>
                                                         <div class="row items-center full-width" v-for="(subDocument,subIndex) in documents" :key="subIndex">
@@ -669,7 +669,7 @@
                                                                     <template slot="header">
                                                                         <q-item-section icon="attach_file" />
                                                                         <q-item-section class="text-body1"
-                                                                        :sublabel="subDocument.uploadedDocuments.length + 'Document(s)'"
+                                                                        :caption="subDocument.uploadedDocuments.length + 'Document(s)'"
                                                                         :label="subDocument.subDocumentType" />
                                                                         <q-item-section v-if="subDocument.documentVerifiedStatus == 2" right>
                                                                             <q-btn
@@ -1001,8 +1001,7 @@ export default {
           message: "Are you sure want to proceed to data entry?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.TOGGLE_COMMON_LOADER(true);
           this.VERIFY_LEAD_DATA(formData)
             .then(response => {
@@ -1015,8 +1014,7 @@ export default {
               this.$router.push(
                 "/sat/lead/validation/" + this.$route.params.id + "/data/entry"
               );
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -1026,7 +1024,7 @@ export default {
             });
           this.TOGGLE_COMMON_LOADER(false);
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

@@ -27,12 +27,14 @@
           color="grey-1"
           @select="goToUnassignedTab"
         >
-          <q-tab default color="dark" name="statusTab" slot="title" label="TID & MID STATUS"/>
-          <!-- <q-tab color="dark" name="rejectedTab" slot="title" label="Rejected Leads" /> -->
-          <q-tab-panel name="rejectedTab">
+          <q-tab default color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="rejectedTab">
               <varaneekRejectedLead/>
             </q-tab-panel>
-          <q-tab-panel name="statusTab">
+<q-tab-panel name="statusTab">
             <q-table
              :rows="tableData1"
               :columns="columnData"
@@ -50,7 +52,7 @@
                 v-slot:body-cell-leadNumber="props"
                 :props="props"
                 class="cursor-pointer"
-                @click.native="toggleLeadInformation(props.row.leadInformation)"
+                @click="toggleLeadInformation(props.row.leadInformation)"
               >
                 <span class="label text-primary"
                   ># {{ props.row.leadInformation.leadNumber }}</span
@@ -59,14 +61,12 @@
               <q-td
                 v-slot:body-cell-submitToMarsDate="props"
                 :props="props"
-                >{{
-                  props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-                }}</q-td
+                >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
               >
               <q-td
                 v-slot:body-cell-createdAt="props"
                 :props="props"
-                >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+                >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
               >
               <q-td
                 v-slot:body-cell-mid="props"
@@ -83,7 +83,7 @@
                     color="grey-9"
                     v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search By MID, TID"
+                    label="Search By MID, TID"
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -91,7 +91,7 @@
             </q-table>
             <!--ENDv-model: table Data -->
           </q-tab-panel>
-        </q-tabs>
+</q-tab-panels>
   
         <!--END: table Footer -->
         <!-- START >> COMPONENT: Update device address  -->
@@ -260,8 +260,7 @@ import { required, or } from '@vuelidate/validators';
           spinnerColor: "purple-9",
           message: "Fetching data .."
         });
-        this.LEAD_STATUS_LIST({ pagination, filter })
-          .then((res) => {
+        this.LEAD_STATUS_LIST({ pagination, filter }).then((res) => {
             this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
               let assumeArr = [];
               this.getImplementationExecutiveList.map(function(value) {

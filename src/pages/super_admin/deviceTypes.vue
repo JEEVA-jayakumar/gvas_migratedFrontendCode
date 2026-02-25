@@ -2,7 +2,7 @@
   <q-page>
     <!-- content -->
     <div>
-      <q-table :rows="getAllDevicesInfo" table-class="customSATableClass" :columns="columns" :filter="filterSearch" :pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
+      <q-table :rows="getAllDevicesInfo" table-class="customSATableClass" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
         <q-td v-slot:body-cell-action="props" :props="props">
           <pre>{{props.row}}  </pre>
           <div class="row no-wrap no-padding">
@@ -26,7 +26,7 @@
                 color="grey-9"
                 v-model="filterSearch"
                 placeholder="Type.."
-                float-label="Search by name, short name"
+                label="Search by name, short name"
                 class="q-mr-lg"
               />
           </div>
@@ -138,8 +138,7 @@ export default {
           message: "Are you sure want to delete device type?",
           ok: "Continue",
           cancel: "Cancel",
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -155,8 +154,7 @@ export default {
                 message: "Successfully removed",
                 icon: "thumb_up",
               });
-            })
-            .catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -166,7 +164,7 @@ export default {
             });
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

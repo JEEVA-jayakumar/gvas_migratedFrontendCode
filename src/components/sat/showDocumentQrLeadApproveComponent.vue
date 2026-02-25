@@ -15,7 +15,7 @@
                 placedholder="Type.."
                 :max-height="100"
                 rows="3"
-                float-label="Reason"
+                label="Reason"
                 color="grey-9"
                 align="left"
                 v-model="formData.leadDetails.reason"

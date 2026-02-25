@@ -11,18 +11,17 @@
           default
           color="dark"
           name="tab-1"
-          slot="title"
           label="PPE Service Request"
         />
         <q-tab
           color="dark"
-         
           name="tab-3"
-          slot="title"
           label="Phonepe Paper Roll"
         >
         </q-tab>
-        <q-tab-panel name="tab-1">
+</q-tabs>
+<q-tab-panels v-model="activeTab" animated>
+<q-tab-panel name="tab-1">
           <div class="row items-center">
             <div class="col">
               <strong>
@@ -34,7 +33,7 @@
               v-model.trim="formData.date"
               :options="dateType"
               color="grey"
-              @input="dateClick"
+              @update:model-value="dateClick"
             >
             </q-select>
             <div class="col-md-3">
@@ -55,7 +54,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search By Ticket No, Merchant No..."
+              label="Search By Ticket No, Merchant No..."
             />
           </div>
           <q-table
@@ -64,8 +63,7 @@
             :rows="tableData"
             :columns="columns"
             :filter="filter"
-            :rows-per-page-options="[5, 10, 15]"
-            :pagination="paginationControl"
+            :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl"
             :loading="toggleAjaxLoadFilter"
             @request="ajaxLoadAllLeadInfo"
           >
@@ -175,7 +173,7 @@
 
           </q-table>
         </q-tab-panel>
-        <q-tab-panel name="tab-2">
+<q-tab-panel name="tab-2">
           <div class="row">
             <q-input
               class="col-4"
@@ -183,7 +181,7 @@
               color="grey-9"
               v-model="filter1"
               placeholder="Type.."
-              float-label="Search By Ticket No, Merchant No..."
+              label="Search By Ticket No, Merchant No..."
             />
             <div class="col-md-6">
               <q-btn
@@ -203,8 +201,7 @@
             :rows="tableData1"
             :columns="columns2"
             :filter="filter1"
-            :rows-per-page-options="[5, 10, 15]"
-            :pagination="paginationControl1"
+            :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl1"
             :loading="toggleAjaxLoadFilter1"
             @request="ajaxLoadAllLeadInfo1"
           >
@@ -243,7 +240,7 @@
             >
           </q-table>
         </q-tab-panel>
-        <q-tab-panel name="tab-3">
+<q-tab-panel name="tab-3">
           <q-tabs
             v-model="paperRollActiveTab"
             class="shadow-1"
@@ -254,16 +251,18 @@
               default
               color="dark"
               name="tab-4"
-              slot="title"
               label="Pending Tickets"
             />
             <q-tab
               color="dark"
               name="tab-5"
-              slot="title"
               label="Completed Tickets"
             />
-            <q-tab-panel name="tab-4">
+</q-tab-panels>
+        </q-tab-panel>
+</q-tabs>
+<q-tab-panels v-model="paperRollActiveTab" animated>
+<q-tab-panel name="tab-4">
               <div class="row items-center">
                 <div class="col">
                   <strong>
@@ -275,7 +274,7 @@
                   v-model.trim="formData.date1"
                   :options="dateTypePaperRoll"
                   color="grey"
-                  @input="dateClickPaperRoll"
+                  @update:model-value="dateClickPaperRoll"
                 >
                 </q-select>
                 <div class="col-5"></div>
@@ -285,7 +284,7 @@
                   color="grey-9"
                   v-model="filter3"
                   placeholder="Type.."
-                  float-label="Search By Ticket No, Merchant No..."
+                  label="Search By Ticket No, Merchant No..."
                 />
               </div>
               <q-table
@@ -294,8 +293,7 @@
                 :rows="tableData3"
                 :columns="columns3"
                 :filter="filter3"
-                :rows-per-page-options="[5, 10, 15]"
-                :pagination="paginationControl3"
+                :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl3"
                 :loading="toggleAjaxLoadFilter3"
                 @request="ajaxLoadAllLeadInfo3"
               >
@@ -310,7 +308,7 @@
                 >
               </q-table>
             </q-tab-panel>
-            <q-tab-panel name="tab-5">
+<q-tab-panel name="tab-5">
               <div class="row">
                 <q-input
                   class="col-4"
@@ -318,7 +316,7 @@
                   color="grey-9"
                   v-model="filter4"
                   placeholder="Type.."
-                  float-label="Search By Ticket No, Merchant No..."
+                  label="Search By Ticket No, Merchant No..."
                 />
               </div>
               <q-table
@@ -327,8 +325,7 @@
                 :rows="tableData4"
                 :columns="columns4"
                 :filter="filter4"
-                :rows-per-page-options="[5, 10, 15]"
-                :pagination="paginationControl4"
+                :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl4"
                 :loading="toggleAjaxLoadFilter4"
                 @request="ajaxLoadAllLeadInfo4"
               >
@@ -352,9 +349,7 @@
                 >
               </q-table>
             </q-tab-panel>
-          </q-tabs>
-        </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
     </div>
     <phonepeRemarks
       v-if="propToggleRemarks"
@@ -1238,8 +1233,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_PHONEPE_COMPLETED_DATA({ pagination, filter })
-        .then(res => {
+      this.FETCH_PHONEPE_COMPLETED_DATA({ pagination, filter }).then(res => {
           this.paginationControl1 = pagination;
           this.paginationControl1.rowsNumber = this.getPhonepeCompletedData.totalElements;
           this.paginationControl1.page =
@@ -1262,8 +1256,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_PHONEPE_PAPER_ROLL_COMPLETED_DATA({ pagination, filter })
-        .then(res => {
+      this.FETCH_PHONEPE_PAPER_ROLL_COMPLETED_DATA({ pagination, filter }).then(res => {
           this.paginationControl4 = pagination;
           this.paginationControl4.rowsNumber = this.getphonepeCompletedPaperRoll.totalElements;
           this.paginationControl4.page =

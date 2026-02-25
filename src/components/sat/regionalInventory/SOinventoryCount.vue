@@ -29,7 +29,7 @@
             </div>
           </q-card>
         </div>
-        <div class="row gutter-md">
+        <div class="row q-col-gutter-md">
           <div class="col-md-2">
             <q-card role="button" class="no-shadow cursor-pointer">
               <q-card-section class="no-padding">
@@ -184,7 +184,7 @@
             </div>
           </q-card>
         </div>
-        <div class="row gutter-md">
+        <div class="row q-col-gutter-md">
           <div class="col-md-6">
             <q-card role="button" class="no-shadow cursor-pointer">
               <q-card-section class="no-padding">
@@ -329,8 +329,7 @@
         class="q-py-none"
         :rows="getAllRegionalInventorySerialNumbersByDevice"
         :columns="columnData"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         :loading="toggleAjaxLoadFilter"
         row-key="name"
       >

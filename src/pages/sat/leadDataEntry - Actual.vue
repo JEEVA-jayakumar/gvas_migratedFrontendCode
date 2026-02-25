@@ -22,7 +22,7 @@
         </div>
 
         <q-list>
-            <q-expansion-item opened icon="info" group="primary" label="Merchant details" sublabel="Device, Exceptions, Payment, MDR" inset-separator>
+            <q-expansion-item opened icon="info" group="primary" label="Merchant details" caption="Device, Exceptions, Payment, MDR" inset>
                 <div>
                     <!-- Device, Exception, Payment, MDR -->
                     <div class="row group content-stretch">
@@ -285,7 +285,7 @@
                 </div>
             </q-expansion-item>
 
-            <q-expansion-item icon="file_copy" group="primary" label="Documents" sublabel="Related documents" inset-separator>
+            <q-expansion-item icon="file_copy" group="primary" label="Documents" caption="Related documents" inset>
                 <showMarsForm :propLeadDeatils="formData.shortLead"></showMarsForm>
             </q-expansion-item>
         </q-list>

@@ -22,15 +22,14 @@
         default
         color="dark"
         name="unassigned"
-        slot="title"
         label="Un Assigned"
       />
-      <q-tab color="dark" name="assigned" slot="title" label="Assigned" />
-      <!-- <q-tab color="dark" name="ReOpened" slot="title" label="ReOpenend" /> -->
-
-      <q-tab color="dark" name="completed" slot="title" label="Completed" />
-
-      <q-tab-panel name="unassigned">
+      <q-tab color="dark" name="assigned" label="Assigned" />
+      <!-- <q-tab color="dark" name="ReOpened" label="ReOpenend" /> -->
+      <q-tab color="dark" name="completed" label="Completed" />
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="unassigned">
         <q-card class="group q-pa-md">
           <div
             class="row items-center gutter-y-sm"
@@ -188,7 +187,7 @@
                 color="grey-9"
                 v-model="filterSearch1"
                 placeholder="Type.."
-                float-label="Search By Mob No, VPA, Merchant Name"
+                label="Search By Mob No, VPA, Merchant Name"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -196,14 +195,13 @@
           </template>
         </q-table>
       </q-tab-panel>
-      <q-tab-panel name="assigned">
+<q-tab-panel name="assigned">
         <!--START: table Data -->
         <q-table
           :rows="tableData"
           :columns="columnDataAssigned"
           table-class="customTableClass"
-          :filter="filterSearch"
-          :pagination="paginationControl"
+          :filter="filterSearch" v-model:pagination="paginationControl"
           row-key="id"
           :loading="tableAjaxLoading"
           :rows-per-page-options="[5, 10, 15, 20]"
@@ -312,7 +310,7 @@
                 color="grey-9"
                 v-model="filterSearch"
                 placeholder="Type.."
-                float-label="Search By Mob No, VPA, Merchant Name"
+                label="Search By Mob No, VPA, Merchant Name"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -320,7 +318,7 @@
         </q-table>
         <!--ENDv-model: table Data -->
       </q-tab-panel>
-      <q-tab-panel name="completed">
+<q-tab-panel name="completed">
         <q-table
           :rows="tableData2"
           :columns="completed"
@@ -439,7 +437,7 @@
                 color="grey-9"
                 v-model="filterSearch2"
                 placeholder="Type.."
-                float-label="Search By Merchant Name"
+                label="Search By Merchant Name"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -456,7 +454,7 @@
         </q-table>
         <!--END: table Data -->
       </q-tab-panel>
-    </q-tabs>
+</q-tab-panels>
     <div class="row items-center gutter-y-sm">
       <div class="col-md-9 col-sm-12 col-xs-12">
         <div class="row items-center"></div>
@@ -904,8 +902,7 @@ export default {
       this.EQUITAS_ONBOARDING_QUEUE_UNASSIGNED_LIST({
         pagination,
         filter
-      })
-        .then(res => {
+      }).then(res => {
           this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
             let assumeArr = [];
             this.getImplementationExecutiveList.map(function(value) {
@@ -976,8 +973,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.EQUITAS_ONBOARDING_QUEUE_ASSIGNED_LIST({ pagination, filter })
-        .then(res => {
+      this.EQUITAS_ONBOARDING_QUEUE_ASSIGNED_LIST({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 
@@ -1021,8 +1017,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.EQUITAS_ONBOARDING_QUEUE_COMPLETED_LIST({ pagination, filter })
-        .then(res => {
+      this.EQUITAS_ONBOARDING_QUEUE_COMPLETED_LIST({ pagination, filter }).then(res => {
           this.paginationControl = pagination;
 
           this.paginationControl.rowsNumber = this.getEquitasQueueCompletedList.totalElements;

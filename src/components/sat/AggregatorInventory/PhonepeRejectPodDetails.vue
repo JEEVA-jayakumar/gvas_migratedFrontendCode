@@ -114,8 +114,7 @@ export default {
                         message: "Are you sure want to Reject?",
                         ok: "Continue",
                         cancel: "Cancel"
-                    })
-                    .then(() => {
+                    }).onOk(() => {
                         console.log("reqdata-------->", JSON.stringify(this.propShowRejectComponent.pod_number))
                         let data = {
                             pod_number: this.propShowRejectComponent.pod_number
@@ -142,8 +141,7 @@ export default {
                                     this.$emit("reloadPaymentTrackerData")
                                     this.emitToggleReject()
                                     this.$router.push("/sat/inventory/allocation");
-                                })
-                                .catch(error => {
+                                }).catch(error => {
                                     this.$q.loading.hide();
                                     this.$q.notify({
                                         color: "negative",

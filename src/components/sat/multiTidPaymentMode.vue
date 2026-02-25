@@ -51,7 +51,7 @@
                 color="grey-9"
                 v-model.trim="formdata.paymentMode"
                 :error="$v.formdata.paymentMode.$error"
-                float-label="Payment mode"
+                label="Payment mode"
                 :options="paymnentModeOptions"
               />
             </div>
@@ -69,7 +69,7 @@
                 color="grey-9"
                 v-model.trim="formdata.combinedSettlementFlag"
                 :error="$v.formdata.combinedSettlementFlag.$error"
-                float-label="Combined Settlement Flag "
+                label="Combined Settlement Flag "
                 :options="combinedSettlementFlagOptions"
               />
             </div>
@@ -87,7 +87,7 @@
                 color="grey-9"
                 v-model.trim="formdata.ONBOARDING_REQD"
                 :error="$v.formdata.ONBOARDING_REQD.$error"
-                float-label="Select Yes Or No"
+                label="Select Yes Or No"
                 :options="onboardingRequestOptions"
               />
             </div>
@@ -517,10 +517,10 @@ components: {
           this.$q.notify({
             color: "positive",
             position: "bottom",
-            message: response.body.message,
+            message: response.data.message,
             icon: "thumb_up",
           });
-          let res = response.body.data;
+          let res = response.data.data;
           this.listAllSubTidDetails = res;
         })
         .catch((error) => {
@@ -535,8 +535,7 @@ components: {
       ) {
         return this.FETCH_SAVED_DATA_FROM_OWN_DB({
           leadId: this.merchant.leadId,
-        })
-          .then(() => {
+        }).then(() => {
             //Date formatting for MARS
             return this.$set(
               this.marsSavedDataFromInternal.salesInformation,
@@ -545,8 +544,7 @@ components: {
                 this.marsSavedDataFromInternal.salesInformation.applicationDate
               )
             );
-          })
-          .then(() => {
+          }).then(() => {
             return this.$set(
               this.marsSavedDataFromInternal.salesInformation,
               "aggreementDate",
@@ -554,8 +552,7 @@ components: {
                 this.marsSavedDataFromInternal.salesInformation.aggreementDate
               )
             );
-          })
-          .then(() => {
+          }).then(() => {
             return this.$set(
               this.marsSavedDataFromInternal.salesInformation,
               "loanDisbursementDate",
@@ -563,8 +560,7 @@ components: {
                 this.marsSavedDataFromInternal.salesInformation.loanDisbursementDate
               )
             );
-          })
-          .then(() => {
+          }).then(() => {
             return this.$set(
               this.marsSavedDataFromInternal.salesInformation,
               "tenureStartDate",
@@ -572,8 +568,7 @@ components: {
                 this.marsSavedDataFromInternal.salesInformation.tenureStartDate
               )
             );
-          })
-          .then(() => {
+          }).then(() => {
             return this.$set(
               this.marsSavedDataFromInternal.companyInformation,
               "establishYear",
@@ -581,8 +576,7 @@ components: {
                 this.marsSavedDataFromInternal.companyInformation.establishYear
               )
             );
-          })
-          .then(() => {
+          }).then(() => {
             return this.$set(
               this.marsSavedDataFromInternal.bankInformation.collectionDetails,
               "chequeDepositedDate",
@@ -591,8 +585,7 @@ components: {
                   .chequeDepositedDate
               )
             );
-          })
-          .then(() => {
+          }).then(() => {
             return this.$set(
               this.marsSavedDataFromInternal.bankInformation.collectionDetails,
               "collectedDate",
@@ -601,8 +594,7 @@ components: {
                   .collectedDate
               )
             );
-          })
-          .then(() => {
+          }).then(() => {
             return this.$set(
               this.marsSavedDataFromInternal.bankInformation.collectionDetails,
               "chequeDate",
@@ -611,8 +603,7 @@ components: {
                   .chequeDate
               )
             );
-          })
-          .then(() => {
+          }).then(() => {
             return this.$set(
               this.marsSavedDataFromInternal.businessInformation,
               "memberSince",
@@ -620,9 +611,7 @@ components: {
                 this.marsSavedDataFromInternal.businessInformation.memberSince
               )
             );
-          })
-
-          .then(() => {
+          }).then(() => {
             return this.$set(
               this.marsSavedDataFromInternal.businessInformation,
               "lastTurnoverYear",
@@ -630,8 +619,7 @@ components: {
                 this.marsSavedDataFromInternal.businessInformation.lastTurnoverYear
               )
             );
-          })
-          .then(() => {
+          }).then(() => {
             this.merchant.salesInformation = this.marsSavedDataFromInternal.salesInformation;
             this.merchant.companyInformation = this.marsSavedDataFromInternal.companyInformation;
             this.merchant.businessInformation = this.marsSavedDataFromInternal.businessInformation;
@@ -881,9 +869,7 @@ components: {
                 params: finalRequest,
                 leadStatus: this.propLeadDeatils.leadStatus,
                 refNumber: this.propLeadDeatils.merchantRefCode,
-              })
-
-              .then((response) => {
+              }).then((response) => {
                 let feed_paramaters;
                 if (response.status == 204) {
                   feed_paramaters = {
@@ -891,7 +877,7 @@ components: {
                     merchantRefCode: this.propLeadDeatils.merchantRefCode,
                   };
                 } else {
-                  feed_paramaters = response.body;
+                  feed_paramaters = response.data;
                 }
                 self.$q.loading.show({
                   delay: 0, // ms
@@ -920,8 +906,7 @@ components: {
                   .MARS_DATA_EXTERNAL_SUBMIT_RESPONSE({
                     request: feed_paramaters,
                     leadId: self.$route.params.id,
-                  })
-                  .then((response) => {
+                  }).then((response) => {
                     self.$q.notify({
                       color: "positive",
                       position: "bottom",

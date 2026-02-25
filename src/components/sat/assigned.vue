@@ -132,17 +132,17 @@
           default
           color="dark"
           name="assigned"
-          slot="title"
           label="Normal"
         />
-        <q-tab color="dark" name="courier" slot="title" label="Courier" />
-        <q-tab-panel name="assigned">
+        <q-tab color="dark" name="courier" label="Courier" />
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="assigned">
           <q-table
             :rows="tableData"
             :columns="columnDataAssigned"
             table-class="customTableClass"
-            :filter="filterSearch"
-            :pagination="paginationControl"
+            :filter="filterSearch" v-model:pagination="paginationControl"
             selection="multiple"
             v-model:selected="formData.marsDeviceIdsCookedUnAssinged"
             row-key="id"
@@ -155,7 +155,7 @@
               v-slot:body-cell-leadNumber="props"
               :props="props"
               class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row.leadInformation)"
+              @click="toggleLeadInformation(props.row.leadInformation)"
             >
               <span class="label text-primary"
                 ># {{ props.row.leadInformation.leadNumber }}</span
@@ -175,7 +175,7 @@
             <q-td
               v-slot:body-cell-createdAt="props"
               :props="props"
-              >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+              >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-mid="props"
@@ -202,9 +202,7 @@
             <q-td
               v-slot:body-cell-submitToMarsDate="props"
               :props="props"
-              >{{
-                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-              }}</q-td
+              >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
             >
 
             <template v-slot:top="props">
@@ -214,22 +212,21 @@
                   color="grey-9"
                   v-model="filterSearch"
                   placeholder="Type.."
-                  float-label="Search By MID, Merchant Name.."
+                  label="Search By MID, Merchant Name.."
                   class="q-mr-lg q-py-sm"
                 />
               </div>
             </template>
           </q-table>
         </q-tab-panel>
-        <q-tab-panel name="courier">
+<q-tab-panel name="courier">
           <!--STARTv-model: table Data   :rows="getImplementationQueueUnassignedList" selection="multiple"
             :selected="formData.marsDeviceIdsCooked" -->
           <q-table
            :rows="tableData1"
             :columns="columnDataUnassigned"
             table-class="customTableClass"
-            :filter="filterSearch"
-            :pagination="paginationControl1"
+            :filter="filterSearch" v-model:pagination="paginationControl1"
             row-key="id"
             :rows-per-page-options="[10, 20, 50, 100, 150, 200]"
             :loading="tableAjaxLoading1"
@@ -240,7 +237,7 @@
               v-slot:body-cell-leadNumber="props"
               :props="props"
               class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row.leadInformation)"
+              @click="toggleLeadInformation(props.row.leadInformation)"
             >
               <span class="label text-primary"
                 >#
@@ -265,15 +262,13 @@
             <!-- <q-td
               v-slot:body-cell-submitToMarsDate="props"
               :props="props"
-              >{{
-                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-              }}</q-td
+              >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
             > -->
             <!--props.row.createdAt | moment("Do MMM Y")-->
             <q-td
               v-slot:body-cell-createdAt="props"
               :props="props"
-              >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+              >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
             >
             <!-- <q-td
               v-slot:body-cell-tid="props"
@@ -320,25 +315,27 @@
                   color="grey-9"
                   v-model="filterSearch"
                   placeholder="Type.."
-                  float-label="Search By MID, Merchant Name.."
+                  label="Search By MID, Merchant Name.."
                   class="q-mr-lg q-py-sm"
                 />
               </div>
               <!-- <div class="col-md-3">
-                <q-input
-                v-model="filter_values" 
-                float-label="Select Date"
-                type="date"
-                class="q-mr-lg q-py-sm"
-                color="grey-9" 
-                />
+                <q-input filled v-model="filter_values" label="Select Date" color="grey-9">
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="filter_values" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
               </div>-->
               <!--ENDv-model: table filter,search -->
             </template>
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
 
       <!--END: table Footer -->
       <!-- START >> COMPONENT: Update device address  -->
@@ -732,8 +729,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.IMPLEMENTATION_QUEUE_COURIER_LIST({ pagination, filter })
-        .then(res => {
+      this.IMPLEMENTATION_QUEUE_COURIER_LIST({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl1 = pagination;
 
@@ -763,8 +759,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.IMPLEMENTATION_QUEUE_ASSIGNED_LIST({ pagination, filter })
-        .then(response => {
+      this.IMPLEMENTATION_QUEUE_ASSIGNED_LIST({ pagination, filter }).then(response => {
           this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
             let assumeArr = [];
             this.getImplementationExecutiveList.map(function(value) {

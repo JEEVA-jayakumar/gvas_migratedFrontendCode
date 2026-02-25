@@ -14,12 +14,12 @@
 
       <!-- <div class="row bottom-border q-px-md q-py-sm items-center">
         <div class="col-md-4">
-          <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
-            :options="aggregatorOptions" @input="selectedAggregators" /> 
+          <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
+            :options="aggregatorOptions" @update:model-value="selectedAggregators" />
         </div>
       </div> -->
 
-      <!-- AGGREGATORS LST  @input="selectedAggregators"-->
+      <!-- AGGREGATORS LST  @update:model-value="selectedAggregators"-->
       <div class="row bottom-border q-ma-md q-py-md">
         <div class="col-12 text-weight-regular text-grey-9">Central Inventory</div>
         <div class="col-md-9 col-sm-12 col-xs-12">

@@ -3,7 +3,7 @@
       <!--START: content -->
       <div class="q-pa-md">
         <!-- START: Dashboard wrapper -->
-        <div class="row gutter-x-xs">
+        <div class="row q-col-gutter-x-xs">
           <div class="col-lg-8">
             <div class="row gutter-x-xs gutter-y-xs items-center justify-center">
               <div class="col-lg-4 col-md-6 col-sm-12">
@@ -287,7 +287,7 @@
   
             </div>
   
-            <div class="row gutter-x-xs">
+            <div class="row q-col-gutter-x-xs">
               <div class="col-lg-12">
                 <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
                   <q-card-section>
@@ -304,7 +304,7 @@
                       </div>
                       <div class="col-12 col-lg-3">
                         <div class="text-subtitle1 text-bold">
-                          <q-select inverted color="purple-9" :value="dateSelection" @change="changeMerchantTrackerData"
+                          <q-select filled color="purple-9" :value="dateSelection" @change="changeMerchantTrackerData"
                             :options="[{ label: 'Days', value: 'DAYS' }, { label: 'Week', value: 'WEEK' }, { label: 'Month', value: 'MONTH' }, { label: 'Year', value: 'YEAR' }]" />
                         </div>
                       </div>
@@ -430,19 +430,19 @@
                   <q-card-section>
                     <div>
                       <q-table dense hide-bottom :rows="agingTrackerPendingTableData"
-                        :columns="agingTrackerPendingColumns" :pagination="paginationControl" row-key="name">
+                        :columns="agingTrackerPendingColumns" v-model:pagination="paginationControl" row-key="name">
                         <q-td v-slot:body-cell-name="props" :props="props">{{ props.row.name }}</q-td>
                         <q-td v-slot:body-cell-greaterThanOneDay="props" :props="props" class="cursor-pointer"
-                          @click.native="retrieveLeadsList(props.row.greaterThanOneDayLeadIdList)">{{
+                          @click="retrieveLeadsList(props.row.greaterThanOneDayLeadIdList)">{{
                             props.row.greaterThanOneDay
                           }}</q-td>
                         <q-td v-slot:body-cell-greaterThanTwoDays="props" :props="props" class="cursor-pointer"
-                          @click.native="retrieveLeadsList(props.row.greaterThanTwoDaysLeadIdList)">{{
+                          @click="retrieveLeadsList(props.row.greaterThanTwoDaysLeadIdList)">{{
                             props.row.greaterThanTwoDays
                           }}</q-td>
                         <q-td v-slot:body-cell-greaterThanFiveDays="props" :props="props"
                           class="cursor-pointer"
-                          @click.native="retrieveLeadsList(props.row.greaterThanFiveDaysLeadIdList)">{{
+                          @click="retrieveLeadsList(props.row.greaterThanFiveDaysLeadIdList)">{{
                             props.row.greaterThanFiveDays
                           }}</q-td>
                       </q-table>
@@ -712,8 +712,7 @@ import { required } from '@vuelidate/validators';
         this.FETCH_DASHBOARD_CHART_DATA({
           region: JSON.parse(localStorage.getItem("u_i")).region.id,
           action: value
-        })
-          .then(() => {
+        }).then(() => {
             this.renderMerchantGraph = true;
             this.$q.loading.hide();
           })

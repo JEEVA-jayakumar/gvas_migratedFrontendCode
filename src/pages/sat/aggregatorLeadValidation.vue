@@ -19,8 +19,7 @@
         table-class="customTableClass"
         :rows="tableData"
         :columns="columns"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         row-key="name"
         :loading="toggleAjaxLoadFilter"
         :rows-per-page-options="[5,10,15,20]"
@@ -37,7 +36,7 @@
          v-slot:body-cell-leadNumber="props"
          :props="props"
          class="cursor-pointer"
-         @click.native="toggleLeadInformation(props.row)"
+         @click="toggleLeadInformation(props.row)"
          >
           <span class="label text-primary"> {{props.row.leadNumber}}</span>
           
@@ -48,7 +47,7 @@
         <q-td
             v-slot:body-cell-date="props"
             :props="props"
-          >{{ props.row.date | moment("Do MMM Y") }}</q-td>
+          >{{ $moment(props.row.date).format("Do MMM Y") }}</q-td>
          <q-td v-slot:body-cell-verifiedFinanceStatus="props" :props="props">
             <span
               class="label text-positive"
@@ -128,7 +127,7 @@
         >{{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}</q-td>
         
         <!-- <q-td v-slot:body-cell-action="props" :props="props">
-            @click.native="toggleLeadInformation(props.row.leadInformation.leadNumber)"
+            @click="toggleLeadInformation(props.row.leadInformation.leadNumber)"
               class="cursor-pointer"
            <q-btn
             highlight
@@ -148,7 +147,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search By Merchant Name, Lead ID.."
+              label="Search By Merchant Name, Lead ID.."
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -356,8 +355,7 @@ export default {
         spinnerColor: 'purple-9',
         message: 'Fetching data ..'
       });
-      this.FETCH_AGGREGATOR_LEAD_VALIDATION_DATAS({ pagination, filter })
-        .then(res => {
+      this.FETCH_AGGREGATOR_LEAD_VALIDATION_DATAS({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 
@@ -389,8 +387,7 @@ export default {
           message: 'Are you sure want to Move Additional Tid?',
           ok: 'Continue',
           cancel: 'Cancel'
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: 'purple-9',

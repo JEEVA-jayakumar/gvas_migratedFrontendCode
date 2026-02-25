@@ -5,8 +5,7 @@
         :rows="tableData"
         :columns="columnDatacancelled"
         table-class="customTableClass"
-        :filter="filterSearch"
-        :pagination="paginationControl"
+        :filter="filterSearch" v-model:pagination="paginationControl"
         row-key="id"
         :loading="tableAjaxLoading"
         :rows-per-page-options="[5, 10, 15, 20]"
@@ -32,7 +31,7 @@
                 color="grey-9"
                 v-model="props.row.expand"
                 class="q-mr-md"
-                @input="expandRowPlease(props.row)"
+                @update:model-value="expandRowPlease(props.row)"
               />
               <span>{{ props.row.serviceReqTicketId }}</span>
             </q-td>
@@ -42,10 +41,10 @@
               <span v-else="props.row.mid == null">NA</span>
             </q-td>
             <q-td key="createdDate" :props="props">
-              {{ props.row.createdDate | moment("Do MMM Y") }}
+              {{ $moment(props.row.createdDate).format("Do MMM Y") }}
             </q-td>
             <q-td key="updatedDate" :props="props">
-              {{ props.row.updatedDate | moment("Do MMM Y") }}
+              {{ $moment(props.row.updatedDate).format("Do MMM Y") }}
             </q-td>
             <q-td key="meName" :props="props"> {{ props.row.meName }}</q-td>
             <q-td key="address" :props="props"> {{ props.row.address }}</q-td>
@@ -529,7 +528,7 @@
               color="grey-9"
               v-model="filterSearch"
               placeholder="Type.."
-              float-label="Search By ServiceReqTicketId, TID .."
+              label="Search By ServiceReqTicketId, TID .."
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -960,8 +959,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_PHONEPE_CANCELLED_SERVICE_REQUEST_DATAS({ pagination, filter })
-        .then(res => {
+      this.FETCH_PHONEPE_CANCELLED_SERVICE_REQUEST_DATAS({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 

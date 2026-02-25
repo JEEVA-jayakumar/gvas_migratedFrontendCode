@@ -24,8 +24,7 @@ export default {
       .get(url, {
         ...withAuthHeader(url, config),
         params: request
-      })
-      .then(response => Promise.resolve(response))
+      }).then(response => Promise.resolve(response))
       .catch(error => Promise.reject(error));
   },
   post(url, request, config) {
@@ -51,8 +50,7 @@ export default {
       .delete(url, {
         ...withAuthHeader(url, config),
         data: request
-      })
-      .then(response => Promise.resolve(response))
+      }).then(response => Promise.resolve(response))
       .catch(error => Promise.reject(error));
   }
 };

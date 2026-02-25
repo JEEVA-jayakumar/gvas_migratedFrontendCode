@@ -16,13 +16,13 @@
                 <q-item>
                   <q-item-section>
                     <q-select color="grey-9" v-model="formData.leadSource" :options="dropDown.leadSourceOptions"
-                      float-label="Select lead source" placeholder="Lead source" />
+                      label="Select lead source" placeholder="Lead source" />
                   </q-item-section>
                 </q-item>
                 <q-item>
                   <q-item-section>
                     <q-input color="grey-9" v-model="formData.prefix" @blur="$v.formData.prefix.$touch"
-                      :error="$v.formData.prefix.$error" float-label="Enter prefix* (3 digits)"
+                      :error="$v.formData.prefix.$error" label="Enter prefix* (3 digits)"
                       placeholder="Enter prefix* (3 digits)" />
                     <div class="text-negative q-py-xs group text-caption" v-if="$v.formData.prefix.$error">
                       <div v-if="

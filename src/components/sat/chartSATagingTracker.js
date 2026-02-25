@@ -18,8 +18,7 @@ export default {
       });
       this.FETCH_DASHBOARD_AGING_CHART_DATA({
         region: JSON.parse(localStorage.getItem("u_i")).region.id,
-      })
-        .then(() => {
+      }).then(() => {
           let labels = this.getSatDashboardAgingGraphData.xAxis.categories;
           let datasets = this.getSatDashboardAgingGraphData.series;
           let yAxisLabel = this.getSatDashboardAgingGraphData.yAxis.title.text;

@@ -11,12 +11,26 @@
             </div>
           </div>
           <div class="col-md-12">
-            <q-input hide-underline class="q-mr-lg q-py-sm" v-model="formData.selectedFromYear" :min="yesterday"
-              :max="tomorrow" type="date" float-label="Choose Date Range" Format="YYYY-MM-DD" />
+            <q-input filled v-model="formData.selectedFromYear" label="Choose Date Range" color="grey-9">
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="formData.selectedFromYear" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
           </div>
           <!-- <div class="col-md-12">
-            <q-input hide-underline class="q-mr-lg q-py-sm" v-model="formData.selectedToYear" :min="yesterday"
-              :max="tomorrow" type="date" float-label="To Date" Format="YYYY-MM-DD" />
+            <q-input filled v-model="formData.selectedToYear" label="To Date" color="grey-9">
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="formData.selectedToYear" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
           </div> -->
           <div class="col-md-12 group" align="right">
             <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8"

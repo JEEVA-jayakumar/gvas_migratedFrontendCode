@@ -29,7 +29,7 @@
             </div>
           </q-card>
         </div>
-        <div class="row gutter-md">
+        <div class="row q-col-gutter-md">
           <div class="col-md-6">
             <q-card role="button" class="no-shadow cursor-pointer">
               <q-card-section class="no-padding">
@@ -183,7 +183,7 @@
         </div>
       </div>
       <div class="q-ma-md">
-        <div class="row gutter-md">
+        <div class="row q-col-gutter-md">
           <div
             class="col-md-6"
             v-for="(item,index) in getAllRegionalInventoryDeviceDetailsWithCount.inventryCount"
@@ -216,7 +216,7 @@
         </strong>
       </div>
       <div class="q-ma-md">
-        <div class="row gutter-md">
+        <div class="row q-col-gutter-md">
           <div
             class="col-md-6"
             v-for="(item,index) in getAllRegionalInventoryDeviceDetailsWithCount.BillPartnerList"
@@ -253,7 +253,7 @@
         </strong>
       </div>
       <div class="q-ma-md">
-        <div class="row gutter-md">
+        <div class="row q-col-gutter-md">
           <div
             class="col-md-6"
             v-for="(item,index) in getAllRegionalInventoryDeviceDetailsWithCount.resellerdevicecount"
@@ -312,7 +312,7 @@
             </div>
           </q-card>
       </div>-->
-      <!-- <div class="row gutter-md"> -->
+      <!-- <div class="row q-col-gutter-md"> -->
       <!-- <div class="col-md-6">
             <q-card role="button" class="no-shadow cursor-pointer">
               <q-card-section class="no-padding">
@@ -369,7 +369,7 @@
               <div
                 @click="loadDevicesTableData($REGIONAL_INVENTORY_DAMAGED_DEVICE,{name:'Damaged Devices'})"
               >
-                <q-card-section <div class="row gutter-md">
+                <q-card-section <div class="row q-col-gutter-md">
                   align="center"
                   class="bg-grey-5"
                   :class="[activeItemId === $REGIONAL_INVENTORY_DAMAGED_DEVICE ? 'shadow-5' : 'shadow-0']"
@@ -427,8 +427,7 @@
         class="q-py-none"
         :rows="getAllRegionalInventorySerialNumbersByDevice"
         :columns="columnData"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         :loading="toggleAjaxLoadFilter"
         row-key="name"
       >
@@ -718,8 +717,7 @@ export default {
           message: "Are You want to submit Usable Device?",
           ok: "Submit",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -748,8 +746,7 @@ export default {
                   message: "Successfully Submitted",
                   icon: "thumb_up"
                 });
-            })
-            .catch(error => {
+            }).catch(error => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -795,8 +792,7 @@ export default {
           message: "Are You want to submit Faulty Device?",
           ok: "Submit",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -827,8 +823,7 @@ export default {
                   message: "Successfully Submitted",
                   icon: "thumb_up"
                 });
-            })
-            .catch(error => {
+            }).catch(error => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",

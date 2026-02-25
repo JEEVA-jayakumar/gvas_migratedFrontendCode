@@ -3,20 +3,21 @@
     <div>
       <!--@select="goToUnassignedTab"-->
       <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToUnassignedTab">
-        <q-tab default color="dark" name="active" slot="title" label="Active Rental Charges" />
-        <q-tab color="dark" name="deactive" slot="title" label="DeActived Rental Charges" />
-        <q-tab-panel name="active">
+        <q-tab default color="dark" name="active" label="Active Rental Charges" />
+        <q-tab color="dark" name="deactive" label="DeActived Rental Charges" />
+</q-tabs>
+<q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="active">
           <!--STARTv-model: table Data -->
-          <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filterSearch"
-            :pagination="paginationControl" row-key="name" :loading="toggleAjaxLoadFilter"
+          <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" row-key="name" :loading="toggleAjaxLoadFilter"
             :rows-per-page-options="[5, 10, 15, 20]" @request="ajaxLoadAllLeadInfo">
             <q-td v-slot:body-cell-leadSource="props" :props="props" class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row.leadSource.sourceName)">
+              @click="toggleLeadInformation(props.row.leadSource.sourceName)">
               <span class="label text-primary">
                 {{ props.row.leadSource.sourceName }}</span>
             </q-td>
             <q-td v-slot:body-cell-device="props" :props="props" class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row.device.deviceName)">
+              @click="toggleLeadInformation(props.row.device.deviceName)">
               <span class="label text-primary">
                 {{ props.row.device.deviceName }}</span>
             </q-td>
@@ -24,7 +25,7 @@
               <span class="label">{{ props.row.marsDeviceModel == null ? "NA" : props.row.marsDeviceModel.name }}</span>
             </q-td>
             <q-td v-slot:body-cell-plan="props" :props="props" class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row.plan.planName)">
+              @click="toggleLeadInformation(props.row.plan.planName)">
               <span class="label text-primary"> {{ props.row.plan.planName }}</span>
             </q-td>
             <q-td v-slot:body-cell-action="props" :props="props">
@@ -44,7 +45,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <q-input clearable color="grey-9" v-model.trim="filterSearch" placeholder="Type.."
-                      float-label="Search by Plan Name" />
+                      label="Search by Plan Name" />
                   </div>
                 </div>
               </div>
@@ -56,18 +57,18 @@
           </q-table>
           <!--ENDv-model: table Data -->
         </q-tab-panel>
-        <q-tab-panel name="deactive">
+<q-tab-panel name="deactive">
           <!--START: table Data -->
           <q-table table-class="customTableClass" :rows="deactiveTableData" :columns="columnsDeactive"
-            :filter="filterSearch1" :pagination="paginationControl1" row-key="name"
+            :filter="filterSearch1" v-model:pagination="paginationControl1" row-key="name"
             :loading="toggleAjaxLoadFilter1" :rows-per-page-options="[5, 10, 15, 20]" @request="ajaxLoadAllLeadInfo1">
             <q-td v-slot:body-cell-leadSource="props" :props="props" class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row.leadSource.sourceName)">
+              @click="toggleLeadInformation(props.row.leadSource.sourceName)">
               <span class="label text-primary">
                 {{ props.row.leadSource.sourceName }}</span>
             </q-td>
             <q-td v-slot:body-cell-device="props" :props="props" class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row.device.deviceName)">
+              @click="toggleLeadInformation(props.row.device.deviceName)">
               <span class="label text-primary">
                 {{ props.row.device.deviceName }}</span>
             </q-td>
@@ -81,7 +82,7 @@
               <span class="label">{{ props.row.marsDeviceModel == null ? "NA" : props.row.marsDeviceModel.name }}</span>
             </q-td>
             <q-td v-slot:body-cell-plan="props" :props="props" class="cursor-pointer"
-              @click.native="toggleLeadInformation(props.row.plan.planName)">
+              @click="toggleLeadInformation(props.row.plan.planName)">
               <span class="label text-primary"> {{ props.row.plan.planName }}</span>
             </q-td>
 
@@ -91,7 +92,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <q-input clearable color="grey-9" v-model.trim="filterSearch1" placeholder="Type.."
-                      float-label="Search by Plan Name" />
+                      label="Search by Plan Name" />
                   </div>
                 </div>
               </div>
@@ -103,7 +104,7 @@
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-      </q-tabs>
+</q-tab-panels>
 
       <EditRentalCharges v-if="propShoweditPlanDetails" :propShoweditPlanDetails="propShoweditPlanDetails"
         :propRowDetails="propRowDetails"  @emitfnshowEditRental="editPlanDetails"></EditRentalCharges>
@@ -399,8 +400,7 @@ export default {
           message: "Are you sure, do you want to enable this Rental?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -422,8 +422,7 @@ export default {
               });
 
             })
-        })
-        .catch(() => {
+        }).onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -439,8 +438,7 @@ export default {
           message: "Are you sure want to delete Rental?",
           ok: "Continue",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -462,8 +460,7 @@ export default {
               });
 
             })
-        })
-        .catch(() => {
+        }).onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -531,8 +528,7 @@ export default {
           message: "Are You Sure want to Deactive the User?",
           ok: "Ok",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.DEACTIVATE_MATM_USER_DETAILS(id).then(() => {
             this.FETCH_ALL_MATM_DATAS();
             this.$q.notify({
@@ -542,8 +538,7 @@ export default {
               icon: "thumb_up"
             });
           });
-        })
-        .catch(() => { });
+        }).onCancel(() => { });
     },
     activateMatmUser(id) {
       this.$q
@@ -552,8 +547,7 @@ export default {
           message: "Are You Sure want to active the User?",
           ok: "Ok",
           cancel: "Cancel"
-        })
-        .then(() => {
+        }).onOk(() => {
           this.ACTIVATE_MATM_USER_DETAILS(id).then(() => {
             this.FETCH_ALL_MATM_DATAS();
             this.$q.notify({
@@ -563,8 +557,7 @@ export default {
               icon: "thumb_up"
             });
           });
-        })
-        .catch(() => { });
+        }).onCancel(() => { });
     },
     ajaxLoadAllLeadInfo1({ pagination, filter }) {
       // we set QTable to "loading" state
@@ -573,8 +566,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_DEACTIVATED_RENTAL_PLAN_DETAILS({ pagination, filter })
-        .then(res => {
+      this.FETCH_DEACTIVATED_RENTAL_PLAN_DETAILS({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl1 = pagination;
 
@@ -603,8 +595,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_ALL_RENTAL_PLAN_DETAILS({ pagination, filter })
-        .then(res => {
+      this.FETCH_ALL_RENTAL_PLAN_DETAILS({ pagination, filter }).then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 

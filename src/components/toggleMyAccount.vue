@@ -18,7 +18,7 @@
             v-model="formData.currentPassword"
             @blur="$v.formData.currentPassword.$touch"
             :error="$v.formData.currentPassword.$error"
-            float-label="Current Password*"
+            label="Current Password*"
           />
         </div>
         <div class="col-12">
@@ -28,7 +28,7 @@
             v-model="formData.newpassword"
             @blur="$v.formData.newpassword.$touch"
             :error="$v.formData.newpassword.$error"
-            float-label="New Password*"
+            label="New Password*"
           />
           <!-- <p class="error1" v-if="!$v.formData.newpassword.required">this field is required</p>
           <br />-->
@@ -45,7 +45,7 @@
             v-model="formData.retypepassword"
             @blur="$v.formData.retypepassword.$touch"
             :error="$v.formData.retypepassword.$error"
-            float-label="Confirm New Password*"
+            label="Confirm New Password*"
           />
           <!-- <p class="error1" v-if="!$v.formData.retypepassword.required">this field is required</p>
           <br />-->
@@ -142,8 +142,7 @@ export default {
         // this.$q.notify("Oops! password didn't match.");
         this.$q.notify("old and new password must be same.");
       } else {
-        this.CHANGE_PASSWORD({ password: finalFormData.newpassword.toString() })
-          .then(() => {
+        this.CHANGE_PASSWORD({ password: finalFormData.newpassword.toString() }).then(() => {
             this.$emit("propsToggleModal");
             this.$q.notify({
               color: "positive",

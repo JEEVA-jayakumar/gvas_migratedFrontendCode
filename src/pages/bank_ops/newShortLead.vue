@@ -12,7 +12,7 @@
               v-model="formData.leadName"
               @blur="$v.formData.leadName.$touch"
               :error="$v.formData.leadName.$error"
-              float-label="Merchant Name"
+              label="Merchant Name"
               placeholder="Merchant Name"
               color="grey-9"
             />
@@ -22,7 +22,7 @@
               v-model="formData.contactName"
               @blur="$v.formData.contactName.$touch"
               :error="$v.formData.contactName.$error"
-              float-label="Contact Name"
+              label="Contact Name"
               placeholder="Contact Name"
               color="grey-9"
             />
@@ -32,7 +32,7 @@
               v-model="formData.contactNumber"
               @blur="$v.formData.contactNumber.$touch"
               :error="$v.formData.contactNumber.$error"
-              float-label="Contact Number"
+              label="Contact Number"
               placeholder="Contact Number"
               color="grey-9"
             />
@@ -42,7 +42,7 @@
               @blur="$v.formData.alternateContactNumber.$touch"
               :error="$v.formData.alternateContactNumber.$error"
               v-model="formData.alternateContactNumber"
-              float-label="Alternate Contact Number"
+              label="Alternate Contact Number"
               placeholder="Alternate Contact Number"
               color="grey-9"
             />
@@ -53,7 +53,7 @@
           <div class="col">
             <q-input
               v-model="formData.leadAddress"
-              float-label="Merchant Address"
+              label="Merchant Address"
               placeholder="Merchant Address"
               color="grey-9"
             />
@@ -66,7 +66,7 @@
               @clear="fnClearStateCity"
               color="grey-9"
               v-model="formData.pincode"
-              float-label="Pincode"
+              label="Pincode"
               placeholder="Pincode"
             >
               <q-autocomplete
@@ -83,7 +83,7 @@
               v-model="formData.city"
               @blur="$v.formData.city.$touch"
               :error="$v.formData.city.$error"
-              float-label="City/Town"
+              label="City/Town"
               placeholder="City/Town"
               color="grey-9"
             />
@@ -94,7 +94,7 @@
               v-model="formData.state"
               @blur="$v.formData.state.$touch"
               :error="$v.formData.state.$error"
-              float-label="State"
+              label="State"
               placeholder="State"
               color="grey-9"
             />
@@ -111,7 +111,7 @@
               @clear="fnClearDeviceList"
               color="grey-9"
               v-model="formData.leadSource.name"
-              float-label="Lead Source"
+              label="Lead Source"
               placeholder="Lead Source"
             >
               <q-autocomplete
@@ -132,7 +132,7 @@
               v-model="formData.device.id"
               @blur="$v.formData.device.id.$touch"
               :error="$v.formData.device.id.$error"
-              float-label="Type"
+              label="Type"
               :options="deviceSelectOptions"
             />
             <p class="q-py-sm" v-if="deviceSelectOptions.length == 0">No data available</p>
@@ -143,7 +143,7 @@
               @blur="$v.formData.deviceCount.$touch"
               :error="$v.formData.deviceCount.$error"
               type="number"
-              float-label="Count"
+              label="Count"
               placeholder="Device Count"
               color="grey-9"
             />
@@ -154,13 +154,13 @@
           <div class="col-md-6 group">
             <q-radio
               v-model="formData.tempAssignedTo"
-              @input="fnToShowAssignSelect"
+              @update:model-value="fnToShowAssignSelect"
               val="1"
               label="RSM"
             />
             <q-radio
               v-model="formData.tempAssignedTo"
-              @input="fnToShowAssignSelect"
+              @update:model-value="fnToShowAssignSelect"
               val="2"
               label="ASM"
             />
@@ -177,7 +177,7 @@
               clearable
               color="grey-9"
               v-model="formData.assignedOpsTo.id"
-              float-label="RSM Name"
+              label="RSM Name"
               :options="RSMselectOptions"
             />
             <p class="q-py-sm" v-if="leadSourceSelectOptions.length == 0">No data available</p>
@@ -189,10 +189,10 @@
               clearable
               color="grey-9"
               v-model="region"
-              float-label="Region"
+              label="Region"
               :options="getAllRegionsData"
               @clear="fnClearASMList"
-              @input="fnFetchASMList()"
+              @update:model-value="fnFetchASMList()"
             />
             <p class="q-py-xs" v-if="leadSourceSelectOptions.length == 0">No data available</p>
           </div>
@@ -205,7 +205,7 @@
               clearable
               color="grey-9"
               v-model="formData.assignedOpsTo.id"
-              float-label="ASM Name"
+              label="ASM Name"
               :options="ASMselectOptions"
             />
             <p class="q-py-xs" v-if="leadSourceSelectOptions.length == 0">No data available</p>

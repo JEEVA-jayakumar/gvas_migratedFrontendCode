@@ -10,8 +10,7 @@
         table-class="customTableClass"
         :rows="tableData"
         :columns="columns"
-        :filter="filter"
-        :pagination="paginationControl"
+        :filter="filter" v-model:pagination="paginationControl"
         :rows-per-page-options="[5,10,15,20]"
         @request="ajaxLoadDataForAllExceptionList"
         row-key="name"
@@ -19,14 +18,14 @@
         <q-tr
           v-slot:body="props"
           :props="props"
-          @click.native="fnRowClick(props.row)"
-          @mouseover.native="fnRowMouseOver(props.row.__index)"
-          @mouseleave.native="fnRowMouseLeave(props.row.__index)"
+          @click="fnRowClick(props.row)"
+          @mouseover="fnRowMouseOver(props.row.__index)"
+          @mouseleave="fnRowMouseLeave(props.row.__index)"
           class="cursor-pointer"
           :class="[props.row.__index === activeId ? 'bg-grey-3' : '']"
         >
           <q-td key="leadInformation.updatedAt" :props="props">
-            <span class="label capitalize">{{props.row.updatedAt | moment("MMMM Do YYYY") }}</span>
+            <span class="label capitalize">{{ $moment(props.row.updatedAt).format("MMMM Do YYYY") }}</span>
           </q-td>
           <q-td key="leadInformation.leadNumber" :props="props">
             <span
@@ -50,7 +49,7 @@
             <span class="label capitalize">{{props.row.kycSatRemark}}</span>
           </q-td>
           <q-td key="expectedSubmitDate" :props="props">
-            <span class="label capitalize">{{props.row.expectedSubmitDate | moment("MMMM Do YYYY")}}</span>
+            <span class="label capitalize">{{ $moment(props.row.expectedSubmitDate).format("MMMM Do YYYY") }}</span>
           </q-td>
         </q-tr>
 
@@ -63,7 +62,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search .."
+              label="Search .."
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -223,8 +222,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching list .."
       });
-      this.FETCH_ALL_EXCEPTION_KYC_DATA({ pagination, filter })
-        .then(response => {
+      this.FETCH_ALL_EXCEPTION_KYC_DATA({ pagination, filter }).then(response => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 
