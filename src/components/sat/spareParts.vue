@@ -31,8 +31,8 @@
       </div>
       <!-- <pre>{{getAllRegionsData}}</pre> -->
       <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
-      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToSelectedTab">
-        <q-tab default color="dark" name="incomingPods" label="Incoming Pod's" />
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
         <q-tab color="dark" name="stocks" label="Stocks" />
         <q-tab color="dark" name="allocatedSo" label="So Pod List" />
         <q-tab color="dark" name="createSoPod" label="Create So Pod" />

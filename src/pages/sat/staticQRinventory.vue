@@ -23,13 +23,13 @@
                 </div>
               </div>
       <div>
-        <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @select="goToCompleteTab">
-          <q-tab default color="dark" name="tab-1" label="Pending QR" />
+        <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @update:model-value="goToCompleteTab">
+          <q-tab color="dark" name="tab-1" label="Pending QR" />
           <q-tab color="dark" name="tab-2" label="Approved QR" />
           <q-tab color="dark" name="tab-3" label="Allocate To SO" />
-</q-tabs>
-<q-tab-panels v-model="activeTab" animated>
-<q-tab-panel name="tab-1">
+        </q-tabs>
+        <q-tab-panels v-model="activeTab" animated>
+          <q-tab-panel name="tab-1">
             <div class="row items-center">
             
               <div class="col-8"></div>
@@ -48,7 +48,7 @@
               </q-td>
             </q-table>
           </q-tab-panel>
-<q-tab-panel name="tab-2">
+          <q-tab-panel name="tab-2">
             <div class="row">
               <div class="col-8"></div>
               <q-input class="col-4" v-model="filter1" clearable color="grey-9" placeholder="Type.."
@@ -61,26 +61,8 @@
             </q-table>
 
           </q-tab-panel>
-<q-tab-panel name="tab-3">
+          <q-tab-panel name="tab-3">
             <div>
-              <!-- <div class="col-md-9 col-sm-12 col-xs-12">
-                <div v-if="this.formData.count != null" class="row">
-                  <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" height="35px" width="35px">
-                    <div>
-                    </div>
-                    <div>
-                      <label></label>
-                    </div>
-                    <p>{{ "Available Count" }}</p>
-                  </q-card>
-
-                </div>
-                <div v-else class="row group">
-                  <div>
-                    <q-banner color="purple-9" icon="info">No data available to display</q-banner>
-                  </div>
-                </div>
-              </div> -->
               <!-- validation -->
               <div class="row">
                 <article class="col-md-2 size7">
@@ -135,51 +117,51 @@
               </div>
             </div>
             &nbsp;
-            <q-tabs v-model="tab" class="shadow-1" color="grey" @select="goToApproveTab">
-              <q-tab default color="dark" name="tab-4" label="Pending List" />
-              <q-tab default color="dark" name="tab-5" label="Approved List" />
-              <q-tab default color="dark" name="tab-6" label="Rejected List" />
-</q-tab-panels>
+            <q-tabs v-model="tab" class="shadow-1" color="grey" @update:model-value="goToApproveTab">
+              <q-tab color="dark" name="tab-4" label="Pending List" />
+              <q-tab color="dark" name="tab-5" label="Approved List" />
+              <q-tab color="dark" name="tab-6" label="Rejected List" />
+            </q-tabs>
+            <q-tab-panels v-model="tab" animated>
+              <q-tab-panel name="tab-4">
+                <div class="row">
+                  <div class="col-8"></div>
+                  <q-input class="col-4" v-model="filter4" clearable color="grey-9" placeholder="Type.."
+                    label="Search By POD Number" />
+                </div>
+                <q-table table-class="customTableClass" class="q-py-none" :rows="tableData4" :columns="columns4"
+                  :filter="filter4" :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl4"
+                  :loading="toggleAjaxLoadFilter4" @request="ajaxLoadAllLeadInfo4">
+                  <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
+                </q-table>
+              </q-tab-panel>
+              <q-tab-panel name="tab-5">
+                <div class="row">
+                  <div class="col-8"></div>
+                  <q-input class="col-4" v-model="filter5" clearable color="grey-9" placeholder="Type.."
+                    label="Search By POD Number" />
+                </div>
+                <q-table table-class="customTableClass" class="q-py-none" :rows="tableData5" :columns="columns5"
+                  :filter="filter5" :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl5"
+                  :loading="toggleAjaxLoadFilter5" @request="ajaxLoadAllLeadInfo5">
+                  <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
+                </q-table>
+              </q-tab-panel>
+              <q-tab-panel name="tab-6">
+                <div class="row">
+                  <div class="col-8"></div>
+                  <q-input class="col-4" v-model="filter6" clearable color="grey-9" placeholder="Type.."
+                    label="Search By POD Number" />
+                </div>
+                <q-table table-class="customTableClass" class="q-py-none" :rows="tableData6" :columns="columns6"
+                  :filter="filter6" :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl6"
+                  :loading="toggleAjaxLoadFilter6" @request="ajaxLoadAllLeadInfo6">
+                  <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
+                </q-table>
+              </q-tab-panel>
+            </q-tab-panels>
           </q-tab-panel>
-</q-tabs>
-<q-tab-panels v-model="tab" animated>
-<q-tab-panel name="tab-4">
-                <div class="row">
-              <div class="col-8"></div>
-              <q-input class="col-4" v-model="filter4" clearable color="grey-9" placeholder="Type.."
-                label="Search By POD Number" />
-            </div>
-            <q-table table-class="customTableClass" class="q-py-none" :rows="tableData4" :columns="columns4"
-              :filter="filter4" :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl4"
-              :loading="toggleAjaxLoadFilter4" @request="ajaxLoadAllLeadInfo4">
-              <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-            </q-table>
-              </q-tab-panel>
-<q-tab-panel name="tab-5">
-                <div class="row">
-              <div class="col-8"></div>
-              <q-input class="col-4" v-model="filter5" clearable color="grey-9" placeholder="Type.."
-                label="Search By POD Number" />
-            </div>
-            <q-table table-class="customTableClass" class="q-py-none" :rows="tableData5" :columns="columns5"
-              :filter="filter5" :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl5"
-              :loading="toggleAjaxLoadFilter5" @request="ajaxLoadAllLeadInfo5">
-              <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-            </q-table>
-              </q-tab-panel>
-<q-tab-panel name="tab-6">
-                <div class="row">
-              <div class="col-8"></div>
-              <q-input class="col-4" v-model="filter6" clearable color="grey-9" placeholder="Type.."
-                label="Search By POD Number" />
-            </div>
-            <q-table table-class="customTableClass" class="q-py-none" :rows="tableData6" :columns="columns6"
-              :filter="filter6" :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl6"
-              :loading="toggleAjaxLoadFilter6" @request="ajaxLoadAllLeadInfo6">
-              <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-            </q-table>
-              </q-tab-panel>
-</q-tab-panels>
+        </q-tab-panels>
       </div>
       <div v-if="toggleAjaxLoadFilter || toggleAjaxLoadFilter1" class="fullscreen spinner-overlay">
         <q-spinner-bars class="absolute-center" style="color:#61116a" :size="35" />
@@ -219,6 +201,7 @@ export default {
       toggleAjaxLoadFilter6:false,
       activeItemId: 0,
       activeTab: 'tab-1',
+      tab: 'tab-4',
       filter: '',
       filter1: '',
       filter4:'',
@@ -272,7 +255,6 @@ export default {
       },
 
       tableAjaxLoading: false,
-      activeTab: 'tab-1',
       columns: [
         {
           name: 'updatedAt',
@@ -549,7 +531,7 @@ export default {
     ...mapGetters("InventoryCentral", [
       "getRegionBasedSO"
     ]),
-    ...mapGetters('staticQrInventory', ['getpendingQrList','getRejectedQrListOfSo','getApprovedQrListOfSo','getpendingQrListOfSo', 'getApprovedQrList', 'getpendingQrList', 'getStaticQrReginolInventory'])
+    ...mapGetters('staticQrInventory', ['getpendingQrList','getRejectedQrListOfSo','getApprovedQrListOfSo','getpendingQrListOfSo', 'getApprovedQrList', 'getStaticQrReginolInventory'])
   },
   validations:{
  formData:{

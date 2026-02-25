@@ -25,9 +25,9 @@
           v-model="selectedTab"
           class="shadow-1"
           color="grey-1"
-          @select="goToUnassignedTab"
+          @click="goToUnassignedTab"
         >
-          <q-tab default color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
           <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
 </q-tabs>
 <q-tab-panels v-model="selectedTab" animated>

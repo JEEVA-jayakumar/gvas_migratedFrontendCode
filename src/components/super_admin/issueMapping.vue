@@ -3,8 +3,8 @@
     <div>
       <q-tabs v-model="activeTab" class="shadow-1" color="grey-1">
         <q-tab
-          @select="ajaxSpareData"
-          default
+          @click="ajaxSpareData"
+
           color="dark"
           name="tab-1"
           label="Active Issue Mapping"

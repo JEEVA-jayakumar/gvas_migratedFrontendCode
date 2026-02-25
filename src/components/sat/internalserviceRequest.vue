@@ -5,8 +5,8 @@
         class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       > Bijlipay Service Request</div>
         <div>
-            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToUnassignedTab">
-               <q-tab default color="dark" name="opened" label="Opened" />
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+               <q-tab color="dark" name="opened" label="Opened" />
                 <q-tab color="dark" name="closed" label="Closed" />
                 <q-tab color="dark" name="cancel" label="cancelled" />
 </q-tabs>

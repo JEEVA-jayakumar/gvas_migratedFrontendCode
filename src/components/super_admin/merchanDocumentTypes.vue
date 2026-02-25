@@ -33,15 +33,15 @@
       </div>
     </div>
     <q-tabs color="grey-9" v-model="currentListTabulation">
-      <!-- Tabs - notice slot="title" -->
+      <!-- Tabs - notice  -->
       <q-tab
-        @select="fetchMerchantDocumentTypeActivatedList"
-        default
+        @click="fetchMerchantDocumentTypeActivatedList"
+
         label="Active List"
         name="tab-1"
       />
       <q-tab
-        @select="fetchMerchantDocumentTypeDeActivatedList"
+        @click="fetchMerchantDocumentTypeDeActivatedList"
         label="De-Actived List"
         name="tab-2"
       />

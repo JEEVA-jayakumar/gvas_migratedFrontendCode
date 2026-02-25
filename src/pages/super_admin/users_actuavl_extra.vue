@@ -2,15 +2,15 @@
   <q-page>
     <div>
       <q-tabs v-model="activeTab" color="purple-9">
-        <!-- Tabs - notice slot="title" -->
+        <!-- Tabs - notice  -->
         <q-tab
-          @select="ajaxLoadDataForAllUsersList"
-          default
+          @click="ajaxLoadDataForAllUsersList"
+
           label="Active Users"
           name="tab-1"
         />
         <q-tab
-          @select="ajaxLoadDataForAllUsersList"
+          @click="ajaxLoadDataForAllUsersList"
           label="De-Actived Users"
           name="tab-2"
         />

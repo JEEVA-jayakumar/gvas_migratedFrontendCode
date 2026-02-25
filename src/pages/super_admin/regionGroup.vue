@@ -3,13 +3,13 @@
         <!-- content -->
         <div>
 
-            <q-tabs class="shadow-1" color="grey-1">
-                <q-tab default color="dark" name="active" label="Active RegionsGroups" />
+            <q-tabs v-model="tab" class="shadow-1" color="grey-1">
+                <q-tab color="dark" name="active" label="Active RegionsGroups" />
                 <!-- <q-tab color="dark" name="deactive" label="Deactive Regions" /> -->
                <!-- We can't disable regiongroup because existing flow through errors-->
                 <!--  -->
 </q-tabs>
-<q-tab-panels animated>
+<q-tab-panels v-model="tab" animated>
 <q-tab-panel name="active">
                     <q-table 
                     :rows="activeTableData"
@@ -126,6 +126,7 @@ export default {
     },
     data() {
         return {
+      tab: 'active',
             propShowCreateRegions: false,
             propShowEditRegionsGroup: false,
             propShowAddNewRegions: false,

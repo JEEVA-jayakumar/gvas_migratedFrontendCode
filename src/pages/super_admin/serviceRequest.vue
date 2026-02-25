@@ -10,7 +10,7 @@
             filled
             class="shadow-1"
           >
-            <q-tab default name="serviceRequest" label="Service Request" />
+            <q-tab name="serviceRequest" label="Service Request" />
             <!-- <q-tab name="spareSo" label="Spare Parts So" /> -->
             <q-tab name="issueTypes" label="Issue Types" />
             <q-tab name="serviceStatus" label="Service Status" />

@@ -5,14 +5,17 @@
         <div class="row bottom-border q-pa-sm items-center">
           <div class="col">
             <q-tabs
+              v-model="uploadTab"
               class="shadow-1"
               animated
               swipeable
               color="tertiary"
               align="justify"
             >
-              <q-tab class="size1" label="UPLOAD CSV FILE" />
-              <div>
+              <q-tab name="upload" class="size1" label="UPLOAD CSV FILE" />
+            </q-tabs>
+            <q-tab-panels v-model="uploadTab" animated>
+              <q-tab-panel name="upload">
                 <div class="q-pa-md">
                   <div class="row text-center justify-center">
                     <div class="col-md-8 q-py-md" align="center">
@@ -79,8 +82,8 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </q-tabs>
+              </q-tab-panel>
+            </q-tab-panels>
           </div>
         </div>
       </div>
@@ -96,32 +99,16 @@
               color="tertiary"
               align="justify"
               v-model="selectedTab"
-              @select="goToUnassignedTab"
+              @update:model-value="goToUnassignedTab"
             >
               <q-tab
                 class="size1"
                 label="Hitachi Onboarding Merchants"
-                default
                 name="unAssigned"
               />
-              <!-- <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-              </q-card> -->
-              <!-- <q-tabs
-                v-model="selectedTab"
-                class="shadow-1"
-                color="grey-1"
-                @select="goToUnassignedTab"
-              > -->
-              <!-- <q-tab
-                  default
-                  class="size1" 
-                  color="dark"
-                  name="unAssigned"
-                  label="Hitachi Onboarding Merchants"
-                /> -->
-</q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="unAssigned">
+            </q-tabs>
+            <q-tab-panels v-model="selectedTab" animated>
+              <q-tab-panel name="unAssigned">
                 <!--START: table Data -->
                 <q-table
                   :rows="tableData1"
@@ -233,15 +220,12 @@
                 </q-table>
                 <!--END: table Data -->
               </q-tab-panel>
-</q-tab-panels>
+            </q-tab-panels>
             <div class="row items-center gutter-y-sm">
               <div class="col-md-9 col-sm-12 col-xs-12">
                 <div class="row items-center"></div>
               </div>
             </div>
-            <!-- </q-tabs> -->
-
-            
           </div>
         </div>
       </div>
@@ -264,12 +248,13 @@ export default {
   },
   data() {
     return {
+      uploadTab: 'upload',
       propToggleLeadInformation: false,
       propHitachiReport:false,
       addtnLeadInformation: null,
       filterSearch: "",
       filterSearch1: "",
-      selectedTab: "assigned",
+      selectedTab: "unAssigned",
       assignTo: "",
       assignToOptions: [],
       tableData: [],
@@ -531,7 +516,8 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.HITACHI_INDIAN_ONBOARDING_LIST({ pagination, filter }).then(res => {
+      this.HITACHI_INDIAN_ONBOARDING_LIST({ pagination, filter })
+        .then(res => {
           // updating pagination to reflect in the UI
           this.paginationControl1 = pagination;
 

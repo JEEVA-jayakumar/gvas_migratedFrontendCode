@@ -3,12 +3,12 @@
         <!-- content -->
         <div>
 
-            <q-tabs class="shadow-1" color="grey-1">
-                <q-tab default color="dark" name="active" label="Active Aggregators" />
+            <q-tabs v-model="tab" class="shadow-1" color="grey-1">
+                <q-tab color="dark" name="active" label="Active Aggregators" />
                 <q-tab color="dark" name="deactive" label="Deactive Aggregators" />
                 <!-- We can't disable regiongroup because existing flow through errors-->
 </q-tabs>
-<q-tab-panels animated>
+<q-tab-panels v-model="tab" animated>
 <q-tab-panel name="active">
                     <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns"
                         :filter="filterSearch" v-model:pagination="paginationControl"
@@ -109,6 +109,7 @@ export default {
     },
     data() {
         return {
+      tab: 'active',
             propShowCreateRegions: false,
             propShowEditAggregator: false,
             propShowAddNewRegions: false,

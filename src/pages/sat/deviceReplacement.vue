@@ -65,8 +65,8 @@ placeholder="Re-Assign To" separator color="grey-9" :disable="isReAssignDropdown
 </div>
 </q-card>
 <!--END: table Footer -->
-<q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToUnassignedTab">
-<q-tab default color="dark" name="unAssigned" label="Unassigned" />
+<q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+<q-tab color="dark" name="unAssigned" label="Unassigned" />
 <q-tab color="dark" name="assigned" label="Assigned" />
 </q-tabs>
 <q-tab-panels v-model="selectedTab" animated>

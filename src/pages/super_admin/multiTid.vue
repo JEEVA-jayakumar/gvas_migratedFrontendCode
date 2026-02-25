@@ -4,7 +4,7 @@
     <div>
 
       <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1">
-        <q-tab default color="dark" name="active" label="Active TID" />
+        <q-tab color="dark" name="active" label="Active TID" />
         <!-- <q-tab color="dark" name="deactive" label="Deactive TID" /> -->
 </q-tabs>
 <q-tab-panels v-model="selectedTab" animated>

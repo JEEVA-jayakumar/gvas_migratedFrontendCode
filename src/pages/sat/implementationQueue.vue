@@ -10,7 +10,7 @@
             filled
             class="shadow-1"
           >
-            <q-tab default name="internal" label="Bijlipay Implementation Queue" />
+            <q-tab name="internal" label="Bijlipay Implementation Queue" />
             <!-- <q-tab name="spareSo" label="Spare Parts So" /> -->
             <q-tab name="external" label="Aggregator Implementation Queue" />
 </q-tabs>

@@ -10,7 +10,7 @@
               filled
               class="shadow-1"
             >
-              <q-tab default name="spare" label="Spare Parts" />
+              <q-tab name="spare" label="Spare Parts" />
               <!-- <q-tab name="spareSo" label="Spare Parts So" /> -->
               <q-tab name="count" label="Inventory Count" />
               <!-- <q-tab name="Socount" label="Inventory So Count" /> -->

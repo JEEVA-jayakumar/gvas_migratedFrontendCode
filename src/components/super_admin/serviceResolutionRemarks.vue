@@ -2,7 +2,7 @@
     <q-page>
       <div>
         <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" >
-           <q-tab @select="ajaxSpareData" default  color="dark" name="tab-3" label="Active Service Resolution Remarks" />
+           <q-tab @click="ajaxSpareData"  color="dark" name="tab-3" label="Active Service Resolution Remarks" />
             <q-tab  color="dark" name="tab-4" label="Deactive Service Resolution Remarks" />
 </q-tabs>
 <q-tab-panels v-model="activeTab" animated>

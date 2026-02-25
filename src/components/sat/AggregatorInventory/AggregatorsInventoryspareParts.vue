@@ -31,19 +31,15 @@
             </div>
             <!-- <pre>{{getAllRegionsData}}</pre> -->
             <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
-            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToSelectedTab">
-                <q-tab default color="dark" name="incomingPods" label="Incoming Pod's" />
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+                <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
                 <q-tab color="dark" name="stocks" label="Stocks" />
                 <q-tab color="dark" name="SoPodList" label="So Pod List" />
                 <q-tab color="dark" name="createSoPod" label="Create So Pod" />
-                <!--  -->
-                <!--  -->
-</q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="SoPodList">
+            </q-tabs>
+            <q-tab-panels v-model="selectedTab" animated>
+                <q-tab-panel name="SoPodList">
                     <PhonepeSoPodList />
-                </q-tab-panel>
-<q-tab-panel name="SoPodList" @click="this.$router.push({namev-model:'PhonepeSparePartsSoPodList'})">
                 </q-tab-panel>
 <q-tab-panel name="incomingPods">
                     <q-table :rows="tableData" table-class="customSATableClass" :columns="columns"
