@@ -4,91 +4,90 @@
         v-model="toggleModal"
         no-backdrop-dismiss
         class="q-mt-lg capitalize"
-        @hide="emitToggleResolve"
-        @escape-key="emitToggleResolve"
+        @hide="handleHide"
         :content-css="{ minWidth: '48vw', padding: '20px' }"
       >
-        <div class="row items-center bottom-border q-py-sm">
-          <div class="col">PPE</div>
-          <div class="col-auto">
-            <q-btn
-              round
-              size="sm"
-              @click="emitToggleResolve"
-              outline
-              color="dark"
-              icon="clear"
-            />
-          </div>
-        </div>
-        <br />
-        <div class="row">
-          <div class="col-sm-5">
-            <q-select
-              stack-label="Issues"
-              filled-light
-              color="light"
-              v-model.trim="formData.issue"
-              separator
-              :options="dropDown.issueOptions"
-              @update:model-value="issueDocumentType"
-            />
-          </div>
-  
-          <div class="col-sm-5" style="margin-left: 20px;">
-            <q-select
-              :disable="this.formData.issue == ''"
-              stack-label="Sub Issues"
-              filled-light
-              color="light"
-              v-model.trim="formData.subIssue"
-              separator
-              :options="dropDown.subIssueOptions"
-            />
-          </div>
-        </div>
-        <br />
-        <div class="row">
-          <div class="col-sm-5">
-            <q-select
-            :disable="this.formData.subIssue == ''"
-              stack-label="Default Remarks"
-              filled-light
-              color="light"
-              v-model.trim="formData.remarks"
-              separator
-              :options="dropDown.remarksOptions"
-            />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-5"></div>
-          <div class="col-sm-5">
-            <q-btn color="purple" :disable="this.formData.remarks == '' || this.formData.subIssue == ''" style="margin-top: 20px;" label="Submit" @click="fnPPE(resolveDataCallback)" />
-          </div>
-        </div>
+        <q-card style="min-width: 48vw; padding: 20px;">
+          <q-card-section>
+            <div class="row items-center bottom-border q-py-sm">
+              <div class="col text-h6">PPE</div>
+              <div class="col-auto">
+                <q-btn
+                  round
+                  size="sm"
+                  @click="closeDialog"
+                  outline
+                  color="dark"
+                  icon="clear"
+                />
+              </div>
+            </div>
+          </q-card-section>
+
+          <q-card-section>
+            <div class="row q-col-gutter-md">
+              <div class="col-12 col-sm-6">
+                <q-select
+                  label="Issues"
+                  filled
+                  color="purple-9"
+                  v-model="formData.issue"
+                  :options="dropDown.issueOptions"
+                  emit-value
+                  map-options
+                  @update:model-value="issueDocumentType"
+                />
+              </div>
+
+              <div class="col-12 col-sm-6">
+                <q-select
+                  :disable="!formData.issue"
+                  label="Sub Issues"
+                  filled
+                  color="purple-9"
+                  v-model="formData.subIssue"
+                  :options="dropDown.subIssueOptions"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-12 col-sm-6">
+                <q-select
+                  :disable="!formData.subIssue"
+                  label="Default Remarks"
+                  filled
+                  color="purple-9"
+                  v-model="formData.remarks"
+                  :options="dropDown.remarksOptions"
+                  emit-value
+                  map-options
+                />
+              </div>
+            </div>
+
+            <div class="row q-mt-md justify-end">
+              <q-btn color="purple-9" :disable="!formData.remarks || !formData.subIssue" label="Submit" @click="fnPPE" />
+            </div>
+          </q-card-section>
+        </q-card>
       </q-dialog>
     </div>
   </template>
   
   <script>
-import { or } from '@vuelidate/validators';
   import { mapGetters, mapActions } from "vuex";
+  import _ from 'lodash';
+
   export default {
-    name: "phonepeTicketResolve",
-    // props: [ "escalateToSatData","propToggleEscalateToSat","propToggleEscalatetoSatPop" ],
+    name: "PhonepeTicketCallback",
     props: ["resolveDataCallback", "propToggleResolveCallback", "proptoggleTicketCallback"],
     data() {
       return {
-        value1: null,
-        issueOptions: [],
-        subIssueOptions: [],
-        remarksOptions: [],
         toggleModal: this.propToggleResolveCallback,
         formData: {
-          issue: "",
-          subIssue: "",
-          remarks: ""
+          issue: null,
+          subIssue: null,
+          remarks: null
         },
         dropDown: {
           issueOptions: [],
@@ -104,11 +103,6 @@ import { or } from '@vuelidate/validators';
         "getsubIssueDatasDetails",
         "getremarksDatasDetails"
       ]),
-      ...mapGetters("phonePeCrm", ["getPhonepeMerchantDetails", "getPhonepeCompletedData", "getphonepeDate"])
-    },
-  
-    beforeMount() {
-      console.log("resolveDataCallback---------->>>>",JSON.stringify(this.resolveDataCallback))
     },
   
     created() {
@@ -117,139 +111,79 @@ import { or } from '@vuelidate/validators';
     },
   
     methods: {
-  
       ...mapActions("crmAction", [
         "FETCH_ISSUE_DATAS",
         "FETCH_SUB_ISSUE_DATAS",
         "FETCH_REMARKS_ISSUE_DATAS"
       ]),
-  
       ...mapActions("phonePeCrm", ["PPE_CALLBACK_RESOLVED"]),
   
       issueLoadData() {
-        let self = this;
-        self.FETCH_ISSUE_DATAS().then(() => {
-          return _.map(self.getissueDatasDetails, item => {
-            self.dropDown.issueOptions.push({
-              value: item,
-              label: item.name
-            });
-            self.value1 =
-              self.dropDown.issueOptions.length > 0
-                ? self.dropDown.issueOptions[0].value
-                : null;
-            // self.issueDocumentType(self.value1);
-          });
-        });
-      },
-  
-      // issueDocumentType(selectedValue) {
-      //   console.log("Drop down value is changed !: {}", selectedValue.id);
-      //   console.log("EVENTS", selectedValue);
-      //   let self = this;
-      //   let value = selectedValue;
-      //   console.log("VALUE DATA", value);
-      //   self.FETCH_SUB_ISSUE_DATAS(value.id).then(() => {
-      //     // Clearing the drop down values before assigning data
-      //     self.dropDown.subIssueOptions.splice(0);
-      //     return _.map(this.getsubIssueDatasDetails, item => {
-      //       self.dropDown.subIssueOptions.push({
-      //         value: item,
-      //         label: item.name
-      //       });
-      //     });
-      //   });
-      // },
-  
-      issueDocumentType(selectedValue) {
-      console.log("Drop down value is changed !: {}", selectedValue.id);
-      console.log("EVENTS", selectedValue);
-      let self = this;
-      let value = selectedValue;
-      console.log("VALUE DATA", value);
-      self.FETCH_SUB_ISSUE_DATAS(value.id).then(() => {
-        self.dropDown.subIssueOptions.splice(0);
-        _.map(this.getsubIssueDatasDetails, item => {
-          self.dropDown.subIssueOptions.push({
+        this.FETCH_ISSUE_DATAS().then(() => {
+          this.dropDown.issueOptions = this.getissueDatasDetails.map(item => ({
             value: item,
             label: item.name
-          });
-        });
-  
-        // Update formData.subIssue here
-        self.formData.subIssue = ""; // or set it to a default value if needed
-      });
-    },
-  
-      remarksDatas() {
-        let self = this;
-        self.FETCH_REMARKS_ISSUE_DATAS().then(() => {
-          return _.map(self.getremarksDatasDetails, item => {
-            self.dropDown.remarksOptions.push({
-              value: item,
-              label: item.name
-            });
-            // console.log("remarksOptions========>",JSON.stringify(self.getremarksDatasDetails));
-          });
+          }));
         });
       },
-      fnPPE(request) {
-        console.log("REQUEST------------------>>>>",request)
-              this.$q
-                  .dialog({
-                      title: "Confirm",
-                      message: "Are you sure ?",
-                      ok: "Yes",
-                      cancel: "Cancel",
-                  }).onOk(() => {
-                    this.$q.loading.show({
-                          delay: 0, // ms
-                          spinnerColor: "purple-9",
-                          message: "Processing .."
-                      });
   
-                      let ticketId = {
-                          ticketId: request.serviceReqTicketId,
-                          pagination: this.paginationControl,
-                          filter: this.filter,
-                          issue : this.formData.issue,
-                          subIssue : this.formData.subIssue,
-                          resolutionRemarksPPE : this.formData.remarks.name
-                      }
-                      this.PPE_CALLBACK_RESOLVED(ticketId)
-                          .then(response => {
-                              this.$q.notify({
-                                  color: "positive",
-                                  position: "bottom",
-                                  message: "Successfully Resolved!",
-                                  icon: "thumb_up",
-                              });
-                          //     this.loadingData({
-                          //     pagination: this.paginationControl,
-                          //     filter: this.filter,
-                          //     date: this.addBasicInformation.action,
-                          // });
-                          this.emitToggleResolve();
-                          this.$q.loading.hide();
-                          })
+      issueDocumentType(val) {
+        if (!val) return;
+        this.FETCH_SUB_ISSUE_DATAS(val.id).then(() => {
+          this.dropDown.subIssueOptions = this.getsubIssueDatasDetails.map(item => ({
+            value: item,
+            label: item.name
+          }));
+          this.formData.subIssue = null;
+        });
+      },
   
-                  }).catch(() => {
-                      this.$q.notify({
-                          color: "negative",
-                          position: "bottom",
-                          message: "No changes made!",
-                          icon: "thumb_down",
-                      });
-                      this.$q.loading.hide();
-                  });
-          },
-  
-      emitToggleResolve() {
+      remarksDatas() {
+        this.FETCH_REMARKS_ISSUE_DATAS().then(() => {
+          this.dropDown.remarksOptions = this.getremarksDatasDetails.map(item => ({
+            value: item,
+            label: item.name
+          }));
+        });
+      },
+
+      fnPPE() {
+        this.$q.dialog({
+            title: "Confirm",
+            message: "Are you sure ?",
+            ok: "Yes",
+            cancel: "Cancel",
+        }).onOk(() => {
+          this.$q.loading.show({ message: "Processing .." });
+          let payload = {
+              ticketId: this.resolveDataCallback.serviceReqTicketId,
+              issue: this.formData.issue,
+              subIssue: this.formData.subIssue,
+              resolutionRemarksPPE: this.formData.remarks ? this.formData.remarks.name : ""
+          }
+          this.PPE_CALLBACK_RESOLVED(payload)
+            .then(() => {
+                this.$q.notify({
+                    color: "positive",
+                    message: "Successfully Resolved!",
+                    icon: "thumb_up",
+                });
+                this.$q.loading.hide();
+                this.toggleModal = false;
+            })
+            .catch(error => {
+                const message = (error.body && error.body.message) ? error.body.message : "Error processing request.";
+                this.$q.notify({ color: "negative", message: message });
+                this.$q.loading.hide();
+            });
+        });
+      },
+      closeDialog() {
+        this.toggleModal = false;
+      },
+      handleHide() {
         this.$emit("closeResolveCallback");
       }
     }
   };
   </script>
-  
-  <style></style>
-  

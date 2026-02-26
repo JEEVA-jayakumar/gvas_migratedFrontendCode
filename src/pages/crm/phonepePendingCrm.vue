@@ -3,34 +3,39 @@
     <div>
       <q-tabs
         v-model="activeTab"
-        class="shadow-1"
-        color="grey-1"
+        class="shadow-1 bg-grey-1"
+        active-color="purple-9"
+        indicator-color="purple-9"
         @update:model-value="goToCompleteTab"
       >
         <q-tab
-          color="dark"
           name="tab-1"
           label="PPE Service Request"
         />
         <q-tab
-          color="dark"
+          name="tab-2"
+          label="Completed Tickets"
+        />
+        <q-tab
           name="tab-3"
           label="Phonepe Paper Roll"
         />
       </q-tabs>
       <q-tab-panels v-model="activeTab" animated>
-        <q-tab-panel name="tab-1">
-          <div class="row items-center">
-            <div class="col">
+        <q-tab-panel name="tab-1" class="no-padding">
+          <div class="row items-center q-pa-md">
+            <div class="col-auto q-mr-md">
               <strong>
                 Open For
               </strong>
             </div>
             <q-select
               class="col"
-              v-model.trim="formData.date"
+              v-model="formData.date"
               :options="dateType"
               color="grey"
+              emit-value
+              map-options
               @update:model-value="dateClick"
             >
             </q-select>
@@ -57,7 +62,7 @@
           </div>
           <q-table
             table-class="customTableClass"
-            class="q-py-none"
+            class="q-py-none shadow-0"
             :rows="tableData"
             :columns="columns"
             :filter="filter"
@@ -65,114 +70,82 @@
             :loading="toggleAjaxLoadFilter"
             @request="ajaxLoadAllLeadInfo"
           >
-            <q-td v-slot:body-cell-action="props" :props="props">
-              <div class="row no-wrap no-padding">
-                <q-btn
-                v-if="props.row.serviceRequestTicketStatus != 5 && props.row.serviceRequestTicketStatus != 3 && props.row.serviceRequestTicketStatus != 8 && props.row.serviceRequestTicketStatus != 2"
-                  color="purple-9"
-                  icon="assignment_turned_in"
-                  label="Pick Ticket"
-                  @click="toggleActionBar(props.row)"
-                  size="sm"
-                  no-wrap
-                />
-                <!-- <q-btn
+            <template v-slot:body-cell-action="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <q-btn
+                  v-if="props.row.serviceRequestTicketStatus != 5 && props.row.serviceRequestTicketStatus != 3 && props.row.serviceRequestTicketStatus != 8 && props.row.serviceRequestTicketStatus != 2"
+                    color="purple-9"
+                    icon="assignment_turned_in"
+                    label="Pick Ticket"
+                    @click="toggleActionBar(props.row)"
+                    size="sm"
+                    no-wrap
+                  />
+                  <span
+                  class="label text-orange"
                   v-if="props.row.serviceRequestTicketStatus == 5"
-                  color="red"
-                  icon="star"
-                  label="Moved to SAT"
-                  size="sm"
-                  no-wrap
-                /> -->
-                <span
-                class="label text-orange"
-                v-if="props.row.serviceRequestTicketStatus == 5"
-                ><b>Moved to SAT</b></span
-              > 
-                <!-- <q-btn
-                v-if="props.row.serviceRequestTicketStatus == 3"
-                  color="positive"
-                  icon="check_circle"
-                  label="Completed"
-                  size="sm"
-                  no-wrap
-                /> -->
-                <span
-                class="label text-green"
-                v-if="props.row.serviceRequestTicketStatus == 3"
-                ><b>Completed</b></span
-              > 
-                <!-- <q-btn
-                v-if="props.row.serviceRequestTicketStatus == 2"
-                  color="secondary"
-                  icon="event_available"
-                  label="Assigned"
-                  size="sm"
-                  no-wrap
-                /> -->
-                <span
-                class="label text-secondary"
-                v-if="props.row.serviceRequestTicketStatus == 2"
-                ><b>Assigned</b></span
-              > 
-                <q-btn
-                  v-if="props.row.serviceRequestTicketStatus == 8"
-                  color="primary"
-                  icon="arrow_forward"
-                  label="Continue"
-                  @click="toggleActionBar(props.row)"
-                  size="sm"
-                  no-wrap
-                />
-              </div>
-            </q-td>
-            <q-td
-              v-slot:body-cell-updateRemarks="props"
-              :props="props"
-            >
-              <div class="row no-wrap no-padding">
-                <q-btn
-                  :disable="props.row.serviceRequestTicketStatus != 1"
-                  no-caps
-                  icon="edit"
-                  color="purple-9"
-                  size="xs"
-                  round
-                  @click="toggleAddremarks(props.row)"
-                />
-                <span
-                  class="q-ma-sm"
-                  v-if="props.row.crmRemark != null"
-                  v-html="props.row.crmRemark"
-                ></span>
-                <span class="q-ma-sm" v-else="props.row.crmRemark == null"
-                  >NA</span
-                >
-              </div>
-            </q-td>
-            <q-td
-              v-slot:body-cell-createdDate="props"
-              :props="props" 
-              >{{
-                props.row == null
-                  ? "NA"
-                  : $moment(props.row.createdDate).format("Do MMM Y")
-              }}</q-td
-            >
-            <q-td
-            v-slot:body-cell-tat="props"
-            :props="props" 
-            >
-            <span :style="getHoursAgoColor(props.row.createdDate)">{{
-              getHoursAgo(props.row.createdDate)
-            }}</span>
-            </q-td
-          >
+                  ><b>Moved to SAT</b></span>
+                  <span
+                  class="label text-green"
+                  v-if="props.row.serviceRequestTicketStatus == 3"
+                  ><b>Completed</b></span>
+                  <span
+                  class="label text-secondary"
+                  v-if="props.row.serviceRequestTicketStatus == 2"
+                  ><b>Assigned</b></span>
+                  <q-btn
+                    v-if="props.row.serviceRequestTicketStatus == 8"
+                    color="primary"
+                    icon="arrow_forward"
+                    label="Continue"
+                    @click="toggleActionBar(props.row)"
+                    size="sm"
+                    no-wrap
+                  />
+                </div>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-updateRemarks="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding items-center">
+                  <q-btn
+                    :disable="props.row.serviceRequestTicketStatus != 1"
+                    no-caps
+                    icon="edit"
+                    color="purple-9"
+                    size="xs"
+                    round
+                    @click="toggleAddremarks(props.row)"
+                  />
+                  <span
+                    class="q-ma-sm"
+                    v-if="props.row.crmRemark != null"
+                    v-html="props.row.crmRemark"
+                  ></span>
+                  <span class="q-ma-sm" v-else>NA</span>
+                </div>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-createdDate="props">
+              <q-td :props="props">{{
+                  props.row == null
+                    ? "NA"
+                    : $moment(props.row.createdDate).format("Do MMM Y")
+                }}</q-td>
+            </template>
+            <template v-slot:body-cell-tat="props">
+              <q-td :props="props">
+                <span :style="getHoursAgoColor(props.row.createdDate)">{{
+                  getHoursAgo(props.row.createdDate)
+                }}</span>
+              </q-td>
+            </template>
 
           </q-table>
         </q-tab-panel>
-        <q-tab-panel name="tab-2">
-          <div class="row">
+        <q-tab-panel name="tab-2" class="no-padding">
+          <div class="row q-pa-md">
             <q-input
               class="col-4"
               clearable
@@ -195,7 +168,7 @@
           </div>
           <q-table
             table-class="customTableClass"
-            class="q-py-none"
+            class="q-py-none shadow-0"
             :rows="tableData1"
             :columns="columns2"
             :filter="filter1"
@@ -203,72 +176,66 @@
             :loading="toggleAjaxLoadFilter1"
             @request="ajaxLoadAllLeadInfo1"
           >
-            <q-td
-              v-slot:body-cell-updateRemarks="props"
-              :props="props"
-            >
-              <div class="row no-wrap no-padding">
-                <span
-                  class="q-ma-sm"
-                  v-if="props.row.crmRemark != null"
-                  v-html="props.row.crmRemark"
-                ></span>
-                <span class="q-ma-sm" v-else="props.row.crmRemark == null"
-                  >NA</span
-                >
-              </div>
-            </q-td>
-            <q-td
-              v-slot:body-cell-createdDate="props"
-              :props="props"
-              >{{
-                props.row == null
-                  ? "NA"
-                  : $moment(props.row.createdDate).format("Do MMM Y")
-              }}</q-td
-            >
-            <q-td
-              v-slot:body-cell-updatedDate="props"
-              :props="props"
-              >{{
-                props.row == null
-                  ? "NA"
-                  : $moment(props.row.updatedDate).format("Do MMM Y")
-              }}</q-td
-            >
+            <template v-slot:body-cell-updateRemarks="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <span
+                    class="q-ma-sm"
+                    v-if="props.row.crmRemark != null"
+                    v-html="props.row.crmRemark"
+                  ></span>
+                  <span class="q-ma-sm" v-else>NA</span>
+                </div>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-createdDate="props">
+              <q-td :props="props">{{
+                  props.row == null
+                    ? "NA"
+                    : $moment(props.row.createdDate).format("Do MMM Y")
+                }}</q-td>
+            </template>
+            <template v-slot:body-cell-updatedDate="props">
+              <q-td :props="props">{{
+                  props.row == null
+                    ? "NA"
+                    : $moment(props.row.updatedDate).format("Do MMM Y")
+                }}</q-td>
+            </template>
           </q-table>
         </q-tab-panel>
-        <q-tab-panel name="tab-3">
+        <q-tab-panel name="tab-3" class="no-padding">
           <q-tabs
             v-model="paperRollActiveTab"
-            class="shadow-1"
-            color="grey-1"
+            class="shadow-1 bg-grey-1"
+            active-color="purple-9"
+            indicator-color="purple-9"
             @update:model-value="goToPaperRollActiveTab"
           >
             <q-tab
-              color="dark"
               name="tab-4"
               label="Pending Tickets"
             />
             <q-tab
-              color="dark"
               name="tab-5"
               label="Completed Tickets"
             />
           </q-tabs>
           <q-tab-panels v-model="paperRollActiveTab" animated>
-            <q-tab-panel name="tab-4">
-              <div class="row items-center">
-                <div class="col">
+            <q-tab-panel name="tab-4" class="no-padding">
+              <div class="row items-center q-pa-md">
+                <div class="col-auto q-mr-md">
                   <strong>
                     Open For
                   </strong>
                 </div>
                 <q-select
                   class="col"
-                  v-model.trim="formData.date1"
+                  v-model="formData.date1"
                   :options="dateTypePaperRoll"
                   color="grey"
+                  emit-value
+                  map-options
                   @update:model-value="dateClickPaperRoll"
                 >
                 </q-select>
@@ -284,7 +251,7 @@
               </div>
               <q-table
                 table-class="customTableClass"
-                class="q-py-none"
+                class="q-py-none shadow-0"
                 :rows="tableData3"
                 :columns="columns3"
                 :filter="filter3"
@@ -292,19 +259,17 @@
                 :loading="toggleAjaxLoadFilter3"
                 @request="ajaxLoadAllLeadInfo3"
               >
-                <q-td
-                  v-slot:body-cell-createdDate="props"
-                  :props="props"
-                  >{{
-                    props.row == null
-                      ? "NA"
-                      : $moment(props.row.createdDate).format("Do MMM Y")
-                  }}</q-td
-                >
+                <template v-slot:body-cell-createdDate="props">
+                  <q-td :props="props">{{
+                      props.row == null
+                        ? "NA"
+                        : $moment(props.row.createdDate).format("Do MMM Y")
+                    }}</q-td>
+                </template>
               </q-table>
             </q-tab-panel>
-            <q-tab-panel name="tab-5">
-              <div class="row">
+            <q-tab-panel name="tab-5" class="no-padding">
+              <div class="row q-pa-md">
                 <q-input
                   class="col-4"
                   clearable
@@ -316,7 +281,7 @@
               </div>
               <q-table
                 table-class="customTableClass"
-                class="q-py-none"
+                class="q-py-none shadow-0"
                 :rows="tableData4"
                 :columns="columns4"
                 :filter="filter4"
@@ -324,24 +289,20 @@
                 :loading="toggleAjaxLoadFilter4"
                 @request="ajaxLoadAllLeadInfo4"
               >
-                <q-td
-                  v-slot:body-cell-createdDate="props"
-                  :props="props"
-                  >{{
-                    props.row == null
-                      ? "NA"
-                      : $moment(props.row.createdDate).format("Do MMM Y")
-                  }}</q-td
-                >
-                <q-td
-                  v-slot:body-cell-updatedDate="props"
-                  :props="props"
-                  >{{
-                    props.row == null
-                      ? "NA"
-                      : $moment(props.row.updatedDate).format("Do MMM Y")
-                  }}</q-td
-                >
+                <template v-slot:body-cell-createdDate="props">
+                  <q-td :props="props">{{
+                      props.row == null
+                        ? "NA"
+                        : $moment(props.row.createdDate).format("Do MMM Y")
+                    }}</q-td>
+                </template>
+                <template v-slot:body-cell-updatedDate="props">
+                  <q-td :props="props">{{
+                      props.row == null
+                        ? "NA"
+                        : $moment(props.row.updatedDate).format("Do MMM Y")
+                    }}</q-td>
+                </template>
               </q-table>
             </q-tab-panel>
           </q-tab-panels>
@@ -422,7 +383,6 @@
   </q-page>
 </template>
 <script>
-import { required, and } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import phonepeRemarks from "../../components/crm/phonepeRemarks.vue";
 import PhonepeEscalateToSat from "../../components/crm/phonepeEscalateToSat.vue";
@@ -465,6 +425,7 @@ export default {
       toggleAjaxLoadFilter: false,
       toggleAjaxLoadFilter1: false,
       toggleAjaxLoadFilter3: false,
+      toggleAjaxLoadFilter4: false,
       activeItemId: 0,
       activeTab: "tab-1",
       paperRollActiveTab: "tab-4",
@@ -540,7 +501,6 @@ export default {
           value: 3
         }
       ],
-      activeTab: "tab-1",
       columns: [
              {
           name: "createdDate",
@@ -591,11 +551,11 @@ export default {
           align: "left",
           field: row => {
             let issues = [];
-            if (row.subTicketsList.length > 0) {
+            if (row.subTicketsList && row.subTicketsList.length > 0) {
               row.subTicketsList.forEach((element, index) => {
                 if (element.serviceRequestType != null) {
                   issues.push(
-                    index + 1 + "." + element.serviceRequestType.name + "   "
+                    (index + 1) + "." + element.serviceRequestType.name + "   "
                   );
                 }
               });
@@ -620,12 +580,11 @@ export default {
           align: "left",
           field: row => {
             let issues = [];
-            if (row.subTicketsList.length > 0) {
+            if (row.subTicketsList && row.subTicketsList.length > 0) {
               row.subTicketsList.forEach((element, index) => {
                 if (element.serviceRequestSubTicketStatus != null) {
                   issues.push(
-                    index +
-                      1 +
+                    (index + 1) +
                       "." +
                       element.serviceRequestSubTicketStatus.name +
                       "   "
@@ -641,7 +600,7 @@ export default {
         {
           name: "action",
           required: true,
-          label: "Status",
+          label: "Action",
           align: "left",
           field: "action",
           sortable: false
@@ -695,11 +654,11 @@ export default {
           align: "left",
           field: row => {
             let issues = [];
-            if (row.subTicketsList.length > 0) {
+            if (row.subTicketsList && row.subTicketsList.length > 0) {
               row.subTicketsList.forEach((element, index) => {
                 if (element.serviceRequestType != null) {
                   issues.push(
-                    index + 1 + "." + element.serviceRequestType.name + "   "
+                    (index + 1) + "." + element.serviceRequestType.name + "   "
                   );
                 }
               });
@@ -792,21 +751,10 @@ export default {
           label: "Count",
           align: "left",
           field: row => {
-            return row.subTicketsList[0].paperRollCount;
+            return (row.subTicketsList && row.subTicketsList.length > 0) ? row.subTicketsList[0].paperRollCount : "NA";
           },
           sortable: false
         },
-      
-        // {
-        //   name: "podNumber",
-        //   required: true,
-        //   label: "POD Number",
-        //   align: "left",
-        //   field: row => {
-        //     return row.podNumber;
-        //   },
-        //   sortable: true
-        // },
       ],
       columns4: [
         
@@ -867,7 +815,7 @@ export default {
           label: "Count",
           align: "left",
           field: row => {
-            return row.subTicketsList[0].paperRollCount;
+            return (row.subTicketsList && row.subTicketsList.length > 0) ? row.subTicketsList[0].paperRollCount : "NA";
           },
           sortable: true
         },
@@ -900,14 +848,10 @@ export default {
       ],
       tableData: [],
       tableData1: [],
-      loading: true,
-      filterRoles: [],
       dataArray: [],
       completedDataArray: [],
       tableData3: [],
       tableData4: [],
-      error: true,
-      warning: false
     };
   },
 
@@ -921,13 +865,6 @@ export default {
     ])
   },
 
-  mounted() {
-    console.log("DATA : --- : ", this.getPhonepeMerchantDetails);
-    this.ajaxLoadAllLeadInfo1({
-      pagination: this.paginationControl1,
-      filter: this.filter1
-    });
-  },
   created() {
     this.loadingData({
       pagination: this.paginationControl,
@@ -945,24 +882,7 @@ export default {
       "PHONEPE_PAPER_ROLL_PENDING",
       "FETCH_PHONEPE_PAPER_ROLL_COMPLETED_DATA"
     ]),
-    ajaxLoadAllLeadInfo() {
-      console.log("loading Data with out request");
-      this.loadingData({
-        pagination: this.paginationControl,
-        filter: this.filter,
-        date: this.formData.date
-      });
-    },
-    ajaxLoadAllLeadInfo3() {
-      this.loadingData1({
-        pagination: this.paginationControl3,
-        filter: this.filter3,
-        date: this.formData.date1
-      });
-    },
-
     ajaxLoadAllLeadInfo(request) {
-      console.log("loading Data with request : ", request);
       let req = {
         pagination: request.pagination,
         filter: request.filter,
@@ -970,50 +890,43 @@ export default {
       };
       this.loadingData(req);
     },
+    ajaxLoadAllLeadInfo3(request) {
+      this.loadingData1({
+        pagination: request.pagination,
+        filter: request.filter,
+        date: this.formData.date1
+      });
+    },
 
     loadingData(request) {
-      console.log("CRM DATE ------>", JSON.stringify(request));
-      this.$q.loading.show({
-        delay: 0,
-        spinnerColor: "purple-9",
-        message: "Fetching data .."
-      });
+      this.toggleAjaxLoadFilter = true;
       this.PHONEPE_CRM_DATE(request)
-        .then(response => {
-          console.log("Req pagination : ---- :", request.pagination);
+        .then(() => {
           this.paginationControl = request.pagination;
           this.paginationControl.rowsNumber = this.getphonepeDate.totalElements;
           this.paginationControl.page = this.getphonepeDate.number + 1;
           this.tableData = this.getphonepeDate.content;
-          // this.getphonepeDate.content.forEach(obj => {
-          //   if (obj.serviceRequestTicketStatus !== 2) {
-          //     obj.items.push(newItem);
-          //   }
-          // });
-                     // this.tableData = this.tableData.find(obj => obj.serviceRequestTicketStatus === 2);
+
           if (this.getphonepeDate.sort != null) {
             this.paginationControl.sortBy = this.getphonepeDate.sort[0].property;
-            this.paginationControl.descending = this.getphonepeDate.sort[0].ascending;
+            this.paginationControl.descending = !this.getphonepeDate.sort[0].ascending;
           }
-          this.$q.loading.hide();
+          this.toggleAjaxLoadFilter = false;
         })
         .catch(error => {
-            this.$q.loading.hide();
-            console.log("ERROR",error)
+            this.toggleAjaxLoadFilter = false;
+            const message = (error.body && error.body.message) ? error.body.message : "Please Try Again Later !";
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
+              message: message,
               icon: "thumb_down"
             });
             this.tableData = []
           });
     },
     dateClick(request) {
-      this.filter="",
+      this.filter = "";
       this.addBasicInformation.action = request;
       this.loadingData({
         pagination: this.paginationControl,
@@ -1023,7 +936,6 @@ export default {
     },
 
     dateClickPaperRoll(request) {
-      // this.addBasicInformation.action = request;
       this.loadingData1({
         pagination: this.paginationControl3,
         filter: this.filter3,
@@ -1031,9 +943,12 @@ export default {
       });
     },
     goToPaperRollActiveTab(tab) {
-      console.log("TAB", tab);
       if (tab == "tab-4") {
-        this.ajaxLoadAllLeadInfo3();
+        this.loadingData1({
+            pagination: this.paginationControl3,
+            filter: this.filter3,
+            date: this.formData.date1
+        });
       } else if (tab == "tab-5") {
         this.ajaxLoadAllLeadInfo4({
           pagination: this.paginationControl4,
@@ -1043,38 +958,21 @@ export default {
     },
 
     loadingData1(request) {
-      console.log("CRM DATE ------>", JSON.stringify(request));
-      this.$q.loading.show({
-        delay: 0,
-        spinnerColor: "purple-9",
-        message: "Fetching data .."
-      });
+      this.toggleAjaxLoadFilter3 = true;
       this.PHONEPE_PAPER_ROLL_PENDING(request)
-        .then(response => {
-          //   console.log("Req pagination : ---- :", request.pagination);
+        .then(() => {
           this.paginationControl3 = request.pagination;
           this.paginationControl3.rowsNumber = this.getphonepePaperRoll.totalElements;
           this.paginationControl3.page = this.getphonepePaperRoll.number + 1;
-          const paperRollData = this.getphonepePaperRoll.content;
-          // this.tableData = this.getphonepePaperRoll.content;
-          paperRollData.forEach(item => {
-            if (item != null) {
-              this.dataArray.push(item);
-              console.log("PAPER ROLL DATA", JSON.stringify(this.dataArray));
-            }
-            // this.dataArray.push(item);
-          });
-          this.tableData3 = [];
-          this.tableData3 = this.dataArray;
-          this.dataArray = [];
+          this.tableData3 = this.getphonepePaperRoll.content;
           if (this.getphonepePaperRoll.sort != null) {
             this.paginationControl3.sortBy = this.getphonepePaperRoll.sort[0].property;
-            this.paginationControl3.descending = this.getphonepePaperRoll.sort[0].ascending;
+            this.paginationControl3.descending = !this.getphonepePaperRoll.sort[0].ascending;
           }
-          this.$q.loading.hide();
+          this.toggleAjaxLoadFilter3 = false;
         })
         .catch(() => {
-          this.$q.loading.hide();
+          this.toggleAjaxLoadFilter3 = false;
         });
     },
 
@@ -1082,107 +980,33 @@ export default {
       this.proptoggleTicketResolve = !this.proptoggleTicketResolve;
       this.resolveInfo = request;
       if (this.proptoggleTicketResolve == false) {
-        this.ajaxLoadAllLeadInfo({
+        this.loadingData({
           pagination: this.paginationControl,
-          filter: this.filter
+          filter: this.filter,
+          date: this.formData.date
         });
       }
-      // this.$q
-      //     .dialog({
-      //         title: "Confirm",
-      //         message: "Are you sure ?",
-      //         ok: "Yes",
-      //         cancel: "Cancel",
-      //     })
-      //     .then(() => {
-      //         let ticketId = {
-      //             ticketId: request.serviceReqTicketId,
-      //             pagination: this.paginationControl,
-      //             filter: this.filter,
-      //         }
-      //         this.ASSIGN_TO_COMPLETE(ticketId)
-      //             .then(response => {
-      //                 this.$q.notify({
-      //                     color: "positive",
-      //                     position: "bottom",
-      //                     message: "Successfully Resolved!",
-      //                     icon: "thumb_up",
-      //                 });
-      //                 this.loadingData({
-      //                 pagination: this.paginationControl,
-      //                 filter: this.filter,
-      //                 date: this.addBasicInformation.action,
-      //             });
-      //             })
-
-      //     })
-      //     .catch(() => {
-      //         this.$q.notify({
-      //             color: "negative",
-      //             position: "bottom",
-      //             message: "No changes made!",
-      //             icon: "thumb_down",
-      //         });
-      //     });
     },
-
 
     fnEscalateToSat(request) {
       this.propToggleEscalateToSat = !this.propToggleEscalateToSat;
       this.escalateToSatInfo = request;
       if (this.propToggleEscalateToSat == false) {
-        this.ajaxLoadAllLeadInfo({
+        this.loadingData({
           pagination: this.paginationControl,
-          filter: this.filter
+          filter: this.filter,
+          date: this.formData.date
         });
       }
-      // if (remarks != undefined) {
-      //     this.addBasicInformation.remarks = remarks;
-      //     this.addBasicInformation.action = this.formData.date;
-      // }
-
-      // this.$q
-      //     .dialog({
-      //         title: "Confirm",
-      //         message: "Are you sure ?",
-      //         ok: "Yes",
-      //         cancel: "Cancel",
-      //     })
-      //     .then(() => {
-      //         let TicketId = {
-      //             ticketId: request.serviceReqTicketId
-      //         }
-      //         this.ESCALATE_TO_SAT(TicketId)
-      //             .then(response => {
-      //                 this.$q.notify({
-      //                     color: "positive",
-      //                     position: "bottom",
-      //                     message: "Escalated To SAT!",
-      //                     icon: "thumb_up",
-      //                 });
-      //                 this.loadingData({
-      //                 pagination: this.paginationControl,
-      //                 filter: this.filter,
-      //                 date: this.addBasicInformation.action,
-      //             });
-      //             })
-      //     })
-      //     .catch(() => {
-      //         this.$q.notify({
-      //             color: "negative",
-      //             position: "bottom",
-      //             message: "No changes made!",
-      //             icon: "thumb_down",
-      //         });
-      //     });
     },
     fnPPE(request) {
       this.proptoggleTicketCallback = !this.proptoggleTicketCallback;
       this.resolveInfoppe = request;
       if (this.proptoggleTicketCallback == false) {
-        this.ajaxLoadAllLeadInfo({
+        this.loadingData({
           pagination: this.paginationControl,
-          filter: this.filter
+          filter: this.filter,
+          date: this.formData.date
         });
       }
     },
@@ -1193,94 +1017,53 @@ export default {
           filter: this.filter1
         });
         this.filter = "";
-        let request = {
-          pagination: this.paginationControl1,
-          filter: this.filter1
-        };
-        this.FETCH_PHONEPE_COMPLETED_DATA(request)
-          .then(response => {
-            this.toggleAjaxLoadFilter1 = false;
-          })
-          .catch(error => {
-            this.toggleAjaxLoadFilter1 = false;
-          });
-      } else {
-        this.ajaxLoadAllLeadInfo({
+      } else if (tab == "tab-1") {
+        this.loadingData({
           pagination: this.paginationControl,
-          filter: this.filter
+          filter: this.filter,
+          date: this.formData.date
         });
         this.filter1 = "";
+      } else if (tab == "tab-3") {
+          this.goToPaperRollActiveTab(this.paperRollActiveTab);
       }
     },
 
-    ajaxLoadAllLeadInfo1() {
+    ajaxLoadAllLeadInfo1(request) {
       this.toggleAjaxLoadFilter1 = true;
-      this.FETCH_PHONEPE_COMPLETED_DATA()
-        .then(response => {
-          this.toggleAjaxLoadFilter1 = false;
-        })
-        .catch(error => {
-          this.toggleAjaxLoadFilter1 = false;
-        });
-    },
-
-    ajaxLoadAllLeadInfo1({ pagination, filter }) {
-      this.$q.loading.show({
-        delay: 0,
-        spinnerColor: "purple-9",
-        message: "Fetching data .."
-      });
-      this.FETCH_PHONEPE_COMPLETED_DATA({ pagination, filter }).then(res => {
-          this.paginationControl1 = pagination;
+      this.FETCH_PHONEPE_COMPLETED_DATA(request).then(() => {
+          this.paginationControl1 = request.pagination;
           this.paginationControl1.rowsNumber = this.getPhonepeCompletedData.totalElements;
           this.paginationControl1.page =
             this.getPhonepeCompletedData.number + 1;
           this.tableData1 = this.getPhonepeCompletedData.content;
           if (this.getPhonepeCompletedData.sort != null) {
             this.paginationControl1.sortBy = this.getPhonepeCompletedData.sort[0].property;
-            this.paginationControl1.descending = this.getPhonepeCompletedData.sort[0].ascending;
+            this.paginationControl1.descending = !this.getPhonepeCompletedData.sort[0].ascending;
           }
-          this.$q.loading.hide();
+          this.toggleAjaxLoadFilter1 = false;
         })
         .catch(() => {
-          this.$q.loading.hide();
+          this.toggleAjaxLoadFilter1 = false;
         });
     },
 
-    ajaxLoadAllLeadInfo4({ pagination, filter }) {
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Fetching data ..",
-      });
-      this.FETCH_PHONEPE_PAPER_ROLL_COMPLETED_DATA({ pagination, filter }).then(res => {
-          this.paginationControl4 = pagination;
+    ajaxLoadAllLeadInfo4(request) {
+      this.toggleAjaxLoadFilter4 = true;
+      this.FETCH_PHONEPE_PAPER_ROLL_COMPLETED_DATA(request).then(() => {
+          this.paginationControl4 = request.pagination;
           this.paginationControl4.rowsNumber = this.getphonepeCompletedPaperRoll.totalElements;
           this.paginationControl4.page =
             this.getphonepeCompletedPaperRoll.number + 1;
-          const paperRollCompletedData = this.getphonepeCompletedPaperRoll
-            .content;
-
-          paperRollCompletedData.forEach(item => {
-            if (item != null) {
-              this.completedDataArray.push(item);
-              console.log(
-                "TESTINg LOG",
-                JSON.stringify(this.completedDataArray)
-              );
-            }
-          });
-          this.tableData4 = [];
-          this.tableData4 = this.completedDataArray;
-          this.completedDataArray = [];
+          this.tableData4 = this.getphonepeCompletedPaperRoll.content;
           if (this.getphonepeCompletedPaperRoll.sort != null) {
             this.paginationControl4.sortBy = this.getphonepeCompletedPaperRoll.sort[0].property;
-            this.paginationControl4.descending = this.getphonepeCompletedPaperRoll.sort[0].ascending;
+            this.paginationControl4.descending = !this.getphonepeCompletedPaperRoll.sort[0].ascending;
           }
-          this.$q.loading.hide();
+          this.toggleAjaxLoadFilter4 = false;
         })
         .catch(() => {
-          this.$q.loading.hide();
+          this.toggleAjaxLoadFilter4 = false;
         });
     },
 
@@ -1301,61 +1084,30 @@ export default {
     },
 
     toggleActionBar(request) {
-      this.loadingData({
-      pagination: this.paginationControl,
-      filter: this.filter,
-      date: this.formData.date
-    });
-
       this.propToggleActionBar = !this.propToggleActionBar;
       if (request != undefined) {
         this.addActionBarInformation.data = request;
       }
     },
-     getHoursAgo(dateInMilliseconds) {
-  // Get the current date and time in milliseconds
-  const currentTime = Date.now();
-  
-  // Calculate the difference in milliseconds
-  const differenceInMilliseconds = currentTime - dateInMilliseconds;
-   
-  // Convert milliseconds to hours
-  const hoursAgo = differenceInMilliseconds / (1000 * 60 * 60);
-  
-  return 72 - Math.floor(hoursAgo); // Round down to the nearest whole hour
-
-  console.log(72-getHoursAgo(dateInMilliseconds)  );
-},
-
-getHoursAgoColor(dateInMilliseconds){
-  const currentTime = Date.now();
-  
-  // Calculate the difference in milliseconds
-  const differenceInMilliseconds = currentTime - dateInMilliseconds;
-   
-  // Convert milliseconds to hours
-  const hoursAgo = differenceInMilliseconds / (1000 * 60 * 60);
-  
- const colorData =  72 - Math.floor(hoursAgo);
-
- 
- // Round down to the nearest whole hour
- if (colorData > 0) {
-       console.log("COOR DATA>>",colorData);
-        return 'color: green; font-weight: bold;'
-      } else if (colorData < 0) {
-        console.log("COOR DATA<<<",colorData);
-        return 'color: red; font-weight: bold;'
-      } else {
-        return 'color: gray; font-weight: normal;'
-      }
-
-}
-
-// Example usage
-
-
-
+    getHoursAgo(dateInMilliseconds) {
+      const currentTime = Date.now();
+      const differenceInMilliseconds = currentTime - dateInMilliseconds;
+      const hoursAgo = differenceInMilliseconds / (1000 * 60 * 60);
+      return 72 - Math.floor(hoursAgo);
+    },
+    getHoursAgoColor(dateInMilliseconds){
+      const currentTime = Date.now();
+      const differenceInMilliseconds = currentTime - dateInMilliseconds;
+      const hoursAgo = differenceInMilliseconds / (1000 * 60 * 60);
+      const colorData =  72 - Math.floor(hoursAgo);
+      if (colorData > 0) {
+          return 'color: green; font-weight: bold;'
+        } else if (colorData < 0) {
+          return 'color: red; font-weight: bold;'
+        } else {
+          return 'color: gray; font-weight: normal;'
+        }
+    }
   }
 };
 </script>

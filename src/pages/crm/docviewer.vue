@@ -1,164 +1,139 @@
 <template>
   <q-page>
-    <div>
-      <div class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
+    <div class="q-pa-md">
+      <div class="text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
         DOC Viewer
       </div>
-      <div class="row gutter-x-xs gutter-y-xs q-pt-md justify-around items-end">
-        <div class="col-md-6">
+      <div class="row q-col-gutter-md q-pt-md justify-around items-end">
+        <div class="col-12 col-md-6">
           <q-input
+            filled
             clearable
             @clear="fnClearing"
-            color="grey-9"
-            @blur="$v.formData.searchTerm.$touch"
-            :error="$v.formData.searchTerm.$error"
+            color="purple-9"
             v-model="formData.searchTerm"
             placeholder="Type.."
             label="Search By Ticket ID / TID..."
-            class="q-mr-lg q-py-sm"
           />
         </div>
-        <div class="col-md-3">
-          <div class="group">
-            <q-radio v-for="(item, index) in flagOptions" :key="index" color="grey-9" v-model.trim="formData.flag" :val="item.value" :label="item.label"/>
+        <div class="col-12 col-md-3">
+          <div class="q-gutter-sm">
+            <q-radio v-for="(item, index) in flagOptions" :key="index" color="purple-9" v-model="formData.flag" :val="item.value" :label="item.label"/>
           </div>
         </div>
-        <div class="col-md-2">
-          <q-btn class="auto" :disabled="formData.searchTerm == '' && formData.flag == ''" size="md" type="button" color="purple-9" @click="globalSubmit(formData)">Submit
-          </q-btn>
+        <div class="col-12 col-md-2">
+          <q-btn class="full-width" :disabled="!formData.searchTerm || !formData.flag" size="md" color="purple-9" @click="globalSubmit" label="Submit" />
         </div>
       </div>
     </div>
   
-    <div v-if="tableData.length != 0">
-      <q-table table-class="customTableClass" :rows="tableData" :columns="columns" v-model:pagination="paginationControl" row-key="name" :loading="toggleAjaxLoadFilter" :rows-per-page-options="[5, 10, 15, 20]" @request="ajaxLoadAllLeadInfo">
-        <q-td v-slot:body-cell-tid="props" :props="props">
-          <span class="label text-primary"># {{ props.row.tid }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-merchantName="props" :props="props">
-          <span > {{ props.row.leadInformation.contactName == null ? "NA"  :  props.row.leadInformation.contactName }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-regionAreaName="props" :props="props">
-          <span > {{ props.row.aggregatorRegionalInventory.region.regionAreaName == null ? "NA"  :  props.row.aggregatorRegionalInventory.region.regionAreaName }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-viewDocument="props" :props="props">
-          <div v-if="props.row.implementationFormMimeType == null || props.row.implementationFormMimeType.includes('application/pdf')" class="cursor-pointer">
-            <div @click="fnPDFViewModal(props.row.implementationForm)">
-              <q-icon name="fas fa-file-pdf" color="primary" />
+    <div v-if="tableData && tableData.length != 0" class="q-pa-md">
+      <q-table table-class="customTableClass" :rows="tableData" :columns="columns" v-model:pagination="paginationControl" row-key="id" :loading="toggleAjaxLoadFilter" :rows-per-page-options="[5, 10, 15, 20]" @request="ajaxLoadAllLeadInfo">
+        <template v-slot:body-cell-tid="props">
+          <q-td :props="props">
+            <span class="text-primary text-bold"># {{ props.row.tid }}</span>
+          </q-td>
+        </template>
+        <template v-slot:body-cell-merchantName="props">
+          <q-td :props="props">
+            {{ (props.row.leadInformation && props.row.leadInformation.contactName) ? props.row.leadInformation.contactName : "NA" }}
+          </q-td>
+        </template>
+        <template v-slot:body-cell-regionAreaName="props">
+          <q-td :props="props">
+            {{ (props.row.aggregatorRegionalInventory && props.row.aggregatorRegionalInventory.region) ? props.row.aggregatorRegionalInventory.region.regionAreaName : "NA" }}
+          </q-td>
+        </template>
+        <template v-slot:body-cell-viewDocument="props">
+          <q-td :props="props">
+            <div v-if="!props.row.implementationFormMimeType || props.row.implementationFormMimeType.includes('application/pdf')" class="cursor-pointer">
+              <q-btn flat round @click="fnPDFViewModal(props.row.implementationForm)" icon="fas fa-file-pdf" color="primary" />
             </div>
-          </div>
-          <div v-else-if="props.row.implementationFormMimeType == null || props.row.implementationFormMimeType.includes('image/*')" class="cursor-pointer">
-            <q-btn flat dense  color="green" @click="fnShowPopuop(props.row.implementationForm)">
-               <q-icon name="fa fa-camera"/>
-            </q-btn>
-          </div>
-          <div v-else>NA Document</div>
-        </q-td>
-         <q-td v-slot:body-cell-pictureOfShop="props" :props="props">
-          <div
-            v-if="
-              props.row.pictureOfShopMimeType == null ||
-              props.row.pictureOfShopMimeType.includes('application/pdf')
-            "
-            class="cursor-pointer"
-          >
-            <div @click="fnPDFViewModal(props.row.pictureOfShop)">
-              <q-icon name="fas fa-file-pdf" color="primary" />
+            <div v-else-if="props.row.implementationFormMimeType.includes('image/')" class="cursor-pointer">
+              <q-btn flat dense color="green" @click="fnShowPopuop(props.row.implementationForm)" icon="fa fa-camera" />
             </div>
-          </div>
-          <div v-else-if="props.row.pictureOfShopMimeType == null || props.row.pictureOfShopMimeType.includes('image/*')" class="cursor-pointer">
-           <q-btn flat dense  color="green" @click="fnShowPopuop(props.row.pictureOfShop)">
-               <q-icon name="fa fa-camera"/>
-            </q-btn>
-          </div>
-          <div v-else>NA Document</div>
-         </q-td>
-         <q-td v-slot:body-cell-cpvForm="props" :props="props">
-          <div
-            v-if="
-              props.row.cpvFormMimeType == null ||
-              props.row.cpvFormMimeType.includes('application/pdf')
-            "
-            class="cursor-pointer"
-          >
-            <div @click="fnPDFViewModal(props.row.cpvForm)">
-              <q-icon name="fas fa-file-pdf" color="primary" />
+            <div v-else>NA Document</div>
+          </q-td>
+        </template>
+         <template v-slot:body-cell-pictureOfShop="props">
+          <q-td :props="props">
+            <div v-if="!props.row.pictureOfShopMimeType || props.row.pictureOfShopMimeType.includes('application/pdf')" class="cursor-pointer">
+              <q-btn flat round @click="fnPDFViewModal(props.row.pictureOfShop)" icon="fas fa-file-pdf" color="primary" />
             </div>
-          </div>
-          <div v-else-if="props.row.cpvFormMimeType == null ||props.row.cpvFormMimeType.includes('image/*')" class="cursor-pointer">
-            <q-btn flat dense  color="green" @click="fnShowPopuop(props.row.cpvForm)">
-               <q-icon name="fa fa-camera"/>
-            </q-btn>
-          </div>
-          <div v-else>NA Document</div>
-        </q-td>
+            <div v-else-if="props.row.pictureOfShopMimeType.includes('image/')" class="cursor-pointer">
+              <q-btn flat dense color="green" @click="fnShowPopuop(props.row.pictureOfShop)" icon="fa fa-camera" />
+            </div>
+            <div v-else>NA Document</div>
+          </q-td>
+         </template>
+         <template v-slot:body-cell-cpvForm="props">
+          <q-td :props="props">
+            <div v-if="!props.row.cpvFormMimeType || props.row.cpvFormMimeType.includes('application/pdf')" class="cursor-pointer">
+              <q-btn flat round @click="fnPDFViewModal(props.row.cpvForm)" icon="fas fa-file-pdf" color="primary" />
+            </div>
+            <div v-else-if="props.row.cpvFormMimeType.includes('image/')" class="cursor-pointer">
+              <q-btn flat dense color="green" @click="fnShowPopuop(props.row.cpvForm)" icon="fa fa-camera" />
+            </div>
+            <div v-else>NA Document</div>
+          </q-td>
+        </template>
       </q-table>
     </div>
-    <div v-else-if="tableData1.length != 0">
-      <q-table table-class="customTableClass" :rows="tableData1" :columns="columns1" row-key="name" v-model:pagination="paginationControlchange" :rows-per-page-options="[5,10,15,20]" :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo1">
-       <q-td v-slot:body-cell-tid="props" :props="props">
-          <span class="label text-primary"># {{ props.row.serviceRequestData.tid }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-merchantName="props" :props="props">
-          <span > {{ props.row.serviceRequestData.meName == null ? "NA"  :  props.row.serviceRequestData.meName }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-regionAreaName="props" :props="props">
-          <span > {{ props.row.serviceRequestData.bpRegion.regionAreaName == null ? "NA"  :  props.row.serviceRequestData.bpRegion.regionAreaName }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-ticket="props" :props="props">
-          <span > {{ props.row.serviceRequestData.serviceReqTicketId == null ? "NA"  :  props.row.serviceRequestData.serviceReqTicketId }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-pictureOfShop="props" :props="props">
-          <div
-            v-if="
-              props.row.pictureOfShopMimeType == null ||
-              props.row.pictureOfShopMimeType.includes('application/pdf')
-            "
-            class="cursor-pointer"
-          >
-            <div @click="fnPDFViewModal(props.row.pictureOfShop)">
-              <q-icon name="fas fa-file-pdf" color="primary" />
-            </div>
-          </div>
-          <div v-else-if="props.row.pictureOfShopMimeType == null || props.row.pictureOfShopMimeType.includes('image/*')" class="cursor-pointer">
-              <q-btn flat dense  color="green" @click="fnShowPopuop(props.row.pictureOfShop)">
-               <q-icon name="fa fa-camera"/></q-btn>
-          </div>
-          <div v-else>NA Document</div>
-        </q-td>
-        <q-td v-slot:body-cell-viewDocument="props" :props="props">
-          <div
-            v-if="
-              props.row.implementationFormMimeType == null ||
-              props.row.implementationFormMimeType.includes('application/pdf')
-            "
-            class="cursor-pointer"
-          >
-            <div @click="fnPDFViewModal(props.row.implementationForm)">
-              <q-icon name="fas fa-file-pdf" color="primary" />
-            </div>
-          </div>
-          <div v-else-if="props.row.implementationFormMimeType == null ||props.row.implementationFormMimeType.includes('image/*')" class="cursor-pointer">
-            <q-btn flat dense  color="green" @click="fnShowPopuop(props.row.implementationForm)">
-               <q-icon name="fa fa-camera"/>
-            </q-btn>
-          </div>
-          <div v-else>NA Document</div>
-        </q-td>
 
+    <div v-else-if="tableData1 && tableData1.length != 0" class="q-pa-md">
+      <q-table table-class="customTableClass" :rows="tableData1" :columns="columns1" row-key="id" v-model:pagination="paginationControlchange" :rows-per-page-options="[5,10,15,20]" :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo1">
+       <template v-slot:body-cell-tid="props">
+          <q-td :props="props">
+            <span class="text-primary text-bold"># {{ (props.row.serviceRequestData) ? props.row.serviceRequestData.tid : 'NA' }}</span>
+          </q-td>
+        </template>
+        <template v-slot:body-cell-merchantName="props">
+          <q-td :props="props">
+            {{ (props.row.serviceRequestData && props.row.serviceRequestData.meName) ? props.row.serviceRequestData.meName : "NA" }}
+          </q-td>
+        </template>
+        <template v-slot:body-cell-regionAreaName="props">
+          <q-td :props="props">
+            {{ (props.row.serviceRequestData && props.row.serviceRequestData.bpRegion) ? props.row.serviceRequestData.bpRegion.regionAreaName : "NA" }}
+          </q-td>
+        </template>
+        <template v-slot:body-cell-ticket="props">
+          <q-td :props="props">
+            {{ (props.row.serviceRequestData) ? props.row.serviceRequestData.serviceReqTicketId : "NA" }}
+          </q-td>
+        </template>
+        <template v-slot:body-cell-pictureOfShop="props">
+          <q-td :props="props">
+            <div v-if="!props.row.pictureOfShopMimeType || props.row.pictureOfShopMimeType.includes('application/pdf')" class="cursor-pointer">
+              <q-btn flat round @click="fnPDFViewModal(props.row.pictureOfShop)" icon="fas fa-file-pdf" color="primary" />
+            </div>
+            <div v-else-if="props.row.pictureOfShopMimeType.includes('image/')" class="cursor-pointer">
+              <q-btn flat dense color="green" @click="fnShowPopuop(props.row.pictureOfShop)" icon="fa fa-camera" />
+            </div>
+            <div v-else>NA Document</div>
+          </q-td>
+        </template>
+        <template v-slot:body-cell-viewDocument="props">
+          <q-td :props="props">
+            <div v-if="!props.row.implementationFormMimeType || props.row.implementationFormMimeType.includes('application/pdf')" class="cursor-pointer">
+              <q-btn flat round @click="fnPDFViewModal(props.row.implementationForm)" icon="fas fa-file-pdf" color="primary" />
+            </div>
+            <div v-else-if="props.row.implementationFormMimeType.includes('image/')" class="cursor-pointer">
+              <q-btn flat dense color="green" @click="fnShowPopuop(props.row.implementationForm)" icon="fa fa-camera" />
+            </div>
+            <div v-else>NA Document</div>
+          </q-td>
+        </template>
       </q-table>
     </div>
-    <div v-else class="row gutter-x-xs gutter-y-xs justify-center q-pt-lg q-mr-lg q-ml-lg q-mt-lg q-mb-lg dFont" style="min-height: calc(80vh - 52px)">
-      <div class="row" align="center">
+
+    <div v-else class="row justify-center items-center q-pa-xl" style="min-height: 40vh">
+      <div class="text-center">
         <q-icon name="warning" color="warning" size="4rem" />
-        <div class="text-subtitle1 text-bold text-grey-9" style="align-self: center">
-          No Data Available
-        </div>
-        </div>
+        <div class="text-subtitle1 text-bold text-grey-9"> No Data Available </div>
+      </div>
     </div>
-    <div v-if="toggleAjaxLoadFilter" class="fullscreen spinner-overlay">
-      <q-spinner-bars class="absolute-center" style="color: #61116a" :size="35" />
-    </div>
+
     <showPDF v-if="toggleshowPDFModal"
       :propToggleshowPDFModal="toggleshowPDFModal"
       :propPDFDetails="PDFDetails"
@@ -167,347 +142,132 @@
       :propShowPopup="propShowPopup"
       :propRowDetails="propRowDetails"
       @emitfnshowservice="fnShowPopuop"></popup>
+
+    <div v-if="toggleAjaxLoadFilter" class="fullscreen spinner-overlay">
+      <q-spinner-bars class="absolute-center" style="color: #61116a" :size="35" />
+    </div>
   </q-page>
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { useVuelidate } from '@vuelidate/core'
-import { required, minLength, maxLength } from "@vuelidate/validators";
 import popup from 'src/components/crm/popup.vue'
 import showPDF from 'src/components/crm/showPDF.vue'
+
 export default {
-  name: "globalSearchFilterValues",
-  setup () {
-    return { $v: useVuelidate() }
-  },
- components: {
+  name: "DocViewer",
+  components: {
     popup,
     showPDF
   },
   data() {
     return {
       propShowPopup: false,
+      propRowDetails: null,
       toggleshowPDFModal: false,
+      PDFDetails: null,
       toggleAjaxLoadFilter: false,
       tableData: [],
       tableData1: [],
       formData: {
-        flag: "",
+        flag: null,
         searchTerm: "",
       },
       flagOptions: [
-        {
-          label: "Tid",
-          value: 1,
-        },
-        {
-          label: "Ticket ID",
-          value: 2,
-        },],
+        { label: "Tid", value: 1 },
+        { label: "Ticket ID", value: 2 }
+      ],
       paginationControl: {
-        rowsNumber: 5,
+        rowsNumber: 0,
         page: 1,
         sortBy: "createdDate",
         descending: false,
         rowsPerPage: 5,
       },
       paginationControlchange: {
-        rowsNumber: 5,
+        rowsNumber: 0,
         page: 1,
         sortBy: "createdDate",
         descending: false,
         rowsPerPage: 5,
       },
       columns: [
-        {
-          name: "tid",
-          required: true,
-          label: "TID",
-          align: "left",
-          field: "tid",
-          sortable: false,
-        },
-        {
-          name: "merchantName",
-          required: true,
-          label: "Merchant Name",
-          align: "left",
-          field: "merchantName",
-          sortable: false,
-        },
-        {
-          name: "regionAreaName",
-          required: true,
-          label: "Region",
-          align: "left",
-          field: "regionAreaName",
-          sortable: false,
-        },
-        {
-          name: "viewDocument",
-          required: true,
-          label: "Imp Form",
-          align: "left",
-          field: (row) => {
-            return row.implementationForm == null ? "NA" : row.implementationForm;
-          },
-          sortable: false,
-        },
-        {
-          name: "pictureOfShop",
-          required: true,
-          label: "Pic of Shop",
-          align: "left",
-          field: "pictureOfShop",
-          sortable: false,
-        },
-        {
-          name: "cpvForm",
-          required: true,
-          label: "CPV form",
-          align: "left",
-          field: "cpvForm",
-          sortable: false,
-        },
+        { name: "tid", label: "TID", align: "left", field: "tid" },
+        { name: "merchantName", label: "Merchant Name", align: "left", field: "merchantName" },
+        { name: "regionAreaName", label: "Region", align: "left", field: "regionAreaName" },
+        { name: "viewDocument", label: "Imp Form", align: "left", field: "implementationForm" },
+        { name: "pictureOfShop", label: "Pic of Shop", align: "left", field: "pictureOfShop" },
+        { name: "cpvForm", label: "CPV form", align: "left", field: "cpvForm" },
       ],
       columns1: [
-        {
-          name: "tid",
-          required: true,
-          label: "TID",
-          align: "left",
-          field: "tid",
-          sortable: false,
-        },
-        {
-          name: "merchantName",
-          required: true,
-          label: "Merchant Name",
-          align: "left",
-          field: "merchantName",
-          sortable: false,
-        },
-        {
-          name: "regionAreaName",
-          required: true,
-          label: "Region",
-          align: "left",
-          field: "regionAreaName",
-          sortable: false,
-        },
-        {
-          name: "ticket",
-          required: true,
-          label: "Ticket ID",
-          align: "left",
-          field: "ticket",
-          sortable: false,
-        },
-        {
-          name: "pictureOfShop",
-          required: true,
-          label: "Pic of Shop",
-          align: "left",
-          field: "pictureOfShop",
-          sortable: false,
-        },
-        {
-          name: "viewDocument",
-          required: true,
-          label: "Imp Form",
-          align: "left",
-          field: (row) => {
-            return row.implementationForm == null ? "NA" : row.implementationForm;
-          },
-          sortable: false,
-        },
+        { name: "tid", label: "TID", align: "left", field: "tid" },
+        { name: "merchantName", label: "Merchant Name", align: "left", field: "merchantName" },
+        { name: "regionAreaName", label: "Region", align: "left", field: "regionAreaName" },
+        { name: "ticket", label: "Ticket ID", align: "left", field: "ticket" },
+        { name: "pictureOfShop", label: "Pic of Shop", align: "left", field: "pictureOfShop" },
+        { name: "viewDocument", label: "Imp Form", align: "left", field: "implementationForm" },
       ],
     };
   },
-  validations: {
-    formData: {
-      searchTerm: {
-        required,
-      },
-       flag: {
-        required,
-      }
-    }
-  },
-
   computed: {
-    ...mapGetters("globalSearchSerialNumber", ["getdocview","getdocticket"]),
-    ...mapGetters("GlobalVariables", [
-      "GLOBAL_STATUS_FETCH",
-      "REGIONAL_INVENTORY_DEVICE_STATUS",
-      "CENTRAL_INVENTORY_DEVICE_STATUS",
-      "TID_STATUS",
-      "TID_RECOVERY_STATUS",
-      "TID_REPLACEMENT_STATUS",
-    ]),
-        ...mapGetters("GlobalVariables", ["GLOBAL_FILE_FETCH_URL"]),
-
+    ...mapGetters("globalSearchSerialNumber", ["getdocview", "getdocticket"]),
   },
-
   methods: {
-    ...mapActions("globalSearchSerialNumber", ["FETCH_DOC_VIEW","FETCH_DOC_VIEW_TICKET"]),
-    globalSubmit(request) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
-        this.$q.notify("Please review fields again.");
-      } 
-      else {
-        if(request.flag == 1){
-              this.$q.loading.show({
-              delay: 0,
-              spinnerColor: "purple-9",
-              message: "Fetching data ..",
-              });
-              this.FETCH_DOC_VIEW(request).then((res) => {
-                this.tableData = this.getdocview;
-                this.$q.loading.hide();
-            })
-              .catch(error => {
-                 this.$q.loading.hide();
-                  this.$q.notify({
-                    color: "negative",
-                    position: "bottom",
-                    message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-                    icon: "thumb_down"
-                  });
-              });
-        }
-        else{
-                this.$q.loading.show({
-                delay: 0,
-                spinnerColor: "purple-9",
-                message: "Fetching data ..",
-                });
-                this.FETCH_DOC_VIEW_TICKET(request).then((res) => {
-                  this.tableData1 = this.getdocticket;
-                  this.$q.loading.hide();
-                })
-                .catch(error => {
-                   this.$q.loading.hide();
-                    this.$q.notify({
-                      color: "negative",
-                      position: "bottom",
-                      message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-                      icon: "thumb_down"
-                    });
-                  });
-
-
-        }
+    ...mapActions("globalSearchSerialNumber", ["FETCH_DOC_VIEW", "FETCH_DOC_VIEW_TICKET"]),
+    globalSubmit() {
+      if (!this.formData.searchTerm || !this.formData.flag) {
+          this.$q.notify({ color: 'warning', message: 'Please enter search term and select type' });
+          return;
       }
-    
-    
-    },
-    ajaxLoadAllLeadInfo() {
       this.toggleAjaxLoadFilter = true;
-      this.FETCH_DOC_VIEW()
-        .then((response) => {
-          this.tableData = this.getaggImplementedverificationqueue;
-          this.toggleAjaxLoadFilter = false;
-        })
-        .catch((error) => {
-          this.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-          icon: "thumb_down"
+      if(this.formData.flag == 1){
+          this.FETCH_DOC_VIEW(this.formData).then(() => {
+                this.tableData = this.getdocview || [];
+                this.tableData1 = [];
+                this.toggleAjaxLoadFilter = false;
+          }).catch(error => {
+                this.toggleAjaxLoadFilter = false;
+                const message = (error.body && error.body.message) ? error.body.message : "Fetch failed";
+                this.$q.notify({ color: "negative", message: message });
           });
-          this.toggleAjaxLoadFilter = false;
-        });
-    },
-    ajaxLoadAllLeadInfo({ pagination, filter }) {
-      this.$q.loading.show({
-        delay: 0,
-        spinnerColor: "purple-9",
-        message: "Fetching data ..",
-      });
-      this.FETCH_DOC_VIEW({ pagination, filter }).then((res) => {
-          this.paginationControl = pagination;
-          this.paginationControl.rowsNumber = this.getaggImplementedverificationqueue.totalElements;
-          this.paginationControl.page =
-            this.getaggImplementedverificationqueue.number + 1;
-
-          this.tableData = this.getaggImplementedverificationqueue.content;
-          if (this.getaggImplementedverificationqueue.sort != null) {
-            this.paginationControl.sortBy = this.getaggImplementedverificationqueue.sort[0].property;
-            this.paginationControl.descending = this.getaggImplementedverificationqueue.sort[0].ascending;
-          }
-
-          this.$q.loading.hide();
-        })
-        .catch(() => {
-          this.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-          icon: "thumb_down"
+      } else {
+          this.FETCH_DOC_VIEW_TICKET(this.formData).then(() => {
+                this.tableData1 = this.getdocticket || [];
+                this.tableData = [];
+                this.toggleAjaxLoadFilter = false;
+          }).catch(error => {
+                this.toggleAjaxLoadFilter = false;
+                const message = (error.body && error.body.message) ? error.body.message : "Fetch failed";
+                this.$q.notify({ color: "negative", message: message });
           });
-          this.$q.loading.hide();
-        });
+      }
     },
-    ajaxLoadAllLeadInfo1({ pagination, filter }) {
-      this.$q.loading.show({
-        delay: 0,
-        spinnerColor: "purple-9",
-        message: "Fetching data ..",
-      });
-      this.FETCH_DOC_VIEW({ pagination, filter }).then((res) => {
-          this.paginationControl = pagination;
-          this.paginationControl.rowsNumber = this.getaggImplementedverificationqueue.totalElements;
-          this.paginationControl.page =
-            this.getaggImplementedverificationqueue.number + 1;
-
-          this.tableData = this.getaggImplementedverificationqueue.content;
-          if (this.getaggImplementedverificationqueue.sort != null) {
-            this.paginationControl.sortBy = this.getaggImplementedverificationqueue.sort[0].property;
-            this.paginationControl.descending = this.getaggImplementedverificationqueue.sort[0].ascending;
-          }
-          this.$q.loading.hide();
-        })
-        .catch(() => {
-          this.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-          icon: "thumb_down"
-          });
-          this.$q.loading.hide();
-        });
+    ajaxLoadAllLeadInfo(request) {
+        this.paginationControl = request.pagination;
+        this.globalSubmit();
     },
-    fnViewMultiAttachedFileImageUploadedBySat(attachedImageIndex) {
-      this.$refs.multiAttachedImageViewerUploadedBySAT;
-    },
-    fnViewMultiAttachedFileImageUploadedByPictureShop(attachedImageIndex) {
-      this.$refs.multiAttachedImageViewerUploadedByPictureShop.click();
-    },
-    fnViewMultiAttachedFileImageUploadedByCpvForm(attachedImageIndex) {
-      this.$refs.multiAttachedImageViewerUploadedByCpvForm.click();
+    ajaxLoadAllLeadInfo1(request) {
+        this.paginationControlchange = request.pagination;
+        this.globalSubmit();
     },
     fnPDFViewModal(documentUrl) {
+      if (!documentUrl) return;
       this.PDFDetails = documentUrl;
       this.toggleshowPDFModal = !this.toggleshowPDFModal;
     },
     fnShowPopuop(rowDetails) {
+      if (!rowDetails) return;
+      this.propRowDetails = rowDetails;
       this.propShowPopup = !this.propShowPopup;
-      if (rowDetails != undefined) {
-        this.propRowDetails = rowDetails;
-      }
     },
     fnClearing() {
       this.tableData = [];
       this.tableData1 = [];
-      this.formData.flag="";
+      this.formData.flag = null;
     },
   },
 };
 </script>
-
-<style>
+<style scoped>
 .text-wrap {
   overflow-wrap: anywhere;
   color: #242225;

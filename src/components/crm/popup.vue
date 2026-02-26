@@ -1,111 +1,78 @@
 <template>
   <div>
     <q-dialog
-      minimized
-      class="customModalOverlay"
       v-model="toggleModel"
-      @hide="emitfnshowservice()"
-      :content-css="{ padding: '25px', minWidth: '30vw' }"
+      @hide="emitfnshowservice"
+      class="customModalOverlay"
     >
-      <form>
-        <div class="column group">
-          <div class="col-md-12">
-            <div class="text-h6 text-weight-regular">DOC Viewer</div>
-          </div>
-          <div class="col-md-12">
-            <img
-              :src="[GLOBAL_FILE_FETCH_URL + '/' + this.propRowDetails]"
-              style="max-width: 100%"
-              :height="'400px'"
-            />
-          </div>
-          <div class="col-md-1 group" align="right">
-            <q-btn align="right" @click="Download()" color="purple-9">Download</q-btn>
-          </div>
-        </div>
-      </form>
+      <q-card style="min-width: 40vw;">
+        <q-card-section class="row items-center q-pb-none">
+          <div class="text-h6">DOC Viewer</div>
+          <q-spacer />
+          <q-btn icon="close" flat round dense v-close-popup />
+        </q-card-section>
+
+        <q-card-section class="text-center">
+          <img
+            v-if="imageUrl"
+            :src="imageUrl"
+            style="max-width: 100%; max-height: 60vh; border: 1px solid #ccc;"
+          />
+          <div v-else class="q-pa-lg">No image details provided.</div>
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn @click="Download" color="purple-9" label="Download" icon="download" />
+          <q-btn flat label="Close" color="primary" v-close-popup />
+        </q-card-actions>
+      </q-card>
     </q-dialog>
   </div>
 </template>
 
 <script>
-import { required, maxLength, minLength } from "@vuelidate/validators";
-
 import { mapGetters, mapActions } from "vuex";
+
 export default {
+  name: "PopupViewer",
   props: ["propShowPopup", "propRowDetails"],
   data() {
     return {
       toggleModel: this.propShowPopup,
     };
   },
-  beforeMount() {},
   computed: {
-    ...mapGetters("globalSearchSerialNumber", ["getdocdownload"]),
     ...mapGetters("GlobalVariables", ["GLOBAL_FILE_FETCH_URL"]),
+    imageUrl() {
+        return this.propRowDetails ? (this.GLOBAL_FILE_FETCH_URL + '/' + this.propRowDetails) : null;
+    }
   },
-
   methods: {
     ...mapActions("globalSearchSerialNumber", ["DOC_DOWNLOAD"]),
-
     emitfnshowservice() {
       this.$emit("emitfnshowservice");
     },
     Download() {
-      this.$q.loading.show({
-        delay: 100,
-        spinnerColor: "purple-9",
-        message: "Please wait..",
-      });
+      if (!this.propRowDetails) return;
+      this.$q.loading.show({ message: "Preparing download.." });
 
       this.DOC_DOWNLOAD(this.propRowDetails)
         .then((response) => {
-          const contentType = response.headers.get("content-type"); 
-
-          if (!contentType) {
-            throw new Error("Content-Type header is missing");
-          }
+          const contentType = response.headers['content-type'];
           const blob = new Blob([response.data], { type: contentType });
-
-          let extension = "";
-          switch (contentType) {
-            case "image/jpeg":
-              extension = ".jpeg";
-              break;
-            case "image/png":
-              extension = ".png";
-              break;
-            default:
-              extension = ""; 
-              break;
-          }
-          const filename = this.propRowDetails ? `${this.propRowDetails}${extension}` : `downloaded_image${extension}`;
           const url = window.URL.createObjectURL(blob);
           const a = document.createElement("a");
           a.href = url;
-          a.download = filename;
-          document.body.appendChild(a);
+          a.download = this.propRowDetails;
           a.click();
-
           window.URL.revokeObjectURL(url);
-          document.body.removeChild(a);
-
           this.$q.loading.hide();
-          this.$q.notify({
-            color: "positive",
-            position: "bottom",
-            message: "Successfully Downloaded",
-            icon: "thumb_up",
-          });
+          this.$q.notify({ color: "positive", message: "Download Successful", icon: "thumb_up" });
         })
         .catch((error) => {
+          console.error("Download failed:", error);
           this.$q.loading.hide();
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "Download failed",
-            icon: "error",
-          });
+          this.$q.notify({ color: "negative", message: "Download failed", icon: "error" });
         });
     },
   },

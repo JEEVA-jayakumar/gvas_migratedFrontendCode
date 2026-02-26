@@ -1,173 +1,114 @@
 <template>
   <q-page>
     <!-- content -->
-    <div>
-      <div class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-      > CRM Global Ticket Search</div>
-      <div class="row gutter-x-xs gutter-y-xs q-pt-md  items-end">
-        <div class="col-md-4">
+    <div class="q-pa-md">
+      <div class="text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"> CRM Global Ticket Search</div>
+      <div class="row q-col-gutter-md q-pt-md items-end">
+        <div class="col-12 col-md-4">
           <q-input
-            filled-light
-            color="light"
+            filled
+            color="purple-9"
             clearable
             v-model="formData.searchTerm"
             placeholder="Search By Ticket ID..."
             @clear="handleClear"
           />
         </div>
-        <div class="col-md-2">
+        <div class="col-12 col-md-2">
           <q-btn
-            class="auto"
+            class="full-width"
             size="md"
-            type="button"
             color="purple-9"
-            @click="globalSearchSubmit(formData)"
-            :disable="this.formData.searchTerm == ''"
-            >Submit
-          </q-btn>
+            @click="globalSearchSubmit"
+            :disable="!formData.searchTerm"
+            label="Submit"
+          />
         </div>
       </div>
     </div>
 
-    <div v-if="tableData == ''"
-      class="row gutter-x-xs gutter-y-xs justify-center q-pt-lg q-mr-lg q-ml-lg q-mt-lg q-mb-lg dFont" style="min-height: calc(80vh - 52px);" >
-      <div class="row" align="center">
+    <div v-if="!tableData"
+      class="row justify-center items-center q-pa-xl" style="min-height: 40vh;" >
+      <div class="text-center">
         <q-icon name="warning" color="warning" size="4rem" />
-        <div class="text-subtitle1 text-bold text-grey-9" style="align-self: center;" > No Data Available </div>
+        <div class="text-subtitle1 text-bold text-grey-9"> No Data Available </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col">
-        <div
-          v-if="tableData != ''"
-          class="row gutter-x-xs gutter-y-xs justify-center q-pt-lg q-mr-lg q-ml-lg q-mt-lg q-mb-lg dFont "
-        >
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <q-card class="q-card q-py-md items-center round-borders q-pa-sm algn1">
-              <q-card-section style="background-color: #680663;">
-                <div class="text-subtitle1 text-bold text-white">
-                  Merchant Details </div>
-              </q-card-section>
-              <q-separator></q-separator>
-              <q-card-section>
-                <div v-if="tableData != ''">
-                  <div class="col">
-                    <div
-                      class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9" >
-                      <span class="col-md-4 text-weight-medium">{{
-                        fieldKeys.merchantDetails.meName.label
-                      }}</span>
-                      <span class="col-md-8 text-wrap text-primary">{{
-                        tableData.meName
-                      }}</span>
-                    </div>
-                    <div
-                      class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9" >
-                      <span class="col-md-4 text-weight-medium">{{
-                        fieldKeys.merchantDetails.leadId.label
-                      }}</span>
-                      <span class="col-md-8 text-wrap text-primary">{{
-                        "# " + tableData.leadId
-                      }}</span>
-                    </div>
-                    <div
-                      class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9"
-                    >
-                      <span class="col-md-4 text-weight-medium">{{
-                        fieldKeys.merchantDetails.region.label
-                      }}</span>
-                      <span class="col-md-8 text-wrap text-primary">{{
-                        tableData.bpRegion.regionAreaName
-                      }}</span>
-                    </div>
-                    <div
-                      class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9"
-                    >
-                      <span class="col-md-4 text-weight-medium">{{
-                        fieldKeys.merchantDetails.contactNumber.label
-                      }}</span>
-                      <span class="col-md-8 text-wrap text-primary">{{
-                        tableData.contactNumber
-                      }}</span>
-                    </div>
-                  </div>
+    <div v-else class="q-pa-md">
+      <div class="row q-col-gutter-md">
+        <!-- Merchant Details Card -->
+        <div class="col-12 col-md-6">
+          <q-card class="round-borders shadow-2">
+            <q-card-section class="bg-purple-9 text-white">
+              <div class="text-subtitle1 text-bold">Merchant Details</div>
+            </q-card-section>
+            <q-separator />
+            <q-card-section>
+              <div class="column q-gutter-y-sm">
+                <div class="row">
+                  <div class="col-4 text-weight-medium">{{ fieldKeys.merchantDetails.meName.label }}</div>
+                  <div class="col-8 text-wrap text-primary">{{ tableData.meName }}</div>
                 </div>
-              </q-card-section>
-            </q-card>
-          </div>
-          </div>
+                <div class="row">
+                  <div class="col-4 text-weight-medium">{{ fieldKeys.merchantDetails.leadId.label }}</div>
+                  <div class="col-8 text-wrap text-primary"># {{ tableData.leadId }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-4 text-weight-medium">{{ fieldKeys.merchantDetails.region.label }}</div>
+                  <div class="col-8 text-wrap text-primary">{{ tableData.bpRegion ? tableData.bpRegion.regionAreaName : 'NA' }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-4 text-weight-medium">{{ fieldKeys.merchantDetails.contactNumber.label }}</div>
+                  <div class="col-8 text-wrap text-primary">{{ tableData.contactNumber }}</div>
+                </div>
+              </div>
+            </q-card-section>
+          </q-card>
         </div>
 
-      <div class="col">
-        <div
-          v-if="tableData != ''"
-          class="row gutter-x-xs gutter-y-xs justify-center q-pt-lg q-mr-lg q-ml-lg q-mt-lg q-mb-lg dFont"
-        >
-          <div class="col-lg-4 col-md-6 col-sm-12 no-wrap	">
-            <q-card class="q-card q-py-md round-borders q-pa-sm algn2">
-              <q-card-section style="background-color: #680663;">
-                <div class="text-subtitle1 text-bold text-white">
-                  Ticket Status
+        <!-- Ticket Status Card -->
+        <div class="col-12 col-md-6">
+          <q-card class="round-borders shadow-2">
+            <q-card-section class="bg-purple-9 text-white">
+              <div class="text-subtitle1 text-bold">Ticket Status</div>
+            </q-card-section>
+            <q-separator />
+            <q-card-section>
+              <div class="column q-gutter-y-sm">
+                <div class="row">
+                  <div class="col-4 text-weight-medium">{{ fieldKeys.ticketStatus.ticketNumber.label }}</div>
+                  <div class="col-8 text-wrap text-primary">{{ tableData.serviceReqTicketId }}</div>
                 </div>
-              </q-card-section>
-              <q-separator></q-separator>
-              <q-card-section>
-                <div v-if="tableData != ''">
-                  <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
-                    <span class="col-md-4 text-weight-medium">{{
-                      fieldKeys.ticketStatus.ticketNumber.label
-                    }}</span>
-                    <span class="col-md-8 text-wrap text-primary">{{
-                      tableData.serviceReqTicketId
-                    }}</span>
-                  </div>
-                  <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
-                    <span class="col-md-4 text-weight-medium">{{
-                      fieldKeys.ticketStatus.ticketStatus.label
-                    }}</span>
-                    <span class="col-md-8 text-wrap text-primary">{{
-                      tableData.subTicketsList[0].serviceRequestSubTicketStatus
-                        .name
-                    }}</span>
-                  </div>
-                  <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
-                    <span class="col-md-4 text-weight-medium">{{
-                      fieldKeys.ticketStatus.createdDate.label
-                    }}</span>
-                    <span class="col-md-8 text-wrap text-primary">{{ $moment(tableData.createdDate).format("Do MMM Y") }}</span>
-                  </div>
-                  <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
-                    <span class="col-md-4 text-weight-medium">{{
-                      fieldKeys.ticketStatus.updatedDate.label
-                    }}</span>
-                    <span class="col-md-8 text-wrap text-primary">{{ $moment(tableData.updatedDate).format("Do MMM Y") }}</span>
-                  </div>
-                  <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
-                    <span class="col-md-4 text-weight-medium">{{
-                      fieldKeys.ticketStatus.serviceResolutionRemarks.label
-                    }}</span>
-                    <span class="col-md-8 text-wrap text-primary">{{
-                      tableData.subTicketsList[0].serviceResolutionRemarks ==
-                      null
-                        ? "NA"
-                        : tableData.subTicketsList[0].serviceResolutionRemarks.name
-                    }}</span>
-                  </div>
-                  <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
-                    <span class="col-md-4 text-weight-medium">{{
-                      fieldKeys.ticketStatus.resolutionRemark.label
-                    }}</span>
-                    <span class="col-md-8 text-wrap text-primary">{{
-                      tableData.subTicketsList[0].resolutionRemark == null
-                        ? "NA"
-                        : tableData.subTicketsList[0].resolutionRemark
-                    }}</span>
+                <div class="row">
+                  <div class="col-4 text-weight-medium">{{ fieldKeys.ticketStatus.ticketStatus.label }}</div>
+                  <div class="col-8 text-wrap text-primary">
+                    {{ (tableData.subTicketsList && tableData.subTicketsList.length > 0 && tableData.subTicketsList[0].serviceRequestSubTicketStatus) ? tableData.subTicketsList[0].serviceRequestSubTicketStatus.name : 'NA' }}
                   </div>
                 </div>
-              </q-card-section>
-            </q-card>
-          </div>
+                <div class="row">
+                  <div class="col-4 text-weight-medium">{{ fieldKeys.ticketStatus.createdDate.label }}</div>
+                  <div class="col-8 text-wrap text-primary">{{ $moment(tableData.createdDate).format("Do MMM Y") }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-4 text-weight-medium">{{ fieldKeys.ticketStatus.updatedDate.label }}</div>
+                  <div class="col-8 text-wrap text-primary">{{ $moment(tableData.updatedDate).format("Do MMM Y") }}</div>
+                </div>
+                <div class="row">
+                  <div class="col-4 text-weight-medium">{{ fieldKeys.ticketStatus.serviceResolutionRemarks.label }}</div>
+                  <div class="col-8 text-wrap text-primary">
+                    {{ (tableData.subTicketsList && tableData.subTicketsList.length > 0 && tableData.subTicketsList[0].serviceResolutionRemarks) ? tableData.subTicketsList[0].serviceResolutionRemarks.name : "NA" }}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-4 text-weight-medium">{{ fieldKeys.ticketStatus.resolutionRemark.label }}</div>
+                  <div class="col-8 text-wrap text-primary">
+                    {{ (tableData.subTicketsList && tableData.subTicketsList.length > 0) ? tableData.subTicketsList[0].resolutionRemark || "NA" : "NA" }}
+                  </div>
+                </div>
+              </div>
+            </q-card-section>
+          </q-card>
         </div>
       </div>
     </div>
@@ -206,25 +147,29 @@ export default {
   computed: {
     ...mapGetters("crmGlobalSearchTicketId", ["getcrmGlobalSearchTicketId"])
   },
-  mounted() {
-    console.log("Merchant Details:", this.fieldKeys.merchantDetails);
-    console.log("Table Data:", this.tableData);
-  },
 
   methods: {
     ...mapActions("crmGlobalSearchTicketId", ["FETCH_CRM_GLOBAL_SEARCH_DATAS"]),
     globalSearchSubmit() {
-      this.$q.loading.show();
+      this.$q.loading.show({
+          spinnerColor: 'purple-9',
+          message: 'Searching..'
+      });
       let params = {
         searchTerm: this.formData.searchTerm
       };
       this.FETCH_CRM_GLOBAL_SEARCH_DATAS(params)
-        .then(res => {
+        .then(() => {
           this.tableData = this.getcrmGlobalSearchTicketId;
           this.$q.loading.hide();
+          if (!this.tableData) {
+              this.$q.notify({ color: 'warning', message: 'No data found for this Ticket ID' });
+          }
         })
-        .catch(() => {
+        .catch((error) => {
           this.$q.loading.hide();
+          const message = (error.body && error.body.message) ? error.body.message : "Search failed";
+          this.$q.notify({ color: 'negative', message: message });
         });
     },
     handleClear() {
@@ -233,21 +178,12 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .text-wrap {
-  overflow-wrap: anywhere;
-  color: #242225;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
-.algn1{
-  width: 268%;
-  height: 124%;
-  margin-left: -103%;
-  border: 1px solid #5a5959;
-}
-.algn2{
-  width: 281%;
-  height: 97%;
-  margin-left: -117%;
-  border: 1px solid #5a5959;
+.bg-purple-9 {
+  background-color: #61116a !important;
 }
 </style>

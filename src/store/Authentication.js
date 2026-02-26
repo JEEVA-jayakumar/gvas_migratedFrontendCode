@@ -204,9 +204,9 @@ const Authentication = {
         .post(rootState.GlobalVariables.LOGIN_URL, request.url)
         .then(response => {
           // console.log("Password is " + response.data.password);
-          localStorage.setItem("auth_token", response.data.jwt);
+          localStorage.setItem("auth_token", response.body.jwt);
           // START=> COMMIT with data received'
-          commit("SET_USER_AUTH_DATA", response.data);
+          commit("SET_USER_AUTH_DATA", response.data.data);
           // END=> COMMIT with data received'
           return response;
         }).then(beforeResponse => {
@@ -232,18 +232,12 @@ const Authentication = {
       return api
         .get("user/profile")
         .then(response => {
-          commit("API_RESPONSE_LOG", {
-            apiStatusCode: response.status,
-            apiPending: false,
-            apiSuccess: true,
-            apiFailure: false,
-            apiData: response.data.data
-          });
+          commit("API_RESPONSE_LOG", true);
           SessionStorage.set("u_i", response.data.data.roles);
           return response.data.data;
         })
         .catch(error => {
-          return Promise.reject(error);
+          return error;
         });
 
       // localStorage.setItem('auth_token', 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MUBnbWFpbC5jb20iLCJhdXRob3JpdGllcy1rZXkiOiJST0xFX1NMX0FTTSIsImlhdCI6MTUzMjU4MTg4NX0.q8bMv-kQfYULHehZ-R8QYfGf6fA7y9q20KO31X3eaH0');
