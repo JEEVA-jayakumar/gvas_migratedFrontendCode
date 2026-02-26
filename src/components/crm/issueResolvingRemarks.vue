@@ -2,10 +2,10 @@
   <div>
     <q-dialog
       v-model="toggleModal"
-      no-backdrop-dismiss
+      persistent
       class="q-mt-lg capitalize"
       @hide="handleHide"
-      :content-css="{ minWidth: '30vw', padding: '10px' }"
+
     >
       <q-card style="min-width: 40vw; padding: 10px;">
         <q-card-section>

@@ -1,199 +1,156 @@
 <template>
-    <div>
-      <q-dialog
-        minimized
-        no-backdrop-dismiss
-        v-model="toggleModel"
-        :content-css="{ padding: '30px', minWidth: '40vw' }"
-      >
-        <!-- @hide="emitfnshowAddPartner()"
-        @escape-key="emitfnshowAddPartner()" -->
-        <form>
-          <div class="column group">
-            <div class="col-md-12">
-              <div class="text-h6 text-weight-regular">
-                <p align="center">
-                  <strong>Download Completed Tickets Reports</strong>
-                </p>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <q-input filled v-model="formData.from" label="From Date" color="grey-9">
-            <template v-slot:append>
-              <q-icon name="event" class="cursor-pointer">
-                <q-menu transition-show="scale" transition-hide="scale">
-                  <q-date v-model="formData.from" mask="YYYY-MM-DD" />
-                </q-menu>
-              </q-icon>
-            </template>
-          </q-input>
-            </div>
-            <div class="col-md-12">
-              <q-input filled v-model="formData.to" label="To Date" color="grey-9">
-            <template v-slot:append>
-              <q-icon name="event" class="cursor-pointer">
-                <q-menu transition-show="scale" transition-hide="scale">
-                  <q-date v-model="formData.to" mask="YYYY-MM-DD" />
-                </q-menu>
-              </q-icon>
-            </template>
-          </q-input>
-            </div>
-            <div class="col-md-12 group" align="right">
-              <q-btn
-                flat
-                align="right"
-                class="bg-white text-weight-regular text-grey-8"
-                @click="emitfnshowPhonepeCrmComplete()"
-                >Cancel</q-btn
-              >
-              <!-- :disabled="submitDisabled" -->
-              <q-btn
-                align="right"
-                @click="downloadHistory(formData)"
-                color="purple-9"
-                >Download</q-btn
-              >
-            </div>
-          </div>
-        </form>
-      </q-dialog>
-    </div>
-  </template>
-  
-  <script>
+  <q-dialog v-model="toggleModel" persistent>
+    <q-card style="min-width: 40vw; padding: 30px;">
+      <q-card-section>
+        <div class="text-h6 text-weight-regular text-center">
+          <strong>Download Completed Tickets Reports</strong>
+        </div>
+      </q-card-section>
 
+      <q-card-section class="q-gutter-y-md">
+        <q-input filled v-model="formData.from" label="From Date" color="grey-9" readonly @click="$refs.fromDateProxy.show()">
+          <template v-slot:append>
+            <q-icon name="event" class="cursor-pointer">
+              <q-popup-proxy ref="fromDateProxy" transition-show="scale" transition-hide="scale">
+                <q-date v-model="formData.from" mask="YYYY-MM-DD" @update:model-value="$refs.fromDateProxy.hide()" />
+              </q-popup-proxy>
+            </q-icon>
+          </template>
+        </q-input>
 
-  import {
-    required,
-    email,
-    password,
-    minLength,
-    maxLength,
-    alpha,
-    alphaNum,
-    numeric,
-    sameAs,
-  } from "@vuelidate/validators";
+        <q-input filled v-model="formData.to" label="To Date" color="grey-9" readonly @click="$refs.toDateProxy.show()">
+          <template v-slot:append>
+            <q-icon name="event" class="cursor-pointer">
+              <q-popup-proxy ref="toDateProxy" transition-show="scale" transition-hide="scale">
+                <q-date v-model="formData.to" mask="YYYY-MM-DD" @update:model-value="$refs.toDateProxy.hide()" />
+              </q-popup-proxy>
+            </q-icon>
+          </template>
+        </q-input>
+      </q-card-section>
 
-  import { date } from "quasar";
-  const today = new Date();
-  const { startOfDate, addToDate, subtractFromDate } = date;
-  import { mapGetters, mapActions } from "vuex";
-  export default {
-    props: ["propPhonepeCompletedTicket"],
-    data() {
-      return {
-        toggleModel: this.propPhonepeCompletedTicket,
-        tomorrow: addToDate(today, { days: 0 }),
-        yesterday: subtractFromDate(today, { days: 1440}),
-        state: new Date(),
-        defaultValue: startOfDate(today, "year"),
-        formData: {
-          from: "",
-          to: "",
-        },
-      };
-    },
-    // computed: {
-    //   submitDisabled: function () {
-    //     return (this.formData.from !=0 || this.formData.to !=0 || (this.formData.from== 0 && this.formData.to == 0)) ;
-    //   },
-    // },
-    computed: {
+      <q-card-actions align="right">
+        <q-btn
+          flat
+          class="bg-white text-weight-regular text-grey-8"
+          @click="emitfnshowPhonepeCrmComplete"
+          label="Cancel"
+        />
+        <q-btn
+          :disabled="submitDisabled"
+          @click="downloadHistory(formData)"
+          color="purple-9"
+          label="Download"
+        />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
+</template>
+
+<script>
+import { date } from "quasar";
+const today = new Date();
+const { startOfDate, addToDate, subtractFromDate } = date;
+import { mapActions } from "vuex";
+
+export default {
+  props: ["propPhonepeCompletedTicket"],
+  emits: ["emitfnshowPhonepeCrmComplete"],
+  data() {
+    return {
+      toggleModel: this.propPhonepeCompletedTicket,
+      tomorrow: addToDate(today, { days: 0 }),
+      yesterday: subtractFromDate(today, { days: 1440 }),
+      formData: {
+        from: "",
+        to: "",
+      },
+    };
+  },
+
+  computed: {
     submitDisabled() {
       return !this.formData.from || !this.formData.to;
     }
   },
-    methods: {
-      ...mapActions("DownloadPhonepeCrmCallbackReport", ["FETCH_PHONEPE_CRM_COMPLETED_CALLBACK_REPORT"]),
-      emitfnshowPhonepeCrmComplete() {
-        this.$emit("emitfnshowPhonepeCrmComplete");
-      },
-    
-      downloadHistory(request) {
-        let params = {
-          from: this.toTimestamp(request.from.toString()),
-          to: this.toTimestamp(request.to.toString()),
-        };
-        this.$q.loading.show({
-          delay: 100, // ms
-          spinnerColor: "purple-9",
-          message: "Please wait..",
-        });
-        this.FETCH_PHONEPE_CRM_COMPLETED_CALLBACK_REPORT(params)
-          .then((response) => {
-            this.$emit("emitfnshowPhonepeCrmComplete");
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully Downloaded",
-              icon: "thumb_up",
-            });
-            (this.formData.from = ""), (this.formData.to = "");
-          })
-          .catch((error) => {
-            this.$q.loading.hide();
-            if (error.status == 400) {
-              this.$q.notify({
-                color: "amber",
-                position: "bottom",
-                message: "Output file size is high,Select smaller date range",
-                icon: "thumb_down",
-              });
-            } else if (error.status == 500) {
-              this.$q.notify({
-                color: "amber",
-                position: "bottom",
-                message:
-                  "INTERNAL_SERVER_ERROR",
-                icon: "thumb_down",
-              });
-            } else if (error.status == 403) {
-              this.$q.notify({
-                color: "amber",
-                position: "bottom",
-                message: "please choose some another date",
-                icon: "thumb_down",
-              });
-            } else {
-              this.$q.notify({
-                color: "amber",
-                position: "bottom",
-                message: "Please select the field",
-                icon: "thumb_down",
-              });
-            }
-  
-            (this.formData.from = ""), (this.formData.to = "");
-          });
-      },
-      toTimestamp(strDate) {
-        var date = strDate.split("T")[0]
-        var curDate = new Date();      
-        var mnth = curDate.getMonth()+1;
-        var chDate = curDate.getFullYear()+"-"+(mnth < 10 ? "0"+mnth : mnth)+"-"+curDate.getDate();
-        var datum = null
-        if (chDate == date) 
-          datum = Date.now();
-        else
-          datum = Date.parse(strDate);
-        return datum;
-      },
-      COMMON_FILTER_FUNCTION(arraySet, terms) {
-        return _.filter(arraySet, function (oo) {
-          return oo.label.toString().includes(terms.toLowerCase());
-        });
-      },
+
+  watch: {
+    propPhonepeCompletedTicket(val) {
+      this.toggleModel = val;
     },
-  };
-  </script>
-  <style scoped>
-  .error {
-    color: red;
-    font-size: 12px;
-    position: absolute;
-    text-transform: lowercase;
-  }
-  </style>
+    toggleModel(val) {
+      if (!val) {
+        this.emitfnshowPhonepeCrmComplete();
+      }
+    }
+  },
+
+  methods: {
+    ...mapActions("DownloadPhonepeCrmCallbackReport", ["FETCH_PHONEPE_CRM_COMPLETED_CALLBACK_REPORT"]),
+    emitfnshowPhonepeCrmComplete() {
+      this.$emit("emitfnshowPhonepeCrmComplete");
+    },
+
+    downloadHistory(request) {
+      let params = {
+        from: this.toTimestamp(request.from),
+        to: this.toTimestamp(request.to),
+      };
+      this.$q.loading.show({
+        delay: 100,
+        spinnerColor: "purple-9",
+        message: "Please wait..",
+      });
+      this.FETCH_PHONEPE_CRM_COMPLETED_CALLBACK_REPORT(params)
+        .then(() => {
+          this.$emit("emitfnshowPhonepeCrmComplete");
+          this.$q.loading.hide();
+          this.$q.notify({
+            color: "positive",
+            position: "bottom",
+            message: "Successfully Downloaded",
+            icon: "thumb_up",
+          });
+          this.formData.from = "";
+          this.formData.to = "";
+        })
+        .catch((error) => {
+          this.$q.loading.hide();
+          const status = error.status || (error.response && error.response.status);
+          const message = (error.body && error.body.message) ? error.body.message : "Error occurred";
+
+          if (status == 400) {
+            this.$q.notify({
+              color: "amber",
+              position: "bottom",
+              message: "Output file size is high, Select smaller date range",
+              icon: "thumb_down",
+            });
+          } else {
+             this.$q.notify({
+              color: "negative",
+              position: "bottom",
+              message: message,
+              icon: "thumb_down",
+            });
+          }
+          this.formData.from = "";
+          this.formData.to = "";
+        });
+    },
+    toTimestamp(strDate) {
+      if (!strDate) return null;
+      var dateOnly = strDate.split("T")[0];
+      var curDate = new Date();
+      var mnth = curDate.getMonth() + 1;
+      var chDate = curDate.getFullYear() + "-" + (mnth < 10 ? "0" + mnth : mnth) + "-" + (curDate.getDate() < 10 ? "0" + curDate.getDate() : curDate.getDate());
+
+      if (chDate === dateOnly) {
+        return Date.now();
+      } else {
+        return Date.parse(strDate);
+      }
+    }
+  },
+};
+</script>

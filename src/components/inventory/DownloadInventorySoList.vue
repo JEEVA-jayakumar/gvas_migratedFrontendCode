@@ -1,10 +1,10 @@
 <template>
   <div>
     <q-dialog
-      minimized
-      no-backdrop-dismiss
+
+      persistent
       v-model="toggleModel"
-      :content-css="{ padding: '30px', minWidth: '40vw' }"
+
     >
       <!-- @hide="emitfnshowAddPartner()"
       @escape-key="emitfnshowAddPartner()" -->

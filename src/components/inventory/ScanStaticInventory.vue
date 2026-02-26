@@ -5,7 +5,7 @@
       class="q-mt-lg capitalize"
       @hide="emitToggleRemarks"
       @escape-key="emitToggleRemarks"
-      :content-css="{ minWidth: '30vw', padding: '20px' }"
+
     >
       <div class="row items-center bottom-border q-py-sm">
         <div class="col">Scan QR</div>

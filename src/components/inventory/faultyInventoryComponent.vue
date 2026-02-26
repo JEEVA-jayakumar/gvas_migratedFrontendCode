@@ -1,11 +1,11 @@
 <template>
   <div>
      <q-dialog
-        minimized
+
         v-model="toggleAddDeviceModal"  
         @hide="emitfaultyInventoryComponent()" 
         @escape-key="emitfaultyInventoryComponent()"  
-        :content-css="{padding:'30px',minWidth: '40vw'}"
+
         class="customModalOverlay"
     >
       <form> 

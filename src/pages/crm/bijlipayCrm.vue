@@ -201,6 +201,12 @@ export default {
     computed: {
         ...mapGetters("bijlipayCrm", ["getBijlipayMerchantDetails", "getBijlipayCompletedData", "getBijlipayDate"])
     },
+    mounted() {
+        this.ajaxLoadAllLeadInfo1({
+            pagination: this.paginationControl1,
+            filter: this.filter1
+        });
+    },
     created() {
         this.loadingData({
             pagination: this.paginationControl,

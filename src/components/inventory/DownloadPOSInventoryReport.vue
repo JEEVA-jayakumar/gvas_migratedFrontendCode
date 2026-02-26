@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-dialog minimized no-backdrop-dismiss v-model="toggleModel" :content-css="{ padding: '30px', minWidth: '40vw' }">
+    <q-dialog persistent v-model="toggleModel" >
       <form>
         <div class="column group">
           <div class="col-md-12">

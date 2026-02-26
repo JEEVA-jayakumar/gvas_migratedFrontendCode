@@ -1,7 +1,7 @@
 <template>
   <div>
-    <q-dialog v-model="toggleModal" no-backdrop-dismiss no-esc-dismiss
-      :content-css="{ padding: '10px', maxWidth: '50vw', minHeight: '' }">
+    <q-dialog v-model="toggleModal" persistent no-esc-dismiss
+      >
       <!-- Scanned Devices: {{this.propAllScannedItemArr.scannedItems}} -->
       <div class="q-pa-md">
         <div class="column">

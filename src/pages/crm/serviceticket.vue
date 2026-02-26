@@ -21,7 +21,7 @@
                 <div class="text-h6 text-grey-9">Ticket Creation - Bulk Upload</div>
               </div>
               <div class="col-md-8 q-py-md">
-                <a href="statics/files/Create_Ticket.xlsx" class="text-primary text-weight-bold" download>
+                <a href="/files/Create_Ticket.xlsx" class="text-primary text-weight-bold" download>
                   Click here to download the template
                 </a>
               </div>
@@ -83,7 +83,7 @@
                 <div class="text-h6 text-grey-9">Ticket Closing - Bulk Upload</div>
               </div>
               <div class="col-md-8 q-py-md">
-                <a href="statics/files/close_Ticket.xlsx" class="text-primary text-weight-bold" download>
+                <a href="/files/close_Ticket.xlsx" class="text-primary text-weight-bold" download>
                   Click here to download the template
                 </a>
               </div>

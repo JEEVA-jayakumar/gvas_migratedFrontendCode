@@ -4,7 +4,7 @@
         v-model="toggleModal"
         @hide="emitToggleinventoryBulkUpload(toggleModal)"
         @escape-key="emitToggleinventoryBulkUpload(toggleModal)"
-        :content-css="{ padding: '30px', maxWidth: '40vw' }"
+
       >
         <div class="q-pa-md">
           <div class="row text-center justify-center">
@@ -14,7 +14,7 @@
   
             <div class="col-md-8" align="left">
               <a
-                href="statics/files/deviceUploadTemplate.xlsx"
+                href="/files/deviceUploadTemplate.xlsx"
                 class="hide-underline"
               >
                 Click here to download the template</a

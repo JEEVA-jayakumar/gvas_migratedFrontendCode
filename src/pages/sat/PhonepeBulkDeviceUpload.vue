@@ -20,7 +20,7 @@
                 :options="actionOption" />
             </div>
             <div class="col-md-8" align="left">
-              <a href="statics/files/deviceUploadTemplate.xlsx" class="hide-underline">
+              <a href="/files/deviceUploadTemplate.xlsx" class="hide-underline">
                 Click here to download the template</a>
             </div>
             <div class="col-md-8 q-py-md" align="center">

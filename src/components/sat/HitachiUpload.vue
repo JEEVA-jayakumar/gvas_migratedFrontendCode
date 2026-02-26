@@ -14,7 +14,7 @@
         <q-card-section>
           <div class="col-md-8" align="center">
             <a
-              href="statics/files/Hitachi_Brand_Emi_Details.xlsx"
+              href="/files/Hitachi_Brand_Emi_Details.xlsx"
               class="hide-underline"
             >
               Click here to download the template</a

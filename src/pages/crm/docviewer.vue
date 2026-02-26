@@ -242,12 +242,16 @@ export default {
       }
     },
     ajaxLoadAllLeadInfo(request) {
-        this.paginationControl = request.pagination;
-        this.globalSubmit();
+      this.paginationControl = request.pagination;
+      if (this.getdocview) {
+        this.paginationControl.rowsNumber = this.getdocview.length;
+      }
     },
     ajaxLoadAllLeadInfo1(request) {
-        this.paginationControlchange = request.pagination;
-        this.globalSubmit();
+      this.paginationControlchange = request.pagination;
+      if (this.getdocticket) {
+        this.paginationControlchange.rowsNumber = this.getdocticket.length;
+      }
     },
     fnPDFViewModal(documentUrl) {
       if (!documentUrl) return;

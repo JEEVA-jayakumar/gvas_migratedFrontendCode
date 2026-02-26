@@ -8,7 +8,7 @@
           </div>
           <br />
           <div class="col-md-8 q-py-md" align="center">
-            <a href="statics/files/Assign_Ticket.xlsx" class="hide-underline">
+            <a href="/files/Assign_Ticket.xlsx" class="hide-underline">
               Click here to download the template
             </a>
           </div>

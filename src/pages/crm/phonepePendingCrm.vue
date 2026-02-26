@@ -600,7 +600,7 @@ export default {
         {
           name: "action",
           required: true,
-          label: "Action",
+          label: "Status",
           align: "left",
           field: "action",
           sortable: false
@@ -864,7 +864,12 @@ export default {
       "getphonepeCompletedPaperRoll"
     ])
   },
-
+  mounted() {
+    this.ajaxLoadAllLeadInfo1({
+      pagination: this.paginationControl1,
+      filter: this.filter1
+    });
+  },
   created() {
     this.loadingData({
       pagination: this.paginationControl,
@@ -1089,13 +1094,17 @@ export default {
         this.addActionBarInformation.data = request;
       }
     },
-    getHoursAgo(dateInMilliseconds) {
+    getHoursAgo(dateVal) {
+      const dateInMilliseconds = (typeof dateVal === 'string') ? Date.parse(dateVal) : dateVal;
+      if (isNaN(dateInMilliseconds)) return "NA";
       const currentTime = Date.now();
       const differenceInMilliseconds = currentTime - dateInMilliseconds;
       const hoursAgo = differenceInMilliseconds / (1000 * 60 * 60);
       return 72 - Math.floor(hoursAgo);
     },
-    getHoursAgoColor(dateInMilliseconds){
+    getHoursAgoColor(dateVal){
+      const dateInMilliseconds = (typeof dateVal === 'string') ? Date.parse(dateVal) : dateVal;
+      if (isNaN(dateInMilliseconds)) return 'color: gray; font-weight: normal;';
       const currentTime = Date.now();
       const differenceInMilliseconds = currentTime - dateInMilliseconds;
       const hoursAgo = differenceInMilliseconds / (1000 * 60 * 60);

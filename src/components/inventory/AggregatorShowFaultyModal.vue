@@ -1,11 +1,11 @@
 <template>
     <div>
         <q-dialog
-        minimized
+
         v-model="toggleModal"  
-        no-backdrop-dismiss	
+        persistent
         no-esc-dismiss	
-        :content-css="{padding:'30px',minWidth: '40vw'}"
+
         >
           <div class="q-pa-md">
               <div class="column">

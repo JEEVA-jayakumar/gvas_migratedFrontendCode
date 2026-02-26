@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-dialog v-model="toggleModal" class="q-mt-lg capitalize" @hide="emitToggleRemarks()" @escape-key="emitToggleRemarks(toggleModal)"
-      :content-css="{ minWidth: '30vw', padding: '20px' }">
+      >
       <div class="row items-center bottom-border q-py-sm">
         <div class="col"><strong>generate QR </strong> </div>
         <div class="col-auto">
