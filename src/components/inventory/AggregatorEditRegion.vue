@@ -1,12 +1,12 @@
 <template>
     <div>
       <q-dialog
-        minimized
+
         class="customModalOverlay"
         v-model="toggleModel"
         @hide="emitfnshowEditRegion()"
         @escape-key="emitfnshowEditRegion()"
-        :content-css="{padding:'30px',minWidth: '40vw'}"
+
       >
         <form>
           <div class="column group">

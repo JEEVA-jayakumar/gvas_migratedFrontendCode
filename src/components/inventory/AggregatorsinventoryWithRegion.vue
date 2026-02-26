@@ -1,8 +1,8 @@
 <template>
     <div>
-        <q-dialog minimized no-backdrop-dismiss class="customModalOverlay" v-model="toggleModel"
+        <q-dialog persistent class="customModalOverlay" v-model="toggleModel"
             @hide="emitfnshowAggregatorsEditRegion()" @escape-key="emitfnshowAggregatorsEditRegion()"
-            :content-css="{ padding: '30px', minWidth: '40vw' }">
+            >
             <form>
                 <div class="column group">
                     <div class="col-md-12">

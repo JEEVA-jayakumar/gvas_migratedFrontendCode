@@ -3,7 +3,7 @@
     <q-dialog
       v-model="toggleModal"
       @hide="handleHide"
-      :content-css="{ padding: '10px', minWidth: '50vw' }"
+
     >
       <q-card style="min-width: 60vw;">
         <q-card-section class="row items-center q-pb-none">

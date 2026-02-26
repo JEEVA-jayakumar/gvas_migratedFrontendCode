@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-dialog v-model="toggleModal" @hide="emitToggleinventoryBulkUpload(toggleModal)"
-      @escape-key="emitToggleinventoryBulkUpload(toggleModal)" :content-css="{ padding: '10px', maxWidth: '50vw' }">
+      @escape-key="emitToggleinventoryBulkUpload(toggleModal)" >
       <div class="q-pa-md">
         <div class="row text-center justify-center">
           <div class="col-md-12 q-py-sm bottom-border">
@@ -16,7 +16,7 @@
               :options="deviceOption" />
           </div>
           <div class="col-md-8" align="left">
-            <a href="statics/files/deviceUploadTemplate.xlsx" class="hide-underline">
+            <a href="/files/deviceUploadTemplate.xlsx" class="hide-underline">
               Click here to download the template</a>
           </div>
           <div class="col-md-8 q-py-md" align="center">

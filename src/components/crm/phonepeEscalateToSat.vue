@@ -4,7 +4,7 @@
       v-model="toggleModal"
       class="q-mt-lg capitalize"
       @hide="handleHide"
-      :content-css="{ minWidth: '48vw', padding: '20px' }"
+
     >
       <q-card style="min-width: 48vw; padding: 20px;">
         <q-card-section>

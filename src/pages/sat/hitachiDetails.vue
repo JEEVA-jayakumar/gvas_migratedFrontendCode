@@ -78,7 +78,7 @@ export default {
         <div class="col-md-8" align="justify-center">
           <br /><br /><br /><br /><br /><br/>
           <a
-            href="statics/files/deviceUploadTemplate.xlsx"
+            href="/files/deviceUploadTemplate.xlsx"
             class="hide-underline"
           >
             Click here to download the template</a

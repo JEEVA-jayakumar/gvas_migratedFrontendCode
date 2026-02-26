@@ -17,7 +17,7 @@
                 <div class="col-md-8 q-py-md" align="center">
                   <div class="col-md-5 align1" align="center">
                     <a
-                      href="statics/files/iciciExistingMerchantOnboardingTemplate.xlsx"
+                      href="/files/iciciExistingMerchantOnboardingTemplate.xlsx"
                       class="hide-underline"
                       >Click here to download the template</a
                     >

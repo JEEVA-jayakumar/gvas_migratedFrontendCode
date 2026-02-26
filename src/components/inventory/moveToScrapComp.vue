@@ -4,7 +4,7 @@
       :model-value="showScrapModel"
       @hide="emitToggleScrap(showScrapModel)"
       @escape-key="emitToggleScrap(showScrapModel)"
-      :content-css="{ padding: '25px' }"
+
     >
       <div>
         <div align="center" class="text-weight-light text-grey-8 q-mb-md">

@@ -1,12 +1,12 @@
 <template>
     <div>
       <q-dialog
-      minimized no-backdrop-dismiss
+      persistent
       class="customModalOverlay"
       v-model="VpaDataToggle"
       @hide="emitVpaModalList(VpaDataToggle)"
       @escape-key="emitVpaModalList(VpaDataToggle)"
-      :content-css="{padding:'30px',minWidth: '30vw'}"
+
       >
       <div class="row justify-end">
         <q-btn flat size="md" icon="close" @click="emitVpaModalList(VpaDataToggle)"></q-btn>

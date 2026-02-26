@@ -1,7 +1,7 @@
 <template>
     <div>
       <q-dialog v-model="opened" class="q-mt-lg capitalize" @hide="emitToggleViewRemarks" @escape-key="emitToggleViewRemarks"
-        :content-css="{minWidth:'30vw',padding:'20px'}">
+        >
         <div class="row items-center bottom-border q-py-sm">
           <div class="col">Add Remarks</div>
           <div class="col-auto">

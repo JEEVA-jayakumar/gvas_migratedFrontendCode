@@ -1,8 +1,8 @@
 <template>
   <div>
     <q-dialog
-      minimized no-backdrop-dismiss v-model="toggleModel"
-      :content-css="{padding: '10px', maxWidth: '50vw'}"
+      persistent v-model="toggleModel"
+
     > 
      <div class="q-pa-md">
         <div class="row text-center justify-center">
@@ -23,7 +23,7 @@
 
            
             <a
-              href="statics/files/Upload_Sim_data.xlsx"
+              href="/files/Upload_Sim_data.xlsx"
               class="hide-underline"
             >
               Click here to download the template</a

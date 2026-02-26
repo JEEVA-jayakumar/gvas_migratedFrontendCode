@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-dialog v-model="toggleModal" class="q-mt-lg capitalize" @hide="emitToggleRemarks"
-      :content-css="{minWidth:'30vw',padding:'20px'}">
+      >
       <q-card style="min-width: 40vw; padding: 20px;">
         <q-card-section>
           <div class="row items-center bottom-border q-py-sm">

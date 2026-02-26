@@ -33,7 +33,7 @@
 />
 </br>
             <a
-              href="statics/files/Upload_Sim_data.xlsx"
+              href="/files/Upload_Sim_data.xlsx"
               class="hide-underline"
             >
               Click here to download the template</a

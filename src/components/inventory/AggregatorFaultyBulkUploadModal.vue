@@ -1,11 +1,11 @@
 <template>
     <div>
       <q-dialog
-        minimized
+
         v-model="toggleModal"
         @hide="emitToggleinventoryBulkUpload(toggleModal)"
         @escape-key="emitToggleinventoryBulkUpload(toggleModal)"
-        :content-css="{ padding: '30px', minWidth: '40vw' }"
+
       >
         <div class="q-pa-md">
           <div class="column text-center justify-center">
@@ -25,7 +25,7 @@
             </div>
             <div class="col-md-8" align="left">
               <a
-                href="statics/files/faultDeviceUploadTemplate.xlsx"
+                href="/files/faultDeviceUploadTemplate.xlsx"
                 class="hide-underline"
                 >Click here to download the template</a
               >

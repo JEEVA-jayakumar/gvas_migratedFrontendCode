@@ -17,7 +17,12 @@ export default boot(({ app, router }) => {
     // - "Access-Control-Allow-*" are response headers; sending them in requests can
     //   cause unexpected backend behavior.
     // - Some endpoints (login/password) must NOT receive app-specific headers.
-    config.headers["Content-Type"] = "application/json;charset=UTF-8";
+    if (config.data instanceof FormData) {
+      // Allow Axios to set the correct Content-Type with boundary for FormData
+      delete config.headers["Content-Type"];
+    } else {
+      config.headers["Content-Type"] = "application/json;charset=UTF-8";
+    }
     config.headers["Accept"] = "application/json, text/plain, */*";
     config.headers["X-Requested-With"] = "XMLHttpRequest";
 

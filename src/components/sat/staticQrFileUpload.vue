@@ -14,7 +14,7 @@
             </div>
             <!-- <div class="col-md-8" align="left">
               <a
-                href="statics/files/faultDeviceUploadTemplate.xlsx"
+                href="/files/faultDeviceUploadTemplate.xlsx"
                 class="hide-underline"
 
                 >Click here to download the template</a

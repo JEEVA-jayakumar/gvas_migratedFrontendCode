@@ -17,8 +17,8 @@
                 <span v-else>NA</span>
           </q-td>
           <q-td class="group" v-slot:body-cell-lock="props" :props="props">
-          <q-btn v-if="props.row.leadSourceId.active==false" flat color="blue" @click="activateMatmUser(props.row.id)"><img src="statics/lock.png" style="height:35px;width:35px"></q-btn>
-          <q-btn v-else-if="props.row.leadSourceId.active==true" flat color="blue" @click="deactivateMatmUser(props.row.id)"><img src="statics/unlock.png" style="height:35px;width:35px"></q-btn>
+          <q-btn v-if="props.row.leadSourceId.active==false" flat color="blue" @click="activateMatmUser(props.row.id)"><img src="/lock.png" style="height:35px;width:35px"></q-btn>
+          <q-btn v-else-if="props.row.leadSourceId.active==true" flat color="blue" @click="deactivateMatmUser(props.row.id)"><img src="/unlock.png" style="height:35px;width:35px"></q-btn>
           
         </q-td>
           <q-td

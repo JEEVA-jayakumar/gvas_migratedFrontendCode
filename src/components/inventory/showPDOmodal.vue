@@ -2,9 +2,9 @@
   <div>
     <q-dialog
       v-model="toggleModal"
-      no-backdrop-dismiss
+      persistent
       no-esc-dismiss
-      :content-css="{padding:'10px',maxWidth:'50vw',minHeight:''}"
+
     >
       <!-- Scanned Devices: {{this.propAllScannedItemArr.scannedItems}} -->
       <div class="q-pa-md">
