@@ -7,39 +7,37 @@
             </q-tabs>
 
             <q-tab-panels v-model="activeTab" animated>
-                <q-tab-panel name="tab-1">
-                    <div class="row items-center q-col-gutter-md">
-                        <div class="col-auto">
+                <q-tab-panel name="tab-1" class="no-padding">
+                    <div class="row items-center q-pa-md">
+                        <div class="col-auto q-mr-md">
                             <strong> Open For </strong>
                         </div>
-                        <div class="col-md-3">
-                            <q-select filled v-model="formData.date" :options="dateType"
-                                color="grey" emit-value map-options @update:model-value="dateClick">
-                            </q-select>
-                        </div>
-                        <div class="col"></div>
-                        <div class="col-md-5">
-                            <q-input clearable dense filled color="grey-9" placeholder="Type.." v-model="filter"
-                            label="Search By Ticket No, Merchant No..." />
-                        </div>
+                        <q-select class="col" v-model="formData.date" :options="dateType"
+                            color="grey" emit-value map-options @update:model-value="dateClick">
+                        </q-select>
+                        <div class="col-5"></div>
+                        <q-input class="col-5" clearable color="grey-9" placeholder="Type.." v-model="filter"
+                        label="Search By Ticket No, Merchant No..." />
                     </div>
                     <q-table table-class="customTableClass" class="q-py-none shadow-0" :rows="tableData" :columns="columns"
                         :filter="filter" :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl"
                         :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
 
                         <template v-slot:body-cell-createdDate="props">
-                            <q-td :props="props">{{ props.row == null ? "NA" : $moment(props.row.createdDate).format("Do MMM Y") }}</q-td>
+                            <q-td :props="props">{{
+                                    props.row == null ? "NA" : $moment(props.row.createdDate).format("Do MMM Y")
+                            }}</q-td>
                         </template>
 
                         <template v-slot:body-cell-action="props">
                             <q-td :props="props">
-                                <div class="row no-wrap q-gutter-xs">
-                                    <q-btn :disable="props.row.serviceRequestTicketStatus != 1" dense no-caps
-                                        label="Resolved" icon="far fa-plus-square" size="sm" @click="fnResolve(props.row)"
+                                <div class="row no-wrap no-padding">
+                                    <q-btn :disable="props.row.serviceRequestTicketStatus != 1" dense no-caps no-wrap
+                                        label="Resolved" icon="far fa-plus-square" size="md" @click="fnResolve(props.row)"
                                         flat class="custom-green">
                                     </q-btn>
-                                    <q-btn :disable="props.row.serviceRequestTicketStatus != 1" dense no-caps
-                                        label="Escalate to Sat" icon="far fa-plus-square" size="sm"
+                                    <q-btn :disable="props.row.serviceRequestTicketStatus != 1" dense no-caps no-wrap
+                                        label="Escalate to Sat" icon="far fa-plus-square" size="md"
                                         @click="fnEscalateToSat(props.row)" flat class="custom-negative">
                                     </q-btn>
                                 </div>
@@ -48,22 +46,22 @@
 
                         <template v-slot:body-cell-updateRemarks="props">
                             <q-td :props="props">
-                                <div class="row no-wrap items-center">
+                                <div class="row no-wrap no-padding items-center">
                                     <q-btn :disable="props.row.serviceRequestTicketStatus != 1" no-caps icon="edit"
                                         color="purple-9" size="xs" round @click="toggleAddremarks(props.row)">
                                     </q-btn>
-                                    <span class="q-ml-sm" v-if="props.row.crmRemark != null"
+                                    <span class="q-ma-sm" v-if="props.row.crmRemark != null"
                                         v-html="props.row.crmRemark"></span>
-                                    <span class="q-ml-sm" v-else>NA</span>
+                                    <span class="q-ma-sm" v-else>NA</span>
                                 </div>
                             </q-td>
                         </template>
                     </q-table>
                 </q-tab-panel>
 
-                <q-tab-panel name="tab-2">
-                    <div class="row q-mb-md">
-                        <q-input class="col-md-4" filled dense v-model="filter1" clearable color="grey-9" placeholder="Type.."
+                <q-tab-panel name="tab-2" class="no-padding">
+                    <div class="row q-pa-md">
+                        <q-input class="col-4" v-model="filter1" clearable color="grey-9" placeholder="Type.."
                         label="Search By Ticket No, Merchant No..." />
                     </div>
                     <q-table table-class="customTableClass" class="q-py-none shadow-0" :rows="tableData1" :columns="columns2"
@@ -72,10 +70,10 @@
 
                         <template v-slot:body-cell-updateRemarks="props">
                             <q-td :props="props">
-                                <div class="row no-wrap">
-                                    <span v-if="props.row.crmRemark != null"
+                                <div class="row no-wrap no-padding">
+                                    <span class="q-ma-sm" v-if="props.row.crmRemark != null"
                                         v-html="props.row.crmRemark"></span>
-                                    <span v-else>NA</span>
+                                    <span class="q-ma-sm" v-else>NA</span>
                                 </div>
                             </q-td>
                         </template>
@@ -155,7 +153,7 @@ export default {
                     if (row.subTicketsList && row.subTicketsList.length > 0) {
                         row.subTicketsList.forEach((element, index) => {
                             if (element.serviceRequestType != null) {
-                                issues.push((index + 1) + "." + element.serviceRequestType.name);
+                                issues.push((index + 1) + "." + element.serviceRequestType.name + "   ");
                             }
                         });
                     }
@@ -167,7 +165,7 @@ export default {
                     if (row.subTicketsList && row.subTicketsList.length > 0) {
                         row.subTicketsList.forEach((element, index) => {
                             if (element.serviceRequestSubTicketStatus != null) {
-                                issues.push((index + 1) + "." + element.serviceRequestSubTicketStatus.name);
+                                issues.push((index + 1) + "." + element.serviceRequestSubTicketStatus.name + "   ");
                             }
                         });
                     }
@@ -186,7 +184,7 @@ export default {
                     if (row.subTicketsList && row.subTicketsList.length > 0) {
                         row.subTicketsList.forEach((element, index) => {
                             if (element.serviceRequestType != null) {
-                                issues.push((index + 1) + "." + element.serviceRequestType.name);
+                                issues.push((index + 1) + "." + element.serviceRequestType.name + "   ");
                             }
                         });
                     }
@@ -228,6 +226,10 @@ export default {
                     this.paginationControl.rowsNumber = this.getBijlipayDate.totalElements;
                     this.paginationControl.page = this.getBijlipayDate.number + 1;
                     this.tableData = this.getBijlipayDate.content;
+                    if (this.getBijlipayDate.sort != null) {
+                        this.paginationControl.sortBy = this.getBijlipayDate.sort[0].property;
+                        this.paginationControl.descending = !this.getBijlipayDate.sort[0].ascending;
+                    }
                     this.toggleAjaxLoadFilter = false;
                 })
                 .catch(() => { this.toggleAjaxLoadFilter = false; });
@@ -254,13 +256,25 @@ export default {
                 }
                 this.ASSIGN_TO_COMPLETE(ticketId)
                     .then(() => {
-                        this.$q.notify({ color: "positive", message: "Successfully Resolved!" });
+                        this.$q.notify({
+                            color: "positive",
+                            position: "bottom",
+                            message: "Successfully Resolved!",
+                            icon: "thumb_up",
+                        });
                         this.loadingData({
                             pagination: this.paginationControl,
                             filter: this.filter,
                             date: this.formData.date,
                         });
-                    })
+                    }).catch(() => {
+                        this.$q.notify({
+                            color: "negative",
+                            position: "bottom",
+                            message: "No changes made!",
+                            icon: "thumb_down",
+                        });
+                    });
             });
         },
         fnEscalateToSat(request) {
@@ -273,13 +287,25 @@ export default {
                 let TicketId = { ticketId: request.serviceReqTicketId }
                 this.ESCALATE_TO_SAT(TicketId)
                     .then(() => {
-                        this.$q.notify({ color: "positive", message: "Escalated To SAT!" });
+                        this.$q.notify({
+                            color: "positive",
+                            position: "bottom",
+                            message: "Escalated To SAT!",
+                            icon: "thumb_up",
+                        });
                         this.loadingData({
                             pagination: this.paginationControl,
                             filter: this.filter,
                             date: this.formData.date,
                         });
-                    })
+                    }).catch(() => {
+                        this.$q.notify({
+                            color: "negative",
+                            position: "bottom",
+                            message: "No changes made!",
+                            icon: "thumb_down",
+                        });
+                    });
             });
         },
         goToCompleteTab(tab) {
@@ -296,13 +322,17 @@ export default {
                 });
             }
         },
-        ajaxLoadAllLeadInfo1({ pagination, filter }) {
+        ajaxLoadAllLeadInfo1(request) {
             this.toggleAjaxLoadFilter1 = true;
-            this.FETCH_BIJLIPAY_COMPLETED_DATA({ pagination, filter }).then(() => {
-                    this.paginationControl1 = pagination;
+            this.FETCH_BIJLIPAY_COMPLETED_DATA(request).then(() => {
+                    this.paginationControl1 = request.pagination;
                     this.paginationControl1.rowsNumber = this.getBijlipayCompletedData.totalElements;
                     this.paginationControl1.page = this.getBijlipayCompletedData.number + 1;
                     this.tableData1 = this.getBijlipayCompletedData.content;
+                    if (this.getBijlipayCompletedData.sort != null) {
+                        this.paginationControl1.sortBy = this.getBijlipayCompletedData.sort[0].property;
+                        this.paginationControl1.descending = !this.getBijlipayCompletedData.sort[0].ascending;
+                    }
                     this.toggleAjaxLoadFilter1 = false;
                 }).catch(() => { this.toggleAjaxLoadFilter1 = false; });
         },

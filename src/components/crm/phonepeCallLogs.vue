@@ -5,87 +5,103 @@
       no-backdrop-dismiss
       class="q-mt-lg capitalize"
       @hide="emitToggleRemarks"
-      @escape-key="emitToggleRemarks"
       :content-css="{ minWidth: '40vw', padding: '10px' }"
     >
-      <div class="row items-center bottom-border q-py-sm">
-        <div class="col">Call Logs</div>
-        <div class="col-auto">
-          <q-btn
-            round
-            size="sm"
-            @click="emitToggleRemarks"
-            outline
-            color="dark"
-            icon="clear"
-          />
-        </div>
-      </div>
-
-      <form>
-        <div class="column group">
-          <div class="text-h6"></div>
-          <div>
-            <div class="row">
-              <div class="col-sm-4">
-                <q-input
-                  v-model="selectedDate"
-                  label="From Date"
-                  color="purple-9"
-                  :max="maxDate"
-                  @update:model-value="onDateChange"
-                  type="datetime"
-                  format24h
-                />
-              </div>
-              <div class="col-sm-1"></div>
-              <div class="col-sm-7">
-                <q-input
-                  filled
-                  v-model="callRemarks"
-                  label="Enter your text"
-                  aria-placeholder="enter remarks"
-                  type="textarea"
-                  rows="5"
-                  maxlength="500"
-                  counter
-                  class="textarea-box"
-                />
-              </div>
-            </div>
-            <div class="row items-center bottom-border q-py-sm"></div>
-            <div
-              class="row q-gutter-sm"
-              style="display: flex; justify-content: flex-end"
-            >
+      <q-card style="min-width: 40vw; padding: 10px;">
+        <q-card-section>
+          <div class="row items-center bottom-border q-py-sm">
+            <div class="col text-h6">Call Logs</div>
+            <div class="col-auto">
               <q-btn
-                @click="reset"
-                color="purple-9"
-                icon="refresh"
-                label="Reset"
-              />
-              &nbsp;
-              <q-btn
-                @click="fnsubmit"
-                color="purple-9"
-                icon="save"
-                label="Save"
+                round
+                size="sm"
+                @click="emitToggleRemarks"
+                outline
+                color="dark"
+                icon="clear"
               />
             </div>
           </div>
-        </div>
-      </form>
+        </q-card-section>
+
+        <q-card-section>
+          <form>
+            <div class="column group">
+              <div class="row q-col-gutter-md">
+                <div class="col-sm-4">
+                  <q-input
+                    v-model="displayDate"
+                    label="From Date"
+                    color="purple-9"
+                    filled
+                  >
+                    <template v-slot:prepend>
+                      <q-icon name="event" class="cursor-pointer">
+                        <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                          <q-date v-model="displayDate" mask="YYYY-MM-DD HH:mm">
+                            <div class="row items-center justify-end">
+                              <q-btn v-close-popup label="Close" color="primary" flat />
+                            </div>
+                          </q-date>
+                        </q-popup-proxy>
+                      </q-icon>
+                    </template>
+                    <template v-slot:append>
+                      <q-icon name="access_time" class="cursor-pointer">
+                        <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                          <q-time v-model="displayDate" mask="YYYY-MM-DD HH:mm" format24h>
+                            <div class="row items-center justify-end">
+                              <q-btn v-close-popup label="Close" color="primary" flat />
+                            </div>
+                          </q-time>
+                        </q-popup-proxy>
+                      </q-icon>
+                    </template>
+                  </q-input>
+                </div>
+                <div class="col-sm-8">
+                  <q-input
+                    filled
+                    v-model="callRemarks"
+                    label="Enter your text"
+                    placeholder="Enter remarks"
+                    type="textarea"
+                    rows="5"
+                    maxlength="500"
+                    counter
+                    class="textarea-box"
+                  />
+                </div>
+              </div>
+              <div
+                class="row q-gutter-sm q-mt-md justify-end"
+              >
+                <q-btn
+                  @click="reset"
+                  color="purple-9"
+                  icon="refresh"
+                  label="Reset"
+                />
+                <q-btn
+                  @click="fnsubmit"
+                  color="purple-9"
+                  icon="save"
+                  label="Save"
+                />
+              </div>
+            </div>
+          </form>
+        </q-card-section>
+      </q-card>
     </q-dialog>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { required } from "@vuelidate/validators";
-import phonepeCallLogs from "./phonepeCallLogs.vue";
 
 export default {
-  name: "ticketActionBar",
+  name: "phonepeCallLogs",
   props: [
     "callInfo",
     "propToggleCallLogsPop",
@@ -96,30 +112,30 @@ export default {
   data() {
     return {
       toggleModal: this.propToggleCallLogsPop,
-      selectedDate: null,
+      displayDate: "",
       callRemarks: "",
-      maxDate: new Date().toISOString(),
       formData: {
-        // serviceTicketId: this.callInfo.subTicketsList.id,
         serviceTicketId: this.callInfo.subTicketsList[0].id,
-        inputDate: this.selectedDate,
-        remarks: this.callRemarks
+        inputDate: null,
+        remarks: ""
       }
     };
   },
 
+  computed: {
+    ...mapGetters("phonePeCrm", ["getupdateRemarks"]),
+  },
+
   watch: {
-    selectedDate(newDate) {
-      this.formData.inputDate = new Date(newDate).getTime(); // Convert to Unix timestamp (milliseconds)
+    displayDate(newVal) {
+      if (newVal) {
+        this.formData.inputDate = new Date(newVal).getTime();
+      } else {
+        this.formData.inputDate = null;
+      }
     },
-
-    computed: {
-      ...mapGetters("phonePeCrm", ["getupdateRemarks"]),
-
-    },
-
-    callRemarks(newRemarks) {
-      this.formData.remarks = newRemarks;
+    callRemarks(newVal) {
+      this.formData.remarks = newVal;
     }
   },
 
@@ -127,6 +143,13 @@ export default {
     ...mapActions("phonePeCrm", ["UPDATE_CALL_LOG_CRM_REMARKS"]),
 
     fnsubmit() {
+      if (!this.formData.inputDate || !this.formData.remarks) {
+          this.$q.notify({
+              color: "warning",
+              message: "Please fill all fields"
+          });
+          return;
+      }
       this.$q.loading.show({
         delay: 0,
         spinnerColor: "purple-9",
@@ -145,10 +168,12 @@ export default {
           this.emitToggleRemarks();
         })
         .catch(error => {
+          console.error("Update call log error:", error);
+          const message = (error.body && error.body.message) ? error.body.message : "Please Try Again Later !";
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: error.body.message || "Please try again later.",
+            message: message,
             icon: "thumb_down"
           });
           this.$q.loading.hide();
@@ -160,14 +185,8 @@ export default {
     },
 
     reset() {
-      this.selectedDate = null;
+      this.displayDate = "";
       this.callRemarks = "";
-    },
-
-    onDateChange(date) {
-
-     this.selectedDate = new Date(date).getTime()
-         
     }
   }
 };
@@ -177,7 +196,6 @@ export default {
 .textarea-box {
   border: 1px solid #c0c0c0;
   border-radius: 4px;
-  padding: 8px;
   background-color: #f9f9f9;
 }
 </style>

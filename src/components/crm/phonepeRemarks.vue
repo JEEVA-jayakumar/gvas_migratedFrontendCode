@@ -1,84 +1,37 @@
 <template>
   <div>
-    <q-dialog v-model="toggleModal" no-backdrop-dismiss class="q-mt-lg capitalize" @hide="emitToggleRemarks" @escape-key="emitToggleRemarks"
+    <q-dialog v-model="toggleModal" no-backdrop-dismiss class="q-mt-lg capitalize" @hide="emitToggleRemarks"
       :content-css="{minWidth:'30vw',padding:'20px'}">
-      <div class="row items-center bottom-border q-py-sm">
-        <div class="col">Add Remarks</div>
-        <div class="col-auto">
-          <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" icon="clear" />
-        </div>
-
-      </div>
-
-      <form>
-        <div class="column group">
-          <div class="text-h6"></div>
-          <div>
-            <q-editor @blur="$v.formData.crmRemark.$touch" :error="$v.formData.crmRemark.$error" color="grey-9" v-model="formData.crmRemark" label="Remarks" placeholder="Add remarks"
-              :toolbar="[
-                ['bold', 'italic', 'strike', 'underline', 'subscript', 'superscript'],
-                ['token', 'hr', 'link', 'custom_btn'],
-                ['print', 'fullscreen'],
-                [
-                  {
-                    label: $q.i18n.editor.formatting,
-                    icon: $q.icon.editor.formatting,
-                    list: 'no-icons',
-                    options: ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'code']
-                  },
-                  {
-                    label: $q.i18n.editor.fontSize,
-                    icon: $q.icon.editor.fontSize,
-                    fixedLabel: true,
-                    fixedIcon: true,
-                    list: 'no-icons',
-                    options: ['size-1', 'size-2', 'size-3', 'size-4', 'size-5', 'size-6', 'size-7']
-                  },
-                  {
-                    label: $q.i18n.editor.defaultFont,
-                    icon: $q.icon.editor.font,
-                    fixedIcon: true,
-                    list: 'no-icons',
-                    options: ['default_font', 'arial', 'arial_black', 'comic_sans', 'courier_new', 'impact', 'lucida_grande', 'times_new_roman', 'verdana']
-                  },
-                  'removeFormat'
-                ],
-                ['quote', 'unordered', 'ordered', 'outdent', 'indent'],
-                [
-                  {
-                    label: $q.i18n.editor.align,
-                    icon: $q.icon.editor.align,
-                    fixedLabel: true,
-                    list: 'only-icons',
-                    options: ['left', 'center', 'right', 'justify']
-                  },
-                  {
-                    label: $q.i18n.editor.align,
-                    icon: $q.icon.editor.align,
-                    fixedLabel: true,
-                    options: ['left', 'center', 'right', 'justify']
-                  }
-                ],
-                ['undo', 'redo']
-              ]" :fonts="{
-                arial: 'Arial',
-                arial_black: 'Arial Black',
-                comic_sans: 'Comic Sans MS',
-                courier_new: 'Courier New',
-                impact: 'Impact',
-                lucida_grande: 'Lucida Grande',
-                times_new_roman: 'Times New Roman',
-                verdana: 'Verdana'
-              }" />
-            <!-- <q-input @blur="$v.formData.crmRemark.$touch" :error="$v.formData.crmRemark.$error" color="grey-9"
-              v-model="formData.crmRemark" label="Remarks" placeholder="Add remarks" /> -->
+      <q-card style="min-width: 40vw; padding: 20px;">
+        <q-card-section>
+          <div class="row items-center bottom-border q-py-sm">
+            <div class="col text-h6">Add Remarks</div>
+            <div class="col-auto">
+              <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" icon="clear" />
+            </div>
           </div>
-        </div>
+        </q-card-section>
 
-        <div class="group" align="right">
-          <q-btn @click="fnsubmit(formData)" color="positive" icon="check" label="Save" />
-        </div>
-      </form>
+        <q-card-section>
+          <form>
+            <div class="column group">
+              <div>
+                <q-editor
+                  v-model="formData.crmRemark"
+                  min-height="5rem"
+                  @blur="$v.formData.crmRemark.$touch"
+                  :error="$v.formData.crmRemark.$error"
+                />
+                <p v-if="$v.formData.crmRemark.$error" class="text-negative text-caption">Remarks are required</p>
+              </div>
+            </div>
+
+            <div class="group q-mt-md" align="right">
+              <q-btn @click="fnsubmit(formData)" color="positive" icon="check" label="Save" />
+            </div>
+          </form>
+        </q-card-section>
+      </q-card>
     </q-dialog>
   </div>
 </template>
@@ -105,9 +58,11 @@ export default {
     };
   },
 
-  validations: {
-    formData: {
-      crmRemark: { required },
+  validations() {
+    return {
+      formData: {
+        crmRemark: { required },
+      }
     }
   },
   computed: {
@@ -116,21 +71,13 @@ export default {
 
   methods: {
     ...mapActions("phonePeCrm", ["UPDATE_CRM_REMARKS"]),
-    // emitToggleRelod(propToggleRemarks) {
-    //   this.$emit("closeRemarksInfo", "reloadPhonepePendingDetails")
-    // },
-    // closeModal() {
-    //   this.$emit("toggleModal");
-
-    // },
-    fnsubmit(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+    async fnsubmit(formData) {
+      const isFormCorrect = await this.$v.$validate();
+      if (!isFormCorrect) {
         this.$q.notify("Please review fields again.");
       } else {
         this.UPDATE_CRM_REMARKS(formData)
           .then(() => {
-
             this.$q.notify({
               color: "positive",
               position: "bottom",
@@ -141,10 +88,12 @@ export default {
             this.$emit("reloadPhonepePendingDetails", this.formData.action);
           })
           .catch(error => {
+            console.error("Update remarks error:", error);
+            const message = (error.body && error.body.message) ? error.body.message : "Please Try Again Later !";
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: message,
               icon: "thumb_down"
             });
           });
@@ -156,8 +105,3 @@ export default {
   }
 };
 </script>
-    
-<style>
-
-</style>
-    
