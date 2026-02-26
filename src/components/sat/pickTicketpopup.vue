@@ -40,6 +40,8 @@
                   style="width: 300px"
                   filter
                   clearable
+                  emit-value
+                  map-options
                   color="grey-9"
                   v-model="formData.so"
                   :options="assignToOptions"
@@ -201,10 +203,6 @@ export default {
                 icon: "thumb_up"
               });
               this.$q.loading.hide();
-              this.ajaxLoadAllLeadInfo1({
-                pagination: this.paginationControl,
-                filter: this.filterSearch
-              });
             })
             .catch(error => {
               this.$q.loading.hide();

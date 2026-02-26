@@ -181,7 +181,7 @@ export default {
           label: "Lead Id",
           align: "left",
           field: row => {
-            row.leadInformation.leadNumber;
+            return row.leadInformation ? row.leadInformation.leadNumber : 'NA';
           },
           sortable: false
         },
@@ -191,7 +191,7 @@ export default {
           label: "ME Name",
           align: "left",
           field: row => {
-            return row.leadInformation.leadName;
+            return row.leadInformation ? row.leadInformation.leadName : 'NA';
           },
           sortable: false
         },
@@ -201,7 +201,7 @@ export default {
           label: "Merchant Address",
           align: "center",
           field: row => {
-            row.leadInformation.leadAddress;
+            return row.leadInformation ? row.leadInformation.leadAddress : 'NA';
           },
           sortable: false
         },
@@ -261,7 +261,7 @@ export default {
           label: "Mobile Number",
           align: "center",
           field: row => {
-            row.leadInformation.contactNumber;
+            return row.leadInformation ? row.leadInformation.contactNumber : 'NA';
           },
           sortable: false
         },
@@ -370,16 +370,16 @@ export default {
               this.$q.loading.hide();
               this.$q.notify({
                 color: 'positive',
-                position: 'bottom',
+                position: "bottom",
                 message: 'Successfully Approved!',
                 icon: 'thumb_up'
               })
-            }).onCancel(error => {
+            }).catch(error => {
              this.$q.loading.hide();
               this.$q.notify({
                 color: 'negative',
-                position: 'bottom',
-                message: 'Please try again later!',
+                position: "bottom",
+                message: error.body && error.body.message ? error.body.message : 'Please try again later!',
                 icon: 'thumb_down'
               })
             })

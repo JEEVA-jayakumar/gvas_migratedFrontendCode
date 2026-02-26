@@ -1,27 +1,37 @@
 <template>
-    <div>
-        <q-dialog
-        :model-value="showChequeImage"
-        @hide="emitToggleCheque(showRejectModel)" 
-        @escape-key="emitToggleCheque(showRejectModel)"  
-        :content-css="{padding:'5px',maxWidth: '75vw',}"
-        >
-           <q-img overlay-position="full">
-                <img :src="chequeImagevalue">
-            </q-img>
-        </q-dialog>
-    </div>
+  <q-dialog
+    v-model="showModel"
+    @hide="emitToggleCheque"
+  >
+    <q-card style="max-width: 80vw;">
+      <q-card-section class="row items-center q-pb-none">
+        <div class="text-h6">Cheque Image</div>
+        <q-space />
+        <q-btn icon="close" flat round dense v-close-popup />
+      </q-card-section>
+
+      <q-card-section>
+        <q-img
+          :src="chequeImagevalue"
+          style="max-width: 100%;"
+          spinner-color="purple-9"
+        />
+      </q-card-section>
+    </q-card>
+  </q-dialog>
 </template>
 <script>
 export default {
   props: ["showChequeImage", "chequeImagevalue"],
 
   data() {
-    return {};
+    return {
+      showModel: this.showChequeImage
+    };
   },
 
   methods: {
-    emitToggleCheque(showChequeImage) {
+    emitToggleCheque() {
       this.$emit("closeChequeImage");
     }
   }

@@ -1,124 +1,110 @@
 <template>
-    <div>
-       <q-dialog
-       :model-value="showRejectModel"
-       @hide="emitToggleReject(showRejectModel)" 
-       @escape-key="emitToggleReject(showRejectModel)"  
-       :content-css="{padding:'50px'}"
-       >
-        <div>
-          <q-input
-            type="textarea"
-            placeholder="Phonepe Remarks"
-            @blur="$v.formData.regionalInventory.lostOrStolenRemarks.$touch"      
-            :error="$v.formData.regionalInventory.lostOrStolenRemarks.$error" 
-            class="q-my-md"
-            color="grey-9"
-            align="left"
-            value=""
-            v-model="formData.regionalInventory.lostOrStolenRemarks"
-          />
-          <q-btn color="negative" class="q-ma-sm float-right" @click="financeRejectSubmit(formData)" align="right" label="Reject" />
-          <q-btn align="right" color="grey-9" 
-            class="float-right q-ma-sm" @click="emitToggleReject(showRejectModel)">Cancel
-          </q-btn>
-        </div>
-      </q-dialog>
-    </div>
+  <q-dialog
+    v-model="showModel"
+    persistent
+    @hide="emitToggleReject"
+  >
+    <q-card style="min-width: 350px; padding: 20px;">
+      <q-card-section>
+        <div class="text-h6">Reject Phonepe Request</div>
+        <q-input
+          type="textarea"
+          filled
+          placeholder="Phonepe Remarks"
+          label="Reject Remarks"
+          class="q-my-md"
+          color="purple-9"
+          v-model="formData.regionalInventory.lostOrStolenRemarks"
+          :error="$v.formData.regionalInventory.lostOrStolenRemarks.$error"
+          error-message="Remarks are required"
+        />
+      </q-card-section>
+
+      <q-card-actions align="right">
+        <q-btn flat label="Cancel" color="grey-9" @click="showModel = false" />
+        <q-btn label="Reject" color="negative" @click="financeRejectSubmit" />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
 </template>
 <script>
-import {
-  required,
-  requiredIf,
-  email,
-  minLength,
-  maxLength,
-  alpha,
-  alphaNum,
-  numeric
-} from "@vuelidate/validators";
-import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from '@vuelidate/core';
+import { required } from "@vuelidate/validators";
+import { mapActions } from "vuex";
+
 export default {
+  setup() {
+    return { $v: useVuelidate() };
+  },
   props: ["showRejectModel", "propShowRejectComponent"],
 
   data() {
     return {
-      //Reject lostOrStolenRemarks checkbox
+      showModel: this.showRejectModel,
       formData: {
-
         regionalInventory: {
-          id : this.propShowRejectComponent.regionalInventory.id,
-          serialNumber:this.propShowRejectComponent.regionalInventory.serialNumber,
+          id: this.propShowRejectComponent.regionalInventory.id,
+          serialNumber: this.propShowRejectComponent.regionalInventory.serialNumber,
           lostOrStolenRemarks: ""
-        },
-       
+        }
       }
     };
   },
 
-  validations: {
-    formData: {
-      regionalInventory: {
-        id:{
-        // required
-        },
-        serialNumber:{
-        // required
-        },
-        lostOrStolenRemarks: {
-          required
-          
+  validations() {
+    return {
+      formData: {
+        regionalInventory: {
+          lostOrStolenRemarks: { required }
         }
       }
-    }
+    };
   },
 
   methods: {
-    ...mapActions("LostFinance", ["REJECT_LOST_STOLEN_EXCEPTION", "REJECT_PHONEPE_LOST_STOLEN_EXCEPTION"]),
-    ...mapActions("commonLoader", ["TOGGLE_COMMON_LOADER"]),
-    emitToggleReject(showRejectModel) {
-      this.$emit("closeRejectModel", "reloadPaymentTrackerData");
+    ...mapActions("LostFinance", ["REJECT_PHONEPE_LOST_STOLEN_EXCEPTION"]),
+    emitToggleReject() {
+      this.$emit("closeRejectModel");
     },
-    financeRejectSubmit(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+    async financeRejectSubmit() {
+      const isCorrect = await this.$v.formData.$validate();
+      if (!isCorrect) {
         this.$q.notify("Please review fields again.");
       } else {
-        this.$q
-          .dialog({
-            title: "Confirm",
-            message: "Are you sure want to reject the lead?",
-            ok: "Continue",
-            cancel: "Cancel"
-          }).onOk(() => {
-            this.$q.loading.show({
-            delay: 0, // ms
+        this.$q.dialog({
+          title: "Confirm",
+          message: "Are you sure want to reject the lead?",
+          ok: "Continue",
+          cancel: "Cancel"
+        }).onOk(() => {
+          this.$q.loading.show({
+            delay: 0,
             spinnerColor: "purple-9",
             message: "Processing .."
           });
-            this.REJECT_PHONEPE_LOST_STOLEN_EXCEPTION(formData.regionalInventory)
-              .then(() => {
-                this.$emit("closeRejectModel");
-                this.$emit("reloadPaymentTrackerData");
-                this.$q.loading.hide()
-                this.$q.notify({
-                  color: "negative",
-                  position: "bottom",
-                  message: "Rejected lead #" + formData.leadId,
-                  icon: "clear"
-                });
-                self.$q.loading.hide();
-              }).onCancel(error => {
-                this.$q.loading.hide()
-                this.$q.notify({
-                  color: "negative",
-                  position: "bottom",
-                  message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-                  icon: "thumb_down"
-                });
+          this.REJECT_PHONEPE_LOST_STOLEN_EXCEPTION(this.formData.regionalInventory)
+            .then(() => {
+              this.$emit("reloadPaymentTrackerData");
+              this.$q.loading.hide();
+              this.$q.notify({
+                color: "negative",
+                position: "bottom",
+                message: "Successfully Rejected",
+                icon: "clear"
               });
-          })
-         }
+              this.showModel = false;
+            })
+            .catch(error => {
+              this.$q.loading.hide();
+              this.$q.notify({
+                color: "negative",
+                position: "bottom",
+                message: error.body?.message || "Please Try Again Later !",
+                icon: "thumb_down"
+              });
+            });
+        });
+      }
     }
   }
 };
