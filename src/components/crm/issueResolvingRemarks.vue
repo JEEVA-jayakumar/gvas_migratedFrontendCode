@@ -117,10 +117,14 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from '@vuelidate/core'
 import { required } from "@vuelidate/validators";
 import phonepeCallLogs from "./phonepeCallLogs.vue"
 export default {
   name: "issueResolvingRemarks",
+  setup () {
+    return { $v: useVuelidate() }
+  },
 
   props: ["resolveRemarksInfo", "propToggleResolveRemarksPop", "propToggleResolveRemarks"],
 

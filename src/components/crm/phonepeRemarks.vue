@@ -85,10 +85,14 @@
     
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from '@vuelidate/core'
 import { required } from "@vuelidate/validators";
 
 export default {
   name: "phonepeRemarks",
+  setup () {
+    return { $v: useVuelidate() }
+  },
   props: ["remarksInfo", "propToggleRemarksPop", "propToggleRemarks"],
   data() {
     return {

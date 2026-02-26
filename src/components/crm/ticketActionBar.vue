@@ -154,6 +154,7 @@
 
 <script>
   import { mapGetters, mapActions } from "vuex";
+  import { useVuelidate } from '@vuelidate/core'
   import { required } from "@vuelidate/validators";
   import phonepeCallLogs from "./phonepeCallLogs.vue"
   import phonepeViewCallLogs from "./phonepeViewCallLogs.vue"
@@ -161,6 +162,9 @@
   import phonepeCrmToSatRemarks from "./phonepeCrmToSatRemarks.vue"
   export default {
     name: "ticketActionBar",
+    setup () {
+      return { $v: useVuelidate() }
+    },
 
     props: ["ActionBarInfo", "propToggleActionBarPop", "propToggleActionBar"],
     components: {

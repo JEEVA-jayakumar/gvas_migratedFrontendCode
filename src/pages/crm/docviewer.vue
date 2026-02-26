@@ -156,7 +156,9 @@
         </div>
         </div>
     </div>
+    <div v-if="toggleAjaxLoadFilter" class="fullscreen spinner-overlay">
       <q-spinner-bars class="absolute-center" style="color: #61116a" :size="35" />
+    </div>
     <showPDF v-if="toggleshowPDFModal"
       :propToggleshowPDFModal="toggleshowPDFModal"
       :propPDFDetails="PDFDetails"
@@ -169,11 +171,15 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from '@vuelidate/core'
 import { required, minLength, maxLength } from "@vuelidate/validators";
 import popup from 'src/components/crm/popup.vue'
 import showPDF from 'src/components/crm/showPDF.vue'
 export default {
   name: "globalSearchFilterValues",
+  setup () {
+    return { $v: useVuelidate() }
+  },
  components: {
     popup,
     showPDF
