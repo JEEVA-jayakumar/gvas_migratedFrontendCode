@@ -156,7 +156,7 @@
               >{{
                 props.row == null
                   ? "NA"
-                  : props.row.createdDate | moment("Do MMM Y")
+                  : $moment(props.row.createdDate).format("Do MMM Y")
               }}</q-td
             >
             <q-td
@@ -224,7 +224,7 @@
               >{{
                 props.row == null
                   ? "NA"
-                  : props.row.createdDate | moment("Do MMM Y")
+                  : $moment(props.row.createdDate).format("Do MMM Y")
               }}</q-td
             >
             <q-td
@@ -233,7 +233,7 @@
               >{{
                 props.row == null
                   ? "NA"
-                  : props.row.updatedDate | moment("Do MMM Y")
+                  : $moment(props.row.updatedDate).format("Do MMM Y")
               }}</q-td
             >
           </q-table>
@@ -298,7 +298,7 @@
                   >{{
                     props.row == null
                       ? "NA"
-                      : props.row.createdDate | moment("Do MMM Y")
+                      : $moment(props.row.createdDate).format("Do MMM Y")
                   }}</q-td
                 >
               </q-table>
@@ -330,7 +330,7 @@
                   >{{
                     props.row == null
                       ? "NA"
-                      : props.row.createdDate | moment("Do MMM Y")
+                      : $moment(props.row.createdDate).format("Do MMM Y")
                   }}</q-td
                 >
                 <q-td
@@ -339,7 +339,7 @@
                   >{{
                     props.row == null
                       ? "NA"
-                      : props.row.updatedDate | moment("Do MMM Y")
+                      : $moment(props.row.updatedDate).format("Do MMM Y")
                   }}</q-td
                 >
               </q-table>
@@ -985,11 +985,11 @@ export default {
           this.paginationControl.rowsNumber = this.getphonepeDate.totalElements;
           this.paginationControl.page = this.getphonepeDate.number + 1;
           this.tableData = this.getphonepeDate.content;
-          this.getphonepeDate.content.forEach(obj => {
-        if (obj.serviceRequestTicketStatus !== 2) {
-          obj.items.push(newItem);
-        }
-      });
+          // this.getphonepeDate.content.forEach(obj => {
+          //   if (obj.serviceRequestTicketStatus !== 2) {
+          //     obj.items.push(newItem);
+          //   }
+          // });
                      // this.tableData = this.tableData.find(obj => obj.serviceRequestTicketStatus === 2);
           if (this.getphonepeDate.sort != null) {
             this.paginationControl.sortBy = this.getphonepeDate.sort[0].property;
