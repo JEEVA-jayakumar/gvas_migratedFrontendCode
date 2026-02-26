@@ -159,11 +159,49 @@
                           class="text-left"
                           v-if="props.row.referenceNumbercount == '' || props.row.referenceNumbercount == null"
                         >
-                          <q-chip square color="purple">NA</q-chip>
+                          <q-chip square color="purple" text-color="white">NA</q-chip>
                         </div>
                         <div class="text-left" v-else>
                           <q-chip square color="purple" text-color="white">{{ props.row.referenceNumbercount }}</q-chip>
                         </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="text-left text-caption text-grey-8 text-weight-medium">Document Uploaded by SAT</div>
+                        <div
+                          class="text-left"
+                          v-if="props.row.leadVerificationStatusMimeType != '' && props.row.leadVerificationStatusMimeType != null"
+                        >
+                          <div
+                            v-if="props.row.leadVerificationStatusMimeType.includes('pdf')"
+                            class="cursor-pointer"
+                          >
+                            <div @click="fnPDFViewModal(props.row.leadVerificationStatusBankAttachedFile)">
+                              <q-icon name="fas fa-file-pdf" color="primary" />
+                              &nbsp;{{props.row.leadVerificationStatusBankAttachedFile}}
+                            </div>
+                          </div>
+                          <div
+                            v-else-if="props.row.leadVerificationStatusMimeType.includes('image')"
+                            class="cursor-pointer"
+                          >
+                            <div @click="fnViewMultiAttachedFileImageUploadedBySat()">
+                                <viewer
+                                  :images="[GLOBAL_FILE_FETCH_URL+ '/'+props.row.leadVerificationStatusBankAttachedFile]"
+                                  class="hidden"
+                                >
+                                  <img
+                                    :src="GLOBAL_FILE_FETCH_URL+ '/'+props.row.leadVerificationStatusBankAttachedFile"
+                                    ref="multiAttachedImageViewerUploadedBySAT"
+                                    style="max-width:100%"
+                                  />
+                                </viewer>
+                                <q-icon name="fas fa-image" color="amber-9" />
+                                &nbsp;{{props.row.leadVerificationStatusBankAttachedFile}}
+                            </div>
+                          </div>
+                          <div v-else>No document attached</div>
+                        </div>
+                        <div v-else class="text-left">NA</div>
                       </div>
                     </div>
                   </q-td>
@@ -544,9 +582,9 @@ export default {
             this.ajaxLoadAllPaymentTrackerInfo({ pagination: this.paginationControl, filter: this.filter });
             this.$q.loading.hide();
             this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Approved!", icon: "thumb_up" });
-          }).onCancel(error => {
+          }).catch(error => {
             this.$q.loading.hide();
-            this.$q.notify({ color: "negative", position: "bottom", message: error.response?.data?.message || "Please Try Again Later !", icon: "thumb_down" });
+            this.$q.notify({ color: "negative", position: "bottom", message: error.body && error.body.message ? error.body.message : "Please Try Again Later !", icon: "thumb_down" });
           });
       });
     },
@@ -568,9 +606,9 @@ export default {
             this.ajaxLoadAllPaymentTrackerInfo1({ pagination: this.paginationControl1, filter: this.filter1 });
             this.$q.loading.hide();
             this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Approved!", icon: "thumb_up" });
-          }).onCancel(error => {
+          }).catch(error => {
             this.$q.loading.hide();
-            this.$q.notify({ color: "negative", position: "bottom", message: error.response?.data?.message || "Please Try Again Later !", icon: "thumb_down" });
+            this.$q.notify({ color: "negative", position: "bottom", message: error.body && error.body.message ? error.body.message : "Please Try Again Later !", icon: "thumb_down" });
           });
       });
     },
@@ -583,6 +621,11 @@ export default {
     fnViewMultiAttachedFileImage() {
       if (this.$refs.multiAttachedImageViewer) {
         this.$refs.multiAttachedImageViewer.click();
+      }
+    },
+    fnViewMultiAttachedFileImageUploadedBySat() {
+      if (this.$refs.multiAttachedImageViewerUploadedBySAT) {
+        this.$refs.multiAttachedImageViewerUploadedBySAT.click();
       }
     }
   }

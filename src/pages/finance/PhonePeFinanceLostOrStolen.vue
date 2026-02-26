@@ -1,7 +1,7 @@
 <template>
     <q-page>
       <!-- //Common lead information in popup -->
-      <generalLeadInformation v-if="propToggleLeadInformation" v-model:leadInformation="addtnLeadInformation"
+      <generalLeadInformation v-if="propToggleLeadInformation" :leadInformation="addtnLeadInformation"
         :propToggleLeadInformationPop="propToggleLeadInformation" @closeLeadInformation="toggleLeadInformation" />
       <!-- content -->
       <!--START: table lead validation -->
@@ -130,7 +130,7 @@ import { required, or } from '@vuelidate/validators';
             label: "Lead Id",
             align: "left",
             field: row => {
-              row.leadInformation.leadNumber;
+              return row.leadInformation ? row.leadInformation.leadNumber : 'NA';
             },
             sortable: false
           },
@@ -140,7 +140,7 @@ import { required, or } from '@vuelidate/validators';
             label: "ME Name",
             align: "left",
             field: row => {
-              return row.leadInformation.leadName;
+              return row.leadInformation ? row.leadInformation.leadName : 'NA';
             },
             sortable: false
           },
@@ -150,7 +150,7 @@ import { required, or } from '@vuelidate/validators';
             label: "Merchant Address",
             align: "center",
             field: row => {
-              row.leadInformation.leadAddress;
+              return row.leadInformation ? row.leadInformation.leadAddress : 'NA';
             },
             sortable: false
           },
@@ -210,7 +210,7 @@ import { required, or } from '@vuelidate/validators';
             label: "Mobile Number",
             align: "center",
             field: row => {
-              row.leadInformation.contactNumber;
+              return row.leadInformation ? row.leadInformation.contactNumber : 'NA';
             },
             sortable: false
           },
@@ -323,12 +323,12 @@ import { required, or } from '@vuelidate/validators';
                   message: 'Successfully Approved!',
                   icon: 'thumb_up'
                 })
-              }).onCancel(error => {
+              }).catch(error => {
                 this.$q.loading.hide();
                 this.$q.notify({
                   color: 'negative',
                   position: 'bottom',
-                  message: 'Please try again later!',
+                  message: error.body && error.body.message ? error.body.message : 'Please try again later!',
                   icon: 'thumb_down'
                 })
               })

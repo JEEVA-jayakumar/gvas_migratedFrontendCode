@@ -12,19 +12,19 @@
             <q-card-section>
               <q-list no-border>
                 <div class="col-md-12">
-                  <q-input type="textarea" label="Device Purchase Cost" placeholder="Device Purchase Cost"
-                    class="q-my-md" color="grey-9" align="left" @blur="$v.formData.devicePurchaseCost.$touch"
+                  <q-input label="Device Purchase Cost" placeholder="Device Purchase Cost"
+                    class="q-my-md" color="grey-9" align="left" @blur="$v.formData.devicePurchaseCost.$touch()"
                     :error="$v.formData.devicePurchaseCost.$error" v-model="formData.devicePurchaseCost" />
                 </div>
                 <div class="col-md-12">
-                  <q-input type="textarea" label="Total Life of Device in Days"
+                  <q-input label="Total Life of Device in Days"
                     placeholder="Total Life of Device in Days" class="q-my-md" color="grey-9" align="left"
-                    @blur="$v.formData.deviceLife.$touch" :error="$v.formData.deviceLife.$error"
+                    @blur="$v.formData.deviceLife.$touch()" :error="$v.formData.deviceLife.$error"
                     v-model="formData.deviceLife" />
                 </div>
                 <div class="col-md-12">
-                  <q-input type="textarea" label="Invoice Number" placeholder="Invoice Number" class="q-my-md"
-                    color="grey-9" align="left" @blur="$v.formData.invoiceNumbers.$touch"
+                  <q-input label="Invoice Number" placeholder="Invoice Number" class="q-my-md"
+                    color="grey-9" align="left" @blur="$v.formData.invoiceNumbers.$touch()"
                     :error="$v.formData.invoiceNumbers.$error" v-model="formData.invoiceNumbers" />
                 </div>
                 <div class="col">
@@ -84,19 +84,14 @@
 
 <script>
   /* START >> Modal components Lead source, device, merchant type */
-    import {
-    required,
-    requiredIf,
-    email,
-    minLength,
-    maxLength,
-    alpha,
-    alphaNum,
-    numeric
-  } from "@vuelidate/validators";
-  import { mapGetters, mapActions } from "vuex";
+  import { useVuelidate } from '@vuelidate/core';
+  import { required } from "@vuelidate/validators";
+  import { mapActions } from "vuex";
   // import financeInvoiceCopy from "../../components/inventory/financeInvoiceCopy.vue";
   export default {
+    setup() {
+      return { $v: useVuelidate() };
+    },
     props: ["propShowPosInventory", "propRowDetails"],
     name: "MDRdetails",
     components: {
@@ -116,18 +111,14 @@
         uploaderHovered: false
       };
     },
-    validations: {
-      formData: {
-        devicePurchaseCost: {
-          required
-        },
-        deviceLife: {
-          required
-        },
-        invoiceNumbers: {
-          required
-        },
-      }
+    validations() {
+      return {
+        formData: {
+          devicePurchaseCost: { required },
+          deviceLife: { required },
+          invoiceNumbers: { required },
+        }
+      };
     },
 
     //   created() {
@@ -210,19 +201,18 @@ this.formData.invoiceNumbers = invoiceNumber;
         this.formData.fileSelected.splice(index, 1); // Remove file at given index
       },
 
-      PosFinanceSubmit(request) {
-        console.log("REQUEST LIST DETAILS DATA----------->>>>", JSON.stringify(request));
+      async PosFinanceSubmit() {
         this.$q.loading.show({
           delay: 0, // ms
           spinnerColor: "purple-9",
           message: "Validating .."
         });
-        this.$v.formData.$touch();
-        if (this.$v.formData.$error || this.formData.fileSelected.length == 0) {
+        const isCorrect = await this.$v.formData.$validate();
+        if (!isCorrect || this.formData.fileSelected.length == 0) {
           this.$q.notify({
             color: "amber-9",
             position: "bottom",
-            message: "Please fill all mandatory fields",
+            message: "Please fill all mandatory fields and upload a file",
             icon: "warning"
           });
           this.$q.loading.hide();

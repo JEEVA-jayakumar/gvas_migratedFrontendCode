@@ -84,10 +84,9 @@ export default {
   },
 
   computed: {
-     submitDisabled: function () {
-
-      return (this.formData.fromDate !=0 || this.formData.toDate !=0 || (this.formData.fromDate== 0 && this.formData.toDate == 0)) ;
-    },
+    submitDisabled: function() {
+      return !this.formData.fromDate || !this.formData.toDate;
+    }
   },
   methods: {
 ...mapActions("DownloadMasterTrackerData", ["FINANCE_APPROVAL_TRACKER"]),
