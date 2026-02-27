@@ -21,16 +21,16 @@
                 </div>
                 <div class="q-mb-md">
                   <q-item-label><b>TID:</b></q-item-label>
-                  <div>{{ this.propRowDetails.tid }}</div>
+                  <div>{{ propRowDetails.tid }}</div>
                 </div>
                 <div class="q-mb-md">
                   <q-item-label><b>Ticket ID:</b></q-item-label>
-                  <div>{{ this.propRowDetails.serviceReqTicketId }}</div>
+                  <div>{{ propRowDetails.serviceReqTicketId }}</div>
                 </div>
                 <div class="q-mb-md">
                   <q-item-label><b>SAT forwarded date:</b></q-item-label>
                   <div>
-                    {{ $moment(this.propRowDetails.subTicketsList[0].moveToSatDate).format("Do MMM Y") }}
+                    {{ $moment(propRowDetails.subTicketsList[0].moveToSatDate).format("Do MMM Y") }}
                   </div>
                 </div>
               </div>
@@ -133,7 +133,7 @@ export default {
 
   created() {},
   beforeMount() {
-    console.log("propRowDetails ------->", JSON.stringify(this.propRowDetails));
+    console.log("propRowDetails ------->", JSON.stringify(propRowDetails));
     this.implementationExecutiveList();
   },
   // beforeMount() {

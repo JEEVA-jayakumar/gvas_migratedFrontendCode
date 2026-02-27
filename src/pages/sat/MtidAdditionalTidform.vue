@@ -28,7 +28,7 @@
                         </div>
                         <div class="col-md-6">
                           <q-input color="grey-9" :disable="
-                              this.propRowDetails.leadInformation
+                              propRowDetails.leadInformation
                                 .merchantRefCode
 
                             " v-model.trim="additionalTerminal.merchantRefCode" :error="$v.additionalTerminal.merchantRefCode.$error
@@ -282,11 +282,11 @@
       },
 
       marsCitySearch(terms, done) {
-        console.log("done---------->", JSON.stringify(this.cityOptions))
-        done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+        console.log("done---------->", JSON.stringify(cityOptions))
+        done(this.COMMON_FILTER_FUNCTION(cityOptions, terms));
       },
       marsStateSearch(terms, done) {
-        done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+        done(this.COMMON_FILTER_FUNCTION(stateOptions, terms));
       },
       partnerCitySelected(item) {
         console.log("before partnerCitySelected ITEM------->", JSON.stringify(item))

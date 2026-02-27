@@ -24,94 +24,108 @@
           </div>
         </div>
         <div class="q-pa-md">
-          <div class="row gutter-sm q-py-sm">
+          <div class="row q-col-gutter-md q-py-sm">
             <div class="col-md-6">
-              <q-select :disabled="formData.disableRegionSelection"
-                :class="[formData.disableRegionSelection ? 'no-pointer-events' : '']" color="grey-9"
+              <q-select outlined :disabled="formData.disableRegionSelection"
+                color="grey-9"
+                emit-value
+                map-options
                 label="Choose a region" v-model="formData.addUserDetails.region.id"
                 :error="$v.formData.addUserDetails.region.id.$error" @blur="$v.formData.addUserDetails.region.id.$touch"
                 :options="getAllRegionsData" />
             </div>
 
             <div class="col-md-6">
-              <q-input v-model.trim="formData.addUserDetails.name" @blur="$v.formData.addUserDetails.name.$touch"
-                :error="$v.formData.addUserDetails.name.$error" class="text-weight-regular text-grey-8" color="grey-9"
+              <q-input outlined v-model.trim="formData.addUserDetails.name" @blur="$v.formData.addUserDetails.name.$touch"
+                :error="$v.formData.addUserDetails.name.$error" color="grey-9"
                 label="*Name" placeholder="Name" />
             </div>
 
             <div class="col-md-6">
-              <q-input v-model.trim="formData.addUserDetails.employeeID"
+              <q-input outlined v-model.trim="formData.addUserDetails.employeeID"
                 @blur="$v.formData.addUserDetails.employeeID.$touch"
-                :error="$v.formData.addUserDetails.employeeID.$error" class="text-weight-regular text-grey-8"
+                :error="$v.formData.addUserDetails.employeeID.$error"
                 color="grey-9" label="*Employee ID" placeholder="Employee ID" />
             </div>
 
             <div class="col-md-6">
-              <q-input disable v-model.trim="formData.addUserDetails.email" class="text-weight-regular text-grey-8"
+              <q-input outlined disable v-model.trim="formData.addUserDetails.email"
                 color="grey-9" @blur="$v.formData.addUserDetails.email.$touch"
                 :error="$v.formData.addUserDetails.email.$error" label="*Email" placeholder="Email" />
             </div>
 
             <div class="col-md-6">
-              <q-input v-model.trim="formData.addUserDetails.contactNumber"
+              <q-input outlined v-model.trim="formData.addUserDetails.contactNumber"
                 @blur="$v.formData.addUserDetails.contactNumber.$touch"
-                :error="$v.formData.addUserDetails.contactNumber.$error" class="text-weight-regular text-grey-8"
+                :error="$v.formData.addUserDetails.contactNumber.$error"
                 color="grey-9" label="*Contact Number" placeholder="Contact Number" />
             </div>
 
             <div class="col-md-6">
-              <q-input v-model.trim="formData.addUserDetails.alternateContactNumber"
+              <q-input outlined v-model.trim="formData.addUserDetails.alternateContactNumber"
                 @blur="$v.formData.addUserDetails.alternateContactNumber.$touch"
                 :error="$v.formData.addUserDetails.alternateContactNumber.$error"
-                class="text-weight-regular text-grey-8" color="grey-9" label="Alt Contact Number"
+                color="grey-9" label="Alt Contact Number"
                 placeholder="Alt Contact Number" />
             </div>
 
             <div class="col-md-6">
-              <q-input v-model.trim="formData.addUserDetails.userAddress"
+              <q-input outlined v-model.trim="formData.addUserDetails.userAddress"
                 @blur="$v.formData.addUserDetails.userAddress.$touch"
-                :error="$v.formData.addUserDetails.userAddress.$error" class="text-weight-regular text-grey-8"
+                :error="$v.formData.addUserDetails.userAddress.$error"
                 color="grey-9" label="*Address" placeholder="Address" />
             </div>
 
             <div class="col-md-6">
-              <q-input type="number" :error="$v.formData.addUserDetails.pincodeTemp.$error" clearable
-                @clear="fnGetCityAndState" color="grey-9" v-model.trim="formData.addUserDetails.pincodeTemp"
-                label="Pincode" placeholder="Pincode">
-                <q-autocomplete @search="pincodeSearch" :debounce="500" :min-characters="1"
-                  @selected="pincodeSelected" />
-              </q-input>
+              <q-select
+                outlined
+                use-input
+                hide-selected
+                fill-input
+                input-debounce="500"
+                label="Pincode"
+                v-model="formData.addUserDetails.pincodeTemp"
+                :options="getAllStatesData"
+                @filter="pincodeSearch"
+                @update:model-value="pincodeSelected"
+                @clear="fnGetCityAndState"
+                clearable
+                :error="$v.formData.addUserDetails.pincodeTemp.$error"
+                @blur="$v.formData.addUserDetails.pincodeTemp.$touch"
+              />
             </div>
             <div class="col-md-6">
-              <q-input disable v-model.trim="formData.addUserDetails.state" class="text-weight-regular text-grey-8"
+              <q-input outlined disable v-model.trim="formData.addUserDetails.state"
                 color="grey-9" label="*State" placeholder="State" />
             </div>
 
             <div class="col-md-6">
-              <q-input disable v-model.trim="formData.addUserDetails.city" class="text-weight-regular text-grey-8"
+              <q-input outlined disable v-model.trim="formData.addUserDetails.city"
                 color="grey-9" label="*City" placeholder="City" />
             </div>
           </div>
-          <div class="row group" v-for="(item, index) in getAllHierarchiesAndRolesData" :key="index">
+          <div class="row items-center q-col-gutter-md q-px-md q-mb-md" v-for="(item, index) in getAllHierarchiesAndRolesData" :key="index">
             <div class="col">
               <q-checkbox color="purple-9" v-model="item.checked" @update:model-value="getRoleCheckedItem(item)"
                 :label="item.hierarchy" />
             </div>
             <div class="col">
-              <q-select :disable="!item.checked" color="grey-9" placeholder="Choose a role" v-model="item.roleChecked"
+              <q-select outlined :disable="!item.checked" color="grey-9" label="Choose a role" v-model="item.roleChecked"
+                emit-value map-options
                 :options="item.roles" @update:model-value="getPredecessorList(item)" />
             </div>
             <div class="col">
-              <q-select :disable="!item.checked" disaply-value color="grey-9"
-                :placeholder="item.predecessor.length == 0 ? 'No data available to display' : 'Choose a predecessor'"
+              <q-select outlined :disable="!item.checked" color="grey-9"
+                :label="item.predecessor && item.predecessor.length === 0 ? 'No data available to display' : 'Choose a predecessor'"
+                emit-value map-options
                 v-model="item.predecessorChecked" :options="item.predecessor" />
             </div>
           </div>
-          <div v-if="formData.showBankOpsList" class="row gutter-sm q-py-sm">
-            <!-- <pre>{{formData.addUserDetails.banksList}}</pre> -->
+          <div v-if="formData.showBankOpsList" class="q-pa-md">
             <div class="col-md-6">
-              <q-select multiple color="grey-9" label="Choose bank (can be multiple)"
+              <q-select outlined multiple color="grey-9" label="Choose bank (can be multiple)"
                 v-model="formData.addUserDetails.banksList" :error="$v.formData.addUserDetails.banksList.$error"
+                emit-value map-options
                 @blur="$v.formData.addUserDetails.banksList.$touch" :options="leadSourceOptions" />
             </div>
           </div>
@@ -129,29 +143,33 @@
             </div>
           </div>
           <div v-if="this.getAllUserByUserIdData.roles[0].hierarchy.hierarchyCode == 'SC'"
-            class="row gutter-sm q-py-sm">
+            class="row q-col-gutter-md q-pa-md">
             <div class="col-md-6">
-              <q-input label="Please enter authMethod....."
+              <q-input outlined label="Auth Method"
                 v-model="formData.addUserDetails.serviceReqClients.authMethod"
+                hint="Token, Basic, Barrier"
                 :error="$v.formData.addUserDetails.serviceReqClients.authMethod.$error"
                 @blur="$v.formData.addUserDetails.serviceReqClients.authMethod.$touch" />
 
             </div>
             <div class="col-md-6">
-              <q-input label="Please enter authKey....."
+              <q-input outlined label="Auth Key"
                 v-model="formData.addUserDetails.serviceReqClients.authKey"
+                hint="Authorization"
                 :error="$v.formData.addUserDetails.serviceReqClients.authKey.$error"
                 @blur="$v.formData.addUserDetails.serviceReqClients.authKey.$touch" />
             </div>
             <div class="col-md-6">
-              <q-input label="Please enter authValue....."
+              <q-input outlined label="Auth Value"
                 v-model="formData.addUserDetails.serviceReqClients.authValue"
+                hint="Encrypted Data"
                 :error="$v.formData.addUserDetails.serviceReqClients.authValue.$error"
                 @blur="$v.formData.addUserDetails.serviceReqClients.authValue.$touch" />
             </div>
             <div class="col-md-6">
-              <q-input label="Please enter callBackUrl....."
+              <q-input outlined label="URL"
                 v-model="formData.addUserDetails.serviceReqClients.callBackUrl"
+                hint="callBackUrl"
                 :error="$v.formData.addUserDetails.serviceReqClients.callBackUrl.$error"
                 @blur="$v.formData.addUserDetails.serviceReqClients.callBackUrl.$touch" />
             </div>
@@ -421,57 +439,27 @@ export default {
         .FETCH_ALL_USERS_BY_USER_ID_DATA(innerSelf.$route.params.id)
         .then(() => {
           console.log("innerSelf.getAllUserByUserIdData.TEST ----------->", JSON.stringify(this.getAllUserByUserIdData))
-                    let formData = {
-                      
-                    
-            showBankOpsList:
-            
-              innerSelf.getAllUserByUserIdData.bankOpsUser == null
-                ,
-             disableRegionSelection: innerSelf.getAllUserByUserIdData.roles[0].hierarchy.hierarchyCode == "CU" && innerSelf.getAllUserByUserIdData.serviceReqClients == null ,
-            //  -UAT ------: this.formData.showAllRoleDetails == 24 
-          // Production ------: this.formData.showAllRoleDetails == 25 
-          // UAT SERVICE REQUEST(HIERARCHY ID -- 8) AND CRM USER (HIERARCHY ID -- 10)
-        // PRODUCTION SERVICE REQUEST(HIERARCHY ID -- 9) AND CRM USER (HIERARCHY ID -- 10)
-             disableRegionSelection: innerSelf.getAllUserByUserIdData.bankOpsUser != null ? true : (innerSelf.getAllUserByUserIdData.roles[0].hierarchy.id == 10 ),
-             disableRegionSelection: innerSelf.getAllUserByUserIdData.serviceReqClients == null  && innerSelf.getAllUserByUserIdData.roles[0].hierarchy.hierarchyCode != "CU" ,
-            
-            // disableRegionSelection:(innerSelf.getAllUserByUserIdData.bankOpsUser == null || innerSelf.getAllUserByUserIdData.serviceReqClients == null ),
-            // leadSource: innerSelf.getAllUserByUserIdData.serviceReqClients != null ? innerSelf.getAllUserByUserIdData.serviceReqClients.sourceId == null ? "No" : "Yes" : null,
+          let formData = {
+            showBankOpsList: innerSelf.getAllUserByUserIdData.bankOpsUser != null,
+            disableRegionSelection: innerSelf.getAllUserByUserIdData.serviceReqClients != null || (innerSelf.getAllUserByUserIdData.roles[0] && innerSelf.getAllUserByUserIdData.roles[0].hierarchy.hierarchyCode === 'CU'),
             addUserDetails: {
-              hasReadPermission:
-                innerSelf.getAllUserByUserIdData.user.hasReadPermission,
-              hasWritePermission:
-                innerSelf.getAllUserByUserIdData.user.hasWritePermission,
-              hasDeletePermission:
-                innerSelf.getAllUserByUserIdData.user.hasDeletePermission,
-              hasEditPermission:
-                innerSelf.getAllUserByUserIdData.user.hasEditPermission,
-              hasDownloadPermission:
-                innerSelf.getAllUserByUserIdData.user.hasDownloadPermission,
-              banksList:
-                innerSelf.getAllUserByUserIdData.bankOpsUser == null
-                  ? []
-                  : innerSelf.getAllUserByUserIdData.bankOpsUser,
+              hasReadPermission: innerSelf.getAllUserByUserIdData.user.hasReadPermission,
+              hasWritePermission: innerSelf.getAllUserByUserIdData.user.hasWritePermission,
+              hasDeletePermission: innerSelf.getAllUserByUserIdData.user.hasDeletePermission,
+              hasEditPermission: innerSelf.getAllUserByUserIdData.user.hasEditPermission,
+              hasDownloadPermission: innerSelf.getAllUserByUserIdData.user.hasDownloadPermission,
+              banksList: innerSelf.getAllUserByUserIdData.bankOpsUser == null ? [] : innerSelf.getAllUserByUserIdData.bankOpsUser,
               userId: innerSelf.getAllUserByUserIdData.user.id,
-              profilePicture:
-                "uploads/c7818f74-9652-42f9-a902-9da6a692cdf3.png",
+              profilePicture: "uploads/c7818f74-9652-42f9-a902-9da6a692cdf3.png",
               region: {
-                id:
-                  innerSelf.getAllUserByUserIdData.region == null
-                    ? ""
-                    : innerSelf.getAllUserByUserIdData.region.id
+                id: innerSelf.getAllUserByUserIdData.region == null ? "" : innerSelf.getAllUserByUserIdData.region.id
               },
-             // predecessor: innerSelf.getAllUserByUserIdData.role[0].predecessor == null ? "" :innerSelf.getAllUserByUserIdData.role[0].predecessor,
               name: innerSelf.getAllUserByUserIdData.user.name,
-            //  id:innerSelf.getAllUserByUserIdData.serviceReqClients.sourceId.id != null? null :innerSelf.getAllUserByUserIdData.serviceReqClients.sourceId.id,
               employeeID: innerSelf.getAllUserByUserIdData.user.employeeID,
               email: innerSelf.getAllUserByUserIdData.user.email,
-              contactNumber:
-                innerSelf.getAllUserByUserIdData.user.contactNumber,
-              alternateContactNumber:
-                innerSelf.getAllUserByUserIdData.user.alternateContactNumber,
-              leadSource: innerSelf.getAllUserByUserIdData.serviceReqClients != null ? innerSelf.getAllUserByUserIdData.serviceReqClients.sourceId == null ? "No" : "Yes" : null,
+              contactNumber: innerSelf.getAllUserByUserIdData.user.contactNumber,
+              alternateContactNumber: innerSelf.getAllUserByUserIdData.user.alternateContactNumber,
+              leadSource: innerSelf.getAllUserByUserIdData.serviceReqClients != null ? (innerSelf.getAllUserByUserIdData.serviceReqClients.sourceId == null ? "No" : "Yes") : null,
               serviceReqClients: innerSelf.getAllUserByUserIdData.serviceReqClients != null ? {
                 authMethod: innerSelf.getAllUserByUserIdData.serviceReqClients.authMethod,
                 authKey: innerSelf.getAllUserByUserIdData.serviceReqClients.authKey,
@@ -483,14 +471,11 @@ export default {
               state: innerSelf.getAllUserByUserIdData.user.state,
               pincode: innerSelf.getAllUserByUserIdData.user.pincode,
               pincodeTemp: innerSelf.getAllUserByUserIdData.user.pincode,
-              pincodeDisplayValue: String(
-                innerSelf.getAllUserByUserIdData.user.pincode
-              ),
+              pincodeDisplayValue: String(innerSelf.getAllUserByUserIdData.user.pincode),
               userMapSets: []
             }
-            
           };
-          
+
           innerSelf.formData = formData;
 
           this.FETCH_ALL_HIERARCHIES_ROLES_DATA().then(() => {
@@ -506,10 +491,9 @@ export default {
                       region: {
                         id: innerSelf.formData.addUserDetails.region.id
                       },
-                      role:  {
+                      role: {
                         id: o.id
-                      },       
-                     // id:innerSelf.formData.addUserDetails.id
+                      },
                     };
 
                     innerSelf
@@ -526,7 +510,9 @@ export default {
                           }
                         );
                         innerSelf.getAllHierarchiesAndRolesData[i]["predecessor"] = cookedArr;
-                        innerSelf.getAllHierarchiesAndRolesData[i]["predecessorChecked"] = o.predecessor.id;
+                        if (o.predecessor) {
+                          innerSelf.getAllHierarchiesAndRolesData[i]["predecessorChecked"] = o.predecessor.id;
+                        }
                       });
                   }
                 }

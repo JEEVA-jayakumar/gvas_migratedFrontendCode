@@ -14,16 +14,21 @@
       @request="ajaxLoadAllLeadInfo"
     >
       
-      <q-td v-slot:body-cell-soName="props" :props="props">{{
+      <template v-slot:body-cell-soName="props">
+  <q-td  :props="props">{{
         props.row.soName == null
           ? "NA"
           : props.row.soName
       }}</q-td>
+</template>
    
-      <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+      <!-- <template v-slot:body-cell-deviceStatusDate="props">
+  <q-td  :props="props">
         <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-      </q-td>   -->
-       <q-td v-slot:body-cell-action="props" :props="props">
+      </q-td>
+</template>   -->
+       <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
         <q-btn 
          v-if="props.row.status == 0"
           highlight
@@ -51,7 +56,9 @@
        </div>
        
       </q-td>
-      <!-- <q-td v-slot:body-cell-action2="props" :props="props"  > -->
+</template>
+      <!-- <template v-slot:body-cell-action2="props">
+  <q-td  :props="props"  > -->
        
        <!-- <q-td auto-width key="action" :props="props">
               <q-btn
@@ -62,7 +69,8 @@
                @click="openAcceptModel(props.row)"
               size="sm"
              >Accept</q-btn>
-           </q-td> -->
+           </q-td>
+</template> -->
          
      
       <template slot="top" class="bottom-border">
@@ -306,7 +314,7 @@ export default {
 
           // then we update the rows with the fetched ones
           this.tableData = responseData.data.content
-          console.log("TABLE DATA",JSON.stringify(this.tableData));
+          console.log("TABLE DATA",JSON.stringify(tableData));
           // if (this.getMasterTrackerList.sort != null) {
           //   this.paginationControl.sortBy = this.getMasterTrackerList.sort[0].property;
           //   this.paginationControl.descending = this.getMasterTrackerList.sort[0].ascending;
@@ -314,7 +322,7 @@ export default {
 
           // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
-          // console.log("Table Datas ---------------------->"+JSON.stringify(this.tableData));
+          // console.log("Table Datas ---------------------->"+JSON.stringify(tableData));
         })
         .catch(() => {
           this.$q.loading.hide();
@@ -346,7 +354,7 @@ export default {
           console.log("INSIDE LOAD ALL LEAD INFO 1 :::::::::::::::::::::");
           console.log(
             "Table Datas 1---------------------->" +
-              JSON.stringify(this.getLostOrStolenDatas)
+              JSON.stringify(getLostOrStolenDatas)
           );
 
           // updating pagination to reflect in the UI

@@ -3,7 +3,8 @@
     <!-- content -->
     <div>
       <q-table :rows="getAllDevicesInfo" table-class="customSATableClass" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
-        <q-td v-slot:body-cell-action="props" :props="props">
+        <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
           <pre>{{props.row}}  </pre>
           <div class="row no-wrap no-padding">
             <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md" @click="fnShowEditDeviceTypes(props.row)" flat class="text-light-blue">
@@ -12,6 +13,7 @@
             </q-btn>
           </div>
         </q-td>
+</template>
 
         <template v-slot:top="props">
           <div class="col-md-6 q-my-md" align="right">

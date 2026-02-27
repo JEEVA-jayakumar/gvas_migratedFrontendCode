@@ -1839,7 +1839,7 @@ export default {
 
     /* MCC search result */
     mccSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.mccSearchSet, terms));
+      done(this.COMMON_FILTER_FUNCTION(mccSearchSet, terms));
     },
     mccSelected(item) {
       this.merchant.companyInformation.mccname = item.label;
@@ -1849,7 +1849,7 @@ export default {
 
     /* City search result */
     residentCitySearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+      done(this.COMMON_FILTER_FUNCTION(cityOptions, terms));
     },
     residentCitySelected(item) {
       this.merchant.companyInformation.residentCityName = item.label;
@@ -1859,7 +1859,7 @@ export default {
 
     /* State search result */
     residentStateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+      done(this.COMMON_FILTER_FUNCTION(stateOptions, terms));
     },
     residentStateSelected(item) {
       this.merchant.companyInformation.residentStateName = item.label;

@@ -40,7 +40,7 @@
           label="Others"
         />
         <div class="text-negative q-py-xs group text-caption" v-if="$v.formData.leadVerificationStatus.reasonType.$error">
-          <div v-if="$v.formData.leadVerificationStatus.reasonType.$params.required">
+          <div>
             <q-icon color="negative" name="warning" />&nbsp;Required
           </div>
         </div>
@@ -153,7 +153,7 @@ export default {
             this.REJECT_LEAD_EXCEPTION(formData)
               .then(() => {
                 this.$emit("closeRejectLeadDetailsModel");
-                 this.$emit("closeReject");
+                this.$emit("closeReject");
                 this.$q.loading.hide();
                 this.$q.notify({
                   color: "negative",
@@ -161,7 +161,7 @@ export default {
                   message: "Rejected lead #" + formData.leadId,
                   icon: "clear"
                 });
-              }).onCancel(error => {
+              }).catch(error => {
                 this.$q.loading.hide();
                 this.$emit("closeRejectLeadDetailsModel");
                 this.$q.notify({

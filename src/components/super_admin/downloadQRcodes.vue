@@ -14,11 +14,14 @@
       >
         <!-- selection="single"
         :selected="formData.selectQRDownload"-->
-        <q-td
-          v-slot:body-cell-createDate="props"
+        <template v-slot:body-cell-createDate="props">
+  <q-td
+
           :props="props"
         >{{ $moment(props.row.createDate).format("Do MMM Y") }}</q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+        <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
           <div class="row no-wrap no-padding">
             <q-btn
               dense
@@ -33,6 +36,7 @@
             ></q-btn>
           </div>
         </q-td>
+</template>
 
         <template v-slot:top="props">
           <div class="col-md-6">

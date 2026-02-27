@@ -98,7 +98,7 @@
                 <div>
                   <q-btn
                     no-caps
-                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0  || this.formData.assignTo == ''"
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0  || formData.assignTo == ''"
                     label="Re-Assign"
                     class="common-dark-blue"
                     @click="reAssignImplementationUser"
@@ -151,8 +151,9 @@
             color="dark"
             @request="ajaxLoadAllLeadInfo"
           >
-            <q-td
-              v-slot:body-cell-leadNumber="props"
+            <template v-slot:body-cell-leadNumber="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
               @click="toggleLeadInformation(props.row.leadInformation)"
@@ -161,7 +162,9 @@
                 ># {{ props.row.leadInformation.leadNumber }}</span
               >
             </q-td>
-            <q-td v-slot:body-cell-LeadSource="props" :props="props">
+</template>
+            <template v-slot:body-cell-LeadSource="props">
+  <q-td  :props="props">
               <span
                 :class="{
                   'text-red':
@@ -172,8 +175,10 @@
                 {{ props.row.leadInformation.leadSource.sourceName }}
               </span>
             </q-td>
-            <q-td
-              v-slot:body-cell-createdAt="props"
+</template>
+            <template v-slot:body-cell-createdAt="props">
+  <q-td
+
               :props="props"
               >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
             >
@@ -184,23 +189,29 @@
             >
               <div class="text-primary">{{ props.row.mid }}</div>
             </q-td>
+</template>
 
-            <q-td
-              v-slot:body-cell-deviceAddress="props"
+            <template v-slot:body-cell-deviceAddress="props">
+  <q-td
+
               :props="props"
               class="customTd customCellLength"
             >
               <div>{{ props.row.deviceAddress }}</div>
             </q-td>
-            <!-- <q-td
-              v-slot:body-cell-tid="props"
+</template>
+            <!-- <template v-slot:body-cell-tid="props">
+  <q-td
+
               :props="props"
               class="customTd"
             >
               <div class="text-primary">{{ props.row.tid }}</div>
-            </q-td> -->
-            <q-td
-              v-slot:body-cell-submitToMarsDate="props"
+            </q-td>
+</template> -->
+            <template v-slot:body-cell-submitToMarsDate="props">
+  <q-td
+
               :props="props"
               >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
             >
@@ -248,7 +259,9 @@
                 }}</span
               >
             </q-td>
-            <q-td v-slot:body-cell-LeadSource="props" :props="props">
+</template>
+            <template v-slot:body-cell-LeadSource="props">
+  <q-td  :props="props">
               <span
                 :class="{
                   'text-red':
@@ -259,8 +272,10 @@
                 {{ props.row.leadInformation.leadSource.sourceName }}
               </span>
             </q-td>
-            <!-- <q-td
-              v-slot:body-cell-submitToMarsDate="props"
+</template>
+            <!-- <template v-slot:body-cell-submitToMarsDate="props">
+  <q-td
+
               :props="props"
               >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
             > -->
@@ -276,9 +291,11 @@
               class="customTd"
             >
               <div class="text-primary">{{ props.row.tid != null ? props.row.tid : "NA" }}</div>
-            </q-td> -->
-            <q-td
-              v-slot:body-cell-mid="props"
+            </q-td>
+</template> -->
+            <template v-slot:body-cell-mid="props">
+  <q-td
+
               :props="props"
               class="customTd"
             >
@@ -286,8 +303,10 @@
                 {{ props.row.mid != null ? props.row.mid : "NA" }}
               </div>
             </q-td>
-            <q-td
-              v-slot:body-cell-deviceAddress="props"
+</template>
+            <template v-slot:body-cell-deviceAddress="props">
+  <q-td
+
               :props="props"
               class="customTd customCellLength"
             >
@@ -307,6 +326,7 @@
                 }}
               </div>
             </q-td>
+</template>
             <template v-slot:top="props">
               <!--START: table filter,search -->
               <div class="col-md-5">

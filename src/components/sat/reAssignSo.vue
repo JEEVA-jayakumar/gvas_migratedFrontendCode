@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-12 col-md-6 q-pt-md group" align="right">
               <q-btn icon="block" outline label="Cancel" @click="emitToggleCheque" />
-              <q-btn icon="check" class="common-btn" :disable="this.formData.remarks == '' || this.formData.podNumber ==''" label="Submit" @click="fnSubmitAllocateRegion" />
+              <q-btn icon="check" class="common-btn" :disable="formData.remarks == '' || formData.podNumber ==''" label="Submit" @click="fnSubmitAllocateRegion" />
             </div>
           </div>
         </div>
@@ -58,7 +58,7 @@
       };
     },
   beforeMount(){
-    console.log("DATAT",JSON.stringify(this.propAllScannedItemArr));
+    console.log("DATAT",JSON.stringify(propAllScannedItemArr));
   },
     methods: {
       ...mapActions("InventoryCentral", [
@@ -99,7 +99,7 @@
             spinnerColor: "purple-9",
             message: "Please wait.."
           });
-          this.FEED_ALLOCATE_SO_TO_SO(this.formData)
+          this.FEED_ALLOCATE_SO_TO_SO(formData)
             .then(() => {
               this.TOGGLE_COMMON_LOADER(false);
               this.$q.notify({

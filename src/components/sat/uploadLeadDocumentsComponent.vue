@@ -444,7 +444,7 @@ export default {
 
     fnGetMerchantTypeValue(inputValue) {
       let merchantDocumentCategory = _.find(
-        this.getShortLeadInfoDocumentTypes,
+        getShortLeadInfoDocumentTypes,
         o => o.merchantType === inputValue
       );
       // console.log("TEST");

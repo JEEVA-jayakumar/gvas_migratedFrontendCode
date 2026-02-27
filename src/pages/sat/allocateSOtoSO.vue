@@ -108,7 +108,7 @@
                     >
                       <q-item-section class="text-body1">{{subItem}}</q-item-section>
                       <q-item-section class="text-body1">{{item.userName[0]}}</q-item-section>
-                      <!-- <q-item-section class="text-body1" >{{this.userName}}</q-item-section> -->
+                      <!-- <q-item-section class="text-body1" >{{userName}}</q-item-section> -->
                       <q-item-section>
                         <q-btn
                           round
@@ -322,7 +322,7 @@ import { email } from '@vuelidate/validators';
         this.scannerToggleOption = false;
   
         if (!this.$barcodeScanner.hasListener()) {
-          this.$barcodeScanner.init(this.onBarcodeScanned);
+          this.$barcodeScanner.init(onBarcodeScanned);
         }
       },
   

@@ -25,36 +25,25 @@
             }}</span
             >/ selected
           </div>
-          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo.id"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-          </div> -->
           &nbsp;&nbsp;
           <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
             <q-select
-              filter
+              use-input
               clearable
               v-model="formData.assignTo.region"
-              separator
               color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :disable="formData.marsDeviceIdsCooked.length == 0"
               :options="assignToRegionOptions"
-              placeholder="Assign To Region"
+              emit-value
+              map-options
+              label="Assign To Region"
             />
           </div>
           <div class="col-md-3 col-sm-6 col-xs-6" align="right">
             <q-btn
               no-caps
               :disabled="
-              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              (formData.assignTo.region == '' || formData.assignTo.region == null)
               "
               label="Assign"
               class="common-dark-blue"
@@ -77,10 +66,9 @@
         v-model="selectedTab"
         class="shadow-1"
         color="grey-1"
-        @click="goToUnassignedTab"
+        @update:model-value="goToUnassignedTab"
       >
         <q-tab
-
           color="dark"
           name="unAssigned"
           label="Opened"
@@ -157,7 +145,7 @@
                 </q-td>
               </q-tr>
             </template>
-            <template slot="top">
+            <template v-slot:top>
               <div class="col-md-5">
                 <q-input
                   clearable
@@ -179,7 +167,7 @@
             :columns="columnDataUnassigned"
             table-class="customTableClass"
             :filter="filterSearch1"
-            :selected="formData.marsDeviceIdsCooked"
+            v-model:selected="formData.marsDeviceIdsCooked"
             v-model:pagination="paginationControl1"
             row-key="serviceReqTicketId"
             selection="multiple"
@@ -188,103 +176,94 @@
             color="dark"
             @request="ajaxLoadAllLeadInfo1"
           >
-     
-              <!--START: table rows -->
-          
-                <q-td
-                v-slot:body-cell-serviceReqTicketId="props"
-                :props="props"
-                class="cursor-pointer">
-                  {{ props.row.serviceReqTicketId }}</q-td
-                >
-              <q-td v-slot:body-cell-merchant_name="props"
-              :props="props"
-              class="cursor-pointer">
-                  {{ props.row.meName }}</q-td
-                >
-                  <q-td
-                v-slot:body-cell-assignedTo="props"
-                :props="props"
-                class="cursor-pointer">
-                  {{ props.row.assignedTo == null ? "NA" : props.row.assignedTo.name }}</q-td
-                >
-                <q-td v-slot:body-cell-tid="props"
-                :props="props"
-                class="cursor-pointer"> {{ props.row.tid }}</q-td>
-                <q-td v-slot:body-cell-actionContact="props"
-                :props="props"
-                class="cursor-pointer">
-                  <q-btn
-                    highlight
-                    push
-                    class="q-mx-sm"
-                    color="blue"
-                    size="sm"
-                    @click="fnContactDetails(props.row)"
-                    >Click to View</q-btn
-                  >
-                </q-td>
-                <q-td v-slot:body-cell-dateCreated="props"
-                :props="props"
-                class="cursor-pointer">
-                  {{ $moment(props.row.createdDate).format("Do MMM Y") }}
-                </q-td>
-                <q-td v-slot:body-cell-tat="props"
-                :props="props"
-                class="cursor-pointer">
-                  <span :style="getHoursAgoColor(props.row.createdDate)">{{
-                    getHoursAgo(props.row.createdDate)
-                  }}</span>
-                </q-td>
-                <q-td  v-slot:body-cell-actionLog="props"
-                :props="props">
-                  <q-btn
-                    highlight
-                    push
-                    class="q-mx-sm"
-                    color="blue"
-                    size="sm"
-                    @click="fnCrmLogsView(props.row)"
-                    >Click to View</q-btn
-                  >
-                </q-td>
-                <q-td
-               
-                  v-slot:body-cell-actionPickTickets="props"
-                  :props="props"
-                  v-if="props.row.serviceRequestTicketStatus == 5"
-             
-                >
-                  <q-btn
-                    highlight
-                    push
-                    class="q-mx-sm"
-                    color="positive"
-                    size="sm"
-                    @click="fnPickTicket(props.row)"
-                    >Pick Ticket</q-btn
-                  >
-                </q-td>
-                <q-td
-                 
-                  v-slot:body-cell-actionReassign="props"
-                  :props="props"
-                  v-if="props.row.serviceRequestTicketStatus == 2"
-            
-                >
-                  <q-btn
-                    highlight
-                    push
-                    class="q-mx-sm"
-                    color="negative"
-                    size="sm"
-                    @click="fnReassignTicket(props.row)"
-                    >Re-Assign</q-btn
-                  >
-                </q-td> 
+                <template v-slot:body-cell-serviceReqTicketId="props">
+                  <q-td :props="props">
+                    {{ props.row.serviceReqTicketId }}
+                  </q-td>
+                </template>
+                <template v-slot:body-cell-merchant_name="props">
+                  <q-td :props="props">
+                    {{ props.row.meName }}
+                  </q-td>
+                </template>
+                <template v-slot:body-cell-assignedTo="props">
+                  <q-td :props="props">
+                    {{ props.row.assignedTo == null ? "NA" : props.row.assignedTo.name }}
+                  </q-td>
+                </template>
+                <template v-slot:body-cell-tid="props">
+                  <q-td :props="props">
+                    {{ props.row.tid }}
+                  </q-td>
+                </template>
+                <template v-slot:body-cell-actionContact="props">
+                  <q-td :props="props">
+                    <q-btn
+                      highlight
+                      push
+                      class="q-mx-sm"
+                      color="blue"
+                      size="sm"
+                      @click="fnContactDetails(props.row)"
+                      >Click to View</q-btn
+                    >
+                  </q-td>
+                </template>
+                <template v-slot:body-cell-dateCreated="props">
+                  <q-td :props="props">
+                    {{ $moment(props.row.createdDate).format("Do MMM Y") }}
+                  </q-td>
+                </template>
+                <template v-slot:body-cell-tat="props">
+                  <q-td :props="props">
+                    <span :style="getHoursAgoColor(props.row.createdDate)">{{
+                      getHoursAgo(props.row.createdDate)
+                    }}</span>
+                  </q-td>
+                </template>
+                <template v-slot:body-cell-actionLog="props">
+                  <q-td :props="props">
+                    <q-btn
+                      highlight
+                      push
+                      class="q-mx-sm"
+                      color="blue"
+                      size="sm"
+                      @click="fnCrmLogsView(props.row)"
+                      >Click to View</q-btn
+                    >
+                  </q-td>
+                </template>
+                <template v-slot:body-cell-actionPickTickets="props">
+                  <q-td :props="props">
+                    <q-btn
+                      v-if="props.row.serviceRequestTicketStatus == 5"
+                      highlight
+                      push
+                      class="q-mx-sm"
+                      color="positive"
+                      size="sm"
+                      @click="fnPickTicket(props.row)"
+                      >Pick Ticket</q-btn
+                    >
+                  </q-td>
+                </template>
+                <template v-slot:body-cell-actionReassign="props">
+                  <q-td :props="props">
+                    <q-btn
+                      v-if="props.row.serviceRequestTicketStatus == 2"
+                      highlight
+                      push
+                      class="q-mx-sm"
+                      color="negative"
+                      size="sm"
+                      @click="fnReassignTicket(props.row)"
+                      >Re-Assign</q-btn
+                    >
+                  </q-td>
+                </template>
            
-       
-            <template slot="top">
+            <template v-slot:top>
               <div class="col-md-5">
                 <q-input
                   clearable
@@ -655,17 +634,6 @@ export default {
           icon: "thumb_down"
         });
       } 
-      // else if (
-      //   self.formData.serviceRequestMode == "Direct Dispatch" &&
-      //   self.formData.podNumber == null
-      // ) {
-      //   self.$q.notify({
-      //     color: "negative",
-      //     position: "bottom",
-      //     message: "Pod Number cannot be empty!",
-      //     icon: "thumb_down"
-      //   });
-      // } 
  
       else if(self.formData.assignTo.region != null && (self.formData.assignTo.id == null || self.formData.assignTo.id == '')){
            this.$q.loading.show({
@@ -691,7 +659,7 @@ export default {
               this.$q.notify({
                 color: "positive",
                 position: "bottom",
-                message: res.body.data,
+                message: res.data.data,
                 icon: "thumb_up"
               });
               this.$q.loading.hide();
@@ -704,7 +672,7 @@ export default {
               self.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: res.body.data,
+                message: res.data.data,
                 icon: "thumb_down"
               });
               this.$q.loading.hide();
@@ -715,7 +683,7 @@ export default {
             self.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.data,
+              message: error.data.data,
               icon: "thumb_down"
             });
             this.$q.loading.hide();
@@ -738,82 +706,6 @@ export default {
           icon: "thumb_down"
         });
       }
-        // else {
-        // this.$q.loading.show({
-        //   delay: 100, // ms
-        //   spinnerColor: "purple-9",
-        //   message: "Please wait.."
-        // });
-        // let marsDeviceIdsCooked = [];
-        // self.formData.marsDeviceIdsCooked.map(function(value) {
-        //   value.podNumber = self.formData.podNumber;
-        //   value.serviceRequestMode = self.formData.serviceRequestMode;
-        //   // value.assignedTo = self.formData.assignTo.id;
-        //   marsDeviceIdsCooked.push(value);
-        // });
-        // let postValues = {
-        //   // action: this.$MARS_DEVICE_STATUS_SAT_ASSIGNED,
-        //   request: marsDeviceIdsCooked,
-        //   // triggerWelcomeMail: self.formData.triggerWelcomeMail,
-        //   userId: self.formData.assignTo.id
-        // };
-        // self
-        //   .PHONEPE_SERVICE_REQUEST_UNASSIGED_TO_ASSIGNED_STATE(postValues)
-        //   .then(res => {
-        //     if (res.status == 200 && res.data.data.serviceRequest != null) {
-        //       this.formData.marsDeviceIdsCooked = [];
-        //       this.formData.assignTo = "";
-        //       this.$q.notify({
-        //         color: "positive",
-        //         position: "bottom",
-        //         message: "Successfully assigned!",
-        //         icon: "thumb_up"
-        //       });
-        //       this.$q.loading.hide();
-        //       this.ajaxLoadAllLeadInfo1({
-        //         pagination: this.paginationControl,
-        //         filter: this.filterSearch
-        //       });
-        //     } else if (res.status == 200 && res.data.data.Success != null) {
-        //       this.formData.marsDeviceIdsCooked = [];
-        //       this.formData.assignTo = "";
-        //       this.$q.notify({
-        //         color: "positive",
-        //         position: "bottom",
-        //         message: "Successfully assigned!",
-        //         icon: "thumb_up"
-        //       });
-        //       this.$q.loading.hide();
-        //       this.ajaxLoadAllLeadInfo1({
-        //         pagination: this.paginationControl,
-        //         filter: this.filterSearch
-        //       });
-        //     } else if (res.status == 200 && res.data.data.Failed != null) {
-        //       this.$router.push({
-        //         name: "externalServiceAddressFetch",
-        //         params: { data: res }
-        //       });
-        //     } else {
-        //       self.$q.notify({
-        //         color: "negative",
-        //         position: "bottom",
-        //         message: "INTERNAL SERVER ERROR !!",
-        //         icon: "thumb_down"
-        //       });
-        //       this.$q.loading.hide();
-        //     }
-        //   })
-
-        //   .catch(() => {
-        //     self.$q.notify({
-        //       color: "negative",
-        //       position: "bottom",
-        //       message: "Please try again",
-        //       icon: "thumb_down"
-        //     });
-        //     this.$q.loading.hide();
-        //   });
-      // }
     },
 
 
@@ -982,68 +874,6 @@ export default {
       this.paginationControl = pagination;
     },
 
-    // Function to assign implementation manager in implementation queue
-    // assignImplementationUser() {
-    //   let self = this;
-    //   if (self.formData.marsDeviceIdsCooked.length == 0) {
-    //     self.$q.notify({
-    //       color: "negative",
-    //       position: "bottom",
-    //       message: "Select atleast one item to assign",
-    //       icon: "thumb_down"
-    //     });
-    //   } else if (self.formData.assignTo == "") {
-    //     self.$q.notify({
-    //       color: "negative",
-    //       position: "bottom",
-    //       message: "Implementation officer cannot be empty!",
-    //       icon: "thumb_down"
-    //     });
-    //   } else {
-    //     let marsDeviceIdsCooked = [];
-    //     self.formData.marsDeviceIdsCooked.map(function(value) {
-    //       marsDeviceIdsCooked.push(value.id);
-    //     });
-
-    //     let postValues = {
-    //       // action: this.$MARS_DEVICE_STATUS_SAT_ASSIGNED,
-    //       marsDeviceIds: marsDeviceIdsCooked,
-    //       // triggerWelcomeMail: self.formData.triggerWelcomeMail,
-    //       userId: self.formData.assignTo
-    //     };
-    //     self
-    //       .DEVICE_RECOVERY_SUBMIT(postValues)
-    //       .then(() => {
-    //         // self.DEVICE_RECOVERY_UNASSIGNED_LIST();
-    //         // self.ajaxLoadAllLeadInfo();
-    //         this.ajaxLoadAllLeadInfo({
-    //           pagination: this.paginationControl,
-    //           filter: this.filterSearch
-    //         });
-    //         this.ajaxLoadAllLeadInfo1({
-    //           pagination: this.paginationControl1,
-    //           filter: this.filterSearch1
-    //         });
-    //         self.formData.marsDeviceIdsCooked = [];
-    //         self.formData.assignTo = "";
-    //         self.$q.notify({
-    //           color: "positive",
-    //           position: "bottom",
-    //           message: "Successfully assigned!",
-    //           icon: "thumb_up"
-    //         });
-    //       })
-    //       .catch(() => {
-    //         self.$q.notify({
-    //           color: "negative",
-    //           position: "bottom",
-    //           message: "Please try again",
-    //           icon: "thumb_down"
-    //         });
-    //       });
-    //   }
-    // },
-
     // Function to unAssignImplementationUser in implementation queue
     unAssignImplementationUser() {
       let self = this;
@@ -1076,7 +906,7 @@ export default {
             });
             self.formData.marsDeviceIdsCookedUnAssinged = [];
             self.formData.assignTo = "";
-            self.$q.notify({
+            this.$q.notify({
               color: "positive",
               position: "bottom",
               message: "Successfully Unassigned!",
@@ -1130,7 +960,7 @@ export default {
             self.ajaxLoadAllLeadInfo();
             self.formData.marsDeviceIdsCookedUnAssinged = [];
             self.formData.assignTo = "";
-            self.$q.notify({
+            this.$q.notify({
               color: "positive",
               position: "bottom",
               message: "Successfully re assigned !",
@@ -1159,8 +989,6 @@ export default {
       const hoursAgo = differenceInMilliseconds / (1000 * 60 * 60);
 
       return 72 - Math.floor(hoursAgo); // Round down to the nearest whole hour
-
-      console.log(72 - getHoursAgo(dateInMilliseconds));
     },
 
     getHoursAgoColor(dateInMilliseconds) {
@@ -1176,10 +1004,8 @@ export default {
 
       // Round down to the nearest whole hour
       if (colorData > 0) {
-        console.log("COOR DATA>>", colorData);
         return "color: green; font-weight: bold;";
       } else if (colorData < 0) {
-        console.log("COOR DATA<<<", colorData);
         return "color: red; font-weight: bold;";
       } else {
         return "color: gray; font-weight: normal;";

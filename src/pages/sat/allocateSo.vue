@@ -11,24 +11,28 @@
         <!--START: table title -->
         <div class="col-md-4">
           <q-select
-            :disabled="formData.device_type != ''"
-            :class="[formData.device_type != '' ? 'no-pointer-events' : '']"
+            :disable="formData.device_type != ''"
             v-model="formData.region"
             label="Select Region"
-            radio
             color="grey-9"
+            emit-value
+            map-options
             :options="regionOptions"
             @update:model-value="regionBasedSO"
           />
         </div>
         <div class="col-md-3">
           <q-select
-            filter 
+            use-input
+            hide-selected
+            fill-input
+            input-debounce="0"
             clearable
             v-model="formData.so"
             label="Select SO"
-            radio
             color="grey-9"
+            emit-value
+            map-options
             :options="regionBasedSo"
           />
         </div>
@@ -40,8 +44,9 @@
             @update:model-value="fnSetDevicesByDeviceId"
             v-model="formData.device_type"
             label="Select Device Type"
-            radio
             color="grey-9"
+            emit-value
+            map-options
             :options="deviceOptions"
           />
         </div>
@@ -80,11 +85,11 @@
             >
               <q-item-label header style="border-bottom: 1px solid #ccc;">
                 <q-icon
-                  :style="'color:'[formData.device_type.id == item.device.id?'#fff':'#202c3f']"
+                  :style="'color:' + (formData.device_type.id == item.device.id ? '#fff' : '#202c3f')"
                   name="fas fa-tablet-alt"
                 />
                 {{item.device.deviceName}}
-              </q-item-label header>
+              </q-item-label>
               <q-scroll-area
                 style="height:400px"
                 :thumb-style="{
@@ -277,7 +282,12 @@ export default {
             });
           });
       } else {
-        this.$q.notify({ S });
+        this.$q.notify({
+          color: "negative",
+          position: "bottom",
+          message: barcode + " already scanned",
+          icon: "warning"
+        });
       }
     },
 

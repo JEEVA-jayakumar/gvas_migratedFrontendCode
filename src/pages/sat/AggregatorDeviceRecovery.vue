@@ -84,9 +84,10 @@
               @request="ajaxLoadAllLeadInfo"
             >
               <!-- selection="multiple" -->
-              <q-td
+              <template v-slot:body-cell-leadNumber="props">
+  <q-td
               v-if="props.row.leadInformation != null"
-                v-slot:body-cell-leadNumber="props"
+
                 :props="props"
                 class="cursor-pointer"
                 @click="toggleLeadInformation(props.row.leadInformation)"
@@ -95,9 +96,11 @@
                   ># {{ props.row.leadInformation.leadNumber }}</span
                 >
               </q-td>
-              <q-td
+</template>
+              <template v-slot:body-cell-submitToMarsDate="props">
+  <q-td
               v-if="props.row.leadInformation != null"
-                v-slot:body-cell-submitToMarsDate="props"
+
                 :props="props"
                 >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
               >
@@ -115,22 +118,27 @@
               >
                 <div>{{ props.row.deviceAddress }}</div>
               </q-td>
-              <q-td
+</template>
+              <template v-slot:body-cell-tid="props">
+  <q-td
               v-if="props.row.leadInformation != null"
-                v-slot:body-cell-tid="props"
+
                 :props="props"
                 class="customTd"
               >
                 <div class="text-primary">{{ props.row.tid }}</div>
               </q-td>
-              <q-td
+</template>
+              <template v-slot:body-cell-mid="props">
+  <q-td
               v-if="props.row.leadInformation != null"
-                v-slot:body-cell-mid="props"
+
                 :props="props"
                 class="customTd"
               >
                 <div class="text-primary">{{ props.row.mid }}</div>
               </q-td>
+</template>
               <template slot="top">
                 <!--START: table filter,search -->
                 <div class="col-md-5">
@@ -163,9 +171,10 @@
               color="dark"
               @request="ajaxLoadAllLeadInfo1"
             >
-              <q-td
+              <template v-slot:body-cell-leadNumber="props">
+  <q-td
               v-if="props.row.leadInformation != null"
-                v-slot:body-cell-leadNumber="props"
+
                 :props="props"
                 class="cursor-pointer"
                 @click="toggleLeadInformation(props.row.leadInformation)"
@@ -174,9 +183,11 @@
                   ># {{ props.row.leadInformation.leadNumber }}</span
                 >
               </q-td>
-              <q-td
+</template>
+              <template v-slot:body-cell-submitToMarsDate="props">
+  <q-td
               v-if="props.row.leadInformation != null"
-                v-slot:body-cell-submitToMarsDate="props"
+
                 :props="props"
                 >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
               >
@@ -194,17 +205,21 @@
               >
                 <div class="text-primary">{{ props.row.tid }}</div>
               </q-td>
-              <q-td
+</template>
+              <template v-slot:body-cell-mid="props">
+  <q-td
               v-if="props.row.leadInformation != null"
-                v-slot:body-cell-mid="props"
+
                 :props="props"
                 class="customTd"
               >
                 <div class="text-primary">{{ props.row.mid }}</div>
               </q-td>
-              <q-td
+</template>
+              <template v-slot:body-cell-deviceAddress="props">
+  <q-td
               v-if="props.row.leadInformation != null"
-                v-slot:body-cell-deviceAddress="props"
+
                 :props="props"
                 class="customTd customCellLength"
               >
@@ -212,6 +227,7 @@
                   {{ props.row.deviceAddress }}
                 </div>
               </q-td>
+</template>
               <template slot="top">
                 <!--START: table filter,search -->
                 <div class="col-md-5">
@@ -594,7 +610,7 @@ import { required, email, not, or } from '@vuelidate/validators';
               console.log("Sort is not null : ---------- : " + JSON.stringify(this.getAggregatorDeviceRecoveryUnassignedList.sort));
               this.paginationControl1.sortBy = this.getAggregatorDeviceRecoveryUnassignedList.sort[0].property;
               this.paginationControl1.descending = this.getAggregatorDeviceRecoveryUnassignedList.sort[0].ascending;
-              console.log("Pagination Control modified : -------- : " + JSON.stringify(this.paginationControl1));
+              console.log("Pagination Control modified : -------- : " + JSON.stringify(paginationControl1));
             } else {
               console.log("Sort is null : ---------- : ");
               this.paginationControl1.sortBy = "createdAt";

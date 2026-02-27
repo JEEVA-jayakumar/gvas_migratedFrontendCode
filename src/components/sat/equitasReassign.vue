@@ -24,7 +24,7 @@
                                         label="Select Reason List*" />
                                 </div>
                                 <!-- {{formData.Reassign}} -->
-                                <div v-if="this.formData.Reassign == 'Other reason'">
+                                <div v-if="formData.Reassign == 'Other reason'">
                                     <q-input type="textarea" placeholder="Reason Type.." class="q-my-md" color="grey-9"
                                         align="left" value="" v-model="formData.reason" />
                                 </div>
@@ -77,7 +77,7 @@ export default {
     },
 
     beforeMount() {
-        console.log("propRowDetails ------->", JSON.stringify(this.propRowDetails));
+        console.log("propRowDetails ------->", JSON.stringify(propRowDetails));
         this.implementationExecutiveList();
         this.ReassignReasonList();
     },

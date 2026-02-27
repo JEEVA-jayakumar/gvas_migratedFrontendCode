@@ -1,16 +1,15 @@
 <template>
   <div>
-    {{this.propRowDetails.leadName}}
+    {{propRowDetails.leadName}}
     <q-dialog
-      minimized
-      class="customModalOverlay"
       v-model="toggleModel"
       @hide="emitfnshowEditShortLead()"
-      @escape-key="emitfnshowEditShortLead()"
-      :content-css="{padding:'30px',minWidth: '40vw'}"
+      persistent
     >
-      <form>
-        <div class="column group">
+      <q-card style="min-width: 40vw; padding: 30px;">
+        <q-card-section>
+          <form>
+            <div class="column group">
           <div class="col-md-6">
             <div class="text-h6 text-weight-regular">Edit ShortLead</div>
           </div>
@@ -85,6 +84,8 @@
           </div>
         </div>
       </form>
+        </q-card-section>
+      </q-card>
     </q-dialog>
   </div>
 </template>
@@ -171,12 +172,12 @@ export default {
               icon: "thumb_up"
             });
           })
-          .catch(() => {
+          .catch((error) => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.body && error.body.message == null ? "Please Try Again Later !" : (error.body ? error.body.message : "Error saving lead"),
               icon: "thumb_down"
             });
           });

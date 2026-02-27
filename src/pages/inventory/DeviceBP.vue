@@ -22,12 +22,14 @@
         :rows-per-page-options="[5,10,15,20,25]"
         @request="ajaxLoadAllLeadInfo"
       >
-        <q-td
-          v-slot:body-cell-TidCreationDate="props"
+        <template v-slot:body-cell-TidCreationDate="props">
+  <q-td
+
           :props="props"
         >
           <span class="label">{{ $moment(props.row.TidCreationDate).format("Do MMM Y") }}</span>
         </q-td>
+</template>
 
         <template slot="top"  class="bottom-border">
           <!--START: table filter,search -->

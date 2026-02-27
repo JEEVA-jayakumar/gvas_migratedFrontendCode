@@ -2,8 +2,8 @@
   <q-page padding>
     <q-stepper flat ref="stepper" v-model="step" color="primary">
       <q-step default name="campaign" title="Edit Rental Details">
-        {{this.info.datainfo1}}
-        {{this.getImplementedQueue.leadInformation.merchantType.merchantTypeName}}
+        {{info.datainfo1}}
+        {{getImplementedQueue.leadInformation.merchantType.merchantTypeName}}
        
         
         <b>Edit Rental Details</b>
@@ -11,7 +11,7 @@
         <br />
         <b>Device Count : {{formdata.deviceCount}}</b>
        
-        <!-- {{this.getMidBasedList.tids}} -->
+        <!-- {{getMidBasedList.tids}} -->
         <!-- {{formdata.mid}} -->
         <br />
         <br />
@@ -31,7 +31,7 @@
                 class="no-margin"
                 label="Select Rental Plan"
                 :options="dropDown.planOptions"
-                :disable="this.getImplementedQueue.leadInformation.cmsLeadStatus==15"
+                :disable="getImplementedQueue.leadInformation.cmsLeadStatus==15"
                 @update:model-value="fnPlan1"
               />
               <!-- @update:model-value="planSelected" -->
@@ -39,7 +39,7 @@
             <div class="col-xs-12 col-sm-6">
               <q-select
                 clearable
-                :disable="((formdata.plan != this.getImplementedQueue.leadInformation.plan.id)||(this.getImplementedQueue.leadInformation.cmsLeadStatus ==15)||(this.getImplementedQueue.leadInformation.cmsLeadStatus==21))"
+                :disable="((formdata.plan != getImplementedQueue.leadInformation.plan.id)||(getImplementedQueue.leadInformation.cmsLeadStatus ==15)||(getImplementedQueue.leadInformation.cmsLeadStatus==21))"
                 @blur="$v.formdata.paymentOption.$touch"
                 :error="$v.formdata.paymentOption.$error"
                 v-model.trim="formdata.paymentOption"
@@ -74,7 +74,7 @@
               <!-- <p class="caption">Pricing Exception</p> -->
               <q-checkbox
                 v-model="check"
-                :disable="this.getImplementedQueue.leadInformation.cmsLeadStatus==15"
+                :disable="getImplementedQueue.leadInformation.cmsLeadStatus==15"
                 color="positive"
                 label="Pricing Exception"
                 left-label
@@ -130,7 +130,7 @@
               <!-- <p class="caption">Pricing Exception</p> -->
               <q-checkbox
                 v-model="check"
-                :disable="this.getImplementedQueue.leadInformation.cmsLeadStatus==15"
+                :disable="getImplementedQueue.leadInformation.cmsLeadStatus==15"
                 color="positive"
                 label="Pricing Exception"
                 left-label
@@ -152,7 +152,7 @@
                   accept=".png, .jpg, .pdf"
                 />
               </label>
-              &nbsp;{{this.formdata.paymentDocumentFile}}
+              &nbsp;{{formdata.paymentDocumentFile}}
             </q-item>
           </div>
           <div class="col-xs-12 col-sm-6">
@@ -226,7 +226,7 @@
         <q-stepper-navigation>
           <!-- <q-btn color="primary" @click="$refs.stepper.goToStep('create_ad')">Create ad now</q-btn> -->
           <div
-            v-if="((formdata.plan == this.getImplementedQueue.leadInformation.plan.id) && (check==false) && (this.getImplementedQueue.leadInformation.cmsLeadStatus==15))"
+            v-if="((formdata.plan == getImplementedQueue.leadInformation.plan.id) && (check==false) && (getImplementedQueue.leadInformation.cmsLeadStatus==15))"
           >
             <!-- <q-btn class="q-ml-sm" color="primary" @click="sendtoNH(formdata)"
             >Send to mars</q-btn>-->
@@ -242,7 +242,7 @@
             <!-- <q-btn class="q-ml-sm" color="primary" @click="$refs.stepper.next()">Continue</q-btn> -->
           </div>
           <div
-            v-else-if="((formdata.plan == this.getImplementedQueue.leadInformation.plan.id) && (check==false) && (this.getImplementedQueue.leadInformation.cmsLeadStatus==21))"
+            v-else-if="((formdata.plan == getImplementedQueue.leadInformation.plan.id) && (check==false) && (getImplementedQueue.leadInformation.cmsLeadStatus==21))"
           >
             <!-- <q-btn class="q-ml-sm" color="primary" @click="sendtoNH(formdata)"
             >Send to mars</q-btn>-->
@@ -258,7 +258,7 @@
             <!-- <q-btn class="q-ml-sm" color="primary" @click="$refs.stepper.next()">Continue</q-btn> -->
           </div>
           <div
-            v-else-if="((formdata.plan == this.getImplementedQueue.leadInformation.plan.id) && (check==false) && (this.getImplementedQueue.leadInformation.cmsLeadStatus==19) || (this.getImplementedQueue.leadInformation.cmsLeadStatus==17))"
+            v-else-if="((formdata.plan == getImplementedQueue.leadInformation.plan.id) && (check==false) && (getImplementedQueue.leadInformation.cmsLeadStatus==19) || (getImplementedQueue.leadInformation.cmsLeadStatus==17))"
           >
             <!-- <q-btn class="q-ml-sm" color="primary" @click="sendtoNH(formdata)"
             >Send to mars</q-btn>-->
@@ -274,7 +274,7 @@
             <!-- <q-btn class="q-ml-sm" color="primary" @click="$refs.stepper.next()">Continue</q-btn> -->
           </div>
           <div
-            v-else-if="((formdata.plan != this.getImplementedQueue.leadInformation.plan.id) && (check==false))"
+            v-else-if="((formdata.plan != getImplementedQueue.leadInformation.plan.id) && (check==false))"
           >
             <!-- &&(formdata.paymentOption == 1 || formdata.paymentOption == 2 || formdata.paymentOption == 3) -->
             <q-btn class="q-ml-sm" color="primary" @click="sendtoFinance(formdata)">Send to Finance</q-btn>
@@ -288,7 +288,7 @@
             <!-- <q-btn class="q-ml-sm" color="primary" @click="$refs.stepper.next()">Continue</q-btn> -->
           </div>
           <div
-            v-else-if="((formdata.plan != this.getImplementedQueue.leadInformation.plan.id || formdata.plan == this.getImplementedQueue.leadInformation.plan.id) && (check==true))"
+            v-else-if="((formdata.plan != getImplementedQueue.leadInformation.plan.id || formdata.plan == getImplementedQueue.leadInformation.plan.id) && (check==true))"
           >
             <q-btn class="q-ml-sm" color="primary" @click="sendtoNH(formdata1)">Send to RSM</q-btn>
             <!-- <q-btn
@@ -1135,7 +1135,7 @@
               <q-item-label>
                 <div class="text-body1">
                   Merchant type:
-                  <span class="text-weight-medium">{{this.getImplementedQueue.leadInformation.merchantType.merchantTypeName}}</span>
+                  <span class="text-weight-medium">{{getImplementedQueue.leadInformation.merchantType.merchantTypeName}}</span>
                 </div>
               </q-item-label>
             </q-item-section>
@@ -1200,7 +1200,7 @@
           </q-item>
           <!-- START >> (Optional) payment document file == bank subvention  -->
           
-          <div v-if="this.getImplementedQueue.leadInformation.merchantType.merchantTypeName == 0" class="full-width text-body1 q-pa-sm">
+          <div v-if="getImplementedQueue.leadInformation.merchantType.merchantTypeName == 0" class="full-width text-body1 q-pa-sm">
             <p>No documents available to display</p>
           </div>
           <div v-else class="group">
@@ -1523,7 +1523,7 @@
            
           </div>
           <div class="col-md-6">
-           <q-select :disable="this.getImplementedQueue.leadInformation.cmsLeadStatus==22"
+           <q-select :disable="getImplementedQueue.leadInformation.cmsLeadStatus==22"
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="merchant.paymentDetails.rentalPlanCode"
@@ -2313,7 +2313,7 @@ export default {
             });
             this.$router.push("/sat/change/management");
             // var self = this;
-            // Object.keys(this.formData).forEach(function(key, index) {
+            // Object.keys(formData).forEach(function(key, index) {
             //   self.formData[key] = "";
             // });
           })
@@ -2326,7 +2326,7 @@ export default {
               message: error.data.message,
             });
             // var self = this;
-            // Object.keys(this.formData).forEach(function(key, index) {
+            // Object.keys(formData).forEach(function(key, index) {
             //   self.formData[key] = "";
             // });
           });
@@ -2447,7 +2447,7 @@ export default {
           });
           this.$router.push("/sat/change/management");
           // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
+          // Object.keys(formData).forEach(function(key, index) {
           //   self.formData[key] = "";
           // });
         })
@@ -2460,7 +2460,7 @@ export default {
             message: error.data.message,
           });
           // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
+          // Object.keys(formData).forEach(function(key, index) {
           //   self.formData[key] = "";
           // });
         });
@@ -2840,7 +2840,7 @@ export default {
     },
     fnGetMerchantTypeValue(inputValue) {
       let merchantDocumentCategory = _.find(
-        this.getShortLeadInfoDocumentTypes,
+        getShortLeadInfoDocumentTypes,
         (o) => o.merchantType === inputValue
       );
       let arr = {
@@ -3054,7 +3054,7 @@ export default {
             });
 
             // var self = this;
-            // Object.keys(this.formData).forEach(function(key, index) {
+            // Object.keys(formData).forEach(function(key, index) {
             //   self.formData[key] = "";
             // });
           })
@@ -3088,7 +3088,7 @@ export default {
             //                 // )}`;
             //                 // let fieldErrorFound = eval(splittingErrorField);
             //                 // fieldErrorFound.$model = "";
-            //                 // OThis.$set(OThis.error.tab, splitted[1], true);
+            //                 // OThis.error.tab[splitted[1]] = true;
 
             //                 let generateErrorMessage = eval(
             //                   `OThis.error.field.${splitted.join(".")}`
@@ -3157,7 +3157,7 @@ export default {
           });
 
           // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
+          // Object.keys(formData).forEach(function(key, index) {
           //   self.formData[key] = "";
           // });
         })
@@ -3170,7 +3170,7 @@ export default {
             message: error.data.message,
           });
           // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
+          // Object.keys(formData).forEach(function(key, index) {
           //   self.formData[key] = "";
           // });
         });
@@ -3643,17 +3643,17 @@ for(var i=0;i<this.formdata.tid.length
     },
     /* IFSC bank search result */
     residentStateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+      done(this.COMMON_FILTER_FUNCTION(stateOptions, terms));
     },
     registeredStateSelected(item) {
       this.merchant.companyinformation.registeredStateName = item.label;
       this.merchant.companyinformation.registeredStateRefCode = item.value;
     },
     residentStateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+      done(this.COMMON_FILTER_FUNCTION(stateOptions, terms));
     },
     residentCitySearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+      done(this.COMMON_FILTER_FUNCTION(cityOptions, terms));
     },
     registeredCitySelected(item) {
       this.merchant.companyinformation.registeredCityName = item.label;

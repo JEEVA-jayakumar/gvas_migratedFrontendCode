@@ -1,7 +1,7 @@
 <template>
   <div>
      <q-dialog
-        position="right"
+
         class="customModalOverlay"
         maximized
         v-model="showEditUser"  
@@ -31,13 +31,13 @@
             <div class="q-px-md">
               <!-- <div class="q-pa-md">
                 <div class="row gutter-sm q-py-sm items-center bottom-border">
-                  <div v-for="radioSale in propGetAllHierarchiesData" :key="radioSale.id">
-                    <q-radio v-model="formData.addUserDetails.hierarchy.id"
-                    class="no-pointer-events"  input="fnChangeRoleBasedOnHeirarchy(radioSale.value)" :val="radioSale.value" color="purple-9">
+                  <div v-for="Sale in propGetAllHierarchiesData" :key="Sale.id">
+                    <q- v-model="formData.addUserDetails.hierarchy.id"
+                    class="no-pointer-events"  input="fnChangeRoleBasedOnHeirarchy(Sale.value)" :val="Sale.value" color="purple-9">
                       <q-chip color="blue-grey-2" class="text-weight-regular text-grey-8">
-                        {{radioSale.label}}
+                        {{Sale.label}}
                       </q-chip>
-                    </q-radio>
+                    </q->
                   </div>
                 </div>
               </div>  -->
@@ -107,7 +107,7 @@
                     <q-select
                       v-model="formData.addUserDetails.state.id"
                       label="*State"
-                      radio
+
                       class="text-weight-regular text-grey-8" color="grey-9"
                       :options="propGetAllStatesData"
                     />
@@ -124,7 +124,7 @@
                   <div v-for="propFilterRole in propFilterRoles" :key="propFilterRole.value">
                       <q-checkbox 
                       v-model="formData.addUserDetails.tempRoles" 
-                      @change="$v.formData.formData.addUserDetails.tempRoles.$touch()"
+                      @update:model-value="$v.formData.addUserDetails.tempRoles.$touch()"
                       :error="$v.formData.addUserDetails.tempRoles.$error" 
                       :val="propFilterRole.label" 
                       color="purple-9">

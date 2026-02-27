@@ -3,10 +3,10 @@
     <!-- START >> Display attached documents -->
     <q-list no-border class="no-padding">
       <!-- START >> (Mandatory) Application form  -->
-      <q-item separator class="text-body1 text-dark bg-grey-4 text-weight-medium">
+      <q-item class="text-body1 text-dark bg-grey-4 text-weight-medium">
         <q-item-section>Application Form</q-item-section>
       </q-item>
-      <q-item separator class="text-body1">
+      <q-item class="text-body1">
         <q-item-section>
           <div class="full-width">
             <!-- START >>If document type is PDF format -->
@@ -59,36 +59,39 @@
               v-if="index.toString()==documents[0].subDocumentType"
             >
               <div class="col-md-12 text-body1">
-                <q-expansion-item separator indent icon-toggle opened multiline class="full-width">
-                  <template slot="header">
-                    <q-item-section icon="attach_file"/>
-                    <q-item-section
-                      class="text-body1"
-                      :caption="documents[0].uploadedDocuments.length + 'Document(s)'"
-                      :label="index"
-                    />
+                <q-expansion-item class="full-width" opened>
+                  <template v-slot:header>
+                    <q-item-section avatar>
+                      <q-icon name="attach_file" />
+                    </q-item-section>
+                    <q-item-section>
+                      <q-item-label class="text-body1">{{index}}</q-item-label>
+                      <q-item-label caption>{{documents[0].uploadedDocuments.length}} Document(s)</q-item-label>
+                    </q-item-section>
                     <q-item-section
                       v-if="documents[0].documentVerifiedStatus == 2 && documents[0].uploadedDocuments.length > 0"
-                      right
+                      side
                     >
-                      <q-btn
-                        round
-                        size="xs"
-                        class="q-ma-xs"
-                        color="green"
-                        icon="fas fa-check"
-                        @click="fnDocumentApproveModal(documents[0])"
-                      />
-                      <q-btn
-                        round
-                        size="xs"
-                        class="q-ma-xs"
-                        color="red"
-                        icon="fas fa-times"
-                        @click="fnDocumentRejectModal(documents[0])"
-                      />
+                      <div class="row no-wrap">
+                        <q-btn
+                          round
+                          size="xs"
+                          class="q-ma-xs"
+                          color="green"
+                          icon="fas fa-check"
+                          @click="fnDocumentApproveModal(documents[0])"
+                        />
+                        <q-btn
+                          round
+                          size="xs"
+                          class="q-ma-xs"
+                          color="red"
+                          icon="fas fa-times"
+                          @click="fnDocumentRejectModal(documents[0])"
+                        />
+                      </div>
                     </q-item-section>
-                    <q-item-section v-else right>
+                    <q-item-section v-else side>
                       <span
                         v-if="documents[0].documentVerifiedStatus == 1"
                         class="text-body1 text-weight-medium text-positive"
@@ -130,14 +133,15 @@
             <!-- START >> View type is 1, Category has sub category, hence defined in else part -->
             <div class="row items-center full-width" v-else>
               <div class="col-md-12 text-body1">
-                <q-expansion-item separator indent icon-toggle opened class="full-width">
-                  <template slot="header">
-                    <q-item-section icon="apps"/>
-                    <q-item-section
-                      class="text-body1"
-                      :caption="documents.length + 'Type(s)'"
-                      :label="index"
-                    />
+                <q-expansion-item class="full-width" opened>
+                  <template v-slot:header>
+                    <q-item-section avatar>
+                      <q-icon name="apps" />
+                    </q-item-section>
+                    <q-item-section>
+                      <q-item-label class="text-body1">{{index}}</q-item-label>
+                      <q-item-label caption>{{documents.length}} Type(s)</q-item-label>
+                    </q-item-section>
                   </template>
                   <div
                     class="row items-center full-width bottom-border"
@@ -146,41 +150,41 @@
                   >
                     <div class="col-md-12 text-body1">
                       <q-expansion-item
-                        separator
-                        icon-toggle
                         group="closeOnOpenSubDocument"
-                        multiline
                         class="full-width"
                       >
-                        <template slot="header">
-                          <q-item-section icon="attach_file"/>
-                          <q-item-section
-                            class="text-body1"
-                            :caption="subDocument.uploadedDocuments.length + 'Document(s)'"
-                            :label="subDocument.subDocumentType"
-                          />
+                        <template v-slot:header>
+                          <q-item-section avatar>
+                            <q-icon name="attach_file" />
+                          </q-item-section>
+                          <q-item-section>
+                            <q-item-label class="text-body1">{{subDocument.subDocumentType}}</q-item-label>
+                            <q-item-label caption>{{subDocument.uploadedDocuments.length}} Document(s)</q-item-label>
+                          </q-item-section>
                           <q-item-section
                             v-if="subDocument.documentVerifiedStatus == 2 && subDocument.uploadedDocuments.length > 0"
-                            right
+                            side
                           >
-                            <q-btn
-                              round
-                              size="xs"
-                              class="q-ma-xs"
-                              color="green"
-                              icon="fas fa-check"
-                              @click="fnDocumentApproveModal(subDocument)"
-                            />
-                            <q-btn
-                              round
-                              size="xs"
-                              class="q-ma-xs"
-                              color="red"
-                              icon="fas fa-times"
-                              @click="fnDocumentRejectModal(subDocument)"
-                            />
+                            <div class="row no-wrap">
+                              <q-btn
+                                round
+                                size="xs"
+                                class="q-ma-xs"
+                                color="green"
+                                icon="fas fa-check"
+                                @click="fnDocumentApproveModal(subDocument)"
+                              />
+                              <q-btn
+                                round
+                                size="xs"
+                                class="q-ma-xs"
+                                color="red"
+                                icon="fas fa-times"
+                                @click="fnDocumentRejectModal(subDocument)"
+                              />
+                            </div>
                           </q-item-section>
-                          <q-item-section v-else right>
+                          <q-item-section v-else side>
                             <span
                               v-if="subDocument.documentVerifiedStatus == 1"
                               class="text-body1 text-weight-medium text-positive"

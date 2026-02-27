@@ -33,7 +33,8 @@
             :loading="toggleAjaxLoadFilter"
             @request="ajaxLoadAllLeadInfo"
           >
-            <q-td v-slot:body-cell-actionScanQR="props" :props="props">
+            <template v-slot:body-cell-actionScanQR="props">
+  <q-td  :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
                   :disable="props.row.isScanQrEnabled"
@@ -50,7 +51,9 @@
                 </q-btn>
               </div>
             </q-td>
-            <q-td v-slot:body-cell-actionScanSoundbox="props" :props="props">
+</template>
+            <template v-slot:body-cell-actionScanSoundbox="props">
+  <q-td  :props="props">
               <div v-if="props.row.soundBox == true" class="row no-wrap no-padding">
                 <q-btn
                   :disable="props.row.isScanSoundboxEnabled"
@@ -67,7 +70,9 @@
                 </q-btn>
               </div>
             </q-td>
-            <q-td v-slot:body-cell-actionPrint="props" :props="props">
+</template>
+            <template v-slot:body-cell-actionPrint="props">
+  <q-td  :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
                   :disabled="
@@ -89,7 +94,9 @@
                 </q-btn>
               </div>
             </q-td>
-            <q-td v-slot:body-cell-actionSubmit="props" :props="props">
+</template>
+            <template v-slot:body-cell-actionSubmit="props">
+  <q-td  :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
                   :disabled="
@@ -107,6 +114,7 @@
                 >
               </div>
             </q-td>
+</template>
           </q-table>
         </q-tab-panel>
 <q-tab-panel name="tab-2">
@@ -120,7 +128,8 @@
             :loading="toggleAjaxLoadFilter1"
             @request="ajaxLoadAllLeadInfo1"
           >
-            <q-td v-slot:body-cell-merchantName="props" :props="props">
+            <template v-slot:body-cell-merchantName="props">
+  <q-td  :props="props">
               <template v-if="props.row.pod == true">
                 {{ props.row.podNumber }}
               </template>
@@ -133,7 +142,9 @@
                 />
               </template>
             </q-td>
-            <q-td v-slot:body-cell-actionPodNumber="props" :props="props">
+</template>
+            <template v-slot:body-cell-actionPodNumber="props">
+  <q-td  :props="props">
               <div v-if="props.row.pod == false" class="row no-wrap no-padding">
                 <q-btn
                   highlight
@@ -146,6 +157,7 @@
                 >
               </div>
             </q-td>
+</template>
           </q-table>
         </q-tab-panel>
 <q-tab-panel name="tab-3">
@@ -159,7 +171,8 @@
             :loading="toggleAjaxLoadFilter2"
             @request="ajaxLoadAllLeadInfo2"
           >
-            <q-td v-slot:body-cell-actionReSubmit="props" :props="props">
+            <template v-slot:body-cell-actionReSubmit="props">
+  <q-td  :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
                   highlight
@@ -171,6 +184,7 @@
                 >
               </div>
             </q-td>
+</template>
           </q-table>
         </q-tab-panel>
 </q-tab-panels>

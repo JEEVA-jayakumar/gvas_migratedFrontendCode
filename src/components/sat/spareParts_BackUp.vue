@@ -67,19 +67,25 @@
           }}</q-th>
         </q-tr>
         <!--END: table header -->
-        <q-td v-slot:body-cell-mid="props" :props="props">
+        <template v-slot:body-cell-mid="props">
+  <q-td  :props="props">
           <span class="label text-primary"># {{ props.row.mid }}</span>
         </q-td>
-        <q-td v-slot:body-cell-regionAreaName="props" :props="props">{{
+</template>
+        <template v-slot:body-cell-regionAreaName="props">
+  <q-td  :props="props">{{
           props.row.allocate_region == null
             ? "NA"
             : props.row.allocate_region.regionAreaName
         }}</q-td>
-         <q-td v-slot:body-cell-name="props" :props="props">{{
+</template>
+         <template v-slot:body-cell-name="props">
+  <q-td  :props="props">{{
           props.row.created_by == null
             ? "NA"
             : props.row.created_by.name
         }}</q-td>
+</template>
         <template slot="top" class="bottom-border">
           <!--START: table filter,search,excel download -->
           <div class="col-5">

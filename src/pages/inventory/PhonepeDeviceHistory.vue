@@ -16,12 +16,16 @@
         <q-table table-class="customTableClass" class="q-py-none" :columns="columns" :rows="tableData" :filter="filter"
           :rows-per-page-options="[100, 200, 300, 400, 500]" v-model:pagination="paginationControl"
           :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
-          <q-td v-slot:body-cell-installationDate="props" :props="props">
+          <template v-slot:body-cell-installationDate="props">
+  <q-td  :props="props">
             <span class="label">{{ $moment(props.row.installationDate).format("Do MMM Y") }}</span>
           </q-td>
-          <q-td v-slot:body-cell-deInstallationDate="props" :props="props">
+</template>
+          <template v-slot:body-cell-deInstallationDate="props">
+  <q-td  :props="props">
             <span class="label">{{ $moment(props.row.deInstallationDate).format("Do MMM Y") }}</span>
           </q-td>
+</template>
           
           <template v-slot:top="props" class="bottom-border">
             <!--START: table  :rows-per-page-options="[5,10,15,20,25]"filter,search -->

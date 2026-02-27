@@ -73,7 +73,7 @@
               separator
               color="grey-9"
               :options="assignToOptions"
-              filter
+              use-input
               clearable
               placeholder="Assign To"
             />
@@ -83,7 +83,7 @@
           <div v-if="formData.requestMode == 0">
             <div class="col-md-3 col-sm-6 col-xs-6">
               <q-select
-                filter
+                use-input
                 clearable
                 v-model="formData.assignTo"
                 separator
@@ -130,7 +130,7 @@
         v-model="selectedTab"
         class="shadow-1"
         color="grey-1"
-        @click="goToUnassignedTab"
+        @update:model-value="goToUnassignedTab"
       >
         <q-tab
 
@@ -143,11 +143,11 @@
 </q-tabs>
 <q-tab-panels v-model="selectedTab" animated>
 <q-tab-panel name="unAssigned">
-          <!--START: table Data    :rows="tableData1" -->
           <q-table
+            :rows="tableData1"
             :columns="columnDataUnassigned"
             table-class="customTableClass"
-            :filter="filterSearch1"
+            :use-input="use-inputSearch1"
             selection="multiple"
             :selected="formData.marsDeviceIdsCooked"
             v-model:pagination="paginationControl1"
@@ -157,8 +157,9 @@
             color="dark"
             @request="ajaxLoadAllLeadInfo1"
           >
-            <q-td
-              v-slot:body-cell-leadNumber="props"
+            <template v-slot:body-cell-leadNumber="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
               @click="toggleLeadInformation(props.row.leadInformation)"
@@ -167,8 +168,10 @@
                 ># {{ props.row.leadInformation.leadNumber }}</span
               >
             </q-td>
-            <q-td
-              v-slot:body-cell-submitToMarsDate="props"
+</template>
+            <template v-slot:body-cell-submitToMarsDate="props">
+  <q-td
+
               :props="props"
               >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
             >
@@ -184,15 +187,19 @@
             >
               <div class="text-primary">{{ props.row.tid }}</div>
             </q-td>
-            <q-td
-              v-slot:body-cell-mid="props"
+</template>
+            <template v-slot:body-cell-mid="props">
+  <q-td
+
               :props="props"
               class="customTd"
             >
               <div class="text-primary">{{ props.row.mid }}</div>
             </q-td>
-            <q-td
-              v-slot:body-cell-deviceAddress="props"
+</template>
+            <template v-slot:body-cell-deviceAddress="props">
+  <q-td
+
               :props="props"
               class="customTd customCellLength"
             >
@@ -200,29 +207,30 @@
                 {{ props.row.deviceAddress }}
               </div>
             </q-td>
+</template>
             <template slot="top">
-              <!--START: table filter,search -->
+              <!--START: table use-input,search -->
               <!-- <div class="col-md-5">
                 <q-input
                   clearable
                   color="grey-9"
-                  v-model="filterSearch1"
+                  v-model="use-inputSearch1"
                   placeholder="Type.."
                   label="Search .."
                   class="q-mr-lg q-py-sm"
                 />
               </div> -->
-              <!--ENDv-model: table filter,search -->
+              <!--ENDv-model: table use-input,search -->
             </template>
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
 <q-tab-panel name="assigned">
-          <!--START: table Data    :rows="tableData" -->
           <q-table
+            :rows="tableData"
             :columns="columnDataAssigned"
             table-class="customTableClass"
-            :filter="filterSearch" v-model:pagination="paginationControl"
+            :use-input="use-inputSearch" v-model:pagination="paginationControl"
             v-model:selected="formData.marsDeviceIdsCookedUnAssinged"
             row-key="id"
             :loading="tableAjaxLoading"
@@ -236,8 +244,9 @@
 
                  </q-tr>
             </template> -->
-            <q-td
-              v-slot:body-cell-leadNumber="props"
+            <template v-slot:body-cell-leadNumber="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
               @click="toggleLeadInformation(props.row.leadInformation)"
@@ -246,8 +255,10 @@
                 ># {{ props.row.leadInformation.leadNumber }}</span
               >
             </q-td>
-            <q-td
-              v-slot:body-cell-submitToMarsDate="props"
+</template>
+            <template v-slot:body-cell-submitToMarsDate="props">
+  <q-td
+
               :props="props"
               >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
             >
@@ -263,22 +274,28 @@
             >
               <div>{{ props.row.deviceAddress }}</div>
             </q-td>
+</template>
 
-            <q-td
-              v-slot:body-cell-tid="props"
+            <template v-slot:body-cell-tid="props">
+  <q-td
+
               :props="props"
               class="customTd"
             >
               <div class="text-primary">{{ props.row.tid }}</div>
             </q-td>
-            <q-td
-              v-slot:body-cell-mid="props"
+</template>
+            <template v-slot:body-cell-mid="props">
+  <q-td
+
               :props="props"
               class="customTd"
             >
               <div class="text-primary">{{ props.row.mid }}</div>
             </q-td>
-            <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+            <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
               <q-btn
                 highlight
                 push
@@ -300,14 +317,15 @@
                 >Reject</q-btn
               >
             </q-td>
+</template>
 
             <template slot="top">
-              <!--START: table filter,search -->
+              <!--START: table use-input,search -->
               <!-- <div class="col-md-5">
                 <q-input
                   clearable
                   color="grey-9"
-                  v-model="filterSearch"
+                  v-model="use-inputSearch"
                   placeholder="Type.."
                   label="Search .."
                   class="q-mr-lg q-py-sm"
@@ -323,7 +341,7 @@
             :rows="closedDatas"
             :columns="columns"
             table-class="customTableClass"
-            :filter="filterSearch2" v-model:pagination="paginationControl2"
+            :use-input="use-inputSearch2" v-model:pagination="paginationControl2"
             v-model:selected="formData.marsDeviceIdsCookedUnAssinged"
             row-key="id"
             :loading="tableAjaxLoading"
@@ -337,8 +355,9 @@
 
                  </q-tr>
             </template> -->
-            <q-td
-              v-slot:body-cell-leadNumber="props"
+            <template v-slot:body-cell-leadNumber="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
               @click="toggleLeadInformation(props.row.leadInformation)"
@@ -347,8 +366,10 @@
                 ># {{ props.row.leadInformation.leadNumber }}</span
               >
             </q-td>
-            <q-td
-              v-slot:body-cell-submitToMarsDate="props"
+</template>
+            <template v-slot:body-cell-submitToMarsDate="props">
+  <q-td
+
               :props="props"
               >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
             >
@@ -364,22 +385,28 @@
             >
               <div>{{ props.row.deviceAddress }}</div>
             </q-td>
+</template>
 
-            <q-td
-              v-slot:body-cell-tid="props"
+            <template v-slot:body-cell-tid="props">
+  <q-td
+
               :props="props"
               class="customTd"
             >
               <div class="text-primary">{{ props.row.tid }}</div>
             </q-td>
-            <q-td
-              v-slot:body-cell-mid="props"
+</template>
+            <template v-slot:body-cell-mid="props">
+  <q-td
+
               :props="props"
               class="customTd"
             >
               <div class="text-primary">{{ props.row.mid }}</div>
             </q-td>
-            <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+            <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
               <q-btn
                 highlight
                 push
@@ -401,14 +428,15 @@
                 >Reject</q-btn
               >
             </q-td>
+</template>
 
             <template slot="top">
-              <!--START: table filter,search -->
+              <!--START: table use-input,search -->
               <!-- <div class="col-md-5">
                 <q-input
                   clearable
                   color="grey-9"
-                  v-model="filterSearch2"
+                  v-model="use-inputSearch2"
                   placeholder="Type.."
                   label="Search .."
                   class="q-mr-lg q-py-sm"
@@ -459,11 +487,11 @@ export default {
 
       closedDatas: [],
       valueToggleMerchantTransaction: false,
-      filter: "",
+      use-input: "",
 
-      filterSearch: "",
-      filterSearch1: "",
-      filterSearch2: "",
+      use-inputSearch: "",
+      use-inputSearch1: "",
+      use-inputSearch2: "",
       selectedTab: "assigned",
       assignTo: "",
       podNumber: "",
@@ -472,7 +500,7 @@ export default {
       tableData: [],
       tableData1: [],
       loading: true,
-      filter_values: "",
+      use-input_values: "",
       requestOptions: [
         {
           label: "Direct Dispatch",
@@ -913,15 +941,15 @@ export default {
   created() {
     this.ajaxLoadAllLeadInfo({
       pagination: this.paginationControl,
-      filter: this.filterSearch,
+      use-input: this.use-inputSearch,
     });
     this.ajaxLoadAllLeadInfo1({
       pagination: this.paginationControl1,
-      filter: this.filterSearch1,
+      use-input: this.use-inputSearch1,
     });
     this.ajaxLoadAllLeadInfoClosed({
       pagination: this.paginationControl2,
-      filter: this.filterSearch2,
+      use-input: this.use-inputSearch2,
     });
     this.getPincodeInformations();
   },
@@ -949,14 +977,14 @@ export default {
     //       this.toggleAjaxLoadFilter = false;
     //     });
     // },
-    // ajaxLoadAllLeadInfoClosed({ pagination, filter }) {
+    // ajaxLoadAllLeadInfoClosed({ pagination, use-input }) {
     //   // we set QTable to "loading" state
     //   this.$q.loading.show({
     //     delay: 0, // ms
     //     spinnerColor: "purple-9",
     //     message: "Fetching data ..",
     //   });
-    //   this.FETCH_ADDITIONAL_TID_DATAS({ pagination, filter })
+    //   this.FETCH_ADDITIONAL_TID_DATAS({ pagination, use-input })
     //     .then((res) => {
     //       // updating pagination to reflect in the UI
     //       this.paginationControl = pagination;
@@ -970,7 +998,7 @@ export default {
     //       this.tableData = this.getadditionalTid.content;
     //       console.log(
     //         "ADDITIONAL TERMINAL TABLE DATA---------->" +
-    //           JSON.stringify(this.tableData)
+    //           JSON.stringify(tableData)
     //       );
     //       if (this.getadditionalTid.sort != null) {
     //         this.paginationControl.sortBy =
@@ -981,7 +1009,7 @@ export default {
 
     //       // finally we tell QTable to exit the "loading" state
     //       this.$q.loading.hide();
-    //       // console.log("Table Datas ---------------------->"+JSON.stringify(this.tableData));
+    //       // console.log("Table Datas ---------------------->"+JSON.stringify(tableData));
     //     })
     //     .catch(() => {
     //       this.$q.loading.hide();
@@ -991,14 +1019,14 @@ export default {
     getPincodeInformations() {
       this.FETCH_ALL_STATES_DATA();
     },
-    ajaxLoadAllLeadInfo1({ pagination, filter }) {
+    ajaxLoadAllLeadInfo1({ pagination, use-input }) {
       // we set QTable to "loading" state
       this.$q.loading.show({
         delay: 0, // ms
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.DEVICE_REPLACEMENT_QUEUE_UNASSIGNED_LIST({ pagination, filter }).then((res) => {
+      this.DEVICE_REPLACEMENT_QUEUE_UNASSIGNED_LIST({ pagination, use-input }).then((res) => {
           this.IMPLEMENTATION_EXECUTIVE_LIST().then((response) => {
             let assumeArr = [];
             this.getImplementationExecutiveList.map(function (value) {
@@ -1032,14 +1060,14 @@ export default {
           this.$q.loading.hide();
         });
     },
-    ajaxLoadAllLeadInfo({ pagination, filter }) {
+    ajaxLoadAllLeadInfo({ pagination, use-input }) {
       // we set QTable to "loading" state
       this.$q.loading.show({
         delay: 0, // ms
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.DEVICE_REPLACEMENT_QUEUE_ASSIGNED_LIST({ pagination, filter }).then((res) => {
+      this.DEVICE_REPLACEMENT_QUEUE_ASSIGNED_LIST({ pagination, use-input }).then((res) => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 
@@ -1065,14 +1093,14 @@ export default {
           this.$q.loading.hide();
         });
     },
-    ajaxLoadAllLeadInfoClosed({ pagination, filter }) {
+    ajaxLoadAllLeadInfoClosed({ pagination, use-input }) {
       // we set QTable to "loading" state
       this.$q.loading.show({
         delay: 0, // ms
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.DEVICE_REPLACEMENT_QUEUE_ASSIGNED_LIST({ pagination, filter }).then((res) => {
+      this.DEVICE_REPLACEMENT_QUEUE_ASSIGNED_LIST({ pagination, use-input }).then((res) => {
           // updating pagination to reflect in the UI
           this.paginationControl2 = pagination;
 
@@ -1104,7 +1132,7 @@ export default {
       if (tab == "unAssigned") {
         let request = {
           pagination: this.paginationControl1,
-          filter: this.filterSearch1,
+          use-input: this.use-inputSearch1,
         };
         this.toggleAjaxLoadFilter = true;
         this.DEVICE_REPLACEMENT_QUEUE_UNASSIGNED_LIST(request)
@@ -1117,7 +1145,7 @@ export default {
       } else if (tab == "assigned") {
         let request = {
           pagination: this.paginationControl,
-          filter: this.filterSearch,
+          use-input: this.use-inputSearch,
         };
         this.toggleAjaxLoadFilter = true;
         this.DEVICE_REPLACEMENT_QUEUE_ASSIGNED_LIST(request)
@@ -1130,7 +1158,7 @@ export default {
       } else {
         this.ajaxLoadAllLeadInfoClosed({
           pagination: this.paginationControl2,
-          filter: this.filter2,
+          use-input: this.use-input2,
         });
       }
     },
@@ -1218,11 +1246,11 @@ export default {
           .then(() => {
             this.ajaxLoadAllLeadInfo({
               pagination: this.paginationControl,
-              filter: this.filterSearch,
+              use-input: this.use-inputSearch,
             });
             this.ajaxLoadAllLeadInfo1({
               pagination: this.paginationControl1,
-              filter: this.filterSearch1,
+              use-input: this.use-inputSearch1,
             });
             self.formData.marsDeviceIdsCooked = [];
             self.formData.assignTo = "";
@@ -1272,7 +1300,7 @@ export default {
             // self.ajaxLoadAllLeadInfo();
             this.ajaxLoadAllLeadInfo({
               pagination: this.paginationControl,
-              filter: this.filterSearch,
+              use-input: this.use-inputSearch,
             });
             self.formData.marsDeviceIdsCookedUnAssinged = [];
             self.formData.assignTo = "";

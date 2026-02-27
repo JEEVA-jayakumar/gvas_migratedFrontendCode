@@ -114,7 +114,7 @@ export default {
     ...mapGetters('iciciStaticQr', ['getAllStaticQrShortLeadDatas'])
   },
   // beforeMount(){
-  //   console.log("leadDetails ---------->",JSON.stringify(this.leadInformation));
+  //   console.log("leadDetails ---------->",JSON.stringify(leadInformation));
   // },
 
   methods: {

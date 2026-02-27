@@ -431,7 +431,8 @@
         :loading="toggleAjaxLoadFilter"
         row-key="name"
       >
-        <q-td v-slot:body-cell-action="props" :props="props" v-if="info==6">
+        <template v-slot:body-cell-action="props">
+  <q-td  :props="props" v-if="info==6">
           <div class="row no-wrap no-padding">
             <q-btn
               dense
@@ -457,6 +458,7 @@
             ></q-btn>
           </div>
         </q-td>
+</template>
         <template v-slot:top="props" class="bottom-border">
           <!--START: table filter,search -->
           <div class="col-md-6">
@@ -602,8 +604,8 @@ export default {
     loadDevicesTableData(itemIndex, item) {
       this.toggleAjaxLoadFilter = true;
       this.activeItemId = itemIndex;
-      console.log("DEVICE LOAD DATAS--------------"+JSON.stringify(this.loadDevicesTableData))
-       console.log("DEVICE LOAD DATAS--------------"+JSON.stringify(this.toggleAjaxLoadFilter))
+      console.log("DEVICE LOAD DATAS--------------"+JSON.stringify(loadDevicesTableData))
+       console.log("DEVICE LOAD DATAS--------------"+JSON.stringify(toggleAjaxLoadFilter))
       if (itemIndex == this.$REGIONAL_INVENTORY_ALL_DEVICES) {
         this.inventoryCountTableTitle = item.name;
         this.$emit("emittedForTotalSerialNumbers");
@@ -728,7 +730,7 @@ export default {
           console.log("Action------------->"+JSON.stringify(action))
             .then(response => {
               this.FETCH_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT(
-                this.region
+                region
               );
               let requestParams = {
                 // TODO Please
@@ -802,7 +804,7 @@ export default {
           this.FAULTY_DEVICE(action)
             .then(response => {
               this.FETCH_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT(
-                this.region
+                region
               );
               // FETCH_REGIONAL_INVENTORY_SERIAL_NUMBER_BY_DEVICE(
               //   this.region + "/1"

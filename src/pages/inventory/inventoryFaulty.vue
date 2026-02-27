@@ -125,19 +125,25 @@
         table-class="customTableClass" v-model:pagination="paginationControl"
       >
         <!--START: table body modification -->
-        <q-td
-          v-slot:body-cell-deviceType="props"
+        <template v-slot:body-cell-deviceType="props">
+  <q-td
+
           :props="props"
         >{{props.row.device.name}}</q-td>
-        <q-td
-          v-slot:body-cell-serialNumber="props"
+</template>
+        <template v-slot:body-cell-serialNumber="props">
+  <q-td
+
           :props="props"
         >{{props.row.serialNumber}}</q-td>
-        <q-td v-slot:body-cell-status="props" :props="props">
+</template>
+        <template v-slot:body-cell-status="props">
+  <q-td  :props="props">
           <q-btn flat v-if="props.row.status == true" icon="check" color="positive" />
           <q-btn flat v-else-if="props.row.status == false" icon="clear" color="negative" />
           <q-btn flat color="amber-9" v-else icon="warning" />
         </q-td>
+</template>
         <!-- END: table body modification -->
         <template slot="top"  class="bottom-border">
           <!--START: table filter,search -->
@@ -420,11 +426,12 @@ export default {
           title: "Confirm",
           message:
             "Are you sure want" +
-            (action == 1 ? " to send to repair" : "accept devices") +
+            (action == 1 ? " to send to repair " : " accept devices ") +
             "?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        })
+        .onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -451,7 +458,8 @@ export default {
                 message: "Devices has been updated successfully",
                 icon: "thumb_up"
               });
-            }).onCancel(() => {
+            })
+            .catch(() => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",

@@ -22,10 +22,12 @@
         <q-table table-class="customTableClass" :columns="columns" :rows="tableData" color="grey-9"
           :filter="filterSearch" v-model:pagination="paginationControl" :rows-per-page-options="[5, 10, 15, 20, 25]"
           :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
-          <q-td v-slot:body-cell-updated_at="props" :props="props">{{
+          <template v-slot:body-cell-updated_at="props">
+  <q-td  :props="props">{{
             props.row.updatedAt == null ? "NA" :
               props.row.updatedAt | moment("Do MMM Y")
           }}</q-td>
+</template>
           <template slot="top">
             <!--START: table filter,search -->
             <div class="col-md-5">

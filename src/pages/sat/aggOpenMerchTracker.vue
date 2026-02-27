@@ -23,20 +23,29 @@
           row-key="name"
         >
           <!--START: table body modification -->
-          <q-td v-slot:body-cell-createdAt="props" :props="props">
+          <template v-slot:body-cell-createdAt="props">
+  <q-td  :props="props">
             <span class="label">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</span>
           </q-td>
-          <q-td v-slot:body-cell-submitteSATDate="props" :props="props">
+</template>
+          <template v-slot:body-cell-submitteSATDate="props">
+  <q-td  :props="props">
             <span class="label">{{ $moment(props.row.updatedAt).format("Do MMM Y") }}</span>
           </q-td>
-          <q-td v-slot:body-cell-applicationNumber="props" :props="props">
+</template>
+          <template v-slot:body-cell-applicationNumber="props">
+  <q-td  :props="props">
             <span class="label capitalize">{{props.row.applicationNumber}}</span>
           </q-td>
-          <q-td v-slot:body-cell-leadName="props" :props="props">
+</template>
+          <template v-slot:body-cell-leadName="props">
+  <q-td  :props="props">
             <span class="label capitalize">{{props.row.leadName}}</span>
           </q-td>
-          <q-td
-            v-slot:body-cell-leadNumber="props"
+</template>
+          <template v-slot:body-cell-leadNumber="props">
+  <q-td
+
             class="cursor-pointer"
             @click="toggleLeadInformation(props.row)"
             slot-scope="props"
@@ -44,20 +53,29 @@
           >
             <span class="label text-primary"># {{props.row.leadNumber}}</span>
           </q-td>
-          <q-td v-slot:body-cell-createdBy="props" :props="props">
+</template>
+          <template v-slot:body-cell-createdBy="props">
+  <q-td  :props="props">
             <span class="label">{{props.row.assignedTo.name == null? "NA":props.row.assignedTo.name}}</span>
           </q-td>
-          <q-td v-slot:body-cell-leadAddress="props" :props="props">
+</template>
+          <template v-slot:body-cell-leadAddress="props">
+  <q-td  :props="props">
             <span class="label">{{props.row.leadAddress}}</span>
           </q-td>
-          <q-td
-            v-slot:body-cell-verifiedStatus="props"
+</template>
+          <template v-slot:body-cell-verifiedStatus="props">
+  <q-td
+
             :props="props"
           >{{props.row.verifiedStatus}}</q-td>
+</template>
 
-          <!-- <q-td v-slot:body-cell-status="props" :props="props">
+          <!-- <template v-slot:body-cell-status="props">
+  <q-td  :props="props">
             <span class="label " :class="{'text-green': props.row.status=='Approved', 'text-red': props.row.status=='Rejected', 'text-orange': props.row.status=='Pending with OPS' }">{{props.row.status}}</span>
-          </q-td>-->
+          </q-td>
+</template>-->
           <!--END: table body modification -->
           <template v-slot:top="props">
             <!--START: table fullscreen mode -->

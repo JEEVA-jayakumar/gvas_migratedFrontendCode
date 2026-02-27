@@ -7,7 +7,7 @@
       color="primary"
     ><q-step default name="campaign" title="Edit Rental Details">
        
-        {{this.info.datainfo1}}
+        {{info.datainfo1}}
          <b>Device Count : {{formdata1.deviceCount}}</b><br/><br/>
         <b>Reason : </b>
         <span class="label text-negative">{{getRsmReason.reason}}</span>
@@ -64,7 +64,7 @@
             </div> -->
               <div class="col-xs-12 col-sm-6">
              <!-- <p class="caption">Pricing Exception</p> -->
-                   <q-checkbox v-model="check" :disable="this.getImplementedQueue.leadInformation.cmsLeadStatus==15" color="positive" label="Pricing Exception" left-label />
+                   <q-checkbox v-model="check" :disable="getImplementedQueue.leadInformation.cmsLeadStatus==15" color="positive" label="Pricing Exception" left-label />
             </div>
          </div>
         </div>
@@ -84,7 +84,7 @@
             accept=".png, .jpg, .pdf"
           />
         </label>
-        &nbsp;{{this.formdata.paymentDocumentFile}}
+        &nbsp;{{formdata.paymentDocumentFile}}
             </q-item>
        </div>
         <div class="col-xs-12 col-sm-6">
@@ -119,7 +119,7 @@
       
         <q-stepper-navigation>
           <!-- <q-btn color="primary" @click="$refs.stepper.goToStep('create_ad')">Create ad now</q-btn> -->
-          <div v-if="((formdata.plan == this.getImplementedQueue.leadInformation.plan.id) && (check==false) && (this.getImplementedQueue.leadInformation.cmsLeadStatus==15))">
+          <div v-if="((formdata.plan == getImplementedQueue.leadInformation.plan.id) && (check==false) && (getImplementedQueue.leadInformation.cmsLeadStatus==15))">
           <!-- <q-btn class="q-ml-sm" color="primary" @click="sendtoNH(formdata)"
       >Send to mars</q-btn> -->
       <q-btn class="q-ml-sm" color="primary" @click="sendtoFinance(formdata)">Send to Finance</q-btn>
@@ -134,7 +134,7 @@
 
       <!-- <q-btn class="q-ml-sm" color="primary" @click="$refs.stepper.next()">Continue</q-btn> -->
           </div>
-                    <div v-else-if="((formdata.plan == this.getImplementedQueue.leadInformation.plan.id) && (check==false) && (this.getImplementedQueue.leadInformation.cmsLeadStatus==21))">
+                    <div v-else-if="((formdata.plan == getImplementedQueue.leadInformation.plan.id) && (check==false) && (getImplementedQueue.leadInformation.cmsLeadStatus==21))">
           <!-- <q-btn class="q-ml-sm" color="primary" @click="sendtoNH(formdata)"
       >Send to mars</q-btn> -->
       <q-btn class="q-ml-sm" color="primary" @click="sendtoFinance(formdata)">Send to Finance</q-btn>
@@ -149,7 +149,7 @@
 
       <!-- <q-btn class="q-ml-sm" color="primary" @click="$refs.stepper.next()">Continue</q-btn> -->
           </div>
-                             <div v-else-if="((formdata.plan == this.getImplementedQueue.leadInformation.plan.id) && (check==false) && (this.getImplementedQueue.leadInformation.cmsLeadStatus==19) || (this.getImplementedQueue.leadInformation.cmsLeadStatus==17))">
+                             <div v-else-if="((formdata.plan == getImplementedQueue.leadInformation.plan.id) && (check==false) && (getImplementedQueue.leadInformation.cmsLeadStatus==19) || (getImplementedQueue.leadInformation.cmsLeadStatus==17))">
           <!-- <q-btn class="q-ml-sm" color="primary" @click="sendtoNH(formdata)"
       >Send to mars</q-btn> -->
       <q-btn class="q-ml-sm" color="primary"  @click="sendtoNH(formdata1)">Send to RSM</q-btn>
@@ -164,7 +164,7 @@
 
       <!-- <q-btn class="q-ml-sm" color="primary" @click="$refs.stepper.next()">Continue</q-btn> -->
           </div>
-      <div v-else-if="((formdata.plan != this.getImplementedQueue.leadInformation.plan.id) && (check==false))">
+      <div v-else-if="((formdata.plan != getImplementedQueue.leadInformation.plan.id) && (check==false))">
          <!-- &&(formdata.paymentOption == 1 || formdata.paymentOption == 2 || formdata.paymentOption == 3) -->
           <q-btn class="q-ml-sm" color="primary" @click="sendtoFinance(formdata)"
       >Send to Finance</q-btn>
@@ -177,7 +177,7 @@
               /> -->
                 <!-- <q-btn class="q-ml-sm" color="primary" @click="$refs.stepper.next()">Continue</q-btn> -->
           </div>
-          <div v-else-if="((formdata.plan != this.getImplementedQueue.leadInformation.plan.id || formdata.plan == this.getImplementedQueue.leadInformation.plan.id) && (check==true))">
+          <div v-else-if="((formdata.plan != getImplementedQueue.leadInformation.plan.id || formdata.plan == getImplementedQueue.leadInformation.plan.id) && (check==true))">
                   <q-btn class="q-ml-sm" color="primary" @click="sendtoNH(formdata1)"
       >Send to RSM</q-btn>
                 <!-- <q-btn
@@ -1925,7 +1925,7 @@ export default {
           });
            this.$router.push("/sat/change/management");
           // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
+          // Object.keys(formData).forEach(function(key, index) {
           //   self.formData[key] = "";
           // });
         })
@@ -1938,7 +1938,7 @@ export default {
             message: error.data.message
           });
           // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
+          // Object.keys(formData).forEach(function(key, index) {
           //   self.formData[key] = "";
           // });
         });
@@ -2021,7 +2021,7 @@ export default {
           });
            this.$router.push("/sat/change/management");
           // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
+          // Object.keys(formData).forEach(function(key, index) {
           //   self.formData[key] = "";
           // });
         })
@@ -2034,7 +2034,7 @@ export default {
             message: error.data.message
           });
           // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
+          // Object.keys(formData).forEach(function(key, index) {
           //   self.formData[key] = "";
           // });
         });
@@ -2404,7 +2404,7 @@ export default {
     },
         fnGetMerchantTypeValue(inputValue) {
       let merchantDocumentCategory = _.find(
-        this.getShortLeadInfoDocumentTypes,
+        getShortLeadInfoDocumentTypes,
         o => o.merchantType === inputValue
       );
       let arr = {
@@ -2621,7 +2621,7 @@ export default {
           });
          
           // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
+          // Object.keys(formData).forEach(function(key, index) {
           //   self.formData[key] = "";
           // });
         })
@@ -2653,7 +2653,7 @@ export default {
       //                 // )}`;
       //                 // let fieldErrorFound = eval(splittingErrorField);
       //                 // fieldErrorFound.$model = "";
-      //                 // OThis.$set(OThis.error.tab, splitted[1], true);
+      //                 // OThis.error.tab[splitted[1]] = true;
 
       //                 let generateErrorMessage = eval(
       //                   `OThis.error.field.${splitted.join(".")}`
@@ -2722,7 +2722,7 @@ export default {
           });
          
           // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
+          // Object.keys(formData).forEach(function(key, index) {
           //   self.formData[key] = "";
           // });
         })
@@ -2735,7 +2735,7 @@ export default {
             message: error.data.message
           });
           // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
+          // Object.keys(formData).forEach(function(key, index) {
           //   self.formData[key] = "";
           // });
         });
@@ -2833,7 +2833,7 @@ export default {
            this.$router.push("/sat/change/management")
          
           // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
+          // Object.keys(formData).forEach(function(key, index) {
           //   self.formData[key] = "";
           // });
         })
@@ -2872,7 +2872,7 @@ export default {
       //     });
          
       //     // var self = this;
-      //     // Object.keys(this.formData).forEach(function(key, index) {
+      //     // Object.keys(formData).forEach(function(key, index) {
       //     //   self.formData[key] = "";
       //     // });
       //   })
@@ -2885,7 +2885,7 @@ export default {
       //       message: "MDR Details -" +error.data.message
       //     });
       //     // var self = this;
-      //     // Object.keys(this.formData).forEach(function(key, index) {
+      //     // Object.keys(formData).forEach(function(key, index) {
       //     //   self.formData[key] = "";
       //     // });
       //   });
@@ -2902,7 +2902,7 @@ export default {
       //     });
          
       //     // var self = this;
-      //     // Object.keys(this.formData).forEach(function(key, index) {
+      //     // Object.keys(formData).forEach(function(key, index) {
       //     //   self.formData[key] = "";
       //     // });
       //   })
@@ -2916,7 +2916,7 @@ export default {
       //     });
           
       //     // var self = this;
-      //     // Object.keys(this.formData).forEach(function(key, index) {
+      //     // Object.keys(formData).forEach(function(key, index) {
       //     //   self.formData[key] = "";
       //     // });
       //   });
@@ -3148,17 +3148,17 @@ export default {
     },
     /* IFSC bank search result */
       residentStateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+      done(this.COMMON_FILTER_FUNCTION(stateOptions, terms));
     },
     registeredStateSelected(item) {
       this.merchant.companyinformation.registeredStateName = item.label;
       this.merchant.companyinformation.registeredStateRefCode = item.value;
     },
         residentStateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+      done(this.COMMON_FILTER_FUNCTION(stateOptions, terms));
     },
        residentCitySearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+      done(this.COMMON_FILTER_FUNCTION(cityOptions, terms));
     },
        registeredCitySelected(item) {
       this.merchant.companyinformation.registeredCityName = item.label;

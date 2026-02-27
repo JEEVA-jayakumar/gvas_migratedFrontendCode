@@ -46,7 +46,8 @@
       :columns="columns" v-model:pagination="paginationControl"
       row-key="id"
     >
-      <q-td v-slot:body-cell-action="props" :props="props">
+      <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
         <div class="row no-wrap no-padding">
           <!-- <q-btn
             dense
@@ -71,6 +72,7 @@
           ></q-btn>
         </div>
       </q-td>
+</template>
     </q-table>
 
     <!-- <showPlanModalComponent

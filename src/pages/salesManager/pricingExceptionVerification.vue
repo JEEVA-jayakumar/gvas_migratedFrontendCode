@@ -49,19 +49,24 @@
               row-key="name"
             >
               <!--START: table body modification -->
-              <q-td
-                v-slot:body-cell-leadNumber="props"
+              <template v-slot:body-cell-leadNumber="props">
+  <q-td
+
                 :props="props"
                 class="cursor-pointer"
                 @click="toggleLeadInformation(props.row)"
               >
                 <span class="label text-primary"># {{props.row.leadNumber}}</span>
               </q-td>
-              <q-td
-                v-slot:body-cell-submittoRSMDate="props"
+</template>
+              <template v-slot:body-cell-submittoRSMDate="props">
+  <q-td
+
                 :props="props"
               >{{ $moment(props.row.submittoRSMDate).format("Do MMM Y") }}</q-td>
-              <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+              <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
                 <q-btn
                   highlight
                   push
@@ -71,6 +76,7 @@
                   @click="pushToDetailedScreenRsm(props.row.id)"
                 >Review</q-btn>
               </q-td>
+</template>
               <!--END: table body modification -->
               <template v-slot:top="props" class="bottom-border">
                 <!--START: table filter,search -->
@@ -122,23 +128,28 @@
               row-key="name"
             >
               <!--START: table body modification -->
-              <q-td
-                v-slot:body-cell-leadNumber="props"
+              <template v-slot:body-cell-leadNumber="props">
+  <q-td
+
                 :props="props"
                 class="cursor-pointer"
                 @click="toggleLeadInformation(props.row)"
               >
                 <span class="label text-primary"># {{props.row.leadNumber}}</span>
               </q-td>
-              <!-- <q-td v-slot:body-cell-Status="props" :props="props">
+</template>
+              <!-- <template v-slot:body-cell-Status="props">
+  <q-td  :props="props">
                 <span
                   class="label text-positive"
                   v-if="props.row.leadInformation.verifpropiedCmsPricingStatus==2"
                 >ChangeManagement</span>
 
                 <span class="label text-amber" v-else>New Lead</span>
-              </q-td>-->
-              <q-td v-slot:body-cell-action="props" :props="props">
+              </q-td>
+</template>-->
+              <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
                 <q-btn
                   highlight
                   push
@@ -148,6 +159,7 @@
                   @click="pushToDetailedScreen(props.row.id)"
                 >Review</q-btn>
               </q-td>
+</template>
               <!--END: table body modification -->
               <template v-slot:top="props" class="bottom-border">
                 <!--START: table filter,search -->
@@ -178,20 +190,25 @@
           :filter="filter" v-model:pagination="paginationControl"
           row-key="name"
         >
-          <q-td
-            v-slot:body-cell-submittoRSMDate="props"
+          <template v-slot:body-cell-submittoRSMDate="props">
+  <q-td
+
             :props="props"
           >{{ $moment(props.row.submittoRSMDate).format("Do MMM Y") }}</q-td>
+</template>
           <!--START: table body modification -->
-          <q-td
-            v-slot:body-cell-leadNumber="props"
+          <template v-slot:body-cell-leadNumber="props">
+  <q-td
+
             :props="props"
             class="cursor-pointer"
             @click="toggleLeadInformation(props.row)"
           >
             <span class="label text-primary"># {{props.row.leadNumber}}</span>
           </q-td>
-          <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+          <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
             <q-btn
               highlight
               push
@@ -201,6 +218,7 @@
               @click="pushToDetailedScreenRsm(props.row.id)"
             >Review</q-btn>
           </q-td>
+</template>
           <!--END: table body modification -->
           <template v-slot:top="props" class="bottom-border">
             <!--START: table filter,search -->

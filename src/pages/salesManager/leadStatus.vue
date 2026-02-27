@@ -129,46 +129,46 @@
         :filter="filter" v-model:pagination="paginationControl"
         row-key="name"
       >
-        <q-tr
-          v-slot:body="props"
-          :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']"
-          :props="props"
-          @mouseover="rowHover(props.row.__index)"
-          @click="rowClick(props.row)"
-          class="cursor-pointer"
-        >
-          <q-td v-for="col in props.cols" :key="col.name" :props="props">{{ col.value }}</q-td>
-        </q-tr>
+        <template v-slot:body="props">
+          <q-tr
+            :class="[rowActiveId == props.rowIndex ? 'bg-grey-4 text-dark' : '']"
+            :props="props"
+            @mouseover="rowHover(props.rowIndex)"
+            @click="rowClick(props.row, props.rowIndex)"
+            class="cursor-pointer"
+          >
+            <q-td v-for="col in props.cols" :key="col.name" :props="props">{{ col.value }}</q-td>
+          </q-tr>
+        </template>
       </q-table>
       <!--END: table data -->
       <!-- content -->
-      <q-tabs
-        v-if="!viewTableFormatAndNotTabs"
-        v-model="tabsModel"
-        text-color="grey-14"
-        color="white"
-        two-lines
-        no-pane-border
-      >
-        <!--START: tabs header -->
-        <q-tab
-          @click="fnLoadSOTableData"
-          v-for="tabHeader in tabs.tabsHeader"
-          :key="tabHeader.value"
-          :name="tabHeader.value"
-          :label="tabHeader.label"
-          class="text-dark"
-        />
-        <!--END: tabs header -->
-        <!--START: tabs body -->
-        <!--END: tabs body -->
-</q-tabs>
-<q-tab-panels v-model="tabsModel" animated>
-<q-tab-panel
-          v-for="tBodyContent in tabs.tabsBody"
-          :key="tBodyContent.value"
-          :name="tBodyContent.value"
+      <div v-if="!viewTableFormatAndNotTabs">
+        <q-tabs
+          v-model="tabsModel"
+          active-bg-color="white"
+          active-color="primary"
+          align="justify"
+          no-caps
+          class="shadow-1"
+          @update:model-value="fnLoadSOTableData"
         >
+          <!--START: tabs header -->
+          <q-tab
+            v-for="tabHeader in tabs.tabsHeader"
+            :key="tabHeader.value"
+            :name="tabHeader.value"
+            :label="tabHeader.label"
+            class="text-dark"
+          />
+          <!--END: tabs header -->
+        </q-tabs>
+        <q-tab-panels v-model="tabsModel" animated>
+          <q-tab-panel
+            v-for="tBodyContent in tabs.tabsBody"
+            :key="tBodyContent.value"
+            :name="tBodyContent.value"
+          >
           <!--START: table aging pending/reject -->
           <q-table
             table-class="customTableClass"
@@ -177,22 +177,27 @@
             v-model:filter="filter" v-model:pagination="paginationControl"
             row-key="name"
           >
-            <q-td
-              v-slot:body-cell-shortleadDate="props"
+            <template v-slot:body-cell-shortleadDate="props">
+  <q-td
+
               :props="props"
             >{{ $moment(props.row.shortleadDate).format("Do MMM Y") }}</q-td>
-            <q-td
-              v-slot:body-cell-id="props"
+</template>
+            <template v-slot:body-cell-id="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
               @click="toggleLeadInformation(props.row)"
             >
               <span class="label text-primary">#{{props.row.leadNumber}}</span>
             </q-td>
+</template>
           </q-table>
           <!--END: table table aging pending/reject -->
         </q-tab-panel>
-</q-tab-panels>
+        </q-tab-panels>
+      </div>
     </div>
   </q-page>
 </template>

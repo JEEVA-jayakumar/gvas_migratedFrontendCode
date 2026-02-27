@@ -20,21 +20,21 @@
                 <div class="q-mb-md row justify-start items-center">
                   <q-item-label><b>Address:</b></q-item-label>
                   <div class="q-ml-sm">
-                    {{ this.propRowDetails.address }}
+                    {{ propRowDetails.address }}
                   </div>
                 </div>
                 <div class="q-mb-md row justify-start items-center">
                   <q-item-label><b>City:</b></q-item-label>
-                  <div class="q-ml-sm">{{ this.propRowDetails.city }}</div>
+                  <div class="q-ml-sm">{{ propRowDetails.city }}</div>
                 </div>
                 <div class="q-mb-md row justify-start items-center">
                   <q-item-label><b>Pincode:</b></q-item-label>
-                  <div class="q-ml-sm">{{ this.propRowDetails.pincode }}</div>
+                  <div class="q-ml-sm">{{ propRowDetails.pincode }}</div>
                 </div>
                 <div class="q-mb-md row justify-start items-center">
                   <q-item-label><b>Mobile Number:</b></q-item-label>
                   <div class="q-ml-sm">
-                    {{ this.propRowDetails.contactNumber }}
+                    {{ propRowDetails.contactNumber }}
                   </div>
                 </div>
               </div>
@@ -93,7 +93,7 @@ export default {
 
   created() {},
   beforeMount() {
-    console.log("propRowDetails ------->", JSON.stringify(this.propRowDetails));
+    console.log("propRowDetails ------->", JSON.stringify(propRowDetails));
   },
 
   methods: {

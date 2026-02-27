@@ -96,7 +96,7 @@ export default {
         }
       },
       merchant: {
-        kyc: JSON.parse(JSON.stringify(this.kyc))
+        kyc: JSON.parse(JSON.stringify(kyc))
       }
     };
   },

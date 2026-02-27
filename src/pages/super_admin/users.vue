@@ -441,7 +441,8 @@ export default {
                 : "Are you sure want to delete users?",
             ok: "Continue",
             cancel: "Cancel"
-          }).onOk(() => {
+          })
+          .onOk(() => {
             this.$q.loading.show({
               delay: 100, // ms
               message: "Please Wait",
@@ -466,15 +467,16 @@ export default {
                     message: "Successfully Activated!",
                     icon: "thumb_up"
                   });
-                }).onCancel(error => {
+                })
+                .catch(error => {
                   this.$q.loading.hide();
                   this.$q.notify({
                     color: "negative",
                     position: "bottom",
                     message:
-                      error.body.message == null
-                        ? "Please Try Again Later !"
-                        : error.body.message,
+                      error.body && error.body.message != null
+                        ? error.body.message
+                        : "Please Try Again Later !",
                     icon: "thumb_down"
                   });
                 });
@@ -483,12 +485,6 @@ export default {
                 .then(response => {
                   this.formData.selectedUsersToDelete = [];
                   this.$q.loading.hide();
-                  // this.$q.notify({
-                  //   color: "negative",
-                  //   position: "bottom",
-                  //   message: "Successfully Deactivated!",
-                  //   icon: "thumb_up"
-                  // });
                   this.deteledUsers = response.data.data;
                   this.toggleDeleteUsersModal();
                 })
@@ -498,17 +494,15 @@ export default {
                     color: "negative",
                     position: "bottom",
                     message:
-                      error.body.message == null
-                        ? "Please Try Again Later !"
-                        : error.body.message,
+                      error.body && error.body.message != null
+                        ? error.body.message
+                        : "Please Try Again Later !",
                     icon: "thumb_down"
                   });
                 });
             }
           })
-          .catch(err => {
-            console.log(err);
-            this.$q.loading.hide();
+          .onCancel(() => {
             this.$q.notify({
               color: "negative",
               position: "bottom",

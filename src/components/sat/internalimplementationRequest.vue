@@ -30,14 +30,15 @@
 
           <div class="col-md-3 col-sm-6 col-xs-6">
             <q-select
-              filter
+              use-input
               clearable
               v-model="formData.assignTo"
-              separator
               color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :disable="formData.marsDeviceIdsCooked.length == 0"
               :options="assignToOptions"
-              placeholder="Assign To"
+              emit-value
+              map-options
+              label="Assign To"
             />
             <q-checkbox
               v-model="formData.courier"
@@ -79,7 +80,7 @@
         v-model="selectedTab"
         class="shadow-1"
         color="grey-1"
-        @click="goToUnassignedTab"
+        @update:model-value="goToUnassignedTab"
       >
         <q-tab
 
@@ -114,8 +115,9 @@
             color="dark"
             @request="ajaxLoadAllLeadInfo1"
           >
-            <q-td
-              v-slot:body-cell-leadNumber="props"
+            <template v-slot:body-cell-leadNumber="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
               @click="toggleLeadInformation(props.row.leadInformation)"
@@ -124,7 +126,9 @@
                 ># {{ props.row.leadInformation.leadNumber }}</span
               >
             </q-td>
-            <q-td v-slot:body-cell-LeadSource="props" :props="props">
+</template>
+            <template v-slot:body-cell-LeadSource="props">
+  <q-td  :props="props">
               <span
                 :class="{
                   'text-red':
@@ -135,33 +139,30 @@
                 {{ props.row.leadInformation.leadSource.sourceName }}
               </span>
             </q-td>
+</template>
 
-            <q-td
-              v-slot:body-cell-submitToMarsDate="props"
-              :props="props"
-              >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
-            >
-            <q-td
-              v-slot:body-cell-createdAt="props"
-              :props="props"
-              >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
-            >
-            <!-- <q-td
-              v-slot:body-cell-tid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.tid }}</div>
-            </q-td> -->
-            <q-td
-              v-slot:body-cell-mid="props"
+            <template v-slot:body-cell-submitToMarsDate="props">
+              <q-td :props="props">
+                {{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-createdAt="props">
+              <q-td :props="props">
+                {{ $moment(props.row.createdAt).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-mid="props">
+  <q-td
+
               :props="props"
               class="customTd"
             >
               <div class="text-primary">{{ props.row.mid }}</div>
             </q-td>
-            <q-td
-              v-slot:body-cell-deviceAddress="props"
+</template>
+            <template v-slot:body-cell-deviceAddress="props">
+  <q-td
+
               :props="props"
               class="customTd customCellLength"
             >
@@ -177,6 +178,7 @@
                 {{ props.row.deviceAddress }}
               </div>
             </q-td>
+</template>
             <template v-slot:top="props">
               <!--START: table filter,search -->
               <div class="col-md-5">
@@ -381,7 +383,7 @@ export default {
           label: "Lead Source",
           align: "left",
           field: row => {
-            return row.leadInformation.LeadSource.sourceName;
+            return row.leadInformation.leadSource.sourceName;
           },
           sortable: false
         },
@@ -614,7 +616,7 @@ export default {
     goToUnassignedTab(tab) {
       if (tab == "unAssigned") {
         this.ajaxLoadAllLeadInfo1({
-          pagination: this.paginationControl,
+          pagination: this.paginationControl1,
           filter: this.filterSearch
         });
         this.formData.marsDeviceIdsCooked = [];

@@ -19,53 +19,54 @@
         table-class="customTableClass"
         :rows="tableData"
         :columns="columns"
-        :filter="filter" v-model:pagination="paginationControl"
-        row-key="name"
+        :filter="filter"
+        v-model:pagination="paginationControl"
+        row-key="id"
         :loading="toggleAjaxLoadFilter"
         :rows-per-page-options="[5,10,15,20,25]"
         @request="ajaxLoadAllLeadInfo"
       >
-        <q-td v-slot:body-cell-tid="props" :props="props">
-          <span class="label text-primary"># {{props.row.tid}}</span>
-        </q-td>
-        <q-td v-slot:body-cell-mid="props" :props="props">
-          <span class="label text-primary"># {{props.row.mid}}</span>
-        </q-td>
-        <!-- <q-td
-          v-slot:body-cell-leadName="props"
-          :props="props"
-        >{{props.row.leadInformation.leadName}}</q-td>-->
-        <q-td
-          v-slot:body-cell-leadNumber="props"
-          :props="props"
-          class="cursor-pointer"
-          @click="toggleLeadInformation(props.row.leadInformation)"
-        >
-          <span class="label text-primary"># {{props.row.leadInformation.leadNumber}}</span>
-        </q-td>
-        <!-- <q-td
-          v-slot:body-cell-serialNumber="props"
-          :props="props"
-        >{{props.row.serialNumber== null? 'NA':props.row.serialNumber}}</q-td>-->
-        <q-td
-          v-slot:body-cell-mobileNumber="props"
-          :props="props"
-        >{{props.row.leadInformation == null? 'NA':props.row.leadInformation.contactNumber}}</q-td>
-        <q-td
-          v-slot:body-cell-leadAddress="props"
-          :props="props"
-        >{{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}</q-td>
-        <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-        </q-td>
+        <template v-slot:body-cell-tid="props">
+          <q-td :props="props">
+            <span class="label text-primary"># {{props.row.tid}}</span>
+          </q-td>
+        </template>
+        <template v-slot:body-cell-mid="props">
+          <q-td :props="props">
+            <span class="label text-primary"># {{props.row.mid}}</span>
+          </q-td>
+        </template>
+        <template v-slot:body-cell-leadNumber="props">
+          <q-td
+            :props="props"
+            class="cursor-pointer"
+            @click="toggleLeadInformation(props.row.leadInformation)"
+          >
+            <span class="label text-primary"># {{props.row.leadInformation.leadNumber}}</span>
+          </q-td>
+        </template>
+        <template v-slot:body-cell-mobileNumber="props">
+          <q-td :props="props">
+            {{props.row.leadInformation == null? 'NA':props.row.leadInformation.contactNumber}}
+          </q-td>
+        </template>
+        <template v-slot:body-cell-leadAddress="props">
+          <q-td :props="props">
+            {{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}
+          </q-td>
+        </template>
+        <template v-slot:body-cell-deviceStatusDate="props">
+          <q-td :props="props">
+            <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
+          </q-td>
+        </template>
 
-        <template slot="top" >
+        <template v-slot:top>
           <!--START: table filter,search,excel download -->
           <div class="col-5">
             <q-input
               clearable
               v-model="filter"
-              separator
               color="grey-9"
               placeholder="Type.."
               label="Search by MID, TID, Merchant Name"
@@ -73,7 +74,6 @@
             />
           </div>
           <div class="col-md-6">
-           
             <q-btn 
             square 
             outline 
@@ -82,9 +82,7 @@
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloadmastertrackerlist()" />
-           
           </div>
-          
         </template>
       </q-table>
       <!--END: table lead validation -->
@@ -111,40 +109,23 @@
 </template>
 
 <script>
-import { required, or } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
-
-
-
-import { date } from "quasar";
-const today = new Date();
-const { startOfDate, addToDate, subtractFromDate } = date;
-import moment from "moment";
-
-// import downloadExcel from "vue-json-excel";
 import showMerchantTransactionLevelDetails from "../../components/sat/showMerchantTransactionLevelDetails.vue";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 import DownloadMasterTracker from "../../components/sat/DownloadMasterTracker.vue";
+
 export default {
   name: "merchantTransactionLevel",
-  
-
   components: {
     showMerchantTransactionLevelDetails,
     generalLeadInformation,
     DownloadMasterTracker,
-    
   },
-
   data() {
     return {
       propToggleLeadInformation: false,
       propMasterTrackerList: false,
       addtnLeadInformation: null,
-      
-      // paginationControl: {
-      //   rowsPerPage: 10
-      // },
       toggleAjaxLoadFilter: false,
       paginationControl: {
         rowsNumber: 10,
@@ -156,7 +137,6 @@ export default {
       tableData: [],
       valueToggleMerchantTransaction: false,
       filter: "",
-      //table information
       columns: [
         {
           name: "tid",
@@ -180,27 +160,17 @@ export default {
           label: "Lead Id",
           align: "left",
           field: row => {
-            row.leadInformation.leadNumber;
+            return row.leadInformation ? row.leadInformation.leadNumber : 'NA';
           },
           sortable: false
         },
-        // {
-        //   name: "leadName",
-        //   required: true,
-        //   label: "Merchant Name",
-        //   align: "left",
-        //   field: row => {
-        //     row.leadInformation.leadName;
-        //   },
-        //   sortable: false
-        // },
         {
           name: "leadInformation",
           required: true,
           label: "ME Name",
           align: "left",
           field: row => {
-            return row.leadInformation.leadName;
+            return row.leadInformation ? row.leadInformation.leadName : 'NA';
           },
           sortable: false
         },
@@ -210,28 +180,17 @@ export default {
           label: "Merchant Address",
           align: "center",
           field: row => {
-            row.leadInformation.leadAddress;
+            return row.leadInformation ? row.leadInformation.leadAddress : 'NA';
           },
           sortable: false
         },
-        // {
-        //   name: "serialNumber",
-        //   required: true,
-        //   label: "Device Serial No",
-        //   align: "left",
-        //   field: row => {
-        //     return row.serialNumber == null ? "NA" : row.serialNumber;
-        //   },
-
-        //   sortable: false
-        // },
         {
           name: "deviceName",
           required: true,
           label: "Device type",
           align: "right",
           field: row => {
-            return row.leadInformation.device.deviceName;
+            return row.leadInformation && row.leadInformation.device ? row.leadInformation.device.deviceName : 'NA';
           },
           sortable: false
         },
@@ -261,7 +220,7 @@ export default {
           label: "Implemented by",
           align: "left",
           field: row => {
-            return row.assignedTo == null ? "NA" : row.assignedTo.name+" | "+row.assignedTo.employeeID;
+            return row.assignedTo == null ? "NA" : row.assignedTo.name + " | " + row.assignedTo.employeeID;
           },
           sortable: true
         },
@@ -281,7 +240,7 @@ export default {
           label: "Mobile Number",
           align: "center",
           field: row => {
-            row.leadInformation.contactNumber;
+            return row.leadInformation ? row.leadInformation.contactNumber : 'NA';
           },
           sortable: false
         }
@@ -299,46 +258,24 @@ export default {
       filter: this.filter
     });
   },
-  // created() {
-  //   this.ajaxLoadAllLeadInfo();
-  // },
   methods: {
     ...mapActions("MasterTracker", ["MASTER_TRACKER_LIST"]),
    
-    //Load all short lead info while page loading
-    ajaxLoadAllLeadInfo() {
-      this.toggleAjaxLoadFilter = true;
-      this.MASTER_TRACKER_LIST()
-        .then(response => {
-          this.toggleAjaxLoadFilter = false;
-        })
-        .catch(error => {
-          this.toggleAjaxLoadFilter = false;
-        });
-    },
     ajaxLoadAllLeadInfo({ pagination, filter }) {
-      // we set QTable to "loading" state
       this.$q.loading.show({
-        delay: 0, // ms
+        delay: 0,
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
       this.MASTER_TRACKER_LIST({ pagination, filter }).then(res => {
-          // updating pagination to reflect in the UI
           this.paginationControl = pagination;
-
-          // we also set (or update) rowsNumber
           this.paginationControl.rowsNumber = this.getMasterTrackerList.totalElements;
           this.paginationControl.page = this.getMasterTrackerList.number + 1;
-
-          // then we update the rows with the fetched ones
           this.tableData = this.getMasterTrackerList.content;
           if (this.getMasterTrackerList.sort != null) {
             this.paginationControl.sortBy = this.getMasterTrackerList.sort[0].property;
             this.paginationControl.descending = this.getMasterTrackerList.sort[0].ascending;
           }
-
-          // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
         })
         .catch(() => {
@@ -346,7 +283,6 @@ export default {
         });
     },
 
-    // Function to toggle lead information pop up screen
     toggleLeadInformation(leadDetails) {
       this.propToggleLeadInformation = !this.propToggleLeadInformation;
       if (leadDetails != undefined) {
@@ -356,8 +292,6 @@ export default {
     downloadmastertrackerlist(){
       this.propMasterTrackerList=!this.propMasterTrackerList;
     },
-    
-    
   }
 };
 </script>

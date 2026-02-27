@@ -593,7 +593,7 @@ export default {
     //fnCookUpKYCmarkedDocumentsId
     fnCookUpKYCmarkedDocumentsId(cookedDocumentArr) {
       this.merchantDocumentIds = cookedDocumentArr;
-      //   console.log("this.merchantDocumentIds", this.merchantDocumentIds);
+      //   console.log("merchantDocumentIds", this.merchantDocumentIds);
     },
     // function to approve lead and send to OPS HEAD
     fnApproveLeadData() {

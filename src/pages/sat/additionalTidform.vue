@@ -28,7 +28,7 @@
                         </div>
                         <div class="col-md-6">
                           <q-input color="grey-9" :disable="
-                            this.propRowDetails.leadInformation
+                            propRowDetails.leadInformation
                               .merchantRefCode
 
                           " v-model.trim="additionalTerminal.merchantRefCode" :error="$v.additionalTerminal.merchantRefCode.$error
@@ -66,23 +66,54 @@
                         </div>
 
                         <div class="col-md-6">
-                          <q-input @blur="fnClrCity" color="grey-9"
-                            v-model.trim="additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel"
-                            @update:model-value="fninputTyping($event, 1)" label="City (type min 3 characters)*"
-                            placeholder="Start typing ..*">
-
-                            <q-autocomplete separator @search="marsCitySearch" :debounce="10" :min-characters="3"
-                              @selected="partnerCitySelected" />
-                          </q-input>
+                          <q-select
+                            v-model="additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel"
+                            use-input
+                            hide-selected
+                            fill-input
+                            input-debounce="10"
+                            label="City (type min 3 characters)*"
+                            :options="cityOptions"
+                            @filter="marsCitySearch"
+                            @update:model-value="partnerCitySelected"
+                            @blur="fnClrCity"
+                            @input-value="fninputTyping($event, 1)"
+                            color="grey-9"
+                            placeholder="Start typing ..*"
+                          >
+                            <template v-slot:no-option>
+                              <q-item>
+                                <q-item-section class="text-grey">
+                                  No results
+                                </q-item-section>
+                              </q-item>
+                            </template>
+                          </q-select>
                         </div>
                         <div class="col-md-6">
-                          <q-input @blur="fnClrState" color="black-9"
-                            v-model.trim="additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel"
-                            @update:model-value="fninputTyping($event, 2)" label="state (type min 3 characters)*"
-                            placeholder="Start typing ..*">
-                            <q-autocomplete separator @search="marsStateSearch" :debounce="10" :min-characters="3"
-                              @selected="partnerStateSelected" />
-                          </q-input>
+                          <q-select
+                            v-model="additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel"
+                            use-input
+                            hide-selected
+                            fill-input
+                            input-debounce="10"
+                            label="state (type min 3 characters)*"
+                            :options="stateOptions"
+                            @filter="marsStateSearch"
+                            @update:model-value="partnerStateSelected"
+                            @blur="fnClrState"
+                            @input-value="fninputTyping($event, 2)"
+                            color="black-9"
+                            placeholder="Start typing ..*"
+                          >
+                            <template v-slot:no-option>
+                              <q-item>
+                                <q-item-section class="text-grey">
+                                  No results
+                                </q-item-section>
+                              </q-item>
+                            </template>
+                          </q-select>
                         </div>
                       </div>
                     </div>
@@ -263,12 +294,15 @@ export default {
         });
     },
 
-    marsCitySearch(terms, done) {
-      console.log("done---------->", JSON.stringify(this.cityOptions))
-      done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+    marsCitySearch(val, update, abort) {
+      update(() => {
+        this.cityOptions = this.COMMON_FILTER_FUNCTION(this.cityOptions, val);
+      });
     },
-    marsStateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+    marsStateSearch(val, update, abort) {
+      update(() => {
+        this.stateOptions = this.COMMON_FILTER_FUNCTION(this.stateOptions, val);
+      });
     },
     partnerCitySelected(item) {
       console.log("before partnerCitySelected ITEM------->", JSON.stringify(item))

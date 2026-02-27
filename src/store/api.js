@@ -24,33 +24,73 @@ export default {
       .get(url, {
         ...withAuthHeader(url, config),
         params: request
-      }).then(response => Promise.resolve(response))
-      .catch(error => Promise.reject(error));
+      }).then(response => {
+        response.body = response.data;
+        return Promise.resolve(response);
+      })
+      .catch(error => {
+        if (error.response) {
+          error.body = error.response.data;
+        }
+        return Promise.reject(error);
+      });
   },
   post(url, request, config) {
     return api
       .post(url, request, withAuthHeader(url, config))
-      .then(response => Promise.resolve(response))
-      .catch(error => Promise.reject(error));
+      .then(response => {
+        response.body = response.data;
+        return Promise.resolve(response);
+      })
+      .catch(error => {
+        if (error.response) {
+          error.body = error.response.data;
+        }
+        return Promise.reject(error);
+      });
   },
   put(url, request, config) {
     return api
       .put(url, request, withAuthHeader(url, config))
-      .then(response => Promise.resolve(response))
-      .catch(error => Promise.reject(error));
+      .then(response => {
+        response.body = response.data;
+        return Promise.resolve(response);
+      })
+      .catch(error => {
+        if (error.response) {
+          error.body = error.response.data;
+        }
+        return Promise.reject(error);
+      });
   },
   patch(url, request, config) {
     return api
       .patch(url, request, withAuthHeader(url, config))
-      .then(response => Promise.resolve(response))
-      .catch(error => Promise.reject(error));
+      .then(response => {
+        response.body = response.data;
+        return Promise.resolve(response);
+      })
+      .catch(error => {
+        if (error.response) {
+          error.body = error.response.data;
+        }
+        return Promise.reject(error);
+      });
   },
   delete(url, request, config) {
     return api
       .delete(url, {
         ...withAuthHeader(url, config),
         data: request
-      }).then(response => Promise.resolve(response))
-      .catch(error => Promise.reject(error));
+      }).then(response => {
+        response.body = response.data;
+        return Promise.resolve(response);
+      })
+      .catch(error => {
+        if (error.response) {
+          error.body = error.response.data;
+        }
+        return Promise.reject(error);
+      });
   }
 };

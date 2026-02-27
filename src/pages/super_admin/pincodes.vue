@@ -3,7 +3,8 @@
     <!-- content -->
     <div>
       <q-table :rows="getAllPincodes" table-class="customSATableClass" :columns="columns" :filter="filter" v-model:pagination="serverPagination" row-key="name" :loading="loading" @request="searchRequest" color="grey-9">
-        <q-td v-slot:body-cell-action="props" :props="props">
+        <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
           <div class="row no-wrap no-padding">
             <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md" @click="fnShowEditPincode(props.row)" flat class="text-light-blue">
             </q-btn>
@@ -11,6 +12,7 @@
             </q-btn> -->
           </div>
         </q-td>
+</template>
 
         <template v-slot:top="props">
           <!--START: table title -->

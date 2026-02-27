@@ -31,19 +31,23 @@
       row-key="name"
     >
       <!--START: table body modification -->
-      <q-td v-slot:body-cell-date="props" :props="props">
+      <template v-slot:body-cell-date="props">
+  <q-td  :props="props">
         <span class="label">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</span>
       </q-td>
+</template>
       <!--END: table body modification -->
       <!--START: table body modification -->
-      <q-td
-        v-slot:body-cell-lead_id="props"
+      <template v-slot:body-cell-lead_id="props">
+  <q-td
+
         :props="props"
         class="cursor-pointer"
         @click="toggleLeadInformation(props.row)"
       >
         <span class="label text-primary"># {{props.row.leadNumber}}</span>
       </q-td>
+</template>
       <!--END: table body modification -->
       <template v-slot:top="props">
         <!--START: table fullscreen mode -->

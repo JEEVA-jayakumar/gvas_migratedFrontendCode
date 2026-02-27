@@ -31,7 +31,8 @@
             row-key="userId"
             color="grey-9"
           >
-            <q-td v-slot:body-cell-name="props" :props="props">
+            <template v-slot:body-cell-name="props">
+  <q-td  :props="props">
               <q-btn
                 align="left"
                 dense
@@ -45,8 +46,10 @@
                 class="capitalize"
               />
             </q-td>
+</template>
 
-            <q-td v-slot:body-cell-role="props" :props="props">
+            <template v-slot:body-cell-role="props">
+  <q-td  :props="props">
               <div class="row no-wrap group" v-for="role in props.row.roles" :key="role.role">
                 <!-- <q-chip :style="{ background: role.roleColor}"> -->
                 <q-chip color="light" class="text-dark">
@@ -55,6 +58,7 @@
                 </q-chip>
               </div>
             </q-td>
+</template>
 
             <template v-slot:top="props">
               <!--START: table filter,search -->
@@ -143,9 +147,12 @@
             row-key="userId"
             color="grey-9"
           >
-            <q-td v-slot:body-cell-name="props" :props="props">{{props.row.user.name}}</q-td>
+            <template v-slot:body-cell-name="props">
+  <q-td  :props="props">{{props.row.user.name}}</q-td>
+</template>
 
-            <q-td v-slot:body-cell-role="props" :props="props">
+            <template v-slot:body-cell-role="props">
+  <q-td  :props="props">
               <div class="row no-wrap group" v-for="role in props.row.roles" :key="role.role">
                 <!-- <q-chip :style="{ background: role.roleColor}"> -->
                 <q-chip color="light" class="text-dark">
@@ -154,6 +161,7 @@
                 </q-chip>
               </div>
             </q-td>
+</template>
 
             <template v-slot:top="props">
               <div class="col-md-12 group">

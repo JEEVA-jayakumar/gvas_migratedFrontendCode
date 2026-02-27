@@ -34,34 +34,46 @@
         :filter="filter" v-model:pagination="paginationControl"
         row-key="name"
       >
-        <q-td
-          v-slot:body-cell-dateCreated="props"
+        <template v-slot:body-cell-dateCreated="props">
+  <q-td
+
           :props="props"
         >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-shortleadDate="props"
+</template>
+        <template v-slot:body-cell-shortleadDate="props">
+  <q-td
+
           :props="props"
         >{{ $moment(props.row.shortleadDate).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-leadId="props"
+</template>
+        <template v-slot:body-cell-leadId="props">
+  <q-td
+
           :props="props"
           class="cursor-pointer"
           @click="toggleLeadInformation(props.row)"
         >
           <span class="text-primary cursor-pointer"># {{ props.row.leadNumber}}</span>
         </q-td>
-        <q-td
+</template>
+        <template v-slot:body-cell-leadAddress="props">
+  <q-td
           class="breakAll"
-          v-slot:body-cell-leadAddress="props"
+
           :props="props"
         >{{props.row.leadAddress}}</q-td>
-        <q-td
-          v-slot:body-cell-assignedTo="props"
+</template>
+        <template v-slot:body-cell-assignedTo="props">
+  <q-td
+
           :props="props"
         >{{props.row.assignedTo == null? 'NA':props.row.assignedTo.name}}</q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+        <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
           <q-btn label="Edit" color="amber-9" icon="edit" @click="navigateToEditScreen(props.row)"/>
         </q-td>
+</template>
 
         <template v-slot:top="props" class="bottom-border">
           <!--START: table fullscreen mode -->

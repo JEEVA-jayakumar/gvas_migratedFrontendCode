@@ -56,12 +56,12 @@
                     </q-item>
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>Setup Fees</q-item-section>
-                      <q-item-section v-if="this.getShortLeadInfo.leadSource.id === 114">Rs. {{formData.shortLead.setUpFeeAppliedAmount}}</q-item-section>
+                      <q-item-section v-if="getShortLeadInfo.leadSource.id === 114">Rs. {{formData.shortLead.setUpFeeAppliedAmount}}</q-item-section>
                       <q-item-section v-else>Rs. {{formData.shortLead.setupFees}}</q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>Recurring Fees</q-item-section>
-                      <q-item-section v-if="this.getShortLeadInfo.leadSource.id === 114">Rs. {{formData.shortLead.recurringFeeAppliedAmount}}</q-item-section>
+                      <q-item-section v-if="getShortLeadInfo.leadSource.id === 114">Rs. {{formData.shortLead.recurringFeeAppliedAmount}}</q-item-section>
                       <q-item-section v-else>Rs. {{formData.shortLead.recurringFees}}</q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm text-body1">
@@ -753,7 +753,7 @@ export default {
       });
       this.FETCH_SHORT_LEAD_DATA(this.$route.params.id)
         .then(response => {
-          this.formData["shortLead"] = this.getShortLeadInfo;
+          this.formData.shortLead = this.getShortLeadInfo;
           this.fnMoveToDataEntryScreen();
           this.$q.loading.hide();
         })
@@ -814,8 +814,8 @@ export default {
                     "/data/entry/"
                 );
               });
-            }).onCancel(error => {
-              if (error.data.data.toBeVerifiedDocuments.length > 0) {
+            }).catch(error => {
+              if (error.data && error.data.data && error.data.data.toBeVerifiedDocuments && error.data.data.toBeVerifiedDocuments.length > 0) {
                 let arrayMessage = "";
                 _.map(error.data.data.toBeVerifiedDocuments, oo => {
                   arrayMessage += `${oo}, `;
@@ -834,8 +834,8 @@ export default {
                     }
                   ]
                 });
-              } else {
-                error.data.data.splice("toBeVerifiedDocuments", 1);
+              } else if (error.data && error.data.data) {
+                delete error.data.data.toBeVerifiedDocuments;
                 for (var key in error.data.data) {
                   let arrayMessage = "";
                   _.map(error.data.data[key], oo => {

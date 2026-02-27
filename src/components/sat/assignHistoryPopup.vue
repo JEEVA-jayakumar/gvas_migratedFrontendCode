@@ -29,15 +29,19 @@
         :columns="columns"
         row-key="name"
       >
-        <q-td v-slot:body-cell-date="props" :props="props">
+        <template v-slot:body-cell-date="props">
+  <q-td  :props="props">
           {{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
         >
         <q-td v-slot:body-cell-agentname="props" :props="props">{{
           props.row.soUser.name == null ? "NA" : props.row.soUser.name
         }}</q-td>
-        <!-- <q-td v-slot:body-cell-remarks="props" :props="props">{{
+</template>
+        <!-- <template v-slot:body-cell-remarks="props">
+  <q-td  :props="props">{{
             props.row.reAssignRemark == null ? "NA" : props.row.reAssignRemark
-          }}</q-td> -->
+          }}</q-td>
+</template> -->
       </q-table>
     </q-dialog>
   </q-page>
@@ -131,12 +135,12 @@ export default {
     ...mapActions("serviceRequestPhonepeSat", ["ASSIGN_HISTORY_REMARKS_LIST"]),
 
     assignHistoryList() {
-      this.ASSIGN_HISTORY_REMARKS_LIST(this.formData)
+      this.ASSIGN_HISTORY_REMARKS_LIST(formData)
         .then(response => {
           this.assignHistoryRemarks = this.getassignHistoryLists;
           console.log(
             "ASSIGN_HISTORY_REMARKS_LIST ------->",
-            JSON.stringify(this.assignHistoryRemarks)
+            JSON.stringify(assignHistoryRemarks)
           );
           this.$q.loading.hide();
         })

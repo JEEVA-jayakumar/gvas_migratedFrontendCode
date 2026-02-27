@@ -59,23 +59,22 @@
             />
           </div>
           <div class="col">
-            <q-input
-              type="number"
-              :error="$v.formData.pincode.$error"
-              clearable
-              @clear="fnClearStateCity"
-              color="grey-9"
-              v-model="formData.pincode"
+            <q-select
+              outlined
+              use-input
+              hide-selected
+              fill-input
+              input-debounce="500"
               label="Pincode"
-              placeholder="Pincode"
-            >
-              <q-autocomplete
-                @search="pincodeSearch"
-                :debounce="500"
-                :min-characters="1"
-                @selected="pincodeSelected"
-              />
-            </q-input>
+              v-model="formData.pincode"
+              :options="getAllStatesData"
+              @filter="pincodeSearch"
+              @update:model-value="pincodeSelected"
+              @clear="fnClearStateCity"
+              clearable
+              :error="$v.formData.pincode.$error"
+              @blur="$v.formData.pincode.$touch"
+            />
           </div>
           <div class="col">
             <q-input
@@ -102,38 +101,39 @@
         </div>
 
         <div class="text-body1 uppercase text-weight-medium text-grey-9 q-my-md">Device Details</div>
-        <div class="row group">
+        <div class="row q-col-gutter-md">
           <div class="col">
-            <q-input
+            <q-select
+              outlined
+              use-input
+              hide-selected
+              fill-input
+              input-debounce="500"
+              label="Lead Source"
+              v-model="formData.leadSource.name"
+              :options="leadSourceSelectOptions"
+              @filter="leadSourceSearch"
+              @update:model-value="leadSourceSelected"
+              @clear="fnClearDeviceList"
+              clearable
               :error="$v.formData.leadSource.id.$error"
               @blur="$v.formData.leadSource.id.$touch"
-              clearable
-              @clear="fnClearDeviceList"
-              color="grey-9"
-              v-model="formData.leadSource.name"
-              label="Lead Source"
-              placeholder="Lead Source"
-            >
-              <q-autocomplete
-                @search="leadSourceSearch"
-                :debounce="500"
-                :min-characters="1"
-                @selected="leadSourceSelected"
-              />
-            </q-input>
+            />
             <p class="q-py-sm" v-if="leadSourceSelectOptions.length == 0">No data available</p>
           </div>
           <div class="col">
             <q-select
-              :disable="deviceSelectOptions.length > 0"
-              placeholder="Device Type"
+              outlined
+              :disable="deviceSelectOptions.length === 0"
+              label="Device Type"
               clearable
               color="grey-9"
               v-model="formData.device.id"
               @blur="$v.formData.device.id.$touch"
               :error="$v.formData.device.id.$error"
-              label="Type"
               :options="deviceSelectOptions"
+              emit-value
+              map-options
             />
             <p class="q-py-sm" v-if="deviceSelectOptions.length == 0">No data available</p>
           </div>
@@ -167,10 +167,11 @@
           </div>
         </div>
 
-        <div class="row group q-mt-xs">
+        <div class="row q-col-gutter-md q-mt-xs">
           <div class="col-md-4" v-if="formData.tempAssignedTo == 1">
             <q-select
-              :disable="RSMselectOptions.length > 0"
+              outlined
+              :disable="RSMselectOptions.length === 0"
               @blur="$v.formData.assignedOpsTo.id.$touch"
               :error="$v.formData.assignedOpsTo.id.$error"
               placeholder="Choose from the below"
@@ -179,26 +180,31 @@
               v-model="formData.assignedOpsTo.id"
               label="RSM Name"
               :options="RSMselectOptions"
+              emit-value
+              map-options
             />
-            <p class="q-py-sm" v-if="leadSourceSelectOptions.length == 0">No data available</p>
+            <p class="q-py-sm" v-if="RSMselectOptions.length == 0">No data available</p>
           </div>
           <div class="col-md-4" v-if="formData.tempAssignedTo == 2">
             <q-select
-              :disable="getAllRegionsData.length > 0"
+              outlined
+              :disable="getAllRegionsData.length === 0"
               placeholder="Choose Region"
               clearable
               color="grey-9"
               v-model="region"
               label="Region"
               :options="getAllRegionsData"
+              emit-value
+              map-options
               @clear="fnClearASMList"
               @update:model-value="fnFetchASMList()"
             />
-            <p class="q-py-xs" v-if="leadSourceSelectOptions.length == 0">No data available</p>
           </div>
           <div class="col-md-4" v-if="formData.tempAssignedTo == 2">
             <q-select
-              :disable="ASMselectOptions.length > 0"
+              outlined
+              :disable="ASMselectOptions.length === 0"
               @blur="$v.formData.assignedOpsTo.id.$touch"
               :error="$v.formData.assignedOpsTo.id.$error"
               placeholder="Choose from the below"
@@ -207,6 +213,8 @@
               v-model="formData.assignedOpsTo.id"
               label="ASM Name"
               :options="ASMselectOptions"
+              emit-value
+              map-options
             />
             <p class="q-py-xs" v-if="leadSourceSelectOptions.length == 0">No data available</p>
           </div>

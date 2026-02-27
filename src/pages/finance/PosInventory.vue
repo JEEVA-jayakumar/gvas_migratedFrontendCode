@@ -32,20 +32,26 @@
           </q-tr>
           <!--END: table header -->
 
-          <q-td v-slot:body-cell-deviceType="props" :props="props">
+          <template v-slot:body-cell-deviceType="props">
+  <q-td  :props="props">
             <span class="label text-primary">
               {{ props.row.device ? props.row.device.deviceName : 'NA' }}
             </span>
           </q-td>
+</template>
 
 
-          <q-td v-slot:body-cell-deviceCount="props" :props="props">
+          <template v-slot:body-cell-deviceCount="props">
+  <q-td  :props="props">
           {{props.row == null? 'NA':props.row.deviceCount}}</q-td>
+</template>
 
 
-          <q-td v-slot:body-cell-dateofSubmission="props" :props="props">
+          <template v-slot:body-cell-dateofSubmission="props">
+  <q-td  :props="props">
             <span class="label">{{ $moment(props.row.financeSubmissionDate).format("Do MMM Y") }}</span>
           </q-td>
+</template>
           <template v-slot:top="props" class="bottom-border">
           <!--START: table  :rows-per-page-options="[5,10,15,20,25]"filter,search -->
           <div class="col">
@@ -73,7 +79,8 @@
           <!--END: table filter,search -->
         </template>
 
-          <q-td v-slot:body-cell-action="props" :props="props">
+          <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
                   <q-btn
                     v-if ="props.row.status == 0"
                     push
@@ -112,7 +119,9 @@
                     >View Invoice Copy</q-btn
                   >
                 </q-td>
-          <!-- <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+          <!-- <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
               <q-btn
                highlight
                push
@@ -121,7 +130,8 @@
                @click="openAccept(props.row)"
                size="sm"
                >Approve</q-btn>
-            </q-td> -->
+            </q-td>
+</template> -->
           <!-- <template v-slot:top="props" class="bottom-border" >
             <div class="col-5">
               <q-input

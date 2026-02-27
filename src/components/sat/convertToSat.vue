@@ -1,13 +1,14 @@
 <template>
   <div>
     <q-dialog
-     minimized class="customModalOverlay" 
-    v-model="toggleModel"
-     @hide="emitfnzEditshowConvertToSat(toggleModel)"
-     @escape-key="emitfnzEditshowConvertToSat(toggleModel)" 
-      :content-css="{ padding: '25px', minWidth: '40vw' }">
-      <form>
-        <div class="column group">
+      v-model="toggleModel"
+      @hide="emitfnzEditshowConvertToSat(toggleModel)"
+      persistent
+    >
+      <q-card style="min-width: 40vw; padding: 25px;">
+        <q-card-section>
+          <form>
+            <div class="column group">
           <div class="col-md-12">
             <div class="text-h6 text-weight-regular">Edit WIP List</div>
           </div>
@@ -136,7 +137,7 @@
             <q-input color="grey-9" v-model="formData.deviceCount"  :error="$v.formData.deviceCount.$error"
               label="Device Count"  :disable="deviceFlag"/>
           </div>
-          <div v-if="this.plan == 'mATM'">
+          <div v-if="plan == 'mATM'">
             <div class="col-md-12">
               <q-select color="grey-9" v-model="formData.mAtmOnboardingPlan" :options="dropDown.planNameOptions"
                 label="Select MATM Plans" @update:model-value="fnPlanName" />
@@ -259,7 +260,19 @@
           <div class="col-md-12">
             <q-input v-model.trim="formData.paymentMadeon" :error="$v.formData.paymentMadeon.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON"
-              placeholder="Transaction Made ON" />
+              placeholder="Transaction Made ON" mask="####-##-##">
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                    <q-date v-model="formData.paymentMadeon" mask="YYYY-MM-DD">
+                      <div class="row items-center justify-end">
+                        <q-btn v-close-popup label="Close" color="primary" flat />
+                      </div>
+                    </q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
           </div>
           <div class="col-md-12">Payement Type</div>
           <div class="col-md-12">
@@ -285,7 +298,7 @@
                 <input type="file" name="file" @change="fnUploadApplicationForm($event, document)"
                   accept=".png, .jpg, .pdf" />
               </label>
-              &nbsp;{{ this.formData.paymentDocumentFile }}
+              &nbsp;{{ formData.paymentDocumentFile }}
             </q-item>
           </div>
           <div class="col-md-12" v-if="formData.paymentOption == 3">
@@ -305,6 +318,8 @@
           </div>
         </div>
       </form>
+        </q-card-section>
+      </q-card>
     </q-dialog>
   </div>
 </template>
@@ -344,6 +359,7 @@ export default {
         // }
       ],
       mdrPlan:"",
+      plan: "",
       formData: {
         id: this.propRowDetails.id,
         leadNumber: this.propRowDetails.leadNumber,
@@ -809,11 +825,11 @@ export default {
             this.$q.loading.hide();
             this.$router.push("/sat/lead/validation");
           })
-          .catch(() => {
+          .catch((error) => {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.body && error.body.message == null ? "Please Try Again Later !" : (error.body ? error.body.message : "Error submitting lead"),
               icon: "thumb_down",
             });
             this.$q.loading.hide();
@@ -883,7 +899,7 @@ export default {
     //   this.formData.location = ''
     //   this.MERCHANT_TIER_MAPPING_VILLAGE_BASED_TIER_AND_LOCATION_DETAILS(terms)
     //     .then(() => {
-    //       done(this.COMMON_FILTER_FUNCTION1(this.getMerchantTierMappingVillageBasedTierAndLocationDetails, terms))
+    //       done(this.COMMON_FILTER_FUNCTION1(getMerchantTierMappingVillageBasedTierAndLocationDetails, terms))
     //     })
     //     .catch(() => {
     //       done([])
@@ -896,82 +912,82 @@ export default {
       })
     },
     getdistrict(terms) {
-      let self= this;
+      let self = this;
       let param = {
         Statename: terms
       };
-      
-      self.MERCHANT_TIER_MAPPING_SEARCH_DISTRICT(param)
+
+      this.MERCHANT_TIER_MAPPING_SEARCH_DISTRICT(param)
         .then(() => {
           self.dropDown.merchantDistrict.splice(0);
-          return _.map(self.getMerchantTierMappingDistrictDetails, (item) => {
-          self.dropDown.merchantDistrict.push({
-            value: item.districtName,
-            label: item.districtName
+          return _.map(getMerchantTierMappingDistrictDetails, (item) => {
+            self.dropDown.merchantDistrict.push({
+              value: item.districtName,
+              label: item.districtName
+            })
           })
-         })
-        }) 
+        })
 
     },
     getSubDistrict(terms) {
-      let self= this;
+      let self = this;
       let param = {
         Statename: this.formData.merchantState,
         Districtname: terms,
-      
-      };
-      self.MERCHANT_TIER_MAPPING_SUB_DISTRICT_DETAILS(param)
-      .then(() => {
-        self.dropDown.merchantSubDistrict.splice(0);
-          return _.map(self.getMerchantTierMappingSubDistrictDetails, (item) => {
-          self.dropDown.merchantSubDistrict.push({
-            value: item.subDistrictName,
-            label: item.subDistrictName,
 
+      };
+      this.MERCHANT_TIER_MAPPING_SUB_DISTRICT_DETAILS(param)
+        .then(() => {
+          self.dropDown.merchantSubDistrict.splice(0);
+          return _.map(getMerchantTierMappingSubDistrictDetails, (item) => {
+            self.dropDown.merchantSubDistrict.push({
+              value: item.subDistrictName,
+              label: item.subDistrictName,
+
+            })
           })
-         })
         })
     },
     //getMerchantTierMappingTownOrVillageDetails
     getTownOrVillage(terms) {
-      let self= this;
+      let self = this;
       let param = {
         Statename: this.formData.merchantState,
         Districtname: this.formData.district,
         SubDistrictname: terms,
 
       };
-      self.MERCHANT_TIER_MAPPING_TOWN_OR_VILLAGE_DETAILS(param)
-      .then(() => {
-        self.dropDown.merchantTownOrVillageDetails.splice(0);
-          return _.map(self.getMerchantTierMappingTownOrVillageDetails, (item) => {
-          self.dropDown.merchantTownOrVillageDetails.push({
-            value: item.townVillageName,
-            label: item.townVillageName
+      this.MERCHANT_TIER_MAPPING_TOWN_OR_VILLAGE_DETAILS(param)
+        .then(() => {
+          self.dropDown.merchantTownOrVillageDetails.splice(0);
+          return _.map(getMerchantTierMappingTownOrVillageDetails, (item) => {
+            self.dropDown.merchantTownOrVillageDetails.push({
+              value: item.townVillageName,
+              label: item.townVillageName
+            })
           })
-         })
         })
     },
     getVillageTier(terms) {
-      let self= this;
+      let self = this;
       let param = {
         Statename: this.formData.merchantState,
         Districtname: this.formData.district,
         SubDistrictname: this.formData.subDistrict,
         Villagename: terms,
-     
+
       };
-      self.MERCHANT_TIER_MAPPING_VILLAGE_TIER_DETAILS(param)
-      .then(() => {
-        // self.formData.tier.splice(0);
-          return _.map(self.getMerchantTierMappingVillageTierDetails, (item) => {
+      this.MERCHANT_TIER_MAPPING_VILLAGE_TIER_DETAILS(param)
+        .then(() => {
+          // self.formData.tier.splice(0);
+          return _.map(getMerchantTierMappingVillageTierDetails, (item) => {
             this.formData.tier = self.dropDown.merchantTierDetails
-          // self.dropDown.merchantTierDetails.push({
-          //   value: item,
-          //   label: item
-          // })
-          this.formData.tier = item
-         })
+            // self.dropDown.merchantTierDetails.push({
+            //   value: item,
+            //   label: item
+            // })
+            this.formData.tier = item
+          })
         })
     },
     ajaxLoadDataForDeviceTypeTable() {

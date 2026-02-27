@@ -118,11 +118,14 @@
             }}</q-th>
           </q-tr>
           <!--END: table header -->
-          <q-td v-slot:body-cell-mid="props" :props="props">
+          <template v-slot:body-cell-mid="props">
+  <q-td  :props="props">
             <span class="capitalize">{{ props.row.mid }}</span>
           </q-td>
-          <q-td
-            v-slot:body-cell-leadNumber="props"
+</template>
+          <template v-slot:body-cell-leadNumber="props">
+  <q-td
+
             :props="props"
             class="cursor-pointer"
             @click="toggleLeadInformation(props.row.leadInformation)"
@@ -131,8 +134,10 @@
               ># {{ props.row.leadInformation.leadNumber }}</span
             >
           </q-td>
-          <q-td
-            v-slot:body-cell-HitachiStatus="props"
+</template>
+          <template v-slot:body-cell-HitachiStatus="props">
+  <q-td
+
             :props="props"
           >
             <span class="capitalize">{{
@@ -141,20 +146,25 @@
                 : "NA"
             }}</span>
           </q-td>
-          <q-td v-slot:body-cell-deviceSer="props" :props="props">
+</template>
+          <template v-slot:body-cell-deviceSer="props">
+  <q-td  :props="props">
             <span class="capitalize">{{
               props.row.regionalInventory != null
                 ? props.row.regionalInventory.serialNumber
                 : "NA"
             }}</span>
           </q-td>
-          <q-td v-slot:body-cell-region="props" :props="props">
+</template>
+          <template v-slot:body-cell-region="props">
+  <q-td  :props="props">
             <span class="capitalize">{{
               props.row.leadInformation != null
                 ? props.row.leadInformation.region.regionAreaName
                 : "NA"
             }}</span>
           </q-td>
+</template>
 
           <template slot="top" class="bottom-border">
             <!--START: table filter,search,excel download -->
@@ -417,13 +427,13 @@ export default {
           this.paginationControl.page = this.gethitachiEmiData.number + 1;
           console.log(
             "this.gethitachiEmiData---------------------->" +
-              JSON.stringify(this.gethitachiEmiData)
+              JSON.stringify(gethitachiEmiData)
           );
           // then we update the rows with the fetched ones
           this.tableData = this.gethitachiEmiData.content;
           console.log(
             "this.tableData this.tableData---------------------->" +
-              JSON.stringify(this.tableData)
+              JSON.stringify(tableData)
           );
           if (this.gethitachiEmiData.sort != null) {
             this.paginationControl.sortBy = this.gethitachiEmiData.sort[0].property;
@@ -432,7 +442,7 @@ export default {
 
           // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
-          // console.log("Table Datas ---------------------->"+JSON.stringify(this.tableData));
+          // console.log("Table Datas ---------------------->"+JSON.stringify(tableData));
         })
         .catch(() => {
           this.$q.loading.hide();

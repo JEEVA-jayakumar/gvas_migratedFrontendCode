@@ -47,7 +47,7 @@ export default {
     return {
       enableUploadInventoryBtn: true,
       toggleScanButton: true,
-      inventoryOptionSelected: "serviceRequest"
+      inventoryOptionSelected: "internal"
     };
   },
 

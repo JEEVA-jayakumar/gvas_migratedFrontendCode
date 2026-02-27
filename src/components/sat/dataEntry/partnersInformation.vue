@@ -62,40 +62,54 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
-          :error="v.cityRefLabel.$anyError || v.cityRefCode.$anyError"
-          @blur="v.cityRefCode.$touch()"
-          color="grey-9"
+        <q-select
           v-model="v.$model.cityRefLabel"
+          use-input
+          hide-selected
+          fill-input
+          input-debounce="10"
           label="City (type min 3 characters)*"
+          :options="cityOptionsList"
+          @filter="citySearch"
+          @update:model-value="obj => partnerCitySelected(obj,index)"
+          @blur="v.cityRefCode.$touch()"
+          :error="v.cityRefLabel.$anyError || v.cityRefCode.$anyError"
+          color="grey-9"
           placeholder="Start typing ..*"
         >
-          <q-autocomplete
-            separator
-            @search="citySearch"
-            :debounce="10"
-            :min-characters="3"
-            @selected="obj => partnerCitySelected(obj,index)"
-          />
-        </q-input>
+          <template v-slot:no-option>
+            <q-item>
+              <q-item-section class="text-grey">
+                No results
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
-          :error="v.stateRefLabel.$anyError || v.stateRefCode.$anyError"
-          @blur="v.stateRefCode.$touch()"
-          color="grey-9"
+        <q-select
           v-model="v.$model.stateRefLabel"
+          use-input
+          hide-selected
+          fill-input
+          input-debounce="10"
           label="State (type min 3 characters)*"
+          :options="stateOptionsList"
+          @filter="stateSearch"
+          @update:model-value="obj => partnerStateSelected(obj,index)"
+          @blur="v.stateRefCode.$touch()"
+          :error="v.stateRefLabel.$anyError || v.stateRefCode.$anyError"
+          color="grey-9"
           placeholder="Start typing ..*"
         >
-          <q-autocomplete
-            separator
-            @search="stateSearch"
-            :debounce="10"
-            :min-characters="1"
-            @selected="obj => partnerStateSelected(obj,index)"
-          />
-        </q-input>
+          <template v-slot:no-option>
+            <q-item>
+              <q-item-section class="text-grey">
+                No results
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
@@ -161,6 +175,8 @@ export default {
   props: ["cityOptions", "stateOptions", "constitution", "partnerInformation"],
   data() {
     return {
+      cityOptionsList: this.cityOptions,
+      stateOptionsList: this.stateOptions,
       partnersArr: []
     };
   },
@@ -204,7 +220,7 @@ export default {
     },
     // Checks for value in partners array => Global variable
     getPartnersVisiblity() {
-      return this.$PARTNERS_TAB_ENABLED_ITEMS.includes(this.constitution);
+      return this.$PARTNERS_TAB_ENABLED_ITEMS.includes(constitution);
     }
   },
   methods: {
@@ -213,11 +229,15 @@ export default {
         return oo.label.toLowerCase().includes(terms.toLowerCase());
       });
     },
-    citySearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+    citySearch(val, update, abort) {
+      update(() => {
+        this.cityOptionsList = this.COMMON_FILTER_FUNCTION(this.cityOptions, val);
+      });
     },
-    stateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+    stateSearch(val, update, abort) {
+      update(() => {
+        this.stateOptionsList = this.COMMON_FILTER_FUNCTION(this.stateOptions, val);
+      });
     },
 
     // Partners city selction

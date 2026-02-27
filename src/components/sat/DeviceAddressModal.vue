@@ -120,7 +120,7 @@ export default {
 
     /* Pincode search result */
     pincodeSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateInformation, terms));
+      done(this.COMMON_FILTER_FUNCTION(stateInformation, terms));
     },
     pincodeSelected(item) {
       this.formData.marsDeviceAddress.state = item.value.stateName;

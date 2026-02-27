@@ -32,10 +32,12 @@
         :loading="tableAjaxLoading"
         color="light-blue"
       >
-        <q-td v-slot:body-cell-action="props" :props="props">
+        <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
           <q-btn label="send" icon="close" color="red-6" size="sm" />
           <!-- @click="removeScannedItems(props.row)" -->
         </q-td>
+</template>
         <template v-slot:top="props">
           <!--START: table filter,search -->
           <div class="col-md-5">
@@ -207,10 +209,9 @@ export default {
       this.REACTIVE_FAULTY_SCANNED_DEVICE_DATA(this.tableData);
       console.log(this.tableData);
     },
-    // onBarcodeDestroy() {
-    //   removeListener("keypress");
-    //   removeListener("keydown");
-    // },
+    onBarcodeDestroy() {
+      // Logic for destroy if needed
+    },
 
     openScannerComp() {
       this.scannerToggleOption = !this.scannerToggleOption;
@@ -224,7 +225,7 @@ export default {
     }
     // removeScannedItems(item) {
     //   this.tableData.splice(item.__index);
-    //   this.REACTIVE_FAULTY_SCANNED_DEVICE_DATA(this.tableData);
+    //   this.REACTIVE_FAULTY_SCANNED_DEVICE_DATA(tableData);
     // }
   }
 };

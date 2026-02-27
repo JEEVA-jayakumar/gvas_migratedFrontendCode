@@ -319,7 +319,8 @@ export default {
           message: "Are you sure want to delete hierarchy?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        })
+        .onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -337,17 +338,16 @@ export default {
               });
               this.ajaxLoadDataForHierarchyTable();
               this.$router.push("/super/admin/hierarchy/");
+            })
+            .catch(error => {
               this.$q.loading.hide();
-            }).onCancel(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
                 message: "Please try again!",
                 icon: "thumb_down"
               });
-              this.$q.loading.hide();
             });
-
         })
     },
     fnactive(reqData) {
@@ -358,7 +358,8 @@ export default {
           message: "Are you sure want to Active hierarchy?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        })
+        .onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -366,7 +367,6 @@ export default {
             customClass: "shadow-none"
           });
           let param = {
-            // active: !reqData.active,
             hierarchy: reqData.label,
             hierarchyCode: reqData.shortCode,
             id: reqData.value
@@ -381,17 +381,16 @@ export default {
                 icon: "thumb_up"
               });
               this.ajaxLoadDataForHierarchyTable();
+            })
+            .catch(error => {
               this.$q.loading.hide();
-            }).onCancel(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
                 message: "Please try again!",
                 icon: "thumb_down"
               });
-              this.$q.loading.hide();
             });
-
         })
     },
 
@@ -413,7 +412,8 @@ export default {
           message: "Are you sure want to delete Hierarchy?",
           ok: "Continue",
           cancel: "Cancel",
-        }).onOk(() => {
+        })
+        .onOk(() => {
           this.DELETE_HIERARCHY_BY_HIERARCHY_ID_DATA(HierarchyId)
             .then(response => {
               this.FETCH_ALL_HIERARCHIES_DATA();
@@ -423,11 +423,12 @@ export default {
                 message: "Successfully Deleted!",
                 icon: "thumb_up",
               });
-            }).onCancel(() => {
+            })
+            .catch((error) => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: error.body && error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down",
               });
             });

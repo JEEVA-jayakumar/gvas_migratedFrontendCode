@@ -4,18 +4,19 @@
       <q-tabs
         v-model="activeTab"
         class="shadow-1"
-        color="grey-1"
-        @click="goToCompleteTab"
+        active-color="purple-9"
+        indicator-color="purple-9"
+        align="left"
+        @update:model-value="goToCompleteTab"
       >
         <q-tab
-
-          color="dark"
           name="tab-1"
-          label="Create Bulk Ticket "
+          label="Create Bulk Ticket"
         />
-        <q-tab color="dark" name="tab-2" label="Close Bulk Ticket" />
-</q-tabs>
-<q-tab-panels v-model="activeTab" animated>
+        <q-tab name="tab-2" label="Close Bulk Ticket" />
+      </q-tabs>
+
+      <q-tab-panels v-model="activeTab" animated>
 <q-tab-panel name="tab-1">
           <div class="q-pa-md">
             <div class="row text-center justify-center">
@@ -81,9 +82,9 @@
                 <q-btn
                   type="button"
                   color="purple-9"
-                  :disabled="formData.fileSelected.length == 0 "
+                  :disabled="formData.fileSelected.length === 0"
                   label="Upload"
-                  @click="uploadlist"
+                  @click="uploadlist(formData)"
                 />
               </div>
             </div>
@@ -154,7 +155,7 @@
                 <q-btn
                   type="button"
                   color="purple-9"
-                  :disabled="formData1.fileSelected.length == 0 "
+                  :disabled="formData1.fileSelected.length === 0"
                   label="Upload"
                   @click="uploadlist1(formData1)"
                 />

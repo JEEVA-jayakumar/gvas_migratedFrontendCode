@@ -98,7 +98,7 @@
               @click="emitfnshowSimDeActivationList()"
             />
             <q-btn
-            :disabled="this.formData.sim == null"
+            :disabled="formData.sim == null"
               class="common-btn"
               label="Upload"
        @click="uploadsimDeactivation()"

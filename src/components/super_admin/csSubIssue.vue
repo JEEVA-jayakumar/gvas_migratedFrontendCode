@@ -8,10 +8,15 @@
 <q-tab-panels v-model="activeTab" animated>
 <q-tab-panel name="tab-3">
             <q-table :rows="ActivetableData" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter1" row-key="name" color="grey-9">
-              <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-              <q-td v-slot:body-cell-updatedAt="props" :props="props">{{ $moment(props.row.updatedAt).format("Do MMM Y") }}</q-td>
+              <template v-slot:body-cell-createdAt="props">
+  <q-td  :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
+</template>
+              <template v-slot:body-cell-updatedAt="props">
+  <q-td  :props="props">{{ $moment(props.row.updatedAt).format("Do MMM Y") }}</q-td>
+</template>
   
-              <q-td v-slot:body-cell-action1="props" :props="props">
+              <template v-slot:body-cell-action1="props">
+  <q-td  :props="props">
                 <div class="row no-wrap no-padding">
                   <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
                     @click="fnShowEditCsSubIssue(props.row)" flat class="text-light-blue"></q-btn>
@@ -19,6 +24,7 @@
                     @click="fnDeleteCsSubIssue(props.row)" flat class="text-negative"></q-btn>
                 </div>
               </q-td>
+</template>
                <template v-slot:top="props">
                 <div class="col-3">
                   <q-input clearable color="grey-9" v-model="filterSearch1" placeholder="Search by Issue Name" class="q-mr-lg" />
@@ -41,15 +47,21 @@
             row-key="name" 
             color="grey-9"
             >
-              <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-              <q-td v-slot:body-cell-updatedAt="props" :props="props">{{ $moment(props.row.updatedAt).format("Do MMM Y") }}</q-td>
+              <template v-slot:body-cell-createdAt="props">
+  <q-td  :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
+</template>
+              <template v-slot:body-cell-updatedAt="props">
+  <q-td  :props="props">{{ $moment(props.row.updatedAt).format("Do MMM Y") }}</q-td>
+</template>
   
-              <q-td v-slot:body-cell-action2="props" :props="props">
+              <template v-slot:body-cell-action2="props">
+  <q-td  :props="props">
                 <div class="row no-wrap no-padding">
                   <q-btn dense no-caps no-wrap label="Active" icon="far fa-plus-square" size="md"
                     @click="fnShowActiveCsSubIssue(props.row)" flat class="text-light-blue"></q-btn>
                 </div>
               </q-td>
+</template>
   
               <template v-slot:top="props">
                 <div class="col-3">

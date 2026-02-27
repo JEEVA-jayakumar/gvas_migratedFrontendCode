@@ -10,7 +10,8 @@
 <q-tab-panels v-model="selectedTab" animated>
 <q-tab-panel name="active">
            <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
-        <q-td v-slot:body-cell-action="props" :props="props">
+        <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
           <div class="row no-wrap no-padding">
             <q-btn dense no-caps no-wrap label="Modify Role/Permissions" icon="far fa-plus-square" size="md" @click="fnShowEditRole(props.row)" flat class="text-light-blue">
             </q-btn>
@@ -19,6 +20,7 @@
             </q-btn>
           </div>
         </q-td>
+</template>
 
         <template v-slot:top="props">
   
@@ -62,7 +64,8 @@
          </q-tab-panel>
 <q-tab-panel name="deactive">
            <q-table :rows="deactivatedTableData" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1" v-model:pagination="paginationControl1" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
-        <q-td v-slot:body-cell-action="props" :props="props">
+        <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
           <div class="row no-wrap no-padding">
             <!-- <q-btn dense no-caps no-wrap label="Modify Role/Permissions" icon="far fa-plus-square" size="md" @click="fnShowEditRole(props.row)" flat class="text-light-blue">
             </q-btn> -->
@@ -71,6 +74,7 @@
             </q-btn>
           </div>
         </q-td>
+</template>
 
         <template v-slot:top="props">
   
@@ -311,11 +315,11 @@ export default {
                 icon: "thumb_up",
               });
               this.ajaxLoadDataForRolesPermissions();
-            }).onCancel(() => {
+            }).catch((error) => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: error.body && error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down",
               });
             });
@@ -348,11 +352,11 @@ export default {
                 icon: "thumb_up",
               });
               this.ajaxLoadDataForRolesPermissions();
-            }).onCancel(() => {
+            }).catch((error) => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: error.body && error.body.message == null ? "Please Try Again Later !" : error.body.message,
                 icon: "thumb_down",
               });
             });

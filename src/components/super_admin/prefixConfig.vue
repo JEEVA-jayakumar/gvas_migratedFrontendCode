@@ -25,9 +25,14 @@
         title="Lead Validation" table-class="customTableClass" v-model:pagination="paginationControl"
         @request="ajaxLoadAllLeadInfo">
         <!--START: table body modification  device-->
-        <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-        <q-td v-slot:body-cell-updatedAt="props" :props="props">{{ $moment(props.row.updatedAt).format("Do MMM Y") }}</q-td>
-        <!-- <q-td v-slot:body-cell-action="props" :props="props">
+        <template v-slot:body-cell-createdAt="props">
+  <q-td  :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
+</template>
+        <template v-slot:body-cell-updatedAt="props">
+  <q-td  :props="props">{{ $moment(props.row.updatedAt).format("Do MMM Y") }}</q-td>
+</template>
+        <!-- <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
           <div class="row no-wrap no-padding">
             <div v-if="props.row.lastBaseMid == null && props.row.lastBaseTid == null">
               <q-btn dense no-caps no-wrap label="active" icon="far fa-plus-square" size="md"
@@ -36,7 +41,8 @@
             </div>
 
           </div>
-        </q-td> -->
+        </q-td>
+</template> -->
         <!-- END: table body modification -->
         <template slot="top" class="bottom-border">
           <!--START: table filter,search -->

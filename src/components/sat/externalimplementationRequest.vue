@@ -38,16 +38,17 @@
           </div>
           <div class="col-md-3 col-sm-6 col-xs-6">
             <q-select
-              filter
+              use-input
               clearable
               v-model="formData.assignTo"
-              separator
               color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :disable="formData.marsDeviceIdsCooked.length == 0"
               :options="assignToOptions"
-              placeholder="Assign To"
+              emit-value
+              map-options
+              label="Assign To"
             />
-             <q-checkbox
+            <q-checkbox
               v-model="formData.courier"
               color="dark"
               label="Courier Device"
@@ -56,7 +57,7 @@
           <div class="col-md-3 col-sm-6 col-xs-6" align="right">
             <q-btn
               no-caps
-              :disabled="formData.marsDeviceIdsCooked.length == 0  || this.formData.assignTo == ''"
+              :disabled="formData.marsDeviceIdsCooked.length == 0  || formData.assignTo == ''"
               label="Assign"
               class="common-dark-blue"
               @click="assignImplementationUser"
@@ -135,7 +136,7 @@
             table-class="customTableClass"
             :filter="filterSearch"
             selection="multiple"
-            :selected="formData.marsDeviceIdsCooked"
+            v-model:selected="formData.marsDeviceIdsCooked"
             v-model:pagination="paginationControl1"
             row-key="id"
             :rows-per-page-options="[10,20,50,100,150,200]"
@@ -143,59 +144,41 @@
             color="dark"
             @request="ajaxLoadAllLeadInfo1"
           >
-            <q-td
-              v-slot:body-cell-leadNumber="props"
-              :props="props"
-              class="cursor-pointer"
-              @click="toggleLeadInformation(props.row.leadInformation)"
-            >
-              <span class="label text-primary"
-                ># {{ props.row.leadInformation.leadNumber }}</span
-              >
-
-
-            </q-td>
-            <q-td
-              v-slot:body-cell-submitToMarsDate="props"
-              :props="props"
-              >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
-            >
-            <q-td
-              v-slot:body-cell-createdAt="props"
-              :props="props"
-              >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
-            >
-            <!-- <q-td
-              v-slot:body-cell-tid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.tid }}</div>
-            </q-td> -->
-            <q-td
-              v-slot:body-cell-mid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.mid }}</div>
-            </q-td>
-            <q-td
-              v-slot:body-cell-deviceAddress="props"
-              :props="props"
-              class="customTd customCellLength"
-            >
-              <div>
-                <q-btn
-                  no-caps
-                  icon="edit"
-                  color="purple-9"
-                  size="xs"
-                  round
-                  @click="UpdateDeviceAddress(props.row)"
-                />
-                {{ props.row.deviceAddress }}
-              </div>
-            </q-td>
+            <template v-slot:body-cell-leadNumber="props">
+              <q-td :props="props" class="cursor-pointer" @click="toggleLeadInformation(props.row.leadInformation)">
+                <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-submitToMarsDate="props">
+              <q-td :props="props">
+                {{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-createdAt="props">
+              <q-td :props="props">
+                {{ $moment(props.row.createdAt).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-mid="props">
+              <q-td :props="props" class="customTd">
+                <div class="text-primary">{{ props.row.mid }}</div>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-deviceAddress="props">
+              <q-td :props="props" class="customTd customCellLength">
+                <div>
+                  <q-btn
+                    no-caps
+                    icon="edit"
+                    color="purple-9"
+                    size="xs"
+                    round
+                    @click="UpdateDeviceAddress(props.row)"
+                  />
+                  {{ props.row.deviceAddress }}
+                </div>
+              </q-td>
+            </template>
             <template v-slot:top="props">
               <!--START: table filter,search -->
               <div class="col-md-5">
@@ -225,57 +208,41 @@
                       color="dark" 
                       @request="ajaxLoadAllLeadInfo2"
                       >
-                      <q-td
-              v-slot:body-cell-leadNumber="props"
-              :props="props"
-              class="cursor-pointer"
-              @click="toggleLeadInformation(props.row.leadInformation)"
-            >
-              <span class="label text-primary"
-                ># {{ props.row.leadInformation.leadNumber }}</span
-              >
-            </q-td>
-            <q-td
-              v-slot:body-cell-submitToMarsDate="props"
-              :props="props"
-              >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
-            >
-            <q-td
-              v-slot:body-cell-createdAt="props"
-              :props="props"
-              >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
-            >
-            <!-- <q-td
-              v-slot:body-cell-tid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.tid }}</div>
-            </q-td> -->
-            <q-td
-              v-slot:body-cell-mid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.mid }}</div>
-            </q-td>
-            <q-td
-              v-slot:body-cell-deviceAddress="props"
-              :props="props"
-              class="customTd customCellLength"
-            >
-              <div>
-                <q-btn
-                  no-caps
-                  icon="edit"
-                  color="purple-9"
-                  size="xs"
-                  round
-                  @click="UpdateDeviceAddress(props.row)"
-                />
-                {{ props.row.deviceAddress }}
-              </div>
-            </q-td>
+                      <template v-slot:body-cell-leadNumber="props">
+                        <q-td :props="props" class="cursor-pointer" @click="toggleLeadInformation(props.row.leadInformation)">
+                          <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
+                        </q-td>
+                      </template>
+            <template v-slot:body-cell-submitToMarsDate="props">
+              <q-td :props="props">
+                {{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-createdAt="props">
+              <q-td :props="props">
+                {{ $moment(props.row.createdAt).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-mid="props">
+              <q-td :props="props" class="customTd">
+                <div class="text-primary">{{ props.row.mid }}</div>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-deviceAddress="props">
+              <q-td :props="props" class="customTd customCellLength">
+                <div>
+                  <q-btn
+                    no-caps
+                    icon="edit"
+                    color="purple-9"
+                    size="xs"
+                    round
+                    @click="UpdateDeviceAddress(props.row)"
+                  />
+                  {{ props.row.deviceAddress }}
+                </div>
+              </q-td>
+            </template>
 
             <template v-slot:top="props">
               <div class="col-md-5">
@@ -794,7 +761,10 @@ export default {
   },
 
   beforeMount(){
-  this.id=localStorage.getItem("selectedTab").split('|')[1]
+    const selectedTab = localStorage.getItem("selectedTab");
+    if (selectedTab && selectedTab.includes('|')) {
+      this.id=selectedTab.split('|')[1];
+    }
   },
   
   created() {
@@ -904,7 +874,7 @@ export default {
       //Load all short lead info while page loading
   goToUnassignedTab(tab) {
       if (tab == "unAssigned") {      
-        this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl, filter: this.filterSearch });
+        this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: this.filterSearch });
         this.formData.marsDeviceIdsCooked = [];
         this.formData.assignTo = "";
         this.filterSearch = "";
@@ -916,7 +886,7 @@ export default {
         this.filterSearch = "";
         // this.formData.courier = "";
       } else {
-        this.ajaxLoadAllLeadInfo2({ pagination: this.paginationControl, filter: this.filterSearch2 });
+        this.ajaxLoadAllLeadInfo2({ pagination: this.paginationControl2, filter: this.filterSearch2 });
       }
     },
 
@@ -1086,7 +1056,7 @@ export default {
           .then(() => {
             self.formData.marsDeviceIdsCookedCancelled = [];
             self.formData.assignTo = "";
-            self.$q.notify({
+            this.$q.notify({
               color: "positive",
               position: "bottom",
               message: "Successfully Re-Assigned!",
@@ -1134,7 +1104,7 @@ export default {
           .then(() => {
             self.formData.marsDeviceIdsCookedCancelled = [];
             self.formData.assignTo = "";
-            self.$q.notify({
+            this.$q.notify({
               color: "positive",
               position: "bottom",
               message: "Successfully Cancelled!",
