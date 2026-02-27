@@ -115,16 +115,13 @@
                               class="cursor-pointer"
                             >
                               <div @click="fnViewMultiAttachedFileImage(props.row)">
-                                <viewer
-                                  :images="[GLOBAL_FILE_FETCH_URL+ '/'+props.row.paymentDocumentFile]"
-                                  class="hidden"
-                                >
+                                <div v-viewer class="hidden">
                                   <img
                                     :src="GLOBAL_FILE_FETCH_URL+ '/'+props.row.paymentDocumentFile"
                                     ref="multiAttachedImageViewer"
                                     style="max-width:100%"
                                   />
-                                </viewer>
+                                </div>
                                 <q-icon name="fas fa-image" color="amber-9" />
                                 &nbsp;{{props.row.paymentDocumentFile}}
                               </div>
@@ -185,16 +182,13 @@
                             class="cursor-pointer"
                           >
                             <div @click="fnViewMultiAttachedFileImageUploadedBySat()">
-                                <viewer
-                                  :images="[GLOBAL_FILE_FETCH_URL+ '/'+props.row.leadVerificationStatusBankAttachedFile]"
-                                  class="hidden"
-                                >
+                                <div v-viewer class="hidden">
                                   <img
                                     :src="GLOBAL_FILE_FETCH_URL+ '/'+props.row.leadVerificationStatusBankAttachedFile"
                                     ref="multiAttachedImageViewerUploadedBySAT"
                                     style="max-width:100%"
                                   />
-                                </viewer>
+                                </div>
                                 <q-icon name="fas fa-image" color="amber-9" />
                                 &nbsp;{{props.row.leadVerificationStatusBankAttachedFile}}
                             </div>
@@ -325,14 +319,12 @@
                               class="cursor-pointer"
                             >
                               <div @click="fnViewHandedOverFileImageCheque()">
-                                <viewer
-                                  :images="[GLOBAL_FILE_FETCH_URL+ '/'+ props.row.paymentDocumentFile]">
+                                <div v-viewer class="hidden">
                                   <img
                                   :src="GLOBAL_FILE_FETCH_URL+ '/'+  props.row.paymentDocumentFile"
                                   ref="handedOverImageViewerCheque"
-                                  class="hidden"
                                   />
-                                </viewer>
+                                </div>
                                 <q-icon name="fas fa-image" color="amber-9" />
                                 &nbsp;{{props.row.paymentDocumentFile}}
                               </div>
@@ -387,9 +379,9 @@
       />
       <generalQrLeadInformation
         v-if="propToggleQrLeadInformation"
-        :QrleadInformation="addQrLeadInformation"
+        :qrLeadInformation="addQrLeadInformation"
         :propToggleQrLeadInformationPop="propToggleQrLeadInformation"
-        @closeLeadInformation="toggleQrLeadInformation"
+        @closeQrLeadInformation="toggleQrLeadInformation"
       />
       <!--START: Open Reject model -->
       <openRejectModelComp
@@ -612,8 +604,12 @@ export default {
           });
       });
     },
-    expandRowPlease(value) {},
-    expandQrRowPlease(data){},
+    expandRowPlease(value) {
+      value.expand = !value.expand;
+    },
+    expandQrRowPlease(data){
+      data.expand = !data.expand;
+    },
     fnPDFViewModal(documentUrl) {
       this.PDFDetails = documentUrl;
       this.toggleshowPDFModal = !this.toggleshowPDFModal;

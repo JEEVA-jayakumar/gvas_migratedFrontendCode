@@ -122,7 +122,7 @@
   export default {
     name: "ticketActionBar",
     setup () {
-      return { $v: useVuelidate() }
+      return { v$: useVuelidate() }
     },
     props: ["ActionBarInfo", "propToggleActionBarPop", "propToggleActionBar"],
     components: {
@@ -292,7 +292,7 @@
       },
       
       async fnIssueResolveSubmit() {
-        const isCorrect = await this.$v.issueResolved.$validate();
+        const isCorrect = await this.v$.issueResolved.$validate();
         if (!isCorrect) {
           this.$q.notify("Please review fields again.");
         } else {
@@ -305,7 +305,7 @@
       },
 
       async fnIssueNotResolveSubmit() {
-        const isCorrect = await this.$v.IssueNotResolved.$validate();
+        const isCorrect = await this.v$.IssueNotResolved.$validate();
         if (!isCorrect) {
           this.$q.notify("Please review fields again.");
         } else {

@@ -38,7 +38,7 @@
                       maxlength="500"
                       counter
                       class="textarea-box"
-                      :error="$v.formData.crmRemark.$error"
+                      :error="v$.formData.crmRemark.$error"
                     />
                   </div>
               </div>
@@ -66,7 +66,7 @@ import { required } from "@vuelidate/validators";
 export default {
   name: "phonepeCrmToSatRemarks",
   setup () {
-    return { $v: useVuelidate() }
+    return { v$: useVuelidate() }
   },
   props: ["resolveCrmToSatInfo", "propToggleCrmToSatRemarksPop", "propToggleCrmToSatRemarks"],
   data() {
@@ -96,7 +96,7 @@ export default {
   methods: {
     ...mapActions("phonePeCrm", ["MOVE_TO_SAT"]),
     async fnsubmit() {
-      const isCorrect = await this.$v.formData.$validate();
+      const isCorrect = await this.v$.formData.$validate();
       if (!isCorrect) {
         this.$q.notify("Please review fields again.");
         return;

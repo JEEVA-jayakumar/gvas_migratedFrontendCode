@@ -41,7 +41,7 @@
             label="Others"
           />
         </div>
-        <div v-if="$v.formData.leadVerificationStatus.reasonType.$error" class="text-negative text-caption">
+        <div v-if="v$.formData.leadVerificationStatus.reasonType.$error" class="text-negative text-caption">
           Reason type is required
         </div>
         <q-input
@@ -53,7 +53,7 @@
           class="q-my-md"
           color="purple-9"
           v-model="formData.leadVerificationStatus.reason"
-          :error="$v.formData.leadVerificationStatus.reason.$error"
+          :error="v$.formData.leadVerificationStatus.reason.$error"
           error-message="Detailed reason is required for 'Others'"
         />
       </q-card-section>
@@ -72,7 +72,7 @@ import { mapActions } from "vuex";
 
 export default {
   setup() {
-    return { $v: useVuelidate() };
+    return { v$: useVuelidate() };
   },
   props: ["showRejectModel", "propShowRejectComponent"],
 
@@ -113,7 +113,7 @@ export default {
       this.$emit("closeRejectModel");
     },
     async financeRejectSubmit() {
-      const isCorrect = await this.$v.formData.$validate();
+      const isCorrect = await this.v$.formData.$validate();
       if (!isCorrect) {
         this.$q.notify("Please review fields again.");
       } else {
