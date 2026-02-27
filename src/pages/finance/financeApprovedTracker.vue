@@ -16,7 +16,7 @@
         </q-tabs>
 
         <q-tab-panels v-model="activeTab" animated>
-          <q-tab-panel name="tab-1" class="no-padding">
+          <q-tab-panel name="tab-1" class="no-padding overflow-hidden">
             <q-table
               table-class="customTableClass"
               :rows="tableData"
@@ -83,7 +83,7 @@
             </q-table>
           </q-tab-panel>
 
-          <q-tab-panel name="tab-2" class="no-padding">
+          <q-tab-panel name="tab-2" class="no-padding overflow-hidden">
             <q-table
               table-class="customTableClass"
               :rows="tableData1"
