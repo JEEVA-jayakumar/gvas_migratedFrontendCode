@@ -1,6 +1,5 @@
 <template>
   <q-page>
-    <q-pull-to-refresh :handler="PullToRefresh" inline>
       <!--START: table title -->
       <div
         class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
@@ -100,7 +99,6 @@
           </div>
         </template>
       </q-table>
-    </q-pull-to-refresh>
 
     <!--START: Open Reject model -->
     <openRejectModel
@@ -292,7 +290,7 @@ export default {
         this.tableData = this.getlostDatas.content;
         if (this.getlostDatas.sort != null) {
           this.paginationControl.sortBy = this.getlostDatas.sort[0].property;
-          this.paginationControl.descending = !this.getlostDatas.sort[0].ascending;
+          this.paginationControl.descending = this.getlostDatas.sort[0].ascending;
         }
         this.$q.loading.hide();
       }).catch(() => {

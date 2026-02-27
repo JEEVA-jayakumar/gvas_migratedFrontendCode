@@ -5,7 +5,6 @@
         :propToggleLeadInformationPop="propToggleLeadInformation" @closeLeadInformation="toggleLeadInformation" />
       <!-- content -->
       <!--START: table lead validation -->
-      <q-pull-to-refresh :handler="PullToRefresh" inline>
       <q-table
         table-class="customTableClass"
         :rows="tableData"
@@ -79,7 +78,6 @@
         <q-spinner-bars class="absolute-center" style="color:#61116a" :size="35" />
       </div>
       <!--END >>  Show Ajax Spinner -->
-      </q-pull-to-refresh>
     </q-page>
   </template>
   

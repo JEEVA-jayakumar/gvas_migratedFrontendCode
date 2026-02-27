@@ -9,7 +9,7 @@ link to click and download
 *************/
 function COMMON_FILE_DOWNLOAD(response) {
   return new Blob([response.data], {
-    type: response.headers.get("content-type"),
+    type: response.headers["content-type"],
   });
 }
 /***********
@@ -50,7 +50,7 @@ const FileDownload1 = {
       if (request.from) {
         return await api
           .get("download-depreciation-report" + "/" + request.from, {
-            responseType: 'arraybuffer'
+            responseType: 'blob'
           }).then(response => {
             console.log("FIle name : -- : ", response)
             let blob = COMMON_FILE_DOWNLOAD(response);
@@ -58,6 +58,7 @@ const FileDownload1 = {
             link.href = window.URL.createObjectURL(blob);
             link.download = "POSInventoryReport.xlsx";
             link.click();
+            window.URL.revokeObjectURL(link.href);
           });
       }
     },

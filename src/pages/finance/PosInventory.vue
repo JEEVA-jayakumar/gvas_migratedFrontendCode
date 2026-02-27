@@ -1,7 +1,5 @@
 <template>
     <q-page>
-      
-      <q-pull-to-refresh :handler="PullToRefresh" inline>
         <!--START: table title -->
         <div
           class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
@@ -175,7 +173,6 @@
           <q-spinner-bars class="absolute-center" style="color:#61116a" :size="35" />
         </div>
         <!--END >>  Show Ajax Spinner -->
-      </q-pull-to-refresh>
     </q-page>
   </template>
   <script>
@@ -228,9 +225,7 @@
             required: true,
             label: "Device Type",
             align: "left",
-            field: row => {
-              return row.device;
-            },
+            field: row => row.device ? row.device.deviceName : 'NA',
             sortable: true
           },
           {
@@ -238,9 +233,7 @@
             required: true,
             label: "Device Count",
             align: "left",
-            field: row => {
-              return row.deviceCount;
-            },
+            field: row => row.deviceCount,
             sortable: false
           },
           {
@@ -248,7 +241,7 @@
             required: true,
             label: "Date of Submission to Finance",
             align: "left",
-            field: "dateofSubmission",
+            field: "financeSubmissionDate",
             sortable: true
           },
           {
