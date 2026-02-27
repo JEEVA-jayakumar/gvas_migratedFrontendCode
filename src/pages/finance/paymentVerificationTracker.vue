@@ -1,7 +1,6 @@
 <template>
   <q-page>
     <div class="q-pa-md">
-      <q-pull-to-refresh :handler="PullToRefresh" inline>
         <!--START: table title -->
         <div
           class="col-md-12 capitalize text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
@@ -11,7 +10,7 @@
           <q-tab name="tab-2" label="QR Merchant" />
         </q-tabs>
 
-        <q-tab-panels v-model="activeTab" animated>
+        <q-tab-panels v-model="activeTab" animated keep-alive>
           <!-- table payment verification tracker -->
           <q-tab-panel name="tab-1" class="no-padding overflow-hidden">
             <q-table
@@ -376,7 +375,6 @@
             </q-table>
           </q-tab-panel>
         </q-tab-panels>
-      </q-pull-to-refresh>
      
       <!-- //Common lead information in popup -->
       <generalLeadInformation
@@ -538,7 +536,7 @@ export default {
           this.tableData = this.getPaymentTrackerInfo.content;
           if (this.getPaymentTrackerInfo.sort != null) {
             this.paginationControl.sortBy = this.getPaymentTrackerInfo.sort[0].property;
-            this.paginationControl.descending = !this.getPaymentTrackerInfo.sort[0].ascending;
+            this.paginationControl.descending = this.getPaymentTrackerInfo.sort[0].ascending;
           }
           this.$q.loading.hide();
         })
@@ -553,7 +551,7 @@ export default {
           this.tableData1 = this.getstaticQrPaymentTrackerData.content;
           if (this.getstaticQrPaymentTrackerData.sort != null) {
             this.paginationControl1.sortBy = this.getstaticQrPaymentTrackerData.sort[0].property;
-            this.paginationControl1.descending = !this.getstaticQrPaymentTrackerData.sort[0].ascending;
+            this.paginationControl1.descending = this.getstaticQrPaymentTrackerData.sort[0].ascending;
           }
           this.$q.loading.hide();
         })

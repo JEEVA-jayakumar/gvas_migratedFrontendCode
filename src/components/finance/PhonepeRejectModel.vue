@@ -83,6 +83,7 @@ export default {
           });
           this.REJECT_PHONEPE_LOST_STOLEN_EXCEPTION(this.formData.regionalInventory)
             .then(() => {
+              this.$emit("closeRejectModel");
               this.$emit("reloadPaymentTrackerData");
               this.$q.loading.hide();
               this.$q.notify({
@@ -91,7 +92,6 @@ export default {
                 message: "Successfully Rejected",
                 icon: "clear"
               });
-              this.emitToggleReject();
             })
             .catch(error => {
               this.$q.loading.hide();

@@ -129,6 +129,7 @@ export default {
           });
           this.REJECT_FINANCE_EXCEPTION(this.formData)
             .then(() => {
+              this.$emit("closeRejectModel");
               this.$emit("reloadPaymentTrackerData");
               this.$q.loading.hide();
               this.$q.notify({
@@ -137,7 +138,6 @@ export default {
                 message: "Rejected lead #" + this.formData.leadId,
                 icon: "clear"
               });
-              this.emitToggleReject();
             })
             .catch(error => {
               this.$q.loading.hide();

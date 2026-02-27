@@ -1,7 +1,6 @@
 <template>
   <q-page>
     <div class="q-pa-md">
-      <q-pull-to-refresh :handler="PullToRefresh" inline>
         <!--START: table title -->
         <div
           class="col-md-12 capitalize text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
@@ -15,7 +14,7 @@
           <q-tab name="tab-2" label="QR Merchant" />
         </q-tabs>
 
-        <q-tab-panels v-model="activeTab" animated>
+        <q-tab-panels v-model="activeTab" animated keep-alive>
           <q-tab-panel name="tab-1" class="no-padding overflow-hidden">
             <q-table
               table-class="customTableClass"
@@ -158,7 +157,6 @@
             </q-table>
           </q-tab-panel>
         </q-tab-panels>
-      </q-pull-to-refresh>
     </div>
 
     <!-- //Common lead information in popup -->
@@ -428,7 +426,7 @@ export default {
           this.tableData = this.getAllApprovedFinaceData.content;
           if (this.getAllApprovedFinaceData.sort != null) {
             this.paginationControl.sortBy = this.getAllApprovedFinaceData.sort[0].property;
-            this.paginationControl.descending = !this.getAllApprovedFinaceData.sort[0].ascending;
+            this.paginationControl.descending = this.getAllApprovedFinaceData.sort[0].ascending;
           }
           // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
@@ -456,7 +454,7 @@ export default {
           this.tableData1 = this.getstaticQrApprovedTrackerData.content;
           if (this.getstaticQrApprovedTrackerData.sort != null) {
             this.paginationControl1.sortBy = this.getstaticQrApprovedTrackerData.sort[0].property;
-            this.paginationControl1.descending = !this.getstaticQrApprovedTrackerData.sort[0].ascending;
+            this.paginationControl1.descending = this.getstaticQrApprovedTrackerData.sort[0].ascending;
           }
 
           // finally we tell QTable to exit the "loading" state
