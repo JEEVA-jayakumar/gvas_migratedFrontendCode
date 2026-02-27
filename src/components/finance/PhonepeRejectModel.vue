@@ -15,7 +15,7 @@
           class="q-my-md"
           color="purple-9"
           v-model="formData.regionalInventory.lostOrStolenRemarks"
-          :error="$v.formData.regionalInventory.lostOrStolenRemarks.$error"
+          :error="v$.formData.regionalInventory.lostOrStolenRemarks.$error"
           error-message="Remarks are required"
         />
       </q-card-section>
@@ -34,7 +34,7 @@ import { mapActions } from "vuex";
 
 export default {
   setup() {
-    return { $v: useVuelidate() };
+    return { v$: useVuelidate() };
   },
   props: ["showRejectModel", "propShowRejectComponent"],
 
@@ -67,7 +67,7 @@ export default {
       this.$emit("closeRejectModel");
     },
     async financeRejectSubmit() {
-      const isCorrect = await this.$v.formData.$validate();
+      const isCorrect = await this.v$.formData.$validate();
       if (!isCorrect) {
         this.$q.notify("Please review fields again.");
       } else {

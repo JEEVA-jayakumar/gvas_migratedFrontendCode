@@ -808,6 +808,11 @@ const routes = [
       component: LostFinance
     },
     {
+      name: "LostOrStolen",
+      path: "LostOrStolen",
+      component: () => import("../pages/finance/LostOrStolen.vue")
+    },
+    {
       name: "PosInventory",
       path: "PosInventory",
       component: PosInventory

@@ -170,7 +170,7 @@ const SatLeadValidation = {
           }
         );
 
-        Vue.set(response.data.data, "leadDocuments", groupDocuments);
+        response.data.data["leadDocuments"] = groupDocuments;
    
         // END=> making documents array'
 

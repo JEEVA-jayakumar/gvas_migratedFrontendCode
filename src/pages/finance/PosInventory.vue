@@ -172,7 +172,6 @@
     </q-page>
   </template>
   <script>
-import { required, or } from '@vuelidate/validators';
   import { mapGetters, mapActions } from "vuex";
   import UpdatePOSInventory from "../../components/sat/UpdatePOSInventory.vue";
   import showPdfFinanceModalComponent from "../../components/sat/showPdfFinanceModalComponent.vue";

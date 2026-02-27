@@ -19,10 +19,10 @@
                 <q-editor
                   v-model="formData.crmRemark"
                   min-height="5rem"
-                  @blur="$v.formData.crmRemark.$touch"
-                  :error="$v.formData.crmRemark.$error"
+                  @blur="v$.formData.crmRemark.$touch"
+                  :error="v$.formData.crmRemark.$error"
                 />
-                <p v-if="$v.formData.crmRemark.$error" class="text-negative text-caption">Remarks are required</p>
+                <p v-if="v$.formData.crmRemark.$error" class="text-negative text-caption">Remarks are required</p>
               </div>
             </div>
 
@@ -44,7 +44,7 @@ import { required } from "@vuelidate/validators";
 export default {
   name: "bijlipayAddRemarks",
   setup () {
-    return { $v: useVuelidate() }
+    return { v$: useVuelidate() }
   },
   props: ["remarksInfo", "propToggleRemarksPop", "propToggleRemarks"],
   data() {
@@ -72,7 +72,7 @@ export default {
   methods: {
     ...mapActions("bijlipayCrm", ["UPDATE_CRM_REMARKS"]),
     async fnsubmit(formData) {
-      const isFormCorrect = await this.$v.$validate();
+      const isFormCorrect = await this.v$.$validate();
       if (!isFormCorrect) {
         this.$q.notify("Please review fields again.");
       } else {

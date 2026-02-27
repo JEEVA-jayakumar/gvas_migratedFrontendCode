@@ -28,10 +28,10 @@ if(request.pagination.sortBy == null){
       // sorting  
       )
     .then(response => {
-      // console.log("PHONEPE ACTION", JSON.stringify(response));
-      console.log("QR FINANCE",JSON.stringify(response));
+      response.data.data.content.map(function (value, index) {
+        value.expand = false;
+      });
       commit('SET_ALL_QR_PAYMENT_TRACKER_DATA', response.data.data)
-
     })
 }else{
   let sorting = request.pagination.descending ? 'asc' : 'desc'
@@ -51,10 +51,10 @@ if(request.pagination.sortBy == null){
     sorting
     )
   .then(response => {
-    // console.log("PHONEPE ACTION", JSON.stringify(response));
-    console.log("QR FINANCE",JSON.stringify(response));
+    response.data.data.content.map(function (value, index) {
+      value.expand = false;
+    });
     commit('SET_ALL_QR_PAYMENT_TRACKER_DATA', response.data.data)
- 
   })
 }
 }

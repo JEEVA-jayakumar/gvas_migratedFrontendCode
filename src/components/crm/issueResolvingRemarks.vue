@@ -38,7 +38,7 @@
                       maxlength="500"
                       counter
                       class="textarea-box"
-                      :error="$v.formData.crmRemark.$error"
+                      :error="v$.formData.crmRemark.$error"
                     />
                   </div>
               </div>
@@ -66,7 +66,7 @@ import { required } from "@vuelidate/validators";
 export default {
   name: "issueResolvingRemarks",
   setup () {
-    return { $v: useVuelidate() }
+    return { v$: useVuelidate() }
   },
   props: ["resolveRemarksInfo", "propToggleResolveRemarksPop", "propToggleResolveRemarks"],
   data() {
@@ -96,7 +96,7 @@ export default {
   methods: {
     ...mapActions("phonePeCrm", ["ISSUE_RESOLVED_BY_CRM"]),
     async fnsubmit() {
-      const isCorrect = await this.$v.formData.$validate();
+      const isCorrect = await this.v$.formData.$validate();
       if (!isCorrect) {
         this.$q.notify("Please review fields again.");
         return;
