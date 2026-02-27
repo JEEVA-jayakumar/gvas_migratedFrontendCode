@@ -10,133 +10,146 @@
         </div>
         <!--END: table title -->
         <!-- table finance approved tracker -->
-        <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @update:model-value="goToQrMerchant">
-          <q-tab color="dark" name="tab-1" label="Pos Merchant" />
-        <q-tab color="dark" name="tab-2" label="QR Merchant" />
-</q-tabs>
-<q-tab-panels v-model="activeTab" animated>
-<q-tab-panel name="tab-1">
-        <q-table
-          table-class="customTableClass"
-          :rows="tableData"
-          :columns="columns"
-          :filter="filter" v-model:pagination="paginationControl"
-          :rows-per-page-options="[5, 10, 15, 20]"
-          @request="ajaxLoadAllFinanceApprovedData"
-          row-key="name"
-        >
-          <q-td v-slot:body-cell-createdAt="props" :props="props">
-            <span class="capitalize">{{ $moment(props.row.submissionDate).format("Do MMM Y") }}</span>
-          </q-td>
-          <!--START: Amount status -->
-          <!-- <q-td v-slot:body-cell-amount_status="props" :props="props">
-              <span class="text-positive" v-if="props.row.verifiedFinanceStatus==$VERIFIED_FINANCE_STATUS_SUCCESS">Finance approved</span>
-              <span class="text-negative" v-else-if="props.row.verifiedFinanceStatus==$VERIFIED_FINANCE_STATUS_REJECT">Finance rejected</span>
-              <span class="text-amber-9" v-else-if="props.row.verifiedFinanceStatus==$VERIFIED_FINANCE_STATUS_PENDING">Finance pending</span>
-              <span class="text-grey-9" v-else>Finance verified</span>
-          </q-td>-->
-          <!--END: Amount status -->
+        <q-tabs v-model="activeTab" class="shadow-1 bg-grey-1" active-color="purple-9" indicator-color="purple-9" @update:model-value="goToQrMerchant">
+          <q-tab name="tab-1" label="Pos Merchant" />
+          <q-tab name="tab-2" label="QR Merchant" />
+        </q-tabs>
 
-          <!--START: table search, filter -->
-          <template v-slot:top="props">
-            <div class="col-md-5">
-              <q-input
-                clearable
-                v-model="filter"
-                separator
-                color="grey-9"
-                placeholder="Type.."
-                label="Search Using Lead Number/ Merchant Name"
-                class="q-mr-lg q-py-sm"
-              />
-            </div>
-            <!--START: table filter dropdown -->
-            <div class="col-md-3"></div>
-            <!--END: table filter dropdown -->
-            <!--START: table excel download -->
-            <!-- <div class="col-md-4" align="right">
-              <q-btn outline color="dark" label="Download as excel" @click="downloadReport" />
-            </div> -->
-            <div class="col-md-4" align="right">
-              <q-btn outline color="dark" label="Download as excel" @click="downloadApproval" />
-            </div>
-            <!--END: table excel download -->
-          </template>
-          <!--END: table search, filter -->
-
-          <!-- START: Table row actions -->
-          <q-td v-slot:body-cell-leadNumber="props" :props="props">
-            <span
-              class="text-primary cursor-pointer"
-              @click="toggleLeadInformation(props.row)"
-              ># {{ props.row.leadNumber }}</span
+        <q-tab-panels v-model="activeTab" animated>
+          <q-tab-panel name="tab-1" class="no-padding">
+            <q-table
+              table-class="customTableClass"
+              :rows="tableData"
+              :columns="columns"
+              :filter="filter"
+              v-model:pagination="paginationControl"
+              :rows-per-page-options="[5, 10, 15, 20]"
+              @request="ajaxLoadAllFinanceApprovedData"
+              row-key="leadNumber"
+              class="shadow-0"
             >
-          </q-td>
-          <!-- END: Table row actions -->
-        </q-table>
-        </q-tab-panel>
+              <template v-slot:body-cell-createdAt="props">
+                <q-td :props="props">
+                  <span class="capitalize">{{ $moment(props.row.submissionDate).format("Do MMM Y") }}</span>
+                </q-td>
+              </template>
 
-<q-tab-panel name="tab-2">
-  <q-table
-          table-class="customTableClass"
-          :rows="tableData1"
-          :columns="columns1"
-          :filter="filter1" v-model:pagination="paginationControl1"
-          :rows-per-page-options="[5, 10, 15, 20]"
-          @request="ajaxLoadAllFinanceQrApprovedData"
-          row-key="name"
-        >
-          <q-td v-slot:body-cell-createdAt="props" :props="props">
-            <span class="capitalize">{{ $moment(props.row.submissionDate).format("Do MMM Y") }}</span>
-          </q-td>
-          <!--START: Amount status -->
-          <!-- <q-td v-slot:body-cell-amount_status="props" :props="props">
-              <span class="text-positive" v-if="props.row.verifiedFinanceStatus==$VERIFIED_FINANCE_STATUS_SUCCESS">Finance approved</span>
-              <span class="text-negative" v-else-if="props.row.verifiedFinanceStatus==$VERIFIED_FINANCE_STATUS_REJECT">Finance rejected</span>
-              <span class="text-amber-9" v-else-if="props.row.verifiedFinanceStatus==$VERIFIED_FINANCE_STATUS_PENDING">Finance pending</span>
-              <span class="text-grey-9" v-else>Finance verified</span>
-          </q-td>-->
-          <!--END: Amount status -->
+              <template v-slot:body-cell-approvedDate="props">
+                <q-td :props="props">
+                  <span class="label">{{ $moment(props.row.approvedDate).format("Do MMM Y") }}</span>
+                </q-td>
+              </template>
 
-          <!--START: table search, filter -->
-          <template v-slot:top="props">
-            <div class="col-md-5">
-              <q-input
-                clearable
-                v-model="filter1"
-                separator
-                color="grey-9"
-                placeholder="Type.."
-                label="Search Using Lead Number/ Merchant Name"
-                class="q-mr-lg q-py-sm"
-              />
-            </div>
-            <!--START: table filter dropdown -->
-            <div class="col-md-3"></div>
-            <!--END: table filter dropdown -->
-            <!--START: table excel download -->
-            <!-- <div class="col-md-4" align="right">
-              <q-btn outline color="dark" label="Download as excel" @click="downloadReport" />
-            </div> -->
-            <div class="col-md-4" align="right">
-              <q-btn outline color="dark" label="Download as excel" @click="downloadApproval" />
-            </div>
-            <!--END: table excel download -->
-          </template>
-          <!--END: table search, filter -->
+              <template v-slot:body-cell-submittedToFinanceDate="props">
+                <q-td :props="props">
+                  <span class="label">{{ $moment(props.row.submittedToFinanceDate).format("Do MMM Y") }}</span>
+                </q-td>
+              </template>
 
-          <!-- START: Table row actions -->
-          <q-td v-slot:body-cell-qrLeadNumber="props" :props="props">
-            <span
-              class="text-primary cursor-pointer"
-              @click="toggleQrLeadInformation(props.row)"
-              ># {{ props.row.qrLeadNumber }}</span
+              <template v-slot:body-cell-leadNumber="props">
+                <q-td :props="props">
+                  <span
+                    class="text-primary cursor-pointer"
+                    @click="toggleLeadInformation(props.row)"
+                    ># {{ props.row.leadNumber }}</span
+                  >
+                </q-td>
+              </template>
+
+              <template v-slot:body-cell-updatedAt="props">
+                <q-td :props="props">
+                  <span class="label">{{ $moment(props.row.leadLastUpdated).format("Do MMM Y") }}</span>
+                </q-td>
+              </template>
+
+              <!--START: table search, filter -->
+              <template v-slot:top>
+                <div class="col-md-5">
+                  <q-input
+                    clearable
+                    v-model="filter"
+                    color="grey-9"
+                    placeholder="Type.."
+                    label="Search .. "
+                    class="q-mr-lg q-py-sm"
+                  />
+                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-4" align="right">
+                  <q-btn outline color="dark" label="Download as excel" @click="downloadApproval" />
+                </div>
+              </template>
+              <!--END: table search, filter -->
+            </q-table>
+          </q-tab-panel>
+
+          <q-tab-panel name="tab-2" class="no-padding">
+            <q-table
+              table-class="customTableClass"
+              :rows="tableData1"
+              :columns="columns1"
+              :filter="filter1"
+              v-model:pagination="paginationControl1"
+              :rows-per-page-options="[5, 10, 15, 20]"
+              @request="ajaxLoadAllFinanceQrApprovedData"
+              row-key="qrLeadNumber"
+              class="shadow-0"
             >
-          </q-td>
-          <!-- END: Table row actions -->
-        </q-table>
-</q-tab-panel>
-</q-tab-panels>
+              <template v-slot:body-cell-createdAt="props">
+                <q-td :props="props">
+                  <span class="capitalize">{{ $moment(props.row.submissionDate).format("Do MMM Y") }}</span>
+                </q-td>
+              </template>
+
+              <template v-slot:body-cell-approvedDate="props">
+                <q-td :props="props">
+                  <span class="label">{{ $moment(props.row.approvedDate).format("Do MMM Y") }}</span>
+                </q-td>
+              </template>
+
+              <template v-slot:body-cell-submittedToFinanceDate="props">
+                <q-td :props="props">
+                  <span class="label">{{ $moment(props.row.submittedToFinanceDate).format("Do MMM Y") }}</span>
+                </q-td>
+              </template>
+
+              <template v-slot:body-cell-qrLeadNumber="props">
+                <q-td :props="props">
+                  <span
+                    class="text-primary cursor-pointer"
+                    @click="toggleQrLeadInformation(props.row)"
+                    ># {{ props.row.qrLeadNumber }}</span
+                  >
+                </q-td>
+              </template>
+
+              <template v-slot:body-cell-updatedAt="props">
+                <q-td :props="props">
+                  <span class="label">{{ $moment(props.row.leadLastUpdated).format("Do MMM Y") }}</span>
+                </q-td>
+              </template>
+
+              <!--START: table search, filter -->
+              <template v-slot:top>
+                <div class="col-md-5">
+                  <q-input
+                    clearable
+                    v-model="filter1"
+                    color="grey-9"
+                    placeholder="Type.."
+                    label="Search .. "
+                    class="q-mr-lg q-py-sm"
+                  />
+                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-4" align="right">
+                  <q-btn outline color="dark" label="Download as excel" @click="downloadQrApproval" />
+                </div>
+              </template>
+              <!--END: table search, filter -->
+            </q-table>
+          </q-tab-panel>
+        </q-tab-panels>
       </q-pull-to-refresh>
     </div>
 
@@ -166,7 +179,7 @@ import { mapGetters, mapActions } from "vuex";
 
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 import generalQrLeadInformation from "../../components/generalQrLeadInformation.vue";
-import downloadFinanceapproval from "../../components/finance/downloadFinanceapproval";
+import downloadFinanceapproval from "../../components/finance/downloadFinanceapproval.vue";
 export default {
   name: "financeApprovedtracker",
   components: {
@@ -306,14 +319,6 @@ export default {
           field: "submissionDate",
           sortable: false
         },
-        // {
-        //   name: "submittedToFinanceDate",
-        //   required: true,
-        //   label: "Date",
-        //   align: "center",
-        //   field: "submittedToFinanceDate",
-        //   sortable: true
-        // },
         {
           name: "referenceNumber",
           required: true,
@@ -331,15 +336,7 @@ export default {
           align: "left",
           field: "amount",
           sortable: false
-        },
-        // {
-        //   name: "updatedAt",
-        //   required: true,
-        //   label: "TID Activation Date",
-        //   align: "left",
-        //   field: "leadLastUpdated",
-        //   sortable: true
-        // }
+        }
       ],
       tableData: [],
       tableData1: []
@@ -423,7 +420,7 @@ export default {
           this.tableData = this.getAllApprovedFinaceData.content;
           if (this.getAllApprovedFinaceData.sort != null) {
             this.paginationControl.sortBy = this.getAllApprovedFinaceData.sort[0].property;
-            this.paginationControl.descending = this.getAllApprovedFinaceData.sort[0].ascending;
+            this.paginationControl.descending = !this.getAllApprovedFinaceData.sort[0].ascending;
           }
           // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
@@ -451,7 +448,7 @@ export default {
           this.tableData1 = this.getstaticQrApprovedTrackerData.content;
           if (this.getstaticQrApprovedTrackerData.sort != null) {
             this.paginationControl1.sortBy = this.getstaticQrApprovedTrackerData.sort[0].property;
-            this.paginationControl1.descending = this.getstaticQrApprovedTrackerData.sort[0].ascending;
+            this.paginationControl1.descending = !this.getstaticQrApprovedTrackerData.sort[0].ascending;
           }
 
           // finally we tell QTable to exit the "loading" state
@@ -463,6 +460,10 @@ export default {
     },
     downloadApproval() {
       this.propFinanceApprovalDatas = !this.propFinanceApprovalDatas;
+    },
+
+    downloadQrApproval() {
+       this.propFinanceApprovalDatas = !this.propFinanceApprovalDatas;
     },
 
     downloadReport() {

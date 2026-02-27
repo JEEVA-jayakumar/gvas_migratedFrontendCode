@@ -13,7 +13,7 @@
           placeholder="Remarks"
           label="Reject Remarks"
           class="q-my-md"
-          color="purple-9"
+          color="grey-9"
           v-model="formData.regionalInventory.lostOrStolenRemarks"
           :error="v$.formData.regionalInventory.lostOrStolenRemarks.$error"
           error-message="Remarks are required"
@@ -103,6 +103,13 @@ export default {
                 icon: "thumb_down"
               });
             });
+        }).onCancel(() => {
+          this.$q.notify({
+            color: "negative",
+            position: "bottom",
+            message: "No changes made!",
+            icon: "thumb_down"
+          });
         });
       }
     }

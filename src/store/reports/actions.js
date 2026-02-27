@@ -1,4 +1,3 @@
-import { and } from '@vuelidate/validators';
 import { api } from '../../boot/axios';
 
 import { date } from "quasar";
