@@ -544,9 +544,9 @@ export default {
             this.ajaxLoadAllPaymentTrackerInfo({ pagination: this.paginationControl, filter: this.filter });
             this.$q.loading.hide();
             this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Approved!", icon: "thumb_up" });
-          }).onCancel(error => {
+          }).catch(error => {
             this.$q.loading.hide();
-            this.$q.notify({ color: "negative", position: "bottom", message: error.response?.data?.message || "Please Try Again Later !", icon: "thumb_down" });
+            this.$q.notify({ color: "negative", position: "bottom", message: error.body && error.body.message ? error.body.message : "Please Try Again Later !", icon: "thumb_down" });
           });
       });
     },
@@ -568,9 +568,9 @@ export default {
             this.ajaxLoadAllPaymentTrackerInfo1({ pagination: this.paginationControl1, filter: this.filter1 });
             this.$q.loading.hide();
             this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Approved!", icon: "thumb_up" });
-          }).onCancel(error => {
+          }).catch(error => {
             this.$q.loading.hide();
-            this.$q.notify({ color: "negative", position: "bottom", message: error.response?.data?.message || "Please Try Again Later !", icon: "thumb_down" });
+            this.$q.notify({ color: "negative", position: "bottom", message: error.body && error.body.message ? error.body.message : "Please Try Again Later !", icon: "thumb_down" });
           });
       });
     },

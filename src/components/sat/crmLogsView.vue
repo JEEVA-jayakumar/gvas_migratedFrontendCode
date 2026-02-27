@@ -29,13 +29,17 @@
         :columns="columns"
         row-key="name"
       >
-        <q-td v-slot:body-cell-attemptno="props" :props="props">{{
+        <template v-slot:body-cell-attemptno="props">
+  <q-td  :props="props">{{
           props.row.orderId == null ? "NA" : props.row.orderId
         }}</q-td>
+</template>
 
-        <q-td v-slot:body-cell-dateandtime="props" :props="props">
+        <template v-slot:body-cell-dateandtime="props">
+  <q-td  :props="props">
           {{ formatDateTime(props.row.inputDate) }}
         </q-td>
+</template>
       </q-table>
     </q-dialog>
   </q-page>
@@ -135,15 +139,15 @@ export default {
     },
 
     crmLogsList() {
-      this.CRM_LOGS_LISTS(this.formData)
+      this.CRM_LOGS_LISTS(formData)
         .then(response => {
           this.getcrmLogsLists.forEach((item, index) => {
             item.orderId = index + 1; // Assign orderId starting from 1
           });
-          console.log("TESTING JSON", JSON.stringify(this.getcrmLogsLists));
+          console.log("TESTING JSON", JSON.stringify(getcrmLogsLists));
 
           this.crmLogs = this.getcrmLogsLists;
-          console.log("CRM_LOGS_LISTS ------->", JSON.stringify(this.crmLogs));
+          console.log("CRM_LOGS_LISTS ------->", JSON.stringify(crmLogs));
           this.$q.loading.hide();
         })
         .catch(() => {

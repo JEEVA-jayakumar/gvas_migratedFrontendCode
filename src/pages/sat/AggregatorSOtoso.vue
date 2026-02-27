@@ -224,7 +224,7 @@ import { email } from '@vuelidate/validators';
         let cookedArr1 = [];
         self.GET_ACTIVE_CREATED_DEVICE_LIST()
           .then(() => {
-            return _.map(this.getCreatedActiveDeviceList, (item) => {
+            return _.map(getCreatedActiveDeviceList, (item) => {
               console.log("ITEM -------->", item)
               cookedArr1.push({
                 value: item,
@@ -325,7 +325,7 @@ import { email } from '@vuelidate/validators';
         this.scannerToggleOption = false;
   
         if (!this.$barcodeScanner.hasListener()) {
-          this.$barcodeScanner.init(this.onBarcodeScanned);
+          this.$barcodeScanner.init(onBarcodeScanned);
         }
       },
   

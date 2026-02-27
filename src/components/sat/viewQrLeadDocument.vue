@@ -832,15 +832,15 @@
                   </q-item-section>
                 </q-item> -->
 
-                <!-- {{ this.propGetShortInfo.qrMerchantType.merchantTypeName }} -->
-                <!-- <div class="group" v-if="(this.propGetShortInfo.qrMerchantType.merchantTypeName ===  'Individuals') || (this.propGetShortInfo.qrMerchantType.merchantTypeName ===  'Sole Proprietorship')"> -->
+                <!-- {{ propGetShortInfo.qrMerchantType.merchantTypeName }} -->
+                <!-- <div class="group" v-if="(propGetShortInfo.qrMerchantType.merchantTypeName ===  'Individuals') || (propGetShortInfo.qrMerchantType.merchantTypeName ===  'Sole Proprietorship')"> -->
 
                 <div
                   class="group"
                   v-if="
-                    this.propGetShortInfo.qrMerchantType.merchantTypeName ==
+                    propGetShortInfo.qrMerchantType.merchantTypeName ==
                       'Sole Proprietorship' ||
-                      this.propGetShortInfo.qrMerchantType.merchantTypeName ==
+                      propGetShortInfo.qrMerchantType.merchantTypeName ==
                         'Individuals'
                   "
                 >
@@ -1716,7 +1716,7 @@ export default {
 
     // console.log(
     //   "LEADVIEWQR ",
-    //   JSON.stringify(this.propLeadDocumentInformation)
+    //   JSON.stringify(propLeadDocumentInformation)
     // );
   },
   beforeMount() {
@@ -1781,7 +1781,7 @@ export default {
         }
       );
       this.Docs = groupDocuments;
-      console.log("DOCS DATA", JSON.stringify(this.Docs));
+      console.log("DOCS DATA", JSON.stringify(Docs));
     },
 
     fnPDFViewModal(documentUrl) {
@@ -1829,7 +1829,7 @@ export default {
           this.formData.documentType = this.getQrShortLeadInfoDocumentTypes;
           console.log(
             "LEAD DETAILS",
-            JSON.stringify(this.getQrShortLeadInfoDocumentTypes)
+            JSON.stringify(getQrShortLeadInfoDocumentTypes)
           );
 
           this.$emit(
@@ -1859,7 +1859,7 @@ export default {
       if (inputvalue == ("Individuals" || "Sole Proprietorship")) {
         console.log("IFF");
         let merchantDocumentCategory = _.find(
-          this.getQrShortLeadInfoDocumentTypes,
+          getQrShortLeadInfoDocumentTypes,
           o => o.merchantType === inputvalue
         );
         let arr = {
@@ -1869,7 +1869,7 @@ export default {
         let innerSelf = this;
         // let qrLeadDocuments = innerSelf.getAllStaticQrShortLeadDatas
         let qrLeadDocuments = innerSelf.Docs;
-        console.log("RESPONSE DOCS GETTER", JSON.stringify(this.Docs));
+        console.log("RESPONSE DOCS GETTER", JSON.stringify(Docs));
         let multipleDocs = [];
         let mccValue =
           this.propGetShortInfo.merchantIndustry.mccCode == "0763"
@@ -1937,17 +1937,17 @@ export default {
           multipleDocs.push(data);
           arr.forMutipleDocument.push(...multipleDocs);
           this.documents = arr;
-          console.log("FInalDATA ", JSON.stringify(this.documents));
+          console.log("FInalDATA ", JSON.stringify(documents));
         } else {
           arr.forMutipleDocument.push(...multipleDocs);
           this.documents = arr;
-          console.log("MULTIPLE DOCS", JSON.stringify(this.documents));
+          console.log("MULTIPLE DOCS", JSON.stringify(documents));
         }
       } else {
         console.log("ELSE");
         console.log("TEST GETTER");
         let merchantDocumentCategory = _.find(
-          this.getQrShortLeadInfoDocumentTypes,
+          getQrShortLeadInfoDocumentTypes,
           o => o.merchantType === inputvalue
         );
         let arr = {
@@ -1968,7 +1968,7 @@ export default {
         });
         arr.forMutipleDocument.push(...multipleDocs);
         this.documents = arr;
-        console.log("THIS>DOC", JSON.stringify(this.documents));
+        console.log("THIS>DOC", JSON.stringify(documents));
       }
     },
 //     fnVerificationDocumentUploadFormsUpload(event, formType) {
@@ -2267,7 +2267,7 @@ saveformsLists(fileName, mimeType, formTypeToUpdate) {
       });
       this.FETCH_STATIC_QR_SHORT_LEAD_DATA(this.$route.params.id)
         .then(response => {
-          //  console.log("RESPONSE DATA GETTER",JSON.stringify(this.getAllStaticQrShortLeadDatas));
+          //  console.log("RESPONSE DATA GETTER",JSON.stringify(getAllStaticQrShortLeadDatas));
           if (response.data.data.qrLeadDocuments != "") {
             var groupDocuments = _.groupBy(
               response.data.data.qrLeadDocuments,
@@ -2278,7 +2278,7 @@ saveformsLists(fileName, mimeType, formTypeToUpdate) {
             this.Docs = groupDocuments;
           }
 
-          //  console.log("DOCS DATA NEW",JSON.stringify(this.Docs));
+          //  console.log("DOCS DATA NEW",JSON.stringify(Docs));
           this.$q.loading.hide();
         })
         .catch(() => {

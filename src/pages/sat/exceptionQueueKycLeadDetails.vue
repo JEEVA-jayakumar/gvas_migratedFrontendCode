@@ -5,18 +5,24 @@
         <div class="col-6">
           <q-banner
             v-if="formData.shortLead.verifiedBanksubventionStatus == $VERIFIED_BANKSUBVENTION_STATUS_ATTACH_FILE_PENDING"
-            icon="info"
-            type="primary"
-            message="KYC & Bank subvention"
-            detail="Status: Bank subvention verification pending"
-          />
+            class="bg-primary text-white q-mb-md"
+          >
+            <template v-slot:avatar>
+              <q-icon name="info" color="white" />
+            </template>
+            <div class="text-weight-bold">KYC & Bank subvention</div>
+            <div>Status: Bank subvention verification pending</div>
+          </q-banner>
           <q-banner
             v-if="formData.shortLead.verifiedPricingStatus == $VERIFIED_PRICING_STATUS_RSM_PENDING"
-            icon="info"
-            type="primary"
-            message="KYC & Pricing"
-            detail="Status: RSM pricing verification pending"
-          />
+            class="bg-primary text-white q-mb-md"
+          >
+            <template v-slot:avatar>
+              <q-icon name="info" color="white" />
+            </template>
+            <div class="text-weight-bold">KYC & Pricing</div>
+            <div>Status: RSM pricing verification pending</div>
+          </q-banner>
         </div>
       </div>
 
@@ -648,18 +654,18 @@ export default {
               color: "amber-9",
               position: "bottom-left",
               message: `${error.data.message}`,
-              detail: arrayMessage,
+              caption: arrayMessage,
               timeout: 8000,
               icon: "warning",
               actions: [
                 {
-                  icon: "clear", // optional
-                  noDismiss: false // optional, v0.15.11+
+                  icon: "clear",
+                  color: "white"
                 }
               ]
             });
           } else {
-            error.data.data.splice("toBeVerifiedDocuments", 1);
+            delete error.data.data.toBeVerifiedDocuments;
             for (var key in error.data.data) {
               let arrayMessage = "";
               _.map(error.data.data[key], oo => {
@@ -669,13 +675,13 @@ export default {
                 color: "amber-9",
                 position: "bottom-left",
                 message: `${error.data.message} for ${key}`,
-                detail: arrayMessage,
+                caption: arrayMessage,
                 timeout: 8000,
                 icon: "warning",
                 actions: [
                   {
-                    icon: "clear", // optional
-                    noDismiss: false // optional, v0.15.11+
+                    icon: "clear",
+                    color: "white"
                   }
                 ]
               });

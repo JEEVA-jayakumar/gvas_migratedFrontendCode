@@ -123,29 +123,29 @@
                   color="dark"
                   @request="ajaxLoadAllLeadInfo1"
                 >
-                  <q-td
-                    v-slot:body-cell-tid="props"
+                  <template v-slot:body-cell-tid="props">
+  <q-td
+
                     :props="props"
                     class="customTd"
                   >
                     <div class="text-primary">{{ props.row.tid }}</div>
                   </q-td>
-                  <q-td
-                    v-slot:body-cell-mid="props"
+</template>
+                  <template v-slot:body-cell-mid="props">
+  <q-td
+
                     :props="props"
                     class="customTd"
                   >
                     <div class="text-primary">{{ props.row.mid }}</div>
                   </q-td>
-                  <q-td
-                    v-slot:body-cell-createdAt="props"
-                    :props="props"
-                    >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
-                  >
-                  <q-td
-                    v-slot:body-cell-assign="props"
-                    :props="props"
-                  >
+</template>
+                  <template v-slot:body-cell-createdAt="props">
+                    <q-td :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
+                  </template>
+                  <template v-slot:body-cell-assign="props">
+                    <q-td :props="props">
                     <q-btn
                       class="btn1"
                       v-if="props.row.isStatus == 1"
@@ -184,16 +184,17 @@
                       size="sm"
                       >Installed</q-btn
                     >
-                    <q-btn
-                      v-if="props.row.isStatus == null"
-                      highlight
-                      push
-                      color="purple-9"
-                      size="sm"
-                      @click="OGSPendingStatus(props.row)"
-                      >Re-Submit</q-btn
-                    >
-                  </q-td>
+                      <q-btn
+                        v-if="props.row.isStatus == null"
+                        highlight
+                        push
+                        color="purple-9"
+                        size="sm"
+                        @click="OGSPendingStatus(props.row)"
+                        >Re-Submit</q-btn
+                      >
+                    </q-td>
+                  </template>
                   <template slot="top">
                     <div class="col-md-4">
                       <q-input
@@ -390,8 +391,8 @@ export default {
   },
 
   computed: {
-    ...mapGetters("HitachiIndianBankOnboarding", ["getHitachiIndianOnboarding"])
-    // ...mapGetters("ImplementationExecutive", ["getImplementationExecutiveList"])
+    ...mapGetters("HitachiIndianBankOnboarding", ["getHitachiIndianOnboarding"]),
+    ...mapGetters("ImplementationExecutive", ["getImplementationExecutiveList"])
   },
   beforeMount() {
     console.log(
@@ -400,7 +401,7 @@ export default {
     );
     console.log(
       "PROPS DETAILS TID1-------------->>>>",
-      JSON.stringify(this.props)
+      JSON.stringify(props)
     );
   },
   mounted() {
@@ -419,6 +420,7 @@ export default {
     ...mapActions("IndianBankUpload", [
       "FEED_HITACHI_INDIAN_BANK_ONBOARDING_UPLOAD_DATA"
     ]),
+    ...mapActions("ImplementationExecutive", ["IMPLEMENTATION_EXECUTIVE_LIST"]),
     removeBulkUploadFile() {
       this.formData.fileSelected = [];
     },
@@ -530,7 +532,7 @@ export default {
           this.tableData1 = this.getHitachiIndianOnboarding.content;
           console.log(
             "TABLE DATA1------------------------>>>>>",
-            JSON.stringify(this.tableData1)
+            JSON.stringify(tableData1)
           );
           if (this.getHitachiIndianOnboarding.sort != null) {
             console.log(
@@ -541,7 +543,7 @@ export default {
             this.paginationControl1.descending = this.getHitachiIndianOnboarding.sort[0].ascending;
             console.log(
               "Pagination Control modified : -------- : " +
-                JSON.stringify(this.paginationControl1)
+                JSON.stringify(paginationControl1)
             );
           } else {
             console.log("Sort is null : ---------- : ");
@@ -575,11 +577,6 @@ export default {
         this.ajaxLoadAllLeadInfo1({
           pagination: this.paginationControl1,
           filter: this.filterSearch1
-        });
-      } else {
-        this.ajaxLoadAllLeadInfo({
-          pagination: this.paginationControl,
-          filter: this.filterSearch
         });
       }
     },

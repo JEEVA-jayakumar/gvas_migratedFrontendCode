@@ -137,7 +137,7 @@
     this.getInvoiceNumber(JSON.stringify(this.propRowDetails.id));
   },
     beforeMount() {
-      console.log("propRowDetails ------->", JSON.stringify(this.propRowDetails));
+      console.log("propRowDetails ------->", JSON.stringify(propRowDetails));
     },
     mounted() {
       console.log("FormData:", assumeFormDataValue);

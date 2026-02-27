@@ -218,7 +218,8 @@
                     :rows="getAllAggregatorsRegionalInventorySerialNumbersByDevice" :columns="columnData"
                     :filter="filter" v-model:pagination="paginationControl" :loading="toggleAjaxLoadFilter"
                     row-key="name">
-                    <q-td v-slot:body-cell-action="props" :props="props" v-if="info == 6">
+                    <template v-slot:body-cell-action="props">
+  <q-td  :props="props" v-if="info == 6">
                         <div class="row no-wrap no-padding">
                             <q-btn dense no-caps no-wrap label="Usable" icon="fa fa-check square" size="md"
                                 @click="fnShowUsable(props.row)" flat class="text-light-blue"></q-btn>
@@ -226,11 +227,14 @@
                                 @click="fnShowFaulty(props.row)" flat class="text-negative"></q-btn>
                         </div>
                     </q-td>
-                    <q-td v-slot:body-cell-device_type="props" :props="props">{{
+</template>
+                    <template v-slot:body-cell-device_type="props">
+  <q-td  :props="props">{{
                         props.row.aggregatorDevice
                             ==
                             null ? 'NA' : props.row.aggregatorDevice.deviceName
                     }}</q-td>
+</template>
                     <template v-slot:top="props" class="bottom-border">
                         <!--START: table filter,search -->
                         <div class="col-md-6">
@@ -428,8 +432,8 @@ export default {
             this.toggleAjaxLoadFilter = true;
             this.activeItemId = itemIndex;
             console.log("itemIndex ------>", JSON.stringify(itemIndex))
-            console.log("DEVICE LOAD DATAS--------------" + JSON.stringify(this.loadDevicesTableData))
-            console.log("DEVICE LOAD DATAS--------------" + JSON.stringify(this.toggleAjaxLoadFilter))
+            console.log("DEVICE LOAD DATAS--------------" + JSON.stringify(loadDevicesTableData))
+            console.log("DEVICE LOAD DATAS--------------" + JSON.stringify(toggleAjaxLoadFilter))
             if (itemIndex == this.$REGIONAL_INVENTORY_ALL_DEVICES) {
                 this.inventoryCountTableTitle = item.name;
                 this.$emit("emittedForTotalSerialNumbers");
@@ -535,7 +539,7 @@ export default {
                     console.log("Action------------->" + JSON.stringify(action))
                         .then(response => {
                             this.FETCH_PHONE_PE_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT(
-                                this.region
+                                region
                             );
                             let requestParams = {
                                 // TODO Please
@@ -589,7 +593,7 @@ export default {
                     this.FAULTY_DEVICE(action)
                         .then(response => {
                             this.FETCH_PHONE_PE_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT(
-                                this.region
+                                region
                             );
                             // FETCH_REGIONAL_INVENTORY_SERIAL_NUMBER_BY_DEVICE(
                             //   this.region + "/1"

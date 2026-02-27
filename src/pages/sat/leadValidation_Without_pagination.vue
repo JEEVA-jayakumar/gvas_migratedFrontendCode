@@ -26,13 +26,16 @@
           row-key="name"
         >
           <!--START: table body modification -->
-          <q-td
-            v-slot:body-cell-date="props"
+          <template v-slot:body-cell-date="props">
+  <q-td
+
             :props="props"
           >{{ $moment(props.row.submitteSATDate).format("Do MMM Y") }}</q-td>
+</template>
 
-          <q-td
-            v-slot:body-cell-lead_id="props"
+          <template v-slot:body-cell-lead_id="props">
+  <q-td
+
             :props="props"
             class="cursor-pointer"
             @click="toggleLeadInformation(props.row)"
@@ -42,24 +45,32 @@
               :class="[props.row.priority?'text-negative text-weight-bolder':'text-primary']"
             ># {{props.row.leadNumber}}</span>
           </q-td>
+</template>
 
-          <q-td v-slot:body-cell-leadName="props" :props="props">
+          <template v-slot:body-cell-leadName="props">
+  <q-td  :props="props">
             <span class="capitalize">{{props.row.leadName}}</span>
           </q-td>
+</template>
 
-          <q-td v-slot:body-cell-state="props" :props="props">
+          <template v-slot:body-cell-state="props">
+  <q-td  :props="props">
             <span class="capitalize">{{props.row.state}}</span>
           </q-td>
+</template>
 
-          <q-td v-slot:body-cell-so_name="props" :props="props">
+          <template v-slot:body-cell-so_name="props">
+  <q-td  :props="props">
             <span
               class="capitalize"
               v-if="props.row.createdBy !== null"
             >{{props.row.createdBy.name}}</span>
             <span v-else>NA</span>
           </q-td>
+</template>
 
-          <q-td v-slot:body-cell-finance_approval="props" :props="props">
+          <template v-slot:body-cell-finance_approval="props">
+  <q-td  :props="props">
             <span
               class="label text-positive"
               v-if="props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_SUCCESS"
@@ -74,8 +85,10 @@
             >Rejected</span>
             <span class="label" v-else>NA</span>
           </q-td>
+</template>
 
-          <q-td v-slot:body-cell-status="props" :props="props">
+          <template v-slot:body-cell-status="props">
+  <q-td  :props="props">
             <span
               class="label text-positive"
               v-if="props.row.verifiedFinanceStatus== $LEAD_STATUS_SUBMIT_TO_SAT_LEAD && props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_SUCCESS"
@@ -94,8 +107,10 @@
             >With ops</span>
             <span class="label text-negative" v-else>Pending</span>
           </q-td>
+</template>
 
-          <q-td v-slot:body-cell-action="props" :props="props">
+          <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
             <q-btn
               v-if="props.row.leadStatus == $LEAD_STATUS_DATA_ENTRY_PENDING"
               highlight
@@ -145,6 +160,7 @@
 
             <q-btn v-else class="disabled" highlight push outline color="grey-9" size="sm">Validate</q-btn>
           </q-td>
+</template>
           <!-- END: table body modification -->
           <template v-slot:top="props" class="bottom-border">
             <!--START: table filter,search -->

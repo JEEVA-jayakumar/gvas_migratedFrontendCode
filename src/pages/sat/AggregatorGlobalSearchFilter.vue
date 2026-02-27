@@ -30,7 +30,7 @@
           <div class="text-subtitle1 text-bold text-grey-9" style="align-self: center;">No Data Available</div>
         </div>
       </div>
-      <div v-for="tdata in tableData" :key="tdata.id" :to="tdata.to"
+      <div v-for="tdata in tableData" :key="tdata.id"
         class="row gutter-x-xs gutter-y-xs justify-center q-pt-lg q-mr-lg q-ml-lg q-mt-lg q-mb-lg dFont">
   
         <div class="col-lg-4 col-md-6 col-sm-12">
@@ -43,7 +43,7 @@
               <div v-if="tableData.length > 0">
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.leadStatus.leadNumber.label
+                  fieldKeys.leadStatus.leadNumber.label
                   }}</span>
                   <span class="col-md-8 text-wrap text-primary">{{
                   "# " + tdata.leadNumber
@@ -51,41 +51,41 @@
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.leadStatus.leadName.label
+                  fieldKeys.leadStatus.leadName.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10">{{ tdata.leadName
                   }}</span>
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.leadStatus.leadAddress.label
+                  fieldKeys.leadStatus.leadAddress.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10">{{
                   tdata.leadAddress }}</span>
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.leadStatus.leadDevice.label
+                  fieldKeys.leadStatus.leadDevice.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10">{{
                   tdata.leadDevice }}</span>
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.leadStatus.leadDeviceCount.label
+                  fieldKeys.leadStatus.leadDeviceCount.label
                   }}</span>
                   <span class="col-md-4">{{ tdata.ledDeviceCount }}</span>
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.leadStatus.leadRegionName.label
+                  fieldKeys.leadStatus.leadRegionName.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10">{{
                   tdata.leadRegionName }}</span>
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.leadStatus.leadStatus.label
+                  fieldKeys.leadStatus.leadStatus.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10" :style="
                     `background-color:${funcValidate(tdata.leadStatus, 'LS')}; 
@@ -109,7 +109,7 @@
               <div v-if="tableData.length > 0">
                 <div v-if="tdata.tidStatus == 6" class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.tidStatus.tid.label
+                  fieldKeys.tidStatus.tid.label
                   }}</span>
                   <span  class="col-md-8 text-wrap text-primary">{{
                   "# " + tdata.tid
@@ -117,7 +117,7 @@
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.tidStatus.tidStatus.label
+                  fieldKeys.tidStatus.tidStatus.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10" :style="
                     `background-color:${funcValidate(tdata.tidStatus, 'TS')}; 
@@ -129,7 +129,7 @@
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.tidStatus.tidAssignedTo.label
+                  fieldKeys.tidStatus.tidAssignedTo.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10" :style="
                     `background-color:${
@@ -140,14 +140,14 @@
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.tidStatus.tidImplementedDate.label
+                  fieldKeys.tidStatus.tidImplementedDate.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10">{{
                   tdata.tidImplementedDate }}</span>
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.tidStatus.deviceRecoveryStatus.label
+                  fieldKeys.tidStatus.deviceRecoveryStatus.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10" :style="
                     `background-color:${funcValidate(
@@ -165,7 +165,7 @@
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.tidStatus.recoveredBy.label
+                  fieldKeys.tidStatus.recoveredBy.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10" :style="
                     `background-color:${
@@ -176,7 +176,7 @@
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.tidStatus.deviceReplacementStatus.label
+                  fieldKeys.tidStatus.deviceReplacementStatus.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10" :style="
                     `background-color:${funcValidate(
@@ -194,7 +194,7 @@
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.tidStatus.replacedBy.label
+                  fieldKeys.tidStatus.replacedBy.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10" :style="
                     `background-color:${
@@ -219,7 +219,7 @@
               <div v-if="tableData.length > 0">
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.serialNumberStatus.serialNumber.label
+                  fieldKeys.serialNumberStatus.serialNumber.label
                   }}</span>
                   <span class="col-md-8 text-wrap text-primary">{{
                   "# " + tdata.serialNumber
@@ -227,7 +227,7 @@
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.serialNumberStatus.ciDeviceType.label
+                  fieldKeys.serialNumberStatus.ciDeviceType.label
                   }}</span>
                   <span class="col-md-4 text-wrap content-center text-weight-regular text-blue-grey-10">{{
                   tdata.ciDeviceType }}</span>
@@ -241,7 +241,7 @@
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.serialNumberStatus.ciDeviceStauts.label
+                  fieldKeys.serialNumberStatus.ciDeviceStauts.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10" :style="
                     `background-color:${funcValidate(
@@ -259,7 +259,7 @@
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.serialNumberStatus.deviceAllocatedtoRegion.label
+                  fieldKeys.serialNumberStatus.deviceAllocatedtoRegion.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10" :style="
                     `background-color:${
@@ -275,7 +275,7 @@
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.serialNumberStatus.riDeviceStatus.label
+                  fieldKeys.serialNumberStatus.riDeviceStatus.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10" :style="
                     `background-color:${funcValidate(
@@ -293,7 +293,7 @@
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.serialNumberStatus.riDeviceAllocatedOrImplemented
+                  fieldKeys.serialNumberStatus.riDeviceAllocatedOrImplemented
                   .label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10" :style="
@@ -312,7 +312,7 @@
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.serialNumberStatus.isDeviceReceivedInRi.label
+                  fieldKeys.serialNumberStatus.isDeviceReceivedInRi.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10" :style="
                     `background-color:${
@@ -328,7 +328,7 @@
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.serialNumberStatus.riAssignedSO.label
+                  fieldKeys.serialNumberStatus.riAssignedSO.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10" :style="
                     `background-color:${
@@ -339,21 +339,21 @@
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.serialNumberStatus.riStatusUpdatedDate.label
+                  fieldKeys.serialNumberStatus.riStatusUpdatedDate.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10">{{
                   tdata.riStatusUpdatedDate }}</span>
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.serialNumberStatus.riPodNumber.label
+                  fieldKeys.serialNumberStatus.riPodNumber.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10">{{
                   tdata.riPodNumber }}</span>
                 </div>
                 <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                   <span class="col-md-4 text-weight-medium">{{
-                  filedKeys.serialNumberStatus.regionInventoryName.label
+                  fieldKeys.serialNumberStatus.regionInventoryName.label
                   }}</span>
                   <span class="col-md-8 text-wrap content-center text-weight-regular text-blue-grey-10">{{
                   tdata.regionInventoryName }}</span>
@@ -387,7 +387,7 @@ import { required, or } from '@vuelidate/validators';
           LeadNumber: "leadNumber"
         },
         tableData: [],
-        filedKeys: {
+        fieldKeys: {
           leadStatus: {
             leadNumber: { label: "Lead Number" },
             leadName: { label: "Lead Name" },

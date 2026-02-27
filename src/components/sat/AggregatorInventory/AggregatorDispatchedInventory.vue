@@ -69,11 +69,13 @@
                 <!--STARTv-model: table damaged device -->
                 <q-table title="Lead Validation" table-class="customTableClass" class="q-py-none"
                     :rows="deviceregionalInventoryList" :columns="columnData" :filter="filter" v-model:pagination="paginationControl" :loading="toggleAjaxLoadFilter" row-key="name">
-                    <q-td v-slot:body-cell-inboundVerified="props" :props="props">
+                    <template v-slot:body-cell-inboundVerified="props">
+  <q-td  :props="props">
                         <q-btn flat v-if="props.row.inboundVerifiedStatus == 1" icon="check" color="positive" />
                         <q-btn flat v-else-if="props.row.inboundVerifiedStatus == 2" icon="clear" color="negative" />
                         <q-btn flat color="amber-9" v-else icon="warning" />
                     </q-td>
+</template>
                     <template v-slot:top="props" class="bottom-border">
                         <!--START: table filter,search -->
                         <div class="col-md-12">
@@ -164,7 +166,7 @@ export default {
         ...mapGetters("superAdminAggregators", ["getCreatedAggregatorList", "getActiveCreatedAggregatorList"]),
         computeEnableUploadToInventory() {
             return _.filter(
-                this.deviceregionalInventoryList,
+                deviceregionalInventoryList,
                 oo => {
                     return oo.inboundVerifiedStatus == 1;
                 }
@@ -310,7 +312,7 @@ export default {
                     icon: "clear"
                 });
             } else {
-                this.$barcodeScanner.init(this.onBarcodeScanned);
+                this.$barcodeScanner.init(onBarcodeScanned);
                 this.toggleScanButton = false;
             }
         },

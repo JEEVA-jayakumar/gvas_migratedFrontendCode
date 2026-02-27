@@ -32,16 +32,23 @@
   
     <div v-if="tableData.length != 0">
       <q-table table-class="customTableClass" :rows="tableData" :columns="columns" v-model:pagination="paginationControl" row-key="name" :loading="toggleAjaxLoadFilter" :rows-per-page-options="[5, 10, 15, 20]" @request="ajaxLoadAllLeadInfo">
-        <q-td v-slot:body-cell-tid="props" :props="props">
+        <template v-slot:body-cell-tid="props">
+  <q-td  :props="props">
           <span class="label text-primary"># {{ props.row.tid }}</span>
         </q-td>
-        <q-td v-slot:body-cell-merchantName="props" :props="props">
+</template>
+        <template v-slot:body-cell-merchantName="props">
+  <q-td  :props="props">
           <span > {{ props.row.leadInformation.contactName == null ? "NA"  :  props.row.leadInformation.contactName }}</span>
         </q-td>
-        <q-td v-slot:body-cell-regionAreaName="props" :props="props">
+</template>
+        <template v-slot:body-cell-regionAreaName="props">
+  <q-td  :props="props">
           <span > {{ props.row.aggregatorRegionalInventory.region.regionAreaName == null ? "NA"  :  props.row.aggregatorRegionalInventory.region.regionAreaName }}</span>
         </q-td>
-        <q-td v-slot:body-cell-viewDocument="props" :props="props">
+</template>
+        <template v-slot:body-cell-viewDocument="props">
+  <q-td  :props="props">
           <div v-if="props.row.implementationFormMimeType == null || props.row.implementationFormMimeType.includes('application/pdf')" class="cursor-pointer">
             <div @click="fnPDFViewModal(props.row.implementationForm)">
               <q-icon name="fas fa-file-pdf" color="primary" />
@@ -54,7 +61,9 @@
           </div>
           <div v-else>NA Document</div>
         </q-td>
-         <q-td v-slot:body-cell-pictureOfShop="props" :props="props">
+</template>
+         <template v-slot:body-cell-pictureOfShop="props">
+  <q-td  :props="props">
           <div
             v-if="
               props.row.pictureOfShopMimeType == null ||
@@ -73,7 +82,9 @@
           </div>
           <div v-else>NA Document</div>
          </q-td>
-         <q-td v-slot:body-cell-cpvForm="props" :props="props">
+</template>
+         <template v-slot:body-cell-cpvForm="props">
+  <q-td  :props="props">
           <div
             v-if="
               props.row.cpvFormMimeType == null ||
@@ -92,23 +103,33 @@
           </div>
           <div v-else>NA Document</div>
         </q-td>
+</template>
       </q-table>
     </div>
     <div v-else-if="tableData1.length != 0">
       <q-table table-class="customTableClass" :rows="tableData1" :columns="columns1" row-key="name" v-model:pagination="paginationControlchange" :rows-per-page-options="[5,10,15,20]" :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo1">
-       <q-td v-slot:body-cell-tid="props" :props="props">
+       <template v-slot:body-cell-tid="props">
+  <q-td  :props="props">
           <span class="label text-primary"># {{ props.row.serviceRequestData.tid }}</span>
         </q-td>
-        <q-td v-slot:body-cell-merchantName="props" :props="props">
+</template>
+        <template v-slot:body-cell-merchantName="props">
+  <q-td  :props="props">
           <span > {{ props.row.serviceRequestData.meName == null ? "NA"  :  props.row.serviceRequestData.meName }}</span>
         </q-td>
-        <q-td v-slot:body-cell-regionAreaName="props" :props="props">
+</template>
+        <template v-slot:body-cell-regionAreaName="props">
+  <q-td  :props="props">
           <span > {{ props.row.serviceRequestData.bpRegion.regionAreaName == null ? "NA"  :  props.row.serviceRequestData.bpRegion.regionAreaName }}</span>
         </q-td>
-        <q-td v-slot:body-cell-ticket="props" :props="props">
+</template>
+        <template v-slot:body-cell-ticket="props">
+  <q-td  :props="props">
           <span > {{ props.row.serviceRequestData.serviceReqTicketId == null ? "NA"  :  props.row.serviceRequestData.serviceReqTicketId }}</span>
         </q-td>
-        <q-td v-slot:body-cell-pictureOfShop="props" :props="props">
+</template>
+        <template v-slot:body-cell-pictureOfShop="props">
+  <q-td  :props="props">
           <div
             v-if="
               props.row.pictureOfShopMimeType == null ||
@@ -126,7 +147,9 @@
           </div>
           <div v-else>NA Document</div>
         </q-td>
-        <q-td v-slot:body-cell-viewDocument="props" :props="props">
+</template>
+        <template v-slot:body-cell-viewDocument="props">
+  <q-td  :props="props">
           <div
             v-if="
               props.row.implementationFormMimeType == null ||
@@ -145,6 +168,7 @@
           </div>
           <div v-else>NA Document</div>
         </q-td>
+</template>
 
       </q-table>
     </div>

@@ -653,7 +653,7 @@ export default {
     fnGetMerchantTypeValue(inputValue) {
       this.TOGGLE_COMMON_LOADER(true);
       let merchantDocumentCategory = _.find(
-        this.getShortLeadInfoDocumentTypes,
+        getShortLeadInfoDocumentTypes,
         o => o.merchantType === inputValue
       );
       let arr = {
@@ -782,7 +782,7 @@ export default {
       });
       this.getShortLeadInfoDocumentTypes["uploadedDocuments"] = arr;
       // console.log(
-      //   "this.getShortLeadInfoDocumentTypes",
+      //   "getShortLeadInfoDocumentTypes",
       //   this.getShortLeadInfoDocumentTypes
       // );
       this.$emit("emitCookUpKYCdocumentsId", this.merchantDocumentIds);

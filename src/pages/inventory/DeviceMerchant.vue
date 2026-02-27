@@ -19,12 +19,16 @@
         :rows-per-page-options="[5,10,15,20]"
         @request="ajaxLoadAllLeadInfo"
       >
-       <q-td v-slot:body-cell-implementedDate="props" :props="props">
+       <template v-slot:body-cell-implementedDate="props">
+  <q-td  :props="props">
           <span class="label">{{ $moment(props.row.implementedDate).format("Do MMM Y") }}</span>
         </q-td>
-        <!-- <q-td v-slot:body-cell-installationDate="props" :props="props">
+</template>
+        <!-- <template v-slot:body-cell-installationDate="props">
+  <q-td  :props="props">
           <span class="label">{{ $moment(props.row.installationDate).format("Do MMM Y") }}</span>
-        </q-td> -->
+        </q-td>
+</template> -->
            <!-- <q-td key="action" :props="props">
                 <div class="q-gutter-sm">
               <q-checkbox v-model="val" />

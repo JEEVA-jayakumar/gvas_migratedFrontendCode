@@ -58,7 +58,7 @@ export default {
     };
   },
   beforeMount() {
-    // console.log("Hellow world ----->", JSON.stringify(this.propRowDetails));
+    // console.log("Hellow world ----->", JSON.stringify(propRowDetails));
   },
   computed: {
     ...mapGetters("equitasImplementedQueue", ["getservicereject"]),

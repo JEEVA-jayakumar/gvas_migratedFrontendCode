@@ -19,86 +19,68 @@
           table-class="customTableClass"
           :rows="tableData"
           :columns="columns"
-          :filter="filter" v-model:pagination="paginationControl"
-          row-key="name"
+          :filter="filter"
+          v-model:pagination="paginationControl"
+          row-key="id"
         >
           <!--START: table body modification -->
-          <q-td v-slot:body-cell-createdAt="props" :props="props">
-            <span class="label">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</span>
-          </q-td>
-          <q-td v-slot:body-cell-submitteSATDate="props" :props="props">
-            <span class="label">{{ $moment(props.row.submitteSATDate).format("Do MMM Y") }}</span>
-          </q-td>
-          <q-td v-slot:body-cell-applicationNumber="props" :props="props">
-            <span class="label capitalize">{{props.row.applicationNumber}}</span>
-          </q-td>
-          <q-td v-slot:body-cell-leadName="props" :props="props">
-            <span class="label capitalize">{{props.row.leadName}}</span>
-          </q-td>
-          <q-td
-            v-slot:body-cell-leadNumber="props"
-            class="cursor-pointer"
-            @click="toggleLeadInformation(props.row)"
-            slot-scope="props"
-            :props="props"
-          >
-            <span class="label text-primary"># {{props.row.leadNumber}}</span>
-          </q-td>
-          <q-td v-slot:body-cell-createdBy="props" :props="props">
-            <span class="label">{{props.row.createdBy.name+ " | " + props.row.createdBy.employeeID}}</span>
-          </q-td>
-          <q-td v-slot:body-cell-leadAddress="props" :props="props">
-            <span class="label">{{props.row.leadAddress}}</span>
-          </q-td>
-          <q-td
-            v-slot:body-cell-verifiedStatus="props"
-            :props="props"
-          >{{props.row.verifiedStatus}}</q-td>
-
-          <!-- <q-td v-slot:body-cell-status="props" :props="props">
-            <span class="label " :class="{'text-green': props.row.status=='Approved', 'text-red': props.row.status=='Rejected', 'text-orange': props.row.status=='Pending with OPS' }">{{props.row.status}}</span>
-          </q-td>-->
+          <template v-slot:body-cell-createdAt="props">
+            <q-td :props="props">
+              <span class="label">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</span>
+            </q-td>
+          </template>
+          <template v-slot:body-cell-submitteSATDate="props">
+            <q-td :props="props">
+              <span class="label">{{ $moment(props.row.submitteSATDate).format("Do MMM Y") }}</span>
+            </q-td>
+          </template>
+          <template v-slot:body-cell-applicationNumber="props">
+            <q-td :props="props">
+              <span class="label capitalize">{{props.row.applicationNumber}}</span>
+            </q-td>
+          </template>
+          <template v-slot:body-cell-leadName="props">
+            <q-td :props="props">
+              <span class="label capitalize">{{props.row.leadName}}</span>
+            </q-td>
+          </template>
+          <template v-slot:body-cell-leadNumber="props">
+            <q-td
+              :props="props"
+              class="cursor-pointer"
+              @click="toggleLeadInformation(props.row)"
+            >
+              <span class="label text-primary"># {{props.row.leadNumber}}</span>
+            </q-td>
+          </template>
+          <template v-slot:body-cell-createdBy="props">
+            <q-td :props="props">
+              <span class="label">{{props.row.createdBy ? props.row.createdBy.name + " | " + props.row.createdBy.employeeID : 'NA'}}</span>
+            </q-td>
+          </template>
+          <template v-slot:body-cell-leadAddress="props">
+            <q-td :props="props">
+              <span class="label">{{props.row.leadAddress}}</span>
+            </q-td>
+          </template>
+          <template v-slot:body-cell-verifiedStatus="props">
+            <q-td :props="props">
+              {{props.row.verifiedStatus}}
+            </q-td>
+          </template>
           <!--END: table body modification -->
-          <template v-slot:top="props">
-            <!--START: table fullscreen mode -->
-            <!-- <div class="col-md-4" align="right">
-            <q-btn
-            :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
-            @click="props.toggleFullscreen"
-            class="q-mt-lg"
-            color="grey-9"
-            size="sm"
-            />
-            </div>-->
-            <!--END: table fullscreen mode -->
+          <template v-slot:top>
             <!--START: table filter,search,excel download -->
             <div class="col-5">
               <q-input
                 clearable
                 v-model="filter"
-                separator
                 color="grey-9"
                 placeholder="Type.."
                 label="Search by Merchant Name, Lead ID"
                 class="q-mr-lg q-py-sm"
               />
             </div>
-            <!-- <div class="col-3">
-              <q-input filled v-model="model" label="Filter By" color="grey-9">
-            <template v-slot:append>
-              <q-icon name="event" class="cursor-pointer">
-                <q-menu transition-show="scale" transition-hide="scale">
-                  <q-date v-model="model" mask="YYYY-MM-DD" />
-                </q-menu>
-              </q-icon>
-            </template>
-          </q-input>
-            </div>-->
-            <!-- <div class="col-md-4">
-              <downloadExcel :rows="excelTableData" :fields="excelColumnData.field" name="Merchant Transaction Level.xls">
-                <q-btn outline color="grey-9" label="Download as Excel" class="q-mr-lg q-py-sm float-right" size="md" />
-              </downloadExcel>
-            </div>-->
             <!--END: table filter,search -->
           </template>
         </q-table>
@@ -114,15 +96,12 @@
 </template>
 
 <script>
-import { required } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
-import downloadExcel from "vue-json-excel";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 
 export default {
   name: "openMerchantTracker",
   components: {
-    downloadExcel,
     generalLeadInformation
   },
   data: () => ({
@@ -133,7 +112,6 @@ export default {
     paginationControl: {
       rowsPerPage: 10
     },
-    model: "",
     filter: "",
     columns: [
       {
@@ -158,10 +136,8 @@ export default {
         label: "MRL app no",
         align: "left",
         field: row => {
-          return "# " + row.applicationNumber == null
-                            ? "NA"
-                            : row.applicationNumber;
-                    },
+          return row.applicationNumber || "NA";
+        },
         sortable: true
       },
       {
@@ -195,7 +171,7 @@ export default {
         required: true,
         label: "SO Name",
         align: "left",
-        field: "createdBy",
+        field: row => row.createdBy ? row.createdBy.name : 'NA',
         sortable: false
       },
       {
@@ -207,100 +183,11 @@ export default {
         sortable: false
       }
     ],
-    excelColumnData: [
-      {
-        name: "createdAt",
-        required: true,
-        label: "Created Date",
-        align: "left",
-        field: "createdAt",
-        sortable: true
-      },
-      {
-        name: "submitteSATDate",
-        required: true,
-        label: "Submitted Date",
-        align: "center",
-        field: "submitteSATDate",
-        sortable: true
-      },
-      {
-        name: "leadNumber",
-        required: true,
-        label: "Lead ID",
-        align: "left",
-        field: "leadNumber",
-        sortable: true
-      },
-      {
-        name: "leadName",
-        required: true,
-        label: "Merchant Name",
-        align: "left",
-        field: "leadName",
-        sortable: true
-      },
-      {
-        name: "state",
-        required: true,
-        label: "Location",
-        align: "left",
-        field: "state",
-        sortable: true
-      },
-      {
-        name: "createdBy",
-        required: true,
-        label: "SO Name",
-        align: "left",
-        field: "createdBy",
-        sortable: true
-      },
-      {
-        name: "verifiedStatus",
-        required: true,
-        label: "Status",
-        align: "left",
-        field: "verifiedStatus",
-        sortable: true
-      }
-    ],
-    excelTableData: [],
-    loading: true,
     tableData: [],
-    lazy: [],
-    select: "fb",
-    multipleSelect: ["goog", "twtr"],
-    error: true,
-    warning: false,
-    options: [
-      {
-        label: "Google",
-        value: "goog"
-      },
-      {
-        label: "Facebook",
-        value: "fb"
-      },
-      {
-        label: "Twitter",
-        value: "twtr"
-      },
-      {
-        label: "Apple Inc.",
-        value: "appl"
-      },
-      {
-        label: "Oracle",
-        value: "ora"
-      }
-    ]
   }),
 
   created() {
-    /* START: Load open merchant tracker data */
     this.ajaLoadDataAllopenAggMerchantTrackerData();
-    /* END: Load open merchant tracker data */
   },
 
   computed: {
@@ -313,24 +200,11 @@ export default {
     ]),
     ...mapActions("commonLoader", ["TOGGLE_COMMON_LOADER"]),
 
-    // Function to list all open merchant tracker data
     ajaLoadDataAllopenAggMerchantTrackerData() {
       this.TOGGLE_COMMON_LOADER(true);
       this.FETCH_ALL_AGG_OPEN_MERCHANT_TRACKER_DATA()
         .then(response => {
           this.tableData = this.getAggOpenMerchantTracker;
-          let arr = [];
-          this.getAggOpenMerchantTracker.map(function(value, index) {
-            arr.push({
-              "Created Date": value.createdAt,
-              "Submitted Date": value.submitteSATDate,
-              "Lead ID": value.id,
-              State: value.state,
-              "SO Name": value.createdBy.name,
-              Status: value.verifiedStatus
-            });
-          });
-          this.excelTableData = arr;
           this.TOGGLE_COMMON_LOADER(false);
         })
         .catch(() => {
@@ -338,7 +212,6 @@ export default {
         });
     },
 
-    // Function to toggle lead information pop up screen
     toggleLeadInformation(leadDetails) {
       this.propToggleLeadInformation = !this.propToggleLeadInformation;
       if (leadDetails != undefined) {
@@ -346,23 +219,10 @@ export default {
       }
     },
 
-    //Function pull to refresh
     PullToRefresh(done) {
       this.FETCH_ALL_AGG_OPEN_MERCHANT_TRACKER_DATA()
         .then(response => {
           this.tableData = this.getAggOpenMerchantTracker;
-          let arr = [];
-          this.getAggOpenMerchantTracker.map(function(value, index) {
-            arr.push({
-              "Created Date": value.createdAt,
-              "Submitted Date": value.submitteSATDate,
-              "Lead ID": value.id,
-              State: value.state,
-              "SO Name": value.createdBy.name,
-              Status: value.verifiedStatus
-            });
-          });
-          this.excelTableData = arr;
           done();
         })
         .catch(() => {

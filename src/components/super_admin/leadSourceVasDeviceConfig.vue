@@ -12,15 +12,19 @@
           <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
             @request="ajaxLoadData">
 
-            <q-td v-slot:body-cell-vas="props" :props="props">
+            <template v-slot:body-cell-vas="props">
+  <q-td  :props="props">
               <div inline color="light" class="row no-wrap group text-dark" v-for="vas in props.row.vasList">{{vas.name}}</div>
             </q-td>
-            <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+            <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
                   @click="fnEdit(props.row)" flat class="text-light-blue"></q-btn>
               </div>
             </q-td>
+</template>
             <template v-slot:top="props">
               <!--START: table title -->
               <!--END: table title -->

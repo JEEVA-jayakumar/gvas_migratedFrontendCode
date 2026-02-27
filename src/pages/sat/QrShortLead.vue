@@ -62,7 +62,7 @@
                         disable
                         type="text"
                         style="width: 220px"
-                        v-model="this.applicationNumber"
+                        v-model="applicationNumber"
                       />
                     </q-item>
                     <q-item class="q-pa-sm text-body1">
@@ -573,14 +573,14 @@
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>Category Type</q-item-section>
                       <q-input
-                        v-if="this.formData.qrShortLead.isMerchant == 1"
+                        v-if="formData.qrShortLead.isMerchant == 1"
                         disable
                         type="text"
                         style="width: 220px;"
                         v-model="isactivemerchant"
                       />
                       <q-input
-                        v-if="this.formData.qrShortLead.isMerchant == 2"
+                        v-if="formData.qrShortLead.isMerchant == 2"
                         disable
                         type="text"
                         style="width: 220px;"
@@ -1165,13 +1165,13 @@
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>Own House</q-item-section>
                       <!-- <q-input
-                        v-if="this.formData.qrShortLead.ownHouse == true"
+                        v-if="formData.qrShortLead.ownHouse == true"
                         type="text"
                         style="width: 220px;"
                         v-model="isownHouse"
                       />
                       <q-input
-                        v-if="this.formData.qrShortLead.ownHouse == false"
+                        v-if="formData.qrShortLead.ownHouse == false"
                         type="text"
                         style="width: 220px;"
                         v-model="isownHouse1"
@@ -1613,7 +1613,7 @@
                         v-model="formData.qrShortLead.mdrPlanName"
                       />
                     </q-item>
-                    <div v-if="this.formData.qrShortLead.isMerchant == 1">
+                    <div v-if="formData.qrShortLead.isMerchant == 1">
                       <q-item class="q-pa-sm text-body1">
                         <q-item-section
                           >Small Merchant - MDR <2K Debit Card</q-item-section>
@@ -2304,7 +2304,7 @@
                 formData.qrShortLead.documentUploadedType == 2 &&
                 formData.qrShortLead.qrLeadCategory != true
               "
-              :disable="this.flag || !partialSaved"
+              :disable="flag || !partialSaved"
               icon="send"
               class="q-ma-xs"
               color="green"
@@ -2313,7 +2313,7 @@
             />
             <q-btn
               v-else-if="formData.qrShortLead.qrLeadCategory"
-              :disable="this.flag || !partialSaved"
+              :disable="flag || !partialSaved"
               icon="send"
               class="q-ma-xs"
               color="green"
@@ -3587,7 +3587,7 @@ export default {
       this.FETCH_PINCODE_WITH_TERM(terms)
         .then(() => {
           const results = this.COMMON_FILTER_FUNCTION(
-            this.getAllStatesData,
+            getAllStatesData,
             terms
           );
           this.validPincodes = results.map(item => item.value.pincode); // Store valid pincodes
@@ -3604,7 +3604,7 @@ export default {
       this.FETCH_PINCODE_WITH_TERM(terms)
         .then(() => {
           const results = this.COMMON_FILTER_FUNCTION(
-            this.getAllStatesData,
+            getAllStatesData,
             terms
           );
           this.validPin = results.map(item => item.value.pincode); // Store valid pincodes
@@ -3615,10 +3615,10 @@ export default {
         });
     },
     saveFieldData() {
-      this.saveCurrentLeadChanges(this.formData);
+      this.saveCurrentLeadChanges(formData);
       console.log(
         "saveFieldData------------->>>>>",
-        JSON.stringify(this.formData)
+        JSON.stringify(formData)
       );
     },
 
@@ -3627,7 +3627,7 @@ export default {
       self.FETCH_APP_DEVICES_DATA(val.id).then(() => {
         // Clearing the drop down values before assigning data
         self.dropDown.deviceOptions.splice(0);
-        return _.map(this.getAllAppDevicesInfo, item => {
+        return _.map(getAllAppDevicesInfo, item => {
           self.dropDown.deviceOptions.push({
             value: item,
             label: item.deviceName
@@ -3729,7 +3729,7 @@ export default {
 
   
 loadUpdate(){
-  this.saveCurrentLeadChangesUpdate(this.formData).then(()=>{
+  this.saveCurrentLeadChangesUpdate(formData).then(()=>{
   // ajaxQrLoadShortLeadInfo() {
   //     this.$q.loading.show({
   //       delay: 0, // ms
@@ -3801,7 +3801,7 @@ loadUpdate(){
           this.formData.qrShortLead.isMerchant == 1 ? "Small" : "Large";
           console.log(
             "QR SHORT LEAD",
-            JSON.stringify(this.getAllStaticQrShortLeadDatas)
+            JSON.stringify(getAllStaticQrShortLeadDatas)
           );
           // console.log("QR SHORT LEAD111111", JSON.stringify(this.getAllStaticQrShortLeadDatas.qrMerchantType.merchantTypeName));
           this.iciciMarsRequest.merchant.salesInformation.applicationNumber =
@@ -4115,7 +4115,7 @@ loadUpdate(){
     },
 
     mccSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.mccSearchSet, terms));
+      done(this.COMMON_FILTER_FUNCTION(mccSearchSet, terms));
     },
 
     autoCompleteError(val1, val2) {
@@ -4172,7 +4172,7 @@ loadUpdate(){
         });
     },
     residentCitySearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+      done(this.COMMON_FILTER_FUNCTION(cityOptions, terms));
     },
     registeredCitySelected(item) {
       this.formData.qrShortLead.personalInfoCity = item.label;
@@ -4183,7 +4183,7 @@ loadUpdate(){
       this.formData.qrShortLead.merchantCityRefCode = item.value;
     },
     residentStateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+      done(this.COMMON_FILTER_FUNCTION(stateOptions, terms));
     },
 
     registeredStateSelected(item) {
@@ -4772,7 +4772,7 @@ loadUpdate(){
 
     savePartialAndEnableProceed() {
       // Call the method to save changes
-      this.saveCurrentLeadChanges(this.formData);
+      this.saveCurrentLeadChanges(formData);
     },
 
     saveCurrentLeadChanges(formData) {
@@ -4797,7 +4797,7 @@ loadUpdate(){
 
      return this.UPDATE_QR_DETAILS(param)
           .then(() => {
-            this.setMarsData(this.formData);
+            this.setMarsData(formData);
             this.$q.loading.hide();
             this.$q.notify({
               color: "positive",
@@ -4843,7 +4843,7 @@ loadUpdate(){
 
      return this.UPDATE_QR_DETAILS(param)
           .then(() => {
-            this.setMarsData(this.formData);
+            this.setMarsData(formData);
             this.$q.loading.hide();
             this.$q.notify({
               color: "positive",
@@ -4871,7 +4871,7 @@ loadUpdate(){
       this.saveFieldData();
     },
     referBackAndEnableProceed() {
-      this.referBackCurrentLeadChanges(this.formData);
+      this.referBackCurrentLeadChanges(formData);
     },
     referBackCurrentLeadChanges(formData) {
       this.partialSaved = true;
@@ -4892,11 +4892,11 @@ loadUpdate(){
           id: this.formData.qrShortLead.id,
           request: this.formData.qrShortLead
         };
-        console.log("FORMDATA", JSON.stringify(this.formData));
+        console.log("FORMDATA", JSON.stringify(formData));
         this.REFERBACK_SAT_TO_SO_QR_DETAILS(param)
           .then(() => {
             this.$router.push("/sat/staticQrLeads");
-            this.setMarsData(this.formData);
+            this.setMarsData(formData);
             this.$q.loading.hide();
             this.$q.notify({
               color: "positive",

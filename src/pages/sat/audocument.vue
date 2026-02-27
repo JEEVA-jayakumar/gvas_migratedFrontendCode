@@ -208,6 +208,204 @@ export default {
         fromDate: "",
         toDate: "",
       },
+      columns: [
+        {
+          name: "tid",
+          required: true,
+          label: "TID",
+          align: "left",
+          field: "tid",
+          sortable: true,
+        },
+        {
+          name: "mid",
+          required: true,
+          label: "MID",
+          align: "left",
+          field: "mid",
+          sortable: true,
+        },
+        {
+          name: "leadNumber",
+          required: true,
+          label: "Lead Id",
+          align: "left",
+          field: (row) => {
+            return row.leadInformation ? row.leadInformation.leadNumber : 'NA';
+          },
+          sortable: false,
+        },
+        {
+          name: "LeadSource",
+          required: true,
+          label: "Lead Source",
+          align: "left",
+          field: row => {
+            return row.leadInformation && row.leadInformation.leadSource ? row.leadInformation.leadSource.sourceName : 'NA';
+          },
+          sortable: true,
+        },
+        {
+          name: "leadInformation",
+          required: true,
+          label: "ME Name",
+          align: "left",
+          field: (row) => {
+            return row.leadInformation ? row.leadInformation.leadName : 'NA';
+          },
+          sortable: false,
+        },
+        {
+          name: "leadAddress",
+          required: true,
+          label: "Merchant Address",
+          align: "center",
+          field: (row) => {
+            return row.leadInformation ? row.leadInformation.leadAddress : 'NA';
+          },
+          sortable: false,
+        },
+        {
+          name: "deviceName",
+          required: true,
+          label: "Device type",
+          align: "right",
+          field: (row) => {
+            return row.leadInformation && row.leadInformation.device
+              ? row.leadInformation.device.deviceName
+              : "NA";
+          },
+          sortable: false,
+        },
+        {
+          name: "regionalInventory.serialNumber",
+          required: true,
+          label: "Device Serial Number",
+          align: "left",
+          field: (row) => {
+            if (
+              row.leadInformation &&
+              row.leadInformation.leadSource &&
+              row.leadInformation.leadSource.sourceName === "LS_TOHANDS"
+            ) {
+              return row.toHandsSerialNumber ? row.toHandsSerialNumber : "NA";
+            }
+
+            return row.regionalInventory && row.regionalInventory.serialNumber
+              ? row.regionalInventory.serialNumber
+              : "NA";
+          },
+          sortable: true,
+        },
+        {
+          name: "deviceStatusDate",
+          required: true,
+          label: "Implementation Date",
+          align: "left",
+          field: "deviceStatusDate",
+          sortable: true,
+        },
+        {
+          name: "assignedTo",
+          required: true,
+          label: "Implemented by",
+          align: "left",
+          field: (row) => {
+            return row.assignedTo == null ? "NA" : row.assignedTo.name + " | " + row.assignedTo.employeeID;
+          },
+          sortable: true,
+        },
+        {
+          name: "deviceAddress",
+          required: true,
+          label: "Implemented Address",
+          align: "left",
+          field: (row) => {
+            return row.deviceAddress;
+          },
+          sortable: true,
+        },
+        {
+          name: "pincode",
+          required: true,
+          label: "Merchants Pincode",
+          align: "left",
+          field: (row) => {
+            return row.leadInformation && row.leadInformation.pincode
+              ? row.leadInformation.pincode
+              : "NA";
+          },
+          sortable: false,
+        },
+        {
+          name: "city",
+          required: true,
+          label: "Merchants City Town",
+          align: "left",
+          field: (row) => {
+            return row.leadInformation && row.leadInformation.city ? row.leadInformation.city : "NA";
+          },
+          sortable: false,
+        },
+        {
+          name: "mobileNumber",
+          required: true,
+          label: "FSE Mobile Number",
+          align: "center",
+          field: (row) => {
+            return row.assignedTo == null ? "NA" : row.assignedTo.contactNumber;
+          },
+          sortable: false,
+        },
+        {
+          name: "status",
+          required: true,
+          label: "Device Status",
+          align: "center",
+          field: "deviceStatus",
+          sortable: false,
+        },
+        {
+          name: "viewDocument",
+          required: true,
+          label: "Implementation Form",
+          align: "center",
+          field: "implementationForm",
+          sortable: false,
+        },
+        {
+          name: "pictureOfShop",
+          required: true,
+          label: "PictureOfShop",
+          align: "center",
+          field: "pictureOfShop",
+          sortable: false,
+        },
+        {
+          name: "cpvForm",
+          required: true,
+          label: "cpvForm",
+          align: "center",
+          field: "cpvForm",
+          sortable: false,
+        },
+        {
+          name: "action",
+          required: true,
+          label: "Approve",
+          align: "center",
+          field: "action",
+          sortable: false,
+        },
+        {
+          name: "data",
+          required: true,
+          label: "Reject",
+          align: "center",
+          field: "data",
+          sortable: false,
+        },
+      ],
     };
   },
   computed: {

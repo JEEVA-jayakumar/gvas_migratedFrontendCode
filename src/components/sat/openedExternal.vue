@@ -74,7 +74,7 @@
           <div class="col-md-3 col-sm-6 col-xs-6" align="right">
             <q-btn
               no-caps
-               :disabled="((this.formData.assignTo.id == '' || this.formData.assignTo.id == null) && (this.formData.assignTo.region == '' || this.formData.assignTo.region == null))"
+               :disabled="((formData.assignTo.id == '' || formData.assignTo.id == null) && (formData.assignTo.region == '' || formData.assignTo.region == null))"
               label="Assign"
               class="common-dark-blue"
               @click="assignImplementationUser"
@@ -127,8 +127,9 @@
             color="dark"
             @request="ajaxLoadAllLeadInfo1"
           >
-            <q-td
-              v-slot:body-cell-serviceReqTicketId="props"
+            <template v-slot:body-cell-serviceReqTicketId="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
               @click="toggleServiceRequest(props.row)"
@@ -137,9 +138,11 @@
                 ># {{ props.row.serviceReqTicketId }}</span
               >
             </q-td>
+</template>
 
-            <q-td
-              v-slot:body-cell-createdDate="props"
+            <template v-slot:body-cell-createdDate="props">
+  <q-td
+
               :props="props"
               >{{ $moment(props.row.createdDate).format("Do MMM Y") }}</q-td
             >
@@ -170,9 +173,11 @@
                             <span class="label text-negative"
                                 v-else-if="props.row.serviceRequestSubTicketStatus == 10">SR_CANCELLED</span>
                             <span class="label" v-else>NA</span>
-                        </q-td> -->
-            <q-td
-              v-slot:body-cell-serviceRequestTicketStatus="props"
+                        </q-td>
+</template> -->
+            <template v-slot:body-cell-serviceRequestTicketStatus="props">
+  <q-td
+
               :props="props"
             >
               <span
@@ -192,8 +197,10 @@
               >
               <span class="label" v-else>NA</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-kaptureDueDate="props"
+</template>
+            <template v-slot:body-cell-kaptureDueDate="props">
+  <q-td
+
               :props="props"
               >{{
                 props.row.kaptureDueDate == null
@@ -282,6 +289,7 @@
                   />
                   <span>{{ props.row.serviceReqTicketId }}</span>
                 </q-td>
+</template>
                 <q-td key="tid" :props="props"> {{ props.row.tid }}</q-td>
                 <q-td key="mid" :props="props">
                   <span v-if="props.row.mid != null">{{ props.row.mid }}</span>

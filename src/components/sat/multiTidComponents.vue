@@ -11,22 +11,22 @@
                         <q-btn round @click="goToValidationPage()" outline color="dark" icon="clear" />
                     </div>
                 </div>
-                <div v-if="this.baseTidFlag == true" error-icon="warning" name="eleven" title="Multi" subtitle="TID">
+                <div v-if="baseTidFlag == true" error-icon="warning" name="eleven" title="Multi" subtitle="TID">
                     <q-btn color="primary" class="q-ma-xs" icon="check" @click="fnCreateOrGetBaseTid()"
                         label="Create Base TID" />
                 </div>
-                <div v-if="this.SubTidField == true">
+                <div v-if="SubTidField == true">
                     <div class="text-weight-regular text-grey-9 ">
                         <div class="col-md-7">
                             <q-card flat class="col-auto">
-                                <q-card-subtitle class="text-weight-bold text-grey-9 row q-px-md q-py-md items-center">
+                                <q-card-section class="text-weight-bold text-grey-9 row q-px-md q-py-md items-center">
                                     <span class="col">Base-Tid Configurations</span>
                                     <q-btn type="button" color="green" @click="getSubTidConfOrCreateSubTids()">Generate
                                         Sub-Tid</q-btn>
-                                </q-card-subtitle>
+                                </q-card-section>
                                 <q-separator style="width:100%" />
                                 <q-expansion-item icon="explore" :label="menu.baseTidList.tid" class="col-auto q-ma-xs"
-                                    flat v-for="menu in this.baseAndSubTidList" :key="menu.id" :to="menu.to" opened
+                                    flat v-for="menu in baseAndSubTidList" :key="menu.id" :to="menu.to" opened
                                     separator>
                                     <q-card flat>
                                         <table style="width:100%">
@@ -56,40 +56,49 @@
                 </div>
 
 
-                <div v-if="this.genSubTidFlag == true" error-icon="warning" name="twelve" title="SUBTID" subtitle="TID">
+                <div v-if="genSubTidFlag == true" error-icon="warning" name="twelve" title="SUBTID" subtitle="TID">
 
-                    <div class="text-weight-regular text-grey-9" v-if="this.SubTidField == false">
+                    <div class="text-weight-regular text-grey-9" v-if="SubTidField == false">
                         <div class="col-md-7">
                             <q-card flat class="col-auto">
-                                <q-card-subtitle class="text-weight-bold text-grey-9 row q-px-md q-py-md items-center">
+                                <q-card-section class="text-weight-bold text-grey-9 row q-px-md q-py-md items-center">
                                     <span class="col">List All Sub TID Details </span>
-                                </q-card-subtitle>
+                                </q-card-section>
                                 <q-separator style="width:100%" />
-                                <q-table  table-class="customTableClass" class="payment_verification_table capitalize"
-                                    table-style="word-break: break-all" :rows="listAllSubTidDetails" :columns="columns"
-                                    row-key="name" :rows-per-page-options="[1, 3, 5, 7, 9, 12, 15]">
-                                    <q-tr v-slot:top-row="props">
-                                        <q-th v-for="col in props.columns" :key="col.name" :props="props">{{ col.label
-                                        }}
-                                        </q-th>
-                                    </q-tr>
-                                    <q-td v-slot:body-cell-baseTid="props" :props="props">
-                                        <span class="label text-primary">{{ props.row.baseTid == null ? "NA" :
-                                                props.row.baseTid
-                                        }}</span>
-                                    </q-td>
-                                    <q-td v-slot:body-cell-action="props" :props="props">
-                                        <!-- v-if="props.row.upiEnabled != true" -->
-                                        <q-btn   highlight push class="q-mx-sm" color="positive" size="sm"
-                                            @click="finalFormSubmit(props.row)" :disabled="props.row.submittedToMars">
-                                            Submit
-                                            To Mars </q-btn>
-                                            <!-- <div v-if="props.row.upiEnabled == true">
-                                            <q-btn class="q-mx-sm" highlight push  color="teal" size="sm" :disabled="props.row.tid == null || props.row.mid == null " 
-                                            @click="additionalTid(listAllSubTidDetails)"> Additional Tid
-                                            </q-btn>
-                                           </div> -->
-                                    </q-td>
+                                <q-table
+                                    table-class="customTableClass"
+                                    class="payment_verification_table capitalize"
+                                    table-style="word-break: break-all"
+                                    :rows="listAllSubTidDetails"
+                                    :columns="columns"
+                                    row-key="name"
+                                    :rows-per-page-options="[1, 3, 5, 7, 9, 12, 15]"
+                                >
+                                    <template v-slot:header="props">
+                                        <q-tr :props="props">
+                                            <q-th v-for="col in props.columns" :key="col.name" :props="props">
+                                                {{ col.label }}
+                                            </q-th>
+                                        </q-tr>
+                                    </template>
+                                    <template v-slot:body-cell-baseTid="props">
+                                        <q-td :props="props">
+                                            <span class="label text-primary">{{ props.row.baseTid == null ? "NA" : props.row.baseTid }}</span>
+                                        </q-td>
+                                    </template>
+                                    <template v-slot:body-cell-action="props">
+                                        <q-td :props="props">
+                                            <q-btn
+                                                highlight
+                                                push
+                                                class="q-mx-sm"
+                                                color="positive"
+                                                size="sm"
+                                                @click="finalFormSubmit(props.row)"
+                                                :disabled="props.row.submittedToMars"
+                                            >Submit To Mars</q-btn>
+                                        </q-td>
+                                    </template>
                                 </q-table>
                                 <q-btn color="primary" :disabled="fndisable" class="text-center justify-center" @click="finalSubmit()"
                                 label="Final Submit" />
@@ -111,13 +120,7 @@
 
 
 import { LocalStorage } from "quasar";
-import {Vuetify,VApp,VCard} from "vuetify";
-import multiTidComponents from "./multiTidComponents.vue";
 import multiTidPaymentMode from "./multiTidPaymentMode";
-// import additionaltidComp from './additionaltidComp.vue';
-global.jQuery = require("jquery");
-var $ = global.jQuery;
-window.$ = $;
 
 import {
     required,
@@ -360,18 +363,9 @@ export default {
     },
     computed: {
         ...mapGetters("mars_dataSubmit", ["marsSavedDataFromInternal"]),
-        fndisable: function(){
-            let size = this.listAllSubTidDetails.length;
-            for(var i=0; i<size; i++){
-                // let data = this.listAllSubTidDetails[i].submittedToMars == true
-           
-                if(this.listAllSubTidDetails[i].submittedToMars == true && this.listAllSubTidDetails[i+1].submittedToMars == true ){
-                    return false
-                    
-                }else{
-                    return true
-                }
-            }
+        fndisable: function() {
+            if (this.listAllSubTidDetails.length === 0) return true;
+            return !this.listAllSubTidDetails.every(item => item.submittedToMars);
         }
     },
     methods: {
@@ -385,7 +379,7 @@ export default {
         ...mapActions("leadInformationVasMapping", ["LEAD_INFORMATION_VAS_MAPPING_DERTAILS", "SAVEING_THE_LEAD_STATUS_DETAILS", "GET_LEAD_INFORMATION_VAS_MAPPING_DERTAILS", "CREATE_BASE_TID", "LOAD_GET_SUB_TID_LIST", "GET_BASE_TID_LIST", "GET_SUB_TID_LIST", "CREATE_SUB_TIDS_LIST"]),
         //Loading base tids if any
         loadBaseTidList() {
-            this.GET_BASE_TID_LIST(this.merchant).then(response => {
+            this.GET_BASE_TID_LIST(merchant).then(response => {
                 if (response.status == 200) {
                     this.$q.notify({
                         color: "positive",
@@ -451,7 +445,7 @@ export default {
         },
         getSubTidConfOrCreateSubTids() {
             //load sub tids if created already
-            this.GET_SUB_TID_LIST(this.merchant).then(response => {
+            this.GET_SUB_TID_LIST(merchant).then(response => {
                 if (response.status == 200) {
                     this.$q.notify({
                         color: "positive",
@@ -478,7 +472,7 @@ export default {
             }).catch(error => {
                 if (error.status == 404) {
                     // create sub tids 
-                    this.CREATE_SUB_TIDS_LIST(this.merchant).then(response => {
+                    this.CREATE_SUB_TIDS_LIST(merchant).then(response => {
                         if (response.status == 200) {
                             this.$q.notify({
                                 color: "positive",
@@ -540,7 +534,7 @@ export default {
         },
 
         fnCreateOrGetBaseTid() {
-            this.CREATE_BASE_TID(this.merchant)
+            this.CREATE_BASE_TID(merchant)
                 .then(response => {
                     if (response.status == 200) {
                         this.$q.notify({
@@ -621,7 +615,7 @@ export default {
             }
         },
         loadBaseTidList() {
-            this.GET_BASE_TID_LIST(this.merchant).then(response => {
+            this.GET_BASE_TID_LIST(merchant).then(response => {
                 if (response.status == 200) {
                     this.$q.notify({
                         color: "positive",
@@ -810,87 +804,57 @@ export default {
         //                 })
         //                 .catch(error => {
         //                     this.merchant.companyInformation.constitutionName = this.propLeadDeatils.merchantType.merchantTypeName;
-        //                     this.$set(
-        //                         finalRequest.merchant.salesInformation,
-        //                         "applicationDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.salesInformation[//                         "applicationDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.salesInformation.applicationDate
-        //                         )
+        //
         //                     );
 
-        //                     this.$set(
-        //                         finalRequest.merchant.salesInformation,
-        //                         "aggreementDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.salesInformation[//                         "aggreementDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.salesInformation.aggreementDate
-        //                         )
+        //
         //                     );
 
-        //                     this.$set(
-        //                         finalRequest.merchant.salesInformation,
-        //                         "loanDisbursementDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.salesInformation[//                         "loanDisbursementDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.salesInformation.loanDisbursementDate
-        //                         )
+        //
         //                     );
 
-        //                     this.$set(
-        //                         finalRequest.merchant.salesInformation,
-        //                         "tenureStartDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.salesInformation[//                         "tenureStartDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.salesInformation.tenureStartDate
-        //                         )
+        //
         //                     );
 
-        //                     this.$set(
-        //                         finalRequest.merchant.companyInformation,
-        //                         "establishYear",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.companyInformation[//                         "establishYear"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.companyInformation.establishYear
-        //                         )
+        //
         //                     );
 
-        //                     this.$set(
-        //                         finalRequest.merchant.bankInformation.collectionDetails,
-        //                         "chequeDepositedDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.bankInformation.collectionDetails[//                         "chequeDepositedDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.bankInformation.collectionDetails
         //                                 .chequeDepositedDate
-        //                         )
+        //
         //                     );
 
-        //                     this.$set(
-        //                         finalRequest.merchant.bankInformation.collectionDetails,
-        //                         "collectedDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.bankInformation.collectionDetails[//                         "collectedDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.bankInformation.collectionDetails
         //                                 .collectedDate
-        //                         )
+        //
         //                     );
 
-        //                     this.$set(
-        //                         finalRequest.merchant.bankInformation.collectionDetails,
-        //                         "chequeDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.bankInformation.collectionDetails[//                         "chequeDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.bankInformation.collectionDetails
         //                                 .chequeDate
-        //                         )
+        //
         //                     );
 
 
-        //                     this.$set(
-        //                         finalRequest.merchant.businessInformation,
-        //                         "memberSince",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.businessInformation[//                         "memberSince"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.businessInformation.memberSince
-        //                         )
+        //
         //                     );
-        //                     this.$set(
-        //                         finalRequest.merchant.businessInformation,
-        //                         "lastTurnoverYear",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.businessInformation[//                         "lastTurnoverYear"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.businessInformation.lastTurnoverYear
-        //                         )
+        //
         //                     );
 
         //                     if (error.data.hasOwnProperty("errorDetails")) {
@@ -922,7 +886,7 @@ export default {
         //                                 )}`;
         //                                 let fieldErrorFound = eval(splittingErrorField);
         //                                 fieldErrorFound.$model = "";
-        //                                 OThis.$set(OThis.error.tab, splitted[1], true);
+        //                                 OThis.error.tab[splitted[1]] = true;
 
         //                                 let generateErrorMessage = eval(
         //                                     `OThis.error.field.${splitted.join(".")}`

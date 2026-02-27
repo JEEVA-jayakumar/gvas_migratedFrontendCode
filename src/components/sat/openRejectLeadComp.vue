@@ -134,7 +134,7 @@ export default {
    this.ajaxLoadShortLeadInfo();
   },
  beforeMount(){
-    //  this.propsRowDetails = JSON.stringify(this.getShortLeadInfo);
+    //  this.propsRowDetails = JSON.stringify(getShortLeadInfo);
        this.formData.device =this.getShortLeadInfo.device.deviceName;
  },
   computed: {

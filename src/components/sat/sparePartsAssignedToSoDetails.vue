@@ -323,7 +323,7 @@ export default {
        
       console.log(
         "SELCETED fnSubmitBankDetails VALUES------->",
-        JSON.stringify(this.formData)
+        JSON.stringify(formData)
       );
       this.$q.loading.show();
       this.UPDATE_SPARE_PARTS_INVENTORY_DATAS(request)

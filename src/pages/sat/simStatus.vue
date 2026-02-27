@@ -15,26 +15,36 @@
          @request="ajaxLoadAllLeadInfo"
       >
 
-        <!-- <q-td
-          v-slot:body-cell-createdAt="props"
+        <!-- <template v-slot:body-cell-createdAt="props">
+  <q-td
+
           :props="props"
         >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-receivedAt="props"
+</template>
+        <template v-slot:body-cell-receivedAt="props">
+  <q-td
+
           :props="props"
         >{{ $moment(props.row.receivedAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-receivedAt="props"
+</template>
+        <template v-slot:body-cell-receivedAt="props">
+  <q-td
+
           :props="props"
         >{{ $moment(props.row.receivedAt ==null? "NA" : props.row.receivedAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-DeviceList="props"
+</template>
+        <template v-slot:body-cell-DeviceList="props">
+  <q-td
+
           :props="props"
         >{{ $moment(props.row.device.createDate).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-ModifyDate="props"
+</template>
+        <template v-slot:body-cell-ModifyDate="props">
+  <q-td
+
           :props="props"
-        >{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</q-td>-->
+        >{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</q-td>
+</template>-->
 
         <template v-slot:top="props">
           <div class="col-md-5">
@@ -286,7 +296,7 @@ this.propSimDeactivation =! this.propSimDeactivation
         console.log("TABLE DATA",JSON.stringify(this.getSimStatus))
  ;
           if (this.getSimStatus.sort != null) {
-            this.paginationControl.sortBy = this.sort[0].property;
+            this.paginationControl.sortBy = this.getSimStatus.sort[0].property;
             this.paginationControl.descending = this.getSimStatus.sort[0].ascending;
           }
           // finally we tell QTable to exit the "loading" state
@@ -300,7 +310,7 @@ this.propSimDeactivation =! this.propSimDeactivation
     //   this.$q.loading.show({
     //     delay: 100 // ms
     //   });
-    //   this.INVENTORY_WITH_RESELLER_LIST_(this.formData)
+    //   this.INVENTORY_WITH_RESELLER_LIST_(formData)
     //     .then(() => {
     //       this.$q.loading.hide();
     //       this.$q.notify({

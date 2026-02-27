@@ -19,64 +19,70 @@
         table-class="customTableClass"
         :rows="tableData"
         :columns="columns"
-        :filter="filter" v-model:pagination="paginationControl"
+        :filter="filter"
+        v-model:pagination="paginationControl"
         row-key="name"
         :loading="toggleAjaxLoadFilter"
-        :rows-per-page-options="[5,10,15,20]"
+        :rows-per-page-options="[5, 10, 15, 20]"
         @request="ajaxLoadAllLeadInfo"
       >
-      <q-td
-      />
-       <!--START: table header -->
-        <q-tr v-slot:top-row="props">
-        <q-th v-for="col in props.columns" :key="col.name" :props="props">{{ col.label }}</q-th>  
-        </q-tr>
+        <!--START: table header -->
+        <template v-slot:header="props">
+          <q-tr :props="props">
+            <q-th v-for="col in props.columns" :key="col.name" :props="props">{{ col.label }}</q-th>
+          </q-tr>
+        </template>
         <!--END: table header -->
-         <q-td 
-         v-slot:body-cell-leadNumber="props"
-         :props="props"
-         class="cursor-pointer"
-         @click="toggleLeadInformation(props.row)"
-         >
-          <span class="label text-primary"> {{props.row.leadNumber}}</span>
-          
-        </q-td>
-        <q-td v-slot:body-cell-contactName="props" :props="props">
-          <span class="label text-primary"> {{props.row.leadInformation.contactName}}</span>
-        </q-td>
-        <q-td
-            v-slot:body-cell-date="props"
+
+        <template v-slot:body-cell-leadNumber="props">
+          <q-td
             :props="props"
-          >{{ $moment(props.row.date).format("Do MMM Y") }}</q-td>
-         <q-td v-slot:body-cell-verifiedFinanceStatus="props" :props="props">
+            class="cursor-pointer"
+            @click="toggleLeadInformation(props.row)"
+          >
+            <span class="label text-primary">{{ props.row.leadNumber }}</span>
+          </q-td>
+        </template>
+
+        <template v-slot:body-cell-contactName="props">
+          <q-td :props="props">
+            <span class="label text-primary">{{ props.row.leadInformation.contactName }}</span>
+          </q-td>
+        </template>
+
+        <template v-slot:body-cell-date="props">
+          <q-td :props="props">{{ $moment(props.row.date).format("Do MMM Y") }}</q-td>
+        </template>
+
+        <template v-slot:body-cell-verifiedFinanceStatus="props">
+          <q-td :props="props">
             <span
               class="label text-positive"
-              v-if="props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_SUCCESS"
+              v-if="props.row.verifiedFinanceStatus == $VERIFIED_FINANCE_STATUS_SUCCESS"
             >Approved</span>
             <span
               class="label text-negative"
-              v-else-if="props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_PENDING"
+              v-else-if="props.row.verifiedFinanceStatus == $VERIFIED_FINANCE_STATUS_PENDING"
             >Pending</span>
             <span
               class="label text-negative"
-              v-else-if="props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_REJECT"
+              v-else-if="props.row.verifiedFinanceStatus == $VERIFIED_FINANCE_STATUS_REJECT"
             >Rejected</span>
             <span class="label" v-else>NA</span>
           </q-td>
-          <q-td v-slot:body-cell-leadStatus="props" :props="props">
+        </template>
+
+        <template v-slot:body-cell-leadStatus="props">
+          <q-td :props="props">
             <span
               class="label text-positive"
-              v-if="props.row.verifiedFinanceStatus== $LEAD_STATUS_SUBMIT_TO_SAT_LEAD && props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_SUCCESS"
+              v-if="props.row.leadStatus == $LEAD_STATUS_SUBMIT_TO_SAT_LEAD && props.row.verifiedFinanceStatus == $VERIFIED_FINANCE_STATUS_SUCCESS"
             >New</span>
             <span
               class="label text-negative"
-              v-if="props.row.verifiedFinanceStatus== $LEAD_STATUS_SUBMIT_TO_SAT_LEAD && props.row.verifiedFinanceStatus== $VERIFIED_DOCUMENT_STATUS_REJECT"
+              v-if="props.row.leadStatus == $LEAD_STATUS_SUBMIT_TO_SAT_LEAD && props.row.verifiedFinanceStatus == $VERIFIED_FINANCE_STATUS_REJECT"
             >Rejected</span>
-            <!-- <span
-              class="label text-positive"
-              v-if="props.row.leadStatus == $LEAD_STATUS_MARS_APPROVED"
-            >Mars Approved</span> -->
-            
+
             <q-btn
               v-else-if="props.row.leadStatus == $LEAD_STATUS_MARS_APPROVED"
               highlight
@@ -88,12 +94,9 @@
 
             <span
               class="label text-primary"
-              v-else-if="props.row.leadStatus== $LEAD_STATUS_DATA_ENTRY_PENDING"
+              v-else-if="props.row.leadStatus == $LEAD_STATUS_DATA_ENTRY_PENDING"
             >WIP</span>
-            <!-- <span
-              class="label text-orange"
-              v-else-if="props.row.leadStatus== $LEAD_STATUS_SUBMITED_TO_MARS"
-            >Submitted To Mars</span> -->
+
             <q-btn
               v-else-if="props.row.leadStatus == $LEAD_STATUS_SUBMITED_TO_MARS"
               highlight
@@ -105,40 +108,25 @@
 
             <span class="label text-negative" v-else>Pending</span>
           </q-td>
-        <q-td v-slot:body-cell-mid="props" :props="props">
-          <span class="label text-primary"># {{props.row.mid}}</span>
-        </q-td>
-       
-        <q-td v-slot:body-cell-contactNumber="props" :props="props">
-          <span class="label text-primary"> {{props.row.leadInformation.contactNumber}}</span>
-        </q-td>
-        <!-- <q-td
-          v-slot:body-cell-leadNumber="props"
-          :props="props"    
-        >
-          <span class="label text-primary"># {{props.row.leadInformation.leadNumber}}</span>
-        </q-td> -->
-        <!-- <q-td v-slot:body-cell-date="props" :props="props">
-          <span class="label text-primary"># {{props.row.date}}</span>
-        </q-td> -->
-        <q-td
-          v-slot:body-cell-leadAddress="props"
-          :props="props"
-        >{{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}</q-td>
-        
-        <!-- <q-td v-slot:body-cell-action="props" :props="props">
-            @click="toggleLeadInformation(props.row.leadInformation.leadNumber)"
-              class="cursor-pointer"
-           <q-btn
-            highlight
-            push
-            class="q-mx-sm"
-            color="positive"
-            size="sm"
-            @click="additionalTid(props.row)"
-          >Additional TID</q-btn>
-        </q-td> -->
-        <template slot="top"  class="bottom-border" >
+        </template>
+
+        <template v-slot:body-cell-mid="props">
+          <q-td :props="props">
+            <span class="label text-primary"># {{ props.row.mid }}</span>
+          </q-td>
+        </template>
+
+        <template v-slot:body-cell-contactNumber="props">
+          <q-td :props="props">
+            <span class="label text-primary">{{ props.row.leadInformation.contactNumber }}</span>
+          </q-td>
+        </template>
+
+        <template v-slot:body-cell-leadAddress="props">
+          <q-td :props="props">{{ props.row.leadInformation == null ? 'NA' : props.row.leadInformation.leadAddress }}</q-td>
+        </template>
+
+        <template v-slot:top>
           <!--START: table filter,search,excel download -->
           <div class="col-5">
             <q-input
@@ -338,16 +326,6 @@ export default {
         this.propRowDetails= rowDetails;
       }
     },
-    ajaxLoadAllLeadInfo() {
-      this.toggleAjaxLoadFilter = true;
-      this.FETCH_AGGREGATOR_LEAD_VALIDATION_DATAS()
-        .then(response => {
-          this.toggleAjaxLoadFilter = false;
-        })
-        .catch(error => {
-          this.toggleAjaxLoadFilter = false;
-        });
-    },
     ajaxLoadAllLeadInfo ({ pagination, filter }) {
       // we set QTable to "loading" state
       this.$q.loading.show({
@@ -365,7 +343,7 @@ export default {
 
           // then we update the rows with the fetched ones
           this.tableData = this.getaggregatorLeadValidationData.content;
-          console.log("TABLE DATA VALUES---------->",JSON.stringify(this.tableData))
+          console.log("TABLE DATA VALUES---------->", JSON.stringify(this.tableData))
           if (this.getaggregatorLeadValidationData.sort != null) {
             this.paginationControl.sortBy = this.getaggregatorLeadValidationData.sort[0].property;
             this.paginationControl.descending = this.getaggregatorLeadValidationData.sort[0].ascending;
@@ -373,7 +351,7 @@ export default {
 
           // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
-          // console.log("Table Datas ---------------------->"+JSON.stringify(this.tableData));
+          // console.log("Table Datas ---------------------->"+JSON.stringify(tableData));
         })
         .catch(() => {
           this.$q.loading.hide();
@@ -393,7 +371,8 @@ export default {
             spinnerColor: 'purple-9',
             message: 'Processing ..'
           })
-
+          // TODO: Implementation of additionalTid logic if any
+          this.$q.loading.hide();
         })
     },
     // Function to toggle lead information pop up screen

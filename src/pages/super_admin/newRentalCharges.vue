@@ -11,33 +11,45 @@
           <!--STARTv-model: table Data -->
           <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" row-key="name" :loading="toggleAjaxLoadFilter"
             :rows-per-page-options="[5, 10, 15, 20]" @request="ajaxLoadAllLeadInfo">
-            <q-td v-slot:body-cell-leadSource="props" :props="props" class="cursor-pointer"
+            <template v-slot:body-cell-leadSource="props">
+  <q-td  :props="props" class="cursor-pointer"
               @click="toggleLeadInformation(props.row.leadSource.sourceName)">
               <span class="label text-primary">
                 {{ props.row.leadSource.sourceName }}</span>
             </q-td>
-            <q-td v-slot:body-cell-device="props" :props="props" class="cursor-pointer"
+</template>
+            <template v-slot:body-cell-device="props">
+  <q-td  :props="props" class="cursor-pointer"
               @click="toggleLeadInformation(props.row.device.deviceName)">
               <span class="label text-primary">
                 {{ props.row.device.deviceName }}</span>
             </q-td>
-            <q-td v-slot:body-cell-marsDeviceModel="props" :props="props" class="cursor-pointer">
+</template>
+            <template v-slot:body-cell-marsDeviceModel="props">
+  <q-td  :props="props" class="cursor-pointer">
               <span class="label">{{ props.row.marsDeviceModel == null ? "NA" : props.row.marsDeviceModel.name }}</span>
             </q-td>
-            <q-td v-slot:body-cell-plan="props" :props="props" class="cursor-pointer"
+</template>
+            <template v-slot:body-cell-plan="props">
+  <q-td  :props="props" class="cursor-pointer"
               @click="toggleLeadInformation(props.row.plan.planName)">
               <span class="label text-primary"> {{ props.row.plan.planName }}</span>
             </q-td>
-            <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+            <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md"
                   @click="fnDeleteRental(props.row)" flat class="text-negative"></q-btn>
               </div>
             </q-td>
-            <q-td v-slot:body-cell-plan="props" :props="props">
+</template>
+            <template v-slot:body-cell-plan="props">
+  <q-td  :props="props">
               <q-btn align="left" dense flat no-wrap no-caps icon="fas fa-pencil-alt" color="primary"
                 @click="editPlanDetails(props.row)" :label="props.row.plan.planName" class="capitalize" />
             </q-td>
+</template>
 
             <template v-slot:top="props">
               <!--START: table filter,search -->
@@ -62,29 +74,39 @@
           <q-table table-class="customTableClass" :rows="deactiveTableData" :columns="columnsDeactive"
             :filter="filterSearch1" v-model:pagination="paginationControl1" row-key="name"
             :loading="toggleAjaxLoadFilter1" :rows-per-page-options="[5, 10, 15, 20]" @request="ajaxLoadAllLeadInfo1">
-            <q-td v-slot:body-cell-leadSource="props" :props="props" class="cursor-pointer"
+            <template v-slot:body-cell-leadSource="props">
+  <q-td  :props="props" class="cursor-pointer"
               @click="toggleLeadInformation(props.row.leadSource.sourceName)">
               <span class="label text-primary">
                 {{ props.row.leadSource.sourceName }}</span>
             </q-td>
-            <q-td v-slot:body-cell-device="props" :props="props" class="cursor-pointer"
+</template>
+            <template v-slot:body-cell-device="props">
+  <q-td  :props="props" class="cursor-pointer"
               @click="toggleLeadInformation(props.row.device.deviceName)">
               <span class="label text-primary">
                 {{ props.row.device.deviceName }}</span>
             </q-td>
-            <q-td v-slot:body-cell-action1="props" :props="props">
+</template>
+            <template v-slot:body-cell-action1="props">
+  <q-td  :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn dense no-caps no-wrap label="Enable" icon="far fa-plus-square" size="md"
                   @click="fnEnableRental(props.row)" flat class="text-positive"></q-btn>
               </div>
             </q-td>
-            <q-td v-slot:body-cell-marsDeviceModel="props" :props="props" class="cursor-pointer">
+</template>
+            <template v-slot:body-cell-marsDeviceModel="props">
+  <q-td  :props="props" class="cursor-pointer">
               <span class="label">{{ props.row.marsDeviceModel == null ? "NA" : props.row.marsDeviceModel.name }}</span>
             </q-td>
-            <q-td v-slot:body-cell-plan="props" :props="props" class="cursor-pointer"
+</template>
+            <template v-slot:body-cell-plan="props">
+  <q-td  :props="props" class="cursor-pointer"
               @click="toggleLeadInformation(props.row.plan.planName)">
               <span class="label text-primary"> {{ props.row.plan.planName }}</span>
             </q-td>
+</template>
 
             <template v-slot:top="props">
               <!--START: table filter,search -->

@@ -39,20 +39,27 @@
             <q-table row-key="name" :filter="filter" :rows="regionalItems" class="q-py-none" :columns="columns"
                 title="Lead Validation" table-class="customTableClass" v-model:pagination="paginationControl">
                 <!--START: table body modification  device-->
-                <q-td v-slot:body-cell-region="props" :props="props">{{
+                <template v-slot:body-cell-region="props">
+  <q-td  :props="props">{{
                     props.row.region == null ?
                         'NA' : props.row.region.regionAreaName
                 }}</q-td>
-                <q-td v-slot:body-cell-device="props" :props="props">{{
+</template>
+                <template v-slot:body-cell-device="props">
+  <q-td  :props="props">{{
                     props.row.aggregatorDevice == null ?
                         'NA' : props.row.aggregatorDevice.deviceName
                 }}</q-td>
-                <q-td v-slot:body-cell-aggregator="props" :props="props">{{
+</template>
+                <template v-slot:body-cell-aggregator="props">
+  <q-td  :props="props">{{
                     props.row.aggregator == null ?
                         'NA' : props.row.aggregator.name
                 }}</q-td>
+</template>
                 <!-- aggregator -->
-                <q-td v-slot:body-cell-action="props" :props="props">
+                <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
                     <div class="row no-wrap no-padding">
                         <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
                             @click="fnShowAggregatorsEditRegion(props.row)" flat class="text-light-blue">
@@ -61,6 +68,7 @@
             </q-btn> -->
                     </div>
                 </q-td>
+</template>
                 <!-- END: table body modification -->
                 <template slot="top" class="bottom-border">
                     <!--START: table filter,search -->

@@ -27,10 +27,12 @@
         :loading="toggleAjaxLoadFilter"
         @request="ajaxLoadAllLeadInfo"
       >
-       <q-td
-          v-slot:body-cell-updated_at="props"
+       <template v-slot:body-cell-updated_at="props">
+  <q-td
+
           :props="props"
         >{{ $moment(props.row.updatedAt ==null? "NA" : props.row.updatedAt).format("Do MMM Y") }}</q-td>
+</template>
         <template slot="top">
           <!--START: table filter,search -->
           <div class="col-md-5">

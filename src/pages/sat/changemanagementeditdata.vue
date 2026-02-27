@@ -2,14 +2,14 @@
   <q-page padding>
     <q-stepper flat ref="stepper" v-model="step" color="primary">
       <q-step default name="campaign" title="Edit Rental Details">
-        {{ this.info.datainfo1 }}
+        {{ info.datainfo1 }}
 
         <b>Edit Rental Details</b>
         <br />
         <br />
         <b>Device Count : {{ formdata.deviceCount }}</b>
 
-        <!-- {{this.getMidBasedList.tids}} -->
+        <!-- {{getMidBasedList.tids}} -->
         <!-- {{formdata.mid}} -->
         <br />
         <br />
@@ -30,7 +30,7 @@
                 label="Select Rental Plan"
                 :options="dropDown.planOptions"
                 :disable="
-                  this.getImplementedQueue.leadInformation.cmsLeadStatus == 15
+                  getImplementedQueue.leadInformation.cmsLeadStatus == 15
 
                 "
                 @update:model-value="fnPlan1"
@@ -42,10 +42,10 @@
                 clearable
                 :disable="
                   formdata.plan !=
-                    this.getImplementedQueue.leadInformation.plan.id ||
-                  this.getImplementedQueue.leadInformation.cmsLeadStatus ==
+                    getImplementedQueue.leadInformation.plan.id ||
+                  getImplementedQueue.leadInformation.cmsLeadStatus ==
                     15 ||
-                  this.getImplementedQueue.leadInformation.cmsLeadStatus == 21
+                  getImplementedQueue.leadInformation.cmsLeadStatus == 21
 
                 "
                 @blur="$v.formdata.paymentOption.$touch"
@@ -80,10 +80,10 @@
                 color="grey-9"
                 v-model.trim="formdata.cmsCategoryType"
                 label="Category Type*"
-                v-if="this.getAllMarsData.mdrPlan.code != 8 || this.getAllMarsData.mdrPlan.code != 9"
+                v-if="getAllMarsData.mdrPlan.code != 8 || getAllMarsData.mdrPlan.code != 9"
                 :disable="
-                  this.getAllMarsData.mdrPlan.code == 8 ||
-                  this.getAllMarsData.mdrPlan.code == 9
+                  getAllMarsData.mdrPlan.code == 8 ||
+                  getAllMarsData.mdrPlan.code == 9
 
                 "
                 :options="cmsCategoryTypeOptions"
@@ -94,7 +94,7 @@
               ></div>
             </div>
             <!-- <div class="col-xs-12 col-sm-6">
-              <q-input v-model="model" class="no-margin" label="Payment Ref Number!(this.getAllMarsData.mdrPlan.code) ||" />
+              <q-input v-model="model" class="no-margin" label="Payment Ref Number!(getAllMarsData.mdrPlan.code) ||" />
             </div>-->
             <!-- <div class="col-xs-12 col-sm-6">
               <q-input v-model="model" class="no-margin" label="Amount" />
@@ -104,7 +104,7 @@
               <q-checkbox
                 v-model="check"
                 :disable="
-                  this.getImplementedQueue.leadInformation.cmsLeadStatus == 15
+                  getImplementedQueue.leadInformation.cmsLeadStatus == 15
 
                 "
                 color="positive"
@@ -167,7 +167,7 @@
               <q-checkbox
                 v-model="check"
                 :disable="
-                  this.getImplementedQueue.leadInformation.cmsLeadStatus == 15
+                  getImplementedQueue.leadInformation.cmsLeadStatus == 15
 
                 "
                 color="positive"
@@ -194,7 +194,7 @@
                   accept=".png, .jpg, .pdf"
                 />
               </label>
-              &nbsp;{{ this.formdata.paymentDocumentFile }}
+              &nbsp;{{ formdata.paymentDocumentFile }}
             </q-item>
           </div>
           <div class="col-xs-12 col-sm-6">
@@ -276,9 +276,9 @@
           <div
             v-if="
               formdata.plan ==
-                this.getImplementedQueue.leadInformation.plan.id &&
+                getImplementedQueue.leadInformation.plan.id &&
               check == false &&
-              this.getImplementedQueue.leadInformation.cmsLeadStatus == 15
+              getImplementedQueue.leadInformation.cmsLeadStatus == 15
             "
           >
             <!-- <q-btn class="q-ml-sm" color="primary" @click="sendtoNH(formdata)"
@@ -302,9 +302,9 @@
           <div
             v-else-if="
               formdata.plan ==
-                this.getImplementedQueue.leadInformation.plan.id &&
+                getImplementedQueue.leadInformation.plan.id &&
               check == false &&
-              this.getImplementedQueue.leadInformation.cmsLeadStatus == 21
+              getImplementedQueue.leadInformation.cmsLeadStatus == 21
             "
           >
             <!-- <q-btn class="q-ml-sm" color="primary" @click="sendtoNH(formdata)"
@@ -328,10 +328,10 @@
           <div
             v-else-if="
               (formdata.plan ==
-                this.getImplementedQueue.leadInformation.plan.id &&
+                getImplementedQueue.leadInformation.plan.id &&
                 check == false &&
-                this.getImplementedQueue.leadInformation.cmsLeadStatus == 19) ||
-              this.getImplementedQueue.leadInformation.cmsLeadStatus == 17
+                getImplementedQueue.leadInformation.cmsLeadStatus == 19) ||
+              getImplementedQueue.leadInformation.cmsLeadStatus == 17
             "
           >
             <!-- <q-btn class="q-ml-sm" color="primary" @click="sendtoNH(formdata)"
@@ -352,7 +352,7 @@
           <div
             v-else-if="
               formdata.plan !=
-                this.getImplementedQueue.leadInformation.plan.id &&
+                getImplementedQueue.leadInformation.plan.id &&
               check == false
             "
           >
@@ -375,9 +375,9 @@
           <div
             v-else-if="
               (formdata.plan !=
-                this.getImplementedQueue.leadInformation.plan.id ||
+                getImplementedQueue.leadInformation.plan.id ||
                 formdata.plan ==
-                  this.getImplementedQueue.leadInformation.plan.id) &&
+                  getImplementedQueue.leadInformation.plan.id) &&
               check == true
             "
           >
@@ -1849,7 +1849,7 @@
           <div class="col-md-6">
             <q-select
               :disable="
-                this.getImplementedQueue.leadInformation.cmsLeadStatus == 22
+                getImplementedQueue.leadInformation.cmsLeadStatus == 22
 
               "
               placeholder="Choose from the below*"
@@ -2666,7 +2666,7 @@ export default {
             });
             this.$router.push("/sat/change/management");
             // var self = this;
-            // Object.keys(this.formData).forEach(function(key, index) {
+            // Object.keys(formData).forEach(function(key, index) {
             //   self.formData[key] = "";
             // });
           })
@@ -2679,7 +2679,7 @@ export default {
               message: error.data.message,
             });
             // var self = this;
-            // Object.keys(this.formData).forEach(function(key, index) {
+            // Object.keys(formData).forEach(function(key, index) {
             //   self.formData[key] = "";
             // });
           });
@@ -2801,7 +2801,7 @@ export default {
           });
           this.$router.push("/sat/change/management");
           // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
+          // Object.keys(formData).forEach(function(key, index) {
           //   self.formData[key] = "";
           // });
         })
@@ -2814,7 +2814,7 @@ export default {
             message: error.data.message,
           });
           // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
+          // Object.keys(formData).forEach(function(key, index) {
           //   self.formData[key] = "";
           // });
         });
@@ -2899,7 +2899,7 @@ export default {
       });
       console.log(
         "Implemented Queue----------------------->" +
-          JSON.stringify(this.getImplementedQueue)
+          JSON.stringify(getImplementedQueue)
       );
       this.IMPLEMENTED_QUEUE(this.$route.params.id)
         // this.FETCH_SHORT_LEAD_DATA(this.getImplementedQueue.leadInformation.id)
@@ -3187,7 +3187,7 @@ export default {
     },
     fnGetMerchantTypeValue(inputValue) {
       let merchantDocumentCategory = _.find(
-        this.getShortLeadInfoDocumentTypes,
+        getShortLeadInfoDocumentTypes,
         (o) => o.merchantType === inputValue
       );
       let arr = {
@@ -3404,7 +3404,7 @@ export default {
             });
 
             // var self = this;
-            // Object.keys(this.formData).forEach(function(key, index) {
+            // Object.keys(formData).forEach(function(key, index) {
             //   self.formData[key] = "";
             // });
           })
@@ -3438,7 +3438,7 @@ export default {
             //                 // )}`;
             //                 // let fieldErrorFound = eval(splittingErrorField);
             //                 // fieldErrorFound.$model = "";
-            //                 // OThis.$set(OThis.error.tab, splitted[1], true);
+            //                 // OThis.error.tab[splitted[1]] = true;
 
             //                 let generateErrorMessage = eval(
             //                   `OThis.error.field.${splitted.join(".")}`
@@ -3515,7 +3515,7 @@ export default {
             message: error.data.message,
           });
           // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
+          // Object.keys(formData).forEach(function(key, index) {
           //   self.formData[key] = "";
           // });
         });
@@ -3527,7 +3527,7 @@ export default {
       // } else {
       this.dataCopy = this.getAllMarsData;
       console.log(
-        "DATA COPY-------------------->" + JSON.stringify(this.dataCopy)
+        "DATA COPY-------------------->" + JSON.stringify(dataCopy)
       );
       this.dataCopy.businessInformation.gstId =
         request.businessInformation.gstId;
@@ -3661,7 +3661,7 @@ export default {
       this.dataCopy.leadInformation.contactNumber =
         request.companyinformation.contactMobile;
       console.log(
-        "DATA COPY----------------------->" + JSON.stringify(this.dataCopy)
+        "DATA COPY----------------------->" + JSON.stringify(dataCopy)
       );
       let key = this.merchant.salesInformation.institutionCode;
       this.$q.localStorage.set("a_t", key);
@@ -4173,17 +4173,17 @@ export default {
     },
     /* IFSC bank search result */
     residentStateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+      done(this.COMMON_FILTER_FUNCTION(stateOptions, terms));
     },
     registeredStateSelected(item) {
       this.merchant.companyinformation.registeredStateName = item.label;
       this.merchant.companyinformation.registeredStateRefCode = item.value;
     },
     residentStateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+      done(this.COMMON_FILTER_FUNCTION(stateOptions, terms));
     },
     residentCitySearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+      done(this.COMMON_FILTER_FUNCTION(cityOptions, terms));
     },
     registeredCitySelected(item) {
       this.merchant.companyinformation.registeredCityName = item.label;

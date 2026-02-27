@@ -11,33 +11,42 @@
         :rows-per-page-options="[5,10,15,20]"
         @request="ajaxLoadAllLeadInfo"
              >
-        <q-td v-slot:body-cell-active="props" :props="props">
+        <template v-slot:body-cell-active="props">
+  <q-td  :props="props">
                <span v-if="props.row.leadSourceId.active==true" class="label text-positive">Active</span>
                 <span v-else-if="props.row.leadSourceId.active==false" class="label text-negative">DeActive</span>
                 <span v-else>NA</span>
           </q-td>
-          <q-td class="group" v-slot:body-cell-lock="props" :props="props">
+</template>
+          <template v-slot:body-cell-lock="props">
+  <q-td class="group"  :props="props">
           <q-btn v-if="props.row.leadSourceId.active==false" flat color="blue" @click="activateMatmUser(props.row.id)"><img src="statics/lock.png" style="height:35px;width:35px"></q-btn>
           <q-btn v-else-if="props.row.leadSourceId.active==true" flat color="blue" @click="deactivateMatmUser(props.row.id)"><img src="statics/unlock.png" style="height:35px;width:35px"></q-btn>
           
         </q-td>
-          <q-td
-          v-slot:body-cell-sourceName="props"
+</template>
+          <template v-slot:body-cell-sourceName="props">
+  <q-td
+
           :props="props"
           class="cursor-pointer"
           @click="toggleLeadInformation(props.row.leadSourceId.sourceName)"
         >
           <span class="label text-primary"> {{props.row.leadSourceId.sourceName}}</span>
         </q-td>
-         <q-td
-          v-slot:body-cell-deviceName="props"
+</template>
+         <template v-slot:body-cell-deviceName="props">
+  <q-td
+
           :props="props"
           class="cursor-pointer"
           @click="toggleLeadInformation(props.row.deviceId.deviceName)"
         >
           <span class="label text-primary"> {{props.row.deviceId.deviceName}}</span>
         </q-td>
-        <q-td v-slot:body-cell-planName="props" :props="props">
+</template>
+        <template v-slot:body-cell-planName="props">
+  <q-td  :props="props">
           <q-btn
             align="left"
             dense
@@ -51,7 +60,9 @@
             class="capitalize"
           />
         </q-td>
-        <!-- <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+        <!-- <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
            <q-btn
             highlight
             push
@@ -60,8 +71,10 @@
             size="sm"
             @click="editPlanDetails(props.row)"
           >Edit Plan Details</q-btn>
-        </q-td> -->
-        <q-td v-slot:body-cell-delete="props" :props="props">
+        </q-td>
+</template> -->
+        <template v-slot:body-cell-delete="props">
+  <q-td  :props="props">
            <q-btn
             highlight
             push
@@ -71,6 +84,7 @@
             @click="deletePlanDetails(props.row)"
           >Delete Plan Details</q-btn>
         </q-td>
+</template>
 
         <template v-slot:top="props">
           <!--START: table filter,search -->

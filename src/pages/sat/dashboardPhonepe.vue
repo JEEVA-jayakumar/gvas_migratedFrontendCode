@@ -431,20 +431,28 @@
                     <div>
                       <q-table dense hide-bottom :rows="agingTrackerPendingTableData"
                         :columns="agingTrackerPendingColumns" v-model:pagination="paginationControl" row-key="name">
-                        <q-td v-slot:body-cell-name="props" :props="props">{{ props.row.name }}</q-td>
-                        <q-td v-slot:body-cell-greaterThanOneDay="props" :props="props" class="cursor-pointer"
+                        <template v-slot:body-cell-name="props">
+  <q-td  :props="props">{{ props.row.name }}</q-td>
+</template>
+                        <template v-slot:body-cell-greaterThanOneDay="props">
+  <q-td  :props="props" class="cursor-pointer"
                           @click="retrieveLeadsList(props.row.greaterThanOneDayLeadIdList)">{{
                             props.row.greaterThanOneDay
                           }}</q-td>
-                        <q-td v-slot:body-cell-greaterThanTwoDays="props" :props="props" class="cursor-pointer"
+</template>
+                        <template v-slot:body-cell-greaterThanTwoDays="props">
+  <q-td  :props="props" class="cursor-pointer"
                           @click="retrieveLeadsList(props.row.greaterThanTwoDaysLeadIdList)">{{
                             props.row.greaterThanTwoDays
                           }}</q-td>
-                        <q-td v-slot:body-cell-greaterThanFiveDays="props" :props="props"
+</template>
+                        <template v-slot:body-cell-greaterThanFiveDays="props">
+  <q-td  :props="props"
                           class="cursor-pointer"
                           @click="retrieveLeadsList(props.row.greaterThanFiveDaysLeadIdList)">{{
                             props.row.greaterThanFiveDays
                           }}</q-td>
+</template>
                       </q-table>
                     </div>
                   </q-card-section>
@@ -632,12 +640,14 @@ import { required } from '@vuelidate/validators';
           spinnerColor: "purple-9",
           message: "Fetching data .."
         });
+        const userInfo = localStorage.getItem("u_i");
+        if (!userInfo) return;
         let param = {
-          region: JSON.parse(localStorage.getItem("u_i")).region.id
+          region: JSON.parse(userInfo).region.id
         };
         this.FETCH_AGGREGATORS_DASHBOARD_COUNT(param)
           .then(() => {
-            console.log("getAggregatorsSatDashboard ------->", JSON.stringify(this.getAggregatorsSatDashboard));
+            console.log("getAggregatorsSatDashboard ------->", JSON.stringify(getAggregatorsSatDashboard));
             this.aggregatorCount = this.getAggregatorsSatDashboard.regionalInventoryCount;
             // this.applicationPendingCount = this.getSatDashboard.applicationPendingCount;
             // this.exceptionCount = this.getSatDashboard.exceptionCount;
@@ -684,7 +694,7 @@ import { required } from '@vuelidate/validators';
         });
         this.FETCH_SERVICE_REQUEST_COUNT_DETAILS()
           .then(() => {
-            console.log("SERVICE REQUEST COUNT------>", JSON.stringify(this.getserviceRequestCountDatas))
+            console.log("SERVICE REQUEST COUNT------>", JSON.stringify(getserviceRequestCountDatas))
             this.serviceRequestCount = this.getserviceRequestCountDatas;
             this.$q.loading.hide();
           })
@@ -693,7 +703,7 @@ import { required } from '@vuelidate/validators';
           });
         this.FETCH_PHONEPE_SERVICE_REQUEST_COUNT_DETAILS()
           .then(() => {
-            console.log("PHONEPE SERVICE REQUEST COUNT------>", JSON.stringify(this.getserviceRequestPhonepeCountDatas))
+            console.log("PHONEPE SERVICE REQUEST COUNT------>", JSON.stringify(getserviceRequestPhonepeCountDatas))
             this.serviceRequestCount = this.getserviceRequestPhonepeCountDatas;
             this.$q.loading.hide();
           })

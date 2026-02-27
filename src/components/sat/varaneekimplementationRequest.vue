@@ -25,7 +25,7 @@
           v-model="selectedTab"
           class="shadow-1"
           color="grey-1"
-          @click="goToUnassignedTab"
+          @update:model-value="goToUnassignedTab"
         >
           <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
           <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
@@ -40,7 +40,6 @@
               :columns="columnData"
               table-class="customTableClass"
               :filter="filterSearch"
-              :selected="formData.marsDeviceIdsCooked"
               v-model:pagination="paginationControl1"
               row-key="id"
               :rows-per-page-options="[10,20,50,100,150,200]"
@@ -48,33 +47,26 @@
               color="dark"
               @request="ajaxLoadAllLeadInfo1"
             >
-              <q-td
-                v-slot:body-cell-leadNumber="props"
-                :props="props"
-                class="cursor-pointer"
-                @click="toggleLeadInformation(props.row.leadInformation)"
-              >
-                <span class="label text-primary"
-                  ># {{ props.row.leadInformation.leadNumber }}</span
-                >
-              </q-td>
-              <q-td
-                v-slot:body-cell-submitToMarsDate="props"
-                :props="props"
-                >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
-              >
-              <q-td
-                v-slot:body-cell-createdAt="props"
-                :props="props"
-                >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
-              >
-              <q-td
-                v-slot:body-cell-mid="props"
-                :props="props"
-                class="customTd"
-              >
-                <div class="text-primary">{{ props.row.mid }}</div>
-              </q-td>
+              <template v-slot:body-cell-leadNumber="props">
+                <q-td :props="props" class="cursor-pointer" @click="toggleLeadInformation(props.row.leadInformation)">
+                  <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
+                </q-td>
+              </template>
+              <template v-slot:body-cell-submitToMarsDate="props">
+                <q-td :props="props">
+                  {{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}
+                </q-td>
+              </template>
+              <template v-slot:body-cell-createdAt="props">
+                <q-td :props="props">
+                  {{ $moment(props.row.createdAt).format("Do MMM Y") }}
+                </q-td>
+              </template>
+              <template v-slot:body-cell-mid="props">
+                <q-td :props="props" class="customTd">
+                  <div class="text-primary">{{ props.row.mid }}</div>
+                </q-td>
+              </template>
               <template v-slot:top="props">
                 <!--START: table filter,search -->
                 <div class="col-md-5">
@@ -345,6 +337,9 @@ import { required, or } from '@vuelidate/validators';
         if (leadDetails != undefined) {
           this.addtnLeadInformation = leadDetails;
         }
+      },
+      ajaxLoadAllLeadInfo({ pagination, filter }) {
+        // Dummy or actual implementation depending on requirements
       }
     }
   };

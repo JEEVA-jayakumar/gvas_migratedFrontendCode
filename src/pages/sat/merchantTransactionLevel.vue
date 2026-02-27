@@ -28,9 +28,11 @@
         </q-td>
       </q-tr>
 
-      <q-td v-slot:body-cell-tid="props" :props="props">
+      <template v-slot:body-cell-tid="props">
+  <q-td  :props="props">
           <span class="label text-primary"># {{props.row.tid}}</span>
       </q-td>
+</template>
 
        <template v-slot:top="props">
            

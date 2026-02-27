@@ -32,7 +32,8 @@
             row-key="id"
             color="grey-9"
           >
-            <q-td v-slot:body-cell-action="props" :props="props">
+            <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
                   dense
@@ -58,6 +59,7 @@
                 ></q-btn>
               </div>
             </q-td>
+</template>
             <template v-slot:top="props">
               <!--START: table filter,search -->
               <div class="col-8">
@@ -93,7 +95,8 @@
             row-key="id"
             color="grey-9"
           >
-            <q-td v-slot:body-cell-action="props" :props="props">
+            <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
                   dense
@@ -108,6 +111,7 @@
                 ></q-btn>
               </div>
             </q-td>
+</template>
             <template v-slot:top="props">
               <div class="col">
                 <q-input

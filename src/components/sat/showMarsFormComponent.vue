@@ -11,7 +11,7 @@
       <div id="rightSidePane" class="col-md-7 q-pa-xs block relative merchant">
         <q-stepper color="purple-9" ref="stepper" contractable text alternative-labels>
           <q-step error-icon="warning" :error="error.tab.salesInformation" name="first" title="Sales" subtitle="Info">
-            <!-- {{this.merchant.paymentDetails.amountCollected}} -->
+            <!-- {{merchant.paymentDetails.amountCollected}} -->
             <div class="row q-col-gutter-sm">
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input color="grey-9" disable v-model.trim="leadSourceApp.sourceName" label="Lead Source*" />
@@ -22,7 +22,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select :class="{
     'readonly-select': propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'
-  }" :disabled="this.propLeadDeatils.leadStatus == 102 || this.propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'"
+  }" :disabled="propLeadDeatils.leadStatus == 102 || propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'"
                   :error="$v.merchant.salesInformation.institutionCode.$error" placeholder="Choose from the below"
                   color="grey-9" v-model.trim="merchant.salesInformation.institutionCode"
                   label="Institution Code*" :options="getinstitutionCode"
@@ -310,7 +310,7 @@
                   @blur="$v.merchant.salesInformation.leadFrom.$touch"
                   :error="$v.merchant.salesInformation.leadFrom.$error"
                   v-model.trim="merchant.salesInformation.leadFrom" label="Lead From*" :options="leadFromOptions"
-                  :disabled="this.propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'" :class="{
+                  :disabled="propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'" :class="{
     'readonly-select': propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'
   }" />
                 <div class="text-negative" v-if="error.field.merchant.salesInformation.leadFrom.alert">
@@ -1566,7 +1566,7 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input :error="v.name.$anyError" @blur="v.name.$touch()" color="grey-9" v-model.trim="v.$model.name"
+                <q-input :error="v.name.$anyError" @blur="v.name.$touch()" color="grey-9" v-model.trim="v.name.$model"
                   label="Name*" placeholder="Name*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.partnerInformation[index].name.alert
@@ -1587,12 +1587,12 @@
               </div> -->
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input :min="past" :max="future" format="DD/MM/YYYY" format-model="number" modal
-                  :error="v.dob.$anyError" @blur="v.dob.$touch()" color="grey-9" v-model.trim="v.$model.dob"
+                  :error="v.dob.$anyError" @blur="v.dob.$touch()" color="grey-9" v-model.trim="v.dob.$model"
                   label="PAN DOB *" placeholder="PAN DOB *" />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input upper-case :error="v.pan.$anyError" @blur="v.pan.$touch()" color="grey-9"
-                  v-model.trim="v.$model.pan" label="Pan*" placeholder="Pan*" />
+                  v-model.trim="v.pan.$model" label="Pan*" placeholder="Pan*" />
                 <div class="textf-negative" v-if="
                     error.field.merchant.partnerInformation[index].pan.alert
                   ">
@@ -1611,7 +1611,7 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input :error="v.address.$anyError" @blur="v.address.$touch()" color="grey-9"
-                  v-model.trim="v.$model.address" label="Address* (max 120 characters)" placeholder="Address*" />
+                  v-model.trim="v.address.$model" label="Address* (max 120 characters)" placeholder="Address*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.partnerInformation[index].address.alert
                   ">
@@ -1625,7 +1625,7 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input :error="v.pin.$anyError" @blur="v.pin.$touch()" color="grey-9" type="number"
-                  v-model.trim="v.$model.pin" label="Pincode*" placeholder="Pincode*" />
+                  v-model.trim="v.pin.$model" label="Pincode*" placeholder="Pincode*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.partnerInformation[index].pin.alert
                   ">
@@ -1644,7 +1644,7 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input :error="autoCompleteError(v.cityRefLabel, v.cityRefCode)" color="grey-9"
-                  v-model.trim="v.$model.cityRefLabel" label="City (type min 3 characters)*"
+                  v-model.trim="v.cityRefLabel.$model" label="City (type min 3 characters)*"
                   placeholder="Start typing ..*">
                   <q-autocomplete separator @search="partnerCitySearch" :debounce="10" :min-characters="3"
                     @selected="(obj) => partnerCitySelected(obj, index)" />
@@ -1664,7 +1664,7 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input :error="autoCompleteError(v.stateRefLabel, v.stateRefCode)" @blur="v.stateRefLabel.$touch()"
-                  color="grey-9" v-model.trim="v.$model.stateRefLabel" label="State (type min 3 characters)*"
+                  color="grey-9" v-model.trim="v.stateRefLabel.$model" label="State (type min 3 characters)*"
                   placeholder="Start typing ..*">
                   <q-autocomplete separator @search="partnerStateSearch" :debounce="10" :min-characters="1"
                     @selected="(obj) => partnerStateSelected(obj, index)" />
@@ -1685,7 +1685,7 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input :error="v.contactMobile.$anyError" @blur="v.contactMobile.$touch()" color="grey-9" type="tel"
-                  v-model.trim="v.$model.contactMobile" label="Mobile*" placeholder="Mobile*" />
+                  v-model.trim="v.contactMobile.$model" label="Mobile*" placeholder="Mobile*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.partnerInformation[index].contactMobile
                       .alert
@@ -1705,7 +1705,7 @@
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input :error="v.contactEmail.$anyError" @blur="v.contactEmail.$touch()" color="grey-9" type="email"
-                  v-model.trim="v.$model.contactEmail" label="Email*" placeholder="Email*" />
+                  v-model.trim="v.contactEmail.$model" label="Email*" placeholder="Email*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.partnerInformation[index].contactEmail
                       .alert
@@ -2496,8 +2496,8 @@
                 </div>
                 <div class="text-negative" v-if="
                     subventionBankFeeData == '' ||
-                    this.subventionBankFeeData == undefined ||
-                    this.subventionBankFeeData == null
+                    subventionBankFeeData == undefined ||
+                    subventionBankFeeData == null
                   ">
                   {{ " Bank rental shouldn't be empty" }}
                 </div>
@@ -5061,7 +5061,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="row items-center" v-if="this.plan == 'mATM'">
+                <div class="row items-center" v-if="plan == 'mATM'">
                   <div class="col-3">
                     <div class="text-caption text-weight-medium">
                       Plan for MATM
@@ -5404,7 +5404,7 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-select :class="{
     'readonly-select': propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'
-  }" :disabled="this.propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'" placeholder="Choose from the below"
+  }" :disabled="propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'" placeholder="Choose from the below"
                   color="grey-9" v-model="
                     merchant.bankInformation.bankDetails.accountType
                   " label="Account Type" :options="accountTypeOptions" />
@@ -5852,7 +5852,7 @@
                   class="text-weight-regular text-grey-8" color="grey-9" :disable="vasDisableFlag"
                   :options="vasBasedOnInstance" />
                 <!-- <q-select multiple checked type ="checkbox" v-model.trim="tmpVasMapping" :options="vasBasedOnInstance" class="text-weight-regular text-grey-8"
-              color="grey-9"  />   // v-model.trim="tmpVasMapping"   :disabled="this.vasDisable = true"-->
+              color="grey-9"  />   // v-model.trim="tmpVasMapping"   :disabled="vasDisable = true"-->
               </div>
               <!-- <div class="col-md-6 col-sm-12 col-xs-12">
                 <p class="text-caption">SMS Enable or Disable?</p>
@@ -6023,9 +6023,9 @@
             </div>
             <q-stepper-navigation>
               <!-- <q-btn  /> -->
-              <q-btn v-if="this.leadSourceApp.multiTidEnabled != true" color="primary" class="q-ma-xs" icon="check"
+              <q-btn v-if="leadSourceApp.multiTidEnabled != true" color="primary" class="q-ma-xs" icon="check"
                 @click="finalFormSubmit()" label="Submit" />
-              <q-btn v-if="this.leadSourceApp.multiTidEnabled == true" color="primary" class="q-ma-xs" icon="check"
+              <q-btn v-if="leadSourceApp.multiTidEnabled == true" color="primary" class="q-ma-xs" icon="check"
                 @click="OpenMultiTidToggle()" label="Create Base TID" />
               <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="previousClicked()" label="Previous" />
               <q-btn color="amber-10" class="q-ma-xs" icon="inbox" label="Save Partial" @click="saveCurrentChanges()" />
@@ -11583,7 +11583,7 @@
           required: requiredIf(function () {
             return this.getPartnersVisiblity;
           }),
-          $each: {
+          $each: helpers.forEach({
             name: {
               required,
               minLength: minLength(1),
@@ -11634,7 +11634,7 @@
               required,
               email,
             },
-          },
+          }),
         },
       },
     },
@@ -11872,7 +11872,7 @@
         .replace("[", "")
         .replace("]", "");
 
-      // this.merchant.mdrPlan.incentive.percentage= this.incentive.includes(this.incentivePercentage);
+      // this.merchant.mdrPlan.incentive.percentage= this.incentive.includes(incentivePercentage);
 
       /* Populating values from FOS */
       this.fetchAndCookDocuments();
@@ -12047,7 +12047,7 @@
         }
       },
       loadSubTidList() {
-        this.GET_BASE_TID_LIST(this.merchant)
+        this.GET_BASE_TID_LIST(merchant)
           .then((response) => {
             if (response.status == 200) {
               this.$q.notify({
@@ -12105,7 +12105,7 @@
         }
       },
       fnCreateOrGetBaseTid() {
-        this.CREATE_BASE_TID(this.merchant)
+        this.CREATE_BASE_TID(merchant)
           .then((response) => {
             if (response.status == 200) {
               this.$q.notify({
@@ -12145,7 +12145,7 @@
       // To create sub tids or load sub tids
       getSubTidConfOrCreateSubTids() {
         //load sub tids if created already
-        this.GET_SUB_TID_LIST(this.merchant)
+        this.GET_SUB_TID_LIST(merchant)
           .then((response) => {
             if (response.status == 200) {
               this.$q.notify({
@@ -12173,7 +12173,7 @@
           .catch((error) => {
             if (error.status == 404) {
               // create sub tids
-              this.CREATE_SUB_TIDS_LIST(this.merchant)
+              this.CREATE_SUB_TIDS_LIST(merchant)
                 .then((response) => {
                   if (response.status == 200) {
                     this.$q.notify({
@@ -12329,7 +12329,7 @@
 
       /* MCC search result */
       partnerCitySearch(terms, done) {
-        done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+        done(this.COMMON_FILTER_FUNCTION(cityOptions, terms));
       },
       partnerCitySelected(item, index) {
         this.ptCitySelected = true;
@@ -12343,7 +12343,7 @@
       },
       /* MCC search result */
       partnerStateSearch(terms, done) {
-        done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+        done(this.COMMON_FILTER_FUNCTION(stateOptions, terms));
       },
       partnerStateSelected(item, index) {
         this.$v.viewBinding.partnersArr.$each[index].stateRefCode.$model =
@@ -12355,7 +12355,7 @@
 
       /* MCC search result */
       mccSearch(terms, done) {
-        done(this.COMMON_FILTER_FUNCTION(this.mccSearchSet, terms));
+        done(this.COMMON_FILTER_FUNCTION(mccSearchSet, terms));
       },
       // selectLead() {
       //   if (this.merchant.salesInformation.leadFrom == "OPEN MARKET") {
@@ -12478,13 +12478,13 @@
       //         leadsource:this.merchant.salesInformation.leadFrom
       //       }
 
-      //       this.FECTCH_MCC_BASED_LEADSOURCE(this.formData1);
+      //       this.FECTCH_MCC_BASED_LEADSOURCE(formData1);
       // },
       /* MCC search result */
 
       /* City search result */
       residentCitySearch(terms, done) {
-        done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+        done(this.COMMON_FILTER_FUNCTION(cityOptions, terms));
       },
       residentCitySelected(item) {
         this.merchant.companyInformation.residentCityName = item.label;
@@ -12494,7 +12494,7 @@
 
       /* State search result */
       residentStateSearch(terms, done) {
-        done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+        done(this.COMMON_FILTER_FUNCTION(stateOptions, terms));
       },
       residentStateSelected(item) {
         this.merchant.companyInformation.residentStateName = item.label;
@@ -12812,7 +12812,7 @@
             this.$q.notify("Bank rental shouldn't be empty");
           } else if (
             this.merchant.paymentDetails.rentalMode === "SB" &&
-            /[^0-9]/.test(this.subventionBankFeeData)
+            /[^0-9]/.test(subventionBankFeeData)
           ) {
             this.$q.notify(
               "Invalid input: only numbers are allowed in Bank Rental "
@@ -12841,7 +12841,7 @@
           } else {
             this.error.revParameters = false;
             this.$v.revParamAndLeadInfo.vasInstanceMapping = JSON.stringify(
-              this.tmpVasMapping
+              tmpVasMapping
             );
             if (this.leadSourceApp.multiTidEnabled == true) {
               this.lsVasMappingController();
@@ -13294,97 +13294,57 @@
                     this.marsSavedDataFromInternal.additionalInfo
                   ).od2Gender;
                   //Date formatting for MARS
-                  return this.$set(
-                    this.marsSavedDataFromInternal.salesInformation,
-                    "applicationDate",
-                    this.commonDateFormat(
+                  return (this.marsSavedDataFromInternal.salesInformation.applicationDate = this.commonDateFormat(
                       this.marsSavedDataFromInternal.salesInformation
-                        .applicationDate
-                    )
+                        .applicationDate)
                   );
                 }).then(() => {
-                  return this.$set(
-                    this.marsSavedDataFromInternal.salesInformation,
-                    "aggreementDate",
-                    this.commonDateFormat(
+                  return (this.marsSavedDataFromInternal.salesInformation.aggreementDate = this.commonDateFormat(
                       this.marsSavedDataFromInternal.salesInformation
-                        .aggreementDate
-                    )
+                        .aggreementDate)
                   );
                 }).then(() => {
-                  return this.$set(
-                    this.marsSavedDataFromInternal.salesInformation,
-                    "loanDisbursementDate",
-                    this.commonDateFormat(
+                  return (this.marsSavedDataFromInternal.salesInformation.loanDisbursementDate = this.commonDateFormat(
                       this.marsSavedDataFromInternal.salesInformation
-                        .loanDisbursementDate
-                    )
+                        .loanDisbursementDate)
                   );
                 }).then(() => {
-                  return this.$set(
-                    this.marsSavedDataFromInternal.salesInformation,
-                    "tenureStartDate",
-                    this.commonDateFormat(
+                  return (this.marsSavedDataFromInternal.salesInformation.tenureStartDate = this.commonDateFormat(
                       this.marsSavedDataFromInternal.salesInformation
-                        .tenureStartDate
-                    )
+                        .tenureStartDate)
                   );
                 }).then(() => {
-                  return this.$set(
-                    this.marsSavedDataFromInternal.companyInformation,
-                    "establishYear",
-                    this.commonDateFormat(
+                  return (this.marsSavedDataFromInternal.companyInformation.establishYear = this.commonDateFormat(
                       this.marsSavedDataFromInternal.companyInformation
-                        .establishYear
-                    )
+                        .establishYear)
                   );
                 }).then(() => {
-                  return this.$set(
-                    this.marsSavedDataFromInternal.bankInformation
-                      .collectionDetails,
-                    "chequeDepositedDate",
-                    this.commonDateFormat(
+                  return (this.marsSavedDataFromInternal.bankInformation
+                      .collectionDetails.chequeDepositedDate = this.commonDateFormat(
                       this.marsSavedDataFromInternal.bankInformation
-                        .collectionDetails.chequeDepositedDate
-                    )
+                        .collectionDetails.chequeDepositedDate)
                   );
                 }).then(() => {
-                  return this.$set(
-                    this.marsSavedDataFromInternal.bankInformation
-                      .collectionDetails,
-                    "collectedDate",
-                    this.commonDateFormat(
+                  return (this.marsSavedDataFromInternal.bankInformation
+                      .collectionDetails.collectedDate = this.commonDateFormat(
                       this.marsSavedDataFromInternal.bankInformation
-                        .collectionDetails.collectedDate
-                    )
+                        .collectionDetails.collectedDate)
                   );
                 }).then(() => {
-                  return this.$set(
-                    this.marsSavedDataFromInternal.bankInformation
-                      .collectionDetails,
-                    "chequeDate",
-                    this.commonDateFormat(
+                  return (this.marsSavedDataFromInternal.bankInformation
+                      .collectionDetails.chequeDate = this.commonDateFormat(
                       this.marsSavedDataFromInternal.bankInformation
-                        .collectionDetails.chequeDate
-                    )
+                        .collectionDetails.chequeDate)
                   );
                 }).then(() => {
-                  return this.$set(
-                    this.marsSavedDataFromInternal.businessInformation,
-                    "memberSince",
-                    this.commonDateFormat(
+                  return (this.marsSavedDataFromInternal.businessInformation.memberSince = this.commonDateFormat(
                       this.marsSavedDataFromInternal.businessInformation
-                        .memberSince
-                    )
+                        .memberSince)
                   );
                 }).then(() => {
-                  return this.$set(
-                    this.marsSavedDataFromInternal.businessInformation,
-                    "lastTurnoverYear",
-                    this.commonDateFormat(
+                  return (this.marsSavedDataFromInternal.businessInformation.lastTurnoverYear = this.commonDateFormat(
                       this.marsSavedDataFromInternal.businessInformation
-                        .lastTurnoverYear
-                    )
+                        .lastTurnoverYear)
                   );
                 }).then(() => {
                   delete this.marsSavedDataFromInternal.salesInformation
@@ -13629,7 +13589,7 @@
 
         if (this.tmpVasMapping.length > 0) {
           this.revParamAndLeadInfo.vasInstanceMapping = JSON.stringify(
-            this.tmpVasMapping
+            tmpVasMapping
           );
 
           revParams.cashAtPosEnabled =
@@ -13998,87 +13958,47 @@
                   .catch((error) => {
                     this.merchant.companyInformation.constitutionName =
                       this.propLeadDeatils.merchantType.merchantTypeName;
-                    this.$set(
-                      finalRequest.merchant.salesInformation,
-                      "applicationDate",
-                      this.commonDateFormatInvalidMARSformat(
+                    finalRequest.merchant.salesInformation.applicationDate = this.commonDateFormatInvalidMARSformat(
                         finalRequest.merchant.salesInformation.applicationDate
-                      )
                     );
 
-                    this.$set(
-                      finalRequest.merchant.salesInformation,
-                      "aggreementDate",
-                      this.commonDateFormatInvalidMARSformat(
+                    finalRequest.merchant.salesInformation.aggreementDate = this.commonDateFormatInvalidMARSformat(
                         finalRequest.merchant.salesInformation.aggreementDate
-                      )
                     );
 
-                    this.$set(
-                      finalRequest.merchant.salesInformation,
-                      "loanDisbursementDate",
-                      this.commonDateFormatInvalidMARSformat(
+                    finalRequest.merchant.salesInformation.loanDisbursementDate = this.commonDateFormatInvalidMARSformat(
                         finalRequest.merchant.salesInformation
                           .loanDisbursementDate
-                      )
                     );
 
-                    this.$set(
-                      finalRequest.merchant.salesInformation,
-                      "tenureStartDate",
-                      this.commonDateFormatInvalidMARSformat(
+                    finalRequest.merchant.salesInformation.tenureStartDate = this.commonDateFormatInvalidMARSformat(
                         finalRequest.merchant.salesInformation.tenureStartDate
-                      )
                     );
 
-                    this.$set(
-                      finalRequest.merchant.companyInformation,
-                      "establishYear",
-                      this.commonDateFormatInvalidMARSformat(
+                    finalRequest.merchant.companyInformation.establishYear = this.commonDateFormatInvalidMARSformat(
                         finalRequest.merchant.companyInformation.establishYear
-                      )
                     );
 
-                    this.$set(
-                      finalRequest.merchant.bankInformation.collectionDetails,
-                      "chequeDepositedDate",
-                      this.commonDateFormatInvalidMARSformat(
+                    finalRequest.merchant.bankInformation.collectionDetails.chequeDepositedDate = this.commonDateFormatInvalidMARSformat(
                         finalRequest.merchant.bankInformation.collectionDetails
                           .chequeDepositedDate
-                      )
                     );
 
-                    this.$set(
-                      finalRequest.merchant.bankInformation.collectionDetails,
-                      "collectedDate",
-                      this.commonDateFormatInvalidMARSformat(
+                    finalRequest.merchant.bankInformation.collectionDetails.collectedDate = this.commonDateFormatInvalidMARSformat(
                         finalRequest.merchant.bankInformation.collectionDetails
                           .collectedDate
-                      )
                     );
 
-                    this.$set(
-                      finalRequest.merchant.bankInformation.collectionDetails,
-                      "chequeDate",
-                      this.commonDateFormatInvalidMARSformat(
+                    finalRequest.merchant.bankInformation.collectionDetails.chequeDate = this.commonDateFormatInvalidMARSformat(
                         finalRequest.merchant.bankInformation.collectionDetails
                           .chequeDate
-                      )
                     );
 
-                    this.$set(
-                      finalRequest.merchant.businessInformation,
-                      "memberSince",
-                      this.commonDateFormatInvalidMARSformat(
+                    finalRequest.merchant.businessInformation.memberSince = this.commonDateFormatInvalidMARSformat(
                         finalRequest.merchant.businessInformation.memberSince
-                      )
                     );
-                    this.$set(
-                      finalRequest.merchant.businessInformation,
-                      "lastTurnoverYear",
-                      this.commonDateFormatInvalidMARSformat(
+                    finalRequest.merchant.businessInformation.lastTurnoverYear = this.commonDateFormatInvalidMARSformat(
                         finalRequest.merchant.businessInformation.lastTurnoverYear
-                      )
                     );
 
                     if (error.data.hasOwnProperty("errorDetails")) {
@@ -14110,7 +14030,7 @@
                           )}`;
                           let fieldErrorFound = eval(splittingErrorField);
                           fieldErrorFound.$model = "";
-                          OThis.$set(OThis.error.tab, splitted[1], true);
+                          OThis.error.tab[splitted[1]] = true;
 
                           let generateErrorMessage = eval(
                             `OThis.error.field.${splitted.join(".")}`
@@ -14326,96 +14246,56 @@
                         })
                         .catch(error => {
                           this.merchant.companyInformation.constitutionName = this.propLeadDeatils.merchantType.merchantTypeName;
-                          this.$set(
-                            finalRequest.merchant.salesInformation,
-                            "applicationDate",
-                            this.commonDateFormatInvalidMARSformat(
+                          finalRequest.merchant.salesInformation.applicationDate = this.commonDateFormatInvalidMARSformat(
                               finalRequest.merchant.salesInformation
                                 .applicationDate
-                            )
                           );
 
-                          this.$set(
-                            finalRequest.merchant.salesInformation,
-                            "aggreementDate",
-                            this.commonDateFormatInvalidMARSformat(
+                          finalRequest.merchant.salesInformation.aggreementDate = this.commonDateFormatInvalidMARSformat(
                               finalRequest.merchant.salesInformation
                                 .aggreementDate
-                            )
                           );
 
-                          this.$set(
-                            finalRequest.merchant.salesInformation,
-                            "loanDisbursementDate",
-                            this.commonDateFormatInvalidMARSformat(
+                          finalRequest.merchant.salesInformation.loanDisbursementDate = this.commonDateFormatInvalidMARSformat(
                               finalRequest.merchant.salesInformation
                                 .loanDisbursementDate
-                            )
                           );
 
-                          this.$set(
-                            finalRequest.merchant.salesInformation,
-                            "tenureStartDate",
-                            this.commonDateFormatInvalidMARSformat(
+                          finalRequest.merchant.salesInformation.tenureStartDate = this.commonDateFormatInvalidMARSformat(
                               finalRequest.merchant.salesInformation
                                 .tenureStartDate
-                            )
                           );
 
-                          this.$set(
-                            finalRequest.merchant.companyInformation,
-                            "establishYear",
-                            this.commonDateFormatInvalidMARSformat(
+                          finalRequest.merchant.companyInformation.establishYear = this.commonDateFormatInvalidMARSformat(
                               finalRequest.merchant.companyInformation
                                 .establishYear
-                            )
                           );
 
-                          this.$set(
-                            finalRequest.merchant.bankInformation
-                              .collectionDetails,
-                            "chequeDepositedDate",
-                            this.commonDateFormatInvalidMARSformat(
+                          finalRequest.merchant.bankInformation
+                              .collectionDetails.chequeDepositedDate = this.commonDateFormatInvalidMARSformat(
                               finalRequest.merchant.bankInformation
                                 .collectionDetails.chequeDepositedDate
-                            )
                           );
 
-                          this.$set(
-                            finalRequest.merchant.bankInformation
-                              .collectionDetails,
-                            "collectedDate",
-                            this.commonDateFormatInvalidMARSformat(
+                          finalRequest.merchant.bankInformation
+                              .collectionDetails.collectedDate = this.commonDateFormatInvalidMARSformat(
                               finalRequest.merchant.bankInformation
                                 .collectionDetails.collectedDate
-                            )
                           );
 
-                          this.$set(
-                            finalRequest.merchant.bankInformation
-                              .collectionDetails,
-                            "chequeDate",
-                            this.commonDateFormatInvalidMARSformat(
+                          finalRequest.merchant.bankInformation
+                              .collectionDetails.chequeDate = this.commonDateFormatInvalidMARSformat(
                               finalRequest.merchant.bankInformation
                                 .collectionDetails.chequeDate
-                            )
                           );
 
-                          this.$set(
-                            finalRequest.merchant.businessInformation,
-                            "memberSince",
-                            this.commonDateFormatInvalidMARSformat(
+                          finalRequest.merchant.businessInformation.memberSince = this.commonDateFormatInvalidMARSformat(
                               finalRequest.merchant.businessInformation
                                 .memberSince
-                            )
                           );
-                          this.$set(
-                            finalRequest.merchant.businessInformation,
-                            "lastTurnoverYear",
-                            this.commonDateFormatInvalidMARSformat(
+                          finalRequest.merchant.businessInformation.lastTurnoverYear = this.commonDateFormatInvalidMARSformat(
                               finalRequest.merchant.businessInformation
                                 .lastTurnoverYear
-                            )
                           );
 
                           if (error.data.hasOwnProperty("errorDetails")) {
@@ -14450,7 +14330,7 @@
                                 )}`;
                                 let fieldErrorFound = eval(splittingErrorField);
                                 fieldErrorFound.$model = "";
-                                OThis.$set(OThis.error.tab, splitted[1], true);
+                                OThis.error.tab[splitted[1]] = true;
 
                                 let generateErrorMessage = eval(
                                   `OThis.error.field.${splitted.join(".")}`
@@ -14595,15 +14475,15 @@
       },
       searchIaLocation(request, done) {
         this.FETCH_IA_LOCATION(request);
-        done(this.getiaLocation);
+        done(getiaLocation);
       },
       searchIorState(request, done) {
         this.FETCH_IOR_STATE(request);
-        done(this.getiorState);
+        done(getiorState);
       },
       searchAxisBankPincode(request, done) {
         this.FETCH_AXIS_BANK_PINCODE_LOCATION(request);
-        done(this.getAxisBankPincode);
+        done(getAxisBankPincode);
       },
       pincodeBasedDistrict() {
         this.FETCH_AXIS_BANK_PINCODE_BASED_DISTRICT(

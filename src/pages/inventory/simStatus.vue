@@ -8,34 +8,45 @@
       </div>
       <q-table
         table-class="customTableClass"
-        v-model:columns="columns"
+        :columns="columns"
         :filter="filter"
-        :rows="tableData" v-model:pagination="paginationControl"
+        :rows="tableData"
+        v-model:pagination="paginationControl"
         row-key="id"
         :rows-per-page-options="[5, 10, 15, 20]"
-         :loading="toggleAjaxLoadFilter"
-         @request="ajaxLoadAllLeadInfo"
+        :loading="toggleAjaxLoadFilter"
+        @request="ajaxLoadAllLeadInfo"
       >
-        <!-- <q-td
-          v-slot:body-cell-createdAt="props"
+        <!-- <template v-slot:body-cell-createdAt="props">
+  <q-td
+
           :props="props"
         >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-receivedAt="props"
+</template>
+        <template v-slot:body-cell-receivedAt="props">
+  <q-td
+
           :props="props"
         >{{ $moment(props.row.receivedAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-receivedAt="props"
+</template>
+        <template v-slot:body-cell-receivedAt="props">
+  <q-td
+
           :props="props"
         >{{ $moment(props.row.receivedAt ==null? "NA" : props.row.receivedAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-DeviceList="props"
+</template>
+        <template v-slot:body-cell-DeviceList="props">
+  <q-td
+
           :props="props"
         >{{ $moment(props.row.device.createDate).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-ModifyDate="props"
+</template>
+        <template v-slot:body-cell-ModifyDate="props">
+  <q-td
+
           :props="props"
-        >{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</q-td>-->
+        >{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</q-td>
+</template>-->
 
         <template v-slot:top="props">
           <div class="col-md-5">

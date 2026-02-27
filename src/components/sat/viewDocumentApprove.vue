@@ -193,7 +193,7 @@
       // })
     },
     beforeMount() {
-      console.log("Hellow world ----->", JSON.stringify(this.propRowDetails));
+      console.log("Hellow world ----->", JSON.stringify(propRowDetails));
     },
 
     computed: {
@@ -655,7 +655,7 @@
             });
 
             // var self = this;
-            // Object.keys(this.formData).forEach(function(key, index) {
+            // Object.keys(formData).forEach(function(key, index) {
             //   self.formData[key] = "";
             // });
           })
@@ -669,7 +669,7 @@
             });
             requestparams.params.kyc = "";
             // var self = this;
-            // Object.keys(this.formData).forEach(function(key, index) {
+            // Object.keys(formData).forEach(function(key, index) {
             //   self.formData[key] = "";
             // });
           });

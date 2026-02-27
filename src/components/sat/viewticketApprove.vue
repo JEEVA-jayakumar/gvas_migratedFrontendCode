@@ -79,7 +79,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Please wait..",
       });
-      this.SERVICE_TICKET_APPROVE(this.propRowDetails)
+      this.SERVICE_TICKET_APPROVE(propRowDetails)
         .then(() => {
           this.$q.loading.hide();
           this.$emit("emitfnshowservice");

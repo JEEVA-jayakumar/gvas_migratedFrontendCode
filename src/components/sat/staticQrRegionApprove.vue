@@ -11,7 +11,7 @@
           </div>
           <div class="col-md-8 q-pt-md" align="left">
             <q-input type="number" color="grey-9"
-             v-model="formData.recievedCount" min="1" oninput="this.value = Math.abs(this.value)" :error="$v.formData.recievedCount.$error"
+             v-model="formData.recievedCount" min="1" oninput="value = Math.abs(value)" :error="$v.formData.recievedCount.$error"
               label="Update Count"
               placeholder="Update Count" />
         </div>
@@ -40,7 +40,7 @@
         }
       },
       beforeMount () {
-        console.log('checkss ', JSON.stringify(this.updateCount ))
+        console.log('checkss ', JSON.stringify(updateCount ))
       },
       validations:{
  formData:{

@@ -29,7 +29,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
-          placeholder="Choose from the below"
+          emit-value
+          map-options
           color="grey-9"
           @blur="$v.merchant.paymentDetails.terminalModeCode.$touch"
           :error="$v.merchant.paymentDetails.terminalModeCode.$error"
@@ -68,7 +69,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
-          placeholder="Choose from the below*"
+          emit-value
+          map-options
           color="grey-9"
           v-model="merchant.paymentDetails.rentalPlanCode"
           label="Rental Plan*"
@@ -77,7 +79,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
-          placeholder="Choose from the below*"
+          emit-value
+          map-options
           color="grey-9"
           v-model="merchant.paymentDetails.rentalMode"
           label="Rental Mode*"
@@ -86,7 +89,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
-          placeholder="Choose from the below*"
+          emit-value
+          map-options
           color="grey-9"
           @blur="$v.merchant.paymentDetails.serviceProvider.$touch"
           :error="$v.merchant.paymentDetails.serviceProvider.$error"
@@ -97,7 +101,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
-          placeholder="Choose from the below*"
+          emit-value
+          map-options
           color="grey-9"
           @blur="$v.merchant.paymentDetails.networkPreferred.$touch"
           :error="$v.merchant.paymentDetails.networkPreferred.$error"

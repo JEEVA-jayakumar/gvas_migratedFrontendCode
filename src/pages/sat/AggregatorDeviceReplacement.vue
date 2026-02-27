@@ -84,9 +84,10 @@
               @request="ajaxLoadAllLeadInfo"
             >
               <!-- selection="multiple" -->
-              <q-td
+              <template v-slot:body-cell-leadNumber="props">
+  <q-td
               v-if="props.row.leadInformation != null"
-                v-slot:body-cell-leadNumber="props"
+
                 :props="props"
                 class="cursor-pointer"
                 @click="toggleLeadInformation(props.row.leadInformation)"
@@ -95,9 +96,11 @@
                   ># {{ props.row.leadInformation.leadNumber }}</span
                 >
               </q-td>
-              <q-td
+</template>
+              <template v-slot:body-cell-submitToMarsDate="props">
+  <q-td
               v-if="props.row.leadInformation != null"
-                v-slot:body-cell-submitToMarsDate="props"
+
                 :props="props"
                 >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
               >
@@ -116,24 +119,29 @@
               >
                 <div>{{ props.row.deviceAddress }}</div>
               </q-td>
-              <q-td
+</template>
+              <template v-slot:body-cell-tid="props">
+  <q-td
               v-if="props.row.leadInformation != null"
-                v-slot:body-cell-tid="props"
+
                 :props="props"
                 class="customTd"
               >
                 <div
                v-if="props.row.leadInformation != null" class="text-primary">{{ props.row.tid }}</div>
               </q-td>
-              <q-td
+</template>
+              <template v-slot:body-cell-mid="props">
+  <q-td
               v-if="props.row.leadInformation != null"
-                v-slot:body-cell-mid="props"
+
                 :props="props"
                 class="customTd"
               >
                 <div
                v-if="props.row.leadInformation != null" class="text-primary">{{ props.row.mid }}</div>
               </q-td>
+</template>
               <template slot="top">
                 <!--START: table filter,search -->
                 <div class="col-md-5">
@@ -166,9 +174,10 @@
               color="dark"
               @request="ajaxLoadAllLeadInfo1"
             >
-              <q-td
+              <template v-slot:body-cell-leadNumber="props">
+  <q-td
               v-if="props.row.leadInformation != null"
-                v-slot:body-cell-leadNumber="props"
+
                 :props="props"
                 class="cursor-pointer"
                 @click="toggleLeadInformation(props.row.leadInformation)"
@@ -177,9 +186,11 @@
                   ># {{ props.row.leadInformation != null ? props.row.leadInformation.leadNumber: "NA"}}</span
                 >
               </q-td>
-              <q-td
+</template>
+              <template v-slot:body-cell-submitToMarsDate="props">
+  <q-td
               v-if="props.row.leadInformation != null"
-                v-slot:body-cell-submitToMarsDate="props"
+
                 :props="props"
                 >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
               >
@@ -198,18 +209,22 @@
                 <div 
               v-if="props.row.leadInformation != null" class="text-primary">{{ props.row.tid }}</div>
               </q-td>
-              <q-td
+</template>
+              <template v-slot:body-cell-mid="props">
+  <q-td
               v-if="props.row.leadInformation != null"
-                v-slot:body-cell-mid="props"
+
                 :props="props"
                 class="customTd"
               >
                 <div 
               v-if="props.row.leadInformation != null" class="text-primary">{{ props.row.mid }}</div>
               </q-td>
-              <q-td
+</template>
+              <template v-slot:body-cell-deviceAddress="props">
+  <q-td
               v-if="props.row.leadInformation != null"
-                v-slot:body-cell-deviceAddress="props"
+
                 :props="props"
                 class="customTd customCellLength"
               >
@@ -217,6 +232,7 @@
                   {{ props.row.deviceAddress }}
                 </div>
               </q-td>
+</template>
               <template slot="top">
                 <!--START: table filter,search -->
                 <div class="col-md-5">

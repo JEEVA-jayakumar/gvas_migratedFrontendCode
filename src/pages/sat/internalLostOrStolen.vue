@@ -30,25 +30,32 @@
         @request="ajaxLoadAllLeadInfo"
       >
         <!--START: table header -->
-        <q-tr v-slot:top-row="props">
+        <template v-slot:header="props"><q-tr :props="props">
           <q-th v-for="col in props.columns" :key="col.name" :props="props">{{
             col.label
           }}</q-th>
-        </q-tr>
+        </q-tr></template>
         <!--END: table header -->
   
-        <q-td v-slot:body-cell-tid="props" :props="props">
+        <template v-slot:body-cell-tid="props">
+  <q-td  :props="props">
           <span class="label text-primary"># {{ props.row.tid }}</span>
         </q-td>
-        <q-td v-slot:body-cell-mid="props" :props="props">
+</template>
+        <template v-slot:body-cell-mid="props">
+  <q-td  :props="props">
           <span class="label text-primary"># {{ props.row.mid }}</span>
         </q-td>
-        <!-- <q-td
-            v-slot:body-cell-leadName="props"
+</template>
+        <!-- <template v-slot:body-cell-leadName="props">
+  <q-td
+
             :props="props"
-          >{{props.row.leadInformation.leadName}}</q-td>-->
-        <q-td
-          v-slot:body-cell-leadNumber="props"
+          >{{props.row.leadInformation.leadName}}</q-td>
+</template>-->
+        <template v-slot:body-cell-leadNumber="props">
+  <q-td
+
           :props="props"
           class="cursor-pointer"
           @click="toggleLeadInformation(props.row.leadInformation)"
@@ -57,29 +64,41 @@
             ># {{ props.row.leadInformation.leadNumber }}</span
           >
         </q-td>
-        <q-td v-slot:body-cell-mobileNumber="props" :props="props">{{
+</template>
+        <template v-slot:body-cell-mobileNumber="props">
+  <q-td  :props="props">{{
           props.row.leadInformation == null
             ? "NA"
             : props.row.leadInformation.contactNumber
         }}</q-td>
-        <q-td v-slot:body-cell-leadAddress="props" :props="props">{{
+</template>
+        <template v-slot:body-cell-leadAddress="props">
+  <q-td  :props="props">{{
           props.row.leadInformation == null
             ? "NA"
             : props.row.leadInformation.leadAddress
         }}</q-td>
-        <q-td
-          v-slot:body-cell-lostOrStolenRemarks="props"
+</template>
+        <template v-slot:body-cell-lostOrStolenRemarks="props">
+  <q-td
+
           :props="props"
         >
           <span class="label">{{ props.row.lostOrStolenRemarks }}</span>
         </q-td>
-        <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+</template>
+        <template v-slot:body-cell-deviceStatusDate="props">
+  <q-td  :props="props">
           <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
         </q-td>
-        <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+</template>
+        <!-- <template v-slot:body-cell-deviceStatusDate="props">
+  <q-td  :props="props">
           <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-        </q-td> -->
-        <q-td v-slot:body-cell-action="props" :props="props">
+        </q-td>
+</template> -->
+        <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
           <q-btn
             highlight
             push
@@ -90,6 +109,7 @@
             >Lost/Stolen</q-btn
           >
         </q-td>
+</template>
         <!-- <q-td auto-width key="action" :props="props">
                 <q-btn
                 highlight
@@ -134,14 +154,19 @@
         class="payment_verification_table capitalize"
       >
       
-        <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+        <!-- <template v-slot:body-cell-deviceStatusDate="props">
+  <q-td  :props="props">
           <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-        </q-td> -->
-        <q-td
-            v-slot:body-cell-updated_at="props"
+        </q-td>
+</template> -->
+        <template v-slot:body-cell-updated_at="props">
+  <q-td
+
             :props="props"
           >{{ $moment(props.row.updatedAt ==null? "NA" : props.row.updatedAt).format("Do MMM Y") }}</q-td>
-        <q-td v-slot:body-cell-Status="props" :props="props">
+</template>
+        <template v-slot:body-cell-Status="props">
+  <q-td  :props="props">
           <span
             class="label text-positive"
             v-if="props.row.regionalInventory.deviceStatus == 8"
@@ -158,7 +183,9 @@
             >Rejected By Finance</span
           >
         </q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+        <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
           <q-btn
             v-if="props.row.regionalInventory.deviceStatus == 8"
             disable
@@ -186,7 +213,9 @@
             >Rejected By Finance</q-btn
           >
         </q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+        <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
           <q-btn
             v-if="props.row.regionalInventory.deviceStatus == 10"
             highlight
@@ -216,6 +245,7 @@
             >Lost/Stolen</q-btn
           >
         </q-td>
+</template>
         <template slot="top" class="bottom-border">
           <div class="col-md-5">
             <q-input
@@ -294,7 +324,7 @@ import { required, or } from '@vuelidate/validators';
   import generalLeadInformation from "../../components/generalLeadInformation.vue";
   
   export default {
-    name: "merchantTransactionLevel",
+    name: "internalLostOrStolen",
   
     components: {
       showMerchantTransactionLevelDetails,
@@ -360,7 +390,7 @@ import { required, or } from '@vuelidate/validators';
             label: "Lead Id",
             align: "left",
             field: row => {
-              row.leadInformation.leadNumber;
+              return row.leadInformation.leadNumber;
             },
             sortable: false
           },
@@ -380,7 +410,7 @@ import { required, or } from '@vuelidate/validators';
             label: "Merchant Address",
             align: "center",
             field: row => {
-              row.leadInformation.leadAddress;
+              return row.leadInformation.leadAddress;
             },
             sortable: false
           },
@@ -440,7 +470,7 @@ import { required, or } from '@vuelidate/validators';
             label: "Mobile Number",
             align: "center",
             field: row => {
-              row.leadInformation.contactNumber;
+              return row.leadInformation.contactNumber;
             },
             sortable: false
           },
@@ -587,7 +617,7 @@ import { required, or } from '@vuelidate/validators';
             this.toggleAjaxLoadFilter1 = false;
           })
           .catch(error => {
-            his.toggleAjaxLoadFilter1 = false;
+            this.toggleAjaxLoadFilter1 = false;
           });
       },
       ajaxLoadAllLeadInfo({ pagination, filter }) {
@@ -614,7 +644,7 @@ import { required, or } from '@vuelidate/validators';
   
             // finally we tell QTable to exit the "loading" state
             this.$q.loading.hide();
-            // console.log("Table Datas ---------------------->"+JSON.stringify(this.tableData));
+            // console.log("Table Datas ---------------------->"+JSON.stringify(tableData));
           })
           .catch(() => {
             this.$q.loading.hide();
@@ -651,7 +681,7 @@ import { required, or } from '@vuelidate/validators';
             // then we update the rows with the fetched ones
             this.tableData1 = this.getLostOrStolenDatas.content;
   
-            if (this.getAllLostDeviceDatas.sort != null) {
+            if (this.getLostOrStolenDatas.sort != null) {
               this.paginationControl1.sortBy = this.getLostOrStolenDatas.sort[0].property;
               this.paginationControl1.descending = this.getLostOrStolenDatas.sort[0].ascending;
             }

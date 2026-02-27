@@ -18,11 +18,14 @@
         row-key="name"
         color="grey-9"
       >
-        <q-td
-          v-slot:body-cell-regionGroup="props"
+        <template v-slot:body-cell-regionGroup="props">
+  <q-td
+
           :props="props"
         >{{props.row.regionGroup ==null ? "NA" : props.row.regionGroup.regionName}}</q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+        <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
           <div class="row no-wrap no-padding">
             <q-btn
               dense
@@ -48,6 +51,7 @@
             ></q-btn>
           </div>
         </q-td>
+</template>
 
         <template v-slot:top="props">
           <div class="col-12 q-pb-md">
@@ -77,11 +81,14 @@
         row-key="name"
         color="grey-9"
       >
-        <q-td
-          v-slot:body-cell-regionGroup="props"
+        <template v-slot:body-cell-regionGroup="props">
+  <q-td
+
           :props="props"
         >{{props.row.regionGroup ==null ? "NA" : props.row.regionGroup.regionName}}</q-td>
-        <q-td v-slot:body-cell-action1="props" :props="props">
+</template>
+        <template v-slot:body-cell-action1="props">
+  <q-td  :props="props">
           <div class="row no-wrap no-padding">
             <!-- <q-btn
               dense
@@ -107,6 +114,7 @@
             ></q-btn>
           </div>
         </q-td>
+</template>
 
         <template v-slot:top="props">
          

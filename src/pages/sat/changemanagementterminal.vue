@@ -13,11 +13,14 @@
         :loading="toggleAjaxLoadFilter"
         @request="ajaxLoadAllCMS"
       >
-        <q-td
-          v-slot:body-cell-updatedAt="props"
+        <template v-slot:body-cell-updatedAt="props">
+  <q-td
+
           :props="props"
         >{{ $moment(props.row.leadInformation.updatedAt).format("Do MMM Y") }}</q-td>
-        <q-td v-slot:body-cell-Status="props" :props="props">
+</template>
+        <template v-slot:body-cell-Status="props">
+  <q-td  :props="props">
           <span
             class="label text-positive"
             v-if="props.row.leadInformation.cmsLeadStatus== 23"
@@ -68,7 +71,9 @@
           >Submitted to Mars</span>-->
           <span class="label text-negative" v-else>Pending</span>
         </q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+        <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
           <q-btn
             v-if="props.row.leadInformation.cmsLeadStatus== 22 || props.row.leadInformation.cmsLeadStatus==15 || props.row.leadInformation.cmsLeadStatus==25 "
             highlight
@@ -125,6 +130,7 @@
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
           >Data Entry</q-btn>
         </q-td>
+</template>
         <template v-slot:top="props" class="bottom-border">
           <!--START: table filter,search -->
           <div class="col-md-5">
@@ -157,10 +163,13 @@
         :loading="toggleAjaxLoadFilter1"
         @request="ajaxLoadAllLeadInfo"
       >
-        <!-- <q-td v-slot:body-cell-action="props" :props="props">
+        <!-- <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
           <q-btn @click="fnEdit(props.row.leadInformation.id)" flat class="text-negative">Edit</q-btn>
-        </q-td>-->
-        <q-td v-slot:body-cell-action="props" :props="props">
+        </q-td>
+</template>-->
+        <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
           <q-btn
             highlight
             push
@@ -170,6 +179,7 @@
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
           >Data Entry</q-btn>
         </q-td>
+</template>
         <!-- END: table body modification -->
         <template v-slot:top="props" class="bottom-border">
           <!--START: table filter,search -->

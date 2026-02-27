@@ -151,17 +151,17 @@ export default {
     this.propRowDetails = this.$route.params.data;
     // console.log(
     //   "getInventoryUpdatedPodDetails------------------>",
-    //   JSON.stringify(this.getInventoryUpdatedPodDetails)
+    //   JSON.stringify(getInventoryUpdatedPodDetails)
     // );
     console.log(
       "propRowDetails------------------>",
-      JSON.stringify(this.propRowDetails)
+      JSON.stringify(propRowDetails)
     );
   },
   mounted() {
     console.log(
       "CREATED PROP ROW DETAILS--------------->",
-      JSON.stringify(this.propRowDetails)
+      JSON.stringify(propRowDetails)
     );
     (this.formData.allocate_region = JSON.stringify(
       this.propRowDetails.allocate_region
@@ -172,11 +172,11 @@ export default {
     this.formData.pod_number = this.propRowDetails.pod_number;
     this.formData.total_count = this.propRowDetails.total_count;
     this.spareParts = this.propRowDetails.sparePartsSets;
-    console.log("FORMDATA DETAILS---------", JSON.stringify(this.formData));
+    console.log("FORMDATA DETAILS---------", JSON.stringify(formData));
     this.ajaxLoadDataForDeviceTypeTable();
   },
   //   a(){
-  //       console.log("CREATED PROP ROW DETAILS--------------->",JSON.stringify(this.propRowDetails));
+  //       console.log("CREATED PROP ROW DETAILS--------------->",JSON.stringify(propRowDetails));
   //   },
 
   methods: {
@@ -253,7 +253,7 @@ export default {
 
       console.log(
         "getInventoryUpdatedPodDetails PARAM VALUES GETTED----------------->",
-        JSON.stringify(this.getInventoryUpdatedPodDetails)
+        JSON.stringify(getInventoryUpdatedPodDetails)
       );
       this.$q.loading.show();
       this.UPDATE_SO_REJECTED_POD_DETAILS(param)
@@ -400,7 +400,7 @@ export default {
       this.allocate_region1 = data.id;
       this.formData.allocate_region = item;
       let self = this;
-      self.FETCH_REGION_BASED_SO(this.allocate_region1).then(() => {
+      self.FETCH_REGION_BASED_SO(allocate_region1).then(() => {
         return _.map(self.getRegionBasedSO, item => {
           self.regionBasedSo.push({
             label: item.name,

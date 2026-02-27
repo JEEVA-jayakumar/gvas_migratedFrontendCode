@@ -36,8 +36,9 @@
             color="dark"
             @request="ajaxLoadAllLeadInfo"
           >
-            <q-td
-              v-slot:body-cell-leadSource="props"
+            <template v-slot:body-cell-leadSource="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
               @click="
@@ -48,7 +49,9 @@
                 props.row.leadSource.sourceName
               }}</span>
             </q-td>
-            <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+            <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
                   dense
@@ -63,8 +66,10 @@
                 ></q-btn>
               </div>
             </q-td>
-            <q-td
-              v-slot:body-cell-device="props"
+</template>
+            <template v-slot:body-cell-device="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
               @click="toggleLeadInformation(props.row.device.deviceName)"
@@ -73,9 +78,11 @@
                 props.row.device.deviceName
               }}</span>
             </q-td>
+</template>
 
-            <q-td
-              v-slot:body-cell-marsDeviceModel="props"
+            <template v-slot:body-cell-marsDeviceModel="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -85,8 +92,10 @@
                   : props.row.marsDeviceModel.name
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-mdrPlanName="props"
+</template>
+            <template v-slot:body-cell-mdrPlanName="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -94,8 +103,10 @@
                 props.row.mdrPlanName == null ? "NA" : props.row.mdrPlanName
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-staticUpiLessThanTwo="props"
+</template>
+            <template v-slot:body-cell-staticUpiLessThanTwo="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -105,8 +116,10 @@
                   : props.row.staticUpiLessThanTwo
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-staticUpigreaterThanTwo="props"
+</template>
+            <template v-slot:body-cell-staticUpigreaterThanTwo="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -116,8 +129,10 @@
                   : props.row.staticUpigreaterThanTwo
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-staticUpiDebitCard="props"
+</template>
+            <template v-slot:body-cell-staticUpiDebitCard="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -127,8 +142,10 @@
                   : props.row.staticUpiDebitCard
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-staticUpicreditCardAndPrepaid="props"
+</template>
+            <template v-slot:body-cell-staticUpicreditCardAndPrepaid="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -138,8 +155,10 @@
                   : props.row.staticUpicreditCardAndPrepaid
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-smallMerchantLessThanTwoDebit="props"
+</template>
+            <template v-slot:body-cell-smallMerchantLessThanTwoDebit="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -149,8 +168,10 @@
                   : props.row.smallMerchantLessThanTwoDebit
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-smallMerchantGreaterThanTwoDebit="props"
+</template>
+            <template v-slot:body-cell-smallMerchantGreaterThanTwoDebit="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -160,8 +181,10 @@
                   : props.row.smallMerchantGreaterThanTwoDebit
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-smallMerchantLessThanTwoCreditAndPrepaid="props"
+</template>
+            <template v-slot:body-cell-smallMerchantLessThanTwoCreditAndPrepaid="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -171,8 +194,10 @@
                   : props.row.smallMerchantLessThanTwoCreditAndPrepaid
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-smallMerchantGreaterThanTwoCreditAndPrepaid="props"
+</template>
+            <template v-slot:body-cell-smallMerchantGreaterThanTwoCreditAndPrepaid="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -182,8 +207,10 @@
                   : props.row.smallMerchantGreaterThanTwoCreditAndPrepaid
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-largeMerchantLessThanTwoDebit="props"
+</template>
+            <template v-slot:body-cell-largeMerchantLessThanTwoDebit="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -193,8 +220,10 @@
                   : props.row.largeMerchantLessThanTwoDebit
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-largeMerchantGreaterThanTwoDebit="props"
+</template>
+            <template v-slot:body-cell-largeMerchantGreaterThanTwoDebit="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -204,8 +233,10 @@
                   : props.row.largeMerchantGreaterThanTwoDebit
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-largeMerchantLessThanTwoCreditandPrepaid="props"
+</template>
+            <template v-slot:body-cell-largeMerchantLessThanTwoCreditandPrepaid="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -215,8 +246,10 @@
                   : props.row.largeMerchantLessThanTwoCreditandPrepaid
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-largeMerchantGreaterThanTwoCreditandPrepaid="props"
+</template>
+            <template v-slot:body-cell-largeMerchantGreaterThanTwoCreditandPrepaid="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -226,10 +259,12 @@
                   : props.row.largeMerchantGreaterThanTwoCreditandPrepaid
               }}</span>
             </q-td>
+</template>
             <!-- mdrPlanName -->
             <!-- mdrPlanName -->
-            <q-td
-              v-slot:body-cell-merchantCategory="props"
+            <template v-slot:body-cell-merchantCategory="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
               @click="
@@ -242,9 +277,11 @@
                 props.row.merchantCategory.merchantCategoryName
               }}</span>
             </q-td>
+</template>
 
-            <q-td
-              v-slot:body-cell-merchantCategory="props"
+            <template v-slot:body-cell-merchantCategory="props">
+  <q-td
+
               :props="props"
             >
               <q-btn
@@ -260,6 +297,7 @@
                 class="capitalize"
               />
             </q-td>
+</template>
             <template slot="top">
               <!--START: table filter,search -->
               <div class="col-md-12 group">
@@ -302,8 +340,9 @@
             color="dark"
             @request="ajaxLoadAllLeadInfo1"
           >
-            <q-td
-              v-slot:body-cell-leadSource="props"
+            <template v-slot:body-cell-leadSource="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
               @click="
@@ -314,7 +353,9 @@
                 props.row.leadSource.sourceName
               }}</span>
             </q-td>
-            <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+            <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
                   dense
@@ -329,8 +370,10 @@
                 ></q-btn>
               </div>
             </q-td>
-            <q-td
-              v-slot:body-cell-device="props"
+</template>
+            <template v-slot:body-cell-device="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
               @click="toggleLeadInformation(props.row.device.deviceName)"
@@ -339,9 +382,11 @@
                 props.row.device.deviceName
               }}</span>
             </q-td>
+</template>
 
-            <q-td
-              v-slot:body-cell-marsDeviceModel="props"
+            <template v-slot:body-cell-marsDeviceModel="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -351,8 +396,10 @@
                   : props.row.marsDeviceModel.name
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-mdrPlanName="props"
+</template>
+            <template v-slot:body-cell-mdrPlanName="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -360,8 +407,10 @@
                 props.row.mdrPlanName == null ? "NA" : props.row.mdrPlanName
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-smallMerchantLessThanTwoDebit="props"
+</template>
+            <template v-slot:body-cell-smallMerchantLessThanTwoDebit="props">
+  <q-td
+
               align="center"
               slot-scope="props"
               :props="props"
@@ -373,8 +422,10 @@
                   : props.row.smallMerchantLessThanTwoDebit
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-smallMerchantGreaterThanTwoDebit="props"
+</template>
+            <template v-slot:body-cell-smallMerchantGreaterThanTwoDebit="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -384,8 +435,10 @@
                   : props.row.smallMerchantGreaterThanTwoDebit
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-smallMerchantLessThanTwoCreditAndPrepaid="props"
+</template>
+            <template v-slot:body-cell-smallMerchantLessThanTwoCreditAndPrepaid="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -395,8 +448,10 @@
                   : props.row.smallMerchantLessThanTwoCreditAndPrepaid
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-smallMerchantGreaterThanTwoCreditAndPrepaid="props"
+</template>
+            <template v-slot:body-cell-smallMerchantGreaterThanTwoCreditAndPrepaid="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -406,8 +461,10 @@
                   : props.row.smallMerchantGreaterThanTwoCreditAndPrepaid
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-largeMerchantLessThanTwoDebit="props"
+</template>
+            <template v-slot:body-cell-largeMerchantLessThanTwoDebit="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -417,8 +474,10 @@
                   : props.row.largeMerchantLessThanTwoDebit
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-largeMerchantGreaterThanTwoDebit="props"
+</template>
+            <template v-slot:body-cell-largeMerchantGreaterThanTwoDebit="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -428,8 +487,10 @@
                   : props.row.largeMerchantGreaterThanTwoDebit
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-largeMerchantLessThanTwoCreditandPrepaid="props"
+</template>
+            <template v-slot:body-cell-largeMerchantLessThanTwoCreditandPrepaid="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -439,8 +500,10 @@
                   : props.row.largeMerchantLessThanTwoCreditandPrepaid
               }}</span>
             </q-td>
-            <q-td
-              v-slot:body-cell-largeMerchantGreaterThanTwoCreditandPrepaid="props"
+</template>
+            <template v-slot:body-cell-largeMerchantGreaterThanTwoCreditandPrepaid="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
             >
@@ -450,9 +513,11 @@
                   : props.row.largeMerchantGreaterThanTwoCreditandPrepaid
               }}</span>
             </q-td>
+</template>
             <!-- mdrPlanName -->
-            <q-td
-              v-slot:body-cell-merchantCategory="props"
+            <template v-slot:body-cell-merchantCategory="props">
+  <q-td
+
               :props="props"
               class="cursor-pointer"
               @click="
@@ -465,6 +530,7 @@
                 props.row.merchantCategory.merchantCategoryName
               }}</span>
             </q-td>
+</template>
             <template slot="top">
               <!--START: table filter,search -->
               <div class="col-md-12 group">

@@ -86,7 +86,7 @@ export default {
           icon: "warning"
         });
       } else {
-        this.FEED_REGIONAL_INVENTORY_DAMAGED_DEVICE_SERIAL_NUMBER(this.formData)
+        this.FEED_REGIONAL_INVENTORY_DAMAGED_DEVICE_SERIAL_NUMBER(formData)
           .then(() => {
             this.TOGGLE_COMMON_LOADER(false);
             this.$q.notify({

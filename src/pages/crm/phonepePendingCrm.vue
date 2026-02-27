@@ -14,6 +14,11 @@
         />
         <q-tab
           color="dark"
+          name="tab-2"
+          label="Completed Tickets"
+        />
+        <q-tab
+          color="dark"
           name="tab-3"
           label="Phonepe Paper Roll"
         />
@@ -65,7 +70,8 @@
             :loading="toggleAjaxLoadFilter"
             @request="ajaxLoadAllLeadInfo"
           >
-            <q-td v-slot:body-cell-action="props" :props="props">
+            <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
                 v-if="props.row.serviceRequestTicketStatus != 5 && props.row.serviceRequestTicketStatus != 3 && props.row.serviceRequestTicketStatus != 8 && props.row.serviceRequestTicketStatus != 2"
@@ -126,8 +132,10 @@
                 />
               </div>
             </q-td>
-            <q-td
-              v-slot:body-cell-updateRemarks="props"
+</template>
+            <template v-slot:body-cell-updateRemarks="props">
+  <q-td
+
               :props="props"
             >
               <div class="row no-wrap no-padding">
@@ -150,25 +158,19 @@
                 >
               </div>
             </q-td>
-            <q-td
-              v-slot:body-cell-createdDate="props"
-              :props="props" 
-              >{{
-                props.row == null
-                  ? "NA"
-                  : props.row.createdDate | moment("Do MMM Y")
-              }}</q-td
-            >
-            <q-td
-            v-slot:body-cell-tat="props"
-            :props="props" 
-            >
-            <span :style="getHoursAgoColor(props.row.createdDate)">{{
-              getHoursAgo(props.row.createdDate)
-            }}</span>
-            </q-td
-          >
-
+</template>
+            <template v-slot:body-cell-createdDate="props">
+              <q-td :props="props">
+                {{ props.row == null ? "NA" : $moment(props.row.createdDate).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-tat="props">
+              <q-td :props="props">
+                <span :style="getHoursAgoColor(props.row.createdDate)">
+                  {{ getHoursAgo(props.row.createdDate) }}
+                </span>
+              </q-td>
+            </template>
           </q-table>
         </q-tab-panel>
         <q-tab-panel name="tab-2">
@@ -203,39 +205,28 @@
             :loading="toggleAjaxLoadFilter1"
             @request="ajaxLoadAllLeadInfo1"
           >
-            <q-td
-              v-slot:body-cell-updateRemarks="props"
-              :props="props"
-            >
-              <div class="row no-wrap no-padding">
-                <span
-                  class="q-ma-sm"
-                  v-if="props.row.crmRemark != null"
-                  v-html="props.row.crmRemark"
-                ></span>
-                <span class="q-ma-sm" v-else="props.row.crmRemark == null"
-                  >NA</span
-                >
-              </div>
-            </q-td>
-            <q-td
-              v-slot:body-cell-createdDate="props"
-              :props="props"
-              >{{
-                props.row == null
-                  ? "NA"
-                  : props.row.createdDate | moment("Do MMM Y")
-              }}</q-td
-            >
-            <q-td
-              v-slot:body-cell-updatedDate="props"
-              :props="props"
-              >{{
-                props.row == null
-                  ? "NA"
-                  : props.row.updatedDate | moment("Do MMM Y")
-              }}</q-td
-            >
+            <template v-slot:body-cell-updateRemarks="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <span
+                    class="q-ma-sm"
+                    v-if="props.row.crmRemark != null"
+                    v-html="props.row.crmRemark"
+                  ></span>
+                  <span class="q-ma-sm" v-else>NA</span>
+                </div>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-createdDate="props">
+              <q-td :props="props">
+                {{ props.row == null ? "NA" : $moment(props.row.createdDate).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-updatedDate="props">
+              <q-td :props="props">
+                {{ props.row == null ? "NA" : $moment(props.row.updatedDate).format("Do MMM Y") }}
+              </q-td>
+            </template>
           </q-table>
         </q-tab-panel>
         <q-tab-panel name="tab-3">
@@ -292,15 +283,11 @@
                 :loading="toggleAjaxLoadFilter3"
                 @request="ajaxLoadAllLeadInfo3"
               >
-                <q-td
-                  v-slot:body-cell-createdDate="props"
-                  :props="props"
-                  >{{
-                    props.row == null
-                      ? "NA"
-                      : props.row.createdDate | moment("Do MMM Y")
-                  }}</q-td
-                >
+                <template v-slot:body-cell-createdDate="props">
+                  <q-td :props="props">
+                    {{ props.row == null ? "NA" : $moment(props.row.createdDate).format("Do MMM Y") }}
+                  </q-td>
+                </template>
               </q-table>
             </q-tab-panel>
             <q-tab-panel name="tab-5">
@@ -324,24 +311,16 @@
                 :loading="toggleAjaxLoadFilter4"
                 @request="ajaxLoadAllLeadInfo4"
               >
-                <q-td
-                  v-slot:body-cell-createdDate="props"
-                  :props="props"
-                  >{{
-                    props.row == null
-                      ? "NA"
-                      : props.row.createdDate | moment("Do MMM Y")
-                  }}</q-td
-                >
-                <q-td
-                  v-slot:body-cell-updatedDate="props"
-                  :props="props"
-                  >{{
-                    props.row == null
-                      ? "NA"
-                      : props.row.updatedDate | moment("Do MMM Y")
-                  }}</q-td
-                >
+                <template v-slot:body-cell-createdDate="props">
+                  <q-td :props="props">
+                    {{ props.row == null ? "NA" : $moment(props.row.createdDate).format("Do MMM Y") }}
+                  </q-td>
+                </template>
+                <template v-slot:body-cell-updatedDate="props">
+                  <q-td :props="props">
+                    {{ props.row == null ? "NA" : $moment(props.row.updatedDate).format("Do MMM Y") }}
+                  </q-td>
+                </template>
               </q-table>
             </q-tab-panel>
           </q-tab-panels>
@@ -985,12 +964,7 @@ export default {
           this.paginationControl.rowsNumber = this.getphonepeDate.totalElements;
           this.paginationControl.page = this.getphonepeDate.number + 1;
           this.tableData = this.getphonepeDate.content;
-          this.getphonepeDate.content.forEach(obj => {
-        if (obj.serviceRequestTicketStatus !== 2) {
-          obj.items.push(newItem);
-        }
-      });
-                     // this.tableData = this.tableData.find(obj => obj.serviceRequestTicketStatus === 2);
+
           if (this.getphonepeDate.sort != null) {
             this.paginationControl.sortBy = this.getphonepeDate.sort[0].property;
             this.paginationControl.descending = this.getphonepeDate.sort[0].ascending;

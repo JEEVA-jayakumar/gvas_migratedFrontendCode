@@ -13,35 +13,51 @@
         </q-tr>
         <!--END: table header -->
   
-        <q-td v-slot:body-cell-tid="props" :props="props">
+        <template v-slot:body-cell-tid="props">
+  <q-td  :props="props">
           <span class="label text-primary"># {{ props.row.tid }}</span>
         </q-td>
-        <q-td v-slot:body-cell-mid="props" :props="props">
+</template>
+        <template v-slot:body-cell-mid="props">
+  <q-td  :props="props">
           <span class="label text-primary"># {{ props.row.mid }}</span>
         </q-td>
-        <!-- <q-td
-            v-slot:body-cell-leadName="props"
+</template>
+        <!-- <template v-slot:body-cell-leadName="props">
+  <q-td
+
             :props="props"
-          >{{props.row.leadInformation.leadName}}</q-td>-->
-        <q-td v-slot:body-cell-leadNumber="props" :props="props" class="cursor-pointer"
+          >{{props.row.leadInformation.leadName}}</q-td>
+</template>-->
+        <template v-slot:body-cell-leadNumber="props">
+  <q-td  :props="props" class="cursor-pointer"
           @click="toggleLeadInformation(props.row.leadInformation)">
           <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
         </q-td>
-        <q-td v-slot:body-cell-mobileNumber="props" :props="props">{{
+</template>
+        <template v-slot:body-cell-mobileNumber="props">
+  <q-td  :props="props">{{
           props.row.leadInformation == null ?
             'NA' : props.row.leadInformation.contactNumber
         }}</q-td>
-        <q-td v-slot:body-cell-leadAddress="props" :props="props">{{
+</template>
+        <template v-slot:body-cell-leadAddress="props">
+  <q-td  :props="props">{{
           props.row.leadInformation == null ?
             'NA' : props.row.leadInformation.leadAddress
         }}</q-td>
-        <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+</template>
+        <template v-slot:body-cell-deviceStatusDate="props">
+  <q-td  :props="props">
           <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
         </q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+        <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
           <q-btn highlight push class="q-mx-sm" color="positive" @click="openReject(props.row)" size="sm">Reject</q-btn>
           <q-btn highlight push class="q-mx-sm" color="negative" @click="openAccept(props.row)" size="sm">Approve</q-btn>
         </q-td>
+</template>
         <template v-slot:top="props" class="bottom-border">
           <!--START: table filter,search,excel download -->
           <div class="col-5">

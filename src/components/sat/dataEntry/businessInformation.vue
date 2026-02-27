@@ -86,7 +86,7 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          upper-case
+          style="text-transform: uppercase"
           color="grey-9"
           @blur="$v.merchant.businessInformation.gstId.$touch"
           :error="$v.merchant.businessInformation.gstId.$error"
@@ -125,16 +125,27 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          format="DD/MM/YYYY"
-          format-model="number"
+          filled
           @blur="$v.merchant.businessInformation.memberSince.$touch"
           :error="$v.merchant.businessInformation.memberSince.$error"
           color="grey-9"
-          modal
           v-model="merchant.businessInformation.memberSince"
           label="Member since"
           placeholder="Member since"
-        />
+          mask="####-##-##"
+        >
+          <template v-slot:append>
+            <q-icon name="event" class="cursor-pointer">
+              <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                <q-date v-model="merchant.businessInformation.memberSince" mask="YYYY-MM-DD">
+                  <div class="row items-center justify-end">
+                    <q-btn v-close-popup label="Close" color="primary" flat />
+                  </div>
+                </q-date>
+              </q-popup-proxy>
+            </q-icon>
+          </template>
+        </q-input>
       </div>
     </div>
     <q-stepper-navigation>

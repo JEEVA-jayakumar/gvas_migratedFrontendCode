@@ -76,7 +76,7 @@ export default {
   beforeMount() {
     console.log(
       "propPDFDetails---------->>>>",
-      JSON.stringify(this.propPDFDetails)
+      JSON.stringify(propPDFDetails)
     );
   },
   created() {
@@ -113,11 +113,11 @@ export default {
               this.invoiceMimeType = item.invoiceMimeType;
               console.log("invoiceCopy:", this.invoiceCopy);
               console.log("invoiceMimeType:", this.invoiceMimeType);
-              invoiceNames.push(this.invoiceCopy);
+              invoiceNames.push(invoiceCopy);
             });
             this.tableData = dataArray;
             this.itemDetail = this.tableData;
-            console.log("itemDetail:", JSON.stringify(this.itemDetail));
+            console.log("itemDetail:", JSON.stringify(itemDetail));
           } else {
             console.error("Unexpected response format: ", responseData);
           }

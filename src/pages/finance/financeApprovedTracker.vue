@@ -25,11 +25,14 @@
           @request="ajaxLoadAllFinanceApprovedData"
           row-key="name"
         >
-          <q-td v-slot:body-cell-createdAt="props" :props="props">
+          <template v-slot:body-cell-createdAt="props">
+  <q-td  :props="props">
             <span class="capitalize">{{ $moment(props.row.submissionDate).format("Do MMM Y") }}</span>
           </q-td>
+</template>
           <!--START: Amount status -->
-          <!-- <q-td v-slot:body-cell-amount_status="props" :props="props">
+          <!-- <template v-slot:body-cell-amount_status="props">
+  <q-td  :props="props">
               <span class="text-positive" v-if="props.row.verifiedFinanceStatus==$VERIFIED_FINANCE_STATUS_SUCCESS">Finance approved</span>
               <span class="text-negative" v-else-if="props.row.verifiedFinanceStatus==$VERIFIED_FINANCE_STATUS_REJECT">Finance rejected</span>
               <span class="text-amber-9" v-else-if="props.row.verifiedFinanceStatus==$VERIFIED_FINANCE_STATUS_PENDING">Finance pending</span>
@@ -37,31 +40,40 @@
               <span class="text-negative" v-else-if="props.row.verifiedFinanceStatus==$VERIFIED_FINANCE_STATUS_REJECT">Rejected on board</span>
               <span class="text-positive" v-else-if="props.row.verifiedFinanceStatus==$LEAD_STATUS_MARS_APPROVED">On boarded</span>
               <span class="text-positive" v-else>NA</span>
-          </q-td>-->
+          </q-td>
+</template>-->
           <!--END: Amount status -->
           <!-- START: Lead Number -->
-          <q-td v-slot:body-cell-approvedDate="props" :props="props">
+          <template v-slot:body-cell-approvedDate="props">
+  <q-td  :props="props">
             <span class="label">{{ $moment(props.row.approvedDate).format("Do MMM Y") }}</span>
           </q-td>
-          <q-td v-slot:body-cell-submittedToFinanceDate="props" :props="props">
+</template>
+          <template v-slot:body-cell-submittedToFinanceDate="props">
+  <q-td  :props="props">
             <span class="label">{{ $moment(props.row.submittedToFinanceDate).format("Do MMM Y") }}</span>
           </q-td>
+</template>
           <!-- END: Lead Number -->
           <!-- START: Lead Number -->
-          <q-td
-            v-slot:body-cell-leadNumber="props"
+          <template v-slot:body-cell-leadNumber="props">
+  <q-td
+
             class="cursor-pointer"
             @click="toggleLeadInformation(props.row)"
             :props="props"
           >
             <span class="label text-primary"># {{ props.row.leadNumber }}</span>
           </q-td>
+</template>
           <!-- END: Lead Number -->
           <!-- START: TID -->
-          <q-td v-slot:body-cell-updatedAt="props" :props="props">
+          <template v-slot:body-cell-updatedAt="props">
+  <q-td  :props="props">
             <!-- <span class="label text-primary"># {{props.row.tid}}</span> -->
             <span class="label">{{ $moment(props.row.leadLastUpdated).format("Do MMM Y") }}</span>
           </q-td>
+</template>
           <!-- END: TID -->
           <!--START: table search, filter -->
           <template v-slot:top="props">
@@ -103,32 +115,42 @@
           @request="ajaxLoadAllFinanceQrApprovedData"
           row-key="name"
         >
-          <q-td v-slot:body-cell-createdAt="props" :props="props">
+          <template v-slot:body-cell-createdAt="props">
+  <q-td  :props="props">
             <span class="capitalize">{{ $moment(props.row.submissionDate).format("Do MMM Y") }}</span>
           </q-td>
+</template>
          
-          <q-td v-slot:body-cell-approvedDate="props" :props="props">
+          <template v-slot:body-cell-approvedDate="props">
+  <q-td  :props="props">
             <span class="label">{{ $moment(props.row.approvedDate).format("Do MMM Y") }}</span>
           </q-td>
-          <q-td v-slot:body-cell-submittedToFinanceDate="props" :props="props">
+</template>
+          <template v-slot:body-cell-submittedToFinanceDate="props">
+  <q-td  :props="props">
             <span class="label">{{ $moment(props.row.submittedToFinanceDate).format("Do MMM Y") }}</span>
           </q-td>
+</template>
           <!-- END: Lead Number -->
           <!-- START: Lead Number -->
-          <q-td
-            v-slot:body-cell-qrLeadNumber="props"
+          <template v-slot:body-cell-qrLeadNumber="props">
+  <q-td
+
             class="cursor-pointer"
             @click="toggleQrLeadInformation(props.row)"
             :props="props"
           >
             <span class="label text-primary"># {{props.row.qrLeadNumber}}</span>
           </q-td>
+</template>
           <!-- END: Lead Number -->
           <!-- START: TID -->
-          <q-td v-slot:body-cell-updatedAt="props" :props="props">
+          <template v-slot:body-cell-updatedAt="props">
+  <q-td  :props="props">
             <!-- <span class="label text-primary"># {{props.row.tid}}</span> -->
             <span class="label">{{ $moment(props.row.leadLastUpdated).format("Do MMM Y") }}</span>
           </q-td>
+</template>
           <!-- END: TID -->
           <!--START: table search, filter -->
           <template v-slot:top="props">

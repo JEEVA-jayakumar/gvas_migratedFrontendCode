@@ -4,30 +4,42 @@
             <div class="col-md-6 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">Aggregator Device
                 Recovery</div>
             <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filter" v-model:pagination="paginationControl" row-key="name" @request="fnajaxLoadingData">
-                <q-td v-slot:body-cell-serialNumber="props" :props="props">{{
+                <template v-slot:body-cell-serialNumber="props">
+  <q-td  :props="props">{{
                     props.row.aggregatorRegionalInventory == null ? "NA" :
                         props.row.aggregatorRegionalInventory.serialNumber
                 }}</q-td>
-                <q-td v-slot:body-cell-podNumber="props" :props="props">{{
+</template>
+                <template v-slot:body-cell-podNumber="props">
+  <q-td  :props="props">{{
                     props.row.aggregatorRegionalInventory == null ? "NA" :
                         props.row.aggregatorRegionalInventory.podNumber
                 }}</q-td>
-                <q-td v-slot:body-cell-deviceName="props" :props="props">{{
+</template>
+                <template v-slot:body-cell-deviceName="props">
+  <q-td  :props="props">{{
                     props.row.aggregatorRegionalInventory == null ? "NA" :
                         props.row.aggregatorRegionalInventory.aggregatorDevice.deviceName
                 }}</q-td>
-                <q-td v-slot:body-cell-tid="props" :props="props">{{
+</template>
+                <template v-slot:body-cell-tid="props">
+  <q-td  :props="props">{{
                     props.row.tid == null ? "NA" :
                         props.row.tid
                 }}</q-td>
-                <q-td v-slot:body-cell-mid="props" :props="props">{{
+</template>
+                <template v-slot:body-cell-mid="props">
+  <q-td  :props="props">{{
                     props.row.mid == null ? "NA" :
                         props.row.mid
                 }}</q-td>
-                <q-td v-slot:body-cell-leadNumber="props" :props="props">{{
+</template>
+                <template v-slot:body-cell-leadNumber="props">
+  <q-td  :props="props">{{
                     props.row.leadInformation == null ? "NA" :
                         props.row.leadInformation.leadNumber
                 }}</q-td>
+</template>
                 <template v-slot:top="props">
                     <div class="col-md-5">
                         <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
@@ -299,9 +311,9 @@ export default {
                 message: 'Fetching data ..'
             });
             this.FETCH_PHONEPE_DEVICE_RECOVERY_DATAS({ pagination, filter }).then(res => {
-                    //     console.log("getPhonepeDeviceRecoveryDatas ------>",JSON.stringify(this.getPhonepeDeviceRecoveryDatas))
+                    //     console.log("getPhonepeDeviceRecoveryDatas ------>",JSON.stringify(getPhonepeDeviceRecoveryDatas))
                     //   this.tableData = this.getPhonepeDeviceRecoveryDatas.content;
-                    //   console.log("FETCH_PHONEPE_DEVICE_RECOVERY_DATAS ------>",JSON.stringify(this.tableData))
+                    //   console.log("FETCH_PHONEPE_DEVICE_RECOVERY_DATAS ------>",JSON.stringify(tableData))
                     // updating pagination to reflect in the UI
                     this.paginationControl = pagination;
 
@@ -329,7 +341,7 @@ export default {
             this.$q.loading.show({
                 delay: 100 // ms
             });
-            this.DOWNLOAD_PHONEPE_DEVICE_RECOVERY_DATAS(this.formData)
+            this.DOWNLOAD_PHONEPE_DEVICE_RECOVERY_DATAS(formData)
                 .then(() => {
                     this.$q.loading.hide();
                     this.$q.notify({

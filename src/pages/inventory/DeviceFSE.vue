@@ -15,12 +15,16 @@
         :loading="toggleAjaxLoadFilter"
         @request="ajaxLoadAllLeadInfo"
       >
-       <q-td v-slot:body-cell-TidCreationDate="props" :props="props">
+       <template v-slot:body-cell-TidCreationDate="props">
+  <q-td  :props="props">
           <span class="label">{{ $moment(props.row.TidCreationDate).format("Do MMM Y") }}</span>
         </q-td>
-        <q-td v-slot:body-cell-ReceivedDate="props" :props="props">
+</template>
+        <template v-slot:body-cell-ReceivedDate="props">
+  <q-td  :props="props">
           <span class="label">{{ $moment(props.row.ReceivedDate).format("Do MMM Y") }}</span>
         </q-td>
+</template>
         
        <template v-slot:top="props" class="bottom-border">
           <!--START: table filter,search -->

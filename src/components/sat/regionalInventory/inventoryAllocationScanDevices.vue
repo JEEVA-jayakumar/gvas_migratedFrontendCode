@@ -226,7 +226,7 @@ export default {
         icon: "list"
       });
       if (!this.$barcodeScanner.hasListener()) {
-        this.$barcodeScanner.init(this.onBarcodeScanned);
+        this.$barcodeScanner.init(onBarcodeScanned);
       }
     },
 

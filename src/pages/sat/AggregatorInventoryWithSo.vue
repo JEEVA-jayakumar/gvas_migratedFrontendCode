@@ -9,14 +9,18 @@
       </div> -->
       <div>
         <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filter" v-model:pagination="paginationControl" row-key="name" @request="ajaxLoadAllLeadInfo">
-          <q-td v-slot:body-cell-created_at="props" :props="props">{{
+          <template v-slot:body-cell-created_at="props">
+  <q-td  :props="props">{{
             props.row.created_at == null ? "NA" :
               props.row.created_at | moment("Do MMM Y")
           }}</q-td>
-          <q-td v-slot:body-cell-updated_at="props" :props="props">{{
+</template>
+          <template v-slot:body-cell-updated_at="props">
+  <q-td  :props="props">{{
             props.row.updated_at == null ? "NA" :
               props.row.updated_at | moment("Do MMM Y")
           }}</q-td>
+</template>
           <template v-slot:top="props">
             <div class="col-md-5">
               <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
@@ -207,7 +211,7 @@ export default {
       });
       this.FETCH_AGGREGATORS_INVENTORY_WITH_SO()
         .then(res => {
-          console.log("FETCH_AGGREGATORS_INVENTORY_WITH_SO ----->", JSON.stringify(this.getAllAggregatorsInventoryWithSo))
+          console.log("FETCH_AGGREGATORS_INVENTORY_WITH_SO ----->", JSON.stringify(getAllAggregatorsInventoryWithSo))
           this.tableData = this.getAllAggregatorsInventoryWithSo;
           this.$q.loading.hide();
         })
@@ -223,7 +227,7 @@ export default {
       this.$q.loading.show({
         delay: 100 // ms
       });
-      this.INVENTORY_WITH_SO_LIST_DOWNLOAD(this.formData)
+      this.INVENTORY_WITH_SO_LIST_DOWNLOAD(formData)
         .then(() => {
           this.$q.loading.hide();
           this.$q.notify({

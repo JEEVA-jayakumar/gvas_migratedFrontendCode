@@ -479,14 +479,14 @@ export default {
     },
     searchIorState(request, done) {
       this.FETCH_IOR_STATE(request);
-      done(this.getiorState);
+      done(getiorState);
     },
     citybasedlocation() {
       this.FETCH_AXIS_BANK_CITY_LOCATION(this.formdata.city);
     },
     searchAxisBankPincode(request, done) {
       this.FETCH_AXIS_BANK_PINCODE_LOCATION(request);
-      done(this.getAxisBankPincode);
+      done(getAxisBankPincode);
     },
     pincodeandDistrictBasedCity() {
       this.FETCH_AXIS_BANK_PINCODE_DISTRICT(
@@ -779,84 +779,44 @@ export default {
               })
               .catch((error) => {
                 this.merchant.companyInformation.constitutionName = this.propLeadDeatils.merchantType.merchantTypeName;
-                this.$set(
-                  finalRequest.merchant.salesInformation,
-                  "applicationDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.salesInformation["applicationDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.salesInformation.applicationDate
-                  )
                 );
 
-                this.$set(
-                  finalRequest.merchant.salesInformation,
-                  "aggreementDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.salesInformation["aggreementDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.salesInformation.aggreementDate
-                  )
                 );
 
-                this.$set(
-                  finalRequest.merchant.salesInformation,
-                  "loanDisbursementDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.salesInformation["loanDisbursementDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.salesInformation.loanDisbursementDate
-                  )
                 );
 
-                this.$set(
-                  finalRequest.merchant.salesInformation,
-                  "tenureStartDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.salesInformation["tenureStartDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.salesInformation.tenureStartDate
-                  )
                 );
 
-                this.$set(
-                  finalRequest.merchant.companyInformation,
-                  "establishYear",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.companyInformation["establishYear"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.companyInformation.establishYear
-                  )
                 );
 
-                this.$set(
-                  finalRequest.merchant.bankInformation.collectionDetails,
-                  "chequeDepositedDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.bankInformation.collectionDetails["chequeDepositedDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.bankInformation.collectionDetails
                       .chequeDepositedDate
-                  )
                 );
 
-                this.$set(
-                  finalRequest.merchant.bankInformation.collectionDetails,
-                  "collectedDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.bankInformation.collectionDetails["collectedDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.bankInformation.collectionDetails.collectedDate
-                  )
                 );
 
-                this.$set(
-                  finalRequest.merchant.bankInformation.collectionDetails,
-                  "chequeDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.bankInformation.collectionDetails["chequeDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.bankInformation.collectionDetails.chequeDate
-                  )
                 );
 
-                this.$set(
-                  finalRequest.merchant.businessInformation,
-                  "memberSince",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.businessInformation["memberSince"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.businessInformation.memberSince
-                  )
                 );
-                this.$set(
-                  finalRequest.merchant.businessInformation,
-                  "lastTurnoverYear",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.businessInformation["lastTurnoverYear"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.businessInformation.lastTurnoverYear
-                  )
                 );
 
                 if (error.data.hasOwnProperty("errorDetails")) {
@@ -886,7 +846,7 @@ export default {
                       let splittingErrorField = `OThis.$v.${splitted.join(".")}`;
                       let fieldErrorFound = eval(splittingErrorField);
                       fieldErrorFound.$model = "";
-                      OThis.$set(OThis.error.tab, splitted[1], true);
+                      OThis.error.tab[splitted[1]] = true;
 
                       let generateErrorMessage = eval(
                         `OThis.error.field.${splitted.join(".")}`

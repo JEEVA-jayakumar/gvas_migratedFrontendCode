@@ -218,7 +218,7 @@ export default {
       let cookedArr1 = [];
       self.GET_ACTIVE_CREATED_DEVICE_LIST()
         .then(() => {
-          return _.map(this.getCreatedActiveDeviceList, (item) => {
+          return _.map(getCreatedActiveDeviceList, (item) => {
             console.log("ITEM -------->", item)
             cookedArr1.push({
               value: item,
@@ -298,7 +298,7 @@ export default {
       this.scannerToggleOption = false;
 
       if (!this.$barcodeScanner.hasListener()) {
-        this.$barcodeScanner.init(this.onBarcodeScanned);
+        this.$barcodeScanner.init(onBarcodeScanned);
       }
     },
 

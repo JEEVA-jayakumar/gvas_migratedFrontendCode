@@ -32,40 +32,54 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
+        <q-select
+          v-model="merchant.companyInformation.registeredCityName"
+          use-input
+          hide-selected
+          fill-input
+          input-debounce="10"
+          label="Registered city (type min 3 characters)*"
+          :options="cityOptionsList"
+          @filter="citySearch"
+          @update:model-value="registeredCitySelected"
           @blur="$v.merchant.companyInformation.registeredCityRefCode.$touch"
           :error="$v.merchant.companyInformation.registeredCityRefCode.$anyError|| $v.merchant.companyInformation.registeredCityName.$anyError"
           color="grey-9"
-          v-model="merchant.companyInformation.registeredCityName"
-          label="Registered city (type min 3 characters)*"
           placeholder="Start typing ..*"
         >
-          <q-autocomplete
-            separator
-            @search="citySearch"
-            :debounce="10"
-            :min-characters="3"
-            @selected="registeredCitySelected"
-          />
-        </q-input>
+          <template v-slot:no-option>
+            <q-item>
+              <q-item-section class="text-grey">
+                No results
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
+        <q-select
+          v-model="merchant.companyInformation.registeredStateName"
+          use-input
+          hide-selected
+          fill-input
+          input-debounce="10"
+          label="Registered state (type min 3 characters)*"
+          :options="stateOptionsList"
+          @filter="stateSearch"
+          @update:model-value="registeredStateSelected"
           @blur="$v.merchant.companyInformation.registeredStateRefCode.$touch"
           :error="$v.merchant.companyInformation.registeredStateRefCode.$anyError|| $v.merchant.companyInformation.registeredStateName.$anyError"
           color="grey-9"
-          v-model="merchant.companyInformation.registeredStateName"
-          label="Registered state (type min 3 characters)*"
           placeholder="Start typing ..*"
         >
-          <q-autocomplete
-            separator
-            @search="stateSearch"
-            :debounce="10"
-            :min-characters="1"
-            @selected="registeredStateSelected"
-          />
-        </q-input>
+          <template v-slot:no-option>
+            <q-item>
+              <q-item-section class="text-grey">
+                No results
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
@@ -88,16 +102,27 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          format="DD/MM/YYYY"
-          format-model="number"
+          filled
           color="grey-9"
-          modal
           @blur="$v.merchant.companyInformation.establishYear.$touch"
           :error="$v.merchant.companyInformation.establishYear.$error"
           v-model="merchant.companyInformation.establishYear"
           label="Year of Establishment*"
           placeholder="Year of Establishment*"
-        />
+          mask="####-##-##"
+        >
+          <template v-slot:append>
+            <q-icon name="event" class="cursor-pointer">
+              <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                <q-date v-model="merchant.companyInformation.establishYear" mask="YYYY-MM-DD">
+                  <div class="row items-center justify-end">
+                    <q-btn v-close-popup label="Close" color="primary" flat />
+                  </div>
+                </q-date>
+              </q-popup-proxy>
+            </q-icon>
+          </template>
+        </q-input>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
@@ -151,7 +176,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
-          placeholder="Choose from the below*"
+          emit-value
+          map-options
           color="grey-9"
           v-model="merchant.companyInformation.businessType"
           label="Type of Business"
@@ -159,22 +185,29 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
+        <q-select
+          v-model="merchant.companyInformation.mccname"
+          use-input
+          hide-selected
+          fill-input
+          input-debounce="10"
+          label="MCC (type min 3 characters)"
+          :options="mccOptionsList"
+          @filter="mccSearch"
+          @update:model-value="mccSelected"
           @blur="$v.merchant.companyInformation.mcc.$touch"
           :error="$v.merchant.companyInformation.mcc.$error || $v.merchant.companyInformation.mccname.$error"
           color="grey-9"
-          v-model="merchant.companyInformation.mccname"
-          label="MCC (type min 3 characters)"
           placeholder="Start typing ..*"
         >
-          <q-autocomplete
-            separator
-            @search="mccSearch"
-            :debounce="10"
-            :min-characters="3"
-            @selected="mccSelected"
-          />
-        </q-input>
+          <template v-slot:no-option>
+            <q-item>
+              <q-item-section class="text-grey">
+                No results
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
@@ -198,40 +231,54 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
+        <q-select
+          v-model="merchant.companyInformation.residentCityName"
+          use-input
+          hide-selected
+          fill-input
+          input-debounce="10"
+          label="City (type min 3 characters)*"
+          :options="cityOptionsList"
+          @filter="citySearch"
+          @update:model-value="residentCitySelected"
           @blur="$v.merchant.companyInformation.residentialCityRefCode.$touch"
           :error="$v.merchant.companyInformation.residentialCityRefCode.$anyError|| $v.merchant.companyInformation.residentCityName.$anyError"
           color="grey-9"
-          v-model="merchant.companyInformation.residentCityName"
-          label="City (type min 3 characters)*"
           placeholder="Start typing ..*"
         >
-          <q-autocomplete
-            separator
-            @search="citySearch"
-            :debounce="10"
-            :min-characters="3"
-            @selected="residentCitySelected"
-          />
-        </q-input>
+          <template v-slot:no-option>
+            <q-item>
+              <q-item-section class="text-grey">
+                No results
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
+        <q-select
+          v-model="merchant.companyInformation.residentStateName"
+          use-input
+          hide-selected
+          fill-input
+          input-debounce="10"
+          label="State (type min 3 characters)*"
+          :options="stateOptionsList"
+          @filter="stateSearch"
+          @update:model-value="residentStateSelected"
           @blur="$v.merchant.companyInformation.residentialStateRefCode.$touch"
           :error="$v.merchant.companyInformation.residentialStateRefCode.$anyError|| $v.merchant.companyInformation.residentStateName.$anyError"
           color="grey-9"
-          v-model="merchant.companyInformation.residentStateName"
-          label="State (type min 3 characters)*"
           placeholder="Start typing ..*"
         >
-          <q-autocomplete
-            separator
-            @search="stateSearch"
-            :debounce="10"
-            :min-characters="1"
-            @selected="residentStateSelected"
-          />
-        </q-input>
+          <template v-slot:no-option>
+            <q-item>
+              <q-item-section class="text-grey">
+                No results
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
@@ -379,6 +426,9 @@ export default {
   ],
   data() {
     return {
+      cityOptionsList: this.cityOptions,
+      stateOptionsList: this.stateOptions,
+      mccOptionsList: this.mccSearchSet,
       businessTypeOptions: [
         {
           label: "Rented",
@@ -541,11 +591,15 @@ export default {
         return oo.label.toLowerCase().includes(terms.toLowerCase());
       });
     },
-    citySearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+    citySearch(val, update, abort) {
+      update(() => {
+        this.cityOptionsList = this.COMMON_FILTER_FUNCTION(this.cityOptions, val);
+      });
     },
-    stateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+    stateSearch(val, update, abort) {
+      update(() => {
+        this.stateOptionsList = this.COMMON_FILTER_FUNCTION(this.stateOptions, val);
+      });
     },
 
     // Registered city selction
@@ -571,8 +625,10 @@ export default {
       this.merchant.companyInformation.residentialStateRefCode = item.value;
     },
 
-    mccSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.mccSearchSet, terms));
+    mccSearch(val, update, abort) {
+      update(() => {
+        this.mccOptionsList = this.COMMON_FILTER_FUNCTION(this.mccSearchSet, val);
+      });
     },
     mccSelected(item) {
       this.merchant.companyInformation.mccname = item.label;

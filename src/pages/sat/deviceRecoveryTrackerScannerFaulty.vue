@@ -36,7 +36,8 @@
         :loading="tableAjaxLoading"
         color="light-blue"
       >
-        <!-- <q-td v-slot:body-cell-action="props" :props="props">
+        <!-- <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
           <q-btn
             @click="removeScannedItems(props.row)"
             label="Remove"
@@ -44,7 +45,8 @@
             color="red-6"
             size="sm"
           />
-        </q-td>-->
+        </q-td>
+</template>-->
 
         <template v-slot:top="props">
           <!--START: table filter,search -->
@@ -217,10 +219,9 @@ export default {
       this.REACTIVE_FAULTY_SCANNED_DEVICE_DATA(this.tableData);
       console.log(this.tableData);
     },
-    // onBarcodeDestroy() {
-    //   removeListener("keypress");
-    //   removeListener("keydown");
-    // },
+    onBarcodeDestroy() {
+      // Logic for destroy
+    },
 
     openScannerComp() {
       this.scannerToggleOption = !this.scannerToggleOption;
@@ -233,7 +234,7 @@ export default {
       this.$barcodeScanner.destroy(this.onBarcodeDestroy);
     },
     removeScannedItems(item) {
-      this.tableData.splice(item.__index);
+      this.tableData.splice(item.__index, 1);
       this.REACTIVE_FAULTY_SCANNED_DEVICE_DATA(this.tableData);
     }
   }

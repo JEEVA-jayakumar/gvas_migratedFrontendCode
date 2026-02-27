@@ -35,13 +35,16 @@
         row-key="nam6"
       >
         <!--START: table body modification -->
-        <q-td
-          v-slot:body-cell-createdAt="props"
+        <template v-slot:body-cell-createdAt="props">
+  <q-td
+
           :props="props"
         >{{ $moment(props.row.date).format("Do MMM Y") }}</q-td>
+</template>
 
-        <q-td
-          v-slot:body-cell-leadNumber="props"
+        <template v-slot:body-cell-leadNumber="props">
+  <q-td
+
           :props="props"
           class="cursor-pointer"
           @click="toggleLeadInformation(props.row)"
@@ -51,15 +54,21 @@
             :class="[props.row.priority?'text-negative text-weight-bolder':'text-primary']"
           ># {{props.row.leadNumber}}</span>
         </q-td>
+</template>
 
-        <q-td v-slot:body-cell-leadName="props" :props="props">
+        <template v-slot:body-cell-leadName="props">
+  <q-td  :props="props">
           <span class="capitalize">{{props.row.merchantName}}</span>
         </q-td>
+</template>
 
-        <q-td v-slot:body-cell-state="props" :props="props">
+        <template v-slot:body-cell-state="props">
+  <q-td  :props="props">
           <span class="capitalize">{{props.row.state}}</span>
         </q-td>
-        <q-td v-slot:body-cell-verifiedFinanceStatus="props" :props="props">
+</template>
+        <template v-slot:body-cell-verifiedFinanceStatus="props">
+  <q-td  :props="props">
           <span
             class="label text-positive"
             v-if="props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_SUCCESS"
@@ -74,7 +83,9 @@
           >Rejected</span>
           <span class="label" v-else>NA</span>
         </q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+        <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
           <q-btn
             v-if="props.row.leadStatus == $LEAD_STATUS_DATA_ENTRY_PENDING"
             highlight
@@ -105,6 +116,7 @@
           >Validate</q-btn>
           <q-btn v-else class="disabled" highlight push outline color="grey-9" size="sm">Validate</q-btn>
         </q-td>
+</template>
         <!-- END: table body modification -->
         <template v-slot:top="props" class="bottom-border">
           <!--START: table filter,search -->

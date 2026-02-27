@@ -147,7 +147,7 @@ import { not, or } from '@vuelidate/validators';
         let cookedArr1 = [];
         self.GET_ACTIVE_CREATED_DEVICE_LIST()
           .then(() => {
-            return _.map(this.getCreatedActiveDeviceList, (item) => {
+            return _.map(getCreatedActiveDeviceList, (item) => {
               console.log("ITEM -------->", item)
               cookedArr1.push({
                 value: item.id,
@@ -227,7 +227,7 @@ import { not, or } from '@vuelidate/validators';
           // aggregator: this.formData.aggregator
         };
   
-        console.log("Device type ------------>", JSON.stringify(this.assumeFormDataValue))
+        console.log("Device type ------------>", JSON.stringify(assumeFormDataValue))
   
         this.FEED_PHONEPE_RECOVERY_DEVICE_BULK_UPLOAD_DATA(assumeFormDataValue)
           .then(response => {

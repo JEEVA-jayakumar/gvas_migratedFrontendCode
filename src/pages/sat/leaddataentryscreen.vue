@@ -59,15 +59,30 @@
                             color="grey-9" label="*Merchant Address" placeholder="Merchant Address" />
                         </div>
                         <div class="col-md-6">
-                          <q-input type="number" onkeydown="javascript: return event.keyCode === 8 ||
-                             event.keyCode === 46 ? true : !isNaN(Number(event.key))"
+                          <q-select
+                            v-model="formData.pincodeTemp"
+                            use-input
+                            hide-selected
+                            fill-input
+                            input-debounce="500"
+                            label="Pincode"
+                            :options="pincodeOptions"
+                            @filter="pincodeSearch"
+                            @update:model-value="pincodeSelected"
                             :error="$v.formData.pincodeTemp.$error"
                             @blur="fnClrPin"
-                            clearable color="grey-9" v-model.trim="formData.pincodeTemp" label="Pincode"
-                            placeholder="Pincode">
-                            <q-autocomplete @search="pincodeSearch" :debounce="500" :min-characters="1"
-                              @selected="pincodeSelected" />
-                          </q-input>
+                            clearable
+                            color="grey-9"
+                            placeholder="Pincode"
+                          >
+                            <template v-slot:no-option>
+                              <q-item>
+                                <q-item-section class="text-grey">
+                                  No results
+                                </q-item-section>
+                              </q-item>
+                            </template>
+                          </q-select>
                         </div>
                         <!-- @clear="fnGetCityAndState" -->
                         <div class="col-md-6">
@@ -98,40 +113,48 @@
                         </div>
 
                         <div class="col-md-6">
-                          <q-option-group inline type="checkbox"     :value="selectedVas"
-                              @update:model-value="handleVasChange" :disable = "vasDisableFlag"
-                            class="text-weight-regular text-grey-8" color="grey-9" label="VAS"
-                            :options="selectBankEnableOptions" />
+                          <q-option-group
+                            inline
+                            type="checkbox"
+                            v-model="selectedVas"
+                            @update:model-value="handleVasChange"
+                            :disable="vasDisableFlag"
+                            class="text-weight-regular text-grey-8"
+                            color="grey-9"
+                            label="VAS"
+                            :options="selectBankEnableOptions"
+                          />
                         </div>
                         <!-- <div
-                             v-if="this.selectedVas == 'AMEX'"
+                             v-if="selectedVas == 'AMEX'"
                              class="row gutter-sm q-my-xs col-md-6 "
                              > -->
-                        <div v-if="this.selectedVas == 'AMEX'" class="col-md-6">
+                        <div v-if="selectedVas == 'AMEX'" class="col-md-6">
                           <q-input v-model.trim="formData.ownerFirstName" @blur="$v.formData.ownerFirstName.$touch"
                             :error="$v.formData.ownerFirstName.$error" class="text-weight-regular text-grey-8"
                             color="grey-9" label="Owner 1 First Name*" placeholder="Owner 1 First Name*" />
                         </div>
-                        <div v-if="this.selectedVas == 'AMEX'" class="col-md-6">
+                        <div v-if="selectedVas == 'AMEX'" class="col-md-6">
                           <q-input v-model.trim="formData.ownerLastName" @blur="$v.formData.ownerLastName.$touch"
                             :error="$v.formData.ownerLastName.$error" class="text-weight-regular text-grey-8"
                             color="grey-9" label="Owner 1 Last Name*" placeholder="Owner 1 Last Name*" />
                         </div>
-                        <div v-if="this.selectedVas == 'AMEX'" class="col-md-6">
-                          <!-- <q-input
-                                format="DD/MM/YYYY"
-                                 format-model="number"
-                                 color="grey-9"
-                                 modal
-                                v-model.trim="formData.ownerDOB"
-                            @blur="$v.formData.ownerDOB.$touch"
-                            :error="$v.formData.ownerDOB.$error"
-                               label="Owner 1 DOB*"
-                    placeholder="Owner 1 DOB*"
-                  /> -->
+                        <div v-if="selectedVas == 'AMEX'" class="col-md-6">
                           <q-input v-model.trim="formData.ownerDOB" @blur="$v.formData.ownerDOB.$touch"
                             :error="$v.formData.ownerDOB.$error" class="text-weight-regular text-grey-8" color="grey-9"
-                            label="Owner 1 DOB*" placeholder="Owner 1 DOB*" />
+                            label="Owner 1 DOB*" placeholder="Owner 1 DOB*" mask="####-##-##">
+                            <template v-slot:append>
+                              <q-icon name="event" class="cursor-pointer">
+                                <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                                  <q-date v-model="formData.ownerDOB" mask="YYYY-MM-DD">
+                                    <div class="row items-center justify-end">
+                                      <q-btn v-close-popup label="Close" color="primary" flat />
+                                    </div>
+                                  </q-date>
+                                </q-popup-proxy>
+                              </q-icon>
+                            </template>
+                          </q-input>
                         </div>
 
                         <!-- </div> -->
@@ -157,9 +180,12 @@
                 <!-- <q-pull-to-refresh :distance="30" :handler="PullToRefresh" inline> -->
                 <q-table class="my-sticky-header-table" title="Wip Lead Information" :rows="getShortLead"
                   :columns="columns" row-key="name">
-                  <q-td v-slot:body-cell-shortleadDate="props" :props="props">{{ $moment(props.row.shortleadDate).format("Do MMM Y") }}</q-td>
+                  <template v-slot:body-cell-shortleadDate="props">
+  <q-td  :props="props">{{ $moment(props.row.shortleadDate).format("Do MMM Y") }}</q-td>
+</template>
 
-                  <!-- <q-td v-slot:body-cell-action="props" :props="props">
+                  <!-- <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
                     <div class="row no-wrap no-padding">
                       <q-btn
                         dense
@@ -175,8 +201,10 @@
                   <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative">
                   </q-btn>-->
                   <!-- </div>
-                  </q-td>-->
-                  <q-td v-slot:body-cell-update="props" :props="props">
+                  </q-td>
+</template>-->
+                  <template v-slot:body-cell-update="props">
+  <q-td  :props="props">
                     <div class="row no-wrap no-padding">
                       <q-btn dense no-caps no-wrap label="update" icon="far fa-plus-square" size="md"
                         @click="fnShowConvertToSat(props.row)" flat class="text-light-blue"></q-btn>
@@ -184,11 +212,14 @@
                       </q-btn>-->
                     </div>
                   </q-td>
-                  <!-- <q-td v-slot:body-cell-status="props" :props="props">
+</template>
+                  <!-- <template v-slot:body-cell-status="props">
+  <q-td  :props="props">
             <span class="label text-negative" v-if="props.row.status == $TRANSACTION_STATUS">Pending</span>
             <span class="label text-positive" v-else-if="props.row.status">Success</span>
             <span class="label text-amber" v-else>NA</span>
-                  </q-td>-->
+                  </q-td>
+</template>-->
                 </q-table>
                 <editShortLead v-if="propShowEditShortLead" :propShowEditShortLead="propShowEditShortLead"
                   :propRowDetails="propRowDetails" @emitfnshowEditShortLead="fnShowEditShortLead"></editShortLead>
@@ -251,6 +282,7 @@ export default {
       vasInstanceMapping: '',
       selectBankEnableOptions: [],
       selectedVas: [],
+      pincodeOptions: [],
       // ownerFirstName:[],
       pinSelected: false,
       formData: {
@@ -528,7 +560,8 @@ export default {
     },
 
     getDevice(val) {
-      self = this;
+      let self = this;
+      if (!val) return;
       self.FETCH_APP_DEVICES_DATA(val.id)
         .then(() => {
           // Clearing the drop down values before assigning data
@@ -546,10 +579,10 @@ export default {
       if (this.$v.formData.$error) {
         this.$q.notify('Please review fields again.')
       } else {
-        if(this.formData.leadSource.multiTidEnabled == true){
+        if (this.formData.leadSource.multiTidEnabled == true) {
           this.formData.deviceCount = 1;
         }
-        this.formData.vasInstanceMapping = JSON.stringify(this.selectedVas)
+        this.formData.vasInstanceMapping = JSON.stringify(this.selectedVas);
         this.formData.region = JSON.parse(formData.region);
         // this.formData.ownerFirstName = JSON.stringify(this.formData.ownerFirstName)
         this.STATE_SHORT_LEAD(formData)
@@ -576,8 +609,8 @@ export default {
               value: value.vas.name
             })
           })
-          this.selectBankEnableOptions = deviceArr
-          console.log("Q161_PRO_DQR",JSON.stringify(this.selectBankEnableOptions))
+          this.selectBankEnableOptions = deviceArr;
+          console.log("Q161_PRO_DQR", JSON.stringify(this.selectBankEnableOptions));
        if(this.formData.device.deviceName == "Q161_PRO_DQR"){        
         const upiOption = this.selectBankEnableOptions.find(opt => opt.label === "UPI QR");
         this.vasDisableFlag = true
@@ -611,23 +644,30 @@ export default {
       })
     },
 
-    pincodeSearch(terms, done) {
-      this.formData.cityName = ''
-      this.formData.stateName = ''
-      this.FETCH_PINCODE_WITH_TERM(terms)
+    pincodeSearch(val, update, abort) {
+      if (val.length < 1) {
+        abort();
+        return;
+      }
+      this.formData.cityName = "";
+      this.formData.stateName = "";
+      this.FETCH_PINCODE_WITH_TERM(val)
         .then(() => {
-          done(this.COMMON_FILTER_FUNCTION(this.getAllStatesData, terms))
+          update(() => {
+            this.pincodeOptions = this.getAllStatesData;
+          });
         })
         .catch(() => {
-          done([])
-        })
+          abort();
+        });
     },
     pincodeSelected(item) {
+      if (!item) return;
       this.pinSelected = true;
-      this.formData.state = item.value.stateName
-      this.formData.city = item.value.cityName
-      this.formData.pincode = item.value.pincode
-      this.formData.pincodeTemp = item.value.pincode
+      this.formData.state = item.value.stateName;
+      this.formData.city = item.value.cityName;
+      this.formData.pincode = item.value.pincode;
+      this.formData.pincodeTemp = item.value.pincode;
     },
     fnClrPin() {
       if (!this.pinSelected)
@@ -698,10 +738,10 @@ export default {
       if(tab == "wiplead"){
         this.fetchappData()
       }
-      else if(tab == "shortlead"){
+      else if (tab == "shortlead") {
         this.formData.leadName = ''
         this.formData.contactName = ''
-        this.formData.contactNumber = '',
+        this.formData.contactNumber = ''
         this.formData.alternateContactNumber = ''
         this.formData.email = ''
         this.formData.deviceSelected = ''

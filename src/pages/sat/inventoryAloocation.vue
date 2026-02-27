@@ -46,7 +46,7 @@ export default {
     return {
       enableUploadInventoryBtn: true,
       toggleScanButton: true,
-      inventoryOptionSelected: "implementationQueue"
+      inventoryOptionSelected: "internal"
     };
   },
 

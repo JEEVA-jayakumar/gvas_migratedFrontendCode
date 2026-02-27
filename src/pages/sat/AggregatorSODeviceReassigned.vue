@@ -18,14 +18,19 @@
       @request="ajaxLoadAllLeadInfo"
     >
       <!--START: table header -->
-      <q-td v-slot:body-cell-soName="props" :props="props">{{
+      <template v-slot:body-cell-soName="props">
+  <q-td  :props="props">{{
         props.row.soName == null ? "NA" : props.row.soName
       }}</q-td>
+</template>
 
-      <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+      <!-- <template v-slot:body-cell-deviceStatusDate="props">
+  <q-td  :props="props">
         <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-      </q-td>   -->
-      <q-td v-slot:body-cell-action="props" :props="props">
+      </q-td>
+</template>   -->
+      <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
         <q-btn
           v-if="props.row.status == 0"
           highlight
@@ -55,6 +60,7 @@
         <span  class="label text">Remarks: {{ props.row.remarks == null ? "NA": props.row.remarks }}</span>
        </div>
       </q-td>
+</template>
       <template slot="top" class="bottom-border">
         <div class="col-5">
           <q-input
@@ -333,11 +339,11 @@ export default {
 
           // then we update the rows with the fetched ones
           this.tableData = responseData.data.content;
-          console.log("TABLE DATA", JSON.stringify(this.tableData));
+          console.log("TABLE DATA", JSON.stringify(tableData));
 
           // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
-          // console.log("Table Datas ---------------------->"+JSON.stringify(this.tableData));
+          // console.log("Table Datas ---------------------->"+JSON.stringify(tableData));
         })
         .catch(() => {
           this.$q.loading.hide();
@@ -367,7 +373,7 @@ export default {
           console.log("INSIDE LOAD ALL LEAD INFO 1 :::::::::::::::::::::");
           console.log(
             "Table Datas 1---------------------->" +
-              JSON.stringify(this.getAggregatorsLostOrStolenDatas)
+              JSON.stringify(getAggregatorsLostOrStolenDatas)
           );
 
           // updating pagination to reflect in the UI

@@ -21,27 +21,36 @@
       row-key="name"
     >
       <!--START: table body modification -->
-      <q-td
-        v-slot:body-cell-createdAt="props"
+      <template v-slot:body-cell-createdAt="props">
+  <q-td
+
         :props="props"
       >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-      <q-td
-        v-slot:body-cell-shortleadDate="props"
+</template>
+      <template v-slot:body-cell-shortleadDate="props">
+  <q-td
+
         :props="props"
       >{{ $moment(props.row.shortleadDate).format("Do MMM Y") }}</q-td>
-      <q-td
-        v-slot:body-cell-leadSource="props"
+</template>
+      <template v-slot:body-cell-leadSource="props">
+  <q-td
+
         :props="props"
       >{{props.row.leadSource.sourceName}}</q-td>
-      <q-td
-        v-slot:body-cell-lead_id="props"
+</template>
+      <template v-slot:body-cell-lead_id="props">
+  <q-td
+
         :props="props"
         class="cursor-pointer"
         @click="toggleLeadInformation(props.row)"
       >
         <span class="label text-primary"># {{props.row.leadNumber}}</span>
       </q-td>
-      <q-td v-slot:body-cell-leadStatus="props" :props="props">
+</template>
+      <template v-slot:body-cell-leadStatus="props">
+  <q-td  :props="props">
         <q-chip
           class="text-positive text-weight-bold"
           v-if="props.row.leadStatus == $LEAD_STATUS_SHORT_LEAD"
@@ -95,6 +104,7 @@
           v-else-if="props.row.leadStatus == $LEAD_STATUS_IMPLEMENT_APPROVED"
         >Implementation Approved</q-chip>
       </q-td>
+</template>
       <!--END: table body modification -->
       <template v-slot:top="props">
         <!--START: table fullscreen mode -->

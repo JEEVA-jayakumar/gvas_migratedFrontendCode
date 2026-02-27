@@ -100,13 +100,13 @@ export default {
 
 
   
-    //   console.log("propPDFDetailsFinance---------->>>>",JSON.stringify(this.propPDFDetailsFinance))
+    //   console.log("propPDFDetailsFinance---------->>>>",JSON.stringify(propPDFDetailsFinance))
   },
   computed: {
     ...mapGetters("GlobalVariables", ["GLOBAL_FILE_FETCH_URL"]),
     
     isImage(){
-      console.log("itemDetail----------{{{{{{}}}}}}>>>>", JSON.stringify(this.itemDetail))
+      console.log("itemDetail----------{{{{{{}}}}}}>>>>", JSON.stringify(itemDetail))
       return (
         this.itemDetail.invoiceMimeType &&
         this.itemDetail.invoiceMimeType.includes("image")

@@ -13,10 +13,13 @@
                     <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns"
                         :filter="filterSearch" v-model:pagination="paginationControl"
                         :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
-                        <!-- <q-td v-slot:body-cell-regionGroup="props" :props="props">{{ props.row.regionName
+                        <!-- <template v-slot:body-cell-regionGroup="props">
+  <q-td  :props="props">{{ props.row.regionName
                                 == null ? "NA" : props.row.regionName
-                        }}</q-td> -->
-                        <q-td v-slot:body-cell-action="props" :props="props">
+                        }}</q-td>
+</template> -->
+                        <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
                             <div class="row no-wrap no-padding">
                                 <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
                                     @click="fnShowEditAggregator(props.row)" flat class="text-light-blue"></q-btn>
@@ -24,6 +27,7 @@
                                     @click="fnDeleteAggregators(props.row)" flat class="text-negative"></q-btn>
                             </div>
                         </q-td>
+</template>
 
                         <template v-slot:top="props">
                             <!--END: table title -->
@@ -44,10 +48,13 @@
                     <q-table :rows="deActiveTableData" table-class="customSATableClass" :columns="columns1"
                         :filter="filterSearch" v-model:pagination="paginationControl"
                         :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
-                        <!-- <q-td v-slot:body-cell-regionGroup="props" :props="props">{{ props.row.regionName
+                        <!-- <template v-slot:body-cell-regionGroup="props">
+  <q-td  :props="props">{{ props.row.regionName
                                 == null ? "NA" : props.row.regionName
-                        }}</q-td> -->
-                        <q-td v-slot:body-cell-action1="props" :props="props">
+                        }}</q-td>
+</template> -->
+                        <template v-slot:body-cell-action1="props">
+  <q-td  :props="props">
                             <div class="row no-wrap no-padding">
                                 <q-btn dense no-caps no-wrap label="Active" icon="far fa-plus-square" size="md"
                                     @click="fnActivate(props.row)" flat class="positive"></q-btn>
@@ -55,6 +62,7 @@
                                     @click="fnDeleteAggregators(props.row)" flat class="text-negative"></q-btn> -->
                             </div>
                         </q-td>
+</template>
 
                         <template v-slot:top="props">
                             <!--END: table title -->

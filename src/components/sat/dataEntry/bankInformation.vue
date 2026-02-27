@@ -6,7 +6,7 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          upper-case
+          style="text-transform: uppercase"
           color="grey-9"
           :error="$v.merchant.bankInformation.bankDetails.ifsc.$error"
           @blur="populateBankDetails"
@@ -27,7 +27,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
-          placeholder="Choose from the below"
+          emit-value
+          map-options
           color="grey-9"
           v-model="merchant.bankInformation.bankDetails.feeType"
           label="Fee Type"
@@ -69,7 +70,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
-          placeholder="Choose from the below"
+          emit-value
+          map-options
           color="grey-9"
           v-model="merchant.bankInformation.bankDetails.paymentMode"
           label="Payment mode"
@@ -77,44 +79,59 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
-          color="grey-9"
+        <q-select
+          v-model="merchant.bankInformation.bankDetails.bankCityName"
+          use-input
+          hide-selected
+          fill-input
+          input-debounce="10"
+          label="City (type min 3 characters)*"
+          :options="cityOptionsList"
+          @filter="citySearch"
+          @update:model-value="bankCitySelected"
           @blur="$v.merchant.bankInformation.bankDetails.bankCityRefCode.$touch"
           :error="$v.merchant.bankInformation.bankDetails.bankCityName.$anyError ||$v.merchant.bankInformation.bankDetails.bankCityRefCode.$anyError"
-          v-model="merchant.bankInformation.bankDetails.bankCityName"
-          label="City (type min 3 characters)*"
-          placeholder="Start typing ..*"
-        >
-          <q-autocomplete
-            separator
-            @search="citySearch"
-            :debounce="10"
-            :min-characters="3"
-            @selected="bankCitySelected"
-          />
-        </q-input>
-      </div>
-      <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
           color="grey-9"
-          @blur="$v.merchant.bankInformation.bankDetails.bankCityRefCode.$touch"
-          :error="$v.merchant.bankInformation.bankDetails.bankStateName.$anyError || $v.merchant.bankInformation.bankDetails.bankCityRefCode.$anyError"
-          v-model="merchant.bankInformation.bankDetails.bankStateName"
-          label="State (type min 3 characters)*"
           placeholder="Start typing ..*"
         >
-          <q-autocomplete
-            separator
-            @search="stateSearch"
-            :debounce="10"
-            :min-characters="1"
-            @selected="bankStateSelected"
-          />
-        </q-input>
+          <template v-slot:no-option>
+            <q-item>
+              <q-item-section class="text-grey">
+                No results
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
-          placeholder="Choose from the below"
+          v-model="merchant.bankInformation.bankDetails.bankStateName"
+          use-input
+          hide-selected
+          fill-input
+          input-debounce="10"
+          label="State (type min 3 characters)*"
+          :options="stateOptionsList"
+          @filter="stateSearch"
+          @update:model-value="bankStateSelected"
+          @blur="$v.merchant.bankInformation.bankDetails.bankCityRefCode.$touch"
+          :error="$v.merchant.bankInformation.bankDetails.bankStateName.$anyError || $v.merchant.bankInformation.bankDetails.bankCityRefCode.$anyError"
+          color="grey-9"
+          placeholder="Start typing ..*"
+        >
+          <template v-slot:no-option>
+            <q-item>
+              <q-item-section class="text-grey">
+                No results
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <q-select
+          emit-value
+          map-options
           color="grey-9"
           v-model="merchant.bankInformation.bankDetails.accountType"
           label="Account Type"
@@ -180,16 +197,27 @@
           </div>
           <div class="col-md-4 col-sm-12">
             <q-input
-              format="DD/MM/YYYY"
-              format-model="number"
+              filled
               color="grey-9"
-              minimal
               @blur="$v.merchant.bankInformation.collectionDetails.collectedDate.$touch"
               :error="$v.merchant.bankInformation.collectionDetails.collectedDate.$error"
               v-model="merchant.bankInformation.collectionDetails.collectedDate"
               label="Swipe Date*"
               placeholder="Swipe Date*"
-            />
+              mask="####-##-##"
+            >
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                    <q-date v-model="merchant.bankInformation.collectionDetails.collectedDate" mask="YYYY-MM-DD">
+                      <div class="row items-center justify-end">
+                        <q-btn v-close-popup label="Close" color="primary" flat />
+                      </div>
+                    </q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
           </div>
           <div class="col-md-4 col-sm-12 col-xs-12">
             <q-input
@@ -217,29 +245,51 @@
           </div>
           <div class="col-md-3 col-sm-12">
             <q-input
-              format="DD/MM/YYYY"
-              format-model="number"
+              filled
               color="grey-9"
-              minimal
               @blur="$v.merchant.bankInformation.collectionDetails.chequeDate.$touch"
               :error="$v.merchant.bankInformation.collectionDetails.chequeDate.$error"
               v-model="merchant.bankInformation.collectionDetails.chequeDate"
               label="Cheque Date*"
               placeholder="Cheque Date*"
-            />
+              mask="####-##-##"
+            >
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                    <q-date v-model="merchant.bankInformation.collectionDetails.chequeDate" mask="YYYY-MM-DD">
+                      <div class="row items-center justify-end">
+                        <q-btn v-close-popup label="Close" color="primary" flat />
+                      </div>
+                    </q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
           </div>
           <div class="col-md-3 col-sm-12 col-xs-12">
             <q-input
-              format="DD/MM/YYYY"
-              format-model="number"
+              filled
               color="grey-9"
-              minimal
               @blur="$v.merchant.bankInformation.collectionDetails.chequeDepositedDate.$touch"
               :error="$v.merchant.bankInformation.collectionDetails.chequeDepositedDate.$error"
               v-model="merchant.bankInformation.collectionDetails.chequeDepositedDate"
               label="Cheque Deposited Date*"
               placeholder="Cheque Deposited Date*"
-            />
+              mask="####-##-##"
+            >
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                    <q-date v-model="merchant.bankInformation.collectionDetails.chequeDepositedDate" mask="YYYY-MM-DD">
+                      <div class="row items-center justify-end">
+                        <q-btn v-close-popup label="Close" color="primary" flat />
+                      </div>
+                    </q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
           </div>
           <div class="col-md-3 col-sm-12 col-xs-12">
             <q-input
@@ -255,8 +305,9 @@
       </div>
       <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
         <q-select
+          emit-value
+          map-options
           clearable
-          placeholder="Choose from the below"
           color="grey-9"
           v-model="merchant.bankInformation.collectionDetails.acquirerBank"
           label="Bank Name"
@@ -296,9 +347,11 @@ import {
 } from "@vuelidate/validators";
 export default {
   // name: 'ComponentName',
-  props: ["cityOptions", "stateOptions", "propLeadDeatils", "bankInformation"],
+  props: ["cityOptions", "stateOptions", "propLeadDeatils", "bankInformation", "bankListSet"],
   data() {
     return {
+      cityOptionsList: this.cityOptions,
+      stateOptionsList: this.stateOptions,
       accountTypeOptions: [
         {
           label: "Saving account",
@@ -469,11 +522,15 @@ export default {
         return oo.label.toLowerCase().includes(terms.toLowerCase());
       });
     },
-    citySearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+    citySearch(val, update, abort) {
+      update(() => {
+        this.cityOptionsList = this.COMMON_FILTER_FUNCTION(this.cityOptions, val);
+      });
     },
-    stateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+    stateSearch(val, update, abort) {
+      update(() => {
+        this.stateOptionsList = this.COMMON_FILTER_FUNCTION(this.stateOptions, val);
+      });
     },
 
     /* Registered City search result */

@@ -9,11 +9,14 @@
       <pre>{{ testData }}</pre>
 			<q-table :rows="getAllUsers" :columns="columns" :filter="filterSearch" selection="multiple" :selected="selectedSecond" v-model:pagination="paginationControl" :loading="tableAjaxLoading" row-key="name" color="grey-9">
 				
-				<q-td v-slot:body-cell-sales="props" :props="props">
+				<template v-slot:body-cell-sales="props">
+  <q-td  :props="props">
 					<img :src="props.row.profilePicture" class="avatar">
 				</q-td>
+</template>
 
-				<q-td v-slot:body-cell-role="props" :props="props">
+				<template v-slot:body-cell-role="props">
+  <q-td  :props="props">
 					<div class="row no-wrap">
 						<div v-for="role in props.row.roles" :key="role.role">
 							<!-- <q-chip v-if="role.role == 'RSM'" color="light-blue">
@@ -31,8 +34,10 @@
 						</div>
 					</div>
 				</q-td>
+</template>
 
-				 <q-td v-slot:body-cell-permission="props" :props="props">
+				 <template v-slot:body-cell-permission="props">
+  <q-td  :props="props">
 					<div class="row no-wrap">
 						<div v-for="role in props.row.roles" :key="role.role">
 							<q-chip v-for="rolePermission in role.permission" :key="rolePermission.permission" color="grey-5" class="text-grey-9">
@@ -41,6 +46,7 @@
 						</div>
 					</div>
 				</q-td>
+</template>
 	
 				<template v-slot:top="props">
 	

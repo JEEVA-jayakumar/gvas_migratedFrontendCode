@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- START >> (Default) Merchant type  -->
-    <q-item separator class="text-body1">
+    <q-item class="text-body1">
       <q-item-section>
         <q-item-label>
           <div class="text-body1">
@@ -15,9 +15,9 @@
     <div class="group">
       <!-- START >> (Mandatory) Application form  -->
       <q-list class="no-padding">
-        <q-item separator class="text-body1 text-dark bg-grey-4 text-weight-medium">
+        <q-item class="text-body1 text-dark bg-grey-4 text-weight-medium">
           <q-item-section>Application Form</q-item-section>
-          <q-item-section>
+          <q-item-section side>
             <label class="cursor-pointer text-white" style="background-color: #202c3f;">
               <span class="text-caption text-weight-light">Attach</span>
               <input
@@ -29,7 +29,7 @@
             </label>
           </q-item-section>
         </q-item>
-        <q-item separator class="text-body1">
+        <q-item class="text-body1">
           <q-item-section>
             <div class="full-width">
               <div
@@ -68,8 +68,8 @@
       <!-- END >> (Mandatory) Application form  -->
       <!-- START >> (Optional) payment document file == bank subvention  -->
       <q-list v-if="getShortLeadInfo.paymentDocumentFile != ''">
-        <q-item-label header class="bg-grey-4">Bank Letter</q-item-label header>
-        <q-item separator class="text-body1">
+        <q-item-label header class="bg-grey-4">Bank Letter</q-item-label>
+        <q-item class="text-body1">
           <q-item-section>
             <div class="full-width">
               <div
@@ -115,7 +115,7 @@
         v-for="(singleDocument,singleDocumentIndex) in getShortLeadInfoDocumentTypes.uploadedDocuments.forSingleDocument"
         :key="singleDocumentIndex"
       >
-        <q-item-label header class="bg-grey-4">{{singleDocument.documentType}}</q-item-label header>
+        <q-item-label header class="bg-grey-4">{{singleDocument.documentType}}</q-item-label>
         <div
           v-for="(document,documentIndex) in singleDocument.documents"
           :key="documentIndex"
@@ -123,11 +123,10 @@
           style="border:1px solid #afafaf;margin:5px"
         >
           <q-item
-            separator
             class="text-body1 q-pa-sm text-dark text-weight-medium bottom-border"
             :class="[document.isKycChecked?'bg-amber-4':'']"
           >
-            <q-item-section v-if="!document.reprocess && document.verifiedStatus != 1">
+            <q-item-section avatar v-if="!document.reprocess && document.verifiedStatus != 1">
               <q-checkbox
                 :disabled="computeAndToggleCheckboxForSingleDocument(document)"
                 :class="[computeAndToggleCheckboxForSingleDocument(document)? 'no-pointer-events':'']"
@@ -137,7 +136,7 @@
               />
             </q-item-section>
             <q-item-section>{{document.subDocumentType}}</q-item-section>
-            <q-item-section v-if="!document.reprocess && document.verifiedStatus != 1">
+            <q-item-section side v-if="!document.reprocess && document.verifiedStatus != 1">
               <label
                 class="cursor-pointer text-white"
                 style="background-color: #202c3f;"
@@ -161,27 +160,30 @@
             <!-- TODO -- END  =>> Quick fix remove for proper buttons visibility -->
             <q-item-section
               v-if="document.reprocess && !computedGetSingleDocumentAccessForStatus(document)"
-              right
+              side
             >
-              <q-btn
-                round
-                size="xs"
-                class="q-ma-xs"
-                color="green"
-                icon="fas fa-check"
-                @click="fnDocumentApproveModal(document)"
-              />
-              <q-btn
-                round
-                size="xs"
-                class="q-ma-xs"
-                color="red"
-                icon="fas fa-times"
-                @click="fnDocumentRejectModal(document)"
-              />
+              <div class="row no-wrap">
+                <q-btn
+                  round
+                  size="xs"
+                  class="q-ma-xs"
+                  color="green"
+                  icon="fas fa-check"
+                  @click="fnDocumentApproveModal(document)"
+                />
+                <q-btn
+                  round
+                  size="xs"
+                  class="q-ma-xs"
+                  color="red"
+                  icon="fas fa-times"
+                  @click="fnDocumentRejectModal(document)"
+                />
+              </div>
             </q-item-section>
             <q-item-section
               v-if="document.reprocess && computedGetSingleDocumentAccessForStatus(document)"
+              side
             >
               <span
                 v-if="checkSumForDocumentVerificationStatus(document).documentVerifiedStatus == 1"
@@ -209,7 +211,6 @@
                 v-for="(filesAttachedEarlier,filesAttachedEarlierIndex) in attachedSubFile.uploadedDocuments"
                 :key="filesAttachedEarlierIndex"
                 class="text-body1"
-                separator
               >
                 <q-item-section>
                   <q-item-label class="text-body1">
@@ -250,14 +251,13 @@
                   </q-item-label>
                 </q-item-section>
                 <!-- <pre>{{attachedSubFile}}</pre> -->
-                <q-item-section v-if="attachedSubFile.documentVerifiedStatus == 4">
+                <q-item-section side v-if="attachedSubFile.documentVerifiedStatus == 4">
                   <q-btn
                     size="xs"
                     icon="clear"
                     @click="fnDeleteAlreadyAttachedFile(filesAttachedEarlier)"
                     round
                     color="negative"
-                    label="Remove"
                   />
                 </q-item-section>
               </q-item>
@@ -271,18 +271,16 @@
       <q-list
         class="no-padding"
         dense
-        v-if="getShortLeadInfoDocumentTypes"
+        v-if="getShortLeadInfoDocumentTypes && getShortLeadInfoDocumentTypes.uploadedDocuments"
         v-for="multipleDocument in getShortLeadInfoDocumentTypes.uploadedDocuments.forMutipleDocument"
         :key="multipleDocument.id"
       >
-        <!-- <pre>{{multipleDocument}}</pre> -->
         <q-item-label header
           class
           :class="[multipleDocument.isKycChecked?'text-dark bg-amber-4':'bg-grey-4']"
         >
           <div class="row items-center">
-            <div class="col-auto" v-if="!multipleDocument.reprocess">
-              <!-- <pre>{{computeAndToggleCheckbox(multipleDocument)}}</pre> -->
+            <div class="col-auto row items-center" v-if="!multipleDocument.reprocess">
               <q-checkbox
                 v-if="multipleDocument.verifiedStatus != 1"
                 :disabled="computeAndToggleCheckbox(multipleDocument)"
@@ -290,9 +288,8 @@
                 v-model="multipleDocument.isKycChecked"
                 color="dark"
                 @update:model-value="fnCookKYCdocumentArr(multipleDocument)"
-                :label="multipleDocument.documentType"
               />
-              <span v-else>{{multipleDocument.documentType}}</span>
+              <span class="q-ml-sm">{{multipleDocument.documentType}}</span>
             </div>
             <div class="col" v-if="multipleDocument.reprocess">
               <span class="col">{{multipleDocument.documentType}}</span>
@@ -305,8 +302,7 @@
               <span class="text-body1 text-weight-medium text-positive" right>Approved</span>
             </div>
             <div class="col-auto" v-if="multipleDocument.reprocess">
-              <!-- <pre>{{getShortLeadInfo.leadDocuments[multipleDocument.documentType][0]}}</pre> -->
-              <span v-if="computedGetAccess(multipleDocument)" right>
+              <span v-if="computedGetAccess(multipleDocument)" class="row no-wrap">
                 <q-btn
                   round
                   size="xs"
@@ -324,7 +320,7 @@
                   @click="fnDocumentRejectModal(getShortLeadInfo.leadDocuments[multipleDocument.documentType][0])"
                 />
               </span>
-              <span v-else right>
+              <span v-else>
                 <span
                   v-if="getShortLeadInfo.leadDocuments[multipleDocument.documentType][0].documentVerifiedStatus == 1"
                   class="text-body1 text-weight-medium text-positive"
@@ -336,10 +332,10 @@
               </span>
             </div>
           </div>
-        </q-item-label header>
+        </q-item-label>
         <!-- <pre>{{multipleDocument}}</pre> -->
         <div>
-          <q-item separator class="text-body1 q-pa-sm group">
+          <q-item class="text-body1 q-pa-sm group">
             <q-item-section>
               <!-- <pre>{{multipleDocument.subDocumentTypeSelection}}</pre> -->
               <select
@@ -358,7 +354,7 @@
             </q-item-section>
             <!-- START >> Will be displayed if reprocess key => false -->
             <div v-if="!multipleDocument.reprocess && multipleDocument.verifiedStatus != 1">
-              <q-item-section v-if="multipleDocument.isKycChecked">
+              <q-item-section side v-if="multipleDocument.isKycChecked">
                 <label
                   class="cursor-pointer text-white"
                   style="background-color: #202c3f;"
@@ -392,7 +388,6 @@
               v-for="(filesAttachedEarlier,filesAttachedEarlierIndex) in attachedSubFile.uploadedDocuments"
               :key="filesAttachedEarlierIndex"
               class="text-body1"
-              separator
               multiline
             >
               <q-item-section>
@@ -430,14 +425,13 @@
                   </div>
                 </q-item-label>
               </q-item-section>
-              <q-item-section v-if="attachedSubFile.documentVerifiedStatus == 4">
+              <q-item-section side v-if="attachedSubFile.documentVerifiedStatus == 4">
                 <q-btn
                   size="xs"
                   icon="clear"
                   @click="fnDeleteAlreadyAttachedFile(filesAttachedEarlier)"
                   round
                   color="negative"
-                  label="Remove"
                 />
               </q-item-section>
               <!-- END >> Will be displayed if reprocess key => true -->
@@ -475,7 +469,7 @@
     ></showPdfModalComponent>
     <!-- END >> COMPONENT: View PDF -->
     <!-- START >> Inner loader for document section, since values are dynamic  -->
-    <q-inner-loading :visible="toggleAjaxLoadFilter">
+    <q-inner-loading :showing="toggleAjaxLoadFilter">
       <q-spinner-gears size="50px" color="primary"></q-spinner-gears>
     </q-inner-loading>
     <!-- END >> Inner loader for document section, since values are dynamic  -->
@@ -659,7 +653,7 @@ export default {
     fnGetMerchantTypeValue(inputValue) {
       this.TOGGLE_COMMON_LOADER(true);
       let merchantDocumentCategory = _.find(
-        this.getShortLeadInfoDocumentTypes,
+        getShortLeadInfoDocumentTypes,
         o => o.merchantType === inputValue
       );
       let arr = {
@@ -784,7 +778,7 @@ export default {
         }
       });
       // console.log(
-      //   "this.getShortLeadInfoDocumentTypes",
+      //   "getShortLeadInfoDocumentTypes",
       //   this.getShortLeadInfoDocumentTypes
       // );
       this.getShortLeadInfoDocumentTypes["uploadedDocuments"] = arr;
@@ -926,8 +920,6 @@ export default {
 
     // Function to delete attached file with respective category
     fnDeleteAlreadyAttachedFile(documentDetails) {
-      // console.log("documentDetails", documentDetails);
-      // return;
       this.$q
         .dialog({
           title: "Confirm",
@@ -955,17 +947,17 @@ export default {
                 message: "Successfully removed!",
                 icon: "thumb_up"
               });
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",
-                position: "bot  tom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                position: "bottom",
+                message: error.body && error.body.message == null ? "Please Try Again Later !" : (error.body ? error.body.message : "Error deleting document"),
                 icon: "thumb_down"
               });
             });
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

@@ -147,7 +147,8 @@
       return {
         enableUploadInventoryBtn: true,
         toggleScanButton: true,
-        inventoryOptionSelected: "count"
+        inventoryOptionSelected: "count",
+        toggleAjaxLoadFilter: false,
       };
     },
   

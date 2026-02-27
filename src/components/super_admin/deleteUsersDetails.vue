@@ -24,7 +24,8 @@
         :filter="filter" v-model:pagination="paginationControl"
         row-key="nam6"
       >
-        <q-td v-slot:body-cell-action="props" class="group" :props="props">
+        <template v-slot:body-cell-action="props">
+  <q-td  class="group" :props="props">
           <q-btn
             v-show="props.row.leadsCount == 0 && props.row.referencesCount == 0"
             no-caps
@@ -49,6 +50,7 @@
             label="Re-assign leads"
           />
         </q-td>
+</template>
         <!-- END: table body modification -->
         <template v-slot:top="props" class="bottom-border">
           <!--START: table filter,search -->

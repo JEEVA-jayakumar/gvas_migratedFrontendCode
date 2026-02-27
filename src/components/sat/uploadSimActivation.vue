@@ -99,7 +99,7 @@
               label="Cancel"
               @click="emitfnshowSimActivationList"
             />
-            <q-btn :disabled="this.formData.sim == null"
+            <q-btn :disabled="formData.sim == null"
               class="common-btn"
               label="Upload"
              @click="uploadsimActivation(formData.sim)"

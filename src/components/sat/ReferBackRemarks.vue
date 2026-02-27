@@ -29,7 +29,7 @@
         </div>
       </div>
       <br />
-      <div v-if="this.propRowDetails.qrLeadStatus == 9" class="row d-flex align-items-center">
+      <div v-if="propRowDetails.qrLeadStatus == 9" class="row d-flex align-items-center">
         <div class="col-sm-4">
           <strong>SAT TO MARS Remark</strong>
         </div>
@@ -48,7 +48,7 @@
         </div>
       </div>
       <br />
-      <div v-if="this.propRowDetails.qrLeadStatus == 9" class="row d-flex align-items-center">
+      <div v-if="propRowDetails.qrLeadStatus == 9" class="row d-flex align-items-center">
         <div class="col-sm-4">
           <strong>MARS Remark</strong>
         </div>
@@ -67,7 +67,7 @@
         </div>
       </div>
       <br />
-      <div v-if="(this.propRowDetails.qrLeadStatus == 4 && this.propRowDetails.referbackStatus == true)" class="row d-flex align-items-center">
+      <div v-if="(propRowDetails.qrLeadStatus == 4 && propRowDetails.referbackStatus == true)" class="row d-flex align-items-center">
         <div class="col-sm-4">
           <strong>SAT TO SO Remark</strong>
         </div>
@@ -108,11 +108,11 @@ export default {
     this.satToSoRemarks = this.propRowDetails.satToMarsRemarks;
     console.log(
       "REFERBACK Remarks marsReason ------->",
-      JSON.stringify(this.marsRemarks)
+      JSON.stringify(marsRemarks)
     );
     console.log(
       "REFERBACK Remarks satTOMarsRemarks ------->",
-      JSON.stringify(this.satToSoRemarks)
+      JSON.stringify(satToSoRemarks)
     );
   },
   computed: {

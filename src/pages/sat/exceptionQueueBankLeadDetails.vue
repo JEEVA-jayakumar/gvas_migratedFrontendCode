@@ -77,12 +77,12 @@
                     </q-item>
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>Setup Fees</q-item-section>
-                      <q-item-section v-if="this.getShortLeadInfo.leadSource.id === 114">Rs. {{formData.shortLead.setUpFeeAppliedAmount}}</q-item-section>
+                      <q-item-section v-if="getShortLeadInfo.leadSource.id === 114">Rs. {{formData.shortLead.setUpFeeAppliedAmount}}</q-item-section>
                       <q-item-section v-else>Rs. {{formData.shortLead.setupFees}}</q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>Recurring Fees</q-item-section>
-                      <q-item-section v-if="this.getShortLeadInfo.leadSource.id === 114">Rs. {{formData.shortLead.recurringFeeAppliedAmount}}</q-item-section>
+                      <q-item-section v-if="getShortLeadInfo.leadSource.id === 114">Rs. {{formData.shortLead.recurringFeeAppliedAmount}}</q-item-section>
                       <q-item-section v-else>Rs. {{formData.shortLead.recurringFees}}</q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm text-body1">
@@ -638,7 +638,7 @@
             @click="fnUploadDocumentAndSubmitRejection"
           />
           <q-btn
-            v-if="this.formData.shortLead.leadSource.id != 114 && this.formData.shortLead.leadSource.id != 115"
+            v-if="formData.shortLead.leadSource.id != 114 && formData.shortLead.leadSource.id != 115"
             icon="cloud_upload"
             class="q-ma-sm"
             color="positive"

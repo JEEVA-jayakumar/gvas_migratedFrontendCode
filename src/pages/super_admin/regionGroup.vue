@@ -20,10 +20,13 @@
                         row-key="name" 
                         color="grey-9">
                         {{ activeTableData }}
-                        <q-td v-slot:body-cell-regionGroup="props" :props="props">{{ props.row.regionName
+                        <template v-slot:body-cell-regionGroup="props">
+  <q-td  :props="props">{{ props.row.regionName
                                 == null ? "NA" : props.row.regionName
                         }}</q-td>
-                        <q-td v-slot:body-cell-action="props" :props="props">
+</template>
+                        <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
                             <div class="row no-wrap no-padding">
                                 <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
                                     @click="fnShowEditRegionsGroup(props.row)" flat class="text-light-blue"></q-btn>
@@ -40,6 +43,7 @@
             ></q-btn> -->
                             </div>
                         </q-td>
+</template>
 
                         <template v-slot:top="props">
                             <!-- <div class="col-md-6 q-my-md" align="right">
@@ -63,15 +67,19 @@
                     <q-table :rows="deActiveTableData" table-class="customSATableClass" :columns="columns1"
                         :filter="filterSearch1" v-model:pagination="paginationControl1"
                         :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
-                        <q-td v-slot:body-cell-regionGroup="props" :props="props">{{ props.row.regionName
+                        <template v-slot:body-cell-regionGroup="props">
+  <q-td  :props="props">{{ props.row.regionName
                                 == null ? "NA" : props.row.regionName
                         }}</q-td>
-                        <q-td v-slot:body-cell-action1="props" :props="props">
+</template>
+                        <template v-slot:body-cell-action1="props">
+  <q-td  :props="props">
                             <div class="row no-wrap no-padding">
                           // <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md" @click="fnShowEditRegions(props.row)" flat class="text-light-blue" ></q-btn> 
              //<q-btn dense no-caps no-wrap label="Active" icon="far fa-minus-square" size="md" @click="fnActiveRegionGroup(props.row)" flat class="text-positive" ></q-btn>  
                             </div>
                         </q-td>
+</template>
 
                         <template v-slot:top="props">
 

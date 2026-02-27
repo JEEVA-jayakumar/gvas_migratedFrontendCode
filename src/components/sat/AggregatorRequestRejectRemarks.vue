@@ -87,7 +87,7 @@
       // this.dataCopy = this.propsRejectDeviceComponent;
     
       // this.dataCopy = this.propsRejectDeviceComponent.regionalInventory;
-     console.log("REJECT COMP---------->",JSON.stringify(this.propsRejectDeviceComponent));
+     console.log("REJECT COMP---------->",JSON.stringify(propsRejectDeviceComponent));
       this.dataCopy1 = this.propsRejectDeviceComponent;
     
     },

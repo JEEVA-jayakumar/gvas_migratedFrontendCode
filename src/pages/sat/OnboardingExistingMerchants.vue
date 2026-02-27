@@ -131,7 +131,7 @@
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-6" align="right">
                   <q-btn
-                    :disabled="this.formData.assignTo == ''"
+                    :disabled="formData.assignTo == ''"
                     type="button"
                     label="Assign"
                     class="common-dark-blue"
@@ -203,7 +203,7 @@
                             :disabled="
                               formData.marsDeviceIdsCookedUnAssinged.length ==
                               0
-                                 || this.formData.assignTo == ''
+                                 || formData.assignTo == ''
                             "
                             label="Re-Assign"
                             class="common-dark-blue"

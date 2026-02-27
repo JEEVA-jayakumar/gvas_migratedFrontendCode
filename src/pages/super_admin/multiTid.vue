@@ -12,7 +12,8 @@
           <q-table :rows="getlsVasHostInstanceDetails" table-class="customSATableClass" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
             @request="ajaxLoadAllLeadInfo">
 
-            <q-td v-slot:body-cell-action="props" :props="props">
+            <template v-slot:body-cell-action="props">
+  <q-td  :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn dense no-caps no-wrap label="Disable" icon="far fa-plus-square" size="md"
                   @click="fnDisable(props.row)" flat class="text-light-blue">
@@ -22,6 +23,7 @@
                 <!-- </q-btn> -->
               </div>
             </q-td>
+</template>
             <template v-slot:top="props">
               <div class="col-md-12 group">
                 <div class="row">

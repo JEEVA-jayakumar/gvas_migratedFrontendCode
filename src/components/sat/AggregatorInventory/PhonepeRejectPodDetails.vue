@@ -83,8 +83,8 @@ export default {
     },
 
     beforeMount() {
-        console.log("propShowRejectComponent--------->", JSON.stringify(this.propShowRejectComponent))
-        console.log("showRejectModel---------->", JSON.stringify(this.showRejectModel))
+        console.log("propShowRejectComponent--------->", JSON.stringify(propShowRejectComponent))
+        console.log("showRejectModel---------->", JSON.stringify(showRejectModel))
     },
     computed: {
         ...mapGetters("regionalInventoryDetails", ["getsparePartsSetsAndCounts", "getregionalInventoryPodDetails", "getregionalInventoryStocksPodDetails", "getregionalInventoryAllocatedSoPodDetails"]),
@@ -126,7 +126,7 @@ export default {
                             param = response.data.data
 
                             console.log("PARAMS VALUES 1------------>", JSON.stringify(param))
-                            //   console.log("PARAMS VALUES--2---------->", JSON.stringify(this.param))
+                            //   console.log("PARAMS VALUES--2---------->", JSON.stringify(param))
                             param.soRemarks = response.data.data.soRemarks == 'null' ? "null" : reqdata.soRemarks
                             param.regionRemarks = response.data.data.regionRemarks == 'null' ? "null" : reqdata.regionRemarks;
                             this.REJECT_PHONEPE_INCOMING_POD_DETAILS(param)

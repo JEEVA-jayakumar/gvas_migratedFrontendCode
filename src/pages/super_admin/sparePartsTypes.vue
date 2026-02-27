@@ -20,15 +20,20 @@
           row-key="name"
           color="grey-9"
 >
-<q-td
-    v-slot:body-cell-created_date="props"
+<template v-slot:body-cell-created_date="props">
+  <q-td
+
     :props="props"
   >{{ $moment(props.row.created_date).format("Do MMM Y") }}</q-td>
+</template>
+  <template v-slot:body-cell-updated_date="props">
   <q-td
-    v-slot:body-cell-updated_date="props"
+
     :props="props"
   >{{ $moment(props.row.updated_date).format("Do MMM Y") }}</q-td>
-<q-td v-slot:body-cell-action="props" :props="props">
+</template>
+<template v-slot:body-cell-action="props">
+  <q-td  :props="props">
   <div class="row no-wrap no-padding">
     <q-btn
       dense
@@ -54,6 +59,7 @@
     ></q-btn>
   </div>
 </q-td>
+</template>
 
 <template v-slot:top="props">
   <!--START: table title -->
@@ -97,15 +103,20 @@
           color="grey-9"
           @click="ajaxSpareData"
 >
-<q-td
-    v-slot:body-cell-created_date="props"
+<template v-slot:body-cell-created_date="props">
+  <q-td
+
     :props="props"
   >{{ $moment(props.row.created_date).format("Do MMM Y") }}</q-td>
+</template>
+  <template v-slot:body-cell-updated_date="props">
   <q-td
-    v-slot:body-cell-updated_date="props"
+
     :props="props"
   >{{ $moment(props.row.updated_date).format("Do MMM Y") }}</q-td>
-<q-td v-slot:body-cell-action="props" :props="props">
+</template>
+<template v-slot:body-cell-action="props">
+  <q-td  :props="props">
   <div class="row no-wrap no-padding">
     <q-btn
       dense
@@ -120,6 +131,7 @@
     ></q-btn>
   </div>
 </q-td>
+</template>
 
 <template v-slot:top="props">
   <!--START: table title -->

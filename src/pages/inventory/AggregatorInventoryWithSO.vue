@@ -13,35 +13,49 @@
      
         <q-table table-class="customTableClass" :rows="this.getInventoryWithSOAggregatorList" v-model:columns="columns"
           :filter="filter" v-model:pagination="paginationControl" row-key="name">
-          <!-- <q-td
-          v-slot:body-cell-createdAt="props"
+          <!-- <template v-slot:body-cell-createdAt="props">
+  <q-td
+
           :props="props"
         >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-receivedAt="props"
+</template>
+        <template v-slot:body-cell-receivedAt="props">
+  <q-td
+
           :props="props"
         >{{ $moment(props.row.receivedAt).format("Do MMM Y") }}</q-td>
+</template>
 
-        <q-td
-          v-slot:body-cell-receivedAt="props"
+        <template v-slot:body-cell-receivedAt="props">
+  <q-td
+
           :props="props"
         >{{ $moment(props.row.receivedAt ==null? "NA" : props.row.receivedAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-DeviceList="props"
+</template>
+        <template v-slot:body-cell-DeviceList="props">
+  <q-td
+
           :props="props"
         >{{ $moment(props.row.device.createDate).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-ModifyDate="props"
+</template>
+        <template v-slot:body-cell-ModifyDate="props">
+  <q-td
+
           :props="props"
-        >{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</q-td>-->
-          <q-td v-slot:body-cell-created_at="props" :props="props">{{
+        >{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</q-td>
+</template>-->
+          <template v-slot:body-cell-created_at="props">
+  <q-td  :props="props">{{
             props.row.created_at == null ? "NA" :
               props.row.created_at | moment("Do MMM Y")
           }}</q-td>
-          <q-td v-slot:body-cell-updated_at="props" :props="props">{{
+</template>
+          <template v-slot:body-cell-updated_at="props">
+  <q-td  :props="props">{{
             props.row.updated_at == null ? "NA" :
               props.row.updated_at | moment("Do MMM Y")
           }}</q-td>
+</template>
           <template v-slot:top="props">
             <div class="col-md-5">
               <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."

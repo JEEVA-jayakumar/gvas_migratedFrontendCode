@@ -67,11 +67,11 @@
           <template v-slot:body-cell-leadStatus="props">
             <q-td :props="props">
               <span class="label text-positive"
-                v-if="props.row.verifiedFinanceStatus== $LEAD_STATUS_SUBMIT_TO_SAT_LEAD && props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_SUCCESS">New</span>
+                v-if="props.row.leadStatus == $LEAD_STATUS_SUBMIT_TO_SAT_LEAD && props.row.verifiedFinanceStatus == $VERIFIED_FINANCE_STATUS_SUCCESS">New</span>
               <span class="label text-negative"
-                v-if="props.row.verifiedFinanceStatus== $LEAD_STATUS_SUBMIT_TO_SAT_LEAD && props.row.verifiedFinanceStatus== $VERIFIED_DOCUMENT_STATUS_REJECT">Rejected</span>
+                v-else-if="props.row.leadStatus == $LEAD_STATUS_SUBMIT_TO_SAT_LEAD && props.row.verifiedFinanceStatus == $VERIFIED_FINANCE_STATUS_REJECT">Rejected</span>
               <span class="label text-primary"
-                v-else-if="props.row.leadStatus== $LEAD_STATUS_DATA_ENTRY_PENDING">WIP</span>
+                v-else-if="props.row.leadStatus == $LEAD_STATUS_DATA_ENTRY_PENDING">WIP</span>
               <span class="label text-orange" v-else-if="props.row.leadStatus== $LEAD_STATUS_SUBMITED_TO_MARS">With
                 ops</span>
               <span class="label text-negative" v-else>Pending</span>

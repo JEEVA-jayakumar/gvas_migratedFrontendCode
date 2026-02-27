@@ -108,9 +108,7 @@ export default {
       info: {
         datainfo1: ""
       },
-      merchant: {
-        datainfo: ""
-      },
+
       formdata: {
         paymentOption: "",
         referenceNumber: "",
@@ -656,7 +654,7 @@ export default {
             });
             this.$router.push("/sat/change/management");
             // var self = this;
-            // Object.keys(this.formData).forEach(function(key, index) {
+            // Object.keys(formData).forEach(function(key, index) {
             //   self.formData[key] = "";
             // });
           })
@@ -669,7 +667,7 @@ export default {
               message: error.data.message
             });
             // var self = this;
-            // Object.keys(this.formData).forEach(function(key, index) {
+            // Object.keys(formData).forEach(function(key, index) {
             //   self.formData[key] = "";
             // });
           });
@@ -747,7 +745,7 @@ export default {
           });
           this.$router.push("/sat/change/management");
           // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
+          // Object.keys(formData).forEach(function(key, index) {
           //   self.formData[key] = "";
           // });
         })
@@ -760,7 +758,7 @@ export default {
             message: error.data.message
           });
           // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
+          // Object.keys(formData).forEach(function(key, index) {
           //   self.formData[key] = "";
           // });
         });
@@ -939,8 +937,8 @@ export default {
         requestparams.params.merchant.salesInformation.institutionCode
       );
     }
-  },
-  finalFormSubmit(request) {
+    },
+    finalFormSubmit(request) {
     let key = this.merchant.salesInformation.institutionCode;
     this.$q.localStorage.set("a_t", key);
     let requestparams = {
@@ -972,7 +970,7 @@ export default {
         });
 
         // var self = this;
-        // Object.keys(this.formData).forEach(function(key, index) {
+        // Object.keys(formData).forEach(function(key, index) {
         //   self.formData[key] = "";
         // });
       })
@@ -985,13 +983,13 @@ export default {
           message: error.data.message
         });
         // var self = this;
-        // Object.keys(this.formData).forEach(function(key, index) {
+        // Object.keys(formData).forEach(function(key, index) {
         //   self.formData[key] = "";
         // });
       });
     console.log("final submit to mars", requestparams.url);
-  },
-  finalFormSubmitKyc(request) {
+    },
+    finalFormSubmitKyc(request) {
     let key = this.merchant.salesInformation.institutionCode;
     this.$q.localStorage.set("a_t", key);
     let requestparams = {
@@ -1025,7 +1023,7 @@ export default {
         });
 
         // var self = this;
-        // Object.keys(this.formData).forEach(function(key, index) {
+        // Object.keys(formData).forEach(function(key, index) {
         //   self.formData[key] = "";
         // });
       })
@@ -1039,13 +1037,13 @@ export default {
         });
         requestparams.params.kyc = "";
         // var self = this;
-        // Object.keys(this.formData).forEach(function(key, index) {
+        // Object.keys(formData).forEach(function(key, index) {
         //   self.formData[key] = "";
         // });
       });
     console.log("final submit to mars", requestparams.url);
-  },
-  fetchAllDropdownValuesFromMARSapi() {
+    },
+    fetchAllDropdownValuesFromMARSapi() {
     // let key = this.merchant.salesInformation.institutionCode
     //     let variable = localStorage.getItem("aa_t")
     //     let v = variable.lastIndexOf('|')
@@ -1074,8 +1072,8 @@ export default {
           // self.stateOptions = stateArr;
         });
       });
-  },
-  fetchAndCookDocuments() {
+    },
+    fetchAndCookDocuments() {
     console.log("Hellow world");
     let self = this;
     self.merchant.kyc.documents.push({
@@ -1085,8 +1083,8 @@ export default {
         this.GLOBAL_FILE_FETCH_URL + "/" + this.getImplementedQueue.cpvForm
       ]
     });
-  },
-  populateBankDetails() {
+    },
+    populateBankDetails() {
     let self = this;
     let ifscArr = [];
     self
@@ -1109,31 +1107,31 @@ export default {
   },
   /* IFSC bank search result */
   residentStateSearch(terms, done) {
-    done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
-  },
-  registeredStateSelected(item) {
+    done(this.COMMON_FILTER_FUNCTION(stateOptions, terms));
+    },
+    registeredStateSelected(item) {
     this.merchant.companyinformation.registeredStateName = item.label;
     this.merchant.companyinformation.registeredStateRefCode = item.value;
-  },
-  residentStateSearch(terms, done) {
-    done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
-  },
-  residentCitySearch(terms, done) {
-    done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
-  },
-  registeredCitySelected(item) {
+    },
+    residentStateSearch(terms, done) {
+    done(this.COMMON_FILTER_FUNCTION(stateOptions, terms));
+    },
+    residentCitySearch(terms, done) {
+    done(this.COMMON_FILTER_FUNCTION(cityOptions, terms));
+    },
+    registeredCitySelected(item) {
     this.merchant.companyinformation.registeredCityName = item.label;
     this.merchant.companyinformation.registeredCityRefCode = item.value;
-  },
-  COMMON_FILTER_FUNCTION(arraySet, terms) {
+    },
+    COMMON_FILTER_FUNCTION(arraySet, terms) {
     return _.filter(arraySet, function(oo) {
       return (
         oo.label.toLowerCase().includes(terms.toLowerCase()) ||
         oo.value.toString().includes(terms.toString())
       );
     });
-  },
-  commonDateFormat(selectedDate) {
+    },
+    commonDateFormat(selectedDate) {
     if (
       selectedDate == "" ||
       selectedDate == null ||
@@ -1143,8 +1141,8 @@ export default {
     } else {
       return moment(selectedDate).format("DD/MM/YYYY");
     }
-  },
-  goBackToDocumentVerificationStage() {
+    },
+    goBackToDocumentVerificationStage() {
     let formData = {
       leadId: this.$route.params.id,
       defaultUrlValue:

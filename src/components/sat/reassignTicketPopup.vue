@@ -21,15 +21,15 @@
                 </div>
                 <div class="q-mb-md">
                   <q-item-label><b>TID:</b></q-item-label>
-                  <div>{{ this.propRowDetails.tid }}</div>
+                  <div>{{ propRowDetails.tid }}</div>
                 </div>
                 <div class="q-mb-md">
                   <q-item-label><b>Ticket ID:</b></q-item-label>
-                  <div>{{ this.propRowDetails.serviceReqTicketId }}</div>
+                  <div>{{ propRowDetails.serviceReqTicketId }}</div>
                 </div>
                 <div class="q-mb-md">
                   <q-item-label><b>SAT forwarded date:</b></q-item-label>
-                  <div>{{ $moment(this.propRowDetails.subTicketsList[0].moveToSatDate).format("Do MMM Y") }}</div>
+                  <div>{{ $moment(propRowDetails.subTicketsList[0].moveToSatDate).format("Do MMM Y") }}</div>
                 </div>
                 <br />
                 <div class="q-mb-md">
@@ -167,8 +167,8 @@ export default {
 
   created() {},
   beforeMount() {
-    console.log("propRowDetails ------->", JSON.stringify(this.propRowDetails));
-        this.assignHistoryList(this.propRowDetails)
+    console.log("propRowDetails ------->", JSON.stringify(propRowDetails));
+        this.assignHistoryList(propRowDetails)
 
     this.implementationExecutiveList();
 
@@ -296,7 +296,7 @@ fnAssignHistoryPopup(rowDetails) {
         filter: this.filterSearch
       });
 
-  this.assignHistoryList(this.propRowDetails)
+  this.assignHistoryList(propRowDetails)
       // eslint-disable-next-line eqeqeq
       if (rowDetails != undefined) {
         this.propRowDetails = rowDetails;
@@ -315,7 +315,7 @@ assignHistoryList(request) {
           this.count = this.assignHistoryRemarks.length
           // console.log(
           //   "ASSIGN_HISTORY_REMARKS_LIST ------->",
-          //   JSON.stringify(this.assignHistoryRemarks)
+          //   JSON.stringify(assignHistoryRemarks)
           // );
           this.$q.loading.hide();
         })

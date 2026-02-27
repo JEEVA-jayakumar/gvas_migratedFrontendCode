@@ -31,6 +31,8 @@
                 label="Choose a region"
                 v-model="formData.addUserDetails.region.id"
                 :options="getAllRegionsData"
+                emit-value
+                map-options
                 :disable="formData.disableRegionSelection"
                 :error="$v.formData.addUserDetails.region.id.$error"
                 @blur="$v.formData.addUserDetails.region.id.$touch"
@@ -99,10 +101,19 @@
 
             <!-- Pincode -->
             <div class="col-md-6">
-              <q-input
+              <q-select
                 outlined
+                use-input
+                hide-selected
+                fill-input
+                input-debounce="500"
                 label="Pincode"
                 v-model="formData.addUserDetails.pincodeTemp"
+                :options="getAllStatesData"
+                @filter="pincodeSearch"
+                @update:model-value="pincodeSelected"
+                @clear="fnGetCityAndState"
+                clearable
                 :error="$v.formData.addUserDetails.pincodeTemp.$error"
                 @blur="$v.formData.addUserDetails.pincodeTemp.$touch"
               />
@@ -121,12 +132,12 @@
 
         <!-- Hierarchy + Roles -->
         <div
-          class="row items-center q-col-gutter-md q-px-md"
+          class="row items-center q-col-gutter-md q-px-md q-mb-md"
           v-for="(item,index) in getAllHierarchiesAndRolesData"
           :key="index"
         >
           <div class="col">
-            <q-checkbox v-model="item.checked" :label="item.hierarchy" @update:model-value="getRoleCheckedItem(item)" />
+            <q-checkbox v-model="item.checked" :label="item.hierarchy" @update:model-value="getRoleCheckedItem(item)" color="purple-9" />
           </div>
 
           <div class="col">
@@ -135,6 +146,8 @@
               label="Choose a role"
               v-model="item.roleChecked"
               :options="item.roles"
+              emit-value
+              map-options
               :disable="!item.checked"
               @update:model-value="getPredecessorList(item)"
             />
@@ -143,9 +156,11 @@
           <div class="col">
             <q-select
               outlined
-              label="Choose a predecessor"
+              :label="item.predecessor && item.predecessor.length === 0 ? 'No data available to display' : 'Choose a predecessor'"
               v-model="item.predecessorChecked"
               :options="item.predecessor"
+              emit-value
+              map-options
               :disable="item.id > 7"
             />
           </div>
@@ -156,9 +171,11 @@
           <q-select
             outlined
             multiple
-            label="Choose bank"
+            label="Choose bank (can be multiple)"
             v-model="formData.addUserDetails.banksList"
             :options="leadSourceOptions"
+            emit-value
+            map-options
             :error="$v.formData.addUserDetails.banksList.$error"
             @blur="$v.formData.addUserDetails.banksList.$touch"
           />
@@ -173,22 +190,51 @@
             v-model="formData.addUserDetails.leadSource.sourceName"
             :val="opt.value"
             :label="opt.label"
+            color="grey-9"
           />
         </div>
 
         <!-- Service Client -->
         <div v-if="formData.showLeadSource" class="q-pa-md row q-col-gutter-md">
           <div class="col-md-6">
-            <q-input outlined label="Auth Method" v-model="formData.addUserDetails.serviceReqClients.authMethod"/>
+            <q-input
+              outlined
+              label="Auth Method"
+              v-model.trim="formData.addUserDetails.serviceReqClients.authMethod"
+              hint="Token, Basic, Barrier"
+              :error="$v.formData.addUserDetails.serviceReqClients.authMethod.$error"
+              @blur="$v.formData.addUserDetails.serviceReqClients.authMethod.$touch"
+            />
           </div>
           <div class="col-md-6">
-            <q-input outlined label="Auth Key" v-model="formData.addUserDetails.serviceReqClients.authKey"/>
+            <q-input
+              outlined
+              label="Auth Key"
+              v-model.trim="formData.addUserDetails.serviceReqClients.authKey"
+              hint="Authorization"
+              :error="$v.formData.addUserDetails.serviceReqClients.authKey.$error"
+              @blur="$v.formData.addUserDetails.serviceReqClients.authKey.$touch"
+            />
           </div>
           <div class="col-md-6">
-            <q-input outlined label="Auth Value" v-model="formData.addUserDetails.serviceReqClients.authValue"/>
+            <q-input
+              outlined
+              label="Auth Value"
+              v-model.trim="formData.addUserDetails.serviceReqClients.authValue"
+              hint="Encrypted Data"
+              :error="$v.formData.addUserDetails.serviceReqClients.authValue.$error"
+              @blur="$v.formData.addUserDetails.serviceReqClients.authValue.$touch"
+            />
           </div>
           <div class="col-md-6">
-            <q-input outlined label="URL" v-model="formData.addUserDetails.serviceReqClients.callBackUrl"/>
+            <q-input
+              outlined
+              label="URL"
+              v-model.trim="formData.addUserDetails.serviceReqClients.callBackUrl"
+              hint="callBackUrl"
+              :error="$v.formData.addUserDetails.serviceReqClients.callBackUrl.$error"
+              @blur="$v.formData.addUserDetails.serviceReqClients.callBackUrl.$touch"
+            />
           </div>
         </div>
 

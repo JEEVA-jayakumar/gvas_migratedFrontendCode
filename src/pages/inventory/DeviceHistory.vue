@@ -19,12 +19,16 @@
         :loading="toggleAjaxLoadFilter"
         @request="ajaxLoadAllLeadInfo"
       >
-         <q-td v-slot:body-cell-installationDate="props" :props="props">
+         <template v-slot:body-cell-installationDate="props">
+  <q-td  :props="props">
           <span class="label">{{ $moment(props.row.installationDate).format("Do MMM Y") }}</span>
         </q-td>
-          <q-td v-slot:body-cell-deInstallationDate="props" :props="props">
+</template>
+          <template v-slot:body-cell-deInstallationDate="props">
+  <q-td  :props="props">
           <span class="label">{{ $moment(props.row.deInstallationDate).format("Do MMM Y") }}</span>
         </q-td>
+</template>
         
      
         <template v-slot:top="props" class="bottom-border">
