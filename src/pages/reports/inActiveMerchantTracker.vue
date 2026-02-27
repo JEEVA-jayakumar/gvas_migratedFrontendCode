@@ -4,7 +4,7 @@
       <!--START: table title -->
       <div class="col-md-12 text-h6 q-px-md q-py-md text-weight-regular bottom-border text-grey-9">Inactive Merchant Tracker</div>
       <div class="row q-pa-md">
-        <div class="col-6 group">
+        <div class="col-12 col-md-6 group">
           <p>Choose one from the below or you can choose start and end date manually</p>
           <q-radio color="grey-9" v-model="formData.option" @update:model-value="calculateDate" :val="1" label="Past 6 months"/>
           <q-radio color="grey-9" v-model="formData.option" @update:model-value="calculateDate" :val="2" label="Past 3 months"/>
@@ -16,9 +16,9 @@
           <q-radio color="grey-9" v-model="formData.option" @update:model-value="calculateDate" :val="8" label="Today"/>
         </div>
       </div>
-      <div class="row q-pa-md">
-        <div class="col-6 group">
-          <q-input filled v-model="formData.from" label="Start date" color="grey-9">
+      <div class="row q-pa-md q-col-gutter-md">
+        <div class="col-12 col-md-4">
+          <q-input filled v-model="formattedFrom" label="Start date" color="grey-9" readonly>
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
                 <q-menu transition-show="scale" transition-hide="scale">
@@ -27,7 +27,9 @@
               </q-icon>
             </template>
           </q-input>
-          <q-input filled v-model="formData.to" label="End date" color="grey-9">
+        </div>
+        <div class="col-12 col-md-4">
+          <q-input filled v-model="formattedTo" label="End date" color="grey-9" readonly>
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
                 <q-menu transition-show="scale" transition-hide="scale">
@@ -37,7 +39,7 @@
             </template>
           </q-input>
         </div>
-        <div class="col-12 group">
+        <div class="col-12 group q-mt-md">
           <q-btn class="common-dark-blue" @click="downloadReport()" label="Download" />
         </div>
       </div>
@@ -46,19 +48,27 @@
 </template>
 
 <script>
-import { or, and } from '@vuelidate/validators';
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 import { date } from "quasar";
+
 export default {
-  // name: 'PageName',
+  name: "inActiveMerchantTracker",
   data() {
     return {
       formData: {
         option: 8,
-        from: new Date(),
-        to: new Date(),
+        from: date.formatDate(new Date(), 'YYYY-MM-DD'),
+        to: date.formatDate(new Date(), 'YYYY-MM-DD'),
       },
     };
+  },
+  computed: {
+    formattedFrom() {
+      return this.$moment(this.formData.from).format("Do MMM Y");
+    },
+    formattedTo() {
+      return this.$moment(this.formData.to).format("Do MMM Y");
+    }
   },
   methods: {
     ...mapActions("reports", ["REPORT_INACTIVE_MERCHANT"]),
@@ -66,66 +76,37 @@ export default {
       let now = new Date();
       let newDate = new Date();
       if (this.formData.option == 1) {
-        newDate = date.subtractFromDate(now, {
-          month: 6,
-        });
+        newDate = date.subtractFromDate(now, { month: 6 });
       } else if (this.formData.option == 2) {
-        newDate = date.subtractFromDate(now, {
-          month: 3,
-        });
+        newDate = date.subtractFromDate(now, { month: 3 });
       } else if (this.formData.option == 3) {
-        newDate = date.subtractFromDate(now, {
-          month: 1,
-        });
+        newDate = date.subtractFromDate(now, { month: 1 });
       } else if (this.formData.option == 4) {
-        newDate = date.subtractFromDate(now, {
-          days: 28,
-        });
+        newDate = date.subtractFromDate(now, { days: 28 });
       } else if (this.formData.option == 5) {
-        newDate = date.subtractFromDate(now, {
-          days: 21,
-        });
+        newDate = date.subtractFromDate(now, { days: 21 });
       } else if (this.formData.option == 6) {
-        newDate = date.subtractFromDate(now, {
-          days: 14,
-        });
+        newDate = date.subtractFromDate(now, { days: 14 });
       } else if (this.formData.option == 7) {
-        newDate = date.subtractFromDate(now, {
-          days: 7,
-        });
+        newDate = date.subtractFromDate(now, { days: 7 });
       } else {
         newDate = new Date();
       }
-      this.formData.from = newDate;
-      this.formData.to = now;
+      this.formData.from = date.formatDate(newDate, 'YYYY-MM-DD');
+      this.formData.to = date.formatDate(now, 'YYYY-MM-DD');
     },
     downloadReport() {
-      this.$q.loading.show({
-        delay: 100, // ms
-      });
+      this.$q.loading.show({ delay: 100 });
       this.REPORT_INACTIVE_MERCHANT(this.formData)
         .then(() => {
           this.$q.loading.hide();
-          this.$q.notify({
-            color: "positive",
-            position: "bottom",
-            message: "Success, file has been downloaded",
-            icon: "check",
-          });
+          this.$q.notify({ color: "positive", position: "bottom", message: "Success, file has been downloaded", icon: "check" });
         })
-        .catch(error => {
+        .catch(() => {
           this.$q.loading.hide();
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "Please try again",
-            icon: "thumb_down",
-          });
+          this.$q.notify({ color: "negative", position: "bottom", message: "Please try again", icon: "thumb_down" });
         });
     },
   },
 };
 </script>
-
-<style>
-</style>

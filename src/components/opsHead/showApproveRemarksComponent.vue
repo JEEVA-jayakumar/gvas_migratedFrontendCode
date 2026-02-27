@@ -1,43 +1,41 @@
 <template>
   <div>
     <q-dialog
-      minimized
-      no-backdrop-dismiss
-      no-esc-dismiss
+      persistent
       v-model="toggleModal"
-      :content-css="{padding:'30px',minWidth: '40vw'}"
     >
-      <form>
-        <div class="column group">
-          <div class="text-h6 q-py-md">Approval confirmation</div>
-          <div>
-            <q-input
-              v-model="formData.leadInformation.reason"
-              label="Remarks"
-              color="primary"
-            />
-          </div>
-          <div class="group">
-            <q-btn
-              icon="done"
-              color="positive"
-              class="q-ma-sm float-right"
-              @click="sendRemarks(formData)"
-              align="right"
-              label="Approve"
-            />
-            <q-btn
-              icon="block"
-              color="grey-5"
-              @click="emitToggleRemarks()"
-              class="q-ma-sm float-right text-dark"
-              align="right"
-              v-close-overlay
-              label="Cancel"
-            />
-          </div>
-        </div>
-      </form>
+      <q-card style="min-width: 40vw;">
+        <q-card-section>
+          <div class="text-h6">Approval confirmation</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          <q-input
+            v-model="formData.leadInformation.reason"
+            label="Remarks"
+            color="primary"
+            autofocus
+            @keyup.enter="sendRemarks(formData)"
+          />
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn
+            icon="block"
+            color="grey-5"
+            @click="emitToggleRemarks()"
+            class="text-dark"
+            v-close-overlay
+            label="Cancel"
+          />
+          <q-btn
+            icon="done"
+            color="positive"
+            @click="sendRemarks(formData)"
+            label="Approve"
+          />
+        </q-card-actions>
+      </q-card>
     </q-dialog>
   </div>
 </template>
