@@ -6,19 +6,19 @@
       <div class="row q-pa-md">
         <div class="col-12 col-md-6 group">
           <p>Choose one from the below or you can choose start and end date manually</p>
-          <q-radio color="purple-9" v-model="formData.option" @update:model-value="calculateDate" :val="1" label="Past 6 months"/>
-          <q-radio color="purple-9" v-model="formData.option" @update:model-value="calculateDate" :val="2" label="Past 3 months"/>
-          <q-radio color="purple-9" v-model="formData.option" @update:model-value="calculateDate" :val="3" label="Past 1 month"/>
-          <q-radio color="purple-9" v-model="formData.option" @update:model-value="calculateDate" :val="4" label="Past 4 weeks"/>
-          <q-radio color="purple-9" v-model="formData.option" @update:model-value="calculateDate" :val="5" label="Past 3 weeks"/>
-          <q-radio color="purple-9" v-model="formData.option" @update:model-value="calculateDate" :val="6" label="Past 2 weeks"/>
-          <q-radio color="purple-9" v-model="formData.option" @update:model-value="calculateDate" :val="7" label="Past 1 week"/>
-          <q-radio color="purple-9" v-model="formData.option" @update:model-value="calculateDate" :val="8" label="Today"/>
+          <q-radio color="grey-9" v-model="formData.option" @update:model-value="calculateDate" :val="1" label="Past 6 months"/>
+          <q-radio color="grey-9" v-model="formData.option" @update:model-value="calculateDate" :val="2" label="Past 3 months"/>
+          <q-radio color="grey-9" v-model="formData.option" @update:model-value="calculateDate" :val="3" label="Past 1 month"/>
+          <q-radio color="grey-9" v-model="formData.option" @update:model-value="calculateDate" :val="4" label="Past 4 weeks"/>
+          <q-radio color="grey-9" v-model="formData.option" @update:model-value="calculateDate" :val="5" label="Past 3 weeks"/>
+          <q-radio color="grey-9" v-model="formData.option" @update:model-value="calculateDate" :val="6" label="Past 2 weeks"/>
+          <q-radio color="grey-9" v-model="formData.option" @update:model-value="calculateDate" :val="7" label="Past 1 week"/>
+          <q-radio color="grey-9" v-model="formData.option" @update:model-value="calculateDate" :val="8" label="Today"/>
         </div>
       </div>
       <div class="row q-pa-md q-col-gutter-md">
         <div class="col-12 col-md-4">
-          <q-input filled v-model="formattedFrom" label="Start date" color="grey-9">
+          <q-input filled v-model="formattedFrom" label="Start date" color="grey-9" readonly>
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
                 <q-menu transition-show="scale" transition-hide="scale">
@@ -29,7 +29,7 @@
           </q-input>
         </div>
         <div class="col-12 col-md-4">
-          <q-input filled v-model="formattedTo" label="End date" color="grey-9">
+          <q-input filled v-model="formattedTo" label="End date" color="grey-9" readonly>
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
                 <q-menu transition-show="scale" transition-hide="scale">
@@ -52,7 +52,7 @@ import { mapActions } from "vuex";
 import { date } from "quasar";
 
 export default {
-  name: "LeadApprovalTracker",
+  name: "leadApprovalTracker",
   data() {
     return {
       formData: {

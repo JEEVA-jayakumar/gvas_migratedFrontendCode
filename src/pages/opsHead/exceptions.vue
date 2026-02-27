@@ -25,13 +25,13 @@
           :class="[props.row.__index === activeId ? 'bg-grey-3' : '']"
         >
           <q-td key="leadInformation.updatedAt" :props="props">
-            <span class="label capitalize">{{ $moment(props.row.updatedAt).format("MMMM Do YYYY") }}</span>
+            <span class="label capitalize" v-if="props.row.updatedAt">{{ $moment(props.row.updatedAt).format("MMMM Do YYYY") }}</span>
           </q-td>
           <q-td key="leadInformation.leadNumber" :props="props">
             <span
               class="label capitalize text-primary cursor-pointer"
               @click.stop="toggleLeadInformation(props.row)"
-            ># {{props.row.leadId }}</span>
+            ># {{props.row.leadId || props.row.id }}</span>
           </q-td>
           <q-td key="leadInformation.leadName" :props="props">
             <span class="label capitalize">{{props.row.leadName}}</span>

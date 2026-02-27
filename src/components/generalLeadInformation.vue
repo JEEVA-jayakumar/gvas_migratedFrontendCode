@@ -2,22 +2,18 @@
   <div>
     <q-dialog
       v-model="opened"
-      class="q-mt-lg capitalize"
+      class="capitalize"
       @hide="emitToggleRemarks"
-      @escape-key="emitToggleRemarks"
-      :content-css="{minWidth:'30vw',padding:'20px'}"
     >
-      <div class="row items-center bottom-border q-py-sm">
-        <div class="col">Lead Information</div>
-        <div class="col-auto">
-          <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" icon="clear"/>
-        </div>
-      </div>
+      <q-card style="min-width: 400px;">
+        <q-card-section class="row items-center q-pb-none">
+          <div class="text-h6">Lead Information</div>
+          <q-space />
+          <q-btn icon="close" flat round dense v-close-overlay />
+        </q-card-section>
 
-      <!-- START >> Lead information -->
-      <div class="row">
-        <div>
-          <q-scroll-area style="width: 400px; height: 375px;">
+        <q-card-section>
+          <q-scroll-area style="height: 400px;">
             <q-list multiline separator class="text-body1">
               <q-item>
                 <q-item-section>
@@ -200,9 +196,8 @@
               </q-item>
             </q-list>
           </q-scroll-area>
-        </div>
-      </div>
-      <!-- END >> Lead information -->
+        </q-card-section>
+      </q-card>
     </q-dialog>
   </div>
 </template>

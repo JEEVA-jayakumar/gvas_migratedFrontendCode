@@ -15,8 +15,8 @@
         <div class="row q-py-sm">
           <div class="full-width">
               <vuePdfjs :url="GLOBAL_FILE_FETCH_URL+'/'+itemDetails" :type="0" :height="'400px'" style="max-width:100%"></vuePdfjs>
-          </div>
-        </div>
+          </q-card-actions>
+      </q-card>
     </q-dialog>
   </div>
 </template>

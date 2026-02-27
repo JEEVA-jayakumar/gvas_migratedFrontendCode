@@ -2,32 +2,38 @@
     <div>
         <q-dialog
         v-model="toggleModal"  
-        @hide="emitToggleCheque(toggleModal)" 
-        @escape-key="emitToggleCheque(toggleModal)"  
-        :content-css="{padding:'10px',maxWidth:'50vw',minHeight:''}"
+        persistent
         >
-          <div class="q-pa-md">
-              <div class="row text-center">
-                  <div class="col-md-12 justify-center">
-                      <div class="text-h6 text-weight-regular">Reject Exception</div>
-                  </div>
-                  <div class="col-md-12 q-pt-md" align="left">
-                      <q-input type="textarea" color="grey-9" v-model="formData.leadVerificationStatus.reason" label="Enter reason for reject" placeholder="type.." />
-                  </div>
-                  <div class="col-md-12 col-md-6 q-pt-md group" align="right">
-                      <q-btn
-                        outline
-                        label="Cancel"
-                        @click="emitModalToggle"
-                      />
-                      <q-btn
-                        class="common-btn"
-                        label="Submit"
-                        @click="fnFinalRejectSubmit(formData)"
-                      />
-                  </div>
-              </div>
-          </div>
+          <q-card style="min-width: 50vw;">
+            <q-card-section>
+              <div class="text-h6 text-weight-regular">Reject Exception</div>
+            </q-card-section>
+
+            <q-card-section class="q-pt-none">
+              <q-input
+                type="textarea"
+                color="grey-9"
+                v-model="formData.leadVerificationStatus.reason"
+                label="Enter reason for reject"
+                placeholder="type.."
+                autofocus
+              />
+            </q-card-section>
+
+            <q-card-actions align="right">
+              <q-btn
+                flat
+                label="Cancel"
+                @click="emitModalToggle"
+                v-close-overlay
+              />
+              <q-btn
+                color="primary"
+                label="Submit"
+                @click="fnFinalRejectSubmit(formData)"
+              />
+            </q-card-actions>
+          </q-card>
         </q-dialog>
     </div>
 </template>

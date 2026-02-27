@@ -1,50 +1,49 @@
 <template>
   <div>
     <q-dialog
-      minimized
-      no-backdrop-dismiss
-      no-esc-dismiss
+      persistent
       v-model="toggleModal"
-      :content-css="{padding:'30px',minWidth: '40vw'}"
     >
-      <form>
-        <div class="column group">
-          <div class="text-h6 q-py-md">Are you sure want to reject?</div>
-          <div>
-            <q-input
-              v-model="formData.leadInformation.reason"
-              @blur="$v.formData.leadInformation.reason.$touch"
-              :error="$v.formData.leadInformation.reason.$error"
-              label="Remarks"
-              color="primary"
-            />
-          </div>
-          <div class="group">
-            <q-btn
-              icon="clear"
-              color="negative"
-              class="q-ma-sm float-right"
-              @click="sendRemarks(formData)"
-              align="right"
-              label="Reject"
-            />
-            <q-btn
-              icon="block"
-              color="grey-5"
-              @click="emitToggleRemarks()"
-              class="q-ma-sm float-right text-dark"
-              align="right"
-              v-close-overlay
-              label="Cancel"
-            />
-          </div>
-        </div>
-      </form>
+      <q-card style="min-width: 40vw;">
+        <q-card-section>
+          <div class="text-h6">Are you sure want to reject?</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          <q-input
+            v-model="formData.leadInformation.reason"
+            @blur="v$.formData.leadInformation.reason.$touch"
+            :error="v$.formData.leadInformation.reason.$error"
+            label="Remarks"
+            color="primary"
+            autofocus
+            @keyup.enter="sendRemarks(formData)"
+          />
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn
+            icon="block"
+            color="grey-5"
+            @click="emitToggleRemarks()"
+            class="text-dark"
+            v-close-overlay
+            label="Cancel"
+          />
+          <q-btn
+            icon="clear"
+            color="negative"
+            @click="sendRemarks(formData)"
+            label="Reject"
+          />
+        </q-card-actions>
+      </q-card>
     </q-dialog>
   </div>
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core'
 import {
   required,
   email,
@@ -58,6 +57,9 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   props: ["propToggleLeadModal", "propLeadDetails"],
+  setup() {
+    return { v$: useVuelidate() }
+  },
   data() {
     return {
       toggleModal: this.propToggleLeadModal,
@@ -95,8 +97,8 @@ export default {
       this.$emit("toggleLeadModal");
     },
     sendRemarks(formDataDetails) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({

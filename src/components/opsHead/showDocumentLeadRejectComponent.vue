@@ -2,44 +2,52 @@
   <div>
     <!-- Reject model -->
     <q-dialog
-      minimized
+      persistent
       :model-value="propToggleDocumentRejectModal"
       @hide="emitToggleRemarks()"
       @escape-key="emitToggleRemarks()"
-      :content-css="{padding:'30px',minWidth: '40vw'}"
     >
-      <div class="text-h6 q-mb-sm">{{propDocumentDetails.documentType}}</div>
-      <q-input
-        @blur="$v.formData.leadDetails.reason.$touch"
-        :error="$v.formData.leadDetails.reason.$error"
-        placedholder="Type.."
-        label="Reason"
-        color="grey-9"
-        align="left"
-        v-model="formData.leadDetails.reason"
-      />
-      <q-btn
-        icon="clear"
-        color="negative"
-        class="q-ma-sm float-right"
-        @click="fnRejectLeadFinal(formData,propToggleDocumentRejectModal)"
-        align="right"
-        label="Reject"
-      />
-      <q-btn
-        icon="block"
-        color="grey-5"
-        @click="emitToggleRemarks()"
-        class="q-ma-sm float-right text-dark"
-        align="right"
-        v-close-overlay
-        label="Cancel"
-      />
+      <q-card style="min-width: 40vw;">
+        <q-card-section>
+          <div class="text-h6">{{propDocumentDetails.documentType}}</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          <q-input
+            @blur="v$.formData.leadDetails.reason.$touch"
+            :error="v$.formData.leadDetails.reason.$error"
+            placeholder="Type.."
+            label="Reason"
+            color="grey-9"
+            v-model="formData.leadDetails.reason"
+            autofocus
+            @keyup.enter="fnRejectLeadFinal(formData)"
+          />
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn
+            icon="block"
+            color="grey-5"
+            @click="emitToggleRemarks()"
+            class="text-dark"
+            v-close-overlay
+            label="Cancel"
+          />
+          <q-btn
+            icon="clear"
+            color="negative"
+            @click="fnRejectLeadFinal(formData)"
+            label="Reject"
+          />
+        </q-card-actions>
+      </q-card>
     </q-dialog>
   </div>
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core'
 import {
   required,
   requiredIf,
@@ -54,23 +62,11 @@ import { date } from "quasar";
 import { mapGetters, mapActions } from "vuex";
 export default {
   props: ["propDocumentDetails", "propToggleDocumentRejectModal"],
-
+  setup() {
+    return { v$: useVuelidate() }
+  },
   data() {
     return {
-      // formData: {
-      //   leadDocuments: {
-      //     id: this.propDocumentDetails.id,
-      //     documentVerifiedStatus: 3
-      //   },
-      //   leadVerificationStatus: {
-      //     fieldName: "Document",
-      //     reason: "",
-      //     leadInformation: {
-      //       id: this.propDocumentDetails.leadId
-      //     },
-      //     status: 0
-      //   }
-      // }
       formData: {
         lead: {
           id: this.propDocumentDetails.leadId,
@@ -106,8 +102,8 @@ export default {
     },
 
     fnRejectLeadFinal(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({
@@ -136,14 +132,6 @@ export default {
               icon: "thumb_down"
             });
             this.$q.loading.hide();
-          })
-          .catch(() => {
-            this.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: "No changes made!",
-              icon: "thumb_down"
-            });
           });
       }
     }
