@@ -214,7 +214,11 @@
                     placeholder="Type.."
                     label="Search .. "
                     class="q-mr-lg q-py-sm"
-                  />
+                  >
+                    <template v-slot:prepend>
+                      <q-icon name="search" />
+                    </template>
+                  </q-input>
                 </div>
                 <!--END: table search -->
               </template>
@@ -360,7 +364,11 @@
                     placeholder="Type.."
                     label="Search .. "
                     class="q-mr-lg q-py-sm"
-                  />
+                  >
+                    <template v-slot:prepend>
+                      <q-icon name="search" />
+                    </template>
+                  </q-input>
                 </div>
                 <!--END: table search -->
               </template>

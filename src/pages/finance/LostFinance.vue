@@ -23,17 +23,9 @@
         v-model:pagination="paginationControl"
         row-key="id"
         :loading="toggleAjaxLoadFilter"
-        :rows-per-page-options="[5,10,15,20]"
+        :rows-per-page-options="[5, 10, 15, 20]"
         @request="ajaxLoadAllLeadInfo"
       >
-        <!--START: table header -->
-        <template v-slot:top-row="props">
-          <q-tr>
-            <q-th v-for="col in props.columns" :key="col.name" :props="props">{{ col.label }}</q-th>
-          </q-tr>
-        </template>
-        <!--END: table header -->
-
         <template v-slot:body-cell-tid="props">
           <q-td :props="props">
             <span class="label text-primary"># {{ props.row.tid }}</span>
@@ -100,7 +92,11 @@
               placeholder="Type.."
               label="Search Using Device Serial Number/TID"
               class="q-mr-lg q-py-sm"
-            />
+            >
+              <template v-slot:prepend>
+                <q-icon name="search" />
+              </template>
+            </q-input>
           </div>
         </template>
       </q-table>

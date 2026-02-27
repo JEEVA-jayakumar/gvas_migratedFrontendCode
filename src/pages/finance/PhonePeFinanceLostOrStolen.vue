@@ -6,50 +6,62 @@
       <!-- content -->
       <!--START: table lead validation -->
       <q-pull-to-refresh :handler="PullToRefresh" inline>
-      <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filter" v-model:pagination="paginationControl" row-key="name" :loading="toggleAjaxLoadFilter"
-        :rows-per-page-options="[5, 10, 15, 20]" @request="ajaxLoadAllLeadInfo">
-        <!--START: table header -->
-        <template v-slot:top-row="props">
-          <q-tr>
-            <q-th v-for="col in props.columns" :key="col.name" :props="props">{{ col.label }}</q-th>
-          </q-tr>
+      <q-table
+        table-class="customTableClass"
+        :rows="tableData"
+        :columns="columns"
+        :filter="filter"
+        v-model:pagination="paginationControl"
+        row-key="name"
+        :loading="toggleAjaxLoadFilter"
+        :rows-per-page-options="[5, 10, 15, 20]"
+        @request="ajaxLoadAllLeadInfo"
+      >
+        <template v-slot:body-cell-tid="props">
+          <q-td :props="props">
+            <span class="label text-primary"># {{ props.row.tid }}</span>
+          </q-td>
         </template>
-        <!--END: table header -->
-  
-        <q-td v-slot:body-cell-tid="props" :props="props">
-          <span class="label text-primary"># {{ props.row.tid }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-mid="props" :props="props">
-          <span class="label text-primary"># {{ props.row.mid }}</span>
-        </q-td>
-        <!-- <q-td
-            v-slot:body-cell-leadName="props"
-            :props="props"
-          >{{props.row.leadInformation.leadName}}</q-td>-->
-        <q-td v-slot:body-cell-leadNumber="props" :props="props" class="cursor-pointer"
-          @click="toggleLeadInformation(props.row.leadInformation)">
-          <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-mobileNumber="props" :props="props">{{
-          props.row.leadInformation == null ?
-            'NA' : props.row.leadInformation.contactNumber
-        }}</q-td>
-        <q-td v-slot:body-cell-leadAddress="props" :props="props">{{
-          props.row.leadInformation == null ?
-            'NA' : props.row.leadInformation.leadAddress
-        }}</q-td>
-        <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
-          <q-btn highlight push class="q-mx-sm" color="positive" @click="openReject(props.row)" size="sm">Reject</q-btn>
-          <q-btn highlight push class="q-mx-sm" color="negative" @click="openAccept(props.row)" size="sm">Approve</q-btn>
-        </q-td>
+        <template v-slot:body-cell-mid="props">
+          <q-td :props="props">
+            <span class="label text-primary"># {{ props.row.mid }}</span>
+          </q-td>
+        </template>
+        <template v-slot:body-cell-leadNumber="props">
+          <q-td :props="props" class="cursor-pointer" @click="toggleLeadInformation(props.row.leadInformation)">
+            <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
+          </q-td>
+        </template>
+        <template v-slot:body-cell-mobileNumber="props">
+          <q-td :props="props">
+            {{ props.row.leadInformation == null ? 'NA' : props.row.leadInformation.contactNumber }}
+          </q-td>
+        </template>
+        <template v-slot:body-cell-leadAddress="props">
+          <q-td :props="props">
+            {{ props.row.leadInformation == null ? 'NA' : props.row.leadInformation.leadAddress }}
+          </q-td>
+        </template>
+        <template v-slot:body-cell-deviceStatusDate="props">
+          <q-td :props="props">
+            <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
+          </q-td>
+        </template>
+        <template v-slot:body-cell-action="props">
+          <q-td :props="props">
+            <q-btn highlight push class="q-mx-sm" color="positive" @click="openReject(props.row)" size="sm">Reject</q-btn>
+            <q-btn highlight push class="q-mx-sm" color="negative" @click="openAccept(props.row)" size="sm">Approve</q-btn>
+          </q-td>
+        </template>
         <template v-slot:top="props" class="bottom-border">
           <!--START: table filter,search,excel download -->
           <div class="col-5">
             <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
-              label="Search Using Device Serial Number/TID" class="q-mr-lg q-py-sm" />
+              label="Search Using Device Serial Number/TID" class="q-mr-lg q-py-sm">
+              <template v-slot:prepend>
+                <q-icon name="search" />
+              </template>
+            </q-input>
           </div>
         </template>
       </q-table>

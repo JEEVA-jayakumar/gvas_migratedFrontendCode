@@ -26,54 +26,59 @@
           :rows-per-page-options="[5,10,15,20]"
           @request="ajaxLoadAllLeadInfo"
         >
-         <!--START: table header -->
-          <q-tr v-slot:top-row="props">
-          <q-th v-for="col in props.columns" :key="col.name" :props="props">{{ col.label }}</q-th>  
-          </q-tr>
-          <!--END: table header -->
+          <template v-slot:body-cell-deviceType="props">
+            <q-td :props="props">
+              <span class="label text-primary">
+                {{ props.row.device ? props.row.device.deviceName : 'NA' }}
+              </span>
+            </q-td>
+          </template>
 
-          <q-td v-slot:body-cell-deviceType="props" :props="props">
-            <span class="label text-primary">
-              {{ props.row.device ? props.row.device.deviceName : 'NA' }}
-            </span>
-          </q-td>
+          <template v-slot:body-cell-deviceCount="props">
+            <q-td :props="props">
+              {{props.row == null? 'NA':props.row.deviceCount}}
+            </q-td>
+          </template>
 
+          <template v-slot:body-cell-dateofSubmission="props">
+            <q-td :props="props">
+              <span class="label">{{ $moment(props.row.financeSubmissionDate).format("Do MMM Y") }}</span>
+            </q-td>
+          </template>
 
-          <q-td v-slot:body-cell-deviceCount="props" :props="props">
-          {{props.row == null? 'NA':props.row.deviceCount}}</q-td>
-
-
-          <q-td v-slot:body-cell-dateofSubmission="props" :props="props">
-            <span class="label">{{ $moment(props.row.financeSubmissionDate).format("Do MMM Y") }}</span>
-          </q-td>
           <template v-slot:top="props" class="bottom-border">
-          <!--START: table  :rows-per-page-options="[5,10,15,20,25]"filter,search -->
-          <div class="col">
-            <q-input
-              clearable
-              color="grey-9"
-              v-model="filter"
-              placeholder="Type.."
-              label="Search by Request Number"
-              class="q-mr-lg q-py-sm"
-            />
-          </div>
-          <div class="col-md-6">
-           
-            <q-btn 
-            square 
-            outline 
-            color="purple-9" 
-            label="Download Report" 
-            class="q-mr-lg q-py-sm float-right" 
-            size="md" 
-            @click="downloadPOSReport()" />
-           
-          </div>
-          <!--END: table filter,search -->
-        </template>
+            <!--START: table  :rows-per-page-options="[5,10,15,20,25]"filter,search -->
+            <div class="col">
+              <q-input
+                clearable
+                color="grey-9"
+                v-model="filter"
+                placeholder="Type.."
+                label="Search by Request Number"
+                class="q-mr-lg q-py-sm"
+              >
+                <template v-slot:prepend>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
+            </div>
+            <div class="col-md-6">
 
-          <q-td v-slot:body-cell-action="props" :props="props">
+              <q-btn
+              square
+              outline
+              color="purple-9"
+              label="Download Report"
+              class="q-mr-lg q-py-sm float-right"
+              size="md"
+              @click="downloadPOSReport()" />
+
+            </div>
+            <!--END: table filter,search -->
+          </template>
+
+          <template v-slot:body-cell-action="props">
+                <q-td :props="props">
                   <q-btn
                     v-if ="props.row.status == 0"
                     push
@@ -112,6 +117,7 @@
                     >View Invoice Copy</q-btn
                   >
                 </q-td>
+          </template>
           <!-- <q-td v-slot:body-cell-action="props" :props="props">
               <q-btn
                highlight

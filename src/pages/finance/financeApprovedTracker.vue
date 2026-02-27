@@ -72,7 +72,11 @@
                     placeholder="Type.."
                     label="Search .. "
                     class="q-mr-lg q-py-sm"
-                  />
+                  >
+                    <template v-slot:prepend>
+                      <q-icon name="search" />
+                    </template>
+                  </q-input>
                 </div>
                 <div class="col-md-3"></div>
                 <div class="col-md-4" align="right">
@@ -139,7 +143,11 @@
                     placeholder="Type.."
                     label="Search .. "
                     class="q-mr-lg q-py-sm"
-                  />
+                  >
+                    <template v-slot:prepend>
+                      <q-icon name="search" />
+                    </template>
+                  </q-input>
                 </div>
                 <div class="col-md-3"></div>
                 <div class="col-md-4" align="right">
