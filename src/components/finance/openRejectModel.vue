@@ -13,7 +13,7 @@
           placeholder="Remarks"
           label="Reject Remarks"
           class="q-my-md"
-          color="grey-9"
+          color="purple-9"
           v-model="formData.regionalInventory.lostOrStolenRemarks"
           :error="v$.formData.regionalInventory.lostOrStolenRemarks.$error"
           error-message="Remarks are required"
@@ -27,6 +27,7 @@
     </q-card>
   </q-dialog>
 </template>
+
 <script>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from "@vuelidate/validators";
@@ -77,7 +78,7 @@ export default {
           cancel: "Cancel"
         }).onOk(() => {
           this.$q.loading.show({
-            delay: 0, // ms
+            delay: 0,
             spinnerColor: "purple-9",
             message: "Processing .."
           });

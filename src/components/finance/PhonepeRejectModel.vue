@@ -27,6 +27,7 @@
     </q-card>
   </q-dialog>
 </template>
+
 <script>
 import { useVuelidate } from '@vuelidate/core';
 import { required } from "@vuelidate/validators";

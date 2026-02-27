@@ -1,6 +1,7 @@
 <template>
   <q-page>
-    <div class="q-pa-md">
+    <div class="q-pa-none">
+      <q-pull-to-refresh :handler="PullToRefresh" inline>
         <!--START: table title -->
         <div
           class="col-md-12 capitalize text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
@@ -344,7 +345,7 @@
                           class="text-left"
                           v-if="(props.row.chequeNumber == '' || props.row.chequeNumber == null) && (props.row.neftId == '' || props.row.neftId == null)"
                         >NA</div>
-                        <div class="text-left" v-else>{{ props.row.chequeNumber || props.row.neftId || 'NA' }}</div>
+                        <div class="text-left" v-else>{{ (props.row.chequeNumber != null && props.row.chequeNumber != '') ? props.row.chequeNumber : props.row.neftId }}</div>
                       </div>
                     </div>
                   </q-td>
@@ -375,6 +376,7 @@
             </q-table>
           </q-tab-panel>
         </q-tab-panels>
+      </q-pull-to-refresh>
      
       <!-- //Common lead information in popup -->
       <generalLeadInformation
@@ -637,7 +639,35 @@ export default {
       if (this.$refs.multiAttachedImageViewerUploadedBySAT) {
         this.$refs.multiAttachedImageViewerUploadedBySAT.click();
       }
+    },
+    fnShowCellIfBankSubvention(rowDetails) {
+      const self = this;
+      const returnValue = _.filter(rowDetails, function(value) {
+        return (
+          value.verificationType === self.$VERIFICATION_TYPE_BANKSUBVENTION
+        );
+      });
+      return returnValue.length > 0 ? true : false;
+    },
+    fnShowBankUploadedDocumentBySat(rowDetails) {
+      const self = this;
+      const returnValue = _.filter(rowDetails, function(value) {
+        return (
+          value.verificationType === self.$VERIFICATION_TYPE_BANKSUBVENTION &&
+          value.status
+        );
+      });
+      return returnValue;
     }
   }
 };
 </script>
+
+<style>
+.payment_verification_table i {
+  transition: none !important;
+}
+.q-table tbody td {
+  word-wrap: break-word !important;
+}
+</style>
