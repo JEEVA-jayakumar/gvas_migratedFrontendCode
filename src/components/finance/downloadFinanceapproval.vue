@@ -43,15 +43,13 @@
                 align="right"
                 class="bg-white text-weight-regular text-grey-8 q-mr-sm"
                 @click="emitfnshowFinanceapproval()"
-                >Cancel</q-btn
-              >
+              >Cancel</q-btn>
               <q-btn
                 align="right"
                 @click="downloadApproval(formData)"
                 :disabled="submitDisabled"
                 color="purple-9"
-                >Download</q-btn
-              >
+              >Download</q-btn>
             </div>
           </div>
         </form>
@@ -61,24 +59,11 @@
 </template>
 
 <script>
-
-
-import {
-  required,
-  email,
-  password,
-  minLength,
-  maxLength,
-  alpha,
-  alphaNum,
-  numeric,
-  sameAs
-} from "@vuelidate/validators";
-
 import { date } from "quasar";
 const today = new Date();
-const { startOfDate, addToDate, subtractFromDate } = date;
-import { mapGetters, mapActions } from "vuex";
+const { addToDate, subtractFromDate } = date;
+import { mapActions } from "vuex";
+
 export default {
   props: ["propFinanceApprovalDatas"],
   data() {
@@ -86,39 +71,35 @@ export default {
       tomorrow: addToDate(today, { days: 0 }),
       yesterday: subtractFromDate(today, { days: 7720 }),
       state: new Date(),
-      defaultValue: startOfDate(today, "year"),
-      formData:{
-        fromDate:"",
-        toDate:""
+      formData: {
+        fromDate: "",
+        toDate: ""
       },
-      }
-      
-    
+    };
   },
 
   computed: {
-    submitDisabled: function() {
+    submitDisabled: function () {
       return !this.formData.fromDate || !this.formData.toDate;
     }
   },
   methods: {
-...mapActions("DownloadMasterTrackerData", ["FINANCE_APPROVAL_TRACKER"]),
-      emitfnshowFinanceapproval() {
+    ...mapActions("DownloadMasterTrackerData", ["FINANCE_APPROVAL_TRACKER"]),
+    emitfnshowFinanceapproval() {
       this.$emit("emitfnshowFinanceapproval");
-     },
-   
-     downloadApproval(request) {
-     let params = {
+    },
+    downloadApproval(request) {
+      let params = {
         fromDate: this.toTimestamp(request.fromDate.toString()),
         toDate: this.toTimestamp(request.toDate.toString())
       };
       this.$q.loading.show({
-          delay: 100, 
-          spinnerColor: "purple-9",
-          message: "Please wait.."
+        delay: 100,
+        spinnerColor: "purple-9",
+        message: "Please wait.."
       });
       this.FINANCE_APPROVAL_TRACKER(params)
-        .then(response => {
+        .then(() => {
           this.$emit("emitfnshowFinanceapproval");
           this.$q.loading.hide();
           this.$q.notify({
@@ -127,87 +108,45 @@ export default {
             message: "Success, file has been downloaded",
             icon: "thumb_up"
           });
-          this.formData.fromDate="",
-          this.formData.toDate=""
-    
-          
+          this.formData.fromDate = "";
+          this.formData.toDate = "";
         })
         .catch(error => {
           this.$q.loading.hide();
-          if(error.status==400){
-            this.$q.notify({
-            color: "amber",
-            position: "bottom",
-            message: "Output file size is high,Select smaller date range",
-            icon: "thumb_down"
-          });
-          }
-          else if(error.status == 500){
-            this.$q.notify({
-            color: "amber",
-            position: "bottom",
-            message: "INTERNAL_SERVER_ERROR",
-            icon: "thumb_down"
-          });
-
-          }
-          else if(error.status == 403){
-            this.$q.notify({
-            color: "amber",
-            position: "bottom",
-            message:  "please choose some another date",
-            icon: "thumb_down"
-          });
-
-          }
+          let message = "Please select the field";
+          if (error.status == 400) message = "Output file size is high, Select smaller date range";
+          else if (error.status == 500) message = "INTERNAL_SERVER_ERROR";
+          else if (error.status == 403 || error.status == 404) message = "please choose some another date";
           
-          else if(error.status == 404){
-            this.$q.notify({
+          this.$q.notify({
             color: "amber",
             position: "bottom",
-            message:  "please choose some another date",
-            icon: "thumb_down"
-            });
-          }
-          else{
-             this.$q.notify({
-            color: "amber",
-            position: "bottom",
-            message:  "Please select the field",
+            message: message,
             icon: "thumb_down"
           });
-          }
-
-          this.formData.fromDate="",
-          this.formData.toDate=""
-          
-
+          this.formData.fromDate = "";
+          this.formData.toDate = "";
         });
-
     },
     toTimestamp(strDate) {
-      var date = strDate.split("T")[0]
-      var curDate = new Date();      
-      var mnth = curDate.getMonth()+1;
-      var chDate = curDate.getFullYear()+"-"+(mnth < 10 ? "0"+mnth : mnth)+"-"+curDate.getDate();
-      var datum = null
-      if (chDate == date) 
+      var date = strDate.split("T")[0];
+      var curDate = new Date();
+      var mnth = curDate.getMonth() + 1;
+      var chDate = curDate.getFullYear() + "-" + (mnth < 10 ? "0" + mnth : mnth) + "-" + curDate.getDate();
+      var datum = null;
+      if (chDate == date)
         datum = Date.now();
       else
         datum = Date.parse(strDate);
       return datum;
-    },
-    COMMON_FILTER_FUNCTION(arraySet, terms) {
-      return _.filter(arraySet, function(oo) {
-        return oo.label.toString().includes(terms.toLowerCase());
-      });
-    },
+    }
   }
 };
 </script>
+
 <style scoped>
 .error {
-  color: red; 
+  color: red;
   font-size: 12px;
   position: absolute;
   text-transform: lowercase;

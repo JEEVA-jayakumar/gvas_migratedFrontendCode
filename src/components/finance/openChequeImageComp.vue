@@ -20,15 +20,10 @@
     </q-card>
   </q-dialog>
 </template>
+
 <script>
 export default {
   props: ["showChequeImage", "chequeImagevalue"],
-
-  data() {
-    return {
-    };
-  },
-
   methods: {
     emitToggleCheque() {
       this.$emit("closeChequeImage");

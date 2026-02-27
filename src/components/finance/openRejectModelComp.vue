@@ -41,7 +41,7 @@
             label="Others"
           />
         </div>
-        <div v-if="v$.formData.leadVerificationStatus.reasonType.$error" class="text-negative text-caption">
+        <div v-if="v$.formData.leadVerificationStatus.reasonType.$error" class="text-negative text-caption q-mt-sm">
           Reason type is required
         </div>
         <q-input
@@ -65,6 +65,7 @@
     </q-card>
   </q-dialog>
 </template>
+
 <script>
 import { useVuelidate } from '@vuelidate/core';
 import { required, requiredIf } from "@vuelidate/validators";
@@ -83,7 +84,7 @@ export default {
           verifiedFinanceStatus: 3
         },
         leadVerificationStatus: {
-          status: 0,
+          status: 2,
           fieldName: "Finance",
           reasonType: "",
           reason: ""

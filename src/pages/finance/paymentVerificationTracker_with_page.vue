@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <div>
+    <div class="q-pa-none">
       <q-pull-to-refresh :handler="PullToRefresh" inline>
         <!--START: table title -->
         <div
@@ -18,19 +18,21 @@
           :rows-per-page-options="[5,10,15,20]"
           @request="ajaxLoadAllPaymentTrackerInfo"
           table-style="word-break: break-all"
-          class="payment_verification_table capitalize"
+          class="payment_verification_table capitalize shadow-0"
         >
           <!--START: table header -->
-          <q-tr v-slot:top-row="props">
-            <q-th v-for="col in props.columns" :key="col.name" :props="props">{{ col.label }}</q-th>
-          </q-tr>
+          <template v-slot:top-row="props">
+            <q-tr>
+              <q-th v-for="col in props.columns" :key="col.name" :props="props">{{ col.label }}</q-th>
+            </q-tr>
+          </template>
           <!--END: table header -->
           <!--START: Table body -->
           <template v-slot:body="props">
             <!--START: table rows -->
             <q-tr :props="props" class="bottom-border">
               <!--START: table expand button :Checkbox -->
-              <q-td auto-width key="id" :props="props">
+              <q-td key="leadInformation.leadNumber" :props="props">
                 <q-checkbox
                   color="grey-9"
                   v-model="props.row.expand"
@@ -42,32 +44,23 @@
                 <span
                   class="cursor-pointer"
                   :class="[props.row.priority?'text-negative text-weight-bolder':'text-primary']"
-                  @click.prevent="toggleLeadInformation(props.row)"
+                  @click="toggleLeadInformation(props.row)"
                 ># {{ props.row.leadNumber }}</span>
               </q-td>
               <!--END: table expand button :Checkbox -->
               <!--START: table other data -->
-              <q-td auto-width key="createdBy" :props="props">{{ props.row.createdBy.name }}</q-td>
-              <q-td auto-width key="leadName" :props="props">{{ props.row.leadName }}</q-td>
-
-              <q-td auto-width key="leadAddress" :props="props">
-                {{ props.row.leadAddress == "null" ? '': props.row.leadAddress }}
-                <p class="capitalize no-margin">{{props.row.city}}, {{props.row.state}}</p>
-              </q-td>
-
-              <q-td auto-width key="state" :props="props">{{ props.row.state }}</q-td>
-
-              <q-td auto-width key="leadSource" :props="props">{{props.row.leadSource.sourceName}}</q-td>
-
+              <q-td key="assignedTo.name" :props="props">{{ props.row.name }}</q-td>
+              <q-td key="leadInformation.leadName" :props="props">{{ props.row.leadName }}</q-td>
+              <q-td key="leadInformation.leadAddress" :props="props">{{props.row.leadAddress }}</q-td>
+              <q-td key="state" :props="props">{{ props.row.state }}</q-td>
+              <q-td key="leadSource.sourceName" :props="props">{{props.row.leadSource}}</q-td>
               <q-td
-                auto-width
-                key="device"
+                key="deviceCount"
                 :props="props"
-              >{{ props.row.deviceCount }}-{{ props.row.device.deviceName }}</q-td>
+              >{{ props.row.deviceCount }}-{{ props.row.deviceName }}</q-td>
 
-              <q-td auto-width key="action" :props="props">
+              <q-td key="action" :props="props">
                 <q-btn
-                  highlight
                   push
                   outline
                   class="q-mx-sm"
@@ -76,13 +69,12 @@
                   size="sm"
                 >Reject</q-btn>
                 <q-btn
-                  highlight
                   push
                   outline
                   class="q-mx-sm"
                   color="purple-9"
                   size="sm"
-                  @click="financeApproveSubmit(props.row.id)"
+                  @click="financeApproveSubmit(props.row.leadId)"
                 >Approve</q-btn>
               </q-td>
               <!--END: table other data -->
@@ -90,118 +82,111 @@
             <!--END: table rows -->
             <!-- START: table expand values -->
             <q-tr v-show="props.row.expand" :props="props" class="wordWrapCustom bottom-border">
-              <q-td>
-                <div class="text-left text-caption text-grey-8 text-weight-medium">Rental Plan</div>
-                <div
-                  class="text-left"
-                  v-if="props.row.plan.planName == '' || props.row.plan.planName == null"
-                >NA</div>
-                <div class="text-left" v-else>{{ props.row.plan.planName }}</div>
-              </q-td>
-              <q-td>
-                <div class="text-left text-caption text-grey-8 text-weight-medium">Amount Collected</div>
-                <div class="text-left" v-if="props.row.amountCollected == null">NA</div>
-                <div class="text-left" v-else>{{ props.row.amountCollected }}</div>
-              </q-td>
-              <q-td>
-                <div class="text-left text-caption text-grey-8 text-weight-medium">Payment Type</div>
-                <div v-if="props.row.paymentOption == 2" class="text-left">
-                  <div>Cheque</div>
-                  <div v-if="props.row.paymentDocumentMimeType != null">
+              <q-td colspan="100%">
+                <div class="row q-col-gutter-md">
+                  <div class="col-md-2">
+                    <div class="text-left text-caption text-grey-8 text-weight-medium">Rental Plan</div>
                     <div
-                      v-if="props.row.paymentDocumentMimeType.includes('pdf')"
-                      class="cursor-pointer"
-                    >
-                      <div @click="fnPDFViewModal(props.row.paymentDocumentFile)">
-                        <q-icon name="fas fa-file-pdf" color="primary" />
-                        &nbsp;{{props.row.paymentDocumentFile}}
-                      </div>
-                    </div>
-                    <div
-                      v-else-if="props.row.paymentDocumentMimeType.includes('image')"
-                      class="cursor-pointer"
-                    >
-                      <div @click="fnViewMultiAttachedFileImage(props.row)">
-                        <viewer
-                          :images="[GLOBAL_FILE_FETCH_URL+ '/'+props.row.paymentDocumentFile]"
-                          class="hidden"
+                      class="text-left"
+                      v-if="props.row.plan.planName == '' || props.row.plan.planName == null"
+                    >NA</div>
+                    <div class="text-left" v-else>{{ props.row.plan.planName }}</div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="text-left text-caption text-grey-8 text-weight-medium">Amount Collected</div>
+                    <div class="text-left" v-if="props.row.amountCollected == null">NA</div>
+                    <div class="text-left" v-else>{{ props.row.amountCollected }}</div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="text-left text-caption text-grey-8 text-weight-medium">Payment Type</div>
+                    <div v-if="props.row.paymentOption == 2" class="text-left">
+                      <div>Cheque</div>
+                      <div v-if="props.row.paymentDocumentMimeType != null">
+                        <div
+                          v-if="props.row.paymentDocumentMimeType.includes('pdf')"
+                          class="cursor-pointer"
                         >
-                          <img
-                            :src="[GLOBAL_FILE_FETCH_URL+ '/'+props.row.paymentDocumentFile]"
-                            ref="multiAttachedImageViewer"
-                            style="max-width:100%"
-                          />
-                        </viewer>
-                        <q-icon name="fas fa-image" color="amber-9" />
-                        &nbsp;{{props.row.paymentDocumentFile}}
+                          <div @click="fnPDFViewModal(props.row.paymentDocumentFile)">
+                            <q-icon name="fas fa-file-pdf" color="primary" />
+                            &nbsp;{{props.row.paymentDocumentFile}}
+                          </div>
+                        </div>
+                        <div
+                          v-else-if="props.row.paymentDocumentMimeType.includes('image')"
+                          class="cursor-pointer"
+                        >
+                          <div @click="fnViewMultiAttachedFileImage(props.row)">
+                            <div v-viewer class="hidden">
+                              <img
+                                :src="GLOBAL_FILE_FETCH_URL+ '/'+props.row.paymentDocumentFile"
+                                ref="multiAttachedImageViewer"
+                                style="max-width:100%"
+                              />
+                            </div>
+                            <q-icon name="fas fa-image" color="amber-9" />
+                            &nbsp;{{props.row.paymentDocumentFile}}
+                          </div>
+                        </div>
+                        <div v-else>No document attached</div>
                       </div>
                     </div>
-                    <div v-else>No document attached</div>
+                    <div v-else-if="props.row.paymentOption == 3" class="text-left">Swipe</div>
+                    <div v-else-if="props.row.paymentOption == 1" class="text-left">NEFT</div>
+                    <div v-else-if="props.row.paymentOption == 4" class="text-left">UPI LINK</div>
+                    <div v-else class="text-left">NA</div>
                   </div>
-                </div>
-                <div v-else-if="props.row.paymentOption == 3" class="text-left">Swipe</div>
-                <div v-else-if="props.row.paymentOption == 1" class="text-left">NEFT</div>
-                <div v-else class="text-left">NA</div>
-              </q-td>
-              <q-td>
-                <div class="text-left text-caption text-grey-8 text-weight-medium">Payment Date</div>
-                <div
-                  class="text-left"
-                  v-if="props.row.paymentMadeon == '' || props.row.paymentMadeon == null"
-                >NA</div>
-                <div class="text-left" v-else>{{ $moment(props.row.paymentMadeon).format("Do MMM Y") }}</div>
-              </q-td>
-              <q-td>
-                <div class="text-left text-caption text-grey-8 text-weight-medium">Payment Reference</div>
-                <div
-                  class="text-left"
-                  v-if="props.row.referenceNumber == '' || props.row.referenceNumber == null"
-                >NA</div>
-                <div class="text-left" v-else>{{ props.row.referenceNumber }}</div>
-              </q-td>
-              <q-td colspan="2">
-                <div
-                  class="text-left text-caption text-grey-8 text-weight-medium"
-                >Document Uploaded by SAT</div>
-                <div
-                  class="text-left"
-                  v-if="fnShowCellIfBankSubvention(props.row.leadVerificationStatus)"
-                >
-                  <div
-                    v-if="fnShowBankUploadedDocumentBySat(props.row.leadVerificationStatus)[0].mimeType.includes('pdf')"
-                    class="cursor-pointer"
-                  >
+                  <div class="col-md-2">
+                    <div class="text-left text-caption text-grey-8 text-weight-medium">Payment Date</div>
                     <div
-                      @click="fnPDFViewModal(fnShowBankUploadedDocumentBySat(props.row.leadVerificationStatus)[0].bankAttachedFile)"
-                    >
-                      <q-icon name="fas fa-file-pdf" color="primary" />
-                      &nbsp;{{fnShowBankUploadedDocumentBySat(props.row.leadVerificationStatus)[0].bankAttachedFile}}
-                    </div>
+                      class="text-left"
+                      v-if="props.row.paymentMadeon == '' || props.row.paymentMadeon == null"
+                    >NA</div>
+                    <div class="text-left" v-else>{{ $moment(props.row.paymentMadeon).format("Do MMM Y") }}</div>
                   </div>
-                  <div
-                    v-else-if="fnShowBankUploadedDocumentBySat(props.row.leadVerificationStatus)[0].mimeType.includes('image')"
-                    class="cursor-pointer"
-                  >
+                  <div class="col-md-2">
+                    <div class="text-left text-caption text-grey-8 text-weight-medium">Payment Reference</div>
                     <div
-                      @click="fnViewMultiAttachedFileImageUploadedBySat(fnShowBankUploadedDocumentBySat(props.row.leadVerificationStatus)[0])"
+                      class="text-left"
+                      v-if="props.row.referenceNumber == '' || props.row.referenceNumber == null"
+                    >NA</div>
+                    <div class="text-left" v-else>{{ props.row.referenceNumber }}</div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="text-left text-caption text-grey-8 text-weight-medium">Document Uploaded by SAT</div>
+                    <div
+                      class="text-left"
+                      v-if="props.row.leadVerificationStatusMimeType != '' && props.row.leadVerificationStatusMimeType != null"
                     >
-                      <viewer
-                        :images="[GLOBAL_FILE_FETCH_URL+ '/'+fnShowBankUploadedDocumentBySat(props.row.leadVerificationStatus)[0].bankAttachedFile]"
-                        class="hidden"
+                      <div
+                        v-if="props.row.leadVerificationStatusMimeType.includes('pdf')"
+                        class="cursor-pointer"
                       >
-                        <img
-                          :src="[GLOBAL_FILE_FETCH_URL+ '/'+fnShowBankUploadedDocumentBySat(props.row.leadVerificationStatus)[0].bankAttachedFile]"
-                          ref="multiAttachedImageViewerUploadedBySAT"
-                          style="max-width:100%"
-                        />
-                      </viewer>
-                      <q-icon name="fas fa-image" color="amber-9" />
-                      &nbsp;{{fnShowBankUploadedDocumentBySat(props.row.leadVerificationStatus)[0].bankAttachedFile}}
+                        <div @click="fnPDFViewModal(props.row.leadVerificationStatusBankAttachedFile)">
+                          <q-icon name="fas fa-file-pdf" color="primary" />
+                          &nbsp;{{props.row.leadVerificationStatusBankAttachedFile}}
+                        </div>
+                      </div>
+                      <div
+                        v-else-if="props.row.leadVerificationStatusMimeType.includes('image')"
+                        class="cursor-pointer"
+                      >
+                        <div @click="fnViewMultiAttachedFileImageUploadedBySat()">
+                          <div v-viewer class="hidden">
+                            <img
+                              :src="GLOBAL_FILE_FETCH_URL+ '/'+props.row.leadVerificationStatusBankAttachedFile"
+                              ref="multiAttachedImageViewerUploadedBySAT"
+                              style="max-width:100%"
+                            />
+                          </div>
+                          <q-icon name="fas fa-image" color="amber-9" />
+                          &nbsp;{{props.row.leadVerificationStatusBankAttachedFile}}
+                        </div>
+                      </div>
+                      <div v-else>No document attached</div>
                     </div>
+                    <div v-else class="text-left">NA</div>
                   </div>
-                  <div v-else>No document attached</div>
                 </div>
-                <div v-else>NA</div>
               </q-td>
             </q-tr>
             <!--END: table expand values -->
@@ -218,7 +203,11 @@
                 placeholder="Type.."
                 label="Search"
                 class="q-mr-lg q-py-sm"
-              />
+              >
+                <template v-slot:prepend>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
             </div>
             <!--END: table search -->
           </template>
@@ -233,16 +222,16 @@
         :propToggleLeadInformationPop="propToggleLeadInformation"
         @closeLeadInformation="toggleLeadInformation"
       />
-
       <!--START: Open Reject model -->
       <openRejectModelComp
         v-if="showRejectModel"
         :showRejectModel="showRejectModel"
         :propShowRejectComponent="propsRejectAppend"
-        @reloadPaymentTrackerData="ajaxLoadAllPaymentTrackerInfo"
+        @reloadPaymentTrackerData="ajaxLoadAllPaymentTrackerInfo({ pagination: paginationControl,filter: filter })"
         @closeRejectModel="openRejectModel"
       ></openRejectModelComp>
       <!--END: Open Reject model -->
+
       <!-- START >> COMPONENT: View PDF  -->
       <showPdfModalComponent
         v-if="toggleshowPDFModal"
@@ -256,15 +245,13 @@
 </template>
 
 <script>
-import { required, or } from '@vuelidate/validators';
 import openRejectModelComp from "../../components/finance/openRejectModelComp.vue";
 import showPdfModalComponent from "../../components/sat/showPdfModalComponent.vue";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
-
-import openChequeImageComp from "../../components/finance/openChequeImageComp.vue";
 import { mapGetters, mapActions } from "vuex";
+
 export default {
-  name: "paymentVerificationTrackerModule",
+  name: "PaymentVerificationTrackerWithPage",
   components: {
     openRejectModelComp,
     showPdfModalComponent,
@@ -274,130 +261,34 @@ export default {
     return {
       propToggleLeadInformation: false,
       addtnLeadInformation: null,
-
       toggleshowPDFModal: false,
       PDFDetails: "",
       paginationControl: {
         rowsNumber: 10,
         page: 1,
+        sortBy: "leadNumber",
+        descending: true,
         rowsPerPage: 10
       },
-
       propsRejectAppend: [],
-      // Open reject model
       showRejectModel: false,
-
-      //showChequeImage
-      showChequeImage: false,
-
-      // To expand table rows
       filter: "",
-
-      // Datatable data
       columns: [
-        {
-          name: "id",
-          required: true,
-          label: "Lead Number",
-          align: "left",
-          field: row => {
-            return "# " + row.leadNumber;
-          },
-          sortable: true
-        },
-        {
-          name: "createdBy",
-          required: true,
-          label: "SO Name",
-          align: "left",
-          field: row => {
-            return row.createdBy.name;
-          },
-          sortable: true
-        },
-        {
-          name: "leadName",
-          required: true,
-          label: "Merchant Name",
-          align: "left",
-          field: "leadName",
-          sortable: true
-        },
-        {
-          name: "leadAddress",
-          required: true,
-          label: "Address",
-          align: "left",
-          field: "leadAddress",
-          sortable: true
-        },
-        {
-          name: "state",
-          required: true,
-          label: "State",
-          align: "left",
-          field: "state",
-          sortable: true
-        },
-        {
-          name: "leadSource",
-          required: true,
-          label: "Lead Source/Bank Name",
-          align: "left",
-          field: "leadSource",
-          sortable: true
-        },
-        {
-          name: "device",
-          required: true,
-          label: "Device Type & Count",
-          align: "left",
-          field: "device",
-          sortable: true
-        },
-        {
-          name: "action",
-          required: true,
-          label: "",
-          align: "center",
-          field: "action",
-          sortable: true
-        }
+        { name: "leadInformation.leadNumber", required: true, label: "Lead Number", align: "left", field: row => "# " + row.leadNumber, sortable: true },
+        { name: "assignedTo.name", required: true, label: "SO Name", align: "left", field: "name", sortable: true },
+        { name: "leadInformation.leadName", required: true, label: "Merchant Name", align: "left", field: "leadName", sortable: true },
+        { name: "leadInformation.leadAddress", required: true, label: "Address", align: "left", field: "leadAddress", sortable: true },
+        { name: "state", required: true, label: "State", align: "left", field: "state", sortable: true },
+        { name: "leadSource.sourceName", required: true, label: "Lead Source/Bank Name", align: "left", field: "leadSource", sortable: true },
+        { name: "deviceCount", required: true, label: "Device Type & Count", align: "left", field: "device", sortable: true },
+        { name: "action", required: true, label: "", align: "center", field: "action", sortable: false }
       ],
-      loading: false,
-      tableData: [],
-      lazy: [],
-      error: true,
-      warning: false,
-      filter_values: "",
-      filter_options: [
-        {
-          label: "Google",
-          value: "goog"
-        },
-        {
-          label: "Facebook",
-          value: "fb"
-        },
-        {
-          label: "Twitter",
-          value: "twtr"
-        },
-        {
-          label: "Apple Inc.",
-          value: "appl"
-        },
-        {
-          label: "Oracle",
-          value: "ora"
-        }
-      ]
+      tableData: []
     };
   },
   computed: {
     ...mapGetters("GlobalVariables", ["GLOBAL_FILE_FETCH_URL"]),
     ...mapGetters("Finance", ["getPaymentTrackerInfo"]),
-    ...mapGetters("commonLoader", ["getToggleCommonLoader"])
   },
   mounted() {
     this.ajaxLoadAllPaymentTrackerInfo({
@@ -406,134 +297,75 @@ export default {
     });
   },
   methods: {
-    ...mapActions("Finance", [
-      "FETCH_ALL_PAYMENT_TRACKER_DATA",
-      "APPROVE_FINANCE_EXCEPTION",
-      "REJECT_FINANCE_EXCEPTION"
-    ]),
-
-    //Function pull to refresh
+    ...mapActions("Finance", ["FETCH_ALL_PAYMENT_TRACKER_DATA", "APPROVE_FINANCE_EXCEPTION", "REJECT_FINANCE_EXCEPTION"]),
     PullToRefresh(done) {
-      this.ajaxLoadAllPaymentTrackerInfo({
-        pagination: this.paginationControl,
-        filter: this.filter
-      });
+      this.ajaxLoadAllPaymentTrackerInfo({ pagination: this.paginationControl, filter: this.filter });
+      done();
     },
-
-    // Function to toggle lead information pop up screen
     toggleLeadInformation(leadDetails) {
       this.propToggleLeadInformation = !this.propToggleLeadInformation;
-      if (leadDetails != undefined) {
-        this.addtnLeadInformation = leadDetails;
-      }
+      if (leadDetails != undefined) this.addtnLeadInformation = leadDetails;
     },
-
     ajaxLoadAllPaymentTrackerInfo({ pagination, filter }) {
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Fetching data .."
-      });
+      this.$q.loading.show({ delay: 0, spinnerColor: "purple-9", message: "Fetching data .." });
       this.FETCH_ALL_PAYMENT_TRACKER_DATA({ pagination, filter }).then(response => {
-          // updating pagination to reflect in the UI
           this.paginationControl = pagination;
-
-          // we also set (or update) rowsNumber
           this.paginationControl.rowsNumber = this.getPaymentTrackerInfo.totalElements;
           this.paginationControl.page = this.getPaymentTrackerInfo.number + 1;
-
-          // then we update the rows with the fetched ones
           this.tableData = this.getPaymentTrackerInfo.content;
-
-          // finally we tell QTable to exit the "loading" state
+          if (this.getPaymentTrackerInfo.sort != null) {
+            this.paginationControl.sortBy = this.getPaymentTrackerInfo.sort[0].property;
+            this.paginationControl.descending = this.getPaymentTrackerInfo.sort[0].ascending;
+          }
           this.$q.loading.hide();
         })
-        .catch(error => {
-          this.$q.loading.hide();
-        });
+        .catch(() => { this.$q.loading.hide(); });
     },
-
     openRejectModel(exceptionDetails) {
       this.showRejectModel = !this.showRejectModel;
       this.propsRejectAppend = exceptionDetails;
     },
-
-    openChequeImage(chequeImagevalue) {
-      this.showChequeImage = !this.showChequeImage;
-      this.chequeImagevalue = chequeImagevalue;
-    },
-
     financeApproveSubmit(exceptionDetails) {
-      this.$q
-        .dialog({
-          title: "Confirm",
-          message: "Are you sure want to approve the lead?",
-          ok: "Continue",
-          cancel: "Cancel"
-        }).onOk(() => {
-          this.$q.loading.show({
-            delay: 0, // ms
-            spinnerColor: "purple-9",
-            message: "Processing .."
+      this.$q.dialog({
+        title: "Confirm",
+        message: "Are you sure want to approve the lead?",
+        ok: "Continue",
+        cancel: "Cancel"
+      }).onOk(() => {
+        this.$q.loading.show({ delay: 0, spinnerColor: "purple-9", message: "Processing .." });
+        let usersSelectSync = {
+          leadInformation: { verifiedFinanceStatus: 1 },
+          leadVerificationStatus: { status: 1, fieldName: "Finance" },
+          leadId: exceptionDetails
+        };
+        this.APPROVE_FINANCE_EXCEPTION(usersSelectSync)
+          .then(() => {
+            this.ajaxLoadAllPaymentTrackerInfo({ pagination: this.paginationControl, filter: this.filter });
+            this.$q.loading.hide();
+            this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Approved!", icon: "thumb_up" });
+          }).catch(error => {
+            this.$q.loading.hide();
+            this.$q.notify({ color: "negative", position: "bottom", message: error.body && error.body.message ? error.body.message : "Please Try Again Later !", icon: "thumb_down" });
           });
-          let usersSelectSync = {
-            leadInformation: {
-              verifiedFinanceStatus: 1
-            },
-            leadVerificationStatus: {
-              status: 1,
-              fieldName: "Finance"
-            },
-            leadId: exceptionDetails
-          };
-
-          this.APPROVE_FINANCE_EXCEPTION(usersSelectSync)
-            .then(() => {
-              this.ajaxLoadAllPaymentTrackerInfo();
-              this.$q.loading.hide();
-              this.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: "Successfully Approved!",
-                icon: "thumb_up"
-              });
-            }).onCancel(error => {
-              this.$q.loading.hide();
-              this.$q.notify({
-                color: "negative",
-                position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-                icon: "thumb_down"
-              });
-            });
-        })
-        .catch(() => {
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "No changes made!",
-            icon: "thumb_down"
-          });
-        });
+      });
     },
-
-    expandRowPlease(value) {},
-
-    // Function to show PDF
+    expandRowPlease(value) {
+      value.expand = !value.expand;
+    },
     fnPDFViewModal(documentUrl) {
-      console.log(documentUrl);
       this.PDFDetails = documentUrl;
       this.toggleshowPDFModal = !this.toggleshowPDFModal;
     },
-
-    fnViewMultiAttachedFileImage(attachedImageIndex) {
-      this.$refs.multiAttachedImageViewer.click();
+    fnViewMultiAttachedFileImage() {
+      if (this.$refs.multiAttachedImageViewer) {
+        this.$refs.multiAttachedImageViewer.click();
+      }
     },
-
-    fnViewMultiAttachedFileImageUploadedBySat(attachedImageIndex) {
-      this.$refs.multiAttachedImageViewerUploadedBySAT.click();
+    fnViewMultiAttachedFileImageUploadedBySat() {
+      if (this.$refs.multiAttachedImageViewerUploadedBySAT) {
+        this.$refs.multiAttachedImageViewerUploadedBySAT.click();
+      }
     },
-
     fnShowCellIfBankSubvention(rowDetails) {
       const self = this;
       const returnValue = _.filter(rowDetails, function(value) {
@@ -541,21 +373,17 @@ export default {
           value.verificationType === self.$VERIFICATION_TYPE_BANKSUBVENTION
         );
       });
-      return returnValue.length > 0 ;
+      return returnValue.length > 0;
     },
-
     fnShowBankUploadedDocumentBySat(rowDetails) {
       const self = this;
       const returnValue = _.filter(rowDetails, function(value) {
-        // console.log("value", value);
         return (
           value.verificationType === self.$VERIFICATION_TYPE_BANKSUBVENTION &&
           value.status
         );
       });
       return returnValue;
-      // console.log("returnValue[0]", returnValue[0]);
-      // return returnValue.length > 0 ? returnValue[0].bankAttachedFile : "NA";
     }
   }
 };
@@ -565,9 +393,6 @@ export default {
 .payment_verification_table i {
   transition: none !important;
 }
-/* .customTableClass .q-table tbody tr td {
-  word-break: break-all;
-} */
 .q-table tbody td {
   word-wrap: break-word !important;
 }
