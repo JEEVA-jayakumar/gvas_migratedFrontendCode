@@ -13,7 +13,7 @@
 
         <q-tab-panels v-model="activeTab" animated>
           <!-- table payment verification tracker -->
-          <q-tab-panel name="tab-1" class="no-padding">
+          <q-tab-panel name="tab-1" class="no-padding overflow-hidden">
             <q-table
               table-class="customTableClass"
               :rows="tableData"
@@ -443,14 +443,14 @@ export default {
         rowsNumber: 10,
         page: 1,
         sortBy: "leadNumber",
-        descending: false,
+        descending: true,
         rowsPerPage: 10
       },
       paginationControl1: {
         rowsNumber: 10,
         page: 1,
         sortBy: "qrLeadNumber",
-        descending: false,
+        descending: true,
         rowsPerPage: 10
       },
       propsRejectAppend: [],
@@ -528,6 +528,10 @@ export default {
           this.paginationControl.rowsNumber = this.getPaymentTrackerInfo.totalElements;
           this.paginationControl.page = this.getPaymentTrackerInfo.number + 1;
           this.tableData = this.getPaymentTrackerInfo.content;
+          if (this.getPaymentTrackerInfo.sort != null) {
+            this.paginationControl.sortBy = this.getPaymentTrackerInfo.sort[0].property;
+            this.paginationControl.descending = !this.getPaymentTrackerInfo.sort[0].ascending;
+          }
           this.$q.loading.hide();
         })
         .catch(() => { this.$q.loading.hide(); });
@@ -539,6 +543,10 @@ export default {
           this.paginationControl1.rowsNumber = this.getstaticQrPaymentTrackerData.totalElements;
           this.paginationControl1.page = this.getstaticQrPaymentTrackerData.number + 1;
           this.tableData1 = this.getstaticQrPaymentTrackerData.content;
+          if (this.getstaticQrPaymentTrackerData.sort != null) {
+            this.paginationControl1.sortBy = this.getstaticQrPaymentTrackerData.sort[0].property;
+            this.paginationControl1.descending = !this.getstaticQrPaymentTrackerData.sort[0].ascending;
+          }
           this.$q.loading.hide();
         })
         .catch(() => { this.$q.loading.hide(); });

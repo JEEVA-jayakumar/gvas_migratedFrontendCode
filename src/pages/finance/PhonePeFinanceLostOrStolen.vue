@@ -5,12 +5,15 @@
         :propToggleLeadInformationPop="propToggleLeadInformation" @closeLeadInformation="toggleLeadInformation" />
       <!-- content -->
       <!--START: table lead validation -->
+      <q-pull-to-refresh :handler="PullToRefresh" inline>
       <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filter" v-model:pagination="paginationControl" row-key="name" :loading="toggleAjaxLoadFilter"
         :rows-per-page-options="[5, 10, 15, 20]" @request="ajaxLoadAllLeadInfo">
         <!--START: table header -->
-        <q-tr v-slot:top-row="props">
-          <q-th v-for="col in props.columns" :key="col.name" :props="props">{{ col.label }}</q-th>
-        </q-tr>
+        <template v-slot:top-row="props">
+          <q-tr>
+            <q-th v-for="col in props.columns" :key="col.name" :props="props">{{ col.label }}</q-th>
+          </q-tr>
+        </template>
         <!--END: table header -->
   
         <q-td v-slot:body-cell-tid="props" :props="props">
@@ -64,6 +67,7 @@
         <q-spinner-bars class="absolute-center" style="color:#61116a" :size="35" />
       </div>
       <!--END >>  Show Ajax Spinner -->
+      </q-pull-to-refresh>
     </q-page>
   </template>
   
@@ -252,16 +256,12 @@ import { required, or } from '@vuelidate/validators';
     methods: {
       // ...mapActions("MasterTracker", ["MASTER_TRACKER_LIST"]),
       ...mapActions("LostFinance", ["FETCH_LOST_FINANCE_DATAS", "APPROVE_LOST_STOLEN_EXCEPTION", "REJECT_LOST_STOLEN_EXCEPTION", "APPROVE_PHONEPE_LOST_STOLEN_EXCEPTION","FETCH_PHONEPE_LOST_FINANCE_DATAS"]),
-      //Load all short lead info while page loading
-      ajaxLoadAllLeadInfo() {
-        this.toggleAjaxLoadFilter = true;
-        this.MASTER_TRACKER_LIST()
-          .then(response => {
-            this.toggleAjaxLoadFilter = false;
-          })
-          .catch(error => {
-            this.toggleAjaxLoadFilter = false;
-          });
+      PullToRefresh(done) {
+        this.ajaxLoadAllLeadInfo({
+          pagination: this.paginationControl,
+          filter: this.filter
+        });
+        done();
       },
       ajaxLoadAllLeadInfo({ pagination, filter }) {
         // we set QTable to "loading" state

@@ -1,27 +1,39 @@
 <template>
   <div>
-    <q-dialog persistent v-model="toggleModel" >
-      <form>
-        <div class="column group">
-          <div class="col-md-12">
-            <div class="text-h6 text-weight-regular">
-              <p align="center">
-                <strong>POS INVENTORY REPORT</strong>
-              </p>
+    <q-dialog persistent :model-value="propDeviceHistoryReport" @update:model-value="$emit('emitfnshowDeviceHistory')">
+      <q-card style="min-width: 40vw; padding: 20px;">
+        <form>
+          <div class="column group">
+            <div class="col-md-12">
+              <div class="text-h6 text-weight-regular">
+                <p align="center">
+                  <strong>POS INVENTORY REPORT</strong>
+                </p>
+              </div>
             </div>
-          </div>
-          <div class="col-md-12">
-            <q-input filled v-model="formData.selectedFromYear" label="Choose Date Range" color="grey-9">
-            <template v-slot:append>
-              <q-icon name="event" class="cursor-pointer">
-                <q-menu transition-show="scale" transition-hide="scale">
-                  <q-date v-model="formData.selectedFromYear" mask="YYYY-MM-DD" />
-                </q-menu>
-              </q-icon>
-            </template>
-          </q-input>
-          </div>
-          <!-- <div class="col-md-12">
+            <div class="col-md-12">
+              <q-input
+                filled
+                v-model="formData.selectedFromYear"
+                label="Choose Date Range"
+                color="grey-9"
+                readonly
+              >
+                <template v-slot:append>
+                  <q-icon name="event" class="cursor-pointer">
+                    <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+                      <q-date
+                        v-model="formData.selectedFromYear"
+                        mask="YYYY-MM-DD"
+                        :options="dateOptions"
+                        @update:model-value="$refs.qDateProxy.hide()"
+                      />
+                    </q-popup-proxy>
+                  </q-icon>
+                </template>
+              </q-input>
+            </div>
+            <!-- <div class="col-md-12">
             <q-input filled v-model="formData.selectedToYear" label="To Date" color="grey-9">
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
@@ -32,17 +44,27 @@
             </template>
           </q-input>
           </div> -->
-          <div class="col-md-12 group" align="right">
-            <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8"
-              @click="emitfnshowDeviceHistory()">
-              Cancel
-            </q-btn>
-            <q-btn align="right" @click="downloadHistory(formData)" :disabled="submitDisabled" color="purple-9">
-              Download
-            </q-btn>
+            <div class="col-md-12 group q-mt-md" align="right">
+              <q-btn
+                flat
+                align="right"
+                class="bg-white text-weight-regular text-grey-8 q-mr-sm"
+                @click="emitfnshowDeviceHistory()"
+              >
+                Cancel
+              </q-btn>
+              <q-btn
+                align="right"
+                @click="downloadHistory(formData)"
+                :disabled="submitDisabled"
+                color="purple-9"
+              >
+                Download
+              </q-btn>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </q-card>
     </q-dialog>
   </div>
 </template>
@@ -62,7 +84,6 @@
     props: ["propDeviceHistoryReport"],
     data() {
       return {
-        toggleModel: this.propDeviceHistoryReport,
         tomorrow: addToDate(today, { days: 0 }),
         yesterday: subtractFromDate(today, { days: 1440 }),
         state: new Date(),
@@ -83,7 +104,7 @@
     },
     computed: {
       submitDisabled() {
-        return (this.formData.selectedFromYear != 0) ;
+        return !this.formData.selectedFromYear;
         // return (this.formData.selectedFromYear != 0 && this.formData.selectedToYear != 0) ;
       }
     },
@@ -167,6 +188,9 @@
           years.push({ label: year.toString(), value: year });
         }
         return years;
+      },
+      dateOptions(date) {
+        return date >= this.$moment(this.yesterday).format('YYYY/MM/DD') && date <= this.$moment(this.tomorrow).format('YYYY/MM/DD');
       }
     }
   };

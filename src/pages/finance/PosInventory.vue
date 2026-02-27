@@ -1,7 +1,7 @@
 <template>
     <q-page>
       
-      <!-- <q-pull-to-refresh :handler="PullToRefresh" inline></q-pull-to-refresh> -->
+      <q-pull-to-refresh :handler="PullToRefresh" inline>
         <!--START: table title -->
         <div
           class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
@@ -169,6 +169,7 @@
           <q-spinner-bars class="absolute-center" style="color:#61116a" :size="35" />
         </div>
         <!--END >>  Show Ajax Spinner -->
+      </q-pull-to-refresh>
     </q-page>
   </template>
   <script>
@@ -272,17 +273,14 @@
     methods: {
       // ...mapActions("MasterTracker", ["MASTER_TRACKER_LIST"]),
       ...mapActions("LostFinance", ["FETCH_POS_INVENTORY_FINANCE","APPROVE_LOST_STOLEN_EXCEPTION"]),
-      //Load all short lead info while page loading
-      ajaxLoadAllLeadInfo() {
-        this.toggleAjaxLoadFilter = true;
-        this.MASTER_TRACKER_LIST()
-          .then(response => {
-            this.toggleAjaxLoadFilter = false;
-          })
-          .catch(error => {
-            this.toggleAjaxLoadFilter = false;
-          });
+      PullToRefresh(done) {
+        this.ajaxLoadAllLeadInfo({
+          pagination: this.paginationControl,
+          filter: this.filter
+        });
+        done();
       },
+      //Load all short lead info while page loading
       ajaxLoadAllLeadInfo ({ pagination, filter }) {
         console.log("PAGINATION",pagination)
         // we set QTable to "loading" state
