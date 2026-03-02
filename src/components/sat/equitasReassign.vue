@@ -55,6 +55,7 @@ import {
     alphaNum,
     numeric
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 export default {
     props: ["propShowReassign", "propRowDetails"],
@@ -136,7 +137,7 @@ export default {
                             this.$q.notify({
                                 color: "negative",
                                 position: "bottom",
-                                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                                message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
                                 icon: "thumb_down"
                             });
                         });

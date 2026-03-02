@@ -45,9 +45,13 @@
 <script>
 import { date } from "quasar";
 import { required } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["propToggleLeadModal", "propLeadDetails"],
   data() {
     return {
@@ -85,8 +89,8 @@ export default {
       this.$emit("toggleLeadModal");
     },
     sendRemarks(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({
@@ -110,7 +114,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
               icon: "thumb_down"
             });
           });

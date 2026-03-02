@@ -230,6 +230,7 @@ import { required, or } from '@vuelidate/validators';
 // import showEditSubTaskType from "../../components/super_admin/showEditSubTaskType.vue";
 // import ShowAddSubTaskType from "../../components/super_admin/ShowAddSubTaskType.vue";
 import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from "@vuelidate/core";
 export default {
     name: "getserviceRequestGetTypes",
     components: {
@@ -681,7 +682,7 @@ export default {
         //                     this.$q.notify({
         //                         color: "negative",
         //                         position: "bottom",
-        //                         message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+        //                         message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
         //                         icon: "thumb_down"
         //                     });
         //                 });
@@ -751,7 +752,7 @@ export default {
                             this.$q.notify({
                                 color: "negative",
                                 position: "bottom",
-                                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                                message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
                                 icon: "thumb_down"
                             });
                         });
@@ -922,9 +923,9 @@ export default {
                         color: "negative",
                         position: "bottom",
                         message:
-                            error.body.message == null
+                            error.data.message == null
                                 ? "Please Try Again Later !"
-                                : error.body.message,
+                                : error.data.message,
                         icon: "thumb_down"
                     });
                 });
@@ -1037,7 +1038,7 @@ export default {
                         });
                     });
                     this.$q.loading.hide();
-                }).onCancel(() => {
+                }).catch(() => {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",
@@ -1069,7 +1070,7 @@ export default {
                         });
                     });
                     this.$q.loading.hide();
-                }).onCancel(() => {
+                }).catch(() => {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",

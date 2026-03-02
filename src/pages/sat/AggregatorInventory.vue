@@ -68,7 +68,8 @@
   import AggregatorSODeviceReassigned from "../../pages/sat/AggregatorSODeviceReassigned.vue";
   
   import { mapGetters, mapActions } from "vuex";
-  export default {
+  import { useVuelidate } from "@vuelidate/core";
+export default {
     name: "inventoryAllocation",
   
     components: {

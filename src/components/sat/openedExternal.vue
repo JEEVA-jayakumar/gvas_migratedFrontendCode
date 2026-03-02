@@ -920,6 +920,7 @@ import {
   alphaNum,
   numeric
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 
 
@@ -1771,7 +1772,7 @@ export default {
               this.$q.notify({
                 color: "positive",
                 position: "bottom",
-                message: res.body.data,
+                message: res.data.data,
                 icon: "thumb_up"
               });
               this.$q.loading.hide();
@@ -1784,7 +1785,7 @@ export default {
               self.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: res.body.data,
+                message: res.data.data,
                 icon: "thumb_down"
               });
               this.$q.loading.hide();
@@ -1795,7 +1796,7 @@ export default {
             self.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.data,
+              message: error.data.data,
               icon: "thumb_down"
             });
             this.$q.loading.hide();

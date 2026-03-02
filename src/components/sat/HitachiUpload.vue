@@ -203,6 +203,7 @@ import {
   maxLength,
   minLength
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 
 
 import { mapGetters, mapActions } from "vuex";
@@ -511,9 +512,9 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              error.body.message == null
+              error.data.message == null
                 ? "Please Try Again Later !"
-                : error.body.message,
+                : error.data.message,
             icon: "thumb_down"
           });
         });

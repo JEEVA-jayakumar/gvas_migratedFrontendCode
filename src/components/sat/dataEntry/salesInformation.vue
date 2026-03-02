@@ -3,8 +3,8 @@
     <div class="row q-col-gutter-sm">
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
-          @blur="$v.merchant.salesInformation.institutionCode.$touch"
-          :error="$v.merchant.salesInformation.institutionCode.$error"
+          @blur="v$.merchant.salesInformation.institutionCode.$touch"
+          :error="v$.merchant.salesInformation.institutionCode.$error"
           placeholder="Choose from the below"
           color="grey-9"
           v-model="merchant.salesInformation.institutionCode"
@@ -13,23 +13,27 @@
             label: 'GPRS',
             value: 3
           }]"
+          map-options
+          emit-value
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
-          @blur="$v.merchant.salesInformation.applicationType.$touch"
-          :error="$v.merchant.salesInformation.applicationType.$error"
+          @blur="v$.merchant.salesInformation.applicationType.$touch"
+          :error="v$.merchant.salesInformation.applicationType.$error"
           placeholder="Choose from the below*"
           color="grey-9"
           v-model="merchant.salesInformation.applicationType"
           label="Application Type*"
           :options="applicationTypeOptions"
+          map-options
+          emit-value
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.salesInformation.applicationNumber.$touch"
-          :error="$v.merchant.salesInformation.applicationNumber.$error"
+          @blur="v$.merchant.salesInformation.applicationNumber.$touch"
+          :error="v$.merchant.salesInformation.applicationNumber.$error"
           color="grey-9"
           v-model="merchant.salesInformation.applicationNumber"
           label="Application Number*"
@@ -38,81 +42,111 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          modal
           color="grey-9"
-          format="DD/MM/YYYY"
           label="Application Date*"
           placeholder="Application Date*"
-          @blur="$v.merchant.salesInformation.applicationDate.$touch"
-          :error="$v.merchant.salesInformation.applicationDate.$error"
+          @blur="v$.merchant.salesInformation.applicationDate.$touch"
+          :error="v$.merchant.salesInformation.applicationDate.$error"
           v-model="merchant.salesInformation.applicationDate"
-        />
+        >
+          <template v-slot:append>
+            <q-icon name="event" class="cursor-pointer">
+              <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                <q-date v-model="merchant.salesInformation.applicationDate" mask="YYYY-MM-DD">
+                  <div class="row items-center justify-end">
+                    <q-btn v-close-popup label="Close" color="primary" flat />
+                  </div>
+                </q-date>
+              </q-popup-proxy>
+            </q-icon>
+          </template>
+        </q-input>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          modal
           color="grey-9"
-          format="DD/MM/YYYY"
-          @blur="$v.merchant.salesInformation.aggreementDate.$touch"
-          :error="$v.merchant.salesInformation.aggreementDate.$error"
+          @blur="v$.merchant.salesInformation.aggreementDate.$touch"
+          :error="v$.merchant.salesInformation.aggreementDate.$error"
           v-model="merchant.salesInformation.aggreementDate"
           label="Agreement Date*"
           placeholder="Agreement Date*"
-        />
+        >
+          <template v-slot:append>
+            <q-icon name="event" class="cursor-pointer">
+              <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                <q-date v-model="merchant.salesInformation.aggreementDate" mask="YYYY-MM-DD">
+                  <div class="row items-center justify-end">
+                    <q-btn v-close-popup label="Close" color="primary" flat />
+                  </div>
+                </q-date>
+              </q-popup-proxy>
+            </q-icon>
+          </template>
+        </q-input>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
-          @blur="$v.merchant.salesInformation.merchantType.$touch"
-          :error="$v.merchant.salesInformation.merchantType.$error"
+          @blur="v$.merchant.salesInformation.merchantType.$touch"
+          :error="v$.merchant.salesInformation.merchantType.$error"
           placeholder="Choose from the below*"
           color="grey-9"
           v-model="merchant.salesInformation.merchantType"
           label="Merchant Type*"
           :options="merchantTypeOptions"
+          map-options
+          emit-value
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
-          @blur="$v.merchant.salesInformation.categoryType.$touch"
-          :error="$v.merchant.salesInformation.categoryType.$error"
+          @blur="v$.merchant.salesInformation.categoryType.$touch"
+          :error="v$.merchant.salesInformation.categoryType.$error"
           placeholder="Choose from the below*"
           color="grey-9"
           v-model="merchant.salesInformation.categoryType"
           label="Category Type*"
           :options="categoryTypeOptions"
+          map-options
+          emit-value
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
           placeholder="Choose from the below*"
           color="grey-9"
-          @blur="$v.merchant.salesInformation.salesPersonCode.$touch"
-          :error="$v.merchant.salesInformation.salesPersonCode.$error"
+          @blur="v$.merchant.salesInformation.salesPersonCode.$touch"
+          :error="v$.merchant.salesInformation.salesPersonCode.$error"
           v-model="merchant.salesInformation.salesPersonCode"
           label="Sales Person*"
           :options="salesPersonOptions"
+          map-options
+          emit-value
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
           placeholder="Choose from the below*"
           color="grey-9"
-          @blur="$v.merchant.salesInformation.region.$touch"
-          :error="$v.merchant.salesInformation.region.$error"
+          @blur="v$.merchant.salesInformation.region.$touch"
+          :error="v$.merchant.salesInformation.region.$error"
           v-model="merchant.salesInformation.region"
           label="Region*"
           :options="regionOptions"
+          map-options
+          emit-value
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
           placeholder="Choose from the below*"
           color="grey-9"
-          @blur="$v.merchant.salesInformation.leadFrom.$touch"
-          :error="$v.merchant.salesInformation.leadFrom.$error"
+          @blur="v$.merchant.salesInformation.leadFrom.$touch"
+          :error="v$.merchant.salesInformation.leadFrom.$error"
           v-model="merchant.salesInformation.leadFrom"
           label="Lead From*"
           :options="leadFromOptions"
+          map-options
+          emit-value
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
@@ -131,19 +165,21 @@
     <div v-show="merchant.salesInformation.sharingModelCode == 'T'" class="row gutter-sm q-my-xs">
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
-          @blur="$v.merchant.salesInformation.sharingPartnerCode.$touch"
-          :error="$v.merchant.salesInformation.sharingPartnerCode.$error"
+          @blur="v$.merchant.salesInformation.sharingPartnerCode.$touch"
+          :error="v$.merchant.salesInformation.sharingPartnerCode.$error"
           placeholder="Choose from the below*"
           color="grey-9"
           v-model="merchant.salesInformation.sharingPartnerCode"
           label="Sharing partner*"
           :options="sharingPartnerOptions"
+          map-options
+          emit-value
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.salesInformation.dailyFixedAmount.$touch"
-          :error="$v.merchant.salesInformation.dailyFixedAmount.$error"
+          @blur="v$.merchant.salesInformation.dailyFixedAmount.$touch"
+          :error="v$.merchant.salesInformation.dailyFixedAmount.$error"
           color="grey-9"
           v-model="merchant.salesInformation.dailyFixedAmount"
           label="Daily fixed amount*"
@@ -153,8 +189,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.salesInformation.loanDisbursementPercentage.$touch"
-          :error="$v.merchant.salesInformation.loanDisbursementPercentage.$error"
+          @blur="v$.merchant.salesInformation.loanDisbursementPercentage.$touch"
+          :error="v$.merchant.salesInformation.loanDisbursementPercentage.$error"
           color="grey-9"
           v-model="merchant.salesInformation.loanDisbursementPercentage"
           label="Percentage*"
@@ -164,10 +200,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          format="DD/MM/YYYY"
-          format-model="date"
-          @blur="$v.merchant.salesInformation.loanDisbursementAmount.$touch"
-          :error="$v.merchant.salesInformation.loanDisbursementAmount.$error"
+          @blur="v$.merchant.salesInformation.loanDisbursementAmount.$touch"
+          :error="v$.merchant.salesInformation.loanDisbursementAmount.$error"
           color="grey-9"
           v-model="merchant.salesInformation.loanDisbursementAmount"
           label="Loan disbursement value*"
@@ -177,21 +211,30 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          format="DD/MM/YYYY"
-          format-model="date"
-          @blur="$v.merchant.salesInformation.loanDisbursementDate.$touch"
-          :error="$v.merchant.salesInformation.loanDisbursementDate.$error"
+          @blur="v$.merchant.salesInformation.loanDisbursementDate.$touch"
+          :error="v$.merchant.salesInformation.loanDisbursementDate.$error"
           color="grey-9"
-          minimal
           v-model="merchant.salesInformation.loanDisbursementDate"
           label="Disbursement Date*"
           placeholder="Disbursement Date*"
-        />
+        >
+          <template v-slot:append>
+            <q-icon name="event" class="cursor-pointer">
+              <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                <q-date v-model="merchant.salesInformation.loanDisbursementDate" mask="YYYY-MM-DD">
+                  <div class="row items-center justify-end">
+                    <q-btn v-close-popup label="Close" color="primary" flat />
+                  </div>
+                </q-date>
+              </q-popup-proxy>
+            </q-icon>
+          </template>
+        </q-input>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.salesInformation.tenureMonth.$touch"
-          :error="$v.merchant.salesInformation.tenureMonth.$error"
+          @blur="v$.merchant.salesInformation.tenureMonth.$touch"
+          :error="v$.merchant.salesInformation.tenureMonth.$error"
           color="grey-9"
           v-model="merchant.salesInformation.tenureMonth"
           label="Tenure (in months)*"
@@ -201,8 +244,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.salesInformation.tenureDay.$touch"
-          :error="$v.merchant.salesInformation.tenureDay.$error"
+          @blur="v$.merchant.salesInformation.tenureDay.$touch"
+          :error="v$.merchant.salesInformation.tenureDay.$error"
           color="grey-9"
           v-model="merchant.salesInformation.tenureDay"
           label="Tenure (in days)*"
@@ -212,35 +255,46 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          format="DD/MM/YYYY"
-          format-model="date"
-          @blur="$v.merchant.salesInformation.tenureStartDate.$touch"
-          :error="$v.merchant.salesInformation.tenureStartDate.$error"
+          @blur="v$.merchant.salesInformation.tenureStartDate.$touch"
+          :error="v$.merchant.salesInformation.tenureStartDate.$error"
           color="grey-9"
-          minimal
           v-model="merchant.salesInformation.tenureStartDate"
           label="Start Date*"
           placeholder="Tenure Start Date*"
-        />
+        >
+          <template v-slot:append>
+            <q-icon name="event" class="cursor-pointer">
+              <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                <q-date v-model="merchant.salesInformation.tenureStartDate" mask="YYYY-MM-DD">
+                  <div class="row items-center justify-end">
+                    <q-btn v-close-popup label="Close" color="primary" flat />
+                  </div>
+                </q-date>
+              </q-popup-proxy>
+            </q-icon>
+          </template>
+        </q-input>
       </div>
     </div>
     <!-- M => MDR/cash@pos/rent -->
     <div v-show="merchant.salesInformation.sharingModelCode == 'M'" class="row gutter-sm q-my-xs">
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
-          @blur="$v.merchant.salesInformation.sharingPartnerCode.$touch"
-          :error="$v.merchant.salesInformation.sharingPartnerCode.$error"
+          @blur="v$.merchant.salesInformation.sharingPartnerCode.$touch"
+          :error="v$.merchant.salesInformation.sharingPartnerCode.$error"
           placeholder="Choose from the below*"
           color="grey-9"
           v-model="merchant.salesInformation.sharingPartnerCode"
           label="Sharing partner*"
           :options="sharingPartnerOptions"
+          map-options
+          emit-value
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.salesInformation.rentPercentage.$touch"
-          :error="$v.merchant.salesInformation.rentPercentage.$error"
+          @blur="v$.merchant.salesInformation.rentPercentage.$touch"
+          :error="v$.merchant.salesInformation.rentPercentage.$error"
           color="grey-9"
           v-model="merchant.salesInformation.rentPercentage"
           label="Rent %*"
@@ -250,8 +304,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.salesInformation.rentFixed.$touch"
-          :error="$v.merchant.salesInformation.rentFixed.$error"
+          @blur="v$.merchant.salesInformation.rentFixed.$touch"
+          :error="v$.merchant.salesInformation.rentFixed.$error"
           color="grey-9"
           v-model="merchant.salesInformation.rentFixed"
           label="Rent fixed*"
@@ -288,7 +342,11 @@ import {
   decimal,
   between
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: [
     "leadDetails",
     "regionOptions",
@@ -455,8 +513,8 @@ export default {
     //   }
     // },
     validate() {
-      this.$v.merchant.salesInformation.$touch();
-      if (this.$v.merchant.salesInformation.$error) {
+      this.v$.merchant.salesInformation.$touch();
+      if (this.v$.merchant.salesInformation.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         if (this.merchant.salesInformation.categoryType == "S") {

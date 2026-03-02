@@ -546,6 +546,7 @@ import viewLeadDocumentsComponent from "../../components/sat/viewLeadDocumentsCo
 import uploadLeadDocumentsComponent from "../../components/sat/uploadLeadDocumentsComponent.vue";
 import showFinalRejectLeadRemarksComponent from "../../components/sat/showFinalRejectLeadRemarksComponent.vue";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "leadDataEntry",
   components: {
@@ -884,8 +885,7 @@ export default {
             });
             this.toggleLeadRejectModal = !this.toggleLeadRejectModal;
             this.$q.loading.hide();
-          })
-          .catch(error => {
+          }).onCancel(error => {
             let arrayMessage = "";
             _.map(error.data.data, oo => {
               arrayMessage += `${oo}, `;

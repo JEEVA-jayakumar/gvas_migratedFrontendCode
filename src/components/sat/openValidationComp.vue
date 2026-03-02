@@ -41,6 +41,7 @@ import {
   alphaNum,
   numeric
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 export default {
   props: ["showRejectLeadModel", "propShowRejectLeadComponent"],
@@ -124,8 +125,8 @@ export default {
     // },
     leadRejectSubmit(formData) {
         // let 
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q
@@ -153,13 +154,13 @@ export default {
                  this.$router.push('/sat/lead/validation');
                 // this.$router.push('/sat/rejected/Lead/Details');
                 
-              }).onCancel(error => {
+              }).catch(error => {
                 this.$q.loading.hide();
                  this.$emit("closeRejectLeadModel");
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
-                  message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                  message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
                   icon: "thumb_down"
                 });
               });

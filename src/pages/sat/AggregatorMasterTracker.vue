@@ -20,32 +20,41 @@
           :rows-per-page-options="[5,10,15,20,25]"
           @request="ajaxLoadAllLeadInfo"
         >
-          <q-td v-slot:body-cell-tid="props" :props="props">
+          <template v-slot:body-cell-tid="props">
+          <q-td :props="props">
             <span class="label text-primary"># {{props.row.tid}}</span>
           </q-td>
-          <q-td v-slot:body-cell-mid="props" :props="props">
+        </template>
+          <template v-slot:body-cell-mid="props">
+          <q-td :props="props">
             <span class="label text-primary"># {{props.row.mid}}</span>
           </q-td>
+        </template>
+          <template v-slot:body-cell-leadNumber="props">
           <q-td
-            v-slot:body-cell-leadNumber="props"
             :props="props"
             class="cursor-pointer"
             @click="toggleLeadInformation(props.row.leadInformation)"
           >
             <span class="label text-primary"># {{props.row.leadInformation.leadNumber}}</span>
           </q-td>
+        </template>
+          <template v-slot:body-cell-mobileNumber="props">
           <q-td
-            v-slot:body-cell-mobileNumber="props"
             :props="props"
           >{{props.row.leadInformation == null? 'NA':props.row.leadInformation.contactNumber}}</q-td>
+        </template>
+          <template v-slot:body-cell-leadAddress="props">
           <q-td
-            v-slot:body-cell-leadAddress="props"
             :props="props"
           >{{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}</q-td>
-          <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+        </template>
+          <template v-slot:body-cell-deviceStatusDate="props">
+          <q-td :props="props">
             <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
           </q-td>
-          <template slot="top" >
+        </template>
+          <template v-slot:top >
             <div class="col-5">
               <q-input
                 clearable
@@ -106,7 +115,8 @@ import { required } from '@vuelidate/validators';
   import generalLeadInformation from "../../components/generalLeadInformation.vue";
   import DownloadMasterTracker from "../../components/sat/DownloadMasterTracker.vue";
   import DownloadAggrMasterTracker from "../../components/sat/DownloadAggrMasterTracker.vue";
-  export default {
+  import { useVuelidate } from "@vuelidate/core";
+export default {
     name: "merchantTransactionLevel",
     
   

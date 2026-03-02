@@ -114,17 +114,18 @@
   import inventoryCount from "../../components/sat/regionalInventory/inventoryCount.vue";
   import dispatchedInventory from "../../components/sat/regionalInventory/dispatchedInventory.vue";
   import showAddDamagedDevices from "../../components/sat/showAddDamagedDevices.vue";
-  import allocateSOtoSO from "../../pages/sat/allocateSOtoSO.vue"
+  import allocateSOtoSO from "./allocateSOtoSO.vue"
   import inventorywithso from "../../components/inventory/inventorywithso.vue";
-  import inventoryallocatetoso from "../../pages/sat/allocateSo.vue";
-  // import inventoryFaulty from "../../pages/sat/satFaulty.vue";
+  import inventoryallocatetoso from "./allocateSo.vue";
+  // import inventoryFaulty from "./satFaulty.vue";
   import inventorySOCount from "../../components/sat/regionalInventory/SOinventoryCount.vue";
-  import inventorywithResellar from "../../pages/inventory/inventorywithsellar.vue";
-  import inventorywithResellarDetails from "../../pages/inventory/inventorywithresellar.vue";
-  import deviceAllocationRequest from "../../pages/sat/deviceAllocationRequest.vue"
-  import simStatus from "../../pages/sat/simStatus.vue"
+  import inventorywithResellar from "../inventory/inventorywithsellar.vue";
+  import inventorywithResellarDetails from "../inventory/inventorywithresellar.vue";
+  import deviceAllocationRequest from "./deviceAllocationRequest.vue"
+  import simStatus from "./simStatus.vue"
   import { mapGetters, mapActions } from "vuex";
-  export default {
+  import { useVuelidate } from "@vuelidate/core";
+export default {
     name: "inventoryAllocation",
   
     components: {
@@ -147,7 +148,7 @@
       return {
         enableUploadInventoryBtn: true,
         toggleScanButton: true,
-        inventoryOptionSelected: "count"
+        inventoryOptionSelected: "spare"
       };
     },
   

@@ -65,7 +65,7 @@ placeholder="Re-Assign To" separator color="grey-9" :disable="isReAssignDropdown
 </div>
 </q-card>
 <!--END: table Footer -->
-<q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+<q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" >
 <q-tab color="dark" name="unAssigned" label="Unassigned" />
 <q-tab color="dark" name="assigned" label="Assigned" />
 </q-tabs>
@@ -136,7 +136,7 @@ props.row.qrLeadInformation != null
 {{ props.row.mid }}
 </div>
 </q-td>
-<template slot="top">
+<template v-slot:top>
 <!--START: table filter,search -->
 <div class="col-md-5">
 <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.."
@@ -211,7 +211,7 @@ props.row.qrLeadInformation != null
 {{ props.row.deviceAddress }}
 </div>
 </q-td>
-<template slot="top">
+<template v-slot:top>
 <!--START: table filter,search -->
 <div class="col-md-5">
 <q-input clearable color="grey-9" v-model="filterSearch1" placeholder="Type.."
@@ -240,6 +240,7 @@ label="Search By TID, MID" class="q-mr-lg q-py-sm" />
 import { required, email, not, or } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
 name: "implementationQueue",
 data() {
@@ -417,7 +418,7 @@ row.leadInformation.submitToMarsDate == null
 row.qrLeadInformation == null ||
 row.qrLeadInformation.submitMarsDate == null
 ? "NA"
-: row.qrLeadInformation.submitMarsDate | moment("Do MMM Y");
+: $moment(row.qrLeadInformation.submitMarsDate).format("Do MMM Y");
 },
 format: val => `${val}|moment("Do MMM Y")`,
 sortable: true
@@ -636,7 +637,7 @@ row.leadInformation.submitToMarsDate == null
 row.qrLeadInformation == null ||
 row.qrLeadInformation.submitMarsDate == null
 ? "NA"
-: row.qrLeadInformation.submitMarsDate | moment("Do MMM Y");
+: $moment(row.qrLeadInformation.submitMarsDate).format("Do MMM Y");
 },
 
 sortable: true

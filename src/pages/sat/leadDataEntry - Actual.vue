@@ -301,7 +301,7 @@ import { not } from '@vuelidate/validators';
 
 
 import { mapGetters, mapActions } from "vuex";
-import vuePdfjs from "vue-pdfjs";
+
 
 import vZoom from "vue-zoom";
 import imgView from "vue-img-view";
@@ -309,13 +309,14 @@ import imgView from "vue-img-view";
 import showPdfModalComponent from "../../components/sat/showPdfModalComponent.vue";
 import showMarsForm from "../../components/sat/showMarsFormComponent.vue";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "leadDataEntry",
   components: {
     showPdfModalComponent,
     showMarsForm,
     vZoom,
-    vuePdfjs,
+
     imgView
   },
   data() {

@@ -84,7 +84,8 @@ import { email } from '@vuelidate/validators';
   // Vue.use(VueBarcodeScanner);
   import { mapGetters, mapActions } from "vuex";
   import showAggregatorsPDOSotoSO from "../../components/inventory/showAggregatorsPDOSotoSO.vue";
-  export default {
+  import { useVuelidate } from "@vuelidate/core";
+export default {
     name: "allocateDevice",
     components: {
         showAggregatorsPDOSotoSO

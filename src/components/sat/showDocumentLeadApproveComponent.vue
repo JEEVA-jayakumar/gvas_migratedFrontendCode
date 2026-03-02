@@ -39,6 +39,7 @@ import {
   alphaNum,
   numeric,
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 import { date } from "quasar";
 import { mapGetters, mapActions } from "vuex";
 export default {

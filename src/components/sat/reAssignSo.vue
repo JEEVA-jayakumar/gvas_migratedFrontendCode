@@ -42,7 +42,8 @@
   <script>
   import { mapGetters, mapActions } from "vuex";
   
-  export default {
+  import { useVuelidate } from "@vuelidate/core";
+export default {
     props: ["propshowRegionBasedSo", "propAllScannedItemArr"],
   
     data() {
@@ -116,7 +117,7 @@
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
                 icon: "thumb_down"
               });
               this.$q.loading.hide();

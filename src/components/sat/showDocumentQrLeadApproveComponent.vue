@@ -41,7 +41,8 @@
   } from '@vuelidate/validators'
   import { date } from "quasar";
   import { mapGetters, mapActions } from 'vuex'
-  export default {
+  import { useVuelidate } from "@vuelidate/core";
+export default {
     props: ['propDocumentDetails', 'propToggleDocumentApproveModal'],
   
     data () {

@@ -137,7 +137,8 @@
   import generalLeadInformation from "../../components/generalLeadInformation.vue";
   import openRejectLeadComp from "../../components/sat/openRejectLeadComp.vue";
 
-  export default {
+  import { useVuelidate } from "@vuelidate/core";
+export default {
     name: "LeadValidation",
     components: {
       generalLeadInformation,
@@ -191,6 +192,10 @@
             this.paginationControl.rowsNumber = this.getAllLeadsValidationInfo.totalElements;
             this.paginationControl.page = this.getAllLeadsValidationInfo.number + 1;
             this.tableData = this.getAllLeadsValidationInfo.content;
+            if (this.getAllLeadsValidationInfo.sort != null) {
+              this.paginationControl.sortBy = this.getAllLeadsValidationInfo.sort[0].property;
+              this.paginationControl.descending = this.getAllLeadsValidationInfo.sort[0].ascending;
+            }
             this.$q.loading.hide();
           })
           .catch(() => { this.$q.loading.hide(); });

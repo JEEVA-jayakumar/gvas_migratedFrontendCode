@@ -15,8 +15,8 @@
             <q-input
               color="grey-9"
               v-model="formData.remarks"
-              @blur="$v.formData.remarks.$touch"
-              :error="$v.formData.remarks.$error"
+              @blur="v$.formData.remarks.$touch"
+              :error="v$.formData.remarks.$error"
               type="textarea"
               label="Remarks"
               :max-height="100"
@@ -51,8 +51,12 @@
 import { date } from "quasar";
 import { mapGetters, mapActions } from "vuex";
 import { required } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["propToggleLeadModal", "propLeadDetails"],
   data() {
     return {
@@ -83,8 +87,8 @@ export default {
       this.$emit("toggleLeadModal");
     },
     saveRemarks(finalFormData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({
@@ -109,7 +113,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
               icon: "thumb_down"
             });
           });

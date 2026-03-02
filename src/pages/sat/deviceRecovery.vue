@@ -32,10 +32,12 @@
         :loading="tableAjaxLoading"
         color="light-blue"
       >
-        <q-td v-slot:body-cell-action="props" :props="props">
+        <template v-slot:body-cell-action="props">
+          <q-td :props="props">
           <q-btn label="send" icon="close" color="red-6" size="sm" />
           <!-- @click="removeScannedItems(props.row)" -->
         </q-td>
+        </template>
         <template v-slot:top="props">
           <!--START: table filter,search -->
           <div class="col-md-5">
@@ -62,6 +64,7 @@ import { required } from '@vuelidate/validators';
 // Vue.use(VueBarcodeScanner);
 
 import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "deviceRecoveryTrackerFaultyScanner",
 

@@ -1,4 +1,6 @@
 import { boot } from 'quasar/wrappers'
+import VuePdfEmbed from 'vue-pdf-embed'
+
 export default boot(({ app }) => {
-  // Stubbed or migrated
+  app.component('VuePdfEmbed', VuePdfEmbed)
 })

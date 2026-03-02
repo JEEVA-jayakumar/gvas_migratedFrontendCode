@@ -355,6 +355,7 @@
 import { required } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   components: {},
   props: ["propMerchantTypeFromSO"],

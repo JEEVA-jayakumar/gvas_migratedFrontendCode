@@ -426,6 +426,7 @@ import chartMerchantTracker from "../../components/sat/chartMerchantTracker.js";
 import chartSATagingTracker from "../../components/sat/chartSATagingTracker.js";
 import leadList from "../../components/sat/leadList.vue";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "SatDashboard",
   components: {

@@ -8,7 +8,7 @@
         <q-input
           upper-case
           color="grey-9"
-          :error="$v.merchant.bankInformation.bankDetails.ifsc.$error"
+          :error="v$.merchant.bankInformation.bankDetails.ifsc.$error"
           @blur="populateBankDetails"
           v-model="merchant.bankInformation.bankDetails.ifsc"
           label="IFSC Code*"
@@ -18,8 +18,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           color="grey-9"
-          @blur="$v.merchant.bankInformation.bankDetails.branchName.$touch"
-          :error="$v.merchant.bankInformation.bankDetails.branchName.$error"
+          @blur="v$.merchant.bankInformation.bankDetails.branchName.$touch"
+          :error="v$.merchant.bankInformation.bankDetails.branchName.$error"
           v-model="merchant.bankInformation.bankDetails.branchName"
           label="Branch Name*"
           placeholder="Branch Name* "
@@ -40,8 +40,8 @@
       >
         <q-input
           color="grey-9"
-          @blur="$v.merchant.bankInformation.bankDetails.settlementOrNeftFee.$touch"
-          :error="$v.merchant.bankInformation.bankDetails.settlementOrNeftFee.$error"
+          @blur="v$.merchant.bankInformation.bankDetails.settlementOrNeftFee.$touch"
+          :error="v$.merchant.bankInformation.bankDetails.settlementOrNeftFee.$error"
           v-model="merchant.bankInformation.bankDetails.settlementOrNeftFee"
           label="NEFT/Settlement Fee Inclusive of Tax*"
           placeholder="NEFT/Settlement Fee Inclusive of Tax*"
@@ -50,8 +50,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           color="grey-9"
-          @blur="$v.merchant.bankInformation.bankDetails.micr.$touch"
-          :error="$v.merchant.bankInformation.bankDetails.micr.$error"
+          @blur="v$.merchant.bankInformation.bankDetails.micr.$touch"
+          :error="v$.merchant.bankInformation.bankDetails.micr.$error"
           v-model="merchant.bankInformation.bankDetails.micr"
           label="MICR*"
           placeholder="MICR*"
@@ -60,8 +60,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           color="grey-9"
-          @blur="$v.merchant.bankInformation.bankDetails.bankName.$touch"
-          :error="$v.merchant.bankInformation.bankDetails.bankName.$error"
+          @blur="v$.merchant.bankInformation.bankDetails.bankName.$touch"
+          :error="v$.merchant.bankInformation.bankDetails.bankName.$error"
           v-model="merchant.bankInformation.bankDetails.bankName"
           label="Bank Name*"
           placeholder="Bank Name*"
@@ -77,40 +77,52 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
-          color="grey-9"
-          @blur="$v.merchant.bankInformation.bankDetails.bankCityRefCode.$touch"
-          :error="$v.merchant.bankInformation.bankDetails.bankCityName.$anyError ||$v.merchant.bankInformation.bankDetails.bankCityRefCode.$anyError"
+        <q-select
+          @blur="v$.merchant.bankInformation.bankDetails.bankCityRefCode.$touch"
+          :error="v$.merchant.bankInformation.bankDetails.bankCityName.$anyError ||v$.merchant.bankInformation.bankDetails.bankCityRefCode.$anyError"
           v-model="merchant.bankInformation.bankDetails.bankCityName"
           label="City (type min 3 characters)*"
           placeholder="Start typing ..*"
+          use-input
+          hide-selected
+          fill-input
+          input-debounce="0"
+          :options="bankCityOptions"
+          @filter="bankCityFilterFn"
+          @update:model-value="bankCitySelected"
         >
-          <q-autocomplete
-            separator
-            @search="citySearch"
-            :debounce="10"
-            :min-characters="3"
-            @selected="bankCitySelected"
-          />
-        </q-input>
+          <template v-slot:no-option>
+            <q-item>
+              <q-item-section class="text-grey">
+                No results
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
-          color="grey-9"
-          @blur="$v.merchant.bankInformation.bankDetails.bankCityRefCode.$touch"
-          :error="$v.merchant.bankInformation.bankDetails.bankStateName.$anyError || $v.merchant.bankInformation.bankDetails.bankCityRefCode.$anyError"
+        <q-select
+          @blur="v$.merchant.bankInformation.bankDetails.bankCityRefCode.$touch"
+          :error="v$.merchant.bankInformation.bankDetails.bankStateName.$anyError || v$.merchant.bankInformation.bankDetails.bankCityRefCode.$anyError"
           v-model="merchant.bankInformation.bankDetails.bankStateName"
           label="State (type min 3 characters)*"
           placeholder="Start typing ..*"
+          use-input
+          hide-selected
+          fill-input
+          input-debounce="0"
+          :options="bankStateOptions"
+          @filter="bankStateFilterFn"
+          @update:model-value="bankStateSelected"
         >
-          <q-autocomplete
-            separator
-            @search="stateSearch"
-            :debounce="10"
-            :min-characters="1"
-            @selected="bankStateSelected"
-          />
-        </q-input>
+          <template v-slot:no-option>
+            <q-item>
+              <q-item-section class="text-grey">
+                No results
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
@@ -124,8 +136,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           color="grey-9"
-          @blur="$v.merchant.bankInformation.bankDetails.accountNumber.$touch"
-          :error="$v.merchant.bankInformation.bankDetails.accountNumber.$error"
+          @blur="v$.merchant.bankInformation.bankDetails.accountNumber.$touch"
+          :error="v$.merchant.bankInformation.bankDetails.accountNumber.$error"
           v-model="merchant.bankInformation.bankDetails.accountNumber"
           label="Bank A/c Number*"
           placeholder="Bank A/c Number*"
@@ -157,8 +169,8 @@
           <div class="col-md-6 col-sm-12 col-xs-12">
             <q-input
               color="grey-9"
-              @blur="$v.merchant.bankInformation.collectionDetails.chequeNumber.$touch"
-              :error="$v.merchant.bankInformation.collectionDetails.chequeNumber.$error"
+              @blur="v$.merchant.bankInformation.collectionDetails.chequeNumber.$touch"
+              :error="v$.merchant.bankInformation.collectionDetails.chequeNumber.$error"
               v-model="merchant.bankInformation.collectionDetails.chequeNumber"
               label="Cheque/UTR No*"
               placeholder="Cheque/UTR No*"
@@ -171,8 +183,8 @@
           <div class="col-md-4 col-sm-12 col-xs-12">
             <q-input
               color="grey-9"
-              @blur="$v.merchant.bankInformation.collectionDetails.swipeAmount.$touch"
-              :error="$v.merchant.bankInformation.collectionDetails.swipeAmount.$error"
+              @blur="v$.merchant.bankInformation.collectionDetails.swipeAmount.$touch"
+              :error="v$.merchant.bankInformation.collectionDetails.swipeAmount.$error"
               v-model="merchant.bankInformation.collectionDetails.swipeAmount"
               label="Swipe Amount*"
               placeholder="Swipe Amount*"
@@ -180,22 +192,31 @@
           </div>
           <div class="col-md-4 col-sm-12">
             <q-input
-              format="DD/MM/YYYY"
-              format-model="number"
               color="grey-9"
-              minimal
-              @blur="$v.merchant.bankInformation.collectionDetails.collectedDate.$touch"
-              :error="$v.merchant.bankInformation.collectionDetails.collectedDate.$error"
+              @blur="v$.merchant.bankInformation.collectionDetails.collectedDate.$touch"
+              :error="v$.merchant.bankInformation.collectionDetails.collectedDate.$error"
               v-model="merchant.bankInformation.collectionDetails.collectedDate"
               label="Swipe Date*"
               placeholder="Swipe Date*"
-            />
+            >
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                    <q-date v-model="merchant.bankInformation.collectionDetails.collectedDate" mask="YYYY-MM-DD">
+                      <div class="row items-center justify-end">
+                        <q-btn v-close-popup label="Close" color="primary" flat />
+                      </div>
+                    </q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
           </div>
           <div class="col-md-4 col-sm-12 col-xs-12">
             <q-input
               color="grey-9"
-              @blur="$v.merchant.bankInformation.collectionDetails.swipeTerminal.$touch"
-              :error="$v.merchant.bankInformation.collectionDetails.swipeTerminal.$error"
+              @blur="v$.merchant.bankInformation.collectionDetails.swipeTerminal.$touch"
+              :error="v$.merchant.bankInformation.collectionDetails.swipeTerminal.$error"
               v-model="merchant.bankInformation.collectionDetails.swipeTerminal"
               label="Swiped on the terminal of*"
               placeholder="Swiped on the terminal of*"
@@ -208,8 +229,8 @@
           <div class="col-md-3 col-sm-12 col-xs-12">
             <q-input
               color="grey-9"
-              @blur="$v.merchant.bankInformation.collectionDetails.chequeAmount.$touch"
-              :error="$v.merchant.bankInformation.collectionDetails.chequeAmount.$error"
+              @blur="v$.merchant.bankInformation.collectionDetails.chequeAmount.$touch"
+              :error="v$.merchant.bankInformation.collectionDetails.chequeAmount.$error"
               v-model="merchant.bankInformation.collectionDetails.chequeAmount"
               label="Cheque Amount*"
               placeholder="Cheque Amount*"
@@ -217,35 +238,53 @@
           </div>
           <div class="col-md-3 col-sm-12">
             <q-input
-              format="DD/MM/YYYY"
-              format-model="number"
               color="grey-9"
-              minimal
-              @blur="$v.merchant.bankInformation.collectionDetails.chequeDate.$touch"
-              :error="$v.merchant.bankInformation.collectionDetails.chequeDate.$error"
+              @blur="v$.merchant.bankInformation.collectionDetails.chequeDate.$touch"
+              :error="v$.merchant.bankInformation.collectionDetails.chequeDate.$error"
               v-model="merchant.bankInformation.collectionDetails.chequeDate"
               label="Cheque Date*"
               placeholder="Cheque Date*"
-            />
+            >
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                    <q-date v-model="merchant.bankInformation.collectionDetails.chequeDate" mask="YYYY-MM-DD">
+                      <div class="row items-center justify-end">
+                        <q-btn v-close-popup label="Close" color="primary" flat />
+                      </div>
+                    </q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
           </div>
           <div class="col-md-3 col-sm-12 col-xs-12">
             <q-input
-              format="DD/MM/YYYY"
-              format-model="number"
               color="grey-9"
-              minimal
-              @blur="$v.merchant.bankInformation.collectionDetails.chequeDepositedDate.$touch"
-              :error="$v.merchant.bankInformation.collectionDetails.chequeDepositedDate.$error"
+              @blur="v$.merchant.bankInformation.collectionDetails.chequeDepositedDate.$touch"
+              :error="v$.merchant.bankInformation.collectionDetails.chequeDepositedDate.$error"
               v-model="merchant.bankInformation.collectionDetails.chequeDepositedDate"
               label="Cheque Deposited Date*"
               placeholder="Cheque Deposited Date*"
-            />
+            >
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                    <q-date v-model="merchant.bankInformation.collectionDetails.chequeDepositedDate" mask="YYYY-MM-DD">
+                      <div class="row items-center justify-end">
+                        <q-btn v-close-popup label="Close" color="primary" flat />
+                      </div>
+                    </q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
           </div>
           <div class="col-md-3 col-sm-12 col-xs-12">
             <q-input
               color="grey-9"
-              @blur="$v.merchant.bankInformation.collectionDetails.chequeNumber.$touch"
-              :error="$v.merchant.bankInformation.collectionDetails.chequeNumber.$error"
+              @blur="v$.merchant.bankInformation.collectionDetails.chequeNumber.$touch"
+              :error="v$.merchant.bankInformation.collectionDetails.chequeNumber.$error"
               v-model="merchant.bankInformation.collectionDetails.chequeNumber"
               label="Cheque/UTR No*"
               placeholder="Cheque/UTR No*"
@@ -294,11 +333,17 @@ import {
   decimal,
   between
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   // name: 'ComponentName',
   props: ["cityOptions", "stateOptions", "propLeadDeatils", "bankInformation"],
   data() {
     return {
+      bankCityOptions: [],
+      bankStateOptions: [],
       accountTypeOptions: [
         {
           label: "Saving account",
@@ -454,7 +499,7 @@ export default {
   },
   computed: {
     makePropsReactive() {
-      this.merchant.bankInformation = this.businessInformation;
+      this.merchant.bankInformation = this.bankInformation;
     },
     bankInfoSwipePayment() {
       return this.propLeadDeatils.paymentOption;
@@ -469,15 +514,38 @@ export default {
         return oo.label.toLowerCase().includes(terms.toLowerCase());
       });
     },
-    citySearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+    bankCityFilterFn(val, update) {
+      if (val.length < 3) {
+        update(() => {
+          this.bankCityOptions = [];
+        });
+        return;
+      }
+      update(() => {
+        this.bankCityOptions = this.COMMON_FILTER_FUNCTION(
+          this.cityOptions,
+          val
+        );
+      });
     },
-    stateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+    bankStateFilterFn(val, update) {
+      if (val.length < 1) {
+        update(() => {
+          this.bankStateOptions = [];
+        });
+        return;
+      }
+      update(() => {
+        this.bankStateOptions = this.COMMON_FILTER_FUNCTION(
+          this.stateOptions,
+          val
+        );
+      });
     },
 
     /* Registered City search result */
     bankCitySelected(item) {
+      if (!item) return;
       this.merchant.bankInformation.bankDetails.bankCityName = item.label;
       this.merchant.bankInformation.bankDetails.bankCityRefCode = item.value;
     },
@@ -485,6 +553,7 @@ export default {
 
     /* Registered State search result */
     bankStateSelected(item) {
+      if (!item) return;
       this.merchant.bankInformation.bankDetails.bankStateName = item.label;
       this.merchant.bankInformation.bankDetails.bankStateRefCode = item.value;
     },
@@ -520,8 +589,8 @@ export default {
     },
     /* IFSC bank search result */
     validate() {
-      this.$v.merchant.companyInformation.$touch();
-      if (this.$v.merchant.companyInformation.$error) {
+      this.v$.merchant.bankInformation.$touch();
+      if (this.v$.merchant.bankInformation.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$emit("goNext", "bank", this.merchant);

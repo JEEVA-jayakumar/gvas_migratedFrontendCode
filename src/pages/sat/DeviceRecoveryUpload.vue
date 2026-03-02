@@ -35,10 +35,12 @@
       <q-table :rows="tempTableData" :columns="columnData" table-class="customTableClass shadow-0"
         :filter="filterSearch" v-model:pagination="paginationControl" row-key="index" :loading="tableAjaxLoading"
         color="light-blue">
-        <q-td v-slot:body-cell-action="props" :props="props">
+        <template v-slot:body-cell-action="props">
+          <q-td :props="props">
           <q-btn @click="removeScannedItems(props.row)" label="Remove" icon="close" color="red-6" size="sm" />
         </q-td>
-        <template slot="top">
+        </template>
+        <template v-slot:top>
           <!--START: table filter,search -->
           <div class="col-md-5">
             <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search .."
@@ -58,6 +60,7 @@ import { required } from '@vuelidate/validators';
 // Vue.use(VueBarcodeScanner);
 
 import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "addDeviceScan",
   props: ["propInventoryWithSo"],

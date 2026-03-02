@@ -133,6 +133,7 @@ import {
     decimal
 }
     from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 
 import { date } from "quasar";
 import moment from "moment";
@@ -145,6 +146,7 @@ import viewLeadDocumentsDataEntryComponent from "./viewLeadDocumentsDataEntryCom
 // import MarsErrorResponse from "../MarsErrorResponseHandler.vue";
 
 import { helpers } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 const today = new Date()
 const { startOfDate, addToDate, subtractFromDate } = date;
 const panCard = helpers.regex(
@@ -414,7 +416,7 @@ export default {
                 // this.$q.notify({
                 //     color: "negative",
                 //     position: "bottom",
-                //     message: error.body != null ? error.body.message : "Base TID creation failed!",
+                //     message: error.data != null ? error.data.message : "Base TID creation failed!",
                 //     icon: "clear"
                 // });
                 this.$q.loading.hide();
@@ -443,7 +445,7 @@ export default {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",
-                        message: error.body != null ? error.body.message : "Lead Information status update failed!",
+                        message: error.data != null ? error.data.message : "Lead Information status update failed!",
                         icon: "clear"
                     });
                     this.$q.loading.hide();
@@ -504,7 +506,7 @@ export default {
                         this.$q.notify({
                             color: "negative",
                             position: "bottom",
-                            message: error.body != null ? error.body.message : "Sub TID creation failed!",
+                            message: error.data != null ? error.data.message : "Sub TID creation failed!",
                             icon: "clear"
                         });
                         this.$q.loading.hide();
@@ -514,7 +516,7 @@ export default {
                 this.$q.notify({
                     color: "negative",
                     position: "bottom",
-                    message: error.body != null ? error.body.message : "Sub TID generation failed!",
+                    message: error.data != null ? error.data.message : "Sub TID generation failed!",
                     icon: "clear"
                 });
                 this.$q.loading.hide();
@@ -569,7 +571,7 @@ export default {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",
-                        message: error.body != null ? error.body.message : "Base TID creation failed!",
+                        message: error.data != null ? error.data.message : "Base TID creation failed!",
                         icon: "clear"
                     });
                     this.$q.loading.hide();
@@ -810,87 +812,57 @@ export default {
         //                 })
         //                 .catch(error => {
         //                     this.merchant.companyInformation.constitutionName = this.propLeadDeatils.merchantType.merchantTypeName;
-        //                     this.$set(
-        //                         finalRequest.merchant.salesInformation,
-        //                         "applicationDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.salesInformation[//                         "applicationDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.salesInformation.applicationDate
-        //                         )
+        //
         //                     );
 
-        //                     this.$set(
-        //                         finalRequest.merchant.salesInformation,
-        //                         "aggreementDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.salesInformation[//                         "aggreementDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.salesInformation.aggreementDate
-        //                         )
+        //
         //                     );
 
-        //                     this.$set(
-        //                         finalRequest.merchant.salesInformation,
-        //                         "loanDisbursementDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.salesInformation[//                         "loanDisbursementDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.salesInformation.loanDisbursementDate
-        //                         )
+        //
         //                     );
 
-        //                     this.$set(
-        //                         finalRequest.merchant.salesInformation,
-        //                         "tenureStartDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.salesInformation[//                         "tenureStartDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.salesInformation.tenureStartDate
-        //                         )
+        //
         //                     );
 
-        //                     this.$set(
-        //                         finalRequest.merchant.companyInformation,
-        //                         "establishYear",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.companyInformation[//                         "establishYear"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.companyInformation.establishYear
-        //                         )
+        //
         //                     );
 
-        //                     this.$set(
-        //                         finalRequest.merchant.bankInformation.collectionDetails,
-        //                         "chequeDepositedDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.bankInformation.collectionDetails[//                         "chequeDepositedDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.bankInformation.collectionDetails
         //                                 .chequeDepositedDate
-        //                         )
+        //
         //                     );
 
-        //                     this.$set(
-        //                         finalRequest.merchant.bankInformation.collectionDetails,
-        //                         "collectedDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.bankInformation.collectionDetails[//                         "collectedDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.bankInformation.collectionDetails
         //                                 .collectedDate
-        //                         )
+        //
         //                     );
 
-        //                     this.$set(
-        //                         finalRequest.merchant.bankInformation.collectionDetails,
-        //                         "chequeDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.bankInformation.collectionDetails[//                         "chequeDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.bankInformation.collectionDetails
         //                                 .chequeDate
-        //                         )
+        //
         //                     );
 
 
-        //                     this.$set(
-        //                         finalRequest.merchant.businessInformation,
-        //                         "memberSince",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.businessInformation[//                         "memberSince"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.businessInformation.memberSince
-        //                         )
+        //
         //                     );
-        //                     this.$set(
-        //                         finalRequest.merchant.businessInformation,
-        //                         "lastTurnoverYear",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.businessInformation[//                         "lastTurnoverYear"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.businessInformation.lastTurnoverYear
-        //                         )
+        //
         //                     );
 
         //                     if (error.data.hasOwnProperty("errorDetails")) {
@@ -903,7 +875,7 @@ export default {
         //                                     .slice(1, 2);
         //                                 let computeSplitted = splitted[splitted.length - 1];
         //                                 let fieldErrorFound = eval(`
-        //                 OThis.$v.viewBinding.partnersArr.$each[
+        //                 OThis.v$.viewBinding.partnersArr.$each[
         //                   ${findPartnersErrorIndex}
         //                 ].${computeSplitted}`);
         //                                 fieldErrorFound.$model = "";
@@ -917,7 +889,7 @@ export default {
         //                                 generateErrorMessage.issue = actual.issue;
         //                                 generateErrorMessage.value = actual.value;
         //                             } else {
-        //                                 let splittingErrorField = `OThis.$v.${splitted.join(
+        //                                 let splittingErrorField = `OThis.v$.${splitted.join(
         //                                     "."
         //                                 )}`;
         //                                 let fieldErrorFound = eval(splittingErrorField);

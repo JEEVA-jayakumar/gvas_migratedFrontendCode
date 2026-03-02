@@ -29,10 +29,11 @@
 </template>
 
 <script>
- import internalRegionalInventory from "../../pages/sat/internalRegionalInventory.vue";
- import AggregatorInventory from "../../pages/sat/AggregatorInventory.vue";
+ import internalRegionalInventory from "./internalRegionalInventory.vue";
+ import AggregatorInventory from "./AggregatorInventory.vue";
 
 import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "inventoryAllocation",
 
@@ -46,7 +47,7 @@ export default {
     return {
       enableUploadInventoryBtn: true,
       toggleScanButton: true,
-      inventoryOptionSelected: "implementationQueue"
+      inventoryOptionSelected: "internal"
     };
   },
 

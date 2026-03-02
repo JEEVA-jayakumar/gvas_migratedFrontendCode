@@ -14,7 +14,8 @@
       :filter="filter" v-model:pagination="paginationControl"
       row-key="name"
     >
-      <q-tr v-slot:body="props" :props="props" @click="rowClick(props.row)" class="cursor-pointer">
+      <template v-slot:body="props">
+          <q-tr :props="props" @click="rowClick(props.row)" class="cursor-pointer">
         <q-td v-for="col in props.cols" :key="col.name" :props="props" >
            <div v-if="col.field == 'tid'" >
               <span class="label text-primary"># {{ col.value }}</span>
@@ -27,10 +28,13 @@
           </div> 
         </q-td>
       </q-tr>
+        </template>
 
-      <q-td v-slot:body-cell-tid="props" :props="props">
+      <template v-slot:body-cell-tid="props">
+          <q-td :props="props">
           <span class="label text-primary"># {{props.row.tid}}</span>
       </q-td>
+        </template>
 
        <template v-slot:top="props">
            
@@ -105,6 +109,7 @@ import { required } from '@vuelidate/validators';
 import showMerchantTransactionLevelDetails from "../../components/sat/showMerchantTransactionLevelDetails.vue";
 import downloadExcel from "vue-json-excel";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "merchantTransactionLevel",
 

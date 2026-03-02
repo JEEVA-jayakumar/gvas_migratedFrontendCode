@@ -88,9 +88,14 @@ import {
   alphaNum,
   numeric
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 import { req } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["propShowUpdatePickTicket", "propRowDetails"],
   name: "MDRdetails",
   data() {
@@ -212,9 +217,9 @@ export default {
                 color: "negative",
                 position: "bottom",
                 message:
-                  error.body.message == null
+                  error.data.message == null
                     ? "Please Try Again Later !"
-                    : error.body.message,
+                    : error.data.message,
                 icon: "thumb_down"
               });
             });

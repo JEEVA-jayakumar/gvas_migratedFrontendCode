@@ -62,6 +62,7 @@
     numeric,
     sameAs
   } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 
   import { date } from "quasar";
   const today = new Date();

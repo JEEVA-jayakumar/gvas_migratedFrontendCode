@@ -127,9 +127,9 @@
       </div>
       <!-- <pre>{{getAllInventoryDevicesTypesData}}</pre> -->
       <!--START: Open openAddBulkDeviceModelComp model -->
-      <PhonepeopenAddBulkDeviceModelComp v-if="openBulkUploadModal" :propOpenBulkUploadModal="openBulkUploadModal"
+      <PhonePeopenAddBulkDeviceModelComp v-if="openBulkUploadModal" :propOpenBulkUploadModal="openBulkUploadModal"
         :propAllDevicestypes="getAllInventoryDevicesTypesData" @closeModel="fnPhonePeOpenBulkUploadModal"
-        @emitToggleinventoryBulkUploadOnSuccess="fnReloadPageInformation"></PhonepeopenAddBulkDeviceModelComp>
+        @emitToggleinventoryBulkUploadOnSuccess="fnReloadPageInformation"></PhonePeopenAddBulkDeviceModelComp>
 
         <phonepeAddRefurbishedBulkUploadDevice v-if="openRefurbishedBulkUploadModal" :propOpenRefurbishedBulkUploadModal="openRefurbishedBulkUploadModal"
         :propAllDevicestypes="getAllInventoryDevicesTypesData" @closeModel="fnPhonePeOpenRefurbishedBulkUploadModal" 
@@ -155,13 +155,13 @@
 import { mapGetters, mapActions } from "vuex";
 import downloadExcel from "vue-json-excel";
 import phonepeAddRefurbishedBulkUploadDevice from "../../components/inventory/phonepeAddRefurbishedBulkUploadDevice.vue"
-import PhonepeopenAddBulkDeviceModelComp from "../../components/inventory/PhonepeopenAddBulkDeviceModelComp.vue";
+import PhonePeopenAddBulkDeviceModelComp from "../../components/inventory/PhonePeopenAddBulkDeviceModelComp.vue";
 import faultyInventoryComponent from "../../components/inventory/faultyInventoryComponent.vue";
 import showAggregatorsAddDamagedDevices from "../../components/inventory/showAggregatorsAddDamagedDevices.vue";
 export default {
   name: "inventoryCentral",
   components: {
-    PhonepeopenAddBulkDeviceModelComp,
+    PhonePeopenAddBulkDeviceModelComp,
     showAggregatorsAddDamagedDevices,
     downloadExcel,
     phonepeAddRefurbishedBulkUploadDevice

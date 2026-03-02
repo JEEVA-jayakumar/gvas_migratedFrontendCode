@@ -34,12 +34,12 @@
 </template>
 
 <script>
-import vuePdfjs from "vue-pdfjs";
+
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
-    vuePdfjs
+
   },
   props: ["propshowDocumentModal", "propReason"],
   data() {

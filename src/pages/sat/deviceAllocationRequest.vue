@@ -14,16 +14,21 @@
       @request="ajaxLoadAllLeadInfo"
     >
       
-      <q-td v-slot:body-cell-soName="props" :props="props">{{
+      <template v-slot:body-cell-soName="props">
+          <q-td :props="props">{{
         props.row.soName == null
           ? "NA"
           : props.row.soName
       }}</q-td>
+        </template>
    
-      <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+      <!-- <template v-slot:body-cell-deviceStatusDate="props">
+          <q-td :props="props">
         <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-      </q-td>   -->
-       <q-td v-slot:body-cell-action="props" :props="props">
+      </q-td>
+        </template>   -->
+       <template v-slot:body-cell-action="props">
+          <q-td :props="props">
         <q-btn 
          v-if="props.row.status == 0"
           highlight
@@ -51,7 +56,9 @@
        </div>
        
       </q-td>
-      <!-- <q-td v-slot:body-cell-action2="props" :props="props"  > -->
+        </template>
+      <!-- <template v-slot:body-cell-action2="props">
+          <q-td :props="props"  > -->
        
        <!-- <q-td auto-width key="action" :props="props">
               <q-btn
@@ -62,10 +69,11 @@
                @click="openAcceptModel(props.row)"
               size="sm"
              >Accept</q-btn>
-           </q-td> -->
+           </q-td>
+        </template> -->
          
      
-      <template slot="top" class="bottom-border">
+      <template v-slot:top class="bottom-border">
         <!--START: table filter,search,excel download -->
         <div class="col-5">
           <q-input
@@ -121,6 +129,7 @@ import moment from "moment";
 
 import deviceAllocationRequest from "../../components/sat/rejectDeviceRequest.vue";
 import { req } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 
 
 export default {
@@ -295,8 +304,8 @@ export default {
       });
       
       this.BIJLIPAY_SELF_ASSIGNMENT_TRACKER({ pagination, filter }).then(res => {
-          console.log("RESPONSE REQUEST",JSON.stringify(res.body));
-         let responseData = res.body
+          console.log("RESPONSE REQUEST",JSON.stringify(res.data));
+         let responseData = res.data
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 
@@ -416,7 +425,7 @@ export default {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
-                  message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                  message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
                   icon: "thumb_down"
                 });
               });

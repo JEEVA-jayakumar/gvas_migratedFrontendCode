@@ -259,8 +259,12 @@ import {
   minValue,
   decimal
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 import { stringify } from "json5";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   name: "getserviceRequestGetTypes",
   components: {
     allocatedSo,
@@ -682,7 +686,7 @@ export default {
     //           this.$q.notify({
     //             color: "negative",
     //             position: "bottom",
-    //             message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+    //             message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
     //             icon: "thumb_down"
     //           });
     //         });
@@ -743,7 +747,7 @@ export default {
                   this.$q.notify({
                     color: 'negative',
                     position: 'bottom',
-                    message: error.body.message == null ? 'Please Try Again Later !' : error.body.message,
+                    message: error.data.message == null ? 'Please Try Again Later !' : error.data.message,
                     icon: 'thumb_down'
                   })
                 })
@@ -753,7 +757,7 @@ export default {
               this.$q.notify({
                 color: 'negative',
                 position: 'bottom',
-                message: error.body.message == null ? 'Please Try Again Later !' : error.body.message,
+                message: error.data.message == null ? 'Please Try Again Later !' : error.data.message,
                 icon: 'thumb_down'
               })
             })
@@ -921,9 +925,9 @@ export default {
             color: 'negative',
             position: 'bottom',
             message:
-              error.body.message == null
+              error.data.message == null
                 ? 'Please Try Again Later !'
-                : error.body.message,
+                : error.data.message,
             icon: 'thumb_down'
           })
         })
@@ -1066,7 +1070,7 @@ export default {
             })
           })
           this.$q.loading.hide()
-        }).onCancel(() => {
+        }).catch(() => {
           this.$q.notify({
             color: 'negative',
             position: 'bottom',
@@ -1098,7 +1102,7 @@ export default {
             })
           })
           this.$q.loading.hide()
-        }).onCancel(() => {
+        }).catch(() => {
           this.$q.notify({
             color: 'negative',
             position: 'bottom',
@@ -1114,7 +1118,7 @@ export default {
           this.tableData = this.getserviceRequestGetTypes
         
         })
-        .onCancel(() => {
+        .catch(() => {
           this.$q.loading.hide()
         })
     },

@@ -456,6 +456,7 @@ import openedExternal from '../../components/sat/openedExternal.vue'
 import internalServiceRequestPopup from '../../components/sat/internalServiceRequestPopup.vue'
 import { nullableTypeAnnotation } from 'babel-types'
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
 name: 'implementationQueue',
 components: {

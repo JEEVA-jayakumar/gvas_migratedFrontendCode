@@ -478,6 +478,7 @@ import showFinalRejectLeadRemarksComponent from "../../components/sat/showFinalR
 
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "leadDataEntry",
   components: {
@@ -725,14 +726,13 @@ export default {
                   this.$q.notify({
                     color: "negative",
                     position: "bottom",
-                    message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                    message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
                     icon: "thumb_down"
                   });
                 }
                 this.$q.loading.hide();
               });
-          })
-          .catch(() => {
+          }).onCancel(() => {
             this.$q.notify({
               color: "negative",
               position: "bottom",

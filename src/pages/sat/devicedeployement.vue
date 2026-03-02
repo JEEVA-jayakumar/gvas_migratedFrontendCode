@@ -15,7 +15,7 @@
             </div>
             <div class="col-xs-12 col-sm-6">
               <q-input
-                format="DD/MM/YYYY"
+                type="date"
                 v-model="merchant.paymentDetails.installationDate"
                 class="no-margin"
                 label="Installation Date"
@@ -24,7 +24,7 @@
             </div>
             <div class="col-xs-12 col-sm-6">
               <q-input
-                format="DD/MM/YYYY"
+                type="date"
                 v-model="merchant.paymentDetails.deinstallationDate"
                 class="no-margin"
                 label="DeInstallation Date"
@@ -48,6 +48,7 @@
 <style scoped>
 </style>
 <script>
+import { useVuelidate } from "@vuelidate/core";
 
 import { LocalStorage } from "quasar";
 global.jQuery = require("jquery");
@@ -82,12 +83,16 @@ const gstn = helpers.regex(
   /^([0-9]){2}([A-Z]{3}[ABCFEGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}[0-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$/
 );
 export default {
+  setup() {
+    return { v$: useVuelidate() }
+  },
   components: {
     showPdfModalComponent,
     MarsErrorResponse
   },
   data() {
     return {
+      step: "campaign",
       PDFDetails: null,
       toggleshowPDFModal: false,
       formData: {
@@ -107,9 +112,6 @@ export default {
       },
       info: {
         datainfo1: ""
-      },
-      merchant: {
-        datainfo: ""
       },
       formdata: {
         paymentOption: "",
@@ -571,8 +573,8 @@ export default {
     //   console.log("Hello",this.formdata.plan);
     // },
     sendtoFinance(request) {
-      this.$v.formdata.$touch();
-      if (this.$v.formdata.$error) {
+      this.v$.formdata.$touch();
+      if (this.v$.formdata.$error) {
         this.$q.notify("Please review fields again.");
       } else if (
         this.formdata.paymentOption == 2 &&

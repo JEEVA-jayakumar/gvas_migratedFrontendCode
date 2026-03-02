@@ -105,6 +105,7 @@ import { and } from '@vuelidate/validators';
 // import VueBarcodeScanner from "vue-barcode-scanner";
 // Vue.use(VueBarcodeScanner);
 import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "allocateDevice",
   props: ["propShowDeviceVerificationComponent"],

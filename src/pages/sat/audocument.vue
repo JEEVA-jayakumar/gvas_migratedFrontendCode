@@ -42,6 +42,12 @@
           </q-td>
         </template>
 
+        <template v-slot:body-cell-mobileNumber="props">
+          <q-td :props="props">{{
+            props.row.assignedTo == null ? "NA" : props.row.assignedTo.contactNumber
+            }}</q-td>
+        </template>
+
         <template v-slot:body-cell-deviceStatusDate="props">
           <q-td :props="props">
             <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
@@ -151,6 +157,9 @@
             </div>
             <div class="col-12 col-md-2 row items-center justify-end">
               <q-btn color="purple-9" :disable="!formData.fromDate || !formData.toDate" @click="SubmitData(formData)">Submit</q-btn>
+              <q-btn color="red" v-if="selectedRow" @click="DeleteData" class="q-ml-sm">
+                <q-icon name="delete" />
+              </q-btn>
             </div>
           </div>
         </template>
@@ -173,6 +182,7 @@ import viewDocumentApprove from "../../components/sat/viewDocumentApprove.vue";
 import viewDocumentReject from "../../components/sat/viewRejectDocument.vue";
 import { date } from "quasar";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "AuDocument",
   components: {
@@ -208,6 +218,7 @@ export default {
         fromDate: "",
         toDate: "",
       },
+      selectedRow: null,
     };
   },
   computed: {
@@ -225,28 +236,55 @@ export default {
     ...mapActions("equitasImplementedQueue", ["EQUITAS_TRACKER_LIST"]),
     toTimestamp(strDate, isFromDate = true) {
       if (!strDate) return null;
-      const dateOnly = strDate.split("T")[0];
-      let timeStr = isFromDate ? "00:00:00" : "23:59:59";
-      return Date.parse(`${dateOnly}T${timeStr}`);
+      const datePart = strDate.split("T")[0];
+      let timeStr = isFromDate ? "00:00:00" : "23:59:00";
+      const formattedDate = `${datePart}T${timeStr}Z`;
+      return Date.parse(formattedDate);
     },
     SubmitData(request) {
       this.formData1 = {
-        fromDate: this.toTimestamp(request.fromDate, true),
-        toDate: this.toTimestamp(request.toDate, false),
+        fromDate: this.toTimestamp(request.fromDate.toString(), true),
+        toDate: this.toTimestamp(request.toDate.toString(), false),
       };
       if (this.formData1.fromDate <= this.formData1.toDate) {
+        this.selectedRow = request;
         this.ajaxLoadAllLeadInfo({
           pagination: this.paginationControl,
           filter: this.filter,
           formData: this.formData1,
         });
       } else {
-        this.$q.notify({ color: "negative", message: "To Date must be greater than From Date" });
+        this.$q.notify({
+          color: "negative",
+          position: "bottom",
+          message: "To Date must be greater than From Date",
+          icon: "thumb_down",
+        });
       }
     },
+    DeleteData() {
+      this.formData.fromDate = "";
+      this.formData.toDate = "";
+      this.formData1.fromDate = "";
+      this.formData1.toDate = "";
+      this.ajaxLoadAllLeadInfo({
+        pagination: this.paginationControl,
+        filter: this.filter,
+        formData: this.formData1,
+      });
+      this.selectedRow = null;
+    },
     ajaxLoadAllLeadInfo({ pagination, filter, formData }) {
-      this.$q.loading.show({ spinnerColor: "purple-9", message: "Fetching data .." });
-      this.EQUITAS_TRACKER_LIST({ pagination, filter, formData }).then(() => {
+      this.$q.loading.show({
+        delay: 0, // ms
+        spinnerColor: "purple-9",
+        message: "Fetching data ..",
+      });
+      this.EQUITAS_TRACKER_LIST({
+        pagination,
+        filter: this.filter,
+        formData: this.formData1,
+      }).then(() => {
           this.paginationControl = pagination;
           this.paginationControl.rowsNumber = this.getEquitasReport.totalElements;
           this.paginationControl.page = this.getEquitasReport.number + 1;

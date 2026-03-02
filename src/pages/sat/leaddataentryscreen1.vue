@@ -359,6 +359,7 @@ import showPdfModalComponent from "../../components/sat/showPdfModalComponent.vu
 import showMarsForm from "../../components/sat/showMarsFormComponent.vue";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "leadDataEntry",
   components: {

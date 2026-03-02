@@ -80,11 +80,11 @@
             >
               <q-item-label header style="border-bottom: 1px solid #ccc;">
                 <q-icon
-                  :style="'color:'[formData.device_type.id == item.device.id?'#fff':'#202c3f']"
+                  :style="{ color: formData.device_type.id == item.device.id ? '#fff' : '#202c3f' }"
                   name="fas fa-tablet-alt"
                 />
                 {{item.device.deviceName}}
-              </q-item-label header>
+              </q-item-label>
               <q-scroll-area
                 style="height:400px"
                 :thumb-style="{
@@ -154,6 +154,7 @@ import { email } from '@vuelidate/validators';
 // Vue.use(VueBarcodeScanner);
 import { mapGetters, mapActions } from "vuex";
 import showPDORegionBasedSo from "../../components/inventory/showPDORegionBasedSo.vue";
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "allocateDevice",
   components: {
@@ -277,7 +278,12 @@ export default {
             });
           });
       } else {
-        this.$q.notify({ S });
+        this.$q.notify({
+          color: "primary",
+          position: "bottom",
+          message: barcode + " - already exist in " + assumeArr.device.deviceName,
+          icon: "info"
+        });
       }
     },
 
@@ -370,7 +376,7 @@ export default {
 };
 </script>
 <style scoped>
-.activeDeviceTab .q-list-header {
+.activeDeviceTab .q-item-label--header {
   border-bottom: 1px solid rgb(204, 204, 204);
   background: #61116a;
   color: #fff;

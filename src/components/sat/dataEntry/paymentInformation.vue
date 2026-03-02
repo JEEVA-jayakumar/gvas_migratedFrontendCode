@@ -5,8 +5,8 @@
         <p class="text-caption">Device Owned By</p>
         <div class="group">
           <q-radio
-            @blur="$v.merchant.paymentDetails.deviceOwnedBy.$touch"
-            :error="$v.merchant.paymentDetails.deviceOwnedBy.$error"
+            @blur="v$.merchant.paymentDetails.deviceOwnedBy.$touch"
+            :error="v$.merchant.paymentDetails.deviceOwnedBy.$error"
             v-for="(item,index) in deviceOwnedByOptions"
             :key="index"
             color="grey-9"
@@ -20,8 +20,8 @@
         <q-input
           color="grey-9"
           type="number"
-          @blur="$v.merchant.paymentDetails.installationFee.$touch"
-          :error="$v.merchant.paymentDetails.installationFee.$error"
+          @blur="v$.merchant.paymentDetails.installationFee.$touch"
+          :error="v$.merchant.paymentDetails.installationFee.$error"
           v-model="merchant.paymentDetails.installationFee"
           label="Installation Fee*"
           placeholder="Installation Fee*"
@@ -31,11 +31,13 @@
         <q-select
           placeholder="Choose from the below"
           color="grey-9"
-          @blur="$v.merchant.paymentDetails.terminalModeCode.$touch"
-          :error="$v.merchant.paymentDetails.terminalModeCode.$error"
+          @blur="v$.merchant.paymentDetails.terminalModeCode.$touch"
+          :error="v$.merchant.paymentDetails.terminalModeCode.$error"
           v-model="merchant.paymentDetails.terminalModeCode"
           label="Terminal Model*"
           :options="terminalModelSet"
+          map-options
+          emit-value
         />
       </div>
       <div class="col-md-6 col-sm-12">
@@ -43,8 +45,8 @@
           color="grey-9"
           type="number"
           disable
-          @blur="$v.merchant.paymentDetails.numberOfTerminals.$touch"
-          :error="$v.merchant.paymentDetails.numberOfTerminals.$error"
+          @blur="v$.merchant.paymentDetails.numberOfTerminals.$touch"
+          :error="v$.merchant.paymentDetails.numberOfTerminals.$error"
           v-model="merchant.paymentDetails.numberOfTerminals"
           label="No of Terminals*"
           placeholder="No of Terminals*"
@@ -55,8 +57,8 @@
         <div class="group">
           <q-radio
             disable
-            @blur="$v.merchant.paymentDetails.cashAtPosEnabled.$touch"
-            :error="$v.merchant.paymentDetails.cashAtPosEnabled.$error"
+            @blur="v$.merchant.paymentDetails.cashAtPosEnabled.$touch"
+            :error="v$.merchant.paymentDetails.cashAtPosEnabled.$error"
             v-for="(item,index) in cashAtPosEnabledOptions"
             :key="index"
             color="grey-9"
@@ -73,6 +75,8 @@
           v-model="merchant.paymentDetails.rentalPlanCode"
           label="Rental Plan*"
           :options="rentalPlanSet"
+          map-options
+          emit-value
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
@@ -82,36 +86,42 @@
           v-model="merchant.paymentDetails.rentalMode"
           label="Rental Mode*"
           :options="rentalModeOptions"
+          map-options
+          emit-value
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
           placeholder="Choose from the below*"
           color="grey-9"
-          @blur="$v.merchant.paymentDetails.serviceProvider.$touch"
-          :error="$v.merchant.paymentDetails.serviceProvider.$error"
+          @blur="v$.merchant.paymentDetails.serviceProvider.$touch"
+          :error="v$.merchant.paymentDetails.serviceProvider.$error"
           v-model="merchant.paymentDetails.serviceProvider"
           label="Service provider*"
           :options="serviceProviderListSet"
+          map-options
+          emit-value
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
           placeholder="Choose from the below*"
           color="grey-9"
-          @blur="$v.merchant.paymentDetails.networkPreferred.$touch"
-          :error="$v.merchant.paymentDetails.networkPreferred.$error"
+          @blur="v$.merchant.paymentDetails.networkPreferred.$touch"
+          :error="v$.merchant.paymentDetails.networkPreferred.$error"
           v-model="merchant.paymentDetails.networkPreferred"
           label="Network provider*"
           :options="networkProviderListSet"
+          map-options
+          emit-value
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <p class="text-caption">Rental Type</p>
         <div class="group">
           <q-radio
-            @blur="$v.merchant.paymentDetails.rentalType.$touch"
-            :error="$v.merchant.paymentDetails.rentalType.$error"
+            @blur="v$.merchant.paymentDetails.rentalType.$touch"
+            :error="v$.merchant.paymentDetails.rentalType.$error"
             v-for="(item,index) in rentalTypeOptions"
             :key="index"
             color="grey-9"
@@ -124,8 +134,8 @@
       </div>
       <div v-if="merchant.paymentDetails.rentalType == 'R'" class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.paymentDetails.gracePeriod.$touch"
-          :error="$v.merchant.paymentDetails.gracePeriod.$error"
+          @blur="v$.merchant.paymentDetails.gracePeriod.$touch"
+          :error="v$.merchant.paymentDetails.gracePeriod.$error"
           color="grey-9"
           type="number"
           v-model="merchant.paymentDetails.gracePeriod"
@@ -137,8 +147,8 @@
         <q-input
           color="grey-9"
           type="number"
-          @blur="$v.merchant.paymentDetails.advanceRentCollected.$touch"
-          :error="$v.merchant.paymentDetails.advanceRentCollected.$error"
+          @blur="v$.merchant.paymentDetails.advanceRentCollected.$touch"
+          :error="v$.merchant.paymentDetails.advanceRentCollected.$error"
           v-model="merchant.paymentDetails.advanceRentCollected"
           label="Advance Rent Collected*"
           placeholder="Advance Rent Collected*"
@@ -148,8 +158,8 @@
         <q-input
           color="grey-9"
           type="number"
-          @blur="$v.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$touch"
-          :error="$v.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$error"
+          @blur="v$.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$touch"
+          :error="v$.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$error"
           v-model="merchant.paymentDetails.noOfMonthRentPaidInAdvance"
           label="No. Of Month Rent Paid In Advance*"
           placeholder="No. Of Month Rent Paid In Advance*"
@@ -159,8 +169,8 @@
         <p class="text-caption">Advanced Rent Mode</p>
         <div class="group">
           <q-radio
-            @blur="$v.merchant.paymentDetails.advanceRentMode.$touch"
-            :error="$v.merchant.paymentDetails.advanceRentMode.$error"
+            @blur="v$.merchant.paymentDetails.advanceRentMode.$touch"
+            :error="v$.merchant.paymentDetails.advanceRentMode.$error"
             v-for="(item,index) in advanceRentModeOptions"
             :key="index"
             color="grey-9"
@@ -174,8 +184,8 @@
         <q-input
           color="grey-9"
           type="number"
-          @blur="$v.merchant.paymentDetails.devicePrice.$touch"
-          :error="$v.merchant.paymentDetails.devicePrice.$error"
+          @blur="v$.merchant.paymentDetails.devicePrice.$touch"
+          :error="v$.merchant.paymentDetails.devicePrice.$error"
           v-model="merchant.paymentDetails.devicePrice"
           label="Device Price"
           placeholder="Device Price"
@@ -185,8 +195,8 @@
         <q-input
           color="grey-9"
           type="number"
-          @blur="$v.merchant.paymentDetails.otherCharges.$touch"
-          :error="$v.merchant.paymentDetails.otherCharges.$error"
+          @blur="v$.merchant.paymentDetails.otherCharges.$touch"
+          :error="v$.merchant.paymentDetails.otherCharges.$error"
           v-model="merchant.paymentDetails.otherCharges"
           label="Other Charges"
           placeholder="Other Charges"
@@ -196,8 +206,8 @@
         <q-input
           color="grey-9"
           type="number"
-          @blur="$v.merchant.paymentDetails.totalAmountPaid.$touch"
-          :error="$v.merchant.paymentDetails.totalAmountPaid.$error"
+          @blur="v$.merchant.paymentDetails.totalAmountPaid.$touch"
+          :error="v$.merchant.paymentDetails.totalAmountPaid.$error"
           v-model="merchant.paymentDetails.totalAmountPaid"
           label="Total Amount Paid"
           placeholder="Total Amount Paid"
@@ -232,7 +242,11 @@ import {
   between,
   numeric
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   // name: 'ComponentName',
   props: [
     "terminalModelSet",
@@ -478,8 +492,8 @@ export default {
   },
   methods: {
     validate() {
-      this.$v.merchant.paymentDetails.$touch();
-      if (this.$v.merchant.paymentDetails.$error) {
+      this.v$.merchant.paymentDetails.$touch();
+      if (this.v$.merchant.paymentDetails.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$emit("goNext", "paymentDetails", this.merchant);

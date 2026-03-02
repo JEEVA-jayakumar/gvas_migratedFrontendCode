@@ -15,22 +15,32 @@
         :filter="filter" v-model:pagination="paginationControl"
         row-key="name"
       >
-        <q-td v-slot:body-cell-tid="props" :props="props">
+        <template v-slot:body-cell-tid="props">
+          <q-td :props="props">
           <span class="label text-primary"># {{props.row.tid}}</span>
         </q-td>
-        <q-td v-slot:body-cell-mid="props" :props="props">
+        </template>
+        <template v-slot:body-cell-mid="props">
+          <q-td :props="props">
           <span class="label text-primary"># {{props.row.mid}}</span>
         </q-td>
-        <q-td
-          v-slot:body-cell-transaction_amount="props"
+        </template>
+        <template v-slot:body-cell-transaction_amount="props">
+          <q-td
           :props="props"
         >Rs. {{props.row.transaction_amount}}</q-td>
-        <q-td v-slot:body-cell-gst="props" :props="props">Rs. {{props.row.gst}}</q-td>
-        <q-td
-          v-slot:body-cell-net_amount="props"
+        </template>
+        <template v-slot:body-cell-gst="props">
+          <q-td :props="props">Rs. {{props.row.gst}}</q-td>
+        </template>
+        <template v-slot:body-cell-net_amount="props">
+          <q-td
           :props="props"
         >Rs. {{props.row.net_amount}}</q-td>
-        <q-td v-slot:body-cell-mdr="props" :props="props">Rs. {{props.row.mdr}}</q-td>
+        </template>
+        <template v-slot:body-cell-mdr="props">
+          <q-td :props="props">Rs. {{props.row.mdr}}</q-td>
+        </template>
         <template v-slot:top="props">
           <!--START: table fullscreen mode -->
           <!-- <div class="col-md-4" align="right">
@@ -83,6 +93,7 @@
 import { required } from '@vuelidate/validators';
 import downloadExcel from "vue-json-excel";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "merchantTracker",
   components: {

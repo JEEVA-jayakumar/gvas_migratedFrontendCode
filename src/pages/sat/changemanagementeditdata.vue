@@ -48,8 +48,8 @@
                   this.getImplementedQueue.leadInformation.cmsLeadStatus == 21
 
                 "
-                @blur="$v.formdata.paymentOption.$touch"
-                :error="$v.formdata.paymentOption.$error"
+                @blur="v$.formdata.paymentOption.$touch"
+                :error="v$.formdata.paymentOption.$error"
                 v-model.trim="formdata.paymentOption"
                 class="no-margin"
                 label="select Payment"
@@ -74,8 +74,8 @@
             </div>
             <div class="col-xs-12 col-sm-6">
               <q-select
-                @blur="$v.formdata.cmsCategoryType.$touch"
-                :error="$v.formdata.cmsCategoryType.$error"
+                @blur="v$.formdata.cmsCategoryType.$touch"
+                :error="v$.formdata.cmsCategoryType.$error"
                 placeholder="Choose from the below*"
                 color="grey-9"
                 v-model.trim="formdata.cmsCategoryType"
@@ -134,8 +134,8 @@
             </div>
             <!-- <div class="col-xs-12 col-sm-6">
               <q-select clearable
-               @blur="$v.formdata.paymentOption.$touch"
-              :error="$v.formdata.paymentOption.$error"
+               @blur="v$.formdata.paymentOption.$touch"
+              :error="v$.formdata.paymentOption.$error"
               v-model="formdata.paymentOption"
                 class="no-margin"
                 label="select Payment"
@@ -190,7 +190,7 @@
                 <input
                   type="file"
                   name="file"
-                  @change="fnUploadApplicationForm($event, document)"
+                  @change="fnUploadApplicationForm($event)"
                   accept=".png, .jpg, .pdf"
                 />
               </label>
@@ -199,19 +199,31 @@
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input
-              @blur="$v.formdata.paymentMadeon.$touch"
-              :error="$v.formdata.paymentMadeon.$error"
+              @blur="v$.formdata.paymentMadeon.$touch"
+              :error="v$.formdata.paymentMadeon.$error"
               v-model.trim="formdata.paymentMadeon"
               class="text-weight-regular text-grey-8"
               color="grey-9"
               label="*Transaction Made ON"
               placeholder="Transaction Made ON"
-            />
+            >
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                    <q-date v-model="formdata.paymentMadeon" mask="YYYY-MM-DD HH:mm:ss">
+                      <div class="row items-center justify-end">
+                        <q-btn v-close-popup label="Close" color="primary" flat />
+                      </div>
+                    </q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input
-              @blur="$v.formdata.referenceNumber.$touch"
-              :error="$v.formdata.referenceNumber.$error"
+              @blur="v$.formdata.referenceNumber.$touch"
+              :error="v$.formdata.referenceNumber.$error"
               v-model.trim="formdata.referenceNumber"
               class="text-weight-regular text-grey-8"
               color="grey-9"
@@ -225,8 +237,8 @@
         >
           <div class="col-xs-12 col-sm-6">
             <q-input
-              @blur="$v.formdata.referenceNumber.$touch"
-              :error="$v.formdata.referenceNumber.$error"
+              @blur="v$.formdata.referenceNumber.$touch"
+              :error="v$.formdata.referenceNumber.$error"
               v-model.trim="formdata.referenceNumber"
               class="text-weight-regular text-grey-8"
               color="grey-9"
@@ -235,13 +247,25 @@
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input
-              @blur="$v.formdata.paymentMadeon.$touch"
-              :error="$v.formdata.paymentMadeon.$error"
+              @blur="v$.formdata.paymentMadeon.$touch"
+              :error="v$.formdata.paymentMadeon.$error"
               v-model.trim="formdata.paymentMadeon"
               class="text-weight-regular text-grey-8"
               color="grey-9"
               label="*Transaction Made ON"
-            />
+            >
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                    <q-date v-model="formdata.paymentMadeon" mask="YYYY-MM-DD HH:mm:ss">
+                      <div class="row items-center justify-end">
+                        <q-btn v-close-popup label="Close" color="primary" flat />
+                      </div>
+                    </q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
           </div>
         </div>
         <div
@@ -250,8 +274,8 @@
         >
           <div class="col-xs-12 col-sm-6">
             <q-input
-              @blur="$v.formdata.referenceNumber.$touch"
-              :error="$v.formdata.referenceNumber.$error"
+              @blur="v$.formdata.referenceNumber.$touch"
+              :error="v$.formdata.referenceNumber.$error"
               v-model.trim="formdata.referenceNumber"
               class="text-weight-regular text-grey-8"
               color="grey-9"
@@ -260,13 +284,25 @@
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input
-              @blur="$v.formdata.paymentMadeon.$touch"
-              :error="$v.formdata.paymentMadeon.$error"
+              @blur="v$.formdata.paymentMadeon.$touch"
+              :error="v$.formdata.paymentMadeon.$error"
               v-model.trim="formdata.paymentMadeon"
               class="text-weight-regular text-grey-8"
               color="grey-9"
               label="*Transaction Made ON"
-            />
+            >
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                    <q-date v-model="formdata.paymentMadeon" mask="YYYY-MM-DD HH:mm:ss">
+                      <div class="row items-center justify-end">
+                        <q-btn v-close-popup label="Close" color="primary" flat />
+                      </div>
+                    </q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
           </div>
         </div>
         <br />
@@ -436,37 +472,50 @@
             />
           </div>
           <div class="col-xs-12 col-sm-6">
-            <q-input
+            <q-select
               color="grey-9"
-              v-model.trim="merchant.companyinformation.registeredCityName"
+              v-model="merchant.companyinformation.registeredCityName"
+              use-input
+              hide-selected
+              fill-input
+              input-debounce="10"
               label="City (type min 3 characters)*"
               placeholder="Start typing ..*"
+              :options="cityOptionsFiltered"
+              @filter="residentCitySearchFilter"
+              @update:model-value="registeredCitySelected"
             >
-              <q-autocomplete
-                separator
-                @search="residentCitySearch"
-                :debounce="10"
-                :min-characters="3"
-                @selected="registeredCitySelected"
-              />
-            </q-input>
-            <!-- {{merchant.companyinformation.registeredCityName}} -->
+              <template v-slot:no-option>
+                <q-item>
+                  <q-item-section class="text-grey">
+                    No results
+                  </q-item-section>
+                </q-item>
+              </template>
+            </q-select>
           </div>
           <div class="col-xs-12 col-sm-6">
-            <q-input
+            <q-select
               color="grey-9"
-              v-model.trim="merchant.companyinformation.registeredStateName"
+              v-model="merchant.companyinformation.registeredStateName"
+              use-input
+              hide-selected
+              fill-input
+              input-debounce="10"
               label="state (type min 3 characters)*"
               placeholder="Start typing ..*"
+              :options="stateOptionsFiltered"
+              @filter="residentStateSearchFilter"
+              @update:model-value="registeredStateSelected"
             >
-              <q-autocomplete
-                separator
-                @search="residentStateSearch"
-                :debounce="10"
-                :min-characters="1"
-                @selected="registeredStateSelected"
-              />
-            </q-input>
+              <template v-slot:no-option>
+                <q-item>
+                  <q-item-section class="text-grey">
+                    No results
+                  </q-item-section>
+                </q-item>
+              </template>
+            </q-select>
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input
@@ -511,8 +560,8 @@
             <q-input
               upper-case
               color="grey-9"
-              @blur="$v.merchant.companyinformation.pan.$touch"
-              :error="$v.merchant.companyinformation.pan.$error"
+              @blur="v$.merchant.companyinformation.pan.$touch"
+              :error="v$.merchant.companyinformation.pan.$error"
               v-model="merchant.companyinformation.pan"
               class="no-margin"
               label="Pan Number"
@@ -527,18 +576,18 @@
             </div>
             <div
               class="text-negative q-py-xs group text-caption"
-              v-if="$v.merchant.companyinformation.pan.$error"
+              v-if="v$.merchant.companyinformation.pan.$error"
             >
               <div>
                 <q-icon color="negative" name="warning" />&nbsp;Required -
                 Provide valid PAN Number
               </div>
-              <div v-if="$v.merchant.companyinformation.pan.$params.minLength">
+              <div v-if="v$.merchant.companyinformation.pan.$params.minLength">
                 <q-icon color="negative" name="warning" />
                 &nbsp;Length should be between
-                {{ $v.merchant.companyinformation.pan.$params.minLength.min }}
+                {{ v$.merchant.companyinformation.pan.$params.minLength.min }}
                 and
-                {{ $v.merchant.companyinformation.pan.$params.maxLength.max }}
+                {{ v$.merchant.companyinformation.pan.$params.maxLength.max }}
               </div>
             </div>
           </div>
@@ -546,8 +595,8 @@
             <q-input
               upper-case
               color="grey-9"
-              @blur="$v.merchant.businessInformation.gstId.$touch"
-              :error="$v.merchant.businessInformation.gstId.$error"
+              @blur="v$.merchant.businessInformation.gstId.$touch"
+              :error="v$.merchant.businessInformation.gstId.$error"
               v-model="merchant.businessInformation.gstId"
               class="no-margin"
               label="Gst Number"
@@ -563,23 +612,23 @@
 
             <div
               class="text-negative q-py-xs group text-caption"
-              v-if="$v.merchant.businessInformation.gstId.$error"
+              v-if="v$.merchant.businessInformation.gstId.$error"
             >
               <div>
                 <q-icon color="negative" name="warning" />&nbsp;Required -
                 Provide valid GST Number
               </div>
               <div
-                v-if="$v.merchant.businessInformation.gstId.$params.minLength"
+                v-if="v$.merchant.businessInformation.gstId.$params.minLength"
               >
                 <q-icon color="negative" name="warning" />
                 &nbsp;Length should be between
                 {{
-                  $v.merchant.businessInformation.gstId.$params.minLength.min
+                  v$.merchant.businessInformation.gstId.$params.minLength.min
                 }}
                 and
                 {{
-                  $v.merchant.businessInformation.gstId.$params.maxLength.max
+                  v$.merchant.businessInformation.gstId.$params.maxLength.max
                 }}
               </div>
             </div>
@@ -1815,7 +1864,7 @@
               class="no-margin"
               label="Amount Collected"
             />
-            <!--   :error="$v.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata.leadSource.$error" -->
           </div>
         </div>
         <br />
@@ -1835,7 +1884,7 @@
               class="no-margin"
               label="Recurring Fees"
             />
-            <!--   :error="$v.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata.leadSource.$error" -->
           </div>
         </div>
         <br />
@@ -1858,7 +1907,7 @@
               label="Rental Plan*"
               :options="rentalPlanSet"
             />
-            <!-- :error="$v.formdata.count.$error" -->
+            <!-- :error="v$.formdata.count.$error" -->
           </div>
         </div>
         <div class="row">
@@ -1879,7 +1928,7 @@
               :val="item.value"
               :label="item.label"
             />
-            <!--   :error="$v.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata.leadSource.$error" -->
           </div>
         </div>
         <br />
@@ -1901,7 +1950,7 @@
               :val="item.value"
               :label="item.label"
             />
-            <!--   :error="$v.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata.leadSource.$error" -->
           </div>
         </div>
         <br />
@@ -1923,7 +1972,7 @@
               :val="item.value"
               :label="item.label"
             />
-            <!--   :error="$v.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata.leadSource.$error" -->
           </div>
         </div>
         <br />
@@ -1945,7 +1994,7 @@
               :val="item.value"
               :label="item.label"
             />
-            <!--   :error="$v.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata.leadSource.$error" -->
           </div>
         </div>
         <br />
@@ -1967,7 +2016,7 @@
               :val="item.value"
               :label="item.label"
             />
-            <!--   :error="$v.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata.leadSource.$error" -->
           </div>
         </div>
         <br />
@@ -2003,6 +2052,7 @@
 <style></style>
 <style scoped></style>
 <script>
+import { useVuelidate } from "@vuelidate/core";
 
 import { LocalStorage } from "quasar";
 global.jQuery = require("jquery");
@@ -2041,6 +2091,9 @@ const gstn = helpers.regex(
   /^([0-9]){2}([A-Z]{3}[ABCFEGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}[0-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$/
 );
 export default {
+  setup() {
+    return { v$: useVuelidate() }
+  },
   components: {
     showPdfModalComponent,
     MarsErrorResponse,
@@ -2058,6 +2111,8 @@ export default {
       subDocumentTypeSelection: 0,
       stateOptions: [],
       cityOptions: [],
+      stateOptionsFiltered: [],
+      cityOptionsFiltered: [],
       rentalPlanSet: [],
       dataCopy: [],
       dropDown: {
@@ -2579,8 +2634,8 @@ export default {
     //   console.log("Hello",this.formdata.plan);
     // },
     sendtoFinance(request) {
-      this.$v.formdata.$touch();
-      if (this.$v.formdata.$error) {
+      this.v$.formdata.$touch();
+      if (this.v$.formdata.$error) {
         this.$q.notify("Please review fields again.");
       } else if (
         this.formdata.paymentOption == 2 &&
@@ -3156,15 +3211,7 @@ export default {
     },
     fnGetSubDocuments(documentDetails) {
       if (typeof documentDetails !== "undefined") {
-        if (
-          documentDetails.hasOwnProperty("selectedSubDocumentType") &&
-          typeof documentDetails.selectedSubDocumentType !== "undefined"
-        ) {
-          documentDetails.selectedSubDocumentType =
-            documentDetails.subDocumentType;
-        } else {
-          documentDetails["selectedSubDocumentType"] = documentDetails.subDocumentType;
-        }
+        documentDetails.selectedSubDocumentType = documentDetails.subDocumentType;
       }
     },
     fn_________GetEntryPermissionToUploadSubDocuments(multipleDocument) {
@@ -3213,17 +3260,17 @@ export default {
               }
             });
             if (assumeArr == undefined) {
-              value["subDocumentTypeSelection"] = 0;
+              value.subDocumentTypeSelection = 0;
             } else {
-              value["subDocumentTypeSelection"] = assumeArr;
+              value.subDocumentTypeSelection = assumeArr;
             }
           } else {
-            value["subDocumentTypeSelection"] = 0;
+            value.subDocumentTypeSelection = 0;
           }
           arr.forMutipleDocument.push(value);
         }
       });
-      this.getShortLeadInfoDocumentTypes["uploadedDocuments"] = arr;
+      this.getShortLeadInfoDocumentTypes.uploadedDocuments = arr;
     },
     fnViewbankUploadedLetterImage() {
       this.$refs.bankUploadedLetter.click();
@@ -3254,29 +3301,20 @@ export default {
                 message: "Successfully removed!",
                 icon: "thumb_up",
               });
-              // innerSelf.FETCH_SHORT_LEAD_DATA(innerSelf.$route.params.id);
-              // innerSelf.$emit(
-              //   "emitAjaxLoadShortLeadInfo",
-              //   "hotReloadForDocumentsUploadValidation",
-              //   innerSelf.merchantTypeSelection
-              // );
-              // this.FETCH_SHORT_LEAD_DATA(this.getShortLeadInfo.id
-              // )
               this.$q.loading.hide();
-            }).onCancel((error) => {
+            }).catch((error) => {
               this.$q.loading.hide();
               innerSelf.$q.notify({
                 color: "negative",
-                position: "bot  tom",
+                position: "bottom",
                 message:
-                  error.body.message == null
-                    ? "Please Try Again Later !"
-                    : error.body.message,
+                  error.data && error.data.message
+                    ? error.data.message
+                    : "Please Try Again Later !",
                 icon: "thumb_down",
               });
             });
-        })
-        .catch(() => {
+        }).onCancel(() => {
           innerSelf.$q.notify({
             color: "negative",
             position: "bottom",
@@ -3306,17 +3344,9 @@ export default {
       };
       this.FEED_HAND_OVER_TO_SAT_DOCUMENT(requestParams)
         .then((response) => {
-          // this.$emit(
-          //   "emitAjaxLoadShortLeadInfo",
-          //   "hotReloadForDocumentsUploadValidation",
-          //   this.merchantTypeSelection
-          // );
-          // this.FETCH_SHORT_LEAD_DATA(this.getShortLeadInfo.id);
-          // this.ajaxLoadMarsData();
           this.shortLeadInfo();
           this.$q.loading.hide();
-        })
-        .catch((error) => {
+        }).catch((error) => {
           this.$q.loading.hide();
           this.$q.notify({
             color: "negative",
@@ -3337,7 +3367,7 @@ export default {
       this.$refs.attachedImageViewer[attachedImageIndex].click();
     },
     finalMerchant(request) {
-      if (this.$v.merchant.businessInformation.$error) {
+      if (this.v$.merchant.businessInformation.$error) {
         this.$q.notify("Please review business information fields again.");
       } else {
         let key = this.merchant.salesInformation.institutionCode;
@@ -3433,7 +3463,7 @@ export default {
             //             _.map(error.data.errorDetails, actual => {
             //               let splitted = actual.field.split("/");
 
-            //                 // let splittingErrorField = `OThis.$v.${splitted.join(
+            //                 // let splittingErrorField = `OThis.v$.${splitted.join(
             //                 //   "."
             //                 // )}`;
             //                 // let fieldErrorFound = eval(splittingErrorField);
@@ -4172,22 +4202,41 @@ export default {
         });
     },
     /* IFSC bank search result */
-    residentStateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+    residentStateSearchFilter(val, update) {
+      if (val === '') {
+        update(() => {
+          this.stateOptionsFiltered = this.stateOptions
+        })
+        return
+      }
+      update(() => {
+        const needle = val.toLowerCase()
+        this.stateOptionsFiltered = this.stateOptions.filter(v => v.label.toLowerCase().indexOf(needle) > -1)
+      })
     },
     registeredStateSelected(item) {
-      this.merchant.companyinformation.registeredStateName = item.label;
-      this.merchant.companyinformation.registeredStateRefCode = item.value;
+      if (item) {
+        this.merchant.companyinformation.registeredStateName = item.label;
+        this.merchant.companyinformation.registeredStateRefCode = item.value;
+      }
     },
-    residentStateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
-    },
-    residentCitySearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+    residentCitySearchFilter(val, update) {
+      if (val.length < 3) {
+        update(() => {
+          this.cityOptionsFiltered = []
+        })
+        return
+      }
+      update(() => {
+        const needle = val.toLowerCase()
+        this.cityOptionsFiltered = this.cityOptions.filter(v => v.label.toLowerCase().indexOf(needle) > -1)
+      })
     },
     registeredCitySelected(item) {
-      this.merchant.companyinformation.registeredCityName = item.label;
-      this.merchant.companyinformation.registeredCityRefCode = item.value;
+      if (item) {
+        this.merchant.companyinformation.registeredCityName = item.label;
+        this.merchant.companyinformation.registeredCityRefCode = item.value;
+      }
     },
     COMMON_FILTER_FUNCTION(arraySet, terms) {
       return _.filter(arraySet, function (oo) {
@@ -4263,8 +4312,8 @@ export default {
       this.$refs.stepper.next();
     },
     next() {
-      this.$v.merchant.$touch();
-      if (this.$v.merchant.$error) {
+      this.v$.merchant.$touch();
+      if (this.v$.merchant.$error) {
         this.$q.notify("Please review the KYC information fields again.");
       } else {
         if (
