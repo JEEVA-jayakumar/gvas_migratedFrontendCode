@@ -5,14 +5,15 @@
       class="capitalize"
       @hide="emitToggleRemarks"
     >
-      <q-card style="min-width: 400px;">
-        <q-card-section class="row items-center q-pb-none">
-          <div class="text-h6">Lead Information</div>
-          <q-space />
-          <q-btn icon="close" flat round dense v-close-overlay />
-        </q-card-section>
+      <q-card style="min-width: 30vw; padding: 20px;">
+        <div class="row items-center bottom-border q-py-sm">
+          <div class="col text-h6">Lead Information</div>
+          <div class="col-auto">
+            <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" icon="clear" v-close-overlay/>
+          </div>
+        </div>
 
-        <q-card-section>
+        <q-card-section class="no-padding">
           <q-scroll-area style="height: 400px;">
             <q-list multiline separator class="text-body1">
               <q-item>
@@ -83,10 +84,10 @@
               <q-item>
                 <q-item-section>
                   <q-item-label>Address</q-item-label>
-                  <q-item-label caption lines="5">{{ propLeadInformation.leadAddress + ', ' + propLeadInformation.city + ', ' + propLeadInformation.state + ', ' + propLeadInformation.pincode }}</q-item-label>
+                  <q-item-label caption lines="5">{{ (propLeadInformation.leadAddress || '') + ', ' + (propLeadInformation.city || '') + ', ' + (propLeadInformation.state || '') + ', ' + (propLeadInformation.pincode || '') }}</q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item v-if="'device' in propLeadInformation">
+              <q-item v-if="'device' in propLeadInformation && propLeadInformation.device">
                 <q-item-section>
                   <q-item-label>Device Count</q-item-label>
                   <q-item-label caption>{{ propLeadInformation.device.deviceName + '-' + propLeadInformation.deviceCount }}</q-item-label>
@@ -203,7 +204,6 @@
 </template>
 
 <script>
-import { email } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 export default {
   props: ["propLeadInformationProp", "propToggleLeadInformationPop", "leadInformation"],

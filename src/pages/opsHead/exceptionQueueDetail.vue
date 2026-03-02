@@ -36,27 +36,27 @@
                     <div class="col text-body1 text-weight-medium">
                       Device -
                       {{formData.shortLead.deviceCount}}
-                      {{formData.shortLead.device.deviceName}}
+                      {{formData.shortLead.device ? formData.shortLead.device.deviceName : ''}}
                     </div>
                   </div>
                 </q-card-section>
-                <q-card-section class="q-pa-sm">
-                  <q-list separator no-border class="no-padding text-body1">
+                <q-card-section class="q-pa-sm" v-if="formData.shortLead.device">
+                  <q-list separator class="no-padding text-body1">
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>Plan</q-item-section>
-                      <q-item-section>{{formData.shortLead.plan.planName}}</q-item-section>
+                      <q-item-section side>{{formData.shortLead.plan ? formData.shortLead.plan.planName : 'NA'}}</q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>Setup Fees</q-item-section>
-                      <q-item-section>Rs. {{formData.shortLead.setupFees}}</q-item-section>
+                      <q-item-section side>Rs. {{formData.shortLead.setupFees}}</q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>Recurring Fees</q-item-section>
-                      <q-item-section>Rs. {{formData.shortLead.recurringFees}}</q-item-section>
+                      <q-item-section side>Rs. {{formData.shortLead.recurringFees}}</q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm text-body1">
                       <q-item-section>Merchant Category</q-item-section>
-                      <q-item-section>{{formData.shortLead.merchantCategory.merchantCategoryName}}</q-item-section>
+                      <q-item-section side>{{formData.shortLead.merchantCategory ? formData.shortLead.merchantCategory.merchantCategoryName : 'NA'}}</q-item-section>
                     </q-item>
                   </q-list>
                 </q-card-section>
@@ -71,10 +71,10 @@
                 </q-card-section>
                 <q-separator/>
                 <q-card-section class="q-pa-sm text-grey-9">
-                  <q-list separator no-border class="no-padding">
+                  <q-list separator class="no-padding">
                     <q-item class="q-pa-sm">
                       <q-item-section class="text-body1">Payment mode:</q-item-section>
-                      <q-item-section class="text-dark text-body1" align="center">
+                      <q-item-section class="text-dark text-body1" align="center" side>
                         <span v-if="formData.shortLead.paymentOption == 1">IMPS/NEFT</span>
                         <span v-else-if="formData.shortLead.paymentOption == 2">Cheque</span>
                         <span v-else-if="formData.shortLead.paymentOption == 3">Swipe</span>
@@ -85,47 +85,52 @@
                       <q-item-section
                         class="text-dark text-body1"
                         align="center"
+                        side
                       >{{formData.shortLead.referenceNumber}}</q-item-section>
                     </q-item>
                     <q-item v-if="formData.shortLead.paymentOption == 2">
-                      <div
-                        v-if="formData.shortLead.paymentDocumentMimeType != null && formData.shortLead.paymentDocumentMimeType.includes('pdf')"
-                      >
-                        <q-btn
-                          size="sm"
-                          :outline="!showOpenPaymentChequeDocumentInfo"
-                          color="dark"
-                          label="View Document"
-                          icon="attach_file"
-                          @click="fnPDFViewModal(formData.shortLead.paymentDocumentFile,'CHEQUE')"
-                        ></q-btn>
-                      </div>
-                      <div
-                        v-else-if="formData.shortLead.paymentDocumentMimeType != null && formData.shortLead.paymentDocumentMimeType.includes('image')"
-                      >
-                        <q-btn
-                          :outline="!showOpenPaymentChequeInfo"
-                          size="sm"
-                          color="dark"
-                          label="View Document"
-                          icon="attach_file"
-                          @click="fnOpenPaymentChequeInfo(formData.shortLead.paymentDocumentFile)"
-                        />
-                      </div>
-                      <div v-else class="text-grey-9">
-                        <q-icon name="clear" color="negative"/>No document attached
-                      </div>
+                      <q-item-section>
+                        <div
+                          v-if="formData.shortLead.paymentDocumentMimeType != null && formData.shortLead.paymentDocumentMimeType.includes('pdf')"
+                        >
+                          <q-btn
+                            size="sm"
+                            :outline="!showOpenPaymentChequeDocumentInfo"
+                            color="dark"
+                            label="View Document"
+                            icon="attach_file"
+                            @click="fnPDFViewModal(formData.shortLead.paymentDocumentFile,'CHEQUE')"
+                          ></q-btn>
+                        </div>
+                        <div
+                          v-else-if="formData.shortLead.paymentDocumentMimeType != null && formData.shortLead.paymentDocumentMimeType.includes('image')"
+                        >
+                          <q-btn
+                            :outline="!showOpenPaymentChequeInfo"
+                            size="sm"
+                            color="dark"
+                            label="View Document"
+                            icon="attach_file"
+                            @click="fnOpenPaymentChequeInfo(formData.shortLead.paymentDocumentFile)"
+                          />
+                        </div>
+                        <div v-else class="text-grey-9">
+                          <q-icon name="clear" color="negative"/>No document attached
+                        </div>
+                      </q-item-section>
                     </q-item>
                     <q-item v-if="showOpenPaymentChequeInfo">
-                      <viewer
-                        class="cursor-pointer"
-                        :images="[GLOBAL_FILE_FETCH_URL+ '/'+formData.shortLead.paymentDocumentFile]"
-                      >
-                        <img
-                          :src="GLOBAL_FILE_FETCH_URL+ '/'+formData.shortLead.paymentDocumentFile"
-                          style="max-width:100%"
+                      <q-item-section>
+                        <viewer
+                          class="cursor-pointer"
+                          :images="[GLOBAL_FILE_FETCH_URL+ '/'+formData.shortLead.paymentDocumentFile]"
                         >
-                      </viewer>
+                          <img
+                            :src="GLOBAL_FILE_FETCH_URL+ '/'+formData.shortLead.paymentDocumentFile"
+                            style="max-width:100%"
+                          >
+                        </viewer>
+                      </q-item-section>
                     </q-item>
                   </q-list>
                 </q-card-section>
@@ -139,7 +144,7 @@
                   <span class="text-body1 text-weight-medium">MDR</span>
                 </q-card-section>
                 <q-card-section class="q-pa-sm text-grey-9">
-                  <q-list no-border class="no-padding">
+                  <q-list class="no-padding">
                     <q-item class="q-pa-sm">
                       <q-item-section>
                         <q-input
@@ -153,7 +158,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          label="Debit < 2000 (%)"
+                          label="Debit > 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.debitGreaterthanAmount"
@@ -233,43 +238,44 @@
                   <span class="text-body1 text-weight-medium">Details</span>
                 </q-card-section>
                 <q-card-section class="q-pa-sm text-grey-9">
-                  <q-list separator no-border class="no-padding">
-                    <q-item class="q-pa-sm" multiline>
+                  <q-list separator class="no-padding">
+                    <q-item class="q-pa-sm">
                       <q-item-section>SO name</q-item-section>
                       <q-item-section
                         class="text-dark capitalize"
-                      >{{getKycExceptionInfoById.assignedTo.name}}</q-item-section>
+                        side
+                      >{{getKycExceptionInfoById.assignedTo ? getKycExceptionInfoById.assignedTo.name : ''}}</q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm" multiline>
+                    <q-item class="q-pa-sm">
                       <q-item-section>SO - Remarks</q-item-section>
-                      <q-item-section class="text-dark capitalize">{{getKycExceptionInfoById.reason}}</q-item-section>
+                      <q-item-section class="text-dark capitalize" side>{{getKycExceptionInfoById.reason}}</q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm" multiline>
+                    <q-item class="q-pa-sm">
                       <q-item-section>SAT - Remarks</q-item-section>
-                      <q-item-section class="text-dark">
+                      <q-item-section class="text-dark" side>
                         <span
                           class="label capitalize"
-                          v-if="getKycExceptionInfoById.leadVerificationStatus.length > 0"
+                          v-if="getKycExceptionInfoById.leadVerificationStatus && getKycExceptionInfoById.leadVerificationStatus.length > 0"
                         >{{sortArraysForReason(getKycExceptionInfoById.leadVerificationStatus)}}</span>
                         <span class="label capitalize" v-else>NA</span>
                       </q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm" multiline>
+                    <q-item class="q-pa-sm">
                       <q-item-section>SAT - Approved By</q-item-section>
-                      <q-item-section class="text-dark">
+                      <q-item-section class="text-dark" side>
                         <span
                           class="label capitalize"
-                          v-if="getKycExceptionInfoById.leadVerificationStatus.length > 0"
+                          v-if="getKycExceptionInfoById.leadVerificationStatus && getKycExceptionInfoById.leadVerificationStatus.length > 0"
                         >{{sortArraysForCreatedBy(getKycExceptionInfoById.leadVerificationStatus)}}</span>
                         <span class="label capitalize" v-else>NA</span>
                       </q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm" multiline>
+                    <q-item class="q-pa-sm">
                       <q-item-section>SAT - Expected submission date</q-item-section>
-                      <q-item-section class="text-dark">
+                      <q-item-section class="text-dark" side>
                         <span
                           class="label capitalize"
-                          v-if="getKycExceptionInfoById.leadVerificationStatus.length > 0"
+                          v-if="getKycExceptionInfoById.leadVerificationStatus && getKycExceptionInfoById.leadVerificationStatus.length > 0"
                         >{{ $moment(sortArraysForExpectedSubmitDate(getKycExceptionInfoById.leadVerificationStatus)).format("MMMM Do YYYY") }}</span>
                         <span class="label capitalize" v-else>NA</span>
                       </q-item-section>
@@ -364,7 +370,7 @@
                   <span class="text-body1 text-weight-medium">Documents</span>
                 </q-card-section>
                 <q-card-section class="no-padding">
-                  <q-list no-border class="no-padding">
+                  <q-list class="no-padding">
                     <!-- START >>Application document view -->
                     <q-item class="text-body1">
                       <q-item-section class="text-body1">
@@ -376,7 +382,7 @@
                         <!-- START >>If document type is PDF format -->
                         <div
                           class="cursor-pointer"
-                          v-if="formData.shortLead.applicationFileMimeType.includes('pdf')"
+                          v-if="formData.shortLead.applicationFileMimeType && formData.shortLead.applicationFileMimeType.includes('pdf')"
                         >
                           <div
                             @click="fnPDFViewModal(formData.shortLead.applicationFile)"
@@ -390,14 +396,14 @@
                         <!-- START >>If document type is image format -->
                         <div
                           class="cursor-pointer"
-                          v-else-if="formData.shortLead.applicationFileMimeType.includes('image')"
+                          v-else-if="formData.shortLead.applicationFileMimeType && formData.shortLead.applicationFileMimeType.includes('image')"
                         >
                           <viewer
                             :images="[GLOBAL_FILE_FETCH_URL+ '/'+formData.shortLead.applicationFile]"
                             class="hidden"
                           >
                             <img
-                              :src="[GLOBAL_FILE_FETCH_URL+ '/'+formData.shortLead.applicationFile]"
+                              :src="GLOBAL_FILE_FETCH_URL+ '/'+formData.shortLead.applicationFile"
                               ref="handedOverImageViewer"
                               style="max-width:100%"
                             >
@@ -417,7 +423,7 @@
                     <!-- START >>Loop through cooked(in store) array for documents -->
                     <q-item
                       class="no-padding"
-                      v-if="Object.keys(formData.shortLead.leadDocuments).length > 0"
+                      v-if="formData.shortLead.leadDocuments && Object.keys(formData.shortLead.leadDocuments).length > 0"
                     >
                       <q-item-section>
                         <div
@@ -430,39 +436,40 @@
                             v-if="index.toString()==documents[0].subDocumentType"
                           >
                             <div class="col-md-12 text-body1">
-                              <q-expansion-item separator indent multiline class="full-width">
-                                <template slot="header">
-                                  <q-item-section
-                                    :color="documents[0].kycException?'amber-9':''"
-                                    :icon="documents[0].kycException? 'warning' :'attach_file'"
-                                  />
-                                  <q-item-section
-                                    class="text-body1"
-                                    :caption="documents[0].uploadedDocuments.length + 'Document(s)'"
-                                    :label="documents[0].subDocumentType"
-                                  />
+                              <q-expansion-item separator indent class="full-width">
+                                <template v-slot:header>
+                                  <q-item-section avatar>
+                                    <q-icon :color="documents[0].kycException?'amber-9':''"
+                                    :name="documents[0].kycException? 'warning' :'attach_file'" />
+                                  </q-item-section>
+                                  <q-item-section>
+                                    <q-item-label class="text-body1">{{documents[0].subDocumentType}}</q-item-label>
+                                    <q-item-label caption>{{documents[0].uploadedDocuments.length + ' Document(s)'}}</q-item-label>
+                                  </q-item-section>
                                   <q-item-section
                                     v-if="documents[0].documentVerifiedStatus == 2"
-                                    right
+                                    side
                                   >
-                                    <q-btn
-                                      round
-                                      size="xs"
-                                      class="q-ma-xs"
-                                      color="green"
-                                      icon="fas fa-check"
-                                      @click.stop="fnDocumentApproveModal(documents[0])"
-                                    />
-                                    <q-btn
-                                      round
-                                      size="xs"
-                                      class="q-ma-xs"
-                                      color="red"
-                                      icon="fas fa-times"
-                                      @click.stop="fnDocumentRejectModal(documents[0])"
-                                    />
+                                    <div class="row items-center">
+                                      <q-btn
+                                        round
+                                        size="xs"
+                                        class="q-ma-xs"
+                                        color="green"
+                                        icon="fas fa-check"
+                                        @click.stop="fnDocumentApproveModal(documents[0])"
+                                      />
+                                      <q-btn
+                                        round
+                                        size="xs"
+                                        class="q-ma-xs"
+                                        color="red"
+                                        icon="fas fa-times"
+                                        @click.stop="fnDocumentRejectModal(documents[0])"
+                                      />
+                                    </div>
                                   </q-item-section>
-                                  <q-item-section v-else right>
+                                  <q-item-section v-else side>
                                     <span
                                       v-if="documents[0].documentVerifiedStatus == 1"
                                       class="text-body1 text-weight-medium text-positive"
@@ -473,7 +480,7 @@
                                     >Rejected</span>
                                   </q-item-section>
                                 </template>
-                                <div v-if="documents[0].uploadedDocuments.length > 0">
+                                <div v-if="documents[0].uploadedDocuments.length > 0" class="q-pa-md">
                                   <div
                                     v-for="(item,subIndex) in documents[0].uploadedDocuments"
                                     :key="subIndex"
@@ -503,7 +510,7 @@
                                     <div v-else>Invalid document type/ No document available</div>
                                   </div>
                                 </div>
-                                <div v-else>No document attached</div>
+                                <div v-else class="q-pa-md">No document attached</div>
                               </q-expansion-item>
                             </div>
                           </div>
@@ -511,15 +518,7 @@
                           <!-- START >> View type is 1, Category has sub category, hence defined in else part -->
                           <div class="row items-center full-width" v-else>
                             <div class="col-md-12 text-body1">
-                              <q-expansion-item separator indent icon-toggle opened class="full-width">
-                                <template slot="header">
-                                  <q-item-section icon="apps"/>
-                                  <q-item-section
-                                    class="text-body1"
-                                    :caption="documents.length + 'Type(s)'"
-                                    :label="index"
-                                  />
-                                </template>
+                              <q-expansion-item separator indent icon="apps" :label="index" :caption="documents.length + ' Type(s)'" default-opened class="full-width">
                                 <div
                                   class="row items-center full-width"
                                   v-for="(subDocument,subIndex) in documents"
@@ -529,41 +528,41 @@
                                     <q-expansion-item
                                       separator
                                       group="closeOnOpenSubDocument"
-                                      multiline
                                       class="full-width"
                                     >
-                                      <template slot="header">
-                                        <q-item-section
-                                          :color="subDocument.kycException?'amber-9':''"
-                                          :icon="subDocument.kycException? 'warning' :'attach_file'"
-                                        />
-                                        <q-item-section
-                                          class="text-body1"
-                                          :caption="subDocument.uploadedDocuments.length + 'Document(s)'"
-                                          :label="subDocument.subDocumentType"
-                                        />
+                                      <template v-slot:header>
+                                        <q-item-section avatar>
+                                          <q-icon :color="subDocument.kycException?'amber-9':''"
+                                          :name="subDocument.kycException? 'warning' :'attach_file'" />
+                                        </q-item-section>
+                                        <q-item-section>
+                                          <q-item-label class="text-body1">{{subDocument.subDocumentType}}</q-item-label>
+                                          <q-item-label caption>{{subDocument.uploadedDocuments.length + ' Document(s)'}}</q-item-label>
+                                        </q-item-section>
                                         <q-item-section
                                           v-if="subDocument.documentVerifiedStatus == 2"
-                                          right
+                                          side
                                         >
-                                          <q-btn
-                                            round
-                                            size="xs"
-                                            class="q-ma-xs"
-                                            color="green"
-                                            icon="fas fa-check"
-                                            @click.stop="fnDocumentApproveModal(subDocument)"
-                                          />
-                                          <q-btn
-                                            round
-                                            size="xs"
-                                            class="q-ma-xs"
-                                            color="red"
-                                            icon="fas fa-times"
-                                            @click.stop="fnDocumentRejectModal(subDocument)"
-                                          />
+                                          <div class="row items-center">
+                                            <q-btn
+                                              round
+                                              size="xs"
+                                              class="q-ma-xs"
+                                              color="green"
+                                              icon="fas fa-check"
+                                              @click.stop="fnDocumentApproveModal(subDocument)"
+                                            />
+                                            <q-btn
+                                              round
+                                              size="xs"
+                                              class="q-ma-xs"
+                                              color="red"
+                                              icon="fas fa-times"
+                                              @click.stop="fnDocumentRejectModal(subDocument)"
+                                            />
+                                          </div>
                                         </q-item-section>
-                                        <q-item-section v-else right>
+                                        <q-item-section v-else side>
                                           <span
                                             v-if="subDocument.documentVerifiedStatus == 1"
                                             class="text-body1 text-weight-medium text-positive"
@@ -574,7 +573,7 @@
                                           >Rejected</span>
                                         </q-item-section>
                                       </template>
-                                      <div v-if="subDocument.uploadedDocuments.length > 0">
+                                      <div v-if="subDocument.uploadedDocuments.length > 0" class="q-pa-md">
                                         <div
                                           v-for="(item,subIndex) in subDocument.uploadedDocuments"
                                           :key="subIndex"
@@ -604,12 +603,9 @@
                                           <div v-else>Invalid document type/ No document available</div>
                                         </div>
                                       </div>
-                                      <div v-else>No document attached</div>
+                                      <div v-else class="q-pa-md">No document attached</div>
                                     </q-expansion-item>
                                   </div>
-                                  <!-- <div v-else>
-                                                                    No document attached
-                                  </div>-->
                                 </div>
                               </q-expansion-item>
                             </div>
@@ -729,7 +725,6 @@
 </template>
 
 <script>
-import { not, and } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 
 
@@ -773,8 +768,6 @@ export default {
       toggleLeadRejectModal: false,
       toggleLeadDocumentApproveModal: false,
       toggleLeadDocumentRejectModal: false,
-      toggleshowPDFModal: false,
-      PDFDetails: null,
 
       documentApproveTempArr: [],
       documentRejectTempArr: [],
@@ -793,7 +786,8 @@ export default {
       leadRejectReason: "",
       formData: {
         shortLead: ""
-      }
+      },
+      showOpenPaymentChequeDocumentInfo: false
     };
   },
   computed: {
@@ -871,7 +865,7 @@ export default {
 
     fnShowPDFModal(pdfDetails) {
       this.toggleshowPDFModal = !this.toggleshowPDFModal;
-      this.pdfDetails = pdfDetails;
+      this.PDFDetails = pdfDetails;
     },
 
     // function to approve lead and send to OPS HEAD
@@ -909,7 +903,8 @@ export default {
               ]
             });
           } else {
-            error.data.data.splice("toBeVerifiedDocuments", 1);
+            // error.data.data.splice("toBeVerifiedDocuments", 1);
+            delete error.data.data.toBeVerifiedDocuments;
             for (var key in error.data.data) {
               let arrayMessage = "";
               _.map(error.data.data[key], oo => {
@@ -978,14 +973,6 @@ export default {
 
     fnOpenPaymentChequeInfo() {
       this.showOpenPaymentChequeInfo = !this.showOpenPaymentChequeInfo;
-    },
-
-    // Function to show PDF
-    fnPDFViewModal(documentUrl) {
-      this.showOpenPaymentChequeDocumentInfo = !this
-        .showOpenPaymentChequeDocumentInfo;
-      this.PDFDetails = documentUrl;
-      this.toggleshowPDFModal = !this.toggleshowPDFModal;
     },
 
     // funcion to toggle pdf component

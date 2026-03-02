@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <div>
-      <!--STARTv-model: table title -->
+      <!--START: table title -->
       <div
         class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >Exceptions</div>
@@ -15,43 +15,44 @@
         @request="ajaxLoadDataForAllExceptionList"
         row-key="name"
       >
-        <q-tr
-          v-slot:body="props"
-          :props="props"
-          @click="fnRowClick(props.row)"
-          @mouseover="fnRowMouseOver(props.row.__index)"
-          @mouseleave="fnRowMouseLeave(props.row.__index)"
-          class="cursor-pointer"
-          :class="[props.row.__index === activeId ? 'bg-grey-3' : '']"
-        >
-          <q-td key="leadInformation.updatedAt" :props="props">
-            <span class="label capitalize" v-if="props.row.updatedAt">{{ $moment(props.row.updatedAt).format("MMMM Do YYYY") }}</span>
-          </q-td>
-          <q-td key="leadInformation.leadNumber" :props="props">
-            <span
-              class="label capitalize text-primary cursor-pointer"
-              @click.stop="toggleLeadInformation(props.row)"
-            ># {{props.row.leadId || props.row.id }}</span>
-          </q-td>
-          <q-td key="leadInformation.leadName" :props="props">
-            <span class="label capitalize">{{props.row.leadName}}</span>
-          </q-td>
-          <q-td key="leadInformation.assignedTo.name" :props="props">
-            <span class="label capitalize">{{props.row.soName}}</span>
-          </q-td>
-          <q-td key="leadInformation.reason" :props="props">
-            <span class="label capitalize">{{props.row.soRemarks}}</span>
-          </q-td>
-          <q-td key="leadInformation.createdBy.name" :props="props">
-            <span class="label capitalize">{{props.row.satName}}</span>
-          </q-td>
-          <q-td key="kycSatRemark" :props="props">
-            <span class="label capitalize">{{props.row.kycSatRemark}}</span>
-          </q-td>
-          <q-td key="expectedSubmitDate" :props="props">
-            <span class="label capitalize">{{ $moment(props.row.expectedSubmitDate).format("MMMM Do YYYY") }}</span>
-          </q-td>
-        </q-tr>
+        <template v-slot:body="props">
+          <q-tr
+            :props="props"
+            @click="fnRowClick(props.row)"
+            @mouseover="fnRowMouseOver(props.row.__index)"
+            @mouseleave="fnRowMouseLeave(props.row.__index)"
+            class="cursor-pointer"
+            :class="[props.row.__index === activeId ? 'bg-grey-3' : '']"
+          >
+            <q-td key="leadInformation.updatedAt" :props="props">
+              <span class="label capitalize" v-if="props.row.updatedAt">{{ $moment(props.row.updatedAt).format("MMMM Do YYYY") }}</span>
+            </q-td>
+            <q-td key="leadInformation.leadNumber" :props="props">
+              <span
+                class="label capitalize text-primary cursor-pointer"
+                @click.stop="toggleLeadInformation(props.row)"
+              ># {{props.row.leadId }}</span>
+            </q-td>
+            <q-td key="leadInformation.leadName" :props="props">
+              <span class="label capitalize">{{props.row.leadName}}</span>
+            </q-td>
+            <q-td key="leadInformation.assignedTo.name" :props="props">
+              <span class="label capitalize">{{props.row.soName}}</span>
+            </q-td>
+            <q-td key="leadInformation.reason" :props="props">
+              <span class="label capitalize">{{props.row.soRemarks}}</span>
+            </q-td>
+            <q-td key="leadInformation.createdBy.name" :props="props">
+              <span class="label capitalize">{{props.row.satName}}</span>
+            </q-td>
+            <q-td key="kycSatRemark" :props="props">
+              <span class="label capitalize">{{props.row.kycSatRemark}}</span>
+            </q-td>
+            <q-td key="expectedSubmitDate" :props="props">
+              <span class="label capitalize" v-if="props.row.expectedSubmitDate">{{ $moment(props.row.expectedSubmitDate).format("MMMM Do YYYY") }}</span>
+            </q-td>
+          </q-tr>
+        </template>
 
         <template v-slot:top="props">
           <!--START: table search -->
@@ -81,7 +82,6 @@
 </template>
 
 <script>
-import { required, or } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import _ from "lodash";
 import downloadExcel from "vue-json-excel";
@@ -126,7 +126,7 @@ export default {
           label: "Lead ID",
           align: "center",
           field: row => {
-            return "# " + row.leadNumber;
+            return "# " + row.leadId;
           },
           sortable: true
         },

@@ -7,12 +7,12 @@
         @hide="emitToggleRemarks()" 
         @escape-key="emitToggleRemarks()"  
         > 
-          <q-card style="min-width: 40vw;">
-            <q-card-section>
-              <div class="text-h6">{{propDocumentDetails.documentType}}</div>
+          <q-card style="min-width: 40vw; padding: 30px;">
+            <q-card-section class="no-padding">
+              <div class="text-h6 q-mb-sm">{{propDocumentDetails.documentType}}</div>
             </q-card-section>
 
-            <q-card-section class="q-pt-none">
+            <q-card-section class="q-pt-none no-padding">
               <q-input
                   placeholder="Type.."
                   label="Reason"
@@ -23,9 +23,9 @@
               />
             </q-card-section>
 
-            <q-card-actions align="right">
-              <q-btn icon="block" color="grey-5" @click="emitToggleRemarks()" class="text-dark" v-close-overlay label="Cancel" />
-              <q-btn icon="done" color="positive" @click="fnApproveLeadFinal(formData)" label="Approve" />
+            <q-card-actions align="right" class="no-padding q-pt-md">
+              <q-btn icon="done" color="positive" class="q-ma-sm" @click="fnApproveLeadFinal(formData)" label="Approve" />
+              <q-btn icon="block" color="grey-5" @click="emitToggleRemarks()" class="text-dark q-ma-sm" v-close-overlay label="Cancel" />
             </q-card-actions>
           </q-card>
         </q-dialog>

@@ -1545,7 +1545,7 @@ const routes = [
   {
     name: "OH",
     path: "/ops/head/",
-    component: Default_Layout,
+    component: Default_OpsHead,
     children: [{
       name: "opsHeadDashboard",
       path: "dashboard",
