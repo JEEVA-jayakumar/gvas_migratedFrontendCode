@@ -1,90 +1,67 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header style="margin-left:0px" class="shadow-0 z-top" flat>
-      <customHeader @fnToggleSideMenu="fnMainToggleSideMenu"></customHeader>
+    <q-header class="bg-white" flat>
+      <customHeader @fnToggleSideMenu="fnMainToggleSideMenu" />
     </q-header>
 
     <q-drawer
-      class="shadow-9"
       v-model="leftDrawerOpen"
-      :width="250"
-      :style="{background: '#202c3f'}"
+      show-if-above
+      bordered
+      :width="260"
+      :breakpoint="500"
+      class="bg-dark text-white"
     >
-     <q-list
-        class="no-border"
-        style="padding-top:65px"
-      >
-        <template v-for="menu in menus" :key="menu.id">
-          <q-item
-            v-if="!menu.subItems || menu.subItems.length === 0"
-            :to="menu.to"
-            clickable
-            class="menu-main-item-color"
-          >
-            <q-item-section class="cursor-pointer menu-item-color">{{ menu.name }}</q-item-section>
-          </q-item>
-          <q-item v-else class="no-padding">
-            <q-item-section class="col-12">
-              <q-expansion-item
-                dense
-                class="no-padding"
-                header-class="no-padding menu-item-color"
-                header-style="font-size:14px"
-                dark
-                :label="menu.name"
-              >
-                <q-item
-                  v-for="subItem in menu.subItems"
-                  :key="subItem.id"
-                  :to="subItem.to"
-                  clickable
-                  class="menu-main-item-color"
-                >
-                  <q-item-section class="cursor-pointer menu-item-color q-pl-lg">{{ subItem.name }}</q-item-section>
-                </q-item>
-              </q-expansion-item>
-            </q-item-section>
-          </q-item>
-        </template>
-      </q-list>
+      <div class="q-py-md q-px-lg flex items-center" style="height: 65px; background: rgba(0,0,0,0.1)">
+        <img src="~assets/images/logo.png" style="height: 35px" />
+      </div>
+      <q-scroll-area style="height: calc(100% - 65px)" :thumb-style="{
+        right: '2px',
+        borderRadius: '5px',
+        backgroundColor: '#61116a',
+        width: '5px',
+        opacity: 0.75,
+      }">
+        <SidebarMenu :menus="menus" />
+      </q-scroll-area>
     </q-drawer>
 
-    <q-page-container>
-      <customBody></customBody>
+    <q-page-container class="bg-grey-2">
+      <customBody />
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
 import customHeader from "../components/customHeader.vue";
 import customBody from "../components/customBody.vue";
+import SidebarMenu from "../components/SidebarMenu.vue";
+
 export default {
+  name: "OpsHeadLayout",
   components: {
     customHeader,
     customBody,
+    SidebarMenu,
   },
-  name: "LayoutDefault",
   data() {
     return {
-      leftDrawerOpen: this.$q.platform.is.desktop,
+      leftDrawerOpen: this.$q.localStorage.getItem("leftDrawerOpen") !== null
+        ? this.$q.localStorage.getItem("leftDrawerOpen")
+        : this.$q.platform.is.desktop,
       menus: [
-        {
-          id: 1,
-          to: "/ops/head/dashboard",
-          name: "Dashboard",
-          subItems: []
-        },
         {
           id: 2,
           to: "/ops/head/exceptions",
           name: "Exceptions",
+          icon: "assignment_late",
           subItems: [],
         },
         {
           id: 3,
           to: null,
           name: "Reports",
+          icon: "bar_chart",
           subItems: [
             {
               id: 1,

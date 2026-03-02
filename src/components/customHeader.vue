@@ -1,5 +1,5 @@
 <template>
-  <q-toolbar class="bg-custom-light-grey bottom-border" color="grey-9" flat>
+  <q-toolbar class="bg-white bottom-border q-px-md" color="grey-9" flat style="height: 65px">
     <q-btn
       flat
       dense
@@ -9,32 +9,33 @@
       v-if="getRole != 'KSN'"
       color="grey-9"
     >
-      <q-icon name="menu" />
+      <q-icon :name="leftDrawerOpen ? 'menu_open' : 'menu'" size="24px" />
     </q-btn>
     <q-toolbar-title>
-      <div class="row items-center vertical-middle">
-        <div class="col-auto">
+      <div class="row items-center full-height">
+        <div class="col-auto q-ml-sm" v-if="!leftDrawerOpen">
           <img
-            v-if="leftDrawerOpen"
             class="cursor-pointer"
             src="~assets/images/logo.png"
-            style="height:38px;"
+            style="height:35px;"
           />
         </div>
         <div class="col float-right" align="right">
-          <q-btn flat color="grey-9" icon="far fa-bell" />
-          <q-btn flat color="grey-9" class="vertical-middle">
-            <span class="mobile-hide capitalize text-weight-regular">{{getUserNAme}}</span>
-            <img
-              src="~assets/images/user.png"
-              style="height:30px; width:30px; padding: 5px"
-              class="vertical-middle"
-            />
+          <q-btn flat dense color="grey-9" icon="far fa-bell" class="q-mr-md">
+            <q-badge color="purple" floating>2</q-badge>
+          </q-btn>
+          <q-btn flat color="grey-9" class="user-profile-btn no-padding">
+            <span class="mobile-hide capitalize text-weight-medium q-mr-sm">{{getUserNAme}}</span>
+            <q-avatar size="32px">
+              <img src="~assets/images/user.png" />
+            </q-avatar>
             <q-menu
-              class="shadow-8"
-              anchor="bottom middle"
-              self="top middle"
-              style="min-width:350px"
+              class="shadow-12"
+              anchor="bottom right"
+              self="top right"
+              transition-show="jump-down"
+              transition-hide="jump-up"
+              style="min-width: 250px; border-radius: 8px;"
             >
               <q-list separator class="no-padding">
                 <q-item clickable v-close-popup @click="openMyAccount()">
@@ -76,11 +77,15 @@ export default {
   data() {
     return {
       toggleMyAccount: false,
-      leftDrawerOpen: this.$q.platform.is.desktop,
+      leftDrawerOpen: this.$q.localStorage.getItem("leftDrawerOpen") !== null
+        ? this.$q.localStorage.getItem("leftDrawerOpen")
+        : this.$q.platform.is.desktop,
     };
   },
   methods: {
     triggerSideMenu() {
+      this.leftDrawerOpen = !this.leftDrawerOpen;
+      this.$q.localStorage.set("leftDrawerOpen", this.leftDrawerOpen);
       this.$emit("fnToggleSideMenu");
     },
     clearLocalStorageData() {
