@@ -31,7 +31,7 @@
               <span
                 class="label capitalize text-primary cursor-pointer"
                 @click.stop="toggleLeadInformation(props.row)"
-              ># {{props.row.leadId }}</span>
+              ># {{ props.row.leadId || props.row.id || props.row.leadNumber }}</span>
             </q-td>
             <q-td key="leadInformation.leadName" :props="props">
               <span class="label capitalize">{{props.row.leadName}}</span>
@@ -245,8 +245,8 @@ export default {
 
     // Function to trigger what should happen after clicking on row
     fnRowClick(itemDetails) {
-       console.log("TABLE DATA VALUES---------->",JSON.stringify(this.itemDetails))
-      this.$router.push("/ops/head/exceptions/" + itemDetails.leadId);
+       console.log("TABLE DATA VALUES---------->",JSON.stringify(itemDetails))
+      this.$router.push("/ops/head/exceptions/" + (itemDetails.leadId || itemDetails.id || itemDetails.leadNumber));
     },
 
     // Function to trigger what should happen after hovering on row
