@@ -1,74 +1,64 @@
 <template>
-  <div>
-    <q-dialog
-      minimized
-      no-backdrop-dismiss
-      class="customModalOverlay"
-      v-model="toggleModel"
-      @hide="emitfnshowAddPincode()"
-      @escape-key="emitfnshowAddPincode()"
-      :content-css="{padding:'30px',minWidth: '40vw'}"
-    >
-      <form>
-        <div class="column group">
-          <div class="col-md-12">
-            <div class="text-h6 text-weight-regular">Add Pincode</div>
-          </div>
-          <div class="col-md-12">
-            <q-input
-              @keyup.enter="submitPincode(formData)"
-              v-model="formData.pincode"
-              :error="$v.formData.pincode.$error"
-              class="text-weight-regular text-grey-8"
-              color="grey-9"
-              label="Pincode*"
-              placeholder="Pincode*"
-            />
-          </div>
-          <div class="col-md-12">
-            <q-input
-              @keyup.enter="submitPincode(formData)"
-              v-model="formData.stateName"
-              :error="$v.formData.stateName.$error"
-              class="text-weight-regular text-grey-8"
-              color="grey-9"
-              label="State name"
-              placeholder="State name"
-            />
-          </div>
-          <div class="col-md-12">
-            <q-input
-              @keyup.enter="submitPincode(formData)"
-              v-model="formData.cityName"
-              :error="$v.formData.cityName.$error"
-              class="text-weight-regular text-grey-8"
-              color="grey-9"
-              label="City name"
-              placeholder="City name"
-            />
-          </div>
+  <q-dialog
+    v-model="toggleModel"
+    persistent
+    class="customModalOverlay"
+  >
+    <q-card style="min-width: 400px; padding: 20px;">
+      <q-card-section class="row items-center q-pb-none">
+        <div class="text-h6 text-purple-9">Add Pincode</div>
+        <q-space />
+        <q-btn icon="close" flat round dense v-close-popup @click="emitfnshowAddPincode" />
+      </q-card-section>
 
-          <div class="col-md-12 group" align="right">
-            <q-btn
-              flat
-              align="right"
-              class="bg-white text-weight-regular text-grey-8"
-              @click="emitfnshowAddPincode()"
-            >Cancel</q-btn>
-            <q-btn align="right" @click="submitPincode(formData)" color="purple-9">Save</q-btn>
+      <q-card-section>
+        <q-form @submit="submitPincode" class="q-gutter-md">
+          <q-input
+            outlined
+            dense
+            v-model="formData.pincode"
+            label="Pincode*"
+            :error="v$.formData.pincode.$error"
+            color="purple-9"
+          />
+          <q-input
+            outlined
+            dense
+            v-model="formData.stateName"
+            label="State Name*"
+            :error="v$.formData.stateName.$error"
+            color="purple-9"
+          />
+          <q-input
+            outlined
+            dense
+            v-model="formData.cityName"
+            label="City Name*"
+            :error="v$.formData.cityName.$error"
+            color="purple-9"
+          />
+
+          <div class="row justify-end q-mt-md q-gutter-x-sm">
+            <q-btn flat label="Cancel" color="grey-7" @click="emitfnshowAddPincode" />
+            <q-btn unelevated label="Save" color="purple-9" type="submit" />
           </div>
-        </div>
-      </form>
-    </q-dialog>
-  </div>
+        </q-form>
+      </q-card-section>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required, maxLength, minLength } from "@vuelidate/validators";
+import { mapActions } from "vuex";
 
-import { mapGetters, mapActions } from "vuex";
 export default {
+  name: "AddPincode",
   props: ["propShowCreatePincodes"],
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       toggleModel: this.propShowCreatePincodes,
@@ -79,64 +69,43 @@ export default {
       }
     };
   },
-  validations: {
-    formData: {
-      pincode: {
-        required,
-        maxLength: maxLength(7),
-        minLength: minLength(5)
-      },
-      stateName: {
-        required
-      },
-      cityName: {
-        required
+  validations() {
+    return {
+      formData: {
+        pincode: { required, maxLength: maxLength(7), minLength: minLength(5) },
+        stateName: { required },
+        cityName: { required }
       }
-    }
+    };
   },
-
   methods: {
     ...mapActions("pincodes", ["FETCH_ALL_PINCODES", "ADD_NEW_PINCODE"]),
 
     emitfnshowAddPincode() {
       this.$emit("emitfnshowAddPincodes");
     },
-    //Permission creation final submit
-    submitPincode(formData) {
-      this.$v.formData.$touch();
 
-      if (this.$v.formData.$error) {
-        this.$q.notify("Please review fields again.");
-      } else {
-        this.$q.loading.show({
-          delay: 100, // ms
-          message: "Please Wait",
-          spinnerColor: "purple-9",
-          customClass: "shadow-none"
-        });
-
-        this.ADD_NEW_PINCODE(formData)
-          .then(response => {
-            this.FETCH_ALL_PINCODES();
-            this.$emit("emitfnshowAddPincodes");
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Pincode successfully created!",
-              icon: "thumb_up"
-            });
-          })
-          .catch(() => {
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-              icon: "thumb_down"
-            });
-          });
+    async submitPincode() {
+      const isValid = await this.v$.$validate();
+      if (!isValid) {
+        this.$q.notify({ color: "warning", message: "Please review fields again." });
+        return;
       }
+
+      this.$q.loading.show({ message: "Please Wait" });
+      this.ADD_NEW_PINCODE(this.formData)
+        .then(() => {
+          this.FETCH_ALL_PINCODES();
+          this.$emit("emitfnshowAddPincodes");
+          this.$q.notify({ color: "positive", message: "Pincode successfully created!" });
+        })
+        .catch(error => {
+          this.$q.notify({
+            color: "negative",
+            message: error.body?.message || "Please Try Again Later !"
+          });
+        })
+        .finally(() => this.$q.loading.hide());
     }
   }
 };

@@ -1,397 +1,180 @@
 <template>
-  <q-page>
-    <!-- content -->
-    <div>
+  <q-page padding>
+    <q-card flat bordered class="q-pa-md">
+      <div class="row items-center q-mb-md">
+        <div class="text-h6 text-purple-9 col">LeadSource And Vas Device Config</div>
+        <div class="col-auto">
+          <q-btn
+            unelevated
+            no-caps
+            label="Add New"
+            color="purple-9"
+            @click="fnaddLeadSourceVasDevice"
+          />
+        </div>
+      </div>
 
-      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="changeTabs">
-        <q-tab color="dark" name="active" label="Active" />
-        <!--:rows="activeTableData"-->
-</q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="active">
-          <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
-            @request="ajaxLoadData">
+      <q-tabs
+        v-model="selectedTab"
+        class="bg-white text-grey-7 shadow-1"
+        active-color="purple-9"
+        indicator-color="purple-9"
+        align="left"
+      >
+        <q-tab name="active" label="Active List" @click="ajaxLoadData" />
+      </q-tabs>
 
-            <q-td v-slot:body-cell-vas="props" :props="props">
-              <div inline color="light" class="row no-wrap group text-dark" v-for="vas in props.row.vasList">{{vas.name}}</div>
-            </q-td>
-            <q-td v-slot:body-cell-action="props" :props="props">
-              <div class="row no-wrap no-padding">
-                <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
-                  @click="fnEdit(props.row)" flat class="text-light-blue"></q-btn>
-              </div>
-            </q-td>
-            <template v-slot:top="props">
-              <!--START: table title -->
-              <!--END: table title -->
-              <!--START: table filter,search -->
-              <div class="col-md-6">
-                <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." class="q-mr-lg" />
-              </div>
-              <div class="col-md-12" align="right">
-                <q-btn no-caps class="text-weight-regular" @click="fnaddLeadSourceVasDevice()" label="Add New"
-                  color="purple-9" size="md" />
-              </div>
-              <!--END: table filter,search -->
+      <q-tab-panels v-model="selectedTab" animated class="bg-transparent">
+        <q-tab-panel name="active" class="no-padding q-mt-md">
+          <q-table
+            flat
+            bordered
+            :rows="activeTableData"
+            :columns="columns"
+            :filter="filterSearch"
+            row-key="id"
+            color="purple-9"
+          >
+            <template v-slot:top-right>
+              <q-input
+                outlined
+                dense
+                clearable
+                v-model="filterSearch"
+                placeholder="Search"
+                color="purple-9"
+              >
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
+            </template>
+
+            <template v-slot:body-cell-vas="props">
+              <q-td :props="props">
+                <div v-for="vas in props.row.vasList" :key="vas.id" class="q-mr-xs inline-block">
+                  <q-badge color="purple-2" text-color="purple-9" :label="vas.name" />
+                </div>
+              </q-td>
+            </template>
+
+            <template v-slot:body-cell-action="props">
+              <q-td :props="props">
+                <q-btn
+                  dense
+                  unelevated
+                  no-caps
+                  label="Modify"
+                  icon="edit"
+                  color="primary"
+                  size="sm"
+                  @click="fnEdit(props.row)"
+                />
+              </q-td>
             </template>
           </q-table>
         </q-tab-panel>
-</q-tab-panels>
+      </q-tab-panels>
+    </q-card>
 
-      <!--START: Show create Hierarchy -->
-      <showAddLeadSOurceVasDevice 
-      v-if="propShowAddLeadSOurceVasDevice" 
+    <!-- Modals -->
+    <showAddLeadSOurceVasDevice
+      v-if="propShowAddLeadSOurceVasDevice"
       :propShowAddLeadSOurceVasDevice="propShowAddLeadSOurceVasDevice"
-        @emitAddLeadSOurceVasDevice="propShowAddLeadSOurceVasDevice" />
-      <!--END: Show create Hierarchy -->
+      @emitAddLeadSOurceVasDevice="propShowAddLeadSOurceVasDevice = false; ajaxLoadData()"
+    />
 
-      <!--START: Show edit LeadSources -->
-      <showEditLsVasDevice v-if="propShowEditLsVasDevice" :propShowEditLsVasDevice="propShowEditLsVasDevice"
-        :propRowDetails="propRowDetails" @emitfnshowLsVasDevice="refreshLeadSourceList"></showEditLsVasDevice>
-      <!--END: Show edit LeadSources -->
-    </div>
+    <showEditLsVasDevice
+      v-if="propShowEditLsVasDevice"
+      :propShowEditLsVasDevice="propShowEditLsVasDevice"
+      :propRowDetails="propRowDetails"
+      @emitfnshowLsVasDevice="propShowEditLsVasDevice = false; ajaxLoadData()"
+    />
   </q-page>
 </template>
-  
+
 <script>
-import { required } from '@vuelidate/validators';
-import showAddLeadSOurceVasDevice from "../../components/super_admin/AddLeadSOurceVasDevice.vue";
-import showEditLsVasDevice from "../../components/super_admin/leadSourceVasDeviceModify.vue";
+import showAddLeadSOurceVasDevice from "./AddLeadSOurceVasDevice.vue";
+import showEditLsVasDevice from "./leadSourceVasDeviceModify.vue";
 import { mapGetters, mapActions } from "vuex";
+
 export default {
-  name: "users",
+  name: "LeadSourceVasDeviceConfig",
   components: {
     showAddLeadSOurceVasDevice,
-    showEditLsVasDevice,
+    showEditLsVasDevice
   },
   data() {
     return {
+      selectedTab: "active",
       propShowAddLeadSOurceVasDevice: false,
       propShowEditLsVasDevice: false,
-      propRowDetails: "",
-
-      filter: "",
+      propRowDetails: null,
       filterSearch: "",
-      filterSearch1: "",
-      filter_values: "",
-      selectedTab: "",
-      multipleSelect: "",
-
-      paginationControl: {
-        rowsPerPage: 10,
-      },
-      paginationControl1: {
-        rowsPerPage: 10,
-      },
-
-      //table information
+      activeTableData: [],
       columns: [
         {
           name: "device",
-          required: true,
           label: "Device Name",
           align: "left",
-          field: row => {
-            return row.leadSourceDeviceVasMapping.device.deviceName;
-          },
-          sortable: false,
+          field: row => row.leadSourceDeviceVasMapping?.device?.deviceName || "NA",
+          sortable: true
         },
         {
           name: "leadSource",
-          required: true,
-          label: "LeadSource",
+          label: "Lead Source",
           align: "left",
-          field: row => {
-            return row.leadSourceDeviceVasMapping.leadSource.sourceName;
-          },
-          sortable: false,
+          field: row => row.leadSourceDeviceVasMapping?.leadSource?.sourceName || "NA",
+          sortable: true
         },
         {
           name: "vas",
-          required: true,
           label: "Vas",
           align: "left",
-          field: row => {
-            return row.vasList;
-          },
-          sortable: false,
+          field: row => row.vasList,
+          sortable: false
         },
         {
           name: "action",
-          required: true,
-          label: "",
-          align: "left",
-          field: "action",
-          sortable: true
+          label: "Action",
+          align: "center"
         }
-      ],
-
-      tableData: [],
-      activeTableData: [],
-      deActiveTableData: [],
-      filterHierarchys: [],
+      ]
     };
   },
-
   computed: {
-    ...mapGetters("SuperAdminUsers", ["getAllHierarchiesData"]),
     ...mapGetters("leadSourceVasDeviceConfig", ["getLsVasDeviceDetails"])
   },
-  // created(){
-
-  // },
-  //  beforeMount(){
-  //    console.log("DISABLE DATAS------------->",JSON.stringify(this.getAllHierarchiesData))
-  //  },
-
+  created() {
+    this.ajaxLoadData();
+  },
   methods: {
-    ...mapActions("SuperAdminUsers", [
-      "FETCH_ALL_HIERARCHIES_DATA",
-      "DELETE_HIERARCHY_BY_HIERARCHY_ID_DATA",
-    ]),
-    ...mapActions("AddHierarchy", ["SAVE_HIERARCHY", "DELETE_HIERARCHY", "ACTIVE_HIERARCHY"]),
     ...mapActions("leadSourceVasDeviceConfig", ["GET_LS_VAS_DEVICE_CONFIG_DETAILS"]),
 
+    async ajaxLoadData() {
+      this.$q.loading.show({ message: "Please Wait" });
+      try {
+        await this.GET_LS_VAS_DEVICE_CONFIG_DETAILS();
+        this.activeTableData = this.getLsVasDeviceDetails;
+      } catch (error) {
+        this.$q.notify({
+          color: "negative",
+          message: error.body?.message || "Please Try Again Later !",
+          icon: "warning"
+        });
+      } finally {
+        this.$q.loading.hide();
+      }
+    },
+
     fnaddLeadSourceVasDevice() {
-      // this.$router.push({ name: "addLeadSourceVasDeviceConfig" })
-      this.propShowAddLeadSOurceVasDevice =! this.propShowAddLeadSOurceVasDevice;
+      this.propShowAddLeadSOurceVasDevice = true;
     },
+
     fnEdit(rowDetails) {
-      this.propShowEditLsVasDevice = !this.propShowEditLsVasDevice;
       this.propRowDetails = rowDetails;
-    },
-    refreshLeadSourceList() {
-      this.propShowEditLsVasDevice = !this.propShowEditLsVasDevice;
-       this.changeTabs();
-    },
-
-    changeTabs(tab) {
-
-      this.ajaxLoadData();
-
-    },
-    //  ajaxLoadDataForHierarchyTable() {
-    //   this.tableAjaxLoading = true;
-    //   this.$q.loading.show({
-    //     delay: 100, // ms
-    //     message: "Please Wait",
-    //     spinnerColor: "purple-9",
-    //     customClass: "shadow-none",
-    //   });
-    //   this.FETCH_ALL_HIERARCHIES_DATA()
-    //     .then(response => {
-    //        console.log("res ACTIVE TABLE  DATAS------------->",JSON.stringify(res))
-    //       this.$q.loading.hide();
-    //     })
-    //     .catch(() => {
-    //       this.$q.notify({
-    //         color: "negative",
-    //         position: "bottom",
-    //         message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-    //         icon: "thumb_down",
-    //       });
-    //     });
-    // },
-    // fnActiveHierarchy(){
-    //    this.$q.loading.show({
-    //     delay: 0, // ms
-    //     spinnerColor: "purple-9",
-    //     message: "Fetching data ..",
-    //   });
-    //   this.FETCH_ALL_HIERARCHIES_DATA().then((res) => {
-    //      console.log("res ACTIVE TABLE  DATAS------------->",JSON.stringify(res))
-
-    //     // then we update the rows with the fetched ones
-    //     this.tableData =
-    //       this.getAllHierarchiesData;
-    //       console.log("ACTIVE TABLE  DATAS------------->",JSON.stringify(this.tableData))
-    //     // finally we tell QTable to exit the "loading" state
-    //     this.$q.loading.hide();
-    //   })
-    //     .catch(() => {
-    //       this.$q.loading.hide();
-    //     });
-    // },
-    // fnDisable(reqData) {
-    //   console.log("DISABLE DATAS------------->", JSON.stringify(reqData))
-    //   this.$q
-    //     .dialog({
-    //       title: "Confirm",
-    //       message: "Are you sure want to delete hierarchy?",
-    //       ok: "Continue",
-    //       cancel: "Cancel"
-    //     })
-    //     .then(() => {
-    //       this.$q.loading.show({
-    //         delay: 100, // ms
-    //         message: "Please Wait",
-    //         spinnerColor: "purple-9",
-    //         customClass: "shadow-none"
-    //       });
-    //       this.DELETE_HIERARCHY(reqData)
-    //         .then(response => {
-    //           this.$q.loading.hide();
-    //           this.$q.notify({
-    //             color: "negative",
-    //             position: "bottom",
-    //             message: "Successfully deactivated",
-    //             icon: "thumb_up"
-    //           });
-    //           this.$router.push("/super/admin/hierarchy/");
-    //           this.$q.loading.hide();
-    //         })
-    //         .catch(error => {
-    //           this.$q.notify({
-    //             color: "warning",
-    //             position: "bottom",
-    //             message: "Please try again!",
-    //             icon: "thumb_down"
-    //           });
-    //           this.$q.loading.hide();
-    //         });
-
-    //     })
-    // },
-    fnactive(reqData) {
-      console.log("DISABLE DATAS------------->", JSON.stringify(reqData))
-      this.$q
-        .dialog({
-          title: "Confirm",
-          message: "Are you sure want to Active hierarchy?",
-          ok: "Continue",
-          cancel: "Cancel"
-        }).onOk(() => {
-          this.$q.loading.show({
-            delay: 100, // ms
-            message: "Please Wait",
-            spinnerColor: "purple-9",
-            customClass: "shadow-none"
-          });
-          let param = {
-            // active: !reqData.active,
-            hierarchy: reqData.label,
-            hierarchyCode: reqData.shortCode,
-            id: reqData.value
-          };
-          this.ACTIVE_HIERARCHY(param)
-            .then(response => {
-              this.$q.loading.hide();
-              this.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: "Successfully activated",
-                icon: "thumb_up"
-              });
-              this.$q.loading.hide();
-            }).onCancel(error => {
-              this.$q.notify({
-                color: "warning",
-                position: "bottom",
-                message: "Please try again!",
-                icon: "thumb_down"
-              });
-              this.$q.loading.hide();
-            });
-
-        })
-    },
-
-
-    fnshowCreateHierarchy() {
-      this.propShowCreateHierarchy = !this.propShowCreateHierarchy;
-    },
-
-    fnShowEditHierarchy(rowDetails) {
-      this.propShowEditHierarchy = !this.propShowEditHierarchy;
-      this.propRowDetails = rowDetails;
-    },
-
-    fnDisableHierarchy(HierarchyId) {
-      console.log("HierarchyId", HierarchyId);
-      this.$q
-        .dialog({
-          title: "Confirm",
-          message: "Are you sure want to delete Hierarchy?",
-          ok: "Continue",
-          cancel: "Cancel",
-        }).onOk(() => {
-          this.DELETE_HIERARCHY_BY_HIERARCHY_ID_DATA(HierarchyId)
-            .then(response => {
-              this.FETCH_ALL_HIERARCHIES_DATA();
-              this.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: "Successfully Deleted!",
-                icon: "thumb_up",
-              });
-            }).onCancel(() => {
-              this.$q.notify({
-                color: "negative",
-                position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-                icon: "thumb_down",
-              });
-            });
-        })
-        .onCancel(() => {
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "No changes made!",
-            icon: "thumb_down",
-          });
-        });
-    },
-
-    //API for table filter using Hierarchy permissions
-    ajaxLoadData() {
-      this.tableAjaxLoading = true;
-      this.$q.loading.show({
-        delay: 100, // ms
-        message: "Please Wait",
-        spinnerColor: "purple-9",
-        customClass: "shadow-none",
-      });
-      this.GET_LS_VAS_DEVICE_CONFIG_DETAILS()
-        .then(response => {
-          console.log("getLsVasDeviceDetails------->", JSON.stringify(this.getLsVasDeviceDetails))
-          this.tableData = this.getLsVasDeviceDetails;
-          // this.activeTableData = this.tableData.active == true ? this.tableData :
-          this.activeTableData = this.getLsVasDeviceDetails;
-          // this.deActiveTableData = this.getAllHierarchiesData.filter(service => service.active == false);
-          this.$q.loading.hide();
-        })
-        .catch(() => {
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-            icon: "thumb_down",
-          });
-        });
-    },
-
-    myCustomSearchFilter(rows, terms, cols, cellValue) {
-      const lowerTerms = terms ? terms.toLowerCase() : "";
-      return rows.filter(row =>
-        cols.some(
-          col =>
-            (cellValue(col, row) + "").toLowerCase().indexOf(lowerTerms) !== -1
-        )
-      );
-    },
-  },
-
-  created() {
-    /* START: Load user table data filter > Hierarchys */
-    let flag = true;
-    console.log("res ACTIVE TABLE  DATAS------------->", flag)
-    console.log("res ACTIVE TABLE  DATAS------------->", !flag)
-    /* End: Load user table data filter > Hierarchys */
-  },
+      this.propShowEditLsVasDevice = true;
+    }
+  }
 };
 </script>
-  
-<style>
-
-</style>

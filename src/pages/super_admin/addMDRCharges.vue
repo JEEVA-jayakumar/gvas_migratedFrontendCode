@@ -1,148 +1,95 @@
 <template>
-  <q-page>
-    <div class="row">
-      <div class="col-12 text-h6 q-pa-md text-weight-regular bottom-border">
-        Add MDR details
-      </div>
+  <q-page padding>
+    <div class="row justify-center">
+      <div class="col-12 col-md-6">
+        <q-card flat bordered>
+          <q-card-section class="bg-purple-9 text-white">
+            <div class="text-h6">Existing MDR Details</div>
+          </q-card-section>
 
-      <!-- LEFT SIDE FORM -->
-      <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
-        <q-card style="width:100%">
-          <q-card-section>
-            <q-list>
+          <q-card-section class="q-pa-md">
+            <q-form @submit="fnsubmit" class="q-gutter-md">
+              <!-- Selection Row -->
+              <q-select
+                outlined
+                dense
+                v-model="formData.leadSource"
+                :options="dropDown.leadSourceOptions"
+                label="Select lead source"
+                emit-value
+                map-options
+              />
 
-              <!-- Lead Source -->
-              <q-item>
-                <q-item-section>
-                  <q-select
-                    dense
-                    outlined
-                    color="grey-9"
-                    v-model="formData.leadSource"
-                    :options="dropDown.leadSourceOptions"
-                    label="Select lead source"
-                    emit-value
-                    map-options
-                  />
-                </q-item-section>
-                <q-item-section side>
-                  <q-btn
-                    round
-                    size="sm"
-                    icon="add"
-                    color="purple-9"
-                    @click="fnManageLeadSource"
-                  />
-                </q-item-section>
-              </q-item>
+              <q-select
+                outlined
+                dense
+                v-model="formData.device"
+                :options="dropDown.deviceOptions"
+                label="Select device"
+                emit-value
+                map-options
+              />
 
-              <!-- Device -->
-              <q-item>
-                <q-item-section>
-                  <q-select
-                    dense
-                    outlined
-                    color="grey-9"
-                    v-model="formData.device"
-                    :options="dropDown.deviceOptions"
-                    label="Select device"
-                    emit-value
-                    map-options
-                  />
-                </q-item-section>
-                <q-item-section side>
-                  <q-btn
-                    round
-                    size="sm"
-                    icon="add"
-                    color="purple-9"
-                    @click="fnManageDevice"
-                  />
-                </q-item-section>
-              </q-item>
+              <q-select
+                outlined
+                dense
+                v-model="formData.marsDevice"
+                :options="dropDown.marsDeviceOptions"
+                label="Mars Device Model"
+                emit-value
+                map-options
+              />
 
-              <!-- Mars Device -->
-              <q-item>
-                <q-item-section>
-                  <q-select
-                    dense
-                    outlined
-                    color="grey-9"
-                    v-model="formData.marsDevice"
-                    :options="dropDown.marsDeviceOptions"
-                    label="Mars Device Model"
-                    emit-value
-                    map-options
-                  />
-                </q-item-section>
-              </q-item>
+              <q-select
+                outlined
+                dense
+                v-model="formData.merchantType"
+                :options="dropDown.merchantTypesOptions"
+                label="Select merchant category type"
+                emit-value
+                map-options
+              />
 
-              <!-- Merchant Type -->
-              <q-item>
-                <q-item-section>
-                  <q-select
-                    dense
-                    outlined
-                    color="grey-9"
-                    v-model="formData.merchantType"
-                    :options="dropDown.merchantTypesOptions"
-                    label="Select merchant category type"
-                    emit-value
-                    map-options
-                  />
-                </q-item-section>
-              </q-item>
-
-              <!-- MDR Fields -->
-              <q-item v-for="field in mdrFields" :key="field.model">
-                <q-item-section>
+              <!-- MDR Fields Grid -->
+              <div class="text-subtitle2 q-mt-md q-mb-sm text-purple-9">Rates (%)</div>
+              <div class="row q-col-gutter-sm">
+                <div v-for="field in mdrFields" :key="field.model" class="col-12 col-sm-6">
                   <q-input
-                    dense
                     outlined
+                    dense
                     type="number"
-                    color="grey-9"
+                    step="0.01"
                     v-model="formData[field.model]"
                     :label="field.label"
                   />
-                </q-item-section>
-              </q-item>
+                </div>
+              </div>
 
-            </q-list>
+              <div class="row justify-end q-mt-lg">
+                <q-btn unelevated label="Submit" color="purple-9" type="submit" class="q-px-lg" />
+              </div>
+            </q-form>
           </q-card-section>
-
-          <q-card-actions vertical align="end">
-            <q-btn
-              label="Submit"
-              color="purple-9"
-              @click="fnsubmit"
-            />
-          </q-card-actions>
         </q-card>
       </div>
-
-      <!-- RIGHT SIDE EMPTY (TABLE PLACEHOLDER) -->
-      <div class="col-md-7 col-sm-8 col-xs-12"></div>
-
-      <!-- MODALS -->
-      <showLeadSourceModalComponent
-        v-if="showLeadSourceModal"
-        :propToggleModal="showLeadSourceModal"
-        @emitToggleModal="fnManageLeadSource"
-      />
-
-      <showDeviceDetailModalComponent
-        v-if="showDeviceDetailModal"
-        :propToggleModal="showDeviceDetailModal"
-        @emitToggleModal="fnManageDevice"
-      />
-
-      <showMerchantModalComponent
-        v-if="showMerchantModal"
-        :propToggleModal="showMerchantModal"
-        @emitToggleModal="fnManageMerchantType"
-      />
-
     </div>
+
+    <!-- Modals (matched with legacy behavior) -->
+    <showLeadSourceModalComponent
+      v-if="showLeadSourceModal"
+      :propToggleModal="showLeadSourceModal"
+      @emitToggleModal="showLeadSourceModal = false"
+    />
+    <showDeviceDetailModalComponent
+      v-if="showDeviceDetailModal"
+      :propToggleModal="showDeviceDetailModal"
+      @emitToggleModal="showDeviceDetailModal = false"
+    />
+    <showMerchantModalComponent
+      v-if="showMerchantModal"
+      :propToggleModal="showMerchantModal"
+      @emitToggleModal="showMerchantModal = false"
+    />
   </q-page>
 </template>
 
@@ -150,24 +97,20 @@
 import showLeadSourceModalComponent from "../../components/super_admin/showLeadSourceModalComponents.vue";
 import showDeviceDetailModalComponent from "../../components/super_admin/showDeviceDetailModalComponents.vue";
 import showMerchantModalComponent from "../../components/super_admin/merchantTypes.vue";
-
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "MDRdetails",
-
+  name: "AddMDRCharges",
   components: {
     showLeadSourceModalComponent,
     showDeviceDetailModalComponent,
     showMerchantModalComponent
   },
-
   data() {
     return {
       showLeadSourceModal: false,
       showDeviceDetailModal: false,
       showMerchantModal: false,
-
       formData: {
         leadSource: null,
         device: null,
@@ -181,22 +124,20 @@ export default {
         intlCC: null,
         superPremiumlCC: null
       },
-
       dropDown: {
         deviceOptions: [],
         leadSourceOptions: [],
         marsDeviceOptions: [],
         merchantTypesOptions: []
       },
-
       mdrFields: [
-        { model: "debitLessthanAmount", label: "Debit <= 2000 %" },
-        { model: "debitGreaterthanAmount", label: "Debit > 2000 %" },
-        { model: "stdCC", label: "Std CC %" },
-        { model: "premiumCC", label: "Premium CC %" },
-        { model: "corpCC", label: "Corp Pre CC %" },
-        { model: "intlCC", label: "Intl Pre CC %" },
-        { model: "superPremiumlCC", label: "Super Pre CC %" }
+        { model: "debitLessthanAmount", label: "Debit <= 2000" },
+        { model: "debitGreaterthanAmount", label: "Debit > 2000" },
+        { model: "stdCC", label: "Std CC" },
+        { model: "premiumCC", label: "Premium CC" },
+        { model: "corpCC", label: "Corp Pre CC" },
+        { model: "intlCC", label: "Intl Pre CC" },
+        { model: "superPremiumlCC", label: "Super Pre CC" }
       ]
     };
   },
@@ -218,42 +159,27 @@ export default {
     ...mapActions("MdrPlan", ["MDR_PLAN"]),
 
     async loadInitialData() {
+      this.$q.loading.show({ message: "Loading data..." });
       try {
-        this.dropDown.deviceOptions = [];
-        this.dropDown.leadSourceOptions = [];
+        await Promise.all([
+          this.FETCH_DEVICES_DATA(),
+          this.LEAD_SOURCE_ACTIVE_LIST(),
+          this.MERCHANT_CATEGORY_ACTIVE_LIST(),
+          this.FETCH_MARS_DEVICE_MODEL()
+        ]);
+
+        this.dropDown.deviceOptions = this.getAllDevicesInfo.map(i => ({ label: i.deviceName, value: i.id }));
+        this.dropDown.leadSourceOptions = this.getActiveLeadSource.map(i => ({ label: i.sourceName, value: i.id }));
+        this.dropDown.merchantTypesOptions = this.getActiveMerchantCategory.map(i => ({ label: i.merchantCategoryName, value: i.id }));
+
         this.dropDown.marsDeviceOptions = [];
-        this.dropDown.merchantTypesOptions = [];
-
-        await this.FETCH_DEVICES_DATA();
-        this.dropDown.deviceOptions = this.getAllDevicesInfo.map(item => ({
-          label: item.deviceName,
-          value: item.id
-        }));
-
-        await this.LEAD_SOURCE_ACTIVE_LIST();
-        this.dropDown.leadSourceOptions = this.getActiveLeadSource.map(item => ({
-          label: item.sourceName,
-          value: item.id
-        }));
-
-        await this.MERCHANT_CATEGORY_ACTIVE_LIST();
-        this.dropDown.merchantTypesOptions = this.getActiveMerchantCategory.map(item => ({
-          label: item.merchantCategoryName,
-          value: item.id
-        }));
-
-        await this.FETCH_MARS_DEVICE_MODEL();
         this.getMarsDeviceModel.forEach(group => {
           group.forEach(device => {
-            this.dropDown.marsDeviceOptions.push({
-              label: device.name,
-              value: device.code
-            });
+            this.dropDown.marsDeviceOptions.push({ label: device.name, value: device.code });
           });
         });
-
-      } catch (error) {
-        console.error(error);
+      } finally {
+        this.$q.loading.hide();
       }
     },
 
@@ -275,50 +201,21 @@ export default {
         }
       };
 
+      this.$q.loading.show({ message: "Submitting..." });
       try {
         const response = await this.MDR_PLAN(requestParams);
-
-        this.$q.notify({
-          color: "positive",
-          position: "bottom",
-          message: response.data.message,
-          icon: "thumb_up"
-        });
-
+        this.$q.notify({ color: "positive", message: response.data.message || "MDR added successfully", icon: "thumb_up" });
         this.resetForm();
-
       } catch (error) {
-        this.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: error?.data?.message || "Something went wrong",
-          icon: "warning"
-        });
-
-        this.resetForm();
+        this.$q.notify({ color: "negative", message: error.data?.message || "Operation failed", icon: "warning" });
+      } finally {
+        this.$q.loading.hide();
       }
     },
 
     resetForm() {
-      Object.keys(this.formData).forEach(key => {
-        this.formData[key] = null;
-      });
-    },
-
-    fnManageLeadSource() {
-      this.showLeadSourceModal = !this.showLeadSourceModal;
-    },
-
-    fnManageDevice() {
-      this.showDeviceDetailModal = !this.showDeviceDetailModal;
-    },
-
-    fnManageMerchantType() {
-      this.showMerchantModal = !this.showMerchantModal;
+      Object.keys(this.formData).forEach(key => this.formData[key] = null);
     }
   }
 };
 </script>
-
-<style>
-</style>

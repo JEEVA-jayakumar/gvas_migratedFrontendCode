@@ -1293,7 +1293,7 @@ const routes = [
   {
     name: "BM",
     path: "/super/admin/",
-    component: Default_Layout,
+    component: Default_SuperAdmin,
     children: [{
       name: "adminDashboard",
       path: "dashboard",

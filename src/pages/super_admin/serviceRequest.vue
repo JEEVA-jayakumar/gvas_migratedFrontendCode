@@ -1,67 +1,58 @@
 <template>
-  <q-page>
-    <div class="text-grey-9">
-      <div class="row bottom-border q-pa-sm items-center">
-        <div class="col">
-          <q-tabs
-            no-pane-border
-            v-model="inventoryOptionSelected"
-            color="dark"
-            filled
-            class="shadow-1"
-          >
-            <q-tab name="serviceRequest" label="Service Request" />
-            <!-- <q-tab name="spareSo" label="Spare Parts So" /> -->
-            <q-tab name="issueTypes" label="Issue Types" />
-            <q-tab name="serviceStatus" label="Service Status" />
-            <q-tab name="cancelled" label="cancelled" />
-            <q-tab name="serviceResolutionRemarks" label="Service Resolution Remarks" />
-            <q-tab name="issueMapping" label="Issue Mapping" />
-            <q-tab name="csSubIssue" label="CS Sub Issue" />
-</q-tabs>
-<q-tab-panels v-model="inventoryOptionSelected" animated>
-<q-tab-panel name="serviceRequest">
-              <serviceRequest/>
-            </q-tab-panel>
-<q-tab-panel name="issueTypes">
-              <issueTypes/>
-            </q-tab-panel>
-<q-tab-panel name="serviceStatus">
-              <serviceStatus/>
-            </q-tab-panel>
-<q-tab-panel name="cancelled">
-              <cancelled/>
-            </q-tab-panel>
-<q-tab-panel name="serviceResolutionRemarks">
-              <serviceResolutionRemarks/>
-            </q-tab-panel>
-<q-tab-panel name="issueMapping">
-              <issueMapping/>
-            </q-tab-panel>
-<q-tab-panel name="csSubIssue">
-              <csSubIssue/>
-            </q-tab-panel>
-</q-tab-panels>
-        </div>
-      </div>
-    </div>
+  <q-page padding>
+    <q-tabs
+      v-model="inventoryOptionSelected"
+      class="bg-white text-grey-7 shadow-1"
+      active-color="purple-9"
+      indicator-color="purple-9"
+      align="left"
+    >
+      <q-tab name="serviceRequest" label="Service Request" />
+      <q-tab name="issueTypes" label="Issue Types" />
+      <q-tab name="serviceStatus" label="Service Status" />
+      <q-tab name="cancelled" label="Cancelled" />
+      <q-tab name="serviceResolutionRemarks" label="Service Resolution Remarks" />
+      <q-tab name="issueMapping" label="Issue Mapping" />
+      <q-tab name="csSubIssue" label="CS Sub Issue" />
+    </q-tabs>
+
+    <q-tab-panels v-model="inventoryOptionSelected" animated keep-alive class="bg-transparent">
+      <q-tab-panel name="serviceRequest" class="no-padding q-mt-md">
+        <serviceRequest />
+      </q-tab-panel>
+      <q-tab-panel name="issueTypes" class="no-padding q-mt-md">
+        <issueTypes />
+      </q-tab-panel>
+      <q-tab-panel name="serviceStatus" class="no-padding q-mt-md">
+        <serviceStatus />
+      </q-tab-panel>
+      <q-tab-panel name="cancelled" class="no-padding q-mt-md">
+        <cancelled />
+      </q-tab-panel>
+      <q-tab-panel name="serviceResolutionRemarks" class="no-padding q-mt-md">
+        <serviceResolutionRemarks />
+      </q-tab-panel>
+      <q-tab-panel name="issueMapping" class="no-padding q-mt-md">
+        <issueMapping />
+      </q-tab-panel>
+      <q-tab-panel name="csSubIssue" class="no-padding q-mt-md">
+        <csSubIssue />
+      </q-tab-panel>
+    </q-tab-panels>
   </q-page>
 </template>
 
 <script>
- import serviceRequest from "../../components/super_admin/serviceRequest.vue";
- import issueTypes from "../../components/super_admin/issueTypes.vue";
- import serviceStatus from "../../components/super_admin/serviceStatus.vue";
- import cancelled from "../../components/super_admin/cancelled.vue";
- import serviceResolutionRemarks from "../../components/super_admin/serviceResolutionRemarks.vue";
- import issueMapping from "../../components/super_admin/issueMapping.vue";
- import csSubIssue from "../../components/super_admin/csSubIssue.vue";
-// import inventoryCount from "../../components/sat/regionalInventory/inventoryCount.vue";
+import serviceRequest from "../../components/super_admin/serviceRequest.vue";
+import issueTypes from "../../components/super_admin/issueTypes.vue";
+import serviceStatus from "../../components/super_admin/serviceStatus.vue";
+import cancelled from "../../components/super_admin/cancelled.vue";
+import serviceResolutionRemarks from "../../components/super_admin/serviceResolutionRemarks.vue";
+import issueMapping from "../../components/super_admin/issueMapping.vue";
+import csSubIssue from "../../components/super_admin/csSubIssue.vue";
 
-import { mapGetters, mapActions } from "vuex";
 export default {
-  name: "inventoryAllocation",
-
+  name: "ServiceRequestManagement",
   components: {
     serviceRequest,
     issueTypes,
@@ -71,65 +62,10 @@ export default {
     issueMapping,
     csSubIssue
   },
-
   data() {
     return {
-      enableUploadInventoryBtn: true,
-      toggleScanButton: true,
       inventoryOptionSelected: "serviceRequest"
     };
-  },
-
-  computed: {
-    ...mapGetters("SAT_RegionalInventoryAllocation", [
-      "getAllRegionalInventoryDeviceDetailsWithCount",
-      "getCurrentPODNumber",
-      "getCurrentDeviceId",
-      "getAllInventorywithsoDeviceDetailsWithCount"
-    ]),
-    ...mapGetters("InventoryWithSo", ["getAllInventoryWithSo"])
-  },
-
-  created() {
-    this.fnAjaxFetchAllDeviceDetailsWithCount();
-  },
-
-  methods: {
-    ...mapActions("SAT_RegionalInventoryAllocation", [
-      "FETCH_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT",
-      "FETCH_REGIONAL_INVENTORY_SERIAL_NUMBER_BY_DEVICE",
-      "FETCH_INVENTORY_WITH_SO_DEVICE_DETAIL_WITH_COUNT"
-    ]),
-    ...mapActions("InventoryWithSo", ["FETCH_INVENTORY_WITH_SO"]),
-    fnAjaxFetchAllDeviceDetailsWithCount() {
-      this.toggleAjaxLoadFilter = true;
-      this.FETCH_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT(
-        JSON.parse(localStorage.getItem("u_i")).region.id
-      )
-        // this.FETCH_INVENTORY_WITH_SO_DEVICE_DETAIL_WITH_COUNT(
-        //   JSON.parse(localStorage.getItem("u_i")).region.id
-        // )
-        .then(() => {
-          let requestParams = {
-            region: JSON.parse(localStorage.getItem("u_i")).region.id,
-            action: this.$REGIONAL_INVENTORY_FILTER_ACTION_DEVICE
-          };
-          this.FETCH_REGIONAL_INVENTORY_SERIAL_NUMBER_BY_DEVICE(requestParams);
-          this.toggleAjaxLoadFilter = false;
-        })
-        .catch(error => {
-          this.toggleAjaxLoadFilter = false;
-        });
-    }
   }
 };
 </script>
-
-<style>
-.border-1 {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-.border-2 {
-  border: 3px solid rgba(48, 48, 48, 0.5);
-}
-</style>

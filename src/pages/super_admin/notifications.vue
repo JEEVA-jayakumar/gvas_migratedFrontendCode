@@ -1,180 +1,154 @@
 <template>
-  <div>
-    <div class="col-12 text-h6 q-my-lg text-weight-regular"><strong>Notifications</strong></div>
-    <form>
-      <div class="q-px-md">
-        <div class="q-pa-md">
-          <div class="row gutter-sm q-py-sm">
-            <div class="col-md-6">
-              <q-select
-                v-model.trim="formData.categoryType"
-                @blur="$v.formData.categoryType.$touch"
-                :error="$v.formData.categoryType.$error"
-                class="text-weight-regular text-grey-8"
-                :options="leadSourceOptions"
-                label="*Notification Category"
-                placeholder="Notification Category"
-              />
-            </div>
-            <div class="col-md-6">
-              <q-chips-input  @blur="$v.formData.tids.$touch" :error="$v.formData.tids.$error"
-                            clearable
-                            color="grey-9"
-                            v-model.trim="formData.tids"
-                            label="TID"
-                            placeholder="Search TID"
-                          >
-                            <q-autocomplete
-                              @search="tidsearch"
-                              :debounce="500"
-                              :min-characters="1"
-                             
-                            />
-                          </q-chips-input>
-            </div>
+  <q-page padding>
+    <q-card flat bordered class="q-pa-md">
+      <div class="text-h6 text-purple-9 q-mb-md">Notifications</div>
 
-            <div class="col-md-7">
-              <q-input
-                v-model.trim="formData.notificationText"
-                @blur="$v.formData.notificationText.$touch"
-                :error="$v.formData.notificationText.$error"
-                class="text-weight-regular text-grey-8"
-                color="grey-9"
-                label="*Notification Text"
-              />
-            </div>
-            <div class="col-md-5">
-                    <q-btn
-          size="md"
-          type="button"
-          color="purple-9"
-          @click="fnSaveMerchant(formData)"
-        >Submit</q-btn>
-        </div>
+      <q-form @submit="fnSaveMerchant" class="q-gutter-md">
+        <div class="row q-col-gutter-md">
+          <div class="col-12 col-md-6">
+            <q-select
+              outlined
+              dense
+              v-model="formData.categoryType"
+              :options="leadSourceOptions"
+              label="*Notification Category"
+              :error="v$.formData.categoryType.$error"
+              color="purple-9"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-12 col-md-6">
+            <q-select
+              outlined
+              dense
+              use-input
+              use-chips
+              multiple
+              v-model="formData.tids"
+              label="TID"
+              placeholder="Search TID"
+              :options="tidOptions"
+              @filter="tidsearch"
+              :error="v$.formData.tids.$error"
+              color="purple-9"
+            >
+              <template v-slot:no-option>
+                <q-item>
+                  <q-item-section class="text-grey">
+                    No results
+                  </q-item-section>
+                </q-item>
+              </template>
+            </q-select>
+          </div>
+
+          <div class="col-12">
+            <q-input
+              outlined
+              dense
+              v-model.trim="formData.notificationText"
+              label="*Notification Text"
+              :error="v$.formData.notificationText.$error"
+              color="purple-9"
+            />
           </div>
         </div>
-      </div>
-    </form>
 
-  </div>
+        <div class="row justify-center q-mt-md">
+          <q-btn unelevated label="Submit" color="purple-9" type="submit" />
+        </div>
+      </q-form>
+    </q-card>
+  </q-page>
 </template>
 
 <script>
-
-import {
-  required,
-  email,
-  requiredIf,
-  branch_code,
-  minLength,
-  maxLength,
-  alpha,
-  alphaNum,
-  numeric
-} from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
+
 export default {
+  name: "Notifications",
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
-      
+      tidOptions: [],
       leadSourceOptions: [
-        {
-         label:"Offers",
-         value:3
-        },
-        {
-         label:"Risk Hold",
-         value:1
-
-        },
-        {
-
-         label:"Paper Roll",
-         value:2
-        }
+        { label: "Offers", value: 3 },
+        { label: "Risk Hold", value: 1 },
+        { label: "Paper Roll", value: 2 }
       ],
-
       formData: {
-       
-        categoryType: "",
-        tids:[],
-        notificationText:"",
+        categoryType: null,
+        tids: [],
+        notificationText: ""
       }
     };
   },
-
-  validations: {
-    formData: {
-      categoryType: {
-        required
-      },
-      tids:{
-        required
-      },
-      notificationText: {
-        required
-      },
-      
-    }
+  validations() {
+    return {
+      formData: {
+        categoryType: { required },
+        tids: { required },
+        notificationText: { required }
+      }
+    };
   },
   computed: {
-    ...mapGetters("leadSource", ["getActiveLeadSource"]),
-      ...mapGetters("Merchant", [
-      "getMerchantTid"
-    ]),
+    ...mapGetters("Merchant", ["getMerchantTid"])
   },
   methods: {
-    ...mapActions("leadSource", ["LEAD_SOURCE_ACTIVE_LIST"]),
-     ...mapActions("Merchant", ["FETCH_ALL_MERCHANTTID","SAVE_MERCHANT"]),
-    fnSaveMerchant(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
-        this.$q.notify("Please review fields again.");
+    ...mapActions("Merchant", ["FETCH_ALL_MERCHANTTID", "SAVE_MERCHANT"]),
+
+    async tidsearch(val, update, abort) {
+      if (val.length < 1) {
+        abort();
         return;
-      } else {
-        this.SAVE_MERCHANT(formData)
-          .then(response => {
-            this.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: response.data.message,
-              icon: "thumb_up"
-            });
-           this.formData.categoryType="",
-           this.formData.tids="",
-           this.formData.notificationText=""
-          })
-          .catch(error => {
-            this.$q.loading.hide();
-            this.$q.notify({
-              type: "warning",
-              color: "amber-9",
-              position: "bottom",
-              message: error.data.message
-            });
-          });
       }
-    },
-    tidsearch(terms, done) {
-      this.FETCH_ALL_MERCHANTTID(terms)
+      this.FETCH_ALL_MERCHANTTID(val)
         .then(() => {
-          done(this.getMerchantTid, terms);
+          update(() => {
+            this.tidOptions = this.getMerchantTid.map(tid => ({
+              label: tid.label || tid,
+              value: tid.value || tid
+            }));
+          });
         })
-        .catch(() => {
-          done([]);
-        });
+        .catch(() => abort());
     },
 
-    // bankcitySelected(){
+    async fnSaveMerchant() {
+      const isValid = await this.v$.$validate();
+      if (!isValid) {
+        this.$q.notify({ color: "warning", message: "Please review fields again." });
+        return;
+      }
 
-    // },
+      this.$q.loading.show();
+      // Ensure tids are sent as an array of values if needed, legacy might expect specific format
+      const payload = {
+        ...this.formData,
+        tids: this.formData.tids.map(t => t.value || t)
+      };
 
-    COMMON_FILTER_FUNCTION(arraySet, terms) {
-      return _.filter(arraySet, function(oo) {
-        return oo.label.toString().includes(terms.toLowerCase());
-      });
+      this.SAVE_MERCHANT(payload)
+        .then(response => {
+          this.$q.notify({ color: "positive", message: response.data.message });
+          this.resetForm();
+        })
+        .catch(error => {
+          this.$q.notify({ color: "amber-9", message: error.data?.message || "Error occurred" });
+        })
+        .finally(() => this.$q.loading.hide());
     },
 
+    resetForm() {
+      this.formData = { categoryType: null, tids: [], notificationText: "" };
+      this.v$.$reset();
+    }
   }
 };
 </script>
