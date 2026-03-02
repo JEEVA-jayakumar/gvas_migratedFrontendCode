@@ -115,7 +115,8 @@ import { required, or } from '@vuelidate/validators';
   import DeviceAddressModal from "../../components/sat/DeviceAddressModal.vue";
   import generalLeadInformation from "../../components/generalLeadInformation.vue";
   import varaneekRejectedLead from "../../components/sat/varaneekRejectedLead.vue";
-  export default {
+  import { useVuelidate } from "@vuelidate/core";
+export default {
     name: "varaneekImplementationQueue",
     components: {
       DeviceAddressModal,

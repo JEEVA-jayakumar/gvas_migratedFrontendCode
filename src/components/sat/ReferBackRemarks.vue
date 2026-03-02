@@ -92,6 +92,7 @@
 <script>
 import { or } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from "@vuelidate/core";
 export default {
   props: ["propShowUpdateOpenedExternal", "propRowDetails"],
   name: "MDRdetails",

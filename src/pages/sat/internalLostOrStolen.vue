@@ -30,25 +30,32 @@
         @request="ajaxLoadAllLeadInfo"
       >
         <!--START: table header -->
-        <q-tr v-slot:top-row="props">
+        <template v-slot:top-row="props">
+          <q-tr>
           <q-th v-for="col in props.columns" :key="col.name" :props="props">{{
             col.label
           }}</q-th>
         </q-tr>
+        </template>
         <!--END: table header -->
   
-        <q-td v-slot:body-cell-tid="props" :props="props">
+        <template v-slot:body-cell-tid="props">
+          <q-td :props="props">
           <span class="label text-primary"># {{ props.row.tid }}</span>
         </q-td>
-        <q-td v-slot:body-cell-mid="props" :props="props">
+        </template>
+        <template v-slot:body-cell-mid="props">
+          <q-td :props="props">
           <span class="label text-primary"># {{ props.row.mid }}</span>
         </q-td>
-        <!-- <q-td
-            v-slot:body-cell-leadName="props"
+        </template>
+        <!-- <template v-slot:body-cell-leadName="props">
+          <q-td
             :props="props"
-          >{{props.row.leadInformation.leadName}}</q-td>-->
-        <q-td
-          v-slot:body-cell-leadNumber="props"
+          >{{props.row.leadInformation.leadName}}</q-td>
+        </template>-->
+        <template v-slot:body-cell-leadNumber="props">
+          <q-td
           :props="props"
           class="cursor-pointer"
           @click="toggleLeadInformation(props.row.leadInformation)"
@@ -57,29 +64,40 @@
             ># {{ props.row.leadInformation.leadNumber }}</span
           >
         </q-td>
-        <q-td v-slot:body-cell-mobileNumber="props" :props="props">{{
+        </template>
+        <template v-slot:body-cell-mobileNumber="props">
+          <q-td :props="props">{{
           props.row.leadInformation == null
             ? "NA"
             : props.row.leadInformation.contactNumber
         }}</q-td>
-        <q-td v-slot:body-cell-leadAddress="props" :props="props">{{
+        </template>
+        <template v-slot:body-cell-leadAddress="props">
+          <q-td :props="props">{{
           props.row.leadInformation == null
             ? "NA"
             : props.row.leadInformation.leadAddress
         }}</q-td>
-        <q-td
-          v-slot:body-cell-lostOrStolenRemarks="props"
+        </template>
+        <template v-slot:body-cell-lostOrStolenRemarks="props">
+          <q-td
           :props="props"
         >
           <span class="label">{{ props.row.lostOrStolenRemarks }}</span>
         </q-td>
-        <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+        </template>
+        <template v-slot:body-cell-deviceStatusDate="props">
+          <q-td :props="props">
           <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
         </q-td>
-        <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+        </template>
+        <!-- <template v-slot:body-cell-deviceStatusDate="props">
+          <q-td :props="props">
           <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-        </q-td> -->
-        <q-td v-slot:body-cell-action="props" :props="props">
+        </q-td>
+        </template> -->
+        <template v-slot:body-cell-action="props">
+          <q-td :props="props">
           <q-btn
             highlight
             push
@@ -90,6 +108,7 @@
             >Lost/Stolen</q-btn
           >
         </q-td>
+        </template>
         <!-- <q-td auto-width key="action" :props="props">
                 <q-btn
                 highlight
@@ -102,7 +121,7 @@
              </q-td>
              </q-tr>
           </template> -->
-        <template slot="top" class="bottom-border">
+        <template v-slot:top class="bottom-border">
           <!--START: table filter,search,excel download -->
           <div class="col-5">
             <q-input
@@ -134,14 +153,18 @@
         class="payment_verification_table capitalize"
       >
       
-        <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+        <!-- <template v-slot:body-cell-deviceStatusDate="props">
+          <q-td :props="props">
           <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-        </q-td> -->
-        <q-td
-            v-slot:body-cell-updated_at="props"
+        </q-td>
+        </template> -->
+        <template v-slot:body-cell-updated_at="props">
+          <q-td
             :props="props"
           >{{ $moment(props.row.updatedAt ==null? "NA" : props.row.updatedAt).format("Do MMM Y") }}</q-td>
-        <q-td v-slot:body-cell-Status="props" :props="props">
+        </template>
+        <template v-slot:body-cell-Status="props">
+          <q-td :props="props">
           <span
             class="label text-positive"
             v-if="props.row.regionalInventory.deviceStatus == 8"
@@ -158,7 +181,9 @@
             >Rejected By Finance</span
           >
         </q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
+        </template>
+        <template v-slot:body-cell-action="props">
+          <q-td :props="props">
           <q-btn
             v-if="props.row.regionalInventory.deviceStatus == 8"
             disable
@@ -185,8 +210,6 @@
             size="sm"
             >Rejected By Finance</q-btn
           >
-        </q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
           <q-btn
             v-if="props.row.regionalInventory.deviceStatus == 10"
             highlight
@@ -216,7 +239,8 @@
             >Lost/Stolen</q-btn
           >
         </q-td>
-        <template slot="top" class="bottom-border">
+        </template>
+        <template v-slot:top class="bottom-border">
           <div class="col-md-5">
             <q-input
               clearable
@@ -293,7 +317,8 @@ import { required, or } from '@vuelidate/validators';
   import showMerchantTransactionLevelDetails from "../../components/sat/showMerchantTransactionLevelDetails.vue";
   import generalLeadInformation from "../../components/generalLeadInformation.vue";
   
-  export default {
+  import { useVuelidate } from "@vuelidate/core";
+export default {
     name: "merchantTransactionLevel",
   
     components: {

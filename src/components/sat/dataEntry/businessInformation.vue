@@ -4,8 +4,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           color="grey-9"
-          @blur="$v.merchant.businessInformation.weekdayStartHour.$touch"
-          :error="$v.merchant.businessInformation.weekdayStartHour.$error"
+          @blur="v$.merchant.businessInformation.weekdayStartHour.$touch"
+          :error="v$.merchant.businessInformation.weekdayStartHour.$error"
           v-model="merchant.businessInformation.weekdayStartHour"
           label="Weekday start hour (00.00)"
           placeholder="Weekday start hour"
@@ -14,8 +14,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           color="grey-9"
-          @blur="$v.merchant.businessInformation.weekdayEndHour.$touch"
-          :error="$v.merchant.businessInformation.weekdayEndHour.$error"
+          @blur="v$.merchant.businessInformation.weekdayEndHour.$touch"
+          :error="v$.merchant.businessInformation.weekdayEndHour.$error"
           v-model="merchant.businessInformation.weekdayEndHour"
           label="Weekday end hour (00.00)"
           placeholder="Weekday end hour"
@@ -24,8 +24,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           color="grey-9"
-          @blur="$v.merchant.businessInformation.weekendStartHour.$touch"
-          :error="$v.merchant.businessInformation.weekendStartHour.$error"
+          @blur="v$.merchant.businessInformation.weekendStartHour.$touch"
+          :error="v$.merchant.businessInformation.weekendStartHour.$error"
           v-model="merchant.businessInformation.weekendStartHour"
           label="Weekend start hour (00.00)"
           placeholder="Weekend start hour"
@@ -34,8 +34,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           color="grey-9"
-          @blur="$v.merchant.businessInformation.weekendEndHour.$touch"
-          :error="$v.merchant.businessInformation.weekendEndHour.$error"
+          @blur="v$.merchant.businessInformation.weekendEndHour.$touch"
+          :error="v$.merchant.businessInformation.weekendEndHour.$error"
           v-model="merchant.businessInformation.weekendEndHour"
           label="Weekend end hour (00.00)"
           placeholder="Weekend end hour"
@@ -44,8 +44,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12 col-xs-12">
         <q-input
           color="grey-9"
-          @blur="$v.merchant.businessInformation.lastTurnoverYear.$touch"
-          :error="$v.merchant.businessInformation.lastTurnoverYear.$error"
+          @blur="v$.merchant.businessInformation.lastTurnoverYear.$touch"
+          :error="v$.merchant.businessInformation.lastTurnoverYear.$error"
           v-model="merchant.businessInformation.lastTurnoverYear"
           label="Last turnover year"
           placeholder="Last turnover year"
@@ -55,8 +55,8 @@
         <q-input
           color="grey-9"
           type="number"
-          @blur="$v.merchant.businessInformation.lastTurnoverAmount.$touch"
-          :error="$v.merchant.businessInformation.lastTurnoverAmount.$error"
+          @blur="v$.merchant.businessInformation.lastTurnoverAmount.$touch"
+          :error="v$.merchant.businessInformation.lastTurnoverAmount.$error"
           v-model="merchant.businessInformation.lastTurnoverAmount"
           label="Turnover during last year"
           placeholder="Turnover during last year"
@@ -66,8 +66,8 @@
         <q-input
           color="grey-9"
           type="number"
-          @blur="$v.merchant.businessInformation.expectedCardBusiness.$touch"
-          :error="$v.merchant.businessInformation.expectedCardBusiness.$error"
+          @blur="v$.merchant.businessInformation.expectedCardBusiness.$touch"
+          :error="v$.merchant.businessInformation.expectedCardBusiness.$error"
           v-model="merchant.businessInformation.expectedCardBusiness"
           label="Expected Card Business"
           placeholder="Expected Card Business"
@@ -77,8 +77,8 @@
         <q-input
           color="grey-9"
           type="number"
-          @blur="$v.merchant.businessInformation.averageBillAmount.$touch"
-          :error="$v.merchant.businessInformation.averageBillAmount.$error"
+          @blur="v$.merchant.businessInformation.averageBillAmount.$touch"
+          :error="v$.merchant.businessInformation.averageBillAmount.$error"
           v-model="merchant.businessInformation.averageBillAmount"
           label="Average Bill Amount"
           placeholder="Average Bill Amount"
@@ -88,8 +88,8 @@
         <q-input
           upper-case
           color="grey-9"
-          @blur="$v.merchant.businessInformation.gstId.$touch"
-          :error="$v.merchant.businessInformation.gstId.$error"
+          @blur="v$.merchant.businessInformation.gstId.$touch"
+          :error="v$.merchant.businessInformation.gstId.$error"
           v-model="merchant.businessInformation.gstId"
           label="GST ID"
           placeholder="GST ID"
@@ -106,8 +106,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           color="grey-9"
-          @blur="$v.merchant.businessInformation.debitCardMdr.$touch"
-          :error="$v.merchant.businessInformation.debitCardMdr.$error"
+          @blur="v$.merchant.businessInformation.debitCardMdr.$touch"
+          :error="v$.merchant.businessInformation.debitCardMdr.$error"
           v-model="merchant.businessInformation.debitCardMdr"
           label="Debit Card MDR"
           placeholder="Debit Card MDR"
@@ -116,8 +116,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           color="grey-9"
-          @blur="$v.merchant.businessInformation.creditCardMdr.$touch"
-          :error="$v.merchant.businessInformation.creditCardMdr.$error"
+          @blur="v$.merchant.businessInformation.creditCardMdr.$touch"
+          :error="v$.merchant.businessInformation.creditCardMdr.$error"
           v-model="merchant.businessInformation.creditCardMdr"
           label="Credit Card MDR"
           placeholder="Credit Card MDR"
@@ -125,16 +125,25 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          format="DD/MM/YYYY"
-          format-model="number"
-          @blur="$v.merchant.businessInformation.memberSince.$touch"
-          :error="$v.merchant.businessInformation.memberSince.$error"
+          @blur="v$.merchant.businessInformation.memberSince.$touch"
+          :error="v$.merchant.businessInformation.memberSince.$error"
           color="grey-9"
-          modal
           v-model="merchant.businessInformation.memberSince"
           label="Member since"
           placeholder="Member since"
-        />
+        >
+          <template v-slot:append>
+            <q-icon name="event" class="cursor-pointer">
+              <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                <q-date v-model="merchant.businessInformation.memberSince" mask="YYYY-MM-DD">
+                  <div class="row items-center justify-end">
+                    <q-btn v-close-popup label="Close" color="primary" flat />
+                  </div>
+                </q-date>
+              </q-popup-proxy>
+            </q-icon>
+          </template>
+        </q-input>
       </div>
     </div>
     <q-stepper-navigation>
@@ -164,11 +173,15 @@ import {
   decimal,
   between
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 const timeValidate = helpers.regex(
   "timeValidate",
   /^(?:\d|[01]\d|2[0-3])\.[0-5]\d$/
 );
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   // name: 'ComponentName',
   props: ["businessInformation"],
 
@@ -240,8 +253,8 @@ export default {
   },
   methods: {
     validate() {
-      this.$v.merchant.businessInformation.$touch();
-      if (this.$v.merchant.businessInformation.$error) {
+      this.v$.merchant.businessInformation.$touch();
+      if (this.v$.merchant.businessInformation.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$emit("goNext", "businessInformation", this.merchant);

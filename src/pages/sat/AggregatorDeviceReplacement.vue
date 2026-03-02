@@ -134,7 +134,7 @@
                 <div
                v-if="props.row.leadInformation != null" class="text-primary">{{ props.row.mid }}</div>
               </q-td>
-              <template slot="top">
+              <template v-slot:top>
                 <!--START: table filter,search -->
                 <div class="col-md-5">
                   <q-input
@@ -217,7 +217,7 @@
                   {{ props.row.deviceAddress }}
                 </div>
               </q-td>
-              <template slot="top">
+              <template v-slot:top>
                 <!--START: table filter,search -->
                 <div class="col-md-5">
                   <q-input
@@ -252,7 +252,8 @@
 import { required, email, or } from '@vuelidate/validators';
   import { mapGetters, mapActions } from "vuex";
   
-  export default {
+  import { useVuelidate } from "@vuelidate/core";
+export default {
     name: "implementationQueue",
     data() {
       return {

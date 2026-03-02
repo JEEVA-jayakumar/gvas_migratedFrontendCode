@@ -8,6 +8,7 @@
 </style>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: 'PageIndex'
 }

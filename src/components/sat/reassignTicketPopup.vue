@@ -116,9 +116,13 @@ import {
   alphaNum,
   numeric
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 import assignHistoryPopup from "../../components/sat/assignHistoryPopup.vue";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["propShowUpdateReassignTicket", "propRowDetails"],
   name: "MDRdetails",
   components: {
@@ -271,9 +275,9 @@ export default {
                 color: "negative",
                 position: "bottom",
                 message:
-                  error.body.message == null
+                  error.data.message == null
                     ? "Please Try Again Later !"
-                    : error.body.message,
+                    : error.data.message,
                 icon: "thumb_down"
               });
             });

@@ -127,6 +127,7 @@ import downloadExcel from "vue-json-excel";
 import showMerchantTransactionLevelDetails from "../../components/sat/showMerchantTransactionLevelDetails.vue";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "getadditionalTid",
 

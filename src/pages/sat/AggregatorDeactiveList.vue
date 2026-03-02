@@ -23,14 +23,18 @@
         :rows-per-page-options="[5, 10, 15, 20]"
         @request="ajaxLoadAllLeadInfo"
       >
-        <q-td v-slot:body-cell-tid="props" :props="props">
+        <template v-slot:body-cell-tid="props">
+          <q-td :props="props">
           <span class="label text-primary"># {{ props.row.tid }}</span>
         </q-td>
-        <q-td v-slot:body-cell-mid="props" :props="props">
+        </template>
+        <template v-slot:body-cell-mid="props">
+          <q-td :props="props">
           <span class="label text-primary"># {{ props.row.mid }}</span>
         </q-td>
-        <q-td
-          v-slot:body-cell-leadNumber="props"
+        </template>
+        <template v-slot:body-cell-leadNumber="props">
+          <q-td
           :props="props"
           class="cursor-pointer"
           @click="toggleLeadInformation(props.row)"
@@ -39,18 +43,26 @@
             ># {{ props.row.leadInformation.leadNumber }}</span
           >
         </q-td>
-        <q-td v-slot:body-cell-mobileNumber="props" :props="props">{{
+        </template>
+        <template v-slot:body-cell-mobileNumber="props">
+          <q-td :props="props">{{
           props.row.leadInformation == null
             ? "NA"
             : props.row.leadInformation.contactNumber
         }}</q-td>
-        <q-td v-slot:body-cell-leadAddress="props" :props="props">{{
+        </template>
+        <template v-slot:body-cell-leadAddress="props">
+          <q-td :props="props">{{
           props.row.leadInformation == null ? "NA" : props.row.leadInformation.leadAddress
         }}</q-td>
-        <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+        </template>
+        <template v-slot:body-cell-deviceStatusDate="props">
+          <q-td :props="props">
           <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
         </q-td>
-        <q-td v-slot:body-cell-viewDocument="props" :props="props">
+        </template>
+        <template v-slot:body-cell-viewDocument="props">
+          <q-td :props="props">
           <div
             v-if="
               props.row.implementationFormMimeType == null ||
@@ -81,7 +93,9 @@
           </div>
           <div v-else>NA Document</div>
         </q-td>
-        <q-td v-slot:body-cell-pictureOfShop="props" :props="props">
+        </template>
+        <template v-slot:body-cell-pictureOfShop="props">
+          <q-td :props="props">
           <div
             v-if="
               props.row.pictureOfShopMimeType == null ||
@@ -112,7 +126,9 @@
           </div>
           <div v-else>NA Document</div>
         </q-td>
-        <q-td v-slot:body-cell-cpvForm="props" :props="props">
+        </template>
+        <template v-slot:body-cell-cpvForm="props">
+          <q-td :props="props">
           <div
             v-if="
               props.row.cpvFormMimeType == null ||
@@ -143,7 +159,9 @@
           </div>
           <div v-else>NA Document</div>
         </q-td>
-        <q-td v-slot:body-cell-status="props" :props="props">
+        </template>
+        <template v-slot:body-cell-status="props">
+          <q-td :props="props">
           <span class="label text-positive" v-if="props.row.deviceStatus == 6"
             >Approved</span
           >
@@ -152,8 +170,9 @@
           >
           <span class="label text-amber" v-else>NA</span>
         </q-td>
+        </template>
 
-        <template slot="top">
+        <template v-slot:top>
           <div class="col-5">
             <q-input
               clearable
@@ -230,6 +249,7 @@ import generalLeadInformation from "../../components/generalLeadInformation.vue"
 import { date } from "quasar";
 const today = new Date();
 const { startOfDate, addToDate, subtractFromDate } = date;
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "merchantTransactionLevel",
 

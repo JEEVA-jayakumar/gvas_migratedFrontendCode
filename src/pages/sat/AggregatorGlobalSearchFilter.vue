@@ -375,7 +375,8 @@ import { required, or } from '@vuelidate/validators';
   import { mapGetters, mapActions } from "vuex";
   const deCapitalizeFirstLetter = ([first, ...rest], locale = navigator.language) =>
     first === undefined ? '' : first.toLocaleLowerCase(locale) + rest.join('')
-  export default {
+  import { useVuelidate } from "@vuelidate/core";
+export default {
     name: "globalSearchFilterValues",
   
     data() {

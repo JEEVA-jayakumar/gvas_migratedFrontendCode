@@ -83,7 +83,7 @@
                                         this.propsAdditionalData
                                             .merchantRefCode
 
-                                    " v-model.trim="additionalTerminal.merchantRefCode" :error="$v.additionalTerminal.merchantRefCode.$error
+                                    " v-model.trim="additionalTerminal.merchantRefCode" :error="v$.additionalTerminal.merchantRefCode.$error
 " label="Merchant RefCode*" />
                                 </div>
                                 <div class="col-md-6">
@@ -95,10 +95,10 @@
                                         additionalTerminal.AdditionalTerminalDetails
                                             .numberOfTerminals
                                     " @blur="
-    $v.additionalTerminal.AdditionalTerminalDetails
+    v$.additionalTerminal.AdditionalTerminalDetails
         .numberOfTerminals.$touch;
                    " :error="
-                       $v.additionalTerminal.AdditionalTerminalDetails
+                       v$.additionalTerminal.AdditionalTerminalDetails
                            .numberOfTerminals.$error
                    " class="text-weight-regular text-grey-8" color="grey-9" label="*Number Of Terminals"
                                         placeholder="Number Of Terminals" />
@@ -118,23 +118,26 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <q-input @blur="fnClrCity" color="grey-9"
+                                    <q-select @blur="fnClrCity" color="grey-9"
                                         v-model.trim="additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel"
-                                        @update:model-value="fninputTyping($event, 1)" label="City (type min 3 characters)*"
+                                        use-input fill-input hide-selected
+                                        :options="cityFilteredOptions" @filter="marsCitySearchFn"
+                                        @update:model-value="partnerCitySelected"
+                                        label="City (type min 3 characters)*"
                                         placeholder="Start typing ..*">
-
-                                        <q-autocomplete separator @search="marsCitySearch" :debounce="10"
-                                            :min-characters="3" @selected="partnerCitySelected" />
-                                    </q-input>
+                                        <template v-slot:no-option><q-item><q-item-section class="text-grey">No results</q-item-section></q-item></template>
+                                    </q-select>
                                 </div>
                                 <div class="col-md-6">
-                                    <q-input @blur="fnClrState" color="black-9"
+                                    <q-select @blur="fnClrState" color="black-9"
                                         v-model.trim="additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel"
-                                        @update:model-value="fninputTyping($event, 2)" label="state (type min 3 characters)*"
+                                        use-input fill-input hide-selected
+                                        :options="stateFilteredOptions" @filter="marsStateSearchFn"
+                                        @update:model-value="partnerStateSelected"
+                                        label="state (type min 3 characters)*"
                                         placeholder="Start typing ..*">
-                                        <q-autocomplete separator @search="marsStateSearch" :debounce="10"
-                                            :min-characters="3" @selected="partnerStateSelected" />
-                                    </q-input>
+                                        <template v-slot:no-option><q-item><q-item-section class="text-grey">No results</q-item-section></q-item></template>
+                                    </q-select>
                                 </div>
                             </q-list>
                         </q-card-section>
@@ -177,6 +180,7 @@ import {
     decimal
 }
     from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 
 import { date } from "quasar";
 import moment from "moment";
@@ -189,6 +193,7 @@ import viewLeadDocumentsDataEntryComponent from "./viewLeadDocumentsDataEntryCom
 // import MarsErrorResponse from "../MarsErrorResponseHandler.vue";
 
 import { helpers } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 const today = new Date()
 const { startOfDate, addToDate, subtractFromDate } = date;
 const panCard = helpers.regex(
@@ -227,6 +232,9 @@ const alphaNumericSpecialValidate = helpers.regex(
 );
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
     props: ["showRejectPaymentMode", "propsAdditionalData"],
 
     data() {
@@ -236,6 +244,8 @@ export default {
             companyRegisteredStateSelected: false,
             cityOptions: [],
             stateOptions: [],
+            cityFilteredOptions: [],
+            stateFilteredOptions: [],
             paymnentModeOptions: [
                 {
                     label: "Direct credit",
@@ -362,8 +372,8 @@ export default {
 
 
         fnAdditionalSubmit(request) {
-            this.$v.additionalTerminal.$touch();
-            if (this.$v.additionalTerminal.$error) {
+            this.v$.additionalTerminal.$touch();
+            if (this.v$.additionalTerminal.$error) {
                 this.$q.notify({
                     color: "negative",
                     position: "bottom",
@@ -462,7 +472,7 @@ export default {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",
-                        message: error.body != null ? error.body.message : "Lead Information status update failed!",
+                        message: error.data != null ? error.data.message : "Lead Information status update failed!",
                         icon: "clear"
                     });
                     this.$q.loading.hide();
@@ -481,11 +491,15 @@ export default {
             if (!this.companyRegisteredStateSelected)
                 this.additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel = ''
         },
-        marsCitySearch(terms, done) {
-            done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+        marsCitySearchFn(val, update) {
+            update(() => {
+                this.cityFilteredOptions = this.COMMON_FILTER_FUNCTION(this.cityOptions, val);
+            });
         },
-        marsStateSearch(terms, done) {
-            done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+        marsStateSearchFn(val, update) {
+            update(() => {
+                this.stateFilteredOptions = this.COMMON_FILTER_FUNCTION(this.stateOptions, val);
+            });
         },
         COMMON_FILTER_FUNCTION(arraySet, terms) {
             return _.filter(arraySet, function (oo) {
@@ -624,108 +638,78 @@ export default {
         //         })
         //             .then(() => {
         //                 //Date formatting for MARS
-        //                 return this.$set(
-        //                     this.marsSavedDataFromInternal.salesInformation,
-        //                     "applicationDate",
-        //                     this.commonDateFormat(
+        //                 return //                     this.marsSavedDataFromInternal.salesInformation[//                     "applicationDate"] = //                     this.commonDateFormat(
         //                         this.marsSavedDataFromInternal.salesInformation
         //                             .applicationDate
-        //                     )
+        //
         //                 );
         //             })
         //             .then(() => {
-        //                 return this.$set(
-        //                     this.marsSavedDataFromInternal.salesInformation,
-        //                     "aggreementDate",
-        //                     this.commonDateFormat(
+        //                 return //                     this.marsSavedDataFromInternal.salesInformation[//                     "aggreementDate"] = //                     this.commonDateFormat(
         //                         this.marsSavedDataFromInternal.salesInformation
         //                             .aggreementDate
-        //                     )
+        //
         //                 );
         //             })
         //             .then(() => {
-        //                 return this.$set(
-        //                     this.marsSavedDataFromInternal.salesInformation,
-        //                     "loanDisbursementDate",
-        //                     this.commonDateFormat(
+        //                 return //                     this.marsSavedDataFromInternal.salesInformation[//                     "loanDisbursementDate"] = //                     this.commonDateFormat(
         //                         this.marsSavedDataFromInternal.salesInformation
         //                             .loanDisbursementDate
-        //                     )
+        //
         //                 );
         //             })
         //             .then(() => {
-        //                 return this.$set(
-        //                     this.marsSavedDataFromInternal.salesInformation,
-        //                     "tenureStartDate",
-        //                     this.commonDateFormat(
+        //                 return //                     this.marsSavedDataFromInternal.salesInformation[//                     "tenureStartDate"] = //                     this.commonDateFormat(
         //                         this.marsSavedDataFromInternal.salesInformation
         //                             .tenureStartDate
-        //                     )
+        //
         //                 );
         //             })
         //             .then(() => {
-        //                 return this.$set(
-        //                     this.marsSavedDataFromInternal.companyInformation,
-        //                     "establishYear",
-        //                     this.commonDateFormat(
+        //                 return //                     this.marsSavedDataFromInternal.companyInformation[//                     "establishYear"] = //                     this.commonDateFormat(
         //                         this.marsSavedDataFromInternal.companyInformation
         //                             .establishYear
-        //                     )
+        //
         //                 );
         //             })
         //             .then(() => {
-        //                 return this.$set(
-        //                     this.marsSavedDataFromInternal.bankInformation
-        //                         .collectionDetails,
-        //                     "chequeDepositedDate",
-        //                     this.commonDateFormat(
+        //                 return //                     this.marsSavedDataFromInternal.bankInformation
+        //                         .collectionDetails[//                     "chequeDepositedDate"] = //                     this.commonDateFormat(
         //                         this.marsSavedDataFromInternal.bankInformation
         //                             .collectionDetails.chequeDepositedDate
-        //                     )
+        //
         //                 );
         //             })
         //             .then(() => {
-        //                 return this.$set(
-        //                     this.marsSavedDataFromInternal.bankInformation
-        //                         .collectionDetails,
-        //                     "collectedDate",
-        //                     this.commonDateFormat(
+        //                 return //                     this.marsSavedDataFromInternal.bankInformation
+        //                         .collectionDetails[//                     "collectedDate"] = //                     this.commonDateFormat(
         //                         this.marsSavedDataFromInternal.bankInformation
         //                             .collectionDetails.collectedDate
-        //                     )
+        //
         //                 );
         //             })
         //             .then(() => {
-        //                 return this.$set(
-        //                     this.marsSavedDataFromInternal.bankInformation
-        //                         .collectionDetails,
-        //                     "chequeDate",
-        //                     this.commonDateFormat(
+        //                 return //                     this.marsSavedDataFromInternal.bankInformation
+        //                         .collectionDetails[//                     "chequeDate"] = //                     this.commonDateFormat(
         //                         this.marsSavedDataFromInternal.bankInformation
         //                             .collectionDetails.chequeDate
-        //                     )
+        //
         //                 );
         //             })
         //             .then(() => {
-        //                 return this.$set(
-        //                     this.marsSavedDataFromInternal.businessInformation,
-        //                     "memberSince",
-        //                     this.commonDateFormat(
+        //                 return //                     this.marsSavedDataFromInternal.businessInformation[//                     "memberSince"] = //                     this.commonDateFormat(
         //                         this.marsSavedDataFromInternal.businessInformation
         //                             .memberSince
-        //                     )
+        //
         //                 );
         //             })
 
 
         //             .then(() => {
-        //                 return this.$set(
-        //                     this.marsSavedDataFromInternal.businessInformation,
-        //                     "lastTurnoverYear",
-        //                     this.commonDateFormat(
+        //                 return //                     this.marsSavedDataFromInternal.businessInformation[//                     "lastTurnoverYear"] = //                     this.commonDateFormat(
         //                         this.marsSavedDataFromInternal.businessInformation
         //                             .lastTurnoverYear
-        //                     )
+        //
         //                 );
         //             })
         //             .then(() => {
@@ -938,94 +922,61 @@ export default {
                         .catch(error => {
                            
                             this.merchant.companyInformation.constitutionName = this.propLeadDeatils.merchantType.merchantTypeName;
-                            this.$set(
-                                finalRequest.merchant.salesInformation,
-                                "applicationDate",
-                                this.commonDateFormatInvalidMARSformat(
+                            finalRequest.merchant.salesInformation["applicationDate"] = this.commonDateFormatInvalidMARSformat(
                                     finalRequest.merchant.salesInformation.applicationDate
-                                )
+
                             );
-                            // this.$set(
-                            //     finalRequest.merchant.partnerInformation,
-                            //     "dob",
-                            //     this.commonDateFormatInvalidMARSformat(
+                            // //     finalRequest.merchant.partnerInformation[//     "dob"] = //     this.commonDateFormatInvalidMARSformat(
                             //         finalRequest.merchant.partnerInformation.dob
-                            //     )
+                            //
                             // );
 
-                            this.$set(
-                                finalRequest.merchant.salesInformation,
-                                "aggreementDate",
-                                this.commonDateFormatInvalidMARSformat(
+                            finalRequest.merchant.salesInformation["aggreementDate"] = this.commonDateFormatInvalidMARSformat(
                                     finalRequest.merchant.salesInformation.aggreementDate
-                                )
+
                             );
 
-                            this.$set(
-                                finalRequest.merchant.salesInformation,
-                                "loanDisbursementDate",
-                                this.commonDateFormatInvalidMARSformat(
+                            finalRequest.merchant.salesInformation["loanDisbursementDate"] = this.commonDateFormatInvalidMARSformat(
                                     finalRequest.merchant.salesInformation.loanDisbursementDate
-                                )
+
                             );
 
-                            this.$set(
-                                finalRequest.merchant.salesInformation,
-                                "tenureStartDate",
-                                this.commonDateFormatInvalidMARSformat(
+                            finalRequest.merchant.salesInformation["tenureStartDate"] = this.commonDateFormatInvalidMARSformat(
                                     finalRequest.merchant.salesInformation.tenureStartDate
-                                )
+
                             );
 
-                            this.$set(
-                                finalRequest.merchant.companyInformation,
-                                "establishYear",
-                                this.commonDateFormatInvalidMARSformat(
+                            finalRequest.merchant.companyInformation["establishYear"] = this.commonDateFormatInvalidMARSformat(
                                     finalRequest.merchant.companyInformation.establishYear
-                                )
+
                             );
 
-                            this.$set(
-                                finalRequest.merchant.bankInformation.collectionDetails,
-                                "chequeDepositedDate",
-                                this.commonDateFormatInvalidMARSformat(
+                            finalRequest.merchant.bankInformation.collectionDetails["chequeDepositedDate"] = this.commonDateFormatInvalidMARSformat(
                                     finalRequest.merchant.bankInformation.collectionDetails
                                         .chequeDepositedDate
-                                )
+
                             );
 
-                            this.$set(
-                                finalRequest.merchant.bankInformation.collectionDetails,
-                                "collectedDate",
-                                this.commonDateFormatInvalidMARSformat(
+                            finalRequest.merchant.bankInformation.collectionDetails["collectedDate"] = this.commonDateFormatInvalidMARSformat(
                                     finalRequest.merchant.bankInformation.collectionDetails
                                         .collectedDate
-                                )
+
                             );
 
-                            this.$set(
-                                finalRequest.merchant.bankInformation.collectionDetails,
-                                "chequeDate",
-                                this.commonDateFormatInvalidMARSformat(
+                            finalRequest.merchant.bankInformation.collectionDetails["chequeDate"] = this.commonDateFormatInvalidMARSformat(
                                     finalRequest.merchant.bankInformation.collectionDetails
                                         .chequeDate
-                                )
+
                             );
 
 
-                            this.$set(
-                                finalRequest.merchant.businessInformation,
-                                "memberSince",
-                                this.commonDateFormatInvalidMARSformat(
+                            finalRequest.merchant.businessInformation["memberSince"] = this.commonDateFormatInvalidMARSformat(
                                     finalRequest.merchant.businessInformation.memberSince
-                                )
+
                             );
-                            this.$set(
-                                finalRequest.merchant.businessInformation,
-                                "lastTurnoverYear",
-                                this.commonDateFormatInvalidMARSformat(
+                            finalRequest.merchant.businessInformation["lastTurnoverYear"] = this.commonDateFormatInvalidMARSformat(
                                     finalRequest.merchant.businessInformation.lastTurnoverYear
-                                )
+
                             );
 
                             if (error.data.hasOwnProperty("errorDetails")) {
@@ -1038,7 +989,7 @@ export default {
                                             .slice(1, 2);
                                         let computeSplitted = splitted[splitted.length - 1];
                                         let fieldErrorFound = eval(`
-                        OThis.$v.viewBinding.partnersArr.$each[
+                        OThis.v$.viewBinding.partnersArr.$each[
                           ${findPartnersErrorIndex}
                         ].${computeSplitted}`);
                                         fieldErrorFound.$model = "";
@@ -1052,7 +1003,7 @@ export default {
                                         generateErrorMessage.issue = actual.issue;
                                         generateErrorMessage.value = actual.value;
                                     } else {
-                                        let splittingErrorField = `OThis.$v.${splitted.join(
+                                        let splittingErrorField = `OThis.v$.${splitted.join(
                                             "."
                                         )}`;
                                         let fieldErrorFound = eval(splittingErrorField);

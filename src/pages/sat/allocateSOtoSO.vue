@@ -159,7 +159,8 @@ import { email } from '@vuelidate/validators';
   // Vue.use(VueBarcodeScanner);
   import { mapGetters, mapActions } from "vuex";
   import reAssignSo from "../../components/sat/reAssignSo.vue";
-  export default {
+  import { useVuelidate } from "@vuelidate/core";
+export default {
     name: "allocateDevice",
     components: {
       reAssignSo

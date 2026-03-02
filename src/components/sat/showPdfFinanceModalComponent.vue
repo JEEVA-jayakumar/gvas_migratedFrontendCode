@@ -54,12 +54,13 @@
 </template>
 <script>
 import { between } from '@vuelidate/validators';
-import vuePdfjs from "vue-pdfjs";
+
 import { mapGetters, mapActions } from "vuex";
 import financePdfComponent from "../../components/sat/financePdfComponent.vue";
+import { useVuelidate } from "@vuelidate/core";
 export default {
   components: {
-    vuePdfjs,
+
     financePdfComponent
   },
   props: ["propToggleshowPDFModal", "propPDFDetails"],

@@ -500,6 +500,7 @@ import viewLeadDocumentsComponent from "../../components/sat/viewExceptionLeadDo
 
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "exceptionQueueKycLeadDetails",
   components: {

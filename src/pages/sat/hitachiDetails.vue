@@ -21,6 +21,7 @@
 import { not, or } from '@vuelidate/validators';
 import HitachiUpload from "../../components/sat/HitachiUpload.vue";
 import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "QRSticker",
 
@@ -168,6 +169,7 @@ export default {
 import { not, or } from '@vuelidate/validators';
 
 import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from "@vuelidate/core";
 export default {
   data() {
     return {
@@ -252,9 +254,9 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              error.body.message == null
+              error.data.message == null
                 ? "Please Try Again Later !"
-                : error.body.message,
+                : error.data.message,
             icon: "thumb_down"
           });
         });

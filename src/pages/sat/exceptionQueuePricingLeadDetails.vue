@@ -404,6 +404,7 @@ import showPdfModalComponent from "../../components/sat/showPdfModalComponent.vu
 
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "exceptionQueuePricingLeadDetails",
   components: {

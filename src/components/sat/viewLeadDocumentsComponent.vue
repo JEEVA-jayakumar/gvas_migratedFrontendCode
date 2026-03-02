@@ -374,6 +374,7 @@ import showDocumentLeadApproveComponent from "../../components/sat/showDocumentL
 import showDocumentLeadRejectComponent from "../../components/sat/showDocumentLeadRejectComponent.vue";
 import showPdfModalComponent from "../../components/sat/showPdfModalComponent.vue";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "viewLeadDocumentsComponent",
   props: ["propLeadDocumentInformation", "propGetShortInfo"],

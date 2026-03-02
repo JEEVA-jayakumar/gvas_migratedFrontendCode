@@ -82,6 +82,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   // name: 'ComponentName',
   props: ["propLeadDeatils", "kyc"],
@@ -90,11 +91,6 @@ export default {
     return {
       holdPayment: "",
       leadDataEntryRemarks: "",
-      merchant: {
-        kyc: {
-          documents: []
-        }
-      },
       merchant: {
         kyc: JSON.parse(JSON.stringify(this.kyc))
       }
@@ -139,12 +135,14 @@ export default {
       });
     },
     validate() {
-      this.$v.merchant.companyInformation.$touch();
-      if (this.$v.merchant.companyInformation.$error) {
-        this.$q.notify("Please review fields again.");
-      } else {
-        this.$emit("submit", "kyc", this.merchant);
+      if (this.v$ && this.v$.merchant && this.v$.merchant.kyc) {
+        this.v$.merchant.kyc.$touch();
+        if (this.v$.merchant.kyc.$error) {
+          this.$q.notify("Please review fields again.");
+          return;
+        }
       }
+      this.$emit("submit", "kyc", this.merchant);
     }
   }
 };

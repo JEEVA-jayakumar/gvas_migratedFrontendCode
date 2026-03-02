@@ -14,19 +14,33 @@
         </div>
         <!-- <pre>{{stateInformation}}</pre> -->
         <div>
-          <q-input @blur="$v.formData.marsDeviceAddress.deviceAddress.$touch"      
-          :error="$v.formData.marsDeviceAddress.deviceAddress.$error"  color="grey-9" v-model="formData.marsDeviceAddress.deviceAddress" label="Address" placeholder="Address" />
+          <q-input @blur="v$.formData.marsDeviceAddress.deviceAddress.$touch"
+          :error="v$.formData.marsDeviceAddress.deviceAddress.$error"  color="grey-9" v-model="formData.marsDeviceAddress.deviceAddress" label="Address" placeholder="Address" />
         </div>
         <div>
-          <q-input :error="$v.formData.marsDeviceAddress.pincode.$error" 
-          color="grey-9" v-model="formData.marsDeviceAddress.pincode" label="Pincode" placeholder="Pincode">
-            <q-autocomplete
-            @search="pincodeSearch"
-            :debounce="500"
-            :min-characters="1"
-            @selected="pincodeSelected"
-            />
-          </q-input>
+          <q-select
+            use-input
+            fill-input
+            hide-selected
+            emit-value
+            map-options
+            :error="v$.formData.marsDeviceAddress.pincode.$error"
+            color="grey-9"
+            v-model="formData.marsDeviceAddress.pincode"
+            label="Pincode"
+            placeholder="Pincode"
+            :options="pincodeOptions"
+            @filter="pincodeFilterFn"
+            @update:model-value="pincodeSelected"
+          >
+            <template v-slot:no-option>
+              <q-item>
+                <q-item-section class="text-grey">
+                  No results
+                </q-item-section>
+              </q-item>
+            </template>
+          </q-select>
         </div>
         <div>
          <q-input color="grey-9" disable v-model="formData.marsDeviceAddress.state" label="State" placeholder="State" />
@@ -55,8 +69,12 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { required } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   name: "DeviceAddressModal",
   props: [
     "showDeviceAddressModal",
@@ -80,7 +98,8 @@ export default {
           state: this.currentDeviceInfo.marsDeviceAddress.state
         }
       },
-      pagination: this.paginationControl
+      pagination: this.paginationControl,
+      pincodeOptions: []
     };
   },
 
@@ -119,10 +138,17 @@ export default {
     },
 
     /* Pincode search result */
-    pincodeSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateInformation, terms));
+    pincodeFilterFn(val, update, abort) {
+      if (val.length < 1) {
+        abort();
+        return;
+      }
+      update(() => {
+        this.pincodeOptions = this.COMMON_FILTER_FUNCTION(this.stateInformation, val);
+      });
     },
     pincodeSelected(item) {
+      if (!item) return;
       this.formData.marsDeviceAddress.state = item.value.stateName;
       this.formData.marsDeviceAddress.city = item.value.cityName;
       this.formData.marsDeviceAddress.pincode = item.value.pincode;
@@ -133,8 +159,8 @@ export default {
       this.$emit("toggleModal", this.pagination);
     },
     UpdateDeviceAddress(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.TOGGLE_COMMON_LOADER(true);
@@ -158,7 +184,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
               icon: "thumb_down"
             });
           });

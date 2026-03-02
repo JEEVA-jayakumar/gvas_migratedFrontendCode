@@ -21,38 +21,53 @@
           :rows-per-page-options="[5, 10, 15, 20]" 
           @request="ajaxLoadAllLeadInfo"
           >
-          <q-td v-slot:body-cell-tid="props" :props="props">
+          <template v-slot:body-cell-tid="props">
+          <q-td :props="props">
             <span class="label text-primary"># {{ props.row.tid }}</span>
           </q-td>
-          <q-td v-slot:body-cell-mid="props" :props="props">
+        </template>
+          <template v-slot:body-cell-mid="props">
+          <q-td :props="props">
             <span class="label text-primary"># {{ props.row.mid }}</span>
           </q-td>
-          <!-- <q-td
-            v-slot:body-cell-leadName="props"
+        </template>
+          <!-- <template v-slot:body-cell-leadName="props">
+          <q-td
             :props="props"
-          >{{props.row.leadInformation.leadName}}</q-td>-->
-          <q-td v-slot:body-cell-leadNumber="props" :props="props" class="cursor-pointer"
+          >{{props.row.leadInformation.leadName}}</q-td>
+        </template>-->
+          <template v-slot:body-cell-leadNumber="props">
+          <q-td :props="props" class="cursor-pointer"
             @click="toggleLeadInformation(props.row)">
             <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
           </q-td>
-          <!-- <q-td
-            v-slot:body-cell-serialNumber="props"
+        </template>
+          <!-- <template v-slot:body-cell-serialNumber="props">
+          <q-td
             :props="props"
-          >{{props.row.serialNumber== null? 'NA':props.row.serialNumber}}</q-td>-->
-          <q-td v-slot:body-cell-mobileNumber="props" :props="props">{{
+          >{{props.row.serialNumber== null? 'NA':props.row.serialNumber}}</q-td>
+        </template>-->
+          <template v-slot:body-cell-mobileNumber="props">
+          <q-td :props="props">{{
               props.row.leadInformation == null
                 ? "NA"
                 : props.row.leadInformation.contactNumber
           }}</q-td>
-          <q-td v-slot:body-cell-leadAddress="props" :props="props">{{
+        </template>
+          <template v-slot:body-cell-leadAddress="props">
+          <q-td :props="props">{{
               props.row.leadInformation == null
                 ? "NA"
                 : props.row.leadInformation.leadAddress
           }}</q-td>
-          <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+        </template>
+          <template v-slot:body-cell-deviceStatusDate="props">
+          <q-td :props="props">
             <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
           </q-td>
-          <q-td v-slot:body-cell-viewDocument="props" :props="props">
+        </template>
+          <template v-slot:body-cell-viewDocument="props">
+          <q-td :props="props">
   
             <div v-if="
               props.row.implementationFormMimeType == null ||
@@ -86,7 +101,9 @@
   
   
           </q-td>
-          <q-td v-slot:body-cell-pictureOfShop="props" :props="props">
+        </template>
+          <template v-slot:body-cell-pictureOfShop="props">
+          <q-td :props="props">
             <!-- <div @click="fnViewMultiAttachedFileImageUploadedByPictureShop(props.row)">
               <viewer :images="[GLOBAL_FILE_FETCH_URL+ '/'+props.row.pictureOfShop]" class="hidden">
                 <img
@@ -136,7 +153,9 @@
             </div>
             <div v-else>NA Document</div>
           </q-td>
-          <q-td v-slot:body-cell-cpvForm="props" :props="props">
+        </template>
+          <template v-slot:body-cell-cpvForm="props">
+          <q-td :props="props">
             <!-- <div @click="fnViewMultiAttachedFileImageUploadedByCpvForm(props.row)">
               <viewer :images="[GLOBAL_FILE_FETCH_URL+ '/'+props.row.cpvForm]" class="hidden">
                 <img
@@ -183,12 +202,16 @@
             </div>
             <div v-else>NA Document</div>
           </q-td>
-          <q-td v-slot:body-cell-status="props" :props="props">
+        </template>
+          <template v-slot:body-cell-status="props">
+          <q-td :props="props">
             <span class="label text-positive" v-if="props.row.deviceStatus == 6">Approved</span>
             <span class="label text-negative" v-else-if="props.row.deviceStatus == 7">Pending</span>
             <span class="label text-amber" v-else>NA</span>
           </q-td>
-          <q-td v-slot:body-cell-action="props" :props="props">
+        </template>
+          <template v-slot:body-cell-action="props">
+          <q-td :props="props">
             <div v-if="props.row.deviceStatus == 6">
               <q-btn disable dense no-caps no-wrap label="Already Approved" icon="block" size="md"
                 @click="fnShowConvertToSat(props.row)"></q-btn>
@@ -201,7 +224,9 @@
               <!-- @click="$router.push('/sat/inventory/'+ props.row.tid+'/edit/data')" -->
             </div>
           </q-td>
-          <q-td v-slot:body-cell-data="props" :props="props">
+        </template>
+          <template v-slot:body-cell-data="props">
+          <q-td :props="props">
             <div v-if="props.row.deviceStatus == 6">
               <q-btn disable dense no-caps no-wrap label="Reject" icon="block" size="md"
                 @click="fnShowConvertToSat(props.row)"></q-btn>
@@ -211,24 +236,26 @@
                 color="red-5"></q-btn>
             </div>
           </q-td>
+        </template>
           <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative">
           </q-btn>-->
   
           <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative">
           </q-btn>-->
   
-          <template slot="top">
+          <template v-slot:top>
             <!--START: table filter,search,excel download -->
             <div class="col-5">
               <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
                 label="Search by MID, TID, Merchant Name" class="q-mr-lg q-py-sm" />
        </div>
-     <div class="col-2">
+          <div class="col-2">
             <q-input
               class="q-mr-lg q-py-sm"
               v-model="formData.fromDate"
               :min="yesterday"
               :max="tomorrow"
+              type="date"
               label="From Date"
             />
           </div>
@@ -238,6 +265,7 @@
               v-model="formData.toDate"
               :min="yesterday"
               :max="tomorrow"
+              type="date"
               label="To Date"
             />
           </div>
@@ -290,7 +318,8 @@ import { required, or } from '@vuelidate/validators';
    import { date } from "quasar";
 const today = new Date();
 const { startOfDate, addToDate, subtractFromDate } = date;
-  export default {
+  import { useVuelidate } from "@vuelidate/core";
+export default {
     name: "merchantTransactionLevel",
   
     components: {
@@ -563,13 +592,13 @@ const { startOfDate, addToDate, subtractFromDate } = date;
     ...mapGetters("equitasImplementedQueue", ["getaggImplementedverificationqueue"]),
     ...mapGetters("GlobalVariables", ["GLOBAL_FILE_FETCH_URL"]),
   },
-    mounted() {
-    this.ajaxLoadAllLeadInfo({
-      pagination: this.paginationControl,
-      filter: this.filter,
-      formData: this.formData,
-    });
-  },
+    created() {
+      this.ajaxLoadAllLeadInfo({
+        pagination: this.paginationControl,
+        filter: this.filter,
+        formData: this.formData,
+      });
+    },
   // created() {
   //   this.ajaxLoadAllLeadInfo({
   //     pagination: this.paginationControl,
@@ -583,18 +612,6 @@ const { startOfDate, addToDate, subtractFromDate } = date;
       "AGGREGATOR_IMPLEMENTED_VERIFICATION_QUEUE",
     ]),
     //Load all short lead info while page loading
-    ajaxLoadAllLeadInfo() {
-      this.toggleAjaxLoadFilter = true;
-      this.AGGREGATOR_IMPLEMENTED_VERIFICATION_QUEUE()
-        .then((response) => {
-          this.tableData = this.getaggImplementedverificationqueue;
-          console.log("TABLE", JSON.stringify(this.response));
-          this.toggleAjaxLoadFilter = false;
-        })
-        .catch((error) => {
-          this.toggleAjaxLoadFilter = false;
-        });
-    },
     SubmitData(request) {
       this.formData1 = {
         fromDate: this.toTimestamp(request.fromDate.toString(), true),
@@ -668,18 +685,19 @@ const { startOfDate, addToDate, subtractFromDate } = date;
       fnViewMultiAttachedFileImageUploadedByCpvForm(attachedImageIndex) {
         this.$refs.multiAttachedImageViewerUploadedByCpvForm.click();
       },
-        ajaxLoadAllLeadInfo({ pagination, filter, formData }) {
-        // we set QTable to "loading" state
-        this.$q.loading.show({
-          delay: 0, // ms
-          spinnerColor: "purple-9",
-          message: "Fetching data ..",
+    ajaxLoadAllLeadInfo({ pagination, filter, formData }) {
+      // we set QTable to "loading" state
+      this.$q.loading.show({
+        delay: 0, // ms
+        spinnerColor: "purple-9",
+        message: "Fetching data ..",
       });
       this.AGGREGATOR_IMPLEMENTED_VERIFICATION_QUEUE({
         pagination,
         filter: this.filter,
         formData: this.formData1,
-      }).then((res) => {
+      })
+        .then((res) => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 

@@ -270,11 +270,10 @@
       <!-- END >> (Not Mandatory) Other attached documents  -->
       <div class="col-md-5 q-pa-xs group" v-if="!showDocumentPreview">
         <div>
-          <vuePdfjs
-            :url="GLOBAL_FILE_FETCH_URL+'/'+populatedDocumentUrl"
+          <VuePdfEmbed :source="GLOBAL_FILE_FETCH_URL+'/'+populatedDocumentUrl"
             :type="0"
             :height="'500px'"
-          ></vuePdfjs>
+           />
         </div>
         <div>
           <q-btn
@@ -318,18 +317,19 @@
 import { url } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import "viewerjs/dist/viewer.css";
-import vuePdfjs from "vue-pdfjs";
+
 
 import showDocumentLeadApproveComponent from "../../components/sat/showDocumentLeadApproveComponent.vue";
 import showDocumentLeadRejectComponent from "../../components/sat/showDocumentLeadRejectComponent.vue";
 import showPdfModalComponent from "../../components/sat/showPdfModalComponent.vue";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "viewLeadDocumentsComponent",
   props: ["propLeadDocumentInformation", "propGetShortInfo"],
 
   components: {
-    vuePdfjs,
+
     showDocumentLeadApproveComponent,
     showDocumentLeadRejectComponent,
     showPdfModalComponent

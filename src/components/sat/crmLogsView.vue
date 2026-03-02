@@ -53,6 +53,7 @@ import {
   alphaNum,
   numeric
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 
 import moment from "moment";

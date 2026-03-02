@@ -34,6 +34,7 @@
 // import inventoryCount from "../../components/sat/regionalInventory/inventoryCount.vue";
 
 import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "inventoryAllocation",
 

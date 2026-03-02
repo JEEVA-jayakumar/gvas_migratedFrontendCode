@@ -540,6 +540,7 @@
 <script>
 import { required, or } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from "@vuelidate/core";
 export default {
   data() {
     return {

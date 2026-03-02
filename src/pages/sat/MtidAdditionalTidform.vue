@@ -31,7 +31,7 @@
                               this.propRowDetails.leadInformation
                                 .merchantRefCode
 
-                            " v-model.trim="additionalTerminal.merchantRefCode" :error="$v.additionalTerminal.merchantRefCode.$error
+                            " v-model.trim="additionalTerminal.merchantRefCode" :error="v$.additionalTerminal.merchantRefCode.$error
                   " label="Merchant RefCode*" />
                         </div>
                         <div class="col-md-6">
@@ -43,10 +43,10 @@
                               additionalTerminal.AdditionalTerminalDetails
                                 .numberOfTerminals
                             " @blur="
-           $v.additionalTerminal.AdditionalTerminalDetails
+           v$.additionalTerminal.AdditionalTerminalDetails
       .numberOfTerminals.$touch;
          " :error="
-           $v.additionalTerminal.AdditionalTerminalDetails
+           v$.additionalTerminal.AdditionalTerminalDetails
              .numberOfTerminals.$error
          " class="text-weight-regular text-grey-8" color="grey-9" label="*Number Of Terminals"
                             placeholder="Number Of Terminals" />
@@ -66,23 +66,38 @@
                         </div>
 
                         <div class="col-md-6">
-                          <q-input @blur="fnClrCity" color="grey-9"
+                          <q-select @blur="fnClrCity" color="grey-9"
                             v-model.trim="additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel"
-                            @update:model-value="fninputTyping($event, 1)" label="City (type min 3 characters)*"
+                            use-input fill-input hide-selected
+                            :options="cityFilteredOptions" @filter="marsCitySearchFn"
+                            @update:model-value="partnerCitySelected"
+                            label="City (type min 3 characters)*"
                             placeholder="Start typing ..*">
-
-                            <q-autocomplete separator @search="marsCitySearch" :debounce="10" :min-characters="3"
-                              @selected="partnerCitySelected" />
-                          </q-input>
+                            <template v-slot:no-option>
+                              <q-item>
+                                <q-item-section class="text-grey">
+                                  No results
+                                </q-item-section>
+                              </q-item>
+                            </template>
+                          </q-select>
                         </div>
                         <div class="col-md-6">
-                          <q-input @blur="fnClrState" color="black-9"
+                          <q-select @blur="fnClrState" color="black-9"
                             v-model.trim="additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel"
-                            @update:model-value="fninputTyping($event, 2)" label="state (type min 3 characters)*"
+                            use-input fill-input hide-selected
+                            :options="stateFilteredOptions" @filter="marsStateSearchFn"
+                            @update:model-value="partnerStateSelected"
+                            label="state (type min 3 characters)*"
                             placeholder="Start typing ..*">
-                            <q-autocomplete separator @search="marsStateSearch" :debounce="10" :min-characters="3"
-                              @selected="partnerStateSelected" />
-                          </q-input>
+                            <template v-slot:no-option>
+                              <q-item>
+                                <q-item-section class="text-grey">
+                                  No results
+                                </q-item-section>
+                              </q-item>
+                            </template>
+                          </q-select>
                         </div>
                       </div>
                     </div>
@@ -102,8 +117,8 @@
 </template>
 
 <script>
-  import {
-    required,
+import { useVuelidate } from "@vuelidate/core";
+  import { required,
     minLength,
     maxLength,
     integer,
@@ -111,6 +126,9 @@
   } from "@vuelidate/validators";
   import { mapGetters, mapActions } from "vuex";
   export default {
+  setup() {
+    return { v$: useVuelidate() }
+  },
     name: "additionalTidFromMars",
     data() {
       return {
@@ -122,6 +140,8 @@
         shortlead: "shortlead",
         companyRegisteredCitySelected: false,
         companyRegisteredStateSelected: false,
+        cityFilteredOptions: [],
+        stateFilteredOptions: [],
         additionalTerminal: {
           institutionCode: "",
           merchantRefCode: "",
@@ -253,6 +273,24 @@
         }
       },
 
+      marsCitySearchFn(val, update, abort) {
+        if (val.length < 3) {
+          abort();
+          return;
+        }
+        update(() => {
+          this.cityFilteredOptions = this.COMMON_FILTER_FUNCTION(this.cityOptions, val);
+        });
+      },
+      marsStateSearchFn(val, update, abort) {
+        if (val.length < 3) {
+          abort();
+          return;
+        }
+        update(() => {
+          this.stateFilteredOptions = this.COMMON_FILTER_FUNCTION(this.stateOptions, val);
+        });
+      },
       ///selected City
       fetchmarsCity(citySerNumberLabel, stateSerNumberLabel) {
         let self = this;
@@ -283,12 +321,13 @@
 
       marsCitySearch(terms, done) {
         console.log("done---------->", JSON.stringify(this.cityOptions))
-        done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+        if (done) done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
       },
       marsStateSearch(terms, done) {
-        done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+        if (done) done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
       },
       partnerCitySelected(item) {
+        if (!item) return;
         console.log("before partnerCitySelected ITEM------->", JSON.stringify(item))
         this.companyRegisteredCitySelected = true
         this.additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel = item.label;
@@ -301,6 +340,7 @@
           this.additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel = ''
       },
       partnerStateSelected(item) {
+        if (!item) return;
         this.companyRegisteredStateSelected = true
         this.additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel = item.label;
         this.additionalTerminal.AdditionalTerminalDetails.stateSerNumber = item.value;
@@ -320,8 +360,8 @@
       },
 
       fnSubmitBankDetails(request) {
-        this.$v.additionalTerminal.$touch();
-        if (this.$v.additionalTerminal.$error) {
+        this.v$.additionalTerminal.$touch();
+        if (this.v$.additionalTerminal.$error) {
           this.$q.notify({
             color: "negative",
             position: "bottom",

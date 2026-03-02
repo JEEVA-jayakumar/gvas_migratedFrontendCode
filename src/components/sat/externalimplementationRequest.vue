@@ -310,6 +310,7 @@ import DeviceAddressModal from "../../components/sat/DeviceAddressModal.vue";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 import Phonepeassigned from "../../components/sat/Phonepeassigned.vue";
 import changeRegionModal from "../../components/changeRegionModal.vue";
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "implementationQueue",
   components: {

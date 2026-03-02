@@ -74,6 +74,7 @@
 import AggregatorShowRegionalInventoryDevicePod from "./AggregatorShowRegionalInventoryDevicePod.vue";
 // Vue.use(VueBarcodeScanner);
 import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from "@vuelidate/core";
 export default {
     name: "damagedDevices",
     components: {

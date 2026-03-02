@@ -90,6 +90,7 @@
     maxLength,
     email
   } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
   import { mapGetters, mapActions } from "vuex";
   export default {
     props: ["regionInformation", "propToggleRegionInfoPop"],
@@ -171,9 +172,9 @@
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
+                error.data.message == null
                   ? "Please Try Again Later !"
-                  : error.body.message,
+                  : error.data.message,
               icon: "thumb_down"
             });
           });

@@ -23,8 +23,8 @@
                   <q-input
                     type="textarea"
                     placeholder="Reason Type.."
-                    :error="$v.formData.reason.$error"
-                    @blur="$v.formData.reason.$touch"
+                    :error="v$.formData.reason.$error"
+                    @blur="v$.formData.reason.$touch"
                     class="q-my-md"
                     color="grey-9"
                     align="left"
@@ -68,8 +68,12 @@ import {
   alphaNum,
   numeric
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["propShowUpdateDemapping", "propRowDetails"],
   name: "MDRdetails",
   data() {
@@ -112,8 +116,8 @@ export default {
     },
 
     fnReasonRemarks(request) {
-        this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+        this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         let param = {
@@ -145,7 +149,7 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-              error.body.message == null ? "Please Try Again Later !": error.body.message,
+              error.data.message == null ? "Please Try Again Later !": error.data.message,
               icon: "thumb_down"
             });
           });

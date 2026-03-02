@@ -257,6 +257,7 @@ import { mapGetters, mapActions } from "vuex";
 import downloadExcel from "vue-json-excel";
 import moment from "moment";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
     components: {
         downloadExcel

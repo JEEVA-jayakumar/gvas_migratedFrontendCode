@@ -18,14 +18,19 @@
       @request="ajaxLoadAllLeadInfo"
     >
       <!--START: table header -->
-      <q-td v-slot:body-cell-soName="props" :props="props">{{
+      <template v-slot:body-cell-soName="props">
+          <q-td :props="props">{{
         props.row.soName == null ? "NA" : props.row.soName
       }}</q-td>
+        </template>
 
-      <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+      <!-- <template v-slot:body-cell-deviceStatusDate="props">
+          <q-td :props="props">
         <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-      </q-td>   -->
-      <q-td v-slot:body-cell-action="props" :props="props">
+      </q-td>
+        </template>   -->
+      <template v-slot:body-cell-action="props">
+          <q-td :props="props">
         <q-btn
           v-if="props.row.status == 0"
           highlight
@@ -55,7 +60,8 @@
         <span  class="label text">Remarks: {{ props.row.remarks == null ? "NA": props.row.remarks }}</span>
        </div>
       </q-td>
-      <template slot="top" class="bottom-border">
+        </template>
+      <template v-slot:top class="bottom-border">
         <div class="col-5">
           <q-input
             clearable
@@ -104,6 +110,7 @@ import moment from "moment";
 import AggregatorRequestRejectRemarks from "../../components/sat/AggregatorRequestRejectRemarks.vue";
 // import generalLeadInformation from "../../components/generalLeadInformation.vue";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   // name: "merchantTransactionLevel",
 
@@ -322,8 +329,8 @@ export default {
       });
       this.AGGREGATOR_SELF_ASSIGNMENT_TRACKER({ pagination, filter }).then(res => {
           console.log("AGGREGATOR", JSON.stringify(res));
-          console.log("RESPONSE REQUEST", JSON.stringify(res.body));
-          let responseData = res.body;
+          console.log("RESPONSE REQUEST", JSON.stringify(res.data));
+          let responseData = res.data;
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 
@@ -431,9 +438,9 @@ export default {
                 color: "negative",
                 position: "bottom",
                 message:
-                  error.body.message == null
+                  error.data.message == null
                     ? "Please Try Again Later !"
-                    : error.body.message,
+                    : error.data.message,
                 icon: "thumb_down"
               });
             });

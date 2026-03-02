@@ -4,13 +4,13 @@
       <!-- //Common lead information in popup -->
       <generalLeadInformation
         v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
+        :leadInformation="addtnLeadInformation"
         :propToggleLeadInformationPop="propToggleLeadInformation"
         @closeLeadInformation="toggleLeadInformation"
       />
 
-      <q-pull-to-refresh :distance="30"  inline>
-        <!--START: table title :handler="PullToRefresh"-->
+      <q-pull-to-refresh :distance="30" :handler="PullToRefresh" inline>
+        <!--START: table title -->
         <div
           class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
         >Lead Validation</div>
@@ -54,9 +54,11 @@
             <span class="capitalize">{{props.row.state}}</span>
           </q-td>
 
-          <q-td v-slot:body-cell-assignedTo.name="props" :props="props">
-            <span class="capitalize">{{props.row.salesOfficerName}}</span>
-          </q-td>
+          <template v-slot:body-cell-assignedTo-name="props">
+            <q-td :props="props">
+              <span class="capitalize">{{props.row.salesOfficerName}}</span>
+            </q-td>
+          </template>
 
           <q-td v-slot:body-cell-verifiedFinanceStatus="props" :props="props">
             <span
@@ -192,6 +194,7 @@ import { required, or } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 import openRejectLeadComp from "../../components/sat/openRejectLeadComp.vue";
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "leadValidation",
   components: {
@@ -353,12 +356,13 @@ export default {
     },
 
     //Function pull to refresh
-    // PullToRefresh(done) {
-    //   this.ajaxLoadAllLeadInfo({
-    //     pagination: this.paginationControl,
-    //     filter: this.filter
-    //   });
-    // },
+    PullToRefresh(done) {
+      this.ajaxLoadAllLeadInfo({
+        pagination: this.paginationControl,
+        filter: this.filter
+      });
+      done();
+    },
 
     // Function to toggle lead information pop up screen
     toggleLeadInformation(leadDetails) {

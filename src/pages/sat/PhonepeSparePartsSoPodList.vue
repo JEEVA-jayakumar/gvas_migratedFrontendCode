@@ -13,17 +13,22 @@
                         :filter="filterSearch" v-model:pagination="paginationControl"
                         :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
                         @request="ajaxLoadAllLeadInfo">
-                        <q-td v-slot:body-cell-createdAt="props" :props="props">{{
+                        <template v-slot:body-cell-createdAt="props">
+          <q-td :props="props">{{
                                 props.row.created_date == null
                                     ? "NA"
-                                    : props.row.created_date | moment("Do MMM Y")
+                                    : $moment(props.row.created_date).format("Do MMM Y")
                         }}</q-td>
-                          <q-td v-slot:body-cell-updated_date="props" :props="props">{{
+        </template>
+                          <template v-slot:body-cell-updated_date="props">
+          <q-td :props="props">{{
                                 props.row.updated_date == null
                                     ? "NA"
-                                    : props.row.updated_date | moment("Do MMM Y")
+                                    : $moment(props.row.updated_date).format("Do MMM Y")
                         }}</q-td>
-                        <q-td v-slot:body-cell-status="props" :props="props">
+        </template>
+                        <template v-slot:body-cell-status="props">
+          <q-td :props="props">
                             <span class="label text-positive" v-if="props.row.status == 1">Created</span>
                             <span class="label text-primary" v-else-if="props.row.status == 2">Assigned to R.I</span>
                             <span class="label text-orange" v-else-if="props.row.status == 3">Approved By R.I</span>
@@ -35,17 +40,23 @@
 
                             <span class="label text-negative" v-else>NA</span>
                         </q-td>
-                        <q-td v-slot:body-cell-owner="props" :props="props">
+        </template>
+                        <template v-slot:body-cell-owner="props">
+          <q-td :props="props">
                             <span class="label text-positive" v-if="props.row.owner == 1">Central Inventory</span>
                             <span class="label text-primary" v-else-if="props.row.owner == 2">Regional Inventory</span>
                             <span class="label text-primary" v-else-if="props.row.owner == 3">SO</span>
                         </q-td>
-                        <q-td v-slot:body-cell-regionAreaName="props" :props="props">{{
+        </template>
+                        <template v-slot:body-cell-regionAreaName="props">
+          <q-td :props="props">{{
                                 props.row.allocate_region == null
                                     ? "NA"
                                     : props.row.allocate_region.regionAreaName
                         }}</q-td>
-                        <q-td v-slot:body-cell-action="props" :props="props">
+        </template>
+                        <template v-slot:body-cell-action="props">
+          <q-td :props="props">
                             <!-- <div class="row no-wrap no-padding">
 
                                 <q-btn dense no-caps no-wrap label="Reject" icon="far fa-minus-square" size="md"
@@ -54,6 +65,7 @@
                                     @click="fnApprovePodDetails(props.row)" flat class="text-light-blue"></q-btn>
                             </div> -->
                         </q-td>
+        </template>
 
                         <template v-slot:top="props">
                             <!--START: table title -->
@@ -79,17 +91,22 @@
                         :filter="filterSearch1" v-model:pagination="paginationControl1"
                         :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
                         @request="ajaxLoadAllLeadInfo1">
-                        <q-td v-slot:body-cell-createdAt="props" :props="props">{{
+                        <template v-slot:body-cell-createdAt="props">
+          <q-td :props="props">{{
                                 props.row.created_date == null
                                     ? "NA"
-                                    : props.row.created_date | moment("Do MMM Y")
+                                    : $moment(props.row.created_date).format("Do MMM Y")
                         }}</q-td>
-                         <q-td v-slot:body-cell-updated_date="props" :props="props">{{
+        </template>
+                         <template v-slot:body-cell-updated_date="props">
+          <q-td :props="props">{{
                                 props.row.updated_date == null
                                     ? "NA"
-                                    : props.row.updated_date | moment("Do MMM Y")
+                                    : $moment(props.row.updated_date).format("Do MMM Y")
                         }}</q-td>
-                        <q-td v-slot:body-cell-status="props" :props="props">
+        </template>
+                        <template v-slot:body-cell-status="props">
+          <q-td :props="props">
                             <span class="label text-positive" v-if="props.row.status == 1">Created</span>
                             <span class="label text-primary" v-else-if="props.row.status == 2">Assigned to R.I</span>
                             <span class="label text-orange" v-else-if="props.row.status == 3">Approved By R.I</span>
@@ -101,28 +118,37 @@
 
                             <span class="label text-negative" v-else>NA</span>
                         </q-td>
-                        <q-td v-slot:body-cell-owner="props" :props="props">
+        </template>
+                        <template v-slot:body-cell-owner="props">
+          <q-td :props="props">
                             <span class="label text-positive" v-if="props.row.owner == 1">Central Inventory</span>
                             <span class="label text-primary" v-else-if="props.row.owner == 2">Regional Inventory</span>
                             <span class="label text-primary" v-else-if="props.row.owner == 3">SO</span>
                         </q-td>
-                        <q-td v-slot:body-cell-regionAreaName="props" :props="props">{{
+        </template>
+                        <template v-slot:body-cell-regionAreaName="props">
+          <q-td :props="props">{{
                                 props.row.allocate_region == null
                                     ? "NA"
                                     : props.row.allocate_region.regionAreaName
                         }}</q-td>
-                        <q-td v-slot:body-cell-name="props" :props="props">{{
+        </template>
+                        <template v-slot:body-cell-name="props">
+          <q-td :props="props">{{
                                 props.row.allocate_so == null
                                     ? "NA"
                                     : props.row.allocate_so.name+" | "+props.row.allocate_so.employeeID
                         }}</q-td>
+        </template>
 
-                        <q-td v-slot:body-cell-action1="props" :props="props">
+                        <template v-slot:body-cell-action1="props">
+          <q-td :props="props">
                             <div class="row no-wrap no-padding">
                                 <q-btn dense no-caps no-wrap label="Update" icon="far fa-plus-square" size="md"
                                     @click="fnUpdateRejectedPodDetails(props.row)" flat class="text-light-blue"></q-btn>
                             </div>
                         </q-td>
+        </template>
                         
 
 
@@ -170,17 +196,22 @@
                         :filter="filterSearch2" v-model:pagination="paginationControl2"
                         :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
                         @request="ajaxLoadAllLeadInfo2">
-                        <q-td v-slot:body-cell-createdAt="props" :props="props">{{
+                        <template v-slot:body-cell-createdAt="props">
+          <q-td :props="props">{{
                                 props.row.created_date == null
                                     ? "NA"
-                                    : props.row.created_date | moment("Do MMM Y")
+                                    : $moment(props.row.created_date).format("Do MMM Y")
                         }}</q-td>
-                          <q-td v-slot:body-cell-updated_date="props" :props="props">{{
+        </template>
+                          <template v-slot:body-cell-updated_date="props">
+          <q-td :props="props">{{
                                 props.row.updated_date == null
                                     ? "NA"
-                                    : props.row.updated_date | moment("Do MMM Y")
+                                    : $moment(props.row.updated_date).format("Do MMM Y")
                         }}</q-td>
-                        <q-td v-slot:body-cell-status="props" :props="props">
+        </template>
+                        <template v-slot:body-cell-status="props">
+          <q-td :props="props">
                             <span class="label text-positive" v-if="props.row.status == 1">Created</span>
                             <span class="label text-primary" v-else-if="props.row.status == 2">Assigned to R.I</span>
                             <span class="label text-orange" v-else-if="props.row.status == 3">Approved By R.I</span>
@@ -192,21 +223,28 @@
 
                             <span class="label text-negative" v-else>NA</span>
                         </q-td>
-                        <q-td v-slot:body-cell-owner="props" :props="props">
+        </template>
+                        <template v-slot:body-cell-owner="props">
+          <q-td :props="props">
                             <span class="label text-positive" v-if="props.row.owner == 1">Central Inventory</span>
                             <span class="label text-primary" v-else-if="props.row.owner == 2">Regional Inventory</span>
                             <span class="label text-primary" v-else-if="props.row.owner == 3">SO</span>
                         </q-td>
-                        <q-td v-slot:body-cell-regionAreaName="props" :props="props">{{
+        </template>
+                        <template v-slot:body-cell-regionAreaName="props">
+          <q-td :props="props">{{
                                 props.row.allocate_region == null
                                     ? "NA"
                                     : props.row.allocate_region.regionAreaName
                         }}</q-td>
-                        <q-td v-slot:body-cell-name="props" :props="props">{{
+        </template>
+                        <template v-slot:body-cell-name="props">
+          <q-td :props="props">{{
                                 props.row.allocate_so == null
                                     ? "NA"
                                     : props.row.allocate_so.name+" | "+props.row.allocate_so.employeeID
                         }}</q-td>
+        </template>
 
 
 
@@ -231,6 +269,7 @@ import { required, or } from '@vuelidate/validators';
 // import ShowAddSubTaskType from "../../components/super_admin/ShowAddSubTaskType.vue";
 import allocatedSo from "../../components/sat/allocatedSo.vue";
 import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from "@vuelidate/core";
 export default {
     name: "getserviceRequestGetTypes",
     components: {
@@ -693,7 +732,7 @@ export default {
         //                     this.$q.notify({
         //                         color: "negative",
         //                         position: "bottom",
-        //                         message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+        //                         message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
         //                         icon: "thumb_down"
         //                     });
         //                 });
@@ -763,12 +802,12 @@ export default {
                                 message: "Successfully Approved!",
                                 icon: "thumb_up"
                             });
-                        }).catch(error => {
+                        }).onCancel(error => {
                             this.$q.loading.hide();
                             this.$q.notify({
                                 color: "negative",
                                 position: "bottom",
-                                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                                message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
                                 icon: "thumb_down"
                             });
                         });
@@ -802,8 +841,7 @@ export default {
 
                 // finally we tell QTable to exit the "loading" state
                 this.$q.loading.hide();
-            })
-                .catch(() => {
+            }).onCancel(() => {
                     this.$q.loading.hide();
                 });
         },
@@ -835,8 +873,7 @@ export default {
 
                 // finally we tell QTable to exit the "loading" state
                 this.$q.loading.hide();
-            })
-                .catch(() => {
+            }).onCancel(() => {
                     this.$q.loading.hide();
                 });
         },
@@ -943,9 +980,9 @@ export default {
                         color: "negative",
                         position: "bottom",
                         message:
-                            error.body.message == null
+                            error.data.message == null
                                 ? "Please Try Again Later !"
-                                : error.body.message,
+                                : error.data.message,
                         icon: "thumb_down"
                     });
                 });
@@ -1116,8 +1153,7 @@ export default {
                         "TABLE DATA VALUES-RESPONSE---------->",
                         JSON.stringify(this.tableData)
                     );
-                })
-                .catch(() => {
+                }).onCancel(() => {
                     this.$q.loading.hide();
                 });
         },
@@ -1140,8 +1176,7 @@ export default {
                         this.inventoryData.regionFilterOptions = this.getAllRegionsData;
 
                         this.$q.loading.hide();
-                    })
-                    .catch(() => {
+                    }).onCancel(() => {
                         this.$q.loading.hide();
                     });
             });

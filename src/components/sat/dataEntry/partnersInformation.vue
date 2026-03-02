@@ -1,9 +1,9 @@
 <template>
   <div>
     <div
-      v-for="(v,index) in $v.partnersArr.$each"
+      v-for="(item,index) in partnersArr"
       :key="index"
-      class="row q-my-xs gutter-sm"
+      class="row q-my-xs q-col-gutter-sm"
       ref="parentElement"
     >
       <div class="col-md-12 col-sm-12 col-xs-12">
@@ -14,17 +14,17 @@
               Partner 0{{parseInt(index)+1}}
             </span>
           </div>
-          <div class="col-auto" v-if="Object.keys($v.partnersArr.$each).length > 1">
-            <q-btn round icon="delete" @click="removePartnerFromArr(v,index)" color="negative"/>
+          <div class="col-auto" v-if="partnersArr.length > 1">
+            <q-btn round icon="delete" @click="removePartnerFromArr(item,index)" color="negative"/>
           </div>
         </div>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          :error="v.name.$anyError"
-          @blur="v.name.$touch()"
+          :error="v$.partnersArr.$each[index].name.$anyError"
+          @blur="v$.partnersArr.$each[index].name.$touch()"
           color="grey-9"
-          v-model="v.$model.name"
+          v-model="item.name"
           label="Name*"
           placeholder="Name*"
         />
@@ -32,89 +32,101 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           upper-case
-          :error="v.pan.$anyError"
-          @blur="v.pan.$touch()"
+          :error="v$.partnersArr.$each[index].pan.$anyError"
+          @blur="v$.partnersArr.$each[index].pan.$touch()"
           color="grey-9"
-          v-model="v.$model.pan"
+          v-model="item.pan"
           label="Pan*"
           placeholder="Pan*"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          :error="v.address.$anyError"
-          @blur="v.address.$touch()"
+          :error="v$.partnersArr.$each[index].address.$anyError"
+          @blur="v$.partnersArr.$each[index].address.$touch()"
           color="grey-9"
-          v-model="v.$model.address"
+          v-model="item.address"
           label="Address*"
           placeholder="Address*"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          :error="v.pin.$anyError"
-          @blur="v.pin.$touch()"
+          :error="v$.partnersArr.$each[index].pin.$anyError"
+          @blur="v$.partnersArr.$each[index].pin.$touch()"
           color="grey-9"
           type="number"
-          v-model="v.$model.pin"
+          v-model="item.pin"
           label="Pincode*"
           placeholder="Pincode*"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
-          :error="v.cityRefLabel.$anyError || v.cityRefCode.$anyError"
-          @blur="v.cityRefCode.$touch()"
+        <q-select
+          use-input
+          fill-input
+          hide-selected
+          :error="v$.partnersArr.$each[index].cityRefLabel.$anyError || v$.partnersArr.$each[index].cityRefCode.$anyError"
+          @blur="v$.partnersArr.$each[index].cityRefCode.$touch()"
           color="grey-9"
-          v-model="v.$model.cityRefLabel"
+          v-model="item.cityRefLabel"
           label="City (type min 3 characters)*"
           placeholder="Start typing ..*"
+          :options="cityFilteredOptions"
+          @filter="cityFilterFn"
+          @update:model-value="obj => partnerCitySelected(obj,index)"
         >
-          <q-autocomplete
-            separator
-            @search="citySearch"
-            :debounce="10"
-            :min-characters="3"
-            @selected="obj => partnerCitySelected(obj,index)"
-          />
-        </q-input>
+          <template v-slot:no-option>
+            <q-item>
+              <q-item-section class="text-grey">
+                No results
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
-          :error="v.stateRefLabel.$anyError || v.stateRefCode.$anyError"
-          @blur="v.stateRefCode.$touch()"
+        <q-select
+          use-input
+          fill-input
+          hide-selected
+          :error="v$.partnersArr.$each[index].stateRefLabel.$anyError || v$.partnersArr.$each[index].stateRefCode.$anyError"
+          @blur="v$.partnersArr.$each[index].stateRefCode.$touch()"
           color="grey-9"
-          v-model="v.$model.stateRefLabel"
+          v-model="item.stateRefLabel"
           label="State (type min 3 characters)*"
           placeholder="Start typing ..*"
+          :options="stateFilteredOptions"
+          @filter="stateFilterFn"
+          @update:model-value="obj => partnerStateSelected(obj,index)"
         >
-          <q-autocomplete
-            separator
-            @search="stateSearch"
-            :debounce="10"
-            :min-characters="1"
-            @selected="obj => partnerStateSelected(obj,index)"
-          />
-        </q-input>
+          <template v-slot:no-option>
+            <q-item>
+              <q-item-section class="text-grey">
+                No results
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          :error="v.contactMobile.$anyError"
-          @blur="v.contactMobile.$touch()"
+          :error="v$.partnersArr.$each[index].contactMobile.$anyError"
+          @blur="v$.partnersArr.$each[index].contactMobile.$touch()"
           color="grey-9"
           type="tel"
-          v-model="v.$model.contactMobile"
+          v-model="item.contactMobile"
           label="Mobile*"
           placeholder="Mobile*"
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          :error="v.contactEmail.$anyError"
-          @blur="v.contactEmail.$touch()"
+          :error="v$.partnersArr.$each[index].contactEmail.$anyError"
+          @blur="v$.partnersArr.$each[index].contactEmail.$touch()"
           color="grey-9"
           type="email"
-          v-model="v.$model.contactEmail"
+          v-model="item.contactEmail"
           label="Email*"
           placeholder="Email*"
         />
@@ -152,16 +164,22 @@ import {
   maxLength,
   email
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 const panCard = helpers.regex(
   "panCard",
   /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/
 );
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   // name: 'ComponentName',
   props: ["cityOptions", "stateOptions", "constitution", "partnerInformation"],
   data() {
     return {
-      partnersArr: []
+      partnersArr: [],
+      cityFilteredOptions: [],
+      stateFilteredOptions: []
     };
   },
   validations: {
@@ -169,7 +187,7 @@ export default {
       required: requiredIf(function() {
         return this.getPartnersVisiblity;
       }),
-      $each: {
+      $each: helpers.forEach({
         name: { required },
         address: { required },
         pan: {
@@ -195,7 +213,7 @@ export default {
           maxLength: maxLength(10)
         },
         contactEmail: { required, email }
-      }
+      })
     }
   },
   computed: {
@@ -213,6 +231,16 @@ export default {
         return oo.label.toLowerCase().includes(terms.toLowerCase());
       });
     },
+    cityFilterFn(val, update) {
+      update(() => {
+        this.cityFilteredOptions = this.COMMON_FILTER_FUNCTION(this.cityOptions, val);
+      });
+    },
+    stateFilterFn(val, update) {
+      update(() => {
+        this.stateFilteredOptions = this.COMMON_FILTER_FUNCTION(this.stateOptions, val);
+      });
+    },
     citySearch(terms, done) {
       done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
     },
@@ -222,14 +250,16 @@ export default {
 
     // Partners city selction
     partnerCitySelected(item, index) {
-      this.$v.partnersArr.$each[index].cityRefCode.$model = item.value;
-      this.$v.partnersArr.$each[index].cityRefLabel.$model = item.label;
+      if (!item) return;
+      this.partnersArr[index].cityRefCode = item.value;
+      this.partnersArr[index].cityRefLabel = item.label;
     },
 
     // Partners state selection
     partnerStateSelected(item, index) {
-      this.$v.partnersArr.$each[index].stateRefCode.$model = item.value;
-      this.$v.partnersArr.$each[index].stateRefLabel.$model = item.label;
+      if (!item) return;
+      this.partnersArr[index].stateRefCode = item.value;
+      this.partnersArr[index].stateRefLabel = item.label;
     },
 
     addMorePartnersSet() {
@@ -252,8 +282,8 @@ export default {
       this.partnersArr.splice(index, 1);
     },
     validate() {
-      this.$v.partnersArr.$touch();
-      if (this.$v.partnersArr.$error) {
+      this.v$.partnersArr.$touch();
+      if (this.v$.partnersArr.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$emit("goNext", "partnerInformation", {

@@ -135,11 +135,15 @@ import {
   minValue,
   decimal
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 // import VueBarcodeScanner from "vue-barcode-scanner";
 // Vue.use(VueBarcodeScanner);
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   name: "allocateDevice",
   data() {
     return {
@@ -300,10 +304,10 @@ export default {
     },
     myPrint(divName) {
       var printContents = document.getElementById(divName).innerHTML;
-      var originalContents = document.body.innerHTML;
-      document.body.innerHTML = printContents;
+      var originalContents = document.data.innerHTML;
+      document.data.innerHTML = printContents;
       window.print();
-      document.body.innerHTML = originalContents;
+      document.data.innerHTML = originalContents;
     },
 // fnSubmitBankDetails(request){
  
@@ -343,9 +347,9 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              error.body.message == null
+              error.data.message == null
                 ? "Please Try Again Later !"
-                : error.body.message,
+                : error.data.message,
             icon: "thumb_down"
           });
         });

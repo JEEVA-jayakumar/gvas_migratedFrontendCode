@@ -23,16 +23,16 @@
         <div class="col-md-12">
           <div align="center" class="col-md-10 text-light-blue text-h6 q-mb-md">Reason Type</div>
             <q-radio 
-            @blur="$v.formData.leadVerificationStatus.reasonType.$touch"      
-            :error="$v.formData.leadVerificationStatus.reasonType.$error" 
+            @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
+            :error="v$.formData.leadVerificationStatus.reasonType.$error"
             v-model="formData.leadVerificationStatus.reasonType" 
             val="Wrong Device Type" 
             color="grey-9" 
             label="Wrong Device Type" 
             />
             <q-radio 
-            @blur="$v.formData.leadVerificationStatus.reasonType.$touch"      
-            :error="$v.formData.leadVerificationStatus.reasonType.$error" 
+            @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
+            :error="v$.formData.leadVerificationStatus.reasonType.$error"
             v-model="formData.leadVerificationStatus.reasonType" 
             val="Others" 
             color="grey-9" 
@@ -45,8 +45,8 @@
            <q-input
             type="textarea"
             placeholder="Type Your Reason Here...."
-            @blur="$v.formData.leadVerificationStatus.reason.$touch"      
-            :error="$v.formData.leadVerificationStatus.reason.$error" 
+            @blur="v$.formData.leadVerificationStatus.reason.$touch"
+            :error="v$.formData.leadVerificationStatus.reason.$error"
             class="q-my-md"
             color="grey-9"
             align="left"
@@ -75,8 +75,12 @@ import {
   alphaNum,
   numeric
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["showRejectLeadModel", "propShowRejectLeadComponent"],
 
   data() {
@@ -175,8 +179,8 @@ export default {
     // },
     leadRejectSubmit(formData) {
         // let 
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q
@@ -204,13 +208,13 @@ export default {
                  this.$router.push('/sat/lead/validation');
                 // this.$router.push('/sat/rejected/Lead/Details');
                 
-              }).onCancel(error => {
+              }).catch(error => {
                 this.$q.loading.hide();
                  this.$emit("closeRejectLeadModel");
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
-                  message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                  message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
                   icon: "thumb_down"
                 });
               });

@@ -124,6 +124,7 @@ import { required } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import generalLeadInformation from "../generalLeadInformation.vue";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   components: {
     generalLeadInformation

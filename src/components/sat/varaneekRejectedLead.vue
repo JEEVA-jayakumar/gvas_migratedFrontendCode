@@ -61,6 +61,7 @@ import { required, email, or } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "varaneekImplementationQueue",
   components: {

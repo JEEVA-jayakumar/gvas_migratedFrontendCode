@@ -33,6 +33,7 @@
  import externalimplementationRequest from "../../components/sat/externalimplementationRequest.vue";
 
 import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "inventoryAllocation",
 
@@ -46,7 +47,7 @@ export default {
     return {
       enableUploadInventoryBtn: true,
       toggleScanButton: true,
-      inventoryOptionSelected: "implementationQueue"
+      inventoryOptionSelected: "internal"
     };
   },
 

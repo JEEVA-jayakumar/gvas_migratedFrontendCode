@@ -20,8 +20,8 @@
                 <q-select
                   placeholder="Choose from the below*"
                   color="grey-9"
-                  @blur="$v.formdata.branchZone.$touch;"
-                  :error="$v.formdata.branchZone.$error"
+                  @blur="v$.formdata.branchZone.$touch;"
+                  :error="v$.formdata.branchZone.$error"
                   v-model.trim="formdata.branchZone"
                   label="Zone*"
                   :options="getAllZone"
@@ -33,8 +33,8 @@
                 <q-select
                   placeholder="Choose from the below*"
                   color="grey-9"
-                  @blur="$v.formdata.iaDistrict.$touch;"
-                  :error="$v.formdata.iaDistrict.$error"
+                  @blur="v$.formdata.iaDistrict.$touch;"
+                  :error="v$.formdata.iaDistrict.$error"
                   v-model.trim="formdata.iaDistrict"
                   label="IA_District*"
                   :options="getAllDistrict"
@@ -79,46 +79,47 @@
                 <q-select
                   placeholder="Choose from the below*"
                   color="grey-9"
-                  @blur="$v.formdata.installationBranchCode.$touch;"
-                  :error="$v.formdata.installationBranchCode.$error"
+                  @blur="v$.formdata.installationBranchCode.$touch;"
+                  :error="v$.formdata.installationBranchCode.$error"
                   v-model.trim="formdata.installationBranchCode"
                   label="InstallationBranchName*"
                   :options="getAllBranchName"
                 />
               </div>
               <div class="col-md-6">
-                <q-input
+                <q-select
+                  use-input
+                  fill-input
+                  hide-selected
+                  map-options
+                  emit-value
                   color="grey-9"
-                  @blur="$v.formdata.lorState.$touch;"
-                  :error="$v.formdata.lorState.$error"
+                  @blur="v$.formdata.lorState.$touch;"
+                  :error="v$.formdata.lorState.$error"
                   v-model.trim="formdata.lorState"
                   label="IOR_STATE(type min 3 characters)*"
                   placeholder="Start typing ..*"
-                >
-                  <q-autocomplete
-                    separator
-                    @search="searchIorState"
-                    :debounce="10"
-                    :min-characters="3"
-                  />
-                </q-input>
+                  :options="iorStateOptions"
+                  @filter="iorStateFilterFn"
+                />
               </div>
               <div class="col-md-6">
-                <q-input
+                <q-select
+                  use-input
+                  fill-input
+                  hide-selected
+                  map-options
+                  emit-value
                   color="grey-9"
-                  @blur="$v.formdata.pin.$touch;"
-                  :error="$v.formdata.pin.$error"
+                  @blur="v$.formdata.pin.$touch;"
+                  :error="v$.formdata.pin.$error"
                   v-model.trim="formdata.pin"
                   label="Pincode"
                   placeholder="Start typing ..*"
                   @update:model-value="pincodeBasedDistrict"
-                >
-                  <q-autocomplete
-                    separator
-                    @search="searchAxisBankPincode"
-                    :min-characters="3"
-                  />
-                </q-input>
+                  :options="axisPincodeOptions"
+                  @filter="axisPincodeFilterFn"
+                />
               </div>
 
               <div class="col-md-6">
@@ -135,8 +136,8 @@
                 <q-select
                   placeholder="Choose from the below*"
                   color="grey-9"
-                  @blur="$v.formdata.city.$touch;"
-                  :error="$v.formdata.city.$error"
+                  @blur="v$.formdata.city.$touch;"
+                  :error="v$.formdata.city.$error"
                   v-model.trim="formdata.city"
                   label="City*"
                   :options="getPincodeDistrict"
@@ -231,11 +232,15 @@
 </template>
 <script>
 import { required } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 import moment from "moment";
 import { date } from "quasar";
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["showRejectAdditionalInfo", "propToggleadditionalInfo"],
 
   data() {
@@ -260,6 +265,8 @@ export default {
         city: "",
         pin: "",
       },
+      iorStateOptions: [],
+      axisPincodeOptions: [],
       iaSalutationOptions: [
         {
           label: "MR",
@@ -477,16 +484,40 @@ export default {
     fetchInstutionCode() {
       this.INSTITUTIONCODE_FROM_FROM_MARS();
     },
+    iorStateFilterFn(val, update, abort) {
+      if (val.length < 3) {
+        abort();
+        return;
+      }
+      this.FETCH_IOR_STATE(val).then(() => {
+        update(() => {
+          this.iorStateOptions = this.getiorState;
+        });
+      }).catch(() => { abort(); });
+    },
+    axisPincodeFilterFn(val, update, abort) {
+      if (val.length < 3) {
+        abort();
+        return;
+      }
+      this.FETCH_AXIS_BANK_PINCODE_LOCATION(val).then(() => {
+        update(() => {
+          this.axisPincodeOptions = this.getAxisBankPincode;
+        });
+      }).catch(() => { abort(); });
+    },
     searchIorState(request, done) {
-      this.FETCH_IOR_STATE(request);
-      done(this.getiorState);
+      this.FETCH_IOR_STATE(request).then(() => {
+        if (done) done(this.getiorState);
+      });
     },
     citybasedlocation() {
       this.FETCH_AXIS_BANK_CITY_LOCATION(this.formdata.city);
     },
     searchAxisBankPincode(request, done) {
-      this.FETCH_AXIS_BANK_PINCODE_LOCATION(request);
-      done(this.getAxisBankPincode);
+      this.FETCH_AXIS_BANK_PINCODE_LOCATION(request).then(() => {
+        if (done) done(this.getAxisBankPincode);
+      });
     },
     pincodeandDistrictBasedCity() {
       this.FETCH_AXIS_BANK_PINCODE_DISTRICT(
@@ -551,8 +582,8 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              error.body != null
-                ? error.body.message
+              error.data != null
+                ? error.data.message
                 : "Lead Information status update failed!",
             icon: "clear",
           });
@@ -560,8 +591,8 @@ export default {
         });
     },
     finalFormSubmit(request) {
-      this.$v.formdata.$touch();
-      if (this.$v.formdata.$error) {
+      this.v$.formdata.$touch();
+      if (this.v$.formdata.$error) {
         this.$q.notify({
           color: "negative",
           position: "bottom",
@@ -779,85 +810,57 @@ export default {
               })
               .catch((error) => {
                 this.merchant.companyInformation.constitutionName = this.propLeadDeatils.merchantType.merchantTypeName;
-                this.$set(
-                  finalRequest.merchant.salesInformation,
-                  "applicationDate",
+
+                finalRequest.merchant.salesInformation.applicationDate =
                   this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.salesInformation.applicationDate
-                  )
-                );
+                  );
 
-                this.$set(
-                  finalRequest.merchant.salesInformation,
-                  "aggreementDate",
+                finalRequest.merchant.salesInformation.aggreementDate =
                   this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.salesInformation.aggreementDate
-                  )
-                );
+                  );
 
-                this.$set(
-                  finalRequest.merchant.salesInformation,
-                  "loanDisbursementDate",
+                finalRequest.merchant.salesInformation.loanDisbursementDate =
                   this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.salesInformation.loanDisbursementDate
-                  )
-                );
+                  );
 
-                this.$set(
-                  finalRequest.merchant.salesInformation,
-                  "tenureStartDate",
+                finalRequest.merchant.salesInformation.tenureStartDate =
                   this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.salesInformation.tenureStartDate
-                  )
-                );
+                  );
 
-                this.$set(
-                  finalRequest.merchant.companyInformation,
-                  "establishYear",
+                finalRequest.merchant.companyInformation.establishYear =
                   this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.companyInformation.establishYear
-                  )
-                );
+                  );
 
-                this.$set(
-                  finalRequest.merchant.bankInformation.collectionDetails,
-                  "chequeDepositedDate",
+                finalRequest.merchant.bankInformation.collectionDetails.chequeDepositedDate =
                   this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.bankInformation.collectionDetails
                       .chequeDepositedDate
-                  )
-                );
+                  );
 
-                this.$set(
-                  finalRequest.merchant.bankInformation.collectionDetails,
-                  "collectedDate",
+                finalRequest.merchant.bankInformation.collectionDetails.collectedDate =
                   this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.bankInformation.collectionDetails.collectedDate
-                  )
-                );
+                  );
 
-                this.$set(
-                  finalRequest.merchant.bankInformation.collectionDetails,
-                  "chequeDate",
+                finalRequest.merchant.bankInformation.collectionDetails.chequeDate =
                   this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.bankInformation.collectionDetails.chequeDate
-                  )
-                );
+                  );
 
-                this.$set(
-                  finalRequest.merchant.businessInformation,
-                  "memberSince",
+                finalRequest.merchant.businessInformation.memberSince =
                   this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.businessInformation.memberSince
-                  )
-                );
-                this.$set(
-                  finalRequest.merchant.businessInformation,
-                  "lastTurnoverYear",
+                  );
+
+                finalRequest.merchant.businessInformation.lastTurnoverYear =
                   this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.businessInformation.lastTurnoverYear
-                  )
-                );
+                  );
 
                 if (error.data.hasOwnProperty("errorDetails")) {
                   let OThis = this;
@@ -869,7 +872,7 @@ export default {
                         .slice(1, 2);
                       let computeSplitted = splitted[splitted.length - 1];
                       let fieldErrorFound = eval(`
-                        OThis.$v.viewBinding.partnersArr.$each[
+                        OThis.v$.viewBinding.partnersArr.$each[
                           ${findPartnersErrorIndex}
                         ].${computeSplitted}`);
                       fieldErrorFound.$model = "";
@@ -883,10 +886,10 @@ export default {
                       generateErrorMessage.issue = actual.issue;
                       generateErrorMessage.value = actual.value;
                     } else {
-                      let splittingErrorField = `OThis.$v.${splitted.join(".")}`;
+                      let splittingErrorField = `OThis.v$.${splitted.join(".")}`;
                       let fieldErrorFound = eval(splittingErrorField);
                       fieldErrorFound.$model = "";
-                      OThis.$set(OThis.error.tab, splitted[1], true);
+                      OThis.error.tab[splitted[1]] = true;
 
                       let generateErrorMessage = eval(
                         `OThis.error.field.${splitted.join(".")}`

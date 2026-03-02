@@ -18,8 +18,8 @@
           <q-input
             type="textarea"
             placeholder="Type.."
-            @blur="$v.remarks.$touch"
-            :error="$v.remarks.$error"
+            @blur="v$.remarks.$touch"
+            :error="v$.remarks.$error"
             class="q-my-md"
             color="grey-9"
             align="left"
@@ -57,8 +57,12 @@ import {
   alphaNum,
   numeric
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["showLostModel", "propShowLostComponent"],
 
   data() {
@@ -104,8 +108,8 @@ export default {
       this.formData.data.lostOrStolenRemarks = val;
     },
     loststolendevice(reqData) {
-      //   this.$v.formData.$touch();
-      //   if (this.$v.formData.$error) {
+      //   this.v$.formData.$touch();
+      //   if (this.v$.formData.$error) {
       //     this.$q.notify("Please review fields again.");
       //   }
       //   else {
@@ -134,12 +138,12 @@ export default {
                 message: "Successfully Approved!",
                 icon: "thumb_up"
               });
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
                 icon: "thumb_down"
               });
             });

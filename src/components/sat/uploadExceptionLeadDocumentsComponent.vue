@@ -489,6 +489,7 @@ import showDocumentLeadApproveComponent from "../../components/sat/showDocumentL
 import showDocumentLeadRejectComponent from "../../components/sat/showDocumentLeadRejectComponent.vue";
 import showPdfModalComponent from "../../components/sat/showPdfModalComponent.vue";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   props: ["propMerchantTypeFromSO"],
 
@@ -955,12 +956,12 @@ export default {
                 message: "Successfully removed!",
                 icon: "thumb_up"
               });
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",
                 position: "bot  tom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
                 icon: "thumb_down"
               });
             });

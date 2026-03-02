@@ -15,35 +15,35 @@
                     </div>
                     <div class="col-md-8">
                         <q-input v-model="FormData.fname" placeholder="Enter Name" label="Enter Name"
-                            @blur="$v.FormData.fname.$touch" :error="$v.FormData.fname.$error" />
+                            @blur="v$.FormData.fname.$touch" :error="v$.FormData.fname.$error" />
 
                     </div>
                     <div class="col-md-8">
                         <q-input v-model="FormData.email" placeholder="Enter Email" label="Enter Email"
-                            @blur="$v.FormData.email.$touch" :error="$v.FormData.email.$error" />
+                            @blur="v$.FormData.email.$touch" :error="v$.FormData.email.$error" />
 
                     </div>
                     <div class="col-md-8">
                         <q-input v-model="FormData.dob" placeholder="Select DOB" label="Select DOB"
-                            @blur="$v.FormData.dob.$touch" :error="$v.FormData.dob.$error" />
+                            @blur="v$.FormData.dob.$touch" :error="v$.FormData.dob.$error" />
 
                     </div>
                     <div class="col-md-8">
                         <q-select v-model="FormData.gender" label="Select Gender" placeholder="Select Gender"
-                            @blur="$v.FormData.gender.$touch" :error="$v.FormData.gender.$error"
+                            @blur="v$.FormData.gender.$touch" :error="v$.FormData.gender.$error"
                             :options="selectGender" />
 
                     </div>
                     <div class="col-md-8">
                         <q-input v-model="FormData.password" type="password" placeholder="Enter Password"
-                            label="Enter Password" @blur="$v.FormData.password.$touch"
-                            :error="$v.FormData.password.$error" />
+                            label="Enter Password" @blur="v$.FormData.password.$touch"
+                            :error="v$.FormData.password.$error" />
 
                     </div>
                     <div class="col-md-8">
                         <q-input v-model="FormData.repassword" type="password" placeholder="Re-Enter Password"
-                            label="Re-Enter Password" @blur="$v.FormData.repassword.$touch"
-                            :error="$v.FormData.repassword.$error" />
+                            label="Re-Enter Password" @blur="v$.FormData.repassword.$touch"
+                            :error="v$.FormData.repassword.$error" />
 
                     </div>
                     <div class="col-md-8" align="center">
@@ -57,8 +57,8 @@
     </q-page>
 </template>
 <script>
-import {
-    required,
+import { useVuelidate } from "@vuelidate/core";
+import { required,
     email,
     minLength,
     maxLength,
@@ -67,6 +67,9 @@ import {
     numeric
 } from "@vuelidate/validators";
 export default {
+  setup() {
+    return { v$: useVuelidate() }
+  },
     data() {
         return {
             selectGender: [
@@ -116,8 +119,8 @@ export default {
     },
     method: {
         // fnsubmit(reqData) {
-        //     this.$v.FormData.$touch();
-        //     if (this.$v.FormData.$error) {
+        //     this.v$.FormData.$touch();
+        //     if (this.v$.FormData.$error) {
         //         this.$q.notify("Please review fields again.");
         //     } else {
 

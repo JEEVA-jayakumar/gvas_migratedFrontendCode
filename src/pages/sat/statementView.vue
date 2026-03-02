@@ -78,6 +78,7 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 export default {
   // name: 'PageName',
   data() {

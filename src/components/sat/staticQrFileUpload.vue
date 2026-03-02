@@ -91,8 +91,12 @@
   <script>
 
   import { required, requiredIf } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
   import { mapGetters, mapActions } from "vuex";
   export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
     props: ["propFileUpload", "propAllExcelFile"],
   
     data() {
@@ -185,7 +189,7 @@
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
                 icon: "thumb_down"
               });
               this.$q.loading.hide();

@@ -51,22 +51,20 @@
               </div>
             </div>
             <div v-else  class="full-width">
-              <vuePdfjs
-                :url="GLOBAL_FILE_FETCH_URL + '/' + itemDetail.invoiceName"
+              <VuePdfEmbed :source="GLOBAL_FILE_FETCH_URL + '/' + itemDetail.invoiceName"
                 :type="0"
                 :height="'400px'"
                 style="max-width:100%"
-              ></vuePdfjs>
+               />
             </div>
           </div> -->
         </div>
         <div v-else class="full-width" >
-            <vuePdfjs
-              :url="GLOBAL_FILE_FETCH_URL+'/'+itemDetail.invoiceName"
+            <VuePdfEmbed :source="GLOBAL_FILE_FETCH_URL+'/'+itemDetail.invoiceName"
               :type="0"
               :height="'400px'"
               style="max-width:100%"
-            ></vuePdfjs>
+             />
           </div>
         <!-- </q-list> -->
       </div>
@@ -80,12 +78,13 @@
 import { url } from '@vuelidate/validators';
 
 
-import vuePdfjs from "vue-pdfjs";
+
 import { mapGetters, mapActions } from "vuex";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   components: {
-    vuePdfjs
+
   },
   props: ["propToggleshowPDFModalFinance", "propPDFDetailsFinance"],
   data() {

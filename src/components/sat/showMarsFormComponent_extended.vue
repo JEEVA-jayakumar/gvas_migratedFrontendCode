@@ -128,6 +128,7 @@ import moment from "moment";
 import { mapGetters, mapActions } from "vuex";
 import viewLeadDocuments from "./viewLeadDocumentsDataEntryComponent.vue";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "leadDataEntry",
   props: ["propLeadDeatils"],
@@ -579,37 +580,25 @@ export default {
                 );
                 res.salesInformation["aggreementDate"] = this.commonDateFormat(res.salesInformation.aggreementDate;
                 );
-                this.$set(
-                  res.salesInformation,
-                  "loanDisbursementDate",
-                  this.commonDateFormat(
+                res.salesInformation["loanDisbursementDate"] = this.commonDateFormat(
                     res.salesInformation.loanDisbursementDate
-                  )
+
                 );
                 res.salesInformation["tenureStartDate"] = this.commonDateFormat(res.salesInformation.tenureStartDate;
                 );
                 res.companyInformation["establishYear"] = this.commonDateFormat(res.companyInformation.establishYear;
                 );
-                this.$set(
-                  res.bankInformation.collectionDetails,
-                  "chequeDepositedDate",
-                  this.commonDateFormat(
+                res.bankInformation.collectionDetails["chequeDepositedDate"] = this.commonDateFormat(
                     res.bankInformation.collectionDetails.chequeDepositedDate
-                  )
+
                 );
-                this.$set(
-                  res.bankInformation.collectionDetails,
-                  "collectedDate",
-                  this.commonDateFormat(
+                res.bankInformation.collectionDetails["collectedDate"] = this.commonDateFormat(
                     res.bankInformation.collectionDetails.collectedDate
-                  )
+
                 );
-                this.$set(
-                  res.bankInformation.collectionDetails,
-                  "chequeDate",
-                  this.commonDateFormat(
+                res.bankInformation.collectionDetails["chequeDate"] = this.commonDateFormat(
                     res.bankInformation.collectionDetails.chequeDate
-                  )
+
                 );
                 res.businessInformation["memberSince"] = this.commonDateFormat(res.businessInformation.memberSince;
                 );
@@ -676,8 +665,8 @@ export default {
     },
 
     finalFormSubmit() {
-      this.$v.merchant.$touch();
-      if (this.$v.merchant.$error) {
+      this.v$.merchant.$touch();
+      if (this.v$.merchant.$error) {
         this.$q.notify({
           color: "negative",
           position: "bottom",
@@ -748,79 +737,52 @@ export default {
                   });
               })
               .catch(error => {
-                this.$set(
-                  finalRequest.merchant.salesInformation,
-                  "applicationDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.salesInformation["applicationDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.salesInformation.applicationDate
-                  )
+
                 );
 
-                this.$set(
-                  finalRequest.merchant.salesInformation,
-                  "aggreementDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.salesInformation["aggreementDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.salesInformation.aggreementDate
-                  )
+
                 );
 
-                this.$set(
-                  finalRequest.merchant.salesInformation,
-                  "loanDisbursementDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.salesInformation["loanDisbursementDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.salesInformation.loanDisbursementDate
-                  )
+
                 );
 
-                this.$set(
-                  finalRequest.merchant.salesInformation,
-                  "tenureStartDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.salesInformation["tenureStartDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.salesInformation.tenureStartDate
-                  )
+
                 );
 
-                this.$set(
-                  finalRequest.merchant.companyInformation,
-                  "establishYear",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.companyInformation["establishYear"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.companyInformation.establishYear
-                  )
+
                 );
 
-                this.$set(
-                  finalRequest.merchant.bankInformation.collectionDetails,
-                  "chequeDepositedDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.bankInformation.collectionDetails["chequeDepositedDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.bankInformation.collectionDetails
                       .chequeDepositedDate
-                  )
+
                 );
 
-                this.$set(
-                  finalRequest.merchant.bankInformation.collectionDetails,
-                  "collectedDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.bankInformation.collectionDetails["collectedDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.bankInformation.collectionDetails
                       .collectedDate
-                  )
+
                 );
 
-                this.$set(
-                  finalRequest.merchant.bankInformation.collectionDetails,
-                  "chequeDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.bankInformation.collectionDetails["chequeDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.bankInformation.collectionDetails
                       .chequeDate
-                  )
+
                 );
 
-                this.$set(
-                  finalRequest.merchant.businessInformation,
-                  "memberSince",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.businessInformation["memberSince"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.businessInformation.memberSince
-                  )
+
                 );
                 self.$q.notify({
                   color: "negative",

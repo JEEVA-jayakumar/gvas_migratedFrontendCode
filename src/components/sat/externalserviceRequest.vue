@@ -348,6 +348,7 @@ import reassignTicketPopup from "../../components/sat/reassignTicketPopup.vue";
 import contactDetailsPopup from "../../components/sat/contactDetailsPopup.vue";
 import crmLogsView from "../../components/sat/crmLogsView.vue";
 import ticketAssign from 'src/components/sat/ticketAssign.vue';
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "implementationQueue",
   components: {
@@ -691,7 +692,7 @@ export default {
               this.$q.notify({
                 color: "positive",
                 position: "bottom",
-                message: res.body.data,
+                message: res.data.data,
                 icon: "thumb_up"
               });
               this.$q.loading.hide();
@@ -704,7 +705,7 @@ export default {
               self.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: res.body.data,
+                message: res.data.data,
                 icon: "thumb_down"
               });
               this.$q.loading.hide();
@@ -715,7 +716,7 @@ export default {
             self.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.data,
+              message: error.data.data,
               icon: "thumb_down"
             });
             this.$q.loading.hide();

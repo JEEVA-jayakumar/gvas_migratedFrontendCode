@@ -431,20 +431,28 @@
                     <div>
                       <q-table dense hide-bottom :rows="agingTrackerPendingTableData"
                         :columns="agingTrackerPendingColumns" v-model:pagination="paginationControl" row-key="name">
-                        <q-td v-slot:body-cell-name="props" :props="props">{{ props.row.name }}</q-td>
-                        <q-td v-slot:body-cell-greaterThanOneDay="props" :props="props" class="cursor-pointer"
+                        <template v-slot:body-cell-name="props">
+          <q-td :props="props">{{ props.row.name }}</q-td>
+        </template>
+                        <template v-slot:body-cell-greaterThanOneDay="props">
+          <q-td :props="props" class="cursor-pointer"
                           @click="retrieveLeadsList(props.row.greaterThanOneDayLeadIdList)">{{
                             props.row.greaterThanOneDay
                           }}</q-td>
-                        <q-td v-slot:body-cell-greaterThanTwoDays="props" :props="props" class="cursor-pointer"
+        </template>
+                        <template v-slot:body-cell-greaterThanTwoDays="props">
+          <q-td :props="props" class="cursor-pointer"
                           @click="retrieveLeadsList(props.row.greaterThanTwoDaysLeadIdList)">{{
                             props.row.greaterThanTwoDays
                           }}</q-td>
-                        <q-td v-slot:body-cell-greaterThanFiveDays="props" :props="props"
+        </template>
+                        <template v-slot:body-cell-greaterThanFiveDays="props">
+          <q-td :props="props"
                           class="cursor-pointer"
                           @click="retrieveLeadsList(props.row.greaterThanFiveDaysLeadIdList)">{{
                             props.row.greaterThanFiveDays
                           }}</q-td>
+        </template>
                       </q-table>
                     </div>
                   </q-card-section>
@@ -470,7 +478,8 @@ import { required } from '@vuelidate/validators';
   import chartSATagingTracker from "../../components/sat/chartSATagingTracker.js";
   import leadList from "../../components/sat/leadList.vue";
   
-  export default {
+  import { useVuelidate } from "@vuelidate/core";
+export default {
     name: "dashoboard",
     components: {
       leadList,

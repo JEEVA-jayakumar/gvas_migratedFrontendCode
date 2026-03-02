@@ -487,7 +487,7 @@
                                 multiline
                                 class="full-width"
                               >
-                                <template slot="header">
+                                <template v-slot:header>
                                   <q-item-section icon="attach_file" />
                                   <q-item-section
                                     class="text-body1"
@@ -540,7 +540,7 @@
                                 opened
                                 class="full-width"
                               >
-                                <template slot="header">
+                                <template v-slot:header>
                                   <q-item-section icon="apps" />
                                   <q-item-section
                                     class="text-body1"
@@ -562,7 +562,7 @@
                                       class="full-width"
                                       indent
                                     >
-                                      <template slot="header">
+                                      <template v-slot:header>
                                         <q-item-section icon="attach_file" />
                                         <q-item-section
                                           class="text-body1"
@@ -708,6 +708,7 @@ import generalLeadInformation from "../../components/generalLeadInformation.vue"
 
 // import showRejectLeadRejectComponent from "../../components/sat/BankSubventionRejectComponent.vue";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "exceptionQueueBankLeadDetails",
   components: {

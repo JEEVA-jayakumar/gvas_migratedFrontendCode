@@ -84,6 +84,7 @@ import { or } from '@vuelidate/validators';
 
 import { mapGetters, mapActions } from "vuex";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "serviceticket",
   components: {},
@@ -151,28 +152,28 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null ? "Internal Server Error" : error.body.message,
+                error.data.message == null ? "Internal Server Error" : error.data.message,
               icon: "thumb_down",
             });
           } else if (error.status == 400) {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Bad Request" : error.body.message,
+              message: error.data.message == null ? "Bad Request" : error.data.message,
               icon: "thumb_down",
             });
           } else if (error.status == 404) {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Not Found" : error.body.message,
+              message: error.data.message == null ? "Not Found" : error.data.message,
               icon: "thumb_down",
             });
           } else if (error.status == 406) {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Not Acceptable" : error.body.message,
+              message: error.data.message == null ? "Not Acceptable" : error.data.message,
               icon: "thumb_down",
             });
           } else {
@@ -180,9 +181,9 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
+                error.data.message == null
                   ? "Please Try Again Later !"
-                  : error.body.message,
+                  : error.data.message,
               icon: "thumb_down",
             });
           }

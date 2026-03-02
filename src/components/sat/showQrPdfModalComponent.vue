@@ -15,12 +15,11 @@
         </div>
         <div class="row q-py-sm">
           <div class="full-width">
-            <vuePdfjs
-              :url="GLOBAL_FILE_FETCH_URL+'/'+itemDetail"
+            <VuePdfEmbed :source="GLOBAL_FILE_FETCH_URL+'/'+itemDetail"
               :type="0"
               :height="'400px'"
               style="max-width:100%"
-            ></vuePdfjs>
+             />
           </div>
         </div>
         <!--END >> PDF viewer, third party plugin -->
@@ -30,12 +29,13 @@
   
   <script>
 import { url } from '@vuelidate/validators';
-  import vuePdfjs from "vue-pdfjs";
+
   import { mapGetters, mapActions } from "vuex";
   
-  export default {
+  import { useVuelidate } from "@vuelidate/core";
+export default {
     components: {
-      vuePdfjs
+
     },
     props: ["propToggleshowPDFModal", "propPDFDetails"],
     data() {

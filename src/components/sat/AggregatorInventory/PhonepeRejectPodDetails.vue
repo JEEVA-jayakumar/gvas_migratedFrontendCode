@@ -10,19 +10,19 @@
                 <!-- <div align="left" class="text-weight-light text-grey-8 q-mb-md">Reason</div> -->
                 <!-- <div class="gutter-xs">
             <q-radio 
-            @blur="$v.formData.leadVerificationStatus.reasonType.$touch"      
-            :error="$v.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="Short Fund" color="grey-9" label="Short Fund" />
-            <q-radio @blur="$v.formData.leadVerificationStatus.reasonType.$touch"      
-            :error="$v.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="Excess Fund" color="grey-9" label="Excess Fund" />
-            <q-radio @blur="$v.formData.leadVerificationStatus.reasonType.$touch"      
-            :error="$v.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="Cheque Bounce" color="grey-9" label="Cheque Bounce" />
-            <q-radio @blur="$v.formData.leadVerificationStatus.reasonType.$touch"      
-            :error="$v.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="No Fund" color="grey-9" label="No Fund" />
-            <q-radio @blur="$v.formData.leadVerificationStatus.reasonType.$touch"      
-            :error="$v.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="Others" color="grey-9" label="Others" />
+            @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
+            :error="v$.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="Short Fund" color="grey-9" label="Short Fund" />
+            <q-radio @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
+            :error="v$.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="Excess Fund" color="grey-9" label="Excess Fund" />
+            <q-radio @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
+            :error="v$.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="Cheque Bounce" color="grey-9" label="Cheque Bounce" />
+            <q-radio @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
+            :error="v$.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="No Fund" color="grey-9" label="No Fund" />
+            <q-radio @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
+            :error="v$.formData.leadVerificationStatus.reasonType.$error" v-model="formData.leadVerificationStatus.reasonType" val="Others" color="grey-9" label="Others" />
           </div> -->
-                <q-input type="textarea" placeholder="Type.." @blur="$v.formData.regionRemarks.$touch"
-                    :error="$v.formData.regionRemarks.$error" class="q-my-md" color="grey-9" align="left" value=""
+                <q-input type="textarea" placeholder="Type.." @blur="v$.formData.regionRemarks.$touch"
+                    :error="v$.formData.regionRemarks.$error" class="q-my-md" color="grey-9" align="left" value=""
                     v-model="formData.regionRemarks" />
                 <q-btn color="negative" class="q-ma-sm float-right" @click="PodRejectDetails(formData)" align="right"
                     label="Reject" />
@@ -44,8 +44,12 @@ import {
     alphaNum,
     numeric
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
     props: ["showRejectModel", "propShowRejectComponent"],
 
     data() {
@@ -103,8 +107,8 @@ export default {
 
 
         PodRejectDetails(reqdata) {
-            this.$v.formData.$touch();
-            if (this.$v.formData.$error) {
+            this.v$.formData.$touch();
+            if (this.v$.formData.$error) {
                 this.$q.notify("Please review fields again.");
             } else {
                 console.log("fnRejectPodDetails------>", JSON.stringify(reqdata));
@@ -147,9 +151,9 @@ export default {
                                         color: "negative",
                                         position: "bottom",
                                         message:
-                                            error.body.message == null
+                                            error.data.message == null
                                                 ? "Please Try Again Later !"
-                                                : error.body.message,
+                                                : error.data.message,
                                         icon: "thumb_down"
                                     });
                                 });
@@ -161,9 +165,9 @@ export default {
                                     color: "negative",
                                     position: "bottom",
                                     message:
-                                        error.body.message == null
+                                        error.data.message == null
                                             ? "Please Try Again Later !"
-                                            : error.body.message,
+                                            : error.data.message,
                                     icon: "thumb_down"
                                 });
                             });

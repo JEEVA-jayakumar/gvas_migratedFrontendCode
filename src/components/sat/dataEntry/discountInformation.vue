@@ -13,8 +13,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.domesticDebitUpTo2000.fixed.$touch"
-                  :error="$v.merchant.mdrPlan.domesticDebitUpTo2000.fixed.$error"
+                  @blur="v$.merchant.mdrPlan.domesticDebitUpTo2000.fixed.$touch"
+                  :error="v$.merchant.mdrPlan.domesticDebitUpTo2000.fixed.$error"
                   v-model="merchant.mdrPlan.domesticDebitUpTo2000.fixed"
                   placeholder="Fixed"
                 />
@@ -23,8 +23,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.domesticDebitUpTo2000.percentage.$touch"
-                  :error="$v.merchant.mdrPlan.domesticDebitUpTo2000.percentage.$error"
+                  @blur="v$.merchant.mdrPlan.domesticDebitUpTo2000.percentage.$touch"
+                  :error="v$.merchant.mdrPlan.domesticDebitUpTo2000.percentage.$error"
                   v-model="merchant.mdrPlan.domesticDebitUpTo2000.percentage"
                   placeholder="%"
                 />
@@ -33,8 +33,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.domesticDebitUpTo2000.minimum.$touch"
-                  :error="$v.merchant.mdrPlan.domesticDebitUpTo2000.minimum.$error"
+                  @blur="v$.merchant.mdrPlan.domesticDebitUpTo2000.minimum.$touch"
+                  :error="v$.merchant.mdrPlan.domesticDebitUpTo2000.minimum.$error"
                   v-model="merchant.mdrPlan.domesticDebitUpTo2000.minimum"
                   placeholder="Max"
                 />
@@ -48,8 +48,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.domesticDebitUpTo2000.fixed.$touch"
-                  :error="$v.merchant.SharingDiscountFee.domesticDebitUpTo2000.fixed.$error"
+                  @blur="v$.merchant.SharingDiscountFee.domesticDebitUpTo2000.fixed.$touch"
+                  :error="v$.merchant.SharingDiscountFee.domesticDebitUpTo2000.fixed.$error"
                   v-model="merchant.SharingDiscountFee.domesticDebitUpTo2000.fixed"
                   placeholder="Fixed"
                 />
@@ -58,8 +58,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.domesticDebitUpTo2000.percentage.$touch"
-                  :error="$v.merchant.SharingDiscountFee.domesticDebitUpTo2000.percentage.$error"
+                  @blur="v$.merchant.SharingDiscountFee.domesticDebitUpTo2000.percentage.$touch"
+                  :error="v$.merchant.SharingDiscountFee.domesticDebitUpTo2000.percentage.$error"
                   v-model="merchant.SharingDiscountFee.domesticDebitUpTo2000.percentage"
                   placeholder="%"
                 />
@@ -68,8 +68,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.domesticDebitUpTo2000.minimum.$touch"
-                  :error="$v.merchant.SharingDiscountFee.domesticDebitUpTo2000.minimum.$error"
+                  @blur="v$.merchant.SharingDiscountFee.domesticDebitUpTo2000.minimum.$touch"
+                  :error="v$.merchant.SharingDiscountFee.domesticDebitUpTo2000.minimum.$error"
                   v-model="merchant.SharingDiscountFee.domesticDebitUpTo2000.minimum"
                   placeholder="Max"
                 />
@@ -87,8 +87,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.domesticDebitAbove2000.fixed.$touch"
-                  :error="$v.merchant.mdrPlan.domesticDebitAbove2000.fixed.$error"
+                  @blur="v$.merchant.mdrPlan.domesticDebitAbove2000.fixed.$touch"
+                  :error="v$.merchant.mdrPlan.domesticDebitAbove2000.fixed.$error"
                   v-model="merchant.mdrPlan.domesticDebitAbove2000.fixed"
                   placeholder="Fixed"
                 />
@@ -97,8 +97,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.domesticDebitAbove2000.percentage.$touch"
-                  :error="$v.merchant.mdrPlan.domesticDebitAbove2000.percentage.$error"
+                  @blur="v$.merchant.mdrPlan.domesticDebitAbove2000.percentage.$touch"
+                  :error="v$.merchant.mdrPlan.domesticDebitAbove2000.percentage.$error"
                   v-model="merchant.mdrPlan.domesticDebitAbove2000.percentage"
                   placeholder="%"
                 />
@@ -107,8 +107,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.domesticDebitAbove2000.minimum.$touch"
-                  :error="$v.merchant.mdrPlan.domesticDebitAbove2000.minimum.$error"
+                  @blur="v$.merchant.mdrPlan.domesticDebitAbove2000.minimum.$touch"
+                  :error="v$.merchant.mdrPlan.domesticDebitAbove2000.minimum.$error"
                   v-model="merchant.mdrPlan.domesticDebitAbove2000.minimum"
                   placeholder="Max"
                 />
@@ -121,8 +121,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.domesticDebitAbove2000.fixed.$touch"
-                  :error="$v.merchant.SharingDiscountFee.domesticDebitAbove2000.fixed.$error"
+                  @blur="v$.merchant.SharingDiscountFee.domesticDebitAbove2000.fixed.$touch"
+                  :error="v$.merchant.SharingDiscountFee.domesticDebitAbove2000.fixed.$error"
                   v-model="merchant.SharingDiscountFee.domesticDebitAbove2000.fixed"
                   placeholder="Fixed"
                 />
@@ -131,8 +131,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.domesticDebitAbove2000.percentage.$touch"
-                  :error="$v.merchant.SharingDiscountFee.domesticDebitAbove2000.percentage.$error"
+                  @blur="v$.merchant.SharingDiscountFee.domesticDebitAbove2000.percentage.$touch"
+                  :error="v$.merchant.SharingDiscountFee.domesticDebitAbove2000.percentage.$error"
                   v-model="merchant.SharingDiscountFee.domesticDebitAbove2000.percentage"
                   placeholder="%"
                 />
@@ -141,8 +141,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.domesticDebitAbove2000.minimum.$touch"
-                  :error="$v.merchant.SharingDiscountFee.domesticDebitAbove2000.minimum.$error"
+                  @blur="v$.merchant.SharingDiscountFee.domesticDebitAbove2000.minimum.$touch"
+                  :error="v$.merchant.SharingDiscountFee.domesticDebitAbove2000.minimum.$error"
                   v-model="merchant.SharingDiscountFee.domesticDebitAbove2000.minimum"
                   placeholder="Max"
                 />
@@ -161,8 +161,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.standardOrClassic.fixed.$touch"
-                  :error="$v.merchant.mdrPlan.standardOrClassic.fixed.$error"
+                  @blur="v$.merchant.mdrPlan.standardOrClassic.fixed.$touch"
+                  :error="v$.merchant.mdrPlan.standardOrClassic.fixed.$error"
                   v-model="merchant.mdrPlan.standardOrClassic.fixed"
                   placeholder="Fixed"
                 />
@@ -171,8 +171,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.standardOrClassic.percentage.$touch"
-                  :error="$v.merchant.mdrPlan.standardOrClassic.percentage.$error"
+                  @blur="v$.merchant.mdrPlan.standardOrClassic.percentage.$touch"
+                  :error="v$.merchant.mdrPlan.standardOrClassic.percentage.$error"
                   v-model="merchant.mdrPlan.standardOrClassic.percentage"
                   placeholder="%"
                 />
@@ -181,8 +181,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.standardOrClassic.minimum.$touch"
-                  :error="$v.merchant.mdrPlan.standardOrClassic.minimum.$error"
+                  @blur="v$.merchant.mdrPlan.standardOrClassic.minimum.$touch"
+                  :error="v$.merchant.mdrPlan.standardOrClassic.minimum.$error"
                   v-model="merchant.mdrPlan.standardOrClassic.minimum"
                   placeholder="Max"
                 />
@@ -195,8 +195,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.standardOrClassic.fixed.$touch"
-                  :error="$v.merchant.SharingDiscountFee.standardOrClassic.fixed.$error"
+                  @blur="v$.merchant.SharingDiscountFee.standardOrClassic.fixed.$touch"
+                  :error="v$.merchant.SharingDiscountFee.standardOrClassic.fixed.$error"
                   v-model="merchant.SharingDiscountFee.standardOrClassic.fixed"
                   placeholder="Fixed"
                 />
@@ -205,8 +205,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.standardOrClassic.percentage.$touch"
-                  :error="$v.merchant.SharingDiscountFee.standardOrClassic.percentage.$error"
+                  @blur="v$.merchant.SharingDiscountFee.standardOrClassic.percentage.$touch"
+                  :error="v$.merchant.SharingDiscountFee.standardOrClassic.percentage.$error"
                   v-model="merchant.SharingDiscountFee.standardOrClassic.percentage"
                   placeholder="%"
                 />
@@ -215,8 +215,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.standardOrClassic.minimum.$touch"
-                  :error="$v.merchant.SharingDiscountFee.standardOrClassic.minimum.$error"
+                  @blur="v$.merchant.SharingDiscountFee.standardOrClassic.minimum.$touch"
+                  :error="v$.merchant.SharingDiscountFee.standardOrClassic.minimum.$error"
                   v-model="merchant.SharingDiscountFee.standardOrClassic.minimum"
                   placeholder="Max"
                 />
@@ -234,8 +234,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.premiumOrPlatinum.fixed.$touch"
-                  :error="$v.merchant.mdrPlan.premiumOrPlatinum.fixed.$error"
+                  @blur="v$.merchant.mdrPlan.premiumOrPlatinum.fixed.$touch"
+                  :error="v$.merchant.mdrPlan.premiumOrPlatinum.fixed.$error"
                   v-model="merchant.mdrPlan.premiumOrPlatinum.fixed"
                   placeholder="Fixed"
                 />
@@ -244,8 +244,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.premiumOrPlatinum.percentage.$touch"
-                  :error="$v.merchant.mdrPlan.premiumOrPlatinum.percentage.$error"
+                  @blur="v$.merchant.mdrPlan.premiumOrPlatinum.percentage.$touch"
+                  :error="v$.merchant.mdrPlan.premiumOrPlatinum.percentage.$error"
                   v-model="merchant.mdrPlan.premiumOrPlatinum.percentage"
                   placeholder="%"
                 />
@@ -254,8 +254,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.premiumOrPlatinum.minimum.$touch"
-                  :error="$v.merchant.mdrPlan.premiumOrPlatinum.minimum.$error"
+                  @blur="v$.merchant.mdrPlan.premiumOrPlatinum.minimum.$touch"
+                  :error="v$.merchant.mdrPlan.premiumOrPlatinum.minimum.$error"
                   v-model="merchant.mdrPlan.premiumOrPlatinum.minimum"
                   placeholder="Max"
                 />
@@ -268,8 +268,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.premiumOrPlatinum.fixed.$touch"
-                  :error="$v.merchant.SharingDiscountFee.premiumOrPlatinum.fixed.$error"
+                  @blur="v$.merchant.SharingDiscountFee.premiumOrPlatinum.fixed.$touch"
+                  :error="v$.merchant.SharingDiscountFee.premiumOrPlatinum.fixed.$error"
                   v-model="merchant.SharingDiscountFee.premiumOrPlatinum.fixed"
                   placeholder="Fixed"
                 />
@@ -278,8 +278,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.premiumOrPlatinum.percentage.$touch"
-                  :error="$v.merchant.SharingDiscountFee.premiumOrPlatinum.percentage.$error"
+                  @blur="v$.merchant.SharingDiscountFee.premiumOrPlatinum.percentage.$touch"
+                  :error="v$.merchant.SharingDiscountFee.premiumOrPlatinum.percentage.$error"
                   v-model="merchant.SharingDiscountFee.premiumOrPlatinum.percentage"
                   placeholder="%"
                 />
@@ -288,8 +288,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.premiumOrPlatinum.minimum.$touch"
-                  :error="$v.merchant.SharingDiscountFee.premiumOrPlatinum.minimum.$error"
+                  @blur="v$.merchant.SharingDiscountFee.premiumOrPlatinum.minimum.$touch"
+                  :error="v$.merchant.SharingDiscountFee.premiumOrPlatinum.minimum.$error"
                   v-model="merchant.SharingDiscountFee.premiumOrPlatinum.minimum"
                   placeholder="Max"
                 />
@@ -307,8 +307,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.superPremiumOrSignature.fixed.$touch"
-                  :error="$v.merchant.mdrPlan.superPremiumOrSignature.fixed.$error"
+                  @blur="v$.merchant.mdrPlan.superPremiumOrSignature.fixed.$touch"
+                  :error="v$.merchant.mdrPlan.superPremiumOrSignature.fixed.$error"
                   v-model="merchant.mdrPlan.superPremiumOrSignature.fixed"
                   placeholder="Fixed"
                 />
@@ -317,8 +317,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.superPremiumOrSignature.percentage.$touch"
-                  :error="$v.merchant.mdrPlan.superPremiumOrSignature.percentage.$error"
+                  @blur="v$.merchant.mdrPlan.superPremiumOrSignature.percentage.$touch"
+                  :error="v$.merchant.mdrPlan.superPremiumOrSignature.percentage.$error"
                   v-model="merchant.mdrPlan.superPremiumOrSignature.percentage"
                   placeholder="%"
                 />
@@ -327,8 +327,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.superPremiumOrSignature.minimum.$touch"
-                  :error="$v.merchant.mdrPlan.superPremiumOrSignature.minimum.$error"
+                  @blur="v$.merchant.mdrPlan.superPremiumOrSignature.minimum.$touch"
+                  :error="v$.merchant.mdrPlan.superPremiumOrSignature.minimum.$error"
                   v-model="merchant.mdrPlan.superPremiumOrSignature.minimum"
                   placeholder="Max"
                 />
@@ -341,8 +341,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.superPremiumOrSignature.fixed.$touch"
-                  :error="$v.merchant.SharingDiscountFee.superPremiumOrSignature.fixed.$error"
+                  @blur="v$.merchant.SharingDiscountFee.superPremiumOrSignature.fixed.$touch"
+                  :error="v$.merchant.SharingDiscountFee.superPremiumOrSignature.fixed.$error"
                   v-model="merchant.SharingDiscountFee.superPremiumOrSignature.fixed"
                   placeholder="Fixed"
                 />
@@ -351,8 +351,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.superPremiumOrSignature.percentage.$touch"
-                  :error="$v.merchant.SharingDiscountFee.superPremiumOrSignature.percentage.$error"
+                  @blur="v$.merchant.SharingDiscountFee.superPremiumOrSignature.percentage.$touch"
+                  :error="v$.merchant.SharingDiscountFee.superPremiumOrSignature.percentage.$error"
                   v-model="merchant.SharingDiscountFee.superPremiumOrSignature.percentage"
                   placeholder="%"
                 />
@@ -361,8 +361,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.superPremiumOrSignature.minimum.$touch"
-                  :error="$v.merchant.SharingDiscountFee.superPremiumOrSignature.minimum.$error"
+                  @blur="v$.merchant.SharingDiscountFee.superPremiumOrSignature.minimum.$touch"
+                  :error="v$.merchant.SharingDiscountFee.superPremiumOrSignature.minimum.$error"
                   v-model="merchant.SharingDiscountFee.superPremiumOrSignature.minimum"
                   placeholder="Max"
                 />
@@ -380,8 +380,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.commercialOrCorporate.fixed.$touch"
-                  :error="$v.merchant.mdrPlan.commercialOrCorporate.fixed.$error"
+                  @blur="v$.merchant.mdrPlan.commercialOrCorporate.fixed.$touch"
+                  :error="v$.merchant.mdrPlan.commercialOrCorporate.fixed.$error"
                   v-model="merchant.mdrPlan.commercialOrCorporate.fixed"
                   placeholder="Fixed"
                 />
@@ -390,8 +390,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.commercialOrCorporate.percentage.$touch"
-                  :error="$v.merchant.mdrPlan.commercialOrCorporate.percentage.$error"
+                  @blur="v$.merchant.mdrPlan.commercialOrCorporate.percentage.$touch"
+                  :error="v$.merchant.mdrPlan.commercialOrCorporate.percentage.$error"
                   v-model="merchant.mdrPlan.commercialOrCorporate.percentage"
                   placeholder="%"
                 />
@@ -400,8 +400,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.commercialOrCorporate.minimum.$touch"
-                  :error="$v.merchant.mdrPlan.commercialOrCorporate.minimum.$error"
+                  @blur="v$.merchant.mdrPlan.commercialOrCorporate.minimum.$touch"
+                  :error="v$.merchant.mdrPlan.commercialOrCorporate.minimum.$error"
                   v-model="merchant.mdrPlan.commercialOrCorporate.minimum"
                   placeholder="Max"
                 />
@@ -414,8 +414,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.commercialOrCorporate.fixed.$touch"
-                  :error="$v.merchant.SharingDiscountFee.commercialOrCorporate.fixed.$error"
+                  @blur="v$.merchant.SharingDiscountFee.commercialOrCorporate.fixed.$touch"
+                  :error="v$.merchant.SharingDiscountFee.commercialOrCorporate.fixed.$error"
                   v-model="merchant.SharingDiscountFee.commercialOrCorporate.fixed"
                   placeholder="Fixed"
                 />
@@ -424,8 +424,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.commercialOrCorporate.percentage.$touch"
-                  :error="$v.merchant.SharingDiscountFee.commercialOrCorporate.percentage.$error"
+                  @blur="v$.merchant.SharingDiscountFee.commercialOrCorporate.percentage.$touch"
+                  :error="v$.merchant.SharingDiscountFee.commercialOrCorporate.percentage.$error"
                   v-model="merchant.SharingDiscountFee.commercialOrCorporate.percentage"
                   placeholder="%"
                 />
@@ -434,8 +434,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.commercialOrCorporate.minimum.$touch"
-                  :error="$v.merchant.SharingDiscountFee.commercialOrCorporate.minimum.$error"
+                  @blur="v$.merchant.SharingDiscountFee.commercialOrCorporate.minimum.$touch"
+                  :error="v$.merchant.SharingDiscountFee.commercialOrCorporate.minimum.$error"
                   v-model="merchant.SharingDiscountFee.commercialOrCorporate.minimum"
                   placeholder="Max"
                 />
@@ -453,8 +453,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.internationalDebitCard.fixed.$touch"
-                  :error="$v.merchant.mdrPlan.internationalDebitCard.fixed.$error"
+                  @blur="v$.merchant.mdrPlan.internationalDebitCard.fixed.$touch"
+                  :error="v$.merchant.mdrPlan.internationalDebitCard.fixed.$error"
                   v-model="merchant.mdrPlan.internationalDebitCard.fixed"
                   placeholder="Fixed"
                 />
@@ -463,8 +463,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.internationalDebitCard.percentage.$touch"
-                  :error="$v.merchant.mdrPlan.internationalDebitCard.percentage.$error"
+                  @blur="v$.merchant.mdrPlan.internationalDebitCard.percentage.$touch"
+                  :error="v$.merchant.mdrPlan.internationalDebitCard.percentage.$error"
                   v-model="merchant.mdrPlan.internationalDebitCard.percentage"
                   placeholder="%"
                 />
@@ -473,8 +473,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.internationalDebitCard.minimum.$touch"
-                  :error="$v.merchant.mdrPlan.internationalDebitCard.minimum.$error"
+                  @blur="v$.merchant.mdrPlan.internationalDebitCard.minimum.$touch"
+                  :error="v$.merchant.mdrPlan.internationalDebitCard.minimum.$error"
                   v-model="merchant.mdrPlan.internationalDebitCard.minimum"
                   placeholder="Max"
                 />
@@ -487,8 +487,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.internationalDebitCard.fixed.$touch"
-                  :error="$v.merchant.SharingDiscountFee.internationalDebitCard.fixed.$error"
+                  @blur="v$.merchant.SharingDiscountFee.internationalDebitCard.fixed.$touch"
+                  :error="v$.merchant.SharingDiscountFee.internationalDebitCard.fixed.$error"
                   v-model="merchant.SharingDiscountFee.internationalDebitCard.fixed"
                   placeholder="Fixed"
                 />
@@ -497,8 +497,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.internationalDebitCard.percentage.$touch"
-                  :error="$v.merchant.SharingDiscountFee.internationalDebitCard.percentage.$error"
+                  @blur="v$.merchant.SharingDiscountFee.internationalDebitCard.percentage.$touch"
+                  :error="v$.merchant.SharingDiscountFee.internationalDebitCard.percentage.$error"
                   v-model="merchant.SharingDiscountFee.internationalDebitCard.percentage"
                   placeholder="%"
                 />
@@ -507,8 +507,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.internationalDebitCard.minimum.$touch"
-                  :error="$v.merchant.SharingDiscountFee.internationalDebitCard.minimum.$error"
+                  @blur="v$.merchant.SharingDiscountFee.internationalDebitCard.minimum.$touch"
+                  :error="v$.merchant.SharingDiscountFee.internationalDebitCard.minimum.$error"
                   v-model="merchant.SharingDiscountFee.internationalDebitCard.minimum"
                   placeholder="Max"
                 />
@@ -526,8 +526,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.internationalCreditCard.fixed.$touch"
-                  :error="$v.merchant.mdrPlan.internationalCreditCard.fixed.$error"
+                  @blur="v$.merchant.mdrPlan.internationalCreditCard.fixed.$touch"
+                  :error="v$.merchant.mdrPlan.internationalCreditCard.fixed.$error"
                   v-model="merchant.mdrPlan.internationalCreditCard.fixed"
                   placeholder="Fixed"
                 />
@@ -536,8 +536,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.internationalCreditCard.percentage.$touch"
-                  :error="$v.merchant.mdrPlan.internationalCreditCard.percentage.$error"
+                  @blur="v$.merchant.mdrPlan.internationalCreditCard.percentage.$touch"
+                  :error="v$.merchant.mdrPlan.internationalCreditCard.percentage.$error"
                   v-model="merchant.mdrPlan.internationalCreditCard.percentage"
                   placeholder="%"
                 />
@@ -546,8 +546,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.internationalCreditCard.minimum.$touch"
-                  :error="$v.merchant.mdrPlan.internationalCreditCard.minimum.$error"
+                  @blur="v$.merchant.mdrPlan.internationalCreditCard.minimum.$touch"
+                  :error="v$.merchant.mdrPlan.internationalCreditCard.minimum.$error"
                   v-model="merchant.mdrPlan.internationalCreditCard.minimum"
                   placeholder="Max"
                 />
@@ -560,8 +560,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.internationalCreditCard.fixed.$touch"
-                  :error="$v.merchant.SharingDiscountFee.internationalCreditCard.fixed.$error"
+                  @blur="v$.merchant.SharingDiscountFee.internationalCreditCard.fixed.$touch"
+                  :error="v$.merchant.SharingDiscountFee.internationalCreditCard.fixed.$error"
                   v-model="merchant.SharingDiscountFee.internationalCreditCard.fixed"
                   placeholder="Fixed"
                 />
@@ -570,8 +570,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.internationalCreditCard.percentage.$touch"
-                  :error="$v.merchant.SharingDiscountFee.internationalCreditCard.percentage.$error"
+                  @blur="v$.merchant.SharingDiscountFee.internationalCreditCard.percentage.$touch"
+                  :error="v$.merchant.SharingDiscountFee.internationalCreditCard.percentage.$error"
                   v-model="merchant.SharingDiscountFee.internationalCreditCard.percentage"
                   placeholder="%"
                 />
@@ -580,8 +580,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.internationalCreditCard.minimum.$touch"
-                  :error="$v.merchant.SharingDiscountFee.internationalCreditCard.minimum.$error"
+                  @blur="v$.merchant.SharingDiscountFee.internationalCreditCard.minimum.$touch"
+                  :error="v$.merchant.SharingDiscountFee.internationalCreditCard.minimum.$error"
                   v-model="merchant.SharingDiscountFee.internationalCreditCard.minimum"
                   placeholder="Max"
                 />
@@ -599,8 +599,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.onus.fixed.$touch"
-                  :error="$v.merchant.mdrPlan.onus.fixed.$error"
+                  @blur="v$.merchant.mdrPlan.onus.fixed.$touch"
+                  :error="v$.merchant.mdrPlan.onus.fixed.$error"
                   v-model="merchant.mdrPlan.onus.fixed"
                   placeholder="Fixed"
                 />
@@ -609,8 +609,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.onus.percentage.$touch"
-                  :error="$v.merchant.mdrPlan.onus.percentage.$error"
+                  @blur="v$.merchant.mdrPlan.onus.percentage.$touch"
+                  :error="v$.merchant.mdrPlan.onus.percentage.$error"
                   v-model="merchant.mdrPlan.onus.percentage"
                   placeholder="%"
                 />
@@ -619,8 +619,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.onus.minimum.$touch"
-                  :error="$v.merchant.mdrPlan.onus.minimum.$error"
+                  @blur="v$.merchant.mdrPlan.onus.minimum.$touch"
+                  :error="v$.merchant.mdrPlan.onus.minimum.$error"
                   v-model="merchant.mdrPlan.onus.minimum"
                   placeholder="Max"
                 />
@@ -633,8 +633,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.onus.fixed.$touch"
-                  :error="$v.merchant.SharingDiscountFee.onus.fixed.$error"
+                  @blur="v$.merchant.SharingDiscountFee.onus.fixed.$touch"
+                  :error="v$.merchant.SharingDiscountFee.onus.fixed.$error"
                   v-model="merchant.SharingDiscountFee.onus.fixed"
                   placeholder="Fixed"
                 />
@@ -643,8 +643,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.onus.percentage.$touch"
-                  :error="$v.merchant.SharingDiscountFee.onus.percentage.$error"
+                  @blur="v$.merchant.SharingDiscountFee.onus.percentage.$touch"
+                  :error="v$.merchant.SharingDiscountFee.onus.percentage.$error"
                   v-model="merchant.SharingDiscountFee.onus.percentage"
                   placeholder="%"
                 />
@@ -653,8 +653,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.onus.minimum.$touch"
-                  :error="$v.merchant.SharingDiscountFee.onus.minimum.$error"
+                  @blur="v$.merchant.SharingDiscountFee.onus.minimum.$touch"
+                  :error="v$.merchant.SharingDiscountFee.onus.minimum.$error"
                   v-model="merchant.SharingDiscountFee.onus.minimum"
                   placeholder="Max"
                 />
@@ -672,8 +672,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.mVisa.fixed.$touch"
-                  :error="$v.merchant.mdrPlan.mVisa.fixed.$error"
+                  @blur="v$.merchant.mdrPlan.mVisa.fixed.$touch"
+                  :error="v$.merchant.mdrPlan.mVisa.fixed.$error"
                   v-model="merchant.mdrPlan.mVisa.fixed"
                   placeholder="Fixed"
                 />
@@ -682,8 +682,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.mVisa.percentage.$touch"
-                  :error="$v.merchant.mdrPlan.mVisa.percentage.$error"
+                  @blur="v$.merchant.mdrPlan.mVisa.percentage.$touch"
+                  :error="v$.merchant.mdrPlan.mVisa.percentage.$error"
                   v-model="merchant.mdrPlan.mVisa.percentage"
                   placeholder="%"
                 />
@@ -692,8 +692,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.mVisa.minimum.$touch"
-                  :error="$v.merchant.mdrPlan.mVisa.minimum.$error"
+                  @blur="v$.merchant.mdrPlan.mVisa.minimum.$touch"
+                  :error="v$.merchant.mdrPlan.mVisa.minimum.$error"
                   v-model="merchant.mdrPlan.mVisa.minimum"
                   placeholder="Max"
                 />
@@ -706,8 +706,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.mVisa.fixed.$touch"
-                  :error="$v.merchant.SharingDiscountFee.mVisa.fixed.$error"
+                  @blur="v$.merchant.SharingDiscountFee.mVisa.fixed.$touch"
+                  :error="v$.merchant.SharingDiscountFee.mVisa.fixed.$error"
                   v-model="merchant.SharingDiscountFee.mVisa.fixed"
                   placeholder="Fixed"
                 />
@@ -716,8 +716,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.mVisa.percentage.$touch"
-                  :error="$v.merchant.SharingDiscountFee.mVisa.percentage.$error"
+                  @blur="v$.merchant.SharingDiscountFee.mVisa.percentage.$touch"
+                  :error="v$.merchant.SharingDiscountFee.mVisa.percentage.$error"
                   v-model="merchant.SharingDiscountFee.mVisa.percentage"
                   placeholder="%"
                 />
@@ -726,8 +726,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.mVisa.minimum.$touch"
-                  :error="$v.merchant.SharingDiscountFee.mVisa.minimum.$error"
+                  @blur="v$.merchant.SharingDiscountFee.mVisa.minimum.$touch"
+                  :error="v$.merchant.SharingDiscountFee.mVisa.minimum.$error"
                   v-model="merchant.SharingDiscountFee.mVisa.minimum"
                   placeholder="Max"
                 />
@@ -745,8 +745,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.masterPass.fixed.$touch"
-                  :error="$v.merchant.mdrPlan.masterPass.fixed.$error"
+                  @blur="v$.merchant.mdrPlan.masterPass.fixed.$touch"
+                  :error="v$.merchant.mdrPlan.masterPass.fixed.$error"
                   v-model="merchant.mdrPlan.masterPass.fixed"
                   placeholder="Fixed"
                 />
@@ -755,8 +755,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.masterPass.percentage.$touch"
-                  :error="$v.merchant.mdrPlan.masterPass.percentage.$error"
+                  @blur="v$.merchant.mdrPlan.masterPass.percentage.$touch"
+                  :error="v$.merchant.mdrPlan.masterPass.percentage.$error"
                   v-model="merchant.mdrPlan.masterPass.percentage"
                   placeholder="%"
                 />
@@ -765,8 +765,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.masterPass.fixed.$touch"
-                  :error="$v.merchant.mdrPlan.masterPass.fixed.$error"
+                  @blur="v$.merchant.mdrPlan.masterPass.fixed.$touch"
+                  :error="v$.merchant.mdrPlan.masterPass.fixed.$error"
                   v-model="merchant.mdrPlan.masterPass.fixed"
                   placeholder="Max"
                 />
@@ -779,8 +779,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.masterPass.fixed.$touch"
-                  :error="$v.merchant.SharingDiscountFee.masterPass.fixed.$error"
+                  @blur="v$.merchant.SharingDiscountFee.masterPass.fixed.$touch"
+                  :error="v$.merchant.SharingDiscountFee.masterPass.fixed.$error"
                   v-model="merchant.SharingDiscountFee.masterPass.fixed"
                   placeholder="Fixed"
                 />
@@ -789,8 +789,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.masterPass.percentage.$touch"
-                  :error="$v.merchant.SharingDiscountFee.masterPass.percentage.$error"
+                  @blur="v$.merchant.SharingDiscountFee.masterPass.percentage.$touch"
+                  :error="v$.merchant.SharingDiscountFee.masterPass.percentage.$error"
                   v-model="merchant.SharingDiscountFee.masterPass.percentage"
                   placeholder="%"
                 />
@@ -799,8 +799,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.masterPass.minimum.$touch"
-                  :error="$v.merchant.SharingDiscountFee.masterPass.minimum.$error"
+                  @blur="v$.merchant.SharingDiscountFee.masterPass.minimum.$touch"
+                  :error="v$.merchant.SharingDiscountFee.masterPass.minimum.$error"
                   v-model="merchant.SharingDiscountFee.masterPass.minimum"
                   placeholder="Max"
                 />
@@ -818,8 +818,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.cashAtPos.fixed.$touch"
-                  :error="$v.merchant.mdrPlan.cashAtPos.fixed.$error"
+                  @blur="v$.merchant.mdrPlan.cashAtPos.fixed.$touch"
+                  :error="v$.merchant.mdrPlan.cashAtPos.fixed.$error"
                   v-model="merchant.mdrPlan.cashAtPos.fixed"
                   placeholder="Fixed"
                 />
@@ -828,8 +828,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.cashAtPos.percentage.$touch"
-                  :error="$v.merchant.mdrPlan.cashAtPos.percentage.$error"
+                  @blur="v$.merchant.mdrPlan.cashAtPos.percentage.$touch"
+                  :error="v$.merchant.mdrPlan.cashAtPos.percentage.$error"
                   v-model="merchant.mdrPlan.cashAtPos.percentage"
                   placeholder="%"
                 />
@@ -838,8 +838,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.mdrPlan.cashAtPos.minimum.$touch"
-                  :error="$v.merchant.mdrPlan.cashAtPos.minimum.$error"
+                  @blur="v$.merchant.mdrPlan.cashAtPos.minimum.$touch"
+                  :error="v$.merchant.mdrPlan.cashAtPos.minimum.$error"
                   v-model="merchant.mdrPlan.cashAtPos.minimum"
                   placeholder="Max"
                 />
@@ -852,8 +852,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.cashAtPos.fixed.$touch"
-                  :error="$v.merchant.SharingDiscountFee.cashAtPos.fixed.$error"
+                  @blur="v$.merchant.SharingDiscountFee.cashAtPos.fixed.$touch"
+                  :error="v$.merchant.SharingDiscountFee.cashAtPos.fixed.$error"
                   v-model="merchant.SharingDiscountFee.cashAtPos.fixed"
                   placeholder="Fixed"
                 />
@@ -862,8 +862,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.cashAtPos.percentage.$touch"
-                  :error="$v.merchant.SharingDiscountFee.cashAtPos.percentage.$error"
+                  @blur="v$.merchant.SharingDiscountFee.cashAtPos.percentage.$touch"
+                  :error="v$.merchant.SharingDiscountFee.cashAtPos.percentage.$error"
                   v-model="merchant.SharingDiscountFee.cashAtPos.percentage"
                   placeholder="%"
                 />
@@ -872,8 +872,8 @@
                 <q-input
                   color="grey-9"
                   type="number"
-                  @blur="$v.merchant.SharingDiscountFee.cashAtPos.minimum.$touch"
-                  :error="$v.merchant.SharingDiscountFee.cashAtPos.minimum.$error"
+                  @blur="v$.merchant.SharingDiscountFee.cashAtPos.minimum.$touch"
+                  :error="v$.merchant.SharingDiscountFee.cashAtPos.minimum.$error"
                   v-model="merchant.SharingDiscountFee.cashAtPos.minimum"
                   placeholder="Max"
                 />
@@ -912,7 +912,11 @@ import {
   between,
   numeric
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   // name: 'ComponentName',
   props: [
     "sharingModelCode",
@@ -924,7 +928,7 @@ export default {
     return {
       merchant: {
         mdrPlan: {},
-        sharingDiscountFee: {}
+        SharingDiscountFee: {}
       }
     };
   },
@@ -1274,7 +1278,7 @@ export default {
   computed: {
     makePropsReactive() {
       this.merchant.mdrPlan = this.mdrPlan;
-      this.merchant.sharingDiscountFee = this.sharingDiscountFee;
+      this.merchant.SharingDiscountFee = this.SharingDiscountFee;
     },
     showOnlyIfSharingModelIsEnabled() {
       // N => No sharing
@@ -1283,8 +1287,8 @@ export default {
   },
   methods: {
     validate() {
-      this.$v.merchant.$touch();
-      if (this.$v.merchant.$error) {
+      this.v$.merchant.$touch();
+      if (this.v$.merchant.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$emit("goNext", "mdr", this.merchant);

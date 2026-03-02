@@ -33,6 +33,7 @@
  import AggregatorGlobalSearchFilter from "../../pages/sat/AggregatorGlobalSearchFilter.vue";
 
 import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "inventoryAllocation",
 

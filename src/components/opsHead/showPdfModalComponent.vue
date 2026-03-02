@@ -14,7 +14,7 @@
         </div>
         <div class="row q-py-sm">
           <div class="full-width">
-              <vuePdfjs :url="GLOBAL_FILE_FETCH_URL+'/'+itemDetails" :type="0" :height="'400px'" style="max-width:100%"></vuePdfjs>
+              <VuePdfEmbed :source="GLOBAL_FILE_FETCH_URL+'/'+itemDetails" :type="0" :height="'400px'" style="max-width:100%" />
           </div>
         </div>
     </q-dialog>
@@ -23,12 +23,12 @@
 
 <script>
 import { url } from '@vuelidate/validators';
-import vuePdfjs from "vue-pdfjs";
+
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
-    vuePdfjs
+
   },
   props: ["propToggleshowPDFModal", "propPDFDetails"],
   data() {

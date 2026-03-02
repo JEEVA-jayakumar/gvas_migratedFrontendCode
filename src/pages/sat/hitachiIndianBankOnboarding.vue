@@ -99,7 +99,7 @@
               color="tertiary"
               align="justify"
               v-model="selectedTab"
-              @update:model-value="goToUnassignedTab"
+
             >
               <q-tab
                 class="size1"
@@ -123,22 +123,24 @@
                   color="dark"
                   @request="ajaxLoadAllLeadInfo1"
                 >
-                  <q-td
-                    v-slot:body-cell-tid="props"
+                  <template v-slot:body-cell-tid="props">
+          <q-td
                     :props="props"
                     class="customTd"
                   >
                     <div class="text-primary">{{ props.row.tid }}</div>
                   </q-td>
-                  <q-td
-                    v-slot:body-cell-mid="props"
+        </template>
+                  <template v-slot:body-cell-mid="props">
+          <q-td
                     :props="props"
                     class="customTd"
                   >
                     <div class="text-primary">{{ props.row.mid }}</div>
                   </q-td>
-                  <q-td
-                    v-slot:body-cell-createdAt="props"
+        </template>
+                  <template v-slot:body-cell-createdAt="props">
+          <q-td
                     :props="props"
                     >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
                   >
@@ -194,7 +196,8 @@
                       >Re-Submit</q-btn
                     >
                   </q-td>
-                  <template slot="top">
+        </template>
+                  <template v-slot:top>
                     <div class="col-md-4">
                       <q-input
                         clearable
@@ -241,6 +244,7 @@
 import { required, email, not, or } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import downloadIndianBankReports from "../../components/sat/downloadIndianBankReports.vue";
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "implementationQueue",
   components: {
@@ -498,9 +502,9 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
+                error.data.message == null
                   ? "Please Try Again Later !"
-                  : error.body.message,
+                  : error.data.message,
               icon: "thumb_down"
             });
           });
@@ -658,9 +662,9 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              error.body.message == null
+              error.data.message == null
                 ? "Please Try Again Later !"
-                : error.body.message,
+                : error.data.message,
             icon: "thumb_down"
           });
         });

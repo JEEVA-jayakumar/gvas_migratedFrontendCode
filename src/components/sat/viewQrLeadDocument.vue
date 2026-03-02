@@ -1590,6 +1590,7 @@ import { mapGetters, mapActions } from "vuex";
 import showQrPdfModalComponent from "../../components/sat/showQrPdfModalComponent.vue";
 import showDocumentQrLeadApproveComponent from "../../components/sat/showDocumentQrLeadApproveComponent.vue";
 import showDocumentQrLeadRejectComponent from "../../components/sat/showDocumentQrLeadRejectComponent.vue";
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "viewQrLeadDocument",
   props: ["propLeadDocumentInformation", "propGetShortInfo"],
@@ -2044,7 +2045,7 @@ export default {
 //       this.$q.notify({
 //         color: "negative",
 //         position: "bottom",
-//         message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+//         message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
 //         icon: "thumb_down"
 //       });
 //     });
@@ -2148,7 +2149,7 @@ saveformsLists(fileName, mimeType, formTypeToUpdate) {
       this.$q.notify({
         color: "negative",
         position: "bottom",
-        message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+        message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
         icon: "thumb_down"
       });
     });
@@ -2317,15 +2318,15 @@ saveformsLists(fileName, mimeType, formTypeToUpdate) {
               //   innerSelf.merchantTypeSelection
               // );
               this.$q.loading.hide();
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.loading.hide();
               innerSelf.$q.notify({
                 color: "negative",
                 position: "bot  tom",
                 message:
-                  error.body.message == null
+                  error.data.message == null
                     ? "Please Try Again Later !"
-                    : error.body.message,
+                    : error.data.message,
                 icon: "thumb_down"
               });
             });

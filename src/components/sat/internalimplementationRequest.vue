@@ -218,6 +218,7 @@ import DeviceAddressModal from "../../components/sat/DeviceAddressModal.vue";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 import assigned from "../../components/sat/assigned.vue";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "implementationQueue",
   components: {

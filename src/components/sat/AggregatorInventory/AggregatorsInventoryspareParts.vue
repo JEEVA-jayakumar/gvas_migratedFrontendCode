@@ -233,8 +233,8 @@
                     <template>
                         <div class="col-sm-3">
                             <div class="row">
-                                <q-select filter clearable v-model="formData.allocate_so" @blur="$v.formData.allocate_so.$touch"
-                                    :error="$v.formData.allocate_so.$error" label="Select SO" class="col-md-3"
+                                <q-select filter clearable v-model="formData.allocate_so" @blur="v$.formData.allocate_so.$touch"
+                                    :error="v$.formData.allocate_so.$error" label="Select SO" class="col-md-3"
                                     radio color="grey-9" :options="regionBasedSo" @request="regionBasedSoLoad" />
                             </div>
                             <div class="col-md-7">
@@ -337,8 +337,12 @@ import {
     minValue,
     decimal
 } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 import { stringify } from "json5";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
     name: "getserviceRequestGetTypes",
     components: {
         PhonepeSoPodList,
@@ -856,7 +860,7 @@ export default {
         //           this.$q.notify({
         //             color: "negative",
         //             position: "bottom",
-        //             message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+        //             message: error.data.message == null ? "Please Try Again Later !" : error.data.message,
         //             icon: "thumb_down"
         //           });
         //         });
@@ -953,7 +957,7 @@ export default {
                                     this.$q.notify({
                                         color: 'negative',
                                         position: 'bottom',
-                                        message: error.body.message == null ? 'Please Try Again Later !' : error.body.message,
+                                        message: error.data.message == null ? 'Please Try Again Later !' : error.data.message,
                                         icon: 'thumb_down'
                                     })
                                 })
@@ -963,7 +967,7 @@ export default {
                             this.$q.notify({
                                 color: 'negative',
                                 position: 'bottom',
-                                message: error.body.message == null ? 'Please Try Again Later !' : error.body.message,
+                                message: error.data.message == null ? 'Please Try Again Later !' : error.data.message,
                                 icon: 'thumb_down'
                             })
                         })
@@ -1104,8 +1108,8 @@ export default {
             //     : this.formData.allocate_region);
             this.formData.allocate_region = JSON.parse(localStorage.getItem('u_i')).region
             this.formData.allocate_reseller = JSON.parse(this.formData.allocate_reseller == '' ? null : this.formData.allocate_reseller)
-            this.$v.formData.$touch();
-            if (this.$v.formData.$error) {
+            this.v$.formData.$touch();
+            if (this.v$.formData.$error) {
                 this.$q.notify({
                     color: "negative",
                     position: "bottom",
@@ -1133,9 +1137,9 @@ export default {
                             color: 'negative',
                             position: 'bottom',
                             message:
-                                error.body.message == null
+                                error.data.message == null
                                     ? 'Please Try Again Later !'
-                                    : error.body.message,
+                                    : error.data.message,
                             icon: 'thumb_down'
                         })
                     })
@@ -1304,7 +1308,7 @@ export default {
                         })
                     })
                     this.$q.loading.hide()
-                }).onCancel(() => {
+                }).catch(() => {
                     this.$q.notify({
                         color: 'negative',
                         position: 'bottom',
@@ -1337,7 +1341,7 @@ export default {
                         })
                     })
                     this.$q.loading.hide()
-                }).onCancel(() => {
+                }).catch(() => {
                     this.$q.notify({
                         color: 'negative',
                         position: 'bottom',

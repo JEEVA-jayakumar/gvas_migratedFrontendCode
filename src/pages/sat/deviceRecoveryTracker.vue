@@ -131,7 +131,7 @@
             >
               <div class="text-primary">{{ props.row.mid }}</div>
             </q-td>
-            <template slot="top">
+            <template v-slot:top>
               <!--START: table filter,search -->
               <div class="col-md-5">
                 <q-input
@@ -212,7 +212,7 @@
                 {{ props.row.deviceAddress }}
               </div>
             </q-td>
-            <template slot="top">
+            <template v-slot:top>
               <!--START: table filter,search -->
               <div class="col-md-5">
                 <q-input
@@ -247,6 +247,7 @@
 import { required, email, not, or } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "implementationQueue",
   data() {
@@ -383,7 +384,7 @@ export default {
           align: "left",
           field: (row) => {
             // return row.leadInformation.submitToMarsDate;
-            return  (row.leadInformation==null||row.leadInformation.submitToMarsDate==null)?"NA":row.leadInformation.submitToMarsDate || (row.qrLeadInformation==null||row.qrLeadInformation.submitMarsDate==null)? "NA" :row.qrLeadInformation.submitMarsDate | moment("Do MMM Y")
+            return  (row.leadInformation==null||row.leadInformation.submitToMarsDate==null)?"NA":row.leadInformation.submitToMarsDate || (row.qrLeadInformation==null||row.qrLeadInformation.submitMarsDate==null)? "NA" :$moment(row.qrLeadInformation.submitMarsDate).format("Do MMM Y")
           },
           format: (val) => `${val}|moment("Do MMM Y")`,
           sortable: true,
@@ -501,7 +502,7 @@ export default {
           align: "left",
           field: (row) => {
             // return row.leadInformation.submitToMarsDate;
-            return  (row.leadInformation==null||row.leadInformation.submitToMarsDate==null)?"NA":row.leadInformation.submitToMarsDate || (row.qrLeadInformation==null||row.qrLeadInformation.submitMarsDate==null)? "NA" :row.qrLeadInformation.submitMarsDate | moment("Do MMM Y")
+            return  (row.leadInformation==null||row.leadInformation.submitToMarsDate==null)?"NA":row.leadInformation.submitToMarsDate || (row.qrLeadInformation==null||row.qrLeadInformation.submitMarsDate==null)? "NA" :$moment(row.qrLeadInformation.submitMarsDate).format("Do MMM Y")
           },
           format: (val) => `${val}|moment("Do MMM Y")`,
           sortable: true,

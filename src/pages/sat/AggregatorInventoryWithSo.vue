@@ -9,14 +9,18 @@
       </div> -->
       <div>
         <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filter" v-model:pagination="paginationControl" row-key="name" @request="ajaxLoadAllLeadInfo">
-          <q-td v-slot:body-cell-created_at="props" :props="props">{{
+          <template v-slot:body-cell-created_at="props">
+          <q-td :props="props">{{
             props.row.created_at == null ? "NA" :
-              props.row.created_at | moment("Do MMM Y")
+              $moment(props.row.created_at).format("Do MMM Y")
           }}</q-td>
-          <q-td v-slot:body-cell-updated_at="props" :props="props">{{
+        </template>
+          <template v-slot:body-cell-updated_at="props">
+          <q-td :props="props">{{
             props.row.updated_at == null ? "NA" :
-              props.row.updated_at | moment("Do MMM Y")
+              $moment(props.row.updated_at).format("Do MMM Y")
           }}</q-td>
+        </template>
           <template v-slot:top="props">
             <div class="col-md-5">
               <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
@@ -52,6 +56,7 @@ import moment from "moment";
 import DownloadAggregatorsInventoryWithSoList from "../../components/inventory/DownloadAggregatorsInventoryWithSoList.vue";
 import axios from "axios";
 
+import { useVuelidate } from "@vuelidate/core";
 export default {
   name: "merchantTracker",
   components: {
