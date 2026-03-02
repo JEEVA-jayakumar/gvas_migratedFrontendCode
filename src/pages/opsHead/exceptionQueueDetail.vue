@@ -8,7 +8,7 @@
           <div
             class="text-light-blue cursor-pointer"
             @click="toggleLeadInformation(formData.shortLead)"
-          ># {{formData.shortLead.id}}</div>
+          ># {{formData.shortLead.leadId || formData.shortLead.id || formData.shortLead.leadNumber}}</div>
         </div>
         <div class="col">
           <div class="text-h6 q-my-md">Contact</div>
