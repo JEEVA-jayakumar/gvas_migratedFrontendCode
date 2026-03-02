@@ -3,36 +3,40 @@
         <q-dialog
         v-model="toggleModal"  
         persistent
+        @hide="emitModalToggle"
         >
-          <q-card style="min-width: 50vw;">
+          <q-card style="min-width: 50vw; padding: 10px;">
             <q-card-section>
-              <div class="text-h6 text-weight-regular">Reject Exception</div>
+              <div class="row text-center">
+                  <div class="col-md-12 justify-center">
+                      <div class="text-h6 text-weight-regular">Reject Exception</div>
+                  </div>
+                  <div class="col-md-12 q-pt-md">
+                      <q-input
+                        type="textarea"
+                        color="grey-9"
+                        v-model="formData.leadVerificationStatus.reason"
+                        label="Enter reason for reject"
+                        placeholder="type.."
+                        autofocus
+                      />
+                  </div>
+                  <div class="col-md-12 q-pt-md" align="right">
+                      <q-btn
+                        outline
+                        label="Cancel"
+                        @click="emitModalToggle"
+                        class="q-mr-sm"
+                        v-close-overlay
+                      />
+                      <q-btn
+                        color="primary"
+                        label="Submit"
+                        @click="fnFinalRejectSubmit(formData)"
+                      />
+                  </div>
+              </div>
             </q-card-section>
-
-            <q-card-section class="q-pt-none">
-              <q-input
-                type="textarea"
-                color="grey-9"
-                v-model="formData.leadVerificationStatus.reason"
-                label="Enter reason for reject"
-                placeholder="type.."
-                autofocus
-              />
-            </q-card-section>
-
-            <q-card-actions align="right">
-              <q-btn
-                flat
-                label="Cancel"
-                @click="emitModalToggle"
-                v-close-overlay
-              />
-              <q-btn
-                color="primary"
-                label="Submit"
-                @click="fnFinalRejectSubmit(formData)"
-              />
-            </q-card-actions>
           </q-card>
         </q-dialog>
     </div>
@@ -97,15 +101,16 @@ export default {
               });
               this.FETCH_ALL_EXCEPTION_KYC_DATA();
               this.emitModalToggle();
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
                 message: "Error in rejecting exception!",
                 icon: "thumb_down"
               });
+            }).finally(() => {
+              this.TOGGLE_COMMON_LOADER(false);
             });
-          this.TOGGLE_COMMON_LOADER(false);
         })
         .onCancel(() => {
           this.$q.notify({

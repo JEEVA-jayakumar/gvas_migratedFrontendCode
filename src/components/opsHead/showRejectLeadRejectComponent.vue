@@ -4,12 +4,12 @@
       persistent
       v-model="toggleModal"
     >
-      <q-card style="min-width: 40vw;">
-        <q-card-section>
-          <div class="text-h6">Are you sure want to reject?</div>
+      <q-card style="min-width: 40vw; padding: 30px;">
+        <q-card-section class="no-padding">
+          <div class="text-h6 q-py-md">Are you sure want to reject?</div>
         </q-card-section>
 
-        <q-card-section class="q-pt-none">
+        <q-card-section class="q-pt-none no-padding">
           <q-input
             v-model="formData.leadInformation.reason"
             @blur="v$.formData.leadInformation.reason.$touch"
@@ -21,20 +21,21 @@
           />
         </q-card-section>
 
-        <q-card-actions align="right">
-          <q-btn
-            icon="block"
-            color="grey-5"
-            @click="emitToggleRemarks()"
-            class="text-dark"
-            v-close-overlay
-            label="Cancel"
-          />
+        <q-card-actions align="right" class="no-padding q-pt-md">
           <q-btn
             icon="clear"
             color="negative"
             @click="sendRemarks(formData)"
             label="Reject"
+            class="q-ma-sm"
+          />
+          <q-btn
+            icon="block"
+            color="grey-5"
+            @click="emitToggleRemarks()"
+            class="text-dark q-ma-sm"
+            v-close-overlay
+            label="Cancel"
           />
         </q-card-actions>
       </q-card>
