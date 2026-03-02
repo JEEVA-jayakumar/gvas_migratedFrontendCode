@@ -1,128 +1,65 @@
 <template>
-    <q-page>
-      <div class="text-grey-9">
-        <div class="row bottom-border q-pa-sm items-center">
-          <div class="col">
-            <q-tabs
-              no-pane-border
-              v-model="MarsApiOptionSelected"
-              color="dark"
-              filled
-              class="shadow-1"
-            >
-              <q-tab name="DeviceModelApiSync" label="DeviceModel" />
-              <q-tab name="CityApiSync" label="City" />
-              <q-tab name="RegionApiSync" label="Region" />
-              <q-tab name="RentalPlanApiSync" label="RentalPlan" />
-              <q-tab name="LeadFormApiSync" label="LeadForm" />
-              <q-tab name="StateApiSync" label="State" />
-</q-tabs>
-<q-tab-panels v-model="MarsApiOptionSelected" animated>
-<q-tab-panel name="DeviceModelApiSync">
-                <DeviceModelApiSync />
-              </q-tab-panel>
-<q-tab-panel name="CityApiSync">
-                <CityApiSync />
-              </q-tab-panel>
-<q-tab-panel name="RegionApiSync">
-                <RegionApiSync />
-              </q-tab-panel>
-<q-tab-panel name="RentalPlanApiSync">
-                <RentalPlanApiSync />
-              </q-tab-panel>
-<q-tab-panel name="LeadFormApiSync">
-                <LeadFormApiSync />
-              </q-tab-panel>
-<q-tab-panel name="StateApiSync">
-                <StateApiSync />
-              </q-tab-panel>
-</q-tab-panels>
-          </div>
-        </div>
-      </div>
-    </q-page>
-  </template>
-  
-  <script>
-  import DeviceModelApiSync from "../../pages/super_admin/DeviceModelApiSync.vue";
-  import CityApiSync from "../../pages/super_admin/CityApiSync.vue";
-  import RegionApiSync from "../../pages/super_admin/RegionApiSync.vue";
-  import RentalPlanApiSync from "../../pages/super_admin/RentalPlanApiSync.vue";
-  import LeadFormApiSync from "../../pages/super_admin/LeadFormApiSync.vue";
-  import StateApiSync from "../../pages/super_admin/StateApiSync.vue";
+  <q-page padding>
+    <q-tabs
+      v-model="MarsApiOptionSelected"
+      class="bg-white text-grey-7 shadow-1"
+      active-color="purple-9"
+      indicator-color="purple-9"
+      align="left"
+    >
+      <q-tab name="DeviceModel" label="Device Model" />
+      <q-tab name="City" label="City" />
+      <q-tab name="Region" label="Region" />
+      <q-tab name="RentalPlan" label="Rental Plan" />
+      <q-tab name="LeadForm" label="Lead Form" />
+      <q-tab name="State" label="State" />
+    </q-tabs>
 
-  
-  import { mapGetters, mapActions } from "vuex";
-  export default {
-    name: "marsApiSync",
-  
-    components: {
-        DeviceModelApiSync,
-        CityApiSync,
-        RegionApiSync,
-        RentalPlanApiSync,
-        LeadFormApiSync,
-        StateApiSync
-    },
-  
-    data() {
-      return {
-        enableUploadInventoryBtn: true,
-        toggleScanButton: true,
-        MarsApiOptionSelected: "count"
-      };
-    },
-  
-    // computed: {
-    //   ...mapGetters("SAT_RegionalInventoryAllocation", [
-    //     "getAllRegionalInventoryDeviceDetailsWithCount",
-    //     "getCurrentPODNumber",
-    //     "getCurrentDeviceId",
-    //     "getAllInventorywithsoDeviceDetailsWithCount"
-    //   ]),
-    //   ...mapGetters("InventoryWithSo", ["getAllInventoryWithSo"])
-    // },
-  
-    // created() {
-    //   this.fnAjaxFetchAllDeviceDetailsWithCount();
-    // },
-  
-    methods: {
-    //   ...mapActions("SAT_RegionalInventoryAllocation", [
-    //     "FETCH_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT",
-    //     "FETCH_REGIONAL_INVENTORY_SERIAL_NUMBER_BY_DEVICE",
-    //     "FETCH_INVENTORY_WITH_SO_DEVICE_DETAIL_WITH_COUNT"
-    //   ]),
-    //   ...mapActions("InventoryWithSo", ["FETCH_INVENTORY_WITH_SO"]),
-    //   fnAjaxFetchAllDeviceDetailsWithCount() {
-    //     this.toggleAjaxLoadFilter = true;
-    //     this.FETCH_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT(
-    //       JSON.parse(localStorage.getItem("u_i")).region.id
-    //     )
-    //       // this.FETCH_INVENTORY_WITH_SO_DEVICE_DETAIL_WITH_COUNT(
-    //       //   JSON.parse(localStorage.getItem("u_i")).region.id
-    //       // )
-    //       .then(() => {
-    //         let requestParams = {
-    //           region: JSON.parse(localStorage.getItem("u_i")).region.id,
-    //           action: this.$REGIONAL_INVENTORY_FILTER_ACTION_DEVICE
-    //         };
-    //         this.FETCH_REGIONAL_INVENTORY_SERIAL_NUMBER_BY_DEVICE(requestParams);
-    //         this.toggleAjaxLoadFilter = false;
-    //       })
-    //       .catch(error => {
-    //         this.toggleAjaxLoadFilter = false;
-    //       });
-    //   }
-    }
-  };
-  </script>
-  
-  <style>
-  .border-1 {
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    <q-tab-panels v-model="MarsApiOptionSelected" animated keep-alive class="bg-transparent">
+      <q-tab-panel name="DeviceModel" class="no-padding q-mt-md">
+        <DeviceModelApiSync />
+      </q-tab-panel>
+      <q-tab-panel name="City" class="no-padding q-mt-md">
+        <CityApiSync />
+      </q-tab-panel>
+      <q-tab-panel name="Region" class="no-padding q-mt-md">
+        <RegionApiSync />
+      </q-tab-panel>
+      <q-tab-panel name="RentalPlan" class="no-padding q-mt-md">
+        <RentalPlanApiSync />
+      </q-tab-panel>
+      <q-tab-panel name="LeadForm" class="no-padding q-mt-md">
+        <LeadFormApiSync />
+      </q-tab-panel>
+      <q-tab-panel name="State" class="no-padding q-mt-md">
+        <StateApiSync />
+      </q-tab-panel>
+    </q-tab-panels>
+  </q-page>
+</template>
+
+<script>
+import DeviceModelApiSync from "./DeviceModelApiSync.vue";
+import CityApiSync from "./CityApiSync.vue";
+import RegionApiSync from "./RegionApiSync.vue";
+import RentalPlanApiSync from "./RentalPlanApiSync.vue";
+import LeadFormApiSync from "./LeadFormApiSync.vue";
+import StateApiSync from "./StateApiSync.vue";
+
+export default {
+  name: "MarsApiSyncMain",
+  components: {
+    DeviceModelApiSync,
+    CityApiSync,
+    RegionApiSync,
+    RentalPlanApiSync,
+    LeadFormApiSync,
+    StateApiSync
+  },
+  data() {
+    return {
+      MarsApiOptionSelected: "DeviceModel"
+    };
   }
-  .border-2 {
-    border: 3px solid rgba(48, 48, 48, 0.5);
-  }
-  </style>
+};
+</script>
