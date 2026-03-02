@@ -1,262 +1,50 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header style="margin-left:0px" class="shadow-0 z-top" flat>
-      <customHeader @fnToggleSideMenu="fnMainToggleSideMenu"></customHeader>
+    <q-header class="bg-white" flat>
+      <customHeader @fnToggleSideMenu="fnMainToggleSideMenu" />
     </q-header>
 
-    <q-drawer class="no-shadow" v-model="leftDrawerOpen"
-      :width="250"
-      :style="{ background: getComputedColor }">
-      <q-scroll-area style="height: 100vh" :thumb-style="{
-        right: '4px',
+    <q-drawer
+      v-model="leftDrawerOpen"
+      show-if-above
+      bordered
+      :width="260"
+      :breakpoint="500"
+      class="bg-dark text-white"
+    >
+      <div class="q-py-md q-px-lg flex items-center" style="height: 65px; background: rgba(0,0,0,0.1)">
+        <img src="~assets/images/logo.png" style="height: 35px" />
+      </div>
+
+      <q-scroll-area style="height: calc(100% - 65px)" :thumb-style="{
+        right: '2px',
         borderRadius: '5px',
-        background: '#cecece',
+        backgroundColor: '#61116a',
         width: '5px',
-        opacity: 0.5
-      }" :delay="1500">
-        <q-list class="no-border" style="padding-top:65px">
-          <div>
-            <!-- Entry point for sat -->
-            <div v-if="
-              $q.localStorage.getItem('u_i') != undefined &&
-              showMenu.includes($ROLE_HIERARCHY_OPERATION_SAT)
-            ">
-            <div v-if="JSON.parse($q.localStorage.getItem('u_i')).region.regionAreaName == 'VARANEEK'">
-             <q-item
-                    v-for="menu in menus.varaneekSat"
-                    :key="menu.id"
-                    :to="menu.to"
-                    clickable
-                    class="menu-main-item-color"
-                  >
-                    <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
-                  </q-item>
-                  </div>
+        opacity: 0.75,
+      }">
+        <div class="q-px-md q-pt-md" v-if="showAggregatorSelect">
+          <q-select
+            filled
+            v-model="selectedValue"
+            label="Module View"
+            color="purple"
+            dark
+            dense
+            :options="aggregatorOptions"
+            emit-value
+            map-options
+            @update:model-value="handleAggregatorChange"
+            class="aggregator-select"
+          />
+        </div>
 
-                  <div v-else>
-              <template v-for="menu in menus.sat" :key="menu.id">
-                <q-item
-                  v-if="!menu.subItems || menu.subItems.length === 0"
-                  :to="menu.to"
-                  clickable
-                  class="menu-main-item-color"
-                >
-                  <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
-                </q-item>
-                <q-item v-else class="no-padding">
-                  <div class="col-12">
-                    <div
-                      class="col-12"
-                      v-if="(menu.name == 'Bijlipay')"
-                    >
-                      <q-select
-                        filled
-                        v-model="selectedValueSat"
-                        label="Please Select"
-                        color="white"
-                        dark
-                        class="cursor-pointer menu-item-color"
-                        :options="options"
-                        emit-value
-                        map-options
-                        @update:model-value="fnclickdropdownSat"
-                      />
-                    </div>
-                    <div
-                      v-if="selectedValueSat == menuListNameSat && menu.name == menuListNameSat"
-                      align="left"
-                    >
-                      <q-item
-                        v-for="subItem in menu.subItems"
-                        :key="subItem.id"
-                        :to="subItem.to"
-                        clickable
-                        class="menu-main-item-color"
-                      >
-                        <q-item-section class="cursor-pointer menu-item-color">{{ subItem.name }}</q-item-section>
-                      </q-item>
-                    </div>
-                    <div
-                      v-else-if="selectedValueSat == menuListNameSat && selectedValueSat != '' && selectedValueSat != 'Bijlipay'  && menu.name == 'Other' "
-                      align="left"
-                    >
-                      <q-item
-                        v-for="subItem in menu.subItems"
-                        :key="subItem.id"
-                        :to="subItem.to"
-                        clickable
-                        class="menu-main-item-color"
-                      >
-                        <q-item-section class="cursor-pointer menu-item-color">{{ subItem.name }}</q-item-section>
-                      </q-item>
-                    </div>
-                  </div>
-                </q-item>
-              </template>
-            </div>
-            </div>
-
-            <!-- Entry point for finance manager -->
-            <div
-              v-if="$q.localStorage.getItem('u_i') != undefined && (showMenu.includes($ROLE_HIERARCHY_FINANCE_HEAD) || showMenu.includes($ROLE_HIERARCHY_FINANCE_MANAGER) || showMenu.includes($ROLE_HIERARCHY_FINANCE_EXECUTIVE))">
-              <q-item v-for="menu in menus.finance" :key="menu.id" :to="menu.to" clickable class="menu-main-item-color">
-                <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
-              </q-item>
-            </div>
-
-            <!-- Entry point for inventory -->
-            <div
-              v-if="$q.localStorage.getItem('u_i') != undefined && showMenu.includes($ROLE_HIERARCHY_INVENTORY_OFFICER)">
-              <template v-for="menu in menus.inventory" :key="menu.id">
-                <q-item
-                  v-if="!menu.subItems || menu.subItems.length === 0"
-                  :to="menu.to"
-                  clickable
-                  class="menu-main-item-color"
-                >
-                  <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
-                </q-item>
-                <q-item v-else class="no-padding">
-                  <div class="col-12">
-                    <div
-                      class="col-12"
-                      v-if="(menu.name == 'Bijlipay')"
-                    >
-                      <q-select
-                        filled
-                        v-model="selectedValue"
-                        label="Please Select"
-                        color="white"
-                        dark
-                        class="cursor-pointer menu-item-color"
-                        :options="options"
-                        emit-value
-                        map-options
-                        @update:model-value="fnclickdropdown"
-                      />
-                    </div>
-                    <div
-                      v-if="selectedValue == menuListName && menu.name == menuListName"
-                      align="left"
-                    >
-                      <q-item
-                        v-for="subItem in menu.subItems"
-                        :key="subItem.id"
-                        :to="subItem.to"
-                        clickable
-                        class="menu-main-item-color"
-                      >
-                        <q-item-section class="cursor-pointer menu-item-color">{{ subItem.name }}</q-item-section>
-                      </q-item>
-                    </div>
-                    <div
-                      v-else-if="selectedValue == menuListName && selectedValue != 'Bijlipay' && selectedValue != '' && menu.name == 'Others'"
-                      align="left"
-                    >
-                      <q-item
-                        v-for="subItem in menu.subItems"
-                        :key="subItem.id"
-                        :to="subItem.to"
-                        clickable
-                        class="menu-main-item-color"
-                      >
-                        <q-item-section class="cursor-pointer menu-item-color">{{ subItem.name }}</q-item-section>
-                      </q-item>
-                    </div>
-                  </div>
-                </q-item>
-              </template>
-            </div>
-
-            <!-- Entry point for ksn inventory -->
-
-            <div
-              v-if="
-                $q.localStorage.getItem('u_i') != undefined &&
-                showMenu.includes($ROLE_HIERARCHY_KSN)
-              "
-            >
-              <q-item
-                v-for="menu in menus.ksn"
-                :key="menu.id"
-                :to="menu.to"
-                clickable
-                class="menu-main-item-color"
-              >
-                <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
-              </q-item>
-            </div>
-
-            <!-- Entry point for opeartions head -->
-            <div
-              v-if="$q.localStorage.getItem('u_i') != undefined && showMenu.includes($ROLE_HIERARCHY_OPERATIONS_HEAD)">
-              <template v-for="menu in menus.opsHead" :key="menu.id">
-                <q-item
-                  v-if="!menu.subItems || menu.subItems.length === 0"
-                  :to="menu.to"
-                  clickable
-                  class="menu-main-item-color"
-                >
-                  <q-item-section class="cursor-pointer menu-item-color">{{ menu.name }}</q-item-section>
-                </q-item>
-                <q-item v-else class="no-padding">
-                  <q-item-section class="menu-item-color">
-                    <q-expansion-item
-                      dense
-                      class="no-padding"
-                      header-class="no-padding menu-item-color"
-                      header-style="font-size:14px"
-                      label="Reports"
-                    >
-                      <q-item
-                        v-for="subItem in menu.subItems"
-                        :key="subItem.id"
-                        :to="subItem.to"
-                        clickable
-                        class="menu-main-item-color"
-                      >
-                        <q-item-section class="cursor-pointer menu-item-color">{{ subItem.name }}</q-item-section>
-                      </q-item>
-                    </q-expansion-item>
-                  </q-item-section>
-                </q-item>
-              </template>
-            </div>
-
-            <!-- Entry point for sales manager => RSM/ASM -->
-            <div
-              v-if="$q.localStorage.getItem('u_i') != undefined && (showMenu.includes($ROLE_HIERARCHY_SALES_RSM) || showMenu.includes($ROLE_HIERARCHY_SALES_ASM) || showMenu.includes($ROLE_HIERARCHY_SALES_NATIONAL_HEAD))">
-              <q-item v-for="menu in menus.salesManager" :key="menu.id" :to="menu.to" clickable class="menu-main-item-color">
-                <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
-              </q-item>
-            </div>
-
-            <!-- Entry point for sales manager => bank ops -->
-            <div v-if="$q.localStorage.getItem('u_i') != undefined && showMenu.includes($ROLE_HIERARCHY_BANK_OPS)">
-              <q-item v-for="menu in menus.bankOps" :key="menu.id" :to="menu.to" clickable class="menu-main-item-color">
-                <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
-              </q-item>
-            </div>
-
-            <!-- Entry point for CRM USERS -->
-            <div v-if="$q.localStorage.getItem('u_i') != undefined && showMenu.includes($HIERARCHY_CRM1)">
-              <q-item v-for="menu in menus.crm" :key="menu.id" :to="menu.to" clickable class="menu-main-item-color">
-                <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
-              </q-item>
-            </div>
-            <!-- Entry point for super admin/bijlipay managemnet -->
-            <div v-if="$q.localStorage.getItem('u_i') != undefined && showMenu.includes($ROLE_BIJLIPAY_MANAGER)">
-              <q-item v-for="menu in menus.superAdmin" :key="menu.id" :to="menu.to" clickable>
-                <q-item-section class="menu-item-color-SA">{{ menu.name}}</q-item-section>
-              </q-item>
-            </div>
-          </div>
-        </q-list>
+        <SidebarMenu :menus="currentMenus" />
       </q-scroll-area>
     </q-drawer>
 
-    <q-page-container>
-      <customBody></customBody>
+    <q-page-container class="bg-grey-2">
+      <customBody />
     </q-page-container>
   </q-layout>
 </template>
@@ -265,27 +53,30 @@
 import { mapGetters, mapActions } from "vuex"; 
 import customHeader from '../components/customHeader.vue';
 import customBody from '../components/customBody.vue';
+import SidebarMenu from '../components/SidebarMenu.vue';
 import _ from "lodash";
+
 export default {
+  name: 'MainLayout',
   components: {
     customHeader,
-    customBody
+    customBody,
+    SidebarMenu
   },
-  name: 'LayoutDefault',
   data() {
     return {
-      leftDrawerOpen: this.$q.platform.is.desktop
-        ? this.$route.name != 'leadDataEntry'
-        : false,
+      leftDrawerOpen: this.$q.localStorage.getItem("leftDrawerOpen") !== null
+        ? this.$q.localStorage.getItem("leftDrawerOpen")
+        : (this.$q.platform.is.desktop && this.$route.name != 'leadDataEntry'),
       propShowDatas: false,
       menuListName: '',
       menuListNameSat: '',
       name:'',
-      options: [],
+      aggregatorOptions: [],
       showMenu: [],
       array:[],
-      selectedValue: "",
-      selectedValueSat: "",
+      selectedValue: "Bijlipay",
+      selectedValueSat: "Bijlipay",
       menus: {
         varaneekSat: [
         {
@@ -554,22 +345,26 @@ export default {
             id: 1,
             to: "/finance/payment/verification/tracker",
             name: "Payment Verification Tracker",
+            icon: "verified_user",
           },
           {
             id: 2,
             to: "/finance/finance/approved/tracker",
-            name: "Finance Approved Tracker ",
+            name: "Finance Approved Tracker",
+            icon: "check_circle",
           },
           {
             id: 3,
             to: "/finance/lost/finance",
             name: "Lost/Stolen",
+            icon: "report_problem",
           },
           {
             id: 4,
-            to: '/finance/PosInventory',
-            name: 'Pos Inventory'
-          }
+            to: "/finance/PosInventory",
+            name: "Pos Inventory",
+            icon: "inventory_2",
+          },
         ],
         inventory: [
           {
@@ -803,26 +598,31 @@ export default {
             id: 1,
             to: "/crm/phonepePendingCrm",
             name: "Phonepe Service Request",
+            icon: "contact_support",
           },
           {
             id: 2,
             to: "/crm/bijlipayCrm",
             name: "Bijlipay Service Request",
+            icon: "support_agent",
           },
           {
             id: 3,
             to: "/crm/globalTicketSearch",
             name: "Global Ticket Search",
+            icon: "search",
           },
           {
             id: 288,
             to: "/crm/docviewer",
             name: "DOC View",
+            icon: "visibility",
           },
           {
             id: 888,
             to: "/crm/serviceticket",
             name: "Service Ticket",
+            icon: "confirmation_number",
           },
         ],
         opsHead: [
@@ -830,12 +630,14 @@ export default {
             id: 2,
             to: "/ops/head/exceptions",
             name: "Exceptions",
+            icon: "assignment_late",
             subItems: [],
           },
           {
             id: 3,
             to: null,
             name: "Reports",
+            icon: "bar_chart",
             subItems: [
               {
                 id: 1,
@@ -875,26 +677,31 @@ export default {
             id: 1,
             to: "/sales/manager/lead/allocation/tracker",
             name: "Lead Allocation Tracker",
+            icon: "assignment",
           },
           {
             id: 2,
             to: "/sales/manager/leads/status",
             name: "Leads Status",
+            icon: "query_stats",
           },
           {
             id: 3,
             to: "/sales/manager/revenue/trackers",
             name: "Revenue Trackers",
+            icon: "payments",
           },
           {
             id: 4,
             to: "/sales/manager/pricing/exception/verification",
             name: "Pricing Exception Verification",
+            icon: "fact_check",
           },
           {
             id: 6,
             to: "/sales/manager/aging/tracker/pending/leads",
             name: "Aging Tracker for Pending Leads",
+            icon: "history",
           },
         ],
         superAdmin: [
@@ -1223,13 +1030,72 @@ export default {
   },
   computed: {
     ...mapGetters("superAdminAggregators", ["getActiveCreatedAggregatorList"]),
-    getComputedColor() {
-      return this.$route.fullPath.includes("super/admin") ? "#773581" : "#202c3f";
+    currentMenus() {
+      let menuItems = [];
+      const userInfo = JSON.parse(localStorage.getItem("u_i"));
+      if (!userInfo) return [];
+
+      // SAT Module
+      if (this.showMenu.includes(this.$ROLE_HIERARCHY_OPERATION_SAT)) {
+        if (userInfo.region.regionAreaName == "VARANEEK") {
+          menuItems = menuItems.concat(this.menus.varaneekSat);
+        } else {
+          const satMenu = this.menus.sat.find(m => m.name === this.selectedValueSat) || this.menus.sat[0];
+          menuItems = menuItems.concat(satMenu.subItems);
+        }
+      }
+
+      // Finance Module
+      if (this.showMenu.includes(this.$ROLE_HIERARCHY_FINANCE_HEAD) ||
+          this.showMenu.includes(this.$ROLE_HIERARCHY_FINANCE_MANAGER) ||
+          this.showMenu.includes(this.$ROLE_HIERARCHY_FINANCE_EXECUTIVE)) {
+        menuItems = menuItems.concat(this.menus.finance);
+      }
+
+      // Inventory Module
+      if (this.showMenu.includes(this.$ROLE_HIERARCHY_INVENTORY_OFFICER)) {
+        const invMenu = this.menus.inventory.find(m => m.name === this.selectedValue) || this.menus.inventory[0];
+        menuItems = menuItems.concat(invMenu.subItems);
+      }
+
+      // KSN Module
+      if (this.showMenu.includes(this.$ROLE_HIERARCHY_KSN)) {
+        menuItems = menuItems.concat(this.menus.ksn);
+      }
+
+      // Operations Head Module
+      if (this.showMenu.includes(this.$ROLE_HIERARCHY_OPERATIONS_HEAD)) {
+        menuItems = menuItems.concat(this.menus.opsHead);
+      }
+
+      // Sales Manager Module
+      if (this.showMenu.includes(this.$ROLE_HIERARCHY_SALES_RSM) ||
+          this.showMenu.includes(this.$ROLE_HIERARCHY_SALES_ASM) ||
+          this.showMenu.includes(this.$ROLE_HIERARCHY_SALES_NATIONAL_HEAD)) {
+        menuItems = menuItems.concat(this.menus.salesManager);
+      }
+
+      // Bank Ops Module
+      if (this.showMenu.includes(this.$ROLE_HIERARCHY_BANK_OPS)) {
+        menuItems = menuItems.concat(this.menus.bankOps);
+      }
+
+      // CRM Module
+      if (this.showMenu.includes(this.$HIERARCHY_CRM1)) {
+        menuItems = menuItems.concat(this.menus.crm);
+      }
+
+      // Super Admin Module
+      if (this.showMenu.includes(this.$ROLE_BIJLIPAY_MANAGER)) {
+        menuItems = menuItems.concat(this.menus.superAdmin);
+      }
+
+      return menuItems;
     },
-    menuList() {
-      const userInfo = localStorage.getItem("u_i");
-      return userInfo ? JSON.parse(userInfo).roles : [];
-    },
+    showAggregatorSelect() {
+      return (this.showMenu.includes(this.$ROLE_HIERARCHY_OPERATION_SAT) && JSON.parse(localStorage.getItem("u_i")).region.regionAreaName !== "VARANEEK") ||
+             this.showMenu.includes(this.$ROLE_HIERARCHY_INVENTORY_OFFICER);
+    }
   },
   methods: {
     ...mapActions("superAdminAggregators", ["GET_ACTIVE_CREATED_AGGREGATORS_LIST"]),
@@ -1244,36 +1110,17 @@ export default {
         this.showMenu = menuArr;
       }
     },
-    fnclickdropdown(request) {
-      this.array = this.menus.Phonepeinventory[1].subItems;
-      this.$q.localStorage.set("selectedTab", request);
-      if (request == "Bijlipay") {
-        this.menuListName = request;
-        this.$router.push("/inventory/home");
-      } else if (request == 3) {
-        this.menus.inventory[1].subItems = this.array;
-        this.menuListName = request;
-        this.$router.push("/inventory/Phonepehome");
-      } else {
-        this.menus.inventory[1].subItems = this.menus.inventory[1].subItems.filter(
-          (item) => item.id !== 26
-        );
-        this.menuListName = request;
-        this.$router.push("/inventory/Mobikwikhome");
-      }
-    },
-
-    fnclickdropdownSat(request) {
-      this.$q.localStorage.set("selectedTab", request);
-      if (request == "Bijlipay") {
-        this.menuListNameSat = request;
-        this.$router.push("/sat/dashboard");
-      } else if (request == 3) {
-        this.menuListNameSat = request;
-        this.$router.push("/sat/dashboardPhonepe");
-      } else {
-        this.menuListNameSat = request;
-        this.$router.push("/sat/dashboardMobikwik");
+    handleAggregatorChange(val) {
+      if (this.showMenu.includes(this.$ROLE_HIERARCHY_OPERATION_SAT)) {
+        this.selectedValueSat = val === "Bijlipay" ? "Bijlipay" : "Other";
+        if (val === "Bijlipay") this.$router.push("/sat/dashboard");
+        else if (val === 3) this.$router.push("/sat/dashboardPhonepe");
+        else this.$router.push("/sat/dashboardMobikwik");
+      } else if (this.showMenu.includes(this.$ROLE_HIERARCHY_INVENTORY_OFFICER)) {
+        this.selectedValue = val === "Bijlipay" ? "Bijlipay" : "Others";
+        if (val === "Bijlipay") this.$router.push("/inventory/home");
+        else if (val === 3) this.$router.push("/inventory/Phonepehome");
+        else this.$router.push("/inventory/Mobikwikhome");
       }
     },
     fnMainToggleSideMenu() {
@@ -1281,27 +1128,26 @@ export default {
     },
     fnAjaxGetAllMenuList() {
       this.GET_ACTIVE_CREATED_AGGREGATORS_LIST()
-        .then((response) => {
-          let assumeArr = [
-            {
-              label: "Bijlipay",
-              value: "Bijlipay",
-            },
-          ];
-          this.getActiveCreatedAggregatorList.map(function (value) {
-            assumeArr.push({
-              label: value.name,
-              value: value.id,
-            });
+        .then(() => {
+          let assumeArr = [{ label: "Bijlipay", value: "Bijlipay" }];
+          this.getActiveCreatedAggregatorList.map((value) => {
+            assumeArr.push({ label: value.name, value: value.id });
           });
-          this.options = assumeArr;
+          this.aggregatorOptions = assumeArr;
         })
         .catch(() => {
-          this.options = [];
+          this.aggregatorOptions = [];
         });
     },
   },
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.aggregator-select {
+  ::v-deep(.q-field__control) {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+  }
+}
+</style>
