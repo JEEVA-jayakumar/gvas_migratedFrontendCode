@@ -1,75 +1,76 @@
 <template>
-  <q-page padding>
-    <div class="row justify-center">
-      <div class="col-12 col-md-6">
-        <q-card flat bordered>
-          <q-card-section class="bg-purple-9 text-white">
-            <div class="text-h6">Add M-ATM Plan</div>
-          </q-card-section>
-
-          <q-card-section class="q-pa-md">
-            <q-form @submit="fnsubmit(formData)" class="q-gutter-md">
-              <q-select
-                outlined
-                dense
-                v-model="formData.leadSource"
-                :options="dropDown.leadSourceOptions"
-                label="Select lead source"
-                emit-value
-                map-options
-              />
-
-              <q-select
-                outlined
-                dense
-                v-model="formData.device"
-                :options="dropDown.deviceOptions"
-                label="Select device"
-                emit-value
-                map-options
-              />
-
-              <q-input
-                outlined
-                dense
-                v-model.trim="formData.planName"
-                label="Plan Name *"
-                placeholder="Enter plan name"
-              />
-
-              <q-input
-                outlined
-                dense
-                type="number"
-                step="0.01"
-                v-model.trim="formData.incentivePercentage"
-                label="Incentive Percentage *"
-                placeholder="%"
-              />
-
-              <q-input
-                outlined
-                dense
-                type="number"
-                v-model.trim="formData.minTxnVal"
-                label="Minimum Transaction Value *"
-                placeholder="Amount"
-              />
-
-              <q-input
-                outlined
-                dense
-                type="number"
-                v-model.trim="formData.maxIncPerTxn"
-                label="Maximum Incentive Per Transaction *"
-                placeholder="Amount"
-              />
-
-              <div class="row justify-end q-mt-lg">
-                <q-btn unelevated label="Submit Plan" type="submit" color="purple-9" />
+  <q-page>
+    <div class="row">
+      <div class="col-12 text-h6 q-pa-md text-weight-regular bottom-border">Add M-ATM plan</div>
+      <!-- START >> Setup MDR details -->
+      <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
+        <q-card style="width:100%">
+          <q-separator />
+          <q-card-section>
+            <div class="row q-col-gutter-sm">
+              <div class="col-12">
+                <q-select
+                  color="grey-9"
+                  v-model="formData.leadSource"
+                  :options="dropDown.leadSourceOptions"
+                  label="Select lead source"
+                  placeholder="Lead source"
+                  emit-value
+                  map-options
+                />
               </div>
-            </q-form>
+              <div class="col-12">
+                <q-select
+                  color="grey-9"
+                  v-model="formData.device"
+                  :options="dropDown.deviceOptions"
+                  label="Select device"
+                  placeholder="Device"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-12">
+                <q-input
+                  color="grey-9"
+                  type="text"
+                  v-model.trim="formData.planName"
+                  placeholder="Enter Your Plan"
+                  label="Enter Your Plan"
+                />
+              </div>
+              <div class="col-12">
+                <q-input
+                  color="grey-9"
+                  type="number"
+                  v-model.trim="formData.incentivePercentage"
+                  placeholder="%"
+                  label="Incentive Percentage *"
+                />
+              </div>
+              <div class="col-12">
+                <q-input
+                  color="grey-9"
+                  type="number"
+                  v-model.trim="formData.minTxnVal"
+                  placeholder="Minimum Transaction Value*"
+                  label="Minimum Transaction Value*"
+                />
+              </div>
+              <div class="col-12">
+                <q-input
+                  color="grey-9"
+                  type="number"
+                  v-model.trim="formData.maxIncPerTxn"
+                  placeholder="Maximum Incentive Per Transaction *"
+                  label="Maximum Incentive Per Transaction *"
+                />
+              </div>
+            </div>
           </q-card-section>
+          <q-card-actions align="right">
+            <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" />
+          </q-card-actions>
         </q-card>
       </div>
     </div>
@@ -85,8 +86,8 @@ export default {
   data() {
     return {
       formData: {
-        leadSource: null,
-        device: null,
+        leadSource: "",
+        device: "",
         planName: "",
         incentivePercentage: "",
         minTxnVal: "",
@@ -100,7 +101,7 @@ export default {
   },
 
   created() {
-    this.ajaxLoadInitialData();
+    this.ajaxLoadDataForDeviceTypeTable();
   },
 
   computed: {
@@ -113,35 +114,29 @@ export default {
     ...mapActions("leadSource", ["LEAD_SOURCE_ACTIVE_LIST"]),
     ...mapActions("mATMSubmitPlan", ["MATM_SUBMIT_PLAN_DETAILS"]),
 
-    async ajaxLoadInitialData() {
-      this.$q.loading.show({ message: "Loading data..." });
-      try {
-        await Promise.all([
-          this.FETCH_DEVICES_DATA(),
-          this.LEAD_SOURCE_ACTIVE_LIST()
-        ]);
-
-        this.dropDown.deviceOptions = this.getAllDevicesInfo.map(item => ({
-          value: item.id,
-          label: item.deviceName
-        }));
-        this.dropDown.leadSourceOptions = this.getActiveLeadSource.map(item => ({
-          value: item.id,
-          label: item.sourceName
-        }));
-      } finally {
-        this.$q.loading.hide();
-      }
+    ajaxLoadDataForDeviceTypeTable() {
+      let self = this;
+      self.FETCH_DEVICES_DATA()
+        .then(() => {
+          this.dropDown.deviceOptions = _.map(self.getAllDevicesInfo, item => {
+            return {
+              value: item.id,
+              label: item.deviceName
+            };
+          });
+        });
+      self.LEAD_SOURCE_ACTIVE_LIST()
+        .then(() => {
+          this.dropDown.leadSourceOptions = _.map(self.getActiveLeadSource, item => {
+            return {
+              value: item.id,
+              label: item.sourceName
+            };
+          });
+        });
     },
 
-    async fnsubmit(request) {
-      if (!request.leadSource || !request.device || !request.planName) {
-        this.$q.notify({ color: "negative", message: "Please fill all mandatory fields" });
-        return;
-      }
-
-      this.$q.loading.show({ message: "Submitting..." });
-
+    fnsubmit(request) {
       let requestParams = {
         url: {
           leadSource: request.leadSource,
@@ -154,38 +149,56 @@ export default {
           maxIncPerTxn: request.maxIncPerTxn,
         }
       };
-
+      this.$q.loading.show({
+        delay: 100,
+        message: "Please Wait",
+        spinnerColor: "purple-9"
+      });
       this.MATM_SUBMIT_PLAN_DETAILS(requestParams)
         .then(response => {
+          this.$q.loading.hide();
           this.$q.notify({
             color: "positive",
-            message: response.data.message || "M-ATM plan added successfully",
+            position: "bottom",
+            message: response.data.message,
             icon: "thumb_up"
           });
           this.resetForm();
         })
         .catch(error => {
+          this.$q.loading.hide();
           this.$q.notify({
             color: "negative",
-            message: error.data?.message || "Submission failed",
-            icon: "warning"
+            position: "bottom",
+            icon: "warning",
+            message: error.data?.message || "Operation failed"
           });
-        })
-        .finally(() => {
-          this.$q.loading.hide();
         });
     },
 
     resetForm() {
       this.formData = {
-        leadSource: null,
-        device: null,
+        leadSource: "",
+        device: "",
         planName: "",
         incentivePercentage: "",
         minTxnVal: "",
         maxIncPerTxn: "",
       };
+    },
+
+    myCustomSearchFilter(rows, terms, cols, cellValue) {
+      const lowerTerms = terms ? terms.toLowerCase() : "";
+      return rows.filter(row =>
+        cols.some(
+          col =>
+            (cellValue(col, row) + "").toLowerCase().indexOf(lowerTerms) !== -1
+        )
+      );
     }
   }
 };
 </script>
+
+<style>
+</style>

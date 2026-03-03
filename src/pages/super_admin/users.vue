@@ -6,10 +6,9 @@
         <q-tab name="tab-2" label="De-activated Users" />
       </q-tabs>
 
-      <q-tab-panels v-model="activeTab" animated>
-
-        <!-- ================= TAB 1 ================= -->
-        <q-tab-panel name="tab-1">
+      <q-tab-panels v-model="activeTab" animated keep-alive>
+        <q-tab-panel name="tab-1" class="no-padding">
+          <!--START: table Data -->
           <q-table
             :rows="getAllUsers"
             :columns="columns"
@@ -23,56 +22,58 @@
             row-key="userId"
             color="grey-9"
           >
-
-            <!-- Name column -->
             <template v-slot:body-cell-name="props">
-              <q-btn
-                align="left"
-                dense
-                flat
-                no-wrap
-                no-caps
-                icon="fas fa-pencil-alt"
-                color="primary"
-                @click="fnShowEditUser(props.row.userId)"
-                :label="props.row.user.name"
-                class="capitalize"
-              />
+              <q-td :props="props">
+                <q-btn
+                  align="left"
+                  dense
+                  flat
+                  no-wrap
+                  no-caps
+                  icon="fas fa-pencil-alt"
+                  color="primary"
+                  @click="fnShowEditUser(props.row.userId)"
+                  :label="props.row.user.name"
+                  class="capitalize"
+                />
+              </q-td>
             </template>
 
-            <!-- Role column -->
             <template v-slot:body-cell-role="props">
-              <div class="row no-wrap group" v-for="role in props.row.roles" :key="role.role">
-                <q-chip color="light" class="text-dark">
-                  <span>{{ role.hierarchy.hierarchyCode }}</span> | {{ role.role }}
-                </q-chip>
-              </div>
+              <q-td :props="props">
+                <div class="row no-wrap group" v-for="role in props.row.roles" :key="role.role">
+                  <q-chip color="light" class="text-dark">
+                    <span>{{ role.hierarchy.hierarchyCode }}</span>
+                    | {{ role.role }}
+                  </q-chip>
+                </div>
+              </q-td>
             </template>
 
-            <!-- ======== TOP SLOT ======== -->
             <template v-slot:top>
-
-              <!-- SEARCH + FILTER -->
-              <div class="col-md-12 group">
-                <div class="row">
+              <!--START: table filter,search -->
+              <div class="col-12 group q-mb-md">
+                <div class="row q-col-gutter-md">
                   <div class="col-md-6">
                     <q-input
                       clearable
-                      dense
                       color="grey-9"
                       v-model.trim="filterSearch"
                       placeholder="Type.."
                       label="Search by Name, Merchant Name, Lead ID"
-                    />
+                    >
+                      <template v-slot:append>
+                        <q-icon name="search" />
+                      </template>
+                    </q-input>
                   </div>
-
                   <div class="col-md-3"></div>
-
                   <div class="col-md-3">
                     <q-select
                       clearable
                       v-model="filter_values"
                       color="grey-9"
+                      placeholder="Select"
                       label="Filter By"
                       @clear="ajaxLoadDataForAllUsersList"
                       @update:model-value="ajaxLoadDataForRoleIdFilter"
@@ -81,32 +82,31 @@
                   </div>
                 </div>
               </div>
-
-              <!-- HIERARCHY + ACTIONS -->
-              <div class="col-md-12">
-                <div class="row justify-between">
-
-                  <!-- Hierarchy buttons -->
+              <!--END: table filter,search -->
+              <!--START: Tabs -->
+              <div class="col-12">
+                <div class="row justify-between items-center">
                   <div class="col">
                     <q-btn
-                      v-for="(tab, index) in getAllHierarchiesData"
+                      v-for="(tab, index) in customizedHirarchyFilter"
                       :key="index"
                       class="text-black q-ma-xs"
                       size="sm"
-                      :class="activeItemId === index ? 'customTabActive text-light' : 'bg-blue-grey-2'"
+                      :class="[
+                        activeItemId === index
+                          ? 'customTabActive text-light'
+                          : 'bg-blue-grey-2'
+                      ]"
                       @click="ajaxLoadDataForHeirarchyIdFilter(index, tab)"
                       rounded
                       :label="tab.label"
                     />
                   </div>
-
-                  <!-- Actions -->
                   <div class="col-auto" align="right">
-                    <div class="row justify-evenly">
-
+                    <div class="row justify-evenly items-center">
                       <div class="col-auto q-px-xs">
                         <q-btn
-                          :disabled="formData.selectedUsersToDelete.length === 0"
+                          :disabled="formData.selectedUsersToDelete.length == 0"
                           flat
                           color="white"
                           class="text-grey-9"
@@ -114,34 +114,33 @@
                           icon="far fa-trash-alt"
                         />
                       </div>
-
                       <div class="col-auto q-px-xs">
                         <downloadExcel :data="getAllUsers" :fields="json_fields" name="UserDetails.xls">
                           <q-btn outline color="grey-9" label="Download as excel" />
                         </downloadExcel>
                       </div>
-
                       <div class="col-auto q-px-xs">
                         <q-btn
                           no-caps
+                          class="text-weight-regular"
                           @click="$router.push('/super/admin/users/add/user')"
                           label="Add User"
                           color="purple-9"
+                          size="md"
                         />
                       </div>
-
                     </div>
                   </div>
-
                 </div>
               </div>
-
+              <!--END: Tabs -->
             </template>
           </q-table>
+          <!--END: table Data -->
         </q-tab-panel>
 
-        <!-- ================= TAB 2 ================= -->
-        <q-tab-panel name="tab-2">
+        <q-tab-panel name="tab-2" class="no-padding">
+          <!--START: table Data -->
           <q-table
             :rows="getAllUsers"
             :columns="columns"
@@ -155,50 +154,68 @@
             row-key="userId"
             color="grey-9"
           >
-
             <template v-slot:body-cell-name="props">
-              <q-btn
-                align="left"
-                dense
-                flat
-                no-wrap
-                no-caps
-                icon="fas fa-pencil-alt"
-                color="primary"
-                @click="fnShowEditUser(props.row.userId)"
-                :label="props.row.user.name"
-              />
+              <q-td :props="props">
+                <q-btn
+                  align="left"
+                  dense
+                  flat
+                  no-wrap
+                  no-caps
+                  icon="fas fa-pencil-alt"
+                  color="primary"
+                  @click="fnShowEditUser(props.row.userId)"
+                  :label="props.row.user.name"
+                  class="capitalize"
+                />
+              </q-td>
             </template>
 
             <template v-slot:body-cell-role="props">
-              <div class="row no-wrap group" v-for="role in props.row.roles" :key="role.role">
-                <q-chip color="light" class="text-dark">
-                  <span>{{ role.hierarchy.hierarchyCode }}</span> | {{ role.role }}
-                </q-chip>
-              </div>
+              <q-td :props="props">
+                <div class="row no-wrap group" v-for="role in props.row.roles" :key="role.role">
+                  <q-chip color="light" class="text-dark">
+                    <span>{{ role.hierarchy.hierarchyCode }}</span>
+                    | {{ role.role }}
+                  </q-chip>
+                </div>
+              </q-td>
             </template>
 
             <template v-slot:top>
-              <div class="row items-stretch">
-                <div class="col-md-6">
-                  <q-input clearable v-model.trim="filterSearch" placeholder="Type.." />
-                </div>
-                <div class="col-md-6 text-right">
-                  <q-btn
-                    :disabled="formData.selectedUsersToDelete.length === 0"
-                    flat
-                    color="white"
-                    class="text-grey-9 q-mr-md"
-                    @click="activate_deactivate_users(formData.selectedUsersToDelete)"
-                    icon="far fa-trash-alt"
-                  />
+              <!--START: table filter,search -->
+              <div class="col-12 group">
+                <div class="row items-center q-col-gutter-md">
+                  <div class="col-md-6">
+                    <q-input
+                      clearable
+                      color="grey-9"
+                      v-model.trim="filterSearch"
+                      placeholder="Type.."
+                      label="Search by Name, Merchant Name, Lead ID"
+                    >
+                      <template v-slot:append>
+                        <q-icon name="search" />
+                      </template>
+                    </q-input>
+                  </div>
+                  <div class="col-md-6" align="right">
+                    <q-btn
+                      :disabled="formData.selectedUsersToDelete.length == 0"
+                      flat
+                      color="white"
+                      class="text-grey-9 q-mr-md"
+                      size="md"
+                      @click="activate_deactivate_users(formData.selectedUsersToDelete)"
+                      icon="far fa-trash-alt"
+                    />
+                  </div>
                 </div>
               </div>
             </template>
-
           </q-table>
+          <!--END: table Data -->
         </q-tab-panel>
-
       </q-tab-panels>
 
       <deleteUsersDetails
@@ -212,10 +229,10 @@
 </template>
 
 <script>
-import { required, between, email } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import downloadExcel from "vue-json-excel";
 import deleteUsersDetails from "../../components/super_admin/deleteUsersDetails.vue";
+
 export default {
   name: "users",
   components: {
@@ -251,10 +268,11 @@ export default {
             let predecessor = "";
             if (value.length > 0) {
               value.map(v => {
+                const predEmail = v.predecessor != null ? v.predecessor.email : "";
                 if (predecessor == "")
-                  predecessor = v.predecessor != null ? v.predecessor.email : "";
+                  predecessor = predEmail;
                 else
-                  predecessor = predecessor + " | " + v.predecessor != null ? v.predecessor.email : "";
+                  predecessor = predecessor + " | " + predEmail;
               })
             }
             return predecessor;
@@ -272,31 +290,23 @@ export default {
       filter: "",
       filter_values: "",
       multipleSelect: "",
-
       filterTabVisiblity: "",
-
       paginationControl: {
         rowsPerPage: 10,
         page: 1
       },
-
       formData: {
         selectedUsersToDelete: []
       },
-      //table information
       tableAjaxLoading: false,
       filterSearch: "",
-      filterSearchDeactivated: "",
-      //Defining columns for table
       columns: [
         {
           name: "name",
           required: true,
           label: "Name",
           align: "left",
-          field: row => {
-            return row.user.name;
-          },
+          field: row => row.user.name,
           sortable: false
         },
         {
@@ -304,9 +314,7 @@ export default {
           required: true,
           label: "Employee ID",
           align: "left",
-          field: row => {
-            return row.user.employeeID;
-          },
+          field: row => row.user.employeeID,
           sortable: true
         },
         {
@@ -314,9 +322,7 @@ export default {
           required: true,
           label: "Contact No",
           align: "left",
-          field: row => {
-            return row.user.contactNumber;
-          },
+          field: row => row.user.contactNumber,
           sortable: false
         },
         {
@@ -324,9 +330,7 @@ export default {
           required: true,
           label: "Email ID",
           align: "left",
-          field: row => {
-            return row.user.email;
-          },
+          field: row => row.user.email,
           sortable: false
         },
         {
@@ -342,43 +346,22 @@ export default {
           required: true,
           label: "Location",
           align: "left",
-          field: row => {
-            return row.user.city;
-          },
+          field: row => row.user.city,
           sortable: false
         }
       ],
-
-      //Load from API
-      //Function: ajaxLoadDataForAllUsersList
-      // allUsers: [],
       tableData: [],
-
-      //Load from API
-      //Function: ajaxLoadDataForRolesFilter
       filterRoles: [],
-      // select: '1',
       error: true,
       warning: false
     };
   },
 
   created() {
-    /* START: Load user table data */
     this.ajaxLoadDataForAllUsersList();
-    /* END: Load user table data */
-
-    /* START: Load user table data filter > Roles */
     this.ajaxLoadDataForRolesFilter();
-    /* End: Load user table data filter > Roles */
-
-    /* START: Load user table data filter > Hierarchy */
     this.ajaxLoadDataForHeirarchyFilter();
-    /* End: Load user table data filter > Hierarchy */
-
-    /* START: Load user table data filter > Hierarchy */
     this.ajaxLoadDataForRegionsFilter();
-    /* End: Load user table data filter > Hierarchy */
   },
 
   computed: {
@@ -391,9 +374,7 @@ export default {
       "getAllStatesData"
     ])
   },
-  beforeMount() {
-    console.log("GET ALL USER--------->", JSON.stringify(this.getAllUsers))
-  },
+
   methods: {
     ...mapActions("SuperAdminUsers", [
       "FETCH_ALL_USERS_DATA",
@@ -407,22 +388,11 @@ export default {
       "DELETE_SELECTED_USERS",
       "ACTIVATE_SELECTED_USERS"
     ]),
-    ...mapActions("reports", ["REPORT_LEAD_APPROVAL_TRACKER"]),
 
-    //Load all short lead info while page loading
     changeTabs(tab) {
-      if (tab == "tab-2") {
-        this.ajaxLoadDataForAllUsersList({
-          pagination: this.paginationControl,
-          filter: this.filterSearch
-        });
-      } else {
-        this.ajaxLoadDataForAllUsersList({
-          pagination: this.paginationControl,
-          filter: this.filterSearch
-        });
-      }
+      this.ajaxLoadDataForAllUsersList();
     },
+
     activate_deactivate_users(selectedUsersToDelete) {
       if (selectedUsersToDelete.length < 1) {
         this.$q.notify({
@@ -432,101 +402,77 @@ export default {
           icon: "warning"
         });
       } else {
-        this.$q
-          .dialog({
-            title: "Confirm",
-            message:
-              this.activeTab == "tab-2"
-                ? "Are you sure want to activate users?"
-                : "Are you sure want to delete users?",
-            ok: "Continue",
-            cancel: "Cancel"
-          }).onOk(() => {
-            this.$q.loading.show({
-              delay: 100, // ms
-              message: "Please Wait",
-              spinnerColor: "purple-9",
-              customClass: "shadow-none"
-            });
-
-            let usersSelectSync = [];
-            selectedUsersToDelete.map(function (value, key) {
-              usersSelectSync.push(value.userId);
-            });
-
-            if (this.activeTab == "tab-2") {
-              this.activateUsers(usersSelectSync)
-                .then(() => {
-                  this.FETCH_ALL_USERS_DATA();
-                  this.formData.selectedUsersToDelete = [];
-                  this.$q.loading.hide();
-                  this.$q.notify({
-                    color: "positive",
-                    position: "bottom",
-                    message: "Successfully Activated!",
-                    icon: "thumb_up"
-                  });
-                }).onCancel(error => {
-                  this.$q.loading.hide();
-                  this.$q.notify({
-                    color: "negative",
-                    position: "bottom",
-                    message:
-                      error.body.message == null
-                        ? "Please Try Again Later !"
-                        : error.body.message,
-                    icon: "thumb_down"
-                  });
-                });
-            } else {
-              this.deactivateUsers(usersSelectSync)
-                .then(response => {
-                  this.formData.selectedUsersToDelete = [];
-                  this.$q.loading.hide();
-                  // this.$q.notify({
-                  //   color: "negative",
-                  //   position: "bottom",
-                  //   message: "Successfully Deactivated!",
-                  //   icon: "thumb_up"
-                  // });
-                  this.deteledUsers = response.data.data;
-                  this.toggleDeleteUsersModal();
-                })
-                .catch(error => {
-                  this.$q.loading.hide();
-                  this.$q.notify({
-                    color: "negative",
-                    position: "bottom",
-                    message:
-                      error.body.message == null
-                        ? "Please Try Again Later !"
-                        : error.body.message,
-                    icon: "thumb_down"
-                  });
-                });
-            }
-          })
-          .catch(err => {
-            console.log(err);
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: "No changes made!",
-              icon: "thumb_down"
-            });
+        this.$q.dialog({
+          title: "Confirm",
+          message:
+            this.activeTab == "tab-2"
+              ? "Are you sure want to activate users?"
+              : "Are you sure want to delete users?",
+          ok: "Continue",
+          cancel: "Cancel"
+        }).onOk(() => {
+          this.$q.loading.show({
+            delay: 100,
+            message: "Please Wait",
+            spinnerColor: "purple-9",
+            customClass: "shadow-none"
           });
+
+          let usersSelectSync = selectedUsersToDelete.map(value => value.userId);
+
+          if (this.activeTab == "tab-2") {
+            this.ACTIVATE_SELECTED_USERS(usersSelectSync)
+              .then(() => {
+                this.FETCH_ALL_USERS_DATA(this.$INACTIVE_FLAG_FOR_LIST);
+                this.formData.selectedUsersToDelete = [];
+                this.$q.loading.hide();
+                this.$q.notify({
+                  color: "positive",
+                  position: "bottom",
+                  message: "Successfully Activated!",
+                  icon: "thumb_up"
+                });
+              })
+              .catch(error => {
+                this.$q.loading.hide();
+                this.$q.notify({
+                  color: "negative",
+                  position: "bottom",
+                  message: error.data?.message || "Please Try Again Later !",
+                  icon: "thumb_down"
+                });
+              });
+          } else {
+            this.DELETE_SELECTED_USERS(usersSelectSync)
+              .then(response => {
+                this.formData.selectedUsersToDelete = [];
+                this.$q.loading.hide();
+                this.deteledUsers = response.data.data;
+                this.toggleDeleteUsersModal();
+              })
+              .catch(error => {
+                this.$q.loading.hide();
+                this.$q.notify({
+                  color: "negative",
+                  position: "bottom",
+                  message: error.data?.message || "Please Try Again Later !",
+                  icon: "thumb_down"
+                });
+              });
+          }
+        }).onCancel(() => {
+          this.$q.notify({
+            color: "negative",
+            position: "bottom",
+            message: "No changes made!",
+            icon: "thumb_down"
+          });
+        });
       }
     },
+
     toggleDeleteUsersModal() {
       this.showDeleteUserDetails = !this.showDeleteUserDetails;
-    },
-
-    activateUsers(usersSelectSync) {
-      return this.ACTIVATE_SELECTED_USERS(usersSelectSync);
-    },
-    deactivateUsers(usersSelectSync) {
-      return this.DELETE_SELECTED_USERS(usersSelectSync);
     },
 
     fnShowEditUser(userId) {
@@ -539,41 +485,10 @@ export default {
         this.paginationControl.rowsPerPage
       );
     },
-    // fndownload(){
-    //    const datas =this.getAllUsers;
-    //   let output = '';
-    //   console.log(datas);
-    //   // while (index < datas.length) {
-    //   //   console.log(datas[index].stan);
-    //   //   output += datas[index].stan;
-    //   //   output += '\r\n';
-    //   //   index += 1;
-    //   // }
-    //   datas.forEach(element => {
 
-    //     output += element.serialNumber;
-    //     output += '\r\n';
-    //   });
-
-    //   const file = new Blob([output],
-
-    //     { type: 'text/plain;charset=utf-8' });
-    //   // element.href = URL.createObjectURL(file);
-    //   // element.download = "serialNumber.txt";
-    //   // document.body.appendChild(element);
-
-    //   // element.click();
-    //    let link = document.createElement("a");
-    //         link.href = window.URL.createObjectURL(file);
-    //         link.download = "serialNumber.txt"
-
-    //         link.click();
-    // },
-
-    //API to fetch table data
     ajaxLoadDataForAllUsersList() {
       this.$q.loading.show({
-        delay: 100, // ms
+        delay: 100,
         message: "Fetching List ..",
         spinnerColor: "purple-9",
         customClass: "shadow-none"
@@ -584,11 +499,11 @@ export default {
       )
         .then(() => {
           this.paginationControl.page =
-            this.$route.params.page == undefined ? 1 : this.$route.params.page;
+            this.$route.params.page == undefined ? 1 : parseInt(this.$route.params.page);
           this.paginationControl.rowsPerPage =
             this.$route.params.perPage == undefined
               ? 10
-              : this.paginationControl.perPage;
+              : parseInt(this.$route.params.perPage);
           this.$q.loading.hide();
         })
         .catch(() => {
@@ -596,35 +511,30 @@ export default {
         });
     },
 
-    //API to fetch roles
     ajaxLoadDataForRolesFilter() {
       this.FETCH_ALL_ROLES_DATA();
     },
 
-    //API for table filter using hierarchy
-    ajaxLoadDataForRoleIdFilter() {
-      if (this.filter_values != undefined) {
-        this.FETCH_ALL_USERS_BY_ROLE_DATA(this.filter_values);
+    ajaxLoadDataForRoleIdFilter(val) {
+      if (val != undefined) {
+        this.FETCH_ALL_USERS_BY_ROLE_DATA(val);
       }
     },
 
-    //API to fetch hierarchy
     ajaxLoadDataForHeirarchyFilter() {
-      this.FETCH_ALL_HIERARCHIES_DATA().then(response => {
-        this.customizedHirarchyFilter = this.getAllHierarchiesData;
+      this.FETCH_ALL_HIERARCHIES_DATA().then(() => {
+        this.customizedHirarchyFilter = [...this.getAllHierarchiesData];
         this.customizedHirarchyFilter.unshift({ value: 0, label: "All" });
       });
     },
 
-    //API to fetch hierarchy
     ajaxLoadDataForRegionsFilter() {
       this.FETCH_ALL_REGIONS_DATA();
     },
 
-    //API for table filter using hierarchy
     ajaxLoadDataForHeirarchyIdFilter(itemIndex, tab) {
       this.$q.loading.show({
-        delay: 100, // ms
+        delay: 100,
         message: "Please Wait",
         spinnerColor: "purple-9",
         customClass: "shadow-none"

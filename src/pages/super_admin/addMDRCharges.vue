@@ -1,104 +1,163 @@
 <template>
-  <q-page padding>
-    <div class="row justify-center">
-      <div class="col-12 col-md-6">
-        <q-card flat bordered>
-          <q-card-section class="bg-purple-9 text-white">
-            <div class="text-h6">Existing MDR Details</div>
-          </q-card-section>
-
-          <q-card-section class="q-pa-md">
-            <q-form @submit="fnsubmit(formData)" class="q-gutter-md">
-              <!-- Selection Row -->
-              <div class="row items-center no-wrap">
+  <q-page>
+    <div class="row">
+      <div class="col-12 text-h6 q-pa-md text-weight-regular bottom-border">Add MDR details</div>
+      <!-- START >> Setup MDR details -->
+      <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
+        <q-card style="width:100%">
+          <q-card-section>
+            <div class="row q-col-gutter-sm">
+              <div class="col-10">
                 <q-select
-                  outlined
-                  dense
+                  color="grey-9"
                   v-model="formData.leadSource"
                   :options="dropDown.leadSourceOptions"
                   label="Select lead source"
-                  class="full-width"
                   emit-value
                   map-options
                 />
-                <q-btn round @click="fnManageLeadSource" size="sm" icon="add" color="purple-9" class="q-ml-sm" />
+              </div>
+              <div class="col-2 flex items-center justify-center">
+                <q-btn round @click="fnManageLeadSource" size="sm" icon="add" color="purple-9" />
               </div>
 
-              <div class="row items-center no-wrap">
+              <div class="col-10">
                 <q-select
-                  outlined
-                  dense
+                  color="grey-9"
                   v-model="formData.device"
                   :options="dropDown.deviceOptions"
                   label="Select device"
-                  class="full-width"
                   emit-value
                   map-options
                 />
-                <q-btn round @click="fnManageDevice" size="sm" icon="add" color="purple-9" class="q-ml-sm" />
+              </div>
+              <div class="col-2 flex items-center justify-center">
+                <q-btn round @click="fnManageDevice" size="sm" icon="add" color="purple-9" />
               </div>
 
-              <q-select
-                outlined
-                dense
-                v-model="formData.marsDevice"
-                :options="dropDown.marsDeviceOptions"
-                label="Mars Device Model"
-                emit-value
-                map-options
-              />
-
-              <q-select
-                outlined
-                dense
-                v-model="formData.merchantType"
-                :options="dropDown.merchantTypesOptions"
-                label="Select merchant category type"
-                emit-value
-                map-options
-                @update:model-value="fnCategoryBasedMdr(formData)"
-              />
-
-              <!-- MDR Fields Grid -->
-              <div class="text-subtitle2 q-mt-md q-mb-sm text-purple-9">Rates (%)</div>
-              <div class="row q-col-gutter-sm">
-                <div v-for="field in mdrFields" :key="field.model" class="col-12 col-sm-6">
-                  <q-input
-                    outlined
-                    dense
-                    type="number"
-                    step="0.01"
-                    v-model="formData[field.model]"
-                    :label="field.label"
-                  />
-                </div>
+              <div class="col-12">
+                <q-select
+                  color="grey-9"
+                  v-model="formData.marsDevice"
+                  :options="dropDown.marsDeviceOptions"
+                  label="Mars Device Model"
+                  emit-value
+                  map-options
+                />
               </div>
 
-              <div class="row justify-end q-mt-lg">
-                <q-btn unelevated label="Submit" color="purple-9" type="submit" class="q-px-lg" />
+              <div class="col-12">
+                <q-select
+                  color="grey-9"
+                  v-model="formData.merchantType"
+                  :options="dropDown.merchantTypesOptions"
+                  label="Select merchant category type"
+                  @update:model-value="fnCategoryBasedMdr(formData)"
+                  emit-value
+                  map-options
+                />
               </div>
-            </q-form>
+
+              <div class="col-12">
+                <q-input
+                  color="grey-9"
+                  type="number"
+                  v-model="formData.debitLessthanAmount"
+                  placeholder="Debit <= 2000 %"
+                  label="Debit <= 2000 %"
+                />
+              </div>
+
+              <div class="col-12">
+                <q-input
+                  color="grey-9"
+                  type="number"
+                  v-model="formData.debitGreaterthanAmount"
+                  label="Debit > 2000 %"
+                  placeholder="Debit > 2000 %"
+                />
+              </div>
+
+              <div class="col-12">
+                <q-input
+                  color="grey-9"
+                  type="number"
+                  v-model="formData.stdCC"
+                  label="Std CC %"
+                  placeholder="Std CC %"
+                />
+              </div>
+
+              <div class="col-12">
+                <q-input
+                  color="grey-9"
+                  type="number"
+                  v-model="formData.premiumCC"
+                  label="Premium CC %"
+                  placeholder="Premium CC %"
+                />
+              </div>
+
+              <div class="col-12">
+                <q-input
+                  color="grey-9"
+                  type="number"
+                  v-model="formData.corpCC"
+                  label="Corp Pre CC %"
+                  placeholder="Corp Pre CC %"
+                />
+              </div>
+
+              <div class="col-12">
+                <q-input
+                  color="grey-9"
+                  type="number"
+                  v-model="formData.intlCC"
+                  label="Intl Pre CC %"
+                  placeholder="Intl Pre CC %"
+                />
+              </div>
+
+              <div class="col-12">
+                <q-input
+                  color="grey-9"
+                  type="number"
+                  v-model="formData.superPremiumlCC"
+                  label="Super Pre CC %"
+                  placeholder="Super Pre CC %"
+                />
+              </div>
+            </div>
           </q-card-section>
+          <q-card-actions align="right">
+            <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" />
+          </q-card-actions>
         </q-card>
       </div>
-    </div>
+      <!-- END >> Setup MDR details -->
 
-    <!-- Modals (matched with legacy behavior) -->
-    <showLeadSourceModalComponent
-      v-if="showLeadSourceModal"
-      :propToggleModal="showLeadSourceModal"
-      @emitToggleModal="showLeadSourceModal = false"
-    />
-    <showDeviceDetailModalComponent
-      v-if="showDeviceDetailModal"
-      :propToggleModal="showDeviceDetailModal"
-      @emitToggleModal="showDeviceDetailModal = false"
-    />
-    <showMerchantModalComponent
-      v-if="showMerchantModal"
-      :propToggleModal="showMerchantModal"
-      @emitToggleModal="showMerchantModal = false"
-    />
+      <!--START: Show lead source -->
+      <showLeadSourceModalComponent
+        v-if="showLeadSourceModal"
+        :propToggleModal="showLeadSourceModal"
+        @emitToggleModal="fnManageLeadSource"
+      ></showLeadSourceModalComponent>
+      <!--END: Show lead source -->
+      <!--START: Show device details -->
+      <showDeviceDetailModalComponent
+        v-if="showDeviceDetailModal"
+        :propToggleModal="showDeviceDetailModal"
+        @emitToggleModal="fnManageDevice"
+      ></showDeviceDetailModalComponent>
+      <!--END: Show device details-->
+      <!--START: Show lead source -->
+      <showMerchantModalComponent
+        v-if="showMerchantModal"
+        :propToggleModal="showMerchantModal"
+        @emitToggleModal="fnManageMerchantType"
+      ></showMerchantModalComponent>
+      <!--END: Show lead source -->
+    </div>
   </q-page>
 </template>
 
@@ -106,7 +165,9 @@
 import showLeadSourceModalComponent from "../../components/super_admin/showLeadSourceModalComponents.vue";
 import showDeviceDetailModalComponent from "../../components/super_admin/showDeviceDetailModalComponents.vue";
 import showMerchantModalComponent from "../../components/super_admin/merchantTypes.vue";
+
 import { mapGetters, mapActions } from "vuex";
+import _ from "lodash";
 
 export default {
   name: "AddMDRCharges",
@@ -121,17 +182,17 @@ export default {
       showDeviceDetailModal: false,
       showMerchantModal: false,
       formData: {
-        leadSource: null,
-        device: null,
-        marsDevice: null,
-        merchantType: null,
-        debitLessthanAmount: null,
-        debitGreaterthanAmount: null,
-        stdCC: null,
-        premiumCC: null,
-        corpCC: null,
-        intlCC: null,
-        superPremiumlCC: null
+        leadSource: "",
+        device: "",
+        marsDevice:"",
+        merchantType: "",
+        debitLessthanAmount: "",
+        debitGreaterthanAmount: "",
+        stdCC: "",
+        premiumCC: "",
+        corpCC: "",
+        intlCC: "",
+        superPremiumlCC: ""
       },
       dropDown: {
         deviceOptions: [],
@@ -139,63 +200,70 @@ export default {
         marsDeviceOptions: [],
         merchantTypesOptions: []
       },
-      mdrFields: [
-        { model: "debitLessthanAmount", label: "Debit <= 2000" },
-        { model: "debitGreaterthanAmount", label: "Debit > 2000" },
-        { model: "stdCC", label: "Std CC" },
-        { model: "premiumCC", label: "Premium CC" },
-        { model: "corpCC", label: "Corp Pre CC" },
-        { model: "intlCC", label: "Intl Pre CC" },
-        { model: "superPremiumlCC", label: "Super Pre CC" }
-      ]
     };
   },
 
   created() {
-    this.loadInitialData();
+    this.ajaxLoadDataForDeviceTypeTable();
+    this.marsDeviceModelDatasLoading();
   },
 
   computed: {
-    ...mapGetters("SA_Devices", ["getAllDevicesInfo", "getMarsDeviceModel"]),
+     ...mapGetters("SA_Devices", ["getAllDevicesInfo","getMarsDeviceModel"]),
     ...mapGetters("leadSource", ["getActiveLeadSource"]),
     ...mapGetters("merchantCategory", ["getActiveMerchantCategory"]),
     ...mapGetters("CategoryBasedMdr", ["categoryBasedMdr"])
   },
 
   methods: {
-    ...mapActions("SA_Devices", ["FETCH_DEVICES_DATA", "FETCH_MARS_DEVICE_MODEL"]),
+    ...mapActions("SA_Devices", ["FETCH_DEVICES_DATA","FETCH_MARS_DEVICE_MODEL"]),
     ...mapActions("leadSource", ["LEAD_SOURCE_ACTIVE_LIST"]),
     ...mapActions("merchantCategory", ["MERCHANT_CATEGORY_ACTIVE_LIST"]),
     ...mapActions("MdrPlan", ["MDR_PLAN"]),
-    ...mapActions("CategoryBasedMdr", ["CATEGORY_BASED_MDR_PLAN"]),
+    ...mapActions("CategoryBasedMdr", [
+      "CATEGORY_BASED_MDR_PLAN",
+      "EDIT_MDR_PLAN"
+    ]),
 
-    async loadInitialData() {
-      this.$q.loading.show({ message: "Loading data..." });
-      try {
-        await Promise.all([
-          this.FETCH_DEVICES_DATA(),
-          this.LEAD_SOURCE_ACTIVE_LIST(),
-          this.MERCHANT_CATEGORY_ACTIVE_LIST(),
-          this.FETCH_MARS_DEVICE_MODEL()
-        ]);
-
-        this.dropDown.deviceOptions = this.getAllDevicesInfo.map(i => ({ label: i.deviceName, value: i.id }));
-        this.dropDown.leadSourceOptions = this.getActiveLeadSource.map(i => ({ label: i.sourceName, value: i.id }));
-        this.dropDown.merchantTypesOptions = this.getActiveMerchantCategory.map(i => ({ label: i.merchantCategoryName, value: i.id }));
-
-        this.dropDown.marsDeviceOptions = [];
-        this.getMarsDeviceModel.forEach(group => {
-          group.forEach(device => {
-            this.dropDown.marsDeviceOptions.push({ label: device.name, value: device.code });
+    marsDeviceModelDatasLoading(){
+      let self = this;
+      self.FETCH_MARS_DEVICE_MODEL()
+          .then(() => {
+            return _.map(self.getMarsDeviceModel, item => {
+              item.map(oo => {
+                self.dropDown.marsDeviceOptions.push({
+                  label: oo.name,
+                  value: oo.code
+                });
+              });
+            });
           });
-        });
-      } finally {
-        this.$q.loading.hide();
-      }
     },
 
-    async fnsubmit(request) {
-      const requestParams = {
+    ajaxLoadDataForDeviceTypeTable() {
+      let self = this;
+      self.FETCH_DEVICES_DATA()
+        .then(() => {
+          this.dropDown.deviceOptions = _.map(self.getAllDevicesInfo, item => {
+            return { value: item.id, label: item.deviceName };
+          });
+        });
+      self.LEAD_SOURCE_ACTIVE_LIST()
+        .then(() => {
+          this.dropDown.leadSourceOptions = _.map(self.getActiveLeadSource, item => {
+            return { value: item.id, label: item.sourceName };
+          });
+        });
+      self.MERCHANT_CATEGORY_ACTIVE_LIST()
+        .then(() => {
+          this.dropDown.merchantTypesOptions = _.map(self.getActiveMerchantCategory, item => {
+            return { value: item.id, label: item.merchantCategoryName };
+          });
+        });
+    },
+
+    fnsubmit(request) {
+      let requestParams = {
         url: {
           leadSource: request.leadSource,
           device: request.device,
@@ -212,26 +280,28 @@ export default {
         }
       };
 
-      this.$q.loading.show({ message: "Submitting..." });
-      try {
-        const response = await this.MDR_PLAN(requestParams);
-        this.$q.notify({
-          color: "positive",
-          position: "bottom",
-          message: response.data?.message || "Successfully created!",
-          icon: "thumb_up"
+      this.$q.loading.show({ message: "Please Wait" });
+      this.MDR_PLAN(requestParams)
+        .then(response => {
+          this.$q.notify({
+            color: "positive",
+            position: "bottom",
+            message: response.data.message,
+            icon: "thumb_up"
+          });
+          this.resetForm();
+        })
+        .catch(error => {
+          this.$q.notify({
+            color: "negative",
+            position: "bottom",
+            icon: "warning",
+            message: error.data?.message || "Operation failed"
+          });
+        })
+        .finally(() => {
+          this.$q.loading.hide();
         });
-        this.resetForm();
-      } catch (error) {
-        this.$q.notify({
-          color: "negative",
-          position: "bottom",
-          icon: "warning",
-          message: error.data?.message || "Please try again later!"
-        });
-      } finally {
-        this.$q.loading.hide();
-      }
     },
 
     resetForm() {
@@ -246,15 +316,16 @@ export default {
         device: request.device,
         merchantType: request.merchantType
       };
-      this.CATEGORY_BASED_MDR_PLAN(formData).then(response => {
+      let self = this;
+      self.CATEGORY_BASED_MDR_PLAN(formData).then(response => {
         if (response.status == 200) {
-          this.formData.debitLessthanAmount = this.categoryBasedMdr.debitLessthanAmount;
-          this.formData.debitGreaterthanAmount = this.categoryBasedMdr.debitGreaterthanAmount;
-          this.formData.stdCC = this.categoryBasedMdr.stdCC;
-          this.formData.premiumCC = this.categoryBasedMdr.premiumCC;
-          this.formData.corpCC = this.categoryBasedMdr.corpCC;
-          this.formData.intlCC = this.categoryBasedMdr.intlCC;
-          this.formData.superPremiumlCC = this.categoryBasedMdr.superPremiumlCC;
+          this.formData.debitLessthanAmount = self.categoryBasedMdr.debitLessthanAmount;
+          this.formData.debitGreaterthanAmount = self.categoryBasedMdr.debitGreaterthanAmount;
+          this.formData.stdCC = self.categoryBasedMdr.stdCC;
+          this.formData.premiumCC = self.categoryBasedMdr.premiumCC;
+          this.formData.corpCC = self.categoryBasedMdr.corpCC;
+          this.formData.intlCC = self.categoryBasedMdr.intlCC;
+          this.formData.superPremiumlCC = self.categoryBasedMdr.superPremiumlCC;
         } else {
           this.$q.notify({
             color: "negative",
@@ -281,7 +352,20 @@ export default {
     },
     fnManageMerchantType() {
       this.showMerchantModal = !this.showMerchantModal;
+    },
+
+    myCustomSearchFilter(rows, terms, cols, cellValue) {
+      const lowerTerms = terms ? terms.toLowerCase() : "";
+      return rows.filter(row =>
+        cols.some(
+          col =>
+            (cellValue(col, row) + "").toLowerCase().indexOf(lowerTerms) !== -1
+        )
+      );
     }
   }
 };
 </script>
+
+<style>
+</style>

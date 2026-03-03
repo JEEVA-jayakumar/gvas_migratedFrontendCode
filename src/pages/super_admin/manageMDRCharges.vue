@@ -1,172 +1,180 @@
 <template>
-  <q-page padding>
-    <div class="row justify-center">
-      <div class="col-12 col-md-8">
-        <q-card flat bordered>
-          <q-card-section class="bg-purple-9 text-white">
-            <div class="text-h6">Add MDR Details</div>
-          </q-card-section>
-
-          <q-card-section class="q-pa-md">
-            <q-form @submit="fnsubmit(formData)" class="q-gutter-md">
-              <!-- Selection Row 1 -->
-              <div class="row q-col-gutter-md">
-                <div class="col-12 col-md-6">
-                  <div class="row items-center no-wrap">
-                    <q-select
-                      outlined
-                      dense
-                      v-model="formData.leadSource"
-                      :options="dropDown.leadSourceOptions"
-                      label="Select lead source"
-                      class="full-width"
-                      emit-value
-                      map-options
-                      :error="v$.formData.leadSource.$error"
-                    />
-                    <q-btn flat round color="purple-9" icon="add" @click="fnManageLeadSource" class="q-ml-xs" />
-                  </div>
-                </div>
-                <div class="col-12 col-md-6">
-                  <div class="row items-center no-wrap">
-                    <q-select
-                      outlined
-                      dense
-                      v-model="formData.device"
-                      @update:model-value="onChange"
-                      :options="dropDown.deviceOptions"
-                      label="Select device"
-                      class="full-width"
-                      :error="v$.formData.device.$error"
-                    />
-                    <q-btn flat round color="purple-9" icon="add" @click="fnManageDevice" class="q-ml-xs" />
-                  </div>
-                </div>
-              </div>
-
-              <!-- Selection Row 2 -->
-              <div class="row q-col-gutter-md">
-                <div class="col-12 col-md-6">
+  <q-page>
+    <div class="row">
+      <div class="col-12 q-title q-pa-md text-weight-regular bottom-border">
+        Add MDR Details
+      </div>
+      <!-- START >> Setup MDR details -->
+      <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
+        <q-card style="width:100%">
+          <q-card-section>
+            <q-list class="no-border">
+              <q-item>
+                <q-item-section>
                   <q-select
-                    outlined
-                    dense
+                    color="grey-9"
+                    v-model="formData.leadSource"
+                    :options="dropDown.leadSourceOptions"
+                    label="Select lead source"
+                    stack-label
+                    :error="v$.formData.leadSource.$error"
+                    @blur="v$.formData.leadSource.$touch"
+                  />
+                </q-item-section>
+                <q-item-section side>
+                  <q-btn
+                    round
+                    @click="fnManageLeadSource"
+                    size="sm"
+                    icon="add"
+                    color="purple-9"
+                  />
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-select
+                    color="grey-9"
+                    v-model="formData.device"
+                    @update:model-value="onChange"
+                    :options="dropDown.deviceOptions"
+                    label="Select device"
+                    stack-label
+                    :error="v$.formData.device.$error"
+                    @blur="v$.formData.device.$touch"
+                  />
+                </q-item-section>
+                <q-item-section side>
+                  <q-btn
+                    round
+                    @click="fnManageDevice"
+                    size="sm"
+                    icon="add"
+                    color="purple-9"
+                  />
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-select
+                    color="grey-9"
                     v-model="formData.marsDeviceModel"
                     :options="dropDown.marsDeviceOptions"
                     label="Mars Device Model"
-                    emit-value
-                    map-options
+                    stack-label
                     :error="v$.formData.marsDeviceModel.$error"
+                    @blur="v$.formData.marsDeviceModel.$touch"
                   />
-                </div>
-                <div class="col-12 col-md-6">
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
                   <q-select
-                    outlined
-                    dense
+                    color="grey-9"
                     v-model="formData.merchantType"
                     :options="dropDown.merchantTypesOptions"
                     label="Select merchant category type"
+                    stack-label
                     @update:model-value="fnCategoryBasedMdr(formData)"
-                    emit-value
-                    map-options
                     :error="v$.formData.merchantType.$error"
+                    @blur="v$.formData.merchantType.$touch"
                   />
-                </div>
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-input
+                    color="grey-9"
+                    type="text"
+                    v-model="formData.mdrPlanName"
+                    placeholder="Mdr Plan Name"
+                    label="Mdr Plan Name"
+                    stack-label
+                    :error="v$.formData.mdrPlanName.$error"
+                    @blur="v$.formData.mdrPlanName.$touch"
+                  />
+                </q-item-section>
+              </q-item>
+
+              <div v-if="deviceId == 1">
+                <q-item v-for="field in cardFields" :key="field.key" class="relative-position">
+                  <q-item-section>
+                    <q-input
+                      color="grey-9"
+                      type="number"
+                      v-model="formData[field.key]"
+                      :label="field.label"
+                      :placeholder="field.label"
+                      stack-label
+                      @blur="v$.formData[field.key].$touch"
+                      :error="v$.formData[field.key].$error"
+                      hide-bottom-space
+                    />
+                  </q-item-section>
+                  <div
+                    v-if="v$.formData[field.key].$error"
+                    class="error-tooltip"
+                    :class="{
+                      'error-highlight': v$.formData[field.key].$error,
+                    }"
+                  >
+                    <span
+                      v-if="
+                        v$.formData[field.key].$model &&
+                        (v$.formData[field.key].$model < 0 ||
+                          v$.formData[field.key].$model > 100)
+                      "
+                    >
+                      {{ field.label }} must be between 0 and 100.
+                    </span>
+                  </div>
+                </q-item>
               </div>
 
-              <q-input
-                outlined
-                dense
-                v-model.trim="formData.mdrPlanName"
-                label="Mdr Plan Name"
-                :error="v$.formData.mdrPlanName.$error"
-              />
-
-              <!-- Rates Grid -->
-              <div class="q-mt-lg" v-if="deviceId == 1">
-                <div class="text-subtitle2 q-mb-md text-purple-9 border-bottom-soft">Card Rates (%)</div>
-                <div class="row q-col-gutter-md">
-                  <div class="col-12 col-sm-4">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.debitLessthanAmount" label="Debit <= 2000" :error="v$.formData.debitLessthanAmount.$error" />
+              <div v-else>
+                <q-item v-for="field in merchantFields" :key="field.key" class="relative-position">
+                  <q-item-section>
+                    <q-input
+                      color="grey-9"
+                      type="number"
+                      v-model="formData[field.key]"
+                      :label="field.label"
+                      :placeholder="field.label"
+                      stack-label
+                      @blur="v$.formData[field.key].$touch"
+                      :error="v$.formData[field.key].$error"
+                      hide-bottom-space
+                    />
+                  </q-item-section>
+                  <div
+                    v-if="v$.formData[field.key].$error"
+                    class="error-tooltip"
+                    :class="{
+                      'error-highlight': v$.formData[field.key].$error,
+                    }"
+                  >
+                    <span
+                      v-if="
+                        v$.formData[field.key].$model &&
+                        (v$.formData[field.key].$model < 0 ||
+                          v$.formData[field.key].$model > 100)
+                      "
+                    >
+                      {{ field.label }} must be between 0 and 100.
+                    </span>
                   </div>
-                  <div class="col-12 col-sm-4">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.debitGreaterthanAmount" label="Debit > 2000" :error="v$.formData.debitGreaterthanAmount.$error" />
-                  </div>
-                  <div class="col-12 col-sm-4">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.stdCC" label="Std CC" :error="v$.formData.stdCC.$error" />
-                  </div>
-                  <div class="col-12 col-sm-4">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.premiumCC" label="Premium CC" :error="v$.formData.premiumCC.$error" />
-                  </div>
-                  <div class="col-12 col-sm-4">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.corpCC" label="Corp Pre CC" :error="v$.formData.corpCC.$error" />
-                  </div>
-                  <div class="col-12 col-sm-4">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.intlCC" label="Intl Pre CC" :error="v$.formData.intlCC.$error" />
-                  </div>
-                  <div class="col-12 col-sm-4">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.superPremiumlCC" label="Super Pre CC" :error="v$.formData.superPremiumlCC.$error" />
-                  </div>
-                  <div class="col-12 col-sm-4">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.amexDomestic" label="Amex Domestic" :error="v$.formData.amexDomestic.$error" />
-                  </div>
-                  <div class="col-12 col-sm-4">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.amexInternational" label="Amex Intl" :error="v$.formData.amexInternational.$error" />
-                  </div>
-                </div>
-
-                <div class="text-subtitle2 q-mt-lg q-mb-md text-purple-9 border-bottom-soft">UPI Rates (%)</div>
-                <div class="row q-col-gutter-md">
-                  <div class="col-12 col-sm-6">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.upiDebitCardUpTo2000" label="UPI Debit <= 2000" :error="v$.formData.upiDebitCardUpTo2000.$error" />
-                  </div>
-                  <div class="col-12 col-sm-6">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.upiDebitCardAbove2000" label="UPI Debit > 2000" :error="v$.formData.upiDebitCardAbove2000.$error" />
-                  </div>
-                  <div class="col-12 col-sm-6">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.upiPrepaidCreditCardsUpTo2000" label="UPI CC/Prepaid <= 2000" :error="v$.formData.upiPrepaidCreditCardsUpTo2000.$error" />
-                  </div>
-                  <div class="col-12 col-sm-6">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.upiPrepaidCreditCardsAbove2000" label="UPI CC/Prepaid > 2000" :error="v$.formData.upiPrepaidCreditCardsAbove2000.$error" />
-                  </div>
-                </div>
+                </q-item>
               </div>
-
-              <!-- Other device type rates -->
-              <div class="q-mt-lg" v-else>
-                <div class="text-subtitle2 q-mb-md text-purple-9 border-bottom-soft">Merchant Rates (%)</div>
-                <div class="row q-col-gutter-md">
-                  <div class="col-12 col-sm-6">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.smallMerchantLessThanTwoDebit" label="Small Merch < 2000 Debit" :error="v$.formData.smallMerchantLessThanTwoDebit.$error" />
-                  </div>
-                  <div class="col-12 col-sm-6">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.smallMerchantGreaterThanTwoDebit" label="Small Merch > 2000 Debit" :error="v$.formData.smallMerchantGreaterThanTwoDebit.$error" />
-                  </div>
-                  <div class="col-12 col-sm-6">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.smallMerchantLessThanTwoCreditAndPrepaid" label="Small Merch < 2000 CC" :error="v$.formData.smallMerchantLessThanTwoCreditAndPrepaid.$error" />
-                  </div>
-                  <div class="col-12 col-sm-6">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.smallMerchantGreaterThanTwoCreditAndPrepaid" label="Small Merch > 2000 CC" :error="v$.formData.smallMerchantGreaterThanTwoCreditAndPrepaid.$error" />
-                  </div>
-                  <div class="col-12 col-sm-6">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.largeMerchantLessThanTwoDebit" label="Large Merch < 2000 Debit" :error="v$.formData.largeMerchantLessThanTwoDebit.$error" />
-                  </div>
-                  <div class="col-12 col-sm-6">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.largeMerchantGreaterThanTwoDebit" label="Large Merch > 2000 Debit" :error="v$.formData.largeMerchantGreaterThanTwoDebit.$error" />
-                  </div>
-                  <div class="col-12 col-sm-6">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.largeMerchantLessThanTwoCreditandPrepaid" label="Large Merch < 2000 CC" :error="v$.formData.largeMerchantLessThanTwoCreditandPrepaid.$error" />
-                  </div>
-                  <div class="col-12 col-sm-6">
-                    <q-input outlined dense type="number" step="0.01" v-model="formData.largeMerchantGreaterThanTwoCreditandPrepaid" label="Large Merch > 2000 CC" :error="v$.formData.largeMerchantGreaterThanTwoCreditandPrepaid.$error" />
-                  </div>
-                </div>
-              </div>
-
-              <div class="row justify-end q-mt-xl">
-                <q-btn unelevated label="Submit" :disabled="Submitdata" type="submit" color="purple-9" class="q-px-lg" />
-              </div>
-            </q-form>
+            </q-list>
           </q-card-section>
+          <q-card-actions vertical align="right">
+            <q-btn
+              :disabled="Submitdata"
+              label="submit"
+              @click="fnsubmit(formData)"
+              color="purple-9"
+            />
+          </q-card-actions>
         </q-card>
       </div>
     </div>
@@ -191,8 +199,8 @@
 </template>
 
 <script>
-import { required, minValue, maxValue } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
+import { required, minValue, maxValue } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 import _ from "lodash";
 
@@ -245,6 +253,31 @@ export default {
         upiPrepaidCreditCardsUpTo2000: "",
         upiPrepaidCreditCardsAbove2000: "",
       },
+      cardFields: [
+        { key: "debitLessthanAmount", label: "Debit <= 2000 %" },
+        { key: "debitGreaterthanAmount", label: "Debit > 2000 %" },
+        { key: "stdCC", label: "Std CC %" },
+        { key: "premiumCC", label: "Premium CC %" },
+        { key: "corpCC", label: "Corp Pre CC %" },
+        { key: "intlCC", label: "Intl Pre CC %" },
+        { key: "superPremiumlCC", label: "Super Pre CC %" },
+        { key: "amexDomestic", label: "amex Domestic %" },
+        { key: "amexInternational", label: "amex International %" },
+        { key: "upiDebitCardUpTo2000", label: "UPI Debit Card UpTo 2000 %" },
+        { key: "upiDebitCardAbove2000", label: "UPI Debit Card Above 2000 %" },
+        { key: "upiPrepaidCreditCardsUpTo2000", label: "UPI Prepaid Credit Cards UpTo 2000 %" },
+        { key: "upiPrepaidCreditCardsAbove2000", label: "UPI Prepaid Credit Cards Above 2000 %" }
+      ],
+      merchantFields: [
+        { key: "smallMerchantLessThanTwoDebit", label: "Small Merchant < 2000 % debit Card" },
+        { key: "smallMerchantGreaterThanTwoDebit", label: "Small Merchant > 2000 % debit Card" },
+        { key: "smallMerchantLessThanTwoCreditAndPrepaid", label: "Small Merchant < 2000 % credit and prepaid card" },
+        { key: "smallMerchantGreaterThanTwoCreditAndPrepaid", label: "Small Merchant > 2000 % credit and prepaid card" },
+        { key: "largeMerchantLessThanTwoDebit", label: "Large Merchant < 2000 % debit Card" },
+        { key: "largeMerchantGreaterThanTwoDebit", label: "Large Merchant > 2000 % debit Card" },
+        { key: "largeMerchantLessThanTwoCreditandPrepaid", label: "Large Merchant < 2000 % credit and prepaid card" },
+        { key: "largeMerchantGreaterThanTwoCreditandPrepaid", label: "Large Merchant > 2000 % credit and prepaid card" }
+      ],
       dropDown: {
         deviceOptions: [],
         leadSourceOptions: [],
@@ -256,6 +289,10 @@ export default {
 
   validations() {
     const rateRules = { minValue: minValue(0), maxValue: maxValue(100) };
+    let dynamicRules = {};
+    this.cardFields.forEach(f => dynamicRules[f.key] = rateRules);
+    this.merchantFields.forEach(f => dynamicRules[f.key] = rateRules);
+
     return {
       formData: {
         leadSource: { required },
@@ -263,27 +300,7 @@ export default {
         marsDeviceModel: { required },
         merchantType: { required },
         mdrPlanName: { required },
-        debitLessthanAmount: rateRules,
-        debitGreaterthanAmount: rateRules,
-        stdCC: rateRules,
-        premiumCC: rateRules,
-        corpCC: rateRules,
-        intlCC: rateRules,
-        superPremiumlCC: rateRules,
-        amexDomestic: rateRules,
-        amexInternational: rateRules,
-        upiDebitCardUpTo2000: rateRules,
-        upiDebitCardAbove2000: rateRules,
-        upiPrepaidCreditCardsUpTo2000: rateRules,
-        upiPrepaidCreditCardsAbove2000: rateRules,
-        smallMerchantLessThanTwoDebit: rateRules,
-        smallMerchantGreaterThanTwoDebit: rateRules,
-        smallMerchantLessThanTwoCreditAndPrepaid: rateRules,
-        smallMerchantGreaterThanTwoCreditAndPrepaid: rateRules,
-        largeMerchantLessThanTwoDebit: rateRules,
-        largeMerchantGreaterThanTwoDebit: rateRules,
-        largeMerchantLessThanTwoCreditandPrepaid: rateRules,
-        largeMerchantGreaterThanTwoCreditandPrepaid: rateRules,
+        ...dynamicRules
       },
     };
   },
@@ -308,7 +325,7 @@ export default {
     ...mapActions("CategoryBasedMdr", ["CATEGORY_BASED_MDR_PLAN"]),
 
     onChange(val) {
-      this.deviceId = val ? val.value.isDevice : null;
+      this.deviceId = val ? val.isDevice : null;
     },
 
     marsDeviceModelDatasLoading() {
@@ -318,7 +335,7 @@ export default {
           item.forEach((oo) => {
             this.dropDown.marsDeviceOptions.push({
               label: oo.name,
-              value: JSON.stringify(oo),
+              value: oo,
             });
           });
         });
@@ -334,7 +351,7 @@ export default {
       });
       this.LEAD_SOURCE_ACTIVE_LIST().then(() => {
         this.dropDown.leadSourceOptions = this.getActiveLeadSource.map(item => ({
-          value: item.id,
+          value: item,
           label: item.sourceName,
         }));
       });
@@ -349,23 +366,23 @@ export default {
     async fnsubmit(request) {
       const isValid = await this.v$.$validate();
       if (!isValid) {
-        this.$q.notify({ color: "negative", message: "Please check form for errors" });
+        this.$q.notify("Please review fields again.");
         return;
       }
 
-      this.$q.loading.show({ message: "Submitting..." });
+      this.$q.loading.show({ message: "Please wait.." });
       this.Submitdata = true;
 
       let requestParams = {
         url: {
-          leadSource: request.leadSource,
-          device: request.device.value.id,
+          leadSource: request.leadSource.id || request.leadSource,
+          device: request.device.id,
           merchantType: request.merchantType,
         },
         params: {
-          marsDeviceModel: JSON.parse(request.marsDeviceModel),
+          marsDeviceModel: request.marsDeviceModel,
           mdrPlanName: request.mdrPlanName,
-          ..._.omit(request, ['leadSource', 'device', 'marsDeviceModel', 'merchantType'])
+          ..._.pick(request, this.cardFields.concat(this.merchantFields).map(f => f.key))
         },
       };
 
@@ -421,14 +438,15 @@ export default {
         upiPrepaidCreditCardsAbove2000: "",
       };
       this.deviceId = null;
+      this.v$.$reset();
     },
 
     fnCategoryBasedMdr(request) {
       if (!request.leadSource || !request.device || !request.merchantType) return;
 
       let formData = {
-        leadSource: request.leadSource,
-        device: request.device.value.id,
+        leadSource: request.leadSource.id || request.leadSource,
+        device: request.device.id,
         merchantType: request.merchantType,
       };
 
@@ -444,16 +462,40 @@ export default {
       });
     },
 
-    fnManageLeadSource() { this.showLeadSourceModal = !this.showLeadSourceModal; if(!this.showLeadSourceModal) this.ajaxLoadDataForDeviceTypeTable(); },
-    fnManageDevice() { this.showDeviceDetailModal = !this.showDeviceDetailModal; if(!this.showDeviceDetailModal) this.ajaxLoadDataForDeviceTypeTable(); },
-    fnManageMerchantType() { this.showMerchantModal = !this.showMerchantModal; if(!this.showMerchantModal) this.ajaxLoadDataForDeviceTypeTable(); },
+    fnManageLeadSource() { this.showLeadSourceModal = !this.showLeadSourceModal; },
+    fnManageDevice() { this.showDeviceDetailModal = !this.showDeviceDetailModal; },
+    fnManageMerchantType() { this.showMerchantModal = !this.showMerchantModal; },
   },
 };
 </script>
 
 <style scoped>
-.border-bottom-soft {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  padding-bottom: 4px;
+.q-title {
+  font-size: 1.25rem;
+  line-height: 2rem;
+}
+.error-tooltip {
+  position: absolute;
+  top: 10%;
+  left: 100%;
+  background: #d32f2f;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  margin-top: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.error-tooltip::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: -10px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #d32f2f transparent transparent;
 }
 </style>

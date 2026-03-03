@@ -1,87 +1,68 @@
 <template>
-  <q-page padding>
-    <q-card flat bordered class="q-pa-md">
-      <div class="text-h6 text-purple-9 q-mb-md">LeadSource And Vas, Device Config</div>
+  <q-page>
+    <div class="row">
+      <div class="col-12 text-h6 q-pa-md text-weight-regular bottom-border">LeadSource And Vas,Device Config</div>
+      <!-- START >> Setup MDR details -->
+      <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
+        <q-card style="width:100%">
+          <q-card-section>
+            <div class="row q-col-gutter-sm">
 
-      <q-form @submit="fnsubmit" class="q-gutter-md">
-        <div class="row q-col-gutter-md">
-          <div class="col-12 col-md-6">
-            <q-select
-              outlined
-              dense
-              v-model="formData.leadSourceDeviceVasMapping.leadSource"
-              :options="dropDown.leadSourceOptions"
-              label="Select lead source"
-              :error="v$.formData.leadSourceDeviceVasMapping.leadSource.$error"
-              color="purple-9"
-              emit-value
-              map-options
-            />
-          </div>
-
-          <div class="col-12 col-md-6">
-            <q-select
-              outlined
-              dense
-              v-model="formData.leadSourceDeviceVasMapping.device"
-              :options="dropDown.deviceOptions"
-              label="Select Device"
-              :error="v$.formData.leadSourceDeviceVasMapping.device.$error"
-              color="purple-9"
-              emit-value
-              map-options
-            />
-          </div>
-
-          <div class="col-12">
-            <q-select
-              outlined
-              dense
-              multiple
-              use-chips
-              v-model="formData.vasList"
-              :options="dropDown.vasOptions"
-              label="Select VAS"
-              :error="v$.formData.vasList.$error"
-              color="purple-9"
-              emit-value
-              map-options
-            />
-          </div>
-        </div>
-
-        <div class="row justify-end q-mt-md">
-          <q-btn unelevated label="Submit" color="purple-9" type="submit" />
-        </div>
-      </q-form>
-    </q-card>
+              <div class="col-12">
+                <q-select color="grey-9" v-model="formData.leadSourceDeviceVasMapping.leadSource" :options="dropDown.leadSourceOptions"
+                  label="Select lead source" placeholder="Lead source"
+                  emit-value
+                  map-options />
+              </div>
+              <div class="col-12">
+                <q-select color="grey-9" v-model="formData.leadSourceDeviceVasMapping.device" :options="dropDown.deviceOptions"
+                  label="Select Device" placeholder="Select Device"
+                  emit-value
+                  map-options />
+              </div>
+              <div class="col-12">
+                <q-select multiple color="grey-9" v-model="formData.vasList" :options="dropDown.vasOptions"
+                  label="Select VAS" placeholder="Select VAS"
+                  emit-value
+                  map-options />
+              </div>
+            </div>
+          </q-card-section>
+          <q-card-actions align="right">
+            <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" />
+          </q-card-actions>
+        </q-card>
+      </div>
+    </div>
   </q-page>
 </template>
 
 <script>
-import { useVuelidate } from "@vuelidate/core";
-import { required } from "@vuelidate/validators";
-import { mapGetters, mapActions } from "vuex";
+import { useVuelidate } from '@vuelidate/core'
+import {
+  required
+} from "@vuelidate/validators";
 
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "AddLeadSourceVasDeviceConfig",
   setup() {
-    return { v$: useVuelidate() };
+    return { v$: useVuelidate() }
   },
   data() {
     return {
       formData: {
         leadSourceDeviceVasMapping: {
-          leadSource: null,
-          device: null
+          leadSource: "",
+          device: "",
         },
         vasList: []
       },
       dropDown: {
         leadSourceOptions: [],
         deviceOptions: [],
-        vasOptions: []
-      }
+        vasOptions: [],
+      },
     };
   },
   validations() {
@@ -89,77 +70,95 @@ export default {
       formData: {
         leadSourceDeviceVasMapping: {
           leadSource: { required },
-          device: { required }
+          device: { required },
         },
         vasList: { required }
       }
-    };
+    }
   },
   created() {
-    this.ajaxLoadData();
+    this.ajaxLoadDataForDeviceTypeTable();
   },
   computed: {
-    ...mapGetters("SA_Devices", ["getAllDevicesInfo"]),
+    ...mapGetters("SA_Devices", ["getAllDevicesInfo", "getMarsDeviceModel"]),
     ...mapGetters("leadSource", ["getActiveLeadSource"]),
     ...mapGetters("vasCreation", ["getAllVasDetails"])
   },
+
   methods: {
     ...mapActions("SA_Devices", ["FETCH_DEVICES_DATA"]),
     ...mapActions("leadSource", ["LEAD_SOURCE_ACTIVE_LIST"]),
     ...mapActions("vasCreation", ["GET_ALL_VAS_DETAILS"]),
     ...mapActions("leadSourceVasDeviceConfig", ["CREATE_LS_VAS_DEVICE_CONFIG"]),
 
-    async ajaxLoadData() {
-      this.$q.loading.show();
-      try {
-        await Promise.all([
-          this.LEAD_SOURCE_ACTIVE_LIST(),
-          this.FETCH_DEVICES_DATA(),
-          this.GET_ALL_VAS_DETAILS()
-        ]);
-
-        this.dropDown.leadSourceOptions = this.getActiveLeadSource.map(item => ({
-          label: item.sourceName, value: item
-        }));
-        this.dropDown.deviceOptions = this.getAllDevicesInfo.map(item => ({
-          label: item.deviceName, value: item
-        }));
-        this.dropDown.vasOptions = this.getAllVasDetails.map(item => ({
-          label: item.name, value: item
-        }));
-      } catch (e) {
-        console.error(e);
-      } finally {
-        this.$q.loading.hide();
-      }
-    },
-
-    async fnsubmit() {
-      const isValid = await this.v$.$validate();
-      if (!isValid) {
-        this.$q.notify({ color: "warning", message: "Please fill all mandatory fields" });
-        return;
-      }
-
-      this.$q.loading.show();
-      this.CREATE_LS_VAS_DEVICE_CONFIG(this.formData)
+    ajaxLoadDataForDeviceTypeTable() {
+      let self = this;
+      self.LEAD_SOURCE_ACTIVE_LIST()
         .then(() => {
-          this.$q.notify({ color: "positive", message: "Successfully Created" });
-          this.resetForm();
-        })
-        .catch(error => {
-          this.$q.notify({ color: "amber-9", message: error.body?.message || "Please Try Again Later !" });
-        })
-        .finally(() => this.$q.loading.hide());
+          this.dropDown.leadSourceOptions = _.map(self.getActiveLeadSource, item => {
+            return { value: item, label: item.sourceName };
+          });
+        });
+      self.FETCH_DEVICES_DATA()
+        .then(() => {
+          this.dropDown.deviceOptions = _.map(self.getAllDevicesInfo, item => {
+            return { value: item.deviceName, label: item.deviceName };
+          });
+        });
+      self.GET_ALL_VAS_DETAILS().then(() => {
+        this.dropDown.vasOptions = _.map(self.getAllVasDetails, item => {
+          return { value: item, label: item.name };
+        });
+      });
     },
-
+    fnsubmit(request) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
+        this.$q.notify({
+          color: "negative",
+          position: "bottom",
+          message: "Please fill all mandatory fields",
+          icon: "info"
+        });
+      } else {
+        this.$q.loading.show({
+          delay: 0,
+          spinnerColor: "purple-9",
+          message: "Validating..."
+        });
+        this.CREATE_LS_VAS_DEVICE_CONFIG(request)
+          .then(response => {
+            this.$q.loading.hide();
+            this.$q.notify({
+              color: "positive",
+              position: "bottom",
+              message: "Successfully Created",
+              icon: "thumb_up",
+            });
+            this.resetForm();
+          })
+          .catch((error) => {
+            this.$q.loading.hide();
+            this.$q.notify({
+              type: "warning",
+              color: "amber-9",
+              position: "bottom",
+              message: error.data?.message || "Please Try Again Later !",
+              icon: "thumb_down",
+            });
+          });
+      }
+    },
     resetForm() {
       this.formData = {
-        leadSourceDeviceVasMapping: { leadSource: null, device: null },
+        leadSourceDeviceVasMapping: { leadSource: "", device: "" },
         vasList: []
       };
       this.v$.$reset();
     }
-  }
+  },
 };
 </script>
+
+<style>
+</style>

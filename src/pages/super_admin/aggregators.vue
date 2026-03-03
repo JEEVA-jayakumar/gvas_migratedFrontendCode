@@ -1,147 +1,72 @@
 <template>
-  <q-page padding>
-    <q-tabs
-      v-model="tab"
-      class="bg-white text-grey-7 shadow-1"
-      active-color="purple-9"
-      indicator-color="purple-9"
-      align="left"
-    >
-      <q-tab name="active" label="Active Aggregators" />
-      <q-tab name="deactive" label="Deactivated Aggregators" />
-    </q-tabs>
+    <q-page>
+        <!-- content -->
+        <div>
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" align="left" @update:model-value="changeTabs">
+                <q-tab color="dark" name="active" label="Active Aggregators" />
+                <q-tab color="dark" name="deactive" label="Deactive Aggregators" />
+            </q-tabs>
 
-    <q-tab-panels v-model="tab" animated keep-alive class="bg-transparent">
-      <q-tab-panel name="active" class="no-padding q-mt-md">
-        <q-table
-          flat
-          bordered
-          :rows="activeTableData"
-          :columns="columns"
-          row-key="id"
-          table-class="customSATableClass"
-          :filter="filterSearch"
-          v-model:pagination="paginationControl"
-          :filter-method="myCustomSearchFilter"
-          color="purple-9"
-        >
-          <template v-slot:body-cell-action="props">
-            <q-td :props="props" class="q-gutter-x-sm">
-              <q-btn
-                dense
-                unelevated
-                no-caps
-                label="Modify"
-                icon="edit"
-                color="primary"
-                @click="fnShowEditAggregator(props.row)"
-              />
-              <q-btn
-                dense
-                unelevated
-                no-caps
-                label="Disable"
-                icon="block"
-                color="negative"
-                @click="fnDeleteAggregators(props.row)"
-              />
-            </q-td>
-          </template>
+            <q-tab-panels v-model="selectedTab" animated keep-alive>
+                <q-tab-panel name="active" class="no-padding">
+                    <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns"
+                        :filter="filterSearch" v-model:pagination="paginationControl"
+                        :filter-method="myCustomSearchFilter" row-key="id" color="grey-9">
+                        <template v-slot:body-cell-action="props">
+                            <q-td :props="props">
+                                <div class="row no-wrap no-padding">
+                                    <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
+                                        @click="fnShowEditAggregator(props.row)" flat class="text-light-blue"></q-btn>
+                                    <q-btn dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md"
+                                        @click="fnDeleteAggregators(props.row)" flat class="text-negative"></q-btn>
+                                </div>
+                            </q-td>
+                        </template>
 
-          <template v-slot:top>
-            <div class="full-width row items-center justify-between">
-              <div class="col-12 col-md-6">
-                <q-input
-                  dense
-                  filled
-                  clearable
-                  color="purple-9"
-                  v-model="filterSearch"
-                  placeholder="Search aggregators..."
-                >
-                  <template v-slot:append>
-                    <q-icon name="search" />
-                  </template>
-                </q-input>
-              </div>
-              <div class="col-auto">
-                <q-btn
-                  unelevated
-                  no-caps
-                  label="Add New Aggregator"
-                  color="purple-9"
-                  icon="add"
-                  @click="fnShowAddNewAggregators()"
-                />
-              </div>
-            </div>
-          </template>
-        </q-table>
-      </q-tab-panel>
+                        <template v-slot:top>
+                            <div class="col-6">
+                                <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.."
+                                    class="q-mr-lg" />
+                            </div>
+                            <div class="col-6" align="right">
+                                <q-btn no-caps class="text-weight-regular" label="Add New Aggregators"
+                                    @click="fnShowAddNewAggregators()" color="purple-9" size="md" />
+                            </div>
+                        </template>
+                    </q-table>
+                </q-tab-panel>
 
-      <q-tab-panel name="deactive" class="no-padding q-mt-md">
-        <q-table
-          flat
-          bordered
-          :rows="deActiveTableData"
-          :columns="columns1"
-          row-key="id"
-          table-class="customSATableClass"
-          :filter="filterSearch"
-          v-model:pagination="paginationControl"
-          :filter-method="myCustomSearchFilter"
-          color="purple-9"
-        >
-          <template v-slot:body-cell-action1="props">
-            <q-td :props="props">
-              <q-btn
-                dense
-                unelevated
-                no-caps
-                label="Activate"
-                icon="check_circle"
-                color="positive"
-                @click="fnActivate(props.row)"
-              />
-            </q-td>
-          </template>
+                <q-tab-panel name="deactive" class="no-padding">
+                    <q-table :rows="deActiveTableData" table-class="customSATableClass" :columns="columns1"
+                        :filter="filterSearch" v-model:pagination="paginationControl"
+                        :filter-method="myCustomSearchFilter" row-key="id" color="grey-9">
+                        <template v-slot:body-cell-action1="props">
+                            <q-td :props="props">
+                                <div class="row no-wrap no-padding">
+                                    <q-btn dense no-caps no-wrap label="Active" icon="far fa-plus-square" size="md"
+                                        @click="fnActivate(props.row)" flat class="text-positive"></q-btn>
+                                </div>
+                            </q-td>
+                        </template>
 
-          <template v-slot:top>
-            <div class="full-width row items-center">
-              <div class="col-12 col-md-6">
-                <q-input
-                  dense
-                  filled
-                  clearable
-                  color="purple-9"
-                  v-model="filterSearch"
-                  placeholder="Search deactivated..."
-                >
-                  <template v-slot:append>
-                    <q-icon name="search" />
-                  </template>
-                </q-input>
-              </div>
-            </div>
-          </template>
-        </q-table>
-      </q-tab-panel>
-    </q-tab-panels>
+                        <template v-slot:top>
+                            <div class="col-6">
+                                <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.."
+                                    class="q-mr-lg" />
+                            </div>
+                        </template>
+                    </q-table>
+                </q-tab-panel>
+            </q-tab-panels>
 
-    <!-- Modals -->
-    <showEditAggregator
-      v-if="propShowEditAggregator"
-      :propShowEditAggregator="propShowEditAggregator"
-      :propRowDetails="propRowDetails"
-      @emitfnShowEditAggregator="propShowEditAggregator = false; ajaxLoadDataForRegionTable()"
-    />
+            <showEditAggregator v-if="propShowEditAggregator" :propShowEditAggregator="propShowEditAggregator"
+                :propRowDetails="propRowDetails" @emitfnShowEditAggregator="fnShowEditAggregator" />
 
-    <ShowAddNewAggregators
-      v-if="propShowAddNewAggregators"
-      :propShowAddNewAggregators="propShowAddNewAggregators"
-      @emitfnShowAddNewAggregators="propShowAddNewAggregators = false; ajaxLoadDataForRegionTable()"
-    />
-  </q-page>
+            <ShowAddNewAggregators v-if="propShowAddNewAggregators"
+                :propShowAddNewAggregators="propShowAddNewAggregators" :propRowDetails="propRowDetails"
+                @emitfnShowAddNewAggregators="fnShowAddNewAggregators" />
+        </div>
+    </q-page>
 </template>
 
 <script>
@@ -150,103 +75,124 @@ import ShowAddNewAggregators from "../../components/super_admin/ShowAddNewAggreg
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "AggregatorsManagement",
-  components: {
-    showEditAggregator,
-    ShowAddNewAggregators,
-  },
-  data() {
-    return {
-      tab: 'active',
-      propShowEditAggregator: false,
-      propShowAddNewAggregators: false,
-      propRowDetails: null,
-      filterSearch: "",
-      paginationControl: { rowsPerPage: 10 },
-      columns: [
-        { name: "name", required: true, label: "Aggregator", align: "left", field: "name", sortable: true },
-        { name: "action", required: true, label: "Actions", align: "center" }
-      ],
-      columns1: [
-        { name: "name", required: true, label: "Aggregator", align: "left", field: "name", sortable: true },
-        { name: "action1", required: true, label: "Actions", align: "center" }
-      ],
-      activeTableData: [],
-      deActiveTableData: [],
-    };
-  },
-
-  computed: {
-    ...mapGetters("superAdminAggregators", ["getCreatedAggregatorList"])
-  },
-
-  created() {
-    this.ajaxLoadDataForRegionTable();
-  },
-
-  methods: {
-    ...mapActions("superAdminAggregators", ["GET_CREATED_AGGREGATORS_LIST", "DELETE_CREATED_AGGREGATORS", "EDIT_CREATED_AGGREGATORS"]),
-
-    ajaxLoadDataForRegionTable() {
-      this.$q.loading.show({ message: "Loading aggregators..." });
-      this.GET_CREATED_AGGREGATORS_LIST()
-        .then(() => {
-          this.activeTableData = this.getCreatedAggregatorList.filter(a => a.active === true);
-          this.deActiveTableData = this.getCreatedAggregatorList.filter(a => a.active === false);
-          this.$q.loading.hide();
-        })
-        .catch(() => {
-          this.$q.loading.hide();
-          this.$q.notify({ color: "negative", message: "Failed to load aggregators" });
-        });
+    name: "Aggregators",
+    components: {
+        showEditAggregator,
+        ShowAddNewAggregators,
+    },
+    data() {
+        return {
+            propShowEditAggregator: false,
+            propShowAddNewAggregators: false,
+            propRowDetails: "",
+            filterSearch: "",
+            selectedTab: "active",
+            paginationControl: {
+                rowsPerPage: 10
+            },
+            columns: [
+                { name: "name", required: true, label: "Aggregator", align: "left", field: "name", sortable: false },
+                { name: "action", required: true, label: "", align: "left", field: "action", sortable: false }
+            ],
+            columns1: [
+                { name: "name", required: true, label: "Aggregator", align: "left", field: "name", sortable: false },
+                { name: "action1", required: true, label: "", align: "left", field: "action1", sortable: false }
+            ],
+            activeTableData: [],
+            deActiveTableData: [],
+        };
     },
 
-    fnShowAddNewAggregators() {
-      this.propShowAddNewAggregators = true;
+    created() {
+        this.ajaxLoadDataForRegionTable();
     },
 
-    fnShowEditAggregator(rowDetails) {
-      this.propRowDetails = rowDetails;
-      this.propShowEditAggregator = true;
+    computed: {
+        ...mapGetters("superAdminAggregators", ["getCreatedAggregatorList"])
     },
 
-    fnActivate(row) {
-      this.$q.dialog({
-        title: "Confirm",
-        message: "Activate this aggregator?",
-        ok: "Continue", cancel: "Cancel", persistent: true
-      }).onOk(() => {
-        this.$q.loading.show();
-        let payload = { ...row, active: true };
-        this.EDIT_CREATED_AGGREGATORS(payload).then(() => {
-          this.$q.notify({ color: "positive", message: "Activated successfully" });
-          this.ajaxLoadDataForRegionTable();
-          this.$q.loading.hide();
-        });
-      });
-    },
+    methods: {
+        ...mapActions("superAdminAggregators", ["GET_CREATED_AGGREGATORS_LIST", "DELETE_CREATED_AGGREGATORS", "EDIT_CREATED_AGGREGATORS"]),
 
-    fnDeleteAggregators(row) {
-      this.$q.dialog({
-        title: "Confirm",
-        message: "Deactivate this aggregator?",
-        ok: "Continue", cancel: "Cancel", persistent: true
-      }).onOk(() => {
-        this.$q.loading.show();
-        this.DELETE_CREATED_AGGREGATORS(row).then(() => {
-          this.$q.notify({ color: "positive", message: "Deactivated successfully" });
-          this.ajaxLoadDataForRegionTable();
-          this.$q.loading.hide();
-        });
-      });
-    },
+        changeTabs(tab) {
+            this.ajaxLoadDataForRegionTable();
+        },
 
-    myCustomSearchFilter(rows, terms, cols, cellValue) {
-      const lowerTerms = terms ? terms.toLowerCase() : "";
-      return rows.filter(row =>
-        cols.some(col => (cellValue(col, row) + "").toLowerCase().includes(lowerTerms))
-      );
+        ajaxLoadDataForRegionTable() {
+            this.$q.loading.show({ delay: 0, spinnerColor: "purple-9", message: "Fetching data .." });
+            this.GET_CREATED_AGGREGATORS_LIST()
+                .then(() => {
+                    this.activeTableData = this.getCreatedAggregatorList.filter(service => service.active == true);
+                    this.deActiveTableData = this.getCreatedAggregatorList.filter(service => service.active == false);
+                    this.$q.loading.hide();
+                })
+                .catch((error) => {
+                    this.$q.loading.hide();
+                    this.$q.notify({
+                        color: "negative",
+                        position: "bottom",
+                        message: error.data?.message || "Please Try Again Later !",
+                        icon: "thumb_down",
+                    });
+                });
+        },
+        fnActivate(request) {
+            this.$q.dialog({
+                title: "Confirm",
+                message: "Are you sure want to active?",
+                ok: "Continue",
+                cancel: "Cancel"
+            }).onOk(() => {
+                this.$q.loading.show({ delay: 100, message: "Please Wait", spinnerColor: "purple-9", customClass: "shadow-none" });
+                this.EDIT_CREATED_AGGREGATORS(request)
+                    .then(() => {
+                        this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Activated", icon: "thumb_up" });
+                        this.ajaxLoadDataForRegionTable();
+                    })
+                    .catch(() => {
+                        this.$q.notify({ color: "negative", position: "bottom", message: "Please try again!", icon: "thumb_down" });
+                    }).finally(() => { this.$q.loading.hide(); });
+            });
+        },
+        fnDeleteAggregators(rowDetails) {
+            this.$q.dialog({
+                title: "Confirm",
+                message: "Are you sure want to delete region?",
+                ok: "Continue",
+                cancel: "Cancel"
+            }).onOk(() => {
+                this.$q.loading.show({ delay: 100, message: "Please Wait", spinnerColor: "purple-9", customClass: "shadow-none" });
+                this.DELETE_CREATED_AGGREGATORS(rowDetails)
+                    .then(() => {
+                        this.$q.notify({ color: "positive", position: "bottom", message: "Successfully removed", icon: "thumb_up" });
+                        this.ajaxLoadDataForRegionTable();
+                    })
+                    .catch(() => {
+                        this.$q.notify({ color: "negative", position: "bottom", message: "Please try again!", icon: "thumb_down" });
+                    }).finally(() => { this.$q.loading.hide(); });
+            });
+        },
+        fnShowAddNewAggregators(rowDetails) {
+            this.propShowAddNewAggregators = !this.propShowAddNewAggregators;
+            this.propRowDetails = rowDetails;
+            if (!this.propShowAddNewAggregators) this.ajaxLoadDataForRegionTable();
+        },
+        fnShowEditAggregator(rowDetails, token) {
+            this.propShowEditAggregator = !this.propShowEditAggregator;
+            this.propRowDetails = rowDetails;
+            if (!this.propShowEditAggregator || token == "refresh") {
+                this.ajaxLoadDataForRegionTable();
+            }
+        },
+        myCustomSearchFilter(rows, terms, cols, cellValue) {
+            const lowerTerms = terms ? terms.toLowerCase() : "";
+            return rows.filter(row =>
+                cols.some(
+                    col =>
+                        (cellValue(col, row) + "").toLowerCase().indexOf(lowerTerms) !== -1
+                )
+            );
+        }
     }
-  }
 };
 </script>

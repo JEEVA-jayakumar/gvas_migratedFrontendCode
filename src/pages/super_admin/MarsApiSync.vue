@@ -1,65 +1,80 @@
 <template>
-  <q-page padding>
-    <q-tabs
-      v-model="MarsApiOptionSelected"
-      class="bg-white text-grey-7 shadow-1"
-      active-color="purple-9"
-      indicator-color="purple-9"
-      align="left"
-    >
-      <q-tab name="DeviceModel" label="Device Model" />
-      <q-tab name="City" label="City" />
-      <q-tab name="Region" label="Region" />
-      <q-tab name="RentalPlan" label="Rental Plan" />
-      <q-tab name="LeadForm" label="Lead Form" />
-      <q-tab name="State" label="State" />
-    </q-tabs>
+    <q-page>
+      <div class="text-grey-9">
+        <div class="row bottom-border q-pa-sm items-center">
+          <div class="col">
+            <q-tabs
+              v-model="MarsApiOptionSelected"
+              color="dark"
+              align="left"
+              class="shadow-1"
+            >
+              <q-tab name="DeviceModelApiSync" label="DeviceModel" />
+              <q-tab name="CityApiSync" label="City" />
+              <q-tab name="RegionApiSync" label="Region" />
+              <q-tab name="RentalPlanApiSync" label="RentalPlan" />
+              <q-tab name="LeadFormApiSync" label="LeadForm" />
+              <q-tab name="StateApiSync" label="State" />
+            </q-tabs>
 
-    <q-tab-panels v-model="MarsApiOptionSelected" animated keep-alive class="bg-transparent">
-      <q-tab-panel name="DeviceModel" class="no-padding q-mt-md">
-        <DeviceModelApiSync />
-      </q-tab-panel>
-      <q-tab-panel name="City" class="no-padding q-mt-md">
-        <CityApiSync />
-      </q-tab-panel>
-      <q-tab-panel name="Region" class="no-padding q-mt-md">
-        <RegionApiSync />
-      </q-tab-panel>
-      <q-tab-panel name="RentalPlan" class="no-padding q-mt-md">
-        <RentalPlanApiSync />
-      </q-tab-panel>
-      <q-tab-panel name="LeadForm" class="no-padding q-mt-md">
-        <LeadFormApiSync />
-      </q-tab-panel>
-      <q-tab-panel name="State" class="no-padding q-mt-md">
-        <StateApiSync />
-      </q-tab-panel>
-    </q-tab-panels>
-  </q-page>
-</template>
+            <q-tab-panels v-model="MarsApiOptionSelected" animated keep-alive>
+              <q-tab-panel name="DeviceModelApiSync" class="no-padding">
+                <DeviceModelApiSync />
+              </q-tab-panel>
+              <q-tab-panel name="CityApiSync" class="no-padding">
+                <CityApiSync />
+              </q-tab-panel>
+              <q-tab-panel name="RegionApiSync" class="no-padding">
+                <RegionApiSync />
+              </q-tab-panel>
+              <q-tab-panel name="RentalPlanApiSync" class="no-padding">
+                <RentalPlanApiSync />
+              </q-tab-panel>
+              <q-tab-panel name="LeadFormApiSync" class="no-padding">
+                <LeadFormApiSync />
+              </q-tab-panel>
+              <q-tab-panel name="StateApiSync" class="no-padding">
+                <StateApiSync />
+              </q-tab-panel>
+            </q-tab-panels>
+          </div>
+        </div>
+      </div>
+    </q-page>
+  </template>
 
-<script>
-import DeviceModelApiSync from "./DeviceModelApiSync.vue";
-import CityApiSync from "./CityApiSync.vue";
-import RegionApiSync from "./RegionApiSync.vue";
-import RentalPlanApiSync from "./RentalPlanApiSync.vue";
-import LeadFormApiSync from "./LeadFormApiSync.vue";
-import StateApiSync from "./StateApiSync.vue";
+  <script>
+  import DeviceModelApiSync from "../../pages/super_admin/DeviceModelApiSync.vue";
+  import CityApiSync from "../../pages/super_admin/CityApiSync.vue";
+  import RegionApiSync from "../../pages/super_admin/RegionApiSync.vue";
+  import RentalPlanApiSync from "../../pages/super_admin/RentalPlanApiSync.vue";
+  import LeadFormApiSync from "../../pages/super_admin/LeadFormApiSync.vue";
+  import StateApiSync from "../../pages/super_admin/StateApiSync.vue";
 
-export default {
-  name: "MarsApiSyncMain",
-  components: {
-    DeviceModelApiSync,
-    CityApiSync,
-    RegionApiSync,
-    RentalPlanApiSync,
-    LeadFormApiSync,
-    StateApiSync
-  },
-  data() {
-    return {
-      MarsApiOptionSelected: "DeviceModel"
-    };
+  export default {
+    name: "MarsApiSync",
+    components: {
+        DeviceModelApiSync,
+        CityApiSync,
+        RegionApiSync,
+        RentalPlanApiSync,
+        LeadFormApiSync,
+        StateApiSync
+    },
+    data() {
+      return {
+        MarsApiOptionSelected: "DeviceModelApiSync"
+      };
+    },
+    methods: {}
+  };
+  </script>
+
+  <style>
+  .border-1 {
+    border: 1px solid rgba(0, 0, 0, 0.1);
   }
-};
-</script>
+  .border-2 {
+    border: 3px solid rgba(48, 48, 48, 0.5);
+  }
+  </style>

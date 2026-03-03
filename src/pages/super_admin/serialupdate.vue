@@ -1,53 +1,63 @@
 <template>
-  <q-page padding>
-    <q-card flat bordered class="q-pa-md">
-      <div class="text-h6 text-purple-9 q-mb-md">TID Based SerialNumber</div>
+  <q-page>
+    <div class="col-md-6 q-my-md" align="right">
+      <div class="col group">
+      </div>
+    </div>
+    <div class="col-12 text-h6 q-my-lg text-weight-regular">TID Based SerialNumber</div>
+    <form>
+      <div class="q-px-md">
+        <div class="q-pa-md">
+          <div class="row q-col-gutter-sm q-py-sm">
+            <div class="col-md-6">
+              <q-select
+                v-model.trim="formData.bank"
+                @blur="v$.formData.bank.$touch"
+                :error="v$.formData.bank.$error"
+                class="text-weight-regular text-grey-8"
+                :options="leadSourceOptions"
+                label="*Select TID"
+                emit-value
+                map-options
+              />
+            </div>
+              <div class="col-md-6">
+              <q-input
+                v-model.trim="formData.emp_id"
+                @blur="v$.formData.emp_id.$touch"
+                :error="v$.formData.emp_id.$error"
+                class="text-weight-regular text-grey-8"
+                color="grey-9"
+                label="*Enter Serial Number"
+              />
+              </div>
 
-      <q-form @submit="fnSubmitBankDetails" class="q-gutter-md">
-        <div class="row q-col-gutter-md">
-          <div class="col-12 col-md-6">
-            <q-select
-              outlined
-              dense
-              v-model="formData.bank"
-              :options="leadSourceOptions"
-              label="*Select TID"
-              :error="v$.formData.bank.$error"
-              color="purple-9"
-            />
-          </div>
-          <div class="col-12 col-md-6">
-            <q-input
-              outlined
-              dense
-              v-model.trim="formData.emp_id"
-              label="*Enter Serial Number"
-              :error="v$.formData.emp_id.$error"
-              color="purple-9"
-            />
-          </div>
+            </div>
         </div>
-
-        <div class="row justify-center q-mt-md">
-          <q-btn unelevated label="Submit" color="purple-9" type="submit" />
-        </div>
-      </q-form>
-    </q-card>
-
-    <!-- Redundant components or other features could be added here if parity requires -->
+      </div>
+      <div class="full-width group" align="center">
+        <q-btn
+          size="md"
+          type="button"
+          color="purple-9"
+          @click="fnSubmitBankDetails(formData)"
+        >Submit</q-btn>
+      </div>
+    </form>
     <uploadFile
       v-if="propShowCreateUploadFile"
       :propShowUploadFile="propShowCreateUploadFile"
       @emitfnshowUploadFile="propShowCreateUploadFile = false"
-    />
+    ></uploadFile>
   </q-page>
 </template>
 
 <script>
-import { useVuelidate } from "@vuelidate/core";
-import { required, email } from "@vuelidate/validators";
-import { mapGetters, mapActions } from "vuex";
 import uploadFile from "../../components/super_admin/uploadFile.vue";
+import { required, email } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
+import { mapGetters, mapActions } from "vuex";
+import _ from "lodash";
 
 export default {
   name: "SerialUpdate",
@@ -72,67 +82,75 @@ export default {
       }
     };
   },
+
   validations() {
     return {
       formData: {
+        location: { required },
         bank: { required },
-        emp_id: { required, email } // Legacy code had email validation for emp_id
+        branch_code: { required },
+        so_name: { required },
+        mail_id: { required },
+        emp_id: { required, email },
+        bank_enable: { required }
       }
     };
-  },
-  created() {
-    this.ajaxLoadLeadSource();
   },
   computed: {
     ...mapGetters("leadSource", ["getActiveLeadSource"])
   },
+  created() {
+    this.ajaxLoadLeadSource();
+  },
   methods: {
     ...mapActions("leadSource", ["LEAD_SOURCE_ACTIVE_LIST"]),
     ...mapActions("Bank_SO", ["SAVE_BANK_SO"]),
-
-    async ajaxLoadLeadSource() {
-      await this.LEAD_SOURCE_ACTIVE_LIST();
-      this.leadSourceOptions = this.getActiveLeadSource.map(item => ({
-        label: item.sourceName,
-        value: item.sourceName
-      }));
-    },
-
-    async fnSubmitBankDetails() {
+    async fnSubmitBankDetails(formData) {
       const isValid = await this.v$.$validate();
       if (!isValid) {
-        this.$q.notify({ color: "warning", message: "Please review fields again." });
+        this.$q.notify("Please review fields again.");
         return;
+      } else {
+        this.SAVE_BANK_SO(formData)
+          .then(response => {
+            this.$q.notify({
+              color: "positive",
+              position: "bottom",
+              message: response.data.message,
+              icon: "thumb_up"
+            });
+            this.formData.location = "";
+            this.formData.bank = "";
+            this.formData.branch_code = "";
+            this.formData.so_name = "";
+            this.formData.mail_id = "";
+            this.formData.emp_id = "";
+            this.formData.bank_enable = "";
+            this.v$.$reset();
+          })
+          .catch(error => {
+            this.$q.notify({
+              type: "warning",
+              color: "amber-9",
+              position: "bottom",
+              message: error.data?.message || "Operation failed"
+            });
+          });
       }
-
-      this.$q.loading.show();
-      const payload = {
-        ...this.formData,
-        bank: this.formData.bank.value // Mapping back to legacy expected structure
-      };
-
-      this.SAVE_BANK_SO(payload)
-        .then(response => {
-          this.$q.notify({ color: "positive", message: response.data.message });
-          this.resetForm();
-        })
-        .catch(error => {
-          this.$q.notify({ color: "amber-9", message: error.data.message || "Error occurred" });
-        })
-        .finally(() => this.$q.loading.hide());
     },
-
-    resetForm() {
-      this.formData = {
-        location: "",
-        bank: "",
-        branch_code: "",
-        so_name: "",
-        mail_id: "",
-        emp_id: "",
-        bank_enable: ""
-      };
-      this.v$.$reset();
+    ajaxLoadLeadSource() {
+      let self = this;
+      self.LEAD_SOURCE_ACTIVE_LIST().then(() => {
+        this.leadSourceOptions = _.map(self.getActiveLeadSource, item => {
+          return {
+            value: item.sourceName,
+            label: item.sourceName
+          };
+        });
+      });
+    },
+    fnShowCreateUploadFile() {
+      this.propShowCreateUploadFile = !this.propShowCreateUploadFile;
     }
   }
 };
