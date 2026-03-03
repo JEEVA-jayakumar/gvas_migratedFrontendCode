@@ -8,27 +8,35 @@
           </q-card-section>
 
           <q-card-section class="q-pa-md">
-            <q-form @submit="fnsubmit" class="q-gutter-md">
+            <q-form @submit="fnsubmit(formData)" class="q-gutter-md">
               <!-- Selection Row -->
-              <q-select
-                outlined
-                dense
-                v-model="formData.leadSource"
-                :options="dropDown.leadSourceOptions"
-                label="Select lead source"
-                emit-value
-                map-options
-              />
+              <div class="row items-center no-wrap">
+                <q-select
+                  outlined
+                  dense
+                  v-model="formData.leadSource"
+                  :options="dropDown.leadSourceOptions"
+                  label="Select lead source"
+                  class="full-width"
+                  emit-value
+                  map-options
+                />
+                <q-btn round @click="fnManageLeadSource" size="sm" icon="add" color="purple-9" class="q-ml-sm" />
+              </div>
 
-              <q-select
-                outlined
-                dense
-                v-model="formData.device"
-                :options="dropDown.deviceOptions"
-                label="Select device"
-                emit-value
-                map-options
-              />
+              <div class="row items-center no-wrap">
+                <q-select
+                  outlined
+                  dense
+                  v-model="formData.device"
+                  :options="dropDown.deviceOptions"
+                  label="Select device"
+                  class="full-width"
+                  emit-value
+                  map-options
+                />
+                <q-btn round @click="fnManageDevice" size="sm" icon="add" color="purple-9" class="q-ml-sm" />
+              </div>
 
               <q-select
                 outlined
@@ -48,6 +56,7 @@
                 label="Select merchant category type"
                 emit-value
                 map-options
+                @update:model-value="fnCategoryBasedMdr(formData)"
               />
 
               <!-- MDR Fields Grid -->
@@ -149,7 +158,8 @@ export default {
   computed: {
     ...mapGetters("SA_Devices", ["getAllDevicesInfo", "getMarsDeviceModel"]),
     ...mapGetters("leadSource", ["getActiveLeadSource"]),
-    ...mapGetters("merchantCategory", ["getActiveMerchantCategory"])
+    ...mapGetters("merchantCategory", ["getActiveMerchantCategory"]),
+    ...mapGetters("CategoryBasedMdr", ["categoryBasedMdr"])
   },
 
   methods: {
@@ -157,6 +167,7 @@ export default {
     ...mapActions("leadSource", ["LEAD_SOURCE_ACTIVE_LIST"]),
     ...mapActions("merchantCategory", ["MERCHANT_CATEGORY_ACTIVE_LIST"]),
     ...mapActions("MdrPlan", ["MDR_PLAN"]),
+    ...mapActions("CategoryBasedMdr", ["CATEGORY_BASED_MDR_PLAN"]),
 
     async loadInitialData() {
       this.$q.loading.show({ message: "Loading data..." });
@@ -183,38 +194,93 @@ export default {
       }
     },
 
-    async fnsubmit() {
+    async fnsubmit(request) {
       const requestParams = {
         url: {
-          leadSource: this.formData.leadSource,
-          device: this.formData.device,
-          merchantType: this.formData.merchantType
+          leadSource: request.leadSource,
+          device: request.device,
+          merchantType: request.merchantType
         },
         params: {
-          debitLessthanAmount: this.formData.debitLessthanAmount,
-          debitGreaterthanAmount: this.formData.debitGreaterthanAmount,
-          stdCC: this.formData.stdCC,
-          premiumCC: this.formData.premiumCC,
-          corpCC: this.formData.corpCC,
-          intlCC: this.formData.intlCC,
-          superPremiumlCC: this.formData.superPremiumlCC
+          debitLessthanAmount: request.debitLessthanAmount,
+          debitGreaterthanAmount: request.debitGreaterthanAmount,
+          stdCC: request.stdCC,
+          premiumCC: request.premiumCC,
+          corpCC: request.corpCC,
+          intlCC: request.intlCC,
+          superPremiumlCC: request.superPremiumlCC
         }
       };
 
       this.$q.loading.show({ message: "Submitting..." });
       try {
         const response = await this.MDR_PLAN(requestParams);
-        this.$q.notify({ color: "positive", message: response.data.message || "MDR added successfully", icon: "thumb_up" });
+        this.$q.notify({
+          color: "positive",
+          position: "bottom",
+          message: response.data?.message || "Successfully created!",
+          icon: "thumb_up"
+        });
         this.resetForm();
       } catch (error) {
-        this.$q.notify({ color: "negative", message: error.data?.message || "Operation failed", icon: "warning" });
+        this.$q.notify({
+          color: "negative",
+          position: "bottom",
+          icon: "warning",
+          message: error.data?.message || "Please try again later!"
+        });
       } finally {
         this.$q.loading.hide();
       }
     },
 
     resetForm() {
-      Object.keys(this.formData).forEach(key => this.formData[key] = null);
+      Object.keys(this.formData).forEach(key => {
+        this.formData[key] = "";
+      });
+    },
+
+    fnCategoryBasedMdr(request) {
+      let formData = {
+        leadSource: request.leadSource,
+        device: request.device,
+        merchantType: request.merchantType
+      };
+      this.CATEGORY_BASED_MDR_PLAN(formData).then(response => {
+        if (response.status == 200) {
+          this.formData.debitLessthanAmount = this.categoryBasedMdr.debitLessthanAmount;
+          this.formData.debitGreaterthanAmount = this.categoryBasedMdr.debitGreaterthanAmount;
+          this.formData.stdCC = this.categoryBasedMdr.stdCC;
+          this.formData.premiumCC = this.categoryBasedMdr.premiumCC;
+          this.formData.corpCC = this.categoryBasedMdr.corpCC;
+          this.formData.intlCC = this.categoryBasedMdr.intlCC;
+          this.formData.superPremiumlCC = this.categoryBasedMdr.superPremiumlCC;
+        } else {
+          this.$q.notify({
+            color: "negative",
+            position: "bottom-left",
+            message: "Invalid MDR details",
+            icon: "clear"
+          });
+          this.formData.debitLessthanAmount = "";
+          this.formData.debitGreaterthanAmount = "";
+          this.formData.stdCC = "";
+          this.formData.premiumCC = "";
+          this.formData.corpCC = "";
+          this.formData.intlCC = "";
+          this.formData.superPremiumlCC = "";
+        }
+      });
+    },
+
+    fnManageLeadSource() {
+      this.showLeadSourceModal = !this.showLeadSourceModal;
+    },
+    fnManageDevice() {
+      this.showDeviceDetailModal = !this.showDeviceDetailModal;
+    },
+    fnManageMerchantType() {
+      this.showMerchantModal = !this.showMerchantModal;
     }
   }
 };

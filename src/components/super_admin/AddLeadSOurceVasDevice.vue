@@ -103,7 +103,7 @@ export default {
     this.ajaxLoadData();
   },
   computed: {
-    ...mapGetters("SA_Devices", ["getAllDevicesInfo"]),
+    ...mapGetters("SA_Devices", ["getAllDevicesInfo", "getMarsDeviceModel"]),
     ...mapGetters("leadSource", ["getActiveLeadSource"]),
     ...mapGetters("vasCreation", ["getAllVasDetails"])
   },
@@ -113,7 +113,7 @@ export default {
     ...mapActions("vasCreation", ["GET_ALL_VAS_DETAILS"]),
     ...mapActions("leadSourceVasDeviceConfig", ["CREATE_LS_VAS_DEVICE_CONFIG"]),
 
-    async ajaxLoadData() {
+    async ajaxLoadDataForDeviceTypeTable() {
       this.$q.loading.show();
       try {
         await Promise.all([
@@ -136,6 +136,10 @@ export default {
       } finally {
         this.$q.loading.hide();
       }
+    },
+
+    async ajaxLoadData() {
+      this.ajaxLoadDataForDeviceTypeTable();
     },
 
     async fnsubmit() {

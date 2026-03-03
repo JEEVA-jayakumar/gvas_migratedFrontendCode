@@ -103,7 +103,8 @@
                 color="positive"
                 @click="fnActivate(props.row)"
               />
-            </template>
+            </q-td>
+          </template>
 
           <template v-slot:top>
             <div class="full-width row items-center">
