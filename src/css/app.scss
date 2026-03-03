@@ -138,9 +138,9 @@ select {
   background: #7d428f !important;
 }
 
-.q-item.active,
-.q-item.router-link-active,
-.q-item:focus {
+.q-drawer .q-item.active,
+.q-drawer .q-item.router-link-active,
+.q-drawer .q-item:focus {
   background: rgba(0, 0, 0, 0.4) !important;
 }
 

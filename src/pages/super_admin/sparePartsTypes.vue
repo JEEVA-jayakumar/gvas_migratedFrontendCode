@@ -1,154 +1,170 @@
 <template>
-  <q-page padding>
-    <q-tabs
-      v-model="tab"
-      class="bg-white text-grey-7 shadow-1"
-      active-color="purple-9"
-      indicator-color="purple-9"
-      align="left"
-      @update:model-value="ajaxSpareData"
-    >
-      <q-tab name="active" label="Active" />
-      <q-tab name="deactive" label="Deactivated" />
-    </q-tabs>
+  <q-page>
+    <!-- content -->
+    <div>
+      <div class="col-12 text-h6 q-my-lg text-weight-regular">Spare Parts Types</div>
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" align="left">
+        <q-tab color="dark" name="active" label="Active " />
+        <q-tab color="dark" name="deactive" label="Deactive" />
+      </q-tabs>
+      <q-tab-panels v-model="selectedTab" animated keep-alive>
+        <q-tab-panel name="active" class="no-padding">
+          <q-table
+            :rows="activeTableData"
+            table-class="customSATableClass"
+            :columns="columns"
+            :filter="filterSearch"
+            v-model:pagination="paginationControl"
+            :filter-method="myCustomSearchFilter"
+            row-key="id"
+            color="grey-9"
+          >
+            <template v-slot:body-cell-created_date="props">
+              <q-td :props="props">
+                {{ $moment(props.row.created_date).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-updated_date="props">
+              <q-td :props="props">
+                {{ $moment(props.row.updated_date).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-action="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <q-btn
+                    dense
+                    no-caps
+                    no-wrap
+                    label="Modify"
+                    icon="far fa-plus-square"
+                    size="md"
+                    @click="fnShowEditSpareParts(props.row)"
+                    flat
+                    class="text-light-blue"
+                  ></q-btn>
+                  <q-btn
+                    dense
+                    no-caps
+                    no-wrap
+                    label="Disable"
+                    icon="far fa-minus-square"
+                    size="md"
+                    @click="fnDeleteSpareParts(props.row)"
+                    flat
+                    class="text-negative"
+                  ></q-btn>
+                </div>
+              </q-td>
+            </template>
 
-    <q-tab-panels v-model="tab" animated keep-alive class="bg-transparent">
-      <!-- ================= ACTIVE TAB ================= -->
-      <q-tab-panel name="active" class="no-padding q-mt-md">
-        <q-table
-          flat
-          bordered
-          :rows="activeTableData"
-          :columns="columns"
-          row-key="id"
-          table-class="customSATableClass"
-          :filter="filterSearch"
-          v-model:pagination="paginationControl"
-          :filter-method="myCustomSearchFilter"
-          color="purple-9"
-        >
-          <template v-slot:body-cell-created_date="props">
-            <q-td :props="props">
-              {{ $moment(props.row.created_date).format("Do MMM Y") }}
-            </q-td>
-          </template>
-
-          <template v-slot:body-cell-updated_date="props">
-            <q-td :props="props">
-              {{ $moment(props.row.updated_date).format("Do MMM Y") }}
-            </q-td>
-          </template>
-
-          <template v-slot:body-cell-action="props">
-            <q-td :props="props" class="q-gutter-x-sm">
-              <q-btn
-                dense
-                unelevated
-                no-caps
-                label="Modify"
-                icon="edit"
-                color="primary"
-                @click="fnShowEditSpareParts(props.row)"
-              />
-              <q-btn
-                dense
-                unelevated
-                no-caps
-                label="Disable"
-                icon="block"
-                color="negative"
-                @click="fnDeleteSpareParts(props.row)"
-              />
-            </q-td>
-          </template>
-
-          <template v-slot:top>
-            <div class="full-width row items-center justify-between">
-              <div class="col-12 col-md-4">
+            <template v-slot:top>
+              <!--START: table filter,search -->
+              <div class="col-6">
                 <q-input
-                  dense
-                  filled
                   clearable
-                  color="purple-9"
+                  color="grey-9"
                   v-model="filterSearch"
-                  placeholder="Search spare types..."
+                  placeholder="Type.."
+                  class="q-mr-lg"
+                  label="Search"
                 >
                   <template v-slot:append>
                     <q-icon name="search" />
                   </template>
                 </q-input>
               </div>
-              <div class="col-auto">
+              <!--END: table filter,search -->
+              <div class="col-6" align="right">
                 <q-btn
-                  unelevated
                   no-caps
+                  class="text-weight-regular"
                   label="Add Spare Type"
-                  color="purple-9"
-                  icon="add"
                   @click="fnShowAddNewSpareParts()"
+                  color="purple-9"
+                  size="md"
                 />
               </div>
-            </div>
-          </template>
-        </q-table>
-      </q-tab-panel>
+            </template>
+          </q-table>
+        </q-tab-panel>
+        <q-tab-panel name="deactive" class="no-padding">
+          <q-table
+            :rows="deActiveTableData"
+            table-class="customSATableClass"
+            :columns="columns1"
+            :filter="filterSearch"
+            v-model:pagination="paginationControl"
+            :filter-method="myCustomSearchFilter"
+            row-key="id"
+            color="grey-9"
+          >
+            <template v-slot:body-cell-created_date="props">
+              <q-td :props="props">
+                {{ $moment(props.row.created_date).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-updated_date="props">
+              <q-td :props="props">
+                {{ $moment(props.row.updated_date).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-action="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <q-btn
+                    dense
+                    no-caps
+                    no-wrap
+                    label="Active"
+                    icon="far fa-minus-square"
+                    size="md"
+                    @click="fnShowActiveSpareparts(props.row)"
+                    flat
+                    class="text-positive"
+                  ></q-btn>
+                </div>
+              </q-td>
+            </template>
 
-      <!-- ================= DEACTIVE TAB ================= -->
-      <q-tab-panel name="deactive" class="no-padding q-mt-md">
-        <q-table
-          flat
-          bordered
-          :rows="deActiveTableData"
-          :columns="columns1"
-          row-key="id"
-          table-class="customSATableClass"
-          :filter="filterSearch"
-          v-model:pagination="paginationControl"
-          :filter-method="myCustomSearchFilter"
-          color="purple-9"
-        >
-          <template v-slot:body-cell-created_date="props">
-            <q-td :props="props">
-              {{ $moment(props.row.created_date).format("Do MMM Y") }}
-            </q-td>
-          </template>
+            <template v-slot:top>
+              <div class="col-6">
+                <q-input
+                  clearable
+                  color="grey-9"
+                  v-model="filterSearch"
+                  placeholder="Type.."
+                  class="q-mr-lg"
+                  label="Search"
+                >
+                  <template v-slot:append>
+                    <q-icon name="search" />
+                  </template>
+                </q-input>
+              </div>
+            </template>
+          </q-table>
+        </q-tab-panel>
+      </q-tab-panels>
 
-          <template v-slot:body-cell-updated_date="props">
-            <q-td :props="props">
-              {{ $moment(props.row.updated_date).format("Do MMM Y") }}
-            </q-td>
-          </template>
+      <!--START: Show edit  Spare Parts -->
+      <showEditSpareParts
+        v-if="propShowEditSpareParts"
+        :propShowEditSpareParts="propShowEditSpareParts"
+        :propRowDetails="propRowDetails"
+        @emitfnshowEditSpareParts ="fnShowEditSpareParts"
+      />
+      <!--END: Show edit  Spare Parts -->
 
-          <template v-slot:body-cell-action="props">
-            <q-td :props="props">
-              <q-btn
-                dense
-                unelevated
-                no-caps
-                label="Activate"
-                icon="check_circle"
-                color="positive"
-                @click="fnShowActiveSpareparts(props.row)"
-              />
-            </q-td>
-          </template>
-        </q-table>
-      </q-tab-panel>
-    </q-tab-panels>
-
-    <!-- Modals -->
-    <showEditSpareParts
-      v-if="propShowEditSpareParts"
-      :propShowEditSpareParts="propShowEditSpareParts"
-      :propRowDetails="propRowDetails"
-      @emitfnshowEditSpareParts="propShowEditSpareParts = false; ajaxSpareData()"
-    />
-
-    <ShowAddSpareParts
-      v-if="propShowAddSpareParts"
-      :propShowAddSpareParts="propShowAddSpareParts"
-      @emitfnShowAddNewSpareParts="propShowAddSpareParts = false; ajaxSpareData()"
-    />
+       <!--START: Show Add Spare Parts -->
+      <ShowAddSpareParts
+        v-if="propShowAddSpareParts"
+        :propShowAddSpareParts="propShowAddSpareParts"
+        :propRowDetails="propRowDetails"
+        @emitfnShowAddNewSpareParts="fnShowAddNewSpareParts"
+      />
+      <!--END: Show Add Spare Parts -->
+    </div>
   </q-page>
 </template>
 
@@ -156,34 +172,38 @@
 import ShowAddSpareParts from "../../components/super_admin/ShowAddSpareParts.vue";
 import showEditSpareParts from "../../components/super_admin/showEditSpareParts.vue";
 import { mapGetters, mapActions } from "vuex";
-
 export default {
-  name: "SparePartsTypes",
-  components: {
+  name: "SparePartsTypesManagement",
+   components: {
     ShowAddSpareParts,
     showEditSpareParts,
   },
+
   data() {
     return {
-      tab: 'active',
+      selectedTab: 'active',
       propShowAddSpareParts: false,
       propShowEditSpareParts: false,
-      propRowDetails: null,
+      propRowDetails: "",
       filterSearch: "",
-      paginationControl: { rowsPerPage: 10 },
+      paginationControl: {
+        rowsPerPage: 10
+      },
       columns: [
-        { name: "id", required: true, label: "ID", align: "left", field: "id", sortable: true },
-        { name: "spare_parts_types", required: true, label: "Spare Part Type", align: "left", field: "spare_parts_types", sortable: true },
-        { name: "created_date", required: true, label: "Created Date", align: "left", field: "created_date", sortable: true },
-        { name: "updated_date", required: true, label: "Updated Date", align: "left", field: "updated_date", sortable: true },
-        { name: "action", label: "Actions", align: "center" }
+       { name: "id", required: true, label: "id", align: "left", field: "id", sortable: true },
+       { name: "spare_parts_types", required: true, label: "spare_parts_types", align: "left", field: "spare_parts_types", sortable: false },
+       { name: "created_date", required: true, label: "Created Date", align: "left", field: "created_date", sortable: true },
+       { name: "updated_date", required: true, label: "Updated Date", align: "left", field: "updated_date", sortable: true },
+       { name: "is_active", required: true, label: "is_active", align: "left", field: "is_active", sortable: false },
+       { name: "action", required: true, label: "", align: "left", field: "action", sortable: false }
       ],
       columns1: [
-        { name: "id", required: true, label: "ID", align: "left", field: "id", sortable: true },
-        { name: "spare_parts_types", required: true, label: "Spare Part Type", align: "left", field: "spare_parts_types", sortable: true },
-        { name: "created_date", required: true, label: "Created Date", align: "left", field: "created_date", sortable: true },
-        { name: "updated_date", required: true, label: "Updated Date", align: "left", field: "updated_date", sortable: true },
-        { name: "action", label: "Actions", align: "center" }
+       { name: "id", required: true, label: "id", align: "left", field: "id", sortable: true },
+       { name: "spare_parts_types", required: true, label: "spare_parts_types", align: "left", field: "spare_parts_types", sortable: false },
+       { name: "created_date", required: true, label: "Created Date", align: "left", field: "created_date", sortable: true },
+       { name: "updated_date", required: true, label: "Updated Date", align: "left", field: "updated_date", sortable: true },
+       { name: "is_active", required: true, label: "is_active", align: "left", field: "is_active", sortable: false },
+       { name: "action", required: true, label: "", align: "left", field: "action", sortable: false }
       ],
       activeTableData: [],
       deActiveTableData: [],
@@ -191,76 +211,112 @@ export default {
   },
 
   created() {
-    this.ajaxSpareData();
+     this.ajaxSpareData();
   },
 
   computed: {
-    ...mapGetters("sparePartsGetTypes", ["getsparePartsGetTypes"]),
+      ...mapGetters("sparePartsGetTypes", [
+      "getsparePartsGetTypes",
+    ]),
   },
 
   methods: {
-    ...mapActions("sparePartsGetTypes", ["FETCH_SPARE_PARTS_GET_TYPES", "DELETE_SPARE_PARTS_TYPES", "ACTIVE_SPARE_PARTS_TYPES"]),
+    ...mapActions("sparePartsGetTypes", ["FETCH_SPARE_PARTS_GET_TYPES","DELETE_SPARE_PARTS_TYPES","ACTIVE_SPARE_PARTS_TYPES"]),
 
-    ajaxSpareData() {
-      this.$q.loading.show({ message: "Loading spare parts types..." });
+     fnDeleteSpareParts(rowDetails) {
+      this.$q.dialog({
+          title: "Confirm",
+          message: "Are you sure want to delete region?",
+          ok: "Continue",
+          cancel: "Cancel"
+        }).onOk(() => {
+          this.$q.loading.show({
+            delay: 100,
+            message: "Please Wait",
+            spinnerColor: "purple-9",
+            customClass: "shadow-none"
+          });
+          this.DELETE_SPARE_PARTS_TYPES(rowDetails)
+            .then(response => {
+              this.ajaxSpareData();
+              this.$q.notify({
+                color: "positive",
+                position: "bottom",
+                message: "Successfully removed",
+                icon: "thumb_up"
+              });
+            }).finally(() => {
+              this.$q.loading.hide();
+            });
+        });
+    },
+
+    fnShowActiveSpareparts(rowDetails) {
+      this.$q.dialog({
+          title: "Confirm",
+          message: "Are you sure want to Active?",
+          ok: "Continue",
+          cancel: "Cancel"
+        }).onOk(() => {
+          this.$q.loading.show({
+            delay: 100,
+            message: "Please Wait",
+            spinnerColor: "purple-9",
+            customClass: "shadow-none"
+          });
+          let payload = { ...rowDetails, is_active: true };
+          this.ACTIVE_SPARE_PARTS_TYPES(payload)
+            .then(response => {
+              this.ajaxSpareData();
+              this.$q.notify({
+                color: "positive",
+                position: "bottom",
+                message: "Successfully Activated",
+                icon: "thumb_up"
+              });
+            }).finally(() => {
+              this.$q.loading.hide();
+            });
+        });
+    },
+    ajaxSpareData(){
+      this.$q.loading.show({ message: "Loading..." });
       this.FETCH_SPARE_PARTS_GET_TYPES()
-        .then(() => {
-          this.activeTableData = this.getsparePartsGetTypes.filter(s => s.is_active === true);
-          this.deActiveTableData = this.getsparePartsGetTypes.filter(s => s.is_active === false);
+      .then(() => {
+          this.activeTableData = this.getsparePartsGetTypes.filter(service => service.is_active == true);
+          this.deActiveTableData = this.getsparePartsGetTypes.filter(service => service.is_active == false);
+      })
+       .finally(() => {
           this.$q.loading.hide();
-        })
-        .catch(() => {
-          this.$q.loading.hide();
-          this.$q.notify({ color: "negative", message: "Failed to load spare parts types" });
         });
     },
-
-    fnShowAddNewSpareParts() {
-      this.propShowAddSpareParts = true;
-    },
-
-    fnShowEditSpareParts(rowDetails) {
+     fnShowAddNewSpareParts(rowDetails){
       this.propRowDetails = rowDetails;
-      this.propShowEditSpareParts = true;
+      this.propShowAddSpareParts = !this.propShowAddSpareParts;
+      if(!this.propShowAddSpareParts){
+        this.ajaxSpareData()
+      }
     },
-
-    fnDeleteSpareParts(row) {
-      this.$q.dialog({
-        title: "Confirm",
-        message: "Deactivate this spare part type?",
-        ok: "Continue", cancel: "Cancel", persistent: true
-      }).onOk(() => {
-        this.$q.loading.show();
-        this.DELETE_SPARE_PARTS_TYPES(row).then(() => {
-          this.$q.notify({ color: "positive", message: "Deactivated successfully" });
-          this.ajaxSpareData();
-          this.$q.loading.hide();
-        });
-      });
-    },
-
-    fnShowActiveSpareparts(row) {
-      this.$q.dialog({
-        title: "Confirm",
-        message: "Activate this spare part type?",
-        ok: "Continue", cancel: "Cancel", persistent: true
-      }).onOk(() => {
-        this.$q.loading.show();
-        let payload = { ...row, is_active: true };
-        this.ACTIVE_SPARE_PARTS_TYPES(payload).then(() => {
-          this.$q.notify({ color: "positive", message: "Activated successfully" });
-          this.ajaxSpareData();
-          this.$q.loading.hide();
-        });
-      });
+    fnShowEditSpareParts(rowDetails){
+      this.propRowDetails = rowDetails;
+      this.propShowEditSpareParts = !this.propShowEditSpareParts;
+      if(!this.propShowEditSpareParts){
+        this.ajaxSpareData()
+      }
     },
 
     myCustomSearchFilter(rows, terms, cols, cellValue) {
       const lowerTerms = terms ? terms.toLowerCase() : "";
       return rows.filter(row =>
-        cols.some(col => (cellValue(col, row) + "").toLowerCase().includes(lowerTerms))
+        cols.some(
+          col =>
+            (cellValue(col, row) + "").toLowerCase().indexOf(lowerTerms) !== -1
+        )
       );
     }
   }
 };
 </script>
+
+<style>
+</style>

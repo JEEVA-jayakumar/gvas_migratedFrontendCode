@@ -1,43 +1,73 @@
 <template>
-  <q-page padding>
-    <q-tabs
-      v-model="inventoryOptionSelected"
-      class="bg-white text-grey-7 shadow-1"
-      active-color="purple-9"
-      indicator-color="purple-9"
-      align="left"
-    >
-      <q-tab name="prefix" label="Prefix Config" />
-      <q-tab name="vasDevLs" label="LeadSource And Vas Device Config" />
-    </q-tabs>
+    <q-page>
+      <div class="text-grey-9">
+        <div class="row bottom-border q-pa-sm items-center">
+          <div class="col">
+            <q-tabs
+              v-model="inventoryOptionSelected"
+              color="dark"
+              align="left"
+              class="shadow-1"
+            >
+              <q-tab name="prefix" label="Prefix Config" />
+              <q-tab name="vasDevLs" label="LeadSource And Vas Device Config" />
+            </q-tabs>
 
-    <q-tab-panels v-model="inventoryOptionSelected" animated keep-alive class="bg-transparent">
-      <q-tab-panel name="prefix" class="no-padding q-mt-md">
-        <prefix />
-      </q-tab-panel>
+            <q-tab-panels v-model="inventoryOptionSelected" animated keep-alive>
+              <q-tab-panel name="prefix" class="no-padding">
+                <prefix />
+              </q-tab-panel>
+              <q-tab-panel name="vasDevLs" class="no-padding">
+                <vasDevLs />
+              </q-tab-panel>
+            </q-tab-panels>
+          </div>
+        </div>
+      </div>
+    </q-page>
+  </template>
 
-      <q-tab-panel name="vasDevLs" class="no-padding q-mt-md">
-        <vasDevLs />
-      </q-tab-panel>
-    </q-tab-panels>
-  </q-page>
-</template>
+  <script>
+  import prefix from "../../components/super_admin/prefixConfig.vue";
+  import vasDevLs from "../../components/super_admin/leadSourceVasDeviceConfig.vue";
+  import { mapGetters, mapActions } from "vuex";
 
-<script>
-import prefix from "../../components/super_admin/prefixConfig.vue";
-import vasDevLs from "../../components/super_admin/leadSourceVasDeviceConfig.vue";
-import { mapGetters, mapActions } from "vuex";
+  export default {
+    name: "PrefixConfigPage",
+    components: {
+        prefix,
+        vasDevLs
+    },
+    data() {
+      return {
+        inventoryOptionSelected: "prefix"
+      };
+    },
+    computed: {
+      ...mapGetters("SAT_RegionalInventoryAllocation", [
+        "getAllRegionalInventoryDeviceDetailsWithCount",
+        "getCurrentPODNumber",
+        "getCurrentDeviceId",
+        "getAllInventorywithsoDeviceDetailsWithCount"
+      ]),
+      ...mapGetters("InventoryWithSo", ["getAllInventoryWithSo"])
+    },
+    methods: {
+      ...mapActions("SAT_RegionalInventoryAllocation", [
+        "FETCH_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT",
+        "FETCH_REGIONAL_INVENTORY_SERIAL_NUMBER_BY_DEVICE",
+        "FETCH_INVENTORY_WITH_SO_DEVICE_DETAIL_WITH_COUNT"
+      ]),
+      ...mapActions("InventoryWithSo", ["FETCH_INVENTORY_WITH_SO"]),
+    }
+  };
+  </script>
 
-export default {
-  name: "PrefixConfigManagement",
-  components: {
-    prefix,
-    vasDevLs
-  },
-  data() {
-    return {
-      inventoryOptionSelected: "prefix"
-    };
+  <style>
+  .border-1 {
+    border: 1px solid rgba(0, 0, 0, 0.1);
   }
-};
-</script>
+  .border-2 {
+    border: 3px solid rgba(48, 48, 48, 0.5);
+  }
+  </style>

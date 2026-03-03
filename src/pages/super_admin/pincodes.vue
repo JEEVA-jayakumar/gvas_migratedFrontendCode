@@ -1,77 +1,62 @@
 <template>
-  <q-page padding>
-    <q-card flat bordered class="q-pa-md">
-      <div class="row items-center q-mb-md">
-        <div class="text-h6 text-purple-9 col">Pincodes</div>
-        <div class="col-auto">
-          <q-btn
-            unelevated
-            no-caps
-            label="Add New Pincode"
-            color="purple-9"
-            icon="add"
-            @click="fnshowCreatePincodes"
-          />
-        </div>
-      </div>
-
-      <q-table
-        flat
-        bordered
-        :rows="getAllPincodes"
-        :columns="columns"
-        :filter="filter"
-        v-model:pagination="serverPagination"
-        row-key="id"
-        :loading="loading"
-        @request="searchRequest"
-        color="purple-9"
-      >
-        <template v-slot:top-right>
-          <q-input
-            outlined
-            dense
-            clearable
-            color="purple-9"
-            v-model="filter"
-            placeholder="Search Pincode"
-          >
-            <template v-slot:append>
-              <q-icon name="search" />
-            </template>
-          </q-input>
-        </template>
-
+  <q-page>
+    <!-- content -->
+    <div>
+      <q-table :rows="getAllPincodes" table-class="customSATableClass" :columns="columns" :filter="filter" v-model:pagination="serverPagination" row-key="id" :loading="loading" @request="searchRequest" color="grey-9">
         <template v-slot:body-cell-action="props">
           <q-td :props="props">
-            <q-btn
-              dense
-              unelevated
-              no-caps
-              label="Modify"
-              icon="edit"
-              color="primary"
-              size="sm"
-              @click="fnShowEditPincode(props.row)"
-            />
+            <div class="row no-wrap no-padding">
+              <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md" @click="fnShowEditPincode(props.row)" flat class="text-light-blue">
+              </q-btn>
+              <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative">
+              </q-btn> -->
+            </div>
           </q-td>
         </template>
+
+        <template v-slot:top="props">
+          <!--START: table title -->
+          <div class="col-md-6 text-h6 q-mt-lg text-weight-regular">Pincodes</div>
+
+          <div class="col-md-6 q-my-md text-right">
+            <q-btn no-caps no-wrap label="Add New Pincode" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreatePincodes()"/>
+          </div>
+          <!--END: table title -->
+
+          <!--START: table filter,search -->
+          <div class="col-md-5">
+            <q-input
+            clearable
+            color="grey-9"
+            v-model="filter"
+            placeholder="Type.."
+            class="q-mr-lg"
+            label="Search"
+            />
+          </div>
+          <!--END: table filter,search -->
+        </template>
+
       </q-table>
-    </q-card>
 
-    <!-- Modals -->
+    <!--START: Show create Pincode -->
     <addPincode
-      v-if="propShowCreatePincodes"
-      :propShowCreatePincodes="propShowCreatePincodes"
-      @emitfnshowAddPincodes="fnshowCreatePincodes"
-    />
+    v-if="propShowCreatePincodes"
+    :propShowCreatePincodes="propShowCreatePincodes"
+    @emitfnshowAddPincodes="fnshowCreatePincodes"
+    ></addPincode>
+    <!--END: Show create Pincode -->
 
+    <!--START: Show edit Pincode -->
     <editPincode
-      v-if="propShowEditPincodes"
-      :propShowEditPincodes="propShowEditPincodes"
-      :propRowDetails="propRowDetails"
-      @emitfnshowEditPincodes="fnShowEditPincode"
-    />
+    v-if="propShowEditPincodes"
+    :propShowEditPincodes="propShowEditPincodes"
+    :propRowDetails="propRowDetails"
+    @emitfnshowEditPincodes="fnShowEditPincode"
+    ></editPincode>
+    <!--END: Show edit Pincode -->
+
+    </div>
   </q-page>
 </template>
 
@@ -79,81 +64,131 @@
 import addPincode from "../../components/super_admin/addPincode.vue";
 import editPincode from "../../components/super_admin/editPincode.vue";
 import { mapGetters, mapActions } from "vuex";
-
 export default {
   name: "PincodeManagement",
   components: {
     addPincode,
-    editPincode
+    editPincode,
   },
   data() {
     return {
       propShowCreatePincodes: false,
       propShowEditPincodes: false,
-      propRowDetails: null,
+      propRowDetails: "",
+
       loading: false,
       serverPagination: {
         page: 1,
         rowsNumber: 10,
         rowsPerPage: 10
       },
+
       filter: "",
+      //table information
       columns: [
-        { name: "pincode", label: "Pincode", align: "left", field: "pincode", sortable: true },
-        { name: "stateName", label: "State", align: "left", field: "stateName", sortable: true },
-        { name: "cityName", label: "City", align: "left", field: "cityName", sortable: true },
-        { name: "action", label: "Action", align: "center" }
-      ]
+        {
+          name: "pincode",
+          required: true,
+          label: "Pincode",
+          align: "left",
+          field: "pincode",
+          sortable: false,
+        },
+        {
+          name: "stateName",
+          required: true,
+          label: "State",
+          align: "left",
+          field: "stateName",
+          sortable: false,
+        },
+        {
+          name: "cityName",
+          required: true,
+          label: "City",
+          align: "left",
+          field: "cityName",
+          sortable: false,
+        },
+        {
+          name: "action",
+          required: true,
+          label: "",
+          align: "left",
+          field: "action",
+          sortable: false,
+        },
+      ],
     };
   },
+
   created() {
-    this.ajaxLoadData();
+    /* START: Load user table data filter > Permissions */
+    this.ajaxLoadDataForPermissionTable();
+    /* End: Load user table data filter > Permissions */
   },
+
   computed: {
-    ...mapGetters("pincodes", ["getAllPincodes"])
+    ...mapGetters("pincodes", ["getAllPincodes"]),
   },
+
   methods: {
     ...mapActions("pincodes", ["FETCH_ALL_PINCODES"]),
 
-    async ajaxLoadData() {
-      this.loading = true;
-      this.$q.loading.show({ message: "Please Wait" });
-      try {
-        await this.FETCH_ALL_PINCODES();
-      } catch (error) {
-        this.$q.notify({
-          color: "negative",
-          message: error.body?.message || "Please Try Again Later !",
-          icon: "warning"
+    //API for table filter using Pincode
+    ajaxLoadDataForPermissionTable() {
+      this.$q.loading.show({
+        delay: 100, // ms
+        message: "Please Wait",
+        spinnerColor: "purple-9",
+        customClass: "shadow-none",
+      });
+      this.FETCH_ALL_PINCODES()
+        .then(response => {
+          this.$q.loading.hide();
+        })
+        .catch(error => {
+          this.$q.loading.hide();
+          this.$q.notify({
+            color: "negative",
+            position: "bottom",
+            message: error.data?.message || "Please Try Again Later !",
+            icon: "thumb_down",
+          });
         });
-      } finally {
-        this.$q.loading.hide();
-        this.loading = false;
-      }
     },
-
     fnshowCreatePincodes() {
       this.propShowCreatePincodes = !this.propShowCreatePincodes;
-      if (!this.propShowCreatePincodes) this.ajaxLoadData();
     },
 
     fnShowEditPincode(rowDetails) {
       this.propShowEditPincodes = !this.propShowEditPincodes;
-      if (rowDetails) this.propRowDetails = rowDetails;
-      if (!this.propShowEditPincodes) this.ajaxLoadData();
+      if (rowDetails != undefined) {
+        this.propRowDetails = rowDetails;
+      }
     },
 
     searchRequest({ pagination, filter }) {
+      console.log("pagination", pagination);
+      // we set QTable to "loading" state
       this.loading = true;
       this.FETCH_ALL_PINCODES(filter)
         .then(() => {
+          // updating pagination to reflect in the UI
           this.serverPagination = pagination;
+          // we also set (or update) rowsNumber
+          // this.serverPagination.rowsPerPage = data.rowsNumber;
+          // finally we tell QTable to exit the "loading" state
           this.loading = false;
         })
-        .catch(() => {
+        .catch(error => {
+          // we tell QTable to exit the "loading" state
           this.loading = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>
+
+<style>
+</style>

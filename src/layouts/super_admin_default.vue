@@ -1,36 +1,92 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <customHeader
-      :getUserName="getUserName"
-      :leftDrawerOpen="leftDrawerOpen"
-      @toggleSideMenu="toggleSideMenu"
-    />
+    <q-header style="margin-left:0px" class="shadow-0 z-top" flat>
+      <q-toolbar
+        class="bg-custom-light-grey bottom-border"
+        color="grey-9"
+        flat
+      >
+        <q-btn
+          flat
+          dense
+          round
+          @click="triggerSideMenu"
+          aria-label="Menu"
+          color="grey-9"
+        >
+          <q-icon name="menu" />
+        </q-btn>
+
+        <q-toolbar-title class="">
+          <div class="row items-center vertical-middle">
+            <div class="col-auto">
+              <img v-if="leftDrawerOpen" class="cursor-pointer" src="~assets/images/logo.png" style="height:38px;">
+            </div>
+            <div class="col float-right" align="right">
+              <q-btn flat color="grey-9" icon="far fa-bell"/>
+              <q-btn flat color="grey-9" class="vertical-middle">
+                <span class="mobile-hide capitalize text-weight-regular">{{getUserName}}</span>
+                <img src="https://pdc.techinasia.com/wp-content/uploads/2018/03/user60.png" style="height:30px;width:30px" class="vertical-middle">
+                <!-- Direct child of target -->
+                <q-menu class="shadow-8" anchor="bottom middle" self="top middle" style="min-width:350px">
+                  <q-list separator class="no-padding">
+                    <q-item clickable v-close-popup @click="showNotification">
+                      <q-item-section avatar>
+                        <q-icon name="fas fa-user" color="dark" />
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>My Account</q-item-label>
+                      </q-item-section>
+                    </q-item>
+                    <q-item clickable v-close-popup @click="logout">
+                      <q-item-section avatar>
+                        <q-icon name="fas fa-sign-out-alt" color="dark" />
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>Logout</q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-menu>
+              </q-btn>
+            </div>
+          </div>
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-header>
 
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
-      bordered
-      :width="260"
+      class="no-shadow shadow-9"
+      :width="250"
       :breakpoint="500"
-      class="bg-dark text-white shadow-1"
+      :style="{background: '#531b64'}"
     >
-      <div class="drawer-header q-pa-md row items-center justify-center">
-        <img src="~assets/images/logo.png" style="height: 45px" />
-      </div>
-
-      <q-scroll-area class="fit drawer-scroll-area">
-        <SidebarMenu :menus="menus" />
+      <q-scroll-area class="fit" style="padding-top:65px">
+        <q-list class="menu-list">
+          <q-item
+            v-for="menu in menus"
+            :key="menu.id"
+            :to="menu.to"
+            clickable
+            class="menu-main-item-color"
+            active-class="active-menu-item"
+          >
+            <q-item-section class="menu-item-color">
+              {{ menu.name }}
+            </q-item-section>
+          </q-item>
+        </q-list>
       </q-scroll-area>
-
-      <div class="drawer-footer q-pa-md text-center text-grey-5 text-caption">
-        Version 2.0.0
-      </div>
     </q-drawer>
 
-    <q-page-container class="bg-grey-1">
+    <q-page-container>
       <router-view v-slot="{ Component }">
         <transition
           appear
+          v-on:before-enter="beforeEnter"
+          v-on:after-enter="afterEnter"
           enter-active-class="animated fadeIn"
           leave-active-class="animated fadeOut"
           mode="out-in"
@@ -43,82 +99,69 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-import customHeader from "../components/customHeader.vue";
-import SidebarMenu from "../components/SidebarMenu.vue";
+import { mapActions } from "vuex";
 
 export default {
   name: "DefaultLayoutSuperAdmin",
-  components: {
-    customHeader,
-    SidebarMenu,
-  },
   data() {
     return {
       leftDrawerOpen: false,
       menus: [
-        { id: 1, to: "/super/admin/dashboard", name: "Dashboard", icon: "dashboard" },
+        {
+          id: 1,
+          to: "/super/admin/dashboard/",
+          name: "Dashboard",
+        },
         {
           id: 2,
-          name: "User Management",
-          icon: "people",
-          subItems: [
-            { id: 21, to: "/super/admin/users", name: "Users", icon: "person" },
-            { id: 22, to: "/super/admin/hierarchy", name: "Hierarchy", icon: "account_tree" },
-            { id: 23, to: "/super/admin/roles/permissions", name: "Roles & Permissions", icon: "security" },
-            { id: 24, to: "/super/admin/permissions", name: "Permissions", icon: "vpn_key" },
-          ],
+          to: "/super/admin/users/",
+          name: "Users",
         },
         {
           id: 3,
-          name: "Location Settings",
-          icon: "location_on",
-          subItems: [
-            { id: 31, to: "/super/admin/regions", name: "Regions", icon: "map" },
-            { id: 32, to: "/super/admin/regionGroup", name: "Region Groups", icon: "layers" },
-            { id: 33, to: "/super/admin/subregions", name: "Sub Regions", icon: "location_city" },
-            { id: 34, to: "/super/admin/pincodes", name: "Pincodes", icon: "pin_drop" },
-          ],
+          to: "/super/admin/hierarchy/",
+          name: "Hierarchy",
         },
         {
           id: 4,
-          name: "Financial Config",
-          icon: "payments",
-          subItems: [
-            { id: 41, to: "/super/admin/manage/rental/charges", name: "Rental Charges", icon: "receipt_long" },
-            { id: 42, to: "/super/admin/manage/mdr/charges", name: "MDR Charges", icon: "request_quote" },
-            { id: 43, to: "/super/admin/manage/mdr/bankSO", name: "Bank SO", icon: "account_balance" },
-          ],
+          to: "/super/admin/roles/permissions/",
+          name: "Roles & Permissions",
         },
         {
           id: 5,
-          name: "Device & Service",
-          icon: "devices",
-          subItems: [
-            { id: 51, to: "/super/admin/device/types", name: "Device Types", icon: "devices_other" },
-            { id: 52, to: "/super/admin/manage/serviceRequest", name: "Service Requests", icon: "support_agent" },
-            { id: 53, to: "/super/admin/manage/mATMplan", name: "mATM Plans", icon: "payment" },
-            { id: 54, to: "/super/admin/manage/existingmATMplan", name: "Existing mATM Plans", icon: "history" },
-            { id: 55, to: "/super/admin/manage/QR/Sticker", name: "QR Stickers", icon: "qr_code" },
-            { id: 56, to: "/super/admin/manage/aggregators", name: "Aggregators", icon: "business" },
-            { id: 57, to: "/super/admin/manage/prefixConfig", name: "Prefix Config", icon: "settings_input_component" },
-            { id: 58, to: "/super/admin/manage/multiTid", name: "Multi TID", icon: "dynamic_feed" },
-          ],
+          to: "/super/admin/permissions/",
+          name: "Permissions",
         },
-        { id: 6, to: "/super/admin/manage/notifications", name: "Notifications", icon: "notifications" },
-        { id: 7, to: "/super/admin/manage/APISync", name: "API Sync", icon: "sync" },
+        {
+          id: 6,
+          to: "/super/admin/regions/",
+          name: "Regions",
+        },
+        {
+          id: 7,
+          to: "/super/admin/manage/rental/charges",
+          name: "Manage Rental Charges",
+        },
+        {
+          id: 8,
+          to: "/super/admin/manage/mdr/charges",
+          name: "Manage MDR Charges",
+        },
       ],
     };
   },
   computed: {
-    ...mapGetters("commonLoader", ["getToggleCommonLoader"]),
     getUserName() {
       try {
-        const userInfo = JSON.parse(localStorage.getItem("u_i"));
-        return userInfo?.user?.name || "Super Admin";
+        const userInfoStr = localStorage.getItem("u_i");
+        if (userInfoStr) {
+          const userInfo = JSON.parse(userInfoStr);
+          return userInfo.user?.name || "User";
+        }
       } catch (e) {
-        return "Super Admin";
+        console.error("Error parsing user info", e);
       }
+      return "User";
     },
   },
   created() {
@@ -126,25 +169,61 @@ export default {
     this.leftDrawerOpen = savedState === null ? true : savedState === "true";
   },
   methods: {
-    toggleSideMenu() {
+    ...mapActions("commonLoader", ["TOGGLE_COMMON_LOADER"]),
+    triggerSideMenu() {
       this.leftDrawerOpen = !this.leftDrawerOpen;
       localStorage.setItem("leftDrawerOpen", this.leftDrawerOpen);
     },
+    beforeEnter(el) {
+      this.TOGGLE_COMMON_LOADER(true);
+    },
+    afterEnter(el) {
+      this.TOGGLE_COMMON_LOADER(false);
+    },
+    showNotification() {
+      // Placeholder for My Account logic if any
+    },
+    logout() {
+      localStorage.removeItem("u_i");
+      localStorage.removeItem("auth_token");
+      this.$q.notify({
+        color: "positive",
+        position: "bottom",
+        message: "Succesfully Logged Out",
+        icon: "thumb_up"
+      });
+      this.$router.push({ name: "login" });
+    }
   },
 };
 </script>
 
-<style lang="scss" scoped>
-.drawer-scroll-area {
-  height: calc(100% - 150px);
-  margin-top: 20px;
+<style scoped>
+.menu-item-color {
+  color: #e3e4e5;
+  font-size: 14px;
 }
-.drawer-header {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(0, 0, 0, 0.2);
+.menu-main-item-color:hover {
+  color: #e3e4e5;
+  font-size: 14px;
+  background: #531a65 !important;
 }
-.drawer-footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(0, 0, 0, 0.1);
+.menu-main-item-color:active {
+  color: #e3e4e5;
+  font-size: 14px;
+  background: #531a65 !important;
+}
+
+.menu-main-item-color:focus {
+  color: #e3e4e5;
+  font-size: 14px;
+  background: #531a65 !important;
+}
+
+.active-menu-item {
+  background: #3b084b !important;
+}
+.active-menu-item .menu-item-color {
+  color: #e3e4e5;
 }
 </style>
