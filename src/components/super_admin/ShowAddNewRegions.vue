@@ -1,60 +1,64 @@
 <template>
-    <div>
-        <q-dialog
-        minimized
-        v-model="toggleModel"  
-        @hide="emitfnShowAddNewRegions" 
-        @escape-key="emitfnShowAddNewRegions"  
-        class="customModalOverlay" 
-        :content-css="{padding:'30px',minWidth: '30vw'}"
-        >
-            <form> 
-                <div class="row gutter-sm q-py-sm items-center">
-                    <div class="col-md-12">
-                        <div class="text-h6 text-weight-regular">Add New Regions</div>
-                    </div>
-                </div>
-                <div class="row gutter-sm q-py-sm items-center">
-                     <div class="col-md-12">
-                        <q-select
-                          v-model="formData.regionGroup"   
-                          :error="$v.formData.regionGroup.$error" 
-                        
-                          :options="regionGroupOptions"
-                          class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          label="Region Group"
-                          placeholder="Region Group" 
-                        />
-                    </div>
-                    <div class="col-md-12">
-                        <q-input 
-                        v-model="formData.regionAreaName" 
-                          :error="$v.formData.regionAreaName.$error"
-                          class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          label="Region"
-                          placeholder="Region" 
-                        />
-                    </div>
-                </div>
-                <div class="row gutter-sm q-py-sm items-center">
-                    <div class="col-md-12 group" align="right">
-                        <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowAddNewRegions()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitAddNewRegion(formData)" color="purple-9">Save</q-btn>
-                    </div>
-                </div>
-            </form>
-        </q-dialog>
-    </div>
+  <q-dialog
+    v-model="toggleModel"
+    persistent
+    class="customModalOverlay"
+  >
+    <q-card style="min-width: 30vw; padding: 30px;">
+      <form>
+        <div class="row gutter-sm q-py-sm items-center">
+          <div class="col-md-12">
+            <div class="q-title text-weight-regular">Add New Regions</div>
+          </div>
+        </div>
+        <div class="row gutter-sm q-py-sm items-center">
+          <div class="col-md-12">
+            <q-select
+              v-model="formData.regionGroup"
+              @blur="v$.formData.regionGroup.$touch"
+              :error="v$.formData.regionGroup.$error"
+              :options="regionGroupOptions"
+              class="text-weight-regular text-grey-8"
+              color="grey-9"
+              label="Region Group"
+              placeholder="Region Group"
+              emit-value map-options
+            />
+          </div>
+          <div class="col-md-12">
+            <q-input
+              v-model="formData.regionAreaName"
+              @blur="v$.formData.regionAreaName.$touch"
+              :error="v$.formData.regionAreaName.$error"
+              class="text-weight-regular text-grey-8"
+              color="grey-9"
+              label="Region"
+              placeholder="Region"
+            />
+          </div>
+        </div>
+        <div class="row gutter-sm q-py-sm items-center">
+          <div class="col-md-12 group" align="right">
+            <q-btn flat class="bg-white text-weight-regular text-grey-8 q-mr-sm" @click="emitfnShowAddNewRegions()">Cancel</q-btn>
+            <q-btn @click="fnfinalsubmitAddNewRegion" color="purple-9">Save</q-btn>
+          </div>
+        </div>
+      </form>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  name: "ShowAddNewRegions",
   props: ["propShowAddNewRegions", "propRowDetails"],
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       toggleModel: this.propShowAddNewRegions,
@@ -99,14 +103,13 @@ computed:{
     emitfnShowAddNewRegions() {
       this.$emit("emitfnShowAddNewRegions");
     },
-    fnfinalsubmitAddNewRegion(formData) {
-      console.log("FINAL SUBMITTED VALUES--------->",JSON.stringify(formData))
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+    async fnfinalsubmitAddNewRegion() {
+      const isValid = await this.v$.$validate();
+      if (!isValid) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();
-        this.FEED_REGION_DATA(formData)
+        this.FEED_REGION_DATA(this.formData)
           .then(() => {
             this.$q.loading.hide();
             this.$q.notify({
@@ -123,7 +126,7 @@ computed:{
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message || "Please Try Again Later !",
               icon: "thumb_down",
             });
           });

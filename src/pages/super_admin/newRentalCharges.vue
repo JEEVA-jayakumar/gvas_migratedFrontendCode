@@ -1,157 +1,245 @@
 <template>
-  <q-page padding>
-    <q-tabs
-      v-model="selectedTab"
-      class="bg-white text-grey-7 shadow-1"
-      active-color="purple-9"
-      indicator-color="purple-9"
-      align="left"
-      @update:model-value="goToUnassignedTab"
-    >
-      <q-tab name="active" label="Active Rental Charges" />
-      <q-tab name="deactive" label="Deactivated Rental Charges" />
-    </q-tabs>
+  <q-page>
+    <div>
+      <!--@select="goToUnassignedTab"-->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        active-bg-color="grey-1"
+        active-color="dark"
+        indicator-color="transparent"
+        align="left"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          name="active"
+          label="Active Rental Charges"
+        />
+        <q-tab
+          name="deactive"
+          label="DeActived Rental Charges"
+        />
+      </q-tabs>
 
-    <q-tab-panels v-model="selectedTab" animated keep-alive class="bg-transparent">
-      <!-- ================= ACTIVE TAB ================= -->
-      <q-tab-panel name="active" class="no-padding q-mt-md">
-        <q-table
-          flat
-          bordered
-          :rows="tableData"
-          :columns="columns"
-          table-class="customSATableClass"
-          :filter="filterSearch"
-          v-model:pagination="paginationControl"
-          row-key="id"
-          :loading="toggleAjaxLoadFilter"
-          color="purple-9"
-          @request="ajaxLoadAllLeadInfo"
-        >
-          <template v-slot:body-cell-plan="props">
-            <q-td :props="props">
-              <q-btn
-                flat
-                dense
-                no-caps
-                color="primary"
-                icon="edit"
-                @click="editPlanDetails(props.row)"
-                :label="props.row.plan?.planName"
-              />
-            </q-td>
-          </template>
-
-          <template v-slot:body-cell-action="props">
-            <q-td :props="props">
-              <q-btn
-                dense
-                unelevated
-                no-caps
-                label="Disable"
-                icon="block"
-                color="negative"
-                @click="fnDeleteRental(props.row)"
-              />
-            </q-td>
-          </template>
-
-          <template v-slot:top>
-            <div class="full-width row items-center justify-between">
-              <div class="col-12 col-md-4">
-                <q-input
-                  dense
-                  filled
-                  clearable
-                  color="purple-9"
-                  v-model="filterSearch"
-                  placeholder="Search by Plan Name..."
-                >
-                  <template v-slot:append>
-                    <q-icon name="search" />
-                  </template>
-                </q-input>
-              </div>
-              <div class="col-auto">
+      <q-tab-panels v-model="selectedTab" animated class="bg-transparent">
+        <q-tab-panel name="active" class="no-padding">
+          <!--START: table Data -->
+          <q-table
+            table-class="customTableClass"
+            :rows="tableData"
+            :columns="columns"
+            :filter="filterSearch"
+            v-model:pagination="paginationControl"
+            row-key="id"
+            :loading="toggleAjaxLoadFilter"
+            :rows-per-page-options="[5, 10, 15, 20]"
+            @request="ajaxLoadAllLeadInfo"
+          >
+            <template v-slot:body-cell-leadSource="props">
+              <q-td
+                :props="props"
+                class="cursor-pointer"
+                @click="toggleLeadInformation(props.row.leadSource.sourceName)"
+              >
+                <span class="label text-primary">
+                  {{ props.row.leadSource.sourceName }}</span>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-device="props">
+              <q-td
+                :props="props"
+                class="cursor-pointer"
+                @click="toggleLeadInformation(props.row.device.deviceName)"
+              >
+                <span class="label text-primary">
+                  {{ props.row.device.deviceName }}</span>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-marsDeviceModel="props">
+              <q-td
+                :props="props"
+                class="cursor-pointer"
+              >
+                <span class="label">{{ props.row.marsDeviceModel == null ? "NA" : props.row.marsDeviceModel.name }}</span>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-plan="props">
+              <q-td
+                :props="props"
+                class="cursor-pointer"
+              >
                 <q-btn
-                  unelevated
+                  align="left"
+                  dense
+                  flat
+                  no-wrap
                   no-caps
+                  icon="fas fa-pencil-alt"
+                  color="primary"
+                  @click="editPlanDetails(props.row)"
+                  :label="props.row.plan?.planName"
+                  class="capitalize"
+                />
+              </q-td>
+            </template>
+            <template v-slot:body-cell-action="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <q-btn
+                    dense
+                    no-caps
+                    no-wrap
+                    label="Disable"
+                    icon="far fa-minus-square"
+                    size="md"
+                    @click="fnDeleteRental(props.row)"
+                    flat
+                    class="text-negative"
+                  ></q-btn>
+                </div>
+              </q-td>
+            </template>
+
+            <template v-slot:top>
+              <!--START: table filter,search -->
+              <div class="col-md-12 group">
+                <div class="row">
+                  <div class="col-md-6">
+                    <q-input
+                      clearable
+                      color="grey-9"
+                      v-model.trim="filterSearch"
+                      placeholder="Type.."
+                      label="Search by Plan Name"
+                    >
+                      <template v-slot:append>
+                        <q-icon name="search" />
+                      </template>
+                    </q-input>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12" align="right">
+                <q-btn
+                  no-caps
+                  class="text-weight-regular"
+                  @click="$router.push('/super/admin/manage/rental/charges')"
                   label="Add New Rental Charges"
                   color="purple-9"
-                  icon="add"
-                  @click="$router.push('/super/admin/manage/rental/charges')"
+                  size="md"
                 />
               </div>
-            </div>
-          </template>
-        </q-table>
-      </q-tab-panel>
+            </template>
+          </q-table>
+          <!--END: table Data -->
+        </q-tab-panel>
 
-      <!-- ================= DEACTIVE TAB ================= -->
-      <q-tab-panel name="deactive" class="no-padding q-mt-md">
-        <q-table
-          flat
-          bordered
-          :rows="deactiveTableData"
-          :columns="columnsDeactive"
-          table-class="customSATableClass"
-          :filter="filterSearch1"
-          v-model:pagination="paginationControl1"
-          row-key="id"
-          :loading="toggleAjaxLoadFilter1"
-          color="purple-9"
-          @request="ajaxLoadAllLeadInfo1"
-        >
-          <template v-slot:body-cell-action1="props">
-            <q-td :props="props">
-              <q-btn
-                dense
-                unelevated
-                no-caps
-                label="Enable"
-                icon="check_circle"
-                color="positive"
-                @click="fnEnableRental(props.row)"
-              />
-            </q-td>
-          </template>
+        <q-tab-panel name="deactive" class="no-padding">
+          <!--START: table Data -->
+          <q-table
+            table-class="customTableClass"
+            :rows="deactiveTableData"
+            :columns="columnsDeactive"
+            :filter="filterSearch1"
+            v-model:pagination="paginationControl1"
+            row-key="id"
+            :loading="toggleAjaxLoadFilter1"
+            :rows-per-page-options="[5, 10, 15, 20]"
+            @request="ajaxLoadAllLeadInfo1"
+          >
+            <template v-slot:body-cell-leadSource="props">
+              <q-td
+                :props="props"
+                class="cursor-pointer"
+                @click="toggleLeadInformation(props.row.leadSource.sourceName)"
+              >
+                <span class="label text-primary">
+                  {{ props.row.leadSource.sourceName }}</span>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-device="props">
+              <q-td
+                :props="props"
+                class="cursor-pointer"
+                @click="toggleLeadInformation(props.row.device.deviceName)"
+              >
+                <span class="label text-primary">
+                  {{ props.row.device.deviceName }}</span>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-action1="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <q-btn
+                    dense
+                    no-caps
+                    no-wrap
+                    label="Enable"
+                    icon="far fa-plus-square"
+                    size="md"
+                    @click="fnEnableRental(props.row)"
+                    flat
+                    class="text-positive"
+                  ></q-btn>
+                </div>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-marsDeviceModel="props">
+              <q-td
+                :props="props"
+                class="cursor-pointer"
+              >
+                <span class="label">{{ props.row.marsDeviceModel == null ? "NA" : props.row.marsDeviceModel.name }}</span>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-plan="props">
+              <q-td
+                :props="props"
+                class="cursor-pointer"
+                @click="toggleLeadInformation(props.row.plan.planName)"
+              >
+                <span class="label text-primary"> {{ props.row.plan.planName }}</span>
+              </q-td>
+            </template>
 
-          <template v-slot:top>
-            <div class="full-width row items-center">
-              <div class="col-12 col-md-4">
-                <q-input
-                  dense
-                  filled
-                  clearable
-                  color="purple-9"
-                  v-model="filterSearch1"
-                  placeholder="Search by Plan Name..."
-                >
-                  <template v-slot:append>
-                    <q-icon name="search" />
-                  </template>
-                </q-input>
+            <template v-slot:top>
+              <!--START: table filter,search -->
+              <div class="col-md-12 group">
+                <div class="row">
+                  <div class="col-md-6">
+                    <q-input
+                      clearable
+                      color="grey-9"
+                      v-model.trim="filterSearch1"
+                      placeholder="Type.."
+                      label="Search by Plan Name"
+                    >
+                      <template v-slot:append>
+                        <q-icon name="search" />
+                      </template>
+                    </q-input>
+                  </div>
+                </div>
               </div>
-            </div>
-          </template>
-        </q-table>
-      </q-tab-panel>
-    </q-tab-panels>
+            </template>
+          </q-table>
+          <!--END: table Data -->
+        </q-tab-panel>
+      </q-tab-panels>
 
-    <EditRentalCharges
-      v-if="propShoweditPlanDetails"
-      :propShoweditPlanDetails="propShoweditPlanDetails"
-      :propRowDetails="propRowDetails"
-      @emitfnshowEditRental="propShoweditPlanDetails = false; goToUnassignedTab(selectedTab)"
-    />
+      <EditRentalCharges
+        v-if="propShoweditPlanDetails"
+        :propShoweditPlanDetails="propShoweditPlanDetails"
+        :propRowDetails="propRowDetails"
+        @emitfnshowEditRental="editPlanDetails"
+      ></EditRentalCharges>
+    </div>
   </q-page>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 import EditRentalCharges from "../../pages/super_admin/editRentalCharges.vue";
-import _ from "lodash";
-
 export default {
   name: "NewRentalChargesList",
   components: {
@@ -159,130 +247,319 @@ export default {
   },
   data() {
     return {
-      selectedTab: "active",
       propShoweditPlanDetails: false,
-      propRowDetails: null,
-      filterSearch: "",
-      filterSearch1: "",
+      propRowDetails: "",
+      selectedTab: "active",
       toggleAjaxLoadFilter: false,
       toggleAjaxLoadFilter1: false,
-      tableData: [],
-      deactiveTableData: [],
+
       paginationControl: {
-        rowsNumber: 0,
+        rowsNumber: 10,
         page: 1,
+        sortBy: "id",
+        descending: false,
         rowsPerPage: 10
       },
       paginationControl1: {
-        rowsNumber: 0,
+        rowsNumber: 10,
         page: 1,
+        sortBy: "id",
+        descending: false,
         rowsPerPage: 10
       },
+
+      filterSearch: "",
+      filterSearch1: "",
+
+      //Defining columns for table
       columns: [
-        { name: "plan", label: "Plan Name", align: "left", field: row => row.plan?.planName, sortable: true },
-        { name: "leadSource", label: "Lead Source", align: "left", field: row => row.leadSource?.sourceName, sortable: true },
-        { name: "device", label: "Device Type", align: "left", field: row => row.device?.deviceName, sortable: true },
-        { name: "marsDeviceModel", label: "Mars Model", align: "left", field: row => row.marsDeviceModel?.name, sortable: true },
-        { name: "setupFees", label: "Setup Fee", align: "right", field: "setupFees", sortable: true },
-        { name: "monthlyFees", label: "Recurring Fee", align: "right", field: "monthlyFees", sortable: true },
-        { name: "action", label: "Actions", align: "center" }
+        {
+          name: "plan",
+          required: true,
+          label: "Plan Name",
+          align: "left",
+          field: row => row.plan?.planName,
+          sortable: true
+        },
+        {
+          name: "leadSource",
+          required: true,
+          label: "Lead Source",
+          align: "left",
+          field: row => row.leadSource?.sourceName,
+          sortable: true
+        },
+        {
+          name: "device",
+          required: true,
+          label: "Device Type",
+          align: "left",
+          field: row => row.device?.deviceName,
+          sortable: true
+        },
+        {
+          name: "marsDeviceModel",
+          required: true,
+          label: "Mars Device Model",
+          align: "left",
+          field: row => row.marsDeviceModel?.name,
+          sortable: true
+        },
+        {
+          name: "setupFees",
+          required: true,
+          label: "setupFees",
+          align: "left",
+          field: "setupFees",
+          sortable: true
+        },
+        {
+          name: "monthlyFees",
+          required: true,
+          label: "Recurring Fees",
+          align: "left",
+          field: "monthlyFees",
+          sortable: true
+        },
+        {
+          name: "action",
+          required: true,
+          label: "",
+          align: "left",
+          field: "action",
+          sortable: false
+        }
       ],
       columnsDeactive: [
-        { name: "plan", label: "Plan Name", align: "left", field: row => row.plan?.planName, sortable: true },
-        { name: "leadSource", label: "Lead Source", align: "left", field: row => row.leadSource?.sourceName, sortable: true },
-        { name: "device", label: "Device Type", align: "left", field: row => row.device?.deviceName, sortable: true },
-        { name: "setupFees", label: "Setup Fee", align: "right", field: "setupFees", sortable: true },
-        { name: "monthlyFees", label: "Recurring Fee", align: "right", field: "monthlyFees", sortable: true },
-        { name: "action1", label: "Actions", align: "center" }
-      ]
+        {
+          name: "plan",
+          required: true,
+          label: "Plan Name",
+          align: "left",
+          field: row => row.plan?.planName,
+          sortable: true
+        },
+        {
+          name: "leadSource",
+          required: true,
+          label: "Lead Source",
+          align: "left",
+          field: row => row.leadSource?.sourceName,
+          sortable: true
+        },
+        {
+          name: "device",
+          required: true,
+          label: "Device Type",
+          align: "left",
+          field: row => row.device?.deviceName,
+          sortable: true
+        },
+        {
+          name: "marsDeviceModel",
+          required: true,
+          label: "Mars Device Model",
+          align: "left",
+          field: row => row.marsDeviceModel?.name,
+          sortable: true
+        },
+        {
+          name: "setupFees",
+          required: true,
+          label: "setupFees",
+          align: "left",
+          field: "setupFees",
+          sortable: true
+        },
+        {
+          name: "monthlyFees",
+          required: true,
+          label: "Recurring Fees",
+          align: "left",
+          field: "monthlyFees",
+          sortable: true
+        },
+        {
+          name: "action1",
+          required: true,
+          label: "",
+          align: "left",
+          field: "action",
+          sortable: false
+        }
+      ],
+      tableData: [],
+      deactiveTableData: []
     };
+  },
+
+  created() {
+    this.ajaxLoadAllLeadInfo({
+      pagination: this.paginationControl,
+      filter: this.filterSearch
+    });
+    this.ajaxLoadAllLeadInfo1({
+      pagination: this.paginationControl1,
+      filter: this.filterSearch1
+    });
   },
 
   computed: {
     ...mapGetters("rentalCharges", ["getAllRentalPlanDetails", "getDeactivatedRentalPlanDetails"])
   },
 
-  created() {
-    this.goToUnassignedTab("active");
-  },
-
   methods: {
     ...mapActions("rentalCharges", [
-      "FETCH_ALL_RENTAL_PLAN_DETAILS",
-      "FETCH_DEACTIVATED_RENTAL_PLAN_DETAILS"
+      "FETCH_ALL_RENTAL_PLAN_DETAILS", "FETCH_DEACTIVATED_RENTAL_PLAN_DETAILS",
+      "FETCH_ALL_RENTAl_PLAN_EDIT_DETAILS", "ENABLE_OR_DISABLE_RENTAL_PLAN",
     ]),
     ...mapActions("categoryBasedRental", ["ENABLE_OR_DISABLE_RENTAL_PLAN"]),
+    fnEnableRental(request) {
+      this.$q
+        .dialog({
+          title: "Confirm",
+          message: "Are you sure, do you want to enable this Rental?",
+          ok: "Continue",
+          cancel: "Cancel"
+        })
+        .onOk(() => {
+          this.$q.loading.show({
+            delay: 100, // ms
+            message: "Please Wait",
+            spinnerColor: "purple-9",
+            customClass: "shadow-none"
+          });
+          request.active = request.active == false ? true : request.active;
+          this.ENABLE_OR_DISABLE_RENTAL_PLAN(request)
+            .then((response) => {
+              this.ajaxLoadAllLeadInfo1({
+                pagination: this.paginationControl1,
+                filter: this.filterSearch1
+              });
+              this.$q.notify({
+                color: "positive",
+                position: "bottom",
+                message: "Successfully Enabled",
+                icon: "thumb_up"
+              });
 
+            }).finally(() => {
+              this.$q.loading.hide();
+            });
+        });
+    },
+    fnDeleteRental(request) {
+      this.$q
+        .dialog({
+          title: "Confirm",
+          message: "Are you sure want to delete Rental?",
+          ok: "Continue",
+          cancel: "Cancel"
+        })
+        .onOk(() => {
+          this.$q.loading.show({
+            delay: 100, // ms
+            message: "Please Wait",
+            spinnerColor: "purple-9",
+            customClass: "shadow-none"
+          });
+          request.active = request.active == true ? false : request.active;
+          this.ENABLE_OR_DISABLE_RENTAL_PLAN(request)
+            .then(response => {
+              this.ajaxLoadAllLeadInfo({
+                pagination: this.paginationControl,
+                filter: this.filterSearch
+              });
+              this.$q.notify({
+                color: "positive",
+                position: "bottom",
+                message: "Successfully removed",
+                icon: "thumb_up"
+              });
+
+            }).finally(() => {
+              this.$q.loading.hide();
+            });
+        });
+    },
     goToUnassignedTab(tab) {
-      if (tab === "deactive") {
-        this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: this.filterSearch1 });
+      if (tab == "deactive") {
+        this.filterSearch1 = "";
+        this.ajaxLoadAllLeadInfo1({
+          pagination: this.paginationControl1,
+          filter: this.filterSearch1,
+        });
       } else {
-        this.ajaxLoadAllLeadInfo({ pagination: this.paginationControl, filter: this.filterSearch });
+        this.filterSearch = "";
+        this.ajaxLoadAllLeadInfo({
+          pagination: this.paginationControl,
+          filter: this.filterSearch,
+        });
       }
     },
 
-    ajaxLoadAllLeadInfo(props) {
-      const { page, rowsPerPage } = props.pagination;
-      this.toggleAjaxLoadFilter = true;
-      this.FETCH_ALL_RENTAL_PLAN_DETAILS({ pagination: props.pagination, filter: props.filter })
-        .then(() => {
-          this.tableData = this.getAllRentalPlanDetails.content || [];
-          this.paginationControl.rowsNumber = this.getAllRentalPlanDetails.totalElements;
-          this.paginationControl.page = page;
-          this.paginationControl.rowsPerPage = rowsPerPage;
-          this.toggleAjaxLoadFilter = false;
-        }).catch(() => { this.toggleAjaxLoadFilter = false; });
-    },
-
     ajaxLoadAllLeadInfo1(props) {
-      const { page, rowsPerPage } = props.pagination;
-      this.toggleAjaxLoadFilter1 = true;
-      this.FETCH_DEACTIVATED_RENTAL_PLAN_DETAILS({ pagination: props.pagination, filter: props.filter })
-        .then(() => {
-          this.deactiveTableData = this.getDeactivatedRentalPlanDetails.content || [];
+      const { pagination, filter } = props;
+      this.$q.loading.show({
+        delay: 0, // ms
+        spinnerColor: "purple-9",
+        message: "Fetching data .."
+      });
+      this.FETCH_DEACTIVATED_RENTAL_PLAN_DETAILS({ pagination, filter })
+        .then(res => {
+          this.paginationControl1 = pagination;
           this.paginationControl1.rowsNumber = this.getDeactivatedRentalPlanDetails.totalElements;
-          this.paginationControl1.page = page;
-          this.paginationControl1.rowsPerPage = rowsPerPage;
-          this.toggleAjaxLoadFilter1 = false;
-        }).catch(() => { this.toggleAjaxLoadFilter1 = false; });
+          this.paginationControl1.page = this.getDeactivatedRentalPlanDetails.number + 1;
+          this.deactiveTableData = this.getDeactivatedRentalPlanDetails.content;
+          if (this.getDeactivatedRentalPlanDetails.sort != null) {
+            this.paginationControl1.sortBy = this.getDeactivatedRentalPlanDetails.sort[0].property;
+            this.paginationControl1.descending = !this.getDeactivatedRentalPlanDetails.sort[0].ascending;
+          }
+          this.$q.loading.hide();
+        })
+        .catch(() => {
+          this.$q.loading.hide();
+        });
     },
-
+    ajaxLoadAllLeadInfo(props) {
+      const { pagination, filter } = props;
+      this.$q.loading.show({
+        delay: 0, // ms
+        spinnerColor: "purple-9",
+        message: "Fetching data .."
+      });
+      this.FETCH_ALL_RENTAL_PLAN_DETAILS({ pagination, filter })
+        .then(res => {
+          this.paginationControl = pagination;
+          this.paginationControl.rowsNumber = this.getAllRentalPlanDetails.totalElements;
+          this.paginationControl.page = this.getAllRentalPlanDetails.number + 1;
+          this.tableData = this.getAllRentalPlanDetails.content;
+          if (this.getAllRentalPlanDetails.sort != null) {
+            this.paginationControl.sortBy = this.getAllRentalPlanDetails.sort[0].property;
+            this.paginationControl.descending = !this.getAllRentalPlanDetails.sort[0].ascending;
+          }
+          this.$q.loading.hide();
+        })
+        .catch(() => {
+          this.$q.loading.hide();
+        });
+    },
     editPlanDetails(rowDetails) {
-      this.propRowDetails = rowDetails;
-      this.propShoweditPlanDetails = true;
+      this.propShoweditPlanDetails = !this.propShoweditPlanDetails;
+      if (rowDetails != undefined) {
+        this.propRowDetails = rowDetails;
+      }
     },
-
-    fnEnableRental(row) {
-      this.$q.dialog({
-        title: "Confirm",
-        message: "Enable this rental plan?",
-        ok: "Continue", cancel: "Cancel", persistent: true
-      }).onOk(() => {
-        this.$q.loading.show();
-        let payload = { ...row, active: true };
-        this.ENABLE_OR_DISABLE_RENTAL_PLAN(payload).then(() => {
-          this.$q.notify({ color: "positive", message: "Enabled successfully" });
-          this.goToUnassignedTab("deactive");
-          this.$q.loading.hide();
-        });
-      });
-    },
-
-    fnDeleteRental(row) {
-      this.$q.dialog({
-        title: "Confirm",
-        message: "Deactivate this rental plan?",
-        ok: "Continue", cancel: "Cancel", persistent: true
-      }).onOk(() => {
-        this.$q.loading.show();
-        let payload = { ...row, active: false };
-        this.ENABLE_OR_DISABLE_RENTAL_PLAN(payload).then(() => {
-          this.$q.notify({ color: "positive", message: "Deactivated successfully" });
-          this.goToUnassignedTab("active");
-          this.$q.loading.hide();
-        });
-      });
+    toggleLeadInformation(leadDetails) {
+      // implementation if needed
     }
   }
 };
 </script>
+
+<style>
+.customTabActive {
+  background: purple;
+  color: #fff;
+}
+</style>

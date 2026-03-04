@@ -4,38 +4,53 @@
     persistent
     class="customModalOverlay"
   >
-    <q-card style="min-width: 400px; padding: 20px;">
-      <q-card-section class="row items-center q-pb-none">
-        <div class="text-h6 text-purple-9">Create Hierarchy</div>
-        <q-space />
-        <q-btn icon="close" flat round dense v-close-popup @click="closeModal" />
-      </q-card-section>
-
-      <q-card-section>
-        <q-form @submit="fnCreateHierarchySubmit" class="q-gutter-md">
-          <q-input
-            outlined
-            dense
-            v-model="formData.hierarchy"
-            label="Hierarchy*"
-            :error="v$.formData.hierarchy.$error"
-            color="purple-9"
-          />
-          <q-input
-            outlined
-            dense
-            v-model="formData.hierarchyCode"
-            label="Hierarchy Code*"
-            :error="v$.formData.hierarchyCode.$error"
-            color="purple-9"
-          />
-
-          <div class="row justify-end q-mt-md q-gutter-x-sm">
-            <q-btn flat label="Cancel" color="grey-7" @click="closeModal" />
-            <q-btn unelevated label="Save" color="purple-9" type="submit" />
+    <q-card style="min-width: 30vw; padding: 30px;">
+      <form>
+        <div class="row q-pa-md bottom-border">
+          <div class="col-md-12">
+            <div class="q-title text-weight-regular">Create Hierarchy</div>
           </div>
-        </q-form>
-      </q-card-section>
+        </div>
+        <div class="row q-pa-md">
+          <div class="col-md-12">
+            <q-input
+              v-model="formData.HierarchyDetails.hierarchy"
+              @blur="v$.formData.HierarchyDetails.hierarchy.$touch"
+              :error="v$.formData.HierarchyDetails.hierarchy.$error"
+              class="text-weight-regular text-grey-8 q-my-sm"
+              color="grey-9"
+              label="Hierarchy"
+              placeholder="Hierarchy"
+            />
+          </div>
+          <div class="col-md-12">
+            <q-input
+              v-model="formData.HierarchyDetails.hierarchyCode"
+              @blur="v$.formData.HierarchyDetails.hierarchyCode.$touch"
+              :error="v$.formData.HierarchyDetails.hierarchyCode.$error"
+              class="text-weight-regular text-grey-8 q-my-sm"
+              color="grey-9"
+              label="Hierarchy Code"
+              placeholder="Hierarchy Code"
+            />
+          </div>
+        </div>
+        <div class="row q-pa-md">
+          <div class="col-md-12 text-right">
+            <q-btn
+              flat
+              size="md"
+              class="bg-white q-mr-sm text-weight-regular text-grey-8"
+              @click="closeModal"
+            >Cancel</q-btn>
+            <q-btn
+              size="md"
+              @click="fnCreateHierarchySubmit"
+              color="purple-9"
+            >Save</q-btn>
+          </div>
+        </div>
+      </form>
     </q-card>
   </q-dialog>
 </template>
@@ -55,16 +70,20 @@ export default {
     return {
       showCreateHierarchyToggle: this.propShowCreateHierarchy,
       formData: {
-        hierarchy: "",
-        hierarchyCode: ""
+        HierarchyDetails: {
+          hierarchy: "",
+          hierarchyCode: ""
+        }
       }
     };
   },
   validations() {
     return {
       formData: {
-        hierarchy: { required },
-        hierarchyCode: { required }
+        HierarchyDetails: {
+          hierarchy: { required },
+          hierarchyCode: { required }
+        }
       }
     };
   },
@@ -83,16 +102,18 @@ export default {
       }
 
       this.$q.loading.show({ message: "Please Wait" });
-      this.FEED_NEW_HIERARCHY_DATA(this.formData)
+      this.FEED_NEW_HIERARCHY_DATA(this.formData.HierarchyDetails)
         .then(() => {
           this.FETCH_ALL_HIERARCHIES_DATA();
           this.$emit("emitCreateHierarchyDetails", false);
-          this.$q.notify({ color: "positive", message: "Successfully created!" });
+          this.$q.notify({ color: "positive", message: "Successfully created!", icon: "thumb_up", position: "bottom" });
         })
         .catch(error => {
           this.$q.notify({
             color: "negative",
-            message: error.body?.message || "Please Try Again Later !"
+            position: "bottom",
+            message: error.data?.message || "Please Try Again Later !",
+            icon: "thumb_down"
           });
         })
         .finally(() => this.$q.loading.hide());

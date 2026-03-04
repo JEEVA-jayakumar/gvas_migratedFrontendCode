@@ -3,28 +3,28 @@
     <customHeader
       :getUserName="getUserName"
       :leftDrawerOpen="leftDrawerOpen"
-      @toggleSideMenu="toggleSideMenu"
+      @fnToggleSideMenu="toggleSideMenu"
     />
 
     <q-drawer
+      class="shadow-9"
       v-model="leftDrawerOpen"
       show-if-above
-      bordered
-      :width="260"
+      :width="250"
       :breakpoint="500"
-      class="bg-dark text-white shadow-1"
+      style="background-color: #531b64 !important;"
     >
-      <div class="drawer-header q-pa-md row items-center justify-center">
-        <img src="~assets/images/logo.png" style="height: 45px" />
-      </div>
-
-      <q-scroll-area class="fit drawer-scroll-area">
-        <SidebarMenu :menus="menus" />
-      </q-scroll-area>
-
-      <div class="drawer-footer q-pa-md text-center text-grey-5 text-caption">
-        Version 2.0.0
-      </div>
+      <q-list
+        no-border
+        link
+        inset-delimiter
+        highlight
+        style="padding-top:65px"
+      >
+        <q-item v-for="menu in menus" :key="menu.id" :to="menu.to" class="menu-main-item-color-SA">
+          <q-item-section class="menu-item-color-SA">{{menu.name}}</q-item-section>
+        </q-item>
+      </q-list>
     </q-drawer>
 
     <q-page-container class="bg-grey-1">
@@ -45,68 +45,126 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import customHeader from "../components/customHeader.vue";
-import SidebarMenu from "../components/SidebarMenu.vue";
 
 export default {
   name: "DefaultLayoutSuperAdmin",
   components: {
     customHeader,
-    SidebarMenu,
   },
   data() {
     return {
       leftDrawerOpen: false,
       menus: [
-        { id: 1, to: "/super/admin/dashboard", name: "Dashboard", icon: "dashboard" },
+        {
+          id: 1,
+          to: "/super/admin/dashboard/",
+          name: "Dashboard",
+        },
         {
           id: 2,
-          name: "User Management",
-          icon: "people",
-          subItems: [
-            { id: 21, to: "/super/admin/users", name: "Users", icon: "person" },
-            { id: 22, to: "/super/admin/hierarchy", name: "Hierarchy", icon: "account_tree" },
-            { id: 23, to: "/super/admin/roles/permissions", name: "Roles & Permissions", icon: "security" },
-            { id: 24, to: "/super/admin/permissions", name: "Permissions", icon: "vpn_key" },
-          ],
+          to: "/super/admin/users/",
+          name: "Users",
         },
         {
           id: 3,
-          name: "Location Settings",
-          icon: "location_on",
-          subItems: [
-            { id: 31, to: "/super/admin/regions", name: "Regions", icon: "map" },
-            { id: 32, to: "/super/admin/regionGroup", name: "Region Groups", icon: "layers" },
-            { id: 33, to: "/super/admin/subregions", name: "Sub Regions", icon: "location_city" },
-            { id: 34, to: "/super/admin/pincodes", name: "Pincodes", icon: "pin_drop" },
-          ],
+          to: "/super/admin/hierarchy/",
+          name: "Hierarchy",
         },
         {
           id: 4,
-          name: "Financial Config",
-          icon: "payments",
-          subItems: [
-            { id: 41, to: "/super/admin/manage/rental/charges", name: "Rental Charges", icon: "receipt_long" },
-            { id: 42, to: "/super/admin/manage/mdr/charges", name: "MDR Charges", icon: "request_quote" },
-            { id: 43, to: "/super/admin/manage/mdr/bankSO", name: "Bank SO", icon: "account_balance" },
-          ],
+          to: "/super/admin/roles/permissions/",
+          name: "Roles & Permissions",
         },
         {
           id: 5,
-          name: "Device & Service",
-          icon: "devices",
-          subItems: [
-            { id: 51, to: "/super/admin/device/types", name: "Device Types", icon: "devices_other" },
-            { id: 52, to: "/super/admin/manage/serviceRequest", name: "Service Requests", icon: "support_agent" },
-            { id: 53, to: "/super/admin/manage/mATMplan", name: "mATM Plans", icon: "payment" },
-            { id: 54, to: "/super/admin/manage/existingmATMplan", name: "Existing mATM Plans", icon: "history" },
-            { id: 55, to: "/super/admin/manage/QR/Sticker", name: "QR Stickers", icon: "qr_code" },
-            { id: 56, to: "/super/admin/manage/aggregators", name: "Aggregators", icon: "business" },
-            { id: 57, to: "/super/admin/manage/prefixConfig", name: "Prefix Config", icon: "settings_input_component" },
-            { id: 58, to: "/super/admin/manage/multiTid", name: "Multi TID", icon: "dynamic_feed" },
-          ],
+          to: "/super/admin/permissions/",
+          name: "Permissions",
         },
-        { id: 6, to: "/super/admin/manage/notifications", name: "Notifications", icon: "notifications" },
-        { id: 7, to: "/super/admin/manage/APISync", name: "API Sync", icon: "sync" },
+        {
+          id: 6,
+          to: "/super/admin/regions/",
+          name: "Regions",
+        },
+        {
+          id: 22,
+          to: "/super/admin/regionGroup/",
+          name: "RegionGroup",
+        },
+        {
+          id: 8,
+          to: "/super/admin/pincodes",
+          name: "Pincodes",
+        },
+        {
+          id: 9,
+          to: "/super/admin/manage/merchant/types",
+          name: "Merchant and Document Types",
+        },
+        {
+          id: 10,
+          to: "/super/admin/manage/mdrCharges",
+          name: "MDR Charges",
+        },
+        {
+          id: 11,
+          to: "/super/admin/manage/newRentalCharges",
+          name: "Rental Charges",
+        },
+        {
+          id: 14,
+          to: "/super/admin/manage/mdr/bankSO",
+          name: "Bank SO",
+        },
+        {
+          id: 16,
+          to: "/super/admin/manage/notifications",
+          name: "Notifications",
+        },
+        {
+          id: 17,
+          to: "/super/admin/manage/QR/Sticker",
+          name: "QRSticker",
+        },
+        {
+          id: 19,
+          to: "/super/admin/manage/existingmATMplan",
+          name: "M-ATM",
+        },
+        {
+          id: 20,
+          to: "/super/admin/manage/multiTid",
+          name: "Multi-TID",
+        },
+        {
+          id: 21,
+          to: "/super/admin/manage/prefixConfig",
+          name: "prefix Config",
+        },
+        {
+          id: 30,
+          to: "/super/admin/sparePartsTypes",
+          name: "Spare Parts Types",
+        },
+        {
+          id: 31,
+          to: "/super/admin/manage/serviceRequest",
+          name: "Service Request",
+        },
+        {
+          id: 25,
+          to: "/super/admin/manage/aggregators",
+          name: "Aggregators",
+        },
+        {
+          id: 26,
+          to: "/super/admin/manage/aggregatorsDevice",
+          name: "Aggregators Device",
+        },
+        {
+          id: 38,
+          to: "/super/admin/manage/APISync",
+          name: "MARS API SYNC",
+        },
       ],
     };
   },
@@ -134,17 +192,32 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.drawer-scroll-area {
-  height: calc(100% - 150px);
-  margin-top: 20px;
+<style scoped>
+.menu-item-color-SA {
+  color: #e3e4e5 !important;
+  font-size: 14px;
 }
-.drawer-header {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(0, 0, 0, 0.2);
+.menu-main-item-color-SA:hover {
+  color: #e3e4e5 !important;
+  font-size: 14px;
+  background: #7d428f !important;
 }
-.drawer-footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(0, 0, 0, 0.1);
+.menu-main-item-color-SA:active {
+  color: #e3e4e5 !important;
+  font-size: 14px;
+  background: #7d428f !important;
+}
+
+.menu-main-item-color-SA:focus {
+  color: #e3e4e5 !important;
+  font-size: 14px;
+  background: #7d428f !important;
+}
+
+.q-item.q-router-link--active,
+.q-item--active,
+.q-item:focus {
+  background: #3b084b !important;
+  color: #e3e4e5 !important;
 }
 </style>

@@ -1,63 +1,42 @@
 <template>
-  <q-page padding>
-    <q-card flat bordered class="q-pa-md">
-      <div class="row items-center q-mb-md">
-        <div class="text-h6 text-purple-9 col">Pincodes</div>
-        <div class="col-auto">
-          <q-btn
-            unelevated
-            no-caps
-            label="Add New Pincode"
-            color="purple-9"
-            icon="add"
-            @click="fnshowCreatePincodes"
-          />
-        </div>
-      </div>
-
-      <q-table
-        flat
-        bordered
-        :rows="getAllPincodes"
-        :columns="columns"
-        :filter="filter"
-        v-model:pagination="serverPagination"
-        row-key="id"
-        :loading="loading"
-        @request="searchRequest"
-        color="purple-9"
-      >
-        <template v-slot:top-right>
-          <q-input
-            outlined
-            dense
-            clearable
-            color="purple-9"
-            v-model="filter"
-            placeholder="Search Pincode"
-          >
-            <template v-slot:append>
-              <q-icon name="search" />
-            </template>
-          </q-input>
-        </template>
-
+  <q-page>
+    <!-- content -->
+    <div>
+      <q-table :rows="getAllPincodes" table-class="customSATableClass" :columns="columns" :filter="filter" v-model:pagination="serverPagination" row-key="name" :loading="loading" @request="searchRequest" color="grey-9">
         <template v-slot:body-cell-action="props">
           <q-td :props="props">
-            <q-btn
-              dense
-              unelevated
-              no-caps
-              label="Modify"
-              icon="edit"
-              color="primary"
-              size="sm"
-              @click="fnShowEditPincode(props.row)"
-            />
+            <div class="row no-wrap no-padding">
+              <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md" @click="fnShowEditPincode(props.row)" flat class="text-light-blue">
+              </q-btn>
+              <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative">
+              </q-btn> -->
+            </div>
           </q-td>
         </template>
+
+        <template v-slot:top>
+          <!--START: table title -->
+          <div class="col-md-6 q-title q-mt-lg text-weight-regular">Pincodes</div>
+
+          <div class="col-md-6 q-my-md" align="right">
+            <q-btn no-caps no-wrap label="Add New Pincode" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreatePincodes()"/>
+          </div>
+          <!--END: table title -->
+
+          <!--START: table filter,search -->
+          <div class="col-md-5">
+            <q-input
+            clearable
+            color="grey-9"
+            v-model="filter"
+            placeholder="Type.."
+            class="q-mr-lg"
+            />
+          </div>
+          <!--END: table filter,search -->
+        </template>
+
       </q-table>
-    </q-card>
 
     <!-- Modals -->
     <addPincode
@@ -72,6 +51,7 @@
       :propRowDetails="propRowDetails"
       @emitfnshowEditPincodes="fnShowEditPincode"
     />
+    </div>
   </q-page>
 </template>
 

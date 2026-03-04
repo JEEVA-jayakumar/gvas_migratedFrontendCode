@@ -5,25 +5,31 @@
       <!-- <pre>{{getAllHierarchiesData}}</pre> -->
       <q-table :rows="getAllPermissionData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
 
-        <q-td v-slot:body-cell-Permission="props" :props="props">
-          {{props.row.label}}
-        </q-td>
-        <q-td v-slot:body-cell-PermissionCode="props" :props="props">
-          {{props.row.shortCode}}
-        </q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
-          <div class="row no-wrap no-padding">
-            <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md" @click="fnShowEditPermission(props.row)" flat class="text-light-blue">
-            </q-btn>
-            <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative"> -->
-            <!-- </q-btn> -->
-          </div>
-        </q-td>
+        <template v-slot:body-cell-Permission="props">
+          <q-td :props="props">
+            {{props.row.label}}
+          </q-td>
+        </template>
+        <template v-slot:body-cell-PermissionCode="props">
+          <q-td :props="props">
+            {{props.row.shortCode}}
+          </q-td>
+        </template>
+        <template v-slot:body-cell-action="props">
+          <q-td :props="props">
+            <div class="row no-wrap no-padding">
+              <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md" @click="fnShowEditPermission(props.row)" flat class="text-light-blue">
+              </q-btn>
+              <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative"> -->
+              <!-- </q-btn> -->
+            </div>
+          </q-td>
+        </template>
 
-        <template v-slot:top="props">
+        <template v-slot:top>
   
             <!--START: table title -->
-            <div class="col-12 text-h6 q-my-lg text-weight-regular">Permissions</div>
+            <div class="col-12 q-title q-my-lg text-weight-regular">Permissions</div>
 
             <!-- <div class="col-md-6 q-my-md" align="right">
               <q-btn no-caps no-wrap label="Add New Permission" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreatePermission()"/>

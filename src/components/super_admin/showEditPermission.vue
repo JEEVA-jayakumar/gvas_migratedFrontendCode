@@ -1,55 +1,52 @@
 <template>
-  <div>
-    <q-dialog
-    minimized no-backdrop-dismiss
+  <q-dialog
+    v-model="propShowEditPermissionToggle"
+    persistent
     class="customModalOverlay"
-    v-model="propShowEditPermissionToggle"  
-    @hide="emitfnEditpermissionDetails(propShowEditPermissionToggle)" 
-    @escape-key="emitfnEditpermissionDetails(propShowEditPermissionToggle)"  
-    :content-css="{padding:'30px',minWidth: '30vw'}"
-    >
-      <form> 
-        <div class="column q-pa-md bottom-border">
+  >
+    <q-card style="min-width: 30vw; padding: 30px;">
+      <form>
+        <div class="row q-pa-md bottom-border">
           <div class="col-md-12">
-            <div class="text-h6 text-weight-regular">Edit Permission</div>
+            <div class="q-title text-weight-regular">Edit Permission</div>
           </div>
         </div>
-        <div class="column q-pa-md">
+        <div class="row q-pa-md">
           <div class="col-md-12">
-            <q-input 
-            @keyup.enter="fnEditPermissionSubmit(formData.permissionDetails)"
-            v-model="formData.permissionDetails.permission" 
-            :error="$v.formData.permissionDetails.permission.$error" 
-            class="text-weight-regular text-grey-8 q-my-sm" color="grey-9" label="Permission" placeholder="Permission" />
+            <q-input
+              @keyup.enter="fnEditPermissionSubmit(formData.permissionDetails)"
+              v-model="formData.permissionDetails.permission"
+              @blur="v$.formData.permissionDetails.permission.$touch"
+              :error="v$.formData.permissionDetails.permission.$error"
+              class="text-weight-regular text-grey-8 q-my-sm" color="grey-9" label="Permission" placeholder="Permission" />
           </div>
         </div>
-        <div class="column gutter-sm q-pa-md">
-          <div class="col-md-12" align="right">
-            <q-btn flat size="md" align="right" class="bg-white q-mr-sm text-weight-regular text-grey-8" @click="emitfnEditpermissionDetails(propShowEditPermissionToggle)">Cancel
+        <div class="row q-pa-md">
+          <div class="col-md-12 text-right">
+            <q-btn flat size="md" class="bg-white q-mr-sm text-weight-regular text-grey-8" @click="emitfnEditpermissionDetails(false)">Cancel
             </q-btn>
-            <q-btn size="md" align="right" @click="fnEditPermissionSubmit(formData.permissionDetails)" color="purple-9">Save
+            <q-btn size="md" @click="fnEditPermissionSubmit(formData.permissionDetails)" color="purple-9">Save
             </q-btn>
           </div>
         </div>
       </form>
-    </q-dialog>
-  </div>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import {
   required,
-  email,
-  minLength,
-  maxLength,
-  alpha,
-  alphaNum,
-  numeric
 } from "@vuelidate/validators";
-import { mapGetters, mapActions } from "vuex";
-export default {
-  props: ["propRowDetails", "propShowEditPermission"],
+import { mapActions } from "vuex";
 
+export default {
+  name: "ShowEditPermission",
+  props: ["propRowDetails", "propShowEditPermission"],
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       propShowEditPermissionToggle: this.propShowEditPermission,
@@ -82,10 +79,10 @@ export default {
     },
 
     //Permission creation final submit
-    fnEditPermissionSubmit(formData) {
-      this.$v.formData.permissionDetails.$touch();
+    async fnEditPermissionSubmit(formData) {
+      const isValid = await this.v$.$validate();
 
-      if (this.$v.formData.permissionDetails.$error) {
+      if (!isValid) {
         this.$q.notify("Please review fields again.");
       } else {
         console.log("formData >> ", formData);
@@ -108,12 +105,12 @@ export default {
               icon: "thumb_up"
             });
           })
-          .catch(() => {
+          .catch(error => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message || "Please Try Again Later !",
               icon: "thumb_down"
             });
           });
