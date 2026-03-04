@@ -4,61 +4,48 @@
         <div>
 
             <q-tabs v-model="tab" class="shadow-1" color="grey-1">
-                <q-tab color="dark" name="active" label="Active RegionsGroups" />
-                <!-- <q-tab color="dark" name="deactive" label="Deactive Regions" /> -->
-               <!-- We can't disable regiongroup because existing flow through errors-->
-                <!--  -->
-</q-tabs>
-<q-tab-panels v-model="tab" animated>
-<q-tab-panel name="active">
-                    <q-table 
-                    :rows="activeTableData"
-                     table-class="customSATableClass" 
-                     :columns="columns"
-                        :filter="filterSearch" v-model:pagination="paginationControl"
-                        :filter-method="myCustomSearchFilter" 
-                        row-key="name" 
-                        color="grey-9">
-                        {{ activeTableData }}
-                        <q-td v-slot:body-cell-regionGroup="props" :props="props">{{ props.row.regionName
-                                == null ? "NA" : props.row.regionName
-                        }}</q-td>
-                        <q-td v-slot:body-cell-action="props" :props="props">
-                            <div class="row no-wrap no-padding">
-                                <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
-                                    @click="fnShowEditRegionsGroup(props.row)" flat class="text-light-blue"></q-btn>
-                                <!-- <q-btn
-              dense
-              no-caps
-              no-wrap
-              label="Disable"
-              icon="far fa-minus-square"
-              size="md"
-              @click="fnDeleteRegionGroup(props.row)"
-              flat
-              class="text-negative"
-            ></q-btn> -->
-                            </div>
-                        </q-td>
+        <q-tab color="dark" name="active" label="Active RegionsGroups" />
+      </q-tabs>
 
-                        <template v-slot:top="props">
-                            <!-- <div class="col-md-6 q-my-md" align="right">
-            <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
-          </div>-->
-                            <!--END: table title -->
-                            <!--START: table filter,search -->
-                            <div class="col-6">
-                                <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.."
-                                    class="q-mr-lg" />
-                            </div>
-                            <!--END: table filter,search -->
-                            <div class="col-6" align="right">
-                                <q-btn no-caps class="text-weight-regular" label="Add New RegionGroup"
-                                    @click="fnShowAddNewRegionsGroups(props.row)" color="purple-9" size="md" />
-                            </div>
-                        </template>
-                    </q-table>
-                </q-tab-panel>
+      <q-tab-panels v-model="tab" animated>
+        <q-tab-panel name="active" class="no-padding">
+          <q-table
+            :rows="activeTableData"
+            table-class="customSATableClass"
+            :columns="columns"
+            :filter="filterSearch"
+            v-model:pagination="paginationControl"
+            :filter-method="myCustomSearchFilter"
+            row-key="name"
+            color="grey-9"
+          >
+            <template v-slot:body-cell-regionGroup="props">
+              <q-td :props="props">
+                {{ props.row.regionName == null ? "NA" : props.row.regionName }}
+              </q-td>
+            </template>
+
+            <template v-slot:body-cell-action="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
+                    @click="fnShowEditRegionsGroup(props.row)" flat class="text-light-blue"></q-btn>
+                </div>
+              </q-td>
+            </template>
+
+            <template v-slot:top>
+              <div class="col-6">
+                <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.."
+                  class="q-mr-lg" />
+              </div>
+              <div class="col-6" align="right">
+                <q-btn no-caps class="text-weight-regular" label="Add New RegionGroup"
+                  @click="fnShowAddNewRegionsGroups(activeTableData[0])" color="purple-9" size="md" />
+              </div>
+            </template>
+          </q-table>
+        </q-tab-panel>
 <q-tab-panel name="deactive">
                     <q-table :rows="deActiveTableData" table-class="customSATableClass" :columns="columns1"
                         :filter="filterSearch1" v-model:pagination="paginationControl1"

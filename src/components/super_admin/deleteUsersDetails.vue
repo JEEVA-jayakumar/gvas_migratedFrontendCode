@@ -1,14 +1,12 @@
 <template>
   <q-dialog
-    maximized
-    no-backdrop-dismiss
-    no-esc-dismiss
+    persistent
     v-model="toggleModal"
-    :content-css="{padding:'50px 5px'}"
   >
+    <q-card style="min-width: 90vw; min-height: 90vh;">
     <!--START: table title -->
     <div class="row items-center q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
-      <div class="col text-h6">Action Sheet</div>
+      <div class="col q-title">Action Sheet</div>
       <div class="col-auto">
         <q-btn size="sm" round @click="emitToggleRemarks" outline color="dark" icon="clear"/>
       </div>
@@ -24,7 +22,8 @@
         :filter="filter" v-model:pagination="paginationControl"
         row-key="nam6"
       >
-        <q-td v-slot:body-cell-action="props" class="group" :props="props">
+        <template v-slot:body-cell-action="props">
+          <q-td :props="props" class="group">
           <q-btn
             v-show="props.row.leadsCount == 0 && props.row.referencesCount == 0"
             no-caps
@@ -48,7 +47,8 @@
             @click="toggleReAssignLeadsModal(props.row)"
             label="Re-assign leads"
           />
-        </q-td>
+          </q-td>
+        </template>
         <!-- END: table body modification -->
         <template v-slot:top="props" class="bottom-border">
           <!--START: table filter,search -->
@@ -78,6 +78,7 @@
       :propToggleModal="reAssignReferencesModal"
       @closeReferencesList="toggleReAssignReferencesModal()"
     />
+    </q-card>
   </q-dialog>
 </template>
 

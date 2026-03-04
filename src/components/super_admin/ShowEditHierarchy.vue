@@ -1,60 +1,71 @@
 <template>
-  <div>
-    <q-dialog
-        minimized
-        class="customModalOverlay"
-        v-model="showEditHierarchyToggle"  
-        @hide="emitfnEditHierarchyDetails(showEditHierarchyToggle)" 
-        @escape-key="emitfnEditHierarchyDetails(showEditHierarchyToggle)"
-        :content-css="{padding:'30px',minWidth: '30vw'}"
-      >
-        <form> 
-            <div class="row q-pa-md bottom-border">
-                <div class="col-md-12">
-                    <div class="text-h6 text-weight-regular">Edit Hierarchy</div>
-                </div>
-            </div>
-             <div class="row q-pa-md">
-                <div class="col-md-12">
-                    <q-input v-model="formData.HierarchyDetails.hierarchy" 
-                    @blur="$v.formData.HierarchyDetails.hierarchy.$touch"      
-                    :error="$v.formData.HierarchyDetails.hierarchy.$error" 
-                    class="text-weight-regular text-grey-8 q-my-sm" color="grey-9" label="Hierarchy" placeholder="Hierarchy" />
-                </div>
-                <div class="col-md-12">
-                    <q-input v-model="formData.HierarchyDetails.hierarchyCode" 
-                    @blur="$v.formData.HierarchyDetails.hierarchyCode.$touch"      
-                    :error="$v.formData.HierarchyDetails.hierarchyCode.$error" 
-                    class="text-weight-regular text-grey-8 q-my-sm" color="grey-9" label="Hierarchy Code" placeholder="Hierarchy Code" />
-                </div>
-            </div>
-             <div class="row gutter-sm q-pa-md">
-                <div class="col-md-12" align="right">
-                    <q-btn flat size="md" align="right" class="bg-white q-mr-sm text-weight-regular text-grey-8" @click="emitfnEditHierarchyDetails(showEditHierarchyToggle)">Cancel
-                    </q-btn>
-                    <q-btn size="md" align="right" @click="fnEditHierarchySubmit(formData.HierarchyDetails)" color="purple-9">Save
-                    </q-btn>
-                </div>
-            </div>
-        </form>
-    </q-dialog>
-  </div>
+  <q-dialog
+    v-model="showEditHierarchyToggle"
+    persistent
+    class="customModalOverlay"
+  >
+    <q-card style="min-width: 30vw; padding: 30px;">
+      <form>
+        <div class="row q-pa-md bottom-border">
+          <div class="col-md-12">
+            <div class="q-title text-weight-regular">Edit Hierarchy</div>
+          </div>
+        </div>
+        <div class="row q-pa-md">
+          <div class="col-md-12">
+            <q-input
+              v-model="formData.HierarchyDetails.hierarchy"
+              @blur="v$.formData.HierarchyDetails.hierarchy.$touch"
+              :error="v$.formData.HierarchyDetails.hierarchy.$error"
+              class="text-weight-regular text-grey-8 q-my-sm"
+              color="grey-9"
+              label="Hierarchy"
+              placeholder="Hierarchy"
+            />
+          </div>
+          <div class="col-md-12">
+            <q-input
+              v-model="formData.HierarchyDetails.hierarchyCode"
+              @blur="v$.formData.HierarchyDetails.hierarchyCode.$touch"
+              :error="v$.formData.HierarchyDetails.hierarchyCode.$error"
+              class="text-weight-regular text-grey-8 q-my-sm"
+              color="grey-9"
+              label="Hierarchy Code"
+              placeholder="Hierarchy Code"
+            />
+          </div>
+        </div>
+        <div class="row q-pa-md">
+          <div class="col-md-12 text-right">
+            <q-btn
+              flat
+              size="md"
+              class="bg-white q-mr-sm text-weight-regular text-grey-8"
+              @click="emitfnEditHierarchyDetails(false)"
+            >Cancel</q-btn>
+            <q-btn
+              size="md"
+              @click="fnEditHierarchySubmit(formData.HierarchyDetails)"
+              color="purple-9"
+            >Save</q-btn>
+          </div>
+        </div>
+      </form>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script>
-import {
-  required,
-  email,
-  minLength,
-  maxLength,
-  alpha,
-  alphaNum,
-  numeric,
-} from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
-export default {
-  props: ["propRowDetails", "propShowEditHierarchy"],
 
+export default {
+  name: "ShowEditHierarchy",
+  props: ["propRowDetails", "propShowEditHierarchy"],
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       showEditHierarchyToggle: this.propShowEditHierarchy,
@@ -93,11 +104,11 @@ export default {
     },
 
     //Hierarchy creation final submit
-    fnEditHierarchySubmit(formData) {
-      this.$v.formData.HierarchyDetails.$touch();
+    async fnEditHierarchySubmit(formData) {
+      const isValid = await this.v$.$validate();
 
-      if (this.$v.formData.HierarchyDetails.$error) {
-        this.$q.notify("Please review fields again.");
+      if (!isValid) {
+        this.$q.notify({ color: "warning", message: "Please review fields again." });
       } else {
         console.log("formData >> ", formData);
         this.$q.loading.show({
@@ -119,12 +130,12 @@ export default {
               icon: "thumb_up",
             });
           })
-          .catch(() => {
+          .catch(error => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message || "Please Try Again Later !",
               icon: "thumb_down",
             });
           });

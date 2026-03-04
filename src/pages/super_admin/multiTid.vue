@@ -1,67 +1,76 @@
 <template>
-  <q-page padding>
-    <q-tabs
-      v-model="selectedTab"
-      class="bg-white text-grey-7 shadow-1"
-      active-color="purple-9"
-      indicator-color="purple-9"
-      align="left"
-    >
-      <q-tab name="active" label="Active TID Configurations" />
-    </q-tabs>
+  <q-page>
+    <!-- content -->
+    <div>
 
-    <q-tab-panels v-model="selectedTab" animated keep-alive class="bg-transparent">
-      <q-tab-panel name="active" class="no-padding q-mt-md">
-        <q-table
-          flat
-          bordered
-          :rows="getlsVasHostInstanceDetails"
-          :columns="columns"
-          row-key="id"
-          table-class="customSATableClass"
-          :filter="filterSearch"
-          v-model:pagination="paginationControl"
-          :filter-method="myCustomSearchFilter"
-          color="purple-9"
-          :loading="loading"
-        >
-          <template v-slot:top>
-            <div class="full-width row items-center justify-between">
-              <div class="col-12 col-md-4">
-                <q-input
-                  dense
-                  filled
-                  clearable
-                  color="purple-9"
-                  v-model="filterSearch"
-                  placeholder="Search configurations..."
-                >
-                  <template v-slot:append>
-                    <q-icon name="search" />
-                  </template>
-                </q-input>
-              </div>
-              <div class="col-auto">
-                <q-btn
-                  unelevated
-                  no-caps
-                  label="Add New Configuration"
-                  color="purple-9"
-                  icon="add"
-                  @click="propShowAddNewConfigurarions = true"
-                />
-              </div>
-            </div>
-          </template>
-        </q-table>
-      </q-tab-panel>
-    </q-tab-panels>
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        active-bg-color="grey-1"
+        active-color="dark"
+        indicator-color="transparent"
+        align="left"
+      >
+        <q-tab name="active" label="Active TID" />
+      </q-tabs>
 
-    <AddNewConfigurarions
-      v-if="propShowAddNewConfigurarions"
-      :propShowAddNewConfigurarions="propShowAddNewConfigurarions"
-      @emitfnshowAddConfiguration="propShowAddNewConfigurarions = false; ajaxLoadAllLeadInfo()"
-    />
+      <q-tab-panels v-model="selectedTab" animated class="bg-transparent">
+        <q-tab-panel name="active" class="no-padding">
+          <q-table
+            :rows="getlsVasHostInstanceDetails"
+            table-class="customSATableClass"
+            :columns="columns"
+            :filter="filterSearch"
+            v-model:pagination="paginationControl"
+            :filter-method="myCustomSearchFilter"
+            row-key="id"
+            color="grey-9"
+          >
+            <template v-slot:body-cell-action="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <q-btn dense no-caps no-wrap label="Disable" icon="far fa-plus-square" size="md"
+                    @click="fnDisable(props.row)" flat class="text-light-blue">
+                  </q-btn>
+                </div>
+              </q-td>
+            </template>
+            <template v-slot:top>
+              <div class="col-md-12 group">
+                <div class="row">
+                  <div class="col-md-6">
+                    <q-input
+                      clearable
+                      color="grey-9"
+                      v-model.trim="filterSearch"
+                      placeholder="Type.."
+                      label="Search by Plan Name"
+                    >
+                      <template v-slot:append>
+                        <q-icon name="search" />
+                      </template>
+                    </q-input>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12" align="right">
+                <q-btn no-caps class="text-weight-regular"
+                @click="fnaddnewConfigurarions()"
+                  label="Add New Configurations"
+                  color="purple-9" size="md" />
+              </div>
+            </template>
+          </q-table>
+        </q-tab-panel>
+      </q-tab-panels>
+
+      <AddNewConfigurarions
+       v-if="propShowAddNewConfigurarions"
+       :propShowAddNewConfigurarions="propShowAddNewConfigurarions"
+      @emitfnshowAddConfiguration="fnaddnewConfigurarions">
+       </AddNewConfigurarions>
+
+    </div>
   </q-page>
 </template>
 
@@ -70,16 +79,15 @@ import AddNewConfigurarions from "../../pages/super_admin/addMultiTidConfigurati
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "MultiTidManagement",
+  name: "MultiTid",
   components: {
     AddNewConfigurarions,
   },
   data() {
     return {
-      selectedTab: "active",
       propShowAddNewConfigurarions: false,
+      selectedTab: "active",
       filterSearch: "",
-      loading: false,
       paginationControl: {
         rowsPerPage: 10,
       },
@@ -89,32 +97,32 @@ export default {
           required: true,
           label: "Institution Name",
           align: "left",
-          field: row => row.institution?.institutionName || "NA",
-          sortable: true,
+          field: row => row.institution?.institutionName,
+          sortable: false,
         },
         {
           name: "leadSource",
           required: true,
           label: "Lead Source",
           align: "left",
-          field: row => row.leadSource?.sourceName || "NA",
-          sortable: true,
+          field: row => row.leadSource?.sourceName,
+          sortable: false,
         },
         {
           name: "masterHost",
           required: true,
           label: "Master Host",
           align: "left",
-          field: row => row.masterHost?.name || "NA",
-          sortable: true,
+          field: row => row.masterHost?.name,
+          sortable: false,
         },
         {
           name: "vas",
           required: true,
-          label: "VAS",
+          label: "vas",
           align: "left",
-          field: row => row.vas?.name || "NA",
-          sortable: true,
+          field: row => row.vas?.name,
+          sortable: false,
         }
       ],
     };
@@ -131,12 +139,30 @@ export default {
   methods: {
     ...mapActions("lsVasHostInstance", ["GET_LS_VAS_HOST_INSTANCE_DETAILS"]),
 
+    fnaddnewConfigurarions(){
+      this.propShowAddNewConfigurarions = !this.propShowAddNewConfigurarions;
+      if (this.propShowAddNewConfigurarions == false) {
+        this.ajaxLoadAllLeadInfo();
+      }
+    },
+
     ajaxLoadAllLeadInfo() {
-      this.loading = true;
+      this.$q.loading.show({
+        delay: 0,
+        spinnerColor: "purple-9",
+        message: "Fetching data .."
+      });
       this.GET_LS_VAS_HOST_INSTANCE_DETAILS()
-        .finally(() => {
-          this.loading = false;
+        .then(res => {
+          this.$q.loading.hide();
+        })
+        .catch(() => {
+          this.$q.loading.hide();
         });
+    },
+
+    fnDisable(row) {
+        // Implementation if needed
     },
 
     myCustomSearchFilter(rows, terms, cols, cellValue) {
@@ -145,6 +171,6 @@ export default {
         cols.some(col => (cellValue(col, row) + "").toLowerCase().includes(lowerTerms))
       );
     }
-  }
+  },
 };
 </script>

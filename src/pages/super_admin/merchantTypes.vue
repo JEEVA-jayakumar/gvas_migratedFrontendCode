@@ -1,109 +1,193 @@
 <template>
-  <q-page padding>
-    <q-card flat bordered class="q-pa-md">
-      <div class="text-h6 text-purple-9 q-mb-md">Manage Document Types</div>
-
-      <q-form @submit="submitMerchantSubDocumentType(formData)" class="q-gutter-md">
-        <div class="row q-col-gutter-sm items-center">
-          <div class="col-12 col-md-3">
+  <q-page>
+    <div class="row">
+      <div class="col-12 q-title q-pa-md text-weight-regular bottom-border">Manage Document Types</div>
+      <!-- START >> Setup MDR details -->
+      <div class="col-md-12 col-sm-12 col-xs-12 q-pa-sm group">
+        <div class="row q-col-gutter-x-sm q-col-gutter-y-sm">
+          <div class="col-3">
             <q-select
-              outlined
-              dense
+              color="grey-9"
               v-model="formData.merchantType"
               :options="activeMerchantType"
               label="Select merchant type"
+              placeholder="Merchant type"
               emit-value
               map-options
-              @update:model-value="merchantDocumentTypeActiveList"
               :error="v$.formData.merchantType.$error"
+              @update:model-value="merchantDocumentTypeActiveList"
             />
           </div>
-          <div class="col-auto">
-            <q-btn round dense color="purple-9" icon="add" @click="toggleMerchantTypes = true" />
-          </div>
-
-          <div class="col-12 col-md-3">
-            <q-select
-              outlined
+          <div class="col-auto self-center">
+            <q-btn
+              round
               dense
+              no-caps
+              size="md"
+              @click="fnManagemerchantTypes"
+              color="purple-9"
+              icon="add"
+              class="no-margin"
+            />
+          </div>
+          <div class="col-3">
+            <q-select
+              color="grey-9"
               v-model="formData.parentIDtemp"
               :options="activeDocumentMerchantType"
-              label="Merchant Document Type"
               @update:model-value="mapParentIdToSubDocument"
+              label="Merchant Document Type"
+              placeholder="Merchant Document Type"
+            />
+          </div>
+          <div class="col-auto self-center">
+            <q-btn
+              round
+              dense
+              no-caps
+              size="md"
+              @click="fnManagemerchanDocumentTypes"
+              color="purple-9"
+              icon="add"
+              class="no-margin"
+            />
+          </div>
+          <div class="col-3">
+            <q-input
+              color="grey-9"
+              v-model="formData.subDocumentType"
+              :error="v$.formData.subDocumentType.$error"
+              label="Merchant Sub Document Type"
+              placeholder="Merchant Sub Document Type"
             />
           </div>
           <div class="col-auto">
-            <q-btn round dense color="purple-9" icon="add" @click="toggleMerchantdocumentTypes = true" />
-          </div>
-
-          <div class="col-12 col-md-3">
             <q-input
-              outlined
-              dense
-              v-model.trim="formData.subDocumentType"
-              label="Merchant Sub Document Type"
-              :error="v$.formData.subDocumentType.$error"
-            />
-          </div>
-          <div class="col-12 col-md-1">
-            <q-input
-              outlined
-              dense
               type="number"
+              color="grey-9"
               v-model="formData.marsDocumentId"
-              label="Mars ID"
+              label="Mars document Id"
+              placeholder="Mars document Id"
             />
           </div>
         </div>
-
-        <div class="row justify-end q-mt-md">
-          <q-btn unelevated label="Submit" color="purple-9" type="submit" />
+        <div class="row q-py-md">
+          <div class="col-3">
+            <q-btn
+              label="Submit"
+              color="purple-9"
+              @click="submitMerchantSubDocumentType(formData)"
+            />
+          </div>
         </div>
-      </q-form>
-    </q-card>
-
-    <div class="q-mt-lg">
-      <q-tabs
-        v-model="tab"
-        class="bg-white text-grey-7 shadow-1"
-        active-color="purple-9"
-        indicator-color="purple-9"
-        align="left"
-      >
-        <q-tab name="tab-1" label="Active List" @click="fetchActiveMerchantTypes()" />
-        <q-tab name="tab-2" label="De-activated List" @click="fetchDeActiveMerchantTypes()" />
-      </q-tabs>
-
-      <q-tab-panels v-model="tab" animated keep-alive class="bg-transparent">
-        <q-tab-panel name="tab-1" class="no-padding q-mt-md">
-          <q-table
-            flat
-            bordered
-            :rows="activatedTableData"
-            :columns="activatedColumns"
-            row-key="id"
-            color="purple-9"
-          >
-            <template v-slot:body-cell-action="props">
-              <q-td :props="props" class="q-gutter-x-sm">
-                <q-btn dense unelevated no-caps label="Modify" icon="edit" color="primary" @click="editMerchantSubDocumentType(props.row)" />
-                <q-btn dense unelevated no-caps label="Disable" icon="block" color="negative" @click="fnDeleteDocumentType(props.row)" />
-              </q-td>
-            </template>
-          </q-table>
-        </q-tab-panel>
-
-        <q-tab-panel name="tab-2" class="no-padding q-mt-md">
-          <q-table
-            flat
-            bordered
-            :rows="deActivatedTableData"
-            :columns="deActivatedColumns"
-            row-key="id"
-            color="purple-9"
+      </div>
+    </div>
+    <div class="row">
+      <!-- START >> Setup fee and recurring fee -->
+      <!-- START >> Table >> rental charge details -->
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <q-tabs v-model="tab" color="grey-9" class="shadow-1">
+          <q-tab
+            color="dark"
+            label="Active List"
+            name="tab-1"
+            @update:model-value="fetchActiveMerchantTypes"
           />
-        </q-tab-panel>
-      </q-tab-panels>
+          <q-tab
+            color="dark"
+            label="De-Actived List"
+            name="tab-2"
+            @update:model-value="fetchDeActiveMerchantTypes"
+          />
+        </q-tabs>
+        <q-tab-panels v-model="tab" animated keep-alive>
+          <q-tab-panel name="tab-1" class="no-padding">
+            <q-table
+              table-class="customSATableClass"
+              :rows="activatedTableData"
+              :columns="activatedColumns"
+              :filter="filterSearch"
+              v-model:pagination="pagination"
+              row-key="id"
+              color="grey-9"
+            >
+              <template v-slot:body-cell-subDocumentType="props">
+                <q-td :props="props">
+                  {{ props.row.subDocumentType || "NA" }}
+                </q-td>
+              </template>
+              <template v-slot:body-cell-action="props">
+                <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <q-btn
+                    dense
+                    no-caps
+                    no-wrap
+                    label="Modify"
+                    icon="far fa-plus-square"
+                    size="md"
+                    @click="editMerchantSubDocumentType(props.row)"
+                    flat
+                    class="text-light-blue"
+                  ></q-btn>
+                  <q-btn
+                    dense
+                    no-caps
+                    no-wrap
+                    label="Disable"
+                    icon="far fa-minus-square"
+                    size="md"
+                    @click="fnDeleteDocumentType(props.row)"
+                    flat
+                    class="text-negative"
+                  ></q-btn>
+                </div>
+                </q-td>
+              </template>
+              <template v-slot:top>
+                <!--START: table filter,search -->
+                <div class="col-md-5">
+                  <q-input
+                    clearable
+                    color="grey-9"
+                    v-model="filterSearch"
+                    placeholder="Type.."
+                    label="Search by merchant type, document type, sub document type"
+                    class="q-mr-lg q-py-sm"
+                  />
+                </div>
+                <!--END: table filter,search -->
+              </template>
+            </q-table>
+          </q-tab-panel>
+          <q-tab-panel name="tab-2" class="no-padding">
+            <q-table
+              table-class="customSATableClass"
+              :rows="deActivatedTableData"
+              :columns="deActivatedColumns"
+              :filter="filterSearch"
+              v-model:pagination="pagination"
+              row-key="id"
+              color="grey-9"
+            >
+              <template v-slot:top>
+                <!--START: table filter,search -->
+                <div class="col-md-5">
+                  <q-input
+                    clearable
+                    color="grey-9"
+                    v-model="filterSearch"
+                    placeholder="Type.."
+                    label="Search by merchant type, document type, sub document type"
+                    class="q-mr-lg q-py-sm"
+                  />
+                </div>
+                <!--END: table filter,search -->
+              </template>
+            </q-table>
+          </q-tab-panel>
+        </q-tab-panels>
+      </div>
     </div>
 
     <!-- Modals -->
@@ -157,29 +241,41 @@ export default {
       activeMerchantType: [],
       activeDocumentMerchantType: [],
       toggleMerchantSubdocumentTypes: false,
-      propRowDetails: null,
+      propRowDetails: "",
       activatedTableData: [],
       deActivatedTableData: [],
       toggleMerchantTypes: false,
       toggleMerchantdocumentTypes: false,
+      filterSearch: "",
+      pagination: {
+        sortBy: null,
+        descending: false,
+        page: 1,
+        rowsPerPage: 10
+      },
       formData: {
         merchantType: null,
-        subDocumentType: "",
+        subDocumentType: null,
         parentIDtemp: null,
         id: null,
         documentType: "",
-        marsDocumentId: 0
+        marsDocumentId: 0,
+        viewType: 0,
+        required: true,
+        params: {
+          parentId: null
+        }
       },
       activatedColumns: [
-        { name: "merchantTypeName", label: "Merchant Type", align: "left", field: "merchantTypeName" },
-        { name: "documentType", label: "Document Type", align: "left", field: "documentType" },
-        { name: "subDocumentType", label: "Sub Document Type", align: "left", field: row => row.subDocumentType || "NA" },
-        { name: "marsDocumentId", label: "Mars ID", align: "left", field: "marsDocumentId" },
-        { name: "action", label: "Actions", align: "center" }
+        { name: "merchantTypeName", label: "Merchant Type", align: "left", field: "merchantTypeName", sortable: false },
+        { name: "documentType", label: "Document Type", align: "left", field: "documentType", sortable: false },
+        { name: "subDocumentType", label: "Sub Document Type", align: "left", field: "subDocumentType", sortable: false },
+        { name: "marsDocumentId", label: "Mars Document Id", align: "left", field: "marsDocumentId", sortable: false },
+        { name: "action", label: "", align: "left", field: "action", sortable: false }
       ],
       deActivatedColumns: [
-        { name: "merchantTypeName", label: "Merchant Type", align: "left", field: "merchantTypeName" },
-        { name: "documentType", label: "Document Type", align: "left", field: "documentType" }
+        { name: "merchantTypeName", label: "Merchant Type", align: "left", field: "merchantTypeName", sortable: false },
+        { name: "documentType", label: "Document Type", align: "left", field: "documentType", sortable: false }
       ]
     };
   },
@@ -268,12 +364,13 @@ export default {
     fnDeleteDocumentType(row) {
       this.$q.dialog({
         title: "Confirm",
-        message: "Deactivate this document type?",
-        ok: "Deactivate", cancel: "Cancel", persistent: true
+        message: "Are you sure want to delete merchant type?",
+        ok: "Continue", cancel: "Cancel"
       }).onOk(() => {
-        this.$q.loading.show();
+        this.$q.loading.show({ message: "Please Wait", spinnerColor: "purple-9" });
         this.DELETE_MERCHANT_DOCUMENT_TYPE_AND_SET_ACTIVE(row.id).then(() => {
           this.fetchActiveMerchantTypes();
+          this.$q.notify({ color: "negative", position: "bottom", message: `Merchant type: ${row.documentType} has been deactivated`, icon: "thumb_up" });
           this.$q.loading.hide();
         });
       });
@@ -287,17 +384,31 @@ export default {
         this.activeDocumentMerchantType = this.getActiveMerchantDocumentTypes.map(v => ({
           label: v.documentType, value: v
         }));
+        this.fetchActiveMerchantTypes(this.formData.merchantType);
       });
     },
 
     mapParentIdToSubDocument(val) {
+      this.formData.params.parentId = val.parentID;
       this.formData.id = val.id;
       this.formData.documentType = val.documentType;
     },
 
     editMerchantSubDocumentType(row) {
-      this.propRowDetails = row;
-      this.toggleMerchantSubdocumentTypes = true;
+      if (row) {
+        this.propRowDetails = row;
+        this.toggleMerchantSubdocumentTypes = true;
+      } else {
+        this.fetchActiveMerchantTypes();
+        this.toggleMerchantSubdocumentTypes = false;
+      }
+    },
+
+    fnManagemerchantTypes() {
+      this.toggleMerchantTypes = !this.toggleMerchantTypes;
+    },
+    fnManagemerchanDocumentTypes() {
+      this.toggleMerchantdocumentTypes = !this.toggleMerchantdocumentTypes;
     }
   }
 };

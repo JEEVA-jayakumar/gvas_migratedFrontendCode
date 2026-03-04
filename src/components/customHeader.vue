@@ -1,5 +1,5 @@
 <template>
-  <q-toolbar class="bg-white bottom-border q-px-md" color="grey-9" flat style="height: 65px">
+  <q-toolbar class="bg-custom-light-grey bottom-border" color="grey-9" flat inverted>
     <q-btn
       flat
       dense
@@ -7,35 +7,36 @@
       @click="triggerSideMenu"
       aria-label="Menu"
       v-if="getRole != 'KSN'"
-      color="grey-9"
     >
-      <q-icon :name="leftDrawerOpen ? 'menu_open' : 'menu'" size="24px" />
+      <q-icon name="menu" />
     </q-btn>
-    <q-toolbar-title>
-      <div class="row items-center full-height">
-        <div class="col-auto q-ml-sm" v-if="!leftDrawerOpen">
+    <q-toolbar-title class>
+      <div class="row items-center vertical-middle">
+        <!-- {{localStorage.getItem('selectedTab')}} -->
+        <div class="col-auto">
           <img
+            v-if="leftDrawerOpen"
             class="cursor-pointer"
             src="~assets/images/logo.png"
-            style="height:35px;"
+            style="height:38px;"
+            @click="$router.push('/super/admin/dashboard')"
           />
         </div>
         <div class="col float-right" align="right">
-          <q-btn flat dense color="grey-9" icon="far fa-bell" class="q-mr-md">
-            <q-badge color="purple" floating>2</q-badge>
-          </q-btn>
-          <q-btn flat color="grey-9" class="user-profile-btn no-padding">
-            <span class="mobile-hide capitalize text-weight-medium q-mr-sm">{{getUserNAme}}</span>
-            <q-avatar size="32px">
-              <img src="~assets/images/user.png" />
-            </q-avatar>
+          <q-btn flat color="grey-9" icon="far fa-bell" />
+          <q-btn flat color="grey-9 vertical-middle">
+            <span class="mobile-hide capitalize text-weight-regular">{{getUserNAme}}</span>
+            <img
+              src="~assets/images/user.png"
+              style="height:30px; width:30px; padding: 5px"
+              class="vertical-middle"
+            />
+            <!-- Direct child of target -->
             <q-menu
-              class="shadow-12"
-              anchor="bottom right"
-              self="top right"
-              transition-show="jump-down"
-              transition-hide="jump-up"
-              style="min-width: 250px; border-radius: 8px;"
+              class="shadow-8"
+              anchor="bottom middle"
+              self="top middle"
+              style="min-width:350px"
             >
               <q-list separator class="no-padding">
                 <q-item clickable v-close-popup @click="openMyAccount()">
@@ -82,6 +83,7 @@ export default {
         : this.$q.platform.is.desktop,
     };
   },
+
   methods: {
     triggerSideMenu() {
       this.leftDrawerOpen = !this.leftDrawerOpen;
@@ -106,18 +108,31 @@ export default {
   computed: {
     getUserNAme() {
       const userInfo = localStorage.getItem("u_i");
-      return userInfo ? JSON.parse(userInfo).user.name : '';
+      if (userInfo && userInfo !== "undefined" && userInfo !== "null") {
+        try {
+          return JSON.parse(userInfo).user.name;
+        } catch (e) {
+          return "Super Admin";
+        }
+      }
+      return "Super Admin";
     },
     getRole() {
       const userInfo = localStorage.getItem("u_i");
-      if (userInfo) {
-        const parsed = JSON.parse(userInfo);
-        if (parsed.roles && parsed.roles[0].role == "KSN") {
-          this.$emit("fnToggleSideMenu");
+      if (userInfo && userInfo !== "undefined" && userInfo !== "null") {
+        try {
+          const parsed = JSON.parse(userInfo);
+          if (parsed.roles && parsed.roles.length > 0) {
+            if (parsed.roles[0].role == "KSN") {
+              this.$emit("fnToggleSideMenu");
+            }
+            return parsed.roles[0].role;
+          }
+        } catch (e) {
+          return "";
         }
-        return parsed.roles[0].role;
       }
-      return '';
+      return "";
     },
   },
 };

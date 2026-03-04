@@ -2,197 +2,182 @@
   <div>
     <form>
       <div class="q-px-md">
-        <!-- Header -->
         <div class="q-pa-sm">
           <div class="row q-py-sm items-center bottom-border">
-            <div class="text-h6 text-weight-regular">Add New User</div>
+            <div>
+              <div class="q-title text-weight-regular">Add New User</div>
+            </div>
           </div>
         </div>
-
-        <!-- Permissions -->
         <div class="q-pa-md">
-          <div class="group">
-            <div class="q-mb-sm">Permissions</div>
-            <q-checkbox v-model="formData.addUserDetails.hasReadPermission" label="Read" color="purple-9"/>
-            <q-checkbox v-model="formData.addUserDetails.hasWritePermission" label="Write" color="purple-9"/>
-            <q-checkbox v-model="formData.addUserDetails.hasEditPermission" label="Update" color="purple-9"/>
-            <q-checkbox v-model="formData.addUserDetails.hasDeletePermission" label="Delete" color="purple-9"/>
-            <q-checkbox v-model="formData.addUserDetails.hasDownloadPermission" label="Download" color="purple-9"/>
+          <div class="row q-py-sm">
+            <div class="group">
+              <div>Permissions</div>
+              <q-checkbox color="purple-9" label="Read" v-model="formData.addUserDetails.hasReadPermission" />
+              <q-checkbox color="purple-9" label="Write" v-model="formData.addUserDetails.hasWritePermission" />
+              <q-checkbox color="purple-9" label="Update" v-model="formData.addUserDetails.hasEditPermission" />
+              <q-checkbox color="purple-9" label="Delete" v-model="formData.addUserDetails.hasDeletePermission" />
+              <q-checkbox color="purple-9" label="Download" v-model="formData.addUserDetails.hasDownloadPermission" />
+            </div>
           </div>
         </div>
-
-        <!-- Basic Details -->
         <div class="q-pa-md">
-          <div class="row q-col-gutter-md">
-
-            <div class="col-md-6">
-              <q-select
-                outlined
-                label="Choose a region"
-                v-model="formData.addUserDetails.region.id"
-                :options="getAllRegionsData"
-                :disable="formData.disableRegionSelection"
-                :error="$v.formData.addUserDetails.region.id.$error"
-                @blur="$v.formData.addUserDetails.region.id.$touch"
-              />
+          <div class="row q-py-sm">
+            <div class="col-md-6 q-px-sm">
+              <q-select :disable="formData.disableRegionSelection"
+                :class="[formData.disableRegionSelection ? 'no-pointer-events' : '']" color="grey-9"
+                label="Choose a region" v-model="formData.addUserDetails.region.id"
+                emit-value map-options
+                :error="$v.formData.addUserDetails.region.id.$error" @blur="$v.formData.addUserDetails.region.id.$touch"
+                :options="getAllRegionsData" />
             </div>
 
-            <div class="col-md-6">
-              <q-input
-                outlined
-                label="*Name"
-                v-model.trim="formData.addUserDetails.name"
-                :error="$v.formData.addUserDetails.name.$error"
-                @blur="$v.formData.addUserDetails.name.$touch"
-              />
+            <div class="col-md-6 q-px-sm">
+              <q-input v-model.trim="formData.addUserDetails.name" @blur="$v.formData.addUserDetails.name.$touch"
+                :error="$v.formData.addUserDetails.name.$error" class="text-weight-regular text-grey-8" color="grey-9"
+                label="*Name" placeholder="Name" />
             </div>
 
-            <div class="col-md-6">
-              <q-input
-                outlined
-                label="*Employee ID"
-                v-model.trim="formData.addUserDetails.employeeID"
-                :error="$v.formData.addUserDetails.employeeID.$error"
+            <div class="col-md-6 q-px-sm">
+              <q-input v-model.trim="formData.addUserDetails.employeeID"
                 @blur="$v.formData.addUserDetails.employeeID.$touch"
-              />
+                :error="$v.formData.addUserDetails.employeeID.$error" class="text-weight-regular text-grey-8"
+                color="grey-9" label="*Employee ID" placeholder="Employee ID" />
             </div>
 
-            <div class="col-md-6">
-              <q-input
-                outlined
-                label="*Email"
-                v-model.trim="formData.addUserDetails.email"
-                :error="$v.formData.addUserDetails.email.$error"
-                @blur="$v.formData.addUserDetails.email.$touch"
-              />
+            <div class="col-md-6 q-px-sm">
+              <q-input v-model.trim="formData.addUserDetails.email" class="text-weight-regular text-grey-8"
+                color="grey-9" @blur="$v.formData.addUserDetails.email.$touch"
+                :error="$v.formData.addUserDetails.email.$error" label="*Email" placeholder="Email" />
             </div>
 
-            <div class="col-md-6">
-              <q-input
-                outlined
-                label="*Contact Number"
-                v-model.trim="formData.addUserDetails.contactNumber"
-                :error="$v.formData.addUserDetails.contactNumber.$error"
+            <div class="col-md-6 q-px-sm">
+              <q-input v-model.trim="formData.addUserDetails.contactNumber"
                 @blur="$v.formData.addUserDetails.contactNumber.$touch"
-              />
+                :error="$v.formData.addUserDetails.contactNumber.$error" class="text-weight-regular text-grey-8"
+                color="grey-9" label="*Contact Number" placeholder="Contact Number" />
             </div>
 
-            <div class="col-md-6">
-              <q-input
-                outlined
-                label="Alt Contact Number"
-                v-model.trim="formData.addUserDetails.alternateContactNumber"
-                :error="$v.formData.addUserDetails.alternateContactNumber.$error"
+            <div class="col-md-6 q-px-sm">
+              <q-input v-model.trim="formData.addUserDetails.alternateContactNumber"
                 @blur="$v.formData.addUserDetails.alternateContactNumber.$touch"
-              />
+                :error="$v.formData.addUserDetails.alternateContactNumber.$error"
+                class="text-weight-regular text-grey-8" color="grey-9" label="Alt Contact Number"
+                placeholder="Alt Contact Number" />
             </div>
 
-            <div class="col-md-6">
-              <q-input
-                outlined
-                label="*Address"
-                v-model.trim="formData.addUserDetails.userAddress"
-                :error="$v.formData.addUserDetails.userAddress.$error"
+            <div class="col-md-6 q-px-sm">
+              <q-input v-model.trim="formData.addUserDetails.userAddress"
                 @blur="$v.formData.addUserDetails.userAddress.$touch"
-              />
+                :error="$v.formData.addUserDetails.userAddress.$error" class="text-weight-regular text-grey-8"
+                color="grey-9" label="*Address" placeholder="Address" />
             </div>
 
-            <!-- Pincode -->
-            <div class="col-md-6">
-              <q-input
-                outlined
+            <div class="col-md-6 q-px-sm">
+              <q-select
+                use-input
+                fill-input
+                hide-selected
+                input-debounce="500"
                 label="Pincode"
                 v-model="formData.addUserDetails.pincodeTemp"
+                :options="pincodeOptions"
+                @filter="pincodeSearch"
+                @update:model-value="pincodeSelected"
                 :error="$v.formData.addUserDetails.pincodeTemp.$error"
-                @blur="$v.formData.addUserDetails.pincodeTemp.$touch"
-              />
+                color="grey-9"
+              >
+                <template v-slot:no-option>
+                  <q-item>
+                    <q-item-section class="text-grey">
+                      No results
+                    </q-item-section>
+                  </q-item>
+                </template>
+              </q-select>
             </div>
 
             <div class="col-md-6">
-              <q-input outlined label="State" v-model="formData.addUserDetails.state" disable/>
+              <q-input disable v-model.trim="formData.addUserDetails.state" class="text-weight-regular text-grey-8"
+                color="grey-9" label="*State" placeholder="State" />
             </div>
 
             <div class="col-md-6">
-              <q-input outlined label="City" v-model="formData.addUserDetails.city" disable/>
+              <q-input disable v-model.trim="formData.addUserDetails.city" class="text-weight-regular text-grey-8"
+                color="grey-9" label="*City" placeholder="City" />
             </div>
+          </div>
 
+          <div class="row group items-center q-col-gutter-md q-px-md" v-for="(item, index) in getAllHierarchiesAndRolesData" :key="index">
+            <div class="col">
+              <q-checkbox color="purple-9" v-model="item.checked" @update:model-value="getRoleCheckedItem(item)"
+                :label="item.hierarchy" />
+            </div>
+            <div class="col">
+              <q-select :disable="!item.checked" color="grey-9" placeholder="Choose a role" v-model="item.roleChecked"
+                emit-value map-options
+                :options="item.roles" @update:model-value="getPredecessorList(item)" />
+            </div>
+            <div class="col">
+              <q-select :disable="item.id > 7" color="grey-9"
+                emit-value map-options
+                :placeholder="item.predecessor.length == 0 ? 'No data available to display' : 'Choose a predecessor'"
+                v-model="item.predecessorChecked" :options="item.predecessor" />
+            </div>
+          </div>
+          <div v-if="formData.showBankOpsList" class="row q-col-gutter-md q-py-sm">
+            <div class="col-md-6">
+              <q-select multiple color="grey-9" label="Choose bank (can be multiple)"
+                emit-value map-options
+                v-model="formData.addUserDetails.banksList" :error="$v.formData.addUserDetails.banksList.$error"
+                @blur="$v.formData.addUserDetails.banksList.$touch" :options="leadSourceOptions" />
+            </div>
+          </div>
+
+          <div v-if="formData.showAllRoleDetails == 25" class="row q-col-gutter-md q-py-sm items-center">
+            <div class="col-auto">
+              <label> Lead Source Enable? </label>
+            </div>
+            <div class="col">
+              <q-radio v-for="(item, index) in LeadSourceOptions1" :key="index" color="grey-9"
+                v-model.trim="formData.addUserDetails.leadSource.sourceName"
+                :val="item.value"
+                :label="item.label" />
+            </div>
+          </div>
+
+          <div v-if="formData.showLeadSource" class="row q-col-gutter-md q-py-sm">
+            <div class="col-md-6">
+              <q-input v-model.trim="formData.addUserDetails.serviceReqClients.authMethod"
+                @blur="$v.formData.addUserDetails.serviceReqClients.authMethod.$touch"
+                :error="$v.formData.addUserDetails.serviceReqClients.authMethod.$error"
+                class="text-weight-regular text-grey-8" color="grey-9" label="Auth Method"
+                placeholder="Auth Method" hint="Token, Basic, Barrier" />
+            </div>
+            <div class="col-md-6">
+              <q-input v-model.trim="formData.addUserDetails.serviceReqClients.authKey"
+                @blur="$v.formData.addUserDetails.serviceReqClients.authKey.$touch"
+                :error="$v.formData.addUserDetails.serviceReqClients.authKey.$error"
+                class="text-weight-regular text-grey-8" color="grey-9" label="Auth Key" placeholder="Auth Key"
+                hint="Authorization" />
+            </div>
+            <div class="col-md-6">
+              <q-input v-model.trim="formData.addUserDetails.serviceReqClients.authValue"
+                @blur="$v.formData.addUserDetails.serviceReqClients.authValue.$touch"
+                :error="$v.formData.addUserDetails.serviceReqClients.authValue.$error"
+                class="text-weight-regular text-grey-8" color="grey-9" label="Auth Value" placeholder="Auth Value"
+                hint="Encrypted Data" />
+            </div>
+            <div class="col-md-6">
+              <q-input v-model.trim="formData.addUserDetails.serviceReqClients.callBackUrl"
+                @blur="$v.formData.addUserDetails.serviceReqClients.callBackUrl.$touch"
+                :error="$v.formData.addUserDetails.serviceReqClients.callBackUrl.$error"
+                class="text-weight-regular text-grey-8" color="grey-9" label="URL" placeholder="URL"
+                hint="callBackUrl" />
+            </div>
           </div>
         </div>
 
-        <!-- Hierarchy + Roles -->
-        <div
-          class="row items-center q-col-gutter-md q-px-md"
-          v-for="(item,index) in getAllHierarchiesAndRolesData"
-          :key="index"
-        >
-          <div class="col">
-            <q-checkbox v-model="item.checked" :label="item.hierarchy" @update:model-value="getRoleCheckedItem(item)" />
-          </div>
-
-          <div class="col">
-            <q-select
-              outlined
-              label="Choose a role"
-              v-model="item.roleChecked"
-              :options="item.roles"
-              :disable="!item.checked"
-              @update:model-value="getPredecessorList(item)"
-            />
-          </div>
-
-          <div class="col">
-            <q-select
-              outlined
-              label="Choose a predecessor"
-              v-model="item.predecessorChecked"
-              :options="item.predecessor"
-              :disable="item.id > 7"
-            />
-          </div>
-        </div>
-
-        <!-- Bank List -->
-        <div v-if="formData.showBankOpsList" class="q-pa-md">
-          <q-select
-            outlined
-            multiple
-            label="Choose bank"
-            v-model="formData.addUserDetails.banksList"
-            :options="leadSourceOptions"
-            :error="$v.formData.addUserDetails.banksList.$error"
-            @blur="$v.formData.addUserDetails.banksList.$touch"
-          />
-        </div>
-
-        <!-- Lead Source -->
-        <div v-if="formData.showAllRoleDetails == 25" class="q-pa-md">
-          <div class="q-mb-sm">Lead Source Enable?</div>
-          <q-radio
-            v-for="opt in LeadSourceOptions1"
-            :key="opt.value"
-            v-model="formData.addUserDetails.leadSource.sourceName"
-            :val="opt.value"
-            :label="opt.label"
-          />
-        </div>
-
-        <!-- Service Client -->
-        <div v-if="formData.showLeadSource" class="q-pa-md row q-col-gutter-md">
-          <div class="col-md-6">
-            <q-input outlined label="Auth Method" v-model="formData.addUserDetails.serviceReqClients.authMethod"/>
-          </div>
-          <div class="col-md-6">
-            <q-input outlined label="Auth Key" v-model="formData.addUserDetails.serviceReqClients.authKey"/>
-          </div>
-          <div class="col-md-6">
-            <q-input outlined label="Auth Value" v-model="formData.addUserDetails.serviceReqClients.authValue"/>
-          </div>
-          <div class="col-md-6">
-            <q-input outlined label="URL" v-model="formData.addUserDetails.serviceReqClients.callBackUrl"/>
-          </div>
-        </div>
-
-        <!-- Actions -->
         <div class="q-pa-md text-right">
           <q-btn flat label="Cancel" @click="$router.go(-1)" class="q-mr-sm"/>
           <q-btn color="purple-9" label="Submit" @click="fnSubmitShowAddUser(formData.addUserDetails)" />
@@ -220,6 +205,7 @@ export default {
   data() {
     return {
       leadSourceOptions: [],
+      pincodeOptions: [],
       LeadSourceOptions1: [
         {
           label: "Yes",
@@ -441,15 +427,26 @@ export default {
     ]),
     ...mapActions("BankOpsShortLead", ["FETCH_ALL_LEAD_SOURCE_DATA"]),
     /* Pincode search result */
-    pincodeSearch(terms, done) {
-      this.formData.addUserDetails.cityName = "";
-      this.formData.addUserDetails.stateName = "";
+    pincodeSearch(terms, update) {
+      if (terms.length < 1) {
+        update(() => {
+          this.pincodeOptions = [];
+        });
+        return;
+      }
       this.FETCH_PINCODE_WITH_TERM(terms)
         .then(() => {
-          done(this.COMMON_FILTER_FUNCTION(this.getAllStatesData, terms));
+          update(() => {
+            this.pincodeOptions = this.getAllStatesData.map(item => ({
+              label: item.label,
+              value: item.value
+            }));
+          });
         })
         .catch(() => {
-          done([]);
+          update(() => {
+            this.pincodeOptions = [];
+          });
         });
     },
     pincodeSelected(item) {

@@ -2,203 +2,135 @@
   <q-page>
     <div>
       <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @update:model-value="changeTabs">
-        <q-tab name="tab-1" label="Active Users" />
-        <q-tab name="tab-2" label="De-activated Users" />
+        <q-tab color="dark" name="tab-1" label="Active Users" />
+        <q-tab color="dark" name="tab-2" label="De-activated Users" />
       </q-tabs>
 
-      <q-tab-panels v-model="activeTab" animated>
+      <q-tab-panels v-model="activeTab" keep-alive>
+        <q-tab-panel name="tab-1" class="no-padding">
+          <!--START: table Data -->
+          <q-table :rows="getAllUsers" :columns="columns" table-class="customSATableClass" :filter="filterSearch"
+            selection="multiple" v-model:selected="formData.selectedUsersToDelete" v-model:pagination="paginationControl"
+            :loading="tableAjaxLoading" :filter-method="myCustomSearchFilter" row-key="userId" color="grey-9">
 
-        <!-- ================= TAB 1 ================= -->
-        <q-tab-panel name="tab-1">
-          <q-table
-            :rows="getAllUsers"
-            :columns="columns"
-            table-class="customSATableClass"
-            :filter="filterSearch"
-            selection="multiple"
-            v-model:selected="formData.selectedUsersToDelete"
-            v-model:pagination="paginationControl"
-            :loading="tableAjaxLoading"
-            :filter-method="myCustomSearchFilter"
-            row-key="userId"
-            color="grey-9"
-          >
-
-            <!-- Name column -->
             <template v-slot:body-cell-name="props">
-              <q-btn
-                align="left"
-                dense
-                flat
-                no-wrap
-                no-caps
-                icon="fas fa-pencil-alt"
-                color="primary"
-                @click="fnShowEditUser(props.row.userId)"
-                :label="props.row.user.name"
-                class="capitalize"
-              />
+              <q-td :props="props">
+                <q-btn align="left" dense flat no-wrap no-caps icon="fas fa-pencil-alt" color="primary"
+                  @click="fnShowEditUser(props.row.userId)" :label="props.row.user.name" class="capitalize" />
+              </q-td>
             </template>
 
-            <!-- Role column -->
             <template v-slot:body-cell-role="props">
-              <div class="row no-wrap group" v-for="role in props.row.roles" :key="role.role">
-                <q-chip color="light" class="text-dark">
-                  <span>{{ role.hierarchy.hierarchyCode }}</span> | {{ role.role }}
-                </q-chip>
-              </div>
+              <q-td :props="props">
+                <div class="row no-wrap group" v-for="role in props.row.roles" :key="role.role">
+                  <!-- <q-chip :style="{ background: role.roleColor}"> -->
+                  <q-chip color="light" class="text-dark">
+                    <span>{{ role.hierarchy.hierarchyCode }}</span>
+                    | {{ role.role }}
+                  </q-chip>
+                </div>
+              </q-td>
             </template>
 
-            <!-- ======== TOP SLOT ======== -->
             <template v-slot:top>
-
-              <!-- SEARCH + FILTER -->
+              <!--START: table filter,search -->
               <div class="col-md-12 group">
                 <div class="row">
                   <div class="col-md-6">
-                    <q-input
-                      clearable
-                      dense
-                      color="grey-9"
-                      v-model.trim="filterSearch"
-                      placeholder="Type.."
-                      label="Search by Name, Merchant Name, Lead ID"
-                    />
+                    <q-input clearable color="grey-9" v-model.trim="filterSearch" placeholder="Type.."
+                      label="Search by Name, Merchant Name, Lead ID" />
                   </div>
-
                   <div class="col-md-3"></div>
-
                   <div class="col-md-3">
-                    <q-select
-                      clearable
-                      v-model="filter_values"
-                      color="grey-9"
-                      label="Filter By"
-                      @clear="ajaxLoadDataForAllUsersList"
-                      @update:model-value="ajaxLoadDataForRoleIdFilter"
-                      :options="getAllRoles"
-                    />
+                    <q-select clearable v-model="filter_values" color="grey-9" placeholder="Select"
+                      label="Filter By" @clear="ajaxLoadDataForAllUsersList"
+                      @update:model-value="ajaxLoadDataForRoleIdFilter" :options="getAllRoles" />
                   </div>
                 </div>
               </div>
-
-              <!-- HIERARCHY + ACTIONS -->
+              <!--END: table filter,search -->
+              <!--START: Tabs -->
               <div class="col-md-12">
                 <div class="row justify-between">
-
-                  <!-- Hierarchy buttons -->
                   <div class="col">
-                    <q-btn
-                      v-for="(tab, index) in getAllHierarchiesData"
-                      :key="index"
-                      class="text-black q-ma-xs"
-                      size="sm"
-                      :class="activeItemId === index ? 'customTabActive text-light' : 'bg-blue-grey-2'"
-                      @click="ajaxLoadDataForHeirarchyIdFilter(index, tab)"
-                      rounded
-                      :label="tab.label"
-                    />
+                    <q-btn v-for="(tab, index) in getAllHierarchiesData" :key="index"
+                      class="text-black q-ma-xs" size="sm" :class="[
+                        activeItemId === index
+                          ? 'customTabActive text-light'
+                          : 'bg-blue-grey-2'
+                      ]" @click="ajaxLoadDataForHeirarchyIdFilter(index, tab)" rounded :label="tab.label" />
                   </div>
-
-                  <!-- Actions -->
                   <div class="col-auto" align="right">
                     <div class="row justify-evenly">
-
                       <div class="col-auto q-px-xs">
-                        <q-btn
-                          :disabled="formData.selectedUsersToDelete.length === 0"
-                          flat
-                          color="white"
+                        <q-btn :disabled="formData.selectedUsersToDelete.length == 0" flat color="white"
                           class="text-grey-9"
                           @click="activate_deactivate_users(formData.selectedUsersToDelete)"
-                          icon="far fa-trash-alt"
-                        />
+                          icon="far fa-trash-alt" />
                       </div>
-
                       <div class="col-auto q-px-xs">
                         <downloadExcel :data="getAllUsers" :fields="json_fields" name="UserDetails.xls">
                           <q-btn outline color="grey-9" label="Download as excel" />
                         </downloadExcel>
                       </div>
-
                       <div class="col-auto q-px-xs">
-                        <q-btn
-                          no-caps
-                          @click="$router.push('/super/admin/users/add/user')"
-                          label="Add User"
-                          color="purple-9"
-                        />
+                        <q-btn no-caps class="text-weight-regular" @click="$router.push('/super/admin/users/add/user')"
+                          label="Add User" color="purple-9" size="md" />
                       </div>
-
                     </div>
                   </div>
-
                 </div>
               </div>
-
+              <!--END: Tabs -->
             </template>
           </q-table>
+          <!--END: table Data -->
         </q-tab-panel>
 
-        <!-- ================= TAB 2 ================= -->
-        <q-tab-panel name="tab-2">
-          <q-table
-            :rows="getAllUsers"
-            :columns="columns"
-            table-class="customSATableClass"
-            :filter="filterSearch"
-            selection="multiple"
-            v-model:selected="formData.selectedUsersToDelete"
-            v-model:pagination="paginationControl"
-            :loading="tableAjaxLoading"
-            :filter-method="myCustomSearchFilter"
-            row-key="userId"
-            color="grey-9"
-          >
+        <q-tab-panel name="tab-2" class="no-padding">
+          <!--START: table Data   :data="getImplementationQueueUnassignedList"  -->
+          <q-table :rows="getAllUsers" :columns="columns" table-class="customSATableClass" :filter="filterSearch"
+            selection="multiple" v-model:selected="formData.selectedUsersToDelete" v-model:pagination="paginationControl"
+            :loading="tableAjaxLoading" :filter-method="myCustomSearchFilter" row-key="userId" color="grey-9">
 
             <template v-slot:body-cell-name="props">
-              <q-btn
-                align="left"
-                dense
-                flat
-                no-wrap
-                no-caps
-                icon="fas fa-pencil-alt"
-                color="primary"
-                @click="fnShowEditUser(props.row.userId)"
-                :label="props.row.user.name"
-              />
+              <q-td :props="props">
+                <q-btn align="left" dense flat no-wrap no-caps icon="fas fa-pencil-alt" color="primary"
+                  @click="fnShowEditUser(props.row.userId)" :label="props.row.user.name" class="capitalize" />
+              </q-td>
             </template>
 
             <template v-slot:body-cell-role="props">
-              <div class="row no-wrap group" v-for="role in props.row.roles" :key="role.role">
-                <q-chip color="light" class="text-dark">
-                  <span>{{ role.hierarchy.hierarchyCode }}</span> | {{ role.role }}
-                </q-chip>
-              </div>
+              <q-td :props="props">
+                <div class="row no-wrap group" v-for="role in props.row.roles" :key="role.role">
+                  <!-- <q-chip :style="{ background: role.roleColor}"> -->
+                  <q-chip color="light" class="text-dark">
+                    <span>{{ role.hierarchy.hierarchyCode }}</span>
+                    | {{ role.role }}
+                  </q-chip>
+                </div>
+              </q-td>
             </template>
 
             <template v-slot:top>
-              <div class="row items-stretch">
-                <div class="col-md-6">
-                  <q-input clearable v-model.trim="filterSearch" placeholder="Type.." />
-                </div>
-                <div class="col-md-6 text-right">
-                  <q-btn
-                    :disabled="formData.selectedUsersToDelete.length === 0"
-                    flat
-                    color="white"
-                    class="text-grey-9 q-mr-md"
-                    @click="activate_deactivate_users(formData.selectedUsersToDelete)"
-                    icon="far fa-trash-alt"
-                  />
+              <!--START: table filter,search -->
+              <div class="col-md-12 group">
+                <div class="row items-stretch">
+                  <div class="col-md-6">
+                    <q-input clearable color="grey-9" v-model.trim="filterSearch" placeholder="Type.."
+                      label="Search by Name, Merchant Name, Lead ID" />
+                  </div>
+                  <div class="col-md-6" align="right">
+                    <q-btn :disabled="formData.selectedUsersToDelete.length == 0" flat color="white"
+                      class="text-grey-9 q-mr-md" size="md"
+                      @click="activate_deactivate_users(formData.selectedUsersToDelete)" icon="far fa-trash-alt" />
+                  </div>
                 </div>
               </div>
             </template>
-
           </q-table>
+          <!--END: table Data -->
         </q-tab-panel>
-
       </q-tab-panels>
 
       <deleteUsersDetails
@@ -466,15 +398,14 @@ export default {
                     message: "Successfully Activated!",
                     icon: "thumb_up"
                   });
-                }).onCancel(error => {
+                })
+                .catch(error => {
                   this.$q.loading.hide();
                   this.$q.notify({
                     color: "negative",
                     position: "bottom",
                     message:
-                      error.body.message == null
-                        ? "Please Try Again Later !"
-                        : error.body.message,
+                      error.data?.message || "Please Try Again Later !",
                     icon: "thumb_down"
                   });
                 });
@@ -611,8 +542,10 @@ export default {
     //API to fetch hierarchy
     ajaxLoadDataForHeirarchyFilter() {
       this.FETCH_ALL_HIERARCHIES_DATA().then(response => {
-        this.customizedHirarchyFilter = this.getAllHierarchiesData;
-        this.customizedHirarchyFilter.unshift({ value: 0, label: "All" });
+        this.customizedHirarchyFilter = _.cloneDeep(this.getAllHierarchiesData);
+        if (!this.customizedHirarchyFilter.find(h => h.value === 0)) {
+           this.customizedHirarchyFilter.unshift({ value: 0, label: "All" });
+        }
       });
     },
 

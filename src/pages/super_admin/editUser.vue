@@ -5,12 +5,10 @@
         <div class="q-pa-sm">
           <div class="row gutter-sm q-py-sm items-center bottom-border">
             <div>
-              <div class="text-h6 text-weight-regular">Update User</div>
+              <div class="q-title text-weight-regular">Update User</div>
             </div>
           </div>
         </div>
-        <!-- <pre>{{formData.addUserDetails}}</pre> -->
-        <!-- <pre>{{formData.addUserDetails.userMapSets}}</pre> -->
         <div class="q-pa-md">
           <div class="row q-py-sm">
             <div class="group">
@@ -26,9 +24,10 @@
         <div class="q-pa-md">
           <div class="row gutter-sm q-py-sm">
             <div class="col-md-6">
-              <q-select :disabled="formData.disableRegionSelection"
+              <q-select :disable="formData.disableRegionSelection"
                 :class="[formData.disableRegionSelection ? 'no-pointer-events' : '']" color="grey-9"
                 label="Choose a region" v-model="formData.addUserDetails.region.id"
+                emit-value map-options
                 :error="$v.formData.addUserDetails.region.id.$error" @blur="$v.formData.addUserDetails.region.id.$touch"
                 :options="getAllRegionsData" />
             </div>
@@ -75,12 +74,27 @@
             </div>
 
             <div class="col-md-6">
-              <q-input type="number" :error="$v.formData.addUserDetails.pincodeTemp.$error" clearable
-                @clear="fnGetCityAndState" color="grey-9" v-model.trim="formData.addUserDetails.pincodeTemp"
-                label="Pincode" placeholder="Pincode">
-                <q-autocomplete @search="pincodeSearch" :debounce="500" :min-characters="1"
-                  @selected="pincodeSelected" />
-              </q-input>
+              <q-select
+                use-input
+                fill-input
+                hide-selected
+                input-debounce="500"
+                label="Pincode"
+                v-model="formData.addUserDetails.pincodeTemp"
+                :options="pincodeOptions"
+                @filter="pincodeSearch"
+                @update:model-value="pincodeSelected"
+                :error="$v.formData.addUserDetails.pincodeTemp.$error"
+                color="grey-9"
+              >
+                <template v-slot:no-option>
+                  <q-item>
+                    <q-item-section class="text-grey">
+                      No results
+                    </q-item-section>
+                  </q-item>
+                </template>
+              </q-select>
             </div>
             <div class="col-md-6">
               <q-input disable v-model.trim="formData.addUserDetails.state" class="text-weight-regular text-grey-8"
@@ -92,65 +106,64 @@
                 color="grey-9" label="*City" placeholder="City" />
             </div>
           </div>
-          <div class="row group" v-for="(item, index) in getAllHierarchiesAndRolesData" :key="index">
+          <div class="row group items-center q-col-gutter-md q-px-md" v-for="(item, index) in getAllHierarchiesAndRolesData" :key="index">
             <div class="col">
               <q-checkbox color="purple-9" v-model="item.checked" @update:model-value="getRoleCheckedItem(item)"
                 :label="item.hierarchy" />
             </div>
             <div class="col">
               <q-select :disable="!item.checked" color="grey-9" placeholder="Choose a role" v-model="item.roleChecked"
+                emit-value map-options
                 :options="item.roles" @update:model-value="getPredecessorList(item)" />
             </div>
             <div class="col">
-              <q-select :disable="!item.checked" disaply-value color="grey-9"
+              <q-select :disable="!item.checked" color="grey-9"
+                emit-value map-options
                 :placeholder="item.predecessor.length == 0 ? 'No data available to display' : 'Choose a predecessor'"
                 v-model="item.predecessorChecked" :options="item.predecessor" />
             </div>
           </div>
-          <div v-if="formData.showBankOpsList" class="row gutter-sm q-py-sm">
-            <!-- <pre>{{formData.addUserDetails.banksList}}</pre> -->
+          <div v-if="formData.showBankOpsList" class="row q-col-gutter-md q-py-sm">
             <div class="col-md-6">
               <q-select multiple color="grey-9" label="Choose bank (can be multiple)"
+                emit-value map-options
                 v-model="formData.addUserDetails.banksList" :error="$v.formData.addUserDetails.banksList.$error"
                 @blur="$v.formData.addUserDetails.banksList.$touch" :options="leadSourceOptions" />
             </div>
           </div>
-          <!-- {{this.hierarchyDetails}}  -->
-          <!-- {{this.getAllUserByUserIdData}} -->
-           <!--UAT ------: this.formData.showAllRoleDetails == 24 -->
-          <!--Production ------: this.formData.showAllRoleDetails == 25 -->
-          <div v-if="this.getAllUserByUserIdData.roles[0].id == 25" class="row gutter-sm q-py-sm" :disabled="this.getAllUserByUserIdData.serviceReqClients.sourceId != null">
-            <label> Lead Source Enable? </label>
-            <div class="col-md-9">
 
+          <div v-if="this.getAllUserByUserIdData.roles[0].id == 25" class="row q-col-gutter-md q-py-sm items-center">
+            <div class="col-auto">
+              <label> Lead Source Enable? </label>
+            </div>
+            <div class="col">
               <q-radio v-for="(item, index) in LeadSourceOptions1" :key="index" color="grey-9"
-                v-model.trim="formData.addUserDetails.leadSource" @blur="$v.formData.addUserDetails.leadSource.$touch"
-                :error="$v.formData.addUserDetails.leadSource.$error" :val="item.value" :label="item.label" />
+                v-model.trim="formData.addUserDetails.leadSource" :val="item.value" :label="item.label" />
             </div>
           </div>
           <div v-if="this.getAllUserByUserIdData.roles[0].hierarchy.hierarchyCode == 'SC'"
-            class="row gutter-sm q-py-sm">
+            class="row q-col-gutter-md q-py-sm">
             <div class="col-md-6">
-              <q-input label="Please enter authMethod....."
+              <q-input label="Auth Method"
                 v-model="formData.addUserDetails.serviceReqClients.authMethod"
                 :error="$v.formData.addUserDetails.serviceReqClients.authMethod.$error"
                 @blur="$v.formData.addUserDetails.serviceReqClients.authMethod.$touch" />
 
             </div>
             <div class="col-md-6">
-              <q-input label="Please enter authKey....."
+              <q-input label="Auth Key"
                 v-model="formData.addUserDetails.serviceReqClients.authKey"
                 :error="$v.formData.addUserDetails.serviceReqClients.authKey.$error"
                 @blur="$v.formData.addUserDetails.serviceReqClients.authKey.$touch" />
             </div>
             <div class="col-md-6">
-              <q-input label="Please enter authValue....."
+              <q-input label="Auth Value"
                 v-model="formData.addUserDetails.serviceReqClients.authValue"
                 :error="$v.formData.addUserDetails.serviceReqClients.authValue.$error"
                 @blur="$v.formData.addUserDetails.serviceReqClients.authValue.$touch" />
             </div>
             <div class="col-md-6">
-              <q-input label="Please enter callBackUrl....."
+              <q-input label="URL"
                 v-model="formData.addUserDetails.serviceReqClients.callBackUrl"
                 :error="$v.formData.addUserDetails.serviceReqClients.callBackUrl.$error"
                 @blur="$v.formData.addUserDetails.serviceReqClients.callBackUrl.$touch" />
@@ -186,6 +199,7 @@ export default {
   data() {
     return {
       leadSourceOptions: [],
+      pincodeOptions: [],
       hierarchyDetails: [],
       LeadSourceOptions1: [
         {
@@ -386,15 +400,26 @@ export default {
     ...mapActions("BankOpsShortLead", ["FETCH_ALL_LEAD_SOURCE_DATA"]),
 
     /* Pincode search result */
-    pincodeSearch(terms, done) {
-      this.formData.addUserDetails.cityName = "";
-      this.formData.addUserDetails.stateName = "";
+    pincodeSearch(terms, update) {
+      if (terms.length < 1) {
+        update(() => {
+          this.pincodeOptions = [];
+        });
+        return;
+      }
       this.FETCH_PINCODE_WITH_TERM(terms)
         .then(() => {
-          done(this.COMMON_FILTER_FUNCTION(this.getAllStatesData, terms));
+          update(() => {
+            this.pincodeOptions = this.getAllStatesData.map(item => ({
+              label: item.label,
+              value: item.value
+            }));
+          });
         })
         .catch(() => {
-          done([]);
+          update(() => {
+            this.pincodeOptions = [];
+          });
         });
     },
     pincodeSelected(item) {
@@ -421,23 +446,9 @@ export default {
         .FETCH_ALL_USERS_BY_USER_ID_DATA(innerSelf.$route.params.id)
         .then(() => {
           console.log("innerSelf.getAllUserByUserIdData.TEST ----------->", JSON.stringify(this.getAllUserByUserIdData))
-                    let formData = {
-                      
-                    
-            showBankOpsList:
-            
-              innerSelf.getAllUserByUserIdData.bankOpsUser == null
-                ,
-             disableRegionSelection: innerSelf.getAllUserByUserIdData.roles[0].hierarchy.hierarchyCode == "CU" && innerSelf.getAllUserByUserIdData.serviceReqClients == null ,
-            //  -UAT ------: this.formData.showAllRoleDetails == 24 
-          // Production ------: this.formData.showAllRoleDetails == 25 
-          // UAT SERVICE REQUEST(HIERARCHY ID -- 8) AND CRM USER (HIERARCHY ID -- 10)
-        // PRODUCTION SERVICE REQUEST(HIERARCHY ID -- 9) AND CRM USER (HIERARCHY ID -- 10)
-             disableRegionSelection: innerSelf.getAllUserByUserIdData.bankOpsUser != null ? true : (innerSelf.getAllUserByUserIdData.roles[0].hierarchy.id == 10 ),
-             disableRegionSelection: innerSelf.getAllUserByUserIdData.serviceReqClients == null  && innerSelf.getAllUserByUserIdData.roles[0].hierarchy.hierarchyCode != "CU" ,
-            
-            // disableRegionSelection:(innerSelf.getAllUserByUserIdData.bankOpsUser == null || innerSelf.getAllUserByUserIdData.serviceReqClients == null ),
-            // leadSource: innerSelf.getAllUserByUserIdData.serviceReqClients != null ? innerSelf.getAllUserByUserIdData.serviceReqClients.sourceId == null ? "No" : "Yes" : null,
+          let formData = {
+            showBankOpsList: innerSelf.getAllUserByUserIdData.bankOpsUser != null,
+            disableRegionSelection: innerSelf.getAllUserByUserIdData.roles[0].hierarchy.hierarchyCode == "CU" && innerSelf.getAllUserByUserIdData.serviceReqClients == null ? true : false,
             addUserDetails: {
               hasReadPermission:
                 innerSelf.getAllUserByUserIdData.user.hasReadPermission,

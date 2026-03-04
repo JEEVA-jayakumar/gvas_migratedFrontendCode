@@ -1,158 +1,158 @@
 <template>
   <q-dialog
-    minimized
-    position="right"
     v-model="toggleModal"
-    no-backdrop-dismiss
-    @escape-key="emitModalClose"
+    persistent
+    position="right"
     class="customModalOverlay"
-    :content-css="{padding:'60px 25px',minWidth:'50vw',minHeight:'100vh'}"
   >
-    <div class="row items-center bottom-border q-py-sm">
-      <div class="col-8">
-        <div class="row group">
-          <div class="col-12">
-            <div class="text-h6 text-weight-regular">Manage merchant document types</div>
-          </div>
-          <div class="col-12">
-            <q-select
-              color="grey-9"
-              placeholder="Merchant type"
-              :options="activeMerchantType"
-              v-model="formData.merchantType"
-              label="Select merchant type"
-              @update:model-value="currentListTabulation == 'tab-1'?fetchMerchantDocumentTypeActivatedList():fetchMerchantDocumentTypeDeActivatedList()"
-              @blur="$v.formData.merchantType.$touch"
-              :error="$v.formData.merchantType.$error"
-            />
+    <q-card style="min-width: 50vw; min-height: 100vh; padding: 60px 25px;">
+      <div class="row items-center bottom-border q-py-sm">
+        <div class="col-8">
+          <div class="row group">
+            <div class="col-12">
+              <div class="q-title text-weight-regular">Manage merchant document types</div>
+            </div>
+            <div class="col-12">
+              <q-select
+                color="grey-9"
+                placeholder="Merchant type"
+                :options="activeMerchantType"
+                v-model="formData.merchantType"
+                float-label="Select merchant type"
+                @update:model-value="currentListTabulation == 'tab-1'?fetchMerchantDocumentTypeActivatedList():fetchMerchantDocumentTypeDeActivatedList()"
+                @blur="v$.formData.merchantType.$touch"
+                :error="v$.formData.merchantType.$error"
+                emit-value map-options
+              />
+            </div>
           </div>
         </div>
+        <div class="col" align="right">
+          <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
+        </div>
       </div>
-      <div class="col" align="right">
-        <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
-      </div>
-    </div>
-    <q-tabs color="grey-9" v-model="currentListTabulation">
-      <!-- Tabs - notice  -->
-      <q-tab
-        @click="fetchMerchantDocumentTypeActivatedList"
+      <q-tabs color="grey-9" v-model="currentListTabulation">
+        <q-tab
+          @click="fetchMerchantDocumentTypeActivatedList"
+          label="Active List"
+          name="tab-1"
+        />
+        <q-tab
+          @click="fetchMerchantDocumentTypeDeActivatedList"
+          label="De-Actived List"
+          name="tab-2"
+        />
+      </q-tabs>
+      <q-tab-panels v-model="currentListTabulation" animated keep-alive>
+        <q-tab-panel name="tab-1" class="no-padding">
+          <q-table
+            :rows="merchantDocumentTypesList"
+            table-class="customSATableClass"
+            :columns="merchantActiveDocumentcolumns"
+            :filter="filterSearch"
+            v-model:pagination="paginationControl"
+            :filter-method="myCustomSearchFilter"
+            row-key="id"
+            color="grey-9"
+          >
+            <template v-slot:body-cell-action="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <q-btn
+                    dense
+                    no-caps
+                    no-wrap
+                    label="Modify"
+                    icon="far fa-plus-square"
+                    size="md"
+                    @click="fnShowEditMerchantDocumentTypes(props.row)"
+                    flat
+                    class="text-light-blue"
+                  ></q-btn>
+                  <q-btn
+                    dense
+                    no-caps
+                    no-wrap
+                    label="Disable"
+                    icon="far fa-minus-square"
+                    size="md"
+                    @click="fnDeleteMerchantDocumentType(props.row)"
+                    flat
+                    class="text-negative"
+                  ></q-btn>
+                </div>
+              </q-td>
+            </template>
 
-        label="Active List"
-        name="tab-1"
-      />
-      <q-tab
-        @click="fetchMerchantDocumentTypeDeActivatedList"
-        label="De-Actived List"
-        name="tab-2"
-      />
-      <!-- Targets -->
-</q-tabs>
-<q-tab-panels v-model="currentListTabulation" animated>
-<q-tab-panel name="tab-1">
-        <q-table
-          :rows="merchantDocumentTypesList"
-          table-class="customSATableClass"
-          :columns="merchantActiveDocumentcolumns"
-          :filter="filterSearch" v-model:pagination="paginationControl"
-          :filter-method="myCustomSearchFilter"
-          row-key="name"
-          color="grey-9"
-        >
-          <q-td v-slot:body-cell-action="props" :props="props">
-            <div class="row no-wrap no-padding">
-              <q-btn
-                dense
-                no-caps
-                no-wrap
-                label="Modify"
-                icon="far fa-plus-square"
-                size="md"
-                @click="fnShowEditMerchantDocumentTypes(props.row)"
-                flat
-                class="text-light-blue"
-              ></q-btn>
-              <q-btn
-                dense
-                no-caps
-                no-wrap
-                label="Disable"
-                icon="far fa-minus-square"
-                size="md"
-                @click="fnDeleteMerchantDocumentType(props.row)"
-                flat
-                class="text-negative"
-              ></q-btn>
-            </div>
-          </q-td>
+            <template v-slot:top>
+              <div class="col-8">
+                <q-input
+                  clearable
+                  color="grey-9"
+                  v-model="filterSearch"
+                  placeholder="Type.."
+                  label="Search merchant type"
+                />
+              </div>
+              <div class="col-4" align="right">
+                <q-btn
+                  no-caps
+                  no-wrap
+                  label="Add New"
+                  class="text-weight-regular"
+                  color="purple-9"
+                  icon="far fa-plus-square"
+                  @click="fnshowCreateMerchantDocumentType()"
+                />
+              </div>
+            </template>
+          </q-table>
+        </q-tab-panel>
 
-          <template v-slot:top="props">
-            <!--START: table filter,search -->
-            <div class="col-8">
-              <q-input
-                clearable
-                color="grey-9"
-                v-model="filterSearch"
-                placeholder="Type.."
-                label="Search merchant type"
-              />
-            </div>
-            <div class="col-4" align="right">
-              <q-btn
-                no-caps
-                no-wrap
-                label="Add New"
-                class="text-weight-regular"
-                color="purple-9"
-                icon="far fa-plus-square"
-                @click="fnshowCreateMerchantDocumentType()"
-              />
-            </div>
-            <!--ENDv-model: table filter,search -->
-          </template>
-        </q-table>
-      </q-tab-panel>
-<q-tab-panel name="tab-2">
-        <q-table
-          :rows="merchantDocumentTypesDeactivatedList"
-          table-class="customSATableClass"
-          :columns="merchantDeactiveDocumentcolumns"
-          :filter="deActivatedSearch" v-model:pagination="paginationControl"
-          :filter-method="myCustomSearchFilter"
-          row-key="name"
-          color="grey-9"
-        >
-          <q-td v-slot:body-cell-action="props" :props="props">
-            <div class="row no-wrap no-padding">
-              <q-btn
-                dense
-                no-caps
-                no-wrap
-                label="Enable"
-                icon="far fa-check-square"
-                size="md"
-                @click="fnEnableMerchantDocumentType(props.row)"
-                flat
-                class="text-positive"
-              />
-            </div>
-          </q-td>
+        <q-tab-panel name="tab-2" class="no-padding">
+          <q-table
+            :rows="merchantDocumentTypesDeactivatedList"
+            table-class="customSATableClass"
+            :columns="merchantDeactiveDocumentcolumns"
+            :filter="deActivatedSearch"
+            v-model:pagination="paginationControl"
+            :filter-method="myCustomSearchFilter"
+            row-key="id"
+            color="grey-9"
+          >
+            <template v-slot:body-cell-action="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <q-btn
+                    dense
+                    no-caps
+                    no-wrap
+                    label="Enable"
+                    icon="far fa-check-square"
+                    size="md"
+                    @click="fnEnableMerchantDocumentType(props.row)"
+                    flat
+                    class="text-positive"
+                  />
+                </div>
+              </q-td>
+            </template>
 
-          <template v-slot:top="props">
-            <!--START: table filter,search -->
-            <div class="col-8">
-              <q-input
-                clearable
-                color="grey-9"
-                v-model="deActivatedSearch"
-                placeholder="Type.."
-                label="Search merchant type"
-              />
-            </div>
-            <!--END: table filter,search -->
-          </template>
-        </q-table>
-      </q-tab-panel>
-</q-tab-panels>
+            <template v-slot:top>
+              <div class="col-8">
+                <q-input
+                  clearable
+                  color="grey-9"
+                  v-model="deActivatedSearch"
+                  placeholder="Type.."
+                  label="Search merchant type"
+                />
+              </div>
+            </template>
+          </q-table>
+        </q-tab-panel>
+      </q-tab-panels>
+    </q-card>
 
     <!--START: Show create MerchantDocumentTypes -->
     <showCreateMerchantDocumentType
@@ -176,12 +176,16 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import showCreateMerchantDocumentType from "./createMerchantDocumentType.vue";
 import showEditMerchantDocumentType from "./editMerchantDocumentType.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: [
     "propToggleModal",
     "propactiveMerchantDocumentTypes",
@@ -389,7 +393,8 @@ export default {
                 } has been deactivated`,
                 icon: "thumb_up"
               });
-            }).onCancel(error => {
+            })
+            .catch(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -399,14 +404,6 @@ export default {
             });
           this.$q.loading.hide();
         })
-        .onCancel(() => {
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "No changes made!",
-            icon: "thumb_down"
-          });
-        });
     },
     fnEnableMerchantDocumentType(rowDetails) {
       this.$q
@@ -449,14 +446,6 @@ export default {
             });
           this.$q.loading.hide();
         })
-        .catch(() => {
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "No changes made!",
-            icon: "thumb_down"
-          });
-        });
     },
 
     myCustomSearchFilter(rows, terms, cols, cellValue) {

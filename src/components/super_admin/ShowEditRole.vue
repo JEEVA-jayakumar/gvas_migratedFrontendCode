@@ -1,86 +1,91 @@
 <template>
-  <div>
-    <q-dialog
-        class="customModalOverlay"
-        minimized no-backdrop-dismiss
-        v-model="showEditRoleToggle"  
-        @hide="emitfnEditrolePermissions(showEditRoleToggle)" 
-        @escape-key="emitfnEditrolePermissions(showEditRoleToggle)"  
-        :content-css="{padding:'30px',minWidth: '40vw'}"
-      >
-        <div class="column group q-py-sm bottom-border">
-          <div>
-            <div class="text-h6 text-weight-regular">Update Role/Permissions</div>
-          </div>
+  <q-dialog
+    v-model="showEditRoleToggle"
+    persistent
+    class="customModalOverlay"
+  >
+    <q-card style="min-width: 40vw; padding: 30px;">
+      <div class="column group q-py-sm bottom-border">
+        <div>
+          <div class="q-title text-weight-regular">Update Role/Permissions</div>
         </div>
+      </div>
 
-        <div class="column group q-py-sm ">
-          <div class="col-md-8">
-            <q-select
+      <div class="column group q-py-sm">
+        <div class="col-md-8">
+          <q-select
             disable
             v-model="formData.rolePermissions.hierarchyId"
-            @blur="$v.formData.rolePermissions.hierarchyId.$touch"      
-            :error="$v.formData.rolePermissions.hierarchyId.$error" 
+            @blur="v$.formData.rolePermissions.hierarchyId.$touch"
+            :error="v$.formData.rolePermissions.hierarchyId.$error"
             label="Hierarchy"
             placeholder="Select Hierarchy"
             class="text-weight-regular text-grey-8" color="grey-9"
             :options="propGetAllHierarchiesData"
-              />
-          </div>
+            emit-value map-options
+          />
         </div>
-      
-        <div class="column group q-py-sm">
-          <div class="col-md-8">
-            <q-input v-model="formData.rolePermissions.role" 
-              @blur="$v.formData.rolePermissions.role.$touch"      
-              @keyup.enter="fnSubmitShowAddUser"
-              :error="$v.formData.rolePermissions.role.$error" 
-              class="text-weight-regular text-grey-8" color="grey-9" label="Role" placeholder="Role" />
-          </div>
-        </div>
-      
-        <div class="column group q-py-sm">
-          <div class="col-md-8">
-            <q-color 
-              clearable
-              v-model="formData.rolePermissions.roleColor"
-              @blur="$v.formData.rolePermissions.roleColor.$touch"      
-              :error="$v.formData.rolePermissions.roleColor.$error" 
-              popover label="Choose a role color" color="grey-9"
-            />
-          </div>
-        </div>
+      </div>
 
-        <div class="group" align="right">
-          <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnEditrolePermissions(showEditRoleToggle)">Cancel
-          </q-btn>
-          <q-btn size="md" align="right" @click="fnEditRoleSubmit(formData.rolePermissions)" color="purple-9">Save
-          </q-btn>
+      <div class="column group q-py-sm">
+        <div class="col-md-8">
+          <q-input v-model="formData.rolePermissions.role"
+            @blur="v$.formData.rolePermissions.role.$touch"
+            :error="v$.formData.rolePermissions.role.$error"
+            class="text-weight-regular text-grey-8" color="grey-9" label="Role" placeholder="Role" />
         </div>
-    </q-dialog>
-  </div>
+      </div>
+
+      <div class="column group q-py-sm">
+        <div class="col-md-8">
+          <q-input
+            v-model="formData.rolePermissions.roleColor"
+            @blur="v$.formData.rolePermissions.roleColor.$touch"
+            :error="v$.formData.rolePermissions.roleColor.$error"
+            label="Choose a role color" color="grey-9"
+          >
+            <template v-slot:append>
+              <q-icon name="colorize" class="cursor-pointer">
+                <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                  <q-color v-model="formData.rolePermissions.roleColor" />
+                </q-popup-proxy>
+              </q-icon>
+            </template>
+          </q-input>
+        </div>
+      </div>
+
+      <div class="group" align="right">
+        <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnEditrolePermissions(false)">Cancel
+        </q-btn>
+        <q-btn size="md" align="right" @click="fnEditRoleSubmit(formData.rolePermissions)" color="purple-9">Save
+        </q-btn>
+      </div>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import {
   helpers,
   required,
-  email,
   minLength,
-  maxLength,
-  alpha,
-  alphaNum,
-  numeric,
 } from "@vuelidate/validators";
-const custom = helpers.regex("custom", /^[a-zA-Z\s]*$/);
-import { mapGetters, mapActions } from "vuex";
+const custom = helpers.regex(/^[a-zA-Z\s]*$/);
+import { mapActions } from "vuex";
+
 export default {
+  name: "ShowEditRole",
   props: [
     "propGetAllHierarchiesData",
     "proprolePermissions",
     "propRowDetails",
     "propFilterRolesPermissions",
   ],
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       showEditRoleToggle: this.proprolePermissions,
@@ -126,10 +131,10 @@ export default {
     },
 
     //Role creation final submit
-    fnEditRoleSubmit(formData) {
-      this.$v.formData.$touch();
+    async fnEditRoleSubmit(formData) {
+      const isValid = await this.v$.$validate();
 
-      if (this.$v.formData.$error) {
+      if (!isValid) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({
@@ -150,12 +155,12 @@ export default {
               icon: "thumb_up",
             });
           })
-          .catch(() => {
+          .catch(error => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message || "Please Try Again Later !",
               icon: "thumb_down",
             });
           });

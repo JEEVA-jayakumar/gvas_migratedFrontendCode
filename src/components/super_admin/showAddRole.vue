@@ -1,12 +1,9 @@
 <template>
-  <div>
-    <q-dialog
-      minimized
-      no-backdrop-dismiss
-      no-esc-dismiss
-      v-model="toggleModal1"
-        :content-css="{padding:'30px',minWidth: '40vw'}"
-    >
+  <q-dialog
+    persistent
+    v-model="toggleModal1"
+  >
+    <q-card style="min-width: 40vw; padding: 30px;">
       <div
         class="
           row
@@ -16,65 +13,73 @@
           bottom-border
           text-grey-9
         ">
-        <div class="col text-h6" icon="far fa-bell">Add Role/Permissions</div>
-     
-        </div>
-        <div class="column group q-py-sm">
-          <div class="col-md-8">
-           <q-select
+        <div class="col q-title">Add Role/Permissions</div>
+      </div>
+
+      <div class="column group q-py-sm">
+        <div class="col-md-8">
+          <q-select
             v-model="formData.hierarchyId"
             label="Hierarchy"
             placeholder="Select Hierarchy"
             class="text-weight-regular text-grey-8" color="grey-9"
             :options="getAllHierarchiesData"
-              />
-          </div>
-          </div>
-          
-             
-          <div class="column group q-py-sm">
-          <div class="col-md-8">
-            <q-input v-model="formData.role" 
-            @blur="$v.formData.role.$touch"
-            :error="$v.formData.role.$error"
-            class="text-weight-regular text-grey-8" 
-            color="grey-9" 
-            label="Role"
-             placeholder="Role" /> 
-          </div>
-
-          <div class="column group q-py-sm">
-          <div class="col-md-8">
-            <q-color 
-              clearable
-              v-model="formData.roleColor"
-              @blur="$v.formData.roleColor.$touch"
-             :error="$v.formData.roleColor.$error"
-              popover label="Choose a role color" color="grey-9"
-            />
-          </div>
+            emit-value map-options
+          />
         </div>
-
-          <div class="group" align="right">
-          <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitToggleMyAccount()">Cancel
-          </q-btn>
-          <q-btn size="md" align="right" @click="fnAddRoleSubmit(formData)" color="purple-9">Save
-          </q-btn>
-        </div>
-        
       </div>
 
-     
+      <div class="column group q-py-sm">
+        <div class="col-md-8">
+          <q-input v-model="formData.role"
+            @blur="v$.formData.role.$touch"
+            :error="v$.formData.role.$error"
+            class="text-weight-regular text-grey-8"
+            color="grey-9"
+            label="Role"
+            placeholder="Role" />
+        </div>
+      </div>
 
-    </q-dialog>
-  </div>
+      <div class="column group q-py-sm">
+        <div class="col-md-8">
+          <q-input
+            v-model="formData.roleColor"
+            @blur="v$.formData.roleColor.$touch"
+            :error="v$.formData.roleColor.$error"
+            label="Choose a role color" color="grey-9"
+          >
+            <template v-slot:append>
+              <q-icon name="colorize" class="cursor-pointer">
+                <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                  <q-color v-model="formData.roleColor" />
+                </q-popup-proxy>
+              </q-icon>
+            </template>
+          </q-input>
+        </div>
+      </div>
+
+      <div class="group" align="right">
+        <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitToggleMyAccount()">Cancel
+        </q-btn>
+        <q-btn size="md" align="right" @click="fnAddRoleSubmit(formData)" color="purple-9">Save
+        </q-btn>
+      </div>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
-import { required, minLength, maxLength } from "@vuelidate/validators";
+import { required } from "@vuelidate/validators";
+
 export default {
-  name: "changePassword",
+  name: "ShowAddRole",
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["propsToggleModal1"],
   data() {
     return {
@@ -149,11 +154,9 @@ export default {
       this.$emit("propsToggleModal1");
     },
 
-    fnAddRoleSubmit(formData){
-      
-      this.$v.formData.$touch();
-
-      if (this.$v.formData.$error) {
+    async fnAddRoleSubmit(formData){
+      const isValid = await this.v$.$validate();
+      if (!isValid) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({
@@ -182,7 +185,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message || "Please Try Again Later !",
               icon: "thumb_down"
             });
           });
