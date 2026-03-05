@@ -3,7 +3,7 @@
     maximized
     no-backdrop-dismiss
     no-esc-dismiss
-    v-model="toggleModal"
+    :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)"
     :content-css="{padding:'50px 5px'}"
   >
     <!-- <pre>{{propRowDetails}}</pre> -->
@@ -238,7 +238,7 @@ export default {
       this.$emit("closeLeadsList");
     },
     getRegionWiseUsers() {
-      // self.FETCH_REGION_WISE_LIST({}).then(() => {
+      // self.FETCH_REGION_WISE_LIST({}).onOk(() => {
       //   return _.map(self.getRegionWiseList, item => {
       //     self.dropDown.regionwiseUsers.push({
       //       value: item.id,

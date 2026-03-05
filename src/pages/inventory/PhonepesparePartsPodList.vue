@@ -291,7 +291,7 @@ export default {
             podNumber: reqData.pod_number
           };
           console.log("the request data " + JSON.stringify(param));
-          this.FETCH_PHONEPE_INVENTORY_UPDATED_POD_DETAILS(param).then(() => {
+          this.FETCH_PHONEPE_INVENTORY_UPDATED_POD_DETAILS(param).onOk(() => {
             // this.ajaxLoadAllLeadInfo();
             this.tableData1 = this.getPhonepeInventoryUpdatedPodDetails;
             this.$q.loading.hide();
@@ -363,7 +363,7 @@ export default {
           );
           // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
-        }).catch(() => {
+        }).onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -380,7 +380,7 @@ export default {
     //     delay: 100 // ms
     //   });
     //   this.REPORT_MASTERTRACKER_MENU()
-    //     .then(() => {
+    //     .onOk(() => {
     //       this.$q.loading.hide();
     //       this.$q.notify({
     //         color: "positive",
@@ -389,7 +389,7 @@ export default {
     //         icon: "check"
     //       });
     //     })
-    //     .catch(error => {
+    //     .onCancel(error => {
     //       console.log(error);
     //       this.$q.loading.hide();
     //       this.$q.notify({

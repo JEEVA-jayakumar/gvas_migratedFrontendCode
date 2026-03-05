@@ -151,7 +151,7 @@ export default {
               message: "Processing .."
             });
             this.REJECT_LEAD_EXCEPTION(formData)
-              .then(() => {
+              .onOk(() => {
                 this.$emit("closeRejectLeadDetailsModel");
                  this.$emit("closeReject");
                 this.$q.loading.hide();

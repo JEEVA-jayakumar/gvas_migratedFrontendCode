@@ -168,7 +168,7 @@ export default {
     ...mapActions("QRList", ["FETCH_QR_LIST"]),
     ajaxLoadDataForDeviceTypeTable() {
       let self = this;
-      self.LEAD_SOURCE_DEACTIVE_LIST().then(() => {
+      self.LEAD_SOURCE_DEACTIVE_LIST().onOk(() => {
         return _.map(self.getDeactiveLeadSource, item => {
           self.dropDown.leadSourceOptions.push({
             value: item.id,

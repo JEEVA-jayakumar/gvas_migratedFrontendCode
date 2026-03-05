@@ -836,7 +836,7 @@ export default {
             this.merchantTypeSelection
           );
         })
-        .catch(error => {
+        .onCancel(error => {
           this.TOGGLE_COMMON_LOADER(false);
           this.$q.notify({
             color: "negative",
@@ -867,7 +867,7 @@ export default {
             this.merchantTypeSelection
           );
         })
-        .catch(error => {
+        .onCancel(error => {
           this.TOGGLE_COMMON_LOADER(false);
           this.$q.notify({
             color: "negative",
@@ -898,7 +898,7 @@ export default {
             this.merchantTypeSelection
           );
         })
-        .catch(error => {
+        .onCancel(error => {
           this.TOGGLE_COMMON_LOADER(false);
           this.$q.notify({
             color: "negative",

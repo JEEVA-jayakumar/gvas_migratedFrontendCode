@@ -123,7 +123,7 @@
             });
   
             this.PHONEPE_MOVED_TO_SCRAP_DATAS(reqData)
-              .then(() => {
+              .onOk(() => {
                 // this.ajaxLoadAllLeadInfo();
                 this.$emit("closeScrapModel");
                 this.$q.loading.hide();

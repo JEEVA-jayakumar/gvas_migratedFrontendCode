@@ -28,16 +28,17 @@
     </q-drawer>
 
     <q-page-container class="bg-grey-1">
-      <router-view v-slot="{ Component }">
-        <transition
-          appear
-          enter-active-class="animated fadeIn"
-          leave-active-class="animated fadeOut"
-          mode="out-in"
-        >
-          <component :is="Component" />
-        </transition>
-      </router-view>
+      <transition
+        :duration="{ enter: 300, leave: 300 }"
+        appear
+        v-on:before-enter="beforeEnter"
+        v-on:after-enter="afterEnter"
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut"
+        mode="out-in"
+      >
+        <router-view />
+      </transition>
     </q-page-container>
   </q-layout>
 </template>
@@ -171,12 +172,7 @@ export default {
   computed: {
     ...mapGetters("commonLoader", ["getToggleCommonLoader"]),
     getUserName() {
-      try {
-        const userInfo = JSON.parse(localStorage.getItem("u_i"));
-        return userInfo?.user?.name || "Super Admin";
-      } catch (e) {
-        return "Super Admin";
-      }
+      try { const ui = JSON.parse(localStorage.getItem("u_i")); return ui?.user?.name || "Super Admin"; } catch(e) { return "Super Admin"; }
     },
   },
   created() {
@@ -184,6 +180,13 @@ export default {
     this.leftDrawerOpen = savedState === null ? true : savedState === "true";
   },
   methods: {
+    ...mapActions("commonLoader", ["TOGGLE_COMMON_LOADER"]),
+    beforeEnter: function(el) {
+      this.TOGGLE_COMMON_LOADER(true);
+    },
+    afterEnter: function(el) {
+      this.TOGGLE_COMMON_LOADER(false);
+    },
     toggleSideMenu() {
       this.leftDrawerOpen = !this.leftDrawerOpen;
       localStorage.setItem("leftDrawerOpen", this.leftDrawerOpen);
@@ -214,6 +217,7 @@ export default {
   background: #7d428f !important;
 }
 
+.q-item.active,
 .q-item.q-router-link--active,
 .q-item--active,
 .q-item:focus {

@@ -229,7 +229,7 @@ export default {
                     // this.deActiveTableData = this.getAllRegionGroupData.filter(service => service.active == false);
                     this.$q.loading.hide();
                 })
-                .catch(() => {
+                .onCancel(() => {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",
@@ -273,7 +273,7 @@ export default {
                                 icon: "thumb_up"
                             });
                             this.$q.loading.hide();
-                        }).catch(error => {
+                        }).onCancel(error => {
                             this.$q.notify({
                                 color: "warning",
                                 position: "bottom",
@@ -333,7 +333,7 @@ export default {
                         });
                     this.$q.loading.hide();
                 })
-                .catch(() => {
+                .onCancel(() => {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",

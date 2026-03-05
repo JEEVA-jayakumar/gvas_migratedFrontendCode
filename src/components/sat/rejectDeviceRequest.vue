@@ -131,7 +131,7 @@
             });
   
             this.REJECT_SELF_ASSIGNMENT(param)
-              .then(() => {
+              .onOk(() => {
                 this.$emit("closeLostModel");
                 this.$q.loading.hide();
                 this.$q.notify({ 

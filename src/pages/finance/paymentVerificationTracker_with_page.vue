@@ -448,7 +448,7 @@ export default {
           // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
         })
-        .catch(error => {
+        .onCancel(error => {
           this.$q.loading.hide();
         });
     },
@@ -488,7 +488,7 @@ export default {
           };
 
           this.APPROVE_FINANCE_EXCEPTION(usersSelectSync)
-            .then(() => {
+            .onOk(() => {
               this.ajaxLoadAllPaymentTrackerInfo();
               this.$q.loading.hide();
               this.$q.notify({
@@ -507,7 +507,7 @@ export default {
               });
             });
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

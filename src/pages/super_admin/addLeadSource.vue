@@ -242,7 +242,7 @@ export default {
               icon: "thumb_up"
             });
           })
-          .catch(error => {
+          .onCancel(error => {
             this.$q.notify({
               color: "warning",
               position: "bottom",
@@ -277,7 +277,7 @@ export default {
               icon: "thumb_up"
             });
           })
-          .catch(error => {
+          .onCancel(error => {
             this.$q.notify({
               color: "warning",
               position: "bottom",

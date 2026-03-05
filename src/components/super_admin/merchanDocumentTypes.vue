@@ -1,6 +1,6 @@
 <template>
   <q-dialog
-    v-model="toggleModal"
+    :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)"
     persistent
     position="right"
     class="customModalOverlay"
@@ -295,14 +295,14 @@ export default {
     },
     fetchMerchantDocumentTypeList() {
       this.MERCHANT_TYPE_ACTIVE_LIST()
-        .then(() => {
+        .onOk(() => {
           return _.map(this.getActiveMerchantTypes, item => {
             this.activeMerchantType.push({
               value: item.id,
               label: item.merchantTypeName
             });
           });
-        }).then(() => {
+        }).onOk(() => {
           this.fetchMerchantDocumentTypeActivatedList();
         });
     },
@@ -320,7 +320,7 @@ export default {
         return this.MERCHANT_DOCUMENT_TYPE_ACTIVE_LIST({
           merchantTypeId: this.formData.merchantType,
           parentId: 0 //for primary document
-        }).then(() => {
+        }).onOk(() => {
           this.merchantDocumentTypesList = _.uniqBy(
             this.getActiveMerchantDocumentTypes,
             "documentType"
@@ -344,7 +344,7 @@ export default {
         this.MERCHANT_DOCUMENT_TYPE_DEACTIVED_LIST({
           merchantTypeId: this.formData.merchantType,
           parentId: 0 //for primary document
-        }).then(() => {
+        }).onOk(() => {
           this.merchantDocumentTypesDeactivatedList = this.getDeActivatedMerchantDocumentTypes;
           this.$q.loading.hide();
         });
@@ -394,7 +394,7 @@ export default {
                 icon: "thumb_up"
               });
             })
-            .catch(error => {
+            .onCancel(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",

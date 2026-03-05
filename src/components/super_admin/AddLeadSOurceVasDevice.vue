@@ -1,6 +1,6 @@
 <template>
   <q-dialog
-    v-model="toggleModel"
+    :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)"
     persistent
     class="customModalOverlay"
   >

@@ -82,7 +82,7 @@ export default {
             message: "Processing .."
           });
           this.REJECT_LOST_STOLEN_EXCEPTION(this.formData.regionalInventory)
-            .then(() => {
+            .onOk(() => {
               this.$emit("closeRejectModel");
               this.$emit("reloadPaymentTrackerData");
               this.$q.loading.hide();
@@ -93,7 +93,7 @@ export default {
                 icon: "clear"
               });
             })
-            .catch(error => {
+            .onCancel(error => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",

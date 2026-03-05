@@ -557,7 +557,7 @@ export default {
           // this.formdata.paymentOption=this.getShortLeadInfo.paymentOption
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
       this.toggleAjaxLoadFilter = false;
@@ -660,7 +660,7 @@ export default {
             //   self.formData[key] = "";
             // });
           })
-          .catch(error => {
+          .onCancel(error => {
             console.log(error);
             this.$q.notify({
               color: "negative",
@@ -751,7 +751,7 @@ export default {
           //   self.formData[key] = "";
           // });
         })
-        .catch(error => {
+        .onCancel(error => {
           console.log(error);
           this.$q.notify({
             color: "negative",
@@ -791,7 +791,7 @@ export default {
           // );
           this.FETCH_SHORT_LEAD_DATA(this.getShortLeadInfo.id);
         })
-        .catch(error => {
+        .onCancel(error => {
           this.$q.loading.hide();
           this.$q.notify({
             color: "negative",
@@ -805,15 +805,15 @@ export default {
       let self = this;
       self
         .FETCH_DEVICES_DATA()
-        .then(() => {
+        .onOk(() => {
           return _.map(self.getAllDevicesInfo, item => {
             self.dropDown.deviceOptions.push({
               value: item.id,
               label: item.deviceName
             });
           });
-        }).then(() => {
-          self.LEAD_SOURCE_ACTIVE_LIST().then(() => {
+        }).onOk(() => {
+          self.LEAD_SOURCE_ACTIVE_LIST().onOk(() => {
             return _.map(self.getActiveLeadSource, item => {
               self.dropDown.leadSourceOptions.push({
                 value: item.id,
@@ -821,8 +821,8 @@ export default {
               });
             });
           });
-        }).then(() => {
-          self.PLAN_ACTIVE_LIST().then(() => {
+        }).onOk(() => {
+          self.PLAN_ACTIVE_LIST().onOk(() => {
             return _.map(self.getActivePlan, item => {
               self.dropDown.planOptions.push({
                 value: item.id,
@@ -850,7 +850,7 @@ export default {
           this.fetchAndCookDocuments();
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
       this.toggleAjaxLoadFilter = false;
@@ -906,7 +906,7 @@ export default {
             message: response.data.message
           });
         })
-        .catch(error => {
+        .onCancel(error => {
           console.log(error);
           this.$q.notify({
             color: "negative",
@@ -925,7 +925,7 @@ export default {
             message: response.data.message
           });
         })
-        .catch(error => {
+        .onCancel(error => {
           console.log(error);
           this.$q.notify({
             color: "negative",
@@ -976,7 +976,7 @@ export default {
         //   self.formData[key] = "";
         // });
       })
-      .catch(error => {
+      .onCancel(error => {
         console.log(error);
         this.$q.notify({
           color: "negative",
@@ -1029,7 +1029,7 @@ export default {
         //   self.formData[key] = "";
         // });
       })
-      .catch(error => {
+      .onCancel(error => {
         console.log(error);
         this.$q.notify({
           color: "negative",
@@ -1059,12 +1059,12 @@ export default {
     /* API call to fetch regions */
     self
       .CITY_FROM_MARS()
-      .then(() => {
+      .onOk(() => {
         self.cityOptions = [];
         self.cityFromMars.items.map(oo => {
           self.cityOptions.push({ label: oo.name, value: oo.code });
         });
-      }).then(() => {
+      }).onOk(() => {
         /* API call to fetch state */
         return self.STATE_FROM_MARS().then(response => {
           self.stateOptions = [];
@@ -1167,7 +1167,7 @@ export default {
           message: "Processing .."
         });
 
-        this.MOVE_BACK_DOCUMENT_VERIFICATION_STAGE(formData).then(() => {
+        this.MOVE_BACK_DOCUMENT_VERIFICATION_STAGE(formData).onOk(() => {
           this.$router.push("/sat/lead/validation/" + this.$route.params.id);
           this.$q.loading.hide();
         });

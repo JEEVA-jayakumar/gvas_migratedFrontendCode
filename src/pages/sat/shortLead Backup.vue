@@ -907,7 +907,7 @@ export default {
         .then(response => {
           this.formData.shortLead = this.getShortLeadInfo;
         })
-        .catch(error => {
+        .onCancel(error => {
           console.log("FAILED >> ajaxLoadShortLeadInfo >>", error);
         });
       this.toggleAjaxLoadFilter = false;
@@ -919,7 +919,7 @@ export default {
         .then(response => {
           this.formData.shortLead.documentType = this.getShortLeadInfoDocumentTypes;
         })
-        .catch(error => {
+        .onCancel(error => {
           console.log("FAILED >> ajaxLoadShortLeadInfo >>", error);
         });
       this.toggleAjaxLoadFilter = false;

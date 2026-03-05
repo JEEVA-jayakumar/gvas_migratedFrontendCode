@@ -301,7 +301,7 @@ export default {
     },
     fnAjaxGetAllBankData () {
       this.FETCH_BANK_LIST()
-        .then(() => {
+        .onOk(() => {
           let assumeArr = []
            console.log('BANKLIST OPTION---->>>>', JSON.stringify(this.getAllBankList))
           this.getAllBankList.map(function (value) {
@@ -314,7 +314,7 @@ export default {
           // this.bankListOptions = this.getAllBankList.bankName
           // console.log("BANKLIST OPTION---->>>>",JSON.stringify(this.bankListOptions));
         })
-        .catch(() => {
+        .onCancel(() => {
           this.bankListOptions = []
         })
     },
@@ -329,10 +329,10 @@ export default {
           filter: this.filter
         }
         this.FETCH_BATCH_DETAILS(request)
-          .then(() => {
+          .onOk(() => {
             this.toggleAjaxLoadFilter = false
           })
-          .catch(() => {
+          .onCancel(() => {
             this.toggleAjaxLoadFilter = false
           })
       } else {
@@ -345,10 +345,10 @@ export default {
     ajaxLoadAllBatchList () {
       this.toggleAjaxLoadFilter = true
       this.FETCH_BATCH_DETAILS()
-        .then(() => {
+        .onOk(() => {
           this.toggleAjaxLoadFilter = false
         })
-        .catch(() => {
+        .onCancel(() => {
           this.toggleAjaxLoadFilter = false
         })
     },
@@ -358,7 +358,7 @@ export default {
         spinnerColor: 'purple-9',
         message: 'Fetching data ..'
       })
-      this.FETCH_BATCH_DETAILS({ pagination, filter }).then(() => {
+      this.FETCH_BATCH_DETAILS({ pagination, filter }).onOk(() => {
           this.paginationControl = pagination
           this.paginationControl.rowsNumber = this.getAllBatchList.totalElements
           this.paginationControl.page = this.getAllBatchList.number + 1
@@ -370,7 +370,7 @@ export default {
           }
           this.$q.loading.hide()
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide()
         })
     },

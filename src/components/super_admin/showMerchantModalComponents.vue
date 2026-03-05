@@ -1,8 +1,8 @@
 <template>
   <q-dialog
-    minimized
+    persistent
     position="right"
-    v-model="toggleModal"
+    :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)"
     no-backdrop-dismiss
     @escape-key="emitModalClose"
     class="customModalOverlay"
@@ -16,7 +16,7 @@
         <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
       </div>
     </div>
-    <q-tabs v-model="tab" color="grey-9">
+    <q-tabs v-model="activeTab" color="grey-9">
       <!-- Tabs - notice  -->
       <q-tab
         @click="merchantTypeActiveList"
@@ -26,7 +26,7 @@
       />
       <q-tab @click="merchantTypeDeActiveList" label="De-Actived List" name="tab-2"/>
 </q-tabs>
-<q-tab-panels v-model="tab" animated>
+<q-tab-panels v-model="activeTab" animated>
 <q-tab-panel name="tab-1">
         <q-table
           :rows="activeMerchantTypeList"
@@ -236,12 +236,12 @@ export default {
     ]),
     /* START >> Function to save, update or delete */
     merchantTypeActiveList() {
-      this.MERCHANT_TYPE_ACTIVE_LIST().then(() => {
+      this.MERCHANT_TYPE_ACTIVE_LIST().onOk(() => {
         this.activeMerchantTypeList = this.getActiveMerchantType;
       });
     },
     merchantTypeDeActiveList() {
-      this.MERCHANT_TYPE_DEACTIVED_LIST().then(() => {
+      this.MERCHANT_TYPE_DEACTIVED_LIST().onOk(() => {
         this.deActiveMerchantTypeList = this.getDeActivatedMerchantType;
       });
     },

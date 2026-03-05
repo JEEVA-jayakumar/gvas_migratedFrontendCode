@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-dialog
-    minimized 
+    persistent
     class="customModalOverlay"
     :model-value="propShowCreatePermission"
     @hide="emitfnshowAddPermissions(propShowCreatePermission)" 

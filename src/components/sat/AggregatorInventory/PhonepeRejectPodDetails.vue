@@ -130,7 +130,7 @@ export default {
                             param.soRemarks = response.data.data.soRemarks == 'null' ? "null" : reqdata.soRemarks
                             param.regionRemarks = response.data.data.regionRemarks == 'null' ? "null" : reqdata.regionRemarks;
                             this.REJECT_PHONEPE_INCOMING_POD_DETAILS(param)
-                                .then(() => {
+                                .onOk(() => {
                                     this.$q.loading.hide();
                                     this.$q.notify({
                                         color: "positive",
@@ -141,7 +141,7 @@ export default {
                                     this.$emit("reloadPaymentTrackerData")
                                     this.emitToggleReject()
                                     this.$router.push("/sat/inventory/allocation");
-                                }).catch(error => {
+                                }).onCancel(error => {
                                     this.$q.loading.hide();
                                     this.$q.notify({
                                         color: "negative",
@@ -155,7 +155,7 @@ export default {
                                 });
                             this.$router.push("/sat/inventory/allocation");
                         })
-                            .catch(error => {
+                            .onCancel(error => {
                                 this.$q.loading.hide();
                                 this.$q.notify({
                                     color: "negative",

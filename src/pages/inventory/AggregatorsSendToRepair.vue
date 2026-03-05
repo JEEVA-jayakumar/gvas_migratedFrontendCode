@@ -279,7 +279,7 @@ export default {
     let self = this;
     let cookedArr = [];
     self.GET_ACTIVE_CREATED_AGGREGATORS_LIST()
-      .then(() => {
+      .onOk(() => {
         return _.map(self.getActiveCreatedAggregatorList, (item) => {
           console.log("ITEM -------->", item)
           cookedArr.push({
@@ -382,7 +382,7 @@ export default {
           this.$q.loading.hide();
         })
       // })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -413,7 +413,7 @@ export default {
           });
 
           this.APPROVE_AGGREGATORS_SEND_TO_REPAIR(reqData)
-            .then(() => {
+            .onOk(() => {
               // this.ajaxLoadAllLeadInfo();
               this.$q.loading.hide();
               this.$q.notify({
@@ -442,7 +442,7 @@ export default {
     //       ok: "Continue",
     //       cancel: "Cancel"
     //     })
-    //     .then(() => {
+    //     .onOk(() => {
     //       this.$q.loading.show({
     //         delay: 0, // ms
     //         spinnerColor: "purple-9",
@@ -450,7 +450,7 @@ export default {
     //       });
 
     //       this.MOVED_TO_SCRAP_DATAS(reqData)
-    //         .then(() => {
+    //         .onOk(() => {
     //           // this.ajaxLoadAllLeadInfo();
     //           this.$q.loading.hide();
     //           this.$q.notify({
@@ -460,7 +460,7 @@ export default {
     //             icon: "thumb_up"
     //           });
     //         })
-    //         .catch(error => {
+    //         .onCancel(error => {
     //           this.$q.loading.hide();
     //           this.$q.notify({
     //             color: "negative",
@@ -476,7 +476,7 @@ export default {
     //       delay: 100 // ms
     //     });
     //     this.REPORT_RECOVERY_REPLACEMENT_HIST(this.regionFilter)
-    //       .then(() => {
+    //       .onOk(() => {
     //         this.$q.loading.hide();
     //         this.$q.notify({
     //           color: 'positive',
@@ -485,7 +485,7 @@ export default {
     //           icon: 'check'
     //         });
     //       })
-    //       .catch(error => {
+    //       .onCancel(error => {
     //         console.log(error);
     //         this.$q.loading.hide();
     //         this.$q.notify({

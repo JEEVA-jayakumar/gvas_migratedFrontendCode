@@ -757,7 +757,7 @@ export default {
           this.fnMoveToDataEntryScreen();
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -885,7 +885,7 @@ export default {
             this.toggleLeadRejectModal = !this.toggleLeadRejectModal;
             this.$q.loading.hide();
           })
-          .catch(error => {
+          .onCancel(error => {
             let arrayMessage = "";
             _.map(error.data.data, oo => {
               arrayMessage += `${oo}, `;

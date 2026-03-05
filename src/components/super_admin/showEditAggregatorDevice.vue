@@ -1,6 +1,6 @@
 <template>
     <div>
-        <q-dialog minimized v-model="toggleModel" @hide="emitfnShowEditAggregatorDevice"
+        <q-dialog persistent :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)" @hide="emitfnShowEditAggregatorDevice"
             @escape-key="emitfnShowEditAggregatorDevice" class="customModalOverlay"
             :content-css="{ padding: '30px', minWidth: '30vw' }">
             <form>

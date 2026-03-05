@@ -227,7 +227,7 @@ export default {
         loadingData(request) {
             this.toggleAjaxLoadFilter = true;
             this.BIJLIPAY_CRM_DATE(request)
-                .then(() => {
+                .onOk(() => {
                     this.paginationControl = request.pagination;
                     this.paginationControl.rowsNumber = this.getBijlipayDate.totalElements;
                     this.paginationControl.page = this.getBijlipayDate.number + 1;
@@ -238,7 +238,7 @@ export default {
                     }
                     this.toggleAjaxLoadFilter = false;
                 })
-                .catch(() => { this.toggleAjaxLoadFilter = false; });
+                .onCancel(() => { this.toggleAjaxLoadFilter = false; });
         },
         dateClick(request) {
             this.addBasicInformation.action = request;
@@ -261,7 +261,7 @@ export default {
                     filter: this.filter,
                 }
                 this.ASSIGN_TO_COMPLETE(ticketId)
-                    .then(() => {
+                    .onOk(() => {
                         this.$q.notify({
                             color: "positive",
                             position: "bottom",
@@ -273,7 +273,7 @@ export default {
                             filter: this.filter,
                             date: this.formData.date,
                         });
-                    }).catch(() => {
+                    }).onCancel(() => {
                         this.$q.notify({
                             color: "negative",
                             position: "bottom",
@@ -292,7 +292,7 @@ export default {
             }).onOk(() => {
                 let TicketId = { ticketId: request.serviceReqTicketId }
                 this.ESCALATE_TO_SAT(TicketId)
-                    .then(() => {
+                    .onOk(() => {
                         this.$q.notify({
                             color: "positive",
                             position: "bottom",
@@ -304,7 +304,7 @@ export default {
                             filter: this.filter,
                             date: this.formData.date,
                         });
-                    }).catch(() => {
+                    }).onCancel(() => {
                         this.$q.notify({
                             color: "negative",
                             position: "bottom",
@@ -330,7 +330,7 @@ export default {
         },
         ajaxLoadAllLeadInfo1(request) {
             this.toggleAjaxLoadFilter1 = true;
-            this.FETCH_BIJLIPAY_COMPLETED_DATA(request).then(() => {
+            this.FETCH_BIJLIPAY_COMPLETED_DATA(request).onOk(() => {
                     this.paginationControl1 = request.pagination;
                     this.paginationControl1.rowsNumber = this.getBijlipayCompletedData.totalElements;
                     this.paginationControl1.page = this.getBijlipayCompletedData.number + 1;
@@ -340,7 +340,7 @@ export default {
                         this.paginationControl1.descending = !this.getBijlipayCompletedData.sort[0].ascending;
                     }
                     this.toggleAjaxLoadFilter1 = false;
-                }).catch(() => { this.toggleAjaxLoadFilter1 = false; });
+                }).onCancel(() => { this.toggleAjaxLoadFilter1 = false; });
         },
         toggleAddremarks(remarks) {
             this.propToggleRemarks = !this.propToggleRemarks;

@@ -722,7 +722,7 @@ export default {
           }
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -752,7 +752,7 @@ export default {
     //         ok: "Yes",
     //         cancel: "Cancel",
     //     })
-    //     .then(() => {
+    //     .onOk(() => {
     //         let ticketId = {
     //             ticketId: request.serviceReqTicketId,
     //             pagination: this.paginationControl,
@@ -774,7 +774,7 @@ export default {
     //             })
 
     //     })
-    //     .catch(() => {
+    //     .onCancel(() => {
     //         this.$q.notify({
     //             color: "negative",
     //             position: "bottom",
@@ -798,7 +798,7 @@ export default {
           .then(response => {
             this.toggleAjaxLoadFilter1 = false;
           })
-          .catch(error => {
+          .onCancel(error => {
             this.toggleAjaxLoadFilter1 = false;
           });
       } else if (tab == "tab-3") {
@@ -814,7 +814,7 @@ export default {
           .then(response => {
             this.toggleAjaxLoadFilter2 = false;
           })
-          .catch(error => {
+          .onCancel(error => {
             this.toggleAjaxLoadFilter2 = false;
           });
       } else {
@@ -831,7 +831,7 @@ export default {
         .then(response => {
           this.toggleAjaxLoadFilter1 = false;
         })
-        .catch(error => {
+        .onCancel(error => {
           this.toggleAjaxLoadFilter1 = false;
         });
     },
@@ -866,7 +866,7 @@ export default {
           }
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -877,7 +877,7 @@ export default {
         .then(response => {
           this.toggleAjaxLoadFilter2 = false;
         })
-        .catch(error => {
+        .onCancel(error => {
           this.toggleAjaxLoadFilter2 = false;
         });
     },
@@ -909,7 +909,7 @@ export default {
           }
           this.$q.loading.hide();
         })
-        .catch(error => {
+        .onCancel(error => {
           this.$q.loading.hide();
           this.$q.notify({
             color: "negative",
@@ -943,7 +943,7 @@ export default {
           console.log("RSPONSE", response);
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -990,7 +990,7 @@ export default {
               this.$q.loading.hide();
             }
           );
-        }).catch(() => {
+        }).onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -1010,7 +1010,7 @@ export default {
           this.$q.loading.hide();
         })
 
-        .catch(error => {
+        .onCancel(error => {
           this.$q.loading.hide();
           this.$q.notify({
             color: "negative",

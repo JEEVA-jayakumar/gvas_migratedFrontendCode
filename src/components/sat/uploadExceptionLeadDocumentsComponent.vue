@@ -843,7 +843,7 @@ export default {
             this.merchantTypeSelection
           );
         })
-        .catch(error => {
+        .onCancel(error => {
           this.$q.loading.hide();
           this.$q.notify({
             color: "negative",
@@ -878,7 +878,7 @@ export default {
             this.merchantTypeSelection
           );
         })
-        .catch(error => {
+        .onCancel(error => {
           this.$q.loading.hide();
           this.$q.notify({
             color: "negative",
@@ -913,7 +913,7 @@ export default {
             this.merchantTypeSelection
           );
         })
-        .catch(error => {
+        .onCancel(error => {
           this.$q.loading.hide();
           this.$q.notify({
             color: "negative",
@@ -965,7 +965,7 @@ export default {
               });
             });
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

@@ -119,7 +119,7 @@ export default {
     ...mapActions("phonePeCrm", ["ASSIGN_TO_COMPLETE"]),
 
     issueLoadData() {
-      this.FETCH_ISSUE_DATAS().then(() => {
+      this.FETCH_ISSUE_DATAS().onOk(() => {
         this.dropDown.issueOptions = this.getissueDatasDetails.map(item => ({
           value: item,
           label: item.name
@@ -129,7 +129,7 @@ export default {
 
     issueDocumentType(val) {
       if (!val) return;
-      this.FETCH_SUB_ISSUE_DATAS(val.id).then(() => {
+      this.FETCH_SUB_ISSUE_DATAS(val.id).onOk(() => {
         this.dropDown.subIssueOptions = this.getsubIssueDatasDetails.map(item => ({
           value: item,
           label: item.name
@@ -139,7 +139,7 @@ export default {
     },
 
     remarksDatas() {
-      this.FETCH_REMARKS_ISSUE_DATAS().then(() => {
+      this.FETCH_REMARKS_ISSUE_DATAS().onOk(() => {
         this.dropDown.remarksOptions = this.getremarksDatasDetails.map(item => ({
           value: item,
           label: item.name
@@ -162,7 +162,7 @@ export default {
             resolutionRemarks: this.formData.remarks
         }
         this.ASSIGN_TO_COMPLETE(payload)
-          .then(() => {
+          .onOk(() => {
               this.$q.notify({
                   color: "positive",
                   message: "Successfully Resolved!",
@@ -171,7 +171,7 @@ export default {
               this.$q.loading.hide();
               this.toggleModal = false;
           })
-          .catch(error => {
+          .onCancel(error => {
               const message = (error.body && error.body.message) ? error.body.message : "Error processing request.";
               this.$q.notify({ color: "negative", message: message });
               this.$q.loading.hide();

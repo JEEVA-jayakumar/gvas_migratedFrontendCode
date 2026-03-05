@@ -529,7 +529,7 @@ export default {
     },
     ajaxLoadAllPaymentTrackerInfo({ pagination, filter }) {
       this.$q.loading.show({ delay: 0, spinnerColor: "purple-9", message: "Fetching data .." });
-      this.FETCH_ALL_PAYMENT_TRACKER_DATA({ pagination, filter }).then(() => {
+      this.FETCH_ALL_PAYMENT_TRACKER_DATA({ pagination, filter }).onOk(() => {
           this.paginationControl = pagination;
           this.paginationControl.rowsNumber = this.getPaymentTrackerInfo.totalElements;
           this.paginationControl.page = this.getPaymentTrackerInfo.number + 1;
@@ -540,11 +540,11 @@ export default {
           }
           this.$q.loading.hide();
         })
-        .catch(() => { this.$q.loading.hide(); });
+        .onCancel(() => { this.$q.loading.hide(); });
     },
     ajaxLoadAllPaymentTrackerInfo1({ pagination, filter }) {
       this.$q.loading.show({ delay: 0, spinnerColor: "purple-9", message: "Fetching data .." });
-      this.FETCH_ALL_QR_PAYMENT_TRACKER_DATA({ pagination, filter }).then(() => {
+      this.FETCH_ALL_QR_PAYMENT_TRACKER_DATA({ pagination, filter }).onOk(() => {
           this.paginationControl1 = pagination;
           this.paginationControl1.rowsNumber = this.getstaticQrPaymentTrackerData.totalElements;
           this.paginationControl1.page = this.getstaticQrPaymentTrackerData.number + 1;
@@ -555,7 +555,7 @@ export default {
           }
           this.$q.loading.hide();
         })
-        .catch(() => { this.$q.loading.hide(); });
+        .onCancel(() => { this.$q.loading.hide(); });
     },
     openRejectModel(exceptionDetails) {
       this.showRejectModel = !this.showRejectModel;
@@ -584,11 +584,11 @@ export default {
           leadId: exceptionDetails
         };
         this.APPROVE_FINANCE_EXCEPTION(usersSelectSync)
-          .then(() => {
+          .onOk(() => {
             this.ajaxLoadAllPaymentTrackerInfo({ pagination: this.paginationControl, filter: this.filter });
             this.$q.loading.hide();
             this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Approved!", icon: "thumb_up" });
-          }).catch(error => {
+          }).onCancel(error => {
             this.$q.loading.hide();
             this.$q.notify({ color: "negative", position: "bottom", message: error.body && error.body.message ? error.body.message : "Please Try Again Later !", icon: "thumb_down" });
           });
@@ -608,11 +608,11 @@ export default {
           leadId: exceptionDetails
         };
         this.QR_APPROVE_FINANCE_EXCEPTION(qrUsersSelectSync)
-          .then(() => {
+          .onOk(() => {
             this.ajaxLoadAllPaymentTrackerInfo1({ pagination: this.paginationControl1, filter: this.filter1 });
             this.$q.loading.hide();
             this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Approved!", icon: "thumb_up" });
-          }).catch(error => {
+          }).onCancel(error => {
             this.$q.loading.hide();
             this.$q.notify({ color: "negative", position: "bottom", message: error.body && error.body.message ? error.body.message : "Please Try Again Later !", icon: "thumb_down" });
           });

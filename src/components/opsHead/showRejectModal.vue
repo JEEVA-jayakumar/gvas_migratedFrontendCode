@@ -101,7 +101,7 @@ export default {
               });
               this.FETCH_ALL_EXCEPTION_KYC_DATA();
               this.emitModalToggle();
-            }).catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",

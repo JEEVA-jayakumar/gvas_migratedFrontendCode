@@ -189,7 +189,7 @@ export default {
         .then(response => {
           this.$q.loading.hide();
         })
-        .catch(error => {
+        .onCancel(error => {
           this.$q.loading.hide();
           this.$q.notify({
             color: "negative",
@@ -220,7 +220,7 @@ export default {
           // finally we tell QTable to exit the "loading" state
           this.loading = false;
         })
-        .catch(error => {
+        .onCancel(error => {
           // we tell QTable to exit the "loading" state
           this.loading = false;
         });

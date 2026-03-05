@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <div>
-      <!--@select="goToUnassignedTab"-->
+      <!--@update:model-value="goToUnassignedTab"-->
       <q-tabs
         v-model="selectedTab"
         class="shadow-1"
@@ -517,7 +517,7 @@ export default {
           }
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -540,7 +540,7 @@ export default {
           }
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },

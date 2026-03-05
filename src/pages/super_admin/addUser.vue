@@ -427,26 +427,15 @@ export default {
     ]),
     ...mapActions("BankOpsShortLead", ["FETCH_ALL_LEAD_SOURCE_DATA"]),
     /* Pincode search result */
-    pincodeSearch(terms, update) {
-      if (terms.length < 1) {
-        update(() => {
-          this.pincodeOptions = [];
-        });
-        return;
-      }
+    pincodeSearch(terms, done) {
+      this.formData.addUserDetails.cityName = "";
+      this.formData.addUserDetails.stateName = "";
       this.FETCH_PINCODE_WITH_TERM(terms)
         .then(() => {
-          update(() => {
-            this.pincodeOptions = this.getAllStatesData.map(item => ({
-              label: item.label,
-              value: item.value
-            }));
-          });
+          done(this.COMMON_FILTER_FUNCTION(this.getAllStatesData, terms));
         })
         .catch(() => {
-          update(() => {
-            this.pincodeOptions = [];
-          });
+          done([]);
         });
     },
     pincodeSelected(item) {

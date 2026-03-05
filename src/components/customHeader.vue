@@ -19,7 +19,6 @@
             class="cursor-pointer"
             src="~assets/images/logo.png"
             style="height:38px;"
-            @click="$router.push('/super/admin/dashboard')"
           />
         </div>
         <div class="col float-right" align="right">
@@ -107,32 +106,13 @@ export default {
   },
   computed: {
     getUserNAme() {
-      const userInfo = localStorage.getItem("u_i");
-      if (userInfo && userInfo !== "undefined" && userInfo !== "null") {
-        try {
-          return JSON.parse(userInfo).user.name;
-        } catch (e) {
-          return "Super Admin";
-        }
-      }
-      return "Super Admin";
+      try { const ui = JSON.parse(localStorage.getItem("u_i")); return ui?.user?.name || "Super Admin"; } catch(e) { return "Super Admin"; }
     },
     getRole() {
-      const userInfo = localStorage.getItem("u_i");
-      if (userInfo && userInfo !== "undefined" && userInfo !== "null") {
-        try {
-          const parsed = JSON.parse(userInfo);
-          if (parsed.roles && parsed.roles.length > 0) {
-            if (parsed.roles[0].role == "KSN") {
-              this.$emit("fnToggleSideMenu");
-            }
-            return parsed.roles[0].role;
-          }
-        } catch (e) {
-          return "";
-        }
+      if (JSON.parse(localStorage.getItem("u_i")).roles[0].role == "KSN") {
+        this.$emit("fnToggleSideMenu");
       }
-      return "";
+      try { const ui = JSON.parse(localStorage.getItem("u_i")); return ui?.roles[0]?.role || ""; } catch(e) { return ""; }
     },
   },
 };

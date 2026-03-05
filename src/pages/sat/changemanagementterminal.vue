@@ -536,7 +536,7 @@ export default {
 
         this.$q.loading.hide();
       })
-      .catch(() => {
+      .onCancel(() => {
         this.$q.loading.hide();
       });
     this.toggleAjaxLoadFilter = false;
@@ -591,7 +591,7 @@ export default {
           // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -620,7 +620,7 @@ export default {
           // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -776,7 +776,7 @@ export default {
 
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
       this.toggleAjaxLoadFilter = false;
@@ -822,7 +822,7 @@ export default {
             });
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

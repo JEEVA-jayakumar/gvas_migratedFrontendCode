@@ -316,7 +316,7 @@ import { required, or } from '@vuelidate/validators';
             // finally we tell QTable to exit the "loading" state
             this.$q.loading.hide();
           })
-          .catch(() => {
+          .onCancel(() => {
             this.$q.loading.hide();
           });
       },
@@ -347,7 +347,7 @@ import { required, or } from '@vuelidate/validators';
             });
   
             this.APPROVE_PHONEPE_SEND_TO_REPAIR(reqData)
-              .then(() => {
+              .onOk(() => {
                 // this.ajaxLoadAllLeadInfo();
                 this.$q.loading.hide();
                 this.$q.notify({

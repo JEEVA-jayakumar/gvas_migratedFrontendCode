@@ -69,7 +69,7 @@
                           icon="far fa-trash-alt" />
                       </div>
                       <div class="col-auto q-px-xs">
-                        <downloadExcel :data="getAllUsers" :fields="json_fields" name="UserDetails.xls">
+                        <downloadExcel :rows="getAllUsers" :fields="json_fields" name="UserDetails.xls">
                           <q-btn outline color="grey-9" label="Download as excel" />
                         </downloadExcel>
                       </div>
@@ -88,7 +88,7 @@
         </q-tab-panel>
 
         <q-tab-panel name="tab-2" class="no-padding">
-          <!--START: table Data   :data="getImplementationQueueUnassignedList"  -->
+          <!--START: table Data   :rows="getImplementationQueueUnassignedList"  -->
           <q-table :rows="getAllUsers" :columns="columns" table-class="customSATableClass" :filter="filterSearch"
             selection="multiple" v-model:selected="formData.selectedUsersToDelete" v-model:pagination="paginationControl"
             :loading="tableAjaxLoading" :filter-method="myCustomSearchFilter" row-key="userId" color="grey-9">
@@ -373,7 +373,8 @@ export default {
                 : "Are you sure want to delete users?",
             ok: "Continue",
             cancel: "Cancel"
-          }).onOk(() => {
+          })
+          .onOk(() => {
             this.$q.loading.show({
               delay: 100, // ms
               message: "Please Wait",
@@ -388,7 +389,7 @@ export default {
 
             if (this.activeTab == "tab-2") {
               this.activateUsers(usersSelectSync)
-                .then(() => {
+                .onOk(() => {
                   this.FETCH_ALL_USERS_DATA();
                   this.formData.selectedUsersToDelete = [];
                   this.$q.loading.hide();
@@ -399,13 +400,15 @@ export default {
                     icon: "thumb_up"
                   });
                 })
-                .catch(error => {
+                .onCancel(error => {
                   this.$q.loading.hide();
                   this.$q.notify({
                     color: "negative",
                     position: "bottom",
                     message:
-                      error.data?.message || "Please Try Again Later !",
+                      error.body.message == null
+                        ? "Please Try Again Later !"
+                        : error.body.message,
                     icon: "thumb_down"
                   });
                 });
@@ -423,7 +426,7 @@ export default {
                   this.deteledUsers = response.data.data;
                   this.toggleDeleteUsersModal();
                 })
-                .catch(error => {
+                .onCancel(error => {
                   this.$q.loading.hide();
                   this.$q.notify({
                     color: "negative",
@@ -437,7 +440,7 @@ export default {
                 });
             }
           })
-          .catch(err => {
+          .onCancel(err => {
             console.log(err);
             this.$q.loading.hide();
             this.$q.notify({
@@ -513,7 +516,7 @@ export default {
       this.FETCH_ALL_USERS_DATA(
         this.activeTab == "tab-2" ? this.$INACTIVE_FLAG_FOR_LIST : undefined
       )
-        .then(() => {
+        .onOk(() => {
           this.paginationControl.page =
             this.$route.params.page == undefined ? 1 : this.$route.params.page;
           this.paginationControl.rowsPerPage =
@@ -522,7 +525,7 @@ export default {
               : this.paginationControl.perPage;
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -542,10 +545,8 @@ export default {
     //API to fetch hierarchy
     ajaxLoadDataForHeirarchyFilter() {
       this.FETCH_ALL_HIERARCHIES_DATA().then(response => {
-        this.customizedHirarchyFilter = _.cloneDeep(this.getAllHierarchiesData);
-        if (!this.customizedHirarchyFilter.find(h => h.value === 0)) {
-           this.customizedHirarchyFilter.unshift({ value: 0, label: "All" });
-        }
+        this.customizedHirarchyFilter = this.getAllHierarchiesData;
+        this.customizedHirarchyFilter.unshift({ value: 0, label: "All" });
       });
     },
 
@@ -564,11 +565,11 @@ export default {
       });
       this.activeItemId = itemIndex;
       if (tab.value == 0) {
-        this.FETCH_ALL_USERS_DATA().then(() => {
+        this.FETCH_ALL_USERS_DATA().onOk(() => {
           this.$q.loading.hide();
         });
       } else {
-        this.FETCH_ALL_USERS_BY_HIERARCHY_DATA(tab.value).then(() => {
+        this.FETCH_ALL_USERS_BY_HIERARCHY_DATA(tab.value).onOk(() => {
           this.$q.loading.hide();
         });
       }

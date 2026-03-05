@@ -3,7 +3,7 @@
     maximized
     no-backdrop-dismiss
     no-esc-dismiss
-    v-model="toggleModal"
+    :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)"
     :content-css="{padding:'50px 5px'}"
   >
     <div>

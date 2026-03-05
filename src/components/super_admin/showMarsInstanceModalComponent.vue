@@ -1,8 +1,8 @@
 <template>
     <q-dialog
-      minimized
+      persistent
       position="right"
-      v-model="toggleModal"
+      :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)"
       no-backdrop-dismiss
       @escape-key="emitModalClose"
       class="customModalOverlay"
@@ -16,13 +16,13 @@
           <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
         </div>
       </div>
-      <q-tabs v-model="tab" color="grey-9">
+      <q-tabs v-model="activeTab" color="grey-9">
         <!-- Tabs - notice  -->
         <q-tab @click="leadSourceActiveList" label="Active List" name="tab-1"/>
         <!-- <q-tab @click="leadSourceDeActiveList" label="De-Actived List" name="tab-2"/> -->
         <!--  -->
 </q-tabs>
-<q-tab-panels v-model="tab" animated>
+<q-tab-panels v-model="activeTab" animated>
 <q-tab-panel name="tab-1">
           <q-table
             :rows="activeLeadSourceList"
@@ -242,13 +242,13 @@
       ...mapActions("MarsInstance", ["GET_MARS_INSTITUTION_DETAILS", "DELETE_INSTANCE","UPDATE_INSTANCE"]),
       /* START >> Function to save, update or delete */
       leadSourceActiveList() {
-        this.GET_MARS_INSTITUTION_DETAILS().then(() => {
+        this.GET_MARS_INSTITUTION_DETAILS().onOk(() => {
           this.activeLeadSourceList = this.getMarsInstanceDetails.filter(service => service.institutionActive == true);
           // this.deActiveTableData = this.getAllHierarchiesData.filter(service => service.active == false);
         });
       },
       leadSourceDeActiveList() {
-        this.GET_MARS_INSTITUTION_DETAILS().then(() => {
+        this.GET_MARS_INSTITUTION_DETAILS().onOk(() => {
           this.deActiveLeadSourceList = this.getMarsInstanceDetails.filter(service => service.institutionActive == false)
         });
       },
@@ -350,7 +350,7 @@
               });
             this.$q.loading.hide();
           })
-          .catch(() => {
+          .onCancel(() => {
             this.$q.notify({
               color: "negative",
               position: "bottom",

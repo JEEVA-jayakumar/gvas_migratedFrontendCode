@@ -1,10 +1,10 @@
 <template>
   <div>
     <q-dialog
-      minimized
+      persistent
       no-backdrop-dismiss
       class="customModalOverlay"
-      v-model="toggleModel"
+      :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)"
       @hide="emitfnshowEditPincode()"
       @escape-key="emitfnshowEditPincode()"
       :content-css="{padding:'30px',minWidth: '40vw'}"

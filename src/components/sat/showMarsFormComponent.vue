@@ -13060,7 +13060,7 @@
               message: "Processing ..",
             });
 
-            this.MOVE_BACK_DOCUMENT_VERIFICATION_STAGE(formData).then(() => {
+            this.MOVE_BACK_DOCUMENT_VERIFICATION_STAGE(formData).onOk(() => {
               this.$router.push("/sat/lead/validation/" + this.$route.params.id);
               this.$q.loading.hide();
             });
@@ -13097,12 +13097,12 @@
         /* API call to fetch regions */
         self
           .REGION_FROM_MARS(institutionCode)
-          .then(() => {
+          .onOk(() => {
             self.regionOptions = [];
             return self.regionsFromMars.items.map((oo) => {
               self.regionOptions.push({ label: oo.name, value: oo.code });
             });
-          }).then(() => {
+          }).onOk(() => {
             /* API call to fetch sharing partner */
             return self.LEAD_FROM_FROM_MARS(institutionCode).then((response) => {
               self.leadFromOptions = [];
@@ -13123,7 +13123,7 @@
               self.merchant.salesInformation.leadFrom =
                 this.propLeadDeatils.leadSource.sourceName;
             });
-          }).then(() => {
+          }).onOk(() => {
             /* API call to fetch sales person */
             return self
               .SALES_PERSON_FROM_MARS(institutionCode)
@@ -13143,7 +13143,7 @@
 
                 // self.salesPersonOptions = salesPerson;
               });
-          }).then(() => {
+          }).onOk(() => {
             /* API call to fetch city */
             return self.CITY_FROM_MARS().then((response) => {
               self.cityOptions = [];
@@ -13152,7 +13152,7 @@
               });
               // self.cityOptions = city;
             });
-          }).then(() => {
+          }).onOk(() => {
             /* API call to fetch state */
             return self.STATE_FROM_MARS().then((response) => {
               self.stateOptions = [];
@@ -13161,7 +13161,7 @@
               });
               // self.stateOptions = stateArr;
             });
-          }).then(() => {
+          }).onOk(() => {
             /* API call to fetch state */
             return self.MCC_FROM_MARS().then((response) => {
               self.mccSearchSet = [];
@@ -13181,7 +13181,7 @@
               });
               // self.mccSearchSet = mccSubArr;
             });
-          }).then(() => {
+          }).onOk(() => {
             /* API call to fetch rental plan */
             return self
               .RENTAL_PLAN_FROM_MARS(institutionCode)
@@ -13192,7 +13192,7 @@
                 });
                 // self.rentalPlanSet = rentalPlan;
               });
-          }).then(() => {
+          }).onOk(() => {
             /* API call to fetch bank list */
             return self.BANK_LIST_FROM_MARS(institutionCode).then((response) => {
               // let bankList = [];
@@ -13202,7 +13202,7 @@
               // self.bankListSet = bankList;
             });
             return true;
-          }).then(() => {
+          }).onOk(() => {
             /* API call to fetch bank list */
             return self.NETWORK_PROVIDER(institutionCode).then((response) => {
               // let bankList = [];
@@ -13215,7 +13215,7 @@
               // self.networkProviderListSet = bankList;
             });
             return true;
-          }).then(() => {
+          }).onOk(() => {
             /* API call to fetch bank list */
             return self.SERVICE_PROVIDER(institutionCode).then((response) => {
               // let bankList = [];
@@ -13228,14 +13228,14 @@
               // self.bankListSet = bankList;
             });
             return true;
-          }).then(() => {
+          }).onOk(() => {
             if (
               this.propLeadDeatils.marsFormSubmitAction == 1 ||
               this.propLeadDeatils.marsFormSubmitAction == 2
             ) {
               return this.FETCH_SAVED_DATA_FROM_OWN_DB({
                 leadId: this.$route.params.id,
-              }).then(() => {
+              }).onOk(() => {
                   this.merchant.additionalInfo.branchZone = JSON.parse(
                     this.marsSavedDataFromInternal.additionalInfo
                   ).branchZone;
@@ -13302,7 +13302,7 @@
                         .applicationDate
                     )
                   );
-                }).then(() => {
+                }).onOk(() => {
                   return this.$set(
                     this.marsSavedDataFromInternal.salesInformation,
                     "aggreementDate",
@@ -13311,7 +13311,7 @@
                         .aggreementDate
                     )
                   );
-                }).then(() => {
+                }).onOk(() => {
                   return this.$set(
                     this.marsSavedDataFromInternal.salesInformation,
                     "loanDisbursementDate",
@@ -13320,7 +13320,7 @@
                         .loanDisbursementDate
                     )
                   );
-                }).then(() => {
+                }).onOk(() => {
                   return this.$set(
                     this.marsSavedDataFromInternal.salesInformation,
                     "tenureStartDate",
@@ -13329,7 +13329,7 @@
                         .tenureStartDate
                     )
                   );
-                }).then(() => {
+                }).onOk(() => {
                   return this.$set(
                     this.marsSavedDataFromInternal.companyInformation,
                     "establishYear",
@@ -13338,7 +13338,7 @@
                         .establishYear
                     )
                   );
-                }).then(() => {
+                }).onOk(() => {
                   return this.$set(
                     this.marsSavedDataFromInternal.bankInformation
                       .collectionDetails,
@@ -13348,7 +13348,7 @@
                         .collectionDetails.chequeDepositedDate
                     )
                   );
-                }).then(() => {
+                }).onOk(() => {
                   return this.$set(
                     this.marsSavedDataFromInternal.bankInformation
                       .collectionDetails,
@@ -13358,7 +13358,7 @@
                         .collectionDetails.collectedDate
                     )
                   );
-                }).then(() => {
+                }).onOk(() => {
                   return this.$set(
                     this.marsSavedDataFromInternal.bankInformation
                       .collectionDetails,
@@ -13368,7 +13368,7 @@
                         .collectionDetails.chequeDate
                     )
                   );
-                }).then(() => {
+                }).onOk(() => {
                   return this.$set(
                     this.marsSavedDataFromInternal.businessInformation,
                     "memberSince",
@@ -13377,7 +13377,7 @@
                         .memberSince
                     )
                   );
-                }).then(() => {
+                }).onOk(() => {
                   return this.$set(
                     this.marsSavedDataFromInternal.businessInformation,
                     "lastTurnoverYear",
@@ -13386,7 +13386,7 @@
                         .lastTurnoverYear
                     )
                   );
-                }).then(() => {
+                }).onOk(() => {
                   delete this.marsSavedDataFromInternal.salesInformation
                     .salesPersonCode;
                   this.merchant.salesInformation =
@@ -13488,14 +13488,14 @@
             } else {
               return true;
             }
-          }).then(() => {
+          }).onOk(() => {
             this.merchant.paymentDetails.cashAtPosEnabled = this.propLeadDeatils
               .posEnable
               ? "Y"
               : "N";
             this.$q.loading.hide();
           })
-          .catch(() => {
+          .onCancel(() => {
             this.$q.loading.hide();
           });
       },
@@ -13569,7 +13569,7 @@
                 icon: "thumb_up",
               });
             })
-            .catch(() => {
+            .onCancel(() => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -13601,7 +13601,7 @@
             this.tmpVasMapping = nameOfVas;
             return true;
           })
-          .catch(() => {
+          .onCancel(() => {
             this.$q.notify({
               color: "negative",
               position: "bottom",
@@ -13666,7 +13666,7 @@
               icon: "thumb_up",
             });
           })
-          .catch(() => {
+          .onCancel(() => {
             this.$q.notify({
               color: "negative",
               position: "bottom",
@@ -13841,7 +13841,7 @@
             self
               .EQUITAS_FRM_DATA(equitasData)
               .then((response) => { })
-              .catch(() => {
+              .onCancel(() => {
                 self.$q.loading.hide();
               });
           }
@@ -14165,7 +14165,7 @@
                         self.$q.loading.hide();
                       });
                   })
-                  .catch(error => {
+                  .onCancel(error => {
                     self.$q.loading.hide();
                     if (
                       error.body.name == "INVALID APPLICATION NUMBER" &&
@@ -14324,7 +14324,7 @@
                               self.$q.loading.hide();
                             });
                         })
-                        .catch(error => {
+                        .onCancel(error => {
                           this.merchant.companyInformation.constitutionName = this.propLeadDeatils.merchantType.merchantTypeName;
                           this.$set(
                             finalRequest.merchant.salesInformation,
@@ -14481,7 +14481,7 @@
                   });
               }
             })
-            .catch(() => {
+            .onCancel(() => {
               self.$q.loading.hide();
             });
         }
@@ -14568,7 +14568,7 @@
         this.FETCH_ALL_MPOS_SUBCATEGORY(this.merchant.additionalInfo.category);
       },
       fnFetchZone() {
-        //  this.FETCH_ALL_DISTRICT(this.merchant.salesInformation.iaLocation).then(() => {
+        //  this.FETCH_ALL_DISTRICT(this.merchant.salesInformation.iaLocation).onOk(() => {
 
         //     let assumeArr = [];
         //     this.getAllDistrict.district.map(function(value) {
@@ -14622,7 +14622,7 @@
       },
       applicationNumberFromToHands(leadid) {
         this.FETCH_APPLICATION_NUMBER(leadid)
-          .then(() => {
+          .onOk(() => {
 
             console.log("TWO HANDS APP NUM", this.getApplicationNumber.applicationNumber)
 

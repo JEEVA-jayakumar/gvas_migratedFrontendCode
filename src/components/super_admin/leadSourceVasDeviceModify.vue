@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-dialog minimized no-backdrop-dismiss v-model="propToggleModal" @hide="toggleModal" @escape-key="toggleModal"
+    <q-dialog persistent no-backdrop-dismiss :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)" @hide="toggleModal" @escape-key="toggleModal"
       class="customModalOverlay" :content-css="{padding:'30px',minWidth: '30vw'}">
       <form>
         <div class="row gutter-sm q-py-sm items-center">
@@ -162,7 +162,7 @@ export default {
               label: item.sourceName
             });
           });
-        }).then(() => {
+        }).onOk(() => {
           self.FETCH_DEVICES_DATA()
             .then(() => {
               return _.map(self.getAllDevicesInfo, item => {

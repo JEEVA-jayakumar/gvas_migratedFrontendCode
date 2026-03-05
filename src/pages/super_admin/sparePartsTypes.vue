@@ -281,7 +281,7 @@ export default {
           this.activeTableData = this.getsparePartsGetTypes.filter(service => service.is_active == true);
           this.deActiveTableData = this.getsparePartsGetTypes.filter(service => service.is_active == false);
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },

@@ -1,8 +1,8 @@
 <template>
   <div>
     <q-dialog
-      minimized
-      v-model="propToggleModal"
+      persistent
+      :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)"
       @hide="toggleModal"
       @escape-key="toggleModal"
       no-backdrop-dismiss

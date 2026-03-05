@@ -97,7 +97,7 @@ export default {
     ...mapActions("phonePeCrm", ["ESCALATE_TO_SAT"]),
 
     issueLoadData() {
-      this.FETCH_ISSUE_DATAS().then(() => {
+      this.FETCH_ISSUE_DATAS().onOk(() => {
         this.dropDown.issueOptions = this.getissueDatasDetails.map(item => ({
           value: item,
           label: item.name
@@ -107,7 +107,7 @@ export default {
 
     issueDocumentType(val) {
       if (!val) return;
-      this.FETCH_SUB_ISSUE_DATAS(val.id).then(() => {
+      this.FETCH_SUB_ISSUE_DATAS(val.id).onOk(() => {
         this.dropDown.subIssueOptions = this.getsubIssueDatasDetails.map(item => ({
           value: item,
           label: item.name
@@ -130,7 +130,7 @@ export default {
             subIssue : this.formData.subIssue,
         };
         this.ESCALATE_TO_SAT(payload)
-          .then(() => {
+          .onOk(() => {
               this.$q.notify({
                   color: "positive",
                   message: "Escalated To SAT!",
@@ -139,7 +139,7 @@ export default {
               this.$q.loading.hide();
               this.toggleModal = false;
           })
-          .catch(error => {
+          .onCancel(error => {
               const message = (error.body && error.body.message) ? error.body.message : "Error escalating.";
               this.$q.notify({ color: "negative", message: message });
               this.$q.loading.hide();

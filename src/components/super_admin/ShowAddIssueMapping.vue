@@ -1,6 +1,6 @@
 <template>
     <div>
-      <q-dialog minimized v-model="toggleModel" @hide="emitfnShowAddNewIssueMapping"
+      <q-dialog persistent :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)" @hide="emitfnShowAddNewIssueMapping"
         @escape-key="emitfnShowAddNewIssueMapping" class="customModalOverlay"
         :content-css="{ padding: '30px', minWidth: '50vw' }">
         <form>

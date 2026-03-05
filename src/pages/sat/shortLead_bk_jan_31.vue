@@ -634,7 +634,7 @@ export default {
           }
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -732,7 +732,7 @@ export default {
                 this.$q.loading.hide();
               });
           })
-          .catch(() => {
+          .onCancel(() => {
             this.$q.notify({
               color: "negative",
               position: "bottom",

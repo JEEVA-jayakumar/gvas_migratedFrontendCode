@@ -1,7 +1,7 @@
 <template>
     <div>
       <q-dialog
-        minimized
+        persistent
         v-model="propShowCreatePrefix"
         @hide="toggleModal"
         @escape-key="toggleModal"

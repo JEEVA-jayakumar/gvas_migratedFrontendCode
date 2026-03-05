@@ -403,7 +403,7 @@ export default {
            };
            this.$q.loading.show();
         this.EDIT_SERVICE_REQUEST_TYPES(param)
-          .then(() => {
+          .onOk(() => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "positive",
@@ -413,7 +413,7 @@ export default {
             });
             this.emitfnshowEditServiceType();
           })
-          .catch(error => {
+          .onCancel(error => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
@@ -446,7 +446,7 @@ export default {
             customClass: "shadow-none"
           });
            this.ACTIVE_SERVICE_ISSUE_TYPES(param)
-          .then(() => {
+          .onOk(() => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "positive",
@@ -481,7 +481,7 @@ export default {
     //   console.log("FINAL PARAM SUBMIT--------->",JSON.stringify(param))
     //     this.$q.loading.show();
     //     this.EDIT_SERVICE_REQUEST_TYPES(param)
-    //       .then(() => {
+    //       .onOk(() => {
     //         this.$q.loading.hide();
     //         this.$q.notify({
     //           color: "positive",
@@ -491,7 +491,7 @@ export default {
     //         });
     //         this.emitfnshowEditServiceType();
     //       })
-    //       .catch(error => {
+    //       .onCancel(error => {
     //         this.$q.loading.hide();
     //         this.$q.notify({
     //           color: "negative",
@@ -512,7 +512,7 @@ export default {
     //     .then(res => {
     //       this.DeactivetableData = this..filter(service => service.serviceReqType.active == false);
     //      })
-    //     .catch(() => {
+    //     .onCancel(() => {
     //       this.$q.loading.hide();
     //     });
     //   } else if(tab == "tab-3"){
@@ -524,7 +524,7 @@ export default {
     //         JSON.stringify(this.tableData1)
     //       );
     //     })
-    //     .catch(() => {
+    //     .onCancel(() => {
     //       this.$q.loading.hide();
     //     });
     //   }else{
@@ -532,7 +532,7 @@ export default {
     //     .then(res => {
     //        this.ActivetableData = this..filter(service => service.serviceReqType.active == true);
     //      })
-    //     .catch(() => {
+    //     .onCancel(() => {
     //       this.$q.loading.hide();
     //     });
     //   }
@@ -623,7 +623,7 @@ export default {
            this.ActivetableData = this.getsubTaskDetails.filter(service => service.active == true);
              console.log("ActivetableData------->", JSON.stringify(this.ActivetableData))
              })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -638,7 +638,7 @@ export default {
            this.DeactiveissueTypes = this.getsubTaskDetails.filter(service => service.active == false);
              this.ActiveissueTypes = this.getsubTaskDetails.filter(service => service.active == true);
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },

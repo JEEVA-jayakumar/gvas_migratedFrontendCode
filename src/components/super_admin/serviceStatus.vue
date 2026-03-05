@@ -251,7 +251,7 @@ export default {
             customClass: 'shadow-none'
           })
           this.EDIT_SERVICE_STATUS_TYPES(param)
-            .then(() => {
+            .onOk(() => {
               this.$q.loading.hide()
               this.$q.notify({
                 color: 'positive',
@@ -324,7 +324,7 @@ export default {
           this.ActivetableData = this.getserviceRequestStatusDetails.filter(service => service.active == true)
           console.log('ActivetableData------->', JSON.stringify(this.ActivetableData))
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide()
         })
     },
@@ -339,7 +339,7 @@ export default {
           this.DeactiveissueTypes = this.getsubTaskDetails.filter(service => service.active == false)
           this.ActiveissueTypes = this.getsubTaskDetails.filter(service => service.active == true)
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide()
         })
     },
