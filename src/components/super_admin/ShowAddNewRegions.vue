@@ -84,17 +84,14 @@ export default {
       },
     },
   },
-computed:{
+computed: {
+    $v() { return this.v$; },
      ...mapGetters("SuperAdminUsers", ["getAllRegionsData"]),
      ...mapGetters("regionGroupDatas", ["getAllRegionGroupData"])
 
 },
   created() {
     this.fetchAllRegionGroupData();
-  },
-
-  computed: {
-    () { return this.v$; }
   },
   methods: {
     ...mapActions("SuperAdminUsers", [

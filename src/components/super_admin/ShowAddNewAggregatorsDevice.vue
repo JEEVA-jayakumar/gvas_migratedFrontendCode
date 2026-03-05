@@ -95,6 +95,7 @@ export default {
         this.ajaxAggregatordeviceList();
     },
     computed: {
+    $v() { return this.v$; },
         ...mapGetters("superAdminAggregators", ["getCreatedAggregatorList", "getActiveCreatedAggregatorList"])
     },
     methods: {

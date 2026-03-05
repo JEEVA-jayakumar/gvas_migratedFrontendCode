@@ -103,6 +103,7 @@ export default {
     this.ajaxLoadData();
   },
   computed: {
+    $v() { return this.v$; },
     ...mapGetters("SA_Devices", ["getAllDevicesInfo", "getMarsDeviceModel"]),
     ...mapGetters("leadSource", ["getActiveLeadSource"]),
     ...mapGetters("vasCreation", ["getAllVasDetails"])

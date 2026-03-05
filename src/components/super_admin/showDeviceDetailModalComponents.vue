@@ -199,6 +199,7 @@ export default {
   },
 
   computed: {
+    $v() { return this.v$; },
     ...mapGetters("SA_Devices", ["getAllDevicesInfo"])
   },
 

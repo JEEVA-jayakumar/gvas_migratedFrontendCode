@@ -87,6 +87,9 @@ export default {
       }
     };
   },
+  computed: {
+    $v() { return this.v$; }
+  },
   methods: {
     ...mapActions("SuperAdminUsers", ["FETCH_ALL_HIERARCHIES_DATA", "FEED_NEW_HIERARCHY_DATA"]),
 

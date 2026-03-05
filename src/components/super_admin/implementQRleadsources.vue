@@ -151,6 +151,7 @@ export default {
     /* End: Load user table data filter > DeviceTypes */
   },
   computed: {
+    $v() { return this.v$; },
     ...mapGetters("ACTIVE_DEACTIVE_LEAD_SOURCE", ["getDeactiveLeadSource"]),
 
     ...mapGetters("QRList", ["getAllQRList"]),

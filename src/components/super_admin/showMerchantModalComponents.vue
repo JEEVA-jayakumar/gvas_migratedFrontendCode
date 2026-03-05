@@ -224,6 +224,7 @@ export default {
     this.merchantTypeActiveList();
   },
   computed: {
+    $v() { return this.v$; },
     ...mapGetters("merchantTypes", [
       "getActiveMerchantTypes",
       "getDeActivatedMerchantTypes"

@@ -178,6 +178,9 @@ export default {
       activeIndex: null
     };
   },
+  computed: {
+    $v() { return this.v$; }
+  },
   methods: {
     // Function to toggle lead information pop up screen
     toggleLeadInformation(leadDetails) {

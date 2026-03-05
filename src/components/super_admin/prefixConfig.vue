@@ -257,6 +257,7 @@ export default {
   },
 
   computed: {
+    $v() { return this.v$; },
     // ...mapGetters("InventoryScanAddDevice", ["getAddDeviceScannedItems"]),
     ...mapGetters("InventoryCentral", [
       "getAllInventoryDevicesTypesData",

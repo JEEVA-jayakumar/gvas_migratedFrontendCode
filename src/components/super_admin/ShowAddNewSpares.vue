@@ -82,13 +82,10 @@ export default {
       },
     },
   },
-computed:{
+computed: {
+    $v() { return this.v$; },
      ...mapGetters("SuperAdminUsers", ["getAllRegionsData"]),
 },
-
-  computed: {
-    () { return this.v$; }
-  },
   methods: {
     ...mapActions("SuperAdminUsers", [
       "FETCH_ALL_REGIONS_DATA",

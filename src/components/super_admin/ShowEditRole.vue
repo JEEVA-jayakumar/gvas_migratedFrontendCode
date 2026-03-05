@@ -118,9 +118,8 @@ export default {
     },
   },
   created() {},
-
   computed: {
-    () { return this.v$; }
+    $v() { return this.v$; }
   },
   methods: {
     ...mapActions("SuperAdminUsers", [

@@ -193,6 +193,9 @@ export default {
       ]
     };
   },
+  computed: {
+    $v() { return this.v$; }
+  },
   methods: {
     toggleReAssignLeadsModal(details) {
       this.reAssignLeadsModal = !this.reAssignLeadsModal;

@@ -144,6 +144,7 @@ export default {
     //   console.log("Region Name---------------->"+JSON.stringify(this.formData.regionGroupName))
   },
   computed: {
+    $v() { return this.v$; },
     ...mapGetters("SuperAdminUsers", ["getAllRegionsData"]),
     ...mapGetters("serviceRequest", ["getserviceRequestIssueTypes"]),
     ...mapGetters("ServiceRequestStatus", ["getserviceRequestStatusDetails"])

@@ -86,7 +86,8 @@ export default {
     //   },
     },
   },
-computed:{
+computed: {
+    $v() { return this.v$; },
      ...mapGetters("SuperAdminUsers", ["getAllRegionsData"]),
      ...mapGetters("regionGroupDatas", ["getAllRegionGroupData"])
 
@@ -94,10 +95,6 @@ computed:{
 //   created() {
 //     this.fetchAllRegionGroupData();
 //   },
-
-  computed: {
-    () { return this.v$; }
-  },
   methods: {
     ...mapActions("SuperAdminUsers", [
       "FETCH_ALL_REGIONS_DATA",

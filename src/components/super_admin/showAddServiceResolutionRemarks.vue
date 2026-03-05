@@ -101,16 +101,13 @@ export default {
       }
     },
   },
-computed:{
+computed: {
+    $v() { return this.v$; },
      ...mapGetters("serviceRequest", ["getserviceResolutionDeatils"])
 },
 created(){
     this.fnAddSubTaskDetails();
 },
-
-  computed: {
-    () { return this.v$; }
-  },
   methods: {
     ...mapActions("serviceRequest", ["FETCH_SERVICE_RESOLUTION_DATAS","POST_SERVICE_RESOLUTION_REMARKS"]),
     emitfnShowAddServiceResolutionRemarks() {

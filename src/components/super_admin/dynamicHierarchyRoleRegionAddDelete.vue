@@ -131,6 +131,7 @@ export default {
   },
 
   computed: {
+    $v() { return this.v$; },
     ...mapGetters("SuperAdminUsers", [
       "getAllRolesForUserCreation",
       "getAllUsersForUserCreation",

@@ -142,6 +142,9 @@ export default {
     };
   },
 
+  computed: {
+    $v() { return this.v$; }
+  },
   methods: {
     emitfnshowAddPermissions(propShowAddPermissions) {
       this.$emit("emitfnshowAddPermissions", propShowAddPermissions);

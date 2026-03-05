@@ -78,6 +78,9 @@ export default {
       }
     };
   },
+  computed: {
+    $v() { return this.v$; }
+  },
   methods: {
     ...mapActions("pincodes", ["FETCH_ALL_PINCODES", "ADD_NEW_PINCODE"]),
 

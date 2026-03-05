@@ -145,6 +145,7 @@ export default {
     };
   },
   computed: {
+    $v() { return this.v$; },
     ...mapGetters("leadSourceVasDeviceConfig", ["getLsVasDeviceDetails"])
   },
   created() {

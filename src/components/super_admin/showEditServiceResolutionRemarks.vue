@@ -129,6 +129,7 @@ export default {
     this.formData.category = this.propRowDetails1.category;
   },
   // computed: {
+    $v() { return this.v$; },
   //   ...mapGetters("SuperAdminUsers", ["getAllRegionsData"])
   // },
   methods: {

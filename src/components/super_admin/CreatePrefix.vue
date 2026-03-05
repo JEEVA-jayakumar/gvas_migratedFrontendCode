@@ -135,9 +135,8 @@ import { integer, required } from "@vuelidate/validators";
         // },
       }
     },
-  
-    computed: {
-    () { return this.v$; }
+  computed: {
+    $v() { return this.v$; }
   },
   methods: {
       ...mapActions("leadSource", ["ADD_NEW_LEAD_SOURCE"]),

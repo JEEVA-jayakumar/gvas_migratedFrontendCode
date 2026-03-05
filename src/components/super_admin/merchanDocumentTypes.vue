@@ -272,6 +272,7 @@ export default {
     }
   },
   computed: {
+    $v() { return this.v$; },
     ...mapGetters("merchantTypes", ["getActiveMerchantTypes"]),
     ...mapGetters("merchantDocumentTypes", [
       "getActiveMerchantDocumentTypes",

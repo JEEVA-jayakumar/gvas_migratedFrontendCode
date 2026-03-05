@@ -150,7 +150,7 @@ export default {
     this.activeDocumentMerchantType();
   },
   computed: {
-    () { return this.v$; }
+    $v() { return this.v$; }
   },
   methods: {
     ...mapActions("merchantDocumentTypes", ["UPDATE_MERCHANT_DOCUMENT_TYPE"]),

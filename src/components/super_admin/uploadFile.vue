@@ -99,7 +99,8 @@ export default {
       cancelConfirmation: false
     };
   },
-  computed: {},
+  computed: {
+    $v() { return this.v$; },},
   methods: {
     ...mapActions("BankListUploadFile", ["UPLOAD_BANKLIST_FILE"]),
     emitfnshowUploadFile() {

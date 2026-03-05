@@ -90,17 +90,14 @@ export default {
       },
     },
   },
-computed:{
+computed: {
+    $v() { return this.v$; },
      ...mapGetters("SuperAdminUsers", ["getAllRegionsData"]),
      ...mapGetters("serviceRequest", ["getsubTaskDetails"])
 },
 created(){
     this.fnAddSubTaskDetails();
 },
-
-  computed: {
-    () { return this.v$; }
-  },
   methods: {
     ...mapActions("SuperAdminUsers", [
       "FETCH_ALL_REGIONS_DATA",

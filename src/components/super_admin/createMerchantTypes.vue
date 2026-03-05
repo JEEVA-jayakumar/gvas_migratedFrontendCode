@@ -90,9 +90,8 @@ export default {
       }
     }
   },
-
   computed: {
-    () { return this.v$; }
+    $v() { return this.v$; }
   },
   methods: {
     ...mapActions("merchantTypes", ["ADD_NEW_MERCHANT_TYPE"]),

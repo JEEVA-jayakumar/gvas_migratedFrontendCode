@@ -76,6 +76,7 @@ import { required } from "@vuelidate/validators";
       },
     },
     computed: {
+    $v() { return this.v$; },
       ...mapGetters("serviceRequest", ["getcsActiveSubIssueDetails"]),
     },
     created(){
