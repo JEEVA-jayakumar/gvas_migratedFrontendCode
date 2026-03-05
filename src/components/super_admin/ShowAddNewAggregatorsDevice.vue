@@ -1,7 +1,9 @@
 <template>
     <div>
-        <q-dialog v-model="toggleModal" @hide="emitfnShowAddNewAggregatorsDevice" no-backdrop-dismiss
+        <q-dialog v-model="toggleModal" @hide="emitfnShowAddNewAggregatorsDevice" persistent
             class="customModalOverlay" :content-css="{ padding: '30px', minWidth: '30vw' }">
+<q-card style="min-width: 350px;">
+
             <form>
                 <div class="text-h6 text-weight-regular q-py-md bottom-border items-center">
                     <q-icon name="add_box" size="25px" color="purple-9" />Add Aggregator Device
@@ -35,23 +37,27 @@
                             class="text-weight-regular text-grey-8" color="grey-9" label="Serial Number Length"
                             placeholder="Serial Number Length" />
                     </div>
-                    <div class="group" align="right">
-                        <q-btn outline align="right" icon="block" class="text-weight-regular text-grey-8" color="grey-6"
+                    <div class="group" align="side">
+                        <q-btn outline align="side" icon="block" class="text-weight-regular text-grey-8" color="grey-6"
                             @click="emitfnShowAddNewAggregatorsDevice()" label="Cancel" />
-                        <q-btn align="right" icon="check" @click="fnfinalsubmitDeviceType(formData)" color="purple-9"
+                        <q-btn align="side" icon="check" @click="fnfinalsubmitDeviceType(formData)" color="purple-9"
                             label="save" />
                     </div>
                 </div>
             </form>
-        </q-dialog>
+
+</q-card>
+</q-dialog>
     </div>
 </template>
   
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required, maxValue } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
     props: ["propShowAddNewAggregatorsDevice"],
     data() {
         return {
@@ -131,8 +137,7 @@ export default {
                         //   this.FETCH_DEVICES_DATA();
                         this.emitfnShowAddNewAggregatorsDevice("emitfnShowAddNewAggregatorsDevice");
                         location.reload();
-                    })
-                    .catch(error => {
+                    }).catch(() => {
                         this.$q.loading.hide();
                         this.$q.notify({
                             color: "negative",

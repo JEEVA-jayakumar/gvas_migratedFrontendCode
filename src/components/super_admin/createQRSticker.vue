@@ -61,7 +61,7 @@
           </div>
         </div>
         <div class="row group">
-          <div class="col" align="right">
+          <div class="col" align="side">
             <q-btn
               :disabled="submitDisabled"
               color="light-blue"
@@ -82,6 +82,7 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import {
   required,
   numeric,
@@ -94,6 +95,9 @@ import {
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "damagedDevices",
+  setup() {
+    return { v$: useVuelidate() };
+  },
   components: {},
   data() {
     return {
@@ -187,8 +191,7 @@ export default {
           });
 
           (this.formdata.leadSource = ""), (this.formdata.count = "");
-        })
-        .catch(error => {
+        }).catch(() => {
           this.$q.loading.hide();
           console.log(error);
           this.$q.notify({

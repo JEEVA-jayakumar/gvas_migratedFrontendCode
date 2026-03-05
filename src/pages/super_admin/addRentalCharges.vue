@@ -85,7 +85,7 @@
               </q-item>
             </q-list>
           </q-card-section>
-          <q-card-actions vertical align="right">
+          <q-card-actions vertical align="side">
             <q-btn label="submit" @click="fnEditRentalPlan(formData)" color="purple-9" />
           </q-card-actions>
         </q-card>
@@ -120,6 +120,7 @@
 
 <script>
 /* START >> Modal components Lead source, device, merchant type */
+import { useVuelidate } from "@vuelidate/core";
 import showLeadSourceModalComponent from "../../components/super_admin/showLeadSourceModalComponents.vue";
 import showDeviceDetailModalComponent from "../../components/super_admin/showDeviceDetailModalComponents.vue";
 import showPlanModalComponent from "../../components/super_admin/showPlanModalComponent.vue";
@@ -129,6 +130,7 @@ import { mapGetters, mapActions } from "vuex";
 import _ from "lodash";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "AddRentalCharges",
   components: {
     /* START >> Modal components Lead source, device, plan */
@@ -263,8 +265,7 @@ export default {
             message: response.data.message
           });
           this.resetForm();
-        })
-        .catch(error => {
+        }).catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

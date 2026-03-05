@@ -174,7 +174,7 @@
         </div>
       </div>
 
-      <div class="full-width group" align="right">
+      <div class="full-width group" align="side">
         <q-btn flat class="bg-white text-weight-regular text-grey-8" @click="GoToUsers()">Cancel</q-btn>
         <q-btn class="text-weight-regular" color="amber-9" @click="refreshData()">Reset</q-btn>
         <q-btn type="button" color="purple-9" @click="fnSubmitShowEditUser(formData.addUserDetails)">Submit</q-btn>
@@ -183,6 +183,7 @@
   </div>
 </template>
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { nullLiteral } from "babel-types";
 import {
   required,
@@ -196,6 +197,9 @@ import {
 } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       leadSourceOptions: [],
@@ -565,7 +569,7 @@ export default {
             // or
 
             detail: "Please ensure you have good network connectivity.",
-            position: "bottom", // 'top', 'left', 'bottom-left' etc
+            position: "bottom", // 'top', '', 'bottom-' etc
 
             actions: [
               {
@@ -821,8 +825,7 @@ export default {
                   icon: "thumb_up"
                 });
                 this.$router.push("/super/admin/users/");
-              })
-              .catch(error => {
+              }).catch(() => {
                 this.$q.loading.hide();
                 this.$q.notify({
                   type: "warning",

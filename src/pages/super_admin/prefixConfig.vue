@@ -8,7 +8,7 @@
               active-color="dark"
               indicator-color="dark"
               class="shadow-1"
-              align="left"
+              align=""
             >
               <q-tab name="prefix" label="Prfix Config" />
               <q-tab name="vasDevLs" label="LeadSource And Vas Device Config" />
@@ -29,11 +29,13 @@
   </template>
 
   <script>
-  import prefix from "../../components/super_admin/prefixConfig.vue";
+  import { useVuelidate } from "@vuelidate/core";
+import prefix from "../../components/super_admin/prefixConfig.vue";
   import vasDevLs from "../../components/super_admin/leadSourceVasDeviceConfig.vue";
 
   import { mapGetters, mapActions } from "vuex";
   export default {
+  setup() { return { v$: useVuelidate() } },
     name: "PrefixConfig",
 
     components: {

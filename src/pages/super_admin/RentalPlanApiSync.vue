@@ -45,9 +45,11 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "RentalPlanApiSync",
   data() {
     return {
@@ -77,8 +79,7 @@ export default {
             message: "Successfully created!",
             icon: "thumb_up"
           });
-        })
-        .catch(error => {
+        }).catch(() => {
           this.$q.loading.hide();
           this.$q.notify({
             color: "negative",
@@ -98,7 +99,7 @@ p {
 }
 
 label {
-  margin-right: 20px;
+  margin-side: 20px;
 }
 
 #textboxid {

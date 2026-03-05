@@ -35,6 +35,7 @@
 
 <script>
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "MarsApiSyncBase",
   props: {
     title: { type: String, required: true },
@@ -77,7 +78,7 @@ export default {
   max-width: 600px;
 }
 .mx-auto {
-  margin-left: auto;
-  margin-right: auto;
+  margin-: auto;
+  margin-side: auto;
 }
 </style>

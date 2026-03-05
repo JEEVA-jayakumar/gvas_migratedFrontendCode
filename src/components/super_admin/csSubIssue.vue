@@ -24,7 +24,7 @@
                   <q-input clearable color="grey-9" v-model="filterSearch1" placeholder="Search by Issue Name" class="q-mr-lg" />
                 </div>
                 <!--END: table filter,search -->
-                <div class="col-3" align="right">
+                <div class="col-3" align="side">
                   <q-btn no-caps class="text-weight-regular" label="Add Sub Task"
                     @click="fnShowAddNewCsSubIssue(props.row)" color="purple-9" size="md" />
                 </div>
@@ -73,11 +73,13 @@
     </q-page>
   </template>
   <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from '@vuelidate/validators';
   import ShowEditCSSubIssue from "../../components/super_admin/ShowEditCSSubIssue.vue";
   import ShowAddCSSubIssue from "../../components/super_admin/ShowAddCSSubIssue.vue";
   import { mapGetters, mapActions } from "vuex";
   export default {
+  setup() { return { v$: useVuelidate() } },
     name: "getcsActiveSubIssueDetails",
     components: {
       ShowEditCSSubIssue,
@@ -112,7 +114,7 @@ import { required } from '@vuelidate/validators';
             name: "name",
             required: true,
             label: "Issue Name",
-            align: "left",
+            align: "",
             field: row => {
             return row.name;
           },
@@ -122,7 +124,7 @@ import { required } from '@vuelidate/validators';
             name: "createdAt",
             required: true,
             label: "Created Date",
-            align: "left",
+            align: "",
             field: "createdAt",
             sortable: true
           },
@@ -130,7 +132,7 @@ import { required } from '@vuelidate/validators';
             name: "updatedAt",
             required: true,
             label: "Updated Date",
-            align: "left",
+            align: "",
             field: "updatedAt",
             sortable: true
           },
@@ -138,7 +140,7 @@ import { required } from '@vuelidate/validators';
             name: "action1",
             required: true,
             label: "",
-            align: "left",
+            align: "",
             field: "action1",
             sortable: false
           }
@@ -149,7 +151,7 @@ import { required } from '@vuelidate/validators';
             name: "name",
             required: true,
             label: "Issue Name",
-            align: "left",
+            align: "",
             field: row => {
             return row.name;
           },
@@ -159,7 +161,7 @@ import { required } from '@vuelidate/validators';
             name: "createdAt",
             required: true,
             label: "Created Date",
-            align: "left",
+            align: "",
             field: "createdAt",
             sortable: true
           },
@@ -167,7 +169,7 @@ import { required } from '@vuelidate/validators';
             name: "updatedAt",
             required: true,
             label: "Updated Date",
-            align: "left",
+            align: "",
             field: "updatedAt",
             sortable: true
           },
@@ -175,7 +177,7 @@ import { required } from '@vuelidate/validators';
             name: "action2",
             required: true,
             label: "",
-            align: "left",
+            align: "",
             field: "action1",
             sortable: false
           }
@@ -185,7 +187,7 @@ import { required } from '@vuelidate/validators';
           //   name: "id",
           //   required: true,
           //   label: "id",
-          //   align: "left",
+          //   align: "",
           //   field: row => {
           //     return row.id;
           //   },
@@ -195,7 +197,7 @@ import { required } from '@vuelidate/validators';
             name: "service_req_data",
             required: true,
             label: "Service Req Data",
-            align: "left",
+            align: "",
             // disable: row => {
             //   return row.serviceReqType.active == false;
             // },
@@ -209,7 +211,7 @@ import { required } from '@vuelidate/validators';
             name: "serviceReqIssueTypeSets",
             required: true,
             label: "Service Req Issue TypeSets",
-            align: "left",
+            align: "",
             field: row => {
               return row.serviceReqIssueTypeSets.serviceReqIssueType.name;
             },
@@ -220,7 +222,7 @@ import { required } from '@vuelidate/validators';
             name: "serviceRequestStatusSets",
             required: true,
             label: "Service Status",
-            align: "left",
+            align: "",
             field: row => {
               return row.name;
             },
@@ -230,7 +232,7 @@ import { required } from '@vuelidate/validators';
           //   name: "updated_date",
           //   required: true,
           //   label: "Updated Date",
-          //   align: "left",
+          //   align: "",
           //   field: "updated_date",
           //   sortable: true
           // },
@@ -239,7 +241,7 @@ import { required } from '@vuelidate/validators';
           //   name: "is_active",
           //   required: true,
           //   label: "is_active",
-          //   align: "left",
+          //   align: "",
           //   field: "is_active",
           //   sortable: false
           // },
@@ -247,7 +249,7 @@ import { required } from '@vuelidate/validators';
             name: "action",
             required: true,
             label: "",
-            align: "left",
+            align: "",
             field: "action",
             sortable: false
           }
@@ -288,7 +290,7 @@ import { required } from '@vuelidate/validators';
             message: "Are you sure want to active this issue?",
             ok: "Continue",
             cancel: "Cancel"
-          }).onOk(() => {
+          }).then(() => {
               this.$q.loading.show({
               delay: 100, // ms
               message: "Please Wait",
@@ -307,14 +309,14 @@ import { required } from '@vuelidate/validators';
                 this.$q.loading.hide();
                 this.ajaxSpareData();
               })
-          }).onCancel(error => {
+          }).catch(error => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
                 message:
-                  error.body.message == null
+                  error.data?.message == null
                     ? "Please Try Again Later !"
-                    : error.body.message,
+                    : error.data?.message,
                 icon: "thumb_down"
               });
               this.$q.loading.hide();
@@ -328,7 +330,7 @@ import { required } from '@vuelidate/validators';
             message: "Are you sure want to delete?",
             ok: "Continue",
             cancel: "Cancel"
-          }).onOk(() => {
+          }).then(() => {
             this.$q.loading.show({
               delay: 100, // ms
               message: "Please Wait",
@@ -347,7 +349,7 @@ import { required } from '@vuelidate/validators';
                 this.$q.loading.hide();
                 this.ajaxSpareData();
               });
-              }).onCancel(() => {
+              }).catch(() => {
             this.$q.notify({
               color: "negative",
               position: "bottom",

@@ -60,10 +60,10 @@
         </div>
       </div>
 
-      <div class="group" align="right">
-        <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitToggleMyAccount()">Cancel
+      <div class="group" align="side">
+        <q-btn flat size="md" align="side" class="bg-white text-weight-regular text-grey-8" @click="emitToggleMyAccount()">Cancel
         </q-btn>
-        <q-btn size="md" align="right" @click="fnAddRoleSubmit(formData)" color="purple-9">Save
+        <q-btn size="md" align="side" @click="fnAddRoleSubmit(formData)" color="purple-9">Save
         </q-btn>
       </div>
     </q-card>
@@ -179,8 +179,7 @@ export default {
           //  this.FETCH_ALL_USERS_DATA();
           //   this.$emit("emitfnShowEditUser", showEditUser);
             this.$emit("propsToggleModal1");
-          })
-          .catch(error => {
+          }).catch(() => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",

@@ -5,7 +5,7 @@
       class="bg-white text-grey-7 shadow-1"
       active-color="purple-9"
       indicator-color="purple-9"
-      align="left"
+      align=""
     >
       <q-tab name="active" label="Active Aggregators Devices" />
       <q-tab name="deactive" label="Deactivated Aggregators Devices" />
@@ -157,11 +157,13 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import showEditAggregatorDevice from "../../components/super_admin/showEditAggregatorDevice.vue";
 import ShowAddNewAggregatorsDevice from "../../components/super_admin/ShowAddNewAggregatorsDevice.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "AggregatorDeviceManagement",
   components: {
     showEditAggregatorDevice,
@@ -176,13 +178,13 @@ export default {
       filterSearch: "",
       paginationControl: { rowsPerPage: 10 },
       columns: [
-        { name: "name", required: true, label: "Aggregator", align: "left", field: row => row.aggregator?.name, sortable: true },
-        { name: "deviceName", required: true, label: "Device Name", align: "left", field: "deviceName", sortable: true },
+        { name: "name", required: true, label: "Aggregator", align: "", field: row => row.aggregator?.name, sortable: true },
+        { name: "deviceName", required: true, label: "Device Name", align: "", field: "deviceName", sortable: true },
         { name: "action", required: true, label: "Actions", align: "center" }
       ],
       columns1: [
-        { name: "name", required: true, label: "Aggregator", align: "left", field: row => row.aggregator?.name, sortable: true },
-        { name: "deviceName", required: true, label: "Device Name", align: "left", field: "deviceName", sortable: true },
+        { name: "name", required: true, label: "Aggregator", align: "", field: row => row.aggregator?.name, sortable: true },
+        { name: "deviceName", required: true, label: "Device Name", align: "", field: "deviceName", sortable: true },
         { name: "action1", required: true, label: "Actions", align: "center" }
       ],
       activeTableData: [],

@@ -795,10 +795,10 @@
                   </div>
                 </q-list>
               </q-card-section>
-              <q-card-actions align="right">
+              <q-card-actions align="side">
                 <q-btn
                   flat
-                  align="right"
+                  align="side"
                   class="bg-white text-weight-regular text-grey-8"
                   @click="emitfnshowEditMDR()"
                   >Cancel</q-btn
@@ -1125,7 +1125,7 @@ export default {
 .error-tooltip {
   position: absolute;
   top: 10%;
-  left: 30%;
+  : 30%;
   background: #d32f2f;
   color: white;
   padding: 5px 10px;
@@ -1140,7 +1140,7 @@ export default {
   content: "";
   position: absolute;
   top: -5px;
-  left: 10px;
+  : 10px;
   border-width: 5px;
   border-style: solid;
   border-color: transparent transparent red transparent;

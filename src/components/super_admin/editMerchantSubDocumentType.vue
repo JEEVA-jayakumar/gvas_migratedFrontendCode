@@ -5,10 +5,12 @@
       v-model="propToggleModal"
       @hide="toggleModal"
       @escape-key="toggleModal"
-      no-backdrop-dismiss
+      persistent
       class="customModalOverlay"
       :content-css="{padding:'30px',minWidth: '30vw'}"
     >
+<q-card style="min-width: 350px;">
+
       <div class="column group">
         <div class="text-h6 text-weight-regular q-py-md">Edit Merchant Sub Document Type</div>
         <div>
@@ -56,25 +58,28 @@
             @keyup.enter="submitMerchantSubDocumentTypeData(formData)"
           />
         </div>
-        <div align="right">
+        <div align="side">
           <q-btn
             flat
-            align="right"
+            align="side"
             class="bg-white text-weight-regular text-grey-8"
             @click="toggleModal()"
           >Cancel</q-btn>
           <q-btn
-            align="right"
+            align="side"
             @click="submitMerchantSubDocumentTypeData(formData)"
             color="purple-9"
           >Save</q-btn>
         </div>
       </div>
-    </q-dialog>
+
+</q-card>
+</q-dialog>
   </div>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import {
   integer,
   required,
@@ -84,6 +89,9 @@ import {
 import { mapGetters, mapActions } from "vuex";
 export default {
   // name: 'ComponentName',
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: [
     "propToggleMerchantSubdocumentTypes",
     "propActiveMerchantTypes",
@@ -141,6 +149,9 @@ export default {
   created() {
     this.activeDocumentMerchantType();
   },
+  computed: {
+    () { return this.v$; }
+  },
   methods: {
     ...mapActions("merchantDocumentTypes", ["UPDATE_MERCHANT_DOCUMENT_TYPE"]),
     toggleModal() {
@@ -176,7 +187,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
               icon: "thumb_down"
             });
           });

@@ -1,9 +1,9 @@
 <template>
   <q-dialog
     minimized
-    position="right"
+    position="side"
     v-model="toggleModal"
-    no-backdrop-dismiss
+    persistent
     @escape-key="emitModalClose"
     class="customModalOverlay"
     :content-css="{padding:'75px 25px',minWidth:'40vw',minHeight:'100vh'}"
@@ -12,7 +12,7 @@
       <div class="col">
         <div class="text-h6 text-weight-regular">Manage plan</div>
       </div>
-      <div class="col" align="right">
+      <div class="col" align="side">
         <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
       </div>
     </div>
@@ -31,14 +31,14 @@
               placeholder="Plan"
             />
           </div>
-          <div align="right">
+          <div align="side">
             <q-btn
-              align="right"
+              align="side"
               v-if="makeUpdateElementActive"
               @click="fnFinalUpdate(formData)"
               color="purple-9"
             >Update</q-btn>
-            <q-btn align="right" v-else @click="fnFinalCreate(formData)" color="purple-9">Save</q-btn>
+            <q-btn align="side" v-else @click="fnFinalCreate(formData)" color="purple-9">Save</q-btn>
           </div>
         </div>
       </q-card-section>
@@ -102,11 +102,15 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { mapActions, mapGetters } from "vuex";
 export default {
   props: ["propToggleModal"],
   // name: 'ComponentName',
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       toggleModal: this.propToggleModal,
@@ -129,7 +133,7 @@ export default {
       //     name: "plan",
       //     required: true,
       //     label: "Lead source",
-      //     align: "left",
+      //     align: "",
       //     field: "plan",
       //     sortable: true
       //   },
@@ -137,7 +141,7 @@ export default {
       //     name: "device",
       //     required: true,
       //     label: "Device",
-      //     align: "left",
+      //     align: "",
       //     field: "device",
       //     sortable: true
       //   },
@@ -145,7 +149,7 @@ export default {
       //     name: "merchant",
       //     required: true,
       //     label: "Merchant Type",
-      //     align: "left",
+      //     align: "",
       //     field: "merchant",
       //     sortable: true
       //   },
@@ -153,7 +157,7 @@ export default {
       //     name: "action",
       //     required: true,
       //     label: "",
-      //     align: "left",
+      //     align: "",
       //     field: "action",
       //     sortable: true
       //   }
@@ -220,7 +224,7 @@ export default {
           this.emitModalClose("emitToggleModal", "refresh");
           location.reload();
         })
-        .getPlan.catch(error => {
+        .getPlan.onCancel(() => {
           this.$q.loading.hide();
           this.$q.notify({
             color: "negative",

@@ -12,11 +12,11 @@
               <div class="col-md-8">
                 <div class="q-title text-weight-regular">Create Role/Permissions</div>
               </div>
-              <div class="col-md-2" align="right">
+              <div class="col-md-2" align="side">
                 <q-btn flat size="md" class="bg-white text-weight-regular text-grey-8" @click="emitfnCreaterolePermissions(false)">Cancel
                 </q-btn>
               </div>
-              <div class="col-md-2" align="right">
+              <div class="col-md-2" align="side">
                 <q-btn size="md" @click="fnCreateRoleSubmit(formData.rolePermissions)" color="purple-9">Save
                 </q-btn>
               </div>
@@ -131,6 +131,9 @@ export default {
     },
   },
 
+  computed: {
+    () { return this.v$; }
+  },
   methods: {
     ...mapActions("SuperAdminUsers", [
       "FEED_NEW_ROLE_WITH_PERMISSIONS",
@@ -169,8 +172,7 @@ export default {
             this.emitfnCreaterolePermissions(this.showCreateRoleToggle);
             this.FETCH_ALL_ROLES_PERMISSIONS_DATA();
             this.$q.loading.hide();
-          })
-          .catch(error => {
+          }).catch(() => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",

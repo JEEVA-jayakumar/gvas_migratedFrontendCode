@@ -3,10 +3,12 @@
     <q-dialog
       v-model="toggleModal"
       @hide="emitfnshowAddDeviceType"
-      no-backdrop-dismiss
+      persistent
       class="customModalOverlay"
       :content-css="{padding:'30px',minWidth:'30vw'}"
     >
+<q-card style="min-width: 350px;">
+
       <form>
         <div class="text-h6 text-weight-regular q-py-md bottom-border items-center">
           <q-icon name="add_box" size="25px" color="purple-9"/>Add Device
@@ -58,10 +60,10 @@
               :error="$v.formData.isDevice.$error"
           :val="item.value" :label="item.label" />
           </div>
-          <div class="group" align="right">
+          <div class="group" align="side">
             <q-btn
               outline
-              align="right"
+              align="side"
               icon="block"
               class="text-weight-regular text-grey-8"
               color="grey-6"
@@ -69,7 +71,7 @@
               label="Cancel"
             />
             <q-btn
-              align="right"
+              align="side"
               icon="check"
               @click="fnfinalsubmitDeviceType(formData)"
               color="purple-9"
@@ -78,15 +80,19 @@
           </div>
         </div>
       </form>
-    </q-dialog>
+
+</q-card>
+</q-dialog>
   </div>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required, maxValue } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   props: ["propShowCreateDeviceTypes"],
   data() {
     return {
@@ -133,6 +139,9 @@ export default {
     
   },
 
+  computed: {
+    () { return this.v$; }
+  },
   methods: {
     ...mapActions("SA_Devices", [
       "FEED_DEVICE_TYPE_DATA",
@@ -160,8 +169,7 @@ export default {
             this.FETCH_DEVICES_DATA();
             this.emitfnshowAddDeviceType("emitfnshowDeviceTypes");
             location.reload();
-          })
-          .catch(error => {
+          }).catch(() => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",

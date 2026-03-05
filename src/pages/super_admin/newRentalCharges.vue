@@ -1,14 +1,14 @@
 <template>
   <q-page>
     <div>
-      <!--@select="goToUnassignedTab"-->
+      <!--@update:model-value="goToUnassignedTab"-->
       <q-tabs
         v-model="selectedTab"
         class="shadow-1"
         active-bg-color="grey-1"
         active-color="dark"
         indicator-color="transparent"
-        align="left"
+        align=""
         @update:model-value="goToUnassignedTab"
       >
         <q-tab
@@ -69,7 +69,7 @@
                 class="cursor-pointer"
               >
                 <q-btn
-                  align="left"
+                  align=""
                   dense
                   flat
                   no-wrap
@@ -119,7 +119,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-12" align="right">
+              <div class="col-md-12" align="side">
                 <q-btn
                   no-caps
                   class="text-weight-regular"
@@ -238,9 +238,11 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 import EditRentalCharges from "../../pages/super_admin/editRentalCharges.vue";
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "NewRentalChargesList",
   components: {
     EditRentalCharges
@@ -277,7 +279,7 @@ export default {
           name: "plan",
           required: true,
           label: "Plan Name",
-          align: "left",
+          align: "",
           field: row => row.plan?.planName,
           sortable: true
         },
@@ -285,7 +287,7 @@ export default {
           name: "leadSource",
           required: true,
           label: "Lead Source",
-          align: "left",
+          align: "",
           field: row => row.leadSource?.sourceName,
           sortable: true
         },
@@ -293,7 +295,7 @@ export default {
           name: "device",
           required: true,
           label: "Device Type",
-          align: "left",
+          align: "",
           field: row => row.device?.deviceName,
           sortable: true
         },
@@ -301,7 +303,7 @@ export default {
           name: "marsDeviceModel",
           required: true,
           label: "Mars Device Model",
-          align: "left",
+          align: "",
           field: row => row.marsDeviceModel?.name,
           sortable: true
         },
@@ -309,7 +311,7 @@ export default {
           name: "setupFees",
           required: true,
           label: "setupFees",
-          align: "left",
+          align: "",
           field: "setupFees",
           sortable: true
         },
@@ -317,7 +319,7 @@ export default {
           name: "monthlyFees",
           required: true,
           label: "Recurring Fees",
-          align: "left",
+          align: "",
           field: "monthlyFees",
           sortable: true
         },
@@ -325,7 +327,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false
         }
@@ -335,7 +337,7 @@ export default {
           name: "plan",
           required: true,
           label: "Plan Name",
-          align: "left",
+          align: "",
           field: row => row.plan?.planName,
           sortable: true
         },
@@ -343,7 +345,7 @@ export default {
           name: "leadSource",
           required: true,
           label: "Lead Source",
-          align: "left",
+          align: "",
           field: row => row.leadSource?.sourceName,
           sortable: true
         },
@@ -351,7 +353,7 @@ export default {
           name: "device",
           required: true,
           label: "Device Type",
-          align: "left",
+          align: "",
           field: row => row.device?.deviceName,
           sortable: true
         },
@@ -359,7 +361,7 @@ export default {
           name: "marsDeviceModel",
           required: true,
           label: "Mars Device Model",
-          align: "left",
+          align: "",
           field: row => row.marsDeviceModel?.name,
           sortable: true
         },
@@ -367,7 +369,7 @@ export default {
           name: "setupFees",
           required: true,
           label: "setupFees",
-          align: "left",
+          align: "",
           field: "setupFees",
           sortable: true
         },
@@ -375,7 +377,7 @@ export default {
           name: "monthlyFees",
           required: true,
           label: "Recurring Fees",
-          align: "left",
+          align: "",
           field: "monthlyFees",
           sortable: true
         },
@@ -383,7 +385,7 @@ export default {
           name: "action1",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false
         }
@@ -422,7 +424,7 @@ export default {
           ok: "Continue",
           cancel: "Cancel"
         })
-        .onOk(() => {
+        .then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -456,7 +458,7 @@ export default {
           ok: "Continue",
           cancel: "Cancel"
         })
-        .onOk(() => {
+        .then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",

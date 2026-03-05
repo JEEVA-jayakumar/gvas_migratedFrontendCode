@@ -9,7 +9,7 @@
         active-bg-color="grey-1"
         active-color="dark"
         indicator-color="transparent"
-        align="left"
+        align=""
       >
         <q-tab name="active" label="Active TID" />
       </q-tabs>
@@ -53,7 +53,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-12" align="right">
+              <div class="col-md-12" align="side">
                 <q-btn no-caps class="text-weight-regular"
                 @click="fnaddnewConfigurarions()"
                   label="Add New Configurations"
@@ -75,10 +75,12 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import AddNewConfigurarions from "../../pages/super_admin/addMultiTidConfiguration.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "MultiTid",
   components: {
     AddNewConfigurarions,
@@ -96,7 +98,7 @@ export default {
           name: "institutionName",
           required: true,
           label: "Institution Name",
-          align: "left",
+          align: "",
           field: row => row.institution?.institutionName,
           sortable: false,
         },
@@ -104,7 +106,7 @@ export default {
           name: "leadSource",
           required: true,
           label: "Lead Source",
-          align: "left",
+          align: "",
           field: row => row.leadSource?.sourceName,
           sortable: false,
         },
@@ -112,7 +114,7 @@ export default {
           name: "masterHost",
           required: true,
           label: "Master Host",
-          align: "left",
+          align: "",
           field: row => row.masterHost?.name,
           sortable: false,
         },
@@ -120,7 +122,7 @@ export default {
           name: "vas",
           required: true,
           label: "vas",
-          align: "left",
+          align: "",
           field: row => row.vas?.name,
           sortable: false,
         }

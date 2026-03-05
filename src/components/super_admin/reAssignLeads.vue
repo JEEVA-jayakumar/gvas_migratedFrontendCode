@@ -1,11 +1,13 @@
 <template>
   <q-dialog
     maximized
-    no-backdrop-dismiss
+    persistent
     no-esc-dismiss
     v-model="toggleModal"
     :content-css="{padding:'50px 5px'}"
   >
+<q-card style="min-width: 350px;">
+
     <!-- <pre>{{propRowDetails}}</pre> -->
     <div>
       <!-- <pre>{{addtnLeadInformation}}</pre> -->
@@ -97,7 +99,7 @@
               class="q-ma-xs"
             />
           </div>
-          <div class="col-12 col-lg-auto" align="right">
+          <div class="col-12 col-lg-auto" align="side">
             <q-btn icon="check" color="positive" class="q-ma-xs" label="Assign" @click="fnAssign" />
           </div>
           <!--END: table filter,search -->
@@ -105,14 +107,18 @@
       </q-table>
       <!--END: table lead validation -->
     </div>
-  </q-dialog>
+
+</q-card>
+</q-dialog>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import generalLeadInformation from "../generalLeadInformation.vue";
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "leadValidation",
   props: ["propRowDetails", "propToggleModal"],
   components: {
@@ -141,7 +147,7 @@ export default {
           name: "createdAt",
           required: true,
           label: "Date(C)",
-          align: "left",
+          align: "",
           field: "createdAt",
           sortable: true
         },
@@ -159,7 +165,7 @@ export default {
           name: "merchantName",
           required: true,
           label: "Merchant Name",
-          align: "left",
+          align: "",
           field: "merchantName",
           sortable: true
         },
@@ -167,7 +173,7 @@ export default {
           name: "state",
           required: true,
           label: "State",
-          align: "left",
+          align: "",
           field: "state",
           sortable: true
         },
@@ -175,7 +181,7 @@ export default {
           name: "salesOfficerName",
           required: true,
           label: "SO Name",
-          align: "left",
+          align: "",
           field: row => {
             return row.assignedTo.name;
           },
@@ -185,7 +191,7 @@ export default {
           name: "finance_approval",
           required: true,
           label: "Finance Approval",
-          align: "left",
+          align: "",
           field: row => {
             return row.verifiedFinanceStatus ==
               this.$VERIFIED_FINANCE_STATUS_SUCCESS
@@ -204,7 +210,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: true
         }

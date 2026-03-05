@@ -154,8 +154,7 @@ export default {
         .then(() => {
           this.$q.notify({ color: "positive", message: "Successfully Created" });
           this.$emit("emitAddLeadSOurceVasDevice");
-        })
-        .catch(error => {
+        }).catch(() => {
           this.$q.notify({
             color: "amber-9",
             message: error.body?.message || "Please Try Again Later !"

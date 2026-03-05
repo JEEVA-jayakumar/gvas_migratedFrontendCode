@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-dialog minimized no-backdrop-dismiss v-model="propToggleModal" @hide="toggleModal" @escape-key="toggleModal"
+    <q-dialog minimized persistent v-model="propToggleModal" @hide="toggleModal" @escape-key="toggleModal"
       class="customModalOverlay" :content-css="{padding:'30px',minWidth: '30vw'}">
       <form>
         <div class="row gutter-sm q-py-sm items-center">
@@ -53,10 +53,10 @@
           </q-list>
         </q-card-section>
         <div class="row gutter-sm q-py-sm items-center">
-          <div class="col-md-12 group" align="right">
-            <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="toggleModal()">Cancel
+          <div class="col-md-12 group" align="side">
+            <q-btn flat align="side" class="bg-white text-weight-regular text-grey-8" @click="toggleModal()">Cancel
             </q-btn>
-            <q-btn align="right" @click="submitModifiedData(formData)" color="purple-9">Save</q-btn>
+            <q-btn align="side" @click="submitModifiedData(formData)" color="purple-9">Save</q-btn>
           </div>
         </div>
       </form>
@@ -65,10 +65,14 @@
 </template>
   
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { integer, required } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 export default {
   // name: 'ComponentName',
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["propShowEditLsVasDevice", "propRowDetails"],
   data() {
     return {
@@ -231,7 +235,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
               icon: "thumb_down"
             });
           });

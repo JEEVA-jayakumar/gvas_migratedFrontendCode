@@ -26,7 +26,7 @@
                       <span class="q-display-1 text-grey-9 q-mr-md" style="font-size: 34px;">{{getAllDashboardCount.totalUserCount}}</span>
                       <span class="q-caption text-grey-9 text-weight-light">Users</span>
                     </div>
-                    <div class="col-md-4" align="right">
+                    <div class="col-md-4" align="side">
                       <q-icon style="height:60px;width:60px" size="24px" color="white" class="bg-purple-9 q-pa-md border-radius-10" name="fas fa-user-plus" />
                     </div>
                   </div>
@@ -53,7 +53,7 @@
                               <span class="q-display-1 text-grey-9 q-mr-md" style="font-size: 34px;">{{roleItem.count}}</span>
                               <span class="q-caption text-grey-9 text-weight-light">Users</span>
                             </div>
-                            <div class="col-md-4" align="right">
+                            <div class="col-md-4" align="side">
                               <q-icon style="height:60px;width:60px" size="24px" color="white" :style="{background:roleItem.roleColor}" class="q-pa-md border-radius-10" name="fas fa-user" />
                             </div>
                           </div>
@@ -74,9 +74,11 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "superAdminDashboard",
   data() {
     return {

@@ -18,7 +18,7 @@
           <!--START: table title -->
           <div class="col-md-6 q-title q-mt-lg text-weight-regular">Pincodes</div>
 
-          <div class="col-md-6 q-my-md" align="right">
+          <div class="col-md-6 q-my-md" align="side">
             <q-btn no-caps no-wrap label="Add New Pincode" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreatePincodes()"/>
           </div>
           <!--END: table title -->
@@ -56,11 +56,13 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import addPincode from "../../components/super_admin/addPincode.vue";
 import editPincode from "../../components/super_admin/editPincode.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "PincodeManagement",
   components: {
     addPincode,
@@ -79,9 +81,9 @@ export default {
       },
       filter: "",
       columns: [
-        { name: "pincode", label: "Pincode", align: "left", field: "pincode", sortable: true },
-        { name: "stateName", label: "State", align: "left", field: "stateName", sortable: true },
-        { name: "cityName", label: "City", align: "left", field: "cityName", sortable: true },
+        { name: "pincode", label: "Pincode", align: "", field: "pincode", sortable: true },
+        { name: "stateName", label: "State", align: "", field: "stateName", sortable: true },
+        { name: "cityName", label: "City", align: "", field: "cityName", sortable: true },
         { name: "action", label: "Action", align: "center" }
       ]
     };

@@ -15,7 +15,7 @@
 
             <template v-slot:body-cell-name="props">
               <q-td :props="props">
-                <q-btn align="left" dense flat no-wrap no-caps icon="fas fa-pencil-alt" color="primary"
+                <q-btn align="" dense flat no-wrap no-caps icon="fas fa-pencil-alt" color="primary"
                   @click="fnShowEditUser(props.row.userId)" :label="props.row.user.name" class="capitalize" />
               </q-td>
             </template>
@@ -60,7 +60,7 @@
                           : 'bg-blue-grey-2'
                       ]" @click="ajaxLoadDataForHeirarchyIdFilter(index, tab)" rounded :label="tab.label" />
                   </div>
-                  <div class="col-auto" align="right">
+                  <div class="col-auto" align="side">
                     <div class="row justify-evenly">
                       <div class="col-auto q-px-xs">
                         <q-btn :disabled="formData.selectedUsersToDelete.length == 0" flat color="white"
@@ -69,7 +69,7 @@
                           icon="far fa-trash-alt" />
                       </div>
                       <div class="col-auto q-px-xs">
-                        <downloadExcel :data="getAllUsers" :fields="json_fields" name="UserDetails.xls">
+                        <downloadExcel :rows="getAllUsers" :fields="json_fields" name="UserDetails.xls">
                           <q-btn outline color="grey-9" label="Download as excel" />
                         </downloadExcel>
                       </div>
@@ -88,14 +88,14 @@
         </q-tab-panel>
 
         <q-tab-panel name="tab-2" class="no-padding">
-          <!--START: table Data   :data="getImplementationQueueUnassignedList"  -->
+          <!--START: table Data   :rows="getImplementationQueueUnassignedList"  -->
           <q-table :rows="getAllUsers" :columns="columns" table-class="customSATableClass" :filter="filterSearch"
             selection="multiple" v-model:selected="formData.selectedUsersToDelete" v-model:pagination="paginationControl"
             :loading="tableAjaxLoading" :filter-method="myCustomSearchFilter" row-key="userId" color="grey-9">
 
             <template v-slot:body-cell-name="props">
               <q-td :props="props">
-                <q-btn align="left" dense flat no-wrap no-caps icon="fas fa-pencil-alt" color="primary"
+                <q-btn align="" dense flat no-wrap no-caps icon="fas fa-pencil-alt" color="primary"
                   @click="fnShowEditUser(props.row.userId)" :label="props.row.user.name" class="capitalize" />
               </q-td>
             </template>
@@ -120,7 +120,7 @@
                     <q-input clearable color="grey-9" v-model.trim="filterSearch" placeholder="Type.."
                       label="Search by Name, Merchant Name, Lead ID" />
                   </div>
-                  <div class="col-md-6" align="right">
+                  <div class="col-md-6" align="side">
                     <q-btn :disabled="formData.selectedUsersToDelete.length == 0" flat color="white"
                       class="text-grey-9 q-mr-md" size="md"
                       @click="activate_deactivate_users(formData.selectedUsersToDelete)" icon="far fa-trash-alt" />
@@ -144,11 +144,13 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required, between, email } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import downloadExcel from "vue-json-excel";
 import deleteUsersDetails from "../../components/super_admin/deleteUsersDetails.vue";
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "users",
   components: {
     deleteUsersDetails,
@@ -225,7 +227,7 @@ export default {
           name: "name",
           required: true,
           label: "Name",
-          align: "left",
+          align: "",
           field: row => {
             return row.user.name;
           },
@@ -235,7 +237,7 @@ export default {
           name: "employeeID",
           required: true,
           label: "Employee ID",
-          align: "left",
+          align: "",
           field: row => {
             return row.user.employeeID;
           },
@@ -245,7 +247,7 @@ export default {
           name: "contactNumber",
           required: true,
           label: "Contact No",
-          align: "left",
+          align: "",
           field: row => {
             return row.user.contactNumber;
           },
@@ -255,7 +257,7 @@ export default {
           name: "email",
           required: true,
           label: "Email ID",
-          align: "left",
+          align: "",
           field: row => {
             return row.user.email;
           },
@@ -265,7 +267,7 @@ export default {
           name: "role",
           required: true,
           label: "Role",
-          align: "left",
+          align: "",
           field: "role",
           sortable: false
         },
@@ -273,7 +275,7 @@ export default {
           name: "city",
           required: true,
           label: "Location",
-          align: "left",
+          align: "",
           field: row => {
             return row.user.city;
           },
@@ -373,7 +375,7 @@ export default {
                 : "Are you sure want to delete users?",
             ok: "Continue",
             cancel: "Cancel"
-          }).onOk(() => {
+          }).then(() => {
             this.$q.loading.show({
               delay: 100, // ms
               message: "Please Wait",
@@ -398,8 +400,7 @@ export default {
                     message: "Successfully Activated!",
                     icon: "thumb_up"
                   });
-                })
-                .catch(error => {
+                }).catch(() => {
                   this.$q.loading.hide();
                   this.$q.notify({
                     color: "negative",
@@ -422,22 +423,20 @@ export default {
                   // });
                   this.deteledUsers = response.data.data;
                   this.toggleDeleteUsersModal();
-                })
-                .catch(error => {
+                }).catch(() => {
                   this.$q.loading.hide();
                   this.$q.notify({
                     color: "negative",
                     position: "bottom",
                     message:
-                      error.body.message == null
+                      error.data?.message == null
                         ? "Please Try Again Later !"
-                        : error.body.message,
+                        : error.data?.message,
                     icon: "thumb_down"
                   });
                 });
             }
-          })
-          .catch(err => {
+          }).catch(() => {
             console.log(err);
             this.$q.loading.hide();
             this.$q.notify({

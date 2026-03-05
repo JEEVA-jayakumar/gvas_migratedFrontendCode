@@ -2,7 +2,7 @@
   <q-dialog
     v-model="toggleModal"
     persistent
-    position="right"
+    position="side"
     class="customModalOverlay"
   >
     <q-card
@@ -12,7 +12,7 @@
         <div class="col">
           <div class="q-title text-weight-regular">Manage lead sources</div>
         </div>
-        <div class="col" align="right">
+        <div class="col" align="side">
           <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
         </div>
       </div>
@@ -21,7 +21,7 @@
         active-bg-color="grey-1"
         active-color="dark"
         indicator-color="transparent"
-        align="left"
+        align=""
       >
         <q-tab name="tab-1" label="Active List" @click="leadSourceActiveList" />
         <q-tab name="tab-2" label="De-Actived List" @click="leadSourceDeActiveList" />
@@ -79,7 +79,7 @@
                   </template>
                 </q-input>
               </div>
-              <div class="col-4" align="right">
+              <div class="col-4" align="side">
                 <q-btn
                   no-caps
                   no-wrap
@@ -158,11 +158,13 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 import showCreateLeadSource from "./createLeadSource.vue";
 import showEditLeadSource from "./editLeadSource.vue";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "AddLeadSource",
   props: ["propToggleModal"],
   components: {
@@ -182,12 +184,12 @@ export default {
         rowsPerPage: 5
       },
       activatedColumns: [
-        { name: "sourceName", label: "Lead source", align: "left", field: "sourceName", sortable: false },
-        { name: "action", label: "", align: "left", field: "action", sortable: false }
+        { name: "sourceName", label: "Lead source", align: "", field: "sourceName", sortable: false },
+        { name: "action", label: "", align: "", field: "action", sortable: false }
       ],
       deActivatedColumns: [
-        { name: "sourceName", label: "Lead source", align: "left", field: "sourceName", sortable: false },
-        { name: "action", label: "", align: "left", field: "action", sortable: false }
+        { name: "sourceName", label: "Lead source", align: "", field: "sourceName", sortable: false },
+        { name: "action", label: "", align: "", field: "action", sortable: false }
       ]
     };
   },
@@ -241,8 +243,7 @@ export default {
               message: "Lead source deactivated",
               icon: "thumb_up"
             });
-          })
-          .catch(error => {
+          }).catch(() => {
             this.$q.notify({
               color: "warning",
               position: "bottom",
@@ -276,8 +277,7 @@ export default {
               message: `Lead source: ${rowDetails.sourceName} has been enabled`,
               icon: "thumb_up"
             });
-          })
-          .catch(error => {
+          }).catch(() => {
             this.$q.notify({
               color: "warning",
               position: "bottom",

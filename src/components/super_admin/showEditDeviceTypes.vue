@@ -4,10 +4,12 @@
       minimized
       v-model="toggleModel"
       @hide="emitfnshowEditDeviceTypes"
-      no-backdrop-dismiss
+      persistent
       class="customModalOverlay"
       :content-css="{padding:'30px',minWidth:'30vw'}"
     >
+<q-card style="min-width: 350px;">
+
       <form>
         <div class="text-h6 text-weight-regular q-py-md bottom-border">
           <q-icon name="border_color" size="25px" color="purple-9"/>Modify Device
@@ -60,10 +62,10 @@
               placeholder="Serial Number Length"
             />
           </div>
-          <div class="group" align="right">
+          <div class="group" align="side">
             <q-btn
               outline
-              align="right"
+              align="side"
               icon="block"
               class="text-weight-regular text-grey-8"
               color="grey-6"
@@ -71,7 +73,7 @@
               label="Cancel"
             />
             <q-btn
-              align="right"
+              align="side"
               icon="check"
               @click="fnfinalsubmitDeviceType(formData)"
               color="purple-9"
@@ -80,15 +82,19 @@
           </div>
         </div>
       </form>
-    </q-dialog>
+
+</q-card>
+</q-dialog>
   </div>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required, maxValue } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   props: ["propShowEditDeviceTypes", "propRowDetails"],
   data() {
     return {
@@ -119,6 +125,9 @@ export default {
     }
   },
 
+  computed: {
+    () { return this.v$; }
+  },
   methods: {
     ...mapActions("SA_Devices", ["UPDATE_DEVICE_DATA", "FETCH_DEVICES_DATA"]),
     emitfnshowEditDeviceTypes() {
@@ -151,13 +160,12 @@ export default {
             this.FETCH_DEVICES_DATA();
             this.emitfnshowEditDeviceTypes();
             location.reload();
-          })
-          .catch(error => {
+          }).catch(() => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
               icon: "thumb_down"
             });
           });

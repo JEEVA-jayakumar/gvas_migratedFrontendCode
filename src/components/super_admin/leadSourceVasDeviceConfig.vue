@@ -19,7 +19,7 @@
         class="bg-white text-grey-7 shadow-1"
         active-color="purple-9"
         indicator-color="purple-9"
-        align="left"
+        align=""
       >
         <q-tab name="active" label="Active List" @click="ajaxLoadData" />
       </q-tabs>
@@ -35,7 +35,7 @@
             row-key="id"
             color="purple-9"
           >
-            <template v-slot:top-right>
+            <template v-slot:top-side>
               <q-input
                 outlined
                 dense
@@ -94,11 +94,13 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import showAddLeadSOurceVasDevice from "./AddLeadSOurceVasDevice.vue";
 import showEditLsVasDevice from "./leadSourceVasDeviceModify.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "LeadSourceVasDeviceConfig",
   components: {
     showAddLeadSOurceVasDevice,
@@ -116,21 +118,21 @@ export default {
         {
           name: "device",
           label: "Device Name",
-          align: "left",
+          align: "",
           field: row => row.leadSourceDeviceVasMapping?.device?.deviceName || "NA",
           sortable: true
         },
         {
           name: "leadSource",
           label: "Lead Source",
-          align: "left",
+          align: "",
           field: row => row.leadSourceDeviceVasMapping?.leadSource?.sourceName || "NA",
           sortable: true
         },
         {
           name: "vas",
           label: "Vas",
-          align: "left",
+          align: "",
           field: row => row.vasList,
           sortable: false
         },

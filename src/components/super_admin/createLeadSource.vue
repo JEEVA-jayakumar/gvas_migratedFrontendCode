@@ -72,7 +72,7 @@
               @keyup.enter="submitLeadSourceData(formData)"
             />
             </q-item-section>
-             <q-item-section right>
+             <q-item-section side>
                 <q-btn
                   round
                   dense
@@ -87,14 +87,14 @@
           </q-item> -->
           </q-card>
         <div class="row gutter-sm q-py-sm items-center">
-          <div class="col-md-12 group" align="right">
+          <div class="col-md-12 group" align="side">
             <q-btn
               flat
-              align="right"
+              align="side"
               class="bg-white text-weight-regular text-grey-8"
               @click="toggleModal()"
             >Cancel</q-btn>
-            <q-btn align="right" @click="submitLeadSourceData(formData)" color="purple-9">Save</q-btn>
+            <q-btn align="side" @click="submitLeadSourceData(formData)" color="purple-9">Save</q-btn>
           </div>
         </div>
       </form>
@@ -110,11 +110,15 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { integer, required,minLength,maxLength} from "@vuelidate/validators";
 // import showPrefixDetails from "../../components/super_admin/addPrefixDetails.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   // name: 'ComponentName',
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["propShowCreateLeadSource"],
   components:{
     // showPrefixDetails
@@ -159,6 +163,9 @@ export default {
     }
   },
 
+  computed: {
+    () { return this.v$; }
+  },
   methods: {
     ...mapActions("leadSource", ["ADD_NEW_LEAD_SOURCE"]),
     toggleModal() {
@@ -193,7 +200,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
               icon: "thumb_down"
             });
           });

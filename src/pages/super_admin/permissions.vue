@@ -31,7 +31,7 @@
             <!--START: table title -->
             <div class="col-12 q-title q-my-lg text-weight-regular">Permissions</div>
 
-            <!-- <div class="col-md-6 q-my-md" align="right">
+            <!-- <div class="col-md-6 q-my-md" align="side">
               <q-btn no-caps no-wrap label="Add New Permission" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreatePermission()"/>
             </div> -->
             <!--END: table title -->
@@ -76,11 +76,13 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from '@vuelidate/validators';
 import showCreatePermission from "../../components/super_admin/showCreatePermission.vue";
 import showEditPermission from "../../components/super_admin/showEditPermission.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "users",
   components: {
     showCreatePermission,
@@ -107,7 +109,7 @@ export default {
           name: "permission",
           required: true,
           label: "Permission",
-          align: "left",
+          align: "",
           field: "permission",
           sortable: false,
         },
@@ -115,7 +117,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false,
         },
@@ -151,7 +153,7 @@ export default {
           message: "Are you sure want to delete Permission?",
           ok: "Continue",
           cancel: "Cancel",
-        }).onOk(() => {
+        }).then(() => {
           this.DELETE_PERMISSION_BY_PERMISSION_ID_DATA(PermissionId)
             .then(response => {
               this.FETCH_ALL_PERMISSIONS_DATA();
@@ -161,16 +163,15 @@ export default {
                 message: "Successfully Deleted!",
                 icon: "thumb_up",
               });
-            }).onCancel(() => {
+            }).catch(() => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
                 icon: "thumb_down",
               });
             });
-        })
-        .onCancel(() => {
+        }).catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -197,7 +198,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+            message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
             icon: "thumb_down",
           });
         });

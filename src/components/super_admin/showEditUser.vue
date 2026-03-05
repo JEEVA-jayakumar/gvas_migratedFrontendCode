@@ -1,7 +1,7 @@
 <template>
   <div>
      <q-dialog
-        position="right"
+        position="side"
         class="customModalOverlay"
         maximized
         v-model="showEditUser"  
@@ -9,6 +9,8 @@
         @escape-key="emitfnShowEditUser(showEditUser)"  
         :content-css="{paddingTop:'50px',paddingBottom:'50px',maxWidth: '50vw',minHeight:'100vh'}"
         >
+<q-card style="min-width: 350px;">
+
           <form>  
             <div class="q-px-md">
              <div class="q-pa-sm">
@@ -17,11 +19,11 @@
                     <div class="text-h6 text-weight-regular">Edit User</div>
                   </div>
                   <div class="col-md-2">
-                    <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowEditUser(showEditUser)">Cancel
+                    <q-btn flat size="md" align="side" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowEditUser(showEditUser)">Cancel
                     </q-btn>
                   </div>
                   <div class="col-md-2">
-                    <q-btn size="md" align="right" type="button" color="purple-9" @click="fnSubmitShowAddUser(showEditUser)">Save
+                    <q-btn size="md" align="side" type="button" color="purple-9" @click="fnSubmitShowAddUser(showEditUser)">Save
                     </q-btn>
                   </div>
                 </div>
@@ -141,12 +143,15 @@
             </div>
 
         </form>
-    </q-dialog>
+
+</q-card>
+</q-dialog>
 
   </div>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import {
   required,
   email,
@@ -158,6 +163,9 @@ import {
 } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: [
     "propShowEditUser",
     "propFilterRoles",
@@ -294,13 +302,12 @@ export default {
             });
             this.FETCH_ALL_USERS_DATA();
             this.$emit("emitfnShowEditUser", showEditUser);
-          })
-          .catch(error => {
+          }).catch(() => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
               icon: "thumb_down"
             });
           });
@@ -335,8 +342,7 @@ export default {
       this.FETCH_ROLES_BASED_ON_HEIRARCHY_ID(heirarchyId)
         .then(() => {
           this.$q.loading.hide();
-        })
-        .catch(error => {
+        }).catch(() => {
           this.$q.loading.hide();
         });
     }

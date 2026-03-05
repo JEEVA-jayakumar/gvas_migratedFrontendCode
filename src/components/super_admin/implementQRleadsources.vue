@@ -18,7 +18,7 @@
                   label="Select Lead bank"
                 />
               </q-item-section>
-              <q-item-section right>
+              <q-item-section side>
                 <q-btn
                   :disabled="formData.leadSource.length == 0"
                   no-caps
@@ -83,6 +83,7 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from '@vuelidate/validators';
 /* START >> Modal components Lead source, device, merchant type */
 // import showPlanModalComponent from "../../components/super_admin/showPlanModalComponent.vue";
@@ -90,6 +91,7 @@ import { required } from '@vuelidate/validators';
 
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "deviceTypes",
   components: {
     /* START >> Modal components Lead source, device, plan */
@@ -134,7 +136,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action"
         }
       ]
@@ -194,7 +196,7 @@ export default {
     //     } else {
     //       this.$q.notify({
     //         color: "negative",
-    //         position: "bottom-left",
+    //         position: "bottom-",
     //         message: "Invalid MDR Plan Code",
     //         icon: "clear"
     //       });
@@ -257,7 +259,7 @@ export default {
           message: "Are you sure want to delete QR Bank?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -273,7 +275,7 @@ export default {
                 message: "Successfully Deleted",
                 icon: "thumb_up"
               });
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -282,8 +284,7 @@ export default {
               });
             });
           this.$q.loading.hide();
-        })
-        .onCancel(() => {
+        }).catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

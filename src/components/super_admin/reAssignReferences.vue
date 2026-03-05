@@ -1,11 +1,13 @@
 <template>
   <q-dialog
     maximized
-    no-backdrop-dismiss
+    persistent
     no-esc-dismiss
     v-model="toggleModal"
     :content-css="{padding:'50px 5px'}"
   >
+<q-card style="min-width: 350px;">
+
     <div>
       <!-- <pre>{{addtnLeadInformation}}</pre> -->
       <!--START: table title -->
@@ -73,14 +75,18 @@
         </div>
       </div>
     </div>
-  </q-dialog>
+
+</q-card>
+</q-dialog>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required, email } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import generalLeadInformation from "../generalLeadInformation.vue";
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "leadValidation",
   props: ["propRowDetails", "propToggleModal"],
   components: {
@@ -106,7 +112,7 @@ export default {
           name: "employeeID",
           required: true,
           label: "Employee ID",
-          align: "left",
+          align: "",
           field: "employeeID",
           sortable: true
         },
@@ -114,7 +120,7 @@ export default {
           name: "name",
           required: true,
           label: "Name",
-          align: "left",
+          align: "",
           field: "name",
           sortable: true
         },
@@ -130,7 +136,7 @@ export default {
           name: "contactNumber",
           required: true,
           label: "Contact number",
-          align: "left",
+          align: "",
           field: "contactNumber",
           sortable: true
         },
@@ -138,7 +144,7 @@ export default {
           name: "userAddress",
           required: true,
           label: "Address",
-          align: "left",
+          align: "",
           field: "userAddress",
           sortable: true
         },
@@ -146,7 +152,7 @@ export default {
           name: "city",
           required: true,
           label: "City",
-          align: "left",
+          align: "",
           field: "city",
           sortable: true
         },
@@ -154,7 +160,7 @@ export default {
           name: "state",
           required: true,
           label: "State",
-          align: "left",
+          align: "",
           field: "state",
           sortable: true
         },
@@ -162,7 +168,7 @@ export default {
           name: "pincode",
           required: true,
           label: "Pincode",
-          align: "left",
+          align: "",
           field: "pincode",
           sortable: true
         }
@@ -192,9 +198,9 @@ export default {
           message: "Are you sure want to leave this page?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
           this.$emit("closeReferencesList");
-        }).onCancel(() => {});
+        }).catch(() => {});
     }
   }
 };

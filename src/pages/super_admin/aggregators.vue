@@ -9,7 +9,7 @@
                 active-bg-color="grey-1"
                 active-color="dark"
                 indicator-color="transparent"
-                align="left"
+                align=""
             >
                 <q-tab name="active" label="Active Aggregators" />
                 <q-tab name="deactive" label="Deactive Aggregators" />
@@ -52,7 +52,7 @@
                                     </template>
                                 </q-input>
                             </div>
-                            <div class="col-6" align="right">
+                            <div class="col-6" align="side">
                                 <q-btn no-caps class="text-weight-regular" label="Add New Aggregators"
                                     @click="fnShowAddNewAggregators()" color="purple-9" size="md" />
                             </div>
@@ -118,11 +118,13 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import showEditAggregator from "../../components/super_admin/showEditAggregator.vue";
 import ShowAddNewAggregators from "../../components/super_admin/ShowAddNewAggregators.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
     name: "AggregatorsPage",
     components: {
         showEditAggregator,
@@ -143,7 +145,7 @@ export default {
                     name: "name",
                     required: true,
                     label: "Aggregator",
-                    align: "left",
+                    align: "",
                     field: "name",
                     sortable: false
                 },
@@ -151,7 +153,7 @@ export default {
                     name: "action",
                     required: true,
                     label: "",
-                    align: "left",
+                    align: "",
                     field: "action",
                     sortable: false
                 }
@@ -161,7 +163,7 @@ export default {
                     name: "name",
                     required: true,
                     label: "Aggregator",
-                    align: "left",
+                    align: "",
                     field: "name",
                     sortable: false
                 },
@@ -169,7 +171,7 @@ export default {
                     name: "action1",
                     required: true,
                     label: "",
-                    align: "left",
+                    align: "",
                     field: "action1",
                     sortable: false
                 }

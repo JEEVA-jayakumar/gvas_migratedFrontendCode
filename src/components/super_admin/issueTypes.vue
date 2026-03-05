@@ -45,7 +45,7 @@
               <div class="col-3">
                 <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." class="q-mr-lg" />
               </div>
-              <div class="col-3" align="right">
+              <div class="col-3" align="side">
                 <q-btn no-caps class="text-weight-regular" label="Add Service Type"
                   @click="fnShowAddNewServiceType(props.row)" color="purple-9" size="md" />
               </div>
@@ -110,7 +110,7 @@
                 <q-input clearable color="grey-9" v-model="filterSearch1" placeholder="Type.." class="q-mr-lg" />
               </div>
               <!--END: table filter,search -->
-              <div class="col-3" align="right">
+              <div class="col-3" align="side">
                 <q-btn no-caps class="text-weight-regular" label="Add Sub Task"
                   @click="fnShowAddNewSubTaskType(props.row)" color="purple-9" size="md" />
               </div>
@@ -173,6 +173,7 @@
   </q-page>
 </template>
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from '@vuelidate/validators';
 import ShowAddServiceType from "../../components/super_admin/ShowAddServiceType.vue";
 import showEditServiceType from "../../components/super_admin/showEditServiceType.vue";
@@ -181,6 +182,7 @@ import ShowAddSubTaskType from "../../components/super_admin/ShowAddSubTaskType.
 import showActiveServiceType from "../../components/super_admin/showActiveServiceType.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "getsubTaskDetails",
   components: {
     ShowAddServiceType,
@@ -227,7 +229,7 @@ export default {
           name: "name",
           required: true,
           label: "Issue Name",
-          align: "left",
+          align: "",
           field: "name",
           sortable: true
         },
@@ -235,7 +237,7 @@ export default {
           name: "createdDate",
           required: true,
           label: "Created Date",
-          align: "left",
+          align: "",
           field: "createdDate",
           sortable: true
         },
@@ -243,7 +245,7 @@ export default {
           name: "updatedDate",
           required: true,
           label: "Updated Date",
-          align: "left",
+          align: "",
           field: "updatedDate",
           sortable: true
         },
@@ -251,7 +253,7 @@ export default {
           name: "action1",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action1",
           sortable: false
         }
@@ -262,7 +264,7 @@ export default {
           name: "name",
           required: true,
           label: "Issue Name",
-          align: "left",
+          align: "",
           field: "name",
           sortable: true
         },
@@ -270,7 +272,7 @@ export default {
           name: "createdDate",
           required: true,
           label: "Created Date",
-          align: "left",
+          align: "",
           field: "createdDate",
           sortable: true
         },
@@ -278,7 +280,7 @@ export default {
           name: "updatedDate",
           required: true,
           label: "Updated Date",
-          align: "left",
+          align: "",
           field: "updatedDate",
           sortable: true
         },
@@ -286,7 +288,7 @@ export default {
           name: "action2",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action1",
           sortable: false
         }
@@ -296,7 +298,7 @@ export default {
         //   name: "id",
         //   required: true,
         //   label: "id",
-        //   align: "left",
+        //   align: "",
         //   field: row => {
         //     return row.id;
         //   },
@@ -306,7 +308,7 @@ export default {
           name: "service_req_data",
           required: true,
           label: "Service Req Data",
-          align: "left",
+          align: "",
           // disable: row => {
           //   return row.serviceReqType.active == false;
           // },
@@ -320,7 +322,7 @@ export default {
           name: "serviceReqIssueTypeSets",
           required: true,
           label: "Service Req Issue TypeSets",
-          align: "left",
+          align: "",
           field: row => {
             return row.serviceReqIssueTypeSets.serviceReqIssueType.name;
           },
@@ -331,7 +333,7 @@ export default {
           name: "serviceRequestStatusSets",
           required: true,
           label: "Service Status",
-          align: "left",
+          align: "",
           field: row => {
             return row.name;
           },
@@ -341,7 +343,7 @@ export default {
         //   name: "updated_date",
         //   required: true,
         //   label: "Updated Date",
-        //   align: "left",
+        //   align: "",
         //   field: "updated_date",
         //   sortable: true
         // },
@@ -350,7 +352,7 @@ export default {
         //   name: "is_active",
         //   required: true,
         //   label: "is_active",
-        //   align: "left",
+        //   align: "",
         //   field: "is_active",
         //   sortable: false
         // },
@@ -358,7 +360,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false
         }
@@ -412,16 +414,15 @@ export default {
               icon: "thumb_up"
             });
             this.emitfnshowEditServiceType();
-          })
-          .catch(error => {
+          }).catch(() => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
+                error.data?.message == null
                   ? "Please Try Again Later !"
-                  : error.body.message,
+                  : error.data?.message,
               icon: "thumb_down"
             });
           });
@@ -438,7 +439,7 @@ export default {
           message: "Are you sure want to active this issue?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
             this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -457,15 +458,15 @@ export default {
             this.$q.loading.hide();
                this.ajaxSpareData();
             })
-        }).onCancel(error => {
+        }).catch(error => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
+                error.data?.message == null
                   ? "Please Try Again Later !"
-                  : error.body.message,
+                  : error.data?.message,
               icon: "thumb_down"
             });
           });
@@ -491,15 +492,15 @@ export default {
     //         });
     //         this.emitfnshowEditServiceType();
     //       })
-    //       .catch(error => {
+    //       .onCancel(() => {
     //         this.$q.loading.hide();
     //         this.$q.notify({
     //           color: "negative",
     //           position: "bottom",
     //           message:
-    //             error.body.message == null
+    //             error.data?.message == null
     //               ? "Please Try Again Later !"
-    //               : error.body.message,
+    //               : error.data?.message,
     //           icon: "thumb_down"
     //         });
     //       });
@@ -547,7 +548,7 @@ export default {
           message: "Are you sure want to delete?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -566,7 +567,7 @@ export default {
                this.$q.loading.hide();
             });
          
-        }).onCancel(() => {
+        }).catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -583,7 +584,7 @@ export default {
           message: "Are you sure want to delete?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -602,7 +603,7 @@ export default {
               this.$q.loading.hide();
               this.ajaxSpareData();
             });
-            }).onCancel(() => {
+            }).catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

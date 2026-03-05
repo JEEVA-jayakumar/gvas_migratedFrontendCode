@@ -1,18 +1,20 @@
 <template>
   <q-dialog
     minimized
-    position="right"
+    position="side"
     v-model="toggleModal"
-    no-backdrop-dismiss
+    persistent
     @escape-key="emitModalClose"
     class="customModalOverlay"
     :content-css="{padding:'25px',paddingTop:'60px',minWidth:'40vw',minHeight:'100vh'}"
   >
+<q-card style="min-width: 350px;">
+
     <div class="row items-center bottom-border q-py-sm fit">
       <div class="col">
         <div class="text-h6 text-weight-regular">Manage VAS</div>
       </div>
-      <div class="col" align="right">
+      <div class="col" align="side">
         <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
       </div>
     </div>
@@ -69,7 +71,7 @@
                 label="Search lead source"
               />
             </div>
-            <div class="col-4" align="right">
+            <div class="col-4" align="side">
               <q-btn
                 no-caps
                 no-wrap
@@ -100,10 +102,13 @@
       @emitfnshowVas=" refreshvasEdit"
     ></showEditVas>
     <!--END: Show edit LeadSources -->
-  </q-dialog>
+
+</q-card>
+</q-dialog>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 import { required } from "@vuelidate/validators";
 import showEditVas from "./vasEdit.vue";
@@ -111,6 +116,7 @@ import showVasCreate from "./vasCreate.vue";
 import showCreateLeadSource from "./createLeadSource.vue";
 import showEditLeadSource from "./editLeadSource.vue";
 export default {
+  setup() { return { v$: useVuelidate() } },
   props: ["propToggleModal"],
   // name: 'ComponentName',
   components: {
@@ -151,7 +157,7 @@ export default {
           name: "name",
           required: true,
           label: "name",
-          align: "left",
+          align: "",
           field: "name",
           sortable: false
         },
@@ -159,7 +165,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false
         }
@@ -169,7 +175,7 @@ export default {
           name: "sourceName",
           required: true,
           label: "Lead source",
-          align: "left",
+          align: "",
           field: "sourceName",
           sortable: false
         },
@@ -177,7 +183,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false
         }
@@ -293,7 +299,7 @@ export default {
     //             icon: "thumb_up"
     //           });
     //         })
-    //         .catch(error => {
+    //         .onCancel(() => {
     //           this.$q.notify({
     //             color: "warning",
     //             position: "bottom",
@@ -339,7 +345,7 @@ export default {
     //             icon: "thumb_up"
     //           });
     //         })
-    //         .catch(error => {
+    //         .onCancel(() => {
     //           this.$q.notify({
     //             color: "warning",
     //             position: "bottom",

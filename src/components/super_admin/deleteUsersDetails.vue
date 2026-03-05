@@ -83,11 +83,13 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required, email } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import reAssignLeads from "./reAssignLeads.vue";
 import reAssignReferences from "./reAssignReferences.vue";
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "leadValidation",
   props: ["propDeteledUsers", "propToggleModal"],
   components: {
@@ -114,7 +116,7 @@ export default {
           name: "name",
           required: true,
           label: "Name",
-          align: "left",
+          align: "",
           field: row => {
             return row.user.name;
           },
@@ -124,7 +126,7 @@ export default {
           name: "employeeID",
           required: true,
           label: "Employee ID",
-          align: "left",
+          align: "",
           field: row => {
             return row.user.employeeID;
           },
@@ -144,7 +146,7 @@ export default {
           name: "contactNumber",
           required: true,
           label: "Phone",
-          align: "left",
+          align: "",
           field: row => {
             return row.user.contactNumber;
           },
@@ -154,7 +156,7 @@ export default {
           name: "userAddress",
           required: true,
           label: "Address",
-          align: "left",
+          align: "",
           field: row => {
             return row.user.userAddress;
           },
@@ -164,7 +166,7 @@ export default {
           name: "city",
           required: true,
           label: "City",
-          align: "left",
+          align: "",
           field: row => {
             return row.user.city;
           },
@@ -174,7 +176,7 @@ export default {
           name: "state",
           required: true,
           label: "State",
-          align: "left",
+          align: "",
           field: row => {
             return row.user.state;
           },
@@ -184,7 +186,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false
         }

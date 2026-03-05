@@ -80,10 +80,10 @@
                   </div>
                 </q-list>
               </q-card-section>
-              <q-card-actions  align="right">
+              <q-card-actions  align="side">
                 <q-btn
                 flat
-                align="right"
+                align="side"
                 class="bg-white text-weight-regular text-grey-8"
                 @click="emitfnshowEditRental()"
                 >Cancel</q-btn>
@@ -128,6 +128,7 @@
 
 <script>
 /* START >> Modal components Lead source, device, merchant type */
+import { useVuelidate } from "@vuelidate/core";
 import showLeadSourceModalComponent from "../../components/super_admin/showLeadSourceModalComponents.vue";
 import showDeviceDetailModalComponent from "../../components/super_admin/showDeviceDetailModalComponents.vue";
 import showMerchantModalComponent from "../../components/super_admin/merchantTypes.vue";
@@ -137,6 +138,7 @@ import { mapGetters, mapActions } from "vuex";
 import _ from "lodash";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   props: ["propShoweditPlanDetails", "propRowDetails"],
   name: "EditRentalCharges",
   components: {
@@ -310,8 +312,7 @@ export default {
             icon: "thumb_up",
             message: response.data.message
           });
-        })
-        .catch(error => {
+        }).catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

@@ -2,6 +2,8 @@
   <div>
     <q-dialog minimized v-model="propToggleModal" @hide="toggleModal" @escape-key="toggleModal"
       class="customModalOverlay" :content-css="{ padding: '30px', minWidth: '30vw' }">
+<q-card style="min-width: 350px;">
+
       <form>
         <div class="row gutter-sm q-py-sm items-center">
           <div class="col-md-12">
@@ -82,22 +84,28 @@
             </div> -->
         </div>
         <div class="row gutter-sm q-py-sm items-center">
-          <div class="col-md-12 group" align="right">
-            <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="toggleModal()">Cancel
+          <div class="col-md-12 group" align="side">
+            <q-btn flat align="side" class="bg-white text-weight-regular text-grey-8" @click="toggleModal()">Cancel
             </q-btn>
-            <q-btn align="right" @click="submitMarsInstanceData(formData)" color="purple-9">Save</q-btn>
+            <q-btn align="side" @click="submitMarsInstanceData(formData)" color="purple-9">Save</q-btn>
           </div>
         </div>
       </form>
-    </q-dialog>
+
+</q-card>
+</q-dialog>
   </div>
 </template>
   
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { integer, required } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 export default {
   // name: 'ComponentName',
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["propShowEditMarsInstance", "propRowDetails"],
   data() {
     return {
@@ -153,6 +161,9 @@ export default {
     console.log("beforeMount Datas -------------->", JSON.stringify(this.propRowDetails))
   },
 
+  computed: {
+    () { return this.v$; }
+  },
   methods: {
     ...mapActions("leadSource", ["UPDATE_LEAD_SOURCE"]),
     ...mapActions("MarsInstance", ["UPDATE_INSTANCE"]),
@@ -190,7 +201,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
               icon: "thumb_down"
             });
           });

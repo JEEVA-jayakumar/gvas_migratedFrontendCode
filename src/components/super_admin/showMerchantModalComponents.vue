@@ -1,18 +1,20 @@
 <template>
   <q-dialog
     minimized
-    position="right"
+    position="side"
     v-model="toggleModal"
-    no-backdrop-dismiss
+    persistent
     @escape-key="emitModalClose"
     class="customModalOverlay"
     :content-css="{padding:'75px 25px',minWidth:'40vw',minHeight:'100vh'}"
   >
+<q-card style="min-width: 350px;">
+
     <div class="row items-center bottom-border q-py-sm fit">
       <div class="col">
         <div class="text-h6 text-weight-regular">Manage merchant type</div>
       </div>
-      <div class="col" align="right">
+      <div class="col" align="side">
         <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
       </div>
     </div>
@@ -134,15 +136,19 @@
       @emitfnshowMerchantTypes="refreshMerchantTypeList"
     ></showEditMerchantType>
     <!--END: Show edit MerchantTypes -->
-  </q-dialog>
+
+</q-card>
+</q-dialog>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 import { required } from "@vuelidate/validators";
 import showCreateMerchantType from "./createMerchantType.vue";
 import showEditMerchantType from "./editMerchantType.vue";
 export default {
+  setup() { return { v$: useVuelidate() } },
   props: ["propToggleModal"],
   // name: 'ComponentName',
   components: {
@@ -180,7 +186,7 @@ export default {
           name: "merchantTypeName",
           required: true,
           label: "Merchant type",
-          align: "left",
+          align: "",
           field: "merchantTypeName",
           sortable: false
         },
@@ -188,7 +194,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false
         }
@@ -198,7 +204,7 @@ export default {
           name: "merchantTypeName",
           required: true,
           label: "Merchant type",
-          align: "left",
+          align: "",
           field: "merchantTypeName",
           sortable: false
         },
@@ -206,7 +212,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false
         }
@@ -268,7 +274,7 @@ export default {
           message: "Are you sure want to disable Merchant type?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -284,7 +290,7 @@ export default {
                 message: "Merchant type deactivated",
                 icon: "thumb_up"
               });
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -293,8 +299,7 @@ export default {
               });
             });
           this.$q.loading.hide();
-        })
-        .onCancel(() => {
+        }).catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -310,7 +315,7 @@ export default {
           message: "Are you sure want to disable Merchant type?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -328,7 +333,7 @@ export default {
                 } has been enabled`,
                 icon: "thumb_up"
               });
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -337,8 +342,7 @@ export default {
               });
             });
           this.$q.loading.hide();
-        })
-        .onCancel(() => {
+        }).catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

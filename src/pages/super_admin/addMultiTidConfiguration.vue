@@ -114,13 +114,13 @@
               </q-item-section>
             </q-item>
             </q-card-section>
-            <q-card-actions vertical align="right">
+            <q-card-actions vertical align="side">
              <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" />
             </q-card-actions>
           </q-card>
         </div>
         </q-card-section>
-        <q-card-actions align="right">
+        <q-card-actions align="side">
            <q-btn flat label="Close" color="primary" @click="emitModalClose" />
         </q-card-actions>
       </q-card>
@@ -169,6 +169,7 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 import showLeadSourceModalComponent from "../../components/super_admin/showLeadSourceModalComponents.vue";
 import showHostDetailModalComponent from "../../components/super_admin/showHostDetailModalComponent.vue";
@@ -178,6 +179,7 @@ import showTIDGroupModalComponent from "../../components/super_admin/showTIDGrou
 import _ from "lodash";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "AddMultiTidConfiguration",
   props: ["propShowAddNewConfigurarions"],
   components: {
@@ -268,8 +270,7 @@ export default {
               message: response.data.message
             });
             this.resetForm();
-          })
-          .catch(error => {
+          }).catch(() => {
             this.$q.notify({
               color: "negative",
               position: "bottom",

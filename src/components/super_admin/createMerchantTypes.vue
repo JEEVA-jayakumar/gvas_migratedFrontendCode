@@ -8,6 +8,8 @@
       class="customModalOverlay"
       :content-css="{padding:'30px',minWidth: '30vw'}"
     >
+<q-card style="min-width: 350px;">
+
       <form>
         <div class="row gutter-sm q-py-sm items-center">
           <div class="col-md-12">
@@ -41,26 +43,32 @@
           </div>
         </div>
         <div class="row gutter-sm q-py-sm items-center">
-          <div class="col-md-12 group" align="right">
+          <div class="col-md-12 group" align="side">
             <q-btn
               flat
-              align="right"
+              align="side"
               class="bg-white text-weight-regular text-grey-8"
               @click="toggleModal()"
             >Cancel</q-btn>
-            <q-btn align="right" @click="submitMerchantTypeData(formData)" color="purple-9">Save</q-btn>
+            <q-btn align="side" @click="submitMerchantTypeData(formData)" color="purple-9">Save</q-btn>
           </div>
         </div>
       </form>
-    </q-dialog>
+
+</q-card>
+</q-dialog>
   </div>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { integer, required } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 export default {
   // name: 'ComponentName',
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["propShowCreateMerchantTypes"],
   data() {
     return {
@@ -83,6 +91,9 @@ export default {
     }
   },
 
+  computed: {
+    () { return this.v$; }
+  },
   methods: {
     ...mapActions("merchantTypes", ["ADD_NEW_MERCHANT_TYPE"]),
     toggleModal() {
@@ -114,7 +125,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
               icon: "thumb_down"
             });
           });

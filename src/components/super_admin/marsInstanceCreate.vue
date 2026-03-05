@@ -8,6 +8,8 @@
         class="customModalOverlay"
         :content-css="{padding:'30px',minWidth: '30vw'}"
       >
+<q-card style="min-width: 350px;">
+
         <form>
           <div class="row gutter-sm q-py-sm items-center">
             <div class="col-md-12">
@@ -81,26 +83,32 @@
   
           </div>
           <div class="row gutter-sm q-py-sm items-center">
-            <div class="col-md-12 group" align="right">
+            <div class="col-md-12 group" align="side">
               <q-btn
                 flat
-                align="right"
+                align="side"
                 class="bg-white text-weight-regular text-grey-8"
                 @click="toggleModal()"
               >Cancel</q-btn>
-              <q-btn align="right" @click="submitInstanceData(formData)" color="purple-9">Save</q-btn>
+              <q-btn align="side" @click="submitInstanceData(formData)" color="purple-9">Save</q-btn>
             </div>
           </div>
         </form>
-      </q-dialog>
+
+</q-card>
+</q-dialog>
     </div>
   </template>
   
   <script>
-  import { integer, required } from "@vuelidate/validators";
+  import { useVuelidate } from "@vuelidate/core";
+import { integer, required } from "@vuelidate/validators";
   import { mapGetters, mapActions } from "vuex";
   export default {
     // name: 'ComponentName',
+  setup() {
+    return { v$: useVuelidate() };
+  },
     props: ["propShowCreatemarsInstance"],
     data() {
       return {
@@ -146,7 +154,10 @@
       }
     },
   
-    methods: {
+    computed: {
+    () { return this.v$; }
+  },
+  methods: {
       ...mapActions("leadSource", ["ADD_NEW_LEAD_SOURCE"]),
       ...mapActions("Host", ["ADD_NEW_HOST"]),
       ...mapActions("MarsInstance", ["ADD_NEW_INSTANCE"]),
@@ -179,7 +190,7 @@
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
                 icon: "thumb_down"
               });
             });

@@ -8,6 +8,8 @@
         class="customModalOverlay" 
         :content-css="{padding:'30px',minWidth: '30vw'}"
         >
+<q-card style="min-width: 350px;">
+
             <form> 
                 <div class="row gutter-sm q-py-sm items-center">
                     <div class="col-md-12">
@@ -27,21 +29,27 @@
                     </div>
                 </div>
                 <div class="row gutter-sm q-py-sm items-center">
-                    <div class="col-md-12 group" align="right">
-                        <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowAddNewCsSubIssue()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitAddCsSubIssue(formData)" color="purple-9">Save</q-btn>
+                    <div class="col-md-12 group" align="side">
+                        <q-btn flat align="side" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowAddNewCsSubIssue()">Cancel</q-btn>
+                        <q-btn align="side" @click="fnfinalsubmitAddCsSubIssue(formData)" color="purple-9">Save</q-btn>
                     </div>
                 </div>
             </form>
-        </q-dialog>
+
+</q-card>
+</q-dialog>
     </div>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["propShowAddCsSubIssue", "propRowDetails"],
   data() {
     return {
@@ -76,6 +84,9 @@ created(){
     this.fnAddCsSubIssueDetails();
 },
 
+  computed: {
+    () { return this.v$; }
+  },
   methods: {
     ...mapActions("serviceRequest", ["FETCH_CS_SUB_ISSUE_DATAS","POST_CS_SUB_ISSUE"]),
     emitfnShowAddNewCsSubIssue() {
@@ -93,8 +104,7 @@ created(){
             });
           });
           this.selectServiceReqType = assumeArr;
-        })
-        .catch(error => {
+        }).catch(() => {
           this.selectServiceReqType = [];
         });
 },
@@ -123,8 +133,7 @@ fnfinalsubmitAddCsSubIssue(formData) {
               icon: "thumb_up"
             });
              
-           })
-          .catch(error => {
+           }).catch(() => {
             this.$q.loading.hide();
             this.$q.notify({
               type: "warning",

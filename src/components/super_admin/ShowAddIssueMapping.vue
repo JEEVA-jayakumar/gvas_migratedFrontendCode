@@ -3,6 +3,8 @@
       <q-dialog minimized v-model="toggleModel" @hide="emitfnShowAddNewIssueMapping"
         @escape-key="emitfnShowAddNewIssueMapping" class="customModalOverlay"
         :content-css="{ padding: '30px', minWidth: '50vw' }">
+<q-card style="min-width: 350px;">
+
         <form>
           <div class="row gutter-sm q-py-sm items-center">
             <div class="col-md-12">
@@ -30,22 +32,28 @@
           </div>
   
           <div class="row gutter-sm q-py-sm items-center">
-            <div class="col-md-12 group" align="right">
-              <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8"
+            <div class="col-md-12 group" align="side">
+              <q-btn flat align="side" class="bg-white text-weight-regular text-grey-8"
                 @click="emitfnShowAddNewIssueMapping()">Cancel</q-btn>
-              <q-btn :disable="this.selectedItem == ''" align="right" @click="fnfinalsubmitIssueMapping(formData)" color="purple-9">Save</q-btn>
+              <q-btn :disable="this.selectedItem == ''" align="side" @click="fnfinalsubmitIssueMapping(formData)" color="purple-9">Save</q-btn>
             </div>
           </div>
         </form>
-      </q-dialog>
+
+</q-card>
+</q-dialog>
     </div>
   </template>
   
   <script>
-  import { required } from "@vuelidate/validators";
+  import { useVuelidate } from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
   import { mapGetters, mapActions } from "vuex";
   
   export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
     props: ["propShowAddIssueMapping", "propRowDetails"],
     data() {
       return {
@@ -125,8 +133,7 @@
                 message: "Added Successfully",
                 icon: "thumb_up"
               });
-             })
-            .catch(error => {
+             }).catch(() => {
               this.$q.loading.hide();
               this.$q.notify({
                 type: "warning",

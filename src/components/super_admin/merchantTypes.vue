@@ -1,18 +1,20 @@
 <template>
   <q-dialog
     minimized
-    position="right"
+    position="side"
     v-model="toggleModal"
-    no-backdrop-dismiss
+    persistent
     @escape-key="emitModalClose"
     class="customModalOverlay"
     :content-css="{padding:'60px 25px',minWidth:'40vw',minHeight:'100vh'}"
   >
+<q-card style="min-width: 350px;">
+
     <div class="row items-center bottom-border q-py-sm">
       <div class="col">
         <div class="text-h6 text-weight-regular">Manage merchant types</div>
       </div>
-      <div class="col" align="right">
+      <div class="col" align="side">
         <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
       </div>
     </div>
@@ -73,7 +75,7 @@
                 label="Search merchant type"
               />
             </div>
-            <div class="col-4" align="right">
+            <div class="col-4" align="side">
               <q-btn
                 no-caps
                 no-wrap
@@ -146,16 +148,20 @@
       @emitfnshowMerchantTypes="refreshMerchantTypeList"
     ></showEditMerchantType>
     <!--END: Show edit MerchantTypes -->
-  </q-dialog>
+
+</q-card>
+</q-dialog>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import showCreateMerchantType from "./createMerchantTypes.vue";
 import showEditMerchantType from "./editMerchantTypes.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   props: ["propToggleModal", "propactiveMerchantTypes"],
   components: {
     showCreateMerchantType,
@@ -194,7 +200,7 @@ export default {
           name: "merchantTypeName",
           required: true,
           label: "Merchant Type",
-          align: "left",
+          align: "",
           field: "merchantTypeName",
           sortable: true
         },
@@ -202,7 +208,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "right",
+          align: "side",
           field: "",
           sortable: true
         }
@@ -273,7 +279,7 @@ export default {
           message: "Are you sure want to delete merchant type?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -291,7 +297,7 @@ export default {
                 } has been deactivated`,
                 icon: "thumb_up"
               });
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -300,8 +306,7 @@ export default {
               });
             });
           this.$q.loading.hide();
-        })
-        .onCancel(() => {
+        }).catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -317,7 +322,7 @@ export default {
           message: "Are you sure want to enable merchant type?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -335,7 +340,7 @@ export default {
                 } has been activated`,
                 icon: "thumb_up"
               });
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -344,8 +349,7 @@ export default {
               });
             });
           this.$q.loading.hide();
-        })
-        .onCancel(() => {
+        }).catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

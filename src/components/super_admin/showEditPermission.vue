@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="row q-pa-md">
-          <div class="col-md-12 text-right">
+          <div class="col-md-12 text-side">
             <q-btn flat size="md" class="bg-white q-mr-sm text-weight-regular text-grey-8" @click="emitfnEditpermissionDetails(false)">Cancel
             </q-btn>
             <q-btn size="md" @click="fnEditPermissionSubmit(formData.permissionDetails)" color="purple-9">Save
@@ -67,6 +67,9 @@ export default {
     }
   },
 
+  computed: {
+    () { return this.v$; }
+  },
   methods: {
     ...mapActions("SuperAdminUsers", [
       "FEED_EXISTING_PERMISSION_DATA",
@@ -104,8 +107,7 @@ export default {
               message: "Successfully Updated!",
               icon: "thumb_up"
             });
-          })
-          .catch(error => {
+          }).catch(() => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
