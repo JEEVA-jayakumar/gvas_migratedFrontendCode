@@ -328,7 +328,7 @@ export default {
         this.DEVICE_VERIFICATION_ON_SCAN_USING_DEVICE_TYPE_ID({
           device: self.formData.device_type.id,
           barcode: barcode
-        }).then(() => {
+        }).onOk(() => {
             assumeArr.deviceSerialNumbers.push(barcode);
             let findDeviceSerialNumber = _.find(this.tableData, function(oo) {
               return (
@@ -338,7 +338,7 @@ export default {
             });
             findDeviceSerialNumber.status = true;
           })
-          .catch(() => {
+          .onCancel(() => {
             this.$q.notify({
               color: "primary",
               position: "bottom",
@@ -373,7 +373,7 @@ export default {
     // Function to get all device types
     fnAjaxGetAllDevicesTypesData() {
       this.FETCH_ALL_INVENTORY_DEVICES_TYPES_DATA()
-        .then(() => {
+        .onOk(() => {
           let assumeArr = [];
           this.getAllInventoryDevicesTypesData.map(function(value, index) {
             assumeArr.push({
@@ -383,7 +383,7 @@ export default {
           });
           this.deviceOptions = assumeArr;
         })
-        .catch(error => {
+        .onCancel(error => {
           this.deviceOptions = [];
         });
     },
@@ -391,7 +391,7 @@ export default {
     // Function to get ll faulty inventorey data
     fnAjaxFaultyInventoryData() {
       this.FETCH_FAULT_INVENTORY_DEVICES_FROM_REGIONAL(this.podNumber)
-        .then(() => {
+        .onOk(() => {
           this.disableDeviceTypeSelection = false;
           let cookedArr = [];
           _.map(this.getInvenotryAsFaultyData, function(oo) {
@@ -404,7 +404,7 @@ export default {
           });
           this.tableData = cookedArr;
         })
-        .catch(() => {
+        .onCancel(() => {
           this.disableDeviceTypeSelection = true;
         });
     },
@@ -437,7 +437,7 @@ export default {
           };
 
           this.FEED_FAULTY_FINAL_SUBMIT(assumeArr)
-            .then(() => {
+            .onOk(() => {
               this.scannerToggleOption = false;
               this.formData = {
                 device_type: "",

@@ -286,7 +286,7 @@ export default {
           this.deActiveTableData = this.getAllRegionsData1.filter(service => service.active == false);
           this.$q.loading.hide();
       })
-       .catch(() => {
+       .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -305,7 +305,7 @@ export default {
       //     ok: "Continue",
       //     cancel: "Cancel"
       //   })
-        // .then(() => {
+        // .onOk(() => {
         //   this.$q.loading.show({
         //     delay: 100, // ms
         //     message: "Please Wait",
@@ -329,7 +329,7 @@ export default {
         //       });
         //       this.$q.loading.hide();
         //     })
-        //     .catch(error => {
+        //     .onCancel(error => {
         //       this.$q.notify({
         //         color: "warning",
         //         position: "bottom",

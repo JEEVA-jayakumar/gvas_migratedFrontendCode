@@ -2,8 +2,8 @@
     <div>
       <q-dialog
         class="customModalOverlay"
-        minimized
-        v-model="toggleModel"  
+        persistent
+        :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)"
         no-esc-dismiss
         no-backdrop-dismiss
         :content-css="{padding:'30px',maxWidth: '30vw'}"

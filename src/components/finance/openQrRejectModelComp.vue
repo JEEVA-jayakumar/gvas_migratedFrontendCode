@@ -128,7 +128,7 @@ export default {
             message: "Processing .."
           });
           this.QR_REJECT_FINANCE_EXCEPTION(this.formData)
-            .then(() => {
+            .onOk(() => {
               this.$emit("closeQrRejectModel");
               this.$emit("reloadQrPaymentTrackerData");
               this.$q.loading.hide();
@@ -139,7 +139,7 @@ export default {
                 icon: "clear"
               });
             })
-            .catch(error => {
+            .onCancel(error => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",

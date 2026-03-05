@@ -1847,7 +1847,7 @@ export default {
           // );
           this.$q.loading.hide();
         })
-        .catch(error => {
+        .onCancel(error => {
           this.$q.loading.hide();
         });
       this.toggleAjaxLoadFilter = false;
@@ -2003,7 +2003,7 @@ export default {
 //       // Call saveformsLists with fileName and mimeType
 //       this.saveformsLists(fileName, mimeType);
 //     })
-//     .catch(error => {
+//     .onCancel(error => {
 //       this.$q.loading.hide();
 //       this.$q.notify({
 //         color: "negative",
@@ -2030,7 +2030,7 @@ export default {
 //   };
 
 //   this.FORMS_UPLOADED_DOCUMENT_QR_DETAILS(param)
-//     .then(() => {
+//     .onOk(() => {
 //       this.$q.loading.hide();
 //       this.$q.notify({
 //         color: "positive",
@@ -2039,7 +2039,7 @@ export default {
 //         icon: "thumb_up"
 //       });
 //     })
-//     .catch(error => {
+//     .onCancel(error => {
 //       this.$q.loading.hide();
 //       this.$q.notify({
 //         color: "negative",
@@ -2090,7 +2090,7 @@ fnVerificationDocumentUploadFormsUpload(event, formType) {
         });
       } 
    })
-  .catch(error => {
+  .onCancel(error => {
       this.$q.loading.hide();
       this.$q.notify({
         color: "negative",
@@ -2133,7 +2133,7 @@ saveformsLists(fileName, mimeType, formTypeToUpdate) {
   };
 
   this.FORMS_UPLOADED_DOCUMENT_QR_DETAILS(param)
-    .then(() => {
+    .onOk(() => {
       this.$q.loading.hide();
       this.$q.notify({
         color: "positive",
@@ -2143,7 +2143,7 @@ saveformsLists(fileName, mimeType, formTypeToUpdate) {
       });
       this.ajaxQrLoadShortLeadInfo();
     })
-    .catch(error => {
+    .onCancel(error => {
       this.$q.loading.hide();
       this.$q.notify({
         color: "negative",
@@ -2180,7 +2180,7 @@ saveformsLists(fileName, mimeType, formTypeToUpdate) {
           this.ajaxQrLoadShortLeadInfo();
           this.$q.loading.hide();
         })
-        .catch(error => {
+        .onCancel(error => {
           this.$q.loading.hide();
           this.$q.notify({
             color: "negative",
@@ -2234,7 +2234,7 @@ saveformsLists(fileName, mimeType, formTypeToUpdate) {
           this.ajaxQrLoadShortLeadInfo();
           this.setGroup();
         })
-        .catch(error => {
+        .onCancel(error => {
           this.$q.loading.hide();
           this.$q.notify({
             color: "negative",
@@ -2281,7 +2281,7 @@ saveformsLists(fileName, mimeType, formTypeToUpdate) {
           //  console.log("DOCS DATA NEW",JSON.stringify(this.Docs));
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -2330,7 +2330,7 @@ saveformsLists(fileName, mimeType, formTypeToUpdate) {
               });
             });
         })
-        .catch(() => {
+        .onCancel(() => {
           innerSelf.$q.notify({
             color: "negative",
             position: "bottom",
@@ -2366,7 +2366,7 @@ saveformsLists(fileName, mimeType, formTypeToUpdate) {
           evt.target.value = "";
           this.$q.loading.hide();
         })
-        .catch(error => {
+        .onCancel(error => {
           evt.target.value = "";
           this.$q.loading.hide();
           this.$q.notify({

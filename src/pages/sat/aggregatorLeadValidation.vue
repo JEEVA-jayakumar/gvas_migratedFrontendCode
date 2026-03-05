@@ -344,7 +344,7 @@ export default {
         .then(response => {
           this.toggleAjaxLoadFilter = false;
         })
-        .catch(error => {
+        .onCancel(error => {
           this.toggleAjaxLoadFilter = false;
         });
     },
@@ -375,7 +375,7 @@ export default {
           this.$q.loading.hide();
           // console.log("Table Datas ---------------------->"+JSON.stringify(this.tableData));
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },

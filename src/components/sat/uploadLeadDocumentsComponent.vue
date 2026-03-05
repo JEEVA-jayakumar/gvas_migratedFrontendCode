@@ -436,7 +436,7 @@ export default {
           );
           this.$q.loading.hide();
         })
-        .catch(error => {
+        .onCancel(error => {
           this.$q.loading.hide();
         });
       this.toggleAjaxLoadFilter = false;
@@ -533,7 +533,7 @@ export default {
             this.merchantTypeSelection
           );
         })
-        .catch(error => {
+        .onCancel(error => {
           this.$q.loading.hide();
           this.$q.notify({
             color: "negative",
@@ -568,7 +568,7 @@ export default {
             this.merchantTypeSelection
           );
         })
-        .catch(error => {
+        .onCancel(error => {
           this.$q.loading.hide();
           this.$q.notify({
             color: "negative",
@@ -603,7 +603,7 @@ export default {
           );
           this.$q.loading.hide();
         })
-        .catch(error => {
+        .onCancel(error => {
           this.$q.loading.hide();
           this.$q.notify({
             color: "negative",
@@ -654,7 +654,7 @@ export default {
               });
             });
         })
-        .catch(() => {
+        .onCancel(() => {
           innerSelf.$q.notify({
             color: "negative",
             position: "bottom",

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <q-dialog v-model="toggleModal" @hide="emitfnShowAddNewAggregatorsDevice" no-backdrop-dismiss
+        <q-dialog :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)" @hide="emitfnShowAddNewAggregatorsDevice" no-backdrop-dismiss
             class="customModalOverlay" :content-css="{ padding: '30px', minWidth: '30vw' }">
             <form>
                 <div class="text-h6 text-weight-regular q-py-md bottom-border items-center">

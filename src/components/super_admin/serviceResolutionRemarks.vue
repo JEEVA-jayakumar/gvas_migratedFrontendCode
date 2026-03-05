@@ -305,7 +305,7 @@ import { required } from '@vuelidate/validators';
               customClass: "shadow-none"
             });
              this.ACTIVE_SERVICE_RESOLUTION_REMARKS(param)
-            .then(() => {
+            .onOk(() => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "positive",
@@ -378,7 +378,7 @@ import { required } from '@vuelidate/validators';
              this.ActivetableData = this.getserviceActiveResolutionDeatils.filter(service => service.active == true);
                console.log("ActivetableData------->", JSON.stringify(this.ActivetableData))
                })
-          .catch(() => {
+          .onCancel(() => {
             this.$q.loading.hide();
           });
 
@@ -392,7 +392,7 @@ import { required } from '@vuelidate/validators';
             //  this.ActivetableData = this.getserviceDeactiveResolutionDeatils.filter(service => service.active == true);
             //    console.log("ActivetableData------->", JSON.stringify(this.ActivetableData))
                })
-          .catch(() => {
+          .onCancel(() => {
             this.$q.loading.hide();
           });
       },
@@ -407,7 +407,7 @@ import { required } from '@vuelidate/validators';
       //        this.DeactiveServiceResolutionRemarks = this.getserviceDeactiveResolutionDeatils.filter(service => service.active == false);
       //          this.ActiveServiceResolutionRemarks= this.getserviceDeactiveResolutionDeatils.filter(service => service.active == true);
       //     })
-      //     .catch(() => {
+      //     .onCancel(() => {
       //       this.$q.loading.hide();
       //     });
       // },

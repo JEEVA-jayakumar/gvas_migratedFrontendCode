@@ -1,7 +1,7 @@
 <template>
     <div>
         <q-dialog
-        minimized
+        persistent
         :model-value="propShowCreateRegions"
         @hide="emitfnshowAddRegions" 
         @escape-key="emitfnshowAddRegions"  

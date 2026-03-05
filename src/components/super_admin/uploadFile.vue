@@ -2,7 +2,7 @@
   <div>
     <q-dialog
       class="customModalOverlay"
-      v-model="toggleModel"
+      :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)"
       @hide="emitfnshowUploadFile()"
       @escape-key="emitfnshowUploadFile()"
       :content-css="{minWidth:'50%',height:'auto',maxHeight:'50vh',margin:'20px',padding:'20px'}"

@@ -197,7 +197,7 @@ export default {
         .then(response => {
           this.toggleAjaxLoadFilter = false;
         })
-        .catch(error => {
+        .onCancel(error => {
           this.toggleAjaxLoadFilter = false;
         });
     },
@@ -227,7 +227,7 @@ export default {
           this.$q.loading.hide();
           // console.log("Table Datas ---------------------->"+JSON.stringify(this.tableData));
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -247,7 +247,7 @@ export default {
           })
 
           this.ADDITIONAL_TID_VERIFY_DATA(reqData)
-            .then(() => {
+            .onOk(() => {
               // this.ajaxLoadAllLeadInfo();
               this.$q.loading.hide();
                this.$router.push({name: "additionalTidform", params: {data: reqData}})

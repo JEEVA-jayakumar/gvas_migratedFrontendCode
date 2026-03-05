@@ -261,7 +261,7 @@ export default {
         .then(response => {
           this.toggleAjaxLoadFilter = false;
         })
-        .catch(error => {
+        .onCancel(error => {
           this.toggleAjaxLoadFilter = false;
         });
     },
@@ -270,7 +270,7 @@ export default {
     //   let self = this;
     //   let cookedArr = [];
     //   self.GET_ACTIVE_CREATED_AGGREGATORS_LIST()
-    //     .then(() => {
+    //     .onOk(() => {
     //       return _.map(self.getActiveCreatedAggregatorList, (item) => {
     //         console.log("ITEM -------->", item)
     //         cookedArr.push({
@@ -309,7 +309,7 @@ export default {
         .then(response => {
           this.toggleAjaxLoadFilter1 = false;
         })
-        .catch(error => {
+        .onCancel(error => {
           his.toggleAjaxLoadFilter1 = false;
         });
     },
@@ -339,7 +339,7 @@ export default {
           this.$q.loading.hide();
           // console.log("Table Datas ---------------------->"+JSON.stringify(this.tableData));
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -389,7 +389,7 @@ export default {
           // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -412,7 +412,7 @@ export default {
             message: "Processing .."
           });
           this.APPROVE_AGGREGATOR_SELF_ASSIGNMENT(param)
-            .then(() => {
+            .onOk(() => {
               this.ajaxLoadAllLeadInfo({
                 pagination: this.paginationControl,
                 filter: this.filter
@@ -462,7 +462,7 @@ export default {
     //     delay: 100 // ms
     //   });
     //   this.DOWNLOAD_lOST_OR_STOLEN_DATAS()
-    //     .then(() => {
+    //     .onOk(() => {
     //       this.$q.loading.hide();
     //       this.$q.notify({
     //         color: "positive",
@@ -471,7 +471,7 @@ export default {
     //         icon: "check"
     //       });
     //     })
-    //     .catch(error => {
+    //     .onCancel(error => {
     //       console.log(error);
     //       this.$q.loading.hide();
     //       this.$q.notify({

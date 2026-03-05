@@ -283,7 +283,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.FETCH_LOST_FINANCE_DATAS({ pagination, filter }).then(() => {
+      this.FETCH_LOST_FINANCE_DATAS({ pagination, filter }).onOk(() => {
         this.paginationControl = pagination;
         this.paginationControl.rowsNumber = this.getlostDatas.totalElements;
         this.paginationControl.page = this.getlostDatas.number + 1;
@@ -293,7 +293,7 @@ export default {
           this.paginationControl.descending = this.getlostDatas.sort[0].ascending;
         }
         this.$q.loading.hide();
-      }).catch(() => {
+      }).onCancel(() => {
         this.$q.loading.hide();
       });
     },
@@ -316,7 +316,7 @@ export default {
           lostOrStolenRemarks: ""
         };
 
-        this.APPROVE_LOST_STOLEN_EXCEPTION(obj).then(() => {
+        this.APPROVE_LOST_STOLEN_EXCEPTION(obj).onOk(() => {
           this.ajaxLoadAllLeadInfo({ pagination: this.paginationControl, filter: this.filter });
           this.$q.loading.hide();
           this.$q.notify({
@@ -325,7 +325,7 @@ export default {
             message: 'Successfully Approved!',
             icon: 'thumb_up'
           });
-        }).catch(error => {
+        }).onCancel(error => {
           this.$q.loading.hide();
           this.$q.notify({
             color: 'negative',

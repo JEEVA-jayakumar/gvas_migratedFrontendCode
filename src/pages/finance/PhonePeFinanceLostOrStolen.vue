@@ -298,7 +298,7 @@ import { required, or } from '@vuelidate/validators';
             // finally we tell QTable to exit the "loading" state
             this.$q.loading.hide();
           })
-          .catch(() => {
+          .onCancel(() => {
             this.$q.loading.hide();
           });
       },
@@ -324,7 +324,7 @@ import { required, or } from '@vuelidate/validators';
             }
   
             this.APPROVE_PHONEPE_LOST_STOLEN_EXCEPTION(obj)
-              .then(() => {
+              .onOk(() => {
                 // this.ajaxLoadAllLeadInfo();
                 this.$q.loading.hide();
                 this.$q.notify({
@@ -333,7 +333,7 @@ import { required, or } from '@vuelidate/validators';
                   message: 'Successfully Approved!',
                   icon: 'thumb_up'
                 })
-              }).catch(error => {
+              }).onCancel(error => {
                 this.$q.loading.hide();
                 this.$q.notify({
                   color: 'negative',

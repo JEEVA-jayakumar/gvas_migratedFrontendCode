@@ -1,8 +1,8 @@
 <template>
     <q-dialog
-      minimized
+      persistent
       position="right"
-      v-model="toggleModal"
+      :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)"
       no-backdrop-dismiss
       @escape-key="emitToggleModal"
       class="customModalOverlay"
@@ -16,12 +16,12 @@
           <q-btn outline round color="dark" size="sm" icon="clear" @click="emitToggleModal"/>
         </div>
       </div>
-      <q-tabs v-model="tab" color="grey-9">
+      <q-tabs v-model="activeTab" color="grey-9">
         <!-- Tabs - notice  -->
         <q-tab @click="leadSourceActiveList" label="Active List" name="tab-1"/>
         <q-tab @click="leadSourceDeActiveList" label="De-Actived List" name="tab-2"/>
 </q-tabs>
-<q-tab-panels v-model="tab" animated>
+<q-tab-panels v-model="activeTab" animated>
 <q-tab-panel name="tab-1">
           <q-table
             :rows="getActiveLeadSource"
@@ -241,12 +241,12 @@
       ]),
       /* START >> Function to save, update or delete */
       leadSourceActiveList() {
-        this.LEAD_SOURCE_ACTIVE_LIST().then(() => {
+        this.LEAD_SOURCE_ACTIVE_LIST().onOk(() => {
           this.activeLeadSourceList = this.getActiveLeadSource;
         });
       },
       leadSourceDeActiveList() {
-        this.LEAD_SOURCE_DEACTIVED_LIST().then(() => {
+        this.LEAD_SOURCE_DEACTIVED_LIST().onOk(() => {
           this.deActiveLeadSourceList = this.getDeActivatedLeadSource;
         });
       },

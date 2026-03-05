@@ -306,7 +306,7 @@
             // finally we tell QTable to exit the "loading" state
             this.$q.loading.hide();
           })
-          .catch(() => {
+          .onCancel(() => {
             this.$q.loading.hide();
           });
       },
@@ -332,7 +332,7 @@
     //         ok: 'Continue',
     //         cancel: 'Cancel'
     //       })
-    //       .then(() => {
+    //       .onOk(() => {
     //         this.$q.loading.show({
     //           delay: 0, // ms
     //           spinnerColor: 'purple-9',
@@ -346,7 +346,7 @@
     //         }
   
     //         this.APPROVE_LOST_STOLEN_EXCEPTION(obj)
-    //           .then(() => {
+    //           .onOk(() => {
     //             // this.ajaxLoadAllLeadInfo();
     //             this.$q.loading.hide();
     //             this.$q.notify({
@@ -356,7 +356,7 @@
     //               icon: 'thumb_up'
     //             })
     //           })
-    //           .catch(error => {
+    //           .onCancel(error => {
     //            this.$q.loading.hide();
     //             this.$q.notify({
     //               color: 'negative',

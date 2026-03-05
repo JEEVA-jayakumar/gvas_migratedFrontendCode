@@ -256,7 +256,7 @@ export default {
         ok: "Ok",
         cancel: "Cancel"
       }).onOk(() => {
-        this.DEACTIVATE_MATM_USER_DETAILS(id).then(() => {
+        this.DEACTIVATE_MATM_USER_DETAILS(id).onOk(() => {
           this.ajaxLoadAllLeadInfo({ pagination: this.paginationControl, filter: "" });
           this.$q.notify({
             color: "positive",
@@ -275,7 +275,7 @@ export default {
         ok: "Ok",
         cancel: "Cancel"
       }).onOk(() => {
-        this.ACTIVATE_MATM_USER_DETAILS(id).then(() => {
+        this.ACTIVATE_MATM_USER_DETAILS(id).onOk(() => {
           this.ajaxLoadAllLeadInfo({ pagination: this.paginationControl, filter: "" });
           this.$q.notify({
             color: "positive",
@@ -290,7 +290,7 @@ export default {
     deletePlanDetails(reqData) {
       let params = { Id: reqData.id };
       this.DELETE_PLAN_DETAILS_DATAS(params)
-        .then(() => {
+        .onOk(() => {
           this.ajaxLoadAllLeadInfo({ pagination: this.paginationControl, filter: "" });
           this.$q.notify({
             color: "positive",
@@ -299,7 +299,7 @@ export default {
             icon: "thumb_up"
           });
         })
-        .catch(error => {
+        .onCancel(error => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -323,11 +323,11 @@ export default {
         });
 
         this.FETCH_ALL_MATM_PLAN_DETAILS(reqData)
-          .then(() => {
+          .onOk(() => {
             this.$q.loading.hide();
             this.$router.push({ name: "editMatmPlans", params: { data: reqData } });
           })
-          .catch(() => {
+          .onCancel(() => {
             this.$q.loading.hide();
           });
       });
@@ -341,7 +341,7 @@ export default {
           this.tableData = this.getMatmDatas;
           this.toggleAjaxLoadFilter = false;
         })
-        .catch(() => {
+        .onCancel(() => {
           this.toggleAjaxLoadFilter = false;
         });
     },

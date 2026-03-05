@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-dialog
-      v-model="toggleModal"
+      :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)"
       @hide="emitfnshowAddDeviceType"
       no-backdrop-dismiss
       class="customModalOverlay"

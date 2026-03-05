@@ -564,7 +564,7 @@ export default {
         //   .then(response => {
         //     this.toggleAjaxLoadFilter1 = false;
         //   })
-        //   .catch(error => {
+        //   .onCancel(error => {
         //     this.toggleAjaxLoadFilter1 = false;
         //   });
       } else if (tab == "tab-3") {
@@ -580,7 +580,7 @@ export default {
         //   .then(response => {
         //     this.toggleAjaxLoadFilter2 = false;
         //   })
-        //   .catch(error => {
+        //   .onCancel(error => {
         //     this.toggleAjaxLoadFilter2 = false;
         //   });
       } else {
@@ -597,7 +597,7 @@ export default {
     //     .then(response => {
     //       this.toggleAjaxLoadFilter1 = false;
     //     })
-    //     .catch(error => {
+    //     .onCancel(error => {
     //       this.toggleAjaxLoadFilter1 = false;
     //     });
     // },
@@ -627,7 +627,7 @@ export default {
           }
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -638,7 +638,7 @@ export default {
     //     .then(response => {
     //       this.toggleAjaxLoadFilter2 = false;
     //     })
-    //     .catch(error => {
+    //     .onCancel(error => {
     //       this.toggleAjaxLoadFilter2 = false;
     //     });
     // },
@@ -667,7 +667,7 @@ export default {
           }
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -754,7 +754,7 @@ export default {
           });
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -794,7 +794,7 @@ export default {
           });
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -820,7 +820,7 @@ export default {
         .then((response) => {
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -833,7 +833,7 @@ export default {
     //       ok: "Yes",
     //       cancel: "Cancel"
     //     })
-    //     .then(() => {
+    //     .onOk(() => {
     //       this.$q.loading.show({
     //         delay: 0,
     //         spinnerColor: "purple-9",
@@ -868,7 +868,7 @@ export default {
     //         }
     //       );
     //     })
-    //     .catch(() => {
+    //     .onCancel(() => {
     //       this.$q.loading.hide();
     //     });
     // },

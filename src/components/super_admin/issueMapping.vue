@@ -299,7 +299,7 @@ export default {
             customClass: "shadow-none"
           });
           this.ACTIVE_ISSUE_MAPPING(param)
-          .then(() => {
+          .onOk(() => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "positive",
@@ -380,7 +380,7 @@ export default {
             JSON.stringify(this.tableData)
           );
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
         
@@ -402,7 +402,7 @@ export default {
           //  this.ActivetableData = this.getdeactiveIssueMapping.filter(service => service.active == true);
           //    console.log("ActivetableData------->", JSON.stringify(this.ActivetableData))
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -415,7 +415,7 @@ export default {
     //           JSON.stringify(this.tableData1)
     //         );
     //       })
-    //       .catch(() => {
+    //       .onCancel(() => {
     //         this.$q.loading.hide();
     //       });
     //   },

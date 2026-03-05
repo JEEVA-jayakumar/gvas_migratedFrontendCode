@@ -1,8 +1,8 @@
 <template>
   <q-dialog
-    minimized
+    persistent
     position="right"
-    v-model="toggleModal"
+    :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)"
     no-backdrop-dismiss
     @escape-key="emitModalClose"
     class="customModalOverlay"
@@ -16,12 +16,12 @@
         <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
       </div>
     </div>
-    <q-tabs v-model="tab" color="grey-9">
+    <q-tabs v-model="activeTab" color="grey-9">
       <!-- Tabs - notice  -->
       <q-tab @click="leadSourceActiveList" label="Active Vas List" name="tab-1"/>
       <!-- <q-tab @click="leadSourceDeActiveList" label="Deactive Vas List" name="tab-2"/> -->
 </q-tabs>
-<q-tab-panels v-model="tab" animated>
+<q-tab-panels v-model="activeTab" animated>
 <q-tab-panel name="tab-1">
         <q-table
           :rows="tableData"
@@ -231,17 +231,17 @@ export default {
           console.log("TABLE DATA----------->",JSON.stringify(this.tableData))
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
     leadSourceActiveList() {
-      this.GET_ALL_VAS_DETAILS().then(() => {
+      this.GET_ALL_VAS_DETAILS().onOk(() => {
         this.tableData = this.getAllVasDetails;
       });
     },
     // leadSourceDeActiveList() {
-    //   this.LEAD_SOURCE_DEACTIVED_LIST().then(() => {
+    //   this.LEAD_SOURCE_DEACTIVED_LIST().onOk(() => {
     //     this.deActiveLeadSourceList = this.getDeActivatedLeadSource;
     //   });
     // },
@@ -276,7 +276,7 @@ export default {
     //       ok: "Continue",
     //       cancel: "Cancel"
     //     })
-    //     .then(() => {
+    //     .onOk(() => {
     //       this.$q.loading.show({
     //         delay: 100, // ms
     //         message: "Please Wait",
@@ -293,7 +293,7 @@ export default {
     //             icon: "thumb_up"
     //           });
     //         })
-    //         .catch(error => {
+    //         .onCancel(error => {
     //           this.$q.notify({
     //             color: "warning",
     //             position: "bottom",
@@ -303,7 +303,7 @@ export default {
     //         });
     //       this.$q.loading.hide();
     //     })
-    //     .catch(() => {
+    //     .onCancel(() => {
     //       this.$q.notify({
     //         color: "negative",
     //         position: "bottom",
@@ -320,7 +320,7 @@ export default {
     //       ok: "Continue",
     //       cancel: "Cancel"
     //     })
-    //     .then(() => {
+    //     .onOk(() => {
     //       this.$q.loading.show({
     //         delay: 100, // ms
     //         message: "Please Wait",
@@ -339,7 +339,7 @@ export default {
     //             icon: "thumb_up"
     //           });
     //         })
-    //         .catch(error => {
+    //         .onCancel(error => {
     //           this.$q.notify({
     //             color: "warning",
     //             position: "bottom",
@@ -349,7 +349,7 @@ export default {
     //         });
     //       this.$q.loading.hide();
     //     })
-    //     .catch(() => {
+    //     .onCancel(() => {
     //       this.$q.notify({
     //         color: "negative",
     //         position: "bottom",

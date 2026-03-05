@@ -812,7 +812,7 @@ export default {
         //       ok: "Continue",
         //       cancel: "Cancel"
         //     })
-        //     .then(() => {
+        //     .onOk(() => {
         //       this.$q.loading.show({
         //         delay: 0, // ms
         //         spinnerColor: "purple-9",
@@ -838,7 +838,7 @@ export default {
         //       console.log("PARAMS VALUES------------>", JSON.stringify(param))
 
         //       this.REJECT_INCOMING_POD_DETAILS(param)
-        //         .then(() => {
+        //         .onOk(() => {
         //           this.ajaxLoadAllLeadInfo({
         //             pagination: this.paginationControl,
         //             filter: this.filterSearch,
@@ -851,7 +851,7 @@ export default {
         //             icon: "thumb_up"
         //           });
         //         })
-        //         .catch(error => {
+        //         .onCancel(error => {
         //           this.$q.loading.hide();
         //           this.$q.notify({
         //             color: "negative",
@@ -867,7 +867,7 @@ export default {
             let self = this;
             self.regionSpareCount = [];
             self.getPhonepeSparePartsSetsAndCounts = [];
-            self.FETCH_PHONEPE_SPARE_PARTS_SETS_AND_COUNTS().then(() => {
+            self.FETCH_PHONEPE_SPARE_PARTS_SETS_AND_COUNTS().onOk(() => {
                 return _.map(self.getPhonepeSparePartsSetsAndCounts, item => {
                     console.log("GETTING SPARE PARTS COUNT DETAILS---------->", JSON.stringify(this.getPhonepeSparePartsSetsAndCounts))
                     self.regionSpareCount.push({
@@ -906,7 +906,7 @@ export default {
                 // finally we tell QTable to exit the "loading" state
                 this.$q.loading.hide();
             })
-                .catch(() => {
+                .onCancel(() => {
                     this.$q.loading.hide();
                 });
         },
@@ -934,7 +934,7 @@ export default {
                             param.status = reqdata.status
                             param.owner = reqdata.owner
                             this.APPROVE_PHONEPE_INCOMING_POD_DETAILS(param)
-                                .then(() => {
+                                .onOk(() => {
                                     console.log('PARAM---->>>>>>', JSON.stringify(param))
                                     console.log('second')
                                     this.$q.notify({
@@ -948,7 +948,7 @@ export default {
                                         filter: this.filterSearch
                                     })
                                     this.fnregionSpareCount()
-                                }).catch(error => {
+                                }).onCancel(error => {
                                     this.$q.loading.hide()
                                     this.$q.notify({
                                         color: 'negative',
@@ -958,7 +958,7 @@ export default {
                                     })
                                 })
                         })
-                        .catch(error => {
+                        .onCancel(error => {
                             this.$q.loading.hide()
                             this.$q.notify({
                                 color: 'negative',
@@ -998,7 +998,7 @@ export default {
                 // finally we tell QTable to exit the "loading" state
                 this.$q.loading.hide()
             })
-                .catch(() => {
+                .onCancel(() => {
                     this.$q.loading.hide()
                 })
         },
@@ -1031,7 +1031,7 @@ export default {
                 // finally we tell QTable to exit the "loading" state
                 this.$q.loading.hide()
             })
-                .catch(() => {
+                .onCancel(() => {
                     this.$q.loading.hide()
                 })
         },
@@ -1064,7 +1064,7 @@ export default {
                 // finally we tell QTable to exit the "loading" state
                 this.$q.loading.hide()
             })
-                .catch(() => {
+                .onCancel(() => {
                     this.$q.loading.hide()
                 })
         },
@@ -1115,7 +1115,7 @@ export default {
             } else {
                 this.$q.loading.show()
                 this.UPDATE_PHONEPE_SPARE_PARTS_INVENTORY_DATAS(request)
-                    .then(() => {
+                    .onOk(() => {
                         this.$q.loading.hide()
                         this.$q.notify({
                             color: 'positive',
@@ -1127,7 +1127,7 @@ export default {
                         console.log("this.formdata ------>",JSON.stringify(this.formData))
 
                     })
-                    .catch(error => {
+                    .onCancel(error => {
                         this.$q.loading.hide()
                         this.$q.notify({
                             color: 'negative',
@@ -1144,7 +1144,7 @@ export default {
         },
         fnSparePartsTypes() {
             let self = this
-            self.FETCH_SPARE_PARTS_GET_TYPES().then(() => {
+            self.FETCH_SPARE_PARTS_GET_TYPES().onOk(() => {
                 return _.map(self.getsparePartsGetTypes, item => {
                     self.sparePartsTypes.push({
                         value: item,
@@ -1266,7 +1266,7 @@ export default {
             let regionArea = JSON.parse(localStorage.getItem('u_i')).region.id
             console.log('REGION BASED SO DETAILS--------->', regionArea)
             // this.red
-            this.FETCH_REGION_BASED_SO(regionArea).then(() => {
+            this.FETCH_REGION_BASED_SO(regionArea).onOk(() => {
                 let assumeArr = []
                 this.getRegionBasedSO.map(function (value, index) {
                     assumeArr.push({
@@ -1356,7 +1356,7 @@ export default {
                         JSON.stringify(this.tableData)
                     )
                 })
-                .catch(() => {
+                .onCancel(() => {
                     this.$q.loading.hide()
                 })
         },
@@ -1366,7 +1366,7 @@ export default {
                 spinnerColor: 'purple-9',
                 message: 'Fetching data ..'
             })
-            this.FETCH_CENTRAL_INVENTORY_DASHBOARD_COUNT().then(() => {
+            this.FETCH_CENTRAL_INVENTORY_DASHBOARD_COUNT().onOk(() => {
                 this.inventoryData.centralItems = this.getCentralInventoryDashboardCount.centralInventory
                 this.inventoryData.merchantItems = this.getCentralInventoryDashboardCount.merchantInventory
                 this.inventoryData.regionalItems = this.getCentralInventoryDashboardCount.regionalInventory
@@ -1375,12 +1375,12 @@ export default {
                 this.inventoryData.faultyInventory = this.getCentralInventoryDashboardCount.faultyInventory
                 this.inventoryData.sendtoRepair = this.getCentralInventoryDashboardCount.faultySentToRepair
                 this.FETCH_ALL_REGIONS_DATA()
-                    .then(() => {
+                    .onOk(() => {
                         this.inventoryData.regionFilterOptions = this.getAllRegionsData
 
                         this.$q.loading.hide()
                     })
-                    .catch(() => {
+                    .onCancel(() => {
                         this.$q.loading.hide()
                     })
             })
@@ -1394,7 +1394,7 @@ export default {
                         JSON.stringify(this.tableData1)
                     )
                 })
-                .catch(() => {
+                .onCancel(() => {
                     this.$q.loading.hide()
                 })
         },

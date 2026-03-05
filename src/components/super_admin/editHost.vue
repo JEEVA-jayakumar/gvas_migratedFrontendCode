@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-dialog minimized v-model="propToggleModal" @hide="toggleModal" @escape-key="toggleModal"
+    <q-dialog persistent :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)" @hide="toggleModal" @escape-key="toggleModal"
       class="customModalOverlay" :content-css="{ padding: '30px', minWidth: '30vw' }">
       <form>
         <div class="row gutter-sm q-py-sm items-center">

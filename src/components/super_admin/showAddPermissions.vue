@@ -79,7 +79,7 @@
 
      <q-dialog
        
-        minimized
+        persistent
         v-model="propShowAddPermissions"  
         @hide="emitfnshowAddPermissions(propShowAddPermissions)" 
         @escape-key="emitfnshowAddPermissions(propShowAddPermissions)"  

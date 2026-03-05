@@ -296,7 +296,7 @@ import { required } from '@vuelidate/validators';
               customClass: "shadow-none"
             });
              this.ACTIVE_CS_SUB_ISSUE(param)
-            .then(() => {
+            .onOk(() => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "positive",
@@ -369,7 +369,7 @@ import { required } from '@vuelidate/validators';
              this.ActivetableData = this.getcsActiveSubIssueDetails.filter(service => service.active == true);
                console.log("ActivetableData------->", JSON.stringify(this.ActivetableData))
                })
-          .catch(() => {
+          .onCancel(() => {
             this.$q.loading.hide();
           });
 
@@ -383,7 +383,7 @@ import { required } from '@vuelidate/validators';
             //  this.ActivetableData = this.getcsDeactiveSubIssueDetails.filter(service => service.active == true);
             //    console.log("ActivetableData------->", JSON.stringify(this.ActivetableData))
                })
-          .catch(() => {
+          .onCancel(() => {
             this.$q.loading.hide();
           });
       },
@@ -398,7 +398,7 @@ import { required } from '@vuelidate/validators';
       //        this.DeactiveCsSubIssue = this.getcsDeactiveSubIssueDetails.filter(service => service.active == false);
       //          this.ActiveCsSubIssue = this.getcsDeactiveSubIssueDetails.filter(service => service.active == true);
       //     })
-      //     .catch(() => {
+      //     .onCancel(() => {
       //       this.$q.loading.hide();
       //     });
       // },

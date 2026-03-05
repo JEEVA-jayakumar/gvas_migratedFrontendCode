@@ -105,7 +105,7 @@ export default {
           this.propLeadInformation = this.getShortLeadInfo;
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         }); 
     },
@@ -113,7 +113,7 @@ export default {
     //   let self = this;
     //   self
     //     .FETCH_DEVICES_DATA()
-    //     .then(() => {
+    //     .onOk(() => {
     //       return _.map(self.getAllDevicesInfo, item => {
     //         self.dropDown.deviceOptions.push({
     //           value: item.deviceName,
@@ -141,7 +141,7 @@ export default {
             message: "Processing .."
           });
             this.REJECT_LEAD_EXCEPTION(formData)
-              .then(() => {
+              .onOk(() => {
                 this.$emit("closeRejectLeadModel");
                 this.$q.loading.hide()
                 this.$q.notify({
@@ -164,7 +164,7 @@ export default {
                 });
               });
           })
-          // .catch(() => {
+          // .onCancel(() => {
           //      this.$emit("closeRejectLeadModel");
           //   this.$q.notify({
           //     color: "negative",

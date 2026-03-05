@@ -183,7 +183,7 @@ export default {
                     console.log("param ------>", JSON.stringify(param))
 
                     this.REASSIGNED_REASON_TYPE_DETAILS(param)
-                        .then(() => {
+                        .onOk(() => {
                             this.$emit("emitfnshowUpdateOpenedExternal");
                             this.$q.loading.hide()
                             this.$q.notify({
@@ -192,7 +192,7 @@ export default {
                                 message: "Updated Successfully",
                                 icon: "thumb_up"
                             });
-                        }).catch(error => {
+                        }).onCancel(error => {
                             this.$q.loading.hide()
                             this.$q.notify({
                                 color: "negative",
@@ -202,7 +202,7 @@ export default {
                             });
                         });
                 })
-                .catch(() => {
+                .onCancel(() => {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",

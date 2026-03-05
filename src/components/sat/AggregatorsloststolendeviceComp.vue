@@ -123,7 +123,7 @@
             });
   
             this.APPROVE_PHONEPE_LOST_STOLEN_DEVICE(reqData)
-              .then(() => {
+              .onOk(() => {
               
   
                 this.$emit("closeLostModel");

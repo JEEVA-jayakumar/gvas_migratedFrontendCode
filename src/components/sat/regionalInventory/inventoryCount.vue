@@ -698,14 +698,14 @@ export default {
       //     cancel: "No"
       //   })
 
-      //   .then(() => {
+      //   .onOk(() => {
       //     console.log("send the data", action);
       //     this.USEABLE_DEVICE(action);
       //     this.FETCH_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT();
 
       //     this.$q.notify("Successfully Submitted!");
       //   })
-      //   .catch(() => {
+      //   .onCancel(() => {
       //     this.$q.notify("Cancel");
       //     // this.data();
       //     // this.fnAjaxFetchAllDeviceDetailsWithCount();
@@ -746,7 +746,7 @@ export default {
                   message: "Successfully Submitted",
                   icon: "thumb_up"
                 });
-            }).catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -756,7 +756,7 @@ export default {
             });
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -774,14 +774,14 @@ export default {
       //     cancel: "No"
       //   })
 
-      //   .then(() => {
+      //   .onOk(() => {
       //     console.log("send the data", action);
       //     this.FAULTY_DEVICE(action);
       //     this.data();
 
       //     this.$q.notify("Successfully Submitted!");
       //   })
-      //   .catch(() => {
+      //   .onCancel(() => {
       //     this.$q.notify("Cancel");
       //     // this.data();
       //     // this.fnAjaxFetchAllDeviceDetailsWithCount();
@@ -823,7 +823,7 @@ export default {
                   message: "Successfully Submitted",
                   icon: "thumb_up"
                 });
-            }).catch(error => {
+            }).onCancel(error => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -833,7 +833,7 @@ export default {
             });
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

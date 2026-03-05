@@ -1,7 +1,5 @@
-
-import VueResource from 'vue-resource';
 import api from "../api.js";
-;
+
 export const DEVICE_MODEL_MARS = ({
     commit,rootState
 }, request) => {

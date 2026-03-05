@@ -256,7 +256,7 @@ export default {
           console.log("param ------>", JSON.stringify(param));
 
           this.PHONEPE_REASSIGNED_MERCHANT_TICKETS(param)
-            .then(() => {
+            .onOk(() => {
               this.$emit("emitfnshowUpdateOpenedExternal");
               this.$q.loading.hide();
               this.$q.notify({
@@ -265,7 +265,7 @@ export default {
                 message: "Updated Successfully",
                 icon: "thumb_up"
               });
-            }).catch(error => {
+            }).onCancel(error => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",
@@ -278,7 +278,7 @@ export default {
               });
             });
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -319,7 +319,7 @@ assignHistoryList(request) {
           // );
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },

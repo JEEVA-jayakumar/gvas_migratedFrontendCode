@@ -2510,15 +2510,15 @@ export default {
       let self = this;
       self
         .FETCH_DEVICES_DATA()
-        .then(() => {
+        .onOk(() => {
           return _.map(self.getAllDevicesInfo, (item) => {
             self.dropDown.deviceOptions.push({
               value: item.id,
               label: item.deviceName,
             });
           });
-        }).then(() => {
-          self.LEAD_SOURCE_ACTIVE_LIST().then(() => {
+        }).onOk(() => {
+          self.LEAD_SOURCE_ACTIVE_LIST().onOk(() => {
             return _.map(self.getActiveLeadSource, (item) => {
               self.dropDown.leadSourceOptions.push({
                 value: item.id,
@@ -2526,8 +2526,8 @@ export default {
               });
             });
           });
-        }).then(() => {
-          self.PLAN_ACTIVE_LIST().then(() => {
+        }).onOk(() => {
+          self.PLAN_ACTIVE_LIST().onOk(() => {
             return _.map(self.getActivePlan, (item) => {
               self.dropDown.planOptions.push({
                 value: item.id,
@@ -2695,7 +2695,7 @@ export default {
 
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
       this.toggleAjaxLoadFilter = false;
@@ -2926,7 +2926,7 @@ export default {
               });
             });
         })
-        .catch(() => {
+        .onCancel(() => {
           innerSelf.$q.notify({
             color: "negative",
             position: "bottom",
@@ -3115,7 +3115,7 @@ export default {
             // self.$q.loading.hide();
           });
 
-        // .catch(() => {
+        // .onCancel(() => {
         //   // self.$q.loading.hide();
         // });
 
@@ -3463,12 +3463,12 @@ for(var i=0;i<this.formdata.tid.length
       /* API call to fetch regions */
       self
         .CITY_FROM_MARS()
-        .then(() => {
+        .onOk(() => {
           self.cityOptions = [];
           self.cityFromMars.items.map((oo) => {
             self.cityOptions.push({ label: oo.name, value: oo.code });
           });
-        }).then(() => {
+        }).onOk(() => {
           /* API call to fetch rental plan */
           return self.RENTAL_PLAN_FROM_MARS().then((response) => {
             self.rentalPlanSet = [];
@@ -3477,7 +3477,7 @@ for(var i=0;i<this.formdata.tid.length
             });
             // self.rentalPlanSet = rentalPlan;
           });
-        }).then(() => {
+        }).onOk(() => {
           /* API call to fetch state */
           return self.STATE_FROM_MARS().then((response) => {
             self.stateOptions = [];
@@ -3563,7 +3563,7 @@ for(var i=0;i<this.formdata.tid.length
           this.merchant.salesInformation.institutionCode = this.getAllMarsData.salesInformation.institutionCode;
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
       this.toggleAjaxLoadFilter = false;
@@ -3584,7 +3584,7 @@ for(var i=0;i<this.formdata.tid.length
         this.formdata.mid=this.getMidBasedList.tids
            this.$q.loading.hide();
         })
-      .catch(() => {
+      .onCancel(() => {
           this.$q.loading.hide();
         });
       this.toggleAjaxLoadFilter = false;
@@ -3692,7 +3692,7 @@ for(var i=0;i<this.formdata.tid.length
             message: "Processing ..",
           });
 
-          this.MOVE_BACK_DOCUMENT_VERIFICATION_STAGE(formData).then(() => {
+          this.MOVE_BACK_DOCUMENT_VERIFICATION_STAGE(formData).onOk(() => {
             this.$router.push("/sat/lead/validation/" + this.$route.params.id);
             this.$q.loading.hide();
           });

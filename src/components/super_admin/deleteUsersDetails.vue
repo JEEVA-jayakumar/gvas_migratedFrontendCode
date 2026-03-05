@@ -1,7 +1,7 @@
 <template>
   <q-dialog
     persistent
-    v-model="toggleModal"
+    :model-value="propToggleModal" @update:model-value="v => $emit('update:propToggleModal', v)"
   >
     <q-card style="min-width: 90vw; min-height: 90vh;">
     <!--START: table title -->

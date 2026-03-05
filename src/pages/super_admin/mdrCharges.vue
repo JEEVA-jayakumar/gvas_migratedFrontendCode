@@ -1089,7 +1089,7 @@ export default {
           // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },
@@ -1120,7 +1120,7 @@ export default {
           // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
         });
     },

@@ -384,7 +384,7 @@ export default {
           this.deactivatedTableData = this.getAllRolesPermissions.filter(service => service.active == false);
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

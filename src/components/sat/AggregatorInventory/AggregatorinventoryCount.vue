@@ -388,7 +388,7 @@ export default {
         //     let self = this;
         //     let cookedArr = [];
         //     self.GET_ACTIVE_CREATED_AGGREGATORS_LIST()
-        //         .then(() => {
+        //         .onOk(() => {
         //             return _.map(self.getActiveCreatedAggregatorList, (item) => {
         //                 console.log("ITEM -------->", item)
         //                 cookedArr.push({
@@ -553,7 +553,7 @@ export default {
                                     message: "Successfully Submitted",
                                     icon: "thumb_up"
                                 });
-                        }).catch(error => {
+                        }).onCancel(error => {
                             this.$q.notify({
                                 color: "negative",
                                 position: "bottom",
@@ -563,7 +563,7 @@ export default {
                         });
                     this.$q.loading.hide();
                 })
-                .catch(() => {
+                .onCancel(() => {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",
@@ -610,7 +610,7 @@ export default {
                                     message: "Successfully Submitted",
                                     icon: "thumb_up"
                                 });
-                        }).catch(error => {
+                        }).onCancel(error => {
                             this.$q.notify({
                                 color: "negative",
                                 position: "bottom",
@@ -620,7 +620,7 @@ export default {
                         });
                     this.$q.loading.hide();
                 })
-                .catch(() => {
+                .onCancel(() => {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",

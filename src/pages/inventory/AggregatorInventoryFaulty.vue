@@ -196,7 +196,7 @@ export default {
     //   let self = this;
     //   let cookedArr = [];
     //   self.GET_ACTIVE_CREATED_AGGREGATORS_LIST()
-    //     .then(() => {
+    //     .onOk(() => {
     //       return _.map(self.getActiveCreatedAggregatorList, (item) => {
     //         console.log("ITEM -------->", item)
     //         cookedArr.push({
@@ -214,7 +214,7 @@ export default {
       self = this;
       let cookedArr1 = [];
       self.GET_ACTIVE_CREATED_DEVICE_LIST()
-        .then(() => {
+        .onOk(() => {
           return _.map(this.getCreatedActiveDeviceList, (item) => {
             console.log("ITEM -------->", item)
             cookedArr1.push({
@@ -283,7 +283,7 @@ export default {
         this.AGGREGATOR_DEVICE_VERIFICATION_ON_SCAN_USING_DEVICE_TYPE_ID({
           device: self.formData.device_type.id,
           barcode: barcode
-        }).then(() => {
+        }).onOk(() => {
             assumeArr.deviceSerialNumbers.push(barcode);
             let findDeviceSerialNumber = _.find(this.tableData, function (oo) {
               return (
@@ -293,7 +293,7 @@ export default {
             });
             findDeviceSerialNumber.status = true;
           })
-          .catch(() => {
+          .onCancel(() => {
             this.$q.notify({
               color: "primary",
               position: "bottom",
@@ -328,7 +328,7 @@ export default {
     // Function to get all device types
     // fnAjaxGetAllDevicesTypesData(aggregator) {
     //   this.FETCH_ALL_AGGREGATOR_INVENTORY_DEVICES_TYPES_DATA(aggregator)
-    //     .then(() => {
+    //     .onOk(() => {
     //       let assumeArr = [];
     //       this.getAllAggregatorInventoryDevicesTypesData.map(function (value, index) {
     //         assumeArr.push({
@@ -338,7 +338,7 @@ export default {
     //       });
     //       this.deviceOptions = assumeArr;
     //     })
-    //     .catch(error => {
+    //     .onCancel(error => {
     //       this.deviceOptions = [];
     //     });
     // },
@@ -346,7 +346,7 @@ export default {
     // Function to get ll faulty inventorey data
     fnAjaxFaultyInventoryData() {
       this.FETCH_AGGREGATOR_FAULT_INVENTORY_DEVICES_FROM_REGIONAL(this.podNumber)
-        .then(() => {
+        .onOk(() => {
           this.disableDeviceTypeSelection = false;
           let cookedArr = [];
           _.map(this.getAggregatorInvenotryAsFaultyData, function (oo) {
@@ -359,7 +359,7 @@ export default {
           });
           this.tableData = cookedArr;
         })
-        .catch(() => {
+        .onCancel(() => {
           this.disableDeviceTypeSelection = true;
         });
     },
@@ -392,7 +392,7 @@ export default {
           };
 
           this.FEED_AGGREGATOR_FAULTY_FINAL_SUBMIT(assumeArr)
-            .then(() => {
+            .onOk(() => {
               this.scannerToggleOption = false;
               this.formData = {
                 device_type: "",

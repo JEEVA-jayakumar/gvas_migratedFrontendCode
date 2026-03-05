@@ -353,7 +353,7 @@ export default {
       };
 
       this.ADD_NEW_MERCHANT_DOCUMENT_TYPE(payload)
-        .then(() => {
+        .onOk(() => {
           this.$q.notify({ color: "positive", message: "Saved successfully" });
           this.fetchActiveMerchantTypes();
           this.formData.subDocumentType = "";
@@ -368,7 +368,7 @@ export default {
         ok: "Continue", cancel: "Cancel"
       }).onOk(() => {
         this.$q.loading.show({ message: "Please Wait", spinnerColor: "purple-9" });
-        this.DELETE_MERCHANT_DOCUMENT_TYPE_AND_SET_ACTIVE(row.id).then(() => {
+        this.DELETE_MERCHANT_DOCUMENT_TYPE_AND_SET_ACTIVE(row.id).onOk(() => {
           this.fetchActiveMerchantTypes();
           this.$q.notify({ color: "negative", position: "bottom", message: `Merchant type: ${row.documentType} has been deactivated`, icon: "thumb_up" });
           this.$q.loading.hide();
@@ -380,7 +380,7 @@ export default {
       this.MERCHANT_DOCUMENT_TYPE_ACTIVE_LIST({
         merchantTypeId: this.formData.merchantType,
         parentId: 0
-      }).then(() => {
+      }).onOk(() => {
         this.activeDocumentMerchantType = this.getActiveMerchantDocumentTypes.map(v => ({
           label: v.documentType, value: v
         }));

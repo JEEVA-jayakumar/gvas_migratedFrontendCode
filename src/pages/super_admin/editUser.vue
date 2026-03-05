@@ -400,26 +400,15 @@ export default {
     ...mapActions("BankOpsShortLead", ["FETCH_ALL_LEAD_SOURCE_DATA"]),
 
     /* Pincode search result */
-    pincodeSearch(terms, update) {
-      if (terms.length < 1) {
-        update(() => {
-          this.pincodeOptions = [];
-        });
-        return;
-      }
+    pincodeSearch(terms, done) {
+      this.formData.addUserDetails.cityName = "";
+      this.formData.addUserDetails.stateName = "";
       this.FETCH_PINCODE_WITH_TERM(terms)
         .then(() => {
-          update(() => {
-            this.pincodeOptions = this.getAllStatesData.map(item => ({
-              label: item.label,
-              value: item.value
-            }));
-          });
+          done(this.COMMON_FILTER_FUNCTION(this.getAllStatesData, terms));
         })
         .catch(() => {
-          update(() => {
-            this.pincodeOptions = [];
-          });
+          done([]);
         });
     },
     pincodeSelected(item) {
@@ -447,8 +436,23 @@ export default {
         .then(() => {
           console.log("innerSelf.getAllUserByUserIdData.TEST ----------->", JSON.stringify(this.getAllUserByUserIdData))
           let formData = {
-            showBankOpsList: innerSelf.getAllUserByUserIdData.bankOpsUser != null,
-            disableRegionSelection: innerSelf.getAllUserByUserIdData.roles[0].hierarchy.hierarchyCode == "CU" && innerSelf.getAllUserByUserIdData.serviceReqClients == null ? true : false,
+
+
+            showBankOpsList:
+
+              innerSelf.getAllUserByUserIdData.bankOpsUser == null
+                ? false
+                : true,
+             disableRegionSelection: innerSelf.getAllUserByUserIdData.roles[0].hierarchy.hierarchyCode == "CU" && innerSelf.getAllUserByUserIdData.serviceReqClients == null ? true : false,
+            //  -UAT ------: this.formData.showAllRoleDetails == 24
+          // Production ------: this.formData.showAllRoleDetails == 25
+          // UAT SERVICE REQUEST(HIERARCHY ID -- 8) AND CRM USER (HIERARCHY ID -- 10)
+        // PRODUCTION SERVICE REQUEST(HIERARCHY ID -- 9) AND CRM USER (HIERARCHY ID -- 10)
+             disableRegionSelection: innerSelf.getAllUserByUserIdData.bankOpsUser != null ? true : (innerSelf.getAllUserByUserIdData.roles[0].hierarchy.id == 10 ? true : false),
+             disableRegionSelection: innerSelf.getAllUserByUserIdData.serviceReqClients == null  && innerSelf.getAllUserByUserIdData.roles[0].hierarchy.hierarchyCode != "CU" ? false : true,
+
+            // disableRegionSelection:(innerSelf.getAllUserByUserIdData.bankOpsUser == null || innerSelf.getAllUserByUserIdData.serviceReqClients == null ? false: true),
+            // leadSource: innerSelf.getAllUserByUserIdData.serviceReqClients != null ? innerSelf.getAllUserByUserIdData.serviceReqClients.sourceId == null ? "No" : "Yes" : null,
             addUserDetails: {
               hasReadPermission:
                 innerSelf.getAllUserByUserIdData.user.hasReadPermission,

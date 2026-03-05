@@ -282,7 +282,7 @@ export default {
     //        console.log("res ACTIVE TABLE  DATAS------------->",JSON.stringify(res))
     //       this.$q.loading.hide();
     //     })
-    //     .catch(() => {
+    //     .onCancel(() => {
     //       this.$q.notify({
     //         color: "negative",
     //         position: "bottom",
@@ -307,7 +307,7 @@ export default {
     //     // finally we tell QTable to exit the "loading" state
     //     this.$q.loading.hide();
     //   })
-    //     .catch(() => {
+    //     .onCancel(() => {
     //       this.$q.loading.hide();
     //     });
     // },
@@ -319,7 +319,8 @@ export default {
           message: "Are you sure want to delete hierarchy?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        })
+        .onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -338,7 +339,8 @@ export default {
               this.ajaxLoadDataForHierarchyTable();
               this.$router.push("/super/admin/hierarchy/");
               this.$q.loading.hide();
-            }).onCancel(error => {
+            })
+            .onCancel(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -358,7 +360,8 @@ export default {
           message: "Are you sure want to Active hierarchy?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        })
+        .onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -382,7 +385,8 @@ export default {
               });
               this.ajaxLoadDataForHierarchyTable();
               this.$q.loading.hide();
-            }).onCancel(error => {
+            })
+            .onCancel(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -413,7 +417,8 @@ export default {
           message: "Are you sure want to delete Hierarchy?",
           ok: "Continue",
           cancel: "Cancel",
-        }).onOk(() => {
+        })
+        .onOk(() => {
           this.DELETE_HIERARCHY_BY_HIERARCHY_ID_DATA(HierarchyId)
             .then(response => {
               this.FETCH_ALL_HIERARCHIES_DATA();
@@ -423,7 +428,8 @@ export default {
                 message: "Successfully Deleted!",
                 icon: "thumb_up",
               });
-            }).onCancel(() => {
+            })
+            .onCancel(() => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -460,7 +466,7 @@ export default {
           this.deActiveTableData = this.getAllHierarchiesData.filter(service => service.active == false);
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

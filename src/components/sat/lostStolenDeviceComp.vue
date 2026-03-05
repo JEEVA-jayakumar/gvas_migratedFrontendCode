@@ -123,7 +123,7 @@ export default {
           });
 
           this.APPROVE_LOST_STOLEN_DEVICE(reqData)
-            .then(() => {
+            .onOk(() => {
             
 
               this.$emit("closeLostModel");

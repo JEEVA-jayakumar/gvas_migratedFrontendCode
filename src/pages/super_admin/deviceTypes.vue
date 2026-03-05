@@ -163,7 +163,7 @@ export default {
       }).onOk(() => {
         this.$q.loading.show({ message: "Processing..." });
         this.DELETE_DEVICE_DATA(row.id)
-          .then(() => {
+          .onOk(() => {
             this.$q.notify({ color: "positive", message: "Successfully removed", icon: "thumb_up" });
             this.ajaxLoadDataForDeviceTypeTable();
           })

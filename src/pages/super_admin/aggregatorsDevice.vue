@@ -204,12 +204,12 @@ export default {
     ajaxLoadDataForRegionTable() {
       this.$q.loading.show({ message: "Loading aggregator devices..." });
       this.GET_CREATED_AGGREGATORS_DEVICE_LIST()
-        .then(() => {
+        .onOk(() => {
           this.activeTableData = this.getCreatedAggregatorDeviceList.filter(d => d.active === true);
           this.deActiveTableData = this.getCreatedAggregatorDeviceList.filter(d => d.active === false);
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .onCancel(() => {
           this.$q.loading.hide();
           this.$q.notify({ color: "negative", message: "Failed to load devices" });
         });
@@ -232,7 +232,7 @@ export default {
       }).onOk(() => {
         this.$q.loading.show();
         let payload = { ...row, active: true };
-        this.EDIT_CREATED_AGGREGATORS_DEVICE_LIST(payload).then(() => {
+        this.EDIT_CREATED_AGGREGATORS_DEVICE_LIST(payload).onOk(() => {
           this.$q.notify({ color: "positive", message: "Activated successfully" });
           this.ajaxLoadDataForRegionTable();
           this.$q.loading.hide();
@@ -247,7 +247,7 @@ export default {
         ok: "Continue", cancel: "Cancel", persistent: true
       }).onOk(() => {
         this.$q.loading.show();
-        this.DELETE_CREATED_AGGREGATORS_DEVICE_LIST(row).then(() => {
+        this.DELETE_CREATED_AGGREGATORS_DEVICE_LIST(row).onOk(() => {
           this.$q.notify({ color: "positive", message: "Deactivated successfully" });
           this.ajaxLoadDataForRegionTable();
           this.$q.loading.hide();
