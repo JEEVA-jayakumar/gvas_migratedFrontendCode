@@ -1,205 +1,155 @@
 <template>
   <div class="q-pa-md">
-    <q-card>
+    <q-card flat bordered>
       <q-card-section>
-        <div class="row">
-          <!--START: table title -->
+        <div class="row items-center q-mb-lg">
           <div class="col-md-6">
-            <strong>
-              <q-chip color="primary">
-                <span align="center">Batch number : BatchNo_000{{getAllQRList1.batchCount}}</span>
-              </q-chip>
-            </strong>
-            <br />
+            <q-chip color="primary" text-color="white">
+              Batch number : BatchNo_000{{ getAllQRList1.batchCount }}
+            </q-chip>
           </div>
         </div>
-        <br />
-        <div class="row">
-          <!--START: table title -->
-          <div class="col-md-3">
-            <strong>
-              <span>Select QR</span>
-            </strong>
-            <br />
-            <strong>
-              <span>Bank</span>
-            </strong>
-          </div>
 
+        <div class="row q-col-gutter-md items-center q-mb-md">
+          <div class="col-md-3">
+            <div class="text-subtitle2">Select QR Bank</div>
+          </div>
           <div class="col-md-6">
             <q-select
-              clearable
+              outlined
+              dense
               label="Select QR API"
-              v-model.trim="formdata.leadSource"
-              color="grey-9"
+              v-model="formdata.leadSource"
               :options="dropDown.leadSourceOptions"
+              color="purple-9"
+              emit-value
+              map-options
             />
-            <!--   :error="$v.formdata.leadSource.$error" -->
           </div>
         </div>
-        <br />
-        <div class="row">
+
+        <div class="row q-col-gutter-md items-center q-mb-md">
           <div class="col-md-3">
-            <strong>
-              <span>Enter numbers of QR</span>
-            </strong>
-            <br />
-            <strong>
-              <span>Ref numbers to be created</span>
-            </strong>
+            <div class="text-subtitle2">Enter numbers of QR Ref numbers to be created</div>
           </div>
           <div class="col-md-6">
             <q-input
+              outlined
+              dense
               type="number"
-              onkeydown="javascript: return event.keyCode === 8 ||
-              event.keyCode === 46 ? true : !isNaN(Number(event.key))"
               label="Enter numbers of QR count"
-              v-model.trim="formdata.count"
-              color="grey-9"
+              v-model.number="formdata.count"
+              color="purple-9"
+              @keydown="fnOnlyNumbers"
             />
-            <!-- :error="$v.formdata.count.$error" -->
           </div>
         </div>
-        <div class="row group">
-          <div class="col" align="right">
-            <q-btn
-              :disabled="submitDisabled"
-              color="light-blue"
-              class="q-py-xs"
-              label="Create QR"
-              @click="fnsubmit(formdata)"
-            />
-          </div>
+
+        <div class="row justify-end q-mt-lg">
+          <q-btn
+            :disabled="submitDisabled"
+            color="light-blue"
+            unelevated
+            label="Create QR"
+            @click="fnsubmit"
+          />
         </div>
       </q-card-section>
     </q-card>
-    <!--END: table title -->
-
-    <!--START >>  Show Add Device Component -->
-
-    <!--END >>  Show Add Device Component -->
   </div>
 </template>
 
 <script>
-import {
-  required,
-  numeric,
-  email,
-  maxLength,
-  minLength
-} from "@vuelidate/validators";
-
-
+import useVuelidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
+import _ from "lodash";
+
 export default {
-  name: "damagedDevices",
-  components: {},
+  name: "CreateQRSticker",
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       formdata: {
-        leadSource: "",
-        count: ""
+        leadSource: null,
+        count: null
       },
       dropDown: {
         leadSourceOptions: []
       }
     };
   },
-  validations: {
-    formdata: {
-      leadSource: {
-        required
-        // maxLength: maxLength(7),
-        // minLength: minLength(5)
-      },
-
-      count: {
-        required
+  validations() {
+    return {
+      formdata: {
+        leadSource: { required },
+        count: { required }
       }
-    }
+    };
   },
-
   computed: {
-    ...mapGetters("leadSource", ["getActiveLeadSource"]),
-    ...mapGetters("ACTIVE_DEACTIVE_LEAD_SOURCE", [
-      "getActiveandDeactiveLeadSource"
-    ]),
     ...mapGetters("QRList", ["getAllQRList1"]),
-    submitDisabled: function() {
-      return this.formdata.leadSource != "" && this.formdata.count != ""
-        ;
+    ...mapGetters("ACTIVE_DEACTIVE_LEAD_SOURCE", ["getActiveandDeactiveLeadSource"]),
+    submitDisabled() {
+      return !this.formdata.leadSource || !this.formdata.count;
     }
   },
-
   created() {
-    this.ajaxLoadDataForDeviceTypeTable();
+    this.ajaxLoadData();
     this.FETCH_QR_LIST1();
   },
-
   methods: {
-    ...mapActions("leadSource", ["LEAD_SOURCE_ACTIVE_LIST"]),
     ...mapActions("createQRCode", ["CREATE_QR_CODE"]),
-    ...mapActions("ACTIVE_DEACTIVE_LEAD_SOURCE", [
-      "LEAD_SOURCE_ACTIVE_DEACTIVE_LIST"
-    ]),
+    ...mapActions("ACTIVE_DEACTIVE_LEAD_SOURCE", ["LEAD_SOURCE_ACTIVE_DEACTIVE_LIST"]),
     ...mapActions("QRList", ["FETCH_QR_LIST1"]),
-    ajaxLoadDataForDeviceTypeTable() {
-      let self = this;
-      self.LEAD_SOURCE_ACTIVE_DEACTIVE_LIST().then(() => {
-        return _.map(self.getActiveandDeactiveLeadSource, item => {
-          self.dropDown.leadSourceOptions.push({
-            value: item.instance_id,
-            label: item.apiInstanceName
-          });
-        });
+
+    ajaxLoadData() {
+      this.LEAD_SOURCE_ACTIVE_DEACTIVE_LIST().then(() => {
+        this.dropDown.leadSourceOptions = _.map(this.getActiveandDeactiveLeadSource, item => ({
+          value: item.instance_id,
+          label: item.apiInstanceName
+        }));
       });
     },
-    fnsubmit(request) {
-      this.$v.formdata.$touch();
-      // if (this.formdata.leadSource == "" && this.formdata.count == "") {
-      //   this.$q.notify("Please enter all fields");
-      // } else {
-      this.$q.loading.show({
-        delay: 100, // ms
-        message: "Please Wait",
-        spinnerColor: "purple-9",
-        customClass: "shadow-none"
-      });
+    fnOnlyNumbers(event) {
+        if (event.keyCode !== 8 && event.keyCode !== 46 && isNaN(Number(event.key))) {
+            event.preventDefault();
+        }
+    },
+    fnsubmit() {
+      this.v$.$touch();
+      if (this.v$.$error) return;
 
-      let requestParams = {
+      this.$q.loading.show({ message: "Please Wait" });
+      const requestParams = {
         url: {
-          leadSource: request.leadSource,
-          count: request.count
+          leadSource: this.formdata.leadSource,
+          count: this.formdata.count
         }
       };
 
       this.CREATE_QR_CODE(requestParams)
         .then(response => {
           this.FETCH_QR_LIST1();
-          this.$q.loading.hide();
           this.$q.notify({
             color: "positive",
-            position: "bottom",
-            message: "data",
-            icon: "thumb_up",
-            message: response.data.message
+            message: response.data.message || "QR Created Successfully",
+            icon: "thumb_up"
           });
-
-          (this.formdata.leadSource = ""), (this.formdata.count = "");
+          this.formdata.leadSource = null;
+          this.formdata.count = null;
+          this.v$.$reset();
         })
         .catch(error => {
-          this.$q.loading.hide();
-          console.log(error);
           this.$q.notify({
-            color: "positive",
-            position: "bottom",
-            icon: "thumb_up",
-            message: error.data.message
+            color: "negative",
+            message: error.data?.message || "Error creating QR"
           });
-        });
+        })
+        .finally(() => this.$q.loading.hide());
     }
   }
 };
-// };
 </script>

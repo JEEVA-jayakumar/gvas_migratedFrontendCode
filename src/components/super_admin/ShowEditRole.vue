@@ -2,165 +2,204 @@
   <div>
     <q-dialog
         class="customModalOverlay"
-        minimized no-backdrop-dismiss
         v-model="showEditRoleToggle"  
-        @hide="emitfnEditrolePermissions(showEditRoleToggle)" 
-        @escape-key="emitfnEditrolePermissions(showEditRoleToggle)"  
-        :content-css="{padding:'30px',minWidth: '40vw'}"
+        persistent
+        @hide="emitfnEditrolePermissions"
+        @escape-key="emitfnEditrolePermissions"
       >
-        <div class="column group q-py-sm bottom-border">
+        <q-card style="min-width: 40vw">
+        <div class="column group q-pa-md bottom-border">
           <div>
             <div class="text-h6 text-weight-regular">Update Role/Permissions</div>
           </div>
         </div>
 
-        <div class="column group q-py-sm ">
-          <div class="col-md-8">
-            <q-select
-            disable
-            v-model="formData.rolePermissions.hierarchyId"
-            @blur="$v.formData.rolePermissions.hierarchyId.$touch"      
-            :error="$v.formData.rolePermissions.hierarchyId.$error" 
-            label="Hierarchy"
-            placeholder="Select Hierarchy"
-            class="text-weight-regular text-grey-8" color="grey-9"
-            :options="propGetAllHierarchiesData"
-              />
-          </div>
-        </div>
-      
-        <div class="column group q-py-sm">
-          <div class="col-md-8">
-            <q-input v-model="formData.rolePermissions.role" 
-              @blur="$v.formData.rolePermissions.role.$touch"      
-              @keyup.enter="fnSubmitShowAddUser"
-              :error="$v.formData.rolePermissions.role.$error" 
-              class="text-weight-regular text-grey-8" color="grey-9" label="Role" placeholder="Role" />
-          </div>
-        </div>
-      
-        <div class="column group q-py-sm">
-          <div class="col-md-8">
-            <q-color 
-              clearable
-              v-model="formData.rolePermissions.roleColor"
-              @blur="$v.formData.rolePermissions.roleColor.$touch"      
-              :error="$v.formData.rolePermissions.roleColor.$error" 
-              popover label="Choose a role color" color="grey-9"
-            />
-          </div>
-        </div>
+        <div class="q-pa-md">
+            <div class="column group q-py-sm ">
+            <div class="col-md-8">
+                <q-select
+                disable
+                v-model="formData.rolePermissions.hierarchyId"
+                @blur="v$.formData.rolePermissions.hierarchyId.$touch"
+                :error="v$.formData.rolePermissions.hierarchyId.$error"
+                label="Hierarchy"
+                placeholder="Select Hierarchy"
+                class="text-weight-regular text-grey-8" color="grey-9"
+                :options="propGetAllHierarchiesData"
+                emit-value
+                map-options
+                />
+            </div>
+            </div>
 
-        <div class="group" align="right">
-          <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnEditrolePermissions(showEditRoleToggle)">Cancel
-          </q-btn>
-          <q-btn size="md" align="right" @click="fnEditRoleSubmit(formData.rolePermissions)" color="purple-9">Save
-          </q-btn>
+            <div class="column group q-py-sm">
+            <div class="col-md-8">
+                <q-input v-model="formData.rolePermissions.role"
+                @blur="v$.formData.rolePermissions.role.$touch"
+                :error="v$.formData.rolePermissions.role.$error"
+                class="text-weight-regular text-grey-8" color="grey-9" label="Role" placeholder="Role" />
+            </div>
+            </div>
+
+            <div class="column group q-py-sm">
+            <div class="col-md-8">
+                <q-input
+                    v-model="formData.rolePermissions.roleColor"
+                    label="Choose a role color"
+                    class="text-weight-regular text-grey-8"
+                    color="grey-9"
+                >
+                    <template v-slot:append>
+                        <q-icon name="colorize" class="cursor-pointer">
+                            <q-menu>
+                                <q-color v-model="formData.rolePermissions.roleColor" />
+                            </q-menu>
+                        </q-icon>
+                    </template>
+                </q-input>
+            </div>
+            </div>
+
+            <div class="q-py-md">
+                <div class="row gutter-sm items-center">
+                    <div class="col-md-12">
+                        <div class="text-h6 text-weight-regular">Permission*</div>
+                    </div>
+                    <div v-for="propGetAllPermission in propGetAllPermissionData" :key="propGetAllPermission.value">
+                        <q-checkbox
+                        v-model="formData.rolePermissions.tempPermission"
+                        @update:model-value="v$.formData.rolePermissions.tempPermission.$touch"
+                        :val="propGetAllPermission.label"
+                        color="purple-9">
+                        <q-chip color="blue-grey-2" class="text-weight-regular text-grey-8">
+                            {{propGetAllPermission.label}}
+                        </q-chip>
+                        </q-checkbox>
+                    </div>
+                </div>
+                 <div class="col-md-12 text-red text-weight-medium text-caption"
+                  v-if="v$.formData.rolePermissions.tempPermission.$error">*Permission is mandatory</div>
+            </div>
+
+            <div class="row justify-end q-mt-md">
+                <q-btn flat label="Cancel" @click="emitfnEditrolePermissions" class="q-mr-sm" />
+                <q-btn color="purple-9" label="Save" @click="fnSubmitShowAddUser(formData.rolePermissions)" />
+            </div>
         </div>
+        </q-card>
     </q-dialog>
   </div>
 </template>
 
 <script>
-import {
-  helpers,
-  required,
-  email,
-  minLength,
-  maxLength,
-  alpha,
-  alphaNum,
-  numeric,
-} from "@vuelidate/validators";
-const custom = helpers.regex("custom", /^[a-zA-Z\s]*$/);
+import useVuelidate from "@vuelidate/core";
+import { required, minLength } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
+import _ from "lodash";
+
 export default {
   props: [
+    "propShowEditRole",
+    "propGetAllPermissionData",
     "propGetAllHierarchiesData",
-    "proprolePermissions",
-    "propRowDetails",
-    "propFilterRolesPermissions",
+    "propExistingRoleItems"
   ],
+  setup() {
+      return { v$: useVuelidate() };
+  },
   data() {
     return {
-      showEditRoleToggle: this.proprolePermissions,
+      showEditRoleToggle: this.propShowEditRole,
       formData: {
         rolePermissions: {
-          roleId: this.propRowDetails.id,
-          role: this.propRowDetails.role,
-          hierarchyId: this.propRowDetails.hierarchy.id,
-          roleColor: this.propRowDetails.roleColor,
-        },
-      },
+          hierarchyId: this.propExistingRoleItems.hierarchy.id,
+          role: this.propExistingRoleItems.role,
+          roleColor: this.propExistingRoleItems.roleColor || "#61116a",
+          tempPermission: [],
+          permission: []
+        }
+      }
     };
   },
-
-  validations: {
-    formData: {
-      rolePermissions: {
-        role: {
-          custom,
-          required,
-          minLength: minLength(2),
-        },
-        hierarchyId: {
-          required,
-        },
-        roleColor: {
-          required,
-        },
-      },
-    },
+  validations() {
+      return {
+          formData: {
+              rolePermissions: {
+                  hierarchyId: { required },
+                  role: { required },
+                  tempPermission: { required, minLength: minLength(1) }
+              }
+          }
+      }
   },
-  created() {},
-
+  computed: {
+    ...mapGetters("SuperAdminUsers", ["getAPIStatusLog"])
+  },
+  created() {
+    this.makeTempPermissionArr();
+  },
   methods: {
-    ...mapActions("SuperAdminUsers", [
-      "FEED_ROLE_ORIGINAL_DATA",
-      "FETCH_ALL_ROLES_PERMISSIONS_DATA",
-    ]),
+    ...mapActions("SuperAdminUsers", ["FEED_UPDATE_ROLE_DATA"]),
 
-    //Emit functions
-    emitfnEditrolePermissions(showEditRoleToggle) {
-      this.$emit("emitfnEditrolePermissions", showEditRoleToggle);
+    emitfnEditrolePermissions() {
+      this.$emit("emitfnEditrolePermissions");
     },
 
-    //Role creation final submit
-    fnEditRoleSubmit(formData) {
-      this.$v.formData.$touch();
-
-      if (this.$v.formData.$error) {
+    fnSubmitShowAddUser(rolePermissions) {
+      this.v$.formData.rolePermissions.$touch();
+      if (this.v$.formData.rolePermissions.$error) {
         this.$q.notify("Please review fields again.");
       } else {
-        this.$q.loading.show({
-          delay: 100, // ms
-          message: "Please Wait",
-          spinnerColor: "purple-9",
-          customClass: "shadow-none",
+        let arr = [];
+        this.formData.rolePermissions.tempPermission.forEach(item => {
+          arr.push({ permission: item });
         });
-        this.FEED_ROLE_ORIGINAL_DATA(formData)
-          .then(response => {
-            this.FETCH_ALL_ROLES_PERMISSIONS_DATA();
+        this.formData.rolePermissions.permission = arr;
+
+        let payload = {
+            id: this.propExistingRoleItems.id,
+            hierarchy: { id: rolePermissions.hierarchyId },
+            role: rolePermissions.role,
+            roleColor: rolePermissions.roleColor,
+            permission: rolePermissions.permission,
+            active: true
+        };
+
+        this.$q.loading.show({ message: "Saving..." });
+        this.FEED_UPDATE_ROLE_DATA(payload)
+          .then(() => {
             this.$q.loading.hide();
-            this.emitfnEditrolePermissions(this.showEditRoleToggle);
             this.$q.notify({
               color: "positive",
               position: "bottom",
               message: "Successfully updated!",
-              icon: "thumb_up",
+              icon: "thumb_up"
             });
+            this.emitfnEditrolePermissions();
           })
-          .catch(() => {
+          .catch(error => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-              icon: "thumb_down",
+              message: error.data?.message || "Error occurred",
+              icon: "thumb_down"
             });
           });
       }
     },
-  },
+
+    makeTempPermissionArr() {
+      this.formData.rolePermissions.tempPermission = this.propExistingRoleItems.permission.map(
+        item => item.permission
+      );
+    }
+  }
 };
 </script>
+
+<style scoped>
+.bottom-border {
+  border-bottom: 1px solid #dcdcdc;
+}
+</style>

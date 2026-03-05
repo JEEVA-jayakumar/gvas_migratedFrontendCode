@@ -1,60 +1,63 @@
 <template>
-  <q-page padding>
-    <q-card flat bordered class="q-pa-md">
-      <div class="text-h6 text-purple-9 q-mb-md">LeadSource And Vas, Device Config</div>
-
-      <q-form @submit="fnsubmit" class="q-gutter-md">
-        <div class="row q-col-gutter-md">
-          <div class="col-12 col-md-6">
-            <q-select
-              outlined
-              dense
-              v-model="formData.leadSourceDeviceVasMapping.leadSource"
-              :options="dropDown.leadSourceOptions"
-              label="Select lead source"
-              :error="v$.formData.leadSourceDeviceVasMapping.leadSource.$error"
-              color="purple-9"
-              emit-value
-              map-options
-            />
-          </div>
-
-          <div class="col-12 col-md-6">
-            <q-select
-              outlined
-              dense
-              v-model="formData.leadSourceDeviceVasMapping.device"
-              :options="dropDown.deviceOptions"
-              label="Select Device"
-              :error="v$.formData.leadSourceDeviceVasMapping.device.$error"
-              color="purple-9"
-              emit-value
-              map-options
-            />
-          </div>
-
-          <div class="col-12">
-            <q-select
-              outlined
-              dense
-              multiple
-              use-chips
-              v-model="formData.vasList"
-              :options="dropDown.vasOptions"
-              label="Select VAS"
-              :error="v$.formData.vasList.$error"
-              color="purple-9"
-              emit-value
-              map-options
-            />
-          </div>
-        </div>
-
-        <div class="row justify-end q-mt-md">
-          <q-btn unelevated label="Submit" color="purple-9" type="submit" />
-        </div>
-      </q-form>
-    </q-card>
+  <q-page>
+    <div class="row">
+      <div class="col-12 text-h6 q-pa-md text-weight-regular bottom-border">LeadSource And Vas,Device Config</div>
+      <!-- START >> Setup MDR details -->
+      <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
+        <q-card style="width:100%" flat bordered>
+          <q-card-section>
+            <q-list no-border>
+              <q-item>
+                <q-item-section>
+                  <q-select
+                    color="grey-9"
+                    v-model="formData.leadSourceDeviceVasMapping.leadSource"
+                    :options="dropDown.leadSourceOptions"
+                    label="Select lead source"
+                    placeholder="Lead source"
+                    :error="v$.formData.leadSourceDeviceVasMapping.leadSource.$error"
+                    emit-value
+                    map-options
+                  />
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-select
+                    color="grey-9"
+                    v-model="formData.leadSourceDeviceVasMapping.device"
+                    :options="dropDown.deviceOptions"
+                    label="Select Device"
+                    placeholder="Select Device"
+                    :error="v$.formData.leadSourceDeviceVasMapping.device.$error"
+                    emit-value
+                    map-options
+                  />
+                </q-item-section>
+              </q-item>
+              <q-item>
+                <q-item-section>
+                  <q-select
+                    multiple
+                    color="grey-9"
+                    v-model="formData.vasList"
+                    :options="dropDown.vasOptions"
+                    label="Select VAS"
+                    placeholder="Select VAS"
+                    :error="v$.formData.vasList.$error"
+                    emit-value
+                    map-options
+                  />
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-card-section>
+          <q-card-actions align="right">
+            <q-btn label="submit" @click="fnsubmit" color="purple-9" />
+          </q-card-actions>
+        </q-card>
+      </div>
+    </div>
   </q-page>
 </template>
 
@@ -62,6 +65,7 @@
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
+import _ from "lodash";
 
 export default {
   name: "AddLeadSourceVasDeviceConfig",
@@ -110,21 +114,24 @@ export default {
     ...mapActions("leadSourceVasDeviceConfig", ["CREATE_LS_VAS_DEVICE_CONFIG"]),
 
     async ajaxLoadData() {
-      this.$q.loading.show();
+      this.$q.loading.show({
+        delay: 100,
+        message: "Please Wait",
+        spinnerColor: "purple-9"
+      });
       try {
-        await Promise.all([
-          this.LEAD_SOURCE_ACTIVE_LIST(),
-          this.FETCH_DEVICES_DATA(),
-          this.GET_ALL_VAS_DETAILS()
-        ]);
-
-        this.dropDown.leadSourceOptions = this.getActiveLeadSource.map(item => ({
+        await this.LEAD_SOURCE_ACTIVE_LIST();
+        this.dropDown.leadSourceOptions = _.map(this.getActiveLeadSource, item => ({
           label: item.sourceName, value: item
         }));
-        this.dropDown.deviceOptions = this.getAllDevicesInfo.map(item => ({
+
+        await this.FETCH_DEVICES_DATA();
+        this.dropDown.deviceOptions = _.map(this.getAllDevicesInfo, item => ({
           label: item.deviceName, value: item
         }));
-        this.dropDown.vasOptions = this.getAllVasDetails.map(item => ({
+
+        await this.GET_ALL_VAS_DETAILS();
+        this.dropDown.vasOptions = _.map(this.getAllVasDetails, item => ({
           label: item.name, value: item
         }));
       } catch (e) {
@@ -137,18 +144,41 @@ export default {
     async fnsubmit() {
       const isValid = await this.v$.$validate();
       if (!isValid) {
-        this.$q.notify({ color: "warning", message: "Please fill all mandatory fields" });
+        this.$q.notify({
+          color: "negative",
+          position: "bottom",
+          message: "Please fill all mandatory fields",
+          icon: "info"
+        });
         return;
       }
 
-      this.$q.loading.show();
+      this.$q.loading.show({
+        delay: 0,
+        spinnerColor: "purple-9",
+        message: "Validating..."
+      });
+
       this.CREATE_LS_VAS_DEVICE_CONFIG(this.formData)
         .then(() => {
-          this.$q.notify({ color: "positive", message: "Successfully Created" });
+          this.$q.notify({
+            color: "positive",
+            position: "bottom",
+            message: "Successfully Created",
+            icon: "thumb_up",
+          });
           this.resetForm();
         })
         .catch(error => {
-          this.$q.notify({ color: "amber-9", message: error.body?.message || "Please Try Again Later !" });
+          this.$q.notify({
+            color: "amber-9",
+            position: "bottom",
+            message: error.body?.message || "Please Try Again Later !",
+            icon: "thumb_down"
+          });
+          if (error.status == 409) {
+             this.resetForm();
+          }
         })
         .finally(() => this.$q.loading.hide());
     },
@@ -163,3 +193,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.bottom-border {
+  border-bottom: 1px solid #dcdcdc;
+}
+</style>

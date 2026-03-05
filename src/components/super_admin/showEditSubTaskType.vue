@@ -1,169 +1,131 @@
 <template>
   <div>
     <q-dialog
-      minimized
       v-model="toggleModel"
       @hide="emitfnshowEditSubTaskType"
       @escape-key="emitfnshowEditSubTaskType"
+      persistent
       class="customModalOverlay"
-      :content-css="{ padding: '30px', minWidth: '30vw' }"
     >
-      <form>
-        <div class="row gutter-sm q-py-sm items-center">
-          <div class="col-md-12">
-            <div class="text-h6 text-weight-regular">
-              Modify Service Request Info
+      <q-card style="min-width: 30vw">
+        <form>
+          <div class="row q-pa-md items-center border-bottom">
+            <div class="col-md-12">
+              <div class="text-h6 text-weight-regular">
+                Modify Service Request Info
+              </div>
             </div>
           </div>
-          
-        </div>
-        <div class="row gutter-sm q-py-sm items-center">
-          <div class="col-md-12">
-            <q-input
-              v-model="formData.name"
-              :error="$v.formData.name.$error"
-              class="text-weight-regular text-grey-8"
-              color="grey-9"
-              label="Service Sub Task Name"
-              placeholder="Service Sub Task Name"
-            />
+          <div class="row q-pa-md items-center">
+            <div class="col-md-12 full-width">
+              <q-input
+                v-model="formData.name"
+                @blur="v$.formData.name.$touch"
+                :error="v$.formData.name.$error"
+                class="text-weight-regular text-grey-8"
+                color="grey-9"
+                label="Service Sub Task Name"
+                placeholder="Service Sub Task Name"
+                @keyup.enter="fnfinalsubmitEditedSpareParts()"
+              />
+            </div>
           </div>
-        </div>
-        <div class="row gutter-sm q-py-sm items-center">
-          <div class="col-md-12 group" align="right">
+          <div class="row q-pa-md items-center justify-end">
             <q-btn
               flat
-              align="right"
-              class="bg-white text-weight-regular text-grey-8"
+              class="bg-white text-weight-regular text-grey-8 q-mr-sm"
               @click="emitfnshowEditSubTaskType()"
-              >Cancel</q-btn
-            >
+              label="Cancel"
+            />
             <q-btn
-              align="right"
-              @click="fnfinalsubmitEditedSpareParts(formData)"
+              @click="fnfinalsubmitEditedSpareParts()"
               color="purple-9"
-              >Save</q-btn
-            >
+              label="Save"
+            />
           </div>
-        </div>
-      </form>
+        </form>
+      </q-card>
     </q-dialog>
-     <!--START: Show Sub Task Details-->
-     <showServiceSubTaskDetails
-        v-if="propShowServiceSubTaskDetails"
-        :propShowServiceSubTaskDetails="propShowServiceSubTaskDetails"
-        :propRowDetails="propRowDetails"
-        @emitfnshowServiceSubTaskDetails="fnShowSubTaskDetails"
-      />
-       <!-- END: Show Sub Task Details -->
+
+    <showServiceSubTaskDetails
+      v-if="propShowServiceSubTaskDetails"
+      :propShowServiceSubTaskDetails="propShowServiceSubTaskDetails"
+      :propRowDetails="propRowDetails"
+      @emitfnshowServiceSubTaskDetails="fnShowSubTaskDetails"
+    />
   </div>
 </template>
 
 <script>
+import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
-import { mapGetters, mapActions } from "vuex";
-import showServiceSubTaskDetails from  "../../components/super_admin/showServiceSubTaskDetails.vue";
+import { mapActions } from "vuex";
+import showServiceSubTaskDetails from "./showServiceSubTaskDetails.vue";
 
 export default {
-     components: {
+  components: {
     showServiceSubTaskDetails,
   },
   props: ["propShowEditSubTaskType", "propRowDetails1"],
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       toggleModel: this.propShowEditSubTaskType,
       propShowServiceSubTaskDetails: false,
-      // regionGroup: [],
+      propRowDetails: null,
       formData: {
-        
-        name: JSON.stringify(this.propRowDetails1.issueReason)
-      }
+        name: this.propRowDetails1.name,
+      },
     };
   },
-
-  validations: {
-    formData: {
-      // id: {
-      //   required
-      // },
-      name: {
-        required
-      }
-    }
-  },
-  beforeMount() {
-    console.log(
-      "Getter propShowEditSpareParts 123456Name---------------->" +
-        JSON.stringify(this.propRowDetails1)
-    );
-    // console.log("Prop details---------------->"+JSON.stringify(this.propShowEditRegions))
-    //  console.log("Prop Row details---------------->"+JSON.stringify(this.propRowDetails1))
-    // this.formData.id = this.propRowDetails1.id;
-    this.formData.name = this.propRowDetails1.name;
-    // //  AllRegionName( this.formData.regionGroupName = this.propRowDetails.regionGroup.regionName)
-    // this.AllRegionName();
-    //   console.log("Region Name---------------->"+JSON.stringify(this.formData.regionGroupName))
-  },
-  computed: {
-    ...mapGetters("SuperAdminUsers", ["getAllRegionsData"])
+  validations() {
+    return {
+      formData: {
+        name: { required },
+      },
+    };
   },
   methods: {
-    ...mapActions("SuperAdminUsers", [
-      "FETCH_ALL_REGIONS_DATA",
-      "FEED_EXISTING_REGION_DATA"
-    ]),
-    ...mapActions("SuperAdminUsers", ["FETCH_ALL_REGIONS_DATA"]),
-    ...mapActions("sparePartsGetTypes", ["EDIT_service_req_data"]),
-    ...mapActions("serviceRequest", ["EDIT_SERVICE_REQUEST_TYPES","EDIT_SUB_TASK_TYPES"]),
+    ...mapActions("serviceRequest", ["EDIT_SUB_TASK_TYPES"]),
     emitfnshowEditSubTaskType() {
       this.$emit("emitfnshowEditSubTaskType");
     },
-    // AllRegionName(){
-    //   this.formData.regionGroupName = this.propRowDetails.regionGroup.regionName;
-    //   console.log("BEFORE FUNCTION DATAS=---------------------->"+JSON.stringify(this.formData.regionGroupName))
-    // },
-    // fnShowSubTaskDetails(formData){
-    //     console.log("SUB TASK DETAILS---------------->",JSON.stringify(formData))
-    // },
-     fnShowSubTaskDetails(rowDetails){
+    fnShowSubTaskDetails(rowDetails) {
       this.propShowServiceSubTaskDetails = !this.propShowServiceSubTaskDetails;
       this.propRowDetails = rowDetails;
     },
-    fnfinalsubmitEditedSpareParts(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+    fnfinalsubmitEditedSpareParts() {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
-        this.$q.loading.show();
+        this.$q.loading.show({ message: "Saving..." });
         let param = {
-         id: JSON.stringify(this.propRowDetails1.id),
-          request: this.formData
+          id: this.propRowDetails1.id,
+          request: this.formData,
         };
         this.EDIT_SUB_TASK_TYPES(param)
           .then(() => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "positive",
-              position: "bottom",
               message: "Successfully updated!",
-              icon: "thumb_up"
+              icon: "thumb_up",
             });
             this.emitfnshowEditSubTaskType();
           })
-          .catch(error => {
+          .catch((error) => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
-              position: "bottom",
-              message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
-              icon: "thumb_down"
+              message: error.data?.message || "Please Try Again Later !",
+              icon: "thumb_down",
             });
           });
       }
-    }
-  }
+    },
+  },
 };
 </script>

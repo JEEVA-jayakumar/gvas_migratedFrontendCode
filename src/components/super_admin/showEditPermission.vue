@@ -1,119 +1,104 @@
 <template>
   <div>
     <q-dialog
-    minimized no-backdrop-dismiss
-    class="customModalOverlay"
-    v-model="propShowEditPermissionToggle"  
-    @hide="emitfnEditpermissionDetails(propShowEditPermissionToggle)" 
-    @escape-key="emitfnEditpermissionDetails(propShowEditPermissionToggle)"  
-    :content-css="{padding:'30px',minWidth: '30vw'}"
+      no-backdrop-dismiss
+      class="customModalOverlay"
+      v-model="propShowEditPermissionToggle"
+      persistent
+      @hide="emitfnEditpermissionDetails"
     >
-      <form> 
-        <div class="column q-pa-md bottom-border">
-          <div class="col-md-12">
-            <div class="text-h6 text-weight-regular">Edit Permission</div>
+      <q-card style="min-width: 30vw">
+        <form>
+          <div class="row q-pa-md bottom-border">
+            <div class="col-md-12">
+              <div class="text-h6 text-weight-regular">Edit Permission</div>
+            </div>
           </div>
-        </div>
-        <div class="column q-pa-md">
-          <div class="col-md-12">
+          <div class="q-pa-md">
             <q-input 
-            @keyup.enter="fnEditPermissionSubmit(formData.permissionDetails)"
-            v-model="formData.permissionDetails.permission" 
-            :error="$v.formData.permissionDetails.permission.$error" 
-            class="text-weight-regular text-grey-8 q-my-sm" color="grey-9" label="Permission" placeholder="Permission" />
+              @keyup.enter="fnEditPermissionSubmit(formData.permissionDetails)"
+              v-model="formData.permissionDetails.permission"
+              :error="v$.formData.permissionDetails.permission.$error"
+              class="text-weight-regular text-grey-8 q-my-sm" color="grey-9" label="Permission" placeholder="Permission" />
           </div>
-        </div>
-        <div class="column gutter-sm q-pa-md">
-          <div class="col-md-12" align="right">
-            <q-btn flat size="md" align="right" class="bg-white q-mr-sm text-weight-regular text-grey-8" @click="emitfnEditpermissionDetails(propShowEditPermissionToggle)">Cancel
-            </q-btn>
-            <q-btn size="md" align="right" @click="fnEditPermissionSubmit(formData.permissionDetails)" color="purple-9">Save
-            </q-btn>
+          <div class="row q-pa-md justify-end">
+              <q-btn flat class="bg-white q-mr-sm text-weight-regular text-grey-8" @click="emitfnEditpermissionDetails">Cancel
+              </q-btn>
+              <q-btn @click="fnEditPermissionSubmit(formData.permissionDetails)" color="purple-9">Save
+              </q-btn>
           </div>
-        </div>
-      </form>
+        </form>
+      </q-card>
     </q-dialog>
   </div>
 </template>
 
 <script>
-import {
-  required,
-  email,
-  minLength,
-  maxLength,
-  alpha,
-  alphaNum,
-  numeric
-} from "@vuelidate/validators";
+import useVuelidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
+
 export default {
   props: ["propRowDetails", "propShowEditPermission"],
-
+  setup() {
+      return { v$: useVuelidate() };
+  },
   data() {
     return {
       propShowEditPermissionToggle: this.propShowEditPermission,
       formData: {
         permissionDetails: {
-          permission: this.propRowDetails.permission,
+          permission: this.propRowDetails.label,
           permissionId: this.propRowDetails.id
         }
       }
     };
   },
-
-  validations: {
-    formData: {
-      permissionDetails: {
-        permission: required
+  validations() {
+      return {
+          formData: {
+              permissionDetails: {
+                  permission: { required }
+              }
+          }
       }
-    }
   },
-
   methods: {
-    ...mapActions("SuperAdminUsers", [
-      "FEED_EXISTING_PERMISSION_DATA",
-      "FETCH_ALL_PERMISSIONS_DATA"
-    ]),
+    ...mapActions("SuperAdminUsers", ["FEED_UPDATE_PERMISSION_DATA"]),
 
-    //Emit functions
-    emitfnEditpermissionDetails(propShowEditPermissionToggle) {
-      this.$emit("emitEditpermissionDetails", propShowEditPermissionToggle);
+    emitfnEditpermissionDetails() {
+      this.$emit("emitfnEditpermissionDetails");
     },
 
-    //Permission creation final submit
-    fnEditPermissionSubmit(formData) {
-      this.$v.formData.permissionDetails.$touch();
-
-      if (this.$v.formData.permissionDetails.$error) {
+    fnEditPermissionSubmit(permissionDetails) {
+      this.v$.formData.permissionDetails.$touch();
+      if (this.v$.formData.permissionDetails.$error) {
         this.$q.notify("Please review fields again.");
       } else {
-        console.log("formData >> ", formData);
         this.$q.loading.show({
-          delay: 100, // ms
+          delay: 100,
           message: "Please Wait",
-          spinnerColor: "purple-9",
-          customClass: "shadow-none"
+          spinnerColor: "purple-9"
         });
 
-        this.FEED_EXISTING_PERMISSION_DATA(formData)
+        this.FEED_UPDATE_PERMISSION_DATA({ id: permissionDetails.permissionId, label: permissionDetails.permission })
           .then(response => {
-            this.FETCH_ALL_PERMISSIONS_DATA();
-            this.emitfnEditpermissionDetails(this.propShowEditPermissionToggle);
             this.$q.loading.hide();
             this.$q.notify({
               color: "positive",
               position: "bottom",
-              message: "Successfully Updated!",
+              message: "Successfully updated!",
               icon: "thumb_up"
             });
+            this.emitfnEditpermissionDetails();
+            this.$emit("emitfnForPermissionTable");
           })
-          .catch(() => {
+          .catch(error => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message || "Error occurred",
               icon: "thumb_down"
             });
           });
@@ -122,3 +107,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.bottom-border {
+  border-bottom: 1px solid #dcdcdc;
+}
+</style>

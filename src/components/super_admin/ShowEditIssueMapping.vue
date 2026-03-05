@@ -1,200 +1,171 @@
 <template>
-    <div>
-      <q-dialog
-        minimized
-        v-model="toggleModel"
-        @hide="emitfnshowEditIssueMapping"
-        @escape-key="emitfnshowEditIssueMapping"
-        class="customModalOverlay"
-        :content-css="{ padding: '30px', minWidth: '50vw'}"
-      >
+  <div>
+    <q-dialog
+      v-model="toggleModel"
+      @hide="emitfnshowEditIssueMapping"
+      @escape-key="emitfnshowEditIssueMapping"
+      persistent
+      class="customModalOverlay"
+    >
+      <q-card style="min-width: 50vw">
         <form>
-          <div class="row gutter-sm q-py-sm items-center">
+          <div class="row q-pa-md items-center border-bottom">
             <div class="col-md-12">
               <div class="text-h6 text-weight-regular">
                 Modify Issue Mapping Info
               </div>
-            
             </div>
-            
           </div>
-          <div class="row gutter-sm q-py-sm items-center">
-            <div class="col-md-12">
+          <div class="row q-pa-md items-center">
+            <div class="col-md-12 full-width">
               <q-input
                 v-model="formData.name"
-                :error="$v.formData.name.$error"
+                @blur="v$.formData.name.$touch"
+                :error="v$.formData.name.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
                 label="Issue Mapping"
                 placeholder="Issue Mapping"
+                @keyup.enter="fnfinalsubmitIssueMapping()"
               />
             </div>
-          </div >
-  
-          <div class="row">
-            <div class="col">
-            <p>CS Sub Issue*</p>
-            <div class="col-md-12">
-              <div class="row items-center" v-for="menu in csSubIssueType" :to="menu.to">
-                <input style="width: 18px; height: 18px" type="checkbox" :value="menu" v-model="selectedItem" @update:model-value="getSelectedDetails($event, menu)" />
-                <label>{{ menu.name}}</label>
-                </div>
+          </div>
+
+          <div class="q-pa-md">
+            <p class="text-weight-bold">CS Sub Issue*</p>
+            <div class="column q-gutter-sm">
+              <div
+                v-for="menu in csSubIssueType"
+                :key="menu.id"
+                class="row items-center"
+              >
+                <q-checkbox
+                  v-model="selectedItem"
+                  :val="menu"
+                  :label="menu.name"
+                  color="purple-9"
+                />
               </div>
             </div>
           </div>
-        
-          <div class="row gutter-sm q-py-sm items-center">
-            <div class="col-md-12 group" align="right">
-              <q-btn
-                flat
-                align="right"
-                class="bg-white text-weight-regular text-grey-8"
-                @click="emitfnshowEditIssueMapping()"
-                >Cancel</q-btn
-              >
-              <q-btn
-              :disable="this.selectedItem == ''"
-                align="right"
-                @click="fnfinalsubmitIssueMapping(formData)"
-                color="purple-9"
-                >Save</q-btn
-              >
-            </div>
+
+          <div class="row q-pa-md items-center justify-end">
+            <q-btn
+              flat
+              class="bg-white text-weight-regular text-grey-8 q-mr-sm"
+              @click="emitfnshowEditIssueMapping()"
+              label="Cancel"
+            />
+            <q-btn
+              :disable="selectedItem.length === 0"
+              @click="fnfinalsubmitIssueMapping()"
+              color="purple-9"
+              label="Save"
+            />
           </div>
         </form>
-      </q-dialog>
-       <!--START: Show Sub Task Details-->
-       <showServiceSubTaskDetails
-          v-if="propShowServiceSubTaskDetails"
-          :propShowServiceSubTaskDetails="propShowServiceSubTaskDetails"
-          :propRowDetails2="propRowDetails2"
-          @emitfnshowServiceSubTaskDetails="fnShowSubTaskDetails"
-        />
-         <!-- END: Show Sub Task Details -->
-    </div>
-  </template>
-  
-  <script>
-    import { required } from "@vuelidate/validators";
-  import { mapGetters, mapActions } from "vuex";
-  import showServiceSubTaskDetails from  "../../components/super_admin/showServiceSubTaskDetails.vue";
-  
-  export default {
-       components: {
-      showServiceSubTaskDetails,
-    },
-    props: ["propShowEditIssueMapping", "propRowDetails2"],
-    data() {
-      return {
-        toggleModel: this.propShowEditIssueMapping,
-        csSubIssueType:[],
-         reqData: [],
-         separatedObjects: [],
-         name: [],
-         selectedItem:[],
-         csSubIssue: [],
-         list:[],
-        propShowServiceSubTaskDetails: false,
-        formData: {
-             name: JSON.stringify(this.propRowDetails2.name)
-         
-        }
-      };
-    },
-  
-    validations: {
+      </q-card>
+    </q-dialog>
+
+    <showServiceSubTaskDetails
+      v-if="propShowServiceSubTaskDetails"
+      :propShowServiceSubTaskDetails="propShowServiceSubTaskDetails"
+      :propRowDetails2="propRowDetails2"
+      @emitfnshowServiceSubTaskDetails="fnShowSubTaskDetails"
+    />
+  </div>
+</template>
+
+<script>
+import useVuelidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
+import { mapGetters, mapActions } from "vuex";
+import _ from "lodash";
+import showServiceSubTaskDetails from "../../components/super_admin/showServiceSubTaskDetails.vue";
+
+export default {
+  components: {
+    showServiceSubTaskDetails,
+  },
+  props: ["propShowEditIssueMapping", "propRowDetails2"],
+  setup() {
+    return { v$: useVuelidate() };
+  },
+  data() {
+    return {
+      toggleModel: this.propShowEditIssueMapping,
+      csSubIssueType: [],
+      selectedItem: [],
+      propShowServiceSubTaskDetails: false,
       formData: {
-          name:{
-            required
-          },
-      }
-    },
-    beforeMount() {
-      console.log(
-        "Getter propShowEditSpareParts Name---------------->" +
-          JSON.stringify(this.propRowDetails2)
-      );
-      this.formData.name= this.propRowDetails2.name;
-    },
-    computed: {
-      ...mapGetters("serviceRequest", ["getcsActiveSubIssueDetails"]),
-    },
-  
-    created(){
-      this.getcsSubIssueTypes();
-    },
-  
-    methods: {
-      ...mapActions("serviceRequest", ["EDIT_ISSUE_MAPPING","FETCH_ACTIVE_CS_SUB_ISSUE_DATAS"]),
-      ...mapActions("ServiceRequestStatus", ["EDIT_SERVICE_STATUS_TYPES","FETCH_SERVICE_REQUEST_STATUS_DETAILS"]),
-      emitfnshowEditIssueMapping() {
-        this.$emit("emitfnshowEditIssueMapping");
+        name: this.propRowDetails2.name,
       },
-  
-      getSelectedDetails(event, request){
-    console.log("event SUBMITTED VALUES----------->",event);
-    console.log("request SUBMITTED VALUES----------->",JSON.stringify(request.id))
-     this.reqData.push(request);
-     console.log("VALUES----------->",JSON.stringify(this.reqData))
-     this.formData.csSubIssueTypeSets = this.reqData;
-     console.log("csSubIssueTypeSets SUBMITTED VALUES----------->",JSON.stringify(this.formData.csSubIssueTypeSets ))
+    };
+  },
+  validations() {
+    return {
+      formData: {
+        name: { required },
       },
-  
-      getcsSubIssueTypes(){
-        let self = this;
-        self.FETCH_ACTIVE_CS_SUB_ISSUE_DATAS().then(() => {
-          return _.map(self.getcsActiveSubIssueDetails, item => {
-            console.log("getcsSubIssueTypes----------->",JSON.stringify(self.getcsActiveSubIssueDetails))
-            self.csSubIssueType.push(item);
-          });
-        });
-      },
-  
-       fnShowSubTaskDetails(rowDetails){
-        this.propShowServiceSubTaskDetails = !this.propShowServiceSubTaskDetails;
-        this.propRowDetails2 = rowDetails;
-      },
-      fnfinalsubmitIssueMapping(formData) {
-         console.log("FINAL SUBMITTED VALUES----------->",JSON.stringify(this.reqData))
-       console.log("SELECTED ITEM",JSON.stringify(this.selectedItem));
-       let list=[]
-        list = this.selectedItem.map(item => ({ id: item.id }));
-       console.log("FINAL",JSON.stringify(list) );
-        let param={
-          id:this.propRowDetails2.id,
+    };
+  },
+  computed: {
+    ...mapGetters("serviceRequest", ["getcsActiveSubIssueDetails"]),
+  },
+  created() {
+    this.getcsSubIssueTypes();
+  },
+  methods: {
+    ...mapActions("serviceRequest", [
+      "EDIT_ISSUE_MAPPING",
+      "FETCH_ACTIVE_CS_SUB_ISSUE_DATAS",
+    ]),
+    emitfnshowEditIssueMapping() {
+      this.$emit("emitfnshowEditIssueMapping");
+    },
+    getcsSubIssueTypes() {
+      this.FETCH_ACTIVE_CS_SUB_ISSUE_DATAS().then(() => {
+        this.csSubIssueType = _.map(this.getcsActiveSubIssueDetails, (item) => item);
+      });
+    },
+    fnShowSubTaskDetails(rowDetails) {
+      this.propShowServiceSubTaskDetails = !this.propShowServiceSubTaskDetails;
+      this.propRowDetails2 = rowDetails;
+    },
+    fnfinalsubmitIssueMapping() {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
+        this.$q.notify("Please review fields again.");
+      } else {
+        this.$q.loading.show({ message: "Saving..." });
+        let list = this.selectedItem.map((item) => ({ id: item.id }));
+        let param = {
+          id: this.propRowDetails2.id,
           request: {
-            name: formData.name,
-            csSubIssue:list
-           }
-           };
-        console.log("FINAL PARAM SUBMIT--------->",JSON.stringify(param))
-          this.$q.loading.show();
-          this.EDIT_ISSUE_MAPPING(param)
-            .then(() => {
-              this.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: "Successfully updated!",
-                icon: "thumb_up"
-              });
-              this.emitfnshowEditIssueMapping();
-              this.$q.loading.hide();
-            })
-            .catch(error => {
-              this.$q.notify({
-                color: "negative",
-                position: "bottom",
-                message:
-                  error.body.message == null
-                    ? "Please Try Again Later !"
-                    : error.body.message,
-                icon: "thumb_down"
-              });
-              this.$q.loading.hide();
+            name: this.formData.name,
+            csSubIssue: list,
+          },
+        };
+        this.EDIT_ISSUE_MAPPING(param)
+          .then(() => {
+            this.$q.loading.hide();
+            this.$q.notify({
+              color: "positive",
+              message: "Successfully updated!",
+              icon: "thumb_up",
             });
-      
+            this.emitfnshowEditIssueMapping();
+          })
+          .catch((error) => {
+            this.$q.loading.hide();
+            this.$q.notify({
+              color: "negative",
+              message: error.data?.message || "Please Try Again Later !",
+              icon: "thumb_down",
+            });
+          });
       }
-    }
-  };
-  </script>
-  
+    },
+  },
+};
+</script>

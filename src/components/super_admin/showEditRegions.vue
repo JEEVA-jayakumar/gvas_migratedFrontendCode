@@ -1,37 +1,37 @@
 <template>
     <div>
         <q-dialog
-        minimized
         v-model="toggleModel"  
+        persistent
         @hide="emitfnshowEditRegions" 
         @escape-key="emitfnshowEditRegions"  
         class="customModalOverlay" 
-        :content-css="{padding:'30px',minWidth: '30vw'}"
         >
+            <q-card style="min-width: 30vw">
             <form> 
-                <div class="row gutter-sm q-py-sm items-center">
+                <div class="row q-pa-md items-center border-bottom">
                     <div class="col-md-12">
                         <div class="text-h6 text-weight-regular">Modify Region Info</div>
                     </div>
                 </div>
-                <div class="row gutter-sm q-py-sm items-center">
-                  <div class="col-md-12">
+                <div class="row q-pa-md items-center">
+                  <div class="col-md-12 full-width">
                         <q-select
                           v-model="formData.regionGroup"   
-                          :error="$v.formData.regionGroup.$error" 
+                          :error="v$.formData.regionGroup.$error"
                            :options="regionGroupOptions"
-                        
                           class="text-weight-regular text-grey-8" 
                           color="grey-9" 
                           label="Region Group"
                           placeholder="Region Group" 
+                          emit-value
+                          map-options
                         />
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 full-width">
                         <q-input v-model="formData.regionAreaName" 
-                          @blur="$v.formData.regionAreaName.$touch"      
-                          :error="$v.formData.regionAreaName.$error" 
-                          @keyup.enter="$v.formData.regionAreaName.$touch"
+                          @blur="v$.formData.regionAreaName.$touch"
+                          :error="v$.formData.regionAreaName.$error"
                           class="text-weight-regular text-grey-8" 
                           color="grey-9" 
                           label="Region"
@@ -39,126 +39,89 @@
                         />
                     </div>
                 </div>
-                <div class="row gutter-sm q-py-sm items-center">
-                    <div class="col-md-12 group" align="right">
-                        <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnshowEditRegions()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitRegion(formData)" color="purple-9">Save</q-btn>
-                    </div>
+                <div class="row q-pa-md items-center justify-end">
+                        <q-btn flat class="bg-white text-weight-regular text-grey-8 q-mr-sm" @click="emitfnshowEditRegions()">Cancel</q-btn>
+                        <q-btn @click="fnfinalsubmitRegion(formData)" color="purple-9">Save</q-btn>
                 </div>
             </form>
+            </q-card>
         </q-dialog>
     </div>
 </template>
 
 <script>
+import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
+import _ from "lodash";
 
 export default {
-  props: ["propShowEditRegions", "propRowDetails"],
-  data() {
-    return {
-      toggleModel: this.propShowEditRegions,
-      regionGroupOptions:[],
-      // regionGroup: [],
-      formData: {
-        regionGroup:JSON.stringify(this.propRowDetails.regionGroup.regionName),
-        regionAreaName:this.propRowDetails.regionAreaName,
-         id: this.propRowDetails.id
-      },
-    };
-  },
+    props: ["propShowEditRegions", "propShowRegionData"],
+    setup() {
+        return { v$: useVuelidate() };
+    },
+    data() {
+        return {
+            toggleModel: this.propShowEditRegions,
+            formData: {
+                id: this.propShowRegionData.id,
+                regionGroup: this.propShowRegionData.regionGroup?.id || "",
+                regionAreaName: this.propShowRegionData.regionName
+            },
+            regionGroupOptions: []
+        };
+    },
+    validations() {
+        return {
+            formData: {
+                regionGroup: { required },
+                regionAreaName: { required }
+            }
+        }
+    },
+    created() {
+        this.ajaxLoadInitialData();
+    },
+    computed: {
+        ...mapGetters("RegionGroup", ["getAllRegionGroupData"])
+    },
+    methods: {
+        ...mapActions("RegionGroup", ["FETCH_REGION_GROUP_DATA"]),
+        ...mapActions("Region", ["UPDATE_REGION_DATA"]),
 
-  validations: {
-    formData: {
-      regionAreaName: {
-        required,
-      },
-      regionGroup: {
-        required,
-      },
-    },
-  },
-  beforeMount(){
-    //  console.log("Getter Region Name---------------->"+JSON.stringify(this.getAllRegionsData))
-    // console.log("Prop details---------------->"+JSON.stringify(this.propShowEditRegions))
-     console.log("Prop Row details---------------->"+JSON.stringify(this.propRowDetails))
-    //  this.formData.regionGroup =JSON.stringify(this.propRowDetails.regionGroup.regionName),
-    this.AllRegionName();
-      console.log("Region Name---------------->"+JSON.stringify(this.formData.regionGroup))
-  },
-  computed:{
-     ...mapGetters("SuperAdminUsers", ["getAllRegionsData"]),
-      ...mapGetters("regionGroupDatas", ["getAllRegionGroupData"])
-  },
-  created(){
-    this.fetchAllRegionGroupData();
-  },
-  methods: {
-    ...mapActions("SuperAdminUsers", [
-      "FETCH_ALL_REGIONS_DATA",
-      "FEED_EXISTING_REGION_DATA",
-    ]),
-    ...mapActions("SuperAdminUsers", ["FETCH_ALL_REGIONS_DATA"]),
-    ...mapActions("regionGroupDatas", ["FETCH_REGION_GROUP_DATAS"]),
-    emitfnshowEditRegions() {
-      this.$emit("emitfnshowRegions");
-    },
-    AllRegionName(){
-      this.formData.regionGroup = this.propRowDetails.regionGroup.regionName;
-      console.log("BEFORE FUNCTION DATAS=---------------------->"+JSON.stringify(this.formData.regionGroup))
-    },
-     fetchAllRegionGroupData(){
-      this.FETCH_REGION_GROUP_DATAS()
-      .then((response)=>{
-        console.log("response fetchAllRegionGroupData ====>",JSON.stringify(response))
-        console.log("fetchAllRegionGroupData ====>",JSON.stringify(this.getAllRegionGroupData))
-        return _.map(this.getAllRegionGroupData, item => {
-             console.log("DEVICE GETTING API ITEM VALUES OF PLAN--------->"+JSON.stringify(item))
-            this.regionGroupOptions.push({
-              //  console.log("REGION GROUPS------------->" +"label"+label);
-              value: item,
-              label: item.regionName
+        ajaxLoadInitialData() {
+            this.FETCH_REGION_GROUP_DATA().then(() => {
+                this.regionGroupOptions = this.getAllRegionGroupData.map(item => ({ label: item.regionName, value: item.id }));
             });
-          
-          });
-          //  console.log("REGION GROUPS------------->" +regionGroupOptions);
-      })
-    },
-    fnfinalsubmitRegion(formData) {
-      console.log("FINAL SUBMITRED-------->",JSON.stringify(formData))
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
-        this.$q.notify("Please review fields again.");
-      } else {
-        this.$q.loading.show();
-        // let param={
-        //   request: formData.regionGroup
-        // };
-         console.log("FINAL SUBMITRED-------->",JSON.stringify(formData))
-        this.FEED_EXISTING_REGION_DATA(formData)
-          .then(() => {
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully updated!",
-              icon: "thumb_up",
-            });
-            this.FETCH_ALL_REGIONS_DATA();
-            this.emitfnshowEditRegions();
-          })
-          .catch(error => {
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-              icon: "thumb_down",
-            });
-          });
-      }
-    },
-  },
+        },
+
+        emitfnshowEditRegions() {
+            this.$emit("emitfnshowEditRegions");
+        },
+
+        fnfinalsubmitRegion(formData) {
+            this.v$.formData.$touch();
+            if (this.v$.formData.$error) {
+                this.$q.notify("Please review fields again.");
+            } else {
+                this.$q.loading.show({ message: "Saving..." });
+                let payload = {
+                    id: formData.id,
+                    regionGroup: { id: formData.regionGroup },
+                    regionName: formData.regionAreaName,
+                    active: true
+                };
+                this.UPDATE_REGION_DATA(payload).then(response => {
+                    this.$q.notify({ color: "positive", message: "Successfully updated!" });
+                    this.$emit("emitfnForRegionTable");
+                    this.emitfnshowEditRegions();
+                    this.$q.loading.hide();
+                }).catch(error => {
+                    this.$q.notify({ color: "negative", message: error.data?.message || "Error" });
+                    this.$q.loading.hide();
+                });
+            }
+        }
+    }
 };
 </script>

@@ -1,468 +1,274 @@
 <template>
   <q-page>
-    <div>
-      <q-tabs v-model="activeTab" class="shadow-1" color="grey-1">
-        <q-tab
-          @click="ajaxSpareData"
+    <div class="q-pa-md">
+      <q-tabs
+        v-model="activeTab"
+        class="bg-white text-grey-7 shadow-1"
+        active-color="purple-9"
+        indicator-color="purple-9"
+        align="left"
+      >
+        <q-tab name="tab-1" label="Active Issue Mapping" />
+        <q-tab name="tab-2" label="Deactive Issue Mapping" />
+      </q-tabs>
 
-          color="dark"
-          name="tab-1"
-          label="Active Issue Mapping"
-        />
-        <q-tab
-          color="dark"
-          name="tab-2"
-          label="Deactive Issue Mapping"
-        />
-</q-tabs>
-<q-tab-panels v-model="activeTab" animated>
-<q-tab-panel name="tab-1">
+      <q-tab-panels v-model="activeTab" animated keep-alive class="bg-transparent">
+        <q-tab-panel name="tab-1" class="no-padding q-mt-md">
           <q-table
             :rows="tableData"
             table-class="customSATableClass"
             :columns="columns1"
-            :filter="filterSearch" v-model:pagination="paginationControl"
+            :filter="filterSearch"
+            v-model:pagination="paginationControl"
             :filter-method="myCustomSearchFilter1"
-            row-key="name"
+            row-key="id"
             color="grey-9"
+            flat
+            bordered
           >
-            <q-td v-slot:body-cell-action="props" :props="props">
-              <div class="row no-wrap no-padding">
-                <q-btn
-                  dense
-                  no-caps
-                  no-wrap
-                  label="Modify"
-                  icon="far fa-plus-square"
-                  size="md"
-                  @click="fnShowEditIssueMapping(props.row)"
-                  flat
-                  class="text-light-blue"
-                ></q-btn>
-                <q-btn
-                  dense
-                  no-caps
-                  no-wrap
-                  label="Disable"
-                  icon="far fa-minus-square"
-                  size="md"
-                  @click="fnDeleteIssueMapping(props.row)"
-                  flat
-                  class="text-negative"
-                ></q-btn>
-              </div>
-            </q-td>
-            <!-- <q-td
-              v-slot:body-cell-serviceReqIssueTypeSets="props"
-              :props="props"
-            >
-              <div
-                class="row no-wrap group"
-                v-for="menu in props.row.serviceReqIssueTypeSets"
-              >
-                <q-chip color="light" class="text-dark">
-                  {{ menu.serviceReqIssueType.name }}
-                </q-chip>
-              </div>
-            </q-td> -->
-            <!-- <q-td v-slot:body-cell-serviceRequestStatusSets="props" :props="props">
-                <div class="row no-wrap group" v-for="menu in props.row.serviceRequestStatusSets" >
-                  <q-chip color="light" class="text-dark">
-                    {{ menu.serviceRequestStatus != null ? menu.serviceRequestStatus.name : "NA" }}
-                  </q-chip>
+            <template v-slot:body-cell-action="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <q-btn
+                    dense
+                    no-caps
+                    no-wrap
+                    label="Modify"
+                    icon="far fa-plus-square"
+                    size="sm"
+                    @click="fnShowEditIssueMapping(props.row)"
+                    flat
+                    class="text-light-blue q-mr-sm"
+                  />
+                  <q-btn
+                    dense
+                    no-caps
+                    no-wrap
+                    label="Disable"
+                    icon="far fa-minus-square"
+                    size="sm"
+                    @click="fnDeleteIssueMapping(props.row)"
+                    flat
+                    class="text-negative"
+                  />
                 </div>
-              </q-td> -->
+              </q-td>
+            </template>
 
-            <template v-slot:top="props">
-              <div class="col-3">
-                  <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Search by Issue Name" class="q-mr-lg" />
+            <template v-slot:top>
+              <div class="row full-width items-center">
+                <div class="col-6">
+                  <q-input
+                    clearable
+                    dense
+                    color="grey-9"
+                    v-model="filterSearch"
+                    placeholder="Search by Issue Name"
+                  >
+                    <template v-slot:append>
+                        <q-icon name="search" />
+                    </template>
+                  </q-input>
                 </div>
-              <div class="col-7" align="right">
-                <q-btn
-                  no-caps
-                  class="text-weight-regular alignbtn1"
-                  label="Add Issue Mapping"
-                  @click="fnShowAddNewIssueMapping(props.row)"
-                  color="purple-9"
-                  size="md"
-                />
+                <div class="col-6" align="right">
+                  <q-btn
+                    no-caps
+                    class="text-weight-regular"
+                    label="Add Issue Mapping"
+                    @click="fnShowAddNewIssueMapping()"
+                    color="purple-9"
+                    icon="add"
+                  />
+                </div>
               </div>
             </template>
           </q-table>
         </q-tab-panel>
-<q-tab-panel name="tab-2">
+
+        <q-tab-panel name="tab-2" class="no-padding q-mt-md">
           <q-table
             :rows="tableData1"
             table-class="customSATableClass"
             :columns="columns2"
-            :filter="filterSearch1" v-model:pagination="paginationControl2"
+            :filter="filterSearch1"
+            v-model:pagination="paginationControl2"
             :filter-method="myCustomSearchFilter2"
-            row-key="name"
+            row-key="id"
             color="grey-9"
+            flat
+            bordered
           >
-            <!-- <q-td
-              v-slot:body-cell-serviceReqIssueTypeSets="props"
-              :props="props"
-            >
-              <div
-                class="row no-wrap group"
-                v-for="menu in props.row.serviceReqIssueTypeSets"
-              >
-                <q-chip color="light" class="text-dark">
-                  {{ menu.serviceReqIssueType.name }}
-                </q-chip>
-              </div>
-            </q-td> -->
-            <!-- <q-td v-slot:body-cell-serviceRequestStatusSets="props" :props="props">
-                <div class="row no-wrap group" v-for="menu in props.row.serviceRequestStatusSets" >
-                  <q-chip color="light" class="text-dark">
-                    {{ menu.serviceRequestStatus != null ? menu.serviceRequestStatus.name : "NA"}}
-                  </q-chip>
+            <template v-slot:body-cell-action1="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <q-btn
+                    dense
+                    no-caps
+                    no-wrap
+                    label="Active"
+                    icon="far fa-plus-square"
+                    size="sm"
+                    @click="fnShowActiveIssueMapping(props.row)"
+                    flat
+                    class="text-light-blue"
+                  />
                 </div>
-              </q-td> -->
+              </q-td>
+            </template>
 
-            <q-td v-slot:body-cell-action1="props" :props="props">
-              <div class="row no-wrap no-padding">
-                <q-btn
+            <template v-slot:top>
+              <div class="col-6">
+                <q-input
+                  clearable
                   dense
-                  no-caps
-                  no-wrap
-                  label="Active"
-                  icon="far fa-plus-square"
-                  size="md"
-                  @click="fnShowActiveIssueMapping(props.row)"
-                  flat
-                  class="text-light-blue"
-                ></q-btn>
+                  color="grey-9"
+                  v-model="filterSearch1"
+                  placeholder="Search by Issue Name"
+                >
+                  <template v-slot:append>
+                    <q-icon name="search" />
+                  </template>
+                </q-input>
               </div>
-            </q-td>
-
-            <template v-slot:top="props">
-              <div class="col-3">
-                  <q-input clearable color="grey-9" v-model="filterSearch1" placeholder="Search by Issue Name" class="q-mr-lg" />
-                </div>
             </template>
           </q-table>
         </q-tab-panel>
-</q-tab-panels>
+      </q-tab-panels>
 
-      <!--START: Show edit  service Parts -->
       <ShowEditIssueMapping
         v-if="propShowEditIssueMapping"
         :propShowEditIssueMapping="propShowEditIssueMapping"
         :propRowDetails2="propRowDetails2"
         @emitfnshowEditIssueMapping="fnShowEditIssueMapping"
       />
-      <!-- END: Show edit  Spare Parts -->
-      <!--START: Show ServiceType -->
       <ShowAddIssueMapping
         v-if="propShowAddIssueMapping"
         :propShowAddIssueMapping="propShowAddIssueMapping"
-        :propRowDetails="propRowDetails"
         @emitfnShowAddNewIssueMapping="fnShowAddNewIssueMapping"
       />
-      <!--END: Show Add Spare Parts -->
     </div>
   </q-page>
 </template>
+
 <script>
-import { required } from '@vuelidate/validators';
 import ShowAddIssueMapping from "../../components/super_admin/ShowAddIssueMapping.vue";
 import ShowEditIssueMapping from "../../components/super_admin/ShowEditIssueMapping.vue";
 import { mapGetters, mapActions } from "vuex";
+
 export default {
-  name: "getactiveIssueMapping",
+  name: "IssueMapping",
   components: {
     ShowAddIssueMapping,
     ShowEditIssueMapping
   },
-
   data() {
     return {
       activeTab: "tab-1",
       propShowAddIssueMapping: false,
       propShowEditIssueMapping: false,
-      propShowEditSubTaskType: false,
-      propShowActiveServiceType: false,
-      propShowAddSubTaskType: false,
-      propRowDetails: "",
-      propRowDetails1: "",
-      propRowDetails2: "",
-      propRowDetails4: "",
-
-      filter: "",
+      propRowDetails2: null,
       filterSearch: "",
       filterSearch1: "",
-      filter_values: "",
-      multipleSelect: "",
-      name: [],
-      csSubIssue: [],
-      // serviceRequestStatusSets: [],
-
-      paginationControl: {
-        rowsPerPage: 10
-      },
-      paginationControl2: {
-        rowsPerPage: 10
-      },
-
-      //table information
+      paginationControl: { rowsPerPage: 10 },
+      paginationControl2: { rowsPerPage: 10 },
       columns1: [
-        {
-          name: "name",
-          required: true,
-          label: "Issue Name",
-          align: "left",
-          field: "name",
-          sortable: true
-        },
-        {
-          name: "action",
-          required: true,
-          label: "",
-          align: "left",
-          field: "action",
-          sortable: false
-        }
+        { name: "name", required: true, label: "Issue Name", align: "left", field: "name", sortable: true },
+        { name: "action", required: true, label: "", align: "left", field: "action", sortable: false }
       ],
       columns2: [
-        {
-          name: "name",
-          required: true,
-          label: "Issue Name",
-          align: "left",
-          field: "name",
-          sortable: true
-        },
-        {
-          name: "action1",
-          required: true,
-          label: "",
-          align: "left",
-          field: "action1",
-          sortable: false
-        }
+        { name: "name", required: true, label: "Issue Name", align: "left", field: "name", sortable: true },
+        { name: "action1", required: true, label: "", align: "left", field: "action1", sortable: false }
       ],
       tableData: [],
-      tableData1: [],
-      ActivetableData: [],
-      DeactivetableData: []
+      tableData1: []
     };
   },
-
   created() {
-    /* START: Load user table data filter > Regions */
     this.ajaxSpareData();
-    //   this.ajaxSpareData1();
-    /* End: Load user table data filter > Regions */
   },
-
+  watch: {
+      activeTab() {
+          this.ajaxSpareData();
+      }
+  },
   computed: {
-    ...mapGetters("serviceRequest", [
-      "getactiveIssueMapping",
-      "getdeactiveIssueMapping"
-    ])
+    ...mapGetters("serviceRequest", ["getactiveIssueMapping", "getdeactiveIssueMapping"])
   },
-  //   beforeMount(){
-  //       console.log("TABLE DATA VALUES----------->",JSON.stringify(this.getactiveIssueMapping))
-  //   },
-
   methods: {
-    ...mapActions("serviceRequest", [
-      "FETCH_ACTIVE_ISSUE_MAPPING",
-      "FETCH_DEACTIVE_ISSUE_MAPPING",
-      "ACTIVE_ISSUE_MAPPING",
-      "DELETE_ISSUE_MAPPING"
-    ]),
-
+    ...mapActions("serviceRequest", ["FETCH_ACTIVE_ISSUE_MAPPING", "FETCH_DEACTIVE_ISSUE_MAPPING", "ACTIVE_ISSUE_MAPPING", "DELETE_ISSUE_MAPPING"]),
     fnShowActiveIssueMapping(reqData) {
-      console.log("REQEST DATA---------->", JSON.stringify(reqData));
-      let param = {
-        id: reqData.id,
-        request: reqData
-        // {
-        //   // name: reqData.name,
-        //   request: reqData
-        // }
-      };
-      this.$q
-        .dialog({
-          title: "Confirm",
-          message: "Are you sure want to active this issue?",
-          ok: "Continue",
-          cancel: "Cancel"
-        }).onOk(() => {
-          this.$q.loading.show({
-            delay: 100, // ms
-            message: "Please Wait",
-            spinnerColor: "purple-9",
-            customClass: "shadow-none"
-          });
-          this.ACTIVE_ISSUE_MAPPING(param)
+      this.$q.dialog({
+        title: "Confirm",
+        message: "Are you sure want to active this issue?",
+        ok: "Continue",
+        cancel: "Cancel",
+        persistent: true
+      }).onOk(() => {
+        this.$q.loading.show({ message: "Please Wait" });
+        this.ACTIVE_ISSUE_MAPPING({ id: reqData.id, request: reqData })
           .then(() => {
             this.$q.loading.hide();
-            this.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully Updated!",
-              icon: "thumb_up"
-            });
-            this.$q.loading.hide();
+            this.$q.notify({ color: "positive", message: "Successfully Updated!" });
             this.ajaxSpareData();
           })
-        }).onCancel(error => {
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message:
-              error.body.message == null
-                ? "Please Try Again Later !"
-                : error.body.message,
-            icon: "thumb_down"
+          .catch((error) => {
+            this.$q.loading.hide();
+            this.$q.notify({ color: "negative", message: error.data?.message || "Error" });
           });
-          this.$q.loading.hide();
-        });
+      });
     },
-
     fnDeleteIssueMapping(rowDetails) {
-      console.log("ROW DETAILS------------->", JSON.stringify(rowDetails));
-      this.$q
-        .dialog({
-          title: "Confirm",
-          message: "Are you sure want to disable?",
-          ok: "Continue",
-          cancel: "Cancel"
-        }).onOk(() => {
-          this.$q.loading.show({
-            delay: 100, // ms
-            message: "Please Wait",
-            spinnerColor: "purple-9",
-            customClass: "shadow-none"
-          });
-          this.DELETE_ISSUE_MAPPING(rowDetails).then(response => {
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully Removed",
-              icon: "thumb_up"
-            });
-            this.$q.loading.hide();
-            this.ajaxSpareData();
-          });
-        }).onCancel(() => {
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "No changes made!",
-            icon: "thumb_down"
-          });
+      this.$q.dialog({
+        title: "Confirm",
+        message: "Are you sure want to disable?",
+        ok: "Continue",
+        cancel: "Cancel",
+        persistent: true
+      }).onOk(() => {
+        this.$q.loading.show({ message: "Please Wait" });
+        this.DELETE_ISSUE_MAPPING(rowDetails).then(() => {
           this.$q.loading.hide();
-        });
+          this.$q.notify({ color: "positive", message: "Successfully Removed" });
+          this.ajaxSpareData();
+        }).catch(() => { this.$q.loading.hide(); });
+      });
     },
-
     ajaxSpareData() {
-      this.FETCH_ACTIVE_ISSUE_MAPPING()
-        .then(res => {
-          console.log(
-            "getactiveIssueMapping------->",
-            JSON.stringify(this.getactiveIssueMapping)
-          );
+      this.$q.loading.show({ message: "Loading..." });
+      Promise.all([
+          this.FETCH_ACTIVE_ISSUE_MAPPING(),
+          this.FETCH_DEACTIVE_ISSUE_MAPPING()
+      ]).then(() => {
           this.tableData = this.getactiveIssueMapping;
-          console.log("tableDataActivetable------->", JSON.stringify(this.tableData));
-          // this.DeactivetableData = this.getactiveIssueMapping.filter(service => service.active == false);
-          //   console.log("DeactivetableData------->", JSON.stringify(this.DeactivetableData))
-          // this.tableData = this.getactiveIssueMapping.filter(
-          //   service => service.active == true
-          // );
-          console.log(
-            "ActivetableData------->",
-            JSON.stringify(this.tableData)
-          );
-        })
-        .catch(() => {
-          this.$q.loading.hide();
-        });
-        
-      this.FETCH_DEACTIVE_ISSUE_MAPPING()
-        .then(res => {
-          console.log(
-            "getdeactiveIssueMapping------->",
-            JSON.stringify(this.getdeactiveIssueMapping)
-          );
           this.tableData1 = this.getdeactiveIssueMapping;
-          console.log("tableData------->", JSON.stringify(this.tableData1));
-          // this.DeactivetableData = this.getdeactiveIssueMapping.filter(
-          //   service => service.active == false
-          // );
-          console.log(
-            "DeactivetableData------->",
-            JSON.stringify(this.tableData1)
-          );
-          //  this.ActivetableData = this.getdeactiveIssueMapping.filter(service => service.active == true);
-          //    console.log("ActivetableData------->", JSON.stringify(this.ActivetableData))
-        })
-        .catch(() => {
           this.$q.loading.hide();
-        });
+      }).catch(() => { this.$q.loading.hide(); });
     },
-    //   ajaxSpareData1() {
-    //     this.FETCH_SUB_TASK_DATAS()
-    //       .then(res => {
-    //         this.tableData1 = this.getsubTaskDetails;
-    //         console.log(
-    //           "TABLE DATA 11111111111111 VALUES-RESPONSE---------->",
-    //           JSON.stringify(this.tableData1)
-    //         );
-    //       })
-    //       .catch(() => {
-    //         this.$q.loading.hide();
-    //       });
-    //   },
     fnShowAddNewIssueMapping(token) {
-      this.propShowAddIssueMapping = !this.propShowAddIssueMapping;
-      // this.propRowDetails = rowDetails;
-      if (token == "refresh") {
-        this.ajaxSpareData();
+      if (token === 'refresh') {
+          this.propShowAddIssueMapping = false;
+          this.ajaxSpareData();
+      } else {
+          this.propShowAddIssueMapping = !this.propShowAddIssueMapping;
       }
     },
-
     fnShowEditIssueMapping(rowDetails) {
-      this.propShowEditIssueMapping = !this.propShowEditIssueMapping;
-      this.propRowDetails2 = rowDetails;
-      if (this.propShowEditIssueMapping == false) {
-        this.ajaxSpareData();
-      }
+        if (this.propShowEditIssueMapping) {
+            this.propShowEditIssueMapping = false;
+            this.ajaxSpareData();
+        } else {
+            this.propRowDetails2 = rowDetails;
+            this.propShowEditIssueMapping = true;
+        }
     },
-    fnShowEditSubTaskType(rowDetails) {
-      this.propShowEditSubTaskType = !this.propShowEditSubTaskType;
-      this.propRowDetails1 = rowDetails;
-    },
-
     myCustomSearchFilter1(rows, terms, cols, cellValue) {
       const lowerTerms = terms ? terms.toLowerCase() : "";
-      return rows.filter(row =>
-        cols.some(
-          col =>
-            (cellValue(col, row) + "").toLowerCase().indexOf(lowerTerms) !== -1
-        )
-      );
+      return rows.filter(row => cols.some(col => (cellValue(col, row) + "").toLowerCase().indexOf(lowerTerms) !== -1));
     },
     myCustomSearchFilter2(rows, terms, cols, cellValue) {
       const lowerTerms = terms ? terms.toLowerCase() : "";
-      return rows.filter(row =>
-        cols.some(
-          col =>
-            (cellValue(col, row) + "").toLowerCase().indexOf(lowerTerms) !== -1
-        )
-      );
+      return rows.filter(row => cols.some(col => (cellValue(col, row) + "").toLowerCase().indexOf(lowerTerms) !== -1));
     }
   }
 };
 </script>
-
-<style>
-.alignbtn1{
-  margin-right: 254px;
-}
-</style>

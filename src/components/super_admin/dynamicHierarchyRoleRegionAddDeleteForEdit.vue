@@ -4,68 +4,79 @@
         class="customModalOverlay"
         minimized
         v-model="toggleModel"  
-        no-esc-dismiss
-        no-backdrop-dismiss
+        persistent
         :content-css="{padding:'30px',maxWidth: '30vw'}"
       >       
-        <div class="row group">
-          <div class="col-md-12 col-sm-12 col-xs-12 q-py-sm bottom-border">
-              <span class="text-h6">User Mapping Information</span>
-          </div>
-          <pre>{{userMapping}}</pre>
+        <q-card style="padding: 30px; min-width: 30vw;">
+          <div class="row group">
+            <div class="col-md-12 col-sm-12 col-xs-12 q-py-sm bottom-border">
+                <span class="text-h6">User Mapping Information</span>
+            </div>
+            <!-- <pre>{{userMapping}}</pre> -->
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <q-select
+                  label="Choose a region"
+                  v-model="userMapping.regionId"
+                  :error="v$.userMapping.regionId.$error"
+                  :options="propGetAllRegionsData"
+                  emit-value
+                  map-options
+                />
+            </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
-              <q-select
-                label="Choose a region"
-                v-model="userMapping.regionId"
-                :error="$v.userMapping.regionId.$error"
-                :options="propGetAllRegionsData"
-              />
+                <q-select
+                  @update:model-value="fnPopulateRolesByHeirarchy(userMapping.hierarchy)"
+                  label="Choose a hierarchy"
+                  v-model="userMapping.hierarchy"
+                  :error="v$.userMapping.hierarchy.$error"
+                  :options="propGetAllHierarchiesData"
+                  emit-value
+                  map-options
+                />
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <q-select
+                  :readonly=disableRolesSelection
+                  :disabled=disableRolesSelection
+                  :class="[disableRolesSelection?'no-pointer-events':'']"
+                  @update:model-value="fnPopulateUsersByRole"
+                  label="Choose a role"
+                  v-model="userMapping.roleId"
+                  :error="v$.userMapping.roleId.$error"
+                  :options="filterRoles"
+                  emit-value
+                  map-options
+                />
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <q-select
+                  :readonly=disablePreceederSelection
+                  :disabled=disablePreceederSelection
+                  :class="[disablePreceederSelection?'no-pointer-events':'']"
+                  label="Choose a predecessor"
+                  v-model="userMapping.predecessorId"
+                  :error="v$.userMapping.predecessorId.$error"
+                  :options="filterUsers"
+                  emit-value
+                  map-options
+                />
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12" align="right">
+              <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnToggleModelCancel()"> Cancel </q-btn>
+              <q-btn size="md" align="right" color="purple-9" @click="emitfnToggleModel(userMapping)"> Done </q-btn>
+            </div>
           </div>
-          <div class="col-md-12 col-sm-12 col-xs-12">
-              <q-select
-                @update:model-value="fnPopulateRolesByHeirarchy(userMapping.hierarchy)"
-                label="Choose a hierarchy"
-                v-model="userMapping.hierarchy"
-                :error="$v.userMapping.hierarchy.$error"
-                :options="propGetAllHierarchiesData"
-              />
-          </div>
-          <div class="col-md-12 col-sm-12 col-xs-12">
-              <q-select
-                :readonly=disableRolesSelection
-                :disabled=disableRolesSelection
-                :class="[disableRolesSelection?'no-pointer-events':'']"
-                @update:model-value="fnPopulateUsersByRole"
-                label="Choose a role"
-                v-model="userMapping.roleId"
-                :error="$v.userMapping.roleId.$error"
-                :options="filterRoles"
-              />
-          </div>
-          <div class="col-md-12 col-sm-12 col-xs-12">
-              <q-select
-                :readonly=disablePreceederSelection
-                :disabled=disablePreceederSelection
-                :class="[disablePreceederSelection?'no-pointer-events':'']"
-                label="Choose a predecessor"
-                v-model="userMapping.predecessorId"
-                :error="$v.userMapping.predecessorId.$error"
-                :options="filterUsers"
-              />
-          </div>
-          <div class="col-md-12 col-sm-12 col-xs-12" align="right">
-            <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnToggleModelCancel()"> Cancel </q-btn>
-            <q-btn size="md" align="right" color="purple-9" @click="emitfnToggleModel(userMapping)"> Done </q-btn>
-          </div>
-        </div>
+        </q-card>
       </q-dialog>
     </div>
 
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
-
+import { useVuelidate } from "@vuelidate/core";
 import { required, requiredIf } from "@vuelidate/validators";
+import _ from "lodash";
+
 export default {
   props: [
     "propDynamicHierarchyRoleRegion",
@@ -74,6 +85,9 @@ export default {
     "propGetAllHierarchiesData",
     "propDetailsForEdit",
   ],
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       dynamicHierarchyRoleRegion: 1,
@@ -102,23 +116,23 @@ export default {
     //End >> Modifying user mapping information in array
   },
 
-  validations: {
-    userMapping: {
-      hierarchy: {
-        required,
+  validations() {
+    return {
+      userMapping: {
+        hierarchy: {
+          required,
+        },
+        roleId: {
+          required,
+        },
+        regionId: {
+          required,
+        },
+        predecessorId: {
+          required: requiredIf(this.filterUsers.length > 0),
+        },
       },
-      roleId: {
-        required,
-      },
-      regionId: {
-        required,
-      },
-      predecessorId: {
-        required: requiredIf(function(filterUsers) {
-          return filterUsers.length > 0;
-        }),
-      },
-    },
+    };
   },
 
   computed: {
@@ -132,8 +146,8 @@ export default {
     ]),
     //Emit functions
     emitfnToggleModel(userMapping) {
-      this.$v.userMapping.$touch();
-      if (this.$v.userMapping.$error) {
+      this.v$.userMapping.$touch();
+      if (this.v$.userMapping.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$emit("emitfnToggleModelWithParams", userMapping);
@@ -145,6 +159,7 @@ export default {
 
     fnPopulateRolesByHeirarchy() {
       let hierarchyId = this.userMapping.hierarchy;
+      if (!hierarchyId) return;
       this.disablePreceederSelection = true;
       this.disableRolesSelection = true;
       this.FETCH_ROLES_BASED_ON_HEIRARCHY_ID(hierarchyId)
@@ -158,6 +173,7 @@ export default {
               return rolesArr;
             }
           });
+          this.filterRoles = this.filterRoles.filter(o => o !== undefined);
           if (this.filterRoles.length > 0) {
             this.disableRolesSelection = false;
           } else {
@@ -174,6 +190,7 @@ export default {
     },
 
     fnPopulateUsersByRole() {
+      if (!this.userMapping.roleId) return;
       this.disablePreceederSelection = true;
       this.FETCH_ALL_USERS_BY_ROLE_DATA(this.userMapping.roleId)
         .then(response => {
@@ -204,4 +221,3 @@ export default {
   },
 };
 </script>
-

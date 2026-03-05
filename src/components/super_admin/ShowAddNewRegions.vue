@@ -1,36 +1,37 @@
 <template>
     <div>
         <q-dialog
-        minimized
         v-model="toggleModel"  
+        persistent
         @hide="emitfnShowAddNewRegions" 
         @escape-key="emitfnShowAddNewRegions"  
         class="customModalOverlay" 
-        :content-css="{padding:'30px',minWidth: '30vw'}"
         >
+            <q-card style="min-width: 30vw">
             <form> 
-                <div class="row gutter-sm q-py-sm items-center">
+                <div class="row q-pa-md items-center border-bottom">
                     <div class="col-md-12">
                         <div class="text-h6 text-weight-regular">Add New Regions</div>
                     </div>
                 </div>
-                <div class="row gutter-sm q-py-sm items-center">
-                     <div class="col-md-12">
+                <div class="row q-pa-md items-center">
+                     <div class="col-md-12 full-width">
                         <q-select
                           v-model="formData.regionGroup"   
-                          :error="$v.formData.regionGroup.$error" 
-                        
+                          :error="v$.formData.regionGroup.$error"
                           :options="regionGroupOptions"
                           class="text-weight-regular text-grey-8" 
                           color="grey-9" 
                           label="Region Group"
                           placeholder="Region Group" 
+                          emit-value
+                          map-options
                         />
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 full-width">
                         <q-input 
                         v-model="formData.regionAreaName" 
-                          :error="$v.formData.regionAreaName.$error"
+                          :error="v$.formData.regionAreaName.$error"
                           class="text-weight-regular text-grey-8" 
                           color="grey-9" 
                           label="Region"
@@ -38,111 +39,87 @@
                         />
                     </div>
                 </div>
-                <div class="row gutter-sm q-py-sm items-center">
-                    <div class="col-md-12 group" align="right">
-                        <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowAddNewRegions()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitAddNewRegion(formData)" color="purple-9">Save</q-btn>
-                    </div>
+                <div class="row q-pa-md items-center justify-end">
+                        <q-btn flat class="bg-white text-weight-regular text-grey-8 q-mr-sm" @click="emitfnShowAddNewRegions()">Cancel</q-btn>
+                        <q-btn @click="fnfinalsubmitAddNewRegion(formData)" color="purple-9">Save</q-btn>
                 </div>
             </form>
+            </q-card>
         </q-dialog>
     </div>
 </template>
 
 <script>
+import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
+import _ from "lodash";
 
 export default {
-  props: ["propShowAddNewRegions", "propRowDetails"],
-  data() {
-    return {
-      toggleModel: this.propShowAddNewRegions,
-      regionGroupOptions:[],
-      formData: {
-           regionGroup: "",
-           regionAreaName: "",
-        //   regionAreaName
-        // id: this.propRowDetails.value,
-        // regionAreaName: this.propRowDetails.label,
-        // regionGroup: this.propRowDetails.group,
-      },
-    };
-  },
+    props: ["propShowAddNewRegions"],
+    setup() {
+        return { v$: useVuelidate() };
+    },
+    data() {
+        return {
+            toggleModel: this.propShowAddNewRegions,
+            formData: {
+                regionGroup: "",
+                regionAreaName: ""
+            },
+            regionGroupOptions: []
+        };
+    },
+    validations() {
+        return {
+            formData: {
+                regionGroup: { required },
+                regionAreaName: { required }
+            }
+        }
+    },
+    created() {
+        this.ajaxLoadInitialData();
+    },
+    computed: {
+        ...mapGetters("RegionGroup", ["getAllRegionGroupData"])
+    },
+    methods: {
+        ...mapActions("RegionGroup", ["FETCH_REGION_GROUP_DATA"]),
+        ...mapActions("Region", ["SUBMIT_REGION_DATA"]),
 
-  validations: {
-    formData: {
-      regionAreaName: {
-        required,
-      },
-      regionGroup: {
-        required,
-      },
-    },
-  },
-computed:{
-     ...mapGetters("SuperAdminUsers", ["getAllRegionsData"]),
-     ...mapGetters("regionGroupDatas", ["getAllRegionGroupData"])
+        ajaxLoadInitialData() {
+            this.FETCH_REGION_GROUP_DATA().then(() => {
+                this.regionGroupOptions = this.getAllRegionGroupData.map(item => ({ label: item.regionName, value: item.id }));
+            });
+        },
 
-},
-  created() {
-    this.fetchAllRegionGroupData();
-  },
+        emitfnShowAddNewRegions() {
+            this.$emit("emitfnShowAddNewRegions");
+        },
 
-  methods: {
-    ...mapActions("SuperAdminUsers", [
-      "FETCH_ALL_REGIONS_DATA",
-      "FEED_EXISTING_REGION_DATA",
-    ]),
-    ...mapActions("SuperAdminUsers", ["FETCH_ALL_REGIONS_DATA","FEED_REGION_DATA"]),
-    ...mapActions("regionGroupDatas", ["FETCH_REGION_GROUP_DATAS"]),
-    emitfnShowAddNewRegions() {
-      this.$emit("emitfnShowAddNewRegions");
-    },
-    fnfinalsubmitAddNewRegion(formData) {
-      console.log("FINAL SUBMITTED VALUES--------->",JSON.stringify(formData))
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
-        this.$q.notify("Please review fields again.");
-      } else {
-        this.$q.loading.show();
-        this.FEED_REGION_DATA(formData)
-          .then(() => {
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully updated!",
-              icon: "thumb_up",
-            });
-            this.FETCH_ALL_REGIONS_DATA();
-            this.emitfnShowAddNewRegions();
-          })
-          .catch(error => {
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-              icon: "thumb_down",
-            });
-          });
-      }
-    },
-    fetchAllRegionGroupData(){
-      this.FETCH_REGION_GROUP_DATAS()
-      .then((response)=>{
-        console.log("response fetchAllRegionGroupData ====>",JSON.stringify(response))
-        console.log("fetchAllRegionGroupData ====>",JSON.stringify(this.getAllRegionGroupData))
-        return _.map(this.getAllRegionGroupData, item => {
-             console.log("DEVICE GETTING API ITEM VALUES OF PLAN--------->"+JSON.stringify(item))
-            this.regionGroupOptions.push({
-              value: item,
-              label: item.regionName
-            });
-          });
-      })
-    },
-  },
+        fnfinalsubmitAddNewRegion(formData) {
+            this.v$.formData.$touch();
+            if (this.v$.formData.$error) {
+                this.$q.notify("Please review fields again.");
+            } else {
+                this.$q.loading.show({ message: "Saving..." });
+                let payload = {
+                    regionGroup: { id: formData.regionGroup },
+                    regionName: formData.regionAreaName,
+                    active: true
+                };
+                this.SUBMIT_REGION_DATA(payload).then(response => {
+                    this.$q.notify({ color: "positive", message: "Successfully added!" });
+                    this.$emit("emitfnForRegionTable");
+                    this.emitfnShowAddNewRegions();
+                    this.$q.loading.hide();
+                }).catch(error => {
+                    this.$q.notify({ color: "negative", message: error.data?.message || "Error" });
+                    this.$q.loading.hide();
+                });
+            }
+        }
+    }
 };
 </script>

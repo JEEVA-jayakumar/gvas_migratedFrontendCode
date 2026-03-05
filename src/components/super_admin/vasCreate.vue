@@ -1,25 +1,26 @@
 <template>
     <div>
       <q-dialog
-        minimized
-        v-model="propToggleModal"
+        :model-value="propToggleModal"
+        @update:model-value="toggleModal"
         @hide="toggleModal"
         @escape-key="toggleModal"
         class="customModalOverlay"
-        :content-css="{padding:'30px',minWidth: '30vw'}"
+        persistent
       >
+        <q-card style="min-width: 30vw">
         <form>
-          <div class="row gutter-sm q-py-sm items-center">
+          <div class="row q-pa-md items-center border-bottom">
             <div class="col-md-12">
               <div class="text-h6 text-weight-regular">Add New VAS</div>
             </div>
           </div>
-          <div class="row gutter-sm q-py-sm items-center">
-            <div class="col-md-12">
+          <div class="row q-pa-md items-center">
+            <div class="col-md-12 full-width">
               <q-input
                 v-model="formData.name"
-                @blur="$v.formData.name.$touch"
-                :error="$v.formData.name.$error"
+                @blur="v$.formData.name.$touch"
+                :error="v$.formData.name.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
                 label="Enter VAS"
@@ -27,126 +28,76 @@
                 @keyup.enter="submitLeadSourceData(formData)"
               />
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 full-width">
             <q-input
               v-model="formData.vasCode"
-              @blur="$v.formData.vasCode.$touch"
-              :error="$v.formData.vasCode.$error"
+              @blur="v$.formData.vasCode.$touch"
+              :error="v$.formData.vasCode.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
               label="Enter VAS Code"
               placeholder="Enter VAS Code"
               @keyup.enter="submitLeadSourceData(formData)"
-              
             />
           </div>
-            
-  
           </div>
-          <div class="row gutter-sm q-py-sm items-center">
-            <div class="col-md-12 group" align="right">
-              <q-btn
-                flat
-                align="right"
-                class="bg-white text-weight-regular text-grey-8"
-                @click="toggleModal()"
-              >Cancel</q-btn>
-              <q-btn align="right" @click="submitVasData(formData)" color="purple-9">Save</q-btn>
-            </div>
+          <div class="row q-pa-md items-center justify-end">
+                <q-btn flat class="bg-white text-weight-regular text-grey-8 q-mr-sm" @click="toggleModal">Cancel</q-btn>
+                <q-btn color="purple-9" label="Save" @click="submitLeadSourceData(formData)" />
           </div>
         </form>
+        </q-card>
       </q-dialog>
     </div>
-  </template>
-  
-  <script>
-  import { integer, required } from "@vuelidate/validators";
-  import { mapGetters, mapActions } from "vuex";
-  export default {
-    // name: 'ComponentName',
-    props: ["propShowVasCreate"],
-    data() {
-      return {
-        multiTidFlagOptions:[
-          {
-            label: "Yes",
-            value: true
-          },
-          {
-            label: "No",
-            value: false
-          }
-        ],
-        propToggleModal: this.propShowVasCreate,
-        formData: {
-        //   bank_enable: "False",
-        name: "",
-        vasCode:"",
-        active:1
-        //   multiTidEnabled: false,
-        //   baseTidMidPrefix:"",
-        }
-      };
-    },
-    validations: {
+</template>
+
+<script>
+import useVuelidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
+import { mapGetters, mapActions } from "vuex";
+
+export default {
+  props: ["propToggleModal"],
+  setup() {
+      return { v$: useVuelidate() };
+  },
+  data() {
+    return {
       formData: {
-        name: {
-          required
-        },
-        vasCode:{
-          required
-        }
-        // multiTidEnabled:{
-        //   required
-        // },
-        // baseTidMidPrefix:{
-        //   required
-        // },
+        name: "",
+        vasCode: ""
       }
+    };
+  },
+  validations() {
+      return {
+          formData: {
+              name: { required },
+              vasCode: { required }
+          }
+      }
+  },
+  methods: {
+    ...mapActions("SA_Devices", ["SUBMIT_VAS_DATA"]),
+    toggleModal() {
+      this.$emit("emitToggleModal");
     },
-  
-    methods: {
-      // ...mapActions("leadSource", ["ADD_NEW_LEAD_SOURCE"]),
-      ...mapActions("vasCreation", ["CREATE_VAS_DETAILS"]),
-      toggleModal() {
-        this.$emit("emitfnshowVas");
-      },
-      submitVasData(request) {
-        this.$v.formData.$touch();
-        if (this.$v.formData.$error) {
+    submitLeadSourceData(formData) {
+        this.v$.formData.$touch();
+        if(this.v$.formData.$error) {
+            this.$q.notify("Please review fields again.");
         } else {
-          this.$q.loading.show({
-            delay: 100, // ms
-            message: "Please Wait",
-            spinnerColor: "purple-9",
-            customClass: "shadow-none"
-          });
-          this.CREATE_VAS_DETAILS(request)
-            .then(() => {
-              this.$q.loading.hide();
-              this.$emit("emitfnshowVas", "refresh");
-              this.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: "Vas successfully created!",
-                icon: "thumb_up"
-              });
-            })
-            .catch(() => {
-              this.$q.loading.hide();
-              this.$q.notify({
-                color: "negative",
-                position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-                icon: "thumb_down"
-              });
+            this.$q.loading.show({ message: "Saving..." });
+            this.SUBMIT_VAS_DATA({ vasName: formData.name, vasCode: formData.vasCode, active: true }).then(response => {
+                this.$q.notify({ color: "positive", message: response.data.message });
+                this.toggleModal();
+                this.$q.loading.hide();
+            }).catch(error => {
+                this.$q.notify({ color: "negative", message: error.data?.message || "Error" });
+                this.$q.loading.hide();
             });
         }
-      }
     }
-  };
-  </script>
-  
-  <style>
-  </style>
-  
+  }
+};
+</script>
