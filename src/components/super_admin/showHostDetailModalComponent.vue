@@ -1,231 +1,157 @@
 <template>
   <q-dialog
-    minimized
-    position="right"
     v-model="toggleModal"
-    no-backdrop-dismiss
+    @hide="emitModalClose"
     @escape-key="emitModalClose"
+    persistent
+    position="right"
     class="customModalOverlay"
-    :content-css="{padding:'25px',paddingTop:'60px',minWidth:'40vw',minHeight:'100vh'}"
   >
-    <div class="row items-center bottom-border q-py-sm fit">
-      <div class="col">
-        <div class="text-h6 text-weight-regular">Manage Host</div>
+    <q-card style="min-width: 40vw; min-height: 100vh">
+      <div class="q-pa-md">
+        <div class="row items-center border-bottom q-pb-md fit">
+          <div class="col">
+            <div class="text-h6 text-weight-regular">Manage Host</div>
+          </div>
+          <div class="col-auto" align="right">
+            <q-btn flat round color="dark" size="sm" icon="clear" @click="emitModalClose" />
+          </div>
+        </div>
+
+        <q-tabs v-model="tab" color="grey-9" align="left" class="q-mt-md">
+          <q-tab label="Host List" name="tab-1" />
+        </q-tabs>
+
+        <q-tab-panels v-model="tab" animated keep-alive>
+          <q-tab-panel name="tab-1" class="no-padding q-mt-md">
+            <q-table
+              :rows="tableData"
+              table-class="customSATableClass"
+              :columns="activatedColumns"
+              :filter="activeFilterSearch"
+              v-model:pagination="paginationControl"
+              row-key="id"
+              color="grey-9"
+              flat
+              bordered
+            >
+              <template v-slot:body-cell-action="props">
+                <q-td :props="props">
+                  <div class="row no-wrap no-padding">
+                    <q-btn
+                      dense
+                      no-caps
+                      no-wrap
+                      label="Modify"
+                      icon="far fa-plus-square"
+                      size="sm"
+                      @click="hostEdit(props.row)"
+                      flat
+                      class="text-light-blue q-mr-sm"
+                    />
+                    <q-btn
+                      dense
+                      no-caps
+                      no-wrap
+                      label="Disable"
+                      icon="far fa-minus-square"
+                      size="sm"
+                      @click="hostDisable(props.row.id)"
+                      flat
+                      class="text-negative"
+                    />
+                  </div>
+                </q-td>
+              </template>
+
+              <template v-slot:top="props">
+                <div class="row full-width items-center q-col-gutter-sm">
+                  <div class="col-8">
+                    <q-input
+                      clearable
+                      dense
+                      color="grey-9"
+                      v-model="activeFilterSearch"
+                      placeholder="Type.."
+                      label="Search host"
+                    />
+                  </div>
+                  <div class="col-4" align="right">
+                    <q-btn
+                      no-caps
+                      no-wrap
+                      dense
+                      label="Add New"
+                      class="text-weight-regular"
+                      color="purple-9"
+                      icon="far fa-plus-square"
+                      @click="hostCreate()"
+                    />
+                  </div>
+                </div>
+              </template>
+            </q-table>
+          </q-tab-panel>
+        </q-tab-panels>
       </div>
-      <div class="col" align="right">
-        <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
-      </div>
-    </div>
-    <q-tabs v-model="tab" color="grey-9">
-      <!-- Tabs - notice  -->
-      <q-tab @click="leadSourceActiveList" label="Host List" name="tab-1"/>
-</q-tabs>
-<q-tab-panels v-model="tab" animated>
-<q-tab-panel name="tab-1">
-        <q-table
-          :rows="tableData"
-          table-class="customSATableClass"
-          :columns="activatedColumns"
-          :filter="activeFilterSearch"
-          row-key="id"
-          color="grey-9"
-          @request="ajaxLoadAllLeadInfo"
-        >
-          <q-td v-slot:body-cell-action="props" :props="props">
-            <div class="row no-wrap no-padding">
-              <q-btn
-                dense
-                no-caps
-                no-wrap
-                label="Modify"
-                icon="far fa-plus-square"
-                size="md"
-                @click="hostEdit(props.row)"
-                flat
-                class="text-light-blue"
-              ></q-btn>
-              <q-btn
-                dense
-                no-caps
-                no-wrap
-                label="Disable"
-                icon="far fa-minus-square"
-                size="md"
-                @click="hostDisable(props.row.id)"
-                flat
-                class="text-negative"
-              ></q-btn>
-            </div>
-          </q-td>
-          <template v-slot:top="props">
-            <!--START: table filter,search -->
-            <div class="col-8">
-              <q-input
-                clearable
-                color="grey-9"
-                v-model="activeFilterSearch"
-                placeholder="Type.."
-                label="Search lead source"
-              />
-            </div>
-            <div class="col-4" align="right">
-              <q-btn
-                no-caps
-                no-wrap
-                label="Add New"
-                class="text-weight-regular"
-                color="purple-9"
-                icon="far fa-plus-square"
-                @click="hostCreate()"
-              />
-            </div>
-            <!--END: table filter,search -->
-          </template>
-        </q-table>
-      </q-tab-panel>
-</q-tab-panels>
-    <!--START: Show create LeadSources -->
+    </q-card>
+
     <showCreateHost
       v-if="propShowCreateHost"
       :propShowCreateHost="propShowCreateHost"
       @emitfnshowHost="hostCreate"
-    ></showCreateHost>
-    <!--END: Show create LeadSources -->
-    <!--START: Show edit LeadSources -->
+    />
     <showEditHost
       v-if="propShowEditHost"
       :propShowEditHost="propShowEditHost"
       :propRowDetails="propRowDetails"
       @emitfnshowHost="refreshLeadSourceList"
-    ></showEditHost>
-    <!--END: Show edit LeadSources -->
+    />
   </q-dialog>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { required } from "@vuelidate/validators";
 import showEditHost from "./editHost.vue";
 import showCreateHost from "./createHost.vue";
-import showCreateLeadSource from "./createLeadSource.vue";
-import showEditLeadSource from "./editLeadSource.vue";
+
 export default {
   props: ["propToggleModal"],
-  // name: 'ComponentName',
   components: {
-    showCreateLeadSource,
     showCreateHost,
-    showEditHost,
-    showEditLeadSource
+    showEditHost
   },
   data() {
     return {
       tab: 'tab-1',
       toggleModal: this.propToggleModal,
-
-      propShowCreateLeadSource: false,
       propShowCreateHost: false,
       propShowEditHost: false,
       propRowDetails: "",
-
-      activeHost: [],
-      deActiveLeadSourceList: [],
-
-      formData: {
-        leadSource: ""
-      },
-
-      /* START >>Table properties */
       activeFilterSearch: "",
-      deActivatedFilterSearch: "",
       paginationControl: {
         rowsPerPage: 5
       },
       tableData: [],
-      /* END >>Table properties */
-
-      /* START >>Table data */
       activatedColumns: [
-        {
-          name: "name",
-          required: true,
-          label: "name",
-          align: "left",
-          field: "name",
-          sortable: false
-        },
-        {
-          name: "action",
-          required: true,
-          label: "",
-          align: "left",
-          field: "action",
-          sortable: false
-        }
-      ],
-      deActivatedColumns: [
-        {
-          name: "sourceName",
-          required: true,
-          label: "Lead source",
-          align: "left",
-          field: "sourceName",
-          sortable: false
-        },
-        {
-          name: "action",
-          required: true,
-          label: "",
-          align: "left",
-          field: "action",
-          sortable: false
-        }
+        { name: "name", required: true, label: "Name", align: "left", field: "name", sortable: true },
+        { name: "action", required: true, label: "", align: "left", sortable: false }
       ]
-      /* END >>Table data */
     };
   },
-
   created() {
-    this.LEAD_SOURCE_ACTIVE_LIST();
     this.ajaxLoadAllLeadInfo();
   },
   computed: {
-    ...mapGetters("leadSource", [
-      "getActiveLeadSource",
-      "getDeActivatedLeadSource"
-    ]),
     ...mapGetters("Host", ["getAllHostDetails"]),
-    // ...mapGetters("merchantDocumentType", [
-    //   "getActiveLeadSource",
-    //   "getDeActivatedLeadSource"
-    // ])
-  },
-  beforeMount(){
-    // console.log("getAllHostDetails ---------->",JSON.stringify(this.getAllHostDetails))
   },
   methods: {
-    ...mapActions("leadSource", [
-      "LEAD_SOURCE_ACTIVE_LIST",
-      "LEAD_SOURCE_DEACTIVED_LIST",
-      "UPDATE_LEAD_SOURCE_AND_SET_ACTIVE",
-      "DELETE_LEAD_SOURCE_AND_SET_ACTIVE"
-    ]),
     ...mapActions("Host", ["GET_HOST_DETAILS", "DELETE_HOST"]),
-    /* START >> Function to save, update or delete */
-
-
-    ajaxLoadAllLeadInfo(){
-       // we set QTable to "loading" state
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Fetching data .."
-      });
+    ajaxLoadAllLeadInfo() {
+      this.$q.loading.show({ message: "Fetching data .." });
       this.GET_HOST_DETAILS()
-        .then((res) => {
-          console.log("TABLE getAllHostDetails----------->",JSON.stringify(this.getAllHostDetails))
+        .then(() => {
           this.tableData = this.getAllHostDetails;
-          console.log("TABLE DATA----------->",JSON.stringify(this.tableData))
           this.$q.loading.hide();
         })
         .catch(() => {
@@ -233,14 +159,7 @@ export default {
         });
     },
     leadSourceActiveList() {
-      this.GET_HOST_DETAILS().then(() => {
-        this.tableData = this.getAllHostDetails;
-      });
-    },
-    leadSourceDeActiveList() {
-      this.LEAD_SOURCE_DEACTIVED_LIST().then(() => {
-        this.deActiveLeadSourceList = this.getDeActivatedLeadSource;
-      });
+      this.ajaxLoadAllLeadInfo();
     },
     hostCreate(token) {
       this.propShowCreateHost = !this.propShowCreateHost;
@@ -248,110 +167,36 @@ export default {
         this.leadSourceActiveList();
       }
     },
-
     hostEdit(rowDetails) {
-      this.propShowEditHost = !this.propShowEditHost;
       this.propRowDetails = rowDetails;
+      this.propShowEditHost = true;
     },
-
     refreshLeadSourceList() {
-      this.propShowEditHost = !this.propShowEditHost;
+      this.propShowEditHost = false;
       this.leadSourceActiveList();
     },
-    hostDisable(rowDetails) {
-      this.$q
-        .dialog({
-          title: "Confirm",
-          message: "Are you sure want to disable Host?",
-          ok: "Continue",
-          cancel: "Cancel"
-        }).onOk(() => {
-          this.$q.loading.show({
-            delay: 100, // ms
-            message: "Please Wait",
-            spinnerColor: "purple-9",
-            customClass: "shadow-none"
-          });
-          this.DELETE_HOST(rowDetails)
-            .then(response => {
-              this.leadSourceActiveList();
-              this.$q.notify({
-                color: "negative",
-                position: "bottom",
-                message: "Host deactivated",
-                icon: "thumb_up"
-              });
-            }).onCancel(error => {
-              this.$q.notify({
-                color: "warning",
-                position: "bottom",
-                message: "Please try again!",
-                icon: "thumb_down"
-              });
-            });
+    hostDisable(id) {
+      this.$q.dialog({
+        title: "Confirm",
+        message: "Are you sure want to disable Host?",
+        ok: "Continue",
+        cancel: "Cancel",
+        persistent: true
+      }).onOk(() => {
+        this.$q.loading.show({ message: "Please Wait" });
+        this.DELETE_HOST(id).then(() => {
+          this.leadSourceActiveList();
+          this.$q.notify({ color: "negative", message: "Host deactivated" });
           this.$q.loading.hide();
-        })
-        .onCancel(() => {
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "No changes made!",
-            icon: "thumb_down"
-          });
-        });
-    },
-    fnEnableLeadSource(rowDetails) {
-      this.$q
-        .dialog({
-          title: "Confirm",
-          message: "Are you sure want to disable lead source?",
-          ok: "Continue",
-          cancel: "Cancel"
-        }).onOk(() => {
-          this.$q.loading.show({
-            delay: 100, // ms
-            message: "Please Wait",
-            spinnerColor: "purple-9",
-            customClass: "shadow-none"
-          });
-          this.UPDATE_LEAD_SOURCE_AND_SET_ACTIVE(rowDetails)
-            .then(response => {
-              this.leadSourceDeActiveList();
-              this.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: `Lead source: ${
-                  rowDetails.sourceName
-                } has been enabled`,
-                icon: "thumb_up"
-              });
-            }).onCancel(error => {
-              this.$q.notify({
-                color: "warning",
-                position: "bottom",
-                message: "Please try again!",
-                icon: "thumb_down"
-              });
-            });
+        }).catch(() => {
+          this.$q.notify({ color: "warning", message: "Please try again!" });
           this.$q.loading.hide();
-        })
-        .onCancel(() => {
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "No changes made!",
-            icon: "thumb_down"
-          });
         });
+      });
     },
-    /* END >> Function to save, update or delete */
-
     emitModalClose() {
       this.$emit("emitToggleModal");
     }
   }
 };
 </script>
-
-<style>
-</style>

@@ -1,118 +1,104 @@
 <template>
-    <div>
-        <q-dialog
-        minimized
-        v-model="toggleModel"  
-        @hide="emitfnShowAddNewSpareParts" 
-        @escape-key="emitfnShowAddNewSpareParts"  
-        class="customModalOverlay" 
-        :content-css="{padding:'30px',minWidth: '30vw'}"
-        >
-            <form> 
-                <div class="row gutter-sm q-py-sm items-center">
-                    <div class="col-md-12">
-                        <div class="text-h6 text-weight-regular">Add Spare Types</div>
-                    </div>
-                </div>
-                <div class="row gutter-sm q-py-sm items-center">
-                     <div class="col-md-12">
-                        <q-input
-                          v-model="formData.spare_parts_types"   
-                          :error="$v.formData.spare_parts_types.$error" 
-                          class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          label="Enter Spare Parts Name"
-                          placeholder="Enter Spare Parts Name" 
-                        />
-                    </div>
-                </div>
-                <div class="row gutter-sm q-py-sm items-center">
-                    <div class="col-md-12 group" align="right">
-                        <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowAddNewSpareParts()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitAddSpareParts(formData)" color="purple-9">Save</q-btn>
-                    </div>
-                </div>
-            </form>
-        </q-dialog>
-    </div>
+  <div>
+    <q-dialog
+      v-model="toggleModel"
+      @hide="emitfnShowAddNewSpareParts"
+      @escape-key="emitfnShowAddNewSpareParts"
+      persistent
+      class="customModalOverlay"
+    >
+      <q-card style="min-width: 30vw">
+        <form>
+          <div class="row q-pa-md items-center border-bottom">
+            <div class="col-md-12">
+              <div class="text-h6 text-weight-regular">Add Spare Types</div>
+            </div>
+          </div>
+          <div class="row q-pa-md items-center">
+            <div class="col-md-12 full-width">
+              <q-input
+                v-model="formData.spare_parts_types"
+                @blur="v$.formData.spare_parts_types.$touch"
+                :error="v$.formData.spare_parts_types.$error"
+                class="text-weight-regular text-grey-8"
+                color="grey-9"
+                label="Enter Spare Parts Name"
+                placeholder="Enter Spare Parts Name"
+                @keyup.enter="fnfinalsubmitAddSpareParts()"
+              />
+            </div>
+          </div>
+          <div class="row q-pa-md items-center justify-end">
+            <q-btn
+              flat
+              class="bg-white text-weight-regular text-grey-8 q-mr-sm"
+              @click="emitfnShowAddNewSpareParts()"
+              label="Cancel"
+            />
+            <q-btn
+              @click="fnfinalsubmitAddSpareParts()"
+              color="purple-9"
+              label="Save"
+            />
+          </div>
+        </form>
+      </q-card>
+    </q-dialog>
+  </div>
 </template>
 
 <script>
+import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   props: ["propShowAddSpareParts", "propRowDetails"],
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       toggleModel: this.propShowAddSpareParts,
       formData: {
-           spare_parts_types: "",
-   
-        //   regionAreaName
-        // id: this.propRowDetails.value,
-        // regionAreaName: this.propRowDetails.label,
-        // regionGroupName: this.propRowDetails.group,
+        spare_parts_types: "",
       },
     };
   },
-
-  validations: {
-    formData: {
-
-      spare_parts_types: {
-        required,
+  validations() {
+    return {
+      formData: {
+        spare_parts_types: { required },
       },
-    },
+    };
   },
-computed:{
-     ...mapGetters("SuperAdminUsers", ["getAllRegionsData"]),
-},
-
   methods: {
-    ...mapActions("SuperAdminUsers", [
-      "FETCH_ALL_REGIONS_DATA",
-      "FEED_EXISTING_REGION_DATA",
-    ]),
-    ...mapActions("SuperAdminUsers", ["FETCH_ALL_REGIONS_DATA"]),
     ...mapActions("sparePartsGetTypes", ["UPDATE_SPARE_PARTS_TYPES"]),
     emitfnShowAddNewSpareParts() {
       this.$emit("emitfnShowAddNewSpareParts");
     },
-    fnfinalsubmitAddSpareParts(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+    fnfinalsubmitAddSpareParts() {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
-          console.log("SUBMIT RESPONSE",JSON.stringify(formData))
-           this.$q.loading.show({
-              delay: 100, // ms
-              message: "Please Wait",
-              spinnerColor: "purple-9",
-              customClass: "shadow-none"
-            });
-        this.UPDATE_SPARE_PARTS_TYPES(formData)
-         .then(() => {
+        this.$q.loading.show({ message: "Please Wait" });
+        this.UPDATE_SPARE_PARTS_TYPES(this.formData)
+          .then(() => {
             this.$q.notify({
               color: "positive",
-              position: "bottom",
               message: "Spares Added Successfully",
-              icon: "thumb_up"
+              icon: "thumb_up",
             });
-            this.emitfnShowAddNewSpareParts()
+            this.emitfnShowAddNewSpareParts();
             this.$q.loading.hide();
-              this.$router.push("/super/admin/sparePartsTypes");
-            // self.$router.push("/super/admin/sparePartsTypes");
-            // self.$q.loading.hide();
-           
+            this.$router.push("/super/admin/sparePartsTypes");
           })
-          .catch(error => {
+          .catch((error) => {
             this.$q.loading.hide();
             this.$q.notify({
-              type: "warning",
-              color: "amber-9",
-              position: "bottom",
-              message: error.data.message
+              color: "negative",
+              message: error.data?.message || "Error",
             });
           });
       }

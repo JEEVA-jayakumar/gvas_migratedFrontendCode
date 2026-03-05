@@ -1,156 +1,162 @@
 <template>
   <q-dialog
-    minimized
-    position="right"
     v-model="toggleModal"
-    no-backdrop-dismiss
+    @hide="emitModalClose"
     @escape-key="emitModalClose"
+    persistent
+    position="right"
     class="customModalOverlay"
-    :content-css="{padding:'60px 25px',minWidth:'40vw',minHeight:'100vh'}"
   >
-    <div class="row items-center bottom-border q-py-sm">
-      <div class="col">
-        <div class="text-h6 text-weight-regular">Manage merchant types</div>
+    <q-card style="min-width: 40vw; min-height: 100vh">
+      <div class="q-pa-md">
+        <div class="row items-center border-bottom q-pb-md">
+          <div class="col">
+            <div class="text-h6 text-weight-regular">Manage merchant types</div>
+          </div>
+          <div class="col-auto" align="right">
+            <q-btn flat round color="dark" size="sm" icon="clear" @click="emitModalClose" />
+          </div>
+        </div>
+
+        <q-tabs v-model="tab" color="grey-9" align="left" class="q-mt-md">
+          <q-tab label="Active List" name="tab-1" />
+          <q-tab label="De-Actived List" name="tab-2" />
+        </q-tabs>
+
+        <q-tab-panels v-model="tab" animated keep-alive>
+          <q-tab-panel name="tab-1" class="no-padding q-mt-md">
+            <q-table
+              :rows="merchantTypesList"
+              table-class="customSATableClass"
+              :columns="columns"
+              :filter="filterSearch"
+              v-model:pagination="paginationControl"
+              :filter-method="myCustomSearchFilter"
+              row-key="id"
+              color="grey-9"
+              flat
+              bordered
+            >
+              <template v-slot:body-cell-action="props">
+                <q-td :props="props" align="right">
+                  <div class="row no-wrap justify-end">
+                    <q-btn
+                      dense
+                      no-caps
+                      no-wrap
+                      label="Modify"
+                      icon="far fa-plus-square"
+                      size="sm"
+                      @click="fnShowEditMerchantTypes(props.row)"
+                      flat
+                      class="text-light-blue q-mr-sm"
+                    />
+                    <q-btn
+                      dense
+                      no-caps
+                      no-wrap
+                      label="Disable"
+                      icon="far fa-minus-square"
+                      size="sm"
+                      @click="fnDeleteMerchantType(props.row)"
+                      flat
+                      class="text-negative"
+                    />
+                  </div>
+                </q-td>
+              </template>
+
+              <template v-slot:top="props">
+                <div class="col-8">
+                  <q-input
+                    clearable
+                    dense
+                    color="grey-9"
+                    v-model="filterSearch"
+                    placeholder="Type.."
+                    label="Search merchant type"
+                  />
+                </div>
+                <div class="col-4" align="right">
+                  <q-btn
+                    no-caps
+                    no-wrap
+                    dense
+                    label="Add New"
+                    class="text-weight-regular"
+                    color="purple-9"
+                    icon="far fa-plus-square"
+                    @click="fnshowCreateMerchantType()"
+                  />
+                </div>
+              </template>
+            </q-table>
+          </q-tab-panel>
+
+          <q-tab-panel name="tab-2" class="no-padding q-mt-md">
+            <q-table
+              :rows="merchantTypesDeactivatedList"
+              table-class="customSATableClass"
+              :columns="columns"
+              :filter="deActivatedSearch"
+              v-model:pagination="paginationControl"
+              :filter-method="myCustomSearchFilter"
+              row-key="id"
+              color="grey-9"
+              flat
+              bordered
+            >
+              <template v-slot:body-cell-action="props">
+                <q-td :props="props" align="right">
+                  <div class="row no-wrap justify-end">
+                    <q-btn
+                      dense
+                      no-caps
+                      no-wrap
+                      label="Enable"
+                      icon="far fa-check-square"
+                      size="sm"
+                      @click="fnEnableMerchantType(props.row)"
+                      flat
+                      class="text-positive"
+                    />
+                  </div>
+                </q-td>
+              </template>
+
+              <template v-slot:top="props">
+                <div class="col-12">
+                  <q-input
+                    clearable
+                    dense
+                    color="grey-9"
+                    v-model="deActivatedSearch"
+                    placeholder="Type.."
+                    label="Search merchant type"
+                  />
+                </div>
+              </template>
+            </q-table>
+          </q-tab-panel>
+        </q-tab-panels>
       </div>
-      <div class="col" align="right">
-        <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
-      </div>
-    </div>
-    <q-tabs v-model="tab" color="grey-9">
-      <q-tab @click="fetchMerchantTypeList" label="Active List" name="tab-1"/>
-      <q-tab
-        @click="fetchMerchantTypeDeActivatedList"
-        label="De-Actived List"
-        name="tab-2"
-      />
-    </q-tabs>
-    <q-tab-panels v-model="tab" animated>
-<q-tab-panel name="tab-1">
-        <q-table
-          :rows="merchantTypesList"
-          table-class="customSATableClass"
-          :columns="columns"
-          :filter="filterSearch" v-model:pagination="paginationControl"
-          :filter-method="myCustomSearchFilter"
-          row-key="name"
-          color="grey-9"
-        >
-          <q-td v-slot:body-cell-action="props" :props="props">
-            <div class="row no-wrap no-padding">
-              <q-btn
-                dense
-                no-caps
-                no-wrap
-                label="Modify"
-                icon="far fa-plus-square"
-                size="md"
-                @click="fnShowEditMerchantTypes(props.row)"
-                flat
-                class="text-light-blue"
-              ></q-btn>
-              <q-btn
-                dense
-                no-caps
-                no-wrap
-                label="Disable"
-                icon="far fa-minus-square"
-                size="md"
-                @click="fnDeleteMerchantType(props.row)"
-                flat
-                class="text-negative"
-              ></q-btn>
-            </div>
-          </q-td>
+    </q-card>
 
-          <template v-slot:top="props">
-            <!--START: table filter,search -->
-            <div class="col-8">
-              <q-input
-                clearable
-                color="grey-9"
-                v-model="filterSearch"
-                placeholder="Type.."
-                label="Search merchant type"
-              />
-            </div>
-            <div class="col-4" align="right">
-              <q-btn
-                no-caps
-                no-wrap
-                label="Add New"
-                class="text-weight-regular"
-                color="purple-9"
-                icon="far fa-plus-square"
-                @click="fnshowCreateMerchantType()"
-              />
-            </div>
-            <!--ENDv-model: table filter,search -->
-          </template>
-        </q-table>
-      </q-tab-panel>
-<q-tab-panel name="tab-2">
-        <q-table
-          :rows="merchantTypesDeactivatedList"
-          table-class="customSATableClass"
-          :columns="columns"
-          :filter="deActivatedSearch" v-model:pagination="paginationControl"
-          :filter-method="myCustomSearchFilter"
-          row-key="name"
-          color="grey-9"
-        >
-          <q-td v-slot:body-cell-action="props" :props="props">
-            <div class="row no-wrap no-padding">
-              <q-btn
-                dense
-                no-caps
-                no-wrap
-                label="Enable"
-                icon="far fa-check-square"
-                size="md"
-                @click="fnEnableMerchantType(props.row)"
-                flat
-                class="text-positive"
-              />
-            </div>
-          </q-td>
-
-          <template v-slot:top="props">
-            <!--START: table filter,search -->
-            <div class="col-8">
-              <q-input
-                clearable
-                color="grey-9"
-                v-model="deActivatedSearch"
-                placeholder="Type.."
-                label="Search merchant type"
-              />
-            </div>
-            <!--END: table filter,search -->
-          </template>
-        </q-table>
-      </q-tab-panel>
-</q-tab-panels>
-
-    <!--START: Show create MerchantTypes -->
     <showCreateMerchantType
       v-if="propShowCreateMerchantTypes"
       :propShowCreateMerchantTypes="propShowCreateMerchantTypes"
       @emitfnshowMerchantTypes="fnshowCreateMerchantType"
-    ></showCreateMerchantType>
-    <!--END: Show create MerchantTypes -->
-    <!--START: Show edit MerchantTypes -->
+    />
     <showEditMerchantType
       v-if="showEditMerchantTypes"
       :propShowEditMerchantTypes="showEditMerchantTypes"
       :propRowDetails="propRowDetails"
       @emitfnshowMerchantTypes="refreshMerchantTypeList"
-    ></showEditMerchantType>
-    <!--END: Show edit MerchantTypes -->
+    />
   </q-dialog>
 </template>
 
 <script>
-import { required } from "@vuelidate/validators";
 import showCreateMerchantType from "./createMerchantTypes.vue";
 import showEditMerchantType from "./editMerchantTypes.vue";
 import { mapGetters, mapActions } from "vuex";
@@ -161,93 +167,61 @@ export default {
     showCreateMerchantType,
     showEditMerchantType
   },
-  // name: 'ComponentName',
   data() {
     return {
       tab: 'tab-1',
       merchantTypesList: [],
       merchantTypesDeactivatedList: [],
       toggleModal: this.propToggleModal,
-      merchantTypes: this.propactiveMerchantTypes,
-      makeUpdateElementActive: false,
-      formData: {
-        device: ""
-      },
-
       propShowCreateMerchantTypes: false,
       showEditMerchantTypes: false,
       propRowDetails: "",
-
-      filter: "",
       filterSearch: "",
       deActivatedSearch: "",
-      filter_values: "",
-      multipleSelect: "",
-
-      paginationControl: {
-        rowsPerPage: 10
-      },
-
-      //table information
-      columns: [
-        {
-          name: "merchantTypeName",
-          required: true,
-          label: "Merchant Type",
-          align: "left",
-          field: "merchantTypeName",
-          sortable: true
-        },
-        {
-          name: "action",
-          required: true,
-          label: "",
-          align: "right",
-          field: "",
-          sortable: true
-        }
-      ],
-
-      /* START >>Table properties */
       paginationControl: {
         rowsPerPage: 5
-      }
-      /* END >>Table properties */
+      },
+      columns: [
+        { name: "merchantTypeName", required: true, label: "Merchant Type", align: "left", field: "merchantTypeName", sortable: true },
+        { name: "action", required: true, label: "", align: "right", field: "", sortable: false }
+      ]
     };
   },
-
+  watch: {
+    tab(val) {
+      if (val === 'tab-1') this.fetchMerchantTypeList();
+      else this.fetchMerchantTypeDeActivatedList();
+    }
+  },
   computed: {
-    ...mapGetters("merchantTypes", [
-      "getActiveMerchantTypes",
-      "getDeActivatedMerchantTypes"
-    ])
+    ...mapGetters("merchantTypes", ["getActiveMerchantTypes", "getDeActivatedMerchantTypes"])
   },
   created() {
     this.fetchMerchantTypeList();
   },
-
   methods: {
-    ...mapActions("merchantTypes", ["DELETE_MERCHANT_TYPE_AND_SET_ACTIVE"]),
     ...mapActions("merchantTypes", [
+      "DELETE_MERCHANT_TYPE_AND_SET_ACTIVE",
       "MERCHANT_TYPE_ACTIVE_LIST",
       "MERCHANT_TYPE_DEACTIVED_LIST",
-      "UPDATE_MERCHANT_TYPE_AND_SET_ACTIVE",
-      "UPDATE_MERCHANT_TYPE"
+      "UPDATE_MERCHANT_TYPE_AND_SET_ACTIVE"
     ]),
     emitModalClose() {
       this.$emit("emitToggleModal");
     },
     fetchMerchantTypeList() {
-      this.merchantTypesList = [];
+      this.$q.loading.show({ message: "Please Wait" });
       this.MERCHANT_TYPE_ACTIVE_LIST().then(() => {
         this.merchantTypesList = this.getActiveMerchantTypes;
-      });
+        this.$q.loading.hide();
+      }).catch(() => { this.$q.loading.hide(); });
     },
     fetchMerchantTypeDeActivatedList() {
-      this.merchantTypesDeactivatedList = [];
+      this.$q.loading.show({ message: "Please Wait" });
       this.MERCHANT_TYPE_DEACTIVED_LIST().then(() => {
         this.merchantTypesDeactivatedList = this.getDeActivatedMerchantTypes;
-      });
+        this.$q.loading.hide();
+      }).catch(() => { this.$q.loading.hide(); });
     },
     fnshowCreateMerchantType(token) {
       this.propShowCreateMerchantTypes = !this.propShowCreateMerchantTypes;
@@ -255,118 +229,56 @@ export default {
         this.fetchMerchantTypeList();
       }
     },
-
     fnShowEditMerchantTypes(rowDetails) {
-      this.showEditMerchantTypes = !this.showEditMerchantTypes;
       this.propRowDetails = rowDetails;
+      this.showEditMerchantTypes = true;
     },
-
     refreshMerchantTypeList() {
-      this.showEditMerchantTypes = !this.showEditMerchantTypes;
+      this.showEditMerchantTypes = false;
       this.fetchMerchantTypeList();
     },
-
     fnDeleteMerchantType(rowDetails) {
-      this.$q
-        .dialog({
-          title: "Confirm",
-          message: "Are you sure want to delete merchant type?",
-          ok: "Continue",
-          cancel: "Cancel"
-        }).onOk(() => {
-          this.$q.loading.show({
-            delay: 100, // ms
-            message: "Please Wait",
-            spinnerColor: "purple-9",
-            customClass: "shadow-none"
-          });
-          this.DELETE_MERCHANT_TYPE_AND_SET_ACTIVE(rowDetails.id)
-            .then(response => {
-              this.fetchMerchantTypeList();
-              this.$q.notify({
-                color: "negative",
-                position: "bottom",
-                message: `Merchant type: ${
-                  rowDetails.merchantTypeName
-                } has been deactivated`,
-                icon: "thumb_up"
-              });
-            }).onCancel(error => {
-              this.$q.notify({
-                color: "warning",
-                position: "bottom",
-                message: "Please try again!",
-                icon: "thumb_down"
-              });
-            });
+      this.$q.dialog({
+        title: "Confirm",
+        message: "Are you sure want to delete merchant type?",
+        ok: "Continue",
+        cancel: "Cancel",
+        persistent: true
+      }).onOk(() => {
+        this.$q.loading.show({ message: "Please Wait" });
+        this.DELETE_MERCHANT_TYPE_AND_SET_ACTIVE(rowDetails.id).then(() => {
+          this.fetchMerchantTypeList();
+          this.$q.notify({ color: "negative", message: `Merchant type: ${rowDetails.merchantTypeName} has been deactivated` });
           this.$q.loading.hide();
-        })
-        .onCancel(() => {
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "No changes made!",
-            icon: "thumb_down"
-          });
+        }).catch(() => {
+          this.$q.notify({ color: "warning", message: "Please try again!" });
+          this.$q.loading.hide();
         });
+      });
     },
     fnEnableMerchantType(rowDetails) {
-      this.$q
-        .dialog({
-          title: "Confirm",
-          message: "Are you sure want to enable merchant type?",
-          ok: "Continue",
-          cancel: "Cancel"
-        }).onOk(() => {
-          this.$q.loading.show({
-            delay: 100, // ms
-            message: "Please Wait",
-            spinnerColor: "purple-9",
-            customClass: "shadow-none"
-          });
-          this.UPDATE_MERCHANT_TYPE_AND_SET_ACTIVE(rowDetails)
-            .then(response => {
-              this.fetchMerchantTypeDeActivatedList();
-              this.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: `Merchant type:${
-                  rowDetails.merchantTypeName
-                } has been activated`,
-                icon: "thumb_up"
-              });
-            }).onCancel(error => {
-              this.$q.notify({
-                color: "warning",
-                position: "bottom",
-                message: "Please try again!",
-                icon: "thumb_down"
-              });
-            });
+      this.$q.dialog({
+        title: "Confirm",
+        message: "Are you sure want to enable merchant type?",
+        ok: "Continue",
+        cancel: "Cancel",
+        persistent: true
+      }).onOk(() => {
+        this.$q.loading.show({ message: "Please Wait" });
+        this.UPDATE_MERCHANT_TYPE_AND_SET_ACTIVE(rowDetails).then(() => {
+          this.fetchMerchantTypeDeActivatedList();
+          this.$q.notify({ color: "positive", message: `Merchant type: ${rowDetails.merchantTypeName} has been activated` });
           this.$q.loading.hide();
-        })
-        .onCancel(() => {
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "No changes made!",
-            icon: "thumb_down"
-          });
+        }).catch(() => {
+          this.$q.notify({ color: "warning", message: "Please try again!" });
+          this.$q.loading.hide();
         });
+      });
     },
-
     myCustomSearchFilter(rows, terms, cols, cellValue) {
       const lowerTerms = terms ? terms.toLowerCase() : "";
-      return rows.filter(row =>
-        cols.some(
-          col =>
-            (cellValue(col, row) + "").toLowerCase().indexOf(lowerTerms) !== -1
-        )
-      );
+      return rows.filter(row => cols.some(col => (cellValue(col, row) + "").toLowerCase().indexOf(lowerTerms) !== -1));
     }
   }
 };
 </script>
-
-<style>
-</style>

@@ -1,67 +1,69 @@
 <template>
   <div>
     <q-dialog
-      minimized
       v-model="propToggleModal"
       @hide="toggleModal"
       @escape-key="toggleModal"
+      persistent
       class="customModalOverlay"
-      :content-css="{padding:'30px',minWidth: '30vw'}"
     >
-      <form>
-        <div class="row gutter-sm q-py-sm items-center">
-          <div class="col-md-12">
-            <div class="text-h6 text-weight-regular">Edit Merchant Type</div>
+      <q-card style="min-width: 30vw">
+        <form>
+          <div class="row q-pa-md items-center border-bottom">
+            <div class="col-md-12">
+              <div class="text-h6 text-weight-regular">Edit Merchant Type</div>
+            </div>
           </div>
-        </div>
-        <div class="row gutter-sm q-py-sm items-center">
-          <div class="col-md-12">
-            <q-input
-              v-model="formData.merchantTypeName"
-              @blur="$v.formData.merchantTypeName.$touch"
-              :error="$v.formData.merchantTypeName.$error"
-              class="text-weight-regular text-grey-8"
-              color="grey-9"
-              label="Merchant Type"
-              placeholder="Merchant Type"
-              @keyup.enter="submitMerchantTypeData(formData)"
-            />
+          <div class="row q-pa-md items-center">
+            <div class="col-md-12 full-width">
+              <q-input
+                v-model="formData.merchantTypeName"
+                @blur="v$.formData.merchantTypeName.$touch"
+                :error="v$.formData.merchantTypeName.$error"
+                class="text-weight-regular text-grey-8"
+                color="grey-9"
+                label="Merchant Type"
+                placeholder="Merchant Type"
+                @keyup.enter="submitMerchantTypeData()"
+              />
+            </div>
+            <div class="col-md-12 full-width q-mt-md">
+              <q-input
+                v-model="formData.marsAgreementId"
+                @blur="v$.formData.marsAgreementId.$touch"
+                :error="v$.formData.marsAgreementId.$error"
+                class="text-weight-regular text-grey-8"
+                color="grey-9"
+                label="Mars Agreement Id"
+                placeholder="Mars Agreement Id"
+                @keyup.enter="submitMerchantTypeData()"
+              />
+            </div>
           </div>
-          <div class="col-md-12">
-            <q-input
-              v-model="formData.marsAgreementId"
-              @blur="$v.formData.marsAgreementId.$touch"
-              :error="$v.formData.marsAgreementId.$error"
-              class="text-weight-regular text-grey-8"
-              color="grey-9"
-              label="Mars Agreement Id"
-              placeholder="Mars Agreement Id"
-              @keyup.enter="submitMerchantTypeData(formData)"
-            />
-          </div>
-        </div>
-        <div class="row gutter-sm q-py-sm items-center">
-          <div class="col-md-12 group" align="right">
+          <div class="row q-pa-md items-center justify-end">
             <q-btn
               flat
-              align="right"
-              class="bg-white text-weight-regular text-grey-8"
+              class="bg-white text-weight-regular text-grey-8 q-mr-sm"
               @click="toggleModal()"
             >Cancel</q-btn>
-            <q-btn align="right" @click="submitMerchantTypeData(formData)" color="purple-9">Save</q-btn>
+            <q-btn @click="submitMerchantTypeData()" color="purple-9" label="Save" />
           </div>
-        </div>
-      </form>
+        </form>
+      </q-card>
     </q-dialog>
   </div>
 </template>
 
 <script>
+import useVuelidate from "@vuelidate/core";
 import { integer, required } from "@vuelidate/validators";
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
+
 export default {
-  // name: 'ComponentName',
   props: ["propShowEditMerchantTypes", "propRowDetails"],
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       propToggleModal: this.propShowEditMerchantTypes,
@@ -72,53 +74,40 @@ export default {
       }
     };
   },
-  validations: {
-    formData: {
-      marsAgreementId: {
-        required,
-        integer
-      },
-      merchantTypeName: {
-        required
+  validations() {
+    return {
+      formData: {
+        marsAgreementId: { required, integer },
+        merchantTypeName: { required }
       }
     }
   },
-
   methods: {
     ...mapActions("merchantTypes", ["UPDATE_MERCHANT_TYPE"]),
     toggleModal() {
       this.$emit("emitfnshowMerchantTypes");
     },
-    refreshListOnClose() {
-      this.$emit("emitfnForMerchantTypeTableRefresh");
-    },
     submitMerchantTypeData() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
+          this.$q.notify("Please review fields again.");
       } else {
-        this.$q.loading.show({
-          delay: 100, // ms
-          message: "Please Wait",
-          spinnerColor: "purple-9",
-          customClass: "shadow-none"
-        });
+        this.$q.loading.show({ message: "Please Wait" });
         this.UPDATE_MERCHANT_TYPE(this.formData)
           .then(() => {
             this.$q.loading.hide();
             this.$emit("emitfnshowMerchantTypes", "refresh");
             this.$q.notify({
               color: "positive",
-              position: "bottom",
               message: "Merchant type successfully updated!",
               icon: "thumb_up"
             });
           })
-          .catch(() => {
+          .catch((error) => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
-              position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message || "Please Try Again Later !",
               icon: "thumb_down"
             });
           });
@@ -127,6 +116,3 @@ export default {
   }
 };
 </script>
-
-<style>
-</style>

@@ -1,118 +1,107 @@
 <template>
-    <div>
-        <q-dialog
-        minimized
-        v-model="toggleModel"  
-        @hide="emitfnShowAddNewSpares" 
-        @escape-key="emitfnShowAddNewSpares"  
-        class="customModalOverlay" 
-        :content-css="{padding:'30px',minWidth: '30vw'}"
-        >
-            <form> 
-                <div class="row gutter-sm q-py-sm items-center">
-                    <div class="col-md-12">
-                        <div class="text-h6 text-weight-regular">Add New Spars</div>
-                    </div>
-                </div>
-                <div class="row gutter-sm q-py-sm items-center">
-                     <div class="col-md-12">
-                        <q-input
-                          v-model="formData.spareName"   
-                          :error="$v.formData.spareName.$error" 
-                        
-                        
-                          class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          label="Enter Spare Parts Name*"
-                          placeholder="Enter Spare Parts Name*" 
-                        />
-                    </div>
-                    <!-- <div class="col-md-12">
-                        <q-input 
-                        v-model="formData.regionAreaName" 
-                          :error="$v.formData.regionAreaName.$error"
-                          class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          label="Region"
-                          placeholder="Region" 
-                        />
-                    </div> -->
-                </div>
-                <div class="row gutter-sm q-py-sm items-center">
-                    <div class="col-md-12 group" align="right">
-                        <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowAddNewSpares()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitAddNewRegion(formData)" color="purple-9">Save</q-btn>
-                    </div>
-                </div>
-            </form>
-        </q-dialog>
-    </div>
+  <div>
+    <q-dialog
+      v-model="toggleModel"
+      @hide="emitfnShowAddNewSpares"
+      @escape-key="emitfnShowAddNewSpares"
+      persistent
+      class="customModalOverlay"
+    >
+      <q-card style="min-width: 30vw">
+        <form>
+          <div class="row q-pa-md items-center border-bottom">
+            <div class="col-md-12">
+              <div class="text-h6 text-weight-regular">Add New Spares</div>
+            </div>
+          </div>
+          <div class="row q-pa-md items-center">
+            <div class="col-md-12 full-width">
+              <q-input
+                v-model="formData.spareName"
+                @blur="v$.formData.spareName.$touch"
+                :error="v$.formData.spareName.$error"
+                class="text-weight-regular text-grey-8"
+                color="grey-9"
+                label="Enter Spare Parts Name*"
+                placeholder="Enter Spare Parts Name*"
+                @keyup.enter="fnfinalsubmitAddNewRegion()"
+              />
+            </div>
+          </div>
+          <div class="row q-pa-md items-center justify-end">
+            <q-btn
+              flat
+              class="bg-white text-weight-regular text-grey-8 q-mr-sm"
+              @click="emitfnShowAddNewSpares()"
+              label="Cancel"
+            />
+            <q-btn
+              @click="fnfinalsubmitAddNewRegion()"
+              color="purple-9"
+              label="Save"
+            />
+          </div>
+        </form>
+      </q-card>
+    </q-dialog>
+  </div>
 </template>
 
 <script>
+import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   props: ["propShowAddNewSpares", "propRowDetails"],
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       toggleModel: this.propShowAddNewSpares,
       formData: {
-           regionGroupName: "",
-           regionAreaName: "",
-        //   regionAreaName
-        // id: this.propRowDetails.value,
-        // regionAreaName: this.propRowDetails.label,
-        // regionGroupName: this.propRowDetails.group,
+        spareName: "",
       },
     };
   },
-
-  validations: {
-    formData: {
-      spareName: {
-        required,
+  validations() {
+    return {
+      formData: {
+        spareName: { required },
       },
-    },
+    };
   },
-computed:{
-     ...mapGetters("SuperAdminUsers", ["getAllRegionsData"]),
-},
-
   methods: {
     ...mapActions("SuperAdminUsers", [
       "FETCH_ALL_REGIONS_DATA",
       "FEED_EXISTING_REGION_DATA",
     ]),
-    ...mapActions("SuperAdminUsers", ["FETCH_ALL_REGIONS_DATA"]),
     emitfnShowAddNewSpares() {
       this.$emit("emitfnShowAddNewSpares");
     },
-    fnfinalsubmitAddNewRegion(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+    fnfinalsubmitAddNewRegion() {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
-        this.$q.loading.show();
-        this.FEED_EXISTING_REGION_DATA(formData)
+        this.$q.loading.show({ message: "Saving..." });
+        this.FEED_EXISTING_REGION_DATA(this.formData)
           .then(() => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "positive",
-              position: "bottom",
               message: "Successfully updated!",
               icon: "thumb_up",
             });
             this.FETCH_ALL_REGIONS_DATA();
             this.emitfnShowAddNewSpares();
           })
-          .catch(error => {
+          .catch((error) => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
-              position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message || "Please Try Again Later !",
               icon: "thumb_down",
             });
           });

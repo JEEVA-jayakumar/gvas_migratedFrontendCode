@@ -1,298 +1,158 @@
 <template>
-  <q-page>
-    <div class="row">
+  <q-page padding>
+    <div class="row q-col-gutter-md">
       <!-- START >> Setup MDR details -->
-      <div class="col-md-6 col-sm-4 col-xs-12 q-pa-sm">
-        <div>
-          <strong>Select the Lead Bank to add List of Banks to implement QR</strong>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="text-subtitle2 q-mb-sm">
+          Select the Lead Bank to add List of Banks to implement QR
         </div>
-        <q-card style="width:100%">
-          <q-separator />
+        <q-card flat bordered>
           <q-card-section>
-            <q-item>
-              <q-item-section>
+            <div class="row items-center q-col-gutter-md">
+              <div class="col">
                 <q-select
                   color="grey-9"
                   v-model="formData.leadSource"
                   :options="dropDown.leadSourceOptions"
                   label="Select Lead bank"
+                  emit-value
+                  map-options
                 />
-              </q-item-section>
-              <q-item-section right>
+              </div>
+              <div class="col-auto">
                 <q-btn
-                  :disabled="formData.leadSource.length == 0"
+                  :disabled="!formData.leadSource"
                   no-caps
-                  size="md"
-                  @click="fnAddLeadSource(formData)"
+                  @click="fnAddLeadSource()"
                   color="purple-9"
                   label="Add Lead Source"
-                  class="no-margin"
                 />
-              </q-item-section>
-            </q-item>
+              </div>
+            </div>
           </q-card-section>
         </q-card>
       </div>
     </div>
-    <br />
-    <br />
 
-    <div align="center">
-      <strong>List of Bank to implement QR Code</strong>
+    <div class="q-mt-xl text-center text-subtitle2">
+      List of Bank to implement QR Code
     </div>
-    <q-table
-      table-class="customTableClass"
-      :rows="getActiveandDeactiveLeadSource"
-      :columns="columns" v-model:pagination="paginationControl"
-      row-key="id"
-    >
-      <q-td v-slot:body-cell-action="props" :props="props">
-        <div class="row no-wrap no-padding">
-          <!-- <q-btn
-            dense
-            no-caps
-            no-wrap
-            label="Delete"
-            size="md"
-            @click="fnDownload(props.row.id)"
-            flat
-            class="text-red"
-          ></q-btn>-->
-          <q-btn
-            dense
-            no-caps
-            no-wrap
-            label="Delete"
-            icon="far fa-minus-square"
-            size="md"
-            @click="fnDownload(props.row.id)"
-            flat
-            class="text-negative"
-          ></q-btn>
-        </div>
-      </q-td>
-    </q-table>
 
-    <!-- <showPlanModalComponent
-      v-if="showPlanDetailModal"
-      :propToggleModal="showPlanDetailModal"
-      @emitToggleModal="fnManagePlan"
-    ></showPlanModalComponent>-->
-    <!--END: Show plan details-->
+    <div class="q-mt-md">
+      <q-table
+        flat
+        bordered
+        table-class="customTableClass"
+        :rows="getActiveandDeactiveLeadSource"
+        :columns="columns"
+        v-model:pagination="paginationControl"
+        row-key="id"
+      >
+        <template v-slot:body-cell-action="props">
+          <q-td :props="props">
+            <div class="row no-wrap no-padding">
+              <q-btn
+                dense
+                no-caps
+                no-wrap
+                label="Delete"
+                icon="far fa-minus-square"
+                size="sm"
+                @click="fnDownload(props.row.id)"
+                flat
+                class="text-negative"
+              />
+            </div>
+          </q-td>
+        </template>
+      </q-table>
+    </div>
   </q-page>
 </template>
 
 <script>
-import { required } from '@vuelidate/validators';
-/* START >> Modal components Lead source, device, merchant type */
-// import showPlanModalComponent from "../../components/super_admin/showPlanModalComponent.vue";
-/* END >> Modal components Lead source, device, plan */
-
 import { mapGetters, mapActions } from "vuex";
+import _ from "lodash";
+
 export default {
-  name: "deviceTypes",
-  components: {
-    /* START >> Modal components Lead source, device, plan */
-    // showPlanModalComponent
-    /* END >> Modal components Lead source, device, plan */
-  },
+  name: "ImplementQRLeadSources",
   data() {
     return {
-      /* START >> Modal props */
-      /* END >> Modal props */
-
-      /* START >> Rental charges */
       paginationControl: {
         rowsPerPage: 5
       },
       formData: {
-        leadSource: ""
+        leadSource: null
       },
       dropDown: {
         leadSourceOptions: []
       },
       columns: [
-        // {
-        //   name: "ModifyDate",
-        //   required: true,
-        //   label: "Modify Date",
-        //   align: "center",
-        //   field: row => {
-        //     return row.device.modifyDate;
-        //   }
-        // },
-        {
-          name: "sourceName",
-          required: true,
-          label: "QR Bank",
-          align: "center",
-          field: row => {
-            return row.sourceName;
-          }
-        },
-        {
-          name: "action",
-          required: true,
-          label: "",
-          align: "left",
-          field: "action"
-        }
+        { name: "sourceName", required: true, label: "QR Bank", align: "center", field: row => row.sourceName, sortable: true },
+        { name: "action", required: true, label: "", align: "left", field: "action" }
       ]
     };
   },
-
   created() {
-    /* START: Load user table data filter > DeviceTypes */
-
     this.fetch();
-
-    /* End: Load user table data filter > DeviceTypes */
   },
   computed: {
-    ...mapGetters("ACTIVE_DEACTIVE_LEAD_SOURCE", ["getDeactiveLeadSource"]),
-
-    ...mapGetters("QRList", ["getAllQRList"]),
-
-    ...mapGetters("ACTIVE_DEACTIVE_LEAD_SOURCE", [
-      "getActiveandDeactiveLeadSource"
-    ])
+    ...mapGetters("ACTIVE_DEACTIVE_LEAD_SOURCE", ["getDeactiveLeadSource", "getActiveandDeactiveLeadSource"]),
+    ...mapGetters("QRList", ["getAllQRList"])
   },
-
   methods: {
-    ...mapActions("ACTIVE_DEACTIVE_LEAD_SOURCE", [
-      "LEAD_SOURCE_DEACTIVE_LIST",
-      "EDIT_LEAD_SOURCE",
-      "LEAD_SOURCE_ACTIVE_DEACTIVE_LIST1",
-      "DELETE_LEAD_SOURCE"
-    ]),
+    ...mapActions("ACTIVE_DEACTIVE_LEAD_SOURCE", ["LEAD_SOURCE_DEACTIVE_LIST", "EDIT_LEAD_SOURCE", "LEAD_SOURCE_ACTIVE_DEACTIVE_LIST1", "DELETE_LEAD_SOURCE"]),
     ...mapActions("QRList", ["FETCH_QR_LIST"]),
     ajaxLoadDataForDeviceTypeTable() {
-      let self = this;
-      self.LEAD_SOURCE_DEACTIVE_LIST().then(() => {
-        return _.map(self.getDeactiveLeadSource, item => {
-          self.dropDown.leadSourceOptions.push({
-            value: item.id,
-            label: item.sourceName
-          });
-        });
+      this.LEAD_SOURCE_DEACTIVE_LIST().then(() => {
+        this.dropDown.leadSourceOptions = _.map(this.getDeactiveLeadSource, item => ({
+          value: item.id,
+          label: item.sourceName
+        }));
       });
     },
-    // fnCategoryBasedRental(request) {
-    //   let formData = {
-    //     leadSource: request.leadSource,
-    //     device: request.device,
-    //     plan: request.plan
-    //   };
-    //   let self = this;
-    //   self.CATEGORY_BASED_RENTAL_PLAN(formData).then(response => {
-    //     if (response.status == 200) {
-    //       this.formData.setupFees = self.categoryBasedRental.setupFees;
-    //       this.formData.monthlyFees = self.categoryBasedRental.monthlyFees;
-    //     } else if (response.data == null) {
-    //       this.formData.setupFees = 0;
-    //       this.formData.monthlyFees = 0;
-    //     } else {
-    //       this.$q.notify({
-    //         color: "negative",
-    //         position: "bottom-left",
-    //         message: "Invalid MDR Plan Code",
-    //         icon: "clear"
-    //       });
-    //       this.formData.setupFees = "";
-    //       this.formData.monthlyFees = "";
-    //     }
-    //   });
-    // },
-
-    /* START >> Manage lead source, device, merchant type */
-
-    fnManagePlan() {
-      this.showPlanDetailModal = !this.showPlanDetailModal;
-    },
-    fnAddLeadSource(request) {
+    fnAddLeadSource() {
       let requestParams = {
         lead: {
           leadId: this.formData.leadSource
         }
       };
+      this.$q.loading.show({ message: "Adding..." });
       this.EDIT_LEAD_SOURCE(requestParams).then(response => {
-        console.log("Respone the lead source", response);
-
         this.LEAD_SOURCE_ACTIVE_DEACTIVE_LIST1();
-
         this.$q.notify({
           color: "positive",
-          position: "bottom",
           message: response.data.message,
           icon: "thumb_up"
         });
-        this.formData.leadSource = "";
+        this.formData.leadSource = null;
         this.LEAD_SOURCE_DEACTIVE_LIST();
-      });
-      // leadSourceCreate(token) {
-      //   this.propShowCreateLeadSource = !this.propShowCreateLeadSource;
-      //   if (token == "refresh") {
-      //     this.leadSourceActiveList();
-      //   }
-
-      /* END >> Manage lead source, device, merchant type */
-
-      /* START >> Manage MDR charges */
+        this.$q.loading.hide();
+      }).catch(() => { this.$q.loading.hide(); });
     },
-    // fnDownload(id) {
-    //   this.DELETE_LEAD_SOURCE(id);
-
-    //   this.fetch();
-    //   this.$q.notify({
-    //     color: "positive",
-    //     position: "bottom",
-    //     message: "Successfully Deleted",
-    //     icon: "thumb_up"
-    //   });
-    // },
-    fnDownload(rowDetails) {
-      this.$q
-        .dialog({
-          title: "Confirm",
-          message: "Are you sure want to delete QR Bank?",
-          ok: "Continue",
-          cancel: "Cancel"
-        }).onOk(() => {
-          this.$q.loading.show({
-            delay: 100, // ms
-            message: "Please Wait",
-            spinnerColor: "purple-9",
-            customClass: "shadow-none"
-          });
-          this.DELETE_LEAD_SOURCE(rowDetails)
-            .then(response => {
-              this.fetch();
-              this.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: "Successfully Deleted",
-                icon: "thumb_up"
-              });
-            }).onCancel(error => {
-              this.$q.notify({
-                color: "negative",
-                position: "bottom",
-                message: "Please try again!",
-                icon: "thumb_down"
-              });
-            });
-          this.$q.loading.hide();
-        })
-        .onCancel(() => {
+    fnDownload(id) {
+      this.$q.dialog({
+        title: "Confirm",
+        message: "Are you sure want to delete QR Bank?",
+        ok: "Continue",
+        cancel: "Cancel",
+        persistent: true
+      }).onOk(() => {
+        this.$q.loading.show({ message: "Please Wait" });
+        this.DELETE_LEAD_SOURCE(id).then(() => {
+          this.fetch();
           this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "No changes made!",
-            icon: "thumb_down"
+            color: "positive",
+            message: "Successfully Deleted",
+            icon: "thumb_up"
           });
+          this.$q.loading.hide();
+        }).catch(() => {
+          this.$q.notify({ color: "negative", message: "Please try again!" });
+          this.$q.loading.hide();
         });
+      });
     },
-
     fetch() {
       this.LEAD_SOURCE_ACTIVE_DEACTIVE_LIST1();
       this.LEAD_SOURCE_DEACTIVE_LIST();
@@ -302,6 +162,3 @@ export default {
   }
 };
 </script>
-
-<style>
-</style>

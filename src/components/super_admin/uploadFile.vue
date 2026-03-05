@@ -1,85 +1,73 @@
 <template>
   <div>
     <q-dialog
-      class="customModalOverlay"
       v-model="toggleModel"
-      @hide="emitfnshowUploadFile()"
-      @escape-key="emitfnshowUploadFile()"
-      :content-css="{minWidth:'50%',height:'auto',maxHeight:'50vh',margin:'20px',padding:'20px'}"
+      @hide="emitfnshowUploadFile"
+      persistent
+      class="customModalOverlay"
     >
-      <div class="column">
-        <div class="q-py-sm text-h6 bottom-border">Upload Bank List</div>
-        <div class="q-py-sm">
-          <div v-if="!uploadFileBoolean" class="group">
-            <label
-              class="cursor-pointer bg-grey-7 text-white"
-              v-if="attachedFileName == '' || attachedFileName == null "
-            >
-              <span>
-                <q-icon name="attach_file" />Attach
-              </span>
-              <input
-                type="file"
-                ref="file"
-                name="file"
-                accept=".xlsx"
-                @change="fnGetUploadFileDetails"
-              />
-            </label>
-            <label class="cursor-pointer bg-light-blue text-white" v-else>
-              <span>
-                <q-icon name="attach_file" />Modify
-              </span>
-              <input
-                type="file"
-                ref="file"
-                name="file"
-                accept=".xlsx"
-                @change="fnGetUploadFileDetails"
-              />
-            </label>
-            <div class="q-py-md" v-if="attachedFileName !=''">
-              <span class="text-faded">Attached File:</span>
-              {{attachedFileName}}
+      <q-card style="min-width: 50vw; padding: 20px">
+        <div class="column">
+          <div class="q-py-sm text-h6 border-bottom">Upload Bank List</div>
+          <div class="q-py-md">
+            <div v-if="!uploadFileBoolean" class="row items-center q-gutter-md">
+              <label
+                class="cursor-pointer q-pa-sm text-white rounded-borders"
+                :class="attachedFileName ? 'bg-light-blue' : 'bg-grey-7'"
+                style="display: inline-block"
+              >
+                <span>
+                  <q-icon name="attach_file" />
+                  {{ attachedFileName ? "Modify" : "Attach" }}
+                </span>
+                <input
+                  type="file"
+                  ref="file"
+                  name="file"
+                  accept=".xlsx"
+                  @change="fnGetUploadFileDetails"
+                  style="display: none"
+                />
+              </label>
+              <div v-if="attachedFileName" class="text-subtitle2">
+                <span class="text-grey-7">Attached File:</span>
+                {{ attachedFileName }}
+              </div>
+            </div>
+            <div v-else>
+              <q-btn
+                dense
+                outline
+                color="grey-7"
+                size="sm"
+                class="no-pointer-events"
+                >{{ uploadFileName }}</q-btn
+              >
             </div>
           </div>
-          <div v-else>
+          <div class="q-py-sm row justify-end q-gutter-sm">
             <q-btn
-              dense
-              outline
+              flat
               color="grey-7"
-              size="sm"
-              class="file-return text-faded no-pointer-events"
-            >{{uploadFileName}}</q-btn>
+              @click="emitfnshowUploadFile"
+              label="Cancel"
+            />
+            <q-btn
+              v-if="sendForDataEntry"
+              color="positive"
+              @click="finalFileUploadAndSubmit()"
+              label="Submit"
+              icon="done"
+            />
           </div>
         </div>
-        <div class="q-py-sm">
-          <q-btn
-            icon="done"
-            v-if="sendForDataEntry"
-            color="positive"
-            class="center"
-            @click="finalFileUploadAndSubmit()"
-            align="right"
-            label="Submit"
-          />
-          <q-btn
-            icon="done"
-            v-if="sendForDataEntry"
-            color="positive"
-            class="center"
-            @click="finalFileUploadAndSubmit()"
-            align="right"
-            label="cancel"
-          />
-        </div>
-      </div>
+      </q-card>
     </q-dialog>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   props: ["propShowUploadFile"],
@@ -90,80 +78,52 @@ export default {
       uploadFileBoolean: false,
       attachedFileName: "",
       toggleModel: this.propShowUploadFile,
-      cancelConfirmation: false
     };
   },
-  computed: {},
   methods: {
     ...mapActions("BankListUploadFile", ["UPLOAD_BANKLIST_FILE"]),
     emitfnshowUploadFile() {
       this.$emit("uploadFile");
     },
-    // fncancel(item) {
-    //   if (this.attachedFileName == "") {
-    //     this.emitfnshowUploadFile();
-    //   } else {
-    //     this.cancelConfirmation = true;
-    //   }
-    // },
-
-    // Function to upload file to server with lead details **two apis
     finalFileUploadAndSubmit() {
       let formData = new FormData();
       let uploadFiles = this.$refs.file;
       formData.append("file", uploadFiles.files[0]);
       this.$q.loading.show({
-        delay: 0, // ms
         spinnerColor: "purple-9",
-        message: "Processing .."
+        message: "Processing ..",
       });
       this.UPLOAD_BANKLIST_FILE(formData)
-        .then(response => {
+        .then((response) => {
           this.$q.loading.hide();
-          this.$emit("emitfnshowUploadFile");
+          this.$emit("uploadFile");
           this.$q.notify({
             color: "positive",
-            position: "bottom",
             message: "Successfully uploaded",
-            icon: "thumb_up"
+            icon: "thumb_up",
           });
-          this.$refs.file = "";
+          this.attachedFileName = "";
+          this.sendForDataEntry = false;
         })
-        .catch(error => {
+        .catch((error) => {
           this.$q.loading.hide();
           this.$q.notify({
             color: "negative",
-            position: "bottom",
-            message: error.data.message,
-            icon: "thumb_down"
+            message: error.data?.message || "Error occurred",
+            icon: "thumb_down",
           });
-          this.$refs.file = "";
         });
     },
-
-    // Function to get uploaded file details
     fnGetUploadFileDetails() {
       let uploadFiles = this.$refs.file;
-      this.attachedFileName = uploadFiles.files[0].name;
       if (uploadFiles.files.length > 0) {
+        this.attachedFileName = uploadFiles.files[0].name;
         this.sendForDataEntry = true;
       } else {
+        this.attachedFileName = "";
         this.sendForDataEntry = false;
       }
-    }
-    // fnclose() {
-    //   this.$router.push("super/admin/manage/mdr/bankSO");
-    // }
-  }
+    },
+  },
 };
 </script>
-<style scoped>
-label {
-  padding: 10px;
-  display: table;
-}
-
-input[type="file"] {
-  display: none;
-}
-</style>

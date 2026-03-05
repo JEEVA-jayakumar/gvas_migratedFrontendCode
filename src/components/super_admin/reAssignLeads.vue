@@ -1,15 +1,11 @@
 <template>
   <q-dialog
-    maximized
-    no-backdrop-dismiss
-    no-esc-dismiss
     v-model="toggleModal"
-    :content-css="{padding:'50px 5px'}"
+    maximized
+    persistent
+    class="customModalOverlay"
   >
-    <!-- <pre>{{propRowDetails}}</pre> -->
-    <div>
-      <!-- <pre>{{addtnLeadInformation}}</pre> -->
-      <!-- //Common lead information in popup -->
+    <q-card>
       <generalLeadInformation
         v-if="propToggleLeadInformation"
         :propLeadInformation="addtnLeadInformation"
@@ -17,7 +13,7 @@
         @closeLeadInformation="toggleLeadInformation"
       />
       <!--START: table title -->
-      <div class="row items-center q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
+      <div class="row items-center q-px-lg q-py-md text-weight-regular border-bottom text-grey-9">
         <div class="col text-h6">Lead Details</div>
         <div class="col-auto">
           <q-btn size="sm" round @click="emitToggleRemarks" outline color="dark" icon="clear" />
@@ -25,95 +21,106 @@
       </div>
       <!--END: table title -->
       <!--START: table lead validation -->
-      <q-table
-        title="Lead Validation"
-        table-class="customTableClass"
-        class="q-py-none"
-        :rows="tableData"
-        :columns="columns"
-        selection="multiple"
-        :selected="formData.deletedSoLeadIds"
-        v-model:filter="filter" v-model:pagination="paginationControl"
-        row-key="id"
-      >
-        <!--START: table body modification -->
-        <q-td
-          v-slot:body-cell-createdAt="props"
-          :props="props"
-        >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-lead_id="props"
-          :props="props"
-          class="cursor-pointer"
-          @click="toggleLeadInformation(props.row)"
+      <div class="q-pa-md">
+        <q-table
+          title="Lead Validation"
+          table-class="customTableClass"
+          class="q-py-none"
+          :rows="tableData"
+          :columns="columns"
+          selection="multiple"
+          v-model:selected="formData.deletedSoLeadIds"
+          v-model:filter="filter"
+          v-model:pagination="paginationControl"
+          row-key="id"
+          flat
+          bordered
         >
-          <span
-            class="label"
-            :class="[props.row.priority?'text-negative text-weight-bolder':'text-primary']"
-          ># {{props.row.leadNumber}}</span>
-        </q-td>
+          <template v-slot:body-cell-createdAt="props">
+            <q-td :props="props">
+              {{ $moment(props.row.createdAt).format("Do MMM Y") }}
+            </q-td>
+          </template>
 
-        <q-td v-slot:body-cell-merchantName="props" :props="props">
-          <span class="capitalize">{{props.row.leadName}}</span>
-        </q-td>
+          <template v-slot:body-cell-lead_id="props">
+            <q-td :props="props" class="cursor-pointer" @click="toggleLeadInformation(props.row)">
+              <span
+                class="label"
+                :class="[props.row.priority?'text-negative text-weight-bolder':'text-primary']"
+              ># {{props.row.leadNumber}}</span>
+            </q-td>
+          </template>
 
-        <q-td v-slot:body-cell-state="props" :props="props">
-          <span class="capitalize">{{props.row.state}}</span>
-        </q-td>
-        <q-td v-slot:body-cell-finance_approval="props" :props="props">
-          <span
-            class="label text-positive"
-            v-if="props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_SUCCESS"
-          >Approved</span>
-          <span
-            class="label text-negative"
-            v-else-if="props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_PENDING"
-          >Pending</span>
-          <span
-            class="label text-negative"
-            v-else-if="props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_REJECT"
-          >Rejected</span>
-          <span class="label" v-else>NA</span>
-        </q-td>
-        <!-- END: table body modification -->
-        <template v-slot:top="props" class="bottom-border">
-          <!--START: table filter,search -->
-          <div class="col-12 col-lg-6">
-            <q-input
-              clearable
-              color="grey-9"
-              v-model="filter"
-              placeholder="Type.."
-              label="Search by SO name, Merchant Name, Lead ID"
-              class="q-ma-xs"
-            />
-          </div>
-          <div class="col-12 col-lg-4">
-            <q-select
-              placeholder="Select .."
-              v-model="formData.reassignToNewSo"
-              label="Choose a user from below"
-              :options="dropDown.regionwiseUsers"
-              class="q-ma-xs"
-            />
-          </div>
-          <div class="col-12 col-lg-auto" align="right">
-            <q-btn icon="check" color="positive" class="q-ma-xs" label="Assign" @click="fnAssign" />
-          </div>
-          <!--END: table filter,search -->
-        </template>
-      </q-table>
-      <!--END: table lead validation -->
-    </div>
+          <template v-slot:body-cell-merchantName="props">
+            <q-td :props="props">
+              <span class="capitalize">{{props.row.leadName}}</span>
+            </q-td>
+          </template>
+
+          <template v-slot:body-cell-state="props">
+            <q-td :props="props">
+              <span class="capitalize">{{props.row.state}}</span>
+            </q-td>
+          </template>
+
+          <template v-slot:body-cell-finance_approval="props">
+            <q-td :props="props">
+              <span
+                class="label text-positive"
+                v-if="props.row.verifiedFinanceStatus == $VERIFIED_FINANCE_STATUS_SUCCESS"
+              >Approved</span>
+              <span
+                class="label text-negative"
+                v-else-if="props.row.verifiedFinanceStatus == $VERIFIED_FINANCE_STATUS_PENDING"
+              >Pending</span>
+              <span
+                class="label text-negative"
+                v-else-if="props.row.verifiedFinanceStatus == $VERIFIED_FINANCE_STATUS_REJECT"
+              >Rejected</span>
+              <span class="label" v-else>NA</span>
+            </q-td>
+          </template>
+
+          <template v-slot:top="props">
+            <div class="row full-width items-center q-col-gutter-sm">
+              <div class="col-12 col-lg-5">
+                <q-input
+                  clearable
+                  dense
+                  color="grey-9"
+                  v-model="filter"
+                  placeholder="Type.."
+                  label="Search by SO name, Merchant Name, Lead ID"
+                />
+              </div>
+              <div class="col-12 col-lg-5">
+                <q-select
+                  dense
+                  v-model="formData.reassignToNewSo"
+                  label="Choose a user from below"
+                  :options="dropDown.regionwiseUsers"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-12 col-lg-2" align="right">
+                <q-btn icon="check" color="positive" label="Assign" @click="fnAssign" dense />
+              </div>
+            </div>
+          </template>
+        </q-table>
+      </div>
+    </q-card>
   </q-dialog>
 </template>
 
 <script>
-import { required } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import generalLeadInformation from "../generalLeadInformation.vue";
+import _ from "lodash";
+
 export default {
-  name: "leadValidation",
+  name: "reAssignLeads",
   props: ["propRowDetails", "propToggleModal"],
   components: {
     generalLeadInformation
@@ -124,7 +131,6 @@ export default {
       propToggleLeadInformation: false,
       addtnLeadInformation: null,
       filter: "",
-      toggleAjaxLoadFilter: false,
       paginationControl: {
         rowsPerPage: 6,
         page: 1
@@ -137,178 +143,61 @@ export default {
         regionwiseUsers: []
       },
       columns: [
-        {
-          name: "createdAt",
-          required: true,
-          label: "Date(C)",
-          align: "left",
-          field: "createdAt",
-          sortable: true
-        },
-        {
-          name: "lead_id",
-          required: true,
-          label: "Lead ID",
-          align: "center",
-          field: row => {
-            return "# " + row.leadNumber;
-          },
-          sortable: true
-        },
-        {
-          name: "merchantName",
-          required: true,
-          label: "Merchant Name",
-          align: "left",
-          field: "merchantName",
-          sortable: true
-        },
-        {
-          name: "state",
-          required: true,
-          label: "State",
-          align: "left",
-          field: "state",
-          sortable: true
-        },
-        {
-          name: "salesOfficerName",
-          required: true,
-          label: "SO Name",
-          align: "left",
-          field: row => {
-            return row.assignedTo.name;
-          },
-          sortable: true
-        },
-        {
-          name: "finance_approval",
-          required: true,
-          label: "Finance Approval",
-          align: "left",
-          field: row => {
-            return row.verifiedFinanceStatus ==
-              this.$VERIFIED_FINANCE_STATUS_SUCCESS
-              ? "Success"
-              : row.verifiedFinanceStatus ==
-                this.$VERIFIED_FINANCE_STATUS_PENDING
-              ? "Pending"
-              : row.verifiedFinanceStatus ==
-                this.$VERIFIED_FINANCE_STATUS_REJECT
-              ? "Rejected"
-              : "NA";
-          },
-          sortable: true
-        },
-        {
-          name: "action",
-          required: true,
-          label: "",
-          align: "left",
-          field: "action",
-          sortable: true
-        }
+        { name: "createdAt", required: true, label: "Date(C)", align: "left", field: "createdAt", sortable: true },
+        { name: "lead_id", required: true, label: "Lead ID", align: "center", field: row => "# " + row.leadNumber, sortable: true },
+        { name: "merchantName", required: true, label: "Merchant Name", align: "left", field: "merchantName", sortable: true },
+        { name: "state", required: true, label: "State", align: "left", field: "state", sortable: true },
+        { name: "salesOfficerName", required: true, label: "SO Name", align: "left", field: row => row.assignedTo?.name || 'N/A', sortable: true },
+        { name: "finance_approval", required: true, label: "Finance Approval", align: "left", field: row => row.verifiedFinanceStatus, sortable: true },
+        { name: "action", required: true, label: "", align: "left", field: "action", sortable: false }
       ],
-      loading: true,
       tableData: this.propRowDetails.leadsList
     };
   },
-  computed: {
-    ...mapGetters("RegionWiseUsers", ["getRegionWiseList"]),
-    ...mapGetters("SuperAdminUsers", ["getAllUsers"])
-  },
   created() {
-    /* RegionWiseUsers */
     this.getRegionWiseUsers();
-
-    /* RegionWiseUsers */
   },
   methods: {
-    ...mapActions("RegionWiseUsers", ["FETCH_REGION_WISE_LIST"]),
     ...mapActions("AssignDeleteLeads", ["DELETE_ASSIGN_USER"]),
-    ...mapActions("SuperAdminUsers", ["FETCH_ALL_USERS_DATA"]),
-    // Function to toggle lead information pop up screen
     toggleLeadInformation(leadDetails) {
       this.propToggleLeadInformation = !this.propToggleLeadInformation;
       if (leadDetails != undefined) {
         this.addtnLeadInformation = leadDetails;
       }
     },
-    emitToggleRemarks(leadDetails) {
+    emitToggleRemarks() {
       this.$emit("closeLeadsList");
     },
     getRegionWiseUsers() {
-      // self.FETCH_REGION_WISE_LIST({}).then(() => {
-      //   return _.map(self.getRegionWiseList, item => {
-      //     self.dropDown.regionwiseUsers.push({
-      //       value: item.id,
-      //       label: item.name
-      //     });
-      //   });
-      // });
-      let self = this;
-      _.map(this.propRowDetails.regionwiseusers, oo => {
-        self.dropDown.regionwiseUsers.push({
-          label: oo.name,
-          value: oo.id
-        });
-      });
+      this.dropDown.regionwiseUsers = _.map(this.propRowDetails.regionwiseusers, oo => ({
+        label: oo.name,
+        value: oo.id
+      }));
     },
-    // fnAssign(formData) {
-    //   this.DELETE_ASSIGN_USER(formData);
-    // }
     fnAssign() {
-      let self = this;
-      if (self.formData.deletedSoLeadIds.length == 0) {
-        self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Select atleast one item to assign",
-          icon: "thumb_down"
-        });
-      } else if (self.formData.reassignToNewSo == "") {
-        self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Please Choose User value!",
-          icon: "thumb_down"
-        });
+      if (this.formData.deletedSoLeadIds.length == 0) {
+        this.$q.notify({ color: "negative", message: "Select atleast one item to assign" });
+      } else if (this.formData.reassignToNewSo == "") {
+        this.$q.notify({ color: "negative", message: "Please Choose User value!" });
       } else {
-        // let marsDeviceIdsCooked = [];
-        let reAssigned = [];
-        self.formData.deletedSoLeadIds.map(function(value) {
-          reAssigned.push(value.id);
-        });
-
+        let reAssigned = this.formData.deletedSoLeadIds.map(value => value.id);
         let postValues = {
           deletedSoLeadIds: reAssigned,
-          reassignToNewSo: self.formData.reassignToNewSo
+          reassignToNewSo: this.formData.reassignToNewSo
         };
+        this.$q.loading.show({ message: "Assigning..." });
         this.DELETE_ASSIGN_USER(postValues)
           .then(() => {
-            this.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully assigned!",
-              icon: "thumb_up"
-            });
+            this.$q.loading.hide();
+            this.$q.notify({ color: "positive", message: "Successfully assigned!" });
             location.reload();
           })
-          .catch(() => {
-            self.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: "Please try again",
-              icon: "thumb_down"
-            });
+          .catch((error) => {
+            this.$q.loading.hide();
+            this.$q.notify({ color: "negative", message: error.data?.message || "Please try again" });
           });
       }
     }
-
-    // Function to unAssignImplementationUser in implementation queue
   }
 };
 </script>
-
-<style scoped>
-</style>

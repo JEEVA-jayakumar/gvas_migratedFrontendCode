@@ -1,222 +1,171 @@
 <template>
   <div>
-    <q-dialog minimized v-model="propToggleModal" @hide="toggleModal" @escape-key="toggleModal"
-      class="customModalOverlay" :content-css="{ padding: '30px', minWidth: '30vw' }">
-      <form>
-        <div class="row gutter-sm q-py-sm items-center">
-          <div class="col-md-12">
-            <div class="text-h6 text-weight-regular">Add Prefix</div>
+    <q-dialog
+      v-model="toggleModal"
+      @hide="toggleModal"
+      @escape-key="toggleModal"
+      persistent
+      class="customModalOverlay"
+    >
+      <q-card style="min-width: 30vw">
+        <form>
+          <div class="row q-pa-md items-center border-bottom">
+            <div class="col-md-12">
+              <div class="text-h6 text-weight-regular">Add Prefix</div>
+            </div>
           </div>
-        </div>
-        <div class="row gutter-sm q-py-sm items-center">
-          <q-card style="width:100%">
-            <q-card-section>
-              <q-list no-border>
-
-                <q-item>
-                  <q-item-section>
-                    <q-select color="grey-9" v-model="formData.leadSource" :options="dropDown.leadSourceOptions"
-                      label="Select lead source" placeholder="Lead source" />
-                  </q-item-section>
-                </q-item>
-                <q-item>
-                  <q-item-section>
-                    <q-input color="grey-9" v-model="formData.prefix" @blur="$v.formData.prefix.$touch"
-                      :error="$v.formData.prefix.$error" label="Enter prefix* (3 digits)"
-                      placeholder="Enter prefix* (3 digits)" />
-                    <div class="text-negative q-py-xs group text-caption" v-if="$v.formData.prefix.$error">
-                      <div v-if="
-                        $v.formData.prefix.$params
-                          .required
-                      ">
+          <div class="q-pa-md">
+            <q-card flat bordered style="width: 100%">
+              <q-card-section>
+                <div class="column q-gutter-md">
+                  <q-select
+                    color="grey-9"
+                    v-model="formData.leadSource"
+                    :options="dropDown.leadSourceOptions"
+                    label="Select lead source"
+                    placeholder="Lead source"
+                    emit-value
+                    map-options
+                    @blur="v$.formData.leadSource.$touch"
+                    :error="v$.formData.leadSource.$error"
+                  />
+                  <div>
+                    <q-input
+                      color="grey-9"
+                      v-model="formData.prefix"
+                      @blur="v$.formData.prefix.$touch"
+                      :error="v$.formData.prefix.$error"
+                      label="Enter prefix* (3 digits)"
+                      placeholder="Enter prefix* (3 digits)"
+                    />
+                    <div
+                      class="text-negative q-py-xs group text-caption"
+                      v-if="v$.formData.prefix.$error"
+                    >
+                      <div v-if="v$.formData.prefix.required.$invalid">
                         <q-icon color="negative" name="warning" />&nbsp;Required
                       </div>
-                      <div v-if="
-                        $v.formData.prefix.$params
-                          .minLength
-                      ">
+                      <div
+                        v-else-if="
+                          v$.formData.prefix.minLength.$invalid ||
+                          v$.formData.prefix.maxLength.$invalid
+                        "
+                      >
                         <q-icon color="negative" name="warning" />
-                        &nbsp;Length should be between
-                        {{
-                            $v.formData.prefix.$params
-                              .minLength.min
-                        }}
-                        and
-                        {{
-                            $v.formData.prefix.$params
-                              .maxLength.max
-                        }}
+                        &nbsp;Length should be 3 digits
                       </div>
                     </div>
-                  </q-item-section>
-                </q-item>
-              </q-list>
-            </q-card-section>
-          </q-card>
-
-        </div>
-        <div class="row gutter-sm q-py-sm items-center">
-          <div class="col-md-12 group" align="right">
-            <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="toggleModal()">Cancel
-            </q-btn>
-            <q-btn align="right" @click="submitCreatePrefix(formData)" color="purple-9">Save</q-btn>
+                  </div>
+                </div>
+              </q-card-section>
+            </q-card>
           </div>
-        </div>
-      </form>
+          <div class="row q-pa-md items-center justify-end">
+            <q-btn
+              flat
+              class="bg-white text-weight-regular text-grey-8 q-mr-sm"
+              @click="toggleModal"
+              label="Cancel"
+            />
+            <q-btn @click="submitCreatePrefix" color="purple-9" label="Save" />
+          </div>
+        </form>
+      </q-card>
     </q-dialog>
   </div>
 </template>
-  
+
 <script>
-import { integer, required, minLength, maxLength } from "@vuelidate/validators";
+import useVuelidate from "@vuelidate/core";
+import { required, minLength, maxLength } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
+import _ from "lodash";
+
 export default {
-  // name: 'ComponentName',
   props: ["propShowAddPrefix"],
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
-      multiTidFlagOptions: [
-        {
-          label: "Yes",
-          value: true
-        },
-        {
-          label: "No",
-          value: false
-        }
-      ],
-      propToggleModal: this.propShowAddPrefix,
+      toggleModalLocal: this.propShowAddPrefix,
       dropDown: {
         leadSourceOptions: [],
       },
       formData: {
-
-        leadSource: "",
+        leadSource: null,
         prefix: "",
         baseMidLength: 15,
         baseTidLength: 8,
       },
     };
   },
-  validations: {
-    formData: {
-      leadSource: { required },
-      prefix: {
-        required,
-        minLength: minLength(3),
-        maxLength: maxLength(3)
+  computed: {
+    toggleModal: {
+      get() {
+        return this.propShowAddPrefix;
       },
-    }
+      set() {
+        this.$emit("emitfnshowaddPrefix");
+      },
+    },
+    ...mapGetters("leadSource", ["getActiveLeadSource"]),
   },
-  error: {
-    formData: {
-      leadSource: {
-        alert: false,
-        issue: "",
-        value: ""
+  validations() {
+    return {
+      formData: {
+        leadSource: { required },
+        prefix: {
+          required,
+          minLength: minLength(3),
+          maxLength: maxLength(3),
+        },
       },
-      prefix: {
-        alert: false,
-        issue: "",
-        value: ""
-      },
-    }
-
+    };
   },
   created() {
-    /* START: Load user table data filter > DeviceTypes */
-    this.ajaxLoadDataForDeviceTypeTable();
+    this.ajaxLoadData();
   },
-  computed: {
-    ...mapGetters("SA_Devices", ["getAllDevicesInfo", "getMarsDeviceModel"]),
-    ...mapGetters("leadSource", ["getActiveLeadSource"]),
-    ...mapGetters("SA_Devices", ["getAllDevicesInfo"]),
-    ...mapGetters("vasCreation", ["getAllVasDetails"])
-  },
-
   methods: {
     ...mapActions("leadSource", ["LEAD_SOURCE_ACTIVE_LIST"]),
-    ...mapActions("vasCreation", ["GET_ALL_VAS_DETAILS"]),
-    ...mapActions("SA_Devices", ["FETCH_DEVICES_DATA"]),
-    ...mapActions("Host", ["ADD_NEW_HOST"]),
     ...mapActions("Prefix", ["ADD_NEW_PREFIX"]),
-    toggleModal() {
-      this.$emit("emitfnshowaddPrefix");
-    },
-
-    ajaxLoadDataForDeviceTypeTable() {
-      let self = this;
-      self
-        .LEAD_SOURCE_ACTIVE_LIST()
-        .then(() => {
-          return _.map(self.getActiveLeadSource, item => {
-
-            self.dropDown.leadSourceOptions.push({
-              value: item,
-              label: item.sourceName
-            });
-          });
-        })
-      //   .then(() => {
-      //     self.FETCH_DEVICES_DATA()
-      // .then(() => {
-      //   return _.map(self.getAllDevicesInfo, item => {
-      //     self.dropDown.deviceOptions.push({
-      //       value: item,
-      //       label: item.deviceName
-      //     });
-      //   });
-      // })
-      //   })
-      //   .then(() => {
-      //     self.GET_ALL_VAS_DETAILS().then(() => {
-      //       return _.map(self.getAllVasDetails, item => {
-      //         console.log("GET_ALL_VAS_DETAILS, item: --->",JSON.stringify(item))
-      //         self.dropDown.vasOptions.push({
-      //           value: item,
-      //           label: item.name
-      //         });
-      //       });
-      //     });
-      //   })
+    ajaxLoadData() {
+      this.LEAD_SOURCE_ACTIVE_LIST().then(() => {
+        this.dropDown.leadSourceOptions = _.map(
+          this.getActiveLeadSource,
+          (item) => ({
+            value: item,
+            label: item.sourceName,
+          })
+        );
+      });
     },
     submitCreatePrefix() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
+        this.$q.notify("Please review fields again.");
       } else {
-        this.$q.loading.show({
-          delay: 100, // ms
-          message: "Please Wait",
-          spinnerColor: "purple-9",
-          customClass: "shadow-none"
-        });
+        this.$q.loading.show({ message: "Please Wait" });
         this.ADD_NEW_PREFIX(this.formData)
           .then(() => {
             this.$q.loading.hide();
             this.$emit("emitfnshowaddPrefix", "refresh");
             this.$q.notify({
               color: "positive",
-              position: "bottom",
               message: "prefix successfully created!",
-              icon: "thumb_up"
+              icon: "thumb_up",
             });
           })
-          .catch(() => {
+          .catch((error) => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
-              position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-              icon: "thumb_down"
+              message: error.data?.message || "Please Try Again Later !",
+              icon: "thumb_down",
             });
           });
       }
-    }
-  }
+    },
+  },
 };
 </script>
-  
-<style>
-
-</style>
-  

@@ -1,373 +1,193 @@
 <template>
-    <q-dialog
-      minimized
-      position="right"
-      v-model="toggleModal"
-      no-backdrop-dismiss
-      @escape-key="emitModalClose"
-      class="customModalOverlay"
-      :content-css="{padding:'25px',paddingTop:'60px',minWidth:'40vw',minHeight:'100vh'}"
-    >
-      <div class="row items-center bottom-border q-py-sm fit">
-        <div class="col">
-          <div class="text-h6 text-weight-regular">Manage Mars Instance</div>
+  <q-dialog
+    v-model="toggleModal"
+    @hide="emitModalClose"
+    @escape-key="emitModalClose"
+    persistent
+    position="right"
+    class="customModalOverlay"
+  >
+    <q-card style="min-width: 40vw; min-height: 100vh">
+      <div class="q-pa-md">
+        <div class="row items-center border-bottom q-pb-md fit">
+          <div class="col">
+            <div class="text-h6 text-weight-regular">Manage Mars Instance</div>
+          </div>
+          <div class="col-auto" align="right">
+            <q-btn flat round color="dark" size="sm" icon="clear" @click="emitModalClose" />
+          </div>
         </div>
-        <div class="col" align="right">
-          <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
-        </div>
-      </div>
-      <q-tabs v-model="tab" color="grey-9">
-        <!-- Tabs - notice  -->
-        <q-tab @click="leadSourceActiveList" label="Active List" name="tab-1"/>
-        <!-- <q-tab @click="leadSourceDeActiveList" label="De-Actived List" name="tab-2"/> -->
-        <!--  -->
-</q-tabs>
-<q-tab-panels v-model="tab" animated>
-<q-tab-panel name="tab-1">
-          <q-table
-            :rows="activeLeadSourceList"
-            table-class="customSATableClass"
-            :columns="activatedColumns"
-            :filter="activeFilterSearch"
-            row-key="id"
-            color="grey-9"
-          >
-            <q-td v-slot:body-cell-action="props" :props="props">
-              <div class="row no-wrap no-padding">
-                <q-btn
-                  dense
-                  no-caps
-                  no-wrap
-                  label="Modify"
-                  icon="far fa-plus-square"
-                  size="md"
-                  @click="InstanceEdit(props.row)"
-                  flat
-                  class="text-light-blue"
-                ></q-btn>
-                <q-btn
-                  dense
-                  no-caps
-                  no-wrap
-                  label="Disable"
-                  icon="far fa-minus-square"
-                  size="md"
-                  @click="InstanceDisable(props.row.id)"
-                  flat
-                  class="text-negative"
-                ></q-btn>
-              </div>
-            </q-td>
-            <template v-slot:top="props">
-              <!--START: table filter,search -->
-              <div class="col-8">
-                <q-input
-                  clearable
-                  color="grey-9"
-                  v-model="activeFilterSearch"
-                  placeholder="Type.."
-                  label="Search lead source"
-                />
-              </div>
-              <div class="col-4" align="right">
-                <q-btn
-                  no-caps
-                  no-wrap
-                  label="Add New"
-                  class="text-weight-regular"
-                  color="purple-9"
-                  icon="far fa-plus-square"
-                  @click="marsInstanceCreate()"
-                />
-              </div>
-              <!--ENDv-model: table filter,search -->
-            </template>
-          </q-table>
-        </q-tab-panel>
-<q-tab-panel name="tab-2">
-          <q-table
-            :rows="deActiveLeadSourceList"
-            table-class="customSATableClass"
-            :columns="deActivatedColumns"
-            :filter="deActivatedFilterSearch" v-model:pagination="paginationControl"
-            row-key="id"
-            color="grey-9"
-          >
-            <q-td v-slot:body-cell-action="props" :props="props">
-              <div class="row no-wrap no-padding">
-                <q-btn
-                  dense
-                  no-caps
-                  no-wrap
-                  label="Enable"
-                  icon="far fa-check-square"
-                  size="md"
-                  @click="fnEnableInstance(props.row)"
-                  flat
-                  class="text-positive"
-                ></q-btn>
-              </div>
-            </q-td>
-            <template v-slot:top="props">
-              <div class="col">
-                <q-input
-                  clearable
-                  color="grey-9"
-                  v-model="deActivatedFilterSearch"
-                  placeholder="Type.."
-                  label="Search by name"
-                  class="q-mr-lg"
-                />
-              </div>
-            </template>
-          </q-table>
-        </q-tab-panel>
-</q-tab-panels>
-      <!--START: Show create LeadSources -->
-      <showCreatemarsInstance
-        v-if="propShowCreatemarsInstance"
-        :propShowCreatemarsInstance="propShowCreatemarsInstance"
-        @emitfnshowMarsInstance="marsInstanceCreate"
-      ></showCreatemarsInstance>
-      <!--END: Show create LeadSources -->
-      <!--START: Show edit LeadSources -->
-      <showEditInstance
-        v-if="propShowEditMarsInstance"
-        :propShowEditMarsInstance="propShowEditMarsInstance"
-        :propRowDetails="propRowDetails"
-        @emitfnshowMarsInstance="refreshLeadSourceList"
-      ></showEditInstance>
-      <!--END: Show edit LeadSources -->
-    </q-dialog>
-  </template>
-  
-  <script>
-  import { mapGetters, mapActions } from "vuex";
-  import { required } from "@vuelidate/validators";
-  import showCreatemarsInstance from "./marsInstanceCreate.vue";
-  import showEditInstance from "./editMarsInstance.vue";
-  export default {
-    props: ["propToggleModal"],
-    // name: 'ComponentName',
-    components: {
-      showCreatemarsInstance,
-      showEditInstance
-    },
-    data() {
-      return {
-      tab: 'tab-1',
-        toggleModal: this.propToggleModal,
-  
-        propShowCreatemarsInstance: false,
-        propShowEditMarsInstance: false,
-        propRowDetails: "",
-  
-        activeLeadSourceList: [],
-        deActiveLeadSourceList: [],
-  
-        formData: {
-          leadSource: ""
-        },
-  
-        /* START >>Table properties */
-        activeFilterSearch: "",
-        deActivatedFilterSearch: "",
-        paginationControl: {
-          rowsPerPage: 5
-        },
-        /* END >>Table properties */
-  
-        /* START >>Table data */
-        activatedColumns: [
-          {
-            name: "institutionName",
-            required: true,
-            label: "Institution Name",
-            align: "left",
-            field: "institutionName",
-            sortable: false
-          },
-          {
-            name: "action",
-            required: true,
-            label: "",
-            align: "left",
-            field: "action",
-            sortable: false
-          }
-        ],
-        // deActivatedColumns: [
-        //   {
-        //     name: "institutionName",
-        //     required: true,
-        //     label: "Institution Name",
-        //     align: "left",
-        //     field: "institutionName",
-        //     sortable: false
-        //   },
-        //   {
-        //     name: "action",
-        //     required: true,
-        //     label: "",
-        //     align: "left",
-        //     field: "action",
-        //     sortable: false
-        //   }
-        // ]
-        /* END >>Table data */
-      };
-    },
-  
-    created() {
-      this.GET_MARS_INSTITUTION_DETAILS();
-    },
-    computed: {
-      ...mapGetters("leadSource", [
-        "getActiveLeadSource",
-        "getDeActivatedLeadSource"
-      ]),
-      ...mapGetters("MarsInstance", ["getMarsInstanceDetails"])
-      // ...mapGetters("merchantDocumentType", [
-      //   "getActiveLeadSource",
-      //   "getDeActivatedLeadSource"
-      // ])
-    },
-    methods: {
-      ...mapActions("leadSource", [
-        "LEAD_SOURCE_ACTIVE_LIST",
-        "LEAD_SOURCE_DEACTIVED_LIST",
-        "UPDATE_LEAD_SOURCE_AND_SET_ACTIVE",
-        "DELETE_LEAD_SOURCE_AND_SET_ACTIVE"
-      ]),
-      ...mapActions("MarsInstance", ["GET_MARS_INSTITUTION_DETAILS", "DELETE_INSTANCE","UPDATE_INSTANCE"]),
-      /* START >> Function to save, update or delete */
-      leadSourceActiveList() {
-        this.GET_MARS_INSTITUTION_DETAILS().then(() => {
-          this.activeLeadSourceList = this.getMarsInstanceDetails.filter(service => service.institutionActive == true);
-          // this.deActiveTableData = this.getAllHierarchiesData.filter(service => service.active == false);
-        });
-      },
-      leadSourceDeActiveList() {
-        this.GET_MARS_INSTITUTION_DETAILS().then(() => {
-          this.deActiveLeadSourceList = this.getMarsInstanceDetails.filter(service => service.institutionActive == false)
-        });
-      },
-      marsInstanceCreate(token) {
-        this.propShowCreatemarsInstance = !this.propShowCreatemarsInstance;
-        if (token == "refresh") {
-          this.leadSourceActiveList();
-        }
-      },
-  
-      InstanceEdit(rowDetails) {
-        this.propShowEditMarsInstance = !this.propShowEditMarsInstance;
-        this.propRowDetails = rowDetails;
-      },
-  
-      refreshLeadSourceList() {
-        this.propShowEditMarsInstance = !this.propShowEditMarsInstance;
-        this.leadSourceActiveList();
-      },
-      InstanceDisable(rowDetails) {
-        this.$q
-          .dialog({
-            title: "Confirm",
-            message: "Are you sure want to disable lead source?",
-            ok: "Continue",
-            cancel: "Cancel"
-          }).onOk(() => {
-            this.$q.loading.show({
-              delay: 100, // ms
-              message: "Please Wait",
-              spinnerColor: "purple-9",
-              customClass: "shadow-none"
-            });
-            this.DELETE_INSTANCE(rowDetails)
-              .then(response => {
-                this.leadSourceActiveList();
-                this.$q.notify({
-                  color: "negative",
-                  position: "bottom",
-                  message: "Instance deactivated",
-                  icon: "thumb_up"
-                });
-              }).onCancel(error => {
-                this.$q.notify({
-                  color: "warning",
-                  position: "bottom",
-                  message: "Please try again!",
-                  icon: "thumb_down"
-                });
-              });
-            this.$q.loading.hide();
-          })
-          .onCancel(() => {
-            this.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: "No changes made!",
-              icon: "thumb_down"
-            });
-          });
-      },
-      fnEnableInstance(rowDetails) {
-        console.log("fnEnableInstance ------->",JSON.stringify(rowDetails))
-        this.$q
-          .dialog({
-            title: "Confirm",
-            message: "Are you sure want to Active Instance?",
-            ok: "Continue",
-            cancel: "Cancel"
-          }).onOk(() => {
-            this.$q.loading.show({
-              delay: 100, // ms
-              message: "Please Wait",
-              spinnerColor: "purple-9",
-              customClass: "shadow-none"
-            });
-            let param={
-              institutionName: rowDetails.institutionName,
-              institutionRRCode: rowDetails.institutionRRCode,
-              institutionActive:1,
 
-            };
-            this.UPDATE_INSTANCE(param)
-              .then(response => {
-                this.leadSourceActiveList();
-                this.$q.notify({
-                  color: "positive",
-                  position: "bottom",
-                  message: "Mars Instance Activated",
-                  icon: "thumb_up"
-                });
-              }).onCancel(error => {
-                this.$q.notify({
-                  color: "warning",
-                  position: "bottom",
-                  message: "Please try again!",
-                  icon: "thumb_down"
-                });
-              });
-            this.$q.loading.hide();
-          })
-          .catch(() => {
-            this.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: "No changes made!",
-              icon: "thumb_down"
-            });
-          });
+        <q-tabs v-model="tab" color="grey-9" align="left" class="q-mt-md">
+          <q-tab label="Active List" name="tab-1" />
+        </q-tabs>
+
+        <q-tab-panels v-model="tab" animated keep-alive>
+          <q-tab-panel name="tab-1" class="no-padding q-mt-md">
+            <q-table
+              :rows="activeLeadSourceList"
+              table-class="customSATableClass"
+              :columns="activatedColumns"
+              :filter="activeFilterSearch"
+              v-model:pagination="paginationControl"
+              row-key="id"
+              color="grey-9"
+              flat
+              bordered
+            >
+              <template v-slot:body-cell-action="props">
+                <q-td :props="props">
+                  <div class="row no-wrap no-padding">
+                    <q-btn
+                      dense
+                      no-caps
+                      no-wrap
+                      label="Modify"
+                      icon="far fa-plus-square"
+                      size="sm"
+                      @click="InstanceEdit(props.row)"
+                      flat
+                      class="text-light-blue q-mr-sm"
+                    />
+                    <q-btn
+                      dense
+                      no-caps
+                      no-wrap
+                      label="Disable"
+                      icon="far fa-minus-square"
+                      size="sm"
+                      @click="InstanceDisable(props.row.id)"
+                      flat
+                      class="text-negative"
+                    />
+                  </div>
+                </q-td>
+              </template>
+
+              <template v-slot:top="props">
+                <div class="col-8">
+                  <q-input
+                    clearable
+                    dense
+                    color="grey-9"
+                    v-model="activeFilterSearch"
+                    placeholder="Type.."
+                    label="Search lead source"
+                  />
+                </div>
+                <div class="col-4" align="right">
+                  <q-btn
+                    no-caps
+                    no-wrap
+                    dense
+                    label="Add New"
+                    class="text-weight-regular"
+                    color="purple-9"
+                    icon="far fa-plus-square"
+                    @click="marsInstanceCreate()"
+                  />
+                </div>
+              </template>
+            </q-table>
+          </q-tab-panel>
+        </q-tab-panels>
+      </div>
+    </q-card>
+
+    <showCreatemarsInstance
+      v-if="propShowCreatemarsInstance"
+      :propShowCreatemarsInstance="propShowCreatemarsInstance"
+      @emitfnshowMarsInstance="marsInstanceCreate"
+    />
+    <showEditInstance
+      v-if="propShowEditMarsInstance"
+      :propShowEditMarsInstance="propShowEditMarsInstance"
+      :propRowDetails="propRowDetails"
+      @emitfnshowMarsInstance="refreshLeadSourceList"
+    />
+  </q-dialog>
+</template>
+
+<script>
+import { mapGetters, mapActions } from "vuex";
+import showCreatemarsInstance from "./marsInstanceCreate.vue";
+import showEditInstance from "./editMarsInstance.vue";
+
+export default {
+  props: ["propToggleModal"],
+  components: {
+    showCreatemarsInstance,
+    showEditInstance
+  },
+  data() {
+    return {
+      tab: 'tab-1',
+      toggleModal: this.propToggleModal,
+      propShowCreatemarsInstance: false,
+      propShowEditMarsInstance: false,
+      propRowDetails: "",
+      activeLeadSourceList: [],
+      activeFilterSearch: "",
+      paginationControl: {
+        rowsPerPage: 5
       },
-      /* END >> Function to save, update or delete */
-  
-      emitModalClose() {
-        this.$emit("emitToggleModal");
+      activatedColumns: [
+        { name: "institutionName", required: true, label: "Institution Name", align: "left", field: "institutionName", sortable: false },
+        { name: "action", required: true, label: "", align: "left", field: "action", sortable: false }
+      ]
+    };
+  },
+  created() {
+    this.leadSourceActiveList();
+  },
+  computed: {
+    ...mapGetters("MarsInstance", ["getMarsInstanceDetails"])
+  },
+  methods: {
+    ...mapActions("MarsInstance", ["GET_MARS_INSTITUTION_DETAILS", "DELETE_INSTANCE"]),
+    leadSourceActiveList() {
+      this.$q.loading.show({ message: "Please Wait" });
+      this.GET_MARS_INSTITUTION_DETAILS().then(() => {
+        this.activeLeadSourceList = this.getMarsInstanceDetails.filter(service => service.institutionActive == true);
+        this.$q.loading.hide();
+      }).catch(() => { this.$q.loading.hide(); });
+    },
+    marsInstanceCreate(token) {
+      this.propShowCreatemarsInstance = !this.propShowCreatemarsInstance;
+      if (token == "refresh") {
+        this.leadSourceActiveList();
       }
+    },
+    InstanceEdit(rowDetails) {
+      this.propRowDetails = rowDetails;
+      this.propShowEditMarsInstance = true;
+    },
+    refreshLeadSourceList() {
+      this.propShowEditMarsInstance = false;
+      this.leadSourceActiveList();
+    },
+    InstanceDisable(id) {
+      this.$q.dialog({
+        title: "Confirm",
+        message: "Are you sure want to disable lead source?",
+        ok: "Continue",
+        cancel: "Cancel",
+        persistent: true
+      }).onOk(() => {
+        this.$q.loading.show({ message: "Please Wait" });
+        this.DELETE_INSTANCE(id).then(() => {
+          this.leadSourceActiveList();
+          this.$q.notify({ color: "negative", message: "Instance deactivated" });
+          this.$q.loading.hide();
+        }).catch(() => {
+          this.$q.notify({ color: "warning", message: "Please try again!" });
+          this.$q.loading.hide();
+        });
+      });
+    },
+    emitModalClose() {
+      this.$emit("emitToggleModal");
     }
-  };
-  </script>
-  
-  <style>
-  </style>
-  
+  }
+};
+</script>

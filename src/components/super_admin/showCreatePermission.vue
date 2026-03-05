@@ -1,13 +1,14 @@
 <template>
   <div>
     <q-dialog
-    minimized 
+    no-backdrop-dismiss
     class="customModalOverlay"
     :model-value="propShowCreatePermission"
-    @hide="emitfnshowAddPermissions(propShowCreatePermission)" 
-    @escape-key="emitfnshowAddPermissions(propShowCreatePermission)"  
-    :content-css="{padding:'30px',minWidth: '30vw'}"
+    @hide="emitfnshowAddPermissions"
+    @escape-key="emitfnshowAddPermissions"
+    persistent
     >
+      <q-card style="min-width: 30vw">
       <form> 
         <div class="row q-pa-md bottom-border">
           <div class="col-md-12">
@@ -19,29 +20,34 @@
             <q-input 
             @keyup.enter="fnEditPermissionSubmit(formData.permissionDetails)"
             v-model="formData.permissionDetails.permission" 
-            :error="$v.formData.permissionDetails.permission.$error" 
+            :error="v$.formData.permissionDetails.permission.$error"
             class="text-weight-regular text-grey-8 q-my-sm" color="grey-9" label="Permission" placeholder="Permission" />
           </div>
         </div>
         <div class="row gutter-sm q-pa-md">
           <div class="col-md-12" align="right">
-            <q-btn flat size="md" align="right" class="bg-white q-mr-sm text-weight-regular text-grey-8" @click="emitfnshowAddPermissions(propShowCreatePermission)">Cancel
+            <q-btn flat size="md" align="right" class="bg-white q-mr-sm text-weight-regular text-grey-8" @click="emitfnshowAddPermissions">Cancel
             </q-btn>
             <q-btn size="md" align="right" @click="fnEditPermissionSubmit(formData.permissionDetails)" color="purple-9">Save
             </q-btn>
           </div>
         </div>
       </form>
+      </q-card>
     </q-dialog>
   </div>
 </template>
 
 <script>
+import useVuelidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
-
 import { mapGetters, mapActions } from "vuex";
+
 export default {
   props: ["propGetAllPermissionData", "propShowCreatePermission"],
+  setup() {
+      return { v$: useVuelidate() };
+  },
   data() {
     return {
       formData: {
@@ -51,56 +57,50 @@ export default {
       }
     };
   },
-
-  validations: {
-    formData: {
-      permissionDetails: {
-        permission: required
+  validations() {
+      return {
+          formData: {
+              permissionDetails: {
+                  permission: { required }
+              }
+          }
       }
-    }
   },
-
   methods: {
-    ...mapActions("SuperAdminUsers", [
-      "FEED_PERMISSION_DATA",
-      "FETCH_ALL_PERMISSIONS_DATA"
-    ]),
+    ...mapActions("SuperAdminUsers", ["FEED_PERMISSION_DATA"]),
 
-    emitfnshowAddPermissions(propShowCreatePermission) {
-      this.$emit("emitfnshowAddPermissions", propShowCreatePermission);
+    emitfnshowAddPermissions() {
+      this.$emit("emitfnshowAddPermissions");
     },
-    //Permission creation final submit
-    fnEditPermissionSubmit(formData) {
-      this.$v.formData.permissionDetails.$touch();
 
-      if (this.$v.formData.permissionDetails.$error) {
+    fnEditPermissionSubmit(permissionDetails) {
+      this.v$.formData.permissionDetails.$touch();
+      if (this.v$.formData.permissionDetails.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({
-          delay: 100, // ms
+          delay: 100,
           message: "Please Wait",
-          spinnerColor: "purple-9",
-          customClass: "shadow-none"
+          spinnerColor: "purple-9"
         });
 
-        this.FEED_PERMISSION_DATA(formData)
+        this.FEED_PERMISSION_DATA({ label: permissionDetails.permission })
           .then(response => {
-            this.FETCH_ALL_PERMISSIONS_DATA();
-            this.emitfnshowAddPermissions(this.propShowCreatePermission);
             this.$q.loading.hide();
             this.$q.notify({
               color: "positive",
               position: "bottom",
-              message: "Successfully Updated!",
+              message: "Successfully added!",
               icon: "thumb_up"
             });
+            this.emitfnshowAddPermissions();
           })
-          .catch(() => {
+          .catch(error => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message || "Please Try Again Later !",
               icon: "thumb_down"
             });
           });
@@ -109,3 +109,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.bottom-border {
+  border-bottom: 1px solid #dcdcdc;
+}
+</style>

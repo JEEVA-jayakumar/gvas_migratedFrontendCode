@@ -1,100 +1,107 @@
 <template>
   <div>
-    <q-dialog   minimized
-        v-model="toggleModel"
-        @hide="emitfnShowCancelStatus"
-        @escape-key="emitfnShowCancelStatus"
-        class="customModalOverlay"
-        :content-css="{ padding: '30px', minWidth: '30vw' }">
-       <form>
-        <div class="row gutter-sm q-py-sm items-center">
-        <div  class="col-md-12">
-         <div class="text-h6 text-weight-regular"> Add Service</div>
-        </div>
-        <div class="col-md-12">
-         <q-input
-          v-model="formData.name"
-          :error="$v.formData.name.$error"
-         class="text-weight-regular text-grey-8"
-         color="grey-9"
-         label="Enter Status"
-         placeholder="Enter Status"
-        />
-        </div>
-        </div>
-        <div class="row gutter-sm q-py-sm items-center">
-          <div class="col-md-12 group" align="right">
-            <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8"
-              @click="emitfnShowCancelStatus()">Cancel</q-btn>
-              <q-btn align="right" @click="fnfinalsubmitAddCancelStatus(formData)" color="purple-9">Save</q-btn>
+    <q-dialog
+      v-model="toggleModel"
+      @hide="emitfnShowCancelStatus"
+      @escape-key="emitfnShowCancelStatus"
+      persistent
+      class="customModalOverlay"
+    >
+      <q-card style="min-width: 30vw">
+        <form>
+          <div class="row q-pa-md items-center border-bottom">
+            <div class="col-md-12">
+              <div class="text-h6 text-weight-regular">Add Service</div>
+            </div>
           </div>
-        </div>
-       </form>
+          <div class="row q-pa-md items-center">
+            <div class="col-md-12 full-width">
+              <q-input
+                v-model="formData.name"
+                @blur="v$.formData.name.$touch"
+                :error="v$.formData.name.$error"
+                class="text-weight-regular text-grey-8"
+                color="grey-9"
+                label="Enter Status"
+                placeholder="Enter Status"
+                @keyup.enter="fnfinalsubmitAddCancelStatus()"
+              />
+            </div>
+          </div>
+          <div class="row q-pa-md items-center justify-end">
+            <q-btn
+              flat
+              class="bg-white text-weight-regular text-grey-8 q-mr-sm"
+              @click="emitfnShowCancelStatus()"
+              label="Cancel"
+            />
+            <q-btn
+              @click="fnfinalsubmitAddCancelStatus()"
+              color="purple-9"
+              label="Save"
+            />
+          </div>
+        </form>
+      </q-card>
     </q-dialog>
   </div>
 </template>
+
 <script>
-import { required } from '@vuelidate/validators'
-import { mapGetters, mapActions } from 'vuex'
+import useVuelidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
+import { mapActions } from "vuex";
+
 export default {
-  props: ['propShowCancelStatus', 'propRowDetails3'],
-  data () {
+  props: ["propShowCancelStatus"],
+  setup() {
+    return { v$: useVuelidate() };
+  },
+  data() {
     return {
       toggleModel: this.propShowCancelStatus,
       formData: {
-        name: ''
-      }
-    }
+        name: "",
+      },
+    };
   },
-  validations: {
-    formData: {
-      name: {
-        required
-      }
-    }
+  validations() {
+    return {
+      formData: {
+        name: { required },
+      },
+    };
   },
   methods: {
-    ...mapActions('serviceRequestCancelled', ['POST_CANCEL_STATUS_TYPES']),
-
-    emitfnShowCancelStatus () {
-      this.$emit('emitfnShowCancelStatus')
+    ...mapActions("serviceRequestCancelled", ["POST_CANCEL_STATUS_TYPES"]),
+    emitfnShowCancelStatus() {
+      this.$emit("emitfnShowCancelStatus");
     },
-
-    fnfinalsubmitAddCancelStatus (formData) {
-      console.log('SUBMIT Sub Task RESPONSE', JSON.stringify(formData))
-      // this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
-        this.$q.notify('Please review fields again.')
+    fnfinalsubmitAddCancelStatus() {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
+        this.$q.notify("Please review fields again.");
       } else {
-        this.$q.loading.show({
-          delay: 100, // ms
-          message: 'Please Wait',
-          spinnerColor: 'purple-9',
-          customClass: 'shadow-none'
-        })
-        console.log('SUBMIT RESPONSE', JSON.stringify(formData))
-        this.POST_CANCEL_STATUS_TYPES(formData)
+        this.$q.loading.show({ message: "Please Wait" });
+        this.POST_CANCEL_STATUS_TYPES(this.formData)
           .then(() => {
-            this.$q.loading.hide()
-            this.$emit('emitfnShowCancelStatus', 'refresh')
+            this.$q.loading.hide();
+            this.$emit("emitfnShowCancelStatus", "refresh");
             this.$q.notify({
-              color: 'positive',
-              position: 'bottom',
-              message: 'Added Successfully',
-              icon: 'thumb_up'
-            })
+              color: "positive",
+              message: "Added Successfully",
+              icon: "thumb_up",
+            });
           })
-          .catch(error => {
-            this.$q.loading.hide()
+          .catch((error) => {
+            this.$q.loading.hide();
             this.$q.notify({
-              type: 'warning',
-              color: 'amber-9',
-              position: 'bottom',
-              message: error.data.message
-            })
-          })
+              color: "negative",
+              message: error.data?.message || "Error",
+            });
+          });
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>

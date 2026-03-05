@@ -1,207 +1,186 @@
 <template>
   <div>
     <q-dialog
-      minimized
       no-backdrop-dismiss
       no-esc-dismiss
       v-model="toggleModal1"
-        :content-css="{padding:'30px',minWidth: '40vw'}"
+      persistent
     >
-      <div
-        class="
-          row
-          items-center
-          q-px-lg q-py-md
-          text-weight-regular
-          bottom-border
-          text-grey-9
-        ">
-        <div class="col text-h6" icon="far fa-bell">Add Role/Permissions</div>
-     
+      <q-card style="min-width: 40vw">
+        <div
+            class="
+            row
+            items-center
+            q-px-lg q-py-md
+            text-weight-regular
+            bottom-border
+            text-grey-9
+            ">
+            <div class="col text-h6">Add Role/Permissions</div>
         </div>
-        <div class="column group q-py-sm">
-          <div class="col-md-8">
-           <q-select
-            v-model="formData.hierarchyId"
-            label="Hierarchy"
-            placeholder="Select Hierarchy"
-            class="text-weight-regular text-grey-8" color="grey-9"
-            :options="getAllHierarchiesData"
-              />
-          </div>
-          </div>
-          
-             
-          <div class="column group q-py-sm">
-          <div class="col-md-8">
-            <q-input v-model="formData.role" 
-            @blur="$v.formData.role.$touch"
-            :error="$v.formData.role.$error"
-            class="text-weight-regular text-grey-8" 
-            color="grey-9" 
-            label="Role"
-             placeholder="Role" /> 
-          </div>
+        <div class="q-pa-md">
+            <div class="column group q-py-sm">
+                <div class="col-md-8">
+                <q-select
+                    v-model="formData.hierarchyId"
+                    label="Hierarchy"
+                    placeholder="Select Hierarchy"
+                    class="text-weight-regular text-grey-8" color="grey-9"
+                    :options="getAllHierarchiesData"
+                    emit-value
+                    map-options
+                    />
+                </div>
+            </div>
 
-          <div class="column group q-py-sm">
-          <div class="col-md-8">
-            <q-color 
-              clearable
-              v-model="formData.roleColor"
-              @blur="$v.formData.roleColor.$touch"
-             :error="$v.formData.roleColor.$error"
-              popover label="Choose a role color" color="grey-9"
-            />
-          </div>
+            <div class="column group q-py-sm">
+                <div class="col-md-8">
+                    <q-input v-model="formData.role"
+                    @blur="v$.formData.role.$touch"
+                    :error="v$.formData.role.$error"
+                    class="text-weight-regular text-grey-8"
+                    color="grey-9"
+                    label="Role"
+                    placeholder="Role" />
+                </div>
+            </div>
+
+            <div class="column group q-py-sm">
+                <div class="col-md-8">
+                    <q-input
+                    v-model="formData.roleColor"
+                    label="Role Color"
+                    class="text-weight-regular text-grey-8"
+                    color="grey-9"
+                    >
+                    <template v-slot:append>
+                        <q-icon name="colorize" class="cursor-pointer">
+                        <q-menu>
+                            <q-color v-model="formData.roleColor" />
+                        </q-menu>
+                        </q-icon>
+                    </template>
+                    </q-input>
+                </div>
+            </div>
+
+            <div class="q-py-md">
+                <div class="row gutter-sm items-center">
+                    <div class="col-md-12">
+                        <div class="text-h6 text-weight-regular">Permission*</div>
+                    </div>
+                    <div v-for="propGetAllPermission in getAllPermissionData" :key="propGetAllPermission.value">
+                        <q-checkbox
+                        v-model="formData.tempPermission"
+                        @update:model-value="v$.formData.tempPermission.$touch"
+                        :val="propGetAllPermission.label"
+                        color="purple-9">
+                        <q-chip color="blue-grey-2" class="text-weight-regular text-grey-8">
+                            {{propGetAllPermission.label}}
+                        </q-chip>
+                        </q-checkbox>
+                    </div>
+                </div>
+                 <div class="col-md-12 text-red text-weight-medium text-caption"
+                  v-if="v$.formData.tempPermission.$error">*Permission is mandatory</div>
+            </div>
+
+            <div class="row justify-end q-mt-md">
+                <q-btn flat label="Cancel" @click="emitModalClose" class="q-mr-sm" />
+                <q-btn color="purple-9" label="Save" @click="fnfinalsubmit(formData)" />
+            </div>
         </div>
-
-          <div class="group" align="right">
-          <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitToggleMyAccount()">Cancel
-          </q-btn>
-          <q-btn size="md" align="right" @click="fnAddRoleSubmit(formData)" color="purple-9">Save
-          </q-btn>
-        </div>
-        
-      </div>
-
-     
-
+      </q-card>
     </q-dialog>
   </div>
 </template>
 
 <script>
+import useVuelidate from "@vuelidate/core";
+import { required, minLength } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
-import { required, minLength, maxLength } from "@vuelidate/validators";
+import _ from "lodash";
+
 export default {
-  name: "changePassword",
-  props: ["propsToggleModal1"],
+  props: ["propShowAddRole"],
+  setup() {
+      return { v$: useVuelidate() };
+  },
   data() {
     return {
-      toggleModal1: this.propsToggleModal1,
-      currentPasswordMatched: false,
+      toggleModal1: this.propShowAddRole,
       formData: {
-          roleColor: "",
-          role: "",
-          hierarchyId: "",
-          // roleId: this.propRowDetails.id,
-          // role: this.propRowDetails.role,
-          // hierarchyId: this.propRowDetails.hierarchy.id,
-          // roleColor: this.propRowDetails.roleColor,
-      },
-      propGetAllHierarchiesData: [],
+        hierarchyId: "",
+        role: "",
+        roleColor: "#61116a",
+        tempPermission: [],
+        permission: []
+      }
     };
-
-    
-  },
-   validations: {
-    formData: {
-        roleColor: { required },
-        role: { required }
-    }
-  },
-   error: {
-    formData: {
-    
-        roleColor: {
-          alert: false,
-          issue: "",
-          value: ""
-        },
-         role: {
-          alert: false,
-          issue: "",
-          value: ""
-        }
-    }
-    
   },
 
- 
-  beforeMount() {
-   
-  },
-  computed: {
-     ...mapGetters("SuperAdminUsers", [
-      "getAllRolesPermissions",
-      "getAllFilterRoles",
-      "getAllHierarchiesData",
-    ]),
-   
-    // ...mapGetters("NotificationDatas", ["getnotificationDatas"]),
-   
+  validations() {
+      return {
+          formData: {
+              role: { required },
+              tempPermission: { required, minLength: minLength(1) }
+          }
+      }
   },
 
   created() {
-     this.ajaxLoadAllLeadInfo();
-  },
-  methods: {
-    // ...mapActions("Authentication", ["CHANGE_PASSWORD"]),
-    // ...mapActions("NotificationDatas", ["FETCH_NOTIFICATION_DATAS"]),
-    ...mapActions("addRole", ["UPDATE_ROLE_DATA"]),
-     ...mapActions("SuperAdminUsers", [
-      "FETCH_ALL_ROLES_PERMISSIONS_DATA",
-      "FETCH_ALL_HIERARCHIES_DATA",
-      "DELETE_ROLE_BY_ROLE_ID_DATA",
-    ]),
-
-    emitToggleMyAccount() {
-      this.$emit("propsToggleModal1");
-    },
-
-    fnAddRoleSubmit(formData){
-      
-      this.$v.formData.$touch();
-
-      if (this.$v.formData.$error) {
-        this.$q.notify("Please review fields again.");
-      } else {
-        this.$q.loading.show({
-          delay: 100, // ms
-          message: "Please Wait",
-          spinnerColor: "purple-9",
-          customClass: "shadow-none",
-        });
-        this.UPDATE_ROLE_DATA(formData)
-          .then(() => {
-            console.log("POST store >> AFTER >>");
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully updated!",
-              icon: "thumb_up"
-            });
-            this.$router.push("/super/admin/roles/permissions/");          
-          //  this.FETCH_ALL_USERS_DATA();
-          //   this.$emit("emitfnShowEditUser", showEditUser);
-            this.$emit("propsToggleModal1");
-          })
-          .catch(error => {
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-              icon: "thumb_down"
-            });
-          });
-      }
-    },
-    // getNotificationTitle(){
-    //  <q-item v-for = "nofication in this.">
-    //  </q-item>
-    // },
-    ajaxLoadAllLeadInfo() {
       this.FETCH_ALL_HIERARCHIES_DATA();
-    },
- 
+      this.FETCH_ALL_PERMISSION_DATA();
   },
+
+  computed: {
+    ...mapGetters("SuperAdminUsers", ["getAllHierarchiesData", "getAllPermissionData"])
+  },
+
+  methods: {
+    ...mapActions("SuperAdminUsers", ["FETCH_ALL_HIERARCHIES_DATA", "FETCH_ALL_PERMISSION_DATA", "FEED_ROLE_DATA"]),
+
+    emitModalClose() {
+        this.$emit("emitfnShowAddRole");
+    },
+
+    fnfinalsubmit(formData) {
+        this.v$.formData.$touch();
+        if (this.v$.formData.$error) {
+            this.$q.notify("Please review fields again.");
+        } else {
+            let arr = [];
+            this.formData.tempPermission.forEach(item => {
+                arr.push({ permission: item });
+            });
+            this.formData.permission = arr;
+
+            let payload = {
+                hierarchy: { id: this.formData.hierarchyId },
+                role: this.formData.role,
+                roleColor: this.formData.roleColor,
+                permission: this.formData.permission,
+                active: true
+            };
+
+            this.$q.loading.show({ message: "Saving..." });
+            this.FEED_ROLE_DATA(payload).then(response => {
+                this.$q.loading.hide();
+                this.$q.notify({ color: "positive", message: "Successfully added!" });
+                this.emitModalClose();
+                this.$emit("emitfnForRoleTable");
+            }).catch(error => {
+                this.$q.loading.hide();
+                this.$q.notify({ color: "negative", message: error.data?.message || "Error" });
+            });
+        }
+    }
+  }
 };
 </script>
 
-<style>
-.error1 {
-  color: grey;
+<style scoped>
+.bottom-border {
+  border-bottom: 1px solid #dcdcdc;
 }
 </style>

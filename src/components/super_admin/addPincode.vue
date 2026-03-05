@@ -1,63 +1,71 @@
 <template>
-  <q-dialog
-    v-model="toggleModel"
-    persistent
-    class="customModalOverlay"
-  >
-    <q-card style="min-width: 400px; padding: 20px;">
-      <q-card-section class="row items-center q-pb-none">
-        <div class="text-h6 text-purple-9">Add Pincode</div>
-        <q-space />
-        <q-btn icon="close" flat round dense v-close-popup @click="emitfnshowAddPincode" />
-      </q-card-section>
-
-      <q-card-section>
-        <q-form @submit="submitPincode" class="q-gutter-md">
-          <q-input
-            outlined
-            dense
-            v-model="formData.pincode"
-            label="Pincode*"
-            :error="v$.formData.pincode.$error"
-            color="purple-9"
-          />
-          <q-input
-            outlined
-            dense
-            v-model="formData.stateName"
-            label="State Name*"
-            :error="v$.formData.stateName.$error"
-            color="purple-9"
-          />
-          <q-input
-            outlined
-            dense
-            v-model="formData.cityName"
-            label="City Name*"
-            :error="v$.formData.cityName.$error"
-            color="purple-9"
-          />
-
-          <div class="row justify-end q-mt-md q-gutter-x-sm">
-            <q-btn flat label="Cancel" color="grey-7" @click="emitfnshowAddPincode" />
-            <q-btn unelevated label="Save" color="purple-9" type="submit" />
+  <div>
+    <q-dialog
+      no-backdrop-dismiss
+      class="customModalOverlay"
+      v-model="toggleModel"
+      persistent
+      @hide="emitfnshowAddPincode"
+    >
+      <q-card style="min-width: 30vw">
+        <div class="column q-pa-md items-center border-bottom">
+          <div class="col-md-12 full-width">
+            <div class="text-h6 text-weight-regular">Add Pincode</div>
           </div>
-        </q-form>
-      </q-card-section>
-    </q-card>
-  </q-dialog>
+        </div>
+        <div class="q-pa-md">
+            <q-input
+              v-model="formData.pincode"
+              :error="v$.formData.pincode.$error"
+              class="text-weight-regular text-grey-8"
+              color="grey-9"
+              label="Pincode*"
+              placeholder="Pincode*"
+            />
+            <q-input
+              v-model="formData.stateName"
+              :error="v$.formData.stateName.$error"
+              class="text-weight-regular text-grey-8"
+              color="grey-9"
+              label="State name"
+              placeholder="State name"
+            />
+            <q-input
+              v-model="formData.cityName"
+              :error="v$.formData.cityName.$error"
+              class="text-weight-regular text-grey-8"
+              color="grey-9"
+              label="City name"
+              placeholder="City name"
+            />
+            <q-select
+                v-model="formData.region"
+                :options="regionOptions"
+                label="Region"
+                class="text-weight-regular text-grey-8"
+                color="grey-9"
+                emit-value
+                map-options
+            />
+        </div>
+        <div class="row q-pa-md justify-end">
+            <q-btn flat class="bg-white text-weight-regular text-grey-8 q-mr-sm" @click="emitfnshowAddPincode">Cancel</q-btn>
+            <q-btn color="purple-9" label="Save" @click="submitPincode(formData)" />
+        </div>
+      </q-card>
+    </q-dialog>
+  </div>
 </template>
 
 <script>
-import { useVuelidate } from "@vuelidate/core";
-import { required, maxLength, minLength } from "@vuelidate/validators";
-import { mapActions } from "vuex";
+import useVuelidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "AddPincode",
   props: ["propShowCreatePincodes"],
   setup() {
-    return { v$: useVuelidate() };
+      return { v$: useVuelidate() };
   },
   data() {
     return {
@@ -65,47 +73,60 @@ export default {
       formData: {
         pincode: "",
         stateName: "",
-        cityName: ""
-      }
+        cityName: "",
+        region: ""
+      },
+      regionOptions: []
     };
   },
   validations() {
-    return {
-      formData: {
-        pincode: { required, maxLength: maxLength(7), minLength: minLength(5) },
-        stateName: { required },
-        cityName: { required }
+      return {
+          formData: {
+              pincode: { required },
+              stateName: { required },
+              cityName: { required }
+          }
       }
-    };
+  },
+  created() {
+      this.ajaxLoadInitialData();
   },
   methods: {
-    ...mapActions("pincodes", ["FETCH_ALL_PINCODES", "ADD_NEW_PINCODE"]),
+    ...mapActions("Region", ["FETCH_REGIONS_DATA"]),
+    ...mapActions("SuperAdminUsers", ["SUBMIT_PINCODE_DATA"]),
+
+    ajaxLoadInitialData() {
+        this.FETCH_REGIONS_DATA().then(response => {
+            this.regionOptions = response.data.map(item => ({ label: item.regionName, value: item.id }));
+        });
+    },
 
     emitfnshowAddPincode() {
       this.$emit("emitfnshowAddPincodes");
     },
 
-    async submitPincode() {
-      const isValid = await this.v$.$validate();
-      if (!isValid) {
-        this.$q.notify({ color: "warning", message: "Please review fields again." });
-        return;
-      }
-
-      this.$q.loading.show({ message: "Please Wait" });
-      this.ADD_NEW_PINCODE(this.formData)
-        .then(() => {
-          this.FETCH_ALL_PINCODES();
-          this.$emit("emitfnshowAddPincodes");
-          this.$q.notify({ color: "positive", message: "Pincode successfully created!" });
-        })
-        .catch(error => {
-          this.$q.notify({
-            color: "negative",
-            message: error.body?.message || "Please Try Again Later !"
-          });
-        })
-        .finally(() => this.$q.loading.hide());
+    submitPincode(formData) {
+        this.v$.formData.$touch();
+        if (this.v$.formData.$error) {
+            this.$q.notify("Please review fields again.");
+        } else {
+            this.$q.loading.show({ message: "Saving..." });
+            let payload = {
+                pincode: formData.pincode,
+                state: formData.stateName,
+                city: formData.cityName,
+                region: { id: formData.region },
+                active: true
+            };
+            this.SUBMIT_PINCODE_DATA(payload).then(response => {
+                this.$q.notify({ color: "positive", message: "Successfully added!" });
+                this.emitfnshowAddPincode();
+                this.$q.loading.hide();
+            }).catch(error => {
+                this.$q.notify({ color: "negative", message: error.data?.message || "Error" });
+                this.$q.loading.hide();
+            });
+        }
     }
   }
 };
