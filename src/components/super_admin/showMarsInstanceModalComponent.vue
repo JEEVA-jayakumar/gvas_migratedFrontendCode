@@ -228,6 +228,7 @@ import { mapGetters, mapActions } from "vuex";
       this.GET_MARS_INSTITUTION_DETAILS();
     },
     computed: {
+    $v() { return this.v$; },
       ...mapGetters("leadSource", [
         "getActiveLeadSource",
         "getDeActivatedLeadSource"

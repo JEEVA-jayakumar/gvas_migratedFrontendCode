@@ -124,9 +124,8 @@ export default {
       }
     }
   },
-
   computed: {
-    () { return this.v$; }
+    $v() { return this.v$; }
   },
   methods: {
     ...mapActions("SA_Devices", ["UPDATE_DEVICE_DATA", "FETCH_DEVICES_DATA"]),

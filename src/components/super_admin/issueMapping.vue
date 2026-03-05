@@ -260,6 +260,7 @@ export default {
   },
 
   computed: {
+    $v() { return this.v$; },
     ...mapGetters("serviceRequest", [
       "getactiveIssueMapping",
       "getdeactiveIssueMapping"

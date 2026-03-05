@@ -62,7 +62,7 @@ export default {
     }
   },
   computed: {
-    () { return this.v$; }
+    $v() { return this.v$; }
   },
   methods: {
     ...mapActions('serviceRequestCancelled', ['POST_CANCEL_STATUS_TYPES']),

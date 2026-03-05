@@ -229,6 +229,7 @@ export default {
     this.LEAD_SOURCE_ACTIVE_LIST();
   },
   computed: {
+    $v() { return this.v$; },
     ...mapGetters("leadSource", [
       "getActiveLeadSource",
       "getDeActivatedLeadSource"

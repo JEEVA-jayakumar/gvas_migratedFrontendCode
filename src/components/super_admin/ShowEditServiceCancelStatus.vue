@@ -64,7 +64,7 @@ export default {
     }
   },
   computed: {
-    () { return this.v$; }
+    $v() { return this.v$; }
   },
   methods: {
     ...mapActions('serviceRequestCancelled', ['EDIT_SERVICE_CANCEL_STATUS_TYPES']),

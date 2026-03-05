@@ -160,7 +160,7 @@ export default {
     }
   },
   computed: {
-    () { return this.v$; }
+    $v() { return this.v$; }
   },
   methods: {
     ...mapActions("merchantDocumentTypes", ["ADD_NEW_MERCHANT_DOCUMENT_TYPE"]),

@@ -162,9 +162,8 @@ export default {
       // },
     }
   },
-
   computed: {
-    () { return this.v$; }
+    $v() { return this.v$; }
   },
   methods: {
     ...mapActions("leadSource", ["ADD_NEW_LEAD_SOURCE"]),

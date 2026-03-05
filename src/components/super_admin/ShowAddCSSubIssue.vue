@@ -77,16 +77,13 @@ export default {
       },
     },
   },
-computed:{
+computed: {
+    $v() { return this.v$; },
      ...mapGetters("serviceRequest", ["getcsSubIssueDetails"])
 },
 created(){
     this.fnAddCsSubIssueDetails();
 },
-
-  computed: {
-    () { return this.v$; }
-  },
   methods: {
     ...mapActions("serviceRequest", ["FETCH_CS_SUB_ISSUE_DATAS","POST_CS_SUB_ISSUE"]),
     emitfnShowAddNewCsSubIssue() {

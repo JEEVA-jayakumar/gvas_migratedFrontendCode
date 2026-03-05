@@ -47,6 +47,9 @@ export default {
       loading: false
     };
   },
+  computed: {
+    $v() { return this.v$; }
+  },
   methods: {
     async handleSync() {
       this.loading = true;

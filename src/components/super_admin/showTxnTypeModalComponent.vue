@@ -197,6 +197,7 @@ export default {
     this.ajaxLoadAllLeadInfo();
   },
   computed: {
+    $v() { return this.v$; },
     ...mapGetters("leadSource", [
       "getActiveLeadSource",
       "getDeActivatedLeadSource"

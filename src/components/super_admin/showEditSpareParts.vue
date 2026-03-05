@@ -92,11 +92,9 @@ export default {
     // this.AllRegionName();
     //   console.log("Region Name---------------->"+JSON.stringify(this.formData.regionGroupName))
   },
-  computed:{
-     ...mapGetters("SuperAdminUsers", ["getAllRegionsData"]),
-  },
   computed: {
-    () { return this.v$; }
+    $v() { return this.v$; },
+     ...mapGetters("SuperAdminUsers", ["getAllRegionsData"]),
   },
   methods: {
     ...mapActions("SuperAdminUsers", [

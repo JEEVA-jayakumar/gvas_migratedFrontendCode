@@ -110,6 +110,7 @@ export default {
   },
 
   computed: {
+    $v() { return this.v$; },
     ...mapGetters('SuperAdminUsers', ['getAllRegionsData']),
     ...mapGetters('serviceRequest', ['getserviceRequestIssueTypes']),
     ...mapGetters('ServiceRequestStatus', ['getserviceRequestStatusDetails'])

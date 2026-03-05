@@ -69,13 +69,9 @@ export default {
   },
 computed:{
      ...mapGetters("SuperAdminUsers", ["getAllRegionsData"]),
-     ...mapGetters("regionGroupDatas", ["getAllRegionGroupData"])
-
+     ...mapGetters("regionGroupDatas", ["getAllRegionGroupData"]),
+     $v() { return this.v$; }
 },
-
-  computed: {
-    () { return this.v$; }
-  },
   methods: {
     ...mapActions("SuperAdminUsers", [
       "FETCH_ALL_REGIONS_DATA",

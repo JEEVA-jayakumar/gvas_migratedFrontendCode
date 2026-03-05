@@ -125,6 +125,7 @@ export default {
   },
 
   computed: {
+    $v() { return this.v$; },
     ...mapGetters("leadSource", ["getActiveLeadSource"]),
     ...mapGetters("ACTIVE_DEACTIVE_LEAD_SOURCE", [
       "getActiveandDeactiveLeadSource"

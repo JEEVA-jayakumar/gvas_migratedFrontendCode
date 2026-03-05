@@ -220,6 +220,7 @@ export default {
     };
   },
   computed: {
+    $v() { return this.v$; },
     ...mapGetters("RegionWiseUsers", ["getRegionWiseList"]),
     ...mapGetters("SuperAdminUsers", ["getAllUsers"])
   },

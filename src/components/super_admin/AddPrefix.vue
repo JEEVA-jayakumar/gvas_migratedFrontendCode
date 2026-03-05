@@ -132,6 +132,7 @@ export default {
     this.ajaxLoadDataForDeviceTypeTable();
   },
   computed: {
+    $v() { return this.v$; },
     ...mapGetters("SA_Devices", ["getAllDevicesInfo", "getMarsDeviceModel"]),
     ...mapGetters("leadSource", ["getActiveLeadSource"]),
     ...mapGetters("SA_Devices", ["getAllDevicesInfo"]),

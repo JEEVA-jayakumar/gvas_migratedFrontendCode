@@ -210,6 +210,7 @@ export default {
   },
 
   computed: {
+    $v() { return this.v$; },
     ...mapGetters('serviceRequest', [
       'getserviceRequestGetTypes',
       'getsubTaskDetails'

@@ -173,9 +173,8 @@ export default {
   beforeMount(){
     console.log("beforeMount Datas -------------->",JSON.stringify(this.propRowDetails))
   },
-
   computed: {
-    () { return this.v$; }
+    $v() { return this.v$; }
   },
   methods: {
     ...mapActions("leadSource", ["UPDATE_LEAD_SOURCE"]),

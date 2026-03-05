@@ -125,6 +125,7 @@ import { required } from "@vuelidate/validators";
       this.formData.name= this.propRowDetails2.name;
     },
     computed: {
+    $v() { return this.v$; },
       ...mapGetters("serviceRequest", ["getcsActiveSubIssueDetails"]),
     },
   
