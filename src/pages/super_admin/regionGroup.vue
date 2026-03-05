@@ -39,7 +39,7 @@
                 <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.."
                   class="q-mr-lg" />
               </div>
-              <div class="col-6" align="right">
+              <div class="col-6" align="side">
                 <q-btn no-caps class="text-weight-regular" label="Add New RegionGroup"
                   @click="fnShowAddNewRegionsGroups(activeTableData[0])" color="purple-9" size="md" />
               </div>
@@ -97,6 +97,7 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from '@vuelidate/validators';
 import showCreateRegion from "../../components/super_admin/showCreateRegions.vue";
 import showEditRegionGroup from "../../components/super_admin/showEditRegionGroup.vue";
@@ -104,6 +105,7 @@ import ShowAddNewRegions from "../../components/super_admin/ShowAddNewRegions.vu
 import ShowAddNewRegionGroup from "../../components/super_admin/ShowAddNewRegionGroup.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() { return { v$: useVuelidate() } },
     name: "regions",
     components: {
         showCreateRegion,
@@ -139,7 +141,7 @@ export default {
                     name: "regionGroup",
                     required: true,
                     label: "Region group",
-                    align: "left",
+                    align: "",
                     field: row => {
                         return row.regionName;
                     },
@@ -149,7 +151,7 @@ export default {
                 //   name: "label",
                 //   required: true,
                 //   label: "Region",
-                //   align: "left",
+                //   align: "",
                 //   field: "regionAreaName",
                 //   sortable: false
                 // },
@@ -157,7 +159,7 @@ export default {
                     name: "action",
                     required: true,
                     label: "",
-                    align: "left",
+                    align: "",
                     field: "action",
                     sortable: false
                 }
@@ -167,7 +169,7 @@ export default {
                     name: "regionGroup",
                     required: true,
                     label: "Region group",
-                    align: "left",
+                    align: "",
                     field: row => {
                         return row.regionName;
                     },
@@ -177,7 +179,7 @@ export default {
                 //   name: "label",
                 //   required: true,
                 //   label: "Region",
-                //   align: "left",
+                //   align: "",
                 //   field: "regionAreaName",
                 //   sortable: false
                 // },
@@ -185,7 +187,7 @@ export default {
                     name: "action1",
                     required: true,
                     label: "",
-                    align: "left",
+                    align: "",
                     field: "action1",
                     sortable: false
                 }
@@ -233,7 +235,7 @@ export default {
                     this.$q.notify({
                         color: "negative",
                         position: "bottom",
-                        message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                        message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
                         icon: "thumb_down",
                     });
                 });
@@ -251,7 +253,7 @@ export default {
                     message: "Are you sure want to Active Region?",
                     ok: "Continue",
                     cancel: "Cancel"
-                }).onOk(() => {
+                }).then(() => {
                     this.$q.loading.show({
                         delay: 100, // ms
                         message: "Please Wait",
@@ -273,7 +275,7 @@ export default {
                                 icon: "thumb_up"
                             });
                             this.$q.loading.hide();
-                        }).catch(error => {
+                        }).catch(() => {
                             this.$q.notify({
                                 color: "warning",
                                 position: "bottom",
@@ -307,7 +309,7 @@ export default {
                     message: "Are you sure want to delete region?",
                     ok: "Continue",
                     cancel: "Cancel"
-                }).onOk(() => {
+                }).then(() => {
                     this.$q.loading.show({
                         delay: 100, // ms
                         message: "Please Wait",
@@ -323,7 +325,7 @@ export default {
                                 message: "Successfully removed",
                                 icon: "thumb_up"
                             });
-                        }).onCancel(error => {
+                        }).catch(error => {
                             this.$q.notify({
                                 color: "negative",
                                 position: "bottom",

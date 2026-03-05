@@ -57,7 +57,7 @@
       <!-- <br />
       <br />
       <div class="row group">
-        <div class="col group" align="right">
+        <div class="col group" align="side">
           <q-btn
             :disabled="formData.selectQRDownload.length == 0"
             color="green"
@@ -73,6 +73,7 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import { date } from "quasar";
@@ -81,6 +82,7 @@ import editRegion from "../../components/inventory/editRegion.vue";
 import downloadExcel from "vue-json-excel";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "merchantTracker",
   components: {
     editRegion,
@@ -174,7 +176,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false
         }
@@ -214,8 +216,7 @@ export default {
             message: "Success, file has been downloaded",
             icon: "check"
           });
-        })
-        .catch(error => {
+        }).catch(() => {
           // this.formData.selectQRDownload = [];
           // console.log("select code", usersSelectSync);
           this.$q.loading.hide();

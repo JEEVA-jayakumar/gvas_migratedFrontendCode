@@ -1,0 +1,48 @@
+    //   path: "addLeadSource",
+    //   path: "existing/mATM/plan/edit/matm/plans/:id/:page?/:perPage?",
+    //   path: "manage/vasUpdates",
+    //   path: "users/:page?",
+/super/admin/
+add/Multi/Tid/Configuration
+add/New/Hierarchy
+addLeadSourceVasDeviceConfig
+addNewPrefixConfig
+dashboard
+device/types
+hierarchy
+manage/APISync
+manage/CityApiSync
+manage/DeviceModelApiSync
+manage/LeadFormApiSync
+manage/QR/Sticker
+manage/RegionApiSync
+manage/RentalPlanApiSync
+manage/StateApiSync
+manage/add/mdr/charges
+manage/add/rental/charges
+manage/aggregators
+manage/aggregatorsDevice
+manage/existingmATMplan
+manage/existingmATMplan/editMatmPlans/:id/:page?/:perPage?
+manage/mATMplan
+manage/mdr/bankSO
+manage/mdr/charges
+manage/mdrCharges
+manage/merchant/types
+manage/multiTid
+manage/newRentalCharges
+manage/notifications
+manage/prefixConfig
+manage/rental/charges
+manage/serialupdate
+manage/serviceRequest
+permissions
+pincodes
+regionGroup
+regions
+roles/permissions
+sparePartsTypes
+subregions
+users/:page?
+users/add/user
+users/edit/user/:id/:page?/:perPage?

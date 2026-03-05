@@ -45,7 +45,7 @@
               <!-- <div class="col-3">
                 <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." class="q-mr-lg" />
               </div> -->
-              <div class="col-7" align="right">
+              <div class="col-7" align="side">
                 <q-btn no-caps class="text-weight-regular" label="Add Service Type"
                   @click="fnShowAddNewServiceType(props.row)" color="purple-9" size="md" />
               </div>
@@ -115,6 +115,7 @@
   </q-page>
 </template>
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from '@vuelidate/validators';
 import ShowAddServiceType from "../../components/super_admin/ShowAddServiceType.vue";
 import showEditServiceType from "../../components/super_admin/showEditServiceType.vue";
@@ -123,6 +124,7 @@ import ShowAddSubTaskType from "../../components/super_admin/ShowAddSubTaskType.
 import showActiveServiceType from "../../components/super_admin/showActiveServiceType.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "getserviceRequestGetTypes",
   components: {
     ShowAddServiceType,
@@ -168,7 +170,7 @@ export default {
           name: "service_req_data",
           required: true,
           label: "Service Req Data",
-          align: "left",
+          align: "",
           // disable: row => {
           //   return row.serviceReqType.active == false;
           // },
@@ -182,7 +184,7 @@ export default {
           name: "serviceReqIssueTypeSets",
           required: true,
           label: "Service Req Issue TypeSets",
-          align: "left",
+          align: "",
           field: row => {
             return row.serviceReqIssueTypeSets != null ? row.serviceReqIssueTypeSets.serviceReqIssueType.name : "NA";
           },
@@ -193,7 +195,7 @@ export default {
           name: "serviceRequestStatusSets",
           required: true,
           label: "Service Status",
-          align: "left",
+          align: "",
           field: row => {
             return row.serviceRequestStatusSets != null ? row.serviceRequestStatusSets.serviceRequestStatus.name : "NA";
           },
@@ -204,7 +206,7 @@ export default {
           name: "action1",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action1",
           sortable: false
         }
@@ -214,7 +216,7 @@ export default {
           name: "service_req_data",
           required: true,
           label: "Service Req Data",
-          align: "left",
+          align: "",
           // disable: row => {
           //   return row.serviceReqType.active == false;
           // },
@@ -228,7 +230,7 @@ export default {
           name: "serviceReqIssueTypeSets",
           required: true,
           label: "Service Req Issue TypeSets",
-          align: "left",
+          align: "",
           field: row => {
             return row.serviceReqIssueTypeSets != null ? row.serviceReqIssueTypeSets.serviceReqIssueType.name : "NA";
           },
@@ -239,7 +241,7 @@ export default {
           name: "serviceRequestStatusSets",
           required: true,
           label: "Service Status",
-          align: "left",
+          align: "",
           field: row => {
             return row.serviceRequestStatusSets != null ? row.serviceRequestStatusSets.serviceRequestStatus.name : "NA";
           },
@@ -250,7 +252,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false
         }
@@ -300,7 +302,7 @@ export default {
           message: "Are you sure want to delete?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -319,15 +321,15 @@ export default {
             this.$q.loading.hide();
                this.ajaxSpareData();
             });
-          }).onCancel(error => {
+          }).catch(error => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
+                error.data?.message == null
                   ? "Please Try Again Later !"
-                  : error.body.message,
+                  : error.data?.message,
               icon: "thumb_down"
             });
           });
@@ -340,7 +342,7 @@ export default {
           message: "Are you sure want to active this issue?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
             this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -358,15 +360,15 @@ export default {
             });
             this.emitfnshowEditServiceType();
           })
-        }).onCancel(error => {
+        }).catch(error => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
+                error.data?.message == null
                   ? "Please Try Again Later !"
-                  : error.body.message,
+                  : error.data?.message,
               icon: "thumb_down"
             });
           });
@@ -380,7 +382,7 @@ export default {
           message: "Are you sure want to delete?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -400,7 +402,7 @@ export default {
                this.ajaxSpareData();
             });
          
-        }).onCancel(() => {
+        }).catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

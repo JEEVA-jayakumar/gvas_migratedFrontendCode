@@ -8,6 +8,8 @@
         class="customModalOverlay"
         :content-css="{padding:'30px',minWidth: '30vw'}"
         >
+<q-card style="min-width: 350px;">
+
             <form>
                 <div class="row gutter-sm q-py-sm items-center">
                     <div class="col-md-12">
@@ -27,17 +29,20 @@
                     </div>
                 </div>
                 <div class="row gutter-sm q-py-sm items-center">
-                    <div class="col-md-12 group" align="right">
-                        <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowAddNewServiceStatus()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitAddServiceStatus(formData)" color="purple-9">Save</q-btn>
+                    <div class="col-md-12 group" align="side">
+                        <q-btn flat align="side" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowAddNewServiceStatus()">Cancel</q-btn>
+                        <q-btn align="side" @click="fnfinalsubmitAddServiceStatus(formData)" color="purple-9">Save</q-btn>
                     </div>
                 </div>
             </form>
-        </q-dialog>
+
+</q-card>
+</q-dialog>
     </div>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from '@vuelidate/validators'
 import { mapGetters, mapActions } from 'vuex'
 
@@ -55,6 +60,9 @@ export default {
         name: ''
       }
     }
+  },
+  setup() {
+    return { v$: useVuelidate() };
   },
   validations: {
     formData: {
@@ -95,8 +103,7 @@ export default {
             })
           })
           this.selectServiceReqType = assumeArr
-        })
-        .catch(error => {
+        }).catch(() => {
           this.selectServiceReqType = []
         })
     },
@@ -124,8 +131,7 @@ export default {
               message: 'Added Successfully',
               icon: 'thumb_up'
             })
-          })
-          .catch(error => {
+          }).catch(() => {
             this.$q.loading.hide()
             this.$q.notify({
               type: 'warning',

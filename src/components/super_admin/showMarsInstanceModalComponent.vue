@@ -1,18 +1,20 @@
 <template>
     <q-dialog
       minimized
-      position="right"
+      position="side"
       v-model="toggleModal"
-      no-backdrop-dismiss
+      persistent
       @escape-key="emitModalClose"
       class="customModalOverlay"
       :content-css="{padding:'25px',paddingTop:'60px',minWidth:'40vw',minHeight:'100vh'}"
     >
+<q-card style="min-width: 350px;">
+
       <div class="row items-center bottom-border q-py-sm fit">
         <div class="col">
           <div class="text-h6 text-weight-regular">Manage Mars Instance</div>
         </div>
-        <div class="col" align="right">
+        <div class="col" align="side">
           <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
         </div>
       </div>
@@ -69,7 +71,7 @@
                   label="Search lead source"
                 />
               </div>
-              <div class="col-4" align="right">
+              <div class="col-4" align="side">
                 <q-btn
                   no-caps
                   no-wrap
@@ -138,15 +140,19 @@
         @emitfnshowMarsInstance="refreshLeadSourceList"
       ></showEditInstance>
       <!--END: Show edit LeadSources -->
-    </q-dialog>
+
+</q-card>
+</q-dialog>
   </template>
   
   <script>
-  import { mapGetters, mapActions } from "vuex";
+  import { useVuelidate } from "@vuelidate/core";
+import { mapGetters, mapActions } from "vuex";
   import { required } from "@vuelidate/validators";
   import showCreatemarsInstance from "./marsInstanceCreate.vue";
   import showEditInstance from "./editMarsInstance.vue";
   export default {
+  setup() { return { v$: useVuelidate() } },
     props: ["propToggleModal"],
     // name: 'ComponentName',
     components: {
@@ -183,7 +189,7 @@
             name: "institutionName",
             required: true,
             label: "Institution Name",
-            align: "left",
+            align: "",
             field: "institutionName",
             sortable: false
           },
@@ -191,7 +197,7 @@
             name: "action",
             required: true,
             label: "",
-            align: "left",
+            align: "",
             field: "action",
             sortable: false
           }
@@ -201,7 +207,7 @@
         //     name: "institutionName",
         //     required: true,
         //     label: "Institution Name",
-        //     align: "left",
+        //     align: "",
         //     field: "institutionName",
         //     sortable: false
         //   },
@@ -209,7 +215,7 @@
         //     name: "action",
         //     required: true,
         //     label: "",
-        //     align: "left",
+        //     align: "",
         //     field: "action",
         //     sortable: false
         //   }
@@ -275,7 +281,7 @@
             message: "Are you sure want to disable lead source?",
             ok: "Continue",
             cancel: "Cancel"
-          }).onOk(() => {
+          }).then(() => {
             this.$q.loading.show({
               delay: 100, // ms
               message: "Please Wait",
@@ -291,7 +297,7 @@
                   message: "Instance deactivated",
                   icon: "thumb_up"
                 });
-              }).onCancel(error => {
+              }).catch(error => {
                 this.$q.notify({
                   color: "warning",
                   position: "bottom",
@@ -300,8 +306,7 @@
                 });
               });
             this.$q.loading.hide();
-          })
-          .onCancel(() => {
+          }).catch(() => {
             this.$q.notify({
               color: "negative",
               position: "bottom",
@@ -318,7 +323,7 @@
             message: "Are you sure want to Active Instance?",
             ok: "Continue",
             cancel: "Cancel"
-          }).onOk(() => {
+          }).then(() => {
             this.$q.loading.show({
               delay: 100, // ms
               message: "Please Wait",
@@ -340,7 +345,7 @@
                   message: "Mars Instance Activated",
                   icon: "thumb_up"
                 });
-              }).onCancel(error => {
+              }).catch(error => {
                 this.$q.notify({
                   color: "warning",
                   position: "bottom",

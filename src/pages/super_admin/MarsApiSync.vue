@@ -8,7 +8,7 @@
             active-color="dark"
             indicator-color="dark"
             class="shadow-1"
-            align="left"
+            align=""
           >
             <q-tab name="DeviceModelApiSync" label="DeviceModel" />
             <q-tab name="CityApiSync" label="City" />
@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import DeviceModelApiSync from "../../pages/super_admin/DeviceModelApiSync.vue";
 import CityApiSync from "../../pages/super_admin/CityApiSync.vue";
 import RegionApiSync from "../../pages/super_admin/RegionApiSync.vue";
@@ -53,6 +54,7 @@ import LeadFormApiSync from "../../pages/super_admin/LeadFormApiSync.vue";
 import StateApiSync from "../../pages/super_admin/StateApiSync.vue";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "marsApiSync",
 
   components: {

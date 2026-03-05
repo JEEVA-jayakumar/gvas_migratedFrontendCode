@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="col-md-6 q-my-md" align="right">
+    <div class="col-md-6 q-my-md" align="side">
       <div class="col group">
       </div>
     </div>
@@ -122,8 +122,7 @@ export default {
               icon: "thumb_up"
             });
             this.resetForm();
-          })
-          .catch(error => {
+          }).catch(() => {
             this.$q.loading.hide();
             this.$q.notify({
               type: "warning",

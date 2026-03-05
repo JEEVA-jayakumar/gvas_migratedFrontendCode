@@ -2,13 +2,15 @@
   <div>
     <q-dialog
       minimized
-      no-backdrop-dismiss
+      persistent
       class="customModalOverlay"
       v-model="toggleModel"
       @hide="emitfnshowEditPincode()"
       @escape-key="emitfnshowEditPincode()"
       :content-css="{padding:'30px',minWidth: '40vw'}"
     >
+<q-card style="min-width: 350px;">
+
       <form>
         <div class="column group">
           <div class="col-md-12">
@@ -49,26 +51,30 @@
             />
           </div>
 
-          <div class="col-md-12 group" align="right">
+          <div class="col-md-12 group" align="side">
             <q-btn
               flat
-              align="right"
+              align="side"
               class="bg-white text-weight-regular text-grey-8"
               @click="emitfnshowEditPincode()"
             >Cancel</q-btn>
-            <q-btn align="right" @click="submitPincode(formData)" color="purple-9">Save</q-btn>
+            <q-btn align="side" @click="submitPincode(formData)" color="purple-9">Save</q-btn>
           </div>
         </div>
       </form>
-    </q-dialog>
+
+</q-card>
+</q-dialog>
   </div>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required, maxLength, minLength } from "@vuelidate/validators";
 
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() { return { v$: useVuelidate() } },
   props: ["propShowEditPincodes", "propRowDetails"],
   data() {
     return {
@@ -97,6 +103,9 @@ export default {
     }
   },
 
+  computed: {
+    () { return this.v$; }
+  },
   methods: {
     ...mapActions("pincodes", ["FETCH_ALL_PINCODES", "EDIT_NEW_PINCODE"]),
 
@@ -133,7 +142,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
               icon: "thumb_down"
             });
           });

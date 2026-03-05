@@ -5,9 +5,11 @@
         minimized
         v-model="toggleModel"  
         no-esc-dismiss
-        no-backdrop-dismiss
+        persistent
         :content-css="{padding:'30px',maxWidth: '30vw'}"
-      >       
+      >
+<q-card style="min-width: 350px;">
+
         <div class="row group">
           <div class="col-md-12 col-sm-12 col-xs-12 q-py-sm bottom-border">
               <span class="text-h6">User Mapping Information</span>
@@ -53,20 +55,24 @@
                 :options="filterUsers"
               />
           </div>
-          <div class="col-md-12 col-sm-12 col-xs-12" align="right">
-            <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnToggleModelCancel()"> Cancel </q-btn>
-            <q-btn size="md" align="right" color="purple-9" @click="emitfnToggleModel(userMapping)"> Done </q-btn>
+          <div class="col-md-12 col-sm-12 col-xs-12" align="side">
+            <q-btn flat size="md" align="side" class="bg-white text-weight-regular text-grey-8" @click="emitfnToggleModelCancel()"> Cancel </q-btn>
+            <q-btn size="md" align="side" color="purple-9" @click="emitfnToggleModel(userMapping)"> Done </q-btn>
           </div>
         </div>
-      </q-dialog>
+
+</q-card>
+</q-dialog>
     </div>
 
 </template>
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 
 import { required, requiredIf } from "@vuelidate/validators";
 export default {
+  setup() { return { v$: useVuelidate() } },
   props: [
     "propDynamicHierarchyRoleRegion",
     "propFilterRoles",
@@ -167,8 +173,7 @@ export default {
             this.disableRolesSelection = true;
           }
           this.$q.loading.hide();
-        })
-        .catch(error => {
+        }).catch(() => {
           this.$q.loading.hide();
         });
     },
@@ -196,8 +201,7 @@ export default {
             });
           }
           this.$q.loading.hide();
-        })
-        .catch(error => {
+        }).catch(() => {
           this.$q.loading.hide();
         });
     },

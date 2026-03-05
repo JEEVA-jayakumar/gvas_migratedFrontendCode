@@ -8,6 +8,8 @@
     @escape-key="emitfnshowAddPermissions(propShowCreatePermission)"  
     :content-css="{padding:'30px',minWidth: '30vw'}"
     >
+<q-card style="min-width: 350px;">
+
       <form> 
         <div class="row q-pa-md bottom-border">
           <div class="col-md-12">
@@ -24,23 +26,27 @@
           </div>
         </div>
         <div class="row gutter-sm q-pa-md">
-          <div class="col-md-12" align="right">
-            <q-btn flat size="md" align="right" class="bg-white q-mr-sm text-weight-regular text-grey-8" @click="emitfnshowAddPermissions(propShowCreatePermission)">Cancel
+          <div class="col-md-12" align="side">
+            <q-btn flat size="md" align="side" class="bg-white q-mr-sm text-weight-regular text-grey-8" @click="emitfnshowAddPermissions(propShowCreatePermission)">Cancel
             </q-btn>
-            <q-btn size="md" align="right" @click="fnEditPermissionSubmit(formData.permissionDetails)" color="purple-9">Save
+            <q-btn size="md" align="side" @click="fnEditPermissionSubmit(formData.permissionDetails)" color="purple-9">Save
             </q-btn>
           </div>
         </div>
       </form>
-    </q-dialog>
+
+</q-card>
+</q-dialog>
   </div>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() { return { v$: useVuelidate() } },
   props: ["propGetAllPermissionData", "propShowCreatePermission"],
   data() {
     return {
@@ -60,6 +66,9 @@ export default {
     }
   },
 
+  computed: {
+    () { return this.v$; }
+  },
   methods: {
     ...mapActions("SuperAdminUsers", [
       "FEED_PERMISSION_DATA",
@@ -100,7 +109,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
               icon: "thumb_down"
             });
           });

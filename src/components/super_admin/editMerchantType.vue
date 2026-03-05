@@ -4,6 +4,7 @@
 
 <script>
 export default {
+  setup() { return { v$: useVuelidate() } },
   // name: 'ComponentName',
   data () {
     return {}

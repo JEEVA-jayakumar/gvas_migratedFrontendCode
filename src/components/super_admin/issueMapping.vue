@@ -77,7 +77,7 @@
               <div class="col-3">
                   <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Search by Issue Name" class="q-mr-lg" />
                 </div>
-              <div class="col-7" align="right">
+              <div class="col-7" align="side">
                 <q-btn
                   no-caps
                   class="text-weight-regular alignbtn1"
@@ -166,11 +166,13 @@
   </q-page>
 </template>
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from '@vuelidate/validators';
 import ShowAddIssueMapping from "../../components/super_admin/ShowAddIssueMapping.vue";
 import ShowEditIssueMapping from "../../components/super_admin/ShowEditIssueMapping.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "getactiveIssueMapping",
   components: {
     ShowAddIssueMapping,
@@ -212,7 +214,7 @@ export default {
           name: "name",
           required: true,
           label: "Issue Name",
-          align: "left",
+          align: "",
           field: "name",
           sortable: true
         },
@@ -220,7 +222,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false
         }
@@ -230,7 +232,7 @@ export default {
           name: "name",
           required: true,
           label: "Issue Name",
-          align: "left",
+          align: "",
           field: "name",
           sortable: true
         },
@@ -238,7 +240,7 @@ export default {
           name: "action1",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action1",
           sortable: false
         }
@@ -291,7 +293,7 @@ export default {
           message: "Are you sure want to active this issue?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -310,14 +312,14 @@ export default {
             this.$q.loading.hide();
             this.ajaxSpareData();
           })
-        }).onCancel(error => {
+        }).catch(error => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
             message:
-              error.body.message == null
+              error.data?.message == null
                 ? "Please Try Again Later !"
-                : error.body.message,
+                : error.data?.message,
             icon: "thumb_down"
           });
           this.$q.loading.hide();
@@ -332,7 +334,7 @@ export default {
           message: "Are you sure want to disable?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -350,7 +352,7 @@ export default {
             this.$q.loading.hide();
             this.ajaxSpareData();
           });
-        }).onCancel(() => {
+        }).catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -463,6 +465,6 @@ export default {
 
 <style>
 .alignbtn1{
-  margin-right: 254px;
+  margin-side: 254px;
 }
 </style>

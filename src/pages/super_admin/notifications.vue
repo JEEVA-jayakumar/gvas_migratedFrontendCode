@@ -146,8 +146,7 @@ export default {
             this.formData.tids = [];
             this.formData.notificationText = "";
             this.v$.formData.$reset();
-          })
-          .catch(error => {
+          }).catch(() => {
             this.$q.loading.hide();
             this.$q.notify({
               type: "warning",

@@ -178,7 +178,7 @@
           </div>
         </div>
 
-        <div class="q-pa-md text-right">
+        <div class="q-pa-md text-side">
           <q-btn flat label="Cancel" @click="$router.go(-1)" class="q-mr-sm"/>
           <q-btn color="purple-9" label="Submit" @click="fnSubmitShowAddUser(formData.addUserDetails)" />
         </div>
@@ -190,6 +190,7 @@
 
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import {
   required,
   requiredIf,
@@ -202,6 +203,7 @@ import {
 } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() { return { v$: useVuelidate() } },
   data() {
     return {
       leadSourceOptions: [],
@@ -639,8 +641,7 @@ export default {
                 });
                 this.$router.push("/super/admin/users/");
                 this.$q.loading.hide();
-              })
-              .catch(error => {
+              }).catch(() => {
                 this.$q.loading.hide();
                 this.$q.notify({
                   type: "warning",
@@ -692,7 +693,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+            message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
             icon: "thumb_down"
           });
         });

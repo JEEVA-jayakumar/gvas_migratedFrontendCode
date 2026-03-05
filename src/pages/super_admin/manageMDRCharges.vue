@@ -350,7 +350,7 @@
               </div>
             </q-list>
           </q-card-section>
-          <q-card-actions vertical align="right">
+          <q-card-actions vertical align="side">
             <q-btn
               :disabled="Submitdata"
               label="submit"

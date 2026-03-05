@@ -27,7 +27,7 @@
 
 
             <!-- Can be enabled in future for adding new role to application-->
-            <!-- <div class="col-md-6 q-my-md" align="right">
+            <!-- <div class="col-md-6 q-my-md" align="side">
               <q-btn no-caps no-wrap label="Add New Role" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreateRole()"/>
             </div> -->
             <!-- Can be enabled in future for adding new role to application -->
@@ -44,7 +44,7 @@
                 class="q-mr-lg"
               />
             </div>
-            <div class="col-md-12" align="right">
+            <div class="col-md-12" align="side">
             <q-btn
               no-caps
               class="text-weight-regular"
@@ -78,7 +78,7 @@
             
 
             <!-- Can be enabled in future for adding new role to application-->
-            <!-- <div class="col-md-6 q-my-md" align="right">
+            <!-- <div class="col-md-6 q-my-md" align="side">
               <q-btn no-caps no-wrap label="Add New Role" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreateRole()"/>
             </div> -->
             <!-- Can be enabled in future for adding new role to application -->
@@ -136,12 +136,14 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from '@vuelidate/validators';
 import showCreateRole from "../../components/super_admin/showCreateRole.vue";
 import showEditRole from "../../components/super_admin/ShowEditRole.vue";
 import showAddRole from "../../components/super_admin/showAddRole.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "users",
   components: {
     showCreateRole,
@@ -178,7 +180,7 @@ export default {
           name: "hierarchy",
           required: true,
           label: "Hierarchy",
-          align: "left",
+          align: "",
           field: row => {
             if (row.hierarchy) {
               return row.hierarchy.hierarchy;
@@ -192,7 +194,7 @@ export default {
           name: "role",
           required: true,
           label: "Role",
-          align: "left",
+          align: "",
           field: "role",
           sortable: false,
         },
@@ -200,7 +202,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false,
         },
@@ -211,7 +213,7 @@ export default {
           name: "hierarchy",
           required: true,
           label: "Hierarchy",
-          align: "left",
+          align: "",
           field: row => {
             if (row.hierarchy) {
               return row.hierarchy.hierarchy;
@@ -225,7 +227,7 @@ export default {
           name: "role",
           required: true,
           label: "Role",
-          align: "left",
+          align: "",
           field: "role",
           sortable: false,
         },
@@ -233,7 +235,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false,
         },
@@ -294,7 +296,7 @@ export default {
           message: "Are you sure want to active role?",
           ok: "Continue",
           cancel: "Cancel",
-        }).onOk(() => {
+        }).then(() => {
           let param = {
             id: roleId.id,
             role: roleId.role,
@@ -311,16 +313,15 @@ export default {
                 icon: "thumb_up",
               });
               this.ajaxLoadDataForRolesPermissions();
-            }).onCancel(() => {
+            }).catch(() => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
                 icon: "thumb_down",
               });
             });
-        })
-        .onCancel(() => {
+        }).catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -337,7 +338,7 @@ export default {
           message: "Are you sure want to delete role?",
           ok: "Continue",
           cancel: "Cancel",
-        }).onOk(() => {
+        }).then(() => {
           this.DELETE_ROLE_BY_ROLE_ID_DATA(roleId)
             .then(response => {
               this.FETCH_ALL_ROLES_PERMISSIONS_DATA();
@@ -348,16 +349,15 @@ export default {
                 icon: "thumb_up",
               });
               this.ajaxLoadDataForRolesPermissions();
-            }).onCancel(() => {
+            }).catch(() => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
                 icon: "thumb_down",
               });
             });
-        })
-        .onCancel(() => {
+        }).catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -388,7 +388,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+            message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
             icon: "thumb_down",
           });
         });

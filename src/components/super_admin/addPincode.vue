@@ -98,8 +98,7 @@ export default {
           this.FETCH_ALL_PINCODES();
           this.$emit("emitfnshowAddPincodes");
           this.$q.notify({ color: "positive", message: "Pincode successfully created!" });
-        })
-        .catch(error => {
+        }).catch(() => {
           this.$q.notify({
             color: "negative",
             message: error.body?.message || "Please Try Again Later !"

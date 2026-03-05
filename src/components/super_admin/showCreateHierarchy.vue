@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="row q-pa-md">
-          <div class="col-md-12 text-right">
+          <div class="col-md-12 text-side">
             <q-btn
               flat
               size="md"
@@ -107,8 +107,7 @@ export default {
           this.FETCH_ALL_HIERARCHIES_DATA();
           this.$emit("emitCreateHierarchyDetails", false);
           this.$q.notify({ color: "positive", message: "Successfully created!", icon: "thumb_up", position: "bottom" });
-        })
-        .catch(error => {
+        }).catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

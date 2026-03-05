@@ -8,6 +8,8 @@
         class="customModalOverlay" 
         :content-css="{padding:'30px',minWidth: '30vw'}"
         >
+<q-card style="min-width: 350px;">
+
             <form> 
                 <div class="row gutter-sm q-py-sm items-center">
                     <div class="col-md-12">
@@ -39,21 +41,25 @@
                     </div>
                 </div>
                 <div class="row gutter-sm q-py-sm items-center">
-                    <div class="col-md-12 group" align="right">
-                        <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowAddNewRegionsGroups()">Cancel</q-btn>
-                        <q-btn align="right" @click="fnfinalsubmitAddNewRegionGroup(formData)" color="purple-9">Save</q-btn>
+                    <div class="col-md-12 group" align="side">
+                        <q-btn flat align="side" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowAddNewRegionsGroups()">Cancel</q-btn>
+                        <q-btn align="side" @click="fnfinalsubmitAddNewRegionGroup(formData)" color="purple-9">Save</q-btn>
                     </div>
                 </div>
             </form>
-        </q-dialog>
+
+</q-card>
+</q-dialog>
     </div>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   props: ["propShowAddNewRegionsGroup", "propRowDetails"],
   data() {
     return {
@@ -89,6 +95,9 @@ computed:{
 //     this.fetchAllRegionGroupData();
 //   },
 
+  computed: {
+    () { return this.v$; }
+  },
   methods: {
     ...mapActions("SuperAdminUsers", [
       "FETCH_ALL_REGIONS_DATA",
@@ -117,13 +126,12 @@ console.log("FINAL SUBMITTED VALUES--------->",JSON.stringify(formData))
             });
             // this.FETCH_ALL_REGIONS_DATA();
             this.emitfnShowAddNewRegionsGroups();
-          })
-          .catch(error => {
+          }).catch(() => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
               icon: "thumb_down",
             });
           });
@@ -148,12 +156,12 @@ console.log("FINAL SUBMITTED VALUES--------->",JSON.stringify(formData))
     //         this.FETCH_ALL_REGIONS_DATA();
     //         this.emitfnShowAddNewRegionsGroups();
     //       })
-    //       .catch(error => {
+    //       .onCancel(() => {
     //         this.$q.loading.hide();
     //         this.$q.notify({
     //           color: "negative",
     //           position: "bottom",
-    //           message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+    //           message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
     //           icon: "thumb_down",
     //         });
     //       });

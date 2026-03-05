@@ -210,8 +210,7 @@ export default {
             this.formData.emp_id = "";
             this.formData.bank_enable = "";
             this.v$.formData.$reset();
-          })
-          .catch(error => {
+          }).catch(() => {
             this.$q.loading.hide();
             this.$q.notify({
               type: "warning",

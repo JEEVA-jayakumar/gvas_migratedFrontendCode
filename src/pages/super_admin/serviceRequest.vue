@@ -8,7 +8,7 @@
             active-color="dark"
             indicator-color="dark"
             class="shadow-1"
-            align="left"
+            align=""
           >
             <q-tab name="serviceRequest" label="Service Request" />
             <q-tab name="issueTypes" label="Issue Types" />
@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import serviceRequest from "../../components/super_admin/serviceRequest.vue";
 import issueTypes from "../../components/super_admin/issueTypes.vue";
 import serviceStatus from "../../components/super_admin/serviceStatus.vue";
@@ -60,6 +61,7 @@ import csSubIssue from "../../components/super_admin/csSubIssue.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "ServiceRequestPage",
 
   components: {
@@ -111,8 +113,7 @@ export default {
             };
             this.FETCH_REGIONAL_INVENTORY_SERIAL_NUMBER_BY_DEVICE(requestParams);
             this.toggleAjaxLoadFilter = false;
-          })
-          .catch(error => {
+          }).catch(() => {
             this.toggleAjaxLoadFilter = false;
           });
       }

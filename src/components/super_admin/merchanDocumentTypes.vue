@@ -2,7 +2,7 @@
   <q-dialog
     v-model="toggleModal"
     persistent
-    position="right"
+    position="side"
     class="customModalOverlay"
   >
     <q-card style="min-width: 50vw; min-height: 100vh; padding: 60px 25px;">
@@ -18,7 +18,7 @@
                 placeholder="Merchant type"
                 :options="activeMerchantType"
                 v-model="formData.merchantType"
-                float-label="Select merchant type"
+                label="Select merchant type"
                 @update:model-value="currentListTabulation == 'tab-1'?fetchMerchantDocumentTypeActivatedList():fetchMerchantDocumentTypeDeActivatedList()"
                 @blur="v$.formData.merchantType.$touch"
                 :error="v$.formData.merchantType.$error"
@@ -27,7 +27,7 @@
             </div>
           </div>
         </div>
-        <div class="col" align="right">
+        <div class="col" align="side">
           <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
         </div>
       </div>
@@ -94,7 +94,7 @@
                   label="Search merchant type"
                 />
               </div>
-              <div class="col-4" align="right">
+              <div class="col-4" align="side">
                 <q-btn
                   no-caps
                   no-wrap
@@ -223,7 +223,7 @@ export default {
           name: "documentType",
           required: true,
           label: "Merchant Document Type",
-          align: "left",
+          align: "",
           field: "documentType",
           sortable: false
         },
@@ -231,7 +231,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false
         }
@@ -241,7 +241,7 @@ export default {
           name: "documentType",
           required: true,
           label: "Merchant Document Type",
-          align: "left",
+          align: "",
           field: "documentType",
           sortable: false
         },
@@ -249,7 +249,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false
         }
@@ -375,7 +375,7 @@ export default {
           message: "Are you sure want to delete merchant type?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -393,8 +393,7 @@ export default {
                 } has been deactivated`,
                 icon: "thumb_up"
               });
-            })
-            .catch(error => {
+            }).catch(() => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -412,7 +411,7 @@ export default {
           message: "Are you sure want to enable merchant type?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -436,7 +435,7 @@ export default {
                 } has been activated`,
                 icon: "thumb_up"
               });
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",

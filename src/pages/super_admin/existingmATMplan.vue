@@ -50,7 +50,7 @@
         <template v-slot:body-cell-planName="props">
           <q-td :props="props">
             <q-btn
-              align="left"
+              align=""
               dense
               flat
               no-wrap
@@ -95,7 +95,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-12" align="right">
+          <div class="col-md-12" align="side">
                 <q-btn no-caps class="text-weight-regular" @click="$router.push('/super/admin/manage/mATMplan')"
                   label="Add M-ATM Plan" color="purple-9" size="md" />
               </div>
@@ -115,10 +115,12 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 import deleteUsersDetails from "../../components/super_admin/deleteUsersDetails.vue";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "ExistingMATMPlans",
   components: {
     deleteUsersDetails
@@ -150,7 +152,7 @@ export default {
           name: "planName",
           required: true,
           label: "Plan Name",
-          align: "left",
+          align: "",
           field: "planName",
           sortable: false
         },
@@ -158,7 +160,7 @@ export default {
           name: "sourceName",
           required: true,
           label: "Lead Source",
-          align: "left",
+          align: "",
           field: row => row.leadSourceId?.sourceName,
           sortable: false
         },
@@ -166,7 +168,7 @@ export default {
           name: "deviceName",
           required: true,
           label: "Device Type",
-          align: "left",
+          align: "",
           field: row => row.deviceId?.deviceName,
           sortable: false
         },
@@ -174,7 +176,7 @@ export default {
           name: "active",
           required: true,
           label: "Status",
-          align: "left",
+          align: "",
         },
         {
           name: 'action',
@@ -298,8 +300,7 @@ export default {
             message: "Successfully Deleted the Plan",
             icon: "thumb_up"
           });
-        })
-        .catch(error => {
+        }).catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

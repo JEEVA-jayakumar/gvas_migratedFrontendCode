@@ -7,7 +7,7 @@
         class="shadow-1"
         active-color="dark"
         indicator-color="dark"
-        align="left"
+        align=""
         @update:model-value="changeTabs"
       >
         <q-tab name="active" label="Active Hierarchy" />
@@ -62,7 +62,7 @@
                   />
                 </div>
 
-                <div class="col-md-6 text-right">
+                <div class="col-md-6 text-side">
                   <q-btn
                     no-caps
                     class="text-weight-regular"
@@ -154,11 +154,13 @@
 
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from '@vuelidate/validators';
 import showCreateHierarchy from "../../components/super_admin/showCreateHierarchy.vue";
 import showEditHierarchy from "../../components/super_admin/ShowEditHierarchy.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "users",
   components: {
     showCreateHierarchy,
@@ -190,7 +192,7 @@ export default {
           name: "label",
           required: true,
           label: "Hierarchy",
-          align: "left",
+          align: "",
           field: "label",
           sortable: false,
         },
@@ -198,7 +200,7 @@ export default {
           name: "shortCode",
           required: true,
           label: "Hierarchy Code",
-          align: "left",
+          align: "",
           field: "shortCode",
           sortable: false,
         },
@@ -206,7 +208,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: true
         }
@@ -216,7 +218,7 @@ export default {
           name: "label",
           required: true,
           label: "Hierarchy",
-          align: "left",
+          align: "",
           field: "label",
           sortable: false,
         },
@@ -224,7 +226,7 @@ export default {
           name: "shortCode",
           required: true,
           label: "Hierarchy Code",
-          align: "left",
+          align: "",
           field: "shortCode",
           sortable: false,
         },
@@ -232,7 +234,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: true
         }
@@ -286,7 +288,7 @@ export default {
     //       this.$q.notify({
     //         color: "negative",
     //         position: "bottom",
-    //         message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+    //         message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
     //         icon: "thumb_down",
     //       });
     //     });
@@ -319,7 +321,7 @@ export default {
           message: "Are you sure want to delete hierarchy?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -338,7 +340,7 @@ export default {
               this.ajaxLoadDataForHierarchyTable();
               this.$router.push("/super/admin/hierarchy/");
               this.$q.loading.hide();
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -358,7 +360,7 @@ export default {
           message: "Are you sure want to Active hierarchy?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -382,7 +384,7 @@ export default {
               });
               this.ajaxLoadDataForHierarchyTable();
               this.$q.loading.hide();
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.notify({
                 color: "warning",
                 position: "bottom",
@@ -413,7 +415,7 @@ export default {
           message: "Are you sure want to delete Hierarchy?",
           ok: "Continue",
           cancel: "Cancel",
-        }).onOk(() => {
+        }).then(() => {
           this.DELETE_HIERARCHY_BY_HIERARCHY_ID_DATA(HierarchyId)
             .then(response => {
               this.FETCH_ALL_HIERARCHIES_DATA();
@@ -423,16 +425,15 @@ export default {
                 message: "Successfully Deleted!",
                 icon: "thumb_up",
               });
-            }).onCancel(() => {
+            }).catch(() => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
                 icon: "thumb_down",
               });
             });
-        })
-        .onCancel(() => {
+        }).catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -464,7 +465,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+            message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
             icon: "thumb_down",
           });
         });

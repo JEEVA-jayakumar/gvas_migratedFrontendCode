@@ -7,6 +7,8 @@
       @escape-key="emitfnshowUploadFile()"
       :content-css="{minWidth:'50%',height:'auto',maxHeight:'50vh',margin:'20px',padding:'20px'}"
     >
+<q-card style="min-width: 350px;">
+
       <div class="column">
         <div class="q-py-sm text-h6 bottom-border">Upload Bank List</div>
         <div class="q-py-sm">
@@ -60,7 +62,7 @@
             color="positive"
             class="center"
             @click="finalFileUploadAndSubmit()"
-            align="right"
+            align="side"
             label="Submit"
           />
           <q-btn
@@ -69,19 +71,23 @@
             color="positive"
             class="center"
             @click="finalFileUploadAndSubmit()"
-            align="right"
+            align="side"
             label="cancel"
           />
         </div>
       </div>
-    </q-dialog>
+
+</q-card>
+</q-dialog>
   </div>
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   props: ["propShowUploadFile"],
   data() {
     return {
@@ -128,8 +134,7 @@ export default {
             icon: "thumb_up"
           });
           this.$refs.file = "";
-        })
-        .catch(error => {
+        }).catch(() => {
           this.$q.loading.hide();
           this.$q.notify({
             color: "negative",

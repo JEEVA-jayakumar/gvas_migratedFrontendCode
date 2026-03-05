@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="row gutter-sm q-py-sm items-center">
-          <div class="col-md-12 group" align="right">
+          <div class="col-md-12 group" align="side">
             <q-btn flat class="bg-white text-weight-regular text-grey-8 q-mr-sm" @click="emitfnShowAddNewRegions()">Cancel</q-btn>
             <q-btn @click="fnfinalsubmitAddNewRegion" color="purple-9">Save</q-btn>
           </div>
@@ -93,6 +93,9 @@ computed:{
     this.fetchAllRegionGroupData();
   },
 
+  computed: {
+    () { return this.v$; }
+  },
   methods: {
     ...mapActions("SuperAdminUsers", [
       "FETCH_ALL_REGIONS_DATA",
@@ -120,8 +123,7 @@ computed:{
             });
             this.FETCH_ALL_REGIONS_DATA();
             this.emitfnShowAddNewRegions();
-          })
-          .catch(error => {
+          }).catch(() => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",

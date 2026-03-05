@@ -9,7 +9,7 @@
         active-bg-color="grey-1"
         active-color="dark"
         indicator-color="transparent"
-        align="left"
+        align=""
         @update:model-value="goToUnassignedTab"
       >
         <q-tab
@@ -202,7 +202,7 @@
                 class="cursor-pointer"
               >
                 <q-btn
-                  align="left"
+                  align=""
                   dense
                   flat
                   no-wrap
@@ -235,7 +235,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-12" align="right">
+              <div class="col-md-12" align="side">
                 <q-btn
                   no-caps
                   class="text-weight-regular"
@@ -474,11 +474,13 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { mapGetters, mapActions } from "vuex";
 
 import EditMDRCharges from "../../pages/super_admin/editMDRCharges.vue";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "MdrChargesList",
   components: {
     EditMDRCharges
@@ -505,7 +507,7 @@ export default {
           name: "mdrPlanName",
           required: true,
           label: "Mdr Plan Name",
-          align: "left",
+          align: "",
           field: row => row.mdrPlanName,
           sortable: true
         },
@@ -513,7 +515,7 @@ export default {
           name: "merchantCategory",
           required: true,
           label: "Selected Merchant Category",
-          align: "left",
+          align: "",
           field: row => row.merchantCategory?.merchantCategoryName,
           sortable: true
         },
@@ -521,7 +523,7 @@ export default {
           name: "leadSource",
           required: true,
           label: "Lead Source",
-          align: "left",
+          align: "",
           field: row => row.leadSource?.sourceName,
           sortable: true
         },
@@ -529,7 +531,7 @@ export default {
           name: "device",
           required: true,
           label: "Device Type",
-          align: "left",
+          align: "",
           field: row => row.device?.deviceName,
           sortable: true
         },
@@ -537,7 +539,7 @@ export default {
           name: "marsDeviceModel",
           required: true,
           label: "Mars Device Model",
-          align: "left",
+          align: "",
           field: row => row.marsDeviceModel?.name,
           sortable: true
         },
@@ -547,7 +549,7 @@ export default {
           name: "debitLessthanAmount",
           required: true,
           label: "Debit Less Amount",
-          align: "left",
+          align: "",
           field: "debitLessthanAmount",
           sortable: true
         },
@@ -555,7 +557,7 @@ export default {
           name: "debitGreaterthanAmount",
           required: true,
           label: "Debit Greater Amount",
-          align: "left",
+          align: "",
           field: "debitGreaterthanAmount",
           sortable: true
         },
@@ -563,7 +565,7 @@ export default {
           name: "stdCC",
           required: true,
           label: "stdCC",
-          align: "left",
+          align: "",
           field: "stdCC",
           sortable: true
         },
@@ -571,7 +573,7 @@ export default {
           name: "premiumCC",
           required: true,
           label: "premiumCC",
-          align: "left",
+          align: "",
           field: "premiumCC",
           sortable: true
         },
@@ -579,7 +581,7 @@ export default {
           name: "corpCC",
           required: true,
           label: "corpCC",
-          align: "left",
+          align: "",
           field: "corpCC",
           sortable: true
         },
@@ -587,7 +589,7 @@ export default {
           name: "intlCC",
           required: true,
           label: "intlCC",
-          align: "left",
+          align: "",
           field: "intlCC",
           sortable: true
         },
@@ -595,7 +597,7 @@ export default {
           name: "superPremiumlCC",
           required: true,
           label: "superPremiumlCC",
-          align: "left",
+          align: "",
           field: "superPremiumlCC",
           sortable: true
         },
@@ -604,7 +606,7 @@ export default {
           name: "amexDomestic",
           required: true,
           label: "Amex Domestic",
-          align: "left",
+          align: "",
           field: "amexDomestic",
           sortable: true
         },
@@ -613,7 +615,7 @@ export default {
           name: "amexInternational",
           required: true,
           label: "Amex International",
-          align: "left",
+          align: "",
           field: "amexInternational",
           sortable: true
         },
@@ -621,7 +623,7 @@ export default {
           name: "upiDebitCardUpTo2000",
           required: true,
           label: "UPI Debit Card UpTo 2000",
-          align: "left",
+          align: "",
           field: "upiDebitCardUpTo2000",
           sortable: true
         },
@@ -629,7 +631,7 @@ export default {
           name: "upiDebitCardAbove2000",
           required: true,
           label: "UPI Debit Card Above 2000",
-          align: "left",
+          align: "",
           field: "upiDebitCardAbove2000",
           sortable: true
         },
@@ -637,7 +639,7 @@ export default {
           name: "upiPrepaidCreditCardsUpTo2000",
           required: true,
           label: "UPI Prepaid Credit Cards UpTo 2000",
-          align: "left",
+          align: "",
           field: "upiPrepaidCreditCardsUpTo2000",
           sortable: true
         },
@@ -645,7 +647,7 @@ export default {
           name: "upiPrepaidCreditCardsAbove2000",
           required: true,
           label: "UPI Prepaid Credit Cards Above 2000",
-          align: "left",
+          align: "",
           field: "upiPrepaidCreditCardsAbove2000",
           sortable: true
         },
@@ -653,7 +655,7 @@ export default {
           name: "smallMerchantLessThanTwoDebit",
           required: true,
           label: "Small merchant < 2000 debit",
-          align: "left",
+          align: "",
           field: row => row.smallMerchantLessThanTwoDebit,
           sortable: true
         },
@@ -661,7 +663,7 @@ export default {
           name: "smallMerchantGreaterThanTwoDebit",
           required: true,
           label: "Small merchant > 2000 debit",
-          align: "left",
+          align: "",
           field: row => row.smallMerchantGreaterThanTwoDebit,
           sortable: true
         },
@@ -669,7 +671,7 @@ export default {
           name: "smallMerchantLessThanTwoCreditAndPrepaid",
           required: true,
           label: "Small merchant < 2000 credit and prepaid",
-          align: "left",
+          align: "",
           field: row => row.smallMerchantLessThanTwoCreditAndPrepaid,
           sortable: true
         },
@@ -677,7 +679,7 @@ export default {
           name: "smallMerchantGreaterThanTwoCreditAndPrepaid",
           required: true,
           label: "small Merchant > 2000 Credit and Prepaid",
-          align: "left",
+          align: "",
           field: row => row.smallMerchantGreaterThanTwoCreditAndPrepaid,
           sortable: true
         },
@@ -685,7 +687,7 @@ export default {
           name: "largeMerchantLessThanTwoDebit",
           required: true,
           label: "large merchant < 2000 debit ",
-          align: "left",
+          align: "",
           field: row => row.largeMerchantLessThanTwoDebit,
           sortable: true
         },
@@ -693,7 +695,7 @@ export default {
           name: "largeMerchantGreaterThanTwoDebit",
           required: true,
           label: "Large merchant > 2000 debit ",
-          align: "left",
+          align: "",
           field: row => row.largeMerchantGreaterThanTwoDebit,
           sortable: true
         },
@@ -701,7 +703,7 @@ export default {
           name: "largeMerchantLessThanTwoCreditandPrepaid",
           required: true,
           label: "Large merchant < 2000 credit and prepaid",
-          align: "left",
+          align: "",
           field: row => row.largeMerchantLessThanTwoCreditandPrepaid,
           sortable: true
         },
@@ -709,7 +711,7 @@ export default {
           name: "largeMerchantGreaterThanTwoCreditandPrepaid",
           required: true,
           label: "Large merchant > 2000 credit and prepaid",
-          align: "left",
+          align: "",
           field: row => row.largeMerchantGreaterThanTwoCreditandPrepaid,
           sortable: true
         },
@@ -717,7 +719,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false
         }
@@ -728,7 +730,7 @@ export default {
           name: "mdrPlanName",
           required: true,
           label: "Mdr Plan Name",
-          align: "left",
+          align: "",
           field: row => row.mdrPlanName,
           sortable: true
         },
@@ -736,7 +738,7 @@ export default {
           name: "merchantCategory",
           required: true,
           label: "Selected Merchant Category",
-          align: "left",
+          align: "",
           field: row => row.merchantCategory?.merchantCategoryName,
           sortable: true
         },
@@ -744,7 +746,7 @@ export default {
           name: "leadSource",
           required: true,
           label: "Lead Source",
-          align: "left",
+          align: "",
           field: row => row.leadSource?.sourceName,
           sortable: true
         },
@@ -752,7 +754,7 @@ export default {
           name: "device",
           required: true,
           label: "Device Type",
-          align: "left",
+          align: "",
           field: row => row.device?.deviceName,
           sortable: true
         },
@@ -760,7 +762,7 @@ export default {
           name: "marsDeviceModel",
           required: true,
           label: "Mars Device Model",
-          align: "left",
+          align: "",
           field: row => row.marsDeviceModel?.name,
           sortable: true
         },
@@ -770,7 +772,7 @@ export default {
           name: "debitLessthanAmount",
           required: true,
           label: "Debit Less Amount",
-          align: "left",
+          align: "",
           field: "debitLessthanAmount",
           sortable: true
         },
@@ -778,7 +780,7 @@ export default {
           name: "debitGreaterthanAmount",
           required: true,
           label: "Debit Greater Amount",
-          align: "left",
+          align: "",
           field: "debitGreaterthanAmount",
           sortable: true
         },
@@ -786,7 +788,7 @@ export default {
           name: "stdCC",
           required: true,
           label: "stdCC",
-          align: "left",
+          align: "",
           field: "stdCC",
           sortable: true
         },
@@ -794,7 +796,7 @@ export default {
           name: "premiumCC",
           required: true,
           label: "premiumCC",
-          align: "left",
+          align: "",
           field: "premiumCC",
           sortable: true
         },
@@ -802,7 +804,7 @@ export default {
           name: "corpCC",
           required: true,
           label: "corpCC",
-          align: "left",
+          align: "",
           field: "corpCC",
           sortable: true
         },
@@ -810,7 +812,7 @@ export default {
           name: "intlCC",
           required: true,
           label: "intlCC",
-          align: "left",
+          align: "",
           field: "intlCC",
           sortable: true
         },
@@ -818,7 +820,7 @@ export default {
           name: "superPremiumlCC",
           required: true,
           label: "superPremiumlCC",
-          align: "left",
+          align: "",
           field: "superPremiumlCC",
           sortable: true
         },
@@ -826,7 +828,7 @@ export default {
           name: "upiDebitCardUpTo2000",
           required: true,
           label: "UPI Debit Card UpTo 2000",
-          align: "left",
+          align: "",
           field: "upiDebitCardUpTo2000",
           sortable: true
         },
@@ -834,7 +836,7 @@ export default {
           name: "upiDebitCardAbove2000",
           required: true,
           label: "UPI Debit Card Above 2000",
-          align: "left",
+          align: "",
           field: "upiDebitCardAbove2000",
           sortable: true
         },
@@ -842,7 +844,7 @@ export default {
           name: "upiPrepaidCreditCardsUpTo2000",
           required: true,
           label: "UPI Prepaid Credit Cards UpTo 2000",
-          align: "left",
+          align: "",
           field: "upiPrepaidCreditCardsUpTo2000",
           sortable: true
         },
@@ -850,7 +852,7 @@ export default {
           name: "upiPrepaidCreditCardsAbove2000",
           required: true,
           label: "UPI Prepaid Credit Cards Above 2000",
-          align: "left",
+          align: "",
           field: "upiPrepaidCreditCardsAbove2000",
           sortable: true
         },
@@ -858,7 +860,7 @@ export default {
           name: "smallMerchantLessThanTwoDebit",
           required: true,
           label: "Small merchant < 2000 debit",
-          align: "left",
+          align: "",
           field: row => row.smallMerchantLessThanTwoDebit,
           sortable: true
         },
@@ -866,7 +868,7 @@ export default {
           name: "smallMerchantGreaterThanTwoDebit",
           required: true,
           label: "Small merchant > 2000 debit",
-          align: "left",
+          align: "",
           field: row => row.smallMerchantGreaterThanTwoDebit,
           sortable: true
         },
@@ -874,7 +876,7 @@ export default {
           name: "smallMerchantLessThanTwoCreditAndPrepaid",
           required: true,
           label: "Small merchant < 2000 credit and prepaid",
-          align: "left",
+          align: "",
           field: row => row.smallMerchantLessThanTwoCreditAndPrepaid,
           sortable: true
         },
@@ -882,7 +884,7 @@ export default {
           name: "smallMerchantGreaterThanTwoCreditAndPrepaid",
           required: true,
           label: "small Merchant > 2000 Credit and Prepaid",
-          align: "left",
+          align: "",
           field: row => row.smallMerchantGreaterThanTwoCreditAndPrepaid,
           sortable: true
         },
@@ -890,7 +892,7 @@ export default {
           name: "largeMerchantLessThanTwoDebit",
           required: true,
           label: "large merchant < 2000 debit ",
-          align: "left",
+          align: "",
           field: row => row.largeMerchantLessThanTwoDebit,
           sortable: true
         },
@@ -898,7 +900,7 @@ export default {
           name: "largeMerchantGreaterThanTwoDebit",
           required: true,
           label: "Large merchant > 2000 debit ",
-          align: "left",
+          align: "",
           field: row => row.largeMerchantGreaterThanTwoDebit,
           sortable: true
         },
@@ -906,7 +908,7 @@ export default {
           name: "largeMerchantLessThanTwoCreditandPrepaid",
           required: true,
           label: "Large merchant < 2000 credit and prepaid",
-          align: "left",
+          align: "",
           field: row => row.largeMerchantLessThanTwoCreditandPrepaid,
           sortable: true
         },
@@ -914,7 +916,7 @@ export default {
           name: "largeMerchantGreaterThanTwoCreditandPrepaid",
           required: true,
           label: "Large merchant > 2000 credit and prepaid",
-          align: "left",
+          align: "",
           field: row => row.largeMerchantGreaterThanTwoCreditandPrepaid,
           sortable: true
         },
@@ -922,7 +924,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false
         }
@@ -1005,7 +1007,7 @@ export default {
           ok: "Continue",
           cancel: "Cancel"
         })
-        .onOk(() => {
+        .then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -1037,7 +1039,7 @@ export default {
           ok: "Continue",
           cancel: "Cancel"
         })
-        .onOk(() => {
+        .then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -1156,7 +1158,7 @@ export default {
 
 <style scoped>
 .customTd {
-  text-align: left !important;
+  text-align:  !important;
   word-wrap: break-word;
   white-space: normal;
 }

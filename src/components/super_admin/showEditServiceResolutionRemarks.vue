@@ -8,6 +8,8 @@
       class="customModalOverlay"
       :content-css="{ padding: '30px', minWidth: '30vw' }"
     >
+<q-card style="min-width: 350px;">
+
       <form>
         <div class="row gutter-sm q-py-sm items-center">
           <div class="col-md-12">
@@ -40,16 +42,16 @@
           </div>
         </div>
         <div class="row gutter-sm q-py-sm items-center">
-          <div class="col-md-12 group" align="right">
+          <div class="col-md-12 group" align="side">
             <q-btn
               flat
-              align="right"
+              align="side"
               class="bg-white text-weight-regular text-grey-8"
               @click="emitfnshowEditServiceResolutionRemarks()"
               >Cancel</q-btn
             >
             <q-btn
-              align="right"
+              align="side"
               @click="fnfinalsubmitServiceResolutionRemarks(formData)"
               color="purple-9"
               >Save</q-btn
@@ -57,7 +59,9 @@
           </div>
         </div>
       </form>
-    </q-dialog>
+
+</q-card>
+</q-dialog>
     <!--START: Show Sub Task Details-->
     <showServiceSubTaskDetails
       v-if="propShowServiceSubTaskDetails"
@@ -70,11 +74,15 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 import showServiceSubTaskDetails from "../../components/super_admin/showServiceSubTaskDetails.vue";
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   components: {
     showServiceSubTaskDetails
   },
@@ -152,16 +160,15 @@ export default {
               icon: "thumb_up"
             });
             this.emitfnshowEditServiceResolutionRemarks();
-          })
-          .catch(error => {
+          }).catch(() => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
+                error.data?.message == null
                   ? "Please Try Again Later !"
-                  : error.body.message,
+                  : error.data?.message,
               icon: "thumb_down"
             });
           });

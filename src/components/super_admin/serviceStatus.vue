@@ -33,7 +33,7 @@
                 <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." class="q-mr-lg" />
               </div>
               <!--END: table filter,search -->
-              <div class="col-3" align="right">
+              <div class="col-3" align="side">
                 <q-btn no-caps class="text-weight-regular" label="Add Service Status"
                   @click="fnShowAddNewServiceStatus(props.row)" color="purple-9" size="md" />
 
@@ -87,12 +87,14 @@
   </q-page>
 </template>
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from '@vuelidate/validators';
 import ShowAddServiceStatus from '../../components/super_admin/ShowAddServiceStatus.vue'
 import ShowEditServiceStatus from '../../components/super_admin/ShowEditServiceStatus.vue'
 
 import { mapGetters, mapActions } from 'vuex'
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: 'getserviceRequestStatusDetails',
   components: {
 
@@ -140,7 +142,7 @@ export default {
           name: 'name',
           required: true,
           label: 'name',
-          align: 'left',
+          align: '',
           field: 'name',
           sortable: true
         },
@@ -148,7 +150,7 @@ export default {
           name: 'updatedDate',
           required: true,
           label: 'Updated Date',
-          align: 'left',
+          align: '',
           field: 'updatedDate',
           sortable: true
         },
@@ -156,7 +158,7 @@ export default {
           name: 'action',
           required: true,
           label: '',
-          align: 'left',
+          align: '',
           field: 'action',
           sortable: false
         }
@@ -167,7 +169,7 @@ export default {
           name: 'name',
           required: true,
           label: 'name',
-          align: 'left',
+          align: '',
           field: 'name',
           sortable: true
         },
@@ -175,7 +177,7 @@ export default {
           name: 'updatedDate',
           required: true,
           label: 'Updated Date',
-          align: 'left',
+          align: '',
           field: 'updatedDate',
           sortable: true
         },
@@ -183,7 +185,7 @@ export default {
           name: 'action1',
           required: true,
           label: '',
-          align: 'left',
+          align: '',
           field: 'action1',
           sortable: false
         }
@@ -243,7 +245,7 @@ export default {
           message: 'Are you sure want to delete?',
           ok: 'Continue',
           cancel: 'Cancel'
-        }).onOk(() => {
+        }).then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: 'Please Wait',
@@ -262,15 +264,15 @@ export default {
               this.$q.loading.hide()
               this.ajaxSpareData()
             })
-        }).onCancel(error => {
+        }).catch(error => {
           this.$q.loading.hide()
           this.$q.notify({
             color: 'negative',
             position: 'bottom',
             message:
-                error.body.message == null
+                error.data?.message == null
                   ? 'Please Try Again Later !'
-                  : error.body.message,
+                  : error.data?.message,
             icon: 'thumb_down'
           })
         })
@@ -284,7 +286,7 @@ export default {
           message: 'Are you sure want to delete?',
           ok: 'Continue',
           cancel: 'Cancel'
-        }).onOk(() => {
+        }).then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: 'Please Wait',
@@ -303,7 +305,7 @@ export default {
               this.$q.loading.hide()
               this.ajaxSpareData()
             })
-        }).onCancel(() => {
+        }).catch(() => {
           this.$q.notify({
             color: 'negative',
             position: 'bottom',

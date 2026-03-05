@@ -30,7 +30,7 @@
                 </form>
               </q-card-section>
 
-              <q-card-actions align="right" class="text-purple-9 q-pa-md">
+              <q-card-actions align="side" class="text-purple-9 q-pa-md">
                 <q-btn flat label="Cancel" @click="emitfnshowAddRegions()" class="text-grey-7" />
                 <q-btn unelevated label="Save Region" color="purple-9" @click="fnfinalsubmitRegion(formData)" class="q-px-lg" />
               </q-card-actions>
@@ -40,10 +40,12 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   props: ["propShowCreateRegions"],
   data() {
     return {
@@ -62,6 +64,9 @@ export default {
     },
   },
 
+  computed: {
+    () { return this.v$; }
+  },
   methods: {
     ...mapActions("SuperAdminUsers", [
       "FETCH_ALL_REGIONS_DATA",
@@ -87,13 +92,12 @@ export default {
             });
             this.FETCH_ALL_REGIONS_DATA();
             this.emitfnshowAddRegions();
-          })
-          .catch(error => {
+          }).catch(() => {
             this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
               icon: "thumb_down",
             });
           });

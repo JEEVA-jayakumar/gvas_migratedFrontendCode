@@ -267,15 +267,15 @@ export default {
         }
       },
       activatedColumns: [
-        { name: "merchantTypeName", label: "Merchant Type", align: "left", field: "merchantTypeName", sortable: false },
-        { name: "documentType", label: "Document Type", align: "left", field: "documentType", sortable: false },
-        { name: "subDocumentType", label: "Sub Document Type", align: "left", field: "subDocumentType", sortable: false },
-        { name: "marsDocumentId", label: "Mars Document Id", align: "left", field: "marsDocumentId", sortable: false },
-        { name: "action", label: "", align: "left", field: "action", sortable: false }
+        { name: "merchantTypeName", label: "Merchant Type", align: "", field: "merchantTypeName", sortable: false },
+        { name: "documentType", label: "Document Type", align: "", field: "documentType", sortable: false },
+        { name: "subDocumentType", label: "Sub Document Type", align: "", field: "subDocumentType", sortable: false },
+        { name: "marsDocumentId", label: "Mars Document Id", align: "", field: "marsDocumentId", sortable: false },
+        { name: "action", label: "", align: "", field: "action", sortable: false }
       ],
       deActivatedColumns: [
-        { name: "merchantTypeName", label: "Merchant Type", align: "left", field: "merchantTypeName", sortable: false },
-        { name: "documentType", label: "Document Type", align: "left", field: "documentType", sortable: false }
+        { name: "merchantTypeName", label: "Merchant Type", align: "", field: "merchantTypeName", sortable: false },
+        { name: "documentType", label: "Document Type", align: "", field: "documentType", sortable: false }
       ]
     };
   },

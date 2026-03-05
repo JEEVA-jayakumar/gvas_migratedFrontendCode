@@ -8,7 +8,7 @@
             active-color="dark"
             indicator-color="dark"
             class="shadow-1"
-            align="left"
+            align=""
           >
             <q-tab name="createQRSticker" label="Create QR Ref No" />
             <q-tab name="downloadQRcodes" label="Download QR Codes" />
@@ -38,11 +38,13 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import createQRSticker from "../../components/super_admin/createQRSticker.vue";
 import downloadQRcodes from "../../components/super_admin/downloadQRcodes.vue";
 import implementQRleadsources from "../../components/super_admin/implementQRleadsources.vue";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "QRSticker",
 
   components: {

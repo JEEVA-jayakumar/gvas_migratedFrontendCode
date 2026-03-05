@@ -11,7 +11,7 @@
           <q-select v-model="formData.leadSource" label="Select LeadSource" radio color="grey-9"
             @update:model-value="filterByLeadSource(formData)" :options="dropDown.leadSourceOptions" />
         </div>
-        <div class="col-md-12" align="right">
+        <div class="col-md-12" align="side">
           <q-btn no-caps class="text-weight-regular" @click="fnaddprefix()" label="Add New" color="purple-9"
             size="md" />
         </div>
@@ -38,7 +38,7 @@
           </div>
         </q-td> -->
         <!-- END: table body modification -->
-        <template slot="top" class="bottom-border">
+        <template v-slot:top class="bottom-border">
           <!--START: table filter,search -->
           <div class="col-md-5">
             <q-input clearable color="grey-9" v-model="filter" placeholder="Type.." label="Search Lead Source..."
@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from '@vuelidate/validators';
 
 // import VueBarcodeScanner from "vue-barcode-scanner";
@@ -79,6 +80,7 @@ import inventoryWithRegion from "../../components/inventory/inventoryWithRegion.
 import showCreatePrefix from "./AddPrefix.vue";
 
 export default {
+  setup() { return { v$: useVuelidate() } },
   name: "allocateDevice",
   components: {
     showPDOmodal,
@@ -111,7 +113,7 @@ export default {
           name: "sourceName",
           required: true,
           label: "Lead Source",
-          align: "left",
+          align: "",
           field: row => {
             return row.leadSource.sourceName
           },
@@ -121,7 +123,7 @@ export default {
           name: "prefix",
           required: true,
           label: "Prefix",
-          align: "left",
+          align: "",
           field: "prefix",
           sortable: false
         },
@@ -232,7 +234,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "left",
+          align: "",
           field: "action",
           sortable: false,
         },
@@ -415,7 +417,7 @@ export default {
     //       });
     //       this.regionOptions = assumeArr;
     //     })
-    //     .catch(error => {
+    //     .onCancel(() => {
     //       this.regionOptions = [];
     //     });
     // },
@@ -433,7 +435,7 @@ export default {
     //       });
     //       this.deviceOptions = assumeArr;
     //     })
-    //     .catch(error => {
+    //     .onCancel(() => {
     //       this.deviceOptions = [];
     //     });
     // },

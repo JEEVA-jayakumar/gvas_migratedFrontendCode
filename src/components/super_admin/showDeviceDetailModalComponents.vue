@@ -1,9 +1,9 @@
 <template>
   <q-dialog
     minimized
-    position="right"
+    position="side"
     v-model="toggleModal"
-    no-backdrop-dismiss
+    persistent
     @escape-key="emitModalClose"
     class="customModalOverlay"
     :content-css="{padding:'60px 25px',minWidth:'40vw',minHeight:'100vh'}"
@@ -12,7 +12,7 @@
       <div class="col">
         <div class="text-h6 text-weight-regular">Manage devices</div>
       </div>
-      <div class="col" align="right">
+      <div class="col" align="side">
         <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
       </div>
     </div>
@@ -28,9 +28,9 @@
               class="text-weight-regular text-grey-8" color="grey-9" label="Device" placeholder="Device"
             />
           </div>
-          <div align="right">
-            <q-btn align="right" v-if="makeUpdateElementActive" @click="fnFinalUpdate(formData)" color="purple-9">Update</q-btn>
-            <q-btn align="right" v-else @click="fnFinalCreate(formData)" color="purple-9">Save</q-btn>
+          <div align="side">
+            <q-btn align="side" v-if="makeUpdateElementActive" @click="fnFinalUpdate(formData)" color="purple-9">Update</q-btn>
+            <q-btn align="side" v-else @click="fnFinalCreate(formData)" color="purple-9">Save</q-btn>
           </div>
         </div>
       </q-card-section>
@@ -82,7 +82,7 @@
             label="Search by name, short name"
           />
         </div>
-        <div class="col-4" align="right">
+        <div class="col-4" align="side">
           <q-btn
             no-caps
             no-wrap
@@ -118,6 +118,7 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import showCreateDeviceType from "../../components/super_admin/showCreateDeviceTypes.vue";
 import showEditDeviceType from "../../components/super_admin/showEditDeviceTypes.vue";
@@ -130,6 +131,9 @@ export default {
     showEditDeviceType
   },
   // name: 'ComponentName',
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       toggleModal: this.propToggleModal,
@@ -157,7 +161,7 @@ export default {
           name: "deviceType",
           required: true,
           label: "Device Type",
-          align: "left",
+          align: "",
           field: "deviceName",
           sortable: true
         },
@@ -165,7 +169,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "right",
+          align: "side",
           field: "action",
           sortable: true
         }
@@ -224,7 +228,7 @@ export default {
           message: "Are you sure want to delete device type?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        }).then(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -240,7 +244,7 @@ export default {
                 message: "Successfully removed",
                 icon: "thumb_up"
               });
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -249,8 +253,7 @@ export default {
               });
             });
           this.$q.loading.hide();
-        })
-        .onCancel(() => {
+        }).catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
