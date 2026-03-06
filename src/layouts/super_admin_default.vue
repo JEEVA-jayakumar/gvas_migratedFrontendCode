@@ -1,10 +1,12 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <customHeader
-      :getUserName="getUserName"
-      :leftDrawerOpen="leftDrawerOpen"
-      @fnToggleSideMenu="toggleSideMenu"
-    />
+    <q-header elevated>
+      <customHeader
+        :getUserName="getUserName"
+        :leftDrawerOpen="leftDrawerOpen"
+        @fnToggleSideMenu="toggleSideMenu"
+      />
+    </q-header>
 
     <q-drawer
       class="shadow-9"
@@ -31,6 +33,8 @@
       <router-view v-slot="{ Component }">
         <transition
           appear
+          v-on:before-enter="beforeEnter"
+          v-on:after-enter="afterEnter"
           enter-active-class="animated fadeIn"
           leave-active-class="animated fadeOut"
           mode="out-in"
@@ -184,6 +188,13 @@ export default {
     this.leftDrawerOpen = savedState === null ? true : savedState === "true";
   },
   methods: {
+    ...mapActions("commonLoader", ["TOGGLE_COMMON_LOADER"]),
+    beforeEnter(el) {
+      this.TOGGLE_COMMON_LOADER(true);
+    },
+    afterEnter(el) {
+      this.TOGGLE_COMMON_LOADER(false);
+    },
     toggleSideMenu() {
       this.leftDrawerOpen = !this.leftDrawerOpen;
       localStorage.setItem("leftDrawerOpen", this.leftDrawerOpen);

@@ -6,7 +6,6 @@
       round
       @click="triggerSideMenu"
       aria-label="Menu"
-      v-if="getRole != 'KSN'"
     >
       <q-icon name="menu" />
     </q-btn>
