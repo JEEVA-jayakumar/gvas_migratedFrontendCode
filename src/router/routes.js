@@ -417,7 +417,7 @@ const routes = [
       component: Changemanagement
     },
     {
-      name: "changemanagement",
+      name: "changemanagementterminal",
       path: "change/management/terminal",
       component: Changemanagementterminal
     },
@@ -466,7 +466,7 @@ const routes = [
       component: ChangemanagementEditDatarejectfinance
     },
     {
-      name: "ChangemanagementEditData",
+      name: "inventoryEditData",
       path: "inventory/:id/edit/data",
       component: deviceDeployementEditData
     },
@@ -1124,7 +1124,7 @@ const routes = [
       component: InventorywithResellar
     },
     {
-      name: "inventorywithresellar",
+      name: "inventorywithresellar_allocate",
       path: "central/allocate/device/resellar",
       component: InventoryWithResellar
     },
@@ -1543,7 +1543,7 @@ const routes = [
 
   // Router for Operations head
   {
-    name: "OH",
+    name: "OPS_HEAD",
     path: "/ops/head/",
     component: Default_OpsHead,
     children: [{

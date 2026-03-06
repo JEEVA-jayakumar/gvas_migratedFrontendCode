@@ -1,9 +1,9 @@
 <template>
   <q-page>
     <div>
-      <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @update:model-value="changeTabs">
-        <q-tab color="dark" name="tab-1" label="Active Users" />
-        <q-tab color="dark" name="tab-2" label="De-activated Users" />
+      <q-tabs v-model="activeTab" class="shadow-1" active-color="purple-9" indicator-color="purple-9" align="left" @update:model-value="changeTabs">
+        <q-tab name="tab-1" label="Active Users" />
+        <q-tab name="tab-2" label="De-activated Users" />
       </q-tabs>
 
       <q-tab-panels v-model="activeTab" keep-alive>
