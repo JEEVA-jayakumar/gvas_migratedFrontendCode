@@ -21,7 +21,6 @@
         no-border
         inset-delimiter
         highlight
-        style="padding-top:65px"
       >
         <q-item clickable v-for="menu in menus" :key="menu.id" :to="menu.to" class="menu-main-item-color-SA">
           <q-item-section class="menu-item-color-SA">{{menu.name}}</q-item-section>
