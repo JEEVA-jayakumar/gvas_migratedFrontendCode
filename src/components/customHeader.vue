@@ -15,7 +15,6 @@
         <!-- {{localStorage.getItem('selectedTab')}} -->
         <div class="col-auto">
           <img
-            v-if="leftDrawerOpen"
             class="cursor-pointer"
             src="~assets/images/logo.png"
             style="height:38px;"

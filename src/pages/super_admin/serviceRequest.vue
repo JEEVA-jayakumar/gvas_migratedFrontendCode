@@ -5,10 +5,10 @@
         <div class="col">
           <q-tabs
             v-model="inventoryOptionSelected"
-            active-color="dark"
-            indicator-color="dark"
+            active-color="purple-9"
+            indicator-color="purple-9"
             class="shadow-1"
-            align=""
+            align="left"
           >
             <q-tab name="serviceRequest" label="Service Request" />
             <q-tab name="issueTypes" label="Issue Types" />

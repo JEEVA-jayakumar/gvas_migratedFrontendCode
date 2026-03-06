@@ -1,10 +1,10 @@
 <template>
   <q-page>
     <div>
-      <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" >
-        <q-tab @click="ajaxSpareData" color="dark" name="tab-1" label="Active Service Request" />
-        <q-tab  color="dark" name="tab-2" label="Deactive Service Request" />
-</q-tabs>
+      <q-tabs v-model="activeTab" class="shadow-1" active-color="purple-9" indicator-color="purple-9" align="left">
+        <q-tab @click="ajaxSpareData" name="tab-1" label="Active Service Request" />
+        <q-tab name="tab-2" label="Deactive Service Request" />
+      </q-tabs>
 <q-tab-panels v-model="activeTab" animated>
 <q-tab-panel name="tab-1">
           <q-table 
@@ -125,7 +125,7 @@ import showActiveServiceType from "../../components/super_admin/showActiveServic
 import { mapGetters, mapActions } from "vuex";
 export default {
   setup() { return { v$: useVuelidate() } },
-  name: "getserviceRequestGetTypes",
+  name: "ServiceRequestComponent",
   components: {
     ShowAddServiceType,
     showEditServiceType,
@@ -414,6 +414,12 @@ export default {
     },
 
     ajaxSpareData() {
+      this.$q.loading.show({
+        delay: 100,
+        message: "Please Wait",
+        spinnerColor: "purple-9",
+        customClass: "shadow-none"
+      });
       this.FETCH_ALL_SERVICE_REQUEST_GET_TYPES()
         .then(res => {
           console.log("getserviceRequestGetTypes------->", JSON.stringify(this.getserviceRequestGetTypes))
@@ -426,10 +432,18 @@ export default {
              
           })
         .catch(() => {
+        })
+        .finally(() => {
           this.$q.loading.hide();
         });
     },
     ajaxSpareData1() {
+      this.$q.loading.show({
+        delay: 100,
+        message: "Please Wait",
+        spinnerColor: "purple-9",
+        customClass: "shadow-none"
+      });
       this.FETCH_SUB_TASK_DATAS()
         .then(res => {
           this.tableData1 = this.getsubTaskDetails;
@@ -439,6 +453,8 @@ export default {
           );
         })
         .catch(() => {
+        })
+        .finally(() => {
           this.$q.loading.hide();
         });
     },
