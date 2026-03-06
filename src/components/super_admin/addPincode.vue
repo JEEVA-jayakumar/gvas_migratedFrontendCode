@@ -8,30 +8,30 @@
       <q-card-section class="row items-center q-pb-none">
         <div class="text-h6 text-purple-9">Add Pincode</div>
         <q-space />
-        <q-btn icon="close" flat round dense v-close-popup @click="emitfnshowAddPincode" />
+        <q-btn icon="close" flat round  v-close-popup @click="emitfnshowAddPincode" />
       </q-card-section>
 
       <q-card-section>
         <q-form @submit="submitPincode" class="q-gutter-md">
           <q-input
-            outlined
-            dense
+
+
             v-model="formData.pincode"
             label="Pincode*"
             :error="v$.formData.pincode.$error"
             color="purple-9"
           />
           <q-input
-            outlined
-            dense
+
+
             v-model="formData.stateName"
             label="State Name*"
             :error="v$.formData.stateName.$error"
             color="purple-9"
           />
           <q-input
-            outlined
-            dense
+
+
             v-model="formData.cityName"
             label="City Name*"
             :error="v$.formData.cityName.$error"

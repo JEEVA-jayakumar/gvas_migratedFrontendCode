@@ -83,7 +83,7 @@
               </q-item-section>
             </q-item>
           </q-card-section>
-          <q-card-actions vertical align="side">
+          <q-card-actions vertical align="right">
             <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" />
           </q-card-actions>
         </q-card>

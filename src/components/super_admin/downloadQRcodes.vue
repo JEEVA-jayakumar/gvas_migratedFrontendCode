@@ -21,7 +21,7 @@
         <q-td v-slot:body-cell-action="props" :props="props">
           <div class="row no-wrap no-padding">
             <q-btn
-              dense
+
               no-caps
               no-wrap
               icon="far fa-download-square"
@@ -57,7 +57,7 @@
       <!-- <br />
       <br />
       <div class="row group">
-        <div class="col group" align="side">
+        <div class="col group" align="right">
           <q-btn
             :disabled="formData.selectQRDownload.length == 0"
             color="green"

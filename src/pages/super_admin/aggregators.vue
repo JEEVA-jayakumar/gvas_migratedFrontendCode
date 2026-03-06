@@ -30,9 +30,9 @@
                         <template v-slot:body-cell-action="props">
                             <q-td :props="props">
                                 <div class="row no-wrap no-padding">
-                                    <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
+                                    <q-btn  no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
                                         @click="fnShowEditAggregator(props.row)" flat class="text-light-blue"></q-btn>
-                                    <q-btn dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md"
+                                    <q-btn  no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md"
                                         @click="fnDeleteAggregators(props.row)" flat class="text-negative"></q-btn>
                                 </div>
                             </q-td>
@@ -52,7 +52,7 @@
                                     </template>
                                 </q-input>
                             </div>
-                            <div class="col-6" align="side">
+                            <div class="col-6" align="right">
                                 <q-btn no-caps class="text-weight-regular" label="Add New Aggregators"
                                     @click="fnShowAddNewAggregators()" color="purple-9" size="md" />
                             </div>
@@ -74,7 +74,7 @@
                         <template v-slot:body-cell-action1="props">
                             <q-td :props="props">
                                 <div class="row no-wrap no-padding">
-                                    <q-btn dense no-caps no-wrap label="Active" icon="far fa-plus-square" size="md"
+                                    <q-btn  no-caps no-wrap label="Active" icon="far fa-plus-square" size="md"
                                         @click="fnActivate(props.row)" flat class="text-positive"></q-btn>
                                 </div>
                             </q-td>
@@ -145,7 +145,7 @@ export default {
                     name: "name",
                     required: true,
                     label: "Aggregator",
-                    align: "",
+                    align: "left",
                     field: "name",
                     sortable: false
                 },
@@ -153,7 +153,7 @@ export default {
                     name: "action",
                     required: true,
                     label: "",
-                    align: "",
+                    align: "left",
                     field: "action",
                     sortable: false
                 }
@@ -163,7 +163,7 @@ export default {
                     name: "name",
                     required: true,
                     label: "Aggregator",
-                    align: "",
+                    align: "left",
                     field: "name",
                     sortable: false
                 },
@@ -171,7 +171,7 @@ export default {
                     name: "action1",
                     required: true,
                     label: "",
-                    align: "",
+                    align: "left",
                     field: "action1",
                     sortable: false
                 }

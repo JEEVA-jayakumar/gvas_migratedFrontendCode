@@ -27,7 +27,7 @@
             </div>
           </div>
         </div>
-        <div class="col" align="side">
+        <div class="col" align="right">
           <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
         </div>
       </div>
@@ -59,7 +59,7 @@
               <q-td :props="props">
                 <div class="row no-wrap no-padding">
                   <q-btn
-                    dense
+
                     no-caps
                     no-wrap
                     label="Modify"
@@ -70,7 +70,7 @@
                     class="text-light-blue"
                   ></q-btn>
                   <q-btn
-                    dense
+
                     no-caps
                     no-wrap
                     label="Disable"
@@ -94,7 +94,7 @@
                   label="Search merchant type"
                 />
               </div>
-              <div class="col-4" align="side">
+              <div class="col-4" align="right">
                 <q-btn
                   no-caps
                   no-wrap
@@ -124,7 +124,7 @@
               <q-td :props="props">
                 <div class="row no-wrap no-padding">
                   <q-btn
-                    dense
+
                     no-caps
                     no-wrap
                     label="Enable"

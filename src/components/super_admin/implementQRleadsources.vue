@@ -49,7 +49,7 @@
       <q-td v-slot:body-cell-action="props" :props="props">
         <div class="row no-wrap no-padding">
           <!-- <q-btn
-            dense
+
             no-caps
             no-wrap
             label="Delete"
@@ -59,7 +59,7 @@
             class="text-red"
           ></q-btn>-->
           <q-btn
-            dense
+
             no-caps
             no-wrap
             label="Delete"

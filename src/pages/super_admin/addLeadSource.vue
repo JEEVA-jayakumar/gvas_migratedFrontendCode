@@ -12,7 +12,7 @@
         <div class="col">
           <div class="q-title text-weight-regular">Manage lead sources</div>
         </div>
-        <div class="col" align="side">
+        <div class="col" align="right">
           <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
         </div>
       </div>
@@ -41,7 +41,7 @@
               <q-td :props="props">
                 <div class="row no-wrap no-padding">
                   <q-btn
-                    dense
+
                     no-caps
                     no-wrap
                     label="Modify"
@@ -52,7 +52,7 @@
                     class="text-light-blue"
                   ></q-btn>
                   <q-btn
-                    dense
+
                     no-caps
                     no-wrap
                     label="Disable"
@@ -79,7 +79,7 @@
                   </template>
                 </q-input>
               </div>
-              <div class="col-4" align="side">
+              <div class="col-4" align="right">
                 <q-btn
                   no-caps
                   no-wrap
@@ -108,7 +108,7 @@
               <q-td :props="props">
                 <div class="row no-wrap no-padding">
                   <q-btn
-                    dense
+
                     no-caps
                     no-wrap
                     label="Enable"
@@ -184,12 +184,12 @@ export default {
         rowsPerPage: 5
       },
       activatedColumns: [
-        { name: "sourceName", label: "Lead source", align: "", field: "sourceName", sortable: false },
-        { name: "action", label: "", align: "", field: "action", sortable: false }
+        { name: "sourceName", label: "Lead source", align: "left", field: "sourceName", sortable: false },
+        { name: "action", label: "", align: "left", field: "action", sortable: false }
       ],
       deActivatedColumns: [
-        { name: "sourceName", label: "Lead source", align: "", field: "sourceName", sortable: false },
-        { name: "action", label: "", align: "", field: "action", sortable: false }
+        { name: "sourceName", label: "Lead source", align: "left", field: "sourceName", sortable: false },
+        { name: "action", label: "", align: "left", field: "action", sortable: false }
       ]
     };
   },

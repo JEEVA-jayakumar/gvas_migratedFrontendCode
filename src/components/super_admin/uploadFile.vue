@@ -47,7 +47,7 @@
           </div>
           <div v-else>
             <q-btn
-              dense
+
               outline
               color="grey-7"
               size="sm"
@@ -62,7 +62,7 @@
             color="positive"
             class="center"
             @click="finalFileUploadAndSubmit()"
-            align="side"
+            align="right"
             label="Submit"
           />
           <q-btn
@@ -71,7 +71,7 @@
             color="positive"
             class="center"
             @click="finalFileUploadAndSubmit()"
-            align="side"
+            align="right"
             label="cancel"
           />
         </div>

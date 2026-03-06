@@ -22,7 +22,7 @@
                 <q-item-section side>
                   <q-btn
                     round
-                    dense
+
                     no-caps
                     size="md"
                     @click="fnManageLeadSource"
@@ -47,7 +47,7 @@
                 <q-item-section side>
                   <q-btn
                     round
-                    dense
+
                     no-caps
                     size="md"
                     @click="fnManageDevice"
@@ -85,7 +85,7 @@
                 <q-item-section side>
                   <q-btn
                     round
-                    dense
+
                     no-caps
                     size="md"
                     @click="fnManagePlan"
@@ -121,7 +121,7 @@
               </q-item>
             </q-list>
           </q-card-section>
-          <q-card-actions vertical align="side">
+          <q-card-actions vertical align="right">
             <q-btn label="submit" :disabled="Submitdata" @click="fnsubmit(formData)" color="purple-9" />
           </q-card-actions>
         </q-card>

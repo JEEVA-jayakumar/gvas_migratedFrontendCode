@@ -37,8 +37,8 @@
           >
             <template v-slot:top-side>
               <q-input
-                outlined
-                dense
+
+
                 clearable
                 v-model="filterSearch"
                 placeholder="Search"
@@ -61,7 +61,7 @@
             <template v-slot:body-cell-action="props">
               <q-td :props="props">
                 <q-btn
-                  dense
+
                   unelevated
                   no-caps
                   label="Modify"

@@ -55,10 +55,10 @@
         </div>
       </div>
 
-      <div class="group" align="side">
-        <q-btn flat size="md" align="side" class="bg-white text-weight-regular text-grey-8" @click="emitfnEditrolePermissions(false)">Cancel
+      <div class="group" align="right">
+        <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnEditrolePermissions(false)">Cancel
         </q-btn>
-        <q-btn size="md" align="side" @click="fnEditRoleSubmit(formData.rolePermissions)" color="purple-9">Save
+        <q-btn size="md" align="right" @click="fnEditRoleSubmit(formData.rolePermissions)" color="purple-9">Save
         </q-btn>
       </div>
     </q-card>

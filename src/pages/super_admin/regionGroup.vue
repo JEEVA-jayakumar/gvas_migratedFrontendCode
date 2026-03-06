@@ -28,7 +28,7 @@
             <template v-slot:body-cell-action="props">
               <q-td :props="props">
                 <div class="row no-wrap no-padding">
-                  <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
+                  <q-btn  no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
                     @click="fnShowEditRegionsGroup(props.row)" flat class="text-light-blue"></q-btn>
                 </div>
               </q-td>
@@ -39,7 +39,7 @@
                 <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.."
                   class="q-mr-lg" />
               </div>
-              <div class="col-6" align="side">
+              <div class="col-6" align="right">
                 <q-btn no-caps class="text-weight-regular" label="Add New RegionGroup"
                   @click="fnShowAddNewRegionsGroups(activeTableData[0])" color="purple-9" size="md" />
               </div>
@@ -55,8 +55,8 @@
                         }}</q-td>
                         <q-td v-slot:body-cell-action1="props" :props="props">
                             <div class="row no-wrap no-padding">
-                          // <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md" @click="fnShowEditRegions(props.row)" flat class="text-light-blue" ></q-btn> 
-             //<q-btn dense no-caps no-wrap label="Active" icon="far fa-minus-square" size="md" @click="fnActiveRegionGroup(props.row)" flat class="text-positive" ></q-btn>  
+                          // <q-btn  no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md" @click="fnShowEditRegions(props.row)" flat class="text-light-blue" ></q-btn>
+             //<q-btn  no-caps no-wrap label="Active" icon="far fa-minus-square" size="md" @click="fnActiveRegionGroup(props.row)" flat class="text-positive" ></q-btn>
                             </div>
                         </q-td>
 
@@ -141,7 +141,7 @@ export default {
                     name: "regionGroup",
                     required: true,
                     label: "Region group",
-                    align: "",
+                    align: "left",
                     field: row => {
                         return row.regionName;
                     },
@@ -151,7 +151,7 @@ export default {
                 //   name: "label",
                 //   required: true,
                 //   label: "Region",
-                //   align: "",
+                //   align: "left",
                 //   field: "regionAreaName",
                 //   sortable: false
                 // },
@@ -159,7 +159,7 @@ export default {
                     name: "action",
                     required: true,
                     label: "",
-                    align: "",
+                    align: "left",
                     field: "action",
                     sortable: false
                 }
@@ -169,7 +169,7 @@ export default {
                     name: "regionGroup",
                     required: true,
                     label: "Region group",
-                    align: "",
+                    align: "left",
                     field: row => {
                         return row.regionName;
                     },
@@ -179,7 +179,7 @@ export default {
                 //   name: "label",
                 //   required: true,
                 //   label: "Region",
-                //   align: "",
+                //   align: "left",
                 //   field: "regionAreaName",
                 //   sortable: false
                 // },
@@ -187,7 +187,7 @@ export default {
                     name: "action1",
                     required: true,
                     label: "",
-                    align: "",
+                    align: "left",
                     field: "action1",
                     sortable: false
                 }

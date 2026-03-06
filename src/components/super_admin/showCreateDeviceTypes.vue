@@ -60,10 +60,10 @@
               :error="$v.formData.isDevice.$error"
           :val="item.value" :label="item.label" />
           </div>
-          <div class="group" align="side">
+          <div class="group" align="right">
             <q-btn
               outline
-              align="side"
+              align="right"
               icon="block"
               class="text-weight-regular text-grey-8"
               color="grey-6"
@@ -71,7 +71,7 @@
               label="Cancel"
             />
             <q-btn
-              align="side"
+              align="right"
               icon="check"
               @click="fnfinalsubmitDeviceType(formData)"
               color="purple-9"

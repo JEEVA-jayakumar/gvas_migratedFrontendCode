@@ -12,11 +12,11 @@
               <div class="col-md-8">
                 <div class="q-title text-weight-regular">Create Role/Permissions</div>
               </div>
-              <div class="col-md-2" align="side">
+              <div class="col-md-2" align="right">
                 <q-btn flat size="md" class="bg-white text-weight-regular text-grey-8" @click="emitfnCreaterolePermissions(false)">Cancel
                 </q-btn>
               </div>
-              <div class="col-md-2" align="side">
+              <div class="col-md-2" align="right">
                 <q-btn size="md" @click="fnCreateRoleSubmit(formData.rolePermissions)" color="purple-9">Save
                 </q-btn>
               </div>

@@ -51,7 +51,7 @@
           <q-td :props="props">
             <q-btn
               align=""
-              dense
+
               flat
               no-wrap
               no-caps
@@ -95,7 +95,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-12" align="side">
+          <div class="col-md-12" align="right">
                 <q-btn no-caps class="text-weight-regular" @click="$router.push('/super/admin/manage/mATMplan')"
                   label="Add M-ATM Plan" color="purple-9" size="md" />
               </div>
@@ -152,7 +152,7 @@ export default {
           name: "planName",
           required: true,
           label: "Plan Name",
-          align: "",
+          align: "left",
           field: "planName",
           sortable: false
         },
@@ -160,7 +160,7 @@ export default {
           name: "sourceName",
           required: true,
           label: "Lead Source",
-          align: "",
+          align: "left",
           field: row => row.leadSourceId?.sourceName,
           sortable: false
         },
@@ -168,7 +168,7 @@ export default {
           name: "deviceName",
           required: true,
           label: "Device Type",
-          align: "",
+          align: "left",
           field: row => row.deviceId?.deviceName,
           sortable: false
         },
@@ -176,7 +176,7 @@ export default {
           name: "active",
           required: true,
           label: "Status",
-          align: "",
+          align: "left",
         },
         {
           name: 'action',

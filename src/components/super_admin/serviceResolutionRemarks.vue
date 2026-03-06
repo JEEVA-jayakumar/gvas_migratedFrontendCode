@@ -21,9 +21,9 @@
   
               <q-td v-slot:body-cell-action1="props" :props="props">
                 <div class="row no-wrap no-padding">
-                  <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
+                  <q-btn  no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
                     @click="fnShowEditServiceResolutionRemarks(props.row)" flat class="text-light-blue"></q-btn>
-                  <q-btn dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md"
+                  <q-btn  no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md"
                     @click="fnDeleteServiceResolutionRemarks(props.row)" flat class="text-negative"></q-btn>
                 </div>
               </q-td>
@@ -32,7 +32,7 @@
                   <q-input clearable color="grey-9" v-model="filterSearch1" placeholder="Search by Issue Name" class="q-mr-lg" />
                 </div>
                 <!--END: table filter,search -->
-                <div class="col-3" align="side">
+                <div class="col-3" align="right">
                   <q-btn no-caps class="text-weight-regular" label="Add Remarks"
                     @click="fnShowAddServiceResolutionRemarks(props.row)" color="purple-9" size="md" />
                 </div>
@@ -54,7 +54,7 @@
   
               <q-td v-slot:body-cell-action2="props" :props="props">
                 <div class="row no-wrap no-padding">
-                  <q-btn dense no-caps no-wrap label="Active" icon="far fa-plus-square" size="md"
+                  <q-btn  no-caps no-wrap label="Active" icon="far fa-plus-square" size="md"
                     @click="fnShowActiveServiceResolutionRemarks(props.row)" flat class="text-light-blue"></q-btn>
                 </div>
               </q-td>

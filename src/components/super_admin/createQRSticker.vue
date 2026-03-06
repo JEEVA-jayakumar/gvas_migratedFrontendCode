@@ -61,7 +61,7 @@
           </div>
         </div>
         <div class="row group">
-          <div class="col" align="side">
+          <div class="col" align="right">
             <q-btn
               :disabled="submitDisabled"
               color="light-blue"

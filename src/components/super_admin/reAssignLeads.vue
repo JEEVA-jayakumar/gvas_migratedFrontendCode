@@ -99,7 +99,7 @@
               class="q-ma-xs"
             />
           </div>
-          <div class="col-12 col-lg-auto" align="side">
+          <div class="col-12 col-lg-auto" align="right">
             <q-btn icon="check" color="positive" class="q-ma-xs" label="Assign" @click="fnAssign" />
           </div>
           <!--END: table filter,search -->

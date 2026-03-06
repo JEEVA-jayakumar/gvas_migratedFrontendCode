@@ -16,7 +16,7 @@
       <template v-slot:body-cell-action="props">
         <q-td :props="props" class="q-gutter-x-sm">
           <q-btn
-            dense
+
             unelevated
             no-caps
             label="Modify"
@@ -25,7 +25,7 @@
             @click="fnShowEditDeviceTypes(props.row)"
           />
           <q-btn
-            dense
+
             unelevated
             no-caps
             label="Disable"
@@ -42,8 +42,8 @@
           <div class="row q-gutter-sm items-center">
             <div class="col-auto">
               <q-input
-                dense
-                filled
+
+
                 clearable
                 color="purple-9"
                 v-model="filterSearch"
@@ -114,7 +114,7 @@ export default {
           name: "deviceType",
           required: true,
           label: "Device Type",
-          align: "",
+          align: "left",
           field: "deviceName",
           sortable: true,
         },

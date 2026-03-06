@@ -41,10 +41,10 @@
         </div>
 
         <div class="row gutter-sm q-py-sm items-center">
-          <div class="col-md-12 group" align="side">
-            <q-btn flat align="side" class="bg-white text-weight-regular text-grey-8"
+          <div class="col-md-12 group" align="right">
+            <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8"
               @click="emitfnShowAddNewServiceType()">Cancel</q-btn>
-            <q-btn align="side" @click="fnfinalsubmitAddSpareParts(formData)" color="purple-9">Save</q-btn>
+            <q-btn align="right" @click="fnfinalsubmitAddSpareParts(formData)" color="purple-9">Save</q-btn>
           </div>
         </div>
       </form>

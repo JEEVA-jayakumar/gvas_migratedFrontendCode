@@ -10,7 +10,8 @@
       bordered
       :width="260"
       :breakpoint="500"
-      class="bg-dark text-white"
+      class="text-white"
+      :style="{ background: getComputedColor }"
     >
       <div class="q-py-md q-px-lg flex items-center" style="height: 65px; background: rgba(0,0,0,0.1)">
         <img src="~assets/images/logo.png" style="height: 35px" />
@@ -1030,6 +1031,9 @@ export default {
   },
   computed: {
     ...mapGetters("superAdminAggregators", ["getActiveCreatedAggregatorList"]),
+    getComputedColor() {
+      return this.$route.fullPath.includes("super/admin") ? "#773581" : "#202c3f";
+    },
     currentMenus() {
       let menuItems = [];
       const userInfo = JSON.parse(localStorage.getItem("u_i"));

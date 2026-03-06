@@ -26,10 +26,10 @@
           </div>
         </div>
         <div class="row gutter-sm q-pa-md">
-          <div class="col-md-12" align="side">
-            <q-btn flat size="md" align="side" class="bg-white q-mr-sm text-weight-regular text-grey-8" @click="emitfnshowAddPermissions(propShowCreatePermission)">Cancel
+          <div class="col-md-12" align="right">
+            <q-btn flat size="md" align="right" class="bg-white q-mr-sm text-weight-regular text-grey-8" @click="emitfnshowAddPermissions(propShowCreatePermission)">Cancel
             </q-btn>
-            <q-btn size="md" align="side" @click="fnEditPermissionSubmit(formData.permissionDetails)" color="purple-9">Save
+            <q-btn size="md" align="right" @click="fnEditPermissionSubmit(formData.permissionDetails)" color="purple-9">Save
             </q-btn>
           </div>
         </div>

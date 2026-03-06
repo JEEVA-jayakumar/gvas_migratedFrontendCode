@@ -174,7 +174,7 @@
         </div>
       </div>
 
-      <div class="full-width group" align="side">
+      <div class="full-width group" align="right">
         <q-btn flat class="bg-white text-weight-regular text-grey-8" @click="GoToUsers()">Cancel</q-btn>
         <q-btn class="text-weight-regular" color="amber-9" @click="refreshData()">Reset</q-btn>
         <q-btn type="button" color="purple-9" @click="fnSubmitShowEditUser(formData.addUserDetails)">Submit</q-btn>

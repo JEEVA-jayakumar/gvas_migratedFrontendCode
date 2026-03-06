@@ -12,10 +12,10 @@
            <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
         <q-td v-slot:body-cell-action="props" :props="props">
           <div class="row no-wrap no-padding">
-            <q-btn dense no-caps no-wrap label="Modify Role/Permissions" icon="far fa-plus-square" size="md" @click="fnShowEditRole(props.row)" flat class="text-light-blue">
+            <q-btn  no-caps no-wrap label="Modify Role/Permissions" icon="far fa-plus-square" size="md" @click="fnShowEditRole(props.row)" flat class="text-light-blue">
             </q-btn>
 
-            <q-btn dense no-caps no-wrap label="Disable Role" icon="far fa-minus-square" size="md" @click="fnDisableRole(props.row)" flat class="text-negative">
+            <q-btn  no-caps no-wrap label="Disable Role" icon="far fa-minus-square" size="md" @click="fnDisableRole(props.row)" flat class="text-negative">
             </q-btn>
           </div>
         </q-td>
@@ -27,7 +27,7 @@
 
 
             <!-- Can be enabled in future for adding new role to application-->
-            <!-- <div class="col-md-6 q-my-md" align="side">
+            <!-- <div class="col-md-6 q-my-md" align="right">
               <q-btn no-caps no-wrap label="Add New Role" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreateRole()"/>
             </div> -->
             <!-- Can be enabled in future for adding new role to application -->
@@ -44,7 +44,7 @@
                 class="q-mr-lg"
               />
             </div>
-            <div class="col-md-12" align="side">
+            <div class="col-md-12" align="right">
             <q-btn
               no-caps
               class="text-weight-regular"
@@ -64,10 +64,10 @@
            <q-table :rows="deactivatedTableData" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1" v-model:pagination="paginationControl1" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
         <q-td v-slot:body-cell-action="props" :props="props">
           <div class="row no-wrap no-padding">
-            <!-- <q-btn dense no-caps no-wrap label="Modify Role/Permissions" icon="far fa-plus-square" size="md" @click="fnShowEditRole(props.row)" flat class="text-light-blue">
+            <!-- <q-btn  no-caps no-wrap label="Modify Role/Permissions" icon="far fa-plus-square" size="md" @click="fnShowEditRole(props.row)" flat class="text-light-blue">
             </q-btn> -->
 
-            <q-btn dense no-caps no-wrap label="Active" icon="far fa-minus-square" size="md" @click="fnActiveRoles(props.row)" flat class="text-negative">
+            <q-btn  no-caps no-wrap label="Active" icon="far fa-minus-square" size="md" @click="fnActiveRoles(props.row)" flat class="text-negative">
             </q-btn>
           </div>
         </q-td>
@@ -78,7 +78,7 @@
             
 
             <!-- Can be enabled in future for adding new role to application-->
-            <!-- <div class="col-md-6 q-my-md" align="side">
+            <!-- <div class="col-md-6 q-my-md" align="right">
               <q-btn no-caps no-wrap label="Add New Role" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreateRole()"/>
             </div> -->
             <!-- Can be enabled in future for adding new role to application -->
@@ -180,7 +180,7 @@ export default {
           name: "hierarchy",
           required: true,
           label: "Hierarchy",
-          align: "",
+          align: "left",
           field: row => {
             if (row.hierarchy) {
               return row.hierarchy.hierarchy;
@@ -194,7 +194,7 @@ export default {
           name: "role",
           required: true,
           label: "Role",
-          align: "",
+          align: "left",
           field: "role",
           sortable: false,
         },
@@ -202,7 +202,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "",
+          align: "left",
           field: "action",
           sortable: false,
         },
@@ -213,7 +213,7 @@ export default {
           name: "hierarchy",
           required: true,
           label: "Hierarchy",
-          align: "",
+          align: "left",
           field: row => {
             if (row.hierarchy) {
               return row.hierarchy.hierarchy;
@@ -227,7 +227,7 @@ export default {
           name: "role",
           required: true,
           label: "Role",
-          align: "",
+          align: "left",
           field: "role",
           sortable: false,
         },
@@ -235,7 +235,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "",
+          align: "left",
           field: "action",
           sortable: false,
         },

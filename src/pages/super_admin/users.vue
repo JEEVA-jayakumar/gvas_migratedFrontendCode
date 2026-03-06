@@ -15,7 +15,7 @@
 
             <template v-slot:body-cell-name="props">
               <q-td :props="props">
-                <q-btn align="" dense flat no-wrap no-caps icon="fas fa-pencil-alt" color="primary"
+                <q-btn align=""  flat no-wrap no-caps icon="fas fa-pencil-alt" color="primary"
                   @click="fnShowEditUser(props.row.userId)" :label="props.row.user.name" class="capitalize" />
               </q-td>
             </template>
@@ -53,14 +53,14 @@
               <div class="col-md-12">
                 <div class="row justify-between">
                   <div class="col">
-                    <q-btn v-for="(tab, index) in getAllHierarchiesData" :key="index"
+                    <q-btn v-for="(tab, index) in customizedHirarchyFilter" :key="index"
                       class="text-black q-ma-xs" size="sm" :class="[
                         activeItemId === index
                           ? 'customTabActive text-light'
                           : 'bg-blue-grey-2'
                       ]" @click="ajaxLoadDataForHeirarchyIdFilter(index, tab)" rounded :label="tab.label" />
                   </div>
-                  <div class="col-auto" align="side">
+                  <div class="col-auto" align="right">
                     <div class="row justify-evenly">
                       <div class="col-auto q-px-xs">
                         <q-btn :disabled="formData.selectedUsersToDelete.length == 0" flat color="white"
@@ -95,7 +95,7 @@
 
             <template v-slot:body-cell-name="props">
               <q-td :props="props">
-                <q-btn align="" dense flat no-wrap no-caps icon="fas fa-pencil-alt" color="primary"
+                <q-btn align=""  flat no-wrap no-caps icon="fas fa-pencil-alt" color="primary"
                   @click="fnShowEditUser(props.row.userId)" :label="props.row.user.name" class="capitalize" />
               </q-td>
             </template>
@@ -120,7 +120,7 @@
                     <q-input clearable color="grey-9" v-model.trim="filterSearch" placeholder="Type.."
                       label="Search by Name, Merchant Name, Lead ID" />
                   </div>
-                  <div class="col-md-6" align="side">
+                  <div class="col-md-6" align="right">
                     <q-btn :disabled="formData.selectedUsersToDelete.length == 0" flat color="white"
                       class="text-grey-9 q-mr-md" size="md"
                       @click="activate_deactivate_users(formData.selectedUsersToDelete)" icon="far fa-trash-alt" />
@@ -227,7 +227,7 @@ export default {
           name: "name",
           required: true,
           label: "Name",
-          align: "",
+          align: "left",
           field: row => {
             return row.user.name;
           },
@@ -237,7 +237,7 @@ export default {
           name: "employeeID",
           required: true,
           label: "Employee ID",
-          align: "",
+          align: "left",
           field: row => {
             return row.user.employeeID;
           },
@@ -247,7 +247,7 @@ export default {
           name: "contactNumber",
           required: true,
           label: "Contact No",
-          align: "",
+          align: "left",
           field: row => {
             return row.user.contactNumber;
           },
@@ -257,7 +257,7 @@ export default {
           name: "email",
           required: true,
           label: "Email ID",
-          align: "",
+          align: "left",
           field: row => {
             return row.user.email;
           },
@@ -267,7 +267,7 @@ export default {
           name: "role",
           required: true,
           label: "Role",
-          align: "",
+          align: "left",
           field: "role",
           sortable: false
         },
@@ -275,7 +275,7 @@ export default {
           name: "city",
           required: true,
           label: "Location",
-          align: "",
+          align: "left",
           field: row => {
             return row.user.city;
           },
@@ -563,7 +563,9 @@ export default {
       });
       this.activeItemId = itemIndex;
       if (tab.value == 0) {
-        this.FETCH_ALL_USERS_DATA().then(() => {
+        this.FETCH_ALL_USERS_DATA(
+          this.activeTab == "tab-2" ? this.$INACTIVE_FLAG_FOR_LIST : undefined
+        ).then(() => {
           this.$q.loading.hide();
         });
       } else {

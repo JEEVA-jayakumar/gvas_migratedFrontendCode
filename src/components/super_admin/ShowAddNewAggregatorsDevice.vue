@@ -37,10 +37,10 @@
                             class="text-weight-regular text-grey-8" color="grey-9" label="Serial Number Length"
                             placeholder="Serial Number Length" />
                     </div>
-                    <div class="group" align="side">
-                        <q-btn outline align="side" icon="block" class="text-weight-regular text-grey-8" color="grey-6"
+                    <div class="group" align="right">
+                        <q-btn outline align="right" icon="block" class="text-weight-regular text-grey-8" color="grey-6"
                             @click="emitfnShowAddNewAggregatorsDevice()" label="Cancel" />
-                        <q-btn align="side" icon="check" @click="fnfinalsubmitDeviceType(formData)" color="purple-9"
+                        <q-btn align="right" icon="check" @click="fnfinalsubmitDeviceType(formData)" color="purple-9"
                             label="save" />
                     </div>
                 </div>

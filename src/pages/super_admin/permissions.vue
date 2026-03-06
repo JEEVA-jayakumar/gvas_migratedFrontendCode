@@ -18,9 +18,9 @@
         <template v-slot:body-cell-action="props">
           <q-td :props="props">
             <div class="row no-wrap no-padding">
-              <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md" @click="fnShowEditPermission(props.row)" flat class="text-light-blue">
+              <q-btn  no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md" @click="fnShowEditPermission(props.row)" flat class="text-light-blue">
               </q-btn>
-              <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative"> -->
+              <!-- <q-btn   no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative"> -->
               <!-- </q-btn> -->
             </div>
           </q-td>
@@ -31,7 +31,7 @@
             <!--START: table title -->
             <div class="col-12 q-title q-my-lg text-weight-regular">Permissions</div>
 
-            <!-- <div class="col-md-6 q-my-md" align="side">
+            <!-- <div class="col-md-6 q-my-md" align="right">
               <q-btn no-caps no-wrap label="Add New Permission" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreatePermission()"/>
             </div> -->
             <!--END: table title -->
@@ -109,7 +109,7 @@ export default {
           name: "permission",
           required: true,
           label: "Permission",
-          align: "",
+          align: "left",
           field: "permission",
           sortable: false,
         },
@@ -117,7 +117,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "",
+          align: "left",
           field: "action",
           sortable: false,
         },

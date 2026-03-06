@@ -29,7 +29,7 @@
             <template v-slot:body-cell-action="props">
               <q-td :props="props">
                 <div class="row no-wrap no-padding">
-                  <q-btn dense no-caps no-wrap label="Disable" icon="far fa-plus-square" size="md"
+                  <q-btn  no-caps no-wrap label="Disable" icon="far fa-plus-square" size="md"
                     @click="fnDisable(props.row)" flat class="text-light-blue">
                   </q-btn>
                 </div>
@@ -53,7 +53,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-12" align="side">
+              <div class="col-md-12" align="right">
                 <q-btn no-caps class="text-weight-regular"
                 @click="fnaddnewConfigurarions()"
                   label="Add New Configurations"
@@ -98,7 +98,7 @@ export default {
           name: "institutionName",
           required: true,
           label: "Institution Name",
-          align: "",
+          align: "left",
           field: row => row.institution?.institutionName,
           sortable: false,
         },
@@ -106,7 +106,7 @@ export default {
           name: "leadSource",
           required: true,
           label: "Lead Source",
-          align: "",
+          align: "left",
           field: row => row.leadSource?.sourceName,
           sortable: false,
         },
@@ -114,7 +114,7 @@ export default {
           name: "masterHost",
           required: true,
           label: "Master Host",
-          align: "",
+          align: "left",
           field: row => row.masterHost?.name,
           sortable: false,
         },
@@ -122,7 +122,7 @@ export default {
           name: "vas",
           required: true,
           label: "vas",
-          align: "",
+          align: "left",
           field: row => row.vas?.name,
           sortable: false,
         }
