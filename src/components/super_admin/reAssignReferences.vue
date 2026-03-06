@@ -112,16 +112,16 @@ export default {
           name: "employeeID",
           required: true,
           label: "Employee ID",
-          align: "",
-          field: "employeeID",
+          align: "left",
+          field: row => row?.employeeID || "NA",
           sortable: true
         },
         {
           name: "name",
           required: true,
           label: "Name",
-          align: "",
-          field: "name",
+          align: "left",
+          field: row => row?.name || "NA",
           sortable: true
         },
         {
@@ -129,47 +129,47 @@ export default {
           required: true,
           label: "Email",
           align: "center",
-          field: "email",
+          field: row => row?.email || "NA",
           sortable: true
         },
         {
           name: "contactNumber",
           required: true,
           label: "Contact number",
-          align: "",
-          field: "contactNumber",
+          align: "left",
+          field: row => row?.contactNumber || "NA",
           sortable: true
         },
         {
           name: "userAddress",
           required: true,
           label: "Address",
-          align: "",
-          field: "userAddress",
+          align: "left",
+          field: row => row?.userAddress || "NA",
           sortable: true
         },
         {
           name: "city",
           required: true,
           label: "City",
-          align: "",
-          field: "city",
+          align: "left",
+          field: row => row?.city || "NA",
           sortable: true
         },
         {
           name: "state",
           required: true,
           label: "State",
-          align: "",
-          field: "state",
+          align: "left",
+          field: row => row?.state || "NA",
           sortable: true
         },
         {
           name: "pincode",
           required: true,
           label: "Pincode",
-          align: "",
-          field: "pincode",
+          align: "left",
+          field: row => row?.pincode || "NA",
           sortable: true
         }
       ],

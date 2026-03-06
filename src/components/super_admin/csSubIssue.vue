@@ -114,9 +114,9 @@ import { required } from '@vuelidate/validators';
             name: "name",
             required: true,
             label: "Issue Name",
-            align: "",
+            align: "left",
             field: row => {
-            return row.name;
+            return row?.name || "NA";
           },
           sortable: true
           },
@@ -124,7 +124,7 @@ import { required } from '@vuelidate/validators';
             name: "createdAt",
             required: true,
             label: "Created Date",
-            align: "",
+            align: "left",
             field: "createdAt",
             sortable: true
           },
@@ -132,7 +132,7 @@ import { required } from '@vuelidate/validators';
             name: "updatedAt",
             required: true,
             label: "Updated Date",
-            align: "",
+            align: "left",
             field: "updatedAt",
             sortable: true
           },
@@ -140,7 +140,7 @@ import { required } from '@vuelidate/validators';
             name: "action1",
             required: true,
             label: "",
-            align: "",
+            align: "left",
             field: "action1",
             sortable: false
           }
@@ -151,9 +151,9 @@ import { required } from '@vuelidate/validators';
             name: "name",
             required: true,
             label: "Issue Name",
-            align: "",
+            align: "left",
             field: row => {
-            return row.name;
+            return row?.name || "NA";
           },
           sortable: true
           },
@@ -161,7 +161,7 @@ import { required } from '@vuelidate/validators';
             name: "createdAt",
             required: true,
             label: "Created Date",
-            align: "",
+            align: "left",
             field: "createdAt",
             sortable: true
           },
@@ -169,7 +169,7 @@ import { required } from '@vuelidate/validators';
             name: "updatedAt",
             required: true,
             label: "Updated Date",
-            align: "",
+            align: "left",
             field: "updatedAt",
             sortable: true
           },
@@ -177,7 +177,7 @@ import { required } from '@vuelidate/validators';
             name: "action2",
             required: true,
             label: "",
-            align: "",
+            align: "left",
             field: "action1",
             sortable: false
           }
@@ -187,9 +187,9 @@ import { required } from '@vuelidate/validators';
           //   name: "id",
           //   required: true,
           //   label: "id",
-          //   align: "",
+          //   align: "left",
           //   field: row => {
-          //     return row.id;
+          //     return row?.id;
           //   },
           //   sortable: true
           // },
@@ -197,12 +197,12 @@ import { required } from '@vuelidate/validators';
             name: "service_req_data",
             required: true,
             label: "Service Req Data",
-            align: "",
+            align: "left",
             // disable: row => {
-            //   return row.serviceReqType.active == false;
+            //   return row.serviceReqType?.active == false;
             // },
             field: row => {
-              return row.serviceReqType.name;
+              return row.serviceReqType?.name || "NA";
             },
             sortable: false
           },
@@ -211,9 +211,9 @@ import { required } from '@vuelidate/validators';
             name: "serviceReqIssueTypeSets",
             required: true,
             label: "Service Req Issue TypeSets",
-            align: "",
+            align: "left",
             field: row => {
-              return row.serviceReqIssueTypeSets.serviceReqIssueType.name;
+              return row.serviceReqIssueTypeSets?.serviceReqIssueType?.name || "NA";
             },
             sortable: true
           },
@@ -222,9 +222,9 @@ import { required } from '@vuelidate/validators';
             name: "serviceRequestStatusSets",
             required: true,
             label: "Service Status",
-            align: "",
+            align: "left",
             field: row => {
-              return row.name;
+              return row?.name || "NA";
             },
             sortable: true
           },

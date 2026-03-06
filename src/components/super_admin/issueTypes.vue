@@ -229,15 +229,15 @@ export default {
           name: "name",
           required: true,
           label: "Issue Name",
-          align: "",
-          field: "name",
+          align: "left",
+          field: row => row?.name || "NA",
           sortable: true
         },
         {
           name: "createdDate",
           required: true,
           label: "Created Date",
-          align: "",
+          align: "left",
           field: "createdDate",
           sortable: true
         },
@@ -245,7 +245,7 @@ export default {
           name: "updatedDate",
           required: true,
           label: "Updated Date",
-          align: "",
+          align: "left",
           field: "updatedDate",
           sortable: true
         },
@@ -253,7 +253,7 @@ export default {
           name: "action1",
           required: true,
           label: "",
-          align: "",
+          align: "left",
           field: "action1",
           sortable: false
         }
@@ -264,15 +264,15 @@ export default {
           name: "name",
           required: true,
           label: "Issue Name",
-          align: "",
-          field: "name",
+          align: "left",
+          field: row => row?.name || "NA",
           sortable: true
         },
         {
           name: "createdDate",
           required: true,
           label: "Created Date",
-          align: "",
+          align: "left",
           field: "createdDate",
           sortable: true
         },
@@ -280,7 +280,7 @@ export default {
           name: "updatedDate",
           required: true,
           label: "Updated Date",
-          align: "",
+          align: "left",
           field: "updatedDate",
           sortable: true
         },
@@ -288,7 +288,7 @@ export default {
           name: "action2",
           required: true,
           label: "",
-          align: "",
+          align: "left",
           field: "action1",
           sortable: false
         }
@@ -298,9 +298,9 @@ export default {
         //   name: "id",
         //   required: true,
         //   label: "id",
-        //   align: "",
+        //   align: "left",
         //   field: row => {
-        //     return row.id;
+        //     return row?.id;
         //   },
         //   sortable: true
         // },
@@ -308,12 +308,12 @@ export default {
           name: "service_req_data",
           required: true,
           label: "Service Req Data",
-          align: "",
+          align: "left",
           // disable: row => {
-          //   return row.serviceReqType.active == false;
+          //   return row.serviceReqType?.active == false;
           // },
           field: row => {
-            return row.serviceReqType.name;
+            return row.serviceReqType?.name || "NA";
           },
           sortable: false
         },
@@ -322,9 +322,9 @@ export default {
           name: "serviceReqIssueTypeSets",
           required: true,
           label: "Service Req Issue TypeSets",
-          align: "",
+          align: "left",
           field: row => {
-            return row.serviceReqIssueTypeSets.serviceReqIssueType.name;
+            return row.serviceReqIssueTypeSets?.serviceReqIssueType?.name || "NA";
           },
           sortable: true
         },
@@ -333,9 +333,9 @@ export default {
           name: "serviceRequestStatusSets",
           required: true,
           label: "Service Status",
-          align: "",
+          align: "left",
           field: row => {
-            return row.name;
+            return row.name || "NA";
           },
           sortable: true
         },

@@ -142,15 +142,15 @@ export default {
           name: 'name',
           required: true,
           label: 'name',
-          align: '',
-          field: 'name',
+          align: 'left',
+          field: row => row?.name || "NA",
           sortable: true
         },
         {
           name: 'updatedDate',
           required: true,
           label: 'Updated Date',
-          align: '',
+          align: 'left',
           field: 'updatedDate',
           sortable: true
         },
@@ -158,7 +158,7 @@ export default {
           name: 'action',
           required: true,
           label: '',
-          align: '',
+          align: 'left',
           field: 'action',
           sortable: false
         }
@@ -169,15 +169,15 @@ export default {
           name: 'name',
           required: true,
           label: 'name',
-          align: '',
-          field: 'name',
+          align: 'left',
+          field: row => row?.name || "NA",
           sortable: true
         },
         {
           name: 'updatedDate',
           required: true,
           label: 'Updated Date',
-          align: '',
+          align: 'left',
           field: 'updatedDate',
           sortable: true
         },
@@ -185,7 +185,7 @@ export default {
           name: 'action1',
           required: true,
           label: '',
-          align: '',
+          align: 'left',
           field: 'action1',
           sortable: false
         }

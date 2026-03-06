@@ -132,7 +132,7 @@ export default {
           name: "id",
           label: "Batch No",
           field: row => {
-            return "BatchNo_000" + row.id;
+            return row?.id ? ("BatchNo_000" + row.id) : "NA";
           },
           align: "center"
         },
@@ -142,7 +142,7 @@ export default {
           label: "Creation Date",
           align: "center",
           field: row => {
-            return row.createDate;
+            return row?.createDate || "NA";
           },
           sortable: true
         },
@@ -151,7 +151,7 @@ export default {
           required: true,
           label: "No of QR Requested",
           align: "center",
-          field: "qrCount"
+          field: row => row?.qrCount || 0
         },
 
         // {
@@ -160,7 +160,7 @@ export default {
         //   label: "Modify Date",
         //   align: "center",
         //   field: row => {
-        //     return row.device.modifyDate;
+        //     return row.device?.modifyDate;
         //   }
         // },
         {
@@ -169,7 +169,7 @@ export default {
           label: "QR Bank Selected",
           align: "center",
           field: row => {
-            return row.apiInstance.apiInstanceName;
+            return row.apiInstance?.apiInstanceName || "NA";
           }
         },
         {

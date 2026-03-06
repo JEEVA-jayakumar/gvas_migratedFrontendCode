@@ -120,7 +120,7 @@ export default {
         //   label: "Modify Date",
         //   align: "center",
         //   field: row => {
-        //     return row.device.modifyDate;
+        //     return row.device?.modifyDate;
         //   }
         // },
         {
@@ -129,7 +129,7 @@ export default {
           label: "QR Bank",
           align: "center",
           field: row => {
-            return row.sourceName;
+            return row?.sourceName || "NA";
           }
         },
         {

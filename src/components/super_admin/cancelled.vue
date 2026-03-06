@@ -215,7 +215,7 @@ export default {
           required: true,
           label: "name",
           align: "left",
-          field: "name",
+          field: row => row?.name || "NA",
           sortable: true,
         },
         {
@@ -249,7 +249,7 @@ export default {
           required: true,
           label: "name",
           align: "left",
-          field: "name",
+          field: row => row?.name || "NA",
           sortable: true,
         },
         {
