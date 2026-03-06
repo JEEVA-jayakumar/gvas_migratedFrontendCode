@@ -19,7 +19,7 @@
             <q-tab name="csSubIssue" label="CS Sub Issue" />
           </q-tabs>
 
-          <q-tab-panels v-model="inventoryOptionSelected" animated class="bg-transparent">
+          <q-tab-panels v-model="inventoryOptionSelected" animated class="bg-transparent" keep-alive>
             <q-tab-panel name="serviceRequest" class="no-padding">
               <serviceRequest/>
             </q-tab-panel>

@@ -42,7 +42,7 @@
                 </q-card-section>
                 <q-card-section class="no-padding">
                   <div class="row group q-col-gutter-md">
-                    <div v-for="(roleItem,roleIndex) in item.role" :key="roleIndex" class="col-md-3 col-sm-6 col-xs-12">
+                    <div v-for="(roleItem,roleIndex) in item.role" :key="roleIndex" class="col-md-3 col-sm-6 col-xs-9">
                       <q-card inline class="bigger full-width">
                         <q-card-section class="relative-position">
                           <div class="ellipsis q-subheading text-grey-9">{{roleItem.role}}</div>

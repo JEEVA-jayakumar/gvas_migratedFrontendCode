@@ -11,6 +11,7 @@
     <q-drawer
       class="shadow-9"
       v-model="leftDrawerOpen"
+      @update:model-value="updateLeftDrawerOpen"
       show-if-above
       :width="250"
       :breakpoint="500"
@@ -18,12 +19,11 @@
     >
       <q-list
         no-border
-        link
         inset-delimiter
         highlight
         style="padding-top:65px"
       >
-        <q-item v-for="menu in menus" :key="menu.id" :to="menu.to" class="menu-main-item-color-SA">
+        <q-item clickable v-for="menu in menus" :key="menu.id" :to="menu.to" class="menu-main-item-color-SA">
           <q-item-section class="menu-item-color-SA">{{menu.name}}</q-item-section>
         </q-item>
       </q-list>
@@ -198,6 +198,10 @@ export default {
     toggleSideMenu() {
       this.leftDrawerOpen = !this.leftDrawerOpen;
       localStorage.setItem("leftDrawerOpen", this.leftDrawerOpen);
+    },
+    updateLeftDrawerOpen(val) {
+      this.leftDrawerOpen = val;
+      localStorage.setItem("leftDrawerOpen", val);
     },
   },
 };
