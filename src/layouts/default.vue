@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh Lpr lFf">
     <q-header class="bg-white" flat>
       <customHeader @fnToggleSideMenu="fnMainToggleSideMenu" />
     </q-header>
@@ -1129,6 +1129,7 @@ export default {
     },
     fnMainToggleSideMenu() {
       this.leftDrawerOpen = !this.leftDrawerOpen;
+      this.$q.localStorage.set("leftDrawerOpen", this.leftDrawerOpen);
     },
     fnAjaxGetAllMenuList() {
       this.GET_ACTIVE_CREATED_AGGREGATORS_LIST()

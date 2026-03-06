@@ -1,6 +1,6 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+  <q-layout view="hHh Lpr lFf">
+    <q-header flat>
       <customHeader
         :getUserName="getUserName"
         :leftDrawerOpen="leftDrawerOpen"

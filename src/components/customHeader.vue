@@ -6,6 +6,7 @@
       round
       @click="triggerSideMenu"
       aria-label="Menu"
+      color="grey-9"
     >
       <q-icon name="menu" />
     </q-btn>
