@@ -116,9 +116,9 @@ export default {
           name: "name",
           required: true,
           label: "Name",
-          align: "",
+          align: "left",
           field: row => {
-            return row.user.name;
+            return row.user?.name || "NA";
           },
           sortable: false
         },
@@ -126,9 +126,9 @@ export default {
           name: "employeeID",
           required: true,
           label: "Employee ID",
-          align: "",
+          align: "left",
           field: row => {
-            return row.user.employeeID;
+            return row.user?.employeeID || "NA";
           },
           sortable: false
         },
@@ -138,7 +138,7 @@ export default {
           label: "Email",
           align: "center",
           field: row => {
-            return row.user.email;
+            return row.user?.email || "NA";
           },
           sortable: true
         },
@@ -146,9 +146,9 @@ export default {
           name: "contactNumber",
           required: true,
           label: "Phone",
-          align: "",
+          align: "left",
           field: row => {
-            return row.user.contactNumber;
+            return row.user?.contactNumber || "NA";
           },
           sortable: false
         },
@@ -156,9 +156,9 @@ export default {
           name: "userAddress",
           required: true,
           label: "Address",
-          align: "",
+          align: "left",
           field: row => {
-            return row.user.userAddress;
+            return row.user?.userAddress || "NA";
           },
           sortable: false
         },
@@ -166,9 +166,9 @@ export default {
           name: "city",
           required: true,
           label: "City",
-          align: "",
+          align: "left",
           field: row => {
-            return row.user.city;
+            return row.user?.city || "NA";
           },
           sortable: false
         },
@@ -176,9 +176,9 @@ export default {
           name: "state",
           required: true,
           label: "State",
-          align: "",
+          align: "left",
           field: row => {
-            return row.user.state;
+            return row.user?.state || "NA";
           },
           sortable: false
         },

@@ -118,22 +118,22 @@ export default {
         {
           name: "device",
           label: "Device Name",
-          align: "",
-          field: row => row.leadSourceDeviceVasMapping?.device?.deviceName || "NA",
+          align: "left",
+          field: row => row?.leadSourceDeviceVasMapping?.device?.deviceName || "NA",
           sortable: true
         },
         {
           name: "leadSource",
           label: "Lead Source",
-          align: "",
-          field: row => row.leadSourceDeviceVasMapping?.leadSource?.sourceName || "NA",
+          align: "left",
+          field: row => row?.leadSourceDeviceVasMapping?.leadSource?.sourceName || "NA",
           sortable: true
         },
         {
           name: "vas",
           label: "Vas",
-          align: "",
-          field: row => row.vasList,
+          align: "left",
+          field: row => row?.vasList || [],
           sortable: false
         },
         {

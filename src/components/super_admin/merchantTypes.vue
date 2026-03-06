@@ -200,8 +200,8 @@ export default {
           name: "merchantTypeName",
           required: true,
           label: "Merchant Type",
-          align: "",
-          field: "merchantTypeName",
+          align: "left",
+          field: row => row?.merchantTypeName || "NA",
           sortable: true
         },
         {

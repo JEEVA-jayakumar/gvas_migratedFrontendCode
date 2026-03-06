@@ -147,7 +147,7 @@ export default {
           name: "createdAt",
           required: true,
           label: "Date(C)",
-          align: "",
+          align: "left",
           field: "createdAt",
           sortable: true
         },
@@ -157,7 +157,7 @@ export default {
           label: "Lead ID",
           align: "center",
           field: row => {
-            return "# " + row.leadNumber;
+            return "# " + (row?.leadNumber || "NA");
           },
           sortable: true
         },
@@ -165,7 +165,7 @@ export default {
           name: "merchantName",
           required: true,
           label: "Merchant Name",
-          align: "",
+          align: "left",
           field: "merchantName",
           sortable: true
         },
@@ -173,7 +173,7 @@ export default {
           name: "state",
           required: true,
           label: "State",
-          align: "",
+          align: "left",
           field: "state",
           sortable: true
         },
@@ -181,9 +181,9 @@ export default {
           name: "salesOfficerName",
           required: true,
           label: "SO Name",
-          align: "",
+          align: "left",
           field: row => {
-            return row.assignedTo.name;
+            return row.assignedTo?.name || "NA";
           },
           sortable: true
         },
@@ -191,15 +191,15 @@ export default {
           name: "finance_approval",
           required: true,
           label: "Finance Approval",
-          align: "",
+          align: "left",
           field: row => {
-            return row.verifiedFinanceStatus ==
+            return row?.verifiedFinanceStatus ==
               this.$VERIFIED_FINANCE_STATUS_SUCCESS
               ? "Success"
-              : row.verifiedFinanceStatus ==
+              : row?.verifiedFinanceStatus ==
                 this.$VERIFIED_FINANCE_STATUS_PENDING
               ? "Pending"
-              : row.verifiedFinanceStatus ==
+              : row?.verifiedFinanceStatus ==
                 this.$VERIFIED_FINANCE_STATUS_REJECT
               ? "Rejected"
               : "NA";
@@ -210,7 +210,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "",
+          align: "left",
           field: "action",
           sortable: true
         }

@@ -170,12 +170,12 @@ export default {
           name: "service_req_data",
           required: true,
           label: "Service Req Data",
-          align: "",
+          align: "left",
           // disable: row => {
-          //   return row.serviceReqType.active == false;
+          //   return row.serviceReqType?.active == false;
           // },
           field: row => {
-            return row.serviceReqType.name;
+            return row.serviceReqType?.name || "NA";
           },
           sortable: true
         },
@@ -184,9 +184,9 @@ export default {
           name: "serviceReqIssueTypeSets",
           required: true,
           label: "Service Req Issue TypeSets",
-          align: "",
+          align: "left",
           field: row => {
-            return row.serviceReqIssueTypeSets != null ? row.serviceReqIssueTypeSets.serviceReqIssueType.name : "NA";
+            return (row.serviceReqIssueTypeSets && row.serviceReqIssueTypeSets.length > 0) ? row.serviceReqIssueTypeSets.map(item => item.serviceReqIssueType?.name).join(', ') : "NA";
           },
           sortable: true
         },
@@ -195,9 +195,9 @@ export default {
           name: "serviceRequestStatusSets",
           required: true,
           label: "Service Status",
-          align: "",
+          align: "left",
           field: row => {
-            return row.serviceRequestStatusSets != null ? row.serviceRequestStatusSets.serviceRequestStatus.name : "NA";
+            return (row.serviceRequestStatusSets && row.serviceRequestStatusSets.length > 0) ? row.serviceRequestStatusSets.map(item => item.serviceRequestStatus?.name).join(', ') : "NA";
           },
           sortable: true
         },
@@ -216,12 +216,12 @@ export default {
           name: "service_req_data",
           required: true,
           label: "Service Req Data",
-          align: "",
+          align: "left",
           // disable: row => {
-          //   return row.serviceReqType.active == false;
+          //   return row.serviceReqType?.active == false;
           // },
           field: row => {
-            return row.serviceReqType.name;
+            return row.serviceReqType?.name || "NA";
           },
           sortable: true
         },
@@ -230,9 +230,9 @@ export default {
           name: "serviceReqIssueTypeSets",
           required: true,
           label: "Service Req Issue TypeSets",
-          align: "",
+          align: "left",
           field: row => {
-            return row.serviceReqIssueTypeSets != null ? row.serviceReqIssueTypeSets.serviceReqIssueType.name : "NA";
+            return (row.serviceReqIssueTypeSets && row.serviceReqIssueTypeSets.length > 0) ? row.serviceReqIssueTypeSets.map(item => item.serviceReqIssueType?.name).join(', ') : "NA";
           },
           sortable: true
         },
@@ -241,9 +241,9 @@ export default {
           name: "serviceRequestStatusSets",
           required: true,
           label: "Service Status",
-          align: "",
+          align: "left",
           field: row => {
-            return row.serviceRequestStatusSets != null ? row.serviceRequestStatusSets.serviceRequestStatus.name : "NA";
+            return (row.serviceRequestStatusSets && row.serviceRequestStatusSets.length > 0) ? row.serviceRequestStatusSets.map(item => item.serviceRequestStatus?.name).join(', ') : "NA";
           },
           sortable: true
         },

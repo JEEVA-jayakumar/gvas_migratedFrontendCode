@@ -214,15 +214,15 @@ export default {
           name: "name",
           required: true,
           label: "Issue Name",
-          align: "",
-          field: "name",
+          align: "left",
+          field: row => row?.name || "NA",
           sortable: true
         },
         {
           name: "action",
           required: true,
           label: "",
-          align: "",
+          align: "left",
           field: "action",
           sortable: false
         }
@@ -232,15 +232,15 @@ export default {
           name: "name",
           required: true,
           label: "Issue Name",
-          align: "",
-          field: "name",
+          align: "left",
+          field: row => row?.name || "NA",
           sortable: true
         },
         {
           name: "action1",
           required: true,
           label: "",
-          align: "",
+          align: "left",
           field: "action1",
           sortable: false
         }

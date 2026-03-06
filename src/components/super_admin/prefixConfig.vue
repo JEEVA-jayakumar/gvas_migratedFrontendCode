@@ -113,9 +113,9 @@ export default {
           name: "sourceName",
           required: true,
           label: "Lead Source",
-          align: "",
+          align: "left",
           field: row => {
-            return row.leadSource.sourceName
+            return row.leadSource?.sourceName || "NA"
           },
           sortable: false
         },
@@ -123,7 +123,7 @@ export default {
           name: "prefix",
           required: true,
           label: "Prefix",
-          align: "",
+          align: "left",
           field: "prefix",
           sortable: false
         },
@@ -149,7 +149,7 @@ export default {
           label: "Next Base Tid",
           align: 'center',
           field: row => {
-            return row.nextBaseTid == null ? "NA" : row.nextBaseTid
+            return row?.nextBaseTid == null ? "NA" : row.nextBaseTid
           },
           sortable: false
         },
@@ -159,7 +159,7 @@ export default {
           label: "Next Base Mid",
           align: 'center',
           field: row => {
-            return row.nextBaseMid == null ? "NA" : row.nextBaseMid
+            return row?.nextBaseMid == null ? "NA" : row.nextBaseMid
           },
           sortable: false
         },
