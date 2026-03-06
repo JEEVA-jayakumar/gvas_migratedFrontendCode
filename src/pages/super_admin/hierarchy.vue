@@ -176,7 +176,7 @@ export default {
       filterSearch: "",
       filterSearch1: "",
       filter_values: "",
-      selectedTab: "",
+      selectedTab: "active",
       multipleSelect: "",
 
       paginationControl: {

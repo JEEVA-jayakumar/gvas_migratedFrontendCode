@@ -157,7 +157,7 @@ export default {
       propShowCreateRole: false,
       propShowEditRole: false,
       propRowDetails: "",
-      selectedTab: "",
+      selectedTab: "active",
        showAddRole: false,
       propShowAddRole: false,
 
