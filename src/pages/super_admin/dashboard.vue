@@ -14,9 +14,9 @@
           </div> -->
         </div>
         <div class="q-pa-lg">
-          <div class="row">
+          <div class="row q-col-gutter-md">
             <div class="col-md-4">
-              <q-card inline class="bigger q-ma-sm full-width" style="border: 1px solid #3b084b33">
+              <q-card inline class="bigger full-width" style="border: 1px solid #3b084b33">
                 <q-card-section class="relative-position">
                   <div class="ellipsis q-subheading text-purple-9">Total Users</div>
                 </q-card-section>
@@ -41,8 +41,8 @@
                   <div class="q-title">{{item.hierarchy.hierarchy}}</div>
                 </q-card-section>
                 <q-card-section class="no-padding">
-                  <div class="row group">
-                    <div v-for="(roleItem,roleIndex) in item.role" :key="roleIndex" class="col-md-3 col-sm-6 col-xs-9">
+                  <div class="row group q-col-gutter-md">
+                    <div v-for="(roleItem,roleIndex) in item.role" :key="roleIndex" class="col-md-3 col-sm-6 col-xs-12">
                       <q-card inline class="bigger full-width">
                         <q-card-section class="relative-position">
                           <div class="ellipsis q-subheading text-grey-9">{{roleItem.role}}</div>

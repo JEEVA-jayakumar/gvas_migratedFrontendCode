@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh Lpr lFf">
      <q-header style="margin-left:0px" class="shadow-0 z-top" flat>
       <customHeader @fnToggleSideMenu="fnMainToggleSideMenu"></customHeader>
     </q-header>
@@ -42,7 +42,7 @@ export default {
   name: "LayoutDefault",
   data() {
     return {
-      leftDrawerOpen: this.$q.platform.is.desktop,
+      leftDrawerOpen: this.$q.localStorage.getItem("leftDrawerOpen") !== null ? this.$q.localStorage.getItem("leftDrawerOpen") : this.$q.platform.is.desktop,
       menus: [
         {
           id: 1,
@@ -80,6 +80,7 @@ export default {
   methods: {
     fnMainToggleSideMenu() {
       this.leftDrawerOpen = !this.leftDrawerOpen;
+      this.$q.localStorage.set("leftDrawerOpen", this.leftDrawerOpen);
     },
   },
 };

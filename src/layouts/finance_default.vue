@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh Lpr lFf">
     <q-header class="bg-white" flat>
       <customHeader @fnToggleSideMenu="fnMainToggleSideMenu" />
     </q-header>
@@ -80,6 +80,7 @@ export default {
   methods: {
     fnMainToggleSideMenu() {
       this.leftDrawerOpen = !this.leftDrawerOpen;
+      this.$q.localStorage.set("leftDrawerOpen", this.leftDrawerOpen);
     },
   },
 };
