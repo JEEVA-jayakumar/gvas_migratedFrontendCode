@@ -1,12 +1,6 @@
 <template>
   <q-page padding>
-    <q-tabs
-      v-model="tab"
-      class="bg-white text-grey-7 shadow-1"
-      active-color="purple-9"
-      indicator-color="purple-9"
-      align=""
-    >
+    <q-tabs indicator-color="purple-9" v-model="tab" class="bg-white text-grey-7 shadow-1" active-color="purple-9" align="">
       <q-tab name="active" label="Active Aggregators Devices" />
       <q-tab name="deactive" label="Deactivated Aggregators Devices" />
     </q-tabs>

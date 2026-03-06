@@ -3,13 +3,7 @@
       <div class="text-grey-9">
         <div class="row bottom-border q-pa-sm items-center">
           <div class="col">
-            <q-tabs
-              v-model="inventoryOptionSelected"
-              active-color="dark"
-              indicator-color="dark"
-              class="shadow-1"
-              align=""
-            >
+            <q-tabs indicator-color="purple-9" v-model="inventoryOptionSelected" active-color="purple-9" class="shadow-1" align="">
               <q-tab name="prefix" label="Prfix Config" />
               <q-tab name="vasDevLs" label="LeadSource And Vas Device Config" />
             </q-tabs>

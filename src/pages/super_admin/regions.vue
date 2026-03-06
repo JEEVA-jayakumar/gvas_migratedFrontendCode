@@ -3,9 +3,9 @@
     <!-- content -->
     <div>
 
-      <q-tabs v-model="tab" class="shadow-1" color="grey-1">
-        <q-tab color="dark" name="active" label="Active Regions" />
-        <q-tab color="dark" name="deactive" label="Deactive Regions" />
+      <q-tabs indicator-color="purple-9" active-color="purple-9" align="left" v-model="tab" class="shadow-1">
+        <q-tab  name="active" label="Active Regions" />
+        <q-tab  name="deactive" label="Deactive Regions" />
       </q-tabs>
 
       <q-tab-panels v-model="tab" animated>
@@ -18,7 +18,7 @@
             v-model:pagination="paginationControl"
             :filter-method="myCustomSearchFilter"
             row-key="name"
-            color="grey-9"
+
           >
             <template v-slot:body-cell-regionGroup="props">
               <q-td :props="props">
@@ -59,7 +59,7 @@
               <div class="col-md-6">
                 <q-input
                   clearable
-                  color="grey-9"
+
                   v-model="filterSearch"
                   placeholder="Type.."
                   class="q-mr-lg"
@@ -87,7 +87,7 @@
             v-model:pagination="paginationControl1"
             :filter-method="myCustomSearchFilter"
             row-key="name"
-            color="grey-9"
+
           >
             <template v-slot:body-cell-regionGroup="props">
               <q-td :props="props">
@@ -117,7 +117,7 @@
               <div class="col-6">
                 <q-input
                   clearable
-                  color="grey-9"
+
                   v-model="filterSearch1"
                   placeholder="Type.."
                   class="q-mr-lg"
@@ -288,13 +288,15 @@ export default {
           this.deActiveTableData = this.getAllRegionsData1.filter(service => service.active == false);
           this.$q.loading.hide();
       })
-       .catch(() => {
+       .catch(error => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
+            message: error.data?.message || "Please Try Again Later !",
             icon: "thumb_down",
           });
+        }).finally(() => {
+          this.$q.loading.hide();
         });
       this.FETCH_ALL_REGIONS_DATA();
     },
@@ -365,7 +367,7 @@ export default {
           message: "Are you sure want to delete region?",
           ok: "Continue",
           cancel: "Cancel"
-        }).then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -387,12 +389,13 @@ export default {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: "Please try again!",
+                message: error.data?.message || "Please try again!",
                 icon: "thumb_down"
               });
+            }).finally(() => {
+              this.$q.loading.hide();
             });
-          this.$q.loading.hide();
-        }).catch(() => {
+        }).onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",

@@ -3,14 +3,7 @@
     <!-- content -->
     <div>
 
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        active-bg-color="grey-1"
-        active-color="dark"
-        indicator-color="transparent"
-        align=""
-      >
+      <q-tabs indicator-color="purple-9" v-model="selectedTab" class="shadow-1" active-color="purple-9" align="">
         <q-tab name="active" label="Active TID" />
       </q-tabs>
 
@@ -24,7 +17,7 @@
             v-model:pagination="paginationControl"
             :filter-method="myCustomSearchFilter"
             row-key="id"
-            color="grey-9"
+
           >
             <template v-slot:body-cell-action="props">
               <q-td :props="props">
@@ -41,7 +34,7 @@
                   <div class="col-md-6">
                     <q-input
                       clearable
-                      color="grey-9"
+
                       v-model.trim="filterSearch"
                       placeholder="Type.."
                       label="Search by Plan Name"
