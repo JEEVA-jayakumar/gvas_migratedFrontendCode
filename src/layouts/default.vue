@@ -1,7 +1,10 @@
 <template>
   <q-layout view="hHh Lpr lFf">
     <q-header class="bg-white" flat>
-      <customHeader @fnToggleSideMenu="fnMainToggleSideMenu" />
+      <customHeader
+        :leftDrawerOpen="leftDrawerOpen"
+        @fnToggleSideMenu="fnMainToggleSideMenu"
+      />
     </q-header>
 
     <q-drawer

@@ -1527,7 +1527,7 @@ const routes = [
       props: true
     },
     {
-      name: "QRSticker",
+      name: "serialupdate",
       path: "manage/serialupdate",
       component: serialupdate,
     },

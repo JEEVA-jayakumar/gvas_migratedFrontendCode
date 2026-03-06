@@ -71,22 +71,18 @@
 import toggleMyAccount from "./toggleMyAccount.vue";
 export default {
   name: "CustomHeader",
+  props: ["leftDrawerOpen", "getUserName"],
   components: {
     toggleMyAccount
   },
   data() {
     return {
       toggleMyAccount: false,
-      leftDrawerOpen: this.$q.localStorage.getItem("leftDrawerOpen") !== null
-        ? this.$q.localStorage.getItem("leftDrawerOpen")
-        : this.$q.platform.is.desktop,
     };
   },
 
   methods: {
     triggerSideMenu() {
-      this.leftDrawerOpen = !this.leftDrawerOpen;
-      this.$q.localStorage.set("leftDrawerOpen", this.leftDrawerOpen);
       this.$emit("fnToggleSideMenu");
     },
     clearLocalStorageData() {
