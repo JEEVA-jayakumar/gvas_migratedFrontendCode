@@ -1,111 +1,184 @@
 <template>
   <q-page>
     <div>
-      <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" >
-         <q-tab @click="ajaxSpareData"  color="dark" name="tab-5" label="Active Cancelled" />
-          <q-tab  color="dark" name="tab-6" label="Deactive Cancelled" />
-</q-tabs>
-<q-tab-panels v-model="activeTab" animated>
-<q-tab-panel name="tab-5">
+      <q-tabs v-model="activeTab" class="shadow-1" color="grey-1">
+        <q-tab
+          @click="ajaxSpareData"
+          color="dark"
+          name="tab-5"
+          label="Active Cancelled"
+        />
+        <q-tab color="dark" name="tab-6" label="Deactive Cancelled" />
+      </q-tabs>
+      <q-tab-panels v-model="activeTab" animated>
+        <q-tab-panel name="tab-5">
           <q-table
-          :rows="ActivetableData"
-          table-class="customSATableClass"
-          :columns="columns1"
-          :filter="filterSearch" v-model:pagination="paginationControl"
-          :filter-method="myCustomSearchFilter1"
-          row-key="name"
-          color="grey-9"
+            :rows="ActivetableData"
+            table-class="customSATableClass"
+            :columns="columns1"
+            :filter="filterSearch"
+            v-model:pagination="paginationControl"
+            :filter-method="myCustomSearchFilter1"
+            row-key="name"
+            color="grey-9"
           >
-          <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-            <q-td v-slot:body-cell-updatedAt="props" :props="props">{{ $moment(props.row.updatedAt).format("Do MMM Y") }}</q-td>
+            <template v-slot:body-cell-createdAt="props">
+              <q-td :props="props">{{
+                $moment(props.row.createdAt).format("Do MMM Y")
+              }}</q-td>
+            </template>
+            <template v-slot:body-cell-updatedAt="props">
+              <q-td :props="props">{{
+                $moment(props.row.updatedAt).format("Do MMM Y")
+              }}</q-td>
+            </template>
 
-            <q-td v-slot:body-cell-action="props" :props="props">
-              <div class="row no-wrap no-padding">
-              <q-btn  no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
-                  @click="ShowEditServiceCancelStatus(props.row)" flat class="text-light-blue"></q-btn>
-                <q-btn  no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md"
-                  @click="fnDeleteServiceRequestCancel(props.row)" flat class="text-negative"></q-btn>
-              </div>
-            </q-td>
+            <template v-slot:body-cell-action="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <q-btn
+                    no-caps
+                    no-wrap
+                    label="Modify"
+                    icon="far fa-plus-square"
+                    size="md"
+                    @click="ShowEditServiceCancelStatus(props.row)"
+                    flat
+                    class="text-light-blue"
+                  ></q-btn>
+                  <q-btn
+                    no-caps
+                    no-wrap
+                    label="Disable"
+                    icon="far fa-minus-square"
+                    size="md"
+                    @click="fnDeleteServiceRequestCancel(props.row)"
+                    flat
+                    class="text-negative"
+                  ></q-btn>
+                </div>
+              </q-td>
+            </template>
 
             <template v-slot:top="props">
               <div class="col-3">
-                <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." class="q-mr-lg" />
+                <q-input
+                  clearable
+                  color="grey-9"
+                  v-model="filterSearch"
+                  placeholder="Type.."
+                  class="q-mr-lg"
+                />
               </div>
               <!--END: table filter,search -->
               <div class="col-3" align="right">
-                <q-btn no-caps class="text-weight-regular" label="Add Service Status"
-                  @click="fnShowCancelStatus(props.row)" color="purple-9" size="md" />
-
+                <q-btn
+                  no-caps
+                  class="text-weight-regular"
+                  label="Add Service Status"
+                  @click="fnShowCancelStatus(props.row)"
+                  color="purple-9"
+                  size="md"
+                />
               </div>
             </template>
           </q-table>
         </q-tab-panel>
-<q-tab-panel name="tab-6">
+        <q-tab-panel name="tab-6">
           <q-table
-          :rows="DeactivetableData"
-          table-class="customSATableClass"
-          :columns="columns4"
-          :filter="filterSearch" v-model:pagination="paginationControl2"
-          :filter-method="myCustomSearchFilter2"
-          row-key="name"
-          color="grey-9"
+            :rows="DeactivetableData"
+            table-class="customSATableClass"
+            :columns="columns4"
+            :filter="filterSearch"
+            v-model:pagination="paginationControl2"
+            :filter-method="myCustomSearchFilter2"
+            row-key="name"
+            color="grey-9"
           >
-            <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-            <q-td v-slot:body-cell-updatedAt="props" :props="props">{{ $moment(props.row.updatedAt).format("Do MMM Y") }}</q-td>
+            <template v-slot:body-cell-createdAt="props">
+              <q-td :props="props">{{
+                $moment(props.row.createdAt).format("Do MMM Y")
+              }}</q-td>
+            </template>
+            <template v-slot:body-cell-updatedAt="props">
+              <q-td :props="props">{{
+                $moment(props.row.updatedAt).format("Do MMM Y")
+              }}</q-td>
+            </template>
 
-            <q-td v-slot:body-cell-action1="props" :props="props">
-              <div class="row no-wrap no-padding">
-                <q-btn  no-caps no-wrap label="Active" icon="far fa-plus-square" size="md"
-                  @click="fnShowActiveCancelStatus(props.row)" flat class="text-light-blue"></q-btn>
-              </div>
-            </q-td>
+            <template v-slot:body-cell-action1="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <q-btn
+                    no-caps
+                    no-wrap
+                    label="Active"
+                    icon="far fa-plus-square"
+                    size="md"
+                    @click="fnShowActiveCancelStatus(props.row)"
+                    flat
+                    class="text-light-blue"
+                  ></q-btn>
+                </div>
+              </q-td>
+            </template>
 
             <template v-slot:top="props">
               <div class="col-3">
-                <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." class="q-mr-lg" />
+                <q-input
+                  clearable
+                  color="grey-9"
+                  v-model="filterSearch"
+                  placeholder="Type.."
+                  class="q-mr-lg"
+                />
               </div>
             </template>
           </q-table>
         </q-tab-panel>
-</q-tab-panels>
+      </q-tab-panels>
 
       <!--START: Show AddServiceStatus -->
-    
-        <showCancelStatus v-if="propShowCancelStatus" :propShowCancelStatus = "propShowCancelStatus"
-        :propRowDetails3="propRowDetails3" @emitfnShowCancelStatus="fnShowCancelStatus" />
+
+      <showCancelStatus
+        v-if="propShowCancelStatus"
+        :propShowCancelStatus="propShowCancelStatus"
+        :propRowDetails3="propRowDetails3"
+        @emitfnShowCancelStatus="fnShowCancelStatus"
+      />
 
       <!--END: Show AddServiceStatus -->
 
       <!--START: Show EditServiceStatus -->
       <ShowEditServiceCancelStatus
-       v-if="propShowEditServiceCancelStatus"
+        v-if="propShowEditServiceCancelStatus"
         :propShowEditServiceCancelStatus="propShowEditServiceCancelStatus"
         :propRowDetails5="propRowDetails5"
-         @emitShowEditServiceCancelStatus="ShowEditServiceCancelStatus"
-          />
+        @emitShowEditServiceCancelStatus="ShowEditServiceCancelStatus"
+      />
       <!--END: Show EditServiceStatus -->
     </div>
   </q-page>
 </template>
 <script>
 import { useVuelidate } from "@vuelidate/core";
-import { required } from '@vuelidate/validators';
-import showCancelStatus from '../../components/super_admin/showCancelStatus.vue'
-import ShowEditServiceCancelStatus from '../../components/super_admin/ShowEditServiceCancelStatus.vue'
+import showCancelStatus from "../../components/super_admin/showCancelStatus.vue";
+import ShowEditServiceCancelStatus from "../../components/super_admin/ShowEditServiceCancelStatus.vue";
 
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from "vuex";
 export default {
-  setup() { return { v$: useVuelidate() } },
-  name: 'getserviceRequestCancelReasonDetails',
+  setup() {
+    return { v$: useVuelidate() };
+  },
+  name: "getserviceRequestCancelReasonDetails",
   components: {
     showCancelStatus,
-    ShowEditServiceCancelStatus
+    ShowEditServiceCancelStatus,
   },
 
-  data () {
+  data() {
     return {
-      activeTab: 'tab-5',
+      activeTab: "tab-5",
       propShowAddServiceType: false,
       propShowEditServiceType: false,
       propShowEditSubTaskType: false,
@@ -113,276 +186,303 @@ export default {
       propShowAddSubTaskType: false,
       propShowCancelStatus: false,
       propShowEditServiceCancelStatus: false,
-      propRowDetails: '',
-      propRowDetails1: '',
-      propRowDetails2: '',
-      propRowDetails3: '',
-      propRowDetails4: '',
-      propRowDetails5: '',
+      propRowDetails: "",
+      propRowDetails1: "",
+      propRowDetails2: "",
+      propRowDetails3: "",
+      propRowDetails4: "",
+      propRowDetails5: "",
 
-      filter: '',
-      filterSearch: '',
-      filterSearch1: '',
-      filterSearch2: '',
-      filterSearch3: '',
-      filter_values: '',
-      multipleSelect: '',
-  
+      filter: "",
+      filterSearch: "",
+      filterSearch1: "",
+      filterSearch2: "",
+      filterSearch3: "",
+      filter_values: "",
+      multipleSelect: "",
 
       paginationControl: {
-        rowsPerPage: 10
+        rowsPerPage: 10,
       },
       paginationControl2: {
-        rowsPerPage: 10
+        rowsPerPage: 10,
       },
 
       // table information
       columns1: [
-
         {
-          name: 'name',
+          name: "name",
           required: true,
-          label: 'name',
-          align: '',
-          field: 'name',
-          sortable: true
+          label: "name",
+          align: "left",
+          field: "name",
+          sortable: true,
         },
         {
-          name: 'createdAt',
+          name: "createdAt",
           required: true,
-          label: 'created Date',
-          align: '',
-          field: 'createdAt',
-          sortable: true
+          label: "created Date",
+          align: "left",
+          field: "createdAt",
+          sortable: true,
         },
         {
-          name: 'updatedAt',
+          name: "updatedAt",
           required: true,
-          label: 'Updated Date',
-          align: '',
-          field: 'updatedAt',
-          sortable: true
+          label: "Updated Date",
+          align: "left",
+          field: "updatedAt",
+          sortable: true,
         },
         {
-          name: 'action',
+          name: "action",
           required: true,
-          label: '',
-          align: '',
-          field: 'action',
-          sortable: false
-        }
+          label: "",
+          align: "left",
+          field: "action",
+          sortable: false,
+        },
       ],
       columns4: [
-
         {
-          name: 'name',
+          name: "name",
           required: true,
-          label: 'name',
-          align: '',
-          field: 'name',
-          sortable: true
+          label: "name",
+          align: "left",
+          field: "name",
+          sortable: true,
         },
         {
-          name: 'createdAt',
+          name: "createdAt",
           required: true,
-          label: 'Updated Date',
-          align: '',
-          field: 'createdAt',
-          sortable: true
+          label: "Updated Date",
+          align: "left",
+          field: "createdAt",
+          sortable: true,
         },
         {
-          name: 'updatedAt',
+          name: "updatedAt",
           required: true,
-          label: 'Updated Date',
-          align: '',
-          field: 'updatedAt',
-          sortable: true
+          label: "Updated Date",
+          align: "left",
+          field: "updatedAt",
+          sortable: true,
         },
         {
-          name: 'action1',
+          name: "action1",
           required: true,
-          label: '',
-          align: '',
-          field: 'action1',
-          sortable: false
-        }
+          label: "",
+          align: "left",
+          field: "action1",
+          sortable: false,
+        },
       ],
 
       tableData: [],
       tableData1: [],
       ActivetableData: [],
-      DeactivetableData: []
-    }
+      DeactivetableData: [],
+      ActiveissueTypes: [],
+      DeactiveissueTypes: [],
+    };
   },
-  mounted () {
-    this.ajaxSpareData()
-    this.ajaxSpareData1()
+  mounted() {
+    this.ajaxSpareData();
+    this.ajaxSpareData1();
   },
 
-  created () {
+  created() {
     /* START: Load user table data filter > Regions */
-    this.ajaxSpareData()
-    this.ajaxSpareData1()
+    this.ajaxSpareData();
+    this.ajaxSpareData1();
     /* End: Load user table data filter > Regions */
   },
 
   computed: {
-    $v() { return this.v$; },
- 
-    ...mapGetters('serviceRequestCancelled', [
-      'getserviceRequestCancelReasonDetails'
-    ])
+    $v() {
+      return this.v$;
+    },
+
+    ...mapGetters("serviceRequestCancelled", [
+      "getserviceRequestCancelReasonDetails",
+    ]),
+    ...mapGetters("serviceRequest", ["getsubTaskDetails"]),
   },
 
   methods: {
-    ...mapActions('serviceRequestCancelled', ['FETCH_SERVICE_REQUEST_CANCELLED_DETAILS', 'DELETE_SERVICE_CANCEL_STATUS_TYPES','EDIT_CANCEL_STATUS_TYPES']),
- 
-    fnShowActiveCancelStatus (reqData) {
-      console.log('REQEST DATA---------->', JSON.stringify(reqData))
+    ...mapActions("serviceRequestCancelled", [
+      "FETCH_SERVICE_REQUEST_CANCELLED_DETAILS",
+      "DELETE_SERVICE_CANCEL_STATUS_TYPES",
+      "EDIT_CANCEL_STATUS_TYPES",
+    ]),
+    ...mapActions("serviceRequest", ["FETCH_ALL_SERVICE_REQUEST_GET_TYPES"]),
+
+    fnShowActiveCancelStatus(reqData) {
+      console.log("REQEST DATA---------->", JSON.stringify(reqData));
       let param = {
         id: reqData.id,
-        request: reqData
-      }
+        request: reqData,
+      };
       this.$q
         .dialog({
-          title: 'Confirm',
-          message: 'Are you sure want to delete?',
-          ok: 'Continue',
-          cancel: 'Cancel'
-        }).then(() => {
+          title: "Confirm",
+          message: "Are you sure want to delete?",
+          ok: "Continue",
+          cancel: "Cancel",
+        })
+        .then(() => {
           this.$q.loading.show({
             delay: 100, // ms
-            message: 'Please Wait',
-            spinnerColor: 'purple-9',
-            customClass: 'shadow-none'
-          })
-          this.EDIT_CANCEL_STATUS_TYPES(param)
-            .then(() => {
-              this.$q.loading.hide()
-              this.$q.notify({
-                color: 'positive',
-                position: 'bottom',
-                message: 'Successfully updated!',
-                icon: 'thumb_up'
-              })
-              this.$q.loading.hide()
-              this.ajaxSpareData()
-            })
-        }).catch(error => {
-          this.$q.loading.hide()
+            message: "Please Wait",
+            spinnerColor: "purple-9",
+            customClass: "shadow-none",
+          });
+          this.EDIT_CANCEL_STATUS_TYPES(param).then(() => {
+            this.$q.loading.hide();
+            this.$q.notify({
+              color: "positive",
+              position: "bottom",
+              message: "Successfully updated!",
+              icon: "thumb_up",
+            });
+            this.$q.loading.hide();
+            this.ajaxSpareData();
+          });
+        })
+        .catch((error) => {
+          this.$q.loading.hide();
           this.$q.notify({
-            color: 'negative',
-            position: 'bottom',
+            color: "negative",
+            position: "bottom",
             message:
-                error.data?.message == null
-                  ? 'Please Try Again Later !'
-                  : error.data?.message,
-            icon: 'thumb_down'
-          })
-        })
+              error?.data?.message == null
+                ? "Please Try Again Later !"
+                : error.data?.message,
+            icon: "thumb_down",
+          });
+        });
     },
 
-    fnDeleteServiceRequestCancel (rowDetails) {
-      console.log('ROW DETAILS------------->', JSON.stringify(rowDetails))
+    fnDeleteServiceRequestCancel(rowDetails) {
+      console.log("ROW DETAILS------------->", JSON.stringify(rowDetails));
       this.$q
         .dialog({
-          title: 'Confirm',
-          message: 'Are you sure want to delete?',
-          ok: 'Continue',
-          cancel: 'Cancel'
-        }).then(() => {
+          title: "Confirm",
+          message: "Are you sure want to delete?",
+          ok: "Continue",
+          cancel: "Cancel",
+        })
+        .then(() => {
           this.$q.loading.show({
             delay: 100, // ms
-            message: 'Please Wait',
-            spinnerColor: 'purple-9',
-            customClass: 'shadow-none'
-          })
-          this.DELETE_SERVICE_CANCEL_STATUS_TYPES(rowDetails)
-            .then(response => {
-              this.$q.loading.hide()
+            message: "Please Wait",
+            spinnerColor: "purple-9",
+            customClass: "shadow-none",
+          });
+          this.DELETE_SERVICE_CANCEL_STATUS_TYPES(rowDetails).then(
+            (response) => {
+              this.$q.loading.hide();
               this.$q.notify({
-                color: 'positive',
-                position: 'bottom',
-                message: 'Successfully removed',
-                icon: 'thumb_up'
-              })
-              this.$q.loading.hide()
-              this.ajaxSpareData()
-            })
-        }).catch(() => {
+                color: "positive",
+                position: "bottom",
+                message: "Successfully removed",
+                icon: "thumb_up",
+              });
+              this.$q.loading.hide();
+              this.ajaxSpareData();
+            }
+          );
+        })
+        .catch(() => {
           this.$q.notify({
-            color: 'negative',
-            position: 'bottom',
-            message: 'No changes made!',
-            icon: 'thumb_down'
-          })
-        })
+            color: "negative",
+            position: "bottom",
+            message: "No changes made!",
+            icon: "thumb_down",
+          });
+        });
     },
 
-    ajaxSpareData () {
+    ajaxSpareData() {
       this.FETCH_SERVICE_REQUEST_CANCELLED_DETAILS()
-        .then(res => {
-          console.log('getserviceRequestCancelReasonDetails------->', JSON.stringify(this.getserviceRequestCancelReasonDetails))
-          this.tableData = this.getserviceRequestCancelReasonDetails
-          console.log('tableData------->', JSON.stringify(this.tableData))
-          this.DeactivetableData = this.getserviceRequestCancelReasonDetails.filter(service => service.active == false)
-          console.log(' ------->', JSON.stringify(this.DeactivetableData))
-          this.ActivetableData = this.getserviceRequestCancelReasonDetails.filter(service => service.active == true)
-          console.log('ActivetableData------->', JSON.stringify(this.ActivetableData))
-        })
-        .catch(() => {
-          this.$q.loading.hide()
-        })
-    },
-    ajaxSpareData1 () {
-      this.FETCH_ALL_SERVICE_REQUEST_GET_TYPES()
-        .then(res => {
+        .then((res) => {
           console.log(
-            'TABLE DATA 11111111111111 VALUES-RESPONSE---------->',
-            JSON.stringify(this.tableData1)
-          )
-          this.DeactiveissueTypes = this.getsubTaskDetails.filter(service => service.active == false)
-          this.ActiveissueTypes = this.getsubTaskDetails.filter(service => service.active == true)
+            "getserviceRequestCancelReasonDetails------->",
+            JSON.stringify(this.getserviceRequestCancelReasonDetails)
+          );
+          this.tableData = this.getserviceRequestCancelReasonDetails;
+          console.log("tableData------->", JSON.stringify(this.tableData));
+          this.DeactivetableData = this.getserviceRequestCancelReasonDetails.filter(
+            (service) => service.active == false
+          );
+          console.log(" ------->", JSON.stringify(this.DeactivetableData));
+          this.ActivetableData = this.getserviceRequestCancelReasonDetails.filter(
+            (service) => service.active == true
+          );
+          console.log(
+            "ActivetableData------->",
+            JSON.stringify(this.ActivetableData)
+          );
         })
         .catch(() => {
-          this.$q.loading.hide()
+          this.$q.loading.hide();
+        });
+    },
+    ajaxSpareData1() {
+      this.FETCH_ALL_SERVICE_REQUEST_GET_TYPES()
+        .then((res) => {
+          console.log(
+            "TABLE DATA 11111111111111 VALUES-RESPONSE---------->",
+            JSON.stringify(this.tableData1)
+          );
+          if (this.getsubTaskDetails) {
+            this.DeactiveissueTypes = this.getsubTaskDetails.filter(
+              (service) => service.active == false
+            );
+            this.ActiveissueTypes = this.getsubTaskDetails.filter(
+              (service) => service.active == true
+            );
+          }
         })
+        .catch(() => {
+          this.$q.loading.hide();
+        });
     },
-    fnShowCancelStatus (token) {
-      this.propShowCancelStatus = !this.propShowCancelStatus
+    fnShowCancelStatus(token) {
+      this.propShowCancelStatus = !this.propShowCancelStatus;
       // this.propRowDetails3 = rowDetails;
-      if (token == 'refresh') {
-        this.ajaxSpareData()
+      if (token == "refresh") {
+        this.ajaxSpareData();
       }
     },
 
-    ShowEditServiceCancelStatus (rowDetails) {
-      console.log('ROW DETAILS', JSON.stringify(rowDetails))
-      this.propShowEditServiceCancelStatus = !this.propShowEditServiceCancelStatus
-      this.propRowDetails5 = rowDetails
+    ShowEditServiceCancelStatus(rowDetails) {
+      console.log("ROW DETAILS", JSON.stringify(rowDetails));
+      this.propShowEditServiceCancelStatus = !this.propShowEditServiceCancelStatus;
+      this.propRowDetails5 = rowDetails;
       if (this.propShowEditServiceCancelStatus == false) {
-        this.ajaxSpareData()
+        this.ajaxSpareData();
       }
     },
 
-    myCustomSearchFilter1 (rows, terms, cols, cellValue) {
-      const lowerTerms = terms ? terms.toLowerCase() : ''
-      return rows.filter(row =>
+    myCustomSearchFilter1(rows, terms, cols, cellValue) {
+      const lowerTerms = terms ? terms.toLowerCase() : "";
+      return rows.filter((row) =>
         cols.some(
-          col =>
-            (cellValue(col, row) + '').toLowerCase().indexOf(lowerTerms) !== -1
+          (col) =>
+            (cellValue(col, row) + "").toLowerCase().indexOf(lowerTerms) !== -1
         )
-      )
+      );
     },
-    myCustomSearchFilter2 (rows, terms, cols, cellValue) {
-      const lowerTerms = terms ? terms.toLowerCase() : ''
-      return rows.filter(row =>
+    myCustomSearchFilter2(rows, terms, cols, cellValue) {
+      const lowerTerms = terms ? terms.toLowerCase() : "";
+      return rows.filter((row) =>
         cols.some(
-          col =>
-            (cellValue(col, row) + '').toLowerCase().indexOf(lowerTerms) !== -1
+          (col) =>
+            (cellValue(col, row) + "").toLowerCase().indexOf(lowerTerms) !== -1
         )
-      )
-    }
-  }
-}
+      );
+    },
+  },
+};
 </script>
