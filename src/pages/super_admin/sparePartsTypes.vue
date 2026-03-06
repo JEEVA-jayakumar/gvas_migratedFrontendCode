@@ -3,7 +3,7 @@
     <!-- content -->
     <div>
       <div class="col-12 q-title q-my-lg text-weight-regular">Spare Parts Types</div>
-      <q-tabs indicator-color="purple-9" v-model="tab" class="shadow-1" active-color="purple-9" align="">
+      <q-tabs indicator-color="purple-9" v-model="tab" class="shadow-1" active-color="purple-9" align="left">
         <q-tab name="active" label="Active " />
         <q-tab name="deactive" label="Deactive" />
       </q-tabs>
@@ -22,12 +22,12 @@
           >
             <template v-slot:body-cell-created_date="props">
               <q-td :props="props">
-                {{ props.row.created_date | moment("Do MMM Y") }}
+                {{ formatDate(props.row.created_date) }}
               </q-td>
             </template>
             <template v-slot:body-cell-updated_date="props">
               <q-td :props="props">
-                {{ props.row.updated_date | moment("Do MMM Y") }}
+                {{ formatDate(props.row.updated_date) }}
               </q-td>
             </template>
             <template v-slot:body-cell-action="props">
@@ -100,12 +100,12 @@
           >
             <template v-slot:body-cell-created_date="props">
               <q-td :props="props">
-                {{ props.row.created_date | moment("Do MMM Y") }}
+                {{ formatDate(props.row.created_date) }}
               </q-td>
             </template>
             <template v-slot:body-cell-updated_date="props">
               <q-td :props="props">
-                {{ props.row.updated_date | moment("Do MMM Y") }}
+                {{ formatDate(props.row.updated_date) }}
               </q-td>
             </template>
             <template v-slot:body-cell-action="props">
@@ -167,6 +167,7 @@ import { useVuelidate } from "@vuelidate/core";
 import ShowAddSpareParts from "../../components/super_admin/ShowAddSpareParts.vue";
 import showEditSpareParts from "../../components/super_admin/showEditSpareParts.vue";
 import { mapGetters, mapActions } from "vuex";
+import moment from "moment";
 
 export default {
   setup() { return { v$: useVuelidate() } },
@@ -301,6 +302,10 @@ export default {
       return rows.filter(row =>
         cols.some(col => (cellValue(col, row) + "").toLowerCase().includes(lowerTerms))
       );
+    },
+
+    formatDate(date) {
+      return moment(date).format("DD-MM-YYYY");
     }
   }
 };
