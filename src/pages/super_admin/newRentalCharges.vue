@@ -2,15 +2,7 @@
   <q-page>
     <div>
       <!--@update:model-value="goToUnassignedTab"-->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        active-bg-color="grey-1"
-        active-color="dark"
-        indicator-color="transparent"
-        align=""
-        @update:model-value="goToUnassignedTab"
-      >
+      <q-tabs indicator-color="purple-9" v-model="selectedTab" class="shadow-1" active-color="purple-9" align="" @update:model-value="goToUnassignedTab">
         <q-tab
           name="active"
           label="Active Rental Charges"
@@ -107,7 +99,7 @@
                   <div class="col-md-6">
                     <q-input
                       clearable
-                      color="grey-9"
+
                       v-model.trim="filterSearch"
                       placeholder="Type.."
                       label="Search by Plan Name"
@@ -209,7 +201,7 @@
                   <div class="col-md-6">
                     <q-input
                       clearable
-                      color="grey-9"
+
                       v-model.trim="filterSearch1"
                       placeholder="Type.."
                       label="Search by Plan Name"

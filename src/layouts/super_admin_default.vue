@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh Lpr lFf">
     <q-header flat>
       <customHeader
         :getUserName="getUserName"
@@ -39,7 +39,9 @@
           leave-active-class="animated fadeOut"
           mode="out-in"
         >
-          <component :is="Component" />
+          <div :key="$route.fullPath">
+            <component :is="Component" />
+          </div>
         </transition>
       </router-view>
     </q-page-container>

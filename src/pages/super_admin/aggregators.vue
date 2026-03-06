@@ -3,14 +3,7 @@
         <!-- content -->
         <div>
 
-            <q-tabs
-                v-model="tab"
-                class="shadow-1"
-                active-bg-color="grey-1"
-                active-color="dark"
-                indicator-color="transparent"
-                align=""
-            >
+            <q-tabs indicator-color="purple-9" v-model="tab" class="shadow-1" active-color="purple-9" align="">
                 <q-tab name="active" label="Active Aggregators" />
                 <q-tab name="deactive" label="Deactive Aggregators" />
             </q-tabs>
@@ -25,7 +18,7 @@
                         v-model:pagination="paginationControl"
                         :filter-method="myCustomSearchFilter"
                         row-key="id"
-                        color="grey-9"
+
                     >
                         <template v-slot:body-cell-action="props">
                             <q-td :props="props">
@@ -42,7 +35,7 @@
                             <div class="col-6">
                                 <q-input
                                     clearable
-                                    color="grey-9"
+
                                     v-model="filterSearch"
                                     placeholder="Type.."
                                     class="q-mr-lg"
@@ -69,7 +62,7 @@
                         v-model:pagination="paginationControl"
                         :filter-method="myCustomSearchFilter"
                         row-key="id"
-                        color="grey-9"
+
                     >
                         <template v-slot:body-cell-action1="props">
                             <q-td :props="props">
@@ -84,7 +77,7 @@
                             <div class="col-6">
                                 <q-input
                                     clearable
-                                    color="grey-9"
+
                                     v-model="filterSearch"
                                     placeholder="Type.."
                                     class="q-mr-lg"

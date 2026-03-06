@@ -3,15 +3,7 @@
     <!-- content -->
     <div>
       <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        active-bg-color="grey-1"
-        active-color="dark"
-        indicator-color="transparent"
-        align=""
-        @update:model-value="goToUnassignedTab"
-      >
+      <q-tabs indicator-color="purple-9" v-model="selectedTab" class="shadow-1" active-color="purple-9" align="" @update:model-value="goToUnassignedTab">
         <q-tab
           name="active"
           label="Active MDR"
@@ -34,7 +26,7 @@
             row-key="id"
             :loading="tableAjaxLoading"
             :rows-per-page-options="[5, 10, 15, 20]"
-            color="dark"
+
             @request="ajaxLoadAllLeadInfo"
           >
             <template v-slot:body-cell-leadSource="props">
@@ -223,7 +215,7 @@
                   <div class="col-md-6">
                     <q-input
                       clearable
-                      color="grey-9"
+
                       v-model.trim="filterSearch"
                       placeholder="Type.."
                       label="Search by Plan Name"
@@ -260,7 +252,7 @@
             row-key="id"
             :loading="tableAjaxLoading1"
             :rows-per-page-options="[5, 10, 15, 20]"
-            color="dark"
+
             @request="ajaxLoadAllLeadInfo1"
           >
             <template v-slot:body-cell-leadSource="props">
@@ -441,7 +433,7 @@
                   <div class="col-md-6">
                     <q-input
                       clearable
-                      color="grey-9"
+
                       v-model.trim="filterSearch1"
                       placeholder="Type.."
                       label="Search by Plan Name"

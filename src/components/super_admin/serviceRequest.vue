@@ -14,7 +14,7 @@
           :filter="filterSearch" v-model:pagination="paginationControl"
           :filter-method="myCustomSearchFilter1" 
           row-key="name" 
-          color="grey-9"
+
           >
 
           <q-td v-slot:body-cell-action="props" :props="props">
@@ -27,23 +27,23 @@
             </q-td>
 
             <q-td v-slot:body-cell-serviceReqIssueTypeSets="props" :props="props">
-              <div class="row no-wrap group" v-for="menu in props.row.serviceReqIssueTypeSets" >
+              <div class="row no-wrap group" v-for="menu in props.row.serviceReqIssueTypeSets" :key="menu.id">
                 <q-chip color="light" class="text-dark">
-                  {{ menu.serviceReqIssueType.name}}
+                  {{ menu.serviceReqIssueType?.name || "NA"}}
                 </q-chip>
               </div>
             </q-td>
             <q-td v-slot:body-cell-serviceRequestStatusSets="props" :props="props">
-              <div class="row no-wrap group" v-for="menu in props.row.serviceRequestStatusSets" >
+              <div class="row no-wrap group" v-for="menu in props.row.serviceRequestStatusSets" :key="menu.id">
                 <q-chip color="light" class="text-dark">
-                  {{ menu.serviceRequestStatus != null ? menu.serviceRequestStatus.name : "NA" }}
+                  {{ menu.serviceRequestStatus?.name || "NA" }}
                 </q-chip>
               </div>
             </q-td>
             
             <template v-slot:top="props">
               <!-- <div class="col-3">
-                <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." class="q-mr-lg" />
+                <q-input clearable  v-model="filterSearch" placeholder="Type.." class="q-mr-lg" />
               </div> -->
               <div class="col-7" align="right">
                 <q-btn no-caps class="text-weight-regular" label="Add Service Type"
@@ -60,20 +60,20 @@
           :filter="filterSearch1" v-model:pagination="paginationControl2"
           :filter-method="myCustomSearchFilter2" 
           row-key="name" 
-          color="grey-9"
+
           >
 
             <q-td v-slot:body-cell-serviceReqIssueTypeSets="props" :props="props">
-              <div class="row no-wrap group" v-for="menu in props.row.serviceReqIssueTypeSets" >
+              <div class="row no-wrap group" v-for="menu in props.row.serviceReqIssueTypeSets" :key="menu.id">
                 <q-chip color="light" class="text-dark">
-                  {{ menu.serviceReqIssueType.name}}
+                  {{ menu.serviceReqIssueType?.name || "NA"}}
                 </q-chip>
               </div>
             </q-td>
              <q-td v-slot:body-cell-serviceRequestStatusSets="props" :props="props">
-              <div class="row no-wrap group" v-for="menu in props.row.serviceRequestStatusSets" >
+              <div class="row no-wrap group" v-for="menu in props.row.serviceRequestStatusSets" :key="menu.id">
                 <q-chip color="light" class="text-dark">
-                  {{ menu.serviceRequestStatus != null ? menu.serviceRequestStatus.name : "NA"}}
+                  {{ menu.serviceRequestStatus?.name || "NA"}}
                 </q-chip>
               </div>
             </q-td>
@@ -88,7 +88,7 @@
 
             <template v-slot:top="props">
               <!-- <div class="col-3">
-                <q-input clearable color="grey-9" v-model="filterSearch1" placeholder="Type.." class="q-mr-lg" />
+                <q-input clearable  v-model="filterSearch1" placeholder="Type.." class="q-mr-lg" />
               </div> -->
             </template>
           </q-table>
@@ -300,10 +300,10 @@ export default {
            this.$q
         .dialog({
           title: "Confirm",
-          message: "Are you sure want to delete?",
+          message: "Are you sure want to active?",
           ok: "Continue",
           cancel: "Cancel"
-        }).then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -312,28 +312,26 @@ export default {
           });
         this.EDIT_SERVICE_REQUEST_TYPES(param)
           .then(() => {
-            this.$q.loading.hide();
             this.$q.notify({
               color: "positive",
               position: "bottom",
               message: "Successfully updated!",
               icon: "thumb_up"
             });
-            this.$q.loading.hide();
-               this.ajaxSpareData();
-            });
-          }).catch(error => {
-            this.$q.loading.hide();
+            this.ajaxSpareData();
+          })
+          .catch(error => {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message:
-                error.data?.message == null
-                  ? "Please Try Again Later !"
-                  : error.data?.message,
+              message: error.data?.message || "Please Try Again Later !",
               icon: "thumb_down"
             });
+          })
+          .finally(() => {
+            this.$q.loading.hide();
           });
+        });
     },
 
     fnShowActiveIssueType(reqData){
@@ -343,7 +341,7 @@ export default {
           message: "Are you sure want to active this issue?",
           ok: "Continue",
           cancel: "Cancel"
-        }).then(() => {
+        }).onOk(() => {
             this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -352,7 +350,6 @@ export default {
           });
            this.ACTIVE_SERVICE_ISSUE_TYPES(param)
           .then(() => {
-            this.$q.loading.hide();
             this.$q.notify({
               color: "positive",
               position: "bottom",
@@ -361,18 +358,18 @@ export default {
             });
             this.emitfnshowEditServiceType();
           })
-        }).catch(error => {
-            this.$q.loading.hide();
+          .catch(error => {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message:
-                error.data?.message == null
-                  ? "Please Try Again Later !"
-                  : error.data?.message,
+              message: error.data?.message || "Please Try Again Later !",
               icon: "thumb_down"
             });
+          })
+          .finally(() => {
+            this.$q.loading.hide();
           });
+        });
     },
 
     fnDeleteServiceType(rowDetails) {
@@ -380,10 +377,10 @@ export default {
       this.$q
         .dialog({
           title: "Confirm",
-          message: "Are you sure want to delete?",
+          message: "Are you sure want to activate?",
           ok: "Continue",
           cancel: "Cancel"
-        }).then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -392,24 +389,25 @@ export default {
           });
           this.DELETE_SERVICE_REQUEST_TYPES(rowDetails)
             .then(response => {
-               this.$q.loading.hide();
               this.$q.notify({
                 color: "positive",
                 position: "bottom",
                 message: "Successfully removed",
                 icon: "thumb_up"
               });
-               this.$q.loading.hide();
-               this.ajaxSpareData();
+              this.ajaxSpareData();
+            })
+            .catch(error => {
+              this.$q.notify({
+                color: "negative",
+                position: "bottom",
+                message: error.data?.message || "Failed to remove",
+                icon: "thumb_down"
+              });
+            })
+            .finally(() => {
+              this.$q.loading.hide();
             });
-         
-        }).catch(() => {
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "No changes made!",
-            icon: "thumb_down"
-          });
         });
     },
 

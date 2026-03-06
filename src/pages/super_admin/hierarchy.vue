@@ -2,14 +2,7 @@
   <q-page>
     <div>
 
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        active-color="dark"
-        indicator-color="dark"
-        align=""
-        @update:model-value="changeTabs"
-      >
+      <q-tabs indicator-color="purple-9" v-model="selectedTab" class="shadow-1" active-color="purple-9" align="" @update:model-value="changeTabs">
         <q-tab name="active" label="Active Hierarchy" />
         <q-tab name="deactive" label="Deactive Hierarchy" />
       </q-tabs>
@@ -27,7 +20,7 @@
             :filter="filterSearch"
             v-model:pagination="paginationControl"
             :filter-method="myCustomSearchFilter"
-            color="grey-9"
+
           >
 
             <!-- ACTION COLUMN -->
@@ -55,7 +48,7 @@
                   <q-input
 
                     clearable
-                    color="grey-9"
+
                     v-model="filterSearch"
                     placeholder="Type.."
                     class="q-mr-lg"
@@ -89,7 +82,7 @@
             :filter="filterSearch1"
             v-model:pagination="paginationControl1"
             :filter-method="myCustomSearchFilter"
-            color="grey-9"
+
           >
 
             <!-- ACTION COLUMN -->
@@ -117,7 +110,7 @@
                   <q-input
 
                     clearable
-                    color="grey-9"
+
                     v-model="filterSearch1"
                     placeholder="Type.."
                     class="q-mr-lg"
@@ -321,7 +314,7 @@ export default {
           message: "Are you sure want to delete hierarchy?",
           ok: "Continue",
           cancel: "Cancel"
-        }).then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -360,7 +353,7 @@ export default {
           message: "Are you sure want to Active hierarchy?",
           ok: "Continue",
           cancel: "Cancel"
-        }).then(() => {
+        }).onOk(() => {
           this.$q.loading.show({
             delay: 100, // ms
             message: "Please Wait",
@@ -415,7 +408,7 @@ export default {
           message: "Are you sure want to delete Hierarchy?",
           ok: "Continue",
           cancel: "Cancel",
-        }).then(() => {
+        }).onOk(() => {
           this.DELETE_HIERARCHY_BY_HIERARCHY_ID_DATA(HierarchyId)
             .then(response => {
               this.FETCH_ALL_HIERARCHIES_DATA();

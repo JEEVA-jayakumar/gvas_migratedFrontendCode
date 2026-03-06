@@ -1,9 +1,9 @@
 <template>
   <q-page>
     <div>
-      <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" >
-         <q-tab @click="ajaxSpareData"  color="dark" name="tab-3" label="Active Issue Types" />
-          <q-tab  color="dark" name="tab-4" label="Deactive Issue Types" />
+      <q-tabs active-color="purple-9" indicator-color="purple-9" align="left" v-model="activeTab" class="shadow-1"  >
+         <q-tab @click="ajaxSpareData"   name="tab-3" label="Active Issue Types" />
+          <q-tab   name="tab-4" label="Deactive Issue Types" />
 </q-tabs>
 <q-tab-panels v-model="activeTab" animated>
 <q-tab-panel name="tab-1">
@@ -14,7 +14,7 @@
           :filter="filterSearch" v-model:pagination="paginationControl"
           :filter-method="myCustomSearchFilter" 
           row-key="name" 
-          color="grey-9"
+
           >
             <q-td v-slot:body-cell-serviceReqIssueTypeSets="props" :props="props">
               <div class="row no-wrap group" v-for="menu in props.row.serviceReqIssueTypeSets" :key="menu.id">
@@ -43,7 +43,7 @@
 
             <template v-slot:top="props">
               <div class="col-3">
-                <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." class="q-mr-lg" />
+                <q-input clearable  v-model="filterSearch" placeholder="Type.." class="q-mr-lg" />
               </div>
               <div class="col-3" align="right">
                 <q-btn no-caps class="text-weight-regular" label="Add Service Type"
@@ -60,7 +60,7 @@
           :filter="filterSearch2" v-model:pagination="paginationControl"
           :filter-method="myCustomSearchFilter" 
           row-key="name" 
-          color="grey-9"
+
           >
             <q-td v-slot:body-cell-serviceReqIssueTypeSets="props" :props="props">
               <div class="row no-wrap group" v-for="menu in props.row.serviceReqIssueTypeSets" :key="menu.id">
@@ -87,13 +87,13 @@
 
             <template v-slot:top="props">
               <div class="col-3">
-                <q-input clearable color="grey-9" v-model="filterSearch2" placeholder="Type.." class="q-mr-lg" />
+                <q-input clearable  v-model="filterSearch2" placeholder="Type.." class="q-mr-lg" />
               </div>
             </template>
           </q-table>
         </q-tab-panel>
 <q-tab-panel name="tab-3">
-          <q-table :rows="ActivetableData" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter1" row-key="name" color="grey-9">
+          <q-table :rows="ActivetableData" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter1" row-key="name" >
             <q-td v-slot:body-cell-createdDate="props" :props="props">{{ $moment(props.row.createdDate).format("Do MMM Y") }}</q-td>
             <q-td v-slot:body-cell-updatedDate="props" :props="props">{{ $moment(props.row.updatedDate).format("Do MMM Y") }}</q-td>
 
@@ -107,7 +107,7 @@
             </q-td>
              <template v-slot:top="props">
               <div class="col-3">
-                <q-input clearable color="grey-9" v-model="filterSearch1" placeholder="Type.." class="q-mr-lg" />
+                <q-input clearable  v-model="filterSearch1" placeholder="Type.." class="q-mr-lg" />
               </div>
               <!--END: table filter,search -->
               <div class="col-3" align="right">
@@ -125,7 +125,7 @@
           :filter="filterSearch3" v-model:pagination="paginationControl2"
           :filter-method="myCustomSearchFilter2" 
           row-key="name" 
-          color="grey-9"
+
           >
             <q-td v-slot:body-cell-createdDate="props" :props="props">{{ $moment(props.row.createdDate).format("Do MMM Y") }}</q-td>
             <q-td v-slot:body-cell-updatedDate="props" :props="props">{{ $moment(props.row.updatedDate).format("Do MMM Y") }}</q-td>
@@ -139,7 +139,7 @@
 
             <template v-slot:top="props">
               <div class="col-3">
-                <q-input clearable color="grey-9" v-model="filterSearch3" placeholder="Type.." class="q-mr-lg" />
+                <q-input clearable  v-model="filterSearch3" placeholder="Type.." class="q-mr-lg" />
               </div>
             </template>
           </q-table>

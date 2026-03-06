@@ -1,15 +1,9 @@
 <template>
-  <q-page>
+  <q-page v-if="inventoryOptionSelected">
     <div class="text-grey-9">
       <div class="row bottom-border q-pa-sm items-center">
         <div class="col">
-          <q-tabs
-            v-model="inventoryOptionSelected"
-            active-color="purple-9"
-            indicator-color="purple-9"
-            class="shadow-1"
-            align="left"
-          >
+          <q-tabs indicator-color="purple-9" v-model="inventoryOptionSelected" active-color="purple-9" class="shadow-1" align="left">
             <q-tab name="serviceRequest" label="Service Request" />
             <q-tab name="issueTypes" label="Issue Types" />
             <q-tab name="serviceStatus" label="Service Status" />
@@ -87,7 +81,14 @@ export default {
       "getCurrentDeviceId",
       "getAllInventorywithsoDeviceDetailsWithCount"
     ]),
-    ...mapGetters("InventoryWithSo", ["getAllInventoryWithSo"])
+    ...mapGetters("InventoryWithSo", ["getAllInventoryWithSo"]),
+    getUserInfo() {
+      try {
+        return JSON.parse(localStorage.getItem("u_i"));
+      } catch (e) {
+        return null;
+      }
+    }
   },
 
   created() {
@@ -102,9 +103,12 @@ export default {
     ]),
     ...mapActions("InventoryWithSo", ["FETCH_INVENTORY_WITH_SO"]),
     fnAjaxFetchAllDeviceDetailsWithCount() {
-      const userInfo = JSON.parse(localStorage.getItem("u_i"));
+      const userInfo = this.getUserInfo;
       if (userInfo && userInfo.region) {
-        this.toggleAjaxLoadFilter = true;
+        this.$q.loading.show({
+          message: "Please Wait",
+          spinnerColor: "purple-9",
+        });
         this.FETCH_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT(userInfo.region.id)
           .then(() => {
             let requestParams = {
@@ -112,9 +116,9 @@ export default {
               action: this.$REGIONAL_INVENTORY_FILTER_ACTION_DEVICE
             };
             this.FETCH_REGIONAL_INVENTORY_SERIAL_NUMBER_BY_DEVICE(requestParams);
-            this.toggleAjaxLoadFilter = false;
-          }).catch(() => {
-            this.toggleAjaxLoadFilter = false;
+          })
+          .finally(() => {
+            this.$q.loading.hide();
           });
       }
     }

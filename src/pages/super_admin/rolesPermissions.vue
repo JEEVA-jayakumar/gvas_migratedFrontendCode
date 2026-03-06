@@ -3,13 +3,13 @@
     <!-- content -->
     <div>
 
-      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="changeTabs">
-        <q-tab color="dark" name="active" label="Active Roles" />
-        <q-tab color="dark" name="deactive" label="Deactive Roles" />
+      <q-tabs indicator-color="purple-9" active-color="purple-9" align="left" v-model="selectedTab" class="shadow-1" @update:model-value="changeTabs">
+        <q-tab  name="active" label="Active Roles" />
+        <q-tab  name="deactive" label="Deactive Roles" />
 </q-tabs>
 <q-tab-panels v-model="selectedTab" animated>
 <q-tab-panel name="active">
-           <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
+           <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" >
         <q-td v-slot:body-cell-action="props" :props="props">
           <div class="row no-wrap no-padding">
             <q-btn  no-caps no-wrap label="Modify Role/Permissions" icon="far fa-plus-square" size="md" @click="fnShowEditRole(props.row)" flat class="text-light-blue">
@@ -38,7 +38,7 @@
             <div class="col-6">
               <q-input
                 clearable
-                color="grey-9"
+
                 v-model="filterSearch"
                 placeholder="Type.."
                 class="q-mr-lg"
@@ -61,7 +61,7 @@
       </q-table>
          </q-tab-panel>
 <q-tab-panel name="deactive">
-           <q-table :rows="deactivatedTableData" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1" v-model:pagination="paginationControl1" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
+           <q-table :rows="deactivatedTableData" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1" v-model:pagination="paginationControl1" :filter-method="myCustomSearchFilter" row-key="name" >
         <q-td v-slot:body-cell-action="props" :props="props">
           <div class="row no-wrap no-padding">
             <!-- <q-btn  no-caps no-wrap label="Modify Role/Permissions" icon="far fa-plus-square" size="md" @click="fnShowEditRole(props.row)" flat class="text-light-blue">
@@ -89,7 +89,7 @@
             <div class="col-6">
               <q-input
                 clearable
-                color="grey-9"
+
                 v-model="filterSearch1"
                 placeholder="Type.."
                 class="q-mr-lg"
@@ -293,10 +293,11 @@ export default {
             this.$q
         .dialog({
           title: "Confirm",
-          message: "Are you sure want to active role?",
+          message: "Are you sure want to activate role?",
           ok: "Continue",
           cancel: "Cancel",
-        }).then(() => {
+        }).onOk(() => {
+          this.$q.loading.show({ message: "Please Wait", spinnerColor: "purple-9" });
           let param = {
             id: roleId.id,
             role: roleId.role,
@@ -309,19 +310,21 @@ export default {
               this.$q.notify({
                 color: "positive",
                 position: "bottom",
-                message: "Successfully Deleted!",
+                message: "Successfully activated!",
                 icon: "thumb_up",
               });
               this.ajaxLoadDataForRolesPermissions();
-            }).catch(() => {
+            }).catch(error => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
+                message: error.data?.message || "Please Try Again Later !",
                 icon: "thumb_down",
               });
+            }).finally(() => {
+              this.$q.loading.hide();
             });
-        }).catch(() => {
+        }).onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -338,7 +341,8 @@ export default {
           message: "Are you sure want to delete role?",
           ok: "Continue",
           cancel: "Cancel",
-        }).then(() => {
+        }).onOk(() => {
+          this.$q.loading.show({ message: "Please Wait", spinnerColor: "purple-9" });
           this.DELETE_ROLE_BY_ROLE_ID_DATA(roleId)
             .then(response => {
               this.FETCH_ALL_ROLES_PERMISSIONS_DATA();
@@ -349,15 +353,17 @@ export default {
                 icon: "thumb_up",
               });
               this.ajaxLoadDataForRolesPermissions();
-            }).catch(() => {
+            }).catch(error => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
+                message: error.data?.message || "Please Try Again Later !",
                 icon: "thumb_down",
               });
+            }).finally(() => {
+              this.$q.loading.hide();
             });
-        }).catch(() => {
+        }).onCancel(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
@@ -384,13 +390,15 @@ export default {
           this.deactivatedTableData = this.getAllRolesPermissions.filter(service => service.active == false);
           this.$q.loading.hide();
         })
-        .catch(() => {
+        .catch(error => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: error.data?.message == null ? "Please Try Again Later !" : error.data?.message,
+            message: error.data?.message || "Please Try Again Later !",
             icon: "thumb_down",
           });
+        }).finally(() => {
+          this.$q.loading.hide();
         });
     },
     ajaxLoadDataForHierarchyData() {

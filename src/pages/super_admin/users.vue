@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <div>
-      <q-tabs v-model="activeTab" class="shadow-1" active-color="purple-9" indicator-color="purple-9" align="left" @update:model-value="changeTabs">
+      <q-tabs indicator-color="purple-9" v-model="activeTab" class="shadow-1" active-color="purple-9" align="left" @update:model-value="changeTabs">
         <q-tab name="tab-1" label="Active Users" />
         <q-tab name="tab-2" label="De-activated Users" />
       </q-tabs>
@@ -11,7 +11,7 @@
           <!--START: table Data -->
           <q-table :rows="getAllUsers" :columns="columns" table-class="customSATableClass" :filter="filterSearch"
             selection="multiple" v-model:selected="formData.selectedUsersToDelete" v-model:pagination="paginationControl"
-            :loading="tableAjaxLoading" :filter-method="myCustomSearchFilter" row-key="userId" color="grey-9">
+            :loading="tableAjaxLoading" :filter-method="myCustomSearchFilter" row-key="userId" >
 
             <template v-slot:body-cell-name="props">
               <q-td :props="props">
@@ -37,12 +37,12 @@
               <div class="col-md-12 group">
                 <div class="row">
                   <div class="col-md-6">
-                    <q-input clearable color="grey-9" v-model.trim="filterSearch" placeholder="Type.."
+                    <q-input clearable  v-model.trim="filterSearch" placeholder="Type.."
                       label="Search by Name, Merchant Name, Lead ID" />
                   </div>
                   <div class="col-md-3"></div>
                   <div class="col-md-3">
-                    <q-select clearable v-model="filter_values" color="grey-9" placeholder="Select"
+                    <q-select clearable v-model="filter_values"  placeholder="Select"
                       label="Filter By" @clear="ajaxLoadDataForAllUsersList"
                       @update:model-value="ajaxLoadDataForRoleIdFilter" :options="getAllRoles" />
                   </div>
@@ -70,7 +70,7 @@
                       </div>
                       <div class="col-auto q-px-xs">
                         <downloadExcel :rows="getAllUsers" :fields="json_fields" name="UserDetails.xls">
-                          <q-btn outline color="grey-9" label="Download as excel" />
+                          <q-btn outline  label="Download as excel" />
                         </downloadExcel>
                       </div>
                       <div class="col-auto q-px-xs">
@@ -91,7 +91,7 @@
           <!--START: table Data   :rows="getImplementationQueueUnassignedList"  -->
           <q-table :rows="getAllUsers" :columns="columns" table-class="customSATableClass" :filter="filterSearch"
             selection="multiple" v-model:selected="formData.selectedUsersToDelete" v-model:pagination="paginationControl"
-            :loading="tableAjaxLoading" :filter-method="myCustomSearchFilter" row-key="userId" color="grey-9">
+            :loading="tableAjaxLoading" :filter-method="myCustomSearchFilter" row-key="userId" >
 
             <template v-slot:body-cell-name="props">
               <q-td :props="props">
@@ -117,7 +117,7 @@
               <div class="col-md-12 group">
                 <div class="row items-stretch">
                   <div class="col-md-6">
-                    <q-input clearable color="grey-9" v-model.trim="filterSearch" placeholder="Type.."
+                    <q-input clearable  v-model.trim="filterSearch" placeholder="Type.."
                       label="Search by Name, Merchant Name, Lead ID" />
                   </div>
                   <div class="col-md-6" align="right">
@@ -375,7 +375,7 @@ export default {
                 : "Are you sure want to delete users?",
             ok: "Continue",
             cancel: "Cancel"
-          }).then(() => {
+          }).onOk(() => {
             this.$q.loading.show({
               delay: 100, // ms
               message: "Please Wait",
@@ -400,13 +400,12 @@ export default {
                     message: "Successfully Activated!",
                     icon: "thumb_up"
                   });
-                }).catch(() => {
+                }).catch(error => {
                   this.$q.loading.hide();
                   this.$q.notify({
                     color: "negative",
                     position: "bottom",
-                    message:
-                      error.data?.message || "Please Try Again Later !",
+                    message: error.data?.message || "Please Try Again Later !",
                     icon: "thumb_down"
                   });
                 });
@@ -423,22 +422,17 @@ export default {
                   // });
                   this.deteledUsers = response.data.data;
                   this.toggleDeleteUsersModal();
-                }).catch(() => {
+                }).catch(error => {
                   this.$q.loading.hide();
                   this.$q.notify({
                     color: "negative",
                     position: "bottom",
-                    message:
-                      error.data?.message == null
-                        ? "Please Try Again Later !"
-                        : error.data?.message,
+                    message: error.data?.message || "Please Try Again Later !",
                     icon: "thumb_down"
                   });
                 });
             }
-          }).catch(() => {
-            console.log(err);
-            this.$q.loading.hide();
+          }).onCancel(() => {
             this.$q.notify({
               color: "negative",
               position: "bottom",

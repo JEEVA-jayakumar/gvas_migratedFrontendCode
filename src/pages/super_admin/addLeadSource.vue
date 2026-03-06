@@ -13,16 +13,10 @@
           <div class="q-title text-weight-regular">Manage lead sources</div>
         </div>
         <div class="col" align="right">
-          <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
+          <q-btn outline round  size="sm" icon="clear" @click="emitModalClose"/>
         </div>
       </div>
-      <q-tabs
-        v-model="tab"
-        active-bg-color="grey-1"
-        active-color="dark"
-        indicator-color="transparent"
-        align=""
-      >
+      <q-tabs indicator-color="purple-9" v-model="tab" active-color="purple-9" align="">
         <q-tab name="tab-1" label="Active List" @click="leadSourceActiveList" />
         <q-tab name="tab-2" label="De-Actived List" @click="leadSourceDeActiveList" />
       </q-tabs>
@@ -35,7 +29,7 @@
             :columns="activatedColumns"
             :filter="activeFilterSearch"
             row-key="id"
-            color="grey-9"
+
           >
             <template v-slot:body-cell-action="props">
               <q-td :props="props">
@@ -69,7 +63,7 @@
               <div class="col-8">
                 <q-input
                   clearable
-                  color="grey-9"
+
                   v-model="activeFilterSearch"
                   placeholder="Type.."
                   label="Search lead source"
@@ -102,7 +96,7 @@
             :filter="deActivatedFilterSearch"
             v-model:pagination="paginationControl"
             row-key="id"
-            color="grey-9"
+
           >
             <template v-slot:body-cell-action="props">
               <q-td :props="props">
@@ -125,7 +119,7 @@
               <div class="col">
                 <q-input
                   clearable
-                  color="grey-9"
+
                   v-model="deActivatedFilterSearch"
                   placeholder="Type.."
                   label="Search by name"

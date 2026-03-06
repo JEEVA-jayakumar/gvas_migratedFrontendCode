@@ -7,7 +7,7 @@
         <div class="row q-col-gutter-x-sm q-col-gutter-y-sm">
           <div class="col-3">
             <q-select
-              color="grey-9"
+
               v-model="formData.merchantType"
               :options="activeMerchantType"
               label="Select merchant type"
@@ -32,7 +32,7 @@
           </div>
           <div class="col-3">
             <q-select
-              color="grey-9"
+
               v-model="formData.parentIDtemp"
               :options="activeDocumentMerchantType"
               @update:model-value="mapParentIdToSubDocument"
@@ -54,7 +54,7 @@
           </div>
           <div class="col-3">
             <q-input
-              color="grey-9"
+
               v-model="formData.subDocumentType"
               :error="v$.formData.subDocumentType.$error"
               label="Merchant Sub Document Type"
@@ -64,7 +64,7 @@
           <div class="col-auto">
             <q-input
               type="number"
-              color="grey-9"
+
               v-model="formData.marsDocumentId"
               label="Mars document Id"
               placeholder="Mars document Id"
@@ -86,15 +86,15 @@
       <!-- START >> Setup fee and recurring fee -->
       <!-- START >> Table >> rental charge details -->
       <div class="col-md-12 col-sm-12 col-xs-12">
-        <q-tabs v-model="tab" color="grey-9" class="shadow-1">
+        <q-tabs indicator-color="purple-9" active-color="purple-9" align="left" v-model="tab" class="shadow-1">
           <q-tab
-            color="dark"
+
             label="Active List"
             name="tab-1"
             @update:model-value="fetchActiveMerchantTypes"
           />
           <q-tab
-            color="dark"
+
             label="De-Actived List"
             name="tab-2"
             @update:model-value="fetchDeActiveMerchantTypes"
@@ -109,7 +109,7 @@
               :filter="filterSearch"
               v-model:pagination="pagination"
               row-key="id"
-              color="grey-9"
+
             >
               <template v-slot:body-cell-subDocumentType="props">
                 <q-td :props="props">
@@ -149,7 +149,7 @@
                 <div class="col-md-5">
                   <q-input
                     clearable
-                    color="grey-9"
+
                     v-model="filterSearch"
                     placeholder="Type.."
                     label="Search by merchant type, document type, sub document type"
@@ -168,14 +168,14 @@
               :filter="filterSearch"
               v-model:pagination="pagination"
               row-key="id"
-              color="grey-9"
+
             >
               <template v-slot:top>
                 <!--START: table filter,search -->
                 <div class="col-md-5">
                   <q-input
                     clearable
-                    color="grey-9"
+
                     v-model="filterSearch"
                     placeholder="Type.."
                     label="Search by merchant type, document type, sub document type"

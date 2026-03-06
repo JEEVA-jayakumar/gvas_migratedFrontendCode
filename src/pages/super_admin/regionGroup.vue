@@ -3,8 +3,8 @@
         <!-- content -->
         <div>
 
-            <q-tabs v-model="tab" class="shadow-1" color="grey-1">
-        <q-tab color="dark" name="active" label="Active RegionsGroups" />
+            <q-tabs indicator-color="purple-9" active-color="purple-9" align="left" v-model="tab" class="shadow-1">
+        <q-tab  name="active" label="Active RegionsGroups" />
       </q-tabs>
 
       <q-tab-panels v-model="tab" animated>
@@ -17,7 +17,7 @@
             v-model:pagination="paginationControl"
             :filter-method="myCustomSearchFilter"
             row-key="name"
-            color="grey-9"
+
           >
             <template v-slot:body-cell-regionGroup="props">
               <q-td :props="props">
@@ -36,7 +36,7 @@
 
             <template v-slot:top>
               <div class="col-6">
-                <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.."
+                <q-input clearable  v-model="filterSearch" placeholder="Type.."
                   class="q-mr-lg" />
               </div>
               <div class="col-6" align="right">
@@ -49,7 +49,7 @@
 <q-tab-panel name="deactive">
                     <q-table :rows="deActiveTableData" table-class="customSATableClass" :columns="columns1"
                         :filter="filterSearch1" v-model:pagination="paginationControl1"
-                        :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">
+                        :filter-method="myCustomSearchFilter" row-key="name" >
                         <q-td v-slot:body-cell-regionGroup="props" :props="props">{{ props.row.regionName
                                 == null ? "NA" : props.row.regionName
                         }}</q-td>
@@ -63,7 +63,7 @@
                         <template v-slot:top="props">
 
                             <div class="col-6">
-                                <q-input clearable color="grey-9" v-model="filterSearch1" placeholder="Type.."
+                                <q-input clearable  v-model="filterSearch1" placeholder="Type.."
                                     class="q-mr-lg" />
                             </div>
                         </template>
