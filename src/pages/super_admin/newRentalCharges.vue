@@ -70,7 +70,7 @@
               >
                 <q-btn
                   align=""
-                  dense
+
                   flat
                   no-wrap
                   no-caps
@@ -86,7 +86,7 @@
               <q-td :props="props">
                 <div class="row no-wrap no-padding">
                   <q-btn
-                    dense
+
                     no-caps
                     no-wrap
                     label="Disable"
@@ -119,7 +119,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-12" align="side">
+              <div class="col-md-12" align="right">
                 <q-btn
                   no-caps
                   class="text-weight-regular"
@@ -171,7 +171,7 @@
               <q-td :props="props">
                 <div class="row no-wrap no-padding">
                   <q-btn
-                    dense
+
                     no-caps
                     no-wrap
                     label="Enable"
@@ -279,7 +279,7 @@ export default {
           name: "plan",
           required: true,
           label: "Plan Name",
-          align: "",
+          align: "left",
           field: row => row.plan?.planName,
           sortable: true
         },
@@ -287,7 +287,7 @@ export default {
           name: "leadSource",
           required: true,
           label: "Lead Source",
-          align: "",
+          align: "left",
           field: row => row.leadSource?.sourceName,
           sortable: true
         },
@@ -295,7 +295,7 @@ export default {
           name: "device",
           required: true,
           label: "Device Type",
-          align: "",
+          align: "left",
           field: row => row.device?.deviceName,
           sortable: true
         },
@@ -303,7 +303,7 @@ export default {
           name: "marsDeviceModel",
           required: true,
           label: "Mars Device Model",
-          align: "",
+          align: "left",
           field: row => row.marsDeviceModel?.name,
           sortable: true
         },
@@ -311,7 +311,7 @@ export default {
           name: "setupFees",
           required: true,
           label: "setupFees",
-          align: "",
+          align: "left",
           field: "setupFees",
           sortable: true
         },
@@ -319,7 +319,7 @@ export default {
           name: "monthlyFees",
           required: true,
           label: "Recurring Fees",
-          align: "",
+          align: "left",
           field: "monthlyFees",
           sortable: true
         },
@@ -327,7 +327,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "",
+          align: "left",
           field: "action",
           sortable: false
         }
@@ -337,7 +337,7 @@ export default {
           name: "plan",
           required: true,
           label: "Plan Name",
-          align: "",
+          align: "left",
           field: row => row.plan?.planName,
           sortable: true
         },
@@ -345,7 +345,7 @@ export default {
           name: "leadSource",
           required: true,
           label: "Lead Source",
-          align: "",
+          align: "left",
           field: row => row.leadSource?.sourceName,
           sortable: true
         },
@@ -353,7 +353,7 @@ export default {
           name: "device",
           required: true,
           label: "Device Type",
-          align: "",
+          align: "left",
           field: row => row.device?.deviceName,
           sortable: true
         },
@@ -361,7 +361,7 @@ export default {
           name: "marsDeviceModel",
           required: true,
           label: "Mars Device Model",
-          align: "",
+          align: "left",
           field: row => row.marsDeviceModel?.name,
           sortable: true
         },
@@ -369,7 +369,7 @@ export default {
           name: "setupFees",
           required: true,
           label: "setupFees",
-          align: "",
+          align: "left",
           field: "setupFees",
           sortable: true
         },
@@ -377,7 +377,7 @@ export default {
           name: "monthlyFees",
           required: true,
           label: "Recurring Fees",
-          align: "",
+          align: "left",
           field: "monthlyFees",
           sortable: true
         },
@@ -385,7 +385,7 @@ export default {
           name: "action1",
           required: true,
           label: "",
-          align: "",
+          align: "left",
           field: "action",
           sortable: false
         }

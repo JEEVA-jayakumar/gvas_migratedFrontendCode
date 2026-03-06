@@ -12,7 +12,7 @@
       <div class="col">
         <div class="text-h6 text-weight-regular">Manage plan</div>
       </div>
-      <div class="col" align="side">
+      <div class="col" align="right">
         <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
       </div>
     </div>
@@ -31,14 +31,14 @@
               placeholder="Plan"
             />
           </div>
-          <div align="side">
+          <div align="right">
             <q-btn
-              align="side"
+              align="right"
               v-if="makeUpdateElementActive"
               @click="fnFinalUpdate(formData)"
               color="purple-9"
             >Update</q-btn>
-            <q-btn align="side" v-else @click="fnFinalCreate(formData)" color="purple-9">Save</q-btn>
+            <q-btn align="right" v-else @click="fnFinalCreate(formData)" color="purple-9">Save</q-btn>
           </div>
         </div>
       </q-card-section>
@@ -58,7 +58,7 @@
           <q-td v-slot:body-cell-action="props" :props="props">
             <div class="row no-wrap no-padding">
               <q-btn
-                dense
+
                 no-caps
                 no-wrap
                 label="Modify"
@@ -69,7 +69,7 @@
                 class="text-light-blue"
               ></q-btn>
               <!-- <q-btn
-                dense
+
                 no-caps
                 no-wrap
                 label="Disable"

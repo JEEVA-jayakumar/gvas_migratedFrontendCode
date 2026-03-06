@@ -28,7 +28,7 @@
                 <q-item-section side>
                   <q-btn
                     round
-                    dense
+
                     no-caps
                     size="md"
                     @click="fnManageLeadSource"
@@ -53,7 +53,7 @@
                 <q-item-section side>
                   <q-btn
                     round
-                    dense
+
                     no-caps
                     size="md"
                     @click="fnManageTxnType"
@@ -78,7 +78,7 @@
                 <q-item-section side>
                   <q-btn
                     round
-                    dense
+
                     no-caps
                     size="md"
                     @click="fnManageHost"
@@ -103,7 +103,7 @@
               <q-item-section side>
                 <q-btn
                   round
-                  dense
+
                   no-caps
                   size="md"
                   @click="fnManageInstance"
@@ -114,13 +114,13 @@
               </q-item-section>
             </q-item>
             </q-card-section>
-            <q-card-actions vertical align="side">
+            <q-card-actions vertical align="right">
              <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" />
             </q-card-actions>
           </q-card>
         </div>
         </q-card-section>
-        <q-card-actions align="side">
+        <q-card-actions align="right">
            <q-btn flat label="Close" color="primary" @click="emitModalClose" />
         </q-card-actions>
       </q-card>

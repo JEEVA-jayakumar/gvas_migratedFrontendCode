@@ -34,7 +34,7 @@
           <template v-slot:body-cell-action="props">
             <q-td :props="props" class="q-gutter-x-sm">
               <q-btn
-                dense
+
                 unelevated
                 no-caps
                 label="Modify"
@@ -43,7 +43,7 @@
                 @click="fnShowEditAggregatorDevice(props.row)"
               />
               <q-btn
-                dense
+
                 unelevated
                 no-caps
                 label="Disable"
@@ -58,8 +58,8 @@
             <div class="full-width row items-center justify-between">
               <div class="col-12 col-md-6">
                 <q-input
-                  dense
-                  filled
+
+
                   clearable
                   color="purple-9"
                   v-model="filterSearch"
@@ -107,7 +107,7 @@
           <template v-slot:body-cell-action1="props">
             <q-td :props="props">
               <q-btn
-                dense
+
                 unelevated
                 no-caps
                 label="Activate"
@@ -122,8 +122,8 @@
             <div class="full-width row items-center">
               <div class="col-12 col-md-6">
                 <q-input
-                  dense
-                  filled
+
+
                   clearable
                   color="purple-9"
                   v-model="filterSearch"
@@ -178,13 +178,13 @@ export default {
       filterSearch: "",
       paginationControl: { rowsPerPage: 10 },
       columns: [
-        { name: "name", required: true, label: "Aggregator", align: "", field: row => row.aggregator?.name, sortable: true },
-        { name: "deviceName", required: true, label: "Device Name", align: "", field: "deviceName", sortable: true },
+        { name: "name", required: true, label: "Aggregator", align: "left", field: row => row.aggregator?.name, sortable: true },
+        { name: "deviceName", required: true, label: "Device Name", align: "left", field: "deviceName", sortable: true },
         { name: "action", required: true, label: "Actions", align: "center" }
       ],
       columns1: [
-        { name: "name", required: true, label: "Aggregator", align: "", field: row => row.aggregator?.name, sortable: true },
-        { name: "deviceName", required: true, label: "Device Name", align: "", field: "deviceName", sortable: true },
+        { name: "name", required: true, label: "Aggregator", align: "left", field: row => row.aggregator?.name, sortable: true },
+        { name: "deviceName", required: true, label: "Device Name", align: "left", field: "deviceName", sortable: true },
         { name: "action1", required: true, label: "Actions", align: "center" }
       ],
       activeTableData: [],

@@ -29,7 +29,7 @@
             <q-td v-slot:body-cell-action="props" :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
-                  dense
+
                   no-caps
                   no-wrap
                   label="Modify"
@@ -40,7 +40,7 @@
                   class="text-light-blue"
                 ></q-btn>
                 <q-btn
-                  dense
+
                   no-caps
                   no-wrap
                   label="Disable"
@@ -77,7 +77,7 @@
               <div class="col-3">
                   <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Search by Issue Name" class="q-mr-lg" />
                 </div>
-              <div class="col-7" align="side">
+              <div class="col-7" align="right">
                 <q-btn
                   no-caps
                   class="text-weight-regular alignbtn1"
@@ -124,7 +124,7 @@
             <q-td v-slot:body-cell-action1="props" :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
-                  dense
+
                   no-caps
                   no-wrap
                   label="Active"

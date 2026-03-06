@@ -17,7 +17,7 @@
           <q-td :props="props">
             <div class="row no-wrap no-padding">
               <q-btn
-                dense
+
                 no-caps
                 no-wrap
                 label="Modify"
@@ -35,7 +35,7 @@
           <!--START: table title -->
           <div class="col-md-6 q-title q-mt-lg text-weight-regular">Pincodes</div>
 
-          <div class="col-md-6 q-my-md" align="side">
+          <div class="col-md-6 q-my-md" align="right">
             <q-btn
               no-caps
               no-wrap
@@ -115,10 +115,10 @@ export default {
 
       filter: "",
       columns: [
-        { name: "pincode", required: true, label: "Pincode", align: "", field: "pincode", sortable: false },
-        { name: "stateName", required: true, label: "State", align: "", field: "stateName", sortable: false },
-        { name: "cityName", required: true, label: "City", align: "", field: "cityName", sortable: false },
-        { name: "action", required: true, label: "", align: "", field: "action", sortable: false }
+        { name: "pincode", required: true, label: "Pincode", align: "left", field: "pincode", sortable: false },
+        { name: "stateName", required: true, label: "State", align: "left", field: "stateName", sortable: false },
+        { name: "cityName", required: true, label: "City", align: "left", field: "cityName", sortable: false },
+        { name: "action", required: true, label: "", align: "left", field: "action", sortable: false }
       ]
     };
   },

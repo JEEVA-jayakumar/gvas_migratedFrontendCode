@@ -35,7 +35,7 @@
               <q-td :props="props">
                 <div class="row no-wrap no-padding">
                   <q-btn
-                    dense
+
                     flat
                     no-caps
                     label="Disable"
@@ -53,7 +53,7 @@
 
                 <div class="col-md-6">
                   <q-input
-                    dense
+
                     clearable
                     color="grey-9"
                     v-model="filterSearch"
@@ -97,7 +97,7 @@
               <q-td :props="props">
                 <div class="row no-wrap no-padding">
                   <q-btn
-                    dense
+
                     flat
                     no-caps
                     label="Active"
@@ -115,7 +115,7 @@
 
                 <div class="col-md-6">
                   <q-input
-                    dense
+
                     clearable
                     color="grey-9"
                     v-model="filterSearch1"
@@ -192,7 +192,7 @@ export default {
           name: "label",
           required: true,
           label: "Hierarchy",
-          align: "",
+          align: "left",
           field: "label",
           sortable: false,
         },
@@ -200,7 +200,7 @@ export default {
           name: "shortCode",
           required: true,
           label: "Hierarchy Code",
-          align: "",
+          align: "left",
           field: "shortCode",
           sortable: false,
         },
@@ -208,7 +208,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "",
+          align: "left",
           field: "action",
           sortable: true
         }
@@ -218,7 +218,7 @@ export default {
           name: "label",
           required: true,
           label: "Hierarchy",
-          align: "",
+          align: "left",
           field: "label",
           sortable: false,
         },
@@ -226,7 +226,7 @@ export default {
           name: "shortCode",
           required: true,
           label: "Hierarchy Code",
-          align: "",
+          align: "left",
           field: "shortCode",
           sortable: false,
         },
@@ -234,7 +234,7 @@ export default {
           name: "action",
           required: true,
           label: "",
-          align: "",
+          align: "left",
           field: "action",
           sortable: true
         }

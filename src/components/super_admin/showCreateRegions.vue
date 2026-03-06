@@ -12,14 +12,14 @@
               <q-card-section class="row items-center q-pb-none">
                 <div class="text-h6 text-grey-9 text-weight-bold">Add Region Info</div>
                 <q-space />
-                <q-btn icon="close" flat round dense @click="emitfnshowAddRegions()" />
+                <q-btn icon="close" flat round  @click="emitfnshowAddRegions()" />
               </q-card-section>
 
               <q-card-section>
                 <form @submit.prevent="fnfinalsubmitRegion(formData)">
                   <div class="row q-col-gutter-md">
                     <div class="col-12">
-                      <q-input outlined dense v-model="formData.regionAreaName" 
+                      <q-input   v-model="formData.regionAreaName"
                           @blur="$v.formData.regionAreaName.$touch"      
                           :error="$v.formData.regionAreaName.$error" 
                           label="Region Name" color="purple-9" 
@@ -30,7 +30,7 @@
                 </form>
               </q-card-section>
 
-              <q-card-actions align="side" class="text-purple-9 q-pa-md">
+              <q-card-actions align="right" class="text-purple-9 q-pa-md">
                 <q-btn flat label="Cancel" @click="emitfnshowAddRegions()" class="text-grey-7" />
                 <q-btn unelevated label="Save Region" color="purple-9" @click="fnfinalsubmitRegion(formData)" class="q-px-lg" />
               </q-card-actions>

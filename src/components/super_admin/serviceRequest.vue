@@ -19,9 +19,9 @@
 
           <q-td v-slot:body-cell-action="props" :props="props">
               <div class="row no-wrap no-padding">
-                 <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
+                 <q-btn  no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
                   @click="fnShowEditServiceType(props.row)" flat class="text-light-blue"></q-btn>
-                <q-btn dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md"
+                <q-btn  no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md"
                   @click="fnDeleteServiceType(props.row)" flat class="text-negative"></q-btn>
               </div>
             </q-td>
@@ -45,7 +45,7 @@
               <!-- <div class="col-3">
                 <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." class="q-mr-lg" />
               </div> -->
-              <div class="col-7" align="side">
+              <div class="col-7" align="right">
                 <q-btn no-caps class="text-weight-regular" label="Add Service Type"
                   @click="fnShowAddNewServiceType(props.row)" color="purple-9" size="md" />
               </div>
@@ -81,7 +81,7 @@
 
             <q-td v-slot:body-cell-action1="props" :props="props">
               <div class="row no-wrap no-padding">
-                <q-btn dense no-caps no-wrap label="Active" icon="far fa-plus-square" size="md"
+                <q-btn  no-caps no-wrap label="Active" icon="far fa-plus-square" size="md"
                   @click="fnShowActiveServiceType(props.row)" flat class="text-light-blue"></q-btn>
               </div>
             </q-td>

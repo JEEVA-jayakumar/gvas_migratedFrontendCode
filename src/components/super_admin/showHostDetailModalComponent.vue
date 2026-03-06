@@ -14,7 +14,7 @@
       <div class="col">
         <div class="text-h6 text-weight-regular">Manage Host</div>
       </div>
-      <div class="col" align="side">
+      <div class="col" align="right">
         <q-btn outline round color="dark" size="sm" icon="clear" @click="emitModalClose"/>
       </div>
     </div>
@@ -36,7 +36,7 @@
           <q-td v-slot:body-cell-action="props" :props="props">
             <div class="row no-wrap no-padding">
               <q-btn
-                dense
+
                 no-caps
                 no-wrap
                 label="Modify"
@@ -47,7 +47,7 @@
                 class="text-light-blue"
               ></q-btn>
               <q-btn
-                dense
+
                 no-caps
                 no-wrap
                 label="Disable"
@@ -70,7 +70,7 @@
                 label="Search lead source"
               />
             </div>
-            <div class="col-4" align="side">
+            <div class="col-4" align="right">
               <q-btn
                 no-caps
                 no-wrap

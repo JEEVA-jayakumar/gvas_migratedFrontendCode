@@ -8,14 +8,14 @@
       <q-card-section class="row items-center q-pb-none">
         <div class="text-h6 text-purple-9">LeadSource And Vas Device Config</div>
         <q-space />
-        <q-btn icon="close" flat round dense v-close-popup @click="$emit('emitAddLeadSOurceVasDevice')" />
+        <q-btn icon="close" flat round  v-close-popup @click="$emit('emitAddLeadSOurceVasDevice')" />
       </q-card-section>
 
       <q-card-section>
         <q-form @submit="fnsubmit" class="q-gutter-md">
           <q-select
-            outlined
-            dense
+
+
             v-model="formData.leadSourceDeviceVasMapping.leadSource"
             :options="dropDown.leadSourceOptions"
             label="Select lead source"
@@ -26,8 +26,8 @@
           />
 
           <q-select
-            outlined
-            dense
+
+
             v-model="formData.leadSourceDeviceVasMapping.device"
             :options="dropDown.deviceOptions"
             label="Select Device"
@@ -38,8 +38,8 @@
           />
 
           <q-select
-            outlined
-            dense
+
+
             multiple
             use-chips
             v-model="formData.vasList"

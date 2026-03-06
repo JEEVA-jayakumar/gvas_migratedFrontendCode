@@ -10,7 +10,7 @@
         <q-input
           v-model="token"
           type="textarea"
-          outlined
+
           readonly
           bg-color="grey-1"
           rows="5"

@@ -58,15 +58,15 @@
             @keyup.enter="submitMerchantSubDocumentTypeData(formData)"
           />
         </div>
-        <div align="side">
+        <div align="right">
           <q-btn
             flat
-            align="side"
+            align="right"
             class="bg-white text-weight-regular text-grey-8"
             @click="toggleModal()"
           >Cancel</q-btn>
           <q-btn
-            align="side"
+            align="right"
             @click="submitMerchantSubDocumentTypeData(formData)"
             color="purple-9"
           >Save</q-btn>

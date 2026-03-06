@@ -795,10 +795,10 @@
                   </div>
                 </q-list>
               </q-card-section>
-              <q-card-actions align="side">
+              <q-card-actions align="right">
                 <q-btn
                   flat
-                  align="side"
+                  align="right"
                   class="bg-white text-weight-regular text-grey-8"
                   @click="emitfnshowEditMDR()"
                   >Cancel</q-btn

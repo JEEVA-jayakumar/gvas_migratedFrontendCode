@@ -41,7 +41,7 @@
               <q-td :props="props">
                 <div class="row no-wrap no-padding">
                   <q-btn
-                    dense
+
                     no-caps
                     no-wrap
                     label="Modify"
@@ -52,7 +52,7 @@
                     class="text-light-blue"
                   ></q-btn>
                   <q-btn
-                    dense
+
                     no-caps
                     no-wrap
                     label="Disable"
@@ -80,7 +80,7 @@
                   </template>
                 </q-input>
               </div>
-              <div class="col-6" align="side">
+              <div class="col-6" align="right">
                 <q-btn
                   no-caps
                   class="text-weight-regular"
@@ -119,7 +119,7 @@
               <q-td :props="props">
                 <div class="row no-wrap no-padding">
                   <q-btn
-                    dense
+
                     no-caps
                     no-wrap
                     label="Active"
@@ -193,20 +193,20 @@ export default {
         rowsPerPage: 10
       },
       columns: [
-        { name: "id", required: true, label: "id", align: "", field: "id", sortable: true },
-        { name: "spare_parts_types", required: true, label: "spare_parts_types", align: "", field: "spare_parts_types", sortable: false },
-        { name: "created_date", required: true, label: "Created Date", align: "", field: "created_date", sortable: true },
-        { name: "updated_date", required: true, label: "Updated Date", align: "", field: "updated_date", sortable: true },
-        { name: "is_active", required: true, label: "is_active", align: "", field: "is_active", sortable: false },
-        { name: "action", required: true, label: "", align: "", field: "action", sortable: false }
+        { name: "id", required: true, label: "id", align: "left", field: "id", sortable: true },
+        { name: "spare_parts_types", required: true, label: "spare_parts_types", align: "left", field: "spare_parts_types", sortable: false },
+        { name: "created_date", required: true, label: "Created Date", align: "left", field: "created_date", sortable: true },
+        { name: "updated_date", required: true, label: "Updated Date", align: "left", field: "updated_date", sortable: true },
+        { name: "is_active", required: true, label: "is_active", align: "left", field: "is_active", sortable: false },
+        { name: "action", required: true, label: "", align: "left", field: "action", sortable: false }
       ],
       columns1: [
-        { name: "id", required: true, label: "id", align: "", field: "id", sortable: true },
-        { name: "spare_parts_types", required: true, label: "spare_parts_types", align: "", field: "spare_parts_types", sortable: false },
-        { name: "created_date", required: true, label: "Created Date", align: "", field: "created_date", sortable: true },
-        { name: "updated_date", required: true, label: "Updated Date", align: "", field: "updated_date", sortable: true },
-        { name: "is_active", required: true, label: "is_active", align: "", field: "is_active", sortable: false },
-        { name: "action", required: true, label: "", align: "", field: "action", sortable: false }
+        { name: "id", required: true, label: "id", align: "left", field: "id", sortable: true },
+        { name: "spare_parts_types", required: true, label: "spare_parts_types", align: "left", field: "spare_parts_types", sortable: false },
+        { name: "created_date", required: true, label: "Created Date", align: "left", field: "created_date", sortable: true },
+        { name: "updated_date", required: true, label: "Updated Date", align: "left", field: "updated_date", sortable: true },
+        { name: "is_active", required: true, label: "is_active", align: "left", field: "is_active", sortable: false },
+        { name: "action", required: true, label: "", align: "left", field: "action", sortable: false }
       ],
       activeTableData: [],
       deActiveTableData: [],

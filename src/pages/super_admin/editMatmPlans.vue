@@ -7,8 +7,8 @@
         <div class="row q-col-gutter-lg justify-center">
           <div class="col-12 col-md-5">
             <q-input
-              outlined
-              dense
+
+
               v-model.trim="formData.planName"
               label="Name of the Plan*"
               :error="v$.formData.planName.$error"
@@ -18,8 +18,8 @@
           
           <div class="col-12 col-md-5">
             <q-input
-              outlined
-              dense
+
+
               type="number"
               v-model.trim="formData.incentivePercentage"
               label="Incentive Percentage *"
@@ -30,8 +30,8 @@
          
           <div class="col-12 col-md-5">
             <q-input
-              outlined
-              dense
+
+
               type="number"
               v-model.trim="formData.minTxnVal"
               label="Minimum Transaction Value*"
@@ -42,8 +42,8 @@
 
           <div class="col-12 col-md-5">
             <q-input
-              outlined
-              dense
+
+
               type="number"
               v-model.trim="formData.maxIncPerTxn"
               label="Maximum Incentive Per Transaction *"

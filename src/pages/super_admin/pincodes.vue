@@ -6,9 +6,9 @@
         <template v-slot:body-cell-action="props">
           <q-td :props="props">
             <div class="row no-wrap no-padding">
-              <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md" @click="fnShowEditPincode(props.row)" flat class="text-light-blue">
+              <q-btn  no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md" @click="fnShowEditPincode(props.row)" flat class="text-light-blue">
               </q-btn>
-              <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative">
+              <!-- <q-btn   no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative">
               </q-btn> -->
             </div>
           </q-td>
@@ -18,7 +18,7 @@
           <!--START: table title -->
           <div class="col-md-6 q-title q-mt-lg text-weight-regular">Pincodes</div>
 
-          <div class="col-md-6 q-my-md" align="side">
+          <div class="col-md-6 q-my-md" align="right">
             <q-btn no-caps no-wrap label="Add New Pincode" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreatePincodes()"/>
           </div>
           <!--END: table title -->
@@ -81,9 +81,9 @@ export default {
       },
       filter: "",
       columns: [
-        { name: "pincode", label: "Pincode", align: "", field: "pincode", sortable: true },
-        { name: "stateName", label: "State", align: "", field: "stateName", sortable: true },
-        { name: "cityName", label: "City", align: "", field: "cityName", sortable: true },
+        { name: "pincode", label: "Pincode", align: "left", field: "pincode", sortable: true },
+        { name: "stateName", label: "State", align: "left", field: "stateName", sortable: true },
+        { name: "cityName", label: "City", align: "left", field: "cityName", sortable: true },
         { name: "action", label: "Action", align: "center" }
       ]
     };

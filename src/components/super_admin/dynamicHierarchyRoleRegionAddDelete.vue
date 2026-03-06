@@ -62,9 +62,9 @@
               :options="filterUsers"
               />
             </div>
-            <div class="col-md-12 col-sm-12 col-xs-12 group" align="side">
-              <q-btn flat size="md" align="side" class="bg-white text-weight-regular text-grey-8" @click="emitfnToggleModelCancel">Cancel</q-btn>
-              <q-btn size="md" align="side" color="purple-9" @click="emitfnToggleModel(userMapping)">Done</q-btn>
+            <div class="col-md-12 col-sm-12 col-xs-12 group" align="right">
+              <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnToggleModelCancel">Cancel</q-btn>
+              <q-btn size="md" align="right" color="purple-9" @click="emitfnToggleModel(userMapping)">Done</q-btn>
             </div>
           </div>
 

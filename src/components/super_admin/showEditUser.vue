@@ -19,11 +19,11 @@
                     <div class="text-h6 text-weight-regular">Edit User</div>
                   </div>
                   <div class="col-md-2">
-                    <q-btn flat size="md" align="side" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowEditUser(showEditUser)">Cancel
+                    <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnShowEditUser(showEditUser)">Cancel
                     </q-btn>
                   </div>
                   <div class="col-md-2">
-                    <q-btn size="md" align="side" type="button" color="purple-9" @click="fnSubmitShowAddUser(showEditUser)">Save
+                    <q-btn size="md" align="right" type="button" color="purple-9" @click="fnSubmitShowAddUser(showEditUser)">Save
                     </q-btn>
                   </div>
                 </div>

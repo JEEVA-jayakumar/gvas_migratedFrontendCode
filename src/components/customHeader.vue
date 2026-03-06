@@ -19,13 +19,12 @@
             class="cursor-pointer"
             src="~assets/images/logo.png"
             style="height:38px;"
-            @click="$router.push('/super/admin/dashboard')"
           />
         </div>
         <div class="col float-right" align="right">
           <q-btn flat color="grey-9" icon="far fa-bell" />
           <q-btn flat color="grey-9 vertical-middle">
-            <span class="mobile-hide capitalize text-weight-regular">{{getUserNAme}}</span>
+            <span class="mobile-hide capitalize text-weight-regular">{{getUserName}}</span>
             <img
               src="~assets/images/user.png"
               style="height:30px; width:30px; padding: 5px"
@@ -106,7 +105,7 @@ export default {
     }
   },
   computed: {
-    getUserNAme() {
+    getUserName() {
       const userInfo = localStorage.getItem("u_i");
       if (userInfo && userInfo !== "undefined" && userInfo !== "null") {
         try {

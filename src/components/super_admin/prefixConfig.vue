@@ -11,7 +11,7 @@
           <q-select v-model="formData.leadSource" label="Select LeadSource" radio color="grey-9"
             @update:model-value="filterByLeadSource(formData)" :options="dropDown.leadSourceOptions" />
         </div>
-        <div class="col-md-12" align="side">
+        <div class="col-md-12" align="right">
           <q-btn no-caps class="text-weight-regular" @click="fnaddprefix()" label="Add New" color="purple-9"
             size="md" />
         </div>
@@ -30,7 +30,7 @@
         <!-- <q-td v-slot:body-cell-action="props" :props="props">
           <div class="row no-wrap no-padding">
             <div v-if="props.row.lastBaseMid == null && props.row.lastBaseTid == null">
-              <q-btn dense no-caps no-wrap label="active" icon="far fa-plus-square" size="md"
+              <q-btn  no-caps no-wrap label="active" icon="far fa-plus-square" size="md"
                 @click="fnShowEditRegion(props.row)" flat class="text-light-blue">
               </q-btn>
             </div>

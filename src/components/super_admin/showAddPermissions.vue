@@ -19,11 +19,11 @@
                     <div class="text-h6 text-weight-regular">Add Permissions</div>
                   </div>
                   <div class="col-md-2">
-                    <q-btn flat size="md" align="side" class="bg-white text-weight-regular text-grey-8" @click="emitfnshowAddPermissions(item)">Cancel
+                    <q-btn flat size="md" align="right" class="bg-white text-weight-regular text-grey-8" @click="emitfnshowAddPermissions(item)">Cancel
                     </q-btn>
                   </div>
                   <div class="col-md-2">
-                    <q-btn size="md" align="side"  color="purple-9">Add
+                    <q-btn size="md" align="right"  color="purple-9">Add
                     </q-btn>
                   </div>
                 </div>
@@ -99,10 +99,10 @@
               </div>
             </div>
 
-            <q-btn size="sm" align="side" rounded outline color="purple-9"
+            <q-btn size="sm" align="right" rounded outline color="purple-9"
                 class="float-side q-mx-sm q-my-md">Send
             </q-btn>
-            <q-btn size="sm" align="side" rounded outline color="grey-7"
+            <q-btn size="sm" align="right" rounded outline color="grey-7"
                 class="float-side q-mx-sm q-my-md" @click="emitfnshowAddPermissions(propShowAddPermissions)">Cancel
             </q-btn>
         </form>
