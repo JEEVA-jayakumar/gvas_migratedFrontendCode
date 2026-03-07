@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh Lpr lFf">
-    <q-header style="margin-left:0px" class="shadow-0 z-top" flat>
+    <q-header style="margin-left:0px" class="shadow-0 z-top bg-white" flat>
       <customHeader
         :leftDrawerOpen="leftDrawerOpen"
         @fnToggleSideMenu="fnMainToggleSideMenu"
@@ -9,22 +9,26 @@
     <q-drawer
       class="shadow-9"
       v-model="leftDrawerOpen"
+      bordered
+      :width="260"
+      :breakpoint="500"
       content-class="no-shadow"
-      :content-style="{background: '#202c3f',width:'250px'}"
+      :content-style="{background: '#202c3f',width:'260px'}"
     >
-      <q-list
-        no-border
-        link
-        inset-delimiter
-        highlight
-        style="padding-top:65px"
-      >
-        <q-item v-for="menu in menus" :key="menu.id" :to="menu.to" class="menu-main-item-color">
-          <q-item-section class="menu-item-color">{{menu.name}}</q-item-section>
-        </q-item>
-      </q-list>
+      <div class="q-py-md q-px-lg flex items-center" style="height: 65px; background: rgba(0,0,0,0.1)">
+        <img v-if="leftDrawerOpen" src="~assets/images/logo.png" style="height: 35px" />
+      </div>
+      <q-scroll-area style="height: calc(100% - 65px)" :thumb-style="{
+        right: '2px',
+        borderRadius: '5px',
+        backgroundColor: '#61116a',
+        width: '5px',
+        opacity: 0.75,
+      }">
+        <SidebarMenu :menus="menus" />
+      </q-scroll-area>
     </q-drawer>
-    <q-page-container>
+    <q-page-container class="bg-grey-2">
       <customBody></customBody>
     </q-page-container>
   </q-layout>
@@ -33,10 +37,13 @@
 <script>
 import customHeader from "../components/customHeader.vue";
 import customBody from "../components/customBody.vue";
+import SidebarMenu from "../components/SidebarMenu.vue";
+
 export default {
   components: {
     customHeader,
     customBody,
+    SidebarMenu,
   },
   name: "LayoutDefault",
   data() {

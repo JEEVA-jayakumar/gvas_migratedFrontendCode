@@ -10,7 +10,7 @@
 
     <!--START: table title -->
     <div class="row bottom-border items-center">
-      <div class="col-md-8 text-h6 q-px-lg q-py-md text-weight-regular text-grey-9">Short Lead</div>
+      <div class="col-md-8 q-title q-px-lg q-py-md text-weight-regular text-grey-9">Short Lead</div>
       <div class="col-md-4 q-px-lg q-py-sm" align="right">
         <q-btn
           no-caps
@@ -27,23 +27,27 @@
       table-class="customTableClass"
       :rows="getAllShortLeadInfo"
       :columns="columns"
-      :filter="filter" v-model:pagination="paginationControl"
+      :filter="filter"
+      v-model:pagination="paginationControl"
       row-key="name"
     >
       <!--START: table body modification -->
-      <q-td v-slot:body-cell-date="props" :props="props">
-        <span class="label">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</span>
-      </q-td>
+      <template v-slot:body-cell-date="props">
+        <q-td :props="props">
+          <span class="label">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</span>
+        </q-td>
+      </template>
       <!--END: table body modification -->
       <!--START: table body modification -->
-      <q-td
-        v-slot:body-cell-lead_id="props"
-        :props="props"
-        class="cursor-pointer"
-        @click="toggleLeadInformation(props.row)"
-      >
-        <span class="label text-primary"># {{props.row.leadNumber}}</span>
-      </q-td>
+      <template v-slot:body-cell-lead_id="props">
+        <q-td
+          :props="props"
+          class="cursor-pointer"
+          @click="toggleLeadInformation(props.row)"
+        >
+          <span class="label text-primary"># {{props.row.leadNumber}}</span>
+        </q-td>
+      </template>
       <!--END: table body modification -->
       <template v-slot:top="props">
         <!--START: table fullscreen mode -->
