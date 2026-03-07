@@ -13,7 +13,6 @@
             </div>
             <div class="col-md-12">
               <q-input
-                filled
                 v-model="formData.selectedFromYear"
                 label="Choose Date Range"
                 color="grey-9"
@@ -34,7 +33,7 @@
               </q-input>
             </div>
             <!-- <div class="col-md-12">
-            <q-input filled v-model="formData.selectedToYear" label="To Date" color="grey-9">
+            <q-input v-model="formData.selectedToYear" label="To Date" color="grey-9">
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
                 <q-menu transition-show="scale" transition-hide="scale">

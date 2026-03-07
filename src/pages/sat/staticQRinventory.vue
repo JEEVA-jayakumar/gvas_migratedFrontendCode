@@ -39,13 +39,13 @@
             <q-table table-class="customTableClass" class="q-py-none" :rows="tableData" :columns="columns"
               :filter="filter" :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl"
               :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
-              <q-td v-slot:body-cell-updatedAt="props" :props="props">{{ $moment(props.row == null ? "NA" : props.row.updatedAt).format("Do MMM Y") }}</q-td>
-              <q-td v-slot:body-cell-Action="props" :props="props">
+              <template v-slot:body-cell-updatedAt="props"><q-td :props="props">{{ $moment(props.row == null ? "NA" : props.row.updatedAt).format("Do MMM Y") }}</q-td></template>
+              <template v-slot:body-cell-Action="props"><q-td :props="props">
                 <q-btn dense no-caps no-wrap label="Approve" icon="edit" size="md" @click="ApproveIncomingData(props.row)"
                   flat class="text-primary">
                 </q-btn>
 
-              </q-td>
+              </q-td></template>
             </q-table>
           </q-tab-panel>
           <q-tab-panel name="tab-2">
@@ -57,7 +57,7 @@
             <q-table table-class="customTableClass" class="q-py-none" :rows="tableData1" :columns="columns2"
               :filter="filter1" :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl1"
               :loading="toggleAjaxLoadFilter1" @request="ajaxLoadAllLeadInfo1">
-              <q-td v-slot:body-cell-updatedAt="props" :props="props">{{ $moment(props.row.updatedAt).format("Do MMM Y") }}</q-td>
+              <template v-slot:body-cell-updatedAt="props"><q-td :props="props">{{ $moment(props.row.updatedAt).format("Do MMM Y") }}</q-td></template>
             </q-table>
 
           </q-tab-panel>
@@ -132,7 +132,7 @@
                 <q-table table-class="customTableClass" class="q-py-none" :rows="tableData4" :columns="columns4"
                   :filter="filter4" :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl4"
                   :loading="toggleAjaxLoadFilter4" @request="ajaxLoadAllLeadInfo4">
-                  <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
+                  <template v-slot:body-cell-createdAt="props"><q-td :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td></template>
                 </q-table>
               </q-tab-panel>
               <q-tab-panel name="tab-5">
@@ -144,7 +144,7 @@
                 <q-table table-class="customTableClass" class="q-py-none" :rows="tableData5" :columns="columns5"
                   :filter="filter5" :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl5"
                   :loading="toggleAjaxLoadFilter5" @request="ajaxLoadAllLeadInfo5">
-                  <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
+                  <template v-slot:body-cell-createdAt="props"><q-td :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td></template>
                 </q-table>
               </q-tab-panel>
               <q-tab-panel name="tab-6">
@@ -156,7 +156,7 @@
                 <q-table table-class="customTableClass" class="q-py-none" :rows="tableData6" :columns="columns6"
                   :filter="filter6" :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl6"
                   :loading="toggleAjaxLoadFilter6" @request="ajaxLoadAllLeadInfo6">
-                  <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
+                  <template v-slot:body-cell-createdAt="props"><q-td :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td></template>
                 </q-table>
               </q-tab-panel>
             </q-tab-panels>

@@ -25,29 +25,23 @@
         :loading="toggleAjaxLoadFilter"
         @request="ajaxLoadAllLeadInfo"
       >
-        <q-td v-slot:body-cell-updated_date="props" :props="props">{{
+        <template v-slot:body-cell-updated_date="props"><q-td :props="props">{{
           props.row.updated_date == null
-            ? "NA"
-            : props.row.updated_date | moment("Do MMM Y")
-        }}</q-td>
-        <q-td v-slot:body-cell-created_date="props" :props="props">{{
+            ? "NA" : $moment( props.row.updated_date).format("Do MMM Y")
+        }}</q-td></template>
+        <template v-slot:body-cell-created_date="props"><q-td :props="props">{{
           props.row.created_date == null
-            ? "NA"
-            : props.row.created_date | moment("Do MMM Y")
-        }}</q-td>
-        <q-td
-          v-slot:body-cell-regionAreaName="props"
-          :props="props"
-          >{{
+            ? "NA" : $moment( props.row.created_date).format("Do MMM Y")
+        }}</q-td></template>
+        <template v-slot:body-cell-regionAreaName="props"><q-td :props="props">{{
             props.row.allocate_region == null
               ? "NA"
               : props.row.allocate_region.regionAreaName
-          }}</q-td
-        >
-        <q-td v-slot:body-cell-name="props" :props="props">{{
+          }}</q-td></template>
+        <template v-slot:body-cell-name="props"><q-td :props="props">{{
           props.row.allocate_so == null ? "NA" : props.row.allocate_so.name+" | "+props.row.allocate_so.employeeID
-        }}</q-td>
-        <q-td v-slot:body-cell-status="props" :props="props">
+        }}</q-td></template>
+        <template v-slot:body-cell-status="props"><q-td :props="props">
         <span class="label text-positive" v-if="props.row.status == 1"
             >Created</span
           >
@@ -68,9 +62,9 @@
           >
 
           <span class="label text-negative" v-else>NA</span>
-        </q-td>
+        </q-td></template>
 
-        <q-td v-slot:body-cell-action="props" :props="props">
+        <template v-slot:body-cell-action="props"><q-td :props="props">
           <q-btn
             highlight
             push
@@ -81,8 +75,8 @@
             @click="updatePodDetails(props.row)"
             >Update</q-btn
           >
-        </q-td>
-        <template slot="top">
+        </q-td></template>
+        <template v-slot:top>
           <!--START: table filter,search -->
           <div class="col-md-5">
             <q-input

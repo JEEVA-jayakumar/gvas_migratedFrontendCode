@@ -88,7 +88,7 @@
           <div>
             <!--START: table Data -->
             <q-table
-              :rows="getAllInventoryDevicesData"
+              :data="getAllInventoryDevicesData"
               :columns="columnData"
               table-class="customTableClass shadow-0"
               :filter="filterSearch"
@@ -102,7 +102,6 @@
                 <div class="col-md-5">
                   <q-input
                     clearable
-                    dense
                     color="grey-9"
                     v-model="filterSearch"
                     placeholder="Type.."

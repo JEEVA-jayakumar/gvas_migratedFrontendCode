@@ -18,7 +18,7 @@ LOST
         @request="ajaxLoadAllCMS"
       >
         
-        <!-- <q-td v-slot:body-cell-Status="props" :props="props">
+        <!-- <template v-slot:body-cell-Status="props"><q-td :props="props">
           <span
             class="label text-positive"
             v-if="props.row.leadInformation.cmsLeadStatus== 23"
@@ -68,8 +68,8 @@ LOST
             v-else-if="props.row.leadInformation.cmsLeadStatus== 23"
           >Submitted to Mars</span>-->
           <!-- <span class="label text-negative" v-else>Pending</span>
-        </q-td> -->
-        <!-- <q-td v-slot:body-cell-action="props" :props="props">
+        </q-td></template> -->
+        <!-- <template v-slot:body-cell-action="props"><q-td :props="props">
           <q-btn
             v-if="props.row.leadInformation.cmsLeadStatus== 22 || props.row.leadInformation.cmsLeadStatus==15 || props.row.leadInformation.cmsLeadStatus==25 "
             highlight
@@ -125,8 +125,8 @@ LOST
             size="sm"
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
           >Data Entry</q-btn>
-        </q-td> --> 
-        <template slot="top"  class="bottom-border">
+        </q-td></template> -->
+        <template v-slot:top  class="bottom-border">
           <!--START: table filter,search -->
           <div class="col-md-5">
             <q-input
@@ -149,7 +149,7 @@ LOST
 
         <!-- END: table body modification -->
       </q-table>
-      <!-- <template slot="top"  class="bottom-border">
+      <!-- <template v-slot:top  class="bottom-border">
        <div class="col">
           <q-input
             v-model="Add"
@@ -169,7 +169,7 @@ LOST
           />
         </div>
           </template> -->
-        <template slot="top"  class="bottom-border"> 
+        <template v-slot:top  class="bottom-border">
 
           <div class="col-md-5">
           <q-input
@@ -204,10 +204,10 @@ LOST
         :loading="toggleAjaxLoadFilter1"
         @request="ajaxLoadAllLeadInfo"
       >
-        <!-- <q-td v-slot:body-cell-action="props" :props="props">
+        <!-- <template v-slot:body-cell-action="props"><q-td :props="props">
           <q-btn @click="fnEdit(props.row.leadInformation.id)" flat class="text-negative">Edit</q-btn>
-        </q-td>-->
-        <q-td v-slot:body-cell-action="props" :props="props">
+        </q-td></template>-->
+        <template v-slot:body-cell-action="props"><q-td :props="props">
           <!-- <q-btn v-if="props.row.leadInformation.leadDocuments.length==0"
             highlight
             push
@@ -223,9 +223,9 @@ LOST
             size="sm"
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
           >Data Entry</q-btn> -->
-        </q-td>
+        </q-td></template>
         <!-- END: table body modification -->
-        <template slot="top"  class="bottom-border">
+        <template v-slot:top  class="bottom-border">
           <!--START: table filter,search -->
           <div class="col-md-5">
             <q-input

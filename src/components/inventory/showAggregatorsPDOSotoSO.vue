@@ -15,7 +15,6 @@
             <div class="col-md-8 q-pt-md" align="left">
               <q-input
               v-model="formData.remarks"
-              filled
               clearable
               type="textarea"
               color="red-12"

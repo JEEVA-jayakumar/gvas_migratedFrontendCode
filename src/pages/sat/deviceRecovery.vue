@@ -32,10 +32,10 @@
         :loading="tableAjaxLoading"
         color="light-blue"
       >
-        <q-td v-slot:body-cell-action="props" :props="props">
+        <template v-slot:body-cell-action="props"><q-td :props="props">
           <q-btn label="send" icon="close" color="red-6" size="sm" />
           <!-- @click="removeScannedItems(props.row)" -->
-        </q-td>
+        </q-td></template>
         <template v-slot:top="props">
           <!--START: table filter,search -->
           <div class="col-md-5">

@@ -73,7 +73,7 @@
               <!--END: table other data -->
             </q-tr>
           </template>
-          <template slot="top" class="bottom-border">
+          <template v-slot:top class="bottom-border">
             <!--START: table filter,search -->
             <div class="col-md-5">
               <q-input

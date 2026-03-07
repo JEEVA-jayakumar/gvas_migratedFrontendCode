@@ -32,23 +32,17 @@
         <q-th v-for="col in props.columns" :key="col.name" :props="props">{{ col.label }}</q-th>  
         </q-tr>
         <!--END: table header -->
-         <q-td 
-         v-slot:body-cell-leadNumber="props"
-         :props="props"
+         <template v-slot:body-cell-leadNumber="props"><q-td :props="props"
          class="cursor-pointer"
-         @click="toggleLeadInformation(props.row)"
-         >
+         @click="toggleLeadInformation(props.row)">
           <span class="label text-primary"> {{props.row.leadNumber}}</span>
           
-        </q-td>
-        <q-td v-slot:body-cell-contactName="props" :props="props">
+        </q-td></template>
+        <template v-slot:body-cell-contactName="props"><q-td :props="props">
           <span class="label text-primary"> {{props.row.leadInformation.contactName}}</span>
-        </q-td>
-        <q-td
-            v-slot:body-cell-date="props"
-            :props="props"
-          >{{ $moment(props.row.date).format("Do MMM Y") }}</q-td>
-         <q-td v-slot:body-cell-verifiedFinanceStatus="props" :props="props">
+        </q-td></template>
+        <template v-slot:body-cell-date="props"><q-td :props="props">{{ $moment(props.row.date).format("Do MMM Y") }}</q-td></template>
+         <template v-slot:body-cell-verifiedFinanceStatus="props"><q-td :props="props">
             <span
               class="label text-positive"
               v-if="props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_SUCCESS"
@@ -62,8 +56,8 @@
               v-else-if="props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_REJECT"
             >Rejected</span>
             <span class="label" v-else>NA</span>
-          </q-td>
-          <q-td v-slot:body-cell-leadStatus="props" :props="props">
+          </q-td></template>
+          <template v-slot:body-cell-leadStatus="props"><q-td :props="props">
             <span
               class="label text-positive"
               v-if="props.row.verifiedFinanceStatus== $LEAD_STATUS_SUBMIT_TO_SAT_LEAD && props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_SUCCESS"
@@ -104,29 +98,23 @@
             >Submitted To Mars</q-btn>
 
             <span class="label text-negative" v-else>Pending</span>
-          </q-td>
-        <q-td v-slot:body-cell-mid="props" :props="props">
+          </q-td></template>
+        <template v-slot:body-cell-mid="props"><q-td :props="props">
           <span class="label text-primary"># {{props.row.mid}}</span>
-        </q-td>
+        </q-td></template>
        
-        <q-td v-slot:body-cell-contactNumber="props" :props="props">
+        <template v-slot:body-cell-contactNumber="props"><q-td :props="props">
           <span class="label text-primary"> {{props.row.leadInformation.contactNumber}}</span>
-        </q-td>
-        <!-- <q-td
-          v-slot:body-cell-leadNumber="props"
-          :props="props"    
-        >
+        </q-td></template>
+        <!-- <template v-slot:body-cell-leadNumber="props"><q-td :props="props">
           <span class="label text-primary"># {{props.row.leadInformation.leadNumber}}</span>
-        </q-td> -->
-        <!-- <q-td v-slot:body-cell-date="props" :props="props">
+        </q-td></template> -->
+        <!-- <template v-slot:body-cell-date="props"><q-td :props="props">
           <span class="label text-primary"># {{props.row.date}}</span>
-        </q-td> -->
-        <q-td
-          v-slot:body-cell-leadAddress="props"
-          :props="props"
-        >{{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}</q-td>
+        </q-td></template> -->
+        <template v-slot:body-cell-leadAddress="props"><q-td :props="props">{{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}</q-td></template>
         
-        <!-- <q-td v-slot:body-cell-action="props" :props="props">
+        <!-- <template v-slot:body-cell-action="props"><q-td :props="props">
             @click="toggleLeadInformation(props.row.leadInformation.leadNumber)"
               class="cursor-pointer"
            <q-btn
@@ -137,7 +125,7 @@
             size="sm"
             @click="additionalTid(props.row)"
           >Additional TID</q-btn>
-        </q-td> -->
+        </q-td></template> -->
         <template slot="top"  class="bottom-border" >
           <!--START: table filter,search,excel download -->
           <div class="col-5">

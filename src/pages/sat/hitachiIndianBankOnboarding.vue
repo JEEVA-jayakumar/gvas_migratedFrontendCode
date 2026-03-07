@@ -123,29 +123,16 @@
                   color="dark"
                   @request="ajaxLoadAllLeadInfo1"
                 >
-                  <q-td
-                    v-slot:body-cell-tid="props"
-                    :props="props"
-                    class="customTd"
-                  >
+                  <template v-slot:body-cell-tid="props"><q-td :props="props"
+                    class="customTd">
                     <div class="text-primary">{{ props.row.tid }}</div>
-                  </q-td>
-                  <q-td
-                    v-slot:body-cell-mid="props"
-                    :props="props"
-                    class="customTd"
-                  >
+                  </q-td></template>
+                  <template v-slot:body-cell-mid="props"><q-td :props="props"
+                    class="customTd">
                     <div class="text-primary">{{ props.row.mid }}</div>
-                  </q-td>
-                  <q-td
-                    v-slot:body-cell-createdAt="props"
-                    :props="props"
-                    >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
-                  >
-                  <q-td
-                    v-slot:body-cell-assign="props"
-                    :props="props"
-                  >
+                  </q-td></template>
+                  <template v-slot:body-cell-createdAt="props"><q-td :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td></template>
+                  <template v-slot:body-cell-assign="props"><q-td :props="props">
                     <q-btn
                       class="btn1"
                       v-if="props.row.isStatus == 1"
@@ -193,7 +180,7 @@
                       @click="OGSPendingStatus(props.row)"
                       >Re-Submit</q-btn
                     >
-                  </q-td>
+                  </q-td></template>
                   <template slot="top">
                     <div class="col-md-4">
                       <q-input
@@ -270,7 +257,7 @@ export default {
           field: row => {
             return row.createdAt;
           },
-          format: val => `${val}|moment("Do MMM Y")`,
+          format: val => `${val}$moment().format("Do MMM Y")`,
           sortable: true
         },
         {

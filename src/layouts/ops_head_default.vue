@@ -8,29 +8,19 @@
     </q-header>
 
     <q-drawer
+      class="shadow-9"
       v-model="leftDrawerOpen"
+      @update:model-value="updateLeftDrawerOpen"
       show-if-above
-      bordered
-      :width="260"
+      :width="250"
       :breakpoint="500"
-      class="bg-dark text-white"
+      style="background-color: #531b64 !important;"
     >
-      <div class="q-py-md q-px-lg flex items-center" style="height: 65px; background: rgba(0,0,0,0.1)">
-        <img src="~assets/images/logo.png" style="height: 35px" />
-      </div>
-      <q-scroll-area style="height: calc(100% - 65px)" :thumb-style="{
-        right: '2px',
-        borderRadius: '5px',
-        backgroundColor: '#61116a',
-        width: '5px',
-        opacity: 0.75,
-      }">
-        <SidebarMenu :menus="menus" />
-      </q-scroll-area>
+      <SidebarMenu :menus="menus" />
     </q-drawer>
 
-    <q-page-container class="bg-grey-2">
-      <customBody />
+    <q-page-container class="bg-grey-1">
+      <customBody></customBody>
     </q-page-container>
   </q-layout>
 </template>
@@ -49,9 +39,7 @@ export default {
   },
   data() {
     return {
-      leftDrawerOpen: this.$q.localStorage.getItem("leftDrawerOpen") !== null
-        ? this.$q.localStorage.getItem("leftDrawerOpen")
-        : this.$q.platform.is.desktop,
+      leftDrawerOpen: false,
       menus: [
         {
           id: 2,
@@ -101,14 +89,20 @@ export default {
       ],
     };
   },
+  created() {
+    const savedState = localStorage.getItem("leftDrawerOpen");
+    this.leftDrawerOpen = savedState === null ? true : savedState === "true";
+  },
   methods: {
     fnMainToggleSideMenu() {
       this.leftDrawerOpen = !this.leftDrawerOpen;
-      this.$q.localStorage.set("leftDrawerOpen", this.leftDrawerOpen);
+      localStorage.setItem("leftDrawerOpen", this.leftDrawerOpen);
+    },
+    updateLeftDrawerOpen(val) {
+      this.leftDrawerOpen = val;
+      localStorage.setItem("leftDrawerOpen", val);
     },
   },
 };
 </script>
 
-<style>
-</style>

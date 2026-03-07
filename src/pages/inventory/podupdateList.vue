@@ -11,7 +11,7 @@
         row-key="name"
         color="grey-9"
       >
-        <q-td v-slot:body-cell-action="props" :props="props">
+        <template v-slot:body-cell-action="props"><q-td :props="props">
           <div class="row no-wrap no-padding">
             <q-btn
               dense
@@ -27,16 +27,10 @@
             <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative">
             </q-btn>-->
           </div>
-        </q-td>
+        </q-td></template>
 
-        <q-td
-          v-slot:body-cell-receivedAt="props"
-          :props="props"
-        >{{ $moment(props.row.receivedAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-DeviceList="props"
-          :props="props"
-        >{{ $moment(props.row.device.createDate).format("Do MMM Y") }}</q-td>
+        <template v-slot:body-cell-receivedAt="props"><q-td :props="props">{{ $moment(props.row.receivedAt).format("Do MMM Y") }}</q-td></template>
+        <template v-slot:body-cell-DeviceList="props"><q-td :props="props">{{ $moment(props.row.device.createDate).format("Do MMM Y") }}</q-td></template>
 
         <template v-slot:top="props">
           <div class="col-md-5">

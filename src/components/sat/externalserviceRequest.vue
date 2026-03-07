@@ -111,8 +111,7 @@
               <!--START: table rows -->
               <q-tr :props="props" class="bottom-border">
                 <q-td key="merchant_name" :props="props">
-                  {{ props.row.meName }}</q-td
-                >
+                  {{ props.row.meName }}</q-td>
                 <q-td key="tid" :props="props"> {{ props.row.tid }}</q-td>
                 <q-td key="actionContact" :props="props">
                   <q-btn
@@ -191,28 +190,21 @@
      
               <!--START: table rows -->
           
-                <q-td
-                v-slot:body-cell-serviceReqTicketId="props"
-                :props="props"
+                <template v-slot:body-cell-serviceReqTicketId="props"><q-td :props="props"
                 class="cursor-pointer">
-                  {{ props.row.serviceReqTicketId }}</q-td
-                >
-              <q-td v-slot:body-cell-merchant_name="props"
-              :props="props"
+                  {{ props.row.serviceReqTicketId }}</q-td></template>
+              <template v-slot:body-cell-merchant_name="props"><q-td :props="props"
               class="cursor-pointer">
-                  {{ props.row.meName }}</q-td
-                >
+                  {{ props.row.meName }}</q-td></template>
                   <q-td
                 v-slot:body-cell-assignedTo="props"
                 :props="props"
                 class="cursor-pointer">
-                  {{ props.row.assignedTo == null ? "NA" : props.row.assignedTo.name }}</q-td
-                >
+                  {{ props.row.assignedTo == null ? "NA" : props.row.assignedTo.name }}</q-td>
                 <q-td v-slot:body-cell-tid="props"
                 :props="props"
-                class="cursor-pointer"> {{ props.row.tid }}</q-td>
-                <q-td v-slot:body-cell-actionContact="props"
-                :props="props"
+                class="cursor-pointer"> {{ props.row.tid }}</q-td></template>
+                <template v-slot:body-cell-actionContact="props"><q-td :props="props"
                 class="cursor-pointer">
                   <q-btn
                     highlight
@@ -223,21 +215,18 @@
                     @click="fnContactDetails(props.row)"
                     >Click to View</q-btn
                   >
-                </q-td>
-                <q-td v-slot:body-cell-dateCreated="props"
-                :props="props"
+                </q-td></template>
+                <template v-slot:body-cell-dateCreated="props"><q-td :props="props"
                 class="cursor-pointer">
                   {{ $moment(props.row.createdDate).format("Do MMM Y") }}
-                </q-td>
-                <q-td v-slot:body-cell-tat="props"
-                :props="props"
+                </q-td></template>
+                <template v-slot:body-cell-tat="props"><q-td :props="props"
                 class="cursor-pointer">
                   <span :style="getHoursAgoColor(props.row.createdDate)">{{
                     getHoursAgo(props.row.createdDate)
                   }}</span>
-                </q-td>
-                <q-td  v-slot:body-cell-actionLog="props"
-                :props="props">
+                </q-td></template>
+                <template v-slot:body-cell-actionLog="props"><q-td :props="props">
                   <q-btn
                     highlight
                     push
@@ -247,14 +236,8 @@
                     @click="fnCrmLogsView(props.row)"
                     >Click to View</q-btn
                   >
-                </q-td>
-                <q-td
-               
-                  v-slot:body-cell-actionPickTickets="props"
-                  :props="props"
-                  v-if="props.row.serviceRequestTicketStatus == 5"
-             
-                >
+                </q-td></template>
+                <template v-slot:body-cell-actionPickTickets="props"><q-td v-if="props.row.serviceRequestTicketStatus == 5" :props="props">
                   <q-btn
                     highlight
                     push
@@ -264,14 +247,8 @@
                     @click="fnPickTicket(props.row)"
                     >Pick Ticket</q-btn
                   >
-                </q-td>
-                <q-td
-                 
-                  v-slot:body-cell-actionReassign="props"
-                  :props="props"
-                  v-if="props.row.serviceRequestTicketStatus == 2"
-            
-                >
+                </q-td></template>
+                <template v-slot:body-cell-actionReassign="props"><q-td v-if="props.row.serviceRequestTicketStatus == 2" :props="props">
                   <q-btn
                     highlight
                     push
@@ -281,7 +258,7 @@
                     @click="fnReassignTicket(props.row)"
                     >Re-Assign</q-btn
                   >
-                </q-td> 
+                </q-td></template>
            
        
             <template slot="top">

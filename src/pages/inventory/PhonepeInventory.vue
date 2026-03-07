@@ -91,11 +91,11 @@
         <div class="col-md-9">
           <div>
             <!--STARTv-model: table Data -->
-            <q-table :rows="getAllPhonepeInventoryDevicesData" :columns="columnData"
+            <q-table :data="getAllPhonepeInventoryDevicesData" :columns="columnData"
               table-class="customTableClass shadow-0" :filter="filterSearch" 
              
               row-key="index" :loading="tableAjaxLoading" color="primary">
-              <template slot="top">
+              <template v-slot:top>
                 <!--START: table filter,search  :pagination="paginationControl"-->
                 <div class="col-md-5">
                   <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search By Device Serail Number.."
@@ -111,7 +111,7 @@
                       label="Search .."
                       class="q-mr-lg q-py-sm"
                     />-->
-                  <downloadExcel :rows="getAllPhonepeInventoryDevicesData" :fields="json_fields"
+                  <downloadExcel :data="getAllPhonepeInventoryDevicesData" :fields="json_fields"
                     name="CentralInventory.xls">
                     <q-btn outline color="grey-9" label="Download as excel" />
                     <!-- @click="fndownload() -->

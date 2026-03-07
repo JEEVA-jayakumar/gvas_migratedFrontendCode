@@ -12,7 +12,7 @@
               <div class="text-h6 text-weight-regular"><p align="center"><strong>Download Aggregator Lost Or Stolen Files</strong></p></div>
             </div>
             <div class="col-md-12">
-               <q-input filled v-model="formData.from" label="Date" color="grey-9">
+               <q-input v-model="formData.from" label="Date" color="grey-9">
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
                 <q-menu transition-show="scale" transition-hide="scale">
@@ -23,7 +23,7 @@
           </q-input>
             </div>
           <div class="col-md-12">
-             <q-input filled v-model="formData.to" label="Date" color="grey-9">
+             <q-input v-model="formData.to" label="Date" color="grey-9">
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
                 <q-menu transition-show="scale" transition-hide="scale">

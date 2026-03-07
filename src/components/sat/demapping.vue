@@ -39,16 +39,13 @@
         color="dark"
         @request="ajaxLoadAllLeadInfo"
       >
-        <q-td
-          v-slot:body-cell-leadNumber="props"
-          :props="props"
+        <template v-slot:body-cell-leadNumber="props"><q-td :props="props"
           class="cursor-pointer"
-          @click="toggleLeadInformation(props.row.leadInformation)"
-        >
+          @click="toggleLeadInformation(props.row.leadInformation)">
           <span class="label text-primary"
             ># {{ props.row.leadInformation.leadNumber }}</span
           >
-        </q-td>
+        </q-td></template>
 
         <template slot="top">
           <!--START: table filter,search,excel download -->

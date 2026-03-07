@@ -13,7 +13,7 @@
 Inventory with Reseller File</strong></p></div>
           </div>
           <div class="col-md-12">
-             <q-input filled v-model="formData.fromDate" label="Date" color="grey-9">
+             <q-input v-model="formData.fromDate" label="Date" color="grey-9">
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
                 <q-menu transition-show="scale" transition-hide="scale">
@@ -24,7 +24,7 @@ Inventory with Reseller File</strong></p></div>
           </q-input>
           </div>
         <div class="col-md-12">
-           <q-input filled v-model="formData.toDate" label="Date" color="grey-9">
+           <q-input v-model="formData.toDate" label="Date" color="grey-9">
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
                 <q-menu transition-show="scale" transition-hide="scale">

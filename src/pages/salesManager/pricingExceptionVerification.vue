@@ -49,19 +49,13 @@
               row-key="name"
             >
               <!--START: table body modification -->
-              <q-td
-                v-slot:body-cell-leadNumber="props"
-                :props="props"
+              <template v-slot:body-cell-leadNumber="props"><q-td :props="props"
                 class="cursor-pointer"
-                @click="toggleLeadInformation(props.row)"
-              >
+                @click="toggleLeadInformation(props.row)">
                 <span class="label text-primary"># {{props.row.leadNumber}}</span>
-              </q-td>
-              <q-td
-                v-slot:body-cell-submittoRSMDate="props"
-                :props="props"
-              >{{ $moment(props.row.submittoRSMDate).format("Do MMM Y") }}</q-td>
-              <q-td v-slot:body-cell-action="props" :props="props">
+              </q-td></template>
+              <template v-slot:body-cell-submittoRSMDate="props"><q-td :props="props">{{ $moment(props.row.submittoRSMDate).format("Do MMM Y") }}</q-td></template>
+              <template v-slot:body-cell-action="props"><q-td :props="props">
                 <q-btn
                   highlight
                   push
@@ -70,7 +64,7 @@
                   size="sm"
                   @click="pushToDetailedScreenRsm(props.row.id)"
                 >Review</q-btn>
-              </q-td>
+              </q-td></template>
               <!--END: table body modification -->
               <template v-slot:top="props" class="bottom-border">
                 <!--START: table filter,search -->
@@ -107,7 +101,7 @@
                 @click="rowClick(props.row)"
                 class="cursor-pointer"
               >
-                <q-td v-for="col in props.cols" :key="col.name" :props="props">{{ col.value }}</q-td>
+                <q-td v-for="col in props.cols" :key="col.name" :props="props">{{ col.value }}</q-td></template>
               </q-tr>
             </q-table>
             <!--ENDv-model: table data -->
@@ -122,23 +116,20 @@
               row-key="name"
             >
               <!--START: table body modification -->
-              <q-td
-                v-slot:body-cell-leadNumber="props"
-                :props="props"
+              <template v-slot:body-cell-leadNumber="props"><q-td :props="props"
                 class="cursor-pointer"
-                @click="toggleLeadInformation(props.row)"
-              >
+                @click="toggleLeadInformation(props.row)">
                 <span class="label text-primary"># {{props.row.leadNumber}}</span>
-              </q-td>
-              <!-- <q-td v-slot:body-cell-Status="props" :props="props">
+              </q-td></template>
+              <!-- <template v-slot:body-cell-Status="props"><q-td :props="props">
                 <span
                   class="label text-positive"
                   v-if="props.row.leadInformation.verifpropiedCmsPricingStatus==2"
                 >ChangeManagement</span>
 
                 <span class="label text-amber" v-else>New Lead</span>
-              </q-td>-->
-              <q-td v-slot:body-cell-action="props" :props="props">
+              </q-td></template>-->
+              <template v-slot:body-cell-action="props"><q-td :props="props">
                 <q-btn
                   highlight
                   push
@@ -147,7 +138,7 @@
                   size="sm"
                   @click="pushToDetailedScreen(props.row.id)"
                 >Review</q-btn>
-              </q-td>
+              </q-td></template>
               <!--END: table body modification -->
               <template v-slot:top="props" class="bottom-border">
                 <!--START: table filter,search -->
@@ -178,20 +169,14 @@
           :filter="filter" v-model:pagination="paginationControl"
           row-key="name"
         >
-          <q-td
-            v-slot:body-cell-submittoRSMDate="props"
-            :props="props"
-          >{{ $moment(props.row.submittoRSMDate).format("Do MMM Y") }}</q-td>
+          <template v-slot:body-cell-submittoRSMDate="props"><q-td :props="props">{{ $moment(props.row.submittoRSMDate).format("Do MMM Y") }}</q-td></template>
           <!--START: table body modification -->
-          <q-td
-            v-slot:body-cell-leadNumber="props"
-            :props="props"
+          <template v-slot:body-cell-leadNumber="props"><q-td :props="props"
             class="cursor-pointer"
-            @click="toggleLeadInformation(props.row)"
-          >
+            @click="toggleLeadInformation(props.row)">
             <span class="label text-primary"># {{props.row.leadNumber}}</span>
-          </q-td>
-          <q-td v-slot:body-cell-action="props" :props="props">
+          </q-td></template>
+          <template v-slot:body-cell-action="props"><q-td :props="props">
             <q-btn
               highlight
               push
@@ -200,7 +185,7 @@
               size="sm"
               @click="pushToDetailedScreenRsm(props.row.id)"
             >Review</q-btn>
-          </q-td>
+          </q-td></template>
           <!--END: table body modification -->
           <template v-slot:top="props" class="bottom-border">
             <!--START: table filter,search -->

@@ -157,9 +157,9 @@
                 <!-- <q-pull-to-refresh :distance="30" :handler="PullToRefresh" inline> -->
                 <q-table class="my-sticky-header-table" title="Wip Lead Information" :rows="getShortLead"
                   :columns="columns" row-key="name">
-                  <q-td v-slot:body-cell-shortleadDate="props" :props="props">{{ $moment(props.row.shortleadDate).format("Do MMM Y") }}</q-td>
+                  <template v-slot:body-cell-shortleadDate="props"><q-td :props="props">{{ $moment(props.row.shortleadDate).format("Do MMM Y") }}</q-td></template>
 
-                  <!-- <q-td v-slot:body-cell-action="props" :props="props">
+                  <!-- <template v-slot:body-cell-action="props"><q-td :props="props">
                     <div class="row no-wrap no-padding">
                       <q-btn
                         dense
@@ -175,20 +175,20 @@
                   <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative">
                   </q-btn>-->
                   <!-- </div>
-                  </q-td>-->
-                  <q-td v-slot:body-cell-update="props" :props="props">
+                  </q-td></template>-->
+                  <template v-slot:body-cell-update="props"><q-td :props="props">
                     <div class="row no-wrap no-padding">
                       <q-btn dense no-caps no-wrap label="update" icon="far fa-plus-square" size="md"
                         @click="fnShowConvertToSat(props.row)" flat class="text-light-blue"></q-btn>
                       <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative">
                       </q-btn>-->
                     </div>
-                  </q-td>
-                  <!-- <q-td v-slot:body-cell-status="props" :props="props">
+                  </q-td></template>
+                  <!-- <template v-slot:body-cell-status="props"><q-td :props="props">
             <span class="label text-negative" v-if="props.row.status == $TRANSACTION_STATUS">Pending</span>
             <span class="label text-positive" v-else-if="props.row.status">Success</span>
             <span class="label text-amber" v-else>NA</span>
-                  </q-td>-->
+                  </q-td></template>-->
                 </q-table>
                 <editShortLead v-if="propShowEditShortLead" :propShowEditShortLead="propShowEditShortLead"
                   :propRowDetails="propRowDetails" @emitfnshowEditShortLead="fnShowEditShortLead"></editShortLead>

@@ -17,29 +17,29 @@
 
           >
 
-          <q-td v-slot:body-cell-action="props" :props="props">
+          <template v-slot:body-cell-action="props"><q-td :props="props">
               <div class="row no-wrap no-padding">
                  <q-btn  no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
                   @click="fnShowEditServiceType(props.row)" flat class="text-light-blue"></q-btn>
                 <q-btn  no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md"
                   @click="fnDeleteServiceType(props.row)" flat class="text-negative"></q-btn>
               </div>
-            </q-td>
+            </q-td></template>
 
-            <q-td v-slot:body-cell-serviceReqIssueTypeSets="props" :props="props">
+            <template v-slot:body-cell-serviceReqIssueTypeSets="props"><q-td :props="props">
               <div class="row no-wrap group" v-for="menu in props.row.serviceReqIssueTypeSets" :key="menu.id">
                 <q-chip color="light" class="text-dark">
                   {{ menu.serviceReqIssueType?.name || "NA"}}
                 </q-chip>
               </div>
-            </q-td>
-            <q-td v-slot:body-cell-serviceRequestStatusSets="props" :props="props">
+            </q-td></template>
+            <template v-slot:body-cell-serviceRequestStatusSets="props"><q-td :props="props">
               <div class="row no-wrap group" v-for="menu in props.row.serviceRequestStatusSets" :key="menu.id">
                 <q-chip color="light" class="text-dark">
                   {{ menu.serviceRequestStatus?.name || "NA" }}
                 </q-chip>
               </div>
-            </q-td>
+            </q-td></template>
             
             <template v-slot:top="props">
               <!-- <div class="col-3">
@@ -63,28 +63,28 @@
 
           >
 
-            <q-td v-slot:body-cell-serviceReqIssueTypeSets="props" :props="props">
+            <template v-slot:body-cell-serviceReqIssueTypeSets="props"><q-td :props="props">
               <div class="row no-wrap group" v-for="menu in props.row.serviceReqIssueTypeSets" :key="menu.id">
                 <q-chip color="light" class="text-dark">
                   {{ menu.serviceReqIssueType?.name || "NA"}}
                 </q-chip>
               </div>
-            </q-td>
-             <q-td v-slot:body-cell-serviceRequestStatusSets="props" :props="props">
+            </q-td></template>
+             <template v-slot:body-cell-serviceRequestStatusSets="props"><q-td :props="props">
               <div class="row no-wrap group" v-for="menu in props.row.serviceRequestStatusSets" :key="menu.id">
                 <q-chip color="light" class="text-dark">
                   {{ menu.serviceRequestStatus?.name || "NA"}}
                 </q-chip>
               </div>
-            </q-td>
+            </q-td></template>
 
 
-            <q-td v-slot:body-cell-action1="props" :props="props">
+            <template v-slot:body-cell-action1="props"><q-td :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn  no-caps no-wrap label="Active" icon="far fa-plus-square" size="md"
                   @click="fnShowActiveServiceType(props.row)" flat class="text-light-blue"></q-btn>
               </div>
-            </q-td>
+            </q-td></template>
 
             <template v-slot:top="props">
               <!-- <div class="col-3">

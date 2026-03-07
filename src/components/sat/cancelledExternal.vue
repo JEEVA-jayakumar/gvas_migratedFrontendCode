@@ -49,8 +49,7 @@
             <q-td key="meName" :props="props"> {{ props.row.meName }}</q-td>
             <q-td key="address" :props="props"> {{ props.row.address }}</q-td>
             <q-td key="contactNumber" :props="props">
-              {{ props.row.contactNumber }}</q-td
-            >
+              {{ props.row.contactNumber }}</q-td>
             <q-td key="pincode" :props="props"> {{ props.row.pincode }}</q-td>
             <q-td key="bpRegion" :props="props">
               {{ props.row.bpRegion.regionAreaName }}
@@ -72,8 +71,7 @@
               <span v-else="props.row.crmRemark == null">NA</span>
             </q-td>
             <q-td key="deviceType" :props="props">
-              {{ props.row.deviceType }}</q-td
-            >
+              {{ props.row.deviceType }}</q-td>
 
             <q-td key="serviceRequestTicketStatus" :props="props">
               <span
@@ -98,8 +96,7 @@
                 props.row.serviceRequestMode == null
                   ? "NA"
                   : props.row.serviceRequestMode
-              }}</q-td
-            >
+              }}</q-td>
             <q-td key="serviceRequestSubTicketStatus" :props="props">
               <span
                 class="label text-positive"

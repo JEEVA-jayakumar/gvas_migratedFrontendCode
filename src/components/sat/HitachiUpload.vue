@@ -118,43 +118,37 @@
             }}</q-th>
           </q-tr>
           <!--END: table header -->
-          <q-td v-slot:body-cell-mid="props" :props="props">
+          <template v-slot:body-cell-mid="props"><q-td :props="props">
             <span class="capitalize">{{ props.row.mid }}</span>
-          </q-td>
-          <q-td
-            v-slot:body-cell-leadNumber="props"
-            :props="props"
+          </q-td></template>
+          <template v-slot:body-cell-leadNumber="props"><q-td :props="props"
             class="cursor-pointer"
-            @click="toggleLeadInformation(props.row.leadInformation)"
-          >
+            @click="toggleLeadInformation(props.row.leadInformation)">
             <span class="label text-primary"
               ># {{ props.row.leadInformation.leadNumber }}</span
             >
-          </q-td>
-          <q-td
-            v-slot:body-cell-HitachiStatus="props"
-            :props="props"
-          >
+          </q-td></template>
+          <template v-slot:body-cell-HitachiStatus="props"><q-td :props="props">
             <span class="capitalize">{{
               props.row.hitachiLeadStatus != null
                 ? props.row.hitachiLeadStatus
                 : "NA"
             }}</span>
-          </q-td>
-          <q-td v-slot:body-cell-deviceSer="props" :props="props">
+          </q-td></template>
+          <template v-slot:body-cell-deviceSer="props"><q-td :props="props">
             <span class="capitalize">{{
               props.row.regionalInventory != null
                 ? props.row.regionalInventory.serialNumber
                 : "NA"
             }}</span>
-          </q-td>
-          <q-td v-slot:body-cell-region="props" :props="props">
+          </q-td></template>
+          <template v-slot:body-cell-region="props"><q-td :props="props">
             <span class="capitalize">{{
               props.row.leadInformation != null
                 ? props.row.leadInformation.region.regionAreaName
                 : "NA"
             }}</span>
-          </q-td>
+          </q-td></template>
 
           <template slot="top" class="bottom-border">
             <!--START: table filter,search,excel download -->

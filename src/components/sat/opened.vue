@@ -66,14 +66,14 @@
                         :selected="formData.marsDeviceIdsCooked" v-model:pagination="paginationControl1" row-key="id"
                         :loading="tableAjaxLoading1" :rows-per-page-options="[5, 10, 15, 20]" color="dark"
                         @request="ajaxLoadAllLeadInfo1">
-                        <q-td v-slot:body-cell-serviceReqTicketId="props" :props="props"
+                        <template v-slot:body-cell-serviceReqTicketId="props"><q-td :props="props"
                             class="cursor-pointer" @click="toggleServiceRequest(props.row)">
                             <span class="label text-primary"># {{ props.row.serviceReqTicketId }}</span>
-                        </q-td>
+                        </q-td></template>
 
-                        <q-td v-slot:body-cell-createdDate="props" :props="props">{{ $moment(props.row.createdDate).format("Do MMM Y") }}</q-td>
-                        <q-td v-slot:body-cell-updatedDate="props" :props="props">{{ $moment(props.row.updatedDate).format("Do MMM Y") }}</q-td>
-                        <q-td v-slot:body-cell-serviceRequestSubTicketStatus="props" :props="props">
+                        <template v-slot:body-cell-createdDate="props"><q-td :props="props">{{ $moment(props.row.createdDate).format("Do MMM Y") }}</q-td></template>
+                        <template v-slot:body-cell-updatedDate="props"><q-td :props="props">{{ $moment(props.row.updatedDate).format("Do MMM Y") }}</q-td></template>
+                        <template v-slot:body-cell-serviceRequestSubTicketStatus="props"><q-td :props="props">
                             <span class="label text-positive"
                                 v-if="props.row.serviceRequestSubTicketStatus == 1">SR_TICKET_RAISED</span>
                             <span class="label text-positive"
@@ -95,8 +95,8 @@
                             <span class="label text-negative"
                                 v-else-if="props.row.serviceRequestSubTicketStatus == 10">SR_CANCELLED</span>
                             <span class="label" v-else>NA</span>
-                        </q-td>
-                        <q-td v-slot:body-cell-serviceRequestTicketStatus="props" :props="props">
+                        </q-td></template>
+                        <template v-slot:body-cell-serviceRequestTicketStatus="props"><q-td :props="props">
                             <span class="label text-positive"
                                 v-if="props.row.serviceRequestTicketStatus == 1">REQUEST_UNASSIGNED</span>
                             <span class="label text-negative"
@@ -104,13 +104,13 @@
                             <span class="label text-negative"
                                 v-else-if="props.row.serviceRequestTicketStatus == 3">REQUEST_CLOSED</span>
                             <span class="label" v-else>NA</span>
-                        </q-td>
-                        <q-td v-slot:body-cell-kaptureDueDate="props" :props="props">{{ $moment(props.row.kaptureDueDate == null ? "NA" : props.row.kaptureDueDate).format("Do MMM Y") }}</q-td>
-                        <q-td v-slot:body-cell-appointmentDate="props" :props="props">{{ $moment(props.row.appointmentDate == null ? "NA" : props.row.appointmentDate).format("Do MMM Y") }}</q-td>
-                        <q-td v-slot:body-cell-courierDueDate="props" :props="props">{{ $moment(props.row.courierDueDate == null ? "NA" : props.row.courierDueDate).format("Do MMM Y") }}</q-td>
-                        <q-td v-slot:body-cell-scheduleDate="props" :props="props">{{ props.row.scheduleDate
-                                == null ? "NA" : props.row.scheduleDate | moment("Do MMM Y")
-                        }}</q-td>
+                        </q-td></template>
+                        <template v-slot:body-cell-kaptureDueDate="props"><q-td :props="props">{{ $moment(props.row.kaptureDueDate == null ? "NA" : : : props.row.kaptureDueDate).format("Do MMM Y") }}</q-td></template>
+                        <template v-slot:body-cell-appointmentDate="props"><q-td :props="props">{{ $moment(props.row.appointmentDate == null ? "NA" : : : props.row.appointmentDate).format("Do MMM Y") }}</q-td></template>
+                        <template v-slot:body-cell-courierDueDate="props"><q-td :props="props">{{ $moment(props.row.courierDueDate == null ? "NA" : : : props.row.courierDueDate).format("Do MMM Y") }}</q-td></template>
+                        <template v-slot:body-cell-scheduleDate="props"><q-td :props="props">{{ props.row.scheduleDate
+$moment(== null ? "NA" : : : props.row.scheduleDate).format("Do MMM Y")
+                        }}</q-td></template>
                         <template slot="top">
                             <div class="col-md-5">
                                 <q-input clearable color="grey-9" v-model="filterSearch1" placeholder="Type.."
@@ -140,7 +140,7 @@
                                         color="grey-9" v-model="props.row.expand" class="q-mr-md"
                                         @update:model-value="expandRowPlease(props.row)" />
                                     <span>{{ props.row.serviceReqTicketId }}</span>
-                                </q-td>
+                                </q-td></template>
                                 <q-td key="tid" :props="props"> {{ props.row.tid }}</q-td>
                                 <q-td key="mid" :props="props">
                                     <span v-if="props.row.mid != null">{{ props.row.mid }}</span>

@@ -32,43 +32,40 @@
         </q-tr>
         <!--END: table header -->
 
-        <q-td v-slot:body-cell-tid="props" :props="props">
+        <template v-slot:body-cell-tid="props"><q-td :props="props">
           <span class="label text-primary"># {{ props.row.tid }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-mid="props" :props="props">
+        </q-td></template>
+        <template v-slot:body-cell-mid="props"><q-td :props="props">
           <span class="label text-primary"># {{ props.row.mid }}</span>
-        </q-td>
-        <!-- <q-td
-          v-slot:body-cell-leadName="props"
-          :props="props"
-        >{{props.row.leadInformation.leadName}}</q-td>-->
-        <q-td v-slot:body-cell-leadNumber="props" :props="props" class="cursor-pointer"
+        </q-td></template>
+        <!-- <template v-slot:body-cell-leadName="props"><q-td :props="props">{{props.row.leadInformation.leadName}}</q-td></template>-->
+        <template v-slot:body-cell-leadNumber="props"><q-td :props="props" class="cursor-pointer"
           @click="toggleLeadInformation(props.row.leadInformation)">
           <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-mobileNumber="props" :props="props">{{
+        </q-td></template>
+        <template v-slot:body-cell-mobileNumber="props"><q-td :props="props">{{
           props.row.leadInformation == null
             ? "NA"
             : props.row.leadInformation.contactNumber
-        }}</q-td>
-        <q-td v-slot:body-cell-leadAddress="props" :props="props">{{
+        }}</q-td></template>
+        <template v-slot:body-cell-leadAddress="props"><q-td :props="props">{{
           props.row.leadInformation == null
             ? "NA"
             : props.row.leadInformation.leadAddress
-        }}</q-td>
-        <q-td v-slot:body-cell-lostOrStolenRemarks="props" :props="props">
+        }}</q-td></template>
+        <template v-slot:body-cell-lostOrStolenRemarks="props"><q-td :props="props">
           <span class="label">{{ props.row.lostOrStolenRemarks }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+        </q-td></template>
+        <template v-slot:body-cell-deviceStatusDate="props"><q-td :props="props">
           <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-        </q-td>
-        <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+        </q-td></template>
+        <!-- <template v-slot:body-cell-deviceStatusDate="props"><q-td :props="props">
         <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-      </q-td> -->
-        <q-td v-slot:body-cell-action="props" :props="props">
+      </q-td></template> -->
+        <template v-slot:body-cell-action="props"><q-td :props="props">
           <q-btn highlight push class="q-mx-sm" color="positive" size="sm"
             @click="Aggregatorsloststolendevice(props.row)">Lost/Stolen</q-btn>
-        </q-td>
+        </q-td></template>
         <!-- <q-td auto-width key="action" :props="props">
               <q-btn
               highlight
@@ -78,7 +75,7 @@
                @click="openAcceptModel(props.row)"
               size="sm"
              >Accept</q-btn>
-           </q-td>
+           </q-td></template>
            </q-tr>
         </template> -->
         <template slot="top" class="bottom-border">
@@ -97,38 +94,37 @@
         :loading="toggleAjaxLoadFilter1" @request="lostOrStolenLoadInfo" table-style="word-break: break-all"
         class="payment_verification_table capitalize">
 
-        <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+        <!-- <template v-slot:body-cell-deviceStatusDate="props"><q-td :props="props">
         <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-      </q-td> -->
-        <q-td v-slot:body-cell-updatedAt="props" :props="props">{{
-          props.row.aggregatorRegionalInventory.updatedAt == null ? "NA" :
-            props.row.aggregatorRegionalInventory.updatedAt
-            | moment("Do MMM Y")
-        }}</q-td>
-        <!-- <q-td v-slot:body-cell-Status="props" :props="props">
+      </q-td></template> -->
+        <template v-slot:body-cell-updatedAt="props"><q-td :props="props">{{
+          props.row.aggregatorRegionalInventory.updatedAt == null ? "NA" : :
+$moment(props.row.aggregatorRegionalInventory.updatedAt).format("Do MMM Y")
+        }}</q-td></template>
+        <!-- <template v-slot:body-cell-Status="props"><q-td :props="props">
           <span class="label text-positive" v-if="props.row.aggregatorRegionalInventory.deviceStatus == 8">Waiting for
             Approval</span>
           <span class="label text-amber" v-if="props.row.aggregatorRegionalInventory.deviceStatus == 7">Submitted By
             SO</span>
           <span class="label text-purple" v-if="props.row.aggregatorRegionalInventory.deviceStatus == 10">Rejected By
             Finance</span>
-        </q-td> -->
-        <q-td v-slot:body-cell-action="props" :props="props">
+        </q-td></template> -->
+        <template v-slot:body-cell-action="props"><q-td :props="props">
           <q-btn v-if="props.row.aggregatorRegionalInventory.deviceStatus == 8" disable push color="purple-9"
             size="sm">Waiting for Approval</q-btn>
           <q-btn v-else-if="props.row.aggregatorRegionalInventory.deviceStatus == 7" highlight push disable color="blue"
             size="sm">Submitted By SO</q-btn>
           <q-btn v-else-if="props.row.aggregatorRegionalInventory.deviceStatus == 10" highlight push disable color="red"
             size="sm">Rejected By Finance</q-btn>
-        </q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
+        </q-td></template>
+        <template v-slot:body-cell-action="props"><q-td :props="props">
           <q-btn v-if="props.row.aggregatorRegionalInventory.deviceStatus == 10" highlight push color="red" size="sm"
             @click="Aggregatorsloststolendevice(props.row)">Lost/Stolen</q-btn>
           <q-btn v-if="props.row.aggregatorRegionalInventory.deviceStatus == 8" highlight push color="purple-9"
             size="sm" @click="Aggregatorsloststolendevice(props.row)">Lost/Stolen</q-btn>
           <q-btn v-else-if="props.row.aggregatorRegionalInventory.deviceStatus == 7" highlight push class="q-mx-sm"
             color="positive" size="sm" @click="Aggregatorsloststolendevice(props.row)">Lost/Stolen</q-btn>
-        </q-td>
+        </q-td></template>
         <template slot="top" class="bottom-border">
           <div class="col-md-5">
             <q-input clearable color="grey-9" v-model="filter1" placeholder="Type.."
