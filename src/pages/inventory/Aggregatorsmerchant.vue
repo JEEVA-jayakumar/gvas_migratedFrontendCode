@@ -18,10 +18,10 @@
         :rows-per-page-options="[100, 200, 300, 400, 500]" v-model:pagination="paginationControl"
         :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
         <!-- :rows-per-page-options="[100,200,300,400,500]" -->
-        <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+        <template v-slot:body-cell-deviceStatusDate="props"><q-td :props="props">
           <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-        </q-td>
-        <template slot="top" class="bottom-border">
+        </q-td></template>
+        <template v-slot:top class="bottom-border">
           <!--START: table filter,search -->
           <div class="col">
             <q-input clearable color="grey-9" v-model="filter" placeholder="Type.."
@@ -55,7 +55,7 @@
               class="q-mr-lg q-py-sm float-right"
               size="md"
             />-->
-            <!-- <downloadExcel :rows="tableData" :fields="json_fields" name="InventoryWithMerchant.xls">
+            <!-- <downloadExcel :data="tableData" :fields="json_fields" name="InventoryWithMerchant.xls">
               <q-btn outline color="grey-9" label="Download as excel" />
             </downloadExcel> -->
           </div>

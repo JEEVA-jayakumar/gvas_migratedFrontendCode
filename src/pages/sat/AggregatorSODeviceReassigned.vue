@@ -18,14 +18,14 @@
       @request="ajaxLoadAllLeadInfo"
     >
       <!--START: table header -->
-      <q-td v-slot:body-cell-soName="props" :props="props">{{
+      <template v-slot:body-cell-soName="props"><q-td :props="props">{{
         props.row.soName == null ? "NA" : props.row.soName
-      }}</q-td>
+      }}</q-td></template>
 
-      <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+      <!-- <template v-slot:body-cell-deviceStatusDate="props"><q-td :props="props">
         <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-      </q-td>   -->
-      <q-td v-slot:body-cell-action="props" :props="props">
+      </q-td></template>   -->
+      <template v-slot:body-cell-action="props"><q-td :props="props">
         <q-btn
           v-if="props.row.status == 0"
           highlight
@@ -54,7 +54,7 @@
         <br>
         <span  class="label text">Remarks: {{ props.row.remarks == null ? "NA": props.row.remarks }}</span>
        </div>
-      </q-td>
+      </q-td></template>
       <template slot="top" class="bottom-border">
         <div class="col-5">
           <q-input

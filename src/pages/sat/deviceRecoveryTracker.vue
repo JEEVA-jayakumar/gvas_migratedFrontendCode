@@ -84,54 +84,41 @@
             @request="ajaxLoadAllLeadInfo"
           >
             <!-- selection="multiple" -->
-            <q-td
-            v-if="props.row.leadInformation != null || props.row.qrLeadInformation != null "
-              v-slot:body-cell-leadNumber="props"
-              :props="props"
-              class="cursor-pointer"
-              @click="toggleLeadInformation(props.row.leadInformation)"
-            >
-              <span class="label text-primary"
-                ># {{ (props.row.leadInformation == null? props.row.qrLeadInformation.qrLeadNumber: props.row.leadInformation.leadNumber) }}</span
-              >
-            </q-td>
-            <q-td
-            v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null"
-              v-slot:body-cell-submitToMarsDate="props"
-              :props="props"
-              >{{ $moment((props.row.leadInformation != null && props.row.leadInformation.submitToMarsDate !=null)?props.row.leadInformation.submitToMarsDate:(props.row.qrLeadInformation != null && props.row.qrLeadInformation.submitMarsDate !=null)?props.row.qrLeadInformation.submitMarsDate:"NA").format("Do MMM Y") }}</q-td
-            >
-            <q-td
-            v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null"
-              v-slot:body-cell-createdAt="props"
-              :props="props"
-              >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
-            >
-            <q-td
-            v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null"
-              v-slot:body-cell-deviceAddress="props"
-              :props="props"
-              class="customTd customCellLength"
-            >
-              <div>{{ props.row.deviceAddress }}</div>
-            </q-td>
-            <q-td
-            v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null"
-              v-slot:body-cell-tid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.tid }}</div>
-            </q-td>
-            <q-td
-            v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null"
-              v-slot:body-cell-mid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.mid }}</div>
-            </q-td>
-            <template slot="top">
+            <template v-slot:body-cell-leadNumber="props">
+              <q-td v-if="props.row.leadInformation != null || props.row.qrLeadInformation != null " :props="props"
+                class="cursor-pointer"
+                @click="toggleLeadInformation(props.row.leadInformation)">
+                <span class="label text-primary"
+                  ># {{ (props.row.leadInformation == null? props.row.qrLeadInformation.qrLeadNumber: props.row.leadInformation.leadNumber) }}</span
+                >
+              </q-td>
+            </template>
+            <template v-slot:body-cell-submitToMarsDate="props">
+              <q-td v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null" :props="props">
+                {{ $moment((props.row.leadInformation != null && props.row.leadInformation.submitToMarsDate !=null)?props.row.leadInformation.submitToMarsDate:(props.row.qrLeadInformation != null && props.row.qrLeadInformation.submitMarsDate !=null)?props.row.qrLeadInformation.submitMarsDate:"NA").format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-createdAt="props">
+              <q-td v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null" :props="props">
+                {{ $moment(props.row.createdAt).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-deviceAddress="props">
+              <q-td v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null" :props="props" class="customTd customCellLength">
+                <div>{{ props.row.deviceAddress }}</div>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-tid="props">
+              <q-td v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null" :props="props" class="customTd">
+                <div class="text-primary">{{ props.row.tid }}</div>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-mid="props">
+              <q-td v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null" :props="props" class="customTd">
+                <div class="text-primary">{{ props.row.mid }}</div>
+              </q-td>
+            </template>
+            <template v-slot:top>
               <!--START: table filter,search -->
               <div class="col-md-5">
                 <q-input
@@ -163,56 +150,43 @@
             color="dark"
             @request="ajaxLoadAllLeadInfo1"
           >
-            <q-td
-            v-if="props.row.leadInformation != null || props.row.qrLeadInformation != null"
-              v-slot:body-cell-leadNumber="props"
-              :props="props"
-              class="cursor-pointer"
-              @click="toggleLeadInformation(props.row.leadInformation)"
-            >
-              <span class="label text-primary"
-                ># {{ (props.row.leadInformation == null? props.row.qrLeadInformation.qrLeadNumber: props.row.leadInformation.leadNumber) }}</span
-              >
-            </q-td>
-            <q-td
-            v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null"
-              v-slot:body-cell-submitToMarsDate="props"
-              :props="props"
-              >{{ $moment((props.row.leadInformation != null && props.row.leadInformation.submitToMarsDate !=null)?props.row.leadInformation.submitToMarsDate:(props.row.qrLeadInformation != null && props.row.qrLeadInformation.submitMarsDate !=null)?props.row.qrLeadInformation.submitMarsDate:"NA").format("Do MMM Y") }}</q-td
-            >
-            <q-td
-            v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null"
-              v-slot:body-cell-createdAt="props"
-              :props="props"
-              >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
-            >
-            <q-td
-            v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null"
-              v-slot:body-cell-tid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.tid }}</div>
-            </q-td>
-            <q-td
-            v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null"
-              v-slot:body-cell-mid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.mid }}</div>
-            </q-td>
-            <q-td
-            v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null"
-              v-slot:body-cell-deviceAddress="props"
-              :props="props"
-              class="customTd customCellLength"
-            >
-              <div>
-                {{ props.row.deviceAddress }}
-              </div>
-            </q-td>
-            <template slot="top">
+            <template v-slot:body-cell-leadNumber="props">
+              <q-td v-if="props.row.leadInformation != null || props.row.qrLeadInformation != null" :props="props"
+                class="cursor-pointer"
+                @click="toggleLeadInformation(props.row.leadInformation)">
+                <span class="label text-primary"
+                  ># {{ (props.row.leadInformation == null? props.row.qrLeadInformation.qrLeadNumber: props.row.leadInformation.leadNumber) }}</span
+                >
+              </q-td>
+            </template>
+            <template v-slot:body-cell-submitToMarsDate="props">
+              <q-td v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null" :props="props">
+                {{ $moment((props.row.leadInformation != null && props.row.leadInformation.submitToMarsDate !=null)?props.row.leadInformation.submitToMarsDate:(props.row.qrLeadInformation != null && props.row.qrLeadInformation.submitMarsDate !=null)?props.row.qrLeadInformation.submitMarsDate:"NA").format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-createdAt="props">
+              <q-td v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null" :props="props">
+                {{ $moment(props.row.createdAt).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-tid="props">
+              <q-td v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null" :props="props" class="customTd">
+                <div class="text-primary">{{ props.row.tid }}</div>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-mid="props">
+              <q-td v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null" :props="props" class="customTd">
+                <div class="text-primary">{{ props.row.mid }}</div>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-deviceAddress="props">
+              <q-td v-if="props.row.leadInformation != null|| props.row.qrLeadInformation != null" :props="props" class="customTd customCellLength">
+                <div>
+                  {{ props.row.deviceAddress }}
+                </div>
+              </q-td>
+            </template>
+            <template v-slot:top>
               <!--START: table filter,search -->
               <div class="col-md-5">
                 <q-input
@@ -382,10 +356,9 @@ export default {
           label: "Date of Submission",
           align: "left",
           field: (row) => {
-            // return row.leadInformation.submitToMarsDate;
-            return  (row.leadInformation==null||row.leadInformation.submitToMarsDate==null)?"NA":row.leadInformation.submitToMarsDate || (row.qrLeadInformation==null||row.qrLeadInformation.submitMarsDate==null)? "NA" :row.qrLeadInformation.submitMarsDate | moment("Do MMM Y")
+            return $moment((row.leadInformation==null||row.leadInformation.submitToMarsDate==null)?"NA":row.leadInformation.submitToMarsDate || (row.qrLeadInformation==null||row.qrLeadInformation.submitMarsDate==null)? "NA" :row.qrLeadInformation.submitMarsDate).format("Do MMM Y")
           },
-          format: (val) => `${val}|moment("Do MMM Y")`,
+          format: (val) => `${val}$moment().format("Do MMM Y")`,
           sortable: true,
         },
       ],
@@ -500,10 +473,9 @@ export default {
           label: "Date of Submission",
           align: "left",
           field: (row) => {
-            // return row.leadInformation.submitToMarsDate;
-            return  (row.leadInformation==null||row.leadInformation.submitToMarsDate==null)?"NA":row.leadInformation.submitToMarsDate || (row.qrLeadInformation==null||row.qrLeadInformation.submitMarsDate==null)? "NA" :row.qrLeadInformation.submitMarsDate | moment("Do MMM Y")
+            return $moment((row.leadInformation==null||row.leadInformation.submitToMarsDate==null)?"NA":row.leadInformation.submitToMarsDate || (row.qrLeadInformation==null||row.qrLeadInformation.submitMarsDate==null)? "NA" :row.qrLeadInformation.submitMarsDate).format("Do MMM Y")
           },
-          format: (val) => `${val}|moment("Do MMM Y")`,
+          format: (val) => `${val}$moment().format("Do MMM Y")`,
           sortable: true,
         },
       ],

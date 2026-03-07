@@ -177,18 +177,12 @@
             v-model:filter="filter" v-model:pagination="paginationControl"
             row-key="name"
           >
-            <q-td
-              v-slot:body-cell-shortleadDate="props"
-              :props="props"
-            >{{ $moment(props.row.shortleadDate).format("Do MMM Y") }}</q-td>
-            <q-td
-              v-slot:body-cell-id="props"
-              :props="props"
+            <template v-slot:body-cell-shortleadDate="props"><q-td :props="props">{{ $moment(props.row.shortleadDate).format("Do MMM Y") }}</q-td></template>
+            <template v-slot:body-cell-id="props"><q-td :props="props"
               class="cursor-pointer"
-              @click="toggleLeadInformation(props.row)"
-            >
+              @click="toggleLeadInformation(props.row)">
               <span class="label text-primary">#{{props.row.leadNumber}}</span>
-            </q-td>
+            </q-td></template>
           </q-table>
           <!--END: table table aging pending/reject -->
         </q-tab-panel>

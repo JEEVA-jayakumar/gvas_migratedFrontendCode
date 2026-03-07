@@ -15,6 +15,7 @@
         <!-- {{localStorage.getItem('selectedTab')}} -->
         <div class="col-auto">
           <img
+            v-if="leftDrawerOpen"
             class="cursor-pointer"
             src="~assets/images/logo.png"
             style="height:38px;"
@@ -101,15 +102,12 @@ export default {
   },
   computed: {
     getUserName() {
-      const userInfo = localStorage.getItem("u_i");
-      if (userInfo && userInfo !== "undefined" && userInfo !== "null") {
-        try {
-          return JSON.parse(userInfo).user.name;
-        } catch (e) {
-          return "Super Admin";
-        }
+      try {
+        const userInfo = JSON.parse(localStorage.getItem("u_i"));
+        return userInfo?.user?.name || "Super Admin";
+      } catch (e) {
+        return "Super Admin";
       }
-      return "Super Admin";
     },
     getRole() {
       const userInfo = localStorage.getItem("u_i");

@@ -23,12 +23,12 @@
         row-key="name"
       >
 
-      <q-td v-slot:body-cell-Sno="props" :props="props">{{ props.row.id == null ? 'NA' : props.row.id
+      <template v-slot:body-cell-Sno="props"><q-td :props="props">{{ props.row.id == null ? 'NA' : props.row.id
 
-            }}</q-td>
+            }}</q-td></template>
                {{ props }}
-             <q-td v-slot:body-cell-Vpa="props" :props="props">{{ props.row.vpa == null ? 'NA' : props.row.vpa
-            }}</q-td>
+             <template v-slot:body-cell-Vpa="props"><q-td :props="props">{{ props.row.vpa == null ? 'NA' : props.row.vpa
+            }}</q-td></template>
     </q-table>
 
       </q-dialog>

@@ -37,49 +37,40 @@
         </q-tr>
         <!--END: table header -->
   
-        <q-td v-slot:body-cell-tid="props" :props="props">
+        <template v-slot:body-cell-tid="props"><q-td :props="props">
           <span class="label text-primary"># {{ props.row.tid }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-mid="props" :props="props">
+        </q-td></template>
+        <template v-slot:body-cell-mid="props"><q-td :props="props">
           <span class="label text-primary"># {{ props.row.mid }}</span>
-        </q-td>
-        <!-- <q-td
-            v-slot:body-cell-leadName="props"
-            :props="props"
-          >{{props.row.leadInformation.leadName}}</q-td>-->
-        <q-td
-          v-slot:body-cell-leadNumber="props"
-          :props="props"
+        </q-td></template>
+        <!-- <template v-slot:body-cell-leadName="props"><q-td :props="props">{{props.row.leadInformation.leadName}}</q-td></template>-->
+        <template v-slot:body-cell-leadNumber="props"><q-td :props="props"
           class="cursor-pointer"
-          @click="toggleLeadInformation(props.row.leadInformation)"
-        >
+          @click="toggleLeadInformation(props.row.leadInformation)">
           <span class="label text-primary"
             ># {{ props.row.leadInformation.leadNumber }}</span
           >
-        </q-td>
-        <q-td v-slot:body-cell-mobileNumber="props" :props="props">{{
+        </q-td></template>
+        <template v-slot:body-cell-mobileNumber="props"><q-td :props="props">{{
           props.row.leadInformation == null
             ? "NA"
             : props.row.leadInformation.contactNumber
-        }}</q-td>
-        <q-td v-slot:body-cell-leadAddress="props" :props="props">{{
+        }}</q-td></template>
+        <template v-slot:body-cell-leadAddress="props"><q-td :props="props">{{
           props.row.leadInformation == null
             ? "NA"
             : props.row.leadInformation.leadAddress
-        }}</q-td>
-        <q-td
-          v-slot:body-cell-lostOrStolenRemarks="props"
-          :props="props"
-        >
+        }}</q-td></template>
+        <template v-slot:body-cell-lostOrStolenRemarks="props"><q-td :props="props">
           <span class="label">{{ props.row.lostOrStolenRemarks }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+        </q-td></template>
+        <template v-slot:body-cell-deviceStatusDate="props"><q-td :props="props">
           <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-        </q-td>
-        <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+        </q-td></template>
+        <!-- <template v-slot:body-cell-deviceStatusDate="props"><q-td :props="props">
           <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-        </q-td> -->
-        <q-td v-slot:body-cell-action="props" :props="props">
+        </q-td></template> -->
+        <template v-slot:body-cell-action="props"><q-td :props="props">
           <q-btn
             highlight
             push
@@ -89,7 +80,7 @@
             @click="lostStolenDevice(props.row)"
             >Lost/Stolen</q-btn
           >
-        </q-td>
+        </q-td></template>
         <!-- <q-td auto-width key="action" :props="props">
                 <q-btn
                 highlight
@@ -99,7 +90,7 @@
                  @click="openAcceptModel(props.row)"
                 size="sm"
                >Accept</q-btn>
-             </q-td>
+             </q-td></template>
              </q-tr>
           </template> -->
         <template slot="top" class="bottom-border">
@@ -134,14 +125,11 @@
         class="payment_verification_table capitalize"
       >
       
-        <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+        <!-- <template v-slot:body-cell-deviceStatusDate="props"><q-td :props="props">
           <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-        </q-td> -->
-        <q-td
-            v-slot:body-cell-updated_at="props"
-            :props="props"
-          >{{ $moment(props.row.updatedAt ==null? "NA" : props.row.updatedAt).format("Do MMM Y") }}</q-td>
-        <q-td v-slot:body-cell-Status="props" :props="props">
+        </q-td></template> -->
+        <template v-slot:body-cell-updated_at="props"><q-td :props="props">{{ $moment(props.row.updatedAt ==null? "NA" : props.row.updatedAt).format("Do MMM Y") }}</q-td></template>
+        <template v-slot:body-cell-Status="props"><q-td :props="props">
           <span
             class="label text-positive"
             v-if="props.row.regionalInventory.deviceStatus == 8"
@@ -157,8 +145,8 @@
             v-if="props.row.regionalInventory.deviceStatus == 10"
             >Rejected By Finance</span
           >
-        </q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
+        </q-td></template>
+        <template v-slot:body-cell-action="props"><q-td :props="props">
           <q-btn
             v-if="props.row.regionalInventory.deviceStatus == 8"
             disable
@@ -185,8 +173,8 @@
             size="sm"
             >Rejected By Finance</q-btn
           >
-        </q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
+        </q-td></template>
+        <template v-slot:body-cell-action="props"><q-td :props="props">
           <q-btn
             v-if="props.row.regionalInventory.deviceStatus == 10"
             highlight
@@ -215,7 +203,7 @@
             @click="loststolendevice(props.row)"
             >Lost/Stolen</q-btn
           >
-        </q-td>
+        </q-td></template>
         <template slot="top" class="bottom-border">
           <div class="col-md-5">
             <q-input

@@ -14,7 +14,6 @@
         <!--START: table title -->
         <div class="col" ref="clickHeretoStartParent">
           <q-select
-            filled
             ref="clickHeretoStartChild"
             @update:model-value="fnDisableDeviceTypeSelection"
             :disable="tempTableData.length > 0"
@@ -29,7 +28,6 @@
         <!-- Invoice Number Field with margin -->
         <div class="col q-ml-md">
           <q-input
-            filled
             type="text"
             :disable="tempTableData.length > 0"
             label="Invoice Number"
@@ -67,7 +65,7 @@
         <template v-slot:top>
           <!--START: table filter,search -->
           <div class="col-md-5">
-            <q-input clearable dense color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search .."
+            <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search .."
               class="q-mr-lg q-py-sm" />
           </div>
           <!--END: table filter,search -->

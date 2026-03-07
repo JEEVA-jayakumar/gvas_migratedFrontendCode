@@ -116,25 +116,22 @@
           <q-table :rows="tableData" :columns="columnDataAssigned" table-class="customTableClass" :filter="filterSearch" v-model:pagination="paginationControl" selection="multiple"
             v-model:selected="formData.marsDeviceIdsCookedUnAssinged" row-key="id" :loading="tableAjaxLoading"
             :rows-per-page-options="[10, 20, 50, 100, 150, 200]" color="dark" @request="ajaxLoadAllLeadInfo">
-            <q-td v-slot:body-cell-leadNumber="props" :props="props" class="cursor-pointer"
+            <template v-slot:body-cell-leadNumber="props"><q-td :props="props" class="cursor-pointer"
               @click="toggleLeadInformation(props.row.leadInformation)">
               <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
-            </q-td>
-            <q-td v-slot:body-cell-submitToMarsDate="props" :props="props">{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td>
-            <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-            <q-td v-slot:body-cell-deviceAddress="props" :props="props" class="customTd customCellLength">
+            </q-td></template>
+            <template v-slot:body-cell-submitToMarsDate="props"><q-td :props="props">{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td></template>
+            <template v-slot:body-cell-createdAt="props"><q-td :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td></template>
+            <template v-slot:body-cell-deviceAddress="props"><q-td :props="props" class="customTd customCellLength">
               <div>{{ props.row.deviceAddress }}</div>
-            </q-td>
-            <!-- <q-td
-                v-slot:body-cell-tid="props"
-                :props="props"
-                class="customTd"
-              >
+            </q-td></template>
+            <!-- <template v-slot:body-cell-tid="props"><q-td :props="props"
+                class="customTd">
                 <div class="text-primary">{{ props.row.tid }}</div>
-              </q-td> -->
-            <q-td v-slot:body-cell-mid="props" :props="props" class="customTd">
+              </q-td></template> -->
+            <template v-slot:body-cell-mid="props"><q-td :props="props" class="customTd">
               <div class="text-primary">{{ props.row.mid }}</div>
-            </q-td>
+            </q-td></template>
             <template v-slot:top="props">
               <div class="col-md-5">
                 <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search By MID, Merchant Name.."
@@ -150,34 +147,27 @@
             :filter="filterSearch" v-model:pagination="paginationControl1" row-key="id"
             :rows-per-page-options="[10, 20, 50, 100, 150, 200]" :loading="tableAjaxLoading1" color="dark"
             @request="ajaxLoadAllLeadInfo1">
-            <q-td v-slot:body-cell-leadNumber="props" :props="props" class="cursor-pointer"
+            <template v-slot:body-cell-leadNumber="props"><q-td :props="props" class="cursor-pointer"
               @click="toggleLeadInformation(props.row.leadInformation)">
               <span class="label text-primary"># {{ props.row.leadInformation != null ?
                 props.row.leadInformation.leadNumber : "NA" }}</span>
-            </q-td>
-            <!-- <q-td
-                v-slot:body-cell-submitToMarsDate="props"
-                :props="props"
-                >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
-              > -->
-            <!--props.row.createdAt | moment("Do MMM Y")-->
-            <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMMY") }}</q-td>
-            <!-- <q-td
-                v-slot:body-cell-tid="props"
-                :props="props"
-                class="customTd"
-              >
+            </q-td></template>
+            <!-- <template v-slot:body-cell-submitToMarsDate="props"><q-td :props="props">{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td></template> -->
+$moment(<!--props.row.createdAt).format("Do MMM Y")-->
+            <template v-slot:body-cell-createdAt="props"><q-td :props="props">{{ $moment(props.row.createdAt).format("Do MMMY") }}</q-td></template>
+            <!-- <template v-slot:body-cell-tid="props"><q-td :props="props"
+                class="customTd">
                 <div class="text-primary">{{ props.row.tid != null ? props.row.tid : "NA" }}</div>
-              </q-td> -->
-            <q-td v-slot:body-cell-mid="props" :props="props" class="customTd">
+              </q-td></template> -->
+            <template v-slot:body-cell-mid="props"><q-td :props="props" class="customTd">
               <div class="text-primary">{{ props.row.mid != null ? props.row.mid : "NA" }}</div>
-            </q-td>
-            <q-td v-slot:body-cell-deviceAddress="props" :props="props" class="customTd customCellLength">
+            </q-td></template>
+            <template v-slot:body-cell-deviceAddress="props"><q-td :props="props" class="customTd customCellLength">
               <div>
                 <q-btn no-caps icon="edit" color="purple-9" size="xs" round @click="UpdateDeviceAddress(props.row)" />
                 {{ props.row.deviceAddress != null ? props.row.deviceAddress : "NA" }}
               </div>
-            </q-td>
+            </q-td></template>
             <template v-slot:top="props">
               <!--START: table filter,search -->
               <div class="col-md-5">
@@ -361,7 +351,7 @@ export default {
           field: row => {
             return row.leadInformation.submitToMarsDate;
           },
-          format: val => `${val}|moment("Do MMM Y")`,
+          format: val => `${val}$moment().format("Do MMM Y")`,
           sortable: true
         },
         {
@@ -497,7 +487,7 @@ export default {
         //   field: row => {
         //     return row.leadInformation !=null ? row.leadInformation.submitToMarsDate : "NA";
         //   },
-        //   format: val => `${val}|moment("Do MMM Y")`,
+        //   format: val => `${val}$moment().format("Do MMM Y")`,
         //   sortable: true
         // }
 

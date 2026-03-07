@@ -116,7 +116,7 @@
                   >
                 </q-td>
           </template>
-          <!-- <q-td v-slot:body-cell-action="props" :props="props">
+          <!-- <template v-slot:body-cell-action="props"><q-td :props="props">
               <q-btn
                highlight
                push
@@ -125,7 +125,7 @@
                @click="openAccept(props.row)"
                size="sm"
                >Approve</q-btn>
-            </q-td> -->
+            </q-td></template> -->
           <!-- <template v-slot:top="props" class="bottom-border" >
             <div class="col-5">
               <q-input

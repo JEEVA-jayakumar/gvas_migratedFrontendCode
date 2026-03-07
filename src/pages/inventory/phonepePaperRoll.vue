@@ -57,7 +57,7 @@
             :loading="toggleAjaxLoadFilter"
             @request="ajaxLoadAllLeadInfo"
           >
-            <q-td v-slot:body-cell-action1="props" :props="props">
+            <template v-slot:body-cell-action1="props"><q-td :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
                   dense
@@ -72,8 +72,8 @@
                 >
                 </q-btn>
               </div>
-            </q-td>
-            <q-td v-slot:body-cell-action="props" :props="props">
+            </q-td></template>
+            <template v-slot:body-cell-action="props"><q-td :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
                   dense
@@ -88,8 +88,8 @@
                 >
                 </q-btn>
               </div>
-            </q-td>
-            <q-td v-slot:body-cell-action2="props" :props="props">
+            </q-td></template>
+            <template v-slot:body-cell-action2="props"><q-td :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
                   dense
@@ -103,16 +103,11 @@
                 >
                 </q-btn>
               </div>
-            </q-td>
-            <q-td
-              v-slot:body-cell-createdDate="props"
-              :props="props"
-              >{{
+            </q-td></template>
+            <template v-slot:body-cell-createdDate="props"><q-td :props="props">{{
                 props.row == null
-                  ? "NA"
-                  : props.row.createdDate | moment("Do MMM Y")
-              }}</q-td
-            >
+                  ? "NA" : $moment( props.row.createdDate).format("Do MMM Y")
+              }}</q-td></template>
           </q-table>
         </q-tab-panel>
 <q-tab-panel name="tab-2">
@@ -136,24 +131,14 @@
             :loading="toggleAjaxLoadFilter1"
             @request="ajaxLoadAllLeadInfo1"
           >
-            <q-td
-              v-slot:body-cell-createdDate="props"
-              :props="props"
-              >{{
+            <template v-slot:body-cell-createdDate="props"><q-td :props="props">{{
                 props.row == null
-                  ? "NA"
-                  : props.row.createdDate | moment("Do MMM Y")
-              }}</q-td
-            >
-            <q-td
-              v-slot:body-cell-updatedDate="props"
-              :props="props"
-              >{{
+                  ? "NA" : $moment( props.row.createdDate).format("Do MMM Y")
+              }}</q-td></template>
+            <template v-slot:body-cell-updatedDate="props"><q-td :props="props">{{
                 props.row == null
-                  ? "NA"
-                  : props.row.updatedDate | moment("Do MMM Y")
-              }}</q-td
-            >
+                  ? "NA" : $moment( props.row.updatedDate).format("Do MMM Y")
+              }}</q-td></template>
             <q-td v-slot:body-cell-action3="props" :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
@@ -168,7 +153,7 @@
                 >
                 </q-btn>
               </div>
-            </q-td>
+            </q-td></template>
           </q-table>
         </q-tab-panel>
 <q-tab-panel name="tab-3">
@@ -197,28 +182,22 @@
               :props="props"
               >{{
                 props.row == null
-                  ? "NA"
-                  : props.row.createdDate | moment("Do MMM Y")
-              }}</q-td
-            >
+                  ? "NA" : $moment( props.row.createdDate).format("Do MMM Y")
+              }}</q-td>
             <q-td
               v-slot:body-cell-updatedDate="props"
               :props="props"
               >{{
                 props.row == null
-                  ? "NA"
-                  : props.row.updatedDate | moment("Do MMM Y")
-              }}</q-td
-            >
+                  ? "NA" : $moment( props.row.updatedDate).format("Do MMM Y")
+              }}</q-td>
             <q-td
               v-slot:body-cell-rtoCreatedDate="props"
               :props="props"
               >{{
                 props.row == null
-                  ? "NA"
-                  : props.row.rtoCreatedDate | moment("Do MMM Y")
-              }}</q-td
-            >
+                  ? "NA" : $moment( props.row.rtoCreatedDate).format("Do MMM Y")
+              }}</q-td>
           </q-table>
         </q-tab-panel>
 </q-tab-panels>

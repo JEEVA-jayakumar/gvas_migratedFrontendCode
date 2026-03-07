@@ -10,7 +10,7 @@
 <q-tab-panels v-model="selectedTab" animated>
 <q-tab-panel name="active">
            <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" >
-        <q-td v-slot:body-cell-action="props" :props="props">
+        <template v-slot:body-cell-action="props"><q-td :props="props">
           <div class="row no-wrap no-padding">
             <q-btn  no-caps no-wrap label="Modify Role/Permissions" icon="far fa-plus-square" size="md" @click="fnShowEditRole(props.row)" flat class="text-light-blue">
             </q-btn>
@@ -18,7 +18,7 @@
             <q-btn  no-caps no-wrap label="Disable Role" icon="far fa-minus-square" size="md" @click="fnDisableRole(props.row)" flat class="text-negative">
             </q-btn>
           </div>
-        </q-td>
+        </q-td></template>
 
         <template v-slot:top="props">
   
@@ -62,7 +62,7 @@
          </q-tab-panel>
 <q-tab-panel name="deactive">
            <q-table :rows="deactivatedTableData" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1" v-model:pagination="paginationControl1" :filter-method="myCustomSearchFilter" row-key="name" >
-        <q-td v-slot:body-cell-action="props" :props="props">
+        <template v-slot:body-cell-action="props"><q-td :props="props">
           <div class="row no-wrap no-padding">
             <!-- <q-btn  no-caps no-wrap label="Modify Role/Permissions" icon="far fa-plus-square" size="md" @click="fnShowEditRole(props.row)" flat class="text-light-blue">
             </q-btn> -->
@@ -70,7 +70,7 @@
             <q-btn  no-caps no-wrap label="Active" icon="far fa-minus-square" size="md" @click="fnActiveRoles(props.row)" flat class="text-negative">
             </q-btn>
           </div>
-        </q-td>
+        </q-td></template>
 
         <template v-slot:top="props">
   

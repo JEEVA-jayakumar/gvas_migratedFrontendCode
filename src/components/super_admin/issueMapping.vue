@@ -26,7 +26,7 @@
             row-key="name"
             color="grey-9"
           >
-            <q-td v-slot:body-cell-action="props" :props="props">
+            <template v-slot:body-cell-action="props"><q-td :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
 
@@ -51,11 +51,8 @@
                   class="text-negative"
                 ></q-btn>
               </div>
-            </q-td>
-            <!-- <q-td
-              v-slot:body-cell-serviceReqIssueTypeSets="props"
-              :props="props"
-            >
+            </q-td></template>
+            <!-- <template v-slot:body-cell-serviceReqIssueTypeSets="props"><q-td :props="props">
               <div
                 class="row no-wrap group"
                 v-for="menu in props.row.serviceReqIssueTypeSets"
@@ -64,14 +61,14 @@
                   {{ menu.serviceReqIssueType.name }}
                 </q-chip>
               </div>
-            </q-td> -->
-            <!-- <q-td v-slot:body-cell-serviceRequestStatusSets="props" :props="props">
+            </q-td></template> -->
+            <!-- <template v-slot:body-cell-serviceRequestStatusSets="props"><q-td :props="props">
                 <div class="row no-wrap group" v-for="menu in props.row.serviceRequestStatusSets" >
                   <q-chip color="light" class="text-dark">
                     {{ menu.serviceRequestStatus != null ? menu.serviceRequestStatus.name : "NA" }}
                   </q-chip>
                 </div>
-              </q-td> -->
+              </q-td></template> -->
 
             <template v-slot:top="props">
               <div class="col-3">
@@ -100,10 +97,7 @@
             row-key="name"
             color="grey-9"
           >
-            <!-- <q-td
-              v-slot:body-cell-serviceReqIssueTypeSets="props"
-              :props="props"
-            >
+            <!-- <template v-slot:body-cell-serviceReqIssueTypeSets="props"><q-td :props="props">
               <div
                 class="row no-wrap group"
                 v-for="menu in props.row.serviceReqIssueTypeSets"
@@ -112,16 +106,16 @@
                   {{ menu.serviceReqIssueType.name }}
                 </q-chip>
               </div>
-            </q-td> -->
-            <!-- <q-td v-slot:body-cell-serviceRequestStatusSets="props" :props="props">
+            </q-td></template> -->
+            <!-- <template v-slot:body-cell-serviceRequestStatusSets="props"><q-td :props="props">
                 <div class="row no-wrap group" v-for="menu in props.row.serviceRequestStatusSets" >
                   <q-chip color="light" class="text-dark">
                     {{ menu.serviceRequestStatus != null ? menu.serviceRequestStatus.name : "NA"}}
                   </q-chip>
                 </div>
-              </q-td> -->
+              </q-td></template> -->
 
-            <q-td v-slot:body-cell-action1="props" :props="props">
+            <template v-slot:body-cell-action1="props"><q-td :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
 
@@ -135,7 +129,7 @@
                   class="text-light-blue"
                 ></q-btn>
               </div>
-            </q-td>
+            </q-td></template>
 
             <template v-slot:top="props">
               <div class="col-3">

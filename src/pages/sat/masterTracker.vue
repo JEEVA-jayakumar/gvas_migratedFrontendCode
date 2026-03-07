@@ -25,39 +25,24 @@
         :rows-per-page-options="[5,10,15,20,25]"
         @request="ajaxLoadAllLeadInfo"
       >
-        <q-td v-slot:body-cell-tid="props" :props="props">
+        <template v-slot:body-cell-tid="props"><q-td :props="props">
           <span class="label text-primary"># {{props.row.tid}}</span>
-        </q-td>
-        <q-td v-slot:body-cell-mid="props" :props="props">
+        </q-td></template>
+        <template v-slot:body-cell-mid="props"><q-td :props="props">
           <span class="label text-primary"># {{props.row.mid}}</span>
-        </q-td>
-        <!-- <q-td
-          v-slot:body-cell-leadName="props"
-          :props="props"
-        >{{props.row.leadInformation.leadName}}</q-td>-->
-        <q-td
-          v-slot:body-cell-leadNumber="props"
-          :props="props"
+        </q-td></template>
+        <!-- <template v-slot:body-cell-leadName="props"><q-td :props="props">{{props.row.leadInformation.leadName}}</q-td></template>-->
+        <template v-slot:body-cell-leadNumber="props"><q-td :props="props"
           class="cursor-pointer"
-          @click="toggleLeadInformation(props.row.leadInformation)"
-        >
+          @click="toggleLeadInformation(props.row.leadInformation)">
           <span class="label text-primary"># {{props.row.leadInformation.leadNumber}}</span>
-        </q-td>
-        <!-- <q-td
-          v-slot:body-cell-serialNumber="props"
-          :props="props"
-        >{{props.row.serialNumber== null? 'NA':props.row.serialNumber}}</q-td>-->
-        <q-td
-          v-slot:body-cell-mobileNumber="props"
-          :props="props"
-        >{{props.row.leadInformation == null? 'NA':props.row.leadInformation.contactNumber}}</q-td>
-        <q-td
-          v-slot:body-cell-leadAddress="props"
-          :props="props"
-        >{{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}</q-td>
-        <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+        </q-td></template>
+        <!-- <template v-slot:body-cell-serialNumber="props"><q-td :props="props">{{props.row.serialNumber== null? 'NA':props.row.serialNumber}}</q-td></template>-->
+        <template v-slot:body-cell-mobileNumber="props"><q-td :props="props">{{props.row.leadInformation == null? 'NA':props.row.leadInformation.contactNumber}}</q-td></template>
+        <template v-slot:body-cell-leadAddress="props"><q-td :props="props">{{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}</q-td></template>
+        <template v-slot:body-cell-deviceStatusDate="props"><q-td :props="props">
           <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-        </q-td>
+        </q-td></template>
 
         <template slot="top" >
           <!--START: table filter,search,excel download -->

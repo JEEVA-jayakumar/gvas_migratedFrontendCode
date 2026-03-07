@@ -25,7 +25,6 @@
       >
         <div class="col-md-4">
           <q-select
-            filled
             :disable="formData.device_type != ''"
             :class="[formData.device_type != '' ? 'no-pointer-events' : '']"
             v-model="formData.region"
@@ -39,7 +38,6 @@
         </div>
         <div class="col-md-4">
           <q-select
-            filled
             clearable
             :disable="formData.region == ''"
             @clear="fnClearingDeviceTypeSelection"
@@ -166,14 +164,14 @@
             <div class="row items-center q-my-sm">
               <label class="qrlabel"><b>Select Bank</b></label>
               <div class="col-md-3">
-                <q-select class="sizeBank" filled clearable label="Select Bank"  @update:model-value="showChannel($event)" v-model="formData.bank" :error="$v.formData.bank.$error"
+                <q-select class="sizeBank" clearable label="Select Bank"  @update:model-value="showChannel($event)" v-model="formData.bank" :error="$v.formData.bank.$error"
                   color="grey-9" :options="bankListOptions" emit-value map-options />
               </div>
             </div>
             <div class="row items-center q-my-sm">
               <label class="qrlabel" ><b>Select Region</b></label>
               <div class="col-md-3">
-                <q-select class="sizeRegion" filled clearable :disable="!formData.bank" label="Select Region" v-model="formData.regionList" :error="$v.formData.regionList.$error" color="grey-9"
+                <q-select class="sizeRegion" clearable :disable="!formData.bank" label="Select Region" v-model="formData.regionList" :error="$v.formData.regionList.$error" color="grey-9"
                   :options="RegionOptionIcici" emit-value map-options />
               </div>
             </div>
@@ -181,11 +179,11 @@
           </div>
           <div class="row items-center q-my-sm">
             <label class="qrlabel" for="input-id"><b>Enter No Of QR</b></label>
-            <q-input class="sizeQR" filled type="number" :disable="!formData.regionList" label="Enter no of QR" min="1" @update:model-value="val => formData.count = Math.abs(val)"  v-model="formData.count" :error="$v.formData.count.$error"  @blur="$v.formData.count.$touch" color="grey-9" />
+            <q-input class="sizeQR" type="number" :disable="!formData.regionList" label="Enter no of QR" min="1" @update:model-value="val => formData.count = Math.abs(val)"  v-model="formData.count" :error="$v.formData.count.$error"  @blur="$v.formData.count.$touch" color="grey-9" />
           </div>
           <div class="row items-center q-my-sm">
             <label class="qrlabel" for="input-id"><b>Enter POD</b></label>
-            <q-input class="alignPOD" filled disable label="Enter POD" v-model="formData.podNumber" :error="$v.formData.podNumber.$error"  @blur="$v.formData.podNumber.$touch"  color="grey-9" />
+            <q-input class="alignPOD" disable label="Enter POD" v-model="formData.podNumber" :error="$v.formData.podNumber.$error"  @blur="$v.formData.podNumber.$touch"  color="grey-9" />
           </div>
           <div class="row q-my-md">
             <div class="col-md-6" align="right">
@@ -202,7 +200,7 @@
             <q-tab-panels v-model="activeTab" animated>
               <q-tab-panel name="tab-1">
                 <div>
-                  <q-input class="col-5 search q-mb-md" filled clearable color="grey-9" placeholder="Type.." v-model="filter"
+                  <q-input class="col-5 search q-mb-md" clearable color="grey-9" placeholder="Type.." v-model="filter"
                     label="Search By POD Number" />
                 </div>
                 <q-table table-class="customTableClass" :rows="tableData" :columns="columns"
@@ -229,7 +227,7 @@
                 </q-table>
               </q-tab-panel>
               <q-tab-panel name="tab-2">
-                <q-input class="col-5 search q-mb-md" filled clearable color="grey-9" placeholder="Type.." v-model="filter1"
+                <q-input class="col-5 search q-mb-md" clearable color="grey-9" placeholder="Type.." v-model="filter1"
                   label="Search By POD Number" />
                 <q-table table-class="customTableClass" :rows="tableData1" :columns="columns1"
                   v-model:pagination="paginationControl1" :filter="filter1" row-key="id" :loading="toggleAjaxLoadFilter1"

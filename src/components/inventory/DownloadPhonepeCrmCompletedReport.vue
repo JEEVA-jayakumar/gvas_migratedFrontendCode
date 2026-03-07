@@ -8,7 +8,7 @@
       </q-card-section>
 
       <q-card-section class="q-gutter-y-md">
-        <q-input filled v-model="formData.from" label="From Date" color="grey-9" readonly @click="$refs.fromDateProxy.show()">
+        <q-input v-model="formData.from" label="From Date" color="grey-9" readonly @click="$refs.fromDateProxy.show()">
           <template v-slot:append>
             <q-icon name="event" class="cursor-pointer">
               <q-popup-proxy ref="fromDateProxy" transition-show="scale" transition-hide="scale">
@@ -18,7 +18,7 @@
           </template>
         </q-input>
 
-        <q-input filled v-model="formData.to" label="To Date" color="grey-9" readonly @click="$refs.toDateProxy.show()">
+        <q-input v-model="formData.to" label="To Date" color="grey-9" readonly @click="$refs.toDateProxy.show()">
           <template v-slot:append>
             <q-icon name="event" class="cursor-pointer">
               <q-popup-proxy ref="toDateProxy" transition-show="scale" transition-hide="scale">

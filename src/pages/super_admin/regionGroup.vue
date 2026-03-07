@@ -50,15 +50,15 @@
                     <q-table :rows="deActiveTableData" table-class="customSATableClass" :columns="columns1"
                         :filter="filterSearch1" v-model:pagination="paginationControl1"
                         :filter-method="myCustomSearchFilter" row-key="name" >
-                        <q-td v-slot:body-cell-regionGroup="props" :props="props">{{ props.row.regionName
+                        <template v-slot:body-cell-regionGroup="props"><q-td :props="props">{{ props.row.regionName
                                 == null ? "NA" : props.row.regionName
-                        }}</q-td>
-                        <q-td v-slot:body-cell-action1="props" :props="props">
+                        }}</q-td></template>
+                        <template v-slot:body-cell-action1="props"><q-td :props="props">
                             <div class="row no-wrap no-padding">
                           // <q-btn  no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md" @click="fnShowEditRegions(props.row)" flat class="text-light-blue" ></q-btn>
              //<q-btn  no-caps no-wrap label="Active" icon="far fa-minus-square" size="md" @click="fnActiveRegionGroup(props.row)" flat class="text-positive" ></q-btn>
                             </div>
-                        </q-td>
+                        </q-td></template>
 
                         <template v-slot:top="props">
 

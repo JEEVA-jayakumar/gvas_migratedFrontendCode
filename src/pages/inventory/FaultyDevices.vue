@@ -21,7 +21,7 @@
       >
        
      
-        <template slot="top"  class="bottom-border">
+        <template v-slot:top  class="bottom-border">
           <!--START: table filter,search -->
           <div class="col-md-4">
           <q-select

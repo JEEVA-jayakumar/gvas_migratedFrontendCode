@@ -218,19 +218,19 @@
                     :rows="getAllAggregatorsRegionalInventorySerialNumbersByDevice" :columns="columnData"
                     :filter="filter" v-model:pagination="paginationControl" :loading="toggleAjaxLoadFilter"
                     row-key="name">
-                    <q-td v-slot:body-cell-action="props" :props="props" v-if="info == 6">
+                    <template v-slot:body-cell-action="props"><q-td v-if="info == 6" :props="props">
                         <div class="row no-wrap no-padding">
                             <q-btn dense no-caps no-wrap label="Usable" icon="fa fa-check square" size="md"
                                 @click="fnShowUsable(props.row)" flat class="text-light-blue"></q-btn>
                             <q-btn dense no-caps no-wrap label="Faulty" icon="close" size="md"
                                 @click="fnShowFaulty(props.row)" flat class="text-negative"></q-btn>
                         </div>
-                    </q-td>
-                    <q-td v-slot:body-cell-device_type="props" :props="props">{{
+                    </q-td></template>
+                    <template v-slot:body-cell-device_type="props"><q-td :props="props">{{
                         props.row.aggregatorDevice
                             ==
                             null ? 'NA' : props.row.aggregatorDevice.deviceName
-                    }}</q-td>
+                    }}</q-td></template>
                     <template v-slot:top="props" class="bottom-border">
                         <!--START: table filter,search -->
                         <div class="col-md-6">

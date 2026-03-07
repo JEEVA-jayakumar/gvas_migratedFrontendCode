@@ -16,34 +16,34 @@
         :rows-per-page-options="[5, 10, 15, 20]"
         @request="ajaxLoadAllLeadInfo"
       >
-        <q-td v-slot:body-cell-createdDate="props" :props="props">
+        <template v-slot:body-cell-createdDate="props"><q-td :props="props">
           <span class="label">{{ $moment(props.row.createdDate).format("Do MMM Y") }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-tid="props" :props="props">
+        </q-td></template>
+        <template v-slot:body-cell-tid="props"><q-td :props="props">
           <span class="label text-primary"># {{ props.row.serviceRequestData.tid }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-ticketid="props" :props="props">
+        </q-td></template>
+        <template v-slot:body-cell-ticketid="props"><q-td :props="props">
           <span class="label text-primary"
             ># {{ props.row.serviceRequestData.serviceReqTicketId }}</span
           >
-        </q-td>
-        <q-td v-slot:body-cell-statusReport="props" :props="props">{{
+        </q-td></template>
+        <template v-slot:body-cell-statusReport="props"><q-td :props="props">{{
           props.row.serviceRequestType.name
-        }}</q-td>
+        }}</q-td></template>
 
-        <q-td v-slot:body-cell-merchantname="props" :props="props">{{
+        <template v-slot:body-cell-merchantname="props"><q-td :props="props">{{
           props.row.serviceRequestData.meName
-        }}</q-td>
-        <q-td v-slot:body-cell-merchantaddress="props" :props="props">{{
+        }}</q-td></template>
+        <template v-slot:body-cell-merchantaddress="props"><q-td :props="props">{{
           props.row.serviceRequestData.address
-        }}</q-td>
-        <q-td v-slot:body-cell-typeofvisit="props" :props="props">{{
+        }}</q-td></template>
+        <template v-slot:body-cell-typeofvisit="props"><q-td :props="props">{{
           props.row.resolutionType
-        }}</q-td>
-        <!-- <q-td v-slot:body-cell-user="props" :props="props">{{
+        }}</q-td></template>
+        <!-- <template v-slot:body-cell-user="props"><q-td :props="props">{{
           props.row.id
-        }}</q-td> -->
-        <q-td v-slot:body-cell-viewDocument="props" :props="props">
+        }}</q-td></template> -->
+        <template v-slot:body-cell-viewDocument="props"><q-td :props="props">
           <div
             v-if="
               props.row.implementationFormMimeType == null ||
@@ -72,8 +72,8 @@
             </div>
           </div>
           <div v-else>NA Document</div>
-        </q-td>
-        <q-td v-slot:body-cell-pictureOfShop="props" :props="props">
+        </q-td></template>
+        <template v-slot:body-cell-pictureOfShop="props"><q-td :props="props">
           <div
             v-if="
               props.row.pictureOfShopMimeType == null ||
@@ -102,12 +102,12 @@
             </div>
           </div>
           <div v-else>NA Document</div>
-        </q-td>
-        <q-td v-slot:body-cell-closedate="props" :props="props">
+        </q-td></template>
+        <template v-slot:body-cell-closedate="props"><q-td :props="props">
           <span class="label">{{ $moment(props.row.updatedDate).format("Do MMM Y") }}</span>
-        </q-td>
+        </q-td></template>
 
-        <q-td v-slot:body-cell-status="props" :props="props">
+        <template v-slot:body-cell-status="props"><q-td :props="props">
           <span
             class="label text-positive"
             v-if="
@@ -127,11 +127,11 @@
             >Rejected</span
           >
           <span class="label text-amber" v-else>Pending</span>
-        </q-td>
-        <q-td v-slot:body-cell-device="props" :props="props">
+        </q-td></template>
+        <template v-slot:body-cell-device="props"><q-td :props="props">
           {{ props.row.serviceRequestData.deviceType }}
-        </q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
+        </q-td></template>
+        <template v-slot:body-cell-action="props"><q-td :props="props">
           <q-btn
             :disabled="props.row.serviceRequestSubTicketStatus.id == 102 "
             no-caps
@@ -142,8 +142,8 @@
             @click="fnshowservice(props.row)"
             color="green-7"
           ></q-btn>
-        </q-td>
-        <q-td v-slot:body-cell-data="props" :props="props">
+        </q-td></template>
+        <template v-slot:body-cell-data="props"><q-td :props="props">
           <q-btn
             :disabled="props.row.serviceRequestSubTicketStatus.id == 102 "
             no-caps
@@ -154,7 +154,7 @@
             @click="fnShowConvertReject(props.row)"
             color="red-5"
           ></q-btn>
-        </q-td>
+        </q-td></template>
 
         <template slot="top">
           <div class="col-5">
