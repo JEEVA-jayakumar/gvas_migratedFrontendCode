@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <div>
-      <div class="col-md-6 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">Aggregator POD List</div>
+      <div class="col-md-6 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">Aggregator POD List</div>
       <!--ENDv-model: table title -->
       <!--START: table lead validation -->
       <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">

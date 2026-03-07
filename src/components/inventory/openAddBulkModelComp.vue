@@ -9,7 +9,7 @@
       <div class="q-pa-md">
         <div class="row text-center justify-center">
           <div class="col-md-12 q-py-sm bottom-border">
-            <div class="text-h6 text-grey-9">Bijlipay Bulk Upload</div>
+            <div class="q-title text-grey-9">Bijlipay Bulk Upload</div>
           </div>
 
           <div class="col-md-8" align="left">

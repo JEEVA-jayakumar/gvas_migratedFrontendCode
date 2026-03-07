@@ -7,7 +7,7 @@
         <div class="
             col-md-12
             capitalize
-            text-h6 q-px-lg q-py-md
+            q-title q-px-lg q-py-md
             text-weight-regular
             bottom-border
             text-grey-9

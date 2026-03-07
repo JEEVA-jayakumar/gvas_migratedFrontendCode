@@ -7,7 +7,7 @@
       :content-css="{padding:'50px 5px'}"
     >
       <div class="row items-center q-pa-md text-weight-regular bottom-border text-grey-9">
-        <div class="col text-h6">Lead Details Faulty</div>
+        <div class="col q-title">Lead Details Faulty</div>
         <div class="col-auto">
           <q-btn round @click="$emit('emitRefreshList')" outline color="dark" icon="clear"/>
         </div>

@@ -6,7 +6,7 @@
             <form>
                 <div class="column group">
                     <div class="col-md-12">
-                        <div class="text-h6 text-weight-regular">Edit Pod And Region</div>
+                        <div class="q-title text-weight-regular">Edit Pod And Region</div>
                     </div>
                     <!-- @click="clickFields($event)"-->
                     <div class="col-md-12">

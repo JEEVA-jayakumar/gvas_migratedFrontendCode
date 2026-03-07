@@ -7,7 +7,7 @@
         <div class="column">
           <!-- <pre>{{propAllScannedItemArr}}</pre> -->
           <div class="col-md-12 bottom-border">
-            <div class="text-h6 text-weight-regular q-py-sm">Aggregator POD Number</div>
+            <div class="q-title text-weight-regular q-py-sm">Aggregator POD Number</div>
           </div>
           <div class="col-md-8 q-pt-md" align="left">
             <q-input color="grey-9" v-model="formData.podNumber" label="Enter POD Number"
@@ -21,7 +21,7 @@
           </div>
 
           <!-- <div class="col-md-12 bottom-border">
-              <div class="text-h6 text-weight-regular q-py-sm">Device Count</div>
+              <div class="q-title text-weight-regular q-py-sm">Device Count</div>
             </div>
             <div class="col-md-8 q-pt-md" align="left">
               <q-input

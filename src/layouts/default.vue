@@ -1,26 +1,22 @@
 <template>
   <q-layout view="hHh Lpr lFf">
-    <q-header class="bg-white" flat>
+    <q-header flat>
       <customHeader
         :leftDrawerOpen="leftDrawerOpen"
-        @fnToggleSideMenu="fnMainToggleSideMenu"
+        @fnToggleSideMenu="toggleSideMenu"
       />
     </q-header>
 
     <q-drawer
       v-model="leftDrawerOpen"
+      @update:model-value="updateLeftDrawerOpen"
       show-if-above
-      bordered
-      :width="260"
+      :width="250"
       :breakpoint="500"
-      class="text-white"
-      :style="{ background: getComputedColor }"
+      class="shadow-9"
+      style="background-color: #531b64 !important;"
     >
-      <div class="q-py-md q-px-lg flex items-center" style="height: 65px; background: rgba(0,0,0,0.1)">
-        <img src="~assets/images/logo.png" style="height: 35px" />
-      </div>
-
-      <q-scroll-area style="height: calc(100% - 65px)" :thumb-style="{
+      <q-scroll-area style="height: 100%; margin-top: 65px;" :thumb-style="{
         right: '2px',
         borderRadius: '5px',
         backgroundColor: '#61116a',
@@ -42,7 +38,6 @@
             class="aggregator-select"
           />
         </div>
-
         <SidebarMenu :menus="currentMenus" />
       </q-scroll-area>
     </q-drawer>
@@ -69,9 +64,7 @@ export default {
   },
   data() {
     return {
-      leftDrawerOpen: this.$q.localStorage.getItem("leftDrawerOpen") !== null
-        ? this.$q.localStorage.getItem("leftDrawerOpen")
-        : (this.$q.platform.is.desktop && this.$route.name != 'leadDataEntry'),
+      leftDrawerOpen: false,
       propShowDatas: false,
       menuListName: '',
       menuListNameSat: '',
@@ -349,25 +342,21 @@ export default {
             id: 1,
             to: "/finance/payment/verification/tracker",
             name: "Payment Verification Tracker",
-            icon: "verified_user",
           },
           {
             id: 2,
             to: "/finance/finance/approved/tracker",
             name: "Finance Approved Tracker",
-            icon: "check_circle",
           },
           {
             id: 3,
             to: "/finance/lost/finance",
             name: "Lost/Stolen",
-            icon: "report_problem",
           },
           {
             id: 4,
             to: "/finance/PosInventory",
             name: "Pos Inventory",
-            icon: "inventory_2",
           },
         ],
         inventory: [
@@ -602,31 +591,26 @@ export default {
             id: 1,
             to: "/crm/phonepePendingCrm",
             name: "Phonepe Service Request",
-            icon: "contact_support",
           },
           {
             id: 2,
             to: "/crm/bijlipayCrm",
             name: "Bijlipay Service Request",
-            icon: "support_agent",
           },
           {
             id: 3,
             to: "/crm/globalTicketSearch",
             name: "Global Ticket Search",
-            icon: "search",
           },
           {
             id: 288,
             to: "/crm/docviewer",
             name: "DOC View",
-            icon: "visibility",
           },
           {
             id: 888,
             to: "/crm/serviceticket",
             name: "Service Ticket",
-            icon: "confirmation_number",
           },
         ],
         opsHead: [
@@ -634,14 +618,12 @@ export default {
             id: 2,
             to: "/ops/head/exceptions",
             name: "Exceptions",
-            icon: "assignment_late",
             subItems: [],
           },
           {
             id: 3,
             to: null,
             name: "Reports",
-            icon: "bar_chart",
             subItems: [
               {
                 id: 1,
@@ -681,31 +663,26 @@ export default {
             id: 1,
             to: "/sales/manager/lead/allocation/tracker",
             name: "Lead Allocation Tracker",
-            icon: "assignment",
           },
           {
             id: 2,
             to: "/sales/manager/leads/status",
             name: "Leads Status",
-            icon: "query_stats",
           },
           {
             id: 3,
             to: "/sales/manager/revenue/trackers",
             name: "Revenue Trackers",
-            icon: "payments",
           },
           {
             id: 4,
             to: "/sales/manager/pricing/exception/verification",
             name: "Pricing Exception Verification",
-            icon: "fact_check",
           },
           {
             id: 6,
             to: "/sales/manager/aging/tracker/pending/leads",
             name: "Aging Tracker for Pending Leads",
-            icon: "history",
           },
         ],
         superAdmin: [
@@ -1028,15 +1005,14 @@ export default {
 
   created() {
     this.findMenuAuth();
+    const savedState = localStorage.getItem("leftDrawerOpen");
+    this.leftDrawerOpen = savedState === null ? true : savedState === "true";
   },
   beforeMount() {
     this.fnAjaxGetAllMenuList();
   },
   computed: {
     ...mapGetters("superAdminAggregators", ["getActiveCreatedAggregatorList"]),
-    getComputedColor() {
-      return this.$route.fullPath.includes("super/admin") ? "#773581" : "#202c3f";
-    },
     currentMenus() {
       let menuItems = [];
       const userInfo = JSON.parse(localStorage.getItem("u_i"));
@@ -1130,9 +1106,13 @@ export default {
         else this.$router.push("/inventory/Mobikwikhome");
       }
     },
-    fnMainToggleSideMenu() {
+    toggleSideMenu() {
       this.leftDrawerOpen = !this.leftDrawerOpen;
-      this.$q.localStorage.set("leftDrawerOpen", this.leftDrawerOpen);
+      localStorage.setItem("leftDrawerOpen", this.leftDrawerOpen);
+    },
+    updateLeftDrawerOpen(val) {
+      this.leftDrawerOpen = val;
+      localStorage.setItem("leftDrawerOpen", val);
     },
     fnAjaxGetAllMenuList() {
       this.GET_ACTIVE_CREATED_AGGREGATORS_LIST()

@@ -4,12 +4,12 @@
         <div>
             <div class="row bottom-border q-px-md q-py-md items-center">
                 <!--START: table title -->  
-                <div class="col-md-12 text-h6 text-weight-regular text-grey-9">Inventory in Transit</div>
+                <div class="col-md-12 q-title text-weight-regular text-grey-9">Inventory in Transit</div>
                 <!--END: table title -->
             </div>
             <div class="row">
               <!--START: table title -->  
-              <div class="col-md-4 text-h6 text-weight-regular text-grey-9">
+              <div class="col-md-4 q-title text-weight-regular text-grey-9">
                 <div class="row">
                    <div class="col-md-12">
                     <q-list class="no-padding" no-border	separator>
@@ -69,7 +69,7 @@
                    </div>
                 </div>
               </div>
-              <div class="col-md-8 text-h6 text-weight-regular text-grey-9">
+              <div class="col-md-8 q-title text-weight-regular text-grey-9">
                 <div class="row items-center">
                   <div class="col-md-3">
                       <q-list class="no-padding" no-border separator>

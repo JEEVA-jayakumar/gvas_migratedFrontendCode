@@ -2,7 +2,7 @@
   <q-page>
     <div>
       <div
-        class="col-md-6 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+        class="col-md-6 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >Inventory with SO/Bill Partner/Sub Region</div>
       <q-table
         table-class="customTableClass"

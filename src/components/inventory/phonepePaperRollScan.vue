@@ -13,7 +13,7 @@
   
         <form>
           <div class="column group">
-            <div class="text-h6"></div>
+            <div class="q-title"></div>
           </div> 
           <!-- <q-item-section class="text-body1">{{this.formData.podNumber.podNumber}}</q-item-section> -->
           <!-- <p>{{ formData.podNumber.podNumber }}</p> -->

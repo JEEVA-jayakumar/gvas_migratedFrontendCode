@@ -9,7 +9,7 @@
     <div  v-if="formData.flag == 1">
       <div class="row bottom-border q-px-md q-py-md items-center">
         <!--START: table title -->
-        <div class="col-6 col-sm-4 col-md-8 text-h6 text-weight-regular text-grey-9">Bijlipay Allocate Device</div>
+        <div class="col-6 col-sm-4 col-md-8 q-title text-weight-regular text-grey-9">Bijlipay Allocate Device</div>
          <div class="col-md-12 col-md-6 q-pt-md group" align="right">
           <q-btn
             @click="$router.push('/inventory/central')"
@@ -144,7 +144,7 @@
           <div class="col-md-3">
             <div  class="col-md-9 col-sm-12 col-xs-12">
               <div class="row bottom-border q-px-md q-py-md items-center">
-              <div class="col-6 col-sm-4 col-md-8 text-h6 text-weight-regular text-grey-9 align1"
+              <div class="col-6 col-sm-4 col-md-8 q-title text-weight-regular text-grey-9 align1"
               >Bijlipay Allocate QR</div>
             </div>
               <div v-if="formData.count != null" class="row">
