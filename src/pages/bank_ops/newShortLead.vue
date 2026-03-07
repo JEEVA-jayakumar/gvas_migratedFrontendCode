@@ -2,7 +2,7 @@
   <q-page>
     <div>
       <div
-        class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+        class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >Assign Short Lead</div>
       <div class="q-px-lg">
         <div class="text-body1 uppercase text-weight-medium text-grey-9 q-my-md">Merchant Details</div>
@@ -125,7 +125,7 @@
           </div>
           <div class="col">
             <q-select
-              :disable="deviceSelectOptions.length > 0"
+              :disable="!deviceSelectOptions.length"
               placeholder="Device Type"
               clearable
               color="grey-9"
@@ -134,6 +134,8 @@
               :error="$v.formData.device.id.$error"
               label="Type"
               :options="deviceSelectOptions"
+              emit-value
+              map-options
             />
             <p class="q-py-sm" v-if="deviceSelectOptions.length == 0">No data available</p>
           </div>
@@ -170,7 +172,7 @@
         <div class="row group q-mt-xs">
           <div class="col-md-4" v-if="formData.tempAssignedTo == 1">
             <q-select
-              :disable="RSMselectOptions.length > 0"
+              :disable="!RSMselectOptions.length"
               @blur="$v.formData.assignedOpsTo.id.$touch"
               :error="$v.formData.assignedOpsTo.id.$error"
               placeholder="Choose from the below"
@@ -179,12 +181,14 @@
               v-model="formData.assignedOpsTo.id"
               label="RSM Name"
               :options="RSMselectOptions"
+              emit-value
+              map-options
             />
-            <p class="q-py-sm" v-if="leadSourceSelectOptions.length == 0">No data available</p>
+            <p class="q-py-sm" v-if="RSMselectOptions.length == 0">No data available</p>
           </div>
           <div class="col-md-4" v-if="formData.tempAssignedTo == 2">
             <q-select
-              :disable="getAllRegionsData.length > 0"
+              :disable="!getAllRegionsData.length"
               placeholder="Choose Region"
               clearable
               color="grey-9"
@@ -193,12 +197,14 @@
               :options="getAllRegionsData"
               @clear="fnClearASMList"
               @update:model-value="fnFetchASMList()"
+              emit-value
+              map-options
             />
-            <p class="q-py-xs" v-if="leadSourceSelectOptions.length == 0">No data available</p>
+            <p class="q-py-xs" v-if="getAllRegionsData.length == 0">No data available</p>
           </div>
           <div class="col-md-4" v-if="formData.tempAssignedTo == 2">
             <q-select
-              :disable="ASMselectOptions.length > 0"
+              :disable="!ASMselectOptions.length"
               @blur="$v.formData.assignedOpsTo.id.$touch"
               :error="$v.formData.assignedOpsTo.id.$error"
               placeholder="Choose from the below"
@@ -207,8 +213,10 @@
               v-model="formData.assignedOpsTo.id"
               label="ASM Name"
               :options="ASMselectOptions"
+              emit-value
+              map-options
             />
-            <p class="q-py-xs" v-if="leadSourceSelectOptions.length == 0">No data available</p>
+            <p class="q-py-xs" v-if="ASMselectOptions.length == 0">No data available</p>
           </div>
         </div>
         <div class="row">
@@ -228,6 +236,7 @@
 </template>
 
 <script>
+import { useVuelidate } from "@vuelidate/core";
 import {
   required,
   maxValue,
@@ -237,6 +246,9 @@ import {
 } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   name: "newShortLead",
 
   data() {
@@ -318,6 +330,9 @@ export default {
   },
 
   computed: {
+    $v() {
+      return this.v$;
+    },
     ...mapGetters("SuperAdminUsers", ["getAllStatesData", "getAllRegionsData"]),
     ...mapGetters("SA_Devices", ["getAllDevicesInfo"]),
     ...mapGetters("BankOpsShortLead", [

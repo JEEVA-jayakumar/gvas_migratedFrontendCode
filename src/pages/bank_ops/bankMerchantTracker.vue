@@ -9,7 +9,7 @@
     />
     <!--START: table title -->
     <div
-      class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
     >Merchant Tracker</div>
     <!--END: table title -->
     <!--START: table lead validation -->
@@ -17,31 +17,35 @@
       table-class="customTableClass"
       :rows="getAllMerchantTrackerInfo"
       :columns="columns"
-      :filter="filter" v-model:pagination="paginationControl"
+      :filter="filter"
+      v-model:pagination="paginationControl"
       row-key="name"
     >
       <!--START: table body modification -->
-      <q-td
-        v-slot:body-cell-createdAt="props"
-        :props="props"
-      >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-      <q-td
-        v-slot:body-cell-shortleadDate="props"
-        :props="props"
-      >{{ $moment(props.row.shortleadDate).format("Do MMM Y") }}</q-td>
-      <q-td
-        v-slot:body-cell-leadSource="props"
-        :props="props"
-      >{{props.row.leadSource.sourceName}}</q-td>
-      <q-td
-        v-slot:body-cell-lead_id="props"
-        :props="props"
-        class="cursor-pointer"
-        @click="toggleLeadInformation(props.row)"
-      >
-        <span class="label text-primary"># {{props.row.leadNumber}}</span>
-      </q-td>
-      <q-td v-slot:body-cell-leadStatus="props" :props="props">
+      <template v-slot:body-cell-createdAt="props">
+        <q-td :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
+      </template>
+
+      <template v-slot:body-cell-shortleadDate="props">
+        <q-td :props="props">{{ $moment(props.row.shortleadDate).format("Do MMM Y") }}</q-td>
+      </template>
+
+      <template v-slot:body-cell-leadSource="props">
+        <q-td :props="props">{{props.row.leadSource.sourceName}}</q-td>
+      </template>
+
+      <template v-slot:body-cell-lead_id="props">
+        <q-td
+          :props="props"
+          class="cursor-pointer"
+          @click="toggleLeadInformation(props.row)"
+        >
+          <span class="label text-primary"># {{props.row.leadNumber}}</span>
+        </q-td>
+      </template>
+
+      <template v-slot:body-cell-leadStatus="props">
+        <q-td :props="props">
         <q-chip
           class="text-positive text-weight-bold"
           v-if="props.row.leadStatus == $LEAD_STATUS_SHORT_LEAD"
@@ -94,7 +98,8 @@
           class="text-positive text-weight-bold"
           v-else-if="props.row.leadStatus == $LEAD_STATUS_IMPLEMENT_APPROVED"
         >Implementation Approved</q-chip>
-      </q-td>
+        </q-td>
+      </template>
       <!--END: table body modification -->
       <template v-slot:top="props">
         <!--START: table fullscreen mode -->
