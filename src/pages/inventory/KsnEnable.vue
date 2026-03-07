@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="col-12 text-h6 q-my-lg text-weight-regular" align="center">
+    <div class="col-12 q-title q-my-lg text-weight-regular" align="center">
       KSN Enable
     </div>
     <form>

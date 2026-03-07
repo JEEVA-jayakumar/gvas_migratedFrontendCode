@@ -4,7 +4,7 @@
         <div>
             <div class="row bottom-border q-px-md q-py-md items-center">
                 <!--START: table title -->
-                <div class="col-6 col-md-6 text-h6 text-weight-regular text-grey-9">Bijlipay Inventory With Region</div>
+                <div class="col-6 col-md-6 q-title text-weight-regular text-grey-9">Bijlipay Inventory With Region</div>
             </div>
             <div class="row bottom-border group q-px-md q-py-md items-center text-weight-regular text-grey-9">
                 <!--START: table title   :disable="disableDeviceTypeSelection" -->

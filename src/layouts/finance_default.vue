@@ -1,24 +1,22 @@
 <template>
   <q-layout view="hHh Lpr lFf">
-    <q-header class="bg-white" flat>
+    <q-header flat>
       <customHeader
         :leftDrawerOpen="leftDrawerOpen"
-        @fnToggleSideMenu="fnMainToggleSideMenu"
+        @fnToggleSideMenu="toggleSideMenu"
       />
     </q-header>
 
     <q-drawer
       v-model="leftDrawerOpen"
+      @update:model-value="updateLeftDrawerOpen"
       show-if-above
-      bordered
-      :width="260"
+      :width="250"
       :breakpoint="500"
-      class="bg-dark text-white"
+      class="shadow-9"
+      style="background-color: #531b64 !important;"
     >
-      <div class="q-py-md q-px-lg flex items-center" style="height: 65px; background: rgba(0,0,0,0.1)">
-        <img src="~assets/images/logo.png" style="height: 35px" />
-      </div>
-      <q-scroll-area style="height: calc(100% - 65px)" :thumb-style="{
+      <q-scroll-area style="height: 100%; margin-top: 65px;" :thumb-style="{
         right: '2px',
         borderRadius: '5px',
         backgroundColor: '#61116a',
@@ -49,45 +47,47 @@ export default {
   },
   data() {
     return {
-      leftDrawerOpen: this.$q.localStorage.getItem("leftDrawerOpen") !== null
-        ? this.$q.localStorage.getItem("leftDrawerOpen")
-        : this.$q.platform.is.desktop,
+      leftDrawerOpen: false,
       menus: [
         {
           id: 1,
           to: "/finance/payment/verification/tracker",
           name: "Payment Verification Tracker",
-          icon: "verified_user",
         },
         {
           id: 2,
           to: "/finance/finance/approved/tracker",
           name: "Finance Approved Tracker",
-          icon: "check_circle",
         },
         {
           id: 3,
           to: "/finance/lost/finance",
           name: "Lost/Stolen",
-          icon: "report_problem",
         },
         {
           id: 4,
           to: "/finance/PosInventory",
           name: "Pos Inventory",
-          icon: "inventory_2",
         },
       ],
     };
   },
+  created() {
+    const savedState = localStorage.getItem("leftDrawerOpen");
+    this.leftDrawerOpen = savedState === null ? true : savedState === "true";
+  },
   methods: {
-    fnMainToggleSideMenu() {
+    toggleSideMenu() {
       this.leftDrawerOpen = !this.leftDrawerOpen;
-      this.$q.localStorage.set("leftDrawerOpen", this.leftDrawerOpen);
+      localStorage.setItem("leftDrawerOpen", this.leftDrawerOpen);
+    },
+    updateLeftDrawerOpen(val) {
+      this.leftDrawerOpen = val;
+      localStorage.setItem("leftDrawerOpen", val);
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 </style>

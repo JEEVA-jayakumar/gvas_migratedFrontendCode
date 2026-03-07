@@ -23,7 +23,7 @@
 
       <form>
         <div class="column group">
-          <div class="text-h6"></div>
+          <div class="q-title"></div>
         </div>
         <q-input
           readonly

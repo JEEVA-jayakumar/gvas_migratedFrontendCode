@@ -2,7 +2,7 @@
   <q-page>
     <!-- content -->
     <div>
-      <div class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
+      <div class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
         Bijlipay Global Serial Number/TID Search
       </div>
       <div class="row gutter-x-xs gutter-y-xs q-pt-md justify-around items-end">

@@ -4,7 +4,7 @@
     <div>
       <div class="row bottom-border q-px-md q-py-md items-center">
         <!--START: table title -->
-        <div class="col-6 col-sm-4 col-md-8 text-h6 text-weight-regular text-grey-9">Aggregator Allocate Device</div>
+        <div class="col-6 col-sm-4 col-md-8 q-title text-weight-regular text-grey-9">Aggregator Allocate Device</div>
         <div class="col-md-12 col-md-6 q-pt-md group" align="right">
           <q-btn
               @click="$router.push('/inventory/PhonepeInventory')"

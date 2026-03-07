@@ -5,7 +5,7 @@
       <!--START: table title -->
       <div class="row bottom-border q-px-md q-py-sm items-center">
         <!--START: table title -->
-        <div class="col-12 col-lg-4 text-h6 text-weight-regular text-grey-9">Bijlipay Central Inventory </div>
+        <div class="col-12 col-lg-4 q-title text-weight-regular text-grey-9">Bijlipay Central Inventory </div>
         <div class="col-12 col-lg-8 group" align="right">
           <q-btn
             outline
@@ -70,7 +70,7 @@
       <div class="row">
         <div class="col-md-3 group q-pa-md">
           <div
-            class="q-pa-md q-ma-xs cursor-pointer border-radius-10"
+            class="q-pa-md cursor-pointer"
             :class="[activeItemId === index ? 'shadow-5 bg-grey-5' : 'shadow-0']"
             @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index,deviceInfo)"
             v-for="(deviceInfo,index) in getAllInventoryDevicesTypesWithCountData"
@@ -79,9 +79,9 @@
             align="center"
           >
             <div>
-              <big class="text-weight-bold">{{deviceInfo.count}}</big>
+              <big>{{deviceInfo.count}}</big>
             </div>
-            <div class="text-caption">{{deviceInfo.device.deviceName}}</div>
+            <div>{{deviceInfo.device.deviceName}}</div>
           </div>
         </div>
         <div class="col-md-9">
@@ -113,7 +113,7 @@
 
                 <div class="col-md-5">
                   <downloadExcel
-                    :data="getAllInventoryDevicesData"
+                    :rows="getAllInventoryDevicesData"
                     :fields="json_fields"
                     name="CentralInventory.xls"
                   >
@@ -229,7 +229,7 @@ export default {
               count: this.getAllInventoryDevicesData.length,
               device: {
                 deviceName: "Total",
-                colorCode: "#eee"
+                colorCode: "666"
               }
             };
             this.getAllInventoryDevicesTypesWithCountData.unshift(allDevicesCount);

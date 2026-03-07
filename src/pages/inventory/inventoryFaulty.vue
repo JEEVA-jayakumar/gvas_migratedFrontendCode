@@ -4,7 +4,7 @@
     <div>
       <div class="row bottom-border q-px-md q-py-md items-center">
         <!--START: table title -->
-        <div class="col-6 col-md-6 text-h6 text-weight-regular text-grey-9">Bijlipay Faulty Inventory</div>
+        <div class="col-6 col-md-6 q-title text-weight-regular text-grey-9">Bijlipay Faulty Inventory</div>
         <div class="col-6 col-md-6" align="right">
           <q-btn
             icon="attach_file"
@@ -451,7 +451,7 @@ export default {
                 message: "Devices has been updated successfully",
                 icon: "thumb_up"
               });
-            }).onCancel(() => {
+            }).catch(() => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",

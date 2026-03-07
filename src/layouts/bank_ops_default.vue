@@ -1,28 +1,29 @@
 <template>
   <q-layout view="hHh Lpr lFf">
-    <q-header style="margin-left:0px" class="shadow-0 z-top" flat>
+    <q-header flat>
       <customHeader
         :leftDrawerOpen="leftDrawerOpen"
-        @fnToggleSideMenu="fnMainToggleSideMenu"
+        @fnToggleSideMenu="toggleSideMenu"
       />
     </q-header>
     <q-drawer
       class="shadow-9"
       v-model="leftDrawerOpen"
-      content-class="no-shadow"
-      :content-style="{background: '#202c3f',width:'250px'}"
+      @update:model-value="updateLeftDrawerOpen"
+      show-if-above
+      :width="250"
+      :breakpoint="500"
+      style="background-color: #531b64 !important;"
     >
-      <q-list
-        no-border
-        link
-        inset-delimiter
-        highlight
-        style="padding-top:65px"
-      >
-        <q-item v-for="menu in menus" :key="menu.id" :to="menu.to" class="menu-main-item-color">
-          <q-item-section class="menu-item-color">{{menu.name}}</q-item-section>
-        </q-item>
-      </q-list>
+      <q-scroll-area style="height: 100%; margin-top: 65px;" :thumb-style="{
+        right: '2px',
+        borderRadius: '5px',
+        backgroundColor: '#61116a',
+        width: '5px',
+        opacity: 0.75,
+      }">
+        <SidebarMenu :menus="menus" />
+      </q-scroll-area>
     </q-drawer>
     <q-page-container>
       <customBody></customBody>
@@ -33,17 +34,18 @@
 <script>
 import customHeader from "../components/customHeader.vue";
 import customBody from "../components/customBody.vue";
+import SidebarMenu from "../components/SidebarMenu.vue";
+
 export default {
   components: {
     customHeader,
     customBody,
+    SidebarMenu,
   },
-  name: "LayoutDefault",
+  name: "LayoutBankOps",
   data() {
     return {
-      leftDrawerOpen: this.$q.localStorage.getItem("leftDrawerOpen") !== null
-        ? this.$q.localStorage.getItem("leftDrawerOpen")
-        : this.$q.platform.is.desktop,
+      leftDrawerOpen: false,
       menus: [
         {
           id: 1,
@@ -58,14 +60,22 @@ export default {
       ],
     };
   },
+  created() {
+    const savedState = localStorage.getItem("leftDrawerOpen");
+    this.leftDrawerOpen = savedState === null ? true : savedState === "true";
+  },
   methods: {
-    fnMainToggleSideMenu() {
+    toggleSideMenu() {
       this.leftDrawerOpen = !this.leftDrawerOpen;
-      this.$q.localStorage.set("leftDrawerOpen", this.leftDrawerOpen);
+      localStorage.setItem("leftDrawerOpen", this.leftDrawerOpen);
+    },
+    updateLeftDrawerOpen(val) {
+      this.leftDrawerOpen = val;
+      localStorage.setItem("leftDrawerOpen", val);
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 </style>

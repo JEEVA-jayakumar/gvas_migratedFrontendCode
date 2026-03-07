@@ -419,7 +419,7 @@ export default {
         //     this.addBasicInformation = response
         //   }
         // }
-      }).onCancel(() => {
+      }).catch(() => {
         this.$q.notify({
           color: 'negative',
           position: 'bottom',
@@ -463,7 +463,7 @@ export default {
         this.$q.loading.hide()
       })
       
-    }).onCancel(() => {
+    }).catch(() => {
         this.$q.notify({
           color: 'negative',
           position: 'bottom',

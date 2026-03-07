@@ -2,7 +2,7 @@
   <q-dialog v-model="toggleModel" persistent>
     <q-card style="min-width: 40vw; padding: 30px;">
       <q-card-section>
-        <div class="text-h6 text-weight-regular text-center">
+        <div class="q-title text-weight-regular text-center">
           <strong>Download Completed Tickets Reports</strong>
         </div>
       </q-card-section>

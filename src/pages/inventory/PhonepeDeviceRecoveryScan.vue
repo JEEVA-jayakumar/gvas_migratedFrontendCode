@@ -4,7 +4,7 @@
       <div>
         <div class="row bottom-border q-px-md q-py-md items-center">
           <!--START: table title -->
-          <div class="col-md-8 text-h6 text-weight-regular text-grey-9">Aggregator Add New Device Recovery - Scan & Upload</div>
+          <div class="col-md-8 q-title text-weight-regular text-grey-9">Aggregator Add New Device Recovery - Scan & Upload</div>
           <!--END: table title -->
         </div>
         <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">

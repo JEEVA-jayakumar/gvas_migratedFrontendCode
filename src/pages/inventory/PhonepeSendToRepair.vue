@@ -6,7 +6,7 @@
         <q-pull-to-refresh :handler="PullToRefresh" inline>
           <!--START: table title -->
           <div
-            class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+            class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
           >
             Send To Repair
           </div>

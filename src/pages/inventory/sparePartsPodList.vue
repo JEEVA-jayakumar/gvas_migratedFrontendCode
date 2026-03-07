@@ -3,7 +3,7 @@
     <div>
       <!--STARTv-model: table title -->
       <div
-        class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular text-grey-9"
+        class="col-md-12 q-title q-px-lg q-py-md text-weight-regular text-grey-9"
       ></div>
       <!--END: table title -->
       <!-- //Common lead information in popup -->

@@ -6,7 +6,7 @@
         <!--START: table title -->
         <div class="
             col-6 col-sm-4 col-md-8
-            text-h6
+            q-title
             text-weight-regular text-grey-9
           ">
           Aggregator Allocation Type / So
