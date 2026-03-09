@@ -681,31 +681,31 @@ export default {
             id: 1,
             to: "/sales/manager/lead/allocation/tracker",
             name: "Lead Allocation Tracker",
-            icon: "assignment",
           },
           {
             id: 2,
             to: "/sales/manager/leads/status",
             name: "Leads Status",
-            icon: "query_stats",
           },
           {
             id: 3,
             to: "/sales/manager/revenue/trackers",
             name: "Revenue Trackers",
-            icon: "payments",
           },
           {
             id: 4,
             to: "/sales/manager/pricing/exception/verification",
-            name: "Pricing Exception Verification",
-            icon: "fact_check",
+            name: "Exception Approval",
+          },
+          {
+            id: 5,
+            to: "/sales/manager/leads/pending/assignment",
+            name: "Leads Pending Assignment",
           },
           {
             id: 6,
             to: "/sales/manager/aging/tracker/pending/leads",
             name: "Aging Tracker for Pending Leads",
-            icon: "history",
           },
         ],
         superAdmin: [
@@ -1035,7 +1035,16 @@ export default {
   computed: {
     ...mapGetters("superAdminAggregators", ["getActiveCreatedAggregatorList"]),
     getComputedColor() {
-      return this.$route.fullPath.includes("super/admin") ? "#773581" : "#202c3f";
+      if (this.$route.fullPath.includes("super/admin")) {
+        return "#531b64";
+      }
+      if (this.$route.fullPath.includes("sales/manager")) {
+        return "#531b64";
+      }
+      if (this.$route.fullPath.includes("/sat/")) {
+        return "#202c3f";
+      }
+      return "#202c3f";
     },
     currentMenus() {
       let menuItems = [];

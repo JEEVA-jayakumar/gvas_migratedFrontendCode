@@ -27,7 +27,7 @@
             :filter="filter" v-model:pagination="paginationControl"
             row-key="name">
             <template v-slot:body="props">
-              <q-tr :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']" :props="props" @mouseover="rowHover(props.row.__index)" @click="rowClick(props.row)" class="cursor-pointer">
+              <q-tr :class="[rowActiveId == props.rowIndex? 'bg-grey-4 text-dark':'']" :props="props" @mouseover="rowHover(props.rowIndex)" @click="rowClick(props.row, props.rowIndex)" class="cursor-pointer">
                 <q-td v-for="col in props.cols" :key="col.name" :props="props">
                   {{ col.value }}
                 </q-td>
@@ -58,8 +58,8 @@
               </div>
               <div class="col-md-9 col-sm-9 col-xs-6 q-pa-md">
                 <div class="custom-dimmed">Target</div>
-                <div class="text-h3" v-if="tableData.currentUser.incentive.targetRevenue == 0">Nil</div>
-                <div class="text-h3" v-else><q-icon size="14px" class="custom-dimmed" name="fas fa-rupee-sign"/>
+                <div class="q-display-1" v-if="tableData.currentUser.incentive.targetRevenue == 0">Nil</div>
+                <div class="q-display-1" v-else><q-icon size="14px" class="custom-dimmed" name="fas fa-rupee-sign"/>
                 &nbsp;{{tableData.currentUser.incentive.targetRevenue}}</div>
               </div>
             </div>
@@ -161,7 +161,7 @@ export default {
           required: true,
           label: "Name",
           align: "left",
-          field: "name",
+          field: row => row?.name || "NA",
           sortable: false
         },
         {
@@ -169,7 +169,7 @@ export default {
           required: true,
           label: "Role",
           align: "left",
-          field: "userRoleName",
+          field: row => row?.userRoleName || "NA",
           sortable: false
         }
       ],
@@ -198,7 +198,9 @@ export default {
     identifySalesHierarchyRole() {
       let self = this;
       /* Hierachy sales values has been taken from gloabl variables from plugin */
-      return _.find(JSON.parse(localStorage.getItem("u_i")).roles, function(
+      const userInfo = JSON.parse(localStorage.getItem("u_i"));
+      if (!userInfo || !userInfo.roles) return null;
+      return _.find(userInfo.roles, function(
         oo
       ) {
         return oo.hierarchy.hierarchyCode.includes(self.$HIERARCHY_SALES);
@@ -227,16 +229,19 @@ export default {
     fnLoadAllTableData(item) {
       //Setting up values when on new load and recursive actions
       let requestParams;
+      const salesRole = this.identifySalesHierarchyRole();
+      if (!salesRole) return;
+
       if (item == undefined) {
         //Values for on load action
         requestParams = {
-          heirarchyId: this.identifySalesHierarchyRole.hierarchy.id,
+          heirarchyId: salesRole.hierarchy.id,
           userId: JSON.parse(localStorage.getItem("u_i")).user.id
         };
       } else {
         //Values for on click action
         requestParams = {
-          heirarchyId: this.identifySalesHierarchyRole.hierarchy.id,
+          heirarchyId: salesRole.hierarchy.id,
           userId: item.id
         };
       }
@@ -263,6 +268,7 @@ export default {
     },
 
     rowClick(item, index) {
+      this.rowActiveId = index;
       if (item.hierarchyRoleLevel == this.$ROLE_HIERARCHY_SALES_SO) {
         let getIndex = this.items.findIndex(p => p.name == this.activeId);
         console.log("this.items", this.items);
@@ -283,8 +289,10 @@ export default {
         this.rowActiveId = index;
 
         //Values for on click action
+        const salesRole = this.identifySalesHierarchyRole();
+        if (!salesRole) return;
         let requestParams = {
-          heirarchyId: this.identifySalesHierarchyRole.hierarchy.id,
+          heirarchyId: salesRole.hierarchy.id,
           userId: item.id
         };
         this.REVENUE_TRACKER(requestParams).then(response => {

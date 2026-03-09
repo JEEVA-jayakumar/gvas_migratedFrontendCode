@@ -4,19 +4,19 @@
       <!-- Merchant details -->
       <div class="row q-ma-xs">
         <div class="col">
-          <div class="text-h6 q-my-md capitalize">{{shortLead.leadName}}</div>
+          <div class="q-title q-my-md capitalize">{{shortLead.leadName}}</div>
           <div
             class="text-primary cursor-pointer"
             @click="toggleLeadInformation(shortLead)"
           ># {{shortLead.id}}</div>
         </div>
         <div class="col">
-          <div class="text-h6 q-my-md">Contact</div>
+          <div class="q-title q-my-md">Contact</div>
           <div class="no-margin">{{shortLead.contactNumber}}</div>
           <div>{{shortLead.alternateContactNumber}}</div>
         </div>
         <div class="col">
-          <div class="text-h6 q-my-md">Address</div>
+          <div class="q-title q-my-md">Address</div>
           <div class="capitalize">{{shortLead.leadAddress}}</div>
         </div>
       </div>
@@ -510,7 +510,7 @@ export default {
                 this.$router.push(
                   "/sales/manager/pricing/exception/verification"
                 );
-              }).onCancel((error) => {
+              }).catch((error) => {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
@@ -558,7 +558,7 @@ export default {
                 this.$router.push(
                   "/sales/manager/pricing/exception/verification"
                 );
-              }).onCancel((error) => {
+              }).catch((error) => {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
@@ -600,7 +600,7 @@ export default {
                 this.$router.push(
                   "/sales/manager/pricing/exception/verification"
                 );
-              }).onCancel((error) => {
+              }).catch((error) => {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",

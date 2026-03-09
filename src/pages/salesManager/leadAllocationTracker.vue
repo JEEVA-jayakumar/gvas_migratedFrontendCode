@@ -36,12 +36,12 @@
       >
         <template v-slot:body-cell-dateCreated="props">
           <q-td :props="props">
-            {{ $moment(props.row.createdAt).format("Do MMM Y") }}
+            {{ props.row.createdAt ? $moment(props.row.createdAt).format("Do MMM Y") : 'NA' }}
           </q-td>
         </template>
         <template v-slot:body-cell-shortleadDate="props">
           <q-td :props="props">
-            {{ $moment(props.row.shortleadDate).format("Do MMM Y") }}
+            {{ props.row.shortleadDate ? $moment(props.row.shortleadDate).format("Do MMM Y") : 'NA' }}
           </q-td>
         </template>
         <template v-slot:body-cell-leadId="props">
