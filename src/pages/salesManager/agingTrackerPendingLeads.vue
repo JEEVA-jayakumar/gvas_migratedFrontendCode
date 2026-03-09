@@ -3,7 +3,7 @@
     <div>
       <!--STARTv-model: table title -->
       <div
-        class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+        class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >Aging Tracker for Pending Leads</div>
       <!--END: table title -->
       <!--START: table lead validation -->
@@ -53,9 +53,18 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators';
 export default {
-  name: "leadsPendingAssignment",
+  setup() {
+    return { v$: useVuelidate() };
+  },
+  name: "SalesManagerAgingTrackerPendingLeads",
+  computed: {
+    $v() {
+      return this.v$;
+    },
+  },
   data() {
     return {
       filter: "",

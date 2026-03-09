@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-5 col-sm-6 col-xs-12">
           <!--START: table title -->
-          <div class="text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">Revenue Tracker</div>
+          <div class="q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">Revenue Tracker</div>
           <!--END: table title -->
 
           <!-- START: Role/user selection -->
@@ -26,11 +26,13 @@
             v-model:columns="column"
             :filter="filter" v-model:pagination="paginationControl"
             row-key="name">
-            <q-tr v-slot:body="props" :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']" :props="props" @mouseover="rowHover(props.row.__index)" @click="rowClick(props.row)" class="cursor-pointer">
-              <q-td v-for="col in props.cols" :key="col.name" :props="props">
-                {{ col.value }}
-              </q-td>
-            </q-tr>
+            <template v-slot:body="props">
+              <q-tr :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']" :props="props" @mouseover="rowHover(props.row.__index)" @click="rowClick(props.row)" class="cursor-pointer">
+                <q-td v-for="col in props.cols" :key="col.name" :props="props">
+                  {{ col.value }}
+                </q-td>
+              </q-tr>
+            </template>
             <template v-slot:top="props">
               <!--START: table filter,search,excel download -->
               <div class="col">
@@ -56,8 +58,8 @@
               </div>
               <div class="col-md-9 col-sm-9 col-xs-6 q-pa-md">
                 <div class="custom-dimmed">Target</div>
-                <div class="q-display-1" v-if="tableData.currentUser.incentive.targetRevenue == 0">Nil</div>
-                <div class="q-display-1" v-else><q-icon size="14px" class="custom-dimmed" name="fas fa-rupee-sign"/>
+                <div class="text-h3" v-if="tableData.currentUser.incentive.targetRevenue == 0">Nil</div>
+                <div class="text-h3" v-else><q-icon size="14px" class="custom-dimmed" name="fas fa-rupee-sign"/>
                 &nbsp;{{tableData.currentUser.incentive.targetRevenue}}</div>
               </div>
             </div>
@@ -125,13 +127,17 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core'
 import { required, and } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 
 import RadialProgressBar from "vue-radial-progress";
 
 export default {
-  name: "revenueTrackers",
+  setup() {
+    return { v$: useVuelidate() };
+  },
+  name: "SalesManagerRevenueTrackers",
   components: {
     RadialProgressBar
   },
@@ -168,7 +174,14 @@ export default {
         }
       ],
       tableData: {
-        currentUser: {},
+        currentUser: {
+          incentive: {
+            targetRevenue: 0,
+            implementedRevenue: 0,
+            pendingImplementationRevenue: 0,
+            revenuePercentage: 0
+          }
+        },
         userList: []
       },
       activeId: "",
@@ -178,6 +191,9 @@ export default {
   },
 
   computed: {
+    $v() {
+      return this.v$;
+    },
     ...mapGetters("revenueTracker", ["revenueTrackerInfo"]),
     identifySalesHierarchyRole() {
       let self = this;

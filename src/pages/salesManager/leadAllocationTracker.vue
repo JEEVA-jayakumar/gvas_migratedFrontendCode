@@ -12,7 +12,7 @@
       <!--START: table title -->
       <div class="row bottom-border items-center">
         <div
-          class="col text-h6 q-px-lg q-py-md text-weight-regular text-grey-9"
+          class="col q-title q-px-lg q-py-md text-weight-regular text-grey-9"
         >Lead Allocation Tracker</div>
         <div class="col-auto q-px-lg q-py-sm">
           <q-btn
@@ -29,53 +29,50 @@
         title="Lead Validation"
         table-class="customTableClass"
         class="q-py-none"
-        :rows="getAllLeadAllocationData.assignedLeads"
-        v-model:columns="columns"
+        :rows="getAllLeadAllocationData.assignedLeads || []"
+        :columns="columns"
         :filter="filter" v-model:pagination="paginationControl"
-        row-key="name"
+        row-key="id"
       >
-        <q-td
-          v-slot:body-cell-dateCreated="props"
-          :props="props"
-        >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-shortleadDate="props"
-          :props="props"
-        >{{ $moment(props.row.shortleadDate).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-leadId="props"
-          :props="props"
-          class="cursor-pointer"
-          @click="toggleLeadInformation(props.row)"
-        >
-          <span class="text-primary cursor-pointer"># {{ props.row.leadNumber}}</span>
-        </q-td>
-        <q-td
-          class="breakAll"
-          v-slot:body-cell-leadAddress="props"
-          :props="props"
-        >{{props.row.leadAddress}}</q-td>
-        <q-td
-          v-slot:body-cell-assignedTo="props"
-          :props="props"
-        >{{props.row.assignedTo == null? 'NA':props.row.assignedTo.name}}</q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
-          <q-btn label="Edit" color="amber-9" icon="edit" @click="navigateToEditScreen(props.row)"/>
-        </q-td>
+        <template v-slot:body-cell-dateCreated="props">
+          <q-td :props="props">
+            {{ $moment(props.row.createdAt).format("Do MMM Y") }}
+          </q-td>
+        </template>
+        <template v-slot:body-cell-shortleadDate="props">
+          <q-td :props="props">
+            {{ $moment(props.row.shortleadDate).format("Do MMM Y") }}
+          </q-td>
+        </template>
+        <template v-slot:body-cell-leadId="props">
+          <q-td
+            :props="props"
+            class="cursor-pointer"
+            @click="toggleLeadInformation(props.row)"
+          >
+            <span class="text-primary cursor-pointer"># {{ props.row.leadNumber}}</span>
+          </q-td>
+        </template>
+        <template v-slot:body-cell-leadAddress="props">
+          <q-td
+            class="breakAll"
+            :props="props"
+          >
+            {{props.row.leadAddress}}
+          </q-td>
+        </template>
+        <template v-slot:body-cell-assignedTo="props">
+          <q-td :props="props">
+            {{props.row.assignedTo == null? 'NA':props.row.assignedTo.name}}
+          </q-td>
+        </template>
+        <template v-slot:body-cell-action="props">
+          <q-td :props="props">
+            <q-btn label="Edit" color="amber-9" icon="edit" @click="navigateToEditScreen(props.row)"/>
+          </q-td>
+        </template>
 
-        <template v-slot:top="props" class="bottom-border">
-          <!--START: table fullscreen mode -->
-          <!-- <div class="col-md-4" align="right">
-            <q-btn
-              :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
-              @click="props.toggleFullscreen"
-              class="q-mt-lg"
-              color="grey-9"
-              size="sm"
-            />
-          </div>-->
-          <!--END: table fullscreen mode -->
-          <!--START: table filter,search -->
+        <template v-slot:top>
           <div class="col-md-5">
             <q-input
               clearable
@@ -86,20 +83,6 @@
               class="q-mr-lg q-py-sm"
             />
           </div>
-          <!-- <div class="col-md-3">
-            <q-select
-            multiple
-            v-model="multipleSelect"
-            separator
-            color="grey-9"
-            :options="options"
-            placeholder="Select"
-            label= "Filter By"
-            class="q-mr-lg q-py-sm"
-            size="sm"
-            />
-          </div>-->
-          <!--END: table filter,search -->
         </template>
       </q-table>
       <!--END: table lead validation -->
@@ -113,12 +96,16 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 
 export default {
-  name: "leadsPendingAssignment",
+  setup() {
+    return { v$: useVuelidate() };
+  },
+  name: "SalesManagerLeadAllocationTracker",
   components: {
     generalLeadInformation
   },
@@ -138,7 +125,7 @@ export default {
           required: true,
           label: "Date Created",
           align: "left",
-          field: "createdAt",
+          field: row => row?.createdAt || "NA",
           sortable: true
         },
         {
@@ -146,7 +133,7 @@ export default {
           required: true,
           label: "Submitted On",
           align: "center",
-          field: "shortleadDate",
+          field: row => row?.shortleadDate || "NA",
           sortable: true
         },
         {
@@ -155,7 +142,7 @@ export default {
           label: "Lead ID",
           align: "left",
           field: row => {
-            return "# " + row.leadNumber;
+            return row?.leadNumber ? "# " + row.leadNumber : "NA";
           },
           sortable: true
         },
@@ -164,7 +151,7 @@ export default {
           required: true,
           label: "Merchant Name",
           align: "left",
-          field: "leadName",
+          field: row => row?.leadName || "NA",
           sortable: false
         },
         {
@@ -172,7 +159,7 @@ export default {
           required: true,
           label: "Location",
           align: "left",
-          field: "leadAddress",
+          field: row => row?.leadAddress || "NA",
           sortable: false
         },
         {
@@ -180,7 +167,7 @@ export default {
           required: true,
           label: "SO Name",
           align: "left",
-          field: "assignedTo",
+          field: row => row?.assignedTo?.name || "NA",
           sortable: false
         },
         {
@@ -188,7 +175,7 @@ export default {
           required: true,
           label: "",
           align: "left",
-          field: "action",
+          field: row => row?.id || "NA",
           sortable: false
         }
       ],
@@ -229,6 +216,9 @@ export default {
   },
 
   computed: {
+    $v() {
+      return this.v$;
+    },
     ...mapGetters("SalesManager_LeadAllocation", ["getAllLeadAllocationData"])
   },
 

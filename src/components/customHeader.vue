@@ -15,7 +15,7 @@
         <!-- {{localStorage.getItem('selectedTab')}} -->
         <div class="col-auto">
           <img
-            v-if="leftDrawerOpen || $route.path.includes('/sat/') || $route.path.includes('/bank/ops/') || $route.path.includes('/finance/')"
+            v-if="leftDrawerOpen || $route.path.includes('/sat/') || $route.path.includes('/bank/ops/') || $route.path.includes('/finance/') || $route.path.includes('/sales/manager/')"
             class="cursor-pointer"
             src="~assets/images/logo.png"
             style="height:38px;"
@@ -24,7 +24,7 @@
         <div class="col float-right" align="right">
           <q-btn flat color="grey-9" icon="far fa-bell" />
           <q-btn flat color="grey-9 vertical-middle">
-            <span class="mobile-hide capitalize text-weight-regular">{{getUserName}}</span>
+            <span class="mobile-hide capitalize text-weight-regular">{{propGetUserName || getUserName}}</span>
             <img
               src="~assets/images/user.png"
               style="height:30px; width:30px; padding: 5px"
@@ -71,7 +71,7 @@
 import toggleMyAccount from "./toggleMyAccount.vue";
 export default {
   name: "CustomHeader",
-  props: ["leftDrawerOpen", "getUserName"],
+  props: ["leftDrawerOpen", "propGetUserName"],
   components: {
     toggleMyAccount
   },

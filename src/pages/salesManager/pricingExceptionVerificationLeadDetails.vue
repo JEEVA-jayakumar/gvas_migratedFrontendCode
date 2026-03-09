@@ -347,13 +347,17 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core'
 import { required, numeric, requiredIf } from "@vuelidate/validators";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "leadDataEntry",
+  setup() {
+    return { v$: useVuelidate() };
+  },
+  name: "SalesManagerPricingExceptionVerificationLeadDetails",
   components: {
     generalLeadInformation,
   },
@@ -418,6 +422,9 @@ export default {
   },
 
   computed: {
+    $v() {
+      return this.v$;
+    },
     ...mapGetters("GlobalVariables", ["GLOBAL_FILE_FETCH_URL"]),
     ...mapGetters("SalesManagerException", ["getShortLeadInfo"]),
     getRsmReason() {
