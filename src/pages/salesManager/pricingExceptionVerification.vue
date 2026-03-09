@@ -14,7 +14,7 @@
         :class="getRoleForTableToggleRsmList == true? 'q-py-sm':'q-py-md'"
       >
         <!--START: table title -->
-        <div class="col text-h6 q-px-lg text-weight-regular text-grey-9">Pricing Exception Approval</div>
+        <div class="col q-title q-px-lg text-weight-regular text-grey-9">Pricing Exception Approval</div>
         <div class="col-auto">
           <q-btn
             flat
@@ -49,28 +49,32 @@
               row-key="name"
             >
               <!--START: table body modification -->
-              <q-td
-                v-slot:body-cell-leadNumber="props"
-                :props="props"
-                class="cursor-pointer"
-                @click="toggleLeadInformation(props.row)"
-              >
-                <span class="label text-primary"># {{props.row.leadNumber}}</span>
-              </q-td>
-              <q-td
-                v-slot:body-cell-submittoRSMDate="props"
-                :props="props"
-              >{{ $moment(props.row.submittoRSMDate).format("Do MMM Y") }}</q-td>
-              <q-td v-slot:body-cell-action="props" :props="props">
-                <q-btn
-                  highlight
-                  push
-                  outline
-                  color="purple-9"
-                  size="sm"
-                  @click="pushToDetailedScreenRsm(props.row.id)"
-                >Review</q-btn>
-              </q-td>
+              <template v-slot:body-cell-leadNumber="props">
+                <q-td
+                  :props="props"
+                  class="cursor-pointer"
+                  @click="toggleLeadInformation(props.row)"
+                >
+                  <span class="label text-primary"># {{props.row.leadNumber}}</span>
+                </q-td>
+              </template>
+              <template v-slot:body-cell-submittoRSMDate="props">
+                <q-td :props="props">
+                  {{ $moment(props.row.submittoRSMDate).format("Do MMM Y") }}
+                </q-td>
+              </template>
+              <template v-slot:body-cell-action="props">
+                <q-td :props="props">
+                  <q-btn
+                    highlight
+                    push
+                    outline
+                    color="purple-9"
+                    size="sm"
+                    @click="pushToDetailedScreenRsm(props.row.id)"
+                  >Review</q-btn>
+                </q-td>
+              </template>
               <!--END: table body modification -->
               <template v-slot:top="props" class="bottom-border">
                 <!--START: table filter,search -->
@@ -99,16 +103,17 @@
               :filter="filter" v-model:pagination="paginationControl"
               row-key="name"
             >
-              <q-tr
-                v-slot:body="props"
-                :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']"
-                :props="props"
-                @mouseover="rowHover(props.row.__index)"
-                @click="rowClick(props.row)"
-                class="cursor-pointer"
-              >
-                <q-td v-for="col in props.cols" :key="col.name" :props="props">{{ col.value }}</q-td>
-              </q-tr>
+              <template v-slot:body="props">
+                <q-tr
+                  :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']"
+                  :props="props"
+                  @mouseover="rowHover(props.row.__index)"
+                  @click="rowClick(props.row)"
+                  class="cursor-pointer"
+                >
+                  <q-td v-for="col in props.cols" :key="col.name" :props="props">{{ col.value }}</q-td>
+                </q-tr>
+              </template>
             </q-table>
             <!--ENDv-model: table data -->
             <!--START: table data -->
@@ -122,32 +127,27 @@
               row-key="name"
             >
               <!--START: table body modification -->
-              <q-td
-                v-slot:body-cell-leadNumber="props"
-                :props="props"
-                class="cursor-pointer"
-                @click="toggleLeadInformation(props.row)"
-              >
-                <span class="label text-primary"># {{props.row.leadNumber}}</span>
-              </q-td>
-              <!-- <q-td v-slot:body-cell-Status="props" :props="props">
-                <span
-                  class="label text-positive"
-                  v-if="props.row.leadInformation.verifpropiedCmsPricingStatus==2"
-                >ChangeManagement</span>
-
-                <span class="label text-amber" v-else>New Lead</span>
-              </q-td>-->
-              <q-td v-slot:body-cell-action="props" :props="props">
-                <q-btn
-                  highlight
-                  push
-                  outline
-                  color="purple-9"
-                  size="sm"
-                  @click="pushToDetailedScreen(props.row.id)"
-                >Review</q-btn>
-              </q-td>
+              <template v-slot:body-cell-leadNumber="props">
+                <q-td
+                  :props="props"
+                  class="cursor-pointer"
+                  @click="toggleLeadInformation(props.row)"
+                >
+                  <span class="label text-primary"># {{props.row.leadNumber}}</span>
+                </q-td>
+              </template>
+              <template v-slot:body-cell-action="props">
+                <q-td :props="props">
+                  <q-btn
+                    highlight
+                    push
+                    outline
+                    color="purple-9"
+                    size="sm"
+                    @click="pushToDetailedScreen(props.row.id)"
+                  >Review</q-btn>
+                </q-td>
+              </template>
               <!--END: table body modification -->
               <template v-slot:top="props" class="bottom-border">
                 <!--START: table filter,search -->
@@ -178,29 +178,33 @@
           :filter="filter" v-model:pagination="paginationControl"
           row-key="name"
         >
-          <q-td
-            v-slot:body-cell-submittoRSMDate="props"
-            :props="props"
-          >{{ $moment(props.row.submittoRSMDate).format("Do MMM Y") }}</q-td>
+          <template v-slot:body-cell-submittoRSMDate="props">
+            <q-td :props="props">
+              {{ $moment(props.row.submittoRSMDate).format("Do MMM Y") }}
+            </q-td>
+          </template>
           <!--START: table body modification -->
-          <q-td
-            v-slot:body-cell-leadNumber="props"
-            :props="props"
-            class="cursor-pointer"
-            @click="toggleLeadInformation(props.row)"
-          >
-            <span class="label text-primary"># {{props.row.leadNumber}}</span>
-          </q-td>
-          <q-td v-slot:body-cell-action="props" :props="props">
-            <q-btn
-              highlight
-              push
-              outline
-              color="purple-9"
-              size="sm"
-              @click="pushToDetailedScreenRsm(props.row.id)"
-            >Review</q-btn>
-          </q-td>
+          <template v-slot:body-cell-leadNumber="props">
+            <q-td
+              :props="props"
+              class="cursor-pointer"
+              @click="toggleLeadInformation(props.row)"
+            >
+              <span class="label text-primary"># {{props.row.leadNumber}}</span>
+            </q-td>
+          </template>
+          <template v-slot:body-cell-action="props">
+            <q-td :props="props">
+              <q-btn
+                highlight
+                push
+                outline
+                color="purple-9"
+                size="sm"
+                @click="pushToDetailedScreenRsm(props.row.id)"
+              >Review</q-btn>
+            </q-td>
+          </template>
           <!--END: table body modification -->
           <template v-slot:top="props" class="bottom-border">
             <!--START: table filter,search -->
@@ -224,12 +228,16 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 
 export default {
-  name: "revenueApproval",
+  setup() {
+    return { v$: useVuelidate() };
+  },
+  name: "SalesManagerPricingExceptionVerification",
   components: {
     generalLeadInformation,
   },
@@ -446,6 +454,9 @@ export default {
   },
 
   computed: {
+    $v() {
+      return this.v$;
+    },
     ...mapGetters("rsmPricingExceptionVerification", [
       "getPricingExceptionList",
       "pricingExceptionByRsmIDList",

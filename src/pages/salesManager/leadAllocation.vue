@@ -3,7 +3,7 @@
     <div>
       <!--START: table title -->
       <div
-        class="text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+        class="q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >Lead Allocation</div>
       <!--END: table title -->
       <div class="q-px-lg text-weight-regular text-grey-8">
@@ -213,6 +213,7 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core'
 import {
   required,
   minLength,
@@ -225,7 +226,10 @@ import {
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  // name: 'PageName',
+  setup() {
+    return { v$: useVuelidate() };
+  },
+  name: 'SalesManagerLeadAllocation',
   data() {
     return {
       enableRSMdropdown: false,

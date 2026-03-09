@@ -17,7 +17,7 @@
         @fetchCurrentUserLeads="fetchCurrentUserLeads"
       />
       <!--START: table title -->
-      <div class="text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">Lead Status</div>
+      <div class="q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">Lead Status</div>
       <!--END: table title -->
       <!-- START: Role/user selection -->
       <div class="q-px-lg q-py-md text-weight-regular text-grey-8">
@@ -104,8 +104,8 @@
       <div class="q-px-lg q-py-md row items-center">
         <!--START: table title -->
         <div
-          class="col-md-7 text-h6 text-weight-regular text-grey-9"
-        >{{getLeadStatusUserDetails == undefined?'':getLeadStatusUserDetails.leadCount.userRoleName}} List</div>
+          class="col-md-7 q-title text-weight-regular text-grey-9"
+        >{{getLeadStatusUserDetails?.leadCount?.userRoleName || ''}} List</div>
         <!--END: table title -->
         <!--START: table search -->
         <div class="col-md-5">
@@ -129,16 +129,17 @@
         :filter="filter" v-model:pagination="paginationControl"
         row-key="name"
       >
-        <q-tr
-          v-slot:body="props"
-          :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']"
-          :props="props"
-          @mouseover="rowHover(props.row.__index)"
-          @click="rowClick(props.row)"
-          class="cursor-pointer"
-        >
-          <q-td v-for="col in props.cols" :key="col.name" :props="props">{{ col.value }}</q-td>
-        </q-tr>
+        <template v-slot:body="props">
+          <q-tr
+            :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']"
+            :props="props"
+            @mouseover="rowHover(props.row.__index)"
+            @click="rowClick(props.row)"
+            class="cursor-pointer"
+          >
+            <q-td v-for="col in props.cols" :key="col.name" :props="props">{{ col.value }}</q-td>
+          </q-tr>
+        </template>
       </q-table>
       <!--END: table data -->
       <!-- content -->
@@ -177,18 +178,20 @@
             v-model:filter="filter" v-model:pagination="paginationControl"
             row-key="name"
           >
-            <q-td
-              v-slot:body-cell-shortleadDate="props"
-              :props="props"
-            >{{ $moment(props.row.shortleadDate).format("Do MMM Y") }}</q-td>
-            <q-td
-              v-slot:body-cell-id="props"
-              :props="props"
-              class="cursor-pointer"
-              @click="toggleLeadInformation(props.row)"
-            >
-              <span class="label text-primary">#{{props.row.leadNumber}}</span>
-            </q-td>
+            <template v-slot:body-cell-shortleadDate="props">
+              <q-td :props="props">
+                {{ $moment(props.row.shortleadDate).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-id="props">
+              <q-td
+                :props="props"
+                class="cursor-pointer"
+                @click="toggleLeadInformation(props.row)"
+              >
+                <span class="label text-primary">#{{props.row.leadNumber}}</span>
+              </q-td>
+            </template>
           </q-table>
           <!--END: table table aging pending/reject -->
         </q-tab-panel>
@@ -198,16 +201,20 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core'
 import { required, and } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 import userLeadInformation from "../../components/sat/userLeadInformation.vue";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   components: {
     generalLeadInformation,
     userLeadInformation
   },
-  name: "LeadStatus",
+  name: "SalesManagerLeadStatus",
   data() {
     return {
       propToggleLeadInformation: false,
@@ -489,6 +496,9 @@ export default {
     this.fnLoadAllTableData();
   },
   computed: {
+    $v() {
+      return this.v$;
+    },
     ...mapGetters("SM_LeadStatusInDetail", [
       "getLeadStatusUserDetails",
       "getLeadStatusUserDetails_ShortLeads",

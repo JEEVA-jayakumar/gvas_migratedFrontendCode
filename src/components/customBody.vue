@@ -1,21 +1,11 @@
 <template>
-    <transition
-        appear
-        v-on:before-enter="beforeEnter"
-        v-on:enter="enter"
-        v-on:after-enter="afterEnter"
-        :duration="{ enter: 200, leave: 100 }"
-        enter-active-class="animated fadeIn"
-        leave-active-class="animated fadeOut"
-        > 
-      <router-view />
-    </transition>
+  <router-view />
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 export default {
-  name: "LayoutDefault",
+  name: "CustomBody",
   data() {
     return {
       toggleAjaxLoadFilter: true
