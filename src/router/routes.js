@@ -1598,7 +1598,7 @@ const routes = [
   {
     name: "SH",
     path: "/sales/manager/",
-    component: Default_SalesManager,
+    component: Default_Layout,
     children: [{
       name: "leadAllocationAdd",
       path: "lead/allocation/tracker/add/new",

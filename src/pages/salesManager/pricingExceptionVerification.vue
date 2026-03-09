@@ -27,18 +27,17 @@
       </div>
       <!--END: table title -->
       <div v-if="shouldShowGivenPricefield">
-        <q-tabs v-model="tab" filled color="purple-9">
+        <q-tabs v-model="tab" align="left" active-color="purple-9" indicator-color="purple-9">
           <!-- Tabs - notice  -->
           <q-tab
-
-            :count="pricingExceptionCountForTab"
+            :alert="pricingExceptionCountForTab > 0"
             name="tab-1"
             label="Pending"
           />
           <q-tab name="tab-2" label="History" />
           <!-- Targets -->
 </q-tabs>
-<q-tab-panels v-model="tab" animated>
+<q-tab-panels v-model="tab" animated keep-alive>
 <q-tab-panel name="tab-1">
             <!--START: table lead validation -->
             <q-table
@@ -60,7 +59,7 @@
               </template>
               <template v-slot:body-cell-submittoRSMDate="props">
                 <q-td :props="props">
-                  {{ $moment(props.row.submittoRSMDate).format("Do MMM Y") }}
+                  {{ props.row.submittoRSMDate ? $moment(props.row.submittoRSMDate).format("Do MMM Y") : 'NA' }}
                 </q-td>
               </template>
               <template v-slot:body-cell-action="props">
@@ -105,10 +104,10 @@
             >
               <template v-slot:body="props">
                 <q-tr
-                  :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']"
+                  :class="[rowActiveId == props.rowIndex? 'bg-grey-4 text-dark':'']"
                   :props="props"
-                  @mouseover="rowHover(props.row.__index)"
-                  @click="rowClick(props.row)"
+                  @mouseover="rowHover(props.rowIndex)"
+                  @click="rowClick(props.row, props.rowIndex)"
                   class="cursor-pointer"
                 >
                   <q-td v-for="col in props.cols" :key="col.name" :props="props">{{ col.value }}</q-td>
@@ -180,7 +179,7 @@
         >
           <template v-slot:body-cell-submittoRSMDate="props">
             <q-td :props="props">
-              {{ $moment(props.row.submittoRSMDate).format("Do MMM Y") }}
+              {{ props.row.submittoRSMDate ? $moment(props.row.submittoRSMDate).format("Do MMM Y") : 'NA' }}
             </q-td>
           </template>
           <!--START: table body modification -->
@@ -265,7 +264,7 @@ export default {
           label: "SO name",
           align: "left",
           field: (row) => {
-            return row.createdBy.name;
+            return row.createdBy?.name || "NA";
           },
           sortable: false,
         },
@@ -275,7 +274,7 @@ export default {
           label: "Submitted to RSM date",
           align: "left",
           field: (row) => {
-            return row.submittoRSMDate;
+            return row.submittoRSMDate || "NA";
           },
           // field: "submittoRSMDate",
           sortable: false,
@@ -293,7 +292,6 @@ export default {
           required: true,
           label: "Type",
           align: "left",
-          field: "verifiedCmsPricingStatus",
           field: (row) => {
             return row.verifiedCmsPricingStatus == 2 ||
               row.verifiedCmsPricingStatus == 6
@@ -316,7 +314,7 @@ export default {
           label: "Regular plan",
           align: "left",
           field: (row) => {
-            return row.plan.planName;
+            return row.plan?.planName || "NA";
           },
           sortable: false,
         },
@@ -326,7 +324,7 @@ export default {
           label: "Merchant category",
           align: "left",
           field: (row) => {
-            return row.merchantCategory.merchantCategoryName;
+            return row.merchantCategory?.merchantCategoryName || "NA";
           },
           sortable: false,
         },
@@ -346,7 +344,7 @@ export default {
           label: "SO name",
           align: "left",
           field: (row) => {
-            return row.createdBy != undefined ? row.createdBy.name : "";
+            return row.createdBy != undefined ? row.createdBy.name : "NA";
           },
           sortable: false,
         },
@@ -357,7 +355,7 @@ export default {
           align: "left",
           // field: "submittoRSMDate",
           field: (row) => {
-            return row.submittoRSMDate;
+            return row.submittoRSMDate || "NA";
           },
           sortable: false,
         },
@@ -383,7 +381,7 @@ export default {
           label: "Regular plan",
           align: "left",
           field: (row) => {
-            return row.plan != undefined ? row.plan.planName : "";
+            return row.plan != undefined ? row.plan.planName : "NA";
           },
           sortable: false,
         },
@@ -395,7 +393,7 @@ export default {
           field: (row) => {
             return row.merchantCategory != undefined
               ? row.merchantCategory.merchantCategoryName
-              : "";
+              : "NA";
           },
           sortable: false,
         },
@@ -530,6 +528,7 @@ export default {
       this.rowActiveId = index;
     },
     rowClick(item, index) {
+      this.rowActiveId = index;
       this.$q.loading.show({
         delay: 0, // ms
         spinnerColor: "purple-9",

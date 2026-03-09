@@ -131,10 +131,10 @@
       >
         <template v-slot:body="props">
           <q-tr
-            :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']"
+            :class="[rowActiveId == props.rowIndex? 'bg-grey-4 text-dark':'']"
             :props="props"
-            @mouseover="rowHover(props.row.__index)"
-            @click="rowClick(props.row)"
+            @mouseover="rowHover(props.rowIndex)"
+            @click="rowClick(props.row, props.rowIndex)"
             class="cursor-pointer"
           >
             <q-td v-for="col in props.cols" :key="col.name" :props="props">{{ col.value }}</q-td>
@@ -146,10 +146,9 @@
       <q-tabs
         v-if="!viewTableFormatAndNotTabs"
         v-model="tabsModel"
-        text-color="grey-14"
-        color="white"
-        two-lines
-        no-pane-border
+        align="left"
+        active-color="purple-9"
+        indicator-color="purple-9"
       >
         <!--START: tabs header -->
         <q-tab
@@ -164,7 +163,7 @@
         <!--START: tabs body -->
         <!--END: tabs body -->
 </q-tabs>
-<q-tab-panels v-model="tabsModel" animated>
+<q-tab-panels v-model="tabsModel" animated keep-alive>
 <q-tab-panel
           v-for="tBodyContent in tabs.tabsBody"
           :key="tBodyContent.value"
@@ -175,12 +174,12 @@
             table-class="customTableClass"
             :rows="tBodyContent.customData.tableData"
             :columns="tBodyContent.customData.columns"
-            v-model:filter="filter" v-model:pagination="paginationControl"
+            :filter="filter" v-model:pagination="paginationControl"
             row-key="name"
           >
             <template v-slot:body-cell-shortleadDate="props">
               <q-td :props="props">
-                {{ $moment(props.row.shortleadDate).format("Do MMM Y") }}
+                {{ props.row.shortleadDate ? $moment(props.row.shortleadDate).format("Do MMM Y") : 'NA' }}
               </q-td>
             </template>
             <template v-slot:body-cell-id="props">
@@ -247,7 +246,7 @@ export default {
           required: true,
           label: "Name",
           align: "left",
-          field: "name",
+          field: row => row?.name || "NA",
           sortable: true
         },
         {
@@ -255,7 +254,7 @@ export default {
           required: true,
           label: "Short Lead",
           align: "center",
-          field: "shortLeadCount",
+          field: row => row?.shortLeadCount ?? 0,
           sortable: true
         },
         {
@@ -263,7 +262,7 @@ export default {
           required: true,
           label: "WIP Lead",
           align: "center",
-          field: "wipLeadCount",
+          field: row => row?.wipLeadCount ?? 0,
           sortable: true
         },
         {
@@ -271,7 +270,7 @@ export default {
           required: true,
           label: "Rejected",
           align: "center",
-          field: "rejectedLeadCount",
+          field: row => row?.rejectedLeadCount ?? 0,
           sortable: true
         },
         {
@@ -279,7 +278,7 @@ export default {
           required: true,
           label: "Implementation",
           align: "center",
-          field: "implementationCount",
+          field: row => row?.implementationCount ?? 0,
           sortable: true
         },
         {
@@ -287,7 +286,7 @@ export default {
           required: true,
           label: "Submitted to SAT",
           align: "center",
-          field: "submitToSatCount",
+          field: row => row?.submitToSatCount ?? 0,
           sortable: true
         }
       ],
@@ -325,7 +324,7 @@ export default {
                   required: true,
                   label: "Date(C)",
                   align: "left",
-                  field: "shortleadDate",
+                  field: row => row?.shortleadDate || "NA",
                   sortable: true
                 },
                 {
@@ -334,7 +333,7 @@ export default {
                   label: "Lead ID",
                   align: "left",
                   field: row => {
-                    return "# " + row.leadNumber;
+                    return row?.leadNumber ? "# " + row.leadNumber : "NA";
                   },
                   sortable: true
                 },
@@ -343,7 +342,7 @@ export default {
                   required: true,
                   label: "SO Name",
                   align: "left",
-                  field: "leadName",
+                  field: row => row?.leadName || "NA",
                   sortable: true
                 },
                 {
@@ -351,7 +350,7 @@ export default {
                   required: true,
                   label: "state",
                   align: "left",
-                  field: "state",
+                  field: row => row?.state || "NA",
                   sortable: true
                 }
               ],
@@ -510,7 +509,9 @@ export default {
     identifySalesHierarchyRole() {
       let self = this;
       /* Hierachy sales values has been taken from gloabl variables from plugin */
-      return _.find(JSON.parse(localStorage.getItem("u_i")).roles, function(
+      const userInfo = JSON.parse(localStorage.getItem("u_i"));
+      if (!userInfo || !userInfo.roles) return null;
+      return _.find(userInfo.roles, function(
         oo
       ) {
         return oo.hierarchy.hierarchyCode.includes(self.$HIERARCHY_SALES);
@@ -556,7 +557,7 @@ export default {
     rowClick(item, index) {
       this.items.push({
         name: item.name,
-        role: this.getLeadStatusUserDetails.leadCount.userRoleName,
+        role: this.getLeadStatusUserDetails?.leadCount?.userRoleName || "NA",
         id: item.id,
         hierarchyRoleLevel: item.hierarchyRoleLevel
       });
@@ -605,16 +606,21 @@ export default {
       });
       //Setting up values when on new load and recursive actions
       let requestParams;
+      const salesRole = this.identifySalesHierarchyRole();
+      if (!salesRole) {
+        this.$q.loading.hide();
+        return;
+      }
       if (item == undefined) {
         //Values for on load action
         requestParams = {
-          heirarchyId: this.identifySalesHierarchyRole.hierarchy.id,
+          heirarchyId: salesRole.hierarchy.id,
           userId: JSON.parse(localStorage.getItem("u_i")).user.id
         };
       } else {
         //Values for on click action
         requestParams = {
-          heirarchyId: this.identifySalesHierarchyRole.hierarchy.id,
+          heirarchyId: salesRole.hierarchy.id,
           userId: item.id
         };
       }

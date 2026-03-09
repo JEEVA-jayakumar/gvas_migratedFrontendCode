@@ -74,16 +74,22 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
                   placeholder="Select Pincode"
-                  filter
+                  use-input
+                  fill-input
+                  hide-selected
+                  input-debounce="0"
                   clearable
                   color="grey-9"
                   @blur="$v.formData.pincodeObj.$touch"
                   :error="$v.formData.pincodeObj.$error"
                   v-model="formData.pincodeObj"
-                  @update:model-value="fnPopulateStateCity"
+                  @filter="pincodeSearch"
+                  @update:model-value="pincodeSelected"
                   @clear="fnClearStateCity"
                   label="Pincode"
-                  :options="getAllStatesData"
+                  :options="pincodeOptions"
+                  emit-value
+                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -121,8 +127,9 @@
                   v-model="formData.leadSource.id"
                   label="Lead Source*"
                   placeholder="Lead Source"
-                  radio
                   :options="leadSourceOptions"
+                  emit-value
+                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -132,9 +139,10 @@
                   :error="$v.formData.device.id.$error"
                   v-model="formData.device.id"
                   label="Device Type"
-                  radio
                   :disable="isDeviceTypeSelectionDisabled"
                   :options="deviceTypeOptions"
+                  emit-value
+                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -154,10 +162,11 @@
                   color="grey-9"
                   v-model="currentAssingedToRSM"
                   placeholder="--RSM--"
-                  stack-label="Select RSM"
-                  radio
-                  :disable="assignToOptionsRSM.length > 0 "
+                  label="Select RSM"
+                  :disable="assignToOptionsRSM.length > 0 ? false:true"
                   :options="assignToOptionsRSM"
+                  emit-value
+                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12" v-show="enableASMdropdown">
@@ -166,10 +175,11 @@
                   color="grey-9"
                   v-model="currentAssingedToASM"
                   placeholder="--ASM--"
-                  stack-label="Select ASM"
-                  radio
-                  :disable="assignToOptionsASM.length > 0 "
+                  label="Select ASM"
+                  :disable="assignToOptionsASM.length > 0 ? false:true"
                   :options="assignToOptionsASM"
+                  emit-value
+                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -178,25 +188,30 @@
                   color="grey-9"
                   v-model="assignTo"
                   placeholder="--TL--"
-                  stack-label="Select TL"
-                  radio
-                  :disable="assignToOptionsTL.length > 0 "
+                  label="Select TL"
+                  :disable="assignToOptionsTL.length > 0 ? false:true"
                   :options="assignToOptionsTL"
+                  emit-value
+                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
-                  filter 
+                  use-input
+                  fill-input
+                  hide-selected
+                  input-debounce="0"
                   clearable
                   color="grey-9"
                   @blur="$v.formData.assignedTo.id.$touch"
                   :error="$v.formData.assignedTo.id.$error"
                   v-model="formData.assignedTo.id"
                   placeholder="--SO--"
-                  stack-label="Select SO"
-                  radio
-                  :disable="assignToOptionsSO.length > 0 "
+                  label="Select SO"
+                  :disable="assignToOptionsSO.length > 0 ? false:true"
                   :options="assignToOptionsSO"
+                  emit-value
+                  map-options
                 />
               </div>
             </div>
@@ -262,6 +277,7 @@ export default {
       ],
       leadSourceOptions: [],
       deviceTypeOptions: [],
+      pincodeOptions: [],
       formData: {
         leadName: "",
         contactName: "",
@@ -368,7 +384,7 @@ export default {
   },
 
   methods: {
-    ...mapActions("SuperAdminUsers", ["FETCH_ALL_STATES_DATA"]),
+    ...mapActions("SuperAdminUsers", ["FETCH_ALL_STATES_DATA", "FETCH_PINCODE_WITH_TERM"]),
     ...mapActions("BankOpsShortLead", ["FETCH_ALL_LEAD_SOURCE_DATA"]),
     ...mapActions("DeviceListBasedOnLeadSource", [
       "DEVICE_LIST_BASED_ON_LEAD_SOURCE"
@@ -519,11 +535,33 @@ export default {
         });
     },
 
-    // Function to popluate state and city based on pincode
-    fnPopulateStateCity(value) {
-      this.formData.pincode = value.pincode;
-      this.formData.state = value.stateName;
-      this.formData.city = value.cityName;
+    /* Pincode search result */
+    pincodeSearch(terms, update, abort) {
+      if (terms.length < 1) {
+        abort();
+        return;
+      }
+      this.FETCH_PINCODE_WITH_TERM(terms)
+        .then(() => {
+          update(() => {
+            const needle = terms.toLowerCase();
+            this.pincodeOptions = this.getAllStatesData.filter(v => v.label.toString().toLowerCase().indexOf(needle) > -1);
+          });
+        })
+        .catch(() => {
+          abort();
+        });
+    },
+    pincodeSelected(item) {
+      if (item) {
+        const selected = this.getAllStatesData.find(v => v.value === item || v.pincode === item);
+        if (selected) {
+          this.formData.state = selected.stateName;
+          this.formData.city = selected.cityName;
+          this.formData.pincode = selected.pincode;
+          this.formData.pincodeObj = selected.pincode;
+        }
+      }
     },
 
     //Function clear city and state when pincode is cleared
