@@ -1,20 +1,30 @@
 <template>
-  <q-page>
-    <div>
-      <q-pull-to-refresh :handler="PullToRefresh" inline>
-        <!--START: table title -->
-        <div
-          class="col-md-12 capitalize text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-        >Finance</div>
-        <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @select="goToQrMerchant">
-          <q-tab default color="dark" name="tab-1" slot="title" label="Pos Merchant" />
-        <q-tab color="dark" name="tab-2" slot="title" label="QR Merchant" />
-     
+  <q-page class="bg-grey-1">
+    <div class="q-pa-lg">
+      <q-pull-to-refresh :handler="PullToRefresh">
+        <q-card flat bordered class="overflow-hidden">
+          <q-card-section class="bg-white q-pa-none">
+            <div class="row items-center q-px-lg q-py-md border-bottom">
+              <div class="text-h6 text-weight-bold text-grey-8 uppercase ls-1">Finance Verification</div>
+            </div>
+            <q-tabs
+              v-model="activeTab"
+              class="text-grey-7"
+              active-color="primary"
+              indicator-color="primary"
+              align="left"
+              @update:model-value="goToQrMerchant"
+            >
+              <q-tab name="tab-1" label="POS Merchant" />
+              <q-tab name="tab-2" label="QR Merchant" />
+            </q-tabs>
+          </q-card-section>
 
-        <!--END: table title -->
-        <!-- table payment verification tracker -->
-        <q-tab-panel name="tab-1">
-        <q-table
+          <q-separator />
+
+          <q-tab-panels v-model="activeTab" animated class="bg-transparent">
+            <q-tab-panel name="tab-1" class="q-pa-none">
+              <q-table
           table-class="customTableClass"
           :rows="tableData"
           :columns="columns"
@@ -463,9 +473,10 @@
             <!--END: table filter dropdown -->
           </template>
           <!--END: table search, filter -->
-        </q-table>
-      </q-tab-panel>
-    </q-tabs>
+              </q-table>
+            </q-tab-panel>
+          </q-tab-panels>
+        </q-card>
       </q-pull-to-refresh>
      
       <!-- //Common lead information in popup -->

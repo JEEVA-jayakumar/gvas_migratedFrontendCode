@@ -4,244 +4,166 @@
       <customHeader @fnToggleSideMenu="fnMainToggleSideMenu"></customHeader>
     </q-header>
 
-    <q-drawer class="no-shadow" v-model="leftDrawerOpen" content-class="no-shadow"
-      :content-style="{ background: getComputedColor, width: '250px' }">
-      <q-scroll-area style="height: 100vh" :thumb-style="{
-        right: '4px',
-        borderRadius: '5px',
-        background: '#cecece',
-        width: '5px',
-        opacity: 0.5
-      }" :delay="1500">
-        <q-list no-border link inset-delimiter highlight style="padding-top:65px">
-          <div>
-            <!-- Entry point for sat -->
-            <div v-if="
-              $q.localStorage.getItem('u_i') != undefined &&
-              showMenu.includes($ROLE_HIERARCHY_OPERATION_SAT)
-            ">
+    <q-drawer
+      v-model="leftDrawerOpen"
+      show-if-above
+      bordered
+      :width="260"
+      :breakpoint="500"
+      class="bg-white"
+    >
+      <div class="q-py-md q-px-lg row items-center no-wrap bg-white" style="height: 64px; border-bottom: 1px solid #edf2f7">
+        <img src="~assets/images/logo.png" style="height: 28px" />
+        <div class="q-ml-sm text-h6 text-weight-bolder text-brand gt-sm">BIJLIPAY</div>
+      </div>
+
+      <q-scroll-area style="height: calc(100% - 64px); margin-top: 0">
+        <q-list padding class="q-px-sm">
+          <!-- Entry point for sat -->
+          <div v-if="$q.localStorage.getItem('u_i') != undefined && showMenu.includes($ROLE_HIERARCHY_OPERATION_SAT)">
+            <q-item-label header class="text-uppercase text-weight-bold text-grey-6" style="font-size: 11px; letter-spacing: 0.05em">SAT Operations</q-item-label>
+
             <div v-if="JSON.parse($q.localStorage.getItem('u_i')).region.regionAreaName == 'VARANEEK'">
-             <q-item
-                    v-for="menu in menus.varaneekSat"
-                    :key="menu.id"
-                    :to="menu.to"
-                    class="menu-main-item-color"
-                  >
-                    <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
-                  </q-item>
-                  </div>
+              <q-item v-for="menu in menus.varaneekSat" :key="menu.id" :to="menu.to" clickable v-ripple>
+                <q-item-section avatar>
+                  <q-icon name="dashboard" size="20px" />
+                </q-item-section>
+                <q-item-section>{{ menu.name }}</q-item-section>
+              </q-item>
+            </div>
 
-                  <div v-else>
+            <div v-else>
               <template v-for="menu in menus.sat" :key="menu.id">
-                <q-item
-                  v-if="!menu.subItems || menu.subItems.length === 0"
-                  :to="menu.to"
-                  class="menu-main-item-color"
-                >
-                  <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
-                </q-item>
-                <q-item v-else>
-                  <div class="col-md-12">
-                    <div
-                      class="col-md-12"
-                      color="light"
-                      text-color="light"
-                      v-if="(menu.name == 'Bijlipay')"
-                    >
-                      <q-select
-                        inverted-light
-                        v-model="selectedValueSat"
-                        float-label="Please Select"
-                        placeholder="Please Select"
-                        color="light"
-                        class="cursor-pointer menu-item-color"
-                        :options="options"
-                        @input="fnclickdropdownSat"
-                      />
-                    </div>
-                    <!--@input="fnclickdropdown"-->
-                    <div
-                      v-if="selectedValueSat == menuListNameSat && menu.name == menuListNameSat"
-                      align="left"
-                    >
-                      <q-item
-                        v-for="subItem in menu.subItems"
-                        :key="subItem.id"
-                        :to="subItem.to"
-                        class="menu-main-item-color"
-                      >
-                        <q-item-section class="cursor-pointer menu-item-color">{{ subItem.name }}</q-item-section>
-                      </q-item>
-                    </div>
-                    <div
-                      v-else-if="selectedValueSat == menuListNameSat && selectedValueSat != '' && selectedValueSat != 'Bijlipay'  && menu.name == 'Other' "
-                      align="left"
-                    >
-                      <q-item
-                        v-for="subItem in menu.subItems"
-                        :key="subItem.id"
-                        :to="subItem.to"
-                        class="menu-main-item-color"
-                      >
-                        <q-item-section class="cursor-pointer menu-item-color">{{ subItem.name }}</q-item-section>
-                      </q-item>
-                    </div>
-                  </div>
-                </q-item>
-              </template>
-            </div>
-            </div>
-
-            <!-- Entry point for finance manager -->
-            <div
-              v-if="$q.localStorage.getItem('u_i') != undefined && (showMenu.includes($ROLE_HIERARCHY_FINANCE_HEAD) || showMenu.includes($ROLE_HIERARCHY_FINANCE_MANAGER) || showMenu.includes($ROLE_HIERARCHY_FINANCE_EXECUTIVE))">
-              <q-item v-for="menu in menus.finance" :key="menu.id" :to="menu.to" class="menu-main-item-color">
-                <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
-              </q-item>
-            </div>
-
-            <!-- Entry point for inventory -->
-            <div
-              v-if="$q.localStorage.getItem('u_i') != undefined && showMenu.includes($ROLE_HIERARCHY_INVENTORY_OFFICER)">
-              <template v-for="menu in menus.inventory" :key="menu.id">
-                <q-item
-                  v-if="!menu.subItems || menu.subItems.length === 0"
-                  :to="menu.to"
-                  class="menu-main-item-color"
-                >
-                  <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
-                </q-item>
-                <q-item v-else>
-                  <div class="col-md-12">
-                    <div
-                      class="col-md-12"
-                      color="light"
-                      text-color="light"
-                      v-if="(menu.name == 'Bijlipay')"
-                    >
-                      <q-select
-                        inverted-light
-                        v-model="selectedValue"
-                        float-label="Please Select"
-                        placeholder="Please Select"
-                        color="light"
-                        class="cursor-pointer menu-item-color"
-                        :options="options"
-                        @input="fnclickdropdown"
-                      />
-                    </div>
-                    <!--@input="fnclickdropdown"-->
-                    <div
-                      v-if="selectedValue == menuListName && menu.name == menuListName"
-                      align="left"
-                    >
-                      <q-item
-                        v-for="subItem in menu.subItems"
-                        :key="subItem.id"
-                        :to="subItem.to"
-                        class="menu-main-item-color"
-                      >
-                        <q-item-section class="cursor-pointer menu-item-color">{{ subItem.name }}</q-item-section>
-                      </q-item>
-                    </div>
-                    <!-- && menu.name == menuListName -->
-                    <div
-                      v-else-if="selectedValue == menuListName && selectedValue != 'Bijlipay' && selectedValue != '' && menu.name == 'Others'"
-                      align="left"
-                    >
-                      <q-item
-                        v-for="subItem in menu.subItems"
-                        :key="subItem.id"
-                        :to="subItem.to"
-                        class="menu-main-item-color"
-                      >
-                        <q-item-section class="cursor-pointer menu-item-color">{{ subItem.name }}</q-item-section>
-                      </q-item>
-                    </div>
-                  </div>
-                </q-item>
-              </template>
-            </div>
-
-            <!-- Entry point for ksn inventory -->
-
-            <div
-              v-if="
-                $q.localStorage.getItem('u_i') != undefined &&
-                showMenu.includes($ROLE_HIERARCHY_KSN)
-              "
-            >
-              <q-item
-                v-for="menu in menus.ksn"
-                :key="menu.id"
-                :to="menu.to"
-                class="menu-main-item-color"
-              >
-                <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
-              </q-item>
-            </div>
-
-            <!-- Entry point for opeartions head -->
-            <div
-              v-if="$q.localStorage.getItem('u_i') != undefined && showMenu.includes($ROLE_HIERARCHY_OPERATIONS_HEAD)">
-              <template v-for="menu in menus.opsHead" :key="menu.id">
-                <q-item
-                  v-if="!menu.subItems || menu.subItems.length === 0"
-                  :to="menu.to"
-                  class="menu-main-item-color"
-                >
-                  <q-item-section class="cursor-pointer menu-item-color">{{ menu.name }}</q-item-section>
-                </q-item>
-                <q-item v-else>
-                  <q-item-section class="menu-item-color">
-                    <q-expansion-item
-                      dense
-                      class="no-padding"
-                      header-class="no-padding"
-                      header-style="font-size:14px"
-                      label="Reports"
-                    >
-                      <q-item
-                        v-for="subItem in menu.subItems"
-                        :key="subItem.id"
-                        :to="subItem.to"
-                        class="menu-main-item-color"
-                      >
-                        <q-item-section class="cursor-pointer menu-item-color">{{ subItem.name }}</q-item-section>
-                      </q-item>
-                    </q-expansion-item>
+                <q-item v-if="!menu.subItems || menu.subItems.length === 0" :to="menu.to" clickable v-ripple>
+                  <q-item-section avatar>
+                    <q-icon :name="menu.icon || 'circle'" size="20px" />
                   </q-item-section>
+                  <q-item-section>{{ menu.name }}</q-item-section>
                 </q-item>
+
+                <q-expansion-item
+                  v-else
+                  :icon="menu.icon || 'business'"
+                  :label="menu.name"
+                  group="sat"
+                  header-class="text-weight-medium"
+                >
+                   <q-item
+                      v-for="subItem in menu.subItems"
+                      :key="subItem.id"
+                      :to="subItem.to"
+                      clickable
+                      v-ripple
+                      dense
+                      class="q-pl-lg"
+                    >
+                      <q-item-section avatar>
+                        <q-icon name="chevron_right" size="16px" />
+                      </q-item-section>
+                      <q-item-section>{{ subItem.name }}</q-item-section>
+                    </q-item>
+                </q-expansion-item>
               </template>
             </div>
+          </div>
 
-            <!-- Entry point for sales manager => RSM/ASM -->
-            <div
-              v-if="$q.localStorage.getItem('u_i') != undefined && (showMenu.includes($ROLE_HIERARCHY_SALES_RSM) || showMenu.includes($ROLE_HIERARCHY_SALES_ASM) || showMenu.includes($ROLE_HIERARCHY_SALES_NATIONAL_HEAD))">
-              <q-item v-for="menu in menus.salesManager" :key="menu.id" :to="menu.to" class="menu-main-item-color">
-                <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
-              </q-item>
-            </div>
+          <!-- Entry point for finance manager -->
+          <div v-if="$q.localStorage.getItem('u_i') != undefined && (showMenu.includes($ROLE_HIERARCHY_FINANCE_HEAD) || showMenu.includes($ROLE_HIERARCHY_FINANCE_MANAGER) || showMenu.includes($ROLE_HIERARCHY_FINANCE_EXECUTIVE))">
+            <q-item-label header class="text-uppercase text-weight-bold text-grey-6" style="font-size: 11px; letter-spacing: 0.05em">Finance</q-item-label>
+            <q-item v-for="menu in menus.finance" :key="menu.id" :to="menu.to" clickable v-ripple>
+               <q-item-section avatar>
+                  <q-icon name="account_balance_wallet" size="20px" />
+                </q-item-section>
+              <q-item-section>{{ menu.name }}</q-item-section>
+            </q-item>
+          </div>
 
-            <!-- Entry point for sales manager => bank ops -->
-            <div v-if="$q.localStorage.getItem('u_i') != undefined && showMenu.includes($ROLE_HIERARCHY_BANK_OPS)">
-              <q-item v-for="menu in menus.bankOps" :key="menu.id" :to="menu.to" class="menu-main-item-color">
-                <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
+          <!-- Entry point for inventory -->
+          <div v-if="$q.localStorage.getItem('u_i') != undefined && showMenu.includes($ROLE_HIERARCHY_INVENTORY_OFFICER)">
+            <q-item-label header class="text-uppercase text-weight-bold text-grey-6" style="font-size: 11px; letter-spacing: 0.05em">Inventory</q-item-label>
+            <template v-for="menu in menus.inventory" :key="menu.id">
+              <q-item v-if="!menu.subItems || menu.subItems.length === 0" :to="menu.to" clickable v-ripple>
+                <q-item-section avatar>
+                  <q-icon name="inventory_2" size="20px" />
+                </q-item-section>
+                <q-item-section>{{ menu.name }}</q-item-section>
               </q-item>
-            </div>
+              <q-expansion-item
+                  v-else
+                  icon="warehouse"
+                  :label="menu.name"
+                  header-class="text-weight-medium"
+                >
+                   <q-item
+                      v-for="subItem in menu.subItems"
+                      :key="subItem.id"
+                      :to="subItem.to"
+                      clickable
+                      v-ripple
+                      dense
+                      class="q-pl-lg"
+                    >
+                      <q-item-section avatar>
+                        <q-icon name="chevron_right" size="16px" />
+                      </q-item-section>
+                      <q-item-section>{{ subItem.name }}</q-item-section>
+                    </q-item>
+                </q-expansion-item>
+            </template>
+          </div>
 
-            <!-- Entry point for CRM USERS -->
-            <div v-if="$q.localStorage.getItem('u_i') != undefined && showMenu.includes($HIERARCHY_CRM1)">
-              <q-item v-for="menu in menus.crm" :key="menu.id" :to="menu.to" class="menu-main-item-color">
-                <q-item-section class="menu-item-color">{{ menu.name }}</q-item-section>
+          <!-- Entry point for opeartions head -->
+          <div v-if="$q.localStorage.getItem('u_i') != undefined && showMenu.includes($ROLE_HIERARCHY_OPERATIONS_HEAD)">
+             <q-item-label header class="text-uppercase text-weight-bold text-grey-6" style="font-size: 11px; letter-spacing: 0.05em">Operations Head</q-item-label>
+            <template v-for="menu in menus.opsHead" :key="menu.id">
+              <q-item v-if="!menu.subItems || menu.subItems.length === 0" :to="menu.to" clickable v-ripple>
+                 <q-item-section avatar>
+                  <q-icon name="admin_panel_settings" size="20px" />
+                </q-item-section>
+                <q-item-section>{{ menu.name }}</q-item-section>
               </q-item>
-            </div>
-            <!-- Entry point for super admin/bijlipay managemnet -->
-            <div v-if="$q.localStorage.getItem('u_i') != undefined && showMenu.includes($ROLE_BIJLIPAY_MANAGER)">
-              <q-item v-for="menu in menus.superAdmin" :key="menu.id" :to="menu.to">
-                <q-item-section class="menu-item-color-SA">{{ menu.name}}</q-item-section>
-              </q-item>
-            </div>
+              <q-expansion-item
+                v-else
+                icon="assessment"
+                label="Reports"
+                header-class="text-weight-medium"
+              >
+                <q-item v-for="subItem in menu.subItems" :key="subItem.id" :to="subItem.to" clickable v-ripple dense class="q-pl-lg">
+                   <q-item-section avatar>
+                    <q-icon name="bar_chart" size="16px" />
+                  </q-item-section>
+                  <q-item-section>{{ subItem.name }}</q-item-section>
+                </q-item>
+              </q-expansion-item>
+            </template>
+          </div>
+
+          <!-- Entry point for sales manager => RSM/ASM -->
+          <div v-if="$q.localStorage.getItem('u_i') != undefined && (showMenu.includes($ROLE_HIERARCHY_SALES_RSM) || showMenu.includes($ROLE_HIERARCHY_SALES_ASM) || showMenu.includes($ROLE_HIERARCHY_SALES_NATIONAL_HEAD))">
+             <q-item-label header class="text-uppercase text-weight-bold text-grey-6" style="font-size: 11px; letter-spacing: 0.05em">Sales Management</q-item-label>
+            <q-item v-for="menu in menus.salesManager" :key="menu.id" :to="menu.to" clickable v-ripple>
+               <q-item-section avatar>
+                  <q-icon name="trending_up" size="20px" />
+                </q-item-section>
+              <q-item-section>{{ menu.name }}</q-item-section>
+            </q-item>
+          </div>
+
+          <!-- Entry point for super admin -->
+          <div v-if="$q.localStorage.getItem('u_i') != undefined && showMenu.includes($ROLE_BIJLIPAY_MANAGER)">
+             <q-item-label header class="text-uppercase text-weight-bold text-grey-6" style="font-size: 11px; letter-spacing: 0.05em">Administration</q-item-label>
+            <q-expansion-item
+                icon="settings"
+                label="Super Admin"
+                header-class="text-weight-medium"
+              >
+                <q-item v-for="menu in menus.superAdmin" :key="menu.id" :to="menu.to" clickable v-ripple dense class="q-pl-lg">
+                   <q-item-section avatar>
+                    <q-icon name="circle" size="8px" color="grey-4" />
+                  </q-item-section>
+                  <q-item-section>{{ menu.name }}</q-item-section>
+                </q-item>
+              </q-expansion-item>
           </div>
         </q-list>
       </q-scroll-area>
@@ -305,6 +227,7 @@ export default {
             id: 1,
             to: "/sat/master/BijlipaySat",
             name: "Bijlipay",
+            icon: "payments",
             subItems: [
               {
                 id: 0,
@@ -533,6 +456,7 @@ export default {
             id: 28,
             to: "/sat/master/Other",
             name: "Other",
+            icon: "more_horiz",
             subItems: [
               {
                 id: 30,
