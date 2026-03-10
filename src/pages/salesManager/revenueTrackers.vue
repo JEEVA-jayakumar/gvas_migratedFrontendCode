@@ -22,12 +22,13 @@
           <!--START: table aging pending/reject -->
           <q-table
             table-class="customTableClass"
-            :rows="tableData.userList"
-            v-model:columns="column"
-            :filter="filter" v-model:pagination="paginationControl"
+            :rows="tableData.userList || []"
+            :columns="column"
+            :filter="filter"
+            v-model:pagination="paginationControl"
             row-key="name">
             <template v-slot:body="props">
-              <q-tr :class="[rowActiveId == props.rowIndex? 'bg-grey-4 text-dark':'']" :props="props" @mouseover="rowHover(props.rowIndex)" @click="rowClick(props.row, props.rowIndex)" class="cursor-pointer">
+              <q-tr :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']" :props="props" @mouseover="rowHover(props.row.__index)" @click="rowClick(props.row, props.row.__index)" class="cursor-pointer">
                 <q-td v-for="col in props.cols" :key="col.name" :props="props">
                   {{ col.value }}
                 </q-td>
@@ -36,13 +37,13 @@
             <template v-slot:top="props">
               <!--START: table filter,search,excel download -->
               <div class="col">
-                <q-input
+                <q-search
                 clearable
                 v-model="filter"
                 separator
                 color="grey-9"
                 placeholder="Type.."
-                label= "Search"
+                float-label= "Search"
                 class="q-mr-lg q-py-sm"
                 />
               </div>
@@ -67,41 +68,41 @@
           <div class="items-center">
             <q-list class="group" multiline no-border	>
               <q-item class="q-pa-lg" multiline>
-                <q-item-section>
-                  <q-item-label>
+                <q-item-main>
+                  <q-item-tile>
                     Revenue accrued from implemented merchants
-                  </q-item-label>
-                </q-item-section>
-                <q-item-section right>
-                  <q-item-label>
+                  </q-item-tile>
+                </q-item-main>
+                <q-item-side right>
+                  <q-item-tile>
                     <q-icon size="14px" name="fas fa-rupee-sign"/> 
                     {{tableData.currentUser.incentive.implementedRevenue}}
-                  </q-item-label>
-                </q-item-section>
+                  </q-item-tile>
+                </q-item-side>
               </q-item>
               <q-item class="q-pa-lg" multiline>
-                <q-item-section>
-                  <q-item-label>
+                <q-item-main>
+                  <q-item-tile>
                     Revenue from pending implementations
-                  </q-item-label>
-                </q-item-section>
-                <q-item-section right>
-                  <q-item-label>
+                  </q-item-tile>
+                </q-item-main>
+                <q-item-side right>
+                  <q-item-tile>
                     <q-icon size="14px" name="fas fa-rupee-sign"/> 
                     {{tableData.currentUser.incentive.pendingImplementationRevenue}}
-                  </q-item-label>
-                </q-item-section>
+                  </q-item-tile>
+                </q-item-side>
               </q-item>
               <q-item class="q-pa-lg items-center" multiline>
-                <q-item-section class="vertical-middle">
-                  <q-item-label>
+                <q-item-main class="vertical-middle">
+                  <q-item-tile>
                     Revenue percentage from target
-                  </q-item-label>
-                </q-item-section>
-                <q-item-section right v-if="tableData.currentUser.incentive.targetRevenue == 0">
+                  </q-item-tile>
+                </q-item-main>
+                <q-item-side right v-if="tableData.currentUser.incentive.targetRevenue == 0">
                   Nil
-                </q-item-section>
-                <q-item-section right v-else>
+                </q-item-side>
+                <q-item-side right v-else>
                   <div>
                     <RadialProgressBar 
                     :diameter="50"
@@ -116,7 +117,7 @@
                      <p class="no-margin"><small>{{ tableData.currentUser.incentive.revenuePercentage}}%</small></p>
                     </RadialProgressBar>
                   </div>
-                </q-item-section>
+                </q-item-side>
               </q-item>  
             </q-list>
           </div>
@@ -137,7 +138,7 @@ export default {
   setup() {
     return { v$: useVuelidate() };
   },
-  name: "SalesManagerRevenueTrackers",
+  name: "revenueTrackers",
   components: {
     RadialProgressBar
   },
@@ -174,14 +175,7 @@ export default {
         }
       ],
       tableData: {
-        currentUser: {
-          incentive: {
-            targetRevenue: 0,
-            implementedRevenue: 0,
-            pendingImplementationRevenue: 0,
-            revenuePercentage: 0
-          }
-        },
+        currentUser: {},
         userList: []
       },
       activeId: "",
@@ -229,19 +223,16 @@ export default {
     fnLoadAllTableData(item) {
       //Setting up values when on new load and recursive actions
       let requestParams;
-      const salesRole = this.identifySalesHierarchyRole();
-      if (!salesRole) return;
-
       if (item == undefined) {
         //Values for on load action
         requestParams = {
-          heirarchyId: salesRole.hierarchy.id,
+          heirarchyId: this.identifySalesHierarchyRole.hierarchy.id,
           userId: JSON.parse(localStorage.getItem("u_i")).user.id
         };
       } else {
         //Values for on click action
         requestParams = {
-          heirarchyId: salesRole.hierarchy.id,
+          heirarchyId: this.identifySalesHierarchyRole.hierarchy.id,
           userId: item.id
         };
       }
@@ -268,7 +259,6 @@ export default {
     },
 
     rowClick(item, index) {
-      this.rowActiveId = index;
       if (item.hierarchyRoleLevel == this.$ROLE_HIERARCHY_SALES_SO) {
         let getIndex = this.items.findIndex(p => p.name == this.activeId);
         console.log("this.items", this.items);
@@ -289,10 +279,8 @@ export default {
         this.rowActiveId = index;
 
         //Values for on click action
-        const salesRole = this.identifySalesHierarchyRole();
-        if (!salesRole) return;
         let requestParams = {
-          heirarchyId: salesRole.hierarchy.id,
+          heirarchyId: this.identifySalesHierarchyRole.hierarchy.id,
           userId: item.id
         };
         this.REVENUE_TRACKER(requestParams).then(response => {

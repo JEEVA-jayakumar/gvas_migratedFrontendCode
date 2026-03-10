@@ -16,7 +16,7 @@
                   :error="$v.formData.leadName.$error"
                   color="grey-9"
                   v-model="formData.leadName"
-                  label="Merchant Name*"
+                  float-label="Merchant Name*"
                   placeholder="Merchant Name"
                 />
               </div>
@@ -26,7 +26,7 @@
                   @blur="$v.formData.contactName.$touch"
                   :error="$v.formData.contactName.$error"
                   v-model="formData.contactName"
-                  label="Contact Name*"
+                  float-label="Contact Name*"
                   placeholder="Contact Name"
                 />
               </div>
@@ -37,7 +37,7 @@
                   :error="$v.formData.contactNumber.$error"
                   v-model="formData.contactNumber"
                   type="number"
-                  label="Contact Number*"
+                  float-label="Contact Number*"
                   placeholder="Contact Number"
                 />
               </div>
@@ -46,7 +46,7 @@
                   color="grey-9"
                   v-model="formData.alternateContactNumber"
                   type="number"
-                  label="Alternate Contact Number"
+                  float-label="Alternate Contact Number"
                   placeholder="Alternate Contact Number"
                 />
               </div>
@@ -56,7 +56,7 @@
                   color="grey-9"
                 
                   v-model="formData.email"
-                  label="Email"
+                  float-label="Email"
                   placeholder="Email"
                 />
               </div>
@@ -66,30 +66,28 @@
                   @blur="$v.formData.leadAddress.$touch"
                   :error="$v.formData.leadAddress.$error"
                   v-model="formData.leadAddress"
-                  label="Merchant Address"
+                  float-label="Merchant Address"
                   placeholder="Merchant Address"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <q-select
-                  placeholder="Select Pincode"
-                  use-input
-                  fill-input
-                  hide-selected
-                  input-debounce="0"
-                  clearable
-                  color="grey-9"
-                  @blur="$v.formData.pincodeObj.$touch"
+                <q-input
+                  type="number"
                   :error="$v.formData.pincodeObj.$error"
-                  v-model="formData.pincodeObj"
-                  @filter="pincodeSearch"
-                  @update:model-value="pincodeSelected"
+                  clearable
                   @clear="fnClearStateCity"
-                  label="Pincode"
-                  :options="pincodeOptions"
-                  emit-value
-                  map-options
-                />
+                  color="grey-9"
+                  v-model.trim="formData.pincodeObj"
+                  float-label="Pincode"
+                  placeholder="Pincode"
+                >
+                  <q-autocomplete
+                    @search="pincodeSearch"
+                    :debounce="500"
+                    :min-characters="1"
+                    @selected="pincodeSelected"
+                  />
+                </q-input>
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
@@ -98,7 +96,7 @@
                   @blur="$v.formData.city.$touch"
                   :error="$v.formData.city.$error"
                   v-model="formData.city"
-                  label="City/Town"
+                  float-label="City/Town"
                   placeholder="Merchant Address"
                 />
               </div>
@@ -109,7 +107,7 @@
                   @blur="$v.formData.state.$touch"
                   :error="$v.formData.state.$error"
                   v-model="formData.state"
-                  label="State"
+                  float-label="State"
                   placeholder="State"
                 />
               </div>
@@ -120,15 +118,14 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
                   color="grey-9"
-                  @update:model-value="fnAjaxRequestPopulateDeviceListData"
+                  @input="fnAjaxRequestPopulateDeviceListData"
                   @blur="$v.formData.leadSource.id.$touch"
                   :error="$v.formData.leadSource.id.$error"
                   v-model="formData.leadSource.id"
-                  label="Lead Source*"
+                  float-label="Lead Source*"
                   placeholder="Lead Source"
+                  radio
                   :options="leadSourceOptions"
-                  emit-value
-                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -137,11 +134,10 @@
                   @blur="$v.formData.device.id.$touch"
                   :error="$v.formData.device.id.$error"
                   v-model="formData.device.id"
-                  label="Device Type"
+                  float-label="Device Type"
+                  radio
                   :disable="isDeviceTypeSelectionDisabled"
                   :options="deviceTypeOptions"
-                  emit-value
-                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -151,66 +147,59 @@
                   @blur="$v.formData.deviceCount.$touch"
                   :error="$v.formData.deviceCount.$error"
                   v-model="formData.deviceCount"
-                  label="Device Count*"
+                  float-label="Device Count*"
                   placeholder="Device Count"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
-                  @update:model-value="fnGetAllUsersByHidUidRSM"
+                  @input="fnGetAllUsersByHidUidRSM"
                   color="grey-9"
                   v-model="currentAssingedToRSM"
                   placeholder="--RSM--"
-                  label="Select RSM"
+                  stack-label="Select RSM"
+                  radio
                   :disable="assignToOptionsRSM.length > 0 ? false:true"
                   :options="assignToOptionsRSM"
-                  emit-value
-                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
-                  @update:model-value="fnGetAllUsersByHidUidASM"
+                  @input="fnGetAllUsersByHidUidASM"
                   color="grey-9"
                   v-model="currentAssingedToASM"
                   placeholder="--ASM--"
-                  label="Select ASM"
+                  stack-label="Select ASM"
+                  radio
                   :disable="assignToOptionsASM.length > 0 ? false:true"
                   :options="assignToOptionsASM"
-                  emit-value
-                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
-                  @update:model-value="fnGetAllUsersByHidUidTL"
+                  @input="fnGetAllUsersByHidUidTL"
                   color="grey-9"
                   v-model="assignTo"
                   placeholder="--TL--"
-                  label="Select TL"
+                  stack-label="Select TL"
+                  radio
                   :disable="assignToOptionsTL.length > 0 ? false:true"
                   :options="assignToOptionsTL"
-                  emit-value
-                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
-                  use-input
-                  fill-input
-                  hide-selected
-                  input-debounce="0"
+                  filter
                   clearable
                   color="grey-9"
                   @blur="$v.formData.assignedTo.id.$touch"
                   :error="$v.formData.assignedTo.id.$error"
                   v-model="formData.assignedTo.id"
                   placeholder="--SO--"
-                  label="Select SO"
+                  stack-label="Select SO"
+                  radio
                   :disable="assignToOptionsSO.length > 0 ? false:true"
                   :options="assignToOptionsSO"
-                  emit-value
-                  map-options
                 />
               </div>
               <!-- Show only for EQUITAS -->
@@ -286,9 +275,9 @@
         </div>
       </div>
     </div>
-    <q-dialog v-model="showPreviewDialog" minimized>
+    <q-modal v-model="showPreviewDialog" minimized>
       <q-card style="max-width: 900px; width: 100%;">
-          <q-card-section>
+          <q-card-title>
             <q-btn
               icon="close"
               flat
@@ -297,9 +286,9 @@
               class="absolute-top-right q-ma-sm"  
               @click="showPreviewDialog = false"
             />
-          </q-card-section>
-        <q-separator />
-        <q-card-section style="max-height: 70vh; overflow:auto;">
+          </q-card-title>
+        <q-card-separator />
+        <q-card-main style="max-height: 70vh; overflow:auto;">
             <!-- IMAGE-->
             <viewer v-if="!isPdf" :images="[previewUrl]">
               <img :src="previewUrl" style="width:100%" />
@@ -312,9 +301,9 @@
               height="600"
               frameborder="0"
             ></iframe>
-        </q-card-section>
+        </q-card-main>
       </q-card>
-    </q-dialog>
+    </q-modal>
   </q-page>
 </template>
 
@@ -533,32 +522,22 @@ export default {
       });
     },
     /* Pincode search result */
-    pincodeSearch(terms, update, abort) {
-      if (terms.length < 1) {
-        abort();
-        return;
-      }
+    pincodeSearch(terms, done) {
+      this.formData.cityName = "";
+      this.formData.stateName = "";
       this.FETCH_PINCODE_WITH_TERM(terms)
         .then(() => {
-          update(() => {
-            const needle = terms.toLowerCase();
-            this.pincodeOptions = this.getAllStatesData.filter(v => v.label.toString().toLowerCase().indexOf(needle) > -1);
-          });
+          done(this.COMMON_FILTER_FUNCTION(this.getAllStatesData, terms));
         })
         .catch(() => {
-          abort();
+          done([]);
         });
     },
     pincodeSelected(item) {
-      if (item) {
-        const selected = this.getAllStatesData.find(v => v.value === item || v.pincode === item);
-        if (selected) {
-          this.formData.state = selected.stateName;
-          this.formData.city = selected.cityName;
-          this.formData.pincode = selected.pincode;
-          this.formData.pincodeObj = selected.pincode;
-        }
-      }
+      this.formData.state = item.value.stateName;
+      this.formData.city = item.value.cityName;
+      this.formData.pincode = item.value.pincode;
+      this.formData.pincodeObj = item.value.pincode;
     },
     /* Pincode search result */
 
