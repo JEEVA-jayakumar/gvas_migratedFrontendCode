@@ -20,10 +20,10 @@
               placeholder="Merchant type"
               :options="activeMerchantType"
               v-model="formData.merchantType"
-              float-label="Select merchant type"
+              label="Select merchant type"
               @input="currentListTabulation == 'tab-1'?fetchMerchantDocumentTypeActivatedList():fetchMerchantDocumentTypeDeActivatedList()"
-              @blur="$v.formData.merchantType.$touch"
-              :error="$v.formData.merchantType.$error"
+              @blur="v$.formData.merchantType.$touch"
+              :error="v$.formData.merchantType.$error"
             />
           </div>
         </div>
@@ -33,17 +33,17 @@
       </div>
     </div>
     <q-tabs color="grey-9" v-model="currentListTabulation">
-      <!-- Tabs - notice slot="title" -->
+      <!-- Tabs - notice  -->
       <q-tab
         @select="fetchMerchantDocumentTypeActivatedList"
         default
-        slot="title"
+
         label="Active List"
         name="tab-1"
       />
       <q-tab
         @select="fetchMerchantDocumentTypeDeActivatedList"
-        slot="title"
+
         label="De-Actived List"
         name="tab-2"
       />
@@ -95,7 +95,7 @@
                 color="grey-9"
                 v-model="filterSearch"
                 placeholder="Type.."
-                float-label="Search merchant type"
+                label="Search merchant type"
               />
             </div>
             <div class="col-4" align="right">
@@ -148,7 +148,7 @@
                 color="grey-9"
                 v-model="deActivatedSearch"
                 placeholder="Type.."
-                float-label="Search merchant type"
+                label="Search merchant type"
               />
             </div>
             <!--END: table filter,search -->
@@ -307,8 +307,8 @@ export default {
         });
     },
     fetchMerchantDocumentTypeActivatedList() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
       } else {
         this.$q.loading.show({
           delay: 100, // ms
@@ -331,8 +331,8 @@ export default {
     },
 
     fetchMerchantDocumentTypeDeActivatedList() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
       } else {
         this.$q.loading.show({
           delay: 100, // ms

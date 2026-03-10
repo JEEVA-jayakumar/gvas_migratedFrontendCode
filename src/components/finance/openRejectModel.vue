@@ -10,8 +10,8 @@
           <q-input
             type="textarea"
             placeholder="Remarks"
-            @blur="$v.formData.regionalInventory.lostOrStolenRemarks.$touch"      
-            :error="$v.formData.regionalInventory.lostOrStolenRemarks.$error" 
+            @blur="v$.formData.regionalInventory.lostOrStolenRemarks.$touch"
+            :error="v$.formData.regionalInventory.lostOrStolenRemarks.$error"
             class="q-my-md"
             color="grey-9"
             align="left"
@@ -19,7 +19,7 @@
             v-model="formData.regionalInventory.lostOrStolenRemarks"
           />
           <q-btn color="negative" class="q-ma-sm float-right" @click="financeRejectSubmit(formData)" align="right" label="Reject" />
-          <q-btn align="right" color="grey-9" 
+          <q-btn align="right" color="grey-9"
             class="float-right q-ma-sm" @click="emitToggleReject(showRejectModel)">Cancel
           </q-btn>
         </div>
@@ -80,8 +80,8 @@ export default {
       this.$emit("closeRejectModel", "reloadPaymentTrackerData");
     },
     financeRejectSubmit(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q

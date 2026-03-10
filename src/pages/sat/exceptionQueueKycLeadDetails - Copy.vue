@@ -141,7 +141,7 @@
                                           <q-item-label>
                                             <q-input 
                                               color="grey-9"
-                                              float-label="Debit < 2000 (%)" 
+                                              label="Debit < 2000 (%)"
                                               readonly
                                             class="no-pointer-events" v-model="shortLead.debitLessthanAmount"
                                             />
@@ -151,7 +151,7 @@
                                           <q-item-label>
                                             <q-input 
                                               color="grey-9"
-                                              float-label="Debit < 2000 (%)"
+                                              label="Debit < 2000 (%)"
                                               readonly
                                             class="no-pointer-events" v-model="shortLead.debitGreaterthanAmount" 
                                             />
@@ -164,7 +164,7 @@
                                         <q-item-label>
                                             <q-input 
                                                 color="grey-9"
-                                                float-label="Std CC (%)" 
+                                                label="Std CC (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="shortLead.stdCC" 
                                             /> 
@@ -174,7 +174,7 @@
                                         <q-item-label>
                                             <q-input 
                                                 color="grey-9"
-                                                float-label="Premium CC (%)" 
+                                                label="Premium CC (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="shortLead.premiumCC" 
                                             />
@@ -184,7 +184,7 @@
                                         <q-item-label>
                                             <q-input 
                                                 color="grey-9"
-                                                float-label="Corp (%)" 
+                                                label="Corp (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="shortLead.corpIntlCC" 
                                             />
@@ -194,7 +194,7 @@
                                         <q-item-label>
                                             <q-input 
                                                 color="grey-9"
-                                                float-label="Intl (%)" 
+                                                label="Intl (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="shortLead.corpIntlCC" 
                                             />
@@ -204,7 +204,7 @@
                                         <q-item-label>
                                             <q-input 
                                                 color="grey-9"
-                                                float-label="Super Pre CC (%)" 
+                                                label="Super Pre CC (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="shortLead.corpIntlCC" 
                                             />

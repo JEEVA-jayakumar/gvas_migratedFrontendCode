@@ -30,7 +30,7 @@
           <q-td
             v-slot:body-cell-date="props"
             :props="props"
-          >{{ props.row.submitteSATDate | moment("Do MMM Y") }}</q-td>
+          >{{ $moment_format(props.row.submitteSATDate, "Do MMM Y") }}</q-td>
 
           <q-td
             v-slot:body-cell-lead_id="props"
@@ -155,7 +155,7 @@
                 color="grey-9"
                 v-model="filter"
                 placeholder="Type.."
-                float-label="Search by SO name, Merchant Name, Lead ID"
+                label="Search by SO name, Merchant Name, Lead ID"
                 class="q-mr-lg q-py-sm"
               />
             </div>

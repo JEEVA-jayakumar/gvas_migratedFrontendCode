@@ -71,7 +71,7 @@
       <!--Aggregator select List-->
       <!-- <div class="row bottom-border q-px-md q-py-sm items-center">
         <div class="col-md-4">
-          <q-select color="grey-9" v-model="formData.aggregator" float-label="Select Aggregator" radio
+          <q-select color="grey-9" v-model="formData.aggregator" label="Select Aggregator" radio
             :options="dropdDown.aggregatorOptions" @input="selectedAggregators" />
         </div>
       </div> -->
@@ -98,7 +98,7 @@
               <template slot="top">
                 <!--START: table filter,search  :pagination="paginationControl"-->
                 <div class="col-md-5">
-                  <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." float-label="Search By Device Serail Number.."
+                  <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search By Device Serail Number.."
                     class="q-mr-lg q-py-sm" />
                 </div>
 
@@ -108,7 +108,7 @@
                       color="grey-9"
                       v-model="filterSearch"
                       placeholder="Type.."
-                      float-label="Search .."
+                      label="Search .."
                       class="q-mr-lg q-py-sm"
                     />-->
                   <downloadExcel :rows="getAllPhonepeInventoryDevicesData" :fields="json_fields"

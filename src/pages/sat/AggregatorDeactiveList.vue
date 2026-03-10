@@ -49,7 +49,7 @@
           props.row.leadInformation == null ? "NA" : props.row.leadInformation.leadAddress
         }}</q-td>
         <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{ props.row.deviceStatusDate | moment("Do MMM Y") }}</span>
+          <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
         </q-td>
         <q-td v-slot:body-cell-viewDocument="props" :props="props">
           <div
@@ -162,7 +162,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search by MID, TID, Merchant Name"
+              label="Search by MID, TID, Merchant Name"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -172,7 +172,7 @@
               v-model="formData.fromDate"
               :min="yesterday"
               :max="tomorrow"
-              float-label="From Date"
+              label="From Date"
             />
           </div>
           <div class="col-2">
@@ -181,7 +181,7 @@
               v-model="formData.toDate"
               :min="yesterday"
               :max="tomorrow"
-              float-label="To Date"
+              label="To Date"
             />
           </div>
           <div class="col-2">

@@ -28,7 +28,7 @@
                     <div class="row group content-stretch">
                         <!-- Device -->
                         <div class="col">
-                            <q-card class=" border-1 q-custom-class" flat>
+                            <q-card border-1 q-custom-class" flat>
                                 <q-card-section class="q-pa-sm items-center bottom-border-dark bg-grey-4">
                                     <div class="row items-center">
                                         <div class="col text-caption text-weight-medium">
@@ -81,7 +81,7 @@
                         <!-- Exception -->
                         <div v-if="formData.shortLead.leadCategory == 2" class="col">
                             <div class="group">
-                                <q-card v-if="formData.shortLead.kyc" class=" border-1" flat>
+                                <q-card v-if="formData.shortLead.kyc" border-1" flat>
                                     <q-card-section class="q-pa-sm bottom-border-dark bg-grey-4">
                                         <div class="row items-center">
                                             <div class="col-auto text-caption text-weight-medium">
@@ -153,7 +153,7 @@
 
                         <!-- Payment -->
                         <div class="col">
-                            <q-card class=" border-1 q-custom-class" flat>
+                            <q-card border-1 q-custom-class" flat>
                                 <q-card-section class="q-pa-sm bottom-border-dark bg-grey-4">
                                     <div class="col-auto text-caption text-weight-medium ">
                                         Payment
@@ -203,7 +203,7 @@
 
                         <!-- MDR -->
                         <div class="col">
-                            <q-card class=" border-1 q-custom-class" flat>
+                            <q-card border-1 q-custom-class" flat>
                                 <q-card-section class="q-pa-sm bottom-border-dark bg-grey-4">
                                     <div class="col-auto text-caption text-weight-medium">
                                         MDR

@@ -27,8 +27,8 @@
           color="grey-1"
           @select="goToUnassignedTab"
         >
-          <q-tab default color="dark" name="statusTab" slot="title" label="TID & MID STATUS"/>
-          <!-- <q-tab color="dark" name="rejectedTab" slot="title" label="Rejected Leads" /> -->
+          <q-tab default color="dark" name="statusTab"  label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab"  label="Rejected Leads" /> -->
           <q-tab-panel name="rejectedTab">
               <varaneekRejectedLead/>
             </q-tab-panel>
@@ -59,14 +59,12 @@
               <q-td
                 v-slot:body-cell-submitToMarsDate="props"
                 :props="props"
-                >{{
-                  props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-                }}</q-td
+                >{{ $moment_format(props.row.leadInformation.submitToMarsDate, "Do MMM Y") }}</q-td
               >
               <q-td
                 v-slot:body-cell-createdAt="props"
                 :props="props"
-                >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+                >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td
               >
               <q-td
                 v-slot:body-cell-mid="props"
@@ -83,7 +81,7 @@
                     color="grey-9"
                     v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search By MID, TID"
+                    label="Search By MID, TID"
                     class="q-mr-lg q-py-sm"
                   />
                 </div>

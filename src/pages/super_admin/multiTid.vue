@@ -4,8 +4,8 @@
     <div>
 
       <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1">
-        <q-tab default color="dark" name="active" slot="title" label="Active TID" />
-        <!-- <q-tab color="dark" name="deactive" slot="title" label="Deactive TID" /> -->
+        <q-tab default color="dark" name="active"  label="Active TID" />
+        <!-- <q-tab color="dark" name="deactive"  label="Deactive TID" /> -->
 
         <q-tab-panel name="active">
           <q-table :rows="getlsVasHostInstanceDetails" table-class="customSATableClass" :columns="columns" :filter="filterSearch"
@@ -27,7 +27,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <q-input clearable color="grey-9" v-model.trim="filterSearch" placeholder="Type.."
-                      float-label="Search by Plan Name" />
+                      label="Search by Plan Name" />
                   </div>
                 </div>
               </div>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-for="(v,index) in $v.partnersArr.$each"
+      v-for="(v,index) in v$.partnersArr.$each"
       :key="index"
       class="row q-my-xs gutter-sm"
       ref="parentElement"
@@ -14,7 +14,7 @@
               Partner 0{{parseInt(index)+1}}
             </span>
           </div>
-          <div class="col-auto" v-if="Object.keys($v.partnersArr.$each).length > 1">
+          <div class="col-auto" v-if="Object.keys(v$.partnersArr.$each).length > 1">
             <q-btn round icon="delete" @click="removePartnerFromArr(v,index)" color="negative"/>
           </div>
         </div>
@@ -25,7 +25,7 @@
           @blur="v.name.$touch()"
           color="grey-9"
           v-model="v.$model.name"
-          float-label="Name*"
+          label="Name*"
           placeholder="Name*"
         />
       </div>
@@ -36,7 +36,7 @@
           @blur="v.pan.$touch()"
           color="grey-9"
           v-model="v.$model.pan"
-          float-label="Pan*"
+          label="Pan*"
           placeholder="Pan*"
         />
       </div>
@@ -46,7 +46,7 @@
           @blur="v.address.$touch()"
           color="grey-9"
           v-model="v.$model.address"
-          float-label="Address*"
+          label="Address*"
           placeholder="Address*"
         />
       </div>
@@ -57,7 +57,7 @@
           color="grey-9"
           type="number"
           v-model="v.$model.pin"
-          float-label="Pincode*"
+          label="Pincode*"
           placeholder="Pincode*"
         />
       </div>
@@ -67,7 +67,7 @@
           @blur="v.cityRefCode.$touch()"
           color="grey-9"
           v-model="v.$model.cityRefLabel"
-          float-label="City (type min 3 characters)*"
+          label="City (type min 3 characters)*"
           placeholder="Start typing ..*"
         >
           <q-autocomplete
@@ -85,7 +85,7 @@
           @blur="v.stateRefCode.$touch()"
           color="grey-9"
           v-model="v.$model.stateRefLabel"
-          float-label="State (type min 3 characters)*"
+          label="State (type min 3 characters)*"
           placeholder="Start typing ..*"
         >
           <q-autocomplete
@@ -104,7 +104,7 @@
           color="grey-9"
           type="tel"
           v-model="v.$model.contactMobile"
-          float-label="Mobile*"
+          label="Mobile*"
           placeholder="Mobile*"
         />
       </div>
@@ -115,7 +115,7 @@
           color="grey-9"
           type="email"
           v-model="v.$model.contactEmail"
-          float-label="Email*"
+          label="Email*"
           placeholder="Email*"
         />
       </div>
@@ -222,14 +222,14 @@ export default {
 
     // Partners city selction
     partnerCitySelected(item, index) {
-      this.$v.partnersArr.$each[index].cityRefCode.$model = item.value;
-      this.$v.partnersArr.$each[index].cityRefLabel.$model = item.label;
+      this.v$.partnersArr.$each[index].cityRefCode.$model = item.value;
+      this.v$.partnersArr.$each[index].cityRefLabel.$model = item.label;
     },
 
     // Partners state selection
     partnerStateSelected(item, index) {
-      this.$v.partnersArr.$each[index].stateRefCode.$model = item.value;
-      this.$v.partnersArr.$each[index].stateRefLabel.$model = item.label;
+      this.v$.partnersArr.$each[index].stateRefCode.$model = item.value;
+      this.v$.partnersArr.$each[index].stateRefLabel.$model = item.label;
     },
 
     addMorePartnersSet() {
@@ -252,8 +252,8 @@ export default {
       this.partnersArr.splice(index, 1);
     },
     validate() {
-      this.$v.partnersArr.$touch();
-      if (this.$v.partnersArr.$error) {
+      this.v$.partnersArr.$touch();
+      if (this.v$.partnersArr.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$emit("goNext", "partnerInformation", {

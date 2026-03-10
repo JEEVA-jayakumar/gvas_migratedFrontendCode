@@ -38,11 +38,11 @@
         <q-td
           v-slot:body-cell-dateCreated="props"
           :props="props"
-        >{{ props.row.createdAt | moment("Do MMM Y")}}</q-td>
+        >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-shortleadDate="props"
           :props="props"
-        >{{ props.row.shortleadDate | moment("Do MMM Y")}}</q-td>
+        >{{ $moment_format(props.row.shortleadDate, "Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-leadId="props"
           :props="props"
@@ -83,7 +83,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search by SO name, Merchant Name, Lead ID"
+              label="Search by SO name, Merchant Name, Lead ID"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -95,7 +95,7 @@
             color="grey-9"
             :options="options"
             placeholder="Select"
-            float-label= "Filter By"
+            label= "Filter By"
             class="q-mr-lg q-py-sm"
             size="sm"
             />

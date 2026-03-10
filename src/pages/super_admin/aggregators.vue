@@ -4,8 +4,8 @@
         <div>
 
             <q-tabs class="shadow-1" color="grey-1">
-                <q-tab default color="dark" name="active" slot="title" label="Active Aggregators" />
-                <q-tab color="dark" name="deactive" slot="title" label="Deactive Aggregators" />
+                <q-tab default color="dark" name="active"  label="Active Aggregators" />
+                <q-tab color="dark" name="deactive"  label="Deactive Aggregators" />
                 <q-tab-panel name="active">
                     <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns"
                         :filter="filterSearch" :pagination="paginationControl"

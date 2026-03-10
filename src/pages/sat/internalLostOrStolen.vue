@@ -75,14 +75,10 @@
           <span class="label">{{ props.row.lostOrStolenRemarks }}</span>
         </q-td>
         <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{
-            props.row.deviceStatusDate | moment("Do MMM Y")
-          }}</span>
+          <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
         </q-td>
         <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{
-            props.row.deviceStatusDate | moment("Do MMM Y")
-          }}</span>
+          <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
         </q-td> -->
         <q-td v-slot:body-cell-action="props" :props="props">
           <q-btn
@@ -116,7 +112,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search Using TID, MID, Lead ID, Merchant Name"
+              label="Search Using TID, MID, Lead ID, Merchant Name"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -141,14 +137,12 @@
       >
       
         <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{
-            props.row.deviceStatusDate | moment("Do MMM Y")
-          }}</span>
+          <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
         </q-td> -->
         <q-td
             v-slot:body-cell-updated_at="props"
             :props="props"
-          >{{ props.row.updatedAt ==null? "NA" : props.row.updatedAt | moment("Do MMM Y") }}</q-td>
+          >{{ $moment_format(props.row.updatedAt ==null? "NA" : props.row.updatedAt, "Do MMM Y") }}</q-td>
         <q-td v-slot:body-cell-Status="props" :props="props">
           <span
             class="label text-positive"
@@ -231,7 +225,7 @@
               color="grey-9"
               v-model="filter1"
               placeholder="Type.."
-              float-label="Search Using TID, MID "
+              label="Search Using TID, MID "
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -240,8 +234,8 @@
               <q-btn 
               square 
               outline 
-              color="purple-9" 
-              label="Download as Excel" 
+              color="purple-9"
+              label="Download as Excel"
               class="q-mr-lg q-py-sm float-right" 
               size="md" 
               @click="downloadLostDatas()" />

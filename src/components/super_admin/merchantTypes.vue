@@ -17,11 +17,11 @@
       </div>
     </div>
     <q-tabs color="grey-9">
-      <!-- Tabs - notice slot="title" -->
-      <q-tab @select="fetchMerchantTypeList" default slot="title" label="Active List" name="tab-1"/>
+      <!-- Tabs - notice  -->
+      <q-tab @select="fetchMerchantTypeList" default  label="Active List" name="tab-1"/>
       <q-tab
         @select="fetchMerchantTypeDeActivatedList"
-        slot="title"
+
         label="De-Actived List"
         name="tab-2"
       />
@@ -73,7 +73,7 @@
                 color="grey-9"
                 v-model="filterSearch"
                 placeholder="Type.."
-                float-label="Search merchant type"
+                label="Search merchant type"
               />
             </div>
             <div class="col-4" align="right">
@@ -126,7 +126,7 @@
                 color="grey-9"
                 v-model="deActivatedSearch"
                 placeholder="Type.."
-                float-label="Search merchant type"
+                label="Search merchant type"
               />
             </div>
             <!--END: table filter,search -->

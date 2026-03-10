@@ -21,7 +21,7 @@
       >
       <!-- :rows-per-page-options="[100,200,300,400,500]" -->
       <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{props.row.deviceStatusDate | moment("Do MMM Y")}}</span>
+          <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
         </q-td>
         <template slot="top" class="bottom-border">
           <!--START: table filter,search -->
@@ -31,7 +31,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search by Device Serial Number, MID, TID, Merchant Name"
+              label="Search by Device Serial Number, MID, TID, Merchant Name"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -45,7 +45,7 @@
               color="grey-9"
               :options="getAllRegionsData"
               placeholder="Select"
-              float-label="Filter By"
+              label="Filter By"
             />
           </div>-->
            <div class="col-md-6">
@@ -53,8 +53,8 @@
             <q-btn 
             square 
             outline 
-            color="purple-9" 
-            label="Download as Excel" 
+            color="purple-9"
+            label="Download as Excel"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloadInventoryWithMerchant()" />

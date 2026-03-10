@@ -12,14 +12,14 @@
       </div>
       <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-md-4">
-          <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
+          <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
             :options="aggregatorOptions" @input="getaggregator" />
         </div>
       </div> -->
       <div >
         <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
           <div class="col-6 col-md-6">
-            <q-input v-model="podNumber" float-label="Enter POD number" color="grey-9" />
+            <q-input v-model="podNumber" label="Enter POD number" color="grey-9" />
           </div>
           <div class="col-6 col-md-6" align="right">
             <q-btn @click="fnAjaxFaultyInventoryData" color="light-blue" class="q-py-xs" label="Submit" />
@@ -29,7 +29,7 @@
           <!--START: table title -->
           <div class="col-6 col-md-6">
             <q-select :disable="disableDeviceTypeSelection" @input="fnSetDevicesByDeviceId"
-              v-model="formData.device_type" float-label="Select Device Type" color="grey-9" :options="deviceOptions" />
+              v-model="formData.device_type" label="Select Device Type" color="grey-9" :options="deviceOptions" />
           </div>
           <div class="col-6 col-md-6" align="right">
             <q-btn :disabled="formData.device_type == '' || formData.region == ''" @click="openScannerComp"
@@ -62,7 +62,7 @@
             <!--START: table filter,search -->
             <div class="col-md-5">
               <q-input clearable color="grey-9" v-model="filter" placeholder="Type.."
-                float-label="Search by SO name, Merchant Name, Lead ID" class="q-mr-lg q-py-sm" />
+                label="Search by SO name, Merchant Name, Lead ID" class="q-mr-lg q-py-sm" />
             </div>
             <!--END: table filter,search -->
           </template>

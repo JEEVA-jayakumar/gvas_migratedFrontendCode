@@ -41,7 +41,7 @@
                 separator
                 color="grey-9"
                 placeholder="Type.."
-                float-label= "Search"
+                label= "Search"
                 class="q-mr-lg q-py-sm"
                 />
               </div>
@@ -92,7 +92,7 @@
                 </q-item-section>
               </q-item>
               <q-item class="q-pa-lg items-center" multiline>
-                <q-item-section class="vertical-middle">
+                <q-item-section vertical-middle">
                   <q-item-label>
                     Revenue percentage from target
                   </q-item-label>

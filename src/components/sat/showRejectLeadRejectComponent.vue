@@ -16,19 +16,19 @@
            </div>
            <div>
             <q-input
-              class=" no-pointer-events"
+              no-pointer-events"
               v-model="formData.soReason"
-              float-label="SO Remarks"
-              color="light-blue" 
+              label="SO Remarks"
+              color="light-blue"
             />
           </div>
           <div>
             <q-input
               v-model="formData.leadInformation.kycSatRemark"
-              @blur="$v.formData.leadInformation.kycSatRemark.$touch"      
-              :error="$v.formData.leadInformation.kycSatRemark.$error" 
-              float-label="SAT Remarks"
-              color="light-blue" 
+              @blur="v$.formData.leadInformation.kycSatRemark.$touch"
+              :error="v$.formData.leadInformation.kycSatRemark.$error"
+              label="SAT Remarks"
+              color="light-blue"
             />
           </div>
           <div class="group">
@@ -84,8 +84,8 @@ export default {
       this.$emit("toggleLeadModal");
     },
     sendRemarks(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({

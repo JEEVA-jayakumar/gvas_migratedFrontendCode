@@ -28,7 +28,7 @@
         <q-input
           v-model="formData.soundBoxNumber.soundBoxNumber"
           readonly
-          float-label="Scan Soundbox Number"
+          label="Scan Soundbox Number"
         />
         <div class="group">
           <q-btn
@@ -94,8 +94,8 @@ export default {
     ...mapActions("phonePeCrm", ["UPDATE_SCAN_SOUNDBOX_NUMBER"]),
     fnsubmit(formData) {
       console.log("FORM DATA", JSON.stringify(formData));
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();

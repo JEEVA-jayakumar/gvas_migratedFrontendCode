@@ -97,10 +97,10 @@
               </div>
             </div>
 
-            <q-btn size="sm" align="right" rounded outline color="purple-9" 
+            <q-btn size="sm" align="right" rounded outline color="purple-9"
                 class="float-right q-mx-sm q-my-md">Send
             </q-btn>
-            <q-btn size="sm" align="right" rounded outline color="grey-7" 
+            <q-btn size="sm" align="right" rounded outline color="grey-7"
                 class="float-right q-mx-sm q-my-md" @click="emitfnshowAddPermissions(propShowAddPermissions)">Cancel
             </q-btn>
         </form>

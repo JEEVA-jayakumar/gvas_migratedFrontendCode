@@ -18,10 +18,10 @@
                 <div class="col-md-12">
                         <q-select
                           v-model="formData."   
-                          :error="$v.formData.issue_req_type.$error" 
+                          :error="v$.formData.issue_req_type.$error"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Select Service Request" 
+                          color="grey-9"
+                          label="Select Service Request"
                           :options="selectServiceReqType"
                           placeholder="Select Service Request" 
                         />
@@ -31,10 +31,10 @@
                      <div class="col-md-12">
                         <q-input
                           v-model="formData.name"   
-                          :error="$v.formData.name.$error" 
+                          :error="v$.formData.name.$error"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Enter Sub Task Name" 
+                          color="grey-9"
+                          label="Enter Sub Task Name"
                           placeholder="Enter Sub Task Name" 
                         />
                     </div>
@@ -121,8 +121,8 @@ fnAddSubTaskDetails(){
 
     fnfinalsubmitAddSubTaskType(formData) {
          console.log("SUBMIT Sub Task RESPONSE",JSON.stringify(formData))
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
           console.log("SUBMIT RESPONSE",JSON.stringify(formData))

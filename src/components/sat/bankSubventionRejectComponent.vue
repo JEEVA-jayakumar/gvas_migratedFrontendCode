@@ -13,7 +13,7 @@
         <div>
           <q-input
             v-model="formData.leadVerificationStatus.reason"
-            float-label="SAT Remarks"
+            label="SAT Remarks"
             color="grey-9"
           />
         </div>
@@ -85,8 +85,8 @@ export default {
       this.$emit("toggleLeadModal");
     },
     sendRemarks(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({

@@ -18,8 +18,8 @@
             <q-input
               type="textarea"
               placeholder="Type.."
-              @blur="$v.remarks.$touch"
-              :error="$v.remarks.$error"
+              @blur="v$.remarks.$touch"
+              :error="v$.remarks.$error"
               class="q-my-md"
               color="grey-9"
               align="left"
@@ -112,8 +112,8 @@
           selfAssignmentId:reqData.id,
           remarks:this.remarks
         }
-          this.$v.remarks.$touch();
-          if (this.$v.remarks.$error) {
+          this.v$.remarks.$touch();
+          if (this.v$.remarks.$error) {
             this.$q.notify("Please enter reason.");
           }
           else {

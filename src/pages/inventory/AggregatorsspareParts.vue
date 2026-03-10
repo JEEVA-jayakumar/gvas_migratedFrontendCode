@@ -10,8 +10,8 @@
               inverted
               class="shadow-1"
             >
-              <q-tab name="PhonepespareParts" label="Aggregator Spare Parts" slot="title" />
-               <q-tab name="PhonepesparePodList" label="Aggregator Spare Pod List" slot="title" />
+              <q-tab name="PhonepespareParts" label="Aggregator Spare Parts"  />
+               <q-tab name="PhonepesparePodList" label="Aggregator Spare Pod List"  />
               
               <q-tab-panel name="PhonepespareParts">
                 <PhonepesparePartsAddStocks

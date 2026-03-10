@@ -7,9 +7,9 @@
         color="grey-1"
         @select="goToCompleteTab"
       >
-        <q-tab default color="dark" name="tab-1" slot="title" label="New Requests" />
-        <q-tab color="dark" name="tab-2" slot="title" label="Courier" />
-        <q-tab color="dark" name="tab-3" slot="title" label="Failure Onboarding" />
+        <q-tab default color="dark" name="tab-1"  label="New Requests" />
+        <q-tab color="dark" name="tab-2"  label="Courier" />
+        <q-tab color="dark" name="tab-3"  label="Failure Onboarding" />
         <q-tab-panel name="tab-1">
           <div class="row items-center">
             <q-input
@@ -18,7 +18,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search LeadNo, ContactName, LegalName, MerchantNumber..."
+              label="Search LeadNo, ContactName, LegalName, MerchantNumber..."
             />
           </div>
           <q-table
@@ -126,7 +126,7 @@
               </template>
               <template v-else>
                 <q-input
-                  float-label="Enter POD Number"
+                  label="Enter POD Number"
                   placeholder="Enter POD Number"
                   v-model="props.row.podNumber"
                   dense

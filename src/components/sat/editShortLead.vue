@@ -21,7 +21,7 @@
               v-model="formData.id"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="leadId"
+              label="leadId"
               placeholder="leadId"
             />
           </div>
@@ -30,10 +30,10 @@
               disable
               @keyup.enter="submitShortLead(formData)"
               v-model="formData.leadName"
-              :error="$v.formData.leadName.$error"
+              :error="v$.formData.leadName.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="leadName"
+              label="leadName"
               placeholder="leadName"
             />
           </div>
@@ -42,10 +42,10 @@
               disable
               @keyup.enter="submitShortLead(formData)"
               v-model="formData.leadNumber"
-              :error="$v.formData.leadNumber.$error"
+              :error="v$.formData.leadNumber.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="leadNumber"
+              label="leadNumber"
               placeholder="leadNumber"
             />
           </div>
@@ -54,10 +54,10 @@
               disable
               @keyup.enter="submitShortLead(formData)"
               v-model="formData.shortleadDate"
-              :error="$v.formData.shortleadDate.$error"
+              :error="v$.formData.shortleadDate.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="shortleadDate"
+              label="shortleadDate"
               placeholder="shortleadDate"
             />
           </div>
@@ -66,10 +66,10 @@
               disable
               @keyup.enter="submitShortLead(formData)"
               v-model="formData.contactNumber"
-              :error="$v.formData.contactNumber.$error"
+              :error="v$.formData.contactNumber.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="contactNumber"
+              label="contactNumber"
               placeholder="contactNumber"
             />
           </div>
@@ -136,8 +136,8 @@ export default {
     },
     //Permission creation final submit
     submitShortLead(request) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         let params = {

@@ -22,10 +22,10 @@
         <div class="column group">
           <div>
             <q-input v-model="formData.device" 
-              @blur="$v.formData.device.$touch"      
-              :error="$v.formData.device.$error" 
-              @keyup.enter="$v.formData.device.$touch"
-              class="text-weight-regular text-grey-8" color="grey-9" float-label="Device" placeholder="Device" 
+              @blur="v$.formData.device.$touch"
+              :error="v$.formData.device.$error"
+              @keyup.enter="v$.formData.device.$touch"
+              class="text-weight-regular text-grey-8" color="grey-9" label="Device" placeholder="Device"
             />
           </div>
           <div align="right">
@@ -80,7 +80,7 @@
             color="grey-9"
             v-model="filterSearch"
             placeholder="Type.."
-            float-label="Search by name, short name"
+            label="Search by name, short name"
           />
         </div>
         <div class="col-4" align="right">

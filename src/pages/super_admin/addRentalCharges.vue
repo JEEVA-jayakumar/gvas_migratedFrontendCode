@@ -10,75 +10,75 @@
           <q-card-separator />
           <q-card-main>
             <q-item>
-              <q-item-main>
+              <q-item-section>
                 <q-select
                   color="grey-9"
                   v-model="formData.leadSource"
                   :options="dropDown.leadSourceOptions"
-                  float-label="Select lead source"
+                  label="Select lead source"
                   placeholder="Lead source"
                 />
-              </q-item-main>
+              </q-item-section>
             </q-item>
 
             <q-item>
-              <q-item-main>
+              <q-item-section>
                 <q-select
                   color="grey-9"
                   v-model="formData.device"
                   :options="dropDown.deviceOptions"
-                  float-label="Select device"
+                  label="Select device"
                   placeholder="Device"
                 />
-              </q-item-main>
+              </q-item-section>
             </q-item>
 
             <q-item>
-              <q-item-main>
+              <q-item-section>
                 <q-select
                   color="grey-9"
                   v-model="formData.marsDevice"
                   :options="dropDown.marsDeviceOptions"
-                  float-label="Mars Device Model"
+                  label="Mars Device Model"
                 />
-              </q-item-main>
+              </q-item-section>
             </q-item>
 
             <q-item>
-              <q-item-main>
+              <q-item-section>
                 <q-select
                   color="grey-9"
                   v-model="formData.plan"
                   :options="dropDown.planOptions"
-                  float-label="Select plan"
+                  label="Select plan"
                   placeholder="Plan"
                   @input="fnCategoryBasedRental(formData)"
                 />
-              </q-item-main>
+              </q-item-section>
             </q-item>
 
             <q-item>
-              <q-item-main>
+              <q-item-section>
                 <q-input
                   color="grey-9"
                   type="number"
                   v-model="formData.setupFees"
                   placeholder="Setup fee"
-                  float-label="Enter Setup fee"
+                  label="Enter Setup fee"
                 />
-              </q-item-main>
+              </q-item-section>
             </q-item>
 
             <q-item>
-              <q-item-main>
+              <q-item-section>
                 <q-input
                   color="grey-9"
                   type="number"
                   v-model="formData.monthlyFees"
                   placeholder="Recurring fee"
-                  float-label="Enter recurring fee"
+                  label="Enter recurring fee"
                 />
-              </q-item-main>
+              </q-item-section>
             </q-item>
           </q-card-main>
 

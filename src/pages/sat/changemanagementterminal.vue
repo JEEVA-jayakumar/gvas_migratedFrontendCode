@@ -17,7 +17,7 @@
         <q-td
           v-slot:body-cell-updatedAt="props"
           :props="props"
-        >{{ props.row.leadInformation.updatedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.leadInformation.updatedAt, "Do MMM Y") }}</q-td>
         <q-td v-slot:body-cell-Status="props" :props="props">
           <span
             class="label text-positive"
@@ -136,7 +136,7 @@
               placeholder="Type.."
               :debounce="600"
               class="q-mr-lg q-py-sm"
-              float-label="Search By MID/TID/Merchant Name "
+              label="Search By MID/TID/Merchant Name "
             />
           </div>
           <!--END: table filter,search -->
@@ -183,7 +183,7 @@
               placeholder="Type.."
               :debounce="600"
               class="q-mr-lg q-py-sm"
-              float-label="Search By MID/TID/Merchant Name"
+              label="Search By MID/TID/Merchant Name"
             />
           </div>
           <!--END: table filter,search -->

@@ -20,10 +20,10 @@
                 <q-select
                   placeholder="Choose from the below*"
                   color="grey-9"
-                  @blur="$v.formdata.branchZone.$touch;"
-                  :error="$v.formdata.branchZone.$error"
+                  @blur="v$.formdata.branchZone.$touch;"
+                  :error="v$.formdata.branchZone.$error"
                   v-model.trim="formdata.branchZone"
-                  float-label="Zone*"
+                  label="Zone*"
                   :options="getAllZone"
                   @clear="fnClearZone"
                   @input="fnFetchZone()"
@@ -33,10 +33,10 @@
                 <q-select
                   placeholder="Choose from the below*"
                   color="grey-9"
-                  @blur="$v.formdata.iaDistrict.$touch;"
-                  :error="$v.formdata.iaDistrict.$error"
+                  @blur="v$.formdata.iaDistrict.$touch;"
+                  :error="v$.formdata.iaDistrict.$error"
                   v-model.trim="formdata.iaDistrict"
-                  float-label="IA_District*"
+                  label="IA_District*"
                   :options="getAllDistrict"
                   @input="fnFetchBranchName()"
                 />
@@ -47,7 +47,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.raDistrict"
-                  float-label="RA_District*"
+                  label="RA_District*"
                   :options="getAllDistrict"
                   @clear="fnClearZone"
                   @input="fnFetchZone()"
@@ -59,7 +59,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.od1District"
-                  float-label="OD1_District*"
+                  label="OD1_District*"
                   :options="getAllDistrict"
                   @clear="fnClearZone"
                   @input="fnFetchZone()"
@@ -71,7 +71,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.od2District"
-                  float-label="OD2_District*"
+                  label="OD2_District*"
                   :options="getAllDistrict"
                 />
               </div>
@@ -79,20 +79,20 @@
                 <q-select
                   placeholder="Choose from the below*"
                   color="grey-9"
-                  @blur="$v.formdata.installationBranchCode.$touch;"
-                  :error="$v.formdata.installationBranchCode.$error"
+                  @blur="v$.formdata.installationBranchCode.$touch;"
+                  :error="v$.formdata.installationBranchCode.$error"
                   v-model.trim="formdata.installationBranchCode"
-                  float-label="InstallationBranchName*"
+                  label="InstallationBranchName*"
                   :options="getAllBranchName"
                 />
               </div>
               <div class="col-md-6">
                 <q-input
                   color="grey-9"
-                  @blur="$v.formdata.lorState.$touch;"
-                  :error="$v.formdata.lorState.$error"
+                  @blur="v$.formdata.lorState.$touch;"
+                  :error="v$.formdata.lorState.$error"
                   v-model.trim="formdata.lorState"
-                  float-label="IOR_STATE(type min 3 characters)*"
+                  label="IOR_STATE(type min 3 characters)*"
                   placeholder="Start typing ..*"
                 >
                   <q-autocomplete
@@ -106,10 +106,10 @@
               <div class="col-md-6">
                 <q-input
                   color="grey-9"
-                  @blur="$v.formdata.pin.$touch;"
-                  :error="$v.formdata.pin.$error"
+                  @blur="v$.formdata.pin.$touch;"
+                  :error="v$.formdata.pin.$error"
                   v-model.trim="formdata.pin"
-                  float-label="Pincode"
+                  label="Pincode"
                   placeholder="Start typing ..*"
                   @input="pincodeBasedDistrict"
                 >
@@ -126,7 +126,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.state"
-                  float-label="State*"
+                  label="State*"
                   @input="pincodeandDistrictBasedCity"
                   :options="getPincodeBasedDistrict"
                 />
@@ -135,10 +135,10 @@
                 <q-select
                   placeholder="Choose from the below*"
                   color="grey-9"
-                  @blur="$v.formdata.city.$touch;"
-                  :error="$v.formdata.city.$error"
+                  @blur="v$.formdata.city.$touch;"
+                  :error="v$.formdata.city.$error"
                   v-model.trim="formdata.city"
-                  float-label="City*"
+                  label="City*"
                   :options="getPincodeDistrict"
                   @input="citybasedlocation"
                 />
@@ -148,7 +148,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.iaLocation"
-                  float-label="IA_LOCATION*"
+                  label="IA_LOCATION*"
                   :options="getCityBasedLocation"
                 />
               </div>
@@ -157,7 +157,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.iaSalutation"
-                  float-label="IA_Salution*"
+                  label="IA_Salution*"
                   :options="iaSalutationOptions"
                 />
               </div>
@@ -166,7 +166,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.iaGender"
-                  float-label="IA_Gender*"
+                  label="IA_Gender*"
                   :options="iaGenderOptions"
                 />
               </div>
@@ -175,7 +175,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.od1Salutation"
-                  float-label="OD1_Salutation*"
+                  label="OD1_Salutation*"
                   :options="od1SalutationOptions"
                 />
               </div>
@@ -184,7 +184,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.od1Gender"
-                  float-label="OD1_Gender*"
+                  label="OD1_Gender*"
                   :options="od1GenderOptions"
                 />
               </div>
@@ -193,7 +193,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.od2Salutation"
-                  float-label="OD2_Salutation*"
+                  label="OD2_Salutation*"
                   :options="od2SalutationOptions"
                 />
               </div>
@@ -202,7 +202,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="formdata.od2Gender"
-                  float-label="OD2_Gender*"
+                  label="OD2_Gender*"
                   :options="od2GenderOptions"
                 />
               </div>
@@ -560,8 +560,8 @@ export default {
         });
     },
     finalFormSubmit(request) {
-      this.$v.formdata.$touch();
-      if (this.$v.formdata.$error) {
+      this.v$.formdata.$touch();
+      if (this.v$.formdata.$error) {
         this.$q.notify({
           color: "negative",
           position: "bottom",
@@ -872,7 +872,7 @@ export default {
                         .slice(1, 2);
                       let computeSplitted = splitted[splitted.length - 1];
                       let fieldErrorFound = eval(`
-                        OThis.$v.viewBinding.partnersArr.$each[
+                        OThis.v$.viewBinding.partnersArr.$each[
                           ${findPartnersErrorIndex}
                         ].${computeSplitted}`);
                       fieldErrorFound.$model = "";
@@ -886,7 +886,7 @@ export default {
                       generateErrorMessage.issue = actual.issue;
                       generateErrorMessage.value = actual.value;
                     } else {
-                      let splittingErrorField = `OThis.$v.${splitted.join(".")}`;
+                      let splittingErrorField = `OThis.v$.${splitted.join(".")}`;
                       let fieldErrorFound = eval(splittingErrorField);
                       fieldErrorFound.$model = "";
                       OThis.$set(OThis.error.tab, splitted[1], true);

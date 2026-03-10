@@ -135,17 +135,13 @@
                     <span class="col-md-4 text-weight-medium">{{
                       fieldKeys.ticketStatus.createdDate.label
                     }}</span>
-                    <span class="col-md-8 text-wrap text-primary">{{
-                      tableData.createdDate | moment("Do MMM Y")
-                    }}</span>
+                    <span class="col-md-8 text-wrap text-primary">{{ $moment_format(tableData.createdDate, "Do MMM Y") }}</span>
                   </div>
                   <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                     <span class="col-md-4 text-weight-medium">{{
                       fieldKeys.ticketStatus.updatedDate.label
                     }}</span>
-                    <span class="col-md-8 text-wrap text-primary">{{
-                      tableData.updatedDate | moment("Do MMM Y")
-                    }}</span>
+                    <span class="col-md-8 text-wrap text-primary">{{ $moment_format(tableData.updatedDate, "Do MMM Y") }}</span>
                   </div>
                   <div class="row gutter-x-xs gutter-y-xs q-pa-sm text-grey-9">
                     <span class="col-md-4 text-weight-medium">{{

@@ -4,7 +4,7 @@
     <div>
 
       <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="changeTabs">
-        <q-tab default color="dark" name="active" slot="title" label="Active" />
+        <q-tab default color="dark" name="active"  label="Active" />
         <!--:rows="activeTableData"-->
         <q-tab-panel name="active">
           <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch"

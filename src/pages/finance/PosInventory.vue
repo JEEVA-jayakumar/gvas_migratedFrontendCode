@@ -45,7 +45,7 @@
 
 
           <q-td v-slot:body-cell-dateofSubmission="props" :props="props">
-            <span class="label">{{props.row.financeSubmissionDate | moment("Do MMM Y")}}</span>
+            <span class="label">{{ $moment_format(props.row.financeSubmissionDate, "Do MMM Y") }}</span>
           </q-td>
           <template v-slot:top="props" class="bottom-border">
           <!--START: table  :rows-per-page-options="[5,10,15,20,25]"filter,search -->
@@ -55,7 +55,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search by Request Number"
+              label="Search by Request Number"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -64,8 +64,8 @@
             <q-btn 
             square 
             outline 
-            color="purple-9" 
-            label="Download Report" 
+            color="purple-9"
+            label="Download Report"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloadPOSReport()" />
@@ -131,7 +131,7 @@
                 separator
                 color="grey-9"
                 placeholder="Type.."
-                float-label="Search By Device Type..."
+                label="Search By Device Type..."
                 class="q-mr-lg q-py-sm"
               />
             </div>

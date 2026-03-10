@@ -102,7 +102,7 @@
                     color="grey-9"
                     v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search By Device Serail Number.."
+                    label="Search By Device Serail Number.."
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -113,7 +113,7 @@
                     color="grey-9"
                     v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search .."
+                    label="Search .."
                     class="q-mr-lg q-py-sm"
                   />-->
                   <downloadExcel

@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col">
             <q-input
-             float-label="Select POD Number"
+             label="Select POD Number"
           color="grey-9"
             />
 

@@ -7,13 +7,13 @@
           default
           color="dark"
           name="tab-1"
-          slot="title"
+
           label="Active Issue Mapping"
         />
         <q-tab
           color="dark"
           name="tab-2"
-          slot="title"
+
           label="Deactive Issue Mapping"
         />
         <q-tab-panel name="tab-1">

@@ -4,8 +4,8 @@
         <div>
 
             <q-tabs class="shadow-1" color="grey-1">
-                <q-tab default color="dark" name="active" slot="title" label="Active RegionsGroups" />
-                <!-- <q-tab color="dark" name="deactive" slot="title" label="Deactive Regions" /> -->
+                <q-tab default color="dark" name="active"  label="Active RegionsGroups" />
+                <!-- <q-tab color="dark" name="deactive"  label="Deactive Regions" /> -->
 
                 <q-tab-panel name="active">
                     <q-table 

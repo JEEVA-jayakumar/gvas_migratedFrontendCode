@@ -10,18 +10,18 @@
               inverted
               class="shadow-1"
             >
-              <q-tab name="prefix" label="Prfix Config" slot="title" />
-              <!-- <q-tab name="Socount" label="Inventory So Count" slot="title" /> -->
-              <q-tab name="vasDevLs" label="LeadSource And Vas Device Config" slot="title" />
+              <q-tab name="prefix" label="Prfix Config"  />
+              <!-- <q-tab name="Socount" label="Inventory So Count"  /> -->
+              <q-tab name="vasDevLs" label="LeadSource And Vas Device Config"  />
   
               <!-- <q-tab-panel name="count">
                 <inventoryCount @emittedForTotalSerialNumbers="fnAjaxFetchAllDeviceDetailsWithCount" />
               </q-tab-panel>
-  
+
               <q-tab-panel name="Socount">
                 <inventoryCount @emittedForTotalSerialNumbers="fnAjaxFetchAllDeviceDetailsWithCount" />
               </q-tab-panel>
-  
+
               <q-tab-panel name="dispatch">
                 <dispatchedInventory
                   @fetchDeviceDetailsWithCount="fnAjaxFetchAllDeviceDetailsWithCount"
@@ -38,15 +38,15 @@
               <q-tab-panel name="vasDevLs">
                 <vasDevLs />
               </q-tab-panel>
-<!--   
+<!--
               <q-tab-panel name="allocatetoso">
                 <inventoryallocatetoso />
               </q-tab-panel>
-  
+
               <q-tab-panel name="inventorywithSo">
                 <inventorywithso />
               </q-tab-panel>
-  
+
               <q-tab-panel name="inventorywithResellar">
                 <inventorywithResellar />
               </q-tab-panel>

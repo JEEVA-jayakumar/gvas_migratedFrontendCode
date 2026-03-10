@@ -10,11 +10,11 @@
             clearable
             @clear="fnClearing"
             color="grey-9"
-            @blur="$v.formData.searchTerm.$touch"
-            :error="$v.formData.searchTerm.$error"
+            @blur="v$.formData.searchTerm.$touch"
+            :error="v$.formData.searchTerm.$error"
             v-model="formData.searchTerm"
             placeholder="Type.."
-            float-label="Search By Ticket ID / TID..."
+            label="Search By Ticket ID / TID..."
             class="q-mr-lg q-py-sm"
           />
         </div>
@@ -346,8 +346,8 @@ export default {
   methods: {
     ...mapActions("globalSearchSerialNumber", ["FETCH_DOC_VIEW","FETCH_DOC_VIEW_TICKET"]),
     globalSubmit(request) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } 
       else {

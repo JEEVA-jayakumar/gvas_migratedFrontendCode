@@ -25,7 +25,7 @@
                 :min="yesterday"
                 :max="tomorrow"
                 type="date"
-                float-label="From Date"
+                label="From Date"
               />
             </div>
             <div class="col-md-12">
@@ -36,7 +36,7 @@
                 :min="yesterday"
                 :max="tomorrow"
                 type="date"
-                float-label="To Date"
+                label="To Date"
               />
             </div>
             <div class="col-md-12 group" align="right">

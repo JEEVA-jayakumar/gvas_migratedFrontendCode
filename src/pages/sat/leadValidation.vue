@@ -15,8 +15,7 @@
           :columns="columns" row-key="name" :filter="filter" :pagination="paginationControl"
           :rows-per-page-options="[5,10,15,20]" :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
           <!--START: table body modification -->
-          <q-td v-slot:body-cell-createdAt="props" :props="props">{{ props.row.date | moment("Do MMM Y")
-            }}</q-td>
+          <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment_format(props.row.date, "Do MMM Y") }}</q-td>
 
           <q-td v-slot:body-cell-leadNumber="props" :props="props" class="cursor-pointer"
             @click.native="toggleLeadInformation(props.row)">
@@ -96,7 +95,7 @@
             <!--START: table filter,search -->
             <div class="col-md-5">
               <q-input clearable color="grey-9" v-model="filter" placeholder="Type.." :debounce="600"
-                class="q-mr-lg q-py-sm" float-label="Search By Merchant Name, Lead ID, Lead Source.." />
+                class="q-mr-lg q-py-sm" label="Search By Merchant Name, Lead ID, Lead Source.." />
             </div>
             <!--END: table filter,search -->
           </template>

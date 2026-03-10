@@ -83,7 +83,7 @@
                   color="grey-9"
                   v-model.trim="filterSearch"
                   placeholder="Type.."
-                  float-label="Search by Plan Name"
+                  label="Search by Plan Name"
                 />
               </div>
              

@@ -236,7 +236,7 @@
                 <q-tab
                   class="q-pa-sm"
                   :name="tab.name"
-                  slot="title"
+
                   v-for="tab in          agingTrackerPending.tabs"
                   :key="tab.tabTitle"
                 >
@@ -321,7 +321,7 @@
                 <q-tab
                   class="q-pa-sm"
                   :name="tab.name"
-                  slot="title"
+
                   v-for="tab in          agingTrackerPending.tabs"
                   :key="tab.tabTitle"
                 >

@@ -4,13 +4,13 @@
       <div class="row bottom-border q-pa-sm items-center">
         <div class="col">
           <q-tabs no-pane-border v-model="QRselected" color="dark" inverted class="shadow-1">
-            <q-tab name="createQRSticker" label="Create QR Ref No" slot="title" />
-            <!-- <q-tab name="Socount" label="Inventory So Count" slot="title" /> -->
-            <q-tab name="downloadQRcodes" label="Download QR Codes" slot="title" />
+            <q-tab name="createQRSticker" label="Create QR Ref No"  />
+            <!-- <q-tab name="Socount" label="Inventory So Count"  /> -->
+            <q-tab name="downloadQRcodes" label="Download QR Codes"  />
             <q-tab
               name="implementQRleadsources"
               label="Implement QR for Lead Sources"
-              slot="title"
+
             />
             <q-tab-panel name="createQRSticker">
               <createQRSticker />

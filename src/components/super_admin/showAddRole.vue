@@ -23,7 +23,7 @@
           <div class="col-md-8">
            <q-select
             v-model="formData.hierarchyId"
-            float-label="Hierarchy"
+            label="Hierarchy"
             placeholder="Select Hierarchy"
             class="text-weight-regular text-grey-8" color="grey-9"
             :options="getAllHierarchiesData"
@@ -35,11 +35,11 @@
           <div class="column group q-py-sm">
           <div class="col-md-8">
             <q-input v-model="formData.role" 
-            @blur="$v.formData.role.$touch"
-            :error="$v.formData.role.$error"
+            @blur="v$.formData.role.$touch"
+            :error="v$.formData.role.$error"
             class="text-weight-regular text-grey-8" 
-            color="grey-9" 
-            float-label="Role"
+            color="grey-9"
+            label="Role"
              placeholder="Role" /> 
           </div>
 
@@ -48,9 +48,9 @@
             <q-color 
               clearable
               v-model="formData.roleColor"
-              @blur="$v.formData.roleColor.$touch"
-             :error="$v.formData.roleColor.$error"
-              popover float-label="Choose a role color" color="grey-9"
+              @blur="v$.formData.roleColor.$touch"
+             :error="v$.formData.roleColor.$error"
+              popover label="Choose a role color" color="grey-9"
             />
           </div>
         </div>
@@ -151,9 +151,9 @@ export default {
 
     fnAddRoleSubmit(formData){
       
-      this.$v.formData.$touch();
+      this.v$.formData.$touch();
 
-      if (this.$v.formData.$error) {
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({

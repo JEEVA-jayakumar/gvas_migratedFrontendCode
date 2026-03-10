@@ -3,9 +3,9 @@
   <q-page>
     <div>
       <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @select="goToDownloadTab">
-        <q-tab default color="dark" name="tab-1" slot="title" label="Generate QR" />
-        <q-tab color="dark" name="tab-2" slot="title" label="Download/View QR" />
-        <!-- <q-tab color="dark" name="tab-3" slot="title" label="Request" /> -->
+        <q-tab default color="dark" name="tab-1"  label="Generate QR" />
+        <q-tab color="dark" name="tab-2"  label="Download/View QR" />
+        <!-- <q-tab color="dark" name="tab-3"  label="Request" /> -->
         <q-tab-panel name="tab-1">
           <q-card style="width:100%" >
           <q-card-section>
@@ -13,7 +13,7 @@
               <div class="row">
                 <label class="qrlabel" for="input-id"><b>Select Bank</b></label>
                 <div class="col-3">
-                  <q-select class="select" float-label="Select Bank"  id="input-id" v-model.trim="formData.id" :error="$v.formData.id.$error"  color="grey-9"
+                  <q-select class="select" label="Select Bank"  id="input-id" v-model.trim="formData.id" :error="v$.formData.id.$error"  color="grey-9"
                     :options="bankListOptions" />
                 </div>
               </div>
@@ -22,9 +22,9 @@
                 <div class="row">
                   <label class="invlabel"  for="input"><b>Enter No Of QR</b></label>
                   <div class="col-3">
-                      <q-input type="number" class="qr-input" :disable="this.formData.id == ''" @keyup="trackChange" @keydown="nameKeydown($event)" float-label="Enter Numbers of QR Count" v-model.trim="formData.count" id="input"
-                    @blur="$v.formData.count.$touch"
-                            :error="$v.formData.count.$error"
+                      <q-input type="number" class="qr-input" :disable="this.formData.id == ''" @keyup="trackChange" @keydown="nameKeydown($event)" label="Enter Numbers of QR Count" v-model.trim="formData.count" id="input"
+                    @blur="v$.formData.count.$touch"
+                            :error="v$.formData.count.$error"
                       color="grey-9" />
                   </div>
                 </div>
@@ -44,10 +44,10 @@
             <q-input
             clearable 
             class="btnsize"
-            color="grey-9" 
-            placeholder="Type.." 
+            color="grey-9"
+            placeholder="Type.."
             v-model="filter"
-            float-label="Search by Batch" />
+            label="Search by Batch" />
           </div>
           <q-table table-class="customTableClass" :rows="tableData" :columns="columns"
             :pagination="paginationControl"   :filter="filter" row-key="id" :loading="toggleAjaxLoadFilter"
@@ -377,8 +377,8 @@ export default {
     },
     
     fnsubmit () {
-      this.$v.formData.$touch()
-      if(this.$v.formData.$error){
+      this.v$.formData.$touch()
+      if(this.v$.formData.$error){
         this.$q.notify('Please review fields again.')
       }else{
      

@@ -23,8 +23,8 @@
                   <q-input
                     type="textarea"
                     placeholder="Reason Type.."
-                    :error="$v.formData.reason.$error"
-                    @blur="$v.formData.reason.$touch"
+                    :error="v$.formData.reason.$error"
+                    @blur="v$.formData.reason.$touch"
                     class="q-my-md"
                     color="grey-9"
                     align="left"
@@ -112,8 +112,8 @@ export default {
     },
 
     fnReasonRemarks(request) {
-        this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+        this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         let param = {

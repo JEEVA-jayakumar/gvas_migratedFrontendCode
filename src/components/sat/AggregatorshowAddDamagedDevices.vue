@@ -4,12 +4,12 @@
             <!--START: table title -->
             
             <!-- <div class="col-md-2">
-                <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
+                <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
                     :options="aggregatorOptions" @input="selectedAggregators" />
             </div> -->
             <div class="col-md-2">
                 <q-select clearable  @clear="fnClearingDeviceTypeSelection"
-                    @input="fnSetDevicesByDeviceId" v-model="formData.device_type" float-label="Select Device Type"
+                    @input="fnSetDevicesByDeviceId" v-model="formData.device_type" label="Select Device Type"
                     color="grey-9" :options="deviceOptions" />
             </div>
             <div class="col-auto" align="center">

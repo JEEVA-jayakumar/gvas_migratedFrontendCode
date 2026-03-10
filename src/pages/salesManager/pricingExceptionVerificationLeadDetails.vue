@@ -73,7 +73,7 @@
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Debit <= 2000 (%)"
+                          label="Debit <= 2000 (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.debitLessthanAmount"
@@ -83,7 +83,7 @@
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Debit > 2000 (%)"
+                          label="Debit > 2000 (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.debitGreaterthanAmount"
@@ -95,7 +95,7 @@
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Std CC (%)"
+                          label="Std CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.stdCC"
@@ -105,7 +105,7 @@
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Premium CC (%)"
+                          label="Premium CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.premiumCC"
@@ -117,7 +117,7 @@
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Corp Pre CC (%)"
+                          label="Corp Pre CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.corpCC"
@@ -127,7 +127,7 @@
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Intl Pre CC (%)"
+                          label="Intl Pre CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.intlCC"
@@ -139,7 +139,7 @@
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Super Pre CC (%)"
+                          label="Super Pre CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.superPremiumlCC"
@@ -216,11 +216,11 @@
                     <q-item-label>
                       <q-input
                         v-model="formData.leadInformation.recurringFees"
-                        @blur="$v.formData.leadInformation.recurringFees.$touch"
-                        :error="$v.formData.leadInformation.recurringFees.$error"
+                        @blur="v$.formData.leadInformation.recurringFees.$touch"
+                        :error="v$.formData.leadInformation.recurringFees.$error"
                         color="grey-9"
                         @input="fnCheckPrice(formData)"
-                        float-label="Given recurring fees"
+                        label="Given recurring fees"
                         type="number"
                       />
                     </q-item-label>
@@ -241,11 +241,11 @@
                     <q-item-label>
                       <q-input
                         v-model="formData.leadInformation.setupFees"
-                        @blur="$v.formData.leadInformation.setupFees.$touch"
-                        :error="$v.formData.leadInformation.setupFees.$error"
+                        @blur="v$.formData.leadInformation.setupFees.$touch"
+                        :error="v$.formData.leadInformation.setupFees.$error"
                         color="grey-9"
                         @input="fnCheckPrice(formData)"
-                        float-label="Given Setup Price"
+                        label="Given Setup Price"
                         type="number"
                       />
                     </q-item-label>
@@ -267,10 +267,10 @@
                       <q-input
                         @keyup.enter="leadVerificationApprove()"
                         v-model="formData.leadVerificationStatus.reason"
-                        @blur="$v.formData.leadVerificationStatus.reason.$touch"
-                        :error="$v.formData.leadVerificationStatus.reason.$error"
+                        @blur="v$.formData.leadVerificationStatus.reason.$touch"
+                        :error="v$.formData.leadVerificationStatus.reason.$error"
                         color="grey-9"
-                        float-label="Remarks"
+                        label="Remarks"
                       />
                     </q-item-label>
                   </q-item-section>
@@ -281,10 +281,10 @@
                       <q-input
                         @keyup.enter="leadVerificationNHApprove()"
                         v-model="formData.leadVerificationStatus.reason"
-                        @blur="$v.formData.leadVerificationStatus.reason.$touch"
-                        :error="$v.formData.leadVerificationStatus.reason.$error"
+                        @blur="v$.formData.leadVerificationStatus.reason.$touch"
+                        :error="v$.formData.leadVerificationStatus.reason.$error"
                         color="grey-9"
-                        float-label="Remarks"
+                        label="Remarks"
                       />
                     </q-item-label>
                   </q-item-section>
@@ -476,8 +476,8 @@ export default {
 
     // Common lead verification action
     leadVerificationReject() {
-      this.$v.formData.leadVerificationStatus.reason.$touch();
-      if (this.$v.formData.leadVerificationStatus.reason.$error) {
+      this.v$.formData.leadVerificationStatus.reason.$touch();
+      if (this.v$.formData.leadVerificationStatus.reason.$error) {
         this.$q.notify("Reason for rejection is mandatory");
       } else {
         this.$q
@@ -519,8 +519,8 @@ export default {
 
     // RSM verification action
     leadVerificationApprove() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q
@@ -570,8 +570,8 @@ export default {
 
     // Nation head verification action
     leadVerificationNHApprove() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q

@@ -100,8 +100,8 @@ export default {
 
     fnFinalSubmit(request) {
       // console.log("fnFinalSubmit-------------->>>>",JSON.stringify(request.tokenDeviceModel))
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         // let requestParams = {

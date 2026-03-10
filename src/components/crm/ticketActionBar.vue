@@ -48,7 +48,7 @@
             </div>
             <div class="row">
               <div class="col-sm-5">
-                <q-select stack-label="Actual Issue"  inverted-light color="none" v-model="issueResolved.actualIssue" 
+                <q-select stack-label="Actual Issue"  inverted-light color="none" v-model="issueResolved.actualIssue"
                   separator :options="issueOptionList"  />
               </div>
             </div>
@@ -81,7 +81,7 @@
             </div>
             <div class="row">
               <div class="col-sm-5">
-                <q-select stack-label="Actual Issue" inverted-light color="none" v-model="IssueNotResolved.actualIssue" 
+                <q-select stack-label="Actual Issue" inverted-light color="none" v-model="IssueNotResolved.actualIssue"
                   separator :options="issueOptionList" />
               </div>
             </div>
@@ -526,8 +526,8 @@ this.disableFlag = false
         if(data == 1){
           this.$emit("closeActionBarInfo");
         }
-        this.$v.issueResolved.$touch();
-      if (this.$v.issueResolved.$error) {
+        this.v$.issueResolved.$touch();
+      if (this.v$.issueResolved.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.propToggleResolveRemarks = !this.propToggleResolveRemarks
@@ -537,8 +537,8 @@ this.disableFlag = false
       },
 
       fnIssueNotResolveSubmit(){
-        this.$v.IssueNotResolved.$touch();
-      if (this.$v.IssueNotResolved.$error) {
+        this.v$.IssueNotResolved.$touch();
+      if (this.v$.IssueNotResolved.$error) {
         this.$q.notify("Please review fields again.");
 
       } else {

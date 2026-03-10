@@ -30,7 +30,7 @@
             <span
               v-if="col.name == 'dateOfUpdation'"
               class="label capitalize"
-            >{{props.row.submitteSATDate | moment("MMMM Do YYYY") }}</span>
+            >{{ $moment_format(props.row.submitteSATDate, "MMMM Do YYYY") }}</span>
             <span
               v-if="col.name == 'leadId'"
               class="label capitalize text-primary cursor-pointer"
@@ -57,7 +57,7 @@
               <span
                 class="label capitalize"
                 v-if="props.row.leadVerificationStatus.length > 0"
-              >{{sortArraysForExpectedSubmitDate(props.row.leadVerificationStatus) | moment("MMMM Do YYYY")}}</span>
+              >{{ $moment_format(sortArraysForExpectedSubmitDate(props.row.leadVerificationStatus), "MMMM Do YYYY") }}</span>
               <span class="label capitalize" v-else>NA</span>
             </div>
           </q-td>
@@ -83,7 +83,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search by MID, TID, Merchant Name, MCC,UTR Number, Device Type"
+              label="Search by MID, TID, Merchant Name, MCC,UTR Number, Device Type"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -92,10 +92,10 @@
           <!-- <div class="col-md-3">
                   <q-input
                     v-model="filters.filter_date" 
-                    float-label="Date Filter"
+                    label="Date Filter"
                     type="date"
                     class="q-mr-lg q-py-sm"
-                    color="grey-9" 
+                    color="grey-9"
                     minimal
                   />
           </div>-->
@@ -108,7 +108,7 @@
                   name="KYC Exceptions List.xls">
                     <q-btn 
                       outline  
-                      color="grey-9" 
+                      color="grey-9"
                       label="Download as Excel"
                       class="q-mr-lg q-py-sm float-right"
                       size="md"

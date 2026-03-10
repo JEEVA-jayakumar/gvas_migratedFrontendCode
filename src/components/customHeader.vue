@@ -28,7 +28,7 @@
             <img
               src="~assets/images/user.png"
               style="height:30px; width:30px; padding: 5px"
-              class="vertical-middle"
+              vertical-middle"
             />
             <!-- Direct child of target -->
             <q-menu

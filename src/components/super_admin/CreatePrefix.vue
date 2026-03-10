@@ -18,11 +18,11 @@
             <div class="col-md-12">
               <q-input
                 v-model="formData.name"
-                @blur="$v.formData.name.$touch"
-                :error="$v.formData.name.$error"
+                @blur="v$.formData.name.$touch"
+                :error="v$.formData.name.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Enter Prefix"
+                label="Enter Prefix"
                 placeholder="Enter Prefix"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -30,11 +30,11 @@
             <!-- <div class="col-md-12">
             <q-input
               v-model="formData.hostCode"
-              @blur="$v.formData.hostCode.$touch"
-              :error="$v.formData.hostCode.$error"
+              @blur="v$.formData.hostCode.$touch"
+              :error="v$.formData.hostCode.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Enter VAS Code"
+              label="Enter VAS Code"
               placeholder="Enter VAS Code"
               @keyup.enter="submitLeadSourceData(formData)"
               
@@ -43,7 +43,7 @@
             <!-- <div class="col-md-12">
               <p class="text-caption">Multi-TID</p>
                 <q-radio
-                      :error="$v.formData.multiTidEnabled.$error"
+                      :error="v$.formData.multiTidEnabled.$error"
                       v-for="(item, index) in multiTidFlagOptions"
                       :key="index"
                       color="grey-9"
@@ -56,11 +56,11 @@
              <!-- <div class="col-md-12">
               <q-input
                 v-model="formData.baseTidMidPrefix"
-                @blur="$v.formData.baseTidMidPrefix.$touch"
-                :error="$v.formData.baseTidMidPrefix.$error"
+                @blur="v$.formData.baseTidMidPrefix.$touch"
+                :error="v$.formData.baseTidMidPrefix.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Tid/Mid Prefix"
+                label="Tid/Mid Prefix"
                 placeholder="Tid/Mid Prefix"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -135,8 +135,8 @@
         this.$emit("emitfnshowPrefix");
       },
       submitHostData() {
-        this.$v.formData.$touch();
-        if (this.$v.formData.$error) {
+        this.v$.formData.$touch();
+        if (this.v$.formData.$error) {
         } else {
           this.$q.loading.show({
             delay: 100, // ms

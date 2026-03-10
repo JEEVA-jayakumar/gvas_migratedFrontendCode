@@ -2,8 +2,8 @@
   <q-page>
     <div>
       <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" >
-        <q-tab @select="ajaxSpareData" default color="dark" name="tab-1" slot="title" label="Active Service Request" />
-        <q-tab  color="dark" name="tab-2" slot="title" label="Deactive Service Request" />
+        <q-tab @select="ajaxSpareData" default color="dark" name="tab-1"  label="Active Service Request" />
+        <q-tab  color="dark" name="tab-2"  label="Deactive Service Request" />
         <q-tab-panel name="tab-1">
           <q-table 
           :rows="ActivetableData"
@@ -51,7 +51,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-        
+
         <q-tab-panel name="tab-2">
           <q-table 
           :rows="DeactivetableData"

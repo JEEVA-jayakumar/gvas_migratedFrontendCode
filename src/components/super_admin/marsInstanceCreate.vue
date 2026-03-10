@@ -18,11 +18,11 @@
             <div class="col-md-12">
               <q-input
                 v-model="formData.institutionName"
-                @blur="$v.formData.institutionName.$touch"
-                :error="$v.formData.institutionName.$error"
+                @blur="v$.formData.institutionName.$touch"
+                :error="v$.formData.institutionName.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Institution Name"
+                label="Institution Name"
                 placeholder="Institution Name"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -30,11 +30,11 @@
             <div class="col-md-12">
             <q-input
               v-model="formData.institutionRRCode"
-              @blur="$v.formData.institutionRRCode.$touch"
-              :error="$v.formData.institutionRRCode.$error"
+              @blur="v$.formData.institutionRRCode.$touch"
+              :error="v$.formData.institutionRRCode.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Institution RR Code"
+              label="Institution RR Code"
               placeholder="Institution RR Code"
               @keyup.enter="submitLeadSourceData(formData)"
               
@@ -43,11 +43,11 @@
           <div class="col-md-12">
             <q-input
               v-model="formData.institutionCode"
-              @blur="$v.formData.institutionCode.$touch"
-              :error="$v.formData.institutionCode.$error"
+              @blur="v$.formData.institutionCode.$touch"
+              :error="v$.formData.institutionCode.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Institution Code"
+              label="Institution Code"
               placeholder="Institution Code"
               @keyup.enter="submitLeadSourceData(formData)"
               
@@ -56,7 +56,7 @@
             <!-- <div class="col-md-12">
               <p class="text-caption">Multi-TID</p>
                 <q-radio
-                      :error="$v.formData.multiTidEnabled.$error"
+                      :error="v$.formData.multiTidEnabled.$error"
                       v-for="(item, index) in multiTidFlagOptions"
                       :key="index"
                       color="grey-9"
@@ -69,11 +69,11 @@
              <!-- <div class="col-md-12">
               <q-input
                 v-model="formData.baseTidMidPrefix"
-                @blur="$v.formData.baseTidMidPrefix.$touch"
-                :error="$v.formData.baseTidMidPrefix.$error"
+                @blur="v$.formData.baseTidMidPrefix.$touch"
+                :error="v$.formData.baseTidMidPrefix.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Tid/Mid Prefix"
+                label="Tid/Mid Prefix"
                 placeholder="Tid/Mid Prefix"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -154,8 +154,8 @@
         this.$emit("emitfnshowMarsInstance");
       },
       submitInstanceData() {
-        this.$v.formData.$touch();
-        if (this.$v.formData.$error) {
+        this.v$.formData.$touch();
+        if (this.v$.formData.$error) {
         } else {
           this.$q.loading.show({
             delay: 100, // ms

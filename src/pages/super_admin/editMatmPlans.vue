@@ -8,10 +8,10 @@
           <!-- <div class="col-md-5">
             <q-select
               type="text"
-              :error="$v.formData.plan.$error"
-              @blur="$v.formData.plan.$touch"
+              :error="v$.formData.plan.$error"
+              @blur="v$.formData.plan.$touch"
               v-model.trim="formData.plan"
-              float-label="Name of the Plan*"
+              label="Name of the Plan*"
               :options="getinstitutionCode"
                @selected="selectedPlan"
             />
@@ -24,11 +24,11 @@
           <div class="col-md-5">
               <q-input
                 v-model.trim="formData.planName"
-                @blur="$v.formData.planName.$touch"
-                :error="$v.formData.planName.$error"
+                @blur="v$.formData.planName.$touch"
+                :error="v$.formData.planName.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Name of the Plan*"
+                label="Name of the Plan*"
                 placeholder="Name of the Plan*"
               />
             </div>
@@ -37,9 +37,9 @@
             <q-input
               type="number"
               v-model.trim="formData.incentivePercentage"
-              @blur="$v.formData.incentivePercentage.$touch"
-              :error="$v.formData.incentivePercentage.$error"
-              float-label="Incentive Percentage *"
+              @blur="v$.formData.incentivePercentage.$touch"
+              :error="v$.formData.incentivePercentage.$error"
+              label="Incentive Percentage *"
               color="grey-9"
             />
           </div>
@@ -48,22 +48,22 @@
             <q-input
               type="number"
               v-model.trim="formData.minTxnVal "
-              @blur="$v.formData.minTxnVal.$touch"
-              :error="$v.formData.minTxnVal.$error"
-              float-label="Minimum Transaction Value*"
+              @blur="v$.formData.minTxnVal.$touch"
+              :error="v$.formData.minTxnVal.$error"
+              label="Minimum Transaction Value*"
               color="grey-9"
-             
+
             />
           </div>
           <div class="col-md-5">
             <q-input
               type="number"
               v-model.trim="formData.maxIncPerTxn"
-              @blur="$v.formData.maxIncPerTxn.$touch"
-              :error="$v.formData.maxIncPerTxn.$error"
-              float-label="Maximum Incentive Per Transaction *"
+              @blur="v$.formData.maxIncPerTxn.$touch"
+              :error="v$.formData.maxIncPerTxn.$error"
+              label="Maximum Incentive Per Transaction *"
               color="grey-9"
-             
+
             />
           </div>
           
@@ -172,8 +172,8 @@ export default {
     ...mapActions("updatePlanDetails",["UPDATE_PLAN_DETAILS_DATAS"]),
     ...mapActions("Bank_SO", ["SAVE_BANK_SO"]),
     // fnSubmitBankDetails(formData) {
-    //   this.$v.formData.$touch();
-    //   if (this.$v.formData.$error) {
+    //   this.v$.formData.$touch();
+    //   if (this.v$.formData.$error) {
     //     this.$q.notify("Please review fields again.");
     //     // return;
     //   } else {
@@ -204,8 +204,8 @@ export default {
     // },
     fnsubmitPlans(request) {
     
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
        
       } 

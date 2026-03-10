@@ -27,7 +27,7 @@
              @clear="fnClearingDeviceTypeSelection"
              @input="fnSetDevicesByDeviceId"
              v-model="formData.device_type"
-             float-label="Select Device Type"
+             label="Select Device Type"
              color="grey-9"
              :options="deviceOptions"
            />

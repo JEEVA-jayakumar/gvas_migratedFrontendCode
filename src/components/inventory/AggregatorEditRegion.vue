@@ -16,10 +16,10 @@
             <div class="col-md-12">
               <q-input
                 v-model="formData.pod"
-                :error="$v.formData.pod.$error"
+                :error="v$.formData.pod.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Pod Number"
+                label="Pod Number"
                 placeholder="Pod NUmber"
               />
             </div>
@@ -29,7 +29,7 @@
                 color="grey-9"
                 :options="inventoryData.regionFilterOptions"
                 placeholder="Region"
-                float-label="Region"
+                label="Region"
               />
             </div>
             <div class="col-md-12 group" align="right">
@@ -97,8 +97,8 @@
       },
       //Permission creation final submit
       submitRegion(request) {
-        this.$v.formData.$touch();
-        if (this.$v.formData.$error) {
+        this.v$.formData.$touch();
+        if (this.v$.formData.$error) {
           this.$q.notify("Please review fields again.");
         } else {
           let params = {

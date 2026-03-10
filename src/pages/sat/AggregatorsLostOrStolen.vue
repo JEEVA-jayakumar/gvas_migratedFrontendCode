@@ -11,7 +11,7 @@
     <!--END: table title -->
     <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
       <div class="col-md-4">
-        <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio :options="aggregatorOptions"
+        <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio :options="aggregatorOptions"
           @input="getaggregator" />
       </div>
     </div> -->
@@ -61,14 +61,10 @@
           <span class="label">{{ props.row.lostOrStolenRemarks }}</span>
         </q-td>
         <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{
-            props.row.deviceStatusDate | moment("Do MMM Y")
-          }}</span>
+          <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
         </q-td>
         <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-        <span class="label">{{
-          props.row.deviceStatusDate | moment("Do MMM Y")
-        }}</span>
+        <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
       </q-td> -->
         <q-td v-slot:body-cell-action="props" :props="props">
           <q-btn highlight push class="q-mx-sm" color="positive" size="sm"
@@ -90,7 +86,7 @@
           <!--START: table filter,search,excel download -->
           <div class="col-5">
             <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
-              float-label="Search Using TID, MID, Lead ID, Merchant Name" class="q-mr-lg q-py-sm" />
+              label="Search Using TID, MID, Lead ID, Merchant Name" class="q-mr-lg q-py-sm" />
           </div>
         </template>
       </q-table>  
@@ -103,9 +99,7 @@
         class="payment_verification_table capitalize">
 
         <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-        <span class="label">{{
-          props.row.deviceStatusDate | moment("Do MMM Y")
-        }}</span>
+        <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
       </q-td> -->
         <q-td v-slot:body-cell-updatedAt="props" :props="props">{{
           props.row.aggregatorRegionalInventory.updatedAt == null ? "NA" :
@@ -139,7 +133,7 @@
         <template slot="top" class="bottom-border">
           <div class="col-md-5">
             <q-input clearable color="grey-9" v-model="filter1" placeholder="Type.."
-              float-label="Search Using TID, MID " class="q-mr-lg q-py-sm" />
+              label="Search Using TID, MID " class="q-mr-lg q-py-sm" />
           </div>
           <div class="col-md-6">
 

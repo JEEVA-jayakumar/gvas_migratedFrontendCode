@@ -8,7 +8,7 @@
       <h2>tttt</h2>
       <pre>{{ testData }}</pre>
 			<q-table :rows="getAllUsers" :columns="columns" :filter="filterSearch" selection="multiple" :selected="selectedSecond" v-model:pagination="paginationControl" :loading="tableAjaxLoading" row-key="name" color="grey-9">
-				
+
 				<q-td v-slot:body-cell-sales="props" :props="props">
 					<img :src="props.row.profilePicture" class="avatar">
 				</q-td>
@@ -55,7 +55,7 @@
 							color="grey-9"
 							v-model="filter"
 							placeholder="Type.."
-							float-label="Search by SO name, Merchant Name, Lead ID"
+							label="Search by SO name, Merchant Name, Lead ID"
 							class="q-mt-lg q-mr-lg"
 						/>
 					</div>
@@ -76,14 +76,14 @@
 							separator
 							color="grey-9"
 							placeholder="Select"
-							float-label="Filter By"
+							label="Filter By"
 							:options="filterRoles"
 						/>
 					</div>
 					<div class="col-md-3 q-my-md" align="right">
 						<q-btn  
 						flat
-						color="white" 
+						color="white"
 						class="text-grey-9 q-mr-md"
 						size="md"
 						@click="fnDeleteUser"
@@ -92,7 +92,7 @@
 						<q-btn 
 						@click="fnShowAddUser"
 						label="Add User"
-						color="purple-9" 
+						color="purple-9"
 						size="md"
 						/>
 					</div>

@@ -18,22 +18,22 @@
                      <!-- <div class="col-md-12">
                         <q-select
                           v-model="formData.regionGroup"   
-                          :error="$v.formData.regionGroup.$error" 
+                          :error="v$.formData.regionGroup.$error"
                         
                           :options="regionGroupOptions"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Region Group" 
+                          color="grey-9"
+                          label="Region Group"
                           placeholder="Region Group" 
                         />
                     </div> -->
                     <div class="col-md-12">
                         <q-input 
                         v-model="formData.regionName" 
-                          :error="$v.formData.regionName.$error"
+                          :error="v$.formData.regionName.$error"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Region" 
+                          color="grey-9"
+                          label="Region"
                           placeholder="Region" 
                         />
                     </div>
@@ -101,8 +101,8 @@ computed:{
     },
     fnfinalsubmitAddNewRegionGroup(formData){
 console.log("FINAL SUBMITTED VALUES--------->",JSON.stringify(formData))
-   this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+   this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();
@@ -131,8 +131,8 @@ console.log("FINAL SUBMITTED VALUES--------->",JSON.stringify(formData))
     },
     // fnfinalsubmitAddNewRegion(formData) {
     //   console.log("FINAL SUBMITTED VALUES--------->",JSON.stringify(formData))
-    //   this.$v.formData.$touch();
-    //   if (this.$v.formData.$error) {
+    //   this.v$.formData.$touch();
+    //   if (this.v$.formData.$error) {
     //     this.$q.notify("Please review fields again.");
     //   } else {
     //     this.$q.loading.show();

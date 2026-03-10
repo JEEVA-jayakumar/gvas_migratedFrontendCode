@@ -18,7 +18,7 @@
       </div>
       <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-6 col-md-6">
-          <q-input v-model="podNumber" float-label="Enter POD number" color="grey-9" />
+          <q-input v-model="podNumber" label="Enter POD number" color="grey-9" />
         </div>
         <div class="col-6 col-md-6" align="right">
           <q-btn
@@ -36,7 +36,7 @@
             :disable="disableDeviceTypeSelection"
             @input="fnSetDevicesByDeviceId"
             v-model="formData.device_type"
-            float-label="Select Device Type"
+            label="Select Device Type"
             color="grey-9"
             :options="deviceOptions"
           />
@@ -96,7 +96,7 @@
                   :delay="1500"
                 >
                   <div v-if="item.deviceSerialNumbers.length > 0">
-                    <q-item separator class=" text-light-blue" v-for="(subItem,subIndex) in item.deviceSerialNumbers" v-model:key="subIndex">
+                    <q-item separator text-light-blue" v-for="(subItem,subIndex) in item.deviceSerialNumbers" v-model:key="subIndex">
                       <q-item-section class="text-body1">{{subItem}}</q-item-section>
                       <q-item-section>
                         <q-btn round size="sm" color="negative" icon="clear" @click="fnRemoveScannedItems(index,subIndex)" />
@@ -148,7 +148,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search by SO name, Merchant Name, Lead ID"
+              label="Search by SO name, Merchant Name, Lead ID"
               class="q-mr-lg q-py-sm"
             />
           </div>

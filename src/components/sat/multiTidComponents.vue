@@ -5,7 +5,7 @@
             <q-dialog class="customModalOverlay" v-model="toggleModel"
                 :content-css="{ padding: '100px', minWidth: '70vw' }">
                 <div
-                    class=" text-h6 q-px-lg q-py-md text-center justify-center text-weight-regular bottom-border text-grey-9 ">
+                    text-h6 q-px-lg q-py-md text-center justify-center text-weight-regular bottom-border text-grey-9 ">
                     <div class="col text-h6">Base-Tid Configurations</div>
                     <div align="right">
                         <q-btn round @click="goToValidationPage()" outline color="dark" icon="clear" />
@@ -85,7 +85,7 @@
                                             Submit
                                             To Mars </q-btn>
                                             <!-- <div v-if="props.row.upiEnabled == true">
-                                            <q-btn class="q-mx-sm" highlight push  color="teal" size="sm" :disabled="props.row.tid == null || props.row.mid == null " 
+                                            <q-btn class="q-mx-sm" highlight push  color="teal" size="sm" :disabled="props.row.tid == null || props.row.mid == null "
                                             @click="additionalTid(listAllSubTidDetails)"> Additional Tid
                                             </q-btn>
                                            </div> -->
@@ -903,7 +903,7 @@ export default {
         //                                     .slice(1, 2);
         //                                 let computeSplitted = splitted[splitted.length - 1];
         //                                 let fieldErrorFound = eval(`
-        //                 OThis.$v.viewBinding.partnersArr.$each[
+        //                 OThis.v$.viewBinding.partnersArr.$each[
         //                   ${findPartnersErrorIndex}
         //                 ].${computeSplitted}`);
         //                                 fieldErrorFound.$model = "";
@@ -917,7 +917,7 @@ export default {
         //                                 generateErrorMessage.issue = actual.issue;
         //                                 generateErrorMessage.value = actual.value;
         //                             } else {
-        //                                 let splittingErrorField = `OThis.$v.${splitted.join(
+        //                                 let splittingErrorField = `OThis.v$.${splitted.join(
         //                                     "."
         //                                 )}`;
         //                                 let fieldErrorFound = eval(splittingErrorField);

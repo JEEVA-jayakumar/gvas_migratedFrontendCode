@@ -47,7 +47,7 @@
               v-model.trim="formData.podNumber"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Enter Pod Number*"
+              label="Enter Pod Number*"
               placeholder="Enter Pod Number*"
             />
           </div>
@@ -136,7 +136,7 @@
           default
           color="dark"
           name="unAssigned"
-          slot="title"
+
           label="Unassigned"
         />
         <q-tab-panel name="unAssigned">
@@ -167,14 +167,12 @@
             <q-td
               v-slot:body-cell-submitToMarsDate="props"
               :props="props"
-              >{{
-                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-              }}</q-td
+              >{{ $moment_format(props.row.leadInformation.submitToMarsDate, "Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-createdAt="props"
               :props="props"
-              >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+              >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-tid="props"
@@ -207,7 +205,7 @@
                   color="grey-9"
                   v-model="filterSearch1"
                   placeholder="Type.."
-                  float-label="Search .."
+                  label="Search .."
                   class="q-mr-lg q-py-sm"
                 />
               </div> -->
@@ -216,7 +214,7 @@
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-        <q-tab color="dark" name="assigned" slot="title" label="Assigned" />
+        <q-tab color="dark" name="assigned"  label="Assigned" />
 
         <q-tab-panel name="assigned">
           <!--START: table Data    :rows="tableData" -->
@@ -251,14 +249,12 @@
             <q-td
               v-slot:body-cell-submitToMarsDate="props"
               :props="props"
-              >{{
-                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-              }}</q-td
+              >{{ $moment_format(props.row.leadInformation.submitToMarsDate, "Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-createdAt="props"
               :props="props"
-              >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+              >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-deviceAddress="props"
@@ -313,7 +309,7 @@
                   color="grey-9"
                   v-model="filterSearch"
                   placeholder="Type.."
-                  float-label="Search .."
+                  label="Search .."
                   class="q-mr-lg q-py-sm"
                 />
               </div> -->
@@ -321,7 +317,7 @@
           </q-table>
           <!--ENDv-model: table Data -->
         </q-tab-panel>
-        <q-tab color="dark" name="closed" slot="title" label="Closed" />
+        <q-tab color="dark" name="closed"  label="Closed" />
         <q-tab-panel name="closed">
           <!--START: table Data -->
           <q-table
@@ -356,14 +352,12 @@
             <q-td
               v-slot:body-cell-submitToMarsDate="props"
               :props="props"
-              >{{
-                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-              }}</q-td
+              >{{ $moment_format(props.row.leadInformation.submitToMarsDate, "Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-createdAt="props"
               :props="props"
-              >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+              >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-deviceAddress="props"
@@ -418,7 +412,7 @@
                   color="grey-9"
                   v-model="filterSearch2"
                   placeholder="Type.."
-                  float-label="Search .."
+                  label="Search .."
                   class="q-mr-lg q-py-sm"
                 />
               </div> -->

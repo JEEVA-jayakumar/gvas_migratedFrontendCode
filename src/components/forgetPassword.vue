@@ -12,8 +12,8 @@
           v-model.trim="formData.email"
           class="text-weight-regular text-grey-8 q-py-md"
           color="grey-9"
-          @blur="$v.formData.email.$touch"
-          :error="$v.formData.email.$error"
+          @blur="v$.formData.email.$touch"
+          :error="v$.formData.email.$error"
           placeholder="Enter your email"
         />
         <q-btn
@@ -66,8 +66,8 @@ export default {
 
     // function to send email to user a link
     fnSendforgetPasswordSubmit(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({

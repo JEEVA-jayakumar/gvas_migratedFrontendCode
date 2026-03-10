@@ -7,8 +7,8 @@
           class="col-md-12 capitalize text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
         >Finance</div>
         <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @select="goToQrMerchant">
-          <q-tab default color="dark" name="tab-1" slot="title" label="Pos Merchant" />
-        <q-tab color="dark" name="tab-2" slot="title" label="QR Merchant" />
+          <q-tab default color="dark" name="tab-1"  label="Pos Merchant" />
+        <q-tab color="dark" name="tab-2"  label="QR Merchant" />
      
 
         <!--END: table title -->
@@ -149,7 +149,7 @@
                   class="text-left"
                   v-if="props.row.paymentMadeon == '' || props.row.paymentMadeon == null"
                 >NA</div>
-                <div class="text-left" v-else>{{ props.row.paymentMadeon | moment("Do MMM Y") }}</div>
+                <div class="text-left" v-else>{{ $moment_format(props.row.paymentMadeon, "Do MMM Y") }}</div>
               </q-td>
               <q-td>
                 <div class="text-left text-caption text-grey-8 text-weight-medium">Payment Reference</div>
@@ -226,7 +226,7 @@
                 color="grey-9"
                 v-model="filter"
                 placeholder="Type.."
-                float-label="Search .. "
+                label="Search .. "
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -376,7 +376,7 @@
                   class="text-left"
                   v-if="props.row.paymentMadeon == '' || props.row.paymentMadeon == null"
                 >NA</div>
-                <div class="text-left" v-else>{{ props.row.paymentMadeon | moment("Do MMM Y") }}</div>
+                <div class="text-left" v-else>{{ $moment_format(props.row.paymentMadeon, "Do MMM Y") }}</div>
               </q-td> -->
               <q-td>
                 <div class="text-left text-caption text-grey-8 text-weight-medium">Payment Reference</div>
@@ -453,7 +453,7 @@
                 color="grey-9"
                 v-model="filter1"
                 placeholder="Type.."
-                float-label="Search .. "
+                label="Search .. "
                 class="q-mr-lg q-py-sm"
               />
             </div>

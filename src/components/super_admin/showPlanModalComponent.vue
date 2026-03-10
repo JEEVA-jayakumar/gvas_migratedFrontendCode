@@ -23,11 +23,11 @@
           <div>
             <q-input
               v-model="formData.planName"
-              @blur="$v.formData.planName.$touch"
-              :error="$v.formData.planName.$error"
+              @blur="v$.formData.planName.$touch"
+              :error="v$.formData.planName.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Plan"
+              label="Plan"
               placeholder="Plan"
             />
           </div>
@@ -90,7 +90,7 @@
                 color="grey-9"
                 v-model="filterSearch"
                 placeholder="Type.."
-                float-label="Search by name, short name"
+                label="Search by name, short name"
                 class="q-mr-lg"
               />-
             </div>

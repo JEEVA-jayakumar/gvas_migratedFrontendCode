@@ -15,10 +15,10 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <q-select
               color="grey-9"
-              float-label="Choose a region"
+              label="Choose a region"
               v-model="userMapping.region.id"
-              :error="$v.userMapping.region.id.$error"
-              @blur="$v.userMapping.region.id.$touch"
+              :error="v$.userMapping.region.id.$error"
+              @blur="v$.userMapping.region.id.$touch"
               :options="propGetAllRegionsData"
               />
             </div>
@@ -26,10 +26,10 @@
               <q-select
               color="grey-9"
               @input="fnPopulateRolesByHeirarchy(userMapping.hierarchy.id)"
-              float-label="Choose a hierarchy"
+              label="Choose a hierarchy"
               v-model="userMapping.hierarchy.id"
-              :error="$v.userMapping.hierarchy.id.$error"
-              @blur="$v.userMapping.hierarchy.id.$touch"
+              :error="v$.userMapping.hierarchy.id.$error"
+              @blur="v$.userMapping.hierarchy.id.$touch"
               :options="propGetAllHierarchiesData"
               />
             </div>
@@ -40,10 +40,10 @@
               :disabled=disableRolesSelection
               :class="[disableRolesSelection?'no-pointer-events':'']"
               @input="fnPopulateUsersByRole"
-              float-label="Choose a role"
+              label="Choose a role"
               v-model="userMapping.role.id"
-              :error="$v.userMapping.role.id.$error"
-              @blur="$v.userMapping.role.id.$touch"
+              :error="v$.userMapping.role.id.$error"
+              @blur="v$.userMapping.role.id.$touch"
               :options="filterRoles"
               />
             </div>
@@ -53,10 +53,10 @@
               :readonly=disablePreceederSelection
               :disabled=disablePreceederSelection
               :class="[disablePreceederSelection?'no-pointer-events':'']"
-              float-label="Choose a predecessor"
+              label="Choose a predecessor"
               v-model="userMapping.predecessor.id"
-              :error="$v.userMapping.predecessor.id.$error"
-              @blur="$v.userMapping.predecessor.id.$touch"
+              :error="v$.userMapping.predecessor.id.$error"
+              @blur="v$.userMapping.predecessor.id.$touch"
               :options="filterUsers"
               />
             </div>
@@ -139,8 +139,8 @@ export default {
 
     //Emit functions
     emitfnToggleModel(userMapping) {
-      this.$v.userMapping.$touch();
-      if (this.$v.userMapping.$error) {
+      this.v$.userMapping.$touch();
+      if (this.v$.userMapping.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$emit("emitfnToggleModelWithParams", userMapping);

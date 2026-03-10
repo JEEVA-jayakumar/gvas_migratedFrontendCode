@@ -15,10 +15,10 @@
             <q-input
               color="grey-9"
               v-model="formData.remarks"
-              @blur="$v.formData.remarks.$touch"
-              :error="$v.formData.remarks.$error"
+              @blur="v$.formData.remarks.$touch"
+              :error="v$.formData.remarks.$error"
               type="textarea"
-              float-label="Remarks"
+              label="Remarks"
               :max-height="100"
             />
           </div>
@@ -83,8 +83,8 @@ export default {
       this.$emit("toggleLeadModal");
     },
     saveRemarks(finalFormData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({

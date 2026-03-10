@@ -14,7 +14,7 @@
               :disabled="formData.device_type != ''"
               :class="[formData.device_type != '' ? 'no-pointer-events' : '']"
               v-model="formData.region"
-              float-label="Select Region"
+              label="Select Region"
               radio
               color="grey-9"
               :options="regionOptions"
@@ -26,7 +26,7 @@
               filter 
               clearable
               v-model="formData.so"
-              float-label="Select SO"
+              label="Select SO"
               radio
               color="grey-9"
               :options="assignToOptions"
@@ -40,7 +40,7 @@
               @clear="fnClearingDeviceTypeSelection"
               @input="fnSetDevicesByDeviceId"
               v-model="formData.device_type"
-              float-label="Select Device Type"
+              label="Select Device Type"
               radio
               color="grey-9"
               :options="deviceOptions"

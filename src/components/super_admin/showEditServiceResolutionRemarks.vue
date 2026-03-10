@@ -20,10 +20,10 @@
           <div class="col-md-12">
             <q-input
               v-model="formData.name"
-              :error="$v.formData.name.$error"
+              :error="v$.formData.name.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Enter Service Resolution Remarks"
+              label="Enter Service Resolution Remarks"
               placeholder="Enter Service Resolution Remarks"
             />
           </div>
@@ -133,8 +133,8 @@ export default {
       this.propRowDetails = rowDetails;
     },
     fnfinalsubmitServiceResolutionRemarks(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();

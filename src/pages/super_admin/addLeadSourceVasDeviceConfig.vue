@@ -160,9 +160,9 @@ export default {
     },
 
     async fnsubmit() {
-      this.$v.$touch();
+      this.v$.$touch();
 
-      if (this.$v.$invalid) {
+      if (this.v$.$invalid) {
         this.$q.notify({
           color: "negative",
           position: "bottom",
@@ -210,7 +210,7 @@ export default {
         },
         vasList: []
       };
-      this.$v.$reset();
+      this.v$.$reset();
     }
   }
 };

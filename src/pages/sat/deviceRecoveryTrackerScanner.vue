@@ -55,7 +55,7 @@
               color="grey-9"
               v-model="filterSearch"
               placeholder="Type.."
-              float-label="Search .."
+              label="Search .."
               class="q-mr-lg q-py-sm"
             />
           </div>

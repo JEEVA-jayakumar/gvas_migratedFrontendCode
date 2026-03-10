@@ -132,10 +132,10 @@
           default
           color="dark"
           name="assigned"
-          slot="title"
+
           label="Normal"
         />
-        <q-tab color="dark" name="courier" slot="title" label="Courier" />
+        <q-tab color="dark" name="courier"  label="Courier" />
         <q-tab-panel name="assigned">
           <q-table
             :rows="tableData"
@@ -175,7 +175,7 @@
             <q-td
               v-slot:body-cell-createdAt="props"
               :props="props"
-              >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+              >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-mid="props"
@@ -202,9 +202,7 @@
             <q-td
               v-slot:body-cell-submitToMarsDate="props"
               :props="props"
-              >{{
-                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-              }}</q-td
+              >{{ $moment_format(props.row.leadInformation.submitToMarsDate, "Do MMM Y") }}</q-td
             >
 
             <template v-slot:top="props">
@@ -214,7 +212,7 @@
                   color="grey-9"
                   v-model="filterSearch"
                   placeholder="Type.."
-                  float-label="Search By MID, Merchant Name.."
+                  label="Search By MID, Merchant Name.."
                   class="q-mr-lg q-py-sm"
                 />
               </div>
@@ -265,15 +263,13 @@
             <!-- <q-td
               v-slot:body-cell-submitToMarsDate="props"
               :props="props"
-              >{{
-                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-              }}</q-td
+              >{{ $moment_format(props.row.leadInformation.submitToMarsDate, "Do MMM Y") }}</q-td
             > -->
             <!--props.row.createdAt | moment("Do MMM Y")-->
             <q-td
               v-slot:body-cell-createdAt="props"
               :props="props"
-              >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+              >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td
             >
             <!-- <q-td
               v-slot:body-cell-tid="props"
@@ -320,17 +316,17 @@
                   color="grey-9"
                   v-model="filterSearch"
                   placeholder="Type.."
-                  float-label="Search By MID, Merchant Name.."
+                  label="Search By MID, Merchant Name.."
                   class="q-mr-lg q-py-sm"
                 />
               </div>
               <!-- <div class="col-md-3">
                 <q-input
                 v-model="filter_values" 
-                float-label="Select Date"
+                label="Select Date"
                 type="date"
                 class="q-mr-lg q-py-sm"
-                color="grey-9" 
+                color="grey-9"
                 />
               </div>-->
               <!--ENDv-model: table filter,search -->

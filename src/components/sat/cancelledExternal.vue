@@ -42,10 +42,10 @@
               <span v-else="props.row.mid == null">NA</span>
             </q-td>
             <q-td key="createdDate" :props="props">
-              {{ props.row.createdDate | moment("Do MMM Y") }}
+              {{ $moment_format(props.row.createdDate, "Do MMM Y") }}
             </q-td>
             <q-td key="updatedDate" :props="props">
-              {{ props.row.updatedDate | moment("Do MMM Y") }}
+              {{ $moment_format(props.row.updatedDate, "Do MMM Y") }}
             </q-td>
             <q-td key="meName" :props="props"> {{ props.row.meName }}</q-td>
             <q-td key="address" :props="props"> {{ props.row.address }}</q-td>
@@ -529,7 +529,7 @@
               color="grey-9"
               v-model="filterSearch"
               placeholder="Type.."
-              float-label="Search By ServiceReqTicketId, TID .."
+              label="Search By ServiceReqTicketId, TID .."
               class="q-mr-lg q-py-sm"
             />
           </div>

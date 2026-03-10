@@ -2,8 +2,8 @@
   <q-page>
     <div>
       <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" >
-         <q-tab @select="ajaxSpareData" default  color="dark" name="tab-3" slot="title" label="Active Service Status" />
-          <q-tab  color="dark" name="tab-4" slot="title" label="Deactive Service Status" />
+         <q-tab @select="ajaxSpareData" default  color="dark" name="tab-3"  label="Active Service Status" />
+          <q-tab  color="dark" name="tab-4"  label="Deactive Service Status" />
 
           <q-tab-panel name="tab-3">
           <q-table
@@ -16,12 +16,8 @@
           row-key="name"
           color="grey-9"
           >
-          <q-td v-slot:body-cell-createdDate="props" :props="props">{{
-                props.row.createdDate | moment("Do MMM Y")
-            }}</q-td>
-            <q-td v-slot:body-cell-updatedDate="props" :props="props">{{
-                props.row.updatedDate | moment("Do MMM Y")
-            }}</q-td>
+          <q-td v-slot:body-cell-createdDate="props" :props="props">{{ $moment_format(props.row.createdDate, "Do MMM Y") }}</q-td>
+            <q-td v-slot:body-cell-updatedDate="props" :props="props">{{ $moment_format(props.row.updatedDate, "Do MMM Y") }}</q-td>
 
             <q-td v-slot:body-cell-action="props" :props="props">
               <div class="row no-wrap no-padding">
@@ -57,12 +53,8 @@
           row-key="name"
           color="grey-9"
           >
-            <q-td v-slot:body-cell-createdDate="props" :props="props">{{
-                props.row.createdDate | moment("Do MMM Y")
-            }}</q-td>
-            <q-td v-slot:body-cell-updatedDate="props" :props="props">{{
-                props.row.updatedDate | moment("Do MMM Y")
-            }}</q-td>
+            <q-td v-slot:body-cell-createdDate="props" :props="props">{{ $moment_format(props.row.createdDate, "Do MMM Y") }}</q-td>
+            <q-td v-slot:body-cell-updatedDate="props" :props="props">{{ $moment_format(props.row.updatedDate, "Do MMM Y") }}</q-td>
 
             <q-td v-slot:body-cell-action1="props" :props="props">
               <div class="row no-wrap no-padding">

@@ -42,7 +42,7 @@
               <q-td auto-width key="device" :props="props">{{
                 props.row.serialNumber
               }}</q-td>
-              <q-td auto-width key="updated_at" :props="props">{{ props.row.updatedAt ==null? "NA" : props.row.updatedAt | moment("Do MMM Y") }}</q-td>
+              <q-td auto-width key="updated_at" :props="props">{{ $moment_format(props.row.updatedAt ==null? "NA" : props.row.updatedAt, "Do MMM Y") }}</q-td>
               <q-td auto-width key="action" :props="props">
                 <q-btn
                   highlight
@@ -74,7 +74,7 @@
                 color="grey-9"
                 v-model="filterSearch"
                 placeholder="Type.."
-                float-label="Search Using Device Serial Number"
+                label="Search Using Device Serial Number"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -92,8 +92,8 @@
             <q-btn 
             square 
             outline 
-            color="purple-9" 
-            label="Download as Excel" 
+            color="purple-9"
+            label="Download as Excel"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloadSendToRepair()" />

@@ -22,10 +22,10 @@
           <div class="col-md-12">
             <q-input
               v-model="formData.serviceReqType.name"
-              :error="$v.formData.serviceReqType.name.$error"
+              :error="v$.formData.serviceReqType.name.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Service Req Data"
+              label="Service Req Data"
               placeholder="Service Req Data"
             />
           </div>

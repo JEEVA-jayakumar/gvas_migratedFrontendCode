@@ -33,7 +33,7 @@
           <q-td
             v-slot:body-cell-createdAt="props"
             :props="props"
-          >{{ props.row.date | moment("Do MMM Y") }}</q-td>
+          >{{ $moment_format(props.row.date, "Do MMM Y") }}</q-td>
 
           <q-td
             v-slot:body-cell-leadNumber="props"
@@ -168,7 +168,7 @@
                 placeholder="Type.."
                 :debounce="600"
                 class="q-mr-lg q-py-sm"
-                float-label="Search .. "
+                label="Search .. "
               />
             </div>
             <!--END: table filter,search -->

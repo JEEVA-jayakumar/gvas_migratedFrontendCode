@@ -33,11 +33,11 @@
         <q-td
           v-slot:body-cell-receivedAt="props"
           :props="props"
-        >{{ props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.receivedAt, "Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-DeviceList="props"
           :props="props"
-        >{{ props.row.device.createDate | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.device.createDate, "Do MMM Y") }}</q-td>
 
         <template v-slot:top="props">
           <div class="col-md-5">
@@ -47,7 +47,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Pod Number, Device Type"
+              label="Pod Number, Device Type"
               class="q-mr-lg q-py-sm"
             />
           </div>

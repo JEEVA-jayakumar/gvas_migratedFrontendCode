@@ -17,9 +17,9 @@
       </div>
     </div>
     <q-tabs color="grey-9">
-      <!-- Tabs - notice slot="title" -->
-      <q-tab @select="leadSourceActiveList" default slot="title" label="Active List" name="tab-1"/>
-      <q-tab @select="leadSourceDeActiveList" slot="title" label="De-Actived List" name="tab-2"/>
+      <!-- Tabs - notice  -->
+      <q-tab @select="leadSourceActiveList" default  label="Active List" name="tab-1"/>
+      <q-tab @select="leadSourceDeActiveList"  label="De-Actived List" name="tab-2"/>
       <q-tab-panel name="tab-1">
         <q-table
           :rows="getActiveLeadSource"
@@ -63,7 +63,7 @@
                 color="grey-9"
                 v-model="activeFilterSearch"
                 placeholder="Type.."
-                float-label="Search lead source"
+                label="Search lead source"
               />
             </div>
             <div class="col-4" align="right">
@@ -114,7 +114,7 @@
                 color="grey-9"
                 v-model="deActivatedFilterSearch"
                 placeholder="Type.."
-                float-label="Search by name"
+                label="Search by name"
                 class="q-mr-lg"
               />
             </div>

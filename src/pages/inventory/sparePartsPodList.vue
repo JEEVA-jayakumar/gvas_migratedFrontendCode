@@ -91,7 +91,7 @@
               color="grey-9"
               v-model="filterSearch"
               placeholder="Type.."
-              float-label="Search Using POD Number"
+              label="Search Using POD Number"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -100,8 +100,8 @@
             <q-btn 
             square 
             outline 
-            color="purple-9" 
-            label="Add New Spare" 
+            color="purple-9"
+            label="Add New Spare"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloadLostOrStolenList()" />

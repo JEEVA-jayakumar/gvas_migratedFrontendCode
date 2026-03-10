@@ -10,7 +10,7 @@
             v-model="podNumber"
             color="grey-9"
             placeholder="POD Number"
-            float-label="Enter POD Number"
+            label="Enter POD Number"
             @keyup.enter="fnCookDispatchedHistoryDetails()"
             class="text-weight-regular text-grey-8 q-py-sm"
           />
@@ -44,7 +44,7 @@
                 <div class="row text-dark">
                   <div class="col-md-8">
                     <div>{{item.device.deviceName}}</div>
-                    <div>{{item.device.createDate | moment("MMMM Do YYYY")}}</div>
+                    <div>{{ $moment_format(item.device.createDate, "MMMM Do YYYY") }}</div>
                   </div>
                   <div class="col-md-4" align="right">
                     <div>Count</div>

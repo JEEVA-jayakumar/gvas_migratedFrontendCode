@@ -10,11 +10,11 @@
           <q-input
             clearable
             v-model.trim="formData.tid"
-            @blur="$v.formData.tid.$touch"
-            :error="$v.formData.tid.$error"
+            @blur="v$.formData.tid.$touch"
+            :error="v$.formData.tid.$error"
             class="text-weight-regular text-grey-8"
             color="grey-9"
-            float-label="*Enter TID"
+            label="*Enter TID"
             placeholder="Enter TID"
             maxlength="8"
             onkeypress="return (event.charCode > 47 && event.charCode < 59) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
@@ -68,8 +68,8 @@ export default {
   methods: {
     ...mapActions("appDevice", ["VERIFY_KSN"]),
     fnSubmittid(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review field again.");
         return;
       } else {

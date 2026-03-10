@@ -3,9 +3,9 @@
         <div>
             <q-tabs no-pane-border v-model="selectedTab" color="dark" inverted class="shadow-1"
                 @select="goToSelectedTab">
-                <q-tab default color="dark" name="tab-1" slot="title" label="Approved Pod" />
-                <q-tab color="dark" name="tab-2" slot="title" label="Rejected Pod" />
-                <q-tab color="dark" name="tab-3" slot="title" label=" Allocated Pod" />
+                <q-tab default color="dark" name="tab-1"  label="Approved Pod" />
+                <q-tab color="dark" name="tab-2"  label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3"  label=" Allocated Pod" />
 
                 <q-tab-panel name="tab-1">
                     <q-table :rows="tableData" table-class="customSATableClass" :columns="columns"
@@ -66,7 +66,7 @@
                             <!--START: table filter,search
                 @click="fnShowAddNewServiceType(props.row)" -->
                             <div class="col-3">
-                                <q-input clearable color="grey-9" v-model="filterSearch" float-label="Search By POD Number" placeholder="Type.."
+                                <q-input clearable color="grey-9" v-model="filterSearch" label="Search By POD Number" placeholder="Type.."
                                     class="q-mr-lg" />
                             </div>
                             <!--ENDv-model: table filter,search -->
@@ -136,7 +136,7 @@
                             <!--END: table title -->
                             <!--START: table filter,search -->
                             <div class="col-3">
-                                <q-input clearable color="grey-9" v-model="filterSearch1" float-label="Search By POD Number" placeholder="Type.."
+                                <q-input clearable color="grey-9" v-model="filterSearch1" label="Search By POD Number" placeholder="Type.."
                                     class="q-mr-lg" />
                             </div>
                             <!-- <div class="col-3" align="right">
@@ -212,7 +212,7 @@
                         <template v-slot:top="props">
 
                             <div class="col-3">
-                                <q-input clearable color="grey-9" v-model="filterSearch2" float-label="Search By POD Number" placeholder="Type.."
+                                <q-input clearable color="grey-9" v-model="filterSearch2" label="Search By POD Number" placeholder="Type.."
                                     class="q-mr-lg" />
                             </div>
                         </template>

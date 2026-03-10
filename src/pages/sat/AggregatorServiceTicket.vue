@@ -18,7 +18,7 @@
         @request="ajaxLoadAllLeadInfo"
       >
         <q-td v-slot:body-cell-createdDate="props" :props="props">
-          <span class="label">{{ props.row.createdDate | moment("Do MMM Y") }}</span>
+          <span class="label">{{ $moment_format(props.row.createdDate, "Do MMM Y") }}</span>
         </q-td>
         <q-td v-slot:body-cell-tid="props" :props="props">
           <span class="label text-primary"># {{ props.row.serviceRequestData.tid }}</span>
@@ -105,7 +105,7 @@
           <div v-else>NA Document</div>
         </q-td>
         <q-td v-slot:body-cell-closedate="props" :props="props">
-          <span class="label">{{ props.row.updatedDate | moment("Do MMM Y") }}</span>
+          <span class="label">{{ $moment_format(props.row.updatedDate, "Do MMM Y") }}</span>
         </q-td>
 
         <q-td v-slot:body-cell-status="props" :props="props">
@@ -165,7 +165,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search by  TID,Ticket ID, Merchant Name"
+              label="Search by  TID,Ticket ID, Merchant Name"
               class="q-mr-lg q-py-sm"
             />
           </div>

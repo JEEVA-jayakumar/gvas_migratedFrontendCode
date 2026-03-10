@@ -10,14 +10,14 @@
             inverted
             class="shadow-1"
           >
-            <q-tab default name="serviceRequest" label="Service Request" slot="title" />
-            <!-- <q-tab name="spareSo" label="Spare Parts So" slot="title" /> -->
-            <q-tab name="issueTypes" label="Issue Types" slot="title" />
-            <q-tab name="serviceStatus" label="Service Status" slot="title" />
-            <q-tab name="cancelled" label="cancelled" slot="title" />
-            <q-tab name="serviceResolutionRemarks" label="Service Resolution Remarks" slot="title" />
-            <q-tab name="issueMapping" label="Issue Mapping" slot="title" />
-            <q-tab name="csSubIssue" label="CS Sub Issue" slot="title" />
+            <q-tab default name="serviceRequest" label="Service Request"  />
+            <!-- <q-tab name="spareSo" label="Spare Parts So"  /> -->
+            <q-tab name="issueTypes" label="Issue Types"  />
+            <q-tab name="serviceStatus" label="Service Status"  />
+            <q-tab name="cancelled" label="cancelled"  />
+            <q-tab name="serviceResolutionRemarks" label="Service Resolution Remarks"  />
+            <q-tab name="issueMapping" label="Issue Mapping"  />
+            <q-tab name="csSubIssue" label="CS Sub Issue"  />
             <q-tab-panel name="serviceRequest">
               <serviceRequest/>
             </q-tab-panel>
@@ -27,7 +27,7 @@
             <q-tab-panel name="serviceStatus">
               <serviceStatus/>
             </q-tab-panel>
-            
+
             <q-tab-panel name="cancelled">
               <cancelled/>
             </q-tab-panel>

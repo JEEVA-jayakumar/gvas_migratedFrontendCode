@@ -23,10 +23,10 @@
         <img v-if="leftDrawerOpen" class="cursor-pointer" src="~assets/images/logo.png" style="height:38px;">
         </div>
         <div class="col float-right" align="right">
-          <q-btn flat color="grey-9" icon="far fa-bell"/>  
+          <q-btn flat color="grey-9" icon="far fa-bell"/>
           <q-btn flat color="grey-9 vertical-middle">
             <span class="mobile-hide capitalize text-weight-regular">{{getUserName}}</span>
-            <img src="https://pdc.techinasia.com/wp-content/uploads/2018/03/user60.png" style="height:30px;width:30px" class="vertical-middle">
+            <img src="https://pdc.techinasia.com/wp-content/uploads/2018/03/user60.png" style="height:30px;width:30px" vertical-middle">
             <!-- Direct child of target -->
             <q-menu class="shadow-8 " anchor="bottom middle" self="top middle" style="min-width:350px">
               <q-list separator link class="no-padding">

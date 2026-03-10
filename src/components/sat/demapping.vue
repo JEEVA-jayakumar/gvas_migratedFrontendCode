@@ -61,7 +61,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search By Device Serial Number"
+              label="Search By Device Serial Number"
               class="q-mr-lg q-py-sm"
             />
           </div>

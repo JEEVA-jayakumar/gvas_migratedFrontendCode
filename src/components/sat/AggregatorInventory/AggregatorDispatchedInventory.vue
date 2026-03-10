@@ -8,7 +8,7 @@
                         <q-chip color="purple-9">Step -1</q-chip>&nbsp; Select Aggregator
                     </div>
                     <div class="col">
-                        <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
+                        <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
                             :options="aggregatorOptions" />
 
                     </div>
@@ -20,7 +20,7 @@
                     <!--aggregator == ''-->
                     <div class="col">
                         <q-input  v-model="podNumber" color="grey-9" placeholder="POD Number"
-                            float-label="Enter POD Number" />
+                            label="Enter POD Number" />
                     </div>
                     <div class="col-auto" align="right">
                         <q-btn :disabled="podNumber == ''" label="Submit"
@@ -42,7 +42,7 @@
                                     <div class="row text-dark">
                                         <div class="col-md-8">
                                             <div>{{ item.aggregatorDevice.deviceName }}</div>
-                                            <div>{{ item.aggregatorDevice.createDate | moment("MMMM Do YYYY") }}</div>
+                                            <div>{{ $moment_format(item.aggregatorDevice.createDate, "MMMM Do YYYY") }}</div>
                                         </div>
                                         <div class="col-md-4" align="right">
                                             <div>Count</div>

@@ -17,7 +17,7 @@
           <!--END: table title -->
           <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
             <div class="col-md-4">
-              <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
+              <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
                 :options="aggregatorOptions" @input="getaggregator" />
             </div>
           </div> -->
@@ -29,7 +29,7 @@
               :columns="columns" 
               :rows="tableData"
               color="grey-9"
-              :filter="filterSearch" 
+              :filter="filterSearch"
               :pagination="paginationControl"
               :rows-per-page-options="[5, 10, 15, 20, 25]"
               :loading="toggleAjaxLoadFilter"
@@ -50,9 +50,9 @@
                   <q-input
                     clearable 
                     color="grey-9"
-                    v-model="filterSearch" 
+                    v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search Using Device Serial Number " class="q-mr-lg q-py-sm" 
+                    label="Search Using Device Serial Number " class="q-mr-lg q-py-sm"
                   />
                 </div>
                 <!--END: table search -->
@@ -61,7 +61,7 @@
                   <q-btn 
                   square 
                   outline 
-                  color="purple-9" 
+                  color="purple-9"
                   label="Download as Excel"
                   class="q-mr-lg q-py-sm float-right"
                   size="md" 

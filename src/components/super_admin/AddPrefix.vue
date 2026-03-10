@@ -16,34 +16,34 @@
                 <q-item>
                   <q-item-section>
                     <q-select color="grey-9" v-model="formData.leadSource" :options="dropDown.leadSourceOptions"
-                      float-label="Select lead source" placeholder="Lead source" />
+                      label="Select lead source" placeholder="Lead source" />
                   </q-item-section>
                 </q-item>
                 <q-item>
                   <q-item-section>
-                    <q-input color="grey-9" v-model="formData.prefix" @blur="$v.formData.prefix.$touch"
-                      :error="$v.formData.prefix.$error" float-label="Enter prefix* (3 digits)"
+                    <q-input color="grey-9" v-model="formData.prefix" @blur="v$.formData.prefix.$touch"
+                      :error="v$.formData.prefix.$error" label="Enter prefix* (3 digits)"
                       placeholder="Enter prefix* (3 digits)" />
-                    <div class="text-negative q-py-xs group text-caption" v-if="$v.formData.prefix.$error">
+                    <div class="text-negative q-py-xs group text-caption" v-if="v$.formData.prefix.$error">
                       <div v-if="
-                        $v.formData.prefix.$params
+                        v$.formData.prefix.$params
                           .required
                       ">
                         <q-icon color="negative" name="warning" />&nbsp;Required
                       </div>
                       <div v-if="
-                        $v.formData.prefix.$params
+                        v$.formData.prefix.$params
                           .minLength
                       ">
                         <q-icon color="negative" name="warning" />
                         &nbsp;Length should be between
                         {{
-                            $v.formData.prefix.$params
+                            v$.formData.prefix.$params
                               .minLength.min
                         }}
                         and
                         {{
-                            $v.formData.prefix.$params
+                            v$.formData.prefix.$params
                               .maxLength.max
                         }}
                       </div>
@@ -181,8 +181,8 @@ export default {
       //   })
     },
     submitCreatePrefix() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
       } else {
         this.$q.loading.show({
           delay: 100, // ms

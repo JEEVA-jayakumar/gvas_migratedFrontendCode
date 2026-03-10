@@ -16,7 +16,7 @@
         <q-input
           color="grey-9"
           v-model="formData.device"
-          float-label="Device Type"
+          label="Device Type"
         />
       </div>
       <div class="col-md-12">
@@ -24,31 +24,31 @@
           Reason Type
         </div>
         <q-radio
-          @blur="$v.formData.leadVerificationStatus.reasonType.$touch"
-          :error="$v.formData.leadVerificationStatus.reasonType.$error"
+          @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
+          :error="v$.formData.leadVerificationStatus.reasonType.$error"
           v-model="formData.leadVerificationStatus.reasonType"
           val="Wrong Device Type"
           color="grey-9"
           label="Wrong Device Type"
         />
         <q-radio
-          @blur="$v.formData.leadVerificationStatus.reasonType.$touch"
-          :error="$v.formData.leadVerificationStatus.reasonType.$error"
+          @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
+          :error="v$.formData.leadVerificationStatus.reasonType.$error"
           v-model="formData.leadVerificationStatus.reasonType"
           val="Others"
           color="grey-9"
           label="Others"
         />
-        <div class="text-negative q-py-xs group text-caption" v-if="$v.formData.leadVerificationStatus.reasonType.$error">
-          <div v-if="$v.formData.leadVerificationStatus.reasonType.$params.required">
+        <div class="text-negative q-py-xs group text-caption" v-if="v$.formData.leadVerificationStatus.reasonType.$error">
+          <div v-if="v$.formData.leadVerificationStatus.reasonType.$params.required">
             <q-icon color="negative" name="warning" />&nbsp;Required
           </div>
         </div>
         <q-input
           type="textarea"
           placeholder="Type Your Reason Here...."
-          @blur="$v.formData.leadVerificationStatus.reason.$touch"
-          :error="$v.formData.leadVerificationStatus.reason.$error"
+          @blur="v$.formData.leadVerificationStatus.reason.$touch"
+          :error="v$.formData.leadVerificationStatus.reason.$error"
           class="q-my-md"
           color="grey-9"
           align="left"
@@ -134,8 +134,8 @@ export default {
     },
     leadRejectSubmit(formData) {
       // let
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q

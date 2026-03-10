@@ -17,11 +17,11 @@
           <div>
             <q-input
               v-model="formData.deviceName"
-              @blur="$v.formData.deviceName.$touch"
-              :error="$v.formData.deviceName.$error"
+              @blur="v$.formData.deviceName.$touch"
+              :error="v$.formData.deviceName.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Device Type"
+              label="Device Type"
               placeholder="Device Type"
             />
           </div>
@@ -31,10 +31,10 @@
                 <q-color
                   clearable
                   v-model="formData.colorCode"
-                  @blur="$v.formData.colorCode.$touch"
-                  :error="$v.formData.colorCode.$error"
+                  @blur="v$.formData.colorCode.$touch"
+                  :error="v$.formData.colorCode.$error"
                   popover
-                  float-label="Choose a role color"
+                  label="Choose a role color"
                   color="grey-9"
                   @input="createDuplicateResult"
                 />
@@ -52,11 +52,11 @@
             <q-input
               v-model="formData.serialNumberLength"
               type="number"
-              @blur="$v.formData.serialNumberLength.$touch"
-              :error="$v.formData.serialNumberLength.$error"
+              @blur="v$.formData.serialNumberLength.$touch"
+              :error="v$.formData.serialNumberLength.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Serial Number Length"
+              label="Serial Number Length"
               placeholder="Serial Number Length"
             />
           </div>
@@ -134,8 +134,8 @@ export default {
       this.formData.colorCode = item;
     },
     fnfinalsubmitDeviceType(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();

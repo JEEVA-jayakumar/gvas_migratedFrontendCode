@@ -31,7 +31,7 @@
        <q-td
           v-slot:body-cell-updated_at="props"
           :props="props"
-        >{{ props.row.updatedAt ==null? "NA" : props.row.updatedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.updatedAt ==null? "NA" : props.row.updatedAt, "Do MMM Y") }}</q-td>
         <template slot="top">
           <!--START: table filter,search -->
           <div class="col-md-5">
@@ -40,7 +40,7 @@
               color="grey-9"
               v-model="filterSearch"
               placeholder="Type.."
-              float-label="Search Using Device Serial Number"
+              label="Search Using Device Serial Number"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -49,8 +49,8 @@
             <q-btn 
             square 
             outline 
-            color="purple-9" 
-            label="Download as Excel" 
+            color="purple-9"
+            label="Download as Excel"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloadLostOrStolenList()" />

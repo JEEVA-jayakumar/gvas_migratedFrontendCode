@@ -12,11 +12,11 @@
           </div>
           <div class="col-md-12">
             <q-input hide-underline class="q-mr-lg q-py-sm" v-model="formData.selectedFromYear" :min="yesterday"
-              :max="tomorrow" type="date" float-label="Choose Date Range" Format="YYYY-MM-DD" />
+              :max="tomorrow" type="date" label="Choose Date Range" Format="YYYY-MM-DD" />
           </div>
           <!-- <div class="col-md-12">
             <q-input hide-underline class="q-mr-lg q-py-sm" v-model="formData.selectedToYear" :min="yesterday"
-              :max="tomorrow" type="date" float-label="To Date" Format="YYYY-MM-DD" />
+              :max="tomorrow" type="date" label="To Date" Format="YYYY-MM-DD" />
           </div> -->
           <div class="col-md-12 group" align="right">
             <q-btn flat align="right" class="bg-white text-weight-regular text-grey-8"

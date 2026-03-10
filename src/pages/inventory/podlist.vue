@@ -34,24 +34,24 @@
         <q-td
           v-slot:body-cell-createdAt="props"
           :props="props"
-        >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-receivedAt="props"
           :props="props"
-        >{{ props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.receivedAt, "Do MMM Y") }}</q-td>
 
         <q-td
           v-slot:body-cell-receivedAt="props"
           :props="props"
-        >{{ props.row.receivedAt ==null? "NA" : props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.receivedAt ==null? "NA" : props.row.receivedAt, "Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-DeviceList="props"
           :props="props"
-        >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-ModifyDate="props"
           :props="props"
-        >{{ props.row.device.modifyDate | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.device.modifyDate, "Do MMM Y") }}</q-td>
         <template v-slot:top="props">
           <div class="col-md-5">
             <q-input
@@ -60,7 +60,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search By Pod Number, BP Region"
+              label="Search By Pod Number, BP Region"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -69,8 +69,8 @@
             <q-btn 
             square 
             outline 
-            color="purple-9" 
-            label="Download as Excel" 
+            color="purple-9"
+            label="Download as Excel"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloadPodList()" />

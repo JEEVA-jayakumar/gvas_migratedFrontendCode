@@ -73,14 +73,14 @@
             modal
             v-model="formData.from"
             color="grey-9"
-            float-label="Start date"
+            label="Start date"
           />
           <q-input
             type="date"
             modal
             v-model="formData.to"
             color="grey-9"
-            float-label="End date"
+            label="End date"
           />
         </div>
         <div class="col-12 group">

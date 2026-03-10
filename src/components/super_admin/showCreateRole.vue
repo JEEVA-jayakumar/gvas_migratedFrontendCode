@@ -34,9 +34,9 @@
                   <q-select
                   filter
                     v-model="formData.rolePermissions.hierarchyId"
-                    @blur="$v.formData.rolePermissions.hierarchyId.$touch"      
-                    :error="$v.formData.rolePermissions.hierarchyId.$error" 
-                    float-label="Hierarchy"
+                    @blur="v$.formData.rolePermissions.hierarchyId.$touch"
+                    :error="v$.formData.rolePermissions.hierarchyId.$error"
+                    label="Hierarchy"
                     placeholder="Select Hierarchy"
                     class="text-weight-regular text-grey-8" color="grey-9"
                     :options="propGetAllHierarchiesData"
@@ -49,9 +49,9 @@
               <div class="column gutter-sm q-py-sm items-center">
                 <div class="col-md-8">
                    <q-input v-model.trim="formData.rolePermissions.name" 
-                    @blur="$v.formData.rolePermissions.name.$touch"      
-                    :error="$v.formData.rolePermissions.name.$error" 
-                    class="text-weight-regular text-grey-8" color="grey-9" float-label="Role" placeholder="Role" />
+                    @blur="v$.formData.rolePermissions.name.$touch"
+                    :error="v$.formData.rolePermissions.name.$error"
+                    class="text-weight-regular text-grey-8" color="grey-9" label="Role" placeholder="Role" />
                 </div>
               </div>
             </div>  
@@ -62,9 +62,9 @@
                   <q-color 
                   clearable
                   v-model="formData.rolePermissions.roleColor"
-                  @blur="$v.formData.rolePermissions.roleColor.$touch"      
-                  :error="$v.formData.rolePermissions.roleColor.$error" 
-                  popover float-label="Choose a role color" color="grey-9"
+                  @blur="v$.formData.rolePermissions.roleColor.$touch"
+                  :error="v$.formData.rolePermissions.roleColor.$error"
+                  popover label="Choose a role color" color="grey-9"
                   />
                 </div>
               </div>
@@ -139,8 +139,8 @@ export default {
 
     //Role creation final submit
     fnCreateRoleSubmit(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         let cookedRole = formData.name.toUpperCase().replace(/ /g, "_");

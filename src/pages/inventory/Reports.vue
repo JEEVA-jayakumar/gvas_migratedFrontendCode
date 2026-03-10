@@ -10,11 +10,11 @@
               inverted
               class="shadow-1"
             >
-              <q-tab name="Replacement" label="Replacement/Recovery" slot="title" />
-              <q-tab name="DeviceHistory" label="DeviceHistory" slot="title" />
-              <q-tab name="DeviceFSE" label="Device With FSE/SO" slot="title" />
-              <q-tab name="DeviceBP" label="Device With BP Regions" slot="title" />
-              <q-tab name="InventorySummary" label="Inventory Summary" slot="title" />
+              <q-tab name="Replacement" label="Replacement/Recovery"  />
+              <q-tab name="DeviceHistory" label="DeviceHistory"  />
+              <q-tab name="DeviceFSE" label="Device With FSE/SO"  />
+              <q-tab name="DeviceBP" label="Device With BP Regions"  />
+              <q-tab name="InventorySummary" label="Inventory Summary"  />
             
   
               <q-tab-panel name="Replacement">

@@ -150,7 +150,7 @@
                   class="text-left"
                   v-if="props.row.paymentMadeon == '' || props.row.paymentMadeon == null"
                 >NA</div>
-                <div class="text-left" v-else>{{ props.row.paymentMadeon | moment("Do MMM Y") }}</div>
+                <div class="text-left" v-else>{{ $moment_format(props.row.paymentMadeon, "Do MMM Y") }}</div>
               </q-td>
               <q-td>
                 <div class="text-left text-caption text-grey-8 text-weight-medium">Payment Reference</div>
@@ -217,7 +217,7 @@
                 color="grey-9"
                 v-model="filter"
                 placeholder="Type.."
-                float-label="Search"
+                label="Search"
                 class="q-mr-lg q-py-sm"
               />
             </div>

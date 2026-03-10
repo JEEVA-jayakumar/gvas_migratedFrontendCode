@@ -21,10 +21,10 @@
             <div class="col-md-12">
               <q-input
                 v-model="formData.name"
-                :error="$v.formData.name.$error"
+                :error="v$.formData.name.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Enter CS Sub Issue"
+                label="Enter CS Sub Issue"
                 placeholder="Enter CS Sub Issue"
               />
             </div>
@@ -117,8 +117,8 @@
         this.propRowDetails = rowDetails;
       },
       fnfinalsubmitCsSubIssue(formData) {
-        this.$v.formData.$touch();
-        if (this.$v.formData.$error) {
+        this.v$.formData.$touch();
+        if (this.v$.formData.$error) {
           this.$q.notify("Please review fields again.");
         } else {
           this.$q.loading.show();

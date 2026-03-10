@@ -51,7 +51,7 @@
                       <q-select
                         inverted-light
                         v-model="selectedValueSat"
-                        float-label="Please Select"
+                        label="Please Select"
                         placeholder="Please Select"
                         color="light"
                         class="cursor-pointer menu-item-color"
@@ -122,7 +122,7 @@
                       <q-select
                         inverted-light
                         v-model="selectedValue"
-                        float-label="Please Select"
+                        label="Please Select"
                         placeholder="Please Select"
                         color="light"
                         class="cursor-pointer menu-item-color"

@@ -11,16 +11,16 @@
           default
           color="dark"
           name="tab-1"
-          slot="title"
+
           label="Pending Tickets"
         />
         <q-tab
           color="dark"
           name="tab-2"
-          slot="title"
+
           label="Completed Tickets"
         />
-        <q-tab color="dark" name="tab-3" slot="title" label="RTO Tickets" />
+        <q-tab color="dark" name="tab-3"  label="RTO Tickets" />
         <q-tab-panel name="tab-1">
           <div class="row items-center">
             <div class="col">
@@ -44,7 +44,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search By Ticket No, Merchant No..."
+              label="Search By Ticket No, Merchant No..."
             />
           </div>
           <q-table
@@ -124,7 +124,7 @@
               color="grey-9"
               v-model="filter1"
               placeholder="Type.."
-              float-label="Search By Ticket No, Merchant No..."
+              label="Search By Ticket No, Merchant No..."
             />
           </div>
           <q-table
@@ -181,7 +181,7 @@
               color="grey-9"
               v-model="filter2"
               placeholder="Type.."
-              float-label="Search By Ticket No, Merchant No..."
+              label="Search By Ticket No, Merchant No..."
             />
           </div>
           <q-table

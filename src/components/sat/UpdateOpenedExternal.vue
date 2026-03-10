@@ -17,11 +17,11 @@
                             <q-list no-border>
                                 <div class="col-md-12">
                                     <q-select filter clearable color="grey-9" v-model="formData.so" :options="assignToOptions"
-                                        float-label="Select SO*" />
+                                        label="Select SO*" />
                                 </div>
                                 <div class="col-md-12">
                                     <q-select color="grey-9" v-model="formData.Reassign" :options="ReasonListOptions"
-                                        float-label="Select Reason List*" />
+                                        label="Select Reason List*" />
                                 </div>
                                 <!-- {{formData.Reassign}} -->
                                 <div v-if="this.formData.Reassign == 'Other reason'">

@@ -10,12 +10,12 @@
               inverted
               class="shadow-1"
             >
-              <q-tab name="DeviceModelApiSync" label="DeviceModel" slot="title" />
-              <q-tab name="CityApiSync" label="City" slot="title" />
-              <q-tab name="RegionApiSync" label="Region" slot="title" />
-              <q-tab name="RentalPlanApiSync" label="RentalPlan" slot="title" />
-              <q-tab name="LeadFormApiSync" label="LeadForm" slot="title" />
-              <q-tab name="StateApiSync" label="State" slot="title" />
+              <q-tab name="DeviceModelApiSync" label="DeviceModel"  />
+              <q-tab name="CityApiSync" label="City"  />
+              <q-tab name="RegionApiSync" label="Region"  />
+              <q-tab name="RentalPlanApiSync" label="RentalPlan"  />
+              <q-tab name="LeadFormApiSync" label="LeadForm"  />
+              <q-tab name="StateApiSync" label="State"  />
             
   
               <q-tab-panel name="DeviceModelApiSync">

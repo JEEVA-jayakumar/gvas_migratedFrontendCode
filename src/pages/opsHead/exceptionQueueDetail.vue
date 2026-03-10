@@ -144,7 +144,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Debit < 2000 (%)"
+                          label="Debit < 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.debitLessthanAmount"
@@ -153,7 +153,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Debit < 2000 (%)"
+                          label="Debit < 2000 (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.debitGreaterthanAmount"
@@ -164,7 +164,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Std CC (%)"
+                          label="Std CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.stdCC"
@@ -173,7 +173,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Premium CC (%)"
+                          label="Premium CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.premiumCC"
@@ -184,7 +184,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Corp Pre CC (%)"
+                          label="Corp Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.corpCC"
@@ -193,7 +193,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Intl Pre CC (%)"
+                          label="Intl Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.intlCC"
@@ -204,7 +204,7 @@
                       <q-item-section>
                         <q-input
                           color="grey-9"
-                          float-label="Super Pre CC (%)"
+                          label="Super Pre CC (%)"
                           readonly
                           class="no-pointer-events"
                           v-model="formData.shortLead.superPremiumlCC"
@@ -270,7 +270,7 @@
                         <span
                           class="label capitalize"
                           v-if="getKycExceptionInfoById.leadVerificationStatus.length > 0"
-                        >{{sortArraysForExpectedSubmitDate(getKycExceptionInfoById.leadVerificationStatus) | moment("MMMM Do YYYY")}}</span>
+                        >{{ $moment_format(sortArraysForExpectedSubmitDate(getKycExceptionInfoById.leadVerificationStatus), "MMMM Do YYYY") }}</span>
                         <span class="label capitalize" v-else>NA</span>
                       </q-item-section>
                     </q-item>

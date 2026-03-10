@@ -18,16 +18,16 @@
         <div class="col-md-2">
           <q-select :disabled="formData.device_type != ''"
             :class="[formData.device_type != '' ? 'no-pointer-events' : '']" v-model="formData.region"
-            float-label="Select Region" radio color="grey-9" :options="regionOptions" />
+            label="Select Region" radio color="grey-9" :options="regionOptions" />
 
         </div>
         <!-- <div class="col-md-2">
-          <q-select color="grey-9" :disable="formData.region == ''" v-model="aggregator" float-label="Select Aggregator" radio
+          <q-select color="grey-9" :disable="formData.region == ''" v-model="aggregator" label="Select Aggregator" radio
             :options="aggregatorOptions" @input="selectedAggregators" />
         </div> -->
         <div class="col-md-2">
           <q-select clearable :disable="formData.region == ''" @clear="fnClearingDeviceTypeSelection"
-            @input="fnSetDevicesByDeviceId" v-model="formData.device_type" float-label="Select Device Type" radio
+            @input="fnSetDevicesByDeviceId" v-model="formData.device_type" label="Select Device Type" radio
             color="grey-9" :options="deviceOptions" />
         </div>
         <div class="col-12 col-lg-4 group" align="right">

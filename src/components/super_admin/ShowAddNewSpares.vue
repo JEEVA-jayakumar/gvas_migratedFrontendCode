@@ -18,22 +18,22 @@
                      <div class="col-md-12">
                         <q-input
                           v-model="formData.spareName"   
-                          :error="$v.formData.spareName.$error" 
+                          :error="v$.formData.spareName.$error"
                         
                         
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Enter Spare Parts Name*" 
+                          color="grey-9"
+                          label="Enter Spare Parts Name*"
                           placeholder="Enter Spare Parts Name*" 
                         />
                     </div>
                     <!-- <div class="col-md-12">
                         <q-input 
                         v-model="formData.regionAreaName" 
-                          :error="$v.formData.regionAreaName.$error"
+                          :error="v$.formData.regionAreaName.$error"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Region" 
+                          color="grey-9"
+                          label="Region"
                           placeholder="Region" 
                         />
                     </div> -->
@@ -90,8 +90,8 @@ computed:{
       this.$emit("emitfnShowAddNewSpares");
     },
     fnfinalsubmitAddNewRegion(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();

@@ -10,8 +10,8 @@
 
               <q-item>
                 <q-item-section>
-                  <q-input color="grey-9" v-model="formData.Address" @blur="$v.formData.Address.$touch"
-                    :error="$v.formData.Address.$error" float-label="Address" />
+                  <q-input color="grey-9" v-model="formData.Address" @blur="v$.formData.Address.$touch"
+                    :error="v$.formData.Address.$error" label="Address" />
                     
                     <div>
                     <q-btn label="Search Address" @click="fnAddress(formData)" color="purple-9" />
@@ -23,16 +23,16 @@
               <q-item>
                 <q-item-section>
                   <q-input color="grey-9" type="double" disable v-model="formData.latitude"
-                    @blur="$v.formData.latitude.$touch" :error="$v.formData.latitude.$error"
-                    float-label="Enter Latitude" placeholder="Add Latitude" />
+                    @blur="v$.formData.latitude.$touch" :error="v$.formData.latitude.$error"
+                    label="Enter Latitude" placeholder="Add Latitude" />
                 </q-item-section>
               </q-item>
 
               <q-item>
                 <q-item-section>
                   <q-input color="grey-9" type="double" disable v-model="formData.longitude"
-                    @blur="$v.formData.longitude.$touch" :error="$v.formData.longitude.$error"
-                    float-label="Enter Longitude" placeholder="Add Longitude" />
+                    @blur="v$.formData.longitude.$touch" :error="v$.formData.longitude.$error"
+                    label="Enter Longitude" placeholder="Add Longitude" />
                 </q-item-section>
               </q-item>
             </q-list>
@@ -204,8 +204,8 @@ export default {
     },
 
     fnsubmit(request) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify({
           color: "negative",
           position: "bottom",

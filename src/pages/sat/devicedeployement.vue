@@ -9,7 +9,7 @@
               <q-input
                 v-model="merchant.paymentDetails.deviceSerialNumber"
                 class="no-margin"
-                float-label="Serial Number"
+                label="Serial Number"
               />
               <!-- @input="planSelected" -->
             </div>
@@ -18,7 +18,7 @@
                 format="DD/MM/YYYY"
                 v-model="merchant.paymentDetails.installationDate"
                 class="no-margin"
-                float-label="Installation Date"
+                label="Installation Date"
               />
               <!-- @input="planSelected" -->
             </div>
@@ -27,7 +27,7 @@
                 format="DD/MM/YYYY"
                 v-model="merchant.paymentDetails.deinstallationDate"
                 class="no-margin"
-                float-label="DeInstallation Date"
+                label="DeInstallation Date"
               />
               <!-- @input="planSelected" -->
             </div>
@@ -571,8 +571,8 @@ export default {
     //   console.log("Hello",this.formdata.plan);
     // },
     sendtoFinance(request) {
-      this.$v.formdata.$touch();
-      if (this.$v.formdata.$error) {
+      this.v$.formdata.$touch();
+      if (this.v$.formdata.$error) {
         this.$q.notify("Please review fields again.");
       } else if (
         this.formdata.paymentOption == 2 &&

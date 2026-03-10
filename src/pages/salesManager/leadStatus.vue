@@ -115,7 +115,7 @@
             separator
             color="grey-9"
             placeholder="Type.."
-            float-label="Search"
+            label="Search"
           />
         </div>
         <!--ENDv-model: table search -->
@@ -159,7 +159,7 @@
           :name="tabHeader.value"
           :label="tabHeader.label"
           class="text-dark"
-          slot="title"
+
         />
      
         <!--END: tabs header -->
@@ -181,7 +181,7 @@
             <q-td
               v-slot:body-cell-shortleadDate="props"
               :props="props"
-            >{{props.row.shortleadDate | moment("Do MMM Y")}}</q-td>
+            >{{ $moment_format(props.row.shortleadDate, "Do MMM Y") }}</q-td>
             <q-td
               v-slot:body-cell-id="props"
               :props="props"

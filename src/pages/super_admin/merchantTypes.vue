@@ -10,9 +10,9 @@
               color="grey-9"
               v-model="formData.merchantType"
               :options="activeMerchantType"
-              float-label="Select merchant type"
+              label="Select merchant type"
               placeholder="Merchant type"
-              :error="$v.formData.merchantType.$error"
+              :error="v$.formData.merchantType.$error"
               @input="merchantDocumentTypeActiveList"
             />
           </div>
@@ -34,7 +34,7 @@
               v-model="formData.parentIDtemp"
               :options="activeDocumentMerchantType"
               @input="mapParentIdToSubDocument"
-              float-label="Merchant Document Type"
+              label="Merchant Document Type"
               placeholder="Merchant Document Type"
             />
           </div>
@@ -54,8 +54,8 @@
             <q-input
               color="grey-9"
               v-model="formData.subDocumentType"
-              :error="$v.formData.subDocumentType.$error"
-              float-label="Merchant Sub Document Type"
+              :error="v$.formData.subDocumentType.$error"
+              label="Merchant Sub Document Type"
               placeholder="Merchant Sub Document Type"
             />
           </div>
@@ -64,7 +64,7 @@
               type="number"
               color="grey-9"
               v-model="formData.marsDocumentId"
-              float-label="Mars document Id"
+              label="Mars document Id"
               placeholder="Mars document Id"
             />
           </div>
@@ -85,17 +85,17 @@
       <!-- START >> Table >> rental charge details -->
       <div class="col-md-12 col-sm-12 col-xs-12">
         <q-tabs color="grey-9">
-          <!-- Tabs - notice slot="title" -->
+          <!-- Tabs - notice  -->
           <q-tab
             @select="fetchActiveMerchantTypes"
             default
-            slot="title"
+
             label="Active List"
             name="tab-1"
           />
           <q-tab
             @select="fetchDeActiveMerchantTypes"
-            slot="title"
+
             label="De-Actived List"
             name="tab-2"
           />
@@ -143,7 +143,7 @@
                     color="grey-9"
                     v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search by merchant type, document type, sub document type"
+                    label="Search by merchant type, document type, sub document type"
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -195,7 +195,7 @@
                     color="grey-9"
                     v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search by merchant type, document type, sub document type"
+                    label="Search by merchant type, document type, sub document type"
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -494,8 +494,8 @@ export default {
     },
     submitMerchantSubDocumentType(formData) {
       
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
       } else {
       formData.hasSubDoc = this.formData.viewType ;
       delete formData.parentIDtemp;

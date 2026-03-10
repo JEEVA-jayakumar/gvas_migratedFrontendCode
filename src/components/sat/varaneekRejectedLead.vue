@@ -36,9 +36,7 @@
             <q-td
               v-slot:body-cell-submitToMarsDate="props"
               :props="props"
-              >{{
-                props.row.submitToMarsDate | moment("Do MMM Y")
-              }}</q-td
+              >{{ $moment_format(props.row.submitToMarsDate, "Do MMM Y") }}</q-td
             >
             <template v-slot:top="props">
               <div class="col-md-5">
@@ -47,7 +45,7 @@
                   color="grey-9"
                   v-model="filterSearch"
                   placeholder="Type.."
-                  float-label="Search By Lead Number"
+                  label="Search By Lead Number"
                   class="q-mr-lg q-py-sm"
                 />
               </div>

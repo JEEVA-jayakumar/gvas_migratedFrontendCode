@@ -17,7 +17,7 @@
               v-model="formData.reason"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Enter the Reason"
+              label="Enter the Reason"
               placeholder="reason"
             />
           </div>

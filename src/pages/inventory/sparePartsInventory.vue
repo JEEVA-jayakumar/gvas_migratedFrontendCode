@@ -21,13 +21,13 @@
               :key="index"
               color="grey-9"
               v-model.trim="flag"
-              @blur="$v.flag.$touch"
-              :error="$v.flag.$error"
+              @blur="v$.flag.$touch"
+              :error="v$.flag.$error"
               :val="item.value"
               :label="item.label"
             />
             <div class="text-negative q-py-xs group text-caption"
-                    v-if="$v.flag.$error"
+                    v-if="v$.flag.$error"
                     align="right" width="25px"
                   >
                     <div>
@@ -52,7 +52,7 @@
         <div v-if="flag == '0' || flag == '1'" class="col-md-4">
           <q-select
             v-model="formData.allocate_region"
-            float-label="Select Region"
+            label="Select Region"
             radio
             color="grey-9"
             :options="regionOptions"
@@ -64,7 +64,7 @@
             filter 
             clearable
             v-model="formData.allocate_so"
-            float-label="Select SO"
+            label="Select SO"
             radio
             color="grey-9"
             :options="regionBasedSo"
@@ -73,7 +73,7 @@
         <div v-if="flag == '2'" class="col-md-3">
           <q-select
             v-model="formData.allocate_reseller"
-            float-label="Select allocate_reseller"
+            label="Select allocate_reseller"
             radio
             color="grey-9"
             :options="resellarOptions"
@@ -119,7 +119,7 @@
           <q-input
             disable
             v-model="formData.pod_number"
-            float-label="Pod Number"
+            label="Pod Number"
             radio
             color="grey-9"
           />
@@ -129,7 +129,7 @@
           <q-input
             disable
             v-model="formData.total_count"
-            float-label="Total Count"
+            label="Total Count"
             radio
             color="grey-9"
           />
@@ -421,8 +421,8 @@ export default {
       document.body.innerHTML = originalContents;
     },
     fnSubmitBankDetails(request) {
-       this.$v.flag.$touch();
-      if(this.$v.flag.$error){
+       this.v$.flag.$touch();
+      if(this.v$.flag.$error){
      this.$q.notify({
           color: "negative",
           position: "bottom",

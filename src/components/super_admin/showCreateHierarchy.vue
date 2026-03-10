@@ -18,22 +18,22 @@
           <div class="col-md-12">
             <q-input
               v-model="formData.HierarchyDetails.hierarchy"
-              @blur="$v.formData.HierarchyDetails.hierarchy.$touch"
-              :error="$v.formData.HierarchyDetails.hierarchy.$error"
+              @blur="v$.formData.HierarchyDetails.hierarchy.$touch"
+              :error="v$.formData.HierarchyDetails.hierarchy.$error"
               class="text-weight-regular text-grey-8 q-my-sm"
               color="grey-9"
-              float-label="Hierarchy"
+              label="Hierarchy"
               placeholder="Hierarchy"
             />
           </div>
           <div class="col-md-12">
             <q-input
               v-model="formData.HierarchyDetails.hierarchyCode"
-              @blur="$v.formData.HierarchyDetails.hierarchyCode.$touch"
-              :error="$v.formData.HierarchyDetails.hierarchyCode.$error"
+              @blur="v$.formData.HierarchyDetails.hierarchyCode.$touch"
+              :error="v$.formData.HierarchyDetails.hierarchyCode.$error"
               class="text-weight-regular text-grey-8 q-my-sm"
               color="grey-9"
-              float-label="Hierarchy Code"
+              label="Hierarchy Code"
               placeholder="Hierarchy Code"
             />
           </div>
@@ -112,9 +112,9 @@ export default {
 
     //Hierarchy creation final submit
     fnCreateHierarchySubmit(formData) {
-      this.$v.formData.HierarchyDetails.$touch();
+      this.v$.formData.HierarchyDetails.$touch();
 
-      if (this.$v.formData.HierarchyDetails.$error) {
+      if (this.v$.formData.HierarchyDetails.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         console.log("formData >> ", formData);

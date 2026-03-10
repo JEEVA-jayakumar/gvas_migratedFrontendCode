@@ -83,16 +83,16 @@
           default
           color="dark"
           name="unAssigned"
-          slot="title"
+
           label="Opened"
         />
         <q-tab
           color="dark"
           name="assigned"
-          slot="title"
+
           label="Resolved Tickets"
         />
-        <q-tab color="dark" name="Ticket" slot="title" label="Ticket Bulk Assign/Reassign" />
+        <q-tab color="dark" name="Ticket"  label="Ticket Bulk Assign/Reassign" />
         <q-tab-panel name="assigned">
           <!--START: table Data -->
           <q-table
@@ -127,7 +127,7 @@
                   >
                 </q-td>
                 <q-td key="dateCreated" :props="props">
-                  {{ props.row.createdDate | moment("Do MMM Y") }}
+                  {{ $moment_format(props.row.createdDate, "Do MMM Y") }}
                 </q-td>
                 <q-td key="tat" :props="props">
                   <span :style="getHoursAgoColor(props.row.createdDate)">{{
@@ -165,7 +165,7 @@
                   color="grey-9"
                   v-model="filterSearch"
                   placeholder="Type.."
-                  float-label="Search By TID ..."
+                  label="Search By TID ..."
                   class="q-mr-lg q-py-sm"
                 />
               </div>
@@ -228,7 +228,7 @@
                 <q-td v-slot:body-cell-dateCreated="props"
                 :props="props"
                 class="cursor-pointer">
-                  {{ props.row.createdDate | moment("Do MMM Y") }}
+                  {{ $moment_format(props.row.createdDate, "Do MMM Y") }}
                 </q-td>
                 <q-td v-slot:body-cell-tat="props"
                 :props="props"
@@ -292,7 +292,7 @@
                   color="grey-9"
                   v-model="filterSearch1"
                   placeholder="Type.."
-                  float-label="Search By Ticket ID, TID ..."
+                  label="Search By Ticket ID, TID ..."
                   class="q-mr-lg q-py-sm"
                 />
               </div>

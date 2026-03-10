@@ -21,7 +21,7 @@
               <q-input disable
                 v-model="formdata.deviceCount"
                 class="no-margin"
-                float-label="Device Count"
+                label="Device Count"
               />
             </div>-->
             <!-- data: {{getRsmReason.reason}} -->
@@ -29,7 +29,7 @@
               <q-select
                 v-model="formdata.plan"
                 class="no-margin"
-                float-label="Select Rental Plan"
+                label="Select Rental Plan"
                 :options="dropDown.planOptions"
                 :disable="this.getImplementedQueue.leadInformation.cmsLeadStatus==15"
                 @input="fnPlan1"
@@ -40,11 +40,11 @@
               <q-select
                 clearable
                 :disable="((formdata.plan != this.getImplementedQueue.leadInformation.plan.id)||(this.getImplementedQueue.leadInformation.cmsLeadStatus ==15)||(this.getImplementedQueue.leadInformation.cmsLeadStatus==21))"
-                @blur="$v.formdata.paymentOption.$touch"
-                :error="$v.formdata.paymentOption.$error"
+                @blur="v$.formdata.paymentOption.$touch"
+                :error="v$.formdata.paymentOption.$error"
                 v-model.trim="formdata.paymentOption"
                 class="no-margin"
-                float-label="select Payment"
+                label="select Payment"
                 :options="payment"
               />
             </div>
@@ -53,7 +53,7 @@
                 disable
                 v-model="formdata.setupFees"
                 class="no-margin"
-                float-label="Setup Fees"
+                label="Setup Fees"
               />
             </div>
             <div class="col-xs-12 col-sm-6">
@@ -61,14 +61,14 @@
                 disable
                 v-model="formdata.recurringFees"
                 class="no-margin"
-                float-label="Recurring fees"
+                label="Recurring fees"
               />
             </div>
             <!-- <div class="col-xs-12 col-sm-6">
-              <q-input v-model="model" class="no-margin" float-label="Payment Ref Number" />
+              <q-input v-model="model" class="no-margin" label="Payment Ref Number" />
             </div>-->
             <!-- <div class="col-xs-12 col-sm-6">
-              <q-input v-model="model" class="no-margin" float-label="Amount" />
+              <q-input v-model="model" class="no-margin" label="Amount" />
             </div>-->
             <div class="col-xs-12 col-sm-6">
               <!-- <p class="caption">Pricing Exception</p> -->
@@ -87,7 +87,7 @@
               <q-input disable
                 v-model="formdata1.deviceCount"
                 class="no-margin"
-                float-label="Device Count"
+                label="Device Count"
               />
             </div>-->
 
@@ -95,36 +95,36 @@
               <q-select
                 v-model="formdata1.plan"
                 class="no-margin"
-                float-label="Select Rental Plan"
+                label="Select Rental Plan"
                 :options="dropDown.planOptions"
                 @input="fnPlan"
               />
             </div>
             <!-- <div class="col-xs-12 col-sm-6">
               <q-select clearable
-               @blur="$v.formdata.paymentOption.$touch"
-              :error="$v.formdata.paymentOption.$error"
+               @blur="v$.formdata.paymentOption.$touch"
+              :error="v$.formdata.paymentOption.$error"
               v-model="formdata.paymentOption"
                 class="no-margin"
-                float-label="select Payment"
+                label="select Payment"
                 :options="payment"
               />
             </div>-->
             <div class="col-xs-12 col-sm-6">
-              <q-input v-model="formdata1.setupFees" class="no-margin" float-label="Setup Fees" />
+              <q-input v-model="formdata1.setupFees" class="no-margin" label="Setup Fees" />
             </div>
             <div class="col-xs-12 col-sm-6">
               <q-input
                 v-model="formdata1.recurringFees"
                 class="no-margin"
-                float-label="Recurring fees"
+                label="Recurring fees"
               />
             </div>
             <!-- <div class="col-xs-12 col-sm-6">
-              <q-input v-model="model" class="no-margin" float-label="Payment Ref Number" />
+              <q-input v-model="model" class="no-margin" label="Payment Ref Number" />
             </div>-->
             <!-- <div class="col-xs-12 col-sm-6">
-              <q-input v-model="model" class="no-margin" float-label="Amount" />
+              <q-input v-model="model" class="no-margin" label="Amount" />
             </div>-->
             <div class="col-xs-12 col-sm-6">
               <!-- <p class="caption">Pricing Exception</p> -->
@@ -157,67 +157,67 @@
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input
-              @blur="$v.formdata.paymentMadeon.$touch"
-              :error="$v.formdata.paymentMadeon.$error"
+              @blur="v$.formdata.paymentMadeon.$touch"
+              :error="v$.formdata.paymentMadeon.$error"
               v-model.trim="formdata.paymentMadeon"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="*Transaction Made ON"
+              label="*Transaction Made ON"
               placeholder="Transaction Made ON"
             />
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input
-              @blur="$v.formdata.referenceNumber.$touch"
-              :error="$v.formdata.referenceNumber.$error"
+              @blur="v$.formdata.referenceNumber.$touch"
+              :error="v$.formdata.referenceNumber.$error"
               v-model.trim="formdata.referenceNumber"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Cheque Reference Number"
+              label="Cheque Reference Number"
             />
           </div>
         </div>
         <div v-else-if="formdata.paymentOption==1" class="row gutter-sm q-my-xs">
           <div class="col-xs-12 col-sm-6">
             <q-input
-              @blur="$v.formdata.referenceNumber.$touch"
-              :error="$v.formdata.referenceNumber.$error"
+              @blur="v$.formdata.referenceNumber.$touch"
+              :error="v$.formdata.referenceNumber.$error"
               v-model.trim="formdata.referenceNumber"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="*NEFT Reference Number"
+              label="*NEFT Reference Number"
             />
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input
-              @blur="$v.formdata.paymentMadeon.$touch"
-              :error="$v.formdata.paymentMadeon.$error"
+              @blur="v$.formdata.paymentMadeon.$touch"
+              :error="v$.formdata.paymentMadeon.$error"
               v-model.trim="formdata.paymentMadeon"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="*Transaction Made ON"
+              label="*Transaction Made ON"
             />
           </div>
         </div>
         <div v-else-if="formdata.paymentOption==3" class="row gutter-sm q-my-xs">
           <div class="col-xs-12 col-sm-6">
             <q-input
-              @blur="$v.formdata.referenceNumber.$touch"
-              :error="$v.formdata.referenceNumber.$error"
+              @blur="v$.formdata.referenceNumber.$touch"
+              :error="v$.formdata.referenceNumber.$error"
               v-model.trim="formdata.referenceNumber"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="*Swipe Reference Number"
+              label="*Swipe Reference Number"
             />
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input
-              @blur="$v.formdata.paymentMadeon.$touch"
-              :error="$v.formdata.paymentMadeon.$error"
+              @blur="v$.formdata.paymentMadeon.$touch"
+              :error="v$.formdata.paymentMadeon.$error"
               v-model.trim="formdata.paymentMadeon"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="*Transaction Made ON"
+              label="*Transaction Made ON"
             />
           </div>
         </div>
@@ -315,14 +315,14 @@
             <q-input
               v-model="merchant.companyinformation.legalName"
               class="no-margin"
-              float-label="Legal Name"
+              label="Legal Name"
             />
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input
               v-model="merchant.companyinformation.dbaName"
               class="no-margin"
-              float-label="DBA Name"
+              label="DBA Name"
             />
           </div>
           <div class="col-xs-12 col-sm-6">
@@ -330,14 +330,14 @@
               
               v-model="merchant.companyinformation.contactName"
               class="no-margin"
-              float-label="Contact Name"
+              label="Contact Name"
             />
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input
               v-model="merchant.companyinformation.registeredAddress"
               class="no-margin"
-              float-label="Address"
+              label="Address"
             />
           </div>
           <div class="col-xs-12 col-sm-6">
@@ -345,7 +345,7 @@
               
               color="grey-9"
               v-model.trim="merchant.companyinformation.registeredCityName"
-              float-label="City (type min 3 characters)*"
+              label="City (type min 3 characters)*"
               placeholder="Start typing ..*"
             >
               <q-autocomplete
@@ -363,7 +363,7 @@
               
               color="grey-9"
               v-model.trim="merchant.companyinformation.registeredStateName"
-              float-label="state (type min 3 characters)*"
+              label="state (type min 3 characters)*"
               placeholder="Start typing ..*"
             >
               <q-autocomplete
@@ -380,21 +380,21 @@
               
               v-model="merchant.companyinformation.registeredPin"
               class="no-margin"
-              float-label="Pincode"
+              label="Pincode"
             />
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input
               v-model="merchant.companyinformation.contactMobile"
               class="no-margin"
-              float-label="Mobile Number"
+              label="Mobile Number"
             />
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input
               v-model="merchant.companyinformation.contactEmail"
               class="no-margin"
-              float-label="Email Id"
+              label="Email Id"
             />
           </div>
           <div class="col-xs-12 col-sm-6">
@@ -402,43 +402,43 @@
               
               v-model="merchant.companyinformation.statementEmail"
               class="no-margin"
-              float-label="Statement Email ID"
+              label="Statement Email ID"
             />
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input
               v-model="merchant.companyinformation.businessNature"
               class="no-margin"
-              float-label="Nature of Business Change"
+              label="Nature of Business Change"
             />
           </div>
           <!-- <div class="col-xs-12 col-sm-6">
-              <q-input v-model="merchant.companyinformation.contactMobile" class="no-margin" float-label="Contact Number" />
+              <q-input v-model="merchant.companyinformation.contactMobile" class="no-margin" label="Contact Number" />
           </div>-->
 
           <div class="col-xs-12 col-sm-6">
             <q-input
               upper-case
               color="grey-9"
-              @blur="$v.merchant.companyinformation.pan.$touch"
-              :error="$v.merchant.companyinformation.pan.$error"
+              @blur="v$.merchant.companyinformation.pan.$touch"
+              :error="v$.merchant.companyinformation.pan.$error"
               v-model="merchant.companyinformation.pan"
               class="no-margin"
-              float-label="Pan Number"
+              label="Pan Number"
             />
             <div class="text-negative" v-if="error.field.merchant.companyinformation.pan.alert">
               <MarsErrorResponse :error="error.field.merchant.companyinformation.pan" />
             </div>
             <div
               class="text-negative q-py-xs group text-caption"
-              v-if="$v.merchant.companyinformation.pan.$error"
+              v-if="v$.merchant.companyinformation.pan.$error"
             >
               <div>
                 <q-icon color="negative" name="warning" />&nbsp;Required - Provide valid PAN Number
               </div>
-              <div v-if="$v.merchant.companyinformation.pan.$params.minLength">
+              <div v-if="v$.merchant.companyinformation.pan.$params.minLength">
                 <q-icon color="negative" name="warning" />
-                &nbsp;Length should be between {{$v.merchant.companyinformation.pan.$params.minLength.min}} and {{ $v.merchant.companyinformation.pan.$params.maxLength.max }}
+                &nbsp;Length should be between {{v$.merchant.companyinformation.pan.$params.minLength.min}} and {{ v$.merchant.companyinformation.pan.$params.maxLength.max }}
               </div>
             </div>
           </div>
@@ -446,11 +446,11 @@
             <q-input
               upper-case
               color="grey-9"
-              @blur="$v.merchant.businessInformation.gstId.$touch"
-              :error="$v.merchant.businessInformation.gstId.$error"
+              @blur="v$.merchant.businessInformation.gstId.$touch"
+              :error="v$.merchant.businessInformation.gstId.$error"
               v-model="merchant.businessInformation.gstId"
               class="no-margin"
-              float-label="Gst Number"
+              label="Gst Number"
             />
             <div class="text-negative" v-if="error.field.merchant.businessInformation.gstId.alert">
               <MarsErrorResponse :error="error.field.merchant.businessInformation.gstId" />
@@ -458,19 +458,19 @@
 
             <div
               class="text-negative q-py-xs group text-caption"
-              v-if="$v.merchant.businessInformation.gstId.$error"
+              v-if="v$.merchant.businessInformation.gstId.$error"
             >
               <div>
                 <q-icon color="negative" name="warning" />&nbsp;Required - Provide valid GST Number
               </div>
-              <div v-if="$v.merchant.businessInformation.gstId.$params.minLength">
+              <div v-if="v$.merchant.businessInformation.gstId.$params.minLength">
                 <q-icon color="negative" name="warning" />
-                &nbsp;Length should be between {{$v.merchant.businessInformation.gstId.$params.minLength.min}} and {{ $v.merchant.businessInformation.gstId.$params.maxLength.max }}
+                &nbsp;Length should be between {{v$.merchant.businessInformation.gstId.$params.minLength.min}} and {{ v$.merchant.businessInformation.gstId.$params.maxLength.max }}
               </div>
             </div>
           </div>
           <!-- <div class="col-xs-12 col-sm-6">
-              <q-input v-model="model" class="no-margin" float-label="Details 4" />
+              <q-input v-model="model" class="no-margin" label="Details 4" />
           </div>-->
           <div class="col-xs-12 col-sm-6">
             <q-input
@@ -479,7 +479,7 @@
               color="grey-9"
               @blur="populateBankDetails"
               v-model.trim="merchant.bankInformation.bankDetails.ifsc"
-              float-label="IFSC Code*"
+              label="IFSC Code*"
               placeholder="Enter IFSC*"
             />
           </div>
@@ -489,7 +489,7 @@
               upper-case
               color="grey-9"
               v-model.trim="merchant.bankInformation.bankDetails.bankName"
-              float-label="Bank Name*"
+              label="Bank Name*"
               placeholder="Enter IFSC*"
             />
           </div>
@@ -499,7 +499,7 @@
               placeholder="Choose from the below"
               color="grey-9"
               v-model.trim="merchant.bankInformation.bankDetails.paymentMode"
-              float-label="Payment mode"
+              label="Payment mode"
               :options="paymnentModeOptions"
             />
           </div>
@@ -508,7 +508,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="merchant.paymentDetails.rentalPlanCode"
-                  float-label="Rental Plan*"
+                  label="Rental Plan*"
                   :options="rentalPlanSet"
                 />
           </div> -->
@@ -518,7 +518,7 @@
               placeholder="Choose from the below"
               color="grey-9"
               v-model.trim="merchant.bankInformation.bankDetails.accountType"
-              float-label="Account Type"
+              label="Account Type"
               :options="accountTypeOptions"
             />
           </div>
@@ -526,7 +526,7 @@
             <q-input
               v-model="merchant.bankInformation.bankDetails.accountNumber"
               class="no-margin"
-              float-label="Account Numbers"
+              label="Account Numbers"
             />
           </div>
           <!-- <div class="col-xs-12 col-sm-6">
@@ -541,7 +541,7 @@
               />
           </div> -->
           <!-- <div class="col-xs-12 col-sm-6">
-              <q-input v-model="model" class="no-margin" float-label="MDR Change" />
+              <q-input v-model="model" class="no-margin" label="MDR Change" />
           </div>-->
           <!-- <div class="col-xs-12 col-sm-6">
               <p>
@@ -1488,9 +1488,9 @@
             <q-input disable
                 v-model="formdata.amountCollected"
                 class="no-margin"
-                float-label="Amount Collected"
+                label="Amount Collected"
               />
-            <!--   :error="$v.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata.leadSource.$error" -->
           </div>
         </div>
         <br />
@@ -1508,9 +1508,9 @@
             <q-input disable
                 v-model="formdata.recurringFees"
                 class="no-margin"
-                float-label="Recurring Fees"
+                label="Recurring Fees"
               />
-            <!--   :error="$v.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata.leadSource.$error" -->
           </div>
         </div>
         <br />
@@ -1527,10 +1527,10 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model.trim="merchant.paymentDetails.rentalPlanCode"
-                  float-label="Rental Plan*"
+                  label="Rental Plan*"
                   :options="rentalPlanSet"
                 />
-            <!-- :error="$v.formdata.count.$error" -->
+            <!-- :error="v$.formdata.count.$error" -->
           </div>
         </div>
          <div class="row">
@@ -1552,7 +1552,7 @@
                 :val="item.value"
                 :label="item.label"
               />
-            <!--   :error="$v.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata.leadSource.$error" -->
           </div>
         </div>
         <br />
@@ -1575,7 +1575,7 @@
                 :val="item.value"
                 :label="item.label"
               />
-            <!--   :error="$v.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata.leadSource.$error" -->
           </div>
         </div>
         <br />
@@ -1598,7 +1598,7 @@
                 :val="item.value"
                 :label="item.label"
               />
-            <!--   :error="$v.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata.leadSource.$error" -->
           </div>
         </div>
         <br />
@@ -1621,7 +1621,7 @@
                 :val="item.value"
                 :label="item.label"
               />
-            <!--   :error="$v.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata.leadSource.$error" -->
           </div>
         </div>
         <br />
@@ -1644,7 +1644,7 @@
                 :val="item.value"
                 :label="item.label"
               />
-            <!--   :error="$v.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata.leadSource.$error" -->
           </div>
         </div>
         <br />
@@ -2227,8 +2227,8 @@ export default {
     //   console.log("Hello",this.formdata.plan);
     // },
     sendtoFinance(request) {
-      this.$v.formdata.$touch();
-      if (this.$v.formdata.$error) {
+      this.v$.formdata.$touch();
+      if (this.v$.formdata.$error) {
         this.$q.notify("Please review fields again.");
       } else if (
         this.formdata.paymentOption == 2 &&
@@ -2992,7 +2992,7 @@ export default {
       this.$refs.attachedImageViewer[attachedImageIndex].click();
     },
     finalMerchant(request) {
-      if (this.$v.merchant.businessInformation.$error) {
+      if (this.v$.merchant.businessInformation.$error) {
         this.$q.notify("Please review business information fields again.");
       } else {
         let key = this.merchant.salesInformation.institutionCode;
@@ -3088,7 +3088,7 @@ export default {
             //             _.map(error.data.errorDetails, actual => {
             //               let splitted = actual.field.split("/");
 
-            //                 // let splittingErrorField = `OThis.$v.${splitted.join(
+            //                 // let splittingErrorField = `OThis.v$.${splitted.join(
             //                 //   "."
             //                 // )}`;
             //                 // let fieldErrorFound = eval(splittingErrorField);
@@ -3743,8 +3743,8 @@ for(var i=0;i<this.formdata.tid.length
        this.$refs.stepper.next();
     },
     next() {
-      this.$v.merchant.$touch();
-      if (this.$v.merchant.$error) {
+      this.v$.merchant.$touch();
+      if (this.v$.merchant.$error) {
         this.$q.notify("Please review the KYC information fields again.");
       } else {
         if (

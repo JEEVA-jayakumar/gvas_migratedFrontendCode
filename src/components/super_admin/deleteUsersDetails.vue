@@ -59,7 +59,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search by user name, email, phone"
+              label="Search by user name, email, phone"
               class="q-mr-lg q-py-sm"
             />
           </div>

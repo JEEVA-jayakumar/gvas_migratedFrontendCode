@@ -13,13 +13,13 @@
           default
           color="dark"
           name="active"
-          slot="title"
+
           label="Active MDR"
         />
         <q-tab
           color="dark"
           name="deactive"
-          slot="title"
+
           label="Deactived MDR"
         />
         <q-tab-panel name="active">
@@ -271,7 +271,7 @@
                       color="grey-9"
                       v-model.trim="filterSearch"
                       placeholder="Type.."
-                      float-label="Search by Plan Name"
+                      label="Search by Plan Name"
                     />
                   </div>
                 </div>
@@ -477,7 +477,7 @@
                       color="grey-9"
                       v-model.trim="filterSearch1"
                       placeholder="Type.."
-                      float-label="Search by Plan Name"
+                      label="Search by Plan Name"
                     />
                   </div>
                 </div>

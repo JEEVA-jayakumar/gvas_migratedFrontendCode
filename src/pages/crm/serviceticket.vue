@@ -11,10 +11,10 @@
           default
           color="dark"
           name="tab-1"
-          slot="title"
+
           label="Create Bulk Ticket "
         />
-        <q-tab color="dark" name="tab-2" slot="title" label="Close Bulk Ticket" />
+        <q-tab color="dark" name="tab-2"  label="Close Bulk Ticket" />
         <q-tab-panel name="tab-1">
           <div class="q-pa-md">
             <div class="row text-center justify-center">

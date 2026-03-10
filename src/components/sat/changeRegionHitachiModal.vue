@@ -41,7 +41,7 @@
               class="text-weight-regular text-grey-8"
               color="grey-9"
               v-model="formData.region"
-              float-label="Select Region"
+              label="Select Region"
               placeholder="Select Region"
               :options="regionOptions"
             />

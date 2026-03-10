@@ -12,20 +12,20 @@
             <q-card-section>
               <q-list no-border>
                 <div class="col-md-12">
-                  <q-input type="textarea" float-label="Device Purchase Cost" placeholder="Device Purchase Cost"
-                    class="q-my-md" color="grey-9" align="left" @blur="$v.formData.devicePurchaseCost.$touch"
-                    :error="$v.formData.devicePurchaseCost.$error" v-model="formData.devicePurchaseCost" />
+                  <q-input type="textarea" label="Device Purchase Cost" placeholder="Device Purchase Cost"
+                    class="q-my-md" color="grey-9" align="left" @blur="v$.formData.devicePurchaseCost.$touch"
+                    :error="v$.formData.devicePurchaseCost.$error" v-model="formData.devicePurchaseCost" />
                 </div>
                 <div class="col-md-12">
-                  <q-input type="textarea" float-label="Total Life of Device in Days"
+                  <q-input type="textarea" label="Total Life of Device in Days"
                     placeholder="Total Life of Device in Days" class="q-my-md" color="grey-9" align="left"
-                    @blur="$v.formData.deviceLife.$touch" :error="$v.formData.deviceLife.$error"
+                    @blur="v$.formData.deviceLife.$touch" :error="v$.formData.deviceLife.$error"
                     v-model="formData.deviceLife" />
                 </div>
                 <div class="col-md-12">
-                  <q-input type="textarea" float-label="Invoice Number" placeholder="Invoice Number" class="q-my-md"
-                    color="grey-9" align="left" @blur="$v.formData.invoiceNumbers.$touch"
-                    :error="$v.formData.invoiceNumbers.$error" v-model="formData.invoiceNumbers" />
+                  <q-input type="textarea" label="Invoice Number" placeholder="Invoice Number" class="q-my-md"
+                    color="grey-9" align="left" @blur="v$.formData.invoiceNumbers.$touch"
+                    :error="v$.formData.invoiceNumbers.$error" v-model="formData.invoiceNumbers" />
                 </div>
                 <div class="col">
                   <b>Placeholder Invoice Copy</b>
@@ -217,8 +217,8 @@ this.formData.invoiceNumbers = invoiceNumber;
           spinnerColor: "purple-9",
           message: "Validating .."
         });
-        this.$v.formData.$touch();
-        if (this.$v.formData.$error || this.formData.fileSelected.length == 0) {
+        this.v$.formData.$touch();
+        if (this.v$.formData.$error || this.formData.fileSelected.length == 0) {
           this.$q.notify({
             color: "amber-9",
             position: "bottom",

@@ -18,23 +18,23 @@
                   <!-- <div class="col-md-12">
                         <q-select
                           v-model="formData.regionGroup"   
-                          :error="$v.formData.regionGroup.$error" 
+                          :error="v$.formData.regionGroup.$error"
                            :options="regionGroupOptions"
                         
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Region Group" 
+                          color="grey-9"
+                          label="Region Group"
                           placeholder="Region Group" 
                         />
                     </div> -->
                     <div class="col-md-12">
                         <q-input v-model="formData.regionArea" 
-                          @blur="$v.formData.regionArea.$touch"      
-                          :error="$v.formData.regionArea.$error" 
-                          @keyup.enter="$v.formData.regionArea.$touch"
+                          @blur="v$.formData.regionArea.$touch"
+                          :error="v$.formData.regionArea.$error"
+                          @keyup.enter="v$.formData.regionArea.$touch"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Region" 
+                          color="grey-9"
+                          label="Region"
                           placeholder="Region" 
                         />
                     </div>
@@ -126,8 +126,8 @@ export default {
     fnfinalsubmitRegionGroup(formData) {
       console.log("FINAL SUBMITRED-------->",JSON.stringify(formData))
       
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();

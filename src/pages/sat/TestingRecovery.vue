@@ -32,7 +32,7 @@
                 <template v-slot:top="props">
                     <div class="col-md-5">
                         <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
-                            float-label="Search TID, MID" class="q-mr-lg q-py-sm" />
+                            label="Search TID, MID" class="q-mr-lg q-py-sm" />
                     </div>
                     <div class="col-md-2">
 

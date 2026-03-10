@@ -30,7 +30,7 @@
             outline
             no-caps
             v-model="filter"
-             float-label="Select  a Region"
+             label="Select  a Region"
             radio
             color="grey-9"
             :options="getFaultyDevicesMenuOptions"

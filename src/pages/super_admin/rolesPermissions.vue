@@ -4,8 +4,8 @@
     <div>
 
       <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="changeTabs">
-        <q-tab default color="dark" name="active" slot="title" label="Active Roles" />
-        <q-tab color="dark" name="deactive" slot="title" label="Deactive Roles" />
+        <q-tab default color="dark" name="active"  label="Active Roles" />
+        <q-tab color="dark" name="deactive"  label="Deactive Roles" />
 
          <q-tab-panel name="active">
            <q-table :rows="activeTableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" :pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9">

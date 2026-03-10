@@ -17,7 +17,7 @@
               color="tertiary"
               align="justify"
             >
-              <q-tab class="size1" label="UPLOAD CSV FILE" slot="title" />
+              <q-tab class="size1" label="UPLOAD CSV FILE"  />
               <div>
                 <div class="q-pa-md">
                   <div class="row text-center justify-center">
@@ -108,7 +108,7 @@
         <div class="row bottom-border q-pa-sm items-center">
           <div class="col">
             <q-tabs class="shadow-1" animated swipeable color="tertiary" align="justify" >
-              <q-tab class="size1" label="Onboarding Existing Merchants" slot="title" />
+              <q-tab class="size1" label="Onboarding Existing Merchants"  />
               <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
                 <div class="row items-center gutter-y-sm">
                   <div
@@ -165,13 +165,13 @@
                   default
                   color="dark"
                   name="unAssigned"
-                  slot="title"
+
                   label="Unassigned"
                 />
                 <q-tab
                   color="dark"
                   name="assigned"
-                  slot="title"
+
                   label="Assigned"
                 />
                 <q-tab-panel name="assigned">
@@ -261,11 +261,9 @@
                             @click.native="toggleLeadInformation(props.row.leadInformation)">
                             <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
                         </q-td> -->
-                    <!-- <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-submitToMarsDate="props" :props="props">{{
-                                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-                            }}</q-td> -->
+                    <!-- <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-submitToMarsDate="props" :props="props">{{ $moment_format(props.row.leadInformation.submitToMarsDate, "Do MMM Y") }}</q-td> -->
                     <!-- <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-createdAt="props"
-                            :props="props">{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+                            :props="props">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
                         <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-deviceAddress="props"
                             :props="props" class="customTd customCellLength">
                             <div>{{ props.row.deviceAddress }}</div>
@@ -295,7 +293,7 @@
                           color="grey-9"
                           v-model="filterSearch"
                           placeholder="Type.."
-                          float-label="Search By Merchant Name, TID, MID ..."
+                          label="Search By Merchant Name, TID, MID ..."
                           class="q-mr-lg q-py-sm"
                         />
                       </div>
@@ -324,11 +322,9 @@
                             @click.native="toggleLeadInformation(props.row.leadInformation)">
                             <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
                         </q-td>
-                        <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-submitToMarsDate="props" :props="props">{{
-                                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-                            }}</q-td>
+                        <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-submitToMarsDate="props" :props="props">{{ $moment_format(props.row.leadInformation.submitToMarsDate, "Do MMM Y") }}</q-td>
                         <q-td v-if="props.row.leadInformation != null" v-slot:body-cell-createdAt="props"
-                            :props="props">{{ props.row.createdAt | moment("Do MMM Y") }}</q-td> -->
+                            :props="props">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td> -->
                     <q-td
                       v-slot:body-cell-tid="props"
                       :props="props"
@@ -360,7 +356,7 @@
                           color="grey-9"
                           v-model="filterSearch1"
                           placeholder="Type.."
-                          float-label="Search By Merchant Name, TID, MID ..."
+                          label="Search By Merchant Name, TID, MID ..."
                           class="q-mr-lg q-py-sm"
                         />
                       </div>

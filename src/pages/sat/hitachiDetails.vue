@@ -4,7 +4,7 @@
       <div class="row bottom-border q-pa-sm items-center">
         <div class="col">
           <q-tabs no-pane-border v-model="QRselected" color="dark" inverted class="shadow-1">
-            <q-tab name="HitachiUpload" label="Upload And Download" slot="title" />
+            <q-tab name="HitachiUpload" label="Upload And Download"  />
             <q-tab-panel name="HitachiUpload">
               <HitachiUpload />
             </q-tab-panel>

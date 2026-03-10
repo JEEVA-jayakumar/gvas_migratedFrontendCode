@@ -32,8 +32,8 @@
                 v-model="formData.addUserDetails.region.id"
                 :options="getAllRegionsData"
                 :disable="formData.disableRegionSelection"
-                :error="$v.formData.addUserDetails.region.id.$error"
-                @blur="$v.formData.addUserDetails.region.id.$touch"
+                :error="v$.formData.addUserDetails.region.id.$error"
+                @blur="v$.formData.addUserDetails.region.id.$touch"
               />
             </div>
 
@@ -42,8 +42,8 @@
                 outlined
                 label="*Name"
                 v-model.trim="formData.addUserDetails.name"
-                :error="$v.formData.addUserDetails.name.$error"
-                @blur="$v.formData.addUserDetails.name.$touch"
+                :error="v$.formData.addUserDetails.name.$error"
+                @blur="v$.formData.addUserDetails.name.$touch"
               />
             </div>
 
@@ -52,8 +52,8 @@
                 outlined
                 label="*Employee ID"
                 v-model.trim="formData.addUserDetails.employeeID"
-                :error="$v.formData.addUserDetails.employeeID.$error"
-                @blur="$v.formData.addUserDetails.employeeID.$touch"
+                :error="v$.formData.addUserDetails.employeeID.$error"
+                @blur="v$.formData.addUserDetails.employeeID.$touch"
               />
             </div>
 
@@ -62,8 +62,8 @@
                 outlined
                 label="*Email"
                 v-model.trim="formData.addUserDetails.email"
-                :error="$v.formData.addUserDetails.email.$error"
-                @blur="$v.formData.addUserDetails.email.$touch"
+                :error="v$.formData.addUserDetails.email.$error"
+                @blur="v$.formData.addUserDetails.email.$touch"
               />
             </div>
 
@@ -72,8 +72,8 @@
                 outlined
                 label="*Contact Number"
                 v-model.trim="formData.addUserDetails.contactNumber"
-                :error="$v.formData.addUserDetails.contactNumber.$error"
-                @blur="$v.formData.addUserDetails.contactNumber.$touch"
+                :error="v$.formData.addUserDetails.contactNumber.$error"
+                @blur="v$.formData.addUserDetails.contactNumber.$touch"
               />
             </div>
 
@@ -82,8 +82,8 @@
                 outlined
                 label="Alt Contact Number"
                 v-model.trim="formData.addUserDetails.alternateContactNumber"
-                :error="$v.formData.addUserDetails.alternateContactNumber.$error"
-                @blur="$v.formData.addUserDetails.alternateContactNumber.$touch"
+                :error="v$.formData.addUserDetails.alternateContactNumber.$error"
+                @blur="v$.formData.addUserDetails.alternateContactNumber.$touch"
               />
             </div>
 
@@ -92,8 +92,8 @@
                 outlined
                 label="*Address"
                 v-model.trim="formData.addUserDetails.userAddress"
-                :error="$v.formData.addUserDetails.userAddress.$error"
-                @blur="$v.formData.addUserDetails.userAddress.$touch"
+                :error="v$.formData.addUserDetails.userAddress.$error"
+                @blur="v$.formData.addUserDetails.userAddress.$touch"
               />
             </div>
 
@@ -103,8 +103,8 @@
                 outlined
                 label="Pincode"
                 v-model="formData.addUserDetails.pincodeTemp"
-                :error="$v.formData.addUserDetails.pincodeTemp.$error"
-                @blur="$v.formData.addUserDetails.pincodeTemp.$touch"
+                :error="v$.formData.addUserDetails.pincodeTemp.$error"
+                @blur="v$.formData.addUserDetails.pincodeTemp.$touch"
               />
             </div>
 
@@ -159,8 +159,8 @@
             label="Choose bank"
             v-model="formData.addUserDetails.banksList"
             :options="leadSourceOptions"
-            :error="$v.formData.addUserDetails.banksList.$error"
-            @blur="$v.formData.addUserDetails.banksList.$touch"
+            :error="v$.formData.addUserDetails.banksList.$error"
+            @blur="v$.formData.addUserDetails.banksList.$touch"
           />
         </div>
 
@@ -585,8 +585,8 @@ export default {
           return;
 
         } else {
-          this.$v.formData.addUserDetails.$touch();
-          if (this.$v.formData.addUserDetails.$error) {
+          this.v$.formData.addUserDetails.$touch();
+          if (this.v$.formData.addUserDetails.$error) {
             this.$q.notify("Please review fields again.");
           } else {
             // let param={

@@ -28,7 +28,7 @@
             :disabled="formData.device_type != ''"
             :class="[formData.device_type != '' ? 'no-pointer-events' : '']"
             v-model="formData.region"
-            float-label="Select Region"
+            label="Select Region"
             radio
             color="grey-9"
             :options="regionOptions"
@@ -42,7 +42,7 @@
             @clear="fnClearingDeviceTypeSelection"
             @input="fnSetDevicesByDeviceId"
             v-model="formData.device_type"
-            float-label="Select Device Type"
+            label="Select Device Type"
             radio
             color="grey-9"
             :options="deviceOptions"
@@ -188,7 +188,7 @@
             <div class="row">
               <label class="qrlabel"><b>Select Bank</b></label>
               <div class="col-md-3">
-                <q-select class="sizeBank" clearable float-label="Select Bank"  @input="showChannel($event)" v-model.trim="formData.bank" :error="$v.formData.bank.$error" 
+                <q-select class="sizeBank" clearable label="Select Bank"  @input="showChannel($event)" v-model.trim="formData.bank" :error="v$.formData.bank.$error"
                   color="grey-9" :options="bankListOptions" />
               </div>
             </div>
@@ -197,7 +197,7 @@
             <div class="row">
               <label class="qrlabel" ><b>Select Region</b></label>
               <div class="col-md-3">
-                <q-select class="sizeRegion" clearable :disable="this.formData.bank == ''" float-label="Select Region" v-model.trim="formData.regionList" :error="$v.formData.regionList.$error" color="grey-9"
+                <q-select class="sizeRegion" clearable :disable="this.formData.bank == ''" label="Select Region" v-model.trim="formData.regionList" :error="v$.formData.regionList.$error" color="grey-9"
                   :options="RegionOptionIcici" />
               </div>
             </div>
@@ -205,12 +205,12 @@
           </div>
           <div class="row">
             <label class="qrlabel" for="input-id"><b>Enter No Of QR</b></label>
-            <q-input class="sizeQR" type="number" :disable="this.formData.regionList == ''" float-label="Enter no of QR" min="1" oninput="this.value = Math.abs(this.value)"  v-model.trim="formData.count" :error="$v.formData.count.$error"  @blur="$v.formData.count.$touch" color="grey-9" />
+            <q-input class="sizeQR" type="number" :disable="this.formData.regionList == ''" label="Enter no of QR" min="1" oninput="this.value = Math.abs(this.value)"  v-model.trim="formData.count" :error="v$.formData.count.$error"  @blur="v$.formData.count.$touch" color="grey-9" />
           </div>
           <br />
           <div class="row">
             <label class="qrlabel" for="input-id"><b>Enter POD</b></label>
-            <q-input class="alignPOD" disable float-label="Enter POD" v-model.trim="formData.podNumber" :error="$v.formData.podNumber.$error"  @blur="$v.formData.podNumber.$touch"  color="grey-9" />
+            <q-input class="alignPOD" disable label="Enter POD" v-model.trim="formData.podNumber" :error="v$.formData.podNumber.$error"  @blur="v$.formData.podNumber.$touch"  color="grey-9" />
           </div>
           <br />
           <div class="row">
@@ -221,12 +221,12 @@
           &nbsp;&nbsp;&nbsp;
           <div class="col-4">
             <q-tabs v-model="activeTab" class="shadow-1" color="grey-1">
-              <q-tab color="dark" name="tab-1" slot="title" label="Pending QR" />
-              <q-tab color="dark" name="tab-2" slot="title" label="Approved QR" />
+              <q-tab color="dark" name="tab-1"  label="Pending QR" />
+              <q-tab color="dark" name="tab-2"  label="Approved QR" />
               <q-tab-panel name="tab-1">
                 <div>
                   <q-input class="col-5 search" clearable color="grey-9" placeholder="Type.." v-model="filter"
-                    float-label="Search By POD Number" />
+                    label="Search By POD Number" />
                 </div>
                 <q-table table-class="customTableClass" :rows="tableData" :columns="columns"
                   :pagination="paginationControl2" :filter="filter" row-key="id" :loading="toggleAjaxLoadFilter1"
@@ -265,7 +265,7 @@
               </q-tab-panel>
               <q-tab-panel name="tab-2">
                 <q-input class="col-5 search" clearable color="grey-9" placeholder="Type.." v-model="filter1"
-                  float-label="Search By POD Number" />
+                  label="Search By POD Number" />
                 <q-table table-class="customTableClass" :rows="tableData1" :columns="columns1"
                   :pagination="paginationControl1" :filter="filter1" row-key="id" :loading="toggleAjaxLoadFilter1"
                   :row-per-page-options="[5, 10, 15, 20]" @request="ajaxLoadAllRegionList1">
@@ -649,8 +649,8 @@ export default {
       this.formData.podNumber = finalValue
     },
     fnAssignsubmit() {
-      this.$v.formData.$touch()
-      if(this.$v.formData.$error){
+      this.v$.formData.$touch()
+      if(this.v$.formData.$error){
         this.$q.notify('Please review fields again.')
       }else{
       let request = {

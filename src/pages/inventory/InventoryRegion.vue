@@ -9,13 +9,13 @@
             <div class="row bottom-border group q-px-md q-py-md items-center text-weight-regular text-grey-9">
                 <!--START: table title   :disable="disableDeviceTypeSelection" -->
                 <div class="col-md-4">
-                    <q-select v-model="formData.region" float-label="Select Region" radio color="grey-9"
+                    <q-select v-model="formData.region" label="Select Region" radio color="grey-9"
                         @input="filterInventoryByRegion" :options="regionOptions" />
                 </div>
 
                 <div class="col-md-4 col-lg-4 group">
                     <q-select :disable="formData.region == undefined" v-model="formData.device_type"
-                        float-label="Filter By Device" radio color="grey-9" @input="filterByDevice"
+                        label="Filter By Device" radio color="grey-9" @input="filterByDevice"
                         :options="deviceOptions" />
                 </div>
                 <div class="col-auto q-px-xs">
@@ -53,7 +53,7 @@
                     <!--START: table filter,search -->
                     <div class="col-md-5">
                         <q-input clearable color="grey-9" v-model="filter" placeholder="Type.."
-                            float-label="Search SerialNumber & podNumber..." class="q-mr-lg q-py-sm" />
+                            label="Search SerialNumber & podNumber..." class="q-mr-lg q-py-sm" />
                     </div>
                     <!--END: table filter,search -->
                 </template>

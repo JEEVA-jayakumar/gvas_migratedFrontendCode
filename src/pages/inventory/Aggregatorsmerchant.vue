@@ -7,7 +7,7 @@
       <!--END: table title -->
       <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-md-4">
-          <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
+          <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
             :options="aggregatorOptions" @input="getaggregator" />
         </div>
       </div> -->
@@ -19,13 +19,13 @@
         :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
         <!-- :rows-per-page-options="[100,200,300,400,500]" -->
         <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{ props.row.deviceStatusDate | moment("Do MMM Y") }}</span>
+          <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
         </q-td>
         <template slot="top" class="bottom-border">
           <!--START: table filter,search -->
           <div class="col">
             <q-input clearable color="grey-9" v-model="filter" placeholder="Type.."
-              float-label="Search by Device Serial Number, MID, TID, Merchant Name" class="q-mr-lg q-py-sm" />
+              label="Search by Device Serial Number, MID, TID, Merchant Name" class="q-mr-lg q-py-sm" />
           </div>
 
           <!-- <div class="col-4">
@@ -37,7 +37,7 @@
               color="grey-9"
               :options="getAllRegionsData"
               placeholder="Select"
-              float-label="Filter By"
+              label="Filter By"
             />
           </div>-->
           <div class="col-md-6">

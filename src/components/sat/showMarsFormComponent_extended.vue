@@ -692,8 +692,8 @@ export default {
     },
 
     finalFormSubmit() {
-      this.$v.merchant.$touch();
-      if (this.$v.merchant.$error) {
+      this.v$.merchant.$touch();
+      if (this.v$.merchant.$error) {
         this.$q.notify({
           color: "negative",
           position: "bottom",

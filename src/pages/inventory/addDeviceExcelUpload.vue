@@ -21,7 +21,7 @@
                 <div class="col-md-4">
                      <q-select
                         v-model="formData.device_type"
-                        float-label="Select Device Type"
+                        label="Select Device Type"
                         radio
                         color="grey-9"
                         v-model:options="deviceOptions"
@@ -32,14 +32,14 @@
                         @click="openScannerComp"
                         v-if="!scannerToggleOption"
                         color="light-blue"
-                        class="q-py-xs" 
+                        class="q-py-xs"
                         label="Start Scan"
                     />
                     <q-btn
                         @click="closeScannerComp"
                         v-if="scannerToggleOption"
                         color="negative"
-                        class="q-py-xs" 
+                        class="q-py-xs"
                         label="Stop Scan"
                     />
                 </div>
@@ -75,7 +75,7 @@
                         color="grey-9"
                         v-model="filterSearch"
                         placeholder="Type.."
-                        float-label="Search .."
+                        label="Search .."
                         class="q-mr-lg q-py-sm"
                     />
                     </div>

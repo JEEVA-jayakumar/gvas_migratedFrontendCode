@@ -17,15 +17,15 @@
       </div>
     </div>
     <q-tabs color="grey-9">
-      <!-- Tabs - notice slot="title" -->
+      <!-- Tabs - notice  -->
       <q-tab
         @select="merchantTypeActiveList"
         default
-        slot="title"
+
         label="Active List"
         name="tab-1"
       />
-      <q-tab @select="merchantTypeDeActiveList" slot="title" label="De-Actived List" name="tab-2"/>
+      <q-tab @select="merchantTypeDeActiveList"  label="De-Actived List" name="tab-2"/>
       <q-tab-panel name="tab-1">
         <q-table
           :rows="activeMerchantTypeList"
@@ -69,7 +69,7 @@
                 color="grey-9"
                 v-model="activeFilterSearch"
                 placeholder="Type.."
-                float-label="Search by name, short name"
+                label="Search by name, short name"
                 class="q-mr-lg"
               />
             </div>
@@ -110,7 +110,7 @@
                 color="grey-9"
                 v-model="deActivatedFilterSearch"
                 placeholder="Type.."
-                float-label="Search by name"
+                label="Search by name"
                 class="q-mr-lg"
               />
             </div>

@@ -137,7 +137,7 @@ LOST
               placeholder="Type.."
               :debounce="600"
               class="q-mr-lg q-py-sm"
-              float-label="Search By MID/TID/Merchant Name "
+              label="Search By MID/TID/Merchant Name "
             />
           </div>
 
@@ -156,7 +156,7 @@ LOST
             v-model="Add"
             color="grey-9"
             placeholder="Add"
-            float-label="Enter Device Serial Number/TID"
+            label="Enter Device Serial Number/TID"
             @keyup.enter="fnCookDispatchedHistoryDetails()"
             class="text-weight-regular text-grey-8 q-py-sm"
           />
@@ -177,7 +177,7 @@ LOST
             v-model="text"
             color="grey-9"
             placeholder="Add"
-            float-label="Enter Device Serial Number/TID"
+            label="Enter Device Serial Number/TID"
             @keyup.enter="fnCookDispatchedHistoryDetails()"
             class="text-weight-regular text-grey-8 q-py-sm"
           />
@@ -237,7 +237,7 @@ LOST
               placeholder="Type.."
               :debounce="600"
               class="q-mr-lg q-py-sm"
-              float-label="Search By MID/TID/Merchant Name"
+              label="Search By MID/TID/Merchant Name"
             />
           </div>
           <div class="col">

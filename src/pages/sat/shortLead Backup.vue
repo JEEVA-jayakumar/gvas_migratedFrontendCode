@@ -57,7 +57,7 @@
                                           <q-item-label>
                                             <q-input 
                                               color="grey-9"
-                                              float-label="Debit < 2000 (%)" 
+                                              label="Debit < 2000 (%)"
                                               readonly
                                             class="no-pointer-events" v-model="formData.shortLead.debitLessthanAmount"
                                             />
@@ -67,7 +67,7 @@
                                           <q-item-label>
                                             <q-input 
                                               color="grey-9"
-                                              float-label="Debit < 2000 (%)"
+                                              label="Debit < 2000 (%)"
                                               readonly
                                             class="no-pointer-events" v-model="formData.shortLead.debitGreaterthanAmount" 
                                             />
@@ -80,7 +80,7 @@
                                         <q-item-label>
                                             <q-input 
                                                 color="grey-9"
-                                                float-label="Std CC (%)" 
+                                                label="Std CC (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="formData.shortLead.stdCC" 
                                             /> 
@@ -90,7 +90,7 @@
                                         <q-item-label>
                                             <q-input 
                                                 color="grey-9"
-                                                float-label="Premium CC (%)" 
+                                                label="Premium CC (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="formData.shortLead.premiumCC" 
                                             />
@@ -100,7 +100,7 @@
                                         <q-item-label>
                                             <q-input 
                                                 color="grey-9"
-                                                float-label="Corp (%)" 
+                                                label="Corp (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="formData.shortLead.corpIntlCC" 
                                             />
@@ -110,7 +110,7 @@
                                         <q-item-label>
                                             <q-input 
                                                 color="grey-9"
-                                                float-label="Intl (%)" 
+                                                label="Intl (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="formData.shortLead.corpIntlCC" 
                                             />
@@ -120,7 +120,7 @@
                                         <q-item-label>
                                             <q-input 
                                                 color="grey-9"
-                                                float-label="Super Pre CC (%)" 
+                                                label="Super Pre CC (%)"
                                                 readonly
                                             class="no-pointer-events" v-model="formData.shortLead.corpIntlCC" 
                                             />
@@ -149,7 +149,7 @@
                                         <span v-if="formData.shortLead.paymentOption == 3">Swipe</span>
                                     </div>
                                     <div class="col text-body1 text-weight-medium" align="right">
-                                    <span v-if="formData.shortLead.verifiedPricingStatus == 1" class="  text-positive text-body1 ">
+                                    <span v-if="formData.shortLead.verifiedPricingStatus == 1"  text-positive text-body1 ">
                                         <q-btn
                                         size="xs"
                                         outline
@@ -167,7 +167,7 @@
                                         icon="warning" 
                                         />
                                         OP Pending</span>
-                                    <span v-if="formData.shortLead.verifiedPricingStatus == 3" class=" text-negative text-body1 ">
+                                    <span v-if="formData.shortLead.verifiedPricingStatus == 3" text-negative text-body1 ">
                                         <q-btn
                                         size="xs"
                                         outline
@@ -176,7 +176,7 @@
                                         icon="clear" 
                                         />
                                         OP Rejected</span>
-                                    <span v-if="formData.shortLead.verifiedPricingStatus == 4" class=" text-amber-9  text-body1">
+                                    <span v-if="formData.shortLead.verifiedPricingStatus == 4" text-amber-9  text-body1">
                                         <q-btn
                                         size="xs"
                                         outline
@@ -185,7 +185,7 @@
                                         icon="warning" 
                                         />
                                         Finance Pending</span>
-                                    <span v-if="formData.shortLead.verifiedPricingStatus == 5" class=" text-negative text-body1 ">
+                                    <span v-if="formData.shortLead.verifiedPricingStatus == 5" text-negative text-body1 ">
                                         <q-btn
                                         size="xs"
                                         outline
@@ -248,7 +248,7 @@
                                                 <div class="col-md-5">
                                                     <q-input 
                                                         color="grey-9"
-                                                        float-label="Debit < 2000 (%)" 
+                                                        label="Debit < 2000 (%)"
                                                         readonly
                                                         class="no-pointer-events" v-model="formData.shortLead.debitLessthanAmount"
                                                     />
@@ -256,7 +256,7 @@
                                                 <div class="col-md-5">
                                                     <q-input 
                                                         color="grey-9"
-                                                        float-label="Debit < 2000 (%)"
+                                                        label="Debit < 2000 (%)"
                                                         readonly
                                                         class="no-pointer-events" v-model="formData.shortLead.debitGreaterthanAmount" 
                                                     />
@@ -271,7 +271,7 @@
                                                 <div class="col-md-3">
                                                     <q-input 
                                                         color="grey-9"
-                                                        float-label="Std CC (%)" 
+                                                        label="Std CC (%)"
                                                         readonly
                                                         class="no-pointer-events" v-model="formData.shortLead.stdCC" 
                                                     /> 
@@ -279,7 +279,7 @@
                                                 <div class="col-md-3">
                                                     <q-input 
                                                         color="grey-9"
-                                                        float-label="Premium CC (%)" 
+                                                        label="Premium CC (%)"
                                                         readonly
                                                         class="no-pointer-events" v-model="formData.shortLead.premiumCC" 
                                                     />
@@ -287,7 +287,7 @@
                                                 <div class="col-md-5">
                                                     <q-input 
                                                         color="grey-9"
-                                                        float-label="Corp/Intl/Super Pre CC (%)" 
+                                                        label="Corp/Intl/Super Pre CC (%)"
                                                         readonly
                                                         class="no-pointer-events" v-model="formData.shortLead.corpIntlCC" 
                                                     />
@@ -318,7 +318,7 @@
                                             Exception KYC
                                         </div>
                                         <div class="col text-body1 text-weight-medium" align="right">
-                                            <span v-if="formData.shortLead.verifiedKycStatus == 1" class="  text-positive">
+                                            <span v-if="formData.shortLead.verifiedKycStatus == 1"  text-positive">
                                                 <q-btn
                                                 size="xs"
                                                 outline
@@ -327,7 +327,7 @@
                                                 icon="check" 
                                                 />
                                                 Approved</span>
-                                            <span v-if="formData.shortLead.verifiedKycStatus == 2" class="  text-amber-9">
+                                            <span v-if="formData.shortLead.verifiedKycStatus == 2"  text-amber-9">
                                                 <q-btn
                                                 size="xs"
                                                 outline
@@ -336,7 +336,7 @@
                                                 icon="warning" 
                                                 />
                                                 OP Pending</span>
-                                            <span v-if="formData.shortLead.verifiedKycStatus == 3" class="  text-negative"><q-btn
+                                            <span v-if="formData.shortLead.verifiedKycStatus == 3"  text-negative"><q-btn
                                                 size="xs"
                                                 outline
                                                 color="negative"
@@ -344,7 +344,7 @@
                                                 icon="clear" 
                                                 />
                                                 OP Rejected</span>
-                                            <span v-if="formData.shortLead.verifiedKycStatus == 4" class="  text-amber-9"><q-btn
+                                            <span v-if="formData.shortLead.verifiedKycStatus == 4"  text-amber-9"><q-btn
                                                 size="xs"
                                                 outline
                                                 color="amber-9"
@@ -352,7 +352,7 @@
                                                 icon="warning" 
                                                 />
                                                 Finance Pending</span>
-                                            <span v-if="formData.shortLead.verifiedKycStatus == 5" class="  text-negative"><q-btn
+                                            <span v-if="formData.shortLead.verifiedKycStatus == 5"  text-negative"><q-btn
                                                 size="xs"
                                                 outline
                                                 color="negative"
@@ -383,7 +383,7 @@
                                             Exception Bank Subvention
                                         </div>
                                         <div class="col text-body1 text-weight-medium" align="right">
-                                            <span v-if="formData.shortLead.verifiedBanksubventionStatus == 1" class="  text-positive text-body1 ">
+                                            <span v-if="formData.shortLead.verifiedBanksubventionStatus == 1"  text-positive text-body1 ">
                                                 <q-btn
                                                 size="xs"
                                                 outline
@@ -401,7 +401,7 @@
                                                 icon="warning" 
                                                 />
                                                 OP Pending</span>
-                                            <span v-if="formData.shortLead.verifiedBanksubventionStatus == 3" class=" text-negative text-body1 ">
+                                            <span v-if="formData.shortLead.verifiedBanksubventionStatus == 3" text-negative text-body1 ">
                                                 <q-btn
                                                 size="xs"
                                                 outline
@@ -410,7 +410,7 @@
                                                 icon="clear" 
                                                 />
                                                 OP Rejected</span>
-                                            <span v-if="formData.shortLead.verifiedBanksubventionStatus == 4" class=" text-amber-9  text-body1">
+                                            <span v-if="formData.shortLead.verifiedBanksubventionStatus == 4" text-amber-9  text-body1">
                                                 <q-btn
                                                 size="xs"
                                                 outline
@@ -419,7 +419,7 @@
                                                 icon="warning" 
                                                 />
                                                 Finance Pending</span>
-                                            <span v-if="formData.shortLead.verifiedBanksubventionStatus == 5" class=" text-negative text-body1 ">
+                                            <span v-if="formData.shortLead.verifiedBanksubventionStatus == 5" text-negative text-body1 ">
                                                 <q-btn
                                                 size="xs"
                                                 outline
@@ -450,7 +450,7 @@
                                             Exception Pricing
                                         </div>
                                         <div class="col text-body1 text-weight-medium" align="right">
-                                            <span v-if="formData.shortLead.verifiedPricingStatus == 1" class="  text-positive text-body1 ">
+                                            <span v-if="formData.shortLead.verifiedPricingStatus == 1"  text-positive text-body1 ">
                                                 <q-btn
                                                 size="xs"
                                                 outline
@@ -468,7 +468,7 @@
                                                 icon="warning" 
                                                 />
                                                 OP Pending</span>
-                                            <span v-if="formData.shortLead.verifiedPricingStatus == 3" class=" text-negative text-body1 ">
+                                            <span v-if="formData.shortLead.verifiedPricingStatus == 3" text-negative text-body1 ">
                                                 <q-btn
                                                 size="xs"
                                                 outline
@@ -477,7 +477,7 @@
                                                 icon="clear" 
                                                 />
                                                 OP Rejected</span>
-                                            <span v-if="formData.shortLead.verifiedPricingStatus == 4" class=" text-amber-9  text-body1">
+                                            <span v-if="formData.shortLead.verifiedPricingStatus == 4" text-amber-9  text-body1">
                                                 <q-btn
                                                 size="xs"
                                                 outline
@@ -486,7 +486,7 @@
                                                 icon="warning" 
                                                 />
                                                 Finance Pending</span>
-                                            <span v-if="formData.shortLead.verifiedPricingStatus == 5" class=" text-negative text-body1 ">
+                                            <span v-if="formData.shortLead.verifiedPricingStatus == 5" text-negative text-body1 ">
                                                 <q-btn
                                                 size="xs"
                                                 outline
@@ -618,22 +618,22 @@
                                                                     round 
                                                                     size="xs"
                                                                     class="q-ma-xs"
-                                                                    color="green" 
-                                                                    icon="fas fa-check" 
+                                                                    color="green"
+                                                                    icon="fas fa-check"
                                                                     @click="fnDocumentApproveModal(documents[0])"
                                                                 />
                                                                 <q-btn 
                                                                     round 
                                                                     size="xs"
                                                                     class="q-ma-xs"
-                                                                    color="red" 
+                                                                    color="red"
                                                                     icon="fas fa-times"
                                                                     @click="fnDocumentRejectModal(documents[0])"
                                                                 />
                                                             </q-item-section>
                                                             <q-item-section v-else right>
-                                                                <span v-if="documents[0].documentVerifiedStatus == 1" class="  text-body1 text-weight-medium text-positive">Approved</span>
-                                                                <span v-if="documents[0].documentVerifiedStatus == 3" class="  text-body1 text-weight-medium text-negative">Rejected</span>
+                                                                <span v-if="documents[0].documentVerifiedStatus == 1"  text-body1 text-weight-medium text-positive">Approved</span>
+                                                                <span v-if="documents[0].documentVerifiedStatus == 3"  text-body1 text-weight-medium text-negative">Rejected</span>
                                                             </q-item-section>
                                                         </template>
                                                         <div v-for="(item,subIndex) in documents[0].uploadedDocuments" :key="subIndex" class="q-py-sm">
@@ -676,22 +676,22 @@
                                                                                 round 
                                                                                 size="xs"
                                                                                 class="q-ma-xs"
-                                                                                color="green" 
-                                                                                icon="fas fa-check" 
+                                                                                color="green"
+                                                                                icon="fas fa-check"
                                                                                 @click="fnDocumentApproveModal(subDocument)"
                                                                             />
                                                                             <q-btn 
                                                                                 round 
                                                                                 size="xs"
                                                                                 class="q-ma-xs"
-                                                                                color="red" 
+                                                                                color="red"
                                                                                 icon="fas fa-times"
                                                                                 @click="fnDocumentRejectModal(subDocument)"
                                                                             />
                                                                         </q-item-section>
                                                                         <q-item-section v-else right>
                                                                             <span v-if="subDocument.documentVerifiedStatus == 1" class="text-body1 text-weight-medium  text-positive">Approved</span>
-                                                                            <span v-if="subDocument.documentVerifiedStatus == 3" class=" text-body1 text-weight-medium text-negative">Rejected</span>
+                                                                            <span v-if="subDocument.documentVerifiedStatus == 3" text-body1 text-weight-medium text-negative">Rejected</span>
                                                                         </q-item-section>
                                                                     </template>
                                                                     <div v-for="(item,subIndex) in subDocument.uploadedDocuments" :key="subIndex" class="q-py-sm">

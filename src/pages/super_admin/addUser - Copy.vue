@@ -86,11 +86,11 @@
             <div class="col-md-6">
               <q-input
                 v-model.trim="formData.addUserDetails.name"
-                @blur="$v.formData.addUserDetails.name.$touch"
-                :error="$v.formData.addUserDetails.name.$error"
+                @blur="v$.formData.addUserDetails.name.$touch"
+                :error="v$.formData.addUserDetails.name.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="*Name"
+                label="*Name"
                 placeholder="Name"
               />
             </div>
@@ -98,11 +98,11 @@
             <div class="col-md-6">
               <q-input
                 v-model.trim="formData.addUserDetails.employeeID"
-                @blur="$v.formData.addUserDetails.employeeID.$touch"
-                :error="$v.formData.addUserDetails.employeeID.$error"
+                @blur="v$.formData.addUserDetails.employeeID.$touch"
+                :error="v$.formData.addUserDetails.employeeID.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="*Employee ID"
+                label="*Employee ID"
                 placeholder="Employee ID"
               />
             </div>
@@ -112,9 +112,9 @@
                 v-model.trim="formData.addUserDetails.email"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                @blur="$v.formData.addUserDetails.email.$touch"
-                :error="$v.formData.addUserDetails.email.$error"
-                float-label="*Email"
+                @blur="v$.formData.addUserDetails.email.$touch"
+                :error="v$.formData.addUserDetails.email.$error"
+                label="*Email"
                 placeholder="Email"
               />
             </div>
@@ -122,11 +122,11 @@
             <div class="col-md-6">
               <q-input
                 v-model.trim="formData.addUserDetails.contactNumber"
-                @blur="$v.formData.addUserDetails.contactNumber.$touch"
-                :error="$v.formData.addUserDetails.contactNumber.$error"
+                @blur="v$.formData.addUserDetails.contactNumber.$touch"
+                :error="v$.formData.addUserDetails.contactNumber.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="*Contact Number"
+                label="*Contact Number"
                 placeholder="Contact Number"
               />
             </div>
@@ -134,11 +134,11 @@
             <div class="col-md-6">
               <q-input
                 v-model.trim="formData.addUserDetails.alternateContactNumber"
-                @blur="$v.formData.addUserDetails.alternateContactNumber.$touch"
-                :error="$v.formData.addUserDetails.alternateContactNumber.$error"
+                @blur="v$.formData.addUserDetails.alternateContactNumber.$touch"
+                :error="v$.formData.addUserDetails.alternateContactNumber.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Alt Contact Number"
+                label="Alt Contact Number"
                 placeholder="Alt Contact Number"
               />
             </div>
@@ -146,11 +146,11 @@
             <div class="col-md-6">
               <q-input
                 v-model.trim="formData.addUserDetails.userAddress"
-                @blur="$v.formData.addUserDetails.userAddress.$touch"
-                :error="$v.formData.addUserDetails.userAddress.$error"
+                @blur="v$.formData.addUserDetails.userAddress.$touch"
+                :error="v$.formData.addUserDetails.userAddress.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="*Address"
+                label="*Address"
                 placeholder="Address"
               />
             </div>
@@ -168,9 +168,9 @@
               <q-select
                 filter
                 v-model.trim="formData.addUserDetails.pincodeTemp"
-                float-label="*Pincode"
+                label="*Pincode"
                 radio
-                :error="$v.formData.addUserDetails.pincodeTemp.$error"
+                :error="v$.formData.addUserDetails.pincodeTemp.$error"
                 @input="fnGetCityAndState()"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
@@ -183,7 +183,7 @@
                 v-model.trim="formData.addUserDetails.state"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="*State"
+                label="*State"
                 placeholder="State"
               />
             </div>
@@ -194,7 +194,7 @@
                 v-model.trim="formData.addUserDetails.city"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="*City"
+                label="*City"
                 placeholder="City"
               />
             </div>
@@ -410,8 +410,8 @@ export default {
         });
         return false;
       }
-      this.$v.formData.addUserDetails.$touch();
-      if (this.$v.formData.addUserDetails.$error) {
+      this.v$.formData.addUserDetails.$touch();
+      if (this.v$.formData.addUserDetails.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         // this.$q.loading.show({

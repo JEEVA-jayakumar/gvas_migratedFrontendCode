@@ -20,7 +20,7 @@
                     color="grey-9"
                     v-model="formData.leadSource"
                     :options="dropDown.leadSourceOptions"
-                    float-label="Select lead source"
+                    label="Select lead source"
                     @input="fnleadSource"
                   />
                 </div>
@@ -29,7 +29,7 @@
                     color="grey-9"
                     v-model="formData.device"
                     :options="dropDown.deviceOptions"
-                    float-label="Select device"
+                    label="Select device"
                     @input="fnDevice"
                   />
                 </div>
@@ -38,7 +38,7 @@
                     color="grey-9"
                     v-model="formData.marsDeviceModel"
                     :options="dropDown.marsDeviceOptions"
-                    float-label="Mars Device Model"
+                    label="Mars Device Model"
                     @input="fnMarsDeviceModel"
                   />
                 </div>
@@ -47,7 +47,7 @@
                     color="grey-9"
                     v-model="formData.plan"
                     :options="dropDown.planOptions"
-                    float-label="Select plan"
+                    label="Select plan"
                     placeholder="Plan"
                     @input="fnCategoryBasedRental"
                   />
@@ -58,7 +58,7 @@
                     type="number"
                     v-model="formData.setupFees"
                     placeholder="Setup fee"
-                    float-label="Enter Setup fee"
+                    label="Enter Setup fee"
                   />
                 </div>
                 <div class="col-md-12">
@@ -67,7 +67,7 @@
                     type="number"
                     v-model="formData.monthlyFees"
                     placeholder="Recurring fee"
-                    float-label="Enter recurring fee"
+                    label="Enter recurring fee"
                   />
                 </div>
               </q-list>

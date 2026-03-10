@@ -102,13 +102,13 @@
           default
           color="dark"
           name="unAssigned"
-          slot="title"
+
           label="Unassigned"
         />
-        <q-tab color="dark" name="assigned" slot="title" label="Assigned" />
+        <q-tab color="dark" name="assigned"  label="Assigned" />
         <!--                 
-                <q-tab color="dark" name="opened" slot="title" label="Opened" />
-                <q-tab color="dark" name="closed" slot="title" label="Closed" /> -->
+                <q-tab color="dark" name="opened"  label="Opened" />
+                <q-tab color="dark" name="closed"  label="Closed" /> -->
         <!-- 
                   <q-tab-panel name="opened">
               <opened/>
@@ -142,12 +142,12 @@
             <q-td
               v-slot:body-cell-createdDate="props"
               :props="props"
-              >{{ props.row.createdDate | moment("Do MMM Y") }}</q-td
+              >{{ $moment_format(props.row.createdDate, "Do MMM Y") }}</q-td
             >
             <q-td
               v-slot:body-cell-updatedDate="props"
               :props="props"
-              >{{ props.row.updatedDate | moment("Do MMM Y") }}</q-td
+              >{{ $moment_format(props.row.updatedDate, "Do MMM Y") }}</q-td
             >
             <!-- <q-td v-slot:body-cell-serviceRequestSubTicketStatus="props" :props="props">
                             <span class="label text-positive"
@@ -236,7 +236,7 @@
                   color="grey-9"
                   v-model="filterSearch1"
                   placeholder="Type.."
-                  float-label="Search By ServiceReqTicketId, TID .."
+                  label="Search By ServiceReqTicketId, TID .."
                   class="q-mr-lg q-py-sm"
                 />
               </div>
@@ -290,10 +290,10 @@
                   <span v-else="props.row.mid == null">NA</span>
                 </q-td>
                 <q-td key="createdDate" :props="props">
-                  {{ props.row.createdDate | moment("Do MMM Y") }}
+                  {{ $moment_format(props.row.createdDate, "Do MMM Y") }}
                 </q-td>
                 <q-td key="updatedDate" :props="props">
-                  {{ props.row.updatedDate | moment("Do MMM Y") }}
+                  {{ $moment_format(props.row.updatedDate, "Do MMM Y") }}
                 </q-td>
                 <q-td key="meName" :props="props"> {{ props.row.meName }}</q-td>
                 <q-td key="address" :props="props"> {{ props.row.address }}</q-td>
@@ -884,7 +884,7 @@
                   color="grey-9"
                   v-model="filterSearch"
                   placeholder="Type.."
-                  float-label="Search By ServiceReqTicketId, TID .."
+                  label="Search By ServiceReqTicketId, TID .."
                   class="q-mr-lg q-py-sm"
                 />
               </div>

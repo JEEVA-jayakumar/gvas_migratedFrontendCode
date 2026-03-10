@@ -54,7 +54,7 @@
                       separator
                       color="grey-9"
                       placeholder="Type.."
-                      float-label= "Search by MID, TID, Merchant Name, MCC,UTR Number, Device Type"
+                      label= "Search by MID, TID, Merchant Name, MCC,UTR Number, Device Type"
                       class="q-mr-lg q-py-sm"
                     />
                 </div>
@@ -64,10 +64,10 @@
                 <div class="col-md-3">
                   <q-input
                     v-model="filter_values" 
-                    float-label="Date Filter"
+                    label="Date Filter"
                     type="date"
                     class="q-mr-lg q-py-sm"
-                    color="grey-9" 
+                    color="grey-9"
                   />
                 </div>
                 <!--END: table filter dropdown -->
@@ -80,7 +80,7 @@
                   name="Merchant Tracker - TID.xls">
                     <q-btn 
                       outline  
-                      color="grey-9" 
+                      color="grey-9"
                       label="Download as Excel"
                       class="q-mr-lg q-py-sm float-right"
                       size="md"

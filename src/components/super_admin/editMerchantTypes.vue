@@ -18,11 +18,11 @@
           <div class="col-md-12">
             <q-input
               v-model="formData.merchantTypeName"
-              @blur="$v.formData.merchantTypeName.$touch"
-              :error="$v.formData.merchantTypeName.$error"
+              @blur="v$.formData.merchantTypeName.$touch"
+              :error="v$.formData.merchantTypeName.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Merchant Type"
+              label="Merchant Type"
               placeholder="Merchant Type"
               @keyup.enter="submitMerchantTypeData(formData)"
             />
@@ -30,11 +30,11 @@
           <div class="col-md-12">
             <q-input
               v-model="formData.marsAgreementId"
-              @blur="$v.formData.marsAgreementId.$touch"
-              :error="$v.formData.marsAgreementId.$error"
+              @blur="v$.formData.marsAgreementId.$touch"
+              :error="v$.formData.marsAgreementId.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Mars Agreement Id"
+              label="Mars Agreement Id"
               placeholder="Mars Agreement Id"
               @keyup.enter="submitMerchantTypeData(formData)"
             />
@@ -93,8 +93,8 @@ export default {
       this.$emit("emitfnForMerchantTypeTableRefresh");
     },
     submitMerchantTypeData() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
       } else {
         this.$q.loading.show({
           delay: 100, // ms

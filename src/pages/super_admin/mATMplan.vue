@@ -13,7 +13,7 @@
                   color="grey-9"
                   v-model="formData.leadSource"
                   :options="dropDown.leadSourceOptions"
-                  float-label="Select lead source"
+                  label="Select lead source"
                   placeholder="Lead source"
                 />
               </q-item-section>
@@ -36,7 +36,7 @@
                   color="grey-9"
                   v-model="formData.device"
                   :options="dropDown.deviceOptions"
-                  float-label="Select device"
+                  label="Select device"
                   placeholder="Device"
                 />
               </q-item-section>
@@ -59,7 +59,7 @@
                   color="grey-9"
                   v-model="formData.plan"
                   :options="dropDown.planOptions"
-                  float-label="Select plan"
+                  label="Select plan"
                   placeholder="Plan"
                   @input="fnCategoryBasedRental(formData)"
                 />
@@ -84,7 +84,7 @@
                   type="text"
                    v-model.trim="formData.planName"
                   placeholder="Enter Your Plan"
-                  float-label="Enter Your Plan"
+                  label="Enter Your Plan"
                 />
               </q-item-section>
             </q-item>
@@ -96,7 +96,7 @@
                     type="number"
                      v-model.trim="formData.incentivePercentage"
                     placeholder="%"
-                    float-label="Incentive Percentage *"
+                    label="Incentive Percentage *"
                   />
                 </div>
               </q-item-section>
@@ -109,7 +109,7 @@
                     type="number"
                     v-model.trim="formData.minTxnVal "
                     placeholder="Minimum Transaction Value*"
-                    float-label="Minimum Transaction Value*"
+                    label="Minimum Transaction Value*"
                   />
                 </div>
               </q-item-section>
@@ -122,7 +122,7 @@
                     type="number"
                     v-model.trim="formData.maxIncPerTxn"
                     placeholder="Maximum Incentive Per Transaction *"
-                    float-label="Maximum Incentive Per Transaction *"
+                    label="Maximum Incentive Per Transaction *"
                   />
                 </div>
               </q-item-section>
@@ -187,7 +187,7 @@
                 color="grey-9"
                 v-model="filterSearch"
                 placeholder="Type.."
-                float-label="Search by name, short name"
+                label="Search by name, short name"
                 class="q-mr-lg"
               />
             </div>

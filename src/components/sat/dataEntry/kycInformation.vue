@@ -55,7 +55,7 @@
         <q-input
           color="grey-9"
           v-model="leadDataEntryRemarks"
-          float-label="Remarks"
+          label="Remarks"
           placeholder="Remarks"
         />
       </div>
@@ -139,8 +139,8 @@ export default {
       });
     },
     validate() {
-      this.$v.merchant.companyInformation.$touch();
-      if (this.$v.merchant.companyInformation.$error) {
+      this.v$.merchant.companyInformation.$touch();
+      if (this.v$.merchant.companyInformation.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$emit("submit", "kyc", this.merchant);

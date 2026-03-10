@@ -22,13 +22,13 @@
         default
         color="dark"
         name="unassigned"
-        slot="title"
+
         label="Un Assigned"
       />
-      <q-tab color="dark" name="assigned" slot="title" label="Assigned" />
-      <!-- <q-tab color="dark" name="ReOpened" slot="title" label="ReOpenend" /> -->
+      <q-tab color="dark" name="assigned"  label="Assigned" />
+      <!-- <q-tab color="dark" name="ReOpened"  label="ReOpenend" /> -->
 
-      <q-tab color="dark" name="completed" slot="title" label="Completed" />
+      <q-tab color="dark" name="completed"  label="Completed" />
 
       <q-tab-panel name="unassigned">
         <q-card class="group q-pa-md">
@@ -188,7 +188,7 @@
                 color="grey-9"
                 v-model="filterSearch1"
                 placeholder="Type.."
-                float-label="Search By Mob No, VPA, Merchant Name"
+                label="Search By Mob No, VPA, Merchant Name"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -312,7 +312,7 @@
                 color="grey-9"
                 v-model="filterSearch"
                 placeholder="Type.."
-                float-label="Search By Mob No, VPA, Merchant Name"
+                label="Search By Mob No, VPA, Merchant Name"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -439,7 +439,7 @@
                 color="grey-9"
                 v-model="filterSearch2"
                 placeholder="Type.."
-                float-label="Search By Merchant Name"
+                label="Search By Merchant Name"
                 class="q-mr-lg q-py-sm"
               />
             </div>

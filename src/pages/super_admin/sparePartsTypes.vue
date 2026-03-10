@@ -6,8 +6,8 @@
       <!-- <pre>{{getAllHierarchiesData}}</pre> -->
       <div class="col-12 text-h6 q-my-lg text-weight-regular">Spare Parts Types</div>
       <q-tabs class="shadow-1" color="grey-1" >
-        <q-tab default color="dark" name="active" slot="title" label="Active " />
-        <q-tab color="dark" name="deactive" slot="title" label="Deactive" />
+        <q-tab default color="dark" name="active"  label="Active " />
+        <q-tab color="dark" name="deactive"  label="Deactive" />
         <q-tab-panel name="active">
           <q-table
          :rows="activeTableData"
@@ -22,11 +22,11 @@
 <q-td
     v-slot:body-cell-created_date="props"
     :props="props"
-  >{{ props.row.created_date | moment("Do MMM Y") }}</q-td>
+  >{{ $moment_format(props.row.created_date, "Do MMM Y") }}</q-td>
   <q-td
     v-slot:body-cell-updated_date="props"
     :props="props"
-  >{{ props.row.updated_date | moment("Do MMM Y") }}</q-td>
+  >{{ $moment_format(props.row.updated_date, "Do MMM Y") }}</q-td>
 <q-td v-slot:body-cell-action="props" :props="props">
   <div class="row no-wrap no-padding">
     <q-btn
@@ -100,11 +100,11 @@
 <q-td
     v-slot:body-cell-created_date="props"
     :props="props"
-  >{{ props.row.created_date | moment("Do MMM Y") }}</q-td>
+  >{{ $moment_format(props.row.created_date, "Do MMM Y") }}</q-td>
   <q-td
     v-slot:body-cell-updated_date="props"
     :props="props"
-  >{{ props.row.updated_date | moment("Do MMM Y") }}</q-td>
+  >{{ $moment_format(props.row.updated_date, "Do MMM Y") }}</q-td>
 <q-td v-slot:body-cell-action="props" :props="props">
   <div class="row no-wrap no-padding">
     <q-btn

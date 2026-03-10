@@ -26,9 +26,7 @@
           :loading="toggleAjaxLoadFilter"
           @request="ajaxLoadAllLeadInfo"
         >
-          <q-td v-slot:body-cell-createdAt="props" :props="props">{{
-            props.row.date | moment("Do MMM Y")
-          }}</q-td>
+          <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment_format(props.row.date, "Do MMM Y") }}</q-td>
           <q-td
             v-slot:body-cell-leadNumber="props"
             :props="props"
@@ -302,7 +300,7 @@
                 placeholder="Type.."
                 :debounce="300"
                 class="q-mr-lg q-py-sm"
-                float-label="Search By Lead ID, Merchant Name ..."
+                label="Search By Lead ID, Merchant Name ..."
               />
             </div>
             <!-- <div class="size1">

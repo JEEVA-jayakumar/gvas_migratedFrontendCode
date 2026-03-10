@@ -48,7 +48,7 @@
         <q-td
             v-slot:body-cell-date="props"
             :props="props"
-          >{{ props.row.date | moment("Do MMM Y") }}</q-td>
+          >{{ $moment_format(props.row.date, "Do MMM Y") }}</q-td>
          <q-td v-slot:body-cell-verifiedFinanceStatus="props" :props="props">
             <span
               class="label text-positive"
@@ -148,7 +148,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search By Merchant Name, Lead ID.."
+              label="Search By Merchant Name, Lead ID.."
               class="q-mr-lg q-py-sm"
             />
           </div>

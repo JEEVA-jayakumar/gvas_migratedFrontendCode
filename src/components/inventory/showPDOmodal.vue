@@ -17,13 +17,13 @@
             <q-input
               color="grey-9"
               v-model="formData.podNumber"
-              float-label="Enter POD Number"
+              label="Enter POD Number"
               placeholder="POD Number"
             />
               <q-input
               color="grey-9"
               v-model="formData.totalDevices"
-              float-label="Total Allocated Devices "
+              label="Total Allocated Devices "
               placeholder="Total Allocated Devices "
             />
           </div>
@@ -35,7 +35,7 @@
             <q-input
               color="grey-9"
               v-model="formData.scannedDevices"
-              float-label="Device Count "
+              label="Device Count "
               placeholder="Device Count "
             />
           </div> -->

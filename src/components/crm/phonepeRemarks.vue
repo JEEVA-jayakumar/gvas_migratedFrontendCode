@@ -14,7 +14,7 @@
         <div class="column group">
           <div class="text-h6"></div>
           <div>
-            <q-editor @blur="$v.formData.crmRemark.$touch" :error="$v.formData.crmRemark.$error" color="grey-9" v-model="formData.crmRemark" float-label="Remarks" placeholder="Add remarks"
+            <q-editor @blur="v$.formData.crmRemark.$touch" :error="v$.formData.crmRemark.$error" color="grey-9" v-model="formData.crmRemark" label="Remarks" placeholder="Add remarks"
               :toolbar="[
                 ['bold', 'italic', 'strike', 'underline', 'subscript', 'superscript'],
                 ['token', 'hr', 'link', 'custom_btn'],
@@ -70,8 +70,8 @@
                 times_new_roman: 'Times New Roman',
                 verdana: 'Verdana'
               }" />
-            <!-- <q-input @blur="$v.formData.crmRemark.$touch" :error="$v.formData.crmRemark.$error" color="grey-9"
-              v-model="formData.crmRemark" float-label="Remarks" placeholder="Add remarks" /> -->
+            <!-- <q-input @blur="v$.formData.crmRemark.$touch" :error="v$.formData.crmRemark.$error" color="grey-9"
+              v-model="formData.crmRemark" label="Remarks" placeholder="Add remarks" /> -->
           </div>
         </div>
 
@@ -120,8 +120,8 @@ export default {
 
     // },
     fnsubmit(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.UPDATE_CRM_REMARKS(formData)

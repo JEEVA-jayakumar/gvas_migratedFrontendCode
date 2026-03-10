@@ -18,8 +18,8 @@
             <q-input
               type="textarea"
               placeholder="Type.."
-              @blur="$v.remarks.$touch"
-              :error="$v.remarks.$error"
+              @blur="v$.remarks.$touch"
+              :error="v$.remarks.$error"
               class="q-my-md"
               color="grey-9"
               align="left"
@@ -109,8 +109,8 @@
           remarks:this.remarks
         }
         console.log("PARAM",JSON.stringify(param));
-          this.$v.remarks.$touch();
-          if (this.$v.remarks.$error) {
+          this.v$.remarks.$touch();
+          if (this.v$.remarks.$error) {
             this.$q.notify("Please enter reason.");
           }
           else {

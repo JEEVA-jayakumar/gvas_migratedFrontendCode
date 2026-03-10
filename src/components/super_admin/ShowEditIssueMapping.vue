@@ -22,10 +22,10 @@
             <div class="col-md-12">
               <q-input
                 v-model="formData.name"
-                :error="$v.formData.name.$error"
+                :error="v$.formData.name.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Issue Mapping"
+                label="Issue Mapping"
                 placeholder="Issue Mapping"
               />
             </div>

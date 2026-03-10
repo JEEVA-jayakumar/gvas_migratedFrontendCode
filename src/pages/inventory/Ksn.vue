@@ -10,11 +10,11 @@
           <q-input
             clearable
             v-model.trim="formData.otp"
-            @blur="$v.formData.otp.$touch"
-            :error="$v.formData.otp.$error"
+            @blur="v$.formData.otp.$touch"
+            :error="v$.formData.otp.$error"
             class="text-weight-regular text-grey-8"
             color="grey-9"
-            float-label="*Enter OTP"
+            label="*Enter OTP"
             placeholder="Enter OTP"
             maxlength="6"
             onkeypress="return (event.charCode > 47 && event.charCode < 59)"
@@ -75,8 +75,8 @@ export default {
   methods: {
     ...mapActions("appDevice", ["VERIFY_OTP_DATA", "SEND_OTP", "VERIFY_MOB_NUM"]),
     fnSubmitotp(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review field again.");
         return;
       } else {

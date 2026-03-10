@@ -133,31 +133,31 @@
                                 <q-list no-border class="no-padding">
                                     <q-item class="no-padding q-py-sm">
                                         <q-item-section>
-                                            <q-input color="grey-9" float-label="Debit < 2000 (%)" readonly class="no-pointer-events" v-model="formData.shortLead.debitLessthanAmount" />
+                                            <q-input color="grey-9" label="Debit < 2000 (%)" readonly class="no-pointer-events" v-model="formData.shortLead.debitLessthanAmount" />
                                         </q-item-section>
                                         <q-item-section>
-                                            <q-input color="grey-9" float-label="Debit < 2000 (%)" readonly class="no-pointer-events" v-model="formData.shortLead.debitGreaterthanAmount" />
-                                        </q-item-section>
-                                    </q-item>
-                                    <q-item class="no-padding q-py-sm">
-                                        <q-item-section>
-                                            <q-input color="grey-9" float-label="Std CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.stdCC" /> 
-                                        </q-item-section>
-                                        <q-item-section>
-                                            <q-input color="grey-9" float-label="Premium CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.premiumCC" />
+                                            <q-input color="grey-9" label="Debit < 2000 (%)" readonly class="no-pointer-events" v-model="formData.shortLead.debitGreaterthanAmount" />
                                         </q-item-section>
                                     </q-item>
                                     <q-item class="no-padding q-py-sm">
                                         <q-item-section>
-                                            <q-input color="grey-9" float-label="Corp Pre CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.corpCC" />
+                                            <q-input color="grey-9" label="Std CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.stdCC" />
                                         </q-item-section>
                                         <q-item-section>
-                                            <q-input color="grey-9" float-label="Intl Pre CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.intlCC" />
+                                            <q-input color="grey-9" label="Premium CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.premiumCC" />
                                         </q-item-section>
                                     </q-item>
                                     <q-item class="no-padding q-py-sm">
                                         <q-item-section>
-                                            <q-input color="grey-9" float-label="Super Pre CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.superPremiumlCC" />
+                                            <q-input color="grey-9" label="Corp Pre CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.corpCC" />
+                                        </q-item-section>
+                                        <q-item-section>
+                                            <q-input color="grey-9" label="Intl Pre CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.intlCC" />
+                                        </q-item-section>
+                                    </q-item>
+                                    <q-item class="no-padding q-py-sm">
+                                        <q-item-section>
+                                            <q-input color="grey-9" label="Super Pre CC (%)" readonly class="no-pointer-events" v-model="formData.shortLead.superPremiumlCC" />
                                         </q-item-section>
                                     </q-item>
                                     <q-item class="items-start q-pa-sm" v-if="formData.shortLead.posEnable">

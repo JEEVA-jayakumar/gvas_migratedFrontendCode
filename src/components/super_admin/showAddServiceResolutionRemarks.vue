@@ -18,17 +18,17 @@
                      <div class="col-md-12">
                         <q-input
                           v-model="formData.name"   
-                          :error="$v.formData.name.$error" 
+                          :error="v$.formData.name.$error"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Enter Service Resolution Remarks" 
+                          color="grey-9"
+                          label="Enter Service Resolution Remarks"
                           placeholder="Enter Service Resolution Remarks" 
                         />
                     </div>
                     <div>
             <q-radio class="alignsize" v-for="(item, index) in option.flagOptions" :key="index" color="grey-9" v-model.trim="formData.category"
-            @blur="$v.formData.category.$touch"
-              :error="$v.formData.category.$error"
+            @blur="v$.formData.category.$touch"
+              :error="v$.formData.category.$error"
           :val="item.value" :label="item.label" />
           </div>
                 </div>
@@ -125,8 +125,8 @@ fnAddSubTaskDetails(){
 
 fnfinalsubmitAddServiceResolutionRemarks(formData) {
          console.log("SUBMIT Sub Task RESPONSE",JSON.stringify(formData))
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
           console.log("SUBMIT RESPONSE",JSON.stringify(formData))

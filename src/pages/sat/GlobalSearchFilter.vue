@@ -10,15 +10,15 @@
             inverted
             class="shadow-1"
           >
-            <q-tab default name="internal" label="Bijlipay Global Serial" slot="title" />
-            <!-- <q-tab name="spareSo" label="Spare Parts So" slot="title" /> -->
-            <q-tab name="external" label="Phonepe Global Serial" slot="title" />
+            <q-tab default name="internal" label="Bijlipay Global Serial"  />
+            <!-- <q-tab name="spareSo" label="Spare Parts So"  /> -->
+            <q-tab name="external" label="Phonepe Global Serial"  />
            
            
             <q-tab-panel name="internal">
               <InternalGlobalSearchFilter/>
             </q-tab-panel>
-           
+
             <q-tab-panel name="external">
               <AggregatorGlobalSearchFilter/>
             </q-tab-panel>

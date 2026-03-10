@@ -10,12 +10,12 @@
             <div class="text-h6 text-weight-regular q-py-sm">Aggregator POD Number</div>
           </div>
           <div class="col-md-8 q-pt-md" align="left">
-            <q-input color="grey-9" v-model="formData.podNumber" float-label="Enter POD Number"
+            <q-input color="grey-9" v-model="formData.podNumber" label="Enter POD Number"
               placeholder="POD Number" />
-            <q-input color="grey-9" v-model="formData.totalDevices" float-label="Total Allocated Devices "
+            <q-input color="grey-9" v-model="formData.totalDevices" label="Total Allocated Devices "
               placeholder="Total Allocated Devices " />
             <!-- <q-select 
-              color="grey-9" v-model="formData.aggregator" float-label="Select Aggregator" radio
+              color="grey-9" v-model="formData.aggregator" label="Select Aggregator" radio
             :options="aggregatorOptions"
               /> -->
           </div>
@@ -27,7 +27,7 @@
               <q-input
                 color="grey-9"
                 v-model="formData.scannedDevices"
-                float-label="Device Count "
+                label="Device Count "
                 placeholder="Device Count "
               />
             </div> -->

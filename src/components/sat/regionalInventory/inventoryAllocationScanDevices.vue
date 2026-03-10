@@ -27,7 +27,7 @@
                 <q-select
                   @input="fnSetDevicesByDeviceId"
                   v-model="formData.device_type"
-                  float-label="Select Device Type"
+                  label="Select Device Type"
                   radio
                   color="grey-9"
                   :options="deviceOptions"
@@ -38,14 +38,14 @@
                   @click="openScannerComp"
                   v-if="!scannerToggleOption"
                   color="light-blue"
-                  class="q-py-xs" 
+                  class="q-py-xs"
                   label="Scan"
               />
               <q-btn
                   @click="closeScannerComp"
                   v-if="scannerToggleOption"
                   color="negative"
-                  class="q-py-xs" 
+                  class="q-py-xs"
                   label="Stop"
               />
           </div> -->
@@ -68,7 +68,7 @@
                 <q-icon style="color:#202c3f" name="fas fa-tablet-alt"/> {{item.device.name}} 
               </q-item-label header>
               <div v-if="item.deviceSerialNumbers.length > 0">
-                <q-item separator class=" text-light-blue" v-for="(subItem,subIndex) in item.deviceSerialNumbers" :key="subIndex">
+                <q-item separator text-light-blue" v-for="(subItem,subIndex) in item.deviceSerialNumbers" :key="subIndex">
                   <q-item-section class="text-body1">{{subItem.barcode}}</q-item-section>
                   <q-item-section>
                     <q-btn flat v-if="subitem.checksum" round size="sm" color="positive" icon="check" />

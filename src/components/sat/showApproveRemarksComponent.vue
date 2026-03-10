@@ -17,10 +17,10 @@
               popover
               format="YYYY-MM-DD"
               v-model="formData.leadInformation.expectedSubmitDate"
-              @blur="$v.formData.leadInformation.expectedSubmitDate.$touch"
-              :error="$v.formData.leadInformation.expectedSubmitDate.$error"
+              @blur="v$.formData.leadInformation.expectedSubmitDate.$touch"
+              :error="v$.formData.leadInformation.expectedSubmitDate.$error"
               :min="currentDateForDocumentSubmission"
-              float-label="Expected date of Doc Submission"
+              label="Expected date of Doc Submission"
               type="date"
               color="light-blue"
             />
@@ -29,16 +29,16 @@
             <q-input
               class="no-pointer-events"
               v-model="formData.soReason"
-              float-label="SO Remarks"
+              label="SO Remarks"
               color="light-blue"
             />
           </div>
           <div>
             <q-input
               v-model="formData.leadInformation.kycSatRemark"
-              @blur="$v.formData.leadInformation.kycSatRemark.$touch"
-              :error="$v.formData.leadInformation.kycSatRemark.$error"
-              float-label="SAT Remarks"
+              @blur="v$.formData.leadInformation.kycSatRemark.$touch"
+              :error="v$.formData.leadInformation.kycSatRemark.$error"
+              label="SAT Remarks"
               color="light-blue"
             />
           </div>
@@ -127,8 +127,8 @@ export default {
       this.$emit("toggleLeadModal");
     },
     sendRemarks(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({

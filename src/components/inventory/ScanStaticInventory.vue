@@ -28,7 +28,7 @@
         <q-input
           readonly
           v-model="formData.scanQRNumber.scanQRNumber"
-          float-label="Scan QR Number"
+          label="Scan QR Number"
         />
         <div class="group">
           <q-btn
@@ -95,8 +95,8 @@ export default {
     ...mapActions("phonePeCrm", ["UPDATE_SCAN_QR_NUMBER"]),
     fnsubmit(formData) {
 
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();

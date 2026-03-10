@@ -23,7 +23,7 @@
             color="grey-9"
             v-model="filter"
             placeholder="Type.."
-            float-label= "Search by serial no, tid, merchant name, device type"
+            label= "Search by serial no, tid, merchant name, device type"
             class="q-mr-lg q-py-sm"
             />
           </div>
@@ -37,14 +37,14 @@
             color="grey-9"
             :options="regionOptions"
             placeholder="Select"
-            float-label= "Filter By"
+            label= "Filter By"
             />
           </div>
           <div class="col-auto">
             <q-btn 
             @click="downloadMasterInventory()"
             outline  
-            color="grey-9" 
+            color="grey-9"
             label="Download as Excel"
             class="q-mr-lg q-py-sm float-right"
             size="md"

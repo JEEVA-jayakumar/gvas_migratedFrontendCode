@@ -15,7 +15,7 @@
                   color="grey-9"
                   v-model="formData.leadSource"
                   :options="dropDown.leadSourceOptions"
-                  float-label="Select Lead bank"
+                  label="Select Lead bank"
                 />
               </q-item-section>
               <q-item-section right>

@@ -13,9 +13,9 @@
           <div>
             <q-input
               v-model="formData.leadInformation.reason"
-              @blur="$v.formData.leadInformation.reason.$touch"
-              :error="$v.formData.leadInformation.reason.$error"
-              float-label="Remarks"
+              @blur="v$.formData.leadInformation.reason.$touch"
+              :error="v$.formData.leadInformation.reason.$error"
+              label="Remarks"
               color="primary"
             />
           </div>
@@ -95,8 +95,8 @@ export default {
       this.$emit("toggleLeadModal");
     },
     sendRemarks(formDataDetails) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({

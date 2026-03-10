@@ -41,7 +41,7 @@
         <q-td
           v-slot:body-cell-createdAt="props"
           :props="props"
-        >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+        >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
         <q-td
           v-slot:body-cell-lead_id="props"
           :props="props"
@@ -85,7 +85,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search by SO name, Merchant Name, Lead ID"
+              label="Search by SO name, Merchant Name, Lead ID"
               class="q-ma-xs"
             />
           </div>
@@ -93,7 +93,7 @@
             <q-select
               placeholder="Select .."
               v-model="formData.reassignToNewSo"
-              float-label="Choose a user from below"
+              label="Choose a user from below"
               :options="dropDown.regionwiseUsers"
               class="q-ma-xs"
             />

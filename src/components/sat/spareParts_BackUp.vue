@@ -89,7 +89,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search Using MID"
+              label="Search Using MID"
               class="q-mr-lg q-py-sm"
             />
           </div>

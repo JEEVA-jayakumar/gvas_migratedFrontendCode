@@ -15,10 +15,10 @@
               <q-input
                 color="grey-9"
                 v-model="formData.leadInformation.reason"
-                @blur="$v.formData.leadInformation.reason.$touch"
-                :error="$v.formData.leadInformation.reason.$error"
+                @blur="v$.formData.leadInformation.reason.$touch"
+                :error="v$.formData.leadInformation.reason.$error"
                 type="textarea"
-                float-label="Remarks"
+                label="Remarks"
                 :max-height="100"
               />
             </div>
@@ -92,8 +92,8 @@
         this.$emit("toggleLeadModal");
       },
       sendRemarks(finalFormData) {
-        this.$v.formData.$touch();
-        if (this.$v.formData.$error) {
+        this.v$.formData.$touch();
+        if (this.v$.formData.$error) {
           this.$q.notify("Please review fields again.");
         } else {
           this.VERIFY_QR_LEAD_DATA(finalFormData)

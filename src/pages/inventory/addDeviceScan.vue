@@ -14,13 +14,13 @@
         <!--START: table title -->
         <div class="col" ref="clickHeretoStartParent">
           <q-select ref="clickHeretoStartChild" @input="fnDisableDeviceTypeSelection"
-            :disable="tempTableData.length > 0" v-model="formData.device.id" float-label="Select Device Type" radio
+            :disable="tempTableData.length > 0" v-model="formData.device.id" label="Select Device Type" radio
             color="grey-9" :options="deviceOptions" />
         </div>
         <!-- Invoice Number Field with margin -->
         <div class="col q-ml-md">
-          <q-input type="text" :disable="tempTableData.length > 0" float-label="Invoice Number" color="grey-9" @blur="$v.formData.invoiceNumber.$touch"
-            :error="$v.formData.invoiceNumber.$error" v-model="formData.invoiceNumber" />
+          <q-input type="text" :disable="tempTableData.length > 0" label="Invoice Number" color="grey-9" @blur="v$.formData.invoiceNumber.$touch"
+            :error="v$.formData.invoiceNumber.$error" v-model="formData.invoiceNumber" />
         </div>
         <!-- Final upload button toggle -->
         <div class="col group" align="right">
@@ -41,7 +41,7 @@
         <template slot="top">
           <!--START: table filter,search -->
           <div class="col-md-5">
-            <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." float-label="Search .."
+            <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search .."
               class="q-mr-lg q-py-sm" />
           </div>
           <!--END: table filter,search -->

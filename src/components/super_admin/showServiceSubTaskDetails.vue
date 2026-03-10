@@ -19,10 +19,10 @@
             <q-input
               disable
               v-model="formData.id"
-              :error="$v.formData.id.$error"
+              :error="v$.formData.id.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Service Request Id"
+              label="Service Request Id"
               placeholder="Service Request Id"
             />
           </div>
@@ -32,15 +32,15 @@
               v-model="service_req_data"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Service Request "
+              label="Service Request "
               placeholder="Service Request "
             />
           </div>
           <div class="col-md-12">
             <q-select
               v-model="formData.issue_reason"
-              :error="$v.formData.issue_reason.$error"
-              float-label="Select Subtask"
+              :error="v$.formData.issue_reason.$error"
+              label="Select Subtask"
               radio
               color="grey-9"
               :options="subtaskDetails"
@@ -154,8 +154,8 @@ export default {
     // },
     fnfinalsubmitEditedSpareParts(formData) {
       console.log("FORMDATA DETAILS----------",JSON.stringify(formData));
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();

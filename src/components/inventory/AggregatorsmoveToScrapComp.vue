@@ -18,8 +18,8 @@
             <q-input
               type="textarea"
               placeholder="Type.."
-              @blur="$v.remarks.$touch"
-              :error="$v.remarks.$error"
+              @blur="v$.remarks.$touch"
+              :error="v$.remarks.$error"
               class="q-my-md"
               color="grey-9"
               align="left"
@@ -99,8 +99,8 @@
         this.formData.data.lostOrStolenRemarks = val;
       },
       AggregatorsMovedToScrap(reqData) {
-        //   this.$v.formData.$touch();
-        //   if (this.$v.formData.$error) {
+        //   this.v$.formData.$touch();
+        //   if (this.v$.formData.$error) {
         //     this.$q.notify("Please review fields again.");
         //   }
         //   else {

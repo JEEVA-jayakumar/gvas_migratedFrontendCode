@@ -11,7 +11,7 @@
               color="tertiary"
               align="justify"
             >
-              <q-tab class="size1" label="UPLOAD CSV FILE" slot="title" />
+              <q-tab class="size1" label="UPLOAD CSV FILE"  />
               <div>
                 <div class="q-pa-md">
                   <div class="row text-center justify-center">
@@ -101,7 +101,7 @@
               <q-tab
                 class="size1"
                 label="Hitachi Onboarding Merchants"
-                slot="title"
+
                 default
                 name="unAssigned"
               />
@@ -118,7 +118,7 @@
                   class="size1" 
                   color="dark"
                   name="unAssigned"
-                  slot="title"
+
                   label="Hitachi Onboarding Merchants"
                 /> -->
               <q-tab-panel name="unAssigned">
@@ -153,7 +153,7 @@
                   <q-td
                     v-slot:body-cell-createdAt="props"
                     :props="props"
-                    >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td
+                    >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td
                   >
                   <q-td
                     v-slot:body-cell-assign="props"
@@ -214,7 +214,7 @@
                         color="grey-9"
                         v-model="filterSearch1"
                         placeholder="Type.."
-                        float-label="Search by MerchantName, TID, MID..."
+                        label="Search by MerchantName, TID, MID..."
                         class="q-mr-lg q-py-sm"
                       />
                     </div>

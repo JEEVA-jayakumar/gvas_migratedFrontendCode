@@ -73,7 +73,7 @@
                 color="grey-9"
                 v-model="filter"
                 placeholder="Type.."
-                float-label= "Search"
+                label= "Search"
                 class="q-mt-lg q-mr-lg"
               />
             </div>

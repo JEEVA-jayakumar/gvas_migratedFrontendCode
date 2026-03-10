@@ -15,8 +15,8 @@
         <div class="col-md-5" align="row">
           <div class="group">
             <q-radio v-for="(item, index) in flagOptions" :key="index" color="grey-9" v-model.trim="flag"
-              @blur="$v.flag.$touch" :error="$v.flag.$error" :val="item.value" :label="item.label" />
-            <div class="text-negative q-py-xs group text-caption" v-if="$v.flag.$error" align="right" width="25px">
+              @blur="v$.flag.$touch" :error="v$.flag.$error" :val="item.value" :label="item.label" />
+            <div class="text-negative q-py-xs group text-caption" v-if="v$.flag.$error" align="right" width="25px">
               <div>
                 <q-icon color="negative" name="warning" />&nbsp;Required Field
               </div>
@@ -35,15 +35,15 @@
         ">
         <!--START: table title -->
         <div v-if="flag == '0' || flag == '1'" class="col-md-4">
-          <q-select v-model="formData.allocate_region" float-label="Select Region" radio color="grey-9"
+          <q-select v-model="formData.allocate_region" label="Select Region" radio color="grey-9"
             :options="regionOptions" @input="regionBasedSoLoad" />
         </div>
         <div v-if="flag == '1'" class="col-md-3">
-          <q-select filter clearable v-model="formData.allocate_so" float-label="Select SO" radio color="grey-9"
+          <q-select filter clearable v-model="formData.allocate_so" label="Select SO" radio color="grey-9"
             :options="regionBasedSo" />
         </div>
         <div v-if="flag == '2'" class="col-md-3">
-          <q-select v-model="formData.allocate_reseller" float-label="Select allocate_reseller" radio color="grey-9"
+          <q-select v-model="formData.allocate_reseller" label="Select allocate_reseller" radio color="grey-9"
             :options="resellarOptions" />
         </div>
         <div class="col-md-7">
@@ -63,11 +63,11 @@
           </div>
         </div>
         <div class="col-md-7">
-          <q-input disable v-model="formData.pod_number" float-label="Pod Number" radio color="grey-9" />
+          <q-input disable v-model="formData.pod_number" label="Pod Number" radio color="grey-9" />
         </div>
 
         <div class="col-md-7">
-          <q-input disable v-model="formData.total_count" float-label="Total Count" radio color="grey-9" />
+          <q-input disable v-model="formData.total_count" label="Total Count" radio color="grey-9" />
         </div>
 
         <div class="full-width group" align="center" id="formData">
@@ -342,8 +342,8 @@ export default {
       document.body.innerHTML = originalContents;
     },
     fnSubmitBankDetails(request) {
-      this.$v.flag.$touch();
-      if (this.$v.flag.$error) {
+      this.v$.flag.$touch();
+      if (this.v$.flag.$error) {
         this.$q.notify({
           color: "negative",
           position: "bottom",

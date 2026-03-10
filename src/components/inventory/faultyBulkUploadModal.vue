@@ -15,10 +15,10 @@
           <div class="col-md-8 q-py-md" align="left">
             <q-select
               color="grey-9"
-              @blur="$v.formData.deviceType.$touch"
-              :error="$v.formData.deviceType.$error"
+              @blur="v$.formData.deviceType.$touch"
+              :error="v$.formData.deviceType.$error"
               v-model="formData.deviceType"
-              float-label="Select Device Type"
+              label="Select Device Type"
               radio
               :options="rawDevicesTypes"
             />
@@ -173,8 +173,8 @@ export default {
     },
 
     uploadFileForBulkUpload(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify({
           color: "amber-9",
           position: "bottom",

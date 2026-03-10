@@ -33,7 +33,7 @@
     >
       <!--START: table body modification -->
       <q-td v-slot:body-cell-date="props" :props="props">
-        <span class="label">{{props.row.createdAt | moment("Do MMM Y")}}</span>
+        <span class="label">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</span>
       </q-td>
       <!--END: table body modification -->
       <!--START: table body modification -->
@@ -65,7 +65,7 @@
             color="grey-9"
             v-model="filter"
             placeholder="Type.."
-            float-label="Search by SO name, Merchant Name, Lead ID"
+            label="Search by SO name, Merchant Name, Lead ID"
             class="q-mr-lg q-py-sm"
           />
         </div>
@@ -77,7 +77,7 @@
                   color="grey-9"
                   :options="options"
                   placeholder="Select"
-                  float-label= "Filter By"
+                  label= "Filter By"
                   class="q-mr-lg q-py-sm "
                   size="sm"
                 />

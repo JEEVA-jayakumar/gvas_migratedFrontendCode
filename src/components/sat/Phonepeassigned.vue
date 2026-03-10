@@ -73,7 +73,7 @@
                 clearable
                 v-model="formData.assignTo" 
                 separator 
-                color="grey-9" 
+                color="grey-9"
                 :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 "
                 :options="assignToOptions"
                 placeholder="Assign To" 
@@ -108,8 +108,8 @@
       </q-card>
       <!--END: table Footer -->
       <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @select="goToUnassignedTab">
-        <q-tab default color="dark" name="assigned" slot="title" label="Normal" />
-        <q-tab  color="dark" name="courier" slot="title" label="Courier" />
+        <q-tab default color="dark" name="assigned"  label="Normal" />
+        <q-tab  color="dark" name="courier"  label="Courier" />
         <q-tab-panel name="assigned">
           <q-table :rows="tableData" :columns="columnDataAssigned" table-class="customTableClass" :filter="filterSearch"
             :pagination="paginationControl" selection="multiple"
@@ -119,11 +119,8 @@
               @click.native="toggleLeadInformation(props.row.leadInformation)">
               <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
             </q-td>
-            <q-td v-slot:body-cell-submitToMarsDate="props" :props="props">{{
-              props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-            }}</q-td>
-            <q-td v-slot:body-cell-createdAt="props" :props="props">{{ props.row.createdAt | moment("Do MMM Y")
-            }}</q-td>
+            <q-td v-slot:body-cell-submitToMarsDate="props" :props="props">{{ $moment_format(props.row.leadInformation.submitToMarsDate, "Do MMM Y") }}</q-td>
+            <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
             <q-td v-slot:body-cell-deviceAddress="props" :props="props" class="customTd customCellLength">
               <div>{{ props.row.deviceAddress }}</div>
             </q-td>
@@ -139,7 +136,7 @@
             </q-td>
             <template v-slot:top="props">
               <div class="col-md-5">
-                <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." float-label="Search By MID, Merchant Name.."
+                <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search By MID, Merchant Name.."
                   class="q-mr-lg q-py-sm" />
               </div>
             </template>
@@ -160,12 +157,10 @@
             <!-- <q-td
                 v-slot:body-cell-submitToMarsDate="props"
                 :props="props"
-                >{{
-                  props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-                }}</q-td
+                >{{ $moment_format(props.row.leadInformation.submitToMarsDate, "Do MMM Y") }}</q-td
               > -->
             <!--props.row.createdAt | moment("Do MMM Y")-->
-            <q-td v-slot:body-cell-createdAt="props" :props="props">{{ props.row.createdAt | moment("Do MMMY")}}</q-td>
+            <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment_format(props.row.createdAt, "Do MMMY") }}</q-td>
             <!-- <q-td
                 v-slot:body-cell-tid="props"
                 :props="props"
@@ -185,16 +180,16 @@
             <template v-slot:top="props">
               <!--START: table filter,search -->
               <div class="col-md-5">
-                <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." float-label="Search By MID, Merchant Name.."
+                <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search By MID, Merchant Name.."
                   class="q-mr-lg q-py-sm" />
               </div>
               <!-- <div class="col-md-3">
                   <q-input
                   v-model="filter_values" 
-                  float-label="Select Date"
+                  label="Select Date"
                   type="date"
                   class="q-mr-lg q-py-sm"
-                  color="grey-9" 
+                  color="grey-9"
                   />
                 </div>-->
               <!--ENDv-model: table filter,search -->

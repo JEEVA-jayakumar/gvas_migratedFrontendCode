@@ -15,22 +15,22 @@
         <div>
           <q-select
             color="grey-9"
-            @blur="$v.formData.url.merchantType.$touch"
-            :error="$v.formData.url.merchantType.$error"
+            @blur="v$.formData.url.merchantType.$touch"
+            :error="v$.formData.url.merchantType.$error"
             v-model="formData.url.merchantType"
             :options="activeMerchantType"
-            float-label="Select merchant type"
+            label="Select merchant type"
             placeholder="Merchant type"
           />
         </div>
         <div>
           <q-input
             v-model="formData.params.documentType"
-            @blur="$v.formData.params.documentType.$touch"
-            :error="$v.formData.params.documentType.$error"
+            @blur="v$.formData.params.documentType.$touch"
+            :error="v$.formData.params.documentType.$error"
             class="text-weight-regular text-grey-8"
             color="grey-9"
-            float-label="Merchant Document Type"
+            label="Merchant Document Type"
             placeholder="Merchant Document Type"
             @keyup.enter="submitMerchantDcoumentTypeData(formData)"
           />
@@ -38,12 +38,12 @@
         <div>
           <q-input
             v-model="formData.params.marsDocumentId"
-            @blur="$v.formData.params.marsDocumentId.$touch"
-            :error="$v.formData.params.marsDocumentId.$error"
+            @blur="v$.formData.params.marsDocumentId.$touch"
+            :error="v$.formData.params.marsDocumentId.$error"
             class="text-weight-regular text-grey-8"
             color="grey-9"
             type="number"
-            float-label="Mars Agreement Id"
+            label="Mars Agreement Id"
             placeholder="Mars Agreement Id"
             @keyup.enter="submitMerchantDcoumentTypeData(formData)"
           />
@@ -167,8 +167,8 @@ export default {
       this.formData.url.hasSubDoc = val ? 0 : 1;
     },
     submitMerchantDcoumentTypeData() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
       } else {
         this.$q.loading.show({
           delay: 100, // ms

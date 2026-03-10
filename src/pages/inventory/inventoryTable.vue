@@ -78,7 +78,7 @@
                     color="grey-9"
                     v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search .."
+                    label="Search .."
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
@@ -89,7 +89,7 @@
                     color="grey-9"
                     v-model="filterSearch"
                     placeholder="Type.."
-                    float-label="Search .."
+                    label="Search .."
                     class="q-mr-lg q-py-sm"
                   />-->
                   <downloadExcel
@@ -114,7 +114,7 @@
             @input="filterInventoryCountByRegion"
             :options="inventoryData.regionFilterOptions"
             placeholder="Select"
-            float-label="Filter By Region Wise"
+            label="Filter By Region Wise"
           />
         </div>
       </div>
@@ -147,7 +147,7 @@
             color="grey-9"
             :options="inventoryData.SOFilterOptions"
             placeholder="Select"
-            float-label="Filter By SO Wise"
+            label="Filter By SO Wise"
             @input="filterInventoryCountBySO"
           />
         </div>

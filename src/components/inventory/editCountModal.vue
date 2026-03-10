@@ -12,8 +12,8 @@
       <div class="col-md-8 q-pt-md" align="left">
         <q-input type="number" color="grey-9"
          v-model="formData.recievedCount"
-         oninput="this.value = Math.abs(this.value)" :error="$v.formData.recievedCount.$error"
-          float-label="Update Count"
+         oninput="this.value = Math.abs(this.value)" :error="v$.formData.recievedCount.$error"
+          label="Update Count"
           placeholder="Update Count" />
     </div>
     <div class="col-md-12 col-md-6 q-pt-md group" align="right">
@@ -54,8 +54,8 @@ export default {
   methods: {
     ...mapActions('generateQR', ['UPDATE_QR_COUNT']),
     fnSubmitUpdateCount(){
-      this.$v.formData.$touch()
-      if(this.$v.formData.$error){
+      this.v$.formData.$touch()
+      if(this.v$.formData.$error){
         this.$q.notify('Please review fields again.')
       }else{
       let updatecount = {

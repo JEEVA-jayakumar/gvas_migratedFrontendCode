@@ -11,14 +11,14 @@
           default
           color="dark"
           name="tab-1"
-          slot="title"
+
           label="PPE Service Request"
         />
         <q-tab
           color="dark"
-         
+
           name="tab-3"
-          slot="title"
+
           label="Phonepe Paper Roll"
         >
         </q-tab>
@@ -55,7 +55,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search By Ticket No, Merchant No..."
+              label="Search By Ticket No, Merchant No..."
             />
           </div>
           <q-table
@@ -183,7 +183,7 @@
               color="grey-9"
               v-model="filter1"
               placeholder="Type.."
-              float-label="Search By Ticket No, Merchant No..."
+              label="Search By Ticket No, Merchant No..."
             />
             <div class="col-md-6">
               <q-btn
@@ -254,13 +254,13 @@
               default
               color="dark"
               name="tab-4"
-              slot="title"
+
               label="Pending Tickets"
             />
             <q-tab
               color="dark"
               name="tab-5"
-              slot="title"
+
               label="Completed Tickets"
             />
             <q-tab-panel name="tab-4">
@@ -285,7 +285,7 @@
                   color="grey-9"
                   v-model="filter3"
                   placeholder="Type.."
-                  float-label="Search By Ticket No, Merchant No..."
+                  label="Search By Ticket No, Merchant No..."
                 />
               </div>
               <q-table
@@ -318,7 +318,7 @@
                   color="grey-9"
                   v-model="filter4"
                   placeholder="Type.."
-                  float-label="Search By Ticket No, Merchant No..."
+                  label="Search By Ticket No, Merchant No..."
                 />
               </div>
               <q-table

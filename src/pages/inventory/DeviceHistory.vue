@@ -21,10 +21,10 @@
         @request="ajaxLoadAllLeadInfo"
       >
          <q-td v-slot:body-cell-installationDate="props" :props="props">
-          <span class="label">{{props.row.installationDate | moment("Do MMM Y")}}</span>
+          <span class="label">{{ $moment_format(props.row.installationDate, "Do MMM Y") }}</span>
         </q-td>
           <q-td v-slot:body-cell-deInstallationDate="props" :props="props">
-          <span class="label">{{props.row.deInstallationDate | moment("Do MMM Y")}}</span>
+          <span class="label">{{ $moment_format(props.row.deInstallationDate, "Do MMM Y") }}</span>
         </q-td>
         
      
@@ -36,7 +36,7 @@
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search by MID, TID"
+              label="Search by MID, TID"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -45,8 +45,8 @@
             <q-btn 
             square 
             outline 
-            color="purple-9" 
-            label="Download as Excel" 
+            color="purple-9"
+            label="Download as Excel"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloaddeviceHist()" />

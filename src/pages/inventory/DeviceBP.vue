@@ -27,9 +27,7 @@
           v-slot:body-cell-TidCreationDate="props"
           :props="props"
         >
-          <span class="label">{{
-            props.row.TidCreationDate | moment("Do MMM Y")
-          }}</span>
+          <span class="label">{{ $moment_format(props.row.TidCreationDate, "Do MMM Y") }}</span>
         </q-td>
 
         <template slot="top"  class="bottom-border">
@@ -37,7 +35,7 @@
           <div class="col-md-4">
             <q-select
               v-model="filter"
-              float-label="Select a Region"
+              label="Select a Region"
               radio
               color="grey-9"
               :options="getBpRegionsMenuOptions"

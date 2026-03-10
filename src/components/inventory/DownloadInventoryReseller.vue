@@ -13,10 +13,10 @@
 Inventory with Reseller File</strong></p></div>
           </div>
           <div class="col-md-12">
-             <q-input hide-underline class="q-mr-lg q-py-sm" v-model="formData.fromDate" :min="yesterday" :max="tomorrow" type="date" float-label='From Date' />
+             <q-input hide-underline class="q-mr-lg q-py-sm" v-model="formData.fromDate" :min="yesterday" :max="tomorrow" type="date" label='From Date' />
           </div>
         <div class="col-md-12">
-           <q-input hide-underline class="q-mr-lg q-py-sm" v-model="formData.toDate" :min="yesterday" :max="tomorrow" type="date" float-label='To Date' />
+           <q-input hide-underline class="q-mr-lg q-py-sm" v-model="formData.toDate" :min="yesterday" :max="tomorrow" type="date" label='To Date' />
            </div>
         <div class="col-md-12 group" align="right">
             <q-btn

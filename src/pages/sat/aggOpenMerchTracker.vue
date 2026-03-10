@@ -25,10 +25,10 @@
         >
           <!--START: table body modification -->
           <q-td v-slot:body-cell-createdAt="props" :props="props">
-            <span class="label">{{props.row.createdAt | moment("Do MMM Y")}}</span>
+            <span class="label">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</span>
           </q-td>
           <q-td v-slot:body-cell-submitteSATDate="props" :props="props">
-            <span class="label">{{props.row.updatedAt | moment("Do MMM Y")}}</span>
+            <span class="label">{{ $moment_format(props.row.updatedAt, "Do MMM Y") }}</span>
           </q-td>
           <q-td v-slot:body-cell-applicationNumber="props" :props="props">
             <span class="label capitalize">{{props.row.applicationNumber}}</span>
@@ -80,12 +80,12 @@
                 separator
                 color="grey-9"
                 placeholder="Type.."
-                float-label="Search by Merchant Name, Lead ID"
+                label="Search by Merchant Name, Lead ID"
                 class="q-mr-lg q-py-sm"
               />
             </div>
             <!-- <div class="col-3">
-              <q-input modal outline type="date" v-model="model" placeholder="Select Date" class="q-mr-lg q-py-sm " float-label="Filter By"
+              <q-input modal outline type="date" v-model="model" placeholder="Select Date" class="q-mr-lg q-py-sm " label="Filter By"
                 color="grey-9" />
             </div>-->
             <!-- <div class="col-md-4">

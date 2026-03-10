@@ -13,9 +13,9 @@
             class="shadow-1"
           >
           
-            <q-tab name="AllocatedDevices" label="Allocated Devices" slot="title" />
-            <q-tab name="UnAllocatedDevices" label="UnAllocated Devices" slot="title" /> 
-            <q-tab name="FaultyDevices" label="Faulty Devices" slot="title" />
+            <q-tab name="AllocatedDevices" label="Allocated Devices"  />
+            <q-tab name="UnAllocatedDevices" label="UnAllocated Devices"  />
+            <q-tab name="FaultyDevices" label="Faulty Devices"  />
             
               <!-- <div class="col-auto">
             <q-btn

@@ -14,7 +14,7 @@
                     color="grey-9"
                     disable
                     v-model="formData.device"
-                    float-label="Selected device"
+                    label="Selected device"
                      @request="ajaxLoadShortLeadInfo"
                     
                     
@@ -23,20 +23,20 @@
         <div class="col-md-12">
           <div align="center" class="col-md-10 text-light-blue text-h6 q-mb-md">Reason Type</div>
             <q-radio 
-            @blur="$v.formData.leadVerificationStatus.reasonType.$touch"      
-            :error="$v.formData.leadVerificationStatus.reasonType.$error" 
+            @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
+            :error="v$.formData.leadVerificationStatus.reasonType.$error"
             v-model="formData.leadVerificationStatus.reasonType" 
             val="Wrong Device Type" 
-            color="grey-9" 
-            label="Wrong Device Type" 
+            color="grey-9"
+            label="Wrong Device Type"
             />
             <q-radio 
-            @blur="$v.formData.leadVerificationStatus.reasonType.$touch"      
-            :error="$v.formData.leadVerificationStatus.reasonType.$error" 
+            @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
+            :error="v$.formData.leadVerificationStatus.reasonType.$error"
             v-model="formData.leadVerificationStatus.reasonType" 
             val="Others" 
-            color="grey-9" 
-            label="Others" 
+            color="grey-9"
+            label="Others"
             />
             
           </div>
@@ -45,8 +45,8 @@
            <q-input
             type="textarea"
             placeholder="Type Your Reason Here...."
-            @blur="$v.formData.leadVerificationStatus.reason.$touch"      
-            :error="$v.formData.leadVerificationStatus.reason.$error" 
+            @blur="v$.formData.leadVerificationStatus.reason.$touch"
+            :error="v$.formData.leadVerificationStatus.reason.$error"
             class="q-my-md"
             color="grey-9"
             align="left"
@@ -57,7 +57,7 @@
           
          
           <q-btn color="negative" class="q-ma-sm float-right" @click="leadRejectSubmit(formData)" align="right" label="Reject" />
-          <q-btn align="right" color="grey-9" 
+          <q-btn align="right" color="grey-9"
             class="float-right q-ma-sm" @click="emitToggleReject(showRejectLeadModel)">Cancel
           </q-btn>
         </div>
@@ -175,8 +175,8 @@ export default {
     // },
     leadRejectSubmit(formData) {
         // let 
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q

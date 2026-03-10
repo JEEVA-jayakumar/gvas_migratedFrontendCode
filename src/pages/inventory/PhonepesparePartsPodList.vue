@@ -52,15 +52,15 @@
           <!--START: table filter,search -->
           <div class="col-md-5">
             <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.."
-              float-label="Search Using POD Number" class="q-mr-lg q-py-sm" />
+              label="Search Using POD Number" class="q-mr-lg q-py-sm" />
           </div>
           <!--<div class="col-md-5">
            
             <q-btn 
             square 
             outline 
-            color="purple-9" 
-            label="Add New Spare" 
+            color="purple-9"
+            label="Add New Spare"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloadLostOrStolenList()" />

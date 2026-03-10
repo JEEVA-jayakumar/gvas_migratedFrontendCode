@@ -60,7 +60,7 @@
           :props="props"
         >{{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}</q-td>
         <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{props.row.deviceStatusDate | moment("Do MMM Y")}}</span>
+          <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
         </q-td>
         <q-td v-slot:body-cell-action="props" :props="props">
            <q-btn
@@ -89,7 +89,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search Using Device Serial Number/TID"
+              label="Search Using Device Serial Number/TID"
               class="q-mr-lg q-py-sm"
             />
           </div>

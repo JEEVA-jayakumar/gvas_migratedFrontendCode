@@ -56,7 +56,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label= "Search by MID, TID, Merchant Name, MCC,UTR Number, Device Type"
+              label= "Search by MID, TID, Merchant Name, MCC,UTR Number, Device Type"
               class="q-mr-lg q-py-sm"
               />
             </div>
@@ -68,8 +68,8 @@
               v-model="filter_values" 
               placeholder="Select Date"
               class="q-mr-lg q-py-sm "
-              float-label= "Filter By"
-              color="grey-9" 
+              label= "Filter By"
+              color="grey-9"
               />
             </div>
             <div class="col-md-4">
@@ -79,7 +79,7 @@
                 name="Merchant Transaction Level.xls">
                   <q-btn 
                     outline  
-                    color="grey-9" 
+                    color="grey-9"
                     label="Download as Excel"
                     class="q-mr-lg q-py-sm float-right"
                     size="md"

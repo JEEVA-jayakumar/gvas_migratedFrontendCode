@@ -3,9 +3,9 @@
         <div>
             <q-tabs no-pane-border v-model="selectedTab" color="dark" inverted class="shadow-1"
                 @select="goToSelectedTab">
-                <q-tab default color="dark" name="tab-1" slot="title" label="Approved Pod" />
-                <q-tab color="dark" name="tab-2" slot="title" label="Rejected Pod" />
-                <q-tab color="dark" name="tab-3" slot="title" label=" Allocated Pod" />
+                <q-tab default color="dark" name="tab-1"  label="Approved Pod" />
+                <q-tab color="dark" name="tab-2"  label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3"  label=" Allocated Pod" />
 
                 <q-tab-panel name="tab-1">
                     <q-table :rows="tableData" table-class="customSATableClass" :columns="columns"

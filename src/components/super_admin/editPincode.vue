@@ -18,11 +18,11 @@
             <q-input
               @keyup.enter="submitPincode(formData)"
               v-model="formData.pincode"
-              :error="$v.formData.pincode.$error"
+              :error="v$.formData.pincode.$error"
               class="text-weight-regular text-grey-8"
               type="number"
               color="grey-9"
-              float-label="Pincode"
+              label="Pincode"
               placeholder="Pincode"
             />
           </div>
@@ -30,10 +30,10 @@
             <q-input
               @keyup.enter="submitPincode(formData)"
               v-model="formData.stateName"
-              :error="$v.formData.stateName.$error"
+              :error="v$.formData.stateName.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="State name"
+              label="State name"
               placeholder="State name"
             />
           </div>
@@ -41,10 +41,10 @@
             <q-input
               @keyup.enter="submitPincode(formData)"
               v-model="formData.cityName"
-              :error="$v.formData.cityName.$error"
+              :error="v$.formData.cityName.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="City name"
+              label="City name"
               placeholder="City name"
             />
           </div>
@@ -105,8 +105,8 @@ export default {
     },
     //Permission creation final submit
     submitPincode(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({

@@ -11,17 +11,17 @@
               class="shadow-1"
             >
             <!-- <q-btn outline no-caps class="text-weight-regular" label="Allocate to SO" to="PhonepeallocateToSo" /> -->
-              <q-tab default name="Aggregatorspare" label="Spare Parts" slot="title" />
-              <q-tab name="Aggregatorcount" label="Inventory Count" slot="title" />
-              <q-tab name="AggregatorDispatch" label="Disptached Inventory" slot="title" />
-              <q-tab name="AggregatorDamagedDevices" label="Add Damaged Devices" slot="title" />
-              <!-- <q-tab name="AggregatorAllocateToSo" label="Aggregator Allocate To So" slot="title" /> -->
-              <q-tab name="AggregatorAllocatetoso" label="Allocate to So" slot="title" />
+              <q-tab default name="Aggregatorspare" label="Spare Parts"  />
+              <q-tab name="Aggregatorcount" label="Inventory Count"  />
+              <q-tab name="AggregatorDispatch" label="Disptached Inventory"  />
+              <q-tab name="AggregatorDamagedDevices" label="Add Damaged Devices"  />
+              <!-- <q-tab name="AggregatorAllocateToSo" label="Aggregator Allocate To So"  /> -->
+              <q-tab name="AggregatorAllocatetoso" label="Allocate to So"  />
 
-              <q-tab name="AggregatorInventoryWithSo" label="Inventory With So" slot="title" />
+              <q-tab name="AggregatorInventoryWithSo" label="Inventory With So"  />
 
-              <q-tab name="AggregatorAllocateSotoso" label="Allocate SO to SO" slot="title" />
-              <q-tab name="RequestSOList" label="REQUEST" slot="title" />
+              <q-tab name="AggregatorAllocateSotoso" label="Allocate SO to SO"  />
+              <q-tab name="RequestSOList" label="REQUEST"  />
   
               <q-tab-panel name="Aggregatorspare">
                 <AggregatorsInventoryspareParts/>
@@ -30,7 +30,7 @@
               <q-tab-panel name="Aggregatorcount">
                 <AggregatorinventoryCount  />
               </q-tab-panel>
-  
+
               <q-tab-panel name="AggregatorDispatch">
                 <AggregatorDispatchedInventory
                 />
@@ -40,7 +40,7 @@
                 :propDeviceTypes="getAllRegionalInventoryDeviceDetailsWithCount"
               />
             </q-tab-panel>
-  
+
               <q-tab-panel name="AggregatorAllocatetoso">
                 <AggregatorInventoryallocatetoso />
               </q-tab-panel>

@@ -49,64 +49,64 @@
                   </div>
                   <div class="col-md-6">
                     <q-input v-model="formData.addUserDetails.name" 
-                     @blur="$v.formData.addUserDetails.name.$touch"      
+                     @blur="v$.formData.addUserDetails.name.$touch"
                     @keyup.enter="fnSubmitShowAddUser"
-                    :error="$v.formData.addUserDetails.name.$error" 
-                    class="text-weight-regular text-grey-8" color="grey-9" float-label="*Username" placeholder="Username" />
+                    :error="v$.formData.addUserDetails.name.$error"
+                    class="text-weight-regular text-grey-8" color="grey-9" label="*Username" placeholder="Username" />
                   </div>
 
                   <div class="col-md-6">
                     <q-input v-model="formData.addUserDetails.employeeID" 
-                     @blur="$v.formData.addUserDetails.employeeID.$touch"      
+                     @blur="v$.formData.addUserDetails.employeeID.$touch"
                     @keyup.enter="fnSubmitShowAddUser"
-                    :error="$v.formData.addUserDetails.employeeID.$error" 
-                    class="text-weight-regular text-grey-8" color="grey-9" float-label="*Employee ID" placeholder="Employee ID" />
+                    :error="v$.formData.addUserDetails.employeeID.$error"
+                    class="text-weight-regular text-grey-8" color="grey-9" label="*Employee ID" placeholder="Employee ID" />
                   </div>
 
                   <div class="col-md-6">
-                    <q-input v-model="formData.addUserDetails.email" class="text-weight-regular text-grey-8" color="grey-9" 
-                    @blur="$v.formData.addUserDetails.email.$touch"      
+                    <q-input v-model="formData.addUserDetails.email" class="text-weight-regular text-grey-8" color="grey-9"
+                    @blur="v$.formData.addUserDetails.email.$touch"
                     @keyup.enter="fnSubmitShowAddUser"
-                    :error="$v.formData.addUserDetails.email.$error" 
-                    float-label="*Email" placeholder="Email" />
+                    :error="v$.formData.addUserDetails.email.$error"
+                    label="*Email" placeholder="Email" />
                   </div>
 
                   <div class="col-md-6">
                     <q-input v-model="formData.addUserDetails.contactNumber" 
-                      @blur="$v.formData.addUserDetails.contactNumber.$touch"      
+                      @blur="v$.formData.addUserDetails.contactNumber.$touch"
                     @keyup.enter="fnSubmitShowAddUser"
-                    :error="$v.formData.addUserDetails.contactNumber.$error" 
-                    class="text-weight-regular text-grey-8" color="grey-9" float-label="*Contact Number" placeholder="Contact Number" />
+                    :error="v$.formData.addUserDetails.contactNumber.$error"
+                    class="text-weight-regular text-grey-8" color="grey-9" label="*Contact Number" placeholder="Contact Number" />
                   </div>
 
                   <div class="col-md-6">
                     <q-input v-model="formData.addUserDetails.alternateContactNumber"
-                     @blur="$v.formData.addUserDetails.alternateContactNumber.$touch"      
+                     @blur="v$.formData.addUserDetails.alternateContactNumber.$touch"
                     @keyup.enter="fnSubmitShowAddUser"
-                    :error="$v.formData.addUserDetails.alternateContactNumber.$error" 
-                     class="text-weight-regular text-grey-8" color="grey-9" float-label="Alt Contact Number" placeholder="Alt Contact Number" />
+                    :error="v$.formData.addUserDetails.alternateContactNumber.$error"
+                     class="text-weight-regular text-grey-8" color="grey-9" label="Alt Contact Number" placeholder="Alt Contact Number" />
                   </div>
 
                   <div class="col-md-6">
                     <q-input v-model="formData.addUserDetails.userAddress"
-                     @blur="$v.formData.addUserDetails.userAddress.$touch"      
+                     @blur="v$.formData.addUserDetails.userAddress.$touch"
                     @keyup.enter="fnSubmitShowAddUser"
-                    :error="$v.formData.addUserDetails.userAddress.$error" 
-                     class="text-weight-regular text-grey-8" color="grey-9" float-label="*Address" placeholder="Address" />
+                    :error="v$.formData.addUserDetails.userAddress.$error"
+                     class="text-weight-regular text-grey-8" color="grey-9" label="*Address" placeholder="Address" />
                   </div>
 
                   <div class="col-md-6">
                     <q-input v-model="formData.addUserDetails.city" 
-                     @blur="$v.formData.addUserDetails.city.$touch"      
+                     @blur="v$.formData.addUserDetails.city.$touch"
                     @keyup.enter="fnSubmitShowAddUser"
-                    :error="$v.formData.addUserDetails.city.$error" 
-                    class="text-weight-regular text-grey-8" color="grey-9" float-label="*City" placeholder="City" />
+                    :error="v$.formData.addUserDetails.city.$error"
+                    class="text-weight-regular text-grey-8" color="grey-9" label="*City" placeholder="City" />
                   </div>
 
                   <div class="col-md-6">
                     <q-select
                       v-model="formData.addUserDetails.state.id"
-                      float-label="*State"
+                      label="*State"
                       radio
                       class="text-weight-regular text-grey-8" color="grey-9"
                       :options="propGetAllStatesData"
@@ -124,8 +124,8 @@
                   <div v-for="propFilterRole in propFilterRoles" :key="propFilterRole.value">
                       <q-checkbox 
                       v-model="formData.addUserDetails.tempRoles" 
-                      @change="$v.formData.formData.addUserDetails.tempRoles.$touch()"
-                      :error="$v.formData.addUserDetails.tempRoles.$error" 
+                      @change="v$.formData.formData.addUserDetails.tempRoles.$touch()"
+                      :error="v$.formData.addUserDetails.tempRoles.$error"
                       :val="propFilterRole.label" 
                       color="purple-9">
                       <q-chip color="blue-grey-2" class="text-weight-regular text-grey-8">
@@ -134,7 +134,7 @@
                     </q-checkbox>
                   </div>  
                   <div class="col-md-12 text-red text-weight-medium text-caption"
-                  v-if="!$v.formData.addUserDetails.tempRoles.required">*Role is mandatory</div>
+                  v-if="!v$.formData.addUserDetails.tempRoles.required">*Role is mandatory</div>
                 </div>
               </div>
 
@@ -264,9 +264,9 @@ export default {
     },
 
     fnSubmitShowAddUser(showEditUser) {
-      this.$v.formData.addUserDetails.$touch();
+      this.v$.formData.addUserDetails.$touch();
 
-      if (this.$v.formData.addUserDetails.$error) {
+      if (this.v$.formData.addUserDetails.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         let arr = [];

@@ -50,7 +50,7 @@
                   color="grey-9"
                   v-model="filter"
                   placeholder="Type.."
-                  float-label="Search by SO name, Merchant Name, Lead ID"
+                  label="Search by SO name, Merchant Name, Lead ID"
                   class="q-ma-xs"
                 />
               </div>
@@ -59,7 +59,7 @@
                   placeholder="Select .."
                   color="grey-9"
                   v-model="formData.userId"
-                  float-label="Choose a user from below"
+                  label="Choose a user from below"
                   :options="[]"
                   class="q-ma-xs"
                 />

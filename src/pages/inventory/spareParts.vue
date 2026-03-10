@@ -10,8 +10,8 @@
             inverted
             class="shadow-1"
           >
-            <q-tab name="sparePartsInventory" label="Spare Parts Inventory" slot="title" />
-             <q-tab name="sparePodList" label="Spare Pod List" slot="title" />
+            <q-tab name="sparePartsInventory" label="Spare Parts Inventory"  />
+             <q-tab name="sparePodList" label="Spare Pod List"  />
             
             <q-tab-panel name="sparePartsInventory">
               <sparePartsAddStocks

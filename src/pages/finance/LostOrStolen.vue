@@ -10,15 +10,15 @@
               inverted
               class="shadow-1"
             >
-              <q-tab default name="internal" label="Bijlipay Lost Or Stolen" slot="title" />
-              <!-- <q-tab name="spareSo" label="Spare Parts So" slot="title" /> -->
-              <q-tab name="external" label="Phonepe Lost Or Stolen" slot="title" />
+              <q-tab default name="internal" label="Bijlipay Lost Or Stolen"  />
+              <!-- <q-tab name="spareSo" label="Spare Parts So"  /> -->
+              <q-tab name="external" label="Phonepe Lost Or Stolen"  />
              
              
               <q-tab-panel name="internal">
                 <LostFinance/>
               </q-tab-panel>
-             
+
               <q-tab-panel name="external">
                 <PhonePeFinanceLostOrStolen/>
               </q-tab-panel>

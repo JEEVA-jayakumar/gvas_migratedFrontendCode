@@ -15,11 +15,11 @@
           <div>
             <q-input
               v-model="formData.deviceName"
-              @blur="$v.formData.deviceName.$touch"
-              :error="$v.formData.deviceName.$error"
+              @blur="v$.formData.deviceName.$touch"
+              :error="v$.formData.deviceName.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Device Type"
+              label="Device Type"
               placeholder="Device Type"
             />
           </div>
@@ -28,10 +28,10 @@
               <div class="col">
                 <q-color
                   v-model="formData.colorCode"
-                  @blur="$v.formData.colorCode.$touch"
-                  :error="$v.formData.colorCode.$error"
+                  @blur="v$.formData.colorCode.$touch"
+                  :error="v$.formData.colorCode.$error"
                   popover
-                  float-label="Choose a role color"
+                  label="Choose a role color"
                   color="grey-9"
                 />
               </div>
@@ -44,18 +44,18 @@
             <q-input
               v-model="formData.serialNumberLength"
               type="number"
-              @blur="$v.formData.serialNumberLength.$touch"
-              :error="$v.formData.serialNumberLength.$error"
+              @blur="v$.formData.serialNumberLength.$touch"
+              :error="v$.formData.serialNumberLength.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Serial Number Length"
+              label="Serial Number Length"
               placeholder="Serial Number Length"
             />
           </div>
           <div>
             <q-radio v-for="(item, index) in device.flagOptions" :key="index" color="grey-9" v-model.trim="formData.isDevice"
-            @blur="$v.formData.isDevice.$touch"
-              :error="$v.formData.isDevice.$error"
+            @blur="v$.formData.isDevice.$touch"
+              :error="v$.formData.isDevice.$error"
           :val="item.value" :label="item.label" />
           </div>
           <div class="group" align="right">
@@ -143,8 +143,8 @@ export default {
       this.$emit("emitfnForDeviceTypeTable");
     },
     fnfinalsubmitDeviceType(requestParams) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();

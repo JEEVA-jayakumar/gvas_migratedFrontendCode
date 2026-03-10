@@ -15,32 +15,32 @@
           <!-- <q-td
             v-slot:body-cell-createdAt="props"
             :props="props"
-          >{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+          >{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
           <q-td
             v-slot:body-cell-receivedAt="props"
             :props="props"
-          >{{ props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+          >{{ $moment_format(props.row.receivedAt, "Do MMM Y") }}</q-td>
   
           <q-td
             v-slot:body-cell-receivedAt="props"
             :props="props"
-          >{{ props.row.receivedAt ==null? "NA" : props.row.receivedAt | moment("Do MMM Y") }}</q-td>
+          >{{ $moment_format(props.row.receivedAt ==null? "NA" : props.row.receivedAt, "Do MMM Y") }}</q-td>
           <q-td
             v-slot:body-cell-DeviceList="props"
             :props="props"
-          >{{ props.row.device.createDate | moment("Do MMM Y") }}</q-td>
+          >{{ $moment_format(props.row.device.createDate, "Do MMM Y") }}</q-td>
           <q-td
             v-slot:body-cell-ModifyDate="props"
             :props="props"
-          >{{ props.row.device.modifyDate | moment("Do MMM Y") }}</q-td>-->
+          >{{ $moment_format(props.row.device.modifyDate, "Do MMM Y") }}</q-td>-->
           <q-td
             v-slot:body-cell-created_at="props"
             :props="props"
-          >{{ props.row.created_at ==null? "NA" : props.row.created_at | moment("Do MMM Y") }}</q-td>
+          >{{ $moment_format(props.row.created_at ==null? "NA" : props.row.created_at, "Do MMM Y") }}</q-td>
           <q-td
             v-slot:body-cell-updated_at="props"
             :props="props"
-          >{{ props.row.updated_at ==null? "NA" : props.row.updated_at | moment("Do MMM Y") }}</q-td>
+          >{{ $moment_format(props.row.updated_at ==null? "NA" : props.row.updated_at, "Do MMM Y") }}</q-td>
           <template v-slot:top="props">
             <div class="col-md-5">
               <q-input
@@ -49,7 +49,7 @@
                 separator
                 color="grey-9"
                 placeholder="Type.."
-                float-label="Pod Number, Device Type"
+                label="Pod Number, Device Type"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -58,8 +58,8 @@
               <q-btn 
               square 
               outline 
-              color="purple-9" 
-              label="Download as Excel" 
+              color="purple-9"
+              label="Download as Excel"
               class="q-mr-lg q-py-sm float-right" 
               size="md" 
               @click="downloadInventoryWithSoList()" />
@@ -71,7 +71,7 @@
                       color="grey-9"
                       v-model="filterSearch"
                       placeholder="Type.."
-                      float-label="Search .."
+                      label="Search .."
                       class="q-mr-lg q-py-sm"
               />-->
               <!-- <div class="col-md-5">

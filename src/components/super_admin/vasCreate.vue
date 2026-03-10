@@ -18,11 +18,11 @@
             <div class="col-md-12">
               <q-input
                 v-model="formData.name"
-                @blur="$v.formData.name.$touch"
-                :error="$v.formData.name.$error"
+                @blur="v$.formData.name.$touch"
+                :error="v$.formData.name.$error"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"
-                float-label="Enter VAS"
+                label="Enter VAS"
                 placeholder="Enter VAS"
                 @keyup.enter="submitLeadSourceData(formData)"
               />
@@ -30,11 +30,11 @@
             <div class="col-md-12">
             <q-input
               v-model="formData.vasCode"
-              @blur="$v.formData.vasCode.$touch"
-              :error="$v.formData.vasCode.$error"
+              @blur="v$.formData.vasCode.$touch"
+              :error="v$.formData.vasCode.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
-              float-label="Enter VAS Code"
+              label="Enter VAS Code"
               placeholder="Enter VAS Code"
               @keyup.enter="submitLeadSourceData(formData)"
               
@@ -112,8 +112,8 @@
         this.$emit("emitfnshowVas");
       },
       submitVasData(request) {
-        this.$v.formData.$touch();
-        if (this.$v.formData.$error) {
+        this.v$.formData.$touch();
+        if (this.v$.formData.$error) {
         } else {
           this.$q.loading.show({
             delay: 100, // ms

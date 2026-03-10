@@ -14,7 +14,7 @@
         <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
       <!--START: table title -->
       <!-- <div class="col-md-4">
-        <q-select color="grey-9" v-model="aggregator" float-label="Select Aggregator" radio
+        <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
           :options="aggregatorOptions" @input="getaggregator" />
       </div> -->
       <!--END: table title -->
@@ -50,7 +50,7 @@
               <q-td auto-width key="serialNumber" :props="props">{{
                 props.row.serialNumber
               }}</q-td>
-              <q-td auto-width key="updated_at" :props="props">{{ props.row.updatedAt ==null? "NA" : props.row.updatedAt | moment("Do MMM Y") }}</q-td>
+              <q-td auto-width key="updated_at" :props="props">{{ $moment_format(props.row.updatedAt ==null? "NA" : props.row.updatedAt, "Do MMM Y") }}</q-td>
               <q-td auto-width key="action" :props="props">
                 <q-btn
                   highlight
@@ -82,7 +82,7 @@
                 color="grey-9"
                 v-model="filterSearch"
                 placeholder="Type.."
-                float-label="Search Using Device Serial Number"
+                label="Search Using Device Serial Number"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -100,8 +100,8 @@
             <q-btn 
             square 
             outline 
-            color="purple-9" 
-            label="Download as Excel" 
+            color="purple-9"
+            label="Download as Excel"
             class="q-mr-lg q-py-sm float-right" 
             size="md" 
             @click="downloadAggregatorsSendToRepair()" />

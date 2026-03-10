@@ -3,7 +3,7 @@
     <div>
         <!-- <div class="row bottom-border q-px-md q-py-sm items-center">
             <div class="col-md-4">
-                <q-select color="grey-9" v-model="formData.aggregator" float-label="Select Aggregator" radio
+                <q-select color="grey-9" v-model="formData.aggregator" label="Select Aggregator" radio
                     :options="dropdDown.aggregatorOptions" @input="selectedAggregators" />
             </div>
 

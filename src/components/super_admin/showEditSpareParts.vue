@@ -20,20 +20,20 @@
                         <q-input
                           disable
                           v-model="formData.id"   
-                          :error="$v.formData.id.$error" 
+                          :error="v$.formData.id.$error"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Spare Parts Id" 
+                          color="grey-9"
+                          label="Spare Parts Id"
                           placeholder="Spare Parts Id" 
                         />
                     </div>
                     <div class="col-md-12">
                         <q-input
                           v-model="formData.spare_parts_types"   
-                          :error="$v.formData.spare_parts_types.$error" 
+                          :error="v$.formData.spare_parts_types.$error"
                           class="text-weight-regular text-grey-8" 
-                          color="grey-9" 
-                          float-label="Spare Parts Id" 
+                          color="grey-9"
+                          label="Spare Parts Id"
                           placeholder="Spare Parts Id" 
                         />
                     </div>
@@ -104,8 +104,8 @@ export default {
     //   console.log("BEFORE FUNCTION DATAS=---------------------->"+JSON.stringify(this.formData.regionGroupName))
     // },
     fnfinalsubmitEditedSpareParts(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show();

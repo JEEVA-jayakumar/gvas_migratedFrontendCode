@@ -2,8 +2,8 @@
     <q-page>
       <div>
         <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" >
-           <q-tab @select="ajaxSpareData" default  color="dark" name="tab-3" slot="title" label="Active Service Resolution Remarks" />
-            <q-tab  color="dark" name="tab-4" slot="title" label="Deactive Service Resolution Remarks" />
+           <q-tab @select="ajaxSpareData" default  color="dark" name="tab-3"  label="Active Service Resolution Remarks" />
+            <q-tab  color="dark" name="tab-4"  label="Deactive Service Resolution Remarks" />
           <q-tab-panel name="tab-3">
             <q-table 
             :rows="ActivetableData"
@@ -15,12 +15,8 @@
             row-key="name" 
             color="grey-9"
             >
-              <q-td v-slot:body-cell-createdAt="props" :props="props">{{
-                  props.row.createdAt | moment("Do MMM Y")
-              }}</q-td>
-              <q-td v-slot:body-cell-updatedAt="props" :props="props">{{
-                  props.row.updatedAt | moment("Do MMM Y")
-              }}</q-td>
+              <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
+              <q-td v-slot:body-cell-updatedAt="props" :props="props">{{ $moment_format(props.row.updatedAt, "Do MMM Y") }}</q-td>
   
               <q-td v-slot:body-cell-action1="props" :props="props">
                 <div class="row no-wrap no-padding">
@@ -53,12 +49,8 @@
             row-key="name" 
             color="grey-9"
             >
-              <q-td v-slot:body-cell-createdAt="props" :props="props">{{
-                  props.row.createdAt | moment("Do MMM Y")
-              }}</q-td>
-              <q-td v-slot:body-cell-updatedAt="props" :props="props">{{
-                  props.row.updatedAt | moment("Do MMM Y")
-              }}</q-td>
+              <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment_format(props.row.createdAt, "Do MMM Y") }}</q-td>
+              <q-td v-slot:body-cell-updatedAt="props" :props="props">{{ $moment_format(props.row.updatedAt, "Do MMM Y") }}</q-td>
   
               <q-td v-slot:body-cell-action2="props" :props="props">
                 <div class="row no-wrap no-padding">

@@ -29,12 +29,12 @@
           <div class="col-md-6">
             <q-select
               clearable
-              float-label="Select QR API"
+              label="Select QR API"
               v-model.trim="formdata.leadSource"
               color="grey-9"
               :options="dropDown.leadSourceOptions"
             />
-            <!--   :error="$v.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata.leadSource.$error" -->
           </div>
         </div>
         <br />
@@ -53,11 +53,11 @@
               type="number"
               onkeydown="javascript: return event.keyCode === 8 ||
               event.keyCode === 46 ? true : !isNaN(Number(event.key))"
-              float-label="Enter numbers of QR count"
+              label="Enter numbers of QR count"
               v-model.trim="formdata.count"
               color="grey-9"
             />
-            <!-- :error="$v.formdata.count.$error" -->
+            <!-- :error="v$.formdata.count.$error" -->
           </div>
         </div>
         <div class="row group">
@@ -156,7 +156,7 @@ export default {
       });
     },
     fnsubmit(request) {
-      this.$v.formdata.$touch();
+      this.v$.formdata.$touch();
       // if (this.formdata.leadSource == "" && this.formdata.count == "") {
       //   this.$q.notify("Please enter all fields");
       // } else {

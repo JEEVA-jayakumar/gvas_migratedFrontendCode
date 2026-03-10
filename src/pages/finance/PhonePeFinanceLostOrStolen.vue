@@ -37,7 +37,7 @@
             'NA' : props.row.leadInformation.leadAddress
         }}</q-td>
         <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{ props.row.deviceStatusDate | moment("Do MMM Y") }}</span>
+          <span class="label">{{ $moment_format(props.row.deviceStatusDate, "Do MMM Y") }}</span>
         </q-td>
         <q-td v-slot:body-cell-action="props" :props="props">
           <q-btn highlight push class="q-mx-sm" color="positive" @click="openReject(props.row)" size="sm">Reject</q-btn>
@@ -47,7 +47,7 @@
           <!--START: table filter,search,excel download -->
           <div class="col-5">
             <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
-              float-label="Search Using Device Serial Number/TID" class="q-mr-lg q-py-sm" />
+              label="Search Using Device Serial Number/TID" class="q-mr-lg q-py-sm" />
           </div>
         </template>
       </q-table>

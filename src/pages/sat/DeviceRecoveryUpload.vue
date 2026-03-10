@@ -10,16 +10,16 @@
       <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <!--START: table title -->
         <!-- <div class="col-md-4">
-          <q-select color="grey-9" v-model="formData.aggregator" float-label="Select Aggregator" radio
+          <q-select color="grey-9" v-model="formData.aggregator" label="Select Aggregator" radio
             :options="dropdDown.aggregatorOptions" @input="getaggregator" />
         </div> -->
         <div class="col-md-4">
           <!-- <pre>{{tempTableData}}</pre>  ref="clickHeretoStartParent"  ref="clickHeretoStartChild"      -->
-          <q-select v-model="formData.device.id" float-label="Select Device Type" radio color="grey-9"
+          <q-select v-model="formData.device.id" label="Select Device Type" radio color="grey-9"
             :options="deviceOptions" />
         </div>
         <div class="col-md-4">
-          <q-select :disabled="formData.device.id == ''" v-model="action" float-label="Select Device Status" radio
+          <q-select :disabled="formData.device.id == ''" v-model="action" label="Select Device Status" radio
             color="grey-9" :options="actionOptions" @input="fnDisableDeviceTypeSelection" />
         </div>
         <!-- Final upload button toggle -->
@@ -41,7 +41,7 @@
         <template slot="top">
           <!--START: table filter,search -->
           <div class="col-md-5">
-            <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." float-label="Search .."
+            <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search .."
               class="q-mr-lg q-py-sm" />
           </div>
           <!--END: table filter,search -->
