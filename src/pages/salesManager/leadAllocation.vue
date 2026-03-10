@@ -12,21 +12,21 @@
             <div class="row group">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
-                  @blur="$v.formData.leadName.$touch"
-                  :error="$v.formData.leadName.$error"
+                  @blur="v$.formData.leadName.$touch"
+                  :error="v$.formData.leadName.$error"
                   color="grey-9"
                   v-model="formData.leadName"
-                  float-label="Merchant Name*"
+                  label="Merchant Name*"
                   placeholder="Merchant Name"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
                   color="grey-9"
-                  @blur="$v.formData.contactName.$touch"
-                  :error="$v.formData.contactName.$error"
+                  @blur="v$.formData.contactName.$touch"
+                  :error="v$.formData.contactName.$error"
                   v-model="formData.contactName"
-                  float-label="Contact Name*"
+                  label="Contact Name*"
                   placeholder="Contact Name"
                 />
               </div>
@@ -35,69 +35,70 @@
                   color="grey-9"
                  
                   v-model="formData.email"
-                  float-label="Email"
+                  label="Email"
                   placeholder="Email"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
                   color="grey-9"
-                  @blur="$v.formData.contactNumber.$touch"
-                  :error="$v.formData.contactNumber.$error"
+                  @blur="v$.formData.contactNumber.$touch"
+                  :error="v$.formData.contactNumber.$error"
                   v-model="formData.contactNumber"
                   type="number"
-                  float-label="Contact Number*"
+                  label="Contact Number*"
                   placeholder="Contact Number"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
                   color="grey-9"
-                  @blur="$v.formData.alternateContactNumber.$touch"
-                  :error="$v.formData.alternateContactNumber.$error"
+                  @blur="v$.formData.alternateContactNumber.$touch"
+                  :error="v$.formData.alternateContactNumber.$error"
                   v-model="formData.alternateContactNumber"
                   type="number"
-                  float-label="Alternate Contact Number"
+                  label="Alternate Contact Number"
                   placeholder="Alternate Contact Number"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
                   color="grey-9"
-                  @blur="$v.formData.leadAddress.$touch"
-                  :error="$v.formData.leadAddress.$error"
+                  @blur="v$.formData.leadAddress.$touch"
+                  :error="v$.formData.leadAddress.$error"
                   v-model="formData.leadAddress"
-                  float-label="Merchant Address"
+                  label="Merchant Address"
                   placeholder="Merchant Address"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <q-input
-                  type="number"
-                  :error="$v.formData.pincodeObj.$error"
+                <q-select
+                  placeholder="Select Pincode"
+                  use-input
+                  fill-input
+                  hide-selected
+                  @filter="pincodeSearch"
                   clearable
-                  @clear="fnClearStateCity"
                   color="grey-9"
-                  v-model.trim="formData.pincodeObj"
-                  float-label="Pincode"
-                  placeholder="Pincode"
-                >
-                  <q-autocomplete
-                    @search="pincodeSearch"
-                    :debounce="500"
-                    :min-characters="1"
-                    @selected="pincodeSelected"
-                  />
-                </q-input>
+                  @blur="v$.formData.pincodeObj.$touch"
+                  :error="v$.formData.pincodeObj.$error"
+                  v-model="formData.pincodeObj"
+                  @update:model-value="pincodeSelected"
+                  @clear="fnClearStateCity"
+                  label="Pincode"
+                  :options="pincodeOptions"
+                  emit-value
+                  map-options
+                />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
                   disable
                   color="grey-9"
-                  @blur="$v.formData.city.$touch"
-                  :error="$v.formData.city.$error"
+                  @blur="v$.formData.city.$touch"
+                  :error="v$.formData.city.$error"
                   v-model="formData.city"
-                  float-label="City/Town"
+                  label="City/Town"
                   placeholder="Merchant Address"
                 />
               </div>
@@ -105,10 +106,10 @@
                 <q-input
                   disable
                   color="grey-9"
-                  @blur="$v.formData.state.$touch"
-                  :error="$v.formData.state.$error"
+                  @blur="v$.formData.state.$touch"
+                  :error="v$.formData.state.$error"
                   v-model="formData.state"
-                  float-label="State"
+                  label="State"
                   placeholder="State"
                 />
               </div>
@@ -118,95 +119,101 @@
             <div class="row group">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
-                  @input="fnAjaxRequestPopulateDeviceListData"
+                  @update:model-value="fnAjaxRequestPopulateDeviceListData"
                   color="grey-9"
-                  @blur="$v.formData.leadSource.id.$touch"
-                  :error="$v.formData.leadSource.id.$error"
+                  @blur="v$.formData.leadSource.id.$touch"
+                  :error="v$.formData.leadSource.id.$error"
                   v-model="formData.leadSource.id"
-                  float-label="Lead Source*"
+                  label="Lead Source*"
                   placeholder="Lead Source"
-                  radio
                   :options="leadSourceOptions"
+                  emit-value
+                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
                   color="grey-9"
-                  @blur="$v.formData.device.id.$touch"
-                  :error="$v.formData.device.id.$error"
+                  @blur="v$.formData.device.id.$touch"
+                  :error="v$.formData.device.id.$error"
                   v-model="formData.device.id"
-                  float-label="Device Type"
-                  radio
+                  label="Device Type"
                   :disable="isDeviceTypeSelectionDisabled"
                   :options="deviceTypeOptions"
+                  emit-value
+                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
                   type="number"
                   color="grey-9"
-                  @blur="$v.formData.deviceCount.$touch"
-                  :error="$v.formData.deviceCount.$error"
+                  @blur="v$.formData.deviceCount.$touch"
+                  :error="v$.formData.deviceCount.$error"
                   v-model="formData.deviceCount"
-                  float-label="Device Count*"
+                  label="Device Count*"
                   placeholder="Device Count"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12" v-show="enableRSMdropdown">
                 <q-select
-                  @input="fnGetAllUsersByHidUidRSM"
+                  @update:model-value="fnGetAllUsersByHidUidRSM"
                   color="grey-9"
                   v-model="currentAssingedToRSM"
                   placeholder="--RSM--"
-                  stack-label="Select RSM"
-                  radio
+                  label="Select RSM"
                   :disable="assignToOptionsRSM.length > 0 ? false:true"
                   :options="assignToOptionsRSM"
+                  emit-value
+                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12" v-show="enableASMdropdown">
                 <q-select
-                  @input="fnGetAllUsersByHidUidASM"
+                  @update:model-value="fnGetAllUsersByHidUidASM"
                   color="grey-9"
                   v-model="currentAssingedToASM"
                   placeholder="--ASM--"
-                  stack-label="Select ASM"
-                  radio
+                  label="Select ASM"
                   :disable="assignToOptionsASM.length > 0 ? false:true"
                   :options="assignToOptionsASM"
+                  emit-value
+                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
-                  @input="fnGetAllUsersByHidUidTL"
+                  @update:model-value="fnGetAllUsersByHidUidTL"
                   color="grey-9"
                   v-model="assignTo"
                   placeholder="--TL--"
-                  stack-label="Select TL"
-                  radio
+                  label="Select TL"
                   :disable="assignToOptionsTL.length > 0 ? false:true"
                   :options="assignToOptionsTL"
+                  emit-value
+                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
-                  filter
+                  use-input
                   clearable
                   color="grey-9"
-                  @blur="$v.formData.assignedTo.id.$touch"
-                  :error="$v.formData.assignedTo.id.$error"
+                  @blur="v$.formData.assignedTo.id.$touch"
+                  :error="v$.formData.assignedTo.id.$error"
                   v-model="formData.assignedTo.id"
                   placeholder="--SO--"
-                  stack-label="Select SO"
-                  radio
+                  label="Select SO"
                   :disable="assignToOptionsSO.length > 0 ? false:true"
                   :options="assignToOptionsSO"
+                  emit-value
+                  map-options
                 />
               </div>
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row q-mt-md">
           <div class="col-md-4 col-sm-4 col-xs-12">
             <q-btn color="dark" @click="fnFinalSubmit(formData)" label="Assign"/>
           </div>
@@ -224,7 +231,6 @@ import {
   maxLength,
   maxValue,
   minValue,
-  alphaNum,
   email
 } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
@@ -253,20 +259,6 @@ export default {
       currentAssingedToTL: null,
       assignToOptionsSO: [],
       currentAssingedToSO: null,
-      assignToOptions: [
-        {
-          label: "Foo",
-          value: 1
-        },
-        {
-          label: "Bar",
-          value: 2
-        },
-        {
-          label: "Ipsum",
-          value: 3
-        }
-      ],
       leadSourceOptions: [],
       deviceTypeOptions: [],
       pincodeOptions: [],
@@ -306,10 +298,6 @@ export default {
       leadAddress: {
         required
       },
-      // email: {
-      //   required,
-      //   email
-      // },
       contactName: {
         required
       },
@@ -372,32 +360,56 @@ export default {
       "getAllUserByIdAndHierarchyIdData"
     ]),
     ...mapGetters("SuperAdminUsers", ["getAllStatesData"]),
-    ...mapGetters("BankOpsShortLead", ["getSelectOptionsLeadSourceInfo"])
+    ...mapGetters("BankOpsShortLead", ["getSelectOptionsLeadSourceInfo"]),
+
+    identifySalesHierarchyRole() {
+      let self = this;
+      /* Hierachy sales values has been taken from gloabl variables from plugin */
+      const userInfoString = localStorage.getItem("u_i");
+      if (!userInfoString) return null;
+      const userInfo = JSON.parse(userInfoString);
+      if (!userInfo || !userInfo.roles) return null;
+      return _.find(userInfo.roles, function(
+        oo
+      ) {
+        return oo.hierarchy.hierarchyCode.includes(self.$HIERARCHY_SALES);
+      });
+    }
   },
 
   methods: {
     COMMON_FILTER_FUNCTION(arraySet, terms) {
       return _.filter(arraySet, function (oo) {
-        return oo.label.toString().includes(terms.toLowerCase());
+        return oo.label.toString().toLowerCase().includes(terms.toLowerCase());
       });
     },
     /* Pincode search result */
-    pincodeSearch(terms, done) {
-      this.formData.cityName = "";
-      this.formData.stateName = "";
-      this.FETCH_PINCODE_WITH_TERM(terms)
+    pincodeSearch(val, update) {
+      if (val.length < 1) {
+        update(() => {
+          this.pincodeOptions = [];
+        });
+        return;
+      }
+      this.FETCH_PINCODE_WITH_TERM(val)
         .then(() => {
-          done(this.COMMON_FILTER_FUNCTION(this.getAllStatesData, terms));
+          update(() => {
+            this.pincodeOptions = this.COMMON_FILTER_FUNCTION(this.getAllStatesData, val);
+          });
         })
         .catch(() => {
-          done([]);
+          update(() => {
+            this.pincodeOptions = [];
+          });
         });
     },
     pincodeSelected(item) {
-      this.formData.state = item.value.stateName;
-      this.formData.city = item.value.cityName;
-      this.formData.pincode = item.value.pincode;
-      this.formData.pincodeObj = item.value.pincode;
+      if (item && item.value) {
+        this.formData.state = item.value.stateName;
+        this.formData.city = item.value.cityName;
+        this.formData.pincode = item.value.pincode;
+        this.formData.pincodeObj = item.label;
+      }
     },
     /* Pincode search result */
     ...mapActions("SuperAdminUsers", ["FETCH_ALL_STATES_DATA", "FETCH_PINCODE_WITH_TERM"]),
@@ -410,18 +422,6 @@ export default {
       "UPDATE_SHORT_LEAD_SALES_INFO"
     ]),
 
-    identifySalesHierarchyRole() {
-      let self = this;
-      /* Hierachy sales values has been taken from gloabl variables from plugin */
-      const userInfo = JSON.parse(localStorage.getItem("u_i"));
-      if (!userInfo || !userInfo.roles) return null;
-      return _.find(userInfo.roles, function(
-        oo
-      ) {
-        return oo.hierarchy.hierarchyCode.includes(self.$HIERARCHY_SALES);
-      });
-    },
-
     //  Function to populate all lead allocation tracker
     fnAjaxRequestPopulateTrackerData() {
       let self = this;
@@ -430,11 +430,12 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data.."
       });
+      const userInfo = JSON.parse(localStorage.getItem("u_i"));
       this.FETCH_ALL_STATES_DATA()
         .then(() => {
           this.FETCH_USERS_BY_USER_ID({
             hierarchy: { id: this.identifySalesHierarchyRole.hierarchy.id },
-            user: { id: JSON.parse(localStorage.getItem("u_i")).user.id }
+            user: { id: userInfo.user.id }
           }).then(response => {
               if (self.getAllUserByIdAndHierarchyIdData.length == 0) {
                 this.$q.notify({
@@ -473,8 +474,6 @@ export default {
                   self.enableASMdropdown = false;
                   self.assignToOptionsTL = assumeArr;
                 }
-                // Assingnment to disable == false select box
-                // self.isDeviceTypeSelectionDisabled = false;
               }
             }).then(response => {
               this.FETCH_ALL_LEAD_SOURCE_DATA().then(response => {
@@ -492,7 +491,7 @@ export default {
         .catch(error => {
           this.$q.loading.hide();
           // if any issues throw the below error
-          if (error.status == this.$API_SUCCESS) {
+          if (error?.status == this.$API_SUCCESS) {
             this.$q.notify({
               color: "primary",
               position: "bottom",
@@ -503,7 +502,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error?.body?.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           }
@@ -534,7 +533,7 @@ export default {
         })
         .catch(error => {
           // if any issues throw the below error
-          if (error.status == this.$API_SUCCESS) {
+          if (error?.status == this.$API_SUCCESS) {
             this.$q.notify({
               color: "primary",
               position: "bottom",
@@ -545,7 +544,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error?.body?.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           }
@@ -555,21 +554,25 @@ export default {
 
     // Function to popluate state and city based on pincode
     fnPopulateStateCity(value) {
-      this.formData.pincode = value.pincode;
-      this.formData.state = value.stateName;
-      this.formData.city = value.cityName;
+      if (value) {
+        this.formData.pincode = value.pincode;
+        this.formData.state = value.stateName;
+        this.formData.city = value.cityName;
+      }
     },
 
     //Function clear city and state when pincode is cleared
     fnClearStateCity() {
       this.formData.state = "";
       this.formData.city = "";
+      this.formData.pincode = null;
+      this.formData.pincodeObj = null;
     },
 
     // Function to create new lead and allocate
     fnFinalSubmit(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({
@@ -593,7 +596,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error?.body?.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });
@@ -603,6 +606,7 @@ export default {
     //Start >> Functions to populate ASM/TL/SO
     // function to populate ASM
     fnGetAllUsersByHidUidRSM(request) {
+      if (!request) return;
       this.$q.loading.show({
         delay: 0, // ms
         spinnerColor: "purple-9",
@@ -634,7 +638,7 @@ export default {
         })
         .catch(error => {
           // if any issues throw the below error
-          if (error.status == this.$API_SUCCESS) {
+          if (error?.status == this.$API_SUCCESS) {
             this.$q.notify({
               color: "primary",
               position: "bottom",
@@ -645,7 +649,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error?.body?.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           }
@@ -654,6 +658,7 @@ export default {
     },
     // function to populate TL
     fnGetAllUsersByHidUidASM(request) {
+      if (!request) return;
       this.$q.loading.show({
         delay: 0, // ms
         spinnerColor: "purple-9",
@@ -684,7 +689,7 @@ export default {
         })
         .catch(error => {
           // if any issues throw the below error
-          if (error.status == this.$API_SUCCESS) {
+          if (error?.status == this.$API_SUCCESS) {
             this.$q.notify({
               color: "primary",
               position: "bottom",
@@ -695,7 +700,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error?.body?.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           }
@@ -705,6 +710,7 @@ export default {
 
     // function to populate SO
     fnGetAllUsersByHidUidTL(request) {
+      if (!request) return;
       this.$q.loading.show({
         delay: 0, // ms
         spinnerColor: "purple-9",
@@ -734,7 +740,7 @@ export default {
         })
         .catch(error => {
           // if any issues throw the below error
-          if (error.status == this.$API_SUCCESS) {
+          if (error?.status == this.$API_SUCCESS) {
             this.$q.notify({
               color: "primary",
               position: "bottom",
@@ -745,7 +751,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error?.body?.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           }

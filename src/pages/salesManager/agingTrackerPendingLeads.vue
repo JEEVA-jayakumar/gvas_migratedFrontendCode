@@ -18,29 +18,21 @@
         row-key="name"
       >
         <template v-slot:top="props">
-          <!--START: table fullscreen mode -->
-          <!-- <div class="col-md-4" align="right">
-            <q-btn
-              :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
-              @click="props.toggleFullscreen"
-              class="q-mt-lg"
-              color="grey-9"
-              size="sm"
-            />
-          </div>-->
-          <!--END: table fullscreen mode -->
-          <!--START: table filter,search -->
           <div class="col-md-5">
-            <q-search
+            <q-input
+              dense
               clearable
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              float-label="Search by SO name, Merchant Name, Lead ID"
+              label="Search by SO name, Merchant Name, Lead ID"
               class="q-mr-lg q-py-sm"
-            />
+            >
+              <template v-slot:prepend>
+                <q-icon name="search" />
+              </template>
+            </q-input>
           </div>
-          <!--END: table filter,search -->
         </template>
       </q-table>
       <!--END: table lead validation -->
