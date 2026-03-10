@@ -9,7 +9,7 @@
     >
       <q-card style="min-width: 40vw; padding: 30px;">
         <q-card-section class="no-padding">
-          <div class="text-h6 q-mb-sm">{{propDocumentDetails.documentType}}</div>
+          <div class="q-title q-mb-sm">{{propDocumentDetails.documentType}}</div>
         </q-card-section>
 
         <q-card-section class="q-pt-none no-padding">

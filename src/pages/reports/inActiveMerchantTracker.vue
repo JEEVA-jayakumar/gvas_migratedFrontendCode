@@ -2,7 +2,7 @@
   <q-page>
     <div>
       <!--START: table title -->
-      <div class="col-md-12 text-h6 q-px-md q-py-md text-weight-regular bottom-border text-grey-9">Inactive Merchant Tracker</div>
+      <div class="col-md-12 q-title q-px-md q-py-md text-weight-regular bottom-border text-grey-9">Inactive Merchant Tracker</div>
       <div class="row q-pa-md">
         <div class="col-12 col-md-6 group">
           <p>Choose one from the below or you can choose start and end date manually</p>

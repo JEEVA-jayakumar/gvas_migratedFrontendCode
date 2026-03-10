@@ -13,7 +13,8 @@
       bordered
       :width="260"
       :breakpoint="500"
-      class="bg-dark text-white"
+      style="background-color: #531b64"
+      class="text-white"
     >
       <div class="q-py-md q-px-lg flex items-center" style="height: 65px; background: rgba(0,0,0,0.1)">
         <img src="~assets/images/logo.png" style="height: 35px" />
@@ -57,14 +58,12 @@ export default {
           id: 2,
           to: "/ops/head/exceptions",
           name: "Exceptions",
-          icon: "assignment_late",
           subItems: [],
         },
         {
           id: 3,
           to: null,
           name: "Reports",
-          icon: "bar_chart",
           subItems: [
             {
               id: 1,

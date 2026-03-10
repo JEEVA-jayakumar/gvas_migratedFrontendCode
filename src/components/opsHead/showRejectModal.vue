@@ -9,7 +9,7 @@
             <q-card-section>
               <div class="row text-center">
                   <div class="col-md-12 justify-center">
-                      <div class="text-h6 text-weight-regular">Reject Exception</div>
+                      <div class="q-title text-weight-regular">Reject Exception</div>
                   </div>
                   <div class="col-md-12 q-pt-md">
                       <q-input
