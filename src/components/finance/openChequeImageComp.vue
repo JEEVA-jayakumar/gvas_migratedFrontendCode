@@ -1,7 +1,7 @@
 <template>
   <q-dialog
-    v-model="showModel"
-    @hide="emitToggleCheque"
+    :model-value="showChequeImage"
+    @update:model-value="emitToggleCheque"
   >
     <q-card style="max-width: 80vw;">
       <q-card-section class="row items-center q-pb-none">
@@ -26,7 +26,6 @@ export default {
 
   data() {
     return {
-      showModel: this.showChequeImage
     };
   },
 

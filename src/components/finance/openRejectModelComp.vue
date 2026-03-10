@@ -1,8 +1,8 @@
 <template>
   <q-dialog
-    v-model="showModel"
     persistent
-    @hide="emitToggleReject"
+    :model-value="showRejectModel"
+    @update:model-value="emitToggleReject"
   >
     <q-card style="min-width: 350px; padding: 20px;">
       <q-card-section>
@@ -59,7 +59,7 @@
       </q-card-section>
 
       <q-card-actions align="right">
-        <q-btn flat label="Cancel" color="grey-9" @click="showModel = false" />
+        <q-btn flat label="Cancel" color="grey-9" @click="emitToggleReject" />
         <q-btn label="Reject" color="negative" @click="financeRejectSubmit" />
       </q-card-actions>
     </q-card>
@@ -78,7 +78,6 @@ export default {
 
   data() {
     return {
-      showModel: this.showRejectModel,
       formData: {
         leadInformation: {
           verifiedFinanceStatus: 3
@@ -110,7 +109,7 @@ export default {
   methods: {
     ...mapActions("Finance", ["REJECT_FINANCE_EXCEPTION"]),
     emitToggleReject() {
-      this.$emit("closeRejectModel");
+      this.$emit("closeRejectModel", "reloadPaymentTrackerData");
     },
     async financeRejectSubmit() {
       const isCorrect = await this.v$.formData.$validate();
@@ -138,7 +137,7 @@ export default {
                 message: "Rejected lead #" + this.formData.leadId,
                 icon: "clear"
               });
-              this.showModel = false;
+              this.emitToggleReject();
             })
             .catch(error => {
               this.$q.loading.hide();

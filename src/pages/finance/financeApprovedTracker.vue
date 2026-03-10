@@ -16,7 +16,7 @@
         </q-tabs>
 
         <q-tab-panels v-model="activeTab" animated>
-          <q-tab-panel name="tab-1" class="no-padding">
+          <q-tab-panel name="tab-1" class="no-padding overflow-hidden">
             <q-table
               table-class="customTableClass"
               :rows="tableData"
@@ -72,7 +72,11 @@
                     placeholder="Type.."
                     label="Search .. "
                     class="q-mr-lg q-py-sm"
-                  />
+                  >
+                    <template v-slot:prepend>
+                      <q-icon name="search" />
+                    </template>
+                  </q-input>
                 </div>
                 <div class="col-md-3"></div>
                 <div class="col-md-4" align="right">
@@ -83,7 +87,7 @@
             </q-table>
           </q-tab-panel>
 
-          <q-tab-panel name="tab-2" class="no-padding">
+          <q-tab-panel name="tab-2" class="no-padding overflow-hidden">
             <q-table
               table-class="customTableClass"
               :rows="tableData1"
@@ -139,7 +143,11 @@
                     placeholder="Type.."
                     label="Search .. "
                     class="q-mr-lg q-py-sm"
-                  />
+                  >
+                    <template v-slot:prepend>
+                      <q-icon name="search" />
+                    </template>
+                  </q-input>
                 </div>
                 <div class="col-md-3"></div>
                 <div class="col-md-4" align="right">
