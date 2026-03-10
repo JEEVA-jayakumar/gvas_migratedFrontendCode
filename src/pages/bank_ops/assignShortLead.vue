@@ -3,7 +3,7 @@
     <!-- Common component to view full lead information -->
     <generalLeadInformation
       v-if="propToggleLeadInformation"
-      v-model:leadInformation="addtnLeadInformation"
+      :leadInformation="addtnLeadInformation"
       :propToggleLeadInformationPop="propToggleLeadInformation"
       @closeLeadInformation="toggleLeadInformation"
     />

@@ -59,8 +59,11 @@
             />
           </div>
           <div class="col">
-            <q-input
-              type="number"
+            <q-select
+              use-input
+              fill-input
+              hide-selected
+              @filter="pincodeSearch"
               :error="$v.formData.pincode.$error"
               clearable
               @clear="fnClearStateCity"
@@ -68,14 +71,11 @@
               v-model="formData.pincode"
               label="Pincode"
               placeholder="Pincode"
-            >
-              <q-autocomplete
-                @search="pincodeSearch"
-                :debounce="500"
-                :min-characters="1"
-                @selected="pincodeSelected"
-              />
-            </q-input>
+              :options="pincodeOptions"
+              @update:model-value="pincodeSelected"
+              emit-value
+              map-options
+            />
           </div>
           <div class="col">
             <q-input
@@ -104,23 +104,24 @@
         <div class="text-body1 uppercase text-weight-medium text-grey-9 q-my-md">Device Details</div>
         <div class="row group">
           <div class="col">
-            <q-input
+            <q-select
+              use-input
+              fill-input
+              hide-selected
+              @filter="leadSourceSearch"
               :error="$v.formData.leadSource.id.$error"
               @blur="$v.formData.leadSource.id.$touch"
               clearable
               @clear="fnClearDeviceList"
               color="grey-9"
-              v-model="formData.leadSource.name"
+              v-model="formData.leadSource.id"
               label="Lead Source"
               placeholder="Lead Source"
-            >
-              <q-autocomplete
-                @search="leadSourceSearch"
-                :debounce="500"
-                :min-characters="1"
-                @selected="leadSourceSelected"
-              />
-            </q-input>
+              :options="leadSourceOptionsFiltered"
+              @update:model-value="leadSourceSelected"
+              emit-value
+              map-options
+            />
             <p class="q-py-sm" v-if="leadSourceSelectOptions.length == 0">No data available</p>
           </div>
           <div class="col">
@@ -255,8 +256,10 @@ export default {
     return {
       toggleAjaxLoadFilter: false,
       region: "",
+      pincodeOptions: [],
       deviceSelectOptions: [],
       leadSourceSelectOptions: [],
+      leadSourceOptionsFiltered: [],
       RSMselectOptions: [],
       ASMselectOptions: [],
       showAssignSelect: null,
@@ -417,33 +420,48 @@ export default {
     },
 
     /* Pincode search result */
-    pincodeSearch(terms, done) {
-      this.formData.cityName = "";
-      this.formData.stateName = "";
-      this.FETCH_PINCODE_WITH_TERM(terms)
+    pincodeSearch(val, update) {
+      this.formData.city = "";
+      this.formData.state = "";
+      if (val.length < 1) {
+        update(() => {
+          this.pincodeOptions = [];
+        });
+        return;
+      }
+      this.FETCH_PINCODE_WITH_TERM(val)
         .then(() => {
-          done(
-            this.COMMON_FILTER_FUNCTION_PINCODE(this.getAllStatesData, terms)
-          );
+          update(() => {
+            this.pincodeOptions = this.COMMON_FILTER_FUNCTION_PINCODE(this.getAllStatesData, val);
+          });
         })
         .catch(() => {
-          done([]);
+          update(() => {
+            this.pincodeOptions = [];
+          });
         });
     },
-    pincodeSelected(item) {
-      this.formData.state = item.value.stateName;
-      this.formData.city = item.value.cityName;
-      this.formData.pincode = item.value.pincode;
+    pincodeSelected(val) {
+      if (val) {
+        this.formData.state = val.stateName;
+        this.formData.city = val.cityName;
+        this.formData.pincode = val.pincode;
+      }
     },
     /* Pincode search result */
 
     /* Lead source search result */
-    leadSourceSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.leadSourceSelectOptions, terms));
+    leadSourceSearch(val, update) {
+      update(() => {
+        this.leadSourceOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.leadSourceSelectOptions, val);
+      });
     },
-    leadSourceSelected(item) {
-      this.formData.leadSource.name = item.label;
-      this.formData.leadSource.id = item.value;
+    leadSourceSelected(val) {
+      const item = this.leadSourceSelectOptions.find(option => option.value === val);
+      if (item) {
+        this.formData.leadSource.name = item.label;
+        this.formData.leadSource.id = item.value;
+      }
 
       this.toggleAjaxLoadFilter = true;
       this.deviceSelectOptions = [];
