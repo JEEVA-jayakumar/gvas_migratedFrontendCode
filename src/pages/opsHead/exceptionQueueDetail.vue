@@ -4,19 +4,19 @@
       <!-- START >> Merchant details -->
       <div class="row q-ma-xs">
         <div class="col">
-          <div class="text-h6 q-my-md capitalize">{{formData.shortLead.leadName}}</div>
+          <div class="q-title q-my-md capitalize">{{formData.shortLead.leadName}}</div>
           <div
             class="text-light-blue cursor-pointer"
             @click="toggleLeadInformation(formData.shortLead)"
           ># {{formData.shortLead.leadId || formData.shortLead.id || formData.shortLead.leadNumber}}</div>
         </div>
         <div class="col">
-          <div class="text-h6 q-my-md">Contact</div>
+          <div class="q-title q-my-md">Contact</div>
           <div class="no-margin">{{formData.shortLead.contactNumber}}</div>
           <div>{{formData.shortLead.alternateContactNumber}}</div>
         </div>
         <div class="col">
-          <div class="text-h6 q-my-md">Address</div>
+          <div class="q-title q-my-md">Address</div>
           <div class="capitalize no-margin">{{formData.shortLead.leadAddress}}</div>
           <div
             class="capitalize no-margin"
@@ -33,7 +33,7 @@
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
                 <q-card-section class="q-pa-sm bottom-border title-bg">
                   <div class="row items-center">
-                    <div class="col text-body1 text-weight-medium">
+                    <div class="col q-body-1 text-weight-medium">
                       Device -
                       {{formData.shortLead.deviceCount}}
                       {{formData.shortLead.device ? formData.shortLead.device.deviceName : ''}}
@@ -41,20 +41,20 @@
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm" v-if="formData.shortLead.device">
-                  <q-list separator class="no-padding text-body1">
-                    <q-item class="q-pa-sm text-body1">
+                  <q-list separator class="no-padding q-body-1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Plan</q-item-section>
                       <q-item-section side>{{formData.shortLead.plan ? formData.shortLead.plan.planName : 'NA'}}</q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Setup Fees</q-item-section>
                       <q-item-section side>Rs. {{formData.shortLead.setupFees}}</q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Recurring Fees</q-item-section>
                       <q-item-section side>Rs. {{formData.shortLead.recurringFees}}</q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Merchant Category</q-item-section>
                       <q-item-section side>{{formData.shortLead.merchantCategory ? formData.shortLead.merchantCategory.merchantCategoryName : 'NA'}}</q-item-section>
                     </q-item>
@@ -67,23 +67,23 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
                 <q-card-section class="q-pa-sm bottom-border-dark bg-grey-4">
-                  <div class="col-auto text-body1 text-weight-medium">Payment</div>
+                  <div class="col-auto q-body-1 text-weight-medium">Payment</div>
                 </q-card-section>
                 <q-separator/>
                 <q-card-section class="q-pa-sm text-grey-9">
                   <q-list separator class="no-padding">
                     <q-item class="q-pa-sm">
-                      <q-item-section class="text-body1">Payment mode:</q-item-section>
-                      <q-item-section class="text-dark text-body1" align="center" side>
+                      <q-item-section class="q-body-1">Payment mode:</q-item-section>
+                      <q-item-section class="text-dark q-body-1" align="center" side>
                         <span v-if="formData.shortLead.paymentOption == 1">IMPS/NEFT</span>
                         <span v-else-if="formData.shortLead.paymentOption == 2">Cheque</span>
                         <span v-else-if="formData.shortLead.paymentOption == 3">Swipe</span>
                       </q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm">
-                      <q-item-section class="text-body1">Reference:</q-item-section>
+                      <q-item-section class="q-body-1">Reference:</q-item-section>
                       <q-item-section
-                        class="text-dark text-body1"
+                        class="text-dark q-body-1"
                         align="center"
                         side
                       >{{formData.shortLead.referenceNumber}}</q-item-section>
@@ -141,7 +141,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
                 <q-card-section class="q-pa-sm bottom-border title-bg">
-                  <span class="text-body1 text-weight-medium">MDR</span>
+                  <span class="q-body-1 text-weight-medium">MDR</span>
                 </q-card-section>
                 <q-card-section class="q-pa-sm text-grey-9">
                   <q-list class="no-padding">
@@ -222,7 +222,7 @@
                         class="no-pointer-events"
                         color="purple-9"
                       >
-                        <small class="text-caption">Enable Cash@POS Cash @POS incentive Rs.5</small>
+                        <small class="q-caption">Enable Cash@POS Cash @POS incentive Rs.5</small>
                       </q-checkbox>
                     </q-item>
                   </q-list>
@@ -235,7 +235,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
                 <q-card-section class="q-pa-sm bottom-border title-bg">
-                  <span class="text-body1 text-weight-medium">Details</span>
+                  <span class="q-body-1 text-weight-medium">Details</span>
                 </q-card-section>
                 <q-card-section class="q-pa-sm text-grey-9">
                   <q-list separator class="no-padding">
@@ -296,20 +296,20 @@
                 <q-card v-if="formData.shortLead.kyc" class="q-ma-xs border-1 q-custom-class" flat>
                   <q-card-section class="q-pa-sm bottom-border title-bg">
                     <div class="row items-center">
-                      <div class="col-auto text-body1 text-weight-medium">Exception KYC</div>
+                      <div class="col-auto q-body-1 text-weight-medium">Exception KYC</div>
                     </div>
                   </q-card-section>
                   <q-card-section class="no-padding">
                     <div class="row items-center q-pa-sm q-py-md">
                       <div class="col-md-3 col-sm-12 col-xs-12">
-                        <span class="text-caption text-faded">Reason</span>
+                        <span class="q-caption text-faded">Reason</span>
                       </div>
                       <div class="col-md-9 col-sm-12 col-xs-12">
                         <span
-                          class="text-caption text-faded"
+                          class="q-caption text-faded"
                           v-if="formData.shortLead.reason == null"
                         >Reason not specified</span>
-                        <span class="text-caption text-faded" v-else>{{formData.shortLead.reason}}</span>
+                        <span class="q-caption text-faded" v-else>{{formData.shortLead.reason}}</span>
                       </div>
                     </div>
                   </q-card-section>
@@ -321,20 +321,20 @@
                 >
                   <q-card-section class="q-pa-sm bottom-border title-bg">
                     <div class="row items-center">
-                      <div class="col-auto text-body1 text-weight-medium">Exception Bank Subvention</div>
+                      <div class="col-auto q-body-1 text-weight-medium">Exception Bank Subvention</div>
                     </div>
                   </q-card-section>
                   <q-card-section class="no-padding">
                     <div class="row items-center q-pa-sm q-py-md">
                       <div class="col-md-3 col-sm-12 col-xs-12">
-                        <div class="text-caption text-faded">Reason</div>
+                        <div class="q-caption text-faded">Reason</div>
                       </div>
                       <div class="col-md-9 col-sm-12 col-xs-12">
                         <div
-                          class="text-caption text-faded"
+                          class="q-caption text-faded"
                           v-if="formData.shortLead.reason == null"
                         >Reason no specified</div>
-                        <div class="text-caption text-faded" v-else>{{formData.shortLead.reason}}</div>
+                        <div class="q-caption text-faded" v-else>{{formData.shortLead.reason}}</div>
                       </div>
                     </div>
                   </q-card-section>
@@ -346,16 +346,16 @@
                 >
                   <q-card-section class="q-pa-sm bottom-border title-bg">
                     <div class="row items-center">
-                      <div class="col-auto text-body1 text-weight-medium">Exception Pricing</div>
+                      <div class="col-auto q-body-1 text-weight-medium">Exception Pricing</div>
                     </div>
                   </q-card-section>
                   <q-card-section class="no-padding">
                     <div class="row items-center q-pa-sm q-py-md">
                       <div class="col-md-3 col-sm-12 col-xs-12">
-                        <div class="text-caption text-faded">Reason</div>
+                        <div class="q-caption text-faded">Reason</div>
                       </div>
                       <div class="col-md-9 col-sm-12 col-xs-12">
-                        <div class="text-caption text-faded">{{formData.shortLead.reason}}</div>
+                        <div class="q-caption text-faded">{{formData.shortLead.reason}}</div>
                       </div>
                     </div>
                   </q-card-section>
@@ -367,17 +367,17 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <q-card class="q-ma-xs border-1" flat>
                 <q-card-section class="q-pa-sm title-bg bottom-border">
-                  <span class="text-body1 text-weight-medium">Documents</span>
+                  <span class="q-body-1 text-weight-medium">Documents</span>
                 </q-card-section>
                 <q-card-section class="no-padding">
                   <q-list class="no-padding">
                     <!-- START >>Application document view -->
-                    <q-item class="text-body1">
-                      <q-item-section class="text-body1">
+                    <q-item class="q-body-1">
+                      <q-item-section class="q-body-1">
                         <q-item-label>Application Form</q-item-label>
                       </q-item-section>
                     </q-item>
-                    <q-item separator class="text-body1 bg-grey-3">
+                    <q-item separator class="q-body-1 bg-grey-3">
                       <div class="full-width">
                         <!-- START >>If document type is PDF format -->
                         <div
@@ -435,7 +435,7 @@
                             class="row items-center full-width"
                             v-if="index.toString()==documents[0].subDocumentType"
                           >
-                            <div class="col-md-12 text-body1">
+                            <div class="col-md-12 q-body-1">
                               <q-expansion-item separator indent class="full-width">
                                 <template v-slot:header>
                                   <q-item-section avatar>
@@ -443,7 +443,7 @@
                                     :name="documents[0].kycException? 'warning' :'attach_file'" />
                                   </q-item-section>
                                   <q-item-section>
-                                    <q-item-label class="text-body1">{{documents[0].subDocumentType}}</q-item-label>
+                                    <q-item-label class="q-body-1">{{documents[0].subDocumentType}}</q-item-label>
                                     <q-item-label caption>{{documents[0].uploadedDocuments.length + ' Document(s)'}}</q-item-label>
                                   </q-item-section>
                                   <q-item-section
@@ -472,11 +472,11 @@
                                   <q-item-section v-else side>
                                     <span
                                       v-if="documents[0].documentVerifiedStatus == 1"
-                                      class="text-body1 text-weight-medium text-positive"
+                                      class="q-body-1 text-weight-medium text-positive"
                                     >Approved</span>
                                     <span
                                       v-if="documents[0].documentVerifiedStatus == 3"
-                                      class="text-body1 text-weight-medium text-negative"
+                                      class="q-body-1 text-weight-medium text-negative"
                                     >Rejected</span>
                                   </q-item-section>
                                 </template>
@@ -517,14 +517,14 @@
                           <!-- END >> View type is 0, direct documents  will be visible -->
                           <!-- START >> View type is 1, Category has sub category, hence defined in else part -->
                           <div class="row items-center full-width" v-else>
-                            <div class="col-md-12 text-body1">
+                            <div class="col-md-12 q-body-1">
                               <q-expansion-item separator indent icon="apps" :label="index" :caption="documents.length + ' Type(s)'" default-opened class="full-width">
                                 <div
                                   class="row items-center full-width"
                                   v-for="(subDocument,subIndex) in documents"
                                   :key="subIndex"
                                 >
-                                  <div class="col-md-12 text-body1">
+                                  <div class="col-md-12 q-body-1">
                                     <q-expansion-item
                                       separator
                                       group="closeOnOpenSubDocument"
@@ -536,7 +536,7 @@
                                           :name="subDocument.kycException? 'warning' :'attach_file'" />
                                         </q-item-section>
                                         <q-item-section>
-                                          <q-item-label class="text-body1">{{subDocument.subDocumentType}}</q-item-label>
+                                          <q-item-label class="q-body-1">{{subDocument.subDocumentType}}</q-item-label>
                                           <q-item-label caption>{{subDocument.uploadedDocuments.length + ' Document(s)'}}</q-item-label>
                                         </q-item-section>
                                         <q-item-section
@@ -565,11 +565,11 @@
                                         <q-item-section v-else side>
                                           <span
                                             v-if="subDocument.documentVerifiedStatus == 1"
-                                            class="text-body1 text-weight-medium text-positive"
+                                            class="q-body-1 text-weight-medium text-positive"
                                           >Approved</span>
                                           <span
                                             v-if="subDocument.documentVerifiedStatus == 3"
-                                            class="text-body1 text-weight-medium text-negative"
+                                            class="q-body-1 text-weight-medium text-negative"
                                           >Rejected</span>
                                         </q-item-section>
                                       </template>

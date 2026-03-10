@@ -6,7 +6,7 @@
     >
       <q-card style="min-width: 40vw; padding: 30px;">
         <q-card-section class="no-padding">
-          <div class="text-h6 q-py-md">Approval confirmation</div>
+          <div class="q-title q-py-md">Approval confirmation</div>
         </q-card-section>
 
         <q-card-section class="q-pt-none no-padding">

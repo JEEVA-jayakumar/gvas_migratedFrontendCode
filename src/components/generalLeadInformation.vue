@@ -7,7 +7,7 @@
     >
       <q-card style="min-width: 30vw; padding: 20px;">
         <div class="row items-center bottom-border q-py-sm">
-          <div class="col text-h6">Lead Information</div>
+          <div class="col q-title">Lead Information</div>
           <div class="col-auto">
             <q-btn round size="sm" @click="emitToggleRemarks" outline color="dark" icon="clear" v-close-overlay/>
           </div>
@@ -15,7 +15,7 @@
 
         <q-card-section class="no-padding">
           <q-scroll-area style="height: 400px;">
-            <q-list multiline separator class="text-body1">
+            <q-list multiline separator class="q-body-1">
               <q-item>
                 <q-item-section>
                   <q-item-label>Category</q-item-label>
