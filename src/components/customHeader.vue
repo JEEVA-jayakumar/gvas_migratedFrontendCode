@@ -15,7 +15,7 @@
         <!-- {{localStorage.getItem('selectedTab')}} -->
         <div class="col-auto">
           <img
-            v-if="leftDrawerOpen || $route.path.includes('/bank/ops/') || $route.path.includes('/finance/') || $route.path.includes('/sat/')"
+            v-if="leftDrawerOpen"
             class="cursor-pointer"
             src="~assets/images/logo.png"
             style="height:38px;"

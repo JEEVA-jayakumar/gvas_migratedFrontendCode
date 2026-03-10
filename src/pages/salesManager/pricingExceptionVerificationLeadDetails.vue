@@ -28,123 +28,123 @@
             <!-- Device -->
             <div class="col-12">
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
-                <q-card-title class="q-pa-sm bottom-border title-bg">
+                <q-card-section class="q-pa-sm bottom-border title-bg">
                   <div class="row items-center">
                     <div class="col q-body-1 text-weight-medium">
                       Device -
                       {{shortLead.deviceCount}}
-                      {{shortLead.device.deviceName}}
+                      {{shortLead.device?.deviceName}}
                     </div>
                   </div>
-                </q-card-title>
-                <q-card-main class="q-pa-sm">
+                </q-card-section>
+                <q-card-section class="q-pa-sm">
                   <q-list separator no-border class="no-padding q-body-1">
                     <q-item class="q-pa-sm q-body-1">
-                      <q-item-main>Plan</q-item-main>
-                      <q-item-side>{{shortLead.plan.planName}}</q-item-side>
+                      <q-item-section>Plan</q-item-section>
+                      <q-item-section side>{{shortLead.plan?.planName}}</q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
-                      <q-item-main>Setup Fees</q-item-main>
-                      <q-item-side>Rs. {{formData.leadInformation.setupGivenFees}}</q-item-side>
+                      <q-item-section>Setup Fees</q-item-section>
+                      <q-item-section side>Rs. {{formData.leadInformation.setupGivenFees}}</q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
-                      <q-item-main>Recurring Fees</q-item-main>
-                      <q-item-side>Rs. {{formData.leadInformation.recurringGivenFees}}</q-item-side>
+                      <q-item-section>Recurring Fees</q-item-section>
+                      <q-item-section side>Rs. {{formData.leadInformation.recurringGivenFees}}</q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
-                      <q-item-main>Merchant Category</q-item-main>
-                      <q-item-side>{{shortLead.merchantCategory.merchantCategoryName}}</q-item-side>
+                      <q-item-section>Merchant Category</q-item-section>
+                      <q-item-section side>{{shortLead.merchantCategory?.merchantCategoryName}}</q-item-section>
                     </q-item>
                   </q-list>
-                </q-card-main>
+                </q-card-section>
               </q-card>
             </div>
 
             <!-- MDR -->
             <div class="col-12">
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
-                <q-card-title class="q-pa-sm bottom-border title-bg">
+                <q-card-section class="q-pa-sm bottom-border title-bg">
                   <span class="q-body-1 text-weight-medium">MDR</span>
-                </q-card-title>
-                <q-card-main class="q-pa-sm">
+                </q-card-section>
+                <q-card-section class="q-pa-sm">
                   <q-list no-border>
                     <q-item class="q-pa-sm">
-                      <q-item-main>
+                      <q-item-section>
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Debit <= 2000 (%)"
+                          label="Debit <= 2000 (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.debitLessthanAmount"
                         />
-                      </q-item-main>
-                      <q-item-main>
+                      </q-item-section>
+                      <q-item-section>
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Debit > 2000 (%)"
+                          label="Debit > 2000 (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.debitGreaterthanAmount"
                         />
-                      </q-item-main>
+                      </q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm">
-                      <q-item-main>
+                      <q-item-section>
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Std CC (%)"
+                          label="Std CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.stdCC"
                         />
-                      </q-item-main>
-                      <q-item-main>
+                      </q-item-section>
+                      <q-item-section>
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Premium CC (%)"
+                          label="Premium CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.premiumCC"
                         />
-                      </q-item-main>
+                      </q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm">
-                      <q-item-main>
+                      <q-item-section>
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Corp Pre CC (%)"
+                          label="Corp Pre CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.corpCC"
                         />
-                      </q-item-main>
-                      <q-item-main>
+                      </q-item-section>
+                      <q-item-section>
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Intl Pre CC (%)"
+                          label="Intl Pre CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.intlCC"
                         />
-                      </q-item-main>
+                      </q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm">
-                      <q-item-main>
+                      <q-item-section>
                         <q-input
                           type="number"
                           color="grey-9"
-                          float-label="Super Pre CC (%)"
+                          label="Super Pre CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.superPremiumlCC"
                         />
-                      </q-item-main>
+                      </q-item-section>
                     </q-item>
                     <q-item class="items-start q-pa-sm">
                       <q-checkbox
@@ -156,7 +156,7 @@
                       </q-checkbox>
                     </q-item>
                   </q-list>
-                </q-card-main>
+                </q-card-section>
               </q-card>
             </div>
           </div>
@@ -164,133 +164,125 @@
 
         <div class="col-md-6">
           <q-card class="q-ma-xs border-1 q-custom-class" flat>
-            <q-card-title class="q-pa-sm bottom-border title-bg">
+            <q-card-section class="q-pa-sm bottom-border title-bg">
               <span class="q-body-1 text-weight-medium">Price Details</span>
-            </q-card-title>
-            <q-card-main>
+            </q-card-section>
+            <q-card-section>
               <q-list multiline no-border>
                 <q-item>
-                  <q-item-side>
-                    <q-item-tile>Expected Setup Price</q-item-tile>
-                  </q-item-side>
-                  <q-item-main>
-                    <q-item-tile>
+                  <q-item-section side>
+                    Expected Setup Price
+                  </q-item-section>
+                  <q-item-section>
+                    <div>
                       <q-icon name="fas fa-rupee-sign" size="12px" />
                       {{formData.leadInformation.setupGivenFees}}
-                    </q-item-tile>
-                  </q-item-main>
+                    </div>
+                  </q-item-section>
                 </q-item>
                 <q-item>
-                  <q-item-side>
-                    <q-item-tile>Expected Recurring Price</q-item-tile>
-                  </q-item-side>
-                  <q-item-main>
-                    <q-item-tile>
+                  <q-item-section side>
+                    Expected Recurring Price
+                  </q-item-section>
+                  <q-item-section>
+                    <div>
                       <q-icon name="fas fa-rupee-sign" size="12px" />
                       {{formData.leadInformation.recurringGivenFees}}
-                    </q-item-tile>
-                  </q-item-main>
+                    </div>
+                  </q-item-section>
                 </q-item>
                 <q-item>
-                  <q-item-side>
-                    <q-item-tile>SO Remarks</q-item-tile>
-                  </q-item-side>
-                  <q-item-main>
-                    <q-item-tile>{{shortLead.reason}}</q-item-tile>
-                  </q-item-main>
+                  <q-item-section side>
+                    SO Remarks
+                  </q-item-section>
+                  <q-item-section>
+                    {{shortLead.reason}}
+                  </q-item-section>
                 </q-item>
                 <q-item
                   v-if="((shouldShowGivenPricefield) && (shortLead.verifiedPricingStatus != 2 || shortLead.verifiedCmsPricingStatus==4))"
                 >
-                  <q-item-side>
-                    <q-item-tile>RSM Remarks</q-item-tile>
-                  </q-item-side>
-                  <q-item-main>
-                    <q-item-tile>{{getRsmReason.reason}}</q-item-tile>
-                  </q-item-main>
+                  <q-item-section side>
+                    RSM Remarks
+                  </q-item-section>
+                  <q-item-section>
+                    {{getRsmReason?.reason}}
+                  </q-item-section>
                 </q-item>
                 <q-item
                   v-if="((shouldShowGivenPricefield) && (shortLead.verifiedPricingStatus != 2 || shortLead.verifiedCmsPricingStatus==4))"
                 >
-                  <q-item-main>
-                    <q-item-tile>
-                      <q-input
-                        v-model="formData.leadInformation.recurringFees"
-                        @blur="$v.formData.leadInformation.recurringFees.$touch"
-                        :error="$v.formData.leadInformation.recurringFees.$error"
-                        color="grey-9"
-                        @update:model-value="fnCheckPrice(formData)"
-                        float-label="Given recurring fees"
-                        type="number"
-                      />
-                    </q-item-tile>
-                  </q-item-main>
+                  <q-item-section>
+                    <q-input
+                      v-model="formData.leadInformation.recurringFees"
+                      @blur="v$.formData.leadInformation.recurringFees.$touch"
+                      :error="v$.formData.leadInformation.recurringFees.$error"
+                      color="grey-9"
+                      @update:model-value="fnCheckPrice(formData)"
+                      label="Given recurring fees"
+                      type="number"
+                    />
+                  </q-item-section>
                 </q-item>
                 <q-item
                   v-if="((shouldShowGivenPricefield) && (shortLead.verifiedPricingStatus == 2 || shortLead.verifiedCmsPricingStatus==4))"
                 >
-                  <q-item-side>Recurring fees</q-item-side>
-                  <q-item-main>
-                    <q-item-tile>{{formData.leadInformation.recurringGivenFees}}</q-item-tile>
-                  </q-item-main>
+                  <q-item-section side>Recurring fees</q-item-section>
+                  <q-item-section>
+                    {{formData.leadInformation.recurringGivenFees}}
+                  </q-item-section>
                 </q-item>
                 <q-item
                   v-if="((shouldShowGivenPricefield) && (shortLead.verifiedPricingStatus != 2 || shortLead.verifiedCmsPricingStatus==4))"
                 >
-                  <q-item-main>
-                    <q-item-tile>
-                      <q-input
-                        v-model="formData.leadInformation.setupFees"
-                        @blur="$v.formData.leadInformation.setupFees.$touch"
-                        :error="$v.formData.leadInformation.setupFees.$error"
-                        color="grey-9"
-                        @update:model-value="fnCheckPrice(formData)"
-                        float-label="Given Setup Price"
-                        type="number"
-                      />
-                    </q-item-tile>
-                  </q-item-main>
+                  <q-item-section>
+                    <q-input
+                      v-model="formData.leadInformation.setupFees"
+                      @blur="v$.formData.leadInformation.setupFees.$touch"
+                      :error="v$.formData.leadInformation.setupFees.$error"
+                      color="grey-9"
+                      @update:model-value="fnCheckPrice(formData)"
+                      label="Given Setup Price"
+                      type="number"
+                    />
+                  </q-item-section>
                 </q-item>
                 <q-item
                   v-if="((shouldShowGivenPricefield) && (shortLead.verifiedPricingStatus == 2 || shortLead.verifiedCmsPricingStatus==4))"
                 >
-                  <q-item-side>Given Setup Price</q-item-side>
-                  <q-item-main>
-                    <q-item-tile>{{formData.leadInformation.setupGivenFees}}</q-item-tile>
-                  </q-item-main>
+                  <q-item-section side>Given Setup Price</q-item-section>
+                  <q-item-section>
+                    {{formData.leadInformation.setupGivenFees}}
+                  </q-item-section>
                 </q-item>
                 <q-item v-if="$route.params.showAction == undefined">
-                  <q-item-main
-                    v-if="!shouldShowGivenPricefield && $route.params.showAction == undefined"
+                  <q-item-section
+                    v-if="!shouldShowGivenPricefield"
                   >
-                    <q-item-tile>
-                      <q-input
-                        @keyup.enter="leadVerificationApprove()"
-                        v-model="formData.leadVerificationStatus.reason"
-                        @blur="$v.formData.leadVerificationStatus.reason.$touch"
-                        :error="$v.formData.leadVerificationStatus.reason.$error"
-                        color="grey-9"
-                        float-label="Remarks"
-                      />
-                    </q-item-tile>
-                  </q-item-main>
-                  <q-item-main
-                    v-if="shouldShowGivenPricefield && $route.params.showAction == undefined"
+                    <q-input
+                      @keyup.enter="leadVerificationApprove()"
+                      v-model="formData.leadVerificationStatus.reason"
+                      @blur="v$.formData.leadVerificationStatus.reason.$touch"
+                      :error="v$.formData.leadVerificationStatus.reason.$error"
+                      color="grey-9"
+                      label="Remarks"
+                    />
+                  </q-item-section>
+                  <q-item-section
+                    v-if="shouldShowGivenPricefield"
                   >
-                    <q-item-tile>
-                      <q-input
-                        @keyup.enter="leadVerificationNHApprove()"
-                        v-model="formData.leadVerificationStatus.reason"
-                        @blur="$v.formData.leadVerificationStatus.reason.$touch"
-                        :error="$v.formData.leadVerificationStatus.reason.$error"
-                        color="grey-9"
-                        float-label="Remarks"
-                      />
-                    </q-item-tile>
-                  </q-item-main>
+                    <q-input
+                      @keyup.enter="leadVerificationNHApprove()"
+                      v-model="formData.leadVerificationStatus.reason"
+                      @blur="v$.formData.leadVerificationStatus.reason.$touch"
+                      :error="v$.formData.leadVerificationStatus.reason.$error"
+                      color="grey-9"
+                      label="Remarks"
+                    />
+                  </q-item-section>
                 </q-item>
               </q-list>
-            </q-card-main>
+            </q-card-section>
           </q-card>
         </div>
       </div>
@@ -422,9 +414,6 @@ export default {
   },
 
   computed: {
-    $v() {
-      return this.v$;
-    },
     ...mapGetters("GlobalVariables", ["GLOBAL_FILE_FETCH_URL"]),
     ...mapGetters("SalesManagerException", ["getShortLeadInfo"]),
     getRsmReason() {
@@ -450,6 +439,11 @@ export default {
 
     //function to load all lead details
     ajaxLoadShortLeadInfo() {
+      this.$q.loading.show({
+        delay: 0, // ms
+        spinnerColor: "purple-9",
+        message: "Fetching data.."
+      });
       this.FETCH_SHORT_LEAD_DATA(this.$route.params.id).then((response) => {
         this.shortLead = this.getShortLeadInfo;
         this.formData.leadInformation = {
@@ -463,10 +457,14 @@ export default {
           setupGivenFees: this.getShortLeadInfo.setupFees,
           recurringGivenFees: this.getShortLeadInfo.recurringFees,
         };
+        this.$q.loading.hide();
+      }).catch(() => {
+        this.$q.loading.hide();
       });
       let self = this;
+      let userInfo = JSON.parse(localStorage.getItem("u_i"));
       let finalObj = _.find(
-        JSON.parse(localStorage.getItem("u_i")).roles,
+        userInfo.roles,
         function (oo) {
           return (
             oo.hierarchyRoleLevel == self.$ROLE_HIERARCHY_SALES_NATIONAL_HEAD
@@ -483,8 +481,8 @@ export default {
 
     // Common lead verification action
     leadVerificationReject() {
-      this.$v.formData.leadVerificationStatus.reason.$touch();
-      if (this.$v.formData.leadVerificationStatus.reason.$error) {
+      this.v$.formData.leadVerificationStatus.reason.$touch();
+      if (this.v$.formData.leadVerificationStatus.reason.$error) {
         this.$q.notify("Reason for rejection is mandatory");
       } else {
         this.$q
@@ -516,7 +514,7 @@ export default {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
-                  message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                  message: error?.body?.message == null ? "Please Try Again Later !" : error.body.message,
                   icon: "thumb_down",
                 });
               });
@@ -526,8 +524,8 @@ export default {
 
     // RSM verification action
     leadVerificationApprove() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q
@@ -566,7 +564,7 @@ export default {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
-                  message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                  message: error?.body?.message == null ? "Please Try Again Later !" : error.body.message,
                   icon: "thumb_down",
                 });
                 this.$q.loading.hide();
@@ -577,8 +575,8 @@ export default {
 
     // Nation head verification action
     leadVerificationNHApprove() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q
@@ -610,7 +608,7 @@ export default {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
-                  message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                  message: error?.body?.message == null ? "Please Try Again Later !" : error.body.message,
                   icon: "thumb_down",
                 });
               });

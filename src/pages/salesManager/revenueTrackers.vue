@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <div>
+    <div class="q-pa-md">
       <div class="row">
         <div class="col-md-5 col-sm-6 col-xs-12">
           <!--START: table title -->
@@ -28,7 +28,7 @@
             v-model:pagination="paginationControl"
             row-key="name">
             <template v-slot:body="props">
-              <q-tr :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']" :props="props" @mouseover="rowHover(props.row.__index)" @click="rowClick(props.row, props.row.__index)" class="cursor-pointer">
+              <q-tr :class="[rowActiveId == props.rowIndex? 'bg-grey-4 text-dark':'']" :props="props" @mouseover="rowHover(props.rowIndex)" @click="rowClick(props.row, props.rowIndex)" class="cursor-pointer">
                 <q-td v-for="col in props.cols" :key="col.name" :props="props">
                   {{ col.value }}
                 </q-td>
@@ -37,76 +37,80 @@
             <template v-slot:top="props">
               <!--START: table filter,search,excel download -->
               <div class="col">
-                <q-search
+                <q-input
+                dense
                 clearable
                 v-model="filter"
-                separator
                 color="grey-9"
                 placeholder="Type.."
-                float-label= "Search"
+                label= "Search"
                 class="q-mr-lg q-py-sm"
-                />
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="search" />
+                  </template>
+                </q-input>
               </div>
             </template>
           </q-table>
           <!--END: table table aging pending/reject -->
         </div>
         <div class="col-md-7 col-sm-6 col-xs-12">
-          <q-card flat class="q-pa-xs" color="light-blue">
-            <div class="row items-center">
+          <q-card flat class="q-pa-xs bg-light-blue-1 border-1">
+            <q-card-section class="row items-center">
               <div class="col-md-3 col-sm-3 col-xs-6 q-pa-md" align="center" style="border-right:1px solid #cecece">
-                <q-icon size="30px" name="fas fa-money-check-alt"/>
+                <q-icon size="30px" name="fas fa-money-check-alt" color="light-blue-10"/>
               </div>
               <div class="col-md-9 col-sm-9 col-xs-6 q-pa-md">
-                <div class="custom-dimmed">Target</div>
-                <div class="q-display-1" v-if="tableData.currentUser.incentive.targetRevenue == 0">Nil</div>
-                <div class="q-display-1" v-else><q-icon size="14px" class="custom-dimmed" name="fas fa-rupee-sign"/>
-                &nbsp;{{tableData.currentUser.incentive.targetRevenue}}</div>
+                <div class="text-grey-7">Target</div>
+                <div class="text-h4" v-if="tableData.currentUser.incentive?.targetRevenue == 0">Nil</div>
+                <div class="text-h4" v-else><q-icon size="24px" class="text-grey-7" name="fas fa-rupee-sign"/>
+                &nbsp;{{tableData.currentUser.incentive?.targetRevenue}}</div>
               </div>
-            </div>
+            </q-card-section>
           </q-card>
-          <div class="items-center">
-            <q-list class="group" multiline no-border	>
-              <q-item class="q-pa-lg" multiline>
-                <q-item-main>
-                  <q-item-tile>
+          <div class="items-center q-mt-md">
+            <q-list bordered separator class="rounded-borders">
+              <q-item class="q-pa-lg">
+                <q-item-section>
+                  <q-item-label>
                     Revenue accrued from implemented merchants
-                  </q-item-tile>
-                </q-item-main>
-                <q-item-side right>
-                  <q-item-tile>
+                  </q-item-label>
+                </q-item-section>
+                <q-item-section side>
+                  <q-item-label class="text-weight-bold">
                     <q-icon size="14px" name="fas fa-rupee-sign"/> 
-                    {{tableData.currentUser.incentive.implementedRevenue}}
-                  </q-item-tile>
-                </q-item-side>
+                    {{tableData.currentUser.incentive?.implementedRevenue || 0}}
+                  </q-item-label>
+                </q-item-section>
               </q-item>
-              <q-item class="q-pa-lg" multiline>
-                <q-item-main>
-                  <q-item-tile>
+              <q-item class="q-pa-lg">
+                <q-item-section>
+                  <q-item-label>
                     Revenue from pending implementations
-                  </q-item-tile>
-                </q-item-main>
-                <q-item-side right>
-                  <q-item-tile>
+                  </q-item-label>
+                </q-item-section>
+                <q-item-section side>
+                  <q-item-label class="text-weight-bold">
                     <q-icon size="14px" name="fas fa-rupee-sign"/> 
-                    {{tableData.currentUser.incentive.pendingImplementationRevenue}}
-                  </q-item-tile>
-                </q-item-side>
+                    {{tableData.currentUser.incentive?.pendingImplementationRevenue || 0}}
+                  </q-item-label>
+                </q-item-section>
               </q-item>
-              <q-item class="q-pa-lg items-center" multiline>
-                <q-item-main class="vertical-middle">
-                  <q-item-tile>
+              <q-item class="q-pa-lg items-center">
+                <q-item-section>
+                  <q-item-label>
                     Revenue percentage from target
-                  </q-item-tile>
-                </q-item-main>
-                <q-item-side right v-if="tableData.currentUser.incentive.targetRevenue == 0">
+                  </q-item-label>
+                </q-item-section>
+                <q-item-section side v-if="tableData.currentUser.incentive?.targetRevenue == 0">
                   Nil
-                </q-item-side>
-                <q-item-side right v-else>
+                </q-item-section>
+                <q-item-section side v-else>
                   <div>
                     <RadialProgressBar 
-                    :diameter="50"
-                    :completed-steps="tableData.currentUser.incentive.revenuePercentage"
+                    :diameter="60"
+                    :completed-steps="tableData.currentUser.incentive?.revenuePercentage || 0"
                     :total-steps="totalSteps"
                     :innerStrokeColor="innerStrokeColor"
                     :startColor="startColor"
@@ -114,10 +118,10 @@
                     :strokeWidth="strokeWidth"
                     :animateSpeed="animateSpeed"
                     >
-                     <p class="no-margin"><small>{{ tableData.currentUser.incentive.revenuePercentage}}%</small></p>
+                     <div class="text-caption text-weight-bold">{{ tableData.currentUser.incentive?.revenuePercentage || 0}}%</div>
                     </RadialProgressBar>
                   </div>
-                </q-item-side>
+                </q-item-section>
               </q-item>  
             </q-list>
           </div>
@@ -138,13 +142,13 @@ export default {
   setup() {
     return { v$: useVuelidate() };
   },
-  name: "revenueTrackers",
+  name: "SalesManagerRevenueTrackers",
   components: {
     RadialProgressBar
   },
   data() {
     return {
-      strokeWidth: 3,
+      strokeWidth: 4,
       animateSpeed: 500,
       startColor: "#421551",
       stopColor: "#421551",
@@ -175,7 +179,14 @@ export default {
         }
       ],
       tableData: {
-        currentUser: {},
+        currentUser: {
+          incentive: {
+            targetRevenue: 0,
+            implementedRevenue: 0,
+            pendingImplementationRevenue: 0,
+            revenuePercentage: 0
+          }
+        },
         userList: []
       },
       activeId: "",
@@ -192,7 +203,9 @@ export default {
     identifySalesHierarchyRole() {
       let self = this;
       /* Hierachy sales values has been taken from gloabl variables from plugin */
-      const userInfo = JSON.parse(localStorage.getItem("u_i"));
+      const userInfoString = localStorage.getItem("u_i");
+      if (!userInfoString) return null;
+      const userInfo = JSON.parse(userInfoString);
       if (!userInfo || !userInfo.roles) return null;
       return _.find(userInfo.roles, function(
         oo
@@ -223,11 +236,15 @@ export default {
     fnLoadAllTableData(item) {
       //Setting up values when on new load and recursive actions
       let requestParams;
+      const userInfoString = localStorage.getItem("u_i");
+      if (!userInfoString) return;
+      const userInfo = JSON.parse(userInfoString);
+
       if (item == undefined) {
         //Values for on load action
         requestParams = {
           heirarchyId: this.identifySalesHierarchyRole.hierarchy.id,
-          userId: JSON.parse(localStorage.getItem("u_i")).user.id
+          userId: userInfo.user.id
         };
       } else {
         //Values for on click action
@@ -236,6 +253,11 @@ export default {
           userId: item.id
         };
       }
+      this.$q.loading.show({
+        delay: 0,
+        spinnerColor: "purple-9",
+        message: "Fetching data.."
+      });
       this.REVENUE_TRACKER(requestParams).then(response => {
         this.tableData.currentUser = this.revenueTrackerInfo.currentUser;
         this.tableData.userList = this.revenueTrackerInfo.userList;
@@ -247,7 +269,11 @@ export default {
             hierarchyRoleLevel: this.tableData.currentUser.hierarchyRoleLevel
           };
           this.items.push(intialPushObj);
+          this.activeId = intialPushObj.name;
         }
+        this.$q.loading.hide();
+      }).catch(() => {
+        this.$q.loading.hide();
       });
     },
     // =========================================> On page loads
@@ -261,10 +287,8 @@ export default {
     rowClick(item, index) {
       if (item.hierarchyRoleLevel == this.$ROLE_HIERARCHY_SALES_SO) {
         let getIndex = this.items.findIndex(p => p.name == this.activeId);
-        console.log("this.items", this.items);
-        console.log("this.items[getIndex]", this.activeId);
         if (
-          this.items[getIndex].hierarchyRoleLevel ==
+          this.items[getIndex] && this.items[getIndex].hierarchyRoleLevel ==
           this.$ROLE_HIERARCHY_SALES_SO
         ) {
           this.items.splice(getIndex, 1);
@@ -283,8 +307,16 @@ export default {
           heirarchyId: this.identifySalesHierarchyRole.hierarchy.id,
           userId: item.id
         };
+        this.$q.loading.show({
+          delay: 0,
+          spinnerColor: "purple-9",
+          message: "Fetching data.."
+        });
         this.REVENUE_TRACKER(requestParams).then(response => {
           this.tableData.currentUser = this.revenueTrackerInfo.currentUser;
+          this.$q.loading.hide();
+        }).catch(() => {
+          this.$q.loading.hide();
         });
       } else {
         this.items.push({
@@ -312,8 +344,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .custom-dimmed {
   color: rgba(255, 255, 255, 0.85);
+}
+.border-1 {
+  border: 1px solid #cecece;
 }
 </style>

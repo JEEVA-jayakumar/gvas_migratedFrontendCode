@@ -105,26 +105,30 @@
         <!--START: table title -->
         <div
           class="col-md-7 q-title text-weight-regular text-grey-9"
-        >{{getLeadStatusUserDetails == undefined?'':getLeadStatusUserDetails.leadCount.userRoleName}} List</div>
+        >{{getLeadStatusUserDetails?.leadCount?.userRoleName || 'SO'}} List</div>
         <!--END: table title -->
         <!--START: table search -->
         <div class="col-md-5">
-          <q-search
+          <q-input
+            dense
             clearable
             v-model="filter"
-            separator
             color="grey-9"
             placeholder="Type.."
-            float-label="Search"
-          />
+            label="Search"
+          >
+            <template v-slot:prepend>
+              <q-icon name="search" />
+            </template>
+          </q-input>
         </div>
-        <!--ENDv-model: table search -->
+        <!--END: table search -->
       </div>
       <!--START: table data -->
       <q-table
         v-if="viewTableFormatAndNotTabs"
         table-class="customTableClass"
-        :rows="tableDataNormal"
+        :rows="tableDataNormal || []"
         :columns="columns"
         :filter="filter"
         v-model:pagination="paginationControl"
@@ -132,10 +136,10 @@
       >
         <template v-slot:body="props">
           <q-tr
-            :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']"
+            :class="[rowActiveId == props.rowIndex? 'bg-grey-4 text-dark':'']"
             :props="props"
-            @mouseover="rowHover(props.row.__index)"
-            @click="rowClick(props.row, props.row.__index)"
+            @mouseover="rowHover(props.rowIndex)"
+            @click="rowClick(props.row, props.rowIndex)"
             class="cursor-pointer"
           >
             <q-td v-for="col in props.cols" :key="col.name" :props="props">{{ col.value }}</q-td>
@@ -170,6 +174,7 @@
         vertical
         transition-prev="jump-up"
         transition-next="jump-up"
+        keep-alive
       >
         <q-tab-panel
           v-for="tBodyContent in tabs.tabsBody"
@@ -180,7 +185,7 @@
           <!--START: table aging pending/reject -->
           <q-table
             table-class="customTableClass"
-            :rows="tBodyContent.customData.tableData"
+            :rows="tBodyContent.customData.tableData || []"
             :columns="tBodyContent.customData.columns"
             :filter="filter"
             v-model:pagination="paginationControl"
@@ -222,7 +227,7 @@ export default {
     generalLeadInformation,
     userLeadInformation
   },
-  name: "LeadStatus",
+  name: "SalesManagerLeadStatus",
   data() {
     return {
       propToggleLeadInformation: false,
@@ -518,7 +523,9 @@ export default {
     identifySalesHierarchyRole() {
       let self = this;
       /* Hierachy sales values has been taken from gloabl variables from plugin */
-      const userInfo = JSON.parse(localStorage.getItem("u_i"));
+      const userInfoString = localStorage.getItem("u_i");
+      if (!userInfoString) return null;
+      const userInfo = JSON.parse(userInfoString);
       if (!userInfo || !userInfo.roles) return null;
       return _.find(userInfo.roles, function(
         oo
@@ -547,16 +554,20 @@ export default {
 
     // =============> On page loads
     loadBreadCrums() {
+      const userInfoString = localStorage.getItem("u_i");
+      if (!userInfoString) return;
+      const userInfo = JSON.parse(userInfoString);
+
       let intialUserInformation = _.find(
-        JSON.parse(localStorage.getItem("u_i")).roles,
+        userInfo.roles,
         function(oo) {
           return oo.hierarchy.hierarchyCode.includes("SH");
         }
       );
       let intialPushObj = {
-        name: JSON.parse(localStorage.getItem("u_i")).user.name,
-        id: JSON.parse(localStorage.getItem("u_i")).user.id,
-        role: intialUserInformation.role,
+        name: userInfo.user.name,
+        id: userInfo.user.id,
+        role: intialUserInformation ? intialUserInformation.role : '',
         userRoleName: ""
       };
       this.items.push(intialPushObj);
@@ -566,7 +577,7 @@ export default {
     rowClick(item, index) {
       this.items.push({
         name: item.name,
-        role: this.getLeadStatusUserDetails.leadCount.userRoleName,
+        role: this.getLeadStatusUserDetails?.leadCount?.userRoleName || '',
         id: item.id,
         hierarchyRoleLevel: item.hierarchyRoleLevel
       });
@@ -615,11 +626,12 @@ export default {
       });
       //Setting up values when on new load and recursive actions
       let requestParams;
+      const userInfo = JSON.parse(localStorage.getItem("u_i"));
       if (item == undefined) {
         //Values for on load action
         requestParams = {
           heirarchyId: this.identifySalesHierarchyRole.hierarchy.id,
-          userId: JSON.parse(localStorage.getItem("u_i")).user.id
+          userId: userInfo.user.id
         };
       } else {
         //Values for on click action
@@ -711,7 +723,7 @@ export default {
           self.$q.notify({
             color: "negative",
             position: "bottom",
-            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+            message: error?.body?.message == null ? "Please Try Again Later !" : error.body.message,
             icon: "thumb_down"
           });
           this.$q.loading.hide();

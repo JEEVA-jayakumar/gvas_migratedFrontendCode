@@ -4,7 +4,7 @@
       <!-- //Common lead information in popup -->
       <generalLeadInformation
         v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
+        :leadInformation="addtnLeadInformation"
         :propToggleLeadInformationPop="propToggleLeadInformation"
         @closeLeadInformation="toggleLeadInformation"
       />
@@ -103,10 +103,10 @@
             >
               <template v-slot:body="props">
                 <q-tr
-                  :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']"
+                  :class="[rowActiveId == props.rowIndex? 'bg-grey-4 text-dark':'']"
                   :props="props"
-                  @mouseover="rowHover(props.row.__index)"
-                  @click="rowClick(props.row, props.row.__index)"
+                  @mouseover="rowHover(props.rowIndex)"
+                  @click="rowClick(props.row, props.rowIndex)"
                   class="cursor-pointer"
                 >
                   <q-td v-for="col in props.cols" :key="col.name" :props="props">{{ col.value }}</q-td>
@@ -237,7 +237,7 @@ export default {
   setup() {
     return { v$: useVuelidate() };
   },
-  name: "revenueApproval",
+  name: "SalesManagerPricingExceptionVerification",
   components: {
     generalLeadInformation,
   },
@@ -265,7 +265,7 @@ export default {
           label: "SO name",
           align: "left",
           field: (row) => {
-            return row.createdBy.name;
+            return row.createdBy?.name || 'NA';
           },
           sortable: false,
         },
@@ -277,7 +277,6 @@ export default {
           field: (row) => {
             return row.submittoRSMDate;
           },
-          // field: "submittoRSMDate",
           sortable: false,
         },
         {
@@ -293,7 +292,6 @@ export default {
           required: true,
           label: "Type",
           align: "left",
-          field: "verifiedCmsPricingStatus",
           field: (row) => {
             return row.verifiedCmsPricingStatus == 2 ||
               row.verifiedCmsPricingStatus == 6
@@ -316,7 +314,7 @@ export default {
           label: "Regular plan",
           align: "left",
           field: (row) => {
-            return row.plan.planName;
+            return row.plan?.planName || 'NA';
           },
           sortable: false,
         },
@@ -326,7 +324,7 @@ export default {
           label: "Merchant category",
           align: "left",
           field: (row) => {
-            return row.merchantCategory.merchantCategoryName;
+            return row.merchantCategory?.merchantCategoryName || 'NA';
           },
           sortable: false,
         },
@@ -346,7 +344,7 @@ export default {
           label: "SO name",
           align: "left",
           field: (row) => {
-            return row.createdBy != undefined ? row.createdBy.name : "";
+            return row.createdBy?.name || "";
           },
           sortable: false,
         },
@@ -355,7 +353,6 @@ export default {
           required: true,
           label: "Submitted to RSM date",
           align: "left",
-          // field: "submittoRSMDate",
           field: (row) => {
             return row.submittoRSMDate;
           },
@@ -383,7 +380,7 @@ export default {
           label: "Regular plan",
           align: "left",
           field: (row) => {
-            return row.plan != undefined ? row.plan.planName : "";
+            return row.plan?.planName || "";
           },
           sortable: false,
         },
@@ -393,9 +390,7 @@ export default {
           label: "Merchant category",
           align: "left",
           field: (row) => {
-            return row.merchantCategory != undefined
-              ? row.merchantCategory.merchantCategoryName
-              : "";
+            return row.merchantCategory?.merchantCategoryName || "";
           },
           sortable: false,
         },
@@ -472,31 +467,15 @@ export default {
     ]),
 
     pricingExceptionList() {
-      // let self = this;
-      // let finalObj = _.find(
-      //   JSON.parse(localStorage.getItem("u_i")).roles,
-      //   function(oo) {
-      //     return (
-      //       oo.hierarchyRoleLevel == self.$ROLE_HIERARCHY_SALES_NATIONAL_HEAD
-      //     );
-      //   }
-      // );
-      // if (finalObj == undefined) {
-      //   this.PRICING_EXCEPTION_LIST();
-      //   this.shouldShowNHscreen = false;
-      // } else {
-      //   this.PRICING_RSM_LIST();
-      //   this.shouldShowNHscreen = true;
-      //   this.getRoleForTableToggleRsmList = false;
-      // }
       this.$q.loading.show({
         delay: 0, // ms
         spinnerColor: "purple-9",
         message: "Fetching list..",
       });
       let self = this;
+      let userInfo = JSON.parse(localStorage.getItem("u_i"));
       let finalObj = _.find(
-        JSON.parse(localStorage.getItem("u_i")).roles,
+        userInfo.roles,
         function (oo) {
           return (
             oo.hierarchyRoleLevel == self.$ROLE_HIERARCHY_SALES_NATIONAL_HEAD

@@ -17,10 +17,7 @@
       :breakpoint="500"
       :content-style="{backgroundColor: '#202c3f', width:'250px'}"
     >
-      <div class="q-py-md q-px-lg flex items-center" v-if="leftDrawerOpen" style="height: 65px; background: rgba(0,0,0,0.1)">
-        <img src="~assets/images/logo.png" style="height: 35px" />
-      </div>
-      <SidebarMenu :menus="menus" />
+      <SidebarMenu :menus="menus" style="padding-top: 65px" />
     </q-drawer>
 
     <q-page-container>

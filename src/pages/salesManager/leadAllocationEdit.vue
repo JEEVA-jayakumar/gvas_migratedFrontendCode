@@ -12,32 +12,32 @@
             <div class="row group">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
-                  @blur="$v.formData.leadName.$touch"
-                  :error="$v.formData.leadName.$error"
+                  @blur="v$.formData.leadName.$touch"
+                  :error="v$.formData.leadName.$error"
                   color="grey-9"
                   v-model="formData.leadName"
-                  float-label="Merchant Name*"
+                  label="Merchant Name*"
                   placeholder="Merchant Name"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
                   color="grey-9"
-                  @blur="$v.formData.contactName.$touch"
-                  :error="$v.formData.contactName.$error"
+                  @blur="v$.formData.contactName.$touch"
+                  :error="v$.formData.contactName.$error"
                   v-model="formData.contactName"
-                  float-label="Contact Name*"
+                  label="Contact Name*"
                   placeholder="Contact Name"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
                   color="grey-9"
-                  @blur="$v.formData.contactNumber.$touch"
-                  :error="$v.formData.contactNumber.$error"
+                  @blur="v$.formData.contactNumber.$touch"
+                  :error="v$.formData.contactNumber.$error"
                   v-model="formData.contactNumber"
                   type="number"
-                  float-label="Contact Number*"
+                  label="Contact Number*"
                   placeholder="Contact Number"
                 />
               </div>
@@ -46,7 +46,7 @@
                   color="grey-9"
                   v-model="formData.alternateContactNumber"
                   type="number"
-                  float-label="Alternate Contact Number"
+                  label="Alternate Contact Number"
                   placeholder="Alternate Contact Number"
                 />
               </div>
@@ -56,47 +56,48 @@
                   color="grey-9"
                 
                   v-model="formData.email"
-                  float-label="Email"
+                  label="Email"
                   placeholder="Email"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
                   color="grey-9"
-                  @blur="$v.formData.leadAddress.$touch"
-                  :error="$v.formData.leadAddress.$error"
+                  @blur="v$.formData.leadAddress.$touch"
+                  :error="v$.formData.leadAddress.$error"
                   v-model="formData.leadAddress"
-                  float-label="Merchant Address"
+                  label="Merchant Address"
                   placeholder="Merchant Address"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <q-input
-                  type="number"
-                  :error="$v.formData.pincodeObj.$error"
+                <q-select
+                  placeholder="Select Pincode"
+                  use-input
+                  fill-input
+                  hide-selected
+                  @filter="pincodeSearch"
                   clearable
-                  @clear="fnClearStateCity"
                   color="grey-9"
-                  v-model.trim="formData.pincodeObj"
-                  float-label="Pincode"
-                  placeholder="Pincode"
-                >
-                  <q-autocomplete
-                    @search="pincodeSearch"
-                    :debounce="500"
-                    :min-characters="1"
-                    @selected="pincodeSelected"
-                  />
-                </q-input>
+                  @blur="v$.formData.pincodeObj.$touch"
+                  :error="v$.formData.pincodeObj.$error"
+                  v-model="formData.pincodeObj"
+                  @update:model-value="pincodeSelected"
+                  @clear="fnClearStateCity"
+                  label="Pincode"
+                  :options="pincodeOptions"
+                  emit-value
+                  map-options
+                />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
                   disable
                   color="grey-9"
-                  @blur="$v.formData.city.$touch"
-                  :error="$v.formData.city.$error"
+                  @blur="v$.formData.city.$touch"
+                  :error="v$.formData.city.$error"
                   v-model="formData.city"
-                  float-label="City/Town"
+                  label="City/Town"
                   placeholder="Merchant Address"
                 />
               </div>
@@ -104,10 +105,10 @@
                 <q-input
                   disable
                   color="grey-9"
-                  @blur="$v.formData.state.$touch"
-                  :error="$v.formData.state.$error"
+                  @blur="v$.formData.state.$touch"
+                  :error="v$.formData.state.$error"
                   v-model="formData.state"
-                  float-label="State"
+                  label="State"
                   placeholder="State"
                 />
               </div>
@@ -118,88 +119,94 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
                   color="grey-9"
-                  @input="fnAjaxRequestPopulateDeviceListData"
-                  @blur="$v.formData.leadSource.id.$touch"
-                  :error="$v.formData.leadSource.id.$error"
+                  @update:model-value="fnAjaxRequestPopulateDeviceListData"
+                  @blur="v$.formData.leadSource.id.$touch"
+                  :error="v$.formData.leadSource.id.$error"
                   v-model="formData.leadSource.id"
-                  float-label="Lead Source*"
+                  label="Lead Source*"
                   placeholder="Lead Source"
-                  radio
                   :options="leadSourceOptions"
+                  emit-value
+                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
                   color="grey-9"
-                  @blur="$v.formData.device.id.$touch"
-                  :error="$v.formData.device.id.$error"
+                  @blur="v$.formData.device.id.$touch"
+                  :error="v$.formData.device.id.$error"
                   v-model="formData.device.id"
-                  float-label="Device Type"
-                  radio
+                  label="Device Type"
                   :disable="isDeviceTypeSelectionDisabled"
                   :options="deviceTypeOptions"
+                  emit-value
+                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-input
                   type="number"
                   color="grey-9"
-                  @blur="$v.formData.deviceCount.$touch"
-                  :error="$v.formData.deviceCount.$error"
+                  @blur="v$.formData.deviceCount.$touch"
+                  :error="v$.formData.deviceCount.$error"
                   v-model="formData.deviceCount"
-                  float-label="Device Count*"
+                  label="Device Count*"
                   placeholder="Device Count"
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
-                  @input="fnGetAllUsersByHidUidRSM"
+                  @update:model-value="fnGetAllUsersByHidUidRSM"
                   color="grey-9"
                   v-model="currentAssingedToRSM"
                   placeholder="--RSM--"
-                  stack-label="Select RSM"
-                  radio
+                  label="Select RSM"
                   :disable="assignToOptionsRSM.length > 0 ? false:true"
                   :options="assignToOptionsRSM"
+                  emit-value
+                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
-                  @input="fnGetAllUsersByHidUidASM"
+                  @update:model-value="fnGetAllUsersByHidUidASM"
                   color="grey-9"
                   v-model="currentAssingedToASM"
                   placeholder="--ASM--"
-                  stack-label="Select ASM"
-                  radio
+                  label="Select ASM"
                   :disable="assignToOptionsASM.length > 0 ? false:true"
                   :options="assignToOptionsASM"
+                  emit-value
+                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
-                  @input="fnGetAllUsersByHidUidTL"
+                  @update:model-value="fnGetAllUsersByHidUidTL"
                   color="grey-9"
                   v-model="assignTo"
                   placeholder="--TL--"
-                  stack-label="Select TL"
-                  radio
+                  label="Select TL"
                   :disable="assignToOptionsTL.length > 0 ? false:true"
                   :options="assignToOptionsTL"
+                  emit-value
+                  map-options
                 />
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-select
-                  filter
+                  use-input
                   clearable
                   color="grey-9"
-                  @blur="$v.formData.assignedTo.id.$touch"
-                  :error="$v.formData.assignedTo.id.$error"
+                  @blur="v$.formData.assignedTo.id.$touch"
+                  :error="v$.formData.assignedTo.id.$error"
                   v-model="formData.assignedTo.id"
                   placeholder="--SO--"
-                  stack-label="Select SO"
-                  radio
+                  label="Select SO"
                   :disable="assignToOptionsSO.length > 0 ? false:true"
                   :options="assignToOptionsSO"
+                  emit-value
+                  map-options
                 />
               </div>
               <!-- Show only for EQUITAS -->
@@ -268,31 +275,32 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row q-mt-md">
           <div class="col-md-4 col-sm-4 col-xs-12 q-mt-sm q-mt-md-none" style="margin-top:-9px">
             <q-btn color="dark" @click="fnFinalSubmit(formData)" label="Assign" />
           </div>
         </div>
       </div>
     </div>
-    <q-modal v-model="showPreviewDialog" minimized>
+    <q-dialog v-model="showPreviewDialog">
       <q-card style="max-width: 900px; width: 100%;">
-          <q-card-title>
+          <q-card-section class="row items-center q-pb-none">
+            <div class="text-h6">Document Preview</div>
+            <q-space />
             <q-btn
               icon="close"
               flat
               round
               dense
-              class="absolute-top-right q-ma-sm"  
-              @click="showPreviewDialog = false"
+              v-close-popup
             />
-          </q-card-title>
-        <q-card-separator />
-        <q-card-main style="max-height: 70vh; overflow:auto;">
+          </q-card-section>
+        <q-separator />
+        <q-card-section style="max-height: 70vh; overflow:auto;">
             <!-- IMAGE-->
-            <viewer v-if="!isPdf" :images="[previewUrl]">
+            <div v-if="!isPdf">
               <img :src="previewUrl" style="width:100%" />
-            </viewer>
+            </div>
             <!-- PDF -->
             <iframe
               v-else
@@ -301,9 +309,9 @@
               height="600"
               frameborder="0"
             ></iframe>
-        </q-card-main>
+        </q-card-section>
       </q-card>
-    </q-modal>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -315,7 +323,6 @@ import {
   maxLength,
   maxValue,
   minValue,
-  alphaNum,
 } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 
@@ -323,12 +330,7 @@ export default {
   setup() {
     return { v$: useVuelidate() };
   },
-  // name: 'PageName',
-  computed: {
-    $v() {
-      return this.v$;
-    },
-  },
+  name: 'SalesManagerLeadAllocationEdit',
   data() {
     return {
       isDeviceTypeSelectionDisabled: true,
@@ -342,25 +344,9 @@ export default {
       currentAssingedToTL: null,
       assignToOptionsSO: [],
       currentAssingedToSO: null,
-      assignToOptions: [
-        {
-          label: "Foo",
-          value: 1,
-        },
-        {
-          label: "Bar",
-          value: 2,
-        },
-        {
-          label: "Ipsum",
-          value: 3,
-        },
-      ],
       leadSourceOptions: [],
       deviceTypeOptions: [],
       pincodeOptions: [],
-      // populatedDocumentUrl: "",
-      // showOpenPaymentChequeInfo: false,
       showPreviewDialog: false,
       isPdf: false,
       previewUrl: "",
@@ -405,9 +391,6 @@ export default {
       contactName: {
         required,
       },
-      // email: {
-      //   required,
-      // },
       contactNumber: {
         required,
         minLength: minLength(8),
@@ -468,36 +451,28 @@ export default {
       "getAllShortLeadInfoById",
     ]),
     ...mapGetters("GlobalVariables", ["GLOBAL_FILE_FETCH_URL"]),
+
+    identifySalesHierarchyRole() {
+      let self = this;
+      /* Hierachy sales values has been taken from gloabl variables from plugin */
+      const userInfoString = localStorage.getItem("u_i");
+      if (!userInfoString) return null;
+      const userInfo = JSON.parse(userInfoString);
+      if (!userInfo || !userInfo.roles) return null;
+      return _.find(userInfo.roles, function(
+        oo
+      ) {
+        return oo.hierarchy.hierarchyCode.includes(self.$HIERARCHY_SALES);
+      });
+    },
+
     isEquitasSource() {
       return (
         this.formData.leadSource &&
         this.formData.leadSource.sourceName ===
           "LS_EQUITAS SMALL FINANCE BANK LIMITED"
       );
-    },
-    // documentRows() {
-    //   const rules = this.leadInformation.merchantType.merchantDocumentType || [];
-    //   const uploaded = this.leadInformation.leadDocuments || [];
-
-    //   return rules
-    //     .filter(r => r.active)
-    //     .map(rule => {
-    //       const docs = uploaded.filter(
-    //         d => d.merchantDocumentType === rule.id
-    //       );
-
-    //       // flatten all uploaded files for this document
-    //       const files = docs.flatMap(d => d.uploadedDocuments || []);
-
-    //       return {
-    //         name: rule.documentType,
-    //         subName: rule.subDocumentType,
-    //         files,                 // 👈 ARRAY OF FILES
-    //         required: rule.required,
-    //         viewType: rule.viewType
-    //       };
-    //     });
-    // }
+    }
   },
 
   methods: {
@@ -518,68 +493,85 @@ export default {
     ]),
     COMMON_FILTER_FUNCTION(arraySet, terms) {
       return _.filter(arraySet, function (oo) {
-        return oo.label.toString().includes(terms.toLowerCase());
+        return oo.label.toString().toLowerCase().includes(terms.toLowerCase());
       });
     },
     /* Pincode search result */
-    pincodeSearch(terms, done) {
-      this.formData.cityName = "";
-      this.formData.stateName = "";
-      this.FETCH_PINCODE_WITH_TERM(terms)
+    pincodeSearch(val, update) {
+      if (val.length < 1) {
+        update(() => {
+          this.pincodeOptions = [];
+        });
+        return;
+      }
+      this.FETCH_PINCODE_WITH_TERM(val)
         .then(() => {
-          done(this.COMMON_FILTER_FUNCTION(this.getAllStatesData, terms));
+          update(() => {
+            this.pincodeOptions = this.COMMON_FILTER_FUNCTION(this.getAllStatesData, val);
+          });
         })
         .catch(() => {
-          done([]);
+          update(() => {
+            this.pincodeOptions = [];
+          });
         });
     },
     pincodeSelected(item) {
-      this.formData.state = item.value.stateName;
-      this.formData.city = item.value.cityName;
-      this.formData.pincode = item.value.pincode;
-      this.formData.pincodeObj = item.value.pincode;
+      if (item && item.value) {
+        this.formData.state = item.value.stateName;
+        this.formData.city = item.value.cityName;
+        this.formData.pincode = item.value.pincode;
+        this.formData.pincodeObj = item.label;
+      }
     },
     /* Pincode search result */
 
     //  Function to populate all lead allocation tracker
     fnAjaxRequestPopulateTrackerData() {
       let self = this;
+      this.$q.loading.show({
+        delay: 0, // ms
+        spinnerColor: "purple-9",
+        message: "Fetching data.."
+      });
       this.FETCH_ALL_STATES_DATA();
       this.FETCH_LEAD_DETAILS_IN_DETAIL(this.$route.params.id)
         .then(() => {
+          if (!this.getAllShortLeadInfoById || !this.getAllShortLeadInfoById.assignedLeads) {
+            this.$q.loading.hide();
+            return;
+          }
+          const lead = this.getAllShortLeadInfoById.assignedLeads;
           this.formData = {
-            leadName: this.getAllShortLeadInfoById.assignedLeads.leadName,
-            contactName: this.getAllShortLeadInfoById.assignedLeads.contactName,
-            contactNumber: this.getAllShortLeadInfoById.assignedLeads
-              .contactNumber,
-            email: this.getAllShortLeadInfoById.assignedLeads.email,
-            alternateContactNumber: this.getAllShortLeadInfoById.assignedLeads
-              .alternateContactNumber,
-            leadAddress: this.getAllShortLeadInfoById.assignedLeads.leadAddress,
+            leadName: lead.leadName,
+            contactName: lead.contactName,
+            contactNumber: lead.contactNumber,
+            email: lead.email,
+            alternateContactNumber: lead.alternateContactNumber,
+            leadAddress: lead.leadAddress,
             latitude: 13.458,
             longitude: 89.236,
-            city: this.getAllShortLeadInfoById.assignedLeads.city,
-            deviceCount: this.getAllShortLeadInfoById.assignedLeads.deviceCount,
-            state: this.getAllShortLeadInfoById.assignedLeads.state,
+            city: lead.city,
+            deviceCount: lead.deviceCount,
+            state: lead.state,
             leadId: this.$route.params.id,
             device: {
-              id: this.getAllShortLeadInfoById.assignedLeads.device.id,
+              id: lead.device?.id,
             },
             leadSource: {
-              id: this.getAllShortLeadInfoById.assignedLeads.leadSource.id,
+              id: lead.leadSource?.id,
             },
             assignedTo: {
               id:
-                this.getAllShortLeadInfoById.assignedLeads.assignedTo == null
+                lead.assignedTo == null
                   ? ""  
-                  : this.getAllShortLeadInfoById.assignedLeads.assignedTo.id,
+                  : lead.assignedTo.id,
             },
-            pincodeObj: this.getAllShortLeadInfoById.assignedLeads.pincode,
+            pincodeObj: lead.pincode,
           };
           // ---- Populate extra document fields ----
-          const lead = this.getAllShortLeadInfoById.assignedLeads;
 
-          // 1️⃣ Business Proof Document  (Company Proof)
+          // 1 Business Proof Document  (Company Proof)
           let businessDoc = null;
           if (lead.leadDocuments && lead.leadDocuments.length) {
             businessDoc = lead.leadDocuments.find(function (d) {
@@ -596,9 +588,9 @@ export default {
           } else {
             this.formData.businessProof = [];
           }
-          // 2️⃣ Merchant Agreement (applicationFile)
+          // 2 Merchant Agreement (applicationFile)
           this.formData.merchantAgreement = lead.applicationFile ? [lead.applicationFile] : [];
-          // 3️⃣ Bank Approval Letter (Others)
+          // 3 Bank Approval Letter (Others)
           let bankDoc = null;
           if (lead.leadDocuments && lead.leadDocuments.length) {
             bankDoc = lead.leadDocuments.find(function (d) {
@@ -624,12 +616,13 @@ export default {
           this.fnAjaxRequestPopulateDeviceListData();
 
           // values of current user from local storage
-          _.map(JSON.parse(localStorage.getItem("u_i")).roles, function (oo) {
+          const userInfo = JSON.parse(localStorage.getItem("u_i"));
+          _.map(userInfo.roles, function (oo) {
             if (oo.hierarchyRoleLevel == self.$ROLE_HIERARCHY_SALES_ASM) {
               //populate TL
               let params = {
                 user: {
-                  id: JSON.parse(localStorage.getItem("u_i")).user.id,
+                  id: userInfo.user.id,
                 },
                 hierarchy: {
                   id: oo.hierarchy.id,
@@ -642,7 +635,7 @@ export default {
               // populate ASM
               let params = {
                 user: {
-                  id: JSON.parse(localStorage.getItem("u_i")).user.id,
+                  id: userInfo.user.id,
                 },
                 hierarchy: {
                   id: oo.hierarchy.id,
@@ -653,7 +646,7 @@ export default {
               // populate RSM
               let params = {
                 user: {
-                  id: JSON.parse(localStorage.getItem("u_i")).user.id,
+                  id: userInfo.user.id,
                 },
                 hierarchy: {
                   id: oo.hierarchy.id,
@@ -662,19 +655,27 @@ export default {
               self.fnGetAllUsersByHidUidNH(params);
             }
           });
+          this.$q.loading.hide();
         })
         .catch((error) => {
+          this.$q.loading.hide();
           // if any issues throw the below error
           self.$q.notify({
             color: "negative",
             position: "bottom",
-            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+            message: error?.body?.message == null ? "Please Try Again Later !" : error.body.message,
             icon: "thumb_down",
           });
         });
     },
     //  Function to populate all lead allocation tracker
     fnAjaxRequestPopulateDeviceListData() {
+      if (!this.formData.leadSource?.id) return;
+      this.$q.loading.show({
+        delay: 0, // ms
+        spinnerColor: "purple-9",
+        message: "Fetching data.."
+      });
       this.deviceTypeOptions = [];
       let self = this;
       // Calls action in store to get device types
@@ -689,10 +690,12 @@ export default {
           self.deviceTypeOptions = assumeArr;
           // Assingnment to disable == false select box
           self.isDeviceTypeSelectionDisabled = false;
+          this.$q.loading.hide();
         })
         .catch((error) => {
+          this.$q.loading.hide();
           // if any issues throw the below error
-          if (error.status == this.$API_SUCCESS) {
+          if (error?.status == this.$API_SUCCESS) {
             this.$q.notify({
               color: "primary",
               position: "bottom",
@@ -703,7 +706,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error?.body?.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down",
             });
           }
@@ -712,25 +715,35 @@ export default {
 
     // Function to popluate state and city based on pincode
     fnPopulateStateCity(value) {
-      this.formData.pincode = value.pincode;
-      this.formData.state = value.stateName;
-      this.formData.city = value.cityName;
+      if (value) {
+        this.formData.pincode = value.pincode;
+        this.formData.state = value.stateName;
+        this.formData.city = value.cityName;
+      }
     },
 
     //Function clear city and state when pincode is cleared
     fnClearStateCity() {
       this.formData.state = "";
       this.formData.city = "";
+      this.formData.pincode = null;
+      this.formData.pincodeObj = null;
     },
 
     // Function to create new lead and allocate
     fnFinalSubmit(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
+        this.$q.loading.show({
+          delay: 0, // ms
+          spinnerColor: "purple-9",
+          message: "Submitting data.."
+        });
         this.UPDATE_SHORT_LEAD_SALES_INFO(formData)
           .then((response) => {
+            this.$q.loading.hide();
             this.$router.push("/sales/manager/lead/allocation/tracker");
             this.$q.notify({
               color: "positive",
@@ -740,10 +753,11 @@ export default {
             });
           })
           .catch((error) => {
+            this.$q.loading.hide();
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error?.body?.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down",
             });
           });
@@ -753,6 +767,7 @@ export default {
     //Start >> Functions to populate ASM/TL/SO
     // function to populate RSM
     fnGetAllUsersByHidUidNH(request) {
+      if (!request) return;
       this.assignToOptionsASM = [];
       this.assignToOptionsTL = [];
       this.assignToOptionsSO = [];
@@ -773,13 +788,12 @@ export default {
             assumeArr.push({ label: value.user.name, value: value });
           });
           self.assignToOptionsRSM = assumeArr;
-          // Assingnment to disable == false select box
-          // self.isDeviceTypeSelectionDisabled = false;
         }
       });
     },
     // function to populate ASM
     fnGetAllUsersByHidUidRSM(request) {
+      if (!request) return;
       this.assignToOptionsTL = [];
       this.assignToOptionsSO = [];
       let self = this;
@@ -799,13 +813,12 @@ export default {
             assumeArr.push({ label: value.user.name, value: value });
           });
           self.assignToOptionsASM = assumeArr;
-          // Assingnment to disable == false select box
-          // self.isDeviceTypeSelectionDisabled = false;
         }
       });
     },
     // function to populate TL
     fnGetAllUsersByHidUidASM(request) {
+      if (!request) return;
       this.assignToOptionsTL = [];
       this.assignToOptionsSO = [];
       let self = this;
@@ -831,6 +844,7 @@ export default {
 
     // function to populate SO
     fnGetAllUsersByHidUidTL(request) {
+      if (!request) return;
       this.assignToOptionsSO = [];
       let self = this;
       this.FETCH_USERS_BY_USER_ID(request).then((response) => {
