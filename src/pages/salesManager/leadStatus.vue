@@ -105,17 +105,17 @@
         <!--START: table title -->
         <div
           class="col-md-7 q-title text-weight-regular text-grey-9"
-        >{{getLeadStatusUserDetails?.leadCount?.userRoleName || ''}} List</div>
+        >{{getLeadStatusUserDetails == undefined?'':getLeadStatusUserDetails.leadCount.userRoleName}} List</div>
         <!--END: table title -->
         <!--START: table search -->
         <div class="col-md-5">
-          <q-input
+          <q-search
             clearable
             v-model="filter"
             separator
             color="grey-9"
             placeholder="Type.."
-            label="Search"
+            float-label="Search"
           />
         </div>
         <!--ENDv-model: table search -->
@@ -126,15 +126,16 @@
         table-class="customTableClass"
         :rows="tableDataNormal"
         :columns="columns"
-        :filter="filter" v-model:pagination="paginationControl"
+        :filter="filter"
+        v-model:pagination="paginationControl"
         row-key="name"
       >
         <template v-slot:body="props">
           <q-tr
-            :class="[rowActiveId == props.rowIndex? 'bg-grey-4 text-dark':'']"
+            :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']"
             :props="props"
-            @mouseover="rowHover(props.rowIndex)"
-            @click="rowClick(props.row, props.rowIndex)"
+            @mouseover="rowHover(props.row.__index)"
+            @click="rowClick(props.row, props.row.__index)"
             class="cursor-pointer"
           >
             <q-td v-for="col in props.cols" :key="col.name" :props="props">{{ col.value }}</q-td>
@@ -146,35 +147,43 @@
       <q-tabs
         v-if="!viewTableFormatAndNotTabs"
         v-model="tabsModel"
-        align="left"
         active-color="purple-9"
         indicator-color="purple-9"
+        align="left"
+        narrow-indicator
+        dense
+        class="text-grey"
       >
-        <!--START: tabs header -->
         <q-tab
           @click="fnLoadSOTableData"
           v-for="tabHeader in tabs.tabsHeader"
           :key="tabHeader.value"
           :name="tabHeader.value"
           :label="tabHeader.label"
-          class="text-dark"
         />
-        <!--END: tabs header -->
-        <!--START: tabs body -->
-        <!--END: tabs body -->
-</q-tabs>
-<q-tab-panels v-model="tabsModel" animated keep-alive>
-<q-tab-panel
+      </q-tabs>
+      <q-tab-panels
+        v-if="!viewTableFormatAndNotTabs"
+        v-model="tabsModel"
+        animated
+        swipeable
+        vertical
+        transition-prev="jump-up"
+        transition-next="jump-up"
+      >
+        <q-tab-panel
           v-for="tBodyContent in tabs.tabsBody"
           :key="tBodyContent.value"
           :name="tBodyContent.value"
+          class="no-padding"
         >
           <!--START: table aging pending/reject -->
           <q-table
             table-class="customTableClass"
             :rows="tBodyContent.customData.tableData"
             :columns="tBodyContent.customData.columns"
-            :filter="filter" v-model:pagination="paginationControl"
+            :filter="filter"
+            v-model:pagination="paginationControl"
             row-key="name"
           >
             <template v-slot:body-cell-shortleadDate="props">
@@ -194,7 +203,7 @@
           </q-table>
           <!--END: table table aging pending/reject -->
         </q-tab-panel>
-</q-tab-panels>
+      </q-tab-panels>
     </div>
   </q-page>
 </template>
@@ -213,7 +222,7 @@ export default {
     generalLeadInformation,
     userLeadInformation
   },
-  name: "SalesManagerLeadStatus",
+  name: "LeadStatus",
   data() {
     return {
       propToggleLeadInformation: false,
@@ -246,7 +255,7 @@ export default {
           required: true,
           label: "Name",
           align: "left",
-          field: row => row?.name || "NA",
+          field: "name",
           sortable: true
         },
         {
@@ -254,7 +263,7 @@ export default {
           required: true,
           label: "Short Lead",
           align: "center",
-          field: row => row?.shortLeadCount ?? 0,
+          field: "shortLeadCount",
           sortable: true
         },
         {
@@ -262,7 +271,7 @@ export default {
           required: true,
           label: "WIP Lead",
           align: "center",
-          field: row => row?.wipLeadCount ?? 0,
+          field: "wipLeadCount",
           sortable: true
         },
         {
@@ -270,7 +279,7 @@ export default {
           required: true,
           label: "Rejected",
           align: "center",
-          field: row => row?.rejectedLeadCount ?? 0,
+          field: "rejectedLeadCount",
           sortable: true
         },
         {
@@ -278,7 +287,7 @@ export default {
           required: true,
           label: "Implementation",
           align: "center",
-          field: row => row?.implementationCount ?? 0,
+          field: "implementationCount",
           sortable: true
         },
         {
@@ -286,7 +295,7 @@ export default {
           required: true,
           label: "Submitted to SAT",
           align: "center",
-          field: row => row?.submitToSatCount ?? 0,
+          field: "submitToSatCount",
           sortable: true
         }
       ],
@@ -324,7 +333,7 @@ export default {
                   required: true,
                   label: "Date(C)",
                   align: "left",
-                  field: row => row?.shortleadDate || "NA",
+                  field: "shortleadDate",
                   sortable: true
                 },
                 {
@@ -333,7 +342,7 @@ export default {
                   label: "Lead ID",
                   align: "left",
                   field: row => {
-                    return row?.leadNumber ? "# " + row.leadNumber : "NA";
+                    return "# " + row.leadNumber;
                   },
                   sortable: true
                 },
@@ -342,7 +351,7 @@ export default {
                   required: true,
                   label: "SO Name",
                   align: "left",
-                  field: row => row?.leadName || "NA",
+                  field: "leadName",
                   sortable: true
                 },
                 {
@@ -350,7 +359,7 @@ export default {
                   required: true,
                   label: "state",
                   align: "left",
-                  field: row => row?.state || "NA",
+                  field: "state",
                   sortable: true
                 }
               ],
@@ -557,7 +566,7 @@ export default {
     rowClick(item, index) {
       this.items.push({
         name: item.name,
-        role: this.getLeadStatusUserDetails?.leadCount?.userRoleName || "NA",
+        role: this.getLeadStatusUserDetails.leadCount.userRoleName,
         id: item.id,
         hierarchyRoleLevel: item.hierarchyRoleLevel
       });
@@ -606,21 +615,16 @@ export default {
       });
       //Setting up values when on new load and recursive actions
       let requestParams;
-      const salesRole = this.identifySalesHierarchyRole();
-      if (!salesRole) {
-        this.$q.loading.hide();
-        return;
-      }
       if (item == undefined) {
         //Values for on load action
         requestParams = {
-          heirarchyId: salesRole.hierarchy.id,
+          heirarchyId: this.identifySalesHierarchyRole.hierarchy.id,
           userId: JSON.parse(localStorage.getItem("u_i")).user.id
         };
       } else {
         //Values for on click action
         requestParams = {
-          heirarchyId: salesRole.hierarchy.id,
+          heirarchyId: this.identifySalesHierarchyRole.hierarchy.id,
           userId: item.id
         };
       }

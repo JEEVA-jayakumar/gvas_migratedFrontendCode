@@ -28,123 +28,123 @@
             <!-- Device -->
             <div class="col-12">
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
-                <q-card-section class="q-pa-sm bottom-border title-bg">
+                <q-card-title class="q-pa-sm bottom-border title-bg">
                   <div class="row items-center">
-                    <div class="col text-body1 text-weight-medium">
+                    <div class="col q-body-1 text-weight-medium">
                       Device -
                       {{shortLead.deviceCount}}
                       {{shortLead.device.deviceName}}
                     </div>
                   </div>
-                </q-card-section>
-                <q-card-section class="q-pa-sm">
-                  <q-list separator no-border class="no-padding text-body1">
-                    <q-item class="q-pa-sm text-body1">
-                      <q-item-section>Plan</q-item-section>
-                      <q-item-section>{{shortLead.plan.planName}}</q-item-section>
+                </q-card-title>
+                <q-card-main class="q-pa-sm">
+                  <q-list separator no-border class="no-padding q-body-1">
+                    <q-item class="q-pa-sm q-body-1">
+                      <q-item-main>Plan</q-item-main>
+                      <q-item-side>{{shortLead.plan.planName}}</q-item-side>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
-                      <q-item-section>Setup Fees</q-item-section>
-                      <q-item-section>Rs. {{formData.leadInformation.setupGivenFees}}</q-item-section>
+                    <q-item class="q-pa-sm q-body-1">
+                      <q-item-main>Setup Fees</q-item-main>
+                      <q-item-side>Rs. {{formData.leadInformation.setupGivenFees}}</q-item-side>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
-                      <q-item-section>Recurring Fees</q-item-section>
-                      <q-item-section>Rs. {{formData.leadInformation.recurringGivenFees}}</q-item-section>
+                    <q-item class="q-pa-sm q-body-1">
+                      <q-item-main>Recurring Fees</q-item-main>
+                      <q-item-side>Rs. {{formData.leadInformation.recurringGivenFees}}</q-item-side>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
-                      <q-item-section>Merchant Category</q-item-section>
-                      <q-item-section>{{shortLead.merchantCategory.merchantCategoryName}}</q-item-section>
+                    <q-item class="q-pa-sm q-body-1">
+                      <q-item-main>Merchant Category</q-item-main>
+                      <q-item-side>{{shortLead.merchantCategory.merchantCategoryName}}</q-item-side>
                     </q-item>
                   </q-list>
-                </q-card-section>
+                </q-card-main>
               </q-card>
             </div>
 
             <!-- MDR -->
             <div class="col-12">
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
-                <q-card-section class="q-pa-sm bottom-border title-bg">
-                  <span class="text-body1 text-weight-medium">MDR</span>
-                </q-card-section>
-                <q-card-section class="q-pa-sm">
+                <q-card-title class="q-pa-sm bottom-border title-bg">
+                  <span class="q-body-1 text-weight-medium">MDR</span>
+                </q-card-title>
+                <q-card-main class="q-pa-sm">
                   <q-list no-border>
                     <q-item class="q-pa-sm">
-                      <q-item-section>
+                      <q-item-main>
                         <q-input
                           type="number"
                           color="grey-9"
-                          label="Debit <= 2000 (%)"
+                          float-label="Debit <= 2000 (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.debitLessthanAmount"
                         />
-                      </q-item-section>
-                      <q-item-section>
+                      </q-item-main>
+                      <q-item-main>
                         <q-input
                           type="number"
                           color="grey-9"
-                          label="Debit > 2000 (%)"
+                          float-label="Debit > 2000 (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.debitGreaterthanAmount"
                         />
-                      </q-item-section>
+                      </q-item-main>
                     </q-item>
                     <q-item class="q-pa-sm">
-                      <q-item-section>
+                      <q-item-main>
                         <q-input
                           type="number"
                           color="grey-9"
-                          label="Std CC (%)"
+                          float-label="Std CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.stdCC"
                         />
-                      </q-item-section>
-                      <q-item-section>
+                      </q-item-main>
+                      <q-item-main>
                         <q-input
                           type="number"
                           color="grey-9"
-                          label="Premium CC (%)"
+                          float-label="Premium CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.premiumCC"
                         />
-                      </q-item-section>
+                      </q-item-main>
                     </q-item>
                     <q-item class="q-pa-sm">
-                      <q-item-section>
+                      <q-item-main>
                         <q-input
                           type="number"
                           color="grey-9"
-                          label="Corp Pre CC (%)"
+                          float-label="Corp Pre CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.corpCC"
                         />
-                      </q-item-section>
-                      <q-item-section>
+                      </q-item-main>
+                      <q-item-main>
                         <q-input
                           type="number"
                           color="grey-9"
-                          label="Intl Pre CC (%)"
+                          float-label="Intl Pre CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.intlCC"
                         />
-                      </q-item-section>
+                      </q-item-main>
                     </q-item>
                     <q-item class="q-pa-sm">
-                      <q-item-section>
+                      <q-item-main>
                         <q-input
                           type="number"
                           color="grey-9"
-                          label="Super Pre CC (%)"
+                          float-label="Super Pre CC (%)"
                           :class="[shouldShowGivenPricefield?'':'no-pointer-events']"
                           :readonly="!shouldShowGivenPricefield"
                           v-model="formData.leadInformation.superPremiumlCC"
                         />
-                      </q-item-section>
+                      </q-item-main>
                     </q-item>
                     <q-item class="items-start q-pa-sm">
                       <q-checkbox
@@ -152,11 +152,11 @@
                         color="purple-9"
                         :readonly="!shouldShowGivenPricefield"
                       >
-                        <small class="text-caption">Enable Cash@POS Cash @POS incentive Rs.5</small>
+                        <small class="q-caption">Enable Cash@POS Cash @POS incentive Rs.5</small>
                       </q-checkbox>
                     </q-item>
                   </q-list>
-                </q-card-section>
+                </q-card-main>
               </q-card>
             </div>
           </div>
@@ -164,133 +164,133 @@
 
         <div class="col-md-6">
           <q-card class="q-ma-xs border-1 q-custom-class" flat>
-            <q-card-section class="q-pa-sm bottom-border title-bg">
-              <span class="text-body1 text-weight-medium">Price Details</span>
-            </q-card-section>
-            <q-card-section>
+            <q-card-title class="q-pa-sm bottom-border title-bg">
+              <span class="q-body-1 text-weight-medium">Price Details</span>
+            </q-card-title>
+            <q-card-main>
               <q-list multiline no-border>
                 <q-item>
-                  <q-item-section>
-                    <q-item-label>Expected Setup Price</q-item-label>
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label>
+                  <q-item-side>
+                    <q-item-tile>Expected Setup Price</q-item-tile>
+                  </q-item-side>
+                  <q-item-main>
+                    <q-item-tile>
                       <q-icon name="fas fa-rupee-sign" size="12px" />
                       {{formData.leadInformation.setupGivenFees}}
-                    </q-item-label>
-                  </q-item-section>
+                    </q-item-tile>
+                  </q-item-main>
                 </q-item>
                 <q-item>
-                  <q-item-section>
-                    <q-item-label>Expected Recurring Price</q-item-label>
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label>
+                  <q-item-side>
+                    <q-item-tile>Expected Recurring Price</q-item-tile>
+                  </q-item-side>
+                  <q-item-main>
+                    <q-item-tile>
                       <q-icon name="fas fa-rupee-sign" size="12px" />
                       {{formData.leadInformation.recurringGivenFees}}
-                    </q-item-label>
-                  </q-item-section>
+                    </q-item-tile>
+                  </q-item-main>
                 </q-item>
                 <q-item>
-                  <q-item-section>
-                    <q-item-label>SO Remarks</q-item-label>
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label>{{shortLead.reason}}</q-item-label>
-                  </q-item-section>
+                  <q-item-side>
+                    <q-item-tile>SO Remarks</q-item-tile>
+                  </q-item-side>
+                  <q-item-main>
+                    <q-item-tile>{{shortLead.reason}}</q-item-tile>
+                  </q-item-main>
                 </q-item>
                 <q-item
                   v-if="((shouldShowGivenPricefield) && (shortLead.verifiedPricingStatus != 2 || shortLead.verifiedCmsPricingStatus==4))"
                 >
-                  <q-item-section>
-                    <q-item-label>RSM Remarks</q-item-label>
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label>{{getRsmReason.reason}}</q-item-label>
-                  </q-item-section>
+                  <q-item-side>
+                    <q-item-tile>RSM Remarks</q-item-tile>
+                  </q-item-side>
+                  <q-item-main>
+                    <q-item-tile>{{getRsmReason.reason}}</q-item-tile>
+                  </q-item-main>
                 </q-item>
                 <q-item
                   v-if="((shouldShowGivenPricefield) && (shortLead.verifiedPricingStatus != 2 || shortLead.verifiedCmsPricingStatus==4))"
                 >
-                  <q-item-section>
-                    <q-item-label>
+                  <q-item-main>
+                    <q-item-tile>
                       <q-input
                         v-model="formData.leadInformation.recurringFees"
                         @blur="$v.formData.leadInformation.recurringFees.$touch"
                         :error="$v.formData.leadInformation.recurringFees.$error"
                         color="grey-9"
                         @update:model-value="fnCheckPrice(formData)"
-                        label="Given recurring fees"
+                        float-label="Given recurring fees"
                         type="number"
                       />
-                    </q-item-label>
-                  </q-item-section>
+                    </q-item-tile>
+                  </q-item-main>
                 </q-item>
                 <q-item
                   v-if="((shouldShowGivenPricefield) && (shortLead.verifiedPricingStatus == 2 || shortLead.verifiedCmsPricingStatus==4))"
                 >
-                  <q-item-section>Recurring fees</q-item-section>
-                  <q-item-section>
-                    <q-item-label>{{formData.leadInformation.recurringGivenFees}}</q-item-label>
-                  </q-item-section>
+                  <q-item-side>Recurring fees</q-item-side>
+                  <q-item-main>
+                    <q-item-tile>{{formData.leadInformation.recurringGivenFees}}</q-item-tile>
+                  </q-item-main>
                 </q-item>
                 <q-item
                   v-if="((shouldShowGivenPricefield) && (shortLead.verifiedPricingStatus != 2 || shortLead.verifiedCmsPricingStatus==4))"
                 >
-                  <q-item-section>
-                    <q-item-label>
+                  <q-item-main>
+                    <q-item-tile>
                       <q-input
                         v-model="formData.leadInformation.setupFees"
                         @blur="$v.formData.leadInformation.setupFees.$touch"
                         :error="$v.formData.leadInformation.setupFees.$error"
                         color="grey-9"
                         @update:model-value="fnCheckPrice(formData)"
-                        label="Given Setup Price"
+                        float-label="Given Setup Price"
                         type="number"
                       />
-                    </q-item-label>
-                  </q-item-section>
+                    </q-item-tile>
+                  </q-item-main>
                 </q-item>
                 <q-item
                   v-if="((shouldShowGivenPricefield) && (shortLead.verifiedPricingStatus == 2 || shortLead.verifiedCmsPricingStatus==4))"
                 >
-                  <q-item-section>Given Setup Price</q-item-section>
-                  <q-item-section>
-                    <q-item-label>{{formData.leadInformation.setupGivenFees}}</q-item-label>
-                  </q-item-section>
+                  <q-item-side>Given Setup Price</q-item-side>
+                  <q-item-main>
+                    <q-item-tile>{{formData.leadInformation.setupGivenFees}}</q-item-tile>
+                  </q-item-main>
                 </q-item>
                 <q-item v-if="$route.params.showAction == undefined">
-                  <q-item-section
+                  <q-item-main
                     v-if="!shouldShowGivenPricefield && $route.params.showAction == undefined"
                   >
-                    <q-item-label>
+                    <q-item-tile>
                       <q-input
                         @keyup.enter="leadVerificationApprove()"
                         v-model="formData.leadVerificationStatus.reason"
                         @blur="$v.formData.leadVerificationStatus.reason.$touch"
                         :error="$v.formData.leadVerificationStatus.reason.$error"
                         color="grey-9"
-                        label="Remarks"
+                        float-label="Remarks"
                       />
-                    </q-item-label>
-                  </q-item-section>
-                  <q-item-section
+                    </q-item-tile>
+                  </q-item-main>
+                  <q-item-main
                     v-if="shouldShowGivenPricefield && $route.params.showAction == undefined"
                   >
-                    <q-item-label>
+                    <q-item-tile>
                       <q-input
                         @keyup.enter="leadVerificationNHApprove()"
                         v-model="formData.leadVerificationStatus.reason"
                         @blur="$v.formData.leadVerificationStatus.reason.$touch"
                         :error="$v.formData.leadVerificationStatus.reason.$error"
                         color="grey-9"
-                        label="Remarks"
+                        float-label="Remarks"
                       />
-                    </q-item-label>
-                  </q-item-section>
+                    </q-item-tile>
+                  </q-item-main>
                 </q-item>
               </q-list>
-            </q-card-section>
+            </q-card-main>
           </q-card>
         </div>
       </div>
@@ -493,7 +493,8 @@ export default {
             message: "Are you sure want to reject lead?",
             ok: "Continue",
             cancel: "Cancel",
-          }).onOk(() => {
+          })
+          .onOk(() => {
             let requestParams = {
               leadId: this.$route.params.id,
               action: 0,
@@ -510,7 +511,8 @@ export default {
                 this.$router.push(
                   "/sales/manager/pricing/exception/verification"
                 );
-              }).catch((error) => {
+              })
+              .catch((error) => {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
@@ -534,18 +536,19 @@ export default {
             message: "Are you sure want to approve lead?",
             ok: "Continue",
             cancel: "Cancel",
-          }).onOk(() => {
+          })
+          .onOk(() => {
             let requestParams = {
               leadId: this.$route.params.id,
               action: 1,
               remarks: this.formData,
             };
             this.$q.loading.show({
-          delay: 100, // ms
-          message: "Please Wait",
-          spinnerColor: "purple-9",
-          customClass: "shadow-none",
-        });
+              delay: 100, // ms
+              message: "Please Wait",
+              spinnerColor: "purple-9",
+              customClass: "shadow-none",
+            });
             this.PRICING_EXCEPTION_VERIFICATION(requestParams)
               .then((response) => {
                 this.$q.notify({
@@ -558,7 +561,8 @@ export default {
                 this.$router.push(
                   "/sales/manager/pricing/exception/verification"
                 );
-              }).catch((error) => {
+              })
+              .catch((error) => {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
@@ -583,7 +587,8 @@ export default {
             message: "Are you sure want to approve lead?",
             ok: "Continue",
             cancel: "Cancel",
-          }).onOk(() => {
+          })
+          .onOk(() => {
             let requestParams = {
               leadId: this.$route.params.id,
               action: 1,
@@ -600,7 +605,8 @@ export default {
                 this.$router.push(
                   "/sales/manager/pricing/exception/verification"
                 );
-              }).catch((error) => {
+              })
+              .catch((error) => {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",

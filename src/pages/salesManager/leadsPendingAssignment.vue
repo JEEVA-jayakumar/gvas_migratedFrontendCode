@@ -11,12 +11,13 @@
         title="Lead Validation"
         table-class="customTableClass"
         class="q-py-none"
-        :rows="tableData"
+        :rows="tableData || []"
         :columns="columns"
-        :filter="filter" v-model:pagination="paginationControl"
+        :filter="filter"
+        v-model:pagination="paginationControl"
         row-key="name"
       >
-        <template v-slot:top="props" class="bottom-border">
+        <template v-slot:top="props">
           <!--START: table fullscreen mode -->
           <!-- <div class="col-md-4" align="right">
             <q-btn
@@ -30,12 +31,12 @@
           <!--END: table fullscreen mode -->
           <!--START: table filter,search -->
           <div class="col-md-5">
-            <q-input
+            <q-search
               clearable
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              label="Search by SO name, Merchant Name, Lead ID"
+              float-label="Search by SO name, Merchant Name, Lead ID"
               class="q-mr-lg q-py-sm"
             />
           </div>

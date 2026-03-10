@@ -27,24 +27,22 @@
       </div>
       <!--END: table title -->
       <div v-if="shouldShowGivenPricefield">
-        <q-tabs v-model="tab" align="left" active-color="purple-9" indicator-color="purple-9">
-          <!-- Tabs - notice  -->
-          <q-tab
-            :alert="pricingExceptionCountForTab > 0"
-            name="tab-1"
-            label="Pending"
-          />
+        <q-tabs v-model="tab" active-color="purple-9" indicator-color="purple-9" align="left" narrow-indicator dense class="text-grey">
+          <q-tab name="tab-1" label="Pending">
+            <q-badge color="purple-9" floating v-if="pricingExceptionCountForTab > 0">{{ pricingExceptionCountForTab }}</q-badge>
+          </q-tab>
           <q-tab name="tab-2" label="History" />
-          <!-- Targets -->
-</q-tabs>
-<q-tab-panels v-model="tab" animated keep-alive>
-<q-tab-panel name="tab-1">
+        </q-tabs>
+
+        <q-tab-panels v-model="tab" animated swipeable vertical transition-prev="jump-up" transition-next="jump-up">
+          <q-tab-panel name="tab-1" class="no-padding">
             <!--START: table lead validation -->
             <q-table
               table-class="customTableClass"
-              :rows="getPricingExceptionList"
+              :rows="getPricingExceptionList || []"
               :columns="columns"
-              :filter="filter" v-model:pagination="paginationControl"
+              :filter="filter"
+              v-model:pagination="paginationControl"
               row-key="name"
             >
               <!--START: table body modification -->
@@ -58,9 +56,9 @@
                 </q-td>
               </template>
               <template v-slot:body-cell-submittoRSMDate="props">
-                <q-td :props="props">
-                  {{ props.row.submittoRSMDate ? $moment(props.row.submittoRSMDate).format("Do MMM Y") : 'NA' }}
-                </q-td>
+                <q-td
+                  :props="props"
+                >{{ props.row.submittoRSMDate ? $moment(props.row.submittoRSMDate).format("Do MMM Y") : 'NA' }}</q-td>
               </template>
               <template v-slot:body-cell-action="props">
                 <q-td :props="props">
@@ -75,54 +73,56 @@
                 </q-td>
               </template>
               <!--END: table body modification -->
-              <template v-slot:top="props" class="bottom-border">
+              <template v-slot:top="props">
                 <!--START: table filter,search -->
                 <div class="col-md-5">
-                  <q-input
+                  <q-search
                     clearable
                     color="grey-9"
                     v-model="filter"
                     placeholder="Type.."
-                    label="Search by Merchant Name, Lead ID"
+                    float-label="Search by Merchant Name, Lead ID"
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
-                <!--ENDv-model: table filter,search -->
+                <!--END: table filter,search -->
               </template>
             </q-table>
             <!--END: table lead validation -->
           </q-tab-panel>
-<q-tab-panel name="tab-2">
+          <q-tab-panel name="tab-2" class="no-padding">
             <!--START: table data -->
             <q-table
               v-if=" getRoleForTableToggleRsmList == false"
               table-class="customTableClass"
-              :rows="getPricingRsmList"
+              :rows="getPricingRsmList || []"
               :columns="rsmcolumns"
-              :filter="filter" v-model:pagination="paginationControl"
+              :filter="filter"
+              v-model:pagination="paginationControl"
               row-key="name"
             >
               <template v-slot:body="props">
                 <q-tr
-                  :class="[rowActiveId == props.rowIndex? 'bg-grey-4 text-dark':'']"
+                  :class="[rowActiveId == props.row.__index? 'bg-grey-4 text-dark':'']"
                   :props="props"
-                  @mouseover="rowHover(props.rowIndex)"
-                  @click="rowClick(props.row, props.rowIndex)"
+                  @mouseover="rowHover(props.row.__index)"
+                  @click="rowClick(props.row, props.row.__index)"
                   class="cursor-pointer"
                 >
                   <q-td v-for="col in props.cols" :key="col.name" :props="props">{{ col.value }}</q-td>
                 </q-tr>
               </template>
             </q-table>
-            <!--ENDv-model: table data -->
+            <!--END: table data -->
             <!--START: table data -->
             <!--START: table lead validation -->
             <q-table
               v-if=" getRoleForTableToggleRsmList == true"
               table-class="customTableClass"
-              :rows="pricingExceptionByRsmIDList"
+              :rows="pricingExceptionByRsmIDList || []"
               :columns="rsmcolumnsLeads"
-              :filter="filter" v-model:pagination="paginationControl"
+              :filter="filter"
+              v-model:pagination="paginationControl"
               row-key="name"
             >
               <!--START: table body modification -->
@@ -148,39 +148,40 @@
                 </q-td>
               </template>
               <!--END: table body modification -->
-              <template v-slot:top="props" class="bottom-border">
+              <template v-slot:top="props">
                 <!--START: table filter,search -->
                 <div class="col-md-5">
-                  <q-input
+                  <q-search
                     clearable
                     color="grey-9"
                     v-model="filter"
                     placeholder="Type.."
-                    label="Search by Merchant Name, Lead ID"
+                    float-label="Search by Merchant Name, Lead ID"
                     class="q-mr-lg q-py-sm"
                   />
                 </div>
-                <!--ENDv-model: table filter,search -->
+                <!--END: table filter,search -->
               </template>
             </q-table>
             <!--END: table lead validation -->
             <!--END: table data -->
           </q-tab-panel>
-</q-tab-panels>
+        </q-tab-panels>
       </div>
       <div v-else>
         <!--START: table lead validation -->
         <q-table
           table-class="customTableClass"
-          :rows="getPricingExceptionList"
+          :rows="getPricingExceptionList || []"
           :columns="columns"
-          :filter="filter" v-model:pagination="paginationControl"
+          :filter="filter"
+          v-model:pagination="paginationControl"
           row-key="name"
         >
           <template v-slot:body-cell-submittoRSMDate="props">
-            <q-td :props="props">
-              {{ props.row.submittoRSMDate ? $moment(props.row.submittoRSMDate).format("Do MMM Y") : 'NA' }}
-            </q-td>
+            <q-td
+              :props="props"
+            >{{ props.row.submittoRSMDate ? $moment(props.row.submittoRSMDate).format("Do MMM Y") : 'NA' }}</q-td>
           </template>
           <!--START: table body modification -->
           <template v-slot:body-cell-leadNumber="props">
@@ -205,15 +206,15 @@
             </q-td>
           </template>
           <!--END: table body modification -->
-          <template v-slot:top="props" class="bottom-border">
+          <template v-slot:top="props">
             <!--START: table filter,search -->
             <div class="col-md-5">
-              <q-input
+              <q-search
                 clearable
                 color="grey-9"
                 v-model="filter"
                 placeholder="Type.."
-                label="Search by Merchant Name, Lead ID"
+                float-label="Search by Merchant Name, Lead ID"
                 class="q-mr-lg q-py-sm"
               />
             </div>
@@ -236,7 +237,7 @@ export default {
   setup() {
     return { v$: useVuelidate() };
   },
-  name: "SalesManagerPricingExceptionVerification",
+  name: "revenueApproval",
   components: {
     generalLeadInformation,
   },
@@ -264,7 +265,7 @@ export default {
           label: "SO name",
           align: "left",
           field: (row) => {
-            return row.createdBy?.name || "NA";
+            return row.createdBy.name;
           },
           sortable: false,
         },
@@ -274,7 +275,7 @@ export default {
           label: "Submitted to RSM date",
           align: "left",
           field: (row) => {
-            return row.submittoRSMDate || "NA";
+            return row.submittoRSMDate;
           },
           // field: "submittoRSMDate",
           sortable: false,
@@ -292,6 +293,7 @@ export default {
           required: true,
           label: "Type",
           align: "left",
+          field: "verifiedCmsPricingStatus",
           field: (row) => {
             return row.verifiedCmsPricingStatus == 2 ||
               row.verifiedCmsPricingStatus == 6
@@ -314,7 +316,7 @@ export default {
           label: "Regular plan",
           align: "left",
           field: (row) => {
-            return row.plan?.planName || "NA";
+            return row.plan.planName;
           },
           sortable: false,
         },
@@ -324,7 +326,7 @@ export default {
           label: "Merchant category",
           align: "left",
           field: (row) => {
-            return row.merchantCategory?.merchantCategoryName || "NA";
+            return row.merchantCategory.merchantCategoryName;
           },
           sortable: false,
         },
@@ -344,7 +346,7 @@ export default {
           label: "SO name",
           align: "left",
           field: (row) => {
-            return row.createdBy != undefined ? row.createdBy.name : "NA";
+            return row.createdBy != undefined ? row.createdBy.name : "";
           },
           sortable: false,
         },
@@ -355,7 +357,7 @@ export default {
           align: "left",
           // field: "submittoRSMDate",
           field: (row) => {
-            return row.submittoRSMDate || "NA";
+            return row.submittoRSMDate;
           },
           sortable: false,
         },
@@ -381,7 +383,7 @@ export default {
           label: "Regular plan",
           align: "left",
           field: (row) => {
-            return row.plan != undefined ? row.plan.planName : "NA";
+            return row.plan != undefined ? row.plan.planName : "";
           },
           sortable: false,
         },
@@ -393,7 +395,7 @@ export default {
           field: (row) => {
             return row.merchantCategory != undefined
               ? row.merchantCategory.merchantCategoryName
-              : "NA";
+              : "";
           },
           sortable: false,
         },
@@ -509,7 +511,8 @@ export default {
       this.PRICING_EXCEPTION_LIST()
         .then(() => {
           this.pricingExceptionCountForTab = this.getPricingExceptionList.length;
-        }).then(() => {
+        })
+        .then(() => {
           this.PRICING_RSM_LIST();
           this.$q.loading.hide();
         })
@@ -528,7 +531,6 @@ export default {
       this.rowActiveId = index;
     },
     rowClick(item, index) {
-      this.rowActiveId = index;
       this.$q.loading.show({
         delay: 0, // ms
         spinnerColor: "purple-9",

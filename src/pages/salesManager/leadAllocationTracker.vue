@@ -31,8 +31,9 @@
         class="q-py-none"
         :rows="getAllLeadAllocationData.assignedLeads || []"
         :columns="columns"
-        :filter="filter" v-model:pagination="paginationControl"
-        row-key="id"
+        :filter="filter"
+        v-model:pagination="paginationControl"
+        row-key="name"
       >
         <template v-slot:body-cell-dateCreated="props">
           <q-td :props="props">
@@ -57,9 +58,7 @@
           <q-td
             class="breakAll"
             :props="props"
-          >
-            {{props.row.leadAddress}}
-          </q-td>
+          >{{props.row.leadAddress}}</q-td>
         </template>
         <template v-slot:body-cell-assignedTo="props">
           <q-td :props="props">
@@ -72,14 +71,14 @@
           </q-td>
         </template>
 
-        <template v-slot:top>
+        <template v-slot:top="props">
           <div class="col-md-5">
-            <q-input
+            <q-search
               clearable
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              label="Search by SO name, Merchant Name, Lead ID"
+              float-label="Search by SO name, Merchant Name, Lead ID"
               class="q-mr-lg q-py-sm"
             />
           </div>
@@ -125,7 +124,7 @@ export default {
           required: true,
           label: "Date Created",
           align: "left",
-          field: row => row?.createdAt || "NA",
+          field: "createdAt",
           sortable: true
         },
         {
@@ -133,7 +132,7 @@ export default {
           required: true,
           label: "Submitted On",
           align: "center",
-          field: row => row?.shortleadDate || "NA",
+          field: "shortleadDate",
           sortable: true
         },
         {
@@ -142,7 +141,7 @@ export default {
           label: "Lead ID",
           align: "left",
           field: row => {
-            return row?.leadNumber ? "# " + row.leadNumber : "NA";
+            return "# " + row.leadNumber;
           },
           sortable: true
         },
@@ -151,7 +150,7 @@ export default {
           required: true,
           label: "Merchant Name",
           align: "left",
-          field: row => row?.leadName || "NA",
+          field: "leadName",
           sortable: false
         },
         {
@@ -159,7 +158,7 @@ export default {
           required: true,
           label: "Location",
           align: "left",
-          field: row => row?.leadAddress || "NA",
+          field: "leadAddress",
           sortable: false
         },
         {
@@ -167,7 +166,7 @@ export default {
           required: true,
           label: "SO Name",
           align: "left",
-          field: row => row?.assignedTo?.name || "NA",
+          field: "assignedTo",
           sortable: false
         },
         {
@@ -175,7 +174,7 @@ export default {
           required: true,
           label: "",
           align: "left",
-          field: row => row?.id || "NA",
+          field: "action",
           sortable: false
         }
       ],

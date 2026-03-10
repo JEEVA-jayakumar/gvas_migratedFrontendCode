@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf">
      <q-header style="margin-left:0px" class="shadow-0 z-top" flat>
       <customHeader
         :leftDrawerOpen="leftDrawerOpen"
@@ -15,8 +15,11 @@
       show-if-above
       :width="250"
       :breakpoint="500"
-      style="background-color: #531b64 !important;"
+      :content-style="{backgroundColor: '#202c3f', width:'250px'}"
     >
+      <div class="q-py-md q-px-lg flex items-center" v-if="leftDrawerOpen" style="height: 65px; background: rgba(0,0,0,0.1)">
+        <img src="~assets/images/logo.png" style="height: 35px" />
+      </div>
       <SidebarMenu :menus="menus" />
     </q-drawer>
 
@@ -45,37 +48,26 @@ export default {
           id: 1,
           to: "/sales/manager/lead/allocation/tracker",
           name: "Lead Allocation Tracker",
-          icon: "assignment",
         },
         {
           id: 2,
           to: "/sales/manager/leads/status",
           name: "Leads Status",
-          icon: "query_stats",
         },
         {
           id: 3,
           to: "/sales/manager/revenue/trackers",
           name: "Revenue Trackers",
-          icon: "payments",
         },
         {
           id: 4,
           to: "/sales/manager/pricing/exception/verification",
-          name: "Pricing Exception Verification",
-          icon: "fact_check",
+          name: "Exception Approval",
         },
         {
           id: 6,
           to: "/sales/manager/aging/tracker/pending/leads",
           name: "Aging Tracker for Pending Leads",
-          icon: "history",
-        },
-        {
-          id: 5,
-          to: "/sales/manager/leads/pending/assignment",
-          name: "Leads Pending Assignment",
-          icon: "assignment_ind",
         },
       ],
     };
@@ -116,29 +108,35 @@ export default {
 
 <style scoped>
 /* Standardized Sidebar Identity for Portal Sidebars */
-::v-deep(.menu-list) {
-  background-color: #531b64 !important;
+:deep(.menu-list) {
+  background-color: #202c3f !important;
 }
 
-::v-deep(.menu-item) {
+:deep(.menu-item) {
   color: #e3e4e5 !important;
   font-size: 14px;
   border-radius: 0 !important;
   margin-right: 0 !important;
+  padding: 12px 25px;
 }
 
-::v-deep(.menu-item:hover) {
-  background: #7d428f !important;
+:deep(.menu-item:hover) {
+  background: rgba(56, 69, 90, 0.98) !important;
   color: #e3e4e5 !important;
 }
 
-::v-deep(.menu-item-active),
-::v-deep(.q-router-link--active) {
-  background: #3b084b !important;
+:deep(.menu-item-active),
+:deep(.q-router-link--active),
+:deep(.q-router-link-active) {
+  background: rgba(0, 0, 0, 0.4) !important;
   color: #e3e4e5 !important;
 }
 
-::v-deep(.active-indicator) {
+:deep(.q-item-section--avatar) {
+  display: none !important;
+}
+
+:deep(.active-indicator) {
   display: none;
 }
 </style>
