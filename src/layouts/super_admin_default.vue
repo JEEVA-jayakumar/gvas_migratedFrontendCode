@@ -2,7 +2,7 @@
   <q-layout view="hHh Lpr lFf">
     <q-header flat>
       <customHeader
-        :getUserName="getUserName"
+        :propGetUserName="getUserName"
         :leftDrawerOpen="leftDrawerOpen"
         @fnToggleSideMenu="toggleSideMenu"
       />
@@ -17,15 +17,9 @@
       :breakpoint="500"
       style="background-color: #531b64 !important;"
     >
-      <q-list
-        no-border
-        inset-delimiter
-        highlight
-      >
-        <q-item clickable v-for="menu in menus" :key="menu.id" :to="menu.to" class="menu-main-item-color-SA">
-          <q-item-section class="menu-item-color-SA">{{menu.name}}</q-item-section>
-        </q-item>
-      </q-list>
+      <q-scroll-area style="height: 100%" :thumb-style="thumbStyle">
+        <SidebarMenu :menus="menus" />
+      </q-scroll-area>
     </q-drawer>
 
     <q-page-container class="bg-grey-1">
@@ -50,15 +44,24 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import customHeader from "../components/customHeader.vue";
+import SidebarMenu from "../components/SidebarMenu.vue";
 
 export default {
   name: "DefaultLayoutSuperAdmin",
   components: {
     customHeader,
+    SidebarMenu
   },
   data() {
     return {
       leftDrawerOpen: false,
+      thumbStyle: {
+        right: "2px",
+        borderRadius: "5px",
+        backgroundColor: "#61116a",
+        width: "5px",
+        opacity: 0.75,
+      },
       menus: [
         {
           id: 1,
@@ -209,31 +212,4 @@ export default {
 </script>
 
 <style scoped>
-.menu-item-color-SA {
-  color: #e3e4e5 !important;
-  font-size: 14px;
-}
-.menu-main-item-color-SA:hover {
-  color: #e3e4e5 !important;
-  font-size: 14px;
-  background: #7d428f !important;
-}
-.menu-main-item-color-SA:active {
-  color: #e3e4e5 !important;
-  font-size: 14px;
-  background: #7d428f !important;
-}
-
-.menu-main-item-color-SA:focus {
-  color: #e3e4e5 !important;
-  font-size: 14px;
-  background: #7d428f !important;
-}
-
-.q-item.q-router-link--active,
-.q-item--active,
-.q-item:focus {
-  background: #3b084b !important;
-  color: #e3e4e5 !important;
-}
 </style>

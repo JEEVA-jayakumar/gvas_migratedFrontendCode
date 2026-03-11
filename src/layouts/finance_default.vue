@@ -13,19 +13,17 @@
       bordered
       :width="260"
       :breakpoint="500"
-      class="bg-dark text-white"
+      style="background-color: #531b64"
+      class="text-white"
     >
-      <div class="q-py-md q-px-lg flex items-center" style="height: 65px; background: rgba(0,0,0,0.1)">
-        <img src="~assets/images/logo.png" style="height: 35px" />
-      </div>
-      <q-scroll-area style="height: calc(100% - 65px)" :thumb-style="{
+      <q-scroll-area style="height: 100%" :thumb-style="{
         right: '2px',
         borderRadius: '5px',
         backgroundColor: '#61116a',
         width: '5px',
         opacity: 0.75,
       }">
-        <SidebarMenu :menus="menus" />
+        <SidebarMenu :menus="menus" style="padding-top: 65px" />
       </q-scroll-area>
     </q-drawer>
 

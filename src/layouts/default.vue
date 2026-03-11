@@ -14,7 +14,7 @@
       :width="260"
       :breakpoint="500"
       class="text-white"
-      :style="{ background: getComputedColor }"
+      style="background-color: #531b64 !important;"
     >
       <q-scroll-area style="height: 100%" :thumb-style="{
         right: '2px',
@@ -1031,16 +1031,7 @@ export default {
   computed: {
     ...mapGetters("superAdminAggregators", ["getActiveCreatedAggregatorList"]),
     getComputedColor() {
-      if (this.$route.fullPath.includes("super/admin")) {
-        return "#531b64";
-      }
-      if (this.$route.fullPath.includes("sales/manager")) {
-        return "#202c3f";
-      }
-      if (this.$route.fullPath.includes("/sat/")) {
-        return "#202c3f";
-      }
-      return "#202c3f";
+      return "#531b64";
     },
     currentMenus() {
       let menuItems = [];
