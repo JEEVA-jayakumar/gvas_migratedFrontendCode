@@ -15,9 +15,17 @@
       show-if-above
       :width="250"
       :breakpoint="500"
-      :content-style="{backgroundColor: '#202c3f', width:'250px'}"
+      style="background-color: #531b64 !important;"
     >
-      <SidebarMenu :menus="menus" style="padding-top: 65px" />
+      <q-scroll-area style="height: 100%" :thumb-style="{
+        right: '2px',
+        borderRadius: '5px',
+        backgroundColor: '#61116a',
+        width: '5px',
+        opacity: 0.75,
+      }">
+        <SidebarMenu :menus="menus" style="padding-top: 65px" />
+      </q-scroll-area>
     </q-drawer>
 
     <q-page-container>
@@ -104,36 +112,4 @@ export default {
 </script>
 
 <style scoped>
-/* Standardized Sidebar Identity for Portal Sidebars */
-:deep(.menu-list) {
-  background-color: #202c3f !important;
-}
-
-:deep(.menu-item) {
-  color: #e3e4e5 !important;
-  font-size: 14px;
-  border-radius: 0 !important;
-  margin-right: 0 !important;
-  padding: 12px 25px;
-}
-
-:deep(.menu-item:hover) {
-  background: rgba(56, 69, 90, 0.98) !important;
-  color: #e3e4e5 !important;
-}
-
-:deep(.menu-item-active),
-:deep(.q-router-link--active),
-:deep(.q-router-link-active) {
-  background: rgba(0, 0, 0, 0.4) !important;
-  color: #e3e4e5 !important;
-}
-
-:deep(.q-item-section--avatar) {
-  display: none !important;
-}
-
-:deep(.active-indicator) {
-  display: none;
-}
 </style>

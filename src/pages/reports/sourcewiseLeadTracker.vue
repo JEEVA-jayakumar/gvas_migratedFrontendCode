@@ -4,7 +4,7 @@
       <!--START: table title -->
       <div class="col-md-12 q-title q-px-md q-py-md text-weight-regular bottom-border text-grey-9">Sourcewise Lead Tracker</div>
       <div class="row q-pa-md">
-        <div class="col-12 col-md-6 group">
+        <div class="col-6 group">
           <p>Choose one from the below or you can choose start and end date manually</p>
           <q-radio color="grey-9" v-model="formData.option" @update:model-value="calculateDate" :val="1" label="Past 6 months"/>
           <q-radio color="grey-9" v-model="formData.option" @update:model-value="calculateDate" :val="2" label="Past 3 months"/>
@@ -16,9 +16,9 @@
           <q-radio color="grey-9" v-model="formData.option" @update:model-value="calculateDate" :val="8" label="Today"/>
         </div>
       </div>
-      <div class="row q-pa-md q-col-gutter-md">
-        <div class="col-12 col-md-4">
-          <q-input filled v-model="formattedFrom" label="Start date" color="grey-9" readonly>
+      <div class="row q-pa-md">
+        <div class="col-6 group">
+          <q-input v-model="formattedFrom" label="Start date" color="grey-9" readonly>
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
                 <q-menu transition-show="scale" transition-hide="scale">
@@ -27,9 +27,7 @@
               </q-icon>
             </template>
           </q-input>
-        </div>
-        <div class="col-12 col-md-4">
-          <q-input filled v-model="formattedTo" label="End date" color="grey-9" readonly>
+          <q-input v-model="formattedTo" label="End date" color="grey-9" readonly>
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
                 <q-menu transition-show="scale" transition-hide="scale">
@@ -39,7 +37,7 @@
             </template>
           </q-input>
         </div>
-        <div class="col-12 group q-mt-md">
+        <div class="col-12 group">
           <q-btn class="common-dark-blue" @click="downloadReport()" label="Download" />
         </div>
       </div>
@@ -57,8 +55,8 @@ export default {
     return {
       formData: {
         option: 8,
-        from: date.formatDate(new Date(), 'YYYY-MM-DD'),
-        to: date.formatDate(new Date(), 'YYYY-MM-DD'),
+        from: new Date(),
+        to: new Date(),
       },
     };
   },
@@ -92,8 +90,8 @@ export default {
       } else {
         newDate = new Date();
       }
-      this.formData.from = date.formatDate(newDate, 'YYYY-MM-DD');
-      this.formData.to = date.formatDate(now, 'YYYY-MM-DD');
+      this.formData.from = newDate;
+      this.formData.to = now;
     },
     downloadReport() {
       this.$q.loading.show({ delay: 100 });

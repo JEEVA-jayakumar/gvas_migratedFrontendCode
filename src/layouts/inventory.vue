@@ -11,20 +11,18 @@
       class="shadow-9"
       v-model="leftDrawerOpen"
       content-class="no-shadow"
-      :content-style="{background: '#202c3f',width:'250px'}"
+      style="background-color: #531b64 !important;"
+      :width="250"
     >
-      <q-list
-        no-border
-        link
-        inset-delimiter
-        highlight
-        style="padding-top:65px"
-      >
-
-        <q-item v-for="menu in menus" :key="menu.id" :to="menu.to" class="menu-main-item-color">
-          <q-item-section class="menu-item-color">{{menu.name}}</q-item-section>
-        </q-item>
-      </q-list>
+      <q-scroll-area style="height: 100%" :thumb-style="{
+        right: '2px',
+        borderRadius: '5px',
+        backgroundColor: '#61116a',
+        width: '5px',
+        opacity: 0.75,
+      }">
+        <SidebarMenu :menus="menus" style="padding-top: 65px" />
+      </q-scroll-area>
     </q-drawer>
 
     <q-page-container>
@@ -36,10 +34,12 @@
 <script>
 import customHeader from "../components/customHeader.vue";
 import customBody from "../components/customBody.vue";
+import SidebarMenu from "../components/SidebarMenu.vue";
 export default {
   components: {
     customHeader,
     customBody,
+    SidebarMenu
   },
   name: "LayoutDefault",
   data() {

@@ -6,7 +6,7 @@ Common function to convert response as BLOB
 *************/
 function COMMON_FILE_DOWNLOAD(response) {
   return new Blob([response.data], {
-    type: response.headers["content-type"] || response.headers["Content-Type"],
+    type: response.headers["content-type"] || response.headers["Content-Type"] || response.headers.get?.("content-type"),
   });
 }
 
@@ -18,7 +18,7 @@ function DOWNLOAD_FILE(response, defaultFilename = "report.xls") {
   let link = document.createElement("a");
   link.href = window.URL.createObjectURL(blob);
 
-  let contentDisposition = response.headers["content-disposition"] || "";
+  let contentDisposition = response.headers["content-disposition"] || response.headers["Content-Disposition"] || "";
   let filename = defaultFilename;
   let match = contentDisposition.match(/filename=(?:"([^"]+)"|([^;]+))/);
   if (match) {
@@ -97,17 +97,17 @@ export const POD_LIST_DOWNLOAD = async ({ commit }, request) => {
 
 export const AGGREGATOR_POD_LIST_DOWNLOAD = async ({ commit }, request) => {
   return await api.get("download/pod-list", { responseType: "arraybuffer" })
-    .then(response => DOWNLOAD_FILE(response, "aggregator_podlist.xls"));
+    .then(response => DOWNLOAD_FILE(response, "podlist.xls"));
 };
 
 export const INVENTORY_WITH_SO_LIST_DOWNLOAD = async ({ commit }, request) => {
   return await api.get("download/so-list", { responseType: "arraybuffer" })
-    .then(response => DOWNLOAD_FILE(response, "inventory_with_so_list.xls"));
+    .then(response => DOWNLOAD_FILE(response, "inventorywithsolist.xls"));
 };
 
 export const AGGREGATOR_INVENTORY_WITH_SO_LIST_DOWNLOAD = async ({ commit }, request) => {
   return await api.get("download/so-list", { responseType: "arraybuffer" })
-    .then(response => DOWNLOAD_FILE(response, "aggregator_inventory_with_so_list.xls"));
+    .then(response => DOWNLOAD_FILE(response, "aggregatorinventorywithsolist.xls"));
 };
 
 export const QR_LIST_DOWNLOAD = async ({ commit }, request) => {
@@ -117,10 +117,10 @@ export const QR_LIST_DOWNLOAD = async ({ commit }, request) => {
 
 export const INVENTORY_WITH_RESELLER_LIST_ = async ({ commit }, request) => {
   return await api.get("download/reseller-list", { responseType: "arraybuffer" })
-    .then(response => DOWNLOAD_FILE(response, "inventory_with_reseller_list.xls"));
+    .then(response => DOWNLOAD_FILE(response, "inventorywithresellerlist.xls"));
 };
 
 export const INVENTORY_WITH_CENTRAL = async ({ commit }, request) => {
   return await api.get("download/inventory-central", { responseType: "arraybuffer" })
-    .then(response => DOWNLOAD_FILE(response, "inventory_central.xls"));
+    .then(response => DOWNLOAD_FILE(response, "inventorycentral.xls"));
 };
