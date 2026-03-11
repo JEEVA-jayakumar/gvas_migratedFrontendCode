@@ -1543,7 +1543,7 @@ const routes = [
 
   // Router for Operations head
   {
-    name: "OPS_HEAD",
+    name: "OH",
     path: "/ops/head/",
     component: Default_OpsHead,
     children: [{
