@@ -2,7 +2,7 @@
   <q-page>
     <div>
       <!--START: table title -->
-      <div class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
+      <div class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
         Bijlipay Implementation Verification Queue
       </div>
       <!--END: table title -->
@@ -39,6 +39,18 @@
             <span :class="{ 'text-red': props.row.leadInformation.leadSource.sourceName === 'LS_TOHANDS' }">
               {{ props.row.leadInformation.leadSource.sourceName }}
             </span>
+          </q-td>
+        </template>
+
+        <template v-slot:body-cell-mobileNumber="props">
+          <q-td :props="props">
+            {{ props.row.assignedTo == null ? "NA" : props.row.assignedTo.contactNumber }}
+          </q-td>
+        </template>
+
+        <template v-slot:body-cell-leadAddress="props">
+          <q-td :props="props">
+            {{ props.row.leadInformation == null ? "NA" : props.row.leadInformation.leadAddress }}
           </q-td>
         </template>
 
@@ -109,26 +121,26 @@
 
         <template v-slot:body-cell-action="props">
           <q-td :props="props">
-            <q-btn v-if="props.row.deviceStatus == 6" disable dense no-caps label="Already Approved" icon="block" size="sm" />
-            <q-btn v-else dense no-caps label="Approve" icon="done" size="sm" @click="fnShowConvertToSat(props.row)" color="green-5" />
+            <q-btn v-if="props.row.deviceStatus == 6" disable dense no-caps label="Already Approved" icon="block" size="md" />
+            <q-btn v-else dense no-caps label="Approve" icon="done" size="md" @click="fnShowConvertToSat(props.row)" color="green-5" />
           </q-td>
         </template>
 
         <template v-slot:body-cell-data="props">
           <q-td :props="props">
-            <q-btn v-if="props.row.deviceStatus == 6" disable dense no-caps label="Reject" icon="block" size="sm" />
-            <q-btn v-else dense no-caps label="Reject" icon="close" size="sm" @click="fnShowConvertReject(props.row)" color="red-5" />
+            <q-btn v-if="props.row.deviceStatus == 6" disable dense no-caps label="Reject" icon="block" size="md" />
+            <q-btn v-else dense no-caps label="Reject" icon="close" size="md" @click="fnShowConvertReject(props.row)" color="red-5" />
           </q-td>
         </template>
 
         <template v-slot:top>
-          <div class="row q-col-gutter-md full-width">
-            <div class="col-12 col-md-4">
-              <q-input filled dense clearable v-model="filter" color="grey-9" placeholder="Type.."
+          <div class="row q-col-gutter-md full-width items-center">
+            <div class="col-12 col-md-5">
+              <q-input inverted clearable v-model="filter" color="grey-9" placeholder="Type.."
                 label="Search by MID, TID, Merchant Name" />
             </div>
-            <div class="col-6 col-md-3">
-              <q-input filled dense v-model="formData.fromDate" label="From Date">
+            <div class="col-6 col-md-2">
+              <q-input inverted v-model="formData.fromDate" label="From Date">
                 <template v-slot:append>
                   <q-icon name="event" class="cursor-pointer">
                     <q-menu transition-show="scale" transition-hide="scale">
@@ -138,8 +150,8 @@
                 </template>
               </q-input>
             </div>
-            <div class="col-6 col-md-3">
-              <q-input filled dense v-model="formData.toDate" label="To Date">
+            <div class="col-6 col-md-2">
+              <q-input inverted v-model="formData.toDate" label="To Date">
                 <template v-slot:append>
                   <q-icon name="event" class="cursor-pointer">
                     <q-menu transition-show="scale" transition-hide="scale">
@@ -149,7 +161,7 @@
                 </template>
               </q-input>
             </div>
-            <div class="col-12 col-md-2 row items-center justify-end">
+            <div class="col-12 col-md-3 row items-center justify-end">
               <q-btn color="purple-9" :disable="!formData.fromDate || !formData.toDate" @click="SubmitData(formData)">Submit</q-btn>
             </div>
           </div>
@@ -174,7 +186,7 @@ import viewDocumentReject from "../../components/sat/viewRejectDocument.vue";
 import { date } from "quasar";
 
 export default {
-  name: "AuDocument",
+  name: "merchantTransactionLevel",
   components: {
     generalLeadInformation,
     showPdfModalComponent,

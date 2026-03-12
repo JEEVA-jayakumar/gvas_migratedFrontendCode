@@ -9,9 +9,9 @@
       <form>
         <div class="column group">
           <div class="col-md-12">
-            <div class="text-h6 text-weight-regular">Edit WIP List</div>
+            <div class="q-title text-weight-regular">Edit WIP List</div>
           </div>
-          <!-- <div class="text-h6 text-weight-regular">Edit WIP List</div>
+          <!-- <div class="q-title text-weight-regular">Edit WIP List</div>
             <q-chip square color="secondary">{{ formData}}</q-chip> -->
 
           <div class="col-md-12">

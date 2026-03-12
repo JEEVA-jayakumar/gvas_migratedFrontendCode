@@ -5,11 +5,11 @@
       <q-table
         class="my-sticky-header-table"
         title="Short Lead Information"
-        :rows="getShortLead"
+        :data="getShortLead"
         :columns="columns"
         row-key="name"
       >
-        <q-td v-slot:body-cell-action="props" :props="props">
+        <q-td slot="body-cell-action" slot-scope="props" :props="props">
           <div class="row no-wrap no-padding">
             <q-btn
               dense
@@ -26,7 +26,7 @@
             </q-btn>-->
           </div>
         </q-td>
-        <q-td v-slot:body-cell-update="props" :props="props">
+        <q-td slot="body-cell-update" slot-scope="props" :props="props">
           <div class="row no-wrap no-padding">
             <q-btn
               dense
@@ -65,7 +65,7 @@ import {
   alpha,
   alphaNum,
   numeric
-} from "@vuelidate/validators";
+} from "vuelidate/lib/validators";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "inventoryAllocation",

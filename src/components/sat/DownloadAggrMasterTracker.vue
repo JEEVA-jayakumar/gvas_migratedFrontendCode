@@ -7,7 +7,7 @@
       <form>
         <div class="column group">
           <div class="col-md-12">
-            <div class="text-h6 text-weight-regular"><p align="center"><strong>Download  Tracker File</strong></p></div>
+            <div class="q-title text-weight-regular"><p align="center"><strong>Download  Tracker File</strong></p></div>
           </div>
           <div class="col-md-12">
              <q-input filled v-model="formData.fromDate" label="Date" color="grey-9">

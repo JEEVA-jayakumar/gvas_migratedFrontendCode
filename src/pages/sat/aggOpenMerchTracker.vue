@@ -11,55 +11,57 @@
         />
         <!--START: table title -->
         <div
-          class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+          class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
         >Aggregator Open Merchant Tracker/Lead Tracker</div>
         <!--END: table title -->
         <!--START: table open merchant tracker -->
         <q-table
           table-class="customTableClass"
-          :rows="tableData"
+          :data="tableData"
           :columns="columns"
-          :filter="filter" v-model:pagination="paginationControl"
+          :filter="filter"
+          :pagination.sync="paginationControl"
           row-key="name"
         >
           <!--START: table body modification -->
-          <q-td v-slot:body-cell-createdAt="props" :props="props">
-            <span class="label">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</span>
+          <q-td slot="body-cell-createdAt" slot-scope="props" :props="props">
+            <span class="label">{{props.row.createdAt | moment("Do MMM Y")}}</span>
           </q-td>
-          <q-td v-slot:body-cell-submitteSATDate="props" :props="props">
-            <span class="label">{{ $moment(props.row.updatedAt).format("Do MMM Y") }}</span>
+          <q-td slot="body-cell-submitteSATDate" slot-scope="props" :props="props">
+            <span class="label">{{props.row.updatedAt | moment("Do MMM Y")}}</span>
           </q-td>
-          <q-td v-slot:body-cell-applicationNumber="props" :props="props">
+          <q-td slot="body-cell-applicationNumber" slot-scope="props" :props="props">
             <span class="label capitalize">{{props.row.applicationNumber}}</span>
           </q-td>
-          <q-td v-slot:body-cell-leadName="props" :props="props">
+          <q-td slot="body-cell-leadName" slot-scope="props" :props="props">
             <span class="label capitalize">{{props.row.leadName}}</span>
           </q-td>
           <q-td
-            v-slot:body-cell-leadNumber="props"
+            slot="body-cell-leadNumber"
             class="cursor-pointer"
-            @click="toggleLeadInformation(props.row)"
+            @click.native="toggleLeadInformation(props.row)"
             slot-scope="props"
             :props="props"
           >
             <span class="label text-primary"># {{props.row.leadNumber}}</span>
           </q-td>
-          <q-td v-slot:body-cell-createdBy="props" :props="props">
+          <q-td slot="body-cell-createdBy" slot-scope="props" :props="props">
             <span class="label">{{props.row.assignedTo.name == null? "NA":props.row.assignedTo.name}}</span>
           </q-td>
-          <q-td v-slot:body-cell-leadAddress="props" :props="props">
+          <q-td slot="body-cell-leadAddress" slot-scope="props" :props="props">
             <span class="label">{{props.row.leadAddress}}</span>
           </q-td>
           <q-td
-            v-slot:body-cell-verifiedStatus="props"
+            slot="body-cell-verifiedStatus"
+            slot-scope="props"
             :props="props"
           >{{props.row.verifiedStatus}}</q-td>
 
-          <!-- <q-td v-slot:body-cell-status="props" :props="props">
+          <!-- <q-td slot="body-cell-status" slot-scope="props" :props="props">
             <span class="label " :class="{'text-green': props.row.status=='Approved', 'text-red': props.row.status=='Rejected', 'text-orange': props.row.status=='Pending with OPS' }">{{props.row.status}}</span>
           </q-td>-->
           <!--END: table body modification -->
-          <template v-slot:top="props">
+          <template slot="top" slot-scope="props">
             <!--START: table fullscreen mode -->
             <!-- <div class="col-md-4" align="right">
             <q-btn
@@ -73,13 +75,13 @@
             <!--END: table fullscreen mode -->
             <!--START: table filter,search,excel download -->
             <div class="col-5">
-              <q-input
+              <q-search
                 clearable
                 v-model="filter"
                 separator
                 color="grey-9"
                 placeholder="Type.."
-                label="Search by Merchant Name, Lead ID"
+                float-label="Search by Merchant Name, Lead ID"
                 class="q-mr-lg q-py-sm"
               />
             </div>

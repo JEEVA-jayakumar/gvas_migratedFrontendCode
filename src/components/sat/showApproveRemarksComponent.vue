@@ -10,7 +10,7 @@
       <!-- START >> Lead approval -->
       <form>
         <div class="column group">
-          <div class="text-h6 q-py-md">Approval confirmation</div>
+          <div class="q-title q-py-md">Approval confirmation</div>
           <div>
             <q-input filled v-model="formData.leadInformation.expectedSubmitDate" label="Expected date of Doc Submission" color="grey-9">
             <template v-slot:append>

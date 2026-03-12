@@ -4,7 +4,7 @@
     <div>
       <div
         class="
-          text-h6 q-px-lg q-py-md
+          q-title q-px-lg q-py-md
           text-weight-regular
           bottom-border
           text-grey-9
@@ -26,7 +26,7 @@
             >/ selected
           </div>
           <div class="col-md-3 col-sm-6 col-xs-6">
-            <b><h>Request Mode</h></b>
+            <b><span>Request Mode</span></b>
             <div class="col-md-2 col-sm-6 col-xs-6">
               <q-radio
                 v-for="(item, index) in requestOptions"
@@ -70,10 +70,12 @@
           >
             <q-select
               v-model="formData.assignTo"
-              separator
               color="grey-9"
               :options="assignToOptions"
-              filter
+              use-input
+              @filter="filterAssignTo"
+              emit-value
+              map-options
               clearable
               placeholder="Assign To"
             />
@@ -83,10 +85,12 @@
           <div v-if="formData.requestMode == 0">
             <div class="col-md-3 col-sm-6 col-xs-6">
               <q-select
-                filter
+                use-input
+                @filter="filterAssignTo"
+                emit-value
+                map-options
                 clearable
                 v-model="formData.assignTo"
-                separator
                 color="grey-9"
                 :options="assignToOptions"
                 placeholder="Assign To"
@@ -98,7 +102,7 @@
             <q-btn
               no-caps
               :disabled="
-                formData.marsDeviceIdsCooked.length == 0
+                formData.marsDeviceIdsCooked.length == 0 ? true : false
               "
               label="Submit"
               class="common-dark-blue"
@@ -130,26 +134,26 @@
         v-model="selectedTab"
         class="shadow-1"
         color="grey-1"
-        @click="goToUnassignedTab"
+        active-color="dark"
       >
         <q-tab
-
-          color="dark"
           name="unAssigned"
           label="Unassigned"
         />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <q-tab color="dark" name="closed" label="Closed" />
-</q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="unAssigned">
-          <!--START: table Data    :rows="tableData1" -->
+        <q-tab name="assigned" label="Assigned" />
+        <q-tab name="closed" label="Closed" />
+      </q-tabs>
+
+      <q-tab-panels v-model="selectedTab" animated @update:model-value="goToUnassignedTab">
+        <q-tab-panel name="unAssigned" class="q-pa-none">
+          <!--START: table Data    :data="tableData1" -->
           <q-table
+            :rows="tableData1"
             :columns="columnDataUnassigned"
             table-class="customTableClass"
             :filter="filterSearch1"
             selection="multiple"
-            :selected="formData.marsDeviceIdsCooked"
+            v-model:selected="formData.marsDeviceIdsCooked"
             v-model:pagination="paginationControl1"
             row-key="id"
             :loading="tableAjaxLoading1"
@@ -157,53 +161,61 @@
             color="dark"
             @request="ajaxLoadAllLeadInfo1"
           >
-            <q-td
-              v-slot:body-cell-leadNumber="props"
-              :props="props"
-              class="cursor-pointer"
-              @click="toggleLeadInformation(props.row.leadInformation)"
-            >
-              <span class="label text-primary"
-                ># {{ props.row.leadInformation.leadNumber }}</span
+            <template v-slot:body-cell-leadNumber="props">
+              <q-td
+                :props="props"
+                class="cursor-pointer"
+                @click="toggleLeadInformation(props.row.leadInformation)"
               >
-            </q-td>
-            <q-td
-              v-slot:body-cell-submitToMarsDate="props"
-              :props="props"
-              >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
-            >
-            <q-td
-              v-slot:body-cell-createdAt="props"
-              :props="props"
-              >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
-            >
-            <q-td
-              v-slot:body-cell-tid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.tid }}</div>
-            </q-td>
-            <q-td
-              v-slot:body-cell-mid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.mid }}</div>
-            </q-td>
-            <q-td
-              v-slot:body-cell-deviceAddress="props"
-              :props="props"
-              class="customTd customCellLength"
-            >
-              <div>
-                {{ props.row.deviceAddress }}
-              </div>
-            </q-td>
-            <template slot="top">
+                <span class="label text-primary"
+                  ># {{ props.row.leadInformation.leadNumber }}</span
+                >
+              </q-td>
+            </template>
+            <template v-slot:body-cell-submitToMarsDate="props">
+              <q-td
+                :props="props"
+                >{{
+                  $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y")
+                }}</q-td
+              >
+            </template>
+            <template v-slot:body-cell-createdAt="props">
+              <q-td
+                :props="props"
+                >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
+              >
+            </template>
+            <template v-slot:body-cell-tid="props">
+              <q-td
+                :props="props"
+                class="customTd"
+              >
+                <div class="text-primary">{{ props.row.tid }}</div>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-mid="props">
+              <q-td
+                :props="props"
+                class="customTd"
+              >
+                <div class="text-primary">{{ props.row.mid }}</div>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-deviceAddress="props">
+              <q-td
+                :props="props"
+                class="customTd customCellLength"
+              >
+                <div>
+                  {{ props.row.deviceAddress }}
+                </div>
+              </q-td>
+            </template>
+            <template v-slot:top>
               <!--START: table filter,search -->
               <!-- <div class="col-md-5">
-                <q-input
+                <q-search
                   clearable
                   color="grey-9"
                   v-model="filterSearch1"
@@ -212,18 +224,20 @@
                   class="q-mr-lg q-py-sm"
                 />
               </div> -->
-              <!--ENDv-model: table filter,search -->
+              <!--END: table filter,search -->
             </template>
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-<q-tab-panel name="assigned">
-          <!--START: table Data    :rows="tableData" -->
+
+        <q-tab-panel name="assigned" class="q-pa-none">
+          <!--START: table Data    :data="tableData" -->
           <q-table
+            :rows="tableData"
             :columns="columnDataAssigned"
             table-class="customTableClass"
-            :filter="filterSearch" v-model:pagination="paginationControl"
-            v-model:selected="formData.marsDeviceIdsCookedUnAssinged"
+            :filter="filterSearch"
+            v-model:pagination="paginationControl"
             row-key="id"
             :loading="tableAjaxLoading"
             :rows-per-page-options="[5, 10, 15, 20]"
@@ -231,80 +245,90 @@
             @request="ajaxLoadAllLeadInfo"
           >
             <!-- selection="multiple" -->
-            <!-- <template v-slot:body="props">
+            <!-- <template slot="body" slot-scope="props">
                  <q-tr :props="props" class="">
 
                  </q-tr>
             </template> -->
-            <q-td
-              v-slot:body-cell-leadNumber="props"
-              :props="props"
-              class="cursor-pointer"
-              @click="toggleLeadInformation(props.row.leadInformation)"
-            >
-              <span class="label text-primary"
-                ># {{ props.row.leadInformation.leadNumber }}</span
+            <template v-slot:body-cell-leadNumber="props">
+              <q-td
+                :props="props"
+                class="cursor-pointer"
+                @click="toggleLeadInformation(props.row.leadInformation)"
               >
-            </q-td>
-            <q-td
-              v-slot:body-cell-submitToMarsDate="props"
-              :props="props"
-              >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
-            >
-            <q-td
-              v-slot:body-cell-createdAt="props"
-              :props="props"
-              >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
-            >
-            <q-td
-              v-slot:body-cell-deviceAddress="props"
-              :props="props"
-              class="customTd customCellLength"
-            >
-              <div>{{ props.row.deviceAddress }}</div>
-            </q-td>
+                <span class="label text-primary"
+                  ># {{ props.row.leadInformation.leadNumber }}</span
+                >
+              </q-td>
+            </template>
+            <template v-slot:body-cell-submitToMarsDate="props">
+              <q-td
+                :props="props"
+                >{{
+                  $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y")
+                }}</q-td
+              >
+            </template>
+            <template v-slot:body-cell-createdAt="props">
+              <q-td
+                :props="props"
+                >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
+              >
+            </template>
+            <template v-slot:body-cell-deviceAddress="props">
+              <q-td
+                :props="props"
+                class="customTd customCellLength"
+              >
+                <div>{{ props.row.deviceAddress }}</div>
+              </q-td>
+            </template>
 
-            <q-td
-              v-slot:body-cell-tid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.tid }}</div>
-            </q-td>
-            <q-td
-              v-slot:body-cell-mid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.mid }}</div>
-            </q-td>
-            <q-td v-slot:body-cell-action="props" :props="props">
-              <q-btn
-                highlight
-                push
-                outline
-                class="q-mx-sm"
-                color="purple-9"
-                size="sm"
-                @click="financeApproveSubmit(props.row.leadId)"
-                >Approve</q-btn
+            <template v-slot:body-cell-tid="props">
+              <q-td
+                :props="props"
+                class="customTd"
               >
-              <q-btn
-                highlight
-                push
-                outline
-                class="q-mx-sm"
-                color="negative"
-                @click="openRejectModel(props.row)"
-                size="sm"
-                >Reject</q-btn
+                <div class="text-primary">{{ props.row.tid }}</div>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-mid="props">
+              <q-td
+                :props="props"
+                class="customTd"
               >
-            </q-td>
+                <div class="text-primary">{{ props.row.mid }}</div>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-action="props">
+              <q-td :props="props">
+                <q-btn
+                  highlight
+                  push
+                  outline
+                  class="q-mx-sm"
+                  color="purple-9"
+                  size="sm"
+                  @click="financeApproveSubmit(props.row.leadId)"
+                  >Approve</q-btn
+                >
+                <q-btn
+                  highlight
+                  push
+                  outline
+                  class="q-mx-sm"
+                  color="negative"
+                  @click="openRejectModel(props.row)"
+                  size="sm"
+                  >Reject</q-btn
+                >
+              </q-td>
+            </template>
 
-            <template slot="top">
+            <template v-slot:top>
               <!--START: table filter,search -->
               <!-- <div class="col-md-5">
-                <q-input
+                <q-search
                   clearable
                   color="grey-9"
                   v-model="filterSearch"
@@ -315,16 +339,17 @@
               </div> -->
             </template>
           </q-table>
-          <!--ENDv-model: table Data -->
+          <!--END: table Data -->
         </q-tab-panel>
-<q-tab-panel name="closed">
+
+        <q-tab-panel name="closed" class="q-pa-none">
           <!--START: table Data -->
           <q-table
             :rows="closedDatas"
             :columns="columns"
             table-class="customTableClass"
-            :filter="filterSearch2" v-model:pagination="paginationControl2"
-            v-model:selected="formData.marsDeviceIdsCookedUnAssinged"
+            :filter="filterSearch2"
+            v-model:pagination="paginationControl2"
             row-key="id"
             :loading="tableAjaxLoading"
             :rows-per-page-options="[5, 10, 15, 20]"
@@ -332,80 +357,90 @@
             @request="ajaxLoadAllLeadInfoClosed"
           >
             <!-- selection="multiple" -->
-            <!-- <template v-slot:body="props">
+            <!-- <template slot="body" slot-scope="props">
                  <q-tr :props="props" class="">
 
                  </q-tr>
             </template> -->
-            <q-td
-              v-slot:body-cell-leadNumber="props"
-              :props="props"
-              class="cursor-pointer"
-              @click="toggleLeadInformation(props.row.leadInformation)"
-            >
-              <span class="label text-primary"
-                ># {{ props.row.leadInformation.leadNumber }}</span
+            <template v-slot:body-cell-leadNumber="props">
+              <q-td
+                :props="props"
+                class="cursor-pointer"
+                @click="toggleLeadInformation(props.row.leadInformation)"
               >
-            </q-td>
-            <q-td
-              v-slot:body-cell-submitToMarsDate="props"
-              :props="props"
-              >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
-            >
-            <q-td
-              v-slot:body-cell-createdAt="props"
-              :props="props"
-              >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
-            >
-            <q-td
-              v-slot:body-cell-deviceAddress="props"
-              :props="props"
-              class="customTd customCellLength"
-            >
-              <div>{{ props.row.deviceAddress }}</div>
-            </q-td>
+                <span class="label text-primary"
+                  ># {{ props.row.leadInformation.leadNumber }}</span
+                >
+              </q-td>
+            </template>
+            <template v-slot:body-cell-submitToMarsDate="props">
+              <q-td
+                :props="props"
+                >{{
+                  $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y")
+                }}</q-td
+              >
+            </template>
+            <template v-slot:body-cell-createdAt="props">
+              <q-td
+                :props="props"
+                >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
+              >
+            </template>
+            <template v-slot:body-cell-deviceAddress="props">
+              <q-td
+                :props="props"
+                class="customTd customCellLength"
+              >
+                <div>{{ props.row.deviceAddress }}</div>
+              </q-td>
+            </template>
 
-            <q-td
-              v-slot:body-cell-tid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.tid }}</div>
-            </q-td>
-            <q-td
-              v-slot:body-cell-mid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.mid }}</div>
-            </q-td>
-            <q-td v-slot:body-cell-action="props" :props="props">
-              <q-btn
-                highlight
-                push
-                outline
-                class="q-mx-sm"
-                color="purple-9"
-                size="sm"
-                @click="financeApproveSubmit(props.row.leadId)"
-                >Approve</q-btn
+            <template v-slot:body-cell-tid="props">
+              <q-td
+                :props="props"
+                class="customTd"
               >
-              <q-btn
-                highlight
-                push
-                outline
-                class="q-mx-sm"
-                color="negative"
-                @click="openRejectModel(props.row)"
-                size="sm"
-                >Reject</q-btn
+                <div class="text-primary">{{ props.row.tid }}</div>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-mid="props">
+              <q-td
+                :props="props"
+                class="customTd"
               >
-            </q-td>
+                <div class="text-primary">{{ props.row.mid }}</div>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-action="props">
+              <q-td :props="props">
+                <q-btn
+                  highlight
+                  push
+                  outline
+                  class="q-mx-sm"
+                  color="purple-9"
+                  size="sm"
+                  @click="financeApproveSubmit(props.row.leadId)"
+                  >Approve</q-btn
+                >
+                <q-btn
+                  highlight
+                  push
+                  outline
+                  class="q-mx-sm"
+                  color="negative"
+                  @click="openRejectModel(props.row)"
+                  size="sm"
+                  >Reject</q-btn
+                >
+              </q-td>
+            </template>
 
-            <template slot="top">
+            <template v-slot:top>
               <!--START: table filter,search -->
               <!-- <div class="col-md-5">
-                <q-input
+                <q-search
                   clearable
                   color="grey-9"
                   v-model="filterSearch2"
@@ -418,7 +453,7 @@
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-</q-tab-panels>
+      </q-tab-panels>
       <div class="row items-center gutter-y-sm">
         <div class="col-md-9 col-sm-12 col-xs-12">
           <div class="row items-center"></div>
@@ -433,7 +468,6 @@
 </template>
 
 <script>
-import { required, or } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -469,6 +503,7 @@ export default {
       podNumber: "",
       requestMode: "",
       assignToOptions: [],
+      assignToOptions_bk: [],
       tableData: [],
       tableData1: [],
       loading: true,
@@ -998,13 +1033,15 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.DEVICE_REPLACEMENT_QUEUE_UNASSIGNED_LIST({ pagination, filter }).then((res) => {
+      this.DEVICE_REPLACEMENT_QUEUE_UNASSIGNED_LIST({ pagination, filter })
+        .then((res) => {
           this.IMPLEMENTATION_EXECUTIVE_LIST().then((response) => {
             let assumeArr = [];
             this.getImplementationExecutiveList.map(function (value) {
               assumeArr.push({ label: value.name, value: value.id });
             });
             this.assignToOptions = assumeArr;
+            this.assignToOptions_bk = assumeArr;
           });
           // updating pagination to reflect in the UI
           this.paginationControl1 = pagination;
@@ -1039,7 +1076,8 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.DEVICE_REPLACEMENT_QUEUE_ASSIGNED_LIST({ pagination, filter }).then((res) => {
+      this.DEVICE_REPLACEMENT_QUEUE_ASSIGNED_LIST({ pagination, filter })
+        .then((res) => {
           // updating pagination to reflect in the UI
           this.paginationControl = pagination;
 
@@ -1072,7 +1110,8 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.DEVICE_REPLACEMENT_QUEUE_ASSIGNED_LIST({ pagination, filter }).then((res) => {
+      this.DEVICE_REPLACEMENT_QUEUE_ASSIGNED_LIST({ pagination, filter })
+        .then((res) => {
           // updating pagination to reflect in the UI
           this.paginationControl2 = pagination;
 
@@ -1127,12 +1166,24 @@ export default {
           .catch((error) => {
             this.toggleAjaxLoadFilter = false;
           });
-      } else {
+      } else if (tab == "closed") {
         this.ajaxLoadAllLeadInfoClosed({
           pagination: this.paginationControl2,
-          filter: this.filter2,
+          filter: this.filterSearch2,
         });
       }
+    },
+    filterAssignTo (val, update) {
+      update(() => {
+        if (val === '') {
+          this.assignToOptions = this.assignToOptions_bk
+        } else {
+          const needle = val.toLowerCase()
+          this.assignToOptions = this.assignToOptions_bk.filter(
+            v => v.label.toLowerCase().indexOf(needle) > -1
+          )
+        }
+      })
     },
     // ajaxLoadAllLeadInfoClosed
     // Function to open device address pop up

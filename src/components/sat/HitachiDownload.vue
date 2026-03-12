@@ -9,7 +9,7 @@
       <form>
         <div class="column group">
           <div class="col-md-12">
-            <div class="text-h6 text-weight-regular">
+            <div class="q-title text-weight-regular">
               <p align="center">
                 <strong>Download File</strong>
               </p>

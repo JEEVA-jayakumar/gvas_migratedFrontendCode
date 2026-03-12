@@ -10,7 +10,7 @@
       <form>
         <div class="column group">
           <div class="col-md-12">
-            <div class="text-h6 text-weight-regular">Reject Reason</div>
+            <div class="q-title text-weight-regular">Reject Reason</div>
           </div>
           <div class="col-md-12">
             <q-input

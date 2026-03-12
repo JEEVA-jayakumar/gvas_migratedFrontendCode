@@ -48,7 +48,7 @@
                   </div>
                   <div class="col-md-4" align="right">
                     <div>Count</div>
-                    <div class="text-h6">{{item.count}}</div>
+                    <div class="q-title">{{item.count}}</div>
                   </div>
                 </div>
               </q-card-section>

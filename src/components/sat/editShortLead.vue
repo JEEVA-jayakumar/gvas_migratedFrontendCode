@@ -12,7 +12,7 @@
       <form>
         <div class="column group">
           <div class="col-md-6">
-            <div class="text-h6 text-weight-regular">Edit ShortLead</div>
+            <div class="q-title text-weight-regular">Edit ShortLead</div>
           </div>
           <div class="col-md-6">
             <q-input

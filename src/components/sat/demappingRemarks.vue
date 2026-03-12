@@ -11,7 +11,7 @@
     >
 
       <div class="row">
-        <div class="col-12 text-h6 q-pa-md text-weight-regular bottom-border">
+        <div class="col-12 q-title q-pa-md text-weight-regular bottom-border">
           Serial Number Remarks
         </div>
         <!-- START >> Setup MDR details -->

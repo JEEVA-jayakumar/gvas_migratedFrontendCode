@@ -3,7 +3,7 @@
     <div>
       <!--STARTv-model: table title -->
       <div
-        class="col-md-6 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+        class="col-md-6 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >Merchant Tracker - TID</div>
       <!--END: table title -->
 

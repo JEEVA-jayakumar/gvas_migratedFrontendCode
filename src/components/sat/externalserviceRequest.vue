@@ -4,7 +4,7 @@
     <div>
       <div
         class="
-          text-h6 q-px-lg q-py-md
+          q-title q-px-lg q-py-md
           text-weight-regular
           bottom-border
           text-grey-9
@@ -40,14 +40,16 @@
           &nbsp;&nbsp;
           <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
             <q-select
-              filter
+              use-input
+              @filter="filterAssignToRegion"
               clearable
               v-model="formData.assignTo.region"
-              separator
               color="grey-9"
               :disable="formData.marsDeviceIdsCooked.length == 0 "
               :options="assignToRegionOptions"
               placeholder="Assign To Region"
+              emit-value
+              map-options
             />
           </div>
           <div class="col-md-3 col-sm-6 col-xs-6" align="right">
@@ -72,34 +74,33 @@
           </div>
         </div>
       </q-card>
-      <!--ENDv-model: table Footer -->
+      <!--END: table Footer -->
       <q-tabs
         v-model="selectedTab"
         class="shadow-1"
         color="grey-1"
-        @click="goToUnassignedTab"
+        active-color="dark"
       >
         <q-tab
-
-          color="dark"
           name="unAssigned"
           label="Opened"
         />
         <q-tab
-          color="dark"
           name="assigned"
           label="Resolved Tickets"
         />
-        <q-tab color="dark" name="Ticket" label="Ticket Bulk Assign/Reassign" />
-</q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="assigned">
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+      <q-tab-panels v-model="selectedTab" animated @update:model-value="goToUnassignedTab">
+        <q-tab-panel name="assigned" class="q-pa-none">
           <!--START: table Data -->
           <q-table
             :rows="tableData"
             :columns="columnDataAssigned"
             table-class="customTableClass"
-            :filter="filterSearch" v-model:pagination="paginationControl"
+            :filter="filterSearch"
+            v-model:pagination="paginationControl"
             v-model:selected="formData.marsDeviceIdsCookedUnAssinged"
             row-key="id"
             :loading="tableAjaxLoading"
@@ -166,20 +167,25 @@
                   placeholder="Type.."
                   label="Search By TID ..."
                   class="q-mr-lg q-py-sm"
-                />
+                >
+                  <template v-slot:append>
+                    <q-icon name="search" />
+                  </template>
+                </q-input>
               </div>
             </template>
           </q-table>
-          <!--ENDv-model: table Data -->
+          <!--END: table Data -->
         </q-tab-panel>
-<q-tab-panel name="unAssigned">
+
+        <q-tab-panel name="unAssigned" class="q-pa-none">
           <!--START: table Data -->
           <q-table
             :rows="tableData1"
             :columns="columnDataUnassigned"
             table-class="customTableClass"
             :filter="filterSearch1"
-            :selected="formData.marsDeviceIdsCooked"
+            v-model:selected="formData.marsDeviceIdsCooked"
             v-model:pagination="paginationControl1"
             row-key="serviceReqTicketId"
             selection="multiple"
@@ -188,30 +194,34 @@
             color="dark"
             @request="ajaxLoadAllLeadInfo1"
           >
-     
-              <!--START: table rows -->
-          
-                <q-td
-                v-slot:body-cell-serviceReqTicketId="props"
+            <template v-slot:body-cell-serviceReqTicketId="props">
+              <q-td
                 :props="props"
                 class="cursor-pointer">
                   {{ props.row.serviceReqTicketId }}</q-td
                 >
-              <q-td v-slot:body-cell-merchant_name="props"
-              :props="props"
-              class="cursor-pointer">
+            </template>
+            <template v-slot:body-cell-merchant_name="props">
+              <q-td
+                :props="props"
+                class="cursor-pointer">
                   {{ props.row.meName }}</q-td
                 >
-                  <q-td
-                v-slot:body-cell-assignedTo="props"
+            </template>
+            <template v-slot:body-cell-assignedTo="props">
+              <q-td
                 :props="props"
                 class="cursor-pointer">
                   {{ props.row.assignedTo == null ? "NA" : props.row.assignedTo.name }}</q-td
                 >
-                <q-td v-slot:body-cell-tid="props"
+            </template>
+            <template v-slot:body-cell-tid="props">
+              <q-td
                 :props="props"
                 class="cursor-pointer"> {{ props.row.tid }}</q-td>
-                <q-td v-slot:body-cell-actionContact="props"
+            </template>
+            <template v-slot:body-cell-actionContact="props">
+              <q-td
                 :props="props"
                 class="cursor-pointer">
                   <q-btn
@@ -224,19 +234,25 @@
                     >Click to View</q-btn
                   >
                 </q-td>
-                <q-td v-slot:body-cell-dateCreated="props"
+            </template>
+            <template v-slot:body-cell-dateCreated="props">
+              <q-td
                 :props="props"
                 class="cursor-pointer">
                   {{ $moment(props.row.createdDate).format("Do MMM Y") }}
                 </q-td>
-                <q-td v-slot:body-cell-tat="props"
+            </template>
+            <template v-slot:body-cell-tat="props">
+              <q-td
                 :props="props"
                 class="cursor-pointer">
                   <span :style="getHoursAgoColor(props.row.createdDate)">{{
                     getHoursAgo(props.row.createdDate)
                   }}</span>
                 </q-td>
-                <q-td  v-slot:body-cell-actionLog="props"
+            </template>
+            <template v-slot:body-cell-actionLog="props">
+              <q-td
                 :props="props">
                   <q-btn
                     highlight
@@ -248,12 +264,11 @@
                     >Click to View</q-btn
                   >
                 </q-td>
-                <q-td
-               
-                  v-slot:body-cell-actionPickTickets="props"
+            </template>
+            <template v-slot:body-cell-actionPickTickets="props">
+              <q-td
                   :props="props"
                   v-if="props.row.serviceRequestTicketStatus == 5"
-             
                 >
                   <q-btn
                     highlight
@@ -265,12 +280,12 @@
                     >Pick Ticket</q-btn
                   >
                 </q-td>
-                <q-td
-                 
-                  v-slot:body-cell-actionReassign="props"
+                <q-td v-else :props="props">NA</q-td>
+            </template>
+            <template v-slot:body-cell-actionReassign="props">
+              <q-td
                   :props="props"
                   v-if="props.row.serviceRequestTicketStatus == 2"
-            
                 >
                   <q-btn
                     highlight
@@ -281,9 +296,10 @@
                     @click="fnReassignTicket(props.row)"
                     >Re-Assign</q-btn
                   >
-                </q-td> 
+                </q-td>
+                <q-td v-else :props="props">NA</q-td>
+            </template>
            
-       
             <template slot="top">
               <div class="col-md-5">
                 <q-input
@@ -293,16 +309,22 @@
                   placeholder="Type.."
                   label="Search By Ticket ID, TID ..."
                   class="q-mr-lg q-py-sm"
-                />
+                >
+                  <template v-slot:append>
+                    <q-icon name="search" />
+                  </template>
+                </q-input>
               </div>
             </template>
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-<q-tab-panel name="Ticket">
+
+        <q-tab-panel name="Ticket" class="q-pa-none">
           <ticketAssign />
         </q-tab-panel>
-</q-tab-panels>
+      </q-tab-panels>
+
       <div class="row items-center gutter-y-sm">
         <div class="col-md-9 col-sm-12 col-xs-12">
           <div class="row items-center"></div>
@@ -341,7 +363,6 @@
 </template>
 
 <script>
-import { required, email, or, and } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import pickTicketpopup from "../../components/sat/pickTicketpopup.vue";
 import reassignTicketPopup from "../../components/sat/reassignTicketPopup.vue";
@@ -372,6 +393,7 @@ export default {
       assignTo: "",
       assignToOptions: [],
       assignToRegionOptions: [],
+      assignToRegionOptions_bk: [],
       externalClosedTableData: [],
       tableData: [],
       tableData1: [],
@@ -829,10 +851,23 @@ export default {
             })
           })
           this.assignToRegionOptions = assumeArr
+          this.assignToRegionOptions_bk = assumeArr
         })
         .catch(() => {
           this.assignToRegionOptions = []
         })
+    },
+    filterAssignToRegion (val, update) {
+      update(() => {
+        if (val === '') {
+          this.assignToRegionOptions = this.assignToRegionOptions_bk
+        } else {
+          const needle = val.toLowerCase()
+          this.assignToRegionOptions = this.assignToRegionOptions_bk.filter(
+            v => v.label.toLowerCase().indexOf(needle) > -1
+          )
+        }
+      })
     },
     fnCrmLogsView(rowDetails) {
       this.propShowUpdateCrmLogsView = !this.propShowUpdateCrmLogsView;

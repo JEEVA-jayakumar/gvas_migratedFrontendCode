@@ -55,7 +55,7 @@
                   v-for="(subItem,subIndex) in item.deviceSerialNumbers"
                   :key="subIndex"
                 >
-                  <q-item-section class="text-body1">{{subItem}}</q-item-section>
+                  <q-item-section class="q-body-1">{{subItem}}</q-item-section>
                   <q-item-section>
                     <q-btn
                       round
@@ -69,7 +69,7 @@
               </div>
               <div v-else>
                 <q-item>
-                  <q-item-section class="text-body1">No data to display</q-item-section>
+                  <q-item-section class="q-body-1">No data to display</q-item-section>
                   <q-item-section>
                     <q-btn
                       round

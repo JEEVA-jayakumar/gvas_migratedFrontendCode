@@ -402,7 +402,7 @@
               >
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     Request Type
                   </div>
@@ -427,7 +427,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     IssueType
                   </div>
@@ -451,7 +451,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     SubTicket Status
                   </div>
@@ -476,7 +476,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     Schedule Date
                   </div>
@@ -498,7 +498,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     Pod Number
                   </div>
@@ -520,7 +520,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     Service Remarks
                   </div>
@@ -542,7 +542,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     Cancel Reason
                   </div>
@@ -564,7 +564,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     Issue Remark
                   </div>
@@ -586,7 +586,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     Remark
                   </div>
@@ -606,7 +606,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     Latitude
                   </div>
@@ -628,7 +628,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     Longitude
                   </div>
@@ -650,7 +650,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     Implementation Form
                   </div>
@@ -674,7 +674,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     Picture Of Shop
                   </div>
@@ -696,7 +696,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     Old Sim Number
                   </div>
@@ -718,7 +718,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     Old Sim Network
                   </div>
@@ -740,7 +740,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     New Sim Number
                   </div>
@@ -762,7 +762,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     New Sim Network
                   </div>
@@ -784,7 +784,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     Scan Sim Number
                   </div>
@@ -806,7 +806,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     Scan Device
                   </div>
@@ -831,7 +831,7 @@
 
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     Part Type
                   </div>
@@ -853,7 +853,7 @@
                 </q-td>
                 <q-td>
                   <div
-                    class="text-left text-caption text-grey-8 text-weight-medium"
+                    class="text-left q-caption text-grey-8 text-weight-medium"
                   >
                     Paper Roll Count
                   </div>

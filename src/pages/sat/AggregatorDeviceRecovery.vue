@@ -4,7 +4,7 @@
       <div>
         <div
           class="
-            text-h6 q-px-lg q-py-md
+            q-title q-px-lg q-py-md
             text-weight-regular
             bottom-border
             text-grey-9
@@ -27,10 +27,12 @@
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6">
               <q-select
-                filter
+                use-input
+                @filter="filterAssignTo"
                 clearable
                 v-model="formData.assignTo"
-                separator
+                emit-value
+                map-options
                 color="grey-9"
                 :options="assignToOptions"
                 placeholder="Assign To"
@@ -40,7 +42,7 @@
               <q-btn
                 no-caps
                 :disabled="
-                  formData.marsDeviceIdsCooked.length == 0
+                  formData.marsDeviceIdsCooked.length == 0 ? true : false
                 "
                 label="Assign"
                 class="common-dark-blue"
@@ -63,19 +65,21 @@
           v-model="selectedTab"
           class="shadow-1"
           color="grey-1"
-          @click="goToUnassignedTab"
+          active-color="dark"
         >
-        <q-tab color="dark" name="unAssigned" label="Unassigned" />
-          <q-tab color="dark" name="assigned" label="Assigned" />
-</q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="assigned">
+        <q-tab name="unAssigned" label="Unassigned" />
+          <q-tab name="assigned" label="Assigned" />
+        </q-tabs>
+
+        <q-tab-panels v-model="selectedTab" animated @update:model-value="goToUnassignedTab">
+          <q-tab-panel name="assigned" class="q-pa-none">
             <!--START: table Data -->
             <q-table
               :rows="tableData"
               :columns="columnDataAssigned"
               table-class="customTableClass"
-              :filter="filterSearch" v-model:pagination="paginationControl"
+              :filter="filterSearch"
+              v-model:pagination="paginationControl"
               v-model:selected="formData.marsDeviceIdsCookedUnAssinged"
               row-key="id"
               :loading="tableAjaxLoading"
@@ -84,53 +88,67 @@
               @request="ajaxLoadAllLeadInfo"
             >
               <!-- selection="multiple" -->
-              <q-td
-              v-if="props.row.leadInformation != null"
-                v-slot:body-cell-leadNumber="props"
-                :props="props"
-                class="cursor-pointer"
-                @click="toggleLeadInformation(props.row.leadInformation)"
-              >
-                <span class="label text-primary"
-                  ># {{ props.row.leadInformation.leadNumber }}</span
+              <template v-slot:body-cell-leadNumber="props">
+                <q-td
+                  v-if="props.row.leadInformation != null"
+                  :props="props"
+                  class="cursor-pointer"
+                  @click="toggleLeadInformation(props.row.leadInformation)"
                 >
-              </q-td>
-              <q-td
-              v-if="props.row.leadInformation != null"
-                v-slot:body-cell-submitToMarsDate="props"
-                :props="props"
-                >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
-              >
-              <q-td
-              v-if="props.row.leadInformation != null"
-                v-slot:body-cell-createdAt="props"
-                :props="props"
-                >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
-              >
-              <q-td
-              v-if="props.row.leadInformation != null"
-                v-slot:body-cell-deviceAddress="props"
-                :props="props"
-                class="customTd customCellLength"
-              >
-                <div>{{ props.row.deviceAddress }}</div>
-              </q-td>
-              <q-td
-              v-if="props.row.leadInformation != null"
-                v-slot:body-cell-tid="props"
-                :props="props"
-                class="customTd"
-              >
-                <div class="text-primary">{{ props.row.tid }}</div>
-              </q-td>
-              <q-td
-              v-if="props.row.leadInformation != null"
-                v-slot:body-cell-mid="props"
-                :props="props"
-                class="customTd"
-              >
-                <div class="text-primary">{{ props.row.mid }}</div>
-              </q-td>
+                  <span class="label text-primary"
+                    ># {{ props.row.leadInformation.leadNumber }}</span
+                  >
+                </q-td>
+                <q-td v-else :props="props">NA</q-td>
+              </template>
+              <template v-slot:body-cell-submitToMarsDate="props">
+                <q-td
+                  v-if="props.row.leadInformation != null"
+                  :props="props"
+                  >{{
+                    $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y")
+                  }}</q-td
+                >
+                <q-td v-else :props="props">NA</q-td>
+              </template>
+              <template v-slot:body-cell-createdAt="props">
+                <q-td
+                  v-if="props.row.leadInformation != null"
+                  :props="props"
+                  >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
+                >
+                <q-td v-else :props="props">NA</q-td>
+              </template>
+              <template v-slot:body-cell-deviceAddress="props">
+                <q-td
+                  v-if="props.row.leadInformation != null"
+                  :props="props"
+                  class="customTd customCellLength"
+                >
+                  <div>{{ props.row.deviceAddress }}</div>
+                </q-td>
+                <q-td v-else :props="props">NA</q-td>
+              </template>
+              <template v-slot:body-cell-tid="props">
+                <q-td
+                  v-if="props.row.leadInformation != null"
+                  :props="props"
+                  class="customTd"
+                >
+                  <div class="text-primary">{{ props.row.tid }}</div>
+                </q-td>
+                <q-td v-else :props="props">NA</q-td>
+              </template>
+              <template v-slot:body-cell-mid="props">
+                <q-td
+                  v-if="props.row.leadInformation != null"
+                  :props="props"
+                  class="customTd"
+                >
+                  <div class="text-primary">{{ props.row.mid }}</div>
+                </q-td>
+                <q-td v-else :props="props">NA</q-td>
+              </template>
               <template slot="top">
                 <!--START: table filter,search -->
                 <div class="col-md-5">
@@ -141,13 +159,17 @@
                     placeholder="Type.."
                     label="Search By TID, MID, Merchant Name .."
                     class="q-mr-lg q-py-sm"
-                  />
+                  >
+                    <template v-slot:append>
+                      <q-icon name="search" />
+                    </template>
+                  </q-input>
                 </div>
               </template>
             </q-table>
-            <!--ENDv-model: table Data -->
+            <!--END: table Data -->
           </q-tab-panel>
-<q-tab-panel name="unAssigned">
+          <q-tab-panel name="unAssigned" class="q-pa-none">
             <!--START: table Data -->
             <q-table
               :rows="tableData1"
@@ -155,7 +177,7 @@
               table-class="customTableClass"
               :filter="filterSearch1"
               selection="multiple"
-              :selected="formData.marsDeviceIdsCooked"
+              v-model:selected="formData.marsDeviceIdsCooked"
               v-model:pagination="paginationControl1"
               row-key="id"
               :loading="tableAjaxLoading1"
@@ -163,55 +185,69 @@
               color="dark"
               @request="ajaxLoadAllLeadInfo1"
             >
-              <q-td
-              v-if="props.row.leadInformation != null"
-                v-slot:body-cell-leadNumber="props"
-                :props="props"
-                class="cursor-pointer"
-                @click="toggleLeadInformation(props.row.leadInformation)"
-              >
-                <span class="label text-primary"
-                  ># {{ props.row.leadInformation.leadNumber }}</span
+              <template v-slot:body-cell-leadNumber="props">
+                <q-td
+                  v-if="props.row.leadInformation != null"
+                  :props="props"
+                  class="cursor-pointer"
+                  @click="toggleLeadInformation(props.row.leadInformation)"
                 >
-              </q-td>
-              <q-td
-              v-if="props.row.leadInformation != null"
-                v-slot:body-cell-submitToMarsDate="props"
-                :props="props"
-                >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
-              >
-              <q-td
-              v-if="props.row.leadInformation != null"
-                v-slot:body-cell-createdAt="props"
-                :props="props"
-                >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
-              >
-              <q-td
-              v-if="props.row.leadInformation != null"
-                v-slot:body-cell-tid="props"
-                :props="props"
-                class="customTd"
-              >
-                <div class="text-primary">{{ props.row.tid }}</div>
-              </q-td>
-              <q-td
-              v-if="props.row.leadInformation != null"
-                v-slot:body-cell-mid="props"
-                :props="props"
-                class="customTd"
-              >
-                <div class="text-primary">{{ props.row.mid }}</div>
-              </q-td>
-              <q-td
-              v-if="props.row.leadInformation != null"
-                v-slot:body-cell-deviceAddress="props"
-                :props="props"
-                class="customTd customCellLength"
-              >
-                <div>
-                  {{ props.row.deviceAddress }}
-                </div>
-              </q-td>
+                  <span class="label text-primary"
+                    ># {{ props.row.leadInformation.leadNumber }}</span
+                  >
+                </q-td>
+                <q-td v-else :props="props">NA</q-td>
+              </template>
+              <template v-slot:body-cell-submitToMarsDate="props">
+                <q-td
+                  v-if="props.row.leadInformation != null"
+                  :props="props"
+                  >{{
+                    $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y")
+                  }}</q-td
+                >
+                <q-td v-else :props="props">NA</q-td>
+              </template>
+              <template v-slot:body-cell-createdAt="props">
+                <q-td
+                  v-if="props.row.leadInformation != null"
+                  :props="props"
+                  >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
+                >
+                <q-td v-else :props="props">NA</q-td>
+              </template>
+              <template v-slot:body-cell-tid="props">
+                <q-td
+                  v-if="props.row.leadInformation != null"
+                  :props="props"
+                  class="customTd"
+                >
+                  <div class="text-primary">{{ props.row.tid }}</div>
+                </q-td>
+                <q-td v-else :props="props">NA</q-td>
+              </template>
+              <template v-slot:body-cell-mid="props">
+                <q-td
+                  v-if="props.row.leadInformation != null"
+                  :props="props"
+                  class="customTd"
+                >
+                  <div class="text-primary">{{ props.row.mid }}</div>
+                </q-td>
+                <q-td v-else :props="props">NA</q-td>
+              </template>
+              <template v-slot:body-cell-deviceAddress="props">
+                <q-td
+                  v-if="props.row.leadInformation != null"
+                  :props="props"
+                  class="customTd customCellLength"
+                >
+                  <div>
+                    {{ props.row.deviceAddress }}
+                  </div>
+                </q-td>
+                <q-td v-else :props="props">NA</q-td>
+              </template>
               <template slot="top">
                 <!--START: table filter,search -->
                 <div class="col-md-5">
@@ -222,14 +258,18 @@
                     placeholder="Type.."
                     label="Search By TID, MID, Merchant Name .."
                     class="q-mr-lg q-py-sm"
-                  />
+                  >
+                    <template v-slot:append>
+                      <q-icon name="search" />
+                    </template>
+                  </q-input>
                 </div>
                 <!--END: table filter,search -->
               </template>
             </q-table>
             <!--END: table Data -->
           </q-tab-panel>
-</q-tab-panels>
+        </q-tab-panels>
         <div class="row items-center gutter-y-sm">
           <div class="col-md-9 col-sm-12 col-xs-12">
             <div class="row items-center"></div>
@@ -244,7 +284,6 @@
   </template>
   
   <script>
-import { required, email, not, or } from '@vuelidate/validators';
   import { mapGetters, mapActions } from "vuex";
   
   export default {
@@ -259,6 +298,7 @@ import { required, email, not, or } from '@vuelidate/validators';
         selectedTab: "assigned",
         assignTo: "",
         assignToOptions: [],
+        assignToOptions_bk: [],
         tableData: [],
         tableData1: [],
         //Defining columns for table
@@ -580,7 +620,8 @@ import { required, email, not, or } from '@vuelidate/validators';
           spinnerColor: "purple-9",
           message: "Fetching data ..",
         });
-        this.AGGREGATOR_DEVICE_RECOVERY_UNASSIGNED_LIST({ pagination, filter }).then((res) => {
+        this.AGGREGATOR_DEVICE_RECOVERY_UNASSIGNED_LIST({ pagination, filter })
+          .then((res) => {
             // updating pagination to reflect in the UI
             this.paginationControl1 = pagination;
   
@@ -606,6 +647,7 @@ import { required, email, not, or } from '@vuelidate/validators';
                     assumeArr.push({ label: value.name + " | " + value.employeeID+ " | " + value.email, value: value.id });
                   });
                   this.assignToOptions = assumeArr;
+                  this.assignToOptions_bk = assumeArr;
               });
   
             // finally we tell QTable to exit the "loading" state
@@ -622,13 +664,15 @@ import { required, email, not, or } from '@vuelidate/validators';
           spinnerColor: "purple-9",
           message: "Fetching data ..",
         });
-        this.AGGREGATOR_DEVICE_RECOVERY_ASSIGNED_LIST({ pagination, filter }).then((res) => {
+        this.AGGREGATOR_DEVICE_RECOVERY_ASSIGNED_LIST({ pagination, filter })
+          .then((res) => {
              this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
                   let assumeArr = [];
                   this.getImplementationExecutiveList.map(function(value) {
                     assumeArr.push({ label: value.name + " | " + value.employeeID+ " | " + value.email, value: value.id });
                   });
                   this.assignToOptions = assumeArr;
+                  this.assignToOptions_bk = assumeArr;
               });
             // updating pagination to reflect in the UI
             this.paginationControl = pagination;
@@ -665,14 +709,25 @@ import { required, email, not, or } from '@vuelidate/validators';
             filter: this.filterSearch1,
           });
         
-        } else {
+        } else if (tab == "assigned") {
           this.ajaxLoadAllLeadInfo({
             pagination: this.paginationControl,
             filter: this.filterSearch,
           });
         }
       },
-  
+      filterAssignTo (val, update) {
+        update(() => {
+          if (val === '') {
+            this.assignToOptions = this.assignToOptions_bk
+          } else {
+            const needle = val.toLowerCase()
+            this.assignToOptions = this.assignToOptions_bk.filter(
+              v => v.label.toLowerCase().indexOf(needle) > -1
+            )
+          }
+        })
+      },
       // Function to open device address pop up
       UpdateDeviceAddress(currentDeviceInfo) {
         this.currentDeviceInfo = [];

@@ -4,7 +4,7 @@
     <div>
       <div class="row bottom-border q-px-md q-py-md items-center">
         <!--START: table title -->
-        <div class="col-6 col-md-6 text-h6 text-weight-regular text-grey-9">Faulty Inventory</div>
+        <div class="col-6 col-md-6 q-title text-weight-regular text-grey-9">Faulty Inventory</div>
         <div class="col-6 col-md-6" align="right">
           <q-btn
             icon="attach_file"
@@ -39,6 +39,8 @@
             label="Select Device Type"
             color="grey-9"
             :options="deviceOptions"
+            emit-value
+            map-options
           />
         </div>
         <div class="col-6 col-md-6" align="right">
@@ -83,7 +85,7 @@
               <q-list highlight separator>
                 <q-item-label header style="border-bottom: 1px solid #ccc;">
                   <q-icon style="color:#202c3f" name="fas fa-tablet-alt"/> {{item.device.name}} 
-                </q-item-label header>
+                </q-item-label>
                 <q-scroll-area
                   style="height:400px"
                   :thumb-style="{
@@ -96,17 +98,17 @@
                   :delay="1500"
                 >
                   <div v-if="item.deviceSerialNumbers.length > 0">
-                    <q-item separator class=" text-light-blue" v-for="(subItem,subIndex) in item.deviceSerialNumbers" v-model:key="subIndex">
-                      <q-item-section class="text-body1">{{subItem}}</q-item-section>
-                      <q-item-section>
+                    <q-item separator class=" text-light-blue" v-for="(subItem,subIndex) in item.deviceSerialNumbers" :key="subIndex">
+                      <q-item-section class="q-body-1">{{subItem}}</q-item-section>
+                      <q-item-section side>
                         <q-btn round size="sm" color="negative" icon="clear" @click="fnRemoveScannedItems(index,subIndex)" />
                       </q-item-section>
                     </q-item>
                   </div>
                   <div v-else>
                     <q-item>
-                      <q-item-section class="text-body1">No data to display</q-item-section>
-                      <q-item-section><q-btn round size="sm" color="negative" @click="fnRemoveDeviceTypeFromList(index)" icon="clear" /></q-item-section>
+                      <q-item-section class="q-body-1">No data to display</q-item-section>
+                      <q-item-section side><q-btn round size="sm" color="negative" @click="fnRemoveDeviceTypeFromList(index)" icon="clear" /></q-item-section>
                     </q-item>
                   </div>
                 </q-scroll-area>
@@ -125,21 +127,21 @@
         table-class="customTableClass" v-model:pagination="paginationControl"
       >
         <!--START: table body modification -->
-        <q-td
-          v-slot:body-cell-deviceType="props"
-          :props="props"
-        >{{props.row.device.name}}</q-td>
-        <q-td
-          v-slot:body-cell-serialNumber="props"
-          :props="props"
-        >{{props.row.serialNumber}}</q-td>
-        <q-td v-slot:body-cell-status="props" :props="props">
-          <q-btn flat v-if="props.row.status == true" icon="check" color="positive" />
-          <q-btn flat v-else-if="props.row.status == false" icon="clear" color="negative" />
-          <q-btn flat color="amber-9" v-else icon="warning" />
-        </q-td>
+        <template v-slot:body-cell-deviceType="props">
+          <q-td :props="props">{{props.row.deviceName}}</q-td>
+        </template>
+        <template v-slot:body-cell-serialNumber="props">
+          <q-td :props="props">{{props.row.serialNumber}}</q-td>
+        </template>
+        <template v-slot:body-cell-status="props">
+          <q-td :props="props">
+            <q-btn flat v-if="props.row.status == true" icon="check" color="positive" />
+            <q-btn flat v-else-if="props.row.status == false" icon="clear" color="negative" />
+            <q-btn flat color="amber-9" v-else icon="warning" />
+          </q-td>
+        </template>
         <!-- END: table body modification -->
-        <template v-slot:top="props" class="bottom-border">
+        <template v-slot:top class="bottom-border">
           <!--START: table filter,search -->
           <div class="col-md-5">
             <q-input
@@ -149,7 +151,11 @@
               placeholder="Type.."
               label="Search by SO name, Merchant Name, Lead ID"
               class="q-mr-lg q-py-sm"
-            />
+            >
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </q-input>
           </div>
           <!--END: table filter,search -->
         </template>
@@ -176,10 +182,6 @@
 </template>
 
 <script>
-import { required, not } from '@vuelidate/validators';
-
-// import VueBarcodeScanner from "vue-barcode-scanner";
-// Vue.use(VueBarcodeScanner);
 import { mapGetters, mapActions } from "vuex";
 import showPDOmodal from "../../components/inventory/showFaultymodal.vue";
 import faultyBulkUploadModal from "../../components/inventory/faultyBulkUploadModal.vue";
@@ -202,7 +204,7 @@ export default {
       deviceOptions: [],
       columns: [
         {
-          name: "deviceName",
+          name: "deviceType",
           required: true,
           label: "Device Type",
           align: "left",
@@ -248,9 +250,10 @@ export default {
     ]),
     disabledButton() {
       return _.find(this.formData.scannedItems, function(oo) {
-        return oo.deviceSerialNumbers.length > 0 ;
+        return oo.deviceSerialNumbers.length > 0 ? true : false;
       }) == undefined
-        ;
+        ? true
+        : false;
     }
   },
   created() {
@@ -260,7 +263,9 @@ export default {
   },
   unmounted() {
     // Remove listener when component is destroyed
-    this.$barcodeScanner.destroy();
+    if (this.$barcodeScanner) {
+        this.$barcodeScanner.destroy();
+    }
   },
 
   methods: {
@@ -279,7 +284,9 @@ export default {
     // Function to dynamically set column name for scanned items without store
     fnSetDevicesByDeviceId() {
       this.scannerToggleOption = true;
-      this.$barcodeScanner.destroy();
+      if (this.$barcodeScanner) {
+          this.$barcodeScanner.destroy();
+      }
       // Set local variable for this
       let self = this;
 
@@ -365,7 +372,7 @@ export default {
         icon: "list"
       });
       this.scannerToggleOption = false;
-      if (!this.$barcodeScanner.hasListener()) {
+      if (this.$barcodeScanner && !this.$barcodeScanner.hasListener()) {
         this.$barcodeScanner.init(this.onBarcodeScanned);
       }
     },
@@ -451,7 +458,7 @@ export default {
                 message: "Devices has been updated successfully",
                 icon: "thumb_up"
               });
-            }).onCancel(() => {
+            }).catch(() => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",

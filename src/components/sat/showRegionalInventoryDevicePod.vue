@@ -10,7 +10,7 @@
       <div class="q-pa-md">
         <div class="column">
           <div class="col-md-12 bottom-border">
-            <div class="text-h6 text-weight-regular q-py-sm">POD Number</div>
+            <div class="q-title text-weight-regular q-py-sm">POD Number</div>
           </div>
           <div class="col-md-8 q-pt-md" align="left">
             <q-list dense separator>

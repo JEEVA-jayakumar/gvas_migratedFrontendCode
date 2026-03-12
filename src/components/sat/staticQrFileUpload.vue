@@ -10,7 +10,7 @@
         <div class="q-pa-md">
           <div class="column text-center justify-center">
             <div class="col-md-12 q-py-sm bottom-border">
-              <div class="text-h6 text-grey-9"><b>Static QR Excel File Upload</b></div>
+              <div class="q-title text-grey-9"><b>Static QR Excel File Upload</b></div>
             </div>
             <!-- <div class="col-md-8" align="left">
               <a

@@ -88,7 +88,7 @@
 
             <template v-slot:top="props">
               <!--START: table title -->
-              <!--<div class="col-12 text-h6 q-my-lg text-weight-regular">
+              <!--<div class="col-12 q-title q-my-lg text-weight-regular">
            Incoming Pod
           </div> -->
               <!-- <div class="col-md-6 q-my-md" align="right">
@@ -143,7 +143,7 @@
 
             <template v-slot:top="props">
               <!--START: table title -->
-              <!--<div class="col-12 text-h6 q-my-lg text-weight-regular">
+              <!--<div class="col-12 q-title q-my-lg text-weight-regular">
             Stocks
           </div> -->
               <!-- <div class="col-md-6 q-my-md" align="right">

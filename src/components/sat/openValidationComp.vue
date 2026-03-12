@@ -7,8 +7,8 @@
        :content-css="{padding:'50px'}"
        >
         <div>
-          <div align="center" class="text-subtitle1 q-mb-md capitalize">{{propShowRejectLeadComponent.merchantName}}</div>
-          <div align="center" class="text-light-blue text-h6 q-mb-md">#{{propShowRejectLeadComponent.leadNumber}}</div>
+          <div align="center" class="q-subheading q-mb-md capitalize">{{propShowRejectLeadComponent.merchantName}}</div>
+          <div align="center" class="text-light-blue q-title q-mb-md">#{{propShowRejectLeadComponent.leadNumber}}</div>
            <div class="col-md-12">
                      <q-input
                     color="grey-9"
@@ -153,7 +153,7 @@ export default {
                  this.$router.push('/sat/lead/validation');
                 // this.$router.push('/sat/rejected/Lead/Details');
                 
-              }).onCancel(error => {
+              }).catch(error => {
                 this.$q.loading.hide();
                  this.$emit("closeRejectLeadModel");
                 this.$q.notify({

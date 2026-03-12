@@ -13,7 +13,7 @@
       <div class="row">
         <div>
           <q-scroll-area style="width: 400px; height: 375px;">
-            <q-list multiline separator class="text-body1">
+            <q-list multiline separator class="q-body-1">
               <q-item multiline>
                 <q-item-section label="Merchant Name"
                   :caption="propLeadInformation.merchantName == null ? 'NA' : propLeadInformation.merchantName " />

@@ -13,7 +13,7 @@
 
         <div class="row items-center border-bottom">
           <div class="col-md-8 q-pa-xs">
-            <div class="text-h6 q-my-md">Bombay Fires</div>
+            <div class="q-title q-my-md">Bombay Fires</div>
             <p class="text-light-blue"># 554855</p>
           </div>
           <div class="col-md-4 q-pa-xs" align="right">
@@ -30,23 +30,23 @@
 
         <div class="row group">
           <div class="col">
-            <div class="text-body1 font-weight-medium q-py-sm"><q-icon color="light-blue" name="phone" size="20px"/> Contact</div>
+            <div class="q-body-1 font-weight-medium q-py-sm"><q-icon color="light-blue" name="phone" size="20px"/> Contact</div>
             <p class="no-margin">+91 9874563210</p>
             <p>+91 9856214700</p>
           </div>
 
           <div class="col">
-            <div class="text-body1 font-weight-medium q-py-sm"><q-icon color="light-blue" name="location_on" size="20px"/> Address</div>
+            <div class="q-body-1 font-weight-medium q-py-sm"><q-icon color="light-blue" name="location_on" size="20px"/> Address</div>
             <p>13A, Haddows Road, Nungambakkam, Chennai, Tamilnadu</p>
           </div>
 
           <div class="col">
-            <div class="text-body1 font-weight-medium q-py-sm"><q-icon color="light-blue" name="map" size="20px"/> State</div>
+            <div class="q-body-1 font-weight-medium q-py-sm"><q-icon color="light-blue" name="map" size="20px"/> State</div>
             <p>Tamilnadu</p>
           </div>
 
           <div class="col">
-            <div class="text-body1 font-weight-medium q-py-sm"><q-icon color="light-blue" name="date_range" size="20px"/> Date of onboarding</div>
+            <div class="q-body-1 font-weight-medium q-py-sm"><q-icon color="light-blue" name="date_range" size="20px"/> Date of onboarding</div>
             <p>20 Oct, 2017</p>
           </div>
         </div>
@@ -63,7 +63,7 @@
           <template v-slot:top="props">
             
             <!--START: table title -->
-            <!-- <div class="col-md-12 text-h6 q-mt-lg  text-weight-regular">FINANCE APPROVED TRACKER </div> -->
+            <!-- <div class="col-md-12 q-title q-mt-lg  text-weight-regular">FINANCE APPROVED TRACKER </div> -->
             <!--END: table title -->
 
             <!--START: table search -->

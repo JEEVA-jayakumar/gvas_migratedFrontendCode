@@ -2,14 +2,14 @@
   <!--q-modal v-model="showRejectLeadDetailsModel" @hide="emitToggleReject(showRejectLeadDetailsModel)" @escape-key="emitToggleReject(showRejectLeadDetailsModel)" :content-css="{ padding: '75px' }">
     </q-dialog-->
   <div class="row">
-    <div class="col-12 text-h6 q-pa-md text-weight-regular bottom-border">
+    <div class="col-12 q-title q-pa-md text-weight-regular bottom-border">
       Reject Lead Details
     </div>
-    <div class="col-12 text-h6 q-pa-md">
-      <div align="center" class="text-light-blue text-h6 q-mb-md">
+    <div class="col-12 q-title q-pa-md">
+      <div align="center" class="text-light-blue q-title q-mb-md">
         #{{ propShowRejectLeadDetailsComponent.leadName }}
       </div>
-      <div align="center" class="text-light-blue text-h6 q-mb-md">
+      <div align="center" class="text-light-blue q-title q-mb-md">
         #{{ propShowRejectLeadDetailsComponent.leadId }}
       </div>
       <div class="col-md-12">
@@ -20,7 +20,7 @@
         />
       </div>
       <div class="col-md-12">
-        <div align="center" class="col-md-10 text-light-blue text-h6 q-mb-md">
+        <div align="center" class="col-md-10 text-light-blue q-title q-mb-md">
           Reason Type
         </div>
         <q-radio
@@ -39,7 +39,7 @@
           color="grey-9"
           label="Others"
         />
-        <div class="text-negative q-py-xs group text-caption" v-if="$v.formData.leadVerificationStatus.reasonType.$error">
+        <div class="text-negative q-py-xs group q-caption" v-if="$v.formData.leadVerificationStatus.reasonType.$error">
           <div v-if="$v.formData.leadVerificationStatus.reasonType.$params.required">
             <q-icon color="negative" name="warning" />&nbsp;Required
           </div>
@@ -55,7 +55,7 @@
           value=""
           v-model="formData.leadVerificationStatus.reason"
         />
-        <div align="center" class="col-md-10 text-light-blue text-h6 q-mb-md">
+        <div align="center" class="col-md-10 text-light-blue q-title q-mb-md">
           <q-btn
             color="negative"
             class="q-ma-sm float-right"
@@ -161,7 +161,7 @@ export default {
                   message: "Rejected lead #" + formData.leadId,
                   icon: "clear"
                 });
-              }).onCancel(error => {
+              }).catch(error => {
                 this.$q.loading.hide();
                 this.$emit("closeRejectLeadDetailsModel");
                 this.$q.notify({

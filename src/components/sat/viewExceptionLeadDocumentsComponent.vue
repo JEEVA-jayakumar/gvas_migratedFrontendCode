@@ -3,10 +3,10 @@
     <!-- START >> Display attached documents -->
     <q-list no-border class="no-padding">
       <!-- START >> (Mandatory) Application form  -->
-      <q-item separator class="text-body1 text-dark bg-grey-4 text-weight-medium">
+      <q-item separator class="q-body-1 text-dark bg-grey-4 text-weight-medium">
         <q-item-section>Application Form</q-item-section>
       </q-item>
-      <q-item separator class="text-body1">
+      <q-item separator class="q-body-1">
         <q-item-section>
           <div class="full-width">
             <!-- START >>If document type is PDF format -->
@@ -58,12 +58,12 @@
               class="row items-center full-width"
               v-if="index.toString()==documents[0].subDocumentType"
             >
-              <div class="col-md-12 text-body1">
+              <div class="col-md-12 q-body-1">
                 <q-expansion-item separator indent icon-toggle opened multiline class="full-width">
                   <template slot="header">
                     <q-item-section icon="attach_file"/>
                     <q-item-section
-                      class="text-body1"
+                      class="q-body-1"
                       :caption="documents[0].uploadedDocuments.length + 'Document(s)'"
                       :label="index"
                     />
@@ -91,11 +91,11 @@
                     <q-item-section v-else right>
                       <span
                         v-if="documents[0].documentVerifiedStatus == 1"
-                        class="text-body1 text-weight-medium text-positive"
+                        class="q-body-1 text-weight-medium text-positive"
                       >Approved</span>
                       <span
                         v-if="documents[0].documentVerifiedStatus == 3"
-                        class="text-body1 text-weight-medium text-negative"
+                        class="q-body-1 text-weight-medium text-negative"
                       >Rejected</span>
                     </q-item-section>
                   </template>
@@ -129,12 +129,12 @@
             <!-- END >> View type is 0, direct documents  will be visible -->
             <!-- START >> View type is 1, Category has sub category, hence defined in else part -->
             <div class="row items-center full-width" v-else>
-              <div class="col-md-12 text-body1">
+              <div class="col-md-12 q-body-1">
                 <q-expansion-item separator indent icon-toggle opened class="full-width">
                   <template slot="header">
                     <q-item-section icon="apps"/>
                     <q-item-section
-                      class="text-body1"
+                      class="q-body-1"
                       :caption="documents.length + 'Type(s)'"
                       :label="index"
                     />
@@ -144,7 +144,7 @@
                     v-for="(subDocument,subIndex) in documents"
                     :key="subIndex"
                   >
-                    <div class="col-md-12 text-body1">
+                    <div class="col-md-12 q-body-1">
                       <q-expansion-item
                         separator
                         icon-toggle
@@ -155,7 +155,7 @@
                         <template slot="header">
                           <q-item-section icon="attach_file"/>
                           <q-item-section
-                            class="text-body1"
+                            class="q-body-1"
                             :caption="subDocument.uploadedDocuments.length + 'Document(s)'"
                             :label="subDocument.subDocumentType"
                           />
@@ -183,11 +183,11 @@
                           <q-item-section v-else right>
                             <span
                               v-if="subDocument.documentVerifiedStatus == 1"
-                              class="text-body1 text-weight-medium text-positive"
+                              class="q-body-1 text-weight-medium text-positive"
                             >Approved</span>
                             <span
                               v-if="subDocument.documentVerifiedStatus == 3"
-                              class="text-body1 text-weight-medium text-negative"
+                              class="q-body-1 text-weight-medium text-negative"
                             >Rejected</span>
                           </q-item-section>
                         </template>

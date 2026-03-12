@@ -1,0 +1,36 @@
+--- web_frontend-2/src/pages/sat/inventoryAloocation.vue	2026-03-11 09:03:51.847015615 +0000
++++ src/pages/sat/inventoryAloocation.vue	2026-03-11 09:03:51.243015622 +0000
+@@ -7,22 +7,21 @@
+             no-pane-border
+             v-model="inventoryOptionSelected"
+             color="dark"
+-            inverted
++            filled
+             class="shadow-1"
+           >
+-            <q-tab default name="internal" label="Bijlipay Regional Inventory" slot="title" />
+-            <!-- <q-tab name="spareSo" label="Spare Parts So" slot="title" /> -->
+-            <q-tab name="external" label="Phonepe Regional Inventory" slot="title" />
+-
+-
+-            <q-tab-pane name="internal">
++            <q-tab name="internal" label="Bijlipay Regional Inventory" />
++            <!-- <q-tab name="spareSo" label="Spare Parts So" /> -->
++            <q-tab name="external" label="Phonepe Regional Inventory" />
++</q-tabs>
++<q-tab-panels v-model="inventoryOptionSelected" animated>
++<q-tab-panel name="internal">
+               <internalRegionalInventory/>
+-            </q-tab-pane>
+-
+-            <q-tab-pane name="external">
++            </q-tab-panel>
++<q-tab-panel name="external">
+               <AggregatorInventory/>
+-            </q-tab-pane>
+-          </q-tabs>
++            </q-tab-panel>
++</q-tab-panels>
+         </div>
+       </div>
+     </div>

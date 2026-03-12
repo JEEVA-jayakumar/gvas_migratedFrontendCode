@@ -9,7 +9,7 @@
   >
     <form>
       <div class="column group">
-        <div class="text-h6">
+        <div class="q-title">
           Update Device Address
         </div>
         <!-- <pre>{{stateInformation}}</pre> -->

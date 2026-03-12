@@ -2,11 +2,11 @@
   <div class="row">
     <div class="col-md-4" style="border-right: 1px solid #ccc;">
       <div class="q-ma-md">
-        <div class="q-mb-md text-subtitle1">Region: {{computedUserRegion}}</div>
+        <div class="q-mb-md q-subheading">Region: {{computedUserRegion}}</div>
         <div>
           <q-card class="no-shadow">
             <q-card-section class="no-padding">
-              <div class="text-body1">
+              <div class="q-body-1">
                 <strong>
                   <h6>Inventory with Region</h6>
                 </strong>
@@ -33,7 +33,7 @@
           <div class="col-md-6">
             <q-card role="button" class="no-shadow cursor-pointer">
               <q-card-section class="no-padding">
-                <div class="text-body1">Pending Allocation</div>
+                <div class="q-body-1">Pending Allocation</div>
               </q-card-section>
               <q-separator />
               <div
@@ -58,7 +58,7 @@
           <div class="col-md-6">
             <q-card role="button" class="no-shadow cursor-pointer">
               <q-card-section class="no-padding">
-                <div class="text-body1">Allocated Devices</div>
+                <div class="q-body-1">Allocated Devices</div>
               </q-card-section>
               <q-separator />
               <div
@@ -83,7 +83,7 @@
           <div class="col-md-6">
             <q-card role="button" class="no-shadow cursor-pointer">
               <q-card-section class="no-padding">
-                <div class="text-body1">Damaged Devices</div>
+                <div class="q-body-1">Damaged Devices</div>
               </q-card-section>
               <q-separator />
               <div
@@ -108,7 +108,7 @@
           <div class="col-md-6">
             <q-card role="button" class="no-shadow cursor-pointer">
               <q-card-section class="no-padding">
-                <div class="text-body1">Inbound Devices</div>
+                <div class="q-body-1">Inbound Devices</div>
               </q-card-section>
               <q-separator />
               <div
@@ -133,7 +133,7 @@
           <div class="col-md-6">
             <q-card role="button" class="no-shadow cursor-pointer">
               <q-card-section class="no-padding">
-                <div class="text-body1">Pending List From App Count</div>
+                <div class="q-body-1">Pending List From App Count</div>
               </q-card-section>
               <q-separator />
               <div
@@ -163,7 +163,7 @@
           >
             <q-card role="button" class="no-shadow cursor-pointer">
               <q-card-section class="no-padding">
-                <div class="text-body1">{{item.device.deviceName}}</div>
+                <div class="q-body-1">{{item.device.deviceName}}</div>
               </q-card-section>
               <q-separator />
               <div @click="loadDevicesTableData(index,item)">
@@ -191,7 +191,7 @@
           >
             <q-card role="button" class="no-shadow cursor-pointer">
               <q-card-section class="no-padding">
-                <div class="text-body1">{{item.device.deviceName}}</div>
+                <div class="q-body-1">{{item.device.deviceName}}</div>
               </q-card-section>
               <q-separator />
               <div @click="loadDevicesTableData(index,item)">
@@ -226,7 +226,7 @@
               <q-card-section>
                 <q-card role="button" class="no-shadow cursor-pointer">
                   <q-card-section class="no-padding">
-                    <div class="text-body1">{{item.user.name}}</div>
+                    <div class="q-body-1">{{item.user.name}}</div>
                   </q-card-section>
                   <q-separator />
                   <div>
@@ -263,7 +263,7 @@
               <q-card-section>
                 <q-card role="button" class="no-shadow cursor-pointer">
                   <q-card-section class="no-padding">
-                    <div class="text-body1">{{item.user.name}}</div>
+                    <div class="q-body-1">{{item.user.name}}</div>
                   </q-card-section>
                   <q-separator />
                   <div>
@@ -289,7 +289,7 @@
       <!-- <div>
           <q-card class="no-shadow">
             <q-card-section class="no-padding">
-              <div class="text-body1">
+              <div class="q-body-1">
                 <strong>
                   <h6>Inventory with SO</h6>
                 </strong>
@@ -316,7 +316,7 @@
       <!-- <div class="col-md-6">
             <q-card role="button" class="no-shadow cursor-pointer">
               <q-card-section class="no-padding">
-                <div class="text-body1">Pending Allocation</div>
+                <div class="q-body-1">Pending Allocation</div>
               </q-card-section>
               <q-separator />
               <div
@@ -340,7 +340,7 @@
       <!-- <div class="col-md-6">
             <q-card role="button" class="no-shadow cursor-pointer">
               <q-card-section class="no-padding">
-                <div class="text-body1">Allocated Devices</div>
+                <div class="q-body-1">Allocated Devices</div>
               </q-card-section>
               <q-separator />
               <div
@@ -363,7 +363,7 @@
       <!-- <div class="col-md-6">
             <q-card role="button" class="no-shadow cursor-pointer">
               <q-card-section class="no-padding">
-                <div class="text-body1">Damaged Devices</div>
+                <div class="q-body-1">Damaged Devices</div>
               </q-card-section>
               <q-separator />
               <div
@@ -388,7 +388,7 @@
       <!-- <div class="col-md-6">
             <q-card role="button" class="no-shadow cursor-pointer">
               <q-card-section class="no-padding">
-                <div class="text-body1">Inbound Devices</div>
+                <div class="q-body-1">Inbound Devices</div>
               </q-card-section>
               <q-separator />
               <div
@@ -416,7 +416,7 @@
       <div class="row bottom-border q-pa-sm items-center">
         <div class="text-weight-regular">
           <!--STARTv-model: table title -->
-          <div class="text-grey-9 text-subtitle1 q-py-sm">{{inventoryCountTableTitle}}</div>
+          <div class="text-grey-9 q-subheading q-py-sm">{{inventoryCountTableTitle}}</div>
           <!--END: table title -->
         </div>
       </div>
