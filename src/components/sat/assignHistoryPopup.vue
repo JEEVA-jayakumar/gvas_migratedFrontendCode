@@ -12,7 +12,7 @@
       <div
         class="row items-center justify-between q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >
-        <div class="col-auto text-h6">Reassign History</div>
+        <div class="col-auto q-title">Reassign History</div>
         <q-btn
           flat
           color="red"

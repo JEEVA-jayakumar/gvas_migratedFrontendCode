@@ -9,27 +9,27 @@
               <q-input
                 v-model="merchant.paymentDetails.deviceSerialNumber"
                 class="no-margin"
-                label="Serial Number"
+                float-label="Serial Number"
               />
-              <!-- @update:model-value="planSelected" -->
+              <!-- @input="planSelected" -->
             </div>
             <div class="col-xs-12 col-sm-6">
-              <q-input
+              <q-datetime
                 format="DD/MM/YYYY"
                 v-model="merchant.paymentDetails.installationDate"
                 class="no-margin"
-                label="Installation Date"
+                float-label="Installation Date"
               />
-              <!-- @update:model-value="planSelected" -->
+              <!-- @input="planSelected" -->
             </div>
             <div class="col-xs-12 col-sm-6">
-              <q-input
+              <q-datetime
                 format="DD/MM/YYYY"
                 v-model="merchant.paymentDetails.deinstallationDate"
                 class="no-margin"
-                label="DeInstallation Date"
+                float-label="DeInstallation Date"
               />
-              <!-- @update:model-value="planSelected" -->
+              <!-- @input="planSelected" -->
             </div>
           </div>
         </div>
@@ -54,6 +54,12 @@ global.jQuery = require("jquery");
 var $ = global.jQuery;
 window.$ = $;
 
+import { easing } from "quasar";
+import { LocalStorage } from "quasar";
+global.jQuery = require("jquery");
+var $ = global.jQuery;
+window.$ = $;
+
 import {
   required,
   requiredIf,
@@ -66,15 +72,15 @@ import {
   maxValue,
   minValue,
   decimal
-} from "@vuelidate/validators";
+} from "vuelidate/lib/validators";
 import moment from "moment";
 import { mapGetters, mapActions } from "vuex";
-import { uid } from "quasar";
-
+import { uid, filter } from "quasar";
+import Vue from "vue";
 import MarsErrorResponse from "../../components/MarsErrorResponseHandler.vue";
 import showPdfModalComponent from "../../components/sat/showPdfModalComponent.vue";
 
-import { helpers } from "@vuelidate/validators";
+import { helpers } from "vuelidate/lib/validators";
 
 const gstn = helpers.regex(
   "gstn",
@@ -1171,7 +1177,7 @@ export default {
           this.$router.push("/sat/lead/validation/" + this.$route.params.id);
           this.$q.loading.hide();
         });
-      }).onCancel(error => {
+      }).catch(error => {
         this.$q.loading.hide();
       });
   }

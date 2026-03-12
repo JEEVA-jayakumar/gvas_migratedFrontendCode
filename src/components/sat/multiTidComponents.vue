@@ -5,8 +5,8 @@
             <q-dialog class="customModalOverlay" v-model="toggleModel"
                 :content-css="{ padding: '100px', minWidth: '70vw' }">
                 <div
-                    class=" text-h6 q-px-lg q-py-md text-center justify-center text-weight-regular bottom-border text-grey-9 ">
-                    <div class="col text-h6">Base-Tid Configurations</div>
+                    class=" q-title q-px-lg q-py-md text-center justify-center text-weight-regular bottom-border text-grey-9 ">
+                    <div class="col q-title">Base-Tid Configurations</div>
                     <div align="right">
                         <q-btn round @click="goToValidationPage()" outline color="dark" icon="clear" />
                     </div>

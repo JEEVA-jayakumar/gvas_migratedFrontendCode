@@ -6,9 +6,9 @@
       <div class="row bottom-border q-px-md q-py-md items-center">
         <!--STARTv-model: table title -->
         <div
-          class="col-md-8 text-h6 text-weight-regular text-grey-9"
+          class="col-md-8 q-title text-weight-regular text-grey-9"
         >Device Recovery Tracker - Faulty Inventory</div>
-        <div class="col-md-4 text-h6 text-weight-regular text-grey-9" align="right">
+        <div class="col-md-4 q-title text-weight-regular text-grey-9" align="right">
           <q-btn
             @click="openScannerComp"
             v-if="!scannerToggleOption"

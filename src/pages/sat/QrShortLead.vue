@@ -3,7 +3,7 @@
     <div class="q-ma-md">
       <div class="row q-ma-xs">
         <div class="col-6 col-lg-3">
-          <div class="text-h6 q-my-md capitalize">
+          <div class="q-title q-my-md capitalize">
             {{ formData.qrShortLead.legalName }}
           </div>
           <div
@@ -14,11 +14,11 @@
           </div>
         </div>
         <div class="col-6 col-lg-3">
-          <div class="text-h6 q-my-md">Contact</div>
+          <div class="q-title q-my-md">Contact</div>
           <div class="no-margin">{{ formData.qrShortLead.contactNumber }}</div>
         </div>
         <div class="col-12 col-lg-3">
-          <div class="text-h6 q-my-md">Address</div>
+          <div class="q-title q-my-md">Address</div>
           <div class="capitalize no-margin">
             {{ formData.qrShortLead.contactAddress }}
           </div>
@@ -28,7 +28,7 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <div class="d-flex align-items-center text-h6 q-my-md nowrap-text">
+            <div class="d-flex align-items-center q-title q-my-md nowrap-text">
               Remarks
             </div>
             <q-btn
@@ -49,23 +49,23 @@
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
                 <q-card-section class="q-pa-sm bottom-border title-bg">
                   <div class="row items-center">
-                    <div class="col text-body1 text-weight-medium">
+                    <div class="col q-body-1 text-weight-medium">
                       MERCHANT DETAILS
                     </div>
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list separator no-border class="no-padding text-body1">
-                    <q-item class="q-pa-sm text-body1">
+                  <q-list separator no-border class="no-padding q-body-1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Application Number</q-item-section>
                       <q-input
                         disable
                         type="text"
                         style="width: 220px"
-                        v-model="this.applicationNumber"
+                        v-model="applicationNumber"
                       />
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center">
                         <span
                           style="flex: 1"
@@ -96,7 +96,7 @@
                         </span>
                       </div>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -138,7 +138,7 @@
                         </span>
                       </div>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Marketing Name</q-item-section>
                       <q-input
                         @blur="$v.formData.qrShortLead.marketingName.$touch"
@@ -161,7 +161,7 @@
                         </span>
                       </div>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>GST Number</q-item-section>
                       <q-input
                         type="text"
@@ -203,7 +203,7 @@
                         />
                       </q-item-section> -->
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Contact Email</q-item-section>
                       <q-input
                         type="text"
@@ -239,7 +239,7 @@
                       </span>
                       <!-- </div> -->
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Contact Number</q-item-section>
                       <q-input
                         type="number"
@@ -276,7 +276,7 @@
                         </span>
                       </div>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Alternate Number</q-item-section>
                       <q-input
                         type="number"
@@ -296,7 +296,7 @@
                         Alternate Number must be exactly 10 digits.
                       </div>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -343,7 +343,7 @@
                         </div>
                       </q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -396,7 +396,7 @@
                         </div>
                       </q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -437,7 +437,7 @@
                         </div>
                       </q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -478,7 +478,7 @@
                         </div>
                       </q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Lead Source</q-item-section>
                       <q-input
                         disable
@@ -487,7 +487,7 @@
                         v-model="formData.qrShortLead.leadSource.sourceName"
                       />
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Merchant Type</q-item-section>
                       <q-input
                         type="text"
@@ -498,7 +498,7 @@
                         "
                       />
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Establishment Year</q-item-section>
                       <!-- <q-input
                         type="text"
@@ -517,7 +517,7 @@
                         Establishment Year must a valid date in dd/mm/yyyy format.
                       </div>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Merchant Industry - MCC</q-item-section>
                       <q-input
                         clearable
@@ -560,7 +560,7 @@
                         </span>
                       </div>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Nature of Business</q-item-section>
                       <q-input
                         type="text"
@@ -570,7 +570,7 @@
                       />
                       <!-- @keydown="nameKeydown($event)" -->
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Category Type</q-item-section>
                       <q-input
                         v-if="this.formData.qrShortLead.isMerchant == 1"
@@ -587,7 +587,7 @@
                         v-model="isactivemerchant1"
                       />
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>State</q-item-section>
                       <q-input
                         disable
@@ -596,7 +596,7 @@
                         v-model="formData.qrShortLead.merchantStateName"
                       />
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>District</q-item-section>
                       <q-input
                         disable
@@ -605,7 +605,7 @@
                         v-model="formData.qrShortLead.merchantDistrictName"
                       />
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Sub District</q-item-section>
                       <q-input
                         disable
@@ -614,7 +614,7 @@
                         v-model="formData.qrShortLead.merchantSubDistrictName"
                       />
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Village</q-item-section>
                       <q-input
                         disable
@@ -623,7 +623,7 @@
                         v-model="formData.qrShortLead.merchantVillageName"
                       />
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Tier</q-item-section>
                       <q-input
                         disable
@@ -632,7 +632,7 @@
                         v-model="formData.qrShortLead.merchantTier"
                       />
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Lat Log</q-item-section>
                       <q-input
                         disable
@@ -641,7 +641,7 @@
                         v-model="formData.qrShortLead.merchantLatLng"
                       />
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Device Type</q-item-section>
                       <q-input
                         disable
@@ -650,7 +650,7 @@
                         v-model="formData.qrShortLead.device.deviceName"
                       />
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Language</q-item-section>
                       <q-input
                         v-if="formData.qrShortLead.languageSoundbox != null"
@@ -659,7 +659,7 @@
                         v-model="formData.qrShortLead.languageSoundbox.language"
                       />
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -699,7 +699,7 @@
                         </div>
                       </q-item-section>
                     </q-item>
-                    <!-- <q-item class="q-pa-sm text-body1">
+                    <!-- <q-item class="q-pa-sm q-body-1">
                         <q-item-section style="display: flex; align-items: center;">
                         <span style="flex: 1;"
                           :class="{'error-highlight': $v.formData.qrShortLead.regionCode.$error}">
@@ -729,14 +729,14 @@
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
                 <q-card-section class="q-pa-sm bottom-border title-bg">
                   <div class="row items-center">
-                    <div class="col text-body1 text-weight-medium">
+                    <div class="col q-body-1 text-weight-medium">
                       PERSONAL INFO
                     </div>
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list separator no-border class="no-padding text-body1">
-                    <q-item class="q-pa-sm text-body1">
+                  <q-list separator no-border class="no-padding q-body-1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -781,7 +781,7 @@
                         </div>
                       </q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -825,7 +825,7 @@
                         </div>
                       </q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -868,7 +868,7 @@
                       </q-item-section>
                     </q-item>
 
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -929,7 +929,7 @@
                       </q-item-section>
                     </q-item>
 
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -978,7 +978,7 @@
                         </div>
                       </q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -1029,7 +1029,7 @@
                         <!-- </div> -->
                       </q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -1072,7 +1072,7 @@
                         </div>
                       </q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -1120,7 +1120,7 @@
                         </div>
                       </q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Nationality</q-item-section>
                       <q-input
                         type="text"
@@ -1128,7 +1128,7 @@
                         v-model="formData.qrShortLead.nationality"
                       />
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Passport Number</q-item-section>
                       <q-input
                         type="text"
@@ -1141,7 +1141,7 @@
                         Passport Number format must be J8369854
                       </div> -->
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Passport Expiry Date</q-item-section>
                       <q-input
                         type="text"
@@ -1162,7 +1162,7 @@
                         Passport Expiry Date must a valid date in dd/mm/yyyy format.
                       </div> -->
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Own House</q-item-section>
                       <!-- <q-input
                         v-if="this.formData.qrShortLead.ownHouse == true"
@@ -1185,7 +1185,7 @@
                         @selected="houseSelected"
                       />
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Owner Age</q-item-section>
                       <q-input
                         :error="$v.formData.qrShortLead.ownerAge.$error"
@@ -1226,12 +1226,12 @@
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
                 <q-card-section class="q-pa-sm bottom-border title-bg">
                   <div class="row items-center">
-                    <div class="col text-body1 text-weight-medium">RISK</div>
+                    <div class="col q-body-1 text-weight-medium">RISK</div>
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list separator no-border class="no-padding text-body1">
-                    <q-item class="q-pa-sm text-body1">
+                  <q-list separator no-border class="no-padding q-body-1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Business Hours WeekDay Start</q-item-section>
                       <q-input
 
@@ -1253,7 +1253,7 @@
                         </span>
                       </div>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Business Hours WeekDay End</q-item-section>
                       <q-input
 
@@ -1276,7 +1276,7 @@
                         </span>
                       </div>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Business Hours Weekend Start</q-item-section>
                       <q-input
 
@@ -1298,7 +1298,7 @@
                         </span>
                       </div>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Business Hours Weekend End</q-item-section>
                       <q-input
 
@@ -1320,7 +1320,7 @@
                         </span>
                       </div>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Average Bill Amount</q-item-section>
                       <q-input
                         type="number"
@@ -1340,7 +1340,7 @@
                         </span>
                       </div>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Maximum Usage - Daily</q-item-section>
                       <q-input
                         type="number"
@@ -1360,7 +1360,7 @@
                         </span>
                       </div>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Maximum Usage - Weekly</q-item-section>
                       <q-input
                         type="number"
@@ -1380,7 +1380,7 @@
                         </span>
                       </div>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Maximum Usage - Monthly</q-item-section>
                       <q-input
                         type="number"
@@ -1412,13 +1412,13 @@
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
                 <q-card-section class="q-pa-sm bottom-border title-bg">
                   <div class="row items-center">
-                    <div class="col text-body1 text-weight-medium">RENTAL</div>
+                    <div class="col q-body-1 text-weight-medium">RENTAL</div>
                   </div>
                 </q-card-section>
 
                 <q-card-section class="q-pa-sm">
-                  <q-list separator no-border class="no-padding text-body1">
-                    <q-item class="q-pa-sm text-body1">
+                  <q-list separator no-border class="no-padding q-body-1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>SO Rental Plan Name</q-item-section>
                       <q-input
                         style="width: 220px"
@@ -1427,7 +1427,7 @@
                         v-model="formData.qrShortLead.plan.planName"
                       />
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -1468,7 +1468,7 @@
                       </div>
                     </q-item>
 
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -1501,7 +1501,7 @@
                       </div>
                     </q-item>
 
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -1537,7 +1537,7 @@
                       </div>
                     </q-item>
 
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Setup Fee</q-item-section>
                       <q-input
                         style="width: 220px"
@@ -1556,7 +1556,7 @@
                         </span>
                       </div>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Reccuring Fee</q-item-section>
                       <q-input
                         type="number"
@@ -1586,13 +1586,13 @@
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
                 <q-card-section class="q-pa-sm bottom-border title-bg">
                   <div class="row items-center">
-                    <div class="col text-body1 text-weight-medium">MDR</div>
+                    <div class="col q-body-1 text-weight-medium">MDR</div>
                   </div>
                 </q-card-section>
 
                 <q-card-section class="q-pa-sm">
-                  <q-list separator no-border class="no-padding text-body1">
-                    <q-item class="q-pa-sm text-body1">
+                  <q-list separator no-border class="no-padding q-body-1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Merchant Category</q-item-section>
                       <q-input
                         disable
@@ -1604,7 +1604,7 @@
                         "
                       />
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Select MDR Plan</q-item-section>
                       <q-input
                         disable
@@ -1614,7 +1614,7 @@
                       />
                     </q-item>
                     <div v-if="this.formData.qrShortLead.isMerchant == 1">
-                      <q-item class="q-pa-sm text-body1">
+                      <q-item class="q-pa-sm q-body-1">
                         <q-item-section
                           >Small Merchant - MDR <2K Debit Card</q-item-section>
                         <q-input
@@ -1645,7 +1645,7 @@
                           </span>
                         </div>
                       </q-item>
-                      <q-item class="q-pa-sm text-body1">
+                      <q-item class="q-pa-sm q-body-1">
                         <q-item-section
                           >Small merchant - MDR >2K Debit Card</q-item-section>
                         <q-input
@@ -1678,7 +1678,7 @@
                           </span>
                         </div>
                       </q-item>
-                      <q-item class="q-pa-sm text-body1">
+                      <q-item class="q-pa-sm q-body-1">
                         <q-item-section
                           >Small merchant - MDR <2K Credit Card</q-item-section>
                         <q-input
@@ -1711,7 +1711,7 @@
                           </span>
                         </div>
                       </q-item>
-                      <q-item class="q-pa-sm text-body1">
+                      <q-item class="q-pa-sm q-body-1">
                         <q-item-section
                           >Small merchant - MDR >2K Credit Card</q-item-section>
                         <q-input
@@ -1746,7 +1746,7 @@
                       </q-item>
                     </div>
                     <div v-else>
-                      <q-item class="q-pa-sm text-body1">
+                      <q-item class="q-pa-sm q-body-1">
                         <q-item-section
                           >Large merchant - MDR <2K Debit Card</q-item-section>
                         <q-input
@@ -1777,7 +1777,7 @@
                           </span>
                         </div>
                       </q-item>
-                      <q-item class="q-pa-sm text-body1">
+                      <q-item class="q-pa-sm q-body-1">
                         <q-item-section
                           >Large merchant - MDR >2K Debit Card</q-item-section>
                         <q-input
@@ -1810,7 +1810,7 @@
                           </span>
                         </div>
                       </q-item>
-                      <q-item class="q-pa-sm text-body1">
+                      <q-item class="q-pa-sm q-body-1">
                         <q-item-section
                           >Large merchant - MDR <2K Credit Card</q-item-section>
                         <q-input
@@ -1843,7 +1843,7 @@
                           </span>
                         </div>
                       </q-item>
-                      <q-item class="q-pa-sm text-body1">
+                      <q-item class="q-pa-sm q-body-1">
                         <q-item-section
                           >Large merchant - MDR >2K Credit Card</q-item-section>
                         <q-input
@@ -1877,7 +1877,7 @@
                         </div>
                       </q-item>
                     </div>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Fixed</q-item-section>
                       <q-input
                         style="width: 220px"
@@ -1898,7 +1898,7 @@
                         </span>
                       </div>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Max MDR per transaction</q-item-section>
                       <q-input
                         type="number"
@@ -1933,12 +1933,12 @@
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
                 <q-card-section class="q-pa-sm bottom-border title-bg">
                   <div class="row items-center">
-                    <div class="col text-body1 text-weight-medium">PAYMENT</div>
+                    <div class="col q-body-1 text-weight-medium">PAYMENT</div>
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list separator no-border class="no-padding text-body1">
-                    <q-item class="q-pa-sm text-body1">
+                  <q-list separator no-border class="no-padding q-body-1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Cheque Number</q-item-section>
                       <q-input
                         style="width: 220px"
@@ -1956,7 +1956,7 @@
                       </div>
                     </q-item>
 
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>NEFT ID</q-item-section>
                       <q-input
                         style="width: 220px"
@@ -1984,14 +1984,14 @@
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
                 <q-card-section class="q-pa-sm bottom-border title-bg">
                   <div class="row items-center">
-                    <div class="col text-body1 text-weight-medium">
+                    <div class="col q-body-1 text-weight-medium">
                       ACCOUNT INFORMATION
                     </div>
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list separator no-border class="no-padding text-body1">
-                    <q-item class="q-pa-sm text-body1">
+                  <q-list separator no-border class="no-padding q-body-1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -2035,7 +2035,7 @@
                         </div>
                       </q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -2078,7 +2078,7 @@
                       </q-item-section>
                     </q-item>
 
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -2120,7 +2120,7 @@
                         </div>
                       </q-item-section>
                     </q-item>
-                    <!-- <q-item class="q-pa-sm text-body1">
+                    <!-- <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span style="flex: 1;"
                           :class="{'error-highlight': $v.formData.qrShortLead.branchCode.$error}">
@@ -2136,7 +2136,7 @@
                       />
                     </q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span style="flex: 1;"
                           :class="{'error-highlight': $v.formData.qrShortLead.branchZone.$error}">
@@ -2162,14 +2162,14 @@
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
                 <q-card-section class="q-pa-sm bottom-border title-bg">
                   <div class="row items-center">
-                    <div class="col text-body1 text-weight-medium">
+                    <div class="col q-body-1 text-weight-medium">
                       REMARKS
                     </div>
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list separator no-border class="no-padding text-body1">
-                    <q-item class="q-pa-sm text-body1">
+                  <q-list separator no-border class="no-padding q-body-1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span
                           style="flex: 1;"
@@ -2205,7 +2205,7 @@
                         </div>
                       </q-item-section>
                     </q-item>
-                    <!-- <q-item class="q-pa-sm text-body1">
+                    <!-- <q-item class="q-pa-sm q-body-1">
                       <q-item-section style="display: flex; align-items: center;">
                         <span style="flex: 1;"
                         :class="{'error-highlight': $v.formData.qrShortLead.satToMarsRemarks.$error}">
@@ -2232,8 +2232,8 @@
         <div class="col-12">
           <q-card class="q-ma-xs border-1" flat>
             <q-card-section class="q-pa-sm title-bg bottom-border">
-              <span class="text-body1 text-weight-medium">DOCUMENTS </span>
-              <span class="text-body1 text-weight-medium"
+              <span class="q-body-1 text-weight-medium">DOCUMENTS </span>
+              <span class="q-body-1 text-weight-medium"
                 >(Merchant Type:
                 {{
                   formData.qrShortLead.qrMerchantType.merchantTypeName
@@ -4287,7 +4287,7 @@ loadUpdate(){
             });
           } else {
             this.$q.loading.hide();
-            error.data.data.splice("toBeVerifiedDocuments", 1);
+            delete error.data.data.toBeVerifiedDocuments;
             for (var key in error.data.data) {
               let arrayMessage = "";
               _.map(error.data.data[key], oo => {
@@ -4343,7 +4343,7 @@ loadUpdate(){
             "PROCEED TO MARS RESPONCE ----------->",
             this.iciciMarsRequest
           );
-          request.merchant.paymentDetails.splice("vpa", 1);
+          delete request.merchant.paymentDetails.vpa;
           this.MARS_STATIC_QR_DATA_SUBMIT({
             params: request,
 

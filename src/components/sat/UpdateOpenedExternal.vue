@@ -7,7 +7,7 @@
         :content-css="{padding:'30px',minWidth: '40vw'}"
       >  -->
             <div class="row">
-                <div class="col-12 text-h6 q-pa-md text-weight-regular bottom-border">
+                <div class="col-12 q-title q-pa-md text-weight-regular bottom-border">
                     RE-Assign
                 </div>
                 <!-- START >> Setup MDR details -->

@@ -70,7 +70,7 @@ export default {
     <div class="q-pa-md bottom-border">
       <div class="row text-center justify-center">
         <div class="col-md-12 q-py-md bottom-border">
-          <div class="text-h6 q-px-lg q-py-md text-width-large text-grey-9">
+          <div class="q-title q-px-lg q-py-md text-width-large text-grey-9">
             Upload
           </div>
         </div>
@@ -147,7 +147,7 @@ export default {
     <div class="q-pa-md">
       <div class="row text-center justify-center">
         <div class="col-md-12 q-py-md bottom-border">
-          <div class="text-h6 text-grey-9">
+          <div class="q-title text-grey-9">
             Download
           </div>
         </div>

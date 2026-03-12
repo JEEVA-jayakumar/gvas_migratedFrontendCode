@@ -11,7 +11,7 @@
       <!-- START >> Lead reject -->
       <form>
         <div class="column group">
-           <div class="text-h6 q-py-md">
+           <div class="q-title q-py-md">
             Are you sure want to reject?
            </div>
            <div>

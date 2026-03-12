@@ -9,7 +9,7 @@
     >
       <!-- START >> Lead reject -->
       <div class="column group">
-        <div class="text-h6 q-py-md">Are you sure want to reject?</div>
+        <div class="q-title q-py-md">Are you sure want to reject?</div>
         <div>
           <q-input
             v-model="formData.leadVerificationStatus.reason"

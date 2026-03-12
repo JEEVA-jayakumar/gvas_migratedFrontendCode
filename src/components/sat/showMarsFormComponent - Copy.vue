@@ -5,7 +5,7 @@
             <!-- Documents proof -->
             <div class="col-md-5 q-pa-xs" v-if="showDocumentPreview">
                 <q-list no-border class="no-padding">
-                    <q-item v-if="formData.shortLead.applicationFileMimeType != null" separator class="text-body1">
+                    <q-item v-if="formData.shortLead.applicationFileMimeType != null" separator class="q-body-1">
                         <div class="full-width">
                             <div class="cursor-pointer" v-if="formData.shortLead.applicationFileMimeType.includes('pdf')">
                                 <div @click="fnPDFViewModal(formData.shortLead.applicationFile)">
@@ -28,15 +28,15 @@
                         </div>
                     </q-item>
                     <q-item separator class="no-padding">
-                        <q-item-section class="text-caption">
+                        <q-item-section class="q-caption">
                             <div v-for="(documents,index) in formData.shortLead.leadDocuments" :key="index" >
                                 <div class="row items-center full-width"
                                 v-if="index.toString()==documents[0].subDocumentType">
-                                    <div class="col-md-12 text-body1">
+                                    <div class="col-md-12 q-body-1">
                                         <q-expansion-item separator indent opened group="closeOnOpen" multiline class="full-width">
                                             <template slot="header">
                                                 <q-item-section icon="attach_file" />
-                                                <q-item-section class="text-body1" :label="index" />
+                                                <q-item-section class="q-body-1" :label="index" />
                                             </template>
                                             <div v-for="(item,subIndex) in documents[0].uploadedDocuments" :key="subIndex" class="q-py-sm">
                                                 <div v-if="item.mimeType.includes('application')">
@@ -57,18 +57,18 @@
                                 </div>
                                 
                                     <div class="row items-center full-width" v-else>
-                                    <div class="col-md-12 text-body1">
+                                    <div class="col-md-12 q-body-1">
                                         <q-expansion-item separator opened group="closeOnOpen"  class="full-width">
                                             <template slot="header">
                                                 <q-item-section  icon="apps" />
-                                                <q-item-section class="text-body1" :label="index" />
+                                                <q-item-section class="q-body-1" :label="index" />
                                             </template>
                                             <div class="row items-center full-width" v-for="(subDocument,subIndex) in documents" :key="subIndex">
-                                                <div class="col-md-12 text-body1">
+                                                <div class="col-md-12 q-body-1">
                                                     <q-expansion-item separator opened group="closeOnOpenSubDocument" multiline class="full-width">
                                                         <template slot="header">
                                                             <q-item-section icon="attach_file" />
-                                                            <q-item-section class="text-body1" :label="subDocument.subDocumentType" />
+                                                            <q-item-section class="q-body-1" :label="subDocument.subDocumentType" />
                                                         </template>
                                                         <div v-for="(item,subIndex) in subDocument.uploadedDocuments" :key="subIndex" class="q-py-sm">
                                                             <div v-if="item.mimeType.includes('application')">
@@ -186,12 +186,12 @@
                                 />
                             </div>
                             <div class="col-md-6">
-                                <p class="text-caption">Subvention Type</p>
+                                <p class="q-caption">Subvention Type</p>
                                 <q-checkbox color="grey-9" v-model="checked" label="Bank MDR" />
                                 <q-checkbox color="grey-9" v-model="checked" label="Bijlipay MDR" />
                             </div>
                             <div class="col-md-6">
-                                <p class="text-caption">Sharing Model</p>
+                                <p class="q-caption">Sharing Model</p>
                                 <q-radio color="grey-9" v-model="option" val="opt2" label="No Sharing" />
                                 <q-radio color="grey-9" v-model="option" val="opt2" label="Transaction Value Model" />
                                 <q-radio color="grey-9" v-model="option" val="opt3" label="MDR and/or Rent" />
@@ -280,7 +280,7 @@
                                 <q-input color="grey-9" type="number" v-model="onBoardDetails.companyInfo.businessNature" label="Name of Business" placeholder="Name of Business" />
                             </div>
                             <div class="col-md-6">
-                                <p class="text-caption">Type of Business</p>
+                                <p class="q-caption">Type of Business</p>
                                 <q-radio color="grey-9" v-model="onBoardDetails.companyInfo.businessType" val="R" label="Rented" />
                                 <q-radio color="grey-9" v-model="onBoardDetails.companyInfo.businessType" val="O" label="Owned" />
                                 <q-radio color="grey-9" v-model="onBoardDetails.companyInfo.businessType" val="L" label="Leased" />
@@ -342,12 +342,12 @@
                                 <q-input color="grey-9" type="email" v-model="text" label="Email" placeholder="Email" />
                             </div>
                             <div class="col-md-6">
-                                <p class="text-caption">Statement Type</p>
+                                <p class="q-caption">Statement Type</p>
                                 <q-radio color="grey-9" v-model="option" val="opt2" label="E-Statement" />
                                 <q-radio color="grey-9" v-model="option" val="opt2" label="Paper Statement" />
                             </div>
                             <div class="col-md-6">
-                                <p class="text-caption">Paper Statement</p>
+                                <p class="q-caption">Paper Statement</p>
                                 <q-radio color="grey-9" v-model="option" val="opt2" label="Daily" />
                                 <q-radio color="grey-9" v-model="option" val="opt2" label="Monthly" />
                                 <q-radio color="grey-9" v-model="option" val="opt3" label="Quaterly" />
@@ -409,19 +409,19 @@
                     <q-step name="fourth" title="Business" subtitle="Info">
                         <div class="row q-col-gutter-sm">
                             <div class="col-md-6 col-sm-12">
-                                <p class="text-caption">Business Hours(Week Days)</p>
+                                <p class="q-caption">Business Hours(Week Days)</p>
                                 <q-input color="grey-9" format-model="number"	v-model="date2" type="time" format24h label="From" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <p class="text-caption">Business Hours(Week Days)</p>
+                                <p class="q-caption">Business Hours(Week Days)</p>
                                 <q-input color="grey-9" format-model="number"	v-model="date2" type="time" format24h label="To" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <p class="text-caption">Business Hours(Weekends)</p>
+                                <p class="q-caption">Business Hours(Weekends)</p>
                                 <q-input color="grey-9" format-model="number"	v-model="date2" type="time" format24h label="From" />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <p class="text-caption">Business Hours(Weekends)</p>
+                                <p class="q-caption">Business Hours(Weekends)</p>
                                 <q-input color="grey-9" format-model="number"	v-model="date2" type="time" format24h label="To" />
                             </div>
                             <div class="col-md-6 col-sm-12">
@@ -480,7 +480,7 @@
                     <q-step name="fifth" title="Payment" subtitle="Details">
                             <div class="row q-col-gutter-sm">
                             <div class="col-md-6">
-                                <p class="text-caption">Device Owned By</p>
+                                <p class="q-caption">Device Owned By</p>
                                 <q-radio color="grey-9" v-model="option" val="opt2" label="Bijlipay" />
                                 <q-radio color="grey-9" v-model="option" val="opt2" label="Merchant" />
                             </div>
@@ -500,7 +500,7 @@
                                 <q-input color="grey-9" type="number" v-model="text" label="No of Terminals" placeholder="No of Terminals" />
                             </div>
                             <div class="col-md-6">
-                                <p class="text-caption">Cash @POS Enabled?</p>
+                                <p class="q-caption">Cash @POS Enabled?</p>
                                 <q-radio color="grey-9" v-model="option" val="opt2" label="Yes" />
                                 <q-radio color="grey-9" v-model="option" val="opt2" label="No" />
                             </div>
@@ -523,7 +523,7 @@
                                 />
                             </div>
                             <div class="col-md-6">
-                                <p class="text-caption">Rental Type</p>
+                                <p class="q-caption">Rental Type</p>
                                 <q-radio color="grey-9" v-model="option" val="opt2" label="Advanced" />
                                 <q-radio color="grey-9" v-model="option" val="opt2" label="Regular" />
                             </div>
@@ -546,7 +546,7 @@
                     <q-step name="seventh" title="Bank & Collection" subtitle="Details">
                         <div class="row gutter-sm items-center">
                             <div class="col-md-12">
-                                <p class="text-caption">Merchant Bank Details</p>
+                                <p class="q-caption">Merchant Bank Details</p>
                             </div>
                             <div class="col-md-6">
                                 <q-input color="grey-9" v-model="text" label="IFSC Code" placeholder="IFSC Code" />
@@ -595,7 +595,7 @@
                                 <q-checkbox color="grey-9" v-model="checked" label="Cancelled Cheque Lead Attached" />
                             </div>
                                 <div class="col-md-12">
-                                <p class="text-caption">Payment Collection Details</p>
+                                <p class="q-caption">Payment Collection Details</p>
                             </div>
                             <div class="col-md-6">
                                 <q-input color="grey-9" v-model="text" label="Swipe Amount" placeholder="Swipe Amount" />

@@ -4,7 +4,7 @@
     <div>
       <div class="row bottom-border q-px-md q-py-md items-center">
         <!--START: table title -->
-        <div class="col-md-8 text-h6 text-weight-regular text-grey-9">Aggregator Add Device Recovery- Scan & Upload</div>
+        <div class="col-md-8 q-title text-weight-regular text-grey-9">Aggregator Add Device Recovery- Scan & Upload</div>
         <!--END: table title -->
       </div>
       <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
@@ -15,12 +15,12 @@
         </div> -->
         <div class="col-md-4">
           <!-- <pre>{{tempTableData}}</pre>  ref="clickHeretoStartParent"  ref="clickHeretoStartChild"      -->
-          <q-select v-model="formData.device.id" label="Select Device Type" radio color="grey-9"
+          <q-select v-model="formData.device.id" float-label="Select Device Type" radio color="grey-9"
             :options="deviceOptions" />
         </div>
         <div class="col-md-4">
-          <q-select :disabled="formData.device.id == ''" v-model="action" label="Select Device Status" radio
-            color="grey-9" :options="actionOptions" @update:model-value="fnDisableDeviceTypeSelection" />
+          <q-select :disabled="formData.device.id == ''" v-model="action" float-label="Select Device Status" radio
+            color="grey-9" :options="actionOptions" @input="fnDisableDeviceTypeSelection" />
         </div>
         <!-- Final upload button toggle -->
         <div class="col-12 col-lg-4 group" align="right">
@@ -32,16 +32,16 @@
         <!--ENDv-model: table title -->
       </div>
       <!--START: table Data -->
-      <q-table :rows="tempTableData" :columns="columnData" table-class="customTableClass shadow-0"
-        :filter="filterSearch" v-model:pagination="paginationControl" row-key="index" :loading="tableAjaxLoading"
+      <q-table :data="tempTableData" :columns="columnData" table-class="customTableClass shadow-0"
+        :filter="filterSearch" :pagination.sync="paginationControl" row-key="index" :loading="tableAjaxLoading"
         color="light-blue">
-        <q-td v-slot:body-cell-action="props" :props="props">
+        <q-td slot="body-cell-action" slot-scope="props" :props="props">
           <q-btn @click="removeScannedItems(props.row)" label="Remove" icon="close" color="red-6" size="sm" />
         </q-td>
         <template slot="top">
           <!--START: table filter,search -->
           <div class="col-md-5">
-            <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search .."
+            <q-search clearable color="grey-9" v-model="filterSearch" placeholder="Type.." float-label="Search .."
               class="q-mr-lg q-py-sm" />
           </div>
           <!--END: table filter,search -->
@@ -52,10 +52,9 @@
 </template>
   
 <script>
-import { required } from '@vuelidate/validators';
-
-// import VueBarcodeScanner from "vue-barcode-scanner";
-// Vue.use(VueBarcodeScanner);
+import Vue from "vue";
+import VueBarcodeScanner from "vue-barcode-scanner";
+Vue.use(VueBarcodeScanner);
 
 import { mapGetters, mapActions } from "vuex";
 export default {
@@ -249,7 +248,7 @@ export default {
     removeScannedItems(item) {
       // this.getAddDeviceScannedItems.splice(item.__index, 1);
       // this.tempTableData.splice(item.__index, 1);
-      this.tempTableData.splice(item.__index, 1);
+      this.$delete(this.tempTableData, item.__index);
       if (this.tempTableData.length == 0) {
         this.scanningActive = true;
       }

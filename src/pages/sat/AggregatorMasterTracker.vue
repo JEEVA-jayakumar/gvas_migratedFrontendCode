@@ -2,58 +2,62 @@
     <q-page>
       <div>
         <div
-          class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+          class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
         >Aggregator Master Tracker-Implemented</div>
         <generalLeadInformation
           v-if="propToggleLeadInformation"
-          v-model:leadInformation="addtnLeadInformation"
+          :leadInformation="addtnLeadInformation"
           :propToggleLeadInformationPop="propToggleLeadInformation"
           @closeLeadInformation="toggleLeadInformation"
         />
         <q-table
           table-class="customTableClass"
-          :rows="tableData"
+          :data="tableData"
           :columns="columns"
-          :filter="filter" v-model:pagination="paginationControl"
+          :filter="filter"
+          :pagination.sync="paginationControl"
           row-key="name"
           :loading="toggleAjaxLoadFilter"
           :rows-per-page-options="[5,10,15,20,25]"
           @request="ajaxLoadAllLeadInfo"
         >
-          <q-td v-slot:body-cell-tid="props" :props="props">
+          <q-td slot="body-cell-tid" slot-scope="props" :props="props">
             <span class="label text-primary"># {{props.row.tid}}</span>
           </q-td>
-          <q-td v-slot:body-cell-mid="props" :props="props">
+          <q-td slot="body-cell-mid" slot-scope="props" :props="props">
             <span class="label text-primary"># {{props.row.mid}}</span>
           </q-td>
           <q-td
-            v-slot:body-cell-leadNumber="props"
+            slot="body-cell-leadNumber"
+            slot-scope="props"
             :props="props"
             class="cursor-pointer"
-            @click="toggleLeadInformation(props.row.leadInformation)"
+            @click.native="toggleLeadInformation(props.row.leadInformation)"
           >
             <span class="label text-primary"># {{props.row.leadInformation.leadNumber}}</span>
           </q-td>
           <q-td
-            v-slot:body-cell-mobileNumber="props"
+            slot="body-cell-mobileNumber"
+            slot-scope="props"
             :props="props"
           >{{props.row.leadInformation == null? 'NA':props.row.leadInformation.contactNumber}}</q-td>
           <q-td
-            v-slot:body-cell-leadAddress="props"
+            slot="body-cell-leadAddress"
+            slot-scope="props"
             :props="props"
           >{{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}</q-td>
-          <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-            <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
+          <q-td slot="body-cell-deviceStatusDate" slot-scope="props" :props="props">
+            <span class="label">{{props.row.deviceStatusDate | moment("Do MMM Y")}}</span>
           </q-td>
           <template slot="top" >
             <div class="col-5">
-              <q-input
+              <q-search
                 clearable
                 v-model="filter"
                 separator
                 color="grey-9"
                 placeholder="Type.."
-                label="Search by MID, TID, Merchant Name"
+                float-label="Search by MID, TID, Merchant Name"
                 class="q-mr-lg q-py-sm"
               />
             </div>

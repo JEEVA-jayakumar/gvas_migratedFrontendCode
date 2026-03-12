@@ -3,7 +3,7 @@
     <!-- content -->
     <div>
       <div
-        class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+        class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >
         Bijlipay Global Serial Number/TID Search
       </div>
@@ -71,7 +71,7 @@
     >
       <div class="row" align="center">
         <q-icon name="warning" color="warning" size="4rem" />
-        <div class="text-subtitle1 text-bold text-grey-9" style="align-self: center">
+        <div class="q-subheading text-bold text-grey-9" style="align-self: center">
           No Data Available
         </div>
       </div>
@@ -87,13 +87,13 @@
           <q-card-section>
             <div
               v-if="tableData.length > 0 && viewopen == 1"
-              class="text-subtitle1 text-bold text-grey-9"
+              class="q-subheading text-bold text-grey-9"
             >
               Lead Status
             </div>
             <div
               v-if="tableData.length > 0 && viewopen == 2"
-              class="text-subtitle1 text-bold text-grey-9"
+              class="q-subheading text-bold text-grey-9"
             >
               QR Lead Status
             </div>
@@ -272,7 +272,7 @@
       <div class="col-lg-4 col-md-6 col-sm-12">
         <q-card class="q-card q-py-md round-borders q-pa-sm">
           <q-card-section>
-            <div class="text-subtitle1 text-bold text-grey-9">Tid Status</div>
+            <div class="q-subheading text-bold text-grey-9">Tid Status</div>
           </q-card-section>
           <q-separator></q-separator>
           <q-card-section>
@@ -397,7 +397,7 @@
       <div class="col-lg-4 col-md-6 col-sm-12 no-wrap">
         <q-card class="q-card q-py-md round-borders q-pa-sm">
           <q-card-section>
-            <div class="text-subtitle1 text-bold text-grey-9">Serial Number Status</div>
+            <div class="q-subheading text-bold text-grey-9">Serial Number Status</div>
           </q-card-section>
           <q-separator></q-separator>
           <q-card-section>

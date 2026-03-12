@@ -8,7 +8,7 @@
         <div class="row text-center justify-center">
           <div class="col-md-12 q-py-sm bottom-border">
      
-            <div class="text-h6 text-grey-9">
+            <div class="q-title text-grey-9">
               Sim Activation - Bulk Upload
             </div>
                     

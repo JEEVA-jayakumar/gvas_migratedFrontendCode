@@ -8,9 +8,9 @@
       :content-css="{ padding: '100px', minWidth: '70vw' }"
     >
       <div
-        class="text-h6 q-px-lg q-py-md text-center justify-center text-weight-regular bottom-border text-grey-9"
+        class="q-title q-px-lg q-py-md text-center justify-center text-weight-regular bottom-border text-grey-9"
       >
-        <div class="col text-h6">Additional Info</div>
+        <div class="col q-title">Additional Info</div>
       </div>
       <q-card>
         <div class="q-px-md">

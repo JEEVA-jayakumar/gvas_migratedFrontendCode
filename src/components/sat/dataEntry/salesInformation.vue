@@ -116,7 +116,7 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <p class="text-caption">Sharing Model</p>
+        <p class="q-caption">Sharing Model</p>
         <div v-for="(item,index) in viewBinding.sharingModelCode" :key="index">
           <q-radio
             color="grey-9"

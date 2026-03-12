@@ -1,12 +1,12 @@
 <template>
   <q-page>
     <div
-        class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+        class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >Aggregator Lost/Stolen</div>
     <!-- <q-pull-to-refresh :handler="PullToRefresh" inline></q-pull-to-refresh> -->
     <!--START: table title -->
     <!-- <div
-      class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
     >Aggregators Lost Or Stolen</div> -->
     <!--END: table title -->
     <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
@@ -25,50 +25,68 @@
       <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filter" v-model:pagination="paginationControl" row-key="name" :loading="toggleAjaxLoadFilter"
         :rows-per-page-options="[5, 10, 15, 20]" @request="ajaxLoadAllLeadInfo">
         <!--START: table header -->
-        <q-tr v-slot:top-row="props">
-          <q-th v-for="col in props.columns" :key="col.name" :props="props">{{
-            col.label
-          }}</q-th>
-        </q-tr>
+        <template v-slot:top-row="props">
+          <q-tr>
+            <q-th v-for="col in props.columns" :key="col.name" :props="props">{{
+              col.label
+            }}</q-th>
+          </q-tr>
+        </template>
         <!--END: table header -->
 
-        <q-td v-slot:body-cell-tid="props" :props="props">
-          <span class="label text-primary"># {{ props.row.tid }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-mid="props" :props="props">
-          <span class="label text-primary"># {{ props.row.mid }}</span>
-        </q-td>
+        <template v-slot:body-cell-tid="props">
+          <q-td :props="props">
+            <span class="label text-primary"># {{ props.row.tid }}</span>
+          </q-td>
+        </template>
+        <template v-slot:body-cell-mid="props">
+          <q-td :props="props">
+            <span class="label text-primary"># {{ props.row.mid }}</span>
+          </q-td>
+        </template>
         <!-- <q-td
           v-slot:body-cell-leadName="props"
           :props="props"
         >{{props.row.leadInformation.leadName}}</q-td>-->
-        <q-td v-slot:body-cell-leadNumber="props" :props="props" class="cursor-pointer"
-          @click="toggleLeadInformation(props.row.leadInformation)">
-          <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-mobileNumber="props" :props="props">{{
-          props.row.leadInformation == null
-            ? "NA"
-            : props.row.leadInformation.contactNumber
-        }}</q-td>
-        <q-td v-slot:body-cell-leadAddress="props" :props="props">{{
-          props.row.leadInformation == null
-            ? "NA"
-            : props.row.leadInformation.leadAddress
-        }}</q-td>
-        <q-td v-slot:body-cell-lostOrStolenRemarks="props" :props="props">
-          <span class="label">{{ props.row.lostOrStolenRemarks }}</span>
-        </q-td>
-        <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
-          <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-        </q-td>
+        <template v-slot:body-cell-leadNumber="props">
+          <q-td :props="props" class="cursor-pointer"
+            @click="toggleLeadInformation(props.row.leadInformation)">
+            <span class="label text-primary"># {{ props.row.leadInformation?.leadNumber }}</span>
+          </q-td>
+        </template>
+        <template v-slot:body-cell-mobileNumber="props">
+          <q-td :props="props">{{
+            props.row.leadInformation == null
+              ? "NA"
+              : props.row.leadInformation.contactNumber
+          }}</q-td>
+        </template>
+        <template v-slot:body-cell-leadAddress="props">
+          <q-td :props="props">{{
+            props.row.leadInformation == null
+              ? "NA"
+              : props.row.leadInformation.leadAddress
+          }}</q-td>
+        </template>
+        <template v-slot:body-cell-lostOrStolenRemarks="props">
+          <q-td :props="props">
+            <span class="label">{{ props.row.lostOrStolenRemarks }}</span>
+          </q-td>
+        </template>
+        <template v-slot:body-cell-deviceStatusDate="props">
+          <q-td :props="props">
+            <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
+          </q-td>
+        </template>
         <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
         <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
       </q-td> -->
-        <q-td v-slot:body-cell-action="props" :props="props">
-          <q-btn highlight push class="q-mx-sm" color="positive" size="sm"
-            @click="Aggregatorsloststolendevice(props.row)">Lost/Stolen</q-btn>
-        </q-td>
+        <template v-slot:body-cell-action="props">
+          <q-td :props="props">
+            <q-btn highlight push class="q-mx-sm" color="positive" size="sm"
+              @click="Aggregatorsloststolendevice(props.row)">Lost/Stolen</q-btn>
+          </q-td>
+        </template>
         <!-- <q-td auto-width key="action" :props="props">
               <q-btn
               highlight
@@ -81,18 +99,21 @@
            </q-td>
            </q-tr>
         </template> -->
-        <template slot="top" class="bottom-border">
+        <template v-slot:top>
           <!--START: table filter,search,excel download -->
           <div class="col-5">
-            <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
-              label="Search Using TID, MID, Lead ID, Merchant Name" class="q-mr-lg q-py-sm" />
+            <q-input clearable v-model="filter" color="grey-9" label="Search Using TID, MID, Lead ID, Merchant Name" class="q-mr-lg q-py-sm">
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </q-input>
           </div>
         </template>
       </q-table>  
   <div
-        class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+        class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >Add Your Remarks</div>
-       <q-table table-class="customTableClass" v-model:columns="columns1" :rows="tableData1" row-key="field" color="grey-9"
+       <q-table table-class="customTableClass" :columns="columns1" :rows="tableData1" row-key="field" color="grey-9"
         :filter="filter1" :rows-per-page-options="[5, 10, 15, 20, 25]" v-model:pagination="paginationControl1"
         :loading="toggleAjaxLoadFilter1" @request="lostOrStolenLoadInfo" table-style="word-break: break-all"
         class="payment_verification_table capitalize">
@@ -100,11 +121,12 @@
         <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
         <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
       </q-td> -->
-        <q-td v-slot:body-cell-updatedAt="props" :props="props">{{
-          props.row.aggregatorRegionalInventory.updatedAt == null ? "NA" :
-            props.row.aggregatorRegionalInventory.updatedAt
-            | moment("Do MMM Y")
-        }}</q-td>
+        <template v-slot:body-cell-updatedAt="props">
+          <q-td :props="props">{{
+            props.row.aggregatorRegionalInventory.updatedAt == null ? "NA" :
+              $moment(props.row.aggregatorRegionalInventory.updatedAt).format("Do MMM Y")
+          }}</q-td>
+        </template>
         <!-- <q-td v-slot:body-cell-Status="props" :props="props">
           <span class="label text-positive" v-if="props.row.aggregatorRegionalInventory.deviceStatus == 8">Waiting for
             Approval</span>
@@ -113,26 +135,30 @@
           <span class="label text-purple" v-if="props.row.aggregatorRegionalInventory.deviceStatus == 10">Rejected By
             Finance</span>
         </q-td> -->
-        <q-td v-slot:body-cell-action="props" :props="props">
-          <q-btn v-if="props.row.aggregatorRegionalInventory.deviceStatus == 8" disable push color="purple-9"
-            size="sm">Waiting for Approval</q-btn>
-          <q-btn v-else-if="props.row.aggregatorRegionalInventory.deviceStatus == 7" highlight push disable color="blue"
-            size="sm">Submitted By SO</q-btn>
-          <q-btn v-else-if="props.row.aggregatorRegionalInventory.deviceStatus == 10" highlight push disable color="red"
-            size="sm">Rejected By Finance</q-btn>
-        </q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
-          <q-btn v-if="props.row.aggregatorRegionalInventory.deviceStatus == 10" highlight push color="red" size="sm"
-            @click="Aggregatorsloststolendevice(props.row)">Lost/Stolen</q-btn>
-          <q-btn v-if="props.row.aggregatorRegionalInventory.deviceStatus == 8" highlight push color="purple-9"
-            size="sm" @click="Aggregatorsloststolendevice(props.row)">Lost/Stolen</q-btn>
-          <q-btn v-else-if="props.row.aggregatorRegionalInventory.deviceStatus == 7" highlight push class="q-mx-sm"
-            color="positive" size="sm" @click="Aggregatorsloststolendevice(props.row)">Lost/Stolen</q-btn>
-        </q-td>
-        <template slot="top" class="bottom-border">
+        <template v-slot:body-cell-action="props">
+          <q-td :props="props">
+            <q-btn v-if="props.row.aggregatorRegionalInventory.deviceStatus == 8" disable push color="purple-9"
+              size="sm">Waiting for Approval</q-btn>
+            <q-btn v-else-if="props.row.aggregatorRegionalInventory.deviceStatus == 7" highlight push disable color="blue"
+              size="sm">Submitted By SO</q-btn>
+            <q-btn v-else-if="props.row.aggregatorRegionalInventory.deviceStatus == 10" highlight push disable color="red"
+              size="sm">Rejected By Finance</q-btn>
+            &nbsp;
+            <q-btn v-if="props.row.aggregatorRegionalInventory.deviceStatus == 10" highlight push color="red" size="sm"
+              @click="Aggregatorsloststolendevice(props.row)">Lost/Stolen</q-btn>
+            <q-btn v-if="props.row.aggregatorRegionalInventory.deviceStatus == 8" highlight push color="purple-9"
+              size="sm" @click="Aggregatorsloststolendevice(props.row)">Lost/Stolen</q-btn>
+            <q-btn v-else-if="props.row.aggregatorRegionalInventory.deviceStatus == 7" highlight push class="q-mx-sm"
+              color="positive" size="sm" @click="Aggregatorsloststolendevice(props.row)">Lost/Stolen</q-btn>
+          </q-td>
+        </template>
+        <template v-slot:top>
           <div class="col-md-5">
-            <q-input clearable color="grey-9" v-model="filter1" placeholder="Type.."
-              label="Search Using TID, MID " class="q-mr-lg q-py-sm" />
+            <q-input clearable color="grey-9" v-model="filter1" label="Search Using TID, MID " class="q-mr-lg q-py-sm">
+               <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </q-input>
           </div>
           <div class="col-md-6">
 
@@ -167,10 +193,7 @@
 </template>
 
 <script>
-import { required, or } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
-
-
 
 import { date } from "quasar";
 const today = new Date();
@@ -250,7 +273,7 @@ export default {
           label: "Lead Id",
           align: "left",
           field: row => {
-            row.leadInformation.leadNumber;
+            return row.leadInformation?.leadNumber;
           },
           sortable: false
         },
@@ -260,7 +283,7 @@ export default {
           label: "Merchant Name",
           align: "left",
           field: row => {
-            return row.leadInformation.leadName;
+            return row.leadInformation?.leadName;
           },
           sortable: false
         },
@@ -270,7 +293,7 @@ export default {
           label: "Merchant Address",
           align: "left",
           field: row => {
-            row.leadInformation.leadAddress;
+            return row.leadInformation?.leadAddress;
           },
           sortable: false
         },
@@ -280,7 +303,7 @@ export default {
           label: "Device Type",
           align: "left",
           field: row => {
-            return row.leadInformation.aggregatorDevice == null ?  "NA" :row.leadInformation.aggregatorDevice.deviceName;
+            return row.leadInformation?.aggregatorDevice == null ?  "NA" :row.leadInformation.aggregatorDevice.deviceName;
           },
           sortable: false
         },
@@ -330,7 +353,7 @@ export default {
           label: "Mobile Number",
           align: "center",
           field: row => {
-            row.leadInformation.contactNumber;
+            return row.leadInformation?.contactNumber;
           },
           sortable: false
         },
@@ -351,7 +374,7 @@ export default {
           align: "left",
 
           field: row => {
-            return row.leadInformation.leadName;
+            return row.leadInformation?.leadName;
           }
           // sortable: true,
         },
@@ -361,7 +384,7 @@ export default {
           label: "Address",
           align: "left",
           field: row => {
-            return row.leadInformation.leadAddress;
+            return row.leadInformation?.leadAddress;
           },
           sortable: true
         },
@@ -372,7 +395,7 @@ export default {
           label: "Device Type",
           align: "left",
           field: row => {
-            return row.leadInformation.aggregatorDevice == null ?  "NA" :row.leadInformation.aggregatorDevice.deviceName;
+            return row.leadInformation?.aggregatorDevice == null ?  "NA" :row.leadInformation.aggregatorDevice.deviceName;
           }
           // sortable: true,
         },
@@ -463,16 +486,16 @@ export default {
     ...mapActions("superAdminAggregators", ["GET_CREATED_AGGREGATORS_LIST", "GET_ACTIVE_CREATED_AGGREGATORS_LIST"]),
     // ...mapActions("InventoryCentral", ["DOWNLOAD_lOST_OR_STOLEN_DATAS"]),
     //Load all short lead info while page loading
-    ajaxLoadAllLeadInfo() {
-      this.toggleAjaxLoadFilter = true;
-      this.AGGREGATORS_MASTER_TRACKER_LIST()
-        .then(response => {
-          this.toggleAjaxLoadFilter = false;
-        })
-        .catch(error => {
-          this.toggleAjaxLoadFilter = false;
-        });
-    },
+    // ajaxLoadAllLeadInfo() {
+    //   this.toggleAjaxLoadFilter = true;
+    //   this.AGGREGATORS_MASTER_TRACKER_LIST()
+    //     .then(response => {
+    //       this.toggleAjaxLoadFilter = false;
+    //     })
+    //     .catch(error => {
+    //       this.toggleAjaxLoadFilter = false;
+    //     });
+    // },
 
     // fetchAggregatorList() {
     //   let self = this;
@@ -511,16 +534,16 @@ export default {
     //     aggregator: value
     //   });
     // },
-    lostOrStolenLoadInfo() {
-      this.toggleAjaxLoadFilter1 = true;
-      this.FETCH_AGGREGATORS_ALL_LOST_DEVICES_DATAS()
-        .then(response => {
-          this.toggleAjaxLoadFilter1 = false;
-        })
-        .catch(error => {
-          his.toggleAjaxLoadFilter1 = false;
-        });
-    },
+    // lostOrStolenLoadInfo() {
+    //   this.toggleAjaxLoadFilter1 = true;
+    //   this.FETCH_AGGREGATORS_ALL_LOST_DEVICES_DATAS()
+    //     .then(response => {
+    //       this.toggleAjaxLoadFilter1 = false;
+    //     })
+    //     .catch(error => {
+    //       his.toggleAjaxLoadFilter1 = false;
+    //     });
+    // },
     ajaxLoadAllLeadInfo({ pagination, filter}) {
       // we set QTable to "loading" state
       this.$q.loading.show({
@@ -582,7 +605,7 @@ export default {
           // then we update the rows with the fetched ones
           this.tableData1 = this.getAggregatorsLostOrStolenDatas.content;
 
-          if (this.getAllLostDeviceDatas.sort != null) {
+          if (this.getAggregatorsLostOrStolenDatas.sort != null) {
             this.paginationControl1.sortBy = this.getAggregatorsLostOrStolenDatas.sort[0].property;
             this.paginationControl1.descending = this.getAggregatorsLostOrStolenDatas.sort[0].ascending;
           }

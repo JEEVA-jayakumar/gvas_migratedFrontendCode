@@ -3,42 +3,42 @@
     <!--START: content -->
     <div class="q-pa-md">
       <!-- START: Dashboard wrapper -->
-      <div class="row q-col-gutter-x-xs">
+      <div class="row gutter-x-xs">
         <div class="col-lg-8">
-          <div class="row q-col-gutter-x-xs q-col-gutter-y-xs items-center justify-center">
+          <div class="row gutter-x-xs gutter-y-xs items-center justify-center">
             <div class="col-lg-4 col-md-6 col-sm-12">
               <div>
-                <q-card class="border-radius-10 q-pa-md bg-purple-9 text-white">
+                <q-card class="border-radius-10 q-pa-md" color="purple-9">
                   <div class="row items-center justify-center">
                     <div class="col-lg-4 col-md-8 col-sm-12 items-center text-center">
-                      <div class="text-h5 sm-text-caption text-center">{{ exceptionCount.totalExceptionCount }}</div>
+                      <div class="q-headline sm-q-caption text-center">{{ exceptionCount.totalExceptionCount }}</div>
                     </div>
                     <div class="col items-center text-center full-height gt-md">
                       <div style="border-left:1px solid #fff;height: 35px !important;"></div>
                     </div>
                     <div class="col-lg-7 col-md-8 col-sm-12 items-center">
-                      <div class="text-h6 sm-text-caption text-weight-light text-center">Exception</div>
+                      <div class="lg-q-title sm-q-caption text-weight-light text-center">Exception</div>
                     </div>
                   </div>
                 </q-card>
                 <q-card class="q-py-md items-center">
                   <div class="row items-center text-center" style="min-height:75px">
                     <div class="col-md-4 q-my-xs">
-                      <div class="text-caption text-grey-10">KYC Exception</div>
-                      <q-chip clickable class="cursor-pointer" @click="retrieveLeadsList(exceptionCount.kycPendingLeadIds)"
-                        color="purple-9" text-color="white">{{ exceptionCount.kycPendingCount }}</q-chip>
+                      <div class="q-caption text-grey-10">KYC Exception</div>
+                      <q-chip class="cursor-pointer" @click="retrieveLeadsList(exceptionCount.kycPendingLeadIds)"
+                        color="purple-9">{{ exceptionCount.kycPendingCount }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
-                      <div class="text-caption text-grey-10">Bank Exception</div>
-                      <q-chip clickable class="cursor-pointer"
-                        @click="retrieveLeadsList(exceptionCount.banksubventionPendingLeadIds)" color="purple-9" text-color="white">{{
+                      <div class="q-caption text-grey-10">Bank Exception</div>
+                      <q-chip class="cursor-pointer"
+                        @click="retrieveLeadsList(exceptionCount.banksubventionPendingLeadIds)" color="purple-9">{{
                           exceptionCount.banksubventionPendingCount
                         }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
-                      <div class="text-caption text-grey-10">Pricing Subvention</div>
-                      <q-chip clickable class="cursor-pointer" @click="retrieveLeadsList(exceptionCount.pricingPendingLeadIds)"
-                        color="purple-9" text-color="white">{{ exceptionCount.pricingPendingCount }}</q-chip>
+                      <div class="q-caption text-grey-10">Pricing Subvention</div>
+                      <q-chip class="cursor-pointer" @click="retrieveLeadsList(exceptionCount.pricingPendingLeadIds)"
+                        color="purple-9">{{ exceptionCount.pricingPendingCount }}</q-chip>
                     </div>
                   </div>
                 </q-card>
@@ -47,16 +47,16 @@
 
             <div class="col-lg-4 col-md-6 col-sm-12">
               <div>
-                <q-card class="border-radius-10 q-pa-md bg-purple-9 text-white">
+                <q-card class="border-radius-10 q-pa-md" color="purple-9">
                   <div class="row items-center justify-center">
                     <div class="col-lg-4 col-md-8 col-sm-12 items-center text-center">
-                      <div class="text-h5 sm-text-caption text-center">{{ regionalInventoryCount.totalDevice }}</div>
+                      <div class="q-headline sm-q-caption text-center">{{ regionalInventoryCount.totalDevice }}</div>
                     </div>
                     <div class="col items-center text-center full-height gt-md">
                       <div style="border-left:1px solid #fff;height: 35px !important;"></div>
                     </div>
                     <div class="col-lg-7 col-md-8 col-sm-12 items-center">
-                      <div class="text-h6 sm-text-caption text-weight-light text-center">Stock Inventory (Bijlipay)
+                      <div class="lg-q-title sm-q-caption text-weight-light text-center">Stock Inventory (Bijlipay)
                       </div>
                     </div>
                   </div>
@@ -64,16 +64,16 @@
                 <q-card class="q-py-md items-center">
                   <div class="row items-center text-center" style="min-height:75px">
                     <div class="col-md-4 q-my-xs">
-                      <div class="text-caption text-grey-10">Allocated Devices</div>
-                      <q-chip color="purple-9" text-color="white">{{ regionalInventoryCount.allocatedDeviceCount }}</q-chip>
+                      <div class="q-caption text-grey-10">Allocated Devices</div>
+                      <q-chip class color="purple-9">{{ regionalInventoryCount.allocatedDeviceCount }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
-                      <div class="text-caption text-grey-10">Pending Devices</div>
-                      <q-chip color="purple-9" text-color="white">{{ regionalInventoryCount.pendingDeviceCount }}</q-chip>
+                      <div class="q-caption text-grey-10">Pending Devices</div>
+                      <q-chip class color="purple-9">{{ regionalInventoryCount.pendingDeviceCount }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
-                      <div class="text-caption text-grey-10">Damaged Devices</div>
-                      <q-chip color="purple-9" text-color="white">{{ regionalInventoryCount.damagedDeviceCount }}</q-chip>
+                      <div class="q-caption text-grey-10">Damaged Devices</div>
+                      <q-chip class color="purple-9">{{ regionalInventoryCount.damagedDeviceCount }}</q-chip>
                     </div>
                   </div>
                 </q-card>
@@ -82,16 +82,16 @@
 
             <div class="col-lg-4 col-md-6 col-sm-12">
               <div>
-                <q-card class="border-radius-10 q-pa-md bg-purple-9 text-white">
+                <q-card class="border-radius-10 q-pa-md" color="purple-9">
                   <div class="row items-center justify-center">
                     <div class="col-lg-4 col-md-8 col-sm-12 items-center text-center">
-                      <div class="text-h5 sm-text-caption text-center">{{ marsDeviceCount.totalMarsDeviceCount }}</div>
+                      <div class="q-headline sm-q-caption text-center">{{ marsDeviceCount.totalMarsDeviceCount }}</div>
                     </div>
                     <div class="col items-center text-center full-height gt-md">
                       <div style="border-left:1px solid #fff;height: 35px !important;"></div>
                     </div>
                     <div class="col-lg-7 col-md-8 col-sm-12 items-center">
-                      <div class="text-h6 md-text-caption sm-text-caption text-weight-light text-center">Implementation
+                      <div class="lg-q-title md-q-caption sm-q-caption text-weight-light text-center">Implementation
                       </div>
                     </div>
                   </div>
@@ -99,10 +99,10 @@
                 <q-card class="q-py-md items-center">
                   <div class="row items-center text-center" style="min-height:75px">
                     <div class="col-md-6 q-my-xs">
-                      <div class="text-caption text-grey-10">Assigned/{{ marsDeviceCount.assignedDeviceCount }}</div>
+                      <div class="q-caption text-grey-10">Assigned/{{ marsDeviceCount.assignedDeviceCount }}</div>
                     </div>
                     <div class="col-md-6 q-my-xs">
-                      <div class="text-caption text-negative">
+                      <div class="q-caption text-negative">
                         <q-icon color="amber-9" name="fa fa-bell" />
                         Unassigned/{{ marsDeviceCount.unassignedDeviceCount }}
                       </div>
@@ -112,18 +112,18 @@
               </div>
             </div>
           </div>
-          <div class="row q-col-gutter-x-xs q-col-gutter-y-xs items-center justify-center q-mt-md">
+          <div class="row gutter-x-xs gutter-y-xs items-center justify-center q-mt-md">
             <div class="col">
-              <q-card class="border-radius-10 q-pa-md bg-purple-9 text-white">
+              <q-card class="border-radius-10 q-pa-md" color="purple-9">
                 <div class="row items-center justify-center">
                   <div class="col-lg-4 col-md-8 col-sm-12 items-center text-center">
-                    <div class="text-h5 sm-text-caption text-center">{{ serviceRequestCount.total }}</div>
+                    <div class="q-headline sm-q-caption text-center">{{ serviceRequestCount.total }}</div>
                   </div>
                   <div class="col items-center text-center full-height gt-md">
                     <div style="border-left:1px solid #fff;height: 35px !important;"></div>
                   </div>
                   <div class="col-lg-7 col-md-8 col-sm-12 items-center">
-                    <div class="text-h6 sm-text-caption text-weight-light text-center">Service Request</div>
+                    <div class="lg-q-title sm-q-caption text-weight-light text-center">Service Request</div>
                   </div>
                 </div>
               </q-card>
@@ -132,47 +132,47 @@
               <q-card class="row border-radius-10 q-pa-md">
                 <div class="col-6 q-py-md items-center">
                   <div class="col border-radius-10 q-pa-md" align="left">
-                    <div class="text-h6 sm-text-caption text-weight-light text-center"><strong>Internal</strong></div>
+                    <div class="lg-q-title sm-q-caption text-weight-light text-center"><strong>Internal</strong></div>
                   </div>
                   <div class="row text-center justify-center" style="min-height:75px">
                     <div class="col-md-4 q-my-xs">
-                      <div class="text-caption text-grey-10">closed</div>
-                      <q-chip color="purple-9" text-color="white">{{
+                      <div class="q-caption text-grey-10">closed</div>
+                      <q-chip class color="purple-9">{{
                         serviceRequestCount.internal.closed == null ? 0
                           : serviceRequestCount.internal.closed
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
-                      <div class="text-caption text-grey-10">assigned</div>
-                      <q-chip color="purple-9" text-color="white">{{
+                      <div class="q-caption text-grey-10">assigned</div>
+                      <q-chip class color="purple-9">{{
                         serviceRequestCount.internal.assigned == null ? 0 :
                           serviceRequestCount.internal.assigned
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
-                      <div class="text-caption text-grey-10">unassigned</div>
-                      <q-chip color="purple-9" text-color="white">{{
+                      <div class="q-caption text-grey-10">unassigned</div>
+                      <q-chip class color="purple-9">{{
                         serviceRequestCount.internal.unassigned == null ? 0 :
                           serviceRequestCount.internal.unassigned
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
-                      <div class="text-caption text-grey-10">Total</div>
-                      <q-chip color="purple-9" text-color="white">{{
+                      <div class="q-caption text-grey-10">Total</div>
+                      <q-chip class color="purple-9">{{
                         serviceRequestCount.intTotal == null ? 0 :
                           serviceRequestCount.intTotal
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
-                      <div class="text-caption text-grey-10">ReOpenAssigned</div>
-                      <q-chip color="purple-9" text-color="white">{{
+                      <div class="q-caption text-grey-10">ReOpenAssigned</div>
+                      <q-chip class color="purple-9">{{
                         serviceRequestCount.internal.ReOpenAssigned == null ? 0 :
                           serviceRequestCount.internal.ReOpenAssigned
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
-                      <div class="text-caption text-grey-10">ReOpenedUnAssigned</div>
-                      <q-chip color="purple-9" text-color="white">{{
+                      <div class="q-caption text-grey-10">ReOpenedUnAssigned</div>
+                      <q-chip class color="purple-9">{{
                         serviceRequestCount.internal.ReOpenedUnAssigned == null ? 0 :
                           serviceRequestCount.internal.ReOpenedUnAssigned
                       }}</q-chip>
@@ -184,47 +184,47 @@
                 </div>
                 <div class="col-6 q-py-md items-center">
                   <div class="col border-radius-10 q-pa-md">
-                    <div class="text-h6 sm-text-caption text-weight-light text-center"><strong>External</strong></div>
+                    <div class="lg-q-title sm-q-caption text-weight-light text-center"><strong>External</strong></div>
                   </div>
                   <div class="row text-center justify-center" style="min-height:75px">
                     <div class="col-md-4 q-my-xs">
-                      <div class="text-caption text-grey-10">closed</div>
-                      <q-chip color="purple-9" text-color="white">{{
+                      <div class="q-caption text-grey-10">closed</div>
+                      <q-chip class color="purple-9">{{
                         serviceRequestCount.external.closed == null ? 0
                           : serviceRequestCount.external.closed
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
-                      <div class="text-caption text-grey-10">assigned</div>
-                      <q-chip color="purple-9" text-color="white">{{
+                      <div class="q-caption text-grey-10">assigned</div>
+                      <q-chip class color="purple-9">{{
                         serviceRequestCount.external.assigned == null ? 0 :
                           serviceRequestCount.external.assigned
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
-                      <div class="text-caption text-grey-10">unassigned</div>
-                      <q-chip color="purple-9" text-color="white">{{
+                      <div class="q-caption text-grey-10">unassigned</div>
+                      <q-chip class color="purple-9">{{
                         serviceRequestCount.external.unassigned == null ? 0 :
                           serviceRequestCount.external.unassigned
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
-                      <div class="text-caption text-grey-10">Total</div>
-                      <q-chip color="purple-9" text-color="white">{{
+                      <div class="q-caption text-grey-10">Total</div>
+                      <q-chip class color="purple-9">{{
                         serviceRequestCount.extTotal == null ? 0 :
                           serviceRequestCount.extTotal
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
-                      <div class="text-caption text-grey-10">ReOpenAssigned</div>
-                      <q-chip color="purple-9" text-color="white">{{
+                      <div class="q-caption text-grey-10">ReOpenAssigned</div>
+                      <q-chip class color="purple-9">{{
                         serviceRequestCount.external.ReOpenAssigned == null ? 0 :
                           serviceRequestCount.external.ReOpenAssigned
                       }}</q-chip>
                     </div>
                     <div class="col-md-4 q-my-xs">
-                      <div class="text-caption text-grey-10">ReOpenedUnAssigned</div>
-                      <q-chip color="purple-9" text-color="white">{{
+                      <div class="q-caption text-grey-10">ReOpenedUnAssigned</div>
+                      <q-chip class color="purple-9">{{
                         serviceRequestCount.external.ReOpenedUnAssigned == null ? 0 :
                           serviceRequestCount.external.ReOpenedUnAssigned
                       }}</q-chip>
@@ -236,30 +236,29 @@
 
           </div>
 
-          <div class="row q-col-gutter-x-xs">
+          <div class="row gutter-x-xs">
             <div class="col-lg-12">
               <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
-                <q-card-section>
-                  <div class="text-subtitle1 text-bold">Aging Tracker</div>
-                </q-card-section>
+                <q-card-title>
+                  <div class="q-subheading text-bold">Aging Tracker</div>
+                </q-card-title>
                 <chartSATagingTracker :options="{ responsive: false, maintainAspectRatio: false }" :height="150"
                   class="bg-white q-pa-md round-borders"></chartSATagingTracker>
               </q-card>
               <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
-                <q-card-section>
+                <q-card-title>
                   <div class="row items-center">
                     <div class="col-12 col-lg-9">
-                      <div class="text-subtitle1 text-bold">Merchant Tracker</div>
+                      <div class="q-subheading text-bold">Merchant Tracker</div>
                     </div>
                     <div class="col-12 col-lg-3">
-                      <div class="text-subtitle1 text-bold">
-                        <q-select filled color="purple-9" v-model="dateSelection" @update:model-value="changeMerchantTrackerData"
-                          :options="[{ label: 'Days', value: 'DAYS' }, { label: 'Week', value: 'WEEK' }, { label: 'Month', value: 'MONTH' }, { label: 'Year', value: 'YEAR' }]"
-                          emit-value map-options />
+                      <div class="q-subheading text-bold">
+                        <q-select inverted color="purple-9" :value="dateSelection" @change="changeMerchantTrackerData"
+                          :options="[{ label: 'Days', value: 'DAYS' }, { label: 'Week', value: 'WEEK' }, { label: 'Month', value: 'MONTH' }, { label: 'Year', value: 'YEAR' }]" />
                       </div>
                     </div>
                   </div>
-                </q-card-section>
+                </q-card-title>
                 <chartMerchantTracker v-if="renderMerchantGraph" :borderWidth="1" :height="150"
                   :merchantTrackerData="getSatDashboardGraphData" class="bg-white q-pa-md round-borders">
                 </chartMerchantTracker>
@@ -269,32 +268,33 @@
         </div>
 
         <div class="col-lg-4">
-          <div class="row q-col-gutter-x-xs q-col-gutter-y-xs items-center justify-center" style="min-height: 100px;">
+          <div class="row gutter-x-xs gutter-y-xs items-center justify-center" style="min-height: 100px;">
             <div class="col-md-5 col-sm-12 col-xs-12 full-width">
-              <q-card class="q-pa-sm full-height bg-orange border-radius-10 vertical-middle items-center" align="center">
-                <q-card-section>
-                  <div class="text-h6 text-white cursor-pointer"
+              <q-card class="q-pa-sm full-height bg-orange border-radius-10 vertical-middle items-center" align="center"
+                vertical>
+                <q-card-title>
+                  <div class="q-title text-white cursor-pointer"
                     @click="retrieveLeadsList(applicationPendingCount.totalApplicationPendingLeadIds)">
                     {{ applicationPendingCount.totalApplicationPendingCount }}</div>
-                </q-card-section>
-                <q-separator style="width:75px" class="bg-white" />
-                <q-card-section class="q-pa-md">
-                  <p class="text-subtitle1 sm-text-caption text-white" align="center">Application Pending</p>
-                </q-card-section>
+                </q-card-title>
+                <q-card-separator style="width:75px" class="bg-white" />
+                <q-card-main class="q-pa-md">
+                  <p class="md-q-subheading sm-q-caption text-faded text-white" align="center">Application Pending</p>
+                </q-card-main>
               </q-card>
             </div>
             <div class="col-md-7 col-sm-12 col-xs-12">
-              <div class="row q-col-gutter-xs">
+              <div class="row lg-inline gutter-xs">
                 <div class="col-lg-6 col-sm-6 col-xs-6" style="height:50%">
                   <q-card class="q-pa-sm bg-negative border-radius-10" align="center">
                     <div class="row items-center justify-around q-pa-xs">
                       <div class="col-12">
-                        <div class="text-subtitle1 sm-text-caption text-white">
+                        <div class="md-q-subheading sm-q-caption text-white">
                           <small>Fin rejects</small>
                         </div>
                       </div>
                       <div class="col-12">
-                        <div class="text-body1 text-white cursor-pointer"
+                        <div class="q-body-1 text-white cursor-pointer"
                           @click="retrieveLeadsList(applicationPendingCount.financeRejectLeadIds)">
                           {{ applicationPendingCount.financeRejectCount }}</div>
                       </div>
@@ -305,12 +305,12 @@
                   <q-card class="q-pa-sm bg-amber-9 border-radius-10" align="center">
                     <div class="row items-center justify-around q-pa-xs">
                       <div class="col-12">
-                        <div class="text-subtitle1 sm-text-caption text-white">
+                        <div class="md-q-subheading sm-q-caption text-white">
                           <small>Fin pending</small>
                         </div>
                       </div>
                       <div class="col-12">
-                        <div class="text-body1 text-white cursor-pointer"
+                        <div class="q-body-1 text-white cursor-pointer"
                           @click="retrieveLeadsList(applicationPendingCount.financePendingLeadIds)">
                           {{ applicationPendingCount.financePendingCount }}</div>
                       </div>
@@ -321,12 +321,12 @@
                   <q-card class="q-pa-sm bg-blue-6 border-radius-10" align="center">
                     <div class="row items-center justify-around q-pa-xs">
                       <div class="col-12">
-                        <div class="text-subtitle1 sm-text-caption text-white">
+                        <div class="md-q-subheading sm-q-caption text-white">
                           <small>WIP</small>
                         </div>
                       </div>
                       <div class="col-12">
-                        <div class="text-body1 text-white cursor-pointer"
+                        <div class="q-body-1 text-white cursor-pointer"
                           @click="retrieveLeadsList(applicationPendingCount.wipLeadIds)">
                           {{ applicationPendingCount.wipCount }}</div>
                       </div>
@@ -337,12 +337,12 @@
                   <q-card class="q-pa-sm bg-positive border-radius-10" align="center">
                     <div class="row items-center justify-around q-pa-xs">
                       <div class="col-12">
-                        <div class="text-subtitle1 sm-text-caption text-white">
+                        <div class="md-q-subheading sm-q-caption text-white">
                           <small>New</small>
                         </div>
                       </div>
                       <div class="col-12">
-                        <div class="text-body1 text-white cursor-pointer"
+                        <div class="q-body-1 text-white cursor-pointer"
                           @click="retrieveLeadsList(applicationPendingCount.withSatLeadIds)">
                           {{ applicationPendingCount.withSatCount }}</div>
                       </div>
@@ -353,12 +353,12 @@
                   <q-card class="q-pa-sm bg-purple-9 border-radius-10" align="center">
                     <div class="row items-center justify-around q-pa-xs">
                       <div class="col-12">
-                        <div class="text-subtitle1 sm-text-caption text-white">
+                        <div class="md-q-subheading sm-q-caption text-white">
                           <small>Ops</small>
                         </div>
                       </div>
                       <div class="col-12">
-                        <div class="text-body1 text-white cursor-pointer"
+                        <div class="q-body-1 text-white cursor-pointer"
                           @click="retrieveLeadsList(applicationPendingCount.withOPSLeadIds)">
                           {{ applicationPendingCount.withOPSHead }}</div>
                       </div>
@@ -369,42 +369,34 @@
             </div>
           </div>
 
-          <div class="row q-col-gutter-x-xs q-col-gutter-y-xs q-my-xs items-center">
+          <div class="row gutter-x-xs gutter-y-xs q-my-xs items-center">
             <div class="col-md-12">
               <q-card square>
-                <q-card-section>
+                <q-card-title>
                   Aging Tracker -
                   <span class="text-amber-9">Pending</span>
-                </q-card-section>
-                <q-card-section>
+                </q-card-title>
+                <q-card-main>
                   <div>
-                    <q-table dense hide-bottom :rows="agingTrackerPendingTableData"
-                      :columns="agingTrackerPendingColumns" v-model:pagination="paginationControl" row-key="name">
-                      <template v-slot:body-cell-name="props">
-                        <q-td :props="props">{{ props.row.name }}</q-td>
-                      </template>
-                      <template v-slot:body-cell-greaterThanOneDay="props">
-                        <q-td :props="props" class="cursor-pointer"
-                          @click="retrieveLeadsList(props.row.greaterThanOneDayLeadIdList)">{{
-                            props.row.greaterThanOneDay
-                          }}</q-td>
-                      </template>
-                      <template v-slot:body-cell-greaterThanTwoDays="props">
-                        <q-td :props="props" class="cursor-pointer"
-                          @click="retrieveLeadsList(props.row.greaterThanTwoDaysLeadIdList)">{{
-                            props.row.greaterThanTwoDays
-                          }}</q-td>
-                      </template>
-                      <template v-slot:body-cell-greaterThanFiveDays="props">
-                        <q-td :props="props"
-                          class="cursor-pointer"
-                          @click="retrieveLeadsList(props.row.greaterThanFiveDaysLeadIdList)">{{
-                            props.row.greaterThanFiveDays
-                          }}</q-td>
-                      </template>
+                    <q-table dense hide-bottom :data="agingTrackerPendingTableData"
+                      :columns="agingTrackerPendingColumns" :pagination.sync="paginationControl" row-key="name">
+                      <q-td slot="body-cell-name" slot-scope="props" :props="props">{{ props.row.name }}</q-td>
+                      <q-td slot="body-cell-greaterThanOneDay" slot-scope="props" :props="props" class="cursor-pointer"
+                        @click.native="retrieveLeadsList(props.row.greaterThanOneDayLeadIdList)">{{
+                          props.row.greaterThanOneDay
+                        }}</q-td>
+                      <q-td slot="body-cell-greaterThanTwoDays" slot-scope="props" :props="props" class="cursor-pointer"
+                        @click.native="retrieveLeadsList(props.row.greaterThanTwoDaysLeadIdList)">{{
+                          props.row.greaterThanTwoDays
+                        }}</q-td>
+                      <q-td slot="body-cell-greaterThanFiveDays" slot-scope="props" :props="props"
+                        class="cursor-pointer"
+                        @click.native="retrieveLeadsList(props.row.greaterThanFiveDaysLeadIdList)">{{
+                          props.row.greaterThanFiveDays
+                        }}</q-td>
                     </q-table>
                   </div>
-                </q-card-section>
+                </q-card-main>
               </q-card>
             </div>
           </div>
@@ -427,7 +419,7 @@ import chartSATagingTracker from "../../components/sat/chartSATagingTracker.js";
 import leadList from "../../components/sat/leadList.vue";
 
 export default {
-  name: "SatDashboard",
+  name: "dashoboard",
   components: {
     leadList,
     chartDailyVolume,
@@ -445,6 +437,7 @@ export default {
       },
       flag: false,
       aggregator: "",
+      // aggregatorOptions: [],
       exceptionCount: {
         banksubventionPendingCount: 0,
         kycPendingCount: 0,
@@ -528,6 +521,7 @@ export default {
   },
   created() {
     this.fetchCountInformation();
+    // this.fetchAggregatorList();
     this.fetchServiceRequestCounts();
     this.changeMerchantTrackerData("DAYS");
     this.fetchAggregatorsCountInformation();
@@ -552,22 +546,26 @@ export default {
     ...mapActions("serviceRequestSat", ["FETCH_SERVICE_REQUEST_COUNT_DETAILS"]),
     ...mapActions("serviceRequestPhonepeSat", ["FETCH_PHONEPE_SERVICE_REQUEST_COUNT_DETAILS"]),
 
+    // fnclick(val){
+    //   console.log("fnclick ------->",JSON.stringify(val));
+    // },
     fetchCountInformation() {
       this.$q.loading.show({
-        delay: 100,
+        delay: 100, // ms
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      const userInfo = localStorage.getItem("u_i");
-      if (!userInfo) return;
-      const regionId = JSON.parse(userInfo).region.id;
-      this.FETCH_DASHBOARD_COUNT(regionId)
+      this.FETCH_DASHBOARD_COUNT(
+        JSON.parse(localStorage.getItem("u_i")).region.id
+      )
         .then(() => {
           this.applicationPendingCount = this.getSatDashboard.applicationPendingCount;
           this.exceptionCount = this.getSatDashboard.exceptionCount;
           this.marsDeviceCount = this.getSatDashboard.marsDeviceCount;
           this.regionalInventoryCount = this.getSatDashboard.regionalInventoryCount;
-          this.FETCH_SAT_AGING_TRACKER_DATA(regionId).then(() => {
+          this.FETCH_SAT_AGING_TRACKER_DATA(
+            JSON.parse(localStorage.getItem("u_i")).region.id
+          ).then(() => {
             this.agingTrackerPendingTableData = this.getSatAgingTrackerdata;
           });
           this.$q.loading.hide();
@@ -578,7 +576,7 @@ export default {
     },
     fetchAggregatorsCountInformation() {
       this.$q.loading.show({
-        delay: 100,
+        delay: 100, // ms
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
@@ -589,6 +587,7 @@ export default {
       };
       this.FETCH_AGGREGATORS_DASHBOARD_COUNT(param)
         .then(() => {
+          console.log("getAggregatorsSatDashboard ------->", JSON.stringify(this.getAggregatorsSatDashboard));
           this.aggregatorCount = this.getAggregatorsSatDashboard.regionalInventoryCount;
           this.$q.loading.hide();
         })
@@ -598,12 +597,13 @@ export default {
     },
     fetchServiceRequestCounts() {
       this.$q.loading.show({
-        delay: 100,
+        delay: 100, // ms
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
       this.FETCH_SERVICE_REQUEST_COUNT_DETAILS()
         .then(() => {
+          console.log("SERVICE REQUEST COUNT------>", JSON.stringify(this.getserviceRequestCountDatas))
           this.serviceRequestCount = this.getserviceRequestCountDatas;
           this.$q.loading.hide();
         })
@@ -612,6 +612,7 @@ export default {
         });
       this.FETCH_PHONEPE_SERVICE_REQUEST_COUNT_DETAILS()
         .then(() => {
+          console.log("PHONEPE SERVICE REQUEST COUNT------>", JSON.stringify(this.getserviceRequestPhonepeCountDatas))
           this.serviceRequestCount = this.getserviceRequestPhonepeCountDatas;
           this.$q.loading.hide();
         })
@@ -622,17 +623,16 @@ export default {
     changeMerchantTrackerData(value) {
       this.renderMerchantGraph = false;
       this.$q.loading.show({
-        delay: 100,
+        delay: 100, // ms
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
       this.dateSelection = value;
-      const userInfo = localStorage.getItem("u_i");
-      if (!userInfo) return;
       this.FETCH_DASHBOARD_CHART_DATA({
-        region: JSON.parse(userInfo).region.id,
+        region: JSON.parse(localStorage.getItem("u_i")).region.id,
         action: value
-      }).then(() => {
+      })
+        .then(() => {
           this.renderMerchantGraph = true;
           this.$q.loading.hide();
         })

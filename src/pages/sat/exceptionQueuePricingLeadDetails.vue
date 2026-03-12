@@ -5,19 +5,19 @@
       <!-- <pre>{{getShortLeadInfo}}</pre> -->
       <div class="flex items-stretch q-ma-xs">
         <div class="col-md-3">
-          <div class="text-h6 q-my-md capitalize">{{formData.shortLead.leadName}}</div>
+          <div class="q-title q-my-md capitalize">{{formData.shortLead.leadName}}</div>
           <p
             class="text-light-blue cursor-pointer"
             @click="toggleLeadInformation(formData.shortLead)"
           ># {{formData.shortLead.id}}</p>
         </div>
         <div class="col-md-3">
-          <div class="text-h6 q-my-md">Contact</div>
+          <div class="q-title q-my-md">Contact</div>
           <p class="no-margin">{{formData.shortLead.contactNumber}}</p>
           <p>{{formData.shortLead.alternateContactNumber}}</p>
         </div>
         <div class="col-md-3">
-          <div class="text-h6 q-my-md">Address</div>
+          <div class="q-title q-my-md">Address</div>
           <p
             v-if="formData.shortLead.leadAddress != null"
             class="capitalize no-margin"
@@ -35,7 +35,7 @@
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
                 <q-card-section class="q-pa-sm bottom-border title-bg">
                   <div class="row items-center">
-                    <div class="col text-body1 text-weight-medium">
+                    <div class="col q-body-1 text-weight-medium">
                       Device -
                       {{formData.shortLead.deviceCount}}
                       {{formData.shortLead.device.deviceName}}
@@ -43,20 +43,20 @@
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
-                  <q-list separator no-border class="no-padding text-body1">
-                    <q-item class="q-pa-sm text-body1">
+                  <q-list separator no-border class="no-padding q-body-1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Plan</q-item-section>
                       <q-item-section>{{formData.shortLead.plan.planName}}</q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Setup Fees</q-item-section>
                       <q-item-section>Rs. {{formData.shortLead.setupFees}}</q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Recurring Fees</q-item-section>
                       <q-item-section>Rs. {{formData.shortLead.recurringFees}}</q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm text-body1">
+                    <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Merchant Category</q-item-section>
                       <q-item-section>{{formData.shortLead.merchantCategory.merchantCategoryName}}</q-item-section>
                     </q-item>
@@ -70,36 +70,36 @@
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
                 <q-card-section class="q-pa-sm bottom-border title-bg">
                   <div class="row items-center">
-                    <div class="col-auto text-body1 text-weight-medium">Payment</div>
+                    <div class="col-auto q-body-1 text-weight-medium">Payment</div>
                   </div>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
                   <q-list no-border separator class="no-padding">
                     <q-item class="q-pa-sm">
-                      <q-item-section class="text-body1">Mode of payment</q-item-section>
-                      <q-item-section class="text-body1">
+                      <q-item-section class="q-body-1">Mode of payment</q-item-section>
+                      <q-item-section class="q-body-1">
                         <span
-                          class="text-body1"
+                          class="q-body-1"
                           v-if="formData.shortLead.paymentOption == 1"
                         >IMPS/NEFT</span>
                         <span
-                          class="text-body1"
+                          class="q-body-1"
                           v-else-if="formData.shortLead.paymentOption == 2"
                         >Cheque</span>
                         <span
-                          class="text-body1"
+                          class="q-body-1"
                           v-else-if="formData.shortLead.paymentOption == 3"
                         >Swipe</span>
                                    <span
-                          class="text-body1"
+                          class="q-body-1"
                           v-else-if="formData.shortLead.paymentOption == 4"
                         >UPI Link</span>
                       </q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm">
-                      <q-item-section class="text-body1">Reference No</q-item-section>
+                      <q-item-section class="q-body-1">Reference No</q-item-section>
                       <q-item-section
-                        class="text-body1"
+                        class="q-body-1"
                       >{{formData.shortLead.referenceNumber == ''? 'NA':formData.shortLead.referenceNumber}}</q-item-section>
                     </q-item>
                     <q-item v-if="formData.shortLead.paymentOption == 2">
@@ -151,7 +151,7 @@
             <div class="col-md-12">
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
                 <q-card-section class="q-pa-sm bottom-border title-bg">
-                  <span class="text-body1 text-weight-medium">MDR</span>
+                  <span class="q-body-1 text-weight-medium">MDR</span>
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
                   <q-list no-border class="no-padding">
@@ -272,7 +272,7 @@
                         class="no-pointer-events"
                         color="purple-9"
                       >
-                        <small class="text-caption">Enable Cash@POS Cash @POS incentive Rs.5</small>
+                        <small class="q-caption">Enable Cash@POS Cash @POS incentive Rs.5</small>
                       </q-checkbox>
                     </q-item>
                   </q-list>
@@ -289,20 +289,20 @@
                 <q-card v-if="formData.shortLead.kyc" class="q-ma-xs border-1 q-custom-class" flat>
                   <q-card-section class="q-pa-sm bottom-border title-bg">
                     <div class="row items-center">
-                      <div class="col-auto text-body1 text-weight-medium">Exception KYC</div>
+                      <div class="col-auto q-body-1 text-weight-medium">Exception KYC</div>
                     </div>
                   </q-card-section>
                   <q-card-section class="no-padding">
                     <div class="row items-center q-pa-sm q-py-md">
                       <div class="col-md-3 col-sm-12 col-xs-12">
-                        <span class="text-caption text-faded">Reason</span>
+                        <span class="q-caption text-faded">Reason</span>
                       </div>
                       <div class="col-md-9 col-sm-12 col-xs-12">
                         <span
-                          class="text-caption text-faded"
+                          class="q-caption text-faded"
                           v-if="formData.shortLead.reason == null"
                         >Reason not specified</span>
-                        <span class="text-caption text-faded" v-else>{{formData.shortLead.reason}}</span>
+                        <span class="q-caption text-faded" v-else>{{formData.shortLead.reason}}</span>
                       </div>
                     </div>
                   </q-card-section>
@@ -314,20 +314,20 @@
                 >
                   <q-card-section class="q-pa-sm bottom-border title-bg">
                     <div class="row items-center">
-                      <div class="col-auto text-body1 text-weight-medium">Exception Bank Subvention</div>
+                      <div class="col-auto q-body-1 text-weight-medium">Exception Bank Subvention</div>
                     </div>
                   </q-card-section>
                   <q-card-section class="no-padding">
                     <div class="row items-center q-pa-sm q-py-md">
                       <div class="col-md-3 col-sm-12 col-xs-12">
-                        <div class="text-caption text-faded">Reason</div>
+                        <div class="q-caption text-faded">Reason</div>
                       </div>
                       <div class="col-md-9 col-sm-12 col-xs-12">
                         <div
-                          class="text-caption text-faded"
+                          class="q-caption text-faded"
                           v-if="formData.shortLead.reason == null"
                         >Reason no specified</div>
-                        <div class="text-caption text-faded" v-else>{{formData.shortLead.reason}}</div>
+                        <div class="q-caption text-faded" v-else>{{formData.shortLead.reason}}</div>
                       </div>
                     </div>
                   </q-card-section>
@@ -339,16 +339,16 @@
                 >
                   <q-card-section class="q-pa-sm bottom-border title-bg">
                     <div class="row items-center">
-                      <div class="col-auto text-body1 text-weight-medium">Exception Pricing</div>
+                      <div class="col-auto q-body-1 text-weight-medium">Exception Pricing</div>
                     </div>
                   </q-card-section>
                   <q-card-section class="no-padding">
                     <div class="row items-center q-pa-sm q-py-md">
                       <div class="col-md-3 col-sm-12 col-xs-12">
-                        <div class="text-caption text-faded">Reason</div>
+                        <div class="q-caption text-faded">Reason</div>
                       </div>
                       <div class="col-md-9 col-sm-12 col-xs-12">
-                        <div class="text-caption text-faded">{{formData.shortLead.reason}}</div>
+                        <div class="q-caption text-faded">{{formData.shortLead.reason}}</div>
                       </div>
                     </div>
                   </q-card-section>

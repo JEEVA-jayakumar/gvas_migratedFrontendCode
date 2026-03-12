@@ -11,7 +11,7 @@
       <!-- <pre>{{getImplementationExecutiveList}}</pre> -->
       <!--START: table title -->
       <!-- <div
-        class="text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+        class="q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >
         Implementation Queues
       </div> -->

@@ -8,7 +8,7 @@
       :content-css="{ padding: '30px', minWidth: '60vw' }"
     >
       <div class="row q-pa-md">
-        <div class="col-12 text-h6 text-weight-regular bottom-border">
+        <div class="col-12 q-title text-weight-regular bottom-border">
           Action Bar
         </div>
         <q-card class="q-pa-md" style="width: 100%">

@@ -9,7 +9,7 @@
           >
   
             <!-- START >> Give reason to approve(optional) document -->
-            <div class="text-h6 q-mb-sm">{{document}}</div>
+            <div class="q-title q-mb-sm">{{document}}</div>
             <q-input
                 type="textarea"
                 placedholder="Type.."

@@ -8,14 +8,14 @@
         <q-item-section>
           <div>
             <div v-if="propGetShortInfo.documentUploadedType != 1" class="row items-center full-width">
-              <div class="col-md-12 text-body1">
+              <div class="col-md-12 q-body-1">
                 <q-expansion-item separator indent opened class="full-width">
                   <template slot="header">
                     <q-item-section icon="apps" />
-                    <q-item-section class="text-body1" :caption="'FORMS'" />
+                    <q-item-section class="q-body-1" :caption="'FORMS'" />
                   </template>
                   <b><label>Agreement Form & Application Form</label></b>
-                  <q-item separator class="text-body1">
+                  <q-item separator class="q-body-1">
                     <q-item-section>
                       <div class="full-width">
                         <div
@@ -82,7 +82,7 @@
                   </q-item>
 
                   <!-- <b><label>Application Form</label></b>
-                  <q-item separator class="text-body1">
+                  <q-item separator class="q-body-1">
                     <q-item-section>
                       <div class="full-width">
                         <div
@@ -149,7 +149,7 @@
                   </q-item> -->
 
                   <b><label>Cheque Leaf</label></b>
-                  <q-item separator class="text-body1">
+                  <q-item separator class="q-body-1">
                     <q-item-section>
                       <div class="full-width">
                         <div
@@ -216,7 +216,7 @@
                   </q-item>
 
                   <b><label>Implementation Form</label></b>
-                  <q-item separator class="text-body1">
+                  <q-item separator class="q-body-1">
                     <q-item-section>
                       <div class="full-width">
                         <div
@@ -285,7 +285,7 @@
                   </q-item>
 
                   <b><label>Picture of Shop</label></b>
-                  <q-item separator class="text-body1">
+                  <q-item separator class="q-body-1">
                     <q-item-section>
                       <div class="full-width">
                         <div
@@ -357,7 +357,7 @@
             <div v-if="propGetShortInfo.documentUploadedType == 1">
               <q-item
   separator
-  class="text-body1 text-dark bg-grey-4 text-weight-medium"
+  class="q-body-1 text-dark bg-grey-4 text-weight-medium"
 >
   <q-item-section>Agreement Form & Application Form</q-item-section>
   <q-item-section>
@@ -365,7 +365,7 @@
       class="cursor-pointer text-white"
       style="background-color: #202c3f;"
     >
-      <span class="text-caption text-weight-light">Attach</span>
+      <span class="q-caption text-weight-light">Attach</span>
       <input
         type="file"
         name="file"
@@ -375,7 +375,7 @@
     </label>
   </q-item-section>
 </q-item>
-<q-item separator class="text-body1">
+<q-item separator class="q-body-1">
   <q-item-section>
     <div class="full-width">
       <div class="cursor-pointer" v-if="isAgreementPdf">
@@ -417,7 +417,7 @@
 
 <!-- <q-item
   separator
-  class="text-body1 text-dark bg-grey-4 text-weight-medium"
+  class="q-body-1 text-dark bg-grey-4 text-weight-medium"
 >
   <q-item-section>Application Form</q-item-section>
   <q-item-section>
@@ -425,7 +425,7 @@
       class="cursor-pointer text-white"
       style="background-color: #202c3f;"
     >
-      <span class="text-caption text-weight-light">Attach</span>
+      <span class="q-caption text-weight-light">Attach</span>
       <input
         type="file"
         name="file"
@@ -435,7 +435,7 @@
     </label>
   </q-item-section>
 </q-item>
-<q-item separator class="text-body1">
+<q-item separator class="q-body-1">
   <q-item-section>
     <div class="full-width">
       <div class="cursor-pointer" v-if="isApplicationPdf">
@@ -477,7 +477,7 @@
 
               <q-item
                 separator
-                class="text-body1 text-dark bg-grey-4 text-weight-medium"
+                class="q-body-1 text-dark bg-grey-4 text-weight-medium"
               >
                 <q-item-section>Cheque Leaf</q-item-section>
                 <q-item-section>
@@ -486,7 +486,7 @@
                     class="cursor-pointer text-white"
                     style="background-color: #202c3f;"
                   >
-                    <span class="text-caption text-weight-light">Attach</span>
+                    <span class="q-caption text-weight-light">Attach</span>
                     <input
                       type="file"
                       name="file"
@@ -496,7 +496,7 @@
                   </label>
                 </q-item-section>
               </q-item>
-              <q-item separator class="text-body1">
+              <q-item separator class="q-body-1">
                 <q-item-section>
                   <div class="full-width">
                     <div class="cursor-pointer" v-if="isChequeLeafPdf">
@@ -538,7 +538,7 @@
 
               <q-item
               separator
-              class="text-body1 text-dark bg-grey-4 text-weight-medium"   >
+              class="q-body-1 text-dark bg-grey-4 text-weight-medium"   >
               <q-item-section>Implementation Form</q-item-section>
               <q-item-section>
                 <label
@@ -546,7 +546,7 @@
                   class="cursor-pointer text-white"
                   style="background-color: #202c3f;"
                 >
-                  <span class="text-caption text-weight-light">Attach</span>
+                  <span class="q-caption text-weight-light">Attach</span>
                   <input
                     type="file"
                    name="file"
@@ -556,7 +556,7 @@
                 </label>
               </q-item-section>
             </q-item>
-            <q-item separator class="text-body1">
+            <q-item separator class="q-body-1">
               <q-item-section>
                 <div class="full-width">
                   <div class="cursor-pointer" v-if="isImplementationPdf">
@@ -597,7 +597,7 @@
             </q-item>
             <q-item
             separator
-            class="text-body1 text-dark bg-grey-4 text-weight-medium">
+            class="q-body-1 text-dark bg-grey-4 text-weight-medium">
             <q-item-section>Picture of Shop</q-item-section>
             <q-item-section>
               <label
@@ -605,7 +605,7 @@
                 class="cursor-pointer text-white"
                 style="background-color: #202c3f;"
               >
-                <span class="text-caption text-weight-light">Attach</span>
+                <span class="q-caption text-weight-light">Attach</span>
                 <input
                   type="file"
                   name="file"
@@ -615,7 +615,7 @@
     </label>
 </q-item-section>
           </q-item>
-          <q-item separator class="text-body1">
+          <q-item separator class="q-body-1">
             <q-item-section>
               <div class="full-width">
                 <div class="cursor-pointer" v-if="isPictureOfShopPdf">
@@ -662,12 +662,12 @@
                 v-if="propGetShortInfo.documentUploadedType != 1 && propGetShortInfo.qrLeadCategory == false"
                 class="row items-center full-width"
               >
-                <div class="col-md-12 text-body1">
+                <div class="col-md-12 q-body-1">
                   <q-expansion-item separator indent opened class="full-width">
                     <template slot="header">
                       <q-item-section icon="apps" />
                       <q-item-section
-                        class="text-body1"
+                        class="q-body-1"
                         :caption="
                           propLeadDocumentInformation.length + 'Type(s)'
                         "
@@ -679,7 +679,7 @@
                       subIndex) in propLeadDocumentInformation"
                       :key="subIndex"
                     >
-                      <div class="col-md-12 text-body1">
+                      <div class="col-md-12 q-body-1">
                         <q-expansion-item
                           separator
                           group="closeOnOpenSubDocument"
@@ -688,7 +688,7 @@
                         >
                           <template slot="header">
                             <q-item-section
-                              class="text-body1"
+                              class="q-body-1"
                               :caption="
                                 subDocument.uploadedDocuments.length +
                                   'Document(s)'
@@ -733,12 +733,12 @@
                             <q-item-section v-else right>
                               <span
                                 v-if="subDocument.documentVerifiedStatus == 1"
-                                class="text-body1 text-weight-medium text-positive"
+                                class="q-body-1 text-weight-medium text-positive"
                                 >Approved</span
                               >
                               <span
                                 v-if="subDocument.documentVerifiedStatus == 3"
-                                class="text-body1 text-weight-medium text-negative"
+                                class="q-body-1 text-weight-medium text-negative"
                                 >Rejected</span
                               >
                               <div v-if="propGetShortInfo.qrLeadStatus == 9">
@@ -819,10 +819,10 @@
               </div>
 
               <div v-if="propGetShortInfo.documentUploadedType != 2">
-                <!-- <q-item separator class="text-body1">
+                <!-- <q-item separator class="q-body-1">
                   <q-item-section>
                     <q-item-label>
-                      <div class="text-body1">
+                      <div class="q-body-1">
                         Merchant Type:
                         <span class="text-weight-medium">{{
                           merchantTypeSelection
@@ -864,7 +864,7 @@
                       <q-item
                         separator
                         dense
-                        class="text-body1 bg-grey-4 q-pa-sm"
+                        class="q-body-1 bg-grey-4 q-pa-sm"
                       >
                         <q-item-section>
                           {{ document.subDocumentType }}
@@ -875,7 +875,7 @@
                             class="cursor-pointer text-white"
                             style="background-color: #202c3f;"
                           >
-                            <span class="text-caption text-weight-light"
+                            <span class="q-caption text-weight-light"
                               >Attach</span
                             >
                             <input
@@ -913,11 +913,11 @@
                             v-for="(filesAttachedEarlier,
                             filesAttachedEarlierIndex) in attachedSubFile.uploadedDocuments"
                             :key="filesAttachedEarlierIndex"
-                            class="text-body1"
+                            class="q-body-1"
                             separator
                           >
                             <q-item-section>
-                              <q-item-label class="text-body1">
+                              <q-item-label class="q-body-1">
                                 <div
                                   class="cursor-pointer"
                                   v-if="
@@ -1023,7 +1023,7 @@
                         >{{ multipleDocument.documentType }}
                       </q-item-label header>
                       <div>
-                        <q-item separator dense class="text-body1 q-pa-sm">
+                        <q-item separator dense class="q-body-1 q-pa-sm">
                           <q-item-section>
                             <select
                               v-if="multipleDocument.isQr != 0"
@@ -1062,7 +1062,7 @@
                               class="cursor-pointer text-white"
                               style="background-color: #202c3f;"
                             >
-                              <span class="text-caption text-weight-light"
+                              <span class="q-caption text-weight-light"
                                 >Attach</span
                               >
                               <input
@@ -1100,12 +1100,12 @@
                             v-for="(filesAttachedEarlier,
                             filesAttachedEarlierIndex) in attachedSubFile.uploadedDocuments"
                             :key="filesAttachedEarlierIndex"
-                            class="text-body1"
+                            class="q-body-1"
                             separator
                             dense
                           >
                             <q-item-section>
-                              <q-item-label class="text-body1">
+                              <q-item-label class="q-body-1">
                                 <div
                                   class="cursor-pointer"
                                   v-if="
@@ -1216,7 +1216,7 @@
                       <q-item
                         separator
                         dense
-                        class="text-body1 bg-grey-4 q-pa-sm"
+                        class="q-body-1 bg-grey-4 q-pa-sm"
                       >
                         <q-item-section>
                           {{ document.subDocumentType }}
@@ -1232,7 +1232,7 @@
                             class="cursor-pointer text-white"
                             style="background-color: #202c3f;"
                           >
-                            <span class="text-caption text-weight-light"
+                            <span class="q-caption text-weight-light"
                               >Attach</span
                             >
                             <input
@@ -1269,11 +1269,11 @@
                             v-for="(filesAttachedEarlier,
                             filesAttachedEarlierIndex) in attachedSubFile.uploadedDocuments"
                             :key="filesAttachedEarlierIndex"
-                            class="text-body1"
+                            class="q-body-1"
                             separator
                           >
                             <q-item-section>
-                              <q-item-label class="text-body1">
+                              <q-item-label class="q-body-1">
                                 <div
                                   class="cursor-pointer"
                                   v-if="
@@ -1379,7 +1379,7 @@
                         {{ multipleDocument.documentType }}
                       </q-item-label header>
                       <div>
-                        <q-item separator dense class="text-body1 q-pa-sm">
+                        <q-item separator dense class="q-body-1 q-pa-sm">
                           <q-item-section>
                             <select
                               class="full-width customQuasarSelect"
@@ -1418,7 +1418,7 @@
                               class="cursor-pointer text-white"
                               style="background-color: #202c3f;"
                             >
-                              <span class="text-caption text-weight-light"
+                              <span class="q-caption text-weight-light"
                                 >Attach</span
                               >
                               <input
@@ -1456,12 +1456,12 @@
                             v-for="(filesAttachedEarlier,
                             filesAttachedEarlierIndex) in attachedSubFile.uploadedDocuments"
                             :key="filesAttachedEarlierIndex"
-                            class="text-body1"
+                            class="q-body-1"
                             separator
                             dense
                           >
                             <q-item-section>
-                              <q-item-label class="text-body1">
+                              <q-item-label class="q-body-1">
                                 <div
                                   class="cursor-pointer"
                                   v-if="
@@ -2317,7 +2317,7 @@ saveformsLists(fileName, mimeType, formTypeToUpdate) {
               //   innerSelf.merchantTypeSelection
               // );
               this.$q.loading.hide();
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.loading.hide();
               innerSelf.$q.notify({
                 color: "negative",

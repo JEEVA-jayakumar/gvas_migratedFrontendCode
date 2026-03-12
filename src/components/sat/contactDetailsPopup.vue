@@ -9,7 +9,7 @@
     >
       <div class="row q-pa-md">
         <div
-          class="col-12 text-h6 text-center text-weight-regular bottom-border text-custom-color"
+          class="col-12 q-title text-center text-weight-regular bottom-border text-custom-color"
         >
           <b>CONTACT DETAILS</b>
         </div>

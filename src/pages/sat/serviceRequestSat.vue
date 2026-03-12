@@ -4,7 +4,6 @@
       <div class="row bottom-border q-pa-sm items-center">
         <div class="col">
           <q-tabs
-            no-pane-border
             v-model="inventoryOptionSelected"
             color="dark"
             filled
@@ -13,15 +12,17 @@
             <q-tab name="internal" label="Bijlipay Service Request" />
             <!-- <q-tab name="spareSo" label="Spare Parts So" /> -->
             <q-tab name="external" label="Aggregator Service Request" />
-</q-tabs>
-<q-tab-panels v-model="inventoryOptionSelected" animated>
-<q-tab-panel name="internal">
+          </q-tabs>
+
+          <q-tab-panels v-model="inventoryOptionSelected" animated>
+            <q-tab-panel name="internal" class="q-pa-none">
               <internalserviceRequest/>
             </q-tab-panel>
-<q-tab-panel name="external">
+
+            <q-tab-panel name="external" class="q-pa-none">
               <externalserviceRequest/>
             </q-tab-panel>
-</q-tab-panels>
+          </q-tab-panels>
         </div>
       </div>
     </div>
@@ -47,7 +48,7 @@ export default {
     return {
       enableUploadInventoryBtn: true,
       toggleScanButton: true,
-      inventoryOptionSelected: "serviceRequest"
+      inventoryOptionSelected: "internal"
     };
   },
 

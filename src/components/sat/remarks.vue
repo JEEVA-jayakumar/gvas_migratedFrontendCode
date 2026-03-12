@@ -10,7 +10,7 @@
     >
       <form>
         <div class="column group">
-          <div class="col-12 text-h6 q-py-md">Save with remarks</div>
+          <div class="col-12 q-title q-py-md">Save with remarks</div>
           <div class="col-12">
             <q-input
               color="grey-9"

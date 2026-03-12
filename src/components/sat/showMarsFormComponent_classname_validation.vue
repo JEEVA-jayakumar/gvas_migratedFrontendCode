@@ -146,7 +146,7 @@
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <p class="text-caption">Sharing Model</p>
+                <p class="q-caption">Sharing Model</p>
                 <div
                   v-for="(item,index) in viewBinding.sharingModelCode"
                   :key="index"
@@ -645,7 +645,7 @@
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <div class="text-caption">Statement type</div>
+                <div class="q-caption">Statement type</div>
                 <div class="group statementType">
                   <q-radio
                     @blur="$v.merchant.companyInformation.statementType.$touch"
@@ -660,7 +660,7 @@
                 </div>
               </div>
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <p class="text-caption">Statement frequency</p>
+                <p class="q-caption">Statement frequency</p>
                 <div class="group statementFrequency">
                   <q-radio
                     @blur="$v.merchant.companyInformation.statementFrequency.$touch"
@@ -1082,7 +1082,7 @@
           >
             <div class="row q-col-gutter-sm">
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <p class="text-caption">Device Owned By</p>
+                <p class="q-caption">Device Owned By</p>
                 <div class="group deviceOwnedBy">
                   <q-radio
                     @blur="$v.merchant.paymentDetails.deviceOwnedBy.$touch"
@@ -1134,7 +1134,7 @@
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <p class="text-caption">Cash @POS Enabled?</p>
+                <p class="q-caption">Cash @POS Enabled?</p>
                 <div class="group cashAtPosEnabled">
                   <q-radio
                     disable
@@ -1194,7 +1194,7 @@
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <p class="text-caption">Rental Type</p>
+                <p class="q-caption">Rental Type</p>
                 <div class="group rentalType">
                   <q-radio
                     @blur="$v.merchant.paymentDetails.rentalType.$touch"
@@ -1258,7 +1258,7 @@
                 v-if="merchant.paymentDetails.rentalType == 'A'"
                 class="col-md-6 col-sm-12 col-xs-12"
               >
-                <p class="text-caption">Advanced Rent Mode</p>
+                <p class="q-caption">Advanced Rent Mode</p>
                 <div class="group advanceRentMode">
                   <q-radio
                     @blur="$v.merchant.paymentDetails.advanceRentMode.$touch"
@@ -1345,11 +1345,11 @@
               <div class="col-md-12">
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium">Domestic Debit Card below 2000</div>
+                    <div class="q-caption text-weight-medium">Domestic Debit Card below 2000</div>
                   </div>
                   <div class="col">
                     <div
-                      class="text-caption text-weight-medium q-py-sm mdrPlan"
+                      class="q-caption text-weight-medium q-py-sm mdrPlan"
                       align="center"
                     >Merchant Disc Fee</div>
                     <div class="row group bg-green-2 domesticDebitUpTo2000">
@@ -1390,7 +1390,7 @@
                   </div>
                   <div class="col SharingDiscountFee" v-if="showOnlyIfSharingModelIsEnabled">
                     <div
-                      class="text-caption text-weight-medium q-py-sm"
+                      class="q-caption text-weight-medium q-py-sm"
                       align="center"
                     >Sharing Disc Fee</div>
                     <div class="row group bg-yellow-2 domesticDebitUpTo2000">
@@ -1432,7 +1432,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium">Domestic Debit Card above 2000</div>
+                    <div class="q-caption text-weight-medium">Domestic Debit Card above 2000</div>
                   </div>
                   <div class="col mdrPlan">
                     <div class="row group bg-green-2 domesticDebitAbove2000">
@@ -1510,7 +1510,7 @@
 
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium">Standard/Classic (1st Stab)</div>
+                    <div class="q-caption text-weight-medium">Standard/Classic (1st Stab)</div>
                   </div>
                   <div class="col mdrPlan">
                     <div class="row group bg-green-2 standardOrClassic">
@@ -1589,7 +1589,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium">Premium/Platinum (2nd Stab)</div>
+                    <div class="q-caption text-weight-medium">Premium/Platinum (2nd Stab)</div>
                   </div>
                   <div class="col mdrPlan">
                     <div class="row group bg-green-2 premiumOrPlatinum">
@@ -1668,7 +1668,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium">Super Premium/Signature (3rd Stab)</div>
+                    <div class="q-caption text-weight-medium">Super Premium/Signature (3rd Stab)</div>
                   </div>
                   <div class="col mdrPlan">
                     <div class="row group bg-green-2 superPremiumOrSignature">
@@ -1747,7 +1747,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium">Commercial/Coporate 4th Stab</div>
+                    <div class="q-caption text-weight-medium">Commercial/Coporate 4th Stab</div>
                   </div>
                   <div class="col mdrPlan">
                     <div class="row group bg-green-2 commercialOrCorporate">
@@ -1826,7 +1826,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium">International Debit Card</div>
+                    <div class="q-caption text-weight-medium">International Debit Card</div>
                   </div>
                   <div class="col mdrPlan">
                     <div class="row group bg-green-2 internationalDebitCard">
@@ -1905,7 +1905,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium">International Credit Card</div>
+                    <div class="q-caption text-weight-medium">International Credit Card</div>
                   </div>
                   <div class="col mdrPlan">
                     <div class="row group bg-green-2 internationalCreditCard">
@@ -1984,7 +1984,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium">Onus</div>
+                    <div class="q-caption text-weight-medium">Onus</div>
                   </div>
                   <div class="col mdrPlan">
                     <div class="row group bg-green-2 onus">
@@ -2063,7 +2063,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium">mVISA</div>
+                    <div class="q-caption text-weight-medium">mVISA</div>
                   </div>
                   <div class="col mdrPlan">
                     <div class="row group bg-green-2 mVisa">
@@ -2142,7 +2142,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium">Master Pass</div>
+                    <div class="q-caption text-weight-medium">Master Pass</div>
                   </div>
                   <div class="col mdrPlan">
                     <div class="row group bg-green-2 masterPass">
@@ -2221,7 +2221,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium">Cash at POS</div>
+                    <div class="q-caption text-weight-medium">Cash at POS</div>
                   </div>
                   <div class="col mdrPlan">
                     <div class="row group bg-green-2 cashAtPos">
@@ -2335,7 +2335,7 @@
           >
             <div class="row q-mb-md gutter-sm items-center bankDetails">
               <div class="col-md-12">
-                <div class="text-h6">Merchant Bank Details</div>
+                <div class="q-title">Merchant Bank Details</div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
@@ -2497,7 +2497,7 @@
             </div>
             <div class="row gutter-sm items-center collectionDetails">
               <div class="col-md-12">
-                <div class="text-h6">Payment Collection Details</div>
+                <div class="q-title">Payment Collection Details</div>
               </div>
               <div v-show="propLeadDeatils.paymentOption == 1" class="col-md-12">
                 <div class="row">
@@ -2661,33 +2661,33 @@
                     :key="subIndex"
                   >
                     <div class="row">
-                      <div class="col-4 text-body1">Document</div>
+                      <div class="col-4 q-body-1">Document</div>
                       <div
-                        class="col-8 text-body1 text-weight-bold text-negative"
+                        class="col-8 q-body-1 text-weight-bold text-negative"
                         v-if="item.documentType == ''"
                       >NA</div>
-                      <div class="col-8 text-body1" v-else>{{item.documentType}}</div>
+                      <div class="col-8 q-body-1" v-else>{{item.documentType}}</div>
                     </div>
                     <div class="row">
-                      <div class="col-4 text-body1">Sub document</div>
+                      <div class="col-4 q-body-1">Sub document</div>
                       <div
-                        class="col-8 text-body1 text-weight-bold text-negative"
+                        class="col-8 q-body-1 text-weight-bold text-negative"
                         v-if="item.subDocumentType == ''"
                       >NA</div>
                       <div
-                        class="col-8 text-body1 text-weight-bold text-positive"
+                        class="col-8 q-body-1 text-weight-bold text-positive"
                         v-else
                       >{{item.subDocumentType}}</div>
                     </div>
                     <div class="row">
                       <div class="col-12" v-show="item.uploadedDocuments.length > 0">
                         <div
-                          class="text-caption"
+                          class="q-caption"
                           v-for="(document, documentIndex) in item.uploadedDocuments"
                           :key="documentIndex"
                         >{{document.fileName}}</div>
                       </div>
-                      <div class="text-caption" v-show="item.uploadedDocuments.length == 0">
+                      <div class="q-caption" v-show="item.uploadedDocuments.length == 0">
                         <div class="text-weight-bold text-negative">No document available</div>
                       </div>
                     </div>

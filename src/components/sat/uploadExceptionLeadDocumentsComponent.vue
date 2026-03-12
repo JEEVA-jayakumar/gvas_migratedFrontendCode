@@ -1,10 +1,10 @@
 <template>
   <div>
     <!-- START >> (Default) Merchant type  -->
-    <q-item separator class="text-body1">
+    <q-item separator class="q-body-1">
       <q-item-section>
         <q-item-label>
-          <div class="text-body1">
+          <div class="q-body-1">
             Merchant type:
             <span class="text-weight-medium">{{merchantTypeSelection}}</span>
           </div>
@@ -15,11 +15,11 @@
     <div class="group">
       <!-- START >> (Mandatory) Application form  -->
       <q-list class="no-padding">
-        <q-item separator class="text-body1 text-dark bg-grey-4 text-weight-medium">
+        <q-item separator class="q-body-1 text-dark bg-grey-4 text-weight-medium">
           <q-item-section>Application Form</q-item-section>
           <q-item-section>
             <label class="cursor-pointer text-white" style="background-color: #202c3f;">
-              <span class="text-caption text-weight-light">Attach</span>
+              <span class="q-caption text-weight-light">Attach</span>
               <input
                 type="file"
                 name="file"
@@ -29,7 +29,7 @@
             </label>
           </q-item-section>
         </q-item>
-        <q-item separator class="text-body1">
+        <q-item separator class="q-body-1">
           <q-item-section>
             <div class="full-width">
               <div
@@ -69,7 +69,7 @@
       <!-- START >> (Optional) payment document file == bank subvention  -->
       <q-list v-if="getShortLeadInfo.paymentDocumentFile != ''">
         <q-item-label header class="bg-grey-4">Bank Letter</q-item-label header>
-        <q-item separator class="text-body1">
+        <q-item separator class="q-body-1">
           <q-item-section>
             <div class="full-width">
               <div
@@ -124,7 +124,7 @@
         >
           <q-item
             separator
-            class="text-body1 q-pa-sm text-dark text-weight-medium bottom-border"
+            class="q-body-1 q-pa-sm text-dark text-weight-medium bottom-border"
             :class="[document.isKycChecked?'bg-amber-4':'']"
           >
             <q-item-section v-if="!document.reprocess && document.verifiedStatus != 1">
@@ -143,7 +143,7 @@
                 style="background-color: #202c3f;"
                 @click="fnShowDisabledMessageForFileUpload(document,document.isKycChecked)"
               >
-                <span class="text-caption text-weight-light">Attach</span>
+                <span class="q-caption text-weight-light">Attach</span>
                 <input
                   type="file"
                   name="file"
@@ -156,7 +156,7 @@
 
             <!-- TODO -- START =>> Quick fix remove for proper buttons visibility -->
             <q-item-section v-if="!document.reprocess && document.verifiedStatus == 1">
-              <span class="text-body1 text-weight-medium text-positive">Approved</span>
+              <span class="q-body-1 text-weight-medium text-positive">Approved</span>
             </q-item-section>
             <!-- TODO -- END  =>> Quick fix remove for proper buttons visibility -->
             <q-item-section
@@ -185,11 +185,11 @@
             >
               <span
                 v-if="checkSumForDocumentVerificationStatus(document).documentVerifiedStatus == 1"
-                class="text-body1 text-weight-medium text-positive"
+                class="q-body-1 text-weight-medium text-positive"
               >Approved</span>
               <span
                 v-if="checkSumForDocumentVerificationStatus(document).documentVerifiedStatus == 3"
-                class="text-body1 text-weight-medium text-negative"
+                class="q-body-1 text-weight-medium text-negative"
               >Rejected</span>
             </q-item-section>
           </q-item>
@@ -208,11 +208,11 @@
               <q-item
                 v-for="(filesAttachedEarlier,filesAttachedEarlierIndex) in attachedSubFile.uploadedDocuments"
                 :key="filesAttachedEarlierIndex"
-                class="text-body1"
+                class="q-body-1"
                 separator
               >
                 <q-item-section>
-                  <q-item-label class="text-body1">
+                  <q-item-label class="q-body-1">
                     <div
                       class="cursor-pointer"
                       v-if="filesAttachedEarlier.mimeType.includes('pdf')"
@@ -302,7 +302,7 @@
               v-if="!multipleDocument.reprocess && multipleDocument.verifiedStatus == 1"
               align="right"
             >
-              <span class="text-body1 text-weight-medium text-positive" right>Approved</span>
+              <span class="q-body-1 text-weight-medium text-positive" right>Approved</span>
             </div>
             <div class="col-auto" v-if="multipleDocument.reprocess">
               <!-- <pre>{{getShortLeadInfo.leadDocuments[multipleDocument.documentType][0]}}</pre> -->
@@ -327,11 +327,11 @@
               <span v-else right>
                 <span
                   v-if="getShortLeadInfo.leadDocuments[multipleDocument.documentType][0].documentVerifiedStatus == 1"
-                  class="text-body1 text-weight-medium text-positive"
+                  class="q-body-1 text-weight-medium text-positive"
                 >Approved</span>
                 <span
                   v-if="getShortLeadInfo.leadDocuments[multipleDocument.documentType][0].documentVerifiedStatus == 3"
-                  class="text-body1 text-weight-medium text-negative"
+                  class="q-body-1 text-weight-medium text-negative"
                 >Rejected</span>
               </span>
             </div>
@@ -339,7 +339,7 @@
         </q-item-label header>
         <!-- <pre>{{multipleDocument}}</pre> -->
         <div>
-          <q-item separator class="text-body1 q-pa-sm group">
+          <q-item separator class="q-body-1 q-pa-sm group">
             <q-item-section>
               <!-- <pre>{{multipleDocument.subDocumentTypeSelection}}</pre> -->
               <select
@@ -364,7 +364,7 @@
                   style="background-color: #202c3f;"
                   @click="fnShowDisabledMessageForFileUpload(multipleDocument,multipleDocument.isKycChecked)"
                 >
-                  <span class="text-caption text-weight-light">Attach</span>
+                  <span class="q-caption text-weight-light">Attach</span>
                   <input
                     type="file"
                     :disabled="multipleDocument.isKycChecked"
@@ -391,12 +391,12 @@
             <q-item
               v-for="(filesAttachedEarlier,filesAttachedEarlierIndex) in attachedSubFile.uploadedDocuments"
               :key="filesAttachedEarlierIndex"
-              class="text-body1"
+              class="q-body-1"
               separator
               multiline
             >
               <q-item-section>
-                <q-item-label class="text-body1">
+                <q-item-label class="q-body-1">
                   <div class="cursor-pointer" v-if="filesAttachedEarlier.mimeType.includes('pdf')">
                     <div
                       @click="fnPDFViewModal(filesAttachedEarlier.fileName)"
@@ -955,7 +955,7 @@ export default {
                 message: "Successfully removed!",
                 icon: "thumb_up"
               });
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",

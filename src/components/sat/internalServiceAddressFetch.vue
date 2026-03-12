@@ -1,7 +1,7 @@
 <template>
     <q-page>
       <div class="row">
-        <div class="col-12 text-h6 q-pa-md text-weight-regular bottom-border">Enter Latitude & Longitude</div>
+        <div class="col-12 q-title q-pa-md text-weight-regular bottom-border">Enter Latitude & Longitude</div>
         <!-- START >> Setup MDR details -->
         <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
           <q-card style="width:150%">

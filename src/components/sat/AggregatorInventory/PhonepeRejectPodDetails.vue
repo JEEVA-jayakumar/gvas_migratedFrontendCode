@@ -3,9 +3,9 @@
         <q-dialog :model-value="showRejectModel" @hide="emitToggleReject(showRejectModel)"
             @escape-key="emitToggleReject(showRejectModel)" :content-css="{ padding: '50px' }">
             <div>
-                <div align="center" class="text-subtitle1 q-mb-md capitalize">
+                <div align="center" class="q-subheading q-mb-md capitalize">
                     {{ propShowRejectComponent.allocate_region.regionAreaName }}</div>
-                <div align="center" class="text-light-blue text-h6 q-mb-md">#{{ propShowRejectComponent.pod_number }}
+                <div align="center" class="text-light-blue q-title q-mb-md">#{{ propShowRejectComponent.pod_number }}
                 </div>
                 <!-- <div align="left" class="text-weight-light text-grey-8 q-mb-md">Reason</div> -->
                 <!-- <div class="gutter-xs">

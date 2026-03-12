@@ -3,7 +3,7 @@
         <q-dialog class="customModalOverlay" v-model="toggleModel" @hide="emitToggleReject(toggleModel)"
             @escape-key="closeRejectModel(toggleModel)" :content-css="{ padding: '50px', minWidth: '50vw' }">
             <div class="row">
-                <div class="col-md-12 text-h6 text-center q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
+                <div class="col-md-12 q-title text-center q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
                     Additional TID
                 </div>
                 <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">

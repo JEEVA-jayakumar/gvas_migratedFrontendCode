@@ -13,7 +13,7 @@
         <span class="label text-negative">{{getRsmReason.reason}}</span>
         <div>
          
-                  <div class="row gutter-sm q-my-xs">
+                  <div class="row q-col-gutter-sm q-my-xs">
                                            <!-- <div class="col-xs-12 col-sm-6">
               <q-input disable
                 v-model="formdata1.deviceCount"
@@ -64,11 +64,11 @@
             </div> -->
               <div class="col-xs-12 col-sm-6">
              <!-- <p class="caption">Pricing Exception</p> -->
-                   <q-checkbox v-model="check" :disable="this.getImplementedQueue.leadInformation.cmsLeadStatus==15" color="positive" label="Pricing Exception" left-label />
+                   <q-checkbox v-model="check" :disable="this.getImplementedQueue.leadInformation.cmsLeadStatus==15?false:true" color="positive" label="Pricing Exception" left-label />
             </div>
          </div>
         </div>
-         <div v-if="formdata.paymentOption==2" class="row gutter-sm q-my-xs">
+         <div v-if="formdata.paymentOption==2" class="row q-col-gutter-sm q-my-xs">
              <div class="col-xs-12 col-sm-6">
               <p>
                 
@@ -89,30 +89,66 @@
        </div>
         <div class="col-xs-12 col-sm-6">
             <q-input @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON" placeholder="Transaction Made ON"
-            />
+            >
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                    <q-date v-model="formdata.paymentMadeon" mask="YYYY-MM-DD HH:mm:ss" with-seconds>
+                      <div class="row items-center justify-end">
+                        <q-btn v-close-popup label="Close" color="primary" flat />
+                      </div>
+                    </q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
           </div>
           <div class="col-xs-12 col-sm-6">
           <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model.trim="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" label="Cheque Reference Number"
           />
           </div> </div>
-        <div v-else-if="formdata.paymentOption==1" class="row gutter-sm q-my-xs">
+        <div v-else-if="formdata.paymentOption==1" class="row q-col-gutter-sm q-my-xs">
            <div class="col-xs-12 col-sm-6">
           <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model.trim="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" label="*NEFT Reference Number"
           />
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON"
-            />
+            >
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                    <q-date v-model="formdata.paymentMadeon" mask="YYYY-MM-DD HH:mm:ss" with-seconds>
+                      <div class="row items-center justify-end">
+                        <q-btn v-close-popup label="Close" color="primary" flat />
+                      </div>
+                    </q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
           </div>
           </div>
-        <div v-else-if="formdata.paymentOption==3" class="row gutter-sm q-my-xs">
+        <div v-else-if="formdata.paymentOption==3" class="row q-col-gutter-sm q-my-xs">
           <div class="col-xs-12 col-sm-6">
           <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model.trim="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" label="*Swipe Reference Number"
           />
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON"
-            />
+            >
+              <template v-slot:append>
+                <q-icon name="event" class="cursor-pointer">
+                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                    <q-date v-model="formdata.paymentMadeon" mask="YYYY-MM-DD HH:mm:ss" with-seconds>
+                      <div class="row items-center justify-end">
+                        <q-btn v-close-popup label="Close" color="primary" flat />
+                      </div>
+                    </q-date>
+                  </q-popup-proxy>
+                </q-icon>
+              </template>
+            </q-input>
           </div>
            </div> <br />
         
@@ -194,7 +230,7 @@
       </q-step>
 
       <q-step name="ad_group" title="Edit KYC Fields">
-        <p class="caption"><strong>Edit KYC Details</strong></p>
+        <p class="q-caption"><strong>Edit KYC Details</strong></p>
         <div class="row q-col-gutter-sm">
             <div class="col-xs-12 col-sm-6">
               <q-input v-model="merchant.companyinformation.legalName" class="no-margin" label="Legal Name" />
@@ -215,7 +251,7 @@
                    <MarsErrorResponse :error="error.field.merchant.companyinformation.pan" />
             </div>
                          <div
-                  class="text-negative q-py-xs group text-caption"
+                  class="text-negative q-py-xs group q-caption"
                   v-if="$v.merchant.companyinformation.pan.$error"
                 >
                   <div>
@@ -239,7 +275,7 @@
                 </div>
                 
                 <div
-                  class="text-negative q-py-xs group text-caption"
+                  class="text-negative q-py-xs group q-caption"
                   v-if="$v.merchant.businessInformation.gstId.$error"
                 >
                   <div>
@@ -302,36 +338,32 @@
               <q-input v-model="merchant.companyinformation.registeredAddress" class="no-margin" label="Address" />
             </div>
             <div class="col-xs-12 col-sm-6">     
-                <q-input
+                <q-select
+                  use-input
+                  fill-input
+                  hide-selected
+                  @filter="residentCitySearch"
+                  @update:model-value="registeredCitySelected"
                   color="grey-9"
                   v-model.trim="merchant.companyinformation.registeredCityName"
                   label="City (type min 3 characters)*"
                   placeholder="Start typing ..*"
-                >
-                  <q-autocomplete
-                    separator
-                    @search="residentCitySearch"
-                    :debounce="10"
-                    :min-characters="3"
-                    @selected="registeredCitySelected"
-                  />
-                </q-input>
+                  :options="cityOptions"
+                />
                      </div>
                    <div class="col-xs-12 col-sm-6">  
-                <q-input
+                <q-select
+                  use-input
+                  fill-input
+                  hide-selected
+                  @filter="residentStateSearch"
+                  @update:model-value="registeredStateSelected"
                    color="grey-9"
                   v-model.trim="merchant.companyinformation.registeredStateName"
                   label="state (type min 3 characters)*"
                   placeholder="Start typing ..*"
-                >
-                  <q-autocomplete
-                    separator
-                    @search="residentStateSearch"
-                    :debounce="10"
-                    :min-characters="1"
-                    @selected="registeredStateSelected"
-                  />
-                </q-input>
+                  :options="stateOptions"
+                />
                    </div>
               <div class="col-xs-12 col-sm-6">
               <q-input v-model="merchant.companyinformation.registeredPin" class="no-margin" label="Pincode" />
@@ -425,7 +457,7 @@
           <div class="col-xs-12">
             Cheque
             <label class="cursor-pointer text-white" style="background-color: #202c3f;">
-              <span class="text-caption text-weight-light">Attach</span>
+              <span class="q-caption text-weight-light">Attach</span>
               <input
                 type="file"
                 name="file"
@@ -438,7 +470,7 @@
         </div>Pan Card:
         <div>
           <label class="cursor-pointer text-white" style="background-color: #202c3f;">
-            <span class="text-caption text-weight-light">Attach</span>
+            <span class="q-caption text-weight-light">Attach</span>
             <input
               type="file"
               name="file"
@@ -451,7 +483,7 @@
         <div>
           Cheque :
           <label class="cursor-pointer text-white" style="background-color: #202c3f;">
-            <span class="text-caption text-weight-light">Attach</span>
+            <span class="q-caption text-weight-light">Attach</span>
             <input
               type="file"
               name="file"
@@ -475,11 +507,11 @@
               <div class="col-md-12">
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium"><strong>Domestic Debit Card below 2000</strong></div>
+                    <div class="q-caption text-weight-medium"><strong>Domestic Debit Card below 2000</strong></div>
                   </div>
                   <div class="col">
                     <div
-                      class="text-caption text-weight-medium q-py-sm"
+                      class="q-caption text-weight-medium q-py-sm"
                       align="center"
                     ><b>Merchant Disc Fee</b></div>
                     <div class="row group bg-green-2">
@@ -513,7 +545,7 @@
                   </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium"><strong>Domestic Debit Card above 2000</strong></div>
+                    <div class="q-caption text-weight-medium"><strong>Domestic Debit Card above 2000</strong></div>
                   </div>
                   <div class="col">
                     <div class="row group bg-green-2">
@@ -547,7 +579,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium"><strong>Standard/Classic (1st Stab)</strong></div>
+                    <div class="q-caption text-weight-medium"><strong>Standard/Classic (1st Stab)</strong></div>
                   </div>
                   <div class="col">
                     <div class="row group bg-green-2">
@@ -581,7 +613,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium"><strong>Premium/Platinum (2nd Stab)</strong></div>
+                    <div class="q-caption text-weight-medium"><strong>Premium/Platinum (2nd Stab)</strong></div>
                   </div>
                   <div class="col">
                     <div class="row group bg-green-2">
@@ -618,7 +650,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium"><strong>Super Premium/Signature (3rd Stab)</strong></div>
+                    <div class="q-caption text-weight-medium"><strong>Super Premium/Signature (3rd Stab)</strong></div>
                   </div>
                   <div class="col">
                     <div class="row group bg-green-2">
@@ -653,7 +685,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium"><strong>Commercial/Coporate 4th Stab</strong></div>
+                    <div class="q-caption text-weight-medium"><strong>Commercial/Coporate 4th Stab</strong></div>
                   </div>
                   <div class="col">
                     <div class="row group bg-green-2">
@@ -692,7 +724,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium"><strong>International Debit Card</strong></div>
+                    <div class="q-caption text-weight-medium"><strong>International Debit Card</strong></div>
                   </div>
                   <div class="col">
                     <div class="row group bg-green-2">
@@ -731,7 +763,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium"><strong>International Credit Card</strong></div>
+                    <div class="q-caption text-weight-medium"><strong>International Credit Card</strong></div>
                   </div>
                   <div class="col">
                     <div class="row group bg-green-2">
@@ -771,7 +803,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium"><strong>Onus</strong></div>
+                    <div class="q-caption text-weight-medium"><strong>Onus</strong></div>
                   </div>
                   <div class="col">
                     <div class="row group bg-green-2">
@@ -811,7 +843,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium"><strong>mVISA</strong></div>
+                    <div class="q-caption text-weight-medium"><strong>mVISA</strong></div>
                   </div>
                   <div class="col">
                     <div class="row group bg-green-2">
@@ -850,7 +882,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium"><strong>Master Pass</strong></div>
+                    <div class="q-caption text-weight-medium"><strong>Master Pass</strong></div>
                   </div>
                   <div class="col">
                     <div class="row group bg-green-2">
@@ -890,7 +922,7 @@
                 </div>
                 <div class="row items-center">
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium"><strong>Cash at POS</strong></div>
+                    <div class="q-caption text-weight-medium"><strong>Cash at POS</strong></div>
                   </div>
                   <div class="col">
                     <div class="row group bg-green-2">
@@ -931,7 +963,7 @@
                   class="row items-center"
                 >
                   <div class="col-3">
-                    <div class="text-caption text-weight-medium"><strong>Convenience fees</strong></div>
+                    <div class="q-caption text-weight-medium"><strong>Convenience fees</strong></div>
                   </div>
                   <div class="col">
                     <div class="row group bg-green-2">
@@ -974,21 +1006,21 @@
       </q-step>
        <q-step name="zata" title="Attach Documents">
          <div>
-      <q-item separator class="text-body1">
+      <q-item separator class="q-body-1">
       <q-item-section>
         <q-item-label>
-          <div class="text-body1">
+          <div class="q-body-1">
             Merchant type:
             <span class="text-weight-medium">{{merchantTypeSelection}}</span>
           </div>
         </q-item-label>
       </q-item-section>
     </q-item>
-    <q-item separator class="text-body1 text-dark bg-grey-4 text-weight-medium">
+    <q-item separator class="q-body-1 text-dark bg-grey-4 text-weight-medium">
       <q-item-section>Application Form</q-item-section>
       <q-item-section>
         <label class="cursor-pointer text-white" style="background-color: #202c3f;">
-          <span class="text-caption text-weight-light">Attach</span>
+          <span class="q-caption text-weight-light">Attach</span>
           <input
             type="file"
             name="file"
@@ -998,7 +1030,7 @@
         </label>
       </q-item-section>
     </q-item>
-    <q-item separator class="text-body1">
+    <q-item separator class="q-body-1">
       <q-item-section>
         <div class="full-width">
           <div
@@ -1037,11 +1069,11 @@
     <q-item
       v-if="getShortLeadInfo.paymentDocumentFile != ''"
       separator
-      class="text-body1 text-dark bg-grey-4 text-weight-medium"
+      class="q-body-1 text-dark bg-grey-4 text-weight-medium"
     >
       <q-item-section>Bank Letter</q-item-section>
     </q-item>
-    <q-item v-if="getShortLeadInfo.paymentDocumentFile != ''" separator class="text-body1">
+    <q-item v-if="getShortLeadInfo.paymentDocumentFile != ''" separator class="q-body-1">
       <q-item-section>
         <div class="full-width">
           <div
@@ -1076,7 +1108,7 @@
         </div>
       </q-item-section>
     </q-item>
-        <div v-if="merchantTypeSelection == 0" class="full-width text-body1 q-pa-sm">
+        <div v-if="merchantTypeSelection == 0" class="full-width q-body-1 q-pa-sm">
       <p>No documents available to display</p>
     </div>
     <div v-else class="group">
@@ -1092,11 +1124,11 @@
           :key="documentIndex"
           class="border-bottom"
         >
-          <q-item separator dense class="text-body1 bg-grey-4 q-pa-sm">
+          <q-item separator dense class="q-body-1 bg-grey-4 q-pa-sm">
             <q-item-section>{{document.subDocumentType}}</q-item-section>
             <q-item-section>
               <label class="cursor-pointer text-white" style="background-color: #202c3f;">
-                <span class="text-caption text-weight-light">Attach</span>
+                <span class="q-caption text-weight-light">Attach</span>
                 <input
                   type="file"
                   name="file"
@@ -1123,11 +1155,11 @@
                 dense
                 v-for="(filesAttachedEarlier,filesAttachedEarlierIndex) in attachedSubFile.uploadedDocuments"
                 :key="filesAttachedEarlierIndex"
-                class="text-body1"
+                class="q-body-1"
                 separator
               >
                 <q-item-section>
-                  <q-item-label class="text-body1">
+                  <q-item-label class="q-body-1">
                     <div
                       class="cursor-pointer"
                       v-if="filesAttachedEarlier.mimeType.includes('pdf')"
@@ -1188,9 +1220,9 @@
         v-for="multipleDocument in getShortLeadInfoDocumentTypes.uploadedDocuments.forMutipleDocument"
         :key="multipleDocument.id"
       >
-        <q-item-label header class="q-mb-sm bg-grey-4">{{multipleDocument.documentType}}</q-item-label header>
+        <q-item-label header class="q-mb-sm bg-grey-4">{{multipleDocument.documentType}}</q-item-label>
         <div>
-          <q-item separator dense class="text-body1 q-pa-sm">
+          <q-item separator dense class="q-body-1 q-pa-sm">
             <q-item-section>
               <!-- <pre>{{multipleDocument.subDocumentTypeSelection}}</pre> -->
               <select
@@ -1211,7 +1243,7 @@
               ref="subDocumentUploadParent"
             >
               <label class="cursor-pointer text-white" style="background-color: #202c3f;">
-                <span class="text-caption text-weight-light">Attach</span>
+                <span class="q-caption text-weight-light">Attach</span>
                 <input
                   type="file"
                   ref="subDocumentUpload"
@@ -1238,12 +1270,12 @@
             <q-item
               v-for="(filesAttachedEarlier,filesAttachedEarlierIndex) in attachedSubFile.uploadedDocuments"
               :key="filesAttachedEarlierIndex"
-              class="text-body1"
+              class="q-body-1"
               separator
               dense
             >
               <q-item-section>
-                <q-item-label class="text-body1">
+                <q-item-label class="q-body-1">
                   <div class="cursor-pointer" v-if="filesAttachedEarlier.mimeType.includes('pdf')">
                     <div
                       ref="multiAttachedImageViewer"
@@ -1382,6 +1414,8 @@ export default {
            subDocumentTypeSelection: 0,
            stateOptions: [],
            cityOptions:[],
+           originalStateOptions: [],
+           originalCityOptions: [],
       dropDown: {
         deviceOptions: [],
         planOptions:[],
@@ -2478,7 +2512,7 @@ export default {
               // this.FETCH_SHORT_LEAD_DATA(this.getShortLeadInfo.id
               // )
               this.$q.loading.hide();
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.loading.hide();
               innerSelf.$q.notify({
                 color: "negative",
@@ -2967,6 +3001,7 @@ export default {
          self.cityFromMars.items.map(oo => {
               self.cityOptions.push({ label: oo.name, value: oo.code });
             });
+            self.originalCityOptions = self.cityOptions;
         }).then(() => {
           /* API call to fetch state */
           return self.STATE_FROM_MARS().then(response => {
@@ -2974,6 +3009,7 @@ export default {
             self.stateFromMars.items.map(oo => {
               self.stateOptions.push({ label: oo.name, value: oo.code });
             });
+            self.originalStateOptions = self.stateOptions;
             // self.stateOptions = stateArr;
           });
         })
@@ -3147,22 +3183,27 @@ export default {
         });
     },
     /* IFSC bank search result */
-      residentStateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
-    },
-    registeredStateSelected(item) {
-      this.merchant.companyinformation.registeredStateName = item.label;
-      this.merchant.companyinformation.registeredStateRefCode = item.value;
-    },
-        residentStateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
-    },
-       residentCitySearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+       residentCitySearch(val, update) {
+      update(() => {
+        this.cityOptions = this.COMMON_FILTER_FUNCTION(this.originalCityOptions, val);
+      });
     },
        registeredCitySelected(item) {
-      this.merchant.companyinformation.registeredCityName = item.label;
-      this.merchant.companyinformation.registeredCityRefCode = item.value;
+      if (item) {
+        this.merchant.companyinformation.registeredCityName = item.label;
+        this.merchant.companyinformation.registeredCityRefCode = item.value;
+      }
+    },
+      residentStateSearch(val, update) {
+      update(() => {
+        this.stateOptions = this.COMMON_FILTER_FUNCTION(this.originalStateOptions, val);
+      });
+    },
+    registeredStateSelected(item) {
+      if (item) {
+        this.merchant.companyinformation.registeredStateName = item.label;
+        this.merchant.companyinformation.registeredStateRefCode = item.value;
+      }
     },
         COMMON_FILTER_FUNCTION(arraySet, terms) {
       return _.filter(arraySet, function(oo) {
@@ -3201,7 +3242,7 @@ export default {
             this.$router.push("/sat/lead/validation/" + this.$route.params.id);
             this.$q.loading.hide();
           });
-        }).onCancel(error => {
+        }).catch(error => {
           this.$q.loading.hide();
         });
     },

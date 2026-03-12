@@ -16,7 +16,7 @@
       />
       <!--START: table title -->
       <div class="row items-center q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
-        <div class="col text-h6">Lead Details</div>
+        <div class="col q-title">Lead Details</div>
         <div class="col-auto">
           <q-btn round @click="emitToggleRemarks" outline color="dark" icon="clear"/>
         </div>

@@ -134,7 +134,7 @@
                   message: "Successfully Approved!",
                   icon: "thumb_up"
                 });
-              }).onCancel(error => {
+              }).catch(error => {
                 this.$q.loading.hide();
                 this.$q.notify({
                   color: "negative",

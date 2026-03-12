@@ -8,7 +8,7 @@
       :content-css="{ padding: '100px', minWidth: '70vw' }"
     >
       <div>
-        <div align="center" class="text-subtitle1 q-mb-md capitalize">
+        <div align="center" class="q-subheading q-mb-md capitalize">
           {{
             this.propShowRejectComponent.data.institutionCode == "112"
               ? "DBS INSTANCE"
@@ -35,7 +35,7 @@
               : null
           }}
         </div>
-        <div align="center" class="text-light-blue text-h6 q-mb-md">
+        <div align="center" class="text-light-blue q-title q-mb-md">
           <span>#{{ this.propShowRejectComponent.data.baseTid }}</span> |
           {{ this.propShowRejectComponent.data.rrId }} |
           {{ this.propShowRejectComponent.data.scheme }}
