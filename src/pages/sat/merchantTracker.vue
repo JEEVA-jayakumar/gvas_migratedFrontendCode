@@ -9,29 +9,41 @@
         <!--START: table data -->
         <q-table
             table-class="customTableClass"
-            :data="tableData"
+            :rows="tableData"
             :columns="columns"
             :filter="filter"
-            :pagination.sync="paginationControl"
+            v-model:pagination="paginationControl"
             row-key="name">
-            <q-td slot="body-cell-tid" slot-scope="props" :props="props">
+            <template v-slot:body-cell-tid="props">
+              <q-td :props="props">
                 <span class="label text-primary"># {{props.row.tid}}</span>
             </q-td>
-            <q-td slot="body-cell-mid" slot-scope="props" :props="props">
+            </template>
+            <template v-slot:body-cell-mid="props">
+              <q-td :props="props">
                 <span class="label text-primary"># {{props.row.mid}}</span>
             </q-td>
-            <q-td slot="body-cell-transaction_amount" slot-scope="props" :props="props">
+            </template>
+            <template v-slot:body-cell-transaction_amount="props">
+              <q-td :props="props">
               Rs. {{props.row.transaction_amount}}
             </q-td>
-            <q-td slot="body-cell-gst" slot-scope="props" :props="props">
+            </template>
+            <template v-slot:body-cell-gst="props">
+              <q-td :props="props">
               Rs. {{props.row.gst}}
             </q-td>
-            <q-td slot="body-cell-net_amount" slot-scope="props" :props="props">
+            </template>
+            <template v-slot:body-cell-net_amount="props">
+              <q-td :props="props">
               Rs. {{props.row.net_amount}}
             </q-td>
-            <q-td slot="body-cell-mdr" slot-scope="props" :props="props">
+            </template>
+            <template v-slot:body-cell-mdr="props">
+              <q-td :props="props">
               Rs. {{props.row.mdr}}
             </q-td>
+            </template>
             <template slot="top" slot-scope="props">
                 
                 <!--START: table fullscreen mode -->
@@ -62,9 +74,9 @@
 
                 <!--START: table filter dropdown -->
                 <div class="col-md-3">
-                  <q-datetime
+                  <q-input type="date"
                     v-model="filter_values"
-                    float-label="Date Filter"
+                    label="Date Filter"
                     type="date"
                     class="q-mr-lg q-py-sm"
                     color="grey-9"

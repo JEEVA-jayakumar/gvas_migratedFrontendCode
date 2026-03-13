@@ -855,4 +855,3 @@ import { required, or } from '@vuelidate/validators';
     color: #242225;
   }
   </style>
-  

@@ -15,11 +15,11 @@
         </div> -->
         <div class="col-md-4">
           <!-- <pre>{{tempTableData}}</pre>  ref="clickHeretoStartParent"  ref="clickHeretoStartChild"      -->
-          <q-select v-model="formData.device.id" float-label="Select Device Type" radio color="grey-9"
+          <q-select v-model="formData.device.id" label="Select Device Type" radio color="grey-9"
             :options="deviceOptions" />
         </div>
         <div class="col-md-4">
-          <q-select :disabled="formData.device.id == ''" v-model="action" float-label="Select Device Status" radio
+          <q-select :disabled="formData.device.id == ''" v-model="action" label="Select Device Status" radio
             color="grey-9" :options="actionOptions" @input="fnDisableDeviceTypeSelection" />
         </div>
         <!-- Final upload button toggle -->
@@ -32,16 +32,18 @@
         <!--ENDv-model: table title -->
       </div>
       <!--START: table Data -->
-      <q-table :data="tempTableData" :columns="columnData" table-class="customTableClass shadow-0"
-        :filter="filterSearch" :pagination.sync="paginationControl" row-key="index" :loading="tableAjaxLoading"
+      <q-table :rows="tempTableData" :columns="columnData" table-class="customTableClass shadow-0"
+        :filter="filterSearch" v-model:pagination="paginationControl" row-key="index" :loading="tableAjaxLoading"
         color="light-blue">
-        <q-td slot="body-cell-action" slot-scope="props" :props="props">
+        <template v-slot:body-cell-action="props">
+          <q-td :props="props">
           <q-btn @click="removeScannedItems(props.row)" label="Remove" icon="close" color="red-6" size="sm" />
         </q-td>
+        </template>
         <template slot="top">
           <!--START: table filter,search -->
           <div class="col-md-5">
-            <q-search clearable color="grey-9" v-model="filterSearch" placeholder="Type.." float-label="Search .."
+            <q-search clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search .."
               class="q-mr-lg q-py-sm" />
           </div>
           <!--END: table filter,search -->

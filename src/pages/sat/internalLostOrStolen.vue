@@ -702,4 +702,3 @@ import { required, or } from '@vuelidate/validators';
   </script>
   
   <style></style>
-  

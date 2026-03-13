@@ -415,4 +415,3 @@ import { email } from '@vuelidate/validators';
     color: #fff;
   }
   </style>
-  

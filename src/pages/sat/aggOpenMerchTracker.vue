@@ -17,25 +17,33 @@
         <!--START: table open merchant tracker -->
         <q-table
           table-class="customTableClass"
-          :data="tableData"
+          :rows="tableData"
           :columns="columns"
           :filter="filter"
-          :pagination.sync="paginationControl"
+          v-model:pagination="paginationControl"
           row-key="name"
         >
           <!--START: table body modification -->
-          <q-td slot="body-cell-createdAt" slot-scope="props" :props="props">
-            <span class="label">{{props.row.createdAt | moment("Do MMM Y")}}</span>
+          <template v-slot:body-cell-createdAt="props">
+            <q-td :props="props">
+            <span class="label">{{ (props.row.createdAt).format("Do MMM Y") }}</span>
           </q-td>
-          <q-td slot="body-cell-submitteSATDate" slot-scope="props" :props="props">
-            <span class="label">{{props.row.updatedAt | moment("Do MMM Y")}}</span>
+          </template>
+          <template v-slot:body-cell-submitteSATDate="props">
+            <q-td :props="props">
+            <span class="label">{{ (props.row.updatedAt).format("Do MMM Y") }}</span>
           </q-td>
-          <q-td slot="body-cell-applicationNumber" slot-scope="props" :props="props">
+          </template>
+          <template v-slot:body-cell-applicationNumber="props">
+            <q-td :props="props">
             <span class="label capitalize">{{props.row.applicationNumber}}</span>
           </q-td>
-          <q-td slot="body-cell-leadName" slot-scope="props" :props="props">
+          </template>
+          <template v-slot:body-cell-leadName="props">
+            <q-td :props="props">
             <span class="label capitalize">{{props.row.leadName}}</span>
           </q-td>
+          </template>
           <q-td
             slot="body-cell-leadNumber"
             class="cursor-pointer"
@@ -45,17 +53,19 @@
           >
             <span class="label text-primary"># {{props.row.leadNumber}}</span>
           </q-td>
-          <q-td slot="body-cell-createdBy" slot-scope="props" :props="props">
+          <template v-slot:body-cell-createdBy="props">
+            <q-td :props="props">
             <span class="label">{{props.row.assignedTo.name == null? "NA":props.row.assignedTo.name}}</span>
           </q-td>
-          <q-td slot="body-cell-leadAddress" slot-scope="props" :props="props">
+          </template>
+          <template v-slot:body-cell-leadAddress="props">
+            <q-td :props="props">
             <span class="label">{{props.row.leadAddress}}</span>
           </q-td>
-          <q-td
-            slot="body-cell-verifiedStatus"
-            slot-scope="props"
-            :props="props"
-          >{{props.row.verifiedStatus}}</q-td>
+          </template>
+          <template v-slot:body-cell-verifiedStatus="props">
+            <q-td :props="props">{{props.row.verifiedStatus}}</q-td>
+          </template>
 
           <!-- <q-td slot="body-cell-status" slot-scope="props" :props="props">
             <span class="label " :class="{'text-green': props.row.status=='Approved', 'text-red': props.row.status=='Rejected', 'text-orange': props.row.status=='Pending with OPS' }">{{props.row.status}}</span>
@@ -81,7 +91,7 @@
                 separator
                 color="grey-9"
                 placeholder="Type.."
-                float-label="Search by Merchant Name, Lead ID"
+                label="Search by Merchant Name, Lead ID"
                 class="q-mr-lg q-py-sm"
               />
             </div>

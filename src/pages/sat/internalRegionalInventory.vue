@@ -204,4 +204,3 @@
     border: 3px solid rgba(48, 48, 48, 0.5);
   }
   </style>
-  

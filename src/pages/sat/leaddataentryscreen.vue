@@ -118,7 +118,7 @@
                             color="grey-9" label="Owner 1 Last Name*" placeholder="Owner 1 Last Name*" />
                         </div>
                         <div v-if="this.selectedVas == 'AMEX'" class="col-md-6">
-                          <!-- <q-datetime
+                          <!-- <q-input type="date"
                                 format="DD/MM/YYYY"
                                  format-model="number"
                                  color="grey-9"
@@ -129,7 +129,7 @@
                                label="Owner 1 DOB*"
                     placeholder="Owner 1 DOB*"
                   /> -->
-                          <q-datetime v-model.trim="formData.ownerDOB" @blur="$v.formData.ownerDOB.$touch"
+                          <q-input type="date" v-model.trim="formData.ownerDOB" @blur="$v.formData.ownerDOB.$touch"
                             :error="$v.formData.ownerDOB.$error" class="text-weight-regular text-grey-8" color="grey-9"
                             label="Owner 1 DOB*" placeholder="Owner 1 DOB*" />
                         </div>

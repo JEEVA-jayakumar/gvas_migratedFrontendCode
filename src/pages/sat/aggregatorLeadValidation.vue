@@ -17,10 +17,10 @@
       <!--START: table lead validation -->
       <q-table
         table-class="customTableClass"
-        :data="tableData"
+        :rows="tableData"
         :columns="columns"
         :filter="filter"
-        :pagination.sync="paginationControl"
+        v-model:pagination="paginationControl"
         row-key="name"
         :loading="toggleAjaxLoadFilter"
         :rows-per-page-options="[5,10,15,20]"
@@ -43,15 +43,16 @@
           <span class="label text-primary"> {{props.row.leadNumber}}</span>
           
         </q-td>
-        <q-td slot="body-cell-contactName" slot-scope="props" :props="props">
+        <template v-slot:body-cell-contactName="props">
+          <q-td :props="props">
           <span class="label text-primary"> {{props.row.leadInformation.contactName}}</span>
         </q-td>
-        <q-td
-            slot="body-cell-date"
-            slot-scope="props"
-            :props="props"
-          >{{ props.row.date | moment("Do MMM Y") }}</q-td>
-         <q-td slot="body-cell-verifiedFinanceStatus" slot-scope="props" :props="props">
+        </template>
+        <template v-slot:body-cell-date="props">
+          <q-td :props="props">{{ (props.row.date).format("Do MMM Y") }}</q-td>
+        </template>
+         <template v-slot:body-cell-verifiedFinanceStatus="props">
+           <q-td :props="props">
             <span
               class="label text-positive"
               v-if="props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_SUCCESS"
@@ -66,7 +67,9 @@
             >Rejected</span>
             <span class="label" v-else>NA</span>
           </q-td>
-          <q-td slot="body-cell-leadStatus" slot-scope="props" :props="props">
+         </template>
+          <template v-slot:body-cell-leadStatus="props">
+            <q-td :props="props">
             <span
               class="label text-positive"
               v-if="props.row.verifiedFinanceStatus== $LEAD_STATUS_SUBMIT_TO_SAT_LEAD && props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_SUCCESS"
@@ -108,13 +111,18 @@
 
             <span class="label text-negative" v-else>Pending</span>
           </q-td>
-        <q-td slot="body-cell-mid" slot-scope="props" :props="props">
+          </template>
+        <template v-slot:body-cell-mid="props">
+          <q-td :props="props">
           <span class="label text-primary"># {{props.row.mid}}</span>
         </q-td>
+        </template>
        
-        <q-td slot="body-cell-contactNumber" slot-scope="props" :props="props">
+        <template v-slot:body-cell-contactNumber="props">
+          <q-td :props="props">
           <span class="label text-primary"> {{props.row.leadInformation.contactNumber}}</span>
         </q-td>
+        </template>
         <!-- <q-td
           slot="body-cell-leadNumber"
           slot-scope="props"
@@ -125,11 +133,9 @@
         <!-- <q-td slot="body-cell-date" slot-scope="props" :props="props">
           <span class="label text-primary"># {{props.row.date}}</span>
         </q-td> -->
-        <q-td
-          slot="body-cell-leadAddress"
-          slot-scope="props"
-          :props="props"
-        >{{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}</q-td>
+        <template v-slot:body-cell-leadAddress="props">
+          <q-td :props="props">{{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}</q-td>
+        </template>
         
         <!-- <q-td slot="body-cell-action" slot-scope="props" :props="props">
             @click.native="toggleLeadInformation(props.row.leadInformation.leadNumber)"
@@ -152,7 +158,7 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search By Merchant Name, Lead ID.."
+              label="Search By Merchant Name, Lead ID.."
               class="q-mr-lg q-py-sm"
             />
           </div>

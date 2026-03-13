@@ -14,21 +14,25 @@
       />
       <q-table
         table-class="customTableClass"
-        :data="tableData"
+        :rows="tableData"
         :columns="columns"
         :filter="filter"
-        :pagination.sync="paginationControl"
+        v-model:pagination="paginationControl"
         row-key="name"
         :loading="toggleAjaxLoadFilter"
         :rows-per-page-options="[5, 10, 15, 20]"
         @request="ajaxLoadAllLeadInfo"
       >
-        <q-td slot="body-cell-tid" slot-scope="props" :props="props">
+        <template v-slot:body-cell-tid="props">
+          <q-td :props="props">
           <span class="label text-primary"># {{ props.row.tid }}</span>
         </q-td>
-        <q-td slot="body-cell-mid" slot-scope="props" :props="props">
+        </template>
+        <template v-slot:body-cell-mid="props">
+          <q-td :props="props">
           <span class="label text-primary"># {{ props.row.mid }}</span>
         </q-td>
+        </template>
         <q-td
           slot="body-cell-leadNumber"
           slot-scope="props"
@@ -40,16 +44,23 @@
             ># {{ props.row.leadInformation.leadNumber }}</span
           >
         </q-td>
-        <q-td slot="body-cell-mobileNumber" slot-scope="props" :props="props">{{
+        <template v-slot:body-cell-mobileNumber="props">
+          <q-td :props="props">
            props.row.assignedTo == null ? "NA" : props.row.assignedTo.contactNumber
         }}</q-td>
-        <q-td slot="body-cell-leadAddress" slot-scope="props" :props="props">{{
+        </template>
+        <template v-slot:body-cell-leadAddress="props">
+          <q-td :props="props">
           props.row.leadInformation == null ? "NA" : props.row.leadInformation.leadAddress
         }}</q-td>
-        <q-td slot="body-cell-deviceStatusDate" slot-scope="props" :props="props">
-          <span class="label">{{ props.row.deviceStatusDate | moment("Do MMM Y") }}</span>
+        </template>
+        <template v-slot:body-cell-deviceStatusDate="props">
+          <q-td :props="props">
+          <span class="label">{{ (props.row.deviceStatusDate).format("Do MMM Y") }}</span>
         </q-td>
-        <q-td slot="body-cell-viewDocument" slot-scope="props" :props="props">
+        </template>
+        <template v-slot:body-cell-viewDocument="props">
+          <q-td :props="props">
           <div
             v-if="
               props.row.implementationFormMimeType == null ||
@@ -80,7 +91,9 @@
           </div>
           <div v-else>NA Document</div>
         </q-td>
-        <q-td slot="body-cell-pictureOfShop" slot-scope="props" :props="props">
+        </template>
+        <template v-slot:body-cell-pictureOfShop="props">
+          <q-td :props="props">
           <div
             v-if="
               props.row.pictureOfShopMimeType == null ||
@@ -111,7 +124,9 @@
           </div>
           <div v-else>NA Document</div>
         </q-td>
-        <q-td slot="body-cell-cpvForm" slot-scope="props" :props="props">
+        </template>
+        <template v-slot:body-cell-cpvForm="props">
+          <q-td :props="props">
           <div
             v-if="
               props.row.cpvFormMimeType == null ||
@@ -142,11 +157,14 @@
           </div>
           <div v-else>NA Document</div>
         </q-td>
-        <q-td slot="body-cell-status" slot-scope="props" :props="props">
+        </template>
+        <template v-slot:body-cell-status="props">
+          <q-td :props="props">
           <span class="label text-negative" v-if="props.row.deviceStatus == 3"
             >Deactivated</span
           >
         </q-td>
+        </template>
 
         <template slot="top">
           <div class="col-5">
@@ -156,26 +174,26 @@
               separator
               color="grey-9"
               placeholder="Type.."
-              float-label="Search by MID, TID, Merchant Name"
+              label="Search by MID, TID, Merchant Name"
               class="q-mr-lg q-py-sm"
             />
           </div>
           <div class="col-2">
-            <q-datetime
+            <q-input type="date"
               class="q-mr-lg q-py-sm"
               v-model="formData.fromDate"
               :min="yesterday"
               :max="tomorrow"
-              float-label="From Date"
+              label="From Date"
             />
           </div>
           <div class="col-2">
-            <q-datetime
+            <q-input type="date"
               class="q-mr-lg q-py-sm"
               v-model="formData.toDate"
               :min="yesterday"
               :max="tomorrow"
-              float-label="To Date"
+              label="To Date"
             />
           </div>
           <div class="col-2">

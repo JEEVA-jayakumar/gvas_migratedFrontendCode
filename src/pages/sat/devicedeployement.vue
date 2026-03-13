@@ -9,25 +9,25 @@
               <q-input
                 v-model="merchant.paymentDetails.deviceSerialNumber"
                 class="no-margin"
-                float-label="Serial Number"
+                label="Serial Number"
               />
               <!-- @input="planSelected" -->
             </div>
             <div class="col-xs-12 col-sm-6">
-              <q-datetime
+              <q-input type="date"
                 format="DD/MM/YYYY"
                 v-model="merchant.paymentDetails.installationDate"
                 class="no-margin"
-                float-label="Installation Date"
+                label="Installation Date"
               />
               <!-- @input="planSelected" -->
             </div>
             <div class="col-xs-12 col-sm-6">
-              <q-datetime
+              <q-input type="date"
                 format="DD/MM/YYYY"
                 v-model="merchant.paymentDetails.deinstallationDate"
                 class="no-margin"
-                float-label="DeInstallation Date"
+                label="DeInstallation Date"
               />
               <!-- @input="planSelected" -->
             </div>
