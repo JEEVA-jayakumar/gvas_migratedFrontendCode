@@ -378,9 +378,11 @@
                 </q-card-title>
                 <q-card-main>
                   <div>
-                    <q-table dense hide-bottom :data="agingTrackerPendingTableData"
-                      :columns="agingTrackerPendingColumns" :pagination.sync="paginationControl" row-key="name">
-                      <q-td slot="body-cell-name" slot-scope="props" :props="props">{{ props.row.name }}</q-td>
+                    <q-table dense hide-bottom :rows="agingTrackerPendingTableData"
+                      :columns="agingTrackerPendingColumns" v-model:pagination="paginationControl" row-key="name">
+                      <template v-slot:body-cell-name="props">
+                        <q-td :props="props">{{ props.row.name }}</q-td>
+                      </template>
                       <q-td slot="body-cell-greaterThanOneDay" slot-scope="props" :props="props" class="cursor-pointer"
                         @click.native="retrieveLeadsList(props.row.greaterThanOneDayLeadIdList)">{{
                           props.row.greaterThanOneDay

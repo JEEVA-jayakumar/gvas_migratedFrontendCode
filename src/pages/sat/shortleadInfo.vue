@@ -5,11 +5,12 @@
       <q-table
         class="my-sticky-header-table"
         title="Short Lead Information"
-        :data="getShortLead"
+        :rows="getShortLead"
         :columns="columns"
         row-key="name"
       >
-        <q-td slot="body-cell-action" slot-scope="props" :props="props">
+        <template v-slot:body-cell-action="props">
+          <q-td :props="props">
           <div class="row no-wrap no-padding">
             <q-btn
               dense
@@ -26,7 +27,9 @@
             </q-btn>-->
           </div>
         </q-td>
-        <q-td slot="body-cell-update" slot-scope="props" :props="props">
+        </template>
+        <template v-slot:body-cell-update="props">
+          <q-td :props="props">
           <div class="row no-wrap no-padding">
             <q-btn
               dense
@@ -43,6 +46,7 @@
             </q-btn>-->
           </div>
         </q-td>
+        </template>
         <!-- <q-td v-slot:body-cell-status="props" :props="props">
             <span class="label text-negative" v-if="props.row.status == $TRANSACTION_STATUS">Pending</span>
             <span class="label text-positive" v-else-if="props.row.status">Success</span>

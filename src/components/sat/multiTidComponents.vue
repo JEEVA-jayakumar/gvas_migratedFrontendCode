@@ -970,4 +970,3 @@ input[type="file"] {
     display: none;
 }
 </style>
-  

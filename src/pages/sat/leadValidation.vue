@@ -11,12 +11,14 @@
         </div>
         <!--END: table title -->
         <!--START: table lead validation -->
-        <q-table title="Lead Validation" table-class="customTableClass" class="q-py-none" :data="tableData"
-          :columns="columns" row-key="name" :filter="filter" :pagination.sync="paginationControl"
+        <q-table title="Lead Validation" table-class="customTableClass" class="q-py-none" :rows="tableData"
+          :columns="columns" row-key="name" :filter="filter" v-model:pagination="paginationControl"
           :rows-per-page-options="[5,10,15,20]" :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
           <!--START: table body modification -->
-          <q-td slot="body-cell-createdAt" slot-scope="props" :props="props">{{ props.row.date | moment("Do MMM Y")
+          <template v-slot:body-cell-createdAt="props">
+            <q-td :props="props">
             }}</q-td>
+          </template>
 
           <q-td slot="body-cell-leadNumber" slot-scope="props" :props="props" class="cursor-pointer"
             @click.native="toggleLeadInformation(props.row)">
@@ -24,23 +26,32 @@
               {{props.row.leadNumber}}</span>
           </q-td>
 
-          <q-td slot="body-cell-leadName" slot-scope="props" :props="props">
+          <template v-slot:body-cell-leadName="props">
+            <q-td :props="props">
             <span class="capitalize">{{props.row.merchantName}}</span>
           </q-td>
+          </template>
 
-          <q-td slot="body-cell-state" slot-scope="props" :props="props">
+          <template v-slot:body-cell-state="props">
+            <q-td :props="props">
             <span class="capitalize">{{props.row.state}}</span>
           </q-td>
+          </template>
 
-          <q-td slot="body-cell-assignedTo.name" slot-scope="props" :props="props">
+          <template v-slot:body-cell-assignedTo.name="props">
+            <q-td :props="props">
             <span class="capitalize">{{props.row.salesOfficerName+" | "+props.row.salesOfficerEmpId}}</span>
           </q-td>
-          <q-td slot="body-cell-leadSource" slot-scope="props" :props="props">
+          </template>
+          <template v-slot:body-cell-leadSource="props">
+            <q-td :props="props">
             <span :class="{ 'text-red': props.row.leadSource === 'LS_TOHANDS' }">
               {{ props.row.leadSource }}
             </span>
           </q-td>
-          <q-td slot="body-cell-verifiedFinanceStatus" slot-scope="props" :props="props">
+          </template>
+          <template v-slot:body-cell-verifiedFinanceStatus="props">
+            <q-td :props="props">
             <span class="label text-positive"
               v-if="props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_SUCCESS">Approved</span>
             <span class="label text-negative"
@@ -49,8 +60,10 @@
               v-else-if="props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_REJECT">Rejected</span>
             <span class="label" v-else>NA</span>
           </q-td>
+          </template>
 
-          <q-td slot="body-cell-leadStatus" slot-scope="props" :props="props">
+          <template v-slot:body-cell-leadStatus="props">
+            <q-td :props="props">
             <span class="label text-positive"
               v-if="props.row.verifiedFinanceStatus== $LEAD_STATUS_SUBMIT_TO_SAT_LEAD && props.row.verifiedFinanceStatus== $VERIFIED_FINANCE_STATUS_SUCCESS">New</span>
             <span class="label text-negative"
@@ -61,7 +74,9 @@
               ops</span>
             <span class="label text-negative" v-else>Pending</span>
           </q-td>
-          <q-td slot="body-cell-action" slot-scope="props" :props="props">
+          </template>
+          <template v-slot:body-cell-action="props">
+            <q-td :props="props">
             <q-btn v-if="props.row.leadStatus == $LEAD_STATUS_DATA_ENTRY_PENDING" highlight push outline
               color="purple-9" size="sm"
               @click="$router.push('/sat/lead/validation/'+ props.row.leadId+'/data/entry')">Data Entry</q-btn>
@@ -87,16 +102,19 @@
 
             <q-btn v-else class="disabled" highlight push outline color="grey-9" size="sm">Validate</q-btn>
           </q-td>
-          <q-td slot="body-cell-rejectLead" slot-scope="props" :props="props">
+          </template>
+          <template v-slot:body-cell-rejectLead="props">
+            <q-td :props="props">
             <q-btn v-if="props.row.leadStatus == $LEAD_STATUS_SUBMIT_TO_SAT_LEAD  " highlight push outline
               class="q-mx-sm" color="negative" @click="openRejectLead(props.row)" size="sm">Reject Lead</q-btn>
           </q-td>
+          </template>
           <!-- END: table body modification -->
           <template slot="top" slot-scope="props" class="bottom-border">
             <!--START: table filter,search -->
             <div class="col-md-5">
               <q-search clearable color="grey-9" v-model="filter" placeholder="Type.." :debounce="600"
-                class="q-mr-lg q-py-sm" float-label="Search By Merchant Name, Lead ID, Lead Source.." />
+                class="q-mr-lg q-py-sm" label="Search By Merchant Name, Lead ID, Lead Source.." />
             </div>
             <!--END: table filter,search -->
           </template>

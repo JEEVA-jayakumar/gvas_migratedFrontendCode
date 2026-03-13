@@ -748,4 +748,3 @@ const { startOfDate, addToDate, subtractFromDate } = date;
   <style>
   
   </style>
-  

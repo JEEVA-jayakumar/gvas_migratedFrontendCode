@@ -332,4 +332,3 @@ import { not, or } from '@vuelidate/validators';
   }
   </style>
     
-  

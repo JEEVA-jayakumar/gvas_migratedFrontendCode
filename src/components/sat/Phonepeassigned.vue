@@ -875,4 +875,3 @@ export default {
   overflow-x: auto;
 }
 </style>
-  

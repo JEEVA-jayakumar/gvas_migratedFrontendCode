@@ -240,12 +240,12 @@
                   </div>
                   <!--START: table Data -->
                   <q-table
-                    :data="tableData"
+                    :rows="tableData"
                     :columns="columnDataAssigned"
                     table-class="customTableClass"
                     :filter="filterSearch"
                     selection="multiple"
-                    :pagination.sync="paginationControl"
+                    v-model:pagination="paginationControl"
                     :selected.sync="formData.marsDeviceIdsCookedUnAssinged"
                     row-key="id"
                     :loading="tableAjaxLoading"
@@ -260,11 +260,9 @@
                             <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
                         </q-td> -->
                     <!-- <q-td v-if="props.row.leadInformation != null" slot="body-cell-submitToMarsDate"
-                            slot-scope="props" :props="props">{{
-                                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-                            }}</q-td> -->
+                            slot-scope="props" :props="props">{{ (props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td> -->
                     <!-- <q-td v-if="props.row.leadInformation != null" slot="body-cell-createdAt" slot-scope="props"
-                            :props="props">{{ props.row.createdAt | moment("Do MMM Y") }}</q-td>
+                            :props="props">{{ (props.row.createdAt).format("Do MMM Y") }}</q-td>
                         <q-td v-if="props.row.leadInformation != null" slot="body-cell-deviceAddress" slot-scope="props"
                             :props="props" class="customTd customCellLength">
                             <div>{{ props.row.deviceAddress }}</div>
@@ -296,7 +294,7 @@
                           color="grey-9"
                           v-model="filterSearch"
                           placeholder="Type.."
-                          float-label="Search By Merchant Name, TID, MID ..."
+                          label="Search By Merchant Name, TID, MID ..."
                           class="q-mr-lg q-py-sm"
                         />
                       </div>
@@ -307,13 +305,13 @@
                 <q-tab-pane name="unAssigned">
                   <!--START: table Data -->
                   <q-table
-                    :data="tableData1"
+                    :rows="tableData1"
                     :columns="columnDataUnassigned"
                     table-class="customTableClass"
                     :filter="filterSearch1"
                     selection="multiple"
                     :selected.sync="formData.marsDeviceIdsCooked"
-                    :pagination.sync="paginationControl1"
+                    v-model:pagination="paginationControl1"
                     row-key="id"
                     :loading="tableAjaxLoading1"
                     :rows-per-page-options="[5, 10, 15, 20]"
@@ -326,11 +324,9 @@
                             <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
                         </q-td>
                         <q-td v-if="props.row.leadInformation != null" slot="body-cell-submitToMarsDate"
-                            slot-scope="props" :props="props">{{
-                                props.row.leadInformation.submitToMarsDate | moment("Do MMM Y")
-                            }}</q-td>
+                            slot-scope="props" :props="props">{{ (props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td>
                         <q-td v-if="props.row.leadInformation != null" slot="body-cell-createdAt" slot-scope="props"
-                            :props="props">{{ props.row.createdAt | moment("Do MMM Y") }}</q-td> -->
+                            :props="props">{{ (props.row.createdAt).format("Do MMM Y") }}</q-td> -->
                     <q-td
                       slot="body-cell-tid"
                       slot-scope="props"
@@ -364,7 +360,7 @@
                           color="grey-9"
                           v-model="filterSearch1"
                           placeholder="Type.."
-                          float-label="Search By Merchant Name, TID, MID ..."
+                          label="Search By Merchant Name, TID, MID ..."
                           class="q-mr-lg q-py-sm"
                         />
                       </div>

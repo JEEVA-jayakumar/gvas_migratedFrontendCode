@@ -146,7 +146,7 @@
 
       <q-tab-panels v-model="selectedTab" animated @update:model-value="goToUnassignedTab">
         <q-tab-panel name="unAssigned" class="q-pa-none">
-          <!--START: table Data    :data="tableData1" -->
+          <!--START: table Data    :rows="tableData1" -->
           <q-table
             :rows="tableData1"
             :columns="columnDataUnassigned"
@@ -231,7 +231,7 @@
         </q-tab-panel>
 
         <q-tab-panel name="assigned" class="q-pa-none">
-          <!--START: table Data    :data="tableData" -->
+          <!--START: table Data    :rows="tableData" -->
           <q-table
             :rows="tableData"
             :columns="columnDataAssigned"

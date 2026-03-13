@@ -100,7 +100,7 @@
                             <!--START: table filter,search
             @click="fnShowAddNewServiceType(props.row)" -->
                             <div class="col-3">
-                                <q-search clearable color="grey-9" v-model="filterSearch" float-label="Search By POD Number" placeholder="Type.."
+                                <q-search clearable color="grey-9" v-model="filterSearch" label="Search By POD Number" placeholder="Type.."
                                     class="q-mr-lg" />
                             </div>
                             <!--END: table filter,search -->
@@ -108,8 +108,8 @@
                     </q-table>
                 </q-tab-pane>
                 <q-tab-pane name="stocks">
-                    <q-table :data="tableData1" table-class="customSATableClass" :columns="columns1"
-                        :filter="filterSearch1" :pagination.sync="paginationControl1"
+                    <q-table :rows="tableData1" table-class="customSATableClass" :columns="columns1"
+                        :filter="filterSearch1" v-model:pagination="paginationControl1"
                         :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
                         @request="ajaxLoadAllLeadInfo1">
                         <q-td v-slot:body-cell-createdAt="props" :props="props">{{
@@ -157,7 +157,7 @@
                             <!--END: table title -->
                             <!--START: table filter,search -->
                             <div class="col-3">
-                                <q-search clearable color="grey-9" v-model="filterSearch1" float-label="Search By POD Number" placeholder="Type.."
+                                <q-search clearable color="grey-9" v-model="filterSearch1" label="Search By POD Number" placeholder="Type.."
                                     class="q-mr-lg" />
                             </div>
                             <!-- <div class="col-3" align="right">
@@ -186,8 +186,8 @@
                 </q-tab-pane>
                 <q-tab-pane name="allocatedSo">
 
-                    <q-table :data="tableData2" table-class="customSATableClass" :columns="columns2" :filter="filterSearch2"
-                        :pagination.sync="paginationControl2" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
+                    <q-table :rows="tableData2" table-class="customSATableClass" :columns="columns2" :filter="filterSearch2"
+                        v-model:pagination="paginationControl2" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
                         @request="ajaxLoadAllLeadInfo2">
             <q-td v-slot:body-cell-createdAt="props" :props="props">{{
                 props.row.created_date == null
@@ -235,7 +235,7 @@
                         <div class="col-sm-3">
                             <div class="row">
                                 <q-select filter clearable v-model="formData.allocate_so" @blur="$v.formData.allocate_so.$touch"
-                                    :error="$v.formData.allocate_so.$error" float-label="Select SO" class="col-md-3"
+                                    :error="$v.formData.allocate_so.$error" label="Select SO" class="col-md-3"
                                     radio color="grey-9" :options="regionBasedSo" @request="regionBasedSoLoad" />
                             </div>
                             <div class="col-md-7">
@@ -259,14 +259,14 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-5">
-                                    <q-input disable v-model="formData.pod_number" float-label="Pod Number" radio
+                                    <q-input disable v-model="formData.pod_number" label="Pod Number" radio
                                         color="grey-9" />
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-5">
-                                    <q-input disable v-model="formData.total_count" float-label="Total Count" radio
+                                    <q-input disable v-model="formData.total_count" label="Total Count" radio
                                         color="grey-9" />
                                 </div>
                             </div>
