@@ -153,7 +153,7 @@ export default {
 .border-radius-10 {
   border-radius: 8px !important;
 }
-.q-item-main.q-item-section.shadow-1.q-pa-md {
+.q-item-section.q-item-section.shadow-1.q-pa-md {
   min-height: 80px;
 }
 </style>

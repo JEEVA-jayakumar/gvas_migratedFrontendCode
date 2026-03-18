@@ -431,7 +431,9 @@
         :loading="toggleAjaxLoadFilter"
         row-key="name"
       >
-        <q-td v-slot:body-cell-action="props" :props="props" v-if="info==6">
+        <template v-slot:body-cell-action="props">
+            <q-td :props="props" v-if="info==6">
+
           <div class="row no-wrap no-padding">
             <q-btn
               dense
@@ -456,7 +458,9 @@
               class="text-negative"
             ></q-btn>
           </div>
-        </q-td>
+
+          </q-td>
+          </template>
         <template v-slot:top="props" class="bottom-border">
           <!--START: table filter,search -->
           <div class="col-md-6">

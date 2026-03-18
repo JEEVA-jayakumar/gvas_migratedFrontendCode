@@ -25,13 +25,16 @@
           :loading="toggleAjaxLoadFilter"
           @request="ajaxLoadAllLeadInfo"
         >
-          <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.date).format("Do MMM Y") }}</q-td>
-          <q-td
-            v-slot:body-cell-leadNumber="props"
-            :props="props"
+          <template v-slot:body-cell-createdAt="props">
+            <q-td :props="props">
+            {{ $moment(props.row.date).format("Do MMM Y") }}
+          </q-td>
+          </template>
+          <template v-slot:body-cell-leadNumber="props">
+            <q-td :props="props"
             class="cursor-pointer"
-            @click="toggleLeadInformation(props.row)"
-          >
+            @click="toggleLeadInformation(props.row)">
+
             <span
               class="label"
               :class="[
@@ -41,21 +44,34 @@
               ]"
               ># {{ props.row.leadNumber }}</span
             >
-          </q-td>
-          <q-td v-slot:body-cell-leadName="props" :props="props">
-            <span class="capitalize">{{ props.row.marketingName }}</span>
-          </q-td>
-          <q-td v-slot:body-cell-state="props" :props="props">
-            <span class="capitalize">{{ props.row.state }}</span>
-          </q-td>
 
-          <q-td
-            v-slot:body-cell-assignedTo.name="props"
-            :props="props"
-          >
-            <span class="capitalize">{{ props.row.salesOfficerName }}</span>
           </q-td>
-          <!-- <q-td v-slot:body-cell-leadStatus="props" :props="props">
+          </template>
+          <template v-slot:body-cell-leadName="props">
+            <q-td :props="props">
+
+            <span class="capitalize">{{ props.row.marketingName }}</span>
+
+          </q-td>
+          </template>
+          <template v-slot:body-cell-state="props">
+            <q-td :props="props">
+
+            <span class="capitalize">{{ props.row.state }}</span>
+
+          </q-td>
+          </template>
+
+          <template v-slot:body-cell-assignedTo.name="props">
+            <q-td :props="props">
+
+            <span class="capitalize">{{ props.row.salesOfficerName }}</span>
+
+          </q-td>
+          </template>
+          <!-- <template v-slot:body-cell-leadStatus="props">
+            <q-td :props="props">
+
             <span class="label text-primary" v-if="props.row.leadStatus == 1"
               >Pending With Bank Details</span
             >
@@ -113,8 +129,12 @@
             Waiting For Response File</span
             >
             <span class="label text-negative" v-else>Pending</span>
-          </q-td> -->
-          <q-td v-slot:body-cell-leadStatus="props" :props="props">
+
+          </q-td>
+          </template> -->
+          <template v-slot:body-cell-leadStatus="props">
+            <q-td :props="props">
+
             <span class="label text-primary" v-if="props.row.leadStatus == 1"
               >Pending With Bank Details</span
             >
@@ -203,8 +223,12 @@
             Mars Re-Upload</span
             >
             <span class="label text-negative" v-else>Pending</span>
+
           </q-td>
-          <q-td v-slot:body-cell-action="props" :props="props">
+          </template>
+          <template v-slot:body-cell-action="props">
+            <q-td :props="props">
+
             <q-btn
               class="btn1"
               v-if="(props.row.leadStatus == 4 && props.row.referbackStatus == false)"
@@ -267,12 +291,13 @@
               size="sm"
               >Reffer Back</q-btn
             >
-          </q-td>
 
-          <q-td
-            v-slot:body-cell-verifiedFinanceStatus="props"
-            :props="props"
-          >
+          </q-td>
+          </template>
+
+          <template v-slot:body-cell-verifiedFinanceStatus="props">
+            <q-td :props="props">
+
             <span
               class="label text-green"
               v-if="props.row.verifiedFinanceStatus == 1"
@@ -289,7 +314,9 @@
               >Rejected</span
             >
             <span class="label text-negative" v-else>Pending</span>
+
           </q-td>
+          </template>
           <template v-slot:top="props" class="bottom-border , row">
             <div class="col-md-4">
               <q-input

@@ -158,7 +158,7 @@
                 </q-td>
               </q-tr>
             </template>
-            <template slot="top">
+            <template v-slot:top>
               <div class="col-md-5">
                 <q-input
                   clearable
@@ -300,7 +300,7 @@
                 <q-td v-else :props="props">NA</q-td>
             </template>
            
-            <template slot="top">
+            <template v-slot:top>
               <div class="col-md-5">
                 <q-input
                   clearable

@@ -44,15 +44,16 @@
             <span class="label capitalize">{{props.row.leadName}}</span>
           </q-td>
           </template>
-          <q-td
-            slot="body-cell-leadNumber"
-            class="cursor-pointer"
-            @click.native="toggleLeadInformation(props.row)"
-            slot-scope="props"
-            :props="props"
-          >
+          <template v-slot:body-cell-leadNumber="props">
+            <q-td class="cursor-pointer"
+            @click="toggleLeadInformation(props.row)"
+
+            :props="props">
+
             <span class="label text-primary"># {{props.row.leadNumber}}</span>
+
           </q-td>
+          </template>
           <template v-slot:body-cell-createdBy="props">
             <q-td :props="props">
             <span class="label">{{props.row.assignedTo.name == null? "NA":props.row.assignedTo.name}}</span>
@@ -67,11 +68,15 @@
             <q-td :props="props">{{props.row.verifiedStatus}}</q-td>
           </template>
 
-          <!-- <q-td slot="body-cell-status" slot-scope="props" :props="props">
+          <!-- <template v-slot:body-cell-status="props">
+            <q-td :props="props">
+
             <span class="label " :class="{'text-green': props.row.status=='Approved', 'text-red': props.row.status=='Rejected', 'text-orange': props.row.status=='Pending with OPS' }">{{props.row.status}}</span>
-          </q-td>-->
+
+          </q-td>
+          </template>-->
           <!--END: table body modification -->
-          <template slot="top" slot-scope="props">
+          <template v-slot:top="props">
             <!--START: table fullscreen mode -->
             <!-- <div class="col-md-4" align="right">
             <q-btn
@@ -85,15 +90,17 @@
             <!--END: table fullscreen mode -->
             <!--START: table filter,search,excel download -->
             <div class="col-5">
-              <q-search
-                clearable
+              <q-input dense clearable
                 v-model="filter"
                 separator
                 color="grey-9"
                 placeholder="Type.."
                 label="Search by Merchant Name, Lead ID"
-                class="q-mr-lg q-py-sm"
-              />
+                class="q-mr-lg q-py-sm">
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
             </div>
             <!-- <div class="col-3">
               <q-input filled v-model="model" label="Filter By" color="grey-9">

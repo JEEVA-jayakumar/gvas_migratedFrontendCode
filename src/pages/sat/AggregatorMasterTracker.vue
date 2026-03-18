@@ -31,15 +31,15 @@
             <span class="label text-primary"># {{props.row.mid}}</span>
           </q-td>
           </template>
-          <q-td
-            slot="body-cell-leadNumber"
-            slot-scope="props"
-            :props="props"
+          <template v-slot:body-cell-leadNumber="props">
+            <q-td :props="props"
             class="cursor-pointer"
-            @click.native="toggleLeadInformation(props.row.leadInformation)"
-          >
+            @click="toggleLeadInformation(props.row.leadInformation)">
+
             <span class="label text-primary"># {{props.row.leadInformation.leadNumber}}</span>
+
           </q-td>
+          </template>
           <template v-slot:body-cell-mobileNumber="props">
             <q-td :props="props">{{props.row.leadInformation == null? 'NA':props.row.leadInformation.contactNumber}}</q-td>
           </template>
@@ -51,17 +51,19 @@
             <span class="label">{{ (props.row.deviceStatusDate).format("Do MMM Y") }}</span>
           </q-td>
           </template>
-          <template slot="top" >
+          <template v-slot:top >
             <div class="col-5">
-              <q-search
-                clearable
+              <q-input dense clearable
                 v-model="filter"
                 separator
                 color="grey-9"
                 placeholder="Type.."
                 label="Search by MID, TID, Merchant Name"
-                class="q-mr-lg q-py-sm"
-              />
+                class="q-mr-lg q-py-sm">
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
             </div>
             <div class="col-md-6">
              

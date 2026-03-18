@@ -87,38 +87,35 @@
                 />
               </div>
               <div class="col-md-6">
-                <q-input
+                <q-select
+                  use-input
+                  fill-input
+                  hide-selected
                   color="grey-9"
                   @blur="$v.formdata.lorState.$touch;"
                   :error="$v.formdata.lorState.$error"
-                  v-model.trim="formdata.lorState"
+                  v-model="formdata.lorState"
                   label="IOR_STATE(type min 3 characters)*"
                   placeholder="Start typing ..*"
-                >
-                  <q-autocomplete
-                    separator
-                    @search="searchIorState"
-                    :debounce="10"
-                    :min-characters="3"
-                  />
-                </q-input>
+                  :options="iorStateOptions"
+                  @filter="searchIorState"
+                />
               </div>
               <div class="col-md-6">
-                <q-input
+                <q-select
+                  use-input
+                  fill-input
+                  hide-selected
                   color="grey-9"
                   @blur="$v.formdata.pin.$touch;"
                   :error="$v.formdata.pin.$error"
-                  v-model.trim="formdata.pin"
+                  v-model="formdata.pin"
                   label="Pincode"
                   placeholder="Start typing ..*"
                   @update:model-value="pincodeBasedDistrict"
-                >
-                  <q-autocomplete
-                    separator
-                    @search="searchAxisBankPincode"
-                    :min-characters="3"
-                  />
-                </q-input>
+                  :options="axisBankPincodeOptions"
+                  @filter="searchAxisBankPincode"
+                />
               </div>
 
               <div class="col-md-6">
@@ -260,6 +257,8 @@ export default {
         city: "",
         pin: "",
       },
+      iorStateOptions: [],
+      axisBankPincodeOptions: [],
       iaSalutationOptions: [
         {
           label: "MR",
@@ -477,16 +476,30 @@ export default {
     fetchInstutionCode() {
       this.INSTITUTIONCODE_FROM_FROM_MARS();
     },
-    searchIorState(request, done) {
-      this.FETCH_IOR_STATE(request);
-      done(this.getiorState);
+    searchIorState(request, update, abort) {
+      if (request.length < 3) {
+        abort();
+        return;
+      }
+      this.FETCH_IOR_STATE(request).then(() => {
+        update(() => {
+          this.iorStateOptions = this.getiorState;
+        });
+      });
     },
     citybasedlocation() {
       this.FETCH_AXIS_BANK_CITY_LOCATION(this.formdata.city);
     },
-    searchAxisBankPincode(request, done) {
-      this.FETCH_AXIS_BANK_PINCODE_LOCATION(request);
-      done(this.getAxisBankPincode);
+    searchAxisBankPincode(request, update, abort) {
+      if (request.length < 3) {
+        abort();
+        return;
+      }
+      this.FETCH_AXIS_BANK_PINCODE_LOCATION(request).then(() => {
+        update(() => {
+          this.axisBankPincodeOptions = this.getAxisBankPincode;
+        });
+      });
     },
     pincodeandDistrictBasedCity() {
       this.FETCH_AXIS_BANK_PINCODE_DISTRICT(

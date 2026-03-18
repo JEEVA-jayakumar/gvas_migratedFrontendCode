@@ -77,7 +77,9 @@
         :loading="toggleAjaxLoadFilter"
         row-key="name"
       >
-        <q-td v-slot:body-cell-inboundVerified="props" :props="props">
+        <template v-slot:body-cell-inboundVerified="props">
+            <q-td :props="props">
+
           <q-btn flat v-if="props.row.inboundVerifiedStatus == 1" icon="check" color="positive" />
           <q-btn
             flat
@@ -86,7 +88,9 @@
             color="negative"
           />
           <q-btn flat color="amber-9" v-else icon="warning" />
-        </q-td>
+
+          </q-td>
+          </template>
         <template v-slot:top="props" class="bottom-border">
           <!--START: table filter,search -->
           <div class="col-md-12">

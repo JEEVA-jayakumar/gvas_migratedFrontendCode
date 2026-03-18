@@ -39,7 +39,7 @@
             <!-- Device -->
             <div class="col-12">
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
-                <q-card-title class="q-pa-sm bottom-border title-bg">
+                <q-card-section class="q-pa-sm bottom-border title-bg">
                   <div class="row items-center">
                     <div class="col q-body-1 text-weight-medium">
                       Device -
@@ -47,36 +47,36 @@
                       {{formData.shortLead.device.deviceName}}
                     </div>
                   </div>
-                </q-card-title>
-                <q-card-main class="q-pa-sm">
+                </q-card-section>
+                <q-card-section class="q-pa-sm">
                   <q-list separator no-border class="no-padding q-body-1">
                     <q-item class="q-pa-sm q-body-1">
-                      <q-item-main>Plan</q-item-main>
-                      <q-item-side>{{formData.shortLead.plan.planName}}</q-item-side>
+                      <q-item-section>Plan</q-item-section>
+                      <q-item-section>{{formData.shortLead.plan.planName}}</q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
-                      <q-item-main>Setup Fees</q-item-main>
-                      <q-item-side v-if="this.getShortLeadInfo.leadSource.id === 114">Rs. {{formData.shortLead.setUpFeeAppliedAmount}}</q-item-side>
-                      <q-item-side v-else>Rs. {{formData.shortLead.setupFees}}</q-item-side>
+                      <q-item-section>Setup Fees</q-item-section>
+                      <q-item-section v-if="this.getShortLeadInfo.leadSource.id === 114">Rs. {{formData.shortLead.setUpFeeAppliedAmount}}</q-item-section>
+                      <q-item-section v-else>Rs. {{formData.shortLead.setupFees}}</q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
-                      <q-item-main>Recurring Fees</q-item-main>
-                      <q-item-side v-if="this.getShortLeadInfo.leadSource.id === 114">Rs. {{formData.shortLead.recurringFeeAppliedAmount}}</q-item-side>
-                      <q-item-side v-else>Rs. {{formData.shortLead.recurringFees}}</q-item-side>
+                      <q-item-section>Recurring Fees</q-item-section>
+                      <q-item-section v-if="this.getShortLeadInfo.leadSource.id === 114">Rs. {{formData.shortLead.recurringFeeAppliedAmount}}</q-item-section>
+                      <q-item-section v-else>Rs. {{formData.shortLead.recurringFees}}</q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
-                      <q-item-main>Merchant Category</q-item-main>
-                      <q-item-side>{{formData.shortLead.merchantCategory.merchantCategoryName}}</q-item-side>
+                      <q-item-section>Merchant Category</q-item-section>
+                      <q-item-section>{{formData.shortLead.merchantCategory.merchantCategoryName}}</q-item-section>
                     </q-item>
                   </q-list>
-                </q-card-main>
+                </q-card-section>
               </q-card>
             </div>
 
             <!-- Payment -->
             <div class="col-12">
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
-                <q-card-title class="q-pa-sm bottom-border title-bg">
+                <q-card-section class="q-pa-sm bottom-border title-bg">
                   <div class="row items-center">
                     <div class="col-auto q-body-1 text-weight-medium">
                       Payment -
@@ -94,12 +94,12 @@
                       <span class="capitalize"></span> (Default)
                     </div>
                   </div>
-                </q-card-title>
-                <q-card-main class="q-pa-sm">
+                </q-card-section>
+                <q-card-section class="q-pa-sm">
                   <q-list no-border separator class="no-padding">
                     <q-item class="q-pa-sm">
-                      <q-item-main class="q-body-1">Mode of payment</q-item-main>
-                      <q-item-side class="q-body-1">
+                      <q-item-section class="q-body-1">Mode of payment</q-item-section>
+                      <q-item-section class="q-body-1">
                         <span
                           class="q-body-1"
                           v-if="formData.shortLead.paymentOption == 1"
@@ -116,13 +116,13 @@
                           class="q-body-1"
                           v-else-if="formData.shortLead.paymentOption == 4"
                         >UPI Link</span>
-                      </q-item-side>
+                      </q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm">
-                      <q-item-main class="q-body-1">Reference No</q-item-main>
-                      <q-item-side
+                      <q-item-section class="q-body-1">Reference No</q-item-section>
+                      <q-item-section
                         class="q-body-1"
-                      >{{formData.shortLead.referenceNumber == ''? 'NA':formData.shortLead.referenceNumber}}</q-item-side>
+                      >{{formData.shortLead.referenceNumber == ''? 'NA':formData.shortLead.referenceNumber}}</q-item-section>
                     </q-item>
                     <q-item v-if="formData.shortLead.paymentOption == 2">
                       <div
@@ -172,18 +172,18 @@
             <!-- MDR -->
             <div class="col-12">
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
-                <q-card-title class="q-pa-sm bottom-border title-bg">
+                <q-card-section class="q-pa-sm bottom-border title-bg">
                   <span class="q-body-1 text-weight-medium">MDR</span>
                   <span class="q-body-1 text-positive float-right" v-if="getShortLeadInfo.pricing">
                     Approved by
                     <span class="capitalize">{{fnGetVerifiedRSMPerson().createdBy.name}}</span>
                     ({{fnGetVerifiedRSMPerson().role.role}})
                   </span>
-                </q-card-title>
-                <q-card-main>
+                </q-card-section>
+                <q-card-section>
                   <q-list no-border class="no-padding">
                     <q-item class="q-pa-sm">
-                      <q-item-main>
+                      <q-item-section>
                         <q-input
                           color="grey-9"
                           label="Debit <= 2000 (%)"
@@ -191,8 +191,8 @@
                           class="no-pointer-events"
                           v-model="debitModelLesserThan"
                         />
-                      </q-item-main>
-                      <q-item-main>
+                      </q-item-section>
+                      <q-item-section>
                         <q-input
                           color="grey-9"
                           label="Debit > 2000 (%)"
@@ -200,10 +200,10 @@
                           class="no-pointer-events"
                           v-model="debitModelGreaterThan"
                         />
-                      </q-item-main>
+                      </q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm">
-                      <q-item-main>
+                      <q-item-section>
                         <q-input
                           color="grey-9"
                           label="Std CC (%)"
@@ -211,8 +211,8 @@
                           class="no-pointer-events"
                           v-model="debitModelStdCC"
                         />
-                      </q-item-main>
-                      <q-item-main>
+                      </q-item-section>
+                      <q-item-section>
                         <q-input
                           color="grey-9"
                           label="Premium CC (%)"
@@ -220,10 +220,10 @@
                           class="no-pointer-events"
                           v-model="debitModelPremiumCC"
                         />
-                      </q-item-main>
+                      </q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm">
-                      <q-item-main>
+                      <q-item-section>
                         <q-input
                           color="grey-9"
                           label="Corp Pre CC (%)"
@@ -231,8 +231,8 @@
                           class="no-pointer-events"
                           v-model="debitModelCorpCC"
                         />
-                      </q-item-main>
-                      <q-item-main>
+                      </q-item-section>
+                      <q-item-section>
                         <q-input
                           color="grey-9"
                           label="Intl Pre CC (%)"
@@ -240,10 +240,10 @@
                           class="no-pointer-events"
                           v-model="debitModelIntlCC"
                         />
-                      </q-item-main>
+                      </q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm">
-                      <q-item-main>
+                      <q-item-section>
                         <q-input
                           color="grey-9"
                           label="Super Pre CC (%)"
@@ -251,8 +251,8 @@
                           class="no-pointer-events"
                           v-model="debitModelSuperPremiumCC"
                         />
-                      </q-item-main>
-                      <q-item-main>
+                      </q-item-section>
+                      <q-item-section>
                         <q-input
                           color="grey-9"
                           label="Upi Debit Card UpTo 2000 (%)"
@@ -260,10 +260,10 @@
                           class="no-pointer-events"
                           v-model="upiDebitCardUpTo2000"
                         />
-                      </q-item-main>
+                      </q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm">
-                       <q-item-main>
+                       <q-item-section>
                         <q-input
                           color="grey-9"
                           label="Upi Debit Card Above 2000 (%)"
@@ -271,8 +271,8 @@
                           class="no-pointer-events"
                           v-model="upiDebitCardAbove2000"
                         />
-                      </q-item-main>
-                      <q-item-main>
+                      </q-item-section>
+                      <q-item-section>
                         <q-input
                           color="grey-9"
                           label="Upi Prepaid Credit Cards UpTo 2000 (%)"
@@ -280,10 +280,10 @@
                           class="no-pointer-events"
                           v-model="upiPrepaidCreditCardsUpTo2000"
                         />
-                      </q-item-main>
+                      </q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm">
-                       <q-item-main>
+                       <q-item-section>
                         <q-input
                           color="grey-9"
                           label="Upi Prepaid Credit Cards Above 2000 (%)"
@@ -291,7 +291,7 @@
                           class="no-pointer-events"
                           v-model="upiPrepaidCreditCardsAbove2000"
                         />
-                      </q-item-main>
+                      </q-item-section>
                     </q-item>
                     <q-item class="items-start q-pa-sm" v-if="formData.shortLead.posEnable">
                       <q-checkbox

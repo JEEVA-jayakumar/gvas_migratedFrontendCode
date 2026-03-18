@@ -54,12 +54,6 @@ global.jQuery = require("jquery");
 var $ = global.jQuery;
 window.$ = $;
 
-import { easing } from "quasar";
-import { LocalStorage } from "quasar";
-global.jQuery = require("jquery");
-var $ = global.jQuery;
-window.$ = $;
-
 import {
   required,
   requiredIf,
@@ -72,15 +66,14 @@ import {
   maxValue,
   minValue,
   decimal
-} from "vuelidate/lib/validators";
+} from "@vuelidate/validators";
 import moment from "moment";
 import { mapGetters, mapActions } from "vuex";
-import { uid, filter } from "quasar";
-import Vue from "vue";
+import { uid } from "quasar";
 import MarsErrorResponse from "../../components/MarsErrorResponseHandler.vue";
 import showPdfModalComponent from "../../components/sat/showPdfModalComponent.vue";
 
-import { helpers } from "vuelidate/lib/validators";
+import { helpers } from "@vuelidate/validators";
 
 const gstn = helpers.regex(
   "gstn",
@@ -94,6 +87,7 @@ export default {
   },
   data() {
     return {
+      step: "campaign",
       PDFDetails: null,
       toggleshowPDFModal: false,
       formData: {
@@ -113,9 +107,6 @@ export default {
       },
       info: {
         datainfo1: ""
-      },
-      merchant: {
-        datainfo: ""
       },
       formdata: {
         paymentOption: "",
@@ -194,6 +185,7 @@ export default {
         paymentDocumentMimeType: ""
       },
       merchant: {
+        datainfo: "",
         salesInformation: {
           institutionCode: ""
         },
@@ -436,7 +428,8 @@ export default {
   computed: {
     ...mapGetters("SatLeadValidation", [
       "getShortLeadInfo",
-      "getDeviceVerificationStatus"
+      "getDeviceVerificationStatus",
+      "getShortLeadInfoDocumentTypes"
     ]),
     ...mapGetters("GlobalVariables", ["GLOBAL_FILE_FETCH_URL"]),
     ...mapGetters("SA_Devices", ["getAllDevicesInfo"]),
@@ -444,11 +437,6 @@ export default {
     ...mapGetters("plan", ["getActivePlan"]),
     ...mapGetters("CategoryBasedMdr", ["categoryBasedMdr"]),
     ...mapGetters("GetMarsData", ["getAllMarsData", "getImplementedQueue"]),
-    ...mapGetters("SatLeadValidation", [
-      "getShortLeadInfo",
-      "getDeviceVerificationStatus",
-      "getShortLeadInfoDocumentTypes"
-    ]),
     ...mapGetters("mars_city", ["cityFromMars"]),
     ...mapGetters("mars_state", ["stateFromMars"]),
     ...mapGetters("mars_ifsc", ["ifscFromMars"])
@@ -491,7 +479,13 @@ export default {
   methods: {
     ...mapActions("SatLeadValidation", [
       "FETCH_SHORT_LEAD_DATA",
-      "VERIFY_DEVICE_FULL_LEAD"
+      "VERIFY_DEVICE_FULL_LEAD",
+      "FEED_HAND_OVER_TO_SAT_DOCUMENT",
+      "FEED_CHEQUE_FORM",
+      "FEED_FULL_APPLICATION_FORM",
+      "DELETE_DOCUMENT_FROM_BY_SAT",
+      "FETCH_LEAD_DOCUMENT_TYPE_DATA",
+      "MOVE_BACK_DOCUMENT_VERIFICATION_STAGE"
     ]),
     ...mapActions("mars_city", ["CITY_FROM_MARS"]),
     ...mapActions("mars_state", ["STATE_FROM_MARS"]),
@@ -503,17 +497,6 @@ export default {
     ...mapActions("CategoryBasedMdr", [
       "CATEGORY_BASED_MDR_PLAN",
       "EDIT_MDR_PLAN"
-    ]),
-    ...mapActions("SatLeadValidation", [
-      "FEED_HAND_OVER_TO_SAT_DOCUMENT",
-      "FEED_CHEQUE_FORM",
-      "FEED_FULL_APPLICATION_FORM",
-      "DELETE_DOCUMENT_FROM_BY_SAT",
-      "FETCH_LEAD_DOCUMENT_TYPE_DATA",
-      "FETCH_SHORT_LEAD_DATA"
-    ]),
-    ...mapActions("SatLeadValidation", [
-      "MOVE_BACK_DOCUMENT_VERIFICATION_STAGE"
     ]),
     ...mapActions("SendTORSMCMS", ["SEND_TO_RSM_CMS"]),
     ...mapActions("plan", ["PLAN_ACTIVE_LIST"]),
@@ -587,7 +570,6 @@ export default {
         this.$q.notify({
           color: "amber",
           position: "bottom",
-          message: "data",
           icon: "attachment",
           message: "Please attach the Cheque File"
         });
@@ -656,7 +638,6 @@ export default {
             this.$q.notify({
               color: "positive",
               position: "bottom",
-              message: "data",
               icon: "thumb_up",
               message: response.data.message
             });
@@ -747,7 +728,6 @@ export default {
           this.$q.notify({
             color: "positive",
             position: "bottom",
-            message: "data",
             icon: "thumb_up",
             message: response.data.message
           });
@@ -907,7 +887,6 @@ export default {
           this.$q.notify({
             color: "positive",
             position: "bottom",
-            message: "data",
             icon: "thumb_up",
             message: response.data.message
           });
@@ -926,7 +905,6 @@ export default {
           this.$q.notify({
             color: "positive",
             position: "bottom",
-            message: "data",
             icon: "thumb_up",
             message: response.data.message
           });
@@ -944,242 +922,237 @@ export default {
         "final submit to mars",
         requestparams.params.merchant.salesInformation.institutionCode
       );
-    }
-  },
-  finalFormSubmit(request) {
-    let key = this.merchant.salesInformation.institutionCode;
-    this.$q.localStorage.set("a_t", key);
-    let requestparams = {
-      url: {
-        id: this.getAllMarsData.merchantRefCode
-        //  code:this.getAllMarsData.salesInformation.institutionCode
-      },
+    },
+    finalFormSubmit(request) {
+      let key = this.merchant.salesInformation.institutionCode;
+      this.$q.localStorage.set("a_t", key);
+      let requestparams = {
+        url: {
+          id: this.getAllMarsData.merchantRefCode
+          //  code:this.getAllMarsData.salesInformation.institutionCode
+        },
 
-      params: {
-        merchant: {
-          companyInformation: {
-            applicationNumber: this.getAllMarsData.salesInformation
-              .applicationNumber
-          },
-          mdrPlan: request.mdrPlan
+        params: {
+          merchant: {
+            companyInformation: {
+              applicationNumber: this.getAllMarsData.salesInformation
+                .applicationNumber
+            },
+            mdrPlan: request.mdrPlan
+          }
         }
-      }
-    };
+      };
 
-    this.CMS_EDIT_MDR(requestparams)
+      this.CMS_EDIT_MDR(requestparams)
 
-      .then(response => {
-        this.$q.notify({
-          color: "positive",
-          position: "bottom",
-          message: "data",
-          icon: "thumb_up",
-          message: response.data.message
-        });
-
-        // var self = this;
-        // Object.keys(this.formData).forEach(function(key, index) {
-        //   self.formData[key] = "";
-        // });
-      })
-      .catch(error => {
-        console.log(error);
-        this.$q.notify({
-          color: "negative",
-          position: "bottom",
-          icon: "thumb_down",
-          message: error.data.message
-        });
-        // var self = this;
-        // Object.keys(this.formData).forEach(function(key, index) {
-        //   self.formData[key] = "";
-        // });
-      });
-    console.log("final submit to mars", requestparams.url);
-  },
-  finalFormSubmitKyc(request) {
-    let key = this.merchant.salesInformation.institutionCode;
-    this.$q.localStorage.set("a_t", key);
-    let requestparams = {
-      url: {
-        id: this.getAllMarsData.merchantRefCode
-        //  code:this.getAllMarsData.salesInformation.institutionCode
-      },
-
-      params: {
-        merchant: {
-          companyInformation: {
-            applicationNumber: this.getAllMarsData.salesInformation
-              .applicationNumber
-          },
-
-          kyc: request.kyc
-        }
-      }
-    };
-
-    // this.ajaxLoadLeadDataEntryInfo();
-    this.CMS_EDIT_KYC(requestparams)
-
-      .then(response => {
-        this.$q.notify({
-          color: "positive",
-          position: "bottom",
-          message: "data",
-          icon: "thumb_up",
-          message: response.data.message
-        });
-
-        // var self = this;
-        // Object.keys(this.formData).forEach(function(key, index) {
-        //   self.formData[key] = "";
-        // });
-      })
-      .catch(error => {
-        console.log(error);
-        this.$q.notify({
-          color: "negative",
-          position: "bottom",
-          icon: "thumb_down",
-          message: error.data.message
-        });
-        requestparams.params.kyc = "";
-        // var self = this;
-        // Object.keys(this.formData).forEach(function(key, index) {
-        //   self.formData[key] = "";
-        // });
-      });
-    console.log("final submit to mars", requestparams.url);
-  },
-  fetchAllDropdownValuesFromMARSapi() {
-    // let key = this.merchant.salesInformation.institutionCode
-    //     let variable = localStorage.getItem("aa_t")
-    //     let v = variable.lastIndexOf('|')
-    //     let res = variable.substring(v+1)
-
-    // console.log("ram _"+res);
-    // this.merchant.salesInformation.institionCode=this.merchant.companyInformation.mcc;
-    // this.$q.localStorage.set("aa_t", key);
-    //  console.log("Before Set _"+res)
-    let self = this;
-    /* API call to fetch regions */
-    self
-      .CITY_FROM_MARS()
-      .then(() => {
-        self.cityOptions = [];
-        self.cityFromMars.items.map(oo => {
-          self.cityOptions.push({ label: oo.name, value: oo.code });
-        });
-      }).then(() => {
-        /* API call to fetch state */
-        return self.STATE_FROM_MARS().then(response => {
-          self.stateOptions = [];
-          self.stateFromMars.items.map(oo => {
-            self.stateOptions.push({ label: oo.name, value: oo.code });
+        .then(response => {
+          this.$q.notify({
+            color: "positive",
+            position: "bottom",
+            icon: "thumb_up",
+            message: response.data.message
           });
-          // self.stateOptions = stateArr;
-        });
-      });
-  },
-  fetchAndCookDocuments() {
-    console.log("Hellow world");
-    let self = this;
-    self.merchant.kyc.documents.push({
-      documentName: "Agreement",
-      documentType: 11,
-      documentImage: [
-        this.GLOBAL_FILE_FETCH_URL + "/" + this.getImplementedQueue.cpvForm
-      ]
-    });
-  },
-  populateBankDetails() {
-    let self = this;
-    let ifscArr = [];
-    self
-      .IFSC_FROM_MARS(this.merchant.bankInformation.bankDetails.ifsc)
-      .then(response => {
-        if (response.status == 200) {
-          this.merchant.bankInformation.bankDetails.bankName =
-            self.ifscFromMars.bankName;
-        } else {
+
+          // var self = this;
+          // Object.keys(this.formData).forEach(function(key, index) {
+          //   self.formData[key] = "";
+          // });
+        })
+        .catch(error => {
+          console.log(error);
           this.$q.notify({
             color: "negative",
-            position: "bottom-left",
-            message: "Invalid IFSC code",
-            icon: "clear"
+            position: "bottom",
+            icon: "thumb_down",
+            message: error.data.message
           });
-          this.merchant.bankInformation.bankDetails.ifsc = "";
-          this.merchant.bankInformation.bankDetails.bankName = "";
-        }
-      });
-  },
-  /* IFSC bank search result */
-  residentStateSearch(terms, done) {
-    done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
-  },
-  registeredStateSelected(item) {
-    this.merchant.companyinformation.registeredStateName = item.label;
-    this.merchant.companyinformation.registeredStateRefCode = item.value;
-  },
-  residentStateSearch(terms, done) {
-    done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
-  },
-  residentCitySearch(terms, done) {
-    done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
-  },
-  registeredCitySelected(item) {
-    this.merchant.companyinformation.registeredCityName = item.label;
-    this.merchant.companyinformation.registeredCityRefCode = item.value;
-  },
-  COMMON_FILTER_FUNCTION(arraySet, terms) {
-    return _.filter(arraySet, function(oo) {
-      return (
-        oo.label.toLowerCase().includes(terms.toLowerCase()) ||
-        oo.value.toString().includes(terms.toString())
-      );
-    });
-  },
-  commonDateFormat(selectedDate) {
-    if (
-      selectedDate == "" ||
-      selectedDate == null ||
-      selectedDate == "Invalid date"
-    ) {
-      return null;
-    } else {
-      return moment(selectedDate).format("DD/MM/YYYY");
-    }
-  },
-  goBackToDocumentVerificationStage() {
-    let formData = {
-      leadId: this.$route.params.id,
-      defaultUrlValue:
-        this.getShortLeadInfo.leadStatus ==
-        this.$LEAD_STATUS_MARS_REFERRAL_BACK_DATA_ENTRY_PENDING
-          ? this.$SAT_LEAD_VALIDATION_PROCEED_TO_DATA_ENTRY_WITH_REFERBACK
-          : this.$SAT_LEAD_VALIDATION_APPROVE
-    };
-
-    this.$q
-      .dialog({
-        title: "Confirm",
-        message: "Are you sure want to proceed to document verification stage?",
-        ok: "Continue",
-        cancel: "Cancel"
-      }).onOk(() => {
-        this.$q.loading.show({
-          delay: 0, // ms
-          spinnerColor: "purple-9",
-          message: "Processing .."
+          // var self = this;
+          // Object.keys(this.formData).forEach(function(key, index) {
+          //   self.formData[key] = "";
+          // });
         });
+      console.log("final submit to mars", requestparams.url);
+    },
+    finalFormSubmitKyc(request) {
+      let key = this.merchant.salesInformation.institutionCode;
+      this.$q.localStorage.set("a_t", key);
+      let requestparams = {
+        url: {
+          id: this.getAllMarsData.merchantRefCode
+          //  code:this.getAllMarsData.salesInformation.institutionCode
+        },
 
-        this.MOVE_BACK_DOCUMENT_VERIFICATION_STAGE(formData).then(() => {
-          this.$router.push("/sat/lead/validation/" + this.$route.params.id);
+        params: {
+          merchant: {
+            companyInformation: {
+              applicationNumber: this.getAllMarsData.salesInformation
+                .applicationNumber
+            },
+
+            kyc: request.kyc
+          }
+        }
+      };
+
+      // this.ajaxLoadLeadDataEntryInfo();
+      this.CMS_EDIT_KYC(requestparams)
+
+        .then(response => {
+          this.$q.notify({
+            color: "positive",
+            position: "bottom",
+            icon: "thumb_up",
+            message: response.data.message
+          });
+
+          // var self = this;
+          // Object.keys(this.formData).forEach(function(key, index) {
+          //   self.formData[key] = "";
+          // });
+        })
+        .catch(error => {
+          console.log(error);
+          this.$q.notify({
+            color: "negative",
+            position: "bottom",
+            icon: "thumb_down",
+            message: error.data.message
+          });
+          requestparams.params.kyc = "";
+          // var self = this;
+          // Object.keys(this.formData).forEach(function(key, index) {
+          //   self.formData[key] = "";
+          // });
+        });
+      console.log("final submit to mars", requestparams.url);
+    },
+    fetchAllDropdownValuesFromMARSapi() {
+      // let key = this.merchant.salesInformation.institutionCode
+      //     let variable = localStorage.getItem("aa_t")
+      //     let v = variable.lastIndexOf('|')
+      //     let res = variable.substring(v+1)
+
+      // console.log("ram _"+res);
+      // this.merchant.salesInformation.institionCode=this.merchant.companyInformation.mcc;
+      // this.$q.localStorage.set("aa_t", key);
+      //  console.log("Before Set _"+res)
+      let self = this;
+      /* API call to fetch regions */
+      self
+        .CITY_FROM_MARS()
+        .then(() => {
+          self.cityOptions = [];
+          self.cityFromMars.items.map(oo => {
+            self.cityOptions.push({ label: oo.name, value: oo.code });
+          });
+        }).then(() => {
+          /* API call to fetch state */
+          return self.STATE_FROM_MARS().then(response => {
+            self.stateOptions = [];
+            self.stateFromMars.items.map(oo => {
+              self.stateOptions.push({ label: oo.name, value: oo.code });
+            });
+            // self.stateOptions = stateArr;
+          });
+        });
+    },
+    fetchAndCookDocuments() {
+      console.log("Hellow world");
+      let self = this;
+      self.merchant.kyc.documents.push({
+        documentName: "Agreement",
+        documentType: 11,
+        documentImage: [
+          this.GLOBAL_FILE_FETCH_URL + "/" + this.getImplementedQueue.cpvForm
+        ]
+      });
+    },
+    populateBankDetails() {
+      let self = this;
+      let ifscArr = [];
+      self
+        .IFSC_FROM_MARS(this.merchant.bankInformation.bankDetails.ifsc)
+        .then(response => {
+          if (response.status == 200) {
+            this.merchant.bankInformation.bankDetails.bankName =
+              self.ifscFromMars.bankName;
+          } else {
+            this.$q.notify({
+              color: "negative",
+              position: "bottom-left",
+              message: "Invalid IFSC code",
+              icon: "clear"
+            });
+            this.merchant.bankInformation.bankDetails.ifsc = "";
+            this.merchant.bankInformation.bankDetails.bankName = "";
+          }
+        });
+    },
+    /* IFSC bank search result */
+    residentStateSearch(terms, done) {
+      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+    },
+    registeredStateSelected(item) {
+      this.merchant.companyinformation.registeredStateName = item.label;
+      this.merchant.companyinformation.registeredStateRefCode = item.value;
+    },
+    residentCitySearch(terms, done) {
+      done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+    },
+    registeredCitySelected(item) {
+      this.merchant.companyinformation.registeredCityName = item.label;
+      this.merchant.companyinformation.registeredCityRefCode = item.value;
+    },
+    COMMON_FILTER_FUNCTION(arraySet, terms) {
+      return _.filter(arraySet, function(oo) {
+        return (
+          oo.label.toLowerCase().includes(terms.toLowerCase()) ||
+          oo.value.toString().includes(terms.toString())
+        );
+      });
+    },
+    commonDateFormat(selectedDate) {
+      if (
+        selectedDate == "" ||
+        selectedDate == null ||
+        selectedDate == "Invalid date"
+      ) {
+        return null;
+      } else {
+        return moment(selectedDate).format("DD/MM/YYYY");
+      }
+    },
+    goBackToDocumentVerificationStage() {
+      let formData = {
+        leadId: this.$route.params.id,
+        defaultUrlValue:
+          this.getShortLeadInfo.leadStatus ==
+          this.$LEAD_STATUS_MARS_REFERRAL_BACK_DATA_ENTRY_PENDING
+            ? this.$SAT_LEAD_VALIDATION_PROCEED_TO_DATA_ENTRY_WITH_REFERBACK
+            : this.$SAT_LEAD_VALIDATION_APPROVE
+      };
+
+      this.$q
+        .dialog({
+          title: "Confirm",
+          message: "Are you sure want to proceed to document verification stage?",
+          ok: "Continue",
+          cancel: "Cancel"
+        }).onOk(() => {
+          this.$q.loading.show({
+            delay: 0, // ms
+            spinnerColor: "purple-9",
+            message: "Processing .."
+          });
+
+          this.MOVE_BACK_DOCUMENT_VERIFICATION_STAGE(formData).then(() => {
+            this.$router.push("/sat/lead/validation/" + this.$route.params.id);
+            this.$q.loading.hide();
+          });
+        }).catch(error => {
           this.$q.loading.hide();
         });
-      }).catch(error => {
-        this.$q.loading.hide();
-      });
+    }
   }
 };
 </script>

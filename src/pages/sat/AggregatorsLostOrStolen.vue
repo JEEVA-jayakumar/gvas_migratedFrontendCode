@@ -44,10 +44,11 @@
             <span class="label text-primary"># {{ props.row.mid }}</span>
           </q-td>
         </template>
-        <!-- <q-td
-          v-slot:body-cell-leadName="props"
-          :props="props"
-        >{{props.row.leadInformation.leadName}}</q-td>-->
+        <!-- <template v-slot:body-cell-leadName="props">
+            <q-td :props="props">
+            {{props.row.leadInformation.leadName}}
+          </q-td>
+          </template>-->
         <template v-slot:body-cell-leadNumber="props">
           <q-td :props="props" class="cursor-pointer"
             @click="toggleLeadInformation(props.row.leadInformation)">
@@ -78,9 +79,13 @@
             <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
           </q-td>
         </template>
-        <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+        <!-- <template v-slot:body-cell-deviceStatusDate="props">
+            <q-td :props="props">
+
         <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-      </q-td> -->
+
+          </q-td>
+          </template> -->
         <template v-slot:body-cell-action="props">
           <q-td :props="props">
             <q-btn highlight push class="q-mx-sm" color="positive" size="sm"
@@ -118,23 +123,31 @@
         :loading="toggleAjaxLoadFilter1" @request="lostOrStolenLoadInfo" table-style="word-break: break-all"
         class="payment_verification_table capitalize">
 
-        <!-- <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
+        <!-- <template v-slot:body-cell-deviceStatusDate="props">
+            <q-td :props="props">
+
         <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-      </q-td> -->
+
+          </q-td>
+          </template> -->
         <template v-slot:body-cell-updatedAt="props">
           <q-td :props="props">{{
             props.row.aggregatorRegionalInventory.updatedAt == null ? "NA" :
               $moment(props.row.aggregatorRegionalInventory.updatedAt).format("Do MMM Y")
           }}</q-td>
         </template>
-        <!-- <q-td v-slot:body-cell-Status="props" :props="props">
+        <!-- <template v-slot:body-cell-Status="props">
+            <q-td :props="props">
+
           <span class="label text-positive" v-if="props.row.aggregatorRegionalInventory.deviceStatus == 8">Waiting for
             Approval</span>
           <span class="label text-amber" v-if="props.row.aggregatorRegionalInventory.deviceStatus == 7">Submitted By
             SO</span>
           <span class="label text-purple" v-if="props.row.aggregatorRegionalInventory.deviceStatus == 10">Rejected By
             Finance</span>
-        </q-td> -->
+
+          </q-td>
+          </template> -->
         <template v-slot:body-cell-action="props">
           <q-td :props="props">
             <q-btn v-if="props.row.aggregatorRegionalInventory.deviceStatus == 8" disable push color="purple-9"

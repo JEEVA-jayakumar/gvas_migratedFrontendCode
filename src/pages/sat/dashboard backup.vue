@@ -247,6 +247,7 @@
                 </q-tab>
 </q-tabs>
 <q-tab-panels v-model="agingTrackerPending.tabsModel" animated>
+<q-tab-panels v-model="agingTrackerPending.tabsModel" animated>
 <q-tab-panel
                   :name="tabPaneItem.name"
                   v-for="tabPaneItem in agingTrackerPending.tabItems"
@@ -561,7 +562,7 @@ export default {
 .border-radius-10 {
   border-radius: 8px !important;
 }
-.q-item-main.q-item-section.shadow-1.q-pa-md {
+.q-item-section.q-item-section.shadow-1.q-pa-md {
   min-height: 80px;
 }
 .q-chip.row.no-wrap.inline.items-center.custom_chip_progress.bg-purple-9.text-white {

@@ -29,20 +29,20 @@
       <q-td
       />
        <!--START: table header -->
-        <q-tr slot="top-row" slot-scope="props">
+        <q-tr v-slot:top-row="props">
         <q-th v-for="col in props.columns" :key="col.name" :props="props">{{ col.label }}</q-th>  
         </q-tr>
         <!--END: table header -->
-         <q-td 
-         slot="body-cell-leadNumber"
-         slot-scope="props"
-         :props="props"
+         <template v-slot:body-cell-leadNumber="props">
+            <q-td :props="props"
          class="cursor-pointer"
-         @click.native="toggleLeadInformation(props.row)"
-         >
+         @click.native="toggleLeadInformation(props.row)">
+
           <span class="label text-primary"> {{props.row.leadNumber}}</span>
           
-        </q-td>
+
+          </q-td>
+          </template>
         <template v-slot:body-cell-contactName="props">
           <q-td :props="props">
           <span class="label text-primary"> {{props.row.leadInformation.contactName}}</span>
@@ -123,21 +123,27 @@
           <span class="label text-primary"> {{props.row.leadInformation.contactNumber}}</span>
         </q-td>
         </template>
-        <!-- <q-td
-          slot="body-cell-leadNumber"
-          slot-scope="props"
-          :props="props"    
-        >
+        <!-- <template v-slot:body-cell-leadNumber="props">
+            <q-td :props="props">
+
           <span class="label text-primary"># {{props.row.leadInformation.leadNumber}}</span>
-        </q-td> -->
-        <!-- <q-td slot="body-cell-date" slot-scope="props" :props="props">
+
+          </q-td>
+          </template> -->
+        <!-- <template v-slot:body-cell-date="props">
+            <q-td :props="props">
+
           <span class="label text-primary"># {{props.row.date}}</span>
-        </q-td> -->
+
+          </q-td>
+          </template> -->
         <template v-slot:body-cell-leadAddress="props">
           <q-td :props="props">{{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}</q-td>
         </template>
         
-        <!-- <q-td slot="body-cell-action" slot-scope="props" :props="props">
+        <!-- <template v-slot:body-cell-action="props">
+            <q-td :props="props">
+
             @click.native="toggleLeadInformation(props.row.leadInformation.leadNumber)"
               class="cursor-pointer"
            <q-btn
@@ -148,19 +154,23 @@
             size="sm"
             @click="additionalTid(props.row)"
           >Additional TID</q-btn>
-        </q-td> -->
-        <template slot="top" slot-scope="props" class="bottom-border" >
+
+          </q-td>
+          </template> -->
+        <template v-slot:top="props" class="bottom-border" >
           <!--START: table filter,search,excel download -->
           <div class="col-5">
-            <q-search
-              clearable
+            <q-input dense clearable
               v-model="filter"
               separator
               color="grey-9"
               placeholder="Type.."
               label="Search By Merchant Name, Lead ID.."
-              class="q-mr-lg q-py-sm"
-            />
+              class="q-mr-lg q-py-sm">
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
           </div>
         </template>
       </q-table>

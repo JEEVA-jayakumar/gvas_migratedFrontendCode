@@ -77,40 +77,36 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
+        <q-select
+          use-input
+          fill-input
+          hide-selected
           color="grey-9"
           @blur="$v.merchant.bankInformation.bankDetails.bankCityRefCode.$touch"
           :error="$v.merchant.bankInformation.bankDetails.bankCityName.$anyError ||$v.merchant.bankInformation.bankDetails.bankCityRefCode.$anyError"
           v-model="merchant.bankInformation.bankDetails.bankCityName"
           label="City (type min 3 characters)*"
           placeholder="Start typing ..*"
-        >
-          <q-autocomplete
-            separator
-            @search="citySearch"
-            :debounce="10"
-            :min-characters="3"
-            @selected="bankCitySelected"
-          />
-        </q-input>
+          :options="cityOptionsFiltered"
+          @filter="citySearch"
+          @update:model-value="bankCitySelected"
+        />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
+        <q-select
+          use-input
+          fill-input
+          hide-selected
           color="grey-9"
           @blur="$v.merchant.bankInformation.bankDetails.bankCityRefCode.$touch"
           :error="$v.merchant.bankInformation.bankDetails.bankStateName.$anyError || $v.merchant.bankInformation.bankDetails.bankCityRefCode.$anyError"
           v-model="merchant.bankInformation.bankDetails.bankStateName"
           label="State (type min 3 characters)*"
           placeholder="Start typing ..*"
-        >
-          <q-autocomplete
-            separator
-            @search="stateSearch"
-            :debounce="10"
-            :min-characters="1"
-            @selected="bankStateSelected"
-          />
-        </q-input>
+          :options="stateOptionsFiltered"
+          @filter="stateSearch"
+          @update:model-value="bankStateSelected"
+        />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
@@ -299,6 +295,8 @@ export default {
   props: ["cityOptions", "stateOptions", "propLeadDeatils", "bankInformation"],
   data() {
     return {
+      cityOptionsFiltered: [],
+      stateOptionsFiltered: [],
       accountTypeOptions: [
         {
           label: "Saving account",
@@ -469,24 +467,44 @@ export default {
         return oo.label.toLowerCase().includes(terms.toLowerCase());
       });
     },
-    citySearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+    citySearch(terms, update, abort) {
+      update(() => {
+        this.cityOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.cityOptions, terms);
+      });
     },
-    stateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+    stateSearch(terms, update, abort) {
+      update(() => {
+        this.stateOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.stateOptions, terms);
+      });
     },
 
     /* Registered City search result */
     bankCitySelected(item) {
-      this.merchant.bankInformation.bankDetails.bankCityName = item.label;
-      this.merchant.bankInformation.bankDetails.bankCityRefCode = item.value;
+      if (item && item.label) {
+        this.merchant.bankInformation.bankDetails.bankCityName = item.label;
+        this.merchant.bankInformation.bankDetails.bankCityRefCode = item.value;
+      } else if (item && typeof item === 'string') {
+        const found = this.cityOptions.find(o => o.label === item || o.value === item);
+        if (found) {
+          this.merchant.bankInformation.bankDetails.bankCityName = found.label;
+          this.merchant.bankInformation.bankDetails.bankCityRefCode = found.value;
+        }
+      }
     },
     /* Registered City search result */
 
     /* Registered State search result */
     bankStateSelected(item) {
-      this.merchant.bankInformation.bankDetails.bankStateName = item.label;
-      this.merchant.bankInformation.bankDetails.bankStateRefCode = item.value;
+      if (item && item.label) {
+        this.merchant.bankInformation.bankDetails.bankStateName = item.label;
+        this.merchant.bankInformation.bankDetails.bankStateRefCode = item.value;
+      } else if (item && typeof item === 'string') {
+        const found = this.stateOptions.find(o => o.label === item || o.value === item);
+        if (found) {
+          this.merchant.bankInformation.bankDetails.bankStateName = found.label;
+          this.merchant.bankInformation.bankDetails.bankStateRefCode = found.value;
+        }
+      }
     },
     /* Registered State search result */
 

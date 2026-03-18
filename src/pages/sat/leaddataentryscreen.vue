@@ -59,15 +59,22 @@
                             color="grey-9" label="*Merchant Address" placeholder="Merchant Address" />
                         </div>
                         <div class="col-md-6">
-                          <q-input type="number" onkeydown="javascript: return event.keyCode === 8 ||
-                             event.keyCode === 46 ? true : !isNaN(Number(event.key))"
+                          <q-select
                             :error="$v.formData.pincodeTemp.$error"
                             @blur="fnClrPin"
-                            clearable color="grey-9" v-model.trim="formData.pincodeTemp" label="Pincode"
-                            placeholder="Pincode">
-                            <q-autocomplete @search="pincodeSearch" :debounce="500" :min-characters="1"
-                              @selected="pincodeSelected" />
-                          </q-input>
+                            clearable
+                            color="grey-9"
+                            v-model="formData.pincodeTemp"
+                            label="Pincode"
+                            placeholder="Pincode"
+                            use-input
+                            hide-selected
+                            fill-input
+                            input-debounce="500"
+                            :options="pincodeOptionsSearch"
+                            @filter="fnPincodeSearch"
+                            @update:model-value="pincodeSelected"
+                          />
                         </div>
                         <!-- @clear="fnGetCityAndState" -->
                         <div class="col-md-6">
@@ -157,9 +164,15 @@
                 <!-- <q-pull-to-refresh :distance="30" :handler="PullToRefresh" inline> -->
                 <q-table class="my-sticky-header-table" title="Wip Lead Information" :rows="getShortLead"
                   :columns="columns" row-key="name">
-                  <q-td v-slot:body-cell-shortleadDate="props" :props="props">{{ $moment(props.row.shortleadDate).format("Do MMM Y") }}</q-td>
+                  <template v-slot:body-cell-shortleadDate="props">
+            <q-td :props="props">
+            {{ $moment(props.row.shortleadDate).format("Do MMM Y") }}
+          </q-td>
+          </template>
 
-                  <!-- <q-td v-slot:body-cell-action="props" :props="props">
+                  <!-- <template v-slot:body-cell-action="props">
+            <q-td :props="props">
+
                     <div class="row no-wrap no-padding">
                       <q-btn
                         dense
@@ -175,20 +188,30 @@
                   <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative">
                   </q-btn>-->
                   <!-- </div>
-                  </q-td>-->
-                  <q-td v-slot:body-cell-update="props" :props="props">
+
+          </q-td>
+          </template>-->
+                  <template v-slot:body-cell-update="props">
+            <q-td :props="props">
+
                     <div class="row no-wrap no-padding">
                       <q-btn dense no-caps no-wrap label="update" icon="far fa-plus-square" size="md"
                         @click="fnShowConvertToSat(props.row)" flat class="text-light-blue"></q-btn>
                       <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative">
                       </q-btn>-->
                     </div>
-                  </q-td>
-                  <!-- <q-td v-slot:body-cell-status="props" :props="props">
+
+          </q-td>
+          </template>
+                  <!-- <template v-slot:body-cell-status="props">
+            <q-td :props="props">
+
             <span class="label text-negative" v-if="props.row.status == $TRANSACTION_STATUS">Pending</span>
             <span class="label text-positive" v-else-if="props.row.status">Success</span>
             <span class="label text-amber" v-else>NA</span>
-                  </q-td>-->
+
+          </q-td>
+          </template>-->
                 </q-table>
                 <editShortLead v-if="propShowEditShortLead" :propShowEditShortLead="propShowEditShortLead"
                   :propRowDetails="propRowDetails" @emitfnshowEditShortLead="fnShowEditShortLead"></editShortLead>
@@ -253,6 +276,7 @@ export default {
       selectedVas: [],
       // ownerFirstName:[],
       pinSelected: false,
+      pincodeOptionsSearch: [],
       formData: {
         leadName: '',
         contactName: '',
@@ -611,23 +635,38 @@ export default {
       })
     },
 
-    pincodeSearch(terms, done) {
-      this.formData.cityName = ''
-      this.formData.stateName = ''
-      this.FETCH_PINCODE_WITH_TERM(terms)
+    fnPincodeSearch(val, update) {
+      if (val.length < 1) {
+        update(() => {
+          this.pincodeOptionsSearch = [];
+        });
+        return;
+      }
+      this.formData.cityName = "";
+      this.formData.stateName = "";
+      this.FETCH_PINCODE_WITH_TERM(val)
         .then(() => {
-          done(this.COMMON_FILTER_FUNCTION(this.getAllStatesData, terms))
+          update(() => {
+            this.pincodeOptionsSearch = this.COMMON_FILTER_FUNCTION(
+              this.getAllStatesData,
+              val
+            );
+          });
         })
         .catch(() => {
-          done([])
-        })
+          update(() => {
+            this.pincodeOptionsSearch = [];
+          });
+        });
     },
     pincodeSelected(item) {
-      this.pinSelected = true;
-      this.formData.state = item.value.stateName
-      this.formData.city = item.value.cityName
-      this.formData.pincode = item.value.pincode
-      this.formData.pincodeTemp = item.value.pincode
+      if (item) {
+        this.pinSelected = true;
+        this.formData.state = item.value.stateName;
+        this.formData.city = item.value.cityName;
+        this.formData.pincode = item.value.pincode;
+        this.formData.pincodeTemp = item.value.pincode;
+      }
     },
     fnClrPin() {
       if (!this.pinSelected)

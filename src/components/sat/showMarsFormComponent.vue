@@ -76,17 +76,17 @@
                     " label="InstallationBranchName*" :options="getAllBranchName" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                  <q-input color="grey-9" v-model.trim="merchant.additionalInfo.lorState"
-                    label="IOR_STATE(type min 3 characters)*" placeholder="Start typing ..*">
-                    <q-autocomplete separator @search="searchIorState" :debounce="10" :min-characters="3" />
-                  </q-input>
+                  <q-select use-input fill-input hide-selected color="grey-9"
+                    v-model="merchant.additionalInfo.lorState"
+                    label="IOR_STATE(type min 3 characters)*" placeholder="Start typing ..*"
+                    :options="iorStateOptions" @filter="searchIorState" />
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                  <q-input color="grey-9" v-model.trim="merchant.additionalInfo.pin" label="Pincode"
-                    placeholder="Start typing ..*" @update:model-value="pincodeBasedDistrict">
-                    <q-autocomplete separator @search="searchAxisBankPincode" :min-characters="3" />
-                  </q-input>
+                  <q-select use-input fill-input hide-selected color="grey-9"
+                    v-model="merchant.additionalInfo.pin" label="Pincode"
+                    placeholder="Start typing ..*" @update:model-value="pincodeBasedDistrict"
+                    :options="axisBankPincodeOptions" @filter="searchAxisBankPincode" />
                 </div>
 
                 <div class="col-md-6 col-sm-12 col-xs-12">
@@ -861,17 +861,15 @@
               </div>
 
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input @blur="fnClrRegisteredCity" :error="
+                <q-select use-input fill-input hide-selected @blur="fnClrRegisteredCity" :error="
                     autoCompleteError(
                       $v.merchant.companyInformation.registeredCityRefCode,
                       $v.merchant.companyInformation.registeredCityName
                     )
-                  " color="grey-9" v-model.trim="merchant.companyInformation.registeredCityName"
-                  @update:model-value="fninputTyping($event, 1)" label="Registered city (type min 3 characters)*"
-                  placeholder="Start typing ..*">
-                  <q-autocomplete separator @search="residentCitySearch" :debounce="10" :min-characters="3"
-                    @selected="registeredCitySelected" />
-                </q-input>
+                  " color="grey-9" v-model="merchant.companyInformation.registeredCityName"
+                  @update:model-value="(val) => { fninputTyping(val, 1); registeredCitySelected(val); }" label="Registered city (type min 3 characters)*"
+                  placeholder="Start typing ..*"
+                  :options="cityOptionsFiltered" @filter="residentCitySearch" />
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation
                       .registeredCityRefCode.alert
@@ -912,17 +910,15 @@
               </div>
 
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input @blur="fnClrRegisteredState" :error="
+                <q-select use-input fill-input hide-selected @blur="fnClrRegisteredState" :error="
                     autoCompleteError(
                       $v.merchant.companyInformation.registeredStateRefCode,
                       $v.merchant.companyInformation.registeredStateName
                     )
-                  " color="grey-9" v-model.trim="merchant.companyInformation.registeredStateName"
-                  @update:model-value="fninputTyping($event, 2)" label="Registered state (type min 3 characters)*"
-                  placeholder="Start typing ..*">
-                  <q-autocomplete separator @search="residentStateSearch" :debounce="10" :min-characters="1"
-                    @selected="registeredStateSelected" />
-                </q-input>
+                  " color="grey-9" v-model="merchant.companyInformation.registeredStateName"
+                  @update:model-value="(val) => { fninputTyping(val, 2); registeredStateSelected(val); }" label="Registered state (type min 3 characters)*"
+                  placeholder="Start typing ..*"
+                  :options="stateOptionsFiltered" @filter="residentStateSearch" />
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation
                       .registeredStateRefCode.alert
@@ -1167,16 +1163,14 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input @blur="$v.merchant.companyInformation.mcc.$touch" :error="
+                <q-select use-input fill-input hide-selected @blur="$v.merchant.companyInformation.mcc.$touch" :error="
                     autoCompleteError(
                       $v.merchant.companyInformation.mcc,
                       $v.merchant.companyInformation.mccname
                     )
-                  " color="grey-9" v-model.trim="merchant.companyInformation.mccname"
-                  label="MCC (type min 3 characters)" placeholder="Start typing ..*">
-                  <q-autocomplete separator @search="mccSearch" :debounce="10" :min-characters="3"
-                    @selected="mccSelected" />
-                </q-input>
+                  " color="grey-9" v-model="merchant.companyInformation.mccname"
+                  label="MCC (type min 3 characters)" placeholder="Start typing ..*"
+                  :options="mccOptions" @filter="mccSearchFilter" @update:model-value="mccSelected" />
                 <div class="text-negative" v-if="error.field.merchant.companyInformation.mcc.alert">
                   <MarsErrorResponse :error="error.field.merchant.companyInformation.mcc" />
                 </div>
@@ -1220,18 +1214,16 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input @blur="
+                <q-select use-input fill-input hide-selected @blur="
                     $v.merchant.companyInformation.residentialCityRefCode.$touch
                   " :error="
                     autoCompleteError(
                       $v.merchant.companyInformation.residentialCityRefCode,
                       $v.merchant.companyInformation.residentCityName
                     )
-                  " color="grey-9" v-model.trim="merchant.companyInformation.residentCityName"
-                  label="City (type min 3 characters)*" placeholder="Start typing ..*">
-                  <q-autocomplete separator @search="residentCitySearch" :debounce="10" :min-characters="3"
-                    @selected="residentCitySelected" />
-                </q-input>
+                  " color="grey-9" v-model="merchant.companyInformation.residentCityName"
+                  label="City (type min 3 characters)*" placeholder="Start typing ..*"
+                  :options="residentCityOptionsFiltered" @filter="residentCitySearchFilter" @update:model-value="residentCitySelected" />
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation
                       .residentialCityRefCode.alert
@@ -1253,7 +1245,7 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input @blur="
+                <q-select use-input fill-input hide-selected @blur="
                     $v.merchant.companyInformation.residentialStateRefCode
                       .$touch;
                   " :error="
@@ -1261,11 +1253,9 @@
                       $v.merchant.companyInformation.residentialStateRefCode,
                       $v.merchant.companyInformation.residentStateName
                     )
-                  " color="grey-9" v-model.trim="merchant.companyInformation.residentStateName"
-                  label="State (type min 3 characters)*" placeholder="Start typing ..*">
-                  <q-autocomplete separator @search="residentStateSearch" :debounce="10" :min-characters="1"
-                    @selected="residentStateSelected" />
-                </q-input>
+                  " color="grey-9" v-model="merchant.companyInformation.residentStateName"
+                  label="State (type min 3 characters)*" placeholder="Start typing ..*"
+                  :options="residentStateOptionsFiltered" @filter="residentStateSearchFilter" @update:model-value="residentStateSelected" />
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation
                       .residentialStateRefCode.alert
@@ -1643,12 +1633,10 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input :error="autoCompleteError(v.cityRefLabel, v.cityRefCode)" color="grey-9"
-                  v-model.trim="v.$model.cityRefLabel" label="City (type min 3 characters)*"
-                  placeholder="Start typing ..*">
-                  <q-autocomplete separator @search="partnerCitySearch" :debounce="10" :min-characters="3"
-                    @selected="(obj) => partnerCitySelected(obj, index)" />
-                </q-input>
+                <q-select use-input fill-input hide-selected :error="autoCompleteError(v.cityRefLabel, v.cityRefCode)" color="grey-9"
+                  v-model="v.$model.cityRefLabel" label="City (type min 3 characters)*"
+                  placeholder="Start typing ..*"
+                  :options="partnerCityOptions" @filter="partnerCitySearchFilter" @update:model-value="(obj) => partnerCitySelected(obj, index)" />
                 <div class="text-negative" v-if="
                     error.field.merchant.partnerInformation[index].cityRefCode
                       .alert
@@ -1663,12 +1651,10 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input :error="autoCompleteError(v.stateRefLabel, v.stateRefCode)" @blur="v.stateRefLabel.$touch()"
-                  color="grey-9" v-model.trim="v.$model.stateRefLabel" label="State (type min 3 characters)*"
-                  placeholder="Start typing ..*">
-                  <q-autocomplete separator @search="partnerStateSearch" :debounce="10" :min-characters="1"
-                    @selected="(obj) => partnerStateSelected(obj, index)" />
-                </q-input>
+                <q-select use-input fill-input hide-selected :error="autoCompleteError(v.stateRefLabel, v.stateRefCode)" @blur="v.stateRefLabel.$touch()"
+                  color="grey-9" v-model="v.$model.stateRefLabel" label="State (type min 3 characters)*"
+                  placeholder="Start typing ..*"
+                  :options="partnerStateOptions" @filter="partnerStateSearchFilter" @update:model-value="(obj) => partnerStateSelected(obj, index)" />
                 <div class="text-negative" v-if="
                     error.field.merchant.partnerInformation[index].stateRefCode
                       .alert
@@ -5308,12 +5294,10 @@
                       $v.merchant.bankInformation.bankDetails.bankCityName,
                       $v.merchant.bankInformation.bankDetails.bankCityRefCode
                     )
-                  " v-model.trim="
+                  " v-model="
                     merchant.bankInformation.bankDetails.bankCityName
-                  " label="City (type min 3 characters)*" placeholder="Start typing ..*">
-                  <q-autocomplete separator @search="residentCitySearch" :debounce="10" :min-characters="3"
-                    @selected="bankCitySelected" />
-                </q-input>
+                  " label="City (type min 3 characters)*" placeholder="Start typing ..*"
+                  :options="bankCityOptionsFiltered" @filter="bankCitySearchFilter" @update:model-value="bankCitySelected" />
                 <div class="text-negative" v-if="
                     error.field.merchant.bankInformation.bankDetails
                       .bankCityRefCode.alert
@@ -5335,7 +5319,7 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input color="grey-9" @blur="
+                <q-select use-input fill-input hide-selected @blur="
                     $v.merchant.bankInformation.bankDetails.bankStateRefCode
                       .$touch
                   " :error="
@@ -5343,12 +5327,10 @@
                       $v.merchant.bankInformation.bankDetails.bankStateName,
                       $v.merchant.bankInformation.bankDetails.bankStateRefCode
                     )
-                  " v-model.trim="
+                  " v-model="
                     merchant.bankInformation.bankDetails.bankStateName
-                  " label="State (type min 3 characters)*" placeholder="Start typing ..*">
-                  <q-autocomplete separator @search="residentStateSearch" :debounce="10" :min-characters="1"
-                    @selected="bankStateSelected" />
-                </q-input>
+                  " label="State (type min 3 characters)*" placeholder="Start typing ..*"
+                  :options="bankStateOptionsFiltered" @filter="bankStateSearchFilter" @update:model-value="bankStateSelected" />
                 <div class="text-negative" v-if="
                     error.field.merchant.bankInformation.bankDetails
                       .bankStateRefCode.alert
@@ -6152,6 +6134,17 @@
         ptCitySelected: false,
         companyRegisteredCitySelected: false,
         companyRegisteredStateSelected: false,
+        mccOptions: [],
+        cityOptionsFiltered: [],
+        stateOptionsFiltered: [],
+        residentCityOptionsFiltered: [],
+        residentStateOptionsFiltered: [],
+        partnerCityOptions: [],
+        partnerStateOptions: [],
+        bankCityOptionsFiltered: [],
+        bankStateOptionsFiltered: [],
+        iorStateOptions: [],
+        axisBankPincodeOptions: [],
 
         bankInformationError: false,
         file: "",
@@ -12328,8 +12321,10 @@
       /* IFSC bank search result */
 
       /* MCC search result */
-      partnerCitySearch(terms, done) {
-        done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+      partnerCitySearchFilter(terms, update, abort) {
+        update(() => {
+          this.partnerCityOptions = this.COMMON_FILTER_FUNCTION(this.cityOptions, terms);
+        });
       },
       partnerCitySelected(item, index) {
         this.ptCitySelected = true;
@@ -12342,8 +12337,10 @@
         if (!this.ptCitySelected) this.cityRefLabel = "";
       },
       /* MCC search result */
-      partnerStateSearch(terms, done) {
-        done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+      partnerStateSearchFilter(terms, update, abort) {
+        update(() => {
+          this.partnerStateOptions = this.COMMON_FILTER_FUNCTION(this.stateOptions, terms);
+        });
       },
       partnerStateSelected(item, index) {
         this.$v.viewBinding.partnersArr.$each[index].stateRefCode.$model =
@@ -12354,8 +12351,10 @@
       /* MCC search result */
 
       /* MCC search result */
-      mccSearch(terms, done) {
-        done(this.COMMON_FILTER_FUNCTION(this.mccSearchSet, terms));
+      mccSearchFilter(terms, update, abort) {
+        update(() => {
+          this.mccOptions = this.COMMON_FILTER_FUNCTION(this.mccSearchSet, terms);
+        });
       },
       // selectLead() {
       //   if (this.merchant.salesInformation.leadFrom == "OPEN MARKET") {
@@ -12483,22 +12482,52 @@
       /* MCC search result */
 
       /* City search result */
-      residentCitySearch(terms, done) {
-        done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+      residentCitySearch(terms, update, abort) {
+        update(() => {
+          this.cityOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.cityOptions, terms);
+        });
+      },
+      residentCitySearchFilter(terms, update, abort) {
+        update(() => {
+          this.residentCityOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.cityOptions, terms);
+        });
       },
       residentCitySelected(item) {
-        this.merchant.companyInformation.residentCityName = item.label;
-        this.merchant.companyInformation.residentialCityRefCode = item.value;
+        if (item && item.label) {
+          this.merchant.companyInformation.residentCityName = item.label;
+          this.merchant.companyInformation.residentialCityRefCode = item.value;
+        } else if (item && typeof item === 'string') {
+          const found = this.cityOptions.find(o => o.label === item || o.value === item);
+          if (found) {
+            this.merchant.companyInformation.residentCityName = found.label;
+            this.merchant.companyInformation.residentialCityRefCode = found.value;
+          }
+        }
       },
       /* City search result */
 
       /* State search result */
-      residentStateSearch(terms, done) {
-        done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+      residentStateSearch(terms, update, abort) {
+        update(() => {
+          this.stateOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.stateOptions, terms);
+        });
+      },
+      residentStateSearchFilter(terms, update, abort) {
+        update(() => {
+          this.residentStateOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.stateOptions, terms);
+        });
       },
       residentStateSelected(item) {
-        this.merchant.companyInformation.residentStateName = item.label;
-        this.merchant.companyInformation.residentialStateRefCode = item.value;
+        if (item && item.label) {
+          this.merchant.companyInformation.residentStateName = item.label;
+          this.merchant.companyInformation.residentialStateRefCode = item.value;
+        } else if (item && typeof item === 'string') {
+          const found = this.stateOptions.find(o => o.label === item || o.value === item);
+          if (found) {
+            this.merchant.companyInformation.residentStateName = found.label;
+            this.merchant.companyInformation.residentialStateRefCode = found.value;
+          }
+        }
       },
       /* State search result */
 
@@ -12542,16 +12571,42 @@
       },
 
       /* Registered City search result */
+      bankCitySearchFilter(terms, update, abort) {
+        update(() => {
+          this.bankCityOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.cityOptions, terms);
+        });
+      },
       bankCitySelected(item) {
-        this.merchant.bankInformation.bankDetails.bankCityName = item.label;
-        this.merchant.bankInformation.bankDetails.bankCityRefCode = item.value;
+        if (item && item.label) {
+          this.merchant.bankInformation.bankDetails.bankCityName = item.label;
+          this.merchant.bankInformation.bankDetails.bankCityRefCode = item.value;
+        } else if (item && typeof item === 'string') {
+          const found = this.cityOptions.find(o => o.label === item || o.value === item);
+          if (found) {
+            this.merchant.bankInformation.bankDetails.bankCityName = found.label;
+            this.merchant.bankInformation.bankDetails.bankCityRefCode = found.value;
+          }
+        }
       },
       /* Registered City search result */
 
       /* Registered State search result */
+      bankStateSearchFilter(terms, update, abort) {
+        update(() => {
+          this.bankStateOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.stateOptions, terms);
+        });
+      },
       bankStateSelected(item) {
-        this.merchant.bankInformation.bankDetails.bankStateName = item.label;
-        this.merchant.bankInformation.bankDetails.bankStateRefCode = item.value;
+        if (item && item.label) {
+          this.merchant.bankInformation.bankDetails.bankStateName = item.label;
+          this.merchant.bankInformation.bankDetails.bankStateRefCode = item.value;
+        } else if (item && typeof item === 'string') {
+          const found = this.stateOptions.find(o => o.label === item || o.value === item);
+          if (found) {
+            this.merchant.bankInformation.bankDetails.bankStateName = found.label;
+            this.merchant.bankInformation.bankDetails.bankStateRefCode = found.value;
+          }
+        }
       },
       /* Registered State search result */
 
@@ -14597,13 +14652,27 @@
         this.FETCH_IA_LOCATION(request);
         done(this.getiaLocation);
       },
-      searchIorState(request, done) {
-        this.FETCH_IOR_STATE(request);
-        done(this.getiorState);
+      searchIorState(request, update, abort) {
+        if (request.length < 3) {
+          abort();
+          return;
+        }
+        this.FETCH_IOR_STATE(request).then(() => {
+          update(() => {
+            this.iorStateOptions = this.getiorState;
+          });
+        });
       },
-      searchAxisBankPincode(request, done) {
-        this.FETCH_AXIS_BANK_PINCODE_LOCATION(request);
-        done(this.getAxisBankPincode);
+      searchAxisBankPincode(request, update, abort) {
+        if (request.length < 3) {
+          abort();
+          return;
+        }
+        this.FETCH_AXIS_BANK_PINCODE_LOCATION(request).then(() => {
+          update(() => {
+            this.axisBankPincodeOptions = this.getAxisBankPincode;
+          });
+        });
       },
       pincodeBasedDistrict() {
         this.FETCH_AXIS_BANK_PINCODE_BASED_DISTRICT(
