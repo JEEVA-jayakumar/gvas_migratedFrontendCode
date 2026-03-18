@@ -44,7 +44,7 @@
               Rs. {{props.row.mdr}}
             </q-td>
             </template>
-            <template slot="top" slot-scope="props">
+            <template v-slot:top="props">
                 
                 <!--START: table fullscreen mode -->
                 <!-- <div class="col-md-4" align="right">
@@ -60,21 +60,23 @@
 
                 <!--START: table search -->
                 <div class="col-md-5">
-                    <q-search
-                      clearable
+                    <q-input dense clearable
                       v-model="filter"
                       separator
                       color="grey-9"
                       placeholder="Type.."
-                      float-label= "Search by MID, TID, Merchant Name, MCC,UTR Number, Device Type"
-                      class="q-mr-lg q-py-sm"
-                    />
+                      label= "Search by MID, TID, Merchant Name, MCC,UTR Number, Device Type"
+                      class="q-mr-lg q-py-sm">
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
                 </div>
                 <!--END: table search -->
 
                 <!--START: table filter dropdown -->
                 <div class="col-md-3">
-                  <q-input type="date"
+                  <q-input
                     v-model="filter_values"
                     label="Date Filter"
                     type="date"

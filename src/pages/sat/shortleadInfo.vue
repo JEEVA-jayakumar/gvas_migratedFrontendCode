@@ -47,11 +47,15 @@
           </div>
         </q-td>
         </template>
-        <!-- <q-td v-slot:body-cell-status="props" :props="props">
+        <!-- <template v-slot:body-cell-status="props">
+            <q-td :props="props">
+
             <span class="label text-negative" v-if="props.row.status == $TRANSACTION_STATUS">Pending</span>
             <span class="label text-positive" v-else-if="props.row.status">Success</span>
             <span class="label text-amber" v-else>NA</span>
-        </q-td>-->
+
+          </q-td>
+          </template>-->
       </q-table>
     </div>
   </q-page>
@@ -69,7 +73,7 @@ import {
   alpha,
   alphaNum,
   numeric
-} from "vuelidate/lib/validators";
+} from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "inventoryAllocation",

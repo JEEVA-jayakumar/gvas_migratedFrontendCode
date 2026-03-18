@@ -62,40 +62,36 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
+        <q-select
+          use-input
+          fill-input
+          hide-selected
           :error="v.cityRefLabel.$anyError || v.cityRefCode.$anyError"
           @blur="v.cityRefCode.$touch()"
           color="grey-9"
           v-model="v.$model.cityRefLabel"
           label="City (type min 3 characters)*"
           placeholder="Start typing ..*"
-        >
-          <q-autocomplete
-            separator
-            @search="citySearch"
-            :debounce="10"
-            :min-characters="3"
-            @selected="obj => partnerCitySelected(obj,index)"
-          />
-        </q-input>
+          :options="cityOptionsFiltered"
+          @filter="citySearch"
+          @update:model-value="obj => partnerCitySelected(obj,index)"
+        />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
+        <q-select
+          use-input
+          fill-input
+          hide-selected
           :error="v.stateRefLabel.$anyError || v.stateRefCode.$anyError"
           @blur="v.stateRefCode.$touch()"
           color="grey-9"
           v-model="v.$model.stateRefLabel"
           label="State (type min 3 characters)*"
           placeholder="Start typing ..*"
-        >
-          <q-autocomplete
-            separator
-            @search="stateSearch"
-            :debounce="10"
-            :min-characters="1"
-            @selected="obj => partnerStateSelected(obj,index)"
-          />
-        </q-input>
+          :options="stateOptionsFiltered"
+          @filter="stateSearch"
+          @update:model-value="obj => partnerStateSelected(obj,index)"
+        />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
@@ -161,7 +157,9 @@ export default {
   props: ["cityOptions", "stateOptions", "constitution", "partnerInformation"],
   data() {
     return {
-      partnersArr: []
+      partnersArr: [],
+      cityOptionsFiltered: [],
+      stateOptionsFiltered: []
     };
   },
   validations: {
@@ -213,23 +211,43 @@ export default {
         return oo.label.toLowerCase().includes(terms.toLowerCase());
       });
     },
-    citySearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+    citySearch(terms, update, abort) {
+      update(() => {
+        this.cityOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.cityOptions, terms);
+      });
     },
-    stateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+    stateSearch(terms, update, abort) {
+      update(() => {
+        this.stateOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.stateOptions, terms);
+      });
     },
 
     // Partners city selction
     partnerCitySelected(item, index) {
-      this.$v.partnersArr.$each[index].cityRefCode.$model = item.value;
-      this.$v.partnersArr.$each[index].cityRefLabel.$model = item.label;
+      if (item && item.label) {
+        this.$v.partnersArr.$each[index].cityRefCode.$model = item.value;
+        this.$v.partnersArr.$each[index].cityRefLabel.$model = item.label;
+      } else if (item && typeof item === 'string') {
+        const found = this.cityOptions.find(o => o.label === item || o.value === item);
+        if (found) {
+          this.$v.partnersArr.$each[index].cityRefCode.$model = found.value;
+          this.$v.partnersArr.$each[index].cityRefLabel.$model = found.label;
+        }
+      }
     },
 
     // Partners state selection
     partnerStateSelected(item, index) {
-      this.$v.partnersArr.$each[index].stateRefCode.$model = item.value;
-      this.$v.partnersArr.$each[index].stateRefLabel.$model = item.label;
+      if (item && item.label) {
+        this.$v.partnersArr.$each[index].stateRefCode.$model = item.value;
+        this.$v.partnersArr.$each[index].stateRefLabel.$model = item.label;
+      } else if (item && typeof item === 'string') {
+        const found = this.stateOptions.find(o => o.label === item || o.value === item);
+        if (found) {
+          this.$v.partnersArr.$each[index].stateRefCode.$model = found.value;
+          this.$v.partnersArr.$each[index].stateRefLabel.$model = found.label;
+        }
+      }
     },
 
     addMorePartnersSet() {

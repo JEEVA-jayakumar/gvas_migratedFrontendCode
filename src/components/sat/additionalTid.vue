@@ -48,23 +48,18 @@
                                     " label="Pincode*" />
                                 </div>
                                 <div class="col-md-5">
-                                    <q-input @blur="fnClrCity" color="grey-9"
-                                        v-model.trim="additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel"
+                                    <q-select use-input fill-input hide-selected @blur="fnClrCity" color="grey-9"
+                                        v-model="additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel"
                                         @update:model-value="fninputTyping($event, 1)" label="City (type min 3 characters)*"
-                                        placeholder="Start typing ..*">
-
-                                        <q-autocomplete separator @search="marsCitySearch" :debounce="10"
-                                            :min-characters="3" @selected="partnerCitySelected" />
-                                    </q-input>
+                                        placeholder="Start typing ..*"
+                                        :options="cityOptionsFiltered" @filter="marsCitySearch" @update:model-value="partnerCitySelected" />
                                 </div>
                                 <div class="col-md-5">
-                                    <q-input @blur="fnClrState" color="black-9"
-                                        v-model.trim="additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel"
+                                    <q-select use-input fill-input hide-selected @blur="fnClrState" color="black-9"
+                                        v-model="additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel"
                                         @update:model-value="fninputTyping($event, 2)" label="state (type min 3 characters)*"
-                                        placeholder="Start typing ..*">
-                                        <q-autocomplete separator @search="marsStateSearch" :debounce="10"
-                                            :min-characters="3" @selected="partnerStateSelected" />
-                                    </q-input>
+                                        placeholder="Start typing ..*"
+                                        :options="stateOptionsFiltered" @filter="marsStateSearch" @update:model-value="partnerStateSelected" />
                                 </div> -->
                                 <div class="col-md-6">
                                     <q-input color="grey-9" disable v-model.trim="additionalTerminal.mid"
@@ -118,23 +113,18 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <q-input @blur="fnClrCity" color="grey-9"
-                                        v-model.trim="additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel"
+                                    <q-select use-input fill-input hide-selected @blur="fnClrCity" color="grey-9"
+                                        v-model="additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel"
                                         @update:model-value="fninputTyping($event, 1)" label="City (type min 3 characters)*"
-                                        placeholder="Start typing ..*">
-
-                                        <q-autocomplete separator @search="marsCitySearch" :debounce="10"
-                                            :min-characters="3" @selected="partnerCitySelected" />
-                                    </q-input>
+                                        placeholder="Start typing ..*"
+                                        :options="cityOptionsFiltered" @filter="marsCitySearch" @update:model-value="partnerCitySelected" />
                                 </div>
                                 <div class="col-md-6">
-                                    <q-input @blur="fnClrState" color="black-9"
-                                        v-model.trim="additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel"
+                                    <q-select use-input fill-input hide-selected @blur="fnClrState" color="black-9"
+                                        v-model="additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel"
                                         @update:model-value="fninputTyping($event, 2)" label="state (type min 3 characters)*"
-                                        placeholder="Start typing ..*">
-                                        <q-autocomplete separator @search="marsStateSearch" :debounce="10"
-                                            :min-characters="3" @selected="partnerStateSelected" />
-                                    </q-input>
+                                        placeholder="Start typing ..*"
+                                        :options="stateOptionsFiltered" @filter="marsStateSearch" @update:model-value="partnerStateSelected" />
                                 </div>
                             </q-list>
                         </q-card-section>
@@ -277,6 +267,8 @@ export default {
             subTidArr: [],
             SubTidField: false,
             baseTidFlag: false,
+            cityOptionsFiltered: [],
+            stateOptionsFiltered: [],
             // data: this.propShowAdditionalComponent.data,
             formdata: {
                 paymentMode: ""
@@ -481,11 +473,15 @@ export default {
             if (!this.companyRegisteredStateSelected)
                 this.additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel = ''
         },
-        marsCitySearch(terms, done) {
-            done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+        marsCitySearch(terms, update, abort) {
+            update(() => {
+                this.cityOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.cityOptions, terms);
+            });
         },
-        marsStateSearch(terms, done) {
-            done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+        marsStateSearch(terms, update, abort) {
+            update(() => {
+                this.stateOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.stateOptions, terms);
+            });
         },
         COMMON_FILTER_FUNCTION(arraySet, terms) {
             return _.filter(arraySet, function (oo) {
@@ -497,8 +493,16 @@ export default {
         },
         partnerCitySelected(item) {
             this.companyRegisteredCitySelected = true
-            this.additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel = item.label;
-            this.additionalTerminal.AdditionalTerminalDetails.citySerNumber = item.value;
+            if (item && item.label) {
+                this.additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel = item.label;
+                this.additionalTerminal.AdditionalTerminalDetails.citySerNumber = item.value;
+            } else if (item && typeof item === 'string') {
+                const found = this.cityOptions.find(o => o.label === item || o.value === item);
+                if (found) {
+                    this.additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel = found.label;
+                    this.additionalTerminal.AdditionalTerminalDetails.citySerNumber = found.value;
+                }
+            }
         },
 
         fninputTyping(event, type) {

@@ -32,40 +32,36 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
+        <q-select
+          use-input
+          fill-input
+          hide-selected
           @blur="$v.merchant.companyInformation.registeredCityRefCode.$touch"
           :error="$v.merchant.companyInformation.registeredCityRefCode.$anyError|| $v.merchant.companyInformation.registeredCityName.$anyError"
           color="grey-9"
           v-model="merchant.companyInformation.registeredCityName"
           label="Registered city (type min 3 characters)*"
           placeholder="Start typing ..*"
-        >
-          <q-autocomplete
-            separator
-            @search="citySearch"
-            :debounce="10"
-            :min-characters="3"
-            @selected="registeredCitySelected"
-          />
-        </q-input>
+          :options="cityOptionsFiltered"
+          @filter="citySearch"
+          @update:model-value="registeredCitySelected"
+        />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
+        <q-select
+          use-input
+          fill-input
+          hide-selected
           @blur="$v.merchant.companyInformation.registeredStateRefCode.$touch"
           :error="$v.merchant.companyInformation.registeredStateRefCode.$anyError|| $v.merchant.companyInformation.registeredStateName.$anyError"
           color="grey-9"
           v-model="merchant.companyInformation.registeredStateName"
           label="Registered state (type min 3 characters)*"
           placeholder="Start typing ..*"
-        >
-          <q-autocomplete
-            separator
-            @search="stateSearch"
-            :debounce="10"
-            :min-characters="1"
-            @selected="registeredStateSelected"
-          />
-        </q-input>
+          :options="stateOptionsFiltered"
+          @filter="stateSearch"
+          @update:model-value="registeredStateSelected"
+        />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
@@ -159,22 +155,20 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
+        <q-select
+          use-input
+          fill-input
+          hide-selected
           @blur="$v.merchant.companyInformation.mcc.$touch"
           :error="$v.merchant.companyInformation.mcc.$error || $v.merchant.companyInformation.mccname.$error"
           color="grey-9"
           v-model="merchant.companyInformation.mccname"
           label="MCC (type min 3 characters)"
           placeholder="Start typing ..*"
-        >
-          <q-autocomplete
-            separator
-            @search="mccSearch"
-            :debounce="10"
-            :min-characters="3"
-            @selected="mccSelected"
-          />
-        </q-input>
+          :options="mccOptionsFiltered"
+          @filter="mccSearch"
+          @update:model-value="mccSelected"
+        />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
@@ -198,40 +192,36 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
+        <q-select
+          use-input
+          fill-input
+          hide-selected
           @blur="$v.merchant.companyInformation.residentialCityRefCode.$touch"
           :error="$v.merchant.companyInformation.residentialCityRefCode.$anyError|| $v.merchant.companyInformation.residentCityName.$anyError"
           color="grey-9"
           v-model="merchant.companyInformation.residentCityName"
           label="City (type min 3 characters)*"
           placeholder="Start typing ..*"
-        >
-          <q-autocomplete
-            separator
-            @search="citySearch"
-            :debounce="10"
-            :min-characters="3"
-            @selected="residentCitySelected"
-          />
-        </q-input>
+          :options="residentCityOptionsFiltered"
+          @filter="residentCitySearchFilter"
+          @update:model-value="residentCitySelected"
+        />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-input
+        <q-select
+          use-input
+          fill-input
+          hide-selected
           @blur="$v.merchant.companyInformation.residentialStateRefCode.$touch"
           :error="$v.merchant.companyInformation.residentialStateRefCode.$anyError|| $v.merchant.companyInformation.residentStateName.$anyError"
           color="grey-9"
           v-model="merchant.companyInformation.residentStateName"
           label="State (type min 3 characters)*"
           placeholder="Start typing ..*"
-        >
-          <q-autocomplete
-            separator
-            @search="stateSearch"
-            :debounce="10"
-            :min-characters="1"
-            @selected="residentStateSelected"
-          />
-        </q-input>
+          :options="residentStateOptionsFiltered"
+          @filter="residentStateSearchFilter"
+          @update:model-value="residentStateSelected"
+        />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
@@ -433,7 +423,12 @@ export default {
       },
       merchant: {
         companyInformation: {}
-      }
+      },
+      cityOptionsFiltered: [],
+      stateOptionsFiltered: [],
+      mccOptionsFiltered: [],
+      residentCityOptionsFiltered: [],
+      residentStateOptionsFiltered: []
     };
   },
   validations: {
@@ -541,38 +536,86 @@ export default {
         return oo.label.toLowerCase().includes(terms.toLowerCase());
       });
     },
-    citySearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+    citySearch(terms, update, abort) {
+      update(() => {
+        this.cityOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.cityOptions, terms);
+      });
     },
-    stateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+    stateSearch(terms, update, abort) {
+      update(() => {
+        this.stateOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.stateOptions, terms);
+      });
+    },
+    residentCitySearchFilter(terms, update, abort) {
+      update(() => {
+        this.residentCityOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.cityOptions, terms);
+      });
+    },
+    residentStateSearchFilter(terms, update, abort) {
+      update(() => {
+        this.residentStateOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.stateOptions, terms);
+      });
     },
 
     // Registered city selction
     registeredCitySelected(item) {
-      this.merchant.companyInformation.registeredCityName = item.label;
-      this.merchant.companyInformation.registeredCityRefCode = item.value;
+      if (item && item.label) {
+        this.merchant.companyInformation.registeredCityName = item.label;
+        this.merchant.companyInformation.registeredCityRefCode = item.value;
+      } else if (item && typeof item === 'string') {
+        const found = this.cityOptions.find(o => o.label === item || o.value === item);
+        if (found) {
+          this.merchant.companyInformation.registeredCityName = found.label;
+          this.merchant.companyInformation.registeredCityRefCode = found.value;
+        }
+      }
     },
 
     // Registered state selection
     registeredStateSelected(item) {
-      this.merchant.companyInformation.registeredStateName = item.label;
-      this.merchant.companyInformation.registeredStateRefCode = item.value;
+      if (item && item.label) {
+        this.merchant.companyInformation.registeredStateName = item.label;
+        this.merchant.companyInformation.registeredStateRefCode = item.value;
+      } else if (item && typeof item === 'string') {
+        const found = this.stateOptions.find(o => o.label === item || o.value === item);
+        if (found) {
+          this.merchant.companyInformation.registeredStateName = found.label;
+          this.merchant.companyInformation.registeredStateRefCode = found.value;
+        }
+      }
     },
 
     // Resident city selection
     residentCitySelected(item) {
-      this.merchant.companyInformation.residentCityName = item.label;
-      this.merchant.companyInformation.residentialCityRefCode = item.value;
+      if (item && item.label) {
+        this.merchant.companyInformation.residentCityName = item.label;
+        this.merchant.companyInformation.residentialCityRefCode = item.value;
+      } else if (item && typeof item === 'string') {
+        const found = this.cityOptions.find(o => o.label === item || o.value === item);
+        if (found) {
+          this.merchant.companyInformation.residentCityName = found.label;
+          this.merchant.companyInformation.residentialCityRefCode = found.value;
+        }
+      }
     },
     // Resident state selection
     residentStateSelected(item) {
-      this.merchant.companyInformation.residentStateName = item.label;
-      this.merchant.companyInformation.residentialStateRefCode = item.value;
+      if (item && item.label) {
+        this.merchant.companyInformation.residentStateName = item.label;
+        this.merchant.companyInformation.residentialStateRefCode = item.value;
+      } else if (item && typeof item === 'string') {
+        const found = this.stateOptions.find(o => o.label === item || o.value === item);
+        if (found) {
+          this.merchant.companyInformation.residentStateName = found.label;
+          this.merchant.companyInformation.residentialStateRefCode = found.value;
+        }
+      }
     },
 
-    mccSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.mccSearchSet, terms));
+    mccSearch(terms, update, abort) {
+      update(() => {
+        this.mccOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.mccSearchSet, terms);
+      });
     },
     mccSelected(item) {
       this.merchant.companyInformation.mccname = item.label;

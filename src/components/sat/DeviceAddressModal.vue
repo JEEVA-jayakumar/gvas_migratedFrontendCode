@@ -18,15 +18,19 @@
           :error="$v.formData.marsDeviceAddress.deviceAddress.$error"  color="grey-9" v-model="formData.marsDeviceAddress.deviceAddress" label="Address" placeholder="Address" />
         </div>
         <div>
-          <q-input :error="$v.formData.marsDeviceAddress.pincode.$error" 
-          color="grey-9" v-model="formData.marsDeviceAddress.pincode" label="Pincode" placeholder="Pincode">
-            <q-autocomplete
-            @search="pincodeSearch"
-            :debounce="500"
-            :min-characters="1"
-            @selected="pincodeSelected"
-            />
-          </q-input>
+          <q-select
+            use-input
+            fill-input
+            hide-selected
+            :error="$v.formData.marsDeviceAddress.pincode.$error"
+            color="grey-9"
+            v-model="formData.marsDeviceAddress.pincode"
+            label="Pincode"
+            placeholder="Pincode"
+            :options="pincodeOptions"
+            @filter="pincodeSearch"
+            @update:model-value="pincodeSelected"
+          />
         </div>
         <div>
          <q-input color="grey-9" disable v-model="formData.marsDeviceAddress.state" label="State" placeholder="State" />
@@ -80,7 +84,8 @@ export default {
           state: this.currentDeviceInfo.marsDeviceAddress.state
         }
       },
-      pagination: this.paginationControl
+      pagination: this.paginationControl,
+      pincodeOptions: []
     };
   },
 
@@ -119,13 +124,24 @@ export default {
     },
 
     /* Pincode search result */
-    pincodeSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateInformation, terms));
+    pincodeSearch(terms, update, abort) {
+      update(() => {
+        this.pincodeOptions = this.COMMON_FILTER_FUNCTION(this.stateInformation, terms);
+      });
     },
     pincodeSelected(item) {
-      this.formData.marsDeviceAddress.state = item.value.stateName;
-      this.formData.marsDeviceAddress.city = item.value.cityName;
-      this.formData.marsDeviceAddress.pincode = item.value.pincode;
+      if (item && item.value) {
+        this.formData.marsDeviceAddress.state = item.value.stateName;
+        this.formData.marsDeviceAddress.city = item.value.cityName;
+        this.formData.marsDeviceAddress.pincode = item.value.pincode;
+      } else if (item && typeof item === 'string') {
+        const found = this.stateInformation.find(o => o.label === item || o.value === item);
+        if (found) {
+          this.formData.marsDeviceAddress.state = found.value.stateName;
+          this.formData.marsDeviceAddress.city = found.value.cityName;
+          this.formData.marsDeviceAddress.pincode = found.value.pincode;
+        }
+      }
     },
     /* Pincode search result */
 

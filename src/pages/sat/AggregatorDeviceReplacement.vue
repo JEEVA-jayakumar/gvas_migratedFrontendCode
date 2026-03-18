@@ -148,7 +148,7 @@
                 </q-td>
                 <q-td v-else :props="props">NA</q-td>
               </template>
-              <template slot="top">
+              <template v-slot:top>
                 <!--START: table filter,search -->
                 <div class="col-md-5">
                   <q-input
@@ -247,7 +247,7 @@
                 </q-td>
                 <q-td v-else :props="props">NA</q-td>
               </template>
-              <template slot="top">
+              <template v-slot:top>
                 <!--START: table filter,search -->
                 <div class="col-md-5">
                   <q-input
@@ -429,7 +429,8 @@
               else
                 return "NA"
             },
-            format: (val) => `${val}|moment("Do MMM Y")`,
+            format: (val) => this.$moment(val).format("Do MMM Y"),
+            format: (val) => this.$moment(val).format("Do MMM Y"),
             sortable: true,
           },
         ],
@@ -552,7 +553,7 @@
               else
                 return "NA"
             },
-            format: (val) => `${val}|moment("Do MMM Y")`,
+            format: (val) => this.$moment(val).format("Do MMM Y"),
             sortable: true,
           },
         ],

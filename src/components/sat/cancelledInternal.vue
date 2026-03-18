@@ -272,7 +272,7 @@
                                 </q-td>
                             </q-tr>
                             </template>
-                        <template slot="top">
+                        <template v-slot:top>
                             <div class="col-md-5">
                                 <q-input clearable color="grey-9" v-model=" filterSearch" placeholder="Type.."
                                 label="Search By ServiceReqTicketId, TID .." class="q-mr-lg q-py-sm" />

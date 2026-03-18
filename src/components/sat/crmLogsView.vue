@@ -29,13 +29,21 @@
         :columns="columns"
         row-key="name"
       >
-        <q-td v-slot:body-cell-attemptno="props" :props="props">{{
+        <template v-slot:body-cell-attemptno="props">
+            <q-td :props="props">
+            {{
           props.row.orderId == null ? "NA" : props.row.orderId
-        }}</q-td>
+        }}
+          </q-td>
+          </template>
 
-        <q-td v-slot:body-cell-dateandtime="props" :props="props">
+        <template v-slot:body-cell-dateandtime="props">
+            <q-td :props="props">
+
           {{ formatDateTime(props.row.inputDate) }}
-        </q-td>
+
+          </q-td>
+          </template>
       </q-table>
     </q-dialog>
   </q-page>

@@ -239,14 +239,14 @@
           <div class="row gutter-x-xs">
             <div class="col-lg-12">
               <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
-                <q-card-title>
+                <q-card-section>
                   <div class="q-subheading text-bold">Aging Tracker</div>
-                </q-card-title>
+                </q-card-section>
                 <chartSATagingTracker :options="{ responsive: false, maintainAspectRatio: false }" :height="150"
                   class="bg-white q-pa-md round-borders"></chartSATagingTracker>
               </q-card>
               <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
-                <q-card-title>
+                <q-card-section>
                   <div class="row items-center">
                     <div class="col-12 col-lg-9">
                       <div class="q-subheading text-bold">Merchant Tracker</div>
@@ -258,7 +258,7 @@
                       </div>
                     </div>
                   </div>
-                </q-card-title>
+                </q-card-section>
                 <chartMerchantTracker v-if="renderMerchantGraph" :borderWidth="1" :height="150"
                   :merchantTrackerData="getSatDashboardGraphData" class="bg-white q-pa-md round-borders">
                 </chartMerchantTracker>
@@ -272,15 +272,15 @@
             <div class="col-md-5 col-sm-12 col-xs-12 full-width">
               <q-card class="q-pa-sm full-height bg-orange border-radius-10 vertical-middle items-center" align="center"
                 vertical>
-                <q-card-title>
+                <q-card-section>
                   <div class="q-title text-white cursor-pointer"
                     @click="retrieveLeadsList(applicationPendingCount.totalApplicationPendingLeadIds)">
                     {{ applicationPendingCount.totalApplicationPendingCount }}</div>
-                </q-card-title>
-                <q-card-separator style="width:75px" class="bg-white" />
-                <q-card-main class="q-pa-md">
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white" />
+                <q-card-section class="q-pa-md">
                   <p class="md-q-subheading sm-q-caption text-faded text-white" align="center">Application Pending</p>
-                </q-card-main>
+                </q-card-section>
               </q-card>
             </div>
             <div class="col-md-7 col-sm-12 col-xs-12">
@@ -372,33 +372,45 @@
           <div class="row gutter-x-xs gutter-y-xs q-my-xs items-center">
             <div class="col-md-12">
               <q-card square>
-                <q-card-title>
+                <q-card-section>
                   Aging Tracker -
                   <span class="text-amber-9">Pending</span>
-                </q-card-title>
-                <q-card-main>
+                </q-card-section>
+                <q-card-section>
                   <div>
                     <q-table dense hide-bottom :rows="agingTrackerPendingTableData"
                       :columns="agingTrackerPendingColumns" v-model:pagination="paginationControl" row-key="name">
                       <template v-slot:body-cell-name="props">
                         <q-td :props="props">{{ props.row.name }}</q-td>
                       </template>
-                      <q-td slot="body-cell-greaterThanOneDay" slot-scope="props" :props="props" class="cursor-pointer"
-                        @click.native="retrieveLeadsList(props.row.greaterThanOneDayLeadIdList)">{{
+                      <template v-slot:body-cell-greaterThanOneDay="props">
+            <q-td :props="props" class="cursor-pointer"
+                        @click.native="retrieveLeadsList(props.row.greaterThanOneDayLeadIdList)">
+            {{
                           props.row.greaterThanOneDay
-                        }}</q-td>
-                      <q-td slot="body-cell-greaterThanTwoDays" slot-scope="props" :props="props" class="cursor-pointer"
-                        @click.native="retrieveLeadsList(props.row.greaterThanTwoDaysLeadIdList)">{{
+                        }}
+          </q-td>
+          </template>
+                      <template v-slot:body-cell-greaterThanTwoDays="props">
+            <q-td :props="props" class="cursor-pointer"
+                        @click.native="retrieveLeadsList(props.row.greaterThanTwoDaysLeadIdList)">
+            {{
                           props.row.greaterThanTwoDays
-                        }}</q-td>
-                      <q-td slot="body-cell-greaterThanFiveDays" slot-scope="props" :props="props"
+                        }}
+          </q-td>
+          </template>
+                      <template v-slot:body-cell-greaterThanFiveDays="props">
+            <q-td :props="props"
                         class="cursor-pointer"
-                        @click.native="retrieveLeadsList(props.row.greaterThanFiveDaysLeadIdList)">{{
+                        @click.native="retrieveLeadsList(props.row.greaterThanFiveDaysLeadIdList)">
+            {{
                           props.row.greaterThanFiveDays
-                        }}</q-td>
+                        }}
+          </q-td>
+          </template>
                     </q-table>
                   </div>
-                </q-card-main>
+                </q-card-section>
               </q-card>
             </div>
           </div>

@@ -7,8 +7,6 @@
             <q-tabs
               v-model="uploadTab"
               class="shadow-1"
-              animated
-              swipeable
               color="tertiary"
               align="justify"
             >
@@ -94,8 +92,6 @@
           <div class="col">
             <q-tabs
               class="shadow-1"
-              animated
-              swipeable
               color="tertiary"
               align="justify"
               v-model="selectedTab"
@@ -115,7 +111,7 @@
                   :columns="columnData"
                   table-class="customTableClass"
                   :filter="filterSearch1"
-                  :selected="formData.marsDeviceIdsCooked"
+                  v-model:selected="formData.marsDeviceIdsCooked"
                   v-model:pagination="paginationControl1"
                   row-key="id"
                   :loading="tableAjaxLoading1"
@@ -123,78 +119,68 @@
                   color="dark"
                   @request="ajaxLoadAllLeadInfo1"
                 >
-                  <q-td
-                    v-slot:body-cell-tid="props"
-                    :props="props"
-                    class="customTd"
-                  >
-                    <div class="text-primary">{{ props.row.tid }}</div>
-                  </q-td>
-                  <q-td
-                    v-slot:body-cell-mid="props"
-                    :props="props"
-                    class="customTd"
-                  >
-                    <div class="text-primary">{{ props.row.mid }}</div>
-                  </q-td>
-                  <q-td
-                    v-slot:body-cell-createdAt="props"
-                    :props="props"
-                    >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
-                  >
-                  <q-td
-                    v-slot:body-cell-assign="props"
-                    :props="props"
-                  >
-                    <q-btn
-                      class="btn1"
-                      v-if="props.row.isStatus == 1"
-                      disable
-                      highlight
-                      push
-                      color="positive"
-                      size="sm"
-                      >Success</q-btn
-                    >
-                    <q-btn
-                      v-if="props.row.isStatus == 2"
-                      highlight
-                      push
-                      color="negative"
-                      size="sm"
-                      @click="OGSPendingStatus(props.row)"
-                      >Re-Submit</q-btn
-                    >
-                    <q-btn
-                      v-if="props.row.isStatus == 3"
-                      highlight
-                      push
-                      color="negative"
-                      size="sm"
-                      @click="OGSPendingStatus(props.row)"
-                      >Re-Submit</q-btn
-                    >
-                    <q-btn
-                      class="btn1"
-                      v-if="props.row.isStatus == 4"
-                      disable
-                      highlight
-                      push
-                      color="purple-9"
-                      size="sm"
-                      >Installed</q-btn
-                    >
-                    <q-btn
-                      v-if="props.row.isStatus == null"
-                      highlight
-                      push
-                      color="purple-9"
-                      size="sm"
-                      @click="OGSPendingStatus(props.row)"
-                      >Re-Submit</q-btn
-                    >
-                  </q-td>
-                  <template slot="top">
+                  <template v-slot:body-cell-tid="props">
+                    <q-td :props="props" class="customTd">
+                      <div class="text-primary">{{ props.row.tid }}</div>
+                    </q-td>
+                  </template>
+                  <template v-slot:body-cell-mid="props">
+                    <q-td :props="props" class="customTd">
+                      <div class="text-primary">{{ props.row.mid }}</div>
+                    </q-td>
+                  </template>
+                  <template v-slot:body-cell-createdAt="props">
+                    <q-td :props="props">
+                      {{ $moment(props.row.createdAt).format("Do MMM Y") }}
+                    </q-td>
+                  </template>
+                  <template v-slot:body-cell-assign="props">
+                    <q-td :props="props">
+                      <q-btn
+                        class="btn1"
+                        v-if="props.row.isStatus == 1"
+                        disable
+                        push
+                        color="positive"
+                        size="sm"
+                        >Success</q-btn
+                      >
+                      <q-btn
+                        v-if="props.row.isStatus == 2"
+                        push
+                        color="negative"
+                        size="sm"
+                        @click="OGSPendingStatus(props.row)"
+                        >Re-Submit</q-btn
+                      >
+                      <q-btn
+                        v-if="props.row.isStatus == 3"
+                        push
+                        color="negative"
+                        size="sm"
+                        @click="OGSPendingStatus(props.row)"
+                        >Re-Submit</q-btn
+                      >
+                      <q-btn
+                        class="btn1"
+                        v-if="props.row.isStatus == 4"
+                        disable
+                        push
+                        color="purple-9"
+                        size="sm"
+                        >Installed</q-btn
+                      >
+                      <q-btn
+                        v-if="props.row.isStatus == null"
+                        push
+                        color="purple-9"
+                        size="sm"
+                        @click="OGSPendingStatus(props.row)"
+                        >Re-Submit</q-btn
+                      >
+                    </q-td>
+                  </template>
+                  <template v-slot:top>
                     <div class="col-md-4">
                       <q-input
                         clearable
@@ -205,27 +191,20 @@
                         class="q-mr-lg q-py-sm"
                       />
                     </div>
-
                     <div class="col-md-6">
-                    <q-btn
-                      color="purple-9"
-                      label="Download as Excel"
-                      class="q-mr-lg q-py-sm float-right"
-                      size="md"
-                      @click="downloadHitachiIndianBank()"
-                    />
-                  </div>
-
+                      <q-btn
+                        color="purple-9"
+                        label="Download as Excel"
+                        class="q-mr-lg q-py-sm float-right"
+                        size="md"
+                        @click="downloadHitachiIndianBank()"
+                      />
+                    </div>
                   </template>
                 </q-table>
                 <!--END: table Data -->
               </q-tab-panel>
             </q-tab-panels>
-            <div class="row items-center gutter-y-sm">
-              <div class="col-md-9 col-sm-12 col-xs-12">
-                <div class="row items-center"></div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -238,11 +217,10 @@
   </q-page>
 </template>
 <script>
-import { required, email, not, or } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import downloadIndianBankReports from "../../components/sat/downloadIndianBankReports.vue";
 export default {
-  name: "implementationQueue",
+  name: "hitachiIndianBankOnboarding",
   components: {
     downloadIndianBankReports
   },
@@ -270,7 +248,7 @@ export default {
           field: row => {
             return row.createdAt;
           },
-          format: val => `${val}|moment("Do MMM Y")`,
+          format: val => this.$moment(val).format("Do MMM Y"),
           sortable: true
         },
         {
@@ -373,56 +351,35 @@ export default {
         fileSelected: []
       },
       paginationControl: {
-        sortBy: "createdAt", // String, column "name" property value
+        sortBy: "createdAt",
         descending: false,
         page: 1,
-        rowsPerPage: 5 // current rows per page being displayed
+        rowsPerPage: 5
       },
       paginationControl1: {
-        sortBy: "createdAt", // String, column "name" property value
+        sortBy: "createdAt",
         descending: false,
         page: 1,
-        rowsPerPage: 5 // current rows per page being displayed
+        rowsPerPage: 5
       },
       tableAjaxLoading: false,
       tableAjaxLoading1: false
     };
   },
-
   computed: {
-    ...mapGetters("HitachiIndianBankOnboarding", ["getHitachiIndianOnboarding"])
-    // ...mapGetters("ImplementationExecutive", ["getImplementationExecutiveList"])
-  },
-  beforeMount() {
-    console.log(
-      "FORMDATA------------->>>>",
-      JSON.stringify(this.formData.props)
-    );
-    console.log(
-      "PROPS DETAILS TID1-------------->>>>",
-      JSON.stringify(this.props)
-    );
-  },
-  mounted() {
-    console.log(
-      "File Selected--------->>>>",
-      JSON.stringify(this.formData.fileSelected)
-    );
+    ...mapGetters("HitachiIndianBankOnboarding", ["getHitachiIndianOnboarding"]),
+    ...mapGetters("ImplementationExecutive", ["getImplementationExecutiveList"])
   },
   methods: {
-    ...mapActions("HitachiIndianBankOnboarding", [
-      "HITACHI_INDIAN_ONBOARDING_LIST",
-      "REASSIGN_HITACHI_MERCHANTS"
-    ]),
+    ...mapActions("HitachiIndianBankOnboarding", ["HITACHI_INDIAN_ONBOARDING_LIST", "REASSIGN_HITACHI_MERCHANTS"]),
     ...mapActions("InventoryCentral", ["REPORT_HITACHI_ONBOARDING_MERCHANTS"]),
     ...mapActions("SuperAdminUsers", ["FETCH_ALL_STATES_DATA"]),
-    ...mapActions("IndianBankUpload", [
-      "FEED_HITACHI_INDIAN_BANK_ONBOARDING_UPLOAD_DATA"
-    ]),
+    ...mapActions("IndianBankUpload", ["FEED_HITACHI_INDIAN_BANK_ONBOARDING_UPLOAD_DATA"]),
+    ...mapActions("ImplementationExecutive", ["IMPLEMENTATION_EXECUTIVE_LIST"]),
+
     removeBulkUploadFile() {
       this.formData.fileSelected = [];
     },
-
     dragAndDropCustomAnimate(action) {
       this.uploaderHovered = action;
     },
@@ -432,274 +389,74 @@ export default {
       this.formData.fileSelected = e.dataTransfer.files;
       this.fileCheckSum(e.dataTransfer.files);
     },
-
     fileCheckSum(file) {
-      console.log(file);
       let re = /(\.csv|\.xlsx|\.xls)$/i;
       if (!re.exec(file[0].name)) {
         this.formData.fileSelected = [];
-        this.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "File format not supported",
-          icon: "clear"
-        });
+        this.$q.notify({ color: "negative", position: "bottom", message: "File format not supported", icon: "clear" });
         return false;
       }
     },
-
     onChange(e) {
       this.formData.fileSelected = e.target.files;
     },
-
     uploadFileForBulkUpload(formData) {
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Validating .."
-      });
       if (this.formData.fileSelected.length == 0) {
-        this.$q.notify({
-          color: "amber-9",
-          position: "bottom",
-          message: "Please upload file",
-          icon: "warning"
-        });
+        this.$q.notify({ color: "amber-9", position: "bottom", message: "Please upload file", icon: "warning" });
         return false;
-      } else {
-        this.$q.loading.show({
-          delay: 100, // ms
-          spinnerColor: "purple-9",
-          message: "Please wait.."
-        });
-        let assumeFormData = new FormData();
-        assumeFormData.append("file", this.formData.fileSelected[0]);
-        let assumeFormDataValue = {
-          file: assumeFormData
-        };
-        this.FEED_HITACHI_INDIAN_BANK_ONBOARDING_UPLOAD_DATA(
-          assumeFormDataValue
-        )
-          .then(response => {
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully Uploaded!",
-              icon: "thumb_up"
-            });
-            this.ajaxLoadAllLeadInfo1({pagination: this.paginationControl,filter: this.filterSearch});
-            this.$emit("emitToggleinventoryBulkUploadOnSuccess");
-            this.formData.fileSelected = [];
-          })
-          .catch(error => {
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
-              icon: "thumb_down"
-            });
-          });
       }
-    },
-    getPincodeInformations() {
-      this.FETCH_ALL_STATES_DATA();
+      this.$q.loading.show({ delay: 100, spinnerColor: "purple-9", message: "Please wait.." });
+      let assumeFormData = new FormData();
+      assumeFormData.append("file", this.formData.fileSelected[0]);
+      this.FEED_HITACHI_INDIAN_BANK_ONBOARDING_UPLOAD_DATA({ file: assumeFormData }).then(response => {
+          this.$q.loading.hide();
+          this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Uploaded!", icon: "thumb_up" });
+          this.ajaxLoadAllLeadInfo1({pagination: this.paginationControl1, filter: this.filterSearch1});
+          this.$emit("emitToggleinventoryBulkUploadOnSuccess");
+          this.formData.fileSelected = [];
+        }).catch(error => {
+          this.$q.loading.hide();
+          this.$q.notify({ color: "negative", position: "bottom", message: error.body?.message || "Please Try Again Later !", icon: "thumb_down" });
+        });
     },
     ajaxLoadAllLeadInfo1({ pagination, filter }) {
-      // we set QTable to "loading" state
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Fetching data .."
-      });
-      this.HITACHI_INDIAN_ONBOARDING_LIST({ pagination, filter })
-        .then(res => {
-          // updating pagination to reflect in the UI
+      this.$q.loading.show({ delay: 0, spinnerColor: "purple-9", message: "Fetching data .." });
+      this.HITACHI_INDIAN_ONBOARDING_LIST({ pagination, filter }).then(res => {
           this.paginationControl1 = pagination;
-
-          // we also set (or update) rowsNumber
           this.paginationControl1.rowsNumber = this.getHitachiIndianOnboarding.totalElements;
-          this.paginationControl1.page =
-            this.getHitachiIndianOnboarding.number + 1;
-
-          // then we update the rows with the fetched ones
+          this.paginationControl1.page = this.getHitachiIndianOnboarding.number + 1;
           this.tableData1 = this.getHitachiIndianOnboarding.content;
-          console.log(
-            "TABLE DATA1------------------------>>>>>",
-            JSON.stringify(this.tableData1)
-          );
           if (this.getHitachiIndianOnboarding.sort != null) {
-            console.log(
-              "Sort is not null : ---------- : " +
-                JSON.stringify(this.getHitachiIndianOnboarding.sort)
-            );
             this.paginationControl1.sortBy = this.getHitachiIndianOnboarding.sort[0].property;
             this.paginationControl1.descending = this.getHitachiIndianOnboarding.sort[0].ascending;
-            console.log(
-              "Pagination Control modified : -------- : " +
-                JSON.stringify(this.paginationControl1)
-            );
           } else {
-            console.log("Sort is null : ---------- : ");
             this.paginationControl1.sortBy = "createdAt";
-            this.paginationControl1.descending = !this.paginationControl1
-              .descending;
+            this.paginationControl1.descending = !this.paginationControl1.descending;
           }
           this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
-            let assumeArr = [];
-            this.getImplementationExecutiveList.map(function(value) {
-              assumeArr.push({
-                label:
-                  value.name + " | " + value.employeeID + " | " + value.email,
+            this.assignToOptions = this.getImplementationExecutiveList.map(value => ({
+                label: value.name + " | " + value.employeeID + " | " + value.email,
                 value: value.id
-              });
-            });
-            this.assignToOptions = assumeArr;
+              }));
           });
-
-          // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
-        })
-        .catch(() => {
-          this.$q.loading.hide();
-        });
+        }).catch(() => this.$q.loading.hide());
     },
-
-    //Load all short lead info while page loading
     goToUnassignedTab(tab) {
-      if (tab == "unAssigned") {
-        this.ajaxLoadAllLeadInfo1({
-          pagination: this.paginationControl1,
-          filter: this.filterSearch1
-        });
-      } else {
-        this.ajaxLoadAllLeadInfo({
-          pagination: this.paginationControl,
-          filter: this.filterSearch
-        });
-      }
-    },
-
-    // Function to open device address pop up
-    UpdateDeviceAddress(currentDeviceInfo) {
-      this.currentDeviceInfo = [];
-      this.showDeviceAddressModal = !this.showDeviceAddressModal;
-      if (this.formData.marsDeviceIdsCooked.length == 0) {
-        let assumeObj = {
-          id: [currentDeviceInfo.id],
-          marsDeviceAddress: {
-            deviceAddress: currentDeviceInfo.deviceAddress,
-            latitude: 0,
-            longitude: 0,
-            pincode: currentDeviceInfo.pincode,
-            city: currentDeviceInfo.city,
-            state: currentDeviceInfo.state
-          }
-        };
-        this.currentDeviceInfo = assumeObj;
-      } else {
-        let marsDeviceIdsCooked = [];
-        this.formData.marsDeviceIdsCooked.map(function(value) {
-          marsDeviceIdsCooked.push(value.id);
-        });
-        let assumeObj = {
-          id: marsDeviceIdsCooked,
-          marsDeviceAddress: {
-            deviceAddress: currentDeviceInfo.deviceAddress,
-            latitude: 0,
-            longitude: 0,
-            pincode: currentDeviceInfo.pincode,
-            city: currentDeviceInfo.city,
-            state: currentDeviceInfo.state
-          }
-        };
-        this.currentDeviceInfo = assumeObj;
-      }
-    },
-    // Function to open device address pop up
-    UpdateDeviceAddressAfterEmit(pagination) {
-      this.showDeviceAddressModal = !this.showDeviceAddressModal;
-      this.paginationControl = pagination;
+        this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: this.filterSearch1 });
     },
     OGSPendingStatus(request) {
-      console.log(
-        "PROPS DETAILS TID STATUS-------->>>>",
-        JSON.stringify(request.tid)
-      );
-      let param = {
-        tid: request.tid
-      };
-      this.$q.loading.show({
-        delay: 100, // ms
-        message: "Please Wait",
-        spinnerColor: "purple-9",
-        customClass: "shadow-none"
-      });
-      this.REASSIGN_HITACHI_MERCHANTS(param)
-        .then(response => {
-          this.ajaxLoadAllLeadInfo1({
-            pagination: this.paginationControl1,
-            filter: this.filterSearch1
-          });
-          this.$q.notify({
-            color: "positive",
-            position: "bottom",
-            message: "Re-Assigned Successfully",
-            icon: "thumb_up"
-          });
-        })
-        .catch(error => {
+      this.$q.loading.show({ delay: 100, message: "Please Wait", spinnerColor: "purple-9" });
+      this.REASSIGN_HITACHI_MERCHANTS({ tid: request.tid }).then(response => {
+          this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: this.filterSearch1 });
+          this.$q.notify({ color: "positive", position: "bottom", message: "Re-Assigned Successfully", icon: "thumb_up" });
+        }).catch(error => {
           this.$q.loading.hide();
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message:
-              error.body.message == null
-                ? "Please Try Again Later !"
-                : error.body.message,
-            icon: "thumb_down"
-          });
+          this.$q.notify({ color: "negative", position: "bottom", message: error.body?.message || "Please Try Again Later !", icon: "thumb_down" });
         });
     },
-
-    // downloadHitachiOnboardingMerchants() {
-    //   this.$q.loading.show({
-    //     delay: 100 // ms
-    //   });
-    //   this.REPORT_HITACHI_ONBOARDING_MERCHANTS()
-    //     .then(() => {
-    //       this.$q.loading.hide();
-    //       this.$q.notify({
-    //         color: "positive",
-    //         position: "bottom",
-    //         message: "Success, file has been downloaded",
-    //         icon: "check"
-    //       });
-    //     })
-    //     .catch(error => {
-    //       console.log(error);
-    //       this.$q.loading.hide();
-    //       this.$q.notify({
-    //         color: "negative",
-    //         position: "bottom",
-    //         message: "Please try again",
-    //         icon: "thumb_down"
-    //       });
-    //     });
-    // },
     downloadHitachiIndianBank() {
       this.propHitachiReport = !this.propHitachiReport;
-    },
-    // Function to toggle lead information pop up screen
-    toggleLeadInformation(leadDetails) {
-      this.propToggleLeadInformation = !this.propToggleLeadInformation;
-      if (leadDetails != undefined) {
-        this.addtnLeadInformation = leadDetails;
-      }
     }
   }
 };
@@ -711,35 +468,18 @@ export default {
   word-wrap: break-word;
   white-space: normal;
 }
-
 .customTd.customCellLength {
   min-width: 300px !important;
   overflow-x: auto;
 }
-
 * {
   font-family: "Arial";
   font-size: 12px;
 }
-
-*,
-*:after,
-*:before {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -webkit-touch-callout: none;
-}
-
 input[type="file"] {
   position: absolute;
   opacity: 0;
   z-index: -1;
-}
-.side1 {
-  margin-left: 24px;
-  font-size: 30px;
 }
 .btn1 {
   width: 87px;
@@ -747,42 +487,10 @@ input[type="file"] {
 .align-center {
   text-align: center;
 }
-
-.helper {
-  height: 100%;
-  display: inline-block;
-  vertical-align: middle;
-  width: 0;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.hidden.image {
-  display: inline-block !important;
-}
-
 .display-inline {
   display: inline-block;
   vertical-align: middle;
 }
-/* .size1{
-  font-size: medium;
-} */
-
-.size3{
-  margin-left: 30px;
-}
-.img {
-  border: 1px solid #f6f6f6;
-  display: inline-block;
-  height: auto;
-  max-height: 80%;
-  max-width: 80%;
-  width: auto;
-}
-
 .drop {
   padding: 15px;
   background-color: #f6f6f6;

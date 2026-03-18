@@ -301,38 +301,36 @@
             <div class="col-xs-12 col-sm-6">
               <q-input v-model="merchant.companyinformation.registeredAddress" class="no-margin" label="Address" />
             </div>
-            <div class="col-xs-12 col-sm-6">     
-                <q-input
+            <div class="col-xs-12 col-sm-6">
+                <q-select
                   color="grey-9"
-                  v-model.trim="merchant.companyinformation.registeredCityName"
+                  v-model="merchant.companyinformation.registeredCityName"
                   label="City (type min 3 characters)*"
                   placeholder="Start typing ..*"
-                >
-                  <q-autocomplete
-                    separator
-                    @search="residentCitySearch"
-                    :debounce="10"
-                    :min-characters="3"
-                    @selected="registeredCitySelected"
-                  />
-                </q-input>
-                     </div>
-                   <div class="col-xs-12 col-sm-6">  
-                <q-input
-                   color="grey-9"
-                  v-model.trim="merchant.companyinformation.registeredStateName"
+                  use-input
+                  hide-selected
+                  fill-input
+                  input-debounce="10"
+                  :options="cityOptionsSearch"
+                  @filter="fnResidentCitySearch"
+                  @update:model-value="registeredCitySelected"
+                />
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <q-select
+                  color="grey-9"
+                  v-model="merchant.companyinformation.registeredStateName"
                   label="state (type min 3 characters)*"
                   placeholder="Start typing ..*"
-                >
-                  <q-autocomplete
-                    separator
-                    @search="residentStateSearch"
-                    :debounce="10"
-                    :min-characters="1"
-                    @selected="registeredStateSelected"
-                  />
-                </q-input>
-                   </div>
+                  use-input
+                  hide-selected
+                  fill-input
+                  input-debounce="10"
+                  :options="stateOptionsSearch"
+                  @filter="fnResidentStateSearch"
+                  @update:model-value="registeredStateSelected"
+                />
+            </div>
               <div class="col-xs-12 col-sm-6">
               <q-input v-model="merchant.companyinformation.registeredPin" class="no-margin" label="Pincode" />
             </div>
@@ -1382,6 +1380,8 @@ export default {
            subDocumentTypeSelection: 0,
            stateOptions: [],
            cityOptions:[],
+           cityOptionsSearch: [],
+           stateOptionsSearch: [],
       dropDown: {
         deviceOptions: [],
         planOptions:[],
@@ -3148,22 +3148,45 @@ export default {
         });
     },
     /* IFSC bank search result */
-      residentStateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
-    },
     registeredStateSelected(item) {
-      this.merchant.companyinformation.registeredStateName = item.label;
-      this.merchant.companyinformation.registeredStateRefCode = item.value;
+      if (item) {
+        this.merchant.companyinformation.registeredStateName = item.label;
+        this.merchant.companyinformation.registeredStateRefCode = item.value;
+      }
     },
-        residentStateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+    registeredCitySelected(item) {
+      if (item) {
+        this.merchant.companyinformation.registeredCityName = item.label;
+        this.merchant.companyinformation.registeredCityRefCode = item.value;
+      }
     },
-       residentCitySearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+    fnResidentCitySearch(val, update) {
+      if (val.length < 3) {
+        update(() => {
+          this.cityOptionsSearch = [];
+        });
+        return;
+      }
+      update(() => {
+        this.cityOptionsSearch = this.COMMON_FILTER_FUNCTION(
+          this.cityOptions,
+          val
+        );
+      });
     },
-       registeredCitySelected(item) {
-      this.merchant.companyinformation.registeredCityName = item.label;
-      this.merchant.companyinformation.registeredCityRefCode = item.value;
+    fnResidentStateSearch(val, update) {
+      if (val.length < 3) {
+        update(() => {
+          this.stateOptionsSearch = [];
+        });
+        return;
+      }
+      update(() => {
+        this.stateOptionsSearch = this.COMMON_FILTER_FUNCTION(
+          this.stateOptions,
+          val
+        );
+      });
     },
         COMMON_FILTER_FUNCTION(arraySet, terms) {
       return _.filter(arraySet, function(oo) {

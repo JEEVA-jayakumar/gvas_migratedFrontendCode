@@ -215,14 +215,16 @@
             <template v-slot:top>
               <!--START: table filter,search -->
               <!-- <div class="col-md-5">
-                <q-search
-                  clearable
+                <q-input dense clearable
                   color="grey-9"
                   v-model="filterSearch1"
                   placeholder="Type.."
                   label="Search .."
-                  class="q-mr-lg q-py-sm"
-                />
+                  class="q-mr-lg q-py-sm">
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
               </div> -->
               <!--END: table filter,search -->
             </template>
@@ -245,7 +247,7 @@
             @request="ajaxLoadAllLeadInfo"
           >
             <!-- selection="multiple" -->
-            <!-- <template slot="body" slot-scope="props">
+            <!-- <template v-slot:body="props">
                  <q-tr :props="props" class="">
 
                  </q-tr>
@@ -328,14 +330,16 @@
             <template v-slot:top>
               <!--START: table filter,search -->
               <!-- <div class="col-md-5">
-                <q-search
-                  clearable
+                <q-input dense clearable
                   color="grey-9"
                   v-model="filterSearch"
                   placeholder="Type.."
                   label="Search .."
-                  class="q-mr-lg q-py-sm"
-                />
+                  class="q-mr-lg q-py-sm">
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
               </div> -->
             </template>
           </q-table>
@@ -357,7 +361,7 @@
             @request="ajaxLoadAllLeadInfoClosed"
           >
             <!-- selection="multiple" -->
-            <!-- <template slot="body" slot-scope="props">
+            <!-- <template v-slot:body="props">
                  <q-tr :props="props" class="">
 
                  </q-tr>
@@ -440,14 +444,16 @@
             <template v-slot:top>
               <!--START: table filter,search -->
               <!-- <div class="col-md-5">
-                <q-search
-                  clearable
+                <q-input dense clearable
                   color="grey-9"
                   v-model="filterSearch2"
                   placeholder="Type.."
                   label="Search .."
-                  class="q-mr-lg q-py-sm"
-                />
+                  class="q-mr-lg q-py-sm">
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
               </div> -->
             </template>
           </q-table>
@@ -640,7 +646,7 @@ export default {
           field: (row) => {
             return row.leadInformation.submitToMarsDate;
           },
-          format: (val) => `${val}|moment("Do MMM Y")`,
+          format: (val) => this.$moment(val).format("Do MMM Y"),
           sortable: true,
         },
         {
@@ -774,7 +780,7 @@ export default {
           field: (row) => {
             return row.leadInformation.submitToMarsDate;
           },
-          format: (val) => `${val}|moment("Do MMM Y")`,
+          format: (val) => this.$moment(val).format("Do MMM Y"),
           sortable: true,
         },
         {
@@ -898,7 +904,7 @@ export default {
         //   field: (row) => {
         //     return row.leadInformation.submitToMarsDate;
         //   },
-        //   format: (val) => `${val}|moment("Do MMM Y")`,
+        //   format: (val) => this.$moment(val).format("Do MMM Y"),
         //   sortable: true,
         // },
       ],

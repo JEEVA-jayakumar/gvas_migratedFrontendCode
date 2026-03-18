@@ -73,12 +73,18 @@
                                         }}
                                         </q-th>
                                     </q-tr>
-                                    <q-td v-slot:body-cell-baseTid="props" :props="props">
+                                    <template v-slot:body-cell-baseTid="props">
+            <q-td :props="props">
+
                                         <span class="label text-primary">{{ props.row.baseTid == null ? "NA" :
                                                 props.row.baseTid
                                         }}</span>
-                                    </q-td>
-                                    <q-td v-slot:body-cell-action="props" :props="props">
+
+          </q-td>
+          </template>
+                                    <template v-slot:body-cell-action="props">
+            <q-td :props="props">
+
                                         <!-- v-if="props.row.upiEnabled != true" -->
                                         <q-btn   highlight push class="q-mx-sm" color="positive" size="sm"
                                             @click="finalFormSubmit(props.row)" :disabled="props.row.submittedToMars">
@@ -89,7 +95,9 @@
                                             @click="additionalTid(listAllSubTidDetails)"> Additional Tid
                                             </q-btn>
                                            </div> -->
-                                    </q-td>
+
+          </q-td>
+          </template>
                                 </q-table>
                                 <q-btn color="primary" :disabled="fndisable" class="text-center justify-center" @click="finalSubmit()"
                                 label="Final Submit" />

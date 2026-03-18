@@ -22,16 +22,17 @@
             color="dark"
             @request="ajaxLoadAllLeadInfo"
           >
-            <q-td
-              v-slot:body-cell-leadNumber="props"
-              :props="props"
+            <template v-slot:body-cell-leadNumber="props">
+            <q-td :props="props"
               class="cursor-pointer"
-              @click="toggleLeadInformation(props.row.leadNumber)"
-            >
+              @click="toggleLeadInformation(props.row.leadNumber)">
+
               <span class="label text-primary"
                 ># {{ props.row.leadNumber }}</span
               >
-            </q-td>
+
+          </q-td>
+          </template>
             <q-td
               v-slot:body-cell-submitToMarsDate="props"
               :props="props"
@@ -95,7 +96,7 @@ export default {
           field: row => {
             return row.submitToMarsDate;
           },
-          format: val => `${val}|moment("Do MMM Y")`,
+          format: val => this.$moment(val).format("Do MMM Y"),
           sortable: true
         },
         {

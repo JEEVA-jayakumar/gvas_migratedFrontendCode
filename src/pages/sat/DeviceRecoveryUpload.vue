@@ -8,19 +8,13 @@
         <!--END: table title -->
       </div>
       <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
-        <!--START: table title -->
-        <!-- <div class="col-md-4">
-          <q-select color="grey-9" v-model="formData.aggregator" label="Select Aggregator" radio
-            :options="dropdDown.aggregatorOptions" @update:model-value="getaggregator" />
-        </div> -->
         <div class="col-md-4">
-          <!-- <pre>{{tempTableData}}</pre>  ref="clickHeretoStartParent"  ref="clickHeretoStartChild"      -->
           <q-select v-model="formData.device.id" label="Select Device Type" radio color="grey-9"
             :options="deviceOptions" />
         </div>
         <div class="col-md-4">
           <q-select :disabled="formData.device.id == ''" v-model="action" label="Select Device Status" radio
-            color="grey-9" :options="actionOptions" @input="fnDisableDeviceTypeSelection" />
+            color="grey-9" :options="actionOptions" @update:model-value="fnDisableDeviceTypeSelection" />
         </div>
         <!-- Final upload button toggle -->
         <div class="col-12 col-lg-4 group" align="right">
@@ -37,14 +31,18 @@
         color="light-blue">
         <template v-slot:body-cell-action="props">
           <q-td :props="props">
-          <q-btn @click="removeScannedItems(props.row)" label="Remove" icon="close" color="red-6" size="sm" />
+          <q-btn @click="removeScannedItems(props)" label="Remove" icon="close" color="red-6" size="sm" />
         </q-td>
         </template>
-        <template slot="top">
+        <template v-slot:top>
           <!--START: table filter,search -->
           <div class="col-md-5">
-            <q-search clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search .."
-              class="q-mr-lg q-py-sm" />
+            <q-input dense clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search .."
+              class="q-mr-lg q-py-sm">
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
           </div>
           <!--END: table filter,search -->
         </template>
@@ -54,22 +52,15 @@
 </template>
   
 <script>
-import Vue from "vue";
-import VueBarcodeScanner from "vue-barcode-scanner";
-Vue.use(VueBarcodeScanner);
-
 import { mapGetters, mapActions } from "vuex";
 export default {
-  name: "addDeviceScan",
+  name: "DeviceRecoveryUpload",
   props: ["propInventoryWithSo"],
   data() {
     return {
       filterSearch: "",
-
       scanningActive: true,
       deviceOptions: [],
-
-      //Defining columns for table unassigned
       columnData: [
         {
           name: "deviceSerialNumbers",
@@ -87,41 +78,25 @@ export default {
           field: "action"
         }
       ],
-
       tempTableData: [],
       action: "",
       actionOptions: [
-        {
-          label: "Good",
-          value: 1
-        },
-        {
-          label: "Fault",
-          value: 2
-        }
+        { label: "Good", value: 1 },
+        { label: "Fault", value: 2 }
       ],
       formData: {
-        // aggregator: "",
-
         device: {
           id: "",
           isDisable: false
         },
         deviceSerialNumbers: []
       },
-      // dropdDown: {
-      //   aggregatorOptions: [],
-      //   // deviceOption: [],
-      // },
-
       paginationControl: {
         rowsPerPage: 10
       },
-
       tableAjaxLoading: false
     };
   },
-
   computed: {
     ...mapGetters("InventoryScanAddDevice", [
       "getAddDeviceScannedItems",
@@ -131,12 +106,9 @@ export default {
     ...mapGetters("superAdminAggregators", ["getCreatedAggregatorList", "getActiveCreatedAggregatorList"]),
     ...mapGetters("superAdminAggregatorsDevice", ["getCreatedActiveDeviceList"])
   },
-
   created() {
-    // this.fetchAggregatorList();
     this.AggregatorsDevice();
   },
-
   methods: {
     ...mapActions("InventoryScanAddDevice", [
       "REACTIVE_ADD_SCANNED_DEVICE_DATA",
@@ -149,68 +121,30 @@ export default {
     ...mapActions("PhonepeDeviceRecovery", ["PHONEPE_VERIFY_DEVICE_AFTER_RECOVERY", "FEED_PHONEPE_DEVICE_AFTER_SCANNED_TO_SUBMIT"]),
     ...mapActions("superAdminAggregators", ["GET_CREATED_AGGREGATORS_LIST", "GET_ACTIVE_CREATED_AGGREGATORS_LIST"]),
     ...mapActions("superAdminAggregatorsDevice", ["GET_ACTIVE_CREATED_DEVICE_LIST"]),
-    // fetchAggregatorList() {
-    //   let self = this;
-    //   let cookedArr = [];
-    //   self.GET_ACTIVE_CREATED_AGGREGATORS_LIST()
-    //     .then(() => {
-    //       return _.map(self.getActiveCreatedAggregatorList, (item) => {
-    //         console.log("ITEM -------->", item)
-    //         cookedArr.push({
-    //           value: item.id,
-    //           label: item.name
-    //         });
-    //         console.log("cookedArr -------->", cookedArr)
-    //         self.dropdDown.aggregatorOptions = cookedArr;
-    //       });
-
-    //     })
-    // },
     AggregatorsDevice() {
-      self = this;
+      let self = this;
       let cookedArr1 = [];
       self.GET_ACTIVE_CREATED_DEVICE_LIST()
         .then(() => {
           return _.map(this.getCreatedActiveDeviceList, (item) => {
-            console.log("ITEM -------->", item)
             cookedArr1.push({
               value: item.id,
               label: item.deviceName
             });
-            console.log("cookedArr1 -------->", cookedArr1)
             self.deviceOptions = cookedArr1;
           })
         })
     },
-    // fnAjaxPopulateAllDevicesTypes() {
-    //   this.FETCH_ALL_INVENTORY_DEVICES_TYPES_DATA().then(response => {
-    //     let tempArr = [];
-    //     this.getAllInventoryDevicesTypesData.map(function(value, index) {
-    //       tempArr.push({ label: value.deviceName, value: value.id });
-    //     });
-    //     this.deviceOptions = tempArr;
-    //   });
-    // },
-
     fnDisableDeviceTypeSelection() {
-      console.log("fnDisableDeviceTypeSelection ----->", this.scanningActive)
       if (!this.scanningActive) {
         this.scanningActive = true;
       }
       this.$barcodeScanner.destroy();
     },
-
     fnStartScanner() {
       this.$barcodeScanner.init(this.onBarcodeScanned);
       this.scanningActive = false;
     },
-
-    // fnStopScanner() {
-    //   this.scanningActive = true;
-    //   this.$barcodeScanner.destroy();
-    // },
-
-    // Create callback function to receive barcode when the scanner is already done
     onBarcodeScanned(barcode) {
       let duplicatecheckSum = _.find(this.tempTableData, function (oo) {
         return oo.deviceSerialNumbers == barcode;
@@ -240,33 +174,16 @@ export default {
           icon: "info"
         });
       }
-      /* Send duplicate avoided values to state => action  */
-      // this.REACTIVE_ADD_SCANNED_DEVICE_DATA(
-      //   _.uniqBy(this.tempTableData, "deviceSerialNumbers")
-      // );
     },
-
-    //Function to remove scanned items
-    removeScannedItems(item) {
-      // this.getAddDeviceScannedItems.splice(item.__index, 1);
-      // this.tempTableData.splice(item.__index, 1);
-      this.$delete(this.tempTableData, item.__index);
+    removeScannedItems(props) {
+      this.tempTableData.splice(props.rowIndex, 1);
       if (this.tempTableData.length == 0) {
         this.scanningActive = true;
       }
-      // this.REACTIVE_ADD_SCANNED_DEVICE_DATA(this.getAddDeviceScannedItems);
     },
-
-    //Function to final submit all devices scanned
     finalSubmit() {
-      console.log("finalSubmit ---------<",JSON.stringify(this.tempTableData[0].deviceSerialNumbers))
-      // let cookedArr = [];
-      // this.tempTableData.map(function (value, index) {
-      //   cookedArr.push(value.deviceSerialNumbers);
-      // });
       this.formData.deviceSerialNumbers = this.tempTableData[0].deviceSerialNumbers;
       let param = {
-        // aggregatorId: this.formData.aggregator,
         deviceId: this.formData.device.id,
         action: this.action,
         request: {
@@ -281,9 +198,9 @@ export default {
             message: "Devices are added successfully!",
             icon: "thumb_up"
           });
-          this.formData = "";
+          this.formData.device.id = "";
+          this.tempTableData = [];
           this.action = ""
-          // this.$router.push("/inventory/PhonepeInventory");
         })
         .catch(error => {
           this.$q.notify({

@@ -183,7 +183,7 @@
           <div class="col-xs-12 col-sm-6">
             <p></p>
             <q-item>
-              <q-item-main>Upload the Cheque File :</q-item-main>
+              <q-item-section>Upload the Cheque File :</q-item-section>
               <label
                 class="cursor-pointer text-white"
                 style="background-color: #202c3f"
@@ -1352,8 +1352,8 @@
             separator
             class="q-body-1 text-dark bg-grey-4 text-weight-medium"
           >
-            <q-item-main>Application Form</q-item-main>
-            <q-item-side>
+            <q-item-section>Application Form</q-item-section>
+            <q-item-section>
               <label
                 class="cursor-pointer text-white"
                 style="background-color: #202c3f"
@@ -1366,10 +1366,10 @@
                   accept=".png, .jpg, .pdf"
                 />
               </label>
-            </q-item-side>
+            </q-item-section>
           </q-item>
           <q-item separator class="q-body-1">
-            <q-item-main>
+            <q-item-section>
               <div class="full-width">
                 <div
                   class="cursor-pointer"
@@ -1500,8 +1500,8 @@
                 class="border-bottom"
               >
                 <q-item separator dense class="q-body-1 bg-grey-4 q-pa-sm">
-                  <q-item-main>{{ document.subDocumentType }}</q-item-main>
-                  <q-item-side>
+                  <q-item-section>{{ document.subDocumentType }}</q-item-section>
+                  <q-item-section>
                     <label
                       class="cursor-pointer text-white"
                       style="background-color: #202c3f"
@@ -1519,7 +1519,7 @@
                         accept=".png, .jpg, .pdf"
                       />
                     </label>
-                  </q-item-side>
+                  </q-item-section>
                 </q-item>
                 <!-- {{getShortLeadInfo.leadDocuments}} -->
                 <div
@@ -1546,8 +1546,8 @@
                       class="q-body-1"
                       separator
                     >
-                      <q-item-main>
-                        <q-item-tile class="q-body-1">
+                      <q-item-section>
+                        <q-item-label class="q-body-1">
                           <div
                             class="cursor-pointer"
                             v-if="filesAttachedEarlier.mimeType.includes('pdf')"
@@ -1599,10 +1599,10 @@
                               &nbsp;{{ filesAttachedEarlier.fileName }}
                             </div>
                           </div>
-                        </q-item-tile>
-                      </q-item-main>
+                        </q-item-label>
+                      </q-item-section>
 
-                      <q-item-side>
+                      <q-item-section>
                         <q-btn
                           size="xs"
                           icon="clear"
@@ -1613,7 +1613,7 @@
                           color="negative"
                           label="Remove"
                         />
-                      </q-item-side>
+                      </q-item-section>
                     </q-item>
                   </div>
                 </div>
@@ -1632,7 +1632,7 @@
               }}</q-list-header>
               <div>
                 <q-item separator dense class="q-body-1 q-pa-sm">
-                  <q-item-main>
+                  <q-item-section>
                     <!-- <pre>{{multipleDocument.subDocumentTypeSelection}}</pre> -->
                     <select
                       class="full-width customQuasarSelect"
@@ -1652,8 +1652,8 @@
                         {{ type.subDocumentType }}
                       </option>
                     </select>
-                    </q-item-main>
-                  <q-item-side
+                    </q-item-section>
+                  <q-item-section
                     v-if="
                       fn_________GetEntryPermissionToUploadSubDocuments(
                         multipleDocument
@@ -1679,7 +1679,7 @@
                         accept=".png, .jpg, .pdf"
                       />
                     </label>
-                  </q-item-side>
+                  </q-item-section>
                 </q-item>
               </div>
               <q-item-separator />
@@ -1703,8 +1703,8 @@
                     separator
                     dense
                   >
-                    <q-item-main>
-                      <q-item-tile class="q-body-1">
+                    <q-item-section>
+                      <q-item-label class="q-body-1">
                         <div
                           class="cursor-pointer"
                           v-if="filesAttachedEarlier.mimeType.includes('pdf')"
@@ -1756,9 +1756,9 @@
                             &nbsp;{{ filesAttachedEarlier.fileName }}
                           </div>
                         </div>
-                      </q-item-tile>
-                    </q-item-main>
-                    <q-item-side>
+                      </q-item-label>
+                    </q-item-section>
+                    <q-item-section>
                       <q-btn
                         size="xs"
                         icon="clear"
@@ -1769,7 +1769,7 @@
                         color="negative"
                         label="Remove"
                       />
-                    </q-item-side>
+                    </q-item-section>
                   </q-item>
                   <q-item-separator />
                 </div>
@@ -1819,7 +1819,7 @@
           <div class="col-xs-12" align="center">
             <q-card
               ><strong>Choose the TID List</strong>
-              <q-card-main>
+              <q-card-section>
                 <q-checkbox
                   v-for="(item, index) in formdata.mid"
                   :key="index"
@@ -1828,7 +1828,7 @@
                   :val="item"
                   :label="item"
                 />
-              </q-card-main>
+              </q-card-section>
             </q-card>
           </div>
         </div>
@@ -2035,8 +2035,6 @@
     ></showPdfModalComponent>
   </q-page>
 </template>
-<style></style>
-<style scoped></style>
 <script>
 
 import { LocalStorage } from "quasar";
@@ -2082,6 +2080,7 @@ export default {
   },
   data() {
     return {
+      step: "campaign",
       PDFDetails: null,
       toggleshowPDFModal: false,
       formData: {
@@ -2109,6 +2108,8 @@ export default {
       merchant: {
         datainfo: "",
       },
+      cityOptionsSearch: [],
+      stateOptionsSearch: [],
       formdata: {
         mid: [],
         tid: [],
@@ -3767,6 +3768,7 @@ export default {
                 icon: "thumb_down",
                 message: error.data.message,
               });
+              this.$q.loading.hide();
             });
         })
         .catch((error) => {
@@ -3779,31 +3781,8 @@ export default {
             icon: "thumb_down",
             message: error.data.message,
           });
+          this.$q.loading.hide();
         });
-      // this.MARS_FINAL_SUBMIT_INTERNAL({
-      //   merchant: this.dataCopy,
-      //   action: 1,
-      // })
-      //   .then((response) => {
-              this.$q.loading.hide();
-              this.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: "Saved successfully",
-                icon: "thumb_up",
-              });
-            })
-            .catch((error) => {
-              //  this.MARS_DATA_SUBMIT_INTERNAL_CHANGEMANAGEMENT(merchantrequestparams)
-              console.log(error.status);
-
-              this.$q.notify({
-                color: "negative",
-                position: "bottom",
-                icon: "thumb_down",
-                message: error.data.message,
-              });
-            });
     },
     terinalUpdate() {
       if (

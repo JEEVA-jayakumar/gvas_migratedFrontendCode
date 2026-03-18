@@ -38,14 +38,17 @@
           </div>
           <div class="col-md-3 col-sm-6 col-xs-6">
             <q-select
-              filter
+              use-input
+              @filter="filterAssignToOptions"
               clearable
               v-model="formData.assignTo"
               separator
               color="grey-9"
               :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
+              :options="filteredAssignToOptions"
               placeholder="Assign To"
+              emit-value
+              map-options
             />
              <q-checkbox
               v-model="formData.courier"
@@ -125,17 +128,17 @@
               <Phonepeassigned/>
             </q-tab-panel>
 <q-tab-panel name="cancelledMerchants">
-              <CancelledMerchants/>
+              <!-- Handled in separate tab panel below -->
             </q-tab-panel>
 <q-tab-panel name="unAssigned">
-          <!--STARTv-model: table Data   :rows="getPhonepeImplementationQueueUnassignedList"  -->
+          <!--START: table Data -->
           <q-table
            :rows="tableData1"
             :columns="columnDataUnassigned"
             table-class="customTableClass"
             :filter="filterSearch"
             selection="multiple"
-            :selected="formData.marsDeviceIdsCooked"
+            v-model:selected="formData.marsDeviceIdsCooked"
             v-model:pagination="paginationControl1"
             row-key="id"
             :rows-per-page-options="[10,20,50,100,150,200]"
@@ -143,47 +146,38 @@
             color="dark"
             @request="ajaxLoadAllLeadInfo1"
           >
-            <q-td
-              v-slot:body-cell-leadNumber="props"
-              :props="props"
+            <template v-slot:body-cell-leadNumber="props">
+            <q-td :props="props"
               class="cursor-pointer"
-              @click="toggleLeadInformation(props.row.leadInformation)"
-            >
+              @click="toggleLeadInformation(props.row.leadInformation)">
+
               <span class="label text-primary"
                 ># {{ props.row.leadInformation.leadNumber }}</span
               >
+          </q-td>
+          </template>
+            <template v-slot:body-cell-submitToMarsDate="props">
+              <q-td :props="props">
+                {{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-createdAt="props">
+              <q-td :props="props">
+                {{ $moment(props.row.createdAt).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-mid="props">
+            <q-td :props="props"
+              class="customTd">
 
-
-            </q-td>
-            <q-td
-              v-slot:body-cell-submitToMarsDate="props"
-              :props="props"
-              >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
-            >
-            <q-td
-              v-slot:body-cell-createdAt="props"
-              :props="props"
-              >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
-            >
-            <!-- <q-td
-              v-slot:body-cell-tid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.tid }}</div>
-            </q-td> -->
-            <q-td
-              v-slot:body-cell-mid="props"
-              :props="props"
-              class="customTd"
-            >
               <div class="text-primary">{{ props.row.mid }}</div>
-            </q-td>
-            <q-td
-              v-slot:body-cell-deviceAddress="props"
-              :props="props"
-              class="customTd customCellLength"
-            >
+
+          </q-td>
+          </template>
+            <template v-slot:body-cell-deviceAddress="props">
+            <q-td :props="props"
+              class="customTd customCellLength">
+
               <div>
                 <q-btn
                   no-caps
@@ -195,7 +189,9 @@
                 />
                 {{ props.row.deviceAddress }}
               </div>
-            </q-td>
+
+          </q-td>
+          </template>
             <template v-slot:top="props">
               <!--START: table filter,search -->
               <div class="col-md-5">
@@ -212,6 +208,7 @@
             </template>
           </q-table>
         </q-tab-panel>
+
 <q-tab-panel name="cancelledMerchants">
       <q-table :rows="tableData2"
                       :columns="columnDataMerchants"
@@ -225,45 +222,39 @@
                       color="dark" 
                       @request="ajaxLoadAllLeadInfo2"
                       >
-                      <q-td
-              v-slot:body-cell-leadNumber="props"
-              :props="props"
+                      <template v-slot:body-cell-leadNumber="props">
+            <q-td :props="props"
               class="cursor-pointer"
-              @click="toggleLeadInformation(props.row.leadInformation)"
-            >
+              @click="toggleLeadInformation(props.row.leadInformation)">
+
               <span class="label text-primary"
                 ># {{ props.row.leadInformation.leadNumber }}</span
               >
-            </q-td>
-            <q-td
-              v-slot:body-cell-submitToMarsDate="props"
-              :props="props"
-              >{{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}</q-td
-            >
-            <q-td
-              v-slot:body-cell-createdAt="props"
-              :props="props"
-              >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
-            >
-            <!-- <q-td
-              v-slot:body-cell-tid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.tid }}</div>
-            </q-td> -->
-            <q-td
-              v-slot:body-cell-mid="props"
-              :props="props"
-              class="customTd"
-            >
+
+          </q-td>
+          </template>
+            <template v-slot:body-cell-submitToMarsDate="props">
+              <q-td :props="props">
+                {{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-createdAt="props">
+              <q-td :props="props">
+                {{ $moment(props.row.createdAt).format("Do MMM Y") }}
+              </q-td>
+            </template>
+            <template v-slot:body-cell-mid="props">
+            <q-td :props="props"
+              class="customTd">
+
               <div class="text-primary">{{ props.row.mid }}</div>
-            </q-td>
-            <q-td
-              v-slot:body-cell-deviceAddress="props"
-              :props="props"
-              class="customTd customCellLength"
-            >
+
+          </q-td>
+          </template>
+            <template v-slot:body-cell-deviceAddress="props">
+            <q-td :props="props"
+              class="customTd customCellLength">
+
               <div>
                 <q-btn
                   no-caps
@@ -275,7 +266,9 @@
                 />
                 {{ props.row.deviceAddress }}
               </div>
-            </q-td>
+
+          </q-td>
+          </template>
 
             <template v-slot:top="props">
               <div class="col-md-5">
@@ -333,6 +326,7 @@ export default {
       assignTo: "",
       id:null,
       assignToOptions: [],
+      filteredAssignToOptions: [],
       tableData: [],
       tableData1: [],
       tableData2: [],
@@ -458,7 +452,7 @@ export default {
           field: row => {
             return row.leadInformation.submitToMarsDate;
           },
-          format: val => `${val}|moment("Do MMM Y")`,
+          format: val => this.$moment(val).format("Do MMM Y"),
           sortable: true
         },
         {
@@ -584,7 +578,7 @@ export default {
           field: row => {
             return row.leadInformation.submitToMarsDate;
           },
-          format: val => `${val}|moment("Do MMM Y")`,
+          format: val => this.$moment(val).format("Do MMM Y"),
           sortable: true
         },
         {
@@ -794,15 +788,11 @@ export default {
   },
 
   beforeMount(){
-  this.id=localStorage.getItem("selectedTab").split('|')[1]
+  this.id=localStorage.getItem("selectedTab") != null ? localStorage.getItem("selectedTab").split('|')[1] : null
   },
   
   created() {
 
-    this.ajaxLoadAllLeadInfo({
-      pagination: this.paginationControl,
-      filter: this.filterSearch
-    });
     this.ajaxLoadAllLeadInfo1({
       pagination: this.paginationControl1,
       filter: this.filterSearch1
@@ -830,6 +820,18 @@ export default {
     getPincodeInformations() {
       this.FETCH_ALL_STATES_DATA();
     },
+    filterAssignToOptions(val, update) {
+      if (val === '') {
+        update(() => {
+          this.filteredAssignToOptions = this.assignToOptions;
+        });
+        return;
+      }
+      update(() => {
+        const needle = val.toLowerCase();
+        this.filteredAssignToOptions = this.assignToOptions.filter(v => v.label.toLowerCase().indexOf(needle) > -1);
+      });
+    },
     ajaxLoadAllLeadInfo1({ pagination, filter }) {
       // we set QTable to "loading" state
       this.$q.loading.show({
@@ -845,6 +847,7 @@ export default {
                value: value.id });
             });
             this.assignToOptions = assumeArr;
+            this.filteredAssignToOptions = assumeArr;
           });
           // updating pagination to reflect in the UI
           this.paginationControl1 = pagination;

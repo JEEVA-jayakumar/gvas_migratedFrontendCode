@@ -31,22 +31,30 @@
         <q-th v-for="col in props.columns" :key="col.name" :props="props">{{ col.label }}</q-th>  
         </q-tr>
         <!--END: table header -->
-        <q-td v-slot:body-cell-mid="props" :props="props">
+        <template v-slot:body-cell-mid="props">
+            <q-td :props="props">
+
           <span class="label text-primary"># {{props.row.mid}}</span>
-        </q-td>
-        <q-td
-          v-slot:body-cell-leadNumber="props"
-          :props="props"
+
+          </q-td>
+          </template>
+        <template v-slot:body-cell-leadNumber="props">
+            <q-td :props="props"
           class="cursor-pointer"
-          @click="toggleLeadInformation(props.row.leadInformation)"
-        >
+          @click="toggleLeadInformation(props.row.leadInformation)">
+
           <span class="label text-primary"># {{props.row.leadInformation.leadNumber}}</span>
-        </q-td>
-        <q-td
-          v-slot:body-cell-leadAddress="props"
-          :props="props"
-        >{{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}</q-td>
-        <q-td v-slot:body-cell-action="props" :props="props">
+
+          </q-td>
+          </template>
+        <template v-slot:body-cell-leadAddress="props">
+            <q-td :props="props">
+            {{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}
+          </q-td>
+          </template>
+        <template v-slot:body-cell-action="props">
+            <q-td :props="props">
+
            <q-btn
             highlight
             push
@@ -55,8 +63,10 @@
             size="sm"
             @click="additionalTid(props.row)"
           >Additional TID</q-btn>
-        </q-td>
-        <template slot="top"  class="bottom-border" >
+
+          </q-td>
+          </template>
+        <template v-slot:top  class="bottom-border" >
           <!--START: table filter,search,excel download -->
           <div class="col-5">
             <q-input

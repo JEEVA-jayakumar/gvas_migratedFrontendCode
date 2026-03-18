@@ -134,18 +134,20 @@
           >Data Entry</q-btn>
         </q-td>
         </template>
-        <template slot="top" slot-scope="props" class="bottom-border">
+        <template v-slot:top="props" class="bottom-border">
           <!--START: table filter,search -->
           <div class="col-md-5">
-            <q-search
-              clearable
+            <q-input dense clearable
               color="grey-9"
               v-model="filter1"
               placeholder="Type.."
-              :debounce="600"
+
               class="q-mr-lg q-py-sm"
-              label="Search By MID/TID/Merchant Name "
-            />
+              label="Search By MID/TID/Merchant Name ">
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
           </div>
           <!--END: table filter,search -->
         </template>
@@ -173,9 +175,13 @@
                                  
                         }}</q-td>
       </template>
-        <!-- <q-td slot="body-cell-action" slot-scope="props" :props="props">
+        <!-- <template v-slot:body-cell-action="props">
+            <q-td :props="props">
+
           <q-btn @click="fnEdit(props.row.leadInformation.id)" flat class="text-negative">Edit</q-btn>
-        </q-td>-->
+
+          </q-td>
+          </template>-->
         <template v-slot:body-cell-action="props">
           <q-td :props="props">
           <!-- <q-btn v-if="props.row.leadInformation.leadDocuments.length==0"
@@ -196,18 +202,20 @@
         </q-td>
         </template>
         <!-- END: table body modification -->
-        <template slot="top" slot-scope="props" class="bottom-border">
+        <template v-slot:top="props" class="bottom-border">
           <!--START: table filter,search -->
           <div class="col-md-5">
-            <q-search
-              clearable
+            <q-input dense clearable
               color="grey-9"
               v-model="filter"
               placeholder="Type.."
-              :debounce="600"
+
               class="q-mr-lg q-py-sm"
-              label="Search By MID/TID/Merchant Name"
-            />
+              label="Search By MID/TID/Merchant Name">
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
           </div>
           <!--END: table filter,search -->
         </template>

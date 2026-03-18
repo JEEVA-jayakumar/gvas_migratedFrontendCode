@@ -354,26 +354,24 @@
                         >
                           Pincode
                         </span>
-                        <q-input
-                          type="number"
+                        <q-select
+                          use-input
+                          fill-input
+                          hide-selected
                           onkeydown="javascript: return event.keyCode === 8 ||
                         event.keyCode === 46 ? true : !isNaN(Number(event.key))"
+                          @filter="pincodeSearch"
                           :error="$v.formData.qrShortLead.pincode.$error"
                           @blur="validatePincode"
                           style="width: 220px"
                           clearable
                           color="grey-9"
-                          v-model.trim="formData.qrShortLead.pincode"
+                          v-model="formData.qrShortLead.pincode"
                           label="Pincode"
                           placeholder="Pincode"
-                        >
-                          <q-autocomplete
-                            @search="pincodeSearch"
-                            :debounce="500"
-                            :min-characters="1"
-                            @selected="pincodeSelected1"
-                          />
-                        </q-input>
+                          :options="pincodeOptions1"
+                          @update:model-value="pincodeSelected1"
+                        />
                         <div
                           v-if="$v.formData.qrShortLead.pincode.$error"
                           class="error-tooltip"
@@ -407,7 +405,10 @@
                         >
                           State
                         </span>
-                        <q-input
+                        <q-select
+                          use-input
+                          fill-input
+                          hide-selected
                           clearable
                           :error="$v.formData.qrShortLead.state.$error"
                           @blur="validateStateInput"
@@ -415,22 +416,17 @@
                           color="grey-9"
                           v-model="formData.qrShortLead.state"
                           label="State*"
-                        >
-                          <q-autocomplete
-                            separator
-                            @search="residentStateSearch"
-                            :debounce="10"
-                            :min-characters="3"
-                            @selected="registeredStateSelected1"
-                          />
-                        </q-input>
+                          :options="stateOptionsFiltered1"
+                          @filter="residentStateSearch1"
+                          @update:model-value="registeredStateSelected1"
+                        />
                         <div
                           v-if="$v.formData.qrShortLead.state.$error"
                           class="error-tooltip"
                           :class="{
                             'error-highlight': $v.formData.qrShortLead.state.$error,
                           }"
-                        >
++                        >
                           <span v-if="!$v.formData.qrShortLead.state.$model">
                             State is required.
                           </span>
@@ -448,7 +444,10 @@
                         >
                           City
                         </span>
-                        <q-input
+                        <q-select
+                          use-input
+                          fill-input
+                          hide-selected
                           clearable
                           @blur="validateCityInput"
                           :error="$v.formData.qrShortLead.city.$error"
@@ -456,15 +455,10 @@
                           color="grey-9"
                           v-model="formData.qrShortLead.city"
                           label="City*"
-                        >
-                          <q-autocomplete
-                            separator
-                            @search="residentCitySearch"
-                            :debounce="10"
-                            :min-characters="3"
-                            @selected="registeredCitySelected1"
-                          />
-                        </q-input>
+                          :options="cityOptionsFiltered1"
+                          @filter="residentCitySearch1"
+                          @update:model-value="registeredCitySelected1"
+                        />
                         <div
                           v-if="$v.formData.qrShortLead.city.$error"
                           class="error-tooltip"
@@ -519,7 +513,10 @@
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Merchant Industry - MCC</q-item-section>
-                      <q-input
+                      <q-select
+                        use-input
+                        fill-input
+                        hide-selected
                         clearable
                         @blur="validateMCCInput"
                         :error="
@@ -532,15 +529,10 @@
                           formData.qrShortLead.merchantIndustry.industryName
                         "
                         label="MCC*"
-                      >
-                        <q-autocomplete
-                          separator
-                          @search="mccSearch"
-                          :debounce="10"
-                          :min-characters="3"
-                          @selected="mccSelected"
-                        />
-                      </q-input>
+                        :options="mccOptions"
+                        @filter="mccSearch"
+                        @update:model-value="mccSelected"
+                      />
                       <div
                         v-if="
                           $v.formData.qrShortLead.merchantIndustry.industryName.$error
@@ -792,7 +784,10 @@
                         >
                           City
                         </span>
-                        <q-input
+                        <q-select
+                          use-input
+                          fill-input
+                          hide-selected
                           clearable
                           @blur="validatePersonalCityInput"
                           :error="
@@ -802,15 +797,10 @@
                           color="grey-9"
                           v-model="formData.qrShortLead.personalInfoCity"
                           label="City*"
-                        >
-                          <q-autocomplete
-                            separator
-                            @search="residentCitySearch"
-                            :debounce="10"
-                            :min-characters="3"
-                            @selected="registeredCitySelected"
-                          />
-                        </q-input>
+                          :options="cityOptionsFiltered"
+                          @filter="residentCitySearch"
+                          @update:model-value="registeredCitySelected"
+                        />
                         <div
                           v-if="$v.formData.qrShortLead.personalInfoCity.$error"
                           class="error-tooltip"
@@ -836,7 +826,10 @@
                         >
                           State
                         </span>
-                        <q-input
+                        <q-select
+                          use-input
+                          fill-input
+                          hide-selected
                           clearable
                           :error="$v.formData.qrShortLead.personalInfoState.$error"
                           @blur="validatePersonalStateInput"
@@ -844,15 +837,10 @@
                           color="grey-9"
                           v-model="formData.qrShortLead.personalInfoState"
                           label="State*"
-                        >
-                          <q-autocomplete
-                            separator
-                            @search="residentStateSearch"
-                            :debounce="10"
-                            :min-characters="3"
-                            @selected="registeredStateSelected"
-                          />
-                        </q-input>
+                          :options="stateOptionsFiltered"
+                          @filter="residentStateSearch"
+                          @update:model-value="registeredStateSelected"
+                        />
                         <div
                           v-if="$v.formData.qrShortLead.personalInfoState.$error"
                           class="error-tooltip"
@@ -879,8 +867,10 @@
                         >
                           PIN
                         </span>
-                        <q-input
-                          type="number"
+                        <q-select
+                          use-input
+                          fill-input
+                          hide-selected
                           onkeydown="javascript: return event.keyCode === 8 ||
                              event.keyCode === 46 ? true : !isNaN(Number(event.key))"
                           :error="
@@ -890,19 +880,15 @@
                           style="width: 220px"
                           clearable
                           color="grey-9"
-                          v-model.trim="
+                          v-model="
                             formData.qrShortLead.personalInfoPincode
                           "
                           label="Pincode*"
                           placeholder="Pincode*"
-                        >
-                          <q-autocomplete
-                            @search="pincodeSearch1"
-                            :debounce="500"
-                            :min-characters="1"
-                            @selected="pincodeSelected"
-                          />
-                        </q-input>
+                          :options="pincodeOptions"
+                          @filter="pincodeSearch1"
+                          @update:model-value="pincodeSelected"
+                        />
                         <div
                           v-if="$v.formData.qrShortLead.personalInfoPincode.$error"
                           class="error-tooltip"
@@ -2394,6 +2380,13 @@ export default {
       },
       validPincodes: [], // To store the list of valid pincodes
       validPin: [], // To store the list of valid pincodes
+      pincodeOptions: [],
+      pincodeOptions1: [],
+      cityOptionsFiltered: [],
+      cityOptionsFiltered1: [],
+      stateOptionsFiltered: [],
+      stateOptionsFiltered1: [],
+      mccOptions: [],
       partialSaved: false,
       mccSearchSet: [],
       isactivemerchant: "Small",
@@ -3571,17 +3564,31 @@ export default {
 
     pincodeSelected(item) {
       this.pinSelected = true;
-      this.formData.qrShortLead.personalInfoPincode = item.value.pincode;
+      if (item && item.value) {
+        this.formData.qrShortLead.personalInfoPincode = item.value.pincode;
+      } else if (item && item.pincode) {
+        this.formData.qrShortLead.personalInfoPincode = item.pincode;
+      }
     },
     pincodeSelected1(item) {
       this.pinSelected = true;
-      this.formData.qrShortLead.pincode = item.value.pincode;
+      if (item && item.value) {
+        this.formData.qrShortLead.pincode = item.value.pincode;
+      } else if (item && item.pincode) {
+        this.formData.qrShortLead.pincode = item.pincode;
+      }
     },
     fnClrPin() {
       if (!this.pinSelected) this.formData.qrShortLead.personalInfoPincode = "";
       if (!this.pinSelected) this.formData.qrShortLead.pincode = "";
     },
-    pincodeSearch(terms, done) {
+    pincodeSearch(terms, update, abort) {
+      if (terms === '') {
+        update(() => {
+          this.pincodeOptions1 = [];
+        })
+        return
+      }
       this.formData.qrShortLead.cityName = "";
       this.formData.qrShortLead.stateName = "";
       this.FETCH_PINCODE_WITH_TERM(terms)
@@ -3591,14 +3598,27 @@ export default {
             terms
           );
           this.validPincodes = results.map(item => item.value.pincode); // Store valid pincodes
-          done(results);
+          update(() => {
+            this.pincodeOptions1 = results.map(item => ({
+              label: item.label,
+              value: item.value
+            }));
+          });
         })
         .catch(() => {
-          done([]);
+          update(() => {
+            this.pincodeOptions1 = [];
+          });
         });
     },
 
-    pincodeSearch1(terms, done) {
+    pincodeSearch1(terms, update, abort) {
+      if (terms === '') {
+        update(() => {
+          this.pincodeOptions = [];
+        })
+        return
+      }
       this.formData.qrShortLead.cityName = "";
       this.formData.qrShortLead.stateName = "";
       this.FETCH_PINCODE_WITH_TERM(terms)
@@ -3608,10 +3628,17 @@ export default {
             terms
           );
           this.validPin = results.map(item => item.value.pincode); // Store valid pincodes
-          done(results);
+          update(() => {
+            this.pincodeOptions = results.map(item => ({
+              label: item.label,
+              value: item.value
+            }));
+          });
         })
         .catch(() => {
-          done([]);
+          update(() => {
+            this.pincodeOptions = [];
+          });
         });
     },
     saveFieldData() {
@@ -4094,8 +4121,16 @@ loadUpdate(){
       }
     },
     mccSelected(item) {
-      this.formData.qrShortLead.merchantIndustry.industryName = item.label;
-      this.formData.qrShortLead.merchantIndustry.mccCode = item.value;
+      if (item && item.label) {
+        this.formData.qrShortLead.merchantIndustry.industryName = item.label;
+        this.formData.qrShortLead.merchantIndustry.mccCode = item.value;
+      } else if (item && typeof item === 'string') {
+        const found = this.mccSearchSet.find(o => o.label === item || o.value === item);
+        if (found) {
+          this.formData.qrShortLead.merchantIndustry.industryName = found.label;
+          this.formData.qrShortLead.merchantIndustry.mccCode = found.value;
+        }
+      }
     },
     // regionSelected(item) {
     //   console.log("Selected Region:", item.value);
@@ -4114,8 +4149,10 @@ loadUpdate(){
       this.formData.qrShortLead.marsRentalPlanName = item.value;
     },
 
-    mccSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.mccSearchSet, terms));
+    mccSearch(terms, update, abort) {
+      update(() => {
+        this.mccOptions = this.COMMON_FILTER_FUNCTION(this.mccSearchSet, terms);
+      });
     },
 
     autoCompleteError(val1, val2) {
@@ -4171,28 +4208,74 @@ loadUpdate(){
           this.$q.loading.hide();
         });
     },
-    residentCitySearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
+    residentCitySearch(terms, update, abort) {
+      update(() => {
+        this.cityOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.cityOptions, terms);
+      });
+    },
+    residentCitySearch1(terms, update, abort) {
+      update(() => {
+        this.cityOptionsFiltered1 = this.COMMON_FILTER_FUNCTION(this.cityOptions, terms);
+      });
     },
     registeredCitySelected(item) {
-      this.formData.qrShortLead.personalInfoCity = item.label;
-      this.formData.qrShortLead.personalCityRefCode = item.value;
+      if (item && item.label) {
+        this.formData.qrShortLead.personalInfoCity = item.label;
+        this.formData.qrShortLead.personalCityRefCode = item.value;
+      } else if (item && typeof item === 'string') {
+        const found = this.cityOptions.find(o => o.label === item || o.value === item);
+        if (found) {
+          this.formData.qrShortLead.personalInfoCity = found.label;
+          this.formData.qrShortLead.personalCityRefCode = found.value;
+        }
+      }
     },
     registeredCitySelected1(item) {
-      this.formData.qrShortLead.city = item.label;
-      this.formData.qrShortLead.merchantCityRefCode = item.value;
+      if (item && item.label) {
+        this.formData.qrShortLead.city = item.label;
+        this.formData.qrShortLead.merchantCityRefCode = item.value;
+      } else if (item && typeof item === 'string') {
+        const found = this.cityOptions.find(o => o.label === item || o.value === item);
+        if (found) {
+          this.formData.qrShortLead.city = found.label;
+          this.formData.qrShortLead.merchantCityRefCode = found.value;
+        }
+      }
     },
-    residentStateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
+    residentStateSearch(terms, update, abort) {
+      update(() => {
+        this.stateOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.stateOptions, terms);
+      });
+    },
+    residentStateSearch1(terms, update, abort) {
+      update(() => {
+        this.stateOptionsFiltered1 = this.COMMON_FILTER_FUNCTION(this.stateOptions, terms);
+      });
     },
 
     registeredStateSelected(item) {
-      this.formData.qrShortLead.personalInfoState = item.label;
-      this.formData.qrShortLead.personalStateRefCode = item.value;
+      if (item && item.label) {
+        this.formData.qrShortLead.personalInfoState = item.label;
+        this.formData.qrShortLead.personalStateRefCode = item.value;
+      } else if (item && typeof item === 'string') {
+        const found = this.stateOptions.find(o => o.label === item || o.value === item);
+        if (found) {
+          this.formData.qrShortLead.personalInfoState = found.label;
+          this.formData.qrShortLead.personalStateRefCode = found.value;
+        }
+      }
     },
     registeredStateSelected1(item) {
-      this.formData.qrShortLead.state = item.label;
-      this.formData.qrShortLead.merchantStateRefCode = item.value;
+      if (item && item.label) {
+        this.formData.qrShortLead.state = item.label;
+        this.formData.qrShortLead.merchantStateRefCode = item.value;
+      } else if (item && typeof item === 'string') {
+        const found = this.stateOptions.find(o => o.label === item || o.value === item);
+        if (found) {
+          this.formData.qrShortLead.state = found.label;
+          this.formData.qrShortLead.merchantStateRefCode = found.value;
+        }
+      }
     },
 
     validateStateInput() {

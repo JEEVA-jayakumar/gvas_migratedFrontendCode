@@ -15,10 +15,10 @@
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-item class="bg-light-blue relative-position">
-                  <q-item-main>
-                    <q-item-tile label text-color="grey-12">KYC exceptions queue</q-item-tile>
-                  </q-item-main>
-                  <q-item-side>
+                  <q-item-section>
+                    <q-item-label label text-color="grey-12">KYC exceptions queue</q-item-label>
+                  </q-item-section>
+                  <q-item-section>
                     <q-btn
                       round
                       color="grey-12"
@@ -26,7 +26,7 @@
                       style="border: 3px solid rgb(32, 169, 244);"
                       text-color="light-blue"
                     >{{getExceptionQueueInfo.KYCExceptionCount}}</q-btn>
-                  </q-item-side>
+                  </q-item-section>
                 </q-item>
               </div>
             </div>
@@ -91,10 +91,10 @@
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-item class="bg-green-7">
-                  <q-item-main>
-                    <q-item-tile label text-color="grey-12">Bank Subvention Queue</q-item-tile>
-                  </q-item-main>
-                  <q-item-side>
+                  <q-item-section>
+                    <q-item-label label text-color="grey-12">Bank Subvention Queue</q-item-label>
+                  </q-item-section>
+                  <q-item-section>
                     <q-btn
                       round
                       color="grey-12"
@@ -102,7 +102,7 @@
                       style="border: 3px solid rgb(67, 159, 71);"
                       text-color="green-8"
                     >{{getExceptionQueueInfo.BankExceptionCount}}</q-btn>
-                  </q-item-side>
+                  </q-item-section>
                 </q-item>
               </div>
             </div>
@@ -166,10 +166,10 @@
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <q-item class="bg-red-7">
-                  <q-item-main>
-                    <q-item-tile label text-color="grey-12">Pricing Exception Queue</q-item-tile>
-                  </q-item-main>
-                  <q-item-side>
+                  <q-item-section>
+                    <q-item-label label text-color="grey-12">Pricing Exception Queue</q-item-label>
+                  </q-item-section>
+                  <q-item-section>
                     <q-btn
                       round
                       color="grey-12"
@@ -177,7 +177,7 @@
                       style="border: 3px solid rgb(244, 67, 55);"
                       text-color="red-6"
                     >{{getExceptionQueueInfo.PricingExceptionCount}}</q-btn>
-                  </q-item-side>
+                  </q-item-section>
                 </q-item>
               </div>
             </div>
