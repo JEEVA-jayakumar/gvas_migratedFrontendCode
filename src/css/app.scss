@@ -1,1 +1,49 @@
 // app global css
+
+/* Legacy Quasar Typography Definitions */
+.q-headline {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: normal;
+}
+
+.q-title {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.q-subheading {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.q-body-1 {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.q-body-2 {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.q-caption {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+/* Custom styles for parity */
+.bottom-border {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.round-borders {
+  border-radius: 4px;
+}
