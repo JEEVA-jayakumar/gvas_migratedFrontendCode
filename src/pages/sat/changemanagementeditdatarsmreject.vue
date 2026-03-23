@@ -1186,7 +1186,7 @@
         v-for="multipleDocument in getShortLeadInfoDocumentTypes.uploadedDocuments.forMutipleDocument"
         :key="multipleDocument.id"
       >
-        <q-item-label header class="q-mb-sm bg-grey-4">{{multipleDocument.documentType}}</q-item-label header>
+        <q-item-label header class="q-mb-sm bg-grey-4">{{multipleDocument.documentType}}</q-item-label>
         <div>
           <q-item separator dense class="q-body-1 q-pa-sm">
             <q-item-section>

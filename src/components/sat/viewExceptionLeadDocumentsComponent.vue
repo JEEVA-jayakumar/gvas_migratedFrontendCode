@@ -60,16 +60,19 @@
             >
               <div class="col-md-12 q-body-1">
                 <q-expansion-item separator indent icon-toggle opened multiline class="full-width">
-                  <template slot="header">
-                    <q-item-section icon="attach_file"/>
+                  <template v-slot:header>
+                    <q-item-section avatar>
+                      <q-icon name="attach_file"/>
+                    </q-item-section>
                     <q-item-section
                       class="q-body-1"
-                      :caption="documents[0].uploadedDocuments.length + 'Document(s)'"
-                      :label="index"
-                    />
+                    >
+                      <q-item-label>{{ index }}</q-item-label>
+                      <q-item-label caption>{{ documents[0].uploadedDocuments.length }} Document(s)</q-item-label>
+                    </q-item-section>
                     <q-item-section
                       v-if="documents[0].documentVerifiedStatus == 2 && documents[0].uploadedDocuments.length > 0"
-                      right
+                      side
                     >
                       <q-btn
                         round
@@ -131,13 +134,16 @@
             <div class="row items-center full-width" v-else>
               <div class="col-md-12 q-body-1">
                 <q-expansion-item separator indent icon-toggle opened class="full-width">
-                  <template slot="header">
-                    <q-item-section icon="apps"/>
+                  <template v-slot:header>
+                    <q-item-section avatar>
+                      <q-icon name="apps"/>
+                    </q-item-section>
                     <q-item-section
                       class="q-body-1"
-                      :caption="documents.length + 'Type(s)'"
-                      :label="index"
-                    />
+                    >
+                      <q-item-label>{{ index }}</q-item-label>
+                      <q-item-label caption>{{ documents.length }} Type(s)</q-item-label>
+                    </q-item-section>
                   </template>
                   <div
                     class="row items-center full-width bottom-border"
@@ -152,16 +158,19 @@
                         multiline
                         class="full-width"
                       >
-                        <template slot="header">
-                          <q-item-section icon="attach_file"/>
+                        <template v-slot:header>
+                          <q-item-section avatar>
+                            <q-icon name="attach_file"/>
+                          </q-item-section>
                           <q-item-section
                             class="q-body-1"
-                            :caption="subDocument.uploadedDocuments.length + 'Document(s)'"
-                            :label="subDocument.subDocumentType"
-                          />
+                          >
+                            <q-item-label>{{ subDocument.subDocumentType }}</q-item-label>
+                            <q-item-label caption>{{ subDocument.uploadedDocuments.length }} Document(s)</q-item-label>
+                          </q-item-section>
                           <q-item-section
                             v-if="subDocument.documentVerifiedStatus == 2 && subDocument.uploadedDocuments.length > 0"
-                            right
+                            side
                           >
                             <q-btn
                               round

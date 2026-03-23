@@ -10,9 +10,13 @@
             <div v-if="propGetShortInfo.documentUploadedType != 1" class="row items-center full-width">
               <div class="col-md-12 q-body-1">
                 <q-expansion-item separator indent opened class="full-width">
-                  <template slot="header">
-                    <q-item-section icon="apps" />
-                    <q-item-section class="q-body-1" :caption="'FORMS'" />
+                  <template v-slot:header>
+                    <q-item-section avatar>
+                      <q-icon name="apps" />
+                    </q-item-section>
+                    <q-item-section class="q-body-1">
+                      <q-item-label caption>FORMS</q-item-label>
+                    </q-item-section>
                   </template>
                   <b><label>Agreement Form & Application Form</label></b>
                   <q-item separator class="q-body-1">
@@ -664,14 +668,15 @@
               >
                 <div class="col-md-12 q-body-1">
                   <q-expansion-item separator indent opened class="full-width">
-                    <template slot="header">
-                      <q-item-section icon="apps" />
+                    <template v-slot:header>
+                      <q-item-section avatar>
+                        <q-icon name="apps" />
+                      </q-item-section>
                       <q-item-section
                         class="q-body-1"
-                        :caption="
-                          propLeadDocumentInformation.length + 'Type(s)'
-                        "
-                      />
+                      >
+                        <q-item-label caption>{{ propLeadDocumentInformation.length }} Type(s)</q-item-label>
+                      </q-item-section>
                     </template>
                     <div
                       class="row items-center full-width"
@@ -686,22 +691,20 @@
                           multiline
                           class="full-width"
                         >
-                          <template slot="header">
+                          <template v-slot:header>
                             <q-item-section
                               class="q-body-1"
-                              :caption="
-                                subDocument.uploadedDocuments.length +
-                                  'Document(s)'
-                              "
-                              :label="subDocument.subDocumentType"
-                            />
+                            >
+                              <q-item-label>{{ subDocument.subDocumentType }}</q-item-label>
+                              <q-item-label caption>{{ subDocument.uploadedDocuments.length }} Document(s)</q-item-label>
+                            </q-item-section>
                             <q-item-section
                               v-if="
                                 [2, 4].includes(
                                   subDocument.documentVerifiedStatus
                                 )
                               "
-                              right
+                              side
                             >
                               <q-btn
                                 round
@@ -730,7 +733,7 @@
                               @click.stop="fileUploadForUsingMerchantId(subDocument.merchantDocumentType)"
                             />
                             </q-item-section>
-                            <q-item-section v-else right>
+                            <q-item-section v-else side>
                               <span
                                 v-if="subDocument.documentVerifiedStatus == 1"
                                 class="q-body-1 text-weight-medium text-positive"
@@ -1021,7 +1024,7 @@
                         v-if="multipleDocument.isQr != 0"
                         class="q-mb-sm bg-grey-4"
                         >{{ multipleDocument.documentType }}
-                      </q-item-label header>
+                      </q-item-label>
                       <div>
                         <q-item separator dense class="q-body-1 q-pa-sm">
                           <q-item-section>
@@ -1377,7 +1380,7 @@
                         v-if="multipleDocument.isQr != 1"
                       >
                         {{ multipleDocument.documentType }}
-                      </q-item-label header>
+                      </q-item-label>
                       <div>
                         <q-item separator dense class="q-body-1 q-pa-sm">
                           <q-item-section>

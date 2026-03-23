@@ -30,7 +30,7 @@ Router.beforeEach((to, from, next) => {
       console.error("Error parsing user info", e);
     }
 
-    if (to.matched.length > 0 && roles.includes(to.matched[0].name)) {
+    if (to.matched.length > 0 && (roles.includes(to.matched[0].name) || (to.matched[0].name === "SAT" && roles.includes("OH")) || (to.matched[0].name === "OH" && roles.includes("OH")))) {
       next();
     } else {
       if (to.matched.length > 0 && to.matched[0].name == "primaryLogin") {

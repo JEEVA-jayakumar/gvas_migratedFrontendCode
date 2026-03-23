@@ -1116,6 +1116,7 @@ export default {
     handleAggregatorChange(val) {
       if (this.showMenu.includes(this.$ROLE_HIERARCHY_OPERATION_SAT)) {
         this.selectedValueSat = val === "Bijlipay" ? "Bijlipay" : "Other";
+        localStorage.setItem("selectedTab", JSON.stringify(this.selectedValueSat + "|" + val));
         if (val === "Bijlipay") this.$router.push("/sat/dashboard");
         else if (val === 3) this.$router.push("/sat/dashboardPhonepe");
         else this.$router.push("/sat/dashboardMobikwik");

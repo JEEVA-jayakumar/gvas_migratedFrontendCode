@@ -87,7 +87,7 @@
                     name="fas fa-tablet-alt"
                   />
                   {{item.device.deviceName}}
-                </q-item-label header>
+                </q-item-label>
                 <q-scroll-area
                   style="height:400px"
                   :thumb-style="{

@@ -1,238 +1,83 @@
 <template>
-  <q-page>
-    <q-dialog
-      minimized
-      no-backdrop-dismiss
-      class="customModalOverlay"
-      v-model="toggleModel"
-      :content-css="{ padding: '30px', minWidth: '60vw' }"
-    >
-      <div class="row q-pa-md">
-        <div class="col-12 q-title text-weight-regular bottom-border">
-          Action Bar
-        </div>
-        <q-card class="q-pa-md" style="width: 100%">
-          <q-card-section>
-            <div class="row q-gutter-md q-justify-between">
-              <div class="col">
-                <div class="q-mb-md">
-                  <q-item-label><b>Reported Status:</b></q-item-label>
-                  <div>{{ propRowDetails.subTicketsList[0].serviceRequestType.name }}</div>
-                </div>
-                <div class="q-mb-md">
-                  <q-item-label><b>TID:</b></q-item-label>
-                  <div>{{ this.propRowDetails.tid }}</div>
-                </div>
-                <div class="q-mb-md">
-                  <q-item-label><b>Ticket ID:</b></q-item-label>
-                  <div>{{ this.propRowDetails.serviceReqTicketId }}</div>
-                </div>
-                <div class="q-mb-md">
-                  <q-item-label><b>SAT forwarded date:</b></q-item-label>
-                  <div>
-                    {{ $moment(this.propRowDetails.subTicketsList[0].moveToSatDate).format("Do MMM Y") }}
-                  </div>
-                </div>
-              </div>
-              <!-- Right side Q-Select -->
-              <div class="col-auto">
-                <q-select
-                  style="width: 300px"
-                  filter
-                  clearable
-                  emit-value
-                  map-options
-                  color="grey-9"
-                  v-model="formData.so"
-                  :options="assignToOptions"
-                  label="Select FSE Name*"
-                />
-              </div>
+  <q-dialog persistent v-model="toggleModel">
+    <q-card style="min-width: 60vw">
+      <q-card-section class="q-title text-weight-regular bottom-border q-pa-md">
+        Action Bar
+      </q-card-section>
+      <q-card-section class="q-pa-md">
+        <div class="row q-col-gutter-md justify-between">
+          <div class="col-12 col-md-6">
+            <div class="q-mb-sm">
+              <span class="text-weight-bold">Reported Status:</span> {{ propRowDetails?.subTicketsList[0]?.serviceRequestType?.name || "NA" }}
             </div>
-          </q-card-section>
-          <q-card-actions align="center">
-            <q-btn
-              :disabled="!formData.so"
-              highlight
-              push
-              class="q-mx-sm"
-              label="Assign"
-              style="width: 90px"
-              @click="fnAssignTickets(formData)"
-              color="blue"
-            />
-            <q-btn
-              highlight
-              push
-              label="Close"
-              style="width: 90px"
-              class="q-mx-sm"
-              align="center"
-              @click="emitfnshowUpdateOpenedExternal()"
-              color="negative"
-            />
-          </q-card-actions>
-        </q-card>
-      </div>
-    </q-dialog>
-  </q-page>
+            <div class="q-mb-sm">
+              <span class="text-weight-bold">TID:</span> {{ propRowDetails?.tid || "NA" }}
+            </div>
+            <div class="q-mb-sm">
+              <span class="text-weight-bold">Ticket ID:</span> {{ propRowDetails?.serviceReqTicketId || "NA" }}
+            </div>
+            <div class="q-mb-sm">
+              <span class="text-weight-bold">SAT forwarded date:</span>
+              {{ propRowDetails?.subTicketsList[0]?.moveToSatDate ? $moment(propRowDetails.subTicketsList[0].moveToSatDate).format("Do MMM Y") : "NA" }}
+            </div>
+          </div>
+          <div class="col-12 col-md-5">
+            <q-select filter clearable emit-value map-options color="grey-9" v-model="formData.so"
+              :options="assignToOptions" label="Select FSE Name*" />
+          </div>
+        </div>
+      </q-card-section>
+      <q-card-actions align="center" class="q-pb-md">
+        <q-btn :disabled="!formData.so" label="Assign" @click="fnAssignTickets" color="blue" />
+        <q-btn label="Close" @click="emitfnshowUpdateOpenedExternal" color="negative" />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script>
-/* START >> Modal components Lead source, device, merchant type */
-import {
-  required,
-  requiredIf,
-  email,
-  minLength,
-  maxLength,
-  alpha,
-  alphaNum,
-  numeric
-} from "@vuelidate/validators";
-import { req } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
+
 export default {
+  name: "pickTicketpopup",
   props: ["propShowUpdatePickTicket", "propRowDetails"],
-  name: "MDRdetails",
   data() {
     return {
-      /* START >> Modal props */
       toggleModel: this.propShowUpdatePickTicket,
-      showLeadSourceModal: false,
-      showDeviceDetailModal: false,
-      showMerchantModal: false,
       assignToOptions: [],
-      ReasonListOptions: [],
-      formData: {
-        so: "",
-        Reassign: "",
-        reason: null
-      }
-      // validations: {
-      //     formData: {
-      //         so:{
-      //             required
-      //         },
-      //         Reassign:{
-      //             required
-      //         },
-      //         reason: {
-      //             required: requiredIf(function (formData) {
-      //                 return formData.reason == "Other reason";
-      //             })
-      //         }
-
-      //     }
-      // },
-      /* END >> Modal props */
-
-      /* END >>Table properties */
-
-      /* END >>Table data */
+      formData: { so: "" }
     };
   },
-
-  created() {},
-  beforeMount() {
-    console.log("propRowDetails ------->", JSON.stringify(this.propRowDetails));
+  created() {
     this.implementationExecutiveList();
   },
-  // beforeMount() {
-  //   this.ajaxLoadDataForDeviceTypeTable(
-  //     this.formData.sourceName,
-  //     this.formData.device,
-  //     this.formData.merchantType
-  //   );
-  //   // this.ajaxMarsDeviceModelDatasLoading(this.formData.marsDeviceModel);
-  //   this.ajaxMarsDeviceModelDatasLoading();
-  // },
-
   computed: {
-    ...mapGetters("ImplementationExecutive", [
-      "getImplementationExecutiveList"
-    ]),
-    ...mapGetters("serviceRequestPhonepeSat", [
-      "getphonepeOpenedTickets",
-      "getphonepeResolvedTickets"
-    ]),
+    ...mapGetters("ImplementationExecutive", ["getImplementationExecutiveList"]),
   },
-
   methods: {
     ...mapActions("ImplementationExecutive", ["IMPLEMENTATION_EXECUTIVE_LIST"]),
-    ...mapActions("serviceRequestPhonepeSat", [
-      "FETCH_PHONEPE_OPENED_TICKETS",
-      "FETCH_PHONEPE_RESOLVED_TICKET",
-      "PHONEPE_PICKUP_TICKET_ASSIGNED",
-      "PHONEPE_REASSIGNED_MERCHANT_TICKETS",
-      "PHONEPE_SERVICE_REQUEST_UNASSIGED_TO_ASSIGNED_STATE"
-    ]),
+    ...mapActions("serviceRequestPhonepeSat", ["PHONEPE_PICKUP_TICKET_ASSIGNED"]),
     emitfnshowUpdateOpenedExternal() {
       this.$emit("emitfnshowUpdateOpenedExternal");
     },
-
-
-    fnAssignTickets(request) {
-      console.log("Request Assign Tickets List---------->>>>",JSON.stringify(request))
-      let self = this;
-      if (self.formData.so == "") {
-        self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Request Mode cannot be empty!",
-          icon: "thumb_down"
-        });
-      } 
-      else {
-        this.$q.loading.show({
-          delay: 100, // ms
-          spinnerColor: "purple-9",
-          message: "Please wait.."
-        });
-        let postValues = {
-          userId: self.formData.so,
-          request: [this.propRowDetails]
-        };
-        self.PHONEPE_PICKUP_TICKET_ASSIGNED(postValues)
-          .then(() => {
-              this.$emit("emitfnshowUpdateOpenedExternal");
-              this.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: "Updated Successfully",
-                icon: "thumb_up"
-              });
-              this.$q.loading.hide();
-            })
-            .catch(error => {
-              this.$q.loading.hide();
-              this.$q.notify({
-                color: "negative",
-                position: "bottom",
-                message:
-                  error.body.message == null
-                    ? "Please Try Again Later !"
-                    : error.body.message,
-                icon: "thumb_down"
-              });
-            });
-      }
-    },
-
-    implementationExecutiveList() {
-      this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
-        let assumeArr = [];
-        this.getImplementationExecutiveList.map(function(value) {
-          assumeArr.push({
-            label: value.name + " | " + value.employeeID + " | " + value.email,
-            value: value.id
-          });
-        });
-        this.assignToOptions = assumeArr;
+    fnAssignTickets() {
+      if (!this.formData.so) return;
+      this.$q.loading.show({ message: "Please wait.." });
+      const postValues = { userId: this.formData.so, request: [this.propRowDetails] };
+      this.PHONEPE_PICKUP_TICKET_ASSIGNED(postValues).then(() => {
+        this.$emit("emitfnshowUpdateOpenedExternal");
+        this.$q.notify({ color: "positive", message: "Updated Successfully", icon: "thumb_up" });
+        this.$q.loading.hide();
+      }).catch(error => {
+        this.$q.loading.hide();
+        this.$q.notify({ color: "negative", message: error.body?.message || "Please Try Again Later !", icon: "thumb_down" });
       });
     },
+    implementationExecutiveList() {
+      this.IMPLEMENTATION_EXECUTIVE_LIST().then(() => {
+        this.assignToOptions = this.getImplementationExecutiveList.map(v => ({ label: `${v.name} | ${v.employeeID} | ${v.email}`, value: v.id }));
+      });
+    }
   }
 };
 </script>
-
-<style></style>

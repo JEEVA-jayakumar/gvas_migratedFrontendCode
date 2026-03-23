@@ -311,7 +311,7 @@ const routes = [
 
   // Router for SAT
   {
-    name: "OH",
+    name: "SAT",
     path: "/sat/",
     component: Default_Layout,
     children: [{
@@ -355,7 +355,7 @@ const routes = [
       component: aggregatorLeadValidation,
     },
     {
-      name: "additionalTid",
+      name: "SAT_additionalTid",
       path: "additionalTid",
       component: additionalTid,
       //props: true
@@ -371,7 +371,7 @@ const routes = [
       component: AggregatorSat,
     },
     {
-      name: "additionalTidform",
+      name: "SAT_additionalTidform",
       path: "additionalTidform",
       component: additionalTidform,
       props: true
@@ -634,12 +634,12 @@ const routes = [
       component: internalRegionalInventory,
     },
     {
-      name: "AggregatorInventory",
+      name: "SAT_AggregatorInventory",
       path: "AggregatorInventory",
       component: AggregatorInventory,
     },
     // {
-    //   name: "AggregatorInventory",
+    //   name: "SAT_AggregatorInventory",
     //   path: "Aggregator/inventory",
     //   component: AggregatorInventory,
     // },
@@ -798,7 +798,7 @@ const routes = [
       component: FinanceApprovedTracker,
     },
     // {
-    //   name: "LostOrStolen",
+    //   name: "SAT_LostOrStolen",
     //   path: "LostOrStolen",
     //   component: LostOrStolen
     // }
@@ -808,7 +808,7 @@ const routes = [
       component: LostFinance
     },
     {
-      name: "LostOrStolen",
+      name: "SAT_LostOrStolen",
       path: "LostOrStolen",
       component: () => import("../pages/finance/LostOrStolen.vue")
     },
@@ -915,7 +915,7 @@ const routes = [
       props: true
     },
     {
-      name: "SendToRepair",
+      name: "SAT_SendToRepair",
       path: "master/SendToRepair",
       component: SendToRepair,
     },
@@ -925,13 +925,13 @@ const routes = [
     //   component: sparePartsAddStocks,
     // },
     // {
-    //   name: "additionalTid",
+    //   name: "SAT_additionalTid",
     //   path: "additionalTid",
     //   component: additionalTid,
     //   //props: true
     // },
     // {
-    //   name: "additionalTidform",
+    //   name: "SAT_additionalTidform",
     //   path: "additionalTidform",
     //   component: additionalTidform,
     //  props: true
@@ -1262,7 +1262,7 @@ const routes = [
       component: InventorySummary,
     },
     // {
-    //   name: "SendToRepair",
+    //   name: "SAT_SendToRepair",
     //   path: "master/SendToRepair",
     //   component:  SendToRepair,
     // },

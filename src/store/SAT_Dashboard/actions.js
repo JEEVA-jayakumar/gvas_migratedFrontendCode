@@ -19,8 +19,15 @@ export const FETCH_DASHBOARD_COUNT = ({ commit }, request) => {
 
   /* START AGGREGATORS STATIC CODE */
   export const FETCH_AGGREGATORS_DASHBOARD_COUNT = ({ commit }, request) => {
-    console.log("FETCH_AGGREGATORS_DASHBOARD_COUNT ----->",JSON.stringify(request))
-    return api.get("aggregator-inventory/agg-sat-dashboard/" + request.region +"/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])).then(response => {
+    console.log("FETCH_AGGREGATORS_DASHBOARD_COUNT ----->", JSON.stringify(request))
+    const selectedTab = localStorage.getItem("selectedTab");
+    const aggregatorId = selectedTab ? selectedTab.split('|')[1]?.replace(/"/g, '') : null;
+
+    if (!aggregatorId || aggregatorId === "Bijlipay") {
+      return Promise.resolve();
+    }
+
+    return api.get("aggregator-inventory/agg-sat-dashboard/" + request.region + "/" + aggregatorId).then(response => {
       commit("SET_AGGREGATORS_DASHBOARD_COUNT", response.data.data);
     });
   };

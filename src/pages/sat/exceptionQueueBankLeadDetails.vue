@@ -487,13 +487,16 @@
                                 multiline
                                 class="full-width"
                               >
-                                <template slot="header">
-                                  <q-item-section icon="attach_file" />
+                                <template v-slot:header>
+                                  <q-item-section avatar>
+                                    <q-icon name="attach_file" />
+                                  </q-item-section>
                                   <q-item-section
                                     class="q-body-1"
-                                    :caption="documents[0].uploadedDocuments.length + 'Document(s)'"
-                                    :label="index"
-                                  />
+                                  >
+                                    <q-item-label>{{ index }}</q-item-label>
+                                    <q-item-label caption>{{ documents[0].uploadedDocuments.length }} Document(s)</q-item-label>
+                                  </q-item-section>
                                 </template>
                                 <div
                                   v-for="(item,subIndex) in documents[0].uploadedDocuments"
@@ -540,13 +543,16 @@
                                 opened
                                 class="full-width"
                               >
-                                <template slot="header">
-                                  <q-item-section icon="apps" />
+                                <template v-slot:header>
+                                  <q-item-section avatar>
+                                    <q-icon name="apps" />
+                                  </q-item-section>
                                   <q-item-section
                                     class="q-body-1"
-                                    :caption="documents.length + 'Type(s)'"
-                                    :label="index"
-                                  />
+                                  >
+                                    <q-item-label>{{ index }}</q-item-label>
+                                    <q-item-label caption>{{ documents.length }} Type(s)</q-item-label>
+                                  </q-item-section>
                                 </template>
                                 <div
                                   class="row items-center full-width"
@@ -562,13 +568,16 @@
                                       class="full-width"
                                       indent
                                     >
-                                      <template slot="header">
-                                        <q-item-section icon="attach_file" />
+                                      <template v-slot:header>
+                                        <q-item-section avatar>
+                                          <q-icon name="attach_file" />
+                                        </q-item-section>
                                         <q-item-section
                                           class="q-body-1"
-                                          :caption="subDocument.uploadedDocuments.length + 'Document(s)'"
-                                          :label="subDocument.subDocumentType"
-                                        />
+                                        >
+                                          <q-item-label>{{ subDocument.subDocumentType }}</q-item-label>
+                                          <q-item-label caption>{{ subDocument.uploadedDocuments.length }} Document(s)</q-item-label>
+                                        </q-item-section>
                                       </template>
                                       <div
                                         v-for="(item,subIndex) in subDocument.uploadedDocuments"

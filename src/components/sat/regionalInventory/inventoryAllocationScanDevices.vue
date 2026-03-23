@@ -66,7 +66,7 @@
             <q-list highlight separator>
               <q-item-label header style="border-bottom: 1px solid #ccc;">
                 <q-icon style="color:#202c3f" name="fas fa-tablet-alt"/> {{item.device.name}} 
-              </q-item-label header>
+              </q-item-label>
               <div v-if="item.deviceSerialNumbers.length > 0">
                 <q-item separator class=" text-light-blue" v-for="(subItem,subIndex) in item.deviceSerialNumbers" :key="subIndex">
                   <q-item-section class="q-body-1">{{subItem.barcode}}</q-item-section>

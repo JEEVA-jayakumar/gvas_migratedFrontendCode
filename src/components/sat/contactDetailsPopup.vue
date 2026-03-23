@@ -1,111 +1,35 @@
 <template>
-  <q-page>
-    <q-dialog
-      minimized
-      no-backdrop-dismiss
-      class="customModalOverlay"
-      v-model="toggleModel"
-      :content-css="{ padding: '25px', minWidth: '30vw' }"
-    >
-      <div class="row q-pa-md">
-        <div
-          class="col-12 q-title text-center text-weight-regular bottom-border text-custom-color"
-        >
-          <b>CONTACT DETAILS</b>
-        </div>
-        <q-card class="q-pa-md" style="width: 100%">
-          <q-card-section>
-            <div class="row q-gutter-md q-justify-between">
-              <div class="col">
-                <div class="q-mb-md row justify-start items-center">
-                  <q-item-label><b>Address:</b></q-item-label>
-                  <div class="q-ml-sm">
-                    {{ this.propRowDetails.address }}
-                  </div>
-                </div>
-                <div class="q-mb-md row justify-start items-center">
-                  <q-item-label><b>City:</b></q-item-label>
-                  <div class="q-ml-sm">{{ this.propRowDetails.city }}</div>
-                </div>
-                <div class="q-mb-md row justify-start items-center">
-                  <q-item-label><b>Pincode:</b></q-item-label>
-                  <div class="q-ml-sm">{{ this.propRowDetails.pincode }}</div>
-                </div>
-                <div class="q-mb-md row justify-start items-center">
-                  <q-item-label><b>Mobile Number:</b></q-item-label>
-                  <div class="q-ml-sm">
-                    {{ this.propRowDetails.contactNumber }}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </q-card-section>
-          <q-card-actions align="center">
-            <q-btn
-              highlight
-              push
-              label="Close"
-              style="width: 90px"
-              class="q-mx-sm"
-              align="center"
-              @click="emitfnshowUpdateOpenedExternal()"
-              color="negative"
-            />
-          </q-card-actions>
-        </q-card>
-      </div>
-    </q-dialog>
-  </q-page>
+  <q-dialog persistent v-model="toggleModel">
+    <q-card style="min-width: 400px">
+      <q-card-section class="q-title text-center text-weight-regular bottom-border text-custom-color q-pa-md">
+        <div class="text-h6">CONTACT DETAILS</div>
+      </q-card-section>
+      <q-card-section class="q-pa-md">
+        <div class="q-mb-sm"><span class="text-weight-bold">Address:</span> {{ propRowDetails?.address || "NA" }}</div>
+        <div class="q-mb-sm"><span class="text-weight-bold">City:</span> {{ propRowDetails?.city || "NA" }}</div>
+        <div class="q-mb-sm"><span class="text-weight-bold">Pincode:</span> {{ propRowDetails?.pincode || "NA" }}</div>
+        <div class="q-mb-sm"><span class="text-weight-bold">Mobile Number:</span> {{ propRowDetails?.contactNumber || "NA" }}</div>
+      </q-card-section>
+      <q-card-actions align="center" class="q-pb-md">
+        <q-btn label="Close" @click="emitfnshowUpdateOpenedExternal" color="negative" />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script>
-/* START >> Modal components Lead source, device, merchant type */
-import {
-  required,
-  requiredIf,
-  email,
-  minLength,
-  maxLength,
-  alpha,
-  alphaNum,
-  numeric
-} from "@vuelidate/validators";
-import { mapGetters, mapActions } from "vuex";
 export default {
+  name: "contactDetailsPopup",
   props: ["propShowUpdateContactDetails", "propRowDetails"],
-  name: "MDRdetails",
   data() {
-    return {
-      /* START >> Modal props */
-      toggleModel: this.propShowUpdateContactDetails,
-      showLeadSourceModal: false,
-      showDeviceDetailModal: false,
-      showMerchantModal: false,
-      assignToOptions: [],
-      ReasonListOptions: [],
-      formData: {
-        so: "",
-        Reassign: "",
-        reason: null
-      }
-    };
+    return { toggleModel: this.propShowUpdateContactDetails };
   },
-
-  created() {},
-  beforeMount() {
-    console.log("propRowDetails ------->", JSON.stringify(this.propRowDetails));
-  },
-
   methods: {
-    emitfnshowUpdateOpenedExternal() {
-      this.$emit("emitfnshowUpdateOpenedExternal");
-    },
+    emitfnshowUpdateOpenedExternal() { this.$emit("emitfnshowUpdateOpenedExternal"); }
   }
 };
 </script>
 
-<style>
-.text-custom-color {
-  color: #530750; /* Replace with your desired color */
-}
+<style scoped>
+.text-custom-color { color: #530750; }
 </style>

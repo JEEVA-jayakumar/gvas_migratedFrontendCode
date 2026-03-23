@@ -1,1227 +1,282 @@
 <template>
-  <q-page>
-    <!-- content -->
-    <div>
-      <div class="row bottom-border q-ma-md q-py-md">
-        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+  <div class="q-pa-none">
+    <div class="row bottom-border q-ma-md q-py-md items-center">
+      <div class="col-12 text-weight-regular text-grey-9 q-title" align="left">Spare Counts</div>
+      <div class="col-md-9 col-sm-12 col-xs-12 q-mt-md">
+        <div v-if="regionSpareCount.length > 0" class="row">
+          <q-card class="border-radius-10 q-pa-md q-ma-sm"
+            style="background-color: #531b64; color: white; min-width: 100px" v-for="menu in regionSpareCount"
+            :key="menu.label">
+            <div class="text-h6">{{ menu.value.count }}</div>
+            <div class="text-caption">{{ menu.value.spareParts.spare_parts_types }}</div>
+          </q-card>
         </div>
-        <br>
-        <div class="col-md-9 col-sm-12 col-xs-12">
-          <div v-if="regionSpareCount.length > 0" class="row">
-            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
-              :key="menu" height="35px" width="35px">
-              <div>
-                <big :style="'color'">{{ menu.value.count }} </big>
-              </div>
-              <div>
-                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
-              </div>
-
-            </q-card>
-          </div>
-
-          <div v-else class="row group">
-            <div>
-              <q-banner color="primary" icon="info">No data available to display</q-banner>
-            </div>
-          </div>
-          <!-- </q-card> -->
-
+        <div v-else class="row">
+          <q-banner class="bg-primary text-white" icon="info">No data available to display</q-banner>
         </div>
       </div>
-      <!-- <pre>{{getAllRegionsData}}</pre> -->
-      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
-      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
-        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
-        <q-tab color="dark" name="stocks" label="Stocks" />
-        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
-        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
-</q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="allocatedSo">
-          <allocatedSo />
-        </q-tab-panel>
-<q-tab-panel name="incomingPods">
-          <q-table :rows="tableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
-            @request="ajaxLoadAllLeadInfo">
-            <template v-slot:body-cell-createdAt="props">
-            <q-td :props="props">
-            {{
-                props.row.created_date == null
-                  ? "NA"
-                  : $moment(props.row.created_date).format("Do MMM Y")
-            }}
-          </q-td>
+    </div>
+
+    <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+      <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+      <q-tab color="dark" name="stocks" label="Stocks" />
+      <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+      <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+    </q-tabs>
+
+    <q-tab-panels v-model="selectedTab" animated>
+      <q-tab-panel name="allocatedSo" class="no-padding">
+        <allocatedSo />
+      </q-tab-panel>
+
+      <q-tab-panel name="incomingPods" class="no-padding">
+        <q-table :rows="tableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch"
+          v-model:pagination="paginationControl" row-key="id" color="grey-9" @request="ajaxLoadAllLeadInfo">
+          <template v-slot:body-cell-createdAt="props">
+            <q-td :props="props">{{ props.row.created_date ? $moment(props.row.created_date).format("Do MMM Y") : "NA" }}
+            </q-td>
           </template>
-            <template v-slot:body-cell-updated_date="props">
-            <q-td :props="props">
-            {{
-                props.row.updated_date == null
-                  ? "NA"
-                  : $moment(props.row.updated_date).format("Do MMM Y")
-            }}
-          </q-td>
+          <template v-slot:body-cell-updated_date="props">
+            <q-td :props="props">{{ props.row.updated_date ? $moment(props.row.updated_date).format("Do MMM Y") : "NA" }}
+            </q-td>
           </template>
-            <template v-slot:body-cell-status="props">
+          <template v-slot:body-cell-action="props">
             <q-td :props="props">
-
-              <span class="label text-positive" v-if="props.row.status == 1">Created</span>
-              <span class="label text-primary" v-else-if="props.row.status == 2">Assigned to R.I</span>
-              <span class="label text-orange" v-else-if="props.row.status == 3">Approved By R.I</span>
-              <span class="label text-orange" v-else-if="props.row.status == 4">Assigned To SO</span>
-              <span class="label text-orange" v-else-if="props.row.status == 5">
-                Approved By So</span>
-              <span class="label text-orange" v-else-if="props.row.status == 6">
-                Rejected</span>
-
-              <span class="label text-negative" v-else>NA</span>
-
-          </q-td>
-          </template>
-            <template v-slot:body-cell-owner="props">
-            <q-td :props="props">
-
-              <span class="label text-positive" v-if="props.row.owner == 1">Central Inventory</span>
-              <span class="label text-primary" v-else-if="props.row.owner == 2">Regional Inventory</span>
-              <span class="label text-primary" v-else-if="props.row.owner == 3">SO</span>
-
-          </q-td>
-          </template>
-            <template v-slot:body-cell-regionAreaName="props">
-            <q-td :props="props">
-            {{
-                props.row.allocate_region == null
-                  ? "NA"
-                  : props.row.allocate_region.regionAreaName
-            }}
-          </q-td>
-          </template>
-            <template v-slot:body-cell-action="props">
-            <q-td :props="props">
-
-              <div class="row no-wrap no-padding">
-
-                <q-btn dense no-caps no-wrap label="Reject" icon="far fa-minus-square" size="md"
-                  @click="fnRejectPodDetails(props.row)" flat class="text-negative"></q-btn>
-                <q-btn dense no-caps no-wrap label="Approve" icon="far fa-plus-square" size="md"
-                  @click="fnApprovePodDetails(props.row)" flat class="text-light-blue"></q-btn>
+              <div class="row no-wrap q-gutter-xs">
+                <q-btn dense no-caps label="Reject" icon="close" size="sm" @click="fnRejectPodDetails(props.row)"
+                  flat class="text-negative" />
+                <q-btn dense no-caps label="Approve" icon="check" size="sm" @click="fnApprovePodDetails(props.row)"
+                  flat class="text-primary" />
               </div>
-
-          </q-td>
+            </q-td>
           </template>
-
-            <template v-slot:top="props">
-              <!--START: table title -->
-              <!--<div class="col-12 q-title q-my-lg text-weight-regular">
-           Incoming Pod
-          </div> -->
-              <!-- <div class="col-md-6 q-my-md" align="right">
-            <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
-          </div>-->
-              <!--END: table title -->
-              <!--START: table filter,search
-            @click="fnShowAddNewServiceType(props.row)" -->
-              <div class="col-3">
-                <q-input clearable color="grey-9" v-model="filterSearch" label="Search By POD Number" placeholder="Type.." class="q-mr-lg" />
-              </div>
-              <!--ENDv-model: table filter,search -->
-            </template>
-          </q-table>
-        </q-tab-panel>
-<q-tab-panel name="stocks">
-          <q-table :rows="tableData1" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1" v-model:pagination="paginationControl1" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
-            @request="ajaxLoadAllLeadInfo1">
-            <template v-slot:body-cell-createdAt="props">
-            <q-td :props="props">
-            {{
-                props.row.created_date == null
-                  ? "NA"
-                  : $moment(props.row.created_date).format("Do MMM Y")
-            }}
-          </q-td>
-          </template>
-            <template v-slot:body-cell-updated_date="props">
-            <q-td :props="props">
-            {{
-                props.row.updated_date == null
-                  ? "NA"
-                  : $moment(props.row.updated_date).format("Do MMM Y")
-            }}
-          </q-td>
-          </template>
-
-            <template v-slot:body-cell-status="props">
-            <q-td :props="props">
-            
-              <span class="label text-positive" v-if="props.row.status == 1">Created</span>
-              <span class="label text-primary" v-else-if="props.row.status == 2">Assigned to R.I</span>
-              <span class="label text-orange" v-else-if="props.row.status == 3">Approved By R.I</span>
-              <span class="label text-orange" v-else-if="props.row.status == 4">Assigned To SO</span>
-              <span class="label text-orange" v-else-if="props.row.status == 5">
-                Approved By So</span>
-              <span class="label text-orange" v-else-if="props.row.status == 6">
-                Rejected</span>
-
-              <span class="label text-negative" v-else>NA</span>
-
-          </q-td>
-          </template>
-            <template v-slot:body-cell-owner="props">
-            <q-td :props="props">
-
-              <span class="label text-positive" v-if="props.row.owner == 1">Central Inventory</span>
-              <span class="label text-primary" v-else-if="props.row.owner == 2">Regional Inventory</span>
-              <span class="label text-primary" v-else-if="props.row.owner == 3">SO</span>
-
-          </q-td>
-          </template>
-            <template v-slot:body-cell-regionAreaName="props">
-            <q-td :props="props">
-            {{
-                props.row.allocate_region == null
-                  ? "NA"
-                  : props.row.allocate_region.regionAreaName
-            }}
-          </q-td>
-          </template>
-
-            <template v-slot:top="props">
-              <!--START: table title -->
-              <!--<div class="col-12 q-title q-my-lg text-weight-regular">
-            Stocks
-          </div> -->
-              <!-- <div class="col-md-6 q-my-md" align="right">
-            <q-btn no-caps no-wrap label="Add New Regions" class="q-mt-lg text-weight-regular" color="purple-9"  icon="far fa-plus-square" size="md" @click="fnshowCreateRegions()"/>
-          </div>-->
-              <!--END: table title -->
-              <!--START: table filter,search -->
-              <div class="col-3">
-                <q-input clearable color="grey-9" v-model="filterSearch1" label="Search By POD Number" placeholder="Type.." class="q-mr-lg" />
-              </div>
-              <!-- <div class="col-3" align="right">
-                <q-btn
-                  no-caps
-                  class="text-weight-regular"
-                  label="Assigned To So"
-                  @click="$router.push('/sat/sparePartsAssignedToSoDetails')"
-                  color="purple-9"
-                  size="md"
-                />
-              </div> -->
-              <!--END: table filter,search -->
-              <!-- <div class="col-3" align="right">
-            <q-btn
-              no-caps
-              class="text-weight-regular"
-              label="Add Sub Task"
-              @click="fnShowAddNewSubTaskType(props.row)"
-              color="purple-9"
-              size="md"
-            />
-          </div> :rows="tableData2"-->
-            </template>
-          </q-table>
-        </q-tab-panel>
-<q-tab-panel name="createSoPod">
-          <template>
-            <div class="col-sm-3">
-              <div class="row">
-                <q-select filter clearable v-model="formData.allocate_so" label="Select SO" class="col-md-3" radio color="grey-9"
-                  :options="regionBasedSo" @request="regionBasedSoLoad" />
-              </div>
-              <div class="col-md-7">
-                <p class="caption">Spare Parts Type*</p>
-                <div class="row">
-                  <div class="row items-center" v-for="menu in sparePartsTypes" :key="menu.value.id" :to="menu.to">
-                    <input style="width: 18px; height: 18px" type="checkbox" :id="menu.value.id + '_CB'"
-                      :name="menu.value.spare_parts_types" @click="getSelectedDetails($event, menu.value)" />
-                    <label>{{ menu.value.spare_parts_types }}</label>
-                  </div>
-                </div>
-                <div v-for="menu in sparePartsTypes" :key="menu.id" :to="menu.to">
-                  <div :id="menu.value.id + '_DV'" style="display: none" @click="finding(menu)">
-                    <label>{{ menu.value.spare_parts_types }}</label>
-                    <input :id="menu.count" type="number" min="0" max="5000" value:menu
-                      @blur="getAllCounts($event, menu)" />
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-5">
-                  <q-input disable v-model="formData.pod_number" label="Pod Number" radio color="grey-9" />
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-5">
-                  <q-input disable v-model="formData.total_count" label="Total Count" radio color="grey-9" />
-                </div>
-              </div>
-
-              <div class="full-width group" align="center" id="formData">
-                <q-btn :disable="this.formData.total_count == 0" regionBasedSo size="md" type="button" color="purple-9" @click="fnSubmitBankDetails(formData)">
-                  Submit</q-btn>
-              </div>
-
+          <template v-slot:top>
+            <div class="col-3">
+              <q-input clearable color="grey-9" v-model="filterSearch" label="Search By POD Number"
+                placeholder="Type.." />
             </div>
           </template>
-        </q-tab-panel>
-</q-tab-panels>
-       
+        </q-table>
+      </q-tab-panel>
 
-       <!-- START REJECT fnRejectPodDetails-->
-       <rejectPodDetails
-          v-if="showRejectModel"
-          :showRejectModel = "showRejectModel"
-          :propShowRejectComponent="propsRejectAppend"
-           @reloadPaymentTrackerData="ajaxLoadAllLeadInfo({ pagination: paginationControl,filter: filter })"
-        @closeRejectModel="fnRejectPodDetails"
-       />
-       <!-- END REJECT-->
-    </div>
-  </q-page>
+      <q-tab-panel name="stocks" class="no-padding">
+        <q-table :rows="tableData1" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1"
+          v-model:pagination="paginationControl1" row-key="id" color="grey-9" @request="ajaxLoadAllLeadInfo1">
+          <template v-slot:body-cell-createdAt="props">
+            <q-td :props="props">{{ props.row.created_date ? $moment(props.row.created_date).format("Do MMM Y") : "NA" }}
+            </q-td>
+          </template>
+          <template v-slot:body-cell-updated_date="props">
+            <q-td :props="props">{{ props.row.updated_date ? $moment(props.row.updated_date).format("Do MMM Y") : "NA" }}
+            </q-td>
+          </template>
+          <template v-slot:top>
+            <div class="col-3">
+              <q-input clearable color="grey-9" v-model="filterSearch1" label="Search By POD Number"
+                placeholder="Type.." />
+            </div>
+          </template>
+        </q-table>
+      </q-tab-panel>
+
+      <q-tab-panel name="createSoPod">
+        <div class="q-pa-md">
+          <div class="row q-col-gutter-md">
+            <div class="col-12 col-md-4">
+              <q-select filter clearable v-model="formData.allocate_so" label="Select SO" color="grey-9"
+                :options="regionBasedSo" emit-value map-options />
+            </div>
+          </div>
+
+          <div class="q-mt-md">
+            <div class="text-subtitle2 q-mb-sm">Spare Parts Type*</div>
+            <div class="row q-col-gutter-sm">
+              <div class="col-12 col-sm-4" v-for="menu in sparePartsTypes" :key="menu.value.id">
+                <q-checkbox :model-value="isSpareSelected(menu.value.id)"
+                  @update:model-value="val => toggleSpareSelection(val, menu.value)" :label="menu.label" />
+                <q-input v-if="isSpareSelected(menu.value.id)" type="number" dense label="Count"
+                  :model-value="getSpareCount(menu.value.id)" @update:model-value="val => updateSpareCount(val, menu.value)"
+                  class="q-ml-md" style="max-width: 100px" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row q-mt-md q-col-gutter-md">
+            <div class="col-12 col-md-4">
+              <q-input disable v-model="formData.pod_number" label="Pod Number" color="grey-9" />
+            </div>
+            <div class="col-12 col-md-4">
+              <q-input disable v-model="formData.total_count" label="Total Count" color="grey-9" />
+            </div>
+          </div>
+
+          <div class="row justify-center q-mt-lg">
+            <q-btn :disable="formData.total_count === 0 || !formData.allocate_so" label="Submit" color="purple-9"
+              @click="fnSubmitBankDetails(formData)" />
+          </div>
+        </div>
+      </q-tab-panel>
+    </q-tab-panels>
+
+    <rejectPodDetails v-if="showRejectModel" :showRejectModel="showRejectModel"
+      :propShowRejectComponent="propsRejectAppend"
+      @reloadPaymentTrackerData="ajaxLoadAllLeadInfo({ pagination: paginationControl, filter: filterSearch })"
+      @closeRejectModel="fnRejectPodDetails" />
+  </div>
 </template>
 
 <script>
-// import ShowAddServiceType from "../../components/super_admin/ShowAddServiceType.vue";
-// import showEditServiceType from "../../components/super_admin/showEditServiceType.vue";
-// import showEditSubTaskType from "../../components/super_admin/showEditSubTaskType.vue";
-// import ShowAddSubTaskType from "../../components/super_admin/ShowAddSubTaskType.vue";
 import rejectPodDetails from "../../components/sat/rejectPodDetails.vue";
 import allocatedSo from "../../components/sat/allocatedSo.vue";
 import { mapGetters, mapActions } from "vuex";
-import {
-  required,
-  requiredIf,
-  alphaNum,
-  integer,
-  numeric,
-  minLength,
-  maxLength,
-  email,
-  maxValue,
-  minValue,
-  decimal
-} from "@vuelidate/validators";
-import { stringify } from "json5";
+
 export default {
-  name: "getserviceRequestGetTypes",
-  components: {
-    allocatedSo,
-    rejectPodDetails,
-
-  },
-
+  name: "SpareParts",
+  components: { allocatedSo, rejectPodDetails },
   data() {
     return {
-      propShowAddServiceType: false,
-      propShowEditServiceType: false,
-      propShowEditSubTaskType: false,
-      propShowAddSubTaskType: false,
-      showRejectModel: false,
-      propsRejectAppend: [],
-      // getDisableCount:"",
-      propRowDetails: "",
-      propRowDetails1: "",
-      propRowDetails2: "",
-      flagField: false,
-      // propRowDetails1:"",
-      disableSo: false,
-      countFlag: false,
-      filter: "",
+      selectedTab: "incomingPods",
       filterSearch: "",
       filterSearch1: "",
-      filterSearch2: "",
-      selectedTab: "",
-      filter_values: "",
-      multipleSelect: "",
-      clearData: {
-        data: ""
-      },
-      paginationControl: {
-        rowsPerPage: 10
-      },
-      regionBasedSo: [],
+      showRejectModel: false,
+      propsRejectAppend: [],
       regionSpareCount: [],
       sparePartsTypes: [],
+      regionBasedSo: [],
       formData: {
-        // allocate_so: "",
-        // pod_number:"",
-        //   total_count: 0,
         allocate_region: "",
         allocate_reseller: null,
         total_count: 0,
-        allocate_so: "",
-        pod_number: "",
+        allocate_so: null,
+        pod_number: "SO" + new Date().getTime(),
         sparePartsSets: [],
       },
-      paginationControl: {
-        rowsNumber: 10,
-        page: 1,
-        sortBy: "updated_date",
-        descending: false,
-        rowsPerPage: 5 // current rows per page being displayed
-      },
-      paginationControl1: {
-        rowsNumber: 10,
-        page: 1,
-        sortBy: "updated_date",
-        descending: false,
-        rowsPerPage: 5 // current rows per page being displayed
-      },
-      paginationControl2: {
-        rowsNumber: 10,
-        page: 1,
-        sortBy: "updated_date",
-        descending: false,
-        rowsPerPage: 5 // current rows per page being displayed
-      },
-      //table information
-      columns1: [
-        {
-          name: "pod_number",
-          required: true,
-          label: "Pod Number",
-          align: "left",
-          field: "pod_number",
-          sortable: true
-        },
-        {
-          name: "regionAreaName",
-          required: true,
-          label: "Region",
-          align: "left",
-          field: row => {
-            row.allocate_region.regionAreaName;
-          }
-          // sortable: truename
-        },
-        {
-          name: "status",
-          required: true,
-          label: "Status",
-          align: "left",
-          field: "status",
-          sortable: false,
-        },
-        {
-          name: "owner",
-          required: true,
-          label: "Owner",
-          align: "left",
-          field: "owner",
-          sortable: false,
-        },
-        {
-          name: "total_count",
-          required: true,
-          label: "Total Count",
-          align: "left",
-          field: "total_count",
-          sortable: false,
-        },
-        {
-          name: "createdAt",
-          required: true,
-          label: "Created Date",
-          align: "left",
-          field: "created_date",
-          sortable: false
-        },
-        {
-          name: "updated_date",
-          required: true,
-          label: "Updated Date",
-          align: "left",
-          field: "updated_date",
-          sortable: true
-        },
-        {
-          name: "action",
-          required: true,
-          label: "",
-          align: "left",
-          field: "action",
-          sortable: false
-        }
-      ],
-      columns2: [
-        {
-          name: "pod_number",
-          required: true,
-          label: "Pod Number",
-          align: "left",
-          field: "pod_number",
-          sortable: true
-        },
-        {
-          name: "regionAreaName",
-          required: true,
-          label: "Region",
-          align: "left",
-          field: row => {
-            row.allocate_region.regionAreaName;
-          }
-          // sortable: truename
-        },
-        {
-          name: "name",
-          required: true,
-          label: "SO Name",
-          align: "left",
-          field: row => {
-            row.allocate_so.name;
-          }
-          // sortable: truename
-        },
-        {
-          name: "status",
-          required: true,
-          label: "Status",
-          align: "left",
-          field: "status",
-          sortable: false,
-        },
-        {
-          name: "owner",
-          required: true,
-          label: "Owner",
-          align: "left",
-          field: "owner",
-          sortable: false,
-        },
-        {
-          name: "total_count",
-          required: true,
-          label: "Total Count",
-          align: "left",
-          field: "total_count",
-          sortable: false,
-        },
-        {
-          name: "createdAt",
-          required: true,
-          label: "Created Date",
-          align: "left",
-          field: "created_date",
-          sortable: false
-        },
-        {
-          name: "updated_date",
-          required: true,
-          label: "Updated Date",
-          align: "left",
-          field: "updated_date",
-          sortable: true
-        },
-        {
-          name: "action",
-          required: true,
-          label: "",
-          align: "left",
-          field: "action",
-          sortable: false
-        }
-      ],
+      paginationControl: { page: 1, sortBy: "updated_date", descending: false, rowsPerPage: 10 },
+      paginationControl1: { page: 1, sortBy: "updated_date", descending: false, rowsPerPage: 10 },
       columns: [
-        {
-          name: "pod_number",
-          required: true,
-          label: "Pod Number",
-          align: "left",
-          field: "pod_number",
-          sortable: true
-        },
-        {
-          name: "regionAreaName",
-          required: true,
-          label: "Region",
-          align: "left",
-          field: row => {
-            row.allocate_region.regionAreaName;
-          }
-          // sortable: truename
-        },
-        {
-          name: "status",
-          required: true,
-          label: "Status",
-          align: "left",
-          field: "status",
-          sortable: false,
-        },
-        {
-          name: "owner",
-          required: true,
-          label: "Owner",
-          align: "left",
-          field: "owner",
-          sortable: false,
-        },
-        {
-          name: "total_count",
-          required: true,
-          label: "Total Count",
-          align: "left",
-          field: "total_count",
-          sortable: false,
-        },
-        {
-          name: "createdAt",
-          required: true,
-          label: "Created Date",
-          align: "left",
-          field: "created_date",
-          sortable: false
-        },
-        {
-          name: "updated_date",
-          required: true,
-          label: "Updated Date",
-          align: "left",
-          field: "updated_date",
-          sortable: true
-        },
-        {
-          name: "action",
-          required: true,
-          label: "",
-          align: "left",
-          field: "action",
-          sortable: false
-        }
+        { name: "pod_number", label: "Pod Number", align: "left", field: "pod_number", sortable: true },
+        { name: "regionAreaName", label: "Region", align: "left", field: row => row.allocate_region?.regionAreaName },
+        { name: "status", label: "Status", align: "left", field: "status" },
+        { name: "owner", label: "Owner", align: "left", field: "owner" },
+        { name: "total_count", label: "Total Count", align: "left", field: "total_count" },
+        { name: "createdAt", label: "Created Date", align: "left", field: "created_date" },
+        { name: "updated_date", label: "Updated Date", align: "left", field: "updated_date", sortable: true },
+        { name: "action", label: "Action", align: "left" }
       ],
-      tableData: [],
-      tableData1: [],
-      tableData2: [],
-      getsinglePodData: [],
+      columns1: [
+        { name: "pod_number", label: "Pod Number", align: "left", field: "pod_number", sortable: true },
+        { name: "regionAreaName", label: "Region", align: "left", field: row => row.allocate_region?.regionAreaName },
+        { name: "status", label: "Status", align: "left", field: "status" },
+        { name: "owner", label: "Owner", align: "left", field: "owner" },
+        { name: "total_count", label: "Total Count", align: "left", field: "total_count" },
+        { name: "createdAt", label: "Created Date", align: "left", field: "created_date" },
+        { name: "updated_date", label: "Updated Date", align: "left", field: "updated_date", sortable: true }
+      ]
     };
   },
-  validations: {
-    flag: {
-      required,
-    },
+  computed: {
+    ...mapGetters("sparePartsGetTypes", ["getsparePartsGetTypes"]),
+    ...mapGetters("InventoryCentral", ["getRegionBasedSO"]),
+    ...mapGetters("regionalInventoryDetails", ["getsparePartsSetsAndCounts", "getregionalInventoryPodDetails", "getregionalInventoryStocksPodDetails"]),
   },
   created() {
-    /* START: Load user table data filter > Regions */
-    this.ajaxSpareData();
-    this.ajaxSpareData1();
-    this.getAllInventoryData();
-    this.regionBasedSoLoad();
     this.fnSparePartsTypes();
     this.fnregionSpareCount();
-    this.podNumberCreation();
-    this.ajaxLoadAllLeadInfo({
-      pagination: this.paginationControl,
-      filter: this.filterSearch,
-    });
-    this.ajaxLoadAllLeadInfo1({
-      pagination: this.paginationControl1,
-      filter: this.filterSearch1,
-    });
-    this.ajaxLoadAllLeadInfo2({
-      pagination: this.paginationControl2,
-      filter: this.filterSearch2,
-    });
-    /* End: Load user table data filter > Regions */
-  },
-
-  computed: {
-    ...mapGetters("serviceRequest", [
-      "getserviceRequestGetTypes",
-      "getsubTaskDetails"
-    ]),
-    ...mapGetters("InventoryCentral", [
-      "getCentralInventoryDashboardCount",
-      "getRegionBasedSO"
-    ]),
-    ...mapGetters("sparePartsGetTypes", [
-      "getsparePartsGetTypes",
-      "getallInventorySparePartsGetTypes"
-    ]),
-    ...mapGetters("regionalInventoryDetails", ["getsparePartsSetsAndCounts", "getregionalInventoryPodDetails", "getregionalInventoryStocksPodDetails", "getregionalInventoryAllocatedSoPodDetails"]),
-    ...mapGetters("singlePodData", ["getsinglePodDetails"])
-
-  },
-  beforeMount() {
-    const name = "SO";
-    const d = new Date();
-    let number = d.getTime();
-    let finalValue = name.concat(number);
-    this.formData.pod_number = finalValue;
+    this.regionBasedSoLoad();
+    this.ajaxLoadAllLeadInfo({ pagination: this.paginationControl, filter: "" });
+    this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: "" });
   },
   methods: {
-    ...mapActions("serviceRequest", [
-      "FETCH_ALL_SERVICE_REQUEST_GET_TYPES",
-      "DELETE_SERVICE_REQUEST_TYPES",
-      "FETCH_SUB_TASK_DATAS",
-      "DELETE_SUB_TASK_TYPES"
-    ]),
-    ...mapActions("sparePartsGetTypes", [
-      "FETCH_SPARE_PARTS_GET_TYPES",
-      "FETCH_ALL_SPARE_PARTS_INVENTORY_DATAS",
-      "SPARE_PARTS_ADD_STOCKS"
-    ]),
-    ...mapActions("InventoryCentral", [
-      "FETCH_CENTRAL_INVENTORY_DASHBOARD_COUNT",
-      "FETCH_REGION_BASED_SO"
-    ]),
-    ...mapActions("sparePartsInventory", [
-      "UPDATE_SPARE_PARTS_INVENTORY_DATAS"
-    ]),
-    ...mapActions("regionalInventoryDetails", ["FETCH_SPARE_PARTS_SETS_AND_COUNTS", , "FETCHING_INCOMING_POD_LIST_DETAILS", "APPROVE_INCOMING_POD_DETAILS", "REJECT_INCOMING_POD_DETAILS", "FETCHING_INCOMING_STOCKS_POD_LIST_DETAILS", "FETCHING_INCOMING_ALLOCATED_SO_POD_LIST_DETAILS"]),
+    ...mapActions("sparePartsGetTypes", ["FETCH_SPARE_PARTS_GET_TYPES"]),
+    ...mapActions("InventoryCentral", ["FETCH_REGION_BASED_SO"]),
+    ...mapActions("regionalInventoryDetails", ["FETCH_SPARE_PARTS_SETS_AND_COUNTS", "FETCHING_INCOMING_POD_LIST_DETAILS", "FETCHING_INCOMING_STOCKS_POD_LIST_DETAILS", "APPROVE_INCOMING_POD_DETAILS"]),
     ...mapActions("singlePodData", ["FETCH_SINGLE_POD_DETAILS"]),
+    ...mapActions("sparePartsInventory", ["UPDATE_SPARE_PARTS_INVENTORY_DATAS"]),
 
-    fnRejectPodDetails(exceptionDetails) {
-      this.showRejectModel = !this.showRejectModel;
-      this.propsRejectAppend = exceptionDetails;
+    fnSparePartsTypes() {
+      this.FETCH_SPARE_PARTS_GET_TYPES().then(() => {
+        this.sparePartsTypes = this.getsparePartsGetTypes.map(item => ({ value: item, label: item.spare_parts_types }));
+      });
     },
-
-    // fnRejectPodDetails(reqdata) {
-    //   this.$q
-    //     .dialog({
-    //       title: "Confirm",
-    //       message: "Are you sure want to Reject?",
-    //       ok: "Continue",
-    //       cancel: "Cancel"
-    //     })
-    //     .then(() => {
-    //       this.$q.loading.show({
-    //         delay: 0, // ms
-    //         spinnerColor: "purple-9",
-    //         message: "Processing .."
-    //       });
-    //       this.FETCH_SINGLE_POD_DETAILS(reqdata);
-    //       let param = {
-    //         allocate_region: this.getsinglePodDetails.data.allocate_region,
-    //         created_by: this.getsinglePodDetails.data.created_by,
-    //         allocate_reseller: this.getsinglePodDetails.data.allocate_reseller,
-    //         allocate_so: this.getsinglePodDetails.data.allocate_so,
-    //         sparePartsSets: this.getsinglePodDetails.data.sparePartsSets,
-    //         total_count: this.getsinglePodDetails.data.total_count,
-    //         pod_number: this.getsinglePodDetails.data.pod_number,
-    //         created_date: this.getsinglePodDetails.data.created_date,
-    //         updated_date: this.getsinglePodDetails.data.updated_date,
-    //       };
-
-    //       param.status = reqdata.status;
-    //       param.owner = reqdata.owner;
-
-    //       this.REJECT_INCOMING_POD_DETAILS(param)
-    //         .then(() => {
-    //           this.ajaxLoadAllLeadInfo({
-    //             pagination: this.paginationControl,
-    //             filter: this.filterSearch,
-    //           });
-    //           this.$q.loading.hide();
-    //           this.$q.notify({
-    //             color: "positive",
-    //             position: "bottom",
-    //             message: "Successfully Rejected!",
-    //             icon: "thumb_up"
-    //           });
-    //         })
-    //         .catch(error => {
-    //           this.$q.loading.hide();
-    //           this.$q.notify({
-    //             color: "negative",
-    //             position: "bottom",
-    //             message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-    //             icon: "thumb_down"
-    //           });
-    //         });
-    //     })
-
-    // },
     fnregionSpareCount() {
-      let self = this;
-      self.regionSpareCount=[];
-      self.getsparePartsSetsAndCounts=[];
-      self.FETCH_SPARE_PARTS_SETS_AND_COUNTS().then(() => {
-        return _.map(self.getsparePartsSetsAndCounts, item => {
-          self.regionSpareCount.push({
-            value: item,
-            label: item.spare_parts_types
+      this.regionSpareCount = [];
+      this.FETCH_SPARE_PARTS_SETS_AND_COUNTS().then(() => {
+        this.regionSpareCount = this.getsparePartsSetsAndCounts.map(item => ({ value: item, label: item.spare_parts_types }));
+      });
+    },
+    regionBasedSoLoad() {
+      const regionId = JSON.parse(localStorage.getItem('u_i')).region.id;
+      this.FETCH_REGION_BASED_SO(regionId).then(() => {
+        this.regionBasedSo = this.getRegionBasedSO.map(v => ({ label: `${v.name} | ${v.employeeID}`, value: JSON.stringify(v) }));
+      });
+    },
+    ajaxLoadAllLeadInfo({ pagination, filter }) {
+      this.$q.loading.show({ message: 'Fetching data ..' });
+      this.FETCHING_INCOMING_POD_LIST_DETAILS({ pagination, filter }).then(() => {
+        this.paginationControl = pagination;
+        this.paginationControl.rowsNumber = this.getregionalInventoryPodDetails.totalElements;
+        this.tableData = this.getregionalInventoryPodDetails.content;
+        this.$q.loading.hide();
+      }).catch(() => this.$q.loading.hide());
+    },
+    ajaxLoadAllLeadInfo1({ pagination, filter }) {
+      this.$q.loading.show({ message: 'Fetching data ..' });
+      this.FETCHING_INCOMING_STOCKS_POD_LIST_DETAILS({ pagination, filter }).then(() => {
+        this.paginationControl1 = pagination;
+        this.paginationControl1.rowsNumber = this.getregionalInventoryStocksPodDetails.totalElements;
+        this.tableData1 = this.getregionalInventoryStocksPodDetails.content;
+        this.$q.loading.hide();
+      }).catch(() => this.$q.loading.hide());
+    },
+    goToSelectedTab(tab) {
+      if (tab === 'incomingPods') this.ajaxLoadAllLeadInfo({ pagination: this.paginationControl, filter: "" });
+      else if (tab === 'stocks') this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: "" });
+    },
+    isSpareSelected(id) { return this.formData.sparePartsSets.some(s => s.spareParts.id === id); },
+    getSpareCount(id) {
+      const item = this.formData.sparePartsSets.find(s => s.spareParts.id === id);
+      return item ? item.count : 0;
+    },
+    toggleSpareSelection(selected, spare) {
+      if (selected) this.formData.sparePartsSets.push({ count: 0, spareParts: { id: spare.id } });
+      else {
+        this.formData.sparePartsSets = this.formData.sparePartsSets.filter(s => s.spareParts.id !== spare.id);
+        this.calculateTotal();
+      }
+    },
+    updateSpareCount(val, spare) {
+      const item = this.formData.sparePartsSets.find(s => s.spareParts.id === spare.id);
+      if (item) { item.count = parseInt(val) || 0; this.calculateTotal(); }
+    },
+    calculateTotal() { this.formData.total_count = this.formData.sparePartsSets.reduce((sum, s) => sum + s.count, 0); },
+    fnSubmitBankDetails() {
+      const payload = { ...this.formData, allocate_so: JSON.parse(this.formData.allocate_so), allocate_region: JSON.parse(localStorage.getItem('u_i')).region };
+      this.$q.loading.show();
+      this.UPDATE_SPARE_PARTS_INVENTORY_DATAS(payload).then(() => {
+        this.$q.loading.hide();
+        this.$q.notify({ color: "positive", message: "Successfully updated!", icon: "thumb_up" });
+        this.fnregionSpareCount();
+        this.formData.sparePartsSets = [];
+        this.formData.total_count = 0;
+        this.formData.pod_number = "SO" + new Date().getTime();
+      }).catch(err => {
+        this.$q.loading.hide();
+        this.$q.notify({ color: "negative", message: err.body?.message || "Please Try Again Later !", icon: "thumb_down" });
+      });
+    },
+    fnRejectPodDetails(details) { this.showRejectModel = true; this.propsRejectAppend = details; },
+    fnApprovePodDetails(reqdata) {
+      this.$q.dialog({ title: "Confirm", message: "Are you sure want to Approve?", ok: "Continue", cancel: "Cancel" }).onOk(() => {
+        this.FETCH_SINGLE_POD_DETAILS(reqdata).then(res => {
+          const param = { ...res.data.data, status: reqdata.status, owner: reqdata.owner };
+          this.APPROVE_INCOMING_POD_DETAILS(param).then(() => {
+            this.$q.notify({ color: 'positive', message: 'Successfully Approved!', icon: 'thumb_up' });
+            this.ajaxLoadAllLeadInfo({ pagination: this.paginationControl, filter: "" });
+            this.fnregionSpareCount();
           });
         });
       });
-    },
-    fnApprovePodDetails(reqdata) {
-      this.$q
-        .dialog({
-          title: "Confirm",
-          message: "Are you sure want to Approve?",
-          ok: "Continue",
-          cancel: "Cancel"
-        }).onOk(() => {
-          this.FETCH_SINGLE_POD_DETAILS(reqdata)
-            .then(response => {
-              let param = {
-                allocate_region: response.data.data.allocate_region,
-                created_by: response.data.data.created_by,
-                allocate_reseller: response.data.data.allocate_reseller,
-                allocate_so: response.data.data.allocate_so,
-                sparePartsSets: response.data.data.sparePartsSets,
-                total_count: response.data.data.total_count,
-                pod_number: response.data.data.pod_number,
-                created_date: response.data.data.created_date,
-                updated_date: response.data.data.updated_date
-              }
-              param.status = reqdata.status
-              param.owner = reqdata.owner
-              this.APPROVE_INCOMING_POD_DETAILS(param)
-                .then(() => {
-                  this.$q.notify({
-                    color: 'positive',
-                    position: 'bottom',
-                    message: 'Successfully Approved!',
-                    icon: 'thumb_up'
-                  })
-                  this.ajaxLoadAllLeadInfo({
-                    pagination: this.paginationControl,
-                    filter: this.filterSearch
-                  })
-                  this.fnregionSpareCount()
-                }).catch(error => {
-                  this.$q.loading.hide()
-                  this.$q.notify({
-                    color: 'negative',
-                    position: 'bottom',
-                    message: error.body.message == null ? 'Please Try Again Later !' : error.body.message,
-                    icon: 'thumb_down'
-                  })
-                })
-            })
-            .catch(error => {
-              this.$q.loading.hide()
-              this.$q.notify({
-                color: 'negative',
-                position: 'bottom',
-                message: error.body.message == null ? 'Please Try Again Later !' : error.body.message,
-                icon: 'thumb_down'
-              })
-            })
-        })
-    },
-    ajaxLoadAllLeadInfo ({ pagination, filter }) {
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: 'purple-9',
-        message: 'Fetching data ..'
-      })
-      this.FETCHING_INCOMING_POD_LIST_DETAILS({ pagination, filter }).then((res) => {
-        // updating pagination to reflect in the UI
-        this.paginationControl = pagination
-
-        // we also set (or update) rowsNumber
-        this.paginationControl.rowsNumber =
-          this.getregionalInventoryPodDetails.totalElements
-        this.paginationControl.page =
-          this.getregionalInventoryPodDetails.number + 1
-
-        // then we update the rows with the fetched ones
-        this.tableData =
-          this.getregionalInventoryPodDetails.content
-        if (this.getregionalInventoryPodDetails.sort != null) {
-          this.paginationControl.sortBy =
-            this.getregionalInventoryPodDetails.sort[0].property
-          this.paginationControl.descending =
-            this.getregionalInventoryPodDetails.sort[0].ascending
-        }
-
-        // finally we tell QTable to exit the "loading" state
-        this.$q.loading.hide()
-      })
-        .catch(() => {
-          this.$q.loading.hide()
-        })
-    },
-    ajaxLoadAllLeadInfo2 ({ pagination, filter }) {
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: 'purple-9',
-        message: 'Fetching data ..'
-      })
-      this.FETCHING_INCOMING_ALLOCATED_SO_POD_LIST_DETAILS({ pagination, filter }).then((res) => {
-        // updating pagination to reflect in the UI
-        this.paginationControl2 = pagination
-
-        // we also set (or update) rowsNumber
-        this.paginationControl2.rowsNumber =
-          this.getregionalInventoryAllocatedSoPodDetails.totalElements
-        this.paginationControl2.page =
-          this.getregionalInventoryAllocatedSoPodDetails.number + 1
-
-        // then we update the rows with the fetched ones
-        this.tableData2 =
-          this.getregionalInventoryAllocatedSoPodDetails.content
-        if (this.getregionalInventoryAllocatedSoPodDetails.sort != null) {
-          this.paginationControl2.sortBy =
-            this.getregionalInventoryAllocatedSoPodDetails.sort[0].property
-          this.paginationControl2.descending =
-            this.getregionalInventoryAllocatedSoPodDetails.sort[0].ascending
-        }
-
-        // finally we tell QTable to exit the "loading" state
-        this.$q.loading.hide()
-      })
-        .catch(() => {
-          this.$q.loading.hide()
-        })
-    },
-    ajaxLoadAllLeadInfo1 ({ pagination, filter }) {
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: 'purple-9',
-        message: 'Fetching data ..'
-      })
-      this.FETCHING_INCOMING_STOCKS_POD_LIST_DETAILS({ pagination, filter }).then((res) => {
-        // updating pagination to reflect in the UI
-        this.paginationControl1 = pagination
-
-        // we also set (or update) rowsNumber
-        this.paginationControl1.rowsNumber =
-          this.getregionalInventoryStocksPodDetails.totalElements
-        this.paginationControl1.page =
-          this.getregionalInventoryStocksPodDetails.number + 1
-
-        // then we update the rows with the fetched ones
-        this.tableData1 =
-          this.getregionalInventoryStocksPodDetails.content
-        if (this.getregionalInventoryStocksPodDetails.sort != null) {
-          this.paginationControl1.sortBy =
-            this.getregionalInventoryStocksPodDetails.sort[0].property
-          this.paginationControl1.descending =
-            this.getregionalInventoryStocksPodDetails.sort[0].ascending
-        }
-
-        // finally we tell QTable to exit the "loading" state
-        this.$q.loading.hide()
-      })
-        .catch(() => {
-          this.$q.loading.hide()
-        })
-    },
-    goToSelectedTab (tab) {
-      if (tab == 'allocatedSo') {
-        let request = {
-          pagination: this.paginationControl2,
-          filter: this.filterSearch2
-        }
-        this.toggleAjaxLoadFilter = true
-        this.FETCHING_INCOMING_ALLOCATED_SO_POD_LIST_DETAILS(request)
-          .then((response) => {
-            this.toggleAjaxLoadFilter = false
-          })
-          .catch((error) => {
-            this.toggleAjaxLoadFilter = false
-          })
-      } else if (tab == 'stocks') {
-        this.ajaxLoadAllLeadInfo1({
-          pagination: this.paginationControl1,
-          filter: this.filterSearch1
-        })
-      } else {
-        this.ajaxLoadAllLeadInfo({
-          pagination: this.paginationControl,
-          filter: this.filterSearch
-        })
-      }
-    },
-    fnSubmitBankDetails (request) {
-      this.formData.allocate_so = JSON.parse(this.formData.allocate_so == ''
-        ? null
-        : this.formData.allocate_so)
-
-      // this.formData.allocate_region =JSON.parse(this.formData.allocate_region == ""
-      //     ? null
-      //     : this.formData.allocate_region);
-      this.formData.allocate_region = JSON.parse(localStorage.getItem('u_i')).region
-      this.formData.allocate_reseller = JSON.parse(this.formData.allocate_reseller == '' ? null : this.formData.allocate_reseller)
-
-      this.$q.loading.show()
-      this.UPDATE_SPARE_PARTS_INVENTORY_DATAS(request)
-        .then(() => {
-          this.$q.loading.hide()
-          if (this.formData.allocate_so == null) {
-            this.$q.notify({
-              color: 'negative',
-              position: 'bottom',
-              message: 'Please Select the SO',
-              icon: 'info'
-            })
-          } else {
-            this.$q.notify({
-              color: 'positive',
-              position: 'bottom',
-              message: 'Successfully updated!',
-              icon: 'thumb_up'
-            })
-          }
-        })
-        .catch(error => {
-          this.$q.loading.hide()
-          this.$q.notify({
-            color: 'negative',
-            position: 'bottom',
-            message:
-              error.body.message == null
-                ? 'Please Try Again Later !'
-                : error.body.message,
-            icon: 'thumb_down'
-          })
-        })
-    },
-    fnSparePartsTypes () {
-      let self = this
-      self.FETCH_SPARE_PARTS_GET_TYPES().then(() => {
-        return _.map(self.getsparePartsGetTypes, item => {
-          self.sparePartsTypes.push({
-            value: item,
-            label: item.spare_parts_types
-          })
-        })
-      })
-    },
-    getSelectedDetails (event, request) {
-      var flag = 0
-      var totalCount = 0
-      var spCount = 0
-      var spCount1 = 0
-      var spCount2 = 0
-      this.requestData = request
-      this.selectedSpareValue = this.requestData
-      let chFlag = event.target.checked
-      if (chFlag) {
-        document.getElementById(request.id + '_DV').style.display = 'block'
-      } else {
-        document.getElementById(request.id + '_DV').style.display = 'none'
-
-        if (this.formData.sparePartsSets.length > 0) {
-          this.rmSpareCount = this.formData.sparePartsSets.filter(
-            spare => spare.spareParts.id == request.id
-          )
-          var length = this.rmSpareCount.length
-          let rmCount = this.rmSpareCount[length - 1].spareParts.id
-          var length2 = this.formData.sparePartsSets.length
-          if (this.formData.sparePartsSets.length > 0) {
-            this.formData.sparePartsSets.forEach(function (obj1) {
-              if (rmCount == obj1.spareParts.id) {
-                obj1.count = 0
-              }
-            })
-            if (this.formData.sparePartsSets.length > 0) {
-              this.formData.sparePartsSets.forEach(function (obj) {
-                if (obj.spareParts.id == 8) {
-                  spCount = obj.count
-                } else if (obj.spareParts.id == 9) {
-                  spCount1 = obj.count
-                } else if (obj.spareParts.id == 10) {
-                  spCount2 = obj.count
-                } 
-                totalCount = spCount + spCount1 + spCount2
-              })
-              this.formData.total_count = totalCount
-            }
-            this.formData.total_count = totalCount
-          }
-        }
-      }
-    },
-    getAllCounts (event, menu) {
-      let ch1Flag = event.target.checked
-      var flag = 0
-      var totalCount = 0
-      var spCount = 0
-      var spCount1 = 0
-      var spCount2 = 0
-      var count1 = 0
-      if (this.formData.sparePartsSets.length > 0) {
-        let myArr = this.formData.sparePartsSets
-        for (var j = 0; j < myArr.length; j++) {
-          if (myArr[j].id == menu.value.id) {
-            this.formData.sparePartsSets[j].count = parseInt(
-              event.target.value
-            )
-            flag = 1
-          }
-        }
-      }
-      if (flag == 0) {
-        this.formData.sparePartsSets.push({
-          count: parseInt(event.target.value),
-          spareParts: {
-            id: menu.value.id
-          }
-        })
-      }
-      if (this.formData.sparePartsSets.length > 0) {
-        this.formData.sparePartsSets.forEach(function (obj) {
-          if (obj.spareParts.id == 8) {
-            spCount = obj.count
-          } else if (obj.spareParts.id == 9) {
-            spCount1 = obj.count
-          } else if (obj.spareParts.id == 10) {
-            spCount2 = obj.count
-          } 
-          totalCount = spCount + spCount1 + spCount2
-        })
-        this.formData.total_count = totalCount
-      }
-    },
-    finding (menu) {
-    },
-    regionBasedSoLoad () {
-      let regionArea = JSON.parse(localStorage.getItem('u_i')).region.id
-      // this.red
-      this.FETCH_REGION_BASED_SO(regionArea).then(() => {
-        let assumeArr = []
-        this.getRegionBasedSO.map(function (value, index) {
-          assumeArr.push({
-            label: value.name+ " | " + value.employeeID+ " | " + value.email,
-            // value: value.id
-            value: JSON.stringify(value)
-          })
-        })
-        this.regionBasedSo = assumeArr
-      })
-    },
-
-    fnDeleteServiceType (rowDetails) {
-      this.$q
-        .dialog({
-          title: 'Confirm',
-          message: 'Are you sure want to delete?',
-          ok: 'Continue',
-          cancel: 'Cancel'
-        }).onOk(() => {
-          this.$q.loading.show({
-            delay: 100, // ms
-            message: 'Please Wait',
-            spinnerColor: 'purple-9',
-            customClass: 'shadow-none'
-          })
-          this.DELETE_SERVICE_REQUEST_TYPES(rowDetails).then(response => {
-            this.$q.notify({
-              color: 'positive',
-              position: 'bottom',
-              message: 'Successfully removed',
-              icon: 'thumb_up'
-            })
-          })
-          this.$q.loading.hide()
-        }).onCancel(() => {
-          this.$q.notify({
-            color: 'negative',
-            position: 'bottom',
-            message: 'No changes made!',
-            icon: 'thumb_down'
-          })
-        })
-    },
-    fnDeleteSubTaskType (rowDetails) {
-      this.$q
-        .dialog({
-          title: 'Confirm',
-          message: 'Are you sure want to delete?',
-          ok: 'Continue',
-          cancel: 'Cancel'
-        }).onOk(() => {
-          this.$q.loading.show({
-            delay: 100, // ms
-            message: 'Please Wait',
-            spinnerColor: 'purple-9',
-            customClass: 'shadow-none'
-          })
-          this.DELETE_SUB_TASK_TYPES(rowDetails).then(response => {
-            this.$q.notify({
-              color: 'positive',
-              position: 'bottom',
-              message: 'Successfully removed',
-              icon: 'thumb_up'
-            })
-          })
-          this.$q.loading.hide()
-        }).onCancel(() => {
-          this.$q.notify({
-            color: 'negative',
-            position: 'bottom',
-            message: 'No changes made!',
-            icon: 'thumb_down'
-          })
-        })
-    },
-
-    ajaxSpareData () {
-      this.FETCH_ALL_SERVICE_REQUEST_GET_TYPES()
-        .then(res => {
-          this.tableData = this.getserviceRequestGetTypes
-        
-        })
-        .onCancel(() => {
-          this.$q.loading.hide()
-        })
-    },
-    getAllInventoryData () {
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: 'purple-9',
-        message: 'Fetching data ..'
-      })
-      this.FETCH_CENTRAL_INVENTORY_DASHBOARD_COUNT().then(() => {
-        this.inventoryData.centralItems = this.getCentralInventoryDashboardCount.centralInventory
-        this.inventoryData.merchantItems = this.getCentralInventoryDashboardCount.merchantInventory
-        this.inventoryData.regionalItems = this.getCentralInventoryDashboardCount.regionalInventory
-        this.inventoryData.billPartnerInventory = this.getCentralInventoryDashboardCount.billPartnerInventory
-        this.inventoryData.resellarItems = this.getCentralInventoryDashboardCount.resellerInventory
-        this.inventoryData.faultyInventory = this.getCentralInventoryDashboardCount.faultyInventory
-        this.inventoryData.sendtoRepair = this.getCentralInventoryDashboardCount.faultySentToRepair
-        this.FETCH_ALL_REGIONS_DATA()
-          .then(() => {
-            this.inventoryData.regionFilterOptions = this.getAllRegionsData
-
-            this.$q.loading.hide()
-          })
-          .catch(() => {
-            this.$q.loading.hide()
-          })
-      })
-    },
-    ajaxSpareData1 () {
-      this.FETCH_SUB_TASK_DATAS()
-        .then(res => {
-          this.tableData1 = this.getsubTaskDetails
-         
-        })
-        .catch(() => {
-          this.$q.loading.hide()
-        })
-    },
-    fnShowAddNewSubTaskType (rowDetails) {
-      this.propShowAddSubTaskType = !this.propShowAddSubTaskType
-      this.propRowDetails2 = rowDetails
-    },
-    fnShowEditServiceType (rowDetails) {
-      this.propShowEditServiceType = !this.propShowEditServiceType
-      this.propRowDetails = rowDetails
-    },
-    fnShowEditSubTaskType (rowDetails) {
-      this.propShowEditSubTaskType = !this.propShowEditSubTaskType
-      this.propRowDetails1 = rowDetails
-    },
-
-    myCustomSearchFilter (rows, terms, cols, cellValue) {
-      const lowerTerms = terms ? terms.toLowerCase() : ''
-      return rows.filter(row =>
-        cols.some(
-          col =>
-            (cellValue(col, row) + '').toLowerCase().indexOf(lowerTerms) !== -1
-        )
-      )
     }
   }
-}
+};
 </script>
-
-<style>
-</style>
