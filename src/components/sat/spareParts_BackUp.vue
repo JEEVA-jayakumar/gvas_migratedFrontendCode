@@ -92,7 +92,7 @@
         }}
           </q-td>
           </template>
-        <template slot="top" class="bottom-border">
+        <template v-slot:top="props" class="bottom-border">
           <!--START: table filter,search,excel download -->
           <div class="col-5">
             <q-input

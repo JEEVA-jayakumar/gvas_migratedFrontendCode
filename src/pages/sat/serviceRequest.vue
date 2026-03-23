@@ -144,7 +144,8 @@
         <q-tab name="closed" label="Closed" />
       </q-tabs>
 
-      <q-tab-panels v-model="selectedTab" animated @update:model-value="goToUnassignedTab">
+
+          <q-tab-panels v-model="selectedTab" animated @update:model-value="goToUnassignedTab">
         <q-tab-panel name="unAssigned" class="q-pa-none">
           <!--START: table Data    :rows="tableData1" -->
           <q-table
@@ -231,8 +232,7 @@
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-
-        <q-tab-panel name="assigned" class="q-pa-none">
+<q-tab-panel name="assigned" class="q-pa-none">
           <!--START: table Data    :rows="tableData" -->
           <q-table
             :rows="tableData"
@@ -250,8 +250,7 @@
             <!-- <template v-slot:body="props">
                  <q-tr :props="props" class="">
 
-                 </q-tr>
-            </template> -->
+                 </q-tr> -->
             <template v-slot:body-cell-leadNumber="props">
               <q-td
                 :props="props"
@@ -345,8 +344,7 @@
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-
-        <q-tab-panel name="closed" class="q-pa-none">
+<q-tab-panel name="closed" class="q-pa-none">
           <!--START: table Data -->
           <q-table
             :rows="closedDatas"
@@ -364,8 +362,7 @@
             <!-- <template v-slot:body="props">
                  <q-tr :props="props" class="">
 
-                 </q-tr>
-            </template> -->
+                 </q-tr> -->
             <template v-slot:body-cell-leadNumber="props">
               <q-td
                 :props="props"
@@ -459,7 +456,7 @@
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-      </q-tab-panels>
+          </q-tab-panels>
       <div class="row items-center gutter-y-sm">
         <div class="col-md-9 col-sm-12 col-xs-12">
           <div class="row items-center"></div>

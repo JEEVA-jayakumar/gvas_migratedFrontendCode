@@ -388,8 +388,10 @@ export default {
             this.FETCH_PHONE_PE_REGIONAL_INVENTORY_PDO_BASED_DEVICE_DETAIL_WITH_COUNT(
                 requestParams
             )
-                .then(() => {
+                .then((response) => {
                     this.$emit("refreshScanButtonVisiblity");
+                    this.deviceTableData = response.data.data.regionalInventoryCount;
+                    this.deviceregionalInventoryList = response.data.data.regionalInventoryList;
                     this.toggleAjaxLoadFilter = false;
                 })
                 .catch(error => {

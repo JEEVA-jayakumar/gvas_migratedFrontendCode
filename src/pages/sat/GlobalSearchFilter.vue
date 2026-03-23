@@ -14,14 +14,15 @@
             <!-- <q-tab name="spareSo" label="Spare Parts So" /> -->
             <q-tab name="external" label="Phonepe Global Serial" />
 </q-tabs>
-<q-tab-panels v-model="inventoryOptionSelected" animated>
+
+          <q-tab-panels v-model="inventoryOptionSelected" animated>
 <q-tab-panel name="internal">
               <InternalGlobalSearchFilter/>
             </q-tab-panel>
 <q-tab-panel name="external">
               <AggregatorGlobalSearchFilter/>
             </q-tab-panel>
-</q-tab-panels>
+          </q-tab-panels>
         </div>
       </div>
     </div>

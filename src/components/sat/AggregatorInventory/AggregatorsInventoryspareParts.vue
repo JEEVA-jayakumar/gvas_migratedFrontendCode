@@ -34,12 +34,12 @@
                 <q-tab color="dark" name="createSoPod" label="Create So Pod" />
             </q-tabs>
 
-            <q-tab-panels v-model="selectedTab" animated>
+
+          <q-tab-panels v-model="selectedTab" animated>
                 <q-tab-panel name="SoPodList">
                     <PhonepeSoPodList />
                 </q-tab-panel>
-
-                <q-tab-panel name="incomingPods">
+<q-tab-panel name="incomingPods">
                     <q-table :rows="tableData" table-class="customSATableClass" :columns="columns"
                         :filter="filterSearch" v-model:pagination="paginationControl"
                         row-key="name" color="grey-9"
@@ -114,8 +114,7 @@
                         </template>
                     </q-table>
                 </q-tab-panel>
-
-                <q-tab-panel name="stocks">
+<q-tab-panel name="stocks">
                     <q-table :rows="tableData1" table-class="customSATableClass" :columns="columns1"
                         :filter="filterSearch1" v-model:pagination="paginationControl1"
                         row-key="name" color="grey-9"
@@ -179,8 +178,7 @@
                         </template>
                     </q-table>
                 </q-tab-panel>
-
-                <q-tab-panel name="createSoPod">
+<q-tab-panel name="createSoPod">
                     <div class="col-sm-3">
                         <div class="row">
                             <q-select filter clearable v-model="formData.allocate_so"
@@ -224,7 +222,7 @@
                         </div>
                     </div>
                 </q-tab-panel>
-            </q-tab-panels>
+          </q-tab-panels>
 
             <PhonepeRejectPodDetails v-if="showRejectModel" :showRejectModel="showRejectModel"
                 :propShowRejectComponent="propsRejectAppend"

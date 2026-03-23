@@ -115,6 +115,7 @@
             </div>
             <!-- <div class="col-3">
               <q-input filled v-model="model" label="Filter By" color="grey-9">
+          </template>
             <template v-slot:append>
               <q-icon name="event" class="cursor-pointer">
                 <q-menu transition-show="scale" transition-hide="scale">

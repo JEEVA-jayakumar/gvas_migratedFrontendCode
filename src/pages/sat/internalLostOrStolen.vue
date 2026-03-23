@@ -131,8 +131,7 @@
                 size="sm"
                >Accept</q-btn>
              </q-td>
-             </q-tr>
-          </template> -->
+             </q-tr> -->
         <template v-slot:top class="bottom-border">
           <!--START: table filter,search,excel download -->
           <div class="col-5">

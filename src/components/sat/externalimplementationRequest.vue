@@ -123,7 +123,8 @@
         </div>
       </q-card>
 </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
+
+          <q-tab-panels v-model="selectedTab" animated>
 <q-tab-panel name="assigned">
               <Phonepeassigned/>
             </q-tab-panel>
@@ -208,7 +209,6 @@
             </template>
           </q-table>
         </q-tab-panel>
-
 <q-tab-panel name="cancelledMerchants">
       <q-table :rows="tableData2"
                       :columns="columnDataMerchants"
@@ -279,7 +279,7 @@
             
             </q-table>
           </q-tab-panel>
-</q-tab-panels>
+          </q-tab-panels>
       <!--ENDv-model: table Footer -->
       <!-- START >> COMPONENT: Update device address  -->
       <DeviceAddressModal

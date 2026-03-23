@@ -36,7 +36,7 @@
          <template v-slot:body-cell-leadNumber="props">
             <q-td :props="props"
          class="cursor-pointer"
-         @click.native="toggleLeadInformation(props.row)">
+         @click="toggleLeadInformation(props.row)">
 
           <span class="label text-primary"> {{props.row.leadNumber}}</span>
           
@@ -49,7 +49,7 @@
         </q-td>
         </template>
         <template v-slot:body-cell-date="props">
-          <q-td :props="props">{{ (props.row.date).format("Do MMM Y") }}</q-td>
+          <q-td :props="props">{{ $moment(props.row.date).format('Do MMM Y') }}</q-td>
         </template>
          <template v-slot:body-cell-verifiedFinanceStatus="props">
            <q-td :props="props">
@@ -144,7 +144,7 @@
         <!-- <template v-slot:body-cell-action="props">
             <q-td :props="props">
 
-            @click.native="toggleLeadInformation(props.row.leadInformation.leadNumber)"
+            @click="toggleLeadInformation(props.row.leadInformation.leadNumber)"
               class="cursor-pointer"
            <q-btn
             highlight

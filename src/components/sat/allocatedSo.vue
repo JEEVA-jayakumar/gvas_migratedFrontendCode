@@ -7,7 +7,8 @@
                 <q-tab color="dark" name="tab-2" label="Rejected Pod" />
                 <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
 </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
+
+          <q-tab-panels v-model="selectedTab" animated>
 <q-tab-panel name="tab-1">
                     <q-table :rows="tableData" table-class="customSATableClass" :columns="columns"
                         :filter="filterSearch" v-model:pagination="paginationControl"
@@ -295,7 +296,7 @@
                         </template>
                     </q-table>
                 </q-tab-panel>
-</q-tab-panels>
+          </q-tab-panels>
         </div>
     </q-page>
 </template>

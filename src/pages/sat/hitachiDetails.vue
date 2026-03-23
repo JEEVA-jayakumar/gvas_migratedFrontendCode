@@ -6,11 +6,12 @@
           <q-tabs no-pane-border v-model="QRselected" color="dark" filled class="shadow-1">
             <q-tab name="HitachiUpload" label="Upload And Download" />
 </q-tabs>
-<q-tab-panels v-model="QRselected" animated>
+
+          <q-tab-panels v-model="QRselected" animated>
 <q-tab-panel name="HitachiUpload">
               <HitachiUpload />
             </q-tab-panel>
-</q-tab-panels>
+          </q-tab-panels>
         </div>
       </div>
     </div>
@@ -116,7 +117,8 @@ export default {
               <q-separator />
               <q-card-section>
                 <q-item dense>
-                  <q-item-section icon="attach_file" />
+                  <q-item-section>
+                </q-item-section>
                   <q-item-section>{{ formData.fileSelected[0].name }}</q-item-section>
                   <q-item-section></q-item-section>
                 </q-item>

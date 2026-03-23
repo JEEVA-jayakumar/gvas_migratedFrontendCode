@@ -8,9 +8,7 @@ AesUtil.prototype.generateKey = function (salt, passPhrase) {
     passPhrase,
     CryptoJS.enc.Hex.parse(salt), {
       keySize: this.keySize,
-      iterations: this.iterationCount,
-      // Keep compatible with backend PBKDF2(HMAC-SHA1)
-      hasher: CryptoJS.algo.SHA1
+      iterations: this.iterationCount
     });
   return key;
 }

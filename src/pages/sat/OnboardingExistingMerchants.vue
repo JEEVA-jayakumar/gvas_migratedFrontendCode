@@ -12,8 +12,11 @@
               align="justify"
             >
               <q-tab class="size1" name="upload" label="UPLOAD CSV FILE" />
+              <q-tab class="size1" name="assigned" label="ASSIGNED" />
+              <q-tab class="size1" name="unAssigned" label="UNASSIGNED" />
             </q-tabs>
-            <q-tab-panels v-model="tab" animated>
+
+            <q-tab-panels v-model="tab" animated @update:model-value="goToUnassignedTab">
               <q-tab-panel name="upload">
                 <div class="q-pa-md">
                   <div class="row text-center justify-center">
@@ -59,11 +62,12 @@
                           <q-separator />
                           <q-card-section>
                             <q-item dense>
-                              <q-item-section icon="attach_file" />
+                              <q-item-section avatar>
+                                <q-icon name="attach_file" />
+                              </q-item-section>
                               <q-item-section>{{
                                 formData.fileSelected[0].name
                               }}</q-item-section>
-                              <q-item-section></q-item-section>
                             </q-item>
                           </q-card-section>
                           <q-separator />
@@ -92,21 +96,7 @@
                   </div>
                 </div>
               </q-tab-panel>
-            </q-tab-panels>
-          </div>
-        </div>
-      </div>
-    </q-card>
-    <q-card>
-      <div class="text-grey-9">
-        <div class="row bottom-border q-pa-sm items-center">
-          <div class="col">
-            <q-tabs v-model="selectedTab" class="shadow-1" color="tertiary" align="justify" @update:model-value="goToUnassignedTab">
-              <q-tab class="size1" name="unAssigned" label="Unassigned" />
-              <q-tab class="size1" name="assigned" label="Assigned" />
-            </q-tabs>
 
-            <q-tab-panels v-model="selectedTab" animated>
               <q-tab-panel name="assigned">
                 <div class="row items-center gutter-y-sm q-mb-md">
                   <div class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md" align="left">
@@ -118,14 +108,14 @@
                     <div class="row items-center">
                       <div class="col-md-4 col-sm-6 col-xs-6">
                         <q-select
-                          filter
                           clearable
                           v-model="formData.assignTo"
                           :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
-                          separator
                           color="grey-9"
                           :options="assignToOptions"
-                          placeholder="Assign To"
+                          label="Assign To"
+                          emit-value
+                          map-options
                         />
                       </div>
                       <div class="col-md-4 col-sm-6 col-xs-6 group">
@@ -178,7 +168,8 @@
                         v-model="filterSearch"
                         placeholder="Type.."
                         label="Search By Merchant Name, TID, MID ..."
-                        class="q-mr-lg q-py-sm">
+                        class="q-mr-lg q-py-sm"
+                      >
                         <template v-slot:append>
                           <q-icon name="search" />
                         </template>
@@ -199,14 +190,14 @@
                     <div class="row items-center">
                       <div class="col-md-4 col-sm-6 col-xs-6">
                         <q-select
-                          filter
                           clearable
                           v-model="formData.assignTo"
                           :disable="formData.marsDeviceIdsCooked.length == 0"
-                          separator
                           color="grey-9"
                           :options="assignToOptions"
-                          placeholder="Assign To"
+                          label="Assign To"
+                          emit-value
+                          map-options
                         />
                       </div>
                       <div class="col-md-4 col-sm-6 col-xs-6">
@@ -252,7 +243,8 @@
                         v-model="filterSearch1"
                         placeholder="Type.."
                         label="Search By Merchant Name, TID, MID ..."
-                        class="q-mr-lg q-py-sm">
+                        class="q-mr-lg q-py-sm"
+                      >
                         <template v-slot:append>
                           <q-icon name="search" />
                         </template>
@@ -280,8 +272,6 @@ export default {
       addtnLeadInformation: null,
       filterSearch: "",
       filterSearch1: "",
-      selectedTab: "unAssigned",
-      assignTo: "",
       assignToOptions: [],
       tableData: [],
       tableData1: [],
@@ -397,13 +387,15 @@ export default {
         sortBy: "createdAt",
         descending: false,
         page: 1,
-        rowsPerPage: 5
+        rowsPerPage: 5,
+        rowsNumber: 0
       },
       paginationControl1: {
         sortBy: "createdAt",
         descending: false,
         page: 1,
-        rowsPerPage: 5
+        rowsPerPage: 5,
+        rowsNumber: 0
       },
       tableAjaxLoading: false,
       tableAjaxLoading1: false
@@ -416,6 +408,7 @@ export default {
   mounted() {
     this.getPincodeInformations();
     this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: "" });
+    this.ajaxLoadAllLeadInfo({ pagination: this.paginationControl, filter: "" });
   },
   methods: {
     ...mapActions("OnboardingExistingMerchants", ["ONBOARDING_MERCHANT_ASSIGNED_LIST", "ONBOARDING_MERCHANT_UNASSIGNED_LIST", "ONBOARDING_MERCHANT_SUBMIT", "ONBOARDING_MERCHANT_SUBMIT_UNASSIGN"]),
@@ -492,7 +485,7 @@ export default {
       if (tab == "unAssigned") {
         this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: "" });
         this.formData.marsDeviceIdsCooked = [];
-      } else {
+      } else if (tab == "assigned") {
         this.ajaxLoadAllLeadInfo({ pagination: this.paginationControl, filter: "" });
         this.formData.marsDeviceIdsCookedUnAssinged = [];
       }

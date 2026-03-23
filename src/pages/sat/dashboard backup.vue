@@ -246,7 +246,63 @@
                   >{{tab.tabTitle}}</q-chip>
                 </q-tab>
 </q-tabs>
-<q-tab-panels v-model="agingTrackerPending.tabsModel" animated>
+
+          <q-tab-panels v-model="agingTrackerPending.tabsModel" animated>
+<q-tab-panel
+                  :name="tabPaneItem.name"
+                  v-for="tabPaneItem in agingTrackerPending.tabItems"
+                  :key="tabPaneItem.name"
+                  class="no-padding"
+                >
+                  <div class="row">
+                    <div class="full-width">
+                      <q-list no-border separator class="col-md-12">
+                        <q-item
+                          class="full-width no-padding q-py-md"
+                          v-for="tabItemDetail in tabPaneItem.tabItemDetails"
+                          :key="tabItemDetail.title"
+                        >
+                          <q-item-section left class="col-md-6 col-sm-12">
+                            <q-item-label>
+                              <div class="q-caption">{{tabItemDetail.title}}</div>
+                            </q-item-label>
+                            <q-item-label>
+                              <div class="q-caption">Created on: {{tabItemDetail.created_date}}</div>
+                            </q-item-label>
+                            <q-item-label>
+                              <div class="q-caption">SO Name: {{tabItemDetail.so_name}}</div>
+                            </q-item-label>
+                          </q-item-section>
+                          <q-item-section></q-item-section>
+                          <q-item-section right class="full-width float-right col-md-6 col-sm-12">
+                            <q-item-label>
+                              <div class="q-caption">
+                                <span class="text-primary">
+                                  <q-icon
+                                    v-if="tabItemDetail.alert"
+                                    color="purple-9"
+                                    size="8px"
+                                    name="fas fa-dot-circle"
+                                  />
+                                </span>
+                              </div>
+                            </q-item-label>
+                            <q-item-label>
+                              <div class="q-caption">
+                                <span class="text-primary">#{{tabItemDetail.tid}}</span>
+                              </div>
+                            </q-item-label>
+                            <q-item-label>
+                              <div class="q-caption">
+                                <span class="text-warning">{{tabItemDetail.status}}</span>
+                              </div>
+                            </q-item-label>
+                          </q-item-section>
+                        </q-item>
+                      </q-list>
+                    </div>
+                  </div>
+                </q-tab-panel>
 <q-tab-panels v-model="agingTrackerPending.tabsModel" animated>
 <q-tab-panel
                   :name="tabPaneItem.name"
@@ -303,92 +359,7 @@
                     </div>
                   </div>
                 </q-tab-panel>
-</q-tab-panels>
-              <router-link to="/sat/aging/tracker/pending" class="text-grey-8">
-                <p>View more</p>
-              </router-link>
-            </div>
-            <div class="col-md-12">
-              <div class="q-subheading q-pa-md">Aging Tracker
-                <small class="text-negative">Rejected</small>
-              </div>
-              <q-tabs
-                v-model="agingTrackerPending.tabsModel"
-                filled
-                color="white"
-                no-pane-border
-                class="relative-position"
-              >
-                <q-tab
-                  class="q-pa-sm"
-                  :name="tab.name"
-                  v-for="tab in          agingTrackerPending.tabs"
-                  :key="tab.tabTitle"
-                >
-                  <q-chip
-                    detail
-                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
-                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
-                  >{{tab.tabTitle}}</q-chip>
-                </q-tab>
-</q-tabs>
-<q-tab-panels v-model="agingTrackerPending.tabsModel" animated>
-<q-tab-panel
-                  :name="tabPaneItem.name"
-                  v-for="tabPaneItem in agingTrackerPending.tabItems"
-                  :key="tabPaneItem.name"
-                  class="no-padding"
-                >
-                  <div class="row">
-                    <div class="full-width">
-                      <q-list no-border separator class="col-md-12">
-                        <q-item
-                          class="full-width no-padding q-py-md"
-                          v-for="tabItemDetail in tabPaneItem.tabItemDetails"
-                          :key="tabItemDetail.title"
-                        >
-                          <q-item-section left class="col-md-6 col-sm-12">
-                            <q-item-label>
-                              <div class="q-caption">{{tabItemDetail.title}}</div>
-                            </q-item-label>
-                            <q-item-label>
-                              <div class="q-caption">Created on: {{tabItemDetail.created_date}}</div>
-                            </q-item-label>
-                            <q-item-label>
-                              <div class="q-caption">SO Name: {{tabItemDetail.so_name}}</div>
-                            </q-item-label>
-                          </q-item-section>
-                          <q-item-section></q-item-section>
-                          <q-item-section right class="full-width float-right col-md-6 col-sm-12">
-                            <q-item-label>
-                              <div class="q-caption">
-                                <span class="text-primary">
-                                  <q-icon
-                                    v-if="tabItemDetail.alert"
-                                    color="purple-9"
-                                    size="8px"
-                                    name="fas fa-dot-circle"
-                                  />
-                                </span>
-                              </div>
-                            </q-item-label>
-                            <q-item-label>
-                              <div class="q-caption">
-                                <span class="text-primary">#{{tabItemDetail.tid}}</span>
-                              </div>
-                            </q-item-label>
-                            <q-item-label>
-                              <div class="q-caption">
-                                <span class="text-warning">{{tabItemDetail.status}}</span>
-                              </div>
-                            </q-item-label>
-                          </q-item-section>
-                        </q-item>
-                      </q-list>
-                    </div>
-                  </div>
-                </q-tab-panel>
-</q-tab-panels>
+          </q-tab-panels>
               <router-link to="/sat/aging/tracker/pending" class="text-grey-8">
                 <p>View more</p>
               </router-link>

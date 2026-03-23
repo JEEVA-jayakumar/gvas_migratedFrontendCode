@@ -1271,7 +1271,7 @@
         v-for="multipleDocument in getShortLeadInfoDocumentTypes.uploadedDocuments.forMutipleDocument"
         :key="multipleDocument.id"
       >
-        <q-list-header class="q-mb-sm bg-grey-4">{{multipleDocument.documentType}}</q-list-header>
+        <q-item-label header class="q-mb-sm bg-grey-4">{{multipleDocument.documentType}}</q-item-label>
         <div>
           <q-item separator dense class="q-body-1 q-pa-sm">
             <q-item-section>
@@ -1306,7 +1306,7 @@
             </q-item-section>
           </q-item>
         </div>
-        <q-item-separator />
+        <q-separator />
         <div
           v-if="displayAttachedFileIndex == multipleDocument.documentType"
           v-for="
@@ -1372,7 +1372,7 @@
                 />
               </q-item-section>
             </q-item>
-            <q-item-separator />
+            <q-separator />
           </div>
         </div>
       </q-list>
@@ -2462,7 +2462,7 @@ export default {
           documentDetails.selectedSubDocumentType =
             documentDetails.subDocumentType;
         } else {
-          this.$set(documentDetails, "selectedSubDocumentType", documentDetails.subDocumentType);
+          documentDetails[ "selectedSubDocumentType"] =  documentDetails.subDocumentType;
         }
       }
     },
@@ -2536,7 +2536,7 @@ export default {
           arr.forMutipleDocument.push(value);
         }
       });
-      this.$set(this.getShortLeadInfoDocumentTypes, "uploadedDocuments", arr);
+      this.getShortLeadInfoDocumentTypes[ "uploadedDocuments"] =  arr;
     },
         fnViewbankUploadedLetterImage() {
       this.$refs.bankUploadedLetter.click();

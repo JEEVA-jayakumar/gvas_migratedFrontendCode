@@ -1,0 +1,57 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - textbox "Search" [ref=e2]
+  - generic [ref=e3]:
+    - heading "~ /" [level=1] [ref=e4]:
+      - link "~" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - text: /
+    - list [ref=e6]:
+      - listitem [ref=e7]:
+        - link "config 3/19/2026 7:05:24 AM" [ref=e8] [cursor=pointer]:
+          - /url: /config
+          - generic [ref=e9]: config
+          - generic [ref=e10]: 3/19/2026 7:05:24 AM
+      - listitem [ref=e11]:
+        - link "files 3/19/2026 7:05:24 AM" [ref=e12] [cursor=pointer]:
+          - /url: /files
+          - generic [ref=e13]: files
+          - generic [ref=e14]: 3/19/2026 7:05:24 AM
+      - listitem [ref=e15]:
+        - link "icons 3/19/2026 7:05:24 AM" [ref=e16] [cursor=pointer]:
+          - /url: /icons
+          - generic [ref=e17]: icons
+          - generic [ref=e18]: 3/19/2026 7:05:24 AM
+      - listitem [ref=e19]:
+        - link "lock.png 20904 3/19/2026 7:05:24 AM" [ref=e20] [cursor=pointer]:
+          - /url: /lock.png
+          - generic [ref=e21]: lock.png
+          - generic [ref=e22]: "20904"
+          - generic [ref=e23]: 3/19/2026 7:05:24 AM
+      - listitem [ref=e24]:
+        - link "logo.png 3411 3/19/2026 7:05:24 AM" [ref=e25] [cursor=pointer]:
+          - /url: /logo.png
+          - generic [ref=e26]: logo.png
+          - generic [ref=e27]: "3411"
+          - generic [ref=e28]: 3/19/2026 7:05:24 AM
+      - listitem [ref=e29]:
+        - link "phonepe.png 1789 3/19/2026 7:05:24 AM" [ref=e30] [cursor=pointer]:
+          - /url: /phonepe.png
+          - generic [ref=e31]: phonepe.png
+          - generic [ref=e32]: "1789"
+          - generic [ref=e33]: 3/19/2026 7:05:24 AM
+      - listitem [ref=e34]:
+        - link "quasar-logo.png 7197 3/19/2026 7:05:24 AM" [ref=e35] [cursor=pointer]:
+          - /url: /quasar-logo.png
+          - generic [ref=e36]: quasar-logo.png
+          - generic [ref=e37]: "7197"
+          - generic [ref=e38]: 3/19/2026 7:05:24 AM
+      - listitem [ref=e39]:
+        - link "unlock.png 11468 3/19/2026 7:05:24 AM" [ref=e40] [cursor=pointer]:
+          - /url: /unlock.png
+          - generic [ref=e41]: unlock.png
+          - generic [ref=e42]: "11468"
+          - generic [ref=e43]: 3/19/2026 7:05:24 AM
+```

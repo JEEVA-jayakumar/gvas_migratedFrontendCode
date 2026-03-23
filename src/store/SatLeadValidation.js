@@ -170,7 +170,7 @@ const SatLeadValidation = {
           }
         );
 
-        response.data.data["leadDocuments"] = groupDocuments;
+        response.data.data.leadDocuments = groupDocuments;
    
         // END=> making documents array'
 
@@ -205,7 +205,7 @@ const SatLeadValidation = {
       commit
     }, request) {
       return api.get("merchant-document-list").then(response => {
-        commit("API_RESPONSE_LOG", true);
+        commit("API_RESPONSE_LOG", { apiStatusCode: 200, apiPending: false, apiSuccess: true, apiFailure: false, apiData: response.data.data });
 
         // START=> COMMIT with data received'
         commit("SET_SHORT_LEAD_DOCUMENT_TYPE_DATA", response.data.data);
@@ -218,7 +218,7 @@ const SatLeadValidation = {
       commit
     }, request) {
       return api.get("merchant-document-list/1").then(response => {
-        commit("API_RESPONSE_LOG", true);
+        commit("API_RESPONSE_LOG", { apiStatusCode: 200, apiPending: false, apiSuccess: true, apiFailure: false, apiData: response.data.data });
 
         // START=> COMMIT with data received'
         commit("SET_SHORT_LEAD_DOCUMENT_TYPE_DATA_QR", response.data.data);
@@ -241,7 +241,7 @@ const SatLeadValidation = {
           request.leadDetails
         )
         .then(response => {
-          commit("API_RESPONSE_LOG", true);
+          commit("API_RESPONSE_LOG", { apiStatusCode: 200, apiPending: false, apiSuccess: true, apiFailure: false, apiData: response.data.data });
           // START=> COMMIT with data received'
           commit("SET_VERIFY_DOCUMENT_FULL_LEAD", response.data.data);
           // END=> COMMIT with data received'
@@ -259,7 +259,7 @@ const SatLeadValidation = {
           request.leadDetails
         )
         .then(response => {
-          commit('API_RESPONSE_LOG', true)
+          commit('API_RESPONSE_LOG', { apiStatusCode: 200, apiPending: false, apiSuccess: true, apiFailure: false, apiData: response.data.data })
           // START=> COMMIT with data received'
           commit('SET_APPROVE_QR_DOCUMENT', response.data.data)
           // END=> COMMIT with data received'
@@ -462,21 +462,6 @@ const SatLeadValidation = {
       );
     },
     /*END >> Module>> delete sat uploaded document data*/
-    ////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////
-    // test
-    /*START >> Module>> delete sat uploaded document data*/
-    // SAMPLE({
-    //   commit
-    // }, request) {
-    //   return api
-    //     .get("download/submited-sat-pending-days/1538332200000/1540284863560")
-    // },
 
     async SAMPLE() {
       let response = await api.get(

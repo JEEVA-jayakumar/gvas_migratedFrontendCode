@@ -58,7 +58,8 @@
               <q-tab color="dark" name="opened" label="Opened" />
               <q-tab color="dark" name="closed" label="Closed" /> -->
 </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
+
+          <q-tab-panels v-model="selectedTab" animated>
 <q-tab-panel name="opened">
             <opened/>
           </q-tab-panel>
@@ -182,7 +183,7 @@
                               <q-td key="tid" :props="props"> {{ props.row.tid }}</q-td>
                               <q-td key="mid" :props="props">
                                   <span v-if="props.row.mid != null">{{ props.row.mid }}</span>
-                                  <span v-else="props.row.mid == null">NA</span>
+                                  <span v-else-if="props.row.mid == null">NA</span>
                               </q-td>
                               <q-td key="createdDate" :props="props"> {{ $moment(props.row.createdDate).format("Do MMM Y") }}
                               </q-td>
@@ -193,7 +194,7 @@
                               <q-td key="assignedTo" :props="props"> {{ props.row.assignedTo.name }} </q-td>
                               <q-td key="crmRemark" :props="props">
                                   <span v-if="props.row.crmRemark != null" v-html="props.row.crmRemark"></span>
-                                  <span v-else="props.row.crmRemark == null">NA</span>
+                                  <span v-else-if="props.row.crmRemark == null">NA</span>
                               </q-td>
                               <q-td key="deviceType" :props="props"> {{ props.row.deviceType }}</q-td>
 
@@ -230,6 +231,7 @@
                                       v-else-if="props.row.serviceRequestSubTicketStatus == 10">SR_CANCELLED</span>
                                   <span class="label" v-else>NA</span>
                               </q-td>
+                      </template>
                           </q-tr>
                           <!-- START: table expand values -->
                           <q-tr v-show="props.row.expand" :props="props" class="wordWrapCustom bottom-border">
@@ -452,7 +454,6 @@
                                   </div>
                               </q-td>
                           </q-tr>
-                      </template>
                       <template v-slot:top>
                           <div class="col-md-5">
                               <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.."
@@ -461,7 +462,7 @@
                       </template>
                   </q-table>
               </q-tab-panel>
-</q-tab-panels>
+          </q-tab-panels>
           <div class="row items-center gutter-y-sm">
               <div class="col-md-9 col-sm-12 col-xs-12">
                   <div class="row items-center"></div>

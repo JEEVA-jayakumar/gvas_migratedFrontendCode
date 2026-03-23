@@ -14,11 +14,11 @@
             <q-tab name="external" label="Aggregator Service Request" />
           </q-tabs>
 
+
           <q-tab-panels v-model="inventoryOptionSelected" animated>
             <q-tab-panel name="internal" class="q-pa-none">
               <internalserviceRequest/>
             </q-tab-panel>
-
             <q-tab-panel name="external" class="q-pa-none">
               <externalserviceRequest/>
             </q-tab-panel>

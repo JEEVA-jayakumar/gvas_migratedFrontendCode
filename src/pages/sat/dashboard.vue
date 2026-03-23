@@ -253,8 +253,14 @@
                     </div>
                     <div class="col-12 col-lg-3">
                       <div class="q-subheading text-bold">
-                        <q-select inverted color="purple-9" :value="dateSelection" @change="changeMerchantTrackerData"
-                          :options="[{ label: 'Days', value: 'DAYS' }, { label: 'Week', value: 'WEEK' }, { label: 'Month', value: 'MONTH' }, { label: 'Year', value: 'YEAR' }]" />
+                        <q-select
+                          emit-value
+                          map-options
+                          color="purple-9"
+                          v-model="dateSelection"
+                          @update:model-value="changeMerchantTrackerData"
+                          :options="[{ label: 'Days', value: 'DAYS' }, { label: 'Week', value: 'WEEK' }, { label: 'Month', value: 'MONTH' }, { label: 'Year', value: 'YEAR' }]"
+                        />
                       </div>
                     </div>
                   </div>
@@ -385,7 +391,7 @@
                       </template>
                       <template v-slot:body-cell-greaterThanOneDay="props">
             <q-td :props="props" class="cursor-pointer"
-                        @click.native="retrieveLeadsList(props.row.greaterThanOneDayLeadIdList)">
+                        @click="retrieveLeadsList(props.row.greaterThanOneDayLeadIdList)">
             {{
                           props.row.greaterThanOneDay
                         }}
@@ -393,7 +399,7 @@
           </template>
                       <template v-slot:body-cell-greaterThanTwoDays="props">
             <q-td :props="props" class="cursor-pointer"
-                        @click.native="retrieveLeadsList(props.row.greaterThanTwoDaysLeadIdList)">
+                        @click="retrieveLeadsList(props.row.greaterThanTwoDaysLeadIdList)">
             {{
                           props.row.greaterThanTwoDays
                         }}
@@ -402,7 +408,7 @@
                       <template v-slot:body-cell-greaterThanFiveDays="props">
             <q-td :props="props"
                         class="cursor-pointer"
-                        @click.native="retrieveLeadsList(props.row.greaterThanFiveDaysLeadIdList)">
+                        @click="retrieveLeadsList(props.row.greaterThanFiveDaysLeadIdList)">
             {{
                           props.row.greaterThanFiveDays
                         }}

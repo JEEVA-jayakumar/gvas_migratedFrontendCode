@@ -35,8 +35,11 @@
                                     <div class="col-md-12 q-body-1">
                                         <q-expansion-item separator indent opened group="closeOnOpen" multiline class="full-width">
                                             <template slot="header">
-                                                <q-item-section icon="attach_file" />
-                                                <q-item-section class="q-body-1" :label="index" />
+                                                <q-item-section>
+                </q-item-section>
+                                                <q-item-section>
+                  <q-item-label>index</q-item-label>
+                </q-item-section>
                                             </template>
                                             <div v-for="(item,subIndex) in documents[0].uploadedDocuments" :key="subIndex" class="q-py-sm">
                                                 <div v-if="item.mimeType.includes('application')">
@@ -60,15 +63,21 @@
                                     <div class="col-md-12 q-body-1">
                                         <q-expansion-item separator opened group="closeOnOpen"  class="full-width">
                                             <template slot="header">
-                                                <q-item-section  icon="apps" />
-                                                <q-item-section class="q-body-1" :label="index" />
+                                                <q-item-section>
+                </q-item-section>
+                                                <q-item-section>
+                  <q-item-label>index</q-item-label>
+                </q-item-section>
                                             </template>
                                             <div class="row items-center full-width" v-for="(subDocument,subIndex) in documents" :key="subIndex">
                                                 <div class="col-md-12 q-body-1">
                                                     <q-expansion-item separator opened group="closeOnOpenSubDocument" multiline class="full-width">
                                                         <template slot="header">
-                                                            <q-item-section icon="attach_file" />
-                                                            <q-item-section class="q-body-1" :label="subDocument.subDocumentType" />
+                                                            <q-item-section>
+                </q-item-section>
+                                                            <q-item-section>
+                  <q-item-label>subDocument.subDocumentType</q-item-label>
+                </q-item-section>
                                                         </template>
                                                         <div v-for="(item,subIndex) in subDocument.uploadedDocuments" :key="subIndex" class="q-py-sm">
                                                             <div v-if="item.mimeType.includes('application')">

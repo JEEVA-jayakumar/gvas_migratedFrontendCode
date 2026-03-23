@@ -542,14 +542,16 @@
                                                         <div class="col-md-12" v-if="primaryItem.showSingleDocumentUpload">
                                                             <q-list dense>
                                                                 <q-item dense>
-                                                                    <q-item-section icon="blur_on"/>
+                                                                    <q-item-section>
+                </q-item-section>
                                                                     <q-item-section class="q-body-1 text-weight-medium">
                                                                         {{primaryItem.documentType}}
                                                                     </q-item-section>
                                                                 </q-item>
                                                                  <q-separator />
                                                                 <q-item dense v-for="(secondaryItem,subIndex) in primaryItem.documents" :key="subIndex">
-                                                                    <q-item-section icon="attach_file"/>
+                                                                    <q-item-section>
+                </q-item-section>
                                                                     <q-item-section class="q-caption">
                                                                         {{secondaryItem.subDocumentType}}
                                                                     </q-item-section>
@@ -578,14 +580,16 @@
                                                             <div v-if="primaryItem.documentTypeSelection != null" class="full-width q-py-md">
                                                                 <q-list dense>
                                                                     <q-item dense>
-                                                                        <q-item-section icon="blur_on"/>
+                                                                        <q-item-section>
+                </q-item-section>
                                                                         <q-item-section class="q-body-1 text-weight-medium">
                                                                             {{primaryItem.documentType}}
                                                                         </q-item-section>
                                                                     </q-item>
                                                                     <q-separator />
                                                                     <q-item dense >
-                                                                        <q-item-section icon="attach_file"/>
+                                                                        <q-item-section>
+                </q-item-section>
                                                                         <q-item-section class="q-caption">
                                                                             {{
                                                                                 primaryItem.documentTypeSelection.subDocumentType
@@ -611,8 +615,12 @@
                                                 <div class="full-width" v-if="index.toString()==documents[0].subDocumentType">
                                                     <q-expansion-item separator indent icon-toggle opened group="closeOnOpen" multiline class="full-width">
                                                         <template slot="header">
-                                                            <q-item-section icon="attach_file" />
-                                                            <q-item-section class="q-body-1" :caption="documents[0].uploadedDocuments.length + 'Document(s)'" :label="index" />
+                                                            <q-item-section>
+                </q-item-section>
+                                                            <q-item-section>
+                  <q-item-label>index</q-item-label>
+                  <q-item-label caption>documents[0].uploadedDocuments.length + 'Document(s)'</q-item-label>
+                </q-item-section>
                                                             <q-item-section v-if="documents[0].documentVerifiedStatus == 2" right>
                                                                 <q-btn
                                                                     round 
@@ -658,7 +666,8 @@
                                                 <div class="full-width"  v-else>
                                                     <q-expansion-item separator indent sicon-toggle opened group="closeOnOpen"  class="full-width">
                                                         <template slot="header">
-                                                            <q-item-section  icon="apps" />
+                                                            <q-item-section>
+                </q-item-section>
                                                             <q-item-section class="q-body-1"
                                                             :caption="documents.length + 'Type(s)'"
                                                                 :label="index" />
@@ -667,7 +676,8 @@
                                                             <div class="col-md-12 q-body-1">
                                                                 <q-expansion-item separator icon-toggle opened group="closeOnOpenSubDocument" multiline class="full-width" indent>
                                                                     <template slot="header">
-                                                                        <q-item-section icon="attach_file" />
+                                                                        <q-item-section>
+                </q-item-section>
                                                                         <q-item-section class="q-body-1"
                                                                         :caption="subDocument.uploadedDocuments.length + 'Document(s)'"
                                                                         :label="subDocument.subDocumentType" />

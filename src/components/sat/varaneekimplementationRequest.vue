@@ -30,7 +30,8 @@
           <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
           <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
 </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
+
+          <q-tab-panels v-model="selectedTab" animated>
 <q-tab-panel name="rejectedTab">
               <varaneekRejectedLead/>
             </q-tab-panel>
@@ -93,7 +94,7 @@
             </q-table>
             <!--ENDv-model: table Data -->
           </q-tab-panel>
-</q-tab-panels>
+          </q-tab-panels>
   
         <!--END: table Footer -->
         <!-- START >> COMPONENT: Update device address  -->

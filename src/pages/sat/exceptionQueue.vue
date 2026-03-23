@@ -65,7 +65,7 @@
                         Date of Updation :
                         <span
                           class="text-primary"
-                        >{{ (item.submitteSATDate).format("MMMM Do YYYY") }}</span>
+                        >{{ $moment(item.submitteSATDate).format('MMMM Do YYYY') }}</span>
                       </div>
                     </div>
                   </div>
@@ -140,7 +140,7 @@
                         Date of Updation :
                         <span
                           class="text-primary"
-                        >{{ (item.submitteSATDate).format("MMMM Do YYYY") }}</span>
+                        >{{ $moment(item.submitteSATDate).format('MMMM Do YYYY') }}</span>
                       </div>
                     </div>
                   </div>

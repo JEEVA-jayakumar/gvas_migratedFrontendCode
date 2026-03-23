@@ -40,7 +40,7 @@
             </q-td>
           </template>
 
-          <template v-slot:body-cell-assignedTo.name="props">
+          <template v-slot:body-cell-assignedTo-name="props">
             <q-td :props="props">
               <span class="capitalize">{{props.row.salesOfficerName+" | "+props.row.salesOfficerEmpId}}</span>
             </q-td>
@@ -171,7 +171,7 @@
           { name: "leadNumber", required: true, label: "Lead ID", align: "center", field: row => "# " + row.leadNumber, sortable: true },
           { name: "leadName", required: true, label: "Merchant Name", align: "left", field: "merchantName", sortable: true },
           { name: "state", required: true, label: "State", align: "left", field: "state", sortable: true },
-          { name: "assignedTo.name", required: true, label: "SO Name", align: "left", field: row => row.salesOfficerName + " | " + row.salesOfficerEmpId, sortable: true },
+          { name: "assignedTo-name", required: true, label: "SO Name", align: "left", field: row => row.salesOfficerName + " | " + row.salesOfficerEmpId, sortable: true },
           { name: "leadSource", required: true, label: "Lead Source", align: "left", field: row => row.leadSource, sortable: true },
           {
             name: "verifiedFinanceStatus",
