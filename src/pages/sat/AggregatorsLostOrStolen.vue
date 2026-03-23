@@ -79,31 +79,12 @@
             <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
           </q-td>
         </template>
-        <!-- <template v-slot:body-cell-deviceStatusDate="props">
-            <q-td :props="props">
-
-        <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-
-          </q-td>
-          </template> -->
         <template v-slot:body-cell-action="props">
           <q-td :props="props">
             <q-btn highlight push class="q-mx-sm" color="positive" size="sm"
               @click="Aggregatorsloststolendevice(props.row)">Lost/Stolen</q-btn>
           </q-td>
         </template>
-        <!-- <q-td auto-width key="action" :props="props">
-              <q-btn
-              highlight
-              push
-              class="q-mx-sm"
-              color="positive"
-               @click="openAcceptModel(props.row)"
-              size="sm"
-             >Accept</q-btn>
-           </q-td>
-           </q-tr>
-        </template> -->
         <template v-slot:top>
           <!--START: table filter,search,excel download -->
           <div class="col-5">
@@ -136,18 +117,6 @@
               $moment(props.row.aggregatorRegionalInventory.updatedAt).format("Do MMM Y")
           }}</q-td>
         </template>
-        <!-- <template v-slot:body-cell-Status="props">
-            <q-td :props="props">
-
-          <span class="label text-positive" v-if="props.row.aggregatorRegionalInventory.deviceStatus == 8">Waiting for
-            Approval</span>
-          <span class="label text-amber" v-if="props.row.aggregatorRegionalInventory.deviceStatus == 7">Submitted By
-            SO</span>
-          <span class="label text-purple" v-if="props.row.aggregatorRegionalInventory.deviceStatus == 10">Rejected By
-            Finance</span>
-
-          </q-td>
-          </template> -->
         <template v-slot:body-cell-action="props">
           <q-td :props="props">
             <q-btn v-if="props.row.aggregatorRegionalInventory.deviceStatus == 8" disable push color="purple-9"

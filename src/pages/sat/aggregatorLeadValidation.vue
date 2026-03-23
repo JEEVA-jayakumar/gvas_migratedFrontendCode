@@ -36,7 +36,7 @@
          <template v-slot:body-cell-leadNumber="props">
             <q-td :props="props"
          class="cursor-pointer"
-         @click.native="toggleLeadInformation(props.row)">
+         @click="toggleLeadInformation(props.row)">
 
           <span class="label text-primary"> {{props.row.leadNumber}}</span>
           
@@ -144,7 +144,7 @@
         <!-- <template v-slot:body-cell-action="props">
             <q-td :props="props">
 
-            @click.native="toggleLeadInformation(props.row.leadInformation.leadNumber)"
+            @click="toggleLeadInformation(props.row.leadInformation.leadNumber)"
               class="cursor-pointer"
            <q-btn
             highlight

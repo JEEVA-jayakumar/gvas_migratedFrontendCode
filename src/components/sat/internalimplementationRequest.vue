@@ -1,9 +1,6 @@
 <template>
-  <q-page>
-    <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
+  <div class="q-pa-none">
+    <div class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
       Bijlipay Implementation Queue
     </div>
     <div>
@@ -13,19 +10,11 @@
         :propToggleLeadInformationPop="propToggleLeadInformation"
         @closeLeadInformation="toggleLeadInformation"
       />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
+
       <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
         <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
+          <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+            <span class="q-display-2">{{ formData.marsDeviceIdsCooked.length }}</span>/ selected
           </div>
 
           <div class="col-md-3 col-sm-6 col-xs-6">
@@ -35,200 +24,113 @@
               v-model="formData.assignTo"
               separator
               color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :disable="formData.marsDeviceIdsCooked.length == 0"
               :options="assignToOptions"
               placeholder="Assign To"
+              emit-value
+              map-options
             />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
+            <q-checkbox v-model="formData.courier" color="dark" label="Courier Device" />
           </div>
           <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
+            <q-checkbox v-model="formData.triggerWelcomeMail" color="dark" label="Trigger welcome email" />
           </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
+          <div class="col-md-3 col-sm-6 col-xs-6 text-right">
             <q-btn
               no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
+              :disabled="formData.marsDeviceIdsCooked.length == 0"
               label="Assign"
-              class="common-dark-blue agnalgin1"
+              class="common-dark-blue"
+              style="width: 90px"
               @click="assignImplementationUser"
             />
           </div>
         </div>
       </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
 
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+        <q-tab color="dark" name="unAssigned" label="Unassigned" />
         <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab 
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="assigned">
+      </q-tabs>
+
+      <q-tab-panels v-model="selectedTab" animated>
+        <q-tab-panel name="assigned" class="no-padding">
           <assigned />
         </q-tab-panel>
-<q-tab-panel name="unAssigned">
-          <!--START: table Data   :rows="getImplementationQueueUnassignedList"  -->
+        <q-tab-panel name="unAssigned" class="no-padding">
           <q-table
             :rows="tableData1"
             :columns="columnDataUnassigned"
             table-class="customTableClass"
             :filter="filterSearch"
             selection="multiple"
-            :selected="formData.marsDeviceIdsCooked"
+            v-model:selected="formData.marsDeviceIdsCooked"
             v-model:pagination="paginationControl1"
             row-key="id"
-            :rows-per-page-options="[10, 20, 50, 100, 150, 200]"
+            :rows-per-page-options="[10, 20, 50, 100]"
             :loading="tableAjaxLoading1"
             color="dark"
             @request="ajaxLoadAllLeadInfo1"
           >
             <template v-slot:body-cell-leadNumber="props">
-            <q-td :props="props"
-              class="cursor-pointer"
-              @click="toggleLeadInformation(props.row.leadInformation)">
-
-              <span class="label text-primary"
-                ># {{ props.row.leadInformation.leadNumber }}</span
-              >
-
-          </q-td>
-          </template>
-            <template v-slot:body-cell-LeadSource="props">
-            <q-td :props="props">
-
-              <span
-                :class="{
-                  'text-red':
-                    props.row.leadInformation.leadSource.sourceName ===
-                    'LS_TOHANDS'
-                }"
-              >
-                {{ props.row.leadInformation.leadSource.sourceName }}
-              </span>
-
-          </q-td>
-          </template>
-
-            <template v-slot:body-cell-submitToMarsDate="props">
-              <q-td :props="props">
-                {{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}
+              <q-td :props="props" class="cursor-pointer" @click="toggleLeadInformation(props.row.leadInformation)">
+                <span class="label text-primary"># {{ props.row.leadInformation?.leadNumber || "NA" }}</span>
               </q-td>
+            </template>
+            <template v-slot:body-cell-LeadSource="props">
+              <q-td :props="props">
+                <span :class="{'text-red': props.row.leadInformation?.leadSource?.sourceName === 'LS_TOHANDS'}">
+                  {{ props.row.leadInformation?.leadSource?.sourceName || "NA" }}
+                </span>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-submitToMarsDate="props">
+              <q-td :props="props">{{ props.row.leadInformation?.submitToMarsDate ? $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") : "NA" }}</q-td>
             </template>
             <template v-slot:body-cell-createdAt="props">
-              <q-td :props="props">
-                {{ $moment(props.row.createdAt).format("Do MMM Y") }}
+              <q-td :props="props">{{ props.row.createdAt ? $moment(props.row.createdAt).format("Do MMM Y") : "NA" }}</q-td>
+            </template>
+            <template v-slot:body-cell-mid="props">
+              <q-td :props="props" class="customTd"><div class="text-primary">{{ props.row.mid }}</div></q-td>
+            </template>
+            <template v-slot:body-cell-deviceAddress="props">
+              <q-td :props="props" class="customTd customCellLength">
+                <div>
+                  <q-btn no-caps icon="edit" color="purple-9" size="xs" round @click="UpdateDeviceAddress(props.row)" />
+                  {{ props.row.deviceAddress }}
+                </div>
               </q-td>
             </template>
-            <!-- <q-td
-              v-slot:body-cell-tid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.tid }}</div>
-
-          </q-td>
-          </template> -->
-            <template v-slot:body-cell-mid="props">
-            <q-td :props="props"
-              class="customTd">
-
-              <div class="text-primary">{{ props.row.mid }}</div>
-
-          </q-td>
-          </template>
-            <template v-slot:body-cell-deviceAddress="props">
-            <q-td :props="props"
-              class="customTd customCellLength">
-
-              <div>
-                <q-btn
-                  no-caps
-                  icon="edit"
-                  color="purple-9"
-                  size="xs"
-                  round
-                  @click="UpdateDeviceAddress(props.row)"
-                />
-                {{ props.row.deviceAddress }}
-              </div>
-
-          </q-td>
-          </template>
-            <template v-slot:top="props">
-              <!--START: table filter,search -->
+            <template v-slot:top>
               <div class="col-md-5">
-                <q-input
-                  clearable
-                  color="grey-9"
-                  v-model="filterSearch"
-                  placeholder="Type.."
-                  label="Search By MID, Merchant Name.."
-                  class="q-mr-lg q-py-sm"
-                />
+                <q-input clearable color="grey-9" v-model="filterSearch" label="Search By MID, Merchant Name.." class="q-mr-lg q-py-sm" />
               </div>
             </template>
           </q-table>
-          <!--ENDv-model: table Data -->
         </q-tab-panel>
-</q-tab-panels>
+      </q-tab-panels>
 
-      <!--END: table Footer -->
-      <!-- START >> COMPONENT: Update device address  -->
       <DeviceAddressModal
         v-if="showDeviceAddressModal"
         :showDeviceAddressModal="showDeviceAddressModal"
         :currentDeviceInfo="currentDeviceInfo"
         :stateInformation="getAllStatesData"
-        :paginationControl="paginationControl"
+        :paginationControl="paginationControl1"
         :selectedLeadItems="formData.marsDeviceIdsCooked"
         @toggleModal="UpdateDeviceAddressAfterEmit"
       />
-      <!-- END >> COMPONENT: Update device address -->
     </div>
-  </q-page>
+  </div>
 </template>
 
 <script>
-import { required, email, or } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import DeviceAddressModal from "../../components/sat/DeviceAddressModal.vue";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 import assigned from "../../components/sat/assigned.vue";
 
 export default {
-  name: "implementationQueue",
+  name: "internalimplementationRequest",
   components: {
     DeviceAddressModal,
     generalLeadInformation,
@@ -238,674 +140,86 @@ export default {
     return {
       propToggleLeadInformation: false,
       addtnLeadInformation: null,
-
       filterSearch: "",
-      filterSearch1: "",
       selectedTab: "assigned",
-      assignTo: "",
       assignToOptions: [],
-      tableData: [],
       tableData1: [],
-      //Defining columns for table
-      columnDataAssigned: [
-        {
-          name: "leadNumber",
-          required: true,
-          label: "Lead Number",
-          align: "left",
-          field: row => {
-            return row.leadInformation.leadNumber;
-          },
-          sortable: false
-        },
-
-        {
-          name: "createdAt",
-          required: true,
-          label: "Date of TID Generation",
-          align: "left",
-          field: "createdAt",
-          sortable: true
-        },
-        // {
-        //   name: "tid",
-        //   required: true,
-        //   label: "TID",
-        //   align: "left",
-        //   field: row => {
-        //     return row.tid;
-        //   },
-        //   sortable: true
-        // },
-        {
-          name: "mid",
-          required: true,
-          label: "MID",
-          align: "left",
-          field: row => {
-            return row.mid;
-          },
-          sortable: true
-        },
-        {
-          name: "merchant_name",
-          required: true,
-          label: "Merchant Name",
-          align: "left",
-          field: row => {
-            return row.leadInformation.leadName;
-          },
-          sortable: false
-        },
-        {
-          name: "mobile_number",
-          required: true,
-          label: "Mobile Number",
-          align: "center",
-          field: row => {
-            return row.leadInformation.contactNumber;
-          },
-          sortable: false
-        },
-        {
-          name: "deviceAddress",
-          required: true,
-          label: "Address",
-          align: "left",
-          field: row => {
-            return row.deviceAddress;
-          },
-          sortable: false
-        },
-        // {
-        //   name: "source",
-        //   required: true,
-        //   label: "Source",
-        //   align: "left",
-        //   field: row => {
-        //     return row.leadInformation.leadSource.sourceName;
-        //   },
-        //   sortable: false
-        // },
-        {
-          name: "assigned_to",
-          required: true,
-          label: "Assigned To",
-          align: "left",
-          field: row => {
-            return row.assignedTo == null ? "NA" : row.assignedTo.name;
-          },
-          sortable: false
-        },
-        {
-          name: "leadInformation",
-          required: true,
-          label: "Device Type",
-          align: "left",
-          field: row => {
-            return row.leadInformation.device.deviceName;
-          },
-          sortable: false
-        },
-        {
-          name: "serial_number",
-          required: true,
-          label: "Serial Number",
-          align: "left",
-          field: row => {
-            return row.regionalInventory == null
-              ? "NA"
-              : row.regionalInventory.serialNumber;
-          },
-
-          sortable: true
-        },
-        {
-          name: "submitToMarsDate",
-          required: true,
-          label: "Date of Submission",
-          align: "left",
-          field: row => {
-            return row.leadInformation.submitToMarsDate;
-          },
-          format: val => this.$moment(val).format("Do MMM Y"),
-          sortable: true
-        }
-      ],
-
-      columnDataUnassigned: [
-        {
-          name: "leadNumber",
-          required: true,
-          label: "Lead Number",
-          align: "left",
-          field: row => {
-            return row.leadInformation.leadNumber;
-          },
-          sortable: false
-        },
-{
-          name: "LeadSource",
-          required: true,
-          label: "Lead Source",
-          align: "left",
-          field: row => {
-            return row.leadInformation.LeadSource.sourceName;
-          },
-          sortable: false
-        },
-        {
-          name: "createdAt",
-          required: true,
-          label: "Date of TID Generation",
-          align: "left",
-          field: "createdAt",
-          sortable: true
-        },
-        // {
-        //   name: "tid",
-        //   required: true,
-        //   label: "TID",
-        //   align: "left",
-        //   field: row => {
-        //     return row.tid;
-        //   },
-        //   sortable: true
-        // },
-        {
-          name: "mid",
-          required: true,
-          label: "MID",
-          align: "left",
-          field: row => {
-            return row.mid;
-          },
-          sortable: true
-        },
-        {
-          name: "merchant_name",
-          required: true,
-          label: "Merchant Name",
-          align: "left",
-          field: row => {
-            return row.leadInformation.leadName;
-          },
-          sortable: false
-        },
-        {
-          name: "mobile_number",
-          required: true,
-          label: "Mobile Number",
-          align: "center",
-          field: row => {
-            return row.leadInformation.contactNumber;
-          },
-          sortable: false
-        },
-        {
-          name: "deviceAddress",
-          required: true,
-          label: "Address",
-          align: "left",
-          field: row => {
-            return row.deviceAddress;
-          },
-          sortable: false
-        },
-        {
-          name: "leadInformation",
-          required: true,
-          label: "Device Type",
-          align: "left",
-          field: row => {
-            return row.leadInformation.device.deviceName;
-          },
-          sortable: false
-        },
-        {
-          name: "serial_number",
-          required: true,
-          label: "Serial Number",
-          align: "left",
-          field: row => {
-            return row.regionalInventory == null
-              ? "NA"
-              : row.regionalInventory.serialNumber;
-          },
-
-          sortable: true
-        },
-        {
-          name: "submitToMarsDate",
-          required: true,
-          label: "Date of Submission",
-          align: "left",
-          field: row => {
-            return row.leadInformation.submitToMarsDate;
-          },
-          format: val => this.$moment(val).format("Do MMM Y"),
-          sortable: true
-        }
-      ],
-
-      currentDeviceInfo: {},
       showDeviceAddressModal: false,
-      formData: {
-        marsDeviceIdsCooked: [],
-        marsDeviceIdsCookedUnAssinged: [],
-        triggerWelcomeMail: false,
-        courier: false,
-        assignTo: ""
-      },
-      paginationControl: {
-        sortBy: "deviceStatusDate", // String, column "name" property value
-        descending: false,
-        page: 1,
-        rowsPerPage: 10 // current rows per page being displayed
-      },
-      paginationControl1: {
-        sortBy: "deviceStatusDate", // String, column "name" property value
-        descending: false,
-        page: 1,
-        rowsPerPage: 10 // current rows per page being displayed
-      },
-      tableAjaxLoading: false,
-      tableAjaxLoading1: false
+      currentDeviceInfo: {},
+      paginationControl1: { sortBy: "deviceStatusDate", descending: false, page: 1, rowsPerPage: 10 },
+      tableAjaxLoading1: false,
+      formData: { marsDeviceIdsCooked: [], triggerWelcomeMail: false, courier: false, assignTo: "" },
+      columnDataUnassigned: [
+        { name: "leadNumber", label: "Lead Number", align: "left", field: row => row.leadInformation?.leadNumber },
+        { name: "LeadSource", label: "Lead Source", align: "left", field: row => row.leadInformation?.leadSource?.sourceName },
+        { name: "createdAt", label: "Date of TID Generation", align: "left", field: "createdAt", sortable: true },
+        { name: "mid", label: "MID", align: "left", field: "mid", sortable: true },
+        { name: "merchant_name", label: "Merchant Name", align: "left", field: row => row.leadInformation?.leadName },
+        { name: "mobile_number", label: "Mobile Number", align: "center", field: row => row.leadInformation?.contactNumber },
+        { name: "deviceAddress", label: "Address", align: "left", field: "deviceAddress" },
+        { name: "leadInformation", label: "Device Type", align: "left", field: row => row.leadInformation?.device?.deviceName },
+        { name: "serial_number", label: "Serial Number", align: "left", field: row => row.regionalInventory?.serialNumber },
+        { name: "submitToMarsDate", label: "Date of Submission", align: "left", field: row => row.leadInformation?.submitToMarsDate }
+      ]
     };
   },
-
   computed: {
-    ...mapGetters("ImplementationQueue", [
-      "getImplementationQueueAssignedList",
-      "getImplementationQueueUnassignedList",
-      "getImplementationQueueAssignedDataList"
-    ]),
-    ...mapGetters("ImplementationExecutive", [
-      "getImplementationExecutiveList"
-    ]),
+    ...mapGetters("ImplementationQueue", ["getImplementationQueueUnassignedList"]),
+    ...mapGetters("ImplementationExecutive", ["getImplementationExecutiveList"]),
     ...mapGetters("SuperAdminUsers", ["getAllStatesData"])
   },
   created() {
-    this.ajaxLoadAllLeadInfo({
-      pagination: this.paginationControl,
-      filter: this.filterSearch
-    });
-    this.ajaxLoadAllLeadInfo1({
-      pagination: this.paginationControl1,
-      filter: this.filterSearch1
-    });
-    this.getPincodeInformations();
+    this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: "" });
+    this.FETCH_ALL_STATES_DATA();
   },
   methods: {
-    ...mapActions("ImplementationQueue", [
-      "IMPLEMENTATION_QUEUE_ASSIGNED_LIST",
-      "IMPLEMENTATION_QUEUE_UNASSIGNED_LIST",
-      "IMPLEMENTATION_QUEUE_SUBMIT"
-    ]),
+    ...mapActions("ImplementationQueue", ["IMPLEMENTATION_QUEUE_UNASSIGNED_LIST", "IMPLEMENTATION_QUEUE_SUBMIT"]),
     ...mapActions("ImplementationExecutive", ["IMPLEMENTATION_EXECUTIVE_LIST"]),
     ...mapActions("SuperAdminUsers", ["FETCH_ALL_STATES_DATA"]),
 
-    getPincodeInformations() {
-      this.FETCH_ALL_STATES_DATA();
-    },
     ajaxLoadAllLeadInfo1({ pagination, filter }) {
-      // we set QTable to "loading" state
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Fetching data .."
-      });
-      this.IMPLEMENTATION_QUEUE_UNASSIGNED_LIST({ pagination, filter }).then(res => {
-          this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
-            let assumeArr = [];
-            this.getImplementationExecutiveList.map(function(value) {
-              assumeArr.push({
-                label:
-                  value.name + " | " + value.employeeID + " | " + value.email,
-                value: value.id
-              });
-            });
-            this.assignToOptions = assumeArr;
-          });
-          // updating pagination to reflect in the UI
-          this.paginationControl1 = pagination;
-
-          // we also set (or update) rowsNumber
-          this.paginationControl1.rowsNumber = this.getImplementationQueueUnassignedList.totalElements;
-          this.paginationControl1.page =
-            this.getImplementationQueueUnassignedList.number + 1;
-
-          // then we update the rows with the fetched ones
-          this.tableData1 = this.getImplementationQueueUnassignedList.content;
-          if (this.getImplementationQueueUnassignedList.sort != null) {
-            this.paginationControl1.sortBy = this.getImplementationQueueUnassignedList.sort[0].property;
-            this.paginationControl1.descending = this.getImplementationQueueUnassignedList.sort[0].ascending;
-          }
-
-          // finally we tell QTable to exit the "loading" state
-          this.$q.loading.hide();
-        })
-        .catch(() => {
-          this.$q.loading.hide();
+      this.tableAjaxLoading1 = true;
+      this.IMPLEMENTATION_QUEUE_UNASSIGNED_LIST({ pagination, filter }).then(() => {
+        this.IMPLEMENTATION_EXECUTIVE_LIST().then(() => {
+          this.assignToOptions = this.getImplementationExecutiveList.map(v => ({ label: v.name + " | " + v.employeeID + " | " + v.email, value: v.id }));
         });
+        this.paginationControl1 = pagination;
+        this.paginationControl1.rowsNumber = this.getImplementationQueueUnassignedList.totalElements;
+        this.tableData1 = this.getImplementationQueueUnassignedList.content;
+        this.tableAjaxLoading1 = false;
+      }).catch(() => { this.tableAjaxLoading1 = false; });
     },
-    ajaxLoadAllLeadInfo({ pagination, filter }) {
-      // we set QTable to "loading" state
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Fetching data .."
-      });
-      this.IMPLEMENTATION_QUEUE_ASSIGNED_LIST({ pagination, filter }).then(response => {
-          // updating pagination to reflect in the UI
-          this.paginationControl = pagination;
-
-          // we also set (or update) rowsNumber
-          this.paginationControl.rowsNumber = this.getImplementationQueueAssignedList.totalElements;
-          this.paginationControl.page =
-            this.getImplementationQueueAssignedList.number + 1;
-
-          // then we update the rows with the fetched ones
-          this.tableData = this.getImplementationQueueAssignedList.content;
-          if (this.getImplementationQueueAssignedList.sort != null) {
-            this.paginationControl.sortBy = this.getImplementationQueueAssignedList.sort[0].property;
-            this.paginationControl.descending = this.getImplementationQueueAssignedList.sort[0].ascending;
-          }
-
-          // finally we tell QTable to exit the "loading" state
-          this.$q.loading.hide();
-        })
-        .catch(() => {
-          this.$q.loading.hide();
-        });
-    },
-    //Load all short lead info while page loading
     goToUnassignedTab(tab) {
-      if (tab == "unAssigned") {
-        this.ajaxLoadAllLeadInfo1({
-          pagination: this.paginationControl,
-          filter: this.filterSearch
-        });
-        this.formData.marsDeviceIdsCooked = [];
-        this.formData.assignTo = "";
-        this.filterSearch = "";
-        // this.formData.courier = "";
-      } else {
-        this.ajaxLoadAllLeadInfo({
-          pagination: this.paginationControl,
-          filter: this.filterSearch
-        });
-        this.formData.marsDeviceIdsCooked = [];
-        this.formData.assignTo = "";
-        this.filterSearch = "";
-        // this.formData.courier = "";
-      }
+      if (tab === "unAssigned") this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: "" });
     },
-
-    // Function to open device address pop up
-    UpdateDeviceAddress(currentDeviceInfo) {
-      this.currentDeviceInfo = [];
-      this.showDeviceAddressModal = !this.showDeviceAddressModal;
-      if (this.formData.marsDeviceIdsCooked.length == 0) {
-        let assumeObj = {
-          id: [currentDeviceInfo.id],
-          marsDeviceAddress: {
-            deviceAddress: currentDeviceInfo.deviceAddress,
-            latitude: 0,
-            longitude: 0,
-            pincode: currentDeviceInfo.pincode,
-            city: currentDeviceInfo.city,
-            state: currentDeviceInfo.state
-          }
-        };
-        this.currentDeviceInfo = assumeObj;
-      } else {
-        let marsDeviceIdsCooked = [];
-        this.formData.marsDeviceIdsCooked.map(function(value) {
-          marsDeviceIdsCooked.push(value.id);
-        });
-        let assumeObj = {
-          id: marsDeviceIdsCooked,
-          marsDeviceAddress: {
-            deviceAddress: currentDeviceInfo.deviceAddress,
-            latitude: 0,
-            longitude: 0,
-            pincode: currentDeviceInfo.pincode,
-            city: currentDeviceInfo.city,
-            state: currentDeviceInfo.state
-          }
-        };
-        this.currentDeviceInfo = assumeObj;
-      }
+    UpdateDeviceAddress(details) {
+      const ids = this.formData.marsDeviceIdsCooked.length === 0 ? [details.id] : this.formData.marsDeviceIdsCooked.map(v => v.id);
+      this.currentDeviceInfo = { id: ids, marsDeviceAddress: { deviceAddress: details.deviceAddress, latitude: 0, longitude: 0, pincode: details.pincode, city: details.city, state: details.state } };
+      this.showDeviceAddressModal = true;
     },
-    // Function to open device address pop up
     UpdateDeviceAddressAfterEmit(pagination) {
-      this.showDeviceAddressModal = !this.showDeviceAddressModal;
-      this.paginationControl = pagination;
+      this.showDeviceAddressModal = false;
+      if (pagination) this.paginationControl1 = pagination;
     },
-
-    // Function to assign implementation manager in implementation queue
     assignImplementationUser() {
-      let self = this;
-      if (self.formData.marsDeviceIdsCooked.length == 0) {
-        self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Select atleast one item to assign",
-          icon: "thumb_down"
-        });
-      } else if (self.formData.assignTo == "") {
-        self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Implementation officer cannot be empty!",
-          icon: "thumb_down"
-        });
-      } else {
-        let marsDeviceIdsCooked = [];
-        self.formData.marsDeviceIdsCooked.map(function(value) {
-          marsDeviceIdsCooked.push(value.id);
-        });
-        let postValues = {
-          action: this.$MARS_DEVICE_STATUS_SAT_ASSIGNED,
-          marsDeviceIds: marsDeviceIdsCooked,
-          triggerWelcomeMail: self.formData.triggerWelcomeMail,
-          courier: self.formData.courier,
-          userId: self.formData.assignTo
-        };
-        this.IMPLEMENTATION_QUEUE_SUBMIT(postValues)
-          .then(res => {
-            if (res.status == 200 && res.data.data == null) {
-              this.formData.marsDeviceIdsCooked = [];
-              this.formData.assignTo = "";
-              this.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: "Successfully assigned!",
-                icon: "thumb_up"
-              });
-              this.filterSearch = "";
-              this.formData.courier = "";
-              this.ajaxLoadAllLeadInfo1({
-                pagination: this.paginationControl,
-                filter: this.filterSearch
-              });
-            } else if (res.status == 200 && res.data.data.second[0].Success) {
-              //  this.$router.push({name: "internalimplementationAddressFetch", params: {data:res}})
-              this.formData.marsDeviceIdsCooked = [];
-              this.formData.assignTo = "";
-              this.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: "Successfully assigned!",
-                icon: "thumb_up"
-              });
-              this.filterSearch = "";
-              this.formData.courier = "";
-              this.ajaxLoadAllLeadInfo1({
-                pagination: this.paginationControl,
-                filter: this.filterSearch
-              });
-            } else if (res.status == 200 && res.data.data.second[0].Failed) {
-              this.$router.push({
-                name: "internalimplementationAddressFetch",
-                params: { data: res }
-              });
-            } else {
-              self.$q.notify({
-                color: "negative",
-                position: "bottom",
-                message: "INTERNAL SERVER ERROR !!",
-                icon: "thumb_down"
-              });
-            }
-          })
-          .catch(() => {
-            self.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: "Please try again",
-              icon: "thumb_down"
-            });
-          });
-      }
+      if (this.formData.marsDeviceIdsCooked.length === 0 || !this.formData.assignTo) return;
+      const postValues = { action: this.$MARS_DEVICE_STATUS_SAT_ASSIGNED, marsDeviceIds: this.formData.marsDeviceIdsCooked.map(v => v.id), triggerWelcomeMail: this.formData.triggerWelcomeMail, courier: this.formData.courier, userId: this.formData.assignTo };
+      this.IMPLEMENTATION_QUEUE_SUBMIT(postValues).then(() => {
+        this.formData.marsDeviceIdsCooked = [];
+        this.formData.assignTo = "";
+        this.$q.notify({ color: "positive", position: "bottom", message: "Successfully assigned!", icon: "thumb_up" });
+        this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: "" });
+      });
     },
-
-    // Function to unAssignImplementationUser in implementation queue
-    unAssignImplementationUser() {
-      let self = this;
-      if (self.formData.marsDeviceIdsCookedUnAssinged.length == 0) {
-        self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Select atleast one item to Unassign",
-          icon: "thumb_down"
-        });
-      } else {
-        let marsDeviceIdsCookedUnAssinged = [];
-        self.formData.marsDeviceIdsCookedUnAssinged.map(function(value) {
-          marsDeviceIdsCookedUnAssinged.push(value.id);
-        });
-
-        let postValues = {
-          action: this.$MARS_DEVICE_STATUS_TID_GENERATED,
-          marsDeviceIds: marsDeviceIdsCookedUnAssinged,
-          userId: this.$SEND_ZERO_FOR_UNASSIGING
-        };
-        self
-          .IMPLEMENTATION_QUEUE_SUBMIT(postValues)
-          .then(() => {
-            // self.DEVICE_REPLACEMENT_QUEUE_UNASSIGNED_LIST();
-            // self.ajaxLoadAllLeadInfo()
-            self.formData.marsDeviceIdsCookedUnAssinged = [];
-            self.formData.assignTo = "";
-            self.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully Unassigned!",
-              icon: "thumb_up"
-            });
-            this.ajaxLoadAllLeadInfo({
-              pagination: this.paginationControl,
-              filter: this.filterSearch
-            });
-          })
-          .catch(() => {
-            self.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: "Please try again",
-              icon: "thumb_down"
-            });
-          });
-      }
-    },
-
-    // Function to reAssignImplementationUser in implementation queue
-    reAssignImplementationUser() {
-      let self = this;
-      if (self.formData.marsDeviceIdsCookedUnAssinged.length == 0) {
-        self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Select atleast one item to assign",
-          icon: "thumb_down"
-        });
-      } else if (self.formData.assignTo == "") {
-        self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Implementation officer cannot be empty!",
-          icon: "thumb_down"
-        });
-      } else {
-        let marsDeviceIdsCookedUnAssinged = [];
-        self.formData.marsDeviceIdsCookedUnAssinged.map(function(value) {
-          marsDeviceIdsCookedUnAssinged.push(value.id);
-        });
-
-        let postValues = {
-          action: this.$MARS_DEVICE_STATUS_SAT_ASSIGNED,
-          marsDeviceIds: marsDeviceIdsCookedUnAssinged,
-          triggerWelcomeMail: self.formData.triggerWelcomeMail,
-          userId: self.formData.assignTo
-        };
-        self
-          .IMPLEMENTATION_QUEUE_SUBMIT(postValues)
-          .then(() => {
-            // self.IMPLEMENTATION_QUEUE_UNASSIGNED_LIST();
-            self.formData.marsDeviceIdsCookedUnAssinged = [];
-            self.formData.assignTo = "";
-            self.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully Re-assigned !",
-              icon: "thumb_up"
-            });
-            this.ajaxLoadAllLeadInfo({
-              pagination: this.paginationControl,
-              filter: this.filterSearch
-            });
-          })
-          .catch(() => {
-            self.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: "Please try again !",
-              icon: "thumb_down"
-            });
-          });
-      }
-    },
-
-    // Function to toggle lead information pop up screen
-    toggleLeadInformation(leadDetails) {
+    toggleLeadInformation(details) {
       this.propToggleLeadInformation = !this.propToggleLeadInformation;
-      if (leadDetails != undefined) {
-        this.addtnLeadInformation = leadDetails;
-      }
+      if (details) this.addtnLeadInformation = details;
     }
   }
 };
 </script>
 
 <style scoped>
-.customTd {
-  text-align: left !important;
-  word-wrap: break-word;
-  white-space: normal;
-}
-.customTd.customCellLength {
-  min-width: 300px !important;
-  overflow-x: auto;
-}
-.size3 {
-  margin-left: 50px;
-}
-.agnalgin {
-  margin-left: -90px;
-}
-.agnalgin1 {
-  width: 90px;
-}
+.customTd { text-align: left !important; word-wrap: break-word; white-space: normal; }
+.customTd.customCellLength { min-width: 300px !important; overflow-x: auto; }
 </style>

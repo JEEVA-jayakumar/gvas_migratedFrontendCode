@@ -60,17 +60,20 @@
                   multiline
                   class="full-width"
                 >
-                  <template slot="header">
+                  <template v-slot:header>
                     <q-item-section
+                      avatar
                       :color="documents[0].kycException?'amber-9':''"
-                      :icon="documents[0].kycException? 'warning' :'attach_file'"
-                    />
+                    >
+                      <q-icon :name="documents[0].kycException? 'warning' :'attach_file'" />
+                    </q-item-section>
                     <q-item-section
                       class="q-body-1"
-                      :caption="documents[0].uploadedDocuments.length + 'Document(s)'"
-                      :label="index"
-                    />
-                    <q-item-section v-if="documents[0].documentVerifiedStatus == 2" right>
+                    >
+                      <q-item-label>{{ index }}</q-item-label>
+                      <q-item-label caption>{{ documents[0].uploadedDocuments.length }} Document(s)</q-item-label>
+                    </q-item-section>
+                    <q-item-section v-if="documents[0].documentVerifiedStatus == 2" side>
                       <q-btn
                         round
                         size="xs"
@@ -88,7 +91,7 @@
                         @click="fnDocumentRejectModal(documents[0])"
                       />
                     </q-item-section>
-                    <q-item-section v-else right>
+                    <q-item-section v-else side>
                       <span
                         v-if="documents[0].documentVerifiedStatus == 1"
                         class="q-body-1 text-weight-medium text-positive"
@@ -140,14 +143,17 @@
             <div class="row items-center full-width" v-else>
               <div class="col-md-12 q-body-1">
                 <q-expansion-item separator opened :group="toggleCollapsible" class="full-width">
-                  <template slot="header">
-                    <q-item-section icon="apps" />
+                  <template v-slot:header>
+                    <q-item-section avatar>
+                      <q-icon name="apps" />
+                    </q-item-section>
                     <q-item-section
                       class="q-body-1"
-                      :caption="documents.length + 'Type(s)'"
-                      :label="index"
-                    />
-                    <q-item-section v-if="fnToggleVerificationButtonStatus(documents)" right>
+                    >
+                      <q-item-label>{{ index }}</q-item-label>
+                      <q-item-label caption>{{ documents.length }} Type(s)</q-item-label>
+                    </q-item-section>
+                    <q-item-section v-if="fnToggleVerificationButtonStatus(documents)" side>
                       <q-btn
                         round
                         size="xs"
@@ -165,7 +171,7 @@
                         @click="fnDocumentRejectModal(documents[0])"
                       />
                     </q-item-section>
-                    <q-item-section v-else right>
+                    <q-item-section v-else side>
                       <span
                         v-if="fnToggleVerificationButtonStatusAfterAction(documents)"
                         class="q-body-1 text-weight-medium text-positive"
@@ -184,17 +190,20 @@
                   >
                     <div class="col-md-12 q-body-1">
                       <q-expansion-item separator opened multiline class="full-width">
-                        <template slot="header">
+                        <template v-slot:header>
                           <q-item-section
+                            avatar
                             :color="subDocument.kycException?'amber-9':''"
-                            :icon="subDocument.kycException? 'warning' :'attach_file'"
-                          />
+                          >
+                            <q-icon :name="subDocument.kycException? 'warning' :'attach_file'" />
+                          </q-item-section>
                           <q-item-section
                             class="q-body-1"
-                            :caption="subDocument.uploadedDocuments.length + 'Document(s)'"
-                            :label="subDocument.subDocumentType"
-                          />
-                          <q-item-section v-if="subDocument.documentVerifiedStatus == 2" right>
+                          >
+                            <q-item-label>{{ subDocument.subDocumentType }}</q-item-label>
+                            <q-item-label caption>{{ subDocument.uploadedDocuments.length }} Document(s)</q-item-label>
+                          </q-item-section>
+                          <q-item-section v-if="subDocument.documentVerifiedStatus == 2" side>
                             <q-btn
                               round
                               size="xs"
@@ -212,7 +221,7 @@
                               @click="fnDocumentRejectModal(subDocument)"
                             />
                           </q-item-section>
-                          <q-item-section v-else right class="desktop-only cordova-only">
+                          <q-item-section v-else side class="desktop-only cordova-only">
                             <span
                               v-if="subDocument.documentVerifiedStatus == 1"
                               class="q-body-1 text-weight-medium text-positive"

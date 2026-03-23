@@ -16,20 +16,19 @@
       v-model="selectedTab"
       class="shadow-1"
       color="grey-1"
-      @click="goToUnassignedTab"
+      @update:model-value="goToUnassignedTab"
     >
       <q-tab
-
         color="dark"
         name="unassigned"
         label="Un Assigned"
       />
       <q-tab color="dark" name="assigned" label="Assigned" />
-      <!-- <q-tab color="dark" name="ReOpened" label="ReOpenend" /> -->
       <q-tab color="dark" name="completed" label="Completed" />
-</q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="unassigned">
+    </q-tabs>
+
+    <q-tab-panels v-model="selectedTab" animated>
+      <q-tab-panel name="unassigned">
         <q-card class="group q-pa-md">
           <div
             class="row items-center gutter-y-sm"
@@ -97,7 +96,7 @@
           table-class="customTableClass"
           :filter="filterSearch1"
           selection="multiple"
-          :selected="formData.marsDeviceIdsCooked"
+          v-model:selected="formData.marsDeviceIdsCooked"
           v-model:pagination="paginationControl1"
           row-key="id"
           :loading="tableAjaxLoading1"
@@ -106,110 +105,87 @@
           @request="ajaxLoadAllLeadInfo1"
         >
           <template v-slot:body-cell-leadNumber="props">
-            <q-td :props="props"
-            class="cursor-pointer">
-
-            <span class="label" :class="['text-primary']">{{
-              props.row.qrLeadInformation.id
-            }}</span>
-
-          </q-td>
+            <q-td :props="props" class="cursor-pointer">
+              <span class="label" :class="['text-primary']">{{
+                props.row.qrLeadInformation.id
+              }}</span>
+            </q-td>
           </template>
           <template v-slot:body-cell-merchantName="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.merchantName == null
-                ? "NA"
-                : props.row.qrLeadInformation.merchantName
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.merchantName == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.merchantName
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-contactEmail="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.contactEmail == null
-                ? "NA"
-                : props.row.qrLeadInformation.contactEmail
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.contactEmail == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.contactEmail
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-contactAddress="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.contactAddress == null
-                ? "NA"
-                : props.row.qrLeadInformation.contactAddress
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.contactAddress == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.contactAddress
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-contactNumber="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.contactNumber == null
-                ? "NA"
-                : props.row.qrLeadInformation.contactNumber
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.contactNumber == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.contactNumber
+              }}
+            </q-td>
           </template>
 
           <template v-slot:body-cell-alternateContactNumber="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.alternateContactNumber == null
-                ? "NA"
-                : props.row.qrLeadInformation.alternateContactNumber
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.alternateContactNumber == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.alternateContactNumber
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-pincode="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.pincode == null
-                ? "NA"
-                : props.row.qrLeadInformation.pincode
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.pincode == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.pincode
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-sim="props">
             <q-td :props="props">
-
-            {{ props.row.sim == null ? "NA" : props.row.sim }}
-
-          </q-td>
+              {{ props.row.sim == null ? "NA" : props.row.sim }}
+            </q-td>
           </template>
 
           <template v-slot:body-cell-tid="props">
             <q-td :props="props">
-
-            {{ props.row.tid == null ? "NA" : props.row.tid }}
-
-          </q-td>
+              {{ props.row.tid == null ? "NA" : props.row.tid }}
+            </q-td>
           </template>
           <template v-slot:body-cell-mid="props">
             <q-td :props="props">
-
-            {{ props.row.mid == null ? "NA" : props.row.mid }}
-
-          </q-td>
+              {{ props.row.mid == null ? "NA" : props.row.mid }}
+            </q-td>
           </template>
           <template v-slot:body-cell-vpa="props">
             <q-td :props="props">
-
-            {{ props.row.vpa == null ? "NA" : props.row.vpa }}
-
-          </q-td>
+              {{ props.row.vpa == null ? "NA" : props.row.vpa }}
+            </q-td>
           </template>
           <template v-slot:top>
             <!--START: table filter,search -->
@@ -223,156 +199,129 @@
                 class="q-mr-lg q-py-sm"
               />
             </div>
-            <!--ENDv-model: table filter,search -->
           </template>
         </q-table>
       </q-tab-panel>
-<q-tab-panel name="assigned">
+
+      <q-tab-panel name="assigned">
         <!--START: table Data -->
         <q-table
           :rows="tableData"
           :columns="columnDataAssigned"
           table-class="customTableClass"
-          :filter="filterSearch" v-model:pagination="paginationControl"
+          :filter="filterSearch"
+          v-model:pagination="paginationControl"
           row-key="id"
           :loading="tableAjaxLoading"
           :rows-per-page-options="[5, 10, 15, 20]"
           color="dark"
           @request="ajaxLoadAllLeadInfo"
         >
-          <!-- selection="multiple" -->
           <template v-slot:body-cell-leadNumber="props">
-            <q-td :props="props"
-            class="cursor-pointer">
-
-            <span class="label" :class="['text-primary']">{{
-              props.row.qrLeadInformation.id
-            }}</span>
-
-          </q-td>
+            <q-td :props="props" class="cursor-pointer">
+              <span class="label" :class="['text-primary']">{{
+                props.row.qrLeadInformation.id
+              }}</span>
+            </q-td>
           </template>
           <template v-slot:body-cell-merchantName="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.merchantName == null
-                ? "NA"
-                : props.row.qrLeadInformation.merchantName
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.merchantName == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.merchantName
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-contactEmail="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.contactEmail == null
-                ? "NA"
-                : props.row.qrLeadInformation.contactEmail
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.contactEmail == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.contactEmail
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-contactAddress="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.contactAddress == null
-                ? "NA"
-                : props.row.qrLeadInformation.contactAddress
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.contactAddress == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.contactAddress
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-contactNumber="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.contactNumber == null
-                ? "NA"
-                : props.row.qrLeadInformation.contactNumber
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.contactNumber == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.contactNumber
+              }}
+            </q-td>
           </template>
 
           <template v-slot:body-cell-alternateContactNumber="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.alternateContactNumber == null
-                ? "NA"
-                : props.row.qrLeadInformation.alternateContactNumber
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.alternateContactNumber == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.alternateContactNumber
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-assignedTo="props">
             <q-td :props="props">
-
-            {{
-              props.row.assignedTo.name == null
-                ? "NA"
-                : props.row.assignedTo.name
-            }}
-
-          </q-td>
+              {{
+                props.row.assignedTo.name == null
+                  ? "NA"
+                  : props.row.assignedTo.name
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-pincode="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.pincode == null
-                ? "NA"
-                : props.row.qrLeadInformation.pincode
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.pincode == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.pincode
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-sim="props">
             <q-td :props="props">
-
-            {{ props.row.sim == null ? "NA" : props.row.sim }}
-
-          </q-td>
+              {{ props.row.sim == null ? "NA" : props.row.sim }}
+            </q-td>
           </template>
 
           <template v-slot:body-cell-tid="props">
             <q-td :props="props">
-
-            {{ props.row.tid == null ? "NA" : props.row.tid }}
-
-          </q-td>
+              {{ props.row.tid == null ? "NA" : props.row.tid }}
+            </q-td>
           </template>
           <template v-slot:body-cell-mid="props">
             <q-td :props="props">
-
-            {{ props.row.mid == null ? "NA" : props.row.mid }}
-
-          </q-td>
+              {{ props.row.mid == null ? "NA" : props.row.mid }}
+            </q-td>
           </template>
           <template v-slot:body-cell-vpa="props">
             <q-td :props="props">
-
-            {{ props.row.vpa == null ? "NA" : props.row.vpa }}
-
-          </q-td>
+              {{ props.row.vpa == null ? "NA" : props.row.vpa }}
+            </q-td>
           </template>
 
           <template v-slot:body-cell-action="props">
             <q-td :props="props">
-
-            <q-btn
-              highlight
-              push
-              class="q-mx-sm"
-              color="positive"
-              size="sm"
-              @click="fnReassignData(props.row)"
-              >Re-Assign</q-btn
-            >
-
-          </q-td>
+              <q-btn
+                highlight
+                push
+                class="q-mx-sm"
+                color="positive"
+                size="sm"
+                @click="fnReassignData(props.row)"
+                >Re-Assign</q-btn
+              >
+            </q-td>
           </template>
           <template v-slot:top>
             <!--START: table filter,search -->
@@ -388,15 +337,15 @@
             </div>
           </template>
         </q-table>
-        <!--ENDv-model: table Data -->
+        <!--END: table Data -->
       </q-tab-panel>
-<q-tab-panel name="completed">
+
+      <q-tab-panel name="completed">
         <q-table
           :rows="tableData2"
           :columns="completed"
           table-class="customTableClass"
           :filter="filterSearch2"
-          :selected="formData.marsDeviceIdsCooked"
           v-model:pagination="paginationControl2"
           row-key="id"
           :loading="tableAjaxLoading2"
@@ -405,143 +354,116 @@
           @request="ajaxLoadAllLeadInfo2"
         >
           <template v-slot:body-cell-leadNumber="props">
-            <q-td :props="props"
-            class="cursor-pointer">
-
-            <span class="label" :class="['text-primary']">{{
-              props.row.qrLeadInformation.id
-            }}</span>
-
-          </q-td>
+            <q-td :props="props" class="cursor-pointer">
+              <span class="label" :class="['text-primary']">{{
+                props.row.qrLeadInformation.id
+              }}</span>
+            </q-td>
           </template>
           <template v-slot:body-cell-merchantName="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.merchantName == null
-                ? "NA"
-                : props.row.qrLeadInformation.merchantName
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.merchantName == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.merchantName
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-contactEmail="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.contactEmail == null
-                ? "NA"
-                : props.row.qrLeadInformation.contactEmail
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.contactEmail == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.contactEmail
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-contactAddress="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.contactAddress == null
-                ? "NA"
-                : props.row.qrLeadInformation.contactAddress
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.contactAddress == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.contactAddress
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-contactNumber="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.contactNumber == null
-                ? "NA"
-                : props.row.qrLeadInformation.contactNumber
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.contactNumber == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.contactNumber
+              }}
+            </q-td>
           </template>
 
           <template v-slot:body-cell-alternateContactNumber="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.alternateContactNumber == null
-                ? "NA"
-                : props.row.qrLeadInformation.alternateContactNumber
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.alternateContactNumber == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.alternateContactNumber
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-state="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.merchantStateName == null
-                ? "NA"
-                : props.row.qrLeadInformation.merchantStateName
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.merchantStateName == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.merchantStateName
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-city="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.merchantDistrictName == null
-                ? "NA"
-                : props.row.qrLeadInformation.merchantDistrictName
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.merchantDistrictName == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.merchantDistrictName
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-pincode="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.pincode == null
-                ? "NA"
-                : props.row.qrLeadInformation.pincode
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.pincode == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.pincode
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-vpa="props">
             <q-td :props="props">
-
-            {{ props.row.vpa == null ? "NA" : props.row.vpa }}
-
-          </q-td>
+              {{ props.row.vpa == null ? "NA" : props.row.vpa }}
+            </q-td>
           </template>
           <template v-slot:body-cell-updatedAt="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.updatedAt == null
-                ? "NA"
-                : props.row.qrLeadInformation.updatedAt
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.updatedAt == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.updatedAt
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-equitasLat="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.equitasLat == null
-                ? "NA"
-                : props.row.qrLeadInformation.equitasLat
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.equitasLat == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.equitasLat
+              }}
+            </q-td>
           </template>
           <template v-slot:body-cell-equitasLan="props">
             <q-td :props="props">
-
-            {{
-              props.row.qrLeadInformation.equitasLan == null
-                ? "NA"
-                : props.row.qrLeadInformation.equitasLan
-            }}
-
-          </q-td>
+              {{
+                props.row.qrLeadInformation.equitasLan == null
+                  ? "NA"
+                  : props.row.qrLeadInformation.equitasLan
+              }}
+            </q-td>
           </template>
           <template v-slot:top>
             <div class="col-md-5">
@@ -566,12 +488,8 @@
         </q-table>
         <!--END: table Data -->
       </q-tab-panel>
-</q-tab-panels>
-    <div class="row items-center gutter-y-sm">
-      <div class="col-md-9 col-sm-12 col-xs-12">
-        <div class="row items-center"></div>
-      </div>
-    </div>
+    </q-tab-panels>
+
     <equitasReassign
       v-if="propShowReassign"
       :propShowReassign="propShowReassign"
@@ -580,20 +498,11 @@
     ></equitasReassign>
   </q-page>
 </template>
+
 <script>
-import {
-  required,
-  requiredIf,
-  email,
-  minLength,
-  maxLength,
-  alpha,
-  alphaNum,
-  numeric,
-} from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
-import { nullableTypeAnnotation } from "babel-types";
 import equitasReassign from "../../components/sat/equitasReassign.vue";
+
 export default {
   name: "equitasSoundboxOnboarding",
   components: {
@@ -607,8 +516,9 @@ export default {
       tableAjaxLoading1: false,
       tableAjaxLoading: false,
       tableAjaxLoading2: false,
-      selectedTab: "assigned",
+      selectedTab: "unassigned",
       propShowReassign: false,
+      propRowDetails: null,
       formData: {
         marsDeviceIdsCooked: [],
         marsDeviceIdsCookedUnAssinged: [],
@@ -624,356 +534,73 @@ export default {
       assignToOptions: [],
       assignToRegionOptions: [],
       paginationControl1: {
-        sortBy: "createdAt", // String, column "name" property value
+        sortBy: "createdAt",
         descending: false,
         page: 1,
-        rowsPerPage: 10, // current rows per page being displayed
+        rowsPerPage: 10,
       },
       paginationControl: {
-        sortBy: "createdAt", // String, column "name" property value
+        sortBy: "createdAt",
         descending: false,
         page: 1,
-        rowsPerPage: 10, // current rows per page being displayed
+        rowsPerPage: 10,
       },
       paginationControl2: {
-        sortBy: "createdAt", // String, column "name" property value
+        sortBy: "createdAt",
         descending: false,
         page: 1,
-        rowsPerPage: 10, // current rows per page being displayed
+        rowsPerPage: 10,
       },
 
       columnDataUnassigned: [
-        {
-          name: "leadNumber",
-          required: true,
-          label: "Lead Id",
-          align: "left",
-          field: "leadNumber",
-          sortable: false,
-        },
-        {
-          name: "merchantName",
-          required: true,
-          label: "Merchant Name",
-          align: "left",
-          field: "merchantName",
-          sortable: false,
-        },
-        {
-          name: "contactEmail",
-          required: true,
-          label: "Merchant Email",
-          align: "left",
-          field: "contactEmail",
-          sortable: false,
-        },
-        {
-          name: "contactAddress",
-          required: true,
-          label: "Merchant Address",
-          align: "left",
-          field: "contactAddress",
-          sortable: false,
-        },
-        {
-          name: "contactNumber",
-          required: true,
-          label: "Merchant Number",
-          align: "left",
-          field: "contactNumber",
-          sortable: false,
-        },
-        {
-          name: "alternateContactNumber",
-          required: true,
-          label: "Alternate Number",
-          align: "left",
-          field: "alternateContactNumber",
-          sortable: false,
-        },
-        {
-          name: "pincode",
-          required: true,
-          label: "Merchant Pincode",
-          align: "left",
-          field: "pincode",
-          sortable: false,
-        },
-        {
-          name: "sim",
-          required: true,
-          label: "Sim No",
-          align: "left",
-          field: "sim",
-          sortable: false
-        },
-
-        {
-          name: "tid",
-          required: true,
-          label: "TID",
-          align: "left",
-          field: row => {
-            return row.tid;
-          },
-          sortable: false
-        },
-        {
-          name: "mid",
-          required: true,
-          label: "MID",
-          align: "left",
-          field: row => {
-            return row.mid;
-          },
-          sortable: false
-        },
-
-        {
-          name: "vpa",
-          required: true,
-          label: "VPA",
-          align: "left",
-          field: row => {
-            return row.vpa;
-          },
-          sortable: false
-        }
+        { name: "leadNumber", required: true, label: "Lead Id", align: "left", field: "leadNumber", sortable: false },
+        { name: "merchantName", required: true, label: "Merchant Name", align: "left", field: "merchantName", sortable: false },
+        { name: "contactEmail", required: true, label: "Merchant Email", align: "left", field: "contactEmail", sortable: false },
+        { name: "contactAddress", required: true, label: "Merchant Address", align: "left", field: "contactAddress", sortable: false },
+        { name: "contactNumber", required: true, label: "Merchant Number", align: "left", field: "contactNumber", sortable: false },
+        { name: "alternateContactNumber", required: true, label: "Alternate Number", align: "left", field: "alternateContactNumber", sortable: false },
+        { name: "pincode", required: true, label: "Merchant Pincode", align: "left", field: "pincode", sortable: false },
+        { name: "sim", required: true, label: "Sim No", align: "left", field: "sim", sortable: false },
+        { name: "tid", required: true, label: "TID", align: "left", field: row => row.tid, sortable: false },
+        { name: "mid", required: true, label: "MID", align: "left", field: row => row.mid, sortable: false },
+        { name: "vpa", required: true, label: "VPA", align: "left", field: row => row.vpa, sortable: false }
       ],
       columnDataAssigned: [
-        {
-          name: "leadNumber",
-          required: true,
-          label: "Lead Id",
-          align: "left",
-          field: "leadNumber",
-          sortable: false
-        },
-        {
-          name: "merchantName",
-          required: true,
-          label: "Merchant Name",
-          align: "left",
-          field: "merchantName",
-          sortable: false
-        },
-        {
-          name: "contactEmail",
-          required: true,
-          label: "Merchant Email",
-          align: "left",
-          field: "contactEmail",
-          sortable: false
-        },
-        {
-          name: "contactAddress",
-          required: true,
-          label: "Merchant Address",
-          align: "left",
-          field: "contactAddress",
-          sortable: false
-        },
-        {
-          name: "contactNumber",
-          required: true,
-          label: "Merchant Number",
-          align: "left",
-          field: "contactNumber",
-          sortable: false
-        },
-        {
-          name: "alternateContactNumber",
-          required: true,
-          label: "Alternate Number",
-          align: "left",
-          field: "alternateContactNumber",
-          sortable: false
-        },
-        {
-          name: "assignedTo",
-          required: true,
-          label: "SO Name",
-          align: "left",
-          field: "assignedTo",
-          sortable: false
-        },
-
-        {
-          name: "pincode",
-          required: true,
-          label: "Merchant Pincode",
-          align: "left",
-          field: "pincode",
-          sortable: false
-        },
-        {
-          name: "sim",
-          required: true,
-          label: "Sim No",
-          align: "left",
-          field: "sim",
-          sortable: false
-        },
-
-        {
-          name: "tid",
-          required: true,
-          label: "TID",
-          align: "left",
-          field: row => {
-            return row.tid;
-          },
-          sortable: false
-        },
-        {
-          name: "mid",
-          required: true,
-          label: "MID",
-          align: "left",
-          field: row => {
-            return row.mid;
-          },
-          sortable: false
-        },
-
-        {
-          name: "vpa",
-          required: true,
-          label: "VPA",
-          align: "left",
-          field: row => {
-            return row.vpa;
-          },
-          sortable: false
-        },
-        {
-          name: "action",
-          required: true,
-          label: "Re-Assign",
-          align: "center",
-          field: "action",
-          sortable: false
-        }
+        { name: "leadNumber", required: true, label: "Lead Id", align: "left", field: "leadNumber", sortable: false },
+        { name: "merchantName", required: true, label: "Merchant Name", align: "left", field: "merchantName", sortable: false },
+        { name: "contactEmail", required: true, label: "Merchant Email", align: "left", field: "contactEmail", sortable: false },
+        { name: "contactAddress", required: true, label: "Merchant Address", align: "left", field: "contactAddress", sortable: false },
+        { name: "contactNumber", required: true, label: "Merchant Number", align: "left", field: "contactNumber", sortable: false },
+        { name: "alternateContactNumber", required: true, label: "Alternate Number", align: "left", field: "alternateContactNumber", sortable: false },
+        { name: "assignedTo", required: true, label: "SO Name", align: "left", field: "assignedTo", sortable: false },
+        { name: "pincode", required: true, label: "Merchant Pincode", align: "left", field: "pincode", sortable: false },
+        { name: "sim", required: true, label: "Sim No", align: "left", field: "sim", sortable: false },
+        { name: "tid", required: true, label: "TID", align: "left", field: row => row.tid, sortable: false },
+        { name: "mid", required: true, label: "MID", align: "left", field: row => row.mid, sortable: false },
+        { name: "vpa", required: true, label: "VPA", align: "left", field: row => row.vpa, sortable: false },
+        { name: "action", required: true, label: "Re-Assign", align: "center", field: "action", sortable: false }
       ],
       completed: [
-        {
-          name: "leadNumber",
-          required: true,
-          label: "Lead Id",
-          align: "left",
-          field: "leadNumber",
-          sortable: false
-        },
-        {
-          name: "merchantName",
-          required: true,
-          label: "Merchant Name",
-          align: "left",
-          field: "merchantName",
-          sortable: false
-        },
-        {
-          name: "contactEmail",
-          required: true,
-          label: "Merchant Email",
-          align: "left",
-          field: "contactEmail",
-          sortable: false
-        },
-        {
-          name: "contactNumber",
-          required: true,
-          label: "Merchant Number",
-          align: "left",
-          field: "contactNumber",
-          sortable: false
-        },
-        {
-          name: "alternateContactNumber",
-          required: true,
-          label: "Alternate Number",
-          align: "left",
-          field: "alternateContactNumber",
-          sortable: false
-        },
-        {
-          name: "state",
-          required: true,
-          label: "State",
-          align: "left",
-          field: "state",
-          sortable: false
-        },
-        {
-          name: "city",
-          required: true,
-          label: "City",
-          align: "left",
-          field: "city",
-          sortable: false
-        },
-        {
-          name: "pincode",
-          required: true,
-          label: "Pincode",
-          align: "left",
-          field: "pincode",
-          sortable: false
-        },
-        {
-          name: "contactAddress",
-          required: true,
-          label: "Address",
-          align: "left",
-          field: "contactAddress",
-          sortable: false
-        },
-        {
-          name: "vpa",
-          required: true,
-          label: "VPA",
-          align: "left",
-          field: "vpa",
-          sortable: false
-        },
-        {
-          name: "updatedAt",
-          required: true,
-          label: "Implementation Date",
-          align: "left",
-          field: "updatedAt",
-          sortable: false
-        },
-        {
-          name: "equitasLat",
-          required: true,
-          label: "Lat",
-          align: "left",
-          field: "equitasLat",
-          sortable: false
-        },
-        {
-          name: "equitasLan",
-          required: true,
-          label: "Lan",
-          align: "left",
-          field: "equitasLan",
-          sortable: false
-        }
+        { name: "leadNumber", required: true, label: "Lead Id", align: "left", field: "leadNumber", sortable: false },
+        { name: "merchantName", required: true, label: "Merchant Name", align: "left", field: "merchantName", sortable: false },
+        { name: "contactEmail", required: true, label: "Merchant Email", align: "left", field: "contactEmail", sortable: false },
+        { name: "contactNumber", required: true, label: "Merchant Number", align: "left", field: "contactNumber", sortable: false },
+        { name: "alternateContactNumber", required: true, label: "Alternate Number", align: "left", field: "alternateContactNumber", sortable: false },
+        { name: "state", required: true, label: "State", align: "left", field: "state", sortable: false },
+        { name: "city", required: true, label: "City", align: "left", field: "city", sortable: false },
+        { name: "pincode", required: true, label: "Pincode", align: "left", field: "pincode", sortable: false },
+        { name: "contactAddress", required: true, label: "Address", align: "left", field: "contactAddress", sortable: false },
+        { name: "vpa", required: true, label: "VPA", align: "left", field: "vpa", sortable: false },
+        { name: "updatedAt", required: true, label: "Implementation Date", align: "left", field: "updatedAt", sortable: false },
+        { name: "equitasLat", required: true, label: "Lat", align: "left", field: "equitasLat", sortable: false },
+        { name: "equitasLan", required: true, label: "Lan", align: "left", field: "equitasLan", sortable: false }
       ]
     };
   },
 
   computed: {
-    ...mapGetters("ImplementationExecutive", [
-      "getImplementationExecutiveList",
-      "getRegionList"
-    ]),
-    ...mapGetters("DeviceReplacement", [
-      "getEquitasQueueAssignedList",
-      "getEquitasQueueUnAssignedList",
-      "getEquitasQueueCompletedList"
-    ]),
+    ...mapGetters("ImplementationExecutive", ["getImplementationExecutiveList", "getRegionList"]),
+    ...mapGetters("DeviceReplacement", ["getEquitasQueueAssignedList", "getEquitasQueueUnAssignedList", "getEquitasQueueCompletedList"]),
     ...mapGetters("SuperAdminUsers", ["getAllStatesData"])
   },
   created() {
@@ -995,38 +622,28 @@ export default {
       "EQUITAS_ONBOARDING_QUEUE_COMPLETED_LIST",
       "EQUITAS_ONBOARDING_REQUEST_TO_ASSIGNED_REGION"
     ]),
-    ...mapActions("ImplementationExecutive", [
-      "IMPLEMENTATION_EXECUTIVE_LIST",
-      "REGION_LIST"
-    ]),
-    ...mapActions("staticQrDownloads", [
-      "DOWNLOAD_ERROR_DATA",
-      "DOWNLOAD_COMPLETED_DATA"
-    ]),
+    ...mapActions("ImplementationExecutive", ["IMPLEMENTATION_EXECUTIVE_LIST", "REGION_LIST"]),
+    ...mapActions("staticQrDownloads", ["DOWNLOAD_ERROR_DATA", "DOWNLOAD_COMPLETED_DATA"]),
 
     ajaxLoadAllLeadInfo1({ pagination, filter }) {
-      // we set QTable to "loading" state
       this.$q.loading.show({
-        delay: 0, // ms
+        delay: 0,
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.EQUITAS_ONBOARDING_QUEUE_UNASSIGNED_LIST({
-        pagination,
-        filter
-      }).then(res => {
-          this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
+      this.EQUITAS_ONBOARDING_QUEUE_UNASSIGNED_LIST({ pagination, filter })
+        .then(res => {
+          this.IMPLEMENTATION_EXECUTIVE_LIST().then(() => {
             let assumeArr = [];
             this.getImplementationExecutiveList.map(function(value) {
               assumeArr.push({
-                label:
-                  value.name + " | " + value.employeeID + " | " + value.email,
+                label: value.name + " | " + value.employeeID + " | " + value.email,
                 value: value.id
               });
             });
             this.assignToOptions = assumeArr;
           });
-          this.REGION_LIST().then(response => {
+          this.REGION_LIST().then(() => {
             let assumeArrData = [];
             this.getRegionList.map(function(value) {
               assumeArrData.push({
@@ -1034,91 +651,52 @@ export default {
                 value: value.code
               });
             });
-
             this.assignToRegionOptions = assumeArrData;
           });
-          // updating pagination to reflect in the UI
           this.paginationControl1 = pagination;
-
-          // we also set (or update) rowsNumber
           this.paginationControl1.rowsNumber = this.getEquitasQueueUnAssignedList.totalElements;
-          this.paginationControl1.page =
-            this.getEquitasQueueUnAssignedList.number + 1;
-
-          // then we update the rows with the fetched ones
+          this.paginationControl1.page = this.getEquitasQueueUnAssignedList.number + 1;
           this.tableData1 = this.getEquitasQueueUnAssignedList.content;
-          console.log("TABLE EQUITAS", this.tableData1);
           if (this.getEquitasQueueUnAssignedList.sort != null) {
             this.paginationControl1.sortBy = this.getEquitasQueueUnAssignedList.sort[0].property;
             this.paginationControl1.descending = this.getEquitasQueueUnAssignedList.sort[0].ascending;
-          } else {
-            this.paginationControl1.sortBy = "createdAt";
-            this.paginationControl1.descending = !this.paginationControl1
-              .descending;
           }
-          // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
         })
         .catch(error => {
           this.$q.loading.hide();
-          let errorMessage = "Please TryAgain";
-          // Try to get readable error message from common locations
-          if (error && error.message) {
-            errorMessage = error.message;
-          } else if (error && error.status === 404) {
-            this.tableData1 = [];
-            errorMessage = "No Data Found";
-          }
-
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: errorMessage,
+            message: error.message || "Please TryAgain",
             icon: "thumb_down"
           });
         });
     },
     ajaxLoadAllLeadInfo({ pagination, filter }) {
-      // we set QTable to "loading" state
       this.$q.loading.show({
-        delay: 0, // ms
+        delay: 0,
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.EQUITAS_ONBOARDING_QUEUE_ASSIGNED_LIST({ pagination, filter }).then(res => {
-          // updating pagination to reflect in the UI
+      this.EQUITAS_ONBOARDING_QUEUE_ASSIGNED_LIST({ pagination, filter })
+        .then(res => {
           this.paginationControl = pagination;
-
-          // we also set (or update) rowsNumber
           this.paginationControl.rowsNumber = this.getEquitasQueueAssignedList.totalElements;
-          this.paginationControl.page =
-            this.getEquitasQueueAssignedList.number + 1;
-
-          // then we update the rows with the fetched ones
+          this.paginationControl.page = this.getEquitasQueueAssignedList.number + 1;
           this.tableData = this.getEquitasQueueAssignedList.content;
-
           if (this.getEquitasQueueAssignedList.sort != null) {
             this.paginationControl.sortBy = this.getEquitasQueueAssignedList.sort[0].property;
             this.paginationControl.descending = this.getEquitasQueueAssignedList.sort[0].ascending;
           }
-          // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
         })
         .catch(error => {
           this.$q.loading.hide();
-          let errorMessage = "Please TryAgain";
-          // Try to get readable error message from common locations
-          if (error && error.message) {
-            errorMessage = error.message;
-          } else if (error && error.status === 404) {
-            this.tableData = [];
-            errorMessage = "No Data Found";
-          }
-
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: errorMessage,
+            message: error.message || "Please TryAgain",
             icon: "thumb_down"
           });
         });
@@ -1129,56 +707,30 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.EQUITAS_ONBOARDING_QUEUE_COMPLETED_LIST({ pagination, filter }).then(res => {
-          this.paginationControl = pagination;
-
-          this.paginationControl.rowsNumber = this.getEquitasQueueCompletedList.totalElements;
-          this.paginationControl.page =
-            this.getEquitasQueueCompletedList.number + 1;
-
+      this.EQUITAS_ONBOARDING_QUEUE_COMPLETED_LIST({ pagination, filter })
+        .then(res => {
+          this.paginationControl2 = pagination;
+          this.paginationControl2.rowsNumber = this.getEquitasQueueCompletedList.totalElements;
+          this.paginationControl2.page = this.getEquitasQueueCompletedList.number + 1;
           this.tableData2 = this.getEquitasQueueCompletedList.content;
           if (this.getEquitasQueueCompletedList.sort != null) {
-            this.paginationControl.sortBy = this.getEquitasQueueCompletedList.sort[0].property;
-            this.paginationControl.descending = this.getEquitasQueueCompletedList.sort[0].ascending;
+            this.paginationControl2.sortBy = this.getEquitasQueueCompletedList.sort[0].property;
+            this.paginationControl2.descending = this.getEquitasQueueCompletedList.sort[0].ascending;
           }
-
           this.$q.loading.hide();
         })
         .catch(error => {
           this.$q.loading.hide();
-
-          let errorMessage = "Please TryAgain";
-
-          // Try to get readable error message from common locations
-          if (error && error.message) {
-            errorMessage = error.message;
-          } else if (error && error.status === 404) {
-            this.tableData2 = [];
-            errorMessage = "No Data Found";
-          }
-
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: errorMessage,
+            message: error.message || "Please TryAgain",
             icon: "thumb_down"
           });
         });
     },
     goToUnassignedTab(tab) {
       if (tab == "unassigned") {
-        let request = {
-          pagination: this.paginationControl1,
-          filter: this.filterSearch1
-        };
-        this.toggleAjaxLoadFilter = true;
-        this.EQUITAS_ONBOARDING_QUEUE_UNASSIGNED_LIST(request)
-          .then(response => {
-            this.toggleAjaxLoadFilter = false;
-          })
-          .catch(error => {
-            this.toggleAjaxLoadFilter = false;
-          });
         this.ajaxLoadAllLeadInfo1({
           pagination: this.paginationControl1,
           filter: this.filterSearch1
@@ -1197,11 +749,6 @@ export default {
     },
     fnReassignData(rowDetails) {
       this.propShowReassign = !this.propShowReassign;
-      this.ajaxLoadAllLeadInfo({
-        pagination: this.paginationControl,
-        filter: this.filterSearch
-      });
-      // eslint-disable-next-line eqeqeq
       if (rowDetails != undefined) {
         this.propRowDetails = rowDetails;
       }
@@ -1209,210 +756,70 @@ export default {
     assignImplementationUser() {
       let self = this;
       if (self.formData.marsDeviceIdsCooked.length == 0) {
-        self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Select atleast one item to assign",
-          icon: "thumb_down"
-        });
-      } else if (self.formData.assignTo == "") {
-        self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Request Mode cannot be empty!",
-          icon: "thumb_down"
-        });
-      } else if (
-        self.formData.assignTo.id != null &&
-        (self.formData.region == null || self.formData.region == "")
-      ) {
-        this.$q.loading.show({
-          delay: 100, // ms
-          spinnerColor: "purple-9",
-          message: "Please wait.."
-        });
-
-        let marsDeviceIdsCooked = [];
-        self.formData.marsDeviceIdsCooked.map(function(value) {
-          marsDeviceIdsCooked.push(value.id);
-        });
-        let postValues = {
-          // action: this.$MARS_DEVICE_STATUS_SAT_ASSIGNED,
-          userId: this.formData.assignTo.id,
-          marsDeviceIds: {
-            marsDeviceIds: marsDeviceIdsCooked
-          }
-        };
-        console.log("check Payload", postValues);
-        self
-          .EQUITAS_SOUNDBOX_REQUEST_UNASSIGED_TO_ASSIGNED_STATE(postValues)
+        self.$q.notify({ color: "negative", position: "bottom", message: "Select atleast one item to assign", icon: "thumb_down" });
+      } else if (self.formData.assignTo == "" && self.formData.region == "") {
+        self.$q.notify({ color: "negative", position: "bottom", message: "Select Any One Request mode", icon: "thumb_down" });
+      } else if (self.formData.assignTo.id != "" && self.formData.region != "") {
+        self.$q.notify({ color: "negative", position: "bottom", message: "Select Only One Request mode", icon: "thumb_down" });
+      } else if (self.formData.assignTo.id != "") {
+        this.$q.loading.show({ delay: 100, spinnerColor: "purple-9", message: "Please wait.." });
+        let marsDeviceIdsCooked = self.formData.marsDeviceIdsCooked.map(v => v.id);
+        let postValues = { userId: this.formData.assignTo.id, marsDeviceIds: { marsDeviceIds: marsDeviceIdsCooked } };
+        self.EQUITAS_SOUNDBOX_REQUEST_UNASSIGED_TO_ASSIGNED_STATE(postValues)
           .then(res => {
             if (res.status == 200) {
               this.formData.marsDeviceIdsCooked = [];
-              this.formData.assignTo = "";
-              this.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: "Successfully assigned!",
-                icon: "thumb_up"
-              });
-              this.$q.loading.hide();
-              this.ajaxLoadAllLeadInfo1({
-                pagination: this.paginationControl1,
-                filter: this.filterSearch1
-              });
+              this.formData.assignTo = { id: "" };
+              this.$q.notify({ color: "positive", position: "bottom", message: "Successfully assigned!", icon: "thumb_up" });
+              this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: this.filterSearch1 });
             } else {
-              self.$q.notify({
-                color: "negative",
-                position: "bottom",
-                message: "INTERNAL SERVER ERROR !!",
-                icon: "thumb_down"
-              });
-              this.$q.loading.hide();
+              self.$q.notify({ color: "negative", position: "bottom", message: "INTERNAL SERVER ERROR !!", icon: "thumb_down" });
             }
+            this.$q.loading.hide();
           })
           .catch(() => {
-            self.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: "Please try again",
-              icon: "thumb_down"
-            });
+            self.$q.notify({ color: "negative", position: "bottom", message: "Please try again", icon: "thumb_down" });
             this.$q.loading.hide();
           });
-        this.$q.loading.hide();
-      } else if (
-        self.formData.region != null &&
-        (self.formData.assignTo.id == null || self.formData.assignTo.id == "")
-      ) {
-        this.$q.loading.show({
-          delay: 100, // ms
-          spinnerColor: "purple-9",
-          message: "Please wait.."
-        });
-        console.log("regionCode", self.formData.region);
-        let marsDeviceIdsCooked = [];
-        self.formData.marsDeviceIdsCooked.map(function(value, index) {
-          marsDeviceIdsCooked.push(value.id);
-        });
-        let data = {
-          regionCode: self.formData.region,
-          marsDeviceIds: {
-            marsDeviceIds: marsDeviceIdsCooked
-          }
-        };
-        self
-          .EQUITAS_ONBOARDING_REQUEST_TO_ASSIGNED_REGION(data)
+      } else if (self.formData.region != "") {
+        this.$q.loading.show({ delay: 100, spinnerColor: "purple-9", message: "Please wait.." });
+        let marsDeviceIdsCooked = self.formData.marsDeviceIdsCooked.map(v => v.id);
+        let data = { regionCode: self.formData.region, marsDeviceIds: { marsDeviceIds: marsDeviceIdsCooked } };
+        self.EQUITAS_ONBOARDING_REQUEST_TO_ASSIGNED_REGION(data)
           .then(res => {
             if (res.status == 200) {
               this.formData.marsDeviceIdsCooked = [];
-              this.formData.assignTo = "";
-              this.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: res.body.data,
-                icon: "thumb_up"
-              });
-              this.$q.loading.hide();
-              this.ajaxLoadAllLeadInfo1({
-                pagination: this.paginationControl1,
-                filter: this.filterSearch1
-              });
+              this.formData.region = "";
+              this.$q.notify({ color: "positive", position: "bottom", message: res.data.data || "Successfully assigned!", icon: "thumb_up" });
+              this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: this.filterSearch1 });
             } else {
-              self.$q.notify({
-                color: "negative",
-                position: "bottom",
-                message: res.body.data,
-                icon: "thumb_down"
-              });
-              this.$q.loading.hide();
+              self.$q.notify({ color: "negative", position: "bottom", message: "INTERNAL SERVER ERROR !!", icon: "thumb_down" });
             }
+            this.$q.loading.hide();
           })
-
           .catch(error => {
-            self.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: error.body.data,
-              icon: "thumb_down"
-            });
+            self.$q.notify({ color: "negative", position: "bottom", message: error.message || "Please try again", icon: "thumb_down" });
             this.$q.loading.hide();
           });
-
-        this.$q.loading.hide();
-      } else if (
-        self.formData.assignTo.id != null &&
-        self.formData.region != null
-      ) {
-        self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Select Only One Request mode",
-          icon: "thumb_down"
-        });
-      } else {
-        self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Select Any One Request mode",
-          icon: "thumb_down"
-        });
       }
     },
     downloadCompletedData() {
-      this.$q.loading.show({
-        delay: 100, // ms
-        spinnerColor: "purple-9",
-        message: "Please wait.."
-      });
-      this.DOWNLOAD_COMPLETED_DATA().then(response => {
+      this.$q.loading.show({ delay: 100, spinnerColor: "purple-9", message: "Please wait.." });
+      this.DOWNLOAD_COMPLETED_DATA().then(() => {
         this.$q.loading.hide();
-
-        this.$q.notify({
-          color: "positive",
-          position: "bottom",
-          message: "Successfully Downloaded",
-          icon: "thumb_up"
-        });
+        this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Downloaded", icon: "thumb_up" });
       });
     },
-
     downloadErrorData() {
-      this.$q.loading.show({
-        delay: 100,
-        spinnerColor: "purple-9",
-        message: "Please wait..."
-      });
-
+      this.$q.loading.show({ delay: 100, spinnerColor: "purple-9", message: "Please wait..." });
       this.DOWNLOAD_ERROR_DATA()
-        .then(response => {
-          console.log("error res", response);
+        .then(() => {
           this.$q.loading.hide();
-          this.$q.notify({
-            color: "positive",
-            position: "bottom",
-            message: "Successfully Downloaded",
-            icon: "thumb_up"
-          });
+          this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Downloaded", icon: "thumb_up" });
         })
         .catch(error => {
           this.$q.loading.hide();
-
-          let errorMessage = "Download failed.";
-
-          // Try to get readable error message from common locations
-          if (error && error.message) {
-            errorMessage = error.message;
-          } else if (error && error.status === 404) {
-            errorMessage = "No Data Found";
-          }
-
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: errorMessage,
-            icon: "thumb_down"
-          });
+          this.$q.notify({ color: "negative", position: "bottom", message: error.message || "Download failed.", icon: "thumb_down" });
         });
     }
   }

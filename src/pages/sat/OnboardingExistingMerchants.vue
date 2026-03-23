@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <!-- content -->
-    <q-card>
+    <q-card class="q-mb-md">
       <div class="text-grey-9">
         <div class="row bottom-border q-pa-sm items-center">
           <div class="col">
@@ -48,6 +48,7 @@
                             @change="onChange"
                             ref="deviceBulkUpload"
                             accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                            style="display:none"
                           />
                         </label>
                       </div>
@@ -97,6 +98,7 @@
         </div>
       </div>
     </q-card>
+
     <q-card>
       <div class="text-grey-9">
         <div class="row bottom-border q-pa-sm items-center">
@@ -126,12 +128,14 @@
                           color="grey-9"
                           :options="assignToOptions"
                           placeholder="Assign To"
+                          emit-value
+                          map-options
                         />
                       </div>
                       <div class="col-md-4 col-sm-6 col-xs-6 group">
                         <q-btn
                           no-caps
-                          :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                          :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0 || !formData.assignTo"
                           label="Re-Assign"
                           class="common-dark-blue q-mr-sm"
                           @click="reAssignImplementationUser"
@@ -207,11 +211,13 @@
                           color="grey-9"
                           :options="assignToOptions"
                           placeholder="Assign To"
+                          emit-value
+                          map-options
                         />
                       </div>
                       <div class="col-md-4 col-sm-6 col-xs-6">
                         <q-btn
-                          :disabled="this.formData.assignTo == '' || formData.marsDeviceIdsCooked.length == 0"
+                          :disabled="!formData.assignTo || formData.marsDeviceIdsCooked.length == 0"
                           type="button"
                           label="Assign"
                           class="common-dark-blue"
@@ -281,110 +287,25 @@ export default {
       filterSearch: "",
       filterSearch1: "",
       selectedTab: "unAssigned",
-      assignTo: "",
       assignToOptions: [],
       tableData: [],
       tableData1: [],
       uploaderHovered: false,
       columnDataAssigned: [
-        {
-          name: "leadNumber",
-          required: true,
-          label: "Lead Number",
-          align: "left",
-          field: row => row.leadInformation?.leadNumber || "NA",
-          sortable: false
-        },
-        {
-          name: "merchant_name",
-          required: true,
-          label: "Merchant Name",
-          align: "left",
-          field: row => row.leadInformation?.leadName || "NA",
-          sortable: false
-        },
-        {
-          name: "tid",
-          required: true,
-          label: "TID",
-          align: "left",
-          field: "tid",
-          sortable: true
-        },
-        {
-          name: "mid",
-          required: true,
-          label: "MID",
-          align: "left",
-          field: "mid",
-          sortable: true
-        },
-        {
-          name: "mobile_number",
-          required: true,
-          label: "Mobile Number",
-          align: "center",
-          field: row => row.leadInformation?.contactNumber || "NA",
-          sortable: false
-        },
-        {
-          name: "assigned_to",
-          required: true,
-          label: "Assigned To",
-          align: "left",
-          field: row => row.qrAssignedTo ? (row.qrAssignedTo.name + " | " + row.qrAssignedTo.employeeID) : "NA",
-          sortable: false
-        }
+        { name: "leadNumber", required: true, label: "Lead Number", align: "left", field: row => row.leadInformation?.leadNumber || "NA", sortable: false },
+        { name: "merchant_name", required: true, label: "Merchant Name", align: "left", field: row => row.leadInformation?.leadName || "NA", sortable: false },
+        { name: "tid", required: true, label: "TID", align: "left", field: "tid", sortable: true },
+        { name: "mid", required: true, label: "MID", align: "left", field: "mid", sortable: true },
+        { name: "mobile_number", required: true, label: "Mobile Number", align: "center", field: row => row.leadInformation?.contactNumber || "NA", sortable: false },
+        { name: "assigned_to", required: true, label: "Assigned To", align: "left", field: row => row.qrAssignedTo ? (row.qrAssignedTo.name + " | " + row.qrAssignedTo.employeeID) : "NA", sortable: false }
       ],
       columnDataUnassigned: [
-        {
-          name: "leadNumber",
-          required: true,
-          label: "Lead Number",
-          align: "left",
-          field: row => row.leadInformation?.leadNumber || "NA",
-          sortable: false
-        },
-        {
-          name: "merchant_name",
-          required: true,
-          label: "Merchant Name",
-          align: "left",
-          field: row => row.leadInformation?.leadName || "NA",
-          sortable: false
-        },
-        {
-          name: "tid",
-          required: true,
-          label: "TID",
-          align: "left",
-          field: "tid",
-          sortable: true
-        },
-        {
-          name: "mid",
-          required: true,
-          label: "MID",
-          align: "left",
-          field: "mid",
-          sortable: true
-        },
-        {
-          name: "mobile_number",
-          required: true,
-          label: "Mobile Number",
-          align: "center",
-          field: row => row.leadInformation?.contactNumber || "NA",
-          sortable: false
-        },
-        {
-          name: "leadAddress",
-          required: true,
-          label: "Address",
-          align: "left",
-          field: row => row.leadInformation?.leadAddress || "NA",
-          sortable: false
-        }
+        { name: "leadNumber", required: true, label: "Lead Number", align: "left", field: row => row.leadInformation?.leadNumber || "NA", sortable: false },
+        { name: "merchant_name", required: true, label: "Merchant Name", align: "left", field: row => row.leadInformation?.leadName || "NA", sortable: false },
+        { name: "tid", required: true, label: "TID", align: "left", field: "tid", sortable: true },
+        { name: "mid", required: true, label: "MID", align: "left", field: "mid", sortable: true },
+        { name: "mobile_number", required: true, label: "Mobile Number", align: "center", field: row => row.leadInformation?.contactNumber || "NA", sortable: false },
+        { name: "leadAddress", required: true, label: "Address", align: "left", field: row => row.leadInformation?.leadAddress || "NA", sortable: false }
       ],
       formData: {
         marsDeviceIdsCooked: [],
@@ -393,18 +314,8 @@ export default {
         assignTo: "",
         fileSelected: []
       },
-      paginationControl: {
-        sortBy: "createdAt",
-        descending: false,
-        page: 1,
-        rowsPerPage: 5
-      },
-      paginationControl1: {
-        sortBy: "createdAt",
-        descending: false,
-        page: 1,
-        rowsPerPage: 5
-      },
+      paginationControl: { sortBy: "createdAt", descending: false, page: 1, rowsPerPage: 5 },
+      paginationControl1: { sortBy: "createdAt", descending: false, page: 1, rowsPerPage: 5 },
       tableAjaxLoading: false,
       tableAjaxLoading1: false
     };
@@ -450,7 +361,7 @@ export default {
       this.FEED_ONBOARDING_EXISTING_MERCHANT_DEVICE_BULK_UPLOAD_DATA(fd).then(() => {
           this.$q.loading.hide();
           this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Added!", icon: "thumb_up" });
-          this.ajaxLoadAllLeadInfo1({pagination: this.paginationControl1, filter: this.filterSearch1});
+          this.ajaxLoadAllLeadInfo1({pagination: this.paginationControl1, filter: ""});
           this.formData.fileSelected = [];
         }).catch(error => {
           this.$q.loading.hide();
@@ -499,10 +410,7 @@ export default {
     },
     assignImplementationUser() {
       if (this.formData.marsDeviceIdsCooked.length == 0 || !this.formData.assignTo) return;
-      let postValues = {
-        marsDeviceIds: this.formData.marsDeviceIdsCooked.map(v => v.id),
-        userId: this.formData.assignTo
-      };
+      let postValues = { marsDeviceIds: this.formData.marsDeviceIdsCooked.map(v => v.id), userId: this.formData.assignTo };
       this.ONBOARDING_MERCHANT_SUBMIT(postValues).then(() => {
           this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: "" });
           this.formData.marsDeviceIdsCooked = [];
@@ -512,11 +420,7 @@ export default {
     },
     unAssignImplementationUser() {
       if (this.formData.marsDeviceIdsCookedUnAssinged.length == 0) return;
-      let postValues = {
-        action: this.$MARS_DEVICE_STATUS_TID_GENERATED,
-        marsDeviceIds: this.formData.marsDeviceIdsCookedUnAssinged.map(v => v.id),
-        userId: this.$SEND_ZERO_FOR_UNASSIGING
-      };
+      let postValues = { action: this.$MARS_DEVICE_STATUS_TID_GENERATED, marsDeviceIds: this.formData.marsDeviceIdsCookedUnAssinged.map(v => v.id), userId: this.$SEND_ZERO_FOR_UNASSIGING };
       this.ONBOARDING_MERCHANT_SUBMIT_UNASSIGN(postValues).then(() => {
           this.ajaxLoadAllLeadInfo({ pagination: this.paginationControl, filter: "" });
           this.formData.marsDeviceIdsCookedUnAssinged = [];
@@ -525,21 +429,13 @@ export default {
     },
     reAssignImplementationUser() {
       if (this.formData.marsDeviceIdsCookedUnAssinged.length == 0 || !this.formData.assignTo) return;
-      let postValues = {
-        action: this.$MARS_DEVICE_STATUS_SAT_ASSIGNED,
-        marsDeviceIds: this.formData.marsDeviceIdsCookedUnAssinged.map(v => v.id),
-        userId: this.formData.assignTo
-      };
+      let postValues = { action: this.$MARS_DEVICE_STATUS_SAT_ASSIGNED, marsDeviceIds: this.formData.marsDeviceIdsCookedUnAssinged.map(v => v.id), userId: this.formData.assignTo };
       this.ONBOARDING_MERCHANT_SUBMIT(postValues).then(() => {
           this.ajaxLoadAllLeadInfo({ pagination: this.paginationControl, filter: "" });
           this.formData.marsDeviceIdsCookedUnAssinged = [];
           this.formData.assignTo = "";
           this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Re-Assigned!", icon: "thumb_up" });
         });
-    },
-    toggleLeadInformation(leadDetails) {
-      this.propToggleLeadInformation = !this.propToggleLeadInformation;
-      if (leadDetails) this.addtnLeadInformation = leadDetails;
     }
   }
 };
@@ -547,7 +443,6 @@ export default {
 
 <style scoped>
 .customTd { text-align: left !important; word-wrap: break-word; white-space: normal; }
-.customTd.customCellLength { min-width: 300px !important; overflow-x: auto; }
 .size2 { font-size: xx-large; }
 .drop { padding: 15px; background-color: #f6f6f6; border-radius: 2px; height: 100%; max-height: 400px; max-width: 600px; width: 100%; border: 4px dashed #ccc; }
 </style>

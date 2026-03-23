@@ -68,7 +68,7 @@
       <!-- END >> (Mandatory) Application form  -->
       <!-- START >> (Optional) payment document file == bank subvention  -->
       <q-list v-if="getShortLeadInfo.paymentDocumentFile != ''">
-        <q-item-label header class="bg-grey-4">Bank Letter</q-item-label header>
+        <q-item-label header class="bg-grey-4">Bank Letter</q-item-label>
         <q-item separator class="q-body-1">
           <q-item-section>
             <div class="full-width">
@@ -115,7 +115,7 @@
         v-for="(singleDocument,singleDocumentIndex) in getShortLeadInfoDocumentTypes.uploadedDocuments.forSingleDocument"
         :key="singleDocumentIndex"
       >
-        <q-item-label header class="bg-grey-4">{{singleDocument.documentType}}</q-item-label header>
+        <q-item-label header class="bg-grey-4">{{singleDocument.documentType}}</q-item-label>
         <div
           v-for="(document,documentIndex) in singleDocument.documents"
           :key="documentIndex"
@@ -336,7 +336,7 @@
               </span>
             </div>
           </div>
-        </q-item-label header>
+        </q-item-label>
         <!-- <pre>{{multipleDocument}}</pre> -->
         <div>
           <q-item separator class="q-body-1 q-pa-sm group">

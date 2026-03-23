@@ -1,161 +1,84 @@
 <template>
-  <q-page>
-    <q-dialog
-      minimized
-      no-backdrop-dismiss
-      class="customModalOverlay"
-      v-model="toggleModel"
-      @hide="emitAssignHistoryList(toggleModel)"
-      @escape-key="emitAssignHistoryList(toggleModel)"
-      :content-css="{ padding: '25px', minWidth: '50vw' }"
-    >
-      <div
-        class="row items-center justify-between q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-      >
-        <div class="col-auto q-title">Reassign History</div>
-        <q-btn
-          flat
-          color="red"
-          round
-          size="md"
-          icon="close"
-          @click="emitAssignHistoryList(toggleModel)"
-        ></q-btn>
-      </div>
-      <q-table
-        table-class="customTableClass"
-        class="q-py-none"
-        :rows="assignHistoryRemarks"
-        :columns="columns"
-        row-key="name"
-      >
-        <template v-slot:body-cell-date="props">
-            <q-td :props="props">
+  <q-dialog
+    persistent
+    v-model="toggleModel"
+    @hide="emitAssignHistoryList(false)"
+  >
+    <q-card style="min-width: 60vw">
+      <q-card-section class="row items-center justify-between q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
+        <div class="text-h6 q-title">Reassign History</div>
+        <q-btn flat color="red" round size="md" icon="close" v-close-popup />
+      </q-card-section>
 
-          {{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
+      <q-card-section class="q-pa-none">
+        <q-table
+          table-class="customTableClass"
+          flat
+          square
+          :rows="assignHistoryRemarks"
+          :columns="columns"
+          row-key="id"
+          :pagination="{ rowsPerPage: 10 }"
         >
-        <q-td v-slot:body-cell-agentname="props" :props="props">{{
-          props.row.soUser.name == null ? "NA" : props.row.soUser.name
-        }}
-          </q-td>
-          </template>
-        <!-- <template v-slot:body-cell-remarks="props">
+          <template v-slot:body-cell-date="props">
             <q-td :props="props">
-            {{
-            props.row.reAssignRemark == null ? "NA" : props.row.reAssignRemark
-          }}
-          </q-td>
-          </template> -->
-      </q-table>
-    </q-dialog>
-  </q-page>
+              {{ $moment(props.row.createdAt).format("Do MMM Y") }}
+            </q-td>
+          </template>
+          <template v-slot:body-cell-agentname="props">
+            <q-td :props="props">
+              {{ props.row.soUser?.name || "NA" }}
+            </q-td>
+          </template>
+          <template v-slot:body-cell-remarks="props">
+            <q-td :props="props">
+              {{ props.row.remarks || "NA" }}
+            </q-td>
+          </template>
+        </q-table>
+      </q-card-section>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script>
-/* START >> Modal components Lead source, device, merchant type */
-import {
-  required,
-  requiredIf,
-  email,
-  minLength,
-  maxLength,
-  alpha,
-  alphaNum,
-  numeric
-} from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
+
 export default {
+  name: "assignHistoryPopup",
   props: ["propShowUpdateAssignHistoryPopup", "propRowDetails"],
-  name: "MDRdetails",
   data() {
     return {
-      /* START >> Modal props */
-      filter: "",
       assignHistoryRemarks: [],
-      formData: {
-        Id: this.propRowDetails.id
-      },
-      paginationControl: {
-        rowsNumber: 5,
-        page: 1,
-        descending: false,
-        rowsPerPage: 5
-      },
-      tableData: this.propRowDetails.vpaList,
       toggleModel: this.propShowUpdateAssignHistoryPopup,
       columns: [
-        {
-          name: "date",
-          required: true,
-          label: "Date",
-          align: "left",
-          field: "createdAt",
-          sortable: false
-        },
-        {
-          name: "agentname",
-          required: true,
-          label: "Agent Name",
-          align: "left",
-          field: row => {
-            return row.soUser.name == null ? "NA" : row.soUser.name;
-          },
-          sortable: false
-        },
-        {
-          name: "remarks",
-          required: true,
-          label: "Remarks",
-          align: "left",
-          field: row => {
-            return row.remarks != null
-              ? row.remarks
-              : "NA";
-          },
-          sortable: false
-        }
+        { name: "date", label: "Date", align: "left", field: "createdAt" },
+        { name: "agentname", label: "Agent Name", align: "left", field: row => row.soUser?.name || "NA" },
+        { name: "remarks", label: "Remarks", align: "left", field: "remarks" }
       ]
     };
   },
-  beforeMount() {
-    console.log(
-      "propRowDetails_DATA_ID ------->",
-      JSON.stringify(this.propRowDetails.id)
-    );
-    // console.log(
-    //   "formData ------->",
-    //   JSON.stringify(this.formData.subTicketsId)
-    // );
+  created() {
     this.assignHistoryList();
   },
   computed: {
     ...mapGetters("serviceRequestPhonepeSat", ["getassignHistoryLists"])
   },
   methods: {
-    ...mapActions("SuperAdminUsers", [
-      "FEED_EXISTING_PERMISSION_DATA",
-      "FETCH_ALL_PERMISSIONS_DATA"
-    ]),
     ...mapActions("serviceRequestPhonepeSat", ["ASSIGN_HISTORY_REMARKS_LIST"]),
-
     assignHistoryList() {
-      this.ASSIGN_HISTORY_REMARKS_LIST(this.formData)
-        .then(response => {
+      this.$q.loading.show({ message: "Loading history..." });
+      this.ASSIGN_HISTORY_REMARKS_LIST({ Id: this.propRowDetails.id })
+        .then(() => {
           this.assignHistoryRemarks = this.getassignHistoryLists;
-          console.log(
-            "ASSIGN_HISTORY_REMARKS_LIST ------->",
-            JSON.stringify(this.assignHistoryRemarks)
-          );
           this.$q.loading.hide();
         })
         .catch(() => {
           this.$q.loading.hide();
         });
     },
-
-    // Emit functions
-    emitAssignHistoryList(toggleModel) {
-      this.$emit("emitfnshowUpdateOpenedExternal", toggleModel);
+    emitAssignHistoryList(val) {
+      this.$emit("emitfnshowUpdateOpenedExternal", val);
     }
   }
 };

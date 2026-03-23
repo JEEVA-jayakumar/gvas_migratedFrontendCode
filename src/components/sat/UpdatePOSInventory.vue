@@ -1,249 +1,114 @@
 <template>
-  <q-page>
-    <q-dialog minimized persistent class="customModalOverlay" v-model="toggleModel"
-      :content-css="{ padding: '10px', minWidth: '63vw' }">
-      <q-card style="width:100%; min-width: 60vw;">
-        <q-card-section>
-          <div class="row">
-            <!-- START >> Setup MDR details -->
-            <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm" style="width: 100%">
-                <q-list no-border>
-                  <div class="col-md-12">
-                    <q-input label="Device Purchase Cost" placeholder="Device Purchase Cost"
-                      class="q-my-md" color="grey-9" align="left" @blur="v$.formData.devicePurchaseCost.$touch()"
-                      :error="v$.formData.devicePurchaseCost.$error" v-model="formData.devicePurchaseCost" />
-                  </div>
-                  <div class="col-md-12">
-                    <q-input label="Total Life of Device in Days"
-                      placeholder="Total Life of Device in Days" class="q-my-md" color="grey-9" align="left"
-                      @blur="v$.formData.deviceLife.$touch()" :error="v$.formData.deviceLife.$error"
-                      v-model="formData.deviceLife" />
-                  </div>
-                  <div class="col-md-12">
-                    <q-input label="Invoice Number" placeholder="Invoice Number" class="q-my-md"
-                      color="grey-9" align="left" @blur="v$.formData.invoiceNumbers.$touch()"
-                      :error="v$.formData.invoiceNumbers.$error" v-model="formData.invoiceNumbers" />
-                  </div>
-                  <div class="col">
-                    <b>Placeholder Invoice Copy</b>
-                  </div>
-                  <div class="col-md-3 q-py-md" align="center">
-                    <div v-if="formData.fileSelected.length === 0" :class="[
-                          uploaderHovered
-                            ? 'toggleBulkUploadDisable'
-                            : 'toggleBulkUploadActive'
-                        ]" class="drop display-inline align-center cursor-pointer"
-                      @dragover.prevent="dragAndDropCustomAnimate(true)"
-                      @dragleave.prevent="dragAndDropCustomAnimate(false)" @drop="onDrop">
-                      <q-card class="q-pa-xs bg-green-3">
-                        <label class="btn display-inline cursor-pointer">
-                          Drag & Drop or click here to open a file
-                          <input type="file" name="image" @change="onChange" ref="deviceBulkUpload"
-                            accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, .pdf, image/png, image/jpeg, image/jpg"
-                            multiple />
-                        </label>
-                      </q-card>
-                    </div>
-                    <div v-else align="left">
-                      <q-card dense class="q-pa-xs">
-                        <q-card-section class="q-pa-xs bg-green-3">
-                          Uploaded Files
-                        </q-card-section>
-                        <q-separator />
-                        <q-card-section>
-                          <div v-for="(file, index) in formData.fileSelected" :key="index">
-                            <q-item dense>
-                              <q-item-section avatar>
-                                <q-icon name="attach_file" />
-                              </q-item-section>
-                              <q-item-section>{{ file.name }}</q-item-section>
-                              <q-item-section side>
-                                <q-btn class="fa fa-close" size="sm" color="negative" @click="removeUploadedFiles(index)"
-                                  label="Remove" icon="clear" />
-                              </q-item-section>
-                            </q-item>
-                          </div>
-                        </q-card-section>
-                      </q-card>
-                    </div>
-                  </div>
-                </q-list>
-            </div>
-            <!-- END >> Setup MDR details -->
+  <q-dialog persistent v-model="toggleModel">
+    <q-card style="min-width: 60vw">
+      <q-card-section class="q-pa-md">
+        <div class="row q-col-gutter-md">
+          <div class="col-12">
+            <q-input label="Device Purchase Cost" placeholder="Device Purchase Cost" color="grey-9"
+              v-model="formData.devicePurchaseCost" @blur="v$.formData.devicePurchaseCost.$touch()"
+              :error="v$.formData.devicePurchaseCost.$error" />
           </div>
-        </q-card-section>
-        <q-card-actions align="end">
-          <q-btn push label="Cancel" align="right" color="negative" @click="emitfnshowPosInventory()" />
-          <q-btn push label="Submit" @click="PosFinanceSubmit(formData)" color="purple-9" />
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
-  </q-page>
+          <div class="col-12">
+            <q-input label="Total Life of Device in Days" placeholder="Total Life of Device in Days" color="grey-9"
+              v-model="formData.deviceLife" @blur="v$.formData.deviceLife.$touch()"
+              :error="v$.formData.deviceLife.$error" />
+          </div>
+          <div class="col-12">
+            <q-input label="Invoice Number" placeholder="Invoice Number" color="grey-9"
+              v-model="formData.invoiceNumbers" @blur="v$.formData.invoiceNumbers.$touch()"
+              :error="v$.formData.invoiceNumbers.$error" />
+          </div>
+          <div class="col-12">
+            <div class="text-subtitle2 q-mb-sm">Invoice Copy</div>
+            <div v-if="formData.fileSelected.length === 0"
+              class="drop cursor-pointer flex flex-center border-dashed border-grey-4 q-pa-md bg-green-1"
+              style="border: 2px dashed #ccc; min-height: 100px" @dragover.prevent @drop.prevent="onDrop">
+              <label class="cursor-pointer full-width text-center">
+                Drag & Drop or click here to open a file
+                <input type="file" class="hidden" @change="onChange" multiple
+                  accept=".csv, .xlsx, .xls, .pdf, .png, .jpg, .jpeg" />
+              </label>
+            </div>
+            <div v-else>
+              <q-list bordered separator>
+                <q-item v-for="(file, index) in formData.fileSelected" :key="index">
+                  <q-item-section avatar><q-icon name="attach_file" /></q-item-section>
+                  <q-item-section>{{ file.name }}</q-item-section>
+                  <q-item-section side>
+                    <q-btn flat round color="negative" icon="close" @click="removeUploadedFiles(index)" />
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </div>
+          </div>
+        </div>
+      </q-card-section>
+      <q-card-actions align="end" class="q-pa-md">
+        <q-btn flat label="Cancel" color="negative" @click="emitfnshowPosInventory" />
+        <q-btn label="Submit" color="purple-9" @click="PosFinanceSubmit" />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script>
-  /* START >> Modal components Lead source, device, merchant type */
-  import { useVuelidate } from '@vuelidate/core';
-  import { required } from "@vuelidate/validators";
-  import { mapActions } from "vuex";
-  // import financeInvoiceCopy from "../../components/inventory/financeInvoiceCopy.vue";
-  export default {
-    setup() {
-      return { v$: useVuelidate() };
-    },
-    props: ["propShowPosInventory", "propRowDetails"],
-    name: "MDRdetails",
-    components: {
-      // financeInvoiceCopy
-    },
-    data() {
-      return {
-        toggleModel: this.propShowPosInventory,
-        //   openBulkModal: false,
-        formData: {
-          id: JSON.stringify(this.propRowDetails.id),
-          devicePurchaseCost: "",
-          deviceLife: "1460",
-          invoiceNumbers: "",
-          fileSelected: []
-        },
-        uploaderHovered: false
-      };
-    },
-    validations() {
-      return {
-        formData: {
-          devicePurchaseCost: { required },
-          deviceLife: { required },
-          invoiceNumbers: { required },
-        }
-      };
-    },
+import { useVuelidate } from '@vuelidate/core';
+import { required } from "@vuelidate/validators";
+import { mapActions } from "vuex";
 
-    created() {
-      this.getInvoiceNumber(JSON.stringify(this.propRowDetails.id));
+export default {
+  name: "UpdatePOSInventory",
+  props: ["propShowPosInventory", "propRowDetails"],
+  setup() { return { v$: useVuelidate() }; },
+  data() {
+    return {
+      toggleModel: this.propShowPosInventory,
+      formData: {
+        id: JSON.stringify(this.propRowDetails.id),
+        devicePurchaseCost: "",
+        deviceLife: "1460",
+        invoiceNumbers: "",
+        fileSelected: []
+      }
+    };
+  },
+  validations() {
+    return { formData: { devicePurchaseCost: { required }, deviceLife: { required }, invoiceNumbers: { required } } };
+  },
+  created() {
+    this.getInvoiceNumber(JSON.stringify(this.propRowDetails.id));
+  },
+  methods: {
+    ...mapActions("posInventoryFinance", ["FETCH_POS_FINANCE_SUBMIT"]),
+    ...mapActions("VerifyDevice", ["GET_INVOICE_NUMBER_FROM_INVENTORY"]),
+    emitfnshowPosInventory() { this.$emit("emitfnshowPosInventory"); },
+    getInvoiceNumber(id) {
+      this.GET_INVOICE_NUMBER_FROM_INVENTORY(id).then(res => {
+        this.formData.invoiceNumbers = res.data?.InvoiceNumber || "";
+      });
     },
-    beforeMount() {
-      console.log("propRowDetails ------->", JSON.stringify(this.propRowDetails));
-    },
-    mounted() {
-      // console.log("FormData:", assumeFormDataValue);
-    },
-
-    computed: {
-      // ...mapGetters("posInventoryFinance", ["getreassignReasonList"])
-    },
-
-    methods: {
-      ...mapActions("posInventoryFinance", ["FETCH_POS_FINANCE_SUBMIT"]),
-      ...mapActions("VerifyDevice", [
-        "GET_INVOICE_NUMBER_FROM_INVENTORY"
-      ]),
-      emitfnshowPosInventory() {
-        this.$emit("emitfnshowPosInventory");
-      },
-      getInvoiceNumber(res){
-        this.GET_INVOICE_NUMBER_FROM_INVENTORY(res)
-          .then((response) => {
-            const invoiceNumber = response.data && response.data.InvoiceNumber ? response.data.InvoiceNumber : "";
-            this.formData.invoiceNumbers = invoiceNumber;
-          })
-          .catch(() => {
-            // this.$q.notify({
-            //   color: "primary",
-            //   position: "bottom",
-            //   message: "invalid",
-            //   icon: "info"
-            // });
-          });
-      },
-      dragAndDropCustomAnimate(action) {
-        this.uploaderHovered = action;
-      },
-      onDrop: function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-        this.formData.fileSelected = Array.from(e.dataTransfer.files);
-        this.fileCheckSum(this.formData.fileSelected);
-        console.log("fileCheckSum", this.fileCheckSum);
-      },
-
-      fileCheckSum(file) {
-        let re = /(\.csv|\.xlsx|\.xls|\.pdf|\.png|\.jpg|\.jpeg)$/i;
-        if (!re.exec(file[0].name)) {
-          this.formData.fileSelected = [];
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "File format not supported",
-            icon: "clear"
-          });
-          return false;
-        }
-      },
-      onChange(e) {
-        this.formData.fileSelected = Array.from(e.target.files); // Convert FileList to array
-        console.log("onChange--------->>>>", this.formData.fileSelected);
-      },
-      removeUploadedFiles(index) {
-        this.formData.fileSelected.splice(index, 1); // Remove file at given index
-      },
-
-      async PosFinanceSubmit(request) {
-        this.$q.loading.show({
-          delay: 0, // ms
-          spinnerColor: "purple-9",
-          message: "Validating .."
-        });
-        const isCorrect = await this.v$.formData.$validate();
-        if (!isCorrect || this.formData.fileSelected.length == 0) {
-          this.$q.notify({
-            color: "amber-9",
-            position: "bottom",
-            message: "Please fill all mandatory fields and upload a file",
-            icon: "warning"
-          });
-          this.$q.loading.hide();
-        } else {
-          let assumeFormData = new FormData();
-          for (let i = 0; i < this.formData.fileSelected.length; i++) {
-            assumeFormData.append("file", this.formData.fileSelected[i]);
-          }
-
-          let assumeFormDataValue = {
-            file: assumeFormData,
-            id: this.formData.id,
-            devicePurchaseCost: request.devicePurchaseCost,
-            deviceLife: request.deviceLife,
-            invoiceNumbers: request.invoiceNumbers
-          };
-
-          this.FETCH_POS_FINANCE_SUBMIT(assumeFormDataValue)
-            .then(response => {
-              this.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: "Devices Successfully added!",
-                icon: "thumb_up"
-              });
-              this.$emit("emitfnshowPosInventory");
-              this.$q.loading.hide();
-              this.formData.fileSelected = [];
-            })
-            .catch(error => {
-              const msg = error.data && error.data.message ? error.data.message : "Error submitting";
-              this.$q.notify({
-                color: "negative",
-                position: "bottom",
-                message: msg,
-                icon: "thumb_down"
-              });
-              this.$q.loading.hide();
-            });
-        }
-      },
+    onDrop(e) { this.formData.fileSelected = Array.from(e.dataTransfer.files); },
+    onChange(e) { this.formData.fileSelected = Array.from(e.target.files); },
+    removeUploadedFiles(index) { this.formData.fileSelected.splice(index, 1); },
+    async PosFinanceSubmit() {
+      const isValid = await this.v$.$validate();
+      if (!isValid || this.formData.fileSelected.length === 0) {
+        this.$q.notify({ color: "amber-9", message: "Please fill all fields and upload a file" });
+        return;
+      }
+      this.$q.loading.show({ message: "Submitting..." });
+      let fd = new FormData();
+      this.formData.fileSelected.forEach(f => fd.append("file", f));
+      const payload = { file: fd, id: this.formData.id, devicePurchaseCost: this.formData.devicePurchaseCost, deviceLife: this.formData.deviceLife, invoiceNumbers: this.formData.invoiceNumbers };
+      this.FETCH_POS_FINANCE_SUBMIT(payload).then(() => {
+        this.$q.notify({ color: "positive", message: "Successfully updated!" });
+        this.emitfnshowPosInventory();
+        this.$q.loading.hide();
+      }).catch(err => {
+        this.$q.notify({ color: "negative", message: err.data?.message || "Error submitting" });
+        this.$q.loading.hide();
+      });
     }
-  };
+  }
+};
 </script>
-
-<style></style>

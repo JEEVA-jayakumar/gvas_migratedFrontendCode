@@ -1,262 +1,95 @@
 <template>
-  <q-page>
+  <div>
     <div class="row">
       <div class="col-12 q-title q-pa-md text-weight-regular bottom-border">Enter Latitude & Longitude</div>
-      <!-- START >> Setup MDR details -->
       <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
         <q-card style="width:150%">
           <q-card-section>
             <q-list no-border>
-
               <q-item>
                 <q-item-section>
-                  <q-input color="grey-9" v-model="formData.Address" @blur="$v.formData.Address.$touch"
-                    :error="$v.formData.Address.$error" label="Address" />
-                    
-                    <div>
-                    <q-btn label="Search Address" @click="fnAddress(formData)" color="purple-9" />
+                  <q-input color="grey-9" v-model="v$.formData.Address.$model" :error="v$.formData.Address.$error" label="Address" />
+                  <div class="q-mt-sm">
+                    <q-btn label="Search Address" @click="fnAddress" color="purple-9" />
                   </div>
-
                 </q-item-section>
               </q-item>
-
               <q-item>
                 <q-item-section>
-                  <q-input color="grey-9" type="double" disable v-model="formData.latitude"
-                    @blur="$v.formData.latitude.$touch" :error="$v.formData.latitude.$error"
-                    label="Enter Latitude" placeholder="Add Latitude" />
+                  <q-input color="grey-9" disable v-model="v$.formData.latitude.$model" :error="v$.formData.latitude.$error" label="Enter Latitude" />
                 </q-item-section>
               </q-item>
-
               <q-item>
                 <q-item-section>
-                  <q-input color="grey-9" type="double" disable v-model="formData.longitude"
-                    @blur="$v.formData.longitude.$touch" :error="$v.formData.longitude.$error"
-                    label="Enter Longitude" placeholder="Add Longitude" />
+                  <q-input color="grey-9" disable v-model="v$.formData.longitude.$model" :error="v$.formData.longitude.$error" label="Enter Longitude" />
                 </q-item-section>
               </q-item>
             </q-list>
           </q-card-section>
-
           <q-card-actions vertical align="end">
-            <q-btn label="submit" @click="fnsubmit(formData)" color="purple-9" />
+            <q-btn label="submit" @click="fnsubmit" color="purple-9" />
           </q-card-actions>
         </q-card>
       </div>
     </div>
-  </q-page>
+  </div>
 </template>
+
 <script>
+import { useVuelidate } from '@vuelidate/core';
+import { required } from '@vuelidate/validators';
+import { mapActions } from "vuex";
 
-import {
-  required,
-  minLength,
-  maxLength,
-  integer,
-  double,
-  email
-} from "@vuelidate/validators";
-/* START >> Modal components Lead source, device, merchant type */
-import showLeadSourceModalComponent from "../../components/super_admin/showLeadSourceModalComponents.vue";
-import showDeviceDetailModalComponent from "../../components/super_admin/showDeviceDetailModalComponents.vue";
-import showMerchantModalComponent from "../../components/super_admin/merchantTypes.vue";
-/* END >> Modal components Lead source, device, merchant type */
-
-import { mapGetters, mapActions } from "vuex";
 export default {
-  name: "MDRdetails",
-  components: {
-  },
+  name: "externalimplementationAddressFetch",
+  setup() { return { v$: useVuelidate() }; },
   data() {
     return {
       propRowDetails: {},
-      formData: {
-
-        // MID: "",
-        // TID: "",
-        // MerchantName: "",
-        Address: "",
-        latitude: "",
-        longitude: "",
-      },
+      formData: { Address: "", latitude: "", longitude: "" }
     };
   },
-  validations: {
-    formData: {
-      // MID: { required},
-      // TID: { required },
-      // MerchantName: { required},
-      Address: { required },
-      latitude: { required },
-      longitude: { required }
-    }
-  },
-  error: {
-    formData: {
-
-      // MID: {
-      //   alert: false,
-      //   issue: "",
-      //   value: ""
-      // },
-      // TID: {
-      //   alert: false,
-      //   issue: "",
-      //   value: ""
-      // },
-      // MerchantName: {
-      //   alert: false,
-      //   issue: "",
-      //   value: ""
-      // },
-      Address: {
-        alert: false,
-        issue: "",
-        value: ""
-      },
-      latitude: {
-        alert: false,
-        issue: "",
-        value: ""
-      },
-      longitude: {
-        alert: false,
-        issue: "",
-        value: ""
-      }
-    }
-
-  },
-
-  computed: {
-    ...mapGetters("SA_Devices", ["getAllDevicesInfo", "getMarsDeviceModel"]),
+  validations() {
+    return { formData: { Address: { required }, latitude: { required }, longitude: { required } } };
   },
   beforeMount() {
     this.propRowDetails = this.$route.params.data;
-    // this.formData.MID = this.propRowDetails.data.data.second[0].Failed.mid
-    // this.formData.TID = this.propRowDetails.data.data.second[0].Failed.tid
-    // this.formData.MerchantName = this.propRowDetails.data.data.second[0].Failed.leadInformation.leadName
-    this.formData.Address = this.propRowDetails.data.data.second[0].Failed.deviceAddress
-
-
+    if (this.propRowDetails?.data?.data?.second[0]?.Failed) {
+      this.formData.Address = this.propRowDetails.data.data.second[0].Failed.deviceAddress;
+    }
   },
-
-  // created() {
-  //   this.ajaxLoadAllLeadInfo({
-  //     pagination: this.paginationControl,
-  //     filter: this.filterSearch
-  //   });
-  // },
-
   methods: {
-    ...mapActions("SA_Devices", ["FETCH_DEVICES_DATA", "FETCH_MARS_DEVICE_MODEL"]),
-    ...mapActions("phonepeImplementationQueue",["PHONEPE_IMPLEMENTATION_QUEUE"]),
-    ...mapActions("lat_long", ["Latitude_Longitude"]),
-    ...mapActions("lat_long", ["Lat_Long"]),
-
-    fnAddress(request){
-      if (request.Address ==null) {
-        this.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Please fill Address fields",
-          icon: "info"
-        });
-      } else {
-          let self = this;
-        self.$q.loading.show({
-          delay: 0, // ms
-          spinnerColor: "purple-9",
-          message: "Validating..."
-        });
-        let params = {
-          id: this.propRowDetails.data.data.second[0].Failed.tid,
-          request:{
-            deviceAddress: request.Address,
-          }
-         
-        };
-        this.Lat_Long(params)
-          .then((response) => {
-            this.$q.loading.hide();
-            this.formData.latitude = response.data.data.first;
-            this.formData.longitude = response.data.data.second;
-            this.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully Created",
-              icon: "thumb_up",
-            });
-          })
-          .catch((error) => {
-            this.$q.loading.hide();
-            this.$q.notify({
-              type: "warning",
-              color: "amber-9",
-              position: "bottom",
-              message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
-              icon: "thumb_down",
-            });
-          });
+    ...mapActions("lat_long", ["Latitude_Longitude", "Lat_Long"]),
+    async fnAddress() {
+      if (!this.formData.Address) {
+        this.$q.notify({ color: "negative", position: "bottom", message: "Please fill Address fields" });
+        return;
       }
+      this.$q.loading.show({ message: "Validating..." });
+      try {
+        const res = await this.Lat_Long({ id: this.propRowDetails.data.data.second[0].Failed.tid, request: { deviceAddress: this.formData.Address } });
+        this.formData.latitude = res.data.data.first;
+        this.formData.longitude = res.data.data.second;
+        this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Created" });
+      } catch (err) {
+        this.$q.notify({ color: "amber-9", position: "bottom", message: err.body?.message || "Please Try Again Later !" });
+      } finally { this.$q.loading.hide(); }
     },
-
-    fnsubmit(request) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
-        this.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Please fill all mandatory fields",
-          icon: "info"
-        });
-      } else {
-          let self = this;
-        self.$q.loading.show({
-          delay: 0, // ms
-          spinnerColor: "purple-9",
-          message: "Validating..."
-        });
-        let params = {
-          id: this.propRowDetails.data.data.second[0].Failed.tid,
-          deviceAddress: request.Address,
-          latitude: request.latitude,
-          longitude: request.longitude,
-        };
-        this.Latitude_Longitude(params)
-          .then((response) => {
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully Created",
-              icon: "thumb_up",
-            });
-            this.$router.push('/sat/implementation/queue');
-          })
-          .catch((error) => {
-            this.$q.loading.hide();
-            this.$q.notify({
-              type: "warning",
-              color: "amber-9",
-              position: "bottom",
-              message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
-              icon: "thumb_down",
-            });
-          });
+    async fnsubmit() {
+      const isFormCorrect = await this.v$.$validate();
+      if (!isFormCorrect) {
+        this.$q.notify({ color: "negative", position: "bottom", message: "Please fill all mandatory fields" });
+        return;
       }
-    },
-  },
+      this.$q.loading.show({ message: "Validating..." });
+      try {
+        await this.Latitude_Longitude({ id: this.propRowDetails.data.data.second[0].Failed.tid, deviceAddress: this.formData.Address, latitude: this.formData.latitude, longitude: this.formData.longitude });
+        this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Created" });
+        this.$router.push('/sat/implementation/queue');
+      } catch (err) {
+        this.$q.notify({ color: "amber-9", position: "bottom", message: err.body?.message || "Please Try Again Later !" });
+      } finally { this.$q.loading.hide(); }
+    }
+  }
 };
-
 </script>
-
-<style>
-
-</style>

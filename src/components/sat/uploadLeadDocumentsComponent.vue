@@ -237,7 +237,7 @@
       >   
         <q-item-label header v-if="multipleDocument.isQr != 1" class="q-mb-sm bg-grey-4">{{multipleDocument.documentType}}
          
-        </q-item-label header>
+        </q-item-label>
          
         <div>
           <q-item separator dense class="q-body-1 q-pa-sm">
