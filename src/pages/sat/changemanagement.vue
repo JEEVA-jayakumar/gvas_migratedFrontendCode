@@ -20,7 +20,7 @@
         @request="ajaxLoadAllCMS"
       >
         <template v-slot:body-cell-updatedAt="props">
-          <q-td :props="props">{{ (props.row.leadInformation.updatedAt).format("Do MMM Y") }}</q-td>
+          <q-td :props="props">{{ $moment(props.row.leadInformation.updatedAt).format("Do MMM Y") }}</q-td>
         </template>
         <template v-slot:body-cell-Status="props">
           <q-td :props="props">

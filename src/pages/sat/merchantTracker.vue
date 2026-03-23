@@ -66,11 +66,12 @@
                       color="grey-9"
                       placeholder="Type.."
                       label= "Search by MID, TID, Merchant Name, MCC,UTR Number, Device Type"
-                      class="q-mr-lg q-py-sm">
-                <template v-slot:append>
-                  <q-icon name="search" />
-                </template>
-              </q-input>
+                      class="q-mr-lg q-py-sm"
+                    >
+                      <template v-slot:append>
+                        <q-icon name="search" />
+                      </template>
+                    </q-input>
                 </div>
                 <!--END: table search -->
 

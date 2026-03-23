@@ -26,12 +26,12 @@
           <!--START: table body modification -->
           <template v-slot:body-cell-createdAt="props">
             <q-td :props="props">
-            <span class="label">{{ (props.row.createdAt).format("Do MMM Y") }}</span>
+            <span class="label">{{ $moment(props.row.createdAt).format('Do MMM Y') }}</span>
           </q-td>
           </template>
           <template v-slot:body-cell-submitteSATDate="props">
             <q-td :props="props">
-            <span class="label">{{ (props.row.updatedAt).format("Do MMM Y") }}</span>
+            <span class="label">{{ $moment(props.row.updatedAt).format('Do MMM Y') }}</span>
           </q-td>
           </template>
           <template v-slot:body-cell-applicationNumber="props">

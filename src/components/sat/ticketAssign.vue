@@ -40,7 +40,8 @@
                 <q-separator />
                 <q-card-section>
                   <q-item dense>
-                    <q-item-section icon="attach_file" />
+                    <q-item-section>
+                </q-item-section>
                     <q-item-section>{{ formData.fileSelected[0].name }}</q-item-section>
                     <q-item-section></q-item-section>
                   </q-item>

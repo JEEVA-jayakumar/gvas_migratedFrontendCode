@@ -58,7 +58,8 @@
         <q-tab color="dark" name="courier" label="Courier" />
       </q-tabs>
 
-      <q-tab-panels v-model="selectedTab" animated>
+
+          <q-tab-panels v-model="selectedTab" animated>
         <q-tab-panel name="assigned">
           <q-table :rows="tableData" :columns="columnDataAssigned" table-class="customTableClass" :filter="filterSearch" v-model:pagination="paginationControl" selection="multiple"
             v-model:selected="formData.marsDeviceIdsCookedUnAssinged" row-key="id" :loading="tableAjaxLoading"
@@ -97,8 +98,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-
-        <q-tab-panel name="courier">
+<q-tab-panel name="courier">
           <q-table :rows="tableData1" :columns="columnDataUnassigned" table-class="customTableClass"
             :filter="filterSearch" v-model:pagination="paginationControl1" row-key="id"
             :rows-per-page-options="[10, 20, 50, 100, 150, 200]" :loading="tableAjaxLoading1" color="dark"
@@ -136,7 +136,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-      </q-tab-panels>
+          </q-tab-panels>
 
       <DeviceAddressModal v-if="showDeviceAddressModal" :showDeviceAddressModal="showDeviceAddressModal"
         :currentDeviceInfo="currentDeviceInfo" :stateInformation="getAllStatesData"

@@ -136,11 +136,11 @@
         <template v-slot:top>
           <div class="row q-col-gutter-md full-width items-center">
             <div class="col-12 col-md-5">
-              <q-input inverted clearable v-model="filter" color="grey-9" placeholder="Type.."
+              <q-input filled clearable v-model="filter" color="grey-9" placeholder="Type.."
                 label="Search by MID, TID, Merchant Name" />
             </div>
             <div class="col-6 col-md-2">
-              <q-input inverted v-model="formData.fromDate" label="From Date">
+              <q-input filled v-model="formData.fromDate" label="From Date">
                 <template v-slot:append>
                   <q-icon name="event" class="cursor-pointer">
                     <q-menu transition-show="scale" transition-hide="scale">
@@ -151,7 +151,7 @@
               </q-input>
             </div>
             <div class="col-6 col-md-2">
-              <q-input inverted v-model="formData.toDate" label="To Date">
+              <q-input filled v-model="formData.toDate" label="To Date">
                 <template v-slot:append>
                   <q-icon name="event" class="cursor-pointer">
                     <q-menu transition-show="scale" transition-hide="scale">

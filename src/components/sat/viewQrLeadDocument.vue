@@ -11,8 +11,11 @@
               <div class="col-md-12 q-body-1">
                 <q-expansion-item separator indent opened class="full-width">
                   <template slot="header">
-                    <q-item-section icon="apps" />
-                    <q-item-section class="q-body-1" :caption="'FORMS'" />
+                    <q-item-section>
+                </q-item-section>
+                    <q-item-section>
+                  <q-item-label caption>'FORMS'</q-item-label>
+                </q-item-section>
                   </template>
                   <b><label>Agreement Form & Application Form</label></b>
                   <q-item separator class="q-body-1">
@@ -665,7 +668,8 @@
                 <div class="col-md-12 q-body-1">
                   <q-expansion-item separator indent opened class="full-width">
                     <template slot="header">
-                      <q-item-section icon="apps" />
+                      <q-item-section>
+                </q-item-section>
                       <q-item-section
                         class="q-body-1"
                         :caption="

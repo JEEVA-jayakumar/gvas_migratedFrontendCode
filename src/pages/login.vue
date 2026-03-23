@@ -61,16 +61,15 @@ let AesUtil = function (keySize, iterationCount) {
 };
 
 AesUtil.prototype.generateKey = function (salt, passPhrase) {
-  var key = CryptoJS.PBKDF2(passPhrase, CryptoJS.enc.Hex.parse(salt), {
+  var key = CryptoJS.PBKDF2("BijliWeAreMakers", CryptoJS.enc.Hex.parse(salt), {
     keySize: this.keySize,
-    iterations: this.iterationCount,
-    hasher: CryptoJS.algo.SHA1
+    iterations: this.iterationCount
   });
   return key;
 };
 
 AesUtil.prototype.encrypt = function (salt, iv, passPhrase, plainText) {
-  var key = this.generateKey(salt, passPhrase);
+  var key = this.generateKey(salt, "BijliWeAreMakers");
   var encrypted = CryptoJS.AES.encrypt(plainText, key, {
     iv: CryptoJS.enc.Hex.parse(iv)
   });
@@ -117,15 +116,6 @@ export default {
       "FETCH_LOGGEDIN_USER_DATA"
     ]),
 
-    fnNavigate(routeName, fallbackPath) {
-      if (this.$router && typeof this.$router.hasRoute === "function") {
-        if (this.$router.hasRoute(routeName)) {
-          return this.$router.push({ name: routeName });
-        }
-      }
-      return this.$router.push(fallbackPath);
-    },
-
     fuSubmitLoginDetails(request) {
       this.v$.formData.$touch();
       if (this.v$.formData.$error) {
@@ -138,12 +128,7 @@ export default {
           CryptoJS.enc.Hex
         );
         let aesUtil = new AesUtil(128, 1000);
-        let ciphertext = aesUtil.encrypt(
-          salt,
-          iv,
-          "BijliWeAreMakers",
-          this.formData.password
-        );
+        let ciphertext = aesUtil.encrypt(salt, iv, "BijliWeAreMakers", this.formData.password);
         let aesPassword = iv + "::" + salt + "::" + ciphertext;
         let password = btoa(aesPassword);
         let requestParams = {
@@ -176,7 +161,7 @@ export default {
                     message: "Succesfully Logged In",
                     icon: "thumb_up",
                   });
-                  this.fnNavigate("BijlipaySat", "/sat/master/BijlipaySat");
+                  this.$router.push({ name: "BijlipaySat" });
                 } else if (menuArr.includes(this.$ROLE_BIJLIPAY_MANAGER)) {
                   this.$q.notify({
                     color: "positive",
@@ -184,7 +169,7 @@ export default {
                     message: "Succesfully Logged In",
                     icon: "thumb_up",
                   });
-                  this.fnNavigate("adminDashboard", "/super/admin/dashboard");
+                  this.$router.push({ name: "adminDashboard" });
                 } else if (
                   menuArr.includes(this.$ROLE_HIERARCHY_SALES_RSM) ||
                   menuArr.includes(this.$ROLE_HIERARCHY_SALES_ASM) ||
@@ -196,7 +181,7 @@ export default {
                     message: "Succesfully Logged In",
                     icon: "thumb_up",
                   });
-                  this.fnNavigate("leadAllocation", "/sales/manager/lead/allocation/tracker");
+                  this.$router.push({ name: "leadAllocation" });
                 } else if (menuArr.includes(this.$ROLE_HIERARCHY_BANK_OPS)) {
                   this.$q.notify({
                     color: "positive",
@@ -204,7 +189,7 @@ export default {
                     message: "Succesfully Logged In",
                     icon: "thumb_up",
                   });
-                  this.fnNavigate("assignShortLead", "/bank/ops/assign/short/lead");
+                  this.$router.push({ name: "assignShortLead" });
                 } else if (menuArr.includes(this.$ROLE_HIERARCHY_OPERATIONS_HEAD)) {
                   this.$q.notify({
                     color: "positive",
@@ -212,7 +197,7 @@ export default {
                     message: "Succesfully Logged In",
                     icon: "thumb_up",
                   });
-                  this.fnNavigate("exceptions", "/ops/head/exceptions");
+                  this.$router.push({ name: "exceptions" });
                 } else if (
                   menuArr.includes(this.$ROLE_HIERARCHY_FINANCE_HEAD) ||
                   menuArr.includes(this.$ROLE_HIERARCHY_FINANCE_MANAGER) ||
@@ -224,7 +209,7 @@ export default {
                     message: "Succesfully Logged In",
                     icon: "thumb_up",
                   });
-                  this.fnNavigate("paymentVerificationTracker", "/finance/payment/verification/tracker");
+                  this.$router.push({ name: "paymentVerificationTracker" });
                 } else if (menuArr.includes(this.$ROLE_HIERARCHY_INVENTORY_OFFICER)) {
                   this.$q.notify({
                     color: "positive",
@@ -232,7 +217,7 @@ export default {
                     message: "Succesfully Logged In",
                     icon: "thumb_up",
                   });
-                  this.fnNavigate("Bijlipay", "/inventory/master/Bijlipay");
+                  this.$router.push({ name: "Bijlipay" });
                 } else if (menuArr.includes(this.$ROLE_HIERARCHY_KSN)) {
                   this.$q.notify({
                     color: "positive",
@@ -240,7 +225,7 @@ export default {
                     message: "Succesfully Logged In",
                     icon: "thumb_up",
                   });
-                  this.fnNavigate("Ksn", "/inventory/master/Ksn");
+                  this.$router.push({ name: "Ksn" });
                 } else if (menuArr.includes(this.$HIERARCHY_CRM1)) {
                   this.$q.notify({
                     color: "positive",
@@ -248,7 +233,7 @@ export default {
                     message: "Succesfully Logged In",
                     icon: "thumb_up",
                   });
-                  this.fnNavigate("phonepePendingCrm", "/crm/phonepePendingCrm");
+                  this.$router.push({ name: "phonepePendingCrm" });
                 } else {
                   this.$q.notify({
                     type: "warning",

@@ -1,55 +1,52 @@
 <template>
     <q-page>
-      <div class="text-grey-9">
+      <div class="q-pa-md text-grey-9">
         <div class="row bottom-border q-pa-sm items-center">
           <div class="col">
             <q-tabs
-              no-pane-border
               v-model="inventoryOptionSelected"
               color="dark"
               filled
               class="shadow-1"
             >
-            <!-- <q-btn outline no-caps class="text-weight-regular" label="Allocate to SO" to="PhonepeallocateToSo" /> -->
               <q-tab name="Aggregatorspare" label="Spare Parts" />
               <q-tab name="Aggregatorcount" label="Inventory Count" />
               <q-tab name="AggregatorDispatch" label="Disptached Inventory" />
               <q-tab name="AggregatorDamagedDevices" label="Add Damaged Devices" />
-              <!-- <q-tab name="AggregatorAllocateToSo" label="Aggregator Allocate To So" /> -->
               <q-tab name="AggregatorAllocatetoso" label="Allocate to So" />
               <q-tab name="AggregatorInventoryWithSo" label="Inventory With So" />
               <q-tab name="AggregatorAllocateSotoso" label="Allocate SO to SO" />
               <q-tab name="RequestSOList" label="REQUEST" />
-</q-tabs>
-<q-tab-panels v-model="inventoryOptionSelected" animated>
-<q-tab-panel name="Aggregatorspare">
+            </q-tabs>
+
+            <q-tab-panels v-model="inventoryOptionSelected" animated>
+              <q-tab-panel name="Aggregatorspare">
                 <AggregatorsInventoryspareParts/>
               </q-tab-panel>
-<q-tab-panel name="Aggregatorcount">
+              <q-tab-panel name="Aggregatorcount">
                 <AggregatorinventoryCount  />
               </q-tab-panel>
-<q-tab-panel name="AggregatorDispatch">
-                <AggregatorDispatchedInventory
+              <q-tab-panel name="AggregatorDispatch">
+                <AggregatorDispatchedInventory />
+              </q-tab-panel>
+              <q-tab-panel name="AggregatorDamagedDevices">
+                <AggregatorshowAddDamagedDevices
+                  :propDeviceTypes="getAllRegionalInventoryDeviceDetailsWithCount"
                 />
               </q-tab-panel>
-<q-tab-panel name="AggregatorDamagedDevices">
-              <AggregatorshowAddDamagedDevices
-                :propDeviceTypes="getAllRegionalInventoryDeviceDetailsWithCount"
-              />
-            </q-tab-panel>
-<q-tab-panel name="AggregatorAllocatetoso">
+              <q-tab-panel name="AggregatorAllocatetoso">
                 <AggregatorInventoryallocatetoso />
               </q-tab-panel>
-<q-tab-panel name="AggregatorAllocateSotoso">
+              <q-tab-panel name="AggregatorAllocateSotoso">
                 <AggregatorSOtoso />
               </q-tab-panel>
-<q-tab-panel name="AggregatorInventoryWithSo">
+              <q-tab-panel name="AggregatorInventoryWithSo">
                   <AggregatorInventoryWithSo />
               </q-tab-panel>
-<q-tab-panel name="RequestSOList">
+              <q-tab-panel name="RequestSOList">
                 <AggregatorSODeviceReassigned />
               </q-tab-panel>
-</q-tab-panels>
+            </q-tab-panels>
           </div>
         </div>
       </div>
@@ -61,7 +58,6 @@
   import AggregatorinventoryCount from "../../components/sat/AggregatorInventory/AggregatorinventoryCount.vue";
   import AggregatorDispatchedInventory from "../../components/sat/AggregatorInventory/AggregatorDispatchedInventory.vue";
   import AggregatorshowAddDamagedDevices from "../../components/sat/AggregatorshowAddDamagedDevices.vue";
-  // import AggregatorAllocateToSo from "../../pages/inventory/PhonepeallocateToSo.vue";
   import AggregatorInventoryallocatetoso from "../../pages/sat/AggregatorInventoryallocatetoso.vue";
   import AggregatorSOtoso from "../../pages/sat/AggregatorSOtoso.vue";
   import AggregatorInventoryWithSo from "../../pages/sat/AggregatorInventoryWithSo.vue";
@@ -69,17 +65,16 @@
   
   import { mapGetters, mapActions } from "vuex";
   export default {
-    name: "inventoryAllocation",
+    name: "AggregatorInventory",
   
     components: {
       AggregatorsInventoryspareParts,
-        AggregatorinventoryCount,
-    AggregatorDispatchedInventory,
-    AggregatorshowAddDamagedDevices,
-    AggregatorSOtoso,
-    AggregatorSODeviceReassigned,
-    // AggregatorAllocateToSo
-    AggregatorInventoryWithSo,
+      AggregatorinventoryCount,
+      AggregatorDispatchedInventory,
+      AggregatorshowAddDamagedDevices,
+      AggregatorSOtoso,
+      AggregatorSODeviceReassigned,
+      AggregatorInventoryWithSo,
       AggregatorInventoryallocatetoso,
     },
   

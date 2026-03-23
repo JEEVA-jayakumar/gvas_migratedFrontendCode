@@ -36,7 +36,8 @@
               <!-- -->
               <!-- -->
 </q-tabs>
-<q-tab-panels v-model="inventoryOptionSelected" animated>
+
+          <q-tab-panels v-model="inventoryOptionSelected" animated>
 <q-tab-panel name="spare">
                 <spareParts
                   @emittedForTotalSerialNumbers="
@@ -101,7 +102,7 @@
 <q-tab-panel name="deviceAllocationRequest">
                 <deviceAllocationRequest />
               </q-tab-panel>
-</q-tab-panels>
+          </q-tab-panels>
           </div>
         </div>
       </div>

@@ -54,99 +54,78 @@
                 <q-tab color="dark" name="unAssigned" label="Unassigned" />
                 <q-tab color="dark" name="assigned" label="Assigned" />
                 <q-tab color="dark" name="opened" label="Opened" />
-                <q-tab color="dark" name="closed" label="Closed" /> -->
-</q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="opened">
-              <opened/>
+                <q-tab color="dark" name="closed" label="Closed" />
+            </q-tabs>
+
+          <q-tab-panels v-model="selectedTab" animated>
+            <q-tab-panel name="opened">
+              <div>Opened content here</div>
             </q-tab-panel>
-<q-tab-panel name="unAssigned">
+            <q-tab-panel name="unAssigned">
                     <q-table :rows="internalUnAssignedTableData" :columns="columnDataUnassigned"
                         table-class="customTableClass" :filter="filterSearch1" selection="multiple"
                         :selected="formData.marsDeviceIdsCooked" v-model:pagination="paginationControl1" row-key="id"
                         :loading="tableAjaxLoading1" :rows-per-page-options="[5, 10, 15, 20]" color="dark"
                         @request="ajaxLoadAllLeadInfo1">
                         <template v-slot:body-cell-serviceReqTicketId="props">
-            <q-td :props="props"
-                            class="cursor-pointer" @click="toggleServiceRequest(props.row)">
-
-                            <span class="label text-primary"># {{ props.row.serviceReqTicketId }}</span>
-
-          </q-td>
-          </template>
+                            <q-td :props="props" class="cursor-pointer" @click="toggleServiceRequest(props.row)">
+                                <span class="label text-primary"># {{ props.row.serviceReqTicketId }}</span>
+                            </q-td>
+                        </template>
 
                         <template v-slot:body-cell-createdDate="props">
-            <q-td :props="props">
-            {{ $moment(props.row.createdDate).format("Do MMM Y") }}
-          </q-td>
-          </template>
+                            <q-td :props="props">
+                                {{ $moment(props.row.createdDate).format("Do MMM Y") }}
+                            </q-td>
+                        </template>
                         <template v-slot:body-cell-updatedDate="props">
-            <q-td :props="props">
-            {{ $moment(props.row.updatedDate).format("Do MMM Y") }}
-          </q-td>
-          </template>
+                            <q-td :props="props">
+                                {{ $moment(props.row.updatedDate).format("Do MMM Y") }}
+                            </q-td>
+                        </template>
                         <template v-slot:body-cell-serviceRequestSubTicketStatus="props">
-            <q-td :props="props">
-
-                            <span class="label text-positive"
-                                v-if="props.row.serviceRequestSubTicketStatus == 1">SR_TICKET_RAISED</span>
-                            <span class="label text-positive"
-                                v-else-if="props.row.serviceRequestSubTicketStatus == 2">SR_TICKET_ESCALATED_TO_SAT</span>
-                            <span class="label text-positive"
-                                v-else-if="props.row.serviceRequestSubTicketStatus == 3">SR_ASSIGNED_TO_ENGINEER</span>
-                            <span class="label text-positive"
-                                v-else-if="props.row.serviceRequestSubTicketStatus == 4">SR_ISSUE_RESOLVED_COURIERED</span>
-                            <span class="label text-positive"
-                                v-else-if="props.row.serviceRequestSubTicketStatus == 5">SR_DEVICE_COURIERED</span>
-                            <span class="label text-positive"
-                                v-else-if="props.row.serviceRequestSubTicketStatus == 6">SR_ISSUE_RESOLVED_REMOTELY</span>
-                            <span class="label text-positive"
-                                v-else-if="props.row.serviceRequestSubTicketStatus == 7">SR_SCHEDULED_ENGINEER_VISIT</span>
-                            <span class="label text-positive"
-                                v-else-if="props.row.serviceRequestSubTicketStatus == 8">SR_ISSUE_RESOLVED</span>
-                            <span class="label text-positive"
-                                v-else-if="props.row.serviceRequestSubTicketStatus == 9">SR_MERCHANT_NOT_REACHABLE</span>
-                            <span class="label text-negative"
-                                v-else-if="props.row.serviceRequestSubTicketStatus == 10">SR_CANCELLED</span>
-                            <span class="label" v-else>NA</span>
-
-          </q-td>
-          </template>
+                            <q-td :props="props">
+                                <span class="label text-positive" v-if="props.row.serviceRequestSubTicketStatus == 1">SR_TICKET_RAISED</span>
+                                <span class="label text-positive" v-else-if="props.row.serviceRequestSubTicketStatus == 2">SR_TICKET_ESCALATED_TO_SAT</span>
+                                <span class="label text-positive" v-else-if="props.row.serviceRequestSubTicketStatus == 3">SR_ASSIGNED_TO_ENGINEER</span>
+                                <span class="label text-positive" v-else-if="props.row.serviceRequestSubTicketStatus == 4">SR_ISSUE_RESOLVED_COURIERED</span>
+                                <span class="label text-positive" v-else-if="props.row.serviceRequestSubTicketStatus == 5">SR_DEVICE_COURIERED</span>
+                                <span class="label text-positive" v-else-if="props.row.serviceRequestSubTicketStatus == 6">SR_ISSUE_RESOLVED_REMOTELY</span>
+                                <span class="label text-positive" v-else-if="props.row.serviceRequestSubTicketStatus == 7">SR_SCHEDULED_ENGINEER_VISIT</span>
+                                <span class="label text-positive" v-else-if="props.row.serviceRequestSubTicketStatus == 8">SR_ISSUE_RESOLVED</span>
+                                <span class="label text-positive" v-else-if="props.row.serviceRequestSubTicketStatus == 9">SR_MERCHANT_NOT_REACHABLE</span>
+                                <span class="label text-negative" v-else-if="props.row.serviceRequestSubTicketStatus == 10">SR_CANCELLED</span>
+                                <span class="label" v-else>NA</span>
+                            </q-td>
+                        </template>
                         <template v-slot:body-cell-serviceRequestTicketStatus="props">
-            <q-td :props="props">
-
-                            <span class="label text-positive"
-                                v-if="props.row.serviceRequestTicketStatus == 1">REQUEST_UNASSIGNED</span>
-                            <span class="label text-negative"
-                                v-else-if="props.row.serviceRequestTicketStatus == 2">REQUEST_ASSIGNED</span>
-                            <span class="label text-negative"
-                                v-else-if="props.row.serviceRequestTicketStatus == 3">REQUEST_CLOSED</span>
-                            <span class="label" v-else>NA</span>
-
-          </q-td>
-          </template>
+                            <q-td :props="props">
+                                <span class="label text-positive" v-if="props.row.serviceRequestTicketStatus == 1">REQUEST_UNASSIGNED</span>
+                                <span class="label text-negative" v-else-if="props.row.serviceRequestTicketStatus == 2">REQUEST_ASSIGNED</span>
+                                <span class="label text-negative" v-else-if="props.row.serviceRequestTicketStatus == 3">REQUEST_CLOSED</span>
+                                <span class="label" v-else>NA</span>
+                            </q-td>
+                        </template>
                         <template v-slot:body-cell-kaptureDueDate="props">
-            <q-td :props="props">
-            {{ $moment(props.row.kaptureDueDate == null ? "NA" : props.row.kaptureDueDate).format("Do MMM Y") }}
-          </q-td>
-          </template>
+                            <q-td :props="props">
+                                {{ $moment(props.row.kaptureDueDate == null ? "NA" : props.row.kaptureDueDate).format("Do MMM Y") }}
+                            </q-td>
+                        </template>
                         <template v-slot:body-cell-appointmentDate="props">
-            <q-td :props="props">
-            {{ $moment(props.row.appointmentDate == null ? "NA" : props.row.appointmentDate).format("Do MMM Y") }}
-          </q-td>
-          </template>
+                            <q-td :props="props">
+                                {{ $moment(props.row.appointmentDate == null ? "NA" : props.row.appointmentDate).format("Do MMM Y") }}
+                            </q-td>
+                        </template>
                         <template v-slot:body-cell-courierDueDate="props">
-            <q-td :props="props">
-            {{ $moment(props.row.courierDueDate == null ? "NA" : props.row.courierDueDate).format("Do MMM Y") }}
-          </q-td>
-          </template>
+                            <q-td :props="props">
+                                {{ $moment(props.row.courierDueDate == null ? "NA" : props.row.courierDueDate).format("Do MMM Y") }}
+                            </q-td>
+                        </template>
                         <template v-slot:body-cell-scheduleDate="props">
-            <q-td :props="props">
-            {{ props.row.scheduleDate
-                                == null ? "NA" : $moment(props.row.scheduleDate).format("Do MMM Y")
-                        }}
-          </q-td>
-          </template>
+                            <q-td :props="props">
+                                {{ props.row.scheduleDate == null ? "NA" : $moment(props.row.scheduleDate).format("Do MMM Y") }}
+                            </q-td>
+                        </template>
                         <template v-slot:top>
                             <div class="col-md-5">
                                 <q-input clearable color="grey-9" v-model="filterSearch1" placeholder="Type.."
@@ -155,21 +134,20 @@
                         </template>
                     </q-table>
                 </q-tab-panel>
-<q-tab-panel name="assigned">
+                <q-tab-panel name="assigned">
                     <q-table :rows="internalAssignedTableData" :columns="columnDataAssigned"
                         table-class="customTableClass" :filter="filterSearch" v-model:pagination="paginationControl"
                         v-model:selected="formData.marsDeviceIdsCookedUnAssinged" row-key="id" :loading="tableAjaxLoading"
                         :rows-per-page-options="[5, 10, 15, 20]" color="dark" @request="ajaxLoadAllLeadInfo">
 
-                        <!--START: table header -->
-                        <q-tr v-slot:top-row="props">
-                            <q-th auto-width></q-th>
-                            <q-th v-for="col in props.columns" :key="col.name" :props="props">{{ col.label }}</q-th>
-                        </q-tr>
-                        <!--END: table header -->
-                        <!--START: Table body -->
+                        <template v-slot:top-row="props">
+                            <q-tr>
+                                <q-th auto-width></q-th>
+                                <q-th v-for="col in props.columns" :key="col.name" :props="props">{{ col.label }}</q-th>
+                            </q-tr>
+                        </template>
+
                         <template v-slot:body="props">
-                            <!--START: table rows -->
                             <q-tr :props="props" class="bottom-border">
                                 <q-td key="serviceReqTicketId">
                                     <q-checkbox checked-icon="fas fa-chevron-up" unchecked-icon="fas fa-chevron-down"
@@ -180,7 +158,7 @@
                                 <q-td key="tid" :props="props"> {{ props.row.tid }}</q-td>
                                 <q-td key="mid" :props="props">
                                     <span v-if="props.row.mid != null">{{ props.row.mid }}</span>
-                                    <span v-else="props.row.mid == null">NA</span>
+                                    <span v-else>NA</span>
                                 </q-td>
                                 <q-td key="createdDate" :props="props"> {{ $moment(props.row.createdDate).format("Do MMM Y") }}
                                 </q-td>
@@ -191,7 +169,7 @@
                                 <q-td key="assignedTo" :props="props"> {{ props.row.assignedTo.name }} </q-td>
                                 <q-td key="crmRemark" :props="props">
                                     <span v-if="props.row.crmRemark != null" v-html="props.row.crmRemark"></span>
-                                    <span v-else="props.row.crmRemark == null">NA</span>
+                                    <span v-else>NA</span>
                                 </q-td>
                                 <q-td key="deviceType" :props="props"> {{ props.row.deviceType }}</q-td>
 
@@ -428,10 +406,6 @@
                                         </div>
                                     </div>
                                 </q-td>
-
-
-
-
                                 <q-td>
                                     <div class="text-left q-caption text-grey-8 text-weight-medium">Part Type</div>
                                     <div class="text-left" v-if="props.row.subTicketsList.length > 0">
@@ -462,7 +436,7 @@
                         </template>
                     </q-table>
                 </q-tab-panel>
-</q-tab-panels>
+          </q-tab-panels>
             <div class="row items-center gutter-y-sm">
                 <div class="col-md-9 col-sm-12 col-xs-12">
                     <div class="row items-center"></div>
@@ -477,26 +451,14 @@
 </template>
 
 <script>
- import {
-    required,
-    requiredIf,
-    email,
-    minLength,
-    maxLength,
-    alpha,
-    alphaNum,
-    numeric
-} from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 
 
 import internalServiceRequestPopup from "../../components/sat/internalServiceRequestPopup.vue";
 
 export default {
-    name: "implementationQueue",
+    name: "opened",
     components: {
-
-        //   generalLeadInformation,
         internalServiceRequestPopup,
     },
     data() {
@@ -517,17 +479,11 @@ export default {
             internalUnAssignedTableData: [],
             internalAssignedTableData: [],
             internalClosedTableData: [],
-            // internalAssignedTableData
             tableData2: [],
             formData: {
                 serviceRequestMode: "",
-                //   podNumber:"",
             },
             requestOptions: [
-                // {
-                //     label: "Direct Dispatch",
-                //     value: "Direct Dispatch",
-                // },
                 {
                     label: "SO",
                     value: "SO",
@@ -604,90 +560,6 @@ export default {
                     },
                     sortable: false,
                 },
-                // {
-                //     name: "address",
-                //     required: true,
-                //     label: "Address",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.address == null
-                //             ? "NA"
-                //             : row.address;
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "state",
-                //     required: true,
-                //     label: "State",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.state == null
-                //             ? "NA"
-                //             : row.state;
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "city",
-                //     required: true,
-                //     label: "City",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.city == null
-                //             ? "NA"
-                //             : row.city;
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "pincode",
-                //     required: true,
-                //     label: "Pincode",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.pincode == null
-                //             ? "NA"
-                //             : row.pincode;
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "kaptureTicketId",
-                //     required: true,
-                //     label: "KaptureTicketId",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.kaptureTicketId == null
-                //             ? "NA"
-                //             : row.kaptureTicketId;
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "contactNumber",
-                //     required: true,
-                //     label: "ContactNumber",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.contactNumber == null
-                //             ? "NA"
-                //             : row.contactNumber;
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "emailId",
-                //     required: true,
-                //     label: "EmailId",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.emailId == null
-                //             ? "NA"
-                //             : row.emailId;
-                //     },
-                //     sortable: false,
-                // },
                 {
                     name: "bpRegion",
                     required: true,
@@ -712,30 +584,6 @@ export default {
                     },
                     sortable: false,
                 },
-                // {
-                //     name: "serviceReqType",
-                //     required: true,
-                //     label: "ServiceReqType",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.serviceReqType == null
-                //             ? "NA"
-                //             : row.serviceReqType.name;
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "serviceReqIssueType",
-                //     required: true,
-                //     label: "ServiceReqIssueType",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.serviceReqIssueType == null
-                //             ? "NA"
-                //             : row.serviceReqIssueType;
-                //     },
-                //     sortable: false,
-                // },
                 {
                     name: "crmRemark",
                     required: true,
@@ -770,30 +618,6 @@ export default {
                     },
                     sortable: false,
                 },
-                // {
-                //     name: "kaptureTicketStatus",
-                //     required: true,
-                //     label: "KaptureTicketStatus",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.kaptureTicketStatus == null
-                //             ? "NA"
-                //             : row.kaptureTicketStatus;
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "source",
-                //     required: true,
-                //     label: "Source",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.source == true
-                //             ? "Internal"
-                //             : "External";
-                //     },
-                //     sortable: false,
-                // },
                 {
                     name: "serviceRequestMode",
                     required: true,
@@ -806,70 +630,6 @@ export default {
                     },
                     sortable: false,
                 },
-                // {
-                //     name: "kaptureDueDate",
-                //     required: true,
-                //     label: "KaptureDueDate",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.kaptureDueDate
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "appointmentDate",
-                //     required: true,
-                //     label: "AppointmentDate",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.appointmentDate
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "courierDueDate",
-                //     required: true,
-                //     label: "CourierDueDate",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.courierDueDate
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "scheduleDate",
-                //     required: true,
-                //     label: "ScheduleDate",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.scheduleDate
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "seName",
-                //     required: true,
-                //     label: "SE Name",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.seName == null
-                //             ? "NA"
-                //             : row.seName;
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "sePhoneNumber",
-                //     required: true,
-                //     label: "SE PhoneNumber",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.sePhoneNumber == null
-                //             ? "NA"
-                //             : row.sePhoneNumber;
-                //     },
-                //     sortable: false,
-                // },
                 {
                     name: "serviceRequestTicketStatus",
                     required: true,
@@ -880,18 +640,6 @@ export default {
                     },
                     sortable: false,
                 },
-                // {
-                //     name: "podNumber",
-                //     required: true,
-                //     label: "podNumber",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.podNumber == null
-                //             ? "NA"
-                //             : row.podNumber;
-                //     },
-                //     sortable: false,
-                // },
             ],
 
             columnDataUnassigned: [
@@ -906,14 +654,6 @@ export default {
                     },
                     sortable: false
                 },
-                //     field: (row) => {
-                //         return row.serviceReqTicketId == null
-                //             ? "NA"
-                //             : row.serviceReqTicketId;
-                //     },
-                //     sortable: false,
-                // },
-
                 {
                     name: "tid",
                     required: true,
@@ -971,90 +711,6 @@ export default {
                     },
                     sortable: false,
                 },
-                // {
-                //     name: "address",
-                //     required: true,
-                //     label: "Address",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.address == null
-                //             ? "NA"
-                //             : row.address;
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "state",
-                //     required: true,
-                //     label: "State",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.state == null
-                //             ? "NA"
-                //             : row.state;
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "city",
-                //     required: true,
-                //     label: "City",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.city == null
-                //             ? "NA"
-                //             : row.city;
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "pincode",
-                //     required: true,
-                //     label: "Pincode",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.pincode == null
-                //             ? "NA"
-                //             : row.pincode;
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "kaptureTicketId",
-                //     required: true,
-                //     label: "KaptureTicketId",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.kaptureTicketId == null
-                //             ? "NA"
-                //             : row.kaptureTicketId;
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "contactNumber",
-                //     required: true,
-                //     label: "ContactNumber",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.contactNumber == null
-                //             ? "NA"
-                //             : row.contactNumber;
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "emailId",
-                //     required: true,
-                //     label: "EmailId",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.emailId == null
-                //             ? "NA"
-                //             : row.emailId;
-                //     },
-                //     sortable: false,
-                // },
                 {
                     name: "bpRegion",
                     required: true,
@@ -1079,30 +735,6 @@ export default {
                     },
                     sortable: false,
                 },
-                // {
-                //     name: "serviceReqType",
-                //     required: true,
-                //     label: "ServiceReqType",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.serviceReqType == null
-                //             ? "NA"
-                //             : row.serviceReqType.name;
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "serviceReqIssueType",
-                //     required: true,
-                //     label: "ServiceReqIssueType",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.serviceReqIssueType == null
-                //             ? "NA"
-                //             : row.serviceReqIssueType;
-                //     },
-                //     sortable: false,
-                // },
                 {
                     name: "crmRemark",
                     required: true,
@@ -1137,30 +769,6 @@ export default {
                     },
                     sortable: false,
                 },
-                // {
-                //     name: "kaptureTicketStatus",
-                //     required: true,
-                //     label: "KaptureTicketStatus",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.kaptureTicketStatus == null
-                //             ? "NA"
-                //             : row.kaptureTicketStatus;
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "source",
-                //     required: true,
-                //     label: "Source",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.source == true
-                //             ? "Internal"
-                //             : "External";
-                //     },
-                //     sortable: false,
-                // },
                 {
                     name: "serviceRequestMode",
                     required: true,
@@ -1173,70 +781,6 @@ export default {
                     },
                     sortable: false,
                 },
-                // {
-                //     name: "kaptureDueDate",
-                //     required: true,
-                //     label: "KaptureDueDate",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.kaptureDueDate
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "appointmentDate",
-                //     required: true,
-                //     label: "AppointmentDate",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.appointmentDate
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "courierDueDate",
-                //     required: true,
-                //     label: "CourierDueDate",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.courierDueDate
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "scheduleDate",
-                //     required: true,
-                //     label: "ScheduleDate",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.scheduleDate
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "seName",
-                //     required: true,
-                //     label: "SE Name",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.seName == null
-                //             ? "NA"
-                //             : row.seName;
-                //     },
-                //     sortable: false,
-                // },
-                // {
-                //     name: "sePhoneNumber",
-                //     required: true,
-                //     label: "SE PhoneNumber",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.sePhoneNumber == null
-                //             ? "NA"
-                //             : row.sePhoneNumber;
-                //     },
-                //     sortable: false,
-                // },
                 {
                     name: "serviceRequestTicketStatus",
                     required: true,
@@ -1247,25 +791,9 @@ export default {
                     },
                     sortable: false,
                 },
-                // {
-                //     name: "podNumber",
-                //     required: true,
-                //     label: "podNumber",
-                //     align: "left",
-                //     field: (row) => {
-                //         return row.podNumber == null
-                //             ? "NA"
-                //             : row.podNumber;
-                //     },
-                //     sortable: false,
-                // },
             ],
             currentDeviceInfo: {},
             showDeviceAddressModal: false,
-            formData: {
-                serviceRequestMode: "",
-                //   podNumber:"",
-            },
             formData: {
                 marsDeviceIdsCooked: [],
                 marsDeviceIdsCookedUnAssinged: [],
@@ -1274,43 +802,32 @@ export default {
                     id: ""
                 },
                 podNumber: "",
+                serviceRequestMode: "",
             },
             paginationControl: {
-                sortBy: "createdDate", // String, column "name" property value
+                sortBy: "createdDate",
                 descending: false,
                 page: 1,
-                rowsPerPage: 10, // current rows per page being displayed
+                rowsPerPage: 10,
             },
             paginationControl1: {
-                sortBy: "createdDate", // String, column "name" property valuecreated_date
+                sortBy: "createdDate",
                 descending: false,
                 page: 1,
-                rowsPerPage: 10, // current rows per page being displayed
+                rowsPerPage: 10,
             },
             paginationControl2: {
-                sortBy: "createdDate", // String, column "name" property valuecreated_date
+                sortBy: "createdDate",
                 descending: false,
                 page: 1,
-                rowsPerPage: 10, // current rows per page being displayed
+                rowsPerPage: 10,
             },
             tableAjaxLoading: false,
             tableAjaxLoading1: false,
         };
     },
 
-    //   validation:{
-    //       formData:{
-    //           serviceRequestMode:{
-    //               required
-    //           },
-    //       }
-    //   },
-
     computed: {
-        ...mapGetters("DeviceReplacement", [
-            "getDeviceReplacementQueueAssignedList",
-            "getDeviceReplacementQueueUnassignedList",
-        ]),
         ...mapGetters("ImplementationExecutive", [
             "getImplementationExecutiveList",
         ]),
@@ -1342,9 +859,8 @@ export default {
             this.FETCH_ALL_STATES_DATA();
         },
         ajaxLoadAllLeadInfo1({ pagination, filter }) {
-            // we set QTable to "loading" state
             this.$q.loading.show({
-                delay: 0, // ms
+                delay: 0,
                 spinnerColor: "purple-9",
                 message: "Fetching data ..",
             });
@@ -1356,16 +872,11 @@ export default {
                         });
                         this.assignToOptions = assumeArr;
                     });
-                    // updating pagination to reflect in the UI
                     this.paginationControl1 = pagination;
-
-                    // we also set (or update) rowsNumber
                     this.paginationControl1.rowsNumber =
                         this.getserviceRequestUnassignedDatas.totalElements;
                     this.paginationControl1.page =
                         this.getserviceRequestUnassignedDatas.number + 1;
-
-                    // then we update the rows with the fetched ones source
                     this.tableData1 =
                         this.getserviceRequestUnassignedDatas.content;
                     this.internalUnAssignedTableData = this.tableData1.filter(service => service.source == true);
@@ -1375,8 +886,6 @@ export default {
                         this.paginationControl1.descending =
                             this.getserviceRequestUnassignedDatas.sort[0].ascending;
                     }
-
-                    // finally we tell QTable to exit the "loading" state
                     this.$q.loading.hide();
                 })
                 .catch(() => {
@@ -1385,25 +894,18 @@ export default {
         },
         ajaxLoadAllLeadInfo({ pagination, filter }) {
             this.$q.loading.show({
-                delay: 0, // ms
+                delay: 0,
                 spinnerColor: "purple-9",
                 message: "Fetching data ..",
             });
 
             this.FETCH_ASSIGNED_SERVICE_REQUEST_DATAS({ pagination, filter }).then((res) => {
-                    // updating pagination to reflect in the UI
                     this.paginationControl = pagination;
-
-                    // we also set (or update) rowsNumber
                     this.paginationControl.rowsNumber =
                         this.getserviceRequestassignedDatas.totalElements;
                     this.paginationControl.page =
                         this.getserviceRequestassignedDatas.number + 1;
-
-                    // then we update the rows with the fetched ones externalAssignedTableData
-
                     this.tableData = this.getserviceRequestassignedDatas.content;
-
                     this.internalAssignedTableData = this.tableData.filter(service => service.source == true);
                     if (this.getserviceRequestassignedDatas.sort != null) {
                         this.paginationControl.sortBy =
@@ -1411,8 +913,6 @@ export default {
                         this.paginationControl.descending =
                             this.getserviceRequestassignedDatas.sort[0].ascending;
                     }
-
-                    // finally we tell QTable to exit the "loading" state
                     this.$q.loading.hide();
                 })
                 .catch(() => {
@@ -1421,7 +921,6 @@ export default {
         },
 
 
-        //Load all short lead info while page loading
         goToUnassignedTab(tab) {
             if (tab == "unAssigned") {
                 this.ajaxLoadAllLeadInfo({ pagination: this.paginationControl, filter: this.filterSearch });
@@ -1429,71 +928,7 @@ export default {
                 this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl, filter: this.filterSearch });
             }
         },
-        // goToUnassignedTab(tab) {
-        //     if (tab == "unAssigned") {
-        //         let request = {
-        //             pagination: this.paginationControl1,
-        //             filter: this.filterSearch1,
-        //         };
-        //         this.toggleAjaxLoadFilter = true;
-        //         this.FETCH_UNASSIGNED_SERVICE_REQUEST_DATAS(request)
-        //             .then((response) => {
-        //                 this.toggleAjaxLoadFilter = false;
-        //             })
-        //             .catch((error) => {
-        //                 this.toggleAjaxLoadFilter = false;
-        //             });
-        //     }else {
-        //         this.ajaxLoadAllLeadInfo({
-        //             pagination: this.paginationControl,
-        //             filter: this.filterSearch,
-        //         });
-        //     }
-        // },
 
-        // Function to open device address pop up
-        UpdateDeviceAddress(currentDeviceInfo) {
-            this.currentDeviceInfo = [];
-            this.showDeviceAddressModal = !this.showDeviceAddressModal;
-            if (this.formData.marsDeviceIdsCooked.length == 0) {
-                let assumeObj = {
-                    id: [currentDeviceInfo.id],
-                    marsDeviceAddress: {
-                        deviceAddress: currentDeviceInfo.deviceAddress,
-                        latitude: 0,
-                        longitude: 0,
-                        pincode: currentDeviceInfo.pincode,
-                        city: currentDeviceInfo.city,
-                        state: currentDeviceInfo.state,
-                    },
-                };
-                this.currentDeviceInfo = assumeObj;
-            } else {
-                let marsDeviceIdsCooked = [];
-                this.formData.marsDeviceIdsCooked.map(function (value) {
-                    marsDeviceIdsCooked.push(value.id);
-                });
-                let assumeObj = {
-                    id: marsDeviceIdsCooked,
-                    marsDeviceAddress: {
-                        deviceAddress: currentDeviceInfo.deviceAddress,
-                        latitude: 0,
-                        longitude: 0,
-                        pincode: currentDeviceInfo.pincode,
-                        city: currentDeviceInfo.city,
-                        state: currentDeviceInfo.state,
-                    },
-                };
-                this.currentDeviceInfo = assumeObj;
-            }
-        },
-        // Function to open device address pop up
-        UpdateDeviceAddressAfterEmit(pagination) {
-            this.showDeviceAddressModal = !this.showDeviceAddressModal;
-            this.paginationControl = pagination;
-        },
-
-        // Function to assign implementation manager in implementation queue
         assignImplementationUser() {
             let self = this;
             if (self.formData.marsDeviceIdsCooked.length == 0) {
@@ -1511,27 +946,14 @@ export default {
                     icon: "thumb_down",
                 });
             }
-            // else if (self.formData.serviceRequestMode == 'Direct Dispatch' && self.formData.podNumber == null) {
-            //     self.$q.notify({
-            //         color: "negative",
-            //         position: "bottom",
-            //         message: "Pod Number cannot be empty!",
-            //         icon: "thumb_down",
-            //     });
-            // }
             else {
                 let marsDeviceIdsCooked = [];
                 self.formData.marsDeviceIdsCooked.map(function (value) {
-                    // value.podNumber = self.formData.podNumber;
                     value.serviceRequestMode = self.formData.serviceRequestMode;
-                    // value.assignedTo = self.formData.assignTo.id;
                     marsDeviceIdsCooked.push(value);
                 });
-                // marsDeviceIdsCooked.podNumber = marsDeviceIdsCooked.podNumber == null ? null :self.formData.podNumber;
                 let postValues = {
-                    // action: this.$MARS_DEVICE_STATUS_SAT_ASSIGNED,
                     request: marsDeviceIdsCooked,
-                    // triggerWelcomeMail: self.formData.triggerWelcomeMail,
                     userId: self.formData.assignTo.id,
                 };
                 self
@@ -1585,7 +1007,6 @@ export default {
             }
         },
 
-        // Function to unAssignImplementationUser in implementation queue
         unAssignImplementationUser() {
             let self = this;
             if (self.formData.marsDeviceIdsCookedUnAssinged.length == 0) {
@@ -1631,13 +1052,12 @@ export default {
                             color: "negative",
                             position: "bottom",
                             message: "Please try again",
-                            icon: "thumb_down",
+                            icon: "thumb_down"
                         });
                     });
             }
         },
 
-        // Function to unAssignImplementationUser in implementation queue
         reAssignImplementationUser() {
             let self = this;
             if (self.formData.marsDeviceIdsCookedUnAssinged.length == 0) {
@@ -1686,30 +1106,14 @@ export default {
                             color: "negative",
                             position: "bottom",
                             message: "Please try again",
-                            icon: "thumb_down",
+                            icon: "thumb_down"
                         });
                     });
             }
         },
-        expandRowPlease(value) { },
-        onRowClick(evt, row) {
+        expandRowPlease(row) {
+            row.expand = !row.expand;
         },
-
-        // Function to show PDF
-        fnPDFViewModal(documentUrl) {
-            this.PDFDetails = documentUrl;
-            this.toggleshowPDFModal = !this.toggleshowPDFModal;
-        },
-
-        // Function to toggle lead information pop up screen
-        toggleLeadInformation(leadDetails) {
-            this.propToggleLeadInformation = !this.propToggleLeadInformation;
-            if (leadDetails != undefined) {
-                this.addtnLeadInformation = leadDetails;
-            }
-        },
-
-        // Function to toggle Service Request pop up screen
         toggleServiceRequest(leadDetails) {
             this.propToggleServiceRequest = !this.propToggleServiceRequest;
             if (leadDetails != undefined) {
@@ -1726,7 +1130,6 @@ export default {
     word-wrap: break-word;
     white-space: normal;
 }
-
 .customTd.customCellLength {
     min-width: 300px !important;
     overflow-x: auto;

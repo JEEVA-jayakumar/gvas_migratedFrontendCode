@@ -1627,9 +1627,9 @@
                 .uploadedDocuments.forMutipleDocument"
               :key="multipleDocument.id"
             >
-              <q-list-header class="q-mb-sm bg-grey-4">{{
+              <q-item-label header class="q-mb-sm bg-grey-4">{{
                 multipleDocument.documentType
-              }}</q-list-header>
+              }}</q-item-label>
               <div>
                 <q-item separator dense class="q-body-1 q-pa-sm">
                   <q-item-section>
@@ -1682,7 +1682,7 @@
                   </q-item-section>
                 </q-item>
               </div>
-              <q-item-separator />
+              <q-separator />
               <div
                 v-if="displayAttachedFileIndex == multipleDocument.documentType"
                 v-for="(
@@ -1771,7 +1771,7 @@
                       />
                     </q-item-section>
                   </q-item>
-                  <q-item-separator />
+                  <q-separator />
                 </div>
               </div>
             </q-list>

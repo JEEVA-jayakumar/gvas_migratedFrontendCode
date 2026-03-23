@@ -69,13 +69,15 @@
                         label="Add Phonepe Device Recovery Manufacturer">
                         <q-list link>
                             <q-item to="DeviceRecoveryUpload">
-                                <q-item-section icon="search" />
+                                <q-item-section>
+                </q-item-section>
                                 <q-item-section>
                                     <q-item-label label>Scan and Upload</q-item-label>
                                 </q-item-section>
                             </q-item>
                             <q-item @click="fnPhonePeBulkUpload">
-                                <q-item-section icon="attach_file" />
+                                <q-item-section>
+                </q-item-section>
                                 <q-item-section>
                                     <q-item-label label>Bulk upload</q-item-label>
                                 </q-item-section>

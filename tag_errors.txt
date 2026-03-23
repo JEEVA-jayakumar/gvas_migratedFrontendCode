@@ -1,0 +1,1 @@
+-bash: /home/jules/self_created_tools/check_tags.py: Permission denied

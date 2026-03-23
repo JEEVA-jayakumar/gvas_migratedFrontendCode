@@ -38,7 +38,7 @@
             <q-td key="tid" :props="props"> {{ props.row.tid }}</q-td>
             <q-td key="mid" :props="props">
               <span v-if="props.row.mid != null">{{ props.row.mid }}</span>
-              <span v-else="props.row.mid == null">NA</span>
+              <span v-else-if="props.row.mid == null">NA</span>
             </q-td>
             <q-td key="createdDate" :props="props">
               {{ $moment(props.row.createdDate).format("Do MMM Y") }}
@@ -69,7 +69,7 @@
                 v-if="props.row.crmRemark != null"
                 v-html="props.row.crmRemark"
               ></span>
-              <span v-else="props.row.crmRemark == null">NA</span>
+              <span v-else-if="props.row.crmRemark == null">NA</span>
             </q-td>
             <q-td key="deviceType" :props="props">
               {{ props.row.deviceType }}</q-td
@@ -153,6 +153,7 @@
               >
               <span class="label" v-else>NA</span>
             </q-td>
+        </template>
           </q-tr>
           <!-- START: table expand values -->
           <q-tr
@@ -520,7 +521,6 @@
               </div>
             </q-td>
           </q-tr>
-        </template>
         <template v-slot:top>
           <div class="col-md-5">
             <q-input

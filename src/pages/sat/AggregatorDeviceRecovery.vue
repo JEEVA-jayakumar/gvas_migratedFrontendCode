@@ -71,7 +71,8 @@
           <q-tab name="assigned" label="Assigned" />
         </q-tabs>
 
-        <q-tab-panels v-model="selectedTab" animated @update:model-value="goToUnassignedTab">
+
+          <q-tab-panels v-model="selectedTab" animated @update:model-value="goToUnassignedTab">
           <q-tab-panel name="assigned" class="q-pa-none">
             <!--START: table Data -->
             <q-table
@@ -169,7 +170,7 @@
             </q-table>
             <!--END: table Data -->
           </q-tab-panel>
-          <q-tab-panel name="unAssigned" class="q-pa-none">
+<q-tab-panel name="unAssigned" class="q-pa-none">
             <!--START: table Data -->
             <q-table
               :rows="tableData1"
@@ -269,7 +270,7 @@
             </q-table>
             <!--END: table Data -->
           </q-tab-panel>
-        </q-tab-panels>
+          </q-tab-panels>
         <div class="row items-center gutter-y-sm">
           <div class="col-md-9 col-sm-12 col-xs-12">
             <div class="row items-center"></div>

@@ -166,7 +166,8 @@
               <div class="col-md-12 q-body-1">
                 <q-expansion-item separator indent opened class="full-width">
                   <template slot="header">
-                    <q-item-section icon="apps"/>
+                    <q-item-section>
+                </q-item-section>
                     <q-item-section
                       class="q-body-1"
                       :caption="documents.length + 'Type(s)'"

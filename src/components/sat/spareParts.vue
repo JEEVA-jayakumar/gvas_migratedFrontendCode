@@ -37,7 +37,8 @@
         <q-tab color="dark" name="allocatedSo" label="So Pod List" />
         <q-tab color="dark" name="createSoPod" label="Create So Pod" />
 </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
+
+          <q-tab-panels v-model="selectedTab" animated>
 <q-tab-panel name="allocatedSo">
           <allocatedSo />
         </q-tab-panel>
@@ -266,7 +267,7 @@
             </div>
           </template>
         </q-tab-panel>
-</q-tab-panels>
+          </q-tab-panels>
        
 
        <!-- START REJECT fnRejectPodDetails-->

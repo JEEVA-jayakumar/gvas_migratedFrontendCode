@@ -25,6 +25,7 @@ export default boot(({ app, router }) => {
     }
     config.headers["Accept"] = "application/json, text/plain, */*";
     config.headers["X-Requested-With"] = "XMLHttpRequest";
+    config.headers["X-Frame-Options"] = "SAMEORIGIN";
 
     if (
       !config.url.includes("authorization/login") &&

@@ -56,7 +56,7 @@
         </template>
         <template v-slot:body-cell-deviceStatusDate="props">
           <q-td :props="props">
-          <span class="label">{{ (props.row.deviceStatusDate).format("Do MMM Y") }}</span>
+          <span class="label">{{ $moment(props.row.deviceStatusDate).format('Do MMM Y') }}</span>
         </q-td>
         </template>
         <template v-slot:body-cell-viewDocument="props">

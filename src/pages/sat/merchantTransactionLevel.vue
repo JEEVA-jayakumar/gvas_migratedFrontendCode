@@ -65,14 +65,14 @@
             </div>
             <div class="col-3">
               <q-input filled v-model="filter_values" label="Date" color="grey-9">
-            <template v-slot:append>
-              <q-icon name="event" class="cursor-pointer">
-                <q-menu transition-show="scale" transition-hide="scale">
-                  <q-date v-model="filter_values" mask="YYYY-MM-DD" />
-                </q-menu>
-              </q-icon>
-            </template>
-          </q-input>
+                <template v-slot:append>
+                  <q-icon name="event" class="cursor-pointer">
+                    <q-menu transition-show="scale" transition-hide="scale">
+                      <q-date v-model="filter_values" mask="YYYY-MM-DD" />
+                    </q-menu>
+                  </q-icon>
+                </template>
+              </q-input>
             </div>
             <div class="col-md-4">
                 <downloadExcel

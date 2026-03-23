@@ -25,18 +25,6 @@
             }}</span
             >/ selected
           </div>
-          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo.id"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-          </div> -->
           &nbsp;&nbsp;
           <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
             <q-select
@@ -91,6 +79,7 @@
         />
         <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
       </q-tabs>
+
 
       <q-tab-panels v-model="selectedTab" animated @update:model-value="goToUnassignedTab">
         <q-tab-panel name="assigned" class="q-pa-none">
@@ -177,7 +166,6 @@
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-
         <q-tab-panel name="unAssigned" class="q-pa-none">
           <!--START: table Data -->
           <q-table
@@ -319,7 +307,6 @@
           </q-table>
           <!--END: table Data -->
         </q-tab-panel>
-
         <q-tab-panel name="Ticket" class="q-pa-none">
           <ticketAssign />
         </q-tab-panel>
@@ -354,10 +341,6 @@
         :propRowDetails="propRowDetails"
         @emitfnshowUpdateOpenedExternal="fnCrmLogsView"
       ></crmLogsView>
-      <!-- </q-card> -->
-      <!--END: table Footer -->
-      <!-- START >> COMPONENT: Update device address  -->
-      <!-- END >> COMPONENT: Update device address -->
     </div>
   </q-page>
 </template>
@@ -370,7 +353,7 @@ import contactDetailsPopup from "../../components/sat/contactDetailsPopup.vue";
 import crmLogsView from "../../components/sat/crmLogsView.vue";
 import ticketAssign from 'src/components/sat/ticketAssign.vue';
 export default {
-  name: "implementationQueue",
+  name: "externalserviceRequest",
   components: {
     pickTicketpopup,
     reassignTicketPopup,
@@ -382,7 +365,7 @@ export default {
     return {
       propToggleLeadInformation: false,
       addtnLeadInformation: null,
-
+      propRowDetails: {},
       filterSearch: "",
       filterSearch1: "",
       propShowUpdatePickTicket: false,
@@ -570,16 +553,16 @@ export default {
       
       },
       paginationControl: {
-        sortBy: "createdDate", // String, column "name" property value
+        sortBy: "createdDate",
         descending: false,
         page: 1,
-        rowsPerPage: 10 // current rows per page being displayed
+        rowsPerPage: 10
       },
       paginationControl1: {
-        sortBy: "createdDate", // String, column "name" property value
+        sortBy: "createdDate",
         descending: false,
         page: 1,
-        rowsPerPage: 10 // current rows per page being displayed
+        rowsPerPage: 10
       },
       tableAjaxLoading: false,
       tableAjaxLoading1: false
@@ -643,7 +626,6 @@ export default {
         pagination: this.paginationControl1,
         filter: this.filterSearch1
       });
-      // eslint-disable-next-line eqeqeq
       if (rowDetails != undefined) {
         this.propRowDetails = rowDetails;
       }
@@ -654,7 +636,6 @@ export default {
         pagination: this.paginationControl1,
         filter: this.filterSearch1
       });
-      // eslint-disable-next-line eqeqeq
       if (rowDetails != undefined) {
         this.propRowDetails = rowDetails;
       }
@@ -677,21 +658,9 @@ export default {
           icon: "thumb_down"
         });
       } 
-      // else if (
-      //   self.formData.serviceRequestMode == "Direct Dispatch" &&
-      //   self.formData.podNumber == null
-      // ) {
-      //   self.$q.notify({
-      //     color: "negative",
-      //     position: "bottom",
-      //     message: "Pod Number cannot be empty!",
-      //     icon: "thumb_down"
-      //   });
-      // } 
- 
       else if(self.formData.assignTo.region != null && (self.formData.assignTo.id == null || self.formData.assignTo.id == '')){
            this.$q.loading.show({
-          delay: 100, // ms
+          delay: 100,
           spinnerColor: "purple-9",
           message: "Please wait.."
         });
@@ -760,82 +729,6 @@ export default {
           icon: "thumb_down"
         });
       }
-        // else {
-        // this.$q.loading.show({
-        //   delay: 100, // ms
-        //   spinnerColor: "purple-9",
-        //   message: "Please wait.."
-        // });
-        // let marsDeviceIdsCooked = [];
-        // self.formData.marsDeviceIdsCooked.map(function(value) {
-        //   value.podNumber = self.formData.podNumber;
-        //   value.serviceRequestMode = self.formData.serviceRequestMode;
-        //   // value.assignedTo = self.formData.assignTo.id;
-        //   marsDeviceIdsCooked.push(value);
-        // });
-        // let postValues = {
-        //   // action: this.$MARS_DEVICE_STATUS_SAT_ASSIGNED,
-        //   request: marsDeviceIdsCooked,
-        //   // triggerWelcomeMail: self.formData.triggerWelcomeMail,
-        //   userId: self.formData.assignTo.id
-        // };
-        // self
-        //   .PHONEPE_SERVICE_REQUEST_UNASSIGED_TO_ASSIGNED_STATE(postValues)
-        //   .then(res => {
-        //     if (res.status == 200 && res.data.data.serviceRequest != null) {
-        //       this.formData.marsDeviceIdsCooked = [];
-        //       this.formData.assignTo = "";
-        //       this.$q.notify({
-        //         color: "positive",
-        //         position: "bottom",
-        //         message: "Successfully assigned!",
-        //         icon: "thumb_up"
-        //       });
-        //       this.$q.loading.hide();
-        //       this.ajaxLoadAllLeadInfo1({
-        //         pagination: this.paginationControl,
-        //         filter: this.filterSearch
-        //       });
-        //     } else if (res.status == 200 && res.data.data.Success != null) {
-        //       this.formData.marsDeviceIdsCooked = [];
-        //       this.formData.assignTo = "";
-        //       this.$q.notify({
-        //         color: "positive",
-        //         position: "bottom",
-        //         message: "Successfully assigned!",
-        //         icon: "thumb_up"
-        //       });
-        //       this.$q.loading.hide();
-        //       this.ajaxLoadAllLeadInfo1({
-        //         pagination: this.paginationControl,
-        //         filter: this.filterSearch
-        //       });
-        //     } else if (res.status == 200 && res.data.data.Failed != null) {
-        //       this.$router.push({
-        //         name: "externalServiceAddressFetch",
-        //         params: { data: res }
-        //       });
-        //     } else {
-        //       self.$q.notify({
-        //         color: "negative",
-        //         position: "bottom",
-        //         message: "INTERNAL SERVER ERROR !!",
-        //         icon: "thumb_down"
-        //       });
-        //       this.$q.loading.hide();
-        //     }
-        //   })
-
-        //   .catch(() => {
-        //     self.$q.notify({
-        //       color: "negative",
-        //       position: "bottom",
-        //       message: "Please try again",
-        //       icon: "thumb_down"
-        //     });
-        //     this.$q.loading.hide();
-        //   });
-      // }
     },
 
 
@@ -875,7 +768,6 @@ export default {
         pagination: this.paginationControl1,
         filter: this.filterSearch1
       });
-      // eslint-disable-next-line eqeqeq
       if (rowDetails != undefined) {
         this.propRowDetails = rowDetails;
       }
@@ -893,22 +785,16 @@ export default {
       });
     },
     ajaxLoadAllLeadInfo1({ pagination, filter }) {
-      // we set QTable to "loading" state
       this.$q.loading.show({
-        delay: 0, // ms
+        delay: 0,
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
       this.FETCH_PHONEPE_OPENED_TICKETS({ pagination, filter }).then(res => {
-          // updating pagination to reflect in the UI
           this.paginationControl1 = pagination;
-
-          // we also set (or update) rowsNumber
           this.paginationControl1.rowsNumber = this.getphonepeOpenedTickets.totalElements;
           this.paginationControl1.page =
             this.getphonepeOpenedTickets.number + 1;
-
-          // then we update the rows with the fetched ones
           this.tableData1 = this.getphonepeOpenedTickets.content;
           this.externalClosedTableData = this.tableData1.filter(
             service => service.source == true
@@ -917,8 +803,6 @@ export default {
             this.paginationControl1.sortBy = this.getphonepeOpenedTickets.sort[0].property;
             this.paginationControl1.descending = this.getphonepeOpenedTickets.sort[0].ascending;
           }
-
-          // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
         })
         .catch(() => {
@@ -927,22 +811,16 @@ export default {
     },
 
     ajaxLoadAllLeadInfo({ pagination, filter }) {
-      // we set QTable to "loading" state
       this.$q.loading.show({
-        delay: 0, // ms
+        delay: 0,
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
       this.FETCH_PHONEPE_RESOLVED_TICKET({ pagination, filter }).then(res => {
-          // updating pagination to reflect in the UI
           this.paginationControl = pagination;
-
-          // we also set (or update) rowsNumber
           this.paginationControl.rowsNumber = this.getphonepeResolvedTickets.totalElements;
           this.paginationControl.page =
             this.getphonepeResolvedTickets.number + 1;
-
-          // then we update the rows with the fetched ones
           this.tableData = this.getphonepeResolvedTickets.content;
           this.externalClosedTableData = this.tableData.filter(
             service => service.source == true
@@ -951,8 +829,6 @@ export default {
             this.paginationControl.sortBy = this.getphonepeResolvedTickets.sort[0].property;
             this.paginationControl.descending = this.getphonepeResolvedTickets.sort[0].ascending;
           }
-
-          // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
         })
         .catch(() => {
@@ -960,7 +836,6 @@ export default {
         });
     },
 
-    //Load all short lead info while page loading
     goToUnassignedTab(tab) {
       if (tab == "unAssigned") {
         this.ajaxLoadAllLeadInfo1({
@@ -975,7 +850,6 @@ export default {
       }
     },
 
-    // Function to open device address pop up
     UpdateDeviceAddress(currentDeviceInfo) {
       this.currentDeviceInfo = [];
       this.showDeviceAddressModal = !this.showDeviceAddressModal;
@@ -1011,75 +885,11 @@ export default {
         this.currentDeviceInfo = assumeObj;
       }
     },
-    // Function to open device address pop up
     UpdateDeviceAddressAfterEmit(pagination) {
       this.showDeviceAddressModal = !this.showDeviceAddressModal;
       this.paginationControl = pagination;
     },
 
-    // Function to assign implementation manager in implementation queue
-    // assignImplementationUser() {
-    //   let self = this;
-    //   if (self.formData.marsDeviceIdsCooked.length == 0) {
-    //     self.$q.notify({
-    //       color: "negative",
-    //       position: "bottom",
-    //       message: "Select atleast one item to assign",
-    //       icon: "thumb_down"
-    //     });
-    //   } else if (self.formData.assignTo == "") {
-    //     self.$q.notify({
-    //       color: "negative",
-    //       position: "bottom",
-    //       message: "Implementation officer cannot be empty!",
-    //       icon: "thumb_down"
-    //     });
-    //   } else {
-    //     let marsDeviceIdsCooked = [];
-    //     self.formData.marsDeviceIdsCooked.map(function(value) {
-    //       marsDeviceIdsCooked.push(value.id);
-    //     });
-
-    //     let postValues = {
-    //       // action: this.$MARS_DEVICE_STATUS_SAT_ASSIGNED,
-    //       marsDeviceIds: marsDeviceIdsCooked,
-    //       // triggerWelcomeMail: self.formData.triggerWelcomeMail,
-    //       userId: self.formData.assignTo
-    //     };
-    //     self
-    //       .DEVICE_RECOVERY_SUBMIT(postValues)
-    //       .then(() => {
-    //         // self.DEVICE_RECOVERY_UNASSIGNED_LIST();
-    //         // self.ajaxLoadAllLeadInfo();
-    //         this.ajaxLoadAllLeadInfo({
-    //           pagination: this.paginationControl,
-    //           filter: this.filterSearch
-    //         });
-    //         this.ajaxLoadAllLeadInfo1({
-    //           pagination: this.paginationControl1,
-    //           filter: this.filterSearch1
-    //         });
-    //         self.formData.marsDeviceIdsCooked = [];
-    //         self.formData.assignTo = "";
-    //         self.$q.notify({
-    //           color: "positive",
-    //           position: "bottom",
-    //           message: "Successfully assigned!",
-    //           icon: "thumb_up"
-    //         });
-    //       })
-    //       .catch(() => {
-    //         self.$q.notify({
-    //           color: "negative",
-    //           position: "bottom",
-    //           message: "Please try again",
-    //           icon: "thumb_down"
-    //         });
-    //       });
-    //   }
-    // },
-
-    // Function to unAssignImplementationUser in implementation queue
     unAssignImplementationUser() {
       let self = this;
       if (self.formData.marsDeviceIdsCookedUnAssinged.length == 0) {
@@ -1103,8 +913,6 @@ export default {
         self
           .DEVICE_RECOVERY_SUBMIT(postValues)
           .then(() => {
-            // self.DEVICE_RECOVERY_UNASSIGNED_LIST();
-            // self.ajaxLoadAllLeadInfo();
             this.ajaxLoadAllLeadInfo({
               pagination: this.paginationControl,
               filter: this.filterSearch
@@ -1129,7 +937,6 @@ export default {
       }
     },
 
-    // Function to unAssignImplementationUser in implementation queue
     reAssignImplementationUser() {
       let self = this;
       if (self.formData.marsDeviceIdsCookedUnAssinged.length == 0) {
@@ -1184,44 +991,26 @@ export default {
     },
 
     getHoursAgo(dateInMilliseconds) {
-      // Get the current date and time in milliseconds
       const currentTime = Date.now();
-
-      // Calculate the difference in milliseconds
       const differenceInMilliseconds = currentTime - dateInMilliseconds;
-
-      // Convert milliseconds to hours
       const hoursAgo = differenceInMilliseconds / (1000 * 60 * 60);
-
-      return 72 - Math.floor(hoursAgo); // Round down to the nearest whole hour
-
-      console.log(72 - getHoursAgo(dateInMilliseconds));
+      return 72 - Math.floor(hoursAgo);
     },
 
     getHoursAgoColor(dateInMilliseconds) {
       const currentTime = Date.now();
-
-      // Calculate the difference in milliseconds
       const differenceInMilliseconds = currentTime - dateInMilliseconds;
-
-      // Convert milliseconds to hours
       const hoursAgo = differenceInMilliseconds / (1000 * 60 * 60);
-
       const colorData = 72 - Math.floor(hoursAgo);
-
-      // Round down to the nearest whole hour
       if (colorData > 0) {
-        console.log("COOR DATA>>", colorData);
         return "color: green; font-weight: bold;";
       } else if (colorData < 0) {
-        console.log("COOR DATA<<<", colorData);
         return "color: red; font-weight: bold;";
       } else {
         return "color: gray; font-weight: normal;";
       }
     },
 
-    // Function to toggle lead information pop up screen
     toggleLeadInformation(leadDetails) {
       this.propToggleLeadInformation = !this.propToggleLeadInformation;
       if (leadDetails != undefined) {

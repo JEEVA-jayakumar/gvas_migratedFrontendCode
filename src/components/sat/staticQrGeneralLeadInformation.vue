@@ -31,60 +31,111 @@
                   :caption="propLeadInformation.leadSource.sourceName" />
               </q-item>
               <q-item multiline>
-                <q-item-section label="Contact Name" :caption="propLeadInformation.contactName" />
+                <q-item-section>
+                  <q-item-label>Contact Name</q-item-label>
+                  <q-item-label caption>propLeadInformation.contactName</q-item-label>
+                </q-item-section>
               </q-item>
               <q-item multiline>
-                <q-item-section label="Contact Number" :caption="propLeadInformation.contactNumber" />
+                <q-item-section>
+                  <q-item-label>Contact Number</q-item-label>
+                  <q-item-label caption>propLeadInformation.contactNumber</q-item-label>
+                </q-item-section>
               </q-item>
 
               <q-item multiline>
-                <q-item-section label="Contact Email" :caption="propLeadInformation.contactEmail || 'NA'" />
+                <q-item-section>
+                  <q-item-label>Contact Email</q-item-label>
+                  <q-item-label caption>propLeadInformation.contactEmail || 'NA'</q-item-label>
+                </q-item-section>
               </q-item>
               <q-item multiline>
                 <q-item-section label="Bank Name"
                   :caption="propLeadInformation.bankName == null ? 'NA' : propLeadInformation.bankName" />
               </q-item>
               <q-item multiline>
-                <q-item-section label="QR Lead Number" :caption="propLeadInformation.qrLeadNumber == null ? 'NA' : propLeadInformation.qrLeadNumber" />
+                <q-item-section>
+                  <q-item-label>QR Lead Number</q-item-label>
+                  <q-item-label caption>propLeadInformation.qrLeadNumber == null ? 'NA' : propLeadInformation.qrLeadNumber</q-item-label>
+                </q-item-section>
               </q-item>
               <q-item multiline>
-                <q-item-section label="Merchant Industry" :caption="propLeadInformation.merchantIndustry == null ? 'NA' : propLeadInformation.merchantIndustry.industryName" />
+                <q-item-section>
+                  <q-item-label>Merchant Industry</q-item-label>
+                  <q-item-label caption>propLeadInformation.merchantIndustry == null ? 'NA' : propLeadInformation.merchantIndustry.industryName</q-item-label>
+                </q-item-section>
               </q-item>
               <q-item multiline>
-                <q-item-section label="Plan" :caption="propLeadInformation.plan == null ? 'NA' : propLeadInformation.plan.planName" />
+                <q-item-section>
+                  <q-item-label>Plan</q-item-label>
+                  <q-item-label caption>propLeadInformation.plan == null ? 'NA' : propLeadInformation.plan.planName</q-item-label>
+                </q-item-section>
               </q-item>
               <q-item multiline>
-                <q-item-section label="SetUp Fees" :caption="propLeadInformation.setupFees == null ? 'NA' : propLeadInformation.setupFees" />
+                <q-item-section>
+                  <q-item-label>SetUp Fees</q-item-label>
+                  <q-item-label caption>propLeadInformation.setupFees == null ? 'NA' : propLeadInformation.setupFees</q-item-label>
+                </q-item-section>
               </q-item>
               <q-item multiline>
-                <q-item-section label="Recurring Fees" :caption="propLeadInformation.recurringFees == null ? 'NA' : propLeadInformation.recurringFees" />
+                <q-item-section>
+                  <q-item-label>Recurring Fees</q-item-label>
+                  <q-item-label caption>propLeadInformation.recurringFees == null ? 'NA' : propLeadInformation.recurringFees</q-item-label>
+                </q-item-section>
               </q-item>
               <q-item multiline>
-                <q-item-section label="Merchant Type " :caption="propLeadInformation.qrMerchantType == null ? 'NA' : propLeadInformation.qrMerchantType.qrMerchantType" />
+                <q-item-section>
+                  <q-item-label>Merchant Type </q-item-label>
+                  <q-item-label caption>propLeadInformation.qrMerchantType == null ? 'NA' : propLeadInformation.qrMerchantType.qrMerchantType</q-item-label>
+                </q-item-section>
               </q-item>
               <q-item multiline>
-                <q-item-section label="Small Merchant < 2000 % debit Card" :caption="propLeadInformation.smallMerchantLessThanTwoDebit == null ? 'NA' : propLeadInformation.smallMerchantLessThanTwoDebit + '%'" />
+                <q-item-section>
+                  <q-item-label>Small Merchant < 2000 % debit Card</q-item-label>
+                  <q-item-label caption>propLeadInformation.smallMerchantLessThanTwoDebit == null ? 'NA' : propLeadInformation.smallMerchantLessThanTwoDebit + '%'</q-item-label>
+                </q-item-section>
               </q-item>
               <q-item multiline>
-                <q-item-section label="Small Merchant > 2000 % debit Card " :caption="propLeadInformation.smallMerchantGreaterThanTwoDebit == null ? 'NA' : propLeadInformation.smallMerchantGreaterThanTwoDebit + '%'" />
+                <q-item-section>
+                  <q-item-label>Small Merchant > 2000 % debit Card </q-item-label>
+                  <q-item-label caption>propLeadInformation.smallMerchantGreaterThanTwoDebit == null ? 'NA' : propLeadInformation.smallMerchantGreaterThanTwoDebit + '%'</q-item-label>
+                </q-item-section>
               </q-item>
               <q-item multiline>
-                <q-item-section label="Small Merchant < 2000 % credit and prepaid card" :caption="propLeadInformation.smallMerchantLessThanTwoCreditAndPrepaid == null ? 'NA' : propLeadInformation.smallMerchantLessThanTwoCreditAndPrepaid + '%'" />
+                <q-item-section>
+                  <q-item-label>Small Merchant < 2000 % credit and prepaid card</q-item-label>
+                  <q-item-label caption>propLeadInformation.smallMerchantLessThanTwoCreditAndPrepaid == null ? 'NA' : propLeadInformation.smallMerchantLessThanTwoCreditAndPrepaid + '%'</q-item-label>
+                </q-item-section>
               </q-item>
               <q-item multiline>
-                <q-item-section label="Small Merchant > 2000 % credit and prepaid card" :caption="propLeadInformation.smallMerchantGreaterThanTwoCreditAndPrepaid == null ? 'NA' : propLeadInformation.smallMerchantGreaterThanTwoCreditAndPrepaid + '%'" />
+                <q-item-section>
+                  <q-item-label>Small Merchant > 2000 % credit and prepaid card</q-item-label>
+                  <q-item-label caption>propLeadInformation.smallMerchantGreaterThanTwoCreditAndPrepaid == null ? 'NA' : propLeadInformation.smallMerchantGreaterThanTwoCreditAndPrepaid + '%'</q-item-label>
+                </q-item-section>
               </q-item>
               <q-item multiline>
-                <q-item-section label="Large Merchant < 2000 % debit Card" :caption="propLeadInformation.largeMerchantLessThanTwoDebit == null ? 'NA' : propLeadInformation.largeMerchantLessThanTwoDebit + '%'" />
+                <q-item-section>
+                  <q-item-label>Large Merchant < 2000 % debit Card</q-item-label>
+                  <q-item-label caption>propLeadInformation.largeMerchantLessThanTwoDebit == null ? 'NA' : propLeadInformation.largeMerchantLessThanTwoDebit + '%'</q-item-label>
+                </q-item-section>
               </q-item>
               <q-item multiline>
-                <q-item-section label="Large Merchant > 2000 % debit Card" :caption="propLeadInformation.largeMerchantGreaterThanTwoDebit == null ? 'NA' : propLeadInformation.largeMerchantGreaterThanTwoDebit + '%'" />
+                <q-item-section>
+                  <q-item-label>Large Merchant > 2000 % debit Card</q-item-label>
+                  <q-item-label caption>propLeadInformation.largeMerchantGreaterThanTwoDebit == null ? 'NA' : propLeadInformation.largeMerchantGreaterThanTwoDebit + '%'</q-item-label>
+                </q-item-section>
               </q-item>
               <q-item multiline>
-                <q-item-section label="Large Merchant < 2000 % credit and prepaid card " :caption="propLeadInformation.largeMerchantLessThanTwoCreditandPrepaid == null ? 'NA' : propLeadInformation.largeMerchantLessThanTwoCreditandPrepaid + '%'" />
+                <q-item-section>
+                  <q-item-label>Large Merchant < 2000 % credit and prepaid card </q-item-label>
+                  <q-item-label caption>propLeadInformation.largeMerchantLessThanTwoCreditandPrepaid == null ? 'NA' : propLeadInformation.largeMerchantLessThanTwoCreditandPrepaid + '%'</q-item-label>
+                </q-item-section>
               </q-item>
               <q-item multiline>
-                <q-item-section label="Large Merchant > 2000 % credit and prepaid card" :caption="propLeadInformation.largeMerchantGreaterThanTwoCreditandPrepaid == null ? 'NA' : propLeadInformation.largeMerchantGreaterThanTwoCreditandPrepaid + '%'" />
+                <q-item-section>
+                  <q-item-label>Large Merchant > 2000 % credit and prepaid card</q-item-label>
+                  <q-item-label caption>propLeadInformation.largeMerchantGreaterThanTwoCreditandPrepaid == null ? 'NA' : propLeadInformation.largeMerchantGreaterThanTwoCreditandPrepaid + '%'</q-item-label>
+                </q-item-section>
               </q-item>
             </q-list>
           </q-scroll-area>

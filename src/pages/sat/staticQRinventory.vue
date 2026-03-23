@@ -28,7 +28,8 @@
           <q-tab color="dark" name="tab-2" label="Approved QR" />
           <q-tab color="dark" name="tab-3" label="Allocate To SO" />
         </q-tabs>
-        <q-tab-panels v-model="activeTab" animated>
+
+          <q-tab-panels v-model="activeTab" animated>
           <q-tab-panel name="tab-1">
             <div class="row items-center">
             
@@ -56,7 +57,7 @@
           </template>
             </q-table>
           </q-tab-panel>
-          <q-tab-panel name="tab-2">
+<q-tab-panel name="tab-2">
             <div class="row">
               <div class="col-8"></div>
               <q-input class="col-4" v-model="filter1" clearable color="grey-9" placeholder="Type.."
@@ -73,7 +74,7 @@
             </q-table>
 
           </q-tab-panel>
-          <q-tab-panel name="tab-3">
+<q-tab-panel name="tab-3">
             <div>
               <!-- validation -->
               <div class="row">
@@ -151,7 +152,7 @@
           </template>
                 </q-table>
               </q-tab-panel>
-              <q-tab-panel name="tab-5">
+<q-tab-panel name="tab-5">
                 <div class="row">
                   <div class="col-8"></div>
                   <q-input class="col-4" v-model="filter5" clearable color="grey-9" placeholder="Type.."
@@ -167,7 +168,7 @@
           </template>
                 </q-table>
               </q-tab-panel>
-              <q-tab-panel name="tab-6">
+<q-tab-panel name="tab-6">
                 <div class="row">
                   <div class="col-8"></div>
                   <q-input class="col-4" v-model="filter6" clearable color="grey-9" placeholder="Type.."
@@ -183,7 +184,7 @@
           </template>
                 </q-table>
               </q-tab-panel>
-            </q-tab-panels>
+          </q-tab-panels>
           </q-tab-panel>
         </q-tab-panels>
       </div>

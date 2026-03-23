@@ -94,7 +94,8 @@
           label="CANCELED MERCHANTS"
         /> -->
 </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
+
+          <q-tab-panels v-model="selectedTab" animated>
 <q-tab-panel name="assigned">
           <assigned />
         </q-tab-panel>
@@ -202,7 +203,7 @@
           </q-table>
           <!--ENDv-model: table Data -->
         </q-tab-panel>
-</q-tab-panels>
+          </q-tab-panels>
 
       <!--END: table Footer -->
       <!-- START >> COMPONENT: Update device address  -->

@@ -58,7 +58,8 @@
         <q-tab name="unAssigned" label="Unassigned" />
         <q-tab name="assigned" label="Assigned" />
       </q-tabs>
-      <q-tab-panels v-model="selectedTab" animated>
+
+          <q-tab-panels v-model="selectedTab" animated>
         <q-tab-panel name="assigned" class="no-padding">
           <!--START: table Data -->
           <q-table
@@ -154,7 +155,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-        <q-tab-panel name="unAssigned" class="no-padding">
+<q-tab-panel name="unAssigned" class="no-padding">
           <!--START: table Data -->
           <q-table
             :rows="tableData1"
@@ -252,7 +253,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-      </q-tab-panels>
+          </q-tab-panels>
     </div>
   </q-page>
 </template>

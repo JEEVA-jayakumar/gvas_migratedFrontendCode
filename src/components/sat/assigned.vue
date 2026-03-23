@@ -83,7 +83,8 @@
         <q-tab color="dark" name="courier" label="Courier" />
       </q-tabs>
 
-      <q-tab-panels v-model="selectedTab" animated>
+
+          <q-tab-panels v-model="selectedTab" animated>
         <q-tab-panel name="assigned">
           <q-table
             :rows="tableData"
@@ -153,8 +154,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-
-        <q-tab-panel name="courier">
+<q-tab-panel name="courier">
           <q-table
             :rows="tableData1"
             :columns="columnDataUnassigned"
@@ -240,7 +240,7 @@
             </template>
           </q-table>
         </q-tab-panel>
-      </q-tab-panels>
+          </q-tab-panels>
 
       <DeviceAddressModal
         v-if="showDeviceAddressModal"

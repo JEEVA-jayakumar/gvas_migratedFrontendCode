@@ -108,7 +108,8 @@
                   <div v-else>
                     <q-item>
                       <q-item-section class="q-body-1">No data to display</q-item-section>
-                      <q-item-section side><q-btn round size="sm" color="negative" @click="fnRemoveDeviceTypeFromList(index)" icon="clear" /></q-item-section>
+                      <q-item-section>
+                </q-item-section></q-item-section>
                     </q-item>
                   </div>
                 </q-scroll-area>

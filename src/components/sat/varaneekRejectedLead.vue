@@ -9,7 +9,9 @@
         @closeLeadInformation="toggleLeadInformation"
       />
       <!--END: table Footer -->
-        <q-tab-panel name="rejectedTab">
+
+          <q-tab-panels v-model="selectedTab" animated>
+<q-tab-panel name="rejectedTab">
           <q-table
             :rows="tableData"
             :columns="columnData"
@@ -52,6 +54,7 @@
             </template>
           </q-table>
         </q-tab-panel>
+          </q-tab-panels>
       <!--END: table Footer -->
     </div>
   </q-page>

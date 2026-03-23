@@ -11,8 +11,10 @@
               align="justify"
             >
               <q-tab name="upload" class="size1" label="UPLOAD CSV FILE" />
+              <q-tab name="unAssigned" class="size1" label="UNASSIGNED" />
             </q-tabs>
-            <q-tab-panels v-model="uploadTab" animated>
+
+            <q-tab-panels v-model="uploadTab" animated @update:model-value="goToUnassignedTab">
               <q-tab-panel name="upload">
                 <div class="q-pa-md">
                   <div class="row text-center justify-center">
@@ -48,11 +50,12 @@
                           <q-separator />
                           <q-card-section>
                             <q-item dense>
-                              <q-item-section icon="attach_file" />
+                              <q-item-section avatar>
+                                <q-icon name="attach_file" />
+                              </q-item-section>
                               <q-item-section>{{
                                 formData.fileSelected[0].name
                               }}</q-item-section>
-                              <q-item-section></q-item-section>
                             </q-item>
                           </q-card-section>
                           <q-separator />
@@ -81,37 +84,13 @@
                   </div>
                 </div>
               </q-tab-panel>
-            </q-tab-panels>
-          </div>
-        </div>
-      </div>
-    </q-card>
-    <q-card>
-      <div class="text-grey-9">
-        <div class="row bottom-border q-pa-sm items-center">
-          <div class="col">
-            <q-tabs
-              class="shadow-1"
-              color="tertiary"
-              align="justify"
-              v-model="selectedTab"
-              @update:model-value="goToUnassignedTab"
-            >
-              <q-tab
-                class="size1"
-                label="Hitachi Onboarding Merchants"
-                name="unAssigned"
-              />
-            </q-tabs>
-            <q-tab-panels v-model="selectedTab" animated>
+
               <q-tab-panel name="unAssigned">
-                <!--START: table Data -->
                 <q-table
                   :rows="tableData1"
                   :columns="columnData"
                   table-class="customTableClass"
                   :filter="filterSearch1"
-                  v-model:selected="formData.marsDeviceIdsCooked"
                   v-model:pagination="paginationControl1"
                   row-key="id"
                   :loading="tableAjaxLoading1"
@@ -146,15 +125,7 @@
                         >Success</q-btn
                       >
                       <q-btn
-                        v-if="props.row.isStatus == 2"
-                        push
-                        color="negative"
-                        size="sm"
-                        @click="OGSPendingStatus(props.row)"
-                        >Re-Submit</q-btn
-                      >
-                      <q-btn
-                        v-if="props.row.isStatus == 3"
+                        v-if="props.row.isStatus == 2 || props.row.isStatus == 3 || props.row.isStatus == null"
                         push
                         color="negative"
                         size="sm"
@@ -169,14 +140,6 @@
                         color="purple-9"
                         size="sm"
                         >Installed</q-btn
-                      >
-                      <q-btn
-                        v-if="props.row.isStatus == null"
-                        push
-                        color="purple-9"
-                        size="sm"
-                        @click="OGSPendingStatus(props.row)"
-                        >Re-Submit</q-btn
                       >
                     </q-td>
                   </template>
@@ -202,7 +165,6 @@
                     </div>
                   </template>
                 </q-table>
-                <!--END: table Data -->
               </q-tab-panel>
             </q-tab-panels>
           </div>
@@ -245,10 +207,7 @@ export default {
           required: true,
           label: "Upload Date / Time",
           align: "left",
-          field: row => {
-            return row.createdAt;
-          },
-          format: val => this.$moment(val).format("Do MMM Y"),
+          field: row => row.createdAt,
           sortable: true
         },
         {
@@ -256,9 +215,7 @@ export default {
           required: true,
           label: "Merchant Name",
           align: "left",
-          field: row => {
-            return row.leadName == null ? "NA" : row.leadName;
-          },
+          field: row => row.leadName || "NA",
           sortable: false
         },
         {
@@ -266,9 +223,7 @@ export default {
           required: true,
           label: "TID",
           align: "left",
-          field: row => {
-            return row.tid;
-          },
+          field: row => row.tid,
           sortable: false
         },
         {
@@ -276,9 +231,7 @@ export default {
           required: true,
           label: "MID",
           align: "left",
-          field: row => {
-            return row.mid;
-          },
+          field: row => row.mid,
           sortable: false
         },
         {
@@ -286,9 +239,7 @@ export default {
           required: true,
           label: "Device Model",
           align: "center",
-          field: row => {
-            return row.device != null ? row.device : "NA";
-          },
+          field: row => row.device || "NA",
           sortable: false
         },
         {
@@ -296,9 +247,7 @@ export default {
           required: true,
           label: "Contact Name",
           align: "left",
-          field: row => {
-            return row.contactName == null ? "NA" : row.contactName;
-          },
+          field: row => row.contactName || "NA",
           sortable: false
         },
         {
@@ -306,9 +255,7 @@ export default {
           required: true,
           label: "Contact Number",
           align: "center",
-          field: row => {
-            return row.contactNumber != null ? row.contactNumber : "NA";
-          },
+          field: row => row.contactNumber || "NA",
           sortable: false
         },
         {
@@ -317,17 +264,11 @@ export default {
           label: "Status",
           align: "left",
           field: row => {
-            if (row.isStatus == 1) {
-              return "Success";
-            } else if (row.isStatus == 2) {
-              return "Pending";
-            } else if (row.isStatus == 3) {
-              return "OGS Failure";
-            } else if (row.isStatus == 4) {
-              return "Installed";
-            } else {
-              return "Failure";
-            }
+            if (row.isStatus == 1) return "Success";
+            if (row.isStatus == 2) return "Pending";
+            if (row.isStatus == 3) return "OGS Failure";
+            if (row.isStatus == 4) return "Installed";
+            return "Failure";
           },
           sortable: false
         },
@@ -340,9 +281,6 @@ export default {
           sortable: false
         }
       ],
-
-      currentDeviceInfo: {},
-      showDeviceAddressModal: false,
       formData: {
         marsDeviceIdsCooked: [],
         marsDeviceIdsCookedUnAssinged: [],
@@ -350,19 +288,13 @@ export default {
         assignTo: "",
         fileSelected: []
       },
-      paginationControl: {
-        sortBy: "createdAt",
-        descending: false,
-        page: 1,
-        rowsPerPage: 5
-      },
       paginationControl1: {
         sortBy: "createdAt",
         descending: false,
         page: 1,
-        rowsPerPage: 5
+        rowsPerPage: 5,
+        rowsNumber: 0
       },
-      tableAjaxLoading: false,
       tableAjaxLoading1: false
     };
   },
@@ -372,20 +304,13 @@ export default {
   },
   methods: {
     ...mapActions("HitachiIndianBankOnboarding", ["HITACHI_INDIAN_ONBOARDING_LIST", "REASSIGN_HITACHI_MERCHANTS"]),
-    ...mapActions("InventoryCentral", ["REPORT_HITACHI_ONBOARDING_MERCHANTS"]),
-    ...mapActions("SuperAdminUsers", ["FETCH_ALL_STATES_DATA"]),
     ...mapActions("IndianBankUpload", ["FEED_HITACHI_INDIAN_BANK_ONBOARDING_UPLOAD_DATA"]),
     ...mapActions("ImplementationExecutive", ["IMPLEMENTATION_EXECUTIVE_LIST"]),
 
-    removeBulkUploadFile() {
-      this.formData.fileSelected = [];
-    },
-    dragAndDropCustomAnimate(action) {
-      this.uploaderHovered = action;
-    },
-    onDrop: function(e) {
-      e.stopPropagation();
-      e.preventDefault();
+    removeBulkUploadFile() { this.formData.fileSelected = []; },
+    dragAndDropCustomAnimate(action) { this.uploaderHovered = action; },
+    onDrop(e) {
+      e.stopPropagation(); e.preventDefault();
       this.formData.fileSelected = e.dataTransfer.files;
       this.fileCheckSum(e.dataTransfer.files);
     },
@@ -397,22 +322,19 @@ export default {
         return false;
       }
     },
-    onChange(e) {
-      this.formData.fileSelected = e.target.files;
-    },
-    uploadFileForBulkUpload(formData) {
+    onChange(e) { this.formData.fileSelected = e.target.files; },
+    uploadFileForBulkUpload() {
       if (this.formData.fileSelected.length == 0) {
         this.$q.notify({ color: "amber-9", position: "bottom", message: "Please upload file", icon: "warning" });
-        return false;
+        return;
       }
       this.$q.loading.show({ delay: 100, spinnerColor: "purple-9", message: "Please wait.." });
-      let assumeFormData = new FormData();
-      assumeFormData.append("file", this.formData.fileSelected[0]);
-      this.FEED_HITACHI_INDIAN_BANK_ONBOARDING_UPLOAD_DATA({ file: assumeFormData }).then(response => {
+      let fd = new FormData();
+      fd.append("file", this.formData.fileSelected[0]);
+      this.FEED_HITACHI_INDIAN_BANK_ONBOARDING_UPLOAD_DATA({ file: fd }).then(() => {
           this.$q.loading.hide();
           this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Uploaded!", icon: "thumb_up" });
           this.ajaxLoadAllLeadInfo1({pagination: this.paginationControl1, filter: this.filterSearch1});
-          this.$emit("emitToggleinventoryBulkUploadOnSuccess");
           this.formData.fileSelected = [];
         }).catch(error => {
           this.$q.loading.hide();
@@ -421,33 +343,20 @@ export default {
     },
     ajaxLoadAllLeadInfo1({ pagination, filter }) {
       this.$q.loading.show({ delay: 0, spinnerColor: "purple-9", message: "Fetching data .." });
-      this.HITACHI_INDIAN_ONBOARDING_LIST({ pagination, filter }).then(res => {
+      this.HITACHI_INDIAN_ONBOARDING_LIST({ pagination, filter }).then(() => {
           this.paginationControl1 = pagination;
           this.paginationControl1.rowsNumber = this.getHitachiIndianOnboarding.totalElements;
           this.paginationControl1.page = this.getHitachiIndianOnboarding.number + 1;
           this.tableData1 = this.getHitachiIndianOnboarding.content;
-          if (this.getHitachiIndianOnboarding.sort != null) {
-            this.paginationControl1.sortBy = this.getHitachiIndianOnboarding.sort[0].property;
-            this.paginationControl1.descending = this.getHitachiIndianOnboarding.sort[0].ascending;
-          } else {
-            this.paginationControl1.sortBy = "createdAt";
-            this.paginationControl1.descending = !this.paginationControl1.descending;
-          }
-          this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
-            this.assignToOptions = this.getImplementationExecutiveList.map(value => ({
-                label: value.name + " | " + value.employeeID + " | " + value.email,
-                value: value.id
-              }));
-          });
           this.$q.loading.hide();
         }).catch(() => this.$q.loading.hide());
     },
     goToUnassignedTab(tab) {
-        this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: this.filterSearch1 });
+        if (tab === "unAssigned") this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: this.filterSearch1 });
     },
     OGSPendingStatus(request) {
       this.$q.loading.show({ delay: 100, message: "Please Wait", spinnerColor: "purple-9" });
-      this.REASSIGN_HITACHI_MERCHANTS({ tid: request.tid }).then(response => {
+      this.REASSIGN_HITACHI_MERCHANTS({ tid: request.tid }).then(() => {
           this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: this.filterSearch1 });
           this.$q.notify({ color: "positive", position: "bottom", message: "Re-Assigned Successfully", icon: "thumb_up" });
         }).catch(error => {
@@ -455,55 +364,19 @@ export default {
           this.$q.notify({ color: "negative", position: "bottom", message: error.body?.message || "Please Try Again Later !", icon: "thumb_down" });
         });
     },
-    downloadHitachiIndianBank() {
-      this.propHitachiReport = !this.propHitachiReport;
-    }
+    downloadHitachiIndianBank() { this.propHitachiReport = !this.propHitachiReport; }
   }
 };
 </script>
 
 <style scoped>
-.customTd {
-  text-align: left !important;
-  word-wrap: break-word;
-  white-space: normal;
-}
-.customTd.customCellLength {
-  min-width: 300px !important;
-  overflow-x: auto;
-}
-* {
-  font-family: "Arial";
-  font-size: 12px;
-}
-input[type="file"] {
-  position: absolute;
-  opacity: 0;
-  z-index: -1;
-}
-.btn1 {
-  width: 87px;
-}
-.align-center {
-  text-align: center;
-}
-.display-inline {
-  display: inline-block;
-  vertical-align: middle;
-}
-.drop {
-  padding: 15px;
-  background-color: #f6f6f6;
-  border-radius: 2px;
-  height: 100%;
-  max-height: 400px;
-  max-width: 600px;
-  width: 100%;
-}
-.toggleBulkUploadActive {
-  border: 4px dashed #ccc;
-}
-.toggleBulkUploadDisable {
-  border: 4px dashed #1f2c3fa6;
-}
+.customTd { text-align: left !important; word-wrap: break-word; white-space: normal; }
+.customTd.customCellLength { min-width: 300px !important; overflow-x: auto; }
+input[type="file"] { position: absolute; opacity: 0; z-index: -1; }
+.btn1 { width: 87px; }
+.align-center { text-align: center; }
+.display-inline { display: inline-block; vertical-align: middle; }
+.drop { padding: 15px; background-color: #f6f6f6; border-radius: 2px; height: 100%; max-height: 400px; max-width: 600px; width: 100%; }
+.toggleBulkUploadActive { border: 4px dashed #ccc; }
+.toggleBulkUploadDisable { border: 4px dashed #1f2c3fa6; }
 </style>
