@@ -26,182 +26,190 @@
       >
         <template v-slot:body-cell-tid="props">
           <q-td :props="props">
-          <span class="label text-primary"># {{ props.row.tid }}</span>
-        </q-td>
+            <span class="label text-primary"># {{ props.row.tid }}</span>
+          </q-td>
         </template>
         <template v-slot:body-cell-mid="props">
           <q-td :props="props">
-          <span class="label text-primary"># {{ props.row.mid }}</span>
-        </q-td>
+            <span class="label text-primary"># {{ props.row.mid }}</span>
+          </q-td>
         </template>
         <template v-slot:body-cell-leadNumber="props">
-            <q-td :props="props"
-          class="cursor-pointer"
-          @click="toggleLeadInformation(props.row)">
-
-          <span class="label text-primary"
-            ># {{ props.row.leadInformation.leadNumber }}</span
+          <q-td
+            :props="props"
+            class="cursor-pointer"
+            @click="toggleLeadInformation(props.row)"
           >
-
+            <span class="label text-primary"
+              ># {{ props.row.leadInformation.leadNumber }}</span
+            >
           </q-td>
-          </template>
+        </template>
         <template v-slot:body-cell-mobileNumber="props">
-          <q-td :props="props">
-          props.row.leadInformation == null
-            ? "NA"
-            : props.row.leadInformation.contactNumber
-        }}</q-td>
+          <q-td :props="props">{{
+            props.row.leadInformation == null
+              ? "NA"
+              : props.row.leadInformation.contactNumber
+          }}</q-td>
         </template>
         <template v-slot:body-cell-leadAddress="props">
-          <q-td :props="props">
-          props.row.leadInformation == null ? "NA" : props.row.leadInformation.leadAddress
-        }}</q-td>
+          <q-td :props="props">{{
+            props.row.leadInformation == null
+              ? "NA"
+              : props.row.leadInformation.leadAddress
+          }}</q-td>
         </template>
         <template v-slot:body-cell-deviceStatusDate="props">
           <q-td :props="props">
-          <span class="label">{{ (props.row.deviceStatusDate).format("Do MMM Y") }}</span>
-        </q-td>
+            <span class="label">{{
+              $moment(props.row.deviceStatusDate).format("Do MMM Y")
+            }}</span>
+          </q-td>
         </template>
         <template v-slot:body-cell-viewDocument="props">
           <q-td :props="props">
-          <div
-            v-if="
-              props.row.implementationFormMimeType == null ||
-              props.row.implementationFormMimeType.includes('application/pdf')
-            "
-            class="cursor-pointer"
-          >
-            <div @click="fnPDFViewModal(props.row.implementationForm)">
-              <q-icon name="fas fa-file-pdf" color="primary" />
-              &nbsp;{{ props.row.implementationForm }}
+            <div
+              v-if="
+                props.row.implementationFormMimeType == null ||
+                props.row.implementationFormMimeType.includes('application/pdf')
+              "
+              class="cursor-pointer"
+            >
+              <div @click="fnPDFViewModal(props.row.implementationForm)">
+                <q-icon name="fas fa-file-pdf" color="primary" />
+                &nbsp;{{ props.row.implementationForm }}
+              </div>
             </div>
-          </div>
-          <div
-            v-else-if="
-              props.row.implementationFormMimeType == null ||
-              props.row.implementationFormMimeType.includes('image/*')
-            "
-            class="cursor-pointer"
-          >
-            <div @click="fnViewMultiAttachedFileImageUploadedBySat()">
-              <viewer :img="[GLOBAL_FILE_FETCH_URL + '/' + props.row.implementationForm]">
-                <img
-                  :src="[GLOBAL_FILE_FETCH_URL + '/' + props.row.implementationForm]"
-                  style="max-width: 15%"
-                />
-              </viewer>
+            <div
+              v-else-if="
+                props.row.implementationFormMimeType == null ||
+                props.row.implementationFormMimeType.includes('image/')
+              "
+              class="cursor-pointer"
+            >
+              <div @click="fnViewMultiAttachedFileImageUploadedBySat()">
+                <viewer
+                  :img="[GLOBAL_FILE_FETCH_URL + '/' + props.row.implementationForm]"
+                >
+                  <img
+                    :src="[GLOBAL_FILE_FETCH_URL + '/' + props.row.implementationForm]"
+                    style="max-width: 15%"
+                  />
+                </viewer>
+              </div>
             </div>
-          </div>
-          <div v-else>NA Document</div>
-        </q-td>
+            <div v-else>NA Document</div>
+          </q-td>
         </template>
         <template v-slot:body-cell-pictureOfShop="props">
           <q-td :props="props">
-          <div
-            v-if="
-              props.row.pictureOfShopMimeType == null ||
-              props.row.pictureOfShopMimeType.includes('application/pdf')
-            "
-            class="cursor-pointer"
-          >
-            <div @click="fnPDFViewModal(props.row.pictureOfShop)">
-              <q-icon name="fas fa-file-pdf" color="primary" />
-              &nbsp;{{ props.row.pictureOfShop }}
+            <div
+              v-if="
+                props.row.pictureOfShopMimeType == null ||
+                props.row.pictureOfShopMimeType.includes('application/pdf')
+              "
+              class="cursor-pointer"
+            >
+              <div @click="fnPDFViewModal(props.row.pictureOfShop)">
+                <q-icon name="fas fa-file-pdf" color="primary" />
+                &nbsp;{{ props.row.pictureOfShop }}
+              </div>
             </div>
-          </div>
-          <div
-            v-else-if="
-              props.row.pictureOfShopMimeType == null ||
-              props.row.pictureOfShopMimeType.includes('image/*')
-            "
-            class="cursor-pointer"
-          >
-            <div @click="fnViewMultiAttachedFileImageUploadedByPictureShop()">
-              <viewer :img="[GLOBAL_FILE_FETCH_URL + '/' + props.row.pictureOfShop]">
-                <img
-                  :src="[GLOBAL_FILE_FETCH_URL + '/' + props.row.pictureOfShop]"
-                  style="max-width: 15%"
-                />
-              </viewer>
+            <div
+              v-else-if="
+                props.row.pictureOfShopMimeType == null ||
+                props.row.pictureOfShopMimeType.includes('image/')
+              "
+              class="cursor-pointer"
+            >
+              <div @click="fnViewMultiAttachedFileImageUploadedByPictureShop()">
+                <viewer
+                  :img="[GLOBAL_FILE_FETCH_URL + '/' + props.row.pictureOfShop]"
+                >
+                  <img
+                    :src="[GLOBAL_FILE_FETCH_URL + '/' + props.row.pictureOfShop]"
+                    style="max-width: 15%"
+                  />
+                </viewer>
+              </div>
             </div>
-          </div>
-          <div v-else>NA Document</div>
-        </q-td>
+            <div v-else>NA Document</div>
+          </q-td>
         </template>
         <template v-slot:body-cell-cpvForm="props">
           <q-td :props="props">
-          <div
-            v-if="
-              props.row.cpvFormMimeType == null ||
-              props.row.cpvFormMimeType.includes('application/pdf')
-            "
-            class="cursor-pointer"
-          >
-            <div @click="fnPDFViewModal(props.row.cpvForm)">
-              <q-icon name="fas fa-file-pdf" color="primary" />
-              &nbsp;{{ props.row.cpvForm }}
+            <div
+              v-if="
+                props.row.cpvFormMimeType == null ||
+                props.row.cpvFormMimeType.includes('application/pdf')
+              "
+              class="cursor-pointer"
+            >
+              <div @click="fnPDFViewModal(props.row.cpvForm)">
+                <q-icon name="fas fa-file-pdf" color="primary" />
+                &nbsp;{{ props.row.cpvForm }}
+              </div>
             </div>
-          </div>
-          <div
-            v-else-if="
-              props.row.cpvFormMimeType == null ||
-              props.row.cpvFormMimeType.includes('image/*')
-            "
-            class="cursor-pointer"
-          >
-            <div @click="fnViewMultiAttachedFileImageUploadedByCpvForm()">
-              <viewer :img="[GLOBAL_FILE_FETCH_URL + '/' + props.row.cpvForm]">
-                <img
-                  :src="[GLOBAL_FILE_FETCH_URL + '/' + props.row.cpvForm]"
-                  style="max-width: 15%"
-                />
-              </viewer>
+            <div
+              v-else-if="
+                props.row.cpvFormMimeType == null ||
+                props.row.cpvFormMimeType.includes('image/')
+              "
+              class="cursor-pointer"
+            >
+              <div @click="fnViewMultiAttachedFileImageUploadedByCpvForm()">
+                <viewer :img="[GLOBAL_FILE_FETCH_URL + '/' + props.row.cpvForm]">
+                  <img
+                    :src="[GLOBAL_FILE_FETCH_URL + '/' + props.row.cpvForm]"
+                    style="max-width: 15%"
+                  />
+                </viewer>
+              </div>
             </div>
-          </div>
-          <div v-else>NA Document</div>
-        </q-td>
+            <div v-else>NA Document</div>
+          </q-td>
         </template>
         <template v-slot:body-cell-status="props">
           <q-td :props="props">
-          <span class="label text-positive" v-if="props.row.deviceStatus == 6"
-            >Approved</span
-          >
-          <span class="label text-negative" v-else-if="props.row.deviceStatus == 7"
-            >Pending</span
-          >
-          <span class="label text-amber" v-else>NA</span>
-        </q-td>
+            <span class="label text-positive" v-if="props.row.deviceStatus == 6"
+              >Approved</span
+            >
+            <span class="label text-negative" v-else-if="props.row.deviceStatus == 7"
+              >Pending</span
+            >
+            <span class="label text-amber" v-else>NA</span>
+          </q-td>
         </template>
 
         <template v-slot:top>
           <div class="col-5">
-            <q-input dense clearable
+            <q-input
+              dense
+              clearable
               v-model="filter"
-              separator
               color="grey-9"
               placeholder="Type.."
               label="Search by MID, TID, Merchant Name"
-              class="q-mr-lg q-py-sm">
-                <template v-slot:append>
-                  <q-icon name="search" />
-                </template>
-              </q-input>
+              class="q-mr-lg q-py-sm"
+            >
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </q-input>
           </div>
           <div class="col-2">
-            <q-input type="date"
+            <q-input
+              type="date"
               class="q-mr-lg q-py-sm"
               v-model="formData.fromDate"
-              :min="yesterday"
-              :max="tomorrow"
               label="From Date"
             />
           </div>
           <div class="col-2">
-            <q-input type="date"
+            <q-input
+              type="date"
               class="q-mr-lg q-py-sm"
               v-model="formData.toDate"
-              :min="yesterday"
-              :max="tomorrow"
               label="To Date"
             />
           </div>
@@ -219,7 +227,7 @@
               @click="SubmitData(formData)"
               >Submit</q-btn
             >
-             <q-btn color="red" v-if="selectedRow" @click="DeleteData">
+            <q-btn color="red" v-if="selectedRow" @click="DeleteData">
               <q-icon name="delete" />
             </q-btn>
           </div>
@@ -242,23 +250,17 @@
 </template>
 
 <script>
-import { required } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
-
-import downloadExcel from "vue-json-excel";
 import showMerchantTransactionLevelDetails from "../../components/sat/showMerchantTransactionLevelDetails.vue";
 import showPdfModalComponent from "../../components/sat/showPdfModalComponent.vue";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
-import { date } from "quasar";
-const today = new Date();
-const { startOfDate, addToDate, subtractFromDate } = date;
+
 export default {
   name: "merchantTransactionLevel",
 
   components: {
     showMerchantTransactionLevelDetails,
     generalLeadInformation,
-    downloadExcel,
     showPdfModalComponent,
   },
 
@@ -274,7 +276,6 @@ export default {
       paginationControl: {
         rowsNumber: 10,
         page: 1,
-        // sortBy: "tid",
         sortBy: "deviceStatusDate",
         descending: false,
         rowsPerPage: 10,
@@ -282,8 +283,6 @@ export default {
       tableData: [],
       valueToggleMerchantTransaction: false,
       filter: "",
-      tomorrow: addToDate(today, { days: 0 }),
-      yesterday: subtractFromDate(today, { days: 7200 }),
       formData: {
         fromDate: "",
         toDate: "",
@@ -292,7 +291,7 @@ export default {
         fromDate: "",
         toDate: "",
       },
-        selectedRow: null,
+      selectedRow: null,
       columns: [
         {
           name: "tid",
@@ -355,7 +354,6 @@ export default {
           sortable: false,
         },
         {
-          // name: "device_serial_number",
           name: "aggregatorRegionalInventory.serialNumber",
           required: true,
           label: "Device Serial Number",
@@ -413,7 +411,9 @@ export default {
           label: "Merchants City Town",
           align: "left",
           field: (row) => {
-            return row.leadInformation.city == null ? "NA" : row.leadInformation.city;
+            return row.leadInformation.city == null
+              ? "NA"
+              : row.leadInformation.city;
           },
           sortable: false,
         },
@@ -423,23 +423,10 @@ export default {
           label: "Mobile Number",
           align: "center",
           field: (row) => {
-            // return row.leadInformation.contactNumber;
             return row.assignedTo == null ? "NA" : row.assignedTo.contactNumber;
           },
           sortable: false,
         },
-        // {
-        //   name: "remarks",
-        //   required: true,
-        //   label: "Remarks",
-        //   align: "center",
-        //   field: (row) => {
-        //     return row.rescheduleRemarks == null
-        //       ? "NA"
-        //       : JSON.parse(row.rescheduleRemarks).remarks;
-        //   },
-        //   sortable: false,
-        // },
         {
           name: "status",
           required: true,
@@ -454,7 +441,9 @@ export default {
           label: "Implementation Form",
           align: "center",
           field: (row) => {
-            return row.implementationForm == null ? "NA" : row.implementationForm;
+            return row.implementationForm == null
+              ? "NA"
+              : row.implementationForm;
           },
           sortable: false,
         },
@@ -478,30 +467,12 @@ export default {
           },
           sortable: false,
         },
-        // {
-        //   name: "action",
-        //   required: true,
-        //   label: "Approve",
-        //   align: "center",
-        //   field: "action",
-        //   sortable: false,
-        // },
-        // {
-        //   name: "data",
-        //   required: true,
-        //   label: "Reject",
-        //   align: "center",
-        //   field: "data",
-        //   sortable: false,
-        // },
       ],
       loading: true,
       filter_values: "",
     };
   },
   computed: {
-    ...mapGetters("MasterTracker", ["getMasterTrackerList"]),
-    ...mapGetters("DocumentApprove", ["getDocumentApprove"]),
     ...mapGetters("equitasImplementedQueue", ["getaggdeactivelist"]),
     ...mapGetters("GlobalVariables", ["GLOBAL_FILE_FETCH_URL"]),
   },
@@ -514,53 +485,37 @@ export default {
   },
 
   methods: {
-    ...mapActions("MasterTracker", ["MASTER_TRACKER_LIST"]),
-    ...mapActions("DocumentApprove", ["DOCUMENT_APPROVE"]),
     ...mapActions("equitasImplementedQueue", ["AGGREGATOR_DEACTIVE_LIST"]),
-    ajaxLoadAllLeadInfo() {
-      this.toggleAjaxLoadFilter = true;
-      this.AGGREGATOR_DEACTIVE_LIST()
-        .then((response) => {
-          this.tableData = this.getaggdeactivelist;
-          this.toggleAjaxLoadFilter = false;
-        })
-        .catch((error) => {
-          this.toggleAjaxLoadFilter = false;
-        });
-    },
-   toTimestamp(strDate, isFromDate = true) {
-     const date = strDate.split("T")[0];  
-      const curDate = new Date();         
-      let timeStr = "00:00:00"; 
+    toTimestamp(strDate, isFromDate = true) {
+      const date = strDate.split("T")[0];
+      let timeStr = "00:00:00";
       if (!isFromDate) {
-       timeStr = "23:59:00";  
-       }
+        timeStr = "23:59:00";
+      }
       const formattedDate = `${date}T${timeStr}Z`;
       const datum = Date.parse(formattedDate);
       return datum;
     },
     SubmitData(request) {
       this.formData1 = {
-       fromDate: this.toTimestamp(request.fromDate.toString(), true),
-       toDate: this.toTimestamp(request.toDate.toString(), false),
+        fromDate: this.toTimestamp(request.fromDate.toString(), true),
+        toDate: this.toTimestamp(request.toDate.toString(), false),
       };
-       if(this.formData1.fromDate <= this.formData1.toDate){
-       this.selectedRow = request;
-      this.ajaxLoadAllLeadInfo({
-        pagination: this.paginationControl,
-        filter: this.filter,
-        formData: this.formData1,
-      });
-            }
-      else{
+      if (this.formData1.fromDate <= this.formData1.toDate) {
+        this.selectedRow = request;
+        this.ajaxLoadAllLeadInfo({
+          pagination: this.paginationControl,
+          filter: this.filter,
+          formData: this.formData1,
+        });
+      } else {
         this.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message:"TO Date must be greather than From Date",
-              icon: "thumb_down",
-            }); 
+          color: "negative",
+          position: "bottom",
+          message: "TO Date must be greather than From Date",
+          icon: "thumb_down",
+        });
       }
-     
     },
     DeleteData() {
       (this.formData.fromDate = ""),
@@ -572,32 +527,11 @@ export default {
           filter: this.filter,
           formData: this.formData1,
         });
-        this.selectedRow = null;
-    },
-    financeApproveSubmit() {
-      let usersSelectSync = {
-        leadInformation: {
-          data: this.getMasterTrackerList,
-        },
-      };
-
-      this.DOCUMENT_APPROVE(usersSelectSync).then(() => {
-        this.getMasterTrackerList();
-        this.$q.notify("Successfully Approved");
-      });
-    },
-    fnViewMultiAttachedFileImageUploadedBySat(attachedImageIndex) {
-      this.$refs.multiAttachedImageViewerUploadedBySAT;
-    },
-    fnViewMultiAttachedFileImageUploadedByPictureShop(attachedImageIndex) {
-      this.$refs.multiAttachedImageViewerUploadedByPictureShop.click();
-    },
-    fnViewMultiAttachedFileImageUploadedByCpvForm(attachedImageIndex) {
-      this.$refs.multiAttachedImageViewerUploadedByCpvForm.click();
+      this.selectedRow = null;
     },
     ajaxLoadAllLeadInfo({ pagination, filter, formData }) {
       this.$q.loading.show({
-        delay: 0, // ms
+        delay: 0,
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
@@ -605,7 +539,8 @@ export default {
         pagination,
         filter: this.filter,
         formData: this.formData1,
-      }).then((res) => {
+      })
+        .then((res) => {
           this.paginationControl = pagination;
           this.paginationControl.rowsNumber = this.getaggdeactivelist.totalElements;
           this.paginationControl.page = this.getaggdeactivelist.number + 1;
@@ -614,7 +549,6 @@ export default {
             this.paginationControl.sortBy = this.getaggdeactivelist.sort[0].property;
             this.paginationControl.descending = this.getaggdeactivelist.sort[0].ascending;
           }
-
           this.$q.loading.hide();
         })
         .catch(() => {
@@ -630,6 +564,15 @@ export default {
     fnPDFViewModal(documentUrl) {
       this.PDFDetails = documentUrl;
       this.toggleshowPDFModal = !this.toggleshowPDFModal;
+    },
+    fnViewMultiAttachedFileImageUploadedBySat() {
+      // Logic from legacy if needed
+    },
+    fnViewMultiAttachedFileImageUploadedByPictureShop() {
+      // Logic from legacy if needed
+    },
+    fnViewMultiAttachedFileImageUploadedByCpvForm() {
+      // Logic from legacy if needed
     },
   },
 };

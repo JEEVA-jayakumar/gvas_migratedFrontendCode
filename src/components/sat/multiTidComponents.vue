@@ -55,7 +55,6 @@
                     </div>
                 </div>
 
-
                 <div v-if="this.genSubTidFlag == true" error-icon="warning" name="twelve" title="SUBTID" subtitle="TID">
 
                     <div class="text-weight-regular text-grey-9" v-if="this.SubTidField == false">
@@ -114,7 +113,7 @@
         :propToggleadditionalTid="propAdditionalTidDetails" @closeRejectModel="additionalTid"></additionaltidComp> -->
     </div>
 </template>
-  
+
 <script>
 
 
@@ -968,6 +967,7 @@ export default {
     }
 };
 </script>
+
 <style scoped>
 label {
     padding: 10px;

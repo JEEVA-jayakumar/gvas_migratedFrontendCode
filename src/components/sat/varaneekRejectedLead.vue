@@ -9,7 +9,214 @@
         @closeLeadInformation="toggleLeadInformation"
       />
       <!--END: table Footer -->
-        <q-tab-panel name="rejectedTab">
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+<q-tab-panells v-model="tab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        v-model:leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+      <!--END: table Footer -->
+
+<q-tab-panells v-model="tab" animated>
+<q-tab-panell name="rejectedTab">
           <q-table
             :rows="tableData"
             :columns="columnData"
@@ -51,7 +258,8 @@
               </div>
             </template>
           </q-table>
-        </q-tab-panel>
+        </q-tab-panell>
+</q-tab-panells>
       <!--END: table Footer -->
     </div>
   </q-page>

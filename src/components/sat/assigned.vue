@@ -83,8 +83,1600 @@
         <q-tab color="dark" name="courier" label="Courier" />
       </q-tabs>
 
-      <q-tab-panels v-model="selectedTab" animated>
-        <q-tab-panel name="assigned">
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <generalLeadInformation
+        v-if="propToggleLeadInformation"
+        :leadInformation="addtnLeadInformation"
+        :propToggleLeadInformationPop="propToggleLeadInformation"
+        @closeLeadInformation="toggleLeadInformation"
+      />
+
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCookedUnAssinged.length
+            }}</span
+            >/ selected
+          </div>
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-select
+                  use-input
+                  @filter="filterAssignToOptions"
+                  clearable
+                  v-model="formData.assignTo"
+                  separator
+                  color="grey-9"
+                  :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                  :options="filteredAssignToOptions"
+                  placeholder="Assign To"
+                  emit-value
+                  map-options
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6">
+                <q-checkbox
+                  v-model="formData.triggerWelcomeMail"
+                  color="dark"
+                  label="Trigger welcome email"
+                />
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6 group">
+                <div>
+                  <q-btn
+                    no-caps
+                    :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                    label="Re-Assign"
+                    class="common-dark-blue"
+                    @click="reAssignImplementationUser"
+                  />
+                </div>
+                <div>
+                  <q-btn
+                    no-caps
+                    :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0"
+                    label="Un-Assign"
+                    class="common-dark-blue"
+                    @click="unAssignImplementationUser"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        @update:model-value="goToUnassignedTab"
+      >
+        <q-tab
+          color="dark"
+          name="assigned"
+          label="Normal"
+        />
+        <q-tab color="dark" name="courier" label="Courier" />
+      </q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+        <q-tab-panell name="assigned">
           <q-table
             :rows="tableData"
             :columns="columnDataAssigned"
@@ -152,9 +1744,9 @@
               </div>
             </template>
           </q-table>
-        </q-tab-panel>
+        </q-tab-panell>
 
-        <q-tab-panel name="courier">
+        <q-tab-panell name="courier">
           <q-table
             :rows="tableData1"
             :columns="columnDataUnassigned"
@@ -239,8 +1831,8 @@
               </div>
             </template>
           </q-table>
-        </q-tab-panel>
-      </q-tab-panels>
+        </q-tab-panell>
+</q-tab-panells>
 
       <DeviceAddressModal
         v-if="showDeviceAddressModal"

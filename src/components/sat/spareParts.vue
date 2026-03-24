@@ -37,11 +37,749 @@
         <q-tab color="dark" name="allocatedSo" label="So Pod List" />
         <q-tab color="dark" name="createSoPod" label="Create So Pod" />
 </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="allocatedSo">
+
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <div class="row bottom-border q-ma-md q-py-md">
+        <div class="col-12 text-weight-regular text-grey-9 " align="left" width="50px">Spare Counts
+        </div>
+        <br>
+        <div class="col-md-9 col-sm-12 col-xs-12">
+          <div v-if="regionSpareCount.length > 0" class="row">
+            <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in regionSpareCount"
+              :key="menu" height="35px" width="35px">
+              <div>
+                <big :style="'color'">{{ menu.value.count }} </big>
+              </div>
+              <div>
+                <label>{{ menu.value.spareParts.spare_parts_types }}</label>
+              </div>
+
+            </q-card>
+          </div>
+
+          <div v-else class="row group">
+            <div>
+              <q-banner color="primary" icon="info">No data available to display</q-banner>
+            </div>
+          </div>
+          <!-- </q-card> -->
+
+        </div>
+      </div>
+      <!-- <pre>{{getAllRegionsData}}</pre> -->
+      <!-- <pre>{{getAllHierarchiesData}}</pre>   -->
+      <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToSelectedTab">
+        <q-tab color="dark" name="incomingPods" label="Incoming Pod's" />
+        <q-tab color="dark" name="stocks" label="Stocks" />
+        <q-tab color="dark" name="allocatedSo" label="So Pod List" />
+        <q-tab color="dark" name="createSoPod" label="Create So Pod" />
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+<q-tab-panell name="allocatedSo">
           <allocatedSo />
-        </q-tab-panel>
-<q-tab-panel name="incomingPods">
+        </q-tab-panell>
+<q-tab-panell name="incomingPods">
           <q-table :rows="tableData" table-class="customSATableClass" :columns="columns" :filter="filterSearch" v-model:pagination="paginationControl" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
             @request="ajaxLoadAllLeadInfo">
             <template v-slot:body-cell-createdAt="props">
@@ -127,8 +865,8 @@
               <!--ENDv-model: table filter,search -->
             </template>
           </q-table>
-        </q-tab-panel>
-<q-tab-panel name="stocks">
+        </q-tab-panell>
+<q-tab-panell name="stocks">
           <q-table :rows="tableData1" table-class="customSATableClass" :columns="columns1" :filter="filterSearch1" v-model:pagination="paginationControl1" :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
             @request="ajaxLoadAllLeadInfo1">
             <template v-slot:body-cell-createdAt="props">
@@ -221,8 +959,8 @@
           </div> :rows="tableData2"-->
             </template>
           </q-table>
-        </q-tab-panel>
-<q-tab-panel name="createSoPod">
+        </q-tab-panell>
+<q-tab-panell name="createSoPod">
           <template>
             <div class="col-sm-3">
               <div class="row">
@@ -265,9 +1003,8 @@
 
             </div>
           </template>
-        </q-tab-panel>
-</q-tab-panels>
-       
+        </q-tab-panell>
+</q-tab-panells>
 
        <!-- START REJECT fnRejectPodDetails-->
        <rejectPodDetails

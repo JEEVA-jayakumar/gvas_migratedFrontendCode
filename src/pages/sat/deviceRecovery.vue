@@ -2,20 +2,21 @@
   <q-page>
     <div>
       <div class="row bottom-border q-px-md q-py-md items-center">
-        <!--STARTv-model: table title -->
+        <!--START: table title -->
         <div class="col-md-8 q-title text-weight-regular text-grey-9">Device Recovery</div>
         <div class="col-md-4 q-title text-weight-regular text-grey-9" align="right">
           <q-btn
             @click="openScannerComp"
             v-if="!scannerToggleOption"
+            flat
+            class="common-dark-blue q-py-xs"
             label="Start Scan"
-            color="positive"
           />
           <q-btn
             @click="closeScannerComp"
             v-if="scannerToggleOption"
-            color="negative"
-            class="q-py-xs"
+            flat
+            class="common-dark-blue q-py-xs"
             label="Stop Scan"
           />
         </div>
@@ -33,13 +34,10 @@
         color="light-blue"
       >
         <template v-slot:body-cell-action="props">
-            <q-td :props="props">
-
-          <q-btn label="send" icon="close" color="red-6" size="sm" />
-          <!-- @click="removeScannedItems(props.row)" -->
-
+          <q-td :props="props">
+            <q-btn label="send" icon="close" color="red-6" size="sm" />
           </q-td>
-          </template>
+        </template>
         <template v-slot:top="props">
           <!--START: table filter,search -->
           <div class="col-md-5">
@@ -50,7 +48,11 @@
               placeholder="Type.."
               label="Search .."
               class="q-mr-lg q-py-sm"
-            />
+            >
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </q-input>
           </div>
           <!--END: table filter,search -->
         </template>
@@ -60,14 +62,9 @@
 </template>
 
 <script>
-import { required } from '@vuelidate/validators';
-
-// import VueBarcodeScanner from "vue-barcode-scanner";
-// Vue.use(VueBarcodeScanner);
-
 import { mapGetters, mapActions } from "vuex";
 export default {
-  name: "deviceRecoveryTrackerFaultyScanner",
+  name: "deviceRecovery",
 
   data() {
     return {
@@ -153,7 +150,7 @@ export default {
         },
         {
           serial_number: 3366525,
-          device_type: "pgprs"
+          device_type: "mPOS"
         },
         {
           serial_number: 3366525,
@@ -193,13 +190,11 @@ export default {
   },
 
   computed: {
-    ...mapGetters("SatDeviceTrackerScanner", ["getDeviceFaultyScannedItems"])
+    ...mapGetters("SatDeviceTrackerScanner", ["getDeviceScannedItems"])
   },
 
   methods: {
-    ...mapActions("SatDeviceTrackerScanner", [
-      "REACTIVE_FAULTY_SCANNED_DEVICE_DATA"
-    ]),
+    ...mapActions("SatDeviceTrackerScanner", ["REACTIVE_SCANNED_DEVICE_DATA"]),
 
     // Create callback function to receive barcode when the scanner is already done
     onBarcodeScanned(barcode) {
@@ -208,28 +203,25 @@ export default {
         serial_number: barcode
       });
       // do something...
-      this.REACTIVE_FAULTY_SCANNED_DEVICE_DATA(this.tableData);
+      this.REACTIVE_SCANNED_DEVICE_DATA(this.tableData);
       console.log(this.tableData);
     },
-    // onBarcodeDestroy() {
-    //   removeListener("keypress");
-    //   removeListener("keydown");
-    // },
-
     openScannerComp() {
       this.scannerToggleOption = !this.scannerToggleOption;
-      if (!this.$barcodeScanner.hasListener()) {
+      if (this.$barcodeScanner && !this.$barcodeScanner.hasListener()) {
         this.$barcodeScanner.init(this.onBarcodeScanned);
       }
     },
     closeScannerComp() {
       this.scannerToggleOption = !this.scannerToggleOption;
-      this.$barcodeScanner.destroy(this.onBarcodeDestroy);
+      if (this.$barcodeScanner) {
+          this.$barcodeScanner.destroy();
+      }
+    },
+    removeScannedItems(item) {
+      this.getDeviceScannedItems.splice(item.__index);
+      this.REACTIVE_SCANNED_DEVICE_DATA(this.getDeviceScannedItems);
     }
-    // removeScannedItems(item) {
-    //   this.tableData.splice(item.__index);
-    //   this.REACTIVE_FAULTY_SCANNED_DEVICE_DATA(this.tableData);
-    // }
   }
 };
 </script>

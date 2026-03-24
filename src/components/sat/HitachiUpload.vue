@@ -536,6 +536,7 @@ export default {
 };
 // };
 </script>
+
 <style scoped>
 * {
   font-family: "Arial";

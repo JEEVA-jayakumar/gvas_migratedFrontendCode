@@ -1,6 +1,5 @@
 <template>
   <q-page>
-    <!-- content -->
     <q-card>
       <div class="text-grey-9">
         <div class="row bottom-border q-pa-sm items-center">
@@ -8,11 +7,13 @@
             <q-tabs
               v-model="tab"
               class="shadow-1"
-              color="tertiary"
+              active-color="primary"
+              indicator-color="primary"
               align="justify"
             >
               <q-tab class="size1" name="upload" label="UPLOAD CSV FILE" />
             </q-tabs>
+
             <q-tab-panels v-model="tab" animated>
               <q-tab-panel name="upload">
                 <div class="q-pa-md">
@@ -32,7 +33,7 @@
                             ? 'toggleBulkUploadDisable'
                             : 'toggleBulkUploadActive'
                         ]"
-                        class="drop display-inline align-center  cursor-pointer"
+                        class="drop display-inline align-center cursor-pointer"
                         @dragover.prevent="dragAndDropCustomAnimate(true)"
                         @dragleave.prevent="dragAndDropCustomAnimate(false)"
                         @drop="onDrop"
@@ -59,11 +60,12 @@
                           <q-separator />
                           <q-card-section>
                             <q-item dense>
-                              <q-item-section icon="attach_file" />
+                              <q-item-section avatar>
+                                <q-icon name="attach_file" />
+                              </q-item-section>
                               <q-item-section>{{
                                 formData.fileSelected[0].name
                               }}</q-item-section>
-                              <q-item-section></q-item-section>
                             </q-item>
                           </q-card-section>
                           <q-separator />
@@ -97,41 +99,41 @@
         </div>
       </div>
     </q-card>
-    <q-card>
+    <q-card class="q-mt-md">
       <div class="text-grey-9">
         <div class="row bottom-border q-pa-sm items-center">
           <div class="col">
-            <q-tabs v-model="selectedTab" class="shadow-1" color="tertiary" align="justify" @update:model-value="goToUnassignedTab">
-              <q-tab class="size1" name="unAssigned" label="Unassigned" />
-              <q-tab class="size1" name="assigned" label="Assigned" />
+            <q-tabs v-model="selectedTab" class="shadow-1" active-color="primary" indicator-color="primary" align="justify" @update:model-value="goToUnassignedTab">
+              <q-tab name="unAssigned" label="Unassigned" />
+              <q-tab name="assigned" label="Assigned" />
             </q-tabs>
 
             <q-tab-panels v-model="selectedTab" animated>
-              <q-tab-panel name="assigned">
-                <div class="row items-center gutter-y-sm q-mb-md">
-                  <div class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md" align="left">
+              <q-tab-panel name="assigned" class="no-padding">
+                <div class="row items-center q-col-gutter-y-sm q-pa-md">
+                  <div class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium" align="left">
                     <span class="q-display-2 size2">{{
                       formData.marsDeviceIdsCookedUnAssinged.length
                     }}</span>/ selected
                   </div>
                   <div class="col-md-9 col-sm-12 col-xs-12">
-                    <div class="row items-center">
+                    <div class="row items-center q-col-gutter-x-md">
                       <div class="col-md-4 col-sm-6 col-xs-6">
                         <q-select
-                          filter
                           clearable
                           v-model="formData.assignTo"
                           :disable="formData.marsDeviceIdsCookedUnAssinged.length == 0"
-                          separator
                           color="grey-9"
                           :options="assignToOptions"
-                          placeholder="Assign To"
+                          label="Assign To"
+                          emit-value
+                          map-options
                         />
                       </div>
-                      <div class="col-md-4 col-sm-6 col-xs-6 group">
+                      <div class="col-md-8 col-sm-6 col-xs-6 group">
                         <q-btn
                           no-caps
-                          :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0 || this.formData.assignTo == ''"
+                          :disabled="formData.marsDeviceIdsCookedUnAssinged.length == 0 || !formData.assignTo"
                           label="Re-Assign"
                           class="common-dark-blue q-mr-sm"
                           @click="reAssignImplementationUser"
@@ -188,30 +190,30 @@
                 </q-table>
               </q-tab-panel>
 
-              <q-tab-panel name="unAssigned">
-                <div class="row items-center gutter-y-sm q-mb-md">
-                  <div class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium q-px-md" align="left">
+              <q-tab-panel name="unAssigned" class="no-padding">
+                <div class="row items-center q-col-gutter-y-sm q-pa-md">
+                  <div class="col-md-3 col-sm-12 col-xs-12 text-grey-7 text-weight-medium" align="left">
                     <span class="q-display-2 size2">{{
                       formData.marsDeviceIdsCooked.length
                     }}</span>/ selected
                   </div>
                   <div class="col-md-9 col-sm-12 col-xs-12">
-                    <div class="row items-center">
+                    <div class="row items-center q-col-gutter-x-md">
                       <div class="col-md-4 col-sm-6 col-xs-6">
                         <q-select
-                          filter
                           clearable
                           v-model="formData.assignTo"
                           :disable="formData.marsDeviceIdsCooked.length == 0"
-                          separator
                           color="grey-9"
                           :options="assignToOptions"
-                          placeholder="Assign To"
+                          label="Assign To"
+                          emit-value
+                          map-options
                         />
                       </div>
                       <div class="col-md-4 col-sm-6 col-xs-6">
                         <q-btn
-                          :disabled="this.formData.assignTo == '' || formData.marsDeviceIdsCooked.length == 0"
+                          :disabled="!formData.assignTo || formData.marsDeviceIdsCooked.length == 0"
                           type="button"
                           label="Assign"
                           class="common-dark-blue"
@@ -281,7 +283,6 @@ export default {
       filterSearch: "",
       filterSearch1: "",
       selectedTab: "unAssigned",
-      assignTo: "",
       assignToOptions: [],
       tableData: [],
       tableData1: [],
@@ -450,11 +451,11 @@ export default {
       this.FEED_ONBOARDING_EXISTING_MERCHANT_DEVICE_BULK_UPLOAD_DATA(fd).then(() => {
           this.$q.loading.hide();
           this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Added!", icon: "thumb_up" });
-          this.ajaxLoadAllLeadInfo1({pagination: this.paginationControl1, filter: this.filterSearch1});
+          this.ajaxLoadAllLeadInfo1({pagination: this.paginationControl1, filter: ""});
           this.formData.fileSelected = [];
         }).catch(error => {
           this.$q.loading.hide();
-          this.$q.notify({ color: "negative", position: "bottom", message: error.body?.message || "Please Try Again Later !", icon: "thumb_down" });
+          this.$q.notify({ color: "negative", position: "bottom", message: error.data?.message || "Please Try Again Later !", icon: "thumb_down" });
         });
     },
     getPincodeInformations() { this.FETCH_ALL_STATES_DATA(); },
@@ -496,6 +497,7 @@ export default {
         this.ajaxLoadAllLeadInfo({ pagination: this.paginationControl, filter: "" });
         this.formData.marsDeviceIdsCookedUnAssinged = [];
       }
+      this.formData.assignTo = "";
     },
     assignImplementationUser() {
       if (this.formData.marsDeviceIdsCooked.length == 0 || !this.formData.assignTo) return;
@@ -513,9 +515,9 @@ export default {
     unAssignImplementationUser() {
       if (this.formData.marsDeviceIdsCookedUnAssinged.length == 0) return;
       let postValues = {
-        action: this.$MARS_DEVICE_STATUS_TID_GENERATED,
+        action: 5, // Status for tid generated or similar in legacy
         marsDeviceIds: this.formData.marsDeviceIdsCookedUnAssinged.map(v => v.id),
-        userId: this.$SEND_ZERO_FOR_UNASSIGING
+        userId: 0
       };
       this.ONBOARDING_MERCHANT_SUBMIT_UNASSIGN(postValues).then(() => {
           this.ajaxLoadAllLeadInfo({ pagination: this.paginationControl, filter: "" });
@@ -526,7 +528,7 @@ export default {
     reAssignImplementationUser() {
       if (this.formData.marsDeviceIdsCookedUnAssinged.length == 0 || !this.formData.assignTo) return;
       let postValues = {
-        action: this.$MARS_DEVICE_STATUS_SAT_ASSIGNED,
+        action: 6, // Status for assigned in legacy
         marsDeviceIds: this.formData.marsDeviceIdsCookedUnAssinged.map(v => v.id),
         userId: this.formData.assignTo
       };

@@ -1583,6 +1583,7 @@
     ></showDocumentQrLeadRejectComponent>
   </div>
 </template>
+
 <script>
 import { url, and } from '@vuelidate/validators';
 
@@ -2380,6 +2381,7 @@ saveformsLists(fileName, mimeType, formTypeToUpdate) {
   }
 };
 </script>
+
 <style>
 #attach {
   height: 33px;

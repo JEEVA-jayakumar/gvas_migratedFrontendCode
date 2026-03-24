@@ -373,6 +373,7 @@
     </div>
   </q-page>
 </template>
+
 <script>
 import { required, and } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
@@ -596,6 +597,7 @@ export default {
   }
 };
 </script>
+
 <style scoped>
 .q-btn-flat,
 .q-btn-outline {

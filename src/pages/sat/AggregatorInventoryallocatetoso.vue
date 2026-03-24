@@ -7,7 +7,7 @@
       <div class="row bottom-border group q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <!--START: table title -->
         <div class="col-md-2">
-          <q-select :disabled="formData.device_type != ''"
+          <q-select :disable="formData.device_type != ''"
             :class="[formData.device_type != '' ? 'no-pointer-events' : '']" v-model="formData.region"
             label="Select Region" radio color="grey-9" :options="regionOptions" @update:model-value="regionBasedSO" />
         </div>
@@ -15,10 +15,6 @@
           <q-select filter clearable :disable="formData.region == ''" v-model="formData.so" label="Select SO" radio color="grey-9"
             :options="regionBasedSo" @update:model-value="SelectedSo" />
         </div>
-        <!-- <div class="col-md-2">
-          <q-select color="grey-9" :disable="formData.so == ''" v-model="aggregator" label="Select Aggregator"
-            radio :options="aggregatorOptions" @update:model-value="selectedAggregators" />
-        </div> -->
         <div class="col-md-2">
           <q-select clearable :disable="formData.so == ''" @clear="fnClearingDeviceTypeSelection"
             @update:model-value="fnSetDevicesByDeviceId" v-model="formData.device_type" label="Select Device Type" radio
@@ -40,10 +36,10 @@
             <q-list highlight separator class="q-pa-none"
               :class="[formData.device_type.id == item.device.id ? 'activeDeviceTab' : '']">
               <q-item-label header style="border-bottom: 1px solid #ccc;">
-                <q-icon :style="'color:'[formData.device_type.id == item.device.id ? '#fff' : '#202c3f']"
+                <q-icon :style="'color:' + [formData.device_type.id == item.device.id ? '#fff' : '#202c3f']"
                   name="fas fa-tablet-alt" />
                 {{ item.device.deviceName }}
-              </q-item-label header>
+              </q-item-label>
               <q-scroll-area style="height:400px" :thumb-style="{
                 right: '4px',
                 borderRadius: '5px',
@@ -55,7 +51,7 @@
                   <q-item separator class="text-light-blue" v-for="(subItem, subIndex) in item.deviceSerialNumbers"
                     :key="subIndex">
                     <q-item-section class="q-body-1">{{ subItem }}</q-item-section>
-                    <q-item-section>
+                    <q-item-section side>
                       <q-btn round size="sm" color="negative" icon="clear"
                         @click="fnRemoveScannedItems(index, subIndex)" />
                     </q-item-section>
@@ -64,7 +60,7 @@
                 <div v-else>
                   <q-item>
                     <q-item-section class="q-body-1">No data to display</q-item-section>
-                    <q-item-section>
+                    <q-item-section side>
                       <q-btn round size="sm" color="negative" @click="fnRemoveDeviceTypeFromList(index)" icon="clear" />
                     </q-item-section>
                   </q-item>
@@ -86,14 +82,12 @@
 </template>
 
 <script>
-import { email } from '@vuelidate/validators';
-
-// import VueBarcodeScanner from "vue-barcode-scanner";
-// Vue.use(VueBarcodeScanner);
 import { mapGetters, mapActions } from "vuex";
 import showAggregatorsPDORegionBasedSo from "../../components/inventory/showAggregatorsPDORegionBasedSo.vue";
+import _ from 'lodash';
+
 export default {
-  name: "allocateDevice",
+  name: "AggregatorInventoryallocatetoso",
   components: {
     showAggregatorsPDORegionBasedSo
   },
@@ -105,9 +99,6 @@ export default {
       regionOptions: [],
       deviceOptions: [],
       regionBasedSo: [],
-      // aggregatorOptions: [],
-      // aggregator: "",
-
       tempTableData: [],
       formData: {
         region: "",
@@ -123,7 +114,6 @@ export default {
   },
 
   computed: {
-    // ...mapGetters("InventoryScanAddDevice", ["getAddDeviceScannedItems"]),
     ...mapGetters("InventoryCentral", [
       "getAllInventoryDevicesTypesData",
       "getAllRegionsData",
@@ -133,18 +123,13 @@ export default {
     ...mapGetters("superAdminAggregators", ["getCreatedAggregatorList", "getActiveCreatedAggregatorList"]),
   },
   created() {
-    // this.fnAjaxGetAllDevicesTypesData();
     this.fnAjaxGetAllRegionsData();
-
-    // this.FETCH_REGION_BASED_SO();
   },
   unmounted() {
-    // Remove listener when component is destroyed
     this.$barcodeScanner.destroy();
   },
 
   methods: {
-    // ...mapActions("SatDeviceTrackerScanner", ["REACTIVE_SCANNED_DEVICE_DATA"]),
     ...mapActions("commonLoader", ["TOGGLE_COMMON_LOADER"]),
     ...mapActions("InventoryCentral", [
       "FETCH_ALL_INVENTORY_DEVICES_TYPES_DATA",
@@ -154,25 +139,19 @@ export default {
     ...mapActions("superAdminAggregatorsDevice", ["GET_ACTIVE_CREATED_DEVICE_LIST"]),
     ...mapActions("superAdminAggregators", ["GET_CREATED_AGGREGATORS_LIST", "GET_ACTIVE_CREATED_AGGREGATORS_LIST"]),
     ...mapActions("VerifyDevice", [
-      "DEVICE_VERIFICATION_ON_SCAN_USING_DEVICE_TYPE_ID_ALLOCATION",
-      "DEVICE_VERIFICATION_ON_SCAN_USING_DEVICE_TYPE_ID_SO_ALLOCATION", "AGGREGATORS_DEVICE_VERIFICATION_ON_SCAN_USING_DEVICE_TYPE_ID_SO_ALLOCATION"
+      "AGGREGATORS_DEVICE_VERIFICATION_ON_SCAN_USING_DEVICE_TYPE_ID_SO_ALLOCATION"
     ]),
 
-    // Function to dynamically set column name for scanned items without store
     fnSetDevicesByDeviceId() {
       this.scannerToggleOption = true;
       this.$barcodeScanner.destroy();
-      // Set local variable for this
       let self = this;
-
-      // Get device type object from array using selected dvice type by user
       let predictIfDeviceExist = self.formData.scannedItems.filter(function (
         value
       ) {
         return value.device.id == self.formData.device_type.id;
       });
 
-      // Push scanned item values into array
       if (predictIfDeviceExist.length == 0) {
         self.formData.scannedItems.unshift({
           device: {
@@ -184,68 +163,30 @@ export default {
       }
     },
     fnClearingDeviceTypeSelection(closeModal) {
-      console.log("fnClearingDeviceTypeSelection  !!!!!!-------->")
       this.formData.device_type = "";
       this.formData.scannedItems = [];
-      this.formData.region = "",
-        this.formData.so = ""
+      this.formData.region = "";
+      this.formData.so = "";
     },
     SelectedSo() {
-      // this.fetchAggregatorList();
       this.AggregatorsDevice();
     },
 
-    // fetchAggregatorList() {
-    //   let self = this;
-    //   let cookedArr = [];
-    //   self.GET_ACTIVE_CREATED_AGGREGATORS_LIST()
-    //     .then(() => {
-    //       return _.map(self.getActiveCreatedAggregatorList, (item) => {
-    //         console.log("ITEM -------->", item)
-    //         cookedArr.push({
-    //           value: item,
-    //           label: item.name
-    //         });
-    //         console.log("cookedArr -------->", cookedArr)
-    //         self.aggregatorOptions = cookedArr;
-    //         // this.flag = true;
-    //       });
-
-    //     })
-    // },
     AggregatorsDevice() {
-      self = this;
+      let self = this;
       let cookedArr1 = [];
       self.GET_ACTIVE_CREATED_DEVICE_LIST()
         .then(() => {
-          return _.map(this.getCreatedActiveDeviceList, (item) => {
-            console.log("ITEM -------->", item)
+          this.getCreatedActiveDeviceList.map((item) => {
             cookedArr1.push({
               value: item,
               label: item.deviceName
             });
-            console.log("cookedArr1 -------->", cookedArr1)
             self.deviceOptions = cookedArr1;
           })
         })
     },
-    // fnAjaxGetAllDevicesTypesData(value) {
-    //   this.FETCH_ALL_INVENTORY_DEVICES_TYPES_DATA()
-    //     .then(() => {
-    //       let assumeArr = [];
-    //       this.getAllInventoryDevicesTypesData.map(function (value, index) {
-    //         assumeArr.push({
-    //           label: value.deviceName,
-    //           value: value
-    //         });
-    //       });
-    //       this.deviceOptions = assumeArr;
-    //     })
-    //     .catch(error => {
-    //       this.deviceOptions = [];
-    //     });
-    // },
-    // Create callback function to receive barcode when the scanner is already done
+
     onBarcodeScanned(barcode) {
       let self = this;
       let predictIfDeviceExist = self.formData.scannedItems.find(function (
@@ -265,16 +206,14 @@ export default {
         return oo == barcode;
       });
       if (finalAssumation == undefined) {
-        console.log("Inside");
         this.AGGREGATORS_DEVICE_VERIFICATION_ON_SCAN_USING_DEVICE_TYPE_ID_SO_ALLOCATION({
           device: self.formData.device_type.id,
           barcode: barcode
-        }).then(() => {
-            console.log("Error-1");
+        })
+          .then(() => {
             assumeArr.deviceSerialNumbers.push(barcode);
           })
           .catch(() => {
-            console.log("Error-2");
             this.$q.notify({
               color: "primary",
               position: "bottom",
@@ -282,8 +221,6 @@ export default {
               icon: "info"
             });
           });
-      } else {
-        this.$q.notify({ S });
       }
     },
 
@@ -302,34 +239,19 @@ export default {
       }
     },
 
-    // Function remove scanned items
     fnRemoveScannedItems(index, subIndex) {
-      // this.formData.scannedItems[index].deviceSerialNumbers.splice(subIndex, 1);
-      this.formData.scannedItems[index].deviceSerialNumbers.splice(subIndex
-      , 1);
+      this.formData.scannedItems[index].deviceSerialNumbers.splice(subIndex, 1);
     },
 
-    // Function to final submit for allocate device
     fnAllocateDeviceToRegion(token) {
       this.showAggregatorsPDORegionBasedSo = !this.showAggregatorsPDORegionBasedSo;
-      console.log("INSIDE COMMING ---->", token);
       if (token == 'refresh') {
-        // this.formData = "";
-      //   formData: {
-      //   region: "",
-      //   device_type: "",
-      //   so: "",
-      //   scannedItems: []
-      // },
-        console.log("INSIDE COMMING");
         this.formData.device_type = "";
         this.formData.scannedItems = [];
-        this.formData.region = "",
-          this.formData.so = ""
+        this.formData.region = "";
+        this.formData.so = "";
       }
     },
-
-    // Function to get all device types
 
     regionBasedSO() {
       this.FETCH_REGION_BASED_SO(this.formData.region).then(() => {
@@ -343,7 +265,6 @@ export default {
         this.regionBasedSo = assumeArr;
       });
     },
-    // Function to get ll regiosn data
     fnAjaxGetAllRegionsData() {
       this.FETCH_ALL_REGIONS_DATA()
         .then(() => {
@@ -361,13 +282,10 @@ export default {
         });
     },
 
-    // Function to delete the entire device based information
     fnRemoveDeviceTypeFromList(index) {
-      // this.formData.scannedItems.splice(index, 1);
       this.formData.scannedItems.splice(index, 1);
     },
 
-    // Function to clear device type
     fnClearingDeviceTypeSelection() {
       this.formData.device_type = "";
       this.formData.scannedItems = [];
@@ -376,7 +294,7 @@ export default {
 };
 </script>
 <style scoped>
-.activeDeviceTab .q-list-header {
+.activeDeviceTab .q-item-label--header {
   border-bottom: 1px solid rgb(204, 204, 204);
   background: #61116a;
   color: #fff;

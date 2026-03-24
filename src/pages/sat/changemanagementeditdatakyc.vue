@@ -4,8 +4,7 @@
       <q-step default name="campaign" title="Edit Rental Details">
         {{this.info.datainfo1}}
         {{this.getImplementedQueue.leadInformation.merchantType.merchantTypeName}}
-       
-        
+
         <b>Edit Rental Details</b>
         <br />
         <br />
@@ -1484,8 +1483,7 @@
       </q-step>
      
       <q-step default name="campaign1" title="TID Level Details">
-       
-          
+
         <div class="row gutter-sm q-my-xs items-center">
           
           <div class="col-xs-12" align="center">
@@ -1503,8 +1501,7 @@
             </q-card>
           </div>
         </div><br><br>
-      
-   
+
         <div class="row">
           <!--START: table title -->
           <div class="col-md-3">
@@ -1679,13 +1676,7 @@
           </div>
         </div>
         <br />
-  
-        
-            
-            
-         
-        
-       
+
         <q-stepper-navigation>
           <q-btn
             class="q-ml-sm"
@@ -1707,10 +1698,7 @@
     ></showPdfModalComponent>
   </q-page>
 </template>
-<style>
-</style>
-<style scoped>
-</style>
+
 <script>
 
 import { LocalStorage } from "quasar";
@@ -4660,20 +4648,6 @@ for(var i=0;i<this.formdata.tid.length
   },
 };
 </script>
+
 <style>
-.customQuasarSelect {
-  padding: 5px;
-}
-
-label {
-  padding: 5px 10px;
-  display: table;
-}
-
-input[type="file"] {
-  display: none;
-}
-.bg-dark-custom {
-  background: rgba(0, 0, 0, 0.5);
-}
 </style>

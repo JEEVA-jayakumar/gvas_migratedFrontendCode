@@ -5,14 +5,16 @@
         <div class="row bottom-border q-pa-sm items-center">
           <div class="col">
             <q-tabs
-              v-model="uploadTab"
+              v-model="tab"
               class="shadow-1"
-              color="tertiary"
+              active-color="primary"
+              indicator-color="primary"
               align="justify"
             >
-              <q-tab name="upload" class="size1" label="UPLOAD CSV FILE" />
+              <q-tab class="size1" name="upload" label="UPLOAD CSV FILE" />
             </q-tabs>
-            <q-tab-panels v-model="uploadTab" animated>
+
+            <q-tab-panels v-model="tab" animated>
               <q-tab-panel name="upload">
                 <div class="q-pa-md">
                   <div class="row text-center justify-center">
@@ -48,17 +50,18 @@
                           <q-separator />
                           <q-card-section>
                             <q-item dense>
-                              <q-item-section icon="attach_file" />
+                              <q-item-section avatar>
+                                <q-icon name="attach_file" />
+                              </q-item-section>
                               <q-item-section>{{
                                 formData.fileSelected[0].name
                               }}</q-item-section>
-                              <q-item-section></q-item-section>
                             </q-item>
                           </q-card-section>
                           <q-separator />
                           <q-card-actions align="end">
                             <q-btn
-                              size="10px"
+                              size="sm"
                               type="button"
                               color="negative"
                               @click="removeBulkUploadFile"
@@ -71,7 +74,7 @@
                     </div>
                     <div class="col-md-12 group" align="center">
                       <q-btn
-                        :disabled="formData.fileSelected.length == 0 "
+                        :disable="formData.fileSelected.length == 0"
                         type="button"
                         color="purple-9"
                         label="Submit"
@@ -86,32 +89,28 @@
         </div>
       </div>
     </q-card>
-    <q-card>
+    <q-card class="q-mt-md">
       <div class="text-grey-9">
         <div class="row bottom-border q-pa-sm items-center">
           <div class="col">
             <q-tabs
               class="shadow-1"
-              color="tertiary"
+              active-color="primary"
+              indicator-color="primary"
               align="justify"
               v-model="selectedTab"
               @update:model-value="goToUnassignedTab"
             >
-              <q-tab
-                class="size1"
-                label="Hitachi Onboarding Merchants"
-                name="unAssigned"
-              />
+              <q-tab class="size1" name="unAssigned" label="Hitachi Onboarding Merchants" />
             </q-tabs>
+
             <q-tab-panels v-model="selectedTab" animated>
-              <q-tab-panel name="unAssigned">
-                <!--START: table Data -->
+              <q-tab-panel name="unAssigned" class="no-padding">
                 <q-table
                   :rows="tableData1"
                   :columns="columnData"
                   table-class="customTableClass"
                   :filter="filterSearch1"
-                  v-model:selected="formData.marsDeviceIdsCooked"
                   v-model:pagination="paginationControl1"
                   row-key="id"
                   :loading="tableAjaxLoading1"
@@ -143,54 +142,41 @@
                         push
                         color="positive"
                         size="sm"
-                        >Success</q-btn
-                      >
+                        label="Success"
+                      />
                       <q-btn
-                        v-if="props.row.isStatus == 2"
+                        v-else-if="props.row.isStatus == 2 || props.row.isStatus == 3 || props.row.isStatus == null"
                         push
                         color="negative"
                         size="sm"
                         @click="OGSPendingStatus(props.row)"
-                        >Re-Submit</q-btn
-                      >
-                      <q-btn
-                        v-if="props.row.isStatus == 3"
-                        push
-                        color="negative"
-                        size="sm"
-                        @click="OGSPendingStatus(props.row)"
-                        >Re-Submit</q-btn
-                      >
+                        label="Re-Submit"
+                      />
                       <q-btn
                         class="btn1"
-                        v-if="props.row.isStatus == 4"
+                        v-else-if="props.row.isStatus == 4"
                         disable
                         push
                         color="purple-9"
                         size="sm"
-                        >Installed</q-btn
-                      >
-                      <q-btn
-                        v-if="props.row.isStatus == null"
-                        push
-                        color="purple-9"
-                        size="sm"
-                        @click="OGSPendingStatus(props.row)"
-                        >Re-Submit</q-btn
-                      >
+                        label="Installed"
+                      />
                     </q-td>
                   </template>
                   <template v-slot:top>
                     <div class="col-md-4">
-                      <q-input
-                        clearable
+                      <q-input dense clearable
                         color="grey-9"
                         v-model="filterSearch1"
                         placeholder="Type.."
                         label="Search by MerchantName, TID, MID..."
-                        class="q-mr-lg q-py-sm"
-                      />
+                        class="q-mr-lg q-py-sm">
+                        <template v-slot:append>
+                          <q-icon name="search" />
+                        </template>
+                      </q-input>
                     </div>
+
                     <div class="col-md-6">
                       <q-btn
                         color="purple-9"
@@ -202,7 +188,6 @@
                     </div>
                   </template>
                 </q-table>
-                <!--END: table Data -->
               </q-tab-panel>
             </q-tab-panels>
           </div>
@@ -210,15 +195,17 @@
       </div>
     </q-card>
     <downloadIndianBankReports
-              v-if="propHitachiReport"
-              :propHitachiReport="propHitachiReport"
-              @emitfnHitachiIndianBank="downloadHitachiIndianBank"
-            ></downloadIndianBankReports>
+      v-if="propHitachiReport"
+      :propHitachiReport="propHitachiReport"
+      @emitfnHitachiIndianBank="downloadHitachiIndianBank"
+    />
   </q-page>
 </template>
+
 <script>
 import { mapGetters, mapActions } from "vuex";
 import downloadIndianBankReports from "../../components/sat/downloadIndianBankReports.vue";
+
 export default {
   name: "hitachiIndianBankOnboarding",
   components: {
@@ -226,135 +213,31 @@ export default {
   },
   data() {
     return {
-      uploadTab: 'upload',
-      propToggleLeadInformation: false,
+      tab: 'upload',
       propHitachiReport:false,
-      addtnLeadInformation: null,
-      filterSearch: "",
       filterSearch1: "",
       selectedTab: "unAssigned",
-      assignTo: "",
-      assignToOptions: [],
-      tableData: [],
       tableData1: [],
       uploaderHovered: false,
-
       columnData: [
-        {
-          name: "createdAt",
-          required: true,
-          label: "Upload Date / Time",
-          align: "left",
-          field: row => {
-            return row.createdAt;
-          },
-          format: val => this.$moment(val).format("Do MMM Y"),
-          sortable: true
-        },
-        {
-          name: "merchant_name",
-          required: true,
-          label: "Merchant Name",
-          align: "left",
-          field: row => {
-            return row.leadName == null ? "NA" : row.leadName;
-          },
-          sortable: false
-        },
-        {
-          name: "tid",
-          required: true,
-          label: "TID",
-          align: "left",
-          field: row => {
-            return row.tid;
-          },
-          sortable: false
-        },
-        {
-          name: "mid",
-          required: true,
-          label: "MID",
-          align: "left",
-          field: row => {
-            return row.mid;
-          },
-          sortable: false
-        },
-        {
-          name: "device_model",
-          required: true,
-          label: "Device Model",
-          align: "center",
-          field: row => {
-            return row.device != null ? row.device : "NA";
-          },
-          sortable: false
-        },
-        {
-          name: "device_address",
-          required: true,
-          label: "Contact Name",
-          align: "left",
-          field: row => {
-            return row.contactName == null ? "NA" : row.contactName;
-          },
-          sortable: false
-        },
-        {
-          name: "contact_number",
-          required: true,
-          label: "Contact Number",
-          align: "center",
-          field: row => {
-            return row.contactNumber != null ? row.contactNumber : "NA";
-          },
-          sortable: false
-        },
-        {
-          name: "status",
-          required: true,
-          label: "Status",
-          align: "left",
-          field: row => {
-            if (row.isStatus == 1) {
-              return "Success";
-            } else if (row.isStatus == 2) {
-              return "Pending";
-            } else if (row.isStatus == 3) {
-              return "OGS Failure";
-            } else if (row.isStatus == 4) {
-              return "Installed";
-            } else {
-              return "Failure";
-            }
-          },
-          sortable: false
-        },
-        {
-          name: "assign",
-          required: true,
-          label: "Action",
-          align: "left",
-          field: "action",
-          sortable: false
-        }
+        { name: "createdAt", required: true, label: "Upload Date / Time", align: "left", field: "createdAt", sortable: true },
+        { name: "merchant_name", required: true, label: "Merchant Name", align: "left", field: row => row.leadName || "NA", sortable: false },
+        { name: "tid", required: true, label: "TID", align: "left", field: "tid", sortable: false },
+        { name: "mid", required: true, label: "MID", align: "left", field: "mid", sortable: false },
+        { name: "device_model", required: true, label: "Device Model", align: "center", field: row => row.device || "NA", sortable: false },
+        { name: "device_address", required: true, label: "Contact Name", align: "left", field: row => row.contactName || "NA", sortable: false },
+        { name: "contact_number", required: true, label: "Contact Number", align: "center", field: row => row.contactNumber || "NA", sortable: false },
+        { name: "status", required: true, label: "Status", align: "left", field: row => {
+            if (row.isStatus == 1) return "Success";
+            if (row.isStatus == 2) return "Pending";
+            if (row.isStatus == 3) return "OGS Failure";
+            if (row.isStatus == 4) return "Installed";
+            return "Failure";
+          }, sortable: false },
+        { name: "assign", required: true, label: "Action", align: "left", field: "action", sortable: false }
       ],
-
-      currentDeviceInfo: {},
-      showDeviceAddressModal: false,
       formData: {
-        marsDeviceIdsCooked: [],
-        marsDeviceIdsCookedUnAssinged: [],
-        triggerWelcomeMail: false,
-        assignTo: "",
         fileSelected: []
-      },
-      paginationControl: {
-        sortBy: "createdAt",
-        descending: false,
-        page: 1,
-        rowsPerPage: 5
       },
       paginationControl1: {
         sortBy: "createdAt",
@@ -362,30 +245,23 @@ export default {
         page: 1,
         rowsPerPage: 5
       },
-      tableAjaxLoading: false,
       tableAjaxLoading1: false
     };
   },
   computed: {
-    ...mapGetters("HitachiIndianBankOnboarding", ["getHitachiIndianOnboarding"]),
-    ...mapGetters("ImplementationExecutive", ["getImplementationExecutiveList"])
+    ...mapGetters("HitachiIndianBankOnboarding", ["getHitachiIndianOnboarding"])
+  },
+  mounted() {
+    this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: "" });
   },
   methods: {
     ...mapActions("HitachiIndianBankOnboarding", ["HITACHI_INDIAN_ONBOARDING_LIST", "REASSIGN_HITACHI_MERCHANTS"]),
-    ...mapActions("InventoryCentral", ["REPORT_HITACHI_ONBOARDING_MERCHANTS"]),
-    ...mapActions("SuperAdminUsers", ["FETCH_ALL_STATES_DATA"]),
     ...mapActions("IndianBankUpload", ["FEED_HITACHI_INDIAN_BANK_ONBOARDING_UPLOAD_DATA"]),
-    ...mapActions("ImplementationExecutive", ["IMPLEMENTATION_EXECUTIVE_LIST"]),
 
-    removeBulkUploadFile() {
-      this.formData.fileSelected = [];
-    },
-    dragAndDropCustomAnimate(action) {
-      this.uploaderHovered = action;
-    },
-    onDrop: function(e) {
-      e.stopPropagation();
-      e.preventDefault();
+    removeBulkUploadFile() { this.formData.fileSelected = []; },
+    dragAndDropCustomAnimate(action) { this.uploaderHovered = action; },
+    onDrop(e) {
+      e.stopPropagation(); e.preventDefault();
       this.formData.fileSelected = e.dataTransfer.files;
       this.fileCheckSum(e.dataTransfer.files);
     },
@@ -397,22 +273,19 @@ export default {
         return false;
       }
     },
-    onChange(e) {
-      this.formData.fileSelected = e.target.files;
-    },
-    uploadFileForBulkUpload(formData) {
+    onChange(e) { this.formData.fileSelected = e.target.files; },
+    uploadFileForBulkUpload() {
       if (this.formData.fileSelected.length == 0) {
         this.$q.notify({ color: "amber-9", position: "bottom", message: "Please upload file", icon: "warning" });
-        return false;
+        return;
       }
       this.$q.loading.show({ delay: 100, spinnerColor: "purple-9", message: "Please wait.." });
-      let assumeFormData = new FormData();
-      assumeFormData.append("file", this.formData.fileSelected[0]);
-      this.FEED_HITACHI_INDIAN_BANK_ONBOARDING_UPLOAD_DATA({ file: assumeFormData }).then(response => {
+      let fd = new FormData();
+      fd.append("file", this.formData.fileSelected[0]);
+      this.FEED_HITACHI_INDIAN_BANK_ONBOARDING_UPLOAD_DATA(fd).then(() => {
           this.$q.loading.hide();
           this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Uploaded!", icon: "thumb_up" });
-          this.ajaxLoadAllLeadInfo1({pagination: this.paginationControl1, filter: this.filterSearch1});
-          this.$emit("emitToggleinventoryBulkUploadOnSuccess");
+          this.ajaxLoadAllLeadInfo1({pagination: this.paginationControl1, filter: ""});
           this.formData.fileSelected = [];
         }).catch(error => {
           this.$q.loading.hide();
@@ -421,89 +294,35 @@ export default {
     },
     ajaxLoadAllLeadInfo1({ pagination, filter }) {
       this.$q.loading.show({ delay: 0, spinnerColor: "purple-9", message: "Fetching data .." });
-      this.HITACHI_INDIAN_ONBOARDING_LIST({ pagination, filter }).then(res => {
+      this.HITACHI_INDIAN_ONBOARDING_LIST({ pagination, filter }).then(() => {
           this.paginationControl1 = pagination;
           this.paginationControl1.rowsNumber = this.getHitachiIndianOnboarding.totalElements;
           this.paginationControl1.page = this.getHitachiIndianOnboarding.number + 1;
           this.tableData1 = this.getHitachiIndianOnboarding.content;
-          if (this.getHitachiIndianOnboarding.sort != null) {
-            this.paginationControl1.sortBy = this.getHitachiIndianOnboarding.sort[0].property;
-            this.paginationControl1.descending = this.getHitachiIndianOnboarding.sort[0].ascending;
-          } else {
-            this.paginationControl1.sortBy = "createdAt";
-            this.paginationControl1.descending = !this.paginationControl1.descending;
-          }
-          this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
-            this.assignToOptions = this.getImplementationExecutiveList.map(value => ({
-                label: value.name + " | " + value.employeeID + " | " + value.email,
-                value: value.id
-              }));
-          });
           this.$q.loading.hide();
         }).catch(() => this.$q.loading.hide());
     },
     goToUnassignedTab(tab) {
-        this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: this.filterSearch1 });
+      this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: "" });
     },
     OGSPendingStatus(request) {
       this.$q.loading.show({ delay: 100, message: "Please Wait", spinnerColor: "purple-9" });
-      this.REASSIGN_HITACHI_MERCHANTS({ tid: request.tid }).then(response => {
-          this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: this.filterSearch1 });
+      this.REASSIGN_HITACHI_MERCHANTS({ tid: request.tid }).then(() => {
+          this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: "" });
           this.$q.notify({ color: "positive", position: "bottom", message: "Re-Assigned Successfully", icon: "thumb_up" });
+          this.$q.loading.hide();
         }).catch(error => {
           this.$q.loading.hide();
           this.$q.notify({ color: "negative", position: "bottom", message: error.body?.message || "Please Try Again Later !", icon: "thumb_down" });
         });
     },
-    downloadHitachiIndianBank() {
-      this.propHitachiReport = !this.propHitachiReport;
-    }
+    downloadHitachiIndianBank() { this.propHitachiReport = !this.propHitachiReport; }
   }
 };
 </script>
 
 <style scoped>
-.customTd {
-  text-align: left !important;
-  word-wrap: break-word;
-  white-space: normal;
-}
-.customTd.customCellLength {
-  min-width: 300px !important;
-  overflow-x: auto;
-}
-* {
-  font-family: "Arial";
-  font-size: 12px;
-}
-input[type="file"] {
-  position: absolute;
-  opacity: 0;
-  z-index: -1;
-}
-.btn1 {
-  width: 87px;
-}
-.align-center {
-  text-align: center;
-}
-.display-inline {
-  display: inline-block;
-  vertical-align: middle;
-}
-.drop {
-  padding: 15px;
-  background-color: #f6f6f6;
-  border-radius: 2px;
-  height: 100%;
-  max-height: 400px;
-  max-width: 600px;
-  width: 100%;
-}
-.toggleBulkUploadActive {
-  border: 4px dashed #ccc;
-}
-.toggleBulkUploadDisable {
-  border: 4px dashed #1f2c3fa6;
-}
+.customTd { text-align: left !important; word-wrap: break-word; white-space: normal; }
+.btn1 { width: 87px; }
+.drop { padding: 15px; background-color: #f6f6f6; border-radius: 2px; height: 100%; max-height: 400px; max-width: 600px; width: 100%; border: 4px dashed #ccc; }
 </style>

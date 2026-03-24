@@ -1,12 +1,11 @@
 <template>
   <q-page>
     <div>
-      <!--STARTv-model: table title -->
+      <!--START: table title -->
       <div
         class="col-md-6 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >Merchant Tracker - TID</div>
       <!--END: table title -->
-
       <!--START: table data -->
       <q-table
         table-class="customTableClass"
@@ -16,50 +15,38 @@
         row-key="name"
       >
         <template v-slot:body-cell-tid="props">
-            <q-td :props="props">
-
-          <span class="label text-primary"># {{props.row.tid}}</span>
-
+          <q-td :props="props">
+            <span class="label text-primary"># {{props.row.tid}}</span>
           </q-td>
-          </template>
+        </template>
         <template v-slot:body-cell-mid="props">
-            <q-td :props="props">
-
-          <span class="label text-primary"># {{props.row.mid}}</span>
-
+          <q-td :props="props">
+            <span class="label text-primary"># {{props.row.mid}}</span>
           </q-td>
-          </template>
+        </template>
         <template v-slot:body-cell-transaction_amount="props">
-            <q-td :props="props">
-            Rs. {{props.row.transaction_amount}}
-          </q-td>
-          </template>
+          <q-td :props="props">Rs. {{props.row.transaction_amount}}</q-td>
+        </template>
         <template v-slot:body-cell-gst="props">
-            <q-td :props="props">
-            Rs. {{props.row.gst}}
-          </q-td>
-          </template>
+          <q-td :props="props">Rs. {{props.row.gst}}</q-td>
+        </template>
         <template v-slot:body-cell-net_amount="props">
-            <q-td :props="props">
-            Rs. {{props.row.net_amount}}
-          </q-td>
-          </template>
+          <q-td :props="props">Rs. {{props.row.net_amount}}</q-td>
+        </template>
         <template v-slot:body-cell-mdr="props">
-            <q-td :props="props">
-            Rs. {{props.row.mdr}}
-          </q-td>
-          </template>
+          <q-td :props="props">Rs. {{props.row.mdr}}</q-td>
+        </template>
+
         <template v-slot:top="props">
           <!--START: table fullscreen mode -->
           <!-- <div class="col-md-4" align="right">
                   <q-btn
+                    class="q-mx-xs q-py-xs text-weight-light"
+                    flat
                     :icon="props.inFullscreen ? 'fullscreen_exit' : 'fullscreen'"
                     @click="props.toggleFullscreen"
-                    class="q-mt-lg"
-                    color="grey-9"
-                    size="sm"
-          />-->
-          <!-- </div> -->
+                  />
+                </div>-->
           <!--END: table fullscreen mode -->
 
           <!--START: table search -->
@@ -67,16 +54,18 @@
             <q-input
               clearable
               v-model="filter"
-              separator
               color="grey-9"
               placeholder="Type.."
               label="SO Name,Region,DeviceType"
               class="q-mr-lg q-py-sm"
-            />
+            >
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </q-input>
           </div>
           <!--END: table search -->
-
-          <!--START: table filter dropdown -->
+          <!--START: table search -->
           <div class="col-md-5">
             <q-select
               v-model="filter_values"
@@ -85,151 +74,218 @@
               :options="data"
             />
           </div>
-          <!--END: table filter dropdown -->
-
-          <!--START: table excel download -->
-          <div class="col-md-4"></div>
-          <!--END: table excel download -->
+          <!--END: table search -->
         </template>
       </q-table>
+
       <!--END: table data -->
     </div>
   </q-page>
 </template>
 
 <script>
-import { required } from '@vuelidate/validators';
 import downloadExcel from "vue-json-excel";
 
 export default {
-  name: "merchantTracker",
+  name: "deviceList",
   components: {
     downloadExcel
   },
   data() {
     return {
+      filter_values: "",
+      filter: "",
       paginationControl: {
         rowsPerPage: 10
       },
-      filter: "",
-      filter_values: "",
       data: [
         {
-          label: "ramesh",
-          value: "ramesh"
+          label: "John Doe",
+          value: "John Doe"
         },
         {
-          label: "suresh",
-          value: "suresh"
-        },
-        {
-          label: "dinesh",
-          value: "dinesh"
+          label: "Mithu",
+          value: "Mithu"
         }
       ],
-
       columns: [
         {
-          name: "soname",
+          name: "tid",
           required: true,
-          label: "SO Name",
+          label: "TID",
           align: "left",
-          field: "soname",
+          field: "tid",
           sortable: true
         },
         {
-          name: "region",
+          name: "mid",
           required: true,
-          label: "Region",
-          align: "center",
-          field: "region",
+          label: "MID",
+          align: "left",
+          field: "mid",
           sortable: true
         },
         {
-          name: "devicename",
+          name: "transaction_amount",
           required: true,
-          label: "Device Name",
+          label: "Trxn Amt",
           align: "left",
-          field: "devicename",
+          field: "transaction_amount",
           sortable: true
         },
         {
-          name: "serialnumber",
+          name: "gst",
           required: true,
-          label: "Serial Number",
+          label: "GST",
           align: "left",
-          field: "serialnumber",
+          field: "gst",
           sortable: true
         },
         {
-          name: "count",
+          name: "mdr",
           required: true,
-          label: "Number of Device",
+          label: "MDR",
           align: "left",
-          field: "count",
+          field: "mdr",
+          sortable: true
+        },
+        {
+          name: "net_amount",
+          required: true,
+          label: "Net Amt",
+          align: "left",
+          field: "net_amount",
+          sortable: true
+        },
+        {
+          name: "payout_id",
+          required: true,
+          label: "Payout ID",
+          align: "left",
+          field: "payout_id",
+          sortable: true
+        },
+        {
+          name: "payout_date",
+          required: true,
+          label: "Payout Date",
+          align: "left",
+          field: "payout_date",
           sortable: true
         }
       ],
-      loading: true,
       tableData: [
         {
-          soname: "suresh",
-          region: "chennai",
-          devicename: "GPRS",
-          serialnumber: "123456",
-          count: "1"
+          tid: 3366525,
+          mid: 5565545,
+          transaction_amount: 500,
+          gst: 18,
+          mdr: 10,
+          net_amount: 472,
+          payout_id: 33233,
+          payout_date: "10-12-2018"
         },
         {
-          soname: "suresh",
-          region: "chennai",
-          devicename: "GPRS",
-          serialnumber: "123456",
-          count: "1"
+          tid: 3366525,
+          mid: 5565545,
+          transaction_amount: 500,
+          gst: 18,
+          mdr: 10,
+          net_amount: 472,
+          payout_id: 33233,
+          payout_date: "10-12-2018"
         },
         {
-          soname: "suresh",
-          region: "chennai",
-          devicename: "GPRS",
-          serialnumber: "123456",
-          count: "1"
+          tid: 3366525,
+          mid: 5565545,
+          transaction_amount: 500,
+          gst: 18,
+          mdr: 10,
+          net_amount: 472,
+          payout_id: 33233,
+          payout_date: "10-12-2018"
         },
         {
-          soname: "suresh",
-          region: "chennai",
-          devicename: "GPRS",
-          serialnumber: "123456",
-          count: "1"
+          tid: 3366525,
+          mid: 5565545,
+          transaction_amount: 500,
+          gst: 18,
+          mdr: 10,
+          net_amount: 472,
+          payout_id: 33233,
+          payout_date: "10-12-2018"
         },
         {
-          soname: "suresh",
-          region: "chennai",
-          devicename: "GPRS",
-          serialnumber: "123456",
-          count: "1"
+          tid: 3366525,
+          mid: 5565545,
+          transaction_amount: 500,
+          gst: 18,
+          mdr: 10,
+          net_amount: 472,
+          payout_id: 33233,
+          payout_date: "10-12-2018"
+        },
+        {
+          tid: 3366525,
+          mid: 5565545,
+          transaction_amount: 500,
+          gst: 18,
+          mdr: 10,
+          net_amount: 472,
+          payout_id: 33233,
+          payout_date: "10-12-2018"
+        },
+        {
+          tid: 3366525,
+          mid: 5565545,
+          transaction_amount: 500,
+          gst: 18,
+          mdr: 10,
+          net_amount: 472,
+          payout_id: 33233,
+          payout_date: "10-12-2018"
+        },
+        {
+          tid: 3366525,
+          mid: 5565545,
+          transaction_amount: 500,
+          gst: 18,
+          mdr: 10,
+          net_amount: 472,
+          payout_id: 33233,
+          payout_date: "10-12-2018"
         }
       ],
-
       json_fields: {
-        name: "String",
-        city: "String",
-        country: "String",
-        birthdate: "String",
-        amount: "Number"
+        TID: "tid",
+        MID: "mid",
+        "Trxn Amt": "transaction_amount",
+        GST: "gst",
+        MDR: "mdr",
+        "Net Amt": "net_amount",
+        "Payout ID": "payout_id",
+        "Payout Date": "payout_date"
       },
       json_data: [
         {
-          name: "Tony Pena",
-          city: "New York",
-          country: "United States",
-          birthdate: "1978-03-15",
-          amount: 42
+          tid: 3366525,
+          mid: 5565545,
+          transaction_amount: 500,
+          gst: 18,
+          mdr: 10,
+          net_amount: 472,
+          payout_id: 33233,
+          payout_date: "10-12-2018"
         },
         {
-          name: "Thessaloniki",
-          city: "Athens",
-          country: "Greece",
-          birthdate: "1987-11-23",
-          amount: 42
+          tid: 3366525,
+          mid: 5565545,
+          transaction_amount: 500,
+          gst: 18,
+          mdr: 10,
+          net_amount: 472,
+          payout_id: 33233,
+          payout_date: "10-12-2018"
         }
       ],
       json_meta: [

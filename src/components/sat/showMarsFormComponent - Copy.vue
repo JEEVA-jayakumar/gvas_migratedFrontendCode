@@ -878,9 +878,9 @@ export default {
   }
 };
 </script>
+
 <style>
 .no-underline {
   text-decoration: none;
 }
 </style>
- 

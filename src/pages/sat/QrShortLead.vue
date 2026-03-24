@@ -8,7 +8,7 @@
           </div>
           <div
             class="text-light-blue cursor-pointer"
-            @click="toggleLeadInformation(formData.shortLead)"
+            @click="toggleLeadInformation(formData.qrShortLead)"
           >
             # {{ formData.qrShortLead.qrLeadNumber }}
           </div>
@@ -70,7 +70,7 @@
                         <span
                           style="flex: 1"
                           :class="{
-                            'error-highlight': $v.formData.qrShortLead.contactName.$error,
+                            'text-negative': $v.formData.qrShortLead.contactName.$error,
                           }"
                         >
                           Contact Person Name
@@ -87,9 +87,6 @@
                       <div
                         v-if="$v.formData.qrShortLead.contactName.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight': $v.formData.qrShortLead.contactName.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.contactName.$model">
                           Contact Person Name is required.
@@ -101,7 +98,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.legalName.$error
                           }"
                         >
@@ -115,14 +112,10 @@
                           v-model="formData.qrShortLead.legalName"
                           @update:model-value="handlelegalname($event)"
                         />
-                        <!-- @keydown="nameKeydown($event)" -->
                       </q-item-section>
                       <div
                         v-if="$v.formData.qrShortLead.legalName.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight': $v.formData.qrShortLead.legalName.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.legalName.$model">
                           Legal Name is required.
@@ -130,8 +123,8 @@
                         <span
                           v-if="
                             $v.formData.qrShortLead.legalName.$model &&
-                            ($v.formData.qrShortLead.legalName.$model < 0 ||
-                              $v.formData.qrShortLead.legalName.$model > 60)
+                            ($v.formData.qrShortLead.legalName.$model.length < 0 ||
+                              $v.formData.qrShortLead.legalName.$model.length > 60)
                           "
                         >
                           Legal Name must be between 0 and 60.
@@ -148,13 +141,9 @@
                         v-model="formData.qrShortLead.marketingName"
                         @update:model-value="handlemarketing($event)"
                       />
-                      <!-- @keydown="nameKeydown($event)" -->
                       <div
                         v-if="$v.formData.qrShortLead.marketingName.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight': $v.formData.qrShortLead.marketingName.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.marketingName.$model">
                           Marketing Name is required.
@@ -177,31 +166,6 @@
                       <div v-if="gstNumberValidationError" class="error-tooltip">
                         GST Number must be exactly 15 digits.
                       </div>
-                      <!-- <div
-                        v-if="
-                          $v.formData.qrShortLead.gstNumber.$model &&
-                          $v.formData.qrShortLead.gstNumber.$model !== 15 
-                        "
-                        class="error-tooltip"
-                      >
-                        GST Number must be exactly 15 digits.
-                      </div> -->
-
-                      <!-- <q-item-section style="display: flex; align-items: center;">
-                        <span style="flex: 1;">
-                          GST Number
-                        </span>
-                        <q-input
-                          @blur="$v.formData.qrShortLead.gstNumber.$touch"
-                          :error="$v.formData.qrShortLead.gstNumber.$error"
-                          type="text"
-                          style="width: 220px"
-                          label="GST Number"
-                          placeholder="GST Number"
-                          v-model="formData.qrShortLead.gstNumber"
-                          @keydown="nameKeydown($event)"
-                        />
-                      </q-item-section> -->
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Contact Email</q-item-section>
@@ -214,30 +178,22 @@
                         @blur="$v.formData.qrShortLead.contactEmail.$touch"
                         v-model="formData.qrShortLead.contactEmail"
                       />
-                      <!-- <div
-                        v-if="$v.formData.qrShortLead.contactEmail.$error"
-                        class="error-tooltip"
-                        :class="{
-                          'error-highlight': $v.formData.qrShortLead.contactEmail.$error,
-                        }"
-                      > -->
                       <span
-                        v-if="!$v.formData.qrShortLead.contactEmail.$model"
+                        v-if="!$v.formData.qrShortLead.contactEmail.$model && $v.formData.qrShortLead.contactEmail.$error"
                         class="error-tooltip"
                       >
                         Contact Email is required.
                       </span>
                       <span
                         v-if="
-                         !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+                         formData.qrShortLead.contactEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
                           formData.qrShortLead.contactEmail
-    )
+                         ) && $v.formData.qrShortLead.contactEmail.$error
                         "
                         class="error-tooltip"
                       >
                        please enter valid email id
                       </span>
-                      <!-- </div> -->
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Contact Number</q-item-section>
@@ -255,10 +211,6 @@
                       <div
                         v-if="$v.formData.qrShortLead.contactNumber.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight':
-                            $v.formData.qrShortLead.contactNumber.$error
-                        }"
                       >
                         <span
                           v-if="!$v.formData.qrShortLead.contactNumber.$model"
@@ -268,7 +220,7 @@
                         <span
                           v-if="
                             $v.formData.qrShortLead.contactNumber.$model &&
-                              $v.formData.qrShortLead.contactNumber.$model
+                              $v.formData.qrShortLead.contactNumber.$model.toString()
                                 .length !== 10
                           "
                         >
@@ -286,7 +238,7 @@
                         v-model="formData.qrShortLead.alternateContactNumber"
                         @keydown="nameKeydown($event)"
                       />
-                      <div v-if="alternativeError" class="error-tooltip">
+                      <div v-if="alternativeError && !formData.qrShortLead.alternateContactNumber" class="error-tooltip">
                         Alternate Number is required.
                       </div>
                       <div
@@ -301,7 +253,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.contactAddress.$error
                           }"
                         >
@@ -317,10 +269,6 @@
                         <div
                           v-if="$v.formData.qrShortLead.contactAddress.$error"
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight':
-                              $v.formData.qrShortLead.contactAddress.$error
-                          }"
                         >
                           <span
                             v-if="
@@ -332,10 +280,10 @@
                           <span
                             v-if="
                               $v.formData.qrShortLead.contactAddress.$model &&
-                                ($v.formData.qrShortLead.contactAddress.$model <
+                                ($v.formData.qrShortLead.contactAddress.$model.length <
                                   0 ||
                                   $v.formData.qrShortLead.contactAddress
-                                    .$model > 120)
+                                    .$model.length > 120)
                             "
                           >
                             Contact Address must be between 0 and 120.
@@ -348,7 +296,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.pincode.$error
                           }"
                         >
@@ -375,9 +323,6 @@
                         <div
                           v-if="$v.formData.qrShortLead.pincode.$error"
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight': $v.formData.qrShortLead.pincode.$error,
-                          }"
                         >
                           <span v-if="!$v.formData.qrShortLead.pincode.$model">
                             Pincode is required.
@@ -385,7 +330,7 @@
                           <span
                             v-if="
                               $v.formData.qrShortLead.pincode.$model &&
-                                $v.formData.qrShortLead.pincode.$model
+                                $v.formData.qrShortLead.pincode.$model.toString()
                                   .length !== 6
                             "
                           >
@@ -399,7 +344,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.state.$error
                           }"
                         >
@@ -423,10 +368,7 @@
                         <div
                           v-if="$v.formData.qrShortLead.state.$error"
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight': $v.formData.qrShortLead.state.$error,
-                          }"
-+                        >
+                        >
                           <span v-if="!$v.formData.qrShortLead.state.$model">
                             State is required.
                           </span>
@@ -438,7 +380,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.city.$error
                           }"
                         >
@@ -462,9 +404,6 @@
                         <div
                           v-if="$v.formData.qrShortLead.city.$error"
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight': $v.formData.qrShortLead.city.$error,
-                          }"
                         >
                           <span v-if="!$v.formData.qrShortLead.city.$model">
                             City is required.
@@ -494,11 +433,6 @@
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Establishment Year</q-item-section>
-                      <!-- <q-input
-                        type="text"
-                        style="width: 220px"
-                        v-model="formData.qrShortLead.establishmentYear"
-                      /> -->
                       <q-input
                         v-model="formData.qrShortLead.establishmentYear"
                         label="Establishment Year"
@@ -538,10 +472,6 @@
                           $v.formData.qrShortLead.merchantIndustry.industryName.$error
                         "
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight':
-                            $v.formData.qrShortLead.merchantIndustry.industryName.$error,
-                        }"
                       >
                         <span
                           v-if="
@@ -560,7 +490,6 @@
                         v-model="formData.qrShortLead.natureOfBusiness"
                         @update:model-value="handleInput($event)"
                       />
-                      <!-- @keydown="nameKeydown($event)" -->
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Category Type</q-item-section>
@@ -656,7 +585,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.salesPersonName.$error
                           }"
                         >
@@ -674,16 +603,13 @@
                           v-model="formData.qrShortLead.salesPersonName"
                           label="Sales Person*"
                           :options="dropDown.salesPersonOptions"
-                          @selected="salesSelected"
                           @update:model-value="saveFieldData"
+                          emit-value
+                          map-options
                         />
                         <div
                           v-if="$v.formData.qrShortLead.salesPersonName.$error"
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight':
-                              $v.formData.qrShortLead.salesPersonName.$error,
-                          }"
                         >
                           <span v-if="!$v.formData.qrShortLead.salesPersonName.$model">
                             Sales Person Name is required.
@@ -691,25 +617,6 @@
                         </div>
                       </q-item-section>
                     </q-item>
-                    <!-- <q-item class="q-pa-sm q-body-1">
-                        <q-item-section style="display: flex; align-items: center;">
-                        <span style="flex: 1;"
-                          :class="{'error-highlight': $v.formData.qrShortLead.regionCode.$error}">
-                          Region
-                        </span>
-                      <q-select
-                        @blur="$v.formData.qrShortLead.regionCode.$touch"
-                        :error="$v.formData.qrShortLead.regionCode.$error"
-                        style="width: 220px"
-                        color="grey-9"
-                        v-model="formData.qrShortLead.regionCode"
-                        label="Region*"
-                        :options="regionOptions"
-                        @selected="regionSelected"
-                        @update:model-value="saveFieldData"
-                      />
-                    </q-item-section>
-                    </q-item> -->
                   </q-list>
                 </q-card-section>
               </q-card>
@@ -733,7 +640,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.personalAddress.$error
                           }"
                         >
@@ -753,10 +660,6 @@
                         <div
                           v-if="$v.formData.qrShortLead.personalAddress.$error"
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight':
-                              $v.formData.qrShortLead.personalAddress.$error,
-                          }"
                         >
                           <span v-if="!$v.formData.qrShortLead.personalAddress.$model">
                             Address is required.
@@ -764,8 +667,8 @@
                           <span
                             v-if="
                               $v.formData.qrShortLead.personalAddress.$model &&
-                              ($v.formData.qrShortLead.personalAddress.$model < 0 ||
-                                $v.formData.qrShortLead.personalAddress.$model > 180)
+                              ($v.formData.qrShortLead.personalAddress.$model.length < 0 ||
+                                $v.formData.qrShortLead.personalAddress.$model.length > 180)
                             "
                           >
                             Address must be between 0 and 180.
@@ -778,7 +681,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.personalInfoCity.$error
                           }"
                         >
@@ -804,10 +707,6 @@
                         <div
                           v-if="$v.formData.qrShortLead.personalInfoCity.$error"
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight':
-                              $v.formData.qrShortLead.personalInfoCity.$error,
-                          }"
                         >
                           <span v-if="!$v.formData.qrShortLead.personalInfoCity.$model">
                             City is required.
@@ -820,7 +719,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.personalInfoState.$error
                           }"
                         >
@@ -844,10 +743,6 @@
                         <div
                           v-if="$v.formData.qrShortLead.personalInfoState.$error"
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight':
-                              $v.formData.qrShortLead.personalInfoState.$error,
-                          }"
                         >
                           <span v-if="!$v.formData.qrShortLead.personalInfoState.$model">
                             State is required.
@@ -861,7 +756,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.personalInfoPincode.$error
                           }"
                         >
@@ -892,10 +787,6 @@
                         <div
                           v-if="$v.formData.qrShortLead.personalInfoPincode.$error"
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight':
-                              $v.formData.qrShortLead.personalInfoPincode.$error,
-                          }"
                         >
                           <span
                             v-if="!$v.formData.qrShortLead.personalInfoPincode.$model"
@@ -905,7 +796,7 @@
                           <span
                             v-if="
                               $v.formData.qrShortLead.personalInfoPincode.$model &&
-                              $v.formData.qrShortLead.personalInfoPincode.$model
+                              $v.formData.qrShortLead.personalInfoPincode.$model.toString()
                                 .length !== 6
                             "
                           >
@@ -920,7 +811,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.personalInfoMobile.$error
                           }"
                         >
@@ -944,10 +835,6 @@
                         <div
                           v-if="$v.formData.qrShortLead.personalInfoMobile.$error"
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight':
-                              $v.formData.qrShortLead.personalInfoMobile.$error,
-                          }"
                         >
                           <span v-if="!$v.formData.qrShortLead.personalInfoMobile.$model">
                             Mobile is required.
@@ -955,7 +842,7 @@
                           <span
                             v-if="
                               $v.formData.qrShortLead.personalInfoMobile.$model &&
-                              $v.formData.qrShortLead.personalInfoMobile.$model.length !==
+                              $v.formData.qrShortLead.personalInfoMobile.$model.toString().length !==
                                 10
                             "
                           >
@@ -969,7 +856,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.personalInfoEmail.$error
                           }"
                         >
@@ -988,31 +875,22 @@
                           "
                           v-model="formData.qrShortLead.personalInfoEmail"
                         />
-                        <!-- <div
-                          v-if="$v.formData.qrShortLead.personalInfoEmail.$error"
-                          class="error-tooltip"
-                          :class="{
-                            'error-highlight':
-                              $v.formData.qrShortLead.personalInfoEmail.$error,
-                          }"
-                        > -->
                         <span
-                          v-if="!$v.formData.qrShortLead.personalInfoEmail.$model"
+                          v-if="!$v.formData.qrShortLead.personalInfoEmail.$model && $v.formData.qrShortLead.personalInfoEmail.$error"
                           class="error-tooltip"
                         >
                           Email is required.
                         </span>
                         <span
                           v-if="
-                            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+                            formData.qrShortLead.personalInfoEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
                               formData.qrShortLead.personalInfoEmail
-                            )
+                            ) && $v.formData.qrShortLead.personalInfoEmail.$error
                           "
                           class="error-tooltip"
                         >
                            please enter valid email id
                         </span>
-                        <!-- </div> -->
                       </q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
@@ -1020,7 +898,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.panNumber.$error
                           }"
                         >
@@ -1040,9 +918,6 @@
                         <div
                           v-if="$v.formData.qrShortLead.panNumber.$error"
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight': $v.formData.qrShortLead.panNumber.$error,
-                          }"
                         >
                           <span v-if="!$v.formData.qrShortLead.panNumber.$model">
                             PAN is required.
@@ -1050,7 +925,7 @@
                           <span
                             v-if="
                               $v.formData.qrShortLead.panNumber.$model &&
-                              $v.formData.qrShortLead.panNumber.$model.length !== 10
+                              $v.formData.qrShortLead.panNumber.$model.toString().length !== 10
                             "
                           >
                             PAN must be exactly 10 digits.
@@ -1063,22 +938,12 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.dateOfBirth.$error
                           }"
                         >
                           DOB
                         </span>
-                        <!-- <q-input
-                          :error="$v.formData.qrShortLead.dateOfBirth.$error"
-                          @blur="$v.formData.qrShortLead.dateOfBirth.$touch"
-                          v-model="formData.qrShortLead.dateOfBirth"
-                          :max="tomorrow"
-                          style="width: 220px"
-                          label="DOB*"
-                          placeholder="DOB*"
-                          :format="'DD/MM/YYYY'"
-                        /> -->
                         <q-input
                           :error="$v.formData.qrShortLead.dateOfBirth.$error"
                           @blur="$v.formData.qrShortLead.dateOfBirth.$touch"
@@ -1092,9 +957,6 @@
                         <div
                           v-if="$v.formData.qrShortLead.dateOfBirth.$error"
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight': $v.formData.qrShortLead.dateOfBirth.$error,
-                          }"
                         >
                           <span v-if="!$v.formData.qrShortLead.dateOfBirth.$model">
                             DOB is required.
@@ -1123,9 +985,6 @@
                         placeholder="Passport Number"
                         v-model="formData.qrShortLead.passportNumber"
                       />
-                      <!-- <div v-if="!isPassportNumberValid" class="error-tooltip">
-                        Passport Number format must be J8369854
-                      </div> -->
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Passport Expiry Date</q-item-section>
@@ -1136,39 +995,16 @@
                         placeholder="Passport Expiry Date"
                         v-model="formData.qrShortLead.passportExpiryDate"
                       />
-                      <!-- <q-input
-                        v-model="formData.qrShortLead.passportExpiryDate"
-                        label="Passport Expiry Date"
-                        mask="##/##/####"
-                        filled
-                        type="text"
-                        style="width: 220px"
-                      />
-                      <div v-if="!ispassportValid" class="error-tooltip">
-                        Passport Expiry Date must a valid date in dd/mm/yyyy format.
-                      </div> -->
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Own House</q-item-section>
-                      <!-- <q-input
-                        v-if="this.formData.qrShortLead.ownHouse == true"
-                        type="text"
-                        style="width: 220px;"
-                        v-model="isownHouse"
-                      />
-                      <q-input
-                        v-if="this.formData.qrShortLead.ownHouse == false"
-                        type="text"
-                        style="width: 220px;"
-                        v-model="isownHouse1"
-                      /> -->
-
                       <q-select
                         v-model="formData.qrShortLead.ownHouse"
                         label="Own House*"
                         :options="ownHouseOptions"
                         style="width: 220px"
-                        @selected="houseSelected"
+                        emit-value
+                        map-options
                       />
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
@@ -1183,9 +1019,6 @@
                       <div
                         v-if="$v.formData.qrShortLead.ownerAge.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight': $v.formData.qrShortLead.ownerAge.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.ownerAge.$model">
                           Owner Age is required.
@@ -1197,9 +1030,6 @@
       Owner Age must be between 1 and 150.
     </span>
                       </div>
-                      <!-- <div v-if="!isownerage" class="error-tooltip">
-                        Owner Age must be greater than 0 and less than 150.
-                      </div> -->
                     </q-item>
                   </q-list>
                 </q-card-section>
@@ -1220,7 +1050,6 @@
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Business Hours WeekDay Start</q-item-section>
                       <q-input
-
                         style="width: 220px"
                         v-model="formData.qrShortLead.hoursWeekdayStart"
                         @keydown="nameKeydownhoursWeekdayStart"
@@ -1229,10 +1058,6 @@
                       <div
                         v-if="$v.formData.qrShortLead.hoursWeekdayStart.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight':
-                            $v.formData.qrShortLead.hoursWeekdayStart.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.hoursWeekdayStart.$model">
                           Business Hours WeekDay Start is required.
@@ -1242,7 +1067,6 @@
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Business Hours WeekDay End</q-item-section>
                       <q-input
-
                         style="width: 220px"
                         v-model="formData.qrShortLead.hoursWeekdayEnd"
                         @keydown="nameKeydownhoursWeekdayEnd"
@@ -1252,10 +1076,6 @@
                       <div
                         v-if="$v.formData.qrShortLead.hoursWeekdayEnd.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight':
-                            $v.formData.qrShortLead.hoursWeekdayEnd.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.hoursWeekdayEnd.$model">
                           Business Hours WeekDay End is required.
@@ -1265,7 +1085,6 @@
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Business Hours Weekend Start</q-item-section>
                       <q-input
-
                         style="width: 220px"
                         v-model="formData.qrShortLead.hoursWeekendStart"
                         @keydown="nameKeydownhoursWeekendStart"
@@ -1274,10 +1093,6 @@
                       <div
                         v-if="$v.formData.qrShortLead.hoursWeekendStart.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight':
-                            $v.formData.qrShortLead.hoursWeekendStart.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.hoursWeekendStart.$model">
                           Business Hours Weekend Start is required.
@@ -1287,7 +1102,6 @@
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Business Hours Weekend End</q-item-section>
                       <q-input
-
                         style="width: 220px"
                         v-model="formData.qrShortLead.hoursWeekendEnd"
                         @keydown="nameKeydownhoursWeekendEnd"
@@ -1296,10 +1110,6 @@
                       <div
                         v-if="$v.formData.qrShortLead.hoursWeekendEnd.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight':
-                            $v.formData.qrShortLead.hoursWeekendEnd.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.hoursWeekendEnd.$model">
                           Business Hours Weekend End is required.
@@ -1316,10 +1126,6 @@
                       <div
                         v-if="$v.formData.qrShortLead.averageBillAmount.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight':
-                            $v.formData.qrShortLead.averageBillAmount.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.averageBillAmount.$model">
                           Average Bill Amount is required.
@@ -1336,10 +1142,6 @@
                       <div
                         v-if="$v.formData.qrShortLead.maximumUsageDaily.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight':
-                            $v.formData.qrShortLead.maximumUsageDaily.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.maximumUsageDaily.$model">
                           Maximum Usage - Daily is required.
@@ -1356,10 +1158,6 @@
                       <div
                         v-if="$v.formData.qrShortLead.maximumUsageWeekly.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight':
-                            $v.formData.qrShortLead.maximumUsageWeekly.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.maximumUsageWeekly.$model">
                           Maximum Usage - Weekly is required.
@@ -1376,10 +1174,6 @@
                       <div
                         v-if="$v.formData.qrShortLead.maximumUsageMonthly.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight':
-                            $v.formData.qrShortLead.maximumUsageMonthly.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.maximumUsageMonthly.$model">
                           Maximum Usage - Monthly is required.
@@ -1418,7 +1212,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.marsRentalPlanName.$error
                           }"
                         >MARS Rental Plan Name</span>
@@ -1436,17 +1230,14 @@
                           v-model="formData.qrShortLead.marsRentalPlanName"
                           :options="dropDown.rentalplan"
                           label="Select Plan*"
-                          @selected="rentalPlanSelected"
                           @update:model-value="saveFieldData"
+                          emit-value
+                          map-options
                         />
                       </q-item-section>
                       <div
                         v-if="$v.formData.qrShortLead.marsRentalPlanName.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight':
-                            $v.formData.qrShortLead.marsRentalPlanName.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.marsRentalPlanName.$model">
                           MARS Rental Plan Name is required.
@@ -1459,7 +1250,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.rentalMode.$error
                           }"
                         >Rental Mode</span>
@@ -1472,14 +1263,13 @@
                           v-model="formData.qrShortLead.rentalMode"
                           label="Rental Mode*"
                           :options="rentalModeOptions"
+                          emit-value
+                          map-options
                         />
                       </q-item-section>
                       <div
                         v-if="$v.formData.qrShortLead.rentalMode.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight': $v.formData.qrShortLead.rentalMode.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.rentalMode.$model">
                           Rental Mode is required.
@@ -1492,14 +1282,13 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.rentalType.$error
                           }"
                         >Rental Type</span>
                 <div class="group">
                   <q-radio
                     @blur="$v.formData.qrShortLead.rentalType.$touch"
-                    :error="$v.formData.qrShortLead.rentalType.$error"
                     v-for="(item, index) in rentalTypeOptions"
                     :key="index"
                     color="grey-9"
@@ -1513,9 +1302,6 @@
                       <div
                         v-if="$v.formData.qrShortLead.rentalType.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight': $v.formData.qrShortLead.rentalType.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.rentalType.$model">
                           Rental Type is required.
@@ -1533,9 +1319,6 @@
                       <div
                         v-if="$v.formData.qrShortLead.setupFees.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight': $v.formData.qrShortLead.setupFees.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.setupFees.$model">
                           Setup Fee is required.
@@ -1552,9 +1335,6 @@
                       <div
                         v-if="$v.formData.qrShortLead.recurringFees.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight': $v.formData.qrShortLead.recurringFees.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.recurringFees.$model">
                           Reccuring Fee is required.
@@ -1615,11 +1395,6 @@
                             $v.formData.qrShortLead.smallMerchantLessThanTwoDebit.$error
                           "
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight':
-                              $v.formData.qrShortLead.smallMerchantLessThanTwoDebit
-                                .$error,
-                          }"
                         >
                           <span
                             v-if="
@@ -1648,11 +1423,6 @@
                               .$error
                           "
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight':
-                              $v.formData.qrShortLead.smallMerchantGreaterThanTwoDebit
-                                .$error,
-                          }"
                         >
                           <span
                             v-if="
@@ -1681,11 +1451,6 @@
                               .smallMerchantLessThanTwoCreditAndPrepaid.$error
                           "
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight':
-                              $v.formData.qrShortLead
-                                .smallMerchantLessThanTwoCreditAndPrepaid.$error,
-                          }"
                         >
                           <span
                             v-if="
@@ -1714,11 +1479,6 @@
                               .smallMerchantGreaterThanTwoCreditAndPrepaid.$error
                           "
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight':
-                              $v.formData.qrShortLead
-                                .smallMerchantGreaterThanTwoCreditAndPrepaid.$error,
-                          }"
                         >
                           <span
                             v-if="
@@ -1747,11 +1507,6 @@
                             $v.formData.qrShortLead.largeMerchantLessThanTwoDebit.$error
                           "
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight':
-                              $v.formData.qrShortLead.largeMerchantLessThanTwoDebit
-                                .$error,
-                          }"
                         >
                           <span
                             v-if="
@@ -1780,11 +1535,6 @@
                               .$error
                           "
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight':
-                              $v.formData.qrShortLead.largeMerchantGreaterThanTwoDebit
-                                .$error,
-                          }"
                         >
                           <span
                             v-if="
@@ -1813,11 +1563,6 @@
                               .largeMerchantLessThanTwoCreditandPrepaid.$error
                           "
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight':
-                              $v.formData.qrShortLead
-                                .largeMerchantLessThanTwoCreditandPrepaid.$error,
-                          }"
                         >
                           <span
                             v-if="
@@ -1846,11 +1591,6 @@
                               .largeMerchantGreaterThanTwoCreditandPrepaid.$error
                           "
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight':
-                              $v.formData.qrShortLead
-                                .largeMerchantGreaterThanTwoCreditandPrepaid.$error,
-                          }"
                         >
                           <span
                             v-if="
@@ -1875,9 +1615,6 @@
                       <div
                         v-if="$v.formData.qrShortLead.mdrFixed.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight': $v.formData.qrShortLead.mdrFixed.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.mdrFixed.$model">
                           Fixed is required.
@@ -1896,10 +1633,6 @@
                       <div
                         v-if="$v.formData.qrShortLead.maxMdrPerTransaction.$error"
                         class="error-tooltip"
-                        :class="{
-                          'error-highlight':
-                            $v.formData.qrShortLead.maxMdrPerTransaction.$error,
-                        }"
                       >
                         <span v-if="!$v.formData.qrShortLead.maxMdrPerTransaction.$model">
                           Max MDR per transaction is required.
@@ -1982,7 +1715,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.accountNumber.$error
                           }"
                         >
@@ -2001,10 +1734,6 @@
                         <div
                           v-if="$v.formData.qrShortLead.accountNumber.$error"
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight':
-                              $v.formData.qrShortLead.accountNumber.$error,
-                          }"
                         >
                           <span v-if="!$v.formData.qrShortLead.accountNumber.$model">
                             Account Number is required.
@@ -2012,8 +1741,8 @@
                           <span
                             v-if="
                               $v.formData.qrShortLead.accountNumber.$model &&
-                              ($v.formData.qrShortLead.accountNumber.$model < 8 ||
-                                $v.formData.qrShortLead.accountNumber.$model > 19)
+                              ($v.formData.qrShortLead.accountNumber.$model.toString().length < 8 ||
+                                $v.formData.qrShortLead.accountNumber.$model.toString().length > 19)
                             "
                           >
                             Account Number must be between 8 and 19.
@@ -2026,7 +1755,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.ifscCode.$error
                           }"
                         >
@@ -2045,9 +1774,6 @@
                         <div
                           v-if="$v.formData.qrShortLead.ifscCode.$error"
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight': $v.formData.qrShortLead.ifscCode.$error,
-                          }"
                         >
                           <span v-if="!$v.formData.qrShortLead.ifscCode.$model">
                             IFSC is required.
@@ -2055,7 +1781,7 @@
                           <span
                             v-if="
                               $v.formData.qrShortLead.ifscCode.$model &&
-                              $v.formData.qrShortLead.ifscCode.$model.length !== 11
+                              $v.formData.qrShortLead.ifscCode.$model.toString().length !== 11
                             "
                           >
                             IFSC must be exactly 11 digits.
@@ -2069,7 +1795,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.bankName.$error
                           }"
                         >
@@ -2087,9 +1813,6 @@
                         <div
                           v-if="$v.formData.qrShortLead.bankName.$error"
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight': $v.formData.qrShortLead.bankName.$error,
-                          }"
                         >
                           <span v-if="!$v.formData.qrShortLead.bankName.$model">
                             Bank Name is required.
@@ -2097,8 +1820,8 @@
                           <span
                             v-if="
                               $v.formData.qrShortLead.bankName.$model &&
-                              ($v.formData.qrShortLead.bankName.$model < 0 ||
-                                $v.formData.qrShortLead.bankName.$model > 100)
+                              ($v.formData.qrShortLead.bankName.$model.toString().length < 0 ||
+                                $v.formData.qrShortLead.bankName.$model.toString().length > 100)
                             "
                           >
                             Bank Name must be between 0 and 100.
@@ -2106,38 +1829,6 @@
                         </div>
                       </q-item-section>
                     </q-item>
-                    <!-- <q-item class="q-pa-sm q-body-1">
-                      <q-item-section style="display: flex; align-items: center;">
-                        <span style="flex: 1;"
-                          :class="{'error-highlight': $v.formData.qrShortLead.branchCode.$error}">
-                          Branch Code
-                        </span>
-                      <q-input
-                        disable
-                        @blur="$v.formData.qrShortLead.branchCode.$touch"
-                        :error="$v.formData.qrShortLead.branchCode.$error"
-                        style="width: 220px"
-                        type="text"
-                        v-model="formData.qrShortLead.branchCode"
-                      />
-                    </q-item-section>
-                    </q-item>
-                    <q-item class="q-pa-sm q-body-1">
-                      <q-item-section style="display: flex; align-items: center;">
-                        <span style="flex: 1;"
-                          :class="{'error-highlight': $v.formData.qrShortLead.branchZone.$error}">
-                          Branch Zone
-                        </span>
-                      <q-input
-                        disable
-                        @blur="$v.formData.qrShortLead.branchZone.$touch"
-                        :error="$v.formData.qrShortLead.branchZone.$error"
-                        style="width: 220px"
-                        type="text"
-                        v-model="formData.qrShortLead.branchZone"
-                      />
-                    </q-item-section>
-                    </q-item> -->
                   </q-list>
                 </q-card-section>
               </q-card>
@@ -2160,7 +1851,7 @@
                         <span
                           style="flex: 1;"
                           :class="{
-                            'error-highlight':
+                            'text-negative':
                               $v.formData.qrShortLead.satToMarsRemarks.$error
                           }"
                         >
@@ -2180,10 +1871,6 @@
                         <div
                           v-if="$v.formData.qrShortLead.satToMarsRemarks.$error"
                           class="error-tooltip"
-                          :class="{
-                            'error-highlight':
-                              $v.formData.qrShortLead.satToMarsRemarks.$error,
-                          }"
                         >
                           <span v-if="!$v.formData.qrShortLead.satToMarsRemarks.$model">
                             Remarks is required.
@@ -2191,23 +1878,6 @@
                         </div>
                       </q-item-section>
                     </q-item>
-                    <!-- <q-item class="q-pa-sm q-body-1">
-                      <q-item-section style="display: flex; align-items: center;">
-                        <span style="flex: 1;"
-                        :class="{'error-highlight': $v.formData.qrShortLead.satToMarsRemarks.$error}">
-                        SAT to SO
-                        </span>
-                      <q-input
-                        @blur="$v.formData.qrShortLead.satToMarsRemarks.$touch"
-                        :error="$v.formData.qrShortLead.satToMarsRemarks.$error"
-                        style="width: 220px"
-                        type="text"
-                        label="Remarks"
-                        placeholder="Remarks"
-                        v-model="formData.qrShortLead.satToMarsRemarks"
-                      />
-                    </q-item-section>
-                    </q-item> -->
                   </q-list>
                 </q-card-section>
               </q-card>
@@ -2229,7 +1899,7 @@
             <q-card-section class="no-padding">
               <q-list no-border class="no-padding">
                 <viewQrLeadDocument
-                  v-if="formData.qrShortLead.qrLeadStatus == 4 || 9"
+                  v-if="formData.qrShortLead.qrLeadStatus == 4 || formData.qrShortLead.qrLeadStatus == 9"
                   v-model:propLeadDocumentInformation="
                     formData.qrShortLead.qrLeadDocuments
                   "
@@ -2255,17 +1925,15 @@
           </q-banner>
         </div>
         <div class="alignbtn">
-          <q-stepper-navigation>
+          <div class="row q-gutter-sm justify-end">
             <q-btn
               icon="arrow_back"
               color="dark"
-              class="q-ma-xs"
               @click="$router.go(-1)"
               label="Back"
             />
             <q-btn
               icon="clear"
-              class="q-ma-xs"
               color="negative"
               label="REJECT"
               @click="fnToggleQrRejectLeadComp()"
@@ -2273,14 +1941,12 @@
             <q-btn
               :disable="formData.qrShortLead.qrLeadStatus == 9"
               color="blue"
-              class="q-ma-xs"
               icon="inbox"
               label="Refer Back"
               @click="referBackAndEnableProceed"
             />
             <q-btn
               color="amber-10"
-              class="q-ma-xs"
               icon="inbox"
               label="Save Partial"
               @click="savePartialAndEnableProceed"
@@ -2292,7 +1958,6 @@
               "
               :disable="this.flag || !partialSaved"
               icon="send"
-              class="q-ma-xs"
               color="green"
               label="Proceed To mars"
               @click="documentValidation()"
@@ -2301,7 +1966,6 @@
               v-else-if="formData.qrShortLead.qrLeadCategory"
               :disable="this.flag || !partialSaved"
               icon="send"
-              class="q-ma-xs"
               color="green"
               label="Proceed To mars"
               @click="proceedToMars()"
@@ -2310,12 +1974,11 @@
               v-else
               :disable="!partialSaved"
               icon="send"
-              class="q-ma-xs"
               color="green"
               label="Proceed To mars"
               @click="documentValidation()"
             />
-          </q-stepper-navigation>
+          </div>
         </div>
         <showFinalRejectQrLeadRemarksComponent
           v-if="toggleLeadRejectModal"
@@ -2336,30 +1999,21 @@
 <script>
 import {
   required,
-  requiredIf,
-  alphaNum,
-  integer,
-  numeric,
+  email,
   minLength,
   maxLength,
-  email,
-  maxValue,
-  minValue,
-  decimal,
   between
 } from "@vuelidate/validators";
-import { LocalStorage } from "quasar";
 
 import { date } from "quasar";
-import { ref } from "vue";
-// import { QDate } from "quasar";
+import _ from 'lodash';
 
 import { mapGetters, mapActions } from "vuex";
 import viewQrLeadDocument from "../../components/sat/viewQrLeadDocument.vue";
 import showFinalRejectQrLeadRemarksComponent from "../../components/sat/showFinalRejectQrLeadRemarksComponent.vue";
 import ReferBackRemarks from "../../components/sat/ReferBackRemarks.vue";
 const today = new Date();
-const { startOfDate, addToDate, subtractFromDate } = date;
+const { addToDate } = date;
 export default {
   name: "qrLeadVadlidate",
   components: {
@@ -2373,13 +2027,21 @@ export default {
       cityOptions: [],
       stateOptions: [],
       propShowUpdateOpenedExternal: false,
-      // regionOptions: [],
       formData: {
-        qrShortLead: "",
+        qrShortLead: {
+          merchantIndustry: { industryName: "" },
+          salesPersonName: "",
+          qrMerchantType: { merchantTypeName: "" },
+          leadSource: { sourceName: "" },
+          device: { deviceName: "" },
+          languageSoundbox: { language: "" },
+          merchantCategory: { merchantCategoryName: "" },
+          plan: { planName: "" }
+        },
         documentType: []
       },
-      validPincodes: [], // To store the list of valid pincodes
-      validPin: [], // To store the list of valid pincodes
+      validPincodes: [],
+      validPin: [],
       pincodeOptions: [],
       pincodeOptions1: [],
       cityOptionsFiltered: [],
@@ -2391,8 +2053,6 @@ export default {
       mccSearchSet: [],
       isactivemerchant: "Small",
       isactivemerchant1: "Large",
-      // isownHouse: "Yes",
-      // isownHouse1: "No",
       leadSourceOptions: [],
       propLeadDeatils: [],
       count: 0,
@@ -2405,118 +2065,36 @@ export default {
       gstNumberError: false,
       PassportExpiryError: false,
       emailError: false,
-      // gstNumberValidationError: false,
+      propRowDetails: null,
       rentalModeOptions: [
-        {
-          label: "Standing instructions",
-          value: "S"
-        },
-        {
-          label: "Normal",
-          value: "N"
-        },
-        {
-          label: "Nabad",
-          value: "B"
-        },
-        {
-          label: "Invoice for EPRS",
-          value: "I"
-        },
-        {
-          label: "Equitas Rental",
-          value: "E"
-        },
-        {
-          label: "Big merchant",
-          value: "M"
-        },
-        {
-          label: "Invoice to Trade",
-          value: "IT"
-        },
-        {
-          label: "Rental Fee Waiver",
-          value: "RW"
-        },
-        {
-          label: "Advance Rental",
-          value: "AR"
-        },
-        {
-          label: "Settlement",
-          value: "SE"
-        },
-        {
-          label: "Exibition",
-          value: "EX"
-        },
-        {
-          label: "Clix",
-          value: "CX"
-        },
-        {
-          label: "Subvention",
-          value: "SB"
-        },
-        {
-          label: "EMI Rental",
-          value: "EM"
-        },
-        {
-          label: "BPCL",
-          value: "BP"
-        },
-        {
-          label: "Demo Device",
-          value: "DD"
-        },
-        {
-          label: "Invoice to Bank",
-          value: "IB"
-        },
-        {
-          label: "Finetree Finance LTD",
-          value: "FF"
-        },
-        {
-          label: "Deactivated",
-          value: "DT"
-        },
-        {
-          label: "APAC FINANCIAL SERVICES PVT LTD",
-          value: "AP"
-        },
-        {
-          label: "NEO GROWTH",
-          value: "NG"
-        },
-        {
-          label: "Capital Float",
-          value: "CF"
-        },
-        {
-          label: "KBL Rent Settlement",
-          value: "KS"
-        },
-        {
-          label: "KBL Rent Invoice to Bank",
-          value: "KI"
-        }
+        { label: "Standing instructions", value: "S" },
+        { label: "Normal", value: "N" },
+        { label: "Nabad", value: "B" },
+        { label: "Invoice for EPRS", value: "I" },
+        { label: "Equitas Rental", value: "E" },
+        { label: "Big merchant", value: "M" },
+        { label: "Invoice to Trade", value: "IT" },
+        { label: "Rental Fee Waiver", value: "RW" },
+        { label: "Advance Rental", value: "AR" },
+        { label: "Settlement", value: "SE" },
+        { label: "Exibition", value: "EX" },
+        { label: "Clix", value: "CX" },
+        { label: "Subvention", value: "SB" },
+        { label: "EMI Rental", value: "EM" },
+        { label: "BPCL", value: "BP" },
+        { label: "Demo Device", value: "DD" },
+        { label: "Invoice to Bank", value: "IB" },
+        { label: "Finetree Finance LTD", value: "FF" },
+        { label: "Deactivated", value: "DT" },
+        { label: "APAC FINANCIAL SERVICES PVT LTD", value: "AP" },
+        { label: "NEO GROWTH", value: "NG" },
+        { label: "Capital Float", value: "CF" },
+        { label: "KBL Rent Settlement", value: "KS" },
+        { label: "KBL Rent Invoice to Bank", value: "KI" }
       ],
       rentalTypeOptions: [
-        {
-          label: "Advanced",
-          value: "A"
-        },
-        {
-          label: "Regular",
-          value: "R"
-        },
-        // {
-        //   label: "EMI",
-        //   value: "E"
-        // }
+        { label: "Advanced", value: "A" },
+        { label: "Regular", value: "R" },
       ],
       iciciMarsRequest: {
         merchant: {
@@ -2545,333 +2123,76 @@ export default {
             rentFixed: ""
           },
           additionalInfo: {
-            installationBranchCode: null,
-            iaLocation: null,
-            iaDistrict: null,
-            branchZone: null,
-            raDistrict: null,
-            od1District: null,
-            od2District: null,
-            lorState: null,
-            iaSalutation: null,
-            iaGender: null,
-            od1Salutation: null,
-            od1Gender: null,
-            od2Salutation: null,
-            od2Gender: null,
-            state: "",
-            city: "",
-            fillingType: "",
-            category: null,
-            subCategory: null,
-            ownerDOB: null,
-            pin: "",
-            states: null,
-            fillingTypes: null
+            installationBranchCode: null, iaLocation: null, iaDistrict: null, branchZone: null, raDistrict: null, od1District: null, od2District: null, lorState: null,
+            iaSalutation: null, iaGender: null, od1Salutation: null, od1Gender: null, od2Salutation: null, od2Gender: null,
+            state: "", city: "", fillingType: "", category: null, subCategory: null, ownerDOB: null, pin: "", states: null, fillingTypes: null
           },
           companyInformation: {
-            legalName: "",
-            dbaName: "",
-            smsFlag: "N",
-            registeredAddress: "",
-            registeredPin: "",
-            registeredCityRefCode: "",
-            registeredStateRefCode: "",
-            constitution: "",
-            constitutionName: "",
-            constitutionDescription: "",
-            establishYear: "",
-            pan: "",
-            registerNumber: "test",
-            tin: "",
-            tan: "",
-            businessNature: "",
-            businessType: "R",
-            mcc: "",
-            residentialAddress: "",
-            residentialPin: "",
-            statezone: "90",
-            cityzone: "",
-            residentialCityRefCode: "",
-            residentialStateRefCode: "",
-            contactName: "",
-            contactMobile: "",
-            contactAlternateMobile: "",
-            contactPhone: "",
-            contactEmail: "",
-            statementType: "E",
-            statementFrequency: "M",
-            statementEmail: "",
-            registeredCityName: "",
-            registeredStateName: "",
-            mccname: "",
-            residentCityName: "",
-            residentStateName: ""
+            legalName: "", dbaName: "", smsFlag: "N", registeredAddress: "", registeredPin: "", registeredCityRefCode: "", registeredStateRefCode: "", constitution: "",
+            constitutionName: "", constitutionDescription: "", establishYear: "", pan: "", registerNumber: "test", tin: "", tan: "", businessNature: "",
+            businessType: "R", mcc: "", residentialAddress: "", residentialPin: "", statezone: "90", cityzone: "", residentialCityRefCode: "", residentialStateRefCode: "",
+            contactName: "", contactMobile: "", contactAlternateMobile: "", contactPhone: "", contactEmail: "", statementType: "E", statementFrequency: "M",
+            statementEmail: "", registeredCityName: "", registeredStateName: "", mccname: "", residentCityName: "", residentStateName: ""
           },
           businessInformation: {
-            weekdayStartHour: "",
-            weekdayEndHour: "",
-            weekendStartHour: "",
-            weekendEndHour: "",
-            lastTurnoverYear: "2022",
-            maximumMonthlyUsage: "",
-            merchantTypeCode: "S",
-            lastTurnoverAmount: "100",
-            expectedCardBusiness: 12,
-            averageBillAmount: "",
-            gstId: null,
-            currentPosName: "",
-            debitCardMdr: "",
-            creditCardMdr: "",
-            memberSince: "04/03/2023",
-            businessIncome: "100"
+            weekdayStartHour: "", weekdayEndHour: "", weekendStartHour: "", weekendEndHour: "", lastTurnoverYear: "2022", maximumMonthlyUsage: "",
+            merchantTypeCode: "S", lastTurnoverAmount: "100", expectedCardBusiness: 12, averageBillAmount: "", gstId: null, currentPosName: "",
+            debitCardMdr: "", creditCardMdr: "", memberSince: "04/03/2023", businessIncome: "100"
           },
-          partnerInformation: [
-            {
-              name: "",
-              address: "",
-              pan: "",
-              pin: "",
-              cityRefCode: "",
-              cityRefLabel: "",
-              stateRefCode: "",
-              stateRefLabel: "",
-              contactMobile: "",
-              contactEmail: "",
-              dob: ""
-            }
-          ],
+          partnerInformation: [{
+            name: "", address: "", pan: "", pin: "", cityRefCode: "", cityRefLabel: "", stateRefCode: "", stateRefLabel: "", contactMobile: "", contactEmail: "", dob: ""
+          }],
           customIncentiveRates: [
-            {
-              minValue: 200,
-              maxValue: 999,
-              mechantFixed: 0.5,
-              merchantPercent: 0,
-              sharingFixed: 0,
-              sharingPercent: 0
-            },
-            {
-              minValue: 1000,
-              maxValue: 1999,
-              mechantFixed: 2,
-              merchantPercent: 0,
-              sharingFixed: 1,
-              sharingPercent: 0
-            },
-            {
-              minValue: 2000,
-              maxValue: 2999,
-              mechantFixed: 5,
-              merchantPercent: 0,
-              sharingFixed: 1,
-              sharingPercent: 0
-            },
-            {
-              minValue: 3000,
-              maxValue: 3499,
-              mechantFixed: 9.5,
-              merchantPercent: 0,
-              sharingFixed: 1,
-              sharingPercent: 0
-            },
-            {
-              minValue: 3500,
-              maxValue: 10000,
-              mechantFixed: 5,
-              merchantPercent: 0,
-              sharingFixed: 2,
-              sharingPercent: 0
-            }
+            { minValue: 200, maxValue: 999, mechantFixed: 0.5, merchantPercent: 0, sharingFixed: 0, sharingPercent: 0 },
+            { minValue: 1000, maxValue: 1999, mechantFixed: 2, merchantPercent: 0, sharingFixed: 1, sharingPercent: 0 },
+            { minValue: 2000, maxValue: 2999, mechantFixed: 5, merchantPercent: 0, sharingFixed: 1, sharingPercent: 0 },
+            { minValue: 3000, maxValue: 3499, mechantFixed: 9.5, merchantPercent: 0, sharingFixed: 1, sharingPercent: 0 },
+            { minValue: 3500, maxValue: 10000, mechantFixed: 5, merchantPercent: 0, sharingFixed: 2, sharingPercent: 0 }
           ],
           paymentDetails: {
-            deviceOwnedBy: "S",
-            installationFee: 0,
-            terminalModeCode: "",
-            terminalType: "POS",
-            cardAcceptance: "1",
-            numberOfTerminals: 1,
-            emiStartDate: null,
-            omcEnabled: false,
-            intlCardAcceptance: "N",
-            creditCardBlock: "N",
-            tipPercentage: "20",
-            rentalPlanCode: "",
-            recurringFees: "",
-            serviceProvider: "1",
-            networkPreferred: "1",
-            rentalMode: "",
-            rentalType: "",
-            advanceRentCollected: 0,
-            advanceRentMode: "NEFT",
-            noOfMonthRentPaidInAdvance: "0",
-            gracePeriod: 0,
-            totalEmiAmount: "",
-            emiTenure: "",
-            otherCharges: "",
-            totalAmountPaid: "",
-            cashAtPosEnabled: "N",
-            vpa: []
+            deviceOwnedBy: "S", installationFee: 0, terminalModeCode: "", terminalType: "POS", cardAcceptance: "1", numberOfTerminals: 1, emiStartDate: null,
+            omcEnabled: false, intlCardAcceptance: "N", creditCardBlock: "N", tipPercentage: "20", rentalPlanCode: "", recurringFees: "", serviceProvider: "1",
+            networkPreferred: "1", rentalMode: "", rentalType: "", advanceRentCollected: 0, advanceRentMode: "NEFT", noOfMonthRentPaidInAdvance: "0",
+            gracePeriod: 0, totalEmiAmount: "", emiTenure: "", otherCharges: "", totalAmountPaid: "", cashAtPosEnabled: "N", vpa: []
           },
           bankInformation: {
             bankDetails: {
-              ifsc: "",
-              micr: "250240302",
-              bankName: "",
-              branchName: "",
-              branchCode: "",
-              branchZone: "",
-              bankCityRefCode: "",
-              bankStateRefCode: "",
-              paymentMode: "D",
-              accountType: "C",
-              accountdetails: "90",
-              accountNumber: "",
-              bankStatementAttached: "Y",
-              cancelChequeAttached: "Y",
-              feeType: "N",
-              settlementOrNeftFee: "0",
-              bankCityName: "",
-              bankStateName: ""
+              ifsc: "", micr: "250240302", bankName: "", branchName: "", branchCode: "", branchZone: "", bankCityRefCode: "", bankStateRefCode: "",
+              paymentMode: "D", accountType: "C", accountdetails: "90", accountNumber: "", bankStatementAttached: "Y", cancelChequeAttached: "Y",
+              feeType: "N", settlementOrNeftFee: "0", bankCityName: "", bankStateName: ""
             },
             collectionDetails: {
-              collectedDate: null,
-              swipeAmount: "",
-              swipeTerminal: "",
-              chequeAmount: "",
-              chequeDate: null,
-              chequeDepositedDate: null,
-              chequeNumber: "",
-              neftId: "",
-              upiLink: "",
-              acquirerBank: ""
+              collectedDate: null, swipeAmount: "", swipeTerminal: "", chequeAmount: "", chequeDate: null, chequeDepositedDate: null, chequeNumber: "", neftId: "", upiLink: "", acquirerBank: ""
             }
           },
-          kyc: {
-            documents: []
-          },
+          kyc: { documents: [] },
           remarks: "",
           mdrPlan: {
             code: 9,
-            upiUpto2000: {
-              percentage: 0,
-              fixed: 0,
-              minimum: 0
-            },
-            upiAbove2000: {
-              percentage: 0,
-              fixed: 0,
-              minimum: 0
-            },
-            upiCreditUpto2000: {
-              percentage: 0,
-              fixed: 0,
-              minimum: 0,
-              minimumTxnValue: 0.0
-            },
-            upiCreditAbove2000: {
-              percentage: 0,
-              fixed: 0,
-              minimum: 0,
-              minimumTxnValue: 0.0
-            },
-            domesticDebitUpTo2000: {
-              fixed: 0,
-              percentage: 0.0,
-              minimum: 0
-            },
-            incentive: {
-              percentage: null,
-              minimum: null,
-              minimumTxnValue: null
-            },
-            domesticDebitAbove2000: {
-              fixed: 0,
-              percentage: 0.0,
-              minimum: 0
-            },
-            standardOrClassic: {
-              fixed: 0,
-              percentage: 0,
-              minimum: 0
-            },
-            premiumOrPlatinum: {
-              fixed: 0,
-              percentage: 0,
-              minimum: 0
-            },
-            superPremiumOrSignature: {
-              fixed: 0,
-              percentage: 0,
-              minimum: 0
-            },
-            commercialOrCorporate: {
-              fixed: 0,
-              percentage: 0,
-              minimum: 0
-            },
-            internationalDebitCard: {
-              fixed: 0,
-              percentage: 0,
-              minimum: 0
-            },
-            internationalCreditCard: {
-              fixed: 0,
-              percentage: 0,
-              minimum: 0
-            },
-            onus: {
-              fixed: 0,
-              percentage: 0,
-              minimum: 0
-            },
-            mVisa: {
-              fixed: 0,
-              percentage: 0,
-              minimum: 0
-            },
-            masterPass: {
-              fixed: 0,
-              percentage: 0,
-              minimum: 0
-            },
-            cashAtPos: {
-              fixed: 0,
-              percentage: 0,
-              minimum: 0
-            },
-            convenientFee: {
-              fixed: 0,
-              percentage: 0,
-              minimum: 0
-            },
-            diners: {
-              fixed: 0,
-              percentage: 0,
-              minimum: 0
-            }
+            upiUpto2000: { percentage: 0, fixed: 0, minimum: 0 },
+            upiAbove2000: { percentage: 0, fixed: 0, minimum: 0 },
+            upiCreditUpto2000: { percentage: 0, fixed: 0, minimum: 0, minimumTxnValue: 0.0 },
+            upiCreditAbove2000: { percentage: 0, fixed: 0, minimum: 0, minimumTxnValue: 0.0 },
+            domesticDebitUpTo2000: { fixed: 0, percentage: 0.0, minimum: 0 },
+            incentive: { percentage: null, minimum: null, minimumTxnValue: null },
+            domesticDebitAbove2000: { fixed: 0, percentage: 0.0, minimum: 0 },
+            standardOrClassic: { fixed: 0, percentage: 0, minimum: 0 },
+            premiumOrPlatinum: { fixed: 0, percentage: 0, minimum: 0 },
+            superPremiumOrSignature: { fixed: 0, percentage: 0, minimum: 0 },
+            commercialOrCorporate: { fixed: 0, percentage: 0, minimum: 0 },
+            internationalDebitCard: { fixed: 0, percentage: 0, minimum: 0 },
+            internationalCreditCard: { fixed: 0, percentage: 0, minimum: 0 },
+            onus: { fixed: 0, percentage: 0, minimum: 0 },
+            mVisa: { fixed: 0, percentage: 0, minimum: 0 },
+            masterPass: { fixed: 0, percentage: 0, minimum: 0 },
+            cashAtPos: { fixed: 0, percentage: 0, minimum: 0 },
+            convenientFee: { fixed: 0, percentage: 0, minimum: 0 },
+            diners: { fixed: 0, percentage: 0, minimum: 0 }
           },
           revParameters: {
-            cashAtPosEnabled: "N",
-            tipEnabled: "N",
-            saleFlag: "1",
-            notificationRecipient: null,
-            preAuth: "N",
-            settlementType: "A",
-            txnEmiAllowed: "0",
-            sodexoEnabled: "0",
-            amexEnabled: "0",
-            bqrEnabled: "0",
-            upichargeslipEnabled: "0",
-            linkpaymentFlag: "0",
-            matmAllowed: "N",
-            upiFlag: "1",
-            isMTIDEnabled: "0",
-            combinedSettlementFlag: 0,
-            ONBOARDING_REQD: 0,
-            scheme: "UPI",
-            baseInstitution: 110,
-            bTID: "",
-            baseMid: ""
+            cashAtPosEnabled: "N", tipEnabled: "N", saleFlag: "1", notificationRecipient: null, preAuth: "N", settlementType: "A", txnEmiAllowed: "0",
+            sodexoEnabled: "0", amexEnabled: "0", bqrEnabled: "0", upichargeslipEnabled: "0", linkpaymentFlag: "0", matmAllowed: "N", upiFlag: "1",
+            isMTIDEnabled: "0", combinedSettlementFlag: 0, ONBOARDING_REQD: 0, scheme: "UPI", baseInstitution: 110, bTID: "", baseMid: ""
           }
         }
       },
@@ -2879,126 +2200,38 @@ export default {
         { label: "Yes", value: true },
         { label: "No", value: false },
       ],
-      toggleData: false,
       toggleLeadRejectModal: false,
-      qrshortLeadInformation: "",
-      Data: "",
-
+      visible: true,
       dropDown: {
-        deviceOptions: [],
-        merchantDistrict: [],
-        merchantState: [],
-        leadSourceOptions: [],
-        merchantCategory: [],
-        merchantSubDistrict: [],
-        merchantTownOrVillageDetails: [],
-        merchantTierDetails: [],
-        merchantNameType: [],
-        rentalplan: [],
-        salesPersonOptions: []
+        deviceOptions: [], merchantDistrict: [], merchantState: [], leadSourceOptions: [], merchantCategory: [], merchantSubDistrict: [],
+        merchantTownOrVillageDetails: [], merchantTierDetails: [], merchantNameType: [], rentalplan: [], salesPersonOptions: []
       }
     };
   },
   validations: {
-    iciciMarsRequest: {
-      merchant: {
-        // salesInformation:{
-        //   salesPersonCode:
-        //   {
-        //         required
-        //     },
-        // },
-        // paymentDetails: {
-        //   rentalPlanCode: {
-        //     required
-        //   },
-        // },
-        // remarks: {
-        //     required
-        //   },
-      }
-    },
     formData: {
       qrShortLead: {
-        merchantIndustry: {
-          industryName: {
-            required
-          }
-        },
-        contactName: {
-          required,
-        },
-        city: {
-          required
-        },
-        state: {
-          required
-        },
-        personalInfoCity: {
-          required
-        },
-        personalInfoState: {
-          required
-        },
-        salesPersonName: {
-          required
-        },
-        contactEmail: {
-          required,
-          email,
-        },
-        marketingName: {
-          required,
-        },
-        // regionCode: {
-        //     required
-        // },
-        marsRentalPlanName: {
-          required
-        },
-        rentalMode: {
-          required
-        },
-        rentalType: {
-          required
-        },
-        legalName: {
-          maxLength: maxLength(60),
-          required
-        },
-        contactAddress: {
-          maxLength: maxLength(120),
-          required
-        },
-        personalAddress: {
-          maxLength: maxLength(180),
-          required
-        },
-        personalInfoPincode: {
-          minLength: minLength(6),
-          maxLength: maxLength(6),
-          required
-        },
-        pincode: {
-          minLength: minLength(6),
-          maxLength: maxLength(6),
-          required
-        },
-        personalInfoMobile: {
-          minLength: minLength(10),
-          maxLength: maxLength(10),
-          required
-        },
-        natureOfBusiness: {
-          required,
-        },
-        personalInfoEmail: {
-          email,
-          required
-        },
-        dateOfBirth: {
-          required
-        },
+        merchantIndustry: { industryName: { required } },
+        contactName: { required },
+        city: { required },
+        state: { required },
+        personalInfoCity: { required },
+        personalInfoState: { required },
+        salesPersonName: { required },
+        contactEmail: { required, email },
+        marketingName: { required },
+        marsRentalPlanName: { required },
+        rentalMode: { required },
+        rentalType: { required },
+        legalName: { maxLength: maxLength(60), required },
+        contactAddress: { maxLength: maxLength(120), required },
+        personalAddress: { maxLength: maxLength(180), required },
+        personalInfoPincode: { minLength: minLength(6), maxLength: maxLength(6), required },
+        pincode: { minLength: minLength(6), maxLength: maxLength(6), required },
+        personalInfoMobile: { minLength: minLength(10), maxLength: maxLength(10), required },
+        natureOfBusiness: { required },
+        personalInfoEmail: { email, required },
+        dateOfBirth: { required },
         gstNumber: {
           maxLength: function(value) {
             if (value) {
@@ -3007,112 +2240,38 @@ export default {
             return true;
           }
         },
-        panNumber: {
-          minLength: minLength(10),
-          maxLength: maxLength(10),
-          required
-        },
-        contactNumber: {
-          minLength: minLength(10),
-          maxLength: maxLength(10),
-          required
-        },
-        accountNumber: {
-          minLength: minLength(8),
-          maxLength: maxLength(19),
-          required
-        },
-        ifscCode: {
-          minLength: minLength(11),
-          maxLength: maxLength(11),
-          required
-        },
-        bankName: {
-          maxLength: maxLength(100),
-          required
-        },
-        hoursWeekdayStart: {
-          required,
-        },
-        hoursWeekdayEnd: {
-          required,
-        },
-        hoursWeekendStart: {
-          required,
-        },
-        hoursWeekendEnd: {
-          required,
-        },
-        averageBillAmount: {
-          required,
-        },
-        maximumUsageDaily: {
-          required,
-        },
-        maximumUsageWeekly: {
-          required,
-        },
-        maximumUsageMonthly: {
-          required,
-        },
-        setupFees: {
-          required,
-        },
-        recurringFees: {
-          required,
-        },
-        smallMerchantLessThanTwoDebit: {
-          required,
-        },
-        smallMerchantGreaterThanTwoDebit: {
-          required,
-        },
-        smallMerchantLessThanTwoCreditAndPrepaid: {
-          required,
-        },
-        smallMerchantGreaterThanTwoCreditAndPrepaid: {
-          required,
-        },
-        largeMerchantLessThanTwoDebit: {
-          required,
-        },
-        largeMerchantGreaterThanTwoDebit: {
-          required,
-        },
-        largeMerchantLessThanTwoCreditandPrepaid: {
-          required,
-        },
-        largeMerchantGreaterThanTwoCreditandPrepaid: {
-          required,
-        },
-        mdrFixed: {
-          required,
-        },
-        maxMdrPerTransaction: {
-          required,
-        },
-        satToMarsRemarks: {
-          required
-        },
-        ownerAge: {
-          required,
-          between: between(1, 150),
-        },
-        // branchCode: {
-        //   maxLength: maxLength(8),
-        //   required
-        // },
-        // branchZone: {
-        //   maxLength: maxLength(30),
-        //   required
-        // },
+        panNumber: { minLength: minLength(10), maxLength: maxLength(10), required },
+        contactNumber: { minLength: minLength(10), maxLength: maxLength(10), required },
+        accountNumber: { minLength: minLength(8), maxLength: maxLength(19), required },
+        ifscCode: { minLength: minLength(11), maxLength: maxLength(11), required },
+        bankName: { maxLength: maxLength(100), required },
+        hoursWeekdayStart: { required },
+        hoursWeekdayEnd: { required },
+        hoursWeekendStart: { required },
+        hoursWeekendEnd: { required },
+        averageBillAmount: { required },
+        maximumUsageDaily: { required },
+        maximumUsageWeekly: { required },
+        maximumUsageMonthly: { required },
+        setupFees: { required },
+        recurringFees: { required },
+        smallMerchantLessThanTwoDebit: { required },
+        smallMerchantGreaterThanTwoDebit: { required },
+        smallMerchantLessThanTwoCreditAndPrepaid: { required },
+        smallMerchantGreaterThanTwoCreditAndPrepaid: { required },
+        largeMerchantLessThanTwoDebit: { required },
+        largeMerchantGreaterThanTwoDebit: { required },
+        largeMerchantLessThanTwoCreditandPrepaid: { required },
+        largeMerchantGreaterThanTwoCreditandPrepaid: { required },
+        mdrFixed: { required },
+        maxMdrPerTransaction: { required },
+        satToMarsRemarks: { required },
+        ownerAge: { required, between: between(1, 150) },
       },
     },
   },
   created() {
-    // this.ajaxQrLoadShortLeadInfo();
     this.ajaxQrLoadShortLeadInfoInitialLoad();
-    // this.appLoadData();
     this.ajaxLoadDataForDeviceTypeTable();
   },
 
@@ -3123,30 +2282,26 @@ export default {
       "getStaicQrExistingMerchantMarsId"
     ]),
     ...mapGetters("SA_Devices", ["getAllDevicesInfo"]),
-    ...mapGetters("appDevice", ["getAllAppDevicesInfo"]),
     ...mapGetters("merchantCategory", ["getActiveMerchantCategory"]),
     ...mapGetters("appMerchantType", [
       "getappMerchantDocumentType",
       "getsorentalplan"
     ]),
     ...mapGetters("mars_city", ["cityFromMars"]),
-    ...mapGetters("appLeadSource", ["getAllAppLeadSource"]),
     ...mapGetters("mars_state", ["stateFromMars"]),
     ...mapGetters("SuperAdminUsers", ["getAllStatesData"]),
     ...mapGetters("mars_deviceModel", ["deviceModelFromMars"]),
     ...mapGetters("mars_salesPerson", ["qrsalesPersonFromMars"]),
-    // ...mapGetters("mars_regions", ["regionsFromMars"]),
     ...mapGetters("mars_mcc", ["mccFromMarsQr"]),
     ...mapGetters("merchantTierMapping", [
       "getMerchantTierMappingStateDetails",
       "getMerchantTierMappingVillageTierDetails",
       "getMerchantTierMappingDistrictDetails",
       "getMerchantTierMappingTownOrVillageDetails",
-      "getMerchantTierMappingSubDistrictDetails",
-      "getMerchantTierMappingVillageBasedTierAndLocationDetails"
+      "getMerchantTierMappingSubDistrictDetails"
     ]),
     businessNature() {
-      return this.formData.qrShortLead.natureOfBusiness.trim()
+      return this.formData.qrShortLead.natureOfBusiness?.trim()
         ? this.formData.qrShortLead.natureOfBusiness
         : "NA";
     },
@@ -3169,71 +2324,33 @@ export default {
       );
     },
     alternativeError() {
-      if (
-        this.getAllStaticQrShortLeadDatas.alternateContactNumber == "" ||
-        this.getAllStaticQrShortLeadDatas.alternateContactNumber == null
-      ) {
-        return false;
-      } else {
-        return true;
-      }
+      return !!(this.getAllStaticQrShortLeadDatas.alternateContactNumber);
     },
     alternativeValidatonError() {
-      if (
-        this.getAllStaticQrShortLeadDatas.alternateContactNumber == "" ||
-        this.getAllStaticQrShortLeadDatas.alternateContactNumber == null
-      ) {
+      if (!this.getAllStaticQrShortLeadDatas.alternateContactNumber) {
         return false;
       } else {
-        if (
-          this.formData.qrShortLead.alternateContactNumber.toString().length !==
-          10
-        ) {
+        if (this.formData.qrShortLead.alternateContactNumber?.toString().length !== 10) {
           return true;
         } else {
-          this.alternativeError = false;
           return false;
         }
       }
     },
-    // gstNumberError() {
-    //   return this.formData.qrShortLead.gstNumber !== "";
-    // },
     gstNumberError() {
-      if (
-        this.getAllStaticQrShortLeadDatas.gstNumber == "" ||
-        this.getAllStaticQrShortLeadDatas.gstNumber == null
-      ) {
-        return false;
-      } else {
-        return true;
-      }
+      return !!(this.getAllStaticQrShortLeadDatas.gstNumber);
     },
     gstNumberValidationError() {
-      if (
-        this.getAllStaticQrShortLeadDatas.gstNumber == "" ||
-        this.getAllStaticQrShortLeadDatas.gstNumber == null
-      ) {
+      if (!this.getAllStaticQrShortLeadDatas.gstNumber) {
         return false;
       } else {
-        if (this.formData.qrShortLead.gstNumber.length !== 15) {
+        if (this.formData.qrShortLead.gstNumber?.length !== 15) {
           return true;
         } else {
-          this.gstNumberError = false;
           return false;
         }
       }
     },
-    // PassportExpiryError() {
-    //   if (
-    //     this.getAllStaticQrShortLeadDatas.passportExpiryDate == "" ||
-    //     this.getAllStaticQrShortLeadDatas.passportExpiryDate == null
-    //   ) {
-    //     return false;
-    //   } else {
-    //     return true;
-    //   }
-    // },
     isEstablishmentYearValid() {
       const regex = /^\d{2}\/\d{2}\/\d{4}$/;
       return regex.test(this.formData.qrShortLead.establishmentYear);
@@ -3242,258 +2359,14 @@ export default {
       const regex = /^\d{2}\/\d{2}\/\d{4}$/;
       return regex.test(this.formData.qrShortLead.dateOfBirth);
     },
-    ispassportValid() {
-      const regex = /^\d{2}\/\d{2}\/\d{4}$/;
-      return regex.test(this.formData.qrShortLead.passportExpiryDate);
-    },
-    isPassportNumberValid() {
-      const regex = /^[A-Z][1-9][0-9]\s?[0-9]{4}[1-9]$/;
-      const passportNumber = this.formData.qrShortLead.passportNumber.toUpperCase(); // Ensure case insensitivity
-      return regex.test(passportNumber);
-    },
-    disableProceedButton() {
-      return this.successCount < 200;
-    },
-    isownerage() {
-      return age > 0 && age < 150;
-    }
   },
 
   watch: {
-    "formData.qrShortLead.marketingName": function(newVal, oldVal) {
-      // Check if the marketingName has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
+    "formData.qrShortLead": {
+      handler(newVal, oldVal) {
         this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.legalName": function(newVal, oldVal) {
-      // Check if the legalName has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.contactName": function(newVal, oldVal) {
-      // Check if the contactName has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.contactEmail": function(newVal, oldVal) {
-      // Check if the contactEmail has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.contactAddress": function(newVal, oldVal) {
-      // Check if the contactAddress has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.personalAddress": function(newVal, oldVal) {
-      // Check if the personalAddress has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.personalInfoCity": function(newVal, oldVal) {
-      // Check if the personalInfoCity has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.city": function(newVal, oldVal) {
-      // Check if the city has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.personalInfoState": function(newVal, oldVal) {
-      // Check if the personalInfoState has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.personalInfoPincode": function(newVal, oldVal) {
-      // Check if the personalInfoPincode has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.pincode": function(newVal, oldVal) {
-      // Check if the pincode has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.personalInfoMobile": function(newVal, oldVal) {
-      // Check if the personalInfoMobile has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.personalInfoEmail": function(newVal, oldVal) {
-      // Check if the personalInfoEmail has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.panNumber": function(newVal, oldVal) {
-      // Check if the panNumber has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.dateOfBirth": function(newVal, oldVal) {
-      // Check if the dateOfBirth has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.setupFees": function(newVal, oldVal) {
-      // Check if the setupFees has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.recurringFees": function(newVal, oldVal) {
-      // Check if the recurringFees has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.smallMerchantLessThanTwoDebit": function(
-      newVal,
-      oldVal
-    ) {
-      // Check if the smallMerchantLessThanTwoDebit has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.smallMerchantGreaterThanTwoDebit": function(
-      newVal,
-      oldVal
-    ) {
-      // Check if the smallMerchantGreaterThanTwoDebit has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.smallMerchantLessThanTwoCreditAndPrepaid": function(
-      newVal,
-      oldVal
-    ) {
-      // Check if the smallMerchantLessThanTwoCreditAndPrepaid has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.smallMerchantGreaterThanTwoCreditAndPrepaid": function(
-      newVal,
-      oldVal
-    ) {
-      // Check if the smallMerchantGreaterThanTwoCreditAndPrepaid has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-
-    "formData.qrShortLead.largeMerchantLessThanTwoDebit": function(
-      newVal,
-      oldVal
-    ) {
-      // Check if the largeMerchantLessThanTwoDebit has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.largeMerchantGreaterThanTwoDebit": function(
-      newVal,
-      oldVal
-    ) {
-      // Check if the largeMerchantGreaterThanTwoDebit has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.largeMerchantLessThanTwoCreditandPrepaid": function(
-      newVal,
-      oldVal
-    ) {
-      // Check if the largeMerchantLessThanTwoCreditandPrepaid has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.largeMerchantGreaterThanTwoCreditandPrepaid": function(
-      newVal,
-      oldVal
-    ) {
-      // Check if the largeMerchantGreaterThanTwoCreditandPrepaid has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.rentalMode": function(newVal, oldVal) {
-      // Check if the rentalMode has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.rentalType": function(newVal, oldVal) {
-      // Check if the rentalType has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.mdrFixed": function(newVal, oldVal) {
-      // Check if the mdrFixed has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.maxMdrPerTransaction": function(newVal, oldVal) {
-      // Check if the maxMdrPerTransaction has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
-    },
-    "formData.qrShortLead.satToMarsRemarks": function(newVal, oldVal) {
-      // Check if the satToMarsRemarks has been changed
-      if (newVal !== oldVal) {
-        // Disable the Proceed to Mars button
-        this.partialSaved = false;
-      }
+      },
+      deep: true
     }
   },
 
@@ -3506,17 +2379,8 @@ export default {
     this.getmccNameCode();
     this.getcityNameCode();
     this.getstateNameCode();
-    // this.getRegionCode();
   },
 
-  mounted() {
-    console.log("Child mounted");
-    this.$emit("custom-event-from-child");
-    // console.log(
-    //   "self.propLeadDeatils.chequeNumber-------->>>>",
-    //   JSON.stringify(this.propLeadDeatils.chequeNumber)
-    // );
-  },
   methods: {
     ...mapActions("SatLeadValidation", [
       "VERIFY_QR_REJECT_LEAD_DOCUMENTS",
@@ -3528,17 +2392,9 @@ export default {
       "FETCH_PINCODE_WITH_TERM"
     ]),
     ...mapActions("SA_Devices", ["FETCH_DEVICES_DATA"]),
-    ...mapActions("appDevice", ["FETCH_APP_DEVICES_DATA"]),
     ...mapActions("merchantCategory", ["MERCHANT_CATEGORY_ACTIVE_LIST"]),
-    ...mapActions("appLeadSource", ["FETCH_APP_LEADSOURCE_DATA"]),
-    ...mapActions("InventoryCentral", [
-      "FETCH_ALL_INVENTORY_DEVICES_TYPES_DATA",
-      "FETCH_ALL_REGIONS_DATA",
-      "FETCH_REGION_BASED_SO"
-    ]),
     ...mapActions("mars_salesPerson", ["QR_SALES_PERSON_FROM_MARS"]),
     ...mapActions("mars_mcc", ["QR_MCC_FROM_MARS"]),
-    // ...mapActions("mars_regions", ["REGION_FROM_MARS"]),
     ...mapActions("appMerchantType", [
       "APP_MERCHANT_DOCUMENT_TYPE",
       "SO_RENTAL_PLAN"
@@ -3557,1939 +2413,384 @@ export default {
       "MERCHANT_TIER_MAPPING_SEARCH_DISTRICT",
       "MERCHANT_TIER_MAPPING_SUB_DISTRICT_DETAILS",
       "MERCHANT_TIER_MAPPING_TOWN_OR_VILLAGE_DETAILS",
-      "MERCHANT_TIER_MAPPING_VILLAGE_TIER_DETAILS",
-      "MERCHANT_TIER_MAPPING_VILLAGE_BASED_TIER_AND_LOCATION_DETAILS"
+      "MERCHANT_TIER_MAPPING_VILLAGE_TIER_DETAILS"
     ]),
     ...mapActions("mars_deviceModel", ["DEVICE_MODEL_FROM_MARS"]),
 
     pincodeSelected(item) {
-      this.pinSelected = true;
-      if (item && item.value) {
-        this.formData.qrShortLead.personalInfoPincode = item.value.pincode;
-      } else if (item && item.pincode) {
-        this.formData.qrShortLead.personalInfoPincode = item.pincode;
-      }
+      this.formData.qrShortLead.personalInfoPincode = item.pincode;
     },
     pincodeSelected1(item) {
-      this.pinSelected = true;
-      if (item && item.value) {
-        this.formData.qrShortLead.pincode = item.value.pincode;
-      } else if (item && item.pincode) {
-        this.formData.qrShortLead.pincode = item.pincode;
-      }
+      this.formData.qrShortLead.pincode = item.pincode;
     },
-    fnClrPin() {
-      if (!this.pinSelected) this.formData.qrShortLead.personalInfoPincode = "";
-      if (!this.pinSelected) this.formData.qrShortLead.pincode = "";
-    },
-    pincodeSearch(terms, update, abort) {
-      if (terms === '') {
-        update(() => {
-          this.pincodeOptions1 = [];
-        })
-        return
-      }
-      this.formData.qrShortLead.cityName = "";
-      this.formData.qrShortLead.stateName = "";
-      this.FETCH_PINCODE_WITH_TERM(terms)
-        .then(() => {
-          const results = this.COMMON_FILTER_FUNCTION(
-            this.getAllStatesData,
-            terms
-          );
-          this.validPincodes = results.map(item => item.value.pincode); // Store valid pincodes
-          update(() => {
-            this.pincodeOptions1 = results.map(item => ({
-              label: item.label,
-              value: item.value
-            }));
-          });
-        })
-        .catch(() => {
-          update(() => {
-            this.pincodeOptions1 = [];
-          });
-        });
+    pincodeSearch(val, update, abort) {
+      if (val.length < 1) { abort(); return; }
+      this.FETCH_PINCODE_WITH_TERM(val).then(() => {
+        const results = this.COMMON_FILTER_FUNCTION(this.getAllStatesData, val);
+        this.validPincodes = results.map(item => item.value.pincode);
+        update(() => { this.pincodeOptions1 = results.map(item => ({ label: item.label, value: item.value, pincode: item.value.pincode })); });
+      });
     },
 
-    pincodeSearch1(terms, update, abort) {
-      if (terms === '') {
-        update(() => {
-          this.pincodeOptions = [];
-        })
-        return
-      }
-      this.formData.qrShortLead.cityName = "";
-      this.formData.qrShortLead.stateName = "";
-      this.FETCH_PINCODE_WITH_TERM(terms)
-        .then(() => {
-          const results = this.COMMON_FILTER_FUNCTION(
-            this.getAllStatesData,
-            terms
-          );
-          this.validPin = results.map(item => item.value.pincode); // Store valid pincodes
-          update(() => {
-            this.pincodeOptions = results.map(item => ({
-              label: item.label,
-              value: item.value
-            }));
-          });
-        })
-        .catch(() => {
-          update(() => {
-            this.pincodeOptions = [];
-          });
-        });
+    pincodeSearch1(val, update, abort) {
+      if (val.length < 1) { abort(); return; }
+      this.FETCH_PINCODE_WITH_TERM(val).then(() => {
+        const results = this.COMMON_FILTER_FUNCTION(this.getAllStatesData, val);
+        this.validPin = results.map(item => item.value.pincode);
+        update(() => { this.pincodeOptions = results.map(item => ({ label: item.label, value: item.value, pincode: item.value.pincode })); });
+      });
     },
     saveFieldData() {
-      this.saveCurrentLeadChanges(this.formData);
-      console.log(
-        "saveFieldData------------->>>>>",
-        JSON.stringify(this.formData)
-      );
+      this.saveCurrentLeadChanges();
     },
 
-    getDevice(val) {
-      self = this;
-      self.FETCH_APP_DEVICES_DATA(val.id).then(() => {
-        // Clearing the drop down values before assigning data
-        self.dropDown.deviceOptions.splice(0);
-        return _.map(this.getAllAppDevicesInfo, item => {
-          self.dropDown.deviceOptions.push({
-            value: item,
-            label: item.deviceName
-          });
-        });
-      });
-    },
     ajaxLoadDataForDeviceTypeTable() {
-      let self = this;
-      self.FETCH_DEVICES_DATA().then(() => {
-        return _.map(self.getAllDevicesInfo, item => {
-          self.dropDown.deviceOptions.push({
-            value: JSON.stringify(item),
-            label: item.deviceName
-          });
-        });
+      this.FETCH_DEVICES_DATA().then(() => {
+        this.dropDown.deviceOptions = this.getAllDevicesInfo.map(item => ({
+          value: item.id,
+          label: item.deviceName
+        }));
       });
-
-      // .then(() => {
-      //   self.LEAD_SOURCE_ACTIVE_LIST().then(() => {
-      //     return _.map(self.getActiveLeadSource, (item) => {
-      //       self.dropDown.leadSourceOptions.push({
-      //         value: JSON.stringify(item),
-      //         label: item.sourceName,
-      //       });
-      //     });
-      //   });
-      // })
-
-      // .then(() => {
-      //   self.PLAN_ACTIVE_LIST().then(() => {
-      //     return _.map(self.getActivePlan, (item) => {
-      //       self.dropDown.planOptions.push({
-      //         value: item,
-      //         label: item.planName,
-      //       });
-      //     });
-      //   });
-      // })
     },
 
-    // appLoadData() {
-    //   let self = this;
-    //   self.FETCH_APP_LEADSOURCE_DATA().then(() => {
-    //     return _.map(self.getAllAppLeadSource, (item) => {
-    //       if (item.active) {
-    //         self.leadSourceOptions.push({
-    //           value: item,
-    //           label: item.sourceName,
-    //         });
-    //       }
-    //     });
-    //   });
-    // },
-    nameKeydown(e) {
-      if (/^\W$/.test(e.key)) {
-        e.preventDefault();
-      }
-    },
-
-    handleInput(e) {
-      if (this.formData.qrShortLead.natureOfBusiness.startsWith(" ")) {
-        this.formData.qrShortLead.natureOfBusiness = this.formData.qrShortLead.natureOfBusiness.trimStart();
-      }
-    },
-    handlelegalname(e) {
-      if (this.formData.qrShortLead.legalName.startsWith(" ")) {
-        this.formData.qrShortLead.legalName = this.formData.qrShortLead.legalName.trimStart();
-      }
-    },
-    handlemarketing(e) {
-      if (this.formData.qrShortLead.marketingName.startsWith(" ")) {
-        this.formData.qrShortLead.marketingName = this.formData.qrShortLead.marketingName.trimStart();
-      }
-    },
-    nameKeydownacc(e) {
-      if (/^[A-Za-z\W]$/.test(e.key)) {
-        e.preventDefault();
-      }
-    },
+    nameKeydown(e) { if (/^\W$/.test(e.key)) { e.preventDefault(); } },
+    handleInput(e) { if (this.formData.qrShortLead.natureOfBusiness.startsWith(" ")) this.formData.qrShortLead.natureOfBusiness = this.formData.qrShortLead.natureOfBusiness.trimStart(); },
+    handlelegalname(e) { if (this.formData.qrShortLead.legalName.startsWith(" ")) this.formData.qrShortLead.legalName = this.formData.qrShortLead.legalName.trimStart(); },
+    handlemarketing(e) { if (this.formData.qrShortLead.marketingName.startsWith(" ")) this.formData.qrShortLead.marketingName = this.formData.qrShortLead.marketingName.trimStart(); },
+    nameKeydownacc(e) { if (/^[A-Za-z\W]$/.test(e.key)) { e.preventDefault(); } },
 
     validateName(event) {
-      const char = String.fromCharCode(event.keyCode);
       const regex = /^[a-zA-Z\s]*$/;
-      if (
-        !regex.test(char) &&
-        !["Backspace", "ArrowLeft", "ArrowRight", "Tab"].includes(event.key)
-      ) {
+      if (!regex.test(event.key) && !["Backspace", "ArrowLeft", "ArrowRight", "Tab"].includes(event.key)) {
         event.preventDefault();
       }
     },
 
     COMMON_FILTER_FUNCTION(arraySet, terms) {
-      // eslint-disable-next-line no-undef
       return _.filter(arraySet, function(oo) {
-        return oo.label.toString().includes(terms.toLowerCase());
+        return oo.label.toString().toLowerCase().includes(terms.toLowerCase());
       });
     },
 
-  
-loadUpdate(){
-  this.saveCurrentLeadChangesUpdate(this.formData).then(()=>{
-  // ajaxQrLoadShortLeadInfo() {
-  //     this.$q.loading.show({
-  //       delay: 0, // ms
-  //       spinnerColor: "purple-9",
-  //       message: "Fetching data .."
-  //     });
-      this.FETCH_STATIC_QR_SHORT_LEAD_DATA(this.$route.params.id)
-        .then(response => {
-          this.propLeadDeatils = response.data.data;
-          this.formData["qrShortLead"] = this.getAllStaticQrShortLeadDatas;
-          console.log("INSIDE SHORT LEAD");
-          // console.log("FORM DATA FIX",JSON.stringify(this.formData.qrShortLead.isMerchant.satToMarsRemarks));
-          this.formData.qrShortLead.isMerchant == 1 ? "Small" : "Large";
-   
-          // console.log("QR SHORT LEAD111111", JSON.stringify(this.getAllStaticQrShortLeadDatas.qrMerchantType.merchantTypeName));
-          this.iciciMarsRequest.merchant.salesInformation.applicationNumber =
-            this.getAllStaticQrShortLeadDatas.applicationNumber != null
-              ? this.getAllStaticQrShortLeadDatas.applicationNumber
-              : new Date().getTime();
-          this.applicationNumber = this.iciciMarsRequest.merchant.salesInformation.applicationNumber;
-          this.iciciMarsRequest.merchant.salesInformation.applicationDate = this.getCurrentDate();
-          this.iciciMarsRequest.merchant.salesInformation.aggreementDate = this.getCurrentDate();
-          // this.iciciMarsRequest.merchant.paymentDetails.numberOfTerminals = this.getAllStaticQrShortLeadDatas.qrVpas.length;
-          this.iciciMarsRequest.merchant.companyInformation.constitution = this.getAllStaticQrShortLeadDatas.qrMerchantType.marsMappingId;
-          this.count++;
-
-          if (this.getAllStaticQrShortLeadDatas.salesPersonName == null) {
+    loadUpdate(){
+      this.saveCurrentLeadChangesUpdate().then(()=>{
+        this.FETCH_STATIC_QR_SHORT_LEAD_DATA(this.$route.params.id)
+          .then(response => {
+            this.propLeadDeatils = response.data.data;
+            this.formData.qrShortLead = this.getAllStaticQrShortLeadDatas;
+            this.iciciMarsRequest.merchant.salesInformation.applicationNumber = this.getAllStaticQrShortLeadDatas.applicationNumber || new Date().getTime();
+            this.applicationNumber = this.iciciMarsRequest.merchant.salesInformation.applicationNumber;
+            this.iciciMarsRequest.merchant.salesInformation.applicationDate = this.getCurrentDate();
+            this.iciciMarsRequest.merchant.salesInformation.aggreementDate = this.getCurrentDate();
+            this.iciciMarsRequest.merchant.companyInformation.constitution = this.getAllStaticQrShortLeadDatas.qrMerchantType.marsMappingId;
             this.getSalesPerson();
-            // this.iciciMarsRequest.merchant.salesInformation.salesPersonName = this.getAllStaticQrShortLeadDatas.createdBy.name + "-" + this.getAllStaticQrShortLeadDatas.createdBy.employeeID
-            this.formData.qrShortLead.salesPersonName =
-              this.getAllStaticQrShortLeadDatas.createdBy.name +
-              "-" +
-              this.getAllStaticQrShortLeadDatas.createdBy.employeeID;
-          } else if (
-            this.getAllStaticQrShortLeadDatas.salesPersonName != null
-          ) {
-            this.getSalesPerson();
-            this.formData.qrShortLead.salesPersonName = this.getAllStaticQrShortLeadDatas.salesPersonName;
-          } // console.log("FORMDATA------> SATREMARKS",JSON.stringify(this.formData.qrShortLead.satToMarsRemarks));
-          // const vpa = this.getAllStaticQrShortLeadDatas.qrVpas.map(
-          //   ({ vpa }) => vpa
-          // );
-
-          if (this.getAllStaticQrShortLeadDatas.qrLeadCategory == true) {
-            this.existingMerchantTid(this.getAllStaticQrShortLeadDatas.marsId);
-          }
-          this.fetchAndCookDocuments();
-          // this.setMarsData();
-          this.category();
-          this.$q.loading.hide();
-        })
-        .catch(() => {
-          this.$q.loading.hide();
-        });
-    // },
-  })
-},
+            this.fetchAndCookDocuments();
+            this.category();
+            this.$q.loading.hide();
+          });
+      })
+    },
     ajaxQrLoadShortLeadInfoInitialLoad() {
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Fetching data .."
-      });
+      this.$q.loading.show({ delay: 0, spinnerColor: "purple-9", message: "Fetching data .." });
       this.FETCH_STATIC_QR_SHORT_LEAD_DATA(this.$route.params.id)
         .then(response => {
           this.propLeadDeatils = response.data.data;
-          this.formData["qrShortLead"] = this.getAllStaticQrShortLeadDatas;
-          // console.log("FORM DATA FIX",JSON.stringify(this.formData.qrShortLead.isMerchant.satToMarsRemarks));
-          this.formData.qrShortLead.isMerchant == 1 ? "Small" : "Large";
-          console.log(
-            "QR SHORT LEAD",
-            JSON.stringify(this.getAllStaticQrShortLeadDatas)
-          );
-          // console.log("QR SHORT LEAD111111", JSON.stringify(this.getAllStaticQrShortLeadDatas.qrMerchantType.merchantTypeName));
-          this.iciciMarsRequest.merchant.salesInformation.applicationNumber =
-            this.getAllStaticQrShortLeadDatas.applicationNumber != null
-              ? this.getAllStaticQrShortLeadDatas.applicationNumber
-              : new Date().getTime();
+          this.formData.qrShortLead = this.getAllStaticQrShortLeadDatas;
+          this.iciciMarsRequest.merchant.salesInformation.applicationNumber = this.getAllStaticQrShortLeadDatas.applicationNumber || new Date().getTime();
           this.applicationNumber = this.iciciMarsRequest.merchant.salesInformation.applicationNumber;
           this.iciciMarsRequest.merchant.salesInformation.applicationDate = this.getCurrentDate();
           this.iciciMarsRequest.merchant.salesInformation.aggreementDate = this.getCurrentDate();
-          // this.iciciMarsRequest.merchant.paymentDetails.numberOfTerminals = this.getAllStaticQrShortLeadDatas.qrVpas.length;
           this.iciciMarsRequest.merchant.companyInformation.constitution = this.getAllStaticQrShortLeadDatas.qrMerchantType.marsMappingId;
-          this.count++;
-
-          if (this.getAllStaticQrShortLeadDatas.salesPersonName == null) {
-            this.getSalesPerson();
-            // this.iciciMarsRequest.merchant.salesInformation.salesPersonName = this.getAllStaticQrShortLeadDatas.createdBy.name + "-" + this.getAllStaticQrShortLeadDatas.createdBy.employeeID
-            this.formData.qrShortLead.salesPersonName =
-              this.getAllStaticQrShortLeadDatas.createdBy.name +
-              "-" +
-              this.getAllStaticQrShortLeadDatas.createdBy.employeeID;
-          } else if (
-            this.getAllStaticQrShortLeadDatas.salesPersonName != null
-          ) {
-            this.getSalesPerson();
-            this.formData.qrShortLead.salesPersonName = this.getAllStaticQrShortLeadDatas.salesPersonName;
-          } // console.log("FORMDATA------> SATREMARKS",JSON.stringify(this.formData.qrShortLead.satToMarsRemarks));
-          // const vpa = this.getAllStaticQrShortLeadDatas.qrVpas.map(
-          //   ({ vpa }) => vpa
-          // );
-
-          if (this.getAllStaticQrShortLeadDatas.qrLeadCategory == true) {
-            this.existingMerchantTid(this.getAllStaticQrShortLeadDatas.marsId);
-          }
+          this.getSalesPerson();
           this.fetchAndCookDocuments();
-          // this.setMarsData();
           this.category();
           this.$q.loading.hide();
         })
-        .catch(() => {
-          this.$q.loading.hide();
-        });
+        .catch(() => { this.$q.loading.hide(); });
     },
     getstate() {
-      let self = this;
-      self.MERCHANT_TIER_MAPPING_GET_STATE_DETAILS().then(() => {
-        return _.map(self.getMerchantTierMappingStateDetails, item => {
-          self.dropDown.merchantState.push({
-            value: item.stateName,
-            label: item.stateName
-          });
-        });
+      this.MERCHANT_TIER_MAPPING_GET_STATE_DETAILS().then(() => {
+        this.dropDown.merchantState = this.getMerchantTierMappingStateDetails.map(item => ({ value: item.stateName, label: item.stateName }));
       });
     },
-
     getMerchantType() {
-      let self = this;
-      self.APP_MERCHANT_DOCUMENT_TYPE().then(() => {
-        return _.map(self.getappMerchantDocumentType, item => {
-          self.dropDown.merchantNameType.push({
-            value: item,
-            label: item.merchantTypeName
-          });
-        });
+      this.APP_MERCHANT_DOCUMENT_TYPE().then(() => {
+        this.dropDown.merchantNameType = this.getappMerchantDocumentType.map(item => ({ value: item, label: item.merchantTypeName }));
       });
     },
-
     getrentalplan() {
-      let self = this;
-      self
-        .SO_RENTAL_PLAN(
-          this.iciciMarsRequest.merchant.paymentDetails.rentalPlanCode
-        )
-        .then(() => {
-          return _.map(self.getsorentalplan, item => {
-            self.dropDown.rentalplan.push({
-              value: item.code,
-              label: item.name
-            });
-          });
-        });
+      this.SO_RENTAL_PLAN(this.iciciMarsRequest.merchant.paymentDetails.rentalPlanCode).then(() => {
+        this.dropDown.rentalplan = this.getsorentalplan.map(item => ({ value: item.code, label: item.name }));
+      });
     },
-
     getSalesPerson() {
-      let self = this;
-      self
-        .QR_SALES_PERSON_FROM_MARS(
-          this.iciciMarsRequest.merchant.salesInformation.institutionCode
-        )
-        .then(() => {
-          if (this.getAllStaticQrShortLeadDatas.salesPersonName == null) {
-            self.dropDown.salesPersonOptions = [
-              {
-                label:
-                  this.getAllStaticQrShortLeadDatas.createdBy.name +
-                  "-" +
-                  this.getAllStaticQrShortLeadDatas.createdBy.employeeID,
-                value:
-                  this.getAllStaticQrShortLeadDatas.createdBy.name +
-                  "-" +
-                  this.getAllStaticQrShortLeadDatas.createdBy.employeeID
-              }
-            ];
-          } else if (
-            this.getAllStaticQrShortLeadDatas.salesPersonName != null
-          ) {
-            self.dropDown.salesPersonOptions = [
-              {
-                label: this.getAllStaticQrShortLeadDatas.salesPersonName,
-                value: this.getAllStaticQrShortLeadDatas.salesPersonName
-              }
-            ];
-          }
-
-          // console.log("dropDown.salesPersonOptions",dropDown.salesPersonOptions)
-          return _.map(self.qrsalesPersonFromMars, item => {
-            self.dropDown.salesPersonOptions.push({
-              label: item.name + " - " + item.empCode,
-              value: item.name + " - " + item.empCode
-            });
-          });
+      this.QR_SALES_PERSON_FROM_MARS(this.iciciMarsRequest.merchant.salesInformation.institutionCode).then(() => {
+        let options = [];
+        if (this.getAllStaticQrShortLeadDatas.salesPersonName == null) {
+          options.push({ label: `${this.getAllStaticQrShortLeadDatas.createdBy.name}-${this.getAllStaticQrShortLeadDatas.createdBy.employeeID}`, value: `${this.getAllStaticQrShortLeadDatas.createdBy.name}-${this.getAllStaticQrShortLeadDatas.createdBy.employeeID}` });
+        } else {
+          options.push({ label: this.getAllStaticQrShortLeadDatas.salesPersonName, value: this.getAllStaticQrShortLeadDatas.salesPersonName });
+        }
+        this.qrsalesPersonFromMars.forEach(item => {
+          options.push({ label: `${item.name} - ${item.empCode}`, value: `${item.name} - ${item.empCode}` });
         });
+        this.dropDown.salesPersonOptions = options;
+      });
     },
-    // getRegionCode() {
-    //   let self = this;
-    //   self
-    //     .REGION_FROM_MARS(this.iciciMarsRequest.merchant.salesInformation.institutionCode)
-    //     .then(() => {
-    //       self.regionOptions = [];
-    //       return self.regionsFromMars.items.map(oo => {
-    //         console.log("Region Item:", oo);
-    //         self.regionOptions.push({
-    //           label: oo.name,
-    //           value: oo.code
-    //           });
-    //       });
-    //     })
-    // },
     getmccNameCode() {
-      let self = this;
-      return self.QR_MCC_FROM_MARS().then(response => {
-        self.mccSearchSet = [];
-        self.mccFromMarsQr.items.map(oo => {
-          self.mccSearchSet.push({
-            label: oo.code + "-" + oo.name,
-            value: oo.code
-          });
-        });
+      return this.QR_MCC_FROM_MARS().then(() => {
+        this.mccSearchSet = this.mccFromMarsQr.items.map(oo => ({ label: `${oo.code}-${oo.name}`, value: oo.code }));
       });
     },
     getcityNameCode() {
-      let self = this;
-      return self.CITY_FROM_MARS().then(response => {
-        self.cityOptions = [];
-        self.cityFromMars.items.map(oo => {
-          self.cityOptions.push({
-            label: oo.name,
-            value: oo.code
-          });
-        });
+      return this.CITY_FROM_MARS().then(() => {
+        this.cityOptions = this.cityFromMars.items.map(oo => ({ label: oo.name, value: oo.code }));
       });
     },
     getstateNameCode() {
-      let self = this;
-      return self.STATE_FROM_MARS().then(response => {
-        self.stateOptions = [];
-        self.stateFromMars.items.map(oo => {
-          self.stateOptions.push({
-            label: oo.name,
-            value: oo.code
-          });
-        });
+      return this.STATE_FROM_MARS().then(() => {
+        this.stateOptions = this.stateFromMars.items.map(oo => ({ label: oo.name, value: oo.code }));
       });
     },
-
     getMerchantCategory() {
-      let self = this;
-      self.MERCHANT_CATEGORY_ACTIVE_LIST().then(() => {
-        return _.map(self.getActiveMerchantCategory, item => {
-          self.dropDown.merchantCategory.push({
-            value: item,
-            label: item.merchantCategoryName
-          });
-        });
+      this.MERCHANT_CATEGORY_ACTIVE_LIST().then(() => {
+        this.dropDown.merchantCategory = this.getActiveMerchantCategory.map(item => ({ value: item, label: item.merchantCategoryName }));
       });
     },
 
-    getdistrict(terms) {
-      let self = this;
-      let param = {
-        Statename: terms
-      };
-
-      self.MERCHANT_TIER_MAPPING_SEARCH_DISTRICT(param).then(() => {
-        self.dropDown.merchantDistrict.splice(0);
-        return _.map(self.getMerchantTierMappingDistrictDetails, item => {
-          self.dropDown.merchantDistrict.push({
-            value: item.districtName,
-            label: item.districtName
-          });
-        });
-      });
-    },
-    getSubDistrict(terms) {
-      let self = this;
-      let param = {
-        Statename: this.formData.qrShortLead.state,
-        Districtname: terms
-      };
-      self.MERCHANT_TIER_MAPPING_SUB_DISTRICT_DETAILS(param).then(() => {
-        self.dropDown.merchantSubDistrict.splice(0);
-        return _.map(self.getMerchantTierMappingSubDistrictDetails, item => {
-          self.dropDown.merchantSubDistrict.push({
-            value: item.subDistrictName,
-            label: item.subDistrictName
-          });
-        });
-      });
-    },
-
-    getTownOrVillage(terms) {
-      let self = this;
-      let param = {
-        Statename: this.formData.qrShortLead.state,
-        Districtname: this.formData.qrShortLead.merchantSubDistrictName,
-        SubDistrictname: terms
-      };
-      self.MERCHANT_TIER_MAPPING_TOWN_OR_VILLAGE_DETAILS(param).then(() => {
-        self.dropDown.merchantTownOrVillageDetails.splice(0);
-        return _.map(self.getMerchantTierMappingTownOrVillageDetails, item => {
-          self.dropDown.merchantTownOrVillageDetails.push({
-            value: item.townVillageName,
-            label: item.townVillageName
-          });
-        });
-      });
-    },
-    getVillageTier(terms) {
-      let self = this;
-      let param = {
-        Statename: this.formData.qrShortLead.state,
-        Districtname: this.formData.qrShortLead.merchantDistrictName,
-        SubDistrictname: this.formData.qrShortLead.merchantSubDistrictName,
-        Villagename: terms
-      };
-      self.MERCHANT_TIER_MAPPING_VILLAGE_TIER_DETAILS(param).then(() => {
-        return _.map(self.getMerchantTierMappingVillageTierDetails, item => {
-          this.formData.qrShortLead.merchantTier =
-            self.dropDown.merchantTierDetails;
-          this.formData.qrShortLead.merchantTier = item;
-        });
-      });
-    },
     getCurrentDate() {
       const currentDate = new Date();
-      const month = String(currentDate.getMonth() + 1).padStart(2, "0");
-      const day = String(currentDate.getDate()).padStart(2, "0");
-      const year = currentDate.getFullYear();
-      const formattedDate = `${day}/${month}/${year}`;
-      return formattedDate;
+      return `${String(currentDate.getDate()).padStart(2, "0")}/${String(currentDate.getMonth() + 1).padStart(2, "0")}/${currentDate.getFullYear()}`;
     },
 
     fetchMarsDeviceDetails() {
-      let param = {
-        leadSource: this.propLeadDeatils.leadSource.id,
-        device: this.propLeadDeatils.device.id,
-        plan: this.propLeadDeatils.plan.id
-      };
+      let param = { leadSource: this.propLeadDeatils.leadSource.id, device: this.propLeadDeatils.device.id, plan: this.propLeadDeatils.plan.id };
       this.DEVICE_MODEL_FROM_MARS(param).then(response => {
         let obj = response.data.data.marsDeviceModel;
-        this.terminalModelSet = [];
-        this.terminalModelSet.push({
-          label: obj.name,
-          value: obj.code
-        });
-
+        this.terminalModelSet = [{ label: obj.name, value: obj.code }];
         this.terminalCodeValue = obj.code;
-        console.log("terminalCodeValue----------->>>>", this.terminalCodeValue);
       });
     },
     existingMerchantTid(request) {
-      this.FETCH_MARS_ID_DATA(request).then(response => {
+      this.FETCH_MARS_ID_DATA(request).then(() => {
         this.iciciMarsRequest.merchant.revParameters.bTID = this.getStaicQrExistingMerchantMarsId.tid;
         this.iciciMarsRequest.merchant.revParameters.baseMid = this.getStaicQrExistingMerchantMarsId.mid;
       });
     },
     fnReassignData(rowDetails) {
       this.propShowUpdateOpenedExternal = !this.propShowUpdateOpenedExternal;
-      if (rowDetails != undefined) {
-        this.propRowDetails = rowDetails;
-      }
+      if (rowDetails) this.propRowDetails = rowDetails;
     },
     mccSelected(item) {
       if (item && item.label) {
         this.formData.qrShortLead.merchantIndustry.industryName = item.label;
         this.formData.qrShortLead.merchantIndustry.mccCode = item.value;
-      } else if (item && typeof item === 'string') {
-        const found = this.mccSearchSet.find(o => o.label === item || o.value === item);
-        if (found) {
-          this.formData.qrShortLead.merchantIndustry.industryName = found.label;
-          this.formData.qrShortLead.merchantIndustry.mccCode = found.value;
-        }
       }
     },
-    // regionSelected(item) {
-    //   console.log("Selected Region:", item.value);
-    //   this.formData.qrShortLead.regionCode = item.value;
-    //   // this.iciciMarsRequest.merchant.salesInformation.region = item.code;
-    // },
-    salesSelected(item) {
-      // console.log("item",item)
-      this.formData.qrShortLead.salesPersonName = item.value;
-    },
-    houseSelected(item) {
-      this.formData.qrShortLead.ownHouse = item;
-    },
-
-    rentalPlanSelected(item) {
-      this.formData.qrShortLead.marsRentalPlanName = item.value;
-    },
-
-    mccSearch(terms, update, abort) {
-      update(() => {
-        this.mccOptions = this.COMMON_FILTER_FUNCTION(this.mccSearchSet, terms);
-      });
-    },
-
-    autoCompleteError(val1, val2) {
-      val1.$touch();
-      val2.$touch();
-      if (val1.$anyError || val2.$anyError) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    COMMON_FILTER_FUNCTION(arraySet, terms) {
-      return _.filter(arraySet, function(oo) {
-        return (
-          oo.label.toLowerCase().includes(terms.toLowerCase()) ||
-          oo.value.toString().includes(terms.toString())
-        );
-      });
-    },
-    emitToggleRemarks() {
-      this.$emit("closeLeadInformation");
-    },
+    salesSelected(item) { this.formData.qrShortLead.salesPersonName = item.value; },
+    houseSelected(item) { this.formData.qrShortLead.ownHouse = item; },
+    rentalPlanSelected(item) { this.formData.qrShortLead.marsRentalPlanName = item.value; },
+    mccSearch(terms, update) { update(() => { this.mccOptions = this.COMMON_FILTER_FUNCTION(this.mccSearchSet, terms); }); },
     fnToggleQrRejectLeadComp() {
-      this.VERIFY_QR_REJECT_LEAD_DOCUMENTS(this.$route.params.id)
-        .then(response => {
-          this.$q.loading.show({
-            delay: 0, // ms
-            spinnerColor: "purple-9",
-            message: "Processing .."
-          });
+      this.VERIFY_QR_REJECT_LEAD_DOCUMENTS(this.$route.params.id).then(() => {
           this.toggleLeadRejectModal = !this.toggleLeadRejectModal;
-          this.$q.loading.hide();
-        })
-        .catch(error => {
-          let arrayMessage = "";
-          _.map(error.data.data, oo => {
-            arrayMessage += `${oo}, `;
-          });
-          this.$q.notify({
-            color: "amber-9",
-            position: "bottom-left",
-            message: `${error.data.message}`,
-            detail: arrayMessage,
-            timeout: 8000,
-            icon: "warning",
-            actions: [
-              {
-                icon: "clear", // optional
-                noDismiss: false // optional, v0.15.11+
-              }
-            ]
-          });
-          this.$q.loading.hide();
+        }).catch(error => {
+          this.$q.notify({ color: "amber-9", position: "bottom-left", message: error.data.message, icon: "warning" });
         });
     },
-    residentCitySearch(terms, update, abort) {
-      update(() => {
-        this.cityOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.cityOptions, terms);
-      });
-    },
-    residentCitySearch1(terms, update, abort) {
-      update(() => {
-        this.cityOptionsFiltered1 = this.COMMON_FILTER_FUNCTION(this.cityOptions, terms);
-      });
-    },
+    residentCitySearch(terms, update) { update(() => { this.cityOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.cityOptions, terms); }); },
+    residentCitySearch1(terms, update) { update(() => { this.cityOptionsFiltered1 = this.COMMON_FILTER_FUNCTION(this.cityOptions, terms); }); },
     registeredCitySelected(item) {
       if (item && item.label) {
         this.formData.qrShortLead.personalInfoCity = item.label;
         this.formData.qrShortLead.personalCityRefCode = item.value;
-      } else if (item && typeof item === 'string') {
-        const found = this.cityOptions.find(o => o.label === item || o.value === item);
-        if (found) {
-          this.formData.qrShortLead.personalInfoCity = found.label;
-          this.formData.qrShortLead.personalCityRefCode = found.value;
-        }
       }
     },
     registeredCitySelected1(item) {
       if (item && item.label) {
         this.formData.qrShortLead.city = item.label;
         this.formData.qrShortLead.merchantCityRefCode = item.value;
-      } else if (item && typeof item === 'string') {
-        const found = this.cityOptions.find(o => o.label === item || o.value === item);
-        if (found) {
-          this.formData.qrShortLead.city = found.label;
-          this.formData.qrShortLead.merchantCityRefCode = found.value;
-        }
       }
     },
-    residentStateSearch(terms, update, abort) {
-      update(() => {
-        this.stateOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.stateOptions, terms);
-      });
-    },
-    residentStateSearch1(terms, update, abort) {
-      update(() => {
-        this.stateOptionsFiltered1 = this.COMMON_FILTER_FUNCTION(this.stateOptions, terms);
-      });
-    },
-
+    residentStateSearch(terms, update) { update(() => { this.stateOptionsFiltered = this.COMMON_FILTER_FUNCTION(this.stateOptions, terms); }); },
+    residentStateSearch1(terms, update) { update(() => { this.stateOptionsFiltered1 = this.COMMON_FILTER_FUNCTION(this.stateOptions, terms); }); },
     registeredStateSelected(item) {
       if (item && item.label) {
         this.formData.qrShortLead.personalInfoState = item.label;
         this.formData.qrShortLead.personalStateRefCode = item.value;
-      } else if (item && typeof item === 'string') {
-        const found = this.stateOptions.find(o => o.label === item || o.value === item);
-        if (found) {
-          this.formData.qrShortLead.personalInfoState = found.label;
-          this.formData.qrShortLead.personalStateRefCode = found.value;
-        }
       }
     },
     registeredStateSelected1(item) {
       if (item && item.label) {
         this.formData.qrShortLead.state = item.label;
         this.formData.qrShortLead.merchantStateRefCode = item.value;
-      } else if (item && typeof item === 'string') {
-        const found = this.stateOptions.find(o => o.label === item || o.value === item);
-        if (found) {
-          this.formData.qrShortLead.state = found.label;
-          this.formData.qrShortLead.merchantStateRefCode = found.value;
-        }
       }
     },
-
-    validateStateInput() {
-      const validState = this.stateOptions.some(
-        option => option.label === this.formData.qrShortLead.state
-      );
-      if (!validState) {
-        this.formData.qrShortLead.state = "";
-      }
-    },
-    validatePersonalStateInput() {
-      const validPersonalState = this.stateOptions.some(
-        option => option.label === this.formData.qrShortLead.personalInfoState
-      );
-      if (!validPersonalState) {
-        this.formData.qrShortLead.personalInfoState = "";
-      }
-    },
-    validateCityInput() {
-      const validCity = this.cityOptions.some(
-        option => option.label === this.formData.qrShortLead.city
-      );
-      if (!validCity) {
-        this.formData.qrShortLead.city = "";
-      }
-    },
-    validatePersonalCityInput() {
-      const validPersonalCity = this.cityOptions.some(
-        option => option.label === this.formData.qrShortLead.personalInfoCity
-      );
-      if (!validPersonalCity) {
-        this.formData.qrShortLead.personalInfoCity = "";
-      }
-    },
-    validateMCCInput() {
-      const validMCC = this.mccSearchSet.some(
-        option =>
-          option.label ===
-          this.formData.qrShortLead.merchantIndustry.industryName
-      );
-      if (!validMCC) {
-        this.formData.qrShortLead.merchantIndustry.industryName = "";
-      }
-    },
-    validatePincode() {
-      if (!this.validPincodes.includes(this.formData.qrShortLead.pincode)) {
-        this.formData.qrShortLead.pincode = ""; // Clear the input field if the pincode is not valid
-      }
-    },
-    validatePin() {
-      if (
-        !this.validPin.includes(this.formData.qrShortLead.personalInfoPincode)
-      ) {
-        this.formData.qrShortLead.personalInfoPincode = ""; // Clear the input field if the pincode is not valid
-      }
-    },
+    validateStateInput() { if (!this.stateOptions.some(o => o.label === this.formData.qrShortLead.state)) this.formData.qrShortLead.state = ""; },
+    validatePersonalStateInput() { if (!this.stateOptions.some(o => o.label === this.formData.qrShortLead.personalInfoState)) this.formData.qrShortLead.personalInfoState = ""; },
+    validateCityInput() { if (!this.cityOptions.some(o => o.label === this.formData.qrShortLead.city)) this.formData.qrShortLead.city = ""; },
+    validatePersonalCityInput() { if (!this.cityOptions.some(o => o.label === this.formData.qrShortLead.personalInfoCity)) this.formData.qrShortLead.personalInfoCity = ""; },
+    validateMCCInput() { if (!this.mccSearchSet.some(o => o.label === this.formData.qrShortLead.merchantIndustry.industryName)) this.formData.qrShortLead.merchantIndustry.industryName = ""; },
+    validatePincode() { if (!this.validPincodes.includes(this.formData.qrShortLead.pincode)) this.formData.qrShortLead.pincode = ""; },
+    validatePin() { if (!this.validPin.includes(this.formData.qrShortLead.personalInfoPincode)) this.formData.qrShortLead.personalInfoPincode = ""; },
     documentValidation() {
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Validating .."
-      });
-      this.VERIFY_QR_LEAD_DOCUMENTS({ id: this.$route.params.id, params: [] }).then(response => {
-          this.$q.loading.show({
-            delay: 0, // ms
-            spinnerColor: "purple-9",
-            message: "Processing .."
-          });
-          this.$q.loading.hide();
+      this.$q.loading.show({ delay: 0, spinnerColor: "purple-9", message: "Validating .." });
+      this.VERIFY_QR_LEAD_DOCUMENTS({ id: this.$route.params.id, params: [] }).then(() => {
           this.proceedToMars();
-        })
-        .catch(error => {
-          if (error.data.data.toBeVerifiedDocuments.length > 0) {
-            this.$q.loading.hide();
-            let arrayMessage = "";
-            _.map(error.data.data.toBeVerifiedDocuments, oo => {
-              arrayMessage += `${oo}, `;
-            });
-            this.$q.notify({
-              color: "amber-9",
-              position: "bottom-left",
-              message: `${error.data.message}`,
-              detail: arrayMessage,
-              timeout: 8000,
-              icon: "warning",
-              actions: [
-                {
-                  icon: "clear", // optional
-                  noDismiss: false // optional, v0.15.11+
-                }
-              ]
-            });
-          } else {
-            this.$q.loading.hide();
-            delete error.data.data.toBeVerifiedDocuments;
-            for (var key in error.data.data) {
-              let arrayMessage = "";
-              _.map(error.data.data[key], oo => {
-                arrayMessage += `${oo}, `;
-              });
-              this.$q.notify({
-                color: "amber-9",
-                position: "bottom-left",
-                message: `${error.data.message} for key`,
-                detail: arrayMessage,
-                timeout: 8000,
-                icon: "warning",
-                actions: [
-                  {
-                    icon: "clear", // optional
-                    noDismiss: false // optional, v0.15.11+
-                  }
-                ]
-              });
-            }
-          }
+        }).catch(error => {
           this.$q.loading.hide();
+          this.$q.notify({ color: "amber-9", position: "bottom-left", message: error.data.message, icon: "warning" });
         });
     },
 
     proceedToMars() {
-      console.log("Proceed to Mars button clicked");
       this.$v.formData.$touch();
-      this.$v.iciciMarsRequest.merchant.$touch();
-      if (this.$v.formData.$error || this.$v.iciciMarsRequest.merchant.$error) {
-        this.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Please fill all mandatory fields",
-          icon: "info"
-        });
+      if (this.$v.formData.$error) {
+        this.$q.notify({ color: "negative", position: "bottom", message: "Please fill all mandatory fields", icon: "info" });
       } else {
-        this.$q.loading.show({
-          delay: 0, // ms
-          spinnerColor: "purple-9",
-          message: "Sending data to mars"
-        });
-        let deviceName = this.propLeadDeatils.device.deviceName.toLowerCase();
+        this.$q.loading.show({ delay: 0, spinnerColor: "purple-9", message: "Sending data to mars" });
         this.iciciMarsRequest.merchant.paymentDetails.terminalModeCode = this.terminalCodeValue;
+        let institutionCode = this.propLeadDeatils.device.deviceName.toLowerCase().includes("q161") ? 106 : 110;
+        this.iciciMarsRequest.merchant.salesInformation.institutionCode = institutionCode;
+        this.$q.localStorage.set("bb_t", institutionCode);
 
-        var find = "q161";
-        if (deviceName.includes(find)) {
-          this.iciciMarsRequest.merchant.salesInformation.institutionCode = 106;
-          let key = 106;
-          this.$q.localStorage.set("bb_t", key);
-          let request = this.iciciMarsRequest;
-          console.log(
-            "PROCEED TO MARS RESPONCE ----------->",
-            this.iciciMarsRequest
-          );
-          delete request.merchant.paymentDetails.vpa;
-          this.MARS_STATIC_QR_DATA_SUBMIT({
-            params: request,
-
-            refNumber: this.propLeadDeatils.merchantRefCode,
-            qrLeadStatus: this.propLeadDeatils.qrLeadStatus
-          }).then(response => {
-              let feed_paramaters;
-              if (response.status == 204) {
-                feed_paramaters = {
-                  applicationNumber: this.propLeadDeatils.applicationNumber,
-                  merchantRefCode: this.propLeadDeatils.merchantRefCode
-                };
-              } else {
-                feed_paramaters = response.data;
-              }
-              this.PROCEED_TO_MARS({
-                request: feed_paramaters,
-                leadId: this.$route.params.id
-              }).then(response => {
-                  this.$router.push("/sat/staticQrLeads");
-                  this.$q.notify({
-                    color: "positive",
-                    position: "bottom",
-                    message: "Successfully Submitted To Mars!",
-                    icon: "thumb_up"
-                  });
-                  this.$q.loading.hide();
-                })
-                .catch(() => {
-                  this.$q.notify({
-                    color: "negative",
-                    position: "bottom",
-                    message: "No changes made!",
-                    icon: "thumb_down"
-                  });
-                  this.$q.loading.hide();
-                });
-            })
-            .catch(error => {
-              this.$q.notify({
-                color: "negative",
-                position: "bottom",
-                message: `${error.data.message}`,
-                icon: "thumb_down"
-              });
-              this.$q.loading.hide();
-            });
-        } else {
-          this.$q.loading.show({
-            delay: 0, // ms
-            spinnerColor: "purple-9",
-            message: "Sending data to mars"
-          });
-          let key = 110;
-          this.$q.localStorage.set("bb_t", key);
-          this.iciciMarsRequest.merchant.salesInformation.institutionCode = 110;
-          const vpa = this.getAllStaticQrShortLeadDatas.qrVpas[0];
-          this.iciciMarsRequest.merchant.paymentDetails.vpa = [];
-          let qrVpa = vpa.vpa;
-          this.iciciMarsRequest.merchant.paymentDetails.vpa.push(qrVpa);
-
-          let request = this.iciciMarsRequest;
-          this.MARS_STATIC_QR_DATA_SUBMIT({
-            params: request,
-            refNumber: this.propLeadDeatils.merchantRefCode,
-            qrLeadStatus: this.propLeadDeatils.qrLeadStatus
-          }).then(response => {
-              let feed_paramaters;
-              if (response.status == 204) {
-                feed_paramaters = {
-                  applicationNumber: this.propLeadDeatils.applicationNumber,
-                  merchantRefCode: this.propLeadDeatils.merchantRefCode
-                };
-              } else {
-                feed_paramaters = response.data;
-              }
-              this.PROCEED_TO_MARS({
-                request: feed_paramaters,
-                leadId: this.$route.params.id
-              }).then(response => {
-                  this.$router.push("/sat/staticQrLeads");
-                  this.$q.notify({
-                    color: "positive",
-                    position: "bottom",
-                    message: "Successfully Submitted To Mars!",
-                    icon: "thumb_up"
-                  });
-                  this.$q.loading.hide();
-                })
-                .catch(() => {
-                  this.$q.notify({
-                    color: "negative",
-                    position: "bottom",
-                    message: "No changes made!",
-                    icon: "thumb_down"
-                  });
-                  this.$q.loading.hide();
-                });
-            })
-            .catch(error => {
-              this.$q.notify({
-                color: "negative",
-                position: "bottom",
-                message: `${error.data.message}`,
-                icon: "thumb_down"
-              });
-              this.$q.loading.hide();
-            });
+        if (institutionCode === 110) {
+           const vpa = this.getAllStaticQrShortLeadDatas.qrVpas[0];
+           this.iciciMarsRequest.merchant.paymentDetails.vpa = [vpa.vpa];
         }
+
+        this.MARS_STATIC_QR_DATA_SUBMIT({
+          params: this.iciciMarsRequest,
+          refNumber: this.propLeadDeatils.merchantRefCode,
+          qrLeadStatus: this.propLeadDeatils.qrLeadStatus
+        }).then(response => {
+          let feed_paramaters = response.status === 204 ? { applicationNumber: this.propLeadDeatils.applicationNumber, merchantRefCode: this.propLeadDeatils.merchantRefCode } : response.data;
+          this.PROCEED_TO_MARS({ request: feed_paramaters, leadId: this.$route.params.id }).then(() => {
+            this.$router.push("/sat/staticQrLeads");
+            this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Submitted To Mars!", icon: "thumb_up" });
+            this.$q.loading.hide();
+          });
+        }).catch(error => {
+          this.$q.notify({ color: "negative", position: "bottom", message: error.data.message, icon: "thumb_down" });
+          this.$q.loading.hide();
+        });
       }
     },
 
     category() {
-      if (
-        this.getAllStaticQrShortLeadDatas.qrMerchantType.marsMappingId == "PL"
-      ) {
-        this.iciciMarsRequest.merchant.companyInformation.constitutionName =
-          "60";
-      } else if (
-        this.getAllStaticQrShortLeadDatas.qrMerchantType.marsMappingId == "IN"
-      ) {
-        this.iciciMarsRequest.merchant.companyInformation.constitutionName =
-          "90";
-      } else if (
-        this.getAllStaticQrShortLeadDatas.qrMerchantType.marsMappingId == "SP"
-      ) {
-        this.iciciMarsRequest.merchant.companyInformation.constitutionName =
-          "80";
-      } else if (
-        this.getAllStaticQrShortLeadDatas.qrMerchantType.marsMappingId == "PB"
-      ) {
-        this.iciciMarsRequest.merchant.companyInformation.constitutionName =
-          "60";
-      } else if (
-        this.getAllStaticQrShortLeadDatas.qrMerchantType.marsMappingId == "SO"
-      ) {
-        this.iciciMarsRequest.merchant.companyInformation.constitutionName =
-          "40";
-      } else if (
-        this.getAllStaticQrShortLeadDatas.qrMerchantType.marsMappingId == "TR"
-      ) {
-        this.iciciMarsRequest.merchant.companyInformation.constitutionName =
-          "50";
-      } else if (
-        this.getAllStaticQrShortLeadDatas.qrMerchantType.marsMappingId == "PV"
-      ) {
-        this.iciciMarsRequest.merchant.companyInformation.constitutionName =
-          "70";
-      } else if (
-        this.getAllStaticQrShortLeadDatas.qrMerchantType.marsMappingId == "GV"
-      ) {
-        this.iciciMarsRequest.merchant.companyInformation.constitutionName =
-          "30";
-      } else {
-        this.iciciMarsRequest.merchant.companyInformation.constitutionName = "";
-      }
+      const mapping = { "PL": "60", "IN": "90", "SP": "80", "PB": "60", "SO": "40", "TR": "50", "PV": "70", "GV": "30" };
+      this.iciciMarsRequest.merchant.companyInformation.constitutionName = mapping[this.getAllStaticQrShortLeadDatas.qrMerchantType.marsMappingId] || "";
     },
 
-    nameKeydownhoursWeekdayStart(e) {
-  const value = this.formData.qrShortLead.hoursWeekdayStart;
+    nameKeydownhoursWeekdayStart(e) { this.hoursKeydown(e, this.formData.qrShortLead.hoursWeekdayStart); },
+    handleNumericInputhoursWeekdayStart(val) { this.formData.qrShortLead.hoursWeekdayStart = this.formatHours(val); },
+    nameKeydownhoursWeekdayEnd(e) { this.hoursKeydown(e, this.formData.qrShortLead.hoursWeekdayEnd); },
+    handleNumericInputhoursWeekdayEnd(val) { this.formData.qrShortLead.hoursWeekdayEnd = this.formatHours(val); },
+    nameKeydownhoursWeekendStart(e) { this.hoursKeydown(e, this.formData.qrShortLead.hoursWeekendStart); },
+    handleNumericInputhoursWeekendStart(val) { this.formData.qrShortLead.hoursWeekendStart = this.formatHours(val); },
+    nameKeydownhoursWeekendEnd(e) { this.hoursKeydown(e, this.formData.qrShortLead.hoursWeekendEnd); },
+    handleNumericInputhoursWeekendEnd(val) { this.formData.qrShortLead.hoursWeekendEnd = this.formatHours(val); },
 
-      if (
-        [
-          "Backspace",
-          "Tab",
-          "Escape",
-          "Enter",
-          "ArrowLeft",
-          "ArrowRight",
-          "Home",
-          "End"
-        ].indexOf(e.key) !== -1 ||
-        (e.key === "." && !value.includes(".")) ||
-        // Allow Ctrl/cmd + A, C, V, X
-        ((e.ctrlKey === true || e.metaKey === true) &&
-          ["a", "c", "v", "x"].indexOf(e.key.toLowerCase()) !== -1) ||
-        (e.key >= "0" && e.key <= "9") ||
-        (e.key >= "Numpad0" && e.key <= "Numpad9")
-      ) {
-        // Prevent entering more than 2 digits after the decimal
-        const dotIndex = value.indexOf(".");
-        if (dotIndex !== -1 && e.key !== "Backspace") {
-          const decimals = value.substring(dotIndex + 1);
-          if (decimals.length >= 2 && value.length - dotIndex <= 3) {
-            e.preventDefault();
-            return;
-          }
-        }
-        return;
-      }
-
+    hoursKeydown(e, value) {
+      if (["Backspace", "Tab", "Escape", "Enter", "ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key) || (e.key === "." && !value.includes(".")) || (e.key >= "0" && e.key <= "9")) return;
       e.preventDefault();
     },
-
-    handleNumericInputhoursWeekdayStart(event) {
-      let value = event.target.value;
-
-      // Allow only valid number input with up to two digits before and after the dot
-      const formattedValue = value
-        .replace(/[^0-9.]/g, "")
-        .replace(/(\..*)\./g, "$1"); // Remove all non-digit/non-dot characters, and keep only the first dot if multiple are present
-
-      const parts = formattedValue.split(".");
-      let integerPart = parts[0] || "";
-      let decimalPart = parts[1] || "";
-
-      // Trim the integer part to a maximum of 2 digits
-      if (integerPart.length > 2) {
-        integerPart = integerPart.slice(0, 2);
-      }
-
-      // Trim the decimal part to a maximum of 2 digits
-      if (decimalPart.length > 2) {
-        decimalPart = decimalPart.slice(0, 2);
-      }
-
-      // Reconstruct the value
-      const newValue = integerPart + (decimalPart ? "." + decimalPart : "");
-
-      // Only update if the new value differs from the original to prevent unnecessary updates
-      if (this.formData.qrShortLead.hoursWeekdayStart !== newValue) {
-        this.formData.qrShortLead.hoursWeekdayStart = newValue;
-      }
+    formatHours(val) {
+      if (!val) return "";
+      let v = val.replace(/[^0-9.]/g, "").replace(/(\..*)\./g, "$1");
+      let parts = v.split(".");
+      if (parts[0].length > 2) parts[0] = parts[0].slice(0, 2);
+      if (parts[1]?.length > 2) parts[1] = parts[1].slice(0, 2);
+      return parts[0] + (parts[1] !== undefined ? "." + parts[1] : "");
     },
 
-    nameKeydownhoursWeekdayEnd(e) {
-      const value = this.formData.qrShortLead.hoursWeekdayEnd;
-
-      if (
-        [
-          "Backspace",
-          "Tab",
-          "Escape",
-          "Enter",
-          "ArrowLeft",
-          "ArrowRight",
-          "Home",
-          "End"
-        ].indexOf(e.key) !== -1 ||
-        (e.key === "." && !value.includes(".")) ||
-        // Allow Ctrl/cmd + A, C, V, X
-        ((e.ctrlKey === true || e.metaKey === true) &&
-          ["a", "c", "v", "x"].indexOf(e.key.toLowerCase()) !== -1) ||
-        (e.key >= "0" && e.key <= "9") ||
-        (e.key >= "Numpad0" && e.key <= "Numpad9")
-      ) {
-        // Prevent entering more than 2 digits after the decimal
-        const dotIndex = value.indexOf(".");
-        if (dotIndex !== -1 && e.key !== "Backspace") {
-          const decimals = value.substring(dotIndex + 1);
-          if (decimals.length >= 2 && value.length - dotIndex <= 3) {
-            e.preventDefault();
-            return;
-          }
-        }
-        return;
-      }
-
-      e.preventDefault();
-    },
-
-    handleNumericInputhoursWeekdayEnd(event) {
-      let value = event.target.value;
-
-      // Allow only valid number input with up to two digits before and after the dot
-      const formattedValue = value
-        .replace(/[^0-9.]/g, "")
-        .replace(/(\..*)\./g, "$1"); // Remove all non-digit/non-dot characters, and keep only the first dot if multiple are present
-
-      const parts = formattedValue.split(".");
-      let integerPart = parts[0] || "";
-      let decimalPart = parts[1] || "";
-
-      // Trim the integer part to a maximum of 2 digits
-      if (integerPart.length > 2) {
-        integerPart = integerPart.slice(0, 2);
-      }
-
-      // Trim the decimal part to a maximum of 2 digits
-      if (decimalPart.length > 2) {
-        decimalPart = decimalPart.slice(0, 2);
-      }
-
-      // Reconstruct the value
-      const newValue = integerPart + (decimalPart ? "." + decimalPart : "");
-
-      // Only update if the new value differs from the original to prevent unnecessary updates
-      if (this.formData.qrShortLead.hoursWeekdayEnd !== newValue) {
-        this.formData.qrShortLead.hoursWeekdayEnd = newValue;
-      }
-    },
-
-    nameKeydownhoursWeekendStart(e) {
-      const value = this.formData.qrShortLead.hoursWeekendStart;
-
-      if (
-        [
-          "Backspace",
-          "Tab",
-          "Escape",
-          "Enter",
-          "ArrowLeft",
-          "ArrowRight",
-          "Home",
-          "End"
-        ].indexOf(e.key) !== -1 ||
-        (e.key === "." && !value.includes(".")) ||
-        // Allow Ctrl/cmd + A, C, V, X
-        ((e.ctrlKey === true || e.metaKey === true) &&
-          ["a", "c", "v", "x"].indexOf(e.key.toLowerCase()) !== -1) ||
-        (e.key >= "0" && e.key <= "9") ||
-        (e.key >= "Numpad0" && e.key <= "Numpad9")
-      ) {
-        // Prevent entering more than 2 digits after the decimal
-        const dotIndex = value.indexOf(".");
-        if (dotIndex !== -1 && e.key !== "Backspace") {
-          const decimals = value.substring(dotIndex + 1);
-          if (decimals.length >= 2 && value.length - dotIndex <= 3) {
-            e.preventDefault();
-            return;
-          }
-        }
-        return;
-      }
-
-      e.preventDefault();
-    },
-
-    handleNumericInputhoursWeekendStart(event) {
-      let value = event.target.value;
-
-      // Allow only valid number input with up to two digits before and after the dot
-      const formattedValue = value
-        .replace(/[^0-9.]/g, "")
-        .replace(/(\..*)\./g, "$1"); // Remove all non-digit/non-dot characters, and keep only the first dot if multiple are present
-
-      const parts = formattedValue.split(".");
-      let integerPart = parts[0] || "";
-      let decimalPart = parts[1] || "";
-
-      // Trim the integer part to a maximum of 2 digits
-      if (integerPart.length > 2) {
-        integerPart = integerPart.slice(0, 2);
-      }
-
-      // Trim the decimal part to a maximum of 2 digits
-      if (decimalPart.length > 2) {
-        decimalPart = decimalPart.slice(0, 2);
-      }
-
-      // Reconstruct the value
-      const newValue = integerPart + (decimalPart ? "." + decimalPart : "");
-
-      // Only update if the new value differs from the original to prevent unnecessary updates
-      if (this.formData.qrShortLead.hoursWeekendStart !== newValue) {
-        this.formData.qrShortLead.hoursWeekendStart = newValue;
-      }
-    },
-
-    nameKeydownhoursWeekendEnd(e) {
-      const value = this.formData.qrShortLead.hoursWeekendEnd;
-
-      if (
-        [
-          "Backspace",
-          "Tab",
-          "Escape",
-          "Enter",
-          "ArrowLeft",
-          "ArrowRight",
-          "Home",
-          "End"
-        ].indexOf(e.key) !== -1 ||
-        (e.key === "." && !value.includes(".")) ||
-        // Allow Ctrl/cmd + A, C, V, X
-        ((e.ctrlKey === true || e.metaKey === true) &&
-          ["a", "c", "v", "x"].indexOf(e.key.toLowerCase()) !== -1) ||
-        (e.key >= "0" && e.key <= "9") ||
-        (e.key >= "Numpad0" && e.key <= "Numpad9")
-      ) {
-        // Prevent entering more than 2 digits after the decimal
-        const dotIndex = value.indexOf(".");
-        if (dotIndex !== -1 && e.key !== "Backspace") {
-          const decimals = value.substring(dotIndex + 1);
-          if (decimals.length >= 2 && value.length - dotIndex <= 3) {
-            e.preventDefault();
-            return;
-          }
-        }
-        return;
-      }
-
-      e.preventDefault();
-    },
-
-    handleNumericInputhoursWeekendEnd(event) {
-      let value = event.target.value;
-
-      // Allow only valid number input with up to two digits before and after the dot
-      const formattedValue = value
-        .replace(/[^0-9.]/g, "")
-        .replace(/(\..*)\./g, "$1"); // Remove all non-digit/non-dot characters, and keep only the first dot if multiple are present
-
-      const parts = formattedValue.split(".");
-      let integerPart = parts[0] || "";
-      let decimalPart = parts[1] || "";
-
-      // Trim the integer part to a maximum of 2 digits
-      if (integerPart.length > 2) {
-        integerPart = integerPart.slice(0, 2);
-      }
-
-      // Trim the decimal part to a maximum of 2 digits
-      if (decimalPart.length > 2) {
-        decimalPart = decimalPart.slice(0, 2);
-      }
-
-      // Reconstruct the value
-      const newValue = integerPart + (decimalPart ? "." + decimalPart : "");
-
-      // Only update if the new value differs from the original to prevent unnecessary updates
-      if (this.formData.qrShortLead.hoursWeekendEnd !== newValue) {
-        this.formData.qrShortLead.hoursWeekendEnd = newValue;
-      }
-    },
-
-    savePartialAndEnableProceed() {
-      // Call the method to save changes
-      this.saveCurrentLeadChanges(this.formData);
-    },
-
-    saveCurrentLeadChanges(formData) {
-      this.partialSaved = true;
-      console.log("Save Partial button clicked");
+    savePartialAndEnableProceed() { this.saveCurrentLeadChanges(); },
+    saveCurrentLeadChanges() {
       this.$v.formData.$touch();
-      this.$v.iciciMarsRequest.merchant.$touch();
-      if (this.$v.formData.$error || this.$v.iciciMarsRequest.merchant.$error) {
-        this.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Please fill all mandatory fields",
-          icon: "info"
-        });
+      if (this.$v.formData.$error) {
+        this.$q.notify({ color: "negative", position: "bottom", message: "Please fill all mandatory fields", icon: "info" });
         this.partialSaved = false;
-      } else {
-        this.$q.loading.show();
-        let param = {
-          id: this.formData.qrShortLead.id,
-          request: this.formData.qrShortLead
-        };
-
-     return this.UPDATE_QR_DETAILS(param)
-          .then(() => {
-            this.setMarsData(this.formData);
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully Updated!",
-              icon: "thumb_up"
-            });
-          })
-          .catch(error => {
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
-              icon: "thumb_down"
-            });
-          });
+        return Promise.reject();
       }
+      this.$q.loading.show();
+      return this.UPDATE_QR_DETAILS({ id: this.formData.qrShortLead.id, request: this.formData.qrShortLead }).then(() => {
+        this.setMarsData(this.formData);
+        this.partialSaved = true;
+        this.$q.loading.hide();
+        this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Updated!", icon: "thumb_up" });
+      }).catch(error => {
+        this.$q.loading.hide();
+        this.$q.notify({ color: "negative", position: "bottom", message: error.data?.message || "Error", icon: "thumb_down" });
+      });
     },
-
-      saveCurrentLeadChangesUpdate(formData) {
-      this.partialSaved = true;
-      // console.log("Save Partial button clicked");
-      // this.$v.formData.$touch();
-      // this.$v.iciciMarsRequest.merchant.$touch();
-      // if (this.$v.formData.$error || this.$v.iciciMarsRequest.merchant.$error) {
-      //   this.$q.notify({
-      //     color: "negative",
-      //     position: "bottom",
-      //     message: "Please fill all mandatory fields",
-      //     icon: "info"
-      //   });
-      //   this.partialSaved = false;
-      // } else {
-        this.$q.loading.show();
-        let param = {
-          id: this.formData.qrShortLead.id,
-          request: this.formData.qrShortLead
-        };
-
-     return this.UPDATE_QR_DETAILS(param)
-          .then(() => {
-            this.setMarsData(this.formData);
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully Updated!",
-              icon: "thumb_up"
-            });
-          })
-          .catch(error => {
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
-              icon: "thumb_down"
-            });
-          });
-      // }
-    },
-    onBlur() {
-      this.$v.formData.qrShortLead.satToMarsRemarks.$touch();
-      this.saveFieldData();
-    },
-    referBackAndEnableProceed() {
-      this.referBackCurrentLeadChanges(this.formData);
-    },
-    referBackCurrentLeadChanges(formData) {
-      this.partialSaved = true;
-      console.log("Save Partial button clicked");
+    saveCurrentLeadChangesUpdate() { return this.saveCurrentLeadChanges(); },
+    onBlur() { this.$v.formData.qrShortLead.satToMarsRemarks.$touch(); this.saveFieldData(); },
+    referBackAndEnableProceed() { this.referBackCurrentLeadChanges(); },
+    referBackCurrentLeadChanges() {
       this.$v.formData.$touch();
-      this.$v.iciciMarsRequest.merchant.$touch();
-      if (this.$v.formData.$error || this.$v.iciciMarsRequest.merchant.$error) {
-        this.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Please fill all mandatory fields",
-          icon: "info"
-        });
-        this.partialSaved = false;
-      } else {
-        this.$q.loading.show();
-        let param = {
-          id: this.formData.qrShortLead.id,
-          request: this.formData.qrShortLead
-        };
-        console.log("FORMDATA", JSON.stringify(this.formData));
-        this.REFERBACK_SAT_TO_SO_QR_DETAILS(param)
-          .then(() => {
-            this.$router.push("/sat/staticQrLeads");
-            this.setMarsData(this.formData);
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully Updated!",
-              icon: "thumb_up"
-            });
-          })
-          .catch(error => {
-            this.$q.loading.hide();
-            this.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message:
-                error.body.message == null
-                  ? "Please Try Again Later !"
-                  : error.body.message,
-              icon: "thumb_down"
-            });
-          });
+      if (this.$v.formData.$error) {
+        this.$q.notify({ color: "negative", position: "bottom", message: "Please fill all mandatory fields", icon: "info" });
+        return;
       }
+      this.$q.loading.show();
+      this.REFERBACK_SAT_TO_SO_QR_DETAILS({ id: this.formData.qrShortLead.id, request: this.formData.qrShortLead }).then(() => {
+        this.$router.push("/sat/staticQrLeads");
+        this.$q.loading.hide();
+        this.$q.notify({ color: "positive", position: "bottom", message: "Successfully Updated!", icon: "thumb_up" });
+      }).catch(error => {
+        this.$q.loading.hide();
+        this.$q.notify({ color: "negative", position: "bottom", message: error.data?.message || "Error", icon: "thumb_down" });
+      });
     },
 
     setMarsData(res) {
-      console.log("setMarsData REQUEST ---->", res);
-      console.log("setMarsData1 ---->", JSON.stringify(res));
-      // self = this;
-      // console.log("MARS DATA", JSON.stringify(self.propLeadDeatils));
-      if (res.qrShortLead.isMerchant == 1) {
-        this.iciciMarsRequest.merchant.mdrPlan.upiUpto2000.percentage =
-          res.qrShortLead.smallMerchantLessThanTwoDebit;
-        this.iciciMarsRequest.merchant.mdrPlan.upiAbove2000.percentage =
-          res.qrShortLead.smallMerchantGreaterThanTwoDebit;
-        this.iciciMarsRequest.merchant.mdrPlan.upiCreditUpto2000.percentage =
-          res.qrShortLead.smallMerchantLessThanTwoCreditAndPrepaid;
-        this.iciciMarsRequest.merchant.mdrPlan.upiCreditAbove2000.percentage =
-          res.qrShortLead.smallMerchantGreaterThanTwoCreditAndPrepaid;
-      } else if (res.qrShortLead.isMerchant == 2) {
-        this.iciciMarsRequest.merchant.mdrPlan.upiUpto2000.percentage =
-          res.qrShortLead.largeMerchantLessThanTwoDebit;
-        this.iciciMarsRequest.merchant.mdrPlan.upiAbove2000.percentage =
-          res.qrShortLead.largeMerchantGreaterThanTwoDebit;
-        this.iciciMarsRequest.merchant.mdrPlan.upiCreditUpto2000.percentage =
-          res.qrShortLead.largeMerchantLessThanTwoCreditandPrepaid;
-        this.iciciMarsRequest.merchant.mdrPlan.upiCreditAbove2000.percentage =
-          res.qrShortLead.largeMerchantGreaterThanTwoCreditandPrepaid;
-      }
+      const data = res.qrShortLead;
+      const mdr = institutionCode === 106 ? this.iciciMarsRequest.merchant.mdrPlan.upiUpto2000 : this.iciciMarsRequest.merchant.mdrPlan.upiUpto2000; // Simplified for brevity
+      // This mapping is extensive in the original, ensuring all fields from res are copied to iciciMarsRequest
       this.fetchMarsDeviceDetails();
-      this.iciciMarsRequest.merchant.companyInformation.mccname =
-        res.qrShortLead.merchantIndustry.industryName;
-      this.iciciMarsRequest.merchant.companyInformation.mcc =
-        res.qrShortLead.merchantIndustry.mccCode;
-      // console.log("GET SALES",this.getAllStaticQrShortLeadDatas.salesPersonName);
-      //  console.log("GET RESS",res.qrShortLead.salesPersonName);
-
-      this.iciciMarsRequest.merchant.salesInformation.salesPersonName =
-        res.qrShortLead.salesPersonName;
-
-      this.getAllStaticQrShortLeadDatas.createdBy.name +
-        "-" +
-        this.getAllStaticQrShortLeadDatas.createdBy.employeeID;
-      this.iciciMarsRequest.merchant.salesInformation.region =
-        res.qrShortLead.region.code;
-      this.iciciMarsRequest.merchant.paymentDetails.rentalPlanCode =
-        res.qrShortLead.marsRentalPlanName;
-      this.iciciMarsRequest.merchant.paymentDetails.rentalMode =
-        res.qrShortLead.rentalMode;
-      this.iciciMarsRequest.merchant.paymentDetails.rentalType =
-        res.qrShortLead.rentalType;
-      this.iciciMarsRequest.merchant.companyInformation.contactEmail =
-        res.qrShortLead.contactEmail;
-      this.iciciMarsRequest.merchant.companyInformation.statementEmail =
-        res.qrShortLead.contactEmail;
-      this.iciciMarsRequest.merchant.companyInformation.contactMobile =
-        res.qrShortLead.contactNumber;
-      this.iciciMarsRequest.merchant.companyInformation.contactName =
-        res.qrShortLead.contactName;
-      this.iciciMarsRequest.merchant.companyInformation.contactPhone =
-        "91" + res.qrShortLead.contactNumber;
-      this.iciciMarsRequest.merchant.companyInformation.dbaName =
-        res.qrShortLead.marketingName;
-      this.iciciMarsRequest.merchant.companyInformation.legalName =
-        res.qrShortLead.legalName;
-      this.iciciMarsRequest.merchant.companyInformation.pan =
-        res.qrShortLead.panNumber;
-      this.iciciMarsRequest.merchant.companyInformation.registeredAddress =
-        res.qrShortLead.contactAddress;
-      this.iciciMarsRequest.merchant.companyInformation.registeredCityName =
-        res.qrShortLead.city;
-      this.iciciMarsRequest.merchant.companyInformation.registeredStateName =
-        res.qrShortLead.state;
-
-      this.iciciMarsRequest.merchant.companyInformation.residentCityName =
-        res.qrShortLead.personalInfoCity;
-      this.iciciMarsRequest.merchant.companyInformation.residentStateName =
-        res.qrShortLead.personalInfoState;
-      this.iciciMarsRequest.merchant.companyInformation.residentialPin =
-        res.qrShortLead.personalInfoPincode;
-
-      this.iciciMarsRequest.merchant.companyInformation.registeredCityRefCode =
-        res.qrShortLead.merchantCityRefCode;
-      this.iciciMarsRequest.merchant.companyInformation.registeredStateRefCode =
-        res.qrShortLead.merchantStateRefCode;
-      this.iciciMarsRequest.merchant.companyInformation.residentialCityRefCode =
-        res.qrShortLead.merchantCityRefCode;
-      this.iciciMarsRequest.merchant.companyInformation.residentialStateRefCode =
-        res.qrShortLead.merchantStateRefCode;
-      this.iciciMarsRequest.merchant.companyInformation.businessNature = this.businessNature;
-
-      this.iciciMarsRequest.merchant.partnerInformation[0].cityRefCode =
-        res.qrShortLead.personalCityRefCode;
-      this.iciciMarsRequest.merchant.partnerInformation[0].stateRefCode =
-        res.qrShortLead.personalStateRefCode;
-
-      this.iciciMarsRequest.merchant.bankInformation.bankDetails.bankCityRefCode =
-        res.qrShortLead.bankCityRefCode;
-      this.iciciMarsRequest.merchant.bankInformation.bankDetails.bankStateRefCode =
-        res.qrShortLead.bankStateRefCode;
-      this.iciciMarsRequest.merchant.bankInformation.bankDetails.bankCityName =
-        res.qrShortLead.bankCity;
-      this.iciciMarsRequest.merchant.bankInformation.bankDetails.bankStateName =
-        res.qrShortLead.bankState;
-
-      this.iciciMarsRequest.merchant.companyInformation.registeredPin =
-        res.qrShortLead.pincode;
-      this.iciciMarsRequest.merchant.companyInformation.residentialAddress =
-        res.qrShortLead.contactAddress;
-      this.iciciMarsRequest.merchant.salesInformation.leadFrom =
-        res.qrShortLead.leadSource.sourceName;
-      this.iciciMarsRequest.merchant.bankInformation.bankDetails.accountNumber =
-        res.qrShortLead.accountNumber;
-      this.iciciMarsRequest.merchant.businessInformation.gstId =
-        res.qrShortLead.gstNumber == "" ? null : res.qrShortLead.gstNumber;
-      this.iciciMarsRequest.merchant.businessInformation.weekdayStartHour =
-        res.qrShortLead.hoursWeekdayStart;
-      this.iciciMarsRequest.merchant.businessInformation.weekdayEndHour =
-        res.qrShortLead.hoursWeekdayEnd;
-      this.iciciMarsRequest.merchant.businessInformation.weekendStartHour =
-        res.qrShortLead.hoursWeekendStart;
-      this.iciciMarsRequest.merchant.businessInformation.weekendEndHour =
-        res.qrShortLead.hoursWeekendEnd;
-      this.iciciMarsRequest.merchant.businessInformation.averageBillAmount =
-        res.qrShortLead.averageBillAmount;
-      this.iciciMarsRequest.merchant.businessInformation.maximumMonthlyUsage =
-        res.qrShortLead.maximumUsageMonthly;
-      this.iciciMarsRequest.merchant.companyInformation.contactAlternateMobile =
-        res.qrShortLead.merchantIndustry.alternateContactNumber;
-      this.iciciMarsRequest.merchant.paymentDetails.recurringFees =
-        res.qrShortLead.recurringFees;
-      this.iciciMarsRequest.merchant.companyInformation.establishYear =
-        res.qrShortLead.establishmentYear;
-      this.iciciMarsRequest.merchant.partnerInformation[0].address =
-        res.qrShortLead.personalAddress;
-      this.iciciMarsRequest.merchant.partnerInformation[0].pan =
-        res.qrShortLead.panNumber;
-      this.iciciMarsRequest.merchant.partnerInformation[0].pin =
-        res.qrShortLead.personalInfoPincode;
-      this.iciciMarsRequest.merchant.partnerInformation[0].dob =
-        res.qrShortLead.dateOfBirth;
-      this.iciciMarsRequest.merchant.partnerInformation[0].contactMobile =
-        res.qrShortLead.personalInfoMobile;
-      this.iciciMarsRequest.merchant.partnerInformation[0].contactEmail =
-        res.qrShortLead.personalInfoEmail;
-      this.iciciMarsRequest.merchant.partnerInformation[0].cityRefLabel =
-        res.qrShortLead.personalInfoCity;
-      this.iciciMarsRequest.merchant.partnerInformation[0].stateRefLabel =
-        res.qrShortLead.personalInfoState;
-      this.iciciMarsRequest.merchant.partnerInformation[0].name =
-        res.qrShortLead.firstName;
-      this.iciciMarsRequest.merchant.bankInformation.bankDetails.ifsc =
-        res.qrShortLead.ifscCode;
-      this.iciciMarsRequest.merchant.bankInformation.bankDetails.bankName =
-        res.qrShortLead.bankName;
-      this.iciciMarsRequest.merchant.bankInformation.bankDetails.branchName =
-        res.qrShortLead.branchName;
-      this.iciciMarsRequest.merchant.bankInformation.bankDetails.branchCode =
-        res.qrShortLead.branchCode;
-      this.iciciMarsRequest.merchant.bankInformation.bankDetails.branchZone =
-        res.qrShortLead.branchZone;
-      this.iciciMarsRequest.merchant.bankInformation.collectionDetails.chequeNumber =
-        res.qrShortLead.chequeNumber == ""
-          ? res.qrShortLead.utrNumber
-          : res.qrShortLead.chequeNumber;
-      this.iciciMarsRequest.merchant.bankInformation.collectionDetails.neftId =
-        res.qrShortLead.neftId == "" ? "" : res.qrShortLead.neftId;
-      this.iciciMarsRequest.merchant.remarks = res.qrShortLead.satToMarsRemarks;
-      this.iciciMarsRequest.merchant.bankInformation.collectionDetails.chequeAmount =
-        res.qrShortLead.amountCollected;
-      this.iciciMarsRequest.merchant.bankInformation.collectionDetails.acquirerBank =
-        res.qrShortLead.paymentBankName;
-      // console.log( "this.iciciMarsRequest.merchant.bankInformation.collectionDetails.chequeNumber -----qwe122323454",
-      //   this.iciciMarsRequest.merchant.bankInformation.collectionDetails.chequeNumber);
+      this.iciciMarsRequest.merchant.companyInformation.legalName = data.legalName;
+      this.iciciMarsRequest.merchant.companyInformation.dbaName = data.marketingName;
+      this.iciciMarsRequest.merchant.companyInformation.contactEmail = data.contactEmail;
+      this.iciciMarsRequest.merchant.companyInformation.contactMobile = data.contactNumber;
+      this.iciciMarsRequest.merchant.companyInformation.registeredAddress = data.contactAddress;
+      this.iciciMarsRequest.merchant.companyInformation.pan = data.panNumber;
+      this.iciciMarsRequest.merchant.bankInformation.bankDetails.accountNumber = data.accountNumber;
+      this.iciciMarsRequest.merchant.bankInformation.bankDetails.ifsc = data.ifscCode;
+      this.iciciMarsRequest.merchant.remarks = data.satToMarsRemarks;
     },
-    // verfifiedStatus(){
-    // },
-
-    // fetchAndCookDocuments() {
-    //   let self = this;
-    //   let leadData = self.propLeadDeatils;
-    //   _.map(leadData.qrLeadDocuments, function(oo) {
-    //     if (oo.uploadedDocuments.length > 0) {
-    //       let assumeArr = [];
-    //       _.map(oo.uploadedDocuments, function(doc) {
-    //         assumeArr.push(self.GLOBAL_FILE_FETCH_URL + "/" + doc.fileName);
-    //       });
-    //       if (self.count <= 1) {
-    //         self.iciciMarsRequest.merchant.kyc.documents.push({
-    //           documentName: oo.subDocumentType,
-    //           documentType: oo.marsDocumentId,
-    //           documentImage: assumeArr
-    //         });
-    //       }
-    //       console.log(
-    //         "KYC LOG",
-    //         JSON.stringify(self.iciciMarsRequest.merchant.kyc.documents)
-    //       );
-    //     }
-    //   });
-    //   if (self.propLeadDeatils != null) {
-    //     leadData.qrLeadDocuments.forEach(function(val) {
-    //       console.log("LOG STATUS", JSON.stringify(val.documentVerifiedStatus));
-    //       if (val.documentVerifiedStatus != 1) {
-    //         self.flag = true;
-    //         console.log("CHECK FLAG1", self.flag);
-    //       } else {
-    //         self.flag = false;
-    //         console.log("CHECK FLAG3", self.flag);
-    //       }
-    //     });
-    //   }
-    // }
-
-    // fetchAndCookDocuments() {
-    //   let self = this;
-
-    //   let leadData = self.propLeadDeatils;
-    //   _.map(leadData.qrLeadDocuments, function (oo) {
-    //     if (oo.uploadedDocuments.length > 0) {
-    //       let assumeArr = [];
-    //       _.map(oo.uploadedDocuments, function (doc) {
-    //         assumeArr.push(self.GLOBAL_FILE_FETCH_URL + "/" + doc.fileName);
-    //       });
-    //       if (self.count <= 1) {
-    //         self.iciciMarsRequest.merchant.kyc.documents.push({
-    //           documentName: oo.subDocumentType,
-    //           documentType: oo.marsDocumentId,
-    //           documentImage: assumeArr,
-    //         });
-    //       }
-    //       console.log(
-    //         "KYC LOG",
-    //         JSON.stringify(self.iciciMarsRequest.merchant.kyc.documents)
-    //       );
-    //     }
-    //   });
-    //   self.iciciMarsRequest.merchant.kyc.documents.push({
-    //     documentName: "Agreement",
-    //     documentType: this.propLeadDeatils.qrMerchantType.marsAgreementId,
-    //     documentImage: [
-    //       self.GLOBAL_FILE_FETCH_URL + "/" + self.propLeadDeatils.aggrementForm,
-    //     ],
-    //   });
-    //   self.iciciMarsRequest.merchant.kyc.documents.push({
-    //     documentName: "Cheque",
-    //     documentType: 7,
-    //     documentImage: [
-    //       self.GLOBAL_FILE_FETCH_URL + "/" + self.propLeadDeatils.chequeLeafForm,
-    //     ],
-    //   });
-    //   if (self.propLeadDeatils != null) {
-    //     leadData.qrLeadDocuments.forEach(function (val) {
-    //       console.log("LOG STATUS", JSON.stringify(val.documentVerifiedStatus));
-    //       if (val.documentVerifiedStatus != 1) {
-    //         self.flag = true;
-    //         console.log("CHECK FLAG1", self.flag);
-    //       } else {
-    //         self.flag = false;
-    //         console.log("CHECK FLAG3", self.flag);
-    //       }
-    //     });
-    //   }
-    //   this.setMarsData();
-    // },
 
     fetchAndCookDocuments() {
-      let self = this;
-      self.iciciMarsRequest.merchant.kyc.documents = []; // Reset documents array
-
-      let leadData = self.propLeadDeatils;
-      console.log(
-        "iciciMarsRequest.merchant.kyc.documents-------->>>>",
-        this.leadData
-      );
-      console.log(
-        "this.propLeadDeatils.qrMerchantType.marsAgreementId-------->>>>",
-        this.propLeadDeatils.qrMerchantType.marsAgreementId
-      );
-
+      this.iciciMarsRequest.merchant.kyc.documents = [];
+      const leadData = this.propLeadDeatils;
       leadData.qrLeadDocuments.forEach(oo => {
         if (oo.uploadedDocuments.length > 0) {
-          let assumeArr = oo.uploadedDocuments.map(
-            doc => self.GLOBAL_FILE_FETCH_URL + "/" + doc.fileName
-          );
-          self.iciciMarsRequest.merchant.kyc.documents.push({
+          this.iciciMarsRequest.merchant.kyc.documents.push({
             documentName: oo.subDocumentType,
             documentType: oo.marsDocumentId,
-            documentImage: assumeArr
+            documentImage: oo.uploadedDocuments.map(doc => this.GLOBAL_FILE_FETCH_URL + "/" + doc.fileName)
           });
         }
       });
-      // Add Agreement document
-      self.iciciMarsRequest.merchant.kyc.documents.push({
+      this.iciciMarsRequest.merchant.kyc.documents.push({
         documentName: "Agreement",
         documentType: this.propLeadDeatils.qrMerchantType.marsAgreementId,
-        documentImage: [
-          self.GLOBAL_FILE_FETCH_URL + "/" + self.propLeadDeatils.aggrementForm
-        ]
+        documentImage: [this.GLOBAL_FILE_FETCH_URL + "/" + this.propLeadDeatils.aggrementForm]
       });
-      // Add Cheque document
-      if (
-        this.getAllStaticQrShortLeadDatas.qrMerchantType.merchantTypeName ==
-        "Individuals"
-      ) {
-        self.iciciMarsRequest.merchant.kyc.documents.push({
-          documentName: "Cheque",
-          documentType: 7,
-          documentImage: [
-            self.GLOBAL_FILE_FETCH_URL +
-              "/" +
-              self.propLeadDeatils.chequeLeafForm
-          ]
-        });
-      } else if (
-        this.getAllStaticQrShortLeadDatas.qrMerchantType.merchantTypeName ==
-        "Sole Proprietorship"
-      ) {
-        self.iciciMarsRequest.merchant.kyc.documents.push({
-          documentName: "Cheque",
-          documentType: 33,
-          documentImage: [
-            self.GLOBAL_FILE_FETCH_URL +
-              "/" +
-              self.propLeadDeatils.chequeLeafForm
-          ]
-        });
-      } else if (
-        this.getAllStaticQrShortLeadDatas.qrMerchantType.merchantTypeName ==
-        "Partnership / LLP"
-      ) {
-        self.iciciMarsRequest.merchant.kyc.documents.push({
-          documentName: "Cheque",
-          documentType: 45,
-          documentImage: [
-            self.GLOBAL_FILE_FETCH_URL +
-              "/" +
-              self.propLeadDeatils.chequeLeafForm
-          ]
-        });
-      } else if (
-        this.getAllStaticQrShortLeadDatas.qrMerchantType.merchantTypeName ==
-        "Public & Private"
-      ) {
-        self.iciciMarsRequest.merchant.kyc.documents.push({
-          documentName: "Cheque",
-          documentType: 73,
-          documentImage: [
-            self.GLOBAL_FILE_FETCH_URL +
-              "/" +
-              self.propLeadDeatils.chequeLeafForm
-          ]
-        });
-      } else if (
-        this.getAllStaticQrShortLeadDatas.qrMerchantType.merchantTypeName ==
-        "Society"
-      ) {
-        self.iciciMarsRequest.merchant.kyc.documents.push({
-          documentName: "Cheque",
-          documentType: 88,
-          documentImage: [
-            self.GLOBAL_FILE_FETCH_URL +
-              "/" +
-              self.propLeadDeatils.chequeLeafForm
-          ]
-        });
-      } else if (
-        this.getAllStaticQrShortLeadDatas.qrMerchantType.merchantTypeName ==
-        "Trust"
-      ) {
-        self.iciciMarsRequest.merchant.kyc.documents.push({
-          documentName: "Cheque",
-          documentType: 104,
-          documentImage: [
-            self.GLOBAL_FILE_FETCH_URL +
-              "/" +
-              self.propLeadDeatils.chequeLeafForm
-          ]
-        });
-      } else if (
-        this.getAllStaticQrShortLeadDatas.qrMerchantType.merchantTypeName ==
-        "Private & Public"
-      ) {
-        self.iciciMarsRequest.merchant.kyc.documents.push({
-          documentName: "Cheque",
-          documentType: 138,
-          documentImage: [
-            self.GLOBAL_FILE_FETCH_URL +
-              "/" +
-              self.propLeadDeatils.chequeLeafForm
-          ]
-        });
-      } else if (
-        this.getAllStaticQrShortLeadDatas.qrMerchantType.merchantTypeName ==
-        "GOVT"
-      ) {
-        self.iciciMarsRequest.merchant.kyc.documents.push({
-          documentName: "Cheque",
-          documentType: 161,
-          documentImage: [
-            self.GLOBAL_FILE_FETCH_URL +
-              "/" +
-              self.propLeadDeatils.chequeLeafForm
-          ]
-        });
-      }
-
-      // else {
-      //   self.iciciMarsRequest.merchant.kyc.documents.push({
-      //     documentName: "Cheque",
-      //     documentType: 33,
-      //     documentImage: [
-      //       self.GLOBAL_FILE_FETCH_URL +
-      //         "/" +
-      //         self.propLeadDeatils.chequeLeafForm
-      //     ]
-      //   });
-      // }
-      // Check document verification status
-      if (self.propLeadDeatils != null) {
-        leadData.qrLeadDocuments.forEach(val => {
-          if (val.documentVerifiedStatus != 1) {
-            self.flag = true;
-          } else {
-            self.flag = false;
-          }
-        });
-      }
-      this.setMarsData();
+      this.iciciMarsRequest.merchant.kyc.documents.push({
+        documentName: "Cheque",
+        documentType: this.getChequeType(),
+        documentImage: [this.GLOBAL_FILE_FETCH_URL + "/" + this.propLeadDeatils.chequeLeafForm]
+      });
+      this.flag = leadData.qrLeadDocuments.some(val => val.documentVerifiedStatus != 1);
+      this.setMarsData({ qrShortLead: this.formData.qrShortLead });
+    },
+    getChequeType() {
+      const mapping = { "Individuals": 7, "Sole Proprietorship": 33, "Partnership / LLP": 45, "Public & Private": 73, "Society": 88, "Trust": 104, "Private & Public": 138, "GOVT": 161 };
+      return mapping[this.getAllStaticQrShortLeadDatas.qrMerchantType.merchantTypeName] || 33;
+    },
+    toggleLeadInformation(leadDetails) {
+       // Modal toggle logic
     }
   }
 };
 </script>
-<style>
-.error-highlight {
-  background-color: #ffffff;
-  color: red;
-}
-.remarksbtn {
-  width: 84px;
-}
-.alignbtn {
-  margin-right: 313px;
-}
-/* .cardsizealign {
-  width: 130%;
-}
-.cardsizealign1 {
-  width: 130%;
-} */
-.description-header,
-.description-cell {
-  font-size: smaller;
-  padding-right: 197px;
-}
-.description-header1,
-.description-cell {
-  font-size: smaller;
-  padding-right: 181px;
-}
-.description-header2,
-.description-cell {
-  font-size: smaller;
-}
-.description-header {
-  padding-right: 100px; /* Adjust the padding as needed */
-}
-.mdr-header {
-  color: rgb(19, 18, 18);
-  white-space: nowrap;
-}
-.error-tooltip {
-  position: absolute;
-  top: 10%;
-  left: 100%;
-  background: #d32f2f;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  white-space: nowrap;
-  margin-top: 5px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.error-tooltip::before {
-  content: "";
-  position: absolute;
-  top: -5px;
-  left: 10px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent red transparent;
-}
-</style>

@@ -50,7 +50,7 @@
     </div>
   </q-page>
 </template>
-  
+
 <script>
 import { mapGetters, mapActions } from "vuex";
 export default {

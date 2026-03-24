@@ -204,7 +204,7 @@ const Authentication = {
         .post(rootState.GlobalVariables.LOGIN_URL, request.url)
         .then(response => {
           // console.log("Password is " + response.data.password);
-          localStorage.setItem("auth_token", response.body.jwt);
+          localStorage.setItem("auth_token", response.data.jwt);
           // START=> COMMIT with data received'
           commit("SET_USER_AUTH_DATA", response.data.data);
           // END=> COMMIT with data received'

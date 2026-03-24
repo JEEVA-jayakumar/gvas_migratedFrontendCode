@@ -17,13 +17,6 @@
         :propToggleRegionInfoPop="propToggleRegionChange"
         @closeRegionInformation="changeRegion"
       />
-      <!-- <pre>{{getImplementationExecutiveList}}</pre> -->
-      <!--START: table title -->
-      <!-- <div
-        class="q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-      >
-      </div> -->
-      <!--END: table title -->
       <!--START: table Footer -->
       <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
         <div class="row items-center gutter-y-sm">
@@ -123,6 +116,7 @@
         </div>
       </q-card>
 </q-tabs>
+
 <q-tab-panels v-model="selectedTab" animated>
 <q-tab-panel name="assigned">
               <Phonepeassigned/>
@@ -198,7 +192,7 @@
                 <q-input
                   clearable
                   color="grey-9"
-                  v-model="filterSearch"
+                  v-model:model-value="filterSearch"
                   placeholder="Type.."
                   label="Search By MID, Merchant Name.."
                   class="q-mr-lg q-py-sm"
@@ -272,7 +266,7 @@
 
             <template v-slot:top="props">
               <div class="col-md-5">
-                <q-input clearable color="grey-9" v-model="filterSearch2" placeholder="Type.." label="Search By MID, Merchant Name.."
+                <q-input clearable color="grey-9" v-model:model-value="filterSearch2" placeholder="Type.." label="Search By MID, Merchant Name.."
                   class="q-mr-lg q-py-sm" />
               </div>
             </template>
@@ -280,7 +274,7 @@
             </q-table>
           </q-tab-panel>
 </q-tab-panels>
-      <!--ENDv-model: table Footer -->
+      <!--END: table Footer -->
       <!-- START >> COMPONENT: Update device address  -->
       <DeviceAddressModal
         v-if="showDeviceAddressModal"
@@ -297,7 +291,6 @@
 </template>
 
 <script>
-import { required, email, or } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import DeviceAddressModal from "../../components/sat/DeviceAddressModal.vue";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
@@ -351,16 +344,6 @@ export default {
           field: "createdAt",
           sortable: true
         },
-        // {
-        //   name: "tid",
-        //   required: true,
-        //   label: "TID",
-        //   align: "left",
-        //   field: row => {
-        //     return row.tid;
-        //   },
-        //   sortable: true
-        // },
         {
           name: "mid",
           required: true,
@@ -401,16 +384,6 @@ export default {
           },
           sortable: false
         },
-        // {
-        //   name: "source",
-        //   required: true,
-        //   label: "Source",
-        //   align: "left",
-        //   field: row => {
-        //     return row.leadInformation.leadSource.sourceName;
-        //   },
-        //   sortable: false
-        // },
         {
           name: "assigned_to",
           required: true,
@@ -487,16 +460,6 @@ export default {
           field: "createdAt",
           sortable: true
         },
-        // {
-        //   name: "tid",
-        //   required: true,
-        //   label: "TID",
-        //   align: "left",
-        //   field: row => {
-        //     return row.tid;
-        //   },
-        //   sortable: true
-        // },
         {
           name: "mid",
           required: true,
@@ -560,16 +523,6 @@ export default {
 
           sortable: true
         },
-        // {
-        //   name: "source",
-        //   required: true,
-        //   label: "Source",
-        //   align: "left",
-        //   field: row => {
-        //     return row.leadInformation.leadSource.sourceName;
-        //   },
-        //   sortable: false
-        // },
         {
           name: "submitToMarsDate",
           required: true,
@@ -627,16 +580,6 @@ export default {
             },
             sortable: true
           },
-          // {
-          //   name: "tid",
-          //   required: true,
-          //   label: "TID",
-          //   align: "left",
-          //   field: row => {
-          //     return row.tid !=null ? row.tid : "NA";
-          //   },
-          //   sortable: true
-          // },
           {
             name: "mid",
             required: true,
@@ -1002,11 +945,6 @@ export default {
         };
         this.PHONEPE_IMPLEMENTATION_QUEUE_SUBMIT(postValues)
           .then((res) => {
-            // let size = res.data.data.second.length;
-            // let data = {};
-            // for(var i=1;i<size;i++){
-            //   data = res.data.data.second[i]
-            // }
             if(res.status == 200 && res.data.data== null){
             this.formData.marsDeviceIdsCooked = [];
             this.formData.assignTo = "";

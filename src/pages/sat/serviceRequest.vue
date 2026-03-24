@@ -26,8 +26,8 @@
             >/ selected
           </div>
           <div class="col-md-3 col-sm-6 col-xs-6">
-            <b><span>Request Mode</span></b>
-            <div class="col-md-2 col-sm-6 col-xs-6">
+            <b><span class="q-body-1">Request Mode</span></b>
+            <div class="col-md-12 col-sm-12 col-xs-12">
               <q-radio
                 v-for="(item, index) in requestOptions"
                 :key="index"
@@ -135,6 +135,7 @@
         class="shadow-1"
         color="grey-1"
         active-color="dark"
+        @update:model-value="goToUnassignedTab"
       >
         <q-tab
           name="unAssigned"
@@ -144,7 +145,7 @@
         <q-tab name="closed" label="Closed" />
       </q-tabs>
 
-      <q-tab-panels v-model="selectedTab" animated @update:model-value="goToUnassignedTab">
+      <q-tab-panels v-model="selectedTab" animated>
         <q-tab-panel name="unAssigned" class="q-pa-none">
           <!--START: table Data    :rows="tableData1" -->
           <q-table
@@ -470,32 +471,32 @@
       <!-- START >> COMPONENT: Update device address  -->
       <!-- END >> COMPONENT: Update device address -->
     </div>
+    <!-- //Common lead information in popup -->
+    <generalLeadInformation
+      v-if="propToggleLeadInformation"
+      :leadInformation="addtnLeadInformation"
+      :propToggleLeadInformationPop="propToggleLeadInformation"
+      @closeLeadInformation="toggleLeadInformation"
+    />
   </q-page>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import generalLeadInformation from "../../components/generalLeadInformation.vue";
 
 export default {
-  name: "implementationQueue",
+  name: "serviceRequest",
+  components: {
+    generalLeadInformation
+  },
   data() {
     return {
       propToggleLeadInformation: false,
       addtnLeadInformation: null,
 
-      // paginationControl: {
-      //   rowsPerPage: 10
-      // },
       toggleAjaxLoadFilter: false,
       toggleAjaxLoadFilter1: false,
-
-      //   paginationControl: {
-      //     rowsNumber: 10,
-      //     page: 1,
-      //     sortBy: "tid",
-      //     descending: false,
-      //     rowsPerPage: 10,
-      //   },
 
       closedDatas: [],
       valueToggleMerchantTransaction: false,
@@ -504,7 +505,7 @@ export default {
       filterSearch: "",
       filterSearch1: "",
       filterSearch2: "",
-      selectedTab: "assigned",
+      selectedTab: "unAssigned",
       assignTo: "",
       podNumber: "",
       requestMode: "",
@@ -646,7 +647,6 @@ export default {
           field: (row) => {
             return row.leadInformation.submitToMarsDate;
           },
-          format: (val) => this.$moment(val).format("Do MMM Y"),
           sortable: true,
         },
         {
@@ -780,7 +780,6 @@ export default {
           field: (row) => {
             return row.leadInformation.submitToMarsDate;
           },
-          format: (val) => this.$moment(val).format("Do MMM Y"),
           sortable: true,
         },
         {
@@ -863,50 +862,6 @@ export default {
           },
           sortable: false,
         },
-        // {
-        //   name: "leadInformation",
-        //   required: true,
-        //   label: "Device Type",
-        //   align: "left",
-        //   field: (row) => {
-        //     return row.leadInformation.device.deviceName;
-        //   },
-        //   sortable: false,
-        // },
-        // {
-        //   name: "serial_number",
-        //   required: true,
-        //   label: "Serial Number",
-        //   align: "left",
-        //   field: (row) => {
-        //     return row.regionalInventory == null
-        //       ? "NA"
-        //       : row.regionalInventory.serialNumber;
-        //   },
-
-        //   sortable: true,
-        // },
-        // {
-        //   name: "source",
-        //   required: true,
-        //   label: "Source",
-        //   align: "left",
-        //   field: (row) => {
-        //     return row.leadInformation.leadSource.sourceName;
-        //   },
-        //   sortable: false,
-        // },
-        // {
-        //   name: "submitToMarsDate",
-        //   required: true,
-        //   label: "Date of Submission",
-        //   align: "left",
-        //   field: (row) => {
-        //     return row.leadInformation.submitToMarsDate;
-        //   },
-        //   format: (val) => this.$moment(val).format("Do MMM Y"),
-        //   sortable: true,
-        // },
       ],
 
       currentDeviceInfo: {},
@@ -916,6 +871,8 @@ export default {
         marsDeviceIdsCookedUnAssinged: [],
         triggerWelcomeMail: false,
         assignTo: "",
+        requestMode: "",
+        podNumber: ""
       },
       paginationControl: {
         sortBy: null, // String, column "name" property value
@@ -952,19 +909,10 @@ export default {
     ...mapGetters("additionalTid", ["getadditionalTid"]),
   },
   created() {
-    this.ajaxLoadAllLeadInfo({
-      pagination: this.paginationControl,
-      filter: this.filterSearch,
-    });
     this.ajaxLoadAllLeadInfo1({
       pagination: this.paginationControl1,
       filter: this.filterSearch1,
     });
-    this.ajaxLoadAllLeadInfoClosed({
-      pagination: this.paginationControl2,
-      filter: this.filterSearch2,
-    });
-    this.getPincodeInformations();
   },
   methods: {
     ...mapActions("DeviceReplacement", [
@@ -979,56 +927,6 @@ export default {
       "ADDITIONAL_TID_VERIFY_DATA",
     ]),
 
-    ////SERVICE REQUEST CLOSED DATAS STARTED///////
-    // ajaxLoadAllLeadInfoClosed() {
-    //   this.toggleAjaxLoadFilter = true;
-    //   this.FETCH_ADDITIONAL_TID_DATAS()
-    //     .then((response) => {
-    //       this.toggleAjaxLoadFilter = false;
-    //     })
-    //     .catch((error) => {
-    //       this.toggleAjaxLoadFilter = false;
-    //     });
-    // },
-    // ajaxLoadAllLeadInfoClosed({ pagination, filter }) {
-    //   // we set QTable to "loading" state
-    //   this.$q.loading.show({
-    //     delay: 0, // ms
-    //     spinnerColor: "purple-9",
-    //     message: "Fetching data ..",
-    //   });
-    //   this.FETCH_ADDITIONAL_TID_DATAS({ pagination, filter })
-    //     .then((res) => {
-    //       // updating pagination to reflect in the UI
-    //       this.paginationControl = pagination;
-
-    //       // we also set (or update) rowsNumber
-    //       this.paginationControl.rowsNumber =
-    //         this.getadditionalTid.totalElements;
-    //       this.paginationControl.page = this.getadditionalTid.number + 1;
-
-    //       // then we update the rows with the fetched ones
-    //       this.tableData = this.getadditionalTid.content;
-    //       console.log(
-    //         "ADDITIONAL TERMINAL TABLE DATA---------->" +
-    //           JSON.stringify(this.tableData)
-    //       );
-    //       if (this.getadditionalTid.sort != null) {
-    //         this.paginationControl.sortBy =
-    //           this.getadditionalTid.sort[0].property;
-    //         this.paginationControl.descending =
-    //           this.getadditionalTid.sort[0].ascending;
-    //       }
-
-    //       // finally we tell QTable to exit the "loading" state
-    //       this.$q.loading.hide();
-    //       // console.log("Table Datas ---------------------->"+JSON.stringify(this.tableData));
-    //     })
-    //     .catch(() => {
-    //       this.$q.loading.hide();
-    //     });
-    // },
-    ////SERVICE REQUEST CLOSED DATAS END///////
     getPincodeInformations() {
       this.FETCH_ALL_STATES_DATA();
     },
@@ -1147,31 +1045,15 @@ export default {
     //Load all short lead info while page loading
     goToUnassignedTab(tab) {
       if (tab == "unAssigned") {
-        let request = {
+        this.ajaxLoadAllLeadInfo1({
           pagination: this.paginationControl1,
           filter: this.filterSearch1,
-        };
-        this.toggleAjaxLoadFilter = true;
-        this.DEVICE_REPLACEMENT_QUEUE_UNASSIGNED_LIST(request)
-          .then((response) => {
-            this.toggleAjaxLoadFilter = false;
-          })
-          .catch((error) => {
-            this.toggleAjaxLoadFilter = false;
-          });
+        });
       } else if (tab == "assigned") {
-        let request = {
+        this.ajaxLoadAllLeadInfo({
           pagination: this.paginationControl,
           filter: this.filterSearch,
-        };
-        this.toggleAjaxLoadFilter = true;
-        this.DEVICE_REPLACEMENT_QUEUE_ASSIGNED_LIST(request)
-          .then((response) => {
-            this.toggleAjaxLoadFilter = false;
-          })
-          .catch((error) => {
-            this.toggleAjaxLoadFilter = false;
-          });
+        });
       } else if (tab == "closed") {
         this.ajaxLoadAllLeadInfoClosed({
           pagination: this.paginationControl2,
@@ -1191,49 +1073,6 @@ export default {
         }
       })
     },
-    // ajaxLoadAllLeadInfoClosed
-    // Function to open device address pop up
-    UpdateDeviceAddress(currentDeviceInfo) {
-      this.currentDeviceInfo = [];
-      this.showDeviceAddressModal = !this.showDeviceAddressModal;
-      if (this.formData.marsDeviceIdsCooked.length == 0) {
-        let assumeObj = {
-          id: [currentDeviceInfo.id],
-          marsDeviceAddress: {
-            deviceAddress: currentDeviceInfo.deviceAddress,
-            latitude: 0,
-            longitude: 0,
-            pincode: currentDeviceInfo.pincode,
-            city: currentDeviceInfo.city,
-            state: currentDeviceInfo.state,
-          },
-        };
-        this.currentDeviceInfo = assumeObj;
-      } else {
-        let marsDeviceIdsCooked = [];
-        this.formData.marsDeviceIdsCooked.map(function (value) {
-          marsDeviceIdsCooked.push(value.id);
-        });
-        let assumeObj = {
-          id: marsDeviceIdsCooked,
-          marsDeviceAddress: {
-            deviceAddress: currentDeviceInfo.deviceAddress,
-            latitude: 0,
-            longitude: 0,
-            pincode: currentDeviceInfo.pincode,
-            city: currentDeviceInfo.city,
-            state: currentDeviceInfo.state,
-          },
-        };
-        this.currentDeviceInfo = assumeObj;
-      }
-    },
-    // Function to open device address pop up
-    UpdateDeviceAddressAfterEmit(pagination) {
-      this.showDeviceAddressModal = !this.showDeviceAddressModal;
-      this.paginationControl = pagination;
-    },
-
     // Function to assign implementation manager in implementation queue
     assignImplementationUser() {
       let self = this;
@@ -1287,110 +1126,6 @@ export default {
               color: "positive",
               position: "bottom",
               message: "Successfully assigned!",
-              icon: "thumb_up",
-            });
-          })
-          .catch(() => {
-            self.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: "Please try again",
-              icon: "thumb_down",
-            });
-          });
-      }
-    },
-
-    // Function to unAssignImplementationUser in implementation queue
-    unAssignImplementationUser() {
-      let self = this;
-      if (self.formData.marsDeviceIdsCookedUnAssinged.length == 0) {
-        self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Select atleast one item to Unassign",
-          icon: "thumb_down",
-        });
-      } else {
-        let marsDeviceIdsCookedUnAssinged = [];
-        self.formData.marsDeviceIdsCookedUnAssinged.map(function (value) {
-          marsDeviceIdsCookedUnAssinged.push(value.id);
-        });
-
-        let postValues = {
-          action: this.$MARS_DEVICE_STATUS_TID_GENERATED,
-          marsDeviceIds: marsDeviceIdsCookedUnAssinged,
-          userId: this.$SEND_ZERO_FOR_UNASSIGING,
-        };
-        self
-          .DEVICE_REPLACEMENT_QUEUE_SUBMIT(postValues)
-          .then(() => {
-            // self.DEVICE_REPLACEMENT_QUEUE_UNASSIGNED_LIST();
-            // self.ajaxLoadAllLeadInfo();
-            this.ajaxLoadAllLeadInfo({
-              pagination: this.paginationControl,
-              filter: this.filterSearch,
-            });
-            self.formData.marsDeviceIdsCookedUnAssinged = [];
-            self.formData.assignTo = "";
-            self.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully Unassigned!",
-              icon: "thumb_up",
-            });
-          })
-          .catch(() => {
-            self.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: "Please try again",
-              icon: "thumb_down",
-            });
-          });
-      }
-    },
-
-    // Function to unAssignImplementationUser in implementation queue
-    reAssignImplementationUser() {
-      let self = this;
-      if (self.formData.marsDeviceIdsCookedUnAssinged.length == 0) {
-        self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Select atleast one item to assign",
-          icon: "thumb_down",
-        });
-      } else if (self.formData.assignTo == "") {
-        self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Implementation officer cannot be empty!",
-          icon: "thumb_down",
-        });
-      } else {
-        let marsDeviceIdsCookedUnAssinged = [];
-        self.formData.marsDeviceIdsCookedUnAssinged.map(function (value) {
-          marsDeviceIdsCookedUnAssinged.push(value.id);
-        });
-
-        let postValues = {
-          action: this.$MARS_DEVICE_STATUS_SAT_ASSIGNED,
-          marsDeviceIds: marsDeviceIdsCookedUnAssinged,
-          triggerWelcomeMail: self.formData.triggerWelcomeMail,
-          userId: self.formData.assignTo,
-        };
-        self
-          .DEVICE_REPLACEMENT_QUEUE_SUBMIT(postValues)
-          .then(() => {
-            self.DEVICE_REPLACEMENT_QUEUE_UNASSIGNED_LIST();
-            self.ajaxLoadAllLeadInfo();
-            self.formData.marsDeviceIdsCookedUnAssinged = [];
-            self.formData.assignTo = "";
-            self.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully re assigned !",
               icon: "thumb_up",
             });
           })

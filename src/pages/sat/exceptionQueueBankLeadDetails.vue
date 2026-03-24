@@ -410,7 +410,6 @@
               </div>
             </div>
 
-
             <q-card class="cardsize1">
             <q-card-section class="q-pa-sm bottom-border title-bg">
                     <div class="row items-center">

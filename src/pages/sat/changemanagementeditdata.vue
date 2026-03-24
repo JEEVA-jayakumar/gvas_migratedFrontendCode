@@ -14,7 +14,7 @@
         <br />
         <br />
         <div>
-          <div class="row gutter-sm q-my-xs" v-if="check == false">
+          <div class="row q-col-gutter-sm q-my-xs" v-if="check == false">
             <!-- <div class="col-xs-12 col-sm-6">
               <q-input disable
                 v-model="formdata.deviceCount"
@@ -29,9 +29,10 @@
                 class="no-margin"
                 label="Select Rental Plan"
                 :options="dropDown.planOptions"
+                emit-value
+                map-options
                 :disable="
                   this.getImplementedQueue.leadInformation.cmsLeadStatus == 15
-
                 "
                 @update:model-value="fnPlan1"
               />
@@ -46,7 +47,6 @@
                   this.getImplementedQueue.leadInformation.cmsLeadStatus ==
                     15 ||
                   this.getImplementedQueue.leadInformation.cmsLeadStatus == 21
-
                 "
                 @blur="$v.formdata.paymentOption.$touch"
                 :error="$v.formdata.paymentOption.$error"
@@ -54,6 +54,8 @@
                 class="no-margin"
                 label="select Payment"
                 :options="payment"
+                emit-value
+                map-options
               />
             </div>
             <div class="col-xs-12 col-sm-6">
@@ -80,11 +82,12 @@
                 color="grey-9"
                 v-model.trim="formdata.cmsCategoryType"
                 label="Category Type*"
+                emit-value
+                map-options
                 v-if="this.getAllMarsData.mdrPlan.code != 8 || this.getAllMarsData.mdrPlan.code != 9"
                 :disable="
                   this.getAllMarsData.mdrPlan.code == 8 ||
                   this.getAllMarsData.mdrPlan.code == 9
-
                 "
                 :options="cmsCategoryTypeOptions"
               />
@@ -105,8 +108,6 @@
                 v-model="check"
                 :disable="
                   this.getImplementedQueue.leadInformation.cmsLeadStatus == 15
-                    ? true
-                    : false
                 "
                 color="positive"
                 label="Pricing Exception"
@@ -115,7 +116,7 @@
             </div>
           </div>
 
-          <div class="row gutter-sm q-my-xs" v-else>
+          <div class="row q-col-gutter-sm q-my-xs" v-else>
             <!-- <div class="col-xs-12 col-sm-6">
               <q-input disable
                 v-model="formdata1.deviceCount"
@@ -130,6 +131,8 @@
                 class="no-margin"
                 label="Select Rental Plan"
                 :options="dropDown.planOptions"
+                emit-value
+                map-options
                 @update:model-value="fnPlan"
               />
             </div>
@@ -179,23 +182,25 @@
             </div>
           </div>
         </div>
-        <div v-if="formdata.paymentOption == 2" class="row gutter-sm q-my-xs">
+        <div v-if="formdata.paymentOption == 2" class="row q-col-gutter-sm q-my-xs">
           <div class="col-xs-12 col-sm-6">
             <p></p>
             <q-item>
               <q-item-section>Upload the Cheque File :</q-item-section>
+              <q-item-section side>
               <label
-                class="cursor-pointer text-white"
+                class="cursor-pointer text-white q-pa-xs"
                 style="background-color: #202c3f"
               >
                 <span>Attach</span>
                 <input
                   type="file"
                   name="file"
-                  @change="fnUploadApplicationForm($event, document)"
+                  @change="fnUploadApplicationForm($event)"
                   accept=".png, .jpg, .pdf"
                 />
               </label>
+              </q-item-section>
               &nbsp;{{ this.formdata.paymentDocumentFile }}
             </q-item>
           </div>
@@ -235,7 +240,7 @@
         </div>
         <div
           v-else-if="formdata.paymentOption == 1"
-          class="row gutter-sm q-my-xs"
+          class="row q-col-gutter-sm q-my-xs"
         >
           <div class="col-xs-12 col-sm-6">
             <q-input
@@ -272,7 +277,7 @@
         </div>
         <div
           v-else-if="formdata.paymentOption == 3"
-          class="row gutter-sm q-my-xs"
+          class="row q-col-gutter-sm q-my-xs"
         >
           <div class="col-xs-12 col-sm-6">
             <q-input
@@ -648,6 +653,8 @@
               v-model.trim="merchant.bankInformation.bankDetails.paymentMode"
               label="Payment mode"
               :options="paymnentModeOptions"
+              emit-value
+              map-options
             />
           </div>
           <!-- <div class="col-xs-12 col-sm-6">
@@ -666,6 +673,8 @@
               v-model.trim="merchant.bankInformation.bankDetails.accountType"
               label="Account Type"
               :options="accountTypeOptions"
+              emit-value
+              map-options
             />
           </div>
           <div class="col-xs-12 col-sm-6">
@@ -1353,16 +1362,16 @@
             class="q-body-1 text-dark bg-grey-4 text-weight-medium"
           >
             <q-item-section>Application Form</q-item-section>
-            <q-item-section>
+            <q-item-section side>
               <label
-                class="cursor-pointer text-white"
+                class="cursor-pointer text-white q-pa-xs"
                 style="background-color: #202c3f"
               >
                 <span class="q-caption text-weight-light">Attach</span>
                 <input
                   type="file"
                   name="file"
-                  @change="fnUploadApplicationForm1($event, document)"
+                  @change="fnUploadApplicationForm1($event)"
                   accept=".png, .jpg, .pdf"
                 />
               </label>
@@ -1414,11 +1423,7 @@
                     class="hidden"
                   >
                     <img
-                      :src="[
-                        GLOBAL_FILE_FETCH_URL +
-                          '/' +
-                          getShortLeadInfo.applicationFile,
-                      ]"
+                      :src="GLOBAL_FILE_FETCH_URL + '/' + getShortLeadInfo.applicationFile"
                       ref="handedOverImageViewer"
                       style="max-width: 100%"
                     />
@@ -1464,7 +1469,7 @@
                     class="hidden"
                   >
                     <img
-                      :src="[GLOBAL_FILE_FETCH_URL+ '/'+getShortLeadInfo.paymentDocumentFile]"
+                      :src="GLOBAL_FILE_FETCH_URL+ '/'+getShortLeadInfo.paymentDocumentFile"
                       ref="bankUploadedLetter"
                       style="max-width:100%"
                     />
@@ -1488,63 +1493,203 @@
               class="no-padding"
               dense
               v-if="getShortLeadInfoDocumentTypes"
-              v-for="(
-                singleDocument, singleDocumentIndex
-              ) in getShortLeadInfoDocumentTypes.uploadedDocuments
-                .forSingleDocument"
-              :key="singleDocumentIndex"
             >
-              <div
-                v-for="(document, documentIndex) in singleDocument.documents"
-                :key="documentIndex"
-                class="border-bottom"
-              >
-                <q-item separator dense class="q-body-1 bg-grey-4 q-pa-sm">
-                  <q-item-section>{{ document.subDocumentType }}</q-item-section>
-                  <q-item-section>
-                    <label
-                      class="cursor-pointer text-white"
-                      style="background-color: #202c3f"
+              <div v-for="(singleDocument, singleDocumentIndex) in getShortLeadInfoDocumentTypes.uploadedDocuments.forSingleDocument" :key="singleDocumentIndex">
+                <div
+                  v-for="(document, documentIndex) in singleDocument.documents"
+                  :key="documentIndex"
+                  class="border-bottom"
+                >
+                  <q-item separator dense class="q-body-1 bg-grey-4 q-pa-sm">
+                    <q-item-section>{{ document.subDocumentType }}</q-item-section>
+                    <q-item-section side>
+                      <label
+                        class="cursor-pointer text-white q-pa-xs"
+                        style="background-color: #202c3f"
+                      >
+                        <span class="q-caption text-weight-light">Attach</span>
+                        <input
+                          type="file"
+                          name="file"
+                          @change="
+                            fnVerificationDocumentUploadSingleUpload(
+                              $event,
+                              document
+                            )
+                          "
+                          accept=".png, .jpg, .pdf"
+                        />
+                      </label>
+                    </q-item-section>
+                  </q-item>
+                  <!-- {{getShortLeadInfo.leadDocuments}} -->
+                  <div
+                    v-if="getShortLeadInfo.leadDocuments && getShortLeadInfo.leadDocuments[document.documentType]"
+                  >
+                    <div
+                      v-if="
+                        attachedSubFile.subDocumentType ==
+                        document.subDocumentType
+                      "
+                      v-for="attachedSubFile in getShortLeadInfo.leadDocuments[document.documentType]"
+                      :key="attachedSubFile.id"
                     >
-                      <span class="q-caption text-weight-light">Attach</span>
-                      <input
-                        type="file"
-                        name="file"
+                      <q-item
+                        dense
+                        v-for="(
+                          filesAttachedEarlier, filesAttachedEarlierIndex
+                        ) in attachedSubFile.uploadedDocuments"
+                        :key="filesAttachedEarlierIndex"
+                        class="q-body-1"
+                        separator
+                      >
+                        <q-item-section>
+                          <q-item-label class="q-body-1">
+                            <div
+                              class="cursor-pointer"
+                              v-if="filesAttachedEarlier.mimeType.includes('pdf')"
+                            >
+                              <div
+                                @click="
+                                  fnPDFViewModal(filesAttachedEarlier.fileName)
+                                "
+                                class="ellipsis"
+                              >
+                                <q-icon name="fas fa-file-pdf" color="negative" />
+                                &nbsp;{{ filesAttachedEarlier.fileName }}
+                              </div>
+                            </div>
+                            <div
+                              class="cursor-pointer"
+                              v-else-if="
+                                filesAttachedEarlier.mimeType.includes('image')
+                              "
+                            >
+                              <viewer
+                                :images="[
+                                  GLOBAL_FILE_FETCH_URL +
+                                    '/' +
+                                    filesAttachedEarlier.fileName,
+                                ]"
+                                class="hidden"
+                              >
+                                <img
+                                  :src="GLOBAL_FILE_FETCH_URL + '/' + filesAttachedEarlier.fileName"
+                                  ref="attachedImageViewer"
+                                  style="max-width: 100%"
+                                />
+                              </viewer>
+                              <div
+                                @click="
+                                  fnViewAttachedFileImage(
+                                    filesAttachedEarlierIndex
+                                  )
+                                "
+                                class="ellipsis"
+                              >
+                                <q-icon name="fas fa-image" color="amber-9" />
+                                &nbsp;{{ filesAttachedEarlier.fileName }}
+                              </div>
+                            </div>
+                          </q-item-label>
+                        </q-item-section>
+
+                        <q-item-section side>
+                          <q-btn
+                            size="xs"
+                            icon="clear"
+                            @click="
+                              fnDeleteAlreadyAttachedFile(filesAttachedEarlier)
+                            "
+                            round
+                            color="negative"
+                            label="Remove"
+                          />
+                        </q-item-section>
+                      </q-item>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </q-list>
+            <q-list
+              class="no-padding"
+              dense
+              v-if="getShortLeadInfoDocumentTypes"
+            >
+              <div v-for="multipleDocument in getShortLeadInfoDocumentTypes.uploadedDocuments.forMutipleDocument" :key="multipleDocument.id">
+                <q-item-label header class="q-mb-sm bg-grey-4">{{
+                  multipleDocument.documentType
+                }}</q-item-label>
+                <div>
+                  <q-item separator dense class="q-body-1 q-pa-sm">
+                    <q-item-section>
+                      <!-- <pre>{{multipleDocument.subDocumentTypeSelection}}</pre> -->
+                      <select
+                        class="full-width customQuasarSelect"
+                        v-model="multipleDocument.subDocumentTypeSelection"
                         @change="
-                          fnVerificationDocumentUploadSingleUpload(
-                            $event,
-                            document
+                          fnGetSubDocuments(
+                            multipleDocument.subDocumentTypeSelection
                           )
                         "
-                        accept=".png, .jpg, .pdf"
-                      />
-                    </label>
-                  </q-item-section>
-                </q-item>
-                <!-- {{getShortLeadInfo.leadDocuments}} -->
+                      >
+                        <option disabled :value="0">Choose from below</option>
+                        <option
+                          v-for="type in multipleDocument.documents"
+                          :key="type.id"
+                          :value="type"
+                        >
+                          {{ type.subDocumentType }}
+                        </option>
+                      </select>
+                    </q-item-section>
+                    <q-item-section
+                      side
+                      v-if="
+                        fn_________GetEntryPermissionToUploadSubDocuments(
+                          multipleDocument
+                        )
+                      "
+                      ref="subDocumentUploadParent"
+                    >
+                      <label
+                        class="cursor-pointer text-white q-pa-xs"
+                        style="background-color: #202c3f"
+                      >
+                        <span class="q-caption text-weight-light">Attach</span>
+                        <input
+                          type="file"
+                          ref="subDocumentUpload"
+                          @change="
+                            fnVerificationDocumentUpload(
+                              $event,
+                              multipleDocument.subDocumentTypeSelection
+                            )
+                          "
+                          name="file"
+                          accept=".png, .jpg, .pdf"
+                        />
+                      </label>
+                    </q-item-section>
+                  </q-item>
+                </div>
+                <q-separator />
                 <div
-                  v-if="displayAttachedFileIndex == document.documentType"
-                  v-for="(
-                    displayAttachedFile, displayAttachedFileIndex
-                  ) in getShortLeadInfo.leadDocuments"
-                  :key="displayAttachedFileIndex"
+                  v-if="getShortLeadInfo.leadDocuments && getShortLeadInfo.leadDocuments[multipleDocument.documentType]"
                 >
                   <div
-                    v-if="
-                      attachedSubFile.subDocumentType ==
-                      document.subDocumentType
-                    "
-                    v-for="attachedSubFile in displayAttachedFile"
+                    v-for="attachedSubFile in getShortLeadInfo.leadDocuments[multipleDocument.documentType]"
                     :key="attachedSubFile.id"
                   >
                     <q-item
-                      dense
                       v-for="(
                         filesAttachedEarlier, filesAttachedEarlierIndex
                       ) in attachedSubFile.uploadedDocuments"
                       :key="filesAttachedEarlierIndex"
                       class="q-body-1"
                       separator
+                      dense
                     >
                       <q-item-section>
                         <q-item-label class="q-body-1">
@@ -1553,7 +1698,6 @@
                             v-if="filesAttachedEarlier.mimeType.includes('pdf')"
                           >
                             <div
-                              ref="attachedImageViewer"
                               @click="
                                 fnPDFViewModal(filesAttachedEarlier.fileName)
                               "
@@ -1578,18 +1722,14 @@
                               class="hidden"
                             >
                               <img
-                                :src="[
-                                  GLOBAL_FILE_FETCH_URL +
-                                    '/' +
-                                    filesAttachedEarlier.fileName,
-                                ]"
-                                ref="attachedImageViewer"
+                                :src="GLOBAL_FILE_FETCH_URL + '/' + filesAttachedEarlier.fileName"
+                                ref="multiAttachedImageViewer"
                                 style="max-width: 100%"
                               />
                             </viewer>
                             <div
                               @click="
-                                fnViewAttachedFileImage(
+                                fnViewMultiAttachedFileImage(
                                   filesAttachedEarlierIndex
                                 )
                               "
@@ -1601,8 +1741,7 @@
                           </div>
                         </q-item-label>
                       </q-item-section>
-
-                      <q-item-section>
+                      <q-item-section side>
                         <q-btn
                           size="xs"
                           icon="clear"
@@ -1615,163 +1754,8 @@
                         />
                       </q-item-section>
                     </q-item>
+                    <q-separator />
                   </div>
-                </div>
-              </div>
-            </q-list>
-            <q-list
-              class="no-padding"
-              dense
-              v-if="getShortLeadInfoDocumentTypes"
-              v-for="multipleDocument in getShortLeadInfoDocumentTypes
-                .uploadedDocuments.forMutipleDocument"
-              :key="multipleDocument.id"
-            >
-              <q-list-header class="q-mb-sm bg-grey-4">{{
-                multipleDocument.documentType
-              }}</q-list-header>
-              <div>
-                <q-item separator dense class="q-body-1 q-pa-sm">
-                  <q-item-section>
-                    <!-- <pre>{{multipleDocument.subDocumentTypeSelection}}</pre> -->
-                    <select
-                      class="full-width customQuasarSelect"
-                      v-model="multipleDocument.subDocumentTypeSelection"
-                      @change="
-                        fnGetSubDocuments(
-                          multipleDocument.subDocumentTypeSelection
-                        )
-                      "
-                    >
-                      <option disabled value="0">Choose from below</option>
-                      <option
-                        v-for="type in multipleDocument.documents"
-                        :key="type.id"
-                        :value="type"
-                      >
-                        {{ type.subDocumentType }}
-                      </option>
-                    </select>
-                    </q-item-section>
-                  <q-item-section
-                    v-if="
-                      fn_________GetEntryPermissionToUploadSubDocuments(
-                        multipleDocument
-                      )
-                    "
-                    ref="subDocumentUploadParent"
-                  >
-                    <label
-                      class="cursor-pointer text-white"
-                      style="background-color: #202c3f"
-                    >
-                      <span class="q-caption text-weight-light">Attach</span>
-                      <input
-                        type="file"
-                        ref="subDocumentUpload"
-                        @change="
-                          fnVerificationDocumentUpload(
-                            $event,
-                            multipleDocument.subDocumentTypeSelection
-                          )
-                        "
-                        name="file"
-                        accept=".png, .jpg, .pdf"
-                      />
-                    </label>
-                  </q-item-section>
-                </q-item>
-              </div>
-              <q-item-separator />
-              <div
-                v-if="displayAttachedFileIndex == multipleDocument.documentType"
-                v-for="(
-                  displayAttachedFile, displayAttachedFileIndex
-                ) in getShortLeadInfo.leadDocuments"
-                :key="displayAttachedFileIndex"
-              >
-                <div
-                  v-for="attachedSubFile in displayAttachedFile"
-                  :key="attachedSubFile.id"
-                >
-                  <q-item
-                    v-for="(
-                      filesAttachedEarlier, filesAttachedEarlierIndex
-                    ) in attachedSubFile.uploadedDocuments"
-                    :key="filesAttachedEarlierIndex"
-                    class="q-body-1"
-                    separator
-                    dense
-                  >
-                    <q-item-section>
-                      <q-item-label class="q-body-1">
-                        <div
-                          class="cursor-pointer"
-                          v-if="filesAttachedEarlier.mimeType.includes('pdf')"
-                        >
-                          <div
-                            ref="multiAttachedImageViewer"
-                            @click="
-                              fnPDFViewModal(filesAttachedEarlier.fileName)
-                            "
-                            class="ellipsis"
-                          >
-                            <q-icon name="fas fa-file-pdf" color="negative" />
-                            &nbsp;{{ filesAttachedEarlier.fileName }}
-                          </div>
-                        </div>
-                        <div
-                          class="cursor-pointer"
-                          v-else-if="
-                            filesAttachedEarlier.mimeType.includes('image')
-                          "
-                        >
-                          <viewer
-                            :images="[
-                              GLOBAL_FILE_FETCH_URL +
-                                '/' +
-                                filesAttachedEarlier.fileName,
-                            ]"
-                            class="hidden"
-                          >
-                            <img
-                              :src="[
-                                GLOBAL_FILE_FETCH_URL +
-                                  '/' +
-                                  filesAttachedEarlier.fileName,
-                              ]"
-                              ref="multiAttachedImageViewer"
-                              style="max-width: 100%"
-                            />
-                          </viewer>
-                          <div
-                            @click="
-                              fnViewMultiAttachedFileImage(
-                                filesAttachedEarlierIndex
-                              )
-                            "
-                            class="ellipsis"
-                          >
-                            <q-icon name="fas fa-image" color="amber-9" />
-                            &nbsp;{{ filesAttachedEarlier.fileName }}
-                          </div>
-                        </div>
-                      </q-item-label>
-                    </q-item-section>
-                    <q-item-section>
-                      <q-btn
-                        size="xs"
-                        icon="clear"
-                        @click="
-                          fnDeleteAlreadyAttachedFile(filesAttachedEarlier)
-                        "
-                        round
-                        color="negative"
-                        label="Remove"
-                      />
-                    </q-item-section>
-                  </q-item>
-                  <q-item-separator />
                 </div>
               </div>
             </q-list>
@@ -1818,7 +1802,7 @@
         <div class="row gutter-sm q-my-xs items-center">
           <div class="col-xs-12" align="center">
             <q-card
-              ><strong>Choose the TID List</strong>
+              ><q-card-section><strong>Choose the TID List</strong></q-card-section>
               <q-card-section>
                 <q-checkbox
                   v-for="(item, index) in formdata.mid"
@@ -1834,7 +1818,7 @@
         </div>
         <br /><br />
 
-        <div class="row">
+        <div class="row items-center q-col-gutter-md">
           <!--START: table title -->
           <div class="col-md-3">
             <strong>
@@ -1854,7 +1838,7 @@
           </div>
         </div>
         <br />
-        <div class="row">
+        <div class="row items-center q-col-gutter-md">
           <!--START: table title -->
           <div class="col-md-3">
             <strong>
@@ -1874,7 +1858,7 @@
           </div>
         </div>
         <br />
-        <div class="row">
+        <div class="row items-center q-col-gutter-md">
           <div class="col-md-3">
             <strong>
               <span>Select the Rental Plan</span>
@@ -1885,18 +1869,19 @@
             <q-select
               :disable="
                 this.getImplementedQueue.leadInformation.cmsLeadStatus == 22
-
               "
               placeholder="Choose from the below*"
               color="grey-9"
               v-model.trim="merchant.paymentDetails.rentalPlanCode"
               label="Rental Plan*"
               :options="rentalPlanSet"
+              emit-value
+              map-options
             />
             <!-- :error="$v.formdata.count.$error" -->
           </div>
         </div>
-        <div class="row">
+        <div class="row items-center q-col-gutter-md">
           <!--START: table title -->
           <div class="col-md-3">
             <strong>
@@ -1918,7 +1903,7 @@
           </div>
         </div>
         <br />
-        <div class="row">
+        <div class="row items-center q-col-gutter-md">
           <!--START: table title -->
           <div class="col-md-3">
             <strong>
@@ -1940,7 +1925,7 @@
           </div>
         </div>
         <br />
-        <div class="row">
+        <div class="row items-center q-col-gutter-md">
           <!--START: table title -->
           <div class="col-md-3">
             <strong>
@@ -1962,7 +1947,7 @@
           </div>
         </div>
         <br />
-        <div class="row">
+        <div class="row items-center q-col-gutter-md">
           <!--START: table title -->
           <div class="col-md-3">
             <strong>
@@ -1984,7 +1969,7 @@
           </div>
         </div>
         <br />
-        <div class="row">
+        <div class="row items-center q-col-gutter-md">
           <!--START: table title -->
           <div class="col-md-3">
             <strong>
@@ -2035,29 +2020,20 @@
     ></showPdfModalComponent>
   </q-page>
 </template>
-<script>
 
+<script>
 import { LocalStorage } from "quasar";
+import _ from "lodash";
 global.jQuery = require("jquery");
 var $ = global.jQuery;
 window.$ = $;
 
 import {
   required,
-  requiredIf,
-  alphaNum,
-  integer,
-  numeric,
   minLength,
   maxLength,
-  email,
-  maxValue,
-  minValue,
-  decimal,
 } from "@vuelidate/validators";
-import moment from "moment";
 import { mapGetters, mapActions } from "vuex";
-import { uid } from "quasar";
 
 import MarsErrorResponse from "../../components/MarsErrorResponseHandler.vue";
 import showPdfModalComponent from "../../components/sat/showPdfModalComponent.vue";
@@ -2070,10 +2046,10 @@ const panCard = helpers.regex(
 
 const gstn = helpers.regex(
   "gstn",
-  // /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([a-zA-Z]{5}[0-9]{4}[a-zA-Z]{1}[1-9a-zA-Z]{1}[zZ]{1}[0-9]{1})+$/
   /^([0-9]){2}([A-Z]{3}[ABCFEGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}[0-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$/
 );
 export default {
+  name: "changemanagementeditdata",
   components: {
     showPdfModalComponent,
     MarsErrorResponse,
@@ -2084,7 +2060,7 @@ export default {
       PDFDetails: null,
       toggleshowPDFModal: false,
       formData: {
-        shortLead: this.getShortLeadInfo,
+        shortLead: "",
         documentType: [],
       },
       check: false,
@@ -2105,11 +2081,6 @@ export default {
       info: {
         datainfo1: "",
       },
-      merchant: {
-        datainfo: "",
-      },
-      cityOptionsSearch: [],
-      stateOptionsSearch: [],
       formdata: {
         mid: [],
         tid: [],
@@ -2238,9 +2209,6 @@ export default {
           remarks: "",
           documents: [],
         },
-        // partnerInformation:[],
-        // customIncentiveRates:[],
-        // additionalInfo:"",
         paymentDetails: {
           settlementType: "",
           tipEnabled: "",
@@ -2249,225 +2217,72 @@ export default {
           preAuth: "",
           rentalPlanCode: 1,
           remarks: "Payment Details Updated",
-          //       deviceSerialNumber:"2314shbcnas341",
-          //  installationDate: "30/12/2019",
-          //  deinstallationDate: "31/12/2019"
         },
         mdrPlan: {
           remarks: "MDR Value Updated",
           code: 1,
-          domesticDebitUpTo2000: {
-            fixed: 0.0,
-            percentage: 0.0,
-            minimum: 0.0,
-          },
-          domesticDebitAbove2000: {
-            fixed: 0.0,
-            percentage: 0.0,
-            minimum: 0.0,
-          },
-          standardOrClassic: {
-            fixed: 0.0,
-            percentage: 0.0,
-            minimum: 0.0,
-          },
-          premiumOrPlatinum: {
-            fixed: 0.0,
-            percentage: 0.0,
-            minimum: 0.0,
-          },
-          superPremiumOrSignature: {
-            fixed: 0.0,
-            percentage: 0.0,
-            minimum: 0.0,
-          },
-          commercialOrCorporate: {
-            fixed: 0.0,
-            percentage: 0.0,
-            minimum: 0.0,
-          },
-          internationalDebitCard: {
-            fixed: 0.0,
-            percentage: 0.0,
-            minimum: 0.0,
-          },
-          internationalCreditCard: {
-            fixed: 0.0,
-            percentage: 0.0,
-            minimum: 0.0,
-          },
-          onus: {
-            fixed: 0.0,
-            percentage: 0.0,
-            minimum: 0.0,
-          },
-          diners: {
-            fixed: 0.0,
-            percentage: 0.0,
-            minimum: 0.0,
-          },
-          masterPass: {
-            fixed: 0.0,
-            percentage: 0.0,
-            minimum: 0.0,
-          },
-          cashAtPos: {
-            fixed: 0.0,
-            percentage: 0.0,
-            minimum: 0.0,
-          },
-          convenientFee: {
-            fixed: 0.0,
-            percentage: 0.0,
-            minimum: 0.0,
-          },
+          domesticDebitUpTo2000: { fixed: 0.0, percentage: 0.0, minimum: 0.0 },
+          domesticDebitAbove2000: { fixed: 0.0, percentage: 0.0, minimum: 0.0 },
+          standardOrClassic: { fixed: 0.0, percentage: 0.0, minimum: 0.0 },
+          premiumOrPlatinum: { fixed: 0.0, percentage: 0.0, minimum: 0.0 },
+          superPremiumOrSignature: { fixed: 0.0, percentage: 0.0, minimum: 0.0 },
+          commercialOrCorporate: { fixed: 0.0, percentage: 0.0, minimum: 0.0 },
+          internationalDebitCard: { fixed: 0.0, percentage: 0.0, minimum: 0.0 },
+          internationalCreditCard: { fixed: 0.0, percentage: 0.0, minimum: 0.0 },
+          onus: { fixed: 0.0, percentage: 0.0, minimum: 0.0 },
+          diners: { fixed: 0.0, percentage: 0.0, minimum: 0.0 },
+          masterPass: { fixed: 0.0, percentage: 0.0, minimum: 0.0 },
+          cashAtPos: { fixed: 0.0, percentage: 0.0, minimum: 0.0 },
+          convenientFee: { fixed: 0.0, percentage: 0.0, minimum: 0.0 },
         },
       },
       error: {
-        formdata: {
-          cmsCategoryType: {
-            alert: false,
-            issue: "",
-            value: "",
-          },
-        },
-
+        formdata: { cmsCategoryType: { alert: false, issue: "", value: "" } },
         field: {
           merchant: {
-            businessInformation: {
-              gstId: {
-                alert: false,
-                issue: "",
-                value: "",
-              },
-            },
-            companyinformation: {
-              pan: {
-                alert: false,
-                issue: "",
-                value: "",
-              },
-            },
+            businessInformation: { gstId: { alert: false, issue: "", value: "" } },
+            companyinformation: { pan: { alert: false, issue: "", value: "" } },
           },
         },
       },
-
-      model: "",
-      // rental: [
-      //   {
-      //     label: "Monthly Plan",
-      //     value: "1"
-      //   },
-      //   {
-      //     label: "Six Month Plan",
-      //     value: "2"
-      //   }
-      // ],
       payment: [
-        {
-          label: "Cheque",
-          value: 2,
-        },
-        {
-          label: "Swipe",
-          value: 3,
-        },
-        {
-          label: "Neft",
-          value: 1,
-        },
+        { label: "Cheque", value: 2 },
+        { label: "Swipe", value: 3 },
+        { label: "Neft", value: 1 },
       ],
       cmsCategoryTypeOptions: [
-        {
-          label: "Small",
-          value: "S",
-        },
-        {
-          label: "Other",
-          value: "O",
-        },
+        { label: "Small", value: "S" },
+        { label: "Other", value: "O" },
       ],
       autoormanualOptions: [
-        {
-          label: "Auto Settlement",
-          value: "A",
-        },
-        {
-          label: "Manual Settlement",
-          value: "M",
-        },
+        { label: "Auto Settlement", value: "A" },
+        { label: "Manual Settlement", value: "M" },
       ],
       preauthOptions: [
-        {
-          label: "Enable",
-          value: "Y",
-        },
-        {
-          label: "Disable",
-          value: "N",
-        },
+        { label: "Enable", value: "Y" },
+        { label: "Disable", value: "N" },
       ],
       cashandposOptions: [
-        {
-          label: "Enable",
-          value: "Y",
-        },
-        {
-          label: "Disable",
-          value: "N",
-        },
+        { label: "Enable", value: "Y" },
+        { label: "Disable", value: "N" },
       ],
       internationalcardOptions: [
-        {
-          label: "Enable",
-          value: "Y",
-        },
-        {
-          label: "Disable",
-          value: "N",
-        },
+        { label: "Enable", value: "Y" },
+        { label: "Disable", value: "N" },
       ],
       tipOptions: [
-        {
-          label: "Enable",
-          value: "Y",
-        },
-        {
-          label: "Disable",
-          value: "N",
-        },
+        { label: "Enable", value: "Y" },
+        { label: "Disable", value: "N" },
       ],
       paymnentModeOptions: [
-        {
-          label: "Direct credit",
-          value: "D",
-        },
-        {
-          label: "NEFT",
-          value: "N",
-        },
-        // {
-        //   label: "IMPS",
-        //   value: "I"
-        // }
+        { label: "Direct credit", value: "D" },
+        { label: "NEFT", value: "N" },
       ],
       accountTypeOptions: [
-        {
-          label: "Saving account",
-          value: "S",
-        },
-        {
-          label: "Current account",
-          value: "C",
-        },
-        {
-          label: "Overdraft account",
-          value: "O",
-        },
-        {
-          label: "Cash credit account",
-          value: "R",
-        },
+        { label: "Saving account", value: "S" },
+        { label: "Current account", value: "C" },
+        { label: "Overdraft account", value: "O" },
+        { label: "Cash credit account", value: "R" },
       ],
     };
   },
@@ -2476,25 +2291,18 @@ export default {
     ...mapGetters("SatLeadValidation", [
       "getShortLeadInfo",
       "getDeviceVerificationStatus",
+      "getShortLeadInfoDocumentTypes",
     ]),
     ...mapGetters("mars_rentalPlans", ["rentalPlanFromMars"]),
     ...mapGetters("categoryBasedRental", ["categoryBasedRental"]),
     ...mapGetters("GlobalVariables", ["GLOBAL_FILE_FETCH_URL"]),
     ...mapGetters("SA_Devices", ["getAllDevicesInfo"]),
     ...mapGetters("leadSource", ["getActiveLeadSource"]),
-    ...mapGetters("merchantTypes", ["getActiveMerchantTypes"]),
     ...mapGetters("plan", ["getActivePlan"]),
-    ...mapGetters("CategoryBasedMdr", ["categoryBasedMdr"]),
-    // ...mapGetters("GetMarsData", ["getAllMarsData"]),
     ...mapGetters("GetMarsData", [
       "getAllMarsData",
       "getImplementedQueue",
       "getMidBasedList",
-    ]),
-    ...mapGetters("SatLeadValidation", [
-      "getShortLeadInfo",
-      "getDeviceVerificationStatus",
-      "getShortLeadInfoDocumentTypes",
     ]),
     ...mapGetters("mars_city", ["cityFromMars"]),
     ...mapGetters("mars_state", ["stateFromMars"]),
@@ -2509,39 +2317,18 @@ export default {
     },
   },
   created() {
-    // this.ajaxLoadLeadDataEntryInfo();
     this.ajaxLoadDataForDeviceTypeTable1();
     this.ajaxLoadMarsData();
     this.ajaxLoadShortLeadInfoForDocumentTypes();
     this.fetchAllDropdownValuesFromMARSapi();
-    // this.fetchAndCookDocuments();
-    // this.fetchAndCookDocuments();
   },
   validations: {
     formdata: {
-      referenceNumber: {
-        required,
-      },
-      paymentOption: {
-        required,
-      },
-      cmsCategoryType: {
-        required,
-      },
-      paymentMadeon: {
-        required,
-      },
-      // paymentDocumentFile:{
-      //   required
-      // },
+      referenceNumber: { required },
+      paymentOption: { required },
+      cmsCategoryType: { required },
+      paymentMadeon: { required },
     },
-    // merchant1:{
-    //        kyc:{
-    //     remarks:{
-    //       required
-    //     }
-    //   }
-    // },
     merchant: {
       companyinformation: {
         pan: {
@@ -2551,7 +2338,6 @@ export default {
           minLength: minLength(10),
         },
       },
-
       businessInformation: {
         gstId: {
           gstn,
@@ -2562,10 +2348,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions("SatLeadValidation", [
-      "FETCH_SHORT_LEAD_DATA",
-      "VERIFY_DEVICE_FULL_LEAD",
-    ]),
     ...mapActions("mars_rentalPlans", ["RENTAL_PLAN_FROM_MARS"]),
     ...mapActions("categoryBasedRental", ["CATEGORY_BASED_RENTAL_PLAN1"]),
     ...mapActions("mars_city", ["CITY_FROM_MARS"]),
@@ -2578,8 +2360,6 @@ export default {
       "MIDBASEDLIST",
     ]),
     ...mapActions("leadSource", ["LEAD_SOURCE_ACTIVE_LIST"]),
-    ...mapActions("merchantTypes", ["MERCHANT_TYPE_ACTIVE_LIST"]),
-    ...mapActions("MdrPlan", ["MDR_PLAN"]),
     ...mapActions("CategoryBasedMdr", [
       "CATEGORY_BASED_MDR_PLAN",
       "EDIT_MDR_PLAN",
@@ -2592,8 +2372,6 @@ export default {
       "DELETE_DOCUMENT_FROM_BY_SAT",
       "FETCH_LEAD_DOCUMENT_TYPE_DATA",
       "FETCH_SHORT_LEAD_DATA",
-    ]),
-    ...mapActions("SatLeadValidation", [
       "MOVE_BACK_DOCUMENT_VERIFICATION_STAGE",
     ]),
     ...mapActions("SendTORSMCMS", ["SEND_TO_RSM_CMS"]),
@@ -2605,17 +2383,7 @@ export default {
       "CMS_EDIT_TERMINAL",
       "CMS_STATUS_CHANGE",
     ]),
-    ...mapActions("mars_dataSubmit", [
-      "MARS_DATA_SUBMIT_INTERNAL_CHANGEMANAGEMENT",
-    ]),
 
-    // planSelected(item) {
-
-    // this.formdata.plan= item;
-    // // this.formdata.planCode=item.planName;
-    // // this.formdata.planCode1=item.
-    //   console.log("Hello",this.formdata.plan);
-    // },
     sendtoFinance(request) {
       this.$v.formdata.$touch();
       if (this.$v.formdata.$error) {
@@ -2627,15 +2395,12 @@ export default {
         this.$q.notify({
           color: "amber",
           position: "bottom",
-          message: "data",
           icon: "attachment",
           message: "Please attach the Cheque File",
         });
       } else {
         let requestparams = {
-          url: {
-            id: this.getShortLeadInfo.id,
-          },
+          url: { id: this.getShortLeadInfo.id },
           params: {
             setupFees: request.setupFees,
             amountCollected: request.setupFees,
@@ -2656,7 +2421,6 @@ export default {
             kyc: request.kyc,
             verifiedBanksubventionStatus: request.verifiedBanksubventionStatus,
             reason: request.reason,
-            //  amountCollected:request.amountCollected,
             merchantCategory: request.merchantCategory,
             corpCC: request.corpCC,
             debitGreaterthanAmount: request.debitGreaterthanAmount,
@@ -2684,42 +2448,23 @@ export default {
           requestparams.params.leadCategory = 2;
           requestparams.params.pricing = 1;
         }
-        // this.SEND_TO_RSM_CMS(requestparams)
-        // this.$q.notify({
-        //             color: "positive",
-        //             position: "bottom",
-        //             message: "Succesfully Send to RSM",
-        //             icon: "thumb_up"
-        //           });
-        //  this.$router.push("/sat/change/management");
-        // delete this.formdata.plan;
         this.SEND_TO_RSM_CMS(requestparams)
           .then((response) => {
             this.$q.notify({
               color: "positive",
               position: "bottom",
-              message: "data",
               icon: "thumb_up",
               message: response.data.message,
             });
             this.$router.push("/sat/change/management");
-            // var self = this;
-            // Object.keys(this.formData).forEach(function(key, index) {
-            //   self.formData[key] = "";
-            // });
           })
           .catch((error) => {
-            console.log(error);
             this.$q.notify({
               color: "negative",
               position: "bottom",
               icon: "thumb_down",
               message: error.data.message,
             });
-            // var self = this;
-            // Object.keys(this.formData).forEach(function(key, index) {
-            //   self.formData[key] = "";
-            // });
           });
       }
     },
@@ -2768,9 +2513,7 @@ export default {
 
     sendtoNH(request) {
       let requestparams = {
-        url: {
-          id: this.getShortLeadInfo.id,
-        },
+        url: { id: this.getShortLeadInfo.id },
         params: {
           setupFees: request.setupFees,
           amountCollected: request.setupFees,
@@ -2791,7 +2534,6 @@ export default {
           kyc: request.kyc,
           verifiedBanksubventionStatus: request.verifiedBanksubventionStatus,
           reason: request.reason,
-          //  amountCollected:request.amountCollected,
           merchantCategory: request.merchantCategory,
           corpCC: request.corpCC,
           debitGreaterthanAmount: request.debitGreaterthanAmount,
@@ -2819,54 +2561,30 @@ export default {
         requestparams.params.leadCategory = 2;
         requestparams.params.pricing = 1;
       }
-      // this.SEND_TO_RSM_CMS(requestparams)
-      // this.$q.notify({
-      //             color: "positive",
-      //             position: "bottom",
-      //             message: "Succesfully Send to RSM",
-      //             icon: "thumb_up"
-      //           });
-      //  this.$router.push("/sat/change/management");
-      // delete this.formdata.plan;
       this.SEND_TO_RSM_CMS(requestparams)
         .then((response) => {
           this.$q.notify({
             color: "positive",
             position: "bottom",
-            message: "data",
             icon: "thumb_up",
             message: response.data.message,
           });
           this.$router.push("/sat/change/management");
-          // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
-          //   self.formData[key] = "";
-          // });
         })
         .catch((error) => {
-          console.log(error);
           this.$q.notify({
             color: "negative",
             position: "bottom",
             icon: "thumb_down",
             message: error.data.message,
           });
-          // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
-          //   self.formData[key] = "";
-          // });
         });
     },
     fnVerificationDocumentUpload(event, documentDetails) {
       this.merchant.kyc.documents = [];
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Uploading file ..",
-      });
+      this.$q.loading.show({ spinnerColor: "purple-9", message: "Uploading file .." });
       let formData = new FormData();
       formData.append("file", event.target.files[0]);
-      // formData.append("fileNameOriginal", "cheque");
 
       let requestParams = {
         files: formData,
@@ -2875,850 +2593,328 @@ export default {
       };
 
       this.FEED_HAND_OVER_TO_SAT_DOCUMENT(requestParams)
-        .then((response) => {
-          // this.ajaxLoadMarsData();
-          this.shortLeadInfo();
-          this.$q.loading.hide();
-          //  this.ajaxLoadMarsData();
-          // this.$emit(
-          //   "emitAjaxLoadShortLeadInfo",
-          //   "hotReloadForDocumentsUploadValidation",
-          //   this.merchantTypeSelection
-          // );
-
-          // this.FETCH_SHORT_LEAD_DATA(this.getShortLeadInfo.id)
-        })
-        .catch((error) => {
-          this.$q.loading.hide();
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "Failed to upload document",
-            icon: "thumb_down",
-          });
-        });
-    },
-    ajaxLoadDataForDeviceTypeTable1() {
-      let self = this;
-      self
-        .FETCH_DEVICES_DATA()
         .then(() => {
-          return _.map(self.getAllDevicesInfo, (item) => {
-            self.dropDown.deviceOptions.push({
-              value: item.id,
-              label: item.deviceName,
-            });
-          });
-        }).then(() => {
-          self.LEAD_SOURCE_ACTIVE_LIST().then(() => {
-            return _.map(self.getActiveLeadSource, (item) => {
-              self.dropDown.leadSourceOptions.push({
-                value: item.id,
-                label: item.sourceName,
-              });
-            });
-          });
-        }).then(() => {
-          self.PLAN_ACTIVE_LIST().then(() => {
-            return _.map(self.getActivePlan, (item) => {
-              self.dropDown.planOptions.push({
-                value: item.id,
-                label: item.planName,
-              });
-            });
-          });
-        });
-    },
-    ajaxLoadMarsData() {
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Fetching data ..",
-      });
-      console.log(
-        "Implemented Queue----------------------->" +
-          JSON.stringify(this.getImplementedQueue)
-      );
-      this.IMPLEMENTED_QUEUE(this.$route.params.id)
-        // this.FETCH_SHORT_LEAD_DATA(this.getImplementedQueue.leadInformation.id)
-        .then((response) => {
-          this.FETCH_SHORT_LEAD_DATA(
-            this.getImplementedQueue.leadInformation.id
-          );
-          //  this.FETCH_SHORT_LEAD_DATA(this.getImplementedQueue.leadInformation.id)
-          this.marsInfo();
-
-          (this.formdata.plan =
-            this.getImplementedQueue.leadInformation.plan.id),
-            (this.formdata.planCode =
-              this.getImplementedQueue.leadInformation.plan.planName);
-          this.formdata.deviceId =
-            this.getImplementedQueue.leadInformation.device.id;
-          this.formdata.leadSourceId =
-            this.getImplementedQueue.leadInformation.leadSource.id;
-
-          this.formdata.contactName =
-            this.getImplementedQueue.leadInformation.contactName;
-          this.formdata.contactNumber =
-            this.getImplementedQueue.leadInformation.contactName;
-          this.formdata.alternateContactNumber =
-            this.getImplementedQueue.leadInformation.alternateContactNumber;
-          this.formdata.city = this.getImplementedQueue.leadInformation.city;
-          this.formdata.device =
-            this.getImplementedQueue.leadInformation.device;
-          this.formdata.deviceCount =
-            this.getImplementedQueue.leadInformation.deviceCount;
-          this.formdata.leadAddress =
-            this.getImplementedQueue.leadInformation.leadAddress;
-          this.formdata.latitude =
-            this.getImplementedQueue.leadInformation.latitude;
-          this.formdata.longitude =
-            this.getImplementedQueue.leadInformation.longitude;
-          this.formdata.state = this.getImplementedQueue.leadInformation.state;
-          // this.formdata.leadCategory=this.getImplementedQueue.leadInformation.leadCategory;
-          this.formdata.kyc = this.getImplementedQueue.leadInformation.kyc;
-          this.formdata.verifiedBanksubventionStatus =
-            this.getImplementedQueue.leadInformation.verifiedBanksubventionStatus;
-          this.formdata.reason =
-            this.getImplementedQueue.leadInformation.reason;
-          // this.formdata.amountCollected=this.getImplementedQueue.leadInformation.amountCollected;
-          this.formdata.merchantCategory =
-            this.getImplementedQueue.leadInformation.merchantCategory;
-          // this.formdata.corpCC=this.getImplementedQueue.leadInformation.corpCC;
-          // this.formdata.debitGreaterthanAmount=this.getImplementedQueue.leadInformation.debitGreaterthanAmount;
-          // this.formdata.debitLessthanAmount=this.getImplementedQueue.leadInformation.debitGreaterthanAmount;
-          // this.formdata.premiumCC=this.getImplementedQueue.leadInformation.premiumCC;
-          this.formdata.pricing =
-            this.getImplementedQueue.leadInformation.pricing;
-          this.formdata.leadStatus =
-            this.getImplementedQueue.leadInformation.leadStatus;
-          this.formdata.submittoRSMDate =
-            this.getImplementedQueue.leadInformation.submittoRSMDate;
-          this.formdata.posIncentive =
-            this.getImplementedQueue.leadInformation.posIncentive;
-          this.formdata.posEnable =
-            this.getImplementedQueue.leadInformation.posEnable;
-          this.formdata.leadName =
-            this.getImplementedQueue.leadInformation.leadName;
-
-          (this.formdata1.plan =
-            this.getImplementedQueue.leadInformation.plan.id),
-            (this.formdata1.planCode =
-              this.getImplementedQueue.leadInformation.plan.planName);
-          this.formdata1.setupFees =
-            this.getImplementedQueue.leadInformation.setupFees;
-          this.formdata1.recurringFees =
-            this.getImplementedQueue.leadInformation.recurringFees;
-          //  this.forminfo.applicationNumber = this.getImplementedQueue.applicationNumber;
-          this.formdata.setupFees =
-            this.getImplementedQueue.leadInformation.setupFees;
-          this.formdata.recurringFees =
-            this.getImplementedQueue.leadInformation.recurringFees;
-          this.formdata.amountCollected =
-            this.getImplementedQueue.leadInformation.amountCollected;
-          this.formdata1.contactName =
-            this.getImplementedQueue.leadInformation.contactName;
-          this.formdata1.contactNumber =
-            this.getImplementedQueue.leadInformation.contactName;
-          this.formdata1.alternateContactNumber =
-            this.getImplementedQueue.leadInformation.alternateContactNumber;
-          this.formdata1.city = this.getImplementedQueue.leadInformation.city;
-          this.formdata1.device =
-            this.getImplementedQueue.leadInformation.device;
-          this.formdata1.deviceId =
-            this.getImplementedQueue.leadInformation.device.id;
-          this.formdata1.leadSourceId =
-            this.getImplementedQueue.leadInformation.leadSource.id;
-          this.formdata1.deviceCount =
-            this.getImplementedQueue.leadInformation.deviceCount;
-          this.formdata1.leadAddress =
-            this.getImplementedQueue.leadInformation.leadAddress;
-          this.formdata1.latitude =
-            this.getImplementedQueue.leadInformation.latitude;
-          this.formdata1.longitude =
-            this.getImplementedQueue.leadInformation.longitude;
-          this.formdata1.state = this.getImplementedQueue.leadInformation.state;
-          // this.formdata1.leadCategory=this.getImplementedQueue.leadInformation.leadCategory;
-          this.formdata1.kyc = this.getImplementedQueue.leadInformation.kyc;
-          this.formdata1.verifiedBanksubventionStatus =
-            this.getImplementedQueue.leadInformation.verifiedBanksubventionStatus;
-          this.formdata1.reason =
-            this.getImplementedQueue.leadInformation.reason;
-          // this.formdata1.amountCollected=this.getImplementedQueue.leadInformation.amountCollected;
-          this.formdata1.merchantCategory =
-            this.getImplementedQueue.leadInformation.merchantCategory;
-          // this.formdata1.corpCC=this.getShortLeadInfo.corpCC;
-          // this.formdata1.debitGreaterthanAmount=this.getShortLeadInfo.debitGreaterthanAmount;
-          // this.formdata1.debitLessthanAmount=this.getShortLeadInfo.debitGreaterthanAmount;
-          // this.formdata1.premiumCC=this.getShortLeadInfo.premiumCC;
-          this.formdata1.pricing =
-            this.getImplementedQueue.leadInformation.pricing;
-          this.formdata1.leadStatus =
-            this.getImplementedQueue.leadInformation.leadStatus;
-          this.formdata1.submittoRSMDate =
-            this.getImplementedQueue.leadInformation.submittoRSMDate;
-          this.formdata1.posIncentive =
-            this.getImplementedQueue.leadInformation.posIncentive;
-          this.formdata1.posEnable =
-            this.getImplementedQueue.leadInformation.posEnable;
-          this.formdata1.leadName =
-            this.getImplementedQueue.leadInformation.leadName;
-          this.merchant.mdrPlan.domesticDebitUpTo2000.percentage =
-            this.getImplementedQueue.leadInformation.debitLessthanAmount;
-          this.merchant.mdrPlan.domesticDebitAbove2000.percentage =
-            this.getImplementedQueue.leadInformation.debitGreaterthanAmount;
-          this.merchant.mdrPlan.standardOrClassic.percentage =
-            this.getImplementedQueue.leadInformation.stdCC;
-          this.merchant.mdrPlan.premiumOrPlatinum.percentage =
-            this.getImplementedQueue.leadInformation.premiumCC;
-          this.merchant.mdrPlan.superPremiumOrSignature.percentage =
-            this.getImplementedQueue.leadInformation.superPremiumlCC;
-          this.merchant.mdrPlan.commercialOrCorporate.percentage =
-            this.getImplementedQueue.leadInformation.corpCC;
-          this.merchant.mdrPlan.internationalCreditCard.percentage =
-            this.getImplementedQueue.leadInformation.intlCC;
-          this.merchantTypeSelection =
-            this.getImplementedQueue.leadInformation.merchantType.merchantTypeName;
-
+          this.shortLeadInfo();
           this.$q.loading.hide();
         })
         .catch(() => {
           this.$q.loading.hide();
+          this.$q.notify({ color: "negative", position: "bottom", message: "Failed to upload document", icon: "thumb_down" });
         });
-      this.toggleAjaxLoadFilter = false;
     },
-    fnUploadApplicationForm(event, documentDetails) {
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Uploading file ..",
+    ajaxLoadDataForDeviceTypeTable1() {
+      let self = this;
+      self.FETCH_DEVICES_DATA().then(() => {
+        self.dropDown.deviceOptions = self.getAllDevicesInfo.map(item => ({ value: item.id, label: item.deviceName }));
+      }).then(() => {
+        self.LEAD_SOURCE_ACTIVE_LIST().then(() => {
+          self.dropDown.leadSourceOptions = self.getActiveLeadSource.map(item => ({ value: item.id, label: item.sourceName }));
+        });
+      }).then(() => {
+        self.PLAN_ACTIVE_LIST().then(() => {
+          self.dropDown.planOptions = self.getActivePlan.map(item => ({ value: item.id, label: item.planName }));
+        });
       });
+    },
+    ajaxLoadMarsData() {
+      this.$q.loading.show({ spinnerColor: "purple-9", message: "Fetching data .." });
+      this.IMPLEMENTED_QUEUE(this.$route.params.id)
+        .then(() => {
+          this.FETCH_SHORT_LEAD_DATA(this.getImplementedQueue.leadInformation.id);
+          this.marsInfo();
+
+          this.formdata.plan = this.getImplementedQueue.leadInformation.plan.id;
+          this.formdata.planCode = this.getImplementedQueue.leadInformation.plan.planName;
+          this.formdata.deviceId = this.getImplementedQueue.leadInformation.device.id;
+          this.formdata.leadSourceId = this.getImplementedQueue.leadInformation.leadSource.id;
+          this.formdata.contactName = this.getImplementedQueue.leadInformation.contactName;
+          this.formdata.contactNumber = this.getImplementedQueue.leadInformation.contactName;
+          this.formdata.alternateContactNumber = this.getImplementedQueue.leadInformation.alternateContactNumber;
+          this.formdata.city = this.getImplementedQueue.leadInformation.city;
+          this.formdata.device = this.getImplementedQueue.leadInformation.device;
+          this.formdata.deviceCount = this.getImplementedQueue.leadInformation.deviceCount;
+          this.formdata.leadAddress = this.getImplementedQueue.leadInformation.leadAddress;
+          this.formdata.latitude = this.getImplementedQueue.leadInformation.latitude;
+          this.formdata.longitude = this.getImplementedQueue.leadInformation.longitude;
+          this.formdata.state = this.getImplementedQueue.leadInformation.state;
+          this.formdata.kyc = this.getImplementedQueue.leadInformation.kyc;
+          this.formdata.verifiedBanksubventionStatus = this.getImplementedQueue.leadInformation.verifiedBanksubventionStatus;
+          this.formdata.reason = this.getImplementedQueue.leadInformation.reason;
+          this.formdata.merchantCategory = this.getImplementedQueue.leadInformation.merchantCategory;
+          this.formdata.pricing = this.getImplementedQueue.leadInformation.pricing;
+          this.formdata.leadStatus = this.getImplementedQueue.leadInformation.leadStatus;
+          this.formdata.submittoRSMDate = this.getImplementedQueue.leadInformation.submittoRSMDate;
+          this.formdata.posIncentive = this.getImplementedQueue.leadInformation.posIncentive;
+          this.formdata.posEnable = this.getImplementedQueue.leadInformation.posEnable;
+          this.formdata.leadName = this.getImplementedQueue.leadInformation.leadName;
+
+          this.formdata1.plan = this.getImplementedQueue.leadInformation.plan.id;
+          this.formdata1.planCode = this.getImplementedQueue.leadInformation.plan.planName;
+          this.formdata1.setupFees = this.getImplementedQueue.leadInformation.setupFees;
+          this.formdata1.recurringFees = this.getImplementedQueue.leadInformation.recurringFees;
+          this.formdata.setupFees = this.getImplementedQueue.leadInformation.setupFees;
+          this.formdata.recurringFees = this.getImplementedQueue.leadInformation.recurringFees;
+          this.formdata.amountCollected = this.getImplementedQueue.leadInformation.amountCollected;
+          this.formdata1.contactName = this.getImplementedQueue.leadInformation.contactName;
+          this.formdata1.contactNumber = this.getImplementedQueue.leadInformation.contactName;
+          this.formdata1.alternateContactNumber = this.getImplementedQueue.leadInformation.alternateContactNumber;
+          this.formdata1.city = this.getImplementedQueue.leadInformation.city;
+          this.formdata1.device = this.getImplementedQueue.leadInformation.device;
+          this.formdata1.deviceId = this.getImplementedQueue.leadInformation.device.id;
+          this.formdata1.leadSourceId = this.getImplementedQueue.leadInformation.leadSource.id;
+          this.formdata1.deviceCount = this.getImplementedQueue.leadInformation.deviceCount;
+          this.formdata1.leadAddress = this.getImplementedQueue.leadInformation.leadAddress;
+          this.formdata1.latitude = this.getImplementedQueue.leadInformation.latitude;
+          this.formdata1.longitude = this.getImplementedQueue.leadInformation.longitude;
+          this.formdata1.state = this.getImplementedQueue.leadInformation.state;
+          this.formdata1.kyc = this.getImplementedQueue.leadInformation.kyc;
+          this.formdata1.verifiedBanksubventionStatus = this.getImplementedQueue.leadInformation.verifiedBanksubventionStatus;
+          this.formdata1.reason = this.getImplementedQueue.leadInformation.reason;
+          this.formdata1.merchantCategory = this.getImplementedQueue.leadInformation.merchantCategory;
+          this.formdata1.pricing = this.getImplementedQueue.leadInformation.pricing;
+          this.formdata1.leadStatus = this.getImplementedQueue.leadInformation.leadStatus;
+          this.formdata1.submittoRSMDate = this.getImplementedQueue.leadInformation.submittoRSMDate;
+          this.formdata1.posIncentive = this.getImplementedQueue.leadInformation.posIncentive;
+          this.formdata1.posEnable = this.getImplementedQueue.leadInformation.posEnable;
+          this.formdata1.leadName = this.getImplementedQueue.leadInformation.leadName;
+          this.merchant.mdrPlan.domesticDebitUpTo2000.percentage = this.getImplementedQueue.leadInformation.debitLessthanAmount;
+          this.merchant.mdrPlan.domesticDebitAbove2000.percentage = this.getImplementedQueue.leadInformation.debitGreaterthanAmount;
+          this.merchant.mdrPlan.standardOrClassic.percentage = this.getImplementedQueue.leadInformation.stdCC;
+          this.merchant.mdrPlan.premiumOrPlatinum.percentage = this.getImplementedQueue.leadInformation.premiumCC;
+          this.merchant.mdrPlan.superPremiumOrSignature.percentage = this.getImplementedQueue.leadInformation.superPremiumlCC;
+          this.merchant.mdrPlan.commercialOrCorporate.percentage = this.getImplementedQueue.leadInformation.corpCC;
+          this.merchant.mdrPlan.internationalCreditCard.percentage = this.getImplementedQueue.leadInformation.intlCC;
+          this.merchantTypeSelection = this.getImplementedQueue.leadInformation.merchantType.merchantTypeName;
+
+          this.$q.loading.hide();
+        })
+        .catch(() => { this.$q.loading.hide(); });
+    },
+    fnUploadApplicationForm(event) {
+      this.$q.loading.show({ spinnerColor: "purple-9", message: "Uploading file .." });
       let formData = new FormData();
       formData.append("file", event.target.files[0]);
       formData.append("fileNameOriginal", "Cheque");
 
-      let requestParams = {
-        files: formData,
-        fileNameOriginal: "Cheque",
-      };
-      this.FEED_CHEQUE_FORM(requestParams)
+      this.FEED_CHEQUE_FORM({ files: formData, fileNameOriginal: "Cheque" })
         .then((response) => {
           this.$q.loading.hide();
-          this.$q.notify({
-            color: "positive",
-            position: "bottom",
-            message: "data",
-            icon: "thumb_up",
-            message: "File Successfully Uploaded" + "-" + response.fileName,
-          });
-          console.log("application form", response.fileName);
+          this.$q.notify({ color: "positive", position: "bottom", icon: "thumb_up", message: "File Successfully Uploaded - " + response.fileName });
           this.formdata.paymentDocumentFile = response.fileName;
           this.formdata.paymentDocumentMimeType = response.mimeType;
-          // this.ajaxLoadLeadDataEntryInfo()
         })
-        .catch((error) => {
+        .catch(() => {
           this.$q.loading.hide();
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "Failed to upload document",
-            icon: "thumb_down",
-          });
+          this.$q.notify({ color: "negative", position: "bottom", message: "Failed to upload document", icon: "thumb_down" });
         });
     },
     ajaxLoadShortLeadInfoForDocumentTypes() {
-      //function to load all lead details
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Fetching files ..",
-      });
+      this.$q.loading.show({ spinnerColor: "purple-9", message: "Fetching files .." });
       this.FETCH_LEAD_DOCUMENT_TYPE_DATA()
-        .then((response) => {
-          return this.fnGetMerchantTypeValue(
-            this.getImplementedQueue.leadInformation.merchantType
-              .merchantTypeName
-          );
-        }).then((response) => {
+        .then(() => {
+          return this.fnGetMerchantTypeValue(this.getImplementedQueue.leadInformation.merchantType.merchantTypeName);
+        })
+        .then(() => {
           this.formData.documentType = this.getShortLeadInfoDocumentTypes;
-          // this.$emit(
-          //   "emitAjaxLoadShortLeadInfo",
-          //   "hotReloadForDocumentsUploadValidation",
-          //   this.merchantTypeSelection
-          // );
           this.$q.loading.hide();
         })
-        .catch((error) => {
-          this.$q.loading.hide();
-        });
-      this.toggleAjaxLoadFilter = false;
+        .catch(() => { this.$q.loading.hide(); });
     },
-    fnUploadApplicationForm1(event, documentDetails) {
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Uploading file ..",
-      });
+    fnUploadApplicationForm1(event) {
+      this.$q.loading.show({ spinnerColor: "purple-9", message: "Uploading file .." });
       let formData = new FormData();
       formData.append("file", event.target.files[0]);
       this.merchant.kyc.documents = [];
 
-      let requestParams = {
-        files: formData,
-        leadId: this.getShortLeadInfo.id,
-      };
-
-      this.FEED_FULL_APPLICATION_FORM(requestParams)
-
-        .then((response) => {
+      this.FEED_FULL_APPLICATION_FORM({ files: formData, leadId: this.getShortLeadInfo.id })
+        .then(() => {
           this.shortLeadInfo();
-          // this.ajaxLoadMarsData();
           this.$q.loading.hide();
-
-          // this.FETCH_SHORT_LEAD_DATA(this.getShortLeadInfo.leadInformation.id);
         })
-        .catch((error) => {
+        .catch(() => {
           this.$q.loading.hide();
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "Failed to upload document",
-            icon: "thumb_down",
-          });
+          this.$q.notify({ color: "negative", position: "bottom", message: "Failed to upload document", icon: "thumb_down" });
         });
     },
-    // Function to show PDF
     fnPDFViewModal(documentUrl) {
       this.PDFDetails = documentUrl;
       this.toggleshowPDFModal = !this.toggleshowPDFModal;
     },
     fnGetSubDocuments(documentDetails) {
       if (typeof documentDetails !== "undefined") {
-        if (
-          documentDetails.hasOwnProperty("selectedSubDocumentType") &&
-          typeof documentDetails.selectedSubDocumentType !== "undefined"
-        ) {
-          documentDetails.selectedSubDocumentType =
-            documentDetails.subDocumentType;
-        } else {
-          documentDetails["selectedSubDocumentType"] = documentDetails.subDocumentType;
-        }
+        documentDetails.selectedSubDocumentType = documentDetails.subDocumentType;
       }
     },
     fn_________GetEntryPermissionToUploadSubDocuments(multipleDocument) {
-      if (
-        multipleDocument.hasOwnProperty("subDocumentTypeSelection") &&
-        typeof multipleDocument.subDocumentTypeSelection !== "undefined" &&
-        multipleDocument.subDocumentTypeSelection.hasOwnProperty(
-          "selectedSubDocumentType"
-        ) &&
-        typeof multipleDocument.subDocumentTypeSelection
-          .selectedSubDocumentType !== "undefined"
-      ) {
-        return true;
-      } else {
-        return true;
-      }
+      return true;
     },
     fnViewHandedOverFileImage() {
       this.$refs.handedOverImageViewer.click();
     },
     fnGetMerchantTypeValue(inputValue) {
-      let merchantDocumentCategory = _.find(
-        this.getShortLeadInfoDocumentTypes,
-        (o) => o.merchantType === inputValue
-      );
-      let arr = {
-        forSingleDocument: [],
-        forMutipleDocument: [],
-      };
-      let innerSelf = this;
-      let leadDocuments = innerSelf.getShortLeadInfo.leadDocuments;
-      merchantDocumentCategory.documentsApplicable.map(function (value, index) {
+      let merchantDocumentCategory = _.find(this.getShortLeadInfoDocumentTypes, (o) => o.merchantType === inputValue);
+      let arr = { forSingleDocument: [], forMutipleDocument: [] };
+      let leadDocuments = this.getShortLeadInfo.leadDocuments;
+      merchantDocumentCategory.documentsApplicable.forEach((value) => {
         if (value.viewType == 1) {
           arr.forSingleDocument.push(value);
         } else {
           if (value.documentType in leadDocuments) {
-            let assumeArr = _.find(value.documents, function (oo) {
-              if (
-                leadDocuments.hasOwnProperty(oo.documentType) &&
-                (oo.subDocumentType ==
-                  leadDocuments[oo.documentType][0].subDocumentType ||
-                  leadDocuments[oo.documentType][0].documentType ==
-                    leadDocuments[oo.documentType][0].subDocumentType)
-              ) {
-                return oo.documentType;
-              }
+            let assumeArr = _.find(value.documents, (oo) => {
+              return leadDocuments.hasOwnProperty(oo.documentType) && (oo.subDocumentType == leadDocuments[oo.documentType][0].subDocumentType || leadDocuments[oo.documentType][0].documentType == leadDocuments[oo.documentType][0].subDocumentType);
             });
-            if (assumeArr == undefined) {
-              value["subDocumentTypeSelection"] = 0;
-            } else {
-              value["subDocumentTypeSelection"] = assumeArr;
-            }
+            value.subDocumentTypeSelection = assumeArr || 0;
           } else {
-            value["subDocumentTypeSelection"] = 0;
+            value.subDocumentTypeSelection = 0;
           }
           arr.forMutipleDocument.push(value);
         }
       });
-      this.getShortLeadInfoDocumentTypes["uploadedDocuments"] = arr;
+      this.getShortLeadInfoDocumentTypes.uploadedDocuments = arr;
     },
     fnViewbankUploadedLetterImage() {
       this.$refs.bankUploadedLetter.click();
     },
     fnDeleteAlreadyAttachedFile(documentDetails) {
       this.merchant.kyc.documents = [];
-      let innerSelf = this;
-      innerSelf.$q
-        .dialog({
+      this.$q.dialog({
           title: "Confirm",
           message: "Are you sure want to delete uploaded document?",
           ok: "Continue",
           cancel: "Cancel",
         }).onOk(() => {
-          this.$q.loading.show({
-            delay: 0, // ms
-            spinnerColor: "purple-9",
-            message: "Processing ..",
-          });
-          innerSelf
-            .DELETE_DOCUMENT_FROM_BY_SAT(documentDetails)
-            .then((response) => {
-              // this.ajaxLoadMarsData();
+          this.$q.loading.show({ spinnerColor: "purple-9", message: "Processing .." });
+          this.DELETE_DOCUMENT_FROM_BY_SAT(documentDetails)
+            .then(() => {
               this.shortLeadInfo();
-              innerSelf.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: "Successfully removed!",
-                icon: "thumb_up",
-              });
-              // innerSelf.FETCH_SHORT_LEAD_DATA(innerSelf.$route.params.id);
-              // innerSelf.$emit(
-              //   "emitAjaxLoadShortLeadInfo",
-              //   "hotReloadForDocumentsUploadValidation",
-              //   innerSelf.merchantTypeSelection
-              // );
-              // this.FETCH_SHORT_LEAD_DATA(this.getShortLeadInfo.id
-              // )
+              this.$q.notify({ color: "positive", position: "bottom", message: "Successfully removed!", icon: "thumb_up" });
               this.$q.loading.hide();
-            }).onCancel((error) => {
+            }).catch((error) => {
               this.$q.loading.hide();
-              innerSelf.$q.notify({
-                color: "negative",
-                position: "bot  tom",
-                message:
-                  error.body.message == null
-                    ? "Please Try Again Later !"
-                    : error.body.message,
-                icon: "thumb_down",
-              });
+              this.$q.notify({ color: "negative", position: "bottom", message: error.body?.message || "Please Try Again Later !", icon: "thumb_down" });
             });
-        })
-        .catch(() => {
-          innerSelf.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "No changes made!",
-            icon: "thumb_down",
-          });
         });
     },
-    fnViewMultiAttachedFileImage(attachedImageIndex) {
-      this.$refs.multiAttachedImageViewer[attachedImageIndex].click();
+    fnViewMultiAttachedFileImage() {
+      this.$refs.multiAttachedImageViewer.click();
     },
     fnVerificationDocumentUploadSingleUpload(event, documentDetails) {
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Uploading file ..",
-      });
-      // return
+      this.$q.loading.show({ spinnerColor: "purple-9", message: "Uploading file .." });
       let formData = new FormData();
       formData.append("file", event.target.files[0]);
       this.merchant.kyc.documents = [];
 
-      let requestParams = {
-        files: formData,
-        leadId: this.getShortLeadInfo.id,
-        documentId: documentDetails.id,
-      };
-      this.FEED_HAND_OVER_TO_SAT_DOCUMENT(requestParams)
-        .then((response) => {
-          // this.$emit(
-          //   "emitAjaxLoadShortLeadInfo",
-          //   "hotReloadForDocumentsUploadValidation",
-          //   this.merchantTypeSelection
-          // );
-          // this.FETCH_SHORT_LEAD_DATA(this.getShortLeadInfo.id);
-          // this.ajaxLoadMarsData();
+      this.FEED_HAND_OVER_TO_SAT_DOCUMENT({ files: formData, leadId: this.getShortLeadInfo.id, documentId: documentDetails.id })
+        .then(() => {
           this.shortLeadInfo();
           this.$q.loading.hide();
         })
-        .catch((error) => {
+        .catch(() => {
           this.$q.loading.hide();
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            message: "Failed to upload document",
-            icon: "thumb_down",
-          });
+          this.$q.notify({ color: "negative", position: "bottom", message: "Failed to upload document", icon: "thumb_down" });
         });
     },
-    // marsRequiredFormattingofGST(val) {
-    //   if (val == "") {
-    //     this.merchant.businessInformation.gstId = null;
-    //   } else {
-    //     this.merchant.businessInformation.gstId = val;
-    //   }
-    // },
-    fnViewAttachedFileImage(attachedImageIndex) {
-      this.$refs.attachedImageViewer[attachedImageIndex].click();
+    fnViewAttachedFileImage() {
+      this.$refs.attachedImageViewer.click();
     },
     finalMerchant(request) {
-      if (this.$v.merchant.businessInformation.$error) {
-        this.$q.notify("Please review business information fields again.");
-      } else {
-        let key = this.merchant.salesInformation.institutionCode;
-        this.$q.localStorage.set("a_t", key);
-        let requestparams = {
-          url: {
-            id: this.getAllMarsData.merchantRefCode,
+      let terminalparams = {
+        terminal: { id: this.getAllMarsData.paymentDetails.terminalModeCode },
+        terminalparams: {
+          merchant: {
+            companyInformation: { applicationNumber: this.getAllMarsData.salesInformation.applicationNumber },
+            paymentDetails: request.paymentDetails,
           },
-
-          params: {
-            merchant: {
-              companyInformation: request.companyinformation,
-              businessInformation: request.businessInformation,
-              paymentDetails: request.paymentDetails,
-              bankInformation: request.bankInformation,
-            },
-          },
-        };
-        let terminalparams = {
-          terminal: {
-            id: this.getAllMarsData.paymentDetails.terminalModeCode,
-          },
-          terminalparams: {
-            merchant: {
-              companyInformation: {
-                applicationNumber:
-                  this.getAllMarsData.salesInformation.applicationNumber,
-              },
-              paymentDetails: request.paymentDetails,
-            },
-          },
-        };
-
-        //  let terman
-
-        this.CMS_EDIT_TERMINAL(terminalparams)
-          .then((response) => {
-            this.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "data",
-              icon: "thumb_up",
-              message: response.data.message,
-            });
-          })
-          .catch((error) => {
-            console.log(error);
-            this.$q.notify({
-              color: "negative",
-              position: "bottom",
-              icon: "thumb_down",
-              message: error.data.message,
-            });
-          });
-        this.CMS_EDIT_MERCHANT(requestparams)
-
-          .then((response) => {
-            this.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "data",
-              icon: "thumb_up",
-              message: response.data.message,
-            });
-
-            // var self = this;
-            // Object.keys(this.formData).forEach(function(key, index) {
-            //   self.formData[key] = "";
-            // });
-          })
-          .catch((error) => {
-            console.log(error.status);
-            if (error.status == 400) {
-              this.$q.notify({
-                color: "negative",
-                position: "bottom",
-                icon: "thumb_down",
-                message:
-                  error.data.errorDetails[1].field +
-                  "-" +
-                  error.data.errorDetails[1].issue,
-              });
-            } else {
-              this.$q.notify({
-                color: "negative",
-                position: "bottom",
-                icon: "thumb_down",
-                message: "Merchant Details" + error.data.message,
-              });
-            }
-            // if (error.data.hasOwnProperty("errorDetails")) {
-            //             let OThis = this;
-            //             _.map(error.data.errorDetails, actual => {
-            //               let splitted = actual.field.split("/");
-
-            //                 // let splittingErrorField = `OThis.$v.${splitted.join(
-            //                 //   "."
-            //                 // )}`;
-            //                 // let fieldErrorFound = eval(splittingErrorField);
-            //                 // fieldErrorFound.$model = "";
-            //                 // OThis.$set(OThis.error.tab, splitted[1], true);
-
-            //                 let generateErrorMessage = eval(
-            //                   `OThis.error.field.${splitted.join(".")}`
-            //                 );
-            //                 generateErrorMessage.alert = true;
-            //                 generateErrorMessage.issue = actual.issue;
-            //                 generateErrorMessage.value = actual.value;
-
-            //             });
-            //             this.$q.notify({
-            //               color: "negative",
-            //               position: "bottom",
-            //               message: `${error.data.message}`,
-            //               icon: "thumb_down"
-            //             });
-            //           } else {
-            //             this.$q.notify({
-            //               color: "negative",
-            //               position: "bottom",
-            //               message: `${error.data.message}`,
-            //               icon: "thumb_down"
-            //             });
-            //           }
-            // self.$q.loading.hide();
-          });
-
-        // .catch(() => {
-        //   // self.$q.loading.hide();
-        // });
-
-        console.log(
-          "final submit to mars",
-          requestparams.params.merchant.salesInformation.institutionCode
-        );
-      }
-    },
-    finalFormSubmit(request) {
-      let key = this.merchant.salesInformation.institutionCode;
-      this.$q.localStorage.set("a_t", key);
-      let requestparams = {
-        url: {
-          id: this.getAllMarsData.merchantRefCode,
-          //  code:this.getAllMarsData.salesInformation.institutionCode
         },
+      };
 
+      this.CMS_EDIT_TERMINAL(terminalparams)
+        .then((response) => {
+          this.$q.notify({ color: "positive", position: "bottom", icon: "thumb_up", message: response.data.message });
+        })
+        .catch((error) => {
+          this.$q.notify({ color: "negative", position: "bottom", icon: "thumb_down", message: error.data.message });
+        });
+
+      let requestparams = {
+        url: { id: this.getAllMarsData.merchantRefCode },
         params: {
           merchant: {
-            companyInformation: {
-              applicationNumber:
-                this.getAllMarsData.salesInformation.applicationNumber,
-            },
+            companyInformation: request.companyinformation,
+            businessInformation: request.businessInformation,
+            paymentDetails: request.paymentDetails,
+            bankInformation: request.bankInformation,
+          },
+        },
+      };
+
+      this.CMS_EDIT_MERCHANT(requestparams)
+        .then((response) => {
+          this.$q.notify({ color: "positive", position: "bottom", icon: "thumb_up", message: response.data.message });
+        })
+        .catch((error) => {
+          this.$q.notify({ color: "negative", position: "bottom", icon: "thumb_down", message: error.data.message });
+        });
+    },
+    finalFormSubmit(request) {
+      let requestparams = {
+        url: { id: this.getAllMarsData.merchantRefCode },
+        params: {
+          merchant: {
+            companyInformation: { applicationNumber: this.getAllMarsData.salesInformation.applicationNumber },
             mdrPlan: request.mdrPlan,
           },
         },
       };
 
       this.CMS_EDIT_MDR(requestparams)
-
         .then((response) => {
-          this.$q.notify({
-            color: "positive",
-            position: "bottom",
-            message: "data",
-            icon: "thumb_up",
-            message: response.data.message,
-          });
+          this.$q.notify({ color: "positive", position: "bottom", icon: "thumb_up", message: response.data.message });
         })
         .catch((error) => {
-          console.log(error);
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            icon: "thumb_down",
-            message: error.data.message,
-          });
-          // var self = this;
-          // Object.keys(this.formData).forEach(function(key, index) {
-          //   self.formData[key] = "";
-          // });
+          this.$q.notify({ color: "negative", position: "bottom", icon: "thumb_down", message: error.data.message });
         });
-      console.log("final submit to mars", requestparams.url);
     },
     finalFormSubmitKyc(request) {
-      // if (this.merchant.kyc.remarks == "") {
-      //   this.$q.notify("Please review the KYC Remarks fields again.");
-      // } else {
-      this.dataCopy = this.getAllMarsData;
-      console.log(
-        "DATA COPY-------------------->" + JSON.stringify(this.dataCopy)
-      );
-      this.dataCopy.businessInformation.gstId =
-        request.businessInformation.gstId;
-      this.dataCopy.companyInformation.legalName =
-        request.companyinformation.legalName;
-      this.dataCopy.companyInformation.dbaName =
-        request.companyinformation.dbaName;
-      this.dataCopy.companyInformation.contactName =
-        request.companyinformation.contactName;
-      this.dataCopy.companyInformation.registeredAddress =
-        request.companyinformation.registeredAddress;
-      this.dataCopy.companyInformation.registeredCityName =
-        request.companyinformation.registeredCityName;
-      this.dataCopy.companyInformation.registeredStateName =
-        request.companyinformation.registeredStateName;
-      this.dataCopy.companyInformation.registeredPin =
-        request.companyinformation.registeredPin;
-      this.dataCopy.companyInformation.contactMobile =
-        request.companyinformation.contactMobile;
-      this.dataCopy.companyInformation.contactEmail =
-        request.companyinformation.contactEmail;
-      this.dataCopy.companyInformation.statementEmail =
-        request.companyinformation.statementEmail;
-      this.dataCopy.companyInformation.businessNature =
-        request.companyinformation.businessNature;
+      this.dataCopy = _.cloneDeep(this.getAllMarsData);
+      this.dataCopy.businessInformation.gstId = request.businessInformation.gstId;
+      this.dataCopy.companyInformation.legalName = request.companyinformation.legalName;
+      this.dataCopy.companyInformation.dbaName = request.companyinformation.dbaName;
+      this.dataCopy.companyInformation.contactName = request.companyinformation.contactName;
+      this.dataCopy.companyInformation.registeredAddress = request.companyinformation.registeredAddress;
+      this.dataCopy.companyInformation.registeredCityName = request.companyinformation.registeredCityName;
+      this.dataCopy.companyInformation.registeredStateName = request.companyinformation.registeredStateName;
+      this.dataCopy.companyInformation.registeredPin = request.companyinformation.registeredPin;
+      this.dataCopy.companyInformation.contactMobile = request.companyinformation.contactMobile;
+      this.dataCopy.companyInformation.contactEmail = request.companyinformation.contactEmail;
+      this.dataCopy.companyInformation.statementEmail = request.companyinformation.statementEmail;
+      this.dataCopy.companyInformation.businessNature = request.companyinformation.businessNature;
       this.dataCopy.companyInformation.pan = request.companyinformation.pan;
-      this.dataCopy.bankInformation.bankDetails.ifsc =
-        request.bankInformation.bankDetails.ifsc;
-      this.dataCopy.bankInformation.bankDetails.bankName =
-        request.bankInformation.bankDetails.bankName;
-      this.dataCopy.bankInformation.bankDetails.paymentMode =
-        request.bankInformation.bankDetails.paymentMode;
-      this.dataCopy.bankInformation.bankDetails.accountType =
-        request.bankInformation.bankDetails.accountType;
-      this.dataCopy.bankInformation.bankDetails.accountNumber =
-        request.bankInformation.bankDetails.accountNumber;
-      this.dataCopy.mdrPlan.domesticDebitUpTo2000.fixed =
-        request.mdrPlan.domesticDebitUpTo2000.fixed;
-      this.dataCopy.mdrPlan.domesticDebitUpTo2000.percentage =
-        request.mdrPlan.domesticDebitUpTo2000.percentage;
-      this.dataCopy.mdrPlan.domesticDebitUpTo2000.minimum =
-        request.mdrPlan.domesticDebitUpTo2000.minimum;
-      this.dataCopy.mdrPlan.domesticDebitAbove2000.fixed =
-        request.mdrPlan.domesticDebitAbove2000.fixed;
-      this.dataCopy.mdrPlan.domesticDebitAbove2000.percentage =
-        request.mdrPlan.domesticDebitAbove2000.percentage;
-      this.dataCopy.mdrPlan.domesticDebitAbove2000.minimum =
-        request.mdrPlan.domesticDebitAbove2000.minimum;
-      this.dataCopy.mdrPlan.standardOrClassic.fixed =
-        request.mdrPlan.standardOrClassic.fixed;
-      this.dataCopy.mdrPlan.standardOrClassic.percentage =
-        request.mdrPlan.standardOrClassic.percentage;
-      this.dataCopy.mdrPlan.standardOrClassic.minimum =
-        request.mdrPlan.standardOrClassic.minimum;
-      this.dataCopy.mdrPlan.premiumOrPlatinum.fixed =
-        request.mdrPlan.premiumOrPlatinum.fixed;
-      this.dataCopy.mdrPlan.premiumOrPlatinum.percentage =
-        request.mdrPlan.premiumOrPlatinum.percentage;
-      this.dataCopy.mdrPlan.premiumOrPlatinum.minimum =
-        request.mdrPlan.premiumOrPlatinum.minimum;
-      this.dataCopy.mdrPlan.superPremiumOrSignature.fixed =
-        request.mdrPlan.superPremiumOrSignature.fixed;
-      this.dataCopy.mdrPlan.superPremiumOrSignature.percentage =
-        request.mdrPlan.superPremiumOrSignature.percentage;
-      this.dataCopy.mdrPlan.superPremiumOrSignature.minimum =
-        request.mdrPlan.superPremiumOrSignature.minimum;
-      this.dataCopy.mdrPlan.commercialOrCorporate.fixed =
-        request.mdrPlan.commercialOrCorporate.fixed;
-      this.dataCopy.mdrPlan.commercialOrCorporate.percentage =
-        request.mdrPlan.commercialOrCorporate.percentage;
-      this.dataCopy.mdrPlan.commercialOrCorporate.minimum =
-        request.mdrPlan.commercialOrCorporate.minimum;
-      this.dataCopy.mdrPlan.internationalDebitCard.fixed =
-        request.mdrPlan.internationalDebitCard.fixed;
-      this.dataCopy.mdrPlan.internationalDebitCard.percentage =
-        request.mdrPlan.internationalDebitCard.percentage;
-      this.dataCopy.mdrPlan.internationalDebitCard.minimum =
-        request.mdrPlan.internationalDebitCard.minimum;
-      this.dataCopy.mdrPlan.internationalCreditCard.fixed =
-        request.mdrPlan.internationalCreditCard.fixed;
-      this.dataCopy.mdrPlan.internationalCreditCard.percentage =
-        request.mdrPlan.internationalCreditCard.percentage;
-      this.dataCopy.mdrPlan.internationalCreditCard.minimum =
-        request.mdrPlan.internationalCreditCard.minimum;
-      this.dataCopy.mdrPlan.onus.fixed = request.mdrPlan.onus.fixed;
-      this.dataCopy.mdrPlan.onus.percentage = request.mdrPlan.onus.percentage;
-      this.dataCopy.mdrPlan.onus.minimum = request.mdrPlan.onus.minimum;
-      this.dataCopy.mdrPlan.diners.fixed = request.mdrPlan.diners.fixed;
-      this.dataCopy.mdrPlan.diners.percentage =
-        request.mdrPlan.diners.percentage;
-      this.dataCopy.mdrPlan.diners.minimum = request.mdrPlan.diners.minimum;
-      this.dataCopy.mdrPlan.masterPass.fixed = request.mdrPlan.masterPass.fixed;
-      this.dataCopy.mdrPlan.masterPass.percentage =
-        request.mdrPlan.masterPass.percentage;
-      this.dataCopy.mdrPlan.masterPass.minimum =
-        request.mdrPlan.masterPass.minimum;
-      this.dataCopy.mdrPlan.cashAtPos.fixed = request.mdrPlan.cashAtPos.fixed;
-      this.dataCopy.mdrPlan.cashAtPos.percentage =
-        request.mdrPlan.cashAtPos.percentage;
-      this.dataCopy.mdrPlan.cashAtPos.minimum =
-        request.mdrPlan.cashAtPos.minimum;
-      this.dataCopy.mdrPlan.convenientFee.fixed =
-        request.mdrPlan.convenientFee.fixed;
-      this.dataCopy.mdrPlan.convenientFee.percentage =
-        request.mdrPlan.convenientFee.percentage;
-      this.dataCopy.mdrPlan.convenientFee.minimum =
-        request.mdrPlan.convenientFee.minimum;
-      this.dataCopy.paymentDetails.rentalPlanCode =
-        request.paymentDetails.rentalPlanCode;
-      this.dataCopy.paymentDetails.settlementType =
-        request.paymentDetails.settlementType;
-      this.dataCopy.paymentDetails.preAuth = request.paymentDetails.preAuth;
-      this.dataCopy.paymentDetails.cashAtPosEnabled =
-        request.paymentDetails.cashAtPosEnabled;
-      this.dataCopy.paymentDetails.intlCardAcceptance =
-        request.paymentDetails.intlCardAcceptance;
-      this.dataCopy.paymentDetails.tipEnabled =
-        request.paymentDetails.tipEnabled;
-      this.dataCopy.leadInformation.leadName =
-        request.companyinformation.legalName;
-      this.dataCopy.leadInformation.contactName =
-        request.companyinformation.contactName;
-      this.dataCopy.leadInformation.leadAddress =
-        request.companyinformation.registeredAddress;
-      this.dataCopy.leadInformation.city =
-        request.companyinformation.registeredCityName;
-      this.dataCopy.leadInformation.state =
-        request.companyinformation.registeredStateName;
-      this.dataCopy.leadInformation.pincode =
-        request.companyinformation.registeredPin;
-      this.dataCopy.leadInformation.contactNumber =
-        request.companyinformation.contactMobile;
-      console.log(
-        "DATA COPY----------------------->" + JSON.stringify(this.dataCopy)
-      );
-      let key = this.merchant.salesInformation.institutionCode;
-      this.$q.localStorage.set("a_t", key);
+      this.dataCopy.bankInformation.bankDetails.ifsc = request.bankInformation.bankDetails.ifsc;
+      this.dataCopy.bankInformation.bankDetails.bankName = request.bankInformation.bankDetails.bankName;
+      this.dataCopy.bankInformation.bankDetails.paymentMode = request.bankInformation.bankDetails.paymentMode;
+      this.dataCopy.bankInformation.bankDetails.accountType = request.bankInformation.bankDetails.accountType;
+      this.dataCopy.bankInformation.bankDetails.accountNumber = request.bankInformation.bankDetails.accountNumber;
+      this.dataCopy.mdrPlan = _.cloneDeep(request.mdrPlan);
+      this.dataCopy.paymentDetails = _.cloneDeep(request.paymentDetails);
+
+      this.dataCopy.leadInformation.leadName = request.companyinformation.legalName;
+      this.dataCopy.leadInformation.contactName = request.companyinformation.contactName;
+      this.dataCopy.leadInformation.leadAddress = request.companyinformation.registeredAddress;
+      this.dataCopy.leadInformation.city = request.companyinformation.registeredCityName;
+      this.dataCopy.leadInformation.state = request.companyinformation.registeredStateName;
+      this.dataCopy.leadInformation.pincode = request.companyinformation.registeredPin;
+      this.dataCopy.leadInformation.contactNumber = request.companyinformation.contactMobile;
+
       let merchantrequestparams = {
         url: {
           id: this.getImplementedQueue.mid,
           leadId: this.getImplementedQueue.leadInformation.id,
         },
-
         params: {
           merchant: {
-            // leadId:"708",
-            // remarks: "",
-            partnerInformation: request.partnerInformation,
-            additionalInfo: request.additionalInfo,
-            customIncentiveRates: request.customIncentiveRates,
-            salesInformation: request.salesInformation,
             companyInformation: request.companyinformation,
-            businessInformation: request.businessInformation,
+            businessInformation: { ...request.businessInformation, gstId: this.merchant.businessInformation.gstId },
             paymentDetails: request.paymentDetails,
             bankInformation: request.bankInformation,
             mdrPlan: request.mdrPlan,
@@ -3726,471 +2922,148 @@ export default {
           },
         },
       };
-      let a = {
-        ...merchantrequestparams.params.merchant.businessInformation,
-      };
-      merchantrequestparams.params.merchant.businessInformation = {
-        ...a,
-        gstId: this.merchant.businessInformation.gstId,
-      };
 
-      console.log("................." + this.formdata.sample);
       this.CMS_EDIT_MERCHANT(merchantrequestparams)
-        .then((response) => {
+        .then(() => {
           this.terinalUpdate();
-          this.$q.notify({
-            color: "positive",
-            position: "bottom",
-            message: "data",
-            icon: "thumb_up",
-            message: "Merchant Details successfully Updated",
-          });
-          this.MARS_FINAL_SUBMIT_INTERNAL({
-            merchant: this.dataCopy,
-            action: 1,
-          })
-            .then((response) => {
+          this.$q.notify({ color: "positive", position: "bottom", icon: "thumb_up", message: "Merchant Details successfully Updated" });
+          this.MARS_FINAL_SUBMIT_INTERNAL({ merchant: this.dataCopy, action: 1 })
+            .then(() => {
               this.$q.loading.hide();
-              this.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: "Saved successfully",
-                icon: "thumb_up",
-              });
+              this.$q.notify({ color: "positive", position: "bottom", message: "Saved successfully", icon: "thumb_up" });
             })
             .catch((error) => {
-              //  this.MARS_DATA_SUBMIT_INTERNAL_CHANGEMANAGEMENT(merchantrequestparams)
-              console.log(error.status);
-
-              this.$q.notify({
-                color: "negative",
-                position: "bottom",
-                icon: "thumb_down",
-                message: error.data.message,
-              });
+              this.$q.notify({ color: "negative", position: "bottom", icon: "thumb_down", message: error.data.message });
               this.$q.loading.hide();
             });
         })
         .catch((error) => {
-          //  this.MARS_DATA_SUBMIT_INTERNAL_CHANGEMANAGEMENT(merchantrequestparams)
-          console.log(error.status);
-
-          this.$q.notify({
-            color: "negative",
-            position: "bottom",
-            icon: "thumb_down",
-            message: error.data.message,
-          });
+          this.$q.notify({ color: "negative", position: "bottom", icon: "thumb_down", message: error.data.message });
           this.$q.loading.hide();
         });
     },
     terinalUpdate() {
-      if (
-        this.merchant.paymentDetails.rentalPlanCode !=
-        this.getAllMarsData.paymentDetails.rentalPlanCode
-      ) {
-        this.merchant.paymentDetails.remarks = "Rental Plan updated";
-      }
-      if (
-        this.merchant.paymentDetails.settlementType !=
-        this.getAllMarsData.paymentDetails.settlementType
-      ) {
-        this.merchant.paymentDetails.remarks = "Settlement Type updated";
-      }
-      if (
-        this.merchant.paymentDetails.tipEnabled !=
-        this.getAllMarsData.paymentDetails.tipEnabled
-      ) {
-        this.merchant.paymentDetails.remarks = "Tip updated";
-      }
-      if (
-        this.merchant.paymentDetails.cashAtPosEnabled !=
-        this.getAllMarsData.paymentDetails.cashAtPosEnabled
-      ) {
-        this.merchant.paymentDetails.remarks = "Cash@Pos updated";
-      }
-      if (
-        this.merchant.paymentDetails.preAuth !=
-        this.getAllMarsData.paymentDetails.preAuth
-      ) {
-        this.merchant.paymentDetails.remarks = "PreAuth updated";
-      }
-      if (
-        this.merchant.paymentDetails.intlCardAcceptance !=
-        this.getAllMarsData.paymentDetails.intlCardAcceptance
-      ) {
-        this.merchant.paymentDetails.remarks = "Intlcard Acceptance updated";
-      }
-      if (
-        this.merchant.paymentDetails.rentalPlanCode !=
-          this.getAllMarsData.paymentDetails.rentalPlanCode &&
-        this.merchant.paymentDetails.settlementType !=
-          this.getAllMarsData.paymentDetails.settlementType &&
-        this.merchant.paymentDetails.tipEnabled !=
-          this.getAllMarsData.paymentDetails.tipEnabled &&
-        this.merchant.paymentDetails.cashAtPosEnabled !=
-          this.getAllMarsData.paymentDetails.cashAtPosEnabled &&
-        this.merchant.paymentDetails.intlCardAcceptance !=
-          this.getAllMarsData.paymentDetails.intlCardAcceptance &&
-        this.merchant.paymentDetails.preAuth !=
-          this.getAllMarsData.paymentDetails.preAuth
-      ) {
-        this.merchant.paymentDetails.remarks =
-          "Rental plan,settlement Type,cash@pos,Tip,intlecard,PreAuth";
-      }
+      if (this.merchant.paymentDetails.rentalPlanCode != this.getAllMarsData.paymentDetails.rentalPlanCode) this.merchant.paymentDetails.remarks = "Rental Plan updated";
+      if (this.merchant.paymentDetails.settlementType != this.getAllMarsData.paymentDetails.settlementType) this.merchant.paymentDetails.remarks = "Settlement Type updated";
+      if (this.merchant.paymentDetails.tipEnabled != this.getAllMarsData.paymentDetails.tipEnabled) this.merchant.paymentDetails.remarks = "Tip updated";
+      if (this.merchant.paymentDetails.cashAtPosEnabled != this.getAllMarsData.paymentDetails.cashAtPosEnabled) this.merchant.paymentDetails.remarks = "Cash@Pos updated";
+      if (this.merchant.paymentDetails.preAuth != this.getAllMarsData.paymentDetails.preAuth) this.merchant.paymentDetails.remarks = "PreAuth updated";
+      if (this.merchant.paymentDetails.intlCardAcceptance != this.getAllMarsData.paymentDetails.intlCardAcceptance) this.merchant.paymentDetails.remarks = "Intlcard Acceptance updated";
 
-      if (
-        this.merchant.paymentDetails.settlementType !=
-          this.getAllMarsData.paymentDetails.settlementType &&
-        this.merchant.paymentDetails.rentalPlanCode !=
-          this.getAllMarsData.paymentDetails.rentalPlanCode
-      ) {
-        this.merchant.paymentDetails.remarks = "SettlementType and Rental plan";
-      }
-      if (
-        this.merchant.paymentDetails.rentalPlanCode !=
-          this.getAllMarsData.paymentDetails.rentalPlanCode &&
-        this.merchant.paymentDetails.settlementType !=
-          this.getAllMarsData.paymentDetails.settlementType &&
-        this.merchant.paymentDetails.tipEnabled !=
-          this.getAllMarsData.paymentDetails.tipEnabled &&
-        this.merchant.paymentDetails.cashAtPosEnabled !=
-          this.getAllMarsData.paymentDetails.cashAtPosEnabled &&
-        this.merchant.paymentDetails.intlCardAcceptance !=
-          this.getAllMarsData.paymentDetails.intlCardAcceptance &&
-        this.merchant.paymentDetails.preAuth !=
-          this.getAllMarsData.paymentDetails.preAuth
-      ) {
-        this.merchant.paymentDetails.remarks =
-          "Rental plan,settlement Type,cash@pos,Tip,intlecard,PreAuth";
-      }
-      if (
-        this.merchant.paymentDetails.rentalPlanCode !=
-          this.getAllMarsData.paymentDetails.rentalPlanCode &&
-        this.merchant.paymentDetails.settlementType !=
-          this.getAllMarsData.paymentDetails.settlementType &&
-        this.merchant.paymentDetails.cashAtPosEnabled !=
-          this.getAllMarsData.paymentDetails.cashAtPosEnabled &&
-        this.merchant.paymentDetails.intlCardAcceptance !=
-          this.getAllMarsData.paymentDetails.intlCardAcceptance &&
-        this.merchant.paymentDetails.preAuth !=
-          this.getAllMarsData.paymentDetails.preAuth
-      ) {
-        this.merchant.paymentDetails.remarks =
-          "Rental plan,cash@pos,Settlement Type,intlecard,PreAuth";
-      }
-      if (
-        this.merchant.paymentDetails.rentalPlanCode !=
-          this.getAllMarsData.paymentDetails.rentalPlanCode &&
-        this.merchant.paymentDetails.settlementType !=
-          this.getAllMarsData.paymentDetails.settlementType &&
-        this.merchant.paymentDetails.tipEnabled !=
-          this.getAllMarsData.paymentDetails.tipEnabled &&
-        this.merchant.paymentDetails.intlCardAcceptance !=
-          this.getAllMarsData.paymentDetails.intlCardAcceptance &&
-        this.merchant.paymentDetails.preAuth !=
-          this.getAllMarsData.paymentDetails.preAuth
-      ) {
-        this.merchant.paymentDetails.remarks =
-          "Rental plan,tip,Settlement Type,intlecard,PreAuth";
-      }
-
-      if (
-        this.merchant.paymentDetails.rentalPlanCode !=
-          this.getAllMarsData.paymentDetails.rentalPlanCode &&
-        this.merchant.paymentDetails.tipEnabled !=
-          this.getAllMarsData.paymentDetails.tipEnabled &&
-        this.merchant.paymentDetails.cashAtPosEnabled !=
-          this.getAllMarsData.paymentDetails.cashAtPosEnabled &&
-        this.merchant.paymentDetails.intlCardAcceptance !=
-          this.getAllMarsData.paymentDetails.intlCardAcceptance &&
-        this.merchant.paymentDetails.preAuth !=
-          this.getAllMarsData.paymentDetails.preAuth
-      ) {
-        this.merchant.paymentDetails.remarks =
-          "Rental plan,cash@pos,Tip,intlecard,PreAuth";
-      }
-      if (
-        this.merchant.paymentDetails.rentalPlanCode !=
-          this.getAllMarsData.paymentDetails.rentalPlanCode &&
-        this.merchant.paymentDetails.tipEnabled !=
-          this.getAllMarsData.paymentDetails.tipEnabled &&
-        this.merchant.paymentDetails.cashAtPosEnabled !=
-          this.getAllMarsData.paymentDetails.cashAtPosEnabled &&
-        this.merchant.paymentDetails.intlCardAcceptance !=
-          this.getAllMarsData.paymentDetails.intlCardAcceptance
-      ) {
-        this.merchant.paymentDetails.remarks =
-          "Rental plan,cash@pos,Tip,intlecard";
-      }
-
-      let key = this.merchant.salesInformation.institutionCode;
-      this.$q.localStorage.set("a_t", key);
       for (var i = 0; i < this.formdata.tid.length; i++) {
-        this.formdata.sample = this.formdata.tid[i];
         let terminalparams = {
-          terminal: {
-            id: this.formdata.sample,
-          },
+          terminal: { id: this.formdata.tid[i] },
           terminalparams: {
             merchant: {
-              companyInformation: {},
+              companyInformation: { applicationNumber: this.forminfo.applicationNumber },
               paymentDetails: this.merchant.paymentDetails,
             },
           },
         };
-        let a = {
-          ...terminalparams.terminalparams.merchant.companyInformation,
-        };
-        terminalparams.terminalparams.merchant.companyInformation = {
-          ...a,
-          applicationNumber: this.forminfo.applicationNumber,
-        };
         this.CMS_EDIT_TERMINAL(terminalparams)
-          .then((response) => {
+          .then(() => {
             this.CMS_STATUS_CHANGE(this.getImplementedQueue.leadInformation.id);
-            this.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "data",
-              icon: "thumb_up",
-              message: "Terminal Details Successfully Updated",
-            });
+            this.$q.notify({ color: "positive", position: "bottom", icon: "thumb_up", message: "Terminal Details Successfully Updated" });
             this.$router.push("/sat/change/management");
           })
-
           .catch((error) => {
-            console.log(error);
-            this.$q.notify({
-              color: "negative",
-              position: "bottom",
-              icon: "thumb_down",
-              message: error.data.message,
-            });
+            this.$q.notify({ color: "negative", position: "bottom", icon: "thumb_down", message: error.data.message });
           });
       }
     },
     fetchAllDropdownValuesFromMARSapi() {
-      // let key = this.merchant.salesInformation.institutionCode
-      //     let variable = localStorage.getItem("aa_t")
-      //     let v = variable.lastIndexOf('|')
-      //     let res = variable.substring(v+1)
-
-      // console.log("ram _"+res);
-      // this.merchant.salesInformation.institionCode=this.merchant.companyInformation.mcc;
-      // this.$q.localStorage.set("aa_t", key);
-      //  console.log("Before Set _"+res)
       let self = this;
-      /* API call to fetch regions */
-      self
-        .CITY_FROM_MARS()
-        .then(() => {
-          self.cityOptions = [];
-          self.cityFromMars.items.map((oo) => {
-            self.cityOptions.push({ label: oo.name, value: oo.code });
-          });
-        }).then(() => {
-          /* API call to fetch rental plan */
-          return self.RENTAL_PLAN_FROM_MARS().then((response) => {
-            self.rentalPlanSet = [];
-            self.rentalPlanFromMars.items.map((oo) => {
-              self.rentalPlanSet.push({ label: oo.name, value: oo.code });
-            });
-            // self.rentalPlanSet = rentalPlan;
-          });
-        }).then(() => {
-          /* API call to fetch state */
-          return self.STATE_FROM_MARS().then((response) => {
-            self.stateOptions = [];
-            self.stateFromMars.items.map((oo) => {
-              self.stateOptions.push({ label: oo.name, value: oo.code });
-            });
-            // self.stateOptions = stateArr;
-          });
+      self.CITY_FROM_MARS().then(() => {
+        self.cityOptions = self.cityFromMars.items.map(oo => ({ label: oo.name, value: oo.code }));
+      }).then(() => {
+        return self.RENTAL_PLAN_FROM_MARS().then(() => {
+          self.rentalPlanSet = self.rentalPlanFromMars.items.map(oo => ({ label: oo.name, value: oo.code }));
         });
+      }).then(() => {
+        return self.STATE_FROM_MARS().then(() => {
+          self.stateOptions = self.stateFromMars.items.map(oo => ({ label: oo.name, value: oo.code }));
+        });
+      });
     },
     marsInfo() {
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Fetching data ..",
-      });
-      // this.IMPLEMENTED_QUEUE(this.$route.params.id)
+      this.$q.loading.show({ spinnerColor: "purple-9", message: "Fetching data .." });
       this.FETCH_MARS_DATA(this.getImplementedQueue.leadInformation.id)
-        // this.FETCH_SHORT_LEAD_DATA(this.getImplementedQueue.leadInformation.id)
-        .then((response) => {
+        .then(() => {
           this.shortLeadInfo();
-
-          (this.formdata.plan =
-            this.getImplementedQueue.leadInformation.plan.id),
-            (this.formdata.planCode =
-              this.getImplementedQueue.leadInformation.plan.planName);
-          this.formdata.contactName =
-            this.getImplementedQueue.leadInformation.contactName;
-          this.formdata.contactNumber =
-            this.getImplementedQueue.leadInformation.contactName;
-          this.formdata.alternateContactNumber =
-            this.getImplementedQueue.leadInformation.alternateContactNumber;
+          this.formdata.plan = this.getImplementedQueue.leadInformation.plan.id;
+          this.formdata.planCode = this.getImplementedQueue.leadInformation.plan.planName;
+          this.formdata.contactName = this.getImplementedQueue.leadInformation.contactName;
+          this.formdata.contactNumber = this.getImplementedQueue.leadInformation.contactName;
+          this.formdata.alternateContactNumber = this.getImplementedQueue.leadInformation.alternateContactNumber;
           this.formdata.city = this.getImplementedQueue.leadInformation.city;
-          this.formdata.device =
-            this.getImplementedQueue.leadInformation.device;
-          this.formdata.deviceCount =
-            this.getImplementedQueue.leadInformation.deviceCount;
-          this.formdata.leadAddress =
-            this.getImplementedQueue.leadInformation.leadAddress;
-          this.formdata.latitude =
-            this.getImplementedQueue.leadInformation.latitude;
-          this.formdata.longitude =
-            this.getImplementedQueue.leadInformation.longitude;
+          this.formdata.device = this.getImplementedQueue.leadInformation.device;
+          this.formdata.deviceCount = this.getImplementedQueue.leadInformation.deviceCount;
+          this.formdata.leadAddress = this.getImplementedQueue.leadInformation.leadAddress;
+          this.formdata.latitude = this.getImplementedQueue.leadInformation.latitude;
+          this.formdata.longitude = this.getImplementedQueue.leadInformation.longitude;
           this.formdata.state = this.getImplementedQueue.leadInformation.state;
           this.formdata.kyc = this.getImplementedQueue.leadInformation.kyc;
-          this.formdata.verifiedBanksubventionStatus =
-            this.getImplementedQueue.leadInformation.verifiedBanksubventionStatus;
-          this.formdata.reason =
-            this.getImplementedQueue.leadInformation.reason;
-          this.formdata.merchantCategory =
-            this.getImplementedQueue.leadInformation.merchantCategory;
-          this.merchant.companyinformation.pan =
-            this.getAllMarsData.companyInformation.pan;
-          this.merchant.companyinformation.contactPhone =
-            this.getAllMarsData.companyInformation.contactPhone;
-          this.merchant.companyinformation.legalName =
-            this.getAllMarsData.companyInformation.legalName;
-          this.merchant.companyinformation.dbaName =
-            this.getAllMarsData.companyInformation.dbaName;
-          this.merchant.companyinformation.registeredAddress =
-            this.getAllMarsData.companyInformation.registeredAddress;
-          this.merchant.companyinformation.registeredPin =
-            this.getAllMarsData.companyInformation.registeredPin;
-          this.merchant.companyinformation.registeredCityRefCode =
-            this.getAllMarsData.companyInformation.registeredCityRefCode;
-          this.merchant.companyinformation.registeredCityName =
-            this.getAllMarsData.companyInformation.registeredCityName;
-          this.merchant.companyinformation.registeredStateRefCode =
-            this.getAllMarsData.companyInformation.registeredStateRefCode;
-          this.merchant.companyinformation.registeredStateName =
-            this.getAllMarsData.companyInformation.registeredStateName;
-          this.merchant.companyinformation.contactName =
-            this.getAllMarsData.companyInformation.contactName;
-          this.merchant.companyinformation.statementEmail =
-            this.getAllMarsData.companyInformation.statementEmail;
-          this.merchant.companyinformation.applicationNumber =
-            this.getAllMarsData.salesInformation.applicationNumber;
-          this.forminfo.applicationNumber =
-            this.getAllMarsData.salesInformation.applicationNumber;
-          this.merchant.companyinformation.contactEmail =
-            this.getAllMarsData.companyInformation.contactEmail;
-          this.merchant.companyinformation.contactMobile =
-            this.getAllMarsData.leadInformation.contactNumber;
-          this.merchant.companyinformation.businessNature =
-            this.getAllMarsData.companyInformation.businessNature;
-          this.merchant.bankInformation.bankDetails.accountNumber =
-            this.getAllMarsData.bankInformation.bankDetails.accountNumber;
-          this.merchant.bankInformation.bankDetails.ifsc =
-            this.getAllMarsData.bankInformation.bankDetails.ifsc;
-          this.merchant.bankInformation.bankDetails.bankName =
-            this.getAllMarsData.bankInformation.bankDetails.bankName;
-          this.merchant.bankInformation.bankDetails.paymentMode =
-            this.getAllMarsData.bankInformation.bankDetails.paymentMode;
-          this.merchant.bankInformation.bankDetails.accountType =
-            this.getAllMarsData.bankInformation.bankDetails.accountType;
-          this.merchant.paymentDetails.settlementType =
-            this.getAllMarsData.paymentDetails.settlementType;
-          this.merchant.paymentDetails.tipEnabled =
-            this.getAllMarsData.paymentDetails.tipEnabled;
-          this.merchant.paymentDetails.cashAtPosEnabled =
-            this.getAllMarsData.paymentDetails.cashAtPosEnabled;
-          this.merchant.paymentDetails.intlCardAcceptance =
-            this.getAllMarsData.paymentDetails.intlCardAcceptance;
-          this.merchant.paymentDetails.preAuth =
-            this.getAllMarsData.paymentDetails.preAuth;
-          this.merchant.paymentDetails.rentalPlanCode =
-            this.getAllMarsData.paymentDetails.rentalPlanCode;
-          this.merchant.salesInformation.institutionCode =
-            this.getAllMarsData.salesInformation.institutionCode;
+          this.formdata.verifiedBanksubventionStatus = this.getImplementedQueue.leadInformation.verifiedBanksubventionStatus;
+          this.formdata.reason = this.getImplementedQueue.leadInformation.reason;
+          this.formdata.merchantCategory = this.getImplementedQueue.leadInformation.merchantCategory;
+          this.merchant.companyinformation.pan = this.getAllMarsData.companyInformation.pan;
+          this.merchant.companyinformation.contactPhone = this.getAllMarsData.companyInformation.contactPhone;
+          this.merchant.companyinformation.legalName = this.getAllMarsData.companyInformation.legalName;
+          this.merchant.companyinformation.dbaName = this.getAllMarsData.companyInformation.dbaName;
+          this.merchant.companyinformation.registeredAddress = this.getAllMarsData.companyInformation.registeredAddress;
+          this.merchant.companyinformation.registeredPin = this.getAllMarsData.companyInformation.registeredPin;
+          this.merchant.companyinformation.registeredCityRefCode = this.getAllMarsData.companyInformation.registeredCityRefCode;
+          this.merchant.companyinformation.registeredCityName = this.getAllMarsData.companyInformation.registeredCityName;
+          this.merchant.companyinformation.registeredStateRefCode = this.getAllMarsData.companyInformation.registeredStateRefCode;
+          this.merchant.companyinformation.registeredStateName = this.getAllMarsData.companyInformation.registeredStateName;
+          this.merchant.companyinformation.contactName = this.getAllMarsData.companyInformation.contactName;
+          this.merchant.companyinformation.statementEmail = this.getAllMarsData.companyInformation.statementEmail;
+          this.merchant.companyinformation.applicationNumber = this.getAllMarsData.salesInformation.applicationNumber;
+          this.forminfo.applicationNumber = this.getAllMarsData.salesInformation.applicationNumber;
+          this.merchant.companyinformation.contactEmail = this.getAllMarsData.companyInformation.contactEmail;
+          this.merchant.companyinformation.contactMobile = this.getAllMarsData.leadInformation.contactNumber;
+          this.merchant.companyinformation.businessNature = this.getAllMarsData.companyInformation.businessNature;
+          this.merchant.bankInformation.bankDetails.accountNumber = this.getAllMarsData.bankInformation.bankDetails.accountNumber;
+          this.merchant.bankInformation.bankDetails.ifsc = this.getAllMarsData.bankInformation.bankDetails.ifsc;
+          this.merchant.bankInformation.bankDetails.bankName = this.getAllMarsData.bankInformation.bankDetails.bankName;
+          this.merchant.bankInformation.bankDetails.paymentMode = this.getAllMarsData.bankInformation.bankDetails.paymentMode;
+          this.merchant.bankInformation.bankDetails.accountType = this.getAllMarsData.bankInformation.bankDetails.accountType;
+          this.merchant.paymentDetails.settlementType = this.getAllMarsData.paymentDetails.settlementType;
+          this.merchant.paymentDetails.tipEnabled = this.getAllMarsData.paymentDetails.tipEnabled;
+          this.merchant.paymentDetails.cashAtPosEnabled = this.getAllMarsData.paymentDetails.cashAtPosEnabled;
+          this.merchant.paymentDetails.intlCardAcceptance = this.getAllMarsData.paymentDetails.intlCardAcceptance;
+          this.merchant.paymentDetails.preAuth = this.getAllMarsData.paymentDetails.preAuth;
+          this.merchant.paymentDetails.rentalPlanCode = this.getAllMarsData.paymentDetails.rentalPlanCode;
+          this.merchant.salesInformation.institutionCode = this.getAllMarsData.salesInformation.institutionCode;
           this.$q.loading.hide();
         })
-        .catch(() => {
-          this.$q.loading.hide();
-        });
-      this.toggleAjaxLoadFilter = false;
+        .catch(() => { this.$q.loading.hide(); });
     },
     shortLeadInfo() {
-      // this.fetchAndCookDocuments();
       this.FETCH_SHORT_LEAD_DATA(this.getImplementedQueue.leadInformation.id);
       this.MidBasedList();
     },
     MidBasedList() {
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Fetching data ..",
-      });
+      this.$q.loading.show({ spinnerColor: "purple-9", message: "Fetching data .." });
       this.MIDBASEDLIST(this.getImplementedQueue.mid)
-        .then((response) => {
+        .then(() => {
           this.formdata.mid = this.getMidBasedList.tids;
           this.$q.loading.hide();
         })
-        .catch(() => {
-          this.$q.loading.hide();
-        });
-      this.toggleAjaxLoadFilter = false;
-    },
-    fetchAndCookDocuments() {
-      let self = this;
-      self.merchant.kyc.documents.push({
-        documentName: "Agreement",
-        documentType: this.getShortLeadInfo.merchantType.marsAgreementId,
-        documentImage: [
-          this.GLOBAL_FILE_FETCH_URL +
-            "/" +
-            this.getShortLeadInfo.applicationFile,
-        ],
-      });
-
-      Object.keys(this.getShortLeadInfo.leadDocuments).forEach(function (
-        key,
-        index
-      ) {
-        _.map(self.getShortLeadInfo.leadDocuments[key], function (oo) {
-          if (oo.uploadedDocuments.length > 0) {
-            let assumeArr = [];
-            _.map(oo.uploadedDocuments, function (doc) {
-              assumeArr.push(self.GLOBAL_FILE_FETCH_URL + "/" + doc.fileName);
-            });
-            self.merchant.kyc.documents.push({
-              documentName: oo.subDocumentType,
-              documentType: oo.marsDocumentId,
-              documentImage: assumeArr,
-            });
-          }
-        });
-      });
+        .catch(() => { this.$q.loading.hide(); });
     },
     populateBankDetails() {
       let self = this;
-      let ifscArr = [];
-      self
-        .IFSC_FROM_MARS(this.merchant.bankInformation.bankDetails.ifsc)
+      self.IFSC_FROM_MARS(this.merchant.bankInformation.bankDetails.ifsc)
         .then((response) => {
           if (response.status == 200) {
-            this.merchant.bankInformation.bankDetails.bankName =
-              self.ifscFromMars.bankName;
+            this.merchant.bankInformation.bankDetails.bankName = self.ifscFromMars.bankName;
           } else {
-            this.$q.notify({
-              color: "negative",
-              position: "bottom-left",
-              message: "Invalid IFSC code",
-              icon: "clear",
-            });
+            this.$q.notify({ color: "negative", position: "bottom-left", message: "Invalid IFSC code", icon: "clear" });
             this.merchant.bankInformation.bankDetails.ifsc = "";
             this.merchant.bankInformation.bankDetails.bankName = "";
           }
         });
-    },
-    /* IFSC bank search result */
-    residentStateSearch(terms, done) {
-      done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
     },
     registeredStateSelected(item) {
       if (item) {
@@ -4199,31 +3072,13 @@ export default {
       }
     },
     fnResidentStateSearch(val, update) {
-      if (val.length < 1) {
-        update(() => {
-          this.stateOptionsSearch = [];
-        });
-        return;
-      }
       update(() => {
-        this.stateOptionsSearch = this.COMMON_FILTER_FUNCTION(
-          this.stateOptions,
-          val
-        );
+        this.stateOptionsSearch = this.COMMON_FILTER_FUNCTION(this.stateOptions, val);
       });
     },
     fnResidentCitySearch(val, update) {
-      if (val.length < 3) {
-        update(() => {
-          this.cityOptionsSearch = [];
-        });
-        return;
-      }
       update(() => {
-        this.cityOptionsSearch = this.COMMON_FILTER_FUNCTION(
-          this.cityOptions,
-          val
-        );
+        this.cityOptionsSearch = this.COMMON_FILTER_FUNCTION(this.cityOptions, val);
       });
     },
     registeredCitySelected(item) {
@@ -4233,76 +3088,28 @@ export default {
       }
     },
     COMMON_FILTER_FUNCTION(arraySet, terms) {
-      return _.filter(arraySet, function (oo) {
-        return (
-          oo.label.toLowerCase().includes(terms.toLowerCase()) ||
-          oo.value.toString().includes(terms.toString())
-        );
+      return _.filter(arraySet, (oo) => {
+        return oo.label.toLowerCase().includes(terms.toLowerCase()) || oo.value.toString().includes(terms.toString());
       });
     },
-
     goBackToDocumentVerificationStage() {
       let formData = {
         leadId: this.$route.params.id,
-        defaultUrlValue:
-          this.getShortLeadInfo.leadStatus ==
-          this.$LEAD_STATUS_MARS_REFERRAL_BACK_DATA_ENTRY_PENDING
+        defaultUrlValue: this.getShortLeadInfo.leadStatus == this.$LEAD_STATUS_MARS_REFERRAL_BACK_DATA_ENTRY_PENDING
             ? this.$SAT_LEAD_VALIDATION_PROCEED_TO_DATA_ENTRY_WITH_REFERBACK
             : this.$SAT_LEAD_VALIDATION_APPROVE,
       };
 
-      this.$q
-        .dialog({
-          title: "Confirm",
-          message:
-            "Are you sure want to proceed to document verification stage?",
-          ok: "Continue",
-          cancel: "Cancel",
-        }).onOk(() => {
-          this.$q.loading.show({
-            delay: 0, // ms
-            spinnerColor: "purple-9",
-            message: "Processing ..",
-          });
-
+      this.$q.dialog({ title: "Confirm", message: "Are you sure want to proceed to document verification stage?", ok: "Continue", cancel: "Cancel" })
+        .onOk(() => {
+          this.$q.loading.show({ spinnerColor: "purple-9", message: "Processing .." });
           this.MOVE_BACK_DOCUMENT_VERIFICATION_STAGE(formData).then(() => {
             this.$router.push("/sat/lead/validation/" + this.$route.params.id);
             this.$q.loading.hide();
           });
-        }).onCancel((error) => {
-          this.$q.loading.hide();
         });
     },
     next1() {
-      let self = this;
-      self.merchant.kyc.documents.push({
-        documentName: "Agreement",
-        documentType: this.getShortLeadInfo.merchantType.marsAgreementId,
-        documentImage: [
-          this.GLOBAL_FILE_FETCH_URL +
-            "/" +
-            this.getShortLeadInfo.applicationFile,
-        ],
-      });
-
-      Object.keys(this.getShortLeadInfo.leadDocuments).forEach(function (
-        key,
-        index
-      ) {
-        _.map(self.getShortLeadInfo.leadDocuments[key], function (oo) {
-          if (oo.uploadedDocuments.length > 0) {
-            let assumeArr = [];
-            _.map(oo.uploadedDocuments, function (doc) {
-              assumeArr.push(self.GLOBAL_FILE_FETCH_URL + "/" + doc.fileName);
-            });
-            self.merchant.kyc.documents.push({
-              documentName: oo.subDocumentType,
-              documentType: oo.marsDocumentId,
-              documentImage: assumeArr,
-            });
-          }
-        });
-      });
       this.$refs.stepper.next();
     },
     next() {
@@ -4310,1028 +3117,9 @@ export default {
       if (this.$v.merchant.$error) {
         this.$q.notify("Please review the KYC information fields again.");
       } else {
-        if (
-          this.merchant.companyinformation.legalName !=
-          this.getAllMarsData.companyInformation.legalName
-        ) {
-          this.merchant.companyinformation.remarks = "Legal Name";
-        }
-        if (this.formdata.cmsCategoryType == "O") {
-          this.merchant.mdrPlan.code = 9;
-        } else if (this.formdata.cmsCategoryType == "") {
-          this.merchant.mdrPlan.code = this.getAllMarsData.mdrPlan.code;
-        } else {
-          this.merchant.mdrPlan.code = 8;
-        }
-        if (
-          this.merchant.companyinformation.dbaName !=
-          this.getAllMarsData.companyInformation.dbaName
-        ) {
-          this.merchant.companyinformation.remarks = "DBA Name";
-        }
-        if (
-          this.merchant.companyinformation.pan !=
-          this.getAllMarsData.companyInformation.pan
-        ) {
-          this.merchant.companyinformation.remarks = "Pan Number";
-        }
-        if (
-          this.merchant.companyinformation.registeredAddress !=
-          this.getAllMarsData.companyInformation.registeredAddress
-        ) {
-          this.merchant.companyinformation.remarks = "Address";
-        }
-        if (
-          this.merchant.companyinformation.contactMobile !=
-          this.getAllMarsData.companyInformation.contactMobile
-        ) {
-          this.merchant.companyinformation.remarks = "Contact Number";
-        }
-        if (
-          this.merchant.companyinformation.registeredCityRefCode !=
-          this.getAllMarsData.companyInformation.registeredCityRefCode
-        ) {
-          this.merchant.companyinformation.remarks = "City";
-        }
-        if (
-          this.merchant.companyinformation.registeredStateRefCode !=
-          this.getAllMarsData.companyInformation.registeredStateRefCode
-        ) {
-          this.merchant.companyinformation.remarks = "State";
-        }
-        if (
-          this.merchant.companyinformation.registeredPin !=
-          this.getAllMarsData.companyInformation.registeredPin
-        ) {
-          this.merchant.companyinformation.remarks = "pincode";
-        }
-        if (
-          this.merchant.companyinformation.businessNature !=
-          this.getAllMarsData.companyInformation.businessNature
-        ) {
-          this.merchant.companyinformation.remarks = "Business Nature";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName
-        ) {
-          this.merchant.companyinformation.remarks = "lead name, DBA name";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress
-        ) {
-          this.merchant.companyinformation.remarks =
-            "lead name, DBA name,address";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile
-        ) {
-          this.merchant.companyinformation.remarks =
-            "lead name, DBA name,address,mobile number";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail
-        ) {
-          this.merchant.companyinformation.remarks =
-            "lead name, DBA name,address,mobile number,email";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature
-        ) {
-          this.merchant.companyinformation.remarks =
-            "lead name, DBA name,address,mobile number,email,business nature";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan
-        ) {
-          this.merchant.companyinformation.remarks =
-            "lead name, DBA name,address,mobile number,email,business nature,pan";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode
-        ) {
-          this.merchant.companyinformation.remarks =
-            "lead name, DBA name,address,mobile number,email,business nature,pan,city";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan &&
-          this.merchant.companyinformation.registeredStateRefCode !=
-            this.getAllMarsData.companyInformation.registeredStateRefCode &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode &&
-          this.merchant.companyinformation.statementEmail !=
-            this.getAllMarsData.companyInformation.statementEmail
-        ) {
-          this.merchant.companyinformation.remarks =
-            "lead name, DBA name,address,mobile number,email,business nature,pan,city,state";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan &&
-          this.merchant.companyinformation.registeredStateRefCode !=
-            this.getAllMarsData.companyInformation.registeredStateRefCode &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode &&
-          this.merchant.companyinformation.registeredPin !=
-            this.getAllMarsData.companyInformation.registeredPin &&
-          this.merchant.companyinformation.statementEmail !=
-            this.getAllMarsData.companyInformation.statementEmail
-        ) {
-          this.merchant.companyinformation.remarks =
-            "lead name, DBA name,address,mobile number,email,business nature,pan,city,state,pincode";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode &&
-          this.merchant.companyinformation.registeredPin !=
-            this.getAllMarsData.companyInformation.registeredPin &&
-          this.merchant.companyinformation.statementEmail !=
-            this.getAllMarsData.companyInformation.statementEmail
-        ) {
-          this.merchant.companyinformation.remarks =
-            "lead name, DBA name,address,mobile number,email,business nature,pan,city,pincode";
-        }
-        if (
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress
-        ) {
-          this.merchant.companyinformation.remarks = "DBA name,address";
-        }
-        if (
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile
-        ) {
-          this.merchant.companyinformation.remarks =
-            "DBA name,address,mobile number";
-        }
-        if (
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail
-        ) {
-          this.merchant.companyinformation.remarks =
-            "DBA name,address,mobile number,email";
-        }
-        if (
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.registeredStateRefCode !=
-            this.getAllMarsData.companyInformation.registeredStateRefCode &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode &&
-          this.merchant.companyinformation.registeredPin !=
-            this.getAllMarsData.companyInformation.registeredPin
-        ) {
-          this.merchant.companyinformation.remarks =
-            "DBA name,address,mobile number,email,business nature,state,city,pincode";
-        }
-        if (
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode
-        ) {
-          this.merchant.companyinformation.remarks =
-            "DBA name,address,mobile number,email,business nature,city";
-        }
-        if (
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.registeredStateRefCode !=
-            this.getAllMarsData.companyInformation.registeredStateRefCode &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode
-        ) {
-          this.merchant.companyinformation.remarks =
-            "DBA name,address,mobile number,email,business nature,state,city";
-        }
-        if (
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan &&
-          this.merchant.companyinformation.registeredStateRefCode !=
-            this.getAllMarsData.companyInformation.registeredStateRefCode &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode &&
-          this.merchant.companyinformation.registeredPin !=
-            this.getAllMarsData.companyInformation.registeredPin
-        ) {
-          this.merchant.companyinformation.remarks =
-            "DBA name,address,mobile number,email,business nature,pan,state,city,pincode";
-        }
-        if (
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode
-        ) {
-          this.merchant.companyinformation.remarks =
-            "DBA name,address,mobile number,email,business nature,pan,city";
-        }
-        if (
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan &&
-          this.merchant.companyinformation.registeredStateRefCode !=
-            this.getAllMarsData.companyInformation.registeredStateRefCode &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode
-        ) {
-          this.merchant.companyinformation.remarks =
-            "DBA name,address,mobile number,email,business nature,pan,state,city";
-        }
-        if (
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.registeredStateRefCode !=
-            this.getAllMarsData.companyInformation.registeredStateRefCode &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode &&
-          this.merchant.companyinformation.registeredPin !=
-            this.getAllMarsData.companyInformation.registeredPin
-        ) {
-          this.merchant.companyinformation.remarks =
-            "address,mobile number,state,city,pincode";
-        }
-        if (
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.registeredStateRefCode !=
-            this.getAllMarsData.companyInformation.registeredStateRefCode &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode &&
-          this.merchant.companyinformation.registeredPin !=
-            this.getAllMarsData.companyInformation.registeredPin
-        ) {
-          this.merchant.companyinformation.remarks =
-            "address,mobile number,email,state,city,pincode";
-        }
-        if (
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.registeredStateRefCode !=
-            this.getAllMarsData.companyInformation.registeredStateRefCode &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode &&
-          this.merchant.companyinformation.registeredPin !=
-            this.getAllMarsData.companyInformation.registeredPin
-        ) {
-          this.merchant.companyinformation.remarks =
-            "address,mobile number,email,business nature,city,state,pincode";
-        }
-        if (
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan &&
-          this.merchant.companyinformation.registeredStateRefCode !=
-            this.getAllMarsData.companyInformation.registeredStateRefCode &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode &&
-          this.merchant.companyinformation.registeredPin !=
-            this.getAllMarsData.companyInformation.registeredPin
-        ) {
-          this.merchant.companyinformation.remarks =
-            "address,mobile number,email,business nature,pan,state,city,pincode";
-        }
-        if (
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail
-        ) {
-          this.merchant.companyinformation.remarks = "mobile number,email";
-        }
-        if (
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature
-        ) {
-          this.merchant.companyinformation.remarks =
-            "mobile number,email,business nature";
-        }
-        if (
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan
-        ) {
-          this.merchant.companyinformation.remarks =
-            "mobile number,email,business nature,pan";
-        }
-        if (
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature
-        ) {
-          this.merchant.companyinformation.remarks = "email,business nature";
-        }
-        if (
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan
-        ) {
-          this.merchant.companyinformation.remarks =
-            "email,business nature,pan";
-        }
-        if (
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan
-        ) {
-          this.merchant.companyinformation.remarks = "business nature,pan";
-        }
-
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan
-        ) {
-          this.merchant.companyinformation.remarks =
-            "lead name, DBA name,address,pan";
-        }
-
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile
-        ) {
-          this.merchant.companyinformation.remarks =
-            "legalname,dba,mobile number";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan
-        ) {
-          this.merchant.companyinformation.remarks =
-            "legalname,dba,mobile number, pan";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature
-        ) {
-          this.merchant.companyinformation.remarks =
-            "legalname,dba,mobile number,pan,business nature";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail
-        ) {
-          this.merchant.companyinformation.remarks =
-            "legalname,dba,address,statement email";
-        }
-        if (
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail
-        ) {
-          this.merchant.companyinformation.remarks =
-            "DBA name,address,statement email";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail
-        ) {
-          this.merchant.companyinformation.remarks =
-            "Legal name,address,statement email";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName
-        ) {
-          this.merchant.companyinformation.remarks =
-            "Legal name,DBA name,address,statement email";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan &&
-          this.merchant.companyinformation.contactPhone !=
-            this.getAllMarsData.companyInformation.contactPhone &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature
-        ) {
-          this.merchant.companyinformation.remarks =
-            "Legal name,DBA name,address,statement email,pan,mobile Number,business nature";
-        }
-
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan
-        ) {
-          this.merchant.companyinformation.remarks = "lead name, DBA name,pan";
-        }
-        //    if(this.merchant.companyinformation.legalName!=this.getAllMarsData.companyInformation.legalName && this.merchant.companyinformation.dbaName!=this.getAllMarsData.companyInformation.dbaName && this.merchant.companyinformation.pan!=this.getAllMarsData.companyInformation.pan) {
-        //   this.merchant.companyinformation.remarks="lead name, DBA name,pan"
-        // }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress
-        ) {
-          this.merchant.companyinformation.remarks =
-            "lead name, DBA name,address";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile
-        ) {
-          this.merchant.companyinformation.remarks =
-            "lead name, DBA name,address,Mobile No";
-        }
-
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature
-        ) {
-          this.merchant.companyinformation.remarks =
-            "lead name, DBA name,address,mobile number,businsess nature";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan
-        ) {
-          this.merchant.companyinformation.remarks =
-            "lead name, DBA name,address,mobile number,pan,businsess nature";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.registeredStateRefCode !=
-            this.getAllMarsData.companyInformation.registeredStateRefCode &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode &&
-          this.merchant.companyinformation.registeredPin !=
-            this.getAllMarsData.companyInformation.registeredPin
-        ) {
-          this.merchant.companyinformation.remarks =
-            "DBA name,address,mobile number,pan,businsess nature,contactEmail,city,state,pincode";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail
-        ) {
-          this.merchant.companyinformation.remarks =
-            "Legal name,address,mobile number,pan,businsess nature,contactEmail";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.registeredStateRefCode !=
-            this.getAllMarsData.companyInformation.registeredStateRefCode &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode &&
-          this.merchant.companyinformation.registeredPin !=
-            this.getAllMarsData.companyInformation.registeredPin
-        ) {
-          this.merchant.companyinformation.remarks =
-            "legal name,DBA name,address,mobile number,pan,businsess nature,contactEmail,city,state,pincode";
-        }
-        if (
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.registeredStateRefCode !=
-            this.getAllMarsData.companyInformation.registeredStateRefCode &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode &&
-          this.merchant.companyinformation.registeredPin !=
-            this.getAllMarsData.companyInformation.registeredPin
-        ) {
-          this.merchant.companyinformation.remarks =
-            "address,mobile number,pan,businsess nature,contactEmail,city,state,pincode";
-        }
-        if (
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.registeredStateRefCode !=
-            this.getAllMarsData.companyInformation.registeredStateRefCode &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode &&
-          this.merchant.companyinformation.registeredPin !=
-            this.getAllMarsData.companyInformation.registeredPin
-        ) {
-          this.merchant.companyinformation.remarks =
-            "mobile number,pan,businsess nature,contactEmail,city,state,pincode";
-        }
-        if (
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.registeredStateRefCode !=
-            this.getAllMarsData.companyInformation.registeredStateRefCode &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode &&
-          this.merchant.companyinformation.registeredPin !=
-            this.getAllMarsData.companyInformation.registeredPin
-        ) {
-          this.merchant.companyinformation.remarks =
-            "pan,businsess nature,contactEmail,city,state,pincode";
-        }
-        if (
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.registeredStateRefCode !=
-            this.getAllMarsData.companyInformation.registeredStateRefCode &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode &&
-          this.merchant.companyinformation.registeredPin !=
-            this.getAllMarsData.companyInformation.registeredPin
-        ) {
-          this.merchant.companyinformation.remarks =
-            "businsess nature,contactEmail,city,state,pincode";
-        }
-        if (
-          this.merchant.companyinformation.legalName !=
-            this.getAllMarsData.companyInformation.legalName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.registeredStateRefCode !=
-            this.getAllMarsData.companyInformation.registeredStateRefCode &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode &&
-          this.merchant.companyinformation.registeredPin !=
-            this.getAllMarsData.companyInformation.registeredPin
-        ) {
-          this.merchant.companyinformation.remarks =
-            "Lead name,address,mobile number,pan,businsess nature,contactEmail,city,state,pincode";
-        }
-        if (
-          this.merchant.companyinformation.dbaName !=
-            this.getAllMarsData.companyInformation.dbaName &&
-          this.merchant.companyinformation.registeredAddress !=
-            this.getAllMarsData.companyInformation.registeredAddress &&
-          this.merchant.companyinformation.contactMobile !=
-            this.getAllMarsData.companyInformation.contactMobile &&
-          this.merchant.companyinformation.businessNature !=
-            this.getAllMarsData.companyInformation.businessNature &&
-          this.merchant.companyinformation.pan !=
-            this.getAllMarsData.companyInformation.pan &&
-          this.merchant.companyinformation.contactEmail !=
-            this.getAllMarsData.companyInformation.contactEmail &&
-          this.merchant.companyinformation.registeredCityRefCode !=
-            this.getAllMarsData.companyInformation.registeredCityRefCode
-        ) {
-          this.merchant.companyinformation.remarks =
-            "DBA Name,address,mobile number,pan,businsess nature,contactEmail,city";
-        }
-
-        if (
-          this.merchant.businessInformation.gstId !=
-          this.getAllMarsData.businessInformation.gstId
-        ) {
-          this.merchant.businessInformation.remarks = "Gst Updated";
-        }
-        if (
-          this.merchant.bankInformation.bankDetails.ifsc !=
-          this.getAllMarsData.bankInformation.bankDetails.ifsc
-        ) {
-          this.merchant.bankInformation.remarks = "ifsc updated";
-        }
-        if (
-          this.merchant.bankInformation.bankDetails.bankName !=
-          this.getAllMarsData.bankInformation.bankDetails.bankName
-        ) {
-          this.merchant.bankInformation.remarks = "Bank Name updated";
-        }
-        if (
-          this.merchant.bankInformation.bankDetails.paymentMode !=
-          this.getAllMarsData.bankInformation.bankDetails.paymentMode
-        ) {
-          this.merchant.bankInformation.remarks = "Payment Mode updated";
-        }
-        if (
-          this.merchant.bankInformation.bankDetails.accountType !=
-          this.getAllMarsData.bankInformation.bankDetails.accountType
-        ) {
-          this.merchant.bankInformation.remarks = "AccType Changed";
-        }
-
-        if (
-          this.merchant.bankInformation.bankDetails.accountNumber !=
-          this.getAllMarsData.bankInformation.bankDetails.accountNumber
-        ) {
-          this.merchant.bankInformation.remarks = "Account Number updated";
-        }
-        if (
-          this.merchant.bankInformation.bankDetails.ifsc !=
-          this.getAllMarsData.bankInformation.bankDetails.ifsc
-        ) {
-          this.merchant.bankInformation.remarks = "IFSC Code Updated";
-        }
-        if (
-          this.merchant.bankInformation.bankDetails.bankName !=
-          this.getAllMarsData.bankInformation.bankDetails.bankName
-        ) {
-          this.merchant.bankInformation.remarks = "Bank Name Updated";
-        }
-        if (
-          this.merchant.bankInformation.bankDetails.accountNumber !=
-          this.getAllMarsData.bankInformation.bankDetails.accountNumber
-        ) {
-          this.merchant.bankInformation.remarks = "Account Number updated";
-        }
-        if (
-          this.merchant.bankInformation.bankDetails.accountNumber !=
-          this.getAllMarsData.bankInformation.bankDetails.accountNumber
-        ) {
-          this.merchant.bankInformation.remarks = "Account Number updated";
-        }
-        if (
-          this.merchant.bankInformation.bankDetails.accountNumber !=
-          this.getAllMarsData.bankInformation.bankDetails.accountNumber
-        ) {
-          this.merchant.bankInformation.remarks = "Account Number updated";
-        }
-
-        if (
-          this.merchant.bankInformation.bankDetails.ifsc !=
-            this.getAllMarsData.bankInformation.bankDetails.ifsc &&
-          this.merchant.bankInformation.bankDetails.bankName !=
-            this.getAllMarsData.bankInformation.bankDetails.bankName
-        ) {
-          this.merchant.bankInformation.remarks = "ifsc,BankName";
-        }
-        if (
-          this.merchant.bankInformation.bankDetails.ifsc !=
-            this.getAllMarsData.bankInformation.bankDetails.ifsc &&
-          this.merchant.bankInformation.bankDetails.bankName !=
-            this.getAllMarsData.bankInformation.bankDetails.bankName &&
-          this.merchant.bankInformation.bankDetails.accountNumber !=
-            this.getAllMarsData.bankInformation.bankDetails.accountNumber &&
-          this.merchant.bankInformation.bankDetails.accountNumber !=
-            this.getAllMarsData.bankInformation.bankDetails.accountNumber
-        ) {
-          this.merchant.bankInformation.remarks =
-            "ifsc,BankName,account number";
-        }
-        if (
-          this.merchant.bankInformation.bankDetails.ifsc !=
-            this.getAllMarsData.bankInformation.bankDetails.ifsc &&
-          this.merchant.bankInformation.bankDetails.bankName !=
-            this.getAllMarsData.bankInformation.bankDetails.bankName &&
-          this.merchant.bankInformation.bankDetails.accountNumber !=
-            this.getAllMarsData.bankInformation.bankDetails.accountNumber &&
-          this.merchant.bankInformation.bankDetails.accountNumber !=
-            this.getAllMarsData.bankInformation.bankDetails.accountNumber &&
-          this.merchant.bankInformation.bankDetails.accountType !=
-            this.getAllMarsData.bankInformation.bankDetails.accountType
-        ) {
-          this.merchant.bankInformation.remarks =
-            "ifsc,BankName,account number,account Type";
-        }
-        if (
-          this.merchant.bankInformation.bankDetails.ifsc !=
-            this.getAllMarsData.bankInformation.bankDetails.ifsc &&
-          this.merchant.bankInformation.bankDetails.accountNumber !=
-            this.getAllMarsData.bankInformation.bankDetails.accountNumber &&
-          this.merchant.bankInformation.bankDetails.bankName !=
-            this.getAllMarsData.bankInformation.bankDetails.bankName &&
-          this.merchant.bankInformation.bankDetails.accountNumber !=
-            this.getAllMarsData.bankInformation.bankDetails.accountNumber &&
-          this.merchant.bankInformation.bankDetails.bankName !=
-            this.getAllMarsData.bankInformation.bankDetails.bankName &&
-          this.merchant.bankInformation.bankDetails.accountType !=
-            this.getAllMarsData.bankInformation.bankDetails.accountType &&
-          this.merchant.bankInformation.bankDetails.paymentMode !=
-            this.getAllMarsData.bankInformation.bankDetails.paymentMode
-        ) {
-          this.merchant.bankInformation.remarks =
-            "ifsc,AccNO,AcType,BankName,paymentMode";
-        }
+        if (this.merchant.companyinformation.legalName != this.getAllMarsData.companyInformation.legalName) this.merchant.companyinformation.remarks = "Legal Name";
+        this.merchant.mdrPlan.code = this.formdata.cmsCategoryType == "O" ? 9 : (this.formdata.cmsCategoryType == "S" ? 8 : this.getAllMarsData.mdrPlan.code);
+        if (this.merchant.companyinformation.dbaName != this.getAllMarsData.companyInformation.dbaName) this.merchant.companyinformation.remarks = "DBA Name";
 
         this.$refs.stepper.next();
       }
@@ -5339,20 +3127,10 @@ export default {
   },
 };
 </script>
+
 <style>
-.customQuasarSelect {
-  padding: 5px;
-}
-
-label {
-  padding: 5px 10px;
-  display: table;
-}
-
-input[type="file"] {
-  display: none;
-}
-.bg-dark-custom {
-  background: rgba(0, 0, 0, 0.5);
-}
+.customQuasarSelect { padding: 5px; }
+label { padding: 5px 10px; display: table; }
+input[type="file"] { display: none; }
+.bg-dark-custom { background: rgba(0, 0, 0, 0.5); }
 </style>

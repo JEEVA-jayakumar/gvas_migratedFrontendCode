@@ -47,8 +47,8 @@
       </q-dialog>
     </div>
   </template>
-  
-  <script>
+
+<script>
 
 
   import {
@@ -199,7 +199,8 @@
     }
   };
   </script>
-  <style scoped>
+
+<style scoped>
   .error {
     color: red; 
     font-size: 12px;

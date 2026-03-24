@@ -453,14 +453,6 @@ const SatLeadValidation = {
     /*END >> Module>> delete sat uploaded document data*/
 
     /*START >> Module>> delete sat uploaded document data*/
-    UPDATE_DEVICE_ADDRESS({
-      commit
-    }, request) {
-      return api.put(
-        "update-tid-implementation-address/" + request.action,
-        request
-      );
-    },
     /*END >> Module>> delete sat uploaded document data*/
     ////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////

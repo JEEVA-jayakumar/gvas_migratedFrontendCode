@@ -39,7 +39,7 @@
           group="primary"
           label="Merchant details"
           caption="Device, Exceptions, Payment, MDR"
-          inset
+          inset-separator
         >
           <div>
             <!-- Device, Exception, Payment, MDR -->
@@ -129,6 +129,7 @@
                         <div class="col-auto q-caption text-weight-medium">Exception Bank Subvention</div>
                       </div>
                     </q-card-section>
+                    <q-separator />
                     <q-card-section class="no-padding">
                       <div class="row items-center q-pa-sm q-py-md">
                         <div class="col-md-3 col-sm-12 col-xs-12">
@@ -152,6 +153,7 @@
                         <div class="col-auto q-caption text-weight-medium">Exception Pricing</div>
                       </div>
                     </q-card-section>
+                    <q-separator />
                     <q-card-section class="no-padding">
                       <div class="row items-center q-pa-sm q-py-md">
                         <div class="col-md-3 col-sm-12 col-xs-12">
@@ -343,7 +345,7 @@
           group="primary"
           label="Documents"
           caption="Related documents"
-          inset
+          inset-separator
         >
           <showMarsForm :propLeadDeatils="formData.shortLead"></showMarsForm>
         </q-expansion-item>
@@ -368,10 +370,8 @@
 </template>
 
 <script>
-import { not } from '@vuelidate/validators';
-
-
 import { mapGetters, mapActions } from "vuex";
+import _ from "lodash";
 import showPdfModalComponent from "../../components/sat/showPdfModalComponent.vue";
 import showMarsForm from "../../components/sat/showMarsFormComponent.vue";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
