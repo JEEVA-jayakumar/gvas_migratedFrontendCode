@@ -246,9 +246,4717 @@
                   >{{tab.tabTitle}}</q-chip>
                 </q-tab>
 </q-tabs>
-<q-tab-panels v-model="agingTrackerPending.tabsModel" animated>
-<q-tab-panels v-model="agingTrackerPending.tabsModel" animated>
-<q-tab-panel
+
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+<q-tab-panells v-model="agingTrackerPending.tabsModel" animated>
+
+</q-tab-panells>
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+<q-tab-panells v-model="agingTrackerPending.tabsModel" animated>
+
+</q-tab-panells>
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+<q-tab-panells v-model="agingTrackerPending.tabsModel" animated>
+
+</q-tab-panells>
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+<q-tab-panells v-model="agingTrackerPending.tabsModel" animated>
+
+</q-tab-panells>
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+<q-tab-panells v-model="agingTrackerPending.tabsModel" animated>
+
+</q-tab-panells>
+   <!--START: content -->
+    <div class="q-pa-md">
+      <!-- START: Dashboard wrapper -->
+      <div class="row q-col-gutter-x-xs">
+        <div class="col-lg-8">
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Exception</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Inventory Allocation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row">
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">KYC Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Pricing Exception</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                        <div class="col-md-4 q-my-xs">
+                          <div class="q-caption">Bank Subvention</div>
+                          <q-chip class="custom_chip_progress" color="purple-9">1</q-chip>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div>
+                <q-card class="border-radius-10 q-py-xs" color="purple-9">
+                  <q-list>
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label color="white">
+                          <div class="lg-q-display-1 sm-q-caption text-center">100</div>
+                          <div class="q-caption text-weight-light text-center">Total</div>
+                        </q-item-label>
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label>
+                          <div
+                            class="lg-q-title sm-q-caption text-weight-light text-center"
+                          >Implementation</div>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-card>
+                <q-list>
+                  <q-item>
+                    <q-item-section>
+                      <div class="row items-center">
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption">Allocated/80</div>
+                        </div>
+                        <div class="col-md-6 q-my-xs">
+                          <div class="q-caption text-red">Unallocated/70</div>
+                        </div>
+                      </div>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </div>
+            </div>
+          </div>
+          <div class="row q-col-gutter-x-xs">
+            <div class="col-lg-12">
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Daily volume graphs</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartDailyVolume
+                  :options="{responsive: false, maintainAspectRatio: false}"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartDailyVolume>
+              </q-card>
+
+              <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
+                <q-card-section>
+                  <div class="q-subheading text-bold">Merchant Tracker</div>
+                  <div class="q-caption">01/01/18 to 01/12/18</div>
+                </q-card-section>
+                <chartMerchantTracker
+                  :borderWidth="1"
+                  :height="150"
+                  class="bg-white q-pa-md round-borders"
+                ></chartMerchantTracker>
+              </q-card>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="row q-col-gutter-sm">
+            <div class="col-lg-5">
+              <q-card class="q-pa-sm bg-orange border-radius-10" align="center">
+                <q-card-section>
+                  <div class="q-title text-white">150</div>
+                  <div class="q-caption text-white">Total</div>
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white"/>
+                <q-card-section class="q-py-md q-px-none">
+                  <p
+                    class="md-q-subheading sm-q-caption text-faded text-white"
+                    align="center"
+                  >Application Pending</p>
+                </q-card-section>
+              </q-card>
+            </div>
+            <div class="col-lg-7">
+              <div class="row lg-inline gutter-sm">
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-green border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">NEW</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+                <div class="col-lg-12 col-sm-6">
+                  <q-card class="bg-blue-6 border-radius-10" align="center">
+                    <q-card-section class="q-pa-md">
+                      <div class="row items-center justify-around">
+                        <div
+                          class="q-pa-sm"
+                          style="border-right: 1px solid rgba(255, 255, 255, 0.5);"
+                        >
+                          <div class="q-title text-white">150</div>
+                          <div class="q-caption text-white">Total</div>
+                        </div>
+                        <div class="q-pa-sm">
+                          <div class="md-q-subheading sm-q-caption text-white">WIP</div>
+                        </div>
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row gutter-sm items-center">
+            <div class="col-md-12">
+              <div class="q-subheading q-pa-md">Aging Tracker
+                <small class="text-warning">Pending</small>
+              </div>
+
+              <q-tabs
+                v-model="agingTrackerPending.tabsModel"
+                filled
+                color="white"
+                no-pane-border
+                class="relative-position"
+              >
+                <q-tab
+                  class="q-pa-sm"
+                  :name="tab.name"
+                  v-for="tab in          agingTrackerPending.tabs"
+                  :key="tab.tabTitle"
+                >
+                  <q-chip
+                    detail
+                    :class="[agingTrackerPending.tabsModel === tab.name ? 'customTabActive text-light shadow-3' : 'bg-blue-grey-2 text-dark']"
+                    class="q-px-sm q-pa-sm q-caption text-weight-light capitalize"
+                  >{{tab.tabTitle}}</q-chip>
+                </q-tab>
+</q-tabs>
+
+<q-tab-panells v-model="agingTrackerPending.tabsModel" animated>
+<q-tab-panell
                   :name="tabPaneItem.name"
                   v-for="tabPaneItem in agingTrackerPending.tabItems"
                   :key="tabPaneItem.name"
@@ -302,8 +5010,8 @@
                       </q-list>
                     </div>
                   </div>
-                </q-tab-panel>
-</q-tab-panels>
+                </q-tab-panell>
+</q-tab-panells>
               <router-link to="/sat/aging/tracker/pending" class="text-grey-8">
                 <p>View more</p>
               </router-link>
@@ -332,8 +5040,8 @@
                   >{{tab.tabTitle}}</q-chip>
                 </q-tab>
 </q-tabs>
-<q-tab-panels v-model="agingTrackerPending.tabsModel" animated>
-<q-tab-panel
+<q-tab-panells v-model="agingTrackerPending.tabsModel" animated>
+<q-tab-panell
                   :name="tabPaneItem.name"
                   v-for="tabPaneItem in agingTrackerPending.tabItems"
                   :key="tabPaneItem.name"
@@ -387,8 +5095,8 @@
                       </q-list>
                     </div>
                   </div>
-                </q-tab-panel>
-</q-tab-panels>
+                </q-tab-panell>
+</q-tab-panells>
               <router-link to="/sat/aging/tracker/pending" class="text-grey-8">
                 <p>View more</p>
               </router-link>

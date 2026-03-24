@@ -30,11 +30,621 @@
           <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
           <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
 </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="rejectedTab">
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+
+        <div>
+        <generalLeadInformation
+          v-if="propToggleLeadInformation"
+          v-model:leadInformation="addtnLeadInformation"
+          :propToggleLeadInformationPop="propToggleLeadInformation"
+          @closeLeadInformation="toggleLeadInformation"
+        />
+        <q-card class="group q-pa-md" v-if="selectedTab == 'statusTab'">
+        </q-card>
+
+        <q-card class="group q-pa-md" v-if="selectedTab == 'rejectedTab'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+
+              <!--END: table Footer -->
+        <q-tabs
+          v-model="selectedTab"
+          class="shadow-1"
+          color="grey-1"
+          @click="goToUnassignedTab"
+        >
+          <q-tab color="dark" name="statusTab" label="TID & MID STATUS"/>
+          <!-- <q-tab color="dark" name="rejectedTab" label="Rejected Leads" /> -->
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+<q-tab-panell name="rejectedTab">
               <varaneekRejectedLead/>
-            </q-tab-panel>
-<q-tab-panel name="statusTab">
+            </q-tab-panell>
+<q-tab-panell name="statusTab">
             <q-table
              :rows="tableData1"
               :columns="columnData"
@@ -92,8 +702,8 @@
               </template>
             </q-table>
             <!--ENDv-model: table Data -->
-          </q-tab-panel>
-</q-tab-panels>
+          </q-tab-panell>
+</q-tab-panells>
   
         <!--END: table Footer -->
         <!-- START >> COMPONENT: Update device address  -->
@@ -110,8 +720,8 @@
       </div>
     </q-page>
   </template>
-  
-  <script>
+
+<script>
 import { required, or } from '@vuelidate/validators';
   import { mapGetters, mapActions } from "vuex";
   import DeviceAddressModal from "../../components/sat/DeviceAddressModal.vue";
@@ -351,8 +961,8 @@ import { required, or } from '@vuelidate/validators';
     }
   };
   </script>
-  
-  <style scoped>
+
+<style scoped>
   .customTd {
     text-align: left !important;
     word-wrap: break-word;
@@ -363,4 +973,3 @@ import { required, or } from '@vuelidate/validators';
     overflow-x: auto;
   }
   </style>
-  

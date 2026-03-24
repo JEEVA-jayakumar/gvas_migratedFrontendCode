@@ -323,7 +323,7 @@
                     @click="retrieveLeadsList(applicationPendingCount.totalApplicationPendingLeadIds)">
                     {{ applicationPendingCount.totalApplicationPendingCount }}</div>
                 </q-card-section>
-                <q-separator style="width:75px" class="bg-white" />
+                <q-separator style="width:75px" class="bg-white" align="center" />
                 <q-card-section class="q-pa-md">
                   <p class="q-subheading sm-q-caption text-white" align="center">Application Pending</p>
                 </q-card-section>
@@ -475,7 +475,7 @@ import chartSATagingTracker from "../../components/sat/chartSATagingTracker.js";
 import leadList from "../../components/sat/leadList.vue";
 
 export default {
-  name: "dashoboard",
+  name: "dashboardMobikwik",
   components: {
     leadList,
     chartDailyVolume,
@@ -586,7 +586,7 @@ export default {
       "getSatAgingTrackerdata",
       "getSatDashboardGraphData"
     ]),
-    ...mapGetters("superAdminAggregators", ["getCreatedAggregatorList", "getActiveCreatedAggregatorList"]),
+    ...mapGetters("superAdminAggregators", ["getActiveCreatedAggregatorList"]),
     ...mapGetters("serviceRequestSat", ["getserviceRequestCountDatas"]),
     ...mapGetters("serviceRequestPhonepeSat", ["getserviceRequestPhonepeCountDatas"]),
   },
@@ -596,7 +596,6 @@ export default {
       "FETCH_DASHBOARD_COUNT", "FETCH_AGGREGATORS_DASHBOARD_COUNT",
       "FETCH_SAT_AGING_TRACKER_DATA"
     ]),
-    ...mapActions("superAdminAggregators", ["GET_CREATED_AGGREGATORS_LIST", "GET_ACTIVE_CREATED_AGGREGATORS_LIST"]),
     ...mapActions("serviceRequestSat", ["FETCH_SERVICE_REQUEST_COUNT_DETAILS"]),
     ...mapActions("serviceRequestPhonepeSat", ["FETCH_PHONEPE_SERVICE_REQUEST_COUNT_DETAILS"]),
 

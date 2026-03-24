@@ -14,9 +14,7 @@
          Assigned To So
         </div>
 
-         
     </div>
-
 
       <div
         class="

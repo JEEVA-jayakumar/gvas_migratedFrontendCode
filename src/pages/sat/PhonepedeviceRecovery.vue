@@ -107,8 +107,8 @@
       </div>
     </q-page>
   </template>
-  
-  <script>
+
+<script>
   import { mapGetters, mapActions } from "vuex";
   import { date } from "quasar";
   import moment from "moment";
@@ -269,6 +269,6 @@
     }
   };
   </script>
-  
-  <style>
+
+<style>
   </style>

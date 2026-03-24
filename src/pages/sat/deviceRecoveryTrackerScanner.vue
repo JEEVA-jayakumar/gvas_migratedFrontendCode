@@ -3,7 +3,7 @@
     <!-- content -->
     <div>
       <div class="row bottom-border q-px-md q-py-md items-center">
-        <!--STARTv-model: table title -->
+        <!--START: table title -->
         <div
           class="col-md-8 q-title text-weight-regular text-grey-9"
         >Device Recovery Tracker - Inventory</div>
@@ -37,18 +37,16 @@
         color="light-blue"
       >
         <template v-slot:body-cell-action="props">
-            <q-td :props="props">
-
-          <q-btn
-            @click="removeScannedItems(props.row)"
-            label="Remove"
-            icon="close"
-            color="red-6"
-            size="sm"
-          />
-
+          <q-td :props="props">
+            <q-btn
+              @click="removeScannedItems(props.row)"
+              label="Remove"
+              icon="close"
+              color="red-6"
+              size="sm"
+            />
           </q-td>
-          </template>
+        </template>
 
         <template v-slot:top="props">
           <!--START: table filter,search -->
@@ -60,7 +58,11 @@
               placeholder="Type.."
               label="Search .."
               class="q-mr-lg q-py-sm"
-            />
+            >
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </q-input>
           </div>
           <!--END: table filter,search -->
         </template>
@@ -70,11 +72,6 @@
 </template>
 
 <script>
-import { required } from '@vuelidate/validators';
-
-// import VueBarcodeScanner from "vue-barcode-scanner";
-// Vue.use(VueBarcodeScanner);
-
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "deviceRecoveryTrackerScanner",
@@ -221,13 +218,15 @@ export default {
     },
     openScannerComp() {
       this.scannerToggleOption = !this.scannerToggleOption;
-      if (!this.$barcodeScanner.hasListener()) {
+      if (this.$barcodeScanner && !this.$barcodeScanner.hasListener()) {
         this.$barcodeScanner.init(this.onBarcodeScanned);
       }
     },
     closeScannerComp() {
       this.scannerToggleOption = !this.scannerToggleOption;
-      this.$barcodeScanner.destroy();
+      if (this.$barcodeScanner) {
+          this.$barcodeScanner.destroy();
+      }
     },
     removeScannedItems(item) {
       this.getDeviceScannedItems.splice(item.__index);

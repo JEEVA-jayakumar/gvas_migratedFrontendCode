@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md group">
+  <q-page padding>
     <div class="row">
         <div class="col">
             <q-input
@@ -7,11 +7,18 @@
           color="grey-9"
             />
 
+        <div class="row q-my-md group items-center" >
+        <div class="col-md-3">
+          <q-btn color="purple-9" label="Submit"  />
         </div>
-     <div class="col" align="right">
-        <q-btn icon="check" outline class="q-py-xs" label="Submit"/>
-        <!-- @click="toggleDamagedDevices" -->
       </div>
     </div>
   </div>
+</q-page>
 </template>
+
+<script>
+export default {
+  name: 'spareParts'
+}
+</script>

@@ -3,13 +3,14 @@
     <div class="text-grey-9">
       <div class="row bottom-border q-pa-sm items-center">
         <div class="col">
-          <q-tabs class="shadow-1" color="white" align="justify" v-model="shortlead"  @update:model-value="goToSelectedTab">
+          <q-tabs class="shadow-1" color="white" align="justify" v-model="shortlead" @update:model-value="goToSelectedTab">
             <q-tab name="shortlead" color="black" label="Short Lead" />
-            <q-tab name="wiplead" color="black" label="WIP Lead" @update:model-value="fetchappData" />
-</q-tabs>
-<q-tab-panels v-model="shortlead" animated>
-<q-tab-panel name="shortlead">
-              <div>
+            <q-tab name="wiplead" color="black" label="WIP Lead" />
+          </q-tabs>
+
+          <q-tab-panels v-model="shortlead" animated>
+            <q-tab-panel name="shortlead" class="q-pa-none">
+              <div class="q-pa-md">
                 <div class="col-md-6 q-my-md" align="right">
                   <div class="col group"></div>
                 </div>
@@ -19,7 +20,7 @@
                 <form>
                   <div class="q-px-md">
                     <div class="q-pa-md">
-                      <div class="row gutter-sm q-py-sm">
+                      <div class="row q-col-gutter-md q-py-sm">
                         <div class="col-md-6">
                           <q-input v-model.trim="formData.leadName" @blur="$v.formData.leadName.$touch"
                             :error="$v.formData.leadName.$error" class="text-weight-regular text-grey-8" color="grey-9"
@@ -45,8 +46,6 @@
                             color="grey-9" label="*Alternate Contact Number"
                             placeholder="Alternate Contact Number" />
                         </div>
-                        <!-- @blur="$v.formData.alternateContactNumber.$touch"
-                        :error="$v.formData.alternateContactNumber.$error"-->
 
                         <div class="col-md-6">
                           <q-input v-model.trim="formData.email" @blur="$v.formData.email.$touch"
@@ -76,7 +75,6 @@
                             @update:model-value="pincodeSelected"
                           />
                         </div>
-                        <!-- @clear="fnGetCityAndState" -->
                         <div class="col-md-6">
                           <q-input disable v-model.trim="formData.state" @blur="$v.formData.state.$touch"
                             :error="$v.formData.state.$error" class="text-weight-regular text-grey-8" color="grey-9"
@@ -90,58 +88,42 @@
                         <div class="col-md-6">
                           <q-select v-model.trim="formData.region" @blur="$v.formData.region.$touch"
                             :error="$v.formData.region.$error" class="text-weight-regular text-grey-8" color="grey-9"
-                            label="Select Region" placeholder="Select Region" :options="dropDown.regionOptions" />
+                            label="Select Region" placeholder="Select Region" :options="dropDown.regionOptions" emit-value map-options />
                         </div>
                         <div class="col-md-6">
                           <q-select v-model.trim="formData.leadSource" @blur="$v.formData.leadSource.$touch"
                             :error="$v.formData.leadSource.$error" class="text-weight-regular text-grey-8"
                             color="grey-9" label="Lead Source" placeholder="Lead Source"
-                            :options="dropDown.leadSourceOptions" @update:model-value="getDevice" />
+                            :options="dropDown.leadSourceOptions" @update:model-value="getDevice" emit-value map-options />
                         </div>
                         <div class="col-md-6">
                           <q-select v-model.trim="formData.device" @update:model-value="devSelected"
                             :error="$v.formData.device.$error" class="text-weight-regular text-grey-8" color="grey-9"
-                            label="Device Type" placeholder="Device Type" :options="dropDown.deviceOptions" />
+                            label="Device Type" placeholder="Device Type" :options="dropDown.deviceOptions" emit-value map-options />
                         </div>
 
                         <div class="col-md-6">
-                          <q-option-group inline type="checkbox"     :value="selectedVas"
-                              @update:model-value="handleVasChange" :disable = "vasDisableFlag"
+                          <q-option-group inline type="checkbox" :model-value="selectedVas"
+                              @update:model-value="handleVasChange" :disable="vasDisableFlag"
                             class="text-weight-regular text-grey-8" color="grey-9" label="VAS"
                             :options="selectBankEnableOptions" />
                         </div>
-                        <!-- <div
-                             v-if="this.selectedVas == 'AMEX'"
-                             class="row gutter-sm q-my-xs col-md-6 "
-                             > -->
-                        <div v-if="this.selectedVas == 'AMEX'" class="col-md-6">
+                        <div v-if="selectedVas.includes('AMEX')" class="col-md-6">
                           <q-input v-model.trim="formData.ownerFirstName" @blur="$v.formData.ownerFirstName.$touch"
                             :error="$v.formData.ownerFirstName.$error" class="text-weight-regular text-grey-8"
                             color="grey-9" label="Owner 1 First Name*" placeholder="Owner 1 First Name*" />
                         </div>
-                        <div v-if="this.selectedVas == 'AMEX'" class="col-md-6">
+                        <div v-if="selectedVas.includes('AMEX')" class="col-md-6">
                           <q-input v-model.trim="formData.ownerLastName" @blur="$v.formData.ownerLastName.$touch"
                             :error="$v.formData.ownerLastName.$error" class="text-weight-regular text-grey-8"
                             color="grey-9" label="Owner 1 Last Name*" placeholder="Owner 1 Last Name*" />
                         </div>
-                        <div v-if="this.selectedVas == 'AMEX'" class="col-md-6">
-                          <!-- <q-input type="date"
-                                format="DD/MM/YYYY"
-                                 format-model="number"
-                                 color="grey-9"
-                                 modal
-                                v-model.trim="formData.ownerDOB"
-                            @blur="$v.formData.ownerDOB.$touch"
-                            :error="$v.formData.ownerDOB.$error"
-                               label="Owner 1 DOB*"
-                    placeholder="Owner 1 DOB*"
-                  /> -->
+                        <div v-if="selectedVas.includes('AMEX')" class="col-md-6">
                           <q-input type="date" v-model.trim="formData.ownerDOB" @blur="$v.formData.ownerDOB.$touch"
                             :error="$v.formData.ownerDOB.$error" class="text-weight-regular text-grey-8" color="grey-9"
                             label="Owner 1 DOB*" placeholder="Owner 1 DOB*" />
                         </div>
 
-                        <!-- </div> -->
                         <div class="col-md-6">
                           <q-input v-model.trim="formData.deviceCount" @blur="$v.formData.deviceCount.$touch" 
                           :disable="deviceFlag"
@@ -159,72 +141,37 @@
                 </form>
               </div>
             </q-tab-panel>
-<q-tab-panel name="wiplead" @update:model-value="fetchappData">
-              <div>
-                <!-- <q-pull-to-refresh :distance="30" :handler="PullToRefresh" inline> -->
+
+            <q-tab-panel name="wiplead" class="q-pa-none">
+              <div class="q-pa-md">
                 <q-table class="my-sticky-header-table" title="Wip Lead Information" :rows="getShortLead"
-                  :columns="columns" row-key="name">
+                  :columns="columns" row-key="id">
                   <template v-slot:body-cell-shortleadDate="props">
-            <q-td :props="props">
-            {{ $moment(props.row.shortleadDate).format("Do MMM Y") }}
-          </q-td>
-          </template>
+                    <q-td :props="props">
+                      {{ $moment(props.row.shortleadDate).format("Do MMM Y") }}
+                    </q-td>
+                  </template>
 
-                  <!-- <template v-slot:body-cell-action="props">
-            <q-td :props="props">
-
-                    <div class="row no-wrap no-padding">
-                      <q-btn
-                        dense
-                        no-caps
-                        no-wrap
-                        label="Convert Wip Lead"
-                        icon="far fa-plus-square"
-                        size="md"
-                        @click="fnShowEditShortLead(props.row)"
-                        flat
-                        class="text-light-blue"
-                  ></q-btn>-->
-                  <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative">
-                  </q-btn>-->
-                  <!-- </div>
-
-          </q-td>
-          </template>-->
                   <template v-slot:body-cell-update="props">
-            <q-td :props="props">
-
-                    <div class="row no-wrap no-padding">
-                      <q-btn dense no-caps no-wrap label="update" icon="far fa-plus-square" size="md"
-                        @click="fnShowConvertToSat(props.row)" flat class="text-light-blue"></q-btn>
-                      <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative">
-                      </q-btn>-->
-                    </div>
-
-          </q-td>
-          </template>
-                  <!-- <template v-slot:body-cell-status="props">
-            <q-td :props="props">
-
-            <span class="label text-negative" v-if="props.row.status == $TRANSACTION_STATUS">Pending</span>
-            <span class="label text-positive" v-else-if="props.row.status">Success</span>
-            <span class="label text-amber" v-else>NA</span>
-
-          </q-td>
-          </template>-->
+                    <q-td :props="props">
+                      <div class="row no-wrap no-padding">
+                        <q-btn dense no-caps no-wrap label="update" icon="far fa-plus-square" size="md"
+                          @click="fnShowConvertToSat(props.row)" flat class="text-light-blue"></q-btn>
+                      </div>
+                    </q-td>
+                  </template>
                 </q-table>
                 <editShortLead v-if="propShowEditShortLead" :propShowEditShortLead="propShowEditShortLead"
                   :propRowDetails="propRowDetails" @emitfnshowEditShortLead="fnShowEditShortLead"></editShortLead>
                 <convertToSat 
-                v-if="propShowConvertToSat" 
-                :propShowConvertToSat="propShowConvertToSat"
+                  v-if="propShowConvertToSat"
+                  :propShowConvertToSat="propShowConvertToSat"
                   :propRowDetails="propRowDetails" 
                   @emitEditshowConvertToSat="fnShowConvertToSat"
-                  ></convertToSat>
-                <!-- </q-pull-to-refresh> -->
+                ></convertToSat>
               </div>
             </q-tab-panel>
-</q-tab-panels>
+          </q-tab-panels>
         </div>
       </div>
     </div>
@@ -234,6 +181,7 @@
 <script>
 import editShortLead from '../../components/sat/editShortLead.vue'
 import convertToSat from '../../components/sat/convertToSat.vue'
+import _ from 'lodash'
 import {
   required,
   requiredIf,
@@ -242,6 +190,7 @@ import {
   email
 } from '@vuelidate/validators'
 import { mapGetters, mapActions } from 'vuex'
+
 export default {
   name: 'inventoryAllocation',
   components: {
@@ -252,31 +201,13 @@ export default {
     return {
       propShowEditShortLead: false,
       propShowConvertToSat: false,
-      vasDisableFlag:false,
+      vasDisableFlag: false,
       propRowDetails: '',
       shortlead: 'shortlead',
-      propShowCreateUploadFile: false,
-      deviceFlag:false,
-      leadSourceOptions: [],
-      regionOptions: [],
-      deviceSet: [],
-      cashAtPosEnabled: 1,
-      upiFlag: '',
-      intlCardACardAcceptance: 1,
-      preauthEnabled: 'N',
-      linkpaymentFlag: '',
-      categoryType: '',
-      matmEnabled: '',
-      txnEmiAllowed: 1,
-      sodexoEnabled: 1,
-      amexEnabled: 1,
-      bqrEnabled: 1,
-      vasInstanceMapping: '',
-      selectBankEnableOptions: [],
-      selectedVas: [],
-      // ownerFirstName:[],
+      deviceFlag: false,
       pinSelected: false,
       pincodeOptionsSearch: [],
+      selectedVas: [],
       formData: {
         leadName: '',
         contactName: '',
@@ -297,176 +228,51 @@ export default {
         ownerFirstName: '',
         ownerLastName: '',
         ownerDOB: '',
-
-        data: ''
-        //  vas:"Y",
-        //   vas1:"Y",
-        //     ICA:"Y",
-        //      PREAUTH:"Y",
-        //      device:"",
       },
       columns: [
-        {
-          name: 'leadName',
-          label: 'leadName',
-          field: 'leadName',
-          align: 'center',
-          sortable: true
-        },
-        {
-          name: 'leadNumber',
-          label: 'leadNumber',
-          field: 'leadNumber',
-          align: 'center',
-          sortable: true
-        },
-        {
-          name: 'contactNumber',
-          label: 'contactNumber',
-          field: 'contactNumber',
-          align: 'center',
-          sortable: true
-        },
-        // {
-        //   name: "id",
-        //   label: "id",
-        //   field: "id",
-        //   align: "center",
-        //   sortable: true
-        // },
-        {
-          name: 'shortleadDate',
-          label: 'shortleadDate',
-          field: 'shortleadDate',
-          align: 'center',
-          sortable: true
-        },
-
-        // {
-        //   name: "action",
-        //   required: true,
-        //   label: "Convert Wip Lead",
-        //   align: "left",
-        //   field: "action",
-        //   sortable: false
-        // },
-        {
-          name: 'update',
-          required: true,
-          label: 'submit to sat',
-          align: 'left',
-          field: 'action',
-          sortable: false
-        }
+        { name: 'leadName', label: 'leadName', field: 'leadName', align: 'center', sortable: true },
+        { name: 'leadNumber', label: 'leadNumber', field: 'leadNumber', align: 'center', sortable: true },
+        { name: 'contactNumber', label: 'contactNumber', field: 'contactNumber', align: 'center', sortable: true },
+        { name: 'shortleadDate', label: 'shortleadDate', field: 'shortleadDate', align: 'center', sortable: true },
+        { name: 'update', required: true, label: 'submit to sat', align: 'left', field: 'action', sortable: false }
       ],
       dropDown: {
         deviceOptions: [],
         leadSourceOptions: [],
         regionOptions: [],
-      }
+      },
+      selectBankEnableOptions: []
     }
   },
   validations: {
     formData: {
-      leadName: {
-        required
-      },
-      contactName: {
-        required
-      },
-      region: {
-        required
-      },
-      contactNumber: {
-        required,
-        minLength: minLength(10),
-        maxLength: maxLength(10)
-      },
-      // alternateContactNumber: {
-      //   required
-      // },
-      email: {
-        email,
-        required
-      },
-      leadAddress: {
-        required
-      },
-      cashAtPosEnabled: {
-        // required,
-      },
-      upiFlag: {
-        // required,
-      },
-      intlCardACardAcceptance: {
-        // required,
-      },
-      preauthEnabled: {
-        // required,
-      },
-      linkpaymentFlag: {
-        // required,
-      },
-      categoryType: {
-        // required,
-      },
-      matmEnabled: {
-        // required,
-      },
-      txnEmiAllowed: {
-        // required,
-      },
-      sodexoEnabled: {
-        // required,
-      },
-      amexEnabled: {
-        //  required
-      },
-      bqrEnabled: {
-        //  required
-      },
-      pincodeTemp: {
-        required,
-        minLength: minLength(6),
-        maxLength: maxLength(6)
-      },
-      // pincode: {
-      //   required
-      // },
-      state: {
-        required
-      },
-      city: {
-        required
-      },
-      leadSource: {
-        required
-      },
-      device: {
-        required
-      },
+      leadName: { required },
+      contactName: { required },
+      region: { required },
+      contactNumber: { required, minLength: minLength(10), maxLength: maxLength(10) },
+      email: { email, required },
+      leadAddress: { required },
+      pincodeTemp: { required, minLength: minLength(6), maxLength: maxLength(6) },
+      state: { required },
+      city: { required },
+      leadSource: { required },
+      device: { required },
       ownerFirstName: {
         required: requiredIf(function () {
-          return this.selectedVas == 'AMEX' ;
+          return this.selectedVas.includes('AMEX');
         })
       },
       ownerDOB: {
         required: requiredIf(function () {
-          return this.selectedVas == 'AMEX' ;
+          return this.selectedVas.includes('AMEX');
         })
       },
       ownerLastName: {
         required: requiredIf(function () {
-          return this.selectedVas == 'AMEX' ;
+          return this.selectedVas.includes('AMEX');
         })
       },
-      vasInstanceMapping: {
-        //  required,
-      },
-
-      deviceCount: {
-        required
-      }
+      deviceCount: { required }
     }
   },
 
@@ -476,26 +282,13 @@ export default {
     ...mapGetters('appLeadSource', ['getAllAppLeadSource']),
     ...mapGetters('shortLeadInfo', ['getShortLead']),
     ...mapGetters('SuperAdminUsers', ['getAllStatesData']),
-    ...mapGetters("InventoryCentral", [
-      "getAllInventoryDevicesTypesData",
-      "getAllRegionsData",
-      "getRegionBasedSO"
-    ])
+    ...mapGetters("InventoryCentral", ["getAllRegionsData"])
   },
 
   created() {
-    /* START: Load user table data filter > DeviceTypes */
     this.appLoadData()
     this.fetchappData()
-    this.trackChange()
-
-
-
-    // this.ajaxLoadDataForAllStatesList();
-
-    /* End: Load user table data filter > DeviceTypes */
   },
-
 
   methods: {
     ...mapActions('appDevice', ['FETCH_APP_DEVICES_DATA']),
@@ -503,45 +296,29 @@ export default {
     ...mapActions('appLeadSource', ['FETCH_APP_LEADSOURCE_DATA']),
     ...mapActions('shortLead', ['STATE_SHORT_LEAD']),
     ...mapActions('shortLeadInfo', ['FETCH_SHORT_LEAD']),
-    ...mapActions('SuperAdminUsers', [
-      'FETCH_ALL_STATES_DATA',
-      'FETCH_PINCODE_WITH_TERM'
-    ]),
-    ...mapActions("InventoryCentral", [
-      "FETCH_ALL_INVENTORY_DEVICES_TYPES_DATA",
-      "FETCH_ALL_REGIONS_DATA",
-      "FETCH_REGION_BASED_SO"
-    ]),
+    ...mapActions('SuperAdminUsers', ['FETCH_ALL_STATES_DATA', 'FETCH_PINCODE_WITH_TERM']),
+    ...mapActions("InventoryCentral", ["FETCH_ALL_REGIONS_DATA"]),
     
     trackChange() {
-      this.formData.deviceCount = parseInt(this.formData.deviceCount) === 0  ? null : this.formData.deviceCount
+      this.formData.deviceCount = parseInt(this.formData.deviceCount) === 0 ? null : this.formData.deviceCount
     },
-  handleVasChange(newVal) {
+    handleVasChange(newVal) {
       let updated = [...newVal];
-
       const has = val => updated.includes(val);
-      const had = val => this.selectedVas.includes(val); // previously selected
+      const had = val => this.selectedVas.includes(val);
 
-      // === Case 1: Unselecting EMI → remove Bank EMI + Brand EMI
       if (had('EMI') && !has('EMI')) {
         updated = updated.filter(v => v !== 'Bank EMI' && v !== 'Brand EMI');
       }
-
-      // === Case 2: Selecting EMI → ensure Bank EMI is selected
       if (has('EMI') && !has('Bank EMI')) {
         updated.push('Bank EMI');
       }
-
-      // === Case 3: Selecting Bank EMI → ensure EMI is selected
       if (has('Bank EMI') && !has('EMI')) {
         updated.push('EMI');
       }
-
-      // === Case 4: Selecting Brand EMI → ensure EMI is selected (not Bank EMI)
       if (has('Brand EMI') && !has('EMI')) {
         updated.push('EMI');
       }
-
       this.selectedVas = [...new Set(updated)];
     },
 
@@ -552,17 +329,13 @@ export default {
     },
 
     getDevice(val) {
-      self = this;
+      let self = this;
       self.FETCH_APP_DEVICES_DATA(val.id)
         .then(() => {
-          // Clearing the drop down values before assigning data
-          self.dropDown.deviceOptions.splice(0);
-          return _.map(this.getAllAppDevicesInfo, (item) => {
-            self.dropDown.deviceOptions.push({
-              value: item,
-              label: item.deviceName
-            })
-          })
+          self.dropDown.deviceOptions = self.getAllAppDevicesInfo.map(item => ({
+            value: item,
+            label: item.deviceName
+          }));
         })
     },
     fnSubmitBankDetails(formData) {
@@ -570,66 +343,48 @@ export default {
       if (this.$v.formData.$error) {
         this.$q.notify('Please review fields again.')
       } else {
-        if(this.formData.leadSource.multiTidEnabled == true){
-          this.formData.deviceCount = 1;
+        let submissionData = _.cloneDeep(formData);
+        if (submissionData.leadSource.multiTidEnabled == true) {
+          submissionData.deviceCount = 1;
         }
-        this.formData.vasInstanceMapping = JSON.stringify(this.selectedVas)
-        this.formData.region = JSON.parse(formData.region);
-        // this.formData.ownerFirstName = JSON.stringify(this.formData.ownerFirstName)
-        this.STATE_SHORT_LEAD(formData)
+        submissionData.vasInstanceMapping = JSON.stringify(this.selectedVas)
+        submissionData.region = typeof submissionData.region === 'string' ? JSON.parse(submissionData.region) : submissionData.region;
+
+        this.STATE_SHORT_LEAD(submissionData)
         this.shortlead = 'wiplead'
         this.fetchappData()
       }
     },
-    // apploaddatas
-    devSelected() {
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: 'purple-9',
-        message: 'Fetching data ..'
-      })
+    devSelected(val) {
+      this.$q.loading.show({ spinnerColor: 'purple-9', message: 'Fetching data ..' })
       let self = this
-      let deviceArr = []
-      this.FETCH_VAS_DATAS(this.formData.device.id).then((response) => {
-        // eslint-disable-next-line eqeqeq
+      this.FETCH_VAS_DATAS(val.id).then((response) => {
         if (response.status == 200) {
           this.$q.loading.hide()
-          self.getVasDeviceMapping.map(function (value, key) {
-            deviceArr.push({
-              label: value.vas.name,
-              value: value.vas.name
-            })
-          })
-          this.selectBankEnableOptions = deviceArr
-          console.log("Q161_PRO_DQR",JSON.stringify(this.selectBankEnableOptions))
-       if(this.formData.device.deviceName == "Q161_PRO_DQR"){        
-        const upiOption = this.selectBankEnableOptions.find(opt => opt.label === "UPI QR");
-        this.vasDisableFlag = true
-        if (upiOption) {
-          this.selectedVas = [upiOption.value]; // Must be array for checkbox
-           console.log("DEVICE TYPE=================>>>>>>>>>",this.selectedVas)
-        }
-      } else {
-        this.selectedVas = [];
-         this.vasDisableFlag = false
-      }
-      if(this.formData.device.deviceName == "Q161_PRO_SQR"){
-         this.formData.deviceCount = ""
-         this.formData.deviceCount = 1
-         this.deviceFlag = true
-      }else {
-       this.deviceFlag = false
-      }
-        
+          this.selectBankEnableOptions = self.getVasDeviceMapping.map(value => ({
+            label: value.vas.name,
+            value: value.vas.name
+          }));
+
+          if (val.deviceName == "Q161_PRO_DQR") {
+            const upiOption = this.selectBankEnableOptions.find(opt => opt.label === "UPI QR");
+            this.vasDisableFlag = true
+            if (upiOption) {
+              this.selectedVas = [upiOption.value];
+            }
+          } else {
+            this.selectedVas = [];
+            this.vasDisableFlag = false
+          }
+          if (val.deviceName == "Q161_PRO_SQR") {
+            this.formData.deviceCount = 1
+            this.deviceFlag = true
+          } else {
+            this.deviceFlag = false
+          }
         } else {
           this.$q.loading.hide()
-          this.$q.notify({
-            color: 'negative',
-            position: 'bottom-left',
-            message: 'Invalid VAS!',
-            icon: 'clear'
-          })
-          //  this.formData.vasInstanceMapping = "";
+          this.$q.notify({ color: 'negative', position: 'bottom-left', message: 'Invalid VAS!', icon: 'clear' })
           this.formData.device = ''
         }
       })
@@ -637,26 +392,17 @@ export default {
 
     fnPincodeSearch(val, update) {
       if (val.length < 1) {
-        update(() => {
-          this.pincodeOptionsSearch = [];
-        });
+        update(() => { this.pincodeOptionsSearch = []; });
         return;
       }
-      this.formData.cityName = "";
-      this.formData.stateName = "";
       this.FETCH_PINCODE_WITH_TERM(val)
         .then(() => {
           update(() => {
-            this.pincodeOptionsSearch = this.COMMON_FILTER_FUNCTION(
-              this.getAllStatesData,
-              val
-            );
+            this.pincodeOptionsSearch = this.COMMON_FILTER_FUNCTION(this.getAllStatesData, val);
           });
         })
         .catch(() => {
-          update(() => {
-            this.pincodeOptionsSearch = [];
-          });
+          update(() => { this.pincodeOptionsSearch = []; });
         });
     },
     pincodeSelected(item) {
@@ -669,95 +415,44 @@ export default {
       }
     },
     fnClrPin() {
-      if (!this.pinSelected)
-        this.formData.pincodeTemp = ''
-    },
-    //  deviceSelected(item) {
-    //  this.formData.deviceSelected = item.id;
-    //   },
-    ajaxLoadDataForAllStatesList() {
-      this.FETCH_ALL_STATES_DATA()
+      if (!this.pinSelected) this.formData.pincodeTemp = ''
     },
     COMMON_FILTER_FUNCTION(arraySet, terms) {
-      // eslint-disable-next-line no-undef
       return _.filter(arraySet, function (oo) {
         return oo.label.toString().includes(terms.toLowerCase())
       })
     },
     fnShowEditShortLead(rowDetails) {
       this.propShowEditShortLead = !this.propShowEditShortLead
-      // eslint-disable-next-line eqeqeq
-      if (rowDetails != undefined) {
-        this.propRowDetails = rowDetails
-      }
+      if (rowDetails) this.propRowDetails = rowDetails
     },
     fnShowConvertToSat(rowDetails) {
       this.propShowConvertToSat = !this.propShowConvertToSat
-      // eslint-disable-next-line eqeqeq
-      if (rowDetails != undefined) {
-        this.propRowDetails = rowDetails
-      }
+      if (rowDetails) this.propRowDetails = rowDetails
     },
     appLoadData() {
       let self = this
       self.FETCH_ALL_REGIONS_DATA().then(() => {
-        return _.map(self.getAllRegionsData, (item) => {
-          self.dropDown.regionOptions.push({
-            value: JSON.stringify(item),
-            label: item.regionAreaName
-          })
-        })
+        self.dropDown.regionOptions = self.getAllRegionsData.map(item => ({
+          value: JSON.stringify(item),
+          label: item.regionAreaName
+        }));
       })
 
       self.FETCH_APP_LEADSOURCE_DATA().then(() => {
-        if(JSON.parse(localStorage.getItem("u_i")).region.regionAreaName == 'VARANEEK'){
-          return _.map(self.getAllAppLeadSource, (item) => {
-          if (item.active && item.sourceName == 'VARANEEK')
-          self.dropDown.leadSourceOptions.push({
-          value: item,
-          label: item.sourceName
-     })
-        })
-        }else{
-          return _.map(self.getAllAppLeadSource, (item) => {
-          if (item.active)
-          self.dropDown.leadSourceOptions.push({
-          value: item,
-          label: item.sourceName
-     })
-        })
-        }
+        let userRegion = JSON.parse(localStorage.getItem("u_i")).region.regionAreaName;
+        self.dropDown.leadSourceOptions = self.getAllAppLeadSource
+          .filter(item => item.active && (userRegion !== 'VARANEEK' || item.sourceName === 'VARANEEK'))
+          .map(item => ({ value: item, label: item.sourceName }));
       })
     },
-
-    fetchappData() {
-      this.FETCH_SHORT_LEAD()
-    },
-    goToSelectedTab(tab){
-      if(tab == "wiplead"){
+    fetchappData() { this.FETCH_SHORT_LEAD() },
+    goToSelectedTab(tab) {
+      if (tab == "wiplead") {
         this.fetchappData()
-      }
-      else if(tab == "shortlead"){
-        this.formData.leadName = ''
-        this.formData.contactName = ''
-        this.formData.contactNumber = '',
-        this.formData.alternateContactNumber = ''
-        this.formData.email = ''
-        this.formData.deviceSelected = ''
-        this.formData.leadAddress = ''
-        this.formData.region = ''
-        this.formData.pincode = ''
-        this.formData.pincodeTemp = ''
-        this.formData.state = ''
-        this.formData.city = ''
-        this.formData.leadSource = ''
-        this.formData.device = ''
-        this.formData.vasInstanceMapping = ''
-        this.formData.deviceCount = ''
-        this.formData.ownerFirstName = ''
-        this.formData.ownerLastName = ''
-        this.formData.ownerDOB = ''
-        this.formData.data = ''     
+      } else if (tab == "shortlead") {
+        Object.keys(this.formData).forEach(key => { this.formData[key] = '' });
+        this.selectedVas = [];
       }
     }
   }
@@ -765,11 +460,6 @@ export default {
 </script>
 
 <style>
-.border-1 {
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.border-2 {
-  border: 3px solid rgba(48, 48, 48, 0.5);
-}
+.border-1 { border: 1px solid rgba(0, 0, 0, 0.1); }
+.border-2 { border: 3px solid rgba(48, 48, 48, 0.5); }
 </style>

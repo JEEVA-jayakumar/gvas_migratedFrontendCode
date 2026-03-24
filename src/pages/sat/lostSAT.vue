@@ -4,24 +4,269 @@
       <div class="row bottom-border q-pa-sm items-center">
         <div class="col">
           <q-tabs
-            no-pane-border
             v-model="inventoryOptionSelected"
             color="dark"
-            filled
+            align="justify"
             class="shadow-1"
           >
             <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
-            <!-- <q-tab name="spareSo" label="Spare Parts So" /> -->
             <q-tab name="external" label="Phonepe Lost Or Stolen" />
-</q-tabs>
-<q-tab-panels v-model="inventoryOptionSelected" animated>
-<q-tab-panel name="internal">
+          </q-tabs>
+
+   <div class="text-grey-9">
+      <div class="row bottom-border q-pa-sm items-center">
+        <div class="col">
+          <q-tabs
+            v-model="inventoryOptionSelected"
+            color="dark"
+            align="justify"
+            class="shadow-1"
+          >
+            <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
+            <q-tab name="external" label="Phonepe Lost Or Stolen" />
+          </q-tabs>
+
+   <div class="text-grey-9">
+      <div class="row bottom-border q-pa-sm items-center">
+        <div class="col">
+          <q-tabs
+            v-model="inventoryOptionSelected"
+            color="dark"
+            align="justify"
+            class="shadow-1"
+          >
+            <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
+            <q-tab name="external" label="Phonepe Lost Or Stolen" />
+          </q-tabs>
+
+   <div class="text-grey-9">
+      <div class="row bottom-border q-pa-sm items-center">
+        <div class="col">
+          <q-tabs
+            v-model="inventoryOptionSelected"
+            color="dark"
+            align="justify"
+            class="shadow-1"
+          >
+            <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
+            <q-tab name="external" label="Phonepe Lost Or Stolen" />
+          </q-tabs>
+
+   <div class="text-grey-9">
+      <div class="row bottom-border q-pa-sm items-center">
+        <div class="col">
+          <q-tabs
+            v-model="inventoryOptionSelected"
+            color="dark"
+            align="justify"
+            class="shadow-1"
+          >
+            <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
+            <q-tab name="external" label="Phonepe Lost Or Stolen" />
+          </q-tabs>
+
+   <div class="text-grey-9">
+      <div class="row bottom-border q-pa-sm items-center">
+        <div class="col">
+          <q-tabs
+            v-model="inventoryOptionSelected"
+            color="dark"
+            align="justify"
+            class="shadow-1"
+          >
+            <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
+            <q-tab name="external" label="Phonepe Lost Or Stolen" />
+          </q-tabs>
+
+   <div class="text-grey-9">
+      <div class="row bottom-border q-pa-sm items-center">
+        <div class="col">
+          <q-tabs
+            v-model="inventoryOptionSelected"
+            color="dark"
+            align="justify"
+            class="shadow-1"
+          >
+            <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
+            <q-tab name="external" label="Phonepe Lost Or Stolen" />
+          </q-tabs>
+
+   <div class="text-grey-9">
+      <div class="row bottom-border q-pa-sm items-center">
+        <div class="col">
+          <q-tabs
+            v-model="inventoryOptionSelected"
+            color="dark"
+            align="justify"
+            class="shadow-1"
+          >
+            <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
+            <q-tab name="external" label="Phonepe Lost Or Stolen" />
+          </q-tabs>
+
+<q-tab-panells v-model="inventoryOptionSelected" animated>
+
+</q-tab-panells>
+   <div class="text-grey-9">
+      <div class="row bottom-border q-pa-sm items-center">
+        <div class="col">
+          <q-tabs
+            v-model="inventoryOptionSelected"
+            color="dark"
+            align="justify"
+            class="shadow-1"
+          >
+            <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
+            <q-tab name="external" label="Phonepe Lost Or Stolen" />
+          </q-tabs>
+
+   <div class="text-grey-9">
+      <div class="row bottom-border q-pa-sm items-center">
+        <div class="col">
+          <q-tabs
+            v-model="inventoryOptionSelected"
+            color="dark"
+            align="justify"
+            class="shadow-1"
+          >
+            <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
+            <q-tab name="external" label="Phonepe Lost Or Stolen" />
+          </q-tabs>
+
+   <div class="text-grey-9">
+      <div class="row bottom-border q-pa-sm items-center">
+        <div class="col">
+          <q-tabs
+            v-model="inventoryOptionSelected"
+            color="dark"
+            align="justify"
+            class="shadow-1"
+          >
+            <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
+            <q-tab name="external" label="Phonepe Lost Or Stolen" />
+          </q-tabs>
+
+   <div class="text-grey-9">
+      <div class="row bottom-border q-pa-sm items-center">
+        <div class="col">
+          <q-tabs
+            v-model="inventoryOptionSelected"
+            color="dark"
+            align="justify"
+            class="shadow-1"
+          >
+            <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
+            <q-tab name="external" label="Phonepe Lost Or Stolen" />
+          </q-tabs>
+
+   <div class="text-grey-9">
+      <div class="row bottom-border q-pa-sm items-center">
+        <div class="col">
+          <q-tabs
+            v-model="inventoryOptionSelected"
+            color="dark"
+            align="justify"
+            class="shadow-1"
+          >
+            <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
+            <q-tab name="external" label="Phonepe Lost Or Stolen" />
+          </q-tabs>
+
+   <div class="text-grey-9">
+      <div class="row bottom-border q-pa-sm items-center">
+        <div class="col">
+          <q-tabs
+            v-model="inventoryOptionSelected"
+            color="dark"
+            align="justify"
+            class="shadow-1"
+          >
+            <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
+            <q-tab name="external" label="Phonepe Lost Or Stolen" />
+          </q-tabs>
+
+   <div class="text-grey-9">
+      <div class="row bottom-border q-pa-sm items-center">
+        <div class="col">
+          <q-tabs
+            v-model="inventoryOptionSelected"
+            color="dark"
+            align="justify"
+            class="shadow-1"
+          >
+            <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
+            <q-tab name="external" label="Phonepe Lost Or Stolen" />
+          </q-tabs>
+
+   <div class="text-grey-9">
+      <div class="row bottom-border q-pa-sm items-center">
+        <div class="col">
+          <q-tabs
+            v-model="inventoryOptionSelected"
+            color="dark"
+            align="justify"
+            class="shadow-1"
+          >
+            <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
+            <q-tab name="external" label="Phonepe Lost Or Stolen" />
+          </q-tabs>
+
+<q-tab-panells v-model="inventoryOptionSelected" animated>
+
+</q-tab-panells>
+   <div class="text-grey-9">
+      <div class="row bottom-border q-pa-sm items-center">
+        <div class="col">
+          <q-tabs
+            v-model="inventoryOptionSelected"
+            color="dark"
+            align="justify"
+            class="shadow-1"
+          >
+            <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
+            <q-tab name="external" label="Phonepe Lost Or Stolen" />
+          </q-tabs>
+
+<q-tab-panells v-model="inventoryOptionSelected" animated>
+
+</q-tab-panells>
+   <div class="text-grey-9">
+      <div class="row bottom-border q-pa-sm items-center">
+        <div class="col">
+          <q-tabs
+            v-model="inventoryOptionSelected"
+            color="dark"
+            align="justify"
+            class="shadow-1"
+          >
+            <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
+            <q-tab name="external" label="Phonepe Lost Or Stolen" />
+          </q-tabs>
+
+<q-tab-panells v-model="inventoryOptionSelected" animated>
+
+</q-tab-panells>
+   <div class="text-grey-9">
+      <div class="row bottom-border q-pa-sm items-center">
+        <div class="col">
+          <q-tabs
+            v-model="inventoryOptionSelected"
+            color="dark"
+            align="justify"
+            class="shadow-1"
+          >
+            <q-tab name="internal" label="Bijlipay Lost Or Stolen" />
+            <q-tab name="external" label="Phonepe Lost Or Stolen" />
+          </q-tabs>
+
+          <q-tab-panells v-model="inventoryOptionSelected" animated>
+            <q-tab-panell name="internal">
               <internalLostOrStolen/>
-            </q-tab-panel>
-<q-tab-panel name="external">
+            </q-tab-panell>
+            <q-tab-panell name="external">
               <AggregatorsLostOrStolen/>
-            </q-tab-panel>
-</q-tab-panels>
+            </q-tab-panell>
+          </q-tab-panells>
         </div>
       </div>
     </div>
@@ -29,69 +274,20 @@
 </template>
 
 <script>
- import internalLostOrStolen from "../../pages/sat/internalLostOrStolen.vue";
- import AggregatorsLostOrStolen from "../../pages/sat/AggregatorsLostOrStolen.vue";
+import internalLostOrStolen from "../../pages/sat/internalLostOrStolen.vue";
+import AggregatorsLostOrStolen from "../../pages/sat/AggregatorsLostOrStolen.vue";
 
-import { mapGetters, mapActions } from "vuex";
 export default {
-  name: "inventoryAllocation",
-
+  name: "lostSAT",
   components: {
     internalLostOrStolen,
     AggregatorsLostOrStolen
-    
   },
-
   data() {
     return {
-      enableUploadInventoryBtn: true,
-      toggleScanButton: true,
-      inventoryOptionSelected: "implementationQueue"
+      inventoryOptionSelected: "internal"
     };
-  },
-
-//   computed: {
-//     ...mapGetters("SAT_RegionalInventoryAllocation", [
-//       "getAllRegionalInventoryDeviceDetailsWithCount",
-//       "getCurrentPODNumber",
-//       "getCurrentDeviceId",
-//       "getAllInventorywithsoDeviceDetailsWithCount"
-//     ]),
-//     ...mapGetters("InventoryWithSo", ["getAllInventoryWithSo"])
-//   },
-
-//   created() {
-//     this.fnAjaxFetchAllDeviceDetailsWithCount();
-//   },
-
-//   methods: {
-//     ...mapActions("SAT_RegionalInventoryAllocation", [
-//       "FETCH_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT",
-//       "FETCH_REGIONAL_INVENTORY_SERIAL_NUMBER_BY_DEVICE",
-//       "FETCH_INVENTORY_WITH_SO_DEVICE_DETAIL_WITH_COUNT"
-//     ]),
-//     ...mapActions("InventoryWithSo", ["FETCH_INVENTORY_WITH_SO"]),
-//     // fnAjaxFetchAllDeviceDetailsWithCount() {
-//     //   this.toggleAjaxLoadFilter = true;
-//     //   this.FETCH_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT(
-//     //     JSON.parse(localStorage.getItem("u_i")).region.id
-//     //   )
-//     //     // this.FETCH_INVENTORY_WITH_SO_DEVICE_DETAIL_WITH_COUNT(
-//     //     //   JSON.parse(localStorage.getItem("u_i")).region.id
-//     //     // )
-//     //     .then(() => {
-//     //       let requestParams = {
-//     //         region: JSON.parse(localStorage.getItem("u_i")).region.id,
-//     //         action: this.$REGIONAL_INVENTORY_FILTER_ACTION_DEVICE
-//     //       };
-//     //       this.FETCH_REGIONAL_INVENTORY_SERIAL_NUMBER_BY_DEVICE(requestParams);
-//     //       this.toggleAjaxLoadFilter = false;
-//     //     })
-//     //     .catch(error => {
-//     //       this.toggleAjaxLoadFilter = false;
-//     //     });
-//     // }
-//   }
+  }
 };
 </script>
 

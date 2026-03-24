@@ -16,8 +16,7 @@
                     v-model="formData.device"
                     label="Selected device"
                      @request="ajaxLoadShortLeadInfo"
-                    
-                    
+
                   />
         </div>
         <div class="col-md-12">
@@ -54,8 +53,7 @@
             v-model="formData.leadVerificationStatus.reason"
           />
         <!-- </div> -->
-          
-         
+
           <q-btn color="negative" class="q-ma-sm float-right" @click="leadRejectSubmit(formData)" align="right" label="Reject" />
           <q-btn align="right" color="grey-9" 
             class="float-right q-ma-sm" @click="emitToggleReject(showRejectLeadModel)">Cancel

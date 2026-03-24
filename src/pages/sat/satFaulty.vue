@@ -127,7 +127,7 @@
         table-class="customTableClass" v-model:pagination="paginationControl"
       >
         <!--START: table body modification -->
-        <template v-slot:body-cell-deviceType="props">
+        <template v-slot:body-cell-deviceName="props">
           <q-td :props="props">{{props.row.deviceName}}</q-td>
         </template>
         <template v-slot:body-cell-serialNumber="props">
@@ -204,7 +204,7 @@ export default {
       deviceOptions: [],
       columns: [
         {
-          name: "deviceType",
+          name: "deviceName",
           required: true,
           label: "Device Type",
           align: "left",

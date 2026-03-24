@@ -7,8 +7,180 @@
                 <q-tab color="dark" name="tab-2" label="Rejected Pod" />
                 <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
 </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="tab-1">
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+
+        <div>
+            <q-tabs no-pane-border v-model="selectedTab" color="dark" filled class="shadow-1"
+                @click="goToSelectedTab">
+                <q-tab color="dark" name="tab-1" label="Approved Pod" />
+                <q-tab color="dark" name="tab-2" label="Rejected Pod" />
+                <q-tab color="dark" name="tab-3" label=" Allocated Pod" />
+</q-tabs>
+<q-tab-panells v-model="selectedTab" animated>
+<q-tab-panell name="tab-1">
                     <q-table :rows="tableData" table-class="customSATableClass" :columns="columns"
                         :filter="filterSearch" v-model:pagination="paginationControl"
                         :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
@@ -97,8 +269,8 @@
                             <!--ENDv-model: table filter,search -->
                         </template>
                     </q-table>
-                </q-tab-panel>
-<q-tab-panel name="tab-2">
+                </q-tab-panell>
+<q-tab-panell name="tab-2">
                     <q-table :rows="tableData1" table-class="customSATableClass" :columns="columns1"
                         :filter="filterSearch1" v-model:pagination="paginationControl1"
                         :filter-method="myCustomSearchFilter" row-key="name" color="grey-9"
@@ -175,8 +347,6 @@
 
           </q-td>
           </template>
-                        
-
 
                         <template v-slot:top="props">
                             <!--START: table title -->
@@ -215,8 +385,8 @@
              </div> :rows="tableData2"-->
                         </template>
                     </q-table>
-                </q-tab-panel>
-<q-tab-panel name="tab-3">
+                </q-tab-panell>
+<q-tab-panell name="tab-3">
 
                     <q-table :rows="tableData2" table-class="customSATableClass" :columns="columns2"
                         :filter="filterSearch2" v-model:pagination="paginationControl2"
@@ -284,8 +454,6 @@
           </q-td>
           </template>
 
-
-
                         <template v-slot:top="props">
 
                             <div class="col-3">
@@ -294,11 +462,12 @@
                             </div>
                         </template>
                     </q-table>
-                </q-tab-panel>
-</q-tab-panels>
+                </q-tab-panell>
+</q-tab-panells>
         </div>
     </q-page>
 </template>
+
 <script>
 import { required, or } from '@vuelidate/validators';
 // import ShowAddServiceType from "../../components/super_admin/ShowAddServiceType.vue";

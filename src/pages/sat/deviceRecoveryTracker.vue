@@ -58,6 +58,7 @@
         <q-tab name="unAssigned" label="Unassigned" />
         <q-tab name="assigned" label="Assigned" />
       </q-tabs>
+
       <q-tab-panels v-model="selectedTab" animated>
         <q-tab-panel name="assigned" class="no-padding">
           <!--START: table Data -->
@@ -84,10 +85,11 @@
                 <span class="label text-primary">#
                   {{
                     props.row.leadInformation == null
-                      ? props.row.qrLeadInformation.qrLeadNumber
+                      ? props.row.qrLeadInformation?.qrLeadNumber
                       : props.row.leadInformation.leadNumber
                   }}</span>
               </q-td>
+              <q-td v-else :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-submitToMarsDate="props">
               <q-td
@@ -104,6 +106,7 @@
                     : "NA"
                 }}
               </q-td>
+              <q-td v-else :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-createdAt="props">
               <q-td
@@ -112,6 +115,7 @@
               >
                 {{ $moment(props.row.createdAt).format("Do MMM Y") }}
               </q-td>
+              <q-td v-else :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-deviceAddress="props">
               <q-td
@@ -121,6 +125,7 @@
               >
                 <div>{{ props.row.deviceAddress }}</div>
               </q-td>
+              <q-td v-else :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-tid="props">
               <q-td
@@ -130,6 +135,7 @@
               >
                 <div class="text-primary">{{ props.row.tid }}</div>
               </q-td>
+              <q-td v-else :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-mid="props">
               <q-td
@@ -139,6 +145,7 @@
               >
                 <div class="text-primary">{{ props.row.mid }}</div>
               </q-td>
+              <q-td v-else :props="props">NA</q-td>
             </template>
             <template v-slot:top>
               <div class="col-md-5">
@@ -149,7 +156,11 @@
                   placeholder="Type.."
                   label="Search By TID, MID, Merchant Name .."
                   class="q-mr-lg q-py-sm"
-                />
+                >
+                  <template v-slot:append>
+                    <q-icon name="search" />
+                  </template>
+                </q-input>
               </div>
             </template>
           </q-table>
@@ -180,10 +191,11 @@
                 <span class="label text-primary">#
                   {{
                     props.row.leadInformation == null
-                      ? props.row.qrLeadInformation.qrLeadNumber
+                      ? props.row.qrLeadInformation?.qrLeadNumber
                       : props.row.leadInformation.leadNumber
                   }}</span>
               </q-td>
+              <q-td v-else :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-submitToMarsDate="props">
               <q-td
@@ -200,6 +212,7 @@
                     : "NA"
                 }}
               </q-td>
+              <q-td v-else :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-createdAt="props">
               <q-td
@@ -208,6 +221,7 @@
               >
                 {{ $moment(props.row.createdAt).format("Do MMM Y") }}
               </q-td>
+              <q-td v-else :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-tid="props">
               <q-td
@@ -217,6 +231,7 @@
               >
                 <div class="text-primary">{{ props.row.tid }}</div>
               </q-td>
+              <q-td v-else :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-mid="props">
               <q-td
@@ -226,6 +241,7 @@
               >
                 <div class="text-primary">{{ props.row.mid }}</div>
               </q-td>
+              <q-td v-else :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-deviceAddress="props">
               <q-td
@@ -237,6 +253,7 @@
                   {{ props.row.deviceAddress }}
                 </div>
               </q-td>
+              <q-td v-else :props="props">NA</q-td>
             </template>
             <template v-slot:top>
               <div class="col-md-5">
@@ -247,7 +264,11 @@
                   placeholder="Type.."
                   label="Search By TID, MID, Merchant Name .."
                   class="q-mr-lg q-py-sm"
-                />
+                >
+                  <template v-slot:append>
+                    <q-icon name="search" />
+                  </template>
+                </q-input>
               </div>
             </template>
           </q-table>
@@ -261,7 +282,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "implementationQueue",
+  name: "deviceRecoveryTracker",
   data() {
     return {
       propToggleLeadInformation: false,
@@ -273,10 +294,197 @@ export default {
       assignToOptionsFiltered: [],
       tableData: [],
       tableData1: [],
+      columnDataAssigned: [
+        {
+          name: "leadNumber",
+          required: true,
+          label: "Lead Number",
+          align: "left",
+          field: (row) => row.leadInformation?.leadNumber || row.qrLeadInformation?.qrLeadNumber || "NA",
+          sortable: false,
+        },
+        {
+          name: "createdAt",
+          required: true,
+          label: "Date of TID Generation",
+          align: "left",
+          field: "createdAt",
+          sortable: true,
+        },
+        {
+          name: "tid",
+          required: true,
+          label: "TID",
+          align: "left",
+          field: (row) => row.tid,
+          sortable: true,
+        },
+        {
+          name: "mid",
+          required: true,
+          label: "MID",
+          align: "left",
+          field: (row) => row.mid,
+          sortable: true,
+        },
+        {
+          name: "merchant_name",
+          required: true,
+          label: "Merchant Name",
+          align: "left",
+          field: (row) => row.leadInformation?.leadName || row.qrLeadInformation?.merchantName || "NA",
+          sortable: false,
+        },
+        {
+          name: "mobile_number",
+          required: true,
+          label: "Mobile Number",
+          align: "center",
+          field: (row) => row.leadInformation?.contactNumber || row.qrLeadInformation?.contactNumber || "NA",
+          sortable: false,
+        },
+        {
+          name: "deviceAddress",
+          required: true,
+          label: "Address",
+          align: "left",
+          field: (row) => row.deviceAddress,
+          sortable: false,
+        },
+        {
+          name: "source",
+          required: true,
+          label: "Source",
+          align: "left",
+          field: (row) => row.leadInformation?.leadSource?.sourceName || row.qrLeadInformation?.leadSource?.sourceName || "NA",
+          sortable: false,
+        },
+        {
+          name: "assigned_to",
+          required: true,
+          label: "Assigned To",
+          align: "left",
+          field: (row) => row.recoveredBy ? (row.recoveredBy.name + " | " + row.recoveredBy.employeeID) : "NA",
+          sortable: false,
+        },
+        {
+          name: "leadInformation",
+          required: true,
+          label: "Device Type",
+          align: "left",
+          field: (row) => row.leadInformation?.device?.deviceName || row.qrLeadInformation?.device?.deviceName || "NA",
+          sortable: false,
+        },
+        {
+          name: "serial_number",
+          required: true,
+          label: "Serial Number",
+          align: "left",
+          field: (row) => row.regionalInventory?.serialNumber || "NA",
+          sortable: true,
+        },
+        {
+          name: "submitToMarsDate",
+          required: true,
+          label: "Date of Submission",
+          align: "left",
+          field: (row) => row.leadInformation?.submitToMarsDate || row.qrLeadInformation?.submitMarsDate || "NA",
+          sortable: true,
+        },
+      ],
+      columnDataUnassigned: [
+        {
+          name: "leadNumber",
+          required: true,
+          label: "Lead Number",
+          align: "left",
+          field: (row) => row.leadInformation?.leadNumber || row.qrLeadInformation?.qrLeadNumber || "NA",
+          sortable: false,
+        },
+        {
+          name: "createdAt",
+          required: true,
+          label: "Date of TID Generation",
+          align: "left",
+          field: "createdAt",
+          sortable: true,
+        },
+        {
+          name: "tid",
+          required: true,
+          label: "TID",
+          align: "left",
+          field: (row) => row.tid,
+          sortable: true,
+        },
+        {
+          name: "mid",
+          required: true,
+          label: "MID",
+          align: "left",
+          field: (row) => row.mid,
+          sortable: true,
+        },
+        {
+          name: "merchant_name",
+          required: true,
+          label: "Merchant Name",
+          align: "left",
+          field: (row) => row.leadInformation?.leadName || row.qrLeadInformation?.merchantName || "NA",
+          sortable: false,
+        },
+        {
+          name: "mobile_number",
+          required: true,
+          label: "Mobile Number",
+          align: "center",
+          field: (row) => row.leadInformation?.contactNumber || row.qrLeadInformation?.contactNumber || "NA",
+          sortable: false,
+        },
+        {
+          name: "deviceAddress",
+          required: true,
+          label: "Address",
+          align: "left",
+          field: (row) => row.deviceAddress,
+          sortable: false,
+        },
+        {
+          name: "leadInformation",
+          required: true,
+          label: "Device Type",
+          align: "left",
+          field: (row) => row.leadInformation?.device?.deviceName || row.qrLeadInformation?.device?.deviceName || "NA",
+          sortable: false,
+        },
+        {
+          name: "serial_number",
+          required: true,
+          label: "Serial Number",
+          align: "left",
+          field: (row) => row.regionalInventory?.serialNumber || "NA",
+          sortable: true,
+        },
+        {
+          name: "source",
+          required: true,
+          label: "Source",
+          align: "left",
+          field: (row) => row.leadInformation?.leadSource?.sourceName || row.qrLeadInformation?.leadSource?.sourceName || "NA",
+          sortable: false,
+        },
+        {
+          name: "submitToMarsDate",
+          required: true,
+          label: "Date of Submission",
+          align: "left",
+          field: (row) => row.leadInformation?.submitToMarsDate || row.qrLeadInformation?.submitMarsDate || "NA",
+          sortable: true,
+        },
+      ],
       formData: {
         marsDeviceIdsCooked: [],
         marsDeviceIdsCookedUnAssinged: [],
-        triggerWelcomeMail: false,
         assignTo: "",
       },
       paginationControl: {
@@ -293,307 +501,28 @@ export default {
       },
       tableAjaxLoading: false,
       tableAjaxLoading1: false,
-      columnDataAssigned: [
-        {
-          name: "leadNumber",
-          required: true,
-          label: "Lead Number",
-          align: "left",
-          field: (row) => {
-            return row.leadInformation != null && row.leadInformation.leadNumber != null
-              ? row.leadInformation.leadNumber
-              : row.qrLeadInformation != null && row.qrLeadInformation.qrLeadNumber != null
-              ? row.qrLeadInformation.qrLeadNumber
-              : "NA";
-          },
-          sortable: false,
-        },
-        {
-          name: "createdAt",
-          required: true,
-          label: "Date of TID Generation",
-          align: "left",
-          field: "createdAt",
-          sortable: true,
-        },
-        {
-          name: "tid",
-          required: true,
-          label: "TID",
-          align: "left",
-          field: (row) => row.tid,
-          sortable: true,
-        },
-        {
-          name: "mid",
-          required: true,
-          label: "MID",
-          align: "left",
-          field: (row) => row.mid,
-          sortable: true,
-        },
-        {
-          name: "merchant_name",
-          required: true,
-          label: "Merchant Name",
-          align: "left",
-          field: (row) => {
-            return row.leadInformation != null && row.leadInformation.leadName != null
-              ? row.leadInformation.leadName
-              : row.qrLeadInformation != null && row.qrLeadInformation.merchantName != null
-              ? row.qrLeadInformation.merchantName
-              : "NA";
-          },
-          sortable: false,
-        },
-        {
-          name: "mobile_number",
-          required: true,
-          label: "Mobile Number",
-          align: "center",
-          field: (row) => {
-            return row.leadInformation != null && row.leadInformation.contactNumber != null
-              ? row.leadInformation.contactNumber
-              : row.qrLeadInformation != null && row.qrLeadInformation.contactNumber != null
-              ? row.qrLeadInformation.contactNumber
-              : "NA";
-          },
-          sortable: false,
-        },
-        {
-          name: "deviceAddress",
-          required: true,
-          label: "Address",
-          align: "left",
-          field: (row) => row.deviceAddress,
-          sortable: false,
-        },
-        {
-          name: "source",
-          required: true,
-          label: "Source",
-          align: "left",
-          field: (row) => {
-            return row.leadInformation != null &&
-              row.leadInformation.leadSource != null &&
-              row.leadInformation.leadSource.sourceName != null
-              ? row.leadInformation.leadSource.sourceName
-              : row.qrLeadInformation != null &&
-                row.qrLeadInformation.leadSource != null &&
-                row.qrLeadInformation.leadSource.sourceName != null
-              ? row.qrLeadInformation.leadSource.sourceName
-              : "NA";
-          },
-          sortable: false,
-        },
-        {
-          name: "assigned_to",
-          required: true,
-          label: "Assigned To",
-          align: "left",
-          field: (row) => {
-            return row.recoveredBy == null ? "NA" : row.recoveredBy.name + " | " + row.recoveredBy.employeeID;
-          },
-          sortable: false,
-        },
-        {
-          name: "leadInformation",
-          required: true,
-          label: "Device Type",
-          align: "left",
-          field: (row) => {
-            return row.leadInformation != null &&
-              row.leadInformation.device != null &&
-              row.leadInformation.device.deviceName != null
-              ? row.leadInformation.device.deviceName
-              : row.qrLeadInformation != null &&
-                row.qrLeadInformation.device != null &&
-                row.qrLeadInformation.device.deviceName != null
-              ? row.qrLeadInformation.device.deviceName
-              : "NA";
-          },
-          sortable: false,
-        },
-        {
-          name: "serial_number",
-          required: true,
-          label: "Serial Number",
-          align: "left",
-          field: (row) => (row.regionalInventory == null ? "NA" : row.regionalInventory.serialNumber),
-          sortable: true,
-        },
-        {
-          name: "submitToMarsDate",
-          required: true,
-          label: "Date of Submission",
-          align: "left",
-          field: (row) => {
-            if (row.leadInformation != null && row.leadInformation.submitToMarsDate != null) {
-              return row.leadInformation.submitToMarsDate;
-            } else if (row.qrLeadInformation != null && row.qrLeadInformation.submitMarsDate != null) {
-              return row.qrLeadInformation.submitMarsDate;
-            }
-            return "NA";
-          },
-          sortable: true,
-        },
-      ],
-      columnDataUnassigned: [
-        {
-          name: "leadNumber",
-          required: true,
-          label: "Lead Number",
-          align: "left",
-          field: (row) => {
-            return row.leadInformation != null && row.leadInformation.leadNumber != null
-              ? row.leadInformation.leadNumber
-              : row.qrLeadInformation != null && row.qrLeadInformation.qrLeadNumber != null
-              ? row.qrLeadInformation.qrLeadNumber
-              : "NA";
-          },
-          sortable: false,
-        },
-        {
-          name: "createdAt",
-          required: true,
-          label: "Date of TID Generation",
-          align: "left",
-          field: "createdAt",
-          sortable: true,
-        },
-        {
-          name: "tid",
-          required: true,
-          label: "TID",
-          align: "left",
-          field: (row) => row.tid,
-          sortable: true,
-        },
-        {
-          name: "mid",
-          required: true,
-          label: "MID",
-          align: "left",
-          field: (row) => row.mid,
-          sortable: true,
-        },
-        {
-          name: "merchant_name",
-          required: true,
-          label: "Merchant Name",
-          align: "left",
-          field: (row) => {
-            return row.leadInformation != null && row.leadInformation.leadName != null
-              ? row.leadInformation.leadName
-              : row.qrLeadInformation != null && row.qrLeadInformation.merchantName != null
-              ? row.qrLeadInformation.merchantName
-              : "NA";
-          },
-          sortable: false,
-        },
-        {
-          name: "mobile_number",
-          required: true,
-          label: "Mobile Number",
-          align: "center",
-          field: (row) => {
-            return row.leadInformation != null && row.leadInformation.contactNumber != null
-              ? row.leadInformation.contactNumber
-              : row.qrLeadInformation != null && row.qrLeadInformation.contactNumber != null
-              ? row.qrLeadInformation.contactNumber
-              : "NA";
-          },
-          sortable: false,
-        },
-        {
-          name: "deviceAddress",
-          required: true,
-          label: "Address",
-          align: "left",
-          field: (row) => row.deviceAddress,
-          sortable: false,
-        },
-        {
-          name: "leadInformation",
-          required: true,
-          label: "Device Type",
-          align: "left",
-          field: (row) => {
-            return row.leadInformation != null &&
-              row.leadInformation.device != null &&
-              row.leadInformation.device.deviceName != null
-              ? row.leadInformation.device.deviceName
-              : row.qrLeadInformation != null &&
-                row.qrLeadInformation.device != null &&
-                row.qrLeadInformation.device.deviceName != null
-              ? row.qrLeadInformation.device.deviceName
-              : "NA";
-          },
-          sortable: false,
-        },
-        {
-          name: "serial_number",
-          required: true,
-          label: "Serial Number",
-          align: "left",
-          field: (row) => (row.regionalInventory == null ? "NA" : row.regionalInventory.serialNumber),
-          sortable: true,
-        },
-        {
-          name: "source",
-          required: true,
-          label: "Source",
-          align: "left",
-          field: (row) => {
-            return row.leadInformation != null &&
-              row.leadInformation.leadSource != null &&
-              row.leadInformation.leadSource.sourceName != null
-              ? row.leadInformation.leadSource.sourceName
-              : row.qrLeadInformation != null &&
-                row.qrLeadInformation.leadSource != null &&
-                row.qrLeadInformation.leadSource.sourceName != null
-              ? row.qrLeadInformation.leadSource.sourceName
-              : "NA";
-          },
-          sortable: false,
-        },
-        {
-          name: "submitToMarsDate",
-          required: true,
-          label: "Date of Submission",
-          align: "left",
-          field: (row) => {
-            if (row.leadInformation != null && row.leadInformation.submitToMarsDate != null) {
-              return row.leadInformation.submitToMarsDate;
-            } else if (row.qrLeadInformation != null && row.qrLeadInformation.submitMarsDate != null) {
-              return row.qrLeadInformation.submitMarsDate;
-            }
-            return "NA";
-          },
-          sortable: true,
-        },
-      ],
     };
   },
   computed: {
-    ...mapGetters("DeviceRecovery", ["getDeviceRecoveryAssignedList", "getDeviceRecoveryUnassignedList"]),
+    ...mapGetters("DeviceRecovery", [
+      "getDeviceRecoveryAssignedList",
+      "getDeviceRecoveryUnassignedList",
+    ]),
     ...mapGetters("ImplementationExecutive", ["getImplementationExecutiveList"]),
   },
-  mounted() {
-    this.getPincodeInformations();
-    this.ajaxLoadAllLeadInfo({
-      pagination: this.paginationControl,
-      filter: this.filterSearch,
-    });
+  created() {
     this.ajaxLoadAllLeadInfo1({
       pagination: this.paginationControl1,
       filter: this.filterSearch1,
     });
   },
   methods: {
-    ...mapActions("DeviceRecovery", ["DEVICE_RECOVERY_ASSIGNED_LIST", "DEVICE_RECOVERY_UNASSIGNED_LIST", "DEVICE_RECOVERY_SUBMIT"]),
+    ...mapActions("DeviceRecovery", [
+      "DEVICE_RECOVERY_ASSIGNED_LIST",
+      "DEVICE_RECOVERY_UNASSIGNED_LIST",
+      "DEVICE_RECOVERY_SUBMIT",
+    ]),
     ...mapActions("ImplementationExecutive", ["IMPLEMENTATION_EXECUTIVE_LIST"]),
-    ...mapActions("SuperAdminUsers", ["FETCH_ALL_STATES_DATA"]),
 
     fnFilterAssignTo(val, update) {
       update(() => {
@@ -604,9 +533,6 @@ export default {
       });
     },
 
-    getPincodeInformations() {
-      this.FETCH_ALL_STATES_DATA();
-    },
     ajaxLoadAllLeadInfo1({ pagination, filter }) {
       this.$q.loading.show({
         delay: 0,
@@ -615,11 +541,6 @@ export default {
       });
       this.DEVICE_RECOVERY_UNASSIGNED_LIST({ pagination, filter })
         .then(() => {
-          this.paginationControl1 = pagination;
-          this.paginationControl1.rowsNumber = this.getDeviceRecoveryUnassignedList.totalElements;
-          this.paginationControl1.page = this.getDeviceRecoveryUnassignedList.number + 1;
-          this.tableData1 = this.getDeviceRecoveryUnassignedList.content;
-
           this.IMPLEMENTATION_EXECUTIVE_LIST().then(() => {
             let assumeArr = [];
             this.getImplementationExecutiveList.map(function (value) {
@@ -631,7 +552,10 @@ export default {
             this.assignToOptions = assumeArr;
             this.assignToOptionsFiltered = assumeArr;
           });
-
+          this.paginationControl1 = pagination;
+          this.paginationControl1.rowsNumber = this.getDeviceRecoveryUnassignedList.totalElements;
+          this.paginationControl1.page = this.getDeviceRecoveryUnassignedList.number + 1;
+          this.tableData1 = this.getDeviceRecoveryUnassignedList.content;
           this.$q.loading.hide();
         })
         .catch(() => {
@@ -658,7 +582,7 @@ export default {
     },
 
     goToUnassignedTab(tab) {
-      if (tab == "unAssigned") {
+      if (tab === "unAssigned") {
         this.ajaxLoadAllLeadInfo1({
           pagination: this.paginationControl1,
           filter: this.filterSearch1,
@@ -736,7 +660,7 @@ export default {
 <style scoped>
 .customTd {
   text-align: left !important;
-  word-break: break-word;
+  word-wrap: break-word;
   white-space: normal;
 }
 .customTd.customCellLength {

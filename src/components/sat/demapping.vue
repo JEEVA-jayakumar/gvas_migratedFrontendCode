@@ -251,6 +251,7 @@ export default {
   }
 };
 </script>
+
 <style>
 .btnalign {
   margin-left: 190px;

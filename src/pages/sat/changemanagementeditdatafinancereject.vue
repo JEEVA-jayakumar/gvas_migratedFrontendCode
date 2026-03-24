@@ -200,8 +200,7 @@
             </q-input>
           </div>
            </div> <br />
-        
-      
+
         <q-stepper-navigation>
           <!-- <q-btn color="primary" @click="$refs.stepper.goToStep('create_ad')">Create ad now</q-btn> -->
           <div v-if="((formdata.plan == this.getImplementedQueue.leadInformation.plan.id) && (check==false) && (this.getImplementedQueue.leadInformation.cmsLeadStatus==15))">
@@ -215,7 +214,6 @@
                 label="Back to document validation"
                 @click="goBackToDocumentVerificationStage()"
               /> -->
-             
 
       <!-- <q-btn class="q-ml-sm" color="primary" @click="$refs.stepper.next()">Continue</q-btn> -->
           </div>
@@ -230,7 +228,6 @@
                 label="Back to document validation"
                 @click="goBackToDocumentVerificationStage()"
               /> -->
-             
 
       <!-- <q-btn class="q-ml-sm" color="primary" @click="$refs.stepper.next()">Continue</q-btn> -->
           </div>
@@ -245,7 +242,6 @@
                 label="Back to document validation"
                 @click="goBackToDocumentVerificationStage()"
               /> -->
-             
 
       <!-- <q-btn class="q-ml-sm" color="primary" @click="$refs.stepper.next()">Continue</q-btn> -->
           </div>
@@ -1385,8 +1381,7 @@
         <!-- START >> Handover to SAT, document upload -->
     
            </div>
-        
-        
+
         <q-stepper-navigation>
           <q-btn class="q-ml-sm" color="secondary"  @click="finalFormSubmitKyc(merchant)">Submit to Mars</q-btn>
           <!-- <q-btn color="primary" @click="$refs.stepper.next()">Submit</q-btn> -->
@@ -1405,10 +1400,7 @@
   </q-page>
   
 </template>
-<style>
-</style>
-<style scoped>
-</style>
+
 <script>
 
 import { LocalStorage } from "quasar";
@@ -3309,20 +3301,6 @@ export default {
 
 
 </script>
+
 <style>
-.customQuasarSelect {
-  padding: 5px;
-}
-
-label {
-  padding: 5px 10px;
-  display: table;
-}
-
-input[type="file"] {
-  display: none;
-}
-.bg-dark-custom {
-  background: rgba(0, 0, 0, 0.5);
-}
 </style>

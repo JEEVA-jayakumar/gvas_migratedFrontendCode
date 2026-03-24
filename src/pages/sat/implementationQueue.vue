@@ -4,24 +4,25 @@
       <div class="row bottom-border q-pa-sm items-center">
         <div class="col">
           <q-tabs
-            no-pane-border
             v-model="inventoryOptionSelected"
             color="dark"
-            filled
+            active-color="primary"
+            indicator-color="primary"
             class="shadow-1"
           >
             <q-tab name="internal" label="Bijlipay Implementation Queue" />
-            <!-- <q-tab name="spareSo" label="Spare Parts So" /> -->
             <q-tab name="external" label="Aggregator Implementation Queue" />
-</q-tabs>
-<q-tab-panels v-model="inventoryOptionSelected" animated>
-<q-tab-panel name="internal">
+          </q-tabs>
+
+          <q-tab-panels v-model="inventoryOptionSelected" animated>
+            <q-tab-panel name="internal">
               <internalimplementationRequest/>
             </q-tab-panel>
-<q-tab-panel name="external">
+
+            <q-tab-panel name="external">
               <externalimplementationRequest/>
             </q-tab-panel>
-</q-tab-panels>
+          </q-tab-panels>
         </div>
       </div>
     </div>
@@ -32,66 +33,17 @@
  import internalimplementationRequest from "../../components/sat/internalimplementationRequest.vue";
  import externalimplementationRequest from "../../components/sat/externalimplementationRequest.vue";
 
-import { mapGetters, mapActions } from "vuex";
 export default {
-  name: "inventoryAllocation",
-
+  name: "implementationQueue",
   components: {
     internalimplementationRequest,
     externalimplementationRequest
-    
   },
-
   data() {
     return {
-      enableUploadInventoryBtn: true,
-      toggleScanButton: true,
-      inventoryOptionSelected: "implementationQueue"
+      inventoryOptionSelected: "internal"
     };
-  },
-
-//   computed: {
-//     ...mapGetters("SAT_RegionalInventoryAllocation", [
-//       "getAllRegionalInventoryDeviceDetailsWithCount",
-//       "getCurrentPODNumber",
-//       "getCurrentDeviceId",
-//       "getAllInventorywithsoDeviceDetailsWithCount"
-//     ]),
-//     ...mapGetters("InventoryWithSo", ["getAllInventoryWithSo"])
-//   },
-
-//   created() {
-//     this.fnAjaxFetchAllDeviceDetailsWithCount();
-//   },
-
-//   methods: {
-//     ...mapActions("SAT_RegionalInventoryAllocation", [
-//       "FETCH_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT",
-//       "FETCH_REGIONAL_INVENTORY_SERIAL_NUMBER_BY_DEVICE",
-//       "FETCH_INVENTORY_WITH_SO_DEVICE_DETAIL_WITH_COUNT"
-//     ]),
-//     ...mapActions("InventoryWithSo", ["FETCH_INVENTORY_WITH_SO"]),
-//     // fnAjaxFetchAllDeviceDetailsWithCount() {
-//     //   this.toggleAjaxLoadFilter = true;
-//     //   this.FETCH_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT(
-//     //     JSON.parse(localStorage.getItem("u_i")).region.id
-//     //   )
-//     //     // this.FETCH_INVENTORY_WITH_SO_DEVICE_DETAIL_WITH_COUNT(
-//     //     //   JSON.parse(localStorage.getItem("u_i")).region.id
-//     //     // )
-//     //     .then(() => {
-//     //       let requestParams = {
-//     //         region: JSON.parse(localStorage.getItem("u_i")).region.id,
-//     //         action: this.$REGIONAL_INVENTORY_FILTER_ACTION_DEVICE
-//     //       };
-//     //       this.FETCH_REGIONAL_INVENTORY_SERIAL_NUMBER_BY_DEVICE(requestParams);
-//     //       this.toggleAjaxLoadFilter = false;
-//     //     })
-//     //     .catch(error => {
-//     //       this.toggleAjaxLoadFilter = false;
-//     //     });
-//     // }
-//   }
+  }
 };
 </script>
 

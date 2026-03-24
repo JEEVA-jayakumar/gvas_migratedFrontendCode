@@ -259,6 +259,7 @@
         </div>
     </div>
 </template>
+
 <script>
 import { required } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";

@@ -56,11 +56,1115 @@
                 <q-tab color="dark" name="opened" label="Opened" />
                 <q-tab color="dark" name="closed" label="Closed" /> -->
 </q-tabs>
-<q-tab-panels v-model="selectedTab" animated>
-<q-tab-panel name="opened">
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+
+        <!-- content -->
+        <div>
+            <internalServiceRequestPopup v-if="propToggleServiceRequest" :ServiceRequest="addtnServiceRequest"
+                :propToggleServiceRequestPop="propToggleServiceRequest" @closeServiceRequest="toggleServiceRequest" />
+        </div>
+        <div>
+            <!--END: table title -->
+            <!--START: table Footer -->
+            <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="left">
+                        <span class="q-display-2">{{
+                                formData.marsDeviceIdsCooked.length
+                        }}</span>/ selected
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium" align="auto">
+                        <b>
+                            <label>Request Mode</label>
+                        </b>
+                        <div class="col-md-2 col-sm-6 col-xs-6">
+                            <q-radio v-for="(item, index) in requestOptions" :key="index" color="grey-9"
+                                v-model.trim="formData.serviceRequestMode" :val="item.value" :label="item.label" />
+                        </div>
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'Direct Dispatch'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+
+                    </div>
+                    <div v-if="formData.serviceRequestMode == 'SO'" class="col-md-3 col-sm-6 col-xs-6">
+                        <q-select filter clearable v-model="formData.assignTo.id" separator color="grey-9" :options="assignToOptions"
+                            placeholder="Assign To" />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+                        <q-btn no-caps :disabled="
+                            formData.marsDeviceIdsCooked.length == 0
+                        " label="Assign" class="common-dark-blue" @click="assignImplementationUser" />
+                    </div>
+                </div>
+            </q-card>
+            <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+                <div class="row items-center gutter-y-sm">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="row items-center">
+                            <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+                        </div>
+                    </div>
+                </div>
+            </q-card>
+            <!--END: table Footer -->
+            <q-tabs v-model="selectedTab" class="shadow-1" color="grey-1" @update:model-value="goToUnassignedTab">
+                <q-tab color="dark" name="unAssigned" label="Unassigned" />
+                <q-tab color="dark" name="assigned" label="Assigned" />
+                <q-tab color="dark" name="opened" label="Opened" />
+                <q-tab color="dark" name="closed" label="Closed" /> -->
+</q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+<q-tab-panell name="opened">
               <opened/>
-            </q-tab-panel>
-<q-tab-panel name="unAssigned">
+            </q-tab-panell>
+<q-tab-panell name="unAssigned">
                     <q-table :rows="internalUnAssignedTableData" :columns="columnDataUnassigned"
                         table-class="customTableClass" :filter="filterSearch1" selection="multiple"
                         :selected="formData.marsDeviceIdsCooked" v-model:pagination="paginationControl1" row-key="id"
@@ -154,8 +1258,8 @@
                             </div>
                         </template>
                     </q-table>
-                </q-tab-panel>
-<q-tab-panel name="assigned">
+                </q-tab-panell>
+<q-tab-panell name="assigned">
                     <q-table :rows="internalAssignedTableData" :columns="columnDataAssigned"
                         table-class="customTableClass" :filter="filterSearch" v-model:pagination="paginationControl"
                         v-model:selected="formData.marsDeviceIdsCookedUnAssinged" row-key="id" :loading="tableAjaxLoading"
@@ -429,9 +1533,6 @@
                                     </div>
                                 </q-td>
 
-
-
-
                                 <q-td>
                                     <div class="text-left q-caption text-grey-8 text-weight-medium">Part Type</div>
                                     <div class="text-left" v-if="props.row.subTicketsList.length > 0">
@@ -461,8 +1562,8 @@
                             </div>
                         </template>
                     </q-table>
-                </q-tab-panel>
-</q-tab-panels>
+                </q-tab-panell>
+</q-tab-panells>
             <div class="row items-center gutter-y-sm">
                 <div class="col-md-9 col-sm-12 col-xs-12">
                     <div class="row items-center"></div>

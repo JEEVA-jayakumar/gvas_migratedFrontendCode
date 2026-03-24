@@ -1,27 +1,24 @@
 <template>
   <q-page>
     <div>
-      <!--START: table title -->
       <div
         class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >Bijlipay Master Tracker-Implemented</div>
-      <!--END: table title -->
-      <!-- //Common lead information in popup -->
+
       <generalLeadInformation
         v-if="propToggleLeadInformation"
         :leadInformation="addtnLeadInformation"
         :propToggleLeadInformationPop="propToggleLeadInformation"
         @closeLeadInformation="toggleLeadInformation"
       />
-      <!-- content -->
-      <!--START: table lead validation -->
+
       <q-table
         table-class="customTableClass"
         :rows="tableData"
         :columns="columns"
         :filter="filter"
         v-model:pagination="paginationControl"
-        row-key="name"
+        row-key="id"
         :loading="toggleAjaxLoadFilter"
         :rows-per-page-options="[5,10,15,20,25]"
         @request="ajaxLoadAllLeadInfo"
@@ -42,7 +39,7 @@
             class="cursor-pointer"
             @click="toggleLeadInformation(props.row.leadInformation)"
           >
-            <span class="label text-primary"># {{props.row.leadInformation.leadNumber}}</span>
+            <span class="label text-primary"># {{props.row.leadInformation?.leadNumber}}</span>
           </q-td>
         </template>
         <template v-slot:body-cell-mobileNumber="props">
@@ -62,7 +59,6 @@
         </template>
 
         <template v-slot:top>
-          <!--START: table filter,search,excel download -->
           <div class="col-5">
             <q-input
               clearable
@@ -71,53 +67,43 @@
               placeholder="Type.."
               label="Search by MID, TID, Merchant Name"
               class="q-mr-lg q-py-sm"
-            />
+            >
+              <template v-slot:append>
+                <q-icon name="search" />
+              </template>
+            </q-input>
           </div>
           <div class="col-md-6">
             <q-btn 
-            square 
-            outline 
-            color="purple-9" 
-            label="Download as Excel" 
-            class="q-mr-lg q-py-sm float-right" 
-            size="md" 
-            @click="downloadmastertrackerlist()" />
+              square
+              outline
+              color="purple-9"
+              label="Download as Excel"
+              class="q-mr-lg q-py-sm float-right"
+              size="md"
+              @click="downloadmastertrackerlist()" />
           </div>
         </template>
       </q-table>
-      <!--END: table lead validation -->
-      <!--START >>  Download Reports -->
+
       <DownloadMasterTracker
-         v-if="propMasterTrackerList" 
+        v-if="propMasterTrackerList"
         :propMasterTrackerList="propMasterTrackerList" 
         @emitfnshowMasterTrackerList="downloadmastertrackerlist"
-     ></DownloadMasterTracker>
-      <!--END:  Download Reports-->
-      <showMerchantTransactionLevelDetails
-        v-if="valueToggleMerchantTransaction"
-        :valueToggleMerchantTransaction="valueToggleMerchantTransaction"
-        @revertRowClick="rowClick"
-      ></showMerchantTransactionLevelDetails>
-
-      <!--START >>  Show Ajax Spinner -->
-      <div v-if="toggleAjaxLoadFilter" class="fullscreen spinner-overlay">
-        <q-spinner-bars class="absolute-center" style="color:#61116a" :size="35" />
-      </div>
-      <!--END >>  Show Ajax Spinner --> 
+      />
     </div>
   </q-page>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import showMerchantTransactionLevelDetails from "../../components/sat/showMerchantTransactionLevelDetails.vue";
+
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 import DownloadMasterTracker from "../../components/sat/DownloadMasterTracker.vue";
 
 export default {
-  name: "merchantTransactionLevel",
+  name: "masterTracker",
   components: {
-    showMerchantTransactionLevelDetails,
     generalLeadInformation,
     DownloadMasterTracker,
   },
@@ -135,7 +121,6 @@ export default {
         rowsPerPage: 10
       },
       tableData: [],
-      valueToggleMerchantTransaction: false,
       filter: "",
       columns: [
         {
@@ -207,7 +192,7 @@ export default {
           required: true,
           label: "Implemented by",
           align: "left",
-          field: row => row.assignedTo ? `${row.assignedTo.name} | ${row.assignedTo.employeeID}` : "NA",
+          field: row => row.assignedTo ? (row.assignedTo.name + " | " + row.assignedTo.employeeID) : "NA",
           sortable: true
         },
         {
@@ -215,7 +200,7 @@ export default {
           required: true,
           label: "Implemented Address",
           align: "left",
-          field: row => row.deviceAddress,
+          field: "deviceAddress",
           sortable: true
         },
         {
@@ -226,8 +211,7 @@ export default {
           field: row => row.leadInformation?.contactNumber,
           sortable: false
         }
-      ],
-      loading: true,
+      ]
     };
   },
   computed: {
@@ -241,7 +225,6 @@ export default {
   },
   methods: {
     ...mapActions("MasterTracker", ["MASTER_TRACKER_LIST"]),
-   
     ajaxLoadAllLeadInfo({ pagination, filter }) {
       this.$q.loading.show({
         delay: 0,
@@ -249,7 +232,7 @@ export default {
         message: "Fetching data .."
       });
       this.MASTER_TRACKER_LIST({ pagination, filter })
-        .then(() => {
+        .then(res => {
           this.paginationControl = pagination;
           this.paginationControl.rowsNumber = this.getMasterTrackerList.totalElements;
           this.paginationControl.page = this.getMasterTrackerList.number + 1;
@@ -264,7 +247,6 @@ export default {
           this.$q.loading.hide();
         });
     },
-
     toggleLeadInformation(leadDetails) {
       this.propToggleLeadInformation = !this.propToggleLeadInformation;
       if (leadDetails != undefined) {
@@ -273,10 +255,7 @@ export default {
     },
     downloadmastertrackerlist(){
       this.propMasterTrackerList=!this.propMasterTrackerList;
-    },
+    }
   }
 };
 </script>
-
-<style>
-</style>

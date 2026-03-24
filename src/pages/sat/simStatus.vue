@@ -1,12 +1,12 @@
 <template>
   <q-page>
-    <div>
+    <div class="q-pa-md">
       <div
-        class="col-md-6 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+        class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >Sim Status</div>
       <q-table
         table-class="customTableClass"
-        v-model:columns="columns"
+        :columns="columns"
         :filter="filter"
          :rows="tableData" v-model:pagination="paginationControl"
         row-key="id"
@@ -15,67 +15,31 @@
          @request="ajaxLoadAllLeadInfo"
       >
 
-        <!-- <template v-slot:body-cell-createdAt="props">
-            <q-td :props="props">
-            {{ $moment(props.row.createdAt).format("Do MMM Y") }}
-          </q-td>
-          </template>
-        <template v-slot:body-cell-receivedAt="props">
-            <q-td :props="props">
-            {{ $moment(props.row.receivedAt).format("Do MMM Y") }}
-          </q-td>
-          </template>
-        <template v-slot:body-cell-receivedAt="props">
-            <q-td :props="props">
-            {{ $moment(props.row.receivedAt ==null? "NA" : props.row.receivedAt).format("Do MMM Y") }}
-          </q-td>
-          </template>
-        <template v-slot:body-cell-DeviceList="props">
-            <q-td :props="props">
-            {{ $moment(props.row.device.createDate).format("Do MMM Y") }}
-          </q-td>
-          </template>
-        <template v-slot:body-cell-ModifyDate="props">
-            <q-td :props="props">
-            {{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}
-          </q-td>
-          </template>-->
-
         <template v-slot:top="props">
           <div class="col-md-5">
             <q-input
               clearable
               v-model="filter"
-              separator
               color="grey-9"
               placeholder="Type.."
               label="Sim Number"
               class="q-mr-lg q-py-sm"
             />
           </div>
-          <div class="col-md-5">
+          <div class="col-md-7" align="right">
             <q-btn
               no-caps
               label="Upload file for Activation"
-              class="common-dark-blue agnalgin1"
+              class="common-dark-blue q-mx-xs"
               @click="UploadSimActivation()"
             />
-            &nbsp;
             <q-btn
               no-caps
               label="Upload file for De-Activation"
-              class="common-dark-blue agnalgin1"
+              class="common-dark-blue q-mx-xs"
               @click="SimDeActivation()"
             />
-            <!-- <downloadExcel
-              :rows="getAllInventoryWithResellar"
-              :fields="json_fields"
-              name="InventoryWithReseller.xls"
-            >
-              <q-btn outline color="grey-9" label="Download as excel" />
-            </downloadExcel> -->
           </div>
-          <!--END: table excel download -->
         </template>
       </q-table>
 
@@ -89,96 +53,55 @@
       :propSimDeactivation = "propSimDeactivation"
       @emitpropSimDeactivation = "SimDeActivation"
       ></uploadSimDeactivation>
-      <!--END: table data -->
-       <!--START >>  Download Reports -->
-      <!--END:  Download Reports-->
     </div>
   </q-page>
 </template>
 
 <script>
-import { required } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
-import { date } from "quasar";
 import moment from "moment";
-
 import uploadSimActivation from "../../components/sat/uploadSimActivation.vue";
 import uploadSimDeactivation from "../../components/sat/uploadSimDeactivation.vue";
+
 export default {
-  name: "merchantTracker",
+  name: "simStatus",
   components: {
   uploadSimActivation,
   uploadSimDeactivation
   },
-
   data() {
     return {
-        propSimActivationList:false,
-        propSimDeactivation:false,
-      propInventoryResellerList:false,
+      propSimActivationList:false,
+      propSimDeactivation:false,
       paginationControl: {
         rowsPerPage: 10,
-           sortBy: "id",
+        sortBy: "id",
+        descending: false,
+        page: 1,
+        rowsNumber: 0
       },
       filter: "",
-      filter_values: "",
-      json_fields: {
-        SoName: "user.name",
-        PodNumber: "podnumber",
-        SerialNumber: "serialnumber",
-        DeviceName: "device.deviceName",
-        createDate: {
-          field: "createDate",
-          callback: value => {
-            if (value == null) {
-              return "NA";
-            } else {
-              return moment(value).format("DD/MM/YYYY");
-            }
-          }
-        },
-        ReceivedDate: {
-          field: "modifyDate",
-          callback: value => {
-            if (value == null) {
-              return "NA";
-            } else {
-              return moment(value).format("DD/MM/YYYY");
-            }
-          }
-        },
-        BPRegion: "region.regionGroup.regionName"
-      },
-
       columns: [
         {
           name: "simNo",
           required: true,
           label: "Sim Number",
           align: "center",
-          field: row => {
-            return row.simNo;
-          },
+          field: row => row.simNo,
           sortable: true
         },
         {
           name: "activationDate",
           label: "Activation Date",
- 
           align: "center",
-           field: row => {
-            return row.activationDate == null ? "NA" :  moment(row.activationDate).format("DD/MM/YYYY");
-          },
+           field: row => row.activationDate == null ? "NA" : moment(row.activationDate).format("DD/MM/YYYY"),
           sortable: true
         },
         {
           name: "deactivationDate",
           label: "Deactivation Date",
-    
           align: "center",
-            field: row => {
-            return row.deactivationDate == null ? "NA" :  moment(row.deactivationDate).format("DD/MM/YYYY");
-          },
+            field: row => row.deactivationDate == null ? "NA" : moment(row.deactivationDate).format("DD/MM/YYYY"),
           sortable: true
         },
         {
@@ -186,29 +109,21 @@ export default {
           required: true,
           label: "Sim Card Deployed Date",
           align: "center",
-          field: row => {
-            return row.deployedDate == null ? "NA" : moment(row.deployedDate).format("DD/MM/YYYY");
-          }
+          field: row => row.deployedDate == null ? "NA" : moment(row.deployedDate).format("DD/MM/YYYY")
         },
-
         {
           name: "simRecoveredDate",
           required: true,
           label: "Sim Recoverd Date ",
           align: "center",
-          field: row => {
-            return row.simRecoveredDate == null ? "NA" : moment(row.simRecoveredDate).format("DD/MM/YYYY");
-          }
+          field: row => row.simRecoveredDate == null ? "NA" : moment(row.simRecoveredDate).format("DD/MM/YYYY")
         },
-
         {
           name: "logonDate",
           required: true,
           label: "Logon Date",
           align: "center",
-          field: row => {
-            return row.logonDate == null ? "NA" : moment(row.logonDate).format("DD/MM/YYYY"); 
-          },
+          field: row => row.logonDate == null ? "NA" : moment(row.logonDate).format("DD/MM/YYYY"),
           sortable: true
         },
         {
@@ -216,115 +131,64 @@ export default {
           required: true,
           label: "Sim Status",
           align: "center",
-          field: row => {
-            return row.simStatus;
-          },
+          field: row => row.simStatus,
           sortable: true
         }
       ],
-      tableData: []
+      tableData: [],
+      toggleAjaxLoadFilter: false
     };
   },
   computed: {
     ...mapGetters("Regional", ["getSimStatus"])
   },
-  // created() {
-  //   this.FETCH_INVENTORY_WITH_RESELLAR();
-  // },
   mounted() {
     this.ajaxLoadAllLeadInfo({
       pagination: this.paginationControl,
       filter: this.filter
     });
   },
-    created() {
-    this.ajaxLoadAllLeadInfo({
-      pagination: this.paginationControl,
-      filter: this.filter
-    });
-  },
-
   methods: {
     ...mapActions("Regional", ["FETCH_ALL_SIM_STATUS_BY_REGION"]),
-    // ...mapActions("reports", ["INVENTORY_WITH_RESELLER_LIST_"]),
-
-    // downloadInventoryResellerList(){
-    //    this.propInventoryResellerList=!this.propInventoryResellerList;
-    // },
-
     UploadSimActivation(){
-    this.propSimActivationList =! this.propSimActivationList;
-
-    if(this.propSimActivationList == false){
- this.ajaxLoadAllLeadInfo({
-      pagination: this.paginationControl,
-      filter: this.filter
-    }); 
-    }
-      
+      this.propSimActivationList =! this.propSimActivationList;
+      if(this.propSimActivationList == false){
+        this.ajaxLoadAllLeadInfo({
+          pagination: this.paginationControl,
+          filter: this.filter
+        });
+      }
     },  
-
-SimDeActivation(){
-this.propSimDeactivation =! this.propSimDeactivation
- this.ajaxLoadAllLeadInfo({
-      pagination: this.paginationControl,
-      filter: this.filter
-    }); 
-},
-   
-
+    SimDeActivation(){
+      this.propSimDeactivation =! this.propSimDeactivation;
+      if(this.propSimDeactivation == false){
+        this.ajaxLoadAllLeadInfo({
+          pagination: this.paginationControl,
+          filter: this.filter
+        });
+      }
+    },
     ajaxLoadAllLeadInfo({ pagination, filter }) {
-      // we set QTable to "loading" state
       this.$q.loading.show({
-        delay: 0, // ms
+        delay: 0,
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
       this.FETCH_ALL_SIM_STATUS_BY_REGION({ pagination, filter }).then(res => {
-      console.log("SIM STATUS",JSON.stringify(this.getSimStatus))
-
           this.paginationControl = pagination;
           this.paginationControl.rowsNumber = this.getSimStatus.totalElements;
-          this.paginationControl.page =
-            this.getSimStatus.number + 1;
+          this.paginationControl.page = this.getSimStatus.number + 1;
           this.tableData = this.getSimStatus.content;
-        console.log("TABLE DATA",JSON.stringify(this.getSimStatus))
- ;
           if (this.getSimStatus.sort != null) {
-            this.paginationControl.sortBy = this.sort[0].property;
-            this.paginationControl.descending = this.getSimStatus.sort[0].ascending;
+            this.paginationControl.sortBy = this.getSimStatus.sort[0].property;
+            this.paginationControl.descending = !this.getSimStatus.sort[0].ascending;
           }
-          // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
         })  
         .catch(() => {
           this.$q.loading.hide();
         });
-    },
-    // downloadReport() {
-    //   this.$q.loading.show({
-    //     delay: 100 // ms
-    //   });
-    //   this.INVENTORY_WITH_RESELLER_LIST_(this.formData)
-    //     .then(() => {
-    //       this.$q.loading.hide();
-    //       this.$q.notify({
-    //         color: "positive",
-    //         position: "bottom",
-    //         message: "Success, file has been downloaded",
-    //         icon: "check"
-    //       });
-    //     })
-    //     .catch(error => {
-    //       this.$q.loading.hide();
-    //       this.$q.notify({
-    //         color: "negative",
-    //         position: "bottom",
-    //         message: "Please try again",
-    //         icon: "thumb_down"
-    //       });
-    //     });
-    // }
+    }
   }
 };
 </script>

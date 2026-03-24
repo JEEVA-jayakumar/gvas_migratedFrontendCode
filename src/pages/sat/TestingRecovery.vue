@@ -62,7 +62,6 @@
                         <q-btn square outline color="purple-9" label="Download as Excel"
                             class="q-mr-lg q-py-sm float-right" size="md" @click="downloadDeviceRecovery()" />
 
-
                     </div>
                     <div class="col-md-5">
                         <q-btn-dropdown outline no-caps class="text-weight-regular" color="purple-9"

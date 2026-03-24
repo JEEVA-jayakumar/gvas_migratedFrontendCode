@@ -92,8 +92,1771 @@
         <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
       </q-tabs>
 
-      <q-tab-panels v-model="selectedTab" animated @update:model-value="goToUnassignedTab">
-        <q-tab-panel name="assigned" class="q-pa-none">
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+
+</q-tab-panells>
+   <!-- content -->
+    <div>
+      <div
+        class="
+          q-title q-px-lg q-py-md
+          text-weight-regular
+          bottom-border
+          text-grey-9
+        "
+      >
+        Aggregator Service Request
+      </div>
+      <!--END: table title -->
+      <!--START: table Footer -->
+      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+        <div class="row items-center gutter-y-sm">
+          <div
+            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
+            align="left"
+          >
+            <span class="q-display-2">{{
+              formData.marsDeviceIdsCooked.length
+            }}</span
+            >/ selected
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              filter
+              clearable
+              v-model="formData.assignTo.id"
+              separator
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToOptions"
+              placeholder="Assign To"
+            />
+          </div> -->
+          &nbsp;&nbsp;
+          <div class="col-md-3 col-sm-6 col-xs-6" style="flex: 1;  max-width: 200px;" align="right">
+            <q-select
+              use-input
+              @filter="filterAssignToRegion"
+              clearable
+              v-model="formData.assignTo.region"
+              color="grey-9"
+              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :options="assignToRegionOptions"
+              placeholder="Assign To Region"
+              emit-value
+              map-options
+            />
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
+            <q-btn
+              no-caps
+              :disabled="
+              (this.formData.assignTo.region == '' || this.formData.assignTo.region == null)
+              "
+              label="Assign"
+              class="common-dark-blue"
+              @click="assignImplementationUser"
+            />
+          </div>
+        </div>
+      </q-card>
+      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+        <div class="row items-center gutter-y-sm">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+            <div class="row items-center">
+              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+      <!--END: table Footer -->
+      <q-tabs
+        v-model="selectedTab"
+        class="shadow-1"
+        color="grey-1"
+        active-color="dark"
+      >
+        <q-tab
+          name="unAssigned"
+          label="Opened"
+        />
+        <q-tab
+          name="assigned"
+          label="Resolved Tickets"
+        />
+        <q-tab name="Ticket" label="Ticket Bulk Assign/Reassign" />
+      </q-tabs>
+
+<q-tab-panells v-model="selectedTab" animated>
+        <q-tab-panell name="assigned" class="q-pa-none">
           <!--START: table Data -->
           <q-table
             :rows="tableData"
@@ -176,9 +1939,9 @@
             </template>
           </q-table>
           <!--END: table Data -->
-        </q-tab-panel>
+        </q-tab-panell>
 
-        <q-tab-panel name="unAssigned" class="q-pa-none">
+        <q-tab-panell name="unAssigned" class="q-pa-none">
           <!--START: table Data -->
           <q-table
             :rows="tableData1"
@@ -318,12 +2081,12 @@
             </template>
           </q-table>
           <!--END: table Data -->
-        </q-tab-panel>
+        </q-tab-panell>
 
-        <q-tab-panel name="Ticket" class="q-pa-none">
+        <q-tab-panell name="Ticket" class="q-pa-none">
           <ticketAssign />
-        </q-tab-panel>
-      </q-tab-panels>
+        </q-tab-panell>
+</q-tab-panells>
 
       <div class="row items-center gutter-y-sm">
         <div class="col-md-9 col-sm-12 col-xs-12">
