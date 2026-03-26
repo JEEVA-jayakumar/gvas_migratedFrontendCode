@@ -142,7 +142,7 @@
                           label="View Document"
                           icon="attach_file"
                           @click="fnPDFViewModal(formData.shortLead.paymentDocumentFile,'CHEQUE')"
-                        ></q-btn>
+                        />
                       </div>
                       <div
                         v-else-if="formData.shortLead.paymentDocumentMimeType != null && formData.shortLead.paymentDocumentMimeType.includes('image')"

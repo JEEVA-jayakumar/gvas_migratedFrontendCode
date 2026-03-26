@@ -1,154 +1,129 @@
 <template>
-    <div>
-      <q-dialog
-        :model-value="showRejectModal"
-        @hide="emitToggleLost(showRejectModal)"
-        @escape-key="emitToggleLost(showRejectModal)"
-        :content-css="{ padding: '25px' }"
-      >
-      <div>
+  <div>
+    <q-dialog
+      :model-value="showRejectModal"
+      @hide="emitToggleLost"
+      @escape-key="emitToggleLost"
+      persistent
+    >
+      <q-card style="min-width: 350px" class="q-pa-md">
+        <q-card-section>
           <div align="center" class="text-weight-light text-grey-8 q-mb-md">
-            <h5><b>Reason</b></h5>
+            <div class="text-h5"><b>Reason</b></div>
           </div>
           <div align="left" class="text-weight-light text-grey-8 q-mb-md">
             Add your Reason and then submit...
           </div>
-  
+
           <div class="gutter-xs">
             <q-input
               type="textarea"
               placeholder="Type.."
-              @blur="$v.remarks.$touch"
-              :error="$v.remarks.$error"
+              @blur="v$.remarks.$touch"
+              :error="v$.remarks.$error"
               class="q-my-md"
               color="grey-9"
               align="left"
-              value=""
               v-model="remarks"
-              @update:model-value="fnMapRemarks"
             />
           </div>
+        </q-card-section>
+
+        <q-card-actions align="right">
           <q-btn
-            color="positive"
-            class="q-ma-sm float-right"
-            @click="rejectSelfAssign(formData.data)"
-            align="right"
-            label="Submit"
+            flat
+            label="Cancel"
+            color="grey-9"
+            @click="emitToggleLost"
           />
           <q-btn
-            align="right"
-            color="grey-9"
-            class="float-right q-ma-sm"
-            @click="emitToggleLost(showRequestModal)"
-            >Cancel
-          </q-btn>
-        </div>
-      </q-dialog>
-    </div>
-  </template>
-  <script>
-  import {
-    required,
-    requiredIf,
-    email,
-    minLength,
-    maxLength,
-    alpha,
-    alphaNum,
-    numeric
-  } from "@vuelidate/validators";
-  import { mapGetters, mapActions } from "vuex";
-  export default {
-    props: ["showRejectModal", "propsRejectDeviceComponent"],
-  
-    data() {
-      return {
-        dataCopy: [],
-        remarks: "",
-        formData: {
-          data: this.propsRejectDeviceComponent
-        }
-      };
-    },
-  
-    validations: {
-      remarks: {
-        required
+            label="Submit"
+            color="positive"
+            @click="rejectSelfAssign(formData.data)"
+          />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+  </div>
+</template>
+
+<script>
+import { useVuelidate } from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
+import { mapGetters, mapActions } from "vuex";
+
+export default {
+  props: ["showRejectModal", "propsRejectDeviceComponent"],
+  setup() {
+    return { v$: useVuelidate() };
+  },
+  data() {
+    return {
+      remarks: "",
+      formData: {
+        data: this.propsRejectDeviceComponent
       }
-    },
-    error: {
-      remarks: {
-        alert: false,
-        issue: "",
-        value: ""
-      }
-    },
-    beforeMount() {
-      // this.dataCopy = this.propsRejectDeviceComponent;
-    
-      // this.dataCopy = this.propsRejectDeviceComponent.regionalInventory;
-     console.log("REJECT COMP---------->",JSON.stringify(this.propsRejectDeviceComponent));
-      this.dataCopy1 = this.propsRejectDeviceComponent;
-    
-    },
-    computed: {
-      ...mapGetters("MasterTracker", ["getApproveLostOrStolenData"])
-    },
-  
-    methods: {
-      ...mapActions("VerifyDevice", [
-     "REJECT_SELF_ASSIGNMENT"
-    ]),
-      emitToggleLost(showRejectModal) {
-        this.$emit("closeLostModel");
-      },
-      rejectSelfAssign (reqData) {
-        console.log("REJ REQ",JSON.stringify(reqData));
-        let param = {
-          selfAssignmentId:reqData.id,
-          remarks:this.remarks
-        }
-        console.log("PARAM",JSON.stringify(param));
-          this.$v.remarks.$touch();
-          if (this.$v.remarks.$error) {
-            this.$q.notify("Please enter reason.");
-          }
-          else {
-        this.$q
-          .dialog({
-            title: "Confirm",
-            message: "Are you sure want to Reject?",
-            ok: "Continue",
-            cancel: "Cancel"
-          }).onOk(() => {
-            this.$q.loading.show({
-              delay: 0, // ms
-              spinnerColor: "purple-9",
-              message: "Processing .."
-            });
-  
-            this.REJECT_SELF_ASSIGNMENT(param)
-              .then(() => {
-                this.$emit("closeLostModel");
-                this.$q.loading.hide();
-                this.$q.notify({ 
-                  color: "positive",
-                  position: "bottom",
-                  message: "Successfully Rejected!",
-                  icon: "thumb_up"
-                });
-              }).catch(error => {
-                this.$q.loading.hide();
-                this.$q.notify({
-                  color: "negative",
-                  position: "bottom",
-                  message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
-                  icon: "thumb_down"
-                });
-              });
-          });
-          }
-      }
+    };
+  },
+  validations: {
+    remarks: {
+      required
     }
-  };
-  </script>
+  },
+  methods: {
+    ...mapActions("VerifyDevice", ["REJECT_SELF_ASSIGNMENT"]),
+    emitToggleLost() {
+      this.$emit("closeLostModel");
+    },
+    rejectSelfAssign(reqData) {
+      this.v$.remarks.$touch();
+      if (this.v$.remarks.$error) {
+        this.$q.notify({
+          color: "negative",
+          message: "Please enter reason."
+        });
+        return;
+      }
+
+      this.$q.dialog({
+        title: "Confirm",
+        message: "Are you sure want to Reject?",
+        ok: "Continue",
+        cancel: "Cancel"
+      }).onOk(() => {
+        this.$q.loading.show({
+          delay: 0,
+          spinnerColor: "purple-9",
+          message: "Processing .."
+        });
+
+        let param = {
+          selfAssignmentId: reqData.id,
+          remarks: this.remarks
+        };
+
+        this.REJECT_SELF_ASSIGNMENT(param)
+          .then(() => {
+            this.$emit("closeLostModel");
+            this.$q.loading.hide();
+            this.$q.notify({
+              color: "positive",
+              position: "bottom",
+              message: "Successfully Rejected!",
+              icon: "thumb_up"
+            });
+          })
+          .catch(error => {
+            this.$q.loading.hide();
+            this.$q.notify({
+              color: "negative",
+              position: "bottom",
+              message: error.data?.message || "Please Try Again Later !",
+              icon: "thumb_down"
+            });
+          });
+      });
+    }
+  }
+};
+</script>

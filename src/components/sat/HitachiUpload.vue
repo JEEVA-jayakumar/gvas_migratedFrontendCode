@@ -377,7 +377,8 @@ export default {
     ...mapGetters("hitachi", ["gethitachiEmiData"]),
     submitDisabled: function() {
       return this.formdata.leadSource != "" && this.formdata.count != ""
-        ;
+        ? false
+        : true;
     }
   },
   mounted() {

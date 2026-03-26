@@ -99,7 +99,8 @@ export default {
       return this.formData.from != 0 ||
         this.formData.to != 0 ||
         (this.formData.from == 0 && this.formData.to == 0)
-        ;
+        ? false
+        : true;
     }
   },
   methods: {
