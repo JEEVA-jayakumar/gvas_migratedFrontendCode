@@ -1382,7 +1382,7 @@
                     <div v-if="this.formData.qrShortLead.isMerchant == 1">
                       <q-item class="q-pa-sm q-body-1">
                         <q-item-section
-                          >Small Merchant - MDR <2K Debit Card</q-item-section>
+                          >Small Merchant - MDR &lt;2K Debit Card</q-item-section>
                         <q-input
                           style="width: 220px"
                           type="number"
@@ -1402,13 +1402,13 @@
                                 .$model
                             "
                           >
-                            Small Merchant - MDR <2K Debit Card is required.
+                            Small Merchant - MDR &lt;2K Debit Card is required.
                           </span>
                         </div>
                       </q-item>
                       <q-item class="q-pa-sm q-body-1">
                         <q-item-section
-                          >Small merchant - MDR >2K Debit Card</q-item-section>
+                          >Small merchant - MDR &gt;2K Debit Card</q-item-section>
                         <q-input
                           style="width: 220px"
                           type="number"
@@ -1430,13 +1430,13 @@
                                 .$model
                             "
                           >
-                            Small merchant - MDR >2K Debit Card is required.
+                            Small merchant - MDR &gt;2K Debit Card is required.
                           </span>
                         </div>
                       </q-item>
                       <q-item class="q-pa-sm q-body-1">
                         <q-item-section
-                          >Small merchant - MDR <2K Credit Card</q-item-section>
+                          >Small merchant - MDR &lt;2K Credit Card</q-item-section>
                         <q-input
                           style="width: 220px"
                           type="number"
@@ -1458,13 +1458,13 @@
                                 .smallMerchantLessThanTwoCreditAndPrepaid.$model
                             "
                           >
-                            Small merchant - MDR <2K Credit Card is required.
+                            Small merchant - MDR &lt;2K Credit Card is required.
                           </span>
                         </div>
                       </q-item>
                       <q-item class="q-pa-sm q-body-1">
                         <q-item-section
-                          >Small merchant - MDR >2K Credit Card</q-item-section>
+                          >Small merchant - MDR &gt;2K Credit Card</q-item-section>
                         <q-input
                           style="width: 220px"
                           type="number"
@@ -1486,7 +1486,7 @@
                                 .smallMerchantGreaterThanTwoCreditAndPrepaid.$model
                             "
                           >
-                            Small merchant - MDR >2K Credit Card is required.
+                            Small merchant - MDR &gt;2K Credit Card is required.
                           </span>
                         </div>
                       </q-item>
@@ -1494,7 +1494,7 @@
                     <div v-else>
                       <q-item class="q-pa-sm q-body-1">
                         <q-item-section
-                          >Large merchant - MDR <2K Debit Card</q-item-section>
+                          >Large merchant - MDR &lt;2K Debit Card</q-item-section>
                         <q-input
                           style="width: 220px"
                           type="number"
@@ -1514,13 +1514,13 @@
                                 .$model
                             "
                           >
-                            Large merchant - MDR <2K Debit Card is required.
+                            Large merchant - MDR &lt;2K Debit Card is required.
                           </span>
                         </div>
                       </q-item>
                       <q-item class="q-pa-sm q-body-1">
                         <q-item-section
-                          >Large merchant - MDR >2K Debit Card</q-item-section>
+                          >Large merchant - MDR &gt;2K Debit Card</q-item-section>
                         <q-input
                           style="width: 220px"
                           type="number"
@@ -1542,13 +1542,13 @@
                                 .$model
                             "
                           >
-                            Large merchant - MDR >2K Debit Card is required.
+                            Large merchant - MDR &gt;2K Debit Card is required.
                           </span>
                         </div>
                       </q-item>
                       <q-item class="q-pa-sm q-body-1">
                         <q-item-section
-                          >Large merchant - MDR <2K Credit Card</q-item-section>
+                          >Large merchant - MDR &lt;2K Credit Card</q-item-section>
                         <q-input
                           style="width: 220px"
                           type="number"
@@ -1570,13 +1570,13 @@
                                 .largeMerchantLessThanTwoCreditandPrepaid.$model
                             "
                           >
-                            Large merchant - MDR <2K Credit Card is required.
+                            Large merchant - MDR &lt;2K Credit Card is required.
                           </span>
                         </div>
                       </q-item>
                       <q-item class="q-pa-sm q-body-1">
                         <q-item-section
-                          >Large merchant - MDR >2K Credit Card</q-item-section>
+                          >Large merchant - MDR &gt;2K Credit Card</q-item-section>
                         <q-input
                           style="width: 220px"
                           type="number"
@@ -1598,7 +1598,7 @@
                                 .largeMerchantGreaterThanTwoCreditandPrepaid.$model
                             "
                           >
-                            Large merchant - MDR >2K Credit Card is required.
+                            Large merchant - MDR &gt;2K Credit Card is required.
                           </span>
                         </div>
                       </q-item>

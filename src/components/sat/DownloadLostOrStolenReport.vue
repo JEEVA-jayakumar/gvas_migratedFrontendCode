@@ -86,9 +86,9 @@ export default {
   },
 
   computed: {
-        submitDisabled: function () {
+    submitDisabled: function () {
 
-      return (this.formData.fromDate !=0 || this.formData.toDate !=0) ;
+      return (this.formData.fromDate != 0 || this.formData.toDate != 0) ? false : true;
     },
   },
   methods: {

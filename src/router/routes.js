@@ -311,7 +311,7 @@ const routes = [
 
   // Router for SAT
   {
-    name: "OH",
+    name: "SAT",
     path: "/sat/",
     component: Default_Layout,
     children: [{

@@ -19,9 +19,9 @@
         <!-- Final upload button toggle -->
         <div class="col-12 col-lg-4 group" align="right">
           <q-btn :disabled="formData.device.id == ''" v-if="scanningActive" color="primary" label="Start scan"
-            @click="fnStartScanner" />
-          <q-btn v-if="tempTableData.length > 0" class="common-btn q-py-xs" label="Upload" @click="finalSubmit" />
-          <q-btn v-else class="disabled common-btn q-py-xs no-pointer-events" label="Upload" @click="finalSubmit" />
+            @click="fnStartScanner"></q-btn>
+          <q-btn v-if="tempTableData.length > 0" class="common-btn q-py-xs" label="Upload" @click="finalSubmit"></q-btn>
+          <q-btn v-else class="disabled common-btn q-py-xs no-pointer-events" label="Upload" @click="finalSubmit"></q-btn>
         </div>
         <!--ENDv-model: table title -->
       </div>

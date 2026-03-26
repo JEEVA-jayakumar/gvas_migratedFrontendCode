@@ -1,9 +1,7 @@
 <template>
   <q-page>
     <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
+    <div class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
       Bijlipay Implementation Queue
     </div>
     <div>
@@ -13,31 +11,30 @@
         :propToggleLeadInformationPop="propToggleLeadInformation"
         @closeLeadInformation="toggleLeadInformation"
       />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
+
+      <q-card
+        class="group q-pa-md"
+        v-if="selectedTab == 'unAssigned'"
+      >
         <div class="row items-center gutter-y-sm">
           <div
             class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
             align="left"
           >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
+            <span class="text-h4">{{ formData.marsDeviceIdsCooked.length }}</span>/ selected
           </div>
 
           <div class="col-md-3 col-sm-6 col-xs-6">
             <q-select
-              filter
+              use-input
               clearable
               v-model="formData.assignTo"
-              separator
               color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
+              :disable="formData.marsDeviceIdsCooked.length == 0"
               :options="assignToOptions"
               placeholder="Assign To"
+              emit-value
+              map-options
             />
             <q-checkbox
               v-model="formData.courier"
@@ -55,9 +52,7 @@
           <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
             <q-btn
               no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
+              :disabled="formData.marsDeviceIdsCooked.length == 0"
               label="Assign"
               class="common-dark-blue agnalgin1"
               @click="assignImplementationUser"
@@ -65,7 +60,10 @@
           </div>
         </div>
       </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
+      <q-card
+        class="group q-pa-md"
+        v-if="selectedTab == 'assigned'"
+      >
         <div class="row items-center gutter-y-sm">
           <div class="col-md-9 col-sm-12 col-xs-12">
             <div class="row items-center">
@@ -74,1860 +72,40 @@
           </div>
         </div>
       </q-card>
-      <!--END: table Footer -->
+
       <q-tabs
         v-model="selectedTab"
         class="shadow-1"
         color="grey-1"
-        @click="goToUnassignedTab"
+        active-color="dark"
+        indicator-color="dark"
+        align="justify"
       >
         <q-tab
-
-          color="dark"
           name="unAssigned"
           label="Unassigned"
         />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab 
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
+        <q-tab
+          name="assigned"
+          label="Assigned"
+        />
+      </q-tabs>
 
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
+      <q-tab-panels
         v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
+        animated
       >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-<q-tab-panells v-model="selectedTab" animated>
-
-</q-tab-panells>
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-<q-tab-panells v-model="selectedTab" animated>
-
-</q-tab-panells>
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-<q-tab-panells v-model="selectedTab" animated>
-
-</q-tab-panells>
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-<q-tab-panells v-model="selectedTab" animated>
-
-</q-tab-panells>
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-<q-tab-panells v-model="selectedTab" animated>
-
-</q-tab-panells>
-   <!-- content -->
-    <div
-      class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
-    >
-      Bijlipay Implementation Queue
-    </div>
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--START: table title -->
-      <!--END: table title -->
-      <!--START: table Footer -->
-      <q-card class="group q-pa-md" v-if="selectedTab == 'unAssigned'">
-        <div class="row items-center gutter-y-sm">
-          <div
-            class="col-md-3 col-sm-6 col-xs-6 text-grey-7 text-weight-medium"
-            align="left"
-          >
-            <span class="q-display-2">{{
-              formData.marsDeviceIdsCooked.length
-            }}</span
-            >/ selected
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
-              filter
-              clearable
-              v-model="formData.assignTo"
-              separator
-              color="grey-9"
-              :disable="formData.marsDeviceIdsCooked.length == 0 "
-              :options="assignToOptions"
-              placeholder="Assign To"
-            />
-            <q-checkbox
-              v-model="formData.courier"
-              color="dark"
-              label="Courier Device"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6" align="right">
-            <q-checkbox
-              v-model="formData.triggerWelcomeMail"
-              color="dark"
-              label="Trigger welcome email"
-            />
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-6 agnalgin" align="right">
-            <q-btn
-              no-caps
-              :disabled="
-                formData.marsDeviceIdsCooked.length == 0
-              "
-              label="Assign"
-              class="common-dark-blue agnalgin1"
-              @click="assignImplementationUser"
-            />
-          </div>
-        </div>
-      </q-card>
-      <q-card class="group q-pa-md" v-if="selectedTab == 'assigned'">
-        <div class="row items-center gutter-y-sm">
-          <div class="col-md-9 col-sm-12 col-xs-12">
-            <div class="row items-center">
-              <div class="col-md-4 col-sm-6 col-xs-6 group"></div>
-            </div>
-          </div>
-        </div>
-      </q-card>
-      <!--END: table Footer -->
-      <q-tabs
-        v-model="selectedTab"
-        class="shadow-1"
-        color="grey-1"
-        @click="goToUnassignedTab"
-      >
-        <q-tab
-
-          color="dark"
-          name="unAssigned"
-          label="Unassigned"
-        />
-        <q-tab color="dark" name="assigned" label="Assigned" />
-        <!-- <q-tab
-          color="dark"
-          name="canceled"
-          label="CANCELED MERCHANTS"
-        /> -->
-</q-tabs>
-
-<q-tab-panells v-model="selectedTab" animated>
-<q-tab-panell name="assigned">
+        <q-tab-panel name="assigned">
           <assigned />
-        </q-tab-panell>
-<q-tab-panell name="unAssigned">
-          <!--START: table Data   :rows="getImplementationQueueUnassignedList"  -->
+        </q-tab-panel>
+        <q-tab-panel name="unAssigned">
           <q-table
             :rows="tableData1"
             :columns="columnDataUnassigned"
             table-class="customTableClass"
             :filter="filterSearch"
             selection="multiple"
-            :selected="formData.marsDeviceIdsCooked"
+            v-model:selected="formData.marsDeviceIdsCooked"
             v-model:pagination="paginationControl1"
             row-key="id"
             :rows-per-page-options="[10, 20, 50, 100, 150, 200]"
@@ -1936,316 +114,279 @@
             @request="ajaxLoadAllLeadInfo1"
           >
             <template v-slot:body-cell-leadNumber="props">
-            <q-td :props="props"
-              class="cursor-pointer"
-              @click="toggleLeadInformation(props.row.leadInformation)">
-
-              <span class="label text-primary"
-                ># {{ props.row.leadInformation.leadNumber }}</span
+              <q-td
+                :props="props"
+                class="cursor-pointer"
+                @click="toggleLeadInformation(props.row.leadInformation)"
               >
-
-          </q-td>
-          </template>
+                <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
+              </q-td>
+            </template>
             <template v-slot:body-cell-LeadSource="props">
-            <q-td :props="props">
-
-              <span
-                :class="{
-                  'text-red':
-                    props.row.leadInformation.leadSource.sourceName ===
-                    'LS_TOHANDS'
-                }"
-              >
-                {{ props.row.leadInformation.leadSource.sourceName }}
-              </span>
-
-          </q-td>
-          </template>
+              <q-td :props="props">
+                <span :class="{ 'text-red': props.row.leadInformation.leadSource?.sourceName === 'LS_TOHANDS' }">
+                  {{ props.row.leadInformation.leadSource?.sourceName }}
+                </span>
+              </q-td>
+            </template>
 
             <template v-slot:body-cell-submitToMarsDate="props">
               <q-td :props="props">
-                {{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}
+                {{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM YYYY") }}
               </q-td>
             </template>
             <template v-slot:body-cell-createdAt="props">
               <q-td :props="props">
-                {{ $moment(props.row.createdAt).format("Do MMM Y") }}
+                {{ $moment(props.row.createdAt).format("Do MMM YYYY") }}
               </q-td>
             </template>
-            <!-- <q-td
-              v-slot:body-cell-tid="props"
-              :props="props"
-              class="customTd"
-            >
-              <div class="text-primary">{{ props.row.tid }}</div>
+            <template v-slot:body-cell-mid="props">
+              <q-td
+                :props="props"
+                class="customTd"
+              >
+                <div class="text-primary">{{ props.row.mid }}</div>
+              </q-td>
+            </template>
+            <template v-slot:body-cell-deviceAddress="props">
+              <q-td
+                :props="props"
+                class="customTd customCellLength"
+              >
+                <div>
+                  <q-btn
+                    no-caps
+                    icon="edit"
+                    color="purple-9"
+                    size="xs"
+                    round
+                    @click="UpdateDeviceAddress(props.row)"
+                  />
+                  {{ props.row.deviceAddress }}
+                </div>
+              </q-td>
+            </template>
+            <template v-slot:top>
+              <div class="col-md-5">
+                <q-input
+                  clearable
+                  color="grey-9"
+                  v-model="filterSearch"
+                  placeholder="Type.."
+                  label="Search By MID, Merchant Name.."
+                  class="q-mr-lg q-py-sm"
+                >
+                  <template v-slot:append>
+                    <q-icon name="search" />
+                  </template>
+                </q-input>
+              </div>
+            </template>
+          </q-table>
+        </q-tab-panel>
+      </q-tab-panels>
 
-          </q-td>
-          </template>
+      <DeviceAddressModal
+        v-if="showDeviceAddressModal"
+        :showDeviceAddressModal="showDeviceAddressModal"
+        :currentDeviceInfo="currentDeviceInfo"
+        :stateInformation="getAllStatesData"
+        :paginationControl="paginationControl"
+        :selectedLeadItems="formData.marsDeviceIdsCooked"
+        @toggleModal="UpdateDeviceAddressAfterEmit"
+      />
+    </div>
+  </q-page>
+</template>
 
 <script>
-import { required, email, or } from '@vuelidate/validators';
-import { mapGetters, mapActions } from "vuex";
-import DeviceAddressModal from "../../components/sat/DeviceAddressModal.vue";
-import generalLeadInformation from "../../components/generalLeadInformation.vue";
-import assigned from "../../components/sat/assigned.vue";
+import { mapGetters, mapActions } from 'vuex'
+import DeviceAddressModal from '../../components/sat/DeviceAddressModal.vue'
+import generalLeadInformation from '../../components/generalLeadInformation.vue'
+import assigned from '../../components/sat/assigned.vue'
 
 export default {
-  name: "implementationQueue",
+  name: 'internalimplementationRequest',
   components: {
     DeviceAddressModal,
     generalLeadInformation,
     assigned
   },
-  data() {
+  data () {
     return {
       propToggleLeadInformation: false,
       addtnLeadInformation: null,
 
-      filterSearch: "",
-      filterSearch1: "",
-      selectedTab: "assigned",
-      assignTo: "",
+      filterSearch: '',
+      filterSearch1: '',
+      selectedTab: 'assigned',
+      assignTo: '',
       assignToOptions: [],
       tableData: [],
       tableData1: [],
-      //Defining columns for table
+      // Defining columns for table
       columnDataAssigned: [
         {
-          name: "leadNumber",
+          name: 'leadNumber',
           required: true,
-          label: "Lead Number",
-          align: "left",
-          field: row => {
-            return row.leadInformation.leadNumber;
-          },
+          label: 'Lead Number',
+          align: 'left',
+          field: row => row.leadInformation.leadNumber,
           sortable: false
         },
-
         {
-          name: "createdAt",
+          name: 'createdAt',
           required: true,
-          label: "Date of TID Generation",
-          align: "left",
-          field: "createdAt",
-          sortable: true
-        },
-        // {
-        //   name: "tid",
-        //   required: true,
-        //   label: "TID",
-        //   align: "left",
-        //   field: row => {
-        //     return row.tid;
-        //   },
-        //   sortable: true
-        // },
-        {
-          name: "mid",
-          required: true,
-          label: "MID",
-          align: "left",
-          field: row => {
-            return row.mid;
-          },
+          label: 'Date of TID Generation',
+          align: 'left',
+          field: 'createdAt',
           sortable: true
         },
         {
-          name: "merchant_name",
+          name: 'mid',
           required: true,
-          label: "Merchant Name",
-          align: "left",
-          field: row => {
-            return row.leadInformation.leadName;
-          },
-          sortable: false
-        },
-        {
-          name: "mobile_number",
-          required: true,
-          label: "Mobile Number",
-          align: "center",
-          field: row => {
-            return row.leadInformation.contactNumber;
-          },
-          sortable: false
-        },
-        {
-          name: "deviceAddress",
-          required: true,
-          label: "Address",
-          align: "left",
-          field: row => {
-            return row.deviceAddress;
-          },
-          sortable: false
-        },
-        // {
-        //   name: "source",
-        //   required: true,
-        //   label: "Source",
-        //   align: "left",
-        //   field: row => {
-        //     return row.leadInformation.leadSource.sourceName;
-        //   },
-        //   sortable: false
-        // },
-        {
-          name: "assigned_to",
-          required: true,
-          label: "Assigned To",
-          align: "left",
-          field: row => {
-            return row.assignedTo == null ? "NA" : row.assignedTo.name;
-          },
-          sortable: false
-        },
-        {
-          name: "leadInformation",
-          required: true,
-          label: "Device Type",
-          align: "left",
-          field: row => {
-            return row.leadInformation.device.deviceName;
-          },
-          sortable: false
-        },
-        {
-          name: "serial_number",
-          required: true,
-          label: "Serial Number",
-          align: "left",
-          field: row => {
-            return row.regionalInventory == null
-              ? "NA"
-              : row.regionalInventory.serialNumber;
-          },
-
+          label: 'MID',
+          align: 'left',
+          field: row => row.mid,
           sortable: true
         },
         {
-          name: "submitToMarsDate",
+          name: 'merchant_name',
           required: true,
-          label: "Date of Submission",
-          align: "left",
-          field: row => {
-            return row.leadInformation.submitToMarsDate;
-          },
-          format: val => this.$moment(val).format("Do MMM Y"),
+          label: 'Merchant Name',
+          align: 'left',
+          field: row => row.leadInformation.leadName,
+          sortable: false
+        },
+        {
+          name: 'mobile_number',
+          required: true,
+          label: 'Mobile Number',
+          align: 'center',
+          field: row => row.leadInformation.contactNumber,
+          sortable: false
+        },
+        {
+          name: 'deviceAddress',
+          required: true,
+          label: 'Address',
+          align: 'left',
+          field: row => row.deviceAddress,
+          sortable: false
+        },
+        {
+          name: 'assigned_to',
+          required: true,
+          label: 'Assigned To',
+          align: 'left',
+          field: row => row.assignedTo == null ? 'NA' : row.assignedTo.name,
+          sortable: false
+        },
+        {
+          name: 'leadInformation',
+          required: true,
+          label: 'Device Type',
+          align: 'left',
+          field: row => row.leadInformation.device?.deviceName ?? 'NA',
+          sortable: false
+        },
+        {
+          name: 'serial_number',
+          required: true,
+          label: 'Serial Number',
+          align: 'left',
+          field: row => row.regionalInventory?.serialNumber ?? 'NA',
+          sortable: true
+        },
+        {
+          name: 'submitToMarsDate',
+          required: true,
+          label: 'Date of Submission',
+          align: 'left',
+          field: row => row.leadInformation.submitToMarsDate,
           sortable: true
         }
       ],
 
       columnDataUnassigned: [
         {
-          name: "leadNumber",
+          name: 'leadNumber',
           required: true,
-          label: "Lead Number",
-          align: "left",
-          field: row => {
-            return row.leadInformation.leadNumber;
-          },
-          sortable: false
-        },
-{
-          name: "LeadSource",
-          required: true,
-          label: "Lead Source",
-          align: "left",
-          field: row => {
-            return row.leadInformation.LeadSource.sourceName;
-          },
+          label: 'Lead Number',
+          align: 'left',
+          field: row => row.leadInformation.leadNumber,
           sortable: false
         },
         {
-          name: "createdAt",
+          name: 'LeadSource',
           required: true,
-          label: "Date of TID Generation",
-          align: "left",
-          field: "createdAt",
-          sortable: true
+          label: 'Lead Source',
+          align: 'left',
+          field: row => row.leadInformation.leadSource?.sourceName ?? 'NA',
+          sortable: false
         },
-        // {
-        //   name: "tid",
-        //   required: true,
-        //   label: "TID",
-        //   align: "left",
-        //   field: row => {
-        //     return row.tid;
-        //   },
-        //   sortable: true
-        // },
         {
-          name: "mid",
+          name: 'createdAt',
           required: true,
-          label: "MID",
-          align: "left",
-          field: row => {
-            return row.mid;
-          },
+          label: 'Date of TID Generation',
+          align: 'left',
+          field: 'createdAt',
           sortable: true
         },
         {
-          name: "merchant_name",
+          name: 'mid',
           required: true,
-          label: "Merchant Name",
-          align: "left",
-          field: row => {
-            return row.leadInformation.leadName;
-          },
-          sortable: false
-        },
-        {
-          name: "mobile_number",
-          required: true,
-          label: "Mobile Number",
-          align: "center",
-          field: row => {
-            return row.leadInformation.contactNumber;
-          },
-          sortable: false
-        },
-        {
-          name: "deviceAddress",
-          required: true,
-          label: "Address",
-          align: "left",
-          field: row => {
-            return row.deviceAddress;
-          },
-          sortable: false
-        },
-        {
-          name: "leadInformation",
-          required: true,
-          label: "Device Type",
-          align: "left",
-          field: row => {
-            return row.leadInformation.device.deviceName;
-          },
-          sortable: false
-        },
-        {
-          name: "serial_number",
-          required: true,
-          label: "Serial Number",
-          align: "left",
-          field: row => {
-            return row.regionalInventory == null
-              ? "NA"
-              : row.regionalInventory.serialNumber;
-          },
-
+          label: 'MID',
+          align: 'left',
+          field: row => row.mid,
           sortable: true
         },
         {
-          name: "submitToMarsDate",
+          name: 'merchant_name',
           required: true,
-          label: "Date of Submission",
-          align: "left",
-          field: row => {
-            return row.leadInformation.submitToMarsDate;
-          },
-          format: val => this.$moment(val).format("Do MMM Y"),
+          label: 'Merchant Name',
+          align: 'left',
+          field: row => row.leadInformation.leadName,
+          sortable: false
+        },
+        {
+          name: 'mobile_number',
+          required: true,
+          label: 'Mobile Number',
+          align: 'center',
+          field: row => row.leadInformation.contactNumber,
+          sortable: false
+        },
+        {
+          name: 'deviceAddress',
+          required: true,
+          label: 'Address',
+          align: 'left',
+          field: row => row.deviceAddress,
+          sortable: false
+        },
+        {
+          name: 'leadInformation',
+          required: true,
+          label: 'Device Type',
+          align: 'left',
+          field: row => row.leadInformation.device?.deviceName ?? 'NA',
+          sortable: false
+        },
+        {
+          name: 'serial_number',
+          required: true,
+          label: 'Serial Number',
+          align: 'left',
+          field: row => row.regionalInventory?.serialNumber ?? 'NA',
+          sortable: true
+        },
+        {
+          name: 'submitToMarsDate',
+          required: true,
+          label: 'Date of Submission',
+          align: 'left',
+          field: row => row.leadInformation.submitToMarsDate,
           sortable: true
         }
       ],
@@ -2257,157 +398,141 @@ export default {
         marsDeviceIdsCookedUnAssinged: [],
         triggerWelcomeMail: false,
         courier: false,
-        assignTo: ""
+        assignTo: ''
       },
       paginationControl: {
-        sortBy: "deviceStatusDate", // String, column "name" property value
+        sortBy: 'deviceStatusDate',
         descending: false,
         page: 1,
-        rowsPerPage: 10 // current rows per page being displayed
+        rowsPerPage: 10
       },
       paginationControl1: {
-        sortBy: "deviceStatusDate", // String, column "name" property value
+        sortBy: 'deviceStatusDate',
         descending: false,
         page: 1,
-        rowsPerPage: 10 // current rows per page being displayed
+        rowsPerPage: 10
       },
       tableAjaxLoading: false,
       tableAjaxLoading1: false
-    };
+    }
   },
 
   computed: {
-    ...mapGetters("ImplementationQueue", [
-      "getImplementationQueueAssignedList",
-      "getImplementationQueueUnassignedList",
-      "getImplementationQueueAssignedDataList"
+    ...mapGetters('ImplementationQueue', [
+      'getImplementationQueueAssignedList',
+      'getImplementationQueueUnassignedList',
+      'getImplementationQueueAssignedDataList'
     ]),
-    ...mapGetters("ImplementationExecutive", [
-      "getImplementationExecutiveList"
+    ...mapGetters('ImplementationExecutive', [
+      'getImplementationExecutiveList'
     ]),
-    ...mapGetters("SuperAdminUsers", ["getAllStatesData"])
+    ...mapGetters('SuperAdminUsers', ['getAllStatesData'])
   },
-  created() {
+  watch: {
+    selectedTab (newVal) {
+      this.goToUnassignedTab(newVal)
+    }
+  },
+  created () {
     this.ajaxLoadAllLeadInfo({
       pagination: this.paginationControl,
       filter: this.filterSearch
-    });
+    })
     this.ajaxLoadAllLeadInfo1({
       pagination: this.paginationControl1,
       filter: this.filterSearch1
-    });
-    this.getPincodeInformations();
+    })
+    this.getPincodeInformations()
   },
   methods: {
-    ...mapActions("ImplementationQueue", [
-      "IMPLEMENTATION_QUEUE_ASSIGNED_LIST",
-      "IMPLEMENTATION_QUEUE_UNASSIGNED_LIST",
-      "IMPLEMENTATION_QUEUE_SUBMIT"
+    ...mapActions('ImplementationQueue', [
+      'IMPLEMENTATION_QUEUE_ASSIGNED_LIST',
+      'IMPLEMENTATION_QUEUE_UNASSIGNED_LIST',
+      'IMPLEMENTATION_QUEUE_SUBMIT'
     ]),
-    ...mapActions("ImplementationExecutive", ["IMPLEMENTATION_EXECUTIVE_LIST"]),
-    ...mapActions("SuperAdminUsers", ["FETCH_ALL_STATES_DATA"]),
+    ...mapActions('ImplementationExecutive', ['IMPLEMENTATION_EXECUTIVE_LIST']),
+    ...mapActions('SuperAdminUsers', ['FETCH_ALL_STATES_DATA']),
 
-    getPincodeInformations() {
-      this.FETCH_ALL_STATES_DATA();
+    getPincodeInformations () {
+      this.FETCH_ALL_STATES_DATA()
     },
-    ajaxLoadAllLeadInfo1({ pagination, filter }) {
-      // we set QTable to "loading" state
+    ajaxLoadAllLeadInfo1 ({ pagination, filter }) {
       this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Fetching data .."
-      });
-      this.IMPLEMENTATION_QUEUE_UNASSIGNED_LIST({ pagination, filter }).then(res => {
-          this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
-            let assumeArr = [];
-            this.getImplementationExecutiveList.map(function(value) {
+        delay: 0,
+        spinnerColor: 'purple-9',
+        message: 'Fetching data ..'
+      })
+      this.IMPLEMENTATION_QUEUE_UNASSIGNED_LIST({ pagination, filter })
+        .then(() => {
+          this.IMPLEMENTATION_EXECUTIVE_LIST().then(() => {
+            const assumeArr = []
+            this.getImplementationExecutiveList.map(function (value) {
               assumeArr.push({
-                label:
-                  value.name + " | " + value.employeeID + " | " + value.email,
+                label: value.name + ' | ' + value.employeeID + ' | ' + value.email,
                 value: value.id
-              });
-            });
-            this.assignToOptions = assumeArr;
-          });
-          // updating pagination to reflect in the UI
-          this.paginationControl1 = pagination;
-
-          // we also set (or update) rowsNumber
-          this.paginationControl1.rowsNumber = this.getImplementationQueueUnassignedList.totalElements;
-          this.paginationControl1.page =
-            this.getImplementationQueueUnassignedList.number + 1;
-
-          // then we update the rows with the fetched ones
-          this.tableData1 = this.getImplementationQueueUnassignedList.content;
+              })
+            })
+            this.assignToOptions = assumeArr
+          })
+          this.paginationControl1 = pagination
+          this.paginationControl1.rowsNumber = this.getImplementationQueueUnassignedList.totalElements
+          this.paginationControl1.page = this.getImplementationQueueUnassignedList.number + 1
+          this.tableData1 = this.getImplementationQueueUnassignedList.content
           if (this.getImplementationQueueUnassignedList.sort != null) {
-            this.paginationControl1.sortBy = this.getImplementationQueueUnassignedList.sort[0].property;
-            this.paginationControl1.descending = this.getImplementationQueueUnassignedList.sort[0].ascending;
+            this.paginationControl1.sortBy = this.getImplementationQueueUnassignedList.sort[0].property
+            this.paginationControl1.descending = this.getImplementationQueueUnassignedList.sort[0].ascending
           }
-
-          // finally we tell QTable to exit the "loading" state
-          this.$q.loading.hide();
+          this.$q.loading.hide()
         })
         .catch(() => {
-          this.$q.loading.hide();
-        });
+          this.$q.loading.hide()
+        })
     },
-    ajaxLoadAllLeadInfo({ pagination, filter }) {
-      // we set QTable to "loading" state
+    ajaxLoadAllLeadInfo ({ pagination, filter }) {
       this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Fetching data .."
-      });
-      this.IMPLEMENTATION_QUEUE_ASSIGNED_LIST({ pagination, filter }).then(response => {
-          // updating pagination to reflect in the UI
-          this.paginationControl = pagination;
-
-          // we also set (or update) rowsNumber
-          this.paginationControl.rowsNumber = this.getImplementationQueueAssignedList.totalElements;
-          this.paginationControl.page =
-            this.getImplementationQueueAssignedList.number + 1;
-
-          // then we update the rows with the fetched ones
-          this.tableData = this.getImplementationQueueAssignedList.content;
+        delay: 0,
+        spinnerColor: 'purple-9',
+        message: 'Fetching data ..'
+      })
+      this.IMPLEMENTATION_QUEUE_ASSIGNED_LIST({ pagination, filter })
+        .then(() => {
+          this.paginationControl = pagination
+          this.paginationControl.rowsNumber = this.getImplementationQueueAssignedList.totalElements
+          this.paginationControl.page = this.getImplementationQueueAssignedList.number + 1
+          this.tableData = this.getImplementationQueueAssignedList.content
           if (this.getImplementationQueueAssignedList.sort != null) {
-            this.paginationControl.sortBy = this.getImplementationQueueAssignedList.sort[0].property;
-            this.paginationControl.descending = this.getImplementationQueueAssignedList.sort[0].ascending;
+            this.paginationControl.sortBy = this.getImplementationQueueAssignedList.sort[0].property
+            this.paginationControl.descending = this.getImplementationQueueAssignedList.sort[0].ascending
           }
-
-          // finally we tell QTable to exit the "loading" state
-          this.$q.loading.hide();
+          this.$q.loading.hide()
         })
         .catch(() => {
-          this.$q.loading.hide();
-        });
+          this.$q.loading.hide()
+        })
     },
-    //Load all short lead info while page loading
-    goToUnassignedTab(tab) {
-      if (tab == "unAssigned") {
+    goToUnassignedTab (tab) {
+      if (tab == 'unAssigned') {
         this.ajaxLoadAllLeadInfo1({
           pagination: this.paginationControl,
           filter: this.filterSearch
-        });
-        this.formData.marsDeviceIdsCooked = [];
-        this.formData.assignTo = "";
-        this.filterSearch = "";
-        // this.formData.courier = "";
+        })
+        this.formData.marsDeviceIdsCooked = []
+        this.formData.assignTo = ''
+        this.filterSearch = ''
       } else {
         this.ajaxLoadAllLeadInfo({
           pagination: this.paginationControl,
           filter: this.filterSearch
-        });
-        this.formData.marsDeviceIdsCooked = [];
-        this.formData.assignTo = "";
-        this.filterSearch = "";
-        // this.formData.courier = "";
+        })
+        this.formData.marsDeviceIdsCooked = []
+        this.formData.assignTo = ''
+        this.filterSearch = ''
       }
     },
 
-    // Function to open device address pop up
-    UpdateDeviceAddress(currentDeviceInfo) {
-      this.currentDeviceInfo = [];
-      this.showDeviceAddressModal = !this.showDeviceAddressModal;
+    UpdateDeviceAddress (currentDeviceInfo) {
+      this.currentDeviceInfo = []
+      this.showDeviceAddressModal = !this.showDeviceAddressModal
       if (this.formData.marsDeviceIdsCooked.length == 0) {
         let assumeObj = {
           id: [currentDeviceInfo.id],
@@ -2419,13 +544,13 @@ export default {
             city: currentDeviceInfo.city,
             state: currentDeviceInfo.state
           }
-        };
-        this.currentDeviceInfo = assumeObj;
+        }
+        this.currentDeviceInfo = assumeObj
       } else {
-        let marsDeviceIdsCooked = [];
-        this.formData.marsDeviceIdsCooked.map(function(value) {
-          marsDeviceIdsCooked.push(value.id);
-        });
+        const marsDeviceIdsCooked = []
+        this.formData.marsDeviceIdsCooked.map(function (value) {
+          marsDeviceIdsCooked.push(value.id)
+        })
         let assumeObj = {
           id: marsDeviceIdsCooked,
           marsDeviceAddress: {
@@ -2436,219 +561,193 @@ export default {
             city: currentDeviceInfo.city,
             state: currentDeviceInfo.state
           }
-        };
-        this.currentDeviceInfo = assumeObj;
+        }
+        this.currentDeviceInfo = assumeObj
       }
     },
-    // Function to open device address pop up
-    UpdateDeviceAddressAfterEmit(pagination) {
-      this.showDeviceAddressModal = !this.showDeviceAddressModal;
-      this.paginationControl = pagination;
+    UpdateDeviceAddressAfterEmit (pagination) {
+      this.showDeviceAddressModal = !this.showDeviceAddressModal
+      this.paginationControl = pagination
     },
 
-    // Function to assign implementation manager in implementation queue
-    assignImplementationUser() {
-      let self = this;
+    assignImplementationUser () {
+      const self = this
       if (self.formData.marsDeviceIdsCooked.length == 0) {
         self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Select atleast one item to assign",
-          icon: "thumb_down"
-        });
-      } else if (self.formData.assignTo == "") {
+          color: 'negative',
+          position: 'bottom',
+          message: 'Select atleast one item to assign',
+          icon: 'thumb_down'
+        })
+      } else if (self.formData.assignTo == '') {
         self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Implementation officer cannot be empty!",
-          icon: "thumb_down"
-        });
+          color: 'negative',
+          position: 'bottom',
+          message: 'Implementation officer cannot be empty!',
+          icon: 'thumb_down'
+        })
       } else {
-        let marsDeviceIdsCooked = [];
-        self.formData.marsDeviceIdsCooked.map(function(value) {
-          marsDeviceIdsCooked.push(value.id);
-        });
-        let postValues = {
+        const marsDeviceIdsCooked = []
+        self.formData.marsDeviceIdsCooked.map(function (value) {
+          marsDeviceIdsCooked.push(value.id)
+        })
+        const postValues = {
           action: this.$MARS_DEVICE_STATUS_SAT_ASSIGNED,
           marsDeviceIds: marsDeviceIdsCooked,
           triggerWelcomeMail: self.formData.triggerWelcomeMail,
           courier: self.formData.courier,
           userId: self.formData.assignTo
-        };
+        }
         this.IMPLEMENTATION_QUEUE_SUBMIT(postValues)
           .then(res => {
-            if (res.status == 200 && res.data.data == null) {
-              this.formData.marsDeviceIdsCooked = [];
-              this.formData.assignTo = "";
+            if (res.status == 200 && (res.data.data == null || res.data.data.second[0].Success)) {
+              this.formData.marsDeviceIdsCooked = []
+              this.formData.assignTo = ''
               this.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: "Successfully assigned!",
-                icon: "thumb_up"
-              });
-              this.filterSearch = "";
-              this.formData.courier = "";
+                color: 'positive',
+                position: 'bottom',
+                message: 'Successfully assigned!',
+                icon: 'thumb_up'
+              })
+              this.filterSearch = ''
+              this.formData.courier = ''
               this.ajaxLoadAllLeadInfo1({
                 pagination: this.paginationControl,
                 filter: this.filterSearch
-              });
-            } else if (res.status == 200 && res.data.data.second[0].Success) {
-              //  this.$router.push({name: "internalimplementationAddressFetch", params: {data:res}})
-              this.formData.marsDeviceIdsCooked = [];
-              this.formData.assignTo = "";
-              this.$q.notify({
-                color: "positive",
-                position: "bottom",
-                message: "Successfully assigned!",
-                icon: "thumb_up"
-              });
-              this.filterSearch = "";
-              this.formData.courier = "";
-              this.ajaxLoadAllLeadInfo1({
-                pagination: this.paginationControl,
-                filter: this.filterSearch
-              });
+              })
             } else if (res.status == 200 && res.data.data.second[0].Failed) {
               this.$router.push({
-                name: "internalimplementationAddressFetch",
+                name: 'internalimplementationAddressFetch',
                 params: { data: res }
-              });
+              })
             } else {
               self.$q.notify({
-                color: "negative",
-                position: "bottom",
-                message: "INTERNAL SERVER ERROR !!",
-                icon: "thumb_down"
-              });
+                color: 'negative',
+                position: 'bottom',
+                message: 'INTERNAL SERVER ERROR !!',
+                icon: 'thumb_down'
+              })
             }
           })
           .catch(() => {
             self.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: "Please try again",
-              icon: "thumb_down"
-            });
-          });
+              color: 'negative',
+              position: 'bottom',
+              message: 'Please try again',
+              icon: 'thumb_down'
+            })
+          })
       }
     },
 
-    // Function to unAssignImplementationUser in implementation queue
-    unAssignImplementationUser() {
-      let self = this;
+    unAssignImplementationUser () {
+      const self = this
       if (self.formData.marsDeviceIdsCookedUnAssinged.length == 0) {
         self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Select atleast one item to Unassign",
-          icon: "thumb_down"
-        });
+          color: 'negative',
+          position: 'bottom',
+          message: 'Select atleast one item to Unassign',
+          icon: 'thumb_down'
+        })
       } else {
-        let marsDeviceIdsCookedUnAssinged = [];
-        self.formData.marsDeviceIdsCookedUnAssinged.map(function(value) {
-          marsDeviceIdsCookedUnAssinged.push(value.id);
-        });
+        const marsDeviceIdsCookedUnAssinged = []
+        self.formData.marsDeviceIdsCookedUnAssinged.map(function (value) {
+          marsDeviceIdsCookedUnAssinged.push(value.id)
+        })
 
-        let postValues = {
+        const postValues = {
           action: this.$MARS_DEVICE_STATUS_TID_GENERATED,
           marsDeviceIds: marsDeviceIdsCookedUnAssinged,
           userId: this.$SEND_ZERO_FOR_UNASSIGING
-        };
-        self
-          .IMPLEMENTATION_QUEUE_SUBMIT(postValues)
+        }
+        self.IMPLEMENTATION_QUEUE_SUBMIT(postValues)
           .then(() => {
-            // self.DEVICE_REPLACEMENT_QUEUE_UNASSIGNED_LIST();
-            // self.ajaxLoadAllLeadInfo()
-            self.formData.marsDeviceIdsCookedUnAssinged = [];
-            self.formData.assignTo = "";
+            self.formData.marsDeviceIdsCookedUnAssinged = []
+            self.formData.assignTo = ''
             self.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully Unassigned!",
-              icon: "thumb_up"
-            });
+              color: 'positive',
+              position: 'bottom',
+              message: 'Successfully Unassigned!',
+              icon: 'thumb_up'
+            })
             this.ajaxLoadAllLeadInfo({
               pagination: this.paginationControl,
               filter: this.filterSearch
-            });
+            })
           })
           .catch(() => {
             self.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: "Please try again",
-              icon: "thumb_down"
-            });
-          });
+              color: 'negative',
+              position: 'bottom',
+              message: 'Please try again',
+              icon: 'thumb_down'
+            })
+          })
       }
     },
 
-    // Function to reAssignImplementationUser in implementation queue
-    reAssignImplementationUser() {
-      let self = this;
+    reAssignImplementationUser () {
+      const self = this
       if (self.formData.marsDeviceIdsCookedUnAssinged.length == 0) {
         self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Select atleast one item to assign",
-          icon: "thumb_down"
-        });
-      } else if (self.formData.assignTo == "") {
+          color: 'negative',
+          position: 'bottom',
+          message: 'Select atleast one item to assign',
+          icon: 'thumb_down'
+        })
+      } else if (self.formData.assignTo == '') {
         self.$q.notify({
-          color: "negative",
-          position: "bottom",
-          message: "Implementation officer cannot be empty!",
-          icon: "thumb_down"
-        });
+          color: 'negative',
+          position: 'bottom',
+          message: 'Implementation officer cannot be empty!',
+          icon: 'thumb_down'
+        })
       } else {
-        let marsDeviceIdsCookedUnAssinged = [];
-        self.formData.marsDeviceIdsCookedUnAssinged.map(function(value) {
-          marsDeviceIdsCookedUnAssinged.push(value.id);
-        });
+        const marsDeviceIdsCookedUnAssinged = []
+        self.formData.marsDeviceIdsCookedUnAssinged.map(function (value) {
+          marsDeviceIdsCookedUnAssinged.push(value.id)
+        })
 
-        let postValues = {
+        const postValues = {
           action: this.$MARS_DEVICE_STATUS_SAT_ASSIGNED,
           marsDeviceIds: marsDeviceIdsCookedUnAssinged,
           triggerWelcomeMail: self.formData.triggerWelcomeMail,
           userId: self.formData.assignTo
-        };
-        self
-          .IMPLEMENTATION_QUEUE_SUBMIT(postValues)
+        }
+        self.IMPLEMENTATION_QUEUE_SUBMIT(postValues)
           .then(() => {
-            // self.IMPLEMENTATION_QUEUE_UNASSIGNED_LIST();
-            self.formData.marsDeviceIdsCookedUnAssinged = [];
-            self.formData.assignTo = "";
+            self.formData.marsDeviceIdsCookedUnAssinged = []
+            self.formData.assignTo = ''
             self.$q.notify({
-              color: "positive",
-              position: "bottom",
-              message: "Successfully Re-assigned !",
-              icon: "thumb_up"
-            });
+              color: 'positive',
+              position: 'bottom',
+              message: 'Successfully Re-assigned !',
+              icon: 'thumb_up'
+            })
             this.ajaxLoadAllLeadInfo({
               pagination: this.paginationControl,
               filter: this.filterSearch
-            });
+            })
           })
           .catch(() => {
             self.$q.notify({
-              color: "negative",
-              position: "bottom",
-              message: "Please try again !",
-              icon: "thumb_down"
-            });
-          });
+              color: 'negative',
+              position: 'bottom',
+              message: 'Please try again !',
+              icon: 'thumb_down'
+            })
+          })
       }
     },
 
-    // Function to toggle lead information pop up screen
-    toggleLeadInformation(leadDetails) {
-      this.propToggleLeadInformation = !this.propToggleLeadInformation;
+    toggleLeadInformation (leadDetails) {
+      this.propToggleLeadInformation = !this.propToggleLeadInformation
       if (leadDetails != undefined) {
-        this.addtnLeadInformation = leadDetails;
+        this.addtnLeadInformation = leadDetails
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>

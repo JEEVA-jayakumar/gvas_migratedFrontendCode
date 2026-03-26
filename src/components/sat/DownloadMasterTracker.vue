@@ -1,117 +1,107 @@
 <template>
-  <div>
-    <q-dialog
-      minimized no-backdrop-dismiss v-model="toggleModel"
-      :content-css="{padding:'30px',minWidth: '40vw'}"
-    > 
-     <!-- @hide="emitfnshowAddPartner()"
-      @escape-key="emitfnshowAddPartner()" -->
-      <form>
-        <div class="column group">
-          <div class="col-md-12">
-            <div class="q-title text-weight-regular"><p align="center"><strong>Download Master Tracker File</strong></p></div>
-          </div>
-          <div class="col-md-12">
-             <q-input filled v-model="formData.fromDate" label="Date" color="grey-9">
-            <template v-slot:append>
-              <q-icon name="event" class="cursor-pointer">
-                <q-menu transition-show="scale" transition-hide="scale">
-                  <q-date v-model="formData.fromDate" mask="YYYY-MM-DD" />
-                </q-menu>
-              </q-icon>
-            </template>
-          </q-input>
-          </div>
-        <div class="col-md-12">
-           <q-input filled v-model="formData.toDate" label="Date" color="grey-9">
-            <template v-slot:append>
-              <q-icon name="event" class="cursor-pointer">
-                <q-menu transition-show="scale" transition-hide="scale">
-                  <q-date v-model="formData.toDate" mask="YYYY-MM-DD" />
-                </q-menu>
-              </q-icon>
-            </template>
-          </q-input>
-           </div>
-        <div class="col-md-12 group" align="right">
-            <q-btn
-              flat
-              align="right"
-              class="bg-white text-weight-regular text-grey-8"
-              @click="emitfnshowMasterTrackerList()"
-            >Cancel</q-btn>
-            <q-btn align="right" @click="downloadMasterTrackerList(formData)" :disabled="submitDisabled" color="purple-9">Download</q-btn>
-          </div>
+  <q-dialog
+    v-model="toggleModel"
+    persistent
+  >
+    <q-card style="min-width: 40vw" class="q-pa-md">
+      <q-card-section>
+        <div class="q-title text-weight-regular text-center q-mb-md">
+          <strong>Download Master Tracker File</strong>
         </div>
-      </form>
-    </q-dialog>
-  </div>
+        <div class="column q-gutter-md">
+          <q-input
+            v-model="formData.fromDate"
+            label="From Date"
+            color="grey-9"
+            mask="####-##-##"
+          >
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                  <q-date v-model="formData.fromDate" mask="YYYY-MM-DD">
+                    <div class="row items-center justify-end">
+                      <q-btn v-close-popup label="Close" color="primary" flat />
+                    </div>
+                  </q-date>
+                </q-popup-proxy>
+              </q-icon>
+            </template>
+          </q-input>
+
+          <q-input
+            v-model="formData.toDate"
+            label="To Date"
+            color="grey-9"
+            mask="####-##-##"
+          >
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                  <q-date v-model="formData.toDate" mask="YYYY-MM-DD">
+                    <div class="row items-center justify-end">
+                      <q-btn v-close-popup label="Close" color="primary" flat />
+                    </div>
+                  </q-date>
+                </q-popup-proxy>
+              </q-icon>
+            </template>
+          </q-input>
+        </div>
+      </q-card-section>
+
+      <q-card-actions align="right">
+        <q-btn
+          flat
+          label="Cancel"
+          color="grey-8"
+          @click="emitfnshowMasterTrackerList"
+        />
+        <q-btn
+          label="Download"
+          color="purple-9"
+          :disabled="submitDisabled"
+          @click="downloadMasterTrackerList(formData)"
+        />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 
-
-import {
-  required,
-  email,
-  password,
-  minLength,
-  maxLength,
-  alpha,
-  alphaNum,
-  numeric,
-  sameAs
-} from "@vuelidate/validators";
-
-import { date } from "quasar";
-const today = new Date();
-const { startOfDate, addToDate, subtractFromDate } = date;
-import { mapGetters, mapActions } from "vuex";
 export default {
+  name: "DownloadMasterTracker",
   props: ["propMasterTrackerList"],
   data() {
     return {
       toggleModel: this.propMasterTrackerList,
-      tomorrow: addToDate(today, { days: 0 }),
-      yesterday: subtractFromDate(today, { days: 7720 }),
-      state: new Date(),
-      defaultValue: startOfDate(today, "year"),
-      formData:{
-        fromDate:"",
-        toDate:""
-      },
+      formData: {
+        fromDate: "",
+        toDate: ""
       }
-      
-    
+    };
   },
-
   computed: {
-    //     submitDisabled: function () {
-
-    //   return (this.formData.fromDate !=0 || this.formData.toDate !=0) ;
-    // },
-     submitDisabled: function () {
-
-      return (this.formData.fromDate !=0 || this.formData.toDate !=0 || (this.formData.fromDate== 0 && this.formData.toDate == 0)) ;
-    },
+    submitDisabled() {
+      return !this.formData.fromDate || !this.formData.toDate;
+    }
   },
   methods: {
-       ...mapActions("DownloadMasterTrackerData",["MASTER_TRACKER_LIST_ALL_DATAS"]),
-      emitfnshowMasterTrackerList() {
+    ...mapActions("DownloadMasterTrackerData", ["MASTER_TRACKER_LIST_ALL_DATAS"]),
+    emitfnshowMasterTrackerList() {
       this.$emit("emitfnshowMasterTrackerList");
-     },
-     downloadMasterTrackerList(request) {
-     let params = {
-        fromDate: this.toTimestamp(request.fromDate.toString()),
-        toDate: this.toTimestamp(request.toDate.toString())
+    },
+    downloadMasterTrackerList(request) {
+      let params = {
+        fromDate: this.toTimestamp(request.fromDate),
+        toDate: this.toTimestamp(request.toDate)
       };
       this.$q.loading.show({
-          delay: 100, // ms
-          spinnerColor: "purple-9",
-          message: "Please wait.."
+        message: "Please wait.."
       });
       this.MASTER_TRACKER_LIST_ALL_DATAS(params)
-        .then(response => {
+        .then(() => {
           this.$emit("emitfnshowMasterTrackerList");
           this.$q.loading.hide();
           this.$q.notify({
@@ -120,90 +110,36 @@ export default {
             message: "Successfully Downloaded",
             icon: "thumb_up"
           });
-          this.formData.fromDate="",
-          this.formData.toDate=""
-    
-          
+          this.formData.fromDate = "";
+          this.formData.toDate = "";
         })
         .catch(error => {
           this.$q.loading.hide();
-          if(error.status==400){
-            this.$q.notify({
-            color: "amber",
-            position: "bottom",
-            message: "Output file size is high,Select smaller date range",
-            icon: "thumb_down"
-          });
-          }
-          else if(error.status == 500){
-            this.$q.notify({
-            color: "amber",
-            position: "bottom",
-            message: "INTERNAL_SERVER_ERROR",
-            icon: "thumb_down"
-          });
-
-          }
-          else if(error.status == 403){
-            this.$q.notify({
-            color: "amber",
-            position: "bottom",
-            message:  "please choose some another date",
-            icon: "thumb_down"
-          });
-
-          }
+          let msg = "Please select the field";
+          if (error.status === 400) msg = "Output file size is high, Select smaller date range";
+          else if (error.status === 500) msg = "INTERNAL_SERVER_ERROR";
+          else if (error.status === 403 || error.status === 404) msg = "please choose some another date";
           
-          else if(error.status == 404){
-            this.$q.notify({
+          this.$q.notify({
             color: "amber",
             position: "bottom",
-            message:  "please choose some another date",
-            icon: "thumb_down"
-            });
-          }
-          else{
-             this.$q.notify({
-            color: "amber",
-            position: "bottom",
-            message:  "Please select the field",
+            message: msg,
             icon: "thumb_down"
           });
-          }
-
-          this.formData.fromDate="",
-          this.formData.toDate=""
-          
-
+          this.formData.fromDate = "";
+          this.formData.toDate = "";
         });
-
     },
     toTimestamp(strDate) {
-      var date = strDate.split("T")[0]
-      var curDate = new Date();      
-      var mnth = curDate.getMonth()+1;
-      var chDate = curDate.getFullYear()+"-"+(mnth < 10 ? "0"+mnth : mnth)+"-"+curDate.getDate();
-      var datum = null
-      if (chDate == date) 
-        datum = Date.now();
-      else
-        datum = Date.parse(strDate);
-      return datum;
-    },
-    COMMON_FILTER_FUNCTION(arraySet, terms) {
-      return _.filter(arraySet, function(oo) {
-        return oo.label.toString().includes(terms.toLowerCase());
-      });
-    },
+      if (!strDate) return null;
+      var datePart = strDate.split("T")[0];
+      var curDate = new Date();
+      var mnth = curDate.getMonth() + 1;
+      var chDate = curDate.getFullYear() + "-" + (mnth < 10 ? "0" + mnth : mnth) + "-" + (curDate.getDate() < 10 ? "0" + curDate.getDate() : curDate.getDate());
+
+      if (chDate === datePart) return Date.now();
+      return Date.parse(strDate);
+    }
   }
 };
 </script>
-
-<style scoped>
-.error {
-  color: red; 
-  font-size: 12px;
-  position: absolute;
-  text-transform: lowercase;
-}
-</style>

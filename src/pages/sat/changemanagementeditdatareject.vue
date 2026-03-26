@@ -377,7 +377,7 @@
               <q-input v-model="merchant.companyinformation.businessNature" class="no-margin" label="Nature of Business Change" />
             </div>
             <div class="col-xs-12 col-sm-6">
-              <p><b>Auto or Manual Settlement?</b></P>
+              <p><b>Auto or Manual Settlement?</b></p>
               <q-radio
                 v-for="(item,index) in autoormanualOptions"
                 :key="index"

@@ -4,422 +4,194 @@
     <div>
       <generalLeadInformation
         v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
+        :leadInformation="addtnLeadInformation"
         :propToggleLeadInformationPop="propToggleLeadInformation"
         @closeLeadInformation="toggleLeadInformation"
       />
-      <!--END: table Footer -->
-
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-<q-tab-panells v-model="selectedTab" animated>
-
-</q-tab-panells>
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-<q-tab-panells v-model="tab" animated>
-
-</q-tab-panells>
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-<q-tab-panells v-model="selectedTab" animated>
-
-</q-tab-panells>
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-<q-tab-panells v-model="selectedTab" animated>
-
-</q-tab-panells>
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-<q-tab-panells v-model="selectedTab" animated>
-
-</q-tab-panells>
-   <!-- content -->
-    <div>
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
-      <!--END: table Footer -->
-
-<q-tab-panells v-model="tab" animated>
-<q-tab-panell name="rejectedTab">
-          <q-table
-            :rows="tableData"
-            :columns="columnData"
-            table-class="customTableClass"
-            :filter="filterSearch" v-model:pagination="paginationControl"
-            v-model:selected="formData.marsDeviceIdsCookedUnAssinged"
-            row-key="id"
-            :loading="tableAjaxLoading"
-            :rows-per-page-options="[10,20,50,100,150,200]"
-            color="dark"
-            @request="ajaxLoadAllLeadInfo"
-          >
-            <template v-slot:body-cell-leadNumber="props">
-            <q-td :props="props"
-              class="cursor-pointer"
-              @click="toggleLeadInformation(props.row.leadNumber)">
-
-              <span class="label text-primary"
-                ># {{ props.row.leadNumber }}</span
-              >
-
-          </q-td>
-          </template>
+      <div class="q-pa-md">
+        <q-table
+          :rows="tableData"
+          :columns="columnData"
+          table-class="customTableClass"
+          :filter="filterSearch"
+          v-model:pagination="paginationControl"
+          row-key="id"
+          :loading="tableAjaxLoading"
+          :rows-per-page-options="[10, 20, 50, 100, 150, 200]"
+          color="dark"
+          @request="ajaxLoadAllLeadInfo"
+        >
+          <template v-slot:body-cell-leadNumber="props">
             <q-td
-              v-slot:body-cell-submitToMarsDate="props"
               :props="props"
-              >{{ $moment(props.row.submitToMarsDate).format("Do MMM Y") }}</q-td
+              class="cursor-pointer"
+              @click="toggleLeadInformation(props.row.leadNumber)"
             >
-            <template v-slot:top="props">
-              <div class="col-md-5">
-                <q-input
-                  clearable
-                  color="grey-9"
-                  v-model="filterSearch"
-                  placeholder="Type.."
-                  label="Search By Lead Number"
-                  class="q-mr-lg q-py-sm"
-                />
-              </div>
-            </template>
-          </q-table>
-        </q-tab-panell>
-</q-tab-panells>
-      <!--END: table Footer -->
+              <span class="label text-primary"># {{ props.row.leadNumber }}</span>
+            </q-td>
+          </template>
+          <template v-slot:body-cell-submitToMarsDate="props">
+            <q-td :props="props">
+              {{ $moment(props.row.submitToMarsDate).format("Do MMM YYYY") }}
+            </q-td>
+          </template>
+          <template v-slot:top>
+            <div class="col-md-5">
+              <q-input
+                clearable
+                color="grey-9"
+                v-model="filterSearch"
+                placeholder="Type.."
+                label="Search By Lead Number"
+                class="q-mr-lg q-py-sm"
+              >
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
+            </div>
+          </template>
+        </q-table>
+      </div>
     </div>
   </q-page>
 </template>
 
 <script>
-import { required, email, or } from '@vuelidate/validators';
-import { mapGetters, mapActions } from "vuex";
-import generalLeadInformation from "../../components/generalLeadInformation.vue";
+import { mapGetters, mapActions } from 'vuex'
+import generalLeadInformation from '../../components/generalLeadInformation.vue'
 
 export default {
-  name: "varaneekImplementationQueue",
+  name: 'varaneekRejectedLead',
   components: {
     generalLeadInformation
   },
-  data() {
+  data () {
     return {
       propToggleLeadInformation: false,
       addtnLeadInformation: null,
 
-      filterSearch: "",
-      selectedTab: "rejectedTab",
+      filterSearch: '',
+      selectedTab: 'rejectedTab',
       assignToOptions: [],
       tableData: [],
-      //Defining columns for table
+      // Defining columns for table
       columnData: [
         {
-          name: "leadNumber",
+          name: 'leadNumber',
           required: true,
-          label: "Lead Number",
-          align: "left",
-          field: row => {
-            return row.leadNumber;
-          },
+          label: 'Lead Number',
+          align: 'left',
+          field: row => row.leadNumber,
           sortable: false
         },
         {
-          name: "submitToMarsDate",
+          name: 'submitToMarsDate',
           required: true,
-          label: "Date of Submission",
-          align: "left",
-          field: row => {
-            return row.submitToMarsDate;
-          },
-          format: val => this.$moment(val).format("Do MMM Y"),
+          label: 'Date of Submission',
+          align: 'left',
+          field: row => row.submitToMarsDate,
           sortable: true
         },
         {
-          name: "leadInformation",
+          name: 'leadInformation',
           required: true,
-          label: "Device Type",
-          align: "left",
-          field: row => {
-            return row.device == null ?  "NA" :row.device.deviceName;
-          },
+          label: 'Device Type',
+          align: 'left',
+          field: row => row.device == null ? 'NA' : row.device.deviceName,
           sortable: false
         },
         {
-          name: "rejectedAt",
+          name: 'rejectedAt',
           required: true,
-          label: "Rejected At",
-          align: "left",
-          field: row => {
-            return row.marsReason == null ?  "NA" :row.marsReason;
-          },
+          label: 'Rejected At',
+          align: 'left',
+          field: row => row.marsReason == null ? 'NA' : row.marsReason,
           sortable: false
         },
         {
-          name: "reason",
+          name: 'reason',
           required: true,
-          label: "Reason",
-          align: "left",
-          field: row => {
-            return row.marsReason == null ?  "NA" :row.marsReason;
-          },
+          label: 'Reason',
+          align: 'left',
+          field: row => row.marsReason == null ? 'NA' : row.marsReason,
           sortable: false
-        },
+        }
       ],
       currentDeviceInfo: {},
       showDeviceAddressModal: false,
       formData: {
         marsDeviceIdsCooked: [],
-        marsDeviceIdsCookedUnAssinged: [],
+        marsDeviceIdsCookedUnAssinged: []
       },
-      paginationControl: {        
-        sortBy: "createdAt", // String, column "name" property value
+      paginationControl: {
+        sortBy: 'createdAt',
         descending: false,
         page: 1,
-        rowsPerPage: 10 // current rows per page being displayed
+        rowsPerPage: 10
       },
-      tableAjaxLoading: false,
-    };
+      tableAjaxLoading: false
+    }
   },
   computed: {
-    ...mapGetters("varaneekImplementationQueue", [
-      "getrejectStatusList"
+    ...mapGetters('varaneekImplementationQueue', [
+      'getrejectStatusList'
     ]),
-    ...mapGetters("ImplementationExecutive", [
-      "getImplementationExecutiveList"
+    ...mapGetters('ImplementationExecutive', [
+      'getImplementationExecutiveList'
     ]),
-    ...mapGetters("SuperAdminUsers", ["getAllStatesData"])
+    ...mapGetters('SuperAdminUsers', ['getAllStatesData'])
   },
-  created() {
+  created () {
     this.ajaxLoadAllLeadInfo({
       pagination: this.paginationControl,
       filter: this.filterSearch
-    });
-    this.getPincodeInformations();
+    })
+    this.getPincodeInformations()
   },
   methods: {
-    ...mapActions("varaneekImplementationQueue", [
-      "REJECT_STATUS_LIST"
+    ...mapActions('varaneekImplementationQueue', [
+      'REJECT_STATUS_LIST'
     ]),
-    ...mapActions("ImplementationExecutive", ["IMPLEMENTATION_EXECUTIVE_LIST"]),
-    ...mapActions("SuperAdminUsers", ["FETCH_ALL_STATES_DATA"]),
+    ...mapActions('ImplementationExecutive', ['IMPLEMENTATION_EXECUTIVE_LIST']),
+    ...mapActions('SuperAdminUsers', ['FETCH_ALL_STATES_DATA']),
 
-    getPincodeInformations() {
-      this.FETCH_ALL_STATES_DATA();
+    getPincodeInformations () {
+      this.FETCH_ALL_STATES_DATA()
     },
-    ajaxLoadAllLeadInfo({ pagination, filter }) {
-      // we set QTable to "loading" state
+    ajaxLoadAllLeadInfo ({ pagination, filter }) {
       this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Fetching data .."
-      });
-      this.REJECT_STATUS_LIST({ pagination, filter }).then((response) => {
-          this.IMPLEMENTATION_EXECUTIVE_LIST().then(response => {
-            let assumeArr = [];
-            this.getImplementationExecutiveList.map(function(value) {
-              assumeArr.push({ label: value.name + " | " + value.employeeID+ " | " + value.email, value: value.id });
-            });
-            this.assignToOptions = assumeArr;
-          });
-          // updating pagination to reflect in the UI
-          this.paginationControl = pagination;
-
-          // we also set (or update) rowsNumber
-          this.paginationControl.rowsNumber = this.getrejectStatusList.totalElements;
-          this.paginationControl.page = this.getrejectStatusList.number + 1;
-
-          // then we update the rows with the fetched ones
-          this.tableData = this.getrejectStatusList.content;
+        delay: 0,
+        spinnerColor: 'purple-9',
+        message: 'Fetching data ..'
+      })
+      this.REJECT_STATUS_LIST({ pagination, filter })
+        .then(() => {
+          this.IMPLEMENTATION_EXECUTIVE_LIST().then(() => {
+            const assumeArr = []
+            this.getImplementationExecutiveList.map(function (value) {
+              assumeArr.push({ label: value.name + ' | ' + value.employeeID + ' | ' + value.email, value: value.id })
+            })
+            this.assignToOptions = assumeArr
+          })
+          this.paginationControl = pagination
+          this.paginationControl.rowsNumber = this.getrejectStatusList.totalElements
+          this.paginationControl.page = this.getrejectStatusList.number + 1
+          this.tableData = this.getrejectStatusList.content
           if (this.getrejectStatusList.sort != null) {
-            this.paginationControl.sortBy = this.getrejectStatusList.sort[0].property;
-            this.paginationControl.descending = this.getrejectStatusList.sort[0].ascending;
+            this.paginationControl.sortBy = this.getrejectStatusList.sort[0].property
+            this.paginationControl.descending = this.getrejectStatusList.sort[0].ascending
           }
-
-          // finally we tell QTable to exit the "loading" state
-          this.$q.loading.hide();
+          this.$q.loading.hide()
         })
         .catch(() => {
-          this.$q.loading.hide();
-        });
+          this.$q.loading.hide()
+        })
     },
 
-    // Function to open device address pop up
-    UpdateDeviceAddress(currentDeviceInfo) {
-      this.currentDeviceInfo = [];
-      this.showDeviceAddressModal = !this.showDeviceAddressModal;
+    UpdateDeviceAddress (currentDeviceInfo) {
+      this.currentDeviceInfo = []
+      this.showDeviceAddressModal = !this.showDeviceAddressModal
       if (this.formData.marsDeviceIdsCooked.length == 0) {
         let assumeObj = {
           id: [currentDeviceInfo.id],
@@ -431,13 +203,13 @@ export default {
             city: currentDeviceInfo.city,
             state: currentDeviceInfo.state
           }
-        };
-        this.currentDeviceInfo = assumeObj;
+        }
+        this.currentDeviceInfo = assumeObj
       } else {
-        let marsDeviceIdsCooked = [];
-        this.formData.marsDeviceIdsCooked.map(function(value) {
-          marsDeviceIdsCooked.push(value.id);
-        });
+        const marsDeviceIdsCooked = []
+        this.formData.marsDeviceIdsCooked.map(function (value) {
+          marsDeviceIdsCooked.push(value.id)
+        })
         let assumeObj = {
           id: marsDeviceIdsCooked,
           marsDeviceAddress: {
@@ -448,24 +220,22 @@ export default {
             city: currentDeviceInfo.city,
             state: currentDeviceInfo.state
           }
-        };
-        this.currentDeviceInfo = assumeObj;
+        }
+        this.currentDeviceInfo = assumeObj
       }
     },
-    // Function to open device address pop up
-    UpdateDeviceAddressAfterEmit(pagination) {
-      this.showDeviceAddressModal = !this.showDeviceAddressModal;
-      this.paginationControl = pagination;
+    UpdateDeviceAddressAfterEmit (pagination) {
+      this.showDeviceAddressModal = !this.showDeviceAddressModal
+      this.paginationControl = pagination
     },
-    // Function to toggle lead information pop up screen
-    toggleLeadInformation(leadDetails) {
-      this.propToggleLeadInformation = !this.propToggleLeadInformation;
+    toggleLeadInformation (leadDetails) {
+      this.propToggleLeadInformation = !this.propToggleLeadInformation
       if (leadDetails != undefined) {
-        this.addtnLeadInformation = leadDetails;
+        this.addtnLeadInformation = leadDetails
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>

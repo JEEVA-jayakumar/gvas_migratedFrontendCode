@@ -30,10 +30,21 @@ Router.beforeEach((to, from, next) => {
       console.error("Error parsing user info", e);
     }
 
-    if (to.matched.length > 0 && roles.includes(to.matched[0].name)) {
+    const matchedName = to.matched.length > 0 ? to.matched[0].name : null;
+    console.log("ROLES:", roles);
+    console.log("MATCHED NAME:", matchedName);
+    let isAuthorized = roles.includes(matchedName);
+
+    // SAT module authorization: OH_3 role maps to SAT route
+    if (!isAuthorized && matchedName === "SAT" && roles.includes("OH_3")) {
+      console.log("Authorizing SAT for OH_3");
+      isAuthorized = true;
+    }
+
+    if (isAuthorized) {
       next();
     } else {
-      if (to.matched.length > 0 && to.matched[0].name == "primaryLogin") {
+      if (matchedName === "primaryLogin") {
         next();
       } else {
         // For visual parity with old behavior which was next(false)
