@@ -14165,7 +14165,7 @@
                           )}`;
                           let fieldErrorFound = eval(splittingErrorField);
                           fieldErrorFound.$model = "";
-                          OThis.$set(OThis.error.tab, splitted[1], true);
+                          OThis.error.tab[splitted[1]] = true;
 
                           let generateErrorMessage = eval(
                             `OThis.error.field.${splitted.join(".")}`
@@ -14505,7 +14505,7 @@
                                 )}`;
                                 let fieldErrorFound = eval(splittingErrorField);
                                 fieldErrorFound.$model = "";
-                                OThis.$set(OThis.error.tab, splitted[1], true);
+                                OThis.error.tab[splitted[1]] = true;
 
                                 let generateErrorMessage = eval(
                                   `OThis.error.field.${splitted.join(".")}`

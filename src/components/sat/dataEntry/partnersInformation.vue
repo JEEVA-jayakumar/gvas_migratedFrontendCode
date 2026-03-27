@@ -75,7 +75,7 @@
           :options="cityOptionsFiltered"
           @filter="citySearch"
           @update:model-value="obj => partnerCitySelected(obj,index)"
-        />
+        ></q-select>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-select
@@ -91,7 +91,7 @@
           :options="stateOptionsFiltered"
           @filter="stateSearch"
           @update:model-value="obj => partnerStateSelected(obj,index)"
-        />
+        ></q-select>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
