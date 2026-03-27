@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="propRowDetails">
     <q-dialog
      minimized class="customModalOverlay" 
     v-model="toggleModel"

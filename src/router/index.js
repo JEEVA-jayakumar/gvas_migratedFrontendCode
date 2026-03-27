@@ -35,9 +35,9 @@ Router.beforeEach((to, from, next) => {
     console.log("MATCHED NAME:", matchedName);
     let isAuthorized = roles.includes(matchedName);
 
-    // SAT module authorization: OH_3 role maps to SAT route
-    if (!isAuthorized && matchedName === "SAT" && roles.includes("OH_3")) {
-      console.log("Authorizing SAT for OH_3");
+    // SAT module authorization: OH_3 role or OH role maps to SAT route
+    if (!isAuthorized && matchedName === "SAT" && (roles.includes("OH_3") || roles.includes("OH"))) {
+      console.log("Authorizing SAT for " + (roles.includes("OH_3") ? "OH_3" : "OH"));
       isAuthorized = true;
     }
 
@@ -48,6 +48,7 @@ Router.beforeEach((to, from, next) => {
         next();
       } else {
         // For visual parity with old behavior which was next(false)
+        console.log("Unauthorized, blocking navigation to:", to.fullPath);
         next(false);
       }
     }

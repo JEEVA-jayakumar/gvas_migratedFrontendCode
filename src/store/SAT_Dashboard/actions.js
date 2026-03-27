@@ -20,7 +20,9 @@ export const FETCH_DASHBOARD_COUNT = ({ commit }, request) => {
   /* START AGGREGATORS STATIC CODE */
   export const FETCH_AGGREGATORS_DASHBOARD_COUNT = ({ commit }, request) => {
     console.log("FETCH_AGGREGATORS_DASHBOARD_COUNT ----->",JSON.stringify(request))
-    return api.get("aggregator-inventory/agg-sat-dashboard/" + request.region +"/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])).then(response => {
+    let selectedTab = localStorage.getItem("selectedTab");
+    let aggregatorId = (selectedTab && selectedTab.includes('|')) ? selectedTab.split('|')[1] : "3"; // Default to 3 if not found
+    return api.get("aggregator-inventory/agg-sat-dashboard/" + request.region +"/"+aggregatorId).then(response => {
       commit("SET_AGGREGATORS_DASHBOARD_COUNT", response.data.data);
     });
   };

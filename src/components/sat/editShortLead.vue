@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="propRowDetails">
     {{this.propRowDetails.leadName}}
     <q-dialog
       minimized
