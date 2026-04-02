@@ -144,4 +144,26 @@ export default boot(({ app }) => {
       })
     }
   }))
+
+  // Stub for q-datetime which is deprecated in Quasar 2
+  app.component('q-datetime', defineComponent({
+    props: ['modelValue', 'placeholder', 'label', 'color', 'error'],
+    emits: ['update:modelValue', 'blur'],
+    setup(props, { emit }) {
+      const QInput = resolveComponent('q-input')
+      const QIcon = resolveComponent('q-icon')
+      return () => h(QInput, {
+        modelValue: props.modelValue,
+        'onUpdate:modelValue': (val) => emit('update:modelValue', val),
+        placeholder: props.placeholder,
+        label: props.label,
+        color: props.color || 'primary',
+        error: props.error,
+        onBlur: (evt) => emit('blur', evt),
+        type: 'date',
+        mask: 'YYYY/MM/DD',
+        hint: 'YYYY/MM/DD'
+      })
+    }
+  }))
 })

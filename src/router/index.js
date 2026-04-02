@@ -33,11 +33,17 @@ Router.beforeEach((to, from, next) => {
     const matchedName = to.matched.length > 0 ? to.matched[0].name : null;
     console.log("ROLES:", roles);
     console.log("MATCHED NAME:", matchedName);
+    console.log("TO MATCHED NAMES:", to.matched.map(m => m.name));
     let isAuthorized = roles.includes(matchedName);
 
     // SAT module authorization: OH_3 role or OH role maps to SAT route
     if (!isAuthorized && matchedName === "SAT" && (roles.includes("OH_3") || roles.includes("OH"))) {
       console.log("Authorizing SAT for " + (roles.includes("OH_3") ? "OH_3" : "OH"));
+      isAuthorized = true;
+    }
+
+    // OPS_HEAD module authorization
+    if (!isAuthorized && matchedName === "OPS_HEAD" && roles.includes("OH")) {
       isAuthorized = true;
     }
 

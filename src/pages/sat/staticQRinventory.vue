@@ -26,8 +26,8 @@
           <q-tab name="tab-3" label="Allocate To SO" />
         </q-tabs>
 
-        <q-tab-panells v-model="activeTab" animated>
-          <q-tab-panell name="tab-1" class="q-pa-none">
+        <q-tab-panels v-model="activeTab" animated>
+          <q-tab-panel name="tab-1" class="q-pa-none">
             <div class="row items-center q-pa-sm">
               <div class="col-8"></div>
               <q-input class="col-4" clearable color="grey-9" placeholder="Type.." v-model="filter"
@@ -48,9 +48,9 @@
                 </q-td>
               </template>
             </q-table>
-          </q-tab-panell>
+          </q-tab-panel>
 
-          <q-tab-panell name="tab-2" class="q-pa-none">
+          <q-tab-panel name="tab-2" class="q-pa-none">
             <div class="row q-pa-sm">
               <div class="col-8"></div>
               <q-input class="col-4" v-model="filter1" clearable color="grey-9" placeholder="Type.."
@@ -65,9 +65,9 @@
                 </q-td>
               </template>
             </q-table>
-          </q-tab-panell>
+          </q-tab-panel>
 
-          <q-tab-panell name="tab-3" class="q-pa-md">
+          <q-tab-panel name="tab-3" class="q-pa-md">
             <div class="row q-col-gutter-md items-center">
               <div class="col-md-2">
                 <strong>Select Bank</strong>
@@ -119,8 +119,8 @@
                 <q-tab name="tab-6" label="Rejected List" />
               </q-tabs>
 
-              <q-tab-panells v-model="innerTab" animated>
-                <q-tab-panell name="tab-4" class="q-pa-none">
+              <q-tab-panels v-model="innerTab" animated>
+                <q-tab-panel name="tab-4" class="q-pa-none">
                   <div class="row q-pa-sm">
                     <div class="col-8"></div>
                     <q-input class="col-4" v-model="filter4" clearable color="grey-9" placeholder="Type.."
@@ -133,9 +133,9 @@
                       <q-td :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
                     </template>
                   </q-table>
-                </q-tab-panell>
+                </q-tab-panel>
 
-                <q-tab-panell name="tab-5" class="q-pa-none">
+                <q-tab-panel name="tab-5" class="q-pa-none">
                   <div class="row q-pa-sm">
                     <div class="col-8"></div>
                     <q-input class="col-4" v-model="filter5" clearable color="grey-9" placeholder="Type.."
@@ -148,9 +148,9 @@
                       <q-td :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
                     </template>
                   </q-table>
-                </q-tab-panell>
+                </q-tab-panel>
 
-                <q-tab-panell name="tab-6" class="q-pa-none">
+                <q-tab-panel name="tab-6" class="q-pa-none">
                   <div class="row q-pa-sm">
                     <div class="col-8"></div>
                     <q-input class="col-4" v-model="filter6" clearable color="grey-9" placeholder="Type.."
@@ -163,11 +163,11 @@
                       <q-td :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
                     </template>
                   </q-table>
-                </q-tab-panell>
-              </q-tab-panells>
+                </q-tab-panel>
+              </q-tab-panels>
             </div>
-          </q-tab-panell>
-        </q-tab-panells>
+          </q-tab-panel>
+        </q-tab-panels>
       </div>
       <div v-if="toggleAjaxLoadFilter || toggleAjaxLoadFilter1" class="fullscreen spinner-overlay">
         <q-spinner-bars class="absolute-center" style="color:#61116a" :size="35" />

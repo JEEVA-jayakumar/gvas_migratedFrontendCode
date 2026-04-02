@@ -103,17 +103,20 @@
             {{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}
           </q-td>
         </template>
-        <template v-slot:top>
-          <div class="col-5">
-            <q-search
-              clearable
-              v-model="filter"
-              color="grey-9"
-              placeholder="Type.."
-              float-label="Search By Merchant Name, Lead ID.."
-              class="q-mr-lg q-py-sm"
-            />
-          </div>
+        <template v-slot:top-right>
+          <q-input
+            clearable
+            v-model="filter"
+            color="grey-9"
+            placeholder="Type.."
+            label="Search By Merchant Name, Lead ID.."
+            class="q-mr-lg q-py-sm"
+            dense
+          >
+            <template v-slot:prepend>
+              <q-icon name="search" />
+            </template>
+          </q-input>
         </template>
       </q-table>
       <showMerchantTransactionLevelDetails

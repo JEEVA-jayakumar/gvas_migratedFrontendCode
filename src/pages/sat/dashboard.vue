@@ -428,22 +428,29 @@
                 </q-card-title>
                 <q-card-main>
                   <div>
-                    <q-table dense hide-bottom :data="agingTrackerPendingTableData"
-                      :columns="agingTrackerPendingColumns" :pagination.sync="paginationControl" row-key="name">
-                      <q-td slot="body-cell-name" slot-scope="props" :props="props">{{ props.row.name }}</q-td>
-                      <q-td slot="body-cell-greaterThanOneDay" slot-scope="props" :props="props" class="cursor-pointer"
-                        @click.native="retrieveLeadsList(props.row.greaterThanOneDayLeadIdList)">{{
-                          props.row.greaterThanOneDay
-                        }}</q-td>
-                      <q-td slot="body-cell-greaterThanTwoDays" slot-scope="props" :props="props" class="cursor-pointer"
-                        @click.native="retrieveLeadsList(props.row.greaterThanTwoDaysLeadIdList)">{{
-                          props.row.greaterThanTwoDays
-                        }}</q-td>
-                      <q-td slot="body-cell-greaterThanFiveDays" slot-scope="props" :props="props"
-                        class="cursor-pointer"
-                        @click.native="retrieveLeadsList(props.row.greaterThanFiveDaysLeadIdList)">{{
-                          props.row.greaterThanFiveDays
-                        }}</q-td>
+                    <q-table dense hide-bottom :rows="agingTrackerPendingTableData"
+                      :columns="agingTrackerPendingColumns" v-model:pagination="paginationControl" row-key="name">
+                      <template v-slot:body-cell-name="props">
+                        <q-td :props="props">{{ props.row.name }}</q-td>
+                      </template>
+                      <template v-slot:body-cell-greaterThanOneDay="props">
+                        <q-td :props="props" class="cursor-pointer"
+                          @click="retrieveLeadsList(props.row.greaterThanOneDayLeadIdList)">{{
+                            props.row.greaterThanOneDay
+                          }}</q-td>
+                      </template>
+                      <template v-slot:body-cell-greaterThanTwoDays="props">
+                        <q-td :props="props" class="cursor-pointer"
+                          @click="retrieveLeadsList(props.row.greaterThanTwoDaysLeadIdList)">{{
+                            props.row.greaterThanTwoDays
+                          }}</q-td>
+                      </template>
+                      <template v-slot:body-cell-greaterThanFiveDays="props">
+                        <q-td :props="props" class="cursor-pointer"
+                          @click="retrieveLeadsList(props.row.greaterThanFiveDaysLeadIdList)">{{
+                            props.row.greaterThanFiveDays
+                          }}</q-td>
+                      </template>
                     </q-table>
                   </div>
                 </q-card-main>

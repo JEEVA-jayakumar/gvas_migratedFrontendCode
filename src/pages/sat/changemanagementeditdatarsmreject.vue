@@ -88,7 +88,7 @@
             </q-item>
        </div>
         <div class="col-xs-12 col-sm-6">
-            <q-input @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON" placeholder="Transaction Made ON"
+            <q-datetime @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON" placeholder="Transaction Made ON"
             />
           </div>
           <div class="col-xs-12 col-sm-6">
@@ -101,7 +101,7 @@
           />
           </div>
           <div class="col-xs-12 col-sm-6">
-            <q-input @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON"
+            <q-datetime @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON"
             />
           </div>
           </div>
@@ -328,19 +328,19 @@
                 />
             </div>
               <div class="col-xs-12 col-sm-6">
-              <q-input v-model="merchant.companyinformation.registeredPin" class="no-margin" float-label="Pincode" />
+              <q-input v-model="merchant.companyinformation.registeredPin" class="no-margin" label="Pincode" />
             </div>
             <div class="col-xs-12 col-sm-6">
-              <q-input v-model="merchant.companyinformation.contactMobile" class="no-margin" float-label="Mobile Number" />
+              <q-input v-model="merchant.companyinformation.contactMobile" class="no-margin" label="Mobile Number" />
             </div>
             <div class="col-xs-12 col-sm-6">
-              <q-input v-model="merchant.companyinformation.contactEmail" class="no-margin" float-label="Email Id" />
+              <q-input v-model="merchant.companyinformation.contactEmail" class="no-margin" label="Email Id" />
             </div>
              <div class="col-xs-12 col-sm-6">
-              <q-input v-model="merchant.companyinformation.statementEmail" class="no-margin" float-label="Statement Email ID" />
+              <q-input v-model="merchant.companyinformation.statementEmail" class="no-margin" label="Statement Email ID" />
             </div>
             <div class="col-xs-12 col-sm-6">
-              <q-input v-model="merchant.companyinformation.businessNature" class="no-margin" float-label="Nature of Business Change" />
+              <q-input v-model="merchant.companyinformation.businessNature" class="no-margin" label="Nature of Business Change" />
             </div>
             <div class="col-xs-12 col-sm-6">
               <p><b>Auto or Manual Settlement?</b></p>

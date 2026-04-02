@@ -218,8 +218,8 @@ export default {
           this.$barcodeScanner.destroy();
       }
     },
-    removeScannedItems(item) {
-      this.getDeviceScannedItems.splice(item.__index);
+    removeScannedItems(index) {
+      this.getDeviceScannedItems.splice(index, 1);
       this.REACTIVE_SCANNED_DEVICE_DATA(this.getDeviceScannedItems);
     }
   }

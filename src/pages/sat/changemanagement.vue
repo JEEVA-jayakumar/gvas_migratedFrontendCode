@@ -97,10 +97,21 @@
             >Data Entry</q-btn>
           </q-td>
         </template>
-        <template v-slot:top>
-          <div class="col-md-5">
-            <q-search clearable color="grey-9" v-model="filter1" placeholder="Type.." :debounce="600" class="q-mr-lg q-py-sm" float-label="Search By MID/TID/Merchant Name " />
-          </div>
+        <template v-slot:top-right>
+          <q-input
+            clearable
+            color="grey-9"
+            v-model="filter1"
+            placeholder="Type.."
+            debounce="600"
+            class="q-mr-lg q-py-sm"
+            label="Search By MID/TID/Merchant Name "
+            dense
+          >
+            <template v-slot:prepend>
+              <q-icon name="search" />
+            </template>
+          </q-input>
         </template>
       </q-table>
       <div class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">Enter TID/MID for changing merchant data name</div>
@@ -127,10 +138,21 @@
             @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
           >Data Entry</q-btn>
         </template>
-        <template v-slot:top>
-          <div class="col-md-5">
-            <q-search clearable color="grey-9" v-model="filter" placeholder="Type.." :debounce="600" class="q-mr-lg q-py-sm" float-label="Search By MID/TID/Merchant Name" />
-          </div>
+        <template v-slot:top-right>
+          <q-input
+            clearable
+            color="grey-9"
+            v-model="filter"
+            placeholder="Type.."
+            debounce="600"
+            class="q-mr-lg q-py-sm"
+            label="Search By MID/TID/Merchant Name"
+            dense
+          >
+            <template v-slot:prepend>
+              <q-icon name="search" />
+            </template>
+          </q-input>
         </template>
       </q-table>
     </div>

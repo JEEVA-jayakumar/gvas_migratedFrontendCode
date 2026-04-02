@@ -19,10 +19,10 @@
           <q-tr
             :props="props"
             @click="fnRowClick(props.row)"
-            @mouseover="fnRowMouseOver(props.row.__index)"
-            @mouseleave="fnRowMouseLeave(props.row.__index)"
+            @mouseover="fnRowMouseOver(props.rowIndex)"
+            @mouseleave="fnRowMouseLeave(props.rowIndex)"
             class="cursor-pointer"
-            :class="[props.row.__index === activeId ? 'bg-grey-3' : '']"
+            :class="[props.rowIndex === activeId ? 'bg-grey-3' : '']"
           >
             <q-td key="leadInformation.updatedAt" :props="props">
               <span class="label capitalize" v-if="props.row.updatedAt">{{ $moment(props.row.updatedAt).format("MMMM Do YYYY") }}</span>
