@@ -311,7 +311,7 @@ const routes = [
 
   // Router for SAT
   {
-    name: "SAT",
+    name: "OH",
     path: "/sat/",
     component: Default_Layout,
     children: [{
@@ -417,7 +417,7 @@ const routes = [
       component: Changemanagement
     },
     {
-      name: "changemanagementterminal",
+      name: "changemanagement",
       path: "change/management/terminal",
       component: Changemanagementterminal
     },
@@ -466,7 +466,7 @@ const routes = [
       component: ChangemanagementEditDatarejectfinance
     },
     {
-      name: "inventoryEditData",
+      name: "ChangemanagementEditData",
       path: "inventory/:id/edit/data",
       component: deviceDeployementEditData
     },
@@ -1124,7 +1124,7 @@ const routes = [
       component: InventorywithResellar
     },
     {
-      name: "inventorywithresellar_allocate",
+      name: "inventorywithresellar",
       path: "central/allocate/device/resellar",
       component: InventoryWithResellar
     },
@@ -1527,7 +1527,7 @@ const routes = [
       props: true
     },
     {
-      name: "serialupdate",
+      name: "QRSticker",
       path: "manage/serialupdate",
       component: serialupdate,
     },
@@ -1545,7 +1545,7 @@ const routes = [
   {
     name: "OH",
     path: "/ops/head/",
-    component: Default_OpsHead,
+    component: Default_Layout,
     children: [{
       name: "opsHeadDashboard",
       path: "dashboard",

@@ -447,7 +447,27 @@ export default {
       if (tab == "wiplead") {
         this.fetchappData()
       } else if (tab == "shortlead") {
-        Object.keys(this.formData).forEach(key => { this.formData[key] = '' });
+        this.formData = {
+          leadName: '',
+          contactName: '',
+          contactNumber: '',
+          alternateContactNumber: '',
+          email: '',
+          deviceSelected: '',
+          leadAddress: '',
+          region: '',
+          pincode: '',
+          pincodeTemp: '',
+          state: '',
+          city: '',
+          leadSource: { id: '', sourceName: '', multiTidEnabled: false },
+          device: { id: '', deviceName: '' },
+          vasInstanceMapping: '',
+          deviceCount: '',
+          ownerFirstName: '',
+          ownerLastName: '',
+          ownerDOB: '',
+        };
         this.selectedVas = [];
       }
     }

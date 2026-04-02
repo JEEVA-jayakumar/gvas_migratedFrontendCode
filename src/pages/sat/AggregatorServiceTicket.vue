@@ -187,7 +187,7 @@
             <q-td :props="props">
 
           <q-btn
-            :disabled="props.row.serviceRequestSubTicketStatus.id == 102 "
+            :disabled="props.row.serviceRequestSubTicketStatus.id != 102 "
             no-caps
             no-wrap
             label="Approve"
@@ -203,7 +203,7 @@
             <q-td :props="props">
 
           <q-btn
-            :disabled="props.row.serviceRequestSubTicketStatus.id == 102 "
+            :disabled="props.row.serviceRequestSubTicketStatus.id != 102 "
             no-caps
             no-wrap
             label="Reject"

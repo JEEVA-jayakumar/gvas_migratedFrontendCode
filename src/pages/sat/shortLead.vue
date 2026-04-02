@@ -52,21 +52,21 @@
                   <q-list separator no-border class="no-padding q-body-1">
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Plan</q-item-section>
-                      <q-item-section>{{formData.shortLead.plan.planName}}</q-item-section>
+                      <q-item-section side>{{formData.shortLead.plan.planName}}</q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Setup Fees</q-item-section>
-                      <q-item-section v-if="this.getShortLeadInfo.leadSource.id === 114">Rs. {{formData.shortLead.setUpFeeAppliedAmount}}</q-item-section>
-                      <q-item-section v-else>Rs. {{formData.shortLead.setupFees}}</q-item-section>
+                      <q-item-section side v-if="this.getShortLeadInfo.leadSource?.id === 114">Rs. {{formData.shortLead.setUpFeeAppliedAmount}}</q-item-section>
+                      <q-item-section side v-else>Rs. {{formData.shortLead.setupFees}}</q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Recurring Fees</q-item-section>
-                      <q-item-section v-if="this.getShortLeadInfo.leadSource.id === 114">Rs. {{formData.shortLead.recurringFeeAppliedAmount}}</q-item-section>
-                      <q-item-section v-else>Rs. {{formData.shortLead.recurringFees}}</q-item-section>
+                      <q-item-section side v-if="this.getShortLeadInfo.leadSource?.id === 114">Rs. {{formData.shortLead.recurringFeeAppliedAmount}}</q-item-section>
+                      <q-item-section side v-else>Rs. {{formData.shortLead.recurringFees}}</q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Merchant Category</q-item-section>
-                      <q-item-section>{{formData.shortLead.merchantCategory.merchantCategoryName}}</q-item-section>
+                      <q-item-section side>{{formData.shortLead.merchantCategory.merchantCategoryName}}</q-item-section>
                     </q-item>
                   </q-list>
                 </q-card-section>
@@ -85,7 +85,7 @@
                       <span v-if="formData.shortLead.paymentOption == 3">Swipe</span>
                        <span v-if="formData.shortLead.paymentOption == 4">UPI Link</span>
                     </div>
-                    <div  v-if="getShortLeadInfo.leadSource.id != 81" class="col q-body-1 text-positive" align="right">
+                    <div  v-if="getShortLeadInfo.leadSource?.id != 81" class="col q-body-1 text-positive" align="right">
                       Approved by
                       <span class="capitalize">{{fnGetVerifiedPerson()}}</span> (Finance)
                     </div>
@@ -99,7 +99,7 @@
                   <q-list no-border separator class="no-padding">
                     <q-item class="q-pa-sm">
                       <q-item-section class="q-body-1">Mode of payment</q-item-section>
-                      <q-item-section class="q-body-1">
+                      <q-item-section side class="q-body-1">
                         <span
                           class="q-body-1"
                           v-if="formData.shortLead.paymentOption == 1"
@@ -120,7 +120,7 @@
                     </q-item>
                     <q-item class="q-pa-sm">
                       <q-item-section class="q-body-1">Reference No</q-item-section>
-                      <q-item-section
+                      <q-item-section side
                         class="q-body-1"
                       >{{formData.shortLead.referenceNumber == ''? 'NA':formData.shortLead.referenceNumber}}</q-item-section>
                     </q-item>
@@ -176,8 +176,8 @@
                   <span class="q-body-1 text-weight-medium">MDR</span>
                   <span class="q-body-1 text-positive float-right" v-if="getShortLeadInfo.pricing">
                     Approved by
-                    <span class="capitalize">{{fnGetVerifiedRSMPerson().createdBy.name}}</span>
-                    ({{fnGetVerifiedRSMPerson().role.role}})
+                    <span class="capitalize">{{fnGetVerifiedRSMPerson()?.createdBy?.name}}</span>
+                    ({{fnGetVerifiedRSMPerson()?.role?.role}})
                   </span>
                 </q-card-section>
                 <q-card-section>
@@ -307,7 +307,7 @@
               </q-card>
             </div>
 
-            <!-- Comments -->
+            <!-- Remarks -->
             <div v-if="getShortLeadInfo.leadSource?.id != 81" class="col-12">
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
                 <q-card-section class="q-pa-sm bottom-border title-bg">
@@ -325,7 +325,7 @@
                         class="q-pa-sm"
                       >
                         <q-item-section avatar>
-                          <q-avatar color="purple-9" text-color="white">
+                           <q-avatar color="purple-9" text-color="white">
                             {{item.createdBy.name.charAt(0)}}
                           </q-avatar>
                         </q-item-section>
@@ -566,9 +566,12 @@ export default {
       merchantTypeSelection: 0,
       subDocumentTypeSelection: 0,
 
+      //Component properties
       toggleApproveLeadModal: false,
       toggleLeadRejectModal: false,
+      //Component properties
 
+      //Template porperties
       showProceedToDataEntryButton: true,
       toggleAjaxLoadFilter: false,
       model: "",
@@ -584,6 +587,7 @@ export default {
         shortLead: {},
         documentType: []
       }
+      //Template porperties
     };
   },
 
@@ -693,8 +697,14 @@ export default {
   },
 
   created() {
+    //function to load all lead details when page loads
     this.ajaxLoadShortLeadInfo();
   },
+  // destroyed() {
+  //   this.$q.notify({
+  //     timeout: 0
+  //   });
+  // },
   methods: {
     ...mapActions("SatLeadValidation", [
       "FETCH_SHORT_LEAD_DATA",
@@ -704,6 +714,7 @@ export default {
     ]),
     ...mapActions("commonLoader", ["TOGGLE_COMMON_LOADER"]),
 
+    // Function to toggle lead information pop up screen
     toggleLeadInformation(leadDetails) {
       this.propToggleLeadInformation = !this.propToggleLeadInformation;
       if (leadDetails != undefined) {
@@ -711,6 +722,7 @@ export default {
       }
     },
 
+    // Function redirect to data entry screen
     fnMoveToDataEntryScreen() {
       if (
         this.getShortLeadInfo.leadStatus ==
@@ -730,14 +742,15 @@ export default {
       }
     },
 
+    //Function to load all lead details
     ajaxLoadShortLeadInfo() {
       this.$q.loading.show({
-        delay: 0,
+        delay: 0, // ms
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
       this.FETCH_SHORT_LEAD_DATA(this.$route.params.id)
-        .then(() => {
+        .then(response => {
           this.formData.shortLead = this.getShortLeadInfo;
           this.fnMoveToDataEntryScreen();
           this.$q.loading.hide();
@@ -747,6 +760,7 @@ export default {
         });
     },
 
+    // Function to show PDF
     fnPDFViewModal(documentUrl) {
       this.showOpenPaymentChequeDocumentInfo = !this
         .showOpenPaymentChequeDocumentInfo;
@@ -754,10 +768,12 @@ export default {
       this.toggleshowPDFModal = !this.toggleshowPDFModal;
     },
 
+    // Function to open payment document as image info
     fnOpenPaymentChequeInfo() {
       this.showOpenPaymentChequeInfo = !this.showOpenPaymentChequeInfo;
     },
 
+    // Function to approve lead and send to data entry final screen MARS
     fnApproveLeadData(leadInfo) {
       let formData = {
         leadInformation: {
@@ -776,19 +792,21 @@ export default {
           message: "Are you sure want to proceed to data entry?",
           ok: "Continue",
           cancel: "Cancel"
-        }).onOk(() => {
+        })
+        .onOk(() => {
           this.$q.loading.show({
-            delay: 0,
+            delay: 0, // ms
             spinnerColor: "purple-9",
             message: "Validating .."
           });
-          this.VERIFY_LEAD_DOCUMENTS({ id: this.$route.params.id, params: [] }).then(() => {
+          this.VERIFY_LEAD_DOCUMENTS({ id: this.$route.params.id, params: [] })
+            .then(response => {
               this.$q.loading.show({
-                delay: 0,
+                delay: 0, // ms
                 spinnerColor: "purple-9",
                 message: "Processing .."
               });
-              this.VERIFY_LEAD_DATA(formData).then(() => {
+              this.VERIFY_LEAD_DATA(formData).then(response => {
                 this.$q.loading.hide();
                 this.$router.push(
                   "/sat/lead/validation/" +
@@ -796,10 +814,11 @@ export default {
                     "/data/entry/"
                 );
               });
-            }).catch(error => {
+            })
+            .catch(error => {
               if (error.data.data.toBeVerifiedDocuments.length > 0) {
                 let arrayMessage = "";
-                error.data.data.toBeVerifiedDocuments.map(oo => {
+                _.map(error.data.data.toBeVerifiedDocuments, oo => {
                   arrayMessage += `${oo}, `;
                 });
                 this.$q.notify({
@@ -811,8 +830,8 @@ export default {
                   icon: "warning",
                   actions: [
                     {
-                      icon: "clear",
-                      noDismiss: false
+                      icon: "clear", // optional
+                      noDismiss: false // optional, v0.15.11+
                     }
                   ]
                 });
@@ -820,7 +839,7 @@ export default {
                 delete error.data.data.toBeVerifiedDocuments;
                 for (var key in error.data.data) {
                   let arrayMessage = "";
-                  error.data.data[key].map(oo => {
+                  _.map(error.data.data[key], oo => {
                     arrayMessage += `${oo}, `;
                   });
                   this.$q.notify({
@@ -832,8 +851,8 @@ export default {
                     icon: "warning",
                     actions: [
                       {
-                        icon: "clear",
-                        noDismiss: false
+                        icon: "clear", // optional
+                        noDismiss: false // optional, v0.15.11+
                       }
                     ]
                   });
@@ -844,9 +863,10 @@ export default {
         });
     },
 
-    fnToggleRejectLeadComp() {
+    // Funcion to toggle reject lead component
+    fnToggleRejectLeadComp(leadInfo) {
       this.$q.loading.show({
-        delay: 0,
+        delay: 0, // ms
         spinnerColor: "purple-9",
         message: "Validating .."
       });
@@ -857,9 +877,10 @@ export default {
         this.toggleLeadRejectModal = !this.toggleLeadRejectModal;
         this.$q.loading.hide();
       } else {
-        this.VERIFY_REJECT_LEAD_DOCUMENTS({ id: this.$route.params.id }).then(() => {
+        this.VERIFY_REJECT_LEAD_DOCUMENTS({ id: this.$route.params.id })
+          .then(response => {
             this.$q.loading.show({
-              delay: 0,
+              delay: 0, // ms
               spinnerColor: "purple-9",
               message: "Processing .."
             });
@@ -868,7 +889,7 @@ export default {
           })
           .catch(error => {
             let arrayMessage = "";
-            error.data.data.map(oo => {
+            _.map(error.data.data, oo => {
               arrayMessage += `${oo}, `;
             });
             this.$q.notify({
@@ -880,8 +901,8 @@ export default {
               icon: "warning",
               actions: [
                 {
-                  icon: "clear",
-                  noDismiss: false
+                  icon: "clear", // optional
+                  noDismiss: false // optional, v0.15.11+
                 }
               ]
             });
@@ -890,6 +911,7 @@ export default {
       }
     },
 
+    //Function to get approved by user for payment information
     fnGetVerifiedPerson() {
       let sortedArr = _.orderBy(
         this.getShortLeadInfo.leadVerificationStatus,
@@ -903,6 +925,7 @@ export default {
       return cookedArr[0]?.createdBy?.name;
     },
 
+    // Function to get verified Finance person name
     fnGetVerifiedFINANCEPerson() {
       let sortedArr = _.orderBy(
         this.getShortLeadInfo.leadVerificationStatus,
@@ -916,6 +939,7 @@ export default {
       return cookedArr[0]?.createdBy?.name;
     },
 
+    // Function to get verified RSM person name
     fnGetVerifiedRSMPerson() {
       let sortedArr = _.orderBy(
         this.getShortLeadInfo.leadVerificationStatus,
@@ -929,6 +953,7 @@ export default {
       return cookedArr[0];
     },
 
+    //Function to get verified OPS Head person name
     fnGetVerifiedOPHPerson() {
       let sortedArr = _.orderBy(
         this.getShortLeadInfo.leadVerificationStatus,

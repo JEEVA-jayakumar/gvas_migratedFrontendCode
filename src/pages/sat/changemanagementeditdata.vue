@@ -332,13 +332,13 @@
               @click="sendtoFinance(formdata)"
               >Send to Finance</q-btn
             >
-            <!-- <q-btn
-                color="negative"
-                class="q-ma-xs"
-                icon="backspace"
-                label="Back to document validation"
-                @click="goBackToDocumentVerificationStage()"
-            />-->
+            <q-btn
+              color="negative"
+              class="q-ma-xs"
+              icon="backspace"
+              label="Back to document validation"
+              @click="goBackToDocumentVerificationStage()"
+            />
 
             <!-- <q-btn class="q-ml-sm" color="primary" @click="$refs.stepper.next()">Continue</q-btn> -->
           </div>
@@ -358,13 +358,6 @@
               @click="sendtoFinance(formdata)"
               >Send to Finance</q-btn
             >
-            <!-- <q-btn
-                color="negative"
-                class="q-ma-xs"
-                icon="backspace"
-                label="Back to document validation"
-                @click="goBackToDocumentVerificationStage()"
-            />-->
 
             <!-- <q-btn class="q-ml-sm" color="primary" @click="$refs.stepper.next()">Continue</q-btn> -->
           </div>
@@ -3095,14 +3088,27 @@ export default {
     goBackToDocumentVerificationStage() {
       let formData = {
         leadId: this.$route.params.id,
-        defaultUrlValue: this.getShortLeadInfo.leadStatus == this.$LEAD_STATUS_MARS_REFERRAL_BACK_DATA_ENTRY_PENDING
+        defaultUrlValue:
+          this.getShortLeadInfo.leadStatus ==
+          this.$LEAD_STATUS_MARS_REFERRAL_BACK_DATA_ENTRY_PENDING
             ? this.$SAT_LEAD_VALIDATION_PROCEED_TO_DATA_ENTRY_WITH_REFERBACK
             : this.$SAT_LEAD_VALIDATION_APPROVE,
       };
 
-      this.$q.dialog({ title: "Confirm", message: "Are you sure want to proceed to document verification stage?", ok: "Continue", cancel: "Cancel" })
+      this.$q
+        .dialog({
+          title: "Confirm",
+          message:
+            "Are you sure want to proceed to document verification stage?",
+          ok: "Continue",
+          cancel: "Cancel",
+        })
         .onOk(() => {
-          this.$q.loading.show({ spinnerColor: "purple-9", message: "Processing .." });
+          this.$q.loading.show({
+            delay: 0, // ms
+            spinnerColor: "purple-9",
+            message: "Processing ..",
+          });
           this.MOVE_BACK_DOCUMENT_VERIFICATION_STAGE(formData).then(() => {
             this.$router.push("/sat/lead/validation/" + this.$route.params.id);
             this.$q.loading.hide();
@@ -3117,9 +3123,31 @@ export default {
       if (this.$v.merchant.$error) {
         this.$q.notify("Please review the KYC information fields again.");
       } else {
-        if (this.merchant.companyinformation.legalName != this.getAllMarsData.companyInformation.legalName) this.merchant.companyinformation.remarks = "Legal Name";
-        this.merchant.mdrPlan.code = this.formdata.cmsCategoryType == "O" ? 9 : (this.formdata.cmsCategoryType == "S" ? 8 : this.getAllMarsData.mdrPlan.code);
-        if (this.merchant.companyinformation.dbaName != this.getAllMarsData.companyInformation.dbaName) this.merchant.companyinformation.remarks = "DBA Name";
+        if (
+          this.merchant.companyinformation.legalName !=
+          this.getAllMarsData.companyInformation.legalName
+        ) {
+          this.merchant.companyinformation.remarks = "Legal Name";
+        }
+        if (this.formdata.cmsCategoryType == "O") {
+          this.merchant.mdrPlan.code = 9;
+        } else if (this.formdata.cmsCategoryType == "") {
+          this.merchant.mdrPlan.code = this.getAllMarsData.mdrPlan.code;
+        } else {
+          this.merchant.mdrPlan.code = 8;
+        }
+        if (
+          this.merchant.companyinformation.dbaName !=
+          this.getAllMarsData.companyInformation.dbaName
+        ) {
+          this.merchant.companyinformation.remarks = "DBA Name";
+        }
+        if (
+          this.merchant.companyinformation.pan !=
+          this.getAllMarsData.companyInformation.pan
+        ) {
+          this.merchant.companyinformation.remarks = "Pan Number";
+        }
 
         this.$refs.stepper.next();
       }

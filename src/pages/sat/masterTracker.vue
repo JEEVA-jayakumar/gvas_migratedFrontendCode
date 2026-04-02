@@ -39,7 +39,7 @@
             class="cursor-pointer"
             @click="toggleLeadInformation(props.row.leadInformation)"
           >
-            <span class="label text-primary"># {{props.row.leadInformation?.leadNumber}}</span>
+            <span class="label text-primary"># {{props.row.leadInformation.leadNumber}}</span>
           </q-td>
         </template>
         <template v-slot:body-cell-mobileNumber="props">
@@ -60,18 +60,15 @@
 
         <template v-slot:top>
           <div class="col-5">
-            <q-input
+            <q-search
               clearable
               v-model="filter"
+              separator
               color="grey-9"
               placeholder="Type.."
-              label="Search by MID, TID, Merchant Name"
+              float-label="Search by MID, TID, Merchant Name"
               class="q-mr-lg q-py-sm"
-            >
-              <template v-slot:append>
-                <q-icon name="search" />
-              </template>
-            </q-input>
+            />
           </div>
           <div class="col-md-6">
             <q-btn 
@@ -91,6 +88,11 @@
         :propMasterTrackerList="propMasterTrackerList" 
         @emitfnshowMasterTrackerList="downloadmastertrackerlist"
       />
+      <showMerchantTransactionLevelDetails
+        v-if="valueToggleMerchantTransaction"
+        :valueToggleMerchantTransaction="valueToggleMerchantTransaction"
+        @revertRowClick="rowClick"
+      ></showMerchantTransactionLevelDetails>
     </div>
   </q-page>
 </template>
@@ -98,12 +100,14 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 
+import showMerchantTransactionLevelDetails from "../../components/sat/showMerchantTransactionLevelDetails.vue";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
 import DownloadMasterTracker from "../../components/sat/DownloadMasterTracker.vue";
 
 export default {
-  name: "masterTracker",
+  name: "merchantTransactionLevel",
   components: {
+    showMerchantTransactionLevelDetails,
     generalLeadInformation,
     DownloadMasterTracker,
   },
@@ -121,6 +125,7 @@ export default {
         rowsPerPage: 10
       },
       tableData: [],
+      valueToggleMerchantTransaction: false,
       filter: "",
       columns: [
         {
@@ -144,7 +149,9 @@ export default {
           required: true,
           label: "Lead Id",
           align: "left",
-          field: row => row.leadInformation?.leadNumber,
+          field: row => {
+            row.leadInformation.leadNumber;
+          },
           sortable: false
         },
         {
@@ -152,7 +159,9 @@ export default {
           required: true,
           label: "ME Name",
           align: "left",
-          field: row => row.leadInformation?.leadName,
+          field: row => {
+            return row.leadInformation.leadName;
+          },
           sortable: false
         },
         {
@@ -160,7 +169,9 @@ export default {
           required: true,
           label: "Merchant Address",
           align: "center",
-          field: row => row.leadInformation?.leadAddress,
+          field: row => {
+            row.leadInformation.leadAddress;
+          },
           sortable: false
         },
         {
@@ -168,7 +179,9 @@ export default {
           required: true,
           label: "Device type",
           align: "right",
-          field: row => row.leadInformation?.device?.deviceName,
+          field: row => {
+            return row.leadInformation.device.deviceName;
+          },
           sortable: false
         },
         {
@@ -176,7 +189,11 @@ export default {
           required: true,
           label: "Device Serial Number",
           align: "left",
-          field: row => row.regionalInventory?.serialNumber || "NA",
+          field: row => {
+            return row.regionalInventory == null
+              ? "NA"
+              : row.regionalInventory.serialNumber;
+          },
           sortable: true
         },
         {
@@ -192,7 +209,9 @@ export default {
           required: true,
           label: "Implemented by",
           align: "left",
-          field: row => row.assignedTo ? (row.assignedTo.name + " | " + row.assignedTo.employeeID) : "NA",
+          field: row => {
+            return row.assignedTo == null ? "NA" : row.assignedTo.name + " | " + row.assignedTo.employeeID;
+          },
           sortable: true
         },
         {
@@ -208,7 +227,9 @@ export default {
           required: true,
           label: "Mobile Number",
           align: "center",
-          field: row => row.leadInformation?.contactNumber,
+          field: row => {
+            row.leadInformation.contactNumber;
+          },
           sortable: false
         }
       ]
@@ -225,22 +246,40 @@ export default {
   },
   methods: {
     ...mapActions("MasterTracker", ["MASTER_TRACKER_LIST"]),
+    ajaxLoadAllLeadInfo() {
+      this.toggleAjaxLoadFilter = true;
+      this.MASTER_TRACKER_LIST()
+        .then(response => {
+          this.toggleAjaxLoadFilter = false;
+        })
+        .catch(error => {
+          this.toggleAjaxLoadFilter = false;
+        });
+    },
     ajaxLoadAllLeadInfo({ pagination, filter }) {
+      // we set QTable to "loading" state
       this.$q.loading.show({
-        delay: 0,
+        delay: 0, // ms
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
       this.MASTER_TRACKER_LIST({ pagination, filter })
         .then(res => {
+          // updating pagination to reflect in the UI
           this.paginationControl = pagination;
+
+          // we also set (or update) rowsNumber
           this.paginationControl.rowsNumber = this.getMasterTrackerList.totalElements;
           this.paginationControl.page = this.getMasterTrackerList.number + 1;
+
+          // then we update the rows with the fetched ones
           this.tableData = this.getMasterTrackerList.content;
           if (this.getMasterTrackerList.sort != null) {
             this.paginationControl.sortBy = this.getMasterTrackerList.sort[0].property;
-            this.paginationControl.descending = !this.getMasterTrackerList.sort[0].ascending;
+            this.paginationControl.descending = this.getMasterTrackerList.sort[0].ascending;
           }
+
+          // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
         })
         .catch(() => {

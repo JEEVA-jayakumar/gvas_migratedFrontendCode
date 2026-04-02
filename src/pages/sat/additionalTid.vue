@@ -178,7 +178,7 @@ export default {
         })
         this.ADDITIONAL_TID_VERIFY_DATA(reqData).then(() => {
           this.$q.loading.hide();
-          this.$router.push({name: "additionalTidform", params: {data: JSON.stringify(reqData)}})
+          this.$router.push({name: "additionalTidform", params: {data: reqData}})
         }).catch(error => {
           this.$q.loading.hide();
           this.$q.notify({
