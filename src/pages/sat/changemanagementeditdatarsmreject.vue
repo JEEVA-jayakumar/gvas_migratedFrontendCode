@@ -328,19 +328,19 @@
                 />
             </div>
               <div class="col-xs-12 col-sm-6">
-              <q-input v-model="merchant.companyinformation.registeredPin" class="no-margin" label="Pincode" />
+              <q-input v-model="merchant.companyinformation.registeredPin" class="no-margin" float-label="Pincode" />
             </div>
             <div class="col-xs-12 col-sm-6">
-              <q-input v-model="merchant.companyinformation.contactMobile" class="no-margin" label="Mobile Number" />
+              <q-input v-model="merchant.companyinformation.contactMobile" class="no-margin" float-label="Mobile Number" />
             </div>
             <div class="col-xs-12 col-sm-6">
-              <q-input v-model="merchant.companyinformation.contactEmail" class="no-margin" label="Email Id" />
+              <q-input v-model="merchant.companyinformation.contactEmail" class="no-margin" float-label="Email Id" />
             </div>
              <div class="col-xs-12 col-sm-6">
-              <q-input v-model="merchant.companyinformation.statementEmail" class="no-margin" label="Statement Email ID" />
+              <q-input v-model="merchant.companyinformation.statementEmail" class="no-margin" float-label="Statement Email ID" />
             </div>
             <div class="col-xs-12 col-sm-6">
-              <q-input v-model="merchant.companyinformation.businessNature" class="no-margin" label="Nature of Business Change" />
+              <q-input v-model="merchant.companyinformation.businessNature" class="no-margin" float-label="Nature of Business Change" />
             </div>
             <div class="col-xs-12 col-sm-6">
               <p><b>Auto or Manual Settlement?</b></p>

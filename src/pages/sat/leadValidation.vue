@@ -8,22 +8,16 @@
         @closeLeadInformation="toggleLeadInformation"
       />
 
-      <q-pull-to-refresh :distance="30" @refresh="PullToRefresh">
+      <q-pull-to-refresh :distance="30" :handler="PullToRefresh" inline>
+        <!--START: table title -->
         <div class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"> Lead Validation
         </div>
-
-        <q-table
-          table-class="customTableClass"
-          class="q-py-none"
-          :rows="tableData"
-          :columns="columns"
-          row-key="id"
-          :filter="filter"
-          v-model:pagination="paginationControl"
-          :rows-per-page-options="[5,10,15,20]"
-          :loading="toggleAjaxLoadFilter"
-          @request="ajaxLoadAllLeadInfo"
-        >
+        <!--END: table title -->
+        <!--START: table lead validation -->
+        <q-table title="Lead Validation" table-class="customTableClass" class="q-py-none" :rows="tableData"
+          :columns="columns" row-key="name" :filter="filter" v-model:pagination="paginationControl"
+          :rows-per-page-options="[5,10,15,20]" :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
+          <!--START: table body modification -->
           <template v-slot:body-cell-createdAt="props">
             <q-td :props="props">{{ $moment(props.row.date).format("Do MMM Y") }}</q-td>
           </template>
@@ -128,14 +122,12 @@
           </template>
 
           <template v-slot:top>
+            <!--START: table filter,search -->
             <div class="col-md-5">
-              <q-input dense clearable color="grey-9" v-model="filter" placeholder="Type.." debounce="600"
-                class="q-mr-lg q-py-sm" label="Search By Merchant Name, Lead ID, Lead Source..">
-                <template v-slot:append>
-                  <q-icon name="search" />
-                </template>
-              </q-input>
+              <q-search clearable color="grey-9" v-model="filter" placeholder="Type.." :debounce="600"
+                class="q-mr-lg q-py-sm" float-label="Search By Merchant Name, Lead ID, Lead Source.." />
             </div>
+            <!--END: table filter,search -->
           </template>
         </q-table>
       </q-pull-to-refresh>
@@ -170,6 +162,7 @@
           descending: false,
           rowsPerPage: 10
         },
+        propsRejectAppend: [],
         propsRejectLeadAppend: [],
         columns: [
           {
@@ -205,7 +198,7 @@
             sortable: true
           },
           {
-            name: "assignedTo_name",
+            name: "assignedTo.name",
             required: true,
             label: "SO Name",
             align: "left",
@@ -266,6 +259,7 @@
     },
     computed: {
       ...mapGetters("SatLeadValidation", ["getAllLeadsValidationInfo"]),
+      ...mapGetters("SatLeadValidation", ["getShortLeadInfo"])
     },
     mounted() {
       this.ajaxLoadAllLeadInfo({
@@ -309,6 +303,7 @@
         if (done) done();
       },
       toggleLeadInformation(leadDetails) {
+        console.log(leadDetails);
         this.propToggleLeadInformation = !this.propToggleLeadInformation;
         if (leadDetails != undefined) {
           this.addtnLeadInformation = leadDetails;

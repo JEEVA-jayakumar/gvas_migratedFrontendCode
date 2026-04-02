@@ -57,19 +57,15 @@
         </template>
         <template v-slot:top>
           <div class="col-5">
-            <q-input
-              dense
+            <q-search
               clearable
               v-model="filter"
+              separator
               color="grey-9"
               placeholder="Type.."
-              label="Search by MID, TID, Merchant Name"
+              float-label="Search by MID, TID, Merchant Name"
               class="q-mr-lg q-py-sm"
-            >
-              <template v-slot:append>
-                <q-icon name="search" />
-              </template>
-            </q-input>
+            />
           </div>
           <div class="col-md-6">
             <q-btn
@@ -88,19 +84,31 @@
         :propAggrMasterTrackerList="propAggrMasterTrackerList"
         @emitfnshowAggrMasterTrackerList="downloadAggrmastertrackerlist"
       />
+      <showMerchantTransactionLevelDetails
+        v-if="valueToggleMerchantTransaction"
+        :valueToggleMerchantTransaction="valueToggleMerchantTransaction"
+        @revertRowClick="rowClick"
+      ></showMerchantTransactionLevelDetails>
+      <div v-if="toggleAjaxLoadFilter" class="fullscreen spinner-overlay">
+        <q-spinner-bars class="absolute-center" style="color:#61116a" :size="35" />
+      </div>
     </div>
   </q-page>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import showMerchantTransactionLevelDetails from "../../components/sat/showMerchantTransactionLevelDetails.vue";
 import generalLeadInformation from "../../components/generalLeadInformation.vue";
+import DownloadMasterTracker from "../../components/sat/DownloadMasterTracker.vue";
 import DownloadAggrMasterTracker from "../../components/sat/DownloadAggrMasterTracker.vue";
 
 export default {
-  name: "AggregatorMasterTracker",
+  name: "merchantTransactionLevel",
   components: {
+    showMerchantTransactionLevelDetails,
     generalLeadInformation,
+    DownloadMasterTracker,
     DownloadAggrMasterTracker,
   },
   data() {
@@ -117,6 +125,7 @@ export default {
         rowsPerPage: 10
       },
       tableData: [],
+      valueToggleMerchantTransaction: false,
       filter: "",
       columns: [
         {
@@ -140,7 +149,9 @@ export default {
           required: true,
           label: "Lead Id",
           align: "left",
-          field: row => row.leadInformation?.leadNumber,
+          field: row => {
+            row.leadInformation.leadNumber;
+          },
           sortable: false
         },
         {
@@ -148,7 +159,9 @@ export default {
           required: true,
           label: "Merchant Name",
           align: "left",
-          field: row => row.leadInformation?.leadName,
+          field: row => {
+            return row.leadInformation.leadName;
+          },
           sortable: false
         },
         {
@@ -156,7 +169,9 @@ export default {
           required: true,
           label: "Merchant Address",
           align: "left",
-          field: row => row.leadInformation?.leadAddress,
+          field: row => {
+            row.leadInformation.leadAddress;
+          },
           sortable: false
         },
         {
@@ -164,7 +179,9 @@ export default {
           required: true,
           label: "Device type",
           align: "left",
-          field: row => row.leadInformation?.aggregatorDevice?.deviceName || "NA",
+          field: row => {
+            return row.leadInformation.aggregatorDevice.deviceName == null ? "NA" : row.leadInformation.aggregatorDevice.deviceName;
+          },
           sortable: false
         },
         {
@@ -172,7 +189,11 @@ export default {
           required: true,
           label: "Device Serial Number",
           align: "left",
-          field: (row) => row.aggregatorRegionalInventory?.serialNumber || "NA",
+          field: (row) => {
+            return row.aggregatorRegionalInventory.serialNumber == null
+              ? "NA"
+              : row.aggregatorRegionalInventory.serialNumber;
+          },
           sortable: true
         },
         {
@@ -188,7 +209,9 @@ export default {
           required: true,
           label: "Implemented by",
           align: "left",
-          field: row => row.assignedTo ? (row.assignedTo.name + " | " + row.assignedTo.employeeID) : "NA",
+          field: row => {
+            return row.assignedTo == null ? "NA" : row.assignedTo.name + " | " + row.assignedTo.employeeID;
+          },
           sortable: true
         },
         {
@@ -204,7 +227,9 @@ export default {
           required: true,
           label: "Mobile Number",
           align: "center",
-          field: row => row.leadInformation?.contactNumber,
+          field: row => {
+            row.leadInformation.contactNumber;
+          },
           sortable: false
         }
       ]
@@ -221,6 +246,16 @@ export default {
   },
   methods: {
     ...mapActions("MasterTracker", ["AGGREGATORS_MASTER_TRACKER_LIST"]),
+    ajaxLoadAllLeadInfo() {
+      this.toggleAjaxLoadFilter = true;
+      this.AGGREGATORS_MASTER_TRACKER_LIST()
+        .then(response => {
+          this.toggleAjaxLoadFilter = false;
+        })
+        .catch(error => {
+          this.toggleAjaxLoadFilter = false;
+        });
+    },
     ajaxLoadAllLeadInfo({ pagination, filter }) {
       this.$q.loading.show({
         delay: 0,
@@ -235,7 +270,7 @@ export default {
           this.tableData = this.getAggregatorsMasterTrackerList.content;
           if (this.getAggregatorsMasterTrackerList.sort != null) {
             this.paginationControl.sortBy = this.getAggregatorsMasterTrackerList.sort[0].property;
-            this.paginationControl.descending = !this.getAggregatorsMasterTrackerList.sort[0].ascending;
+            this.paginationControl.descending = this.getAggregatorsMasterTrackerList.sort[0].ascending;
           }
           this.$q.loading.hide();
         })

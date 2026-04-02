@@ -26,9 +26,9 @@
               <q-select
                 v-model="formdata1.plan"
                 class="no-margin"
-                label="Select Rental Plan"
+                float-label="Select Rental Plan"
                 :options="dropDown.planOptions"
-                  @update:model-value="fnPlan"
+                  @input="fnPlan"
          />
           
           </div>
@@ -47,14 +47,14 @@
               <q-input
                 v-model="formdata1.setupFees"
                 class="no-margin"
-                label="Setup Fees"
+                float-label="Setup Fees"
               />
             </div>
           <div class="col-xs-12 col-sm-6">
               <q-input
                 v-model="formdata1.recurringFees"
                 class="no-margin"
-                label="Recurring fees"/>
+                float-label="Recurring fees"/>
             </div>
             <!-- <div class="col-xs-12 col-sm-6">
               <q-input v-model="model" class="no-margin" label="Payment Ref Number" />
@@ -68,13 +68,13 @@
             </div>
          </div>
         </div>
-         <div v-if="formdata.paymentOption==2" class="row q-col-gutter-sm q-my-xs">
+         <div v-if="formdata.paymentOption==2" class="row gutter-sm q-my-xs">
              <div class="col-xs-12 col-sm-6">
               <p>
                 
               </p>
                 <q-item>
-               <q-item-section>Upload the Cheque File  :</q-item-section>
+               <q-item-main>Upload the Cheque File  :</q-item-main>
                <label class="cursor-pointer text-white" style="background-color: #202c3f;">
              <span>Attach</span>
          <input
@@ -88,16 +88,9 @@
             </q-item>
        </div>
         <div class="col-xs-12 col-sm-6">
-            <q-input @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON" placeholder="Transaction Made ON"
-            >
-              <template v-slot:append>
-                <q-icon name="event" class="cursor-pointer">
-                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                    <q-date v-model="formdata.paymentMadeon" mask="YYYY-MM-DD HH:mm:ss" with-seconds>
-                      <div class="row items-center justify-end">
-                        <q-btn v-close-popup label="Close" color="primary" flat />
-                      </div>
-                    </q-date>
+            <q-datetime @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" float-label="*Transaction Made ON" placeholder="Transaction Made ON"
+            />
+          </div>
                   </q-popup-proxy>
                 </q-icon>
               </template>
@@ -107,48 +100,24 @@
           <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model.trim="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" label="Cheque Reference Number"
           />
           </div> </div>
-        <div v-else-if="formdata.paymentOption==1" class="row q-col-gutter-sm q-my-xs">
+        <div v-else-if="formdata.paymentOption==1" class="row gutter-sm q-my-xs">
            <div class="col-xs-12 col-sm-6">
-          <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model.trim="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" label="*NEFT Reference Number"
+          <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model.trim="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" float-label="*NEFT Reference Number"
           />
           </div>
           <div class="col-xs-12 col-sm-6">
-            <q-input @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON"
-            >
-              <template v-slot:append>
-                <q-icon name="event" class="cursor-pointer">
-                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                    <q-date v-model="formdata.paymentMadeon" mask="YYYY-MM-DD HH:mm:ss" with-seconds>
-                      <div class="row items-center justify-end">
-                        <q-btn v-close-popup label="Close" color="primary" flat />
-                      </div>
-                    </q-date>
-                  </q-popup-proxy>
-                </q-icon>
-              </template>
-            </q-input>
+            <q-datetime @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" float-label="*Transaction Made ON" placeholder="Transaction Made ON"
+            />
           </div>
           </div>
-        <div v-else-if="formdata.paymentOption==3" class="row q-col-gutter-sm q-my-xs">
+        <div v-else-if="formdata.paymentOption==3" class="row gutter-sm q-my-xs">
           <div class="col-xs-12 col-sm-6">
-          <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model.trim="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" label="*Swipe Reference Number"
+          <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model.trim="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" float-label="*Transaction Reference Number"
           />
           </div>
           <div class="col-xs-12 col-sm-6">
-            <q-input @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON"
-            >
-              <template v-slot:append>
-                <q-icon name="event" class="cursor-pointer">
-                  <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                    <q-date v-model="formdata.paymentMadeon" mask="YYYY-MM-DD HH:mm:ss" with-seconds>
-                      <div class="row items-center justify-end">
-                        <q-btn v-close-popup label="Close" color="primary" flat />
-                      </div>
-                    </q-date>
-                  </q-popup-proxy>
-                </q-icon>
-              </template>
-            </q-input>
+            <q-datetime @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" float-label="*Transaction Made ON" placeholder="Transaction Made ON"
+            />
           </div>
            </div> <br />
 
@@ -3213,28 +3182,30 @@ export default {
           this.getShortLeadInfo.leadStatus ==
           this.$LEAD_STATUS_MARS_REFERRAL_BACK_DATA_ENTRY_PENDING
             ? this.$SAT_LEAD_VALIDATION_PROCEED_TO_DATA_ENTRY_WITH_REFERBACK
-            : this.$SAT_LEAD_VALIDATION_APPROVE
+            : this.$SAT_LEAD_VALIDATION_APPROVE,
       };
-      
+
       this.$q
         .dialog({
           title: "Confirm",
           message:
             "Are you sure want to proceed to document verification stage?",
           ok: "Continue",
-          cancel: "Cancel"
-        }).onOk(() => {
+          cancel: "Cancel",
+        })
+        .onOk(() => {
           this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: "purple-9",
-            message: "Processing .."
+            message: "Processing ..",
           });
 
           this.MOVE_BACK_DOCUMENT_VERIFICATION_STAGE(formData).then(() => {
             this.$router.push("/sat/lead/validation/" + this.$route.params.id);
             this.$q.loading.hide();
           });
-        }).catch(error => {
+        })
+        .catch((error) => {
           this.$q.loading.hide();
         });
     },

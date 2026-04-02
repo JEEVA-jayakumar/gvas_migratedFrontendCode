@@ -40,17 +40,66 @@
         </template>
         <template v-slot:body-cell-action="props">
           <q-td :props="props">
-            <q-btn v-if="[22, 15, 25].includes(props.row.leadInformation.cmsLeadStatus)" push outline color="purple-9" size="sm" @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')" label="Data Entry" />
-            <q-btn v-else-if="props.row.leadInformation.cmsLeadStatus == 21" push outline color="purple-9" size="sm" @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data/rejectfinance')" label="Data Entry" />
-            <q-btn v-else-if="props.row.leadInformation.cmsLeadStatus == 17" push outline color="purple-9" size="sm" @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data/reject')" label="Data Entry" />
-            <q-btn v-else-if="props.row.leadInformation.cmsLeadStatus == 19" push outline color="purple-9" size="sm" @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data/rejectrsm')" label="Data Entry" />
-            <q-btn disable v-else-if="props.row.leadInformation.cmsLeadStatus == 23" push color="purple-9" size="sm" label="Submitted To Mars" />
-            <q-btn disable v-else push outline color="purple-9" size="sm" label="Data Entry" />
+            <q-btn
+              v-if="props.row.leadInformation.cmsLeadStatus== 22 || props.row.leadInformation.cmsLeadStatus==15 || props.row.leadInformation.cmsLeadStatus==25 "
+              highlight
+              push
+              outline
+              color="purple-9"
+              size="sm"
+              @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
+            >Data Entry</q-btn>
+            <q-btn
+              v-else-if="props.row.leadInformation.cmsLeadStatus== 21"
+              highlight
+              push
+              outline
+              color="purple-9"
+              size="sm"
+              @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data/rejectfinance')"
+            >Data Entry</q-btn>
+            <q-btn
+              v-else-if="props.row.leadInformation.cmsLeadStatus== 17"
+              highlight
+              push
+              outline
+              color="purple-9"
+              size="sm"
+              @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data/reject')"
+            >Data Entry</q-btn>
+            <q-btn
+              v-else-if="props.row.leadInformation.cmsLeadStatus== 19"
+              highlight
+              push
+              outline
+              color="purple-9"
+              size="sm"
+              @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data/rejectrsm')"
+            >Data Entry</q-btn>
+            <q-btn
+              disable
+              v-else-if="props.row.leadInformation.cmsLeadStatus== 23"
+              highlight
+              push
+              color="purple-9"
+              size="sm"
+              @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
+            >Submitted To Mars</q-btn>
+            <q-btn
+              disabled
+              v-else
+              highlight
+              outline
+              push
+              color="purple-9"
+              size="sm"
+              @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
+            >Data Entry</q-btn>
           </q-td>
         </template>
         <template v-slot:top>
           <div class="col-md-5">
-            <q-input dense clearable color="grey-9" v-model="filter1" placeholder="Type.." debounce="600" class="q-mr-lg q-py-sm" label="Search By MID/TID/Merchant Name " />
+            <q-search clearable color="grey-9" v-model="filter1" placeholder="Type.." :debounce="600" class="q-mr-lg q-py-sm" float-label="Search By MID/TID/Merchant Name " />
           </div>
         </template>
       </q-table>
@@ -70,13 +119,17 @@
           <q-td :props="props">{{ props.row.deviceStatus != 6 ? "NA" : props.row.tid }}</q-td>
         </template>
         <template v-slot:body-cell-action="props">
-          <q-td :props="props">
-            <q-btn push outline color="purple-9" size="sm" @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')" label="Data Entry" />
-          </q-td>
+          <q-btn highlight
+            push
+            outline
+            color="purple-9"
+            size="sm"
+            @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
+          >Data Entry</q-btn>
         </template>
         <template v-slot:top>
           <div class="col-md-5">
-            <q-input dense clearable color="grey-9" v-model="filter" placeholder="Type.." debounce="600" class="q-mr-lg q-py-sm" label="Search By MID/TID/Merchant Name" />
+            <q-search clearable color="grey-9" v-model="filter" placeholder="Type.." :debounce="600" class="q-mr-lg q-py-sm" float-label="Search By MID/TID/Merchant Name" />
           </div>
         </template>
       </q-table>

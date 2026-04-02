@@ -476,7 +476,7 @@ export default {
       tableAjaxLoading1: false,
       tableAjaxLoading: false,
       tableAjaxLoading2: false,
-      selectedTab: "unassigned",
+      selectedTab: "assigned",
       propShowReassign: false,
       propRowDetails: null,
       formData: {
@@ -631,6 +631,9 @@ export default {
           if (this.getEquitasQueueUnAssignedList.sort != null) {
             this.paginationControl1.sortBy = this.getEquitasQueueUnAssignedList.sort[0].property;
             this.paginationControl1.descending = this.getEquitasQueueUnAssignedList.sort[0].ascending;
+          } else {
+            this.paginationControl1.sortBy = "createdAt";
+            this.paginationControl1.descending = !this.paginationControl1.descending;
           }
           this.$q.loading.hide();
         })
@@ -709,20 +712,20 @@ export default {
     },
     fnReassignData(rowDetails) {
       this.propShowReassign = !this.propShowReassign;
+      this.ajaxLoadAllLeadInfo({
+        pagination: this.paginationControl,
+        filter: this.filterSearch
+      });
       if (rowDetails != undefined) {
         this.propRowDetails = rowDetails;
-      }
-      if (!this.propShowReassign) {
-          this.ajaxLoadAllLeadInfo({
-            pagination: this.paginationControl,
-            filter: this.filterSearch
-          });
       }
     },
     assignImplementationUser() {
       let self = this;
       if (self.formData.marsDeviceIdsCooked.length == 0) {
         self.$q.notify({ color: "negative", position: "bottom", message: "Select atleast one item to assign", icon: "thumb_down" });
+      } else if (self.formData.assignTo.id == "" && self.formData.region == "") {
+        self.$q.notify({ color: "negative", position: "bottom", message: "Request Mode cannot be empty!", icon: "thumb_down" });
       } else if (
         self.formData.assignTo.id != null && self.formData.assignTo.id !== "" &&
         (self.formData.region == null || self.formData.region == "")

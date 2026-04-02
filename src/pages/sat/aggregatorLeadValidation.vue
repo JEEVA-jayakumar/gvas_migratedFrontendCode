@@ -16,7 +16,7 @@
         :columns="columns"
         :filter="filter"
         v-model:pagination="paginationControl"
-        row-key="id"
+        row-key="name"
         :loading="toggleAjaxLoadFilter"
         :rows-per-page-options="[5,10,15,20]"
         @request="ajaxLoadAllLeadInfo"
@@ -28,6 +28,11 @@
             @click="toggleLeadInformation(props.row)"
           >
             <span class="label text-primary"> {{props.row.leadNumber}}</span>
+          </q-td>
+        </template>
+        <template v-slot:body-cell-contactName="props">
+          <q-td :props="props">
+            <span class="label text-primary"> {{props.row.leadInformation.contactName}}</span>
           </q-td>
         </template>
         <template v-slot:body-cell-date="props">
@@ -83,33 +88,51 @@
             <span class="label text-negative" v-else>Pending</span>
           </q-td>
         </template>
+        <template v-slot:body-cell-mid="props">
+          <q-td :props="props">
+            <span class="label text-primary"># {{props.row.mid}}</span>
+          </q-td>
+        </template>
+        <template v-slot:body-cell-contactNumber="props">
+          <q-td :props="props">
+            <span class="label text-primary"> {{props.row.leadInformation.contactNumber}}</span>
+          </q-td>
+        </template>
+        <template v-slot:body-cell-leadAddress="props">
+          <q-td :props="props">
+            {{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}
+          </q-td>
+        </template>
         <template v-slot:top>
           <div class="col-5">
-            <q-input
+            <q-search
               clearable
               v-model="filter"
               color="grey-9"
               placeholder="Type.."
-              label="Search By Merchant Name, Lead ID.."
+              float-label="Search By Merchant Name, Lead ID.."
               class="q-mr-lg q-py-sm"
-            >
-              <template v-slot:append>
-                <q-icon name="search" />
-              </template>
-            </q-input>
+            />
           </div>
         </template>
       </q-table>
+      <showMerchantTransactionLevelDetails
+        v-if="valueToggleMerchantTransaction"
+        :valueToggleMerchantTransaction="valueToggleMerchantTransaction"
+        @revertRowClick="rowClick"
+      ></showMerchantTransactionLevelDetails>
   </q-page>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import showMerchantTransactionLevelDetails from '../../components/sat/showMerchantTransactionLevelDetails.vue';
 import generalLeadInformation from '../../components/generalLeadInformation.vue';
 
 export default {
   name: 'getaggregatorLeadValidationData',
   components: {
+    showMerchantTransactionLevelDetails,
     generalLeadInformation
   },
   data() {
@@ -119,6 +142,7 @@ export default {
       propShowLeadNumberDetails: false,
       addtnLeadInformation: null,
       toggleAjaxLoadFilter: false,
+      toggleAjaxLoadFilter1: false,
       paginationControl: {
         rowsNumber: 10,
         page: 1,
@@ -127,7 +151,9 @@ export default {
         rowsPerPage: 10
       },
       tableData: [],
+      valueToggleMerchantTransaction: false,
       filter: '',
+      filter1: '',
       columns: [
         {
           name: 'date',
@@ -215,28 +241,63 @@ export default {
   },
   methods: {
     ...mapActions('aggregatorLeadValidation', ['FETCH_AGGREGATOR_LEAD_VALIDATION_DATAS']),
+    getLeadNumberDetails(rowDetails){
+      this.propShowLeadNumberDetails =!this.propShowLeadNumberDetails;
+      if(rowDetails != undefined){
+        this.propRowDetails= rowDetails;
+      }
+    },
     ajaxLoadAllLeadInfo ({ pagination, filter }) {
+      // we set QTable to "loading" state
       this.$q.loading.show({
-        delay: 0,
+        delay: 0, // ms
         spinnerColor: 'purple-9',
         message: 'Fetching data ..'
       });
       this.FETCH_AGGREGATOR_LEAD_VALIDATION_DATAS({ pagination, filter })
         .then(res => {
+          // updating pagination to reflect in the UI
           this.paginationControl = pagination;
+
+          // we also set (or update) rowsNumber
           this.paginationControl.rowsNumber = this.getaggregatorLeadValidationData.totalElements;
           this.paginationControl.page = this.getaggregatorLeadValidationData.number + 1;
+
+          // then we update the rows with the fetched ones
           this.tableData = this.getaggregatorLeadValidationData.content;
+          console.log("TABLE DATA VALUES---------->",JSON.stringify(this.tableData))
           if (this.getaggregatorLeadValidationData.sort != null) {
             this.paginationControl.sortBy = this.getaggregatorLeadValidationData.sort[0].property;
-            this.paginationControl.descending = !this.getaggregatorLeadValidationData.sort[0].ascending;
+            this.paginationControl.descending = this.getaggregatorLeadValidationData.sort[0].ascending;
           }
+
+          // finally we tell QTable to exit the "loading" state
           this.$q.loading.hide();
+          // console.log("Table Datas ---------------------->"+JSON.stringify(this.tableData));
         })
         .catch(() => {
           this.$q.loading.hide();
         });
     },
+    additionalTid (reqData) {
+      console.log('the request data ' + JSON.stringify(reqData))
+      this.$q
+        .dialog({
+          title: 'Confirm',
+          message: 'Are you sure want to Move Additional Tid?',
+          ok: 'Continue',
+          cancel: 'Cancel'
+        })
+        .then(() => {
+          this.$q.loading.show({
+            delay: 0, // ms
+            spinnerColor: 'purple-9',
+            message: 'Processing ..'
+          })
+
+        })
+    },
+    // Function to toggle lead information pop up screen
     toggleLeadInformation (leadDetails) {
       this.propToggleLeadInformation = !this.propToggleLeadInformation;
       if (leadDetails != undefined) {

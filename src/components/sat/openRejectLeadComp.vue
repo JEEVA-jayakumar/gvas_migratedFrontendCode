@@ -1,7 +1,7 @@
 <template>
     <div>
-       <q-dialog
-       :model-value="showRejectLeadModel"
+       <q-modal
+       v-model="showRejectLeadModel"
        @hide="emitToggleReject(showRejectLeadModel)" 
        @escape-key="emitToggleReject(showRejectLeadModel)"  
        :content-css="{padding:'50px'}"
@@ -14,8 +14,9 @@
                     color="grey-9"
                     disable
                     v-model="formData.device"
-                    label="Selected device"
+                    float-label="Selected device"
                      @request="ajaxLoadShortLeadInfo"
+
 
                   />
         </div>
@@ -59,7 +60,7 @@
             class="float-right q-ma-sm" @click="emitToggleReject(showRejectLeadModel)">Cancel
           </q-btn>
         </div>
-      </q-dialog>
+      </q-modal>
     </div>
 </template>
 <script>
@@ -72,7 +73,7 @@ import {
   alpha,
   alphaNum,
   numeric
-} from "@vuelidate/validators";
+} from "vuelidate/lib/validators";
 import { mapGetters, mapActions } from "vuex";
 export default {
   props: ["showRejectLeadModel", "propShowRejectLeadComponent"],
@@ -183,7 +184,8 @@ export default {
             message: "Are you sure want to reject the lead?",
             ok: "Continue",
             cancel: "Cancel"
-          }).onOk(() => {
+          })
+          .then(() => {
             this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: "purple-9",
@@ -202,7 +204,8 @@ export default {
                  this.$router.push('/sat/lead/validation');
                 // this.$router.push('/sat/rejected/Lead/Details');
                 
-              }).catch(error => {
+              })
+              .catch(error => {
                 this.$q.loading.hide();
                  this.$emit("closeRejectLeadModel");
                 this.$q.notify({
