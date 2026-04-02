@@ -1,69 +1,80 @@
 <template>
-    <div>
-       <q-modal
-       v-model="showRejectLeadModel"
-       @hide="emitToggleReject(showRejectLeadModel)" 
-       @escape-key="emitToggleReject(showRejectLeadModel)"  
-       :content-css="{padding:'50px'}"
-       >
-        <div>
-          <div align="center" class="q-subheading q-mb-md capitalize">{{propShowRejectLeadComponent.merchantName}}</div>
-          <div align="center" class="text-light-blue q-title q-mb-md">#{{propShowRejectLeadComponent.leadNumber}}</div>
-           <div class="col-md-12">
-                     <q-input
-                    color="grey-9"
-                    disable
-                    v-model="formData.device"
-                    float-label="Selected device"
-                     @request="ajaxLoadShortLeadInfo"
-
-
-                  />
+  <q-dialog
+    :model-value="showRejectLeadModel"
+    @hide="emitToggleReject(showRejectLeadModel)"
+  >
+    <q-card style="padding: 50px; min-width: 400px">
+      <q-card-section>
+        <div align="center" class="q-subheading q-mb-md capitalize">
+          {{ propShowRejectLeadComponent.merchantName }}
+        </div>
+        <div align="center" class="text-light-blue q-title q-mb-md">
+          #{{ propShowRejectLeadComponent.leadNumber }}
         </div>
         <div class="col-md-12">
-          <div align="center" class="col-md-10 text-light-blue q-title q-mb-md">Reason Type</div>
-            <q-radio 
-            @blur="$v.formData.leadVerificationStatus.reasonType.$touch"      
-            :error="$v.formData.leadVerificationStatus.reasonType.$error" 
-            v-model="formData.leadVerificationStatus.reasonType" 
-            val="Wrong Device Type" 
-            color="grey-9" 
-            label="Wrong Device Type" 
-            />
-            <q-radio 
-            @blur="$v.formData.leadVerificationStatus.reasonType.$touch"      
-            :error="$v.formData.leadVerificationStatus.reasonType.$error" 
-            v-model="formData.leadVerificationStatus.reasonType" 
-            val="Others" 
-            color="grey-9" 
-            label="Others" 
-            />
-            
+          <q-input
+            color="grey-9"
+            disable
+            v-model="formData.device"
+            label="Selected device"
+            @request="ajaxLoadShortLeadInfo"
+          />
+        </div>
+        <div class="col-md-12">
+          <div align="center" class="col-md-10 text-light-blue q-title q-mb-md">
+            Reason Type
           </div>
+          <q-radio
+            @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
+            :error="v$.formData.leadVerificationStatus.reasonType.$error"
+            v-model="formData.leadVerificationStatus.reasonType"
+            val="Wrong Device Type"
+            color="grey-9"
+            label="Wrong Device Type"
+          />
+          <q-radio
+            @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
+            :error="v$.formData.leadVerificationStatus.reasonType.$error"
+            v-model="formData.leadVerificationStatus.reasonType"
+            val="Others"
+            color="grey-9"
+            label="Others"
+          />
+        </div>
         <!-- <div class="col-md-12">
            <div align="center" class="col-md-10 text-light-blue q-title q-mb-md">Reason</div> -->
-           <q-input
-            type="textarea"
-            placeholder="Type Your Reason Here...."
-            @blur="$v.formData.leadVerificationStatus.reason.$touch"      
-            :error="$v.formData.leadVerificationStatus.reason.$error" 
-            class="q-my-md"
-            color="grey-9"
-            align="left"
-            value=""
-            v-model="formData.leadVerificationStatus.reason"
-          />
+        <q-input
+          type="textarea"
+          placeholder="Type Your Reason Here...."
+          @blur="v$.formData.leadVerificationStatus.reason.$touch"
+          :error="v$.formData.leadVerificationStatus.reason.$error"
+          class="q-my-md"
+          color="grey-9"
+          align="left"
+          v-model="formData.leadVerificationStatus.reason"
+        />
         <!-- </div> -->
 
-          <q-btn color="negative" class="q-ma-sm float-right" @click="leadRejectSubmit(formData)" align="right" label="Reject" />
-          <q-btn align="right" color="grey-9" 
-            class="float-right q-ma-sm" @click="emitToggleReject(showRejectLeadModel)">Cancel
-          </q-btn>
-        </div>
-      </q-modal>
-    </div>
+        <q-btn
+          color="negative"
+          class="q-ma-sm float-right"
+          @click="leadRejectSubmit(formData)"
+          align="right"
+          label="Reject"
+        />
+        <q-btn
+          align="right"
+          color="grey-9"
+          class="float-right q-ma-sm"
+          @click="emitToggleReject(showRejectLeadModel)"
+          >Cancel
+        </q-btn>
+      </q-card-section>
+    </q-card>
+  </q-dialog>
 </template>
 <script>
+import { useVuelidate } from '@vuelidate/core'
 import {
   required,
   requiredIf,
@@ -72,12 +83,14 @@ import {
   maxLength,
   alpha,
   alphaNum,
-  numeric
-} from "vuelidate/lib/validators";
+  numeric,
+} from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 export default {
   props: ["showRejectLeadModel", "propShowRejectLeadComponent"],
-
+  setup() {
+    return { v$: useVuelidate() }
+  },
   data() {
     return {
       //Reject reason checkbox
@@ -174,8 +187,8 @@ export default {
     // },
     leadRejectSubmit(formData) {
         // let 
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q
@@ -185,7 +198,7 @@ export default {
             ok: "Continue",
             cancel: "Cancel"
           })
-          .then(() => {
+          .onOk(() => {
             this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: "purple-9",
@@ -211,7 +224,7 @@ export default {
                 this.$q.notify({
                   color: "negative",
                   position: "bottom",
-                  message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                  message: (error.response && error.response.data && error.response.data.message) || "Please Try Again Later !",
                   icon: "thumb_down"
                 });
               });

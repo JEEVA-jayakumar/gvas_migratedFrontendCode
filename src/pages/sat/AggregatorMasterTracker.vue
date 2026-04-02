@@ -55,28 +55,29 @@
             <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
           </q-td>
         </template>
-        <template v-slot:top>
-          <div class="col-5">
-            <q-search
-              clearable
-              v-model="filter"
-              separator
-              color="grey-9"
-              placeholder="Type.."
-              float-label="Search by MID, TID, Merchant Name"
-              class="q-mr-lg q-py-sm"
-            />
-          </div>
-          <div class="col-md-6">
-            <q-btn
-              square 
-              outline 
-              color="purple-9" 
-              label="Download as Excel" 
-              class="q-mr-lg q-py-sm float-right" 
-              size="md" 
-              @click="downloadAggrmastertrackerlist()" />
-          </div>
+        <template v-slot:top-right>
+          <q-input
+            clearable
+            v-model="filter"
+            color="grey-9"
+            placeholder="Type.."
+            label="Search by MID, TID, Merchant Name"
+            class="q-mr-lg q-py-sm"
+            dense
+          >
+            <template v-slot:prepend>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+          <q-btn
+            square
+            outline
+            color="purple-9"
+            label="Download as Excel"
+            class="q-mr-lg q-py-sm float-right"
+            size="md"
+            @click="downloadAggrmastertrackerlist()"
+          />
         </template>
       </q-table>
       <DownloadAggrMasterTracker

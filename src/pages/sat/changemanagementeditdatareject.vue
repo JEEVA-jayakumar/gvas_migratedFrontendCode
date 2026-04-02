@@ -26,7 +26,7 @@
               <q-select
                 v-model="formdata1.plan"
                 class="no-margin"
-                float-label="Select Rental Plan"
+                label="Select Rental Plan"
                 :options="dropDown.planOptions"
                   @input="fnPlan"
          />
@@ -47,14 +47,14 @@
               <q-input
                 v-model="formdata1.setupFees"
                 class="no-margin"
-                float-label="Setup Fees"
+                label="Setup Fees"
               />
             </div>
           <div class="col-xs-12 col-sm-6">
               <q-input
                 v-model="formdata1.recurringFees"
                 class="no-margin"
-                float-label="Recurring fees"/>
+                label="Recurring fees"/>
             </div>
             <!-- <div class="col-xs-12 col-sm-6">
               <q-input v-model="model" class="no-margin" label="Payment Ref Number" />
@@ -88,13 +88,8 @@
             </q-item>
        </div>
         <div class="col-xs-12 col-sm-6">
-            <q-datetime @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" float-label="*Transaction Made ON" placeholder="Transaction Made ON"
+            <q-datetime @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON" placeholder="Transaction Made ON"
             />
-          </div>
-                  </q-popup-proxy>
-                </q-icon>
-              </template>
-            </q-input>
           </div>
           <div class="col-xs-12 col-sm-6">
           <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model.trim="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" label="Cheque Reference Number"
@@ -102,21 +97,21 @@
           </div> </div>
         <div v-else-if="formdata.paymentOption==1" class="row gutter-sm q-my-xs">
            <div class="col-xs-12 col-sm-6">
-          <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model.trim="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" float-label="*NEFT Reference Number"
+          <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model.trim="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" label="*NEFT Reference Number"
           />
           </div>
           <div class="col-xs-12 col-sm-6">
-            <q-datetime @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" float-label="*Transaction Made ON" placeholder="Transaction Made ON"
+            <q-datetime @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON" placeholder="Transaction Made ON"
             />
           </div>
           </div>
         <div v-else-if="formdata.paymentOption==3" class="row gutter-sm q-my-xs">
           <div class="col-xs-12 col-sm-6">
-          <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model.trim="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" float-label="*Transaction Reference Number"
+          <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model.trim="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Reference Number"
           />
           </div>
           <div class="col-xs-12 col-sm-6">
-            <q-datetime @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" float-label="*Transaction Made ON" placeholder="Transaction Made ON"
+            <q-datetime @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON" placeholder="Transaction Made ON"
             />
           </div>
            </div> <br />

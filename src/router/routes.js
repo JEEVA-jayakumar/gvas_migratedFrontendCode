@@ -311,7 +311,7 @@ const routes = [
 
   // Router for SAT
   {
-    name: "OH",
+    name: "SAT",
     path: "/sat/",
     component: Default_Layout,
     children: [{
@@ -1543,7 +1543,7 @@ const routes = [
 
   // Router for Operations head
   {
-    name: "OH",
+    name: "OPS_HEAD",
     path: "/ops/head/",
     component: Default_Layout,
     children: [{

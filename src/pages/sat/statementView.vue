@@ -33,31 +33,29 @@
 
         <div class="row">
           <div class="col-md-6 text-grey-9">
-              <q-field
-                icon="date_range"
-              >
-                <q-input
-                   v-model="formData.statementDetails.fromDate" 
-                  :min="today"
-                  label="From Date"
-                   color="grey-9"
-                />
-              </q-field>
+            <q-input
+              v-model="formData.statementDetails.fromDate"
+              label="From Date"
+              color="grey-9"
+            >
+              <template v-slot:prepend>
+                <q-icon name="date_range" />
+              </template>
+            </q-input>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-6 text-grey-9">
-              <q-field
-                icon="date_range"
-              >
-                <q-input
-                  v-model="formData.statementDetails.toDate" 
-                  :min="today"
-                  label="To Date"
-                   color="grey-9"
-                />
-              </q-field>
+            <q-input
+              v-model="formData.statementDetails.toDate"
+              label="To Date"
+              color="grey-9"
+            >
+              <template v-slot:prepend>
+                <q-icon name="date_range" />
+              </template>
+            </q-input>
           </div>
         </div>
 

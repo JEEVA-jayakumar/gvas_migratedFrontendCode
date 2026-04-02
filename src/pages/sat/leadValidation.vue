@@ -121,12 +121,22 @@
             </q-td>
           </template>
 
-          <template v-slot:top>
+          <template v-slot:top-right>
             <!--START: table filter,search -->
-            <div class="col-md-5">
-              <q-search clearable color="grey-9" v-model="filter" placeholder="Type.." :debounce="600"
-                class="q-mr-lg q-py-sm" float-label="Search By Merchant Name, Lead ID, Lead Source.." />
-            </div>
+            <q-input
+              clearable
+              color="grey-9"
+              v-model="filter"
+              placeholder="Type.."
+              debounce="600"
+              class="q-mr-lg q-py-sm"
+              label="Search By Merchant Name, Lead ID, Lead Source.."
+              dense
+            >
+              <template v-slot:prepend>
+                <q-icon name="search" />
+              </template>
+            </q-input>
             <!--END: table filter,search -->
           </template>
         </q-table>

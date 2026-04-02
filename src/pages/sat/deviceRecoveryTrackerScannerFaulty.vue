@@ -236,8 +236,8 @@ export default {
       this.scannerToggleOption = !this.scannerToggleOption;
       this.$barcodeScanner.destroy(this.onBarcodeDestroy);
     },
-    removeScannedItems(item) {
-      this.tableData.splice(item.__index);
+    removeScannedItems(index) {
+      this.tableData.splice(index, 1);
       this.REACTIVE_FAULTY_SCANNED_DEVICE_DATA(this.tableData);
     }
   }
