@@ -69,8 +69,8 @@ export default {
         ? (this.$q.localStorage.getItem("leftDrawerOpen") === true || this.$q.localStorage.getItem("leftDrawerOpen") === 'true')
         : (this.$q.platform.is.desktop && this.$route.name != 'leadDataEntry'),
       propShowDatas: false,
-      menuListName: '',
-      menuListNameSat: '',
+      menuListName: 'Bijlipay',
+      menuListNameSat: 'Bijlipay',
       name:'',
       aggregatorOptions: [],
       showMenu: [],
@@ -1024,6 +1024,17 @@ export default {
 
   created() {
     this.findMenuAuth();
+    const selectedTab = this.$q.localStorage.getItem("selectedTab");
+    if (selectedTab) {
+      this.selectedValue = selectedTab;
+      if (this.showMenu.includes(this.$ROLE_HIERARCHY_OPERATION_SAT)) {
+        this.selectedValueSat = selectedTab === "Bijlipay" ? "Bijlipay" : "Other";
+        this.menuListNameSat = this.selectedValueSat;
+      }
+      if (this.showMenu.includes(this.$ROLE_HIERARCHY_INVENTORY_OFFICER)) {
+        this.menuListName = selectedTab === "Bijlipay" ? "Bijlipay" : "Others";
+      }
+    }
   },
   beforeMount() {
     this.fnAjaxGetAllMenuList();
@@ -1057,7 +1068,7 @@ export default {
 
       // Inventory Module
       if (this.showMenu.includes(this.$ROLE_HIERARCHY_INVENTORY_OFFICER)) {
-        const invMenu = this.menus.inventory.find(m => m.name === this.selectedValue) || this.menus.inventory[0];
+        const invMenu = this.menus.inventory.find(m => m.name === this.menuListName) || this.menus.inventory[0];
         menuItems = menuItems.concat(invMenu.subItems);
       }
 
@@ -1114,13 +1125,17 @@ export default {
       }
     },
     handleAggregatorChange(val) {
+      this.$q.localStorage.set("selectedTab", val);
+      this.selectedValue = val;
       if (this.showMenu.includes(this.$ROLE_HIERARCHY_OPERATION_SAT)) {
         this.selectedValueSat = val === "Bijlipay" ? "Bijlipay" : "Other";
+        this.menuListNameSat = this.selectedValueSat;
         if (val === "Bijlipay") this.$router.push("/sat/dashboard");
         else if (val === 3) this.$router.push("/sat/dashboardPhonepe");
         else this.$router.push("/sat/dashboardMobikwik");
-      } else if (this.showMenu.includes(this.$ROLE_HIERARCHY_INVENTORY_OFFICER)) {
-        this.selectedValue = val === "Bijlipay" ? "Bijlipay" : "Others";
+      }
+      if (this.showMenu.includes(this.$ROLE_HIERARCHY_INVENTORY_OFFICER)) {
+        this.menuListName = val === "Bijlipay" ? "Bijlipay" : "Others";
         if (val === "Bijlipay") this.$router.push("/inventory/home");
         else if (val === 3) this.$router.push("/inventory/Phonepehome");
         else this.$router.push("/inventory/Mobikwikhome");

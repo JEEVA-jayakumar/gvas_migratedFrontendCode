@@ -142,16 +142,16 @@
                 label="Select MATM Plans" @update:model-value="fnPlanName" />
             </div>
             <div class="col-md-12">
-              <q-input disable v-model.trim="formData.incentivePercentage" class="text-weight-regular text-grey-8"
+              <q-input disable v-model="formData.incentivePercentage" class="text-weight-regular text-grey-8"
                 color="grey-9" label="*percentage" placeholder="percentage" />
             </div>
             <div class="col-md-12">
-              <q-input disable v-model.trim="formData.minTxnVal" class="text-weight-regular text-grey-8" color="grey-9"
+              <q-input disable v-model="formData.minTxnVal" class="text-weight-regular text-grey-8" color="grey-9"
                 label="*minimum" placeholder="minimum" />
             </div>
 
             <div class="col-md-12">
-              <q-input disable v-model.trim="formData.maxIncPerTxn" class="text-weight-regular text-grey-8"
+              <q-input disable v-model="formData.maxIncPerTxn" class="text-weight-regular text-grey-8"
                 color="grey-9" label="*maximumTxnValue" placeholder="maximumTxnValue" />
             </div>
           </div>
@@ -169,64 +169,64 @@
           </div>
 
           <div class="col-md-12">
-            <q-input disable v-model.trim="formData.debitLessthanAmount" :error="$v.formData.debitLessthanAmount.$error"
+            <q-input disable v-model="formData.debitLessthanAmount" :error="$v.formData.debitLessthanAmount.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*debitLessthanAmount"
               placeholder="debitLessthanAmount" />
           </div>
           <div class="col-md-12">
-            <q-input disable v-model.trim="formData.debitGreaterthanAmount"
+            <q-input disable v-model="formData.debitGreaterthanAmount"
               :error="$v.formData.debitGreaterthanAmount.$error" class="text-weight-regular text-grey-8" color="grey-9"
               label="*debitGreaterthanAmount" placeholder="debitGreaterthanAmount" />
           </div>
           <div class="col-md-12">
-            <q-input disable v-model.trim="formData.stdCC" :error="$v.formData.stdCC.$error"
+            <q-input disable v-model="formData.stdCC" :error="$v.formData.stdCC.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*stdCC" placeholder="stdCC" />
           </div>
           <div class="col-md-12">
-            <q-input disable v-model.trim="formData.premiumCC" :error="$v.formData.premiumCC.$error"
+            <q-input disable v-model="formData.premiumCC" :error="$v.formData.premiumCC.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*premiumCC" placeholder="premiumCC" />
           </div>
           <div class="col-md-12">
-            <q-input disable v-model.trim="formData.corpCC" :error="$v.formData.corpCC.$error"
+            <q-input disable v-model="formData.corpCC" :error="$v.formData.corpCC.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*corpCC" placeholder="corpCC" />
           </div>
           <div class="col-md-12">
-            <q-input disable v-model.trim="formData.intlCC" :error="$v.formData.intlCC.$error"
+            <q-input disable v-model="formData.intlCC" :error="$v.formData.intlCC.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*intlCC" placeholder="intlCC" />
           </div>
           <div class="col-md-12">
-            <q-input disable v-model.trim="formData.superPremiumlCC" :error="$v.formData.superPremiumlCC.$error"
+            <q-input disable v-model="formData.superPremiumlCC" :error="$v.formData.superPremiumlCC.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*superPremiumlCC"
               placeholder="superPremiumlCC" />
           </div>
           <div class="col-md-12">
-            <q-input disable v-model.trim="formData.amexDomestic" :error="$v.formData.amexDomestic.$error"
+            <q-input disable v-model="formData.amexDomestic" :error="$v.formData.amexDomestic.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*amexDomestic"
               placeholder="amexDomestic" />
           </div>
           <div class="col-md-12">
-            <q-input disable v-model.trim="formData.amexInternational" :error="$v.formData.amexInternational.$error"
+            <q-input disable v-model="formData.amexInternational" :error="$v.formData.amexInternational.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*amexInternational"
               placeholder="amexInternational" />
           </div>
            <div class="col-md-12">
-            <q-input disable v-model.trim="formData.upiDebitCardUpTo2000" :error="$v.formData.upiDebitCardUpTo2000.$error"
+            <q-input disable v-model="formData.upiDebitCardUpTo2000" :error="$v.formData.upiDebitCardUpTo2000.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*upiDebitCardUpTo2000"
               placeholder="upiDebitCardUpTo2000" />
           </div>
           <div class="col-md-12">
-            <q-input disable v-model.trim="formData.upiDebitCardAbove2000" :error="$v.formData.upiDebitCardAbove2000.$error"
+            <q-input disable v-model="formData.upiDebitCardAbove2000" :error="$v.formData.upiDebitCardAbove2000.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*upiDebitCardAbove2000"
               placeholder="upiDebitCardAbove2000" />
           </div>
 
            <div class="col-md-12">
-            <q-input disable v-model.trim="formData.upiPrepaidCreditCardsUpTo2000" :error="$v.formData.upiPrepaidCreditCardsUpTo2000.$error"
+            <q-input disable v-model="formData.upiPrepaidCreditCardsUpTo2000" :error="$v.formData.upiPrepaidCreditCardsUpTo2000.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*upiPrepaidCreditCardsUpTo2000"
               placeholder="upiPrepaidCreditCardsUpTo2000" />
           </div>
           <div class="col-md-12">
-            <q-input disable v-model.trim="formData.upiPrepaidCreditCardsAbove2000" :error="$v.formData.upiPrepaidCreditCardsAbove2000.$error"
+            <q-input disable v-model="formData.upiPrepaidCreditCardsAbove2000" :error="$v.formData.upiPrepaidCreditCardsAbove2000.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*upiPrepaidCreditCardsAbove2000"
               placeholder="upiPrepaidCreditCardsAbove2000" />
           </div>
@@ -236,12 +236,12 @@
           </div>
 
           <div class="col-md-12">
-            <q-input disable v-model.trim="formData.setupFees" :error="$v.formData.setupFees.$error"
+            <q-input disable v-model="formData.setupFees" :error="$v.formData.setupFees.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*setUp fees"
               placeholder="setUp fees" />
           </div>
           <div class="col-md-12">
-            <q-input disable v-model.trim="formData.recurringFees" :error="$v.formData.recurringFees.$error"
+            <q-input disable v-model="formData.recurringFees" :error="$v.formData.recurringFees.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*Recurring Fees"
               placeholder="Recurring Fees" />
           </div>
@@ -252,12 +252,12 @@
 
           <div class="col-md-12">Payement Option</div>
           <div class="col-md-12">
-            <q-input v-model.trim="formData.amountCollected" :error="$v.formData.amountCollected.$error"
+            <q-input v-model="formData.amountCollected" :error="$v.formData.amountCollected.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*Amout Collected"
               placeholder="Amout Collected" />
           </div>
           <div class="col-md-12">
-            <q-input v-model.trim="formData.paymentMadeon" :error="$v.formData.paymentMadeon.$error"
+            <q-input v-model="formData.paymentMadeon" :error="$v.formData.paymentMadeon.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON"
               placeholder="Transaction Made ON" />
           </div>
@@ -267,12 +267,12 @@
               :options="paymentType" label="paymentType" placeholder="paymentType" />
           </div>
           <div class="col-md-12" v-if="formData.paymentOption == 1">
-            <q-input v-model.trim="formData.referenceNumber" :error="$v.formData.referenceNumber.$error"
+            <q-input v-model="formData.referenceNumber" :error="$v.formData.referenceNumber.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*NEFT Number"
               placeholder="Enter the NEFT Number" />
           </div>
           <div class="col-md-12" v-if="formData.paymentOption == 2">
-            <q-input v-model.trim="formData.referenceNumber" :error="$v.formData.referenceNumber.$error"
+            <q-input v-model="formData.referenceNumber" :error="$v.formData.referenceNumber.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*CHEQUE Number"
               placeholder="Enter the Cheque Number" />
           </div>
@@ -289,7 +289,7 @@
             </q-item>
           </div>
           <div class="col-md-12" v-if="formData.paymentOption == 3">
-            <q-input v-model.trim="formData.referenceNumber" :error="$v.formData.referenceNumber.$error"
+            <q-input v-model="formData.referenceNumber" :error="$v.formData.referenceNumber.$error"
               class="text-weight-regular text-grey-8" color="grey-9" label="*SWIPE Number"
               placeholder="Enter the SWIPE Number" />
           </div>

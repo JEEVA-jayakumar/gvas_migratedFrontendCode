@@ -42,7 +42,7 @@
           </q-card-section>
           <q-card-actions align="center">
             <q-btn
-              highlight
+
               push
               label="Close"
               style="width: 90px"

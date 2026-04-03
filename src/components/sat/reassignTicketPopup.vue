@@ -75,7 +75,7 @@
           <q-card-actions align="center">
             <q-btn
               :disabled="!formData.so || !formData.reason"
-              highlight
+
               push
               style="width: 90px"
               label="Re-Assign"
@@ -83,7 +83,7 @@
               color="blue"
             />
             <q-btn
-              highlight
+
               push
               label="Close"
               style="width: 90px"

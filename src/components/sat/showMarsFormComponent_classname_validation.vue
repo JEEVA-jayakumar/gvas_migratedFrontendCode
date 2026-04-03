@@ -28,7 +28,7 @@
                   :error="$v.merchant.salesInformation.institutionCode.$error"
                   placeholder="Choose from the below"
                   color="grey-9"
-                  v-model.trim="merchant.salesInformation.institutionCode"
+                  v-model="merchant.salesInformation.institutionCode"
                   label="Institution Code*"
                   :options="institutionCodeOptions"
                   @update:model-value="fetchAllDropdownValuesFromMARSapi"
@@ -41,7 +41,7 @@
                   :error="$v.merchant.salesInformation.applicationType.$error"
                   placeholder="Choose from the below*"
                   color="grey-9"
-                  v-model.trim="merchant.salesInformation.applicationType"
+                  v-model="merchant.salesInformation.applicationType"
                   label="Application Type*"
                   :options="applicationTypeOptions"
                 />
@@ -52,7 +52,7 @@
                   @blur="$v.merchant.salesInformation.applicationNumber.$touch"
                   :error="$v.merchant.salesInformation.applicationNumber.$error"
                   color="grey-9"
-                  v-model.trim="merchant.salesInformation.applicationNumber"
+                  v-model="merchant.salesInformation.applicationNumber"
                   label="Application Number*"
                   placeholder="Application Number*"
                 />
@@ -66,7 +66,7 @@
                   format="DD/MM/YYYY"
                   format-model="number"
                   modal
-                  v-model.trim="merchant.salesInformation.applicationDate"
+                  v-model="merchant.salesInformation.applicationDate"
                   label="Application Date*"
                   placeholder="Application Date*"
                 />
@@ -80,7 +80,7 @@
                   :error="$v.merchant.salesInformation.aggreementDate.$error"
                   color="grey-9"
                   modal
-                  v-model.trim="merchant.salesInformation.aggreementDate"
+                  v-model="merchant.salesInformation.aggreementDate"
                   label="Agreement Date*"
                   placeholder="Agreement Date*"
                 />
@@ -92,7 +92,7 @@
                   :error="$v.merchant.salesInformation.merchantType.$error"
                   placeholder="Choose from the below*"
                   color="grey-9"
-                  v-model.trim="merchant.salesInformation.merchantType"
+                  v-model="merchant.salesInformation.merchantType"
                   label="Merchant Type*"
                   :options="merchantTypeOptions"
                 />
@@ -104,7 +104,7 @@
                   :error="$v.merchant.salesInformation.categoryType.$error"
                   placeholder="Choose from the below*"
                   color="grey-9"
-                  v-model.trim="merchant.salesInformation.categoryType"
+                  v-model="merchant.salesInformation.categoryType"
                   label="Category Type*"
                   :options="categoryTypeOptions"
                 />
@@ -116,7 +116,7 @@
                   color="grey-9"
                   @blur="$v.merchant.salesInformation.salesPersonCode.$touch"
                   :error="$v.merchant.salesInformation.salesPersonCode.$error"
-                  v-model.trim="merchant.salesInformation.salesPersonCode"
+                  v-model="merchant.salesInformation.salesPersonCode"
                   label="Sales Person*"
                   :options="salesPersonOptions"
                 />
@@ -128,7 +128,7 @@
                   color="grey-9"
                   @blur="$v.merchant.salesInformation.region.$touch"
                   :error="$v.merchant.salesInformation.region.$error"
-                  v-model.trim="merchant.salesInformation.region"
+                  v-model="merchant.salesInformation.region"
                   label="Region*"
                   :options="regionOptions"
                 />
@@ -140,7 +140,7 @@
                   color="grey-9"
                   @blur="$v.merchant.salesInformation.leadFrom.$touch"
                   :error="$v.merchant.salesInformation.leadFrom.$error"
-                  v-model.trim="merchant.salesInformation.leadFrom"
+                  v-model="merchant.salesInformation.leadFrom"
                   label="Lead From*"
                   :options="leadFromOptions"
                 />
@@ -154,7 +154,7 @@
                 >
                   <q-radio
                     color="grey-9"
-                    v-model.trim="merchant.salesInformation.sharingModelCode"
+                    v-model="merchant.salesInformation.sharingModelCode"
                     :val="item.value"
                     :label="item.label"
                   />
@@ -173,7 +173,7 @@
                   :error="$v.merchant.salesInformation.sharingPartnerCode.$error"
                   placeholder="Choose from the below*"
                   color="grey-9"
-                  v-model.trim="merchant.salesInformation.sharingPartnerCode"
+                  v-model="merchant.salesInformation.sharingPartnerCode"
                   label="Sharing partner*"
                   :options="sharingPartnerOptions"
                 />
@@ -184,7 +184,7 @@
                   @blur="$v.merchant.salesInformation.dailyFixedAmount.$touch"
                   :error="$v.merchant.salesInformation.dailyFixedAmount.$error"
                   color="grey-9"
-                  v-model.trim="merchant.salesInformation.dailyFixedAmount"
+                  v-model="merchant.salesInformation.dailyFixedAmount"
                   label="Daily fixed amount*"
                   type="number"
                   placeholder="Daily fixed amount*"
@@ -196,7 +196,7 @@
                   @blur="$v.merchant.salesInformation.loanDisbursementPercentage.$touch"
                   :error="$v.merchant.salesInformation.loanDisbursementPercentage.$error"
                   color="grey-9"
-                  v-model.trim="merchant.salesInformation.loanDisbursementPercentage"
+                  v-model="merchant.salesInformation.loanDisbursementPercentage"
                   label="Percentage*"
                   type="number"
                   placeholder="Percentage*"
@@ -208,7 +208,7 @@
                   @blur="$v.merchant.salesInformation.loanDisbursementAmount.$touch"
                   :error="$v.merchant.salesInformation.loanDisbursementAmount.$error"
                   color="grey-9"
-                  v-model.trim="merchant.salesInformation.loanDisbursementAmount"
+                  v-model="merchant.salesInformation.loanDisbursementAmount"
                   label="Loan disbursement value*"
                   type="number"
                   placeholder="Loan disbursement value*"
@@ -223,7 +223,7 @@
                   :error="$v.merchant.salesInformation.loanDisbursementDate.$error"
                   color="grey-9"
                   modal
-                  v-model.trim="merchant.salesInformation.loanDisbursementDate"
+                  v-model="merchant.salesInformation.loanDisbursementDate"
                   label="Disbursement Date*"
                   placeholder="Disbursement Date*"
                 />
@@ -234,7 +234,7 @@
                   :error="$v.merchant.salesInformation.tenureMonth.$error"
                   color="grey-9"
                   class="tenureMonth"
-                  v-model.trim="merchant.salesInformation.tenureMonth"
+                  v-model="merchant.salesInformation.tenureMonth"
                   label="Tenure (in months)*"
                   type="number"
                   placeholder="Tenure (in months)*"
@@ -246,7 +246,7 @@
                   @blur="$v.merchant.salesInformation.tenureDay.$touch"
                   :error="$v.merchant.salesInformation.tenureDay.$error"
                   color="grey-9"
-                  v-model.trim="merchant.salesInformation.tenureDay"
+                  v-model="merchant.salesInformation.tenureDay"
                   label="Tenure (in days)*"
                   type="number"
                   placeholder="Tenure (in days)*"
@@ -261,7 +261,7 @@
                   :error="$v.merchant.salesInformation.tenureStartDate.$error"
                   color="grey-9"
                   modal
-                  v-model.trim="merchant.salesInformation.tenureStartDate"
+                  v-model="merchant.salesInformation.tenureStartDate"
                   label="Start Date*"
                   placeholder="Tenure Start Date*"
                 />
@@ -279,7 +279,7 @@
                   :error="$v.merchant.salesInformation.sharingPartnerCode.$error"
                   placeholder="Choose from the below*"
                   color="grey-9"
-                  v-model.trim="merchant.salesInformation.sharingPartnerCode"
+                  v-model="merchant.salesInformation.sharingPartnerCode"
                   label="Sharing partner*"
                   :options="sharingPartnerOptions"
                 />
@@ -290,7 +290,7 @@
                   @blur="$v.merchant.salesInformation.rentPercentage.$touch"
                   :error="$v.merchant.salesInformation.rentPercentage.$error"
                   color="grey-9"
-                  v-model.trim="merchant.salesInformation.rentPercentage"
+                  v-model="merchant.salesInformation.rentPercentage"
                   label="Rent %*"
                   type="number"
                   placeholder="Rent %*"
@@ -302,7 +302,7 @@
                   @blur="$v.merchant.salesInformation.rentFixed.$touch"
                   :error="$v.merchant.salesInformation.rentFixed.$error"
                   color="grey-9"
-                  v-model.trim="merchant.salesInformation.rentFixed"
+                  v-model="merchant.salesInformation.rentFixed"
                   label="Rent fixed*"
                   type="number"
                   placeholder="Rent fixed*"
@@ -341,7 +341,7 @@
                   @blur="$v.merchant.companyInformation.legalName.$touch"
                   :error="$v.merchant.companyInformation.legalName.$error"
                   color="grey-9"
-                  v-model.trim="merchant.companyInformation.legalName"
+                  v-model="merchant.companyInformation.legalName"
                   label="Legal Name*"
                   placeholder="Legal Name*"
                 />
@@ -352,7 +352,7 @@
                   @blur="$v.merchant.companyInformation.dbaName.$touch"
                   :error="$v.merchant.companyInformation.dbaName.$error"
                   color="grey-9"
-                  v-model.trim="merchant.companyInformation.dbaName"
+                  v-model="merchant.companyInformation.dbaName"
                   label="DBA Name*"
                   placeholder="DBA Name*"
                 />
@@ -363,7 +363,7 @@
                   color="grey-9"
                   label="Registered Address* (max 120 characters)"
                   placeholder="Registered Address*"
-                  v-model.trim="merchant.companyInformation.registeredAddress"
+                  v-model="merchant.companyInformation.registeredAddress"
                   @blur="$v.merchant.companyInformation.registeredAddress.$touch"
                   :error="$v.merchant.companyInformation.registeredAddress.$error"
                 />
@@ -374,7 +374,7 @@
                   @blur="$v.merchant.companyInformation.registeredCityRefCode.$touch"
                   :error="autoCompleteError($v.merchant.companyInformation.registeredCityRefCode,$v.merchant.companyInformation.registeredCityName)"
                   color="grey-9"
-                  v-model.trim="merchant.companyInformation.registeredCityName"
+                  v-model="merchant.companyInformation.registeredCityName"
                   label="Registered city (type min 3 characters)*"
                   placeholder="Start typing ..*"
                 >
@@ -393,7 +393,7 @@
                   @blur="$v.merchant.companyInformation.registeredStateRefCode.$touch"
                   :error="autoCompleteError($v.merchant.companyInformation.registeredStateRefCode,$v.merchant.companyInformation.registeredStateName)"
                   color="grey-9"
-                  v-model.trim="merchant.companyInformation.registeredStateName"
+                  v-model="merchant.companyInformation.registeredStateName"
                   label="Registered state (type min 3 characters)*"
                   placeholder="Start typing ..*"
                 >
@@ -413,7 +413,7 @@
                   :error="$v.merchant.companyInformation.registeredPin.$error"
                   color="grey-9"
                   type="number"
-                  v-model.trim="merchant.companyInformation.registeredPin"
+                  v-model="merchant.companyInformation.registeredPin"
                   label="PIN*"
                   placeholder="PIN*"
                 />
@@ -423,7 +423,7 @@
                   disable
                   class="constitutionName"
                   color="grey-9"
-                  v-model.trim="merchant.companyInformation.constitutionName"
+                  v-model="merchant.companyInformation.constitutionName"
                   label="Type of Business Entity"
                 />
               </div>
@@ -436,7 +436,7 @@
                   class="establishYear"
                   @blur="$v.merchant.companyInformation.establishYear.$touch"
                   :error="$v.merchant.companyInformation.establishYear.$error"
-                  v-model.trim="merchant.companyInformation.establishYear"
+                  v-model="merchant.companyInformation.establishYear"
                   label="Year of Establishment*"
                   placeholder="Year of Establishment*"
                 />
@@ -447,7 +447,7 @@
                   class="registerNumber"
                   @blur="$v.merchant.companyInformation.registerNumber.$touch"
                   :error="$v.merchant.companyInformation.registerNumber.$error"
-                  v-model.trim="merchant.companyInformation.registerNumber"
+                  v-model="merchant.companyInformation.registerNumber"
                   label="Establish Number"
                   placeholder="Establish Number"
                 />
@@ -458,7 +458,7 @@
                   :error="$v.merchant.companyInformation.tin.$error"
                   color="grey-9"
                   class="tin"
-                  v-model.trim="merchant.companyInformation.tin"
+                  v-model="merchant.companyInformation.tin"
                   label="TIN"
                   placeholder="TIN"
                 />
@@ -470,7 +470,7 @@
                   @blur="$v.merchant.companyInformation.pan.$touch"
                   :error="$v.merchant.companyInformation.pan.$error"
                   color="grey-9"
-                  v-model.trim="merchant.companyInformation.pan"
+                  v-model="merchant.companyInformation.pan"
                   label="Company PAN*"
                   placeholder="Company PAN*"
                 />
@@ -482,7 +482,7 @@
                   @blur="$v.merchant.companyInformation.tan.$touch"
                   :error="$v.merchant.companyInformation.tan.$error"
                   color="grey-9"
-                  v-model.trim="merchant.companyInformation.tan"
+                  v-model="merchant.companyInformation.tan"
                   label="TAN"
                   placeholder="TAN"
                 />
@@ -491,7 +491,7 @@
                 <q-input
                   color="grey-9"
                   class="businessNature"
-                  v-model.trim="merchant.companyInformation.businessNature"
+                  v-model="merchant.companyInformation.businessNature"
                   label="Nature of Business"
                   placeholder="Nature of Business"
                 />
@@ -501,7 +501,7 @@
                   placeholder="Choose from the below*"
                   class="businessType"
                   color="grey-9"
-                  v-model.trim="merchant.companyInformation.businessType"
+                  v-model="merchant.companyInformation.businessType"
                   label="Type of Business"
                   :options="businessTypeOptions"
                 />
@@ -512,7 +512,7 @@
                   :error="autoCompleteError($v.merchant.companyInformation.mcc,$v.merchant.companyInformation.mccname)"
                   color="grey-9"
                   class="mcc"
-                  v-model.trim="merchant.companyInformation.mccname"
+                  v-model="merchant.companyInformation.mccname"
                   label="MCC (type min 3 characters)"
                   placeholder="Start typing ..*"
                 >
@@ -531,7 +531,7 @@
                   @blur="$v.merchant.companyInformation.residentialAddress.$touch"
                   :error="$v.merchant.companyInformation.residentialAddress.$error"
                   color="grey-9"
-                  v-model.trim="merchant.companyInformation.residentialAddress"
+                  v-model="merchant.companyInformation.residentialAddress"
                   label="Residential Address* (max 120 characters)"
                   placeholder="Residential Address*"
                 />
@@ -543,7 +543,7 @@
                   :error="$v.merchant.companyInformation.residentialPin.$error"
                   color="grey-9"
                   type="number"
-                  v-model.trim="merchant.companyInformation.residentialPin"
+                  v-model="merchant.companyInformation.residentialPin"
                   label="PIN*"
                   placeholder="PIN*"
                 />
@@ -554,7 +554,7 @@
                   @blur="$v.merchant.companyInformation.residentialCityRefCode.$touch"
                   :error="autoCompleteError($v.merchant.companyInformation.residentialCityRefCode,$v.merchant.companyInformation.residentCityName)"
                   color="grey-9"
-                  v-model.trim="merchant.companyInformation.residentCityName"
+                  v-model="merchant.companyInformation.residentCityName"
                   label="City (type min 3 characters)*"
                   placeholder="Start typing ..*"
                 >
@@ -573,7 +573,7 @@
                   @blur="$v.merchant.companyInformation.residentialStateRefCode.$touch"
                   :error="autoCompleteError($v.merchant.companyInformation.residentialStateRefCode,$v.merchant.companyInformation.residentStateName)"
                   color="grey-9"
-                  v-model.trim="merchant.companyInformation.residentStateName"
+                  v-model="merchant.companyInformation.residentStateName"
                   label="State (type min 3 characters)*"
                   placeholder="Start typing ..*"
                 >
@@ -592,7 +592,7 @@
                   @blur="$v.merchant.companyInformation.contactName.$touch"
                   :error="$v.merchant.companyInformation.contactName.$error"
                   color="grey-9"
-                  v-model.trim="merchant.companyInformation.contactName"
+                  v-model="merchant.companyInformation.contactName"
                   label="Contact Name*"
                   placeholder="Contact Name*"
                 />
@@ -603,7 +603,7 @@
                   @blur="$v.merchant.companyInformation.contactMobile.$touch"
                   :error="$v.merchant.companyInformation.contactMobile.$error"
                   color="grey-9"
-                  v-model.trim="merchant.companyInformation.contactMobile"
+                  v-model="merchant.companyInformation.contactMobile"
                   label="Contact mobile*"
                   placeholder="Contact Mobile*"
                 />
@@ -615,7 +615,7 @@
                   class="contactAlternateMobile"
                   @blur="$v.merchant.companyInformation.contactAlternateMobile.$touch"
                   :error="$v.merchant.companyInformation.contactAlternateMobile.$error"
-                  v-model.trim="merchant.companyInformation.contactAlternateMobile"
+                  v-model="merchant.companyInformation.contactAlternateMobile"
                   label="Contact Alt Mobile"
                   placeholder="Contact Alt Mobile"
                 />
@@ -627,7 +627,7 @@
                   class="contactPhone"
                   @blur="$v.merchant.companyInformation.contactPhone.$touch"
                   :error="$v.merchant.companyInformation.contactPhone.$error"
-                  v-model.trim="merchant.companyInformation.contactPhone"
+                  v-model="merchant.companyInformation.contactPhone"
                   label="Contact Phone*"
                   placeholder="Contact Phone*"
                 />
@@ -639,7 +639,7 @@
                   :error="$v.merchant.companyInformation.contactEmail.$error"
                   color="grey-9"
                   type="email"
-                  v-model.trim="merchant.companyInformation.contactEmail"
+                  v-model="merchant.companyInformation.contactEmail"
                   label="Contact Email*"
                   placeholder="Contact Email*"
                 />
@@ -653,7 +653,7 @@
                     v-for="(item,index) in viewBinding.statementType"
                     :key="index"
                     color="grey-9"
-                    v-model.trim="merchant.companyInformation.statementType"
+                    v-model="merchant.companyInformation.statementType"
                     :val="item.value"
                     :label="item.label"
                   />
@@ -668,7 +668,7 @@
                     v-for="(item,index) in viewBinding.statementFrequency"
                     :key="index"
                     color="grey-9"
-                    v-model.trim="merchant.companyInformation.statementFrequency"
+                    v-model="merchant.companyInformation.statementFrequency"
                     :val="item.value"
                     :label="item.label"
                   />
@@ -682,7 +682,7 @@
                   placeholder="Statement Email"
                   @blur="$v.merchant.companyInformation.statementEmail.$touch"
                   :error="$v.merchant.companyInformation.statementEmail.$error"
-                  v-model.trim="merchant.companyInformation.statementEmail"
+                  v-model="merchant.companyInformation.statementEmail"
                 />
               </div>
             </div>
@@ -752,7 +752,7 @@
                   :error="v.name.$anyError"
                   @blur="() => v.name.$anyError"
                   color="grey-9"
-                  v-model.trim="v.$model.name"
+                  v-model="v.$model.name"
                   label="Name*"
                   placeholder="Name*"
                 />
@@ -764,7 +764,7 @@
                   :error="v.pan.$anyError"
                   @blur="() => v.pan.$anyError"
                   color="grey-9"
-                  v-model.trim="v.$model.pan"
+                  v-model="v.$model.pan"
                   label="Pan*"
                   placeholder="Pan*"
                 />
@@ -775,7 +775,7 @@
                   :error="v.address.$anyError"
                   @blur="() => v.address.$anyError"
                   color="grey-9"
-                  v-model.trim="v.$model.address"
+                  v-model="v.$model.address"
                   label="Address* (max 120 characters)"
                   placeholder="Address*"
                 />
@@ -787,7 +787,7 @@
                   @blur="() => v.pin.$anyError"
                   color="grey-9"
                   type="number"
-                  v-model.trim="v.$model.pin"
+                  v-model="v.$model.pin"
                   label="Pincode*"
                   placeholder="Pincode*"
                 />
@@ -798,7 +798,7 @@
                   :error="autoCompleteError(v.cityRefLabel,v.cityRefCode)"
                   @blur="v.cityRefLabel.$touch()"
                   color="grey-9"
-                  v-model.trim="v.$model.cityRefLabel"
+                  v-model="v.$model.cityRefLabel"
                   label="City (type min 3 characters)*"
                   placeholder="Start typing ..*"
                 >
@@ -817,7 +817,7 @@
                   :error="autoCompleteError(v.stateRefLabel,v.stateRefCode)"
                   @blur="v.stateRefLabel.$touch()"
                   color="grey-9"
-                  v-model.trim="v.$model.stateRefLabel"
+                  v-model="v.$model.stateRefLabel"
                   label="State (type min 3 characters)*"
                   placeholder="Start typing ..*"
                 >
@@ -837,7 +837,7 @@
                   @blur="() => v.contactMobile.$anyError"
                   color="grey-9"
                   type="tel"
-                  v-model.trim="v.$model.contactMobile"
+                  v-model="v.$model.contactMobile"
                   label="Mobile*"
                   placeholder="Mobile*"
                 />
@@ -849,7 +849,7 @@
                   @blur="() => v.contactEmail.$anyError"
                   color="grey-9"
                   type="email"
-                  v-model.trim="v.$model.contactEmail"
+                  v-model="v.$model.contactEmail"
                   label="Email*"
                   placeholder="Email*"
                 />
@@ -901,7 +901,7 @@
                   class="weekdayStartHour"
                   @blur="$v.merchant.businessInformation.weekdayStartHour.$touch"
                   :error="$v.merchant.businessInformation.weekdayStartHour.$error"
-                  v-model.trim="merchant.businessInformation.weekdayStartHour"
+                  v-model="merchant.businessInformation.weekdayStartHour"
                   label="Weekday start hour (00.00)"
                   placeholder="Weekday start hour"
                 />
@@ -912,7 +912,7 @@
                   class="weekdayEndHour"
                   @blur="$v.merchant.businessInformation.weekdayEndHour.$touch"
                   :error="$v.merchant.businessInformation.weekdayEndHour.$error"
-                  v-model.trim="merchant.businessInformation.weekdayEndHour"
+                  v-model="merchant.businessInformation.weekdayEndHour"
                   label="Weekday end hour (00.00)"
                   placeholder="Weekday end hour"
                 />
@@ -923,7 +923,7 @@
                   class="weekendStartHour"
                   @blur="$v.merchant.businessInformation.weekendStartHour.$touch"
                   :error="$v.merchant.businessInformation.weekendStartHour.$error"
-                  v-model.trim="merchant.businessInformation.weekendStartHour"
+                  v-model="merchant.businessInformation.weekendStartHour"
                   label="Weekend start hour (00.00)"
                   placeholder="Weekend start hour"
                 />
@@ -934,13 +934,13 @@
                   class="weekendEndHour"
                   @blur="$v.merchant.businessInformation.weekendEndHour.$touch"
                   :error="$v.merchant.businessInformation.weekendEndHour.$error"
-                  v-model.trim="merchant.businessInformation.weekendEndHour"
+                  v-model="merchant.businessInformation.weekendEndHour"
                   label="Weekend end hour (00.00)"
                   placeholder="Weekend end hour"
                 />
               </div>
               <!-- <div class="col-md-6 col-sm-12 col-xs-12">
-                  <q-input color="grey-9" type="number" v-model.trim="merchant.businessInformation.weekdayStartHour" label="Business Income" placeholder="Business Income" />
+                  <q-input color="grey-9" type="number" v-model="merchant.businessInformation.weekdayStartHour" label="Business Income" placeholder="Business Income" />
               </div>-->
               <div class="col-md-6 col-sm-12 col-xs-12 col-xs-12">
                 <q-input
@@ -948,7 +948,7 @@
                   class="lastTurnoverYear"
                   @blur="$v.merchant.businessInformation.lastTurnoverYear.$touch"
                   :error="$v.merchant.businessInformation.lastTurnoverYear.$error"
-                  v-model.trim="merchant.businessInformation.lastTurnoverYear"
+                  v-model="merchant.businessInformation.lastTurnoverYear"
                   label="Last turnover year"
                   placeholder="Last turnover year"
                 />
@@ -960,7 +960,7 @@
                   class="lastTurnoverAmount"
                   @blur="$v.merchant.businessInformation.lastTurnoverAmount.$touch"
                   :error="$v.merchant.businessInformation.lastTurnoverAmount.$error"
-                  v-model.trim="merchant.businessInformation.lastTurnoverAmount"
+                  v-model="merchant.businessInformation.lastTurnoverAmount"
                   label="Turnover during last year"
                   placeholder="Turnover during last year"
                 />
@@ -972,7 +972,7 @@
                   class="expectedCardBusiness"
                   @blur="$v.merchant.businessInformation.expectedCardBusiness.$touch"
                   :error="$v.merchant.businessInformation.expectedCardBusiness.$error"
-                  v-model.trim="merchant.businessInformation.expectedCardBusiness"
+                  v-model="merchant.businessInformation.expectedCardBusiness"
                   label="Expected Card Business"
                   placeholder="Expected Card Business"
                 />
@@ -984,7 +984,7 @@
                   class="averageBillAmount"
                   @blur="$v.merchant.businessInformation.averageBillAmount.$touch"
                   :error="$v.merchant.businessInformation.averageBillAmount.$error"
-                  v-model.trim="merchant.businessInformation.averageBillAmount"
+                  v-model="merchant.businessInformation.averageBillAmount"
                   label="Average Bill Amount"
                   placeholder="Average Bill Amount"
                 />
@@ -996,7 +996,7 @@
                   class="gstId"
                   @blur="$v.merchant.businessInformation.gstId.$touch"
                   :error="$v.merchant.businessInformation.gstId.$error"
-                  v-model.trim="merchant.businessInformation.gstId"
+                  v-model="merchant.businessInformation.gstId"
                   @change="marsRequiredFormattingofGST"
                   label="GST ID"
                   placeholder="GST ID"
@@ -1006,7 +1006,7 @@
                 <q-input
                   color="grey-9"
                   class="currentPosName"
-                  v-model.trim="merchant.businessInformation.currentPosName"
+                  v-model="merchant.businessInformation.currentPosName"
                   label="Name of the other POS Currentlly Used"
                   placeholder="Name of the other POS Currentlly Used"
                 />
@@ -1017,7 +1017,7 @@
                   class="debitCardMdr"
                   @blur="$v.merchant.businessInformation.debitCardMdr.$touch"
                   :error="$v.merchant.businessInformation.debitCardMdr.$error"
-                  v-model.trim="merchant.businessInformation.debitCardMdr"
+                  v-model="merchant.businessInformation.debitCardMdr"
                   label="Debit Card MDR"
                   placeholder="Debit Card MDR"
                 />
@@ -1028,7 +1028,7 @@
                   class="creditCardMdr"
                   @blur="$v.merchant.businessInformation.creditCardMdr.$touch"
                   :error="$v.merchant.businessInformation.creditCardMdr.$error"
-                  v-model.trim="merchant.businessInformation.creditCardMdr"
+                  v-model="merchant.businessInformation.creditCardMdr"
                   label="Credit Card MDR"
                   placeholder="Credit Card MDR"
                 />
@@ -1042,7 +1042,7 @@
                   :error="$v.merchant.businessInformation.memberSince.$error"
                   color="grey-9"
                   modal
-                  v-model.trim="merchant.businessInformation.memberSince"
+                  v-model="merchant.businessInformation.memberSince"
                   label="Member since"
                   placeholder="Member since"
                 />
@@ -1090,7 +1090,7 @@
                     v-for="(item,index) in deviceOwnedByOptions"
                     :key="index"
                     color="grey-9"
-                    v-model.trim="merchant.paymentDetails.deviceOwnedBy"
+                    v-model="merchant.paymentDetails.deviceOwnedBy"
                     :val="item.value"
                     :label="item.label"
                   />
@@ -1103,7 +1103,7 @@
                   class="installationFee"
                   @blur="$v.merchant.paymentDetails.installationFee.$touch"
                   :error="$v.merchant.paymentDetails.installationFee.$error"
-                  v-model.trim="merchant.paymentDetails.installationFee"
+                  v-model="merchant.paymentDetails.installationFee"
                   label="Installation Fee*"
                   placeholder="Installation Fee*"
                 />
@@ -1115,7 +1115,7 @@
                   class="terminalModeCode"
                   @blur="$v.merchant.paymentDetails.terminalModeCode.$touch"
                   :error="$v.merchant.paymentDetails.terminalModeCode.$error"
-                  v-model.trim="merchant.paymentDetails.terminalModeCode"
+                  v-model="merchant.paymentDetails.terminalModeCode"
                   label="Terminal Model*"
                   :options="terminalModelSet"
                 />
@@ -1128,7 +1128,7 @@
                   class="numberOfTerminals"
                   @blur="$v.merchant.paymentDetails.numberOfTerminals.$touch"
                   :error="$v.merchant.paymentDetails.numberOfTerminals.$error"
-                  v-model.trim="merchant.paymentDetails.numberOfTerminals"
+                  v-model="merchant.paymentDetails.numberOfTerminals"
                   label="No of Terminals*"
                   placeholder="No of Terminals*"
                 />
@@ -1143,7 +1143,7 @@
                     v-for="(item,index) in cashAtPosEnabledOptions"
                     :key="index"
                     color="grey-9"
-                    v-model.trim="merchant.paymentDetails.cashAtPosEnabled"
+                    v-model="merchant.paymentDetails.cashAtPosEnabled"
                     :val="item.value"
                     :label="item.label"
                   />
@@ -1154,7 +1154,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   class="rentalPlanCode"
-                  v-model.trim="merchant.paymentDetails.rentalPlanCode"
+                  v-model="merchant.paymentDetails.rentalPlanCode"
                   label="Rental Plan*"
                   :options="rentalPlanSet"
                 />
@@ -1164,7 +1164,7 @@
                   placeholder="Choose from the below*"
                   color="grey-9"
                   class="rentalMode"
-                  v-model.trim="merchant.paymentDetails.rentalMode"
+                  v-model="merchant.paymentDetails.rentalMode"
                   label="Rental Mode*"
                   :options="rentalModeOptions"
                 />
@@ -1176,7 +1176,7 @@
                   class="serviceProvider"
                   @blur="$v.merchant.paymentDetails.serviceProvider.$touch"
                   :error="$v.merchant.paymentDetails.serviceProvider.$error"
-                  v-model.trim="merchant.paymentDetails.serviceProvider"
+                  v-model="merchant.paymentDetails.serviceProvider"
                   label="Service provider*"
                   :options="serviceProviderListSet"
                 />
@@ -1188,7 +1188,7 @@
                   class="networkPreferred"
                   @blur="$v.merchant.paymentDetails.networkPreferred.$touch"
                   :error="$v.merchant.paymentDetails.networkPreferred.$error"
-                  v-model.trim="merchant.paymentDetails.networkPreferred"
+                  v-model="merchant.paymentDetails.networkPreferred"
                   label="Network provider*"
                   :options="networkProviderListSet"
                 />
@@ -1219,7 +1219,7 @@
                   color="grey-9"
                   type="number"
                   class="gracePeriod"
-                  v-model.trim="merchant.paymentDetails.gracePeriod"
+                  v-model="merchant.paymentDetails.gracePeriod"
                   label="Grace period*"
                   placeholder="Grace period*"
                 />
@@ -1234,7 +1234,7 @@
                   class="advanceRentCollected"
                   @blur="$v.merchant.paymentDetails.advanceRentCollected.$touch"
                   :error="$v.merchant.paymentDetails.advanceRentCollected.$error"
-                  v-model.trim="merchant.paymentDetails.advanceRentCollected"
+                  v-model="merchant.paymentDetails.advanceRentCollected"
                   label="Advance Rent Collected*"
                   placeholder="Advance Rent Collected*"
                 />
@@ -1249,7 +1249,7 @@
                   class="noOfMonthRentPaidInAdvance"
                   @blur="$v.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$touch"
                   :error="$v.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$error"
-                  v-model.trim="merchant.paymentDetails.noOfMonthRentPaidInAdvance"
+                  v-model="merchant.paymentDetails.noOfMonthRentPaidInAdvance"
                   label="No. Of Month Rent Paid In Advance*"
                   placeholder="No. Of Month Rent Paid In Advance*"
                 />
@@ -1266,7 +1266,7 @@
                     v-for="(item,index) in advanceRentModeOptions"
                     :key="index"
                     color="grey-9"
-                    v-model.trim="merchant.paymentDetails.advanceRentMode"
+                    v-model="merchant.paymentDetails.advanceRentMode"
                     :val="item.value"
                     :label="item.label"
                   />
@@ -1279,7 +1279,7 @@
                   class="devicePrice"
                   @blur="$v.merchant.paymentDetails.devicePrice.$touch"
                   :error="$v.merchant.paymentDetails.devicePrice.$error"
-                  v-model.trim="merchant.paymentDetails.devicePrice"
+                  v-model="merchant.paymentDetails.devicePrice"
                   label="Device Price"
                   placeholder="Device Price"
                 />
@@ -1291,7 +1291,7 @@
                   class="otherCharges"
                   @blur="$v.merchant.paymentDetails.otherCharges.$touch"
                   :error="$v.merchant.paymentDetails.otherCharges.$error"
-                  v-model.trim="merchant.paymentDetails.otherCharges"
+                  v-model="merchant.paymentDetails.otherCharges"
                   label="Other Charges"
                   placeholder="Other Charges"
                 />
@@ -1303,7 +1303,7 @@
                   class="totalAmountPaid"
                   @blur="$v.merchant.paymentDetails.totalAmountPaid.$touch"
                   :error="$v.merchant.paymentDetails.totalAmountPaid.$error"
-                  v-model.trim="merchant.paymentDetails.totalAmountPaid"
+                  v-model="merchant.paymentDetails.totalAmountPaid"
                   label="Total Amount Paid"
                   placeholder="Total Amount Paid"
                 />
@@ -1360,7 +1360,7 @@
                           type="number"
                           @blur="$v.merchant.mdrPlan.domesticDebitUpTo2000.fixed.$touch"
                           :error="$v.merchant.mdrPlan.domesticDebitUpTo2000.fixed.$error"
-                          v-model.trim="merchant.mdrPlan.domesticDebitUpTo2000.fixed"
+                          v-model="merchant.mdrPlan.domesticDebitUpTo2000.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -1371,7 +1371,7 @@
                           type="number"
                           @blur="$v.merchant.mdrPlan.domesticDebitUpTo2000.percentage.$touch"
                           :error="$v.merchant.mdrPlan.domesticDebitUpTo2000.percentage.$error"
-                          v-model.trim="merchant.mdrPlan.domesticDebitUpTo2000.percentage"
+                          v-model="merchant.mdrPlan.domesticDebitUpTo2000.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -1382,7 +1382,7 @@
                           class="minimum"
                           @blur="$v.merchant.mdrPlan.domesticDebitUpTo2000.minimum.$touch"
                           :error="$v.merchant.mdrPlan.domesticDebitUpTo2000.minimum.$error"
-                          v-model.trim="merchant.mdrPlan.domesticDebitUpTo2000.minimum"
+                          v-model="merchant.mdrPlan.domesticDebitUpTo2000.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -1401,7 +1401,7 @@
                           class="fixed"
                           @blur="$v.merchant.SharingDiscountFee.domesticDebitUpTo2000.fixed.$touch"
                           :error="$v.merchant.SharingDiscountFee.domesticDebitUpTo2000.fixed.$error"
-                          v-model.trim="merchant.SharingDiscountFee.domesticDebitUpTo2000.fixed"
+                          v-model="merchant.SharingDiscountFee.domesticDebitUpTo2000.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -1412,7 +1412,7 @@
                           class="percentage"
                           @blur="$v.merchant.SharingDiscountFee.domesticDebitUpTo2000.percentage.$touch"
                           :error="$v.merchant.SharingDiscountFee.domesticDebitUpTo2000.percentage.$error"
-                          v-model.trim="merchant.SharingDiscountFee.domesticDebitUpTo2000.percentage"
+                          v-model="merchant.SharingDiscountFee.domesticDebitUpTo2000.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -1423,7 +1423,7 @@
                           class="minimum"
                           @blur="$v.merchant.SharingDiscountFee.domesticDebitUpTo2000.minimum.$touch"
                           :error="$v.merchant.SharingDiscountFee.domesticDebitUpTo2000.minimum.$error"
-                          v-model.trim="merchant.SharingDiscountFee.domesticDebitUpTo2000.minimum"
+                          v-model="merchant.SharingDiscountFee.domesticDebitUpTo2000.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -1443,7 +1443,7 @@
                           class="fixed"
                           @blur="$v.merchant.mdrPlan.domesticDebitAbove2000.fixed.$touch"
                           :error="$v.merchant.mdrPlan.domesticDebitAbove2000.fixed.$error"
-                          v-model.trim="merchant.mdrPlan.domesticDebitAbove2000.fixed"
+                          v-model="merchant.mdrPlan.domesticDebitAbove2000.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -1454,7 +1454,7 @@
                           class="percentage"
                           @blur="$v.merchant.mdrPlan.domesticDebitAbove2000.percentage.$touch"
                           :error="$v.merchant.mdrPlan.domesticDebitAbove2000.percentage.$error"
-                          v-model.trim="merchant.mdrPlan.domesticDebitAbove2000.percentage"
+                          v-model="merchant.mdrPlan.domesticDebitAbove2000.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -1465,7 +1465,7 @@
                           class="minimum"
                           @blur="$v.merchant.mdrPlan.domesticDebitAbove2000.minimum.$touch"
                           :error="$v.merchant.mdrPlan.domesticDebitAbove2000.minimum.$error"
-                          v-model.trim="merchant.mdrPlan.domesticDebitAbove2000.minimum"
+                          v-model="merchant.mdrPlan.domesticDebitAbove2000.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -1480,7 +1480,7 @@
                           class="fixed"
                           @blur="$v.merchant.SharingDiscountFee.domesticDebitAbove2000.fixed.$touch"
                           :error="$v.merchant.SharingDiscountFee.domesticDebitAbove2000.fixed.$error"
-                          v-model.trim="merchant.SharingDiscountFee.domesticDebitAbove2000.fixed"
+                          v-model="merchant.SharingDiscountFee.domesticDebitAbove2000.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -1490,7 +1490,7 @@
                           type="number"
                           @blur="$v.merchant.SharingDiscountFee.domesticDebitAbove2000.percentage.$touch"
                           :error="$v.merchant.SharingDiscountFee.domesticDebitAbove2000.percentage.$error"
-                          v-model.trim="merchant.SharingDiscountFee.domesticDebitAbove2000.percentage"
+                          v-model="merchant.SharingDiscountFee.domesticDebitAbove2000.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -1500,7 +1500,7 @@
                           type="number"
                           @blur="$v.merchant.SharingDiscountFee.domesticDebitAbove2000.minimum.$touch"
                           :error="$v.merchant.SharingDiscountFee.domesticDebitAbove2000.minimum.$error"
-                          v-model.trim="merchant.SharingDiscountFee.domesticDebitAbove2000.minimum"
+                          v-model="merchant.SharingDiscountFee.domesticDebitAbove2000.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -1521,7 +1521,7 @@
                           class="fixed"
                           @blur="$v.merchant.mdrPlan.standardOrClassic.fixed.$touch"
                           :error="$v.merchant.mdrPlan.standardOrClassic.fixed.$error"
-                          v-model.trim="merchant.mdrPlan.standardOrClassic.fixed"
+                          v-model="merchant.mdrPlan.standardOrClassic.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -1532,7 +1532,7 @@
                           class="percentage"
                           @blur="$v.merchant.mdrPlan.standardOrClassic.percentage.$touch"
                           :error="$v.merchant.mdrPlan.standardOrClassic.percentage.$error"
-                          v-model.trim="merchant.mdrPlan.standardOrClassic.percentage"
+                          v-model="merchant.mdrPlan.standardOrClassic.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -1543,7 +1543,7 @@
                           class="minimum"
                           @blur="$v.merchant.mdrPlan.standardOrClassic.minimum.$touch"
                           :error="$v.merchant.mdrPlan.standardOrClassic.minimum.$error"
-                          v-model.trim="merchant.mdrPlan.standardOrClassic.minimum"
+                          v-model="merchant.mdrPlan.standardOrClassic.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -1558,7 +1558,7 @@
                           class="fixed"
                           @blur="$v.merchant.SharingDiscountFee.standardOrClassic.fixed.$touch"
                           :error="$v.merchant.SharingDiscountFee.standardOrClassic.fixed.$error"
-                          v-model.trim="merchant.SharingDiscountFee.standardOrClassic.fixed"
+                          v-model="merchant.SharingDiscountFee.standardOrClassic.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -1569,7 +1569,7 @@
                           class="percentage"
                           @blur="$v.merchant.SharingDiscountFee.standardOrClassic.percentage.$touch"
                           :error="$v.merchant.SharingDiscountFee.standardOrClassic.percentage.$error"
-                          v-model.trim="merchant.SharingDiscountFee.standardOrClassic.percentage"
+                          v-model="merchant.SharingDiscountFee.standardOrClassic.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -1580,7 +1580,7 @@
                           class="minimum"
                           @blur="$v.merchant.SharingDiscountFee.standardOrClassic.minimum.$touch"
                           :error="$v.merchant.SharingDiscountFee.standardOrClassic.minimum.$error"
-                          v-model.trim="merchant.SharingDiscountFee.standardOrClassic.minimum"
+                          v-model="merchant.SharingDiscountFee.standardOrClassic.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -1600,7 +1600,7 @@
                           class="fixed"
                           @blur="$v.merchant.mdrPlan.premiumOrPlatinum.fixed.$touch"
                           :error="$v.merchant.mdrPlan.premiumOrPlatinum.fixed.$error"
-                          v-model.trim="merchant.mdrPlan.premiumOrPlatinum.fixed"
+                          v-model="merchant.mdrPlan.premiumOrPlatinum.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -1611,7 +1611,7 @@
                           class="percentage"
                           @blur="$v.merchant.mdrPlan.premiumOrPlatinum.percentage.$touch"
                           :error="$v.merchant.mdrPlan.premiumOrPlatinum.percentage.$error"
-                          v-model.trim="merchant.mdrPlan.premiumOrPlatinum.percentage"
+                          v-model="merchant.mdrPlan.premiumOrPlatinum.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -1622,7 +1622,7 @@
                           class="minimum"
                           @blur="$v.merchant.mdrPlan.premiumOrPlatinum.minimum.$touch"
                           :error="$v.merchant.mdrPlan.premiumOrPlatinum.minimum.$error"
-                          v-model.trim="merchant.mdrPlan.premiumOrPlatinum.minimum"
+                          v-model="merchant.mdrPlan.premiumOrPlatinum.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -1637,7 +1637,7 @@
                           class="fixed"
                           @blur="$v.merchant.SharingDiscountFee.premiumOrPlatinum.fixed.$touch"
                           :error="$v.merchant.SharingDiscountFee.premiumOrPlatinum.fixed.$error"
-                          v-model.trim="merchant.SharingDiscountFee.premiumOrPlatinum.fixed"
+                          v-model="merchant.SharingDiscountFee.premiumOrPlatinum.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -1648,7 +1648,7 @@
                           class="percentage"
                           @blur="$v.merchant.SharingDiscountFee.premiumOrPlatinum.percentage.$touch"
                           :error="$v.merchant.SharingDiscountFee.premiumOrPlatinum.percentage.$error"
-                          v-model.trim="merchant.SharingDiscountFee.premiumOrPlatinum.percentage"
+                          v-model="merchant.SharingDiscountFee.premiumOrPlatinum.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -1659,7 +1659,7 @@
                           class="minimum"
                           @blur="$v.merchant.SharingDiscountFee.premiumOrPlatinum.minimum.$touch"
                           :error="$v.merchant.SharingDiscountFee.premiumOrPlatinum.minimum.$error"
-                          v-model.trim="merchant.SharingDiscountFee.premiumOrPlatinum.minimum"
+                          v-model="merchant.SharingDiscountFee.premiumOrPlatinum.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -1679,7 +1679,7 @@
                           class="fixed"
                           @blur="$v.merchant.mdrPlan.superPremiumOrSignature.fixed.$touch"
                           :error="$v.merchant.mdrPlan.superPremiumOrSignature.fixed.$error"
-                          v-model.trim="merchant.mdrPlan.superPremiumOrSignature.fixed"
+                          v-model="merchant.mdrPlan.superPremiumOrSignature.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -1690,7 +1690,7 @@
                           class="percentage"
                           @blur="$v.merchant.mdrPlan.superPremiumOrSignature.percentage.$touch"
                           :error="$v.merchant.mdrPlan.superPremiumOrSignature.percentage.$error"
-                          v-model.trim="merchant.mdrPlan.superPremiumOrSignature.percentage"
+                          v-model="merchant.mdrPlan.superPremiumOrSignature.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -1701,7 +1701,7 @@
                           class="minimum"
                           @blur="$v.merchant.mdrPlan.superPremiumOrSignature.minimum.$touch"
                           :error="$v.merchant.mdrPlan.superPremiumOrSignature.minimum.$error"
-                          v-model.trim="merchant.mdrPlan.superPremiumOrSignature.minimum"
+                          v-model="merchant.mdrPlan.superPremiumOrSignature.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -1716,7 +1716,7 @@
                           class="fixed"
                           @blur="$v.merchant.SharingDiscountFee.superPremiumOrSignature.fixed.$touch"
                           :error="$v.merchant.SharingDiscountFee.superPremiumOrSignature.fixed.$error"
-                          v-model.trim="merchant.SharingDiscountFee.superPremiumOrSignature.fixed"
+                          v-model="merchant.SharingDiscountFee.superPremiumOrSignature.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -1727,7 +1727,7 @@
                           class="percentage"
                           @blur="$v.merchant.SharingDiscountFee.superPremiumOrSignature.percentage.$touch"
                           :error="$v.merchant.SharingDiscountFee.superPremiumOrSignature.percentage.$error"
-                          v-model.trim="merchant.SharingDiscountFee.superPremiumOrSignature.percentage"
+                          v-model="merchant.SharingDiscountFee.superPremiumOrSignature.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -1738,7 +1738,7 @@
                           class="minimum"
                           @blur="$v.merchant.SharingDiscountFee.superPremiumOrSignature.minimum.$touch"
                           :error="$v.merchant.SharingDiscountFee.superPremiumOrSignature.minimum.$error"
-                          v-model.trim="merchant.SharingDiscountFee.superPremiumOrSignature.minimum"
+                          v-model="merchant.SharingDiscountFee.superPremiumOrSignature.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -1758,7 +1758,7 @@
                           class="fixed"
                           @blur="$v.merchant.mdrPlan.commercialOrCorporate.fixed.$touch"
                           :error="$v.merchant.mdrPlan.commercialOrCorporate.fixed.$error"
-                          v-model.trim="merchant.mdrPlan.commercialOrCorporate.fixed"
+                          v-model="merchant.mdrPlan.commercialOrCorporate.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -1769,7 +1769,7 @@
                           class="percentage"
                           @blur="$v.merchant.mdrPlan.commercialOrCorporate.percentage.$touch"
                           :error="$v.merchant.mdrPlan.commercialOrCorporate.percentage.$error"
-                          v-model.trim="merchant.mdrPlan.commercialOrCorporate.percentage"
+                          v-model="merchant.mdrPlan.commercialOrCorporate.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -1780,7 +1780,7 @@
                           class="minimum"
                           @blur="$v.merchant.mdrPlan.commercialOrCorporate.minimum.$touch"
                           :error="$v.merchant.mdrPlan.commercialOrCorporate.minimum.$error"
-                          v-model.trim="merchant.mdrPlan.commercialOrCorporate.minimum"
+                          v-model="merchant.mdrPlan.commercialOrCorporate.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -1795,7 +1795,7 @@
                           class="fixed"
                           @blur="$v.merchant.SharingDiscountFee.commercialOrCorporate.fixed.$touch"
                           :error="$v.merchant.SharingDiscountFee.commercialOrCorporate.fixed.$error"
-                          v-model.trim="merchant.SharingDiscountFee.commercialOrCorporate.fixed"
+                          v-model="merchant.SharingDiscountFee.commercialOrCorporate.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -1806,7 +1806,7 @@
                           class="percentage"
                           @blur="$v.merchant.SharingDiscountFee.commercialOrCorporate.percentage.$touch"
                           :error="$v.merchant.SharingDiscountFee.commercialOrCorporate.percentage.$error"
-                          v-model.trim="merchant.SharingDiscountFee.commercialOrCorporate.percentage"
+                          v-model="merchant.SharingDiscountFee.commercialOrCorporate.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -1817,7 +1817,7 @@
                           class="minimum"
                           @blur="$v.merchant.SharingDiscountFee.commercialOrCorporate.minimum.$touch"
                           :error="$v.merchant.SharingDiscountFee.commercialOrCorporate.minimum.$error"
-                          v-model.trim="merchant.SharingDiscountFee.commercialOrCorporate.minimum"
+                          v-model="merchant.SharingDiscountFee.commercialOrCorporate.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -1837,7 +1837,7 @@
                           class="fixed"
                           @blur="$v.merchant.mdrPlan.internationalDebitCard.fixed.$touch"
                           :error="$v.merchant.mdrPlan.internationalDebitCard.fixed.$error"
-                          v-model.trim="merchant.mdrPlan.internationalDebitCard.fixed"
+                          v-model="merchant.mdrPlan.internationalDebitCard.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -1848,7 +1848,7 @@
                           class="percentage"
                           @blur="$v.merchant.mdrPlan.internationalDebitCard.percentage.$touch"
                           :error="$v.merchant.mdrPlan.internationalDebitCard.percentage.$error"
-                          v-model.trim="merchant.mdrPlan.internationalDebitCard.percentage"
+                          v-model="merchant.mdrPlan.internationalDebitCard.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -1859,7 +1859,7 @@
                           class="minimum"
                           @blur="$v.merchant.mdrPlan.internationalDebitCard.minimum.$touch"
                           :error="$v.merchant.mdrPlan.internationalDebitCard.minimum.$error"
-                          v-model.trim="merchant.mdrPlan.internationalDebitCard.minimum"
+                          v-model="merchant.mdrPlan.internationalDebitCard.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -1874,7 +1874,7 @@
                           class="fixed"
                           @blur="$v.merchant.SharingDiscountFee.internationalDebitCard.fixed.$touch"
                           :error="$v.merchant.SharingDiscountFee.internationalDebitCard.fixed.$error"
-                          v-model.trim="merchant.SharingDiscountFee.internationalDebitCard.fixed"
+                          v-model="merchant.SharingDiscountFee.internationalDebitCard.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -1885,7 +1885,7 @@
                           class="percentage"
                           @blur="$v.merchant.SharingDiscountFee.internationalDebitCard.percentage.$touch"
                           :error="$v.merchant.SharingDiscountFee.internationalDebitCard.percentage.$error"
-                          v-model.trim="merchant.SharingDiscountFee.internationalDebitCard.percentage"
+                          v-model="merchant.SharingDiscountFee.internationalDebitCard.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -1896,7 +1896,7 @@
                           class="minimum"
                           @blur="$v.merchant.SharingDiscountFee.internationalDebitCard.minimum.$touch"
                           :error="$v.merchant.SharingDiscountFee.internationalDebitCard.minimum.$error"
-                          v-model.trim="merchant.SharingDiscountFee.internationalDebitCard.minimum"
+                          v-model="merchant.SharingDiscountFee.internationalDebitCard.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -1916,7 +1916,7 @@
                           class="fixed"
                           @blur="$v.merchant.mdrPlan.internationalCreditCard.fixed.$touch"
                           :error="$v.merchant.mdrPlan.internationalCreditCard.fixed.$error"
-                          v-model.trim="merchant.mdrPlan.internationalCreditCard.fixed"
+                          v-model="merchant.mdrPlan.internationalCreditCard.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -1927,7 +1927,7 @@
                           class="percentage"
                           @blur="$v.merchant.mdrPlan.internationalCreditCard.percentage.$touch"
                           :error="$v.merchant.mdrPlan.internationalCreditCard.percentage.$error"
-                          v-model.trim="merchant.mdrPlan.internationalCreditCard.percentage"
+                          v-model="merchant.mdrPlan.internationalCreditCard.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -1938,7 +1938,7 @@
                           class="minimum"
                           @blur="$v.merchant.mdrPlan.internationalCreditCard.minimum.$touch"
                           :error="$v.merchant.mdrPlan.internationalCreditCard.minimum.$error"
-                          v-model.trim="merchant.mdrPlan.internationalCreditCard.minimum"
+                          v-model="merchant.mdrPlan.internationalCreditCard.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -1953,7 +1953,7 @@
                           class="fixed"
                           @blur="$v.merchant.SharingDiscountFee.internationalCreditCard.fixed.$touch"
                           :error="$v.merchant.SharingDiscountFee.internationalCreditCard.fixed.$error"
-                          v-model.trim="merchant.SharingDiscountFee.internationalCreditCard.fixed"
+                          v-model="merchant.SharingDiscountFee.internationalCreditCard.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -1964,7 +1964,7 @@
                           class="percentage"
                           @blur="$v.merchant.SharingDiscountFee.internationalCreditCard.percentage.$touch"
                           :error="$v.merchant.SharingDiscountFee.internationalCreditCard.percentage.$error"
-                          v-model.trim="merchant.SharingDiscountFee.internationalCreditCard.percentage"
+                          v-model="merchant.SharingDiscountFee.internationalCreditCard.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -1975,7 +1975,7 @@
                           class="minimum"
                           @blur="$v.merchant.SharingDiscountFee.internationalCreditCard.minimum.$touch"
                           :error="$v.merchant.SharingDiscountFee.internationalCreditCard.minimum.$error"
-                          v-model.trim="merchant.SharingDiscountFee.internationalCreditCard.minimum"
+                          v-model="merchant.SharingDiscountFee.internationalCreditCard.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -1995,7 +1995,7 @@
                           class="fixed"
                           @blur="$v.merchant.mdrPlan.onus.fixed.$touch"
                           :error="$v.merchant.mdrPlan.onus.fixed.$error"
-                          v-model.trim="merchant.mdrPlan.onus.fixed"
+                          v-model="merchant.mdrPlan.onus.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -2006,7 +2006,7 @@
                           class="percentage"
                           @blur="$v.merchant.mdrPlan.onus.percentage.$touch"
                           :error="$v.merchant.mdrPlan.onus.percentage.$error"
-                          v-model.trim="merchant.mdrPlan.onus.percentage"
+                          v-model="merchant.mdrPlan.onus.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -2017,7 +2017,7 @@
                           class="minimum"
                           @blur="$v.merchant.mdrPlan.onus.minimum.$touch"
                           :error="$v.merchant.mdrPlan.onus.minimum.$error"
-                          v-model.trim="merchant.mdrPlan.onus.minimum"
+                          v-model="merchant.mdrPlan.onus.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -2032,7 +2032,7 @@
                           class="fixed"
                           @blur="$v.merchant.SharingDiscountFee.onus.fixed.$touch"
                           :error="$v.merchant.SharingDiscountFee.onus.fixed.$error"
-                          v-model.trim="merchant.SharingDiscountFee.onus.fixed"
+                          v-model="merchant.SharingDiscountFee.onus.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -2043,7 +2043,7 @@
                           class="percentage"
                           @blur="$v.merchant.SharingDiscountFee.onus.percentage.$touch"
                           :error="$v.merchant.SharingDiscountFee.onus.percentage.$error"
-                          v-model.trim="merchant.SharingDiscountFee.onus.percentage"
+                          v-model="merchant.SharingDiscountFee.onus.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -2054,7 +2054,7 @@
                           class="minimum"
                           @blur="$v.merchant.SharingDiscountFee.onus.minimum.$touch"
                           :error="$v.merchant.SharingDiscountFee.onus.minimum.$error"
-                          v-model.trim="merchant.SharingDiscountFee.onus.minimum"
+                          v-model="merchant.SharingDiscountFee.onus.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -2074,7 +2074,7 @@
                           class="fixed"
                           @blur="$v.merchant.mdrPlan.mVisa.fixed.$touch"
                           :error="$v.merchant.mdrPlan.mVisa.fixed.$error"
-                          v-model.trim="merchant.mdrPlan.mVisa.fixed"
+                          v-model="merchant.mdrPlan.mVisa.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -2085,7 +2085,7 @@
                           class="percentage"
                           @blur="$v.merchant.mdrPlan.mVisa.percentage.$touch"
                           :error="$v.merchant.mdrPlan.mVisa.percentage.$error"
-                          v-model.trim="merchant.mdrPlan.mVisa.percentage"
+                          v-model="merchant.mdrPlan.mVisa.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -2096,7 +2096,7 @@
                           class="minimum"
                           @blur="$v.merchant.mdrPlan.mVisa.minimum.$touch"
                           :error="$v.merchant.mdrPlan.mVisa.minimum.$error"
-                          v-model.trim="merchant.mdrPlan.mVisa.minimum"
+                          v-model="merchant.mdrPlan.mVisa.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -2111,7 +2111,7 @@
                           class="fixed"
                           @blur="$v.merchant.SharingDiscountFee.mVisa.fixed.$touch"
                           :error="$v.merchant.SharingDiscountFee.mVisa.fixed.$error"
-                          v-model.trim="merchant.SharingDiscountFee.mVisa.fixed"
+                          v-model="merchant.SharingDiscountFee.mVisa.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -2122,7 +2122,7 @@
                           class="percentage"
                           @blur="$v.merchant.SharingDiscountFee.mVisa.percentage.$touch"
                           :error="$v.merchant.SharingDiscountFee.mVisa.percentage.$error"
-                          v-model.trim="merchant.SharingDiscountFee.mVisa.percentage"
+                          v-model="merchant.SharingDiscountFee.mVisa.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -2133,7 +2133,7 @@
                           class="minimum"
                           @blur="$v.merchant.SharingDiscountFee.mVisa.minimum.$touch"
                           :error="$v.merchant.SharingDiscountFee.mVisa.minimum.$error"
-                          v-model.trim="merchant.SharingDiscountFee.mVisa.minimum"
+                          v-model="merchant.SharingDiscountFee.mVisa.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -2153,7 +2153,7 @@
                           class="fixed"
                           @blur="$v.merchant.mdrPlan.masterPass.fixed.$touch"
                           :error="$v.merchant.mdrPlan.masterPass.fixed.$error"
-                          v-model.trim="merchant.mdrPlan.masterPass.fixed"
+                          v-model="merchant.mdrPlan.masterPass.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -2164,7 +2164,7 @@
                           class="percentage"
                           @blur="$v.merchant.mdrPlan.masterPass.percentage.$touch"
                           :error="$v.merchant.mdrPlan.masterPass.percentage.$error"
-                          v-model.trim="merchant.mdrPlan.masterPass.percentage"
+                          v-model="merchant.mdrPlan.masterPass.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -2175,7 +2175,7 @@
                           class="minimum"
                           @blur="$v.merchant.mdrPlan.masterPass.minimum.$touch"
                           :error="$v.merchant.mdrPlan.masterPass.minimum.$error"
-                          v-model.trim="merchant.mdrPlan.masterPass.minimum"
+                          v-model="merchant.mdrPlan.masterPass.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -2190,7 +2190,7 @@
                           class="fixed"
                           @blur="$v.merchant.SharingDiscountFee.masterPass.fixed.$touch"
                           :error="$v.merchant.SharingDiscountFee.masterPass.fixed.$error"
-                          v-model.trim="merchant.SharingDiscountFee.masterPass.fixed"
+                          v-model="merchant.SharingDiscountFee.masterPass.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -2201,7 +2201,7 @@
                           class="percentage"
                           @blur="$v.merchant.SharingDiscountFee.masterPass.percentage.$touch"
                           :error="$v.merchant.SharingDiscountFee.masterPass.percentage.$error"
-                          v-model.trim="merchant.SharingDiscountFee.masterPass.percentage"
+                          v-model="merchant.SharingDiscountFee.masterPass.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -2212,7 +2212,7 @@
                           class="minimum"
                           @blur="$v.merchant.SharingDiscountFee.masterPass.minimum.$touch"
                           :error="$v.merchant.SharingDiscountFee.masterPass.minimum.$error"
-                          v-model.trim="merchant.SharingDiscountFee.masterPass.minimum"
+                          v-model="merchant.SharingDiscountFee.masterPass.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -2232,7 +2232,7 @@
                           class="fixed"
                           @blur="$v.merchant.mdrPlan.cashAtPos.fixed.$touch"
                           :error="$v.merchant.mdrPlan.cashAtPos.fixed.$error"
-                          v-model.trim="merchant.mdrPlan.cashAtPos.fixed"
+                          v-model="merchant.mdrPlan.cashAtPos.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -2243,7 +2243,7 @@
                           class="percentage"
                           @blur="$v.merchant.mdrPlan.cashAtPos.percentage.$touch"
                           :error="$v.merchant.mdrPlan.cashAtPos.percentage.$error"
-                          v-model.trim="merchant.mdrPlan.cashAtPos.percentage"
+                          v-model="merchant.mdrPlan.cashAtPos.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -2254,7 +2254,7 @@
                           class="minimum"
                           @blur="$v.merchant.mdrPlan.cashAtPos.minimum.$touch"
                           :error="$v.merchant.mdrPlan.cashAtPos.minimum.$error"
-                          v-model.trim="merchant.mdrPlan.cashAtPos.minimum"
+                          v-model="merchant.mdrPlan.cashAtPos.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -2269,7 +2269,7 @@
                           class="fixed"
                           @blur="$v.merchant.SharingDiscountFee.cashAtPos.fixed.$touch"
                           :error="$v.merchant.SharingDiscountFee.cashAtPos.fixed.$error"
-                          v-model.trim="merchant.SharingDiscountFee.cashAtPos.fixed"
+                          v-model="merchant.SharingDiscountFee.cashAtPos.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -2280,7 +2280,7 @@
                           class="percentage"
                           @blur="$v.merchant.SharingDiscountFee.cashAtPos.percentage.$touch"
                           :error="$v.merchant.SharingDiscountFee.cashAtPos.percentage.$error"
-                          v-model.trim="merchant.SharingDiscountFee.cashAtPos.percentage"
+                          v-model="merchant.SharingDiscountFee.cashAtPos.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -2291,7 +2291,7 @@
                           class="minimum"
                           @blur="$v.merchant.SharingDiscountFee.cashAtPos.minimum.$touch"
                           :error="$v.merchant.SharingDiscountFee.cashAtPos.minimum.$error"
-                          v-model.trim="merchant.SharingDiscountFee.cashAtPos.minimum"
+                          v-model="merchant.SharingDiscountFee.cashAtPos.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -2344,7 +2344,7 @@
                   class="ifsc"
                   :error="$v.merchant.bankInformation.bankDetails.ifsc.$error"
                   @blur="populateBankDetails"
-                  v-model.trim="merchant.bankInformation.bankDetails.ifsc"
+                  v-model="merchant.bankInformation.bankDetails.ifsc"
                   label="IFSC Code*"
                   placeholder="Enter IFSC*"
                 />
@@ -2355,7 +2355,7 @@
                   color="grey-9"
                   @blur="$v.merchant.bankInformation.bankDetails.branchName.$touch"
                   :error="$v.merchant.bankInformation.bankDetails.branchName.$error"
-                  v-model.trim="merchant.bankInformation.bankDetails.branchName"
+                  v-model="merchant.bankInformation.bankDetails.branchName"
                   label="Branch Name*"
                   placeholder="Branch Name* "
                 />
@@ -2365,7 +2365,7 @@
                   placeholder="Choose from the below"
                   color="grey-9"
                   class="feeType"
-                  v-model.trim="merchant.bankInformation.bankDetails.feeType"
+                  v-model="merchant.bankInformation.bankDetails.feeType"
                   label="Fee Type"
                   :options="feeTypeOptions"
                   @update:model-value="merchant.bankInformation.bankDetails.settlementOrNeftFee = ''"
@@ -2380,7 +2380,7 @@
                   class="settlementOrNeftFee"
                   @blur="$v.merchant.bankInformation.bankDetails.settlementOrNeftFee.$touch"
                   :error="$v.merchant.bankInformation.bankDetails.settlementOrNeftFee.$error"
-                  v-model.trim="merchant.bankInformation.bankDetails.settlementOrNeftFee"
+                  v-model="merchant.bankInformation.bankDetails.settlementOrNeftFee"
                   label="NEFT/Settlement Fee Inclusive of Tax*"
                   placeholder="NEFT/Settlement Fee Inclusive of Tax*"
                 />
@@ -2391,7 +2391,7 @@
                   class="micr"
                   @blur="$v.merchant.bankInformation.bankDetails.micr.$touch"
                   :error="$v.merchant.bankInformation.bankDetails.micr.$error"
-                  v-model.trim="merchant.bankInformation.bankDetails.micr"
+                  v-model="merchant.bankInformation.bankDetails.micr"
                   label="MICR*"
                   placeholder="MICR*"
                 />
@@ -2402,7 +2402,7 @@
                   class="bankName"
                   @blur="$v.merchant.bankInformation.bankDetails.bankName.$touch"
                   :error="$v.merchant.bankInformation.bankDetails.bankName.$error"
-                  v-model.trim="merchant.bankInformation.bankDetails.bankName"
+                  v-model="merchant.bankInformation.bankDetails.bankName"
                   label="Bank Name*"
                   placeholder="Bank Name*"
                 />
@@ -2412,7 +2412,7 @@
                   class="paymentMode"
                   placeholder="Choose from the below"
                   color="grey-9"
-                  v-model.trim="merchant.bankInformation.bankDetails.paymentMode"
+                  v-model="merchant.bankInformation.bankDetails.paymentMode"
                   label="Payment mode"
                   :options="paymnentModeOptions"
                 />
@@ -2423,7 +2423,7 @@
                   class="bankCityRefCode"
                   @blur="$v.merchant.bankInformation.bankDetails.bankCityRefCode.$touch"
                   :error="autoCompleteError($v.merchant.bankInformation.bankDetails.bankCityName,$v.merchant.bankInformation.bankDetails.bankCityRefCode)"
-                  v-model.trim="merchant.bankInformation.bankDetails.bankCityName"
+                  v-model="merchant.bankInformation.bankDetails.bankCityName"
                   label="City (type min 3 characters)*"
                   placeholder="Start typing ..*"
                 >
@@ -2442,7 +2442,7 @@
                   class="bankStateRefCode"
                   @blur="$v.merchant.bankInformation.bankDetails.bankStateRefCode.$touch"
                   :error="autoCompleteError($v.merchant.bankInformation.bankDetails.bankStateName,$v.merchant.bankInformation.bankDetails.bankStateRefCode)"
-                  v-model.trim="merchant.bankInformation.bankDetails.bankStateName"
+                  v-model="merchant.bankInformation.bankDetails.bankStateName"
                   label="State (type min 3 characters)*"
                   placeholder="Start typing ..*"
                 >
@@ -2460,7 +2460,7 @@
                   class="accountType"
                   placeholder="Choose from the below"
                   color="grey-9"
-                  v-model.trim="merchant.bankInformation.bankDetails.accountType"
+                  v-model="merchant.bankInformation.bankDetails.accountType"
                   label="Account Type"
                   :options="accountTypeOptions"
                 />
@@ -2471,7 +2471,7 @@
                   class="accountNumber"
                   @blur="$v.merchant.bankInformation.bankDetails.accountNumber.$touch"
                   :error="$v.merchant.bankInformation.bankDetails.accountNumber.$error"
-                  v-model.trim="merchant.bankInformation.bankDetails.accountNumber"
+                  v-model="merchant.bankInformation.bankDetails.accountNumber"
                   label="Bank A/c Number*"
                   placeholder="Bank A/c Number*"
                 />
@@ -2482,14 +2482,14 @@
                     color="grey-9"
                     true-value="Y"
                     false-value="N"
-                    v-model.trim="merchant.bankInformation.bankDetails.bankStatementAttached"
+                    v-model="merchant.bankInformation.bankDetails.bankStatementAttached"
                     label="Bank Statement Attached"
                   />
                   <q-checkbox
                     color="grey-9"
                     true-value="Y"
                     false-value="N"
-                    v-model.trim="merchant.bankInformation.bankDetails.cancelChequeAttached"
+                    v-model="merchant.bankInformation.bankDetails.cancelChequeAttached"
                     label="Cancelled Cheque Lead Attached"
                   />
                 </div>
@@ -2507,7 +2507,7 @@
                       color="grey-9"
                       @blur="$v.merchant.bankInformation.collectionDetails.chequeNumber.$touch"
                       :error="$v.merchant.bankInformation.collectionDetails.chequeNumber.$error"
-                      v-model.trim="merchant.bankInformation.collectionDetails.chequeNumber"
+                      v-model="merchant.bankInformation.collectionDetails.chequeNumber"
                       label="Cheque/UTR No*"
                       placeholder="Cheque/UTR No*"
                     />
@@ -2522,7 +2522,7 @@
                       class="swipeAmount"
                       @blur="$v.merchant.bankInformation.collectionDetails.swipeAmount.$touch"
                       :error="$v.merchant.bankInformation.collectionDetails.swipeAmount.$error"
-                      v-model.trim="merchant.bankInformation.collectionDetails.swipeAmount"
+                      v-model="merchant.bankInformation.collectionDetails.swipeAmount"
                       label="Swipe Amount*"
                       placeholder="Swipe Amount*"
                     />
@@ -2536,7 +2536,7 @@
                       class="collectedDate"
                       @blur="$v.merchant.bankInformation.collectionDetails.collectedDate.$touch"
                       :error="$v.merchant.bankInformation.collectionDetails.collectedDate.$error"
-                      v-model.trim="merchant.bankInformation.collectionDetails.collectedDate"
+                      v-model="merchant.bankInformation.collectionDetails.collectedDate"
                       label="Swipe Date*"
                       placeholder="Swipe Date*"
                     />
@@ -2547,7 +2547,7 @@
                       class="swipeTerminal"
                       @blur="$v.merchant.bankInformation.collectionDetails.swipeTerminal.$touch"
                       :error="$v.merchant.bankInformation.collectionDetails.swipeTerminal.$error"
-                      v-model.trim="merchant.bankInformation.collectionDetails.swipeTerminal"
+                      v-model="merchant.bankInformation.collectionDetails.swipeTerminal"
                       label="Swiped on the terminal of*"
                       placeholder="Swiped on the terminal of*"
                     />
@@ -2562,7 +2562,7 @@
                       class="chequeAmount"
                       @blur="$v.merchant.bankInformation.collectionDetails.chequeAmount.$touch"
                       :error="$v.merchant.bankInformation.collectionDetails.chequeAmount.$error"
-                      v-model.trim="merchant.bankInformation.collectionDetails.chequeAmount"
+                      v-model="merchant.bankInformation.collectionDetails.chequeAmount"
                       label="Cheque Amount*"
                       placeholder="Cheque Amount*"
                     />
@@ -2576,7 +2576,7 @@
                       modal
                       @blur="$v.merchant.bankInformation.collectionDetails.chequeDate.$touch"
                       :error="$v.merchant.bankInformation.collectionDetails.chequeDate.$error"
-                      v-model.trim="merchant.bankInformation.collectionDetails.chequeDate"
+                      v-model="merchant.bankInformation.collectionDetails.chequeDate"
                       label="Cheque Date*"
                       placeholder="Cheque Date*"
                     />
@@ -2590,7 +2590,7 @@
                       class="chequeDepositedDate"
                       @blur="$v.merchant.bankInformation.collectionDetails.chequeDepositedDate.$touch"
                       :error="$v.merchant.bankInformation.collectionDetails.chequeDepositedDate.$error"
-                      v-model.trim="merchant.bankInformation.collectionDetails.chequeDepositedDate"
+                      v-model="merchant.bankInformation.collectionDetails.chequeDepositedDate"
                       label="Cheque Deposited Date*"
                       placeholder="Cheque Deposited Date*"
                     />
@@ -2601,7 +2601,7 @@
                       class="chequeNumber"
                       @blur="$v.merchant.bankInformation.collectionDetails.chequeNumber.$touch"
                       :error="$v.merchant.bankInformation.collectionDetails.chequeNumber.$error"
-                      v-model.trim="merchant.bankInformation.collectionDetails.chequeNumber"
+                      v-model="merchant.bankInformation.collectionDetails.chequeNumber"
                       label="Cheque/UTR No*"
                       placeholder="Cheque/UTR No*"
                     />
@@ -2614,7 +2614,7 @@
                   class="acquirerBank"
                   placeholder="Choose from the below"
                   color="grey-9"
-                  v-model.trim="merchant.bankInformation.collectionDetails.acquirerBank"
+                  v-model="merchant.bankInformation.collectionDetails.acquirerBank"
                   label="Bank Name"
                   :options="bankListSet"
                 />
@@ -2699,15 +2699,15 @@
               <div class="col-6">
                 <q-input
                   color="grey-9"
-                  v-model.trim="leadDataEntryRemarks"
+                  v-model="leadDataEntryRemarks"
                   label="Remarks"
                   placeholder="Remarks"
                 />
               </div>
               <div class="col-6">
                 <p class="q-ma-0">Hold payment?</p>
-                <q-radio color="grey-9" v-model.trim="holdPayment" :val="1" label="Yes"/>
-                <q-radio color="grey-9" v-model.trim="holdPayment" :val="0" label="No"/>
+                <q-radio color="grey-9" v-model="holdPayment" :val="1" label="Yes"/>
+                <q-radio color="grey-9" v-model="holdPayment" :val="0" label="No"/>
               </div>
             </div>
             <q-stepper-navigation>
@@ -5049,89 +5049,53 @@ export default {
               leadId: this.$route.params.id
             }).then(() => {
                 //Date formatting for MARS
-                return this.$set(
-                  this.marsSavedDataFromInternal.salesInformation,
-                  "applicationDate",
-                  this.commonDateFormat(
+                return (this.marsSavedDataFromInternal.salesInformation["applicationDate"] = this.commonDateFormat(
                     this.marsSavedDataFromInternal.salesInformation
                       .applicationDate
-                  )
-                );
+                  ));
               }).then(() => {
-                return this.$set(
-                  this.marsSavedDataFromInternal.salesInformation,
-                  "aggreementDate",
-                  this.commonDateFormat(
+                return (this.marsSavedDataFromInternal.salesInformation["aggreementDate"] = this.commonDateFormat(
                     this.marsSavedDataFromInternal.salesInformation
                       .aggreementDate
-                  )
-                );
+                  ));
               }).then(() => {
-                return this.$set(
-                  this.marsSavedDataFromInternal.salesInformation,
-                  "loanDisbursementDate",
-                  this.commonDateFormat(
+                return (this.marsSavedDataFromInternal.salesInformation["loanDisbursementDate"] = this.commonDateFormat(
                     this.marsSavedDataFromInternal.salesInformation
                       .loanDisbursementDate
-                  )
-                );
+                  ));
               }).then(() => {
-                return this.$set(
-                  this.marsSavedDataFromInternal.salesInformation,
-                  "tenureStartDate",
-                  this.commonDateFormat(
+                return (this.marsSavedDataFromInternal.salesInformation["tenureStartDate"] = this.commonDateFormat(
                     this.marsSavedDataFromInternal.salesInformation
                       .tenureStartDate
-                  )
-                );
+                  ));
               }).then(() => {
-                return this.$set(
-                  this.marsSavedDataFromInternal.companyInformation,
-                  "establishYear",
-                  this.commonDateFormat(
+                return (this.marsSavedDataFromInternal.companyInformation["establishYear"] = this.commonDateFormat(
                     this.marsSavedDataFromInternal.companyInformation
                       .establishYear
-                  )
-                );
+                  ));
               }).then(() => {
-                return this.$set(
-                  this.marsSavedDataFromInternal.bankInformation
-                    .collectionDetails,
-                  "chequeDepositedDate",
-                  this.commonDateFormat(
+                return (this.marsSavedDataFromInternal.bankInformation
+                    .collectionDetails["chequeDepositedDate"] = this.commonDateFormat(
                     this.marsSavedDataFromInternal.bankInformation
                       .collectionDetails.chequeDepositedDate
-                  )
-                );
+                  ));
               }).then(() => {
-                return this.$set(
-                  this.marsSavedDataFromInternal.bankInformation
-                    .collectionDetails,
-                  "collectedDate",
-                  this.commonDateFormat(
+                return (this.marsSavedDataFromInternal.bankInformation
+                    .collectionDetails["collectedDate"] = this.commonDateFormat(
                     this.marsSavedDataFromInternal.bankInformation
                       .collectionDetails.collectedDate
-                  )
-                );
+                  ));
               }).then(() => {
-                return this.$set(
-                  this.marsSavedDataFromInternal.bankInformation
-                    .collectionDetails,
-                  "chequeDate",
-                  this.commonDateFormat(
+                return (this.marsSavedDataFromInternal.bankInformation
+                    .collectionDetails["chequeDate"] = this.commonDateFormat(
                     this.marsSavedDataFromInternal.bankInformation
                       .collectionDetails.chequeDate
-                  )
-                );
+                  ));
               }).then(() => {
-                return this.$set(
-                  this.marsSavedDataFromInternal.businessInformation,
-                  "memberSince",
-                  this.commonDateFormat(
+                return (this.marsSavedDataFromInternal.businessInformation["memberSince"] = this.commonDateFormat(
                     this.marsSavedDataFromInternal.businessInformation
                       .memberSince
-                  )
-                );
+                  ));
               }).then(() => {
                 this.holdPayment =
                   this.marsSavedDataFromInternal.holdPayment == null
@@ -5323,80 +5287,44 @@ export default {
               .catch(error => {
                 this.merchant.companyInformation.constitutionName = this.propLeadDeatils.merchantType.merchantTypeName;
                 //Date formatting for MARS
-                this.$set(
-                  finalRequest.merchant.salesInformation,
-                  "applicationDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.salesInformation["applicationDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.salesInformation.applicationDate
-                  )
-                );
+                  );
 
-                this.$set(
-                  finalRequest.merchant.salesInformation,
-                  "aggreementDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.salesInformation["aggreementDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.salesInformation.aggreementDate
-                  )
-                );
+                  );
 
-                this.$set(
-                  finalRequest.merchant.salesInformation,
-                  "loanDisbursementDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.salesInformation["loanDisbursementDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.salesInformation.loanDisbursementDate
-                  )
-                );
+                  );
 
-                this.$set(
-                  finalRequest.merchant.salesInformation,
-                  "tenureStartDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.salesInformation["tenureStartDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.salesInformation.tenureStartDate
-                  )
-                );
+                  );
 
-                this.$set(
-                  finalRequest.merchant.companyInformation,
-                  "establishYear",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.companyInformation["establishYear"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.companyInformation.establishYear
-                  )
-                );
+                  );
 
-                this.$set(
-                  finalRequest.merchant.bankInformation.collectionDetails,
-                  "chequeDepositedDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.bankInformation.collectionDetails["chequeDepositedDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.bankInformation.collectionDetails
                       .chequeDepositedDate
-                  )
-                );
+                  );
 
-                this.$set(
-                  finalRequest.merchant.bankInformation.collectionDetails,
-                  "collectedDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.bankInformation.collectionDetails["collectedDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.bankInformation.collectionDetails
                       .collectedDate
-                  )
-                );
+                  );
 
-                this.$set(
-                  finalRequest.merchant.bankInformation.collectionDetails,
-                  "chequeDate",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.bankInformation.collectionDetails["chequeDate"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.bankInformation.collectionDetails
                       .chequeDate
-                  )
-                );
+                  );
 
-                this.$set(
-                  finalRequest.merchant.businessInformation,
-                  "memberSince",
-                  this.commonDateFormatInvalidMARSformat(
+                finalRequest.merchant.businessInformation["memberSince"] = this.commonDateFormatInvalidMARSformat(
                     finalRequest.merchant.businessInformation.memberSince
-                  )
-                );
+                  );
 
                 if (error.data.hasOwnProperty("errorDetails")) {
                   let OThis = this;
@@ -5428,7 +5356,7 @@ export default {
                       )}`;
                       let fieldErrorFound = eval(splittingErrorField);
                       fieldErrorFound.$model = "";
-                      OThis.$set(OThis.error.tab, splitted[1], true);
+                      OThis.error.tab[splitted[1]] = true;
                     }
                   });
                   this.$q.notify({

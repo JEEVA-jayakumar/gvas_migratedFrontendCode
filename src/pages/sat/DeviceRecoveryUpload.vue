@@ -53,6 +53,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import _ from "lodash";
 export default {
   name: "DeviceRecoveryUpload",
   props: ["propInventoryWithSo"],

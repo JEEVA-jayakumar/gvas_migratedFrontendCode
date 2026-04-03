@@ -121,7 +121,7 @@
 
             <q-btn
               v-if="props.row.leadStatus == $LEAD_STATUS_DATA_ENTRY_PENDING"
-              highlight
+
               push
               outline
               color="purple-9"
@@ -131,7 +131,7 @@
 
             <q-btn
               v-else-if="props.row.leadStatus == $LEAD_STATUS_SUBMITED_TO_MARS"
-              highlight
+
               push
               class="disabled"
               color="purple-9"
@@ -140,7 +140,7 @@
 
             <q-btn
               v-else-if="props.row.leadStatus == $LEAD_STATUS_SUBMIT_TO_SAT_LEAD && props.row.verifiedFinanceStatus == $VERIFIED_FINANCE_STATUS_SUCCESS"
-              highlight
+
               push
               outline
               color="purple-9"
@@ -149,7 +149,7 @@
             >Validate</q-btn>
             <q-btn
               v-else-if="props.row.leadStatus == $LEAD_STATUS_REFER_BACK"
-              highlight
+
               push
               outline
               color="amber-9"
@@ -158,7 +158,7 @@
             >Referred Back</q-btn>
             <q-btn
               v-else-if="props.row.leadStatus == $LEAD_STATUS_MARS_REFERRAL_BACK_DATA_ENTRY_PENDING"
-              highlight
+
               push
               outline
               color="amber-9"
@@ -166,7 +166,7 @@
               @click="$router.push('/sat/lead/validation/'+ props.row.leadId+'/data/entry')"
             >RB - data entry</q-btn>
 
-            <q-btn v-else class="disabled" highlight push outline color="grey-9" size="sm">Validate</q-btn>
+            <q-btn v-else class="disabled" push outline color="grey-9" size="sm">Validate</q-btn>
 
           </q-td>
           </template>
@@ -175,7 +175,7 @@
 
              <q-btn
               v-if="props.row.leadStatus == $LEAD_STATUS_SUBMIT_TO_SAT_LEAD  "
-             highlight
+
                   push
                   outline
                   class="q-mx-sm"

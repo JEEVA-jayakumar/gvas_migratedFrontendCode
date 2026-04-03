@@ -233,7 +233,7 @@
               class="btn1"
               v-if="(props.row.leadStatus == 4 && props.row.referbackStatus == false)"
               :disabled="props.row.verifiedFinanceStatus != 1"
-              highlight
+
               push
               color="purple-9"
               size="sm"
@@ -243,7 +243,7 @@
             <q-btn
               class="btn3"
               v-if="(props.row.leadStatus == 4 && props.row.referbackStatus == true)"
-              highlight
+
               push
               outline
               color="blue"
@@ -254,7 +254,7 @@
             <q-btn
               class="btn3"
               v-if="props.row.leadStatus == 9"
-              highlight
+
               push
               outline
               color="green"
@@ -266,7 +266,7 @@
               class="btn2"
               disable
               v-else-if="props.row.leadStatus == 6"
-              highlight
+
               push
               color="red"
               size="sm"
@@ -275,7 +275,7 @@
             <q-btn
               v-else-if="props.row.leadStatus == 7"
               disable
-              highlight
+
               push
               color="green"
               size="sm"
@@ -284,7 +284,7 @@
             <q-btn
               class="btn3"
               v-else-if="props.row.leadStatus == 8"
-              highlight
+
               push
               outline
               color="amber"

@@ -53,7 +53,7 @@
           <q-card-actions align="center">
             <q-btn
               :disabled="!formData.so"
-              highlight
+
               push
               class="q-mx-sm"
               label="Assign"
@@ -62,7 +62,7 @@
               color="blue"
             />
             <q-btn
-              highlight
+
               push
               label="Close"
               style="width: 90px"

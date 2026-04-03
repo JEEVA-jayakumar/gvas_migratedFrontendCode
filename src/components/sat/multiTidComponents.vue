@@ -85,12 +85,12 @@
             <q-td :props="props">
 
                                         <!-- v-if="props.row.upiEnabled != true" -->
-                                        <q-btn   highlight push class="q-mx-sm" color="positive" size="sm"
+                                        <q-btn   push class="q-mx-sm" color="positive" size="sm"
                                             @click="finalFormSubmit(props.row)" :disabled="props.row.submittedToMars">
                                             Submit
                                             To Mars </q-btn>
                                             <!-- <div v-if="props.row.upiEnabled == true">
-                                            <q-btn class="q-mx-sm" highlight push  color="teal" size="sm" :disabled="props.row.tid == null || props.row.mid == null " 
+                                            <q-btn class="q-mx-sm" push  color="teal" size="sm" :disabled="props.row.tid == null || props.row.mid == null "
                                             @click="additionalTid(listAllSubTidDetails)"> Additional Tid
                                             </q-btn>
                                            </div> -->
@@ -817,88 +817,58 @@ export default {
         //                 })
         //                 .catch(error => {
         //                     this.merchant.companyInformation.constitutionName = this.propLeadDeatils.merchantType.merchantTypeName;
-        //                     this.$set(
-        //                         finalRequest.merchant.salesInformation,
-        //                         "applicationDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.salesInformation[//                         "applicationDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.salesInformation.applicationDate
         //                         )
-        //                     );
+        //;
 
-        //                     this.$set(
-        //                         finalRequest.merchant.salesInformation,
-        //                         "aggreementDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.salesInformation[//                         "aggreementDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.salesInformation.aggreementDate
         //                         )
-        //                     );
+        //;
 
-        //                     this.$set(
-        //                         finalRequest.merchant.salesInformation,
-        //                         "loanDisbursementDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.salesInformation[//                         "loanDisbursementDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.salesInformation.loanDisbursementDate
         //                         )
-        //                     );
+        //;
 
-        //                     this.$set(
-        //                         finalRequest.merchant.salesInformation,
-        //                         "tenureStartDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.salesInformation[//                         "tenureStartDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.salesInformation.tenureStartDate
         //                         )
-        //                     );
+        //;
 
-        //                     this.$set(
-        //                         finalRequest.merchant.companyInformation,
-        //                         "establishYear",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.companyInformation[//                         "establishYear"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.companyInformation.establishYear
         //                         )
-        //                     );
+        //;
 
-        //                     this.$set(
-        //                         finalRequest.merchant.bankInformation.collectionDetails,
-        //                         "chequeDepositedDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.bankInformation.collectionDetails[//                         "chequeDepositedDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.bankInformation.collectionDetails
         //                                 .chequeDepositedDate
         //                         )
-        //                     );
+        //;
 
-        //                     this.$set(
-        //                         finalRequest.merchant.bankInformation.collectionDetails,
-        //                         "collectedDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.bankInformation.collectionDetails[//                         "collectedDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.bankInformation.collectionDetails
         //                                 .collectedDate
         //                         )
-        //                     );
+        //;
 
-        //                     this.$set(
-        //                         finalRequest.merchant.bankInformation.collectionDetails,
-        //                         "chequeDate",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.bankInformation.collectionDetails[//                         "chequeDate"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.bankInformation.collectionDetails
         //                                 .chequeDate
         //                         )
-        //                     );
+        //;
 
 
-        //                     this.$set(
-        //                         finalRequest.merchant.businessInformation,
-        //                         "memberSince",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //                     //                         finalRequest.merchant.businessInformation[//                         "memberSince"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.businessInformation.memberSince
         //                         )
-        //                     );
-        //                     this.$set(
-        //                         finalRequest.merchant.businessInformation,
-        //                         "lastTurnoverYear",
-        //                         this.commonDateFormatInvalidMARSformat(
+        //;
+        //                     //                         finalRequest.merchant.businessInformation[//                         "lastTurnoverYear"] = //                         this.commonDateFormatInvalidMARSformat(
         //                             finalRequest.merchant.businessInformation.lastTurnoverYear
         //                         )
-        //                     );
+        //;
 
         //                     if (error.data.hasOwnProperty("errorDetails")) {
         //                         let OThis = this;
@@ -929,7 +899,7 @@ export default {
         //                                 )}`;
         //                                 let fieldErrorFound = eval(splittingErrorField);
         //                                 fieldErrorFound.$model = "";
-        //                                 OThis.$set(OThis.error.tab, splitted[1], true);
+        //                                 OThis.error.tab[splitted[1]] = true;
 
         //                                 let generateErrorMessage = eval(
         //                                     `OThis.error.field.${splitted.join(".")}`

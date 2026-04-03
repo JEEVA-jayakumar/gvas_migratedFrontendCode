@@ -110,17 +110,17 @@
                             :options="selectBankEnableOptions" />
                         </div>
                         <div v-if="selectedVas.includes('AMEX')" class="col-md-6">
-                          <q-input v-model.trim="formData.ownerFirstName" @blur="$v.formData.ownerFirstName.$touch"
+                          <q-input v-model="formData.ownerFirstName" @blur="$v.formData.ownerFirstName.$touch"
                             :error="$v.formData.ownerFirstName.$error" class="text-weight-regular text-grey-8"
                             color="grey-9" label="Owner 1 First Name*" placeholder="Owner 1 First Name*" />
                         </div>
                         <div v-if="selectedVas.includes('AMEX')" class="col-md-6">
-                          <q-input v-model.trim="formData.ownerLastName" @blur="$v.formData.ownerLastName.$touch"
+                          <q-input v-model="formData.ownerLastName" @blur="$v.formData.ownerLastName.$touch"
                             :error="$v.formData.ownerLastName.$error" class="text-weight-regular text-grey-8"
                             color="grey-9" label="Owner 1 Last Name*" placeholder="Owner 1 Last Name*" />
                         </div>
                         <div v-if="selectedVas.includes('AMEX')" class="col-md-6">
-                          <q-input type="date" v-model.trim="formData.ownerDOB" @blur="$v.formData.ownerDOB.$touch"
+                          <q-input type="date" v-model="formData.ownerDOB" @blur="$v.formData.ownerDOB.$touch"
                             :error="$v.formData.ownerDOB.$error" class="text-weight-regular text-grey-8" color="grey-9"
                             label="Owner 1 DOB*" placeholder="Owner 1 DOB*" />
                         </div>
