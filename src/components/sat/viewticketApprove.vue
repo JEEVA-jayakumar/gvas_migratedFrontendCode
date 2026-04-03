@@ -18,7 +18,7 @@
               disable
               class="no-margin"
               label="TID"
-              v-model.trim="formData.tid"
+              v-model="formData.tid"
             />
           </div>
           <div class="col-md-12">
@@ -26,7 +26,7 @@
               disable
               class="no-margin"
               label="TICKET ID"
-              v-model.trim="formData.ticketid"
+              v-model="formData.ticketid"
             />
           </div>
 

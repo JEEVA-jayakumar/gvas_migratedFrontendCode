@@ -24,27 +24,27 @@
                     <div class="q-pa-md">
                       <div class="row q-col-gutter-sm q-py-sm">
                         <div class="col-md-6">
-                          <q-input color="grey-9" disable v-model.trim="additionalTerminal.mid" label="MID*" />
+                          <q-input color="grey-9" disable v-model="additionalTerminal.mid" label="MID*" />
                         </div>
                         <div class="col-md-6">
-                          <q-input color="grey-9" disable v-model.trim="additionalTerminal.tid" label="TID*" />
+                          <q-input color="grey-9" disable v-model="additionalTerminal.tid" label="TID*" />
                         </div>
                         <div class="col-md-6">
-                          <q-input color="grey-9" disable v-model.trim="additionalTerminal.institutionCode"
+                          <q-input color="grey-9" disable v-model="additionalTerminal.institutionCode"
                             label="Institution code*" />
                         </div>
                         <div class="col-md-6">
                           <q-input color="grey-9" :disable="!!this.propRowDetails.leadInformation?.merchantRefCode"
-                            v-model.trim="additionalTerminal.merchantRefCode"
+                            v-model="additionalTerminal.merchantRefCode"
                             :error="$v.additionalTerminal.merchantRefCode.$error"
                             label="Merchant RefCode*" />
                         </div>
                         <div class="col-md-6">
-                          <q-input color="grey-9" disable v-model.trim="additionalTerminal.applicationNumber"
+                          <q-input color="grey-9" disable v-model="additionalTerminal.applicationNumber"
                             label="Application Number*" />
                         </div>
                         <div class="col-md-6">
-                          <q-input v-model.trim="
+                          <q-input v-model="
                             additionalTerminal.AdditionalTerminalDetails
                               .numberOfTerminals
                           " @blur="
@@ -57,14 +57,14 @@
                             placeholder="Number Of Terminals" />
                         </div>
                         <div class="col-md-6">
-                          <q-input color="grey-9" disable v-model.trim="
+                          <q-input color="grey-9" disable v-model="
                             additionalTerminal.AdditionalTerminalDetails
                               .address
                           " label="Address*" />
                         </div>
 
                         <div class="col-md-6">
-                          <q-input color="grey-9" disable v-model.trim="
+                          <q-input color="grey-9" disable v-model="
                             additionalTerminal.AdditionalTerminalDetails
                               .pinCode
                           " label="Pincode*" />

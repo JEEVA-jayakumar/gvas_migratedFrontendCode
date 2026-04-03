@@ -32,7 +32,7 @@
                 v-for="(item, index) in requestOptions"
                 :key="index"
                 color="grey-9"
-                v-model.trim="formData.requestMode"
+                v-model="formData.requestMode"
                 :val="item.value"
                 :label="item.label"
               />
@@ -44,7 +44,7 @@
             class="col-md-2 col-sm-6 col-xs-6"
           >
             <q-input
-              v-model.trim="formData.podNumber"
+              v-model="formData.podNumber"
               class="text-weight-regular text-grey-8"
               color="grey-9"
               label="Enter Pod Number*"
@@ -306,7 +306,7 @@
             <template v-slot:body-cell-action="props">
               <q-td :props="props">
                 <q-btn
-                  highlight
+
                   push
                   outline
                   class="q-mx-sm"
@@ -316,7 +316,7 @@
                   >Approve</q-btn
                 >
                 <q-btn
-                  highlight
+
                   push
                   outline
                   class="q-mx-sm"
@@ -420,7 +420,7 @@
             <template v-slot:body-cell-action="props">
               <q-td :props="props">
                 <q-btn
-                  highlight
+
                   push
                   outline
                   class="q-mx-sm"
@@ -430,7 +430,7 @@
                   >Approve</q-btn
                 >
                 <q-btn
-                  highlight
+
                   push
                   outline
                   class="q-mx-sm"

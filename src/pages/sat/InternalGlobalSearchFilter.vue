@@ -28,25 +28,27 @@
             v-model="formData.select"
             separator
             :options="dropDown"
+            emit-value
+            map-options
           />
         </div>
         <div class="col-md-3">
-          <div class="group" v-if="this.formData.select == '1'">
+          <div class="group" v-if="formData.select == '1'">
             <q-radio
               v-for="(item, index) in flagOptions"
               :key="index"
               color="grey-9"
-              v-model.trim="formData.flag"
+              v-model="formData.flag"
               :val="item.value"
               :label="item.label"
             />
           </div>
-          <div class="group" v-if="this.formData.select == '2'">
+          <div class="group" v-if="formData.select == '2'">
             <q-radio
               v-for="(item, index) in flagOptions1"
               :key="index"
               color="grey-9"
-              v-model.trim="formData.flag"
+              v-model="formData.flag"
               :val="item.value"
               :label="item.label"
             />
@@ -933,13 +935,13 @@ export default {
   },
 
   methods: {
-    ...mapActions("globalSearchSerialNumber", ["FETCH_GLOBAL_SEARCH_DATAS"]),
+    ...mapActions("globalSearchSerialNumber", ["FETCH_GLOBAL_SEARCH_DATAS", "FETCH_PHONE_PE_GLOBAL_SEARCH_DATAS"]),
     getFlagKeyByValue(object, value) {
       if (object.value === value) {
         return object.label;
       }
     },
-    globalSearchSubmit({ pagination }) {
+    globalSearchSubmit() {
       this.$v.formData.$touch();
       console.log("formData",this.formData)
       if (this.$v.formData.$error) {
@@ -970,7 +972,6 @@ export default {
             this.FETCH_GLOBAL_SEARCH_DATAS(params)
               .then((res) => {
                 // updating pagination to reflect in the UI
-                this.paginationControl = params.pagination;
                 let sort = this.flagOptions.filter((sFlag) =>
                   this.getFlagKeyByValue(sFlag, this.formData.flag)
                 );
@@ -1021,7 +1022,6 @@ export default {
             };
             this.FETCH_GLOBAL_SEARCH_DATAS(params)
               .then((res) => {
-                this.paginationControl = params.pagination;
                 let sort = this.flagOptions1.filter((sFlag) =>
                   this.getFlagKeyByValue(sFlag, this.formData.flag)
                 );

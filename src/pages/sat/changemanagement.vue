@@ -42,7 +42,7 @@
           <q-td :props="props">
             <q-btn
               v-if="props.row.leadInformation.cmsLeadStatus== 22 || props.row.leadInformation.cmsLeadStatus==15 || props.row.leadInformation.cmsLeadStatus==25 "
-              highlight
+
               push
               outline
               color="purple-9"
@@ -51,7 +51,7 @@
             >Data Entry</q-btn>
             <q-btn
               v-else-if="props.row.leadInformation.cmsLeadStatus== 21"
-              highlight
+
               push
               outline
               color="purple-9"
@@ -60,7 +60,7 @@
             >Data Entry</q-btn>
             <q-btn
               v-else-if="props.row.leadInformation.cmsLeadStatus== 17"
-              highlight
+
               push
               outline
               color="purple-9"
@@ -69,7 +69,7 @@
             >Data Entry</q-btn>
             <q-btn
               v-else-if="props.row.leadInformation.cmsLeadStatus== 19"
-              highlight
+
               push
               outline
               color="purple-9"
@@ -79,7 +79,7 @@
             <q-btn
               disable
               v-else-if="props.row.leadInformation.cmsLeadStatus== 23"
-              highlight
+
               push
               color="purple-9"
               size="sm"
@@ -88,7 +88,7 @@
             <q-btn
               disabled
               v-else
-              highlight
+
               outline
               push
               color="purple-9"
@@ -130,7 +130,7 @@
           <q-td :props="props">{{ props.row.deviceStatus != 6 ? "NA" : props.row.tid }}</q-td>
         </template>
         <template v-slot:body-cell-action="props">
-          <q-btn highlight
+          <q-btn
             push
             outline
             color="purple-9"

@@ -306,7 +306,7 @@
                 </q-td>
                 <q-td key="action" :props="props" align="center">
                   <q-btn
-                    highlight
+
                     push
                     class="q-mx-sm"
                     color="positive"

@@ -290,7 +290,7 @@
           <template v-slot:body-cell-action="props">
             <q-td :props="props">
               <q-btn
-                highlight
+
                 push
                 class="q-mx-sm"
                 color="positive"

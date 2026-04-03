@@ -33,7 +33,7 @@
             </div>
             <q-btn
               square
-              highlight
+
               push
               class="remarksbtn"
               color="purple-9"

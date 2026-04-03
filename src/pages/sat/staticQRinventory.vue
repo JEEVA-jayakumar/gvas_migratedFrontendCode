@@ -93,7 +93,7 @@
                 <strong>Enter no of QR </strong>
               </div>
               <div class="col-md-3">
-                <q-input type="number" min="1" :disable="!formData.soList" oninput="this.value = Math.abs(this.value)"  :error="$v.formData.count.$error"  label="Enter no of QR" v-model.trim="formData.count" color="grey-9" />
+                <q-input type="number" min="1" :disable="!formData.soList" oninput="this.value = Math.abs(this.value)"  :error="$v.formData.count.$error"  label="Enter no of QR" v-model="formData.count" color="grey-9" />
               </div>
             </div>
 
@@ -102,7 +102,7 @@
                 <strong>Enter POD</strong>
               </div>
               <div class="col-md-3">
-                <q-input disable label="Enter POD" :error="$v.formData.podNumber.$error" v-model.trim="formData.podNumber" color="grey-9" />
+                <q-input disable label="Enter POD" :error="$v.formData.podNumber.$error" v-model="formData.podNumber" color="grey-9" />
               </div>
             </div>
 

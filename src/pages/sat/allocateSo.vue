@@ -149,6 +149,7 @@
 
 <script>
 import { email } from '@vuelidate/validators';
+import _ from 'lodash';
 
 // import VueBarcodeScanner from "vue-barcode-scanner";
 // Vue.use(VueBarcodeScanner);

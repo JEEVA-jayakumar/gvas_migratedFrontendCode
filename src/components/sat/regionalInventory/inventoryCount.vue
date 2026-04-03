@@ -570,7 +570,7 @@ export default {
   },
 
   created() {
-    this.getAllRegionalInventoryDeviceDetailsWithCount();
+    // this.getAllRegionalInventoryDeviceDetailsWithCount;
   },
   methods: {
     ...mapActions("SAT_RegionalInventoryAllocation", [

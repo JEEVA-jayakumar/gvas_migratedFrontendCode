@@ -28,7 +28,7 @@
                 class="no-margin"
                 label="Select Rental Plan"
                 :options="dropDown.planOptions"
-                  @input="fnPlan"
+                  @update:model-value="fnPlan"
          />
           
           </div>
@@ -74,7 +74,7 @@
                 
               </p>
                 <q-item>
-               <q-item-main>Upload the Cheque File  :</q-item-main>
+               <q-item-section>Upload the Cheque File  :</q-item-section>
                <label class="cursor-pointer text-white" style="background-color: #202c3f;">
              <span>Attach</span>
          <input
@@ -88,30 +88,30 @@
             </q-item>
        </div>
         <div class="col-xs-12 col-sm-6">
-            <q-datetime @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON" placeholder="Transaction Made ON"
+            <q-input type="date" @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON" placeholder="Transaction Made ON"
             />
           </div>
           <div class="col-xs-12 col-sm-6">
-          <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model.trim="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" label="Cheque Reference Number"
+          <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" label="Cheque Reference Number"
           />
           </div> </div>
         <div v-else-if="formdata.paymentOption==1" class="row gutter-sm q-my-xs">
            <div class="col-xs-12 col-sm-6">
-          <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model.trim="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" label="*NEFT Reference Number"
+          <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" label="*NEFT Reference Number"
           />
           </div>
           <div class="col-xs-12 col-sm-6">
-            <q-datetime @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON" placeholder="Transaction Made ON"
+            <q-input type="date" @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON" placeholder="Transaction Made ON"
             />
           </div>
           </div>
         <div v-else-if="formdata.paymentOption==3" class="row gutter-sm q-my-xs">
           <div class="col-xs-12 col-sm-6">
-          <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model.trim="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Reference Number"
+          <q-input @blur="$v.formdata.referenceNumber.$touch" :error="$v.formdata.referenceNumber.$error" v-model="formdata.referenceNumber" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Reference Number"
           />
           </div>
           <div class="col-xs-12 col-sm-6">
-            <q-datetime @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model.trim="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON" placeholder="Transaction Made ON"
+            <q-input type="date" @blur="$v.formdata.paymentMadeon.$touch" :error="$v.formdata.paymentMadeon.$error" v-model="formdata.paymentMadeon" class="text-weight-regular text-grey-8" color="grey-9" label="*Transaction Made ON" placeholder="Transaction Made ON"
             />
           </div>
            </div> <br />
@@ -255,7 +255,7 @@
                   upper-case
                   color="grey-9"
                   @blur="populateBankDetails"
-                  v-model.trim="merchant.bankInformation.bankDetails.ifsc"
+                  v-model="merchant.bankInformation.bankDetails.ifsc"
                   label="IFSC Code*"
                   placeholder="Enter IFSC*"
                 />
@@ -265,7 +265,7 @@
                   upper-case
                   color="grey-9"
                  
-                  v-model.trim="merchant.bankInformation.bankDetails.bankName"
+                  v-model="merchant.bankInformation.bankDetails.bankName"
                   label="Bank Name*"
                   placeholder="Enter IFSC*"
                 />
@@ -274,7 +274,7 @@
                 <q-select
                   placeholder="Choose from the below"
                   color="grey-9"
-                  v-model.trim="merchant.bankInformation.bankDetails.paymentMode"
+                  v-model="merchant.bankInformation.bankDetails.paymentMode"
                   label="Payment mode"
                   :options="paymnentModeOptions"
                 />
@@ -283,7 +283,7 @@
                 <q-select
                   placeholder="Choose from the below"
                   color="grey-9"
-                  v-model.trim="merchant.bankInformation.bankDetails.accountType"
+                  v-model="merchant.bankInformation.bankDetails.accountType"
                   label="Account Type"
                   :options="accountTypeOptions"
                 />
@@ -305,7 +305,7 @@
                   @filter="residentCitySearch"
                   @update:model-value="registeredCitySelected"
                   color="grey-9"
-                  v-model.trim="merchant.companyinformation.registeredCityName"
+                  v-model="merchant.companyinformation.registeredCityName"
                   label="City (type min 3 characters)*"
                   placeholder="Start typing ..*"
                   :options="cityOptions"
@@ -319,7 +319,7 @@
                   @filter="residentStateSearch"
                   @update:model-value="registeredStateSelected"
                    color="grey-9"
-                  v-model.trim="merchant.companyinformation.registeredStateName"
+                  v-model="merchant.companyinformation.registeredStateName"
                   label="state (type min 3 characters)*"
                   placeholder="Start typing ..*"
                   :options="stateOptions"
@@ -346,7 +346,7 @@
                 v-for="(item,index) in autoormanualOptions"
                 :key="index"
                 color="grey-9"
-                v-model.trim="merchant.paymentDetails.settlementType"
+                v-model="merchant.paymentDetails.settlementType"
                 :val="item.value"
                 :label="item.label"
               />
@@ -362,7 +362,7 @@
                 v-for="(item,index) in preauthOptions"
                 :key="index"
                 color="grey-9"
-                v-model.trim="merchant.paymentDetails.preAuth"
+                v-model="merchant.paymentDetails.preAuth"
                 :val="item.value"
                 :label="item.label"
               />
@@ -375,7 +375,7 @@
                 v-for="(item,index) in cashandposOptions"
                 :key="index"
                 color="grey-9"
-                v-model.trim="merchant.paymentDetails.cashAtPosEnabled"
+                v-model="merchant.paymentDetails.cashAtPosEnabled"
                 :val="item.value"
                 :label="item.label"
               />
@@ -388,7 +388,7 @@
                 v-for="(item,index) in internationalcardOptions"
                 :key="index"
                 color="grey-9"
-                v-model.trim="merchant.paymentDetails.intlCardAcceptance"
+                v-model="merchant.paymentDetails.intlCardAcceptance"
                 :val="item.value"
                 :label="item.label"
               />
@@ -401,7 +401,7 @@
                 v-for="(item,index) in tipOptions"
                 :key="index"
                 color="grey-9"
-                v-model.trim="merchant.paymentDetails.tipEnabled"
+                v-model="merchant.paymentDetails.tipEnabled"
                 :val="item.value"
                 :label="item.label"
               />
@@ -479,7 +479,7 @@
                         <q-input
                           color="grey-9"
                           type="number"
-                          v-model.trim="merchant.mdrPlan.domesticDebitUpTo2000.fixed"
+                          v-model="merchant.mdrPlan.domesticDebitUpTo2000.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -488,7 +488,7 @@
                           color="grey-9"
                           type="number"
                       
-                          v-model.trim="merchant.mdrPlan.domesticDebitUpTo2000.percentage"
+                          v-model="merchant.mdrPlan.domesticDebitUpTo2000.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -496,7 +496,7 @@
                         <q-input
                           color="grey-9"
                           type="number"
-                          v-model.trim="merchant.mdrPlan.domesticDebitUpTo2000.minimum"
+                          v-model="merchant.mdrPlan.domesticDebitUpTo2000.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -513,7 +513,7 @@
                         <q-input
                           color="grey-9"
                           type="number"
-                          v-model.trim="merchant.mdrPlan.domesticDebitAbove2000.fixed"
+                          v-model="merchant.mdrPlan.domesticDebitAbove2000.fixed"
                           placeholder="Fixed"
                         />
 
@@ -522,7 +522,7 @@
                         <q-input
                           color="grey-9"
                           type="number"
-                          v-model.trim="merchant.mdrPlan.domesticDebitAbove2000.percentage"
+                          v-model="merchant.mdrPlan.domesticDebitAbove2000.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -530,7 +530,7 @@
                         <q-input
                           color="grey-9"
                           type="number"
-                          v-model.trim="merchant.mdrPlan.domesticDebitAbove2000.minimum"
+                          v-model="merchant.mdrPlan.domesticDebitAbove2000.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -547,7 +547,7 @@
                         <q-input
                           color="grey-9"
                           type="number"
-                          v-model.trim="merchant.mdrPlan.standardOrClassic.fixed"
+                          v-model="merchant.mdrPlan.standardOrClassic.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -555,7 +555,7 @@
                         <q-input
                           color="grey-9"
                           type="number"
-                         v-model.trim="merchant.mdrPlan.standardOrClassic.percentage"
+                         v-model="merchant.mdrPlan.standardOrClassic.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -564,7 +564,7 @@
                           color="grey-9"
                           type="number"
                           
-                          v-model.trim="merchant.mdrPlan.standardOrClassic.minimum"
+                          v-model="merchant.mdrPlan.standardOrClassic.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -582,7 +582,7 @@
                           color="grey-9"
                           type="number"
                          
-                          v-model.trim="merchant.mdrPlan.premiumOrPlatinum.fixed"
+                          v-model="merchant.mdrPlan.premiumOrPlatinum.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -591,7 +591,7 @@
                           color="grey-9"
                           type="number"
                           
-                          v-model.trim="merchant.mdrPlan.premiumOrPlatinum.percentage"
+                          v-model="merchant.mdrPlan.premiumOrPlatinum.percentage"
                           placeholder="%"
                         />
   
@@ -601,7 +601,7 @@
                           color="grey-9"
                           type="number"
                          
-                          v-model.trim="merchant.mdrPlan.premiumOrPlatinum.minimum"
+                          v-model="merchant.mdrPlan.premiumOrPlatinum.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -618,7 +618,7 @@
                         <q-input
                           color="grey-9"
                           type="number"
-                         v-model.trim="merchant.mdrPlan.superPremiumOrSignature.fixed"
+                         v-model="merchant.mdrPlan.superPremiumOrSignature.fixed"
                           placeholder="Fixed"
                         />
 
@@ -627,7 +627,7 @@
                         <q-input
                           color="grey-9"
                           type="number"
-                        v-model.trim="merchant.mdrPlan.superPremiumOrSignature.percentage"
+                        v-model="merchant.mdrPlan.superPremiumOrSignature.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -636,7 +636,7 @@
                           color="grey-9"
                           type="number"
                   
-                          v-model.trim="merchant.mdrPlan.superPremiumOrSignature.minimum"
+                          v-model="merchant.mdrPlan.superPremiumOrSignature.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -654,7 +654,7 @@
                           color="grey-9"
                           type="number"
                          
-                          v-model.trim="merchant.mdrPlan.commercialOrCorporate.fixed"
+                          v-model="merchant.mdrPlan.commercialOrCorporate.fixed"
                           placeholder="Fixed"
                         />
      
@@ -664,7 +664,7 @@
                           color="grey-9"
                           type="number"
                           
-                          v-model.trim="merchant.mdrPlan.commercialOrCorporate.percentage"
+                          v-model="merchant.mdrPlan.commercialOrCorporate.percentage"
                           placeholder="%"
                         />
 
@@ -674,7 +674,7 @@
                           color="grey-9"
                           type="number"
                           
-                          v-model.trim="merchant.mdrPlan.commercialOrCorporate.minimum"
+                          v-model="merchant.mdrPlan.commercialOrCorporate.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -693,7 +693,7 @@
                           color="grey-9"
                           type="number"
                           
-                          v-model.trim="merchant.mdrPlan.internationalDebitCard.fixed"
+                          v-model="merchant.mdrPlan.internationalDebitCard.fixed"
                           placeholder="Fixed"
                         />
  
@@ -703,7 +703,7 @@
                           color="grey-9"
                           type="number"
                           
-                          v-model.trim="merchant.mdrPlan.internationalDebitCard.percentage"
+                          v-model="merchant.mdrPlan.internationalDebitCard.percentage"
                           placeholder="%"
                         />
 
@@ -713,7 +713,7 @@
                           color="grey-9"
                           type="number"
       
-                          v-model.trim="merchant.mdrPlan.internationalDebitCard.minimum"
+                          v-model="merchant.mdrPlan.internationalDebitCard.minimum"
                           placeholder="Max"
                         />
 
@@ -732,7 +732,7 @@
                           color="grey-9"
                           type="number"
                          
-                          v-model.trim="merchant.mdrPlan.internationalCreditCard.fixed"
+                          v-model="merchant.mdrPlan.internationalCreditCard.fixed"
                           placeholder="Fixed"
                         />
 
@@ -742,7 +742,7 @@
                           color="grey-9"
                           type="number"
 
-                          v-model.trim="merchant.mdrPlan.internationalCreditCard.percentage"
+                          v-model="merchant.mdrPlan.internationalCreditCard.percentage"
                           placeholder="%"
                         />
        
@@ -752,7 +752,7 @@
                           color="grey-9"
                           type="number"
                         
-                          v-model.trim="merchant.mdrPlan.internationalCreditCard.minimum"
+                          v-model="merchant.mdrPlan.internationalCreditCard.minimum"
                           placeholder="Max"
                         />
  
@@ -772,7 +772,7 @@
                           color="grey-9"
                           type="number"
                           
-                          v-model.trim="merchant.mdrPlan.onus.fixed"
+                          v-model="merchant.mdrPlan.onus.fixed"
                           placeholder="Fixed"
                         />
 
@@ -782,7 +782,7 @@
                           color="grey-9"
                           type="number"
                           
-                          v-model.trim="merchant.mdrPlan.onus.percentage"
+                          v-model="merchant.mdrPlan.onus.percentage"
                           placeholder="%"
                         />
        
@@ -792,7 +792,7 @@
                           color="grey-9"
                           type="number"
                          
-                          v-model.trim="merchant.mdrPlan.onus.minimum"
+                          v-model="merchant.mdrPlan.onus.minimum"
                           placeholder="Max"
                         />
    
@@ -812,7 +812,7 @@
                           color="grey-9"
                           type="number"
                           
-                          v-model.trim="merchant.mdrPlan.mVisa.fixed"
+                          v-model="merchant.mdrPlan.mVisa.fixed"
                           placeholder="Fixed"
                         />
 
@@ -821,7 +821,7 @@
                         <q-input
                           color="grey-9"
                           type="number"
-                          v-model.trim="merchant.mdrPlan.mVisa.percentage"
+                          v-model="merchant.mdrPlan.mVisa.percentage"
                           placeholder="%"
                         />
 
@@ -831,7 +831,7 @@
                           color="grey-9"
                           type="number"
                          
-                          v-model.trim="merchant.mdrPlan.mVisa.minimum"
+                          v-model="merchant.mdrPlan.mVisa.minimum"
                           placeholder="Max"
                         />
 
@@ -851,7 +851,7 @@
                           color="grey-9"
                           type="number"
                          
-                          v-model.trim="merchant.mdrPlan.masterPass.fixed"
+                          v-model="merchant.mdrPlan.masterPass.fixed"
                           placeholder="Fixed"
                         />
    
@@ -861,7 +861,7 @@
                           color="grey-9"
                           type="number"
                           
-                          v-model.trim="merchant.mdrPlan.masterPass.percentage"
+                          v-model="merchant.mdrPlan.masterPass.percentage"
                           placeholder="%"
                         />
  
@@ -871,7 +871,7 @@
                           color="grey-9"
                           type="number"
                          
-                          v-model.trim="merchant.mdrPlan.masterPass.minimum"
+                          v-model="merchant.mdrPlan.masterPass.minimum"
                           placeholder="Max"
                         />
  
@@ -891,7 +891,7 @@
                           color="grey-9"
                           type="number"
                           
-                          v-model.trim="merchant.mdrPlan.cashAtPos.fixed"
+                          v-model="merchant.mdrPlan.cashAtPos.fixed"
                           placeholder="Fixed"
                         />
    
@@ -900,7 +900,7 @@
                         <q-input
                           color="grey-9"
                           type="number"
-                          v-model.trim="merchant.mdrPlan.cashAtPos.percentage"
+                          v-model="merchant.mdrPlan.cashAtPos.percentage"
                           placeholder="%"
                         />
   
@@ -910,7 +910,7 @@
                           color="grey-9"
                           type="number"
                          
-                          v-model.trim="merchant.mdrPlan.cashAtPos.minimum"
+                          v-model="merchant.mdrPlan.cashAtPos.minimum"
                           placeholder="Max"
                         />
 
@@ -931,7 +931,7 @@
                         <q-input
                           color="grey-9"
                           type="number"
-                          v-model.trim="merchant.mdrPlan.convenientFee.fixed"
+                          v-model="merchant.mdrPlan.convenientFee.fixed"
                           placeholder="Fixed"
                         />
                       </div>
@@ -939,7 +939,7 @@
                         <q-input
                           color="grey-9"
                           type="number"
-                          v-model.trim="merchant.mdrPlan.convenientFee.percentage"
+                          v-model="merchant.mdrPlan.convenientFee.percentage"
                           placeholder="%"
                         />
                       </div>
@@ -947,7 +947,7 @@
                         <q-input
                           color="grey-9"
                           type="number"
-                          v-model.trim="merchant.mdrPlan.convenientFee.minimum"
+                          v-model="merchant.mdrPlan.convenientFee.minimum"
                           placeholder="Max"
                         />
                       </div>
@@ -2643,7 +2643,7 @@ export default {
       //                 // )}`;
       //                 // let fieldErrorFound = eval(splittingErrorField);
       //                 // fieldErrorFound.$model = "";
-      //                 // OThis.$set(OThis.error.tab, splitted[1], true);
+      //                 // OThis.error.tab[splitted[1]] = true;
 
       //                 let generateErrorMessage = eval(
       //                   `OThis.error.field.${splitted.join(".")}`

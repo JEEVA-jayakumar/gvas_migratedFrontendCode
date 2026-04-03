@@ -115,13 +115,13 @@
           <!-- <div class="row gutter-x-xs gutter-y-xs justify-center"> -->
          <!-- <div class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
             <div>
-              <q-card-title>
+              <q-card-section>
                 <div class="col-lg-7 col-md-8 col-sm-12 items-center">
                   <div class="col-12 col-lg-9">
                     <div class="q-subheading text-bold">Stock Inventory (Aggregator)</div>
                   </div>
                 </div>
-              </q-card-title>
+              </q-card-section>
                <div class="row gutter-x-xs gutter-y-xs items-center justify-center q-mt-md">
             <div class="col">
               <q-card class="border-radius-10 q-pa-md" color="purple-9">
@@ -289,29 +289,34 @@
           <div class="row gutter-x-xs">
             <div class="col-lg-12">
               <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
-                <q-card-title>
+                <q-card-section>
                   <div class="q-subheading text-bold">Aging Tracker</div>
-                </q-card-title>
-                <chartSATagingTracker :options="{ responsive: false, maintainAspectRatio: false }" :height="150"
-                  class="bg-white q-pa-md round-borders"></chartSATagingTracker>
+                </q-card-section>
+                <q-card-section>
+                  <chartSATagingTracker :options="{ responsive: false, maintainAspectRatio: false }" :height="150"
+                    class="bg-white q-pa-md round-borders"></chartSATagingTracker>
+                </q-card-section>
               </q-card>
               <q-card class="q-my-md q-px-md q-py-sm bg-grey-12 round-borders">
-                <q-card-title>
+                <q-card-section>
                   <div class="row items-center">
                     <div class="col-12 col-lg-9">
                       <div class="q-subheading text-bold">Merchant Tracker</div>
                     </div>
                     <div class="col-12 col-lg-3">
                       <div class="q-subheading text-bold">
-                        <q-select inverted color="purple-9" :value="dateSelection" @change="changeMerchantTrackerData"
-                          :options="[{ label: 'Days', value: 'DAYS' }, { label: 'Week', value: 'WEEK' }, { label: 'Month', value: 'MONTH' }, { label: 'Year', value: 'YEAR' }]" />
+                        <q-select filled dark color="purple-9" v-model="dateSelection" @update:model-value="changeMerchantTrackerData"
+                          :options="[{ label: 'Days', value: 'DAYS' }, { label: 'Week', value: 'WEEK' }, { label: 'Month', value: 'MONTH' }, { label: 'Year', value: 'YEAR' }]"
+                          emit-value map-options />
                       </div>
                     </div>
                   </div>
-                </q-card-title>
-                <chartMerchantTracker v-if="renderMerchantGraph" :borderWidth="1" :height="150"
-                  :merchantTrackerData="getSatDashboardGraphData" class="bg-white q-pa-md round-borders">
-                </chartMerchantTracker>
+                </q-card-section>
+                <q-card-section>
+                  <chartMerchantTracker v-if="renderMerchantGraph" :borderWidth="1" :height="150"
+                    :merchantTrackerData="getSatDashboardGraphData" class="bg-white q-pa-md round-borders">
+                  </chartMerchantTracker>
+                </q-card-section>
               </q-card>
             </div>
           </div>
@@ -320,17 +325,16 @@
         <div class="col-lg-4">
           <div class="row gutter-x-xs gutter-y-xs items-center justify-center" style="min-height: 100px;">
             <div class="col-md-5 col-sm-12 col-xs-12 full-width">
-              <q-card class="q-pa-sm full-height bg-orange border-radius-10 vertical-middle items-center" align="center"
-                vertical>
-                <q-card-title>
+              <q-card class="q-pa-sm full-height bg-orange border-radius-10 vertical-middle items-center" align="center">
+                <q-card-section>
                   <div class="q-title text-white cursor-pointer"
                     @click="retrieveLeadsList(applicationPendingCount.totalApplicationPendingLeadIds)">
                     {{ applicationPendingCount.totalApplicationPendingCount }}</div>
-                </q-card-title>
-                <q-card-separator style="width:75px" class="bg-white" />
-                <q-card-main class="q-pa-md">
+                </q-card-section>
+                <q-separator style="width:75px" class="bg-white" />
+                <q-card-section class="q-pa-md">
                   <p class="md-q-subheading sm-q-caption text-faded text-white" align="center">Application Pending</p>
-                </q-card-main>
+                </q-card-section>
               </q-card>
             </div>
             <div class="col-md-7 col-sm-12 col-xs-12">
@@ -422,11 +426,13 @@
           <div class="row gutter-x-xs gutter-y-xs q-my-xs items-center">
             <div class="col-md-12">
               <q-card square>
-                <q-card-title>
-                  Aging Tracker -
-                  <span class="text-amber-9">Pending</span>
-                </q-card-title>
-                <q-card-main>
+                <q-card-section>
+                  <div class="q-title">
+                    Aging Tracker -
+                    <span class="text-amber-9">Pending</span>
+                  </div>
+                </q-card-section>
+                <q-card-section>
                   <div>
                     <q-table dense hide-bottom :rows="agingTrackerPendingTableData"
                       :columns="agingTrackerPendingColumns" v-model:pagination="paginationControl" row-key="name">
@@ -453,7 +459,7 @@
                       </template>
                     </q-table>
                   </div>
-                </q-card-main>
+                </q-card-section>
               </q-card>
             </div>
           </div>

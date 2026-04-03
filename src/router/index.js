@@ -37,13 +37,13 @@ Router.beforeEach((to, from, next) => {
     let isAuthorized = roles.includes(matchedName);
 
     // SAT module authorization: OH_3 role or OH role maps to SAT route
-    if (!isAuthorized && matchedName === "SAT" && (roles.includes("OH_3") || roles.includes("OH"))) {
+    if (!isAuthorized && (matchedName === "SAT" || matchedName === "OH") && (roles.includes("OH_3") || roles.includes("OH"))) {
       console.log("Authorizing SAT for " + (roles.includes("OH_3") ? "OH_3" : "OH"));
       isAuthorized = true;
     }
 
     // OPS_HEAD module authorization
-    if (!isAuthorized && matchedName === "OPS_HEAD" && roles.includes("OH")) {
+    if (!isAuthorized && (matchedName === "OPS_HEAD" || matchedName === "OH") && roles.includes("OH")) {
       isAuthorized = true;
     }
 

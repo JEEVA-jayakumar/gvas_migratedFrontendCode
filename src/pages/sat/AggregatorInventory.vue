@@ -91,6 +91,9 @@ export default {
       inventoryOptionSelected: "Aggregatorcount"
     };
   },
+  created() {
+    this.fnAjaxFetchAllDeviceDetailsWithCount();
+  },
   computed: {
     ...mapGetters("SAT_RegionalInventoryAllocation", [
       "getAllRegionalInventoryDeviceDetailsWithCount"
@@ -103,6 +106,20 @@ export default {
       "FETCH_INVENTORY_WITH_SO_DEVICE_DETAIL_WITH_COUNT"
     ]),
     ...mapActions("InventoryWithSo", ["FETCH_INVENTORY_WITH_SO"]),
+    fnAjaxFetchAllDeviceDetailsWithCount() {
+      const userInfo = JSON.parse(localStorage.getItem("u_i"));
+      if (!userInfo?.region?.id) return;
+      this.FETCH_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT(userInfo.region.id)
+        .then(() => {
+          let requestParams = {
+            region: userInfo.region.id,
+            action: this.$REGIONAL_INVENTORY_FILTER_ACTION_DEVICE
+          };
+          this.FETCH_REGIONAL_INVENTORY_SERIAL_NUMBER_BY_DEVICE(requestParams);
+        })
+        .catch(() => {
+        });
+    },
   }
 };
 </script>
