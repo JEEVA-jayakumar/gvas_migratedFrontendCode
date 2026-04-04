@@ -10,8 +10,8 @@
 
               <q-item>
                 <q-item-section>
-                  <q-input color="grey-9" v-model="formData.address" @blur="$v.formData.address.$touch"
-                    :error="$v.formData.address.$error" label="Address" />
+                  <q-input color="grey-9" v-model="formData.address" @blur="v$.formData.address.$touch"
+                    :error="v$.formData.address.$error" label="Address" />
                     
                     <div>
                     <q-btn label="Search Address" @click="fnAddress(formData)" color="purple-9" />
@@ -23,7 +23,7 @@
               <q-item>
                 <q-item-section>
                   <q-input color="grey-9" type="double" disable v-model="formData.latitude"
-                    @blur="$v.formData.latitude.$touch" :error="$v.formData.latitude.$error"
+                    @blur="v$.formData.latitude.$touch" :error="v$.formData.latitude.$error"
                     label="Enter Latitude" placeholder="Add Latitude" />
                 </q-item-section>
               </q-item>
@@ -31,7 +31,7 @@
               <q-item>
                 <q-item-section>
                   <q-input color="grey-9" type="double" disable v-model="formData.longitude"
-                    @blur="$v.formData.longitude.$touch" :error="$v.formData.longitude.$error"
+                    @blur="v$.formData.longitude.$touch" :error="v$.formData.longitude.$error"
                     label="Enter Longitude" placeholder="Add Longitude" />
                 </q-item-section>
               </q-item>
@@ -47,6 +47,8 @@
   </q-page>
 </template>
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 
 import {
   required,
@@ -64,6 +66,9 @@ import showMerchantModalComponent from "../../components/super_admin/merchantTyp
 
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   name: "MDRdetails",
   components: {
   },
@@ -204,8 +209,8 @@ export default {
     },
 
     fnsubmit(request) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify({
           color: "negative",
           position: "bottom",

@@ -3,8 +3,8 @@
     <div class="row q-col-gutter-sm">
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.companyInformation.legalName.$touch"
-          :error="$v.merchant.companyInformation.legalName.$error"
+          @blur="v$.merchant.companyInformation.legalName.$touch"
+          :error="v$.merchant.companyInformation.legalName.$error"
           color="grey-9"
           v-model="merchant.companyInformation.legalName"
           label="Legal Name*"
@@ -13,8 +13,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.companyInformation.dbaName.$touch"
-          :error="$v.merchant.companyInformation.dbaName.$error"
+          @blur="v$.merchant.companyInformation.dbaName.$touch"
+          :error="v$.merchant.companyInformation.dbaName.$error"
           color="grey-9"
           v-model="merchant.companyInformation.dbaName"
           label="DBA Name*"
@@ -23,8 +23,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.companyInformation.registeredAddress.$touch"
-          :error="$v.merchant.companyInformation.registeredAddress.$error"
+          @blur="v$.merchant.companyInformation.registeredAddress.$touch"
+          :error="v$.merchant.companyInformation.registeredAddress.$error"
           color="grey-9"
           v-model="merchant.companyInformation.registeredAddress"
           label="Registered Address*"
@@ -36,8 +36,8 @@
           use-input
           fill-input
           hide-selected
-          @blur="$v.merchant.companyInformation.registeredCityRefCode.$touch"
-          :error="$v.merchant.companyInformation.registeredCityRefCode.$anyError|| $v.merchant.companyInformation.registeredCityName.$anyError"
+          @blur="v$.merchant.companyInformation.registeredCityRefCode.$touch"
+          :error="v$.merchant.companyInformation.registeredCityRefCode.$anyError|| v$.merchant.companyInformation.registeredCityName.$anyError"
           color="grey-9"
           v-model="merchant.companyInformation.registeredCityName"
           label="Registered city (type min 3 characters)*"
@@ -52,8 +52,8 @@
           use-input
           fill-input
           hide-selected
-          @blur="$v.merchant.companyInformation.registeredStateRefCode.$touch"
-          :error="$v.merchant.companyInformation.registeredStateRefCode.$anyError|| $v.merchant.companyInformation.registeredStateName.$anyError"
+          @blur="v$.merchant.companyInformation.registeredStateRefCode.$touch"
+          :error="v$.merchant.companyInformation.registeredStateRefCode.$anyError|| v$.merchant.companyInformation.registeredStateName.$anyError"
           color="grey-9"
           v-model="merchant.companyInformation.registeredStateName"
           label="Registered state (type min 3 characters)*"
@@ -65,8 +65,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.companyInformation.registeredPin.$touch"
-          :error="$v.merchant.companyInformation.registeredPin.$error"
+          @blur="v$.merchant.companyInformation.registeredPin.$touch"
+          :error="v$.merchant.companyInformation.registeredPin.$error"
           color="grey-9"
           type="number"
           v-model="merchant.companyInformation.registeredPin"
@@ -88,8 +88,8 @@
           format-model="number"
           color="grey-9"
           modal
-          @blur="$v.merchant.companyInformation.establishYear.$touch"
-          :error="$v.merchant.companyInformation.establishYear.$error"
+          @blur="v$.merchant.companyInformation.establishYear.$touch"
+          :error="v$.merchant.companyInformation.establishYear.$error"
           v-model="merchant.companyInformation.establishYear"
           label="Year of Establishment*"
           placeholder="Year of Establishment*"
@@ -98,8 +98,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           color="grey-9"
-          @blur="$v.merchant.companyInformation.registerNumber.$touch"
-          :error="$v.merchant.companyInformation.registerNumber.$error"
+          @blur="v$.merchant.companyInformation.registerNumber.$touch"
+          :error="v$.merchant.companyInformation.registerNumber.$error"
           v-model="merchant.companyInformation.registerNumber"
           label="Establish Number"
           placeholder="Establish Number"
@@ -107,8 +107,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.companyInformation.tin.$touch"
-          :error="$v.merchant.companyInformation.tin.$error"
+          @blur="v$.merchant.companyInformation.tin.$touch"
+          :error="v$.merchant.companyInformation.tin.$error"
           color="grey-9"
           v-model="merchant.companyInformation.tin"
           label="TIN"
@@ -118,8 +118,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           upper-case
-          @blur="$v.merchant.companyInformation.pan.$touch"
-          :error="$v.merchant.companyInformation.pan.$error"
+          @blur="v$.merchant.companyInformation.pan.$touch"
+          :error="v$.merchant.companyInformation.pan.$error"
           color="grey-9"
           v-model="merchant.companyInformation.pan"
           label="Company PAN*"
@@ -129,8 +129,8 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           upper-case
-          @blur="$v.merchant.companyInformation.tan.$touch"
-          :error="$v.merchant.companyInformation.tan.$error"
+          @blur="v$.merchant.companyInformation.tan.$touch"
+          :error="v$.merchant.companyInformation.tan.$error"
           color="grey-9"
           v-model="merchant.companyInformation.tan"
           label="TAN"
@@ -159,8 +159,8 @@
           use-input
           fill-input
           hide-selected
-          @blur="$v.merchant.companyInformation.mcc.$touch"
-          :error="$v.merchant.companyInformation.mcc.$error || $v.merchant.companyInformation.mccname.$error"
+          @blur="v$.merchant.companyInformation.mcc.$touch"
+          :error="v$.merchant.companyInformation.mcc.$error || v$.merchant.companyInformation.mccname.$error"
           color="grey-9"
           v-model="merchant.companyInformation.mccname"
           label="MCC (type min 3 characters)"
@@ -172,8 +172,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.companyInformation.residentialAddress.$touch"
-          :error="$v.merchant.companyInformation.residentialAddress.$error"
+          @blur="v$.merchant.companyInformation.residentialAddress.$touch"
+          :error="v$.merchant.companyInformation.residentialAddress.$error"
           color="grey-9"
           v-model="merchant.companyInformation.residentialAddress"
           label="Residential Address*"
@@ -182,8 +182,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.companyInformation.residentialPin.$touch"
-          :error="$v.merchant.companyInformation.residentialPin.$error"
+          @blur="v$.merchant.companyInformation.residentialPin.$touch"
+          :error="v$.merchant.companyInformation.residentialPin.$error"
           color="grey-9"
           type="number"
           v-model="merchant.companyInformation.residentialPin"
@@ -196,8 +196,8 @@
           use-input
           fill-input
           hide-selected
-          @blur="$v.merchant.companyInformation.residentialCityRefCode.$touch"
-          :error="$v.merchant.companyInformation.residentialCityRefCode.$anyError|| $v.merchant.companyInformation.residentCityName.$anyError"
+          @blur="v$.merchant.companyInformation.residentialCityRefCode.$touch"
+          :error="v$.merchant.companyInformation.residentialCityRefCode.$anyError|| v$.merchant.companyInformation.residentCityName.$anyError"
           color="grey-9"
           v-model="merchant.companyInformation.residentCityName"
           label="City (type min 3 characters)*"
@@ -212,8 +212,8 @@
           use-input
           fill-input
           hide-selected
-          @blur="$v.merchant.companyInformation.residentialStateRefCode.$touch"
-          :error="$v.merchant.companyInformation.residentialStateRefCode.$anyError|| $v.merchant.companyInformation.residentStateName.$anyError"
+          @blur="v$.merchant.companyInformation.residentialStateRefCode.$touch"
+          :error="v$.merchant.companyInformation.residentialStateRefCode.$anyError|| v$.merchant.companyInformation.residentStateName.$anyError"
           color="grey-9"
           v-model="merchant.companyInformation.residentStateName"
           label="State (type min 3 characters)*"
@@ -225,8 +225,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.companyInformation.contactName.$touch"
-          :error="$v.merchant.companyInformation.contactName.$error"
+          @blur="v$.merchant.companyInformation.contactName.$touch"
+          :error="v$.merchant.companyInformation.contactName.$error"
           color="grey-9"
           v-model="merchant.companyInformation.contactName"
           label="Contact Name*"
@@ -235,8 +235,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.companyInformation.contactMobile.$touch"
-          :error="$v.merchant.companyInformation.contactMobile.$error"
+          @blur="v$.merchant.companyInformation.contactMobile.$touch"
+          :error="v$.merchant.companyInformation.contactMobile.$error"
           color="grey-9"
           v-model="merchant.companyInformation.contactMobile"
           label="Contact mobile*"
@@ -247,8 +247,8 @@
         <q-input
           color="grey-9"
           type="tel"
-          @blur="$v.merchant.companyInformation.contactAlternateMobile.$touch"
-          :error="$v.merchant.companyInformation.contactAlternateMobile.$error"
+          @blur="v$.merchant.companyInformation.contactAlternateMobile.$touch"
+          :error="v$.merchant.companyInformation.contactAlternateMobile.$error"
           v-model="merchant.companyInformation.contactAlternateMobile"
           label="Contact Alt Mobile"
           placeholder="Contact Alt Mobile"
@@ -258,8 +258,8 @@
         <q-input
           color="grey-9"
           type="tel"
-          @blur="$v.merchant.companyInformation.contactPhone.$touch"
-          :error="$v.merchant.companyInformation.contactPhone.$error"
+          @blur="v$.merchant.companyInformation.contactPhone.$touch"
+          :error="v$.merchant.companyInformation.contactPhone.$error"
           v-model="merchant.companyInformation.contactPhone"
           label="Contact Phone*"
           placeholder="Contact Phone*"
@@ -267,8 +267,8 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          @blur="$v.merchant.companyInformation.contactEmail.$touch"
-          :error="$v.merchant.companyInformation.contactEmail.$error"
+          @blur="v$.merchant.companyInformation.contactEmail.$touch"
+          :error="v$.merchant.companyInformation.contactEmail.$error"
           color="grey-9"
           type="email"
           v-model="merchant.companyInformation.contactEmail"
@@ -280,8 +280,8 @@
         <div class="q-caption">Statement type</div>
         <div class="group">
           <q-radio
-            @blur="$v.merchant.companyInformation.statementType.$touch"
-            :error="$v.merchant.companyInformation.statementType.$error"
+            @blur="v$.merchant.companyInformation.statementType.$touch"
+            :error="v$.merchant.companyInformation.statementType.$error"
             v-for="(item,index) in viewBinding.statementType"
             :key="index"
             color="grey-9"
@@ -295,8 +295,8 @@
         <p class="q-caption">Statement frequency</p>
         <div class="group">
           <q-radio
-            @blur="$v.merchant.companyInformation.statementFrequency.$touch"
-            :error="$v.merchant.companyInformation.statementFrequency.$error"
+            @blur="v$.merchant.companyInformation.statementFrequency.$touch"
+            :error="v$.merchant.companyInformation.statementFrequency.$error"
             v-for="(item,index) in viewBinding.statementFrequency"
             :key="index"
             color="grey-9"
@@ -311,8 +311,8 @@
           color="grey-9"
           label="Statement Email"
           placeholder="Statement Email"
-          @blur="$v.merchant.companyInformation.statementEmail.$touch"
-          :error="$v.merchant.companyInformation.statementEmail.$error"
+          @blur="v$.merchant.companyInformation.statementEmail.$touch"
+          :error="v$.merchant.companyInformation.statementEmail.$error"
           v-model="merchant.companyInformation.statementEmail"
         />
       </div>
@@ -333,6 +333,8 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 import {
   helpers,
   required,
@@ -359,6 +361,9 @@ const panCard = helpers.regex(
   /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/
 );
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   // name: 'ComponentName',
   props: [
     "propLeadDeatils",
@@ -622,8 +627,8 @@ export default {
       this.merchant.companyInformation.mcc = item.value;
     },
     validate() {
-      this.$v.merchant.companyInformation.$touch();
-      if (this.$v.merchant.companyInformation.$error) {
+      this.v$.merchant.companyInformation.$touch();
+      if (this.v$.merchant.companyInformation.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$emit("goNext", "companyInformation", this.merchant);

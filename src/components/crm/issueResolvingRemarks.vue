@@ -64,6 +64,9 @@ import { useVuelidate } from '@vuelidate/core';
 import { required } from "@vuelidate/validators";
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   name: "issueResolvingRemarks",
   setup () {
     return { v$: useVuelidate() }

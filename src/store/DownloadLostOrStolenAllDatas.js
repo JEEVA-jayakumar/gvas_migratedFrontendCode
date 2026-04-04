@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../util/safeStorage";
 import { or, and } from '@vuelidate/validators';
 import { api } from '../boot/axios';
 
@@ -74,7 +75,7 @@ const FileDownload1 = {
       if (request.fromDate && request.toDate) {
         console.log("==========", request)
         return await api
-          .get("aggregator-inventory/agg-download-lost-or-stolen-device-sat/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/" + request.fromDate + "/" + request.toDate, {
+          .get("aggregator-inventory/agg-download-lost-or-stolen-device-sat/"+getAggregatorId()+"/" + request.fromDate + "/" + request.toDate, {
             responseType: 'arraybuffer'
           }).then(response => {
             console.log("FIle name : -- : ", response)
@@ -89,7 +90,7 @@ const FileDownload1 = {
       } else {
         console.log("==========", request)
         return await api
-          .get("aggregator-inventory/agg-download-lost-or-stolen-device-sat/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]), {
+          .get("aggregator-inventory/agg-download-lost-or-stolen-device-sat/"+getAggregatorId(), {
             responseType: 'arraybuffer'
           }).then(response => {
             console.log("FIle name : -- : ", response.headers["Content-Disposition"])

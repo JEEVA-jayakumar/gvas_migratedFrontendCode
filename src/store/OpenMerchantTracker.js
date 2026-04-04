@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../util/safeStorage";
 import api from "./api.js";
 
 /* START >> Store modules => Super Admin Users */
@@ -113,7 +114,7 @@ const OpenMerchantTracker = {
       commit
     }, request) {
       return api
-        .get("aggregator-inventory/agg-open-merchant-tracker-list/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]))
+        .get("aggregator-inventory/agg-open-merchant-tracker-list/"+getAggregatorId())
         .then(response => {
           let data = {
             apiStatusCode: response.status,

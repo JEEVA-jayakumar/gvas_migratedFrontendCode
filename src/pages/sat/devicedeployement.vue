@@ -48,6 +48,8 @@
 <style scoped>
 </style>
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 
 import { LocalStorage } from "quasar";
 global.jQuery = require("jquery");
@@ -81,6 +83,9 @@ const gstn = helpers.regex(
   /^([0-9]){2}([A-Z]{3}[ABCFEGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}[0-9a-zA-Z]{1}[zZ]{1}[0-9a-zA-Z]{1})+$/
 );
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   components: {
     showPdfModalComponent,
     MarsErrorResponse
@@ -560,8 +565,8 @@ export default {
     //   console.log("Hello",this.formdata.plan);
     // },
     sendtoFinance(request) {
-      this.$v.formdata.$touch();
-      if (this.$v.formdata.$error) {
+      this.v$.formdata.$touch();
+      if (this.v$.formdata.$error) {
         this.$q.notify("Please review fields again.");
       } else if (
         this.formdata.paymentOption == 2 &&

@@ -114,6 +114,8 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 
 import salesInformation from "./dataEntry/salesInformation.vue";
 import companyInformation from "./dataEntry/companyInformation.vue";
@@ -129,6 +131,9 @@ import { mapGetters, mapActions } from "vuex";
 import viewLeadDocuments from "./viewLeadDocumentsDataEntryComponent.vue";
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   name: "leadDataEntry",
   props: ["propLeadDeatils"],
   components: {
@@ -660,8 +665,8 @@ export default {
     },
 
     finalFormSubmit() {
-      this.$v.merchant.$touch();
-      if (this.$v.merchant.$error) {
+      this.v$.merchant.$touch();
+      if (this.v$.merchant.$error) {
         this.$q.notify({
           color: "negative",
           position: "bottom",

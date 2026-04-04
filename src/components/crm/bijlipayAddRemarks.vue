@@ -42,6 +42,9 @@ import { useVuelidate } from '@vuelidate/core'
 import { required } from "@vuelidate/validators";
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   name: "bijlipayAddRemarks",
   setup () {
     return { v$: useVuelidate() }

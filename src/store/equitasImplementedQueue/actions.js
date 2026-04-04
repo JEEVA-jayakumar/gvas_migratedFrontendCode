@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import api from "../api.js";
 export const EQUITAS_TRACKER_LIST = ({
     commit
@@ -142,7 +143,7 @@ export const AGGREGATOR_IMPLEMENTED_VERIFICATION_QUEUE = ({
     if (request.pagination.sortBy == null) {
         return api
           .get(
-            "aggregator-inventory/agg-merchant-tracker-implemented-list/sat/" + JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) + "?page=" +
+            "aggregator-inventory/agg-merchant-tracker-implemented-list/sat/" + getAggregatorId() + "?page=" +
                 request.pagination.page +
                 "&size=" +
                 request.pagination.rowsPerPage +
@@ -157,7 +158,7 @@ export const AGGREGATOR_IMPLEMENTED_VERIFICATION_QUEUE = ({
     if (request.formData.fromDate == "" || request.formData.toDate == "") {
         return api
             .get(
-                "aggregator-inventory/agg-merchant-tracker-implemented-list/sat/" + JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) + "?page=" +
+                "aggregator-inventory/agg-merchant-tracker-implemented-list/sat/" + getAggregatorId() + "?page=" +
                 request.pagination.page +
                 "&size=" +
                 request.pagination.rowsPerPage +
@@ -180,7 +181,7 @@ export const AGGREGATOR_IMPLEMENTED_VERIFICATION_QUEUE = ({
     else {
         return api
             .get(
-                "aggregator-inventory/agg-merchant-tracker-implemented-list/sat/" + JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) + "?page=" +
+                "aggregator-inventory/agg-merchant-tracker-implemented-list/sat/" + getAggregatorId() + "?page=" +
                 request.pagination.page +
                 "&size=" +
                 request.pagination.rowsPerPage +
@@ -208,7 +209,7 @@ export const AGGREGATOR_DEACTIVE_LIST = ({
     if (request.pagination.sortBy == null) {
         return api
           .get(
-            "aggregator-inventory/agg-merchant-tracker-DE-Activation-list/sat/" + JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) + "?page=" +
+            "aggregator-inventory/agg-merchant-tracker-DE-Activation-list/sat/" + getAggregatorId() + "?page=" +
             request.pagination.page +
             "&size=" +
             request.pagination.rowsPerPage +
@@ -223,7 +224,7 @@ export const AGGREGATOR_DEACTIVE_LIST = ({
     if (request.formData.fromDate == "" || request.formData.toDate == "") {
         return api
             .get(
-                "aggregator-inventory/agg-merchant-tracker-DE-Activation-list/sat/" + JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) + "?page=" +
+                "aggregator-inventory/agg-merchant-tracker-DE-Activation-list/sat/" + getAggregatorId() + "?page=" +
                 request.pagination.page +
                 "&size=" +
                 request.pagination.rowsPerPage +
@@ -244,7 +245,7 @@ export const AGGREGATOR_DEACTIVE_LIST = ({
     else {
         return api
             .get(
-                "aggregator-inventory/agg-merchant-tracker-DE-Activation-list/sat/" + JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) + "?page=" +
+                "aggregator-inventory/agg-merchant-tracker-DE-Activation-list/sat/" + getAggregatorId() + "?page=" +
                 request.pagination.page +
                 "&size=" +
                 request.pagination.rowsPerPage +

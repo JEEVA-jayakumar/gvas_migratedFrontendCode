@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import api from "../api.js";
 export const PHONEPE_IMPLEMENTATION_QUEUE = ({commit}, request) => {
     console.log("ACTION REQUEST------------>",JSON.stringify(request))
@@ -9,7 +10,7 @@ export const PHONEPE_IMPLEMENTATION_QUEUE_UNASSIGNED_LIST = ({ commit }, request
     // console.log("Implementation Queue Unassigned Data : " + request);
     let sorting = request.pagination.descending ? "asc" : "desc";
     console.log("Implementation Queue Unassigned Data : " + request);
-    return api.get("implementation-queue-list-PhonePe-lead/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/unassigned"+"?page="+ request.pagination.page + "&size=" + request.pagination.rowsPerPage + "&search=" + request.filter 
+    return api.get("implementation-queue-list-PhonePe-lead/"+getAggregatorId()+"/unassigned"+"?page="+ request.pagination.page + "&size=" + request.pagination.rowsPerPage + "&search=" + request.filter
     + "&sort=" + request.pagination.sortBy +"&" + request.pagination.sortBy + ".dir=" + sorting
     ).then(response => {
       console.log("response of Unassigned datas----------->",response)
@@ -24,7 +25,7 @@ export const PHONEPE_IMPLEMENTATION_QUEUE_UNASSIGNED_LIST = ({ commit }, request
     // console.log("request of Unassigned datas----------->",request)
     // console.log("Implementation Queue Unassigned Data : " + request);
     let sorting = request.pagination.descending ? "asc" : "desc";
-    return api.get("implementation-data-with-without-courier-device/0/0/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"?page=" + request.pagination.page + "&size=" + request.pagination.rowsPerPage + "&search=" + request.filter 
+    return api.get("implementation-data-with-without-courier-device/0/0/"+getAggregatorId()+"?page=" + request.pagination.page + "&size=" + request.pagination.rowsPerPage + "&search=" + request.filter
     + "&sort=" + request.pagination.sortBy + "&" + request.pagination.sortBy + ".dir=" + sorting
     ).then(response => {
       console.log("response of Unassigned datas----------->",response)
@@ -36,7 +37,7 @@ export const PHONEPE_IMPLEMENTATION_QUEUE_UNASSIGNED_LIST = ({ commit }, request
   };
   export const PHONEPE_IMPLEMENTATION_QUEUE_COURIER_LIST = ({ commit }, request) => {
     let sorting = request.pagination.descending ? "asc" : "desc";
-    return api.get("implementation-data-with-without-courier-device/0/1/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"?page=" + request.pagination.page + "&size=" + request.pagination.rowsPerPage + "&search=" + request.filter 
+    return api.get("implementation-data-with-without-courier-device/0/1/"+getAggregatorId()+"?page=" + request.pagination.page + "&size=" + request.pagination.rowsPerPage + "&search=" + request.filter
     + "&sort=" + request.pagination.sortBy + "&" + request.pagination.sortBy + ".dir=" + sorting
     ).then(response => {
       console.log("response of Unassigned courier datas----------->",response)
@@ -51,7 +52,7 @@ export const PHONEPE_IMPLEMENTATION_QUEUE_UNASSIGNED_LIST = ({ commit }, request
     // console.log("request of CANCELLED MERCHANTS----------->",request)
     // console.log("Implementation Queue CANCELLED MERCHANTS : " + request);
     let sorting = request.pagination.descending ? "asc" : "desc";
-    return api.get("get-cancel-onboard-phonepe-list/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"?page=" + request.pagination.page + "&size=" + request.pagination.rowsPerPage + "&search=" + request.filter 
+    return api.get("get-cancel-onboard-phonepe-list/"+getAggregatorId()+"?page=" + request.pagination.page + "&size=" + request.pagination.rowsPerPage + "&search=" + request.filter
     + "&sort=" + request.pagination.sortBy + "&" + request.pagination.sortBy + ".dir=" + sorting
     ).then(response => {
       console.log("response of Cancelledmerchants----------->",response)

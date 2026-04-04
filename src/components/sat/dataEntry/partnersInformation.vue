@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-for="(v,index) in $v.partnersArr.$each"
+      v-for="(v,index) in v$.partnersArr.$each"
       :key="index"
       class="row q-my-xs gutter-sm"
       ref="parentElement"
@@ -14,7 +14,7 @@
               Partner 0{{parseInt(index)+1}}
             </span>
           </div>
-          <div class="col-auto" v-if="Object.keys($v.partnersArr.$each).length > 1">
+          <div class="col-auto" v-if="Object.keys(v$.partnersArr.$each).length > 1">
             <q-btn round icon="delete" @click="removePartnerFromArr(v,index)" color="negative"/>
           </div>
         </div>
@@ -139,6 +139,8 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 import {
   helpers,
   required,
@@ -153,6 +155,9 @@ const panCard = helpers.regex(
   /^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/
 );
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   // name: 'ComponentName',
   props: ["cityOptions", "stateOptions", "constitution", "partnerInformation"],
   data() {
@@ -225,13 +230,13 @@ export default {
     // Partners city selction
     partnerCitySelected(item, index) {
       if (item && item.label) {
-        this.$v.partnersArr.$each[index].cityRefCode.$model = item.value;
-        this.$v.partnersArr.$each[index].cityRefLabel.$model = item.label;
+        this.v$.partnersArr.$each[index].cityRefCode.$model = item.value;
+        this.v$.partnersArr.$each[index].cityRefLabel.$model = item.label;
       } else if (item && typeof item === 'string') {
         const found = this.cityOptions.find(o => o.label === item || o.value === item);
         if (found) {
-          this.$v.partnersArr.$each[index].cityRefCode.$model = found.value;
-          this.$v.partnersArr.$each[index].cityRefLabel.$model = found.label;
+          this.v$.partnersArr.$each[index].cityRefCode.$model = found.value;
+          this.v$.partnersArr.$each[index].cityRefLabel.$model = found.label;
         }
       }
     },
@@ -239,13 +244,13 @@ export default {
     // Partners state selection
     partnerStateSelected(item, index) {
       if (item && item.label) {
-        this.$v.partnersArr.$each[index].stateRefCode.$model = item.value;
-        this.$v.partnersArr.$each[index].stateRefLabel.$model = item.label;
+        this.v$.partnersArr.$each[index].stateRefCode.$model = item.value;
+        this.v$.partnersArr.$each[index].stateRefLabel.$model = item.label;
       } else if (item && typeof item === 'string') {
         const found = this.stateOptions.find(o => o.label === item || o.value === item);
         if (found) {
-          this.$v.partnersArr.$each[index].stateRefCode.$model = found.value;
-          this.$v.partnersArr.$each[index].stateRefLabel.$model = found.label;
+          this.v$.partnersArr.$each[index].stateRefCode.$model = found.value;
+          this.v$.partnersArr.$each[index].stateRefLabel.$model = found.label;
         }
       }
     },
@@ -270,8 +275,8 @@ export default {
       this.partnersArr.splice(index, 1);
     },
     validate() {
-      this.$v.partnersArr.$touch();
-      if (this.$v.partnersArr.$error) {
+      this.v$.partnersArr.$touch();
+      if (this.v$.partnersArr.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$emit("goNext", "partnerInformation", {

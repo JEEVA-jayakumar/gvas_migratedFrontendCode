@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 
 import api from "../api.js";
 
@@ -32,7 +33,7 @@ import api from "../api.js";
 export const FETCH_PHONEPE_DEVICE_RECOVERY_DATAS = ({
   commit
 }, request) => {
-  if (JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) == '3') {
+  if (getAggregatorId() == '3') {
     let sorting = request.pagination.descending ? 'asc' : 'desc';
     return api
       .get(
@@ -99,7 +100,7 @@ function COMMON_FILE_DOWNLOAD(response) {
 //       });
 //   };
 export const DOWNLOAD_PHONEPE_DEVICE_RECOVERY_DATAS = async ({ commit }, request) => {
-  if (JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) == '3') {
+  if (getAggregatorId() == '3') {
     return await api
       .get("aggregator-inventory/agg-download-device-recovery-data-list", {
         responseType: "arraybuffer",
@@ -130,7 +131,7 @@ export const PHONEPE_VERIFY_DEVICE_AFTER_RECOVERY = (
   request
 ) => {
   return api.get(
-    "aggregator-inventory/agg-device-recovery-scan-pick/" + JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) +
+    "aggregator-inventory/agg-device-recovery-scan-pick/" + getAggregatorId() +
     "/" +
     request.device +
     "/" +
@@ -140,7 +141,7 @@ export const PHONEPE_VERIFY_DEVICE_AFTER_RECOVERY = (
 
 export const FEED_PHONEPE_DEVICE_AFTER_SCANNED_TO_SUBMIT = ({ commit }, request) => {
   return api
-    .put("aggregator-inventory/agg-device-recovery-scan-pick-submit/" + JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) + "/" + request.deviceId + "/" + request.action, request.request)
+    .put("aggregator-inventory/agg-device-recovery-scan-pick-submit/" + getAggregatorId() + "/" + request.deviceId + "/" + request.action, request.request)
     .then(response => {
       commit("API_RESPONSE_LOG", true);
       // START=> COMMIT with data received'
@@ -155,7 +156,7 @@ export const FEED_PHONEPE_RECOVERY_DEVICE_BULK_UPLOAD_DATA = ({
 }, request) => {
   return api
     // .post("aggregator-inventory/agg-add-bulk-recovery-device-inventory/"+ request.device_type +'/' + request.action, request.file,
-    .put("aggregator-inventory/agg-add-bulk-recovery-device-to-inventory/" + JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) + "/" + request.action, request.file, {
+    .put("aggregator-inventory/agg-add-bulk-recovery-device-to-inventory/" + getAggregatorId() + "/" + request.action, request.file, {
       headers: {
         "Content-Type": 'multipart/form-data',
         "Authorization": "Token " + localStorage.getItem(

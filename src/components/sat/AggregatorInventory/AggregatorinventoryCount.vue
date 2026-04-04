@@ -351,7 +351,7 @@ export default {
 
     created() {
         // this.fetchAggregatorList();
-        // this.getAllRegionalInventoryDeviceDetailsWithCount();
+        // this.getAllRegionalInventoryDeviceDetailsWithCount;
         this.fetchAllRegionalInventoryDeviceDetailsWithCount();
             this.fetchAllRegionalInventoryDeviceListBasedOnRegionalDevice();
 

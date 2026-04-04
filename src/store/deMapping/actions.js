@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import api from '../api.js';
 export const DEMAPPING_STATUS_LIST = ({
   commit
@@ -5,7 +6,7 @@ export const DEMAPPING_STATUS_LIST = ({
   // let sorting = request.pagination.descending ? 'asc' : 'desc';
   return api
     .get(
-      'get-aggrator-mapped-device/'+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+'?page=' +
+      'get-aggrator-mapped-device/'+getAggregatorId()+'?page=' +
       request.pagination.page +
       '&size=' +
       request.pagination.rowsPerPage +

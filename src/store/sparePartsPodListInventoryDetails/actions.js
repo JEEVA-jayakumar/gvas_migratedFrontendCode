@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import api from '../api.js';
 export const FETCH_SPARE_PARTS_POD_LIST_INVENTORY_DETAILS= ({
   commit
@@ -35,7 +36,7 @@ export const FETCH_PHONEPE_SPARE_PARTS_POD_LIST_INVENTORY_DETAILS= ({
   let sorting = request.pagination.descending ? 'asc' : 'desc';
   return api
     .get(
-      "aggregator-spare-parts/agg-podList/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"?page=" +
+      "aggregator-spare-parts/agg-podList/"+getAggregatorId()+"?page=" +
       request.pagination.page +
       "&size=" +
       request.pagination.rowsPerPage +

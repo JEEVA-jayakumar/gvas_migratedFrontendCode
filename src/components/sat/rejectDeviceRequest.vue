@@ -18,8 +18,8 @@
             <q-input
               type="textarea"
               placeholder="Type.."
-              @blur="$v.remarks.$touch"
-              :error="$v.remarks.$error"
+              @blur="v$.remarks.$touch"
+              :error="v$.remarks.$error"
               class="q-my-md"
               color="grey-9"
               align="left"
@@ -47,6 +47,8 @@
     </div>
   </template>
   <script>
+import { useVuelidate } from '@vuelidate/core';
+
   import {
     required,
     requiredIf,
@@ -59,6 +61,9 @@
   } from "@vuelidate/validators";
   import { mapGetters, mapActions } from "vuex";
   export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
     props: ["showRequestModal", "showRequestComponent"],
   
     data() {
@@ -112,8 +117,8 @@
           selfAssignmentId:reqData.id,
           remarks:this.remarks
         }
-          this.$v.remarks.$touch();
-          if (this.$v.remarks.$error) {
+          this.v$.remarks.$touch();
+          if (this.v$.remarks.$error) {
             this.$q.notify("Please enter reason.");
           }
           else {

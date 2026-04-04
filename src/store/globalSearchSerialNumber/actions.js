@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 
 import api from "../api.js";
 function COMMON_FILE_DOWNLOAD(response) {
@@ -126,7 +127,7 @@ export const FETCH_PHONE_PE_GLOBAL_SEARCH_DATAS = ({ commit }, request) => {
   console.log("PAGI : ------ : " + JSON.stringify(request.pagination.sortBy))
 return api
   .get(
-    "aggregator-inventory/agg-search-global/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+
+    "aggregator-inventory/agg-search-global/"+getAggregatorId()+
     "/" +
       request.flag +
       "/" +

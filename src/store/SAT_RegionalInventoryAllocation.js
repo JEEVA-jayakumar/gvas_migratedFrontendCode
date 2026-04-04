@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../util/safeStorage";
 import api from "./api.js";
 
 /* START >> Store modules => Super Admin Users */
@@ -170,7 +171,7 @@ const SAT_RegionalInventoryAllocation = {
     FETCH_PHONE_PE_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT({ commit }, request) {
       console.log("FETCH_PHONE_PE_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT ACTION--->",JSON.stringify(request))
       return api
-      .get("aggregator-inventory/agg-device-count-list-based-on-regional/"+request.region+"/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]))
+      .get("aggregator-inventory/agg-device-count-list-based-on-regional/"+request.region+"/"+getAggregatorId())
         .then(response => {
           // START=> COMMIT with data received'
           commit(
@@ -352,7 +353,7 @@ const SAT_RegionalInventoryAllocation = {
             "aggregator-inventory/agg-device-list-based-on-regional-device/" +
             request.region.id +
             "/" +
-            request.action +"/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])
+            request.action +"/"+getAggregatorId()
           )
           .then(response => {
             console.log("_-_-_-_-_-/", response);
@@ -374,7 +375,7 @@ const SAT_RegionalInventoryAllocation = {
             "/" +
             request.action +
             "/" +
-            request.device + "/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])
+            request.device + "/"+getAggregatorId()
           )
           .then(response => {
             commit("API_RESPONSE_LOG", response);
@@ -406,7 +407,7 @@ const SAT_RegionalInventoryAllocation = {
 
     PHONEPE_FEED_REGIONAL_INVENTORY_DAMAGED_DEVICE_SERIAL_NUMBER({ commit }, request) {
       return api.post(
-        "aggregator-inventory/agg-add-damage-device-from-regional/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/"+
+        "aggregator-inventory/agg-add-damage-device-from-regional/"+getAggregatorId()+"/"+
         request.region +
         "/" +
         request.podNumber,
@@ -468,7 +469,7 @@ const SAT_RegionalInventoryAllocation = {
       console.log("FETCH_PHONE_PE_REGIONAL_INVENTORY_PDO_BASED_DEVICE_DETAIL_WITH_COUNT",JSON.stringify(request))
       if (request.device == undefined) {
         return api
-          .get("aggregator-inventory/agg-regional-dispatched-inventory-list/" + request.request.podNumber +"/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]))
+          .get("aggregator-inventory/agg-regional-dispatched-inventory-list/" + request.request.podNumber +"/"+getAggregatorId())
           .then(response => {
             // START=> COMMIT with data received'
             commit(
@@ -485,7 +486,7 @@ const SAT_RegionalInventoryAllocation = {
             "aggregator-inventory/agg-regional-dispatched-inventory-list/" +
             request.podNumber +
             "/" +
-            request.device + "/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])
+            request.device + "/"+getAggregatorId()
           )
           .then(response => {
             // START=> COMMIT with data received'
@@ -527,7 +528,7 @@ const SAT_RegionalInventoryAllocation = {
     AGGREGATORS_VERIFY_DEVICE_WITH_POD_AND_DEVICE_ID({ commit }, request) {
       return api
         .put(
-          "aggregator-inventory/agg-regional-verify-inbound-device/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/" +
+          "aggregator-inventory/agg-regional-verify-inbound-device/"+getAggregatorId()+"/" +
           request.podNumber +
           "/" +
           request.device +
@@ -560,7 +561,7 @@ const SAT_RegionalInventoryAllocation = {
        
     AGGREGATORS_CONVERT_INBOUND_TO_ACTIVE_DEVICE({ commit }, request) {
       return api
-        .put("aggregator-inventory/agg-regional-convert-inbount-to-active-device/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/" + request.podNumber)
+        .put("aggregator-inventory/agg-regional-convert-inbount-to-active-device/"+getAggregatorId()+"/" + request.podNumber)
         .then(response => {
           commit("API_RESPONSE_LOG", response);
         });

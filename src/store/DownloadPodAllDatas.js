@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../util/safeStorage";
 import { and } from '@vuelidate/validators';
 import { api } from '../boot/axios';
 
@@ -130,7 +131,7 @@ const FileDownload1 = {
       if (request.fromDate && request.toDate) {
         // console.log("==========", request)
         return await api
-          .get("aggregator-inventory/agg-download-pod-details/" + request.fromDate + "/" + request.toDate + "/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]), {
+          .get("aggregator-inventory/agg-download-pod-details/" + request.fromDate + "/" + request.toDate + "/"+getAggregatorId(), {
             responseType: 'arraybuffer'
           }).then(response => {
             console.log("FIle name : -- : ", response.headers)
@@ -147,7 +148,7 @@ const FileDownload1 = {
       } else {
         console.log("==========", request)
         return await api
-          .get("aggregator-inventory/agg-download-pod-details/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]), {
+          .get("aggregator-inventory/agg-download-pod-details/"+getAggregatorId(), {
             responseType: 'arraybuffer'
           }).then(response => {
             console.log("FIle name : -- : ", response)

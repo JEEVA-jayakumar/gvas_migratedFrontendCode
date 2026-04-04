@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import api from '../api.js';
 // export const FETCH_INVENTORY_STOLEN_DATA= ({ commit }, request) =>{
 //     //  let sorting = request.pagination.descending ? 'asc' : 'desc';
@@ -83,7 +84,7 @@ export const FETCH_AGGREGATORS_INVENTORY_STOLEN_DATA = ({
   let sorting = request.pagination.descending ? 'asc' : 'desc';
   return api
     .get(
-      'aggregator-inventory/agg-central-inventory-get-device-by-status/5/'+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+'?page=' +
+      'aggregator-inventory/agg-central-inventory-get-device-by-status/5/'+getAggregatorId()+'?page=' +
       request.pagination.page +
       '&size=' +
       request.pagination.rowsPerPage +

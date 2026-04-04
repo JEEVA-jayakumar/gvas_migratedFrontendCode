@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../util/safeStorage";
 import { and } from '@vuelidate/validators';
 import { api } from '../boot/axios';
 
@@ -221,7 +222,7 @@ const FileDownload1 = {
         // console.log("==========", request)
         /* ACTION (4 --> Moved To SCrap Datas) */
         return await api
-          .get("aggregator-inventory/agg-download-central-inventory-device-by-status/4/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+ "?from=" + request.from + "&to=" + request.to, {
+          .get("aggregator-inventory/agg-download-central-inventory-device-by-status/4/"+getAggregatorId()+ "?from=" + request.from + "&to=" + request.to, {
             responseType: 'arraybuffer'
           }).then(response => {
             console.log("FIle name : -- : ", response)
@@ -237,7 +238,7 @@ const FileDownload1 = {
         console.log("==========", request)
         /* ACTION (5 --> LOST OR STOLEN Datas) */
         return await api
-          .get("aggregator-inventory/agg-download-central-inventory-device-by-status/4/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]), {
+          .get("aggregator-inventory/agg-download-central-inventory-device-by-status/4/"+getAggregatorId(), {
             responseType: 'arraybuffer'
           }).then(response => {
             console.log("FIle name : -- : ", response.headers["Content-Disposition"])

@@ -505,7 +505,10 @@ export default {
         banksubventionPendingCount: 0,
         kycPendingCount: 0,
         pricingPendingCount: 0,
-        totalExceptionCount: 0
+        totalExceptionCount: 0,
+        kycPendingLeadIds: [],
+        banksubventionPendingLeadIds: [],
+        pricingPendingLeadIds: []
       },
       aggregatorCount: {
         totalDevice: 0,
@@ -525,12 +528,37 @@ export default {
         totalDevice: 0
       },
       serviceRequestCount: {
-        external: { closed: 0, assigned: 0, unassigned: 0 },
-        internal: { closed: 0, assigned: 0, unassigned: 0 },
-        total: 0, intTotal: 0, extTotal: 0
+        external: {
+          closed: 0,
+          assigned: 0,
+          unassigned: 0,
+          ReOpenAssigned: 0,
+          ReOpenedUnAssigned: 0
+        },
+        internal: {
+          closed: 0,
+          assigned: 0,
+          unassigned: 0,
+          ReOpenAssigned: 0,
+          ReOpenedUnAssigned: 0
+        },
+        total: 0,
+        intTotal: 0,
+        extTotal: 0
       },
       applicationPendingCount: {
-        financePendingCount: 0, financeRejectCount: 0, wipCount: 0, withOPSHead: 0
+        financePendingCount: 0,
+        financeRejectCount: 0,
+        wipCount: 0,
+        withOPSHead: 0,
+        totalApplicationPendingCount: 0,
+        totalApplicationPendingLeadIds: [],
+        financeRejectLeadIds: [],
+        financePendingLeadIds: [],
+        withSatCount: 0,
+        withSatLeadIds: [],
+        withOPSLeadIds: [],
+        wipLeadIds: []
       },
       agingTrackerPendingColumns: [
         { name: "name", required: false, label: "Stage", align: "left", field: "name", sortable: false },

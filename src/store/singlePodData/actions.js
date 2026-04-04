@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import api from '../api.js';
 export const FETCH_SINGLE_POD_DETAILS = ({
     commit
@@ -20,7 +21,7 @@ export const FETCH_SINGLE_POD_DETAILS = ({
    // console.log("API ACTION REQUEST DETAILS-------->",JSON.stringify(request))
     return api
       .get(
-        "aggregator-spare-parts/agg-getSparePod/"+request.pod_number+"/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]))
+        "aggregator-spare-parts/agg-getSparePod/"+request.pod_number+"/"+getAggregatorId())
       .then(response => {
         return response
       // console.log("ACTION APPROVE REGION DATA====+>>>",JSON.stringify(response))

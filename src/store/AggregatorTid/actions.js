@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import { url } from '@vuelidate/validators';
 import api from "../api.js";
 
@@ -39,7 +40,7 @@ export const UPDATE_AGGREGATOR_SERIAL_NUMBER = ({
   commit,
   rootState
 }, request) => {
-  return api.post("aggregator-inventory/agg-update-device-serialNo/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/" + request.url.tid +"/" +request.url.newSerialNumber)
+  return api.post("aggregator-inventory/agg-update-device-serialNo/"+getAggregatorId()+"/" + request.url.tid +"/" +request.url.newSerialNumber)
 //     .then(response => {
 //         console.log("data",response)
 //         // console.log(response)

@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../util/safeStorage";
 import { or, and } from '@vuelidate/validators';
 import api from "./api.js";
 
@@ -210,7 +211,7 @@ const InventoryCentral = {
     FETCH_AGGREGATORS_CENTRAL_INVENTORY_DASHBOARD_COUNT({ commit }, request) {
       console.log("ACTION FETCH_AGGREGATORS_CENTRAL_INVENTORY_DASHBOARD_COUNT ===>", JSON.stringify(request))
       return api
-        .get("aggregator-inventory/agg-central-inventory-dashboard-device-count-list/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]))
+        .get("aggregator-inventory/agg-central-inventory-dashboard-device-count-list/"+getAggregatorId())
         .then(response => {
           // START=> COMMIT with data received'
           commit(
@@ -289,7 +290,7 @@ const InventoryCentral = {
 
     FETCH_ALL_PHONE_PE_INVENTORY_DEVICES_TYPES_WITH_COUNT_DATA({ commit }, request) {
       console.log("FETCH_ALL_PHONE_PE_INVENTORY_DEVICES_TYPES_WITH_COUNT_DATA------->", JSON.stringify(request))
-      return api.get("aggregator-inventory/inventoryCountList/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])).then(response => {
+      return api.get("aggregator-inventory/inventoryCountList/"+getAggregatorId()).then(response => {
         // START=> COMMIT with data received'
         commit(
           "SET_ALL_PHONE_PE_INVENTORY_DEVICES_TYPES_WITH_COUNT_DATA",
@@ -345,14 +346,14 @@ const InventoryCentral = {
     /* PHONEPE API */
     FETCH_ALL_PHOEPE_INVENTORY_DEVICES_BY_DEVICE_TYPE({ commit }, request) {
       if (request == undefined || request.device.id == undefined) {
-        return api.get("aggregator-inventory/agg-list-device-to-central-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])).then(response => {
+        return api.get("aggregator-inventory/agg-list-device-to-central-inventory/"+getAggregatorId()).then(response => {
           // START=> COMMIT with data received'
           commit("SET_ALL_PHOEPE_INVENTORY_DEVICES_BY_DEVICE_TYPE", response.data.data);
           // END=> COMMIT with data received'
         });
       } else {
         return api
-          .get("aggregator-inventory/agg-list-device-to-central-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) + request.device.id)
+          .get("aggregator-inventory/agg-list-device-to-central-inventory/"+getAggregatorId() + request.device.id)
           .then(response => {
             // START=> COMMIT with data received'
             commit("SET_ALL_PHOEPE_INVENTORY_DEVICES_BY_DEVICE_TYPE", response.data.data);
@@ -393,7 +394,7 @@ const InventoryCentral = {
     FEED_AGGREGATORS_FAULTY_FINAL_SUBMIT({ commit }, request) {
       console.log("FEED_AGGREGATORS_FAULTY_FINAL_SUBMIT ---->", request)
       return api.put(
-        "aggregator-inventory/agg-scan-add-central-fault-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/"+ request.action,
+        "aggregator-inventory/agg-scan-add-central-fault-inventory/"+getAggregatorId()+"/"+ request.action,
         request.data
       );
     },
@@ -445,7 +446,7 @@ const InventoryCentral = {
     FEED_PHONE_PE_ALLOCATE_TO_REGION({ commit }, request) {
       console.log("FEED_PHONE_PE_ALLOCATE_TO_REGION --->", JSON.stringify(request))
       return api.post(
-        "aggregator-inventory/agg-allocate-device-to-regional-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) +"/" +
+        "aggregator-inventory/agg-allocate-device-to-regional-inventory/"+getAggregatorId() +"/" +
         request.region +
         "/" +
         request.podNumber,
@@ -479,7 +480,7 @@ const InventoryCentral = {
 
     FEED_AGGREGATORS_ALLOCATE_TO_REGION_BASED_SO({ commit }, request) {
       return api.post(
-        "aggregator-inventory/agg-allocate-device-to-regional-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) +"/" +
+        "aggregator-inventory/agg-allocate-device-to-regional-inventory/"+getAggregatorId() +"/" +
         request.region +
         "/" +
         request.podNumber +
@@ -1038,7 +1039,7 @@ const InventoryCentral = {
       let sorting = request.pagination.descending ? "asc" : "desc";
       return api
         .get(
-          "aggregator-inventory/agg-inventory-with-merchant-list/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"?page=" +
+          "aggregator-inventory/agg-inventory-with-merchant-list/"+getAggregatorId()+"?page=" +
           request.pagination.page +
           "&size=" +
           request.pagination.rowsPerPage +

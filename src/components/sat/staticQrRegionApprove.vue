@@ -11,7 +11,7 @@
           </div>
           <div class="col-md-8 q-pt-md" align="left">
             <q-input type="number" color="grey-9"
-             v-model="formData.recievedCount" min="1" oninput="this.value = Math.abs(this.value)" :error="$v.formData.recievedCount.$error"
+             v-model="formData.recievedCount" min="1" oninput="this.value = Math.abs(this.value)" :error="v$.formData.recievedCount.$error"
               label="Update Count"
               placeholder="Update Count" />
         </div>
@@ -25,9 +25,14 @@
     </div>
     </template>
     <script>
+import { useVuelidate } from '@vuelidate/core';
+
     import { minValue, required,}from "@vuelidate/validators";
     import { mapGetters, mapActions } from 'vuex'
     export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
       props: ['propsApproveRegion', 'propsApproveRegionModal'],
       data () {
         return {
@@ -55,8 +60,8 @@
         ...mapActions('generateQR', ['SUBMIT_QR_COUNT']),
     
         fnSubmitCount() {
-          this.$v.formData.$touch()
-      if(this.$v.formData.$error){
+          this.v$.formData.$touch()
+      if(this.v$.formData.$error){
         this.$q.notify('Please review fields again.')
       }else{
             let updatecount = {

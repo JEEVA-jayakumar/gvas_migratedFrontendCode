@@ -18,8 +18,8 @@
           <q-input
             type="textarea"
             placeholder="Type.."
-            @blur="$v.remarks.$touch"
-            :error="$v.remarks.$error"
+            @blur="v$.remarks.$touch"
+            :error="v$.remarks.$error"
             class="q-my-md"
             color="grey-9"
             align="left"
@@ -47,6 +47,8 @@
   </div>
 </template>
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 import {
   required,
   requiredIf,
@@ -59,6 +61,9 @@ import {
 } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["showLostModel", "propShowLostComponent"],
 
   data() {
@@ -104,8 +109,8 @@ export default {
       this.formData.data.lostOrStolenRemarks = val;
     },
     loststolendevice(reqData) {
-      //   this.$v.formData.$touch();
-      //   if (this.$v.formData.$error) {
+      //   this.v$.formData.$touch();
+      //   if (this.v$.formData.$error) {
       //     this.$q.notify("Please review fields again.");
       //   }
       //   else {

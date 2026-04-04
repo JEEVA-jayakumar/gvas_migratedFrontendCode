@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 
 import api from "../api.js";
 export const FETCH_AGGREGATOR_POD_LIST = ({
@@ -6,7 +7,7 @@ export const FETCH_AGGREGATOR_POD_LIST = ({
      let sorting = request.pagination.descending ? 'asc' : 'desc';
     return api
       .get(
-        "aggregator-inventory/agg-pod-list/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"?page=" +
+        "aggregator-inventory/agg-pod-list/"+getAggregatorId()+"?page=" +
         request.pagination.page +
         '&size=' +
         request.pagination.rowsPerPage +

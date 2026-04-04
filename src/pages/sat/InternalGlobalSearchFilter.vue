@@ -12,8 +12,8 @@
           <q-input
             clearable
             color="grey-9"
-            @blur="$v.formData.searchTerm.$touch"
-            :error="$v.formData.searchTerm.$error"
+            @blur="v$.formData.searchTerm.$touch"
+            :error="v$.formData.searchTerm.$error"
             v-model="formData.searchTerm"
             placeholder="Type.."
             label="Search .."
@@ -566,8 +566,13 @@ import { mapGetters, mapActions } from "vuex";
 import { required, minLength, maxLength } from "@vuelidate/validators";
 const deCapitalizeFirstLetter = ([first, ...rest], locale = navigator.language) =>
   first === undefined ? "" : first.toLocaleLowerCase(locale) + rest.join("");
+import { useVuelidate } from '@vuelidate/core'
+
 export default {
   name: "globalSearchFilterValues",
+  setup() {
+    return { v$: useVuelidate() }
+  },
 
   data() {
     return {
@@ -942,9 +947,9 @@ export default {
       }
     },
     globalSearchSubmit() {
-      this.$v.formData.$touch();
+      this.v$.formData.$touch();
       console.log("formData",this.formData)
-      if (this.$v.formData.$error) {
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         console.log("this.paginationControl",this.paginationControl)

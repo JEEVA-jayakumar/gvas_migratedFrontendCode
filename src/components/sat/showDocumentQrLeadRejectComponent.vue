@@ -10,8 +10,8 @@
         <!-- START >> Give reason to reject(mandatory) document -->
         <div class="q-title q-mb-sm">{{document}}</div>
         <q-input
-          @blur="$v.formData.leadDetails.reason.$touch"
-          :error="$v.formData.leadDetails.reason.$error"
+          @blur="v$.formData.leadDetails.reason.$touch"
+          :error="v$.formData.leadDetails.reason.$error"
           type="textarea"
           placedholder="Type.."
           :max-height="100"
@@ -44,6 +44,8 @@
   </template>
   
   <script>
+import { useVuelidate } from '@vuelidate/core';
+
   import {
     required,
     requiredIf,
@@ -57,6 +59,9 @@
   import { date } from "quasar";
   import { mapGetters, mapActions } from "vuex";
   export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
     props: ["propDocumentDetails", "propToggleDocumentRejectModal"],
   
     data() {
@@ -102,8 +107,8 @@
       },
   
       fnRejectLeadFinal(formData) {
-        this.$v.formData.$touch();
-        if (this.$v.formData.$error) {
+        this.v$.formData.$touch();
+        if (this.v$.formData.$error) {
           this.$q.notify("Please review fields again.");
         } else {
           this.$q.loading.show({

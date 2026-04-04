@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../util/safeStorage";
 import { email, and } from '@vuelidate/validators';
 import api from "./api.js";
 
@@ -440,7 +441,7 @@ const SuperAdminusers = {
       commit
     }, request) {
       console.log("AGGREGATORS_POD_REGION -------->", JSON.stringify(request))
-      return api.put("aggregator-inventory/agg-podregion/" + request.pod + "/" + request.region + "/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]));
+      return api.put("aggregator-inventory/agg-podregion/" + request.pod + "/" + request.region + "/"+getAggregatorId());
     },
 
     EDIT_CMS({

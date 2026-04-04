@@ -36,7 +36,7 @@
                         <div class="col-md-6">
                           <q-input color="grey-9" :disable="!!this.propRowDetails.leadInformation?.merchantRefCode"
                             v-model="additionalTerminal.merchantRefCode"
-                            :error="$v.additionalTerminal.merchantRefCode.$error"
+                            :error="v$.additionalTerminal.merchantRefCode.$error"
                             label="Merchant RefCode*" />
                         </div>
                         <div class="col-md-6">
@@ -48,10 +48,10 @@
                             additionalTerminal.AdditionalTerminalDetails
                               .numberOfTerminals
                           " @blur="
-         $v.additionalTerminal.AdditionalTerminalDetails
+         v$.additionalTerminal.AdditionalTerminalDetails
          .numberOfTerminals.$touch();
        " :error="
-           $v.additionalTerminal.AdditionalTerminalDetails
+           v$.additionalTerminal.AdditionalTerminalDetails
            .numberOfTerminals.$error
            " class="text-weight-regular text-grey-8" color="grey-9" label="*Number Of Terminals"
                             placeholder="Number Of Terminals" />
@@ -120,6 +120,8 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 import {
   required,
 } from "@vuelidate/validators";
@@ -127,6 +129,9 @@ import { mapGetters, mapActions } from "vuex";
 import _ from 'lodash';
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   name: "additionalTidFromMars",
   data() {
     return {
@@ -301,8 +306,8 @@ export default {
       });
     },
     fnSubmitBankDetails(request) {
-      this.$v.additionalTerminal.$touch();
-      if (this.$v.additionalTerminal.$error) {
+      this.v$.additionalTerminal.$touch();
+      if (this.v$.additionalTerminal.$error) {
         this.$q.notify({
           color: "negative",
           position: "bottom",

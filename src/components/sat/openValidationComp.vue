@@ -29,6 +29,8 @@
     </div>
 </template>
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 import {
   required,
   requiredIf,
@@ -41,6 +43,9 @@ import {
 } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["showRejectLeadModel", "propShowRejectLeadComponent"],
 
   data() {
@@ -122,8 +127,8 @@ export default {
     // },
     leadRejectSubmit(formData) {
         // let 
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q

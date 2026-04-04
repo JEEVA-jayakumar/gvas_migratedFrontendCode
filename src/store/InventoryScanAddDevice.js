@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../util/safeStorage";
 import api from "./api.js";
 
 /* START >> Store modules => Super Admin Users */
@@ -142,7 +143,7 @@ const InventoryScanAddDevice = {
     FEED_PHONE_PE_DEVICE_SCAN_BY_ID_DATA({ commit }, request) {
       console.log("FEED_PHONE_PE_DEVICE_SCAN_BY_ID_DATA ---->", JSON.stringify(request))
       return api
-        .post("aggregator-inventory/agg-add-device-to-central-inventory/" + request.deviceId + "/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]), request.request)
+        .post("aggregator-inventory/agg-add-device-to-central-inventory/" + request.deviceId + "/"+getAggregatorId(), request.request)
         .then(response => {
           commit("API_RESPONSE_LOG", true);
           // START=> COMMIT with data received'

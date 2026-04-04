@@ -22,8 +22,8 @@
     />
     <q-input
       v-model="formData.leadVerificationStatus.reason"
-      @blur="$v.formData.leadVerificationStatus.reason.$touch"
-      :error="$v.formData.leadVerificationStatus.reason.$error"
+      @blur="v$.formData.leadVerificationStatus.reason.$touch"
+      :error="v$.formData.leadVerificationStatus.reason.$error"
       type="textarea"
       class="q-mt-lg"
       label="SAT Remarks"
@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 import { date } from "quasar";
 import {
   required,
@@ -66,6 +68,9 @@ import {
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["item"],
   data() {
     return {
@@ -114,8 +119,8 @@ export default {
       this.$emit("toggleRemarks", item);
     },
     sendRemarks(formData, item) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.TOGGLE_COMMON_LOADER(true);

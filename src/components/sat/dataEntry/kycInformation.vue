@@ -80,9 +80,14 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   // name: 'ComponentName',
   props: ["propLeadDeatils", "kyc"],
 
@@ -139,8 +144,8 @@ export default {
       });
     },
     validate() {
-      this.$v.merchant.companyInformation.$touch();
-      if (this.$v.merchant.companyInformation.$error) {
+      this.v$.merchant.companyInformation.$touch();
+      if (this.v$.merchant.companyInformation.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$emit("submit", "kyc", this.merchant);

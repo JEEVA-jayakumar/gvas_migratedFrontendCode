@@ -1,11 +1,12 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import api from "../api.js";
 export const AGGREGATOR_DEVICE_RECOVERY_ASSIGNED_LIST = ({commit}, request) => {
-  if(JSON.parse(localStorage.getItem("selectedTab").split('|')[1])=='4')
+  if(getAggregatorId()=='4')
   {
   let sorting = request.pagination.descending ? "asc" : "desc";
   console.log("requested datas:----------------:assigned-----"+JSON.stringify(request))
   return api
-    .get("aggregator-inventory/agg-device-recovery-tracker-list/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/assigned"+"?page=" +
+    .get("aggregator-inventory/agg-device-recovery-tracker-list/"+getAggregatorId()+"/assigned"+"?page=" +
     request.pagination.page +
     "&size=" +
     request.pagination.rowsPerPage +
@@ -30,7 +31,7 @@ export const AGGREGATOR_DEVICE_RECOVERY_ASSIGNED_LIST = ({commit}, request) => {
     let sorting = request.pagination.descending ? "asc" : "desc";
   console.log("requested datas:----------------:assigned-----"+JSON.stringify(request))
   return api
-    .get("aggregator-inventory/agg-device-recovery-tracker-lst/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/assigned"+"?page=" +
+    .get("aggregator-inventory/agg-device-recovery-tracker-lst/"+getAggregatorId()+"/assigned"+"?page=" +
     request.pagination.page +
     "&size=" +
     request.pagination.rowsPerPage +
@@ -55,13 +56,13 @@ export const AGGREGATOR_DEVICE_RECOVERY_ASSIGNED_LIST = ({commit}, request) => {
 export const AGGREGATOR_DEVICE_RECOVERY_UNASSIGNED_LIST = ({
   commit
 }, request) => {
-  if(JSON.parse(localStorage.getItem("selectedTab").split('|')[1])=='4')
+  if(getAggregatorId()=='4')
   {
   let sorting = request.pagination.descending ? "asc" : "desc";
   let sortBy = request.pagination.sortBy == null ? "createdAt" : request.pagination.sortBy
   // console.log("requested datas:----------------:Unassigned-----"+JSON.stringify(request))
   return api
-    .get("aggregator-inventory/agg-device-recovery-tracker-list/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"?page=" +
+    .get("aggregator-inventory/agg-device-recovery-tracker-list/"+getAggregatorId()+"?page=" +
     request.pagination.page + "&size=" + request.pagination.rowsPerPage + "&searchterm=" + request.filter + 
     "&sort=" + request.pagination.sortBy + "&" + request.pagination.sortBy + ".dir=" + sorting 
     )
@@ -77,7 +78,7 @@ export const AGGREGATOR_DEVICE_RECOVERY_UNASSIGNED_LIST = ({
     let sortBy = request.pagination.sortBy == null ? "createdAt" : request.pagination.sortBy
     // console.log("requested datas:----------------:Unassigned-----"+JSON.stringify(request))
     return api
-      .get("aggregator-inventory/agg-device-recovery-tracker-lst/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"?page=" +
+      .get("aggregator-inventory/agg-device-recovery-tracker-lst/"+getAggregatorId()+"?page=" +
       request.pagination.page + "&size=" + request.pagination.rowsPerPage + "&searchterm=" + request.filter + 
       "&sort=" + request.pagination.sortBy + "&" + request.pagination.sortBy + ".dir=" + sorting 
       )

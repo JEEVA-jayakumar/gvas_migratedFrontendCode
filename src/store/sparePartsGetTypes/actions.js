@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import api from '../api.js';
 export const FETCH_SPARE_PARTS_GET_TYPES = ({
   commit
@@ -74,7 +75,7 @@ export const FETCH_ALL_PHONEPE_SPARE_PARTS_INVENTORY_DATAS = ({
 }, request) => {
   console.log(request)
   return api
-    .get("aggregator-spare-parts/agg-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]))
+    .get("aggregator-spare-parts/agg-inventory/"+getAggregatorId())
     .then(response => {
       // START=> COMMIT with data received'
       console.log("-------------------/////", response)
@@ -102,7 +103,7 @@ export const PHONEPE_SPARE_PARTS_ADD_STOCKS = ({
   rootState
 }, request) => {
   console.log("SUBMIT request", JSON.stringify(request))
-  return api.post("aggregator-spare-parts/agg-createInventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]), request)
+  return api.post("aggregator-spare-parts/agg-createInventory/"+getAggregatorId(), request)
 }
 
 /* PHONEPE API END */

@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import api from '../api.js';
 export const FETCHING_APPROVED_POD_LIST_DETAILS = ({
   commit
@@ -35,7 +36,7 @@ export const FETCHING_PHONEPE_APPROVED_POD_LIST_DETAILS = ({
   let sorting = request.pagination.descending ? 'asc' : 'desc';
   return api
     .get(
-      "aggregator-spare-parts/agg-getPod"+"/3"+"/5"+"/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"?page=" +
+      "aggregator-spare-parts/agg-getPod"+"/3"+"/5"+"/"+getAggregatorId()+"?page=" +
       request.pagination.page +
       "&size=" +
       request.pagination.rowsPerPage +
@@ -94,7 +95,7 @@ export const FETCHING_REJECTED_POD_LIST_DETAILS = ({
     let sorting = request.pagination.descending ? 'asc' : 'desc';
     return api
       .get(
-        "aggregator-spare-parts/agg-getPod"+"/2"+"/6"+"/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"?page=" +
+        "aggregator-spare-parts/agg-getPod"+"/2"+"/6"+"/"+getAggregatorId()+"?page=" +
         request.pagination.page +
         "&size=" +
         request.pagination.rowsPerPage +
