@@ -73,7 +73,7 @@
                 <strong>Select Bank</strong>
               </div>
               <div class="col-md-3">
-                <q-select clearable label="Select Bank" v-model="formData.id" :error="$v.formData.id.$error"
+                <q-select clearable label="Select Bank" v-model="formData.id" :error="v$.formData.id.$error"
                   color="grey-9" :options="bankListOptions" map-options emit-value />
               </div>
             </div>
@@ -83,7 +83,7 @@
                 <strong>Select SO</strong>
               </div>
               <div class="col-md-3">
-                <q-select :disable="!formData.id" use-input fill-input hide-selected clearable label="Select SO" v-model="formData.soList" :error="$v.formData.soList.$error"  color="grey-9"
+                <q-select :disable="!formData.id" use-input fill-input hide-selected clearable label="Select SO" v-model="formData.soList" :error="v$.formData.soList.$error"  color="grey-9"
                   :options="SoListData" map-options emit-value />
               </div>
             </div>
@@ -93,7 +93,7 @@
                 <strong>Enter no of QR </strong>
               </div>
               <div class="col-md-3">
-                <q-input type="number" min="1" :disable="!formData.soList" oninput="this.value = Math.abs(this.value)"  :error="$v.formData.count.$error"  label="Enter no of QR" v-model="formData.count" color="grey-9" />
+                <q-input type="number" min="1" :disable="!formData.soList" oninput="this.value = Math.abs(this.value)"  :error="v$.formData.count.$error"  label="Enter no of QR" v-model="formData.count" color="grey-9" />
               </div>
             </div>
 
@@ -102,7 +102,7 @@
                 <strong>Enter POD</strong>
               </div>
               <div class="col-md-3">
-                <q-input disable label="Enter POD" :error="$v.formData.podNumber.$error" v-model="formData.podNumber" color="grey-9" />
+                <q-input disable label="Enter POD" :error="v$.formData.podNumber.$error" v-model="formData.podNumber" color="grey-9" />
               </div>
             </div>
 
@@ -293,8 +293,8 @@ export default {
     ...mapActions('staticQrInventory', ['FETCH_UNAPPROVED_QR_LIST','FETCH_UNAPPROVED_QR_LIST_OF_SO', 'FETCH_APPROVED_QR_LIST_OF_SO','FETCH_REJECTED_QR_LIST_OF_SO','FETCH_APPROVED_QR_LIST', 'FETCH_STATIC_QR_REGIONAL_INVENTORY_COUNT']),
     ...mapActions('generateQR', ['FETCH_BANK_LIST','ASSIGN_SO']), 
     fnAssignsubmit(){
-      this.$v.formData.$touch()
-      if(this.$v.formData.$error){
+      this.v$.formData.$touch()
+      if(this.v$.formData.$error){
         this.$q.notify('Please review fields again.')
       }else{
         const userInfo = JSON.parse(localStorage.getItem('u_i'))

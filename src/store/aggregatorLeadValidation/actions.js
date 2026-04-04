@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import api from '../api.js';
 export const FETCH_AGGREGATOR_LEAD_VALIDATION_DATAS= ({
   commit
@@ -5,7 +6,7 @@ export const FETCH_AGGREGATOR_LEAD_VALIDATION_DATAS= ({
   let sorting = request.pagination.descending ? 'asc' : 'desc';
   return api
     .get(
-      "tpt-lead-validation-tracker-pagination-list-paged/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"?page=" +
+      "tpt-lead-validation-tracker-pagination-list-paged/"+getAggregatorId()+"?page=" +
       request.pagination.page +
       "&size=" +
       request.pagination.rowsPerPage +

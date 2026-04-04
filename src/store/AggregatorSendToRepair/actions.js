@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import { or } from '@vuelidate/validators';
 import api from '../api.js';
 export const FETCH_PHONEPE_SEND_TO_REPAIR_DETAILS = ({
@@ -48,7 +49,7 @@ export const APPROVE_PHONEPE_SEND_TO_REPAIR = ({ commit }, request) => {
   console.log("|REQUEST : " +JSON.stringify(request))
 
     return api
-      .post("aggregator-inventory/agg-central-faulty-device-accept-or-move-to-scrap/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/1", request)
+      .post("aggregator-inventory/agg-central-faulty-device-accept-or-move-to-scrap/"+getAggregatorId()+"/1", request)
       .then(response => {
         console.log(response);
         let data = {
@@ -64,7 +65,7 @@ export const APPROVE_PHONEPE_SEND_TO_REPAIR = ({ commit }, request) => {
   export const PHONEPE_MOVED_TO_SCRAP_DATAS = ({ commit }, request) => {
     console.log("|REQUEST : " + request)
     return api
-      .post("aggregator-inventory/agg-central-faulty-device-accept-or-move-to-scrap/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/2",request)
+      .post("aggregator-inventory/agg-central-faulty-device-accept-or-move-to-scrap/"+getAggregatorId()+"/2",request)
       .then(response => {
         console.log(response);
         let data = {

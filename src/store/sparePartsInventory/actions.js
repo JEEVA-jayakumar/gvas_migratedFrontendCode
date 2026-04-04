@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import api from '../api.js';
 export const UPDATE_SPARE_PARTS_INVENTORY_DATAS= ({
     commit,
@@ -24,7 +25,7 @@ export const UPDATE_SPARE_PARTS_INVENTORY_DATAS= ({
     rootState
   }, request) => {
     console.log("SUBMIT request",JSON.stringify(request))
-    return api.post("aggregator-spare-parts/agg-createSoPod/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]),request)
+    return api.post("aggregator-spare-parts/agg-createSoPod/"+getAggregatorId(),request)
   }
 
    /* PHONEPE API END */
@@ -64,7 +65,7 @@ export const UPDATE_SPARE_PARTS_INVENTORY_DATAS= ({
     }else {
       pathVar = 4
     }
-    return api.post("aggregator-spare-parts/agg-createPod/"+pathVar +"/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]),request)
+    return api.post("aggregator-spare-parts/agg-createPod/"+pathVar +"/"+getAggregatorId(),request)
   }
 
 

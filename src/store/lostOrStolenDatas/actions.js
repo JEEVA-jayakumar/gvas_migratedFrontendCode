@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import { or } from '@vuelidate/validators';
 import api from '../api.js';
 
@@ -64,7 +65,7 @@ export const FETCH_ALL_LOST_DEVICES_DATAS = ({
     let sorting = request.pagination.descending ? 'asc' : 'desc';
     return api
       .get(
-        'aggregator-inventory/agg-get-lost-or-stolen-device/' + request.filter+"/" +JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+'?page=' +
+        'aggregator-inventory/agg-get-lost-or-stolen-device/' + request.filter+"/" +getAggregatorId()+'?page=' +
         request.pagination.page +
         '&size=' +
         request.pagination.rowsPerPage +

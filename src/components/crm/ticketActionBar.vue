@@ -120,6 +120,9 @@
   import _ from 'lodash';
 
   export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
     name: "ticketActionBar",
     setup () {
       return { v$: useVuelidate() }

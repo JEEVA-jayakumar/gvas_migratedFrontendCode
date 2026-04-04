@@ -13,26 +13,26 @@
               <div class="row q-col-gutter-sm">
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select 
-                  @blur="$v.merchant.salesInformation.institutionCode.$touch"      
-                  :error="$v.merchant.salesInformation.institutionCode.$error" 
+                  @blur="v$.merchant.salesInformation.institutionCode.$touch"
+                  :error="v$.merchant.salesInformation.institutionCode.$error"
                   placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.institutionCode" label="Institution Code*" :options="institutionCodeOptions" @update:model-value="fetchAllDropdownValuesFromMARSapi"/>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select 
-                  @blur="$v.merchant.salesInformation.applicationType.$touch"      
-                  :error="$v.merchant.salesInformation.applicationType.$error" 
+                  @blur="v$.merchant.salesInformation.applicationType.$touch"
+                  :error="v$.merchant.salesInformation.applicationType.$error"
                   placeholder="Choose from the below*" color="grey-9" v-model="merchant.salesInformation.applicationType" label="Application Type*" :options="applicationTypeOptions" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input 
-                  @blur="$v.merchant.salesInformation.applicationNumber.$touch"      
-                  :error="$v.merchant.salesInformation.applicationNumber.$error" 
+                  @blur="v$.merchant.salesInformation.applicationNumber.$touch"
+                  :error="v$.merchant.salesInformation.applicationNumber.$error"
                   color="grey-9" v-model="merchant.salesInformation.applicationNumber"  label="Application Number*" placeholder="Application Number*" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input
-                  @blur="$v.merchant.salesInformation.applicationDate.$touch"      
-                  :error="$v.merchant.salesInformation.applicationDate.$error"
+                  @blur="v$.merchant.salesInformation.applicationDate.$touch"
+                  :error="v$.merchant.salesInformation.applicationDate.$error"
                   format="DD/MM/YYYY"
                   color="grey-9" 
                   minimal 
@@ -44,38 +44,38 @@
                   <q-input
                   format="DD/MM/YYYY"
                   format-model="date"
-                  @blur="$v.merchant.salesInformation.aggreementDate.$touch"      
-                  :error="$v.merchant.salesInformation.aggreementDate.$error"
+                  @blur="v$.merchant.salesInformation.aggreementDate.$touch"
+                  :error="v$.merchant.salesInformation.aggreementDate.$error"
                   color="grey-9" minimal v-model="merchant.salesInformation.aggreementDate"  label="Agreement Date*" placeholder="Agreement Date*" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select 
-                  @blur="$v.merchant.salesInformation.merchantType.$touch"      
-                  :error="$v.merchant.salesInformation.merchantType.$error"
+                  @blur="v$.merchant.salesInformation.merchantType.$touch"
+                  :error="v$.merchant.salesInformation.merchantType.$error"
                   placeholder="Choose from the below*" color="grey-9" v-model="merchant.salesInformation.merchantType" label="Merchant Type*" :options="merchantTypeOptions" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select 
-                  @blur="$v.merchant.salesInformation.categoryType.$touch"      
-                  :error="$v.merchant.salesInformation.categoryType.$error"
+                  @blur="v$.merchant.salesInformation.categoryType.$touch"
+                  :error="v$.merchant.salesInformation.categoryType.$error"
                   placeholder="Choose from the below*" color="grey-9" v-model="merchant.salesInformation.categoryType" label="Category Type*" :options="categoryTypeOptions" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select 
                   placeholder="Choose from the below*" color="grey-9" 
-                  @blur="$v.merchant.salesInformation.salesPersonCode.$touch"      
-                  :error="$v.merchant.salesInformation.salesPersonCode.$error" v-model="merchant.salesInformation.salesPersonCode" label="Sales Person*" :options="salesPersonOptions" />
+                  @blur="v$.merchant.salesInformation.salesPersonCode.$touch"
+                  :error="v$.merchant.salesInformation.salesPersonCode.$error" v-model="merchant.salesInformation.salesPersonCode" label="Sales Person*" :options="salesPersonOptions" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9" 
-                  @blur="$v.merchant.salesInformation.region.$touch"      
-                  :error="$v.merchant.salesInformation.region.$error"
+                  @blur="v$.merchant.salesInformation.region.$touch"
+                  :error="v$.merchant.salesInformation.region.$error"
                   v-model="merchant.salesInformation.region" label="Region*" :options="regionOptions" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below*" color="grey-9" 
-                  @blur="$v.merchant.salesInformation.leadFrom.$touch"      
-                  :error="$v.merchant.salesInformation.leadFrom.$error" v-model="merchant.salesInformation.leadFrom" label="Lead From*" :options="leadFromOptions" />
+                  @blur="v$.merchant.salesInformation.leadFrom.$touch"
+                  :error="v$.merchant.salesInformation.leadFrom.$error" v-model="merchant.salesInformation.leadFrom" label="Lead From*" :options="leadFromOptions" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <p class="q-caption">Sharing Model</p>
@@ -88,56 +88,56 @@
               <div v-if="merchant.salesInformation.sharingModelCode == 'T'" class="row gutter-sm q-my-xs">
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select 
-                  @blur="$v.merchant.salesInformation.sharingPartnerCode.$touch"      
-                  :error="$v.merchant.salesInformation.sharingPartnerCode.$error"
+                  @blur="v$.merchant.salesInformation.sharingPartnerCode.$touch"
+                  :error="v$.merchant.salesInformation.sharingPartnerCode.$error"
                   placeholder="Choose from the below*" color="grey-9" v-model="merchant.salesInformation.sharingPartnerCode" label="Sharing partner*" :options="sharingPartnerOptions" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input 
-                  @blur="$v.merchant.salesInformation.dailyFixedAmount.$touch"      
-                  :error="$v.merchant.salesInformation.dailyFixedAmount.$error"
+                  @blur="v$.merchant.salesInformation.dailyFixedAmount.$touch"
+                  :error="v$.merchant.salesInformation.dailyFixedAmount.$error"
                   color="grey-9" v-model="merchant.salesInformation.dailyFixedAmount"  label="Daily fixed amount*" type="number" placeholder="Daily fixed amount*" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input 
-                  @blur="$v.merchant.salesInformation.loanDisbursementPercentage.$touch"      
-                  :error="$v.merchant.salesInformation.loanDisbursementPercentage.$error"
+                  @blur="v$.merchant.salesInformation.loanDisbursementPercentage.$touch"
+                  :error="v$.merchant.salesInformation.loanDisbursementPercentage.$error"
                   color="grey-9" v-model="merchant.salesInformation.loanDisbursementPercentage"  label="Percentage*" type="number" placeholder="Percentage*" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input
                   format="DD/MM/YYYY"
                   format-model="date"
-                  @blur="$v.merchant.salesInformation.loanDisbursementAmount.$touch"      
-                  :error="$v.merchant.salesInformation.loanDisbursementAmount.$error"
+                  @blur="v$.merchant.salesInformation.loanDisbursementAmount.$touch"
+                  :error="v$.merchant.salesInformation.loanDisbursementAmount.$error"
                   color="grey-9" v-model="merchant.salesInformation.loanDisbursementAmount"  label="Loan disbursement value*" type="number" placeholder="Loan disbursement value*" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input
                   format="DD/MM/YYYY"
                   format-model="date"
-                  @blur="$v.merchant.salesInformation.loanDisbursementDate.$touch"      
-                  :error="$v.merchant.salesInformation.loanDisbursementDate.$error"
+                  @blur="v$.merchant.salesInformation.loanDisbursementDate.$touch"
+                  :error="v$.merchant.salesInformation.loanDisbursementDate.$error"
                   color="grey-9" minimal v-model="merchant.salesInformation.loanDisbursementDate"   label="Disbursement Date*" placeholder="Disbursement Date*" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input 
-                  @blur="$v.merchant.salesInformation.tenureMonth.$touch"      
-                  :error="$v.merchant.salesInformation.tenureMonth.$error"
+                  @blur="v$.merchant.salesInformation.tenureMonth.$touch"
+                  :error="v$.merchant.salesInformation.tenureMonth.$error"
                   color="grey-9" v-model="merchant.salesInformation.tenureMonth"  label="Tenure (in months)*" type="number" placeholder="Tenure (in months)*" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input 
-                  @blur="$v.merchant.salesInformation.tenureDay.$touch"      
-                  :error="$v.merchant.salesInformation.tenureDay.$error"
+                  @blur="v$.merchant.salesInformation.tenureDay.$touch"
+                  :error="v$.merchant.salesInformation.tenureDay.$error"
                   color="grey-9" v-model="merchant.salesInformation.tenureDay"  label="Tenure (in days)*" type="number" placeholder="Tenure (in days)*" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input
                   format="DD/MM/YYYY"
                   format-model="date"
-                  @blur="$v.merchant.salesInformation.tenureStartDate.$touch"      
-                  :error="$v.merchant.salesInformation.tenureStartDate.$error"
+                  @blur="v$.merchant.salesInformation.tenureStartDate.$touch"
+                  :error="v$.merchant.salesInformation.tenureStartDate.$error"
                   color="grey-9" minimal v-model="merchant.salesInformation.tenureStartDate"  label="Start Date*" placeholder="Tenure Start Date*" />
                 </div>
               </div>
@@ -146,20 +146,20 @@
               class="row gutter-sm q-my-xs">
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select
-                  @blur="$v.merchant.salesInformation.sharingPartnerCode.$touch"      
-                  :error="$v.merchant.salesInformation.sharingPartnerCode.$error"
+                  @blur="v$.merchant.salesInformation.sharingPartnerCode.$touch"
+                  :error="v$.merchant.salesInformation.sharingPartnerCode.$error"
                   placeholder="Choose from the below*" color="grey-9" v-model="merchant.salesInformation.sharingPartnerCode" label="Sharing partner*" :options="sharingPartnerOptions" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input 
-                  @blur="$v.merchant.salesInformation.rentPercentage.$touch"      
-                  :error="$v.merchant.salesInformation.rentPercentage.$error"
+                  @blur="v$.merchant.salesInformation.rentPercentage.$touch"
+                  :error="v$.merchant.salesInformation.rentPercentage.$error"
                   color="grey-9" v-model="merchant.salesInformation.rentPercentage"  label="Rent %*" type="number" placeholder="Rent %*" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input 
-                  @blur="$v.merchant.salesInformation.rentFixed.$touch"      
-                  :error="$v.merchant.salesInformation.rentFixed.$error"
+                  @blur="v$.merchant.salesInformation.rentFixed.$touch"
+                  :error="v$.merchant.salesInformation.rentFixed.$error"
                   color="grey-9" v-model="merchant.salesInformation.rentFixed"  label="Rent fixed*" type="number" placeholder="Rent fixed*" />
                 </div>
               </div>
@@ -173,26 +173,26 @@
               <div class="row q-col-gutter-sm">
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-input 
-                    @blur="$v.merchant.companyInformation.legalName.$touch"      
-                    :error="$v.merchant.companyInformation.legalName.$error"
+                    @blur="v$.merchant.companyInformation.legalName.$touch"
+                    :error="v$.merchant.companyInformation.legalName.$error"
                     color="grey-9" v-model="merchant.companyInformation.legalName" label="Legal Name*" placeholder="Legal Name*" />
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-input 
-                    @blur="$v.merchant.companyInformation.dbaName.$touch"      
-                    :error="$v.merchant.companyInformation.dbaName.$error" 
+                    @blur="v$.merchant.companyInformation.dbaName.$touch"
+                    :error="v$.merchant.companyInformation.dbaName.$error"
                     color="grey-9" v-model="merchant.companyInformation.dbaName" label="DBA Name*" placeholder="DBA Name*" />
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-input 
-                    @blur="$v.merchant.companyInformation.registeredAddress.$touch"      
-                    :error="$v.merchant.companyInformation.registeredAddress.$error"
+                    @blur="v$.merchant.companyInformation.registeredAddress.$touch"
+                    :error="v$.merchant.companyInformation.registeredAddress.$error"
                     color="grey-9" v-model="merchant.companyInformation.registeredAddress" label="Registered Address*" placeholder="Registered Address*" />
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-input 
-                    @blur="$v.merchant.companyInformation.registeredCityRefCode.$touch"      
-                    :error="$v.merchant.companyInformation.registeredCityRefCode.$error"
+                    @blur="v$.merchant.companyInformation.registeredCityRefCode.$touch"
+                    :error="v$.merchant.companyInformation.registeredCityRefCode.$error"
                     color="grey-9" v-model="merchant.companyInformation.registeredCityName" label="Registered city*" placeholder="Start typing ..*">
                       <q-autocomplete
                       separator
@@ -205,8 +205,8 @@
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-input 
-                    @blur="$v.merchant.companyInformation.registeredStateRefCode.$touch"      
-                    :error="$v.merchant.companyInformation.registeredStateRefCode.$error"
+                    @blur="v$.merchant.companyInformation.registeredStateRefCode.$touch"
+                    :error="v$.merchant.companyInformation.registeredStateRefCode.$error"
                     color="grey-9" v-model="merchant.companyInformation.registeredStateName" label="Registered state*" placeholder="Start typing ..*">
                       <q-autocomplete
                       separator
@@ -219,21 +219,21 @@
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-input 
-                    @blur="$v.merchant.companyInformation.registeredPin.$touch"      
-                    :error="$v.merchant.companyInformation.registeredPin.$error"
+                    @blur="v$.merchant.companyInformation.registeredPin.$touch"
+                    :error="v$.merchant.companyInformation.registeredPin.$error"
                     color="grey-9" type="number" v-model="merchant.companyInformation.registeredPin" label="PIN*" placeholder="PIN*" />
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-select 
                     @update:model-value="togglePartnersTab"
-                    @blur="$v.merchant.companyInformation.constitution.$touch"      
-                    :error="$v.merchant.companyInformation.constitution.$error"
+                    @blur="v$.merchant.companyInformation.constitution.$touch"
+                    :error="v$.merchant.companyInformation.constitution.$error"
                     placeholder="Choose from the below*" color="grey-9" v-model="merchant.companyInformation.constitution" label="Type of business entity*" :options="constitutionOptions" />
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-input color="grey-9" minimal
-                    @blur="$v.merchant.companyInformation.establishYear.$touch" 
-                    :error="$v.merchant.companyInformation.establishYear.$error"     v-model="merchant.companyInformation.establishYear" label="Year of Establishment*" placeholder="Year of Establishment*" />
+                    @blur="v$.merchant.companyInformation.establishYear.$touch"
+                    :error="v$.merchant.companyInformation.establishYear.$error"     v-model="merchant.companyInformation.establishYear" label="Year of Establishment*" placeholder="Year of Establishment*" />
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-input color="grey-9" v-model="merchant.companyInformation.registerNumber" label="Establish Number*" placeholder="Establish Number*" />
@@ -255,8 +255,8 @@
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-input 
-                    @blur="$v.merchant.companyInformation.mcc.$touch"      
-                    :error="$v.merchant.companyInformation.mcc.$error"
+                    @blur="v$.merchant.companyInformation.mcc.$touch"
+                    :error="v$.merchant.companyInformation.mcc.$error"
                     color="grey-9" v-model="merchant.companyInformation.mccname" label="MCC*" placeholder="Start typing ..*">
                       <q-autocomplete
                       separator
@@ -269,20 +269,20 @@
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-input 
-                    @blur="$v.merchant.companyInformation.residentialAddress.$touch"      
-                    :error="$v.merchant.companyInformation.residentialAddress.$error"
+                    @blur="v$.merchant.companyInformation.residentialAddress.$touch"
+                    :error="v$.merchant.companyInformation.residentialAddress.$error"
                     color="grey-9" v-model="merchant.companyInformation.residentialAddress" label="Residential Address*" placeholder="Residential Address*" />
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-input 
-                    @blur="$v.merchant.companyInformation.residentialPin.$touch"      
-                    :error="$v.merchant.companyInformation.residentialPin.$error"
+                    @blur="v$.merchant.companyInformation.residentialPin.$touch"
+                    :error="v$.merchant.companyInformation.residentialPin.$error"
                     color="grey-9" type="number" v-model="merchant.companyInformation.residentialPin" label="PIN*" placeholder="PIN*" />
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-input 
-                    @blur="$v.merchant.companyInformation.residentialCityRefCode.$touch"      
-                    :error="$v.merchant.companyInformation.residentialCityRefCode.$error"
+                    @blur="v$.merchant.companyInformation.residentialCityRefCode.$touch"
+                    :error="v$.merchant.companyInformation.residentialCityRefCode.$error"
                     color="grey-9" v-model="merchant.companyInformation.residentCityName" label="City (type min 3 characters)*" placeholder="Start typing ..*">
                       <q-autocomplete
                       separator
@@ -295,8 +295,8 @@
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-input
-                    @blur="$v.merchant.companyInformation.residentialStateRefCode.$touch"      
-                    :error="$v.merchant.companyInformation.residentialStateRefCode.$error"
+                    @blur="v$.merchant.companyInformation.residentialStateRefCode.$touch"
+                    :error="v$.merchant.companyInformation.residentialStateRefCode.$error"
                     color="grey-9" v-model="merchant.companyInformation.residentStateName" label="State (type min 3 characters)*" placeholder="Start typing ..*">
                       <q-autocomplete
                       separator
@@ -309,14 +309,14 @@
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-input 
-                    @blur="$v.merchant.companyInformation.contactName.$touch"      
-                    :error="$v.merchant.companyInformation.contactName.$error"
+                    @blur="v$.merchant.companyInformation.contactName.$touch"
+                    :error="v$.merchant.companyInformation.contactName.$error"
                     color="grey-9" v-model="merchant.companyInformation.contactName" label="Contact Name*" placeholder="Contact Name*" />
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-input 
-                    @blur="$v.merchant.companyInformation.contactMobile.$touch"      
-                    :error="$v.merchant.companyInformation.contactMobile.$error"
+                    @blur="v$.merchant.companyInformation.contactMobile.$touch"
+                    :error="v$.merchant.companyInformation.contactMobile.$error"
                     color="grey-9" type="number" v-model="merchant.companyInformation.contactMobile" label="Contact mobile*" placeholder="Contact Mobile*" />
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
@@ -324,21 +324,21 @@
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-input color="grey-9" type="tel" 
-                    @blur="$v.merchant.companyInformation.contactPhone.$touch"      
-                    :error="$v.merchant.companyInformation.contactPhone.$error" v-model="merchant.companyInformation.contactPhone" label="Contact Phone*" placeholder="Contact Phone*" />
+                    @blur="v$.merchant.companyInformation.contactPhone.$touch"
+                    :error="v$.merchant.companyInformation.contactPhone.$error" v-model="merchant.companyInformation.contactPhone" label="Contact Phone*" placeholder="Contact Phone*" />
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <q-input 
-                    @blur="$v.merchant.companyInformation.contactEmail.$touch"      
-                    :error="$v.merchant.companyInformation.contactEmail.$error"
+                    @blur="v$.merchant.companyInformation.contactEmail.$touch"
+                    :error="v$.merchant.companyInformation.contactEmail.$error"
                     color="grey-9" type="email" v-model="merchant.companyInformation.contactEmail" label="Contact Email*" placeholder="Contact Email*" />
                   </div>
                   <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="q-caption">Statement type</div>
                     <div class="group">
                       <q-radio 
-                      @blur="$v.merchant.companyInformation.statementType.$touch"      
-                      :error="$v.merchant.companyInformation.statementType.$error"
+                      @blur="v$.merchant.companyInformation.statementType.$touch"
+                      :error="v$.merchant.companyInformation.statementType.$error"
                       v-for="(item,index) in viewBinding.statementType" :key="index" color="grey-9" v-model="merchant.companyInformation.statementType" :val="item.value" :label="item.label"
                         />
                     </div>
@@ -347,8 +347,8 @@
                     <p class="q-caption">Statement frequency</p>
                     <div class="group">
                       <q-radio 
-                      @blur="$v.merchant.companyInformation.statementFrequency.$touch"      
-                      :error="$v.merchant.companyInformation.statementFrequency.$error"
+                      @blur="v$.merchant.companyInformation.statementFrequency.$touch"
+                      :error="v$.merchant.companyInformation.statementFrequency.$error"
                       v-for="(item,index) in viewBinding.statementFrequency" :key="index" color="grey-9" v-model="merchant.companyInformation.statementFrequency" :val="item.value" :label="item.label" />
                     </div>
                   </div>
@@ -363,14 +363,14 @@
               </q-stepper-navigation>
             </q-step>
             <q-step error-icon="warning" name="third" :error="businessInformationError" :order="3" title="Partners" v-if="showPartnerstab">
-                <div v-for="(v,index) in $v.viewBinding.partnersArr.$each" :key="index" class="row q-my-xs gutter-sm" ref="parentElement">
+                <div v-for="(v,index) in v$.viewBinding.partnersArr.$each" :key="index" class="row q-my-xs gutter-sm" ref="parentElement">
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="row group items-center">
                       <div class="col">
                         <span class="q-pa-sm bg-light text-dark"><q-icon name="people" /> 
                         Partner 0{{parseInt(index)+1}}</span>
                       </div>
-                      <div class="col-auto" v-if="$v.viewBinding.partnersArr.$each.length > 1">
+                      <div class="col-auto" v-if="v$.viewBinding.partnersArr.$each.length > 1">
                         <q-btn round icon="delete" @click="removePartnerFromArr(v,index)" color="negative" />
                       </div>
                     </div>
@@ -478,8 +478,8 @@
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input color="grey-9" 
-                  @blur="$v.merchant.businessInformation.gstId.$touch"      
-                  :error="$v.merchant.businessInformation.gstId.$error"
+                  @blur="v$.merchant.businessInformation.gstId.$touch"
+                  :error="v$.merchant.businessInformation.gstId.$error"
                   v-model="merchant.businessInformation.gstId" label="GST ID*" placeholder="GST ID*" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
@@ -497,8 +497,8 @@
                   <q-input
                   format="DD/MM/YYYY"
                   format-model="date"
-                  @blur="$v.merchant.businessInformation.memberSince.$touch"      
-                  :error="$v.merchant.businessInformation.memberSince.$error"
+                  @blur="v$.merchant.businessInformation.memberSince.$touch"
+                  :error="v$.merchant.businessInformation.memberSince.$error"
                   color="grey-9" minimal v-model="merchant.businessInformation.memberSince"  label="Member since*" placeholder="Member since*" />
                 </div>
               </div>
@@ -514,8 +514,8 @@
                   <p class="q-caption">Device Owned By</p>
                   <div class="group">
                     <q-radio 
-                    @blur="$v.merchant.paymentDetails.deviceOwnedBy.$touch"      
-                    :error="$v.merchant.paymentDetails.deviceOwnedBy.$error" 
+                    @blur="v$.merchant.paymentDetails.deviceOwnedBy.$touch"
+                    :error="v$.merchant.paymentDetails.deviceOwnedBy.$error"
                     v-for="(item,index) in deviceOwnedByOptions" :key="index" color="grey-9" v-model="merchant.paymentDetails.deviceOwnedBy" :val="item.value" :label="item.label" 
                     />
                   </div>
@@ -523,15 +523,15 @@
                 <div class="col-md-6 col-sm-12">
                   <q-input 
                   color="grey-9" type="number" 
-                  @blur="$v.merchant.paymentDetails.installationFee.$touch"      
-                    :error="$v.merchant.paymentDetails.installationFee.$error" 
+                  @blur="v$.merchant.paymentDetails.installationFee.$touch"
+                    :error="v$.merchant.paymentDetails.installationFee.$error"
                     v-model="merchant.paymentDetails.installationFee" label="Installation Fee*" placeholder="Installation Fee*"
                   />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below" color="grey-9" 
-                  @blur="$v.merchant.paymentDetails.terminalModeCode.$touch"      
-                  :error="$v.merchant.paymentDetails.terminalModeCode.$error" 
+                  @blur="v$.merchant.paymentDetails.terminalModeCode.$touch"
+                  :error="v$.merchant.paymentDetails.terminalModeCode.$error"
                   v-model="merchant.paymentDetails.terminalModeCode" label="Terminal Model*" :options="terminalModelSet" />
                 </div>
                 <div class="col-md-6 col-sm-12">
@@ -541,8 +541,8 @@
                     <p class="q-caption">Cash @POS Enabled?</p>
                     <div class="group">
                       <q-radio 
-                      @blur="$v.merchant.paymentDetails.cashAtPosEnabled.$touch"      
-                      :error="$v.merchant.paymentDetails.cashAtPosEnabled.$error" 
+                      @blur="v$.merchant.paymentDetails.cashAtPosEnabled.$touch"
+                      :error="v$.merchant.paymentDetails.cashAtPosEnabled.$error"
                       v-for="(item,index) in cashAtPosEnabledOptions" :key="index" color="grey-9" v-model="merchant.paymentDetails.cashAtPosEnabled" :val="item.value" :label="item.label"
                       />
                     </div>
@@ -557,33 +557,33 @@
                     <p class="q-caption">Rental Type</p>
                     <div class="group">
                       <q-radio 
-                      @blur="$v.merchant.paymentDetails.rentalType.$touch"      
-                      :error="$v.merchant.paymentDetails.rentalType.$error" 
+                      @blur="v$.merchant.paymentDetails.rentalType.$touch"
+                      :error="v$.merchant.paymentDetails.rentalType.$error"
                       v-for="(item,index) in rentalTypeOptions" :key="index" 
                       color="grey-9" v-model="merchant.paymentDetails.rentalType" :val="item.value" :label="item.label" />
                     </div>
                 </div>
 
                 <div v-if="merchant.paymentDetails.rentalType == 'R'" class="col-md-6 col-sm-12 col-xs-12">
-                  <q-input @blur="$v.merchant.paymentDetails.gracePeriod.$touch"      
-                      :error="$v.merchant.paymentDetails.gracePeriod.$error"  color="grey-9" type="number" v-model="merchant.paymentDetails.gracePeriod" label="Grace period*" placeholder="Grace period*" />
+                  <q-input @blur="v$.merchant.paymentDetails.gracePeriod.$touch"
+                      :error="v$.merchant.paymentDetails.gracePeriod.$error"  color="grey-9" type="number" v-model="merchant.paymentDetails.gracePeriod" label="Grace period*" placeholder="Grace period*" />
                 </div>
                 <div v-if="merchant.paymentDetails.rentalType == 'A'"  class="col-md-6 col-sm-12 col-xs-12">
                   <q-input color="grey-9" type="number" 
-                      @blur="$v.merchant.paymentDetails.advanceRentCollected.$touch"      
-                      :error="$v.merchant.paymentDetails.advanceRentCollected.$error"  v-model="merchant.paymentDetails.advanceRentCollected" label="Advance Rent Collected*" placeholder="Advance Rent Collected*" />
+                      @blur="v$.merchant.paymentDetails.advanceRentCollected.$touch"
+                      :error="v$.merchant.paymentDetails.advanceRentCollected.$error"  v-model="merchant.paymentDetails.advanceRentCollected" label="Advance Rent Collected*" placeholder="Advance Rent Collected*" />
                 </div>
                 <div v-if="merchant.paymentDetails.rentalType == 'A'"  class="col-md-6 col-sm-12 col-xs-12">
                   <q-input color="grey-9" type="number" 
-                   @blur="$v.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$touch"      
-                      :error="$v.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$error" v-model="merchant.paymentDetails.noOfMonthRentPaidInAdvance" label="No. Of Month Rent Paid In Advance*" placeholder="No. Of Month Rent Paid In Advance*" />
+                   @blur="v$.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$touch"
+                      :error="v$.merchant.paymentDetails.noOfMonthRentPaidInAdvance.$error" v-model="merchant.paymentDetails.noOfMonthRentPaidInAdvance" label="No. Of Month Rent Paid In Advance*" placeholder="No. Of Month Rent Paid In Advance*" />
                 </div>
                 <div v-if="merchant.paymentDetails.rentalType == 'A'"  class="col-md-6 col-sm-12 col-xs-12">
                   <p class="q-caption">Advanced Rent Mode</p>
                   <div class="group">
                     <q-radio 
-                    @blur="$v.merchant.paymentDetails.advanceRentMode.$touch"      
-                    :error="$v.merchant.paymentDetails.advanceRentMode.$error" 
+                    @blur="v$.merchant.paymentDetails.advanceRentMode.$touch"
+                    :error="v$.merchant.paymentDetails.advanceRentMode.$error"
                     v-for="(item,index) in advanceRentModeOptions" :key="index" 
                     color="grey-9" v-model="merchant.paymentDetails.advanceRentMode" :val="item.value" :label="item.label" />
                   </div>
@@ -620,8 +620,8 @@
                                   </div>
                                   <div class="col">
                                       <q-input color="grey-9" type="number" 
-                                      @blur="$v.merchant.mdrPlan.domesticDebitUpTo2000.percentage.$touch"      
-                                      :error="$v.merchant.mdrPlan.domesticDebitUpTo2000.percentage.$error" 
+                                      @blur="v$.merchant.mdrPlan.domesticDebitUpTo2000.percentage.$touch"
+                                      :error="v$.merchant.mdrPlan.domesticDebitUpTo2000.percentage.$error"
                                       v-model="merchant.mdrPlan.domesticDebitUpTo2000.percentage" placeholder="%" />
                                   </div>
                                   <div class="col">
@@ -655,8 +655,8 @@
                                   </div>
                                   <div class="col">
                                       <q-input color="grey-9" type="number" 
-                                      @blur="$v.merchant.mdrPlan.domesticDebitAbove2000.percentage.$touch"      
-                                      :error="$v.merchant.mdrPlan.domesticDebitAbove2000.percentage.$error" v-model="merchant.mdrPlan.domesticDebitAbove2000.percentage" placeholder="%" />
+                                      @blur="v$.merchant.mdrPlan.domesticDebitAbove2000.percentage.$touch"
+                                      :error="v$.merchant.mdrPlan.domesticDebitAbove2000.percentage.$error" v-model="merchant.mdrPlan.domesticDebitAbove2000.percentage" placeholder="%" />
                                   </div>
                                   <div class="col">
                                       <q-input color="grey-9" type="number" v-model="merchant.mdrPlan.domesticDebitAbove2000.minimum" placeholder="Max" />
@@ -689,8 +689,8 @@
                                   </div>
                                   <div class="col">
                                       <q-input color="grey-9" type="number" 
-                                      @blur="$v.merchant.mdrPlan.standardOrClassic.percentage.$touch"
-                                      :error="$v.merchant.mdrPlan.standardOrClassic.percentage.$error" 
+                                      @blur="v$.merchant.mdrPlan.standardOrClassic.percentage.$touch"
+                                      :error="v$.merchant.mdrPlan.standardOrClassic.percentage.$error"
                                       v-model="merchant.mdrPlan.standardOrClassic.percentage" placeholder="%" />
                                   </div>
                                   <div class="col">
@@ -723,8 +723,8 @@
                                   </div>
                                   <div class="col">
                                       <q-input color="grey-9" type="number" 
-                                      @blur="$v.merchant.mdrPlan.premiumOrPlatinum.percentage.$touch"
-                                      :error="$v.merchant.mdrPlan.premiumOrPlatinum.percentage.$error" v-model="merchant.mdrPlan.premiumOrPlatinum.percentage" placeholder="%" />
+                                      @blur="v$.merchant.mdrPlan.premiumOrPlatinum.percentage.$touch"
+                                      :error="v$.merchant.mdrPlan.premiumOrPlatinum.percentage.$error" v-model="merchant.mdrPlan.premiumOrPlatinum.percentage" placeholder="%" />
                                   </div>
                                   <div class="col">
                                       <q-input color="grey-9" type="number" v-model="merchant.mdrPlan.premiumOrPlatinum.minimum" placeholder="Max" />
@@ -756,8 +756,8 @@
                                   </div>
                                   <div class="col">
                                       <q-input color="grey-9" type="number" 
-                                      @blur="$v.merchant.mdrPlan.superPremiumOrSignature.percentage.$touch"
-                                      :error="$v.merchant.mdrPlan.superPremiumOrSignature.percentage.$error" 
+                                      @blur="v$.merchant.mdrPlan.superPremiumOrSignature.percentage.$touch"
+                                      :error="v$.merchant.mdrPlan.superPremiumOrSignature.percentage.$error"
                                       v-model="merchant.mdrPlan.superPremiumOrSignature.percentage" placeholder="%" />
                                   </div>
                                   <div class="col">
@@ -790,8 +790,8 @@
                                   </div>
                                   <div class="col">
                                       <q-input color="grey-9" type="number" 
-                                      @blur="$v.merchant.mdrPlan.commercialOrCorporate.percentage.$touch"
-                                      :error="$v.merchant.mdrPlan.commercialOrCorporate.percentage.$error" 
+                                      @blur="v$.merchant.mdrPlan.commercialOrCorporate.percentage.$touch"
+                                      :error="v$.merchant.mdrPlan.commercialOrCorporate.percentage.$error"
                                       v-model="merchant.mdrPlan.commercialOrCorporate.percentage" placeholder="%" />
                                   </div>
                                   <div class="col">
@@ -824,8 +824,8 @@
                                   </div>
                                   <div class="col">
                                       <q-input color="grey-9" type="number" 
-                                      @blur="$v.merchant.mdrPlan.internationalDebitCard.percentage.$touch"
-                                      :error="$v.merchant.mdrPlan.internationalDebitCard.percentage.$error" v-model="merchant.mdrPlan.internationalDebitCard.percentage" placeholder="%" />
+                                      @blur="v$.merchant.mdrPlan.internationalDebitCard.percentage.$touch"
+                                      :error="v$.merchant.mdrPlan.internationalDebitCard.percentage.$error" v-model="merchant.mdrPlan.internationalDebitCard.percentage" placeholder="%" />
                                   </div>
                                   <div class="col">
                                       <q-input color="grey-9" type="number" v-model="merchant.mdrPlan.internationalDebitCard.minimum" placeholder="Max" />
@@ -857,8 +857,8 @@
                                   </div>
                                   <div class="col">
                                       <q-input color="grey-9" type="number" 
-                                      @blur="$v.merchant.mdrPlan.internationalCreditCard.percentage.$touch"
-                                      :error="$v.merchant.mdrPlan.internationalCreditCard.percentage.$error" 
+                                      @blur="v$.merchant.mdrPlan.internationalCreditCard.percentage.$touch"
+                                      :error="v$.merchant.mdrPlan.internationalCreditCard.percentage.$error"
                                       v-model="merchant.mdrPlan.internationalCreditCard.percentage" placeholder="%" />
                                   </div>
                                   <div class="col">
@@ -891,8 +891,8 @@
                                   </div>
                                   <div class="col">
                                       <q-input color="grey-9" type="number" 
-                                       @blur="$v.merchant.mdrPlan.onus.percentage.$touch"
-                                      :error="$v.merchant.mdrPlan.onus.percentage.$error" 
+                                       @blur="v$.merchant.mdrPlan.onus.percentage.$touch"
+                                      :error="v$.merchant.mdrPlan.onus.percentage.$error"
                                       v-model="merchant.mdrPlan.onus.percentage" placeholder="%" />
                                   </div>
                                   <div class="col">
@@ -925,8 +925,8 @@
                                   </div>
                                   <div class="col">
                                       <q-input color="grey-9" type="number" 
-                                      @blur="$v.merchant.mdrPlan.mVisa.percentage.$touch"
-                                      :error="$v.merchant.mdrPlan.mVisa.percentage.$error" v-model="merchant.mdrPlan.mVisa.percentage" placeholder="%" />
+                                      @blur="v$.merchant.mdrPlan.mVisa.percentage.$touch"
+                                      :error="v$.merchant.mdrPlan.mVisa.percentage.$error" v-model="merchant.mdrPlan.mVisa.percentage" placeholder="%" />
                                   </div>
                                   <div class="col">
                                       <q-input color="grey-9" type="number" v-model="merchant.mdrPlan.mVisa.minimum" placeholder="Max" />
@@ -958,8 +958,8 @@
                                   </div>
                                   <div class="col">
                                       <q-input color="grey-9" type="number" 
-                                      @blur="$v.merchant.mdrPlan.masterPass.percentage.$touch"
-                                      :error="$v.merchant.mdrPlan.masterPass.percentage.$error"
+                                      @blur="v$.merchant.mdrPlan.masterPass.percentage.$touch"
+                                      :error="v$.merchant.mdrPlan.masterPass.percentage.$error"
                                       v-model="merchant.mdrPlan.masterPass.percentage" placeholder="%" />
                                   </div>
                                   <div class="col">
@@ -992,8 +992,8 @@
                                   </div>
                                   <div class="col">
                                       <q-input color="grey-9" type="number"
-                                      @blur="$v.merchant.mdrPlan.cashAtPos.percentage.$touch"
-                                      :error="$v.merchant.mdrPlan.cashAtPos.percentage.$error"
+                                      @blur="v$.merchant.mdrPlan.cashAtPos.percentage.$touch"
+                                      :error="v$.merchant.mdrPlan.cashAtPos.percentage.$error"
                                        v-model="merchant.mdrPlan.cashAtPos.percentage" placeholder="%" />
                                   </div>
                                   <div class="col">
@@ -1030,11 +1030,11 @@
                   <div class="q-title">Merchant Bank Details</div>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                  <q-input color="grey-9" :error="$v.merchant.bankInformation.bankDetails.ifsc.$error" @blur="populateBankDetails"  v-model="merchant.bankInformation.bankDetails.ifsc" label="IFSC Code*" placeholder="Enter IFSC*" />
+                  <q-input color="grey-9" :error="v$.merchant.bankInformation.bankDetails.ifsc.$error" @blur="populateBankDetails"  v-model="merchant.bankInformation.bankDetails.ifsc" label="IFSC Code*" placeholder="Enter IFSC*" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
-                  <q-input color="grey-9"        @blur="$v.merchant.bankInformation.bankDetails.branchName.$touch"      
-                  :error="$v.merchant.bankInformation.bankDetails.branchName.$error" v-model="merchant.bankInformation.bankDetails.branchName" label="Branch Name*" placeholder="Branch Name* " />
+                  <q-input color="grey-9"        @blur="v$.merchant.bankInformation.bankDetails.branchName.$touch"
+                  :error="v$.merchant.bankInformation.bankDetails.branchName.$error" v-model="merchant.bankInformation.bankDetails.branchName" label="Branch Name*" placeholder="Branch Name* " />
                 </div>  
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-select placeholder="Choose from the below" color="grey-9"
@@ -1042,20 +1042,20 @@
                 </div>
                 <div v-if="merchant.bankInformation.bankDetails.feeType == 'N' || merchant.bankInformation.bankDetails.feeType == 'S'" class="col-md-6 col-sm-12 col-xs-12">
                   <q-input color="grey-9" 
-                    @blur="$v.merchant.bankInformation.bankDetails.settlementOrNeftFee.$touch"      
-                    :error="$v.merchant.bankInformation.bankDetails.settlementOrNeftFee.$error" 
+                    @blur="v$.merchant.bankInformation.bankDetails.settlementOrNeftFee.$touch"
+                    :error="v$.merchant.bankInformation.bankDetails.settlementOrNeftFee.$error"
                     v-model="merchant.bankInformation.bankDetails.settlementOrNeftFee" label="NEFT/Settlement Fee Inclusive of Tax*" placeholder="NEFT/Settlement Fee Inclusive of Tax*" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input color="grey-9" 
-                  @blur="$v.merchant.bankInformation.bankDetails.micr.$touch"      
-                  :error="$v.merchant.bankInformation.bankDetails.micr.$error" 
+                  @blur="v$.merchant.bankInformation.bankDetails.micr.$touch"
+                  :error="v$.merchant.bankInformation.bankDetails.micr.$error"
                   v-model="merchant.bankInformation.bankDetails.micr" label="MICR*" placeholder="MICR*" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input color="grey-9" 
-                    @blur="$v.merchant.bankInformation.bankDetails.bankName.$touch"      
-                    :error="$v.merchant.bankInformation.bankDetails.bankName.$error" 
+                    @blur="v$.merchant.bankInformation.bankDetails.bankName.$touch"
+                    :error="v$.merchant.bankInformation.bankDetails.bankName.$error"
                     v-model="merchant.bankInformation.bankDetails.bankName" label="Bank Name*" placeholder="Bank Name*" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
@@ -1063,8 +1063,8 @@
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input color="grey-9" 
-                  @blur="$v.merchant.bankInformation.bankDetails.bankCityName.$touch"      
-                  :error="$v.merchant.bankInformation.bankDetails.bankCityName.$error" 
+                  @blur="v$.merchant.bankInformation.bankDetails.bankCityName.$touch"
+                  :error="v$.merchant.bankInformation.bankDetails.bankCityName.$error"
                   v-model="merchant.bankInformation.bankDetails.bankCityName" label="City (type min 3 characters)*" placeholder="Start typing ..*">
                     <q-autocomplete
                     separator
@@ -1077,8 +1077,8 @@
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input color="grey-9" 
-                    @blur="$v.merchant.bankInformation.bankDetails.bankStateName.$touch"      
-                    :error="$v.merchant.bankInformation.bankDetails.bankStateName.$error" 
+                    @blur="v$.merchant.bankInformation.bankDetails.bankStateName.$touch"
+                    :error="v$.merchant.bankInformation.bankDetails.bankStateName.$error"
                     v-model="merchant.bankInformation.bankDetails.bankStateName" label="State (type min 3 characters)*" placeholder="Start typing ..*">
                     <q-autocomplete
                     separator
@@ -1094,8 +1094,8 @@
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <q-input color="grey-9"
-                  @blur="$v.merchant.bankInformation.bankDetails.accountNumber.$touch"      
-                  :error="$v.merchant.bankInformation.bankDetails.accountNumber.$error" 
+                  @blur="v$.merchant.bankInformation.bankDetails.accountNumber.$touch"
+                  :error="v$.merchant.bankInformation.bankDetails.accountNumber.$error"
                   v-model="merchant.bankInformation.bankDetails.accountNumber" label="Bank A/c Number*" placeholder="Bank A/c Number*" />
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
@@ -1168,6 +1168,8 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 
 import {
   required,
@@ -1185,6 +1187,9 @@ import { mapGetters, mapActions } from "vuex";
 import { uid } from "quasar";
 import viewLeadDocumentsDataEntryComponent from "./viewLeadDocumentsDataEntryComponent.vue";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   name: "leadDataEntry",
   components: {
     viewLeadDocumentsDataEntryComponent
@@ -2634,9 +2639,9 @@ export default {
       done(this.COMMON_FILTER_FUNCTION(this.cityOptions, terms));
     },
     partnerCitySelected(item, index) {
-      this.$v.viewBinding.partnersArr.$each[index].cityRefCode.$model =
+      this.v$.viewBinding.partnersArr.$each[index].cityRefCode.$model =
         item.value;
-      this.$v.viewBinding.partnersArr.$each[index].cityRefLabel.$model =
+      this.v$.viewBinding.partnersArr.$each[index].cityRefLabel.$model =
         item.label;
     },
 
@@ -2645,9 +2650,9 @@ export default {
       done(this.COMMON_FILTER_FUNCTION(this.stateOptions, terms));
     },
     partnerStateSelected(item, index) {
-      this.$v.viewBinding.partnersArr.$each[index].stateRefCode.$model =
+      this.v$.viewBinding.partnersArr.$each[index].stateRefCode.$model =
         item.value;
-      this.$v.viewBinding.partnersArr.$each[index].stateRefLabel.$model =
+      this.v$.viewBinding.partnersArr.$each[index].stateRefLabel.$model =
         item.label;
     },
     /* MCC search result */
@@ -2739,8 +2744,8 @@ export default {
     },
     validatebeforeNavigate(step) {
       if (step == "salesInformation") {
-        this.$v.merchant.salesInformation.$touch();
-        if (this.$v.merchant.salesInformation.$error) {
+        this.v$.merchant.salesInformation.$touch();
+        if (this.v$.merchant.salesInformation.$error) {
           this.$q.notify("Please review fields again.");
         } else {
           // // TODO 1 => IOB
@@ -2772,32 +2777,32 @@ export default {
           this.$refs.stepper.next();
         }
       } else if (step == "companyInformation") {
-        this.$v.merchant.companyInformation.$touch();
-        if (this.$v.merchant.companyInformation.$error) {
+        this.v$.merchant.companyInformation.$touch();
+        if (this.v$.merchant.companyInformation.$error) {
           this.$q.notify("Please review fields again.");
         } else {
           this.companyInformationError = false;
           this.$refs.stepper.next();
         }
       } else if (step == "partners") {
-        this.$v.viewBinding.partnersArr.$touch();
-        if (this.$v.viewBinding.partnersArr.$error) {
+        this.v$.viewBinding.partnersArr.$touch();
+        if (this.v$.viewBinding.partnersArr.$error) {
           this.$q.notify("Please review fields again.");
         } else {
           this.partnerInformationError = false;
           this.$refs.stepper.next();
         }
       } else if (step == "businessInformation") {
-        this.$v.merchant.businessInformation.$touch();
-        if (this.$v.merchant.businessInformation.$error) {
+        this.v$.merchant.businessInformation.$touch();
+        if (this.v$.merchant.businessInformation.$error) {
           this.$q.notify("Please review fields again.");
         } else {
           this.businessInformationError = false;
           this.$refs.stepper.next();
         }
       } else if (step == "paymentDetails") {
-        this.$v.merchant.paymentDetails.$touch();
-        if (this.$v.merchant.paymentDetails.$error) {
+        this.v$.merchant.paymentDetails.$touch();
+        if (this.v$.merchant.paymentDetails.$error) {
           this.$q.notify("Please review fields again.");
         } else {
           this.paymentDetailsError = false;
@@ -2980,8 +2985,8 @@ export default {
     },
 
     finalFormSubmit() {
-      this.$v.merchant.$touch();
-      if (this.$v.merchant.$error) {
+      this.v$.merchant.$touch();
+      if (this.v$.merchant.$error) {
         this.$q.notify({
           color: "negative",
           position: "bottom",

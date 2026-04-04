@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import { or } from '@vuelidate/validators';
 import api from '../api.js';
 // export const FETCH_SEND_TO_REPAIR_DETAILS = ({
@@ -115,7 +116,7 @@ export const FETCH_AGGREGATORS_SEND_TO_REPAIR_DETAILS = ({
   if (request.pagination.sortBy == null) {
     return api
       .get(
-        "aggregator-inventory/agg-central-devices-sent-for-repair/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"?page="+
+        "aggregator-inventory/agg-central-devices-sent-for-repair/"+getAggregatorId()+"?page="+
         request.pagination.page +
         "&size=" +
         request.pagination.rowsPerPage +
@@ -131,7 +132,7 @@ export const FETCH_AGGREGATORS_SEND_TO_REPAIR_DETAILS = ({
     let sorting = request.pagination.descending ? 'asc' : 'desc';
     return api
       .get(
-        'aggregator-inventory/agg-central-devices-sent-for-repair/'+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+'?page='+
+        'aggregator-inventory/agg-central-devices-sent-for-repair/'+getAggregatorId()+'?page='+
         request.pagination.page +
         '&size=' +
         request.pagination.rowsPerPage +
@@ -293,9 +294,9 @@ export const APPROVE_SEND_TO_REPAIR = ({ commit }, request) => {
     }, request) => {
        let sorting = request.pagination.descending ? 'desc' : 'asc';
       return api
-      // repair/'+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"?
+      // repair/'+getAggregatorId()+"?
         .get( 
-          'aggregator-inventory/agg-central-inventory-get-device-by-status/4/'+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+'?page='+
+          'aggregator-inventory/agg-central-inventory-get-device-by-status/4/'+getAggregatorId()+'?page='+
             request.pagination.page +
             '&size=' +
             request.pagination.rowsPerPage +

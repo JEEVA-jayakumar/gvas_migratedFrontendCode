@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import api from '../api.js';
 export const FETCH_INVENTORY_UPDATED_POD_DETAILS= ({
   commit
@@ -19,7 +20,7 @@ export const FETCH_PHONEPE_INVENTORY_UPDATED_POD_DETAILS= ({
 }, request) => {
   console.log("API ACTION REQUEST DETAILS-------->",request)
   return api
-    .get("aggregator-spare-parts/agg-getSparePod/" + request.podNumber + "/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]))
+    .get("aggregator-spare-parts/agg-getSparePod/" + request.podNumber + "/"+getAggregatorId())
     .then(response => {
       // START=> COMMIT with data received'
       commit('SET_PHONEPE_INVENTORY_UPDATED_POD_DETAILS', response.data.data);

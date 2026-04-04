@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import api from "../api.js";
 export const VERIFY_DEVICE_ON_REQUEST = ({ commit }, request) => {
   return api.get(
@@ -25,7 +26,7 @@ export const DEVICE_VERIFICATION_ON_SCAN_USING_DEVICE_TYPE_ID = (
   request
 ) => {
   return api.get(
-    "aggregator-inventory/agg-verify-fault-central-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/"+ request.device + "/" + request.barcode
+    "aggregator-inventory/agg-verify-fault-central-inventory/"+getAggregatorId()+"/"+ request.device + "/" + request.barcode
   );
 };
  export const DEVICE_VERIFICATION_ON_SCAN_USING_DEVICE_TYPE_ID_ALLOCATION = (
@@ -46,7 +47,7 @@ export const PHONE_PE_DEVICE_VERIFICATION_ON_SCAN_USING_DEVICE_TYPE_ID_ALLOCATIO
 ) => {
   console.log("PHONE_PE_DEVICE_VERIFICATION_ON_SCAN_USING_DEVICE_TYPE_ID_ALLOCATION ---->",JSON.stringify(request))
   return api.get(
-    "aggregator-inventory/agg-verify-central-to-regional-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/" +
+    "aggregator-inventory/agg-verify-central-to-regional-inventory/"+getAggregatorId()+"/" +
     request.device +
     "/" +
     request.barcode
@@ -166,7 +167,7 @@ export const AGGREGATORS_DEVICE_VERIFICATION_ON_SCAN_USING_DEVICE_TYPE_ID_SO_ALL
   request
 ) => {
   return api.get(
-    "aggregator-inventory/agg-verify-regional-To-so-reseller-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/"+
+    "aggregator-inventory/agg-verify-regional-To-so-reseller-inventory/"+getAggregatorId()+"/"+
     request.device +
     "/" +
     request.barcode
@@ -188,7 +189,7 @@ export const AGGREAGATORS_DEVICE_VERIFICATION_IN_CENTRAL_FOR_ACTIVE = (
   request
 ) => {
   return api.get(
-    "aggregator-inventory/agg-verify-device-active-in-central/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+ "/" + request.device + "/" + request.barcode
+    "aggregator-inventory/agg-verify-device-active-in-central/"+getAggregatorId()+ "/" + request.device + "/" + request.barcode
   );
 };
 
@@ -211,7 +212,7 @@ export const AGGREGATORS_VERIFY_DEVICE_BEFORE_ADDING_CENTRAL_INVENTORY = (
   request
 ) => {
   return api.get(
-    "aggregator-inventory/agg-verify-device-in-central-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/"+
+    "aggregator-inventory/agg-verify-device-in-central-inventory/"+getAggregatorId()+"/"+
     request.device +
     "/" +
     request.barcode
@@ -241,7 +242,7 @@ export const VERIFY_AGGREGATORS_DEVICE_ON_REGIONAL_TO_CENTRAL_FOR_FAULTY = (
   request
 ) => {
   return api.get(
-    "aggregator-inventory/agg-verify-regional-to-central/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+ "/" + request.device + "/" + request.barcode
+    "aggregator-inventory/agg-verify-regional-to-central/"+getAggregatorId()+ "/" + request.device + "/" + request.barcode
   )
 }
 

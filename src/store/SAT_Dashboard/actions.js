@@ -1,4 +1,6 @@
 import api from "../api.js";
+import { getAggregatorId } from "../../util/safeStorage";
+
 export const FETCH_DASHBOARD_COUNT = ({ commit }, request) => {
   return api.get("sat-dashboard/" + request).then(response => {
     commit("SET_SAT_DASHBOARD_COUNT", response.data.data);
@@ -19,13 +21,13 @@ export const FETCH_DASHBOARD_COUNT = ({ commit }, request) => {
 
   /* START AGGREGATORS STATIC CODE */
   export const FETCH_AGGREGATORS_DASHBOARD_COUNT = ({ commit }, request) => {
-    console.log("FETCH_AGGREGATORS_DASHBOARD_COUNT ----->",JSON.stringify(request))
-    return api.get("aggregator-inventory/agg-sat-dashboard/" + request.region +"/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])).then(response => {
+    console.log("FETCH_AGGREGATORS_DASHBOARD_COUNT ----->", JSON.stringify(request))
+    return api.get("aggregator-inventory/agg-sat-dashboard/" + request.region + "/" + getAggregatorId()).then(response => {
       commit("SET_AGGREGATORS_DASHBOARD_COUNT", response.data.data);
     });
   };
 
-   /* END AGGREGATORS STATIC CODE */
+  /* END AGGREGATORS STATIC CODE */
 
  /*AGGREGATORS API */
 export const FETCH_SAT_AGING_TRACKER_DATA = ({ commit }, request) => {

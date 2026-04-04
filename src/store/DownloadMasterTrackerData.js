@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../util/safeStorage";
 import { and } from '@vuelidate/validators';
 import { api } from '../boot/axios';
 
@@ -78,7 +79,7 @@ const FileDownload1 = {
       var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     if(request.fromDate && request.toDate){
         return await api
-        .get("aggregator-inventory/agg-download-master-tracker-list/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/"+request.fromDate+"/"+request.toDate, {
+        .get("aggregator-inventory/agg-download-master-tracker-list/"+getAggregatorId()+"/"+request.fromDate+"/"+request.toDate, {
           responseType: 'arraybuffer'
         }).then(response => {
             console.log("FIle name : -- : ", response)
@@ -93,7 +94,7 @@ const FileDownload1 = {
     }else {
         console.log("==========", request)
         return await  api
-        .get("download-master-tracker-listaggregator-inventory/agg-download-master-tracker-list/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]), {
+        .get("download-master-tracker-listaggregator-inventory/agg-download-master-tracker-list/"+getAggregatorId(), {
           responseType: 'arraybuffer'
         }).then(response => {
             console.log("FIle name : -- : ", response.headers["Content-Disposition"])

@@ -110,18 +110,18 @@
                             :options="selectBankEnableOptions" />
                         </div>
                         <div v-if="selectedVas.includes('AMEX')" class="col-md-6">
-                          <q-input v-model="formData.ownerFirstName" @blur="$v.formData.ownerFirstName.$touch"
-                            :error="$v.formData.ownerFirstName.$error" class="text-weight-regular text-grey-8"
+                          <q-input v-model="formData.ownerFirstName" @blur="v$.formData.ownerFirstName.$touch"
+                            :error="v$.formData.ownerFirstName.$error" class="text-weight-regular text-grey-8"
                             color="grey-9" label="Owner 1 First Name*" placeholder="Owner 1 First Name*" />
                         </div>
                         <div v-if="selectedVas.includes('AMEX')" class="col-md-6">
-                          <q-input v-model="formData.ownerLastName" @blur="$v.formData.ownerLastName.$touch"
-                            :error="$v.formData.ownerLastName.$error" class="text-weight-regular text-grey-8"
+                          <q-input v-model="formData.ownerLastName" @blur="v$.formData.ownerLastName.$touch"
+                            :error="v$.formData.ownerLastName.$error" class="text-weight-regular text-grey-8"
                             color="grey-9" label="Owner 1 Last Name*" placeholder="Owner 1 Last Name*" />
                         </div>
                         <div v-if="selectedVas.includes('AMEX')" class="col-md-6">
-                          <q-input type="date" v-model="formData.ownerDOB" @blur="$v.formData.ownerDOB.$touch"
-                            :error="$v.formData.ownerDOB.$error" class="text-weight-regular text-grey-8" color="grey-9"
+                          <q-input type="date" v-model="formData.ownerDOB" @blur="v$.formData.ownerDOB.$touch"
+                            :error="v$.formData.ownerDOB.$error" class="text-weight-regular text-grey-8" color="grey-9"
                             label="Owner 1 DOB*" placeholder="Owner 1 DOB*" />
                         </div>
 
@@ -175,6 +175,8 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 import editShortLead from '../../components/sat/editShortLead.vue'
 import convertToSat from '../../components/sat/convertToSat.vue'
 import _ from 'lodash'
@@ -188,6 +190,9 @@ import {
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   name: 'inventoryAllocation',
   components: {
     editShortLead,
@@ -335,8 +340,8 @@ export default {
         })
     },
     fnSubmitBankDetails(formData) {
-      this.$v.formData.$touch()
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch()
+      if (this.v$.formData.$error) {
         this.$q.notify('Please review fields again.')
       } else {
         let submissionData = _.cloneDeep(formData);

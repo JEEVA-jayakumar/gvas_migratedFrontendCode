@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import { or } from '@vuelidate/validators';
 import api from '../api.js';
 export const MASTER_TRACKER_LIST = ({
@@ -68,7 +69,7 @@ export const AGGREGATORS_MASTER_TRACKER_LIST = ({
   let sorting = request.pagination.descending ? 'asc' : 'desc';
   return api
     .get(
-      'aggregator-inventory/agg-master-tracker-list/'+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+'?page=' +
+      'aggregator-inventory/agg-master-tracker-list/'+getAggregatorId()+'?page=' +
       request.pagination.page +
       '&size=' +
       request.pagination.rowsPerPage +
@@ -116,7 +117,7 @@ export const AGGREGATORS_MASTER_TRACKER_LIST = ({
 export const APPROVE_PHONEPE_LOST_STOLEN_DEVICE = ({ commit }, request) => {
   console.log('|REQUEST : ' + JSON.stringify(request))
   return api
-    .post('aggregator-inventory/agg-submit-lost-or-stolen/'+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]), request)
+    .post('aggregator-inventory/agg-submit-lost-or-stolen/'+getAggregatorId(), request)
     .then(response => {
       console.log("TESTING RESPONSE------>"+response);
       let data = {

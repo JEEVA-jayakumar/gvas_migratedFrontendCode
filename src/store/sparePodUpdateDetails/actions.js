@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import api from '../api.js';
 export const SPARE_PARTS_POD_UPDATE_DETAILS= ({
     commit,
@@ -26,7 +27,7 @@ export const SPARE_PARTS_POD_UPDATE_DETAILS= ({
     // }else if(request.allocate_region != null && request.allocate_so != null){
     //   path =2;
     // }
-    return api.post("aggregator-spare-parts/agg-updatePod/"+request.pod_number+"/2"+"/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]), request)
+    return api.post("aggregator-spare-parts/agg-updatePod/"+request.pod_number+"/2"+"/"+getAggregatorId(), request)
   };
 
   /*PHONEPE API END */

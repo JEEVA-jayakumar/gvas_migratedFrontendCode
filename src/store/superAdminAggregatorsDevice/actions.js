@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import api from "../api.js";
 export const CREATE_AGGREGATORS_DEVICE = ({
     commit,
@@ -37,7 +38,7 @@ export const GET_CREATED_AGGREGATORS_DEVICE_LIST = ({
 export const GET_ACTIVE_CREATED_DEVICE_LIST = ({
     commit
 }, request) => {
-    return api.get("aggregator/deviceList/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])).then(response => {
+    return api.get("aggregator/deviceList/"+getAggregatorId()).then(response => {
         commit("SET_GET_ACTIVE_CREATED_DEVICE_LIST", response.data.data);
     });
 };

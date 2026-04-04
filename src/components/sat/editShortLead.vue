@@ -30,7 +30,7 @@
               disable
               @keyup.enter="submitShortLead(formData)"
               v-model="formData.leadName"
-              :error="$v.formData.leadName.$error"
+              :error="v$.formData.leadName.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
               label="leadName"
@@ -42,7 +42,7 @@
               disable
               @keyup.enter="submitShortLead(formData)"
               v-model="formData.leadNumber"
-              :error="$v.formData.leadNumber.$error"
+              :error="v$.formData.leadNumber.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
               label="leadNumber"
@@ -54,7 +54,7 @@
               disable
               @keyup.enter="submitShortLead(formData)"
               v-model="formData.shortleadDate"
-              :error="$v.formData.shortleadDate.$error"
+              :error="v$.formData.shortleadDate.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
               label="shortleadDate"
@@ -66,7 +66,7 @@
               disable
               @keyup.enter="submitShortLead(formData)"
               v-model="formData.contactNumber"
-              :error="$v.formData.contactNumber.$error"
+              :error="v$.formData.contactNumber.$error"
               class="text-weight-regular text-grey-8"
               color="grey-9"
               label="contactNumber"
@@ -90,10 +90,15 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 import { required, maxLength, minLength } from "@vuelidate/validators";
 
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["propShowEditShortLead", "propRowDetails"],
   data() {
     return {
@@ -136,8 +141,8 @@ export default {
     },
     //Permission creation final submit
     submitShortLead(request) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         let params = {

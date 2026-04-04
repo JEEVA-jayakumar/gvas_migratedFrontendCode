@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 
 import api from "../api.js";
 
@@ -13,7 +14,7 @@ export const FETCH_INVENTORY_WITH_SO = ({
 export const FETCH_AGGREGATORS_INVENTORY_WITH_SO = ({
     commit
 }, request) => {
-    return api.get("aggregator-inventory/agg-all-so-inventory-details/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])).then(response => {
+    return api.get("aggregator-inventory/agg-all-so-inventory-details/"+getAggregatorId()).then(response => {
         commit("SET_AGGREGATORS_INVENTORY_WITH_SO", response.data.data);
     });
 }

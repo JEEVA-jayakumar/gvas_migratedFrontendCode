@@ -78,7 +78,7 @@
                                         this.propsAdditionalData
                                             .merchantRefCode
 
-                                    " v-model="additionalTerminal.merchantRefCode" :error="$v.additionalTerminal.merchantRefCode.$error
+                                    " v-model="additionalTerminal.merchantRefCode" :error="v$.additionalTerminal.merchantRefCode.$error
 " label="Merchant RefCode*" />
                                 </div>
                                 <div class="col-md-6">
@@ -90,10 +90,10 @@
                                         additionalTerminal.AdditionalTerminalDetails
                                             .numberOfTerminals
                                     " @blur="
-    $v.additionalTerminal.AdditionalTerminalDetails
+    v$.additionalTerminal.AdditionalTerminalDetails
         .numberOfTerminals.$touch;
                    " :error="
-                       $v.additionalTerminal.AdditionalTerminalDetails
+                       v$.additionalTerminal.AdditionalTerminalDetails
                            .numberOfTerminals.$error
                    " class="text-weight-regular text-grey-8" color="grey-9" label="*Number Of Terminals"
                                         placeholder="Number Of Terminals" />
@@ -141,6 +141,8 @@
     </div>
 </template>
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 
 
 import { LocalStorage } from "quasar";
@@ -214,6 +216,9 @@ const alphaNumericSpecialValidate = helpers.regex(
 );
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
     props: ["showRejectPaymentMode", "propsAdditionalData"],
 
     data() {
@@ -351,8 +356,8 @@ export default {
 
 
         fnAdditionalSubmit(request) {
-            this.$v.additionalTerminal.$touch();
-            if (this.$v.additionalTerminal.$error) {
+            this.v$.additionalTerminal.$touch();
+            if (this.v$.additionalTerminal.$error) {
                 this.$q.notify({
                     color: "negative",
                     position: "bottom",
@@ -966,7 +971,7 @@ export default {
                                             .slice(1, 2);
                                         let computeSplitted = splitted[splitted.length - 1];
                                         let fieldErrorFound = eval(`
-                        OThis.$v.viewBinding.partnersArr.$each[
+                        OThis.v$.viewBinding.partnersArr.$each[
                           ${findPartnersErrorIndex}
                         ].${computeSplitted}`);
                                         fieldErrorFound.$model = "";
@@ -980,7 +985,7 @@ export default {
                                         generateErrorMessage.issue = actual.issue;
                                         generateErrorMessage.value = actual.value;
                                     } else {
-                                        let splittingErrorField = `OThis.$v.${splitted.join(
+                                        let splittingErrorField = `OThis.v$.${splitted.join(
                                             "."
                                         )}`;
                                         let fieldErrorFound = eval(splittingErrorField);

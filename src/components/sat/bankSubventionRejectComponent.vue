@@ -43,11 +43,16 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 import { date } from "quasar";
 import { required } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["propToggleLeadModal", "propLeadDetails"],
   data() {
     return {
@@ -85,8 +90,8 @@ export default {
       this.$emit("toggleLeadModal");
     },
     sendRemarks(formData) {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q.loading.show({

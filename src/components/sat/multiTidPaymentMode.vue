@@ -50,7 +50,7 @@
                 placeholder="Choose from the below"
                 color="grey-9"
                 v-model="formdata.paymentMode"
-                :error="$v.formdata.paymentMode.$error"
+                :error="v$.formdata.paymentMode.$error"
                 label="Payment mode"
                 :options="paymnentModeOptions"
               />
@@ -68,7 +68,7 @@
                 placeholder="Choose from the below"
                 color="grey-9"
                 v-model="formdata.combinedSettlementFlag"
-                :error="$v.formdata.combinedSettlementFlag.$error"
+                :error="v$.formdata.combinedSettlementFlag.$error"
                 label="Combined Settlement Flag "
                 :options="combinedSettlementFlagOptions"
               />
@@ -86,7 +86,7 @@
                 placeholder="Choose from the below"
                 color="grey-9"
                 v-model="formdata.ONBOARDING_REQD"
-                :error="$v.formdata.ONBOARDING_REQD.$error"
+                :error="v$.formdata.ONBOARDING_REQD.$error"
                 label="Select Yes Or No"
                 :options="onboardingRequestOptions"
               />
@@ -130,6 +130,8 @@
   </div>
 </template>
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 
 
 import { LocalStorage } from "quasar";
@@ -200,6 +202,9 @@ const alphaNumericSpecialValidate = helpers.regex(
 );
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["showRejectPaymentMode", "propShowRejectComponent"],
 components: {
        additionalInfo
@@ -487,8 +492,8 @@ components: {
     },
     OpenAdditionalInfo(token) {
       // this.showRejectAdditionalInfo = !this.showRejectAdditionalInfo;
-      this.$v.formdata.$touch();
-      if (this.$v.formdata.$error) {
+      this.v$.formdata.$touch();
+      if (this.v$.formdata.$error) {
         this.$q.notify({
           color: "negative",
           position: "bottom",
@@ -646,8 +651,8 @@ components: {
     // MARS DATA STORING END
 
     finalFormSubmit(request) {
-      this.$v.formdata.$touch();
-      if (this.$v.formdata.$error) {
+      this.v$.formdata.$touch();
+      if (this.v$.formdata.$error) {
         this.$q.notify({
           color: "negative",
           position: "bottom",
@@ -935,7 +940,7 @@ components: {
                         .slice(1, 2);
                       let computeSplitted = splitted[splitted.length - 1];
                       let fieldErrorFound = eval(`
-                        OThis.$v.viewBinding.partnersArr.$each[
+                        OThis.v$.viewBinding.partnersArr.$each[
                           ${findPartnersErrorIndex}
                         ].${computeSplitted}`);
                       fieldErrorFound.$model = "";
@@ -949,7 +954,7 @@ components: {
                       generateErrorMessage.issue = actual.issue;
                       generateErrorMessage.value = actual.value;
                     } else {
-                      let splittingErrorField = `OThis.$v.${splitted.join(".")}`;
+                      let splittingErrorField = `OThis.v$.${splitted.join(".")}`;
                       let fieldErrorFound = eval(splittingErrorField);
                       fieldErrorFound.$model = "";
                       OThis.error.tab[splitted[1]] = true;

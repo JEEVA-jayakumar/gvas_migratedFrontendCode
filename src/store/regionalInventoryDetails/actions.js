@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../../util/safeStorage";
 import api from '../api.js';
 export const FETCHING_INCOMING_POD_LIST_DETAILS = ({
   commit
@@ -35,7 +36,7 @@ export const FETCHING_PHONEPE_INCOMING_POD_LIST_DETAILS = ({
   let sorting = request.pagination.descending ? 'asc' : 'desc';
   return api
     .get(
-      "aggregator-spare-parts/agg-getPod"+"/1"+"/2"+"/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"?page=" +
+      "aggregator-spare-parts/agg-getPod"+"/1"+"/2"+"/"+getAggregatorId()+"?page=" +
       request.pagination.page +
       "&size=" +
       request.pagination.rowsPerPage +
@@ -109,7 +110,7 @@ export const FETCHING_PHONEPE_INCOMING_STOCKS_POD_LIST_DETAILS = ({
   let sorting = request.pagination.descending ? 'asc' : 'desc';
   return api
     .get(
-      "aggregator-spare-parts/agg-getPod"+"/2"+"/3"+"/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"?page=" +
+      "aggregator-spare-parts/agg-getPod"+"/2"+"/3"+"/"+getAggregatorId()+"?page=" +
       request.pagination.page +
       "&size=" +
       request.pagination.rowsPerPage +
@@ -168,7 +169,7 @@ export const FETCHING_INCOMING_ALLOCATED_SO_POD_LIST_DETAILS = ({
     let sorting = request.pagination.descending ? 'asc' : 'desc';
     return api
       .get(
-        "aggregator-spare-parts/agg-getPod"+"/2"+"/4"+"/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"?page=" +
+        "aggregator-spare-parts/agg-getPod"+"/2"+"/4"+"/"+getAggregatorId()+"?page=" +
         request.pagination.page +
         "&size=" +
         request.pagination.rowsPerPage +
@@ -214,7 +215,7 @@ export const FETCHING_INCOMING_ALLOCATED_SO_POD_LIST_DETAILS = ({
   }, request) => {
   //  console.log("API ACTION REQUEST DETAILS-------->",request)
     return api
-      .get("aggregator-spare-parts/agg-regionSpareCount/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]))
+      .get("aggregator-spare-parts/agg-regionSpareCount/"+getAggregatorId())
       .then(response => {
         // START=> COMMIT with data received'
         commit('SET_PHONEPE_SPARE_PARTS_SETS_AND_COUNTS', response.data.data);
@@ -241,7 +242,7 @@ export const FETCHING_INCOMING_ALLOCATED_SO_POD_LIST_DETAILS = ({
     rootState
   }, request) => {
     //console.log("API REJECT_INCOMING_POD_DETAILS-------->",JSON.stringify(request)) aggregator-spare-parts/agg-updatePod
-     return api.post("aggregator-spare-parts/agg-updatePod/" + request.pod_number +"/0"+"/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) ,request)
+     return api.post("aggregator-spare-parts/agg-updatePod/" + request.pod_number +"/0"+"/"+getAggregatorId() ,request)
   }
 
 
@@ -263,7 +264,7 @@ export const FETCHING_INCOMING_ALLOCATED_SO_POD_LIST_DETAILS = ({
     rootState
   }, request) => {
   //  console.log("API ACTION REQUEST DETAILS-------->",request)
-    return api.post("aggregator-spare-parts/agg-updatePod/" + request.pod_number +"/1"+"/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) ,request)
+    return api.post("aggregator-spare-parts/agg-updatePod/" + request.pod_number +"/1"+"/"+getAggregatorId() ,request)
   }
 
   /*PHONEPE API END */

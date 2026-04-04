@@ -70,14 +70,14 @@
                         <span
                           style="flex: 1"
                           :class="{
-                            'text-negative': $v.formData.qrShortLead.contactName.$error,
+                            'text-negative': v$.formData.qrShortLead.contactName.$error,
                           }"
                         >
                           Contact Person Name
                         </span>
                         <q-input
-                          @blur="$v.formData.qrShortLead.contactName.$touch"
-                          :error="$v.formData.qrShortLead.contactName.$error"
+                          @blur="v$.formData.qrShortLead.contactName.$touch"
+                          :error="v$.formData.qrShortLead.contactName.$error"
                           type="text"
                           style="width: 220px"
                           v-model="formData.qrShortLead.contactName"
@@ -85,10 +85,10 @@
                         />
                       </q-item-section>
                       <div
-                        v-if="$v.formData.qrShortLead.contactName.$error"
+                        v-if="v$.formData.qrShortLead.contactName.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.contactName.$model">
+                        <span v-if="!v$.formData.qrShortLead.contactName.$model">
                           Contact Person Name is required.
                         </span>
                       </div>
@@ -99,14 +99,14 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.legalName.$error
+                              v$.formData.qrShortLead.legalName.$error
                           }"
                         >
                           Legal Name
                         </span>
                         <q-input
-                          @blur="$v.formData.qrShortLead.legalName.$touch"
-                          :error="$v.formData.qrShortLead.legalName.$error"
+                          @blur="v$.formData.qrShortLead.legalName.$touch"
+                          :error="v$.formData.qrShortLead.legalName.$error"
                           type="text"
                           style="width: 220px"
                           v-model="formData.qrShortLead.legalName"
@@ -114,17 +114,17 @@
                         />
                       </q-item-section>
                       <div
-                        v-if="$v.formData.qrShortLead.legalName.$error"
+                        v-if="v$.formData.qrShortLead.legalName.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.legalName.$model">
+                        <span v-if="!v$.formData.qrShortLead.legalName.$model">
                           Legal Name is required.
                         </span>
                         <span
                           v-if="
-                            $v.formData.qrShortLead.legalName.$model &&
-                            ($v.formData.qrShortLead.legalName.$model.length < 0 ||
-                              $v.formData.qrShortLead.legalName.$model.length > 60)
+                            v$.formData.qrShortLead.legalName.$model &&
+                            (v$.formData.qrShortLead.legalName.$model.length < 0 ||
+                              v$.formData.qrShortLead.legalName.$model.length > 60)
                           "
                         >
                           Legal Name must be between 0 and 60.
@@ -134,18 +134,18 @@
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Marketing Name</q-item-section>
                       <q-input
-                        @blur="$v.formData.qrShortLead.marketingName.$touch"
-                        :error="$v.formData.qrShortLead.marketingName.$error"
+                        @blur="v$.formData.qrShortLead.marketingName.$touch"
+                        :error="v$.formData.qrShortLead.marketingName.$error"
                         type="text"
                         style="width: 220px"
                         v-model="formData.qrShortLead.marketingName"
                         @update:model-value="handlemarketing($event)"
                       />
                       <div
-                        v-if="$v.formData.qrShortLead.marketingName.$error"
+                        v-if="v$.formData.qrShortLead.marketingName.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.marketingName.$model">
+                        <span v-if="!v$.formData.qrShortLead.marketingName.$model">
                           Marketing Name is required.
                         </span>
                       </div>
@@ -174,12 +174,12 @@
                         style="width: 220px"
                         label="Contact Email*"
                         placeholder="Contact Email*"
-                        :error="$v.formData.qrShortLead.contactEmail.$error"
-                        @blur="$v.formData.qrShortLead.contactEmail.$touch"
+                        :error="v$.formData.qrShortLead.contactEmail.$error"
+                        @blur="v$.formData.qrShortLead.contactEmail.$touch"
                         v-model="formData.qrShortLead.contactEmail"
                       />
                       <span
-                        v-if="!$v.formData.qrShortLead.contactEmail.$model && $v.formData.qrShortLead.contactEmail.$error"
+                        v-if="!v$.formData.qrShortLead.contactEmail.$model && v$.formData.qrShortLead.contactEmail.$error"
                         class="error-tooltip"
                       >
                         Contact Email is required.
@@ -188,7 +188,7 @@
                         v-if="
                          formData.qrShortLead.contactEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
                           formData.qrShortLead.contactEmail
-                         ) && $v.formData.qrShortLead.contactEmail.$error
+                         ) && v$.formData.qrShortLead.contactEmail.$error
                         "
                         class="error-tooltip"
                       >
@@ -202,25 +202,25 @@
                         style="width: 220px"
                         label="Contact Number*"
                         placeholder="Contact Number*"
-                        :error="$v.formData.qrShortLead.contactNumber.$error"
-                        @blur="$v.formData.qrShortLead.contactNumber.$touch"
+                        :error="v$.formData.qrShortLead.contactNumber.$error"
+                        @blur="v$.formData.qrShortLead.contactNumber.$touch"
                         v-model="formData.qrShortLead.contactNumber"
                         @keydown="nameKeydown($event)"
                         maxlength="10"
                       />
                       <div
-                        v-if="$v.formData.qrShortLead.contactNumber.$error"
+                        v-if="v$.formData.qrShortLead.contactNumber.$error"
                         class="error-tooltip"
                       >
                         <span
-                          v-if="!$v.formData.qrShortLead.contactNumber.$model"
+                          v-if="!v$.formData.qrShortLead.contactNumber.$model"
                         >
                           Contact Number is required.
                         </span>
                         <span
                           v-if="
-                            $v.formData.qrShortLead.contactNumber.$model &&
-                              $v.formData.qrShortLead.contactNumber.$model.toString()
+                            v$.formData.qrShortLead.contactNumber.$model &&
+                              v$.formData.qrShortLead.contactNumber.$model.toString()
                                 .length !== 10
                           "
                         >
@@ -254,35 +254,35 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.contactAddress.$error
+                              v$.formData.qrShortLead.contactAddress.$error
                           }"
                         >
                           Contact Address
                         </span>
                         <q-input
-                          @blur="$v.formData.qrShortLead.contactAddress.$touch"
-                          :error="$v.formData.qrShortLead.contactAddress.$error"
+                          @blur="v$.formData.qrShortLead.contactAddress.$touch"
+                          :error="v$.formData.qrShortLead.contactAddress.$error"
                           type="text"
                           style="width: 220px"
                           v-model="formData.qrShortLead.contactAddress"
                         />
                         <div
-                          v-if="$v.formData.qrShortLead.contactAddress.$error"
+                          v-if="v$.formData.qrShortLead.contactAddress.$error"
                           class="error-tooltip"
                         >
                           <span
                             v-if="
-                              !$v.formData.qrShortLead.contactAddress.$model
+                              !v$.formData.qrShortLead.contactAddress.$model
                             "
                           >
                             Contact Address is required.
                           </span>
                           <span
                             v-if="
-                              $v.formData.qrShortLead.contactAddress.$model &&
-                                ($v.formData.qrShortLead.contactAddress.$model.length <
+                              v$.formData.qrShortLead.contactAddress.$model &&
+                                (v$.formData.qrShortLead.contactAddress.$model.length <
                                   0 ||
-                                  $v.formData.qrShortLead.contactAddress
+                                  v$.formData.qrShortLead.contactAddress
                                     .$model.length > 120)
                             "
                           >
@@ -297,7 +297,7 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.pincode.$error
+                              v$.formData.qrShortLead.pincode.$error
                           }"
                         >
                           Pincode
@@ -309,7 +309,7 @@
                           onkeydown="javascript: return event.keyCode === 8 ||
                         event.keyCode === 46 ? true : !isNaN(Number(event.key))"
                           @filter="pincodeSearch"
-                          :error="$v.formData.qrShortLead.pincode.$error"
+                          :error="v$.formData.qrShortLead.pincode.$error"
                           @blur="validatePincode"
                           style="width: 220px"
                           clearable
@@ -321,16 +321,16 @@
                           @update:model-value="pincodeSelected1"
                         />
                         <div
-                          v-if="$v.formData.qrShortLead.pincode.$error"
+                          v-if="v$.formData.qrShortLead.pincode.$error"
                           class="error-tooltip"
                         >
-                          <span v-if="!$v.formData.qrShortLead.pincode.$model">
+                          <span v-if="!v$.formData.qrShortLead.pincode.$model">
                             Pincode is required.
                           </span>
                           <span
                             v-if="
-                              $v.formData.qrShortLead.pincode.$model &&
-                                $v.formData.qrShortLead.pincode.$model.toString()
+                              v$.formData.qrShortLead.pincode.$model &&
+                                v$.formData.qrShortLead.pincode.$model.toString()
                                   .length !== 6
                             "
                           >
@@ -345,7 +345,7 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.state.$error
+                              v$.formData.qrShortLead.state.$error
                           }"
                         >
                           State
@@ -355,7 +355,7 @@
                           fill-input
                           hide-selected
                           clearable
-                          :error="$v.formData.qrShortLead.state.$error"
+                          :error="v$.formData.qrShortLead.state.$error"
                           @blur="validateStateInput"
                           style="width: 220px"
                           color="grey-9"
@@ -366,10 +366,10 @@
                           @update:model-value="registeredStateSelected1"
                         />
                         <div
-                          v-if="$v.formData.qrShortLead.state.$error"
+                          v-if="v$.formData.qrShortLead.state.$error"
                           class="error-tooltip"
                         >
-                          <span v-if="!$v.formData.qrShortLead.state.$model">
+                          <span v-if="!v$.formData.qrShortLead.state.$model">
                             State is required.
                           </span>
                         </div>
@@ -381,7 +381,7 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.city.$error
+                              v$.formData.qrShortLead.city.$error
                           }"
                         >
                           City
@@ -392,7 +392,7 @@
                           hide-selected
                           clearable
                           @blur="validateCityInput"
-                          :error="$v.formData.qrShortLead.city.$error"
+                          :error="v$.formData.qrShortLead.city.$error"
                           style="width: 220px"
                           color="grey-9"
                           v-model="formData.qrShortLead.city"
@@ -402,10 +402,10 @@
                           @update:model-value="registeredCitySelected1"
                         />
                         <div
-                          v-if="$v.formData.qrShortLead.city.$error"
+                          v-if="v$.formData.qrShortLead.city.$error"
                           class="error-tooltip"
                         >
-                          <span v-if="!$v.formData.qrShortLead.city.$model">
+                          <span v-if="!v$.formData.qrShortLead.city.$model">
                             City is required.
                           </span>
                         </div>
@@ -454,7 +454,7 @@
                         clearable
                         @blur="validateMCCInput"
                         :error="
-                          $v.formData.qrShortLead.merchantIndustry.industryName
+                          v$.formData.qrShortLead.merchantIndustry.industryName
                             .$error
                         "
                         style="width: 220px"
@@ -469,13 +469,13 @@
                       />
                       <div
                         v-if="
-                          $v.formData.qrShortLead.merchantIndustry.industryName.$error
+                          v$.formData.qrShortLead.merchantIndustry.industryName.$error
                         "
                         class="error-tooltip"
                       >
                         <span
                           v-if="
-                            !$v.formData.qrShortLead.merchantIndustry.industryName.$model
+                            !v$.formData.qrShortLead.merchantIndustry.industryName.$model
                           "
                         >
                           Merchant Industry - MCC is required.
@@ -586,7 +586,7 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.salesPersonName.$error
+                              v$.formData.qrShortLead.salesPersonName.$error
                           }"
                         >
                           Sales Person Name
@@ -594,9 +594,9 @@
                         <q-select
                           filter
                           clearable
-                          @blur="$v.formData.qrShortLead.salesPersonName.$touch"
+                          @blur="v$.formData.qrShortLead.salesPersonName.$touch"
                           :error="
-                            $v.formData.qrShortLead.salesPersonName.$error
+                            v$.formData.qrShortLead.salesPersonName.$error
                           "
                           style="width: 220px"
                           color="grey-9"
@@ -608,10 +608,10 @@
                           map-options
                         />
                         <div
-                          v-if="$v.formData.qrShortLead.salesPersonName.$error"
+                          v-if="v$.formData.qrShortLead.salesPersonName.$error"
                           class="error-tooltip"
                         >
-                          <span v-if="!$v.formData.qrShortLead.salesPersonName.$model">
+                          <span v-if="!v$.formData.qrShortLead.salesPersonName.$model">
                             Sales Person Name is required.
                           </span>
                         </div>
@@ -641,15 +641,15 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.personalAddress.$error
+                              v$.formData.qrShortLead.personalAddress.$error
                           }"
                         >
                           Address
                         </span>
                         <q-input
-                          @blur="$v.formData.qrShortLead.personalAddress.$touch"
+                          @blur="v$.formData.qrShortLead.personalAddress.$touch"
                           :error="
-                            $v.formData.qrShortLead.personalAddress.$error
+                            v$.formData.qrShortLead.personalAddress.$error
                           "
                           type="text"
                           style="width: 220px"
@@ -658,17 +658,17 @@
                           v-model="formData.qrShortLead.personalAddress"
                         />
                         <div
-                          v-if="$v.formData.qrShortLead.personalAddress.$error"
+                          v-if="v$.formData.qrShortLead.personalAddress.$error"
                           class="error-tooltip"
                         >
-                          <span v-if="!$v.formData.qrShortLead.personalAddress.$model">
+                          <span v-if="!v$.formData.qrShortLead.personalAddress.$model">
                             Address is required.
                           </span>
                           <span
                             v-if="
-                              $v.formData.qrShortLead.personalAddress.$model &&
-                              ($v.formData.qrShortLead.personalAddress.$model.length < 0 ||
-                                $v.formData.qrShortLead.personalAddress.$model.length > 180)
+                              v$.formData.qrShortLead.personalAddress.$model &&
+                              (v$.formData.qrShortLead.personalAddress.$model.length < 0 ||
+                                v$.formData.qrShortLead.personalAddress.$model.length > 180)
                             "
                           >
                             Address must be between 0 and 180.
@@ -682,7 +682,7 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.personalInfoCity.$error
+                              v$.formData.qrShortLead.personalInfoCity.$error
                           }"
                         >
                           City
@@ -694,7 +694,7 @@
                           clearable
                           @blur="validatePersonalCityInput"
                           :error="
-                            $v.formData.qrShortLead.personalInfoCity.$error
+                            v$.formData.qrShortLead.personalInfoCity.$error
                           "
                           style="width: 220px"
                           color="grey-9"
@@ -705,10 +705,10 @@
                           @update:model-value="registeredCitySelected"
                         />
                         <div
-                          v-if="$v.formData.qrShortLead.personalInfoCity.$error"
+                          v-if="v$.formData.qrShortLead.personalInfoCity.$error"
                           class="error-tooltip"
                         >
-                          <span v-if="!$v.formData.qrShortLead.personalInfoCity.$model">
+                          <span v-if="!v$.formData.qrShortLead.personalInfoCity.$model">
                             City is required.
                           </span>
                         </div>
@@ -720,7 +720,7 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.personalInfoState.$error
+                              v$.formData.qrShortLead.personalInfoState.$error
                           }"
                         >
                           State
@@ -730,7 +730,7 @@
                           fill-input
                           hide-selected
                           clearable
-                          :error="$v.formData.qrShortLead.personalInfoState.$error"
+                          :error="v$.formData.qrShortLead.personalInfoState.$error"
                           @blur="validatePersonalStateInput"
                           style="width: 220px"
                           color="grey-9"
@@ -741,10 +741,10 @@
                           @update:model-value="registeredStateSelected"
                         />
                         <div
-                          v-if="$v.formData.qrShortLead.personalInfoState.$error"
+                          v-if="v$.formData.qrShortLead.personalInfoState.$error"
                           class="error-tooltip"
                         >
-                          <span v-if="!$v.formData.qrShortLead.personalInfoState.$model">
+                          <span v-if="!v$.formData.qrShortLead.personalInfoState.$model">
                             State is required.
                           </span>
                         </div>
@@ -757,7 +757,7 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.personalInfoPincode.$error
+                              v$.formData.qrShortLead.personalInfoPincode.$error
                           }"
                         >
                           PIN
@@ -769,7 +769,7 @@
                           onkeydown="javascript: return event.keyCode === 8 ||
                              event.keyCode === 46 ? true : !isNaN(Number(event.key))"
                           :error="
-                            $v.formData.qrShortLead.personalInfoPincode.$error
+                            v$.formData.qrShortLead.personalInfoPincode.$error
                           "
                           @blur="validatePin"
                           style="width: 220px"
@@ -785,18 +785,18 @@
                           @update:model-value="pincodeSelected"
                         />
                         <div
-                          v-if="$v.formData.qrShortLead.personalInfoPincode.$error"
+                          v-if="v$.formData.qrShortLead.personalInfoPincode.$error"
                           class="error-tooltip"
                         >
                           <span
-                            v-if="!$v.formData.qrShortLead.personalInfoPincode.$model"
+                            v-if="!v$.formData.qrShortLead.personalInfoPincode.$model"
                           >
                             PIN is required.
                           </span>
                           <span
                             v-if="
-                              $v.formData.qrShortLead.personalInfoPincode.$model &&
-                              $v.formData.qrShortLead.personalInfoPincode.$model.toString()
+                              v$.formData.qrShortLead.personalInfoPincode.$model &&
+                              v$.formData.qrShortLead.personalInfoPincode.$model.toString()
                                 .length !== 6
                             "
                           >
@@ -812,7 +812,7 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.personalInfoMobile.$error
+                              v$.formData.qrShortLead.personalInfoMobile.$error
                           }"
                         >
                           Mobile
@@ -823,26 +823,26 @@
                           label="Mobile*"
                           placeholder="Mobile*"
                           :error="
-                            $v.formData.qrShortLead.personalInfoMobile.$error
+                            v$.formData.qrShortLead.personalInfoMobile.$error
                           "
                           @blur="
-                            $v.formData.qrShortLead.personalInfoMobile.$touch
+                            v$.formData.qrShortLead.personalInfoMobile.$touch
                           "
                           v-model="formData.qrShortLead.personalInfoMobile"
                           @keydown="nameKeydown($event)"
                           maxlength="10"
                         />
                         <div
-                          v-if="$v.formData.qrShortLead.personalInfoMobile.$error"
+                          v-if="v$.formData.qrShortLead.personalInfoMobile.$error"
                           class="error-tooltip"
                         >
-                          <span v-if="!$v.formData.qrShortLead.personalInfoMobile.$model">
+                          <span v-if="!v$.formData.qrShortLead.personalInfoMobile.$model">
                             Mobile is required.
                           </span>
                           <span
                             v-if="
-                              $v.formData.qrShortLead.personalInfoMobile.$model &&
-                              $v.formData.qrShortLead.personalInfoMobile.$model.toString().length !==
+                              v$.formData.qrShortLead.personalInfoMobile.$model &&
+                              v$.formData.qrShortLead.personalInfoMobile.$model.toString().length !==
                                 10
                             "
                           >
@@ -857,7 +857,7 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.personalInfoEmail.$error
+                              v$.formData.qrShortLead.personalInfoEmail.$error
                           }"
                         >
                           Email
@@ -868,15 +868,15 @@
                           label="Email ID*"
                           placeholder="Email ID*"
                           :error="
-                            $v.formData.qrShortLead.personalInfoEmail.$error
+                            v$.formData.qrShortLead.personalInfoEmail.$error
                           "
                           @blur="
-                            $v.formData.qrShortLead.personalInfoEmail.$touch
+                            v$.formData.qrShortLead.personalInfoEmail.$touch
                           "
                           v-model="formData.qrShortLead.personalInfoEmail"
                         />
                         <span
-                          v-if="!$v.formData.qrShortLead.personalInfoEmail.$model && $v.formData.qrShortLead.personalInfoEmail.$error"
+                          v-if="!v$.formData.qrShortLead.personalInfoEmail.$model && v$.formData.qrShortLead.personalInfoEmail.$error"
                           class="error-tooltip"
                         >
                           Email is required.
@@ -885,7 +885,7 @@
                           v-if="
                             formData.qrShortLead.personalInfoEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
                               formData.qrShortLead.personalInfoEmail
-                            ) && $v.formData.qrShortLead.personalInfoEmail.$error
+                            ) && v$.formData.qrShortLead.personalInfoEmail.$error
                           "
                           class="error-tooltip"
                         >
@@ -899,14 +899,14 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.panNumber.$error
+                              v$.formData.qrShortLead.panNumber.$error
                           }"
                         >
                           PAN
                         </span>
                         <q-input
-                          @blur="$v.formData.qrShortLead.panNumber.$touch"
-                          :error="$v.formData.qrShortLead.panNumber.$error"
+                          @blur="v$.formData.qrShortLead.panNumber.$touch"
+                          :error="v$.formData.qrShortLead.panNumber.$error"
                           label="PAN*"
                           placeholder="PAN*"
                           type="text"
@@ -916,16 +916,16 @@
                           maxlength="10"
                         />
                         <div
-                          v-if="$v.formData.qrShortLead.panNumber.$error"
+                          v-if="v$.formData.qrShortLead.panNumber.$error"
                           class="error-tooltip"
                         >
-                          <span v-if="!$v.formData.qrShortLead.panNumber.$model">
+                          <span v-if="!v$.formData.qrShortLead.panNumber.$model">
                             PAN is required.
                           </span>
                           <span
                             v-if="
-                              $v.formData.qrShortLead.panNumber.$model &&
-                              $v.formData.qrShortLead.panNumber.$model.toString().length !== 10
+                              v$.formData.qrShortLead.panNumber.$model &&
+                              v$.formData.qrShortLead.panNumber.$model.toString().length !== 10
                             "
                           >
                             PAN must be exactly 10 digits.
@@ -939,14 +939,14 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.dateOfBirth.$error
+                              v$.formData.qrShortLead.dateOfBirth.$error
                           }"
                         >
                           DOB
                         </span>
                         <q-input
-                          :error="$v.formData.qrShortLead.dateOfBirth.$error"
-                          @blur="$v.formData.qrShortLead.dateOfBirth.$touch"
+                          :error="v$.formData.qrShortLead.dateOfBirth.$error"
+                          @blur="v$.formData.qrShortLead.dateOfBirth.$touch"
                           v-model="formData.qrShortLead.dateOfBirth"
                           label="DOB*"
                           mask="##/##/####"
@@ -955,10 +955,10 @@
                           style="width: 220px"
                         />
                         <div
-                          v-if="$v.formData.qrShortLead.dateOfBirth.$error"
+                          v-if="v$.formData.qrShortLead.dateOfBirth.$error"
                           class="error-tooltip"
                         >
-                          <span v-if="!$v.formData.qrShortLead.dateOfBirth.$model">
+                          <span v-if="!v$.formData.qrShortLead.dateOfBirth.$model">
                             DOB is required.
                           </span>
                         </div>
@@ -1010,22 +1010,22 @@
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Owner Age</q-item-section>
                       <q-input
-                        :error="$v.formData.qrShortLead.ownerAge.$error"
-                        @blur="$v.formData.qrShortLead.ownerAge.$touch"
+                        :error="v$.formData.qrShortLead.ownerAge.$error"
+                        @blur="v$.formData.qrShortLead.ownerAge.$touch"
                         type="text"
                         style="width: 220px"
                         v-model="formData.qrShortLead.ownerAge"
                       />
                       <div
-                        v-if="$v.formData.qrShortLead.ownerAge.$error"
+                        v-if="v$.formData.qrShortLead.ownerAge.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.ownerAge.$model">
+                        <span v-if="!v$.formData.qrShortLead.ownerAge.$model">
                           Owner Age is required.
                         </span>
                          <span v-if="
-      $v.formData.qrShortLead.ownerAge.$model && 
-      ($v.formData.qrShortLead.ownerAge.$model < 1 || $v.formData.qrShortLead.ownerAge.$model > 150)"
+      v$.formData.qrShortLead.ownerAge.$model &&
+      (v$.formData.qrShortLead.ownerAge.$model < 1 || v$.formData.qrShortLead.ownerAge.$model > 150)"
     >
       Owner Age must be between 1 and 150.
     </span>
@@ -1056,10 +1056,10 @@
                         @update:model-value="handleNumericInputhoursWeekdayStart"
                       />
                       <div
-                        v-if="$v.formData.qrShortLead.hoursWeekdayStart.$error"
+                        v-if="v$.formData.qrShortLead.hoursWeekdayStart.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.hoursWeekdayStart.$model">
+                        <span v-if="!v$.formData.qrShortLead.hoursWeekdayStart.$model">
                           Business Hours WeekDay Start is required.
                         </span>
                       </div>
@@ -1074,10 +1074,10 @@
                       />
 
                       <div
-                        v-if="$v.formData.qrShortLead.hoursWeekdayEnd.$error"
+                        v-if="v$.formData.qrShortLead.hoursWeekdayEnd.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.hoursWeekdayEnd.$model">
+                        <span v-if="!v$.formData.qrShortLead.hoursWeekdayEnd.$model">
                           Business Hours WeekDay End is required.
                         </span>
                       </div>
@@ -1091,10 +1091,10 @@
                         @update:model-value="handleNumericInputhoursWeekendStart"
                       />
                       <div
-                        v-if="$v.formData.qrShortLead.hoursWeekendStart.$error"
+                        v-if="v$.formData.qrShortLead.hoursWeekendStart.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.hoursWeekendStart.$model">
+                        <span v-if="!v$.formData.qrShortLead.hoursWeekendStart.$model">
                           Business Hours Weekend Start is required.
                         </span>
                       </div>
@@ -1108,10 +1108,10 @@
                         @update:model-value="handleNumericInputhoursWeekendEnd"
                       />
                       <div
-                        v-if="$v.formData.qrShortLead.hoursWeekendEnd.$error"
+                        v-if="v$.formData.qrShortLead.hoursWeekendEnd.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.hoursWeekendEnd.$model">
+                        <span v-if="!v$.formData.qrShortLead.hoursWeekendEnd.$model">
                           Business Hours Weekend End is required.
                         </span>
                       </div>
@@ -1124,10 +1124,10 @@
                         v-model="formData.qrShortLead.averageBillAmount"
                       />
                       <div
-                        v-if="$v.formData.qrShortLead.averageBillAmount.$error"
+                        v-if="v$.formData.qrShortLead.averageBillAmount.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.averageBillAmount.$model">
+                        <span v-if="!v$.formData.qrShortLead.averageBillAmount.$model">
                           Average Bill Amount is required.
                         </span>
                       </div>
@@ -1140,10 +1140,10 @@
                         v-model="formData.qrShortLead.maximumUsageDaily"
                       />
                       <div
-                        v-if="$v.formData.qrShortLead.maximumUsageDaily.$error"
+                        v-if="v$.formData.qrShortLead.maximumUsageDaily.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.maximumUsageDaily.$model">
+                        <span v-if="!v$.formData.qrShortLead.maximumUsageDaily.$model">
                           Maximum Usage - Daily is required.
                         </span>
                       </div>
@@ -1156,10 +1156,10 @@
                         v-model="formData.qrShortLead.maximumUsageWeekly"
                       />
                       <div
-                        v-if="$v.formData.qrShortLead.maximumUsageWeekly.$error"
+                        v-if="v$.formData.qrShortLead.maximumUsageWeekly.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.maximumUsageWeekly.$model">
+                        <span v-if="!v$.formData.qrShortLead.maximumUsageWeekly.$model">
                           Maximum Usage - Weekly is required.
                         </span>
                       </div>
@@ -1172,10 +1172,10 @@
                         v-model="formData.qrShortLead.maximumUsageMonthly"
                       />
                       <div
-                        v-if="$v.formData.qrShortLead.maximumUsageMonthly.$error"
+                        v-if="v$.formData.qrShortLead.maximumUsageMonthly.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.maximumUsageMonthly.$model">
+                        <span v-if="!v$.formData.qrShortLead.maximumUsageMonthly.$model">
                           Maximum Usage - Monthly is required.
                         </span>
                       </div>
@@ -1213,17 +1213,17 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.marsRentalPlanName.$error
+                              v$.formData.qrShortLead.marsRentalPlanName.$error
                           }"
                         >MARS Rental Plan Name</span>
                         <q-select
                           filter
                           clearable
                           @blur="
-                            $v.formData.qrShortLead.marsRentalPlanName.$touch
+                            v$.formData.qrShortLead.marsRentalPlanName.$touch
                           "
                           :error="
-                            $v.formData.qrShortLead.marsRentalPlanName.$error
+                            v$.formData.qrShortLead.marsRentalPlanName.$error
                           "
                           color="grey-9"
                           style="width: 220px"
@@ -1236,10 +1236,10 @@
                         />
                       </q-item-section>
                       <div
-                        v-if="$v.formData.qrShortLead.marsRentalPlanName.$error"
+                        v-if="v$.formData.qrShortLead.marsRentalPlanName.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.marsRentalPlanName.$model">
+                        <span v-if="!v$.formData.qrShortLead.marsRentalPlanName.$model">
                           MARS Rental Plan Name is required.
                         </span>
                       </div>
@@ -1251,12 +1251,12 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.rentalMode.$error
+                              v$.formData.qrShortLead.rentalMode.$error
                           }"
                         >Rental Mode</span>
                         <q-select
-                          @blur="$v.formData.qrShortLead.rentalMode.$touch"
-                          :error="$v.formData.qrShortLead.rentalMode.$error"
+                          @blur="v$.formData.qrShortLead.rentalMode.$touch"
+                          :error="v$.formData.qrShortLead.rentalMode.$error"
                           placeholder="Choose from the below*"
                           color="grey-9"
                           style="width: 220px"
@@ -1268,10 +1268,10 @@
                         />
                       </q-item-section>
                       <div
-                        v-if="$v.formData.qrShortLead.rentalMode.$error"
+                        v-if="v$.formData.qrShortLead.rentalMode.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.rentalMode.$model">
+                        <span v-if="!v$.formData.qrShortLead.rentalMode.$model">
                           Rental Mode is required.
                         </span>
                       </div>
@@ -1283,12 +1283,12 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.rentalType.$error
+                              v$.formData.qrShortLead.rentalType.$error
                           }"
                         >Rental Type</span>
                 <div class="group">
                   <q-radio
-                    @blur="$v.formData.qrShortLead.rentalType.$touch"
+                    @blur="v$.formData.qrShortLead.rentalType.$touch"
                     v-for="(item, index) in rentalTypeOptions"
                     :key="index"
                     color="grey-9"
@@ -1300,10 +1300,10 @@
               </div>
             </q-item-section>
                       <div
-                        v-if="$v.formData.qrShortLead.rentalType.$error"
+                        v-if="v$.formData.qrShortLead.rentalType.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.rentalType.$model">
+                        <span v-if="!v$.formData.qrShortLead.rentalType.$model">
                           Rental Type is required.
                         </span>
                       </div>
@@ -1317,10 +1317,10 @@
                         v-model="formData.qrShortLead.setupFees"
                       />
                       <div
-                        v-if="$v.formData.qrShortLead.setupFees.$error"
+                        v-if="v$.formData.qrShortLead.setupFees.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.setupFees.$model">
+                        <span v-if="!v$.formData.qrShortLead.setupFees.$model">
                           Setup Fee is required.
                         </span>
                       </div>
@@ -1333,10 +1333,10 @@
                         v-model="formData.qrShortLead.recurringFees"
                       />
                       <div
-                        v-if="$v.formData.qrShortLead.recurringFees.$error"
+                        v-if="v$.formData.qrShortLead.recurringFees.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.recurringFees.$model">
+                        <span v-if="!v$.formData.qrShortLead.recurringFees.$model">
                           Reccuring Fee is required.
                         </span>
                       </div>
@@ -1392,13 +1392,13 @@
                         />
                         <div
                           v-if="
-                            $v.formData.qrShortLead.smallMerchantLessThanTwoDebit.$error
+                            v$.formData.qrShortLead.smallMerchantLessThanTwoDebit.$error
                           "
                           class="error-tooltip"
                         >
                           <span
                             v-if="
-                              !$v.formData.qrShortLead.smallMerchantLessThanTwoDebit
+                              !v$.formData.qrShortLead.smallMerchantLessThanTwoDebit
                                 .$model
                             "
                           >
@@ -1419,14 +1419,14 @@
                         />
                         <div
                           v-if="
-                            $v.formData.qrShortLead.smallMerchantGreaterThanTwoDebit
+                            v$.formData.qrShortLead.smallMerchantGreaterThanTwoDebit
                               .$error
                           "
                           class="error-tooltip"
                         >
                           <span
                             v-if="
-                              !$v.formData.qrShortLead.smallMerchantGreaterThanTwoDebit
+                              !v$.formData.qrShortLead.smallMerchantGreaterThanTwoDebit
                                 .$model
                             "
                           >
@@ -1447,14 +1447,14 @@
                         />
                         <div
                           v-if="
-                            $v.formData.qrShortLead
+                            v$.formData.qrShortLead
                               .smallMerchantLessThanTwoCreditAndPrepaid.$error
                           "
                           class="error-tooltip"
                         >
                           <span
                             v-if="
-                              !$v.formData.qrShortLead
+                              !v$.formData.qrShortLead
                                 .smallMerchantLessThanTwoCreditAndPrepaid.$model
                             "
                           >
@@ -1475,14 +1475,14 @@
                         />
                         <div
                           v-if="
-                            $v.formData.qrShortLead
+                            v$.formData.qrShortLead
                               .smallMerchantGreaterThanTwoCreditAndPrepaid.$error
                           "
                           class="error-tooltip"
                         >
                           <span
                             v-if="
-                              !$v.formData.qrShortLead
+                              !v$.formData.qrShortLead
                                 .smallMerchantGreaterThanTwoCreditAndPrepaid.$model
                             "
                           >
@@ -1504,13 +1504,13 @@
                         />
                         <div
                           v-if="
-                            $v.formData.qrShortLead.largeMerchantLessThanTwoDebit.$error
+                            v$.formData.qrShortLead.largeMerchantLessThanTwoDebit.$error
                           "
                           class="error-tooltip"
                         >
                           <span
                             v-if="
-                              !$v.formData.qrShortLead.largeMerchantLessThanTwoDebit
+                              !v$.formData.qrShortLead.largeMerchantLessThanTwoDebit
                                 .$model
                             "
                           >
@@ -1531,14 +1531,14 @@
                         />
                         <div
                           v-if="
-                            $v.formData.qrShortLead.largeMerchantGreaterThanTwoDebit
+                            v$.formData.qrShortLead.largeMerchantGreaterThanTwoDebit
                               .$error
                           "
                           class="error-tooltip"
                         >
                           <span
                             v-if="
-                              !$v.formData.qrShortLead.largeMerchantGreaterThanTwoDebit
+                              !v$.formData.qrShortLead.largeMerchantGreaterThanTwoDebit
                                 .$model
                             "
                           >
@@ -1559,14 +1559,14 @@
                         />
                         <div
                           v-if="
-                            $v.formData.qrShortLead
+                            v$.formData.qrShortLead
                               .largeMerchantLessThanTwoCreditandPrepaid.$error
                           "
                           class="error-tooltip"
                         >
                           <span
                             v-if="
-                              !$v.formData.qrShortLead
+                              !v$.formData.qrShortLead
                                 .largeMerchantLessThanTwoCreditandPrepaid.$model
                             "
                           >
@@ -1587,14 +1587,14 @@
                         />
                         <div
                           v-if="
-                            $v.formData.qrShortLead
+                            v$.formData.qrShortLead
                               .largeMerchantGreaterThanTwoCreditandPrepaid.$error
                           "
                           class="error-tooltip"
                         >
                           <span
                             v-if="
-                              !$v.formData.qrShortLead
+                              !v$.formData.qrShortLead
                                 .largeMerchantGreaterThanTwoCreditandPrepaid.$model
                             "
                           >
@@ -1613,10 +1613,10 @@
                         placeholder="Fixed"
                       />
                       <div
-                        v-if="$v.formData.qrShortLead.mdrFixed.$error"
+                        v-if="v$.formData.qrShortLead.mdrFixed.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.mdrFixed.$model">
+                        <span v-if="!v$.formData.qrShortLead.mdrFixed.$model">
                           Fixed is required.
                         </span>
                       </div>
@@ -1631,10 +1631,10 @@
                         placeholder="Max MDR per transaction"
                       />
                       <div
-                        v-if="$v.formData.qrShortLead.maxMdrPerTransaction.$error"
+                        v-if="v$.formData.qrShortLead.maxMdrPerTransaction.$error"
                         class="error-tooltip"
                       >
-                        <span v-if="!$v.formData.qrShortLead.maxMdrPerTransaction.$model">
+                        <span v-if="!v$.formData.qrShortLead.maxMdrPerTransaction.$model">
                           Max MDR per transaction is required.
                         </span>
                       </div>
@@ -1716,15 +1716,15 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.accountNumber.$error
+                              v$.formData.qrShortLead.accountNumber.$error
                           }"
                         >
                           Account Number
                         </span>
                        
                         <q-input
-                          @blur="$v.formData.qrShortLead.accountNumber.$touch"
-                          :error="$v.formData.qrShortLead.accountNumber.$error"
+                          @blur="v$.formData.qrShortLead.accountNumber.$touch"
+                          :error="v$.formData.qrShortLead.accountNumber.$error"
                           style="width: 220px"
                           label="Account Number"
                           placeholder="Account Number"
@@ -1732,17 +1732,17 @@
                           @keydown="nameKeydownacc($event)"
                         />
                         <div
-                          v-if="$v.formData.qrShortLead.accountNumber.$error"
+                          v-if="v$.formData.qrShortLead.accountNumber.$error"
                           class="error-tooltip"
                         >
-                          <span v-if="!$v.formData.qrShortLead.accountNumber.$model">
+                          <span v-if="!v$.formData.qrShortLead.accountNumber.$model">
                             Account Number is required.
                           </span>
                           <span
                             v-if="
-                              $v.formData.qrShortLead.accountNumber.$model &&
-                              ($v.formData.qrShortLead.accountNumber.$model.toString().length < 8 ||
-                                $v.formData.qrShortLead.accountNumber.$model.toString().length > 19)
+                              v$.formData.qrShortLead.accountNumber.$model &&
+                              (v$.formData.qrShortLead.accountNumber.$model.toString().length < 8 ||
+                                v$.formData.qrShortLead.accountNumber.$model.toString().length > 19)
                             "
                           >
                             Account Number must be between 8 and 19.
@@ -1756,14 +1756,14 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.ifscCode.$error
+                              v$.formData.qrShortLead.ifscCode.$error
                           }"
                         >
                           IFSC
                         </span>
                         <q-input
-                          @blur="$v.formData.qrShortLead.ifscCode.$touch"
-                          :error="$v.formData.qrShortLead.ifscCode.$error"
+                          @blur="v$.formData.qrShortLead.ifscCode.$touch"
+                          :error="v$.formData.qrShortLead.ifscCode.$error"
                           style="width: 220px"
                           type="text"
                           label="IFSC Code"
@@ -1772,16 +1772,16 @@
                           @keydown="nameKeydown($event)"
                         />
                         <div
-                          v-if="$v.formData.qrShortLead.ifscCode.$error"
+                          v-if="v$.formData.qrShortLead.ifscCode.$error"
                           class="error-tooltip"
                         >
-                          <span v-if="!$v.formData.qrShortLead.ifscCode.$model">
+                          <span v-if="!v$.formData.qrShortLead.ifscCode.$model">
                             IFSC is required.
                           </span>
                           <span
                             v-if="
-                              $v.formData.qrShortLead.ifscCode.$model &&
-                              $v.formData.qrShortLead.ifscCode.$model.toString().length !== 11
+                              v$.formData.qrShortLead.ifscCode.$model &&
+                              v$.formData.qrShortLead.ifscCode.$model.toString().length !== 11
                             "
                           >
                             IFSC must be exactly 11 digits.
@@ -1796,14 +1796,14 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.bankName.$error
+                              v$.formData.qrShortLead.bankName.$error
                           }"
                         >
                           Bank Name
                         </span>
                         <q-input
-                          @blur="$v.formData.qrShortLead.bankName.$touch"
-                          :error="$v.formData.qrShortLead.bankName.$error"
+                          @blur="v$.formData.qrShortLead.bankName.$touch"
+                          :error="v$.formData.qrShortLead.bankName.$error"
                           style="width: 220px"
                           type="text"
                           label="Bank Name"
@@ -1811,17 +1811,17 @@
                           v-model="formData.qrShortLead.bankName"
                         />
                         <div
-                          v-if="$v.formData.qrShortLead.bankName.$error"
+                          v-if="v$.formData.qrShortLead.bankName.$error"
                           class="error-tooltip"
                         >
-                          <span v-if="!$v.formData.qrShortLead.bankName.$model">
+                          <span v-if="!v$.formData.qrShortLead.bankName.$model">
                             Bank Name is required.
                           </span>
                           <span
                             v-if="
-                              $v.formData.qrShortLead.bankName.$model &&
-                              ($v.formData.qrShortLead.bankName.$model.toString().length < 0 ||
-                                $v.formData.qrShortLead.bankName.$model.toString().length > 100)
+                              v$.formData.qrShortLead.bankName.$model &&
+                              (v$.formData.qrShortLead.bankName.$model.toString().length < 0 ||
+                                v$.formData.qrShortLead.bankName.$model.toString().length > 100)
                             "
                           >
                             Bank Name must be between 0 and 100.
@@ -1852,7 +1852,7 @@
                           style="flex: 1;"
                           :class="{
                             'text-negative':
-                              $v.formData.qrShortLead.satToMarsRemarks.$error
+                              v$.formData.qrShortLead.satToMarsRemarks.$error
                           }"
                         >
                           Remarks
@@ -1860,7 +1860,7 @@
                         <q-input
                           @blur="onBlur"
                           :error="
-                            $v.formData.qrShortLead.satToMarsRemarks.$error
+                            v$.formData.qrShortLead.satToMarsRemarks.$error
                           "
                           style="width: 220px"
                           type="text"
@@ -1869,10 +1869,10 @@
                           v-model="formData.qrShortLead.satToMarsRemarks"
                         />
                         <div
-                          v-if="$v.formData.qrShortLead.satToMarsRemarks.$error"
+                          v-if="v$.formData.qrShortLead.satToMarsRemarks.$error"
                           class="error-tooltip"
                         >
-                          <span v-if="!$v.formData.qrShortLead.satToMarsRemarks.$model">
+                          <span v-if="!v$.formData.qrShortLead.satToMarsRemarks.$model">
                             Remarks is required.
                           </span>
                         </div>
@@ -1997,6 +1997,8 @@
   </q-page>
 </template>
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 import {
   required,
   email,
@@ -2015,6 +2017,9 @@ import ReferBackRemarks from "../../components/sat/ReferBackRemarks.vue";
 const today = new Date();
 const { addToDate } = date;
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   name: "qrLeadVadlidate",
   components: {
     viewQrLeadDocument,
@@ -2644,8 +2649,8 @@ export default {
     },
 
     proceedToMars() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify({ color: "negative", position: "bottom", message: "Please fill all mandatory fields", icon: "info" });
       } else {
         this.$q.loading.show({ delay: 0, spinnerColor: "purple-9", message: "Sending data to mars" });
@@ -2706,8 +2711,8 @@ export default {
 
     savePartialAndEnableProceed() { this.saveCurrentLeadChanges(); },
     saveCurrentLeadChanges() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify({ color: "negative", position: "bottom", message: "Please fill all mandatory fields", icon: "info" });
         this.partialSaved = false;
         return Promise.reject();
@@ -2724,11 +2729,11 @@ export default {
       });
     },
     saveCurrentLeadChangesUpdate() { return this.saveCurrentLeadChanges(); },
-    onBlur() { this.$v.formData.qrShortLead.satToMarsRemarks.$touch(); this.saveFieldData(); },
+    onBlur() { this.v$.formData.qrShortLead.satToMarsRemarks.$touch(); this.saveFieldData(); },
     referBackAndEnableProceed() { this.referBackCurrentLeadChanges(); },
     referBackCurrentLeadChanges() {
-      this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+      this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify({ color: "negative", position: "bottom", message: "Please fill all mandatory fields", icon: "info" });
         return;
       }

@@ -115,6 +115,8 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 
 
 import { LocalStorage } from "quasar";
@@ -190,6 +192,9 @@ const alphaNumericSpecialValidate = helpers.regex(
 );
 
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
     props: ["multiTidComponentDetails", "propTogglemultiTidComponentDetails"],
     components: {
         multiTidPaymentMode,
@@ -880,7 +885,7 @@ export default {
         //                                     .slice(1, 2);
         //                                 let computeSplitted = splitted[splitted.length - 1];
         //                                 let fieldErrorFound = eval(`
-        //                 OThis.$v.viewBinding.partnersArr.$each[
+        //                 OThis.v$.viewBinding.partnersArr.$each[
         //                   ${findPartnersErrorIndex}
         //                 ].${computeSplitted}`);
         //                                 fieldErrorFound.$model = "";
@@ -894,7 +899,7 @@ export default {
         //                                 generateErrorMessage.issue = actual.issue;
         //                                 generateErrorMessage.value = actual.value;
         //                             } else {
-        //                                 let splittingErrorField = `OThis.$v.${splitted.join(
+        //                                 let splittingErrorField = `OThis.v$.${splitted.join(
         //                                     "."
         //                                 )}`;
         //                                 let fieldErrorFound = eval(splittingErrorField);

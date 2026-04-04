@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../util/safeStorage";
 
 import api from "./api.js";
 
@@ -186,7 +187,7 @@ const InventoryBulkUploadDevice = {
       rootState
     }, request) {
       return api
-        .post(rootState.GlobalVariables.PHONEPE_INVENTORY_BULKFILEUPLOADURL + '/' + request.device_type +'/'+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]), request.file, {
+        .post(rootState.GlobalVariables.PHONEPE_INVENTORY_BULKFILEUPLOADURL + '/' + request.device_type +'/'+getAggregatorId(), request.file, {
           headers: {
             "Content-Type": 'multipart/form-data',
             "Authorization": "Token " + localStorage.getItem(
@@ -203,7 +204,7 @@ const InventoryBulkUploadDevice = {
       rootState
     }, request) {
       return api
-        .post(rootState.GlobalVariables.AGGREGATOR_REFURBISH_INVENTORY_BULKFILEUPLOADURL + '/'+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]), request.file, {
+        .post(rootState.GlobalVariables.AGGREGATOR_REFURBISH_INVENTORY_BULKFILEUPLOADURL + '/'+getAggregatorId(), request.file, {
           // headers: {
           //   "Content-Type": 'multipart/form-data',
           //   "Authorization": "Token " + localStorage.getItem(
@@ -253,7 +254,7 @@ const InventoryBulkUploadDevice = {
       rootState
     }, request) {
       return api
-        .put("aggregator-inventory/agg-add-bulk-sent-to-repair-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/3", request.file, {
+        .put("aggregator-inventory/agg-add-bulk-sent-to-repair-inventory/"+getAggregatorId()+"/3", request.file, {
           headers: {
             "Content-Type": 'multipart/form-data',
             "Authorization": "Token " + localStorage.getItem(
@@ -287,7 +288,7 @@ const InventoryBulkUploadDevice = {
       rootState
     }, request) {
       return api
-        .put("aggregator-inventory/agg-add-bulk-sent-to-repair-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/4", request.file, {
+        .put("aggregator-inventory/agg-add-bulk-sent-to-repair-inventory/"+getAggregatorId()+"/4", request.file, {
           headers: {
             "Content-Type": 'multipart/form-data',
             "Authorization": "Token " + localStorage.getItem(

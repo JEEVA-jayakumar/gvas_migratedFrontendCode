@@ -1,3 +1,4 @@
+import { getAggregatorId } from "../util/safeStorage";
 import { or, and } from '@vuelidate/validators';
 import api from "./api.js";
 
@@ -314,14 +315,14 @@ const InventoryCentral = {
 
     PHONEPE_FETCH_ALL_INVENTORY_DEVICES_BY_DEVICE_TYPE({ commit }, request) {
       if (request == undefined || request.device.id == undefined) {
-        return api.get("aggregator-inventory/agg-list-device-to-central-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])).then(response => {
+        return api.get("aggregator-inventory/agg-list-device-to-central-inventory/"+getAggregatorId()).then(response => {
           // START=> COMMIT with data received'
           commit("SET_ALL_INVENTORY_DEVICES_DATA", response.data.data);
           // END=> COMMIT with data received'
         });
       } else {
         return api
-          .get("aggregator-inventory/agg-list-device-to-central-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) + request.device.id)
+          .get("aggregator-inventory/agg-list-device-to-central-inventory/"+getAggregatorId() + request.device.id)
           .then(response => {
             // START=> COMMIT with data received'
             commit("SET_ALL_INVENTORY_DEVICES_DATA", response.data.data);
@@ -334,14 +335,14 @@ const InventoryCentral = {
     /* PHONEPE API */
     FETCH_ALL_PHOEPE_INVENTORY_DEVICES_BY_DEVICE_TYPE({ commit }, request) {
       if (request == undefined || request.device.id == undefined) {
-        return api.get("aggregator-inventory/agg-list-device-to-central-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])).then(response => {
+        return api.get("aggregator-inventory/agg-list-device-to-central-inventory/"+getAggregatorId()).then(response => {
           // START=> COMMIT with data received'
           commit("SET_ALL_PHOEPE_INVENTORY_DEVICES_BY_DEVICE_TYPE", response.data.data);
           // END=> COMMIT with data received'
         });
       } else {
         return api
-          .get("aggregator-inventory/agg-list-device-to-central-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) + request.device.id)
+          .get("aggregator-inventory/agg-list-device-to-central-inventory/"+getAggregatorId() + request.device.id)
           .then(response => {
             // START=> COMMIT with data received'
             commit("SET_ALL_PHOEPE_INVENTORY_DEVICES_BY_DEVICE_TYPE", response.data.data);
@@ -380,7 +381,7 @@ const InventoryCentral = {
 
     FEED_AGGREGATOR_FAULTY_FINAL_SUBMIT({ commit }, request) {
       return api.put(
-        "aggregator-inventory/agg-scan-add-central-fault-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/"+ request.action,
+        "aggregator-inventory/agg-scan-add-central-fault-inventory/"+getAggregatorId()+"/"+ request.action,
         request.data
       );
     },
@@ -417,7 +418,7 @@ const InventoryCentral = {
 
     FEED_AGGREGATOR_FAULTY_BULK_UPLOAD_FINAL_SUBMIT({ commit }, request) {
       return api.put(
-        "aggregator-inventory/agg-add-bulk-fault-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+ "/" + request.device + "/" + request.action,
+        "aggregator-inventory/agg-add-bulk-fault-inventory/"+getAggregatorId()+ "/" + request.device + "/" + request.action,
         request.file
       );
     },
@@ -436,7 +437,7 @@ const InventoryCentral = {
 
     FEED_AGGREGATOR_ALLOCATE_TO_REGION({ commit }, request) {
       return api.post(
-        "aggregator-inventory/agg-allocate-device-to-regional-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) +"/"+
+        "aggregator-inventory/agg-allocate-device-to-regional-inventory/"+getAggregatorId() +"/"+
         request.region +
         "/" +
         request.podNumber,
@@ -449,7 +450,7 @@ const InventoryCentral = {
     FEED_PHONE_PE_ALLOCATE_TO_REGION({ commit }, request) {
       console.log("FEED_PHONE_PE_ALLOCATE_TO_REGION --->",JSON.stringify(request))
       return api.post(
-        "aggregator-inventory/agg-allocate-device-to-regional-inventory/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1]) +"/" +
+        "aggregator-inventory/agg-allocate-device-to-regional-inventory/"+getAggregatorId() +"/" +
         request.region +
         "/" +
         request.podNumber,
@@ -994,7 +995,7 @@ const InventoryCentral = {
 
     FETCH_AGGREGATOR_FAULT_INVENTORY_DEVICES_FROM_REGIONAL({ commit }, request) {
       return api
-        .get("aggregator-inventory/agg-find-faulty-inventory-from-pod-number/"+JSON.parse(localStorage.getItem("selectedTab").split('|')[1])+"/" + request)
+        .get("aggregator-inventory/agg-find-faulty-inventory-from-pod-number/"+getAggregatorId()+"/" + request)
         .then(response => {
           commit("SET_AGGREGATOR_FAULTY_INVENTORY_DEVICES", response.data.data);
         });

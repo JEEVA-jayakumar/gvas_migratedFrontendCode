@@ -23,8 +23,8 @@
                   <q-input
                     type="textarea"
                     placeholder="Reason Type.."
-                    :error="$v.formData.reason.$error"
-                    @blur="$v.formData.reason.$touch"
+                    :error="v$.formData.reason.$error"
+                    @blur="v$.formData.reason.$touch"
                     class="q-my-md"
                     color="grey-9"
                     align="left"
@@ -57,6 +57,8 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core';
+
 /* START >> Modal components Lead source, device, merchant type */
 import {
   required,
@@ -70,6 +72,9 @@ import {
 } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["propShowUpdateDemapping", "propRowDetails"],
   name: "MDRdetails",
   data() {
@@ -112,8 +117,8 @@ export default {
     },
 
     fnReasonRemarks(request) {
-        this.$v.formData.$touch();
-      if (this.$v.formData.$error) {
+        this.v$.formData.$touch();
+      if (this.v$.formData.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         let param = {
