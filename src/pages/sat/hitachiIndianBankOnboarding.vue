@@ -119,22 +119,22 @@
                   @request="ajaxLoadAllLeadInfo1"
                 >
                   <template v-slot:body-cell-tid="props">
-                    <q-td :props="props" class="customTd">
+                    <q-td v-if="props.row" :props="props" class="customTd">
                       <div class="text-primary">{{ props.row.tid }}</div>
                     </q-td>
                   </template>
                   <template v-slot:body-cell-mid="props">
-                    <q-td :props="props" class="customTd">
+                    <q-td v-if="props.row" :props="props" class="customTd">
                       <div class="text-primary">{{ props.row.mid }}</div>
                     </q-td>
                   </template>
                   <template v-slot:body-cell-createdAt="props">
-                    <q-td :props="props">
+                    <q-td v-if="props.row" :props="props">
                       {{ $moment(props.row.createdAt).format("Do MMM Y") }}
                     </q-td>
                   </template>
                   <template v-slot:body-cell-assign="props">
-                    <q-td :props="props">
+                    <q-td v-if="props.row" :props="props">
                       <q-btn
                         class="btn1"
                         v-if="props.row.isStatus == 1"

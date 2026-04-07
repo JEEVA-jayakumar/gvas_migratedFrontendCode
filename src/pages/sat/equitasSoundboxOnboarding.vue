@@ -106,35 +106,35 @@
           @request="ajaxLoadAllLeadInfo1"
         >
           <template v-slot:body-cell-leadNumber="props">
-            <q-td :props="props" class="cursor-pointer">
+          <q-td :props="props" class="cursor-pointer" v-if="props.row">
               <span class="label" :class="['text-primary']">{{
                 props.row.qrLeadInformation?.id
               }}</span>
             </q-td>
           </template>
           <template v-slot:body-cell-merchantName="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.merchantName || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-contactEmail="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.contactEmail || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-contactAddress="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.contactAddress || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-contactNumber="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.contactNumber || "NA"
               }}
@@ -142,37 +142,37 @@
           </template>
 
           <template v-slot:body-cell-alternateContactNumber="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.alternateContactNumber || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-pincode="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.pincode || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-sim="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{ props.row.sim || "NA" }}
             </q-td>
           </template>
 
           <template v-slot:body-cell-tid="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{ props.row.tid || "NA" }}
             </q-td>
           </template>
           <template v-slot:body-cell-mid="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{ props.row.mid || "NA" }}
             </q-td>
           </template>
           <template v-slot:body-cell-vpa="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{ props.row.vpa || "NA" }}
             </q-td>
           </template>
@@ -209,35 +209,35 @@
           @request="ajaxLoadAllLeadInfo"
         >
           <template v-slot:body-cell-leadNumber="props">
-            <q-td :props="props" class="cursor-pointer">
+          <q-td :props="props" class="cursor-pointer" v-if="props.row">
               <span class="label" :class="['text-primary']">{{
                 props.row.qrLeadInformation?.id
               }}</span>
             </q-td>
           </template>
           <template v-slot:body-cell-merchantName="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.merchantName || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-contactEmail="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.contactEmail || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-contactAddress="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.contactAddress || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-contactNumber="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.contactNumber || "NA"
               }}
@@ -245,50 +245,50 @@
           </template>
 
           <template v-slot:body-cell-alternateContactNumber="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.alternateContactNumber || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-assignedTo="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.assignedTo?.name || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-pincode="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.pincode || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-sim="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{ props.row.sim || "NA" }}
             </q-td>
           </template>
 
           <template v-slot:body-cell-tid="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{ props.row.tid || "NA" }}
             </q-td>
           </template>
-          <template v-slot:body-cell-mid="props">
+        <template v-slot:body-cell-mid="props" v-if="props.row">
             <q-td :props="props">
               {{ props.row.mid || "NA" }}
             </q-td>
           </template>
           <template v-slot:body-cell-vpa="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{ props.row.vpa || "NA" }}
             </q-td>
           </template>
 
           <template v-slot:body-cell-action="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               <q-btn
 
                 push
@@ -333,35 +333,35 @@
           @request="ajaxLoadAllLeadInfo2"
         >
           <template v-slot:body-cell-leadNumber="props">
-            <q-td :props="props" class="cursor-pointer">
+          <q-td :props="props" class="cursor-pointer" v-if="props.row">
               <span class="label" :class="['text-primary']">{{
                 props.row.qrLeadInformation?.id
               }}</span>
             </q-td>
           </template>
           <template v-slot:body-cell-merchantName="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.merchantName || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-contactEmail="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.contactEmail || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-contactAddress="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.contactAddress || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-contactNumber="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.contactNumber || "NA"
               }}
@@ -369,54 +369,54 @@
           </template>
 
           <template v-slot:body-cell-alternateContactNumber="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.alternateContactNumber || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-state="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.merchantStateName || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-city="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.merchantDistrictName || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-pincode="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.pincode || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-vpa="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{ props.row.vpa || "NA" }}
             </q-td>
           </template>
           <template v-slot:body-cell-updatedAt="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.updatedAt || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-equitasLat="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.equitasLat || "NA"
               }}
             </q-td>
           </template>
           <template v-slot:body-cell-equitasLan="props">
-            <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
               {{
                 props.row.qrLeadInformation?.equitasLan || "NA"
               }}
@@ -768,16 +768,16 @@ export default {
             if (res.status == 200) {
               this.formData.marsDeviceIdsCooked = [];
               this.formData.region = "";
-              this.$q.notify({ color: "positive", position: "bottom", message: res.body.data, icon: "thumb_up" });
+              this.$q.notify({ color: "positive", position: "bottom", message: res.body?.data, icon: "thumb_up" });
               this.$q.loading.hide();
               this.ajaxLoadAllLeadInfo1({ pagination: this.paginationControl1, filter: this.filterSearch1 });
             } else {
-              self.$q.notify({ color: "negative", position: "bottom", message: res.body.data, icon: "thumb_down" });
+              self.$q.notify({ color: "negative", position: "bottom", message: res.body?.data, icon: "thumb_down" });
               this.$q.loading.hide();
             }
           })
           .catch(error => {
-            self.$q.notify({ color: "negative", position: "bottom", message: error.body.data, icon: "thumb_down" });
+            self.$q.notify({ color: "negative", position: "bottom", message: error.body?.data, icon: "thumb_down" });
             this.$q.loading.hide();
           });
       } else if (

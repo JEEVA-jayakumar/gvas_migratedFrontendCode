@@ -119,12 +119,7 @@
             @request="ajaxLoadAllLeadInfo"
           >
             <template v-slot:body-cell-leadNumber="props">
-              <q-td
-                v-if="props.row.leadInformation != null || props.row.qrLeadInformation != null"
-                :props="props"
-                class="cursor-pointer"
-                @click="toggleLeadInformation(props.row.leadInformation)"
-              >
+              <q-td v-if="props.row" :props="props" class="cursor-pointer" @click="toggleLeadInformation(props.row.leadInformation)">
                 <span class="label text-primary">#
                   {{
                     props.row.leadInformation == null
@@ -132,13 +127,10 @@
                       : props.row.leadInformation.leadNumber
                   }}</span>
               </q-td>
-              <q-td v-else :props="props">NA</q-td>
+              <q-td v-else v-if="props.row" :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-submitToMarsDate="props">
-              <q-td
-                v-if="props.row.leadInformation != null || props.row.qrLeadInformation != null"
-                :props="props"
-              >
+              <q-td v-if="props.row" :props="props">
                 {{
                   props.row.leadInformation != null &&
                   props.row.leadInformation.submitToMarsDate != null
@@ -149,50 +141,35 @@
                     : "NA"
                 }}
               </q-td>
-              <q-td v-else :props="props">NA</q-td>
+              <q-td v-else v-if="props.row" :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-createdAt="props">
-              <q-td
-                v-if="props.row.leadInformation != null || props.row.qrLeadInformation != null"
-                :props="props"
-              >
+              <q-td v-if="props.row" :props="props">
                 {{ $moment(props.row.createdAt).format("Do MMM Y") }}
               </q-td>
-              <q-td v-else :props="props">NA</q-td>
+              <q-td v-else v-if="props.row" :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-deviceAddress="props">
-              <q-td
-                v-if="props.row.leadInformation != null || props.row.qrLeadInformation != null"
-                :props="props"
-                class="customTd customCellLength"
-              >
+              <q-td v-if="props.row" :props="props" class="customTd customCellLength">
                 <div>{{ props.row.deviceAddress }}</div>
               </q-td>
-              <q-td v-else :props="props">NA</q-td>
+              <q-td v-else v-if="props.row" :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-tid="props">
-              <q-td
-                v-if="props.row.leadInformation != null || props.row.qrLeadInformation != null"
-                :props="props"
-                class="customTd"
-              >
+              <q-td v-if="props.row" :props="props" class="customTd">
                 <div class="text-primary">
                   {{ props.row.tid }}
                 </div>
               </q-td>
-              <q-td v-else :props="props">NA</q-td>
+              <q-td v-else v-if="props.row" :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-mid="props">
-              <q-td
-                v-if="props.row.leadInformation != null || props.row.qrLeadInformation != null"
-                :props="props"
-                class="customTd"
-              >
+              <q-td v-if="props.row" :props="props" class="customTd">
                 <div class="text-primary">
                   {{ props.row.mid }}
                 </div>
               </q-td>
-              <q-td v-else :props="props">NA</q-td>
+              <q-td v-else v-if="props.row" :props="props">NA</q-td>
             </template>
             <template v-slot:top>
               <div class="col-md-5">
@@ -229,12 +206,7 @@
             @request="ajaxLoadAllLeadInfo1"
           >
             <template v-slot:body-cell-leadNumber="props">
-              <q-td
-                v-if="props.row.leadInformation != null || props.row.qrLeadInformation != null"
-                :props="props"
-                class="cursor-pointer"
-                @click="toggleLeadInformation(props.row.leadInformation)"
-              >
+              <q-td v-if="props.row" :props="props" class="cursor-pointer" @click="toggleLeadInformation(props.row.leadInformation)">
                 <span class="label text-primary">#
                   {{
                     props.row.leadInformation == null
@@ -242,13 +214,10 @@
                       : props.row.leadInformation.leadNumber
                   }}</span>
               </q-td>
-              <q-td v-else :props="props">NA</q-td>
+              <q-td v-else v-if="props.row" :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-submitToMarsDate="props">
-              <q-td
-                v-if="props.row.leadInformation != null || props.row.qrLeadInformation != null"
-                :props="props"
-              >
+              <q-td v-if="props.row" :props="props">
                 {{
                   props.row.leadInformation != null &&
                   props.row.leadInformation.submitToMarsDate != null
@@ -259,52 +228,37 @@
                     : "NA"
                 }}
               </q-td>
-              <q-td v-else :props="props">NA</q-td>
+              <q-td v-else v-if="props.row" :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-createdAt="props">
-              <q-td
-                v-if="props.row.leadInformation != null || props.row.qrLeadInformation != null"
-                :props="props"
-              >
+              <q-td v-if="props.row" :props="props">
                 {{ $moment(props.row.createdAt).format("Do MMM Y") }}
               </q-td>
-              <q-td v-else :props="props">NA</q-td>
+              <q-td v-else v-if="props.row" :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-tid="props">
-              <q-td
-                v-if="props.row.leadInformation != null || props.row.qrLeadInformation != null"
-                :props="props"
-                class="customTd"
-              >
+              <q-td v-if="props.row" :props="props" class="customTd">
                 <div class="text-primary">
                   {{ props.row.tid == null ? "NA" : props.row.tid }}
                 </div>
               </q-td>
-              <q-td v-else :props="props">NA</q-td>
+              <q-td v-else v-if="props.row" :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-mid="props">
-              <q-td
-                v-if="props.row.leadInformation != null || props.row.qrLeadInformation != null"
-                :props="props"
-                class="customTd"
-              >
+              <q-td v-if="props.row" :props="props" class="customTd">
                 <div class="text-primary">
                   {{ props.row.mid }}
                 </div>
               </q-td>
-              <q-td v-else :props="props">NA</q-td>
+              <q-td v-else v-if="props.row" :props="props">NA</q-td>
             </template>
             <template v-slot:body-cell-deviceAddress="props">
-              <q-td
-                v-if="props.row.leadInformation != null || props.row.qrLeadInformation != null"
-                :props="props"
-                class="customTd customCellLength"
-              >
+              <q-td v-if="props.row" :props="props" class="customTd customCellLength">
                 <div>
                   {{ props.row.deviceAddress }}
                 </div>
               </q-td>
-              <q-td v-else :props="props">NA</q-td>
+              <q-td v-else v-if="props.row" :props="props">NA</q-td>
             </template>
             <template v-slot:top>
               <div class="col-md-5">

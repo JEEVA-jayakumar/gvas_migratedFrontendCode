@@ -15,13 +15,13 @@
         @request="ajaxLoadAllCMS"
       >
         <template v-slot:body-cell-updatedAt="props">
-          <q-td :props="props">
+          <q-td v-if="props.row" :props="props">
             {{ $moment(props.row.leadInformation.updatedAt).format("Do MMM Y") }}
           </q-td>
         </template>
 
         <template v-slot:body-cell-Status="props">
-          <q-td :props="props">
+          <q-td v-if="props.row" :props="props">
             <span
               class="label text-positive"
               v-if="props.row.leadInformation.cmsLeadStatus == 23"
@@ -71,7 +71,7 @@
         </template>
 
         <template v-slot:body-cell-action="props">
-          <q-td :props="props">
+          <q-td v-if="props.row" :props="props">
             <q-btn
               v-if="props.row.leadInformation.cmsLeadStatus == 22 || props.row.leadInformation.cmsLeadStatus == 15 || props.row.leadInformation.cmsLeadStatus == 25"
               push
@@ -156,7 +156,7 @@
         @request="ajaxLoadAllLeadInfo"
       >
         <template v-slot:body-cell-action="props">
-          <q-td :props="props" class="text-center">
+          <q-td v-if="props.row" :props="props" class="text-center">
             <q-btn
               push
               outline

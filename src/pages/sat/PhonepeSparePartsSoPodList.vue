@@ -27,17 +27,17 @@
             @request="ajaxLoadAllLeadInfo"
           >
             <template v-slot:body-cell-createdAt="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{ props.row.created_date == null ? "NA" : $moment(props.row.created_date).format("Do MMM Y") }}
               </q-td>
             </template>
             <template v-slot:body-cell-updated_date="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{ props.row.updated_date == null ? "NA" : $moment(props.row.updated_date).format("Do MMM Y") }}
               </q-td>
             </template>
             <template v-slot:body-cell-status="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 <span class="label text-positive" v-if="props.row.status == 1">Created</span>
                 <span class="label text-primary" v-else-if="props.row.status == 2">Assigned to R.I</span>
                 <span class="label text-orange" v-else-if="props.row.status == 3">Approved By R.I</span>
@@ -48,14 +48,14 @@
               </q-td>
             </template>
             <template v-slot:body-cell-owner="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 <span class="label text-positive" v-if="props.row.owner == 1">Central Inventory</span>
                 <span class="label text-primary" v-else-if="props.row.owner == 2">Regional Inventory</span>
                 <span class="label text-primary" v-else-if="props.row.owner == 3">SO</span>
               </q-td>
             </template>
             <template v-slot:body-cell-regionAreaName="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{ props.row.allocate_region == null ? "NA" : props.row.allocate_region.regionAreaName }}
               </q-td>
             </template>
@@ -91,17 +91,17 @@
             @request="ajaxLoadAllLeadInfo1"
           >
             <template v-slot:body-cell-createdAt="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{ props.row.created_date == null ? "NA" : $moment(props.row.created_date).format("Do MMM Y") }}
               </q-td>
             </template>
             <template v-slot:body-cell-updated_date="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{ props.row.updated_date == null ? "NA" : $moment(props.row.updated_date).format("Do MMM Y") }}
               </q-td>
             </template>
             <template v-slot:body-cell-status="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 <span class="label text-positive" v-if="props.row.status == 1">Created</span>
                 <span class="label text-primary" v-else-if="props.row.status == 2">Assigned to R.I</span>
                 <span class="label text-orange" v-else-if="props.row.status == 3">Approved By R.I</span>
@@ -112,24 +112,24 @@
               </q-td>
             </template>
             <template v-slot:body-cell-owner="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 <span class="label text-positive" v-if="props.row.owner == 1">Central Inventory</span>
                 <span class="label text-primary" v-else-if="props.row.owner == 2">Regional Inventory</span>
                 <span class="label text-primary" v-else-if="props.row.owner == 3">SO</span>
               </q-td>
             </template>
             <template v-slot:body-cell-regionAreaName="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{ props.row.allocate_region == null ? "NA" : props.row.allocate_region.regionAreaName }}
               </q-td>
             </template>
             <template v-slot:body-cell-name="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{ props.row.allocate_so == null ? "NA" : props.row.allocate_so.name + " | " + props.row.allocate_so.employeeID }}
               </q-td>
             </template>
             <template v-slot:body-cell-action1="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 <q-btn
                   dense
                   no-caps
@@ -174,17 +174,17 @@
             @request="ajaxLoadAllLeadInfo2"
           >
             <template v-slot:body-cell-createdAt="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{ props.row.created_date == null ? "NA" : $moment(props.row.created_date).format("Do MMM Y") }}
               </q-td>
             </template>
             <template v-slot:body-cell-updated_date="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{ props.row.updated_date == null ? "NA" : $moment(props.row.updated_date).format("Do MMM Y") }}
               </q-td>
             </template>
             <template v-slot:body-cell-status="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 <span class="label text-positive" v-if="props.row.status == 1">Created</span>
                 <span class="label text-primary" v-else-if="props.row.status == 2">Assigned to R.I</span>
                 <span class="label text-orange" v-else-if="props.row.status == 3">Approved By R.I</span>
@@ -195,19 +195,19 @@
               </q-td>
             </template>
             <template v-slot:body-cell-owner="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 <span class="label text-positive" v-if="props.row.owner == 1">Central Inventory</span>
                 <span class="label text-primary" v-else-if="props.row.owner == 2">Regional Inventory</span>
                 <span class="label text-primary" v-else-if="props.row.owner == 3">SO</span>
               </q-td>
             </template>
             <template v-slot:body-cell-regionAreaName="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{ props.row.allocate_region == null ? "NA" : props.row.allocate_region.regionAreaName }}
               </q-td>
             </template>
             <template v-slot:body-cell-name="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{ props.row.allocate_so == null ? "NA" : props.row.allocate_so.name + " | " + props.row.allocate_so.employeeID }}
               </q-td>
             </template>

@@ -38,7 +38,7 @@
           >
             <template v-slot:body-cell-leadNumber="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 class="cursor-pointer"
                 @click="toggleLeadInformation(props.row.leadInformation)"
               >
@@ -46,17 +46,17 @@
               </q-td>
             </template>
             <template v-slot:body-cell-submitToMarsDate="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}
               </q-td>
             </template>
             <template v-slot:body-cell-createdAt="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{ $moment(props.row.createdAt).format("Do MMM Y") }}
               </q-td>
             </template>
             <template v-slot:body-cell-mid="props">
-              <q-td :props="props" class="customTd">
+              <q-td v-if="props.row" :props="props" class="customTd">
                 <div class="text-primary">{{ props.row.mid }}</div>
               </q-td>
             </template>

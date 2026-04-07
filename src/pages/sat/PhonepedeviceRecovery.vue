@@ -12,38 +12,38 @@
           row-key="name"
         >
           <!-- <template v-slot:body-cell-createdAt="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             {{ $moment(props.row.createdAt).format("Do MMM Y") }}
           </q-td>
           </template>
           <template v-slot:body-cell-receivedAt="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             {{ $moment(props.row.receivedAt).format("Do MMM Y") }}
           </q-td>
           </template>
   
           <template v-slot:body-cell-receivedAt="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             {{ $moment(props.row.receivedAt ==null? "NA" : props.row.receivedAt).format("Do MMM Y") }}
           </q-td>
           </template>
           <template v-slot:body-cell-DeviceList="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             {{ $moment(props.row.device.createDate).format("Do MMM Y") }}
           </q-td>
           </template>
           <template v-slot:body-cell-ModifyDate="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             {{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}
           </q-td>
           </template>-->
           <template v-slot:body-cell-created_at="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
               {{ props.row.created_at ==null? "NA" : $moment(props.row.created_at).format("Do MMM Y") }}
             </q-td>
           </template>
           <template v-slot:body-cell-updated_at="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
               {{ props.row.updated_at ==null? "NA" : $moment(props.row.updated_at).format("Do MMM Y") }}
             </q-td>
           </template>

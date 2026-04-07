@@ -78,7 +78,7 @@
         row-key="name"
       >
         <template v-slot:body-cell-inboundVerified="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           <q-btn flat v-if="props.row.inboundVerifiedStatus == 1" icon="check" color="positive" />
           <q-btn

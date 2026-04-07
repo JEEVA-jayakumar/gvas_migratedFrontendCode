@@ -119,14 +119,14 @@
           </q-tr>
           <!--END: table header -->
           <template v-slot:body-cell-mid="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
             <span class="capitalize">{{ props.row.mid }}</span>
 
           </q-td>
           </template>
           <template v-slot:body-cell-leadNumber="props">
-            <q-td :props="props"
+            <q-td v-if="props.row" :props="props"
             class="cursor-pointer"
             @click="toggleLeadInformation(props.row.leadInformation)">
 
@@ -137,7 +137,7 @@
           </q-td>
           </template>
           <template v-slot:body-cell-HitachiStatus="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
             <span class="capitalize">{{
               props.row.hitachiLeadStatus != null
@@ -148,7 +148,7 @@
           </q-td>
           </template>
           <template v-slot:body-cell-deviceSer="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
             <span class="capitalize">{{
               props.row.regionalInventory != null
@@ -159,7 +159,7 @@
           </q-td>
           </template>
           <template v-slot:body-cell-region="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
             <span class="capitalize">{{
               props.row.leadInformation != null

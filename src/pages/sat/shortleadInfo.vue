@@ -10,7 +10,7 @@
         row-key="name"
       >
         <template v-slot:body-cell-action="props">
-          <q-td :props="props">
+          <q-td v-if="props.row" :props="props">
           <div class="row no-wrap no-padding">
             <q-btn
               dense
@@ -29,7 +29,7 @@
         </q-td>
         </template>
         <template v-slot:body-cell-update="props">
-          <q-td :props="props">
+          <q-td v-if="props.row" :props="props">
           <div class="row no-wrap no-padding">
             <q-btn
               dense
@@ -48,7 +48,7 @@
         </q-td>
         </template>
         <!-- <template v-slot:body-cell-status="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
             <span class="label text-negative" v-if="props.row.status == $TRANSACTION_STATUS">Pending</span>
             <span class="label text-positive" v-else-if="props.row.status">Success</span>

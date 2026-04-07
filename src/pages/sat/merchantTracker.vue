@@ -11,32 +11,32 @@
             row-key="id"
         >
           <template v-slot:body-cell-tid="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
                 <span class="label text-primary"># {{props.row.tid}}</span>
             </q-td>
           </template>
           <template v-slot:body-cell-mid="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
                 <span class="label text-primary"># {{props.row.mid}}</span>
             </q-td>
           </template>
           <template v-slot:body-cell-transaction_amount="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
               Rs. {{props.row.transaction_amount}}
             </q-td>
           </template>
           <template v-slot:body-cell-gst="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
               Rs. {{props.row.gst}}
             </q-td>
           </template>
           <template v-slot:body-cell-net_amount="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
               Rs. {{props.row.net_amount}}
             </q-td>
           </template>
           <template v-slot:body-cell-mdr="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
               Rs. {{props.row.mdr}}
             </q-td>
           </template>

@@ -231,7 +231,7 @@
           </q-td>
           </template>
                     <template v-slot:body-cell-device_type="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             {{
                         props.row.aggregatorDevice
                             ==

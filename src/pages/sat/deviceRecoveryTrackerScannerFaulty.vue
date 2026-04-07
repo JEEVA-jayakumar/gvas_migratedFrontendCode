@@ -37,7 +37,7 @@
         color="light-blue"
       >
         <!-- <template v-slot:body-cell-action="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           <q-btn
             @click="removeScannedItems(props.row)"

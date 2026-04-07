@@ -1055,7 +1055,9 @@ export default {
           menuItems = menuItems.concat(this.menus.varaneekSat);
         } else {
           const satMenu = this.menus.sat.find(m => m.name === this.selectedValueSat) || this.menus.sat[0];
-          menuItems = menuItems.concat(satMenu.subItems);
+          if (satMenu && satMenu.subItems) {
+            menuItems = menuItems.concat(satMenu.subItems);
+          }
         }
       }
 
@@ -1132,7 +1134,8 @@ export default {
         this.menuListNameSat = this.selectedValueSat;
         if (val === "Bijlipay") this.$router.push("/sat/dashboard");
         else if (val === 3) this.$router.push("/sat/dashboardPhonepe");
-        else this.$router.push("/sat/dashboardMobikwik");
+        else if (val === 4) this.$router.push("/sat/dashboardMobikwik");
+        else this.$router.push("/sat/dashboard");
       }
       if (this.showMenu.includes(this.$ROLE_HIERARCHY_INVENTORY_OFFICER)) {
         this.menuListName = val === "Bijlipay" ? "Bijlipay" : "Others";

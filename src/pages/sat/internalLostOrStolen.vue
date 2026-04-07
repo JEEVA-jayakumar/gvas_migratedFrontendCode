@@ -23,18 +23,18 @@
       @request="ajaxLoadAllLeadInfo"
     >
       <template v-slot:body-cell-tid="props">
-        <q-td :props="props">
+        <q-td v-if="props.row" :props="props">
           <span class="label text-primary"># {{ props.row.tid }}</span>
         </q-td>
       </template>
       <template v-slot:body-cell-mid="props">
-        <q-td :props="props">
+        <q-td v-if="props.row" :props="props">
           <span class="label text-primary"># {{ props.row.mid }}</span>
         </q-td>
       </template>
       <template v-slot:body-cell-leadNumber="props">
         <q-td
-          :props="props"
+v-if="props.row"           :props="props"
           class="cursor-pointer"
           @click="toggleLeadInformation(props.row.leadInformation)"
         >
@@ -42,27 +42,27 @@
         </q-td>
       </template>
       <template v-slot:body-cell-mobileNumber="props">
-        <q-td :props="props">{{
+        <q-td v-if="props.row" :props="props">{{
           props.row.leadInformation == null ? "NA" : props.row.leadInformation.contactNumber
         }}</q-td>
       </template>
       <template v-slot:body-cell-leadAddress="props">
-        <q-td :props="props">{{
+        <q-td v-if="props.row" :props="props">{{
           props.row.leadInformation == null ? "NA" : props.row.leadInformation.leadAddress
         }}</q-td>
       </template>
       <template v-slot:body-cell-lostOrStolenRemarks="props">
-        <q-td :props="props">
+        <q-td v-if="props.row" :props="props">
           <span class="label">{{ props.row.lostOrStolenRemarks }}</span>
         </q-td>
       </template>
       <template v-slot:body-cell-deviceStatusDate="props">
-        <q-td :props="props">
+        <q-td v-if="props.row" :props="props">
           <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
         </q-td>
       </template>
       <template v-slot:body-cell-action="props">
-        <q-td :props="props">
+        <q-td v-if="props.row" :props="props">
           <q-btn push class="q-mx-sm" color="positive" size="sm" @click="lostStolenDevice(props.row)" label="Lost/Stolen" />
         </q-td>
       </template>
@@ -94,17 +94,17 @@
       class="payment_verification_table capitalize"
     >
       <template v-slot:body-cell-updated_at="props">
-        <q-td :props="props">{{ props.row.updatedAt == null ? "NA" : $moment(props.row.updatedAt).format("Do MMM Y") }}</q-td>
+        <q-td v-if="props.row" :props="props">{{ props.row.updatedAt == null ? "NA" : $moment(props.row.updatedAt).format("Do MMM Y") }}</q-td>
       </template>
       <template v-slot:body-cell-Status="props">
-        <q-td :props="props">
+        <q-td v-if="props.row" :props="props">
           <span class="label text-positive" v-if="props.row.regionalInventory?.deviceStatus == 8">Waiting for Approval</span>
           <span class="label text-amber" v-if="props.row.regionalInventory?.deviceStatus == 7">Submitted By SO</span>
           <span class="label text-purple" v-if="props.row.regionalInventory?.deviceStatus == 10">Rejected By Finance</span>
         </q-td>
       </template>
       <template v-slot:body-cell-action="props">
-        <q-td :props="props">
+        <q-td v-if="props.row" :props="props">
           <q-btn v-if="props.row.regionalInventory?.deviceStatus == 8" disable push color="purple-9" size="sm" label="Waiting for Approval" />
           <q-btn v-else-if="props.row.regionalInventory?.deviceStatus == 7" disable color="blue" size="sm" label="Submitted By SO" />
           <q-btn v-else-if="props.row.regionalInventory?.deviceStatus == 10" disable color="red" size="sm" label="Rejected By Finance" />

@@ -40,7 +40,7 @@
         @request="ajaxLoadAllLeadInfo"
       >
         <template v-slot:body-cell-leadNumber="props">
-            <q-td :props="props"
+            <q-td v-if="props.row" :props="props"
           class="cursor-pointer"
           @click="toggleLeadInformation(props.row.leadInformation)">
 

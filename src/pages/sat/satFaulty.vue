@@ -128,13 +128,13 @@
       >
         <!--START: table body modification -->
         <template v-slot:body-cell-deviceName="props">
-          <q-td :props="props">{{props.row.deviceName}}</q-td>
+          <q-td v-if="props.row" :props="props">{{props.row.deviceName}}</q-td>
         </template>
         <template v-slot:body-cell-serialNumber="props">
-          <q-td :props="props">{{props.row.serialNumber}}</q-td>
+          <q-td v-if="props.row" :props="props">{{props.row.serialNumber}}</q-td>
         </template>
         <template v-slot:body-cell-status="props">
-          <q-td :props="props">
+          <q-td v-if="props.row" :props="props">
             <q-btn flat v-if="props.row.status == true" icon="check" color="positive" />
             <q-btn flat v-else-if="props.row.status == false" icon="clear" color="negative" />
             <q-btn flat color="amber-9" v-else icon="warning" />

@@ -22,26 +22,22 @@
         @request="ajaxLoadAllLeadInfo"
       >
         <template v-slot:body-cell-leadNumber="props">
-          <q-td
-            :props="props"
-            class="cursor-pointer"
-            @click="toggleLeadInformation(props.row)"
-          >
+          <q-td v-if="props.row" :props="props" class="cursor-pointer" @click="toggleLeadInformation(props.row)">
             <span class="label text-primary"> {{props.row.leadNumber}}</span>
           </q-td>
         </template>
         <template v-slot:body-cell-contactName="props">
-          <q-td :props="props">
-            <span class="label text-primary"> {{props.row.leadInformation.contactName}}</span>
+          <q-td :props="props" v-if="props && props.row">
+            <span class="label text-primary" v-if="props.row.leadInformation"> {{props.row.leadInformation.contactName}}</span>
           </q-td>
         </template>
         <template v-slot:body-cell-date="props">
-          <q-td :props="props">
+          <q-td :props="props" v-if="props && props.row">
             {{ $moment(props.row.date).format("Do MMM Y") }}
           </q-td>
         </template>
         <template v-slot:body-cell-verifiedFinanceStatus="props">
-          <q-td :props="props">
+          <q-td :props="props" v-if="props && props.row">
             <span
               class="label text-positive"
               v-if="props.row.verifiedFinanceStatus == $VERIFIED_FINANCE_STATUS_SUCCESS"
@@ -58,7 +54,7 @@
           </q-td>
         </template>
         <template v-slot:body-cell-leadStatus="props">
-          <q-td :props="props">
+          <q-td :props="props" v-if="props && props.row">
             <span
               class="label text-positive"
               v-if="props.row.leadStatus == $LEAD_STATUS_SUBMIT_TO_SAT_LEAD && props.row.verifiedFinanceStatus == $VERIFIED_FINANCE_STATUS_SUCCESS"
@@ -89,17 +85,17 @@
           </q-td>
         </template>
         <template v-slot:body-cell-mid="props">
-          <q-td :props="props">
+          <q-td :props="props" v-if="props && props.row">
             <span class="label text-primary"># {{props.row.mid}}</span>
           </q-td>
         </template>
         <template v-slot:body-cell-contactNumber="props">
-          <q-td :props="props">
-            <span class="label text-primary"> {{props.row.leadInformation.contactNumber}}</span>
+          <q-td :props="props" v-if="props && props.row">
+            <span class="label text-primary" v-if="props.row.leadInformation"> {{props.row.leadInformation.contactNumber}}</span>
           </q-td>
         </template>
         <template v-slot:body-cell-leadAddress="props">
-          <q-td :props="props">
+          <q-td :props="props" v-if="props && props.row">
             {{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}
           </q-td>
         </template>

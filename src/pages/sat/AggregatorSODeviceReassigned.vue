@@ -12,13 +12,13 @@
       @request="ajaxLoadAllLeadInfo"
     >
       <template v-slot:body-cell-soName="props">
-        <q-td :props="props">{{
+        <q-td v-if="props.row" :props="props">{{
           props.row.soName == null ? "NA" : props.row.soName
         }}</q-td>
       </template>
 
       <template v-slot:body-cell-action="props">
-        <q-td :props="props">
+        <q-td v-if="props.row" :props="props">
           <q-btn
             v-if="props.row.status == 0"
             push

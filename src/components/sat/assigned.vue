@@ -99,16 +99,12 @@
             @request="ajaxLoadAllLeadInfo"
           >
             <template v-slot:body-cell-leadNumber="props">
-              <q-td
-                :props="props"
-                class="cursor-pointer"
-                @click="toggleLeadInformation(props.row.leadInformation)"
-              >
+              <q-td v-if="props.row" :props="props" class="cursor-pointer" @click="toggleLeadInformation(props.row.leadInformation)">
                 <span class="label text-primary"># {{ props.row.leadInformation.leadNumber }}</span>
               </q-td>
             </template>
             <template v-slot:body-cell-LeadSource="props">
-              <q-td :props="props">
+              <q-td :props="props" v-if="props.row && props.row.leadInformation && props.row.leadInformation.leadSource">
                 <span
                   :class="{
                     'text-red': props.row.leadInformation.leadSource.sourceName === 'LS_TOHANDS'
@@ -119,22 +115,22 @@
               </q-td>
             </template>
             <template v-slot:body-cell-createdAt="props">
-              <q-td :props="props">
+              <q-td :props="props" v-if="props.row">
                 {{ $moment(props.row.createdAt).format("Do MMM Y") }}
               </q-td>
             </template>
             <template v-slot:body-cell-mid="props">
-              <q-td :props="props" class="customTd">
+              <q-td :props="props" class="customTd" v-if="props.row">
                 <div class="text-primary">{{ props.row.mid }}</div>
               </q-td>
             </template>
             <template v-slot:body-cell-deviceAddress="props">
-              <q-td :props="props" class="customTd customCellLength">
+              <q-td :props="props" class="customTd customCellLength" v-if="props.row">
                 <div>{{ props.row.deviceAddress }}</div>
               </q-td>
             </template>
             <template v-slot:body-cell-submitToMarsDate="props">
-              <q-td :props="props">
+              <q-td :props="props" v-if="props.row && props.row.leadInformation">
                 {{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y") }}
               </q-td>
             </template>
@@ -167,18 +163,14 @@
             @request="ajaxLoadAllLeadInfo1"
           >
             <template v-slot:body-cell-leadNumber="props">
-              <q-td
-                :props="props"
-                class="cursor-pointer"
-                @click="toggleLeadInformation(props.row.leadInformation)"
-              >
+              <q-td v-if="props.row" :props="props" class="cursor-pointer" @click="toggleLeadInformation(props.row.leadInformation)">
                 <span class="label text-primary">
                   # {{ props.row.leadInformation ? props.row.leadInformation.leadNumber : "NA" }}
                 </span>
               </q-td>
             </template>
             <template v-slot:body-cell-LeadSource="props">
-              <q-td :props="props">
+              <q-td :props="props" v-if="props.row && props.row.leadInformation && props.row.leadInformation.leadSource">
                 <span
                   :class="{
                     'text-red': props.row.leadInformation.leadSource.sourceName === 'LS_TOHANDS'
@@ -189,17 +181,17 @@
               </q-td>
             </template>
             <template v-slot:body-cell-createdAt="props">
-              <q-td :props="props">
+              <q-td :props="props" v-if="props.row">
                 {{ $moment(props.row.createdAt).format("Do MMM Y") }}
               </q-td>
             </template>
             <template v-slot:body-cell-mid="props">
-              <q-td :props="props" class="customTd">
+              <q-td :props="props" class="customTd" v-if="props.row">
                 <div class="text-primary">{{ props.row.mid || "NA" }}</div>
               </q-td>
             </template>
             <template v-slot:body-cell-deviceAddress="props">
-              <q-td :props="props" class="customTd customCellLength">
+              <q-td :props="props" class="customTd customCellLength" v-if="props.row">
                 <div>
                   <q-btn
                     no-caps
