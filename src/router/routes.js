@@ -417,7 +417,7 @@ const routes = [
       component: Changemanagement
     },
     {
-      name: "changemanagement",
+      name: "changemanagementterminal",
       path: "change/management/terminal",
       component: Changemanagementterminal
     },
@@ -680,22 +680,22 @@ const routes = [
       component: dashboardMobikwik,
     },
     {
-      name: "'internalLostOrStolen'",
+      name: "internalLostOrStolen",
       path: "internalLostOrStolen",
       component: internalLostOrStolen,
     },
     {
-      name: "'InternalGlobalSearchFilter'",
+      name: "InternalGlobalSearchFilter",
       path: "InternalGlobalSearchFilter",
       component: InternalGlobalSearchFilter,
     },
     {
-      name: "'AggregatorGlobalSearchFilter'",
+      name: "AggregatorGlobalSearchFilter",
       path: "AggregatorGlobalSearchFilter",
       component: AggregatorGlobalSearchFilter,
     },
     {
-      name: "'AggregatorDeviceReplacement'",
+      name: "AggregatorDeviceReplacement",
       path: "AggregatorDeviceReplacement",
       component: AggregatorDeviceReplacement,
     },

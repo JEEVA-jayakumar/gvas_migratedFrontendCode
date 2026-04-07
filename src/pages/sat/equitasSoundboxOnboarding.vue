@@ -276,8 +276,8 @@
               {{ props.row.tid || "NA" }}
             </q-td>
           </template>
-        <template v-slot:body-cell-mid="props" v-if="props.row">
-            <q-td :props="props">
+          <template v-slot:body-cell-mid="props">
+            <q-td :props="props" v-if="props && props.row">
               {{ props.row.mid || "NA" }}
             </q-td>
           </template>
