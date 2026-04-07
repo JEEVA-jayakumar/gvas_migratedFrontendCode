@@ -23,7 +23,7 @@
               >
                 <div>Count</div>
                 <div>
-                  <big>{{fngetAllRegionalInventorySerialNumbersByDevice()}}</big>
+                  <span class="text-h6 text-weight-bold">{{fngetAllRegionalInventorySerialNumbersByDevice()}}</span>
                 </div>
               </q-card-section>
             </div>
@@ -46,10 +46,10 @@
                 >
                   <div>Count</div>
                   <div>
-                    <big>
-                      {{getAllRegionalInventoryDeviceDetailsWithCount.
-                      pendingDeviceCount.count}}
-                    </big>
+                    <span class="text-h6 text-weight-bold">
+                      {{getAllRegionalInventoryDeviceDetailsWithCount?.
+                      pendingDeviceCount?.count || 0}}
+                    </span>
                   </div>
                 </q-card-section>
               </div>
@@ -71,10 +71,10 @@
                 >
                   <div>Count</div>
                   <div>
-                    <big>
-                      {{getAllRegionalInventoryDeviceDetailsWithCount.
-                      allocatedCount.count}}
-                    </big>
+                    <span class="text-h6 text-weight-bold">
+                      {{getAllRegionalInventoryDeviceDetailsWithCount?.
+                      allocatedCount?.count || 0}}
+                    </span>
                   </div>
                 </q-card-section>
               </div>
@@ -96,10 +96,10 @@
                 >
                   <div>Count</div>
                   <div>
-                    <big>
-                      {{getAllRegionalInventoryDeviceDetailsWithCount.
-                      damageDeviceCount.count}}
-                    </big>
+                    <span class="text-h6 text-weight-bold">
+                      {{getAllRegionalInventoryDeviceDetailsWithCount?.
+                      damageDeviceCount?.count || 0}}
+                    </span>
                   </div>
                 </q-card-section>
               </div>
@@ -121,10 +121,10 @@
                 >
                   <div>Count</div>
                   <div>
-                    <big>
-                      {{getAllRegionalInventoryDeviceDetailsWithCount.
-                      inbountDeviceCount.count}}
-                    </big>
+                    <span class="text-h6 text-weight-bold">
+                      {{getAllRegionalInventoryDeviceDetailsWithCount?.
+                      inbountDeviceCount?.count || 0}}
+                    </span>
                   </div>
                 </q-card-section>
               </div>
@@ -146,10 +146,10 @@
                 >
                   <div>Count</div>
                   <div>
-                    <big>
-                      {{getAllRegionalInventoryDeviceDetailsWithCount.
-                      pendingListFromAppCount.count}}
-                    </big>
+                    <span class="text-h6 text-weight-bold">
+                      {{getAllRegionalInventoryDeviceDetailsWithCount?.
+                      pendingListFromAppCount?.count || 0}}
+                    </span>
                   </div>
                 </q-card-section>
               </div>
@@ -237,7 +237,7 @@
                     <!-- <div>Count</div> -->
                     <div align="center">
                       <br />
-                      <big>{{item.count}}</big>
+                      <span class="text-h6 text-weight-bold">{{item.count}}</span>
                     </div>
                     <!-- </q-card-section> -->
                   </div>
@@ -274,7 +274,7 @@
                       <!-- <div>Count</div> -->
                       <div>
                         <br />
-                        <big>{{item.count}}</big>
+                        <span class="text-h6 text-weight-bold">{{item.count}}</span>
                       </div>
                     </q-card-section>
                   </div>
@@ -586,8 +586,7 @@ export default {
     // Function to get all device serial numbers
     fngetAllRegionalInventorySerialNumbersByDevice() {
       let totalDeviceCount = 0;
-      let hashMapCook = this.getAllRegionalInventoryDeviceDetailsWithCount
-        .inventryCount;
+      let hashMapCook = this.getAllRegionalInventoryDeviceDetailsWithCount?.inventryCount || [];
       hashMapCook.map(function(value, index) {
         totalDeviceCount = totalDeviceCount + value.count;
       });
