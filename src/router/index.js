@@ -36,9 +36,9 @@ Router.beforeEach((to, from, next) => {
     console.log("TO MATCHED NAMES:", to.matched.map(m => m.name));
     let isAuthorized = roles.includes(matchedName);
 
-    // SAT/OPS_HEAD module authorization: OH_3 or OH roles map to OH route
-    if (!isAuthorized && matchedName === "OH" && (roles.includes("OH_3") || roles.includes("OH"))) {
-      console.log("Authorizing OH for " + (roles.includes("OH_3") ? "OH_3" : "OH"));
+    // SAT/OPS_HEAD module authorization: OH_3 or OH roles map to SAT or OPS_HEAD route
+    if (!isAuthorized && (matchedName === "SAT" || matchedName === "OPS_HEAD") && (roles.includes("OH_3") || roles.includes("OH"))) {
+      console.log("Authorizing SAT/OPS_HEAD for " + (roles.includes("OH_3") ? "OH_3" : "OH"));
       isAuthorized = true;
     }
 

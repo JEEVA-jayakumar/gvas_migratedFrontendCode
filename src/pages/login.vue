@@ -176,7 +176,7 @@ export default {
                     message: "Succesfully Logged In",
                     icon: "thumb_up",
                   });
-                  this.fnNavigate("satDashboard", "/sat/dashboard");
+                  this.fnNavigate("BijlipaySat", "/sat/master/BijlipaySat");
                 } else if (menuArr.includes(this.$ROLE_BIJLIPAY_MANAGER)) {
                   this.$q.notify({
                     color: "positive",
