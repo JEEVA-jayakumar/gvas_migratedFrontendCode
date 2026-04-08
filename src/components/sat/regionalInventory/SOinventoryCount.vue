@@ -23,7 +23,7 @@
               >
                 <div>Count</div>
                 <div>
-                  <big>{{fngetAllRegionalInventorySerialNumbersByDevice()}}</big>
+                  <span class="text-h6 text-weight-bold">{{fngetAllRegionalInventorySerialNumbersByDevice()}}</span>
                 </div>
               </q-card-section>
             </div>
@@ -46,10 +46,10 @@
                 >
                   <div>Count</div>
                   <div>
-                    <big>
+                    <span class="text-h6 text-weight-bold">
                       {{getAllRegionalInventoryDeviceDetailsWithCount.
                       pendingDeviceCount.count}}
-                    </big>
+                    </span>
                   </div>
                 </q-card-section>
               </div>
@@ -71,10 +71,10 @@
                 >
                   <div>Count</div>
                   <div>
-                    <big>
+                    <span class="text-h6 text-weight-bold">
                       {{getAllRegionalInventoryDeviceDetailsWithCount.
                       allocatedCount.count}}
-                    </big>
+                    </span>
                   </div>
                 </q-card-section>
               </div>
@@ -96,10 +96,10 @@
                 >
                   <div>Count</div>
                   <div>
-                    <big>
+                    <span class="text-h6 text-weight-bold">
                       {{getAllRegionalInventoryDeviceDetailsWithCount.
                       damageDeviceCount.count}}
-                    </big>
+                    </span>
                   </div>
                 </q-card-section>
               </div>
@@ -121,10 +121,10 @@
                 >
                   <div>Count</div>
                   <div>
-                    <big>
+                    <span class="text-h6 text-weight-bold">
                       {{getAllRegionalInventoryDeviceDetailsWithCount.
                       inbountDeviceCount.count}}
-                    </big>
+                    </span>
                   </div>
                 </q-card-section>
               </div>
@@ -149,7 +149,7 @@
                 >
                   <div>Count</div>
                   <div>
-                    <big>{{item.count}}</big>
+                    <span class="text-h6 text-weight-bold">{{item.count}}</span>
                   </div>
                 </q-card-section>
               </div>
@@ -178,7 +178,7 @@
               >
                 <div>Count</div>
                 <div>
-                  <big>{{fngetAllSoInventorySerialNumbersByDevice()}}</big>
+                  <span class="text-h6 text-weight-bold">{{fngetAllSoInventorySerialNumbersByDevice()}}</span>
                 </div>
               </q-card-section>
             </div>
@@ -201,10 +201,10 @@
                 >
                   <div>Count</div>
                   <div>
-                    <big>
+                    <span class="text-h6 text-weight-bold">
                       {{getAllInventorywithsoDeviceDetailsWithCount.
                       pendingDeviceCountBillPartner.count}}
-                    </big>
+                    </span>
                   </div>
                 </q-card-section>
               </div>
@@ -226,10 +226,10 @@
                 >
                   <div>Count</div>
                   <div>
-                    <big>
+                    <span class="text-h6 text-weight-bold">
                       {{getAllInventorywithsoDeviceDetailsWithCount.
                       allocatedCountBillPartner.count}}
-                    </big>
+                    </span>
                   </div>
                 </q-card-section>
               </div>
@@ -251,10 +251,10 @@
                 >
                   <div>Count</div>
                   <div>
-                    <big>
+                    <span class="text-h6 text-weight-bold">
                       {{getAllInventorywithsoDeviceDetailsWithCount.
                       damageDeviceCountBillPartner.count}}
-                    </big>
+                    </span>
                   </div>
                 </q-card-section>
               </div>
@@ -276,10 +276,10 @@
                 >
                   <div>Count</div>
                   <div>
-                    <big>
+                    <span class="text-h6 text-weight-bold">
                       {{getAllInventorywithsoDeviceDetailsWithCount.
                       inbountDeviceCountBillPartner.count}}
-                    </big>
+                    </span>
                   </div>
                 </q-card-section>
               </div>
@@ -304,7 +304,7 @@
                 >
                   <div>Count</div>
                   <div>
-                    <big>{{item.count}}</big>
+                    <span class="text-h6 text-weight-bold">{{item.count}}</span>
                   </div>
                 </q-card-section>
               </div>

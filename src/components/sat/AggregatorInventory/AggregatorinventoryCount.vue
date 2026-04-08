@@ -29,7 +29,7 @@
                                     :class="[activeItemId === $REGIONAL_INVENTORY_ALL_DEVICES ? 'shadow-5' : 'shadow-0']">
                                     <div>Count</div>
                                     <div>
-                                        <big>{{ fngetAllAggregatorsRegionalInventorySerialNumbersByDevice() }}</big>
+                                        <span class="text-h6 text-weight-bold">{{ fngetAllAggregatorsRegionalInventorySerialNumbersByDevice() }}</span>
                                     </div>
                                 </q-card-section>
                             </div>
@@ -48,12 +48,12 @@
                                         :class="[activeItemId === $REGIONAL_INVENTORY_PENDING_ALLOCATION_DEVICE ? 'shadow-5' : 'shadow-0']">
                                         <div>Count</div>
                                         <div>
-                                            <big>
+                                            <span class="text-h6 text-weight-bold">
                                                 {{
-                                                    getAllPhonePeRegionalInventoryDeviceDetailsWithCount.
-                                                        pendingDeviceCount.count
+                                                    getAllPhonePeRegionalInventoryDeviceDetailsWithCount?.
+                                                        pendingDeviceCount?.count || 0
                                                 }}
-                                            </big>
+                                            </span>
                                         </div>
                                     </q-card-section>
                                 </div>
@@ -71,12 +71,12 @@
                                         :class="[activeItemId === $REGIONAL_INVENTORY_ALLOCATED_DEVICE ? 'shadow-5' : 'shadow-0']">
                                         <div>Count</div>
                                         <div>
-                                            <big>
+                                            <span class="text-h6 text-weight-bold">
                                                 {{
-                                                    getAllPhonePeRegionalInventoryDeviceDetailsWithCount.
-                                                        allocatedCount.count
+                                                    getAllPhonePeRegionalInventoryDeviceDetailsWithCount?.
+                                                        allocatedCount?.count || 0
                                                 }}
-                                            </big>
+                                            </span>
                                         </div>
                                     </q-card-section>
                                 </div>
@@ -94,12 +94,12 @@
                                         :class="[activeItemId === $REGIONAL_INVENTORY_DAMAGED_DEVICE ? 'shadow-5' : 'shadow-0']">
                                         <div>Count</div>
                                         <div>
-                                            <big>
+                                            <span class="text-h6 text-weight-bold">
                                                 {{
-                                                    getAllPhonePeRegionalInventoryDeviceDetailsWithCount.
-                                                        damageDeviceCount.count
+                                                    getAllPhonePeRegionalInventoryDeviceDetailsWithCount?.
+                                                        damageDeviceCount?.count || 0
                                                 }}
-                                            </big>
+                                            </span>
                                         </div>
                                     </q-card-section>
                                 </div>
@@ -117,12 +117,12 @@
                                         :class="[activeItemId === $REGIONAL_INVENTORY_INBOUND_DEVICE ? 'shadow-5' : 'shadow-0']">
                                         <div>Count</div>
                                         <div>
-                                            <big>
+                                            <span class="text-h6 text-weight-bold">
                                                 {{
-                                                    getAllPhonePeRegionalInventoryDeviceDetailsWithCount.
-                                                        inbountDeviceCount.count
+                                                    getAllPhonePeRegionalInventoryDeviceDetailsWithCount?.
+                                                        inbountDeviceCount?.count || 0
                                                 }}
-                                            </big>
+                                            </span>
                                         </div>
                                     </q-card-section>
                                 </div>
@@ -140,12 +140,12 @@
                                         :class="[activeItemId === $REGIONAL_INVENTORY_FAULTY_DEVICE ? 'shadow-5' : 'shadow-0']">
                                         <div>Count</div>
                                         <div>
-                                            <big>
+                                            <span class="text-h6 text-weight-bold">
                                                 {{
-                                                    getAllPhonePeRegionalInventoryDeviceDetailsWithCount.
-                                                        pendingListFromAppCount.count
+                                                    getAllPhonePeRegionalInventoryDeviceDetailsWithCount?.
+                                                        pendingListFromAppCount?.count || 0
                                                 }}
-                                            </big>
+                                            </span>
                                         </div>
                                     </q-card-section>
                                 </div>
@@ -156,7 +156,7 @@
                 <div class="q-ma-md">
                     <div class="row q-col-gutter-md">
                         <div class="col-md-6"
-                            v-for="(item, index) in getAllPhonePeRegionalInventoryDeviceDetailsWithCount.inventryCount"
+                            v-for="(item, index) in getAllPhonePeRegionalInventoryDeviceDetailsWithCount?.inventryCount || []"
                             :key="index">
                             <q-card role="button" class="no-shadow cursor-pointer">
                                 <q-card-section class="no-padding">
@@ -196,7 +196,7 @@
                                       <div>
                                           <div align="center">
                                               <br />
-                                              <big>{{ item.count }}</big>
+                                              <span class="text-h6 text-weight-bold">{{ item.count }}</span>
                                           </div>
                                       </div>
                                   </q-card>
@@ -416,10 +416,12 @@ export default {
         fngetAllAggregatorsRegionalInventorySerialNumbersByDevice() {
             let totalDeviceCount = 0;
             let hashMapCook = this.getAllPhonePeRegionalInventoryDeviceDetailsWithCount
-                .inventryCount;
-            hashMapCook.map(function (value, index) {
-                totalDeviceCount = totalDeviceCount + value.count;
-            });
+                ?.inventryCount;
+            if (hashMapCook && Array.isArray(hashMapCook)) {
+              hashMapCook.map(function (value, index) {
+                  totalDeviceCount = totalDeviceCount + value.count;
+              });
+            }
             return totalDeviceCount;
         },
         // fngetAllSoInventorySerialNumbersByDevice() {

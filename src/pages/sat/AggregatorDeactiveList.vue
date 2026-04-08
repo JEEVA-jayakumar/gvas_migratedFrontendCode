@@ -535,7 +535,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.AGGREGATOR_DEACTIVE_LIST({
+      return this.AGGREGATOR_DEACTIVE_LIST({
         pagination,
         filter: this.filter,
         formData: this.formData1,

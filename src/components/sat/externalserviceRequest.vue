@@ -675,7 +675,7 @@ export default {
         spinnerColor: 'purple-9',
         message: 'Fetching data ..'
       })
-      this.FETCH_PHONEPE_OPENED_TICKETS({ pagination, filter })
+      return this.FETCH_PHONEPE_OPENED_TICKETS({ pagination, filter })
         .then(() => {
           this.paginationControl1 = pagination
           this.paginationControl1.rowsNumber = this.getphonepeOpenedTickets.totalElements
@@ -698,7 +698,7 @@ export default {
         spinnerColor: 'purple-9',
         message: 'Fetching data ..'
       })
-      this.FETCH_PHONEPE_RESOLVED_TICKET({ pagination, filter })
+      return this.FETCH_PHONEPE_RESOLVED_TICKET({ pagination, filter })
         .then(() => {
           this.paginationControl = pagination
           this.paginationControl.rowsNumber = this.getphonepeResolvedTickets.totalElements

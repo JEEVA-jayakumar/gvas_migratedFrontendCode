@@ -263,7 +263,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.AGGREGATORS_MASTER_TRACKER_LIST({ pagination, filter })
+      return this.AGGREGATORS_MASTER_TRACKER_LIST({ pagination, filter })
         .then(res => {
           this.paginationControl = pagination;
           this.paginationControl.rowsNumber = this.getAggregatorsMasterTrackerList.totalElements;

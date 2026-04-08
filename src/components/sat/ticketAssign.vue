@@ -95,6 +95,7 @@ export default {
         fileSelected: [],
       },
       toggleAjaxLoadFilter: false,
+      toggleAjaxLoadFilter1: false,
       uploaderHovered0: false,
     };
   },

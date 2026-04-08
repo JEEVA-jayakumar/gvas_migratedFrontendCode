@@ -5,7 +5,7 @@
         <div v-if="RegionalInventoryQrCount.length > 0" class="row">
           <q-card class="border-radius-10 q-pa-md q-ma-md" color="purple-9" v-for="menu in RegionalInventoryQrCount" :key="menu.value">
             <div>
-              <big>{{ menu.label.requestCount || 0 }} </big>
+              <span class="text-h6 text-weight-bold">{{ menu.label.requestCount || 0 }} </span>
             </div>
             <div>
               <label>{{ menu.value }}</label>

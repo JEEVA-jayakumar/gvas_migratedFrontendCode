@@ -16,7 +16,7 @@
               :key="index"
             >
               <div align="center">
-                <big>{{ menu.value.count }}</big>
+                <span class="text-h6 text-weight-bold">{{ menu.value.count }}</span>
               </div>
               <div align="center">
                 <label>{{ menu.value.spareParts.spare_parts_types }}</label>

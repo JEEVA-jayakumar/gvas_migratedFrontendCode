@@ -565,7 +565,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.AGGREGATOR_DEVICE_RECOVERY_UNASSIGNED_LIST({ pagination, filter })
+      return this.AGGREGATOR_DEVICE_RECOVERY_UNASSIGNED_LIST({ pagination, filter })
         .then(() => {
           this.IMPLEMENTATION_EXECUTIVE_LIST().then(() => {
             let assumeArr = [];
@@ -595,7 +595,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.AGGREGATOR_DEVICE_RECOVERY_ASSIGNED_LIST({ pagination, filter })
+      return this.AGGREGATOR_DEVICE_RECOVERY_ASSIGNED_LIST({ pagination, filter })
         .then(() => {
           this.paginationControl = pagination;
           this.paginationControl.rowsNumber = this.getAggregatorDeviceRecoveryAssignedList.totalElements;
