@@ -4,7 +4,7 @@
     <div>
       <div class="row bottom-border q-px-md q-py-md items-center">
         <!--START: table title -->
-        <div class="col-md-8 text-h6 text-weight-regular text-grey-9">Bijlipay Add New Devices - Scan & Upload</div>
+        <div class="col-md-8 q-title text-weight-regular text-grey-9">Bijlipay Add New Devices - Scan & Upload</div>
         <div class="col-md-12 col-md-6 q-pt-md group" align="right">
           <q-btn @click="$router.push('/inventory/central')" outline label="Cancel Allocation" color="negative" />
         </div>
@@ -14,12 +14,11 @@
         <!--START: table title -->
         <div class="col" ref="clickHeretoStartParent">
           <q-select
-            filled
             ref="clickHeretoStartChild"
             @update:model-value="fnDisableDeviceTypeSelection"
             :disable="tempTableData.length > 0"
             v-model="formData.device.id"
-            label="Select Device Type"
+            placeholder="Select Device Type"
             color="grey-9"
             :options="deviceOptions"
             emit-value
@@ -29,10 +28,9 @@
         <!-- Invoice Number Field with margin -->
         <div class="col q-ml-md">
           <q-input
-            filled
             type="text"
             :disable="tempTableData.length > 0"
-            label="Invoice Number"
+            placeholder="Invoice Number"
             color="grey-9"
             @blur="$v.formData.invoiceNumber.$touch"
             :error="$v.formData.invoiceNumber.$error"
@@ -67,7 +65,7 @@
         <template v-slot:top>
           <!--START: table filter,search -->
           <div class="col-md-5">
-            <q-input clearable dense color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search .."
+            <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search .."
               class="q-mr-lg q-py-sm" />
           </div>
           <!--END: table filter,search -->

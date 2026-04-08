@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <div>
-      <div class="col-md-6 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">Aggregator Inventory with SO/Bill Partner/Sub Region</div>
+      <div class="col-md-6 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">Aggregator Inventory with SO/Bill Partner/Sub Region</div>
       <!--END: table title -->
       <!--START: table lead validation -->
       <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
@@ -42,9 +42,9 @@
             props.row.updated_at == null ? "NA" :
               props.row.updated_at | moment("Do MMM Y")
           }}</q-td>
-          <template v-slot:top="props">
+          <template v-slot:top class="bottom-border">
             <div class="col-md-5">
-              <q-input clearable v-model="filter" separator color="grey-9" placeholder="Type.."
+              <q-input clearable v-model="filter" color="grey-9" placeholder="Type.."
               label="Pod Number, Device Type, Serial Number" class="q-mr-lg q-py-sm" />
             </div>
             <div class="col-md-5">

@@ -5,7 +5,7 @@
         <!--START: table title -->
         <div class="row bottom-border q-px-md q-py-md items-center">
           <!--START: table title -->
-          <div class="col-12 text-h6 text-weight-regular text-grey-9">Mobikwik Inventory Table</div>
+          <div class="col-12 q-title text-weight-regular text-grey-9">Mobikwik Inventory Table</div>
           <!--END: table title -->
         </div>
         <!--END: table title -->
@@ -27,8 +27,8 @@
             <div v-if="inventoryData.centralItems.length > 0" class="row">
               <div class="col-md-2 col-sm-3 col-xs-3 q-ma-xs q-pa-md" v-for="(device, index) in inventoryData.centralItems"
                 :key="index" :style="'border: 1px solid ' + device.aggregatorDevice.colorCode" align="center">
-                <div>
-                  <big :style="'color:' + device.aggregatorDevice.colorCode">{{ device.count }}</big>
+              <div class="q-title text-weight-bold" :style="'color:' + device.aggregatorDevice.colorCode">
+                {{ device.count }}
                 </div>
                 <div>{{ device.aggregatorDevice.deviceName }}</div>
               </div>
@@ -44,12 +44,12 @@
           <div class="col-12 text-weight-regular text-grey-9">Inventory with regions</div>
           <div class="col-md-9 col-sm-12 col-xs-12">
             <div v-if="inventoryData.regionalItems.length > 0" class="row">
-              <div class="col-md-2 col-sm-3 col-xs-3 q-ma-xs q-pa-md"
+            <div class="col-md-2 col-sm-3 col-xs-3 q-ma-xs q-pa-md cursor-pointer"
                 @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index, deviceInfo)"
                 v-for="(deviceInfo, index) in inventoryData.regionalItems" :key="index"
                 :style="'border: 1px solid ' + deviceInfo.aggregatorDevice.colorCode" align="center">
-                <div>
-                  <big :style="'color:' + deviceInfo.aggregatorDevice.colorCode">{{ deviceInfo.count }}</big>
+              <div class="q-title text-weight-bold" :style="'color:' + deviceInfo.aggregatorDevice.colorCode">
+                {{ deviceInfo.count }}
                 </div>
                 <div>{{ deviceInfo.aggregatorDevice.deviceName }}</div>
               </div>
@@ -68,8 +68,8 @@
                 @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index, deviceInfo)"
                 v-for="(deviceInfo, index) in inventoryData.merchantItems" :key="index"
                 :style="'border: 1px solid ' + deviceInfo.aggregatorDevice.colorCode" align="center">
-                <div>
-                  <big :style="'color:' + deviceInfo.aggregatorDevice.colorCode">{{ deviceInfo.count }}</big>
+              <div class="q-title text-weight-bold" :style="'color:' + deviceInfo.aggregatorDevice.colorCode">
+                {{ deviceInfo.count }}
                 </div>
                 <div>{{ deviceInfo.aggregatorDevice.deviceName }}</div>
               </div>
@@ -88,8 +88,8 @@
                 @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index, deviceInfo)"
                 v-for="(deviceInfo, index) in inventoryData.billPartnerInventory" :key="index"
                 :style="'border: 1px solid ' + deviceInfo.aggregatorDevice.colorCode" align="center">
-                <div>
-                  <big :style="'color:' + deviceInfo.aggregatorDevice.colorCode">{{ deviceInfo.count }}</big>
+              <div class="q-title text-weight-bold" :style="'color:' + deviceInfo.aggregatorDevice.colorCode">
+                {{ deviceInfo.count }}
                 </div>
                 <div>{{ deviceInfo.aggregatorDevice.deviceName }}</div>
               </div>
@@ -107,8 +107,8 @@
                 @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index, deviceInfo)"
                 v-for="(deviceInfo, index) in inventoryData.faultyInventory" :key="index"
                 :style="'border: 1px solid ' + deviceInfo.aggregatorDevice.colorCode" align="center">
-                <div>
-                  <big :style="'color:' + deviceInfo.aggregatorDevice.colorCode">{{ deviceInfo.count }}</big>
+              <div class="q-title text-weight-bold" :style="'color:' + deviceInfo.aggregatorDevice.colorCode">
+                {{ deviceInfo.count }}
                 </div>
                 <div>{{ deviceInfo.aggregatorDevice.deviceName }}</div>
               </div>
@@ -127,8 +127,8 @@
                 @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index, deviceInfo)"
                 v-for="(deviceInfo, index) in inventoryData.sendtoRepair" :key="index"
                 :style="'border: 1px solid ' + deviceInfo.aggregatorDevice.colorCode" align="center">
-                <div>
-                  <big :style="'color:' + deviceInfo.aggregatorDevice.colorCode">{{ deviceInfo.count }}</big>
+              <div class="q-title text-weight-bold" :style="'color:' + deviceInfo.aggregatorDevice.colorCode">
+                {{ deviceInfo.count }}
                 </div>
                 <div>{{ deviceInfo.aggregatorDevice.deviceName }}</div>
               </div>
@@ -269,16 +269,21 @@ import { required } from '@vuelidate/validators';
         this.fnAjaxPopulateAllDevicesList(deviceInfo);
       },
       fnAjaxPopulateAllDevicesList(deviceInfo) {
-        this.tableAjaxLoading = false;
-  
+        this.tableAjaxLoading = true;
+        if (deviceInfo == undefined) {
+          this.tableAjaxLoading = false;
+          return;
+        }
         let requestParams = {
-          // TODO Please
-          region: this.inventoryData.region,
+          region: this.inventoryData.region ? this.inventoryData.region.id : "",
           action: this.$REGIONAL_INVENTORY_FILTER_ACTION_DEVICE,
-          device: deviceInfo.device.id
+          device: deviceInfo.aggregatorDevice.id
         };
-        this.FETCH_REGIONAL_INVENTORY_SERIAL_NUMBER_BY_DEVICE(requestParams);
-  
+        this.FETCH_REGIONAL_INVENTORY_SERIAL_NUMBER_BY_DEVICE(requestParams).then(() => {
+          this.tableAjaxLoading = false;
+        }).catch(() => {
+          this.tableAjaxLoading = false;
+        });
       },
   
       getAllInventoryData() {

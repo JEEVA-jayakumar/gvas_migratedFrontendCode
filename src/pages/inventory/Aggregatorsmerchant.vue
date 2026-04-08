@@ -3,7 +3,7 @@
     <!-- content -->
     <div>
       <!--STARTv-model: table title -->
-      <div class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">Aggregator Inventory with Merchant</div>
+      <div class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">Aggregator Inventory with Merchant</div>
       <!--END: table title -->
       <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-md-4">
@@ -21,7 +21,7 @@
         <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
           <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
         </q-td>
-        <template slot="top" class="bottom-border">
+        <template v-slot:top class="bottom-border">
           <!--START: table filter,search -->
           <div class="col">
             <q-input clearable color="grey-9" v-model="filter" placeholder="Type.."

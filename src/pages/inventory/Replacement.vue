@@ -4,7 +4,7 @@
     <div>
       <!--STARTv-model: table title -->
       <div
-        class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+        class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >Replacement/Recovery</div>
       <!--END: table title -->
       <!--START: table lead validation -->
@@ -23,7 +23,7 @@
           <span class="label">{{ $moment(props.row.dateOfRecoveryReplacement).format("Do MMM Y") }}</span>
         </q-td>
      
-        <template v-slot:top="props" class="bottom-border">
+        <template v-slot:top class="bottom-border">
           <!--START: table  :rows-per-page-options="[5,10,15,20,25]"filter,search -->
           <div class="col">
             <q-input

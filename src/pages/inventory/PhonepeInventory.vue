@@ -5,7 +5,7 @@
       <!--START: table title -->
       <div class="row bottom-border q-px-md q-py-sm items-center">
         <!--START: table title -->
-        <div class="col-12 col-lg-4 text-h6 text-weight-regular text-grey-9">Aggregator Inventory</div>
+        <div class="col-12 col-lg-4 q-title text-weight-regular text-grey-9">Aggregator Inventory</div>
         <div class="col-12 col-lg-8 group" align="right">
           <q-btn-dropdown outline no-caps class="text-weight-regular" label="Add Refurbished Device" >
             <q-list link>
@@ -82,8 +82,8 @@
             @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index, deviceInfo)"
             v-for="(deviceInfo, index) in getAllPhonepeInventoryDevicesTypesWithCountData" :key="index"
             :style="'background:' + deviceInfo.aggregatorDevice.colorCode" align="center">
-            <div>
-              <big>{{ deviceInfo.count }}</big>
+            <div class="q-title text-weight-bold">
+              {{ deviceInfo.count }}
             </div>
             <div>{{ deviceInfo.aggregatorDevice.deviceName }}</div>
           </div>

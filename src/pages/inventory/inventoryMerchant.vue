@@ -4,7 +4,7 @@
     <div>
       <!--STARTv-model: table title -->
       <div
-        class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+        class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >Bijlipay Inventory with Merchant</div>
       <!--END: table title -->
       <!--START: table lead validation -->
@@ -22,7 +22,7 @@
       <q-td v-slot:body-cell-deviceStatusDate="props" :props="props">
           <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
         </q-td>
-        <template slot="top" class="bottom-border">
+        <template v-slot:top class="bottom-border">
           <!--START: table filter,search -->
           <div class="col">
             <q-input

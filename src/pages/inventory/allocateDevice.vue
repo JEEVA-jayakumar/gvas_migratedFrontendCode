@@ -9,7 +9,7 @@
     <div  v-if="formData.flag == 1">
       <div class="row bottom-border q-px-md q-py-md items-center">
         <!--START: table title -->
-        <div class="col-6 col-sm-4 col-md-8 text-h6 text-weight-regular text-grey-9">Bijlipay Allocate Device</div>
+        <div class="col-6 col-sm-4 col-md-8 q-title text-weight-regular text-grey-9">Bijlipay Allocate Device</div>
          <div class="col-md-12 col-md-6 q-pt-md group" align="right">
           <q-btn
             @click="$router.push('/inventory/central')"
@@ -25,11 +25,10 @@
       >
         <div class="col-md-4">
           <q-select
-            filled
             :disable="formData.device_type != ''"
             :class="[formData.device_type != '' ? 'no-pointer-events' : '']"
             v-model="formData.region"
-            label="Select Region"
+            placeholder="Select Region"
             color="grey-9"
             :options="regionOptions"
             emit-value
@@ -39,13 +38,12 @@
         </div>
         <div class="col-md-4">
           <q-select
-            filled
             clearable
             :disable="formData.region == ''"
             @clear="fnClearingDeviceTypeSelection"
             @update:model-value="fnSetDevicesByDeviceId"
             v-model="formData.device_type"
-            label="Select Device Type"
+            placeholder="Select Device Type"
             color="grey-9"
             :options="deviceOptions"
           />
@@ -63,7 +61,7 @@
           <q-btn
             icon="shopping_cart"
             outline
-            class="q-py-xs q-ml-sm"
+            class="q-py-xs"
             label="Add to cart"
             @click="fnAllocateDeviceToRegion"
           />
@@ -82,7 +80,7 @@
               class="q-pa-none"
               :class="[formData.device_type && formData.device_type.id == item.device.id ? 'activeDeviceTab' : '']"
             >
-              <q-item-label header class="bottom-border">
+              <q-item-label header class="bottom-border" style="padding: 10px 16px;">
                 <q-icon
                   :style="'color:'+(formData.device_type && formData.device_type.id == item.device.id ? '#fff' : '#202c3f')"
                   name="fas fa-tablet-alt"
@@ -144,7 +142,7 @@
           <div class="col-md-3">
             <div  class="col-md-9 col-sm-12 col-xs-12">
               <div class="row bottom-border q-px-md q-py-md items-center">
-              <div class="col-6 col-sm-4 col-md-8 text-h6 text-weight-regular text-grey-9 align1"
+              <div class="col-6 col-sm-4 col-md-8 q-title text-weight-regular text-grey-9 align1"
               >Bijlipay Allocate QR</div>
             </div>
               <div v-if="formData.count != null" class="row">
@@ -370,7 +368,9 @@ export default {
     this.podGeneration();
   },
   unmounted() {
-    this.$barcodeScanner.destroy();
+      if (this.$barcodeScanner) {
+        this.$barcodeScanner.destroy();
+      }
   },
   methods: {
     ...mapActions("InventoryCentral", ["FETCH_ALL_INVENTORY_DEVICES_TYPES_DATA", "FETCH_ALL_REGIONS_DATA"]),

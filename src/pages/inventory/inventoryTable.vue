@@ -6,7 +6,7 @@
       <!--START: table title -->
       <div class="row bottom-border q-px-md q-py-md items-center">
         <!--START: table title -->
-        <div class="col-12 text-h6 text-weight-regular text-grey-9">Bijlipay Inventory Table</div>
+        <div class="col-12 q-title text-weight-regular text-grey-9">Bijlipay Inventory Table</div>
         <!--END: table title -->
       </div>
       <!--END: table title -->
@@ -21,8 +21,8 @@
               :style="'border: 1px solid '+device.device.colorCode"
               align="center"
             >
-              <div>
-                <big :style="'color:'+device.device.colorCode">{{device.count}}</big>
+              <div class="q-title text-weight-bold" :style="'color:'+device.device.colorCode">
+                {{device.count}}
               </div>
               <div>{{device.device.deviceName}}</div>
             </div>
@@ -39,7 +39,7 @@
         <div class="col-md-9 col-sm-12 col-xs-12">
           <div v-if="inventoryData.regionalItems.length > 0" class="row">
             <div
-              class="col-md-2 col-sm-3 col-xs-3 q-ma-xs q-pa-md"
+              class="col-md-2 col-sm-3 col-xs-3 q-ma-xs q-pa-md cursor-pointer"
               
               @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index,deviceInfo)"
               v-for="(deviceInfo,index) in inventoryData.regionalItems"
@@ -47,8 +47,8 @@
               :style="'border: 1px solid '+deviceInfo.device.colorCode"
               align="center"
             >
-              <div>
-                <big :style="'color:'+deviceInfo.device.colorCode">{{deviceInfo.count}}</big>
+              <div class="q-title text-weight-bold" :style="'color:'+deviceInfo.device.colorCode">
+                {{deviceInfo.count}}
               </div>
               <div>{{deviceInfo.device.deviceName}}</div>
             </div>
@@ -128,8 +128,8 @@
               :style="'border: 1px solid '+device.device.colorCode"
               align="center"
             >
-              <div>
-                <big :style="'color:'+device.device.colorCode">{{device.count}}</big>
+              <div class="q-title text-weight-bold" :style="'color:'+device.device.colorCode">
+                {{device.count}}
               </div>
               <div>{{device.device.deviceName}}</div>
             </div>
@@ -162,8 +162,8 @@
               :style="'border: 1px solid '+device.device.colorCode"
               align="center"
             >
-              <div>
-                <big :style="'color:'+device.device.colorCode">{{device.count}}</big>
+              <div class="q-title text-weight-bold" :style="'color:'+device.device.colorCode">
+                {{device.count}}
               </div>
               <div>{{device.device.deviceName}}</div>
             </div>
@@ -184,8 +184,8 @@
               :style="'border: 1px solid '+device.device.colorCode"
               align="center"
             >
-              <div>
-                <big :style="'color:'+device.device.colorCode">{{device.count}}</big>
+              <div class="q-title text-weight-bold" :style="'color:'+device.device.colorCode">
+                {{device.count}}
               </div>
               <div>{{device.device.deviceName}}</div>
             </div>
@@ -206,8 +206,8 @@
               :style="'border: 1px solid '+device.device.colorCode"
               align="center"
             >
-              <div>
-                <big :style="'color:'+device.device.colorCode">{{device.count}}</big>
+              <div class="q-title text-weight-bold" :style="'color:'+device.device.colorCode">
+                {{device.count}}
               </div>
               <div>{{device.device.deviceName}}</div>
             </div>
@@ -228,8 +228,8 @@
               :style="'border: 1px solid '+device.device.colorCode"
               align="center"
             >
-              <div>
-                <big :style="'color:'+device.device.colorCode">{{device.count}}</big>
+              <div class="q-title text-weight-bold" :style="'color:'+device.device.colorCode">
+                {{device.count}}
               </div>
               <div>{{device.device.deviceName}}</div>
             </div>
@@ -345,16 +345,21 @@ export default {
       this.fnAjaxPopulateAllDevicesList(deviceInfo);
     },
      fnAjaxPopulateAllDevicesList(deviceInfo) {
-      this.tableAjaxLoading = false;
-     
+      this.tableAjaxLoading = true;
+      if (deviceInfo == undefined) {
+        this.tableAjaxLoading = false;
+        return;
+      }
       let requestParams = {
-          // TODO Please
-          region: this.inventoryData.region,
-          action: this.$REGIONAL_INVENTORY_FILTER_ACTION_DEVICE,
-          device: deviceInfo.device.id
-        };
-      this.FETCH_REGIONAL_INVENTORY_SERIAL_NUMBER_BY_DEVICE(requestParams);
-     
+        region: this.inventoryData.region ? this.inventoryData.region.id : "",
+        action: this.$REGIONAL_INVENTORY_FILTER_ACTION_DEVICE,
+        device: deviceInfo.device.id
+      };
+      this.FETCH_REGIONAL_INVENTORY_SERIAL_NUMBER_BY_DEVICE(requestParams).then(() => {
+        this.tableAjaxLoading = false;
+      }).catch(() => {
+        this.tableAjaxLoading = false;
+      });
     },
 
     getAllInventoryData() {
@@ -395,12 +400,18 @@ export default {
    
     filterInventoryCountByRegion(value) {
       this.inventoryData.regionalItems = [];
-    
-      this.FETCH_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT(value)
+      if (value == null) {
+        this.inventoryData.regionalItems = this.getCentralInventoryDashboardCount.regionalInventory;
+        return;
+      }
+      this.$q.loading.show({
+        delay: 0, // ms
+        spinnerColor: "purple-9",
+        message: "Fetching data .."
+      });
+      this.FETCH_REGIONAL_INVENTORY_DEVICE_DETAIL_WITH_COUNT(value.id)
         .then(() => {
-        
           this.inventoryData.regionalItems = this.getAllRegionalInventoryDeviceDetailsWithCount.inventryCount;
-          
           this.$q.loading.hide();
         })
         .catch(() => {
@@ -409,7 +420,16 @@ export default {
     },
     filterInventoryCountBySO(value) {
       this.inventoryData.billPartnerInventory = [];
-      this.FETCH_SO_INVENTORY_DEVICE_DETAIL_WITH_COUNT(value)
+      if (value == null) {
+        this.inventoryData.billPartnerInventory = this.getCentralInventoryDashboardCount.billPartnerInventory;
+        return;
+      }
+      this.$q.loading.show({
+        delay: 0, // ms
+        spinnerColor: "purple-9",
+        message: "Fetching data .."
+      });
+      this.FETCH_SO_INVENTORY_DEVICE_DETAIL_WITH_COUNT(value.id)
         .then(() => {
           this.inventoryData.billPartnerInventory = this.getAllSoInventoryDeviceDetailsWithCount.inventryCount;
           this.$q.loading.hide();

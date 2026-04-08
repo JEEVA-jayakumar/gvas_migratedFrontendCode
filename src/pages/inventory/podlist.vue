@@ -2,7 +2,7 @@
   <q-page>
     <div>
       <div
-        class="col-md-6 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+        class="col-md-6 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >Bijlipay POD List</div>
       <q-table
         table-class="customTableClass"
@@ -51,12 +51,11 @@
           v-slot:body-cell-ModifyDate="props"
           :props="props"
         >{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</q-td>
-        <template v-slot:top="props">
+        <template v-slot:top class="bottom-border">
           <div class="col-md-5">
             <q-input
               clearable
               v-model="filter"
-              separator
               color="grey-9"
               placeholder="Type.."
               label="Search By Pod Number, BP Region"

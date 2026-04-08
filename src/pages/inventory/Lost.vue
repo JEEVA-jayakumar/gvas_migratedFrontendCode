@@ -3,7 +3,7 @@
     <div>
       <!--STARTv-model: table title -->
       <div
-        class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+        class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >
       Bijlipay Lost Or Stolen Devices
       </div>
@@ -31,7 +31,7 @@
           v-slot:body-cell-updated_at="props"
           :props="props"
         >{{ $moment(props.row.updatedAt ==null? "NA" : props.row.updatedAt).format("Do MMM Y") }}</q-td>
-        <template slot="top">
+        <template v-slot:top class="bottom-border">
           <!--START: table filter,search -->
           <div class="col-md-5">
             <q-input
