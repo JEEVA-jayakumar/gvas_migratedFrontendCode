@@ -150,9 +150,12 @@
 import { required } from '@vuelidate/validators';
 import { mapGetters, mapActions } from "vuex";
 import downloadExcel from "vue-json-excel";
+import openAddBulkDeviceModelComp from "../../components/inventory/openAddBulkDeviceModelComp.vue";
+
 export default {
   components: {
-    downloadExcel
+    downloadExcel,
+    openAddBulkDeviceModelComp
   },
   name: "inventory",
   data() {
@@ -188,19 +191,15 @@ export default {
         so: "",
         regionFilterOptions: [],
         SOFilterOptions: [],
-
         regionalItems: [],
-
-        // billPartnerInventory: [],
-
+        billPartnerInventory: [],
         central: "",
         centralItems: [],
-
         merchant: "",
-        // merchantItems: [],
-        // resellarItems: [],
-        // faultyInventory: [],
-        // sendtoRepair: []
+        merchantItems: [],
+        resellarItems: [],
+        faultyInventory: [],
+        sendtoRepair: []
       }
     };
   },
@@ -284,6 +283,9 @@ export default {
       }).catch(() => {
         this.tableAjaxLoading = false;
       });
+    },
+    fnOpenBulkUploadModal() {
+      this.openBulkUploadModal = !this.openBulkUploadModal;
     },
 
     getAllInventoryData() {

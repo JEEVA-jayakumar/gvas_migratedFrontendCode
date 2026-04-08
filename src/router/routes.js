@@ -1124,7 +1124,7 @@ const routes = [
       component: InventorywithResellar
     },
     {
-      name: "inventorywithresellar",
+      name: "inventorywithresellar_allocate",
       path: "central/allocate/device/resellar",
       component: InventoryWithResellar
     },

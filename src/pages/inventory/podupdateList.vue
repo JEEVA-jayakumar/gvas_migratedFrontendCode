@@ -171,7 +171,10 @@ export default {
     ...mapGetters("PodList", ["getAllPodList"])
   },
   created() {
-    this.FETCH_POD_LIST();
+    this.FETCH_POD_LIST({
+      pagination: this.serverPagination,
+      filter: this.filter
+    });
   },
   methods: {
     ...mapActions("PodList", ["FETCH_POD_LIST"]),

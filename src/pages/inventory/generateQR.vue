@@ -58,16 +58,14 @@
         </q-tr> -->
             <q-td v-slot:body-cell-createdAt="props" :props="props">{{
               props.row.createdAt == null ? 'NA' :
-                props.row.createdAt | moment("Do MMM Y")
+                $moment(props.row.createdAt).format("Do MMM Y")
             }}</q-td>
             <q-td v-slot:body-cell-Batch="props" :props="props">{{
               props.row.batchId == null ? 'NA' :
                 props.row.batchId
             }}</q-td>
             <q-td v-slot:body-cell-Bank="props" :props="props">{{
-              props.row.staticQrBank.name == null ? 'NA'
-                :
-                props.row.staticQrBank.name
+              props.row.staticQrBank && props.row.staticQrBank.name ? props.row.staticQrBank.name : 'NA'
             }}</q-td>
             <q-td v-slot:body-cell-Count="props" :props="props">{{
               props.row.count == null ? 'NA' :

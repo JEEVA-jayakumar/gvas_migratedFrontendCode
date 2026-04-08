@@ -132,7 +132,7 @@ export default {
                     label: 'Region',
                     align: 'center',
                     field: row => {
-                        row.region.regionAreaName;
+                        return row.region.regionAreaName;
                     },
                     sortable: false
                 },
@@ -142,7 +142,7 @@ export default {
                     label: 'Device Type',
                     align: 'center',
                     field: row => {
-                        row.device.deviceName;
+                        return row.device.deviceName;
                     },
                     sortable: false
                 },

@@ -36,11 +36,11 @@
         >{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</q-td>-->
           <q-td v-slot:body-cell-created_at="props" :props="props">{{
             props.row.created_at == null ? "NA" :
-              props.row.created_at | moment("Do MMM Y")
+              $moment(props.row.created_at).format("Do MMM Y")
           }}</q-td>
           <q-td v-slot:body-cell-updated_at="props" :props="props">{{
             props.row.updated_at == null ? "NA" :
-              props.row.updated_at | moment("Do MMM Y")
+              $moment(props.row.updated_at).format("Do MMM Y")
           }}</q-td>
           <template v-slot:top class="bottom-border">
             <div class="col-md-5">
@@ -124,7 +124,7 @@ export default {
             if (value == null) {
               return "NA";
             } else {
-              return moment(value).format("DD/MM/YYYY");
+              return this.$moment(value).format("DD/MM/YYYY");
             }
           }
         },
@@ -134,7 +134,7 @@ export default {
             if (value == null) {
               return "NA";
             } else {
-              return moment(value).format("DD/MM/YYYY");
+              return this.$moment(value).format("DD/MM/YYYY");
             }
           }
         },
@@ -182,7 +182,7 @@ export default {
           label: "Create Date",
           align: "center",
           field: row => {
-            return moment(row.created_at).format("DD/MM/YYYY");
+            return this.$moment(row.created_at).format("DD/MM/YYYY");
           }
         },
         {
@@ -191,7 +191,7 @@ export default {
           label: "Receive Date",
           align: "center",
           field: row => {
-            return moment(row.updated_at).format("DD/MM/YYYY");
+            return this.$moment(row.updated_at).format("DD/MM/YYYY");
           }
         },
 

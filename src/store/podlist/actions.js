@@ -3,19 +3,24 @@ import api from "../api.js";
 export const FETCH_POD_LIST = ({
     commit
   }, request) => {
-     let sorting = request.pagination.descending ? 'asc' : 'desc';
+    let page = request && request.pagination ? request.pagination.page : 1;
+    let size = request && request.pagination ? request.pagination.rowsPerPage : 10;
+    let search = request && request.filter ? request.filter : "";
+    let sortBy = request && request.pagination ? request.pagination.sortBy : "id";
+    let sorting = request && request.pagination && request.pagination.descending ? 'asc' : 'desc';
+
     return api
       .get(
         'pod-list?page=' +
-        request.pagination.page +
+        page +
         '&size=' +
-        request.pagination.rowsPerPage +
+        size +
         "&search=" +
-        request.filter +
+        search +
         "&sort=" +
-        request.pagination.sortBy +
+        sortBy +
         "&" +
-        request.pagination.sortBy +
+        sortBy +
         ".dir=" +
         sorting
       )

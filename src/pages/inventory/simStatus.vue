@@ -133,7 +133,7 @@ export default {
             if (value == null) {
               return "NA";
             } else {
-              return moment(value).format("DD/MM/YYYY");
+              return this.$moment(value).format("DD/MM/YYYY");
             }
           }
         },
@@ -143,7 +143,7 @@ export default {
             if (value == null) {
               return "NA";
             } else {
-              return moment(value).format("DD/MM/YYYY");
+              return this.$moment(value).format("DD/MM/YYYY");
             }
           }
         },
@@ -167,7 +167,7 @@ export default {
 
           align: "center",
           field: row => {
-            return  row.activationDate == null ? "NA" :  moment(row.activationDate).format("DD/MM/YYYY");
+            return  row.activationDate == null ? "NA" :  this.$moment(row.activationDate).format("DD/MM/YYYY");
           },
           sortable: true
         },
@@ -179,7 +179,7 @@ export default {
           field: row => {
             return row.deactivationDate == null
               ? "NA"
-              : moment(row.deactivationDate).format("DD/MM/YYYY");
+              : this.$moment(row.deactivationDate).format("DD/MM/YYYY");
           },
           sortable: true
         },
@@ -191,7 +191,7 @@ export default {
           field: row => {
             return row.deployedDate == null
               ? "NA"
-              : moment(row.deployedDate).format("DD/MM/YYYY");
+              : this.$moment(row.deployedDate).format("DD/MM/YYYY");
           }
         },
 
@@ -203,7 +203,7 @@ export default {
           field: row => {
             return row.simRecoveredDate == null
               ? "NA"
-              : moment(row.simRecoveredDate).format("DD/MM/YYYY");
+              : this.$moment(row.simRecoveredDate).format("DD/MM/YYYY");
           }
         },
 
@@ -215,7 +215,7 @@ export default {
           field: row => {
             return row.logonDate == null
               ? "NA"
-              : moment(row.logonDate).format("DD/MM/YYYY");
+              : this.$moment(row.logonDate).format("DD/MM/YYYY");
           },
           sortable: true
         },

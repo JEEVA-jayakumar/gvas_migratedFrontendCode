@@ -132,7 +132,7 @@ export default {
             if (value == null) {
               return "NA";
             } else {
-              return moment(value).format("DD/MM/YYYY");
+              return this.$moment(value).format("DD/MM/YYYY");
             }
           }
         },
@@ -142,7 +142,7 @@ export default {
             if (value == null) {
               return "NA";
             } else {
-              return moment(value).format("DD/MM/YYYY");
+              return this.$moment(value).format("DD/MM/YYYY");
             }
           }
         },
@@ -191,7 +191,7 @@ export default {
           label: "Create Date",
           align: "center",
           field: row => {
-            return moment(row.created_at).format("DD/MM/YYYY");
+            return this.$moment(row.created_at).format("DD/MM/YYYY");
           }
         },
         {
@@ -200,7 +200,7 @@ export default {
           label: "Receive Date",
           align: "center",
           field: row => {
-            return moment(row.updated_at).format("DD/MM/YYYY");
+            return this.$moment(row.updated_at).format("DD/MM/YYYY");
           }
         },
 

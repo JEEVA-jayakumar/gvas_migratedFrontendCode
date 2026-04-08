@@ -114,7 +114,7 @@ export default {
             if (value == null) {
               return "NA";
             } else {
-              return moment(value).format("DD/MM/YYYY");
+              return this.$moment(value).format("DD/MM/YYYY");
             }
           }
           },
@@ -124,7 +124,7 @@ export default {
             if (value == null) {
               return "NA";
             } else {
-              return moment(value).format("DD/MM/YYYY");
+              return this.$moment(value).format("DD/MM/YYYY");
             }
           }
           },

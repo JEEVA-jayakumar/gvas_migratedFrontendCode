@@ -24,7 +24,7 @@
 
         <q-td v-slot:body-cell-receivedAt="props" :props="props">{{
           props.row.receivedAt == null ? "NA" :
-            props.row.receivedAt | moment("Do MMM Y")
+            $moment(props.row.receivedAt).format("Do MMM Y")
         }}</q-td>
         <q-td v-slot:body-cell-DeviceList="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
         <q-td v-slot:body-cell-ModifyDate="props" :props="props">{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</q-td>
@@ -103,7 +103,7 @@ export default {
             if (value == null) {
               return "NA";
             } else {
-              return moment(value).format("DD/MM/YYYY");
+              return this.$moment(value).format("DD/MM/YYYY");
             }
           }
         },
@@ -113,7 +113,7 @@ export default {
             if (value == null) {
               return "NA";
             } else {
-              return moment(value).format("DD/MM/YYYY");
+              return this.$moment(value).format("DD/MM/YYYY");
             }
           }
         },
@@ -147,7 +147,7 @@ export default {
           label: "Received Date",
           align: "center",
           field: row => {
-            return moment(row.receivedAt).format("DD/MM/YYYY");
+            return this.$moment(row.receivedAt).format("DD/MM/YYYY");
           }
         },
 
