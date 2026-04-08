@@ -445,7 +445,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.AGGREGATOR_IMPLEMENTED_VERIFICATION_QUEUE({
+      return this.AGGREGATOR_IMPLEMENTED_VERIFICATION_QUEUE({
         pagination,
         filter,
         formData: this.formData1,

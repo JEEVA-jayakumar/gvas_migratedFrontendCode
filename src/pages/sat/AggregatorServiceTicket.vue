@@ -474,7 +474,7 @@ export default {
     ...mapActions("equitasImplementedQueue", ["SERVICE_TICKET_LIST"]),
     ajaxLoadAllLeadInfo() {
       this.toggleAjaxLoadFilter = true;
-      this.SERVICE_TICKET_LIST()
+      return this.SERVICE_TICKET_LIST()
         .then((response) => {
           this.tableData = this.getserviceticketlist;
           this.toggleAjaxLoadFilter = false;
@@ -505,7 +505,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.SERVICE_TICKET_LIST({ pagination, filter }).then((res) => {
+      return this.SERVICE_TICKET_LIST({ pagination, filter }).then((res) => {
           this.paginationControl = pagination;
           this.paginationControl.rowsNumber = this.getserviceticketlist.totalElements;
           this.paginationControl.page = this.getserviceticketlist.number + 1;

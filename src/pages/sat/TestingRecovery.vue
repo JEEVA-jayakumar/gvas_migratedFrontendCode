@@ -321,7 +321,7 @@ export default {
                 spinnerColor: 'purple-9',
                 message: 'Fetching data ..'
             });
-            this.FETCH_PHONEPE_DEVICE_RECOVERY_DATAS({ pagination, filter }).then(res => {
+            return this.FETCH_PHONEPE_DEVICE_RECOVERY_DATAS({ pagination, filter }).then(res => {
                     //     console.log("getPhonepeDeviceRecoveryDatas ------>",JSON.stringify(this.getPhonepeDeviceRecoveryDatas))
                     //   this.tableData = this.getPhonepeDeviceRecoveryDatas.content;
                     //   console.log("FETCH_PHONEPE_DEVICE_RECOVERY_DATAS ------>",JSON.stringify(this.tableData))

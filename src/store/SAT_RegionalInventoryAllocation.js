@@ -23,7 +23,7 @@ const SAT_RegionalInventoryAllocation = {
     currentDeviceId: null,
     /*START >> Module>> all allRegionalInventoryDevicesWithCount data*/
     allRegionalInventoryDevicesWithCount: [],
-    allPhonePeRegionalInventoryDevicesWithCount:[],
+    allPhonePeRegionalInventoryDevicesWithCount:{},
     allInventorywithsoDevicesWithCount: [],
     allSoInventoryDevicesWithCount: [],
     /*END >> Module>> allRegionalInventoryDevicesWithCount data*/

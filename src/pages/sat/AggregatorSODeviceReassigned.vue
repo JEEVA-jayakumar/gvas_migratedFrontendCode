@@ -166,7 +166,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data .."
       });
-      this.AGGREGATOR_SELF_ASSIGNMENT_TRACKER({ pagination, filter })
+      return this.AGGREGATOR_SELF_ASSIGNMENT_TRACKER({ pagination, filter })
         .then(res => {
           let responseData = res.data;
           this.paginationControl = pagination;

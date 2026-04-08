@@ -204,7 +204,7 @@ export default {
     ...mapActions("lostOrStolenDatas", ["FETCH_AGGREGATORS_ALL_LOST_DEVICES_DATAS"]),
     ajaxLoadAllLeadInfo({ pagination, filter }) {
       this.$q.loading.show({ delay: 0, spinnerColor: "purple-9", message: "Fetching data .." });
-      this.AGGREGATORS_MASTER_TRACKER_LIST({ pagination, filter })
+      return this.AGGREGATORS_MASTER_TRACKER_LIST({ pagination, filter })
         .then(res => {
           this.paginationControl = pagination;
           this.paginationControl.rowsNumber = this.getAggregatorsMasterTrackerList.totalElements;
@@ -215,7 +215,7 @@ export default {
     },
     lostOrStolenLoadInfo({ pagination, filter }) {
       this.$q.loading.show({ delay: 0, spinnerColor: "purple-9", message: "Fetching data .." });
-      this.FETCH_AGGREGATORS_ALL_LOST_DEVICES_DATAS({ pagination, filter })
+      return this.FETCH_AGGREGATORS_ALL_LOST_DEVICES_DATAS({ pagination, filter })
         .then(res => {
           this.paginationControl1 = pagination;
           this.paginationControl1.rowsNumber = this.getAggregatorsLostOrStolenDatas.totalElements;

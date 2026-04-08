@@ -570,7 +570,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.AGGREGATOR_DEVICE_REPLACEMENT_QUEUE_UNASSIGNED_LIST({ pagination, filter })
+      return this.AGGREGATOR_DEVICE_REPLACEMENT_QUEUE_UNASSIGNED_LIST({ pagination, filter })
         .then(() => {
           this.IMPLEMENTATION_EXECUTIVE_LIST().then(() => {
             let assumeArr = [];
@@ -599,7 +599,7 @@ export default {
         spinnerColor: "purple-9",
         message: "Fetching data ..",
       });
-      this.AGGREGATOR_DEVICE_REPLACEMENT_QUEUE_ASSIGNED_LIST({ pagination, filter })
+      return this.AGGREGATOR_DEVICE_REPLACEMENT_QUEUE_ASSIGNED_LIST({ pagination, filter })
         .then(() => {
           this.IMPLEMENTATION_EXECUTIVE_LIST().then(() => {
             let assumeArr = [];
