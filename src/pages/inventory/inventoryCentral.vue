@@ -113,7 +113,7 @@
 
                 <div class="col-md-5">
                   <downloadExcel
-                    :data="getAllInventoryDevicesData"
+                    :rows="getAllInventoryDevicesData"
                     :fields="json_fields"
                     name="CentralInventory.xls"
                   >

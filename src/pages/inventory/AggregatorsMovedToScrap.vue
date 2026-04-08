@@ -159,7 +159,7 @@ export default {
         //   label: "Updated Date",
         //   align: "center",
         //   field: row => {
-        //     return moment(row.updatedAt).format("DD/MM/YYYY");
+        //     return this.$moment(row.updatedAt).format("DD/MM/YYYY");
         //   }
         // },
         {

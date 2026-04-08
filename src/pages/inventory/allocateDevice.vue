@@ -147,8 +147,8 @@
             </div>
               <div v-if="formData.count != null" class="row">
                 <q-card class="card bg-purple-9 text-white" align="center">
-                  <div>
-                    <big class="alignbtn">{{ remainingCount || 0 }} </big>
+                  <div class="text-h6 text-weight-bold">
+                    <span class="alignbtn">{{ remainingCount || 0 }} </span>
                   </div>
                   <p>{{ label }}</p>
                 </q-card>

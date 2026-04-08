@@ -14,12 +14,12 @@
         <q-td v-slot:body-cell-updated_date="props" :props="props">{{
           props.row.updated_date == null
             ? "NA"
-            : props.row.updated_date | moment("Do MMM Y")
+            : $moment(props.row.updated_date).format("Do MMM Y")
         }}</q-td>
         <q-td v-slot:body-cell-created_date="props" :props="props">{{
           props.row.created_date == null
             ? "NA"
-            : props.row.created_date | moment("Do MMM Y")
+            : $moment(props.row.created_date).format("Do MMM Y")
         }}</q-td>
         <q-td v-slot:body-cell-regionAreaName="props" :props="props">{{
           props.row.allocate_region == null

@@ -210,7 +210,7 @@ export default {
           label: "Receive Date",
           align: "center",
           field: row => {
-            return moment(row.updated_at).format("DD/MM/YYYY");
+            return this.$moment(row.updated_at).format("DD/MM/YYYY");
           }
         },
         {

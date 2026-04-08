@@ -24,7 +24,7 @@
           :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
           <q-td v-slot:body-cell-updated_at="props" :props="props">{{
             props.row.updatedAt == null ? "NA" :
-              props.row.updatedAt | moment("Do MMM Y")
+              $moment(props.row.updatedAt).format("Do MMM Y")
           }}</q-td>
           <template slot="top">
             <!--START: table filter,search -->
@@ -126,7 +126,7 @@ export default {
           label: "Receive Date",
           align: "center",
           field: row => {
-            return moment(row.updated_at).format("DD/MM/YYYY");
+            return this.$moment(row.updatedAt).format("DD/MM/YYYY");
           }
         },
         // {

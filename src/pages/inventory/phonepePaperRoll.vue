@@ -110,7 +110,7 @@
               >{{
                 props.row == null
                   ? "NA"
-                  : props.row.createdDate | moment("Do MMM Y")
+                  : $moment(props.row.createdDate).format("Do MMM Y")
               }}</q-td
             >
           </q-table>
@@ -142,7 +142,7 @@
               >{{
                 props.row == null
                   ? "NA"
-                  : props.row.createdDate | moment("Do MMM Y")
+                  : $moment(props.row.createdDate).format("Do MMM Y")
               }}</q-td
             >
             <q-td
@@ -151,7 +151,7 @@
               >{{
                 props.row == null
                   ? "NA"
-                  : props.row.updatedDate | moment("Do MMM Y")
+                  : $moment(props.row.updatedDate).format("Do MMM Y")
               }}</q-td
             >
             <q-td v-slot:body-cell-action3="props" :props="props">
@@ -198,7 +198,7 @@
               >{{
                 props.row == null
                   ? "NA"
-                  : props.row.createdDate | moment("Do MMM Y")
+                  : $moment(props.row.createdDate).format("Do MMM Y")
               }}</q-td
             >
             <q-td
@@ -207,7 +207,7 @@
               >{{
                 props.row == null
                   ? "NA"
-                  : props.row.updatedDate | moment("Do MMM Y")
+                  : $moment(props.row.updatedDate).format("Do MMM Y")
               }}</q-td
             >
             <q-td
@@ -216,7 +216,7 @@
               >{{
                 props.row == null
                   ? "NA"
-                  : props.row.rtoCreatedDate | moment("Do MMM Y")
+                  : $moment(props.row.rtoCreatedDate).format("Do MMM Y")
               }}</q-td
             >
           </q-table>
