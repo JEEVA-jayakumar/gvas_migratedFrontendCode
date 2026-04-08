@@ -6,7 +6,7 @@
       <div class="row bottom-border q-px-md q-py-md items-center">
         <!--START: table title -->
         <div
-          class="col-6 col-sm-4 col-md-8 text-h6 text-weight-regular text-grey-9"
+          class="col-6 col-sm-4 col-md-8 q-title text-weight-regular text-grey-9"
         >
           Bijlipay Allocate SO/Bill Partner/Sub Region
         </div>
@@ -32,7 +32,7 @@
             :disabled="formData.device_type != ''"
             :class="[formData.device_type != '' ? 'no-pointer-events' : '']"
             v-model="formData.region"
-            label="Select Region"
+            placeholder="Select Region"
             radio
             color="grey-9"
             :options="regionOptions"
@@ -44,7 +44,7 @@
             filter 
             clearable
             v-model="formData.so"
-            label="Select SO"
+            placeholder="Select SO"
             radio
             color="grey-9"
             :options="regionBasedSo"
@@ -57,7 +57,7 @@
             @clear="fnClearingDeviceTypeSelection"
             @update:model-value="fnSetDevicesByDeviceId"
             v-model="formData.device_type"
-            label="Select Device Type"
+            placeholder="Select Device Type"
             radio
             color="grey-9"
             :options="deviceOptions"
@@ -95,7 +95,7 @@
 
       <div class="row text-weight-regular text-grey-9">
         <div
-          class="col group"
+          class="col-md-4 q-pa-sm"
           v-for="(item, index) in formData.scannedItems"
           :key="index"
         >
@@ -103,11 +103,11 @@
             class="shadow-4"
             :style="
               'border:' +
-                [
-                  formData.device_type.id == item.device.id
+                (
+                  formData.device_type && formData.device_type.id == item.device.id
                     ? '2px solid #61116a'
                     : 'unset'
-                ]
+                )
             "
           >
             <q-list
@@ -115,24 +115,24 @@
               separator
               class="q-pa-none"
               :class="[
-                formData.device_type.id == item.device.id
+                formData.device_type && formData.device_type.id == item.device.id
                   ? 'activeDeviceTab'
                   : ''
               ]"
             >
-              <q-item-label header style="border-bottom: 1px solid #ccc;">
+            <q-item-label header style="border-bottom: 1px solid #ccc; padding: 10px 16px;">
                 <q-icon
                   :style="
-                    'color:'[
-                      formData.device_type.id == item.device.id
+                    'color:' + (
+                      formData.device_type && formData.device_type.id == item.device.id
                         ? '#fff'
                         : '#202c3f'
-                    ]
+                    )
                   "
                   name="fas fa-tablet-alt"
                 />
                 {{ item.device.deviceName }}
-              </q-item-label header>
+              </q-item-label>
               <q-scroll-area
                 style="height:400px"
                 :thumb-style="{

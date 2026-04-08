@@ -4,18 +4,18 @@
         <div>
             <div class="row bottom-border q-px-md q-py-md items-center">
                 <!--START: table title -->
-                <div class="col-6 col-md-6 text-h6 text-weight-regular text-grey-9">Bijlipay Inventory With Region</div>
+                <div class="col-6 col-md-6 q-title text-weight-regular text-grey-9">Bijlipay Inventory With Region</div>
             </div>
             <div class="row bottom-border group q-px-md q-py-md items-center text-weight-regular text-grey-9">
                 <!--START: table title   :disable="disableDeviceTypeSelection" -->
                 <div class="col-md-4">
-                    <q-select v-model="formData.region" label="Select Region" radio color="grey-9"
+                    <q-select v-model="formData.region" placeholder="Select Region" radio color="grey-9"
                         @update:model-value="filterInventoryByRegion" :options="regionOptions" />
                 </div>
 
                 <div class="col-md-4 col-lg-4 group">
                     <q-select :disable="formData.region == undefined" v-model="formData.device_type"
-                        label="Filter By Device" radio color="grey-9" @update:model-value="filterByDevice"
+                        placeholder="Filter By Device" radio color="grey-9" @update:model-value="filterByDevice"
                         :options="deviceOptions" />
                 </div>
                 <div class="col-auto q-px-xs">
@@ -49,7 +49,7 @@
                     </div>
                 </q-td>
                 <!-- END: table body modification -->
-                <template slot="top" class="bottom-border">
+                <template v-slot:top class="bottom-border">
                     <!--START: table filter,search -->
                     <div class="col-md-5">
                         <q-input clearable color="grey-9" v-model="filter" placeholder="Type.."

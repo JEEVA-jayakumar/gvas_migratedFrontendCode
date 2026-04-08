@@ -6,7 +6,7 @@
       <q-pull-to-refresh :handler="PullToRefresh" inline>
         <!--START: table title -->
         <div
-          class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+          class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
         >
           Aggregators Send To Repair
         </div>
@@ -73,7 +73,7 @@
               <!--END: table other data -->
             </q-tr>
           </template>
-          <template slot="top" class="bottom-border">
+          <template v-slot:top class="bottom-border">
             <!--START: table filter,search -->
             <div class="col-md-5">
               <q-input

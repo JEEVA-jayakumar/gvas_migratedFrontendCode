@@ -5,7 +5,7 @@
       <!--START: table title -->
       <div class="row bottom-border q-px-md q-py-sm items-center">
         <!--START: table title -->
-        <div class="col-12 col-lg-4 text-h6 text-weight-regular text-grey-9">Bijlipay Central Inventory </div>
+        <div class="col-12 col-lg-4 q-title text-weight-regular text-grey-9">Bijlipay Central Inventory </div>
         <div class="col-12 col-lg-8 group" align="right">
           <q-btn
             outline
@@ -78,10 +78,10 @@
             :style="'background:'+deviceInfo.device.colorCode"
             align="center"
           >
-            <div>
-              <big class="text-weight-bold">{{deviceInfo.count}}</big>
+            <div class="q-title text-weight-bold">
+              {{deviceInfo.count}}
             </div>
-            <div class="text-caption">{{deviceInfo.device.deviceName}}</div>
+            <div>{{deviceInfo.device.deviceName}}</div>
           </div>
         </div>
         <div class="col-md-9">
@@ -229,7 +229,7 @@ export default {
               count: this.getAllInventoryDevicesData.length,
               device: {
                 deviceName: "Total",
-                colorCode: "#eee"
+                colorCode: "#666"
               }
             };
             this.getAllInventoryDevicesTypesWithCountData.unshift(allDevicesCount);

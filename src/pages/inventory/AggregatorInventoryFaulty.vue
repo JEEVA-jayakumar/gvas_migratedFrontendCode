@@ -4,7 +4,7 @@
     <div>
       <div class="row bottom-border q-px-md q-py-md items-center">
         <!--START: table title -->
-        <div class="col-6 col-md-6 text-h6 text-weight-regular text-grey-9">Aggregator Faulty Inventory</div>
+        <div class="col-6 col-md-6 q-title text-weight-regular text-grey-9">Aggregator Faulty Inventory</div>
         <div class="col-6 col-md-6" align="right">
           <q-btn icon="attach_file" @click="bulkUploadFaultyDevices" outline color="dark" label="Bulk upload" />
         </div>
@@ -19,7 +19,7 @@
       <div >
         <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
           <div class="col-6 col-md-6">
-            <q-input v-model="podNumber" label="Enter POD number" color="grey-9" />
+            <q-input v-model="podNumber" placeholder="Enter POD number" color="grey-9" />
           </div>
           <div class="col-6 col-md-6" align="right">
             <q-btn @click="fnAjaxFaultyInventoryData" color="light-blue" class="q-py-xs" label="Submit" />
@@ -29,7 +29,7 @@
           <!--START: table title -->
           <div class="col-6 col-md-6">
             <q-select :disable="disableDeviceTypeSelection" @update:model-value="fnSetDevicesByDeviceId"
-              v-model="formData.device_type" label="Select Device Type" color="grey-9" :options="deviceOptions" />
+              v-model="formData.device_type" placeholder="Select Device Type" color="grey-9" :options="deviceOptions" />
           </div>
           <div class="col-6 col-md-6" align="right">
             <q-btn :disabled="formData.device_type == '' || formData.region == ''" @click="openScannerComp"
@@ -58,7 +58,7 @@
             <q-btn flat color="amber-9" v-else icon="warning" />
           </q-td>
           <!-- END: table body modification -->
-          <template slot="top" class="bottom-border">
+          <template v-slot:top class="bottom-border">
             <!--START: table filter,search -->
             <div class="col-md-5">
               <q-input clearable color="grey-9" v-model="filter" placeholder="Type.."

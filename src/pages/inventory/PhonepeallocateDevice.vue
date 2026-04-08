@@ -4,7 +4,7 @@
     <div>
       <div class="row bottom-border q-px-md q-py-md items-center">
         <!--START: table title -->
-        <div class="col-6 col-sm-4 col-md-8 text-h6 text-weight-regular text-grey-9">Aggregator Allocate Device</div>
+        <div class="col-6 col-sm-4 col-md-8 q-title text-weight-regular text-grey-9">Aggregator Allocate Device</div>
         <div class="col-md-12 col-md-6 q-pt-md group" align="right">
           <q-btn
               @click="$router.push('/inventory/PhonepeInventory')"
@@ -18,16 +18,12 @@
         <div class="col-md-2">
           <q-select :disabled="formData.device_type != ''"
             :class="[formData.device_type != '' ? 'no-pointer-events' : '']" v-model="formData.region"
-            label="Select Region" radio color="grey-9" :options="regionOptions" />
+            placeholder="Select Region" radio color="grey-9" :options="regionOptions" />
 
         </div>
-        <!-- <div class="col-md-2">
-          <q-select color="grey-9" :disable="formData.region == ''" v-model="aggregator" label="Select Aggregator" radio
-            :options="aggregatorOptions" @update:model-value="selectedAggregators" />
-        </div> -->
         <div class="col-md-2">
           <q-select clearable :disable="formData.region == ''" @clear="fnClearingDeviceTypeSelection"
-            @update:model-value="fnSetDevicesByDeviceId" v-model="formData.device_type" label="Select Device Type" radio
+            @update:model-value="fnSetDevicesByDeviceId" v-model="formData.device_type" placeholder="Select Device Type" radio
             color="grey-9" :options="deviceOptions" />
         </div>
         <div class="col-12 col-lg-4 group" align="right">
@@ -39,16 +35,16 @@
       </div>
 
       <div class="row text-weight-regular text-grey-9">
-        <div class="col group" v-for="(item, index) in formData.scannedItems" :key="index">
+        <div class="col-md-4 q-pa-sm" v-for="(item, index) in formData.scannedItems" :key="index">
           <q-card class="shadow-4"
-            :style="'border:' + [formData.device_type.id == item.device.id ? '2px solid #61116a' : 'unset']">
+            :style="'border:' + (formData.device_type && formData.device_type.id == item.device.id ? '2px solid #61116a' : 'unset')">
             <q-list highlight separator class="q-pa-none"
-              :class="[formData.device_type.id == item.device.id ? 'activeDeviceTab' : '']">
-              <q-item-label header style="border-bottom: 1px solid #ccc;">
-                <q-icon :style="'color:'[formData.device_type.id == item.device.id ? '#fff' : '#202c3f']"
+              :class="[formData.device_type && formData.device_type.id == item.device.id ? 'activeDeviceTab' : '']">
+              <q-item-label header style="border-bottom: 1px solid #ccc; padding: 10px 16px;">
+                <q-icon :style="'color:' + (formData.device_type && formData.device_type.id == item.device.id ? '#fff' : '#202c3f')"
                   name="fas fa-tablet-alt" />
                 {{ item.device.deviceName }}
-              </q-item-label header>
+              </q-item-label>
               <q-scroll-area style="height:400px" :thumb-style="{ right: '4px', borderRadius: '5px', background: 'grey', width: '5px', opacity: 0.5 }" :delay="1500">
                 <div v-if="item.deviceSerialNumbers.length > 0">
                   <q-item separator class="text-light-blue" v-for="(subItem, subIndex) in item.deviceSerialNumbers"

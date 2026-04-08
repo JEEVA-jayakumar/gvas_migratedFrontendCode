@@ -42,6 +42,12 @@ Router.beforeEach((to, from, next) => {
       isAuthorized = true;
     }
 
+    // Inventory module authorization: INH_2 role maps to INH route
+    if (!isAuthorized && matchedName === "INH" && roles.includes("INH_2")) {
+      console.log("Authorizing INH for INH_2");
+      isAuthorized = true;
+    }
+
     if (isAuthorized) {
       next();
     } else {
