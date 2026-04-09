@@ -33,7 +33,7 @@
             :loading="toggleAjaxLoadFilter"
             @request="ajaxLoadAllLeadInfo"
           >
-            <q-td v-slot:body-cell-actionScanQR="props" :props="props">
+            <q-td v-slot:body-cell-actionScanQR="props" :props="props"><template v-if="props && props.row">
               <div class="row no-wrap no-padding">
                 <q-btn
                   :disable="props.row.isScanQrEnabled"
@@ -49,7 +49,7 @@
                 >
                 </q-btn>
               </div>
-            </q-td>
+            </template></q-td>
             <q-td v-slot:body-cell-actionScanSoundbox="props" :props="props">
               <div v-if="props.row.soundBox == true" class="row no-wrap no-padding">
                 <q-btn
@@ -67,7 +67,7 @@
                 </q-btn>
               </div>
             </q-td>
-            <q-td v-slot:body-cell-actionPrint="props" :props="props">
+            <q-td v-slot:body-cell-actionPrint="props" :props="props"><template v-if="props && props.row">
               <div class="row no-wrap no-padding">
                 <q-btn
                   :disabled="
@@ -88,8 +88,8 @@
                 >
                 </q-btn>
               </div>
-            </q-td>
-            <q-td v-slot:body-cell-actionSubmit="props" :props="props">
+            </template></q-td>
+            <q-td v-slot:body-cell-actionSubmit="props" :props="props"><template v-if="props && props.row">
               <div class="row no-wrap no-padding">
                 <q-btn
                   :disabled="
@@ -106,7 +106,7 @@
                   >Submit</q-btn
                 >
               </div>
-            </q-td>
+            </template></q-td>
           </q-table>
         </q-tab-panel>
 <q-tab-panel name="tab-2">
@@ -159,7 +159,7 @@
             :loading="toggleAjaxLoadFilter2"
             @request="ajaxLoadAllLeadInfo2"
           >
-            <q-td v-slot:body-cell-actionReSubmit="props" :props="props">
+            <q-td v-slot:body-cell-actionReSubmit="props" :props="props"><template v-if="props && props.row">
               <div class="row no-wrap no-padding">
                 <q-btn
                   highlight
@@ -170,7 +170,7 @@
                   >RE-Submit</q-btn
                 >
               </div>
-            </q-td>
+            </template></q-td>
           </q-table>
         </q-tab-panel>
 </q-tab-panels>

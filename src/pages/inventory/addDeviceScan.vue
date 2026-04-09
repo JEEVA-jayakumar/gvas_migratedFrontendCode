@@ -57,7 +57,7 @@
         :loading="tableAjaxLoading"
         color="light-blue"
       >
-        <template v-slot:body-cell-action="props">
+        <template v-slot:body-cell-action="props" :props="props">
           <q-td :props="props">
             <q-btn @click="removeScannedItems(props.rowIndex)" label="Remove" icon="close" color="red-6" size="sm" />
           </q-td>

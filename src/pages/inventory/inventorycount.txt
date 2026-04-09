@@ -407,7 +407,7 @@
         :loading="toggleAjaxLoadFilter"
         row-key="name"
       >
-        <template slot="top" slot-scope="props" class="bottom-border">
+        <template v-slot:top slot-scope="props" class="bottom-border">
           <!--START: table filter,search -->
           <div class="col-md-8">
             <q-search

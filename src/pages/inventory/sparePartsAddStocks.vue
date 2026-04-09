@@ -40,8 +40,8 @@
           Stock List
         </div>
         <q-table :rows="tableData" table-class="customSATableClass" :columns="columns" v-model:pagination="paginationControl" row-key="name" color="grey-9">
-          <q-td v-slot:body-cell-created_date="props" :props="props">{{ $moment(props.row.created_date).format("Do MMM Y") }}</q-td>
-          <q-td v-slot:body-cell-updated_date="props" :props="props">{{ $moment(props.row.updated_date).format("Do MMM Y") }}</q-td>
+          <q-td v-slot:body-cell-created_date="props" :props="props"><template v-if="props && props.row">{{ $moment(props.row.created_date).format("Do MMM Y") }}</template></q-td>
+          <q-td v-slot:body-cell-updated_date="props" :props="props"><template v-if="props && props.row">{{ $moment(props.row.updated_date).format("Do MMM Y") }}</template></q-td>
         </q-table>
       </div>
     </div>

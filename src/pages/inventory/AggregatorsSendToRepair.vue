@@ -42,9 +42,9 @@
           <!--END: table header -->
           <template v-slot:body="props">
             <!--START: table rows -->
-            <q-tr :props="props" class="bottom-border">
+            <q-tr v-if="props && props.row" :props="props" class="bottom-border">
               <q-td auto-width key="aggregatorDevice" :props="props">{{
-                props.row.aggregatorDevice.deviceName
+                props.row.aggregatorDevice ? props.row.aggregatorDevice.deviceName : 'NA'
               }}</q-td>
               <q-td auto-width key="serialNumber" :props="props">{{
                 props.row.serialNumber
@@ -246,7 +246,7 @@ export default {
     ...mapGetters("superAdminAggregators", ["getCreatedAggregatorList", "getActiveCreatedAggregatorList"]),
   },
   created() {
-    this.ajaxLoadAllLeadInfo();
+    this.ajaxLoadAllLeadInfo2();
   },
   beforeMount() {
       //  this.AggregatorId=this.$AGGREGATOR_ID
@@ -255,7 +255,7 @@ export default {
     },
   
     mounted() {
-    // this.ajaxLoadAllLeadInfo({
+    // this.ajaxLoadAllLeadInfo2({
     //   pagination: this.paginationControl,
     //   filter: this.filterSearch
     // });
@@ -295,14 +295,14 @@ export default {
   // getaggregator(value) {
   //   this.flag = true;
  
-  //   this.ajaxLoadAllLeadInfo({
+  //   this.ajaxLoadAllLeadInfo2({
   //     pagination: this.paginationControl,
   //     filter: this.filterSearch,
   //     aggregators: value
   //   });
   // },
   fnReloadPageInformation(){
-      this.ajaxLoadAllLeadInfo({
+      this.ajaxLoadAllLeadInfo2({
       pagination: this.paginationControl,
       filter: this.filterSearch
     });
@@ -391,7 +391,7 @@ export default {
       this.propsScrapAppend = exceptionDetails;
     },
     PullToRefresh(done) {
-      this.ajaxLoadAllLeadInfo({
+      this.ajaxLoadAllLeadInfo2({
         pagination: this.paginationControl,
         filter: this.filter
       });
@@ -414,7 +414,7 @@ export default {
 
           this.APPROVE_AGGREGATORS_SEND_TO_REPAIR(reqData)
             .then(() => {
-              // this.ajaxLoadAllLeadInfo();
+              // this.ajaxLoadAllLeadInfo2();
               this.$q.loading.hide();
               this.$q.notify({
                 color: "positive",
@@ -422,7 +422,7 @@ export default {
                 message: "Successfully Approved!",
                 icon: "thumb_up"
               });
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",
@@ -431,6 +431,13 @@ export default {
                 icon: "thumb_down"
               });
             });
+        }).onCancel(() => {
+          this.$q.notify({
+            color: "negative",
+            position: "bottom",
+            message: "No changes made!",
+            icon: "thumb_down"
+          });
         });
     }
     // MovedToScrap(reqData) {
@@ -451,7 +458,7 @@ export default {
 
     //       this.MOVED_TO_SCRAP_DATAS(reqData)
     //         .then(() => {
-    //           // this.ajaxLoadAllLeadInfo();
+    //           // this.ajaxLoadAllLeadInfo2();
     //           this.$q.loading.hide();
     //           this.$q.notify({
     //             color: "positive",

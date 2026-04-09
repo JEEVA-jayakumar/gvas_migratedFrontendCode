@@ -8,14 +8,14 @@
         <div class="col-12 col-lg-4 q-title text-weight-regular text-grey-9">Aggregator Inventory</div>
         <div class="col-12 col-lg-8 group" align="right">
           <q-btn-dropdown outline no-caps class="text-weight-regular" label="Add Refurbished Device" >
-            <q-list link>
-              <!-- <q-item to="phonepeRefurbishmentAddDeviceScan">
+            <q-list>
+              <!-- <q-item clickable to="phonepeRefurbishmentAddDeviceScan">
                 <q-item-section icon="search" />
                 <q-item-section>
                   <q-item-label label>Scan and Upload</q-item-label>
                 </q-item-section>
               </q-item> -->
-              <q-item @click="fnPhonePeOpenRefurbishedBulkUploadModal">
+              <q-item clickable @click="fnPhonePeOpenRefurbishedBulkUploadModal">
                 <q-item-section icon="attach_file" />
                 <q-item-section>
                   <q-item-label label>Bulk upload</q-item-label>
@@ -27,14 +27,14 @@
           <q-btn outline no-caps class="text-weight-regular" label="Allocate to Region" to="PhonepeallocateDevice" />
           <q-btn outline no-caps class="text-weight-regular" label="Add Faulty Device" @click="fnShowAddDevice" to="showAggregatorsAddDamagedDevices" />
           <q-btn-dropdown outline no-caps class="text-weight-regular" label="Add new device from manufacturer" >
-            <q-list link>
-              <q-item to="PhonepeAddDeviceScan">
+            <q-list>
+              <q-item clickable to="PhonepeAddDeviceScan">
                 <q-item-section icon="search" />
                 <q-item-section>
                   <q-item-label label>Scan and Upload</q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item @click="fnPhonePeOpenBulkUploadModal">
+              <q-item clickable @click="fnPhonePeOpenBulkUploadModal">
                 <q-item-section icon="attach_file" />
                 <q-item-section>
                   <q-item-label label>Bulk upload</q-item-label>
@@ -50,14 +50,14 @@
             class="text-weight-regular"
             label="Add Phonepe Device Recovery Manufacturer"
           >
-            <q-list link>
-              <q-item to="PhonepeDeviceRecoveryScan">
+            <q-list>
+              <q-item clickable to="PhonepeDeviceRecoveryScan">
                 <q-item-section icon="search" />
                 <q-item-section>
                   <q-item-label label>Scan and Upload</q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item @click="fnOpenBulkUploadModal">
+              <q-item clickable @click="fnOpenBulkUploadModal">
                 <q-item-section icon="attach_file" />
                 <q-item-section>
                   <q-item-label label>Bulk upload</q-item-label>
@@ -78,15 +78,16 @@
       <!--END: table title -->
       <div class="row">
         <div class="col-md-3 group q-pa-md">
-          <div class="q-pa-md cursor-pointer" v-if="deviceInfo.aggregatorDevice != undefined" :class="[activeItemId === index ? 'shadow-5 bg-grey-5' : 'shadow-0']"
-            @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index, deviceInfo)"
-            v-for="(deviceInfo, index) in getAllPhonepeInventoryDevicesTypesWithCountData" :key="index"
-            :style="'background:' + deviceInfo.aggregatorDevice.colorCode" align="center">
-            <div class="q-title text-weight-bold">
-              {{ deviceInfo.count }}
+          <template v-for="(deviceInfo, index) in getAllPhonepeInventoryDevicesTypesWithCountData" :key="index">
+            <div class="q-pa-md cursor-pointer q-ma-xs border-radius-10" v-if="deviceInfo && (deviceInfo.aggregatorDevice || deviceInfo.device)" :class="[activeItemId === index ? 'shadow-5 bg-grey-5' : 'shadow-0']"
+              @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index, deviceInfo)"
+              :style="'background:' + (deviceInfo.aggregatorDevice ? deviceInfo.aggregatorDevice.colorCode : deviceInfo.device.colorCode)" align="center">
+              <div class="q-title text-weight-bold">
+                {{ deviceInfo.count }}
+              </div>
+              <div>{{ deviceInfo.aggregatorDevice ? deviceInfo.aggregatorDevice.deviceName : deviceInfo.device.deviceName }}</div>
             </div>
-            <div>{{ deviceInfo.aggregatorDevice.deviceName }}</div>
-          </div>
+          </template>
         </div>
         <div class="col-md-9">
           <div>
@@ -95,7 +96,7 @@
               table-class="customTableClass shadow-0" :filter="filterSearch" 
              
               row-key="index" :loading="tableAjaxLoading" color="primary">
-              <template slot="top">
+              <template v-slot:top>
                 <!--START: table filter,search  :pagination="paginationControl"-->
                 <div class="col-md-5">
                   <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search By Device Serail Number.."
@@ -353,6 +354,9 @@ export default {
       this.tableAjaxLoading = true;
       this.FETCH_ALL_PHONE_PE_INVENTORY_DEVICES_TYPES_WITH_COUNT_DATA().then(() => {
         this.FETCH_ALL_PHOEPE_INVENTORY_DEVICES_BY_DEVICE_TYPE().then(() => {
+          if (this.getAllPhonepeInventoryDevicesTypesWithCountData && this.getAllPhonepeInventoryDevicesTypesWithCountData.length > 0 && this.getAllPhonepeInventoryDevicesTypesWithCountData[0].device && this.getAllPhonepeInventoryDevicesTypesWithCountData[0].device.deviceName === "Total") {
+              return;
+          }
           let allDevicesCount = {
             count: this.getAllPhonepeInventoryDevicesData.length,
             device: {
@@ -361,9 +365,11 @@ export default {
             }
           };
           console.log("before getAllPhonepeInventoryDevicesTypesWithCountData ------>", JSON.stringify(this.getAllPhonepeInventoryDevicesTypesWithCountData));
-          this.getAllPhonepeInventoryDevicesTypesWithCountData.unshift(
-            allDevicesCount
-          );
+          if (this.getAllPhonepeInventoryDevicesTypesWithCountData) {
+            this.getAllPhonepeInventoryDevicesTypesWithCountData.unshift(
+              allDevicesCount
+            );
+          }
           console.log("After getAllPhonepeInventoryDevicesTypesWithCountData ------>", JSON.stringify(this.getAllPhonepeInventoryDevicesTypesWithCountData));
         });
       });

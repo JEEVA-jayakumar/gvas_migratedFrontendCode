@@ -34,9 +34,9 @@
           <!--END: table header -->
           <template v-slot:body="props">
             <!--START: table rows -->
-            <q-tr :props="props" class="bottom-border">
+            <q-tr v-if="props && props.row" :props="props" class="bottom-border">
               <q-td auto-width key="device" :props="props">{{
-                props.row.device.deviceName
+                props.row.device ? props.row.device.deviceName : 'NA'
               }}</q-td>
               <q-td auto-width key="device" :props="props">{{
                 props.row.serialNumber

@@ -8,7 +8,7 @@
       </div>
       <q-table
         table-class="customTableClass"
-        v-model:columns="columns"
+         :columns="columns"
         :filter="filter"
         :rows="tableData" v-model:pagination="paginationControl"
         row-key="id"
@@ -16,26 +16,16 @@
          :loading="toggleAjaxLoadFilter"
          @request="ajaxLoadAllLeadInfo"
       >
-        <!-- <q-td
-          v-slot:body-cell-createdAt="props"
-          :props="props"
-        >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-receivedAt="props"
-          :props="props"
-        >{{ $moment(props.row.receivedAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-receivedAt="props"
-          :props="props"
-        >{{ $moment(props.row.receivedAt ==null? "NA" : props.row.receivedAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-DeviceList="props"
-          :props="props"
-        >{{ $moment(props.row.device.createDate).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-ModifyDate="props"
-          :props="props"
-        >{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</q-td>-->
+        <!-- <q-td v-slot:body-cell-createdAt="props" :props="props"
+        ><template v-if="props && props.row">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</template></q-td>
+        <q-td v-slot:body-cell-receivedAt="props" :props="props"
+        ><template v-if="props && props.row">{{ $moment(props.row.receivedAt).format("Do MMM Y") }}</template></q-td>
+        <q-td v-slot:body-cell-receivedAt="props" :props="props"
+        ><template v-if="props && props.row">{{ $moment(props.row.receivedAt ==null? "NA" : props.row.receivedAt).format("Do MMM Y") }}</template></q-td>
+        <q-td v-slot:body-cell-DeviceList="props" :props="props"
+        ><template v-if="props && props.row">{{ $moment(props.row.device.createDate).format("Do MMM Y") }}</template></q-td>
+        <q-td v-slot:body-cell-ModifyDate="props" :props="props"
+        ><template v-if="props && props.row">{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</template></q-td>-->
 
         <template v-slot:top="props">
           <div class="col-md-5">
