@@ -34,9 +34,9 @@
             <!--END: table header -->
             <template v-slot:body="props">
               <!--START: table rows -->
-              <q-tr :props="props" class="bottom-border">
+            <q-tr v-if="props && props.row" :props="props" class="bottom-border">
                 <q-td auto-width key="device" :props="props">{{
-                  props.row.device.deviceName
+                props.row.aggregatorDevice ? props.row.aggregatorDevice.deviceName : 'NA'
                 }}</q-td>
                 <q-td auto-width key="device" :props="props">{{
                   props.row.serialNumber
@@ -65,7 +65,7 @@
                 <!--END: table other data -->
               </q-tr>
             </template>
-            <template slot="top" class="bottom-border">
+            <template v-slot:top class="bottom-border">
               <!--START: table filter,search -->
               <div class="col-md-5">
                 <q-input
@@ -356,7 +356,7 @@ import { required, or } from '@vuelidate/validators';
                   message: "Successfully Approved!",
                   icon: "thumb_up"
                 });
-              }).onCancel(error => {
+              }).catch(error => {
                 this.$q.loading.hide();
                 this.$q.notify({
                   color: "negative",
@@ -365,6 +365,13 @@ import { required, or } from '@vuelidate/validators';
                   icon: "thumb_down"
                 });
               });
+          }).onCancel(() => {
+            this.$q.notify({
+              color: "negative",
+              position: "bottom",
+              message: "No changes made!",
+              icon: "thumb_down"
+            });
           });
       }
     }

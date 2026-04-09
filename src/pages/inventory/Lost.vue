@@ -27,10 +27,8 @@
         :loading="toggleAjaxLoadFilter"
         @request="ajaxLoadAllLeadInfo"
       >
-       <q-td
-          v-slot:body-cell-updated_at="props"
-          :props="props"
-        >{{ $moment(props.row.updatedAt ==null? "NA" : props.row.updatedAt).format("Do MMM Y") }}</q-td>
+       <q-td v-slot:body-cell-updated_at="props" :props="props"
+        ><template v-if="props && props.row">{{ $moment(props.row.updatedAt ==null? "NA" : props.row.updatedAt).format("Do MMM Y") }}</template></q-td>
         <template v-slot:top class="bottom-border">
           <!--START: table filter,search -->
           <div class="col-md-5">

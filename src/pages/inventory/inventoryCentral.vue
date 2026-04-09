@@ -186,7 +186,7 @@ export default {
           required: true,
           label: "Device Type",
           align: "center",
-          field: row => row.device.deviceName,
+          field: row => row.device ? row.device.deviceName : 'NA',
           sortable: true
         },
       ],

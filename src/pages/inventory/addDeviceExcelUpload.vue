@@ -57,7 +57,7 @@
             <q-table :rows="getAddDeviceScannedItems" :columns="columnData" table-class="customTableClass shadow-0" :filter="filterSearch" v-model:pagination="paginationControl" row-key="index" :loading="tableAjaxLoading"
             color="light-blue">
 
-                <q-td v-slot:body-cell-action="props" :props="props">
+                <q-td v-slot:body-cell-action="props" :props="props"><template v-if="props && props.row">
                    <q-btn
                    @click="removeScannedItems(props.row)"
                     label="Remove"
@@ -65,7 +65,7 @@
                     color="red-6"
                     size="sm"
                    />
-                </q-td>
+                </template></q-td>
 
                 <template v-slot:top="props">
                     <!--START: table filter,search -->

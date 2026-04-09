@@ -56,26 +56,33 @@
             <!-- <q-tr v-slot:top-row="props">
         <q-th v-for="col in props.columns" :key="col.name" :props="props">{{ col.label }}</q-th>
         </q-tr> -->
-            <q-td v-slot:body-cell-createdAt="props" :props="props">{{
-              props.row.createdAt == null ? 'NA' :
-                $moment(props.row.createdAt).format("Do MMM Y")
-            }}</q-td>
-            <q-td v-slot:body-cell-Batch="props" :props="props">{{
-              props.row.batchId == null ? 'NA' :
-                props.row.batchId
-            }}</q-td>
-            <q-td v-slot:body-cell-Bank="props" :props="props">{{
-              props.row.staticQrBank && props.row.staticQrBank.name ? props.row.staticQrBank.name : 'NA'
-            }}</q-td>
-            <q-td v-slot:body-cell-Count="props" :props="props">{{
-              props.row.count == null ? 'NA' :
-                props.row.count
-            }}</q-td>
-            <q-td v-slot:body-cell-remainingCount="props" :props="props">{{
-              props.row.remainingQrCount == 0 ? '' : props.row.remainingQrCount
-            }}</q-td>
+            <q-td v-slot:body-cell-createdAt="props" :props="props">
+              <template v-if="props && props.row">
+                {{ props.row.createdAt == null ? 'NA' : $moment(props.row.createdAt).format("Do MMM Y") }}
+              </template>
+            </q-td>
+            <q-td v-slot:body-cell-Batch="props" :props="props">
+              <template v-if="props && props.row">
+                {{ props.row.batchId == null ? 'NA' : props.row.batchId }}
+              </template>
+            </q-td>
+            <q-td v-slot:body-cell-Bank="props" :props="props">
+              <template v-if="props && props.row">
+                {{ props.row.staticQrBank && props.row.staticQrBank.name ? props.row.staticQrBank.name : 'NA' }}
+              </template>
+            </q-td>
+            <q-td v-slot:body-cell-Count="props" :props="props">
+              <template v-if="props && props.row">
+                {{ props.row.count == null ? 'NA' : props.row.count }}
+              </template>
+            </q-td>
+            <q-td v-slot:body-cell-remainingCount="props" :props="props">
+              <template v-if="props && props.row">
+                {{ props.row.remainingQrCount == 0 ? '' : props.row.remainingQrCount }}
+              </template>
+            </q-td>
             <q-td v-slot:body-cell-Action="props" :props="props">
-              <div class="row no-wrap no-padding">
+              <div v-if="props && props.row" class="row no-wrap no-padding">
                 <q-btn dense no-caps no-wrap label="Download" icon="file_download" size="md"
                   @click="downloadQrString(props.row)" flat class="text-green">
                 </q-btn>
@@ -85,7 +92,7 @@
               </div>
             </q-td>
             <q-td v-slot:body-cell-Action2="props" :props="props">
-              <div class="row no-wrap no-padding">
+              <div v-if="props && props.row" class="row no-wrap no-padding">
                 <q-btn :disable="props.row.batchCount == true" dense no-caps no-wrap label="Sticker Recieved" icon="thumb_up_alt" size="md"
                   @click="stickerRecieved(props.row)" flat class="text-blue">
                 </q-btn>
@@ -417,7 +424,8 @@ export default {
         //     this.addBasicInformation = response
         //   }
         // }
-      }).onCancel(() => {
+      })
+    }).onCancel(() => {
         this.$q.notify({
           color: 'negative',
           position: 'bottom',
@@ -426,8 +434,6 @@ export default {
         })
         this.$q.loading.hide();
       })
-    
-    })
       }
     
     },

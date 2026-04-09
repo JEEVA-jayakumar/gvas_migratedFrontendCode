@@ -19,9 +19,9 @@
         :loading="toggleAjaxLoadFilter"
         @request="ajaxLoadAllLeadInfo"
       >
-         <q-td v-slot:body-cell-dateOfRecoveryReplacement="props" :props="props">
+         <q-td v-slot:body-cell-dateOfRecoveryReplacement="props" :props="props"><template v-if="props && props.row">
           <span class="label">{{ $moment(props.row.dateOfRecoveryReplacement).format("Do MMM Y") }}</span>
-        </q-td>
+        </template></q-td>
      
         <template v-slot:top class="bottom-border">
           <!--START: table  :rows-per-page-options="[5,10,15,20,25]"filter,search -->

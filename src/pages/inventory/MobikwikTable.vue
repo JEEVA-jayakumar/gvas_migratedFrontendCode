@@ -26,11 +26,11 @@
             
             <div v-if="inventoryData.centralItems.length > 0" class="row">
               <div class="col-md-2 col-sm-3 col-xs-3 q-ma-xs q-pa-md" v-for="(device, index) in inventoryData.centralItems"
-                :key="index" :style="'border: 1px solid ' + device.aggregatorDevice.colorCode" align="center">
-              <div class="q-title text-weight-bold" :style="'color:' + device.aggregatorDevice.colorCode">
+                :key="index" :style="'border: 1px solid ' + (device.aggregatorDevice ? device.aggregatorDevice.colorCode : '#ccc')" align="center">
+              <div v-if="device.aggregatorDevice" class="q-title text-weight-bold" :style="'color:' + device.aggregatorDevice.colorCode">
                 {{ device.count }}
                 </div>
-                <div>{{ device.aggregatorDevice.deviceName }}</div>
+                <div v-if="device.aggregatorDevice">{{ device.aggregatorDevice.deviceName }}</div>
               </div>
             </div>
             <div v-else class="row group">
@@ -47,11 +47,11 @@
             <div class="col-md-2 col-sm-3 col-xs-3 q-ma-xs q-pa-md cursor-pointer"
                 @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index, deviceInfo)"
                 v-for="(deviceInfo, index) in inventoryData.regionalItems" :key="index"
-                :style="'border: 1px solid ' + deviceInfo.aggregatorDevice.colorCode" align="center">
-              <div class="q-title text-weight-bold" :style="'color:' + deviceInfo.aggregatorDevice.colorCode">
+                :style="'border: 1px solid ' + (deviceInfo.aggregatorDevice ? deviceInfo.aggregatorDevice.colorCode : '#ccc')" align="center">
+              <div v-if="deviceInfo.aggregatorDevice" class="q-title text-weight-bold" :style="'color:' + deviceInfo.aggregatorDevice.colorCode">
                 {{ deviceInfo.count }}
                 </div>
-                <div>{{ deviceInfo.aggregatorDevice.deviceName }}</div>
+                <div v-if="deviceInfo.aggregatorDevice">{{ deviceInfo.aggregatorDevice.deviceName }}</div>
               </div>
             </div>
             <div v-else class="row group">
@@ -67,11 +67,11 @@
               <div class="col-md-2 col-sm-3 col-xs-3 q-ma-xs q-pa-md"
                 @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index, deviceInfo)"
                 v-for="(deviceInfo, index) in inventoryData.merchantItems" :key="index"
-                :style="'border: 1px solid ' + deviceInfo.aggregatorDevice.colorCode" align="center">
-              <div class="q-title text-weight-bold" :style="'color:' + deviceInfo.aggregatorDevice.colorCode">
+              :style="'border: 1px solid ' + (deviceInfo.aggregatorDevice ? deviceInfo.aggregatorDevice.colorCode : '#ccc')" align="center">
+            <div v-if="deviceInfo.aggregatorDevice" class="q-title text-weight-bold" :style="'color:' + deviceInfo.aggregatorDevice.colorCode">
                 {{ deviceInfo.count }}
                 </div>
-                <div>{{ deviceInfo.aggregatorDevice.deviceName }}</div>
+              <div v-if="deviceInfo.aggregatorDevice">{{ deviceInfo.aggregatorDevice.deviceName }}</div>
               </div>
             </div>
             <div v-else class="row group">
@@ -87,11 +87,11 @@
               <div class="col-md-2 col-sm-3 col-xs-3 q-ma-xs q-pa-md"
                 @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index, deviceInfo)"
                 v-for="(deviceInfo, index) in inventoryData.billPartnerInventory" :key="index"
-                :style="'border: 1px solid ' + deviceInfo.aggregatorDevice.colorCode" align="center">
-              <div class="q-title text-weight-bold" :style="'color:' + deviceInfo.aggregatorDevice.colorCode">
+              :style="'border: 1px solid ' + (deviceInfo.aggregatorDevice ? deviceInfo.aggregatorDevice.colorCode : '#ccc')" align="center">
+            <div v-if="deviceInfo.aggregatorDevice" class="q-title text-weight-bold" :style="'color:' + deviceInfo.aggregatorDevice.colorCode">
                 {{ deviceInfo.count }}
                 </div>
-                <div>{{ deviceInfo.aggregatorDevice.deviceName }}</div>
+              <div v-if="deviceInfo.aggregatorDevice">{{ deviceInfo.aggregatorDevice.deviceName }}</div>
               </div>
             </div>
             <div v-else class="row group">
@@ -106,11 +106,11 @@
               <div class="col-md-2 col-sm-3 col-xs-3 q-ma-xs q-pa-md"
                 @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index, deviceInfo)"
                 v-for="(deviceInfo, index) in inventoryData.faultyInventory" :key="index"
-                :style="'border: 1px solid ' + deviceInfo.aggregatorDevice.colorCode" align="center">
-              <div class="q-title text-weight-bold" :style="'color:' + deviceInfo.aggregatorDevice.colorCode">
+              :style="'border: 1px solid ' + (deviceInfo.aggregatorDevice ? deviceInfo.aggregatorDevice.colorCode : '#ccc')" align="center">
+            <div v-if="deviceInfo.aggregatorDevice" class="q-title text-weight-bold" :style="'color:' + deviceInfo.aggregatorDevice.colorCode">
                 {{ deviceInfo.count }}
                 </div>
-                <div>{{ deviceInfo.aggregatorDevice.deviceName }}</div>
+              <div v-if="deviceInfo.aggregatorDevice">{{ deviceInfo.aggregatorDevice.deviceName }}</div>
               </div>
             </div>
             <div v-else class="row group">
@@ -126,11 +126,11 @@
               <div class="col-md-2 col-sm-3 col-xs-3 q-ma-xs q-pa-md"
                 @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index, deviceInfo)"
                 v-for="(deviceInfo, index) in inventoryData.sendtoRepair" :key="index"
-                :style="'border: 1px solid ' + deviceInfo.aggregatorDevice.colorCode" align="center">
-              <div class="q-title text-weight-bold" :style="'color:' + deviceInfo.aggregatorDevice.colorCode">
+              :style="'border: 1px solid ' + (deviceInfo.aggregatorDevice ? deviceInfo.aggregatorDevice.colorCode : '#ccc')" align="center">
+            <div v-if="deviceInfo.aggregatorDevice" class="q-title text-weight-bold" :style="'color:' + deviceInfo.aggregatorDevice.colorCode">
                 {{ deviceInfo.count }}
                 </div>
-                <div>{{ deviceInfo.aggregatorDevice.deviceName }}</div>
+              <div v-if="deviceInfo.aggregatorDevice">{{ deviceInfo.aggregatorDevice.deviceName }}</div>
               </div>
             </div>
             <div v-else class="row group">

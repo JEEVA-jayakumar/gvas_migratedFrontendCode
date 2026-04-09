@@ -96,7 +96,7 @@
                   :delay="1500"
                 >
                   <div v-if="item.deviceSerialNumbers.length > 0">
-                    <q-item separator class=" text-light-blue" v-for="(subItem,subIndex) in item.deviceSerialNumbers" v-model:key="subIndex">
+                    <q-item separator class=" text-light-blue" v-for="(subItem,subIndex) in item.deviceSerialNumbers"  :key="subIndex">
                       <q-item-section class="text-body1">{{subItem}}</q-item-section>
                       <q-item-section>
                         <q-btn round size="sm" color="negative" icon="clear" @click="fnRemoveScannedItems(index,subIndex)" />
@@ -125,14 +125,10 @@
         table-class="customTableClass" v-model:pagination="paginationControl"
       >
         <!--START: table body modification -->
-        <q-td
-          v-slot:body-cell-deviceType="props"
-          :props="props"
-        >{{props.row.device.name}}</q-td>
-        <q-td
-          v-slot:body-cell-serialNumber="props"
-          :props="props"
-        >{{props.row.serialNumber}}</q-td>
+        <q-td v-slot:body-cell-deviceType="props" :props="props"
+        ><template v-if="props && props.row">{{props.row.device.name}}</template></q-td>
+        <q-td v-slot:body-cell-serialNumber="props" :props="props"
+        ><template v-if="props && props.row">{{props.row.serialNumber}}</template></q-td>
         <q-td v-slot:body-cell-status="props" :props="props">
           <q-btn flat v-if="props.row.status == true" icon="check" color="positive" />
           <q-btn flat v-else-if="props.row.status == false" icon="clear" color="negative" />

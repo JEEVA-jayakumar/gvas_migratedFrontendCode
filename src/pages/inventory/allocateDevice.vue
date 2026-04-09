@@ -206,18 +206,18 @@
                 <q-table table-class="customTableClass" :rows="tableData" :columns="columns"
                   v-model:pagination="paginationControl2" :filter="filter" row-key="id" :loading="toggleAjaxLoadFilter1"
                   :rows-per-page-options="[5, 10, 15, 20]" @request="ajaxLoadAllRegionList">
-                  <template v-slot:body-cell-createdAt="props">
+                  <template v-slot:body-cell-createdAt="props" :props="props">
                     <q-td :props="props">{{
                       props.row.createdAt == null ? 'NA' :
                       $moment(props.row.createdAt).format("Do MMM Y")
                     }}</q-td>
                   </template>
-                  <template v-slot:body-cell-Action="props">
+                  <template v-slot:body-cell-Action="props" :props="props">
                     <q-td :props="props">
                       <q-btn no-caps icon="edit" color="primary" @click="editCount(props.row)" size="xs" round />
                     </q-td>
                   </template>
-                  <template v-slot:body-cell-Action2="props">
+                  <template v-slot:body-cell-Action2="props" :props="props">
                     <q-td :props="props">
                       <div v-if="props.row.updated == true">
                         <q-btn no-caps icon="priority_high" color="orange" size="xs" round />

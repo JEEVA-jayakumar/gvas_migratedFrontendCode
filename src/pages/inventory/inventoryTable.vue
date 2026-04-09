@@ -18,13 +18,13 @@
               class="col-md-2 col-sm-3 col-xs-3 q-ma-xs q-pa-md"
               v-for="(device,index) in inventoryData.centralItems"
               :key="index"
-              :style="'border: 1px solid '+device.device.colorCode"
+              :style="'border: 1px solid ' + (device.device ? device.device.colorCode : '#ccc')"
               align="center"
             >
-              <div class="q-title text-weight-bold" :style="'color:'+device.device.colorCode">
+              <div v-if="device.device" class="q-title text-weight-bold" :style="'color:'+device.device.colorCode">
                 {{device.count}}
               </div>
-              <div>{{device.device.deviceName}}</div>
+              <div v-if="device.device">{{device.device.deviceName}}</div>
             </div>
           </div>
           <div v-else class="row group">
@@ -44,13 +44,13 @@
               @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index,deviceInfo)"
               v-for="(deviceInfo,index) in inventoryData.regionalItems"
               :key="index"
-              :style="'border: 1px solid '+deviceInfo.device.colorCode"
+              :style="'border: 1px solid ' + (deviceInfo.device ? deviceInfo.device.colorCode : '#ccc')"
               align="center"
             >
-              <div class="q-title text-weight-bold" :style="'color:'+deviceInfo.device.colorCode">
+              <div v-if="deviceInfo.device" class="q-title text-weight-bold" :style="'color:'+deviceInfo.device.colorCode">
                 {{deviceInfo.count}}
               </div>
-              <div>{{deviceInfo.device.deviceName}}</div>
+              <div v-if="deviceInfo.device">{{deviceInfo.device.deviceName}}</div>
             </div>
           </div>
           <div v-else class="row group">
@@ -125,13 +125,13 @@
               class="col-md-2 col-sm-3 col-xs-3 q-ma-xs q-pa-md"
               v-for="(device,index) in inventoryData.billPartnerInventory"
               :key="index"
-              :style="'border: 1px solid '+device.device.colorCode"
+              :style="'border: 1px solid ' + (device.device ? device.device.colorCode : '#ccc')"
               align="center"
             >
-              <div class="q-title text-weight-bold" :style="'color:'+device.device.colorCode">
+              <div v-if="device.device" class="q-title text-weight-bold" :style="'color:'+device.device.colorCode">
                 {{device.count}}
               </div>
-              <div>{{device.device.deviceName}}</div>
+              <div v-if="device.device">{{device.device.deviceName}}</div>
             </div>
           </div>
           <div v-else class="row group">
@@ -159,13 +159,13 @@
               class="col-md-2 col-sm-3 col-xs-3 q-ma-xs q-pa-md"
               v-for="(device,index) in inventoryData.resellarItems"
               :key="index"
-              :style="'border: 1px solid '+device.device.colorCode"
+              :style="'border: 1px solid ' + (device.device ? device.device.colorCode : '#ccc')"
               align="center"
             >
-              <div class="q-title text-weight-bold" :style="'color:'+device.device.colorCode">
+              <div v-if="device.device" class="q-title text-weight-bold" :style="'color:'+device.device.colorCode">
                 {{device.count}}
               </div>
-              <div>{{device.device.deviceName}}</div>
+              <div v-if="device.device">{{device.device.deviceName}}</div>
             </div>
           </div>
           <div v-else class="row group">
@@ -181,13 +181,13 @@
               class="col-md-2 col-sm-3 col-xs-3 q-ma-xs q-pa-md"
               v-for="(device,index) in inventoryData.merchantItems"
               :key="index"
-              :style="'border: 1px solid '+device.device.colorCode"
+              :style="'border: 1px solid ' + (device.device ? device.device.colorCode : '#ccc')"
               align="center"
             >
-              <div class="q-title text-weight-bold" :style="'color:'+device.device.colorCode">
+              <div v-if="device.device" class="q-title text-weight-bold" :style="'color:'+device.device.colorCode">
                 {{device.count}}
               </div>
-              <div>{{device.device.deviceName}}</div>
+              <div v-if="device.device">{{device.device.deviceName}}</div>
             </div>
           </div>
           <div v-else class="row group">
@@ -203,13 +203,13 @@
               class="col-md-2 col-sm-3 col-xs-3 q-ma-xs q-pa-md"
               v-for="(device,index) in inventoryData.faultyInventory"
               :key="index"
-              :style="'border: 1px solid '+device.device.colorCode"
+              :style="'border: 1px solid ' + (device.device ? device.device.colorCode : '#ccc')"
               align="center"
             >
-              <div class="q-title text-weight-bold" :style="'color:'+device.device.colorCode">
+              <div v-if="device.device" class="q-title text-weight-bold" :style="'color:'+device.device.colorCode">
                 {{device.count}}
               </div>
-              <div>{{device.device.deviceName}}</div>
+              <div v-if="device.device">{{device.device.deviceName}}</div>
             </div>
           </div>
           <div v-else class="row group">
@@ -225,13 +225,13 @@
               class="col-md-2 col-sm-3 col-xs-3 q-ma-xs q-pa-md"
               v-for="(device,index) in inventoryData.sendtoRepair"
               :key="index"
-              :style="'border: 1px solid '+device.device.colorCode"
+              :style="'border: 1px solid ' + (device.device ? device.device.colorCode : '#ccc')"
               align="center"
             >
-              <div class="q-title text-weight-bold" :style="'color:'+device.device.colorCode">
+              <div v-if="device.device" class="q-title text-weight-bold" :style="'color:'+device.device.colorCode">
                 {{device.count}}
               </div>
-              <div>{{device.device.deviceName}}</div>
+              <div v-if="device.device">{{device.device.deviceName}}</div>
             </div>
           </div>
           <div v-else class="row group">

@@ -50,8 +50,8 @@
         <q-table row-key="name" :filter="filter" :rows="tableData" class="q-py-none" :columns="columns"
           title="Lead Validation" table-class="customTableClass" v-model:pagination="paginationControl">
           <!--START: table body modification -->
-          <q-td v-slot:body-cell-deviceType="props" :props="props">{{ props.row.device.name }}</q-td>
-          <q-td v-slot:body-cell-serialNumber="props" :props="props">{{ props.row.serialNumber }}</q-td>
+          <q-td v-slot:body-cell-deviceType="props" :props="props"><template v-if="props && props.row">{{ props.row.device.name }}</template></q-td>
+          <q-td v-slot:body-cell-serialNumber="props" :props="props"><template v-if="props && props.row">{{ props.row.serialNumber }}</template></q-td>
           <q-td v-slot:body-cell-status="props" :props="props">
             <q-btn flat v-if="props.row.status == true" icon="check" color="positive" />
             <q-btn flat v-else-if="props.row.status == false" icon="clear" color="negative" />

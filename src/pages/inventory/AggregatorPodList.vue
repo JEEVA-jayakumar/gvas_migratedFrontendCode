@@ -13,21 +13,21 @@
 
       <q-table table-class="customTableClass" :rows="tableData" :columns="columns" :filter="filter" v-model:pagination="paginationControl" :rows-per-page-options="[5, 10, 15, 20, 25]" row-key="name"
         :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
-        <q-td v-slot:body-cell-action="props" :props="props">
+        <q-td v-slot:body-cell-action="props" :props="props"><template v-if="props && props.row">
           <div class="row no-wrap no-padding">
             <q-btn dense no-caps no-wrap label="Modify" icon="far fa-edit" size="md"
               @click="fnShowEditRegion(props.row)" flat class="text-light-blue"></q-btn>
           </div>
-        </q-td>
-        <q-td v-slot:body-cell-createdAt="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-        <q-td v-slot:body-cell-receivedAt="props" :props="props">{{ $moment(props.row.receivedAt).format("Do MMM Y") }}</q-td>
+        </template></q-td>
+        <q-td v-slot:body-cell-createdAt="props" :props="props"><template v-if="props && props.row">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</template></q-td>
+        <q-td v-slot:body-cell-receivedAt="props" :props="props"><template v-if="props && props.row">{{ $moment(props.row.receivedAt).format("Do MMM Y") }}</template></q-td>
 
-        <q-td v-slot:body-cell-receivedAt="props" :props="props">{{
+        <q-td v-slot:body-cell-receivedAt="props" :props="props"><template v-if="props && props.row">{{
           props.row.receivedAt == null ? "NA" :
             $moment(props.row.receivedAt).format("Do MMM Y")
-        }}</q-td>
-        <q-td v-slot:body-cell-DeviceList="props" :props="props">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-        <q-td v-slot:body-cell-ModifyDate="props" :props="props">{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</q-td>
+        }}</template></q-td>
+        <q-td v-slot:body-cell-DeviceList="props" :props="props"><template v-if="props && props.row">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</template></q-td>
+        <q-td v-slot:body-cell-ModifyDate="props" :props="props"><template v-if="props && props.row">{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</template></q-td>
         <template v-slot:top class="bottom-border">
           <div class="col-md-5">
             <q-input clearable v-model="filter" color="grey-9" placeholder="Type.."

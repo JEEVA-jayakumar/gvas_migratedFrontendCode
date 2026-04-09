@@ -70,7 +70,7 @@
               :loading="tableAjaxLoading"
               color="primary"
             >
-              <template slot="top" slot-scope="props">
+              <template v-slot:top slot-scope="props">
                 <!--START: table filter,search -->
                 <div class="col-md-5">
                   <q-search

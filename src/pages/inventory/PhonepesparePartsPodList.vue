@@ -11,24 +11,24 @@
       <!--START: table lead validation -->
       <q-table table-class="customTableClass" :columns="columns" :rows="tableData" color="grey-9" :filter="filterSearch" v-model:pagination="paginationControl" :rows-per-page-options="[5, 10, 15, 20, 25]"
         :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
-        <q-td v-slot:body-cell-updated_date="props" :props="props">{{
+        <q-td v-slot:body-cell-updated_date="props" :props="props"><template v-if="props && props.row">{{
           props.row.updated_date == null
             ? "NA"
             : $moment(props.row.updated_date).format("Do MMM Y")
-        }}</q-td>
-        <q-td v-slot:body-cell-created_date="props" :props="props">{{
+        }}</template></q-td>
+        <q-td v-slot:body-cell-created_date="props" :props="props"><template v-if="props && props.row">{{
           props.row.created_date == null
             ? "NA"
             : $moment(props.row.created_date).format("Do MMM Y")
-        }}</q-td>
-        <q-td v-slot:body-cell-regionAreaName="props" :props="props">{{
+        }}</template></q-td>
+        <q-td v-slot:body-cell-regionAreaName="props" :props="props"><template v-if="props && props.row">{{
           props.row.allocate_region == null
             ? "NA"
             : props.row.allocate_region.regionAreaName
-        }}</q-td>
-        <q-td v-slot:body-cell-name="props" :props="props">{{
+        }}</template></q-td>
+        <q-td v-slot:body-cell-name="props" :props="props"><template v-if="props && props.row">{{
           props.row.allocate_so == null ? "NA" : props.row.allocate_so.name+" | "+props.row.allocate_so.employeeID
-        }}</q-td>
+        }}</template></q-td>
         <q-td v-slot:body-cell-status="props" :props="props">
           <span class="label text-positive" v-if="props.row.status == 1">Created</span>
           <span class="label text-primary" v-else-if="props.row.status == 2">Assigned to R.I</span>
@@ -42,12 +42,12 @@
           <span class="label text-negative" v-else>NA</span>
         </q-td>
 
-        <q-td v-slot:body-cell-action="props" :props="props">
+        <q-td v-slot:body-cell-action="props" :props="props"><template v-if="props && props.row">
           <q-btn highlight push class="q-mx-sm" color="positive" size="sm"
             :disable="props.row.status == 1 || props.row.status == 3 || props.row.status == 5 || props.row.status == 6 && props.row.owner == 2 || props.row.status == undefined"
             @click="updatePodDetails(props.row)">Update</q-btn>
-        </q-td>
-        <template slot="top">
+        </template></q-td>
+        <template v-slot:top>
           <!--START: table filter,search -->
           <div class="col-md-5">
             <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.."

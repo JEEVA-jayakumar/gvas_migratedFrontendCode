@@ -22,11 +22,11 @@
         <q-table table-class="customTableClass" :columns="columns" :rows="tableData" color="grey-9"
           :filter="filterSearch" v-model:pagination="paginationControl" :rows-per-page-options="[5, 10, 15, 20, 25]"
           :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
-          <q-td v-slot:body-cell-updated_at="props" :props="props">{{
+          <q-td v-slot:body-cell-updated_at="props" :props="props"><template v-if="props && props.row">{{
             props.row.updatedAt == null ? "NA" :
               $moment(props.row.updatedAt).format("Do MMM Y")
-          }}</q-td>
-          <template slot="top">
+          }}</template></q-td>
+          <template v-slot:top>
             <!--START: table filter,search -->
             <div class="col-md-5">
               <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.."
