@@ -2,7 +2,7 @@
   <q-page>
     <div class="q-ma-md">
       <!-- Merchant details -->
-      <div class="row q-ma-xs">
+      <div class="row q-ma-xs" v-if="formData && formData.shortLead">
         <div class="col-6 col-lg-3">
           <div class="q-title q-my-md capitalize">{{formData.shortLead.leadName}}</div>
           <div
@@ -15,7 +15,7 @@
           <div class="no-margin">{{formData.shortLead.contactNumber}}</div>
           <div>{{formData.shortLead.alternateContactNumber}}</div>
         </div>
-        <div class="col-122 col-lg-3">
+        <div class="col-12 col-lg-3">
           <div class="q-title q-my-md">Address</div>
           <div class="capitalize no-margin">{{formData.shortLead.leadAddress}}</div>
           <div
@@ -37,7 +37,7 @@
         <div class="col-md-6">
           <div class="row">
             <!-- Device -->
-            <div class="col-12">
+            <div class="col-12" v-if="formData && formData.shortLead && formData.shortLead.device">
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
                 <q-card-section class="q-pa-sm bottom-border title-bg">
                   <div class="row items-center">
@@ -50,21 +50,21 @@
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
                   <q-list separator no-border class="no-padding q-body-1">
-                    <q-item class="q-pa-sm q-body-1">
+                    <q-item class="q-pa-sm q-body-1" v-if="formData.shortLead.plan">
                       <q-item-section>Plan</q-item-section>
                       <q-item-section side>{{formData.shortLead.plan.planName}}</q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Setup Fees</q-item-section>
-                      <q-item-section side v-if="this.getShortLeadInfo.leadSource?.id === 114">Rs. {{formData.shortLead.setUpFeeAppliedAmount}}</q-item-section>
+                      <q-item-section side v-if="getShortLeadInfo.leadSource?.id === 114">Rs. {{formData.shortLead.setUpFeeAppliedAmount}}</q-item-section>
                       <q-item-section side v-else>Rs. {{formData.shortLead.setupFees}}</q-item-section>
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Recurring Fees</q-item-section>
-                      <q-item-section side v-if="this.getShortLeadInfo.leadSource?.id === 114">Rs. {{formData.shortLead.recurringFeeAppliedAmount}}</q-item-section>
+                      <q-item-section side v-if="getShortLeadInfo.leadSource?.id === 114">Rs. {{formData.shortLead.recurringFeeAppliedAmount}}</q-item-section>
                       <q-item-section side v-else>Rs. {{formData.shortLead.recurringFees}}</q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm q-body-1">
+                    <q-item class="q-pa-sm q-body-1" v-if="formData.shortLead.merchantCategory">
                       <q-item-section>Merchant Category</q-item-section>
                       <q-item-section side>{{formData.shortLead.merchantCategory.merchantCategoryName}}</q-item-section>
                     </q-item>
@@ -618,82 +618,93 @@ export default {
     ]),
 
     debitModelLesserThan() {
-    if (this.getShortLeadInfo.leadSource?.id === 114) {
-      return this.formData.shortLead.appliedDebitLessthanAmount;
-    } else {
-      return this.formData.shortLead.debitLessthanAmount;
-    }
-  },
-  debitModelGreaterThan() {
-    if (this.getShortLeadInfo.leadSource?.id === 114) {
-      return this.formData.shortLead.appliedDebitGreaterthanAmount;
-    } else {
-      return this.formData.shortLead.debitGreaterthanAmount;
-    }
-  },
-  debitModelStdCC() {
-    if (this.getShortLeadInfo.leadSource?.id === 114) {
-      return this.formData.shortLead.appliedStdCC;
-    } else {
-      return this.formData.shortLead.stdCC;
-    }
-  },
-  debitModelPremiumCC() {
-    if (this.getShortLeadInfo.leadSource?.id === 114) {
-      return this.formData.shortLead.appliedPremiumCC;
-    } else {
-      return this.formData.shortLead.premiumCC;
-    }
-  },
-  debitModelCorpCC() {
-    if (this.getShortLeadInfo.leadSource?.id === 114) {
-      return this.formData.shortLead.appliedCorpCC;
-    } else {
-      return this.formData.shortLead.corpCC;
-    }
-  },
-  debitModelIntlCC() {
-    if (this.getShortLeadInfo.leadSource?.id === 114) {
-      return this.formData.shortLead.appliedIntlCC;
-    } else {
-      return this.formData.shortLead.intlCC;
-    }
-  },
-  debitModelSuperPremiumCC() {
-    if (this.getShortLeadInfo.leadSource?.id === 114) {
-      return this.formData.shortLead.appliedSuperPremiumCC;
-    } else {
-      return this.formData.shortLead.superPremiumlCC;
-    }
-  },
-  upiDebitCardUpTo2000() {
-    if (this.getShortLeadInfo.leadSource?.id === 114) {
-      return this.formData.shortLead.appliedUpiDebitCardUpTo2000;
-    } else {
-      return this.formData.shortLead.upiDebitCardUpTo2000;
-    }
-  },
-  upiDebitCardAbove2000() {
-    if (this.getShortLeadInfo.leadSource?.id === 114) {
-      return this.formData.shortLead.appliedUpiDebitCardAbove2000;
-    } else {
-      return this.formData.shortLead.upiDebitCardAbove2000 ;
-    }
-  },
-  upiPrepaidCreditCardsUpTo2000() {
-    if (this.getShortLeadInfo.leadSource?.id === 114) {
-      return this.formData.shortLead.appliedUpiPrepaidCreditCardUpTo2000;
-    } else {
-      return this.formData.shortLead.upiPrepaidCreditCardsUpTo2000;
-    }
-  },
-  upiPrepaidCreditCardsAbove2000() {
-    if (this.getShortLeadInfo.leadSource?.id === 114) {
-      return this.formData.shortLead.appliedUpiPrepaidCreditCardAbove2000;
-    } else {
-      return this.formData.shortLead.upiPrepaidCreditCardsAbove2000 ;
-    }
-  },
+      if (!this.formData.shortLead) return '';
+      if (this.getShortLeadInfo.leadSource?.id === 114) {
+        return this.formData.shortLead.appliedDebitLessthanAmount;
+      } else {
+        return this.formData.shortLead.debitLessthanAmount;
+      }
+    },
+    debitModelGreaterThan() {
+      if (!this.formData.shortLead) return '';
+      if (this.getShortLeadInfo.leadSource?.id === 114) {
+        return this.formData.shortLead.appliedDebitGreaterthanAmount;
+      } else {
+        return this.formData.shortLead.debitGreaterthanAmount;
+      }
+    },
+    debitModelStdCC() {
+      if (!this.formData.shortLead) return '';
+      if (this.getShortLeadInfo.leadSource?.id === 114) {
+        return this.formData.shortLead.appliedStdCC;
+      } else {
+        return this.formData.shortLead.stdCC;
+      }
+    },
+    debitModelPremiumCC() {
+      if (!this.formData.shortLead) return '';
+      if (this.getShortLeadInfo.leadSource?.id === 114) {
+        return this.formData.shortLead.appliedPremiumCC;
+      } else {
+        return this.formData.shortLead.premiumCC;
+      }
+    },
+    debitModelCorpCC() {
+      if (!this.formData.shortLead) return '';
+      if (this.getShortLeadInfo.leadSource?.id === 114) {
+        return this.formData.shortLead.appliedCorpCC;
+      } else {
+        return this.formData.shortLead.corpCC;
+      }
+    },
+    debitModelIntlCC() {
+      if (!this.formData.shortLead) return '';
+      if (this.getShortLeadInfo.leadSource?.id === 114) {
+        return this.formData.shortLead.appliedIntlCC;
+      } else {
+        return this.formData.shortLead.intlCC;
+      }
+    },
+    debitModelSuperPremiumCC() {
+      if (!this.formData.shortLead) return '';
+      if (this.getShortLeadInfo.leadSource?.id === 114) {
+        return this.formData.shortLead.appliedSuperPremiumCC;
+      } else {
+        return this.formData.shortLead.superPremiumlCC;
+      }
+    },
+    upiDebitCardUpTo2000() {
+      if (!this.formData.shortLead) return '';
+      if (this.getShortLeadInfo.leadSource?.id === 114) {
+        return this.formData.shortLead.appliedUpiDebitCardUpTo2000;
+      } else {
+        return this.formData.shortLead.upiDebitCardUpTo2000;
+      }
+    },
+    upiDebitCardAbove2000() {
+      if (!this.formData.shortLead) return '';
+      if (this.getShortLeadInfo.leadSource?.id === 114) {
+        return this.formData.shortLead.appliedUpiDebitCardAbove2000;
+      } else {
+        return this.formData.shortLead.upiDebitCardAbove2000 ;
+      }
+    },
+    upiPrepaidCreditCardsUpTo2000() {
+      if (!this.formData.shortLead) return '';
+      if (this.getShortLeadInfo.leadSource?.id === 114) {
+        return this.formData.shortLead.appliedUpiPrepaidCreditCardUpTo2000;
+      } else {
+        return this.formData.shortLead.upiPrepaidCreditCardsUpTo2000;
+      }
+    },
+    upiPrepaidCreditCardsAbove2000() {
+      if (!this.formData.shortLead) return '';
+      if (this.getShortLeadInfo.leadSource?.id === 114) {
+        return this.formData.shortLead.appliedUpiPrepaidCreditCardAbove2000;
+      } else {
+        return this.formData.shortLead.upiPrepaidCreditCardsAbove2000 ;
+      }
+    },
   },
 
   created() {

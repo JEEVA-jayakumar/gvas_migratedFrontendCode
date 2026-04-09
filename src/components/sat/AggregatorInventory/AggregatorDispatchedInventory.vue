@@ -70,7 +70,7 @@
                 <q-table title="Lead Validation" table-class="customTableClass" class="q-py-none"
                     :rows="deviceregionalInventoryList" :columns="columnData" :filter="filter" v-model:pagination="paginationControl" :loading="toggleAjaxLoadFilter" row-key="name">
                     <template v-slot:body-cell-inboundVerified="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
                         <q-btn flat v-if="props.row.inboundVerifiedStatus == 1" icon="check" color="positive" />
                         <q-btn flat v-else-if="props.row.inboundVerifiedStatus == 2" icon="clear" color="negative" />

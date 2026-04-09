@@ -486,7 +486,7 @@
                                 multiline
                                 class="full-width"
                               >
-                                <template slot="header">
+                                <template v-slot:header>
                                   <q-item-section icon="attach_file" />
                                   <q-item-section
                                     class="q-body-1"
@@ -539,7 +539,7 @@
                                 opened
                                 class="full-width"
                               >
-                                <template slot="header">
+                                <template v-slot:header>
                                   <q-item-section icon="apps" />
                                   <q-item-section
                                     class="q-body-1"
@@ -561,7 +561,7 @@
                                       class="full-width"
                                       indent
                                     >
-                                      <template slot="header">
+                                      <template v-slot:header>
                                         <q-item-section icon="attach_file" />
                                         <q-item-section
                                           class="q-body-1"

@@ -34,7 +34,7 @@
                                 v-if="index.toString()==documents[0].subDocumentType">
                                     <div class="col-md-12 q-body-1">
                                         <q-expansion-item separator indent opened group="closeOnOpen" multiline class="full-width">
-                                            <template slot="header">
+                                            <template v-slot:header>
                                                 <q-item-section icon="attach_file" />
                                                 <q-item-section class="q-body-1" :label="index" />
                                             </template>
@@ -59,14 +59,14 @@
                                     <div class="row items-center full-width" v-else>
                                     <div class="col-md-12 q-body-1">
                                         <q-expansion-item separator opened group="closeOnOpen"  class="full-width">
-                                            <template slot="header">
+                                            <template v-slot:header>
                                                 <q-item-section  icon="apps" />
                                                 <q-item-section class="q-body-1" :label="index" />
                                             </template>
                                             <div class="row items-center full-width" v-for="(subDocument,subIndex) in documents" :key="subIndex">
                                                 <div class="col-md-12 q-body-1">
                                                     <q-expansion-item separator opened group="closeOnOpenSubDocument" multiline class="full-width">
-                                                        <template slot="header">
+                                                        <template v-slot:header>
                                                             <q-item-section icon="attach_file" />
                                                             <q-item-section class="q-body-1" :label="subDocument.subDocumentType" />
                                                         </template>

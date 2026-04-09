@@ -25,44 +25,44 @@
         >
           <!--START: table body modification -->
           <template v-slot:body-cell-createdAt="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             <span class="label">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</span>
           </q-td>
           </template>
           <template v-slot:body-cell-submitteSATDate="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             <span class="label">{{ $moment(props.row.updatedAt).format("Do MMM Y") }}</span>
           </q-td>
           </template>
           <template v-slot:body-cell-applicationNumber="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             <span class="label capitalize">{{props.row.applicationNumber}}</span>
           </q-td>
           </template>
           <template v-slot:body-cell-leadName="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             <span class="label capitalize">{{props.row.leadName}}</span>
           </q-td>
           </template>
           <template v-slot:body-cell-leadNumber="props">
-            <q-td class="cursor-pointer"
+            <q-td v-if="props.row" class="cursor-pointer"
             @click="toggleLeadInformation(props.row)"
             :props="props">
             <span class="label text-primary"># {{props.row.leadNumber}}</span>
           </q-td>
           </template>
           <template v-slot:body-cell-createdBy="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             <span class="label">{{props.row.assignedTo?.name == null? "NA":props.row.assignedTo.name}}</span>
           </q-td>
           </template>
           <template v-slot:body-cell-leadAddress="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             <span class="label">{{props.row.leadAddress}}</span>
           </q-td>
           </template>
           <template v-slot:body-cell-verifiedStatus="props">
-            <q-td :props="props">{{props.row.verifiedStatus}}</q-td>
+            <q-td v-if="props.row" :props="props">{{props.row.verifiedStatus}}</q-td>
           </template>
 
           <template v-slot:top="props">

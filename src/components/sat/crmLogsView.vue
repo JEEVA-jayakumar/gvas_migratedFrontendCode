@@ -30,7 +30,7 @@
         row-key="name"
       >
         <template v-slot:body-cell-attemptno="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             {{
           props.row.orderId == null ? "NA" : props.row.orderId
         }}
@@ -38,7 +38,7 @@
           </template>
 
         <template v-slot:body-cell-dateandtime="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           {{ formatDateTime(props.row.inputDate) }}
 

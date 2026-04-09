@@ -245,7 +245,7 @@ import { not, or } from '@vuelidate/validators';
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+              message: error.body?.message == null ? "Please Try Again Later !" : error.body?.message,
               icon: "thumb_down"
             });
           });

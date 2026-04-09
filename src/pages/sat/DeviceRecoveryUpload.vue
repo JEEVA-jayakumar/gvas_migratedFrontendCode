@@ -30,7 +30,7 @@
         :filter="filterSearch" v-model:pagination="paginationControl" row-key="index" :loading="tableAjaxLoading"
         color="light-blue">
         <template v-slot:body-cell-action="props">
-          <q-td :props="props">
+          <q-td :props="props" v-if="props.row">
           <q-btn @click="removeScannedItems(props)" label="Remove" icon="close" color="red-6" size="sm" />
         </q-td>
         </template>

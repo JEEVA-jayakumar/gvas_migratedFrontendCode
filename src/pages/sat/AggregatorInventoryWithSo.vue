@@ -12,13 +12,13 @@
           @request="ajaxLoadAllLeadInfo"
         >
           <template v-slot:body-cell-created_at="props">
-            <q-td :props="props">{{
+            <q-td v-if="props.row" :props="props">{{
               props.row.created_at == null ? "NA" :
                 $moment(props.row.created_at).format("Do MMM Y")
             }}</q-td>
           </template>
           <template v-slot:body-cell-updated_at="props">
-            <q-td :props="props">{{
+            <q-td v-if="props.row" :props="props">{{
               props.row.updated_at == null ? "NA" :
                 $moment(props.row.updated_at).format("Do MMM Y")
             }}</q-td>

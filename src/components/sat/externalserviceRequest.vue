@@ -106,6 +106,7 @@
               <q-tr
                 :props="props"
                 class="bottom-border"
+                v-if="props.row"
               >
                 <q-td
                   key="merchant_name"
@@ -197,19 +198,19 @@
             @request="ajaxLoadAllLeadInfo1"
           >
             <template v-slot:body-cell-serviceReqTicketId="props">
-              <q-td :props="props"> {{ props.row.serviceReqTicketId }}</q-td>
+              <q-td :props="props" v-if="props.row"> {{ props.row.serviceReqTicketId }}</q-td>
             </template>
             <template v-slot:body-cell-merchant_name="props">
-              <q-td :props="props"> {{ props.row.meName }}</q-td>
+              <q-td :props="props" v-if="props.row"> {{ props.row.meName }}</q-td>
             </template>
             <template v-slot:body-cell-assignedTo="props">
-              <q-td :props="props"> {{ props.row.assignedTo == null ? "NA" : props.row.assignedTo.name }}</q-td>
+              <q-td :props="props" v-if="props.row"> {{ props.row.assignedTo == null ? "NA" : props.row.assignedTo.name }}</q-td>
             </template>
             <template v-slot:body-cell-tid="props">
-              <q-td :props="props"> {{ props.row.tid }}</q-td>
+              <q-td :props="props" v-if="props.row"> {{ props.row.tid }}</q-td>
             </template>
             <template v-slot:body-cell-actionContact="props">
-              <q-td :props="props">
+              <q-td :props="props" v-if="props.row">
                 <q-btn
                   class="q-mx-sm"
                   color="blue"
@@ -219,17 +220,17 @@
               </q-td>
             </template>
             <template v-slot:body-cell-dateCreated="props">
-              <q-td :props="props">
+              <q-td :props="props" v-if="props.row">
                 {{ $moment(props.row.createdDate).format("Do MMM YYYY") }}
               </q-td>
             </template>
             <template v-slot:body-cell-tat="props">
-              <q-td :props="props">
+              <q-td :props="props" v-if="props.row">
                 <span :style="getHoursAgoColor(props.row.createdDate)">{{ getHoursAgo(props.row.createdDate) }}</span>
               </q-td>
             </template>
             <template v-slot:body-cell-actionLog="props">
-              <q-td :props="props">
+              <q-td :props="props" v-if="props.row">
                 <q-btn
                   class="q-mx-sm"
                   color="blue"
@@ -239,7 +240,7 @@
               </q-td>
             </template>
             <template v-slot:body-cell-actionPickTickets="props">
-              <q-td :props="props">
+              <q-td :props="props" v-if="props.row">
                 <q-btn
                   v-if="props.row.serviceRequestTicketStatus == 5"
                   class="q-mx-sm"
@@ -250,7 +251,7 @@
               </q-td>
             </template>
             <template v-slot:body-cell-actionReassign="props">
-              <q-td :props="props">
+              <q-td :props="props" v-if="props.row">
                 <q-btn
                   v-if="props.row.serviceRequestTicketStatus == 2"
                   class="q-mx-sm"

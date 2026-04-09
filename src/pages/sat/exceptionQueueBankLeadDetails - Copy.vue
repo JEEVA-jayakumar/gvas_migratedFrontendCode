@@ -254,7 +254,7 @@
                                                 v-if="index.toString()==documents[0].subDocumentType">
                                                     <div class="col-md-12 q-body-1">
                                                         <q-expansion-item separator indent icon-toggle opened group="closeOnOpen" multiline class="full-width">
-                                                            <template slot="header">
+                                                            <template v-slot:header>
                                                                 <q-item-section icon="attach_file" />
                                                                 <q-item-section class="q-body-1" :caption="documents[0].uploadedDocuments.length + 'Document(s)'" :label="index" />
                                                             </template>
@@ -282,7 +282,7 @@
                                                     <!-- <pre>{{documents}}</pre> -->
                                                     <div class="col-md-12 q-body-1">
                                                         <q-expansion-item separator indent sicon-toggle opened group="closeOnOpen"  class="full-width">
-                                                            <template slot="header">
+                                                            <template v-slot:header>
                                                                 <q-item-section  icon="apps" />
                                                                 <q-item-section class="q-body-1"
                                                                 :caption="documents.length + 'Type(s)'"
@@ -291,7 +291,7 @@
                                                             <div class="row items-center full-width" v-for="(subDocument,subIndex) in documents" :key="subIndex">
                                                                 <div class="col-md-12 q-body-1">
                                                                     <q-expansion-item separator icon-toggle opened group="closeOnOpenSubDocument" multiline class="full-width" indent>
-                                                                        <template slot="header">
+                                                                        <template v-slot:header>
                                                                             <q-item-section icon="attach_file" />
                                                                             <q-item-section class="q-body-1"
                                                                             :caption="subDocument.uploadedDocuments.length + 'Document(s)'"

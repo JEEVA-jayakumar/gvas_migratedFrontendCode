@@ -20,10 +20,12 @@
         @request="ajaxLoadAllCMS"
       >
         <template v-slot:body-cell-updatedAt="props">
-          <q-td :props="props">{{ $moment(props.row.leadInformation.updatedAt).format("Do MMM Y") }}</q-td>
+          <q-td :props="props" v-if="props.row && props.row.leadInformation">
+            {{ $moment(props.row.leadInformation.updatedAt).format("Do MMM Y") }}
+          </q-td>
         </template>
         <template v-slot:body-cell-Status="props">
-          <q-td :props="props">
+          <q-td :props="props" v-if="props.row && props.row.leadInformation">
             <span class="label text-positive" v-if="props.row.leadInformation.cmsLeadStatus == 23">submitted to Mars</span>
             <span class="label text-amber" v-else-if="props.row.leadInformation.cmsLeadStatus == 11">Mars Approved</span>
             <span class="label text-positive" v-else-if="props.row.leadInformation.cmsLeadStatus == 15">NH Approved</span>
@@ -39,7 +41,7 @@
           </q-td>
         </template>
         <template v-slot:body-cell-action="props">
-          <q-td :props="props">
+          <q-td :props="props" v-if="props.row && props.row.leadInformation">
             <q-btn
               v-if="props.row.leadInformation.cmsLeadStatus== 22 || props.row.leadInformation.cmsLeadStatus==15 || props.row.leadInformation.cmsLeadStatus==25 "
 
@@ -127,16 +129,18 @@
         @request="ajaxLoadAllLeadInfo"
       >
         <template v-slot:body-cell-tid="props">
-          <q-td :props="props">{{ props.row.deviceStatus != 6 ? "NA" : props.row.tid }}</q-td>
+          <q-td :props="props" v-if="props.row">{{ props.row.deviceStatus != 6 ? "NA" : props.row.tid }}</q-td>
         </template>
         <template v-slot:body-cell-action="props">
-          <q-btn
-            push
-            outline
-            color="purple-9"
-            size="sm"
-            @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
-          >Data Entry</q-btn>
+          <q-td :props="props" v-if="props.row">
+            <q-btn
+              push
+              outline
+              color="purple-9"
+              size="sm"
+              @click="$router.push('/sat/change/management/'+ props.row.tid+'/edit/data')"
+            >Data Entry</q-btn>
+          </q-td>
         </template>
         <template v-slot:top-right>
           <q-input

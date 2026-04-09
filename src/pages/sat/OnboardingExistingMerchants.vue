@@ -164,12 +164,12 @@
                   @request="ajaxLoadAllLeadInfo"
                 >
                   <template v-slot:body-cell-tid="props">
-                    <q-td :props="props" class="customTd">
+                    <q-td :props="props" class="customTd" v-if="props.row">
                       <div class="text-primary">{{ props.row.tid || "NA" }}</div>
                     </q-td>
                   </template>
                   <template v-slot:body-cell-mid="props">
-                    <q-td :props="props" class="customTd">
+                    <q-td :props="props" class="customTd" v-if="props.row">
                       <div class="text-primary">{{ props.row.mid || "NA" }}</div>
                     </q-td>
                   </template>
@@ -238,12 +238,12 @@
                   @request="ajaxLoadAllLeadInfo1"
                 >
                   <template v-slot:body-cell-tid="props">
-                    <q-td :props="props" class="customTd">
+                    <q-td :props="props" class="customTd" v-if="props.row">
                       <div class="text-primary">{{ props.row.tid || "NA" }}</div>
                     </q-td>
                   </template>
                   <template v-slot:body-cell-mid="props">
-                    <q-td :props="props" class="customTd">
+                    <q-td :props="props" class="customTd" v-if="props.row">
                       <div class="text-primary">{{ props.row.mid || "NA" }}</div>
                     </q-td>
                   </template>

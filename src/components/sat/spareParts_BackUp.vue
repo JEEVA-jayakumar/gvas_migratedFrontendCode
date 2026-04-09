@@ -68,14 +68,14 @@
         </q-tr>
         <!--END: table header -->
         <template v-slot:body-cell-mid="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           <span class="label text-primary"># {{ props.row.mid }}</span>
 
           </q-td>
           </template>
         <template v-slot:body-cell-regionAreaName="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             {{
           props.row.allocate_region == null
             ? "NA"
@@ -84,7 +84,7 @@
           </q-td>
           </template>
          <template v-slot:body-cell-name="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             {{
           props.row.created_by == null
             ? "NA"

@@ -273,9 +273,9 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              error.body.message == null
+              error.body?.message == null
                 ? "Please Try Again Later !"
-                : error.body.message,
+                : error.body?.message,
             icon: "thumb_down"
           });
         });
@@ -299,9 +299,9 @@ export default {
     //         color: "negative",
     //         position: "bottom",
     //         message:
-    //           error.body.message == null
+    //           error.body?.message == null
     //             ? "Please Try Again Later !"
-    //             : error.body.message,
+    //             : error.body?.message,
     //         icon: "thumb_down"
     //       });
     //     });
@@ -325,9 +325,9 @@ export default {
     //         color: "negative",
     //         position: "bottom",
     //         message:
-    //           error.body.message == null
+    //           error.body?.message == null
     //             ? "Please Try Again Later !"
-    //             : error.body.message,
+    //             : error.body?.message,
     //         icon: "thumb_down"
     //       });
     //     });

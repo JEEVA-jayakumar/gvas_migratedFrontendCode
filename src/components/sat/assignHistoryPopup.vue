@@ -30,17 +30,17 @@
         row-key="name"
       >
         <template v-slot:body-cell-date="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           {{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
         >
-        <q-td v-slot:body-cell-agentname="props" :props="props">{{
+        <q-td v-slot:body-cell-agentname="props" v-if="props.row" :props="props">{{
           props.row.soUser.name == null ? "NA" : props.row.soUser.name
         }}
           </q-td>
           </template>
         <!-- <template v-slot:body-cell-remarks="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             {{
             props.row.reAssignRemark == null ? "NA" : props.row.reAssignRemark
           }}

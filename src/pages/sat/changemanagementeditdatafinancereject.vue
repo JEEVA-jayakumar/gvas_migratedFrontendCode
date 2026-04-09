@@ -2576,7 +2576,7 @@ export default {
               innerSelf.$q.notify({
                 color: "negative",
                 position: "bot  tom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: error.body?.message == null ? "Please Try Again Later !" : error.body?.message,
                 icon: "thumb_down"
               });
             });

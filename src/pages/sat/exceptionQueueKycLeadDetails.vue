@@ -21,7 +21,7 @@
       </div>
 
       <!-- Merchant details -->
-      <div class="row q-ma-xs">
+      <div class="row q-ma-xs" v-if="formData && formData.shortLead">
         <div class="col">
           <div class="q-title q-my-md capitalize">{{formData.shortLead.leadName}}</div>
           <div
@@ -46,7 +46,7 @@
       <!-- <pre>{{formData.shortLead.leadDocuments}}</pre> -->
       <!-- Device, Exception, Payment, MDR and Documents -->
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6" v-if="formData && formData.shortLead && formData.shortLead.device">
           <div class="flex">
             <!-- Device -->
             <div class="full-width">
@@ -62,7 +62,7 @@
                 </q-card-section>
                 <q-card-section class="q-pa-sm">
                   <q-list separator no-border class="no-padding q-body-1">
-                    <q-item class="q-pa-sm q-body-1">
+                    <q-item class="q-pa-sm q-body-1" v-if="formData.shortLead.plan">
                       <q-item-section>Plan</q-item-section>
                       <q-item-section>{{formData.shortLead.plan.planName}}</q-item-section>
                     </q-item>
@@ -74,7 +74,7 @@
                       <q-item-section>Recurring Fees</q-item-section>
                       <q-item-section>Rs. {{formData.shortLead.recurringFees}}</q-item-section>
                     </q-item>
-                    <q-item class="q-pa-sm q-body-1">
+                    <q-item class="q-pa-sm q-body-1" v-if="formData.shortLead.merchantCategory">
                       <q-item-section>Merchant Category</q-item-section>
                       <q-item-section>{{formData.shortLead.merchantCategory.merchantCategoryName}}</q-item-section>
                     </q-item>
@@ -300,7 +300,7 @@
           </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6" v-if="formData && formData.shortLead">
           <div class="flex">
             <!-- Exception -->
             <div class="full-width">

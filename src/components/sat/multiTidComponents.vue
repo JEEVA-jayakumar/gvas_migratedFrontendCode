@@ -73,7 +73,7 @@
                                         </q-th>
                                     </q-tr>
                                     <template v-slot:body-cell-baseTid="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
                                         <span class="label text-primary">{{ props.row.baseTid == null ? "NA" :
                                                 props.row.baseTid
@@ -82,7 +82,7 @@
           </q-td>
           </template>
                                     <template v-slot:body-cell-action="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
                                         <!-- v-if="props.row.upiEnabled != true" -->
                                         <q-btn   push class="q-mx-sm" color="positive" size="sm"

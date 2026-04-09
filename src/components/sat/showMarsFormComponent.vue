@@ -182,9 +182,9 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input @blur="v$.merchant.salesInformation.applicationDate.$touch"
-                  :error="v$.merchant.salesInformation.applicationDate.$error" color="grey-9" format="DD/MM/YYYY"
-                  format-model="number" modal v-model="merchant.salesInformation.applicationDate"
+                <q-input type="date" @blur="v$.merchant.salesInformation.applicationDate.$touch"
+                  :error="v$.merchant.salesInformation.applicationDate.$error" color="grey-9"
+                  v-model="merchant.salesInformation.applicationDate"
                   label="Application Date*" placeholder="Application Date*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.salesInformation.applicationDate.alert
@@ -204,9 +204,9 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input format="DD/MM/YYYY" format-model="number"
+                <q-input type="date"
                   @blur="v$.merchant.salesInformation.aggreementDate.$touch"
-                  :error="v$.merchant.salesInformation.aggreementDate.$error" color="grey-9" modal
+                  :error="v$.merchant.salesInformation.aggreementDate.$error" color="grey-9"
                   v-model="merchant.salesInformation.aggreementDate" label="Agreement Date*"
                   placeholder="Agreement Date*" />
                 <div class="text-negative" v-if="
@@ -501,11 +501,11 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input format="DD/MM/YYYY" format-model="number" @blur="
+                <q-input type="date" @blur="
                     v$.merchant.salesInformation.loanDisbursementDate.$touch
                   " :error="
                     v$.merchant.salesInformation.loanDisbursementDate.$error
-                  " color="grey-9" modal v-model="merchant.salesInformation.loanDisbursementDate"
+                  " color="grey-9" v-model="merchant.salesInformation.loanDisbursementDate"
                   label="Disbursement Date*" placeholder="Disbursement Date*" />
                 <div class="text-negative" v-if="
                     error.field.merchant.salesInformation.loanDisbursementDate
@@ -560,9 +560,9 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input format="DD/MM/YYYY" format-model="number"
+                <q-input type="date"
                   @blur="v$.merchant.salesInformation.tenureStartDate.$touch"
-                  :error="v$.merchant.salesInformation.tenureStartDate.$error" color="grey-9" modal
+                  :error="v$.merchant.salesInformation.tenureStartDate.$error" color="grey-9"
                   v-model="merchant.salesInformation.tenureStartDate" label="Start Date*"
                   placeholder="Tenure Start Date*" />
                 <div class="text-negative" v-if="
@@ -1002,7 +1002,7 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input format="DD/MM/YYYY" format-model="number" color="grey-9" modal
+                <q-input type="date" color="grey-9"
                   @blur="v$.merchant.companyInformation.establishYear.$touch"
                   :error="v$.merchant.companyInformation.establishYear.$error"
                   v-model="merchant.companyInformation.establishYear" label="Year of Establishment*"
@@ -2081,9 +2081,9 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-input format="DD/MM/YYYY" format-model="number"
+                <q-input type="date"
                   @blur="v$.merchant.businessInformation.memberSince.$touch"
-                  :error="v$.merchant.businessInformation.memberSince.$error" color="grey-9" modal
+                  :error="v$.merchant.businessInformation.memberSince.$error" color="grey-9"
                   v-model="merchant.businessInformation.memberSince" label="Member since*"
                   placeholder="Member since*" />
                 <div class="text-negative" v-if="

@@ -3,7 +3,7 @@
     <div>
       <staticQrGeneralLeadInformation
         v-if="propToggleLeadInformation"
-        v-model:leadInformation="addtnLeadInformation"
+        :leadInformation="addtnLeadInformation"
         :propToggleLeadInformationPop="propToggleLeadInformation"
         @closeLeadInformation="toggleLeadInformation"
       />
@@ -26,14 +26,12 @@
           @request="ajaxLoadAllLeadInfo"
         >
           <template v-slot:body-cell-createdAt="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props.row">
             {{ $moment(props.row.date).format("Do MMM Y") }}
           </q-td>
           </template>
           <template v-slot:body-cell-leadNumber="props">
-            <q-td :props="props"
-            class="cursor-pointer"
-            @click="toggleLeadInformation(props.row)">
+            <q-td v-if="props.row" :props="props" class="cursor-pointer" @click="toggleLeadInformation(props.row)">
 
             <span
               class="label"
@@ -48,14 +46,14 @@
           </q-td>
           </template>
           <template v-slot:body-cell-leadName="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props.row">
 
             <span class="capitalize">{{ props.row.marketingName }}</span>
 
           </q-td>
           </template>
           <template v-slot:body-cell-state="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props.row">
 
             <span class="capitalize">{{ props.row.state }}</span>
 
@@ -63,14 +61,14 @@
           </template>
 
           <template v-slot:body-cell-assignedTo.name="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props.row">
 
             <span class="capitalize">{{ props.row.salesOfficerName }}</span>
 
           </q-td>
           </template>
           <!-- <template v-slot:body-cell-leadStatus="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
             <span class="label text-primary" v-if="props.row.leadStatus == 1"
               >Pending With Bank Details</span
@@ -133,7 +131,7 @@
           </q-td>
           </template> -->
           <template v-slot:body-cell-leadStatus="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props.row">
 
             <span class="label text-primary" v-if="props.row.leadStatus == 1"
               >Pending With Bank Details</span
@@ -227,7 +225,7 @@
           </q-td>
           </template>
           <template v-slot:body-cell-action="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props.row">
 
             <q-btn
               class="btn1"
@@ -296,7 +294,7 @@
           </template>
 
           <template v-slot:body-cell-verifiedFinanceStatus="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props.row">
 
             <span
               class="label text-green"

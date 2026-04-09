@@ -164,7 +164,7 @@
           >
             <template v-slot:body-cell-leadNumber="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 class="cursor-pointer"
                 @click="toggleLeadInformation(props.row.leadInformation)"
               >
@@ -175,7 +175,7 @@
             </template>
             <template v-slot:body-cell-submitToMarsDate="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 >{{
                   $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y")
                 }}</q-td
@@ -183,13 +183,13 @@
             </template>
             <template v-slot:body-cell-createdAt="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
               >
             </template>
             <template v-slot:body-cell-tid="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 class="customTd"
               >
                 <div class="text-primary">{{ props.row.tid }}</div>
@@ -197,7 +197,7 @@
             </template>
             <template v-slot:body-cell-mid="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 class="customTd"
               >
                 <div class="text-primary">{{ props.row.mid }}</div>
@@ -205,7 +205,7 @@
             </template>
             <template v-slot:body-cell-deviceAddress="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 class="customTd customCellLength"
               >
                 <div>
@@ -255,7 +255,7 @@
             </template> -->
             <template v-slot:body-cell-leadNumber="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 class="cursor-pointer"
                 @click="toggleLeadInformation(props.row.leadInformation)"
               >
@@ -266,7 +266,7 @@
             </template>
             <template v-slot:body-cell-submitToMarsDate="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 >{{
                   $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y")
                 }}</q-td
@@ -274,13 +274,13 @@
             </template>
             <template v-slot:body-cell-createdAt="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
               >
             </template>
             <template v-slot:body-cell-deviceAddress="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 class="customTd customCellLength"
               >
                 <div>{{ props.row.deviceAddress }}</div>
@@ -289,7 +289,7 @@
 
             <template v-slot:body-cell-tid="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 class="customTd"
               >
                 <div class="text-primary">{{ props.row.tid }}</div>
@@ -297,14 +297,14 @@
             </template>
             <template v-slot:body-cell-mid="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 class="customTd"
               >
                 <div class="text-primary">{{ props.row.mid }}</div>
               </q-td>
             </template>
             <template v-slot:body-cell-action="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 <q-btn
 
                   push
@@ -369,7 +369,7 @@
             </template> -->
             <template v-slot:body-cell-leadNumber="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 class="cursor-pointer"
                 @click="toggleLeadInformation(props.row.leadInformation)"
               >
@@ -380,7 +380,7 @@
             </template>
             <template v-slot:body-cell-submitToMarsDate="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 >{{
                   $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM Y")
                 }}</q-td
@@ -388,13 +388,13 @@
             </template>
             <template v-slot:body-cell-createdAt="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td
               >
             </template>
             <template v-slot:body-cell-deviceAddress="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 class="customTd customCellLength"
               >
                 <div>{{ props.row.deviceAddress }}</div>
@@ -403,7 +403,7 @@
 
             <template v-slot:body-cell-tid="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 class="customTd"
               >
                 <div class="text-primary">{{ props.row.tid }}</div>
@@ -411,14 +411,14 @@
             </template>
             <template v-slot:body-cell-mid="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 class="customTd"
               >
                 <div class="text-primary">{{ props.row.mid }}</div>
               </q-td>
             </template>
             <template v-slot:body-cell-action="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 <q-btn
 
                   push

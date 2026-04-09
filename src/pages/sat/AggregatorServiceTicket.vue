@@ -17,21 +17,21 @@
         @request="ajaxLoadAllLeadInfo"
       >
         <template v-slot:body-cell-createdDate="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           <span class="label">{{ $moment(props.row.createdDate).format("Do MMM Y") }}</span>
 
           </q-td>
           </template>
         <template v-slot:body-cell-tid="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           <span class="label text-primary"># {{ props.row.serviceRequestData.tid }}</span>
 
           </q-td>
           </template>
         <template v-slot:body-cell-ticketid="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           <span class="label text-primary"
             ># {{ props.row.serviceRequestData.serviceReqTicketId }}</span
@@ -40,7 +40,7 @@
           </q-td>
           </template>
         <template v-slot:body-cell-statusReport="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             {{
           props.row.serviceRequestType.name
         }}
@@ -48,35 +48,35 @@
           </template>
 
         <template v-slot:body-cell-merchantname="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             {{
           props.row.serviceRequestData.meName
         }}
           </q-td>
           </template>
         <template v-slot:body-cell-merchantaddress="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             {{
           props.row.serviceRequestData.address
         }}
           </q-td>
           </template>
         <template v-slot:body-cell-typeofvisit="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             {{
           props.row.resolutionType
         }}
           </q-td>
           </template>
         <!-- <template v-slot:body-cell-user="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             {{
           props.row.id
         }}
           </q-td>
           </template> -->
         <template v-slot:body-cell-viewDocument="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           <div
             v-if="
@@ -110,7 +110,7 @@
           </q-td>
           </template>
         <template v-slot:body-cell-pictureOfShop="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           <div
             v-if="
@@ -144,7 +144,7 @@
           </q-td>
           </template>
         <template v-slot:body-cell-closedate="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           <span class="label">{{ $moment(props.row.updatedDate).format("Do MMM Y") }}</span>
 
@@ -152,7 +152,7 @@
           </template>
 
         <template v-slot:body-cell-status="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           <span
             class="label text-positive"
@@ -177,14 +177,14 @@
           </q-td>
           </template>
         <template v-slot:body-cell-device="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           {{ props.row.serviceRequestData.deviceType }}
 
           </q-td>
           </template>
         <template v-slot:body-cell-action="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           <q-btn
             :disabled="props.row.serviceRequestSubTicketStatus.id != 102 "
@@ -200,7 +200,7 @@
           </q-td>
           </template>
         <template v-slot:body-cell-data="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           <q-btn
             :disabled="props.row.serviceRequestSubTicketStatus.id != 102 "
@@ -484,9 +484,9 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              error.body.message == null
+              error.body?.message == null
                 ? "Please Try Again Later !"
-                : error.body.message,
+                : error.body?.message,
             icon: "thumb_down",
           });
           this.$q.loading.hide();
@@ -521,9 +521,9 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              error.body.message == null
+              error.body?.message == null
                 ? "Please Try Again Later !"
-                : error.body.message,
+                : error.body?.message,
             icon: "thumb_down",
           });
           this.$q.loading.hide();

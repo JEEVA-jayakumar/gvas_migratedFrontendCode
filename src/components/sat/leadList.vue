@@ -36,13 +36,13 @@
       >
         <!--START: table body modification -->
         <template v-slot:body-cell-createdAt="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             {{ $moment(props.row.date).format("Do MMM Y") }}
           </q-td>
           </template>
 
         <template v-slot:body-cell-leadNumber="props">
-            <q-td :props="props"
+            <q-td v-if="props.row" :props="props"
           class="cursor-pointer"
           @click="toggleLeadInformation(props.row)">
 
@@ -55,7 +55,7 @@
           </template>
 
         <template v-slot:body-cell-leadName="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           <span class="capitalize">{{props.row.merchantName}}</span>
 
@@ -63,14 +63,14 @@
           </template>
 
         <template v-slot:body-cell-state="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           <span class="capitalize">{{props.row.state}}</span>
 
           </q-td>
           </template>
         <template v-slot:body-cell-verifiedFinanceStatus="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           <span
             class="label text-positive"
@@ -89,7 +89,7 @@
           </q-td>
           </template>
         <template v-slot:body-cell-action="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
           <q-btn
             v-if="props.row.leadStatus == $LEAD_STATUS_DATA_ENTRY_PENDING"

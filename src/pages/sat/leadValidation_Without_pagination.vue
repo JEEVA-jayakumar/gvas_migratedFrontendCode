@@ -27,13 +27,13 @@
         >
           <!--START: table body modification -->
           <template v-slot:body-cell-date="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
             {{ $moment(props.row.submitteSATDate).format("Do MMM Y") }}
           </q-td>
           </template>
 
           <template v-slot:body-cell-lead_id="props">
-            <q-td :props="props"
+            <q-td v-if="props.row" :props="props"
             class="cursor-pointer"
             @click="toggleLeadInformation(props.row)">
 
@@ -46,7 +46,7 @@
           </template>
 
           <template v-slot:body-cell-leadName="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
             <span class="capitalize">{{props.row.leadName}}</span>
 
@@ -54,7 +54,7 @@
           </template>
 
           <template v-slot:body-cell-state="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
             <span class="capitalize">{{props.row.state}}</span>
 
@@ -62,7 +62,7 @@
           </template>
 
           <template v-slot:body-cell-so_name="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
             <span
               class="capitalize"
@@ -74,7 +74,7 @@
           </template>
 
           <template v-slot:body-cell-finance_approval="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
             <span
               class="label text-positive"
@@ -94,7 +94,7 @@
           </template>
 
           <template v-slot:body-cell-status="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
             <span
               class="label text-positive"
@@ -118,7 +118,7 @@
           </template>
 
           <template v-slot:body-cell-action="props">
-            <q-td :props="props">
+            <q-td v-if="props.row" :props="props">
 
             <q-btn
               v-if="props.row.leadStatus == $LEAD_STATUS_DATA_ENTRY_PENDING"

@@ -30,15 +30,13 @@
         >
           <!--START: table body modification -->
           <template v-slot:body-cell-createdAt="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props.row">
             {{ $moment(props.row.date).format("Do MMM Y") }}
           </q-td>
           </template>
 
           <template v-slot:body-cell-leadNumber="props">
-            <q-td :props="props"
-            class="cursor-pointer"
-            @click="toggleLeadInformation(props.row)">
+            <q-td v-if="props.row" :props="props" class="cursor-pointer" @click="toggleLeadInformation(props.row)">
 
             <span
               class="label"
@@ -49,7 +47,7 @@
           </template>
 
           <template v-slot:body-cell-leadName="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props.row">
 
             <span class="capitalize">{{props.row.merchantName}}</span>
 
@@ -57,7 +55,7 @@
           </template>
 
           <template v-slot:body-cell-state="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props.row">
 
             <span class="capitalize">{{props.row.state}}</span>
 
@@ -65,7 +63,7 @@
           </template>
 
           <template v-slot:body-cell-assignedTo.name="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props.row">
 
             <span class="capitalize">{{props.row.salesOfficerName}}</span>
 
@@ -73,7 +71,7 @@
           </template>
 
           <template v-slot:body-cell-verifiedFinanceStatus="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props.row">
 
             <span
               class="label text-positive"
@@ -93,7 +91,7 @@
           </template>
 
           <template v-slot:body-cell-leadStatus="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props.row">
 
             <span
               class="label text-positive"
@@ -117,7 +115,7 @@
           </template>
 
           <template v-slot:body-cell-action="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props.row">
 
             <q-btn
               v-if="props.row.leadStatus == $LEAD_STATUS_DATA_ENTRY_PENDING"
@@ -171,7 +169,7 @@
           </q-td>
           </template>
           <template v-slot:body-cell-rejectLead="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props.row">
 
              <q-btn
               v-if="props.row.leadStatus == $LEAD_STATUS_SUBMIT_TO_SAT_LEAD  "

@@ -67,7 +67,7 @@
             @request="ajaxLoadAllLeadInfo"
           >
             <template v-slot:body-cell-createdAt="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{
                   props.row.created_date == null
                     ? "NA"
@@ -76,7 +76,7 @@
               </q-td>
             </template>
             <template v-slot:body-cell-updated_date="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{
                   props.row.updated_date == null
                     ? "NA"
@@ -85,7 +85,7 @@
               </q-td>
             </template>
             <template v-slot:body-cell-status="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 <span class="label text-positive" v-if="props.row.status == 1"
                   >Created</span
                 >
@@ -110,7 +110,7 @@
               </q-td>
             </template>
             <template v-slot:body-cell-owner="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 <span class="label text-positive" v-if="props.row.owner == 1"
                   >Central Inventory</span
                 >
@@ -127,7 +127,7 @@
               </q-td>
             </template>
             <template v-slot:body-cell-regionAreaName="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{
                   props.row.allocate_region == null
                     ? "NA"
@@ -136,7 +136,7 @@
               </q-td>
             </template>
             <template v-slot:body-cell-action="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 <div class="row no-wrap no-padding">
                   <q-btn
                     dense
@@ -196,7 +196,7 @@
             @request="ajaxLoadAllLeadInfo1"
           >
             <template v-slot:body-cell-createdAt="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{
                   props.row.created_date == null
                     ? "NA"
@@ -205,7 +205,7 @@
               </q-td>
             </template>
             <template v-slot:body-cell-updated_date="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{
                   props.row.updated_date == null
                     ? "NA"
@@ -214,7 +214,7 @@
               </q-td>
             </template>
             <template v-slot:body-cell-status="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 <span class="label text-positive" v-if="props.row.status == 1"
                   >Created</span
                 >
@@ -239,7 +239,7 @@
               </q-td>
             </template>
             <template v-slot:body-cell-owner="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 <span class="label text-positive" v-if="props.row.owner == 1"
                   >Central Inventory</span
                 >
@@ -256,7 +256,7 @@
               </q-td>
             </template>
             <template v-slot:body-cell-regionAreaName="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{
                   props.row.allocate_region == null
                     ? "NA"

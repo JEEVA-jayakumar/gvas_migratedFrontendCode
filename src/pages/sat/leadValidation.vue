@@ -19,36 +19,36 @@
           :rows-per-page-options="[5,10,15,20]" :loading="toggleAjaxLoadFilter" @request="ajaxLoadAllLeadInfo">
           <!--START: table body modification -->
           <template v-slot:body-cell-createdAt="props">
-            <q-td :props="props">{{ $moment(props.row.date).format("Do MMM Y") }}</q-td>
+            <q-td :props="props" v-if="props && props.row">{{ $moment(props.row.date).format("Do MMM Y") }}</q-td>
           </template>
 
           <template v-slot:body-cell-leadNumber="props">
-            <q-td :props="props" class="cursor-pointer" @click="toggleLeadInformation(props.row)">
+            <q-td :props="props" class="cursor-pointer" @click="toggleLeadInformation(props.row)" v-if="props && props.row">
               <span class="label" :class="[props.row.priority?'text-negative text-weight-bolder':'text-primary']">#
                 {{props.row.leadNumber}}</span>
             </q-td>
           </template>
 
           <template v-slot:body-cell-leadName="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props && props.row">
               <span class="capitalize">{{props.row.merchantName}}</span>
             </q-td>
           </template>
 
           <template v-slot:body-cell-state="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props && props.row">
               <span class="capitalize">{{props.row.state}}</span>
             </q-td>
           </template>
 
           <template v-slot:body-cell-assignedTo_name="props">
-            <q-td :props="props">
-              <span class="capitalize">{{props.row.salesOfficerName+" | "+props.row.salesOfficerEmpId}}</span>
+            <q-td :props="props" v-if="props && props.row">
+              <span class="capitalize">{{(props.row.salesOfficerName || '') + " | " + (props.row.salesOfficerEmpId || '')}}</span>
             </q-td>
           </template>
 
           <template v-slot:body-cell-leadSource="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props && props.row">
               <span :class="{ 'text-red': props.row.leadSource === 'LS_TOHANDS' }">
                 {{ props.row.leadSource }}
               </span>
@@ -56,7 +56,7 @@
           </template>
 
           <template v-slot:body-cell-verifiedFinanceStatus="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props && props.row">
               <span class="label text-positive"
                 v-if="props.row.verifiedFinanceStatus == $VERIFIED_FINANCE_STATUS_SUCCESS">Approved</span>
               <span class="label text-negative"
@@ -68,7 +68,7 @@
           </template>
 
           <template v-slot:body-cell-leadStatus="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props && props.row">
               <span class="label text-positive"
                 v-if="props.row.verifiedFinanceStatus == $LEAD_STATUS_SUBMIT_TO_SAT_LEAD && props.row.verifiedFinanceStatus == $VERIFIED_FINANCE_STATUS_SUCCESS">New</span>
               <span class="label text-negative"
@@ -82,7 +82,7 @@
           </template>
 
           <template v-slot:body-cell-action="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props && props.row">
               <q-btn v-if="props.row.leadStatus == $LEAD_STATUS_DATA_ENTRY_PENDING" push outline
                 color="purple-9" size="sm"
                 @click="$router.push('/sat/lead/validation/'+ props.row.leadId+'/data/entry')" label="Data Entry" />
@@ -115,7 +115,7 @@
           </template>
 
           <template v-slot:body-cell-rejectLead="props">
-            <q-td :props="props">
+            <q-td :props="props" v-if="props && props.row">
               <q-btn v-if="props.row.leadStatus == $LEAD_STATUS_SUBMIT_TO_SAT_LEAD" push outline
                 class="q-mx-sm" color="negative" @click="openRejectLead(props.row)" size="sm" label="Reject Lead" />
             </q-td>
@@ -208,11 +208,11 @@
             sortable: true
           },
           {
-            name: "assignedTo.name",
+            name: "assignedTo_name",
             required: true,
             label: "SO Name",
             align: "left",
-            field: row => row.salesOfficerName + " | " + row.salesOfficerEmpId,
+            field: row => (row.salesOfficerName || '') + " | " + (row.salesOfficerEmpId || ''),
             sortable: true
           },
           {

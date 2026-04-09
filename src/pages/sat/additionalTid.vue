@@ -22,13 +22,13 @@
         @request="ajaxLoadAllLeadInfo"
       >
         <template v-slot:body-cell-mid="props">
-          <q-td :props="props">
+          <q-td v-if="props.row" :props="props">
             <span class="label text-primary"># {{props.row.mid}}</span>
           </q-td>
         </template>
         <template v-slot:body-cell-leadNumber="props">
           <q-td
-            :props="props"
+v-if="props.row"             :props="props"
             class="cursor-pointer"
             @click="toggleLeadInformation(props.row.leadInformation)"
           >
@@ -36,12 +36,12 @@
           </q-td>
         </template>
         <template v-slot:body-cell-leadAddress="props">
-          <q-td :props="props">
+          <q-td v-if="props.row" :props="props">
             {{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}
           </q-td>
         </template>
         <template v-slot:body-cell-action="props">
-          <q-td :props="props">
+          <q-td v-if="props.row" :props="props">
             <q-btn
               push
               class="q-mx-sm"

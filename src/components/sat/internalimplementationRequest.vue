@@ -115,7 +115,7 @@
           >
             <template v-slot:body-cell-leadNumber="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 class="cursor-pointer"
                 @click="toggleLeadInformation(props.row.leadInformation)"
               >
@@ -123,7 +123,7 @@
               </q-td>
             </template>
             <template v-slot:body-cell-LeadSource="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 <span :class="{ 'text-red': props.row.leadInformation.leadSource?.sourceName === 'LS_TOHANDS' }">
                   {{ props.row.leadInformation.leadSource?.sourceName }}
                 </span>
@@ -131,18 +131,18 @@
             </template>
 
             <template v-slot:body-cell-submitToMarsDate="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{ $moment(props.row.leadInformation.submitToMarsDate).format("Do MMM YYYY") }}
               </q-td>
             </template>
             <template v-slot:body-cell-createdAt="props">
-              <q-td :props="props">
+              <q-td v-if="props.row" :props="props">
                 {{ $moment(props.row.createdAt).format("Do MMM YYYY") }}
               </q-td>
             </template>
             <template v-slot:body-cell-mid="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 class="customTd"
               >
                 <div class="text-primary">{{ props.row.mid }}</div>
@@ -150,7 +150,7 @@
             </template>
             <template v-slot:body-cell-deviceAddress="props">
               <q-td
-                :props="props"
+v-if="props.row"                 :props="props"
                 class="customTd customCellLength"
               >
                 <div>

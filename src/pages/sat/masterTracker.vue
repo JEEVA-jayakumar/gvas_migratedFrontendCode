@@ -24,36 +24,33 @@
         @request="ajaxLoadAllLeadInfo"
       >
         <template v-slot:body-cell-tid="props">
-          <q-td :props="props">
+          <q-td :props="props" v-if="props && props.row">
             <span class="label text-primary"># {{props.row.tid}}</span>
           </q-td>
         </template>
         <template v-slot:body-cell-mid="props">
-          <q-td :props="props">
+          <q-td :props="props" v-if="props && props.row">
             <span class="label text-primary"># {{props.row.mid}}</span>
           </q-td>
         </template>
         <template v-slot:body-cell-leadNumber="props">
-          <q-td
-            :props="props"
-            class="cursor-pointer"
-            @click="toggleLeadInformation(props.row.leadInformation)"
-          >
+          <q-td v-if="props.row" :props="props" class="cursor-pointer" @click="toggleLeadInformation(props.row.leadInformation)">
             <span class="label text-primary"># {{props.row.leadInformation.leadNumber}}</span>
           </q-td>
+          <q-td v-else v-if="props.row" :props="props">NA</q-td>
         </template>
         <template v-slot:body-cell-mobileNumber="props">
-          <q-td :props="props">
+          <q-td :props="props" v-if="props && props.row">
             {{props.row.leadInformation == null? 'NA':props.row.leadInformation.contactNumber}}
           </q-td>
         </template>
         <template v-slot:body-cell-leadAddress="props">
-          <q-td :props="props">
+          <q-td :props="props" v-if="props && props.row">
             {{props.row.leadInformation == null? 'NA':props.row.leadInformation.leadAddress}}
           </q-td>
         </template>
         <template v-slot:body-cell-deviceStatusDate="props">
-          <q-td :props="props">
+          <q-td :props="props" v-if="props && props.row">
             <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
           </q-td>
         </template>
@@ -151,7 +148,7 @@ export default {
           label: "Lead Id",
           align: "left",
           field: row => {
-            row.leadInformation.leadNumber;
+            return row.leadInformation ? row.leadInformation.leadNumber : 'NA';
           },
           sortable: false
         },
@@ -161,7 +158,7 @@ export default {
           label: "ME Name",
           align: "left",
           field: row => {
-            return row.leadInformation.leadName;
+            return row.leadInformation ? row.leadInformation.leadName : 'NA';
           },
           sortable: false
         },
@@ -171,7 +168,7 @@ export default {
           label: "Merchant Address",
           align: "center",
           field: row => {
-            row.leadInformation.leadAddress;
+            return row.leadInformation ? row.leadInformation.leadAddress : 'NA';
           },
           sortable: false
         },
@@ -181,7 +178,7 @@ export default {
           label: "Device type",
           align: "right",
           field: row => {
-            return row.leadInformation.device.deviceName;
+            return row.leadInformation && row.leadInformation.device ? row.leadInformation.device.deviceName : 'NA';
           },
           sortable: false
         },
@@ -229,7 +226,7 @@ export default {
           label: "Mobile Number",
           align: "center",
           field: row => {
-            row.leadInformation.contactNumber;
+            return row.leadInformation ? row.leadInformation.contactNumber : 'NA';
           },
           sortable: false
         }

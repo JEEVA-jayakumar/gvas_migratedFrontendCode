@@ -10,7 +10,7 @@
             <div v-if="propGetShortInfo.documentUploadedType != 1" class="row items-center full-width">
               <div class="col-md-12 q-body-1">
                 <q-expansion-item separator indent opened class="full-width">
-                  <template slot="header">
+                  <template v-slot:header>
                     <q-item-section icon="apps" />
                     <q-item-section class="q-body-1" :caption="'FORMS'" />
                   </template>
@@ -664,7 +664,7 @@
               >
                 <div class="col-md-12 q-body-1">
                   <q-expansion-item separator indent opened class="full-width">
-                    <template slot="header">
+                    <template v-slot:header>
                       <q-item-section icon="apps" />
                       <q-item-section
                         class="q-body-1"
@@ -686,7 +686,7 @@
                           multiline
                           class="full-width"
                         >
-                          <template slot="header">
+                          <template v-slot:header>
                             <q-item-section
                               class="q-body-1"
                               :caption="

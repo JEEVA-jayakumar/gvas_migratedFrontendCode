@@ -24,18 +24,18 @@
         @request="ajaxLoadAllLeadInfo"
       >
         <template v-slot:body-cell-tid="props">
-          <q-td :props="props">
+          <q-td v-if="props.row" :props="props">
             <span class="label text-primary"># {{ props.row.tid }}</span>
           </q-td>
         </template>
         <template v-slot:body-cell-mid="props">
-          <q-td :props="props">
+          <q-td v-if="props.row" :props="props">
             <span class="label text-primary"># {{ props.row.mid }}</span>
           </q-td>
         </template>
         <template v-slot:body-cell-leadNumber="props">
           <q-td
-            :props="props"
+v-if="props.row"             :props="props"
             class="cursor-pointer"
             @click="toggleLeadInformation(props.row.leadInformation)"
           >
@@ -45,22 +45,22 @@
           </q-td>
         </template>
         <template v-slot:body-cell-mobileNumber="props">
-          <q-td :props="props">{{
+          <q-td v-if="props.row" :props="props">{{
              props.row.assignedTo == null ? "NA" : props.row.assignedTo.contactNumber
           }}</q-td>
         </template>
         <template v-slot:body-cell-leadAddress="props">
-          <q-td :props="props">{{
+          <q-td v-if="props.row" :props="props">{{
             props.row.leadInformation == null ? "NA" : props.row.leadInformation.leadAddress
           }}</q-td>
         </template>
         <template v-slot:body-cell-deviceStatusDate="props">
-          <q-td :props="props">
+          <q-td v-if="props.row" :props="props">
             <span class="label">{{ $moment(props.row.deviceStatusDate).format("Do MMM Y") }}</span>
           </q-td>
         </template>
         <template v-slot:body-cell-viewDocument="props">
-          <q-td :props="props">
+          <q-td v-if="props.row" :props="props">
             <div
               v-if="
                 props.row.implementationFormMimeType == null ||
@@ -93,7 +93,7 @@
           </q-td>
         </template>
         <template v-slot:body-cell-pictureOfShop="props">
-          <q-td :props="props">
+          <q-td v-if="props.row" :props="props">
             <div
               v-if="
                 props.row.pictureOfShopMimeType == null ||
@@ -126,7 +126,7 @@
           </q-td>
         </template>
         <template v-slot:body-cell-cpvForm="props">
-          <q-td :props="props">
+          <q-td v-if="props.row" :props="props">
             <div
               v-if="
                 props.row.cpvFormMimeType == null ||
@@ -159,7 +159,7 @@
           </q-td>
         </template>
         <template v-slot:body-cell-status="props">
-          <q-td :props="props">
+          <q-td v-if="props.row" :props="props">
             <span class="label text-negative" v-if="props.row.deviceStatus == 3"
               >Deactivated</span
             >

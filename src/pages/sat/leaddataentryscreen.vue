@@ -23,20 +23,20 @@
                     <div class="q-pa-md">
                       <div class="row q-col-gutter-md q-py-sm">
                         <div class="col-md-6">
-                          <q-input v-model="formData.leadName" @blur="$v?.formData?.leadName?.$touch"
-                            :error="!!($v?.formData?.leadName?.$error)" class="text-weight-regular text-grey-8" color="grey-9"
+                          <q-input v-model="formData.leadName" @blur="v$.formData.leadName.$touch"
+                            :error="v$.formData.leadName.$error" class="text-weight-regular text-grey-8" color="grey-9"
                             label="*Merchant Name" placeholder="Merchant Name" />
                         </div>
                         <div class="col-md-6">
-                          <q-input v-model="formData.contactName" @blur="$v?.formData?.contactName?.$touch"
-                            :error="!!($v?.formData?.contactName?.$error)" class="text-weight-regular text-grey-8"
+                          <q-input v-model="formData.contactName" @blur="v$.formData.contactName.$touch"
+                            :error="v$.formData.contactName.$error" class="text-weight-regular text-grey-8"
                             label="*Contact Name" placeholder="Contact Name" />
                         </div>
                         <div class="col-md-6">
                           <q-input type="number" onkeydown="javascript: return event.keyCode === 8 ||
                             event.keyCode === 46 ? true : !isNaN(Number(event.key))"
                             v-model="formData.contactNumber" class="text-weight-regular text-grey-8" color="grey-9"
-                            @blur="$v?.formData?.contactNumber?.$touch" :error="!!($v?.formData?.contactNumber?.$error)"
+                            @blur="v$.formData.contactNumber.$touch" :error="v$.formData.contactNumber.$error"
                             label="*Contact Number" placeholder="Contact Number" />
                         </div>
 
@@ -49,18 +49,18 @@
                         </div>
 
                         <div class="col-md-6">
-                          <q-input v-model="formData.email" @blur="$v?.formData?.email?.$touch"
-                            :error="!!($v?.formData?.email?.$error)" class="text-weight-regular text-grey-8" color="grey-9"
+                          <q-input v-model="formData.email" @blur="v$.formData.email.$touch"
+                            :error="v$.formData.email.$error" class="text-weight-regular text-grey-8" color="grey-9"
                             label="*Mail_Id" placeholder="Mail_Id" />
                         </div>
                         <div class="col-md-6">
-                          <q-input v-model="formData.leadAddress" @blur="$v?.formData?.leadAddress?.$touch"
-                            :error="!!($v?.formData?.leadAddress?.$error)" class="text-weight-regular text-grey-8"
+                          <q-input v-model="formData.leadAddress" @blur="v$.formData.leadAddress.$touch"
+                            :error="v$.formData.leadAddress.$error" class="text-weight-regular text-grey-8"
                             color="grey-9" label="*Merchant Address" placeholder="Merchant Address" />
                         </div>
                         <div class="col-md-6">
                           <q-select
-                            :error="!!($v?.formData?.pincodeTemp?.$error)"
+                            :error="v$.formData.pincodeTemp.$error"
                             @blur="fnClrPin"
                             clearable
                             color="grey-9"
@@ -77,29 +77,29 @@
                           />
                         </div>
                         <div class="col-md-6">
-                          <q-input disable v-model="formData.state" @blur="$v?.formData?.state?.$touch"
-                            :error="!!($v?.formData?.state?.$error)" class="text-weight-regular text-grey-8" color="grey-9"
+                          <q-input disable v-model="formData.state" @blur="v$.formData.state.$touch"
+                            :error="v$.formData.state.$error" class="text-weight-regular text-grey-8" color="grey-9"
                             label="State" placeholder="State" />
                         </div>
                         <div class="col-md-6">
-                          <q-input disable v-model="formData.city" @blur="$v?.formData?.city?.$touch"
-                            :error="!!($v?.formData?.city?.$error)" class="text-weight-regular text-grey-8" color="grey-9"
+                          <q-input disable v-model="formData.city" @blur="v$.formData.city.$touch"
+                            :error="v$.formData.city.$error" class="text-weight-regular text-grey-8" color="grey-9"
                             label="City/Down" placeholder="City/Down" />
                         </div>
                         <div class="col-md-6">
-                          <q-select v-model="formData.region" @blur="$v?.formData?.region?.$touch"
-                            :error="!!($v?.formData?.region?.$error)" class="text-weight-regular text-grey-8" color="grey-9"
+                          <q-select v-model="formData.region" @blur="v$.formData.region.$touch"
+                            :error="v$.formData.region.$error" class="text-weight-regular text-grey-8" color="grey-9"
                             label="Select Region" placeholder="Select Region" :options="dropDown.regionOptions" emit-value map-options />
                         </div>
                         <div class="col-md-6">
-                          <q-select v-model="formData.leadSource" @blur="$v?.formData?.leadSource?.$touch"
-                            :error="!!($v?.formData?.leadSource?.$error)" class="text-weight-regular text-grey-8"
+                          <q-select v-model="formData.leadSource" @blur="v$.formData.leadSource.$touch"
+                            :error="v$.formData.leadSource.$error" class="text-weight-regular text-grey-8"
                             color="grey-9" label="Lead Source" placeholder="Lead Source"
                             :options="dropDown.leadSourceOptions" @update:model-value="getDevice" emit-value map-options />
                         </div>
                         <div class="col-md-6">
                           <q-select v-model="formData.device" @update:model-value="devSelected"
-                            :error="!!($v?.formData?.device?.$error)" class="text-weight-regular text-grey-8" color="grey-9"
+                            :error="v$.formData.device.$error" class="text-weight-regular text-grey-8" color="grey-9"
                             label="Device Type" placeholder="Device Type" :options="dropDown.deviceOptions" emit-value map-options />
                         </div>
 
@@ -126,9 +126,9 @@
                         </div>
 
                         <div class="col-md-6">
-                          <q-input v-model="formData.deviceCount" @blur="$v?.formData?.deviceCount?.$touch"
+                          <q-input v-model="formData.deviceCount" @blur="v$.formData.deviceCount.$touch"
                           :disable="deviceFlag"
-                            :error="!!($v?.formData?.deviceCount?.$error)" class="text-weight-regular text-grey-8"
+                            :error="v$.formData.deviceCount.$error" class="text-weight-regular text-grey-8"
                             color="grey-9" @keydown="nameKeydown($event)" @keyup="trackChange" label="Device Count" placeholder="Device Count" />
                         </div>
 
@@ -148,7 +148,7 @@
                 <q-table class="my-sticky-header-table" title="Wip Lead Information" :rows="getShortLead || []"
                   :columns="columns" row-key="id">
                   <template v-slot:body-cell-update="props">
-                    <q-td :props="props">
+                    <q-td v-if="props.row" :props="props">
                       <div class="row no-wrap no-padding" v-if="props && props.row">
                         <q-btn dense no-caps no-wrap label="update" icon="far fa-plus-square" size="md"
                           @click="fnShowConvertToSat(props.row)" flat class="text-light-blue"></q-btn>
