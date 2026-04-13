@@ -57,7 +57,9 @@
             :loading="toggleAjaxLoadFilter"
             @request="ajaxLoadAllLeadInfo"
           >
-            <q-td v-slot:body-cell-action1="props" :props="props">
+            <template v-slot:body-cell-action1="props">
+              <q-td :props="props">
+                 <q-td :props="props" :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
                   dense
@@ -72,8 +74,12 @@
                 >
                 </q-btn>
               </div>
-            </q-td>
-            <q-td v-slot:body-cell-action="props" :props="props">
+
+              </q-td>
+            </template>
+            <template v-slot:body-cell-action="props">
+              <q-td :props="props">
+                 <q-td :props="props" :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
                   dense
@@ -88,8 +94,12 @@
                 >
                 </q-btn>
               </div>
-            </q-td>
-            <q-td v-slot:body-cell-action2="props" :props="props">
+
+              </q-td>
+            </template>
+            <template v-slot:body-cell-action2="props">
+              <q-td :props="props">
+                 <q-td :props="props" :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
                   dense
@@ -103,9 +113,12 @@
                 >
                 </q-btn>
               </div>
-            </q-td>
-            <q-td
-              v-slot:body-cell-createdDate="props"
+
+              </q-td>
+            </template>
+            <template v-slot:body-cell-createdDate="props">
+              <q-td :props="props">
+                 <q-td :props="props"
               :props="props"
               >{{
                 props.row == null
@@ -137,7 +150,7 @@
             @request="ajaxLoadAllLeadInfo1"
           >
             <q-td
-              v-slot:body-cell-createdDate="props"
+              v-slot:body-cell-createdDate="props"> <q-td :props="props"
               :props="props"
               >{{
                 props.row == null
@@ -146,7 +159,7 @@
               }}</q-td
             >
             <q-td
-              v-slot:body-cell-updatedDate="props"
+              v-slot:body-cell-updatedDate="props"> <q-td :props="props"
               :props="props"
               >{{
                 props.row == null
@@ -154,7 +167,7 @@
                   : $moment(props.row.updatedDate).format("Do MMM Y")
               }}</q-td
             >
-            <q-td v-slot:body-cell-action3="props" :props="props">
+            <q-td v-slot:body-cell-action3="props"> <q-td :props="props" :props="props">
               <div class="row no-wrap no-padding">
                 <q-btn
                   dense
@@ -168,7 +181,9 @@
                 >
                 </q-btn>
               </div>
-            </q-td>
+
+              </q-td>
+            </template>
           </q-table>
         </q-tab-panel>
 <q-tab-panel name="tab-3">
@@ -193,7 +208,7 @@
             @request="ajaxLoadAllLeadInfo2"
           >
             <q-td
-              v-slot:body-cell-createdDate="props"
+              v-slot:body-cell-createdDate="props"> <q-td :props="props"
               :props="props"
               >{{
                 props.row == null
@@ -202,7 +217,7 @@
               }}</q-td
             >
             <q-td
-              v-slot:body-cell-updatedDate="props"
+              v-slot:body-cell-updatedDate="props"> <q-td :props="props"
               :props="props"
               >{{
                 props.row == null
@@ -211,7 +226,7 @@
               }}</q-td
             >
             <q-td
-              v-slot:body-cell-rtoCreatedDate="props"
+              v-slot:body-cell-rtoCreatedDate="props"> <q-td :props="props"
               :props="props"
               >{{
                 props.row == null

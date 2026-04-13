@@ -24,13 +24,13 @@
         >
 
           <!--START: table header -->
-          <q-tr v-slot:top-row="props">
-            <q-th v-for="col in props.columns" :key="col.name" :props="props">{{
-              col.label
-            }}</q-th>
-          </q-tr>
-          
-
+          <template v-slot:header="props">
+            <q-tr :props="props">
+              <q-th v-for="col in props.cols" :key="col.name" :props="props">
+                {{ col.label }}
+              </q-th>
+            </q-tr>
+          </template>
           <!--END: table header -->
           <template v-slot:body="props">
             <!--START: table rows -->
@@ -65,7 +65,7 @@
               <!--END: table other data -->
             </q-tr>
           </template>
-          <template v-slot:top class="bottom-border">
+          <template v-slot:top>
             <!--START: table filter,search -->
             <div class="col-md-5">
               <q-input
