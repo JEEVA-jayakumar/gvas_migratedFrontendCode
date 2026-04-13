@@ -11,35 +11,56 @@
         :filter="filter" v-model:pagination="paginationControl"
         row-key="name"
       >
-        <!-- <q-td
-          v-slot:body-cell-createdAt="props"
+        <!-- <template v-slot:body-cell-createdAt="props">
+              <q-td :props="props">
+                 <q-td :props="props"
           :props="props"
-        >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-receivedAt="props"
+        >{{ $moment(props.row.createdAt).format("Do MMM Y") }}
+              </q-td>
+            </template>
+        <template v-slot:body-cell-receivedAt="props">
+              <q-td :props="props">
+                 <q-td :props="props"
           :props="props"
-        >{{ $moment(props.row.receivedAt).format("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.receivedAt).format("Do MMM Y") }}
+              </q-td>
+            </template>
 
-        <q-td
-          v-slot:body-cell-receivedAt="props"
+        <template v-slot:body-cell-receivedAt="props">
+              <q-td :props="props">
+                 <q-td :props="props"
           :props="props"
-        >{{ $moment(props.row.receivedAt ==null? "NA" : props.row.receivedAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-DeviceList="props"
+        >{{ $moment(props.row.receivedAt ==null? "NA" : props.row.receivedAt).format("Do MMM Y") }}
+              </q-td>
+            </template>
+        <template v-slot:body-cell-DeviceList="props">
+              <q-td :props="props">
+                 <q-td :props="props"
           :props="props"
-        >{{ $moment(props.row.device.createDate).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-ModifyDate="props"
+        >{{ $moment(props.row.device.createDate).format("Do MMM Y") }}
+              </q-td>
+            </template>
+        <template v-slot:body-cell-ModifyDate="props">
+              <q-td :props="props">
+                 <q-td :props="props"
           :props="props"
-        >{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</q-td>-->
-        <q-td
-          v-slot:body-cell-createDate="props"
+        >{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}
+              </q-td>
+            </template>-->
+        <template v-slot:body-cell-createDate="props">
+              <q-td :props="props">
+                 <q-td :props="props"
           :props="props"
-        >{{ $moment(props.row.createDate ==null? "NA" : props.row.createDate).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-modifyDate="props"
+        >{{ $moment(props.row.createDate ==null? "NA" : props.row.createDate).format("Do MMM Y") }}
+              </q-td>
+            </template>
+        <template v-slot:body-cell-modifyDate="props">
+              <q-td :props="props">
+                 <q-td :props="props"
           :props="props"
-        >{{ $moment(props.row.modifyDate ==null? "NA" : props.row.modifyDate).format("Do MMM Y") }}</q-td>
+        >{{ $moment(props.row.modifyDate ==null? "NA" : props.row.modifyDate).format("Do MMM Y") }}
+              </q-td>
+            </template>
         <template v-slot:top class="bottom-border">
           <div class="col-md-5">
             <q-input

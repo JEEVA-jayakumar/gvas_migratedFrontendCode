@@ -3,13 +3,14 @@
   <q-page>
     <div>
       <q-tabs v-model="activeTab" class="shadow-1" color="grey-1" @update:model-value="goToDownloadTab">
-        <q-tab color="dark" name="tab-1" label="Generate QR" />
-        <q-tab color="dark" name="tab-2" label="Download/View QR" />
-        <!-- <q-tab color="dark" name="tab-3" label="Request" /> -->
-</q-tabs>
-<q-tab-panels v-model="activeTab" animated>
-<q-tab-panel name="tab-1">
-          <q-card style="width:100%" >
+        <q-tab name="tab-1" label="Generate QR" />
+        <q-tab name="tab-2" label="Download/View QR" />
+        <!-- <q-tab name="tab-3" label="Request" /> -->
+      </q-tabs>
+
+      <q-tab-panels v-model="activeTab" animated>
+        <q-tab-panel name="tab-1" class="no-padding">
+          <q-card style="width:100%" flat>
           <q-card-section>
             <div>
               <div class="row">
@@ -52,53 +53,67 @@
           </div>
           <q-table table-class="customTableClass" :rows="tableData" :columns="columns" v-model:pagination="paginationControl"   :filter="filter" row-key="id" :loading="toggleAjaxLoadFilter"
             :rows-per-page-options="[5, 10, 15, 20]" @request="ajaxLoadAllBatchList">
-            <!--START: table header -->
-            <!-- <q-tr v-slot:top-row="props">
-        <q-th v-for="col in props.columns" :key="col.name" :props="props">{{ col.label }}</q-th>
-        </q-tr> -->
-            <q-td v-slot:body-cell-createdAt="props" :props="props">{{
-              props.row.createdAt == null ? 'NA' :
-                $moment(props.row.createdAt).format("Do MMM Y")
-            }}</q-td>
-            <q-td v-slot:body-cell-Batch="props" :props="props">{{
-              props.row.batchId == null ? 'NA' :
-                props.row.batchId
-            }}</q-td>
-            <q-td v-slot:body-cell-Bank="props" :props="props">{{
-              props.row.staticQrBank && props.row.staticQrBank.name ? props.row.staticQrBank.name : 'NA'
-            }}</q-td>
-            <q-td v-slot:body-cell-Count="props" :props="props">{{
-              props.row.count == null ? 'NA' :
-                props.row.count
-            }}</q-td>
-            <q-td v-slot:body-cell-remainingCount="props" :props="props">{{
-              props.row.remainingQrCount == 0 ? '' : props.row.remainingQrCount
-            }}</q-td>
-            <q-td v-slot:body-cell-Action="props" :props="props">
-              <div class="row no-wrap no-padding">
-                <q-btn dense no-caps no-wrap label="Download" icon="file_download" size="md"
-                  @click="downloadQrString(props.row)" flat class="text-green">
-                </q-btn>
-                <q-btn dense no-caps no-wrap label="View" icon="visibility" size="md" @click="ListVpaData(props.row)"
-                  flat class="text-negative">
-                </q-btn>
-              </div>
-            </q-td>
-            <q-td v-slot:body-cell-Action2="props" :props="props">
-              <div class="row no-wrap no-padding">
-                <q-btn :disable="props.row.batchCount == true" dense no-caps no-wrap label="Sticker Recieved" icon="thumb_up_alt" size="md"
-                  @click="stickerRecieved(props.row)" flat class="text-blue">
-                </q-btn>
-              </div>
-            </q-td>
+
+            <template v-slot:body-cell-createdAt="props">
+              <q-td :props="props">
+                {{ props.row.createdAt == null ? 'NA' : $moment(props.row.createdAt).format("Do MMM Y") }}
+              </q-td>
+            </template>
+
+            <template v-slot:body-cell-Batch="props">
+              <q-td :props="props">
+                {{ props.row.batchId == null ? 'NA' : props.row.batchId }}
+              </q-td>
+            </template>
+
+            <template v-slot:body-cell-Bank="props">
+              <q-td :props="props">
+                {{ props.row.staticQrBank && props.row.staticQrBank.name ? props.row.staticQrBank.name : 'NA' }}
+              </q-td>
+            </template>
+
+            <template v-slot:body-cell-Count="props">
+              <q-td :props="props">
+                {{ props.row.count == null ? 'NA' : props.row.count }}
+              </q-td>
+            </template>
+
+            <template v-slot:body-cell-remainingCount="props">
+              <q-td :props="props">
+                {{ props.row.remainingQrCount == 0 ? '' : props.row.remainingQrCount }}
+              </q-td>
+            </template>
+
+            <template v-slot:body-cell-Action="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <q-btn dense no-caps no-wrap label="Download" icon="file_download" size="md"
+                    @click="downloadQrString(props.row)" flat class="text-green">
+                  </q-btn>
+                  <q-btn dense no-caps no-wrap label="View" icon="visibility" size="md" @click="ListVpaData(props.row)"
+                    flat class="text-negative">
+                  </q-btn>
+                </div>
+              </q-td>
+            </template>
+
+            <template v-slot:body-cell-Action2="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <q-btn :disable="props.row.batchCount == true" dense no-caps no-wrap label="Sticker Recieved" icon="thumb_up_alt" size="md"
+                    @click="stickerRecieved(props.row)" flat class="text-blue">
+                  </q-btn>
+                </div>
+              </q-td>
+            </template>
           </q-table>
         </q-tab-panel>
 </q-tab-panels>
-    <qrPopUp v-if="propToggleData" :QrInfo="addBasicInformation" :propToggleDataPop="propToggleData"
-      @closeRemarksInfo="toggle" />
+      <qrPopUp v-if="propToggleData" :QrInfo="addBasicInformation" :propToggleDataPop="propToggleData"
+        @closeRemarksInfo="toggle" />
 
-    <ViewVpaData v-if="VpaDataModal" :VpaDataModal="VpaDataModal" :propRowDetails="propRowDetails"
-      @toggleModal="ListVpaData" />
+      <ViewVpaData v-if="VpaDataModal" :VpaDataModal="VpaDataModal" :propRowDetails="propRowDetails"
+        @toggleModal="ListVpaData" />
     </div>
   </q-page>
 </template>

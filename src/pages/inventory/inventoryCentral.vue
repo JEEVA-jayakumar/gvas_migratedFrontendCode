@@ -69,20 +69,21 @@
       <!--END: table title -->
       <div class="row">
         <div class="col-md-3 group q-pa-md">
-          <div
-            class="q-pa-md q-ma-xs cursor-pointer border-radius-10"
-            :class="[activeItemId === index ? 'shadow-5 bg-grey-5' : 'shadow-0']"
-            @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index,deviceInfo)"
-            v-for="(deviceInfo,index) in getAllInventoryDevicesTypesWithCountData"
-            :key="index"
-            :style="'background:'+deviceInfo.device.colorCode"
-            align="center"
-          >
-            <div class="q-title text-weight-bold">
-              {{deviceInfo.count}}
+          <template v-for="(deviceInfo,index) in getAllInventoryDevicesTypesWithCountData" :key="index">
+            <div
+              class="q-pa-md q-ma-xs cursor-pointer border-radius-10"
+              v-if="deviceInfo && deviceInfo.device"
+              :class="[activeItemId === index ? 'shadow-5 bg-grey-5' : 'shadow-0']"
+              @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index,deviceInfo)"
+              :style="'background:'+deviceInfo.device.colorCode"
+              align="center"
+            >
+              <div class="q-title text-weight-bold">
+                {{deviceInfo.count}}
+              </div>
+              <div>{{deviceInfo.device.deviceName}}</div>
             </div>
-            <div>{{deviceInfo.device.deviceName}}</div>
-          </div>
+          </template>
         </div>
         <div class="col-md-9">
           <div>

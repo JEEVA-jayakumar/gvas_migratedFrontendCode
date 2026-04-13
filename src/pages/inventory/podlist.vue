@@ -15,7 +15,9 @@
         @request="ajaxLoadAllLeadInfo"
         
       >
-        <q-td v-slot:body-cell-action="props" :props="props">
+        <template v-slot:body-cell-action="props">
+              <q-td :props="props">
+
           <div class="row no-wrap no-padding">
             <q-btn
               dense
@@ -29,28 +31,35 @@
               class="text-light-blue"
             ></q-btn>
           </div>
-        </q-td>
-        <q-td
-          v-slot:body-cell-createdAt="props"
-          :props="props"
-        >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-receivedAt="props"
-          :props="props"
-        >{{ $moment(props.row.receivedAt).format("Do MMM Y") }}</q-td>
 
-        <q-td
-          v-slot:body-cell-receivedAt="props"
-          :props="props"
-        >{{ $moment(props.row.receivedAt ==null? "NA" : props.row.receivedAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-DeviceList="props"
-          :props="props"
-        >{{ $moment(props.row.createdAt).format("Do MMM Y") }}</q-td>
-        <q-td
-          v-slot:body-cell-ModifyDate="props"
-          :props="props"
-        >{{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}</q-td>
+              </q-td>
+            </template>
+        <template v-slot:body-cell-createdAt="props">
+              <q-td :props="props">
+                {{ $moment(props.row.createdAt).format("Do MMM Y") }}
+              </q-td>
+            </template>
+        <template v-slot:body-cell-receivedAt="props">
+              <q-td :props="props">
+                {{ $moment(props.row.receivedAt).format("Do MMM Y") }}
+              </q-td>
+            </template>
+
+        <template v-slot:body-cell-receivedAt="props">
+              <q-td :props="props">
+                {{ $moment(props.row.receivedAt ==null? "NA" : props.row.receivedAt).format("Do MMM Y") }}
+              </q-td>
+            </template>
+        <template v-slot:body-cell-DeviceList="props">
+              <q-td :props="props">
+                {{ $moment(props.row.createdAt).format("Do MMM Y") }}
+              </q-td>
+            </template>
+        <template v-slot:body-cell-ModifyDate="props">
+              <q-td :props="props">
+                {{ $moment(props.row.device.modifyDate).format("Do MMM Y") }}
+              </q-td>
+            </template>
         <template v-slot:top class="bottom-border">
           <div class="col-md-5">
             <q-input

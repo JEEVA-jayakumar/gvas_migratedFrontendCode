@@ -33,13 +33,23 @@
             <q-table row-key="name" :filter="filter" :rows="regionalItems" class="q-py-none" :columns="columns"
                 title="Lead Validation" table-class="customTableClass" v-model:pagination="paginationControl">
                 <!--START: table body modification  device-->
-                <q-td v-slot:body-cell-region="props" :props="props">{{ props.row.region == null ?
+                <template v-slot:body-cell-region="props">
+              <q-td :props="props">
+                {{ props.row.region == null ?
                         'NA' : props.row.region.regionAreaName
-                }}</q-td>
-                <q-td v-slot:body-cell-device="props" :props="props">{{ props.row.device == null ?
+                }}
+              </q-td>
+            </template>
+                <template v-slot:body-cell-device="props">
+              <q-td :props="props">
+                {{ props.row.device == null ?
                         'NA' : props.row.device.deviceName
-                }}</q-td>
-                <q-td v-slot:body-cell-action="props" :props="props">
+                }}
+              </q-td>
+            </template>
+                <template v-slot:body-cell-action="props">
+              <q-td :props="props">
+
                     <div class="row no-wrap no-padding">
                         <q-btn dense no-caps no-wrap label="Modify" icon="far fa-plus-square" size="md"
                             @click="fnShowEditRegion(props.row)" flat class="text-light-blue">
@@ -47,7 +57,9 @@
                         <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative">
             </q-btn> -->
                     </div>
-                </q-td>
+
+              </q-td>
+            </template>
                 <!-- END: table body modification -->
                 <template v-slot:top class="bottom-border">
                     <!--START: table filter,search -->

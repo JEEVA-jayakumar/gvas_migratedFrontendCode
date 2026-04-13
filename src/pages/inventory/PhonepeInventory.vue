@@ -8,17 +8,19 @@
         <div class="col-12 col-lg-4 q-title text-weight-regular text-grey-9">Aggregator Inventory</div>
         <div class="col-12 col-lg-8 group" align="right">
           <q-btn-dropdown outline no-caps class="text-weight-regular" label="Add Refurbished Device" >
-            <q-list link>
-              <!-- <q-item to="phonepeRefurbishmentAddDeviceScan">
+            <q-list>
+              <!-- <q-item clickable to="phonepeRefurbishmentAddDeviceScan">
                 <q-item-section icon="search" />
                 <q-item-section>
                   <q-item-label label>Scan and Upload</q-item-label>
                 </q-item-section>
               </q-item> -->
-              <q-item @click="fnPhonePeOpenRefurbishedBulkUploadModal">
-                <q-item-section icon="attach_file" />
+              <q-item clickable @click="fnPhonePeOpenRefurbishedBulkUploadModal">
+                <q-item-section avatar>
+                  <q-icon name="attach_file" />
+                </q-item-section>
                 <q-item-section>
-                  <q-item-label label>Bulk upload</q-item-label>
+                  <q-item-label>Bulk upload</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -27,17 +29,21 @@
           <q-btn outline no-caps class="text-weight-regular" label="Allocate to Region" to="PhonepeallocateDevice" />
           <q-btn outline no-caps class="text-weight-regular" label="Add Faulty Device" @click="fnShowAddDevice" to="showAggregatorsAddDamagedDevices" />
           <q-btn-dropdown outline no-caps class="text-weight-regular" label="Add new device from manufacturer" >
-            <q-list link>
-              <q-item to="PhonepeAddDeviceScan">
-                <q-item-section icon="search" />
+            <q-list>
+              <q-item clickable to="PhonepeAddDeviceScan">
+                <q-item-section avatar>
+                  <q-icon name="search" />
+                </q-item-section>
                 <q-item-section>
-                  <q-item-label label>Scan and Upload</q-item-label>
+                  <q-item-label>Scan and Upload</q-item-label>
                 </q-item-section>
               </q-item>
-              <q-item @click="fnPhonePeOpenBulkUploadModal">
-                <q-item-section icon="attach_file" />
+              <q-item clickable @click="fnPhonePeOpenBulkUploadModal">
+                <q-item-section avatar>
+                  <q-icon name="attach_file" />
+                </q-item-section>
                 <q-item-section>
-                  <q-item-label label>Bulk upload</q-item-label>
+                  <q-item-label>Bulk upload</q-item-label>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -78,15 +84,16 @@
       <!--END: table title -->
       <div class="row">
         <div class="col-md-3 group q-pa-md">
-          <div class="q-pa-md cursor-pointer" v-if="deviceInfo.aggregatorDevice != undefined" :class="[activeItemId === index ? 'shadow-5 bg-grey-5' : 'shadow-0']"
-            @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index, deviceInfo)"
-            v-for="(deviceInfo, index) in getAllPhonepeInventoryDevicesTypesWithCountData" :key="index"
-            :style="'background:' + deviceInfo.aggregatorDevice.colorCode" align="center">
-            <div class="q-title text-weight-bold">
-              {{ deviceInfo.count }}
+          <template v-for="(deviceInfo, index) in getAllPhonepeInventoryDevicesTypesWithCountData" :key="index">
+            <div class="q-pa-md cursor-pointer" v-if="deviceInfo && deviceInfo.aggregatorDevice != undefined" :class="[activeItemId === index ? 'shadow-5 bg-grey-5' : 'shadow-0']"
+              @click="ajaxLoadDataForCentralInventoryByDeviceIdFilter(index, deviceInfo)"
+              :style="'background:' + deviceInfo.aggregatorDevice.colorCode" align="center">
+              <div class="q-title text-weight-bold">
+                {{ deviceInfo.count }}
+              </div>
+              <div>{{ deviceInfo.aggregatorDevice.deviceName }}</div>
             </div>
-            <div>{{ deviceInfo.aggregatorDevice.deviceName }}</div>
-          </div>
+          </template>
         </div>
         <div class="col-md-9">
           <div>
@@ -95,7 +102,7 @@
               table-class="customTableClass shadow-0" :filter="filterSearch" 
              
               row-key="index" :loading="tableAjaxLoading" color="primary">
-              <template slot="top">
+              <template v-slot:top>
                 <!--START: table filter,search  :pagination="paginationControl"-->
                 <div class="col-md-5">
                   <q-input clearable color="grey-9" v-model="filterSearch" placeholder="Type.." label="Search By Device Serail Number.."

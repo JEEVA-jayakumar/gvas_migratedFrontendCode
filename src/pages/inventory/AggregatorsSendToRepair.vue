@@ -32,48 +32,46 @@
         >
 
           <!--START: table header -->
-          <q-tr v-slot:top-row="props">
-            <q-th v-for="col in props.columns" :key="col.name" :props="props">{{
-              col.label
-            }}</q-th>
-          </q-tr>
-          
-
+          <template v-slot:header="props">
+            <q-tr :props="props">
+              <q-th v-for="col in props.cols" :key="col.name" :props="props">
+                {{ col.label }}
+              </q-th>
+            </q-tr>
+          </template>
           <!--END: table header -->
           <template v-slot:body="props">
             <!--START: table rows -->
             <q-tr :props="props" class="bottom-border">
-              <q-td auto-width key="aggregatorDevice" :props="props">{{
+              <q-td key="aggregatorDevice" :props="props">{{
                 props.row.aggregatorDevice.deviceName
               }}</q-td>
-              <q-td auto-width key="serialNumber" :props="props">{{
+              <q-td key="serialNumber" :props="props">{{
                 props.row.serialNumber
               }}</q-td>
-              <q-td auto-width key="updated_at" :props="props">{{ $moment(props.row.updatedAt ==null? "NA" : props.row.updatedAt).format("Do MMM Y") }}</q-td>
-              <q-td auto-width key="action" :props="props">
+              <q-td key="updated_at" :props="props">{{ $moment(props.row.updatedAt ==null? "NA" : props.row.updatedAt).format("Do MMM Y") }}</q-td>
+              <q-td key="action" :props="props">
                 <q-btn
-                  highlight
                   push
                   class="q-mx-sm"
                   color="positive"
                   @click="openAcceptModel(props.row)"
                   size="sm"
-                  >Accept</q-btn
-                >
+                  label="Accept"
+                />
                 <q-btn
-                  highlight
                   push
                   class="q-mx-sm"
                   color="negative"
                   @click="AggregatorsmoveToScrap(props.row)"
                   size="sm"
-                  >Moved To Scrap</q-btn
-                >
+                  label="Moved To Scrap"
+                />
               </q-td>
               <!--END: table other data -->
             </q-tr>
           </template>
-          <template v-slot:top class="bottom-border">
+          <template v-slot:top>
             <!--START: table filter,search -->
             <div class="col-md-5">
               <q-input
@@ -246,7 +244,10 @@ export default {
     ...mapGetters("superAdminAggregators", ["getCreatedAggregatorList", "getActiveCreatedAggregatorList"]),
   },
   created() {
-    this.ajaxLoadAllLeadInfo();
+    this.ajaxLoadAllLeadInfo2({
+      pagination: this.paginationControl,
+      filter: this.filterSearch
+    });
   },
   beforeMount() {
       //  this.AggregatorId=this.$AGGREGATOR_ID
@@ -302,7 +303,7 @@ export default {
   //   });
   // },
   fnReloadPageInformation(){
-      this.ajaxLoadAllLeadInfo({
+      this.ajaxLoadAllLeadInfo2({
       pagination: this.paginationControl,
       filter: this.filterSearch
     });
@@ -353,7 +354,7 @@ export default {
       }
     },
 
-    ajaxLoadAllLeadInfo2({ pagination, filter}) {
+    ajaxLoadAllLeadInfo2({ pagination, filter }) {
       // we set QTable to "loading" state
       this.$q.loading.show({
         delay: 0, // ms
@@ -391,9 +392,9 @@ export default {
       this.propsScrapAppend = exceptionDetails;
     },
     PullToRefresh(done) {
-      this.ajaxLoadAllLeadInfo({
+      this.ajaxLoadAllLeadInfo2({
         pagination: this.paginationControl,
-        filter: this.filter
+        filter: this.filterSearch
       });
     },
 

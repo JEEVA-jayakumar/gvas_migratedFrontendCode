@@ -24,48 +24,46 @@
           >
   
             <!--START: table header -->
-            <q-tr v-slot:top-row="props">
-              <q-th v-for="col in props.columns" :key="col.name" :props="props">{{
-                col.label
-              }}</q-th>
-            </q-tr>
-            
-  
+            <template v-slot:header="props">
+              <q-tr :props="props">
+                <q-th v-for="col in props.cols" :key="col.name" :props="props">
+                  {{ col.label }}
+                </q-th>
+              </q-tr>
+            </template>
             <!--END: table header -->
             <template v-slot:body="props">
               <!--START: table rows -->
               <q-tr :props="props" class="bottom-border">
-                <q-td auto-width key="device" :props="props">{{
+                <q-td key="device" :props="props">{{
                   props.row.device.deviceName
                 }}</q-td>
-                <q-td auto-width key="device" :props="props">{{
+                <q-td key="deviceserialNumber" :props="props">{{
                   props.row.serialNumber
                 }}</q-td>
-                <q-td auto-width key="updated_at" :props="props">{{ $moment(props.row.updatedAt ==null? "NA" : props.row.updatedAt).format("Do MMM Y") }}</q-td>
-                <q-td auto-width key="action" :props="props">
+                <q-td key="updated_at" :props="props">{{ $moment(props.row.updatedAt ==null? "NA" : props.row.updatedAt).format("Do MMM Y") }}</q-td>
+                <q-td key="action" :props="props">
                   <q-btn
-                    highlight
                     push
                     class="q-mx-sm"
                     color="positive"
                     @click="openAcceptModel(props.row)"
                     size="sm"
-                    >Accept</q-btn
-                  >
+                    label="Accept"
+                  />
                   <q-btn
-                    highlight
                     push
                     class="q-mx-sm"
                     color="negative"
                     @click="moveToScrap(props.row)"
                     size="sm"
-                    >Moved To Scrap</q-btn
-                  >
+                    label="Moved To Scrap"
+                  />
                 </q-td>
                 <!--END: table other data -->
               </q-tr>
             </template>
-            <template slot="top" class="bottom-border">
+            <template v-slot:top class="bottom-border">
               <!--START: table filter,search -->
               <div class="col-md-5">
                 <q-input
@@ -229,9 +227,12 @@ import { required, or } from '@vuelidate/validators';
     computed: {
       ...mapGetters("AggregatorSendToRepair", ["getPhonepeSendToRepairDetails"])
     },
-    // created() {
-    //   this.ajaxLoadAllLeadInfo();
-    // },
+    created() {
+      this.ajaxLoadAllLeadInfo({
+        pagination: this.paginationControl,
+        filter: this.filterSearch
+      });
+    },
       mounted() {
       this.ajaxLoadAllLeadInfo({
         pagination: this.paginationControl,
