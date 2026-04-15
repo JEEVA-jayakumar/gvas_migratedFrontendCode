@@ -6,7 +6,7 @@
         <!--START: table title -->
         <div class="
             col-6 col-sm-4 col-md-8
-            text-h6
+            q-title
             text-weight-regular text-grey-9
           ">
           Aggregator Allocation Type / So
@@ -396,9 +396,9 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
+                error.response.data.message == null
                   ? "Please Try Again Later !"
-                  : error.body.message,
+                  : error.response.data.message,
               icon: "thumb_down"
             });
           });

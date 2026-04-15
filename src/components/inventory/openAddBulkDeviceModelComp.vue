@@ -9,7 +9,7 @@
       <div class="q-pa-md">
         <div class="row text-center justify-center">
           <div class="col-md-12 q-py-sm bottom-border">
-            <div class="text-h6 text-grey-9">Bijlipay Add New Device - Bulk Upload</div>
+            <div class="q-title text-grey-9">Bijlipay Add New Device - Bulk Upload</div>
           </div>
           <div class="col-md-8 q-py-md" align="left">
             <q-select
@@ -218,7 +218,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+            message: error.response.data.message == null ? "Please Try Again Later !" : error.response.data.message,
             icon: "thumb_down"
           });
         });

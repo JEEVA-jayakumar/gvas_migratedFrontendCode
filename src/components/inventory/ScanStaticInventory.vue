@@ -23,7 +23,7 @@
 
       <form>
         <div class="column group">
-          <div class="text-h6"></div>
+          <div class="q-title"></div>
         </div>
         <q-input
           readonly
@@ -126,9 +126,9 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
+                error.response.data.message == null
                   ? "Please Try Again Later !"
-                  : error.body.message,
+                  : error.response.data.message,
               icon: "thumb_down"
             });
             this.$q.loading.hide();

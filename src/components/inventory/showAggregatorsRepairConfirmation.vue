@@ -10,7 +10,7 @@
           <div class="column">
             <!-- <pre>{{propAllScannedItemArr}}</pre> -->
             <div class="col-md-12 bottom-border">
-              <div class="text-h6 text-weight-regular q-py-sm">Aggregator Send to repair</div>
+              <div class="q-title text-weight-regular q-py-sm">Aggregator Send to repair</div>
             </div>
             <div class="col-md-8 q-pt-md" align="left">
               <q-list dense separator>

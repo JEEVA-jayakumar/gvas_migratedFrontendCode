@@ -213,7 +213,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: `${error.data.message}`,
+            message: `${error.response.data.message}`,
             icon: "thumb_down"
           });
         });

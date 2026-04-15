@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="col-md-6 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"> Aggregator Update
+        <div class="col-md-6 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"> Aggregator Update
             SpareParts Pod List</div>
 
         <form>
@@ -274,9 +274,9 @@ export default {
                         color: "negative",
                         position: "bottom",
                         message:
-                            error.body.message == null
+                            error.response.data.message == null
                                 ? "Please Try Again Later !"
-                                : error.body.message,
+                                : error.response.data.message,
                         icon: "thumb_down"
                     });
                 });
@@ -300,9 +300,9 @@ export default {
         //         color: "negative",
         //         position: "bottom",
         //         message:
-        //           error.body.message == null
+        //           error.response.data.message == null
         //             ? "Please Try Again Later !"
-        //             : error.body.message,
+        //             : error.response.data.message,
         //         icon: "thumb_down"
         //       });
         //     });
@@ -326,9 +326,9 @@ export default {
         //         color: "negative",
         //         position: "bottom",
         //         message:
-        //           error.body.message == null
+        //           error.response.data.message == null
         //             ? "Please Try Again Later !"
-        //             : error.body.message,
+        //             : error.response.data.message,
         //         icon: "thumb_down"
         //       });
         //     });

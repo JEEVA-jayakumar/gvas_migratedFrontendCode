@@ -24,11 +24,6 @@
               </q-td>
             </template>
 
-        <template v-slot:body-cell-receivedAt="props">
-              <q-td :props="props">
-                {{ $moment(props.row.receivedAt ==null? "NA" : props.row.receivedAt).format("Do MMM Y") }}
-              </q-td>
-            </template>
         <template v-slot:body-cell-DeviceList="props">
               <q-td :props="props">
                 {{ $moment(props.row.device.createDate).format("Do MMM Y") }}

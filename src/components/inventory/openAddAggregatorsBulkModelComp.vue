@@ -9,7 +9,7 @@
         <div class="q-pa-md">
           <div class="row text-center justify-center">
             <div class="col-md-12 q-py-sm bottom-border">
-              <div class="text-h6 text-grey-9">Aggregator Bulk Upload</div>
+              <div class="q-title text-grey-9">Aggregator Bulk Upload</div>
             </div>
   
             <div class="col-md-8" align="left">
@@ -226,7 +226,7 @@ import { not, or } from '@vuelidate/validators';
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message:`${error.data.message}`,
+              message:`${error.response.data.message}`,
               icon: "thumb_down"
             });
           });
@@ -265,7 +265,7 @@ import { not, or } from '@vuelidate/validators';
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message:`${error.data.message}`,
+              message:`${error.response.data.message}`,
               icon: "thumb_down"
             });
           });

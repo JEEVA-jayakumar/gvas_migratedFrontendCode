@@ -15,7 +15,7 @@
       <!-- </div>
     </div> -->
     <div
-        class="col-md-6 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+        class="col-md-6 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >Bijlipay Serial Number Update</div>
     
     <form>
@@ -163,7 +163,7 @@ export default {
               type: "warning",
               color: "amber-9",
               position: "bottom",
-              message: error.data.message
+              message: error.response.data.message
             });
           });
       }

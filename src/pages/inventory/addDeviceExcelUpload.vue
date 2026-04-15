@@ -4,8 +4,8 @@
         <div>
             <div class="row bottom-border q-px-md q-py-md items-center">
                 <!--START: table title -->
-                <div class="col-md-8 text-h6 text-weight-regular  text-grey-9">Add New Devices - Scan & Upload</div>
-                <div class="col-md-4 col-sm-12 col-xs-12 text-h6 text-weight-regular text-grey-9" align="right">
+                <div class="col-md-8 q-title text-weight-regular  text-grey-9">Add New Devices - Scan & Upload</div>
+                <div class="col-md-4 col-sm-12 col-xs-12 q-title text-weight-regular text-grey-9" align="right">
                    <q-btn
                     @click="$router.push('/inventory/central')"
                     outline

@@ -6,7 +6,7 @@
           <div class="column">
             <!-- <pre>{{propAllScannedItemArr}}</pre> -->
             <div class="col-md-12 bottom-border">
-              <div class="text-h6 text-weight-regular q-py-sm">Aggregator POD Number </div>
+              <div class="q-title text-weight-regular q-py-sm">Aggregator POD Number </div>
             </div>
             <div class="col-md-8 q-pt-md" align="left">
               <q-input color="grey-9" v-model="formData.podNumber" label="Enter POD Number"
@@ -118,7 +118,7 @@
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: error.response.data.message == null ? "Please Try Again Later !" : error.response.data.message,
                 icon: "thumb_down"
               });
             });

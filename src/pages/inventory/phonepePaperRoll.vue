@@ -59,76 +59,67 @@
           >
             <template v-slot:body-cell-action1="props">
               <q-td :props="props">
-                 <q-td :props="props" :props="props">
-              <div class="row no-wrap no-padding">
-                <q-btn
-                  dense
-                  no-caps
-                  no-wrap
-                  label="Scan"
-                  icon="mdi-scanner"
-                  size="md"
-                  @click="toggleScanner(props.row)"
-                  flat
-                  class="text-green"
-                >
-                </q-btn>
-              </div>
-
+                <div class="row no-wrap no-padding">
+                  <q-btn
+                    dense
+                    no-caps
+                    no-wrap
+                    label="Scan"
+                    icon="mdi-scanner"
+                    size="md"
+                    @click="toggleScanner(props.row)"
+                    flat
+                    class="text-green"
+                  >
+                  </q-btn>
+                </div>
               </q-td>
             </template>
             <template v-slot:body-cell-action="props">
               <q-td :props="props">
-                 <q-td :props="props" :props="props">
-              <div class="row no-wrap no-padding">
-                <q-btn
-                  dense
-                  no-caps
-                  no-wrap
-                  label="print"
-                  icon="print"
-                  size="md"
-                  @click="generatePdf(props.row)"
-                  flat
-                  class="text-blue"
-                >
-                </q-btn>
-              </div>
-
+                <div class="row no-wrap no-padding">
+                  <q-btn
+                    dense
+                    no-caps
+                    no-wrap
+                    label="print"
+                    icon="print"
+                    size="md"
+                    @click="generatePdf(props.row)"
+                    flat
+                    class="text-blue"
+                  >
+                  </q-btn>
+                </div>
               </q-td>
             </template>
             <template v-slot:body-cell-action2="props">
               <q-td :props="props">
-                 <q-td :props="props" :props="props">
-              <div class="row no-wrap no-padding">
-                <q-btn
-                  dense
-                  no-caps
-                  no-wrap
-                  label="Submit"
-                  size="md"
-                  @click="sumbit(props.row)"
-                  flat
-                  style="background-color: #61116a; color: white;"
-                >
-                </q-btn>
-              </div>
-
+                <div class="row no-wrap no-padding">
+                  <q-btn
+                    dense
+                    no-caps
+                    no-wrap
+                    label="Submit"
+                    size="md"
+                    @click="sumbit(props.row)"
+                    flat
+                    style="background-color: #61116a; color: white;"
+                  >
+                  </q-btn>
+                </div>
               </q-td>
             </template>
             <template v-slot:body-cell-createdDate="props">
-              <q-td :props="props">
-                 <q-td :props="props"
-              :props="props"
-              >{{
+              <q-td :props="props">{{
                 props.row == null
                   ? "NA"
                   : $moment(props.row.createdDate).format("Do MMM Y")
-              }}</q-td
-            >
+              }}</q-td>
+            </template>
           </q-table>
         </q-tab-panel>
-<q-tab-panel name="tab-2">
+        <q-tab-panel name="tab-2">
           <div class="row">
             <q-input
               class="col-4"
@@ -145,48 +136,45 @@
             :rows="tableData1"
             :columns="columns2"
             :filter="filter1"
-            :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl1"
+            :rows-per-page-options="[5, 10, 15]"
+            v-model:pagination="paginationControl1"
             :loading="toggleAjaxLoadFilter1"
             @request="ajaxLoadAllLeadInfo1"
           >
-            <q-td
-              v-slot:body-cell-createdDate="props"> <q-td :props="props"
-              :props="props"
-              >{{
+            <template v-slot:body-cell-createdDate="props">
+              <q-td :props="props">{{
                 props.row == null
                   ? "NA"
                   : $moment(props.row.createdDate).format("Do MMM Y")
-              }}</q-td
-            >
-            <q-td
-              v-slot:body-cell-updatedDate="props"> <q-td :props="props"
-              :props="props"
-              >{{
+              }}</q-td>
+            </template>
+            <template v-slot:body-cell-updatedDate="props">
+              <q-td :props="props">{{
                 props.row == null
                   ? "NA"
                   : $moment(props.row.updatedDate).format("Do MMM Y")
-              }}</q-td
-            >
-            <q-td v-slot:body-cell-action3="props"> <q-td :props="props" :props="props">
-              <div class="row no-wrap no-padding">
-                <q-btn
-                  dense
-                  no-caps
-                  no-wrap
-                  label="Mark RTO"
-                  size="md"
-                  @click="MarkRto(props.row)"
-                  flat
-                  style="background-color: #61116a; color: white;"
-                >
-                </q-btn>
-              </div>
-
+              }}</q-td>
+            </template>
+            <template v-slot:body-cell-action3="props">
+              <q-td :props="props">
+                <div class="row no-wrap no-padding">
+                  <q-btn
+                    dense
+                    no-caps
+                    no-wrap
+                    label="Mark RTO"
+                    size="md"
+                    @click="MarkRto(props.row)"
+                    flat
+                    style="background-color: #61116a; color: white;"
+                  >
+                  </q-btn>
+                </div>
               </q-td>
             </template>
           </q-table>
         </q-tab-panel>
-<q-tab-panel name="tab-3">
+        <q-tab-panel name="tab-3">
           <div class="row">
             <q-input
               class="col-4"
@@ -203,37 +191,32 @@
             :rows="tableData2"
             :columns="columns3"
             :filter="filter2"
-            :rows-per-page-options="[5, 10, 15]" v-model:pagination="paginationControl2"
+            :rows-per-page-options="[5, 10, 15]"
+            v-model:pagination="paginationControl2"
             :loading="toggleAjaxLoadFilter2"
             @request="ajaxLoadAllLeadInfo2"
           >
-            <q-td
-              v-slot:body-cell-createdDate="props"> <q-td :props="props"
-              :props="props"
-              >{{
+            <template v-slot:body-cell-createdDate="props">
+              <q-td :props="props">{{
                 props.row == null
                   ? "NA"
                   : $moment(props.row.createdDate).format("Do MMM Y")
-              }}</q-td
-            >
-            <q-td
-              v-slot:body-cell-updatedDate="props"> <q-td :props="props"
-              :props="props"
-              >{{
+              }}</q-td>
+            </template>
+            <template v-slot:body-cell-updatedDate="props">
+              <q-td :props="props">{{
                 props.row == null
                   ? "NA"
                   : $moment(props.row.updatedDate).format("Do MMM Y")
-              }}</q-td
-            >
-            <q-td
-              v-slot:body-cell-rtoCreatedDate="props"> <q-td :props="props"
-              :props="props"
-              >{{
+              }}</q-td>
+            </template>
+            <template v-slot:body-cell-rtoCreatedDate="props">
+              <q-td :props="props">{{
                 props.row == null
                   ? "NA"
                   : $moment(props.row.rtoCreatedDate).format("Do MMM Y")
-              }}</q-td
-            >
+              }}</q-td>
+            </template>
           </q-table>
         </q-tab-panel>
 </q-tab-panels>
@@ -930,9 +913,9 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              error.body.message == null
+              error.response.data.message == null
                 ? "Please Try Again Later !"
-                : error.body.message,
+                : error.response.data.message,
             icon: "thumb_down"
           });
         });
@@ -1031,9 +1014,9 @@ export default {
             color: "negative",
             position: "bottom",
             message:
-              error.body.message == null
+              error.response.data.message == null
                 ? "Please Try Again Later !"
-                : error.body.message,
+                : error.response.data.message,
             icon: "thumb_down"
           });
         });

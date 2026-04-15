@@ -5,7 +5,7 @@
     <div>
       <div class="row q-px-md q-py-md items-center">
         <!--START: table title -->
-        <div class=" col-6 col-sm-4 col-md-8 text-h6 text-weight-regular text-grey-9 ">
+        <div class=" col-6 col-sm-4 col-md-8 q-title text-weight-regular text-grey-9 ">
         </div>
       </div>
 
@@ -30,11 +30,11 @@
         </div>
       </div>
       <!-- onfocus="clearInput($event)"-->
-      <div class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
+      <div class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
         <!--START: table title -->
         <div class="
             col-6 col-sm-4 col-md-8
-            text-h6
+            q-title
             text-weight-regular text-grey-9
           ">
           Stock List

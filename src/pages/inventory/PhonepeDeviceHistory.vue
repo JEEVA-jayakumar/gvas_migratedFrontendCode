@@ -3,7 +3,7 @@
     <!-- content -->
     <div>
       <!--STARTv-model: table title -->
-      <div class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">Aggregator Device History</div>
+      <div class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">Aggregator Device History</div>
       <!--END: table title -->
       <!--START: table lead validation -->
       <!-- <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">

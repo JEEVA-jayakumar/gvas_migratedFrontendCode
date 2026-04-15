@@ -13,7 +13,7 @@
   
         <form>
           <div class="column group">
-            <div class="text-h6"></div>
+            <div class="q-title"></div>
           </div> 
           <!-- <q-item-section class="text-body1">{{this.formData.podNumber.podNumber}}</q-item-section> -->
           <!-- <p>{{ formData.podNumber.podNumber }}</p> -->
@@ -97,7 +97,7 @@
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: error.response.data.message == null ? "Please Try Again Later !" : error.response.data.message,
                 icon: "thumb_down"
               });
             });

@@ -199,7 +199,7 @@ LOST
         </div>
        </template>
       <!-- <div>
-        class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+        class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >Enter Device Serial Number/TID</div> -->
       <q-table
         title="Change Management"

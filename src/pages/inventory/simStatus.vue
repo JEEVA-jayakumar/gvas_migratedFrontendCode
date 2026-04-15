@@ -2,7 +2,7 @@
   <q-page>
     <div>
       <div
-        class="col-md-6 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+        class="col-md-6 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       >
         Sim Status
       </div>
@@ -24,11 +24,6 @@
         <template v-slot:body-cell-receivedAt="props">
               <q-td :props="props">
                 {{ $moment(props.row.receivedAt).format("Do MMM Y") }}
-              </q-td>
-            </template>
-        <template v-slot:body-cell-receivedAt="props">
-              <q-td :props="props">
-                {{ $moment(props.row.receivedAt ==null? "NA" : props.row.receivedAt).format("Do MMM Y") }}
               </q-td>
             </template>
         <template v-slot:body-cell-DeviceList="props">
