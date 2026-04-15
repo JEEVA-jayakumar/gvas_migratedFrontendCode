@@ -7,7 +7,7 @@
      <div class="q-pa-md">
         <div class="row text-center justify-center">
           <div class="col-md-12 q-py-sm bottom-border">
-            <div class="text-h6 text-grey-9">
+            <div class="q-title text-grey-9">
               Sim De-Activation - Bulk Upload
             </div>
           </div>
@@ -238,9 +238,9 @@ export default {
               color: "negative",
               position: "bottom",
               message:
-                error.body.message == null
+                error.response.data.message == null
                   ? "Please Try Again Later !"
-                  : error.body.message,
+                  : error.response.data.message,
               icon: "thumb_down"
             });
             // this.formData.fileSelected = []

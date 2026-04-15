@@ -138,19 +138,17 @@
           >
             <template v-slot:body-cell-merchantName="props">
               <q-td :props="props">
-
-              <template v-if="props.row.pod == true">
-                {{ props.row.podNumber }}
-              </template>
-              <template v-else>
-                <q-input
-                  label="Enter POD Number"
-                  placeholder="Enter POD Number"
-                  v-model="props.row.podNumber"
-                  dense
-                />
-              </template>
-
+                <template v-if="props.row.pod == true">
+                  {{ props.row.podNumber }}
+                </template>
+                <template v-else>
+                  <q-input
+                    label="Enter POD Number"
+                    placeholder="Enter POD Number"
+                    v-model="props.row.podNumber"
+                    dense
+                  />
+                </template>
               </q-td>
             </template>
             <template v-slot:body-cell-actionPodNumber="props">
@@ -970,9 +968,9 @@ export default {
             position: "bottom",
             // message: "Error in Updating Courier!",
             message:
-              error.body.message == null
+              error.response.data.message == null
                 ? "Please Try Again Later !"
-                : error.body.message,
+                : error.response.data.message,
             icon: "thumb_down",
           });
           this.$q.loading.hide();

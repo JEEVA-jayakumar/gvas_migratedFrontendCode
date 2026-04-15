@@ -12,7 +12,7 @@
         <q-btn flat size="md" icon="close" @click="emitVpaModalList(VpaDataToggle)"></q-btn>
       </div>
       <div class="row items-center q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
-      <div class="col text-h6">VPA LIST</div>
+      <div class="col q-title">VPA LIST</div>
 
     </div>
       <q-table

@@ -12,41 +12,33 @@
         color="grey-9"
       >
         <template v-slot:body-cell-action="props">
-              <q-td :props="props">
-                 <q-td :props="props" :props="props">
-          <div class="row no-wrap no-padding">
-            <q-btn
-              dense
-              no-caps
-              no-wrap
-              label="Modify"
-              icon="far fa-edit"
-              size="md"
-              @click="fnShowEditRegion(props.row)"
-              flat
-              class="text-light-blue"
-            ></q-btn>
-            <!-- <q-btn  dense no-caps no-wrap label="Disable" icon="far fa-minus-square" size="md" @click="fnDisablePermission(props.row.id)" flat class="text-negative">
-            </q-btn>-->
-          </div>
-
-              </q-td>
-            </template>
+          <q-td :props="props">
+            <div class="row no-wrap no-padding">
+              <q-btn
+                dense
+                no-caps
+                no-wrap
+                label="Modify"
+                icon="far fa-edit"
+                size="md"
+                @click="fnShowEditRegion(props.row)"
+                flat
+                class="text-light-blue"
+              ></q-btn>
+            </div>
+          </q-td>
+        </template>
 
         <template v-slot:body-cell-receivedAt="props">
-              <q-td :props="props">
-                 <q-td :props="props"
-          :props="props"
-        >{{ $moment(props.row.receivedAt).format("Do MMM Y") }}
-              </q-td>
-            </template>
+          <q-td :props="props">
+            {{ $moment(props.row.receivedAt).format("Do MMM Y") }}
+          </q-td>
+        </template>
         <template v-slot:body-cell-DeviceList="props">
-              <q-td :props="props">
-                 <q-td :props="props"
-          :props="props"
-        >{{ $moment(props.row.device.createDate).format("Do MMM Y") }}
-              </q-td>
-            </template>
+          <q-td :props="props">
+            {{ $moment(props.row.device.createDate).format("Do MMM Y") }}
+          </q-td>
+        </template>
 
         <template v-slot:top="props">
           <div class="col-md-5">
@@ -207,7 +199,7 @@ export default {
           this.$q.notify({
             color: "negative",
             position: "bottom",
-            message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+            message: error.response.data.message == null ? "Please Try Again Later !" : error.response.data.message,
             icon: "thumb_down"
           });
         });
@@ -260,7 +252,7 @@ export default {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
-                message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+                message: error.response.data.message == null ? "Please Try Again Later !" : error.response.data.message,
                 icon: "thumb_down"
               });
             });

@@ -3,7 +3,7 @@
     <div>
       <!--STARTv-model: table title -->
       <div
-        class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular text-grey-9"
+        class="col-md-12 q-title q-px-lg q-py-md text-weight-regular text-grey-9"
       ></div>
       <!--END: table title -->
       <!-- //Common lead information in popup -->
@@ -44,18 +44,21 @@
               </q-td>
             </template>
         <template v-slot:body-cell-regionAreaName="props">
-              <q-td :props="props">
-                {{
-            props.row.allocate_region == null
-              ? "NA"
-              : props.row.allocate_region.regionAreaName
-          }}</q-td
-        >
-        <q-td v-slot:body-cell-name="props" :props="props">{{
-          props.row.allocate_so == null ? "NA" : props.row.allocate_so.name+" | "+props.row.allocate_so.employeeID
-        }}
-              </q-td>
-            </template>
+          <q-td :props="props">
+            {{
+              props.row.allocate_region == null
+                ? "NA"
+                : props.row.allocate_region.regionAreaName
+            }}
+          </q-td>
+        </template>
+        <template v-slot:body-cell-name="props">
+          <q-td :props="props">
+            {{
+              props.row.allocate_so == null ? "NA" : props.row.allocate_so.name+" | "+props.row.allocate_so.employeeID
+            }}
+          </q-td>
+        </template>
         <template v-slot:body-cell-status="props">
               <q-td :props="props">
 

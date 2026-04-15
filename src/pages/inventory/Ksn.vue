@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="col-12 text-h6 q-my-lg text-weight-regular" align="center">
+    <div class="col-12 q-title q-my-lg text-weight-regular" align="center">
       OTP Verification
     </div>
     <form>
@@ -114,7 +114,7 @@ export default {
               type: "warning",
               color: "amber-9",
               position: "bottom",
-              message: error.data.message,
+              message: error.response.data.message,
             });
           });
       }
@@ -165,7 +165,7 @@ export default {
                   type: "warning",
                   color: "amber-9",
                   position: "bottom",
-                  message: error.data.message,
+                  message: error.response.data.message,
                 });
               });
           } else {
@@ -174,13 +174,13 @@ export default {
               type: "warning",
               color: "amber-9",
               position: "bottom",
-              message: this.mobiledata.body.message,
+              message: this.mobiledata.data.message,
               icon: "thumb_up",
             });
           }
         })
         .catch((error) => {
-          if (error.body.message == "Value already present") {
+          if (error.response.data.message == "Value already present") {
             this.$q.loading.show({
               delay: 100,
               spinnerColor: "purple-9",
@@ -214,7 +214,7 @@ export default {
                   type: "warning",
                   color: "amber-9",
                   position: "bottom",
-                  message: error.data.message,
+                  message: error.response.data.message,
                 });
               });
           } else {
@@ -223,7 +223,7 @@ export default {
               type: "warning",
               color: "amber-9",
               position: "bottom",
-              message: error.data.message,
+              message: error.response.data.message,
             });
           }
         });

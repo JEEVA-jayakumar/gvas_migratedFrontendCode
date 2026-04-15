@@ -2,7 +2,7 @@
   <q-dialog v-model="toggleModel" persistent>
     <q-card style="min-width: 40vw; padding: 30px;">
       <q-card-section>
-        <div class="text-h6 text-weight-regular text-center">
+        <div class="q-title text-weight-regular text-center">
           <strong>Download Pending Tickets Reports</strong>
         </div>
       </q-card-section>
@@ -117,7 +117,7 @@ export default {
         .catch((error) => {
           this.$q.loading.hide();
           const status = error.status || (error.response && error.response.status);
-          const message = (error.body && error.body.message) ? error.body.message : "Error occurred";
+          const message = (error.response.data && error.response.data.message) ? error.response.data.message : "Error occurred";
 
           if (status == 400) {
             this.$q.notify({

@@ -5,7 +5,7 @@
     <div>
       <!--STARTv-model: table title -->
       <div
-        class="col-md-12 text-h6 q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
+        class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9"
       ></div>
       <!--END: table title -->
       <!--START: table lead validation -->
@@ -296,7 +296,7 @@ export default {
     //         this.$q.notify({
     //           color: "negative",
     //           position: "bottom",
-    //           message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
+    //           message: error.response.data.message == null ? "Please Try Again Later !" : error.response.data.message,
     //           icon: "thumb_down"
     //         });
     //       });
