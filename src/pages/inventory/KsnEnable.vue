@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="full-width group" align="center">
-        <q-btn  :disable="this.formData.tid.length != 8" size="md" type="button" color="purple-9" @click="fnSubmittid(formData)"
+        <q-btn  :disable="formData.tid.length != 8" size="md" type="button" color="purple-9" @click="fnSubmittid(formData)"
           >Submit</q-btn
         >
       </div>

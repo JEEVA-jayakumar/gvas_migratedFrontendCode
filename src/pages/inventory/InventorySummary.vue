@@ -28,7 +28,7 @@
 </q-tabs>
 <q-tab-panels v-model="inventoryOptionSelected" animated>
 <q-tab-panel name="AllocatedDevices">
-              <AllocatedDevices @emittedForTotalSerialNumbers="this.fnAjaxAllocatedDevice" />
+              <AllocatedDevices @emittedForTotalSerialNumbers="fnAjaxAllocatedDevice" />
             </q-tab-panel>
 <q-tab-panel name="UnAllocatedDevices">
               <UnAllocatedDevices @emittedForTotalSerialNumbers="fnAjaxFetchAllDeviceDetailsWithCount" />

@@ -8,25 +8,25 @@
       </q-card-section>
 
       <q-card-section class="q-gutter-y-md">
-        <q-input filled v-model="formData.from" label="From Date" color="grey-9" readonly @click="$refs.fromDateProxy.show()">
-          <template v-slot:append>
-            <q-icon name="event" class="cursor-pointer">
-              <q-popup-proxy ref="fromDateProxy" transition-show="scale" transition-hide="scale">
-                <q-date v-model="formData.from" mask="YYYY-MM-DD" @update:model-value="$refs.fromDateProxy.hide()" />
-              </q-popup-proxy>
-            </q-icon>
-          </template>
-        </q-input>
+        <q-input filled v-model="formData.from" label="From Date" color="grey-9" >
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="formData.from" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
 
-        <q-input filled v-model="formData.to" label="To Date" color="grey-9" readonly @click="$refs.toDateProxy.show()">
-          <template v-slot:append>
-            <q-icon name="event" class="cursor-pointer">
-              <q-popup-proxy ref="toDateProxy" transition-show="scale" transition-hide="scale">
-                <q-date v-model="formData.to" mask="YYYY-MM-DD" @update:model-value="$refs.toDateProxy.hide()" />
-              </q-popup-proxy>
-            </q-icon>
-          </template>
-        </q-input>
+        <q-input filled v-model="formData.to" label="To Date" color="grey-9" >
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="formData.to" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
       </q-card-section>
 
       <q-card-actions align="right">
@@ -70,7 +70,7 @@ export default {
 
   computed: {
     submitDisabled() {
-      return !this.formData.from || !this.formData.to;
+      return !(this.formData.from != 0 || this.formData.to != 0);
     }
   },
 

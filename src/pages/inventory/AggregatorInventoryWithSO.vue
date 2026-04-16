@@ -11,7 +11,7 @@
         </div>
       </div> -->
      
-        <q-table table-class="customTableClass" :rows="this.getInventoryWithSOAggregatorList" v-model:columns="columns"
+        <q-table table-class="customTableClass" :rows="getInventoryWithSOAggregatorList" v-model:columns="columns"
           :filter="filter" v-model:pagination="paginationControl" row-key="name">
           <!-- <template v-slot:body-cell-createdAt="props">
               <q-td :props="props">

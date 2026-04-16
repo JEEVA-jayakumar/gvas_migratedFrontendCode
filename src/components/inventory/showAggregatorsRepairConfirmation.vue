@@ -22,7 +22,7 @@
             </div>
             <div class="col-md-12 col-md-6 q-pt-md group" align="right">
               <q-btn icon="block" outline label="Cancel" @click="emitToggleCheque"/>
-              <q-btn icon="check" class="common-btn" :disable="this.formData.scannedItems[0].deviceSerialNumbers.length == 0" label="Submit" @click="fnFinalFaultySubmit(1)"/>
+              <q-btn icon="check" class="common-btn" :disable="formData.scannedItems[0].deviceSerialNumbers.length == 0" label="Submit" @click="fnFinalFaultySubmit(1)"/>
             </div>
           </div>
         </div>

@@ -133,7 +133,7 @@ export default {
                 message: "Successfully  Moved!",
                 icon: "thumb_up"
               });
-            }).onCancel(error => {
+            }).catch(error => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",

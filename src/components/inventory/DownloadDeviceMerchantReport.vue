@@ -40,7 +40,7 @@
               class="bg-white text-weight-regular text-grey-8"
               @click="emitfnshowDeviceMerchant()"
             >Cancel</q-btn>
-            <q-btn align="right" @click="downloadMerchant(formData)"  color="purple-9">Download</q-btn>
+            <q-btn align="right" @click="downloadMerchant(formData)" :disabled="submitDisabled"  color="purple-9">Download</q-btn>
           </div>
           <!-- :disabled="submitDisabled" -->
         </div>
@@ -86,12 +86,12 @@ export default {
     
   },
 
-  // computed: {
-  //       submitDisabled: function () {
+  computed: {
+        submitDisabled: function () {
 
-  //     return (this.formData.from !=0 || this.formData.to !=0) ;
-  //   },
-  // },
+      return !(this.formData.from != 0 || this.formData.to != 0);
+    },
+  },
   methods: {
        ...mapActions("InventoryCentral",["REPORT_MERCHANT_MENU"]),
       emitfnshowDeviceMerchant() {

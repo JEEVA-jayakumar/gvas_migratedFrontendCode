@@ -9,8 +9,8 @@
       </div>
       <div class="q-ma-sm">
       </div>
-      <p><b>{{ this.count }}</b> QR from {{ this.bank }} Bank generated Successfully</p>
-      <strong> Batch ID :{{ this.batchId }} </strong>
+      <p><b>{{ count }}</b> QR from {{ bank }} Bank generated Successfully</p>
+      <strong> Batch ID :{{ batchId }} </strong>
       <div class="group alignsize" align="right">
         <q-btn @click="emitToggleRemarks()" color="negative" icon="close" label="Dismiss" />
         <q-btn @click="fnsubmit()" color="positive" icon="check" label="Download" />

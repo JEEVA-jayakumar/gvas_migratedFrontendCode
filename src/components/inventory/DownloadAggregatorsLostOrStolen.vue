@@ -88,12 +88,11 @@
     computed: {
       //     submitDisabled: function () {
   
-      //   return (this.formData.fromDate !=0 || this.formData.toDate !=0) ;
+      //   return !(this.formData.fromDate != 0 || this.formData.toDate != 0);
       // },
        submitDisabled: function () {
-  
-        return (this.formData.from !=0 || this.formData.to !=0 || (this.formData.from== 0 && this.formData.to== 0)) ;
-      },
+      return !(this.formData.from != 0 || this.formData.to != 0);
+    },
     },
     methods: {
          ...mapActions("DownloadInventoryLostOrStolenData",["FETCH_LOST_OR_STOLEN_INVENTORY_ALL_DATAS", "FETCH_AGGREGATORS_LOST_OR_STOLEN_INVENTORY_ALL_DATAS"]),

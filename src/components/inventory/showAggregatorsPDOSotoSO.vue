@@ -26,7 +26,7 @@
             
             <div class="col-md-12 col-md-6 q-pt-md group" align="right">
               <q-btn icon="block" outline label="Cancel" @click="emitToggleCheque" />
-              <q-btn :disable="this.formData.remarks == '' || this.formData.podNumber ==''" icon="check" 
+              <q-btn :disable="formData.remarks == '' || this.formData.podNumber ==''" icon="check"
               class="common-btn" label="Submit" @click="fnSubmitAllocateRegion" />
             </div>
           </div>

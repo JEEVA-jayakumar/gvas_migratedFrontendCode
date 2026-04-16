@@ -144,7 +144,7 @@
             >Print</q-btn
           > -->
           <q-btn
-          :disable="this.formData.total_count == 0"
+          :disable="formData.total_count == 0"
             size="md"
             type="button"
             color="purple-9"

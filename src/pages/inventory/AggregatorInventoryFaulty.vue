@@ -416,7 +416,7 @@ export default {
                 message: "Devices has been updated successfully",
                 icon: "thumb_up"
               });
-            }).onCancel(() => {
+            }).catch(() => {
               this.$q.loading.hide();
               this.$q.notify({
                 color: "negative",
