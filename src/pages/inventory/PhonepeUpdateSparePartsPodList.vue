@@ -67,7 +67,7 @@
                         label="Select Region" @update:model-value="regionBasedSoLoad" />
                 </div>
                 <div class="col-md-2">
-                    <q-select filter clearable :disable="this.propRowDetails.allocate_so == null" v-model="formData.allocate_so" label="Select SO" radio color="grey-9"
+                    <q-select filter clearable :disable="propRowDetails.allocate_so == null" v-model="formData.allocate_so" label="Select SO" radio color="grey-9"
                         :options="regionBasedSo" />
                 </div>
                  <div class="col-md-2">

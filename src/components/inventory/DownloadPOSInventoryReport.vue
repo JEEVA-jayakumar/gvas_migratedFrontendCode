@@ -17,7 +17,7 @@
                 v-model="formData.selectedFromYear"
                 label="Choose Date Range"
                 color="grey-9"
-                readonly
+
               >
                 <template v-slot:append>
                   <q-icon name="event" class="cursor-pointer">
@@ -104,7 +104,7 @@
     },
     computed: {
       submitDisabled() {
-        return !this.formData.selectedFromYear;
+        return !(this.formData.selectedFromYear != 0);
         // return (this.formData.selectedFromYear != 0 && this.formData.selectedToYear != 0) ;
       }
     },

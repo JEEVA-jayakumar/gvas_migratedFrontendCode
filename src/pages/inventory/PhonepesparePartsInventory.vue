@@ -78,7 +78,7 @@
             @click="myPrint('myfrm')"
             >Print</q-btn
           > -->
-          <q-btn :disable="this.formData.total_count == 0" size="md" type="button" color="purple-9" @click="fnSubmitBankDetails(formData)">Submit</q-btn>
+          <q-btn :disable="formData.total_count == 0" size="md" type="button" color="purple-9" @click="fnSubmitBankDetails(formData)">Submit</q-btn>
         </div>
         <Form model="post" class="full-width group" action="" id="myfrm" :disabled="true">
           <!-- <fieldset disable>

@@ -15,7 +15,7 @@
           <div class="column group">
             <div class="q-title"></div>
           </div> 
-          <!-- <q-item-section class="text-body1">{{this.formData.podNumber.podNumber}}</q-item-section> -->
+          <!-- <q-item-section class="text-body1">{{ formData.podNumber.podNumber}}</q-item-section> -->
           <!-- <p>{{ formData.podNumber.podNumber }}</p> -->
           <q-input v-model="formData.podNumber.podNumber" readonly  label="POD Number"/>
           <div class="group" >

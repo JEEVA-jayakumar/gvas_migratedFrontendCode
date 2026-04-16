@@ -6,7 +6,7 @@
       no-esc-dismiss
 
     >
-      <!-- Scanned Devices: {{this.propAllScannedItemArr.scannedItems}} -->
+      <!-- Scanned Devices: {{ propAllScannedItemArr.scannedItems}} -->
       <div class="q-pa-md">
         <div class="column">
           <!-- <pre>{{propAllScannedItemArr}}</pre> -->

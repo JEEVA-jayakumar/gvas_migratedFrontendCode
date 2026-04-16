@@ -83,7 +83,7 @@
           />
           <q-btn
             icon="shopping_cart"
-            :disabled="this.scannerToggleOption== true"
+            :disabled="scannerToggleOption== true"
             outline
             class="q-py-xs"
             label="Add to cart"

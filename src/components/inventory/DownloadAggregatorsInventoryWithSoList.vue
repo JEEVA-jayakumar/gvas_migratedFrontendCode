@@ -25,7 +25,15 @@
                 :min="yesterday"
                 :max="tomorrow"
                 label="From Date"
-              />
+              >
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="formData.fromDate" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
             </div>
             <div class="col-md-12">
               <q-input
@@ -35,7 +43,15 @@
                 :min="yesterday"
                 :max="tomorrow"
                 label="To Date"
-              />
+              >
+            <template v-slot:append>
+              <q-icon name="event" class="cursor-pointer">
+                <q-menu transition-show="scale" transition-hide="scale">
+                  <q-date v-model="formData.toDate" mask="YYYY-MM-DD" />
+                </q-menu>
+              </q-icon>
+            </template>
+          </q-input>
             </div>
             <div class="col-md-12 group" align="right">
               <q-btn
@@ -97,14 +113,11 @@
     computed: {
       //     submitDisabled: function () {
   
-      //   return (this.formData.fromDate !=0 || this.formData.toDate !=0) ;
+      //   return !(this.formData.fromDate != 0 || this.formData.toDate != 0);
       // },
       submitDisabled: function () {
-        return this.formData.fromDate != 0 ||
-          this.formData.toDate != 0 ||
-          (this.formData.fromDate == 0 && this.formData.toDate == 0)
-          ;
-      },
+      return !(this.formData.fromDate != 0 || this.formData.toDate != 0);
+    },
     },
     methods: {
       ...mapActions("DownloadInventoryWithSoData", ["INVENTORY_WITH_SO_ALL_DATAS", "AGGREGATOR_INVENTORY_WITH_SO_ALL_DATAS"]),

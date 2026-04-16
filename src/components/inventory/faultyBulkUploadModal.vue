@@ -2,7 +2,7 @@
   <div>
     <q-dialog
 
-      v-model="toggleModal"
+      v-model="toggleModal" persistent
       @hide="emitToggleinventoryBulkUpload(toggleModal)"
       @escape-key="emitToggleinventoryBulkUpload(toggleModal)"
 
@@ -20,12 +20,12 @@
               v-model="formData.deviceType"
               label="Select Device Type"
               radio
-              :options="rawDevicesTypes"
+              :options="selectOption"
             />
           </div>
           <div class="col-md-8" align="left">
             <a
-              href="/files/faultDeviceUploadTemplate.xlsx"
+              href="statics/files/faultDeviceUploadTemplate.xlsx"
               class="hide-underline"
               >Click here to download the template</a
             >
@@ -103,13 +103,16 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   props: ["propBulkUpload", "propAllDevicestypes"],
 
+  created() {
+    this.deviceTypeOptions();
+  },
   data() {
     return {
       toggleModal: this.propBulkUpload,
       rawDevicesTypes: this.propAllDevicestypes,
       selectOption: [],
       formData: {
-        deviceType: "",
+        deviceType: { id: "" },
         fileSelected: []
       },
       uploaderHovered: false
@@ -126,13 +129,14 @@ export default {
     ...mapActions("InventoryCentral", ["FEED_FAULTY_BULK_UPLOAD_FINAL_SUBMIT"]),
     deviceTypeOptions() {
       let cookedArr = [];
+      if (!this.propAllDevicestypes) return;
       this.propAllDevicestypes.map(function(value, index) {
         cookedArr.push({
           label: value.deviceName,
-          value: value.id
+          value: value
         });
       });
-      this.formData.deviceType = cookedArr[0].value;
+      this.formData.deviceType = cookedArr[0] ? cookedArr[0].value : { id: "" };
       this.selectOption = cookedArr;
     },
 
@@ -214,7 +218,7 @@ export default {
             this.$q.notify({
               color: "negative",
               position: "bottom",
-              message: error.response.data.message == null ? "Please Try Again Later !" : error.response.data.message,
+              message: error.body.message == null ? "Please Try Again Later !" : error.body.message,
               icon: "thumb_down"
             });
           });

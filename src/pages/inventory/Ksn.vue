@@ -23,7 +23,7 @@
       </div>
       <div class="full-width group" align="center">
         <q-btn
-          :disable="this.formData.otp.length != 6"
+          :disable="formData.otp.length != 6"
           size="md"
           type="button"
           color="purple-9"

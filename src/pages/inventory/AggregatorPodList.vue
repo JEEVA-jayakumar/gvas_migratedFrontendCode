@@ -63,7 +63,7 @@
         </template>
       </q-table>
       <!--START >>  Download Reports -->
-      <AggregatorDownloadPod v-if="propPodListDatas" :propPodListDatas="propAggregator" :propData="this.propAggregator"
+      <AggregatorDownloadPod v-if="propPodListDatas" :propPodListDatas="propAggregator" :propData="propAggregator"
         @emitfnshowPodList="downloadPodList"></AggregatorDownloadPod>
       <!--END:  Download Reports-->
       <AggregatorEditRegion v-if="propShowEditRegion" :propShowEditRegion="propShowEditRegion"

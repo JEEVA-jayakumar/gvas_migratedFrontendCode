@@ -98,8 +98,8 @@
   
     computed: {
       submitDisabled: function () {
-        return (this.formData.from !=0 || this.formData.to !=0 || (this.formData.from== 0 && this.formData.to == 0)) ;
-      },
+      return !(this.formData.from != 0 || this.formData.to != 0);
+    },
     },
     methods: {
       ...mapActions("DownloadInventoryDeviceHistoryReports", ["FETCH_INVENTORY_DEVICE_HISTORY_DATAS", "FETCH_PHONE_PE_INVENTORY_DEVICE_HISTORY_DATAS"]),

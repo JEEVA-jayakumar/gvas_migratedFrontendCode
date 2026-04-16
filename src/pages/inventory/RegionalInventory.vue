@@ -873,7 +873,7 @@ export default {
                 message: "Successfully Edited" + "-" + rowDetails,
                 icon: "thumb_up",
               });
-            }).onCancel((error) => {
+            }).catch((error) => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",

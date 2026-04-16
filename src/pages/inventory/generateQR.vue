@@ -25,7 +25,7 @@
                 <div class="row">
                   <label class="invlabel"  for="input"><b>Enter No Of QR</b></label>
                   <div class="col-3">
-                      <q-input type="number" class="qr-input" :disable="this.formData.id == ''" @keyup="trackChange" @keydown="nameKeydown($event)" label="Enter Numbers of QR Count" v-model.trim="formData.count" id="input"
+                      <q-input type="number" class="qr-input" :disable="formData.id == ''" @keyup="trackChange" @keydown="nameKeydown($event)" label="Enter Numbers of QR Count" v-model.trim="formData.count" id="input"
                     @blur="$v.formData.count.$touch"
                             :error="$v.formData.count.$error"
                       color="grey-9" />
@@ -432,7 +432,7 @@ export default {
         //     this.addBasicInformation = response
         //   }
         // }
-      }).onCancel(() => {
+      }).catch(() => {
         this.$q.notify({
           color: 'negative',
           position: 'bottom',
@@ -476,7 +476,7 @@ export default {
         this.$q.loading.hide()
       })
       
-    }).onCancel(() => {
+    }).catch(() => {
         this.$q.notify({
           color: 'negative',
           position: 'bottom',

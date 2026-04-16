@@ -248,7 +248,7 @@ export default {
                 message: "Successfully Deleted!",
                 icon: "thumb_up"
               });
-            }).onCancel(() => {
+            }).catch(() => {
               this.$q.notify({
                 color: "negative",
                 position: "bottom",
@@ -257,7 +257,7 @@ export default {
               });
             });
         })
-        .onCancel(() => {
+        .catch(() => {
           this.$q.notify({
             color: "negative",
             position: "bottom",
