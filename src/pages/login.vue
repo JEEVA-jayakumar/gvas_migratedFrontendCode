@@ -1,46 +1,82 @@
 <template>
-  <q-page>
-    <!-- content -->
-    <div class="row items-center window-height">
-      <div class="col-md-5 gt-sm bg-grey-4" align="center">
-        <div class="row items-center window-height full-width inline" align="center">
-          <div class="col-auto no-padding full-width" align="center">
-            <img src="~assets/images/logo.png" class="responsive vertical-align" style="width:200px" />
-          </div>
+  <q-page class="login-page flex flex-center">
+    <div class="login-card-container">
+      <q-card class="login-card q-pa-xl">
+        <div class="text-center q-mb-lg">
+          <img src="~assets/images/logo.png" class="login-logo" />
+          <h1 class="text-h5 text-weight-bold q-mt-md q-mb-xs">Welcome Back</h1>
+          <p class="text-subtitle2 text-grey-7">Please enter your details to sign in</p>
         </div>
-      </div>
-      <div class="col-12 col-md-7 q-px-xl">
-        <div class="row justify-center q-gutter-md">
-          <div class="col-12 col-sm-10 col-md-8" align="center">
-            <div class="text-h4 text-grey-9 text-weight-medium q-py-lg">Please Log In </div>
-          </div>
-          <div class="col-12 col-sm-10 col-md-8">
-            <q-input v-model.trim="formData.email" @blur="v$.formData.email.$touch" :error="v$.formData.email.$error"
-              label="Email" color="grey-9" placeholder="Enter your email id"
-              @keyup.enter="fuSubmitLoginDetails(formData)" />
-          </div>
-          <div class="col-12 col-sm-10 col-md-8">
-            <q-input v-model="formData.password" @blur="v$.formData.password.$touch"
-              :error="v$.formData.password.$error" placeholder="Enter your password"
-              @keyup.enter="fuSubmitLoginDetails(formData)" type="password" label="Password" color="grey-9" />
-          </div>
-          <div class="col-12 col-sm-10 col-md-8">
-            <q-checkbox v-model="formData.rememberPassword" color="purple-9" label="Remember Password" />
-          </div>
-          <div class="col-12 col-sm-10 col-md-8" align="center">
-            <q-btn class="full-width text-weight-regular q-pa-md" no-caps color="purple-9"
-              @click="fuSubmitLoginDetails(formData)" style="max-width:300px">Log In</q-btn>
-          </div>
-          <div class="col-12 col-sm-10 col-md-8" align="center">
-            <q-btn flat no-caps class="text-purple-9 text-weight-regular"
-              @click="fnShowForgetPasswordModal">Forgot your password?</q-btn>
-          </div>
-        </div>
-      </div>
 
-      <showForgetPasswordComp v-if="showForgetPassword" :propShowForgetPassword="showForgetPassword"
-        @emitfnShowForgetPasswordModal="fnShowForgetPasswordModal"></showForgetPasswordComp>
+        <q-form @submit="fuSubmitLoginDetails(formData)" class="q-gutter-y-md">
+          <q-input
+            v-model.trim="formData.email"
+            @blur="v$.formData.email.$touch"
+            :error="v$.formData.email.$error"
+            label="Email"
+            outlined
+            rounded
+            bg-color="white"
+            placeholder="Enter your email"
+            @keyup.enter="fuSubmitLoginDetails(formData)"
+          >
+            <template v-slot:prepend>
+              <q-icon name="email" color="grey-7" />
+            </template>
+          </q-input>
+
+          <q-input
+            v-model="formData.password"
+            @blur="v$.formData.password.$touch"
+            :error="v$.formData.password.$error"
+            placeholder="Enter your password"
+            @keyup.enter="fuSubmitLoginDetails(formData)"
+            type="password"
+            label="Password"
+            outlined
+            rounded
+            bg-color="white"
+          >
+            <template v-slot:prepend>
+              <q-icon name="lock" color="grey-7" />
+            </template>
+          </q-input>
+
+          <div class="row items-center justify-between q-mt-sm">
+            <q-checkbox v-model="formData.rememberPassword" color="primary" label="Remember me" class="text-grey-8" />
+            <q-btn
+              flat
+              no-caps
+              padding="none"
+              color="primary"
+              class="text-weight-medium"
+              @click="fnShowForgetPasswordModal"
+            >
+              Forgot password?
+            </q-btn>
+          </div>
+
+          <q-btn
+            class="full-width q-py-md q-mt-lg submit-btn"
+            no-caps
+            color="primary"
+            unelevated
+            type="submit"
+            label="Sign In"
+          />
+        </q-form>
+      </q-card>
+
+      <div class="text-center q-mt-lg">
+        <p class="text-grey-6 text-caption">© {{ new Date().getFullYear() }} Bijlipay. All rights reserved.</p>
+      </div>
     </div>
+
+    <showForgetPasswordComp
+      v-if="showForgetPassword"
+      :propShowForgetPassword="showForgetPassword"
+      @emitfnShowForgetPasswordModal="fnShowForgetPasswordModal"
+    ></showForgetPasswordComp>
   </q-page>
 </template>
 
@@ -99,7 +135,8 @@ export default {
   validations: {
     formData: {
       email: {
-        required
+        required,
+        email
       },
       password: {
         required
@@ -155,8 +192,8 @@ export default {
         };
         this.$q.loading.show({
           delay: 100,
-          spinnerColor: "purple-9",
-          message: "Please wait.."
+          spinnerColor: "primary",
+          message: "Authenticating..."
         });
         this.FEED_LOGIN_DATA(requestParams)
           .then(response => {
@@ -173,7 +210,7 @@ export default {
                   this.$q.notify({
                     color: "positive",
                     position: "bottom",
-                    message: "Succesfully Logged In",
+                    message: "Successfully Logged In",
                     icon: "thumb_up",
                   });
                   this.fnNavigate("BijlipaySat", "/sat/master/BijlipaySat");
@@ -181,7 +218,7 @@ export default {
                   this.$q.notify({
                     color: "positive",
                     position: "bottom",
-                    message: "Succesfully Logged In",
+                    message: "Successfully Logged In",
                     icon: "thumb_up",
                   });
                   this.fnNavigate("adminDashboard", "/super/admin/dashboard");
@@ -193,7 +230,7 @@ export default {
                   this.$q.notify({
                     color: "positive",
                     position: "bottom",
-                    message: "Succesfully Logged In",
+                    message: "Successfully Logged In",
                     icon: "thumb_up",
                   });
                   this.fnNavigate("leadAllocation", "/sales/manager/lead/allocation/tracker");
@@ -201,7 +238,7 @@ export default {
                   this.$q.notify({
                     color: "positive",
                     position: "bottom",
-                    message: "Succesfully Logged In",
+                    message: "Successfully Logged In",
                     icon: "thumb_up",
                   });
                   this.fnNavigate("assignShortLead", "/bank/ops/assign/short/lead");
@@ -209,7 +246,7 @@ export default {
                   this.$q.notify({
                     color: "positive",
                     position: "bottom",
-                    message: "Succesfully Logged In",
+                    message: "Successfully Logged In",
                     icon: "thumb_up",
                   });
                   this.fnNavigate("exceptions", "/ops/head/exceptions");
@@ -221,7 +258,7 @@ export default {
                   this.$q.notify({
                     color: "positive",
                     position: "bottom",
-                    message: "Succesfully Logged In",
+                    message: "Successfully Logged In",
                     icon: "thumb_up",
                   });
                   this.fnNavigate("paymentVerificationTracker", "/finance/payment/verification/tracker");
@@ -229,7 +266,7 @@ export default {
                   this.$q.notify({
                     color: "positive",
                     position: "bottom",
-                    message: "Succesfully Logged In",
+                    message: "Successfully Logged In",
                     icon: "thumb_up",
                   });
                   this.fnNavigate("Bijlipay", "/inventory/master/Bijlipay");
@@ -237,7 +274,7 @@ export default {
                   this.$q.notify({
                     color: "positive",
                     position: "bottom",
-                    message: "Succesfully Logged In",
+                    message: "Successfully Logged In",
                     icon: "thumb_up",
                   });
                   this.fnNavigate("Ksn", "/inventory/master/Ksn");
@@ -245,7 +282,7 @@ export default {
                   this.$q.notify({
                     color: "positive",
                     position: "bottom",
-                    message: "Succesfully Logged In",
+                    message: "Successfully Logged In",
                     icon: "thumb_up",
                   });
                   this.fnNavigate("phonepePendingCrm", "/crm/phonepePendingCrm");
@@ -280,7 +317,7 @@ export default {
               this.$q.notify({
                 type: "warning",
                 position: "bottom",
-                message: "Your Accout is Locked, Please Contact Admin",
+                message: "Your Account is Locked, Please Contact Admin",
               });
             } else {
               this.$q.notify({
@@ -301,3 +338,51 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.login-page {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  min-height: 100vh;
+}
+
+.login-card-container {
+  width: 100%;
+  max-width: 450px;
+  padding: 20px;
+}
+
+.login-card {
+  border-radius: 24px !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+}
+
+.login-logo {
+  height: 50px;
+  margin-bottom: 8px;
+}
+
+.submit-btn {
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 12px !important;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(97, 17, 106, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+::v-deep(.q-field--outlined.q-field--rounded .q-field__control) {
+  border-radius: 12px !important;
+  background-color: #f8fafc;
+
+  &:hover {
+    background-color: #fff;
+  }
+}
+</style>
