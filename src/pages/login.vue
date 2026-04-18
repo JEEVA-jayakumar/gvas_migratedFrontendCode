@@ -123,15 +123,34 @@ export default {
 
       this.FEED_LOGIN_DATA(payload)
         .then((res) => {
-          this.loading = false;
-          const user = res.data.data;
-          if (user.hierarchy.hierarchyCode === "OH_3") {
-            this.$router.push("/sat/master/BijlipaySat");
-          } else if (user.hierarchy.hierarchyCode === "SA") {
-            this.$router.push("/super/admin/dashboard/");
-          } else {
+          this.FETCH_LOGGEDIN_USER_DATA().then(() => {
+            this.loading = false;
+            const userInfoStr = localStorage.getItem("u_i");
+            if (userInfoStr) {
+              const userInfo = JSON.parse(userInfoStr);
+              let roles = [];
+              userInfo.roles.map(oo => roles.push(oo.hierarchyRoleLevel));
+
+              if (roles.includes("OH_3")) {
+                this.$router.push("/sat/master/BijlipaySat");
+              } else if (roles.includes("BM_1")) {
+                this.$router.push("/super/admin/dashboard/");
+              } else if (roles.includes("BOH_2")) {
+                this.$router.push("/bank/ops/assign/short/lead");
+              } else if (roles.includes("OH_2")) {
+                this.$router.push("/ops/head/exceptions");
+              } else if (roles.includes("INH_2")) {
+                this.$router.push("/inventory/master/Bijlipay");
+              } else {
+                this.$router.push("/");
+              }
+            } else {
+              this.$router.push("/");
+            }
+          }).catch(() => {
+            this.loading = false;
             this.$router.push("/");
-          }
+          });
         })
         .catch((error) => {
           this.loading = false;

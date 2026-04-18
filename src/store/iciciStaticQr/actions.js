@@ -7,7 +7,7 @@ export const FETCH_ALL_STATIC_QR_LEAD_VALIDATIONS_DATA = ({
   // return api.get("lead-validation-traker-list").then(response => {
   if (request.pagination.sortBy == null) {
     return api
-    // https://qaapp.bijlipay.co.in:8085/api/qr-leads-list?page=1&size=10&search=&sort=qrLeadNumber&leadNumber.dir=desc
+    // https://qaapp.bijlipay.co.in:8985/api/qr-leads-list?page=1&size=10&search=&sort=qrLeadNumber&leadNumber.dir=desc
       .get(
         'qr-leads-list?page=' +
             request.pagination.page +

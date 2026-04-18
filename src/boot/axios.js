@@ -2,7 +2,7 @@ import { boot } from 'quasar/wrappers'
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'https://qaapp.bijlipay.co.in:8085/api/',
+  baseURL: 'https://qaapp.bijlipay.co.in:8985/api/',
   // Token-based auth; cookies are not required (and can complicate CORS in dev).
   withCredentials: false
 })
@@ -21,10 +21,12 @@ export default boot(({ app, router }) => {
       // Allow Axios to set the correct Content-Type with boundary for FormData
       delete config.headers["Content-Type"];
     } else {
-      config.headers["Content-Type"] = "application/json;charset=UTF-8";
+      config.headers["Content-Type"] = "application/json";
     }
-    config.headers["Accept"] = "application/json, text/plain, */*";
-    config.headers["X-Requested-With"] = "XMLHttpRequest";
+    config.headers["Access-Control-Allow-Origin"] = "*";
+    config.headers["X-Frame-Options"] = "SAMEORIGIN";
+    // config.headers["Accept"] = "application/json, text/plain, */*";
+    // config.headers["X-Requested-With"] = "XMLHttpRequest";
 
     if (
       !config.url.includes("authorization/login") &&
