@@ -1,6 +1,6 @@
 <template>
-  <q-page>
-    <div class="capitalize">
+  <q-page class="bg-slate-50 q-pa-lg">
+    <div class="premium-card shadow-1 bg-white border-radius-16 overflow-hidden fade-up">
       <q-pull-to-refresh :distance="30" @refresh="PullToRefresh">
         <generalLeadInformation
           v-if="propToggleLeadInformation"
@@ -8,70 +8,111 @@
           :propToggleLeadInformationPop="propToggleLeadInformation"
           @closeLeadInformation="toggleLeadInformation"
         />
-        <div class="col-md-12 q-title q-px-lg q-py-md text-weight-regular bottom-border text-grey-9">
-          Bijlipay Open Merchant Tracker/Lead Tracker
+
+        <!-- Premium Header Section -->
+        <div class="q-pa-lg border-bottom bg-white">
+          <div class="row items-center justify-between q-mb-md">
+            <div>
+              <div class="text-overline text-purple-9 text-weight-bold">SAT Intelligence</div>
+              <h1 class="text-h5 text-weight-bold text-slate-900 q-ma-none">Open Merchant Tracker</h1>
+            </div>
+            <div class="flex gap-sm">
+               <q-btn flat color="slate-600" icon="refresh" @click="PullToRefresh()" class="premium-btn" />
+            </div>
+          </div>
+
+          <!-- Search Bar -->
+          <div class="row q-col-gutter-md items-center">
+            <div class="col-md-5 col-sm-12">
+              <q-input
+                dense
+                clearable
+                v-model="filter"
+                outlined
+                placeholder="Search by Merchant Name, Lead ID..."
+                class="premium-search"
+                bg-color="slate-50"
+              >
+                <template v-slot:prepend>
+                  <q-icon name="search" color="slate-400" />
+                </template>
+              </q-input>
+            </div>
+          </div>
         </div>
+
+        <!-- Premium Table -->
         <q-table
-          table-class="customTableClass"
+          flat
+          class="premium-table sticky-header-table"
           :rows="tableData"
           :columns="columns"
           :filter="filter"
           v-model:pagination="paginationControl"
           row-key="id"
+          :loading="toggleAjaxLoadFilter"
         >
-          <template v-slot:body-cell-createdAt="props">
-            <q-td v-if="props.row" :props="props">
-              <span class="label">{{ $moment(props.row.createdAt).format("Do MMM Y") }}</span>
-            </q-td>
-          </template>
-          <template v-slot:body-cell-submitteSATDate="props">
-            <q-td v-if="props.row" :props="props">
-              <span class="label">{{ $moment(props.row.submitteSATDate).format("Do MMM Y") }}</span>
-            </q-td>
-          </template>
-          <template v-slot:body-cell-applicationNumber="props">
-            <q-td v-if="props.row" :props="props">
-              <span class="label capitalize">{{ props.row.applicationNumber }}</span>
-            </q-td>
-          </template>
-          <template v-slot:body-cell-leadName="props">
-            <q-td v-if="props.row" :props="props">
-              <span class="label capitalize">{{ props.row.leadName }}</span>
-            </q-td>
-          </template>
-          <template v-slot:body-cell-leadNumber="props">
-            <q-td class="cursor-pointer" @click="toggleLeadInformation(props.row)" v-if="props.row" :props="props">
-              <span class="label text-primary"># {{ props.row.leadNumber }}</span>
-            </q-td>
-          </template>
-          <template v-slot:body-cell-createdBy="props">
-            <q-td v-if="props.row" :props="props">
-              <span class="label">{{ props.row.createdBy ? (props.row.createdBy.name + " | " + props.row.createdBy.employeeID) : "NA" }}</span>
-            </q-td>
-          </template>
-          <template v-slot:body-cell-leadAddress="props">
-            <q-td v-if="props.row" :props="props">
-              <span class="label">{{ props.row.leadAddress }}</span>
-            </q-td>
-          </template>
-          <template v-slot:body-cell-verifiedStatus="props">
-            <q-td v-if="props.row" :props="props">{{ props.row.verifiedStatus }}</q-td>
+          <!-- Loading Template -->
+          <template v-slot:loading>
+            <q-inner-loading showing color="purple-9">
+              <q-spinner-dots size="40px" />
+            </q-inner-loading>
           </template>
 
-          <template v-slot:top>
-            <div class="col-5">
-              <q-input dense clearable v-model="filter" color="grey-9" placeholder="Type.." label="Search by Merchant Name, Lead ID" class="q-mr-lg q-py-sm">
-                <template v-slot:append>
-                  <q-icon name="search" />
-                </template>
-              </q-input>
+          <template v-slot:body-cell-createdAt="props">
+            <q-td :props="props">
+              <div class="text-slate-500">{{ $moment(props.row.createdAt).format("DD MMM YYYY") }}</div>
+            </q-td>
+          </template>
+
+          <template v-slot:body-cell-submitteSATDate="props">
+            <q-td :props="props">
+              <div class="text-slate-500">{{ $moment(props.row.submitteSATDate).format("DD MMM YYYY") }}</div>
+            </q-td>
+          </template>
+
+          <template v-slot:body-cell-leadNumber="props">
+            <q-td class="cursor-pointer" @click="toggleLeadInformation(props.row)" :props="props">
+              <q-badge color="purple-1" text-color="purple-9" class="text-weight-bold q-pa-xs">
+                # {{ props.row.leadNumber }}
+              </q-badge>
+            </q-td>
+          </template>
+
+          <template v-slot:body-cell-leadName="props">
+            <q-td :props="props">
+              <div class="text-weight-bold text-slate-900">{{ props.row.leadName }}</div>
+              <div class="text-caption text-slate-400">{{ props.row.applicationNumber || 'No App #' }}</div>
+            </q-td>
+          </template>
+
+          <template v-slot:body-cell-createdBy="props">
+            <q-td :props="props">
+              <div class="text-slate-600 font-medium">{{ props.row.createdBy ? props.row.createdBy.name : 'NA' }}</div>
+              <div class="text-caption text-slate-400">{{ props.row.createdBy ? props.row.createdBy.employeeID : '' }}</div>
+            </q-td>
+          </template>
+
+          <template v-slot:body-cell-verifiedStatus="props">
+            <q-td :props="props">
+              <q-badge
+                rounded
+                :color="props.row.verifiedStatus === 'Approved' ? 'green-1' : (props.row.verifiedStatus === 'Rejected' ? 'red-1' : 'amber-1')"
+                :text-color="props.row.verifiedStatus === 'Approved' ? 'green-9' : (props.row.verifiedStatus === 'Rejected' ? 'red-9' : 'amber-9')"
+                :label="props.row.verifiedStatus"
+                class="q-px-sm"
+              />
+            </q-td>
+          </template>
+
+          <template v-slot:no-data>
+            <div class="full-width q-pa-xl text-center text-slate-400">
+               <q-icon name="manage_search" size="64px" class="opacity-20 q-mb-md" />
+               <div class="text-h6 opacity-50">No open merchant records found</div>
             </div>
           </template>
         </q-table>
       </q-pull-to-refresh>
-      <div v-if="toggleAjaxLoadFilter" class="fullscreen spinner-overlay">
-        <q-spinner-bars class="absolute-center" style="color:#61116a" :size="35"/>
-      </div>
     </div>
   </q-page>
 </template>
@@ -96,14 +137,13 @@ export default {
     },
     filter: "",
     columns: [
-      { name: "createdAt", required: true, label: "Created Date", align: "left", field: "createdAt", sortable: true },
-      { name: "submitteSATDate", required: true, label: "Submitted Date", align: "center", field: "submitteSATDate", sortable: true },
-      { name: "applicationNumber", required: true, label: "MRL app no", align: "left", field: row => "# " + (row.applicationNumber || "NA"), sortable: true },
-      { name: "leadNumber", required: true, label: "Lead ID", align: "left", field: row => "# " + row.leadNumber, sortable: true },
-      { name: "leadName", required: true, label: "Merchant Name", align: "left", field: "leadName", sortable: false },
-      { name: "leadAddress", required: true, label: "Location", align: "left", field: "leadAddress", sortable: false },
-      { name: "createdBy", required: true, label: "SO Name", align: "left", field: "createdBy", sortable: false },
-      { name: "verifiedStatus", required: true, label: "Status", align: "left", field: "verifiedStatus", sortable: false }
+      { name: "createdAt", label: "Created Date", align: "left", field: "createdAt", sortable: true },
+      { name: "submitteSATDate", label: "Submitted Date", align: "left", field: "submitteSATDate", sortable: true },
+      { name: "leadNumber", label: "Lead ID", align: "left", field: "leadNumber", sortable: true },
+      { name: "leadName", label: "Merchant Info", align: "left", field: "leadName", sortable: false },
+      { name: "leadAddress", label: "Location", align: "left", field: "leadAddress", sortable: false },
+      { name: "createdBy", label: "Sales Officer", align: "left", field: "createdBy", sortable: false },
+      { name: "verifiedStatus", label: "Status", align: "left", field: "verifiedStatus", sortable: false }
     ],
     tableData: [],
   }),
@@ -146,5 +186,27 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.border-bottom { border-bottom: 1px solid #f1f5f9; }
+.premium-btn { border-radius: 10px !important; font-weight: 600; }
+.premium-search {
+  ::v-deep(.q-field__control) {
+    border-radius: 10px !important;
+    &:hover { background: #fff !important; }
+  }
+}
+.premium-table {
+  ::v-deep(.q-table__top) { display: none; }
+  ::v-deep(thead tr th) {
+    background: #f8fafc;
+    color: #64748b;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    padding: 16px !important;
+  }
+}
+.bg-purple-1 { background-color: #faf5ff; }
+.opacity-20 { opacity: 0.2; }
+.opacity-50 { opacity: 0.5; }
 </style>

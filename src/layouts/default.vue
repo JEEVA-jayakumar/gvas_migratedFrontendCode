@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh Lpr lFf">
-    <q-header class="bg-white" flat>
+    <q-header class="bg-white border-bottom" flat>
       <customHeader
         :leftDrawerOpen="leftDrawerOpen"
         @fnToggleSideMenu="fnMainToggleSideMenu"
@@ -11,24 +11,21 @@
       v-model="leftDrawerOpen"
       show-if-above
       bordered
+      :mini="miniState"
+      @mouseover="miniState = false"
+      @mouseout="miniState = true"
       :width="260"
+      :mini-width="80"
       :breakpoint="500"
-      class="text-white"
-      style="background-color: #531b64 !important;"
+      class="sidebar-drawer text-white"
     >
-      <q-scroll-area style="height: 100%" :thumb-style="{
-        right: '2px',
-        borderRadius: '5px',
-        backgroundColor: '#61116a',
-        width: '5px',
-        opacity: 0.75,
-      }">
-        <div class="q-px-md q-pt-md" v-if="showAggregatorSelect">
+      <q-scroll-area class="fit" :thumb-style="thumbStyle">
+        <div class="q-px-md q-pt-md" v-if="showAggregatorSelect && !miniState">
           <q-select
             filled
             v-model="selectedValue"
             label="Module View"
-            color="purple"
+            color="white"
             dark
             dense
             :options="aggregatorOptions"
@@ -39,11 +36,30 @@
           />
         </div>
 
-        <SidebarMenu :menus="currentMenus" />
+        <div class="q-py-md" v-if="miniState">
+           <div class="flex flex-center q-mb-md">
+             <q-icon name="dashboard" size="24px" color="white" />
+           </div>
+        </div>
+
+        <SidebarMenu :menus="currentMenus" :mini="miniState" />
       </q-scroll-area>
+
+      <!-- Mini toggle footer -->
+      <div class="absolute-bottom q-pa-sm flex flex-center" v-if="!$q.platform.is.mobile">
+        <q-btn
+          flat
+          round
+          dense
+          :icon="miniState ? 'chevron_right' : 'chevron_left'"
+          @click="miniState = !miniState"
+          color="white"
+          class="mini-toggle-btn"
+        />
+      </div>
     </q-drawer>
 
-    <q-page-container class="bg-grey-2">
+    <q-page-container class="bg-slate-50">
       <customBody :key="$route.fullPath" />
     </q-page-container>
   </q-layout>
@@ -68,13 +84,18 @@ export default {
       leftDrawerOpen: this.$q.localStorage.getItem("leftDrawerOpen") !== null
         ? (this.$q.localStorage.getItem("leftDrawerOpen") === true || this.$q.localStorage.getItem("leftDrawerOpen") === 'true')
         : (this.$q.platform.is.desktop && this.$route.name != 'leadDataEntry'),
-      propShowDatas: false,
+      miniState: false,
+      thumbStyle: {
+        right: '2px',
+        borderRadius: '5px',
+        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+        width: '4px',
+        opacity: 0.75,
+      },
       menuListName: 'Bijlipay',
       menuListNameSat: 'Bijlipay',
-      name:'',
       aggregatorOptions: [],
       showMenu: [],
-      array:[],
       selectedValue: "Bijlipay",
       selectedValueSat: "Bijlipay",
       menus: {
@@ -82,17 +103,20 @@ export default {
         {
             id: 3,
             to: '/sat/lead/lead/dataentry',
-            name: 'Lead Creation'
+            name: 'Lead Creation',
+            icon: 'add_circle'
           },
           {
             id: 1,
             to: '/sat/lead/validation',
-            name: 'Lead Validation'
+            name: 'Lead Validation',
+            icon: 'rule'
           },
           {
             id: 8,
             to: '/sat/varaneekimplementationRequest',
             name: 'Lead Status',
+            icon: 'hourglass_empty',
             subItems: []
           }
         ],
@@ -101,139 +125,141 @@ export default {
             id: 1,
             to: "/sat/master/BijlipaySat",
             name: "Bijlipay",
+            icon: 'business',
             subItems: [
               {
                 id: 0,
                 to: "/sat/dashboard",
                 name: "Dashboard",
-                subItems: [],
+                icon: 'dashboard',
               },
               {
                 id: 1,
                 to: "/sat/lead/validation",
                 name: "Lead Validation",
-                subItems: [],
+                icon: 'fact_check',
               },
               {
                 id: 21,
                 to: "/sat/additionalTid",
                 name: "Additional Terminals",
-                subItems: [],
+                icon: 'app_registration',
               },
               {
                 id: 15,
                 to: "/sat/change/management",
                 name: "Change Management",
-                subItems: [],
+                icon: 'edit_note',
               },
               {
                 id: 20,
                 to: "/sat/internalLostOrStolen",
                 name: "Lost/Stolen",
-                subItems: [],
+                icon: 'report_off',
               },
               {
                 id: 22,
                 to: "/sat/InternalGlobalSearchFilter",
-                name: "Global Serial Number/TID Search",
-                subItems: [],
+                name: "Global Search",
+                icon: 'search',
               },
 
               {
                 id: 2,
                 to: "/sat/exception/queue",
                 name: "Exception Queue",
-                subItems: [],
+                icon: 'error_outline',
               },
               {
                 id: 3,
                 to: "/sat/open/merchant/tracker",
-                name: "Open Merchant tracker",
-                subItems: [],
+                name: "Open Merchant Tracker",
+                icon: 'track_changes',
               },
               {
                 id: 7,
                 to: "/sat/internalRegionalInventory",
                 name: "Regional Inventory",
-                subItems: [],
+                icon: 'inventory_2',
               },
               {
                 id: 8,
                 to: "/sat/internalimplementationRequest",
                 name: "Implementation Queue",
-                subItems: [],
+                icon: 'queue',
               },
               {
                 id: 9,
                 to: "/sat/master/tracker",
-                name: "Master Tracker-Implemented",
-                subItems: [],
+                name: "Master Tracker",
+                icon: 'assignment_turned_in',
               },
               {
                 id: 10,
                 to: "/sat/device/recovery/tracker",
-                name: "Device Recovery Tracker",
-                subItems: [],
+                name: "Recovery Tracker",
+                icon: 'settings_backup_restore',
               },
               {
                 id: 12,
                 to: "/sat/lead/lead/dataentry",
                 name: "Lead Creation",
-                subItems: [],
+                icon: 'person_add',
               },
               {
                 id: 13,
                 to: "/sat/lead/lead/view/audocuments",
-                name: "Implemented Verification Queue",
-                subItems: [],
+                name: "Verification Queue",
+                icon: 'verified',
               },
               {
                id: 78,
                to: "/sat/deactivelist",
-               name: "Bijlipay De-Active List ",
-               subItems: []
+               name: "De-Active List ",
+               icon: 'person_off'
               },
               {
                 id: 14,
                 to: "/sat/device/replacement",
                 name: "Device Replacement",
-                subItems: [],
+                icon: 'swap_horiz',
               },
               {
                 id: 1001,
                 to: "/sat/hitachiDetails",
-                name: "Hitachi -Upload & Download",
-                subItems: [],
+                name: "Hitachi - U/D",
+                icon: 'cloud_sync',
               },
               {
                 id: 16,
                 to: "/sat/staticQrLeads",
                 name: "Static QR Leads",
-                subItems: [],
+                icon: 'qr_code_2',
               },
               {
                 id: 17,
                 to: "/sat/staticQRinventory",
                 name: "Static QR Inventory",
-                subItems: [],
+                icon: 'qr_code',
               },
               {
                 id: 19,
                 to: "/sat/OnboardingExistingMerchants",
-                name: "Onboarding Existing Merchants",
-                subItems: [],
+                name: "Existing Merchants",
+                icon: 'group_add',
               },
 
               {
                 id: 27,
                 to: "/sat/hitachiIndianBankOnboarding",
-                name: "Hitachi Indian Bank Onboarding",
-                subItems: [],
+                name: "Indian Bank Onboarding",
+                icon: 'account_balance',
               },
               {
                 id:28,
                 to:"/sat/equitasSoundboxOnboarding",
-                name: "Equitas SoundBox Onboarding",
+                name: "Equitas SoundBox",
+                icon: 'speaker',
               }
             ],
           },
@@ -242,100 +268,103 @@ export default {
             id: 28,
             to: "/sat/master/Other",
             name: "Other",
+            icon: 'more_horiz',
             subItems: [
               {
                 id: 30,
                 to: "/sat/dashboardPhonepe",
                 name: "Dashboard",
-                subItems: [],
+                icon: 'dashboard',
               },
               {
                 id: 31,
                 to: "/sat/aggregator/lead/validation",
                 name: "Lead Validation",
-                subItems: [],
+                icon: 'fact_check',
               },
               {
                 id: 32,
                 to: "/sat/AggregatorsLostOrStolen",
                 name: "Lost/Stolen",
-                subItems: [],
+                icon: 'report_off',
               },
               {
                 id: 33,
                 to: "/sat/AggregatorGlobalSearchFilter",
-                name: "Global Serial Number/TID Search",
-                subItems: [],
+                name: "Global Search",
+                icon: 'search',
               },
               {
                 id: 3,
                 to: "/sat/aggOpenMerchantTracker",
-                name: "Open Merchant tracker",
-                subItems: [],
+                name: "Open Merchant Tracker",
+                icon: 'track_changes',
               },
               {
                 id: 34,
                 to: "/sat/AggregatorInventory",
                 name: "Regional Inventory",
-                subItems: [],
+                icon: 'inventory_2',
               },
               {
                 id: 41,
                 to: "/sat/TestingRecovery",
-                name: "PhonePe Device Recovery",
+                name: "PhonePe Recovery",
+                icon: 'history',
               },
               {
                 id: 14,
                 to: "/sat/AggregatorDeviceRecovery",
-                name: "Mobikwik Device Recovery",
+                name: "Mobikwik Recovery",
+                icon: 'restore',
               },
               {
                 id: 35,
                 to: "/sat/externalimplementationRequest",
                 name: "Implementation Queue",
-                subItems: [],
+                icon: 'queue',
               },
               {
                 id: 9,
                 to: "/sat/AggregatorMasterTracker",
-                name: "Master Tracker-Implemented",
-                subItems: [],
+                name: "Master Tracker",
+                icon: 'assignment_turned_in',
               },
               {
                 id: 88,
                 to: "/sat/AggregatorServiceTicket",
-                name: "SAT - Service Verification",
-                subItems: [],
+                name: "Service Verification",
+                icon: 'verified',
               },
               {
                 id: 13,
                 to: "/sat/AggregatorVerificationQueue",
-                name: "Implemented Verification Queue",
-                subItems: [],
+                name: "Verification Queue",
+                icon: 'rule',
               },
               {
                 id: 73,
                 to: "/sat/AggregatorDeactiveList",
-                name: "Aggregator De-Active List ",
-                subItems: []
+                name: "De-Active List ",
+                icon: 'person_off'
               },
               {
                 id: 36,
                 to: "/sat/externalserviceRequest",
                 name: "Service Request",
-                subItems: [],
+                icon: 'support_agent',
               },
               {
                 id: 14,
                 to: "/sat/AggregatorDeviceReplacement",
                 name: "Device Replacement",
-                subItems: [],
+                icon: 'swap_horiz',
               },
               {
                 id: 38,
                 to: "/sat/demapping",
                 name: "DE-Mapping",
-                subItems: [],
+                icon: 'link_off',
               },
             ],
           },
@@ -344,13 +373,13 @@ export default {
           {
             id: 1,
             to: "/finance/payment/verification/tracker",
-            name: "Payment Verification Tracker",
+            name: "Payment Verification",
             icon: "verified_user",
           },
           {
             id: 2,
             to: "/finance/finance/approved/tracker",
-            name: "Finance Approved Tracker",
+            name: "Approved Tracker",
             icon: "check_circle",
           },
           {
@@ -371,110 +400,111 @@ export default {
             id: 1,
             to: "/inventory/master/Bijlipay",
             name: "Bijlipay",
+            icon: 'warehouse',
             subItems: [
               {
                 id: 1,
                 to: "/inventory/home",
                 name: "Dashboard",
-                subItems: [],
+                icon: 'dashboard',
               },
               {
                 id: 2,
                 to: "/inventory/central",
                 name: "Central Inventory",
-                subItems: [],
+                icon: 'hub',
               },
               {
                 id: 23,
                 to: "/inventory/staticQrBankPortalInventory",
-                name: "Static QR - Request from Bank Portal",
-                subItems: [],
+                name: "Static QR - Bank",
+                icon: 'qr_code_scanner',
               },
               {
                 id: 3,
                 to: "/inventory/master/SendToRepair",
-                name: "SendToRepair",
-                subItems: [],
+                name: "Send To Repair",
+                icon: 'build',
               },
               {
                 id: 64,
                 to: "/inventory/master/spareParts",
                 name: "Spare Parts",
-                subItems: [],
+                icon: 'settings_input_component',
               },
               {
                 id: 4,
                 to: "/inventory/master/MovedToScrap",
-                name: "MovedToScrap",
-                subItems: [],
+                name: "Moved To Scrap",
+                icon: 'delete_sweep',
               },
               {
                 id: 15,
                 to: "/inventory/master/Lost",
                 name: "Lost/Stolen",
-                subItems: [],
+                icon: 'report_off',
               },
               {
                 id: 16,
                 to: "/inventory/master/GlobalSearch",
-                name: "Global Serial Number/TID Search",
-                subItems: [],
+                name: "Global Search",
+                icon: 'search',
               },
               {
                 id: 21,
                 to: "/inventory/master/InventoryRegion",
-                name: "Inventory With Regions",
-                subItems: [],
+                name: "Regional Inventory",
+                icon: 'location_city',
               },
               {
                 id: 5,
                 to: "/inventory/merchant",
-                name: "Inventory with Merchant",
-                subItems: [],
+                name: "Merchant Inventory",
+                icon: 'storefront',
               },
               {
                 id: 6,
                 to: "/inventory/faulty",
-                name: "Regional return & Faulty Inventory",
-                subItems: [],
+                name: "Faulty Inventory",
+                icon: 'error',
               },
 
               {
                 id: 8,
                 to: "/inventory/podlist",
                 name: "POD Updated List",
-                subItems: [],
+                icon: 'list_alt',
               },
               {
                 id: 9,
                 to: "/inventory/inventorywithso",
                 name: "Inventory with SO",
-                subItems: [],
+                icon: 'groups',
               },
               {
                 id: 10,
                 to: "/inventory/inventorywithresellar",
                 name: "Inventory with Resellar",
-                subItems: [],
+                icon: 'handshake',
               },
               {
                 id: 12,
                 to: "/inventory/master/Reports",
                 name: "Reports",
-                subItems: [],
+                icon: 'analytics',
               },
               {
                 id: 13,
                 to: "/inventory/master/generateQR",
                 name: "Generate QR",
-                subItems: [],
+                icon: 'qr_code',
               },
 
               {
                 id: 14,
                 to: "/inventory/master/simStatus",
                 name: "Sim Status",
-                subItems: [],
+                icon: 'sim_card',
               },
             ],
           },
@@ -482,93 +512,94 @@ export default {
             id: 2,
             to: "/inventory/master/Others",
             name: "Others",
+            icon: 'more_horiz',
             subItems: [
               {
                 id: 1,
                 to: "/inventory/Phonepehome",
                 name: "Dashboard",
-                subItems: [],
+                icon: 'dashboard',
               },
               {
                 id: 2,
                 to: "/inventory/PhonepeInventory",
                 name: "Central Inventory",
-                subItems: [],
+                icon: 'hub',
               },
               {
                 id: 3,
                 to: "/inventory/AggregatorsSendToRepair",
                 name: "Send To Repair",
-                subItems: [],
+                icon: 'build',
               },
               {
                 id: 64,
                 to: "/inventory/master/AggregatorsspareParts",
                 name: "Spare Parts",
-                subItems: [],
+                icon: 'settings_input_component',
               },
               {
                 id: 4,
                 to: "/inventory/AggregatorsMovedToScrap",
-                name: " MovedToScrap",
-                subItems: [],
+                name: " Moved To Scrap",
+                icon: 'delete_sweep',
               },
 
               {
                 id: 15,
                 to: "/inventory/AggregatorsLost",
                 name: "Lost/Stolen",
-                subItems: [],
+                icon: 'report_off',
               },
 
               {
                 id: 16,
                 to: "/inventory/master/PhonepeGlobalSearch",
-                name: "Global Serial Number/TID Search",
-                subItems: [],
+                name: "Global Search",
+                icon: 'search',
               },
               {
                 id: 21,
                 to: "/inventory/master/PhonepeInventoryRegion",
-                name: "Inventory With Regions",
-                subItems: [],
+                name: "Regional Inventory",
+                icon: 'location_city',
               },
               {
                 id: 5,
                 to: "/inventory/Aggregatorsmerchant",
-                name: "Inventory with Merchant",
-                subItems: [],
+                name: "Merchant Inventory",
+                icon: 'storefront',
               },
               {
                 id: 38,
                 to: "/inventory/AggregatorInventoryFaulty",
-                name: "Regional return & Faulty Inventory",
-                subItems: [],
+                name: "Faulty Inventory",
+                icon: 'error',
               },
 
               {
                 id: 36,
                 to: "/inventory/Aggregatorpodlist",
                 name: "POD Updated List",
-                subItems: [],
+                icon: 'list_alt',
               },
               {
                 id: 37,
                 to: "/inventory/AggregatorInventoryWithSO",
                 name: "Inventory with SO",
-                subItems: [],
+                icon: 'groups',
               },
               {
                 id: 25,
                 to: "/inventory/master/PhonepeDeviceHistory",
                 name: " Device History",
-                subItems: [],
+                icon: 'history',
               },
               {
                 id: 26,
                 to: "/inventory/master/phonepePaperRoll",
-                name: "Phonepe Paper Roll",
-                subItems: [],
+                name: "Paper Roll",
+                icon: 'scroll',
               },
             ],
           },
@@ -579,6 +610,7 @@ export default {
             id: 77,
             to: "/inventory/ksn",
             name: "KSN Enable",
+            icon: 'key',
           },
         ],
         bankOps: [
@@ -586,30 +618,32 @@ export default {
             id: 1,
             to: "/bank/ops/assign/short/lead",
             name: "Assign Short Lead",
+            icon: 'assignment_ind',
           },
           {
             id: 2,
             to: "/bank/ops/bank/merchant/tracker",
             name: "Merchant Tracker",
+            icon: 'track_changes',
           },
         ],
         crm: [
           {
             id: 1,
             to: "/crm/phonepePendingCrm",
-            name: "Phonepe Service Request",
+            name: "Phonepe Request",
             icon: "contact_support",
           },
           {
             id: 2,
             to: "/crm/bijlipayCrm",
-            name: "Bijlipay Service Request",
+            name: "Bijlipay Request",
             icon: "support_agent",
           },
           {
             id: 3,
             to: "/crm/globalTicketSearch",
-            name: "Global Ticket Search",
+            name: "Ticket Search",
             icon: "search",
           },
           {
@@ -641,33 +675,39 @@ export default {
             subItems: [
               {
                 id: 1,
-                name: "Lead Approval Tracker",
+                name: "Approval Tracker",
                 to: "/ops/head/lead/approval/tracker",
+                icon: 'check_circle'
               },
               {
                 id: 2,
-                name: "Sourcewise - Lead Tracker",
+                name: "Sourcewise Tracker",
                 to: "/ops/head/sourcewise/lead/tracker",
+                icon: 'query_stats'
               },
               {
                 id: 3,
-                name: "Source & Region - Lead Tracker",
+                name: "Region Tracker",
                 to: "/ops/head/source/region/lead/tracker",
+                icon: 'public'
               },
               {
                 id: 4,
-                name: "In - active Merchant",
+                name: "Inactive Merchant",
                 to: "/ops/head/inactive/merchant/tracker",
+                icon: 'person_off'
               },
               {
                 id: 5,
-                name: "Month-old Inactive Merchant ",
+                name: "Month-old Inactive ",
                 to: "/ops/head/month/old/inactive/merchant/tracker",
+                icon: 'history'
               },
               {
                 id: 6,
-                name: "Proxy Lead / Misselling",
+                name: "Proxy Lead",
                 to: "/ops/head/proxy/lead/tracker",
+                icon: 'warning'
               },
             ],
           },
@@ -676,32 +716,38 @@ export default {
           {
             id: 1,
             to: "/sales/manager/lead/allocation/tracker",
-            name: "Lead Allocation Tracker",
+            name: "Allocation Tracker",
+            icon: 'assignment_ind'
           },
           {
             id: 2,
             to: "/sales/manager/leads/status",
             name: "Leads Status",
+            icon: 'hourglass_empty'
           },
           {
             id: 3,
             to: "/sales/manager/revenue/trackers",
             name: "Revenue Trackers",
+            icon: 'payments'
           },
           {
             id: 4,
             to: "/sales/manager/pricing/exception/verification",
             name: "Exception Approval",
+            icon: 'rule'
           },
           {
             id: 5,
             to: "/sales/manager/leads/pending/assignment",
-            name: "Leads Pending Assignment",
+            name: "Pending Assignment",
+            icon: 'pending_actions'
           },
           {
             id: 6,
             to: "/sales/manager/aging/tracker/pending/leads",
-            name: "Aging Tracker for Pending Leads",
+            name: "Aging Tracker",
+            icon: 'history'
           },
         ],
         superAdmin: [
@@ -709,313 +755,133 @@ export default {
             id: 1,
             to: "/super/admin/dashboard/",
             name: "Dashboard",
+            icon: 'dashboard'
           },
           {
             id: 2,
             to: "/super/admin/users/",
             name: "Users",
+            icon: 'people'
           },
           {
             id: 3,
             to: "/super/admin/hierarchy/",
             name: "Hierarchy",
+            icon: 'account_tree'
           },
           {
             id: 4,
             to: "/super/admin/roles/permissions/",
             name: "Roles & Permissions",
+            icon: 'security'
           },
           {
             id: 5,
             to: "/super/admin/permissions/",
             name: "Permissions",
+            icon: 'vpn_key'
           },
           {
             id: 6,
             to: "/super/admin/regions/",
             name: "Regions",
+            icon: 'public'
           },
           {
             id: 22,
             to: "/super/admin/regionGroup/",
-            name: "RegionGroup",
+            name: "Region Group",
+            icon: 'layers'
           },
           {
             id: 8,
             to: "/super/admin/pincodes",
             name: "Pincodes",
+            icon: 'pin_drop'
           },
           {
             id: 9,
             to: "/super/admin/manage/merchant/types",
-            name: "Merchant and Document Types",
+            name: "Merchant/Doc Types",
+            icon: 'description'
           },
           {
             id: 10,
             to: "/super/admin/manage/mdrCharges",
             name: "MDR Charges",
+            icon: 'currency_rupee'
           },
           {
             id: 11,
             to: "/super/admin/manage/newRentalCharges",
             name: "Rental Charges",
+            icon: 'receipt'
           },
           {
             id: 14,
             to: "/super/admin/manage/mdr/bankSO",
             name: "Bank SO",
+            icon: 'account_balance'
           },
           {
             id: 16,
             to: "/super/admin/manage/notifications",
             name: "Notifications",
+            icon: 'notifications'
           },
           {
             id: 17,
             to: "/super/admin/manage/QR/Sticker",
-            name: "QRSticker",
+            name: "QR Sticker",
+            icon: 'qr_code'
           },
           {
             id: 19,
             to: "/super/admin/manage/existingmATMplan",
             name: "M-ATM",
+            icon: 'atm'
           },
           {
             id: 20,
             to: "/super/admin/manage/multiTid",
             name: "Multi-TID",
+            icon: 'vignette'
           },
           {
             id: 21,
             to: "/super/admin/manage/prefixConfig",
-            name: "prefix Config",
+            name: "Prefix Config",
+            icon: 'settings_input_component'
           },
           {
             id: 30,
             to: "/super/admin/sparePartsTypes",
             name: "Spare Parts Types",
+            icon: 'settings'
           },
           {
             id: 31,
             to: "/super/admin/manage/serviceRequest",
             name: "Service Request",
+            icon: 'support_agent'
           },
           {
             id: 25,
             to: "/super/admin/manage/aggregators",
             name: "Aggregators",
+            icon: 'business'
           },
           {
             id: 26,
             to: "/super/admin/manage/aggregatorsDevice",
-            name: "Aggregators Device",
+            name: "Aggregator Devices",
+            icon: 'devices'
           },
           {
             id: 38,
             to: "/super/admin/manage/APISync",
-            name: "MARS API SYNC",
-            subItems: [],
-          },
-        ],
-        Phonepeinventory: [
-          {
-            id: 1,
-            to: "/inventory/master/Bijlipay",
-            name: "Bijlipay",
-            subItems: [
-              {
-                id: 1,
-                to: "/inventory/home",
-                name: "Dashboard",
-                subItems: [],
-              },
-              {
-                id: 2,
-                to: "/inventory/central",
-                name: "Central Inventory",
-                subItems: [],
-              },
-              {
-                id: 3,
-                to: "/inventory/master/SendToRepair",
-                name: "SendToRepair",
-                subItems: [],
-              },
-              {
-                id: 64,
-                to: "/inventory/master/spareParts",
-                name: "Spare Parts",
-                subItems: [],
-              },
-              {
-                id: 4,
-                to: "/inventory/master/MovedToScrap",
-                name: "MovedToScrap",
-                subItems: [],
-              },
-              {
-                id: 15,
-                to: "/inventory/master/Lost",
-                name: "Lost/Stolen",
-                subItems: [],
-              },
-              {
-                id: 16,
-                to: "/inventory/master/GlobalSearch",
-                name: "Global Serial Number/TID Search",
-                subItems: [],
-              },
-              {
-                id: 21,
-                to: "/inventory/master/InventoryRegion",
-                name: "Inventory With Regions",
-                subItems: [],
-              },
-              {
-                id: 5,
-                to: "/inventory/merchant",
-                name: "Inventory with Merchant",
-                subItems: [],
-              },
-              {
-                id: 6,
-                to: "/inventory/faulty",
-                name: "Regional return & Faulty Inventory",
-                subItems: [],
-              },
-
-              {
-                id: 8,
-                to: "/inventory/podlist",
-                name: "POD Updated List",
-                subItems: [],
-              },
-              {
-                id: 9,
-                to: "/inventory/inventorywithso",
-                name: "Inventory with SO",
-                subItems: [],
-              },
-              {
-                id: 10,
-                to: "/inventory/inventorywithresellar",
-                name: "Inventory with Resellar",
-                subItems: [],
-              },
-              {
-                id: 11,
-                to: "/inventory/master/serialnumberupdate",
-                name: "Serial Number Update",
-                subItems: [],
-              },
-              {
-                id: 12,
-                to: "/inventory/master/Reports",
-                name: "Reports",
-                subItems: [],
-              },
-              {
-                id: 13,
-                to: "/inventory/master/generateQR",
-                name: "Generate QR",
-                subItems: [],
-              },
-            ],
-          },
-          {
-            id: 2,
-            to: "/inventory/master/Others",
-            name: "Others",
-            subItems: [
-              {
-                id: 1,
-                to: "/inventory/Phonepehome",
-                name: "Dashboard",
-                subItems: [],
-              },
-              {
-                id: 2,
-                to: "/inventory/PhonepeInventory",
-                name: "Central Inventory",
-                subItems: [],
-              },
-              {
-                id: 3,
-                to: "/inventory/AggregatorsSendToRepair",
-                name: "Send To Repair",
-                subItems: [],
-              },
-              {
-                id: 64,
-                to: "/inventory/master/AggregatorsspareParts",
-                name: "Spare Parts",
-                subItems: [],
-              },
-              {
-                id: 4,
-                to: "/inventory/AggregatorsMovedToScrap",
-                name: " MovedToScrap",
-                subItems: [],
-              },
-
-              {
-                id: 15,
-                to: "/inventory/AggregatorsLost",
-                name: "Lost/Stolen",
-                subItems: [],
-              },
-
-              {
-                id: 16,
-                to: "/inventory/master/PhonepeGlobalSearch",
-                name: "Global Serial Number/TID Search",
-                subItems: [],
-              },
-              {
-                id: 21,
-                to: "/inventory/master/PhonepeInventoryRegion",
-                name: "Inventory With Regions",
-                subItems: [],
-              },
-              {
-                id: 5,
-                to: "/inventory/Aggregatorsmerchant",
-                name: "Inventory with Merchant",
-                subItems: [],
-              },
-              {
-                id: 38,
-                to: "/inventory/AggregatorInventoryFaulty",
-                name: "Regional return & Faulty Inventory",
-                subItems: [],
-              },
-
-              {
-                id: 36,
-                to: "/inventory/Aggregatorpodlist",
-                name: "POD Updated List",
-                subItems: [],
-              },
-              {
-                id: 37,
-                to: "/inventory/AggregatorInventoryWithSO",
-                name: "Inventory with SO",
-                subItems: [],
-              },
-              {
-                id: 25,
-                to: "/inventory/master/PhonepeDeviceHistory",
-                name: " Device History",
-                subItems: [],
-              },
-
-              {
-                id: 26,
-                to: "/inventory/master/phonepePaperRoll",
-                name: "Phonepe Paper Roll",
-                subItems: [],
-              },
-            ],
+            name: "MARS API Sync",
+            icon: 'sync'
           },
         ],
       },
@@ -1028,7 +894,7 @@ export default {
     if (selectedTab) {
       this.selectedValue = selectedTab;
       if (this.showMenu.includes(this.$ROLE_HIERARCHY_OPERATION_SAT)) {
-        this.selectedValueSat = selectedTab === "Bijlipay" ? "Bijlipay" : "Other";
+        this.selectedValueSat = (selectedTab === "Bijlipay" || selectedTab === "Other") ? selectedTab : "Bijlipay";
         this.menuListNameSat = this.selectedValueSat;
       }
       if (this.showMenu.includes(this.$ROLE_HIERARCHY_INVENTORY_OFFICER)) {
@@ -1041,9 +907,6 @@ export default {
   },
   computed: {
     ...mapGetters("superAdminAggregators", ["getActiveCreatedAggregatorList"]),
-    getComputedColor() {
-      return "#531b64";
-    },
     currentMenus() {
       let menuItems = [];
       const userInfo = JSON.parse(localStorage.getItem("u_i"));
@@ -1130,7 +993,7 @@ export default {
       this.$q.localStorage.set("selectedTab", val);
       this.selectedValue = val;
       if (this.showMenu.includes(this.$ROLE_HIERARCHY_OPERATION_SAT)) {
-        this.selectedValueSat = val === "Bijlipay" ? "Bijlipay" : "Other";
+        this.selectedValueSat = (val === "Bijlipay" || val === "Other") ? val : "Other";
         this.menuListNameSat = this.selectedValueSat;
         if (val === "Bijlipay") this.$router.push("/sat/dashboard");
         else if (val === 3) this.$router.push("/sat/dashboardPhonepe");
@@ -1166,10 +1029,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.sidebar-drawer {
+  background: #531b64 !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .aggregator-select {
   ::v-deep(.q-field__control) {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
   }
+}
+
+.mini-toggle-btn {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.bg-slate-50 {
+  background-color: #f8fafc;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #e2e8f0;
 }
 </style>

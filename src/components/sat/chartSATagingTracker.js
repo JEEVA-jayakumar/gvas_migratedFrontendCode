@@ -1,7 +1,6 @@
 import { defineComponent, h, computed, onMounted } from 'vue'
 import { Bar } from 'vue-chartjs'
 import { useStore } from 'vuex'
-import { useQuasar } from 'quasar'
 import {
   Chart as ChartJS,
   Title,
@@ -17,71 +16,91 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 export default defineComponent({
   name: 'AgingTrackerChart',
   props: {
-    options: {
-      type: Object,
-      default: () => ({})
-    },
     height: {
       type: Number,
-      default: 150
+      default: 350
     }
   },
   setup(props) {
     const store = useStore()
-    const $q = useQuasar()
 
     const agingData = computed(() => store.getters['SAT_Dashboard/getSatDashboardAgingGraphData'])
 
-    const loadAgingGraphData = () => {
-      $q.loading.show({
-        delay: 0,
-        spinnerColor: "purple-9",
-        message: "Fetching data ..",
-      });
-
+    onMounted(() => {
       const userInfo = JSON.parse(localStorage.getItem("u_i"));
       store.dispatch('SAT_Dashboard/FETCH_DASHBOARD_AGING_CHART_DATA', {
         region: userInfo.region.id,
-      }).then(() => {
-        $q.loading.hide();
-      }).catch(() => {
-        $q.loading.hide();
-      });
-    }
-
-    onMounted(() => {
-      loadAgingGraphData();
+      })
     })
 
     const chartData = computed(() => {
       if (!agingData.value || !agingData.value.xAxis) return { labels: [], datasets: [] };
+
+      // Modern Palette for the datasets
+      const colors = [
+        { bg: 'rgba(97, 17, 106, 0.8)', border: '#61116a' }, // Primary Purple
+        { bg: 'rgba(37, 99, 235, 0.8)', border: '#2563eb' }, // Blue
+        { bg: 'rgba(245, 158, 11, 0.8)', border: '#f59e0b' }  // Amber
+      ]
+
+      const datasets = agingData.value.series.map((s, i) => ({
+        label: s.name,
+        data: s.data,
+        backgroundColor: colors[i % colors.length].bg,
+        borderColor: colors[i % colors.length].border,
+        borderWidth: 0,
+        borderRadius: 6,
+        barThickness: 20,
+        maxBarThickness: 30
+      }))
+
       return {
         labels: agingData.value.xAxis.categories,
-        datasets: agingData.value.series
+        datasets: datasets
       }
     })
 
-    const chartOptions = computed(() => {
-      if (!agingData.value || !agingData.value.yAxis) return { responsive: true, maintainAspectRatio: false };
-      return {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            display: true,
-            title: {
-              display: true,
-              text: agingData.value.yAxis.title.text
-            }
+    const chartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'top',
+          align: 'end',
+          labels: {
+            usePointStyle: true,
+            pointStyle: 'circle',
+            padding: 20,
+            font: { family: 'Inter', size: 12, weight: '600' },
+            color: '#64748b'
           }
+        },
+        tooltip: {
+          backgroundColor: '#1e293b',
+          padding: 12,
+          titleFont: { family: 'Inter', size: 14, weight: '700' },
+          bodyFont: { family: 'Inter', size: 13 },
+          cornerRadius: 8,
+          displayColors: true
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { font: { family: 'Inter', size: 11 }, color: '#94a3b8' }
+        },
+        y: {
+          beginAtZero: true,
+          grid: { color: '#f1f5f9' },
+          ticks: { font: { family: 'Inter', size: 11 }, color: '#94a3b8', padding: 10 }
         }
       }
-    })
+    }
 
     return () =>
       h(Bar, {
         data: chartData.value,
-        options: chartOptions.value,
+        options: chartOptions,
         height: props.height
       })
   }
