@@ -1,371 +1,241 @@
 <template>
-  <q-page>
-    <div class="q-ma-md">
-      <!-- Merchant details -->
-      <div class="flex items-stretch q-ma-xs">
-        <div class="col-12 col-lg-3">
-          <div class="q-title q-my-md capitalize">{{formData.shortLead.leadName}}</div>
-          <div
-            class="text-light-blue cursor-pointer"
-            @click="toggleLeadInformation(formData.shortLead)"
-          ># {{formData.shortLead.leadNumber}}</div>
-        </div>
-        <div class="col-12 col-lg-3">
-          <div class="q-title q-my-md">Contact</div>
-          <p class="no-margin">{{formData.shortLead.contactNumber}}</p>
-          <p>{{formData.shortLead.alternateContactNumber}}</p>
-        </div>
-        <div class="col-12 col-lg-3">
-          <div class="q-title q-my-md">Address</div>
-          <p
-            v-if="formData.shortLead.leadAddress != null"
-            class="capitalize no-margin"
-          >{{formData.shortLead.leadAddress}}</p>
-          <p class="capitalize no-margin">{{formData.shortLead.city}}, {{formData.shortLead.state}}</p>
-        </div>
-        <div class="col-12 col-lg-3">
-          <div class="q-title q-my-md">Remarks</div>
-          <div
-            class="capitalize no-margin text-negative"
-            v-if="formData.shortLead.marsReason != null"
-          >{{formData.shortLead.marsReason}}</div>
-          <div v-else>No Remarks</div>
+  <q-page class="bg-slate-50 q-pa-lg">
+    <div class="premium-card shadow-1 bg-white border-radius-16 overflow-hidden fade-up">
+      <!-- Premium Header: Merchant Summary -->
+      <div class="q-pa-xl border-bottom bg-white">
+        <div class="row items-center q-col-gutter-xl">
+          <div class="col-md-3 col-sm-6">
+            <div class="text-overline text-purple-9 text-weight-bold">Merchant Identity</div>
+            <div class="text-h5 text-weight-bold text-slate-900 q-mt-xs capitalize">{{formData.shortLead.leadName}}</div>
+            <div class="cursor-pointer q-mt-sm" @click="toggleLeadInformation(formData.shortLead)">
+               <q-badge color="purple-1" text-color="purple-9" class="text-weight-bold q-px-md q-py-xs">
+                 # {{formData.shortLead.leadNumber}}
+               </q-badge>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-sm-6">
+            <div class="text-overline text-slate-400 text-weight-bold">Primary Contact</div>
+            <div class="text-subtitle1 text-slate-700 text-weight-bold q-mt-xs">{{formData.shortLead.contactNumber}}</div>
+            <div class="text-caption text-slate-400">{{formData.shortLead.alternateContactNumber || 'No Alt Number'}}</div>
+          </div>
+
+          <div class="col-md-3 col-sm-6">
+            <div class="text-overline text-slate-400 text-weight-bold">Business Location</div>
+            <div class="text-subtitle1 text-slate-700 q-mt-xs capitalize line-clamp-1" v-if="formData.shortLead.leadAddress">
+              {{formData.shortLead.leadAddress}}
+            </div>
+            <div class="text-caption text-slate-500 capitalize">{{formData.shortLead.city}}, {{formData.shortLead.state}}</div>
+          </div>
+
+          <div class="col-md-3 col-sm-6">
+            <div class="text-overline text-slate-400 text-weight-bold">Operational Status</div>
+            <div class="q-mt-xs">
+              <q-badge
+                v-if="formData.shortLead.marsReason"
+                color="red-1"
+                text-color="red-9"
+                class="q-pa-sm text-weight-bold rounded-8"
+              >
+                <q-icon name="warning" class="q-mr-xs" />
+                {{formData.shortLead.marsReason}}
+              </q-badge>
+              <q-badge v-else color="green-1" text-color="green-9" class="q-pa-sm text-weight-bold rounded-8">
+                <q-icon name="check_circle" class="q-mr-xs" />
+                No Active Remarks
+              </q-badge>
+            </div>
+          </div>
         </div>
       </div>
 
-      <q-list>
-        <q-expansion-item
-          icon="info"
-          group="primary"
-          label="Merchant details"
-          caption="Device, Exceptions, Payment, MDR"
-          inset-separator
-        >
-          <div>
-            <!-- Device, Exception, Payment, MDR -->
-            <div class="row group content-stretch">
-              <!-- Device -->
-              <div class="col">
-                <q-card class="border-1 q-custom-class" flat>
-                  <q-card-section class="q-pa-sm items-center bottom-border-dark bg-grey-4">
-                    <div class="row items-center">
-                      <div class="col q-caption text-weight-medium">
-                        Device -
-                        {{formData.shortLead.deviceCount}}
-                        {{formData.shortLead.device.deviceName}}
-                      </div>
+      <!-- Main Content Tabs/Expansion -->
+      <div class="q-pa-lg">
+        <q-list class="premium-expansion-list">
+          <!-- Lead Configuration Details -->
+          <q-expansion-item
+            default-opened
+            icon="settings_suggest"
+            label="Service & Billing Configuration"
+            header-class="text-h6 text-slate-700 q-py-lg"
+            class="premium-expansion-item q-mb-md"
+          >
+            <div class="q-pa-lg">
+              <div class="row q-col-gutter-lg">
+                <!-- Device Details -->
+                <div class="col-md-3">
+                  <q-card flat class="premium-inner-card full-height">
+                    <div class="q-pa-md bg-slate-50 border-bottom flex items-center">
+                      <q-icon name="devices" color="purple-9" size="20px" class="q-mr-sm" />
+                      <div class="text-weight-bold text-slate-700">Device Selection</div>
                     </div>
-                  </q-card-section>
-                  <q-separator />
-                  <q-card-section class="q-pa-sm text-grey-9">
-                    <q-list separator no-border class="no-padding">
-                      <q-item>
-                        <q-item-section class="q-caption">
-                          <q-item-label>Plan</q-item-label>
-                        </q-item-section>
-                        <q-item-section class="q-caption" align="center">
-                          <q-item-label>{{formData.shortLead.plan.planName}}</q-item-label>
-                        </q-item-section>
-                      </q-item>
-                      <q-item>
-                        <q-item-section class="q-caption">
-                          <q-item-label>Setup Fees</q-item-label>
-                        </q-item-section>
-                        <q-item-section class="q-caption" align="center">
-                          <q-item-label>Rs. {{formData.shortLead.setupFees}}</q-item-label>
-                        </q-item-section>
-                      </q-item>
-                      <q-item>
-                        <q-item-section class="q-caption">
-                          <q-item-label>Recurring Fees</q-item-label>
-                        </q-item-section>
-                        <q-item-section class="q-caption" align="center">
-                          <q-item-label>Rs. {{formData.shortLead.recurringFees}}</q-item-label>
-                        </q-item-section>
-                      </q-item>
-                      <q-item>
-                        <q-item-section class="q-caption">
-                          <q-item-label>Merchant Category</q-item-label>
-                        </q-item-section>
-                        <q-item-section class="q-caption" align="center">
-                          <q-item-label>{{formData.shortLead.merchantCategory.merchantCategoryName}}</q-item-label>
-                        </q-item-section>
-                      </q-item>
-                    </q-list>
-                  </q-card-section>
-                </q-card>
-              </div>
+                    <div class="q-pa-md">
+                      <div class="text-h4 text-weight-bold text-slate-900 q-mb-xs">{{formData.shortLead.deviceCount}}</div>
+                      <div class="text-caption text-purple-9 text-weight-bold uppercase letter-spacing-1">{{formData.shortLead.device.deviceName}}</div>
 
-              <!-- Exception -->
-              <div v-if="formData.shortLead.leadCategory == 2" class="col">
-                <div class="group">
-                  <q-card v-if="formData.shortLead.kyc" class="border-1" flat>
-                    <q-card-section class="q-pa-sm bottom-border-dark bg-grey-4">
-                      <div class="row items-center">
-                        <div class="col-auto q-caption text-weight-medium">Exception KYC</div>
-                      </div>
-                    </q-card-section>
-                    <q-separator />
-                    <q-card-section class="no-padding">
-                      <div class="row items-center q-pa-sm q-py-md">
-                        <div class="col-md-3 col-sm-12 col-xs-12">
-                          <span class="q-caption text-faded">Reason</span>
-                        </div>
-                        <div class="col-md-9 col-sm-12 col-xs-12">
-                          <span
-                            class="q-caption text-faded"
-                            v-if="formData.shortLead.reason == null"
-                          >Reason not specified</span>
-                          <span class="q-caption text-faded" v-else>{{formData.shortLead.reason}}</span>
-                        </div>
-                      </div>
-                    </q-card-section>
+                      <q-list class="q-mt-lg dense-info-list">
+                        <q-item dense class="q-px-none">
+                          <q-item-section class="text-slate-400">Plan</q-item-section>
+                          <q-item-section side class="text-slate-700 text-weight-bold">{{formData.shortLead.plan.planName}}</q-item-section>
+                        </q-item>
+                        <q-item dense class="q-px-none">
+                          <q-item-section class="text-slate-400">Setup</q-item-section>
+                          <q-item-section side class="text-slate-700 text-weight-bold">₹{{formData.shortLead.setupFees}}</q-item-section>
+                        </q-item>
+                        <q-item dense class="q-px-none">
+                          <q-item-section class="text-slate-400">Recurring</q-item-section>
+                          <q-item-section side class="text-slate-700 text-weight-bold">₹{{formData.shortLead.recurringFees}}</q-item-section>
+                        </q-item>
+                      </q-list>
+                    </div>
                   </q-card>
                 </div>
-                <div class="group">
-                  <q-card class="border-1" flat v-if=" formData.shortLead.bankSubvention">
-                    <q-card-section class="q-pa-sm bottom-border-dark bg-grey-4">
-                      <div class="row items-center">
-                        <div class="col-auto q-caption text-weight-medium">Exception Bank Subvention</div>
-                      </div>
-                    </q-card-section>
-                    <q-separator />
-                    <q-card-section class="no-padding">
-                      <div class="row items-center q-pa-sm q-py-md">
-                        <div class="col-md-3 col-sm-12 col-xs-12">
-                          <div class="q-caption text-faded">Reason</div>
-                        </div>
-                        <div class="col-md-9 col-sm-12 col-xs-12">
-                          <div
-                            class="q-caption text-faded"
-                            v-if="formData.shortLead.reason == null"
-                          >Reason not specified</div>
-                          <div class="q-caption text-faded" v-else>{{formData.shortLead.reason}}</div>
-                        </div>
-                      </div>
-                    </q-card-section>
-                  </q-card>
-                </div>
-                <div class="group">
-                  <q-card v-if="formData.shortLead.pricing" class="q-ma-xs border-1" flat>
-                    <q-card-section class="q-pa-sm bottom-border-dark bg-grey-4">
-                      <div class="row items-center">
-                        <div class="col-auto q-caption text-weight-medium">Exception Pricing</div>
-                      </div>
-                    </q-card-section>
-                    <q-separator />
-                    <q-card-section class="no-padding">
-                      <div class="row items-center q-pa-sm q-py-md">
-                        <div class="col-md-3 col-sm-12 col-xs-12">
-                          <div class="q-caption text-faded">Reason</div>
-                        </div>
-                        <div class="col-md-9 col-sm-12 col-xs-12">
-                          <div class="q-caption text-faded">{{formData.shortLead.reason}}</div>
-                        </div>
-                      </div>
-                    </q-card-section>
-                  </q-card>
-                </div>
-              </div>
 
-              <!-- Payment -->
-              <div class="col">
-                <q-card class="border-1 q-custom-class" flat>
-                  <q-card-section class="q-pa-sm bottom-border-dark bg-grey-4">
-                    <div class="col-auto q-caption text-weight-medium">Payment</div>
-                  </q-card-section>
-                  <q-separator />
-                  <q-card-section class="q-pa-sm text-grey-9">
-                    <q-list dense no-border class="no-padding">
-                      <q-item class="q-pa-sm">
-                        <q-item-section class="q-caption">Payment mode:</q-item-section>
-                        <q-item-section class="q-caption" align="center">
-                          <span v-if="formData.shortLead.paymentOption == 1">IMPS/NEFT</span>
-                          <span v-else-if="formData.shortLead.paymentOption == 2">Cheque</span>
-                          <span v-else-if="formData.shortLead.paymentOption == 3">Swipe</span>
-                           <span v-else-if="formData.shortLead.paymentOption == 4">UPI Link</span>
-                        </q-item-section>
-                      </q-item>
-                      <q-item class="q-pa-sm">
-                        <q-item-section class="q-caption">Reference:</q-item-section>
-                        <q-item-section
-                          class="q-caption"
-                          align="center"
-                        >{{formData.shortLead.referenceNumber == ''?'NA':formData.shortLead.referenceNumber}}</q-item-section>
-                      </q-item>
-                    </q-list>
-                    <q-item v-if="formData.shortLead.paymentOption == 2">
-                      <div
-                        v-if="formData.shortLead.paymentDocumentMimeType != null && formData.shortLead.paymentDocumentMimeType.includes('pdf')"
-                      >
+                <!-- Exception History -->
+                <div class="col-md-3">
+                   <q-card flat class="premium-inner-card full-height">
+                    <div class="q-pa-md bg-slate-50 border-bottom flex items-center">
+                      <q-icon name="rule" color="amber-9" size="20px" class="q-mr-sm" />
+                      <div class="text-weight-bold text-slate-700">Exception Profiling</div>
+                    </div>
+                    <div class="q-pa-md">
+                       <template v-if="formData.shortLead.leadCategory == 2">
+                         <div v-if="formData.shortLead.kyc" class="q-mb-md">
+                           <div class="text-caption text-weight-bold text-blue-7 uppercase">KYC Exception</div>
+                           <div class="text-slate-600 text-caption">{{formData.shortLead.reason || 'Manual review required'}}</div>
+                         </div>
+                         <div v-if="formData.shortLead.bankSubvention" class="q-mb-md">
+                           <div class="text-caption text-weight-bold text-green-7 uppercase">Bank Subvention</div>
+                           <div class="text-slate-600 text-caption">{{formData.shortLead.reason || 'Channel approval pending'}}</div>
+                         </div>
+                         <div v-if="formData.shortLead.pricing">
+                           <div class="text-caption text-weight-bold text-red-5 uppercase">Pricing Exception</div>
+                           <div class="text-slate-600 text-caption">{{formData.shortLead.reason || 'Commercial override'}}</div>
+                         </div>
+                       </template>
+                       <div v-else class="flex flex-center full-height opacity-50 q-pa-md text-center">
+                          <q-icon name="verified_user" color="green-7" size="32px" />
+                          <div class="text-caption q-mt-sm">Standard Lead Profile - No Exceptions</div>
+                       </div>
+                    </div>
+                  </q-card>
+                </div>
+
+                <!-- Payment Info -->
+                <div class="col-md-3">
+                   <q-card flat class="premium-inner-card full-height">
+                    <div class="q-pa-md bg-slate-50 border-bottom flex items-center">
+                      <q-icon name="account_balance_wallet" color="green-7" size="20px" class="q-mr-sm" />
+                      <div class="text-weight-bold text-slate-700">Financial Setup</div>
+                    </div>
+                    <div class="q-pa-md">
+                      <div class="text-caption text-slate-400">Payment Channel</div>
+                      <div class="text-h6 text-slate-900 q-mb-md">
+                         <template v-if="formData.shortLead.paymentOption == 1">IMPS/NEFT Transfer</template>
+                         <template v-else-if="formData.shortLead.paymentOption == 2">Physical Cheque</template>
+                         <template v-else-if="formData.shortLead.paymentOption == 3">Card Swipe</template>
+                         <template v-else-if="formData.shortLead.paymentOption == 4">UPI Digital Link</template>
+                      </div>
+
+                      <div class="text-caption text-slate-400 q-mb-xs">Reference Number</div>
+                      <div class="text-weight-bold text-slate-700 q-mb-lg">{{formData.shortLead.referenceNumber || 'Awaiting ID'}}</div>
+
+                      <template v-if="formData.shortLead.paymentOption == 2">
                         <q-btn
+                          unelevated
+                          color="slate-900"
+                          icon="visibility"
+                          label="Review Document"
+                          class="full-width premium-btn"
                           size="sm"
-                          :outline="!showOpenPaymentChequeDocumentInfo"
-                          color="dark"
-                          label="View Document"
-                          icon="attach_file"
-                          @click="fnPDFViewModal(formData.shortLead.paymentDocumentFile,'CHEQUE')"
-                        ></q-btn>
-                      </div>
-                      <div
-                        v-else-if="formData.shortLead.paymentDocumentMimeType != null && formData.shortLead.paymentDocumentMimeType.includes('image')"
-                      >
-                        <q-btn
-                          :outline="!showOpenPaymentChequeInfo"
-                          size="sm"
-                          color="dark"
-                          label="View Document"
-                          icon="attach_file"
-                          @click="fnOpenPaymentChequeInfo(formData.shortLead.paymentDocumentFile)"
+                          @click="formData.shortLead.paymentDocumentMimeType?.includes('pdf') ? fnPDFViewModal(formData.shortLead.paymentDocumentFile,'CHEQUE') : fnOpenPaymentChequeInfo(formData.shortLead.paymentDocumentFile)"
                         />
-                      </div>
-                      <div v-else class="text-grey-9">
-                        <q-icon name="clear" color="negative" />No document attached
-                      </div>
-                    </q-item>
-                    <q-item v-if="showOpenPaymentChequeInfo">
-                      <viewer
-                        class="cursor-pointer"
-                        :images="[GLOBAL_FILE_FETCH_URL+ '/'+formData.shortLead.paymentDocumentFile]"
-                      >
-                        <img
-                          :src="GLOBAL_FILE_FETCH_URL+ '/'+formData.shortLead.paymentDocumentFile"
-                          style="max-width:100%"
-                        />
-                      </viewer>
-                    </q-item>
-                  </q-card-section>
-                </q-card>
-              </div>
+                      </template>
+                    </div>
+                  </q-card>
+                </div>
 
-              <!-- MDR -->
-              <div class="col">
-                <q-card class="border-1 q-custom-class" flat>
-                  <q-card-section class="q-pa-sm bottom-border-dark bg-grey-4">
-                    <div class="col-auto q-caption text-weight-medium">MDR</div>
-                  </q-card-section>
-                  <q-separator />
-                  <q-card-section class="q-pa-sm text-grey-9">
-                    <q-list separator dense no-border class="no-padding">
-                      <q-item>
-                        <q-item-section class="q-caption">Debit &lt;= 2000</q-item-section>
-                        <q-item-section
-                          class="q-caption"
-                          align="center"
-                        >{{formData.shortLead.debitLessthanAmount}}%</q-item-section>
-                      </q-item>
-                      <q-item>
-                        <q-item-section class="q-caption">
-                          <q-item-label class="q-caption">Debit > 2000</q-item-label>
-                        </q-item-section>
-                        <q-item-section
-                          class="q-caption"
-                          align="center"
-                        >{{formData.shortLead.debitGreaterthanAmount}}%</q-item-section>
-                      </q-item>
-                      <q-item>
-                        <q-item-section>
-                          <q-item-label class="q-caption">Std CC</q-item-label>
-                        </q-item-section>
-                        <q-item-section class="q-caption" align="center">
-                          <q-item-label class="q-caption">{{formData.shortLead.stdCC}}%</q-item-label>
-                        </q-item-section>
-                      </q-item>
-                      <q-item>
-                        <q-item-section>
-                          <q-item-label class="q-caption">Premium CC</q-item-label>
-                        </q-item-section>
-                        <q-item-section class="q-caption" align="center">
-                          <q-item-label class="q-caption">
-                            <div class="q-caption">{{formData.shortLead.premiumCC}}%</div>
-                          </q-item-label>
-                        </q-item-section>
-                      </q-item>
-                      <q-item>
-                        <q-item-section>
-                          <q-item-label class="q-caption">Corp Pre CC</q-item-label>
-                        </q-item-section>
-                        <q-item-section class="q-caption" align="center">
-                          <q-item-label class="q-caption">{{formData.shortLead.corpCC}}%</q-item-label>
-                        </q-item-section>
-                      </q-item>
-                      <q-item>
-                        <q-item-section>
-                          <q-item-label class="q-caption">Intl Pre CC</q-item-label>
-                        </q-item-section>
-                        <q-item-section class="q-caption" align="center">
-                          <q-item-label class="q-caption">{{formData.shortLead.intlCC}}%</q-item-label>
-                        </q-item-section>
-                      </q-item>
-                      <q-item>
-                        <q-item-section>
-                          <q-item-label class="q-caption">Super Pre CC</q-item-label>
-                        </q-item-section>
-                        <q-item-section class="q-caption" align="center">
-                          <q-item-label class="q-caption">{{formData.shortLead.superPremiumlCC}}%</q-item-label>
-                        </q-item-section>
-                      </q-item>
-                      <q-item>
-                        <q-item-section>
-                          <q-item-label class="q-caption">Amex Domestic</q-item-label>
-                        </q-item-section>
-                        <q-item-section class="q-caption" align="center">
-                          <q-item-label class="q-caption">{{formData.shortLead.amexDomestic}}%</q-item-label>
-                        </q-item-section>
-                      </q-item>
-                      <q-item>
-                        <q-item-section>
-                          <q-item-label class="q-caption">Amex International</q-item-label>
-                        </q-item-section>
-                        <q-item-section class="q-caption" align="center">
-                          <q-item-label class="q-caption">{{formData.shortLead.amexInternational}}%</q-item-label>
-                        </q-item-section>
-                      </q-item>
-                      <q-item class="q-pa-sm" v-if="formData.shortLead.posEnable">
-                        <q-checkbox
-                          v-model="formData.shortLead.posEnable"
-                          disable
-                          readonly
-                          color="grey-9"
-                        >
-                          <small class="q-caption">Enable Cash@POS Cash @POS incentive Rs. 5"</small>
-                        </q-checkbox>
-                      </q-item>
-                    </q-list>
-                  </q-card-section>
-                </q-card>
+                <!-- MDR Stack -->
+                <div class="col-md-3">
+                   <q-card flat class="premium-inner-card full-height">
+                    <div class="q-pa-md bg-slate-50 border-bottom flex items-center">
+                      <q-icon name="percent" color="blue-7" size="20px" class="q-mr-sm" />
+                      <div class="text-weight-bold text-slate-700">Commercial Stack (MDR)</div>
+                    </div>
+                    <div class="q-pa-none">
+                      <q-list dense separator class="mdr-list">
+                        <q-item class="q-py-sm">
+                          <q-item-section class="text-slate-500">Debit (≤ 2k)</q-item-section>
+                          <q-item-section side class="text-weight-bold text-slate-900">{{formData.shortLead.debitLessthanAmount}}%</q-item-section>
+                        </q-item>
+                        <q-item class="q-py-sm">
+                          <q-item-section class="text-slate-500">Credit (Std)</q-item-section>
+                          <q-item-section side class="text-weight-bold text-slate-900">{{formData.shortLead.stdCC}}%</q-item-section>
+                        </q-item>
+                        <q-item class="q-py-sm">
+                          <q-item-section class="text-slate-500">Amex (Dom)</q-item-section>
+                          <q-item-section side class="text-weight-bold text-slate-900">{{formData.shortLead.amexDomestic}}%</q-item-section>
+                        </q-item>
+                        <q-item class="q-py-sm bg-purple-50" v-if="formData.shortLead.posEnable">
+                          <q-item-section class="text-purple-9 text-weight-bold">Cash@POS</q-item-section>
+                          <q-item-section side><q-icon name="check_circle" color="purple-9" /></q-item-section>
+                        </q-item>
+                      </q-list>
+                    </div>
+                  </q-card>
+                </div>
               </div>
             </div>
-          </div>
-        </q-expansion-item>
+          </q-expansion-item>
 
-        <q-expansion-item
-          opened
-          icon="file_copy"
-          group="primary"
-          label="Documents"
-          caption="Related documents"
-          inset-separator
-        >
-          <showMarsForm :propLeadDeatils="formData.shortLead"></showMarsForm>
-        </q-expansion-item>
-      </q-list>
-      <!-- START >> COMPONENT: View PDF  -->
-      <showPdfModalComponent
-        v-if="toggleshowPDFModal"
-        :propToggleshowPDFModal="toggleshowPDFModal"
-        :propPDFDetails="PDFDetails"
-        @togglePDFModal="fnPDFViewModal"
-      ></showPdfModalComponent>
-      <!-- END >> COMPONENT: View PDF -->
-      <!-- //Common lead information in popup -->
-      <generalLeadInformation
-        v-if="propToggleLeadInformation"
-        :leadInformation="addtnLeadInformation"
-        :propToggleLeadInformationPop="propToggleLeadInformation"
-        @closeLeadInformation="toggleLeadInformation"
-      />
+          <!-- Digital Assets/Documents -->
+          <q-expansion-item
+            icon="folder_zip"
+            label="Digital Verification Assets"
+            header-class="text-h6 text-slate-700 q-py-lg"
+            class="premium-expansion-item"
+          >
+            <div class="q-pa-lg">
+               <showMarsForm :propLeadDeatils="formData.shortLead"></showMarsForm>
+            </div>
+          </q-expansion-item>
+        </q-list>
+      </div>
+
+      <!-- Action Footer -->
+      <div class="q-pa-lg border-top bg-slate-50 flex justify-end gap-md">
+         <q-btn flat color="slate-500" label="Return to Queue" to="/sat/lead/validation" icon="arrow_back" no-caps />
+         <q-btn unelevated color="purple-9" label="Validate & Continue" class="premium-btn-primary q-px-xl" no-caps icon-right="chevron_right" />
+      </div>
     </div>
+
+    <!-- Modals -->
+    <showPdfModalComponent
+      v-if="toggleshowPDFModal"
+      :propToggleshowPDFModal="toggleshowPDFModal"
+      :propPDFDetails="PDFDetails"
+      @togglePDFModal="fnPDFViewModal"
+    />
+
+    <generalLeadInformation
+      v-if="propToggleLeadInformation"
+      :leadInformation="addtnLeadInformation"
+      :propToggleLeadInformationPop="propToggleLeadInformation"
+      @closeLeadInformation="toggleLeadInformation"
+    />
+
+    <!-- Image Preview Modal -->
+    <q-dialog v-model="showOpenPaymentChequeInfo">
+       <q-card style="width: 700px; max-width: 90vw; border-radius: 16px;">
+          <div class="q-pa-md border-bottom flex justify-between items-center">
+             <div class="text-weight-bold">Payment Document Preview</div>
+             <q-btn flat round icon="close" v-close-popup />
+          </div>
+          <q-card-section class="q-pa-md flex flex-center bg-slate-100">
+             <img :src="GLOBAL_FILE_FETCH_URL+ '/'+formData.shortLead.paymentDocumentFile" style="max-width:100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1)" />
+          </q-card-section>
+       </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -387,150 +257,72 @@ export default {
     return {
       propToggleLeadInformation: false,
       addtnLeadInformation: null,
-
       showOpenPaymentChequeDocumentInfo: false,
       PDFDetails: null,
       toggleshowPDFModal: false,
-      showImage: true,
-      showDocumentPreview: true,
-      populatedDocumentUrl: "",
-      text: "",
-      fileUrl: "",
-      date2: "",
-      select: "",
-      model: "",
       showOpenPaymentChequeInfo: false,
-      checked: false,
-      thumbnailsHorizontal: false,
-
-      formData: {
-        shortLead: ""
-      }
+      formData: { shortLead: "" }
     };
   },
   computed: {
     ...mapGetters("GlobalVariables", ["GLOBAL_FILE_FETCH_URL"]),
-    ...mapGetters("SatLeadValidation", [
-      "getShortLeadInfo",
-      "getDeviceVerificationStatus"
-    ])
+    ...mapGetters("SatLeadValidation", ["getShortLeadInfo"])
   },
   created() {
     this.ajaxLoadLeadDataEntryInfo();
   },
   methods: {
-    ...mapActions("SatLeadValidation", [
-      "FETCH_SHORT_LEAD_DATA",
-      "VERIFY_DEVICE_FULL_LEAD"
-    ]),
-    // Function to toggle lead information pop up screen
+    ...mapActions("SatLeadValidation", ["FETCH_SHORT_LEAD_DATA"]),
     toggleLeadInformation(leadDetails) {
       this.propToggleLeadInformation = !this.propToggleLeadInformation;
-      if (leadDetails != undefined) {
-        this.addtnLeadInformation = leadDetails;
-      }
+      if (leadDetails) this.addtnLeadInformation = leadDetails;
     },
-
     ajaxLoadLeadDataEntryInfo() {
-      this.$q.loading.show({
-        delay: 0, // ms
-        spinnerColor: "purple-9",
-        message: "Fetching data .."
-      });
+      this.$q.loading.show({ spinnerColor: "purple-9", message: "Fetching deep lead intelligence..." });
       this.FETCH_SHORT_LEAD_DATA(this.$route.params.id)
-        .then(response => {
+        .then(() => {
           this.formData.shortLead = this.getShortLeadInfo;
           this.$q.loading.hide();
         })
-        .catch(() => {
-          this.$q.loading.hide();
-        });
-      this.toggleAjaxLoadFilter = false;
+        .catch(() => this.$q.loading.hide());
     },
-    fnDocumentUrl(documentUrl) {
-      this.populatedDocumentUrl = documentUrl;
-      this.showDocumentPreview = !this.showDocumentPreview;
-    },
-    fnCloseDocumentPreview() {
-      this.showDocumentPreview = !this.showDocumentPreview;
-    },
-    fnOpenPaymentChequeInfo() {
-      this.showOpenPaymentChequeInfo = !this.showOpenPaymentChequeInfo;
-    },
-
-    // Function to show PDF
+    fnOpenPaymentChequeInfo() { this.showOpenPaymentChequeInfo = !this.showOpenPaymentChequeInfo; },
     fnPDFViewModal(documentUrl, viewChequeFlag) {
-      if (viewChequeFlag == "CHEQUE") {
-        this.showOpenPaymentChequeDocumentInfo = !this
-          .showOpenPaymentChequeDocumentInfo;
-        this.PDFDetails = documentUrl;
-        this.toggleshowPDFModal = !this.toggleshowPDFModal;
-      } else {
-        this.PDFDetails = documentUrl;
-        this.toggleshowPDFModal = !this.toggleshowPDFModal;
-      }
-    },
-
-    //Function to et approved by user for payment information
-    fnGetVerifiedPerson() {
-      let sortedArr = _.orderBy(
-        this.getShortLeadInfo.leadVerificationStatus,
-        ["id"],
-        ["desc"]
-      );
-      let cookedArr = _.filter(sortedArr, {
-        status: true,
-        verificationType: this.$VERIFICATION_TYPE_FINANCE
-      });
-      return cookedArr[0].createdBy.name;
-    },
-
-    fnGetVerifiedRSMPerson() {
-      let sortedArr = _.orderBy(
-        this.getShortLeadInfo.leadVerificationStatus,
-        ["id"],
-        ["desc"]
-      );
-      let cookedArr = _.filter(sortedArr, {
-        status: true,
-        verificationType: this.$VERIFICATION_TYPE_PRICING
-      });
-      return cookedArr[0].createdBy.name;
-    },
-    // Function to open handed over image upload
-    fnViewHandedOverFileImage() {
-      this.$refs.handedOverImageViewer.click();
+      this.PDFDetails = documentUrl;
+      this.toggleshowPDFModal = !this.toggleshowPDFModal;
     }
   }
 };
 </script>
 
-<style scoped>
-.bottom-border-dark {
-  border-bottom: 1px solid #afafaf;
+<style lang="scss" scoped>
+.premium-inner-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  &:hover {
+    border-color: #61116a;
+    box-shadow: 0 4px 12px rgba(97, 17, 106, 0.05);
+  }
 }
 
-.border-1 {
-  border: 1px solid #afafaf;
+.premium-expansion-item {
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  background: white;
+  ::v-deep(.q-item) { border-radius: 12px; }
 }
 
-.q-custom-class {
-  min-height: 230px;
+.mdr-list {
+  .q-item {
+    border-bottom: 1px solid #f8fafc;
+    &:last-child { border-bottom: none; }
+  }
 }
 
-.custom-z-index {
-  z-index: 2;
-}
-
-.no-underline {
-  text-decoration: none;
-  color: #222;
-}
-
-.no-underline:hover,
-.no-underline:active,
-.no-underline:focus {
-  text-decoration: none;
-  color: #027be3;
-}
+.letter-spacing-1 { letter-spacing: 0.1em; }
+.bg-purple-50 { background-color: #faf5ff; }
+.rounded-8 { border-radius: 8px; }
+.line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
 </style>
