@@ -4,7 +4,7 @@ import api from '../api.js';
 // export const FETCH_SEND_TO_REPAIR_DETAILS = ({
 //   commit
 // }, request) => {
-// //   let sorting = request.pagination.descending ? 'asc' : 'desc';  https://qaapp.bijlipay.co.in:8085/api/central-devices-sent-for-repair
+// //   let sorting = request.pagination.descending ? 'asc' : 'desc';  https://qaapp.bijlipay.co.in:8985/api/central-devices-sent-for-repair
   
 //      return api
 //        .get(
@@ -322,7 +322,7 @@ export const APPROVE_SEND_TO_REPAIR = ({ commit }, request) => {
   
 
     
-  // /*START >> Module>> all FINANCE APPROVED tracker*/https://qaapp.bijlipay.co.in:8085/api/central-inventory-get-device-by-status/3
+  // /*START >> Module>> all FINANCE APPROVED tracker*/https://qaapp.bijlipay.co.in:8985/api/central-inventory-get-device-by-status/3
   // export const FETCH_ALL_MOVED_TO_SCRAP_DATA = ({ commit }, request) => {
   //   console.log("|REQUEST : " + request)
   //   // if (request.pagination.sortBy == null) {

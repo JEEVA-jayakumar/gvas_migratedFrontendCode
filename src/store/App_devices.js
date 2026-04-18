@@ -84,7 +84,7 @@ const APP_Devices = {
       commit
     }, request) {
       return api
-        .get("https://qaapp.bijlipay.co.in:8085/staticApi/plan-and-deivce-list-based-on-lead-source/"+ request)
+        .get("https://qaapp.bijlipay.co.in:8985/staticApi/plan-and-deivce-list-based-on-lead-source/"+ request)
         .then(response => {
           commit("API_RESPONSE_LOG", response);
           // START >> Commit response data
@@ -125,7 +125,7 @@ const APP_Devices = {
     VERIFY_KSN({
       commit
     }, request) {
-      return api.get("https://qaapp.bijlipay.co.in:8085/api/switch-enable-ksn/" + request)
+      return api.get("https://qaapp.bijlipay.co.in:8985/api/switch-enable-ksn/" + request)
         .then(response => {
           commit("API_RESPONSE_LOG", response);
           commit("SET_KSN", response)

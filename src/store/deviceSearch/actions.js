@@ -6,7 +6,7 @@
 // }, request) => {
 //   return api
 //     .get("search-device-by-mid-tid-mobile?serialNumber=" + request)
-//     // https://qaapp.bijlipay.co.in:8085/api/search-device-by-mid-tid-mobile/7239505
+//     // https://qaapp.bijlipay.co.in:8985/api/search-device-by-mid-tid-mobile/7239505
 //     .then(response => {
 //       // console.log(response)
 //       let merchant = [];

@@ -10,7 +10,7 @@ export const DEVICE_MODEL_MARS = ({
         'Authorization': request
     };
     console.log("HEADERS_TOKEN_DETAILS-----------", {headers: headers})
-    return api.get("https://qaapp.bijlipay.co.in:8085/api/deviceModel?NII=101", {headers: headers}).then(response => {
+    return api.get("https://qaapp.bijlipay.co.in:8985/api/deviceModel?NII=101", {headers: headers}).then(response => {
             console.log("SEND DEVICE MODEL MARS-----------",JSON.stringify(response))
             // commit('SET_DEVICE_MODEL_MARS', response.data);
             return response
@@ -24,7 +24,7 @@ export const CITY_MARS = ({
         'Authorization': request
     };
     console.log("HEADERS_TOKEN_DETAILS-----------", {headers: headers})
-    return api.get("https://qaapp.bijlipay.co.in:8085/api/city", {headers: headers}).then(response => {
+    return api.get("https://qaapp.bijlipay.co.in:8985/api/city", {headers: headers}).then(response => {
             console.log("SEND CITY MARS-----------",JSON.stringify(response))
             // commit('SET_CITY_MARS', response.data);
             return response
@@ -39,7 +39,7 @@ export const REGION_MARS = ({
         'Authorization': request
     };
     console.log("HEADERS_TOKEN_DETAILS-----------", {headers: headers})
-    return api.get("https://qaapp.bijlipay.co.in:8085/api/marsregion", {headers: headers}).then(response => {
+    return api.get("https://qaapp.bijlipay.co.in:8985/api/marsregion", {headers: headers}).then(response => {
             console.log("SEND REGION MARS-----------",JSON.stringify(response))
             // commit('SET_REGION_MARS', response.data);
             return response
@@ -69,7 +69,7 @@ export const LEAD_FORM_MARS = ({
         'Authorization': request
     };
     console.log("HEADERS_TOKEN_DETAILS-----------", {headers: headers})
-    return api.get("https://qaapp.bijlipay.co.in:8085/api/leadFrom", {headers: headers}).then(response => {
+    return api.get("https://qaapp.bijlipay.co.in:8985/api/leadFrom", {headers: headers}).then(response => {
             console.log("SEND LEAD FORM MARS-----------",JSON.stringify(response))
             // commit('SET_LEAD_FORM_MARS', response.data);
             return response
@@ -83,7 +83,7 @@ export const STATE_MARS = ({
         'Authorization': request
     };
     console.log("HEADERS_TOKEN_DETAILS-----------", {headers: headers})
-    return api.get("https://qaapp.bijlipay.co.in:8085/api/state", {headers: headers}).then(response => {
+    return api.get("https://qaapp.bijlipay.co.in:8985/api/state", {headers: headers}).then(response => {
             console.log("SEND STATE MARS-----------",JSON.stringify(response))
             // commit('SET_STATE_MARS', response.data);
             return response

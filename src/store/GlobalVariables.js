@@ -12,9 +12,9 @@ import {
 // const LOCAL_BASEURL_FOR_FILES = "http://192.168.4.204:8080/"
 // const LOCAL_BASEURL_FOR_FILES = "http://192.168.4.204:8080/";
 // const LOCAL_BASEURL_FOR_FILES = "http://182.156.237.85:8080/";
-// const LOCAL_BASEURL_FOR_FILES = "https://qaapp.bijlipay.co.in:8085/";
-const LOCAL_BASEURL_FOR_FILES = "https://qaapp.bijlipay.co.in:8085/"
-//const LOCAL_BASEURL_FOR_FILES = "https://qaapp.bijlipay.co.in:8085/"
+// const LOCAL_BASEURL_FOR_FILES = "https://qaapp.bijlipay.co.in:8985/";
+const LOCAL_BASEURL_FOR_FILES = "https://qaapp.bijlipay.co.in:8985/"
+//const LOCAL_BASEURL_FOR_FILES = "https://qaapp.bijlipay.co.in:8985/"
 // const LOCAL_BASEURL_FOR_FILES = "http://192.168.4.205:8080/";
 // const MARS_API_URL = "http://10.20.20.49:8090/";
 // const MARS_API_URL = "http://1.23.166.107:8090/";
@@ -22,14 +22,14 @@ const LOCAL_BASEURL_FOR_FILES = "https://qaapp.bijlipay.co.in:8085/"
 //UAT
 // const MARS_API_URL = "http://182.156.237.86:9090/";
 // const MARS_API = "http://182.156.237.85:9081/"
-const MARS_API = "https://qaapp.bijlipay.co.in:8085/"
-//const MARS_API = "https://qaapp.bijlipay.co.in:8085/"
+const MARS_API = "https://qaapp.bijlipay.co.in:8985/"
+//const MARS_API = "https://qaapp.bijlipay.co.in:8985/"
 // const MARS_API = "http://192.168.4.204:8080/"
 // const LOCAL_API = "http://182.156.237.85:9081/"
-//const LOCAL_API = "https://qaapp.bijlipay.co.in:8085/"
-const LOCAL_API = "https://qaapp.bijlipay.co.in:8085/"
-//const APP_API = "https://qaapp.bijlipay.co.in:8085/"
-const APP_API = "https://qaapp.bijlipay.co.in:8085/"
+//const LOCAL_API = "https://qaapp.bijlipay.co.in:8985/"
+const LOCAL_API = "https://qaapp.bijlipay.co.in:8985/"
+//const APP_API = "https://qaapp.bijlipay.co.in:8985/"
+const APP_API = "https://qaapp.bijlipay.co.in:8985/"
 const AXIS_PINCODE = "https://smart.bijlipay.co.in:6091/"
 const MERCHANT = "https://bportal.bijlipay.co.in:8081/"
 
