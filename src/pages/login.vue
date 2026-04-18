@@ -79,6 +79,7 @@
 
 <script>
 import AesUtil from "../store/AesUtil";
+import * as CryptoJS from "crypto-js";
 import { mapActions } from "vuex";
 
 export default {
@@ -93,22 +94,34 @@ export default {
     };
   },
   methods: {
-    ...mapActions("Authentication", ["LOGIN"]),
+    ...mapActions("Authentication", ["FEED_LOGIN_DATA", "FETCH_LOGGEDIN_USER_DATA"]),
     onSubmit() {
       this.loading = true;
-      const aesUtil = new AesUtil();
-      const encryptedEmail = aesUtil.encrypt("BijliWeAreMakers", this.email);
-      const encryptedPassword = aesUtil.encrypt("BijliWeAreMakers", this.password);
+      let iv = CryptoJS.lib.WordArray.random(128 / 8).toString(
+        CryptoJS.enc.Hex
+      );
+      let salt = CryptoJS.lib.WordArray.random(128 / 8).toString(
+        CryptoJS.enc.Hex
+      );
+      let aesUtil = new AesUtil(128, 1000);
+      let ciphertext = aesUtil.encrypt(
+        salt,
+        iv,
+        "BijliWeAreMakers",
+        this.password
+      );
+      let aesPassword = iv + "::" + salt + "::" + ciphertext;
+      let password = btoa(aesPassword);
 
       const payload = {
         url: {
-          email: encryptedEmail,
-          password: encryptedPassword,
+          email: this.email,
+          password: password,
           rememberPassword: this.rememberMe
         }
       };
 
-      this.LOGIN(payload)
+      this.FEED_LOGIN_DATA(payload)
         .then((res) => {
           this.loading = false;
           const user = res.data.data;
