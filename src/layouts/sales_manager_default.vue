@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-     <q-header style="margin-left:0px" class="shadow-0 z-top" flat>
+     <q-header style="margin-left:0px" class="shadow-0 z-top bg-custom-light-grey" flat>
       <customHeader
         :leftDrawerOpen="leftDrawerOpen"
         :propGetUserName="getUserName"
