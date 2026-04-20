@@ -454,7 +454,7 @@ export default {
   }
 
   &.q-field--focused {
-    ::v-deep(.q-field__control) {
+    :deep(.q-field__control) {
       background-color: #fff !important;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     }

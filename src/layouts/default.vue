@@ -1132,16 +1132,27 @@ export default {
       if (this.showMenu.includes(this.$ROLE_HIERARCHY_OPERATION_SAT)) {
         this.selectedValueSat = val === "Bijlipay" ? "Bijlipay" : "Other";
         this.menuListNameSat = this.selectedValueSat;
-        if (val === "Bijlipay") this.$router.push("/sat/dashboard");
-        else if (val === 3) this.$router.push("/sat/dashboardPhonepe");
-        else if (val === 4) this.$router.push("/sat/dashboardMobikwik");
-        else this.$router.push("/sat/dashboard");
+        if (val === "Bijlipay") {
+          this.$router.push("/sat/dashboard");
+        } else if (val == 3) {
+          this.$router.push("/sat/dashboardPhonepe");
+        } else if (val == 4) {
+          this.$router.push("/sat/dashboardMobikwik");
+        } else {
+          this.$router.push("/sat/dashboard");
+        }
       }
       if (this.showMenu.includes(this.$ROLE_HIERARCHY_INVENTORY_OFFICER)) {
         this.menuListName = val === "Bijlipay" ? "Bijlipay" : "Others";
-        if (val === "Bijlipay") this.$router.push("/inventory/home");
-        else if (val === 3) this.$router.push("/inventory/Phonepehome");
-        else this.$router.push("/inventory/Mobikwikhome");
+        if (val === "Bijlipay") {
+          this.$router.push("/inventory/home");
+        } else if (val == 3) {
+          this.$router.push("/inventory/Phonepehome");
+        } else if (val == 4) {
+          this.$router.push("/inventory/Mobikwikhome");
+        } else {
+          this.$router.push("/inventory/home");
+        }
       }
     },
     fnMainToggleSideMenu() {
@@ -1167,7 +1178,7 @@ export default {
 
 <style lang="scss" scoped>
 .aggregator-select {
-  ::v-deep(.q-field__control) {
+  :deep(.q-field__control) {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
   }
