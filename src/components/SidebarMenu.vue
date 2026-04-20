@@ -116,7 +116,7 @@ export default {
 }
 
 .menu-expansion-item {
-  ::v-deep(.q-expansion-item__container) {
+  :deep(.q-expansion-item__container) {
     .q-item {
       @extend .menu-item;
     }

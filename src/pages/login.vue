@@ -1,79 +1,125 @@
 <template>
-  <q-page class="login-page flex flex-center">
-    <div class="login-card-container">
-      <q-card class="login-card q-pa-xl">
-        <div class="text-center q-mb-lg">
-          <img src="~assets/images/logo.png" class="login-logo" />
-          <h1 class="text-h5 text-weight-bold q-mt-md q-mb-xs">Welcome Back</h1>
-          <p class="text-subtitle2 text-grey-7">Please enter your details to sign in</p>
+  <q-page class="login-page">
+    <div class="row full-height window-height">
+      <!-- Left Branding Panel (Hidden on small screens) -->
+      <div class="col-md-5 gt-sm branding-panel flex flex-center relative-position overflow-hidden">
+        <div class="absolute-full branding-overlay"></div>
+        <div class="branding-content text-center q-pa-xl z-top">
+          <div class="logo-wrapper q-mb-xl hover-scale">
+            <img src="~assets/images/logo.png" class="branding-logo" />
+          </div>
+          <div class="branding-text text-white">
+            <h2 class="text-h3 text-weight-bolder q-mb-md">Bijlipay</h2>
+          </div>
         </div>
+        <!-- Decorative Elements -->
+        <div class="decor-circle circle-1"></div>
+        <div class="decor-circle circle-2"></div>
+      </div>
 
-        <q-form @submit="fuSubmitLoginDetails(formData)" class="q-gutter-y-md">
-          <q-input
-            v-model.trim="formData.email"
-            @blur="v$.formData.email.$touch"
-            :error="v$.formData.email.$error"
-            label="Email"
-            outlined
-            rounded
-            bg-color="white"
-            placeholder="Enter your email"
-            @keyup.enter="fuSubmitLoginDetails(formData)"
-          >
-            <template v-slot:prepend>
-              <q-icon name="email" color="grey-7" />
-            </template>
-          </q-input>
-
-          <q-input
-            v-model="formData.password"
-            @blur="v$.formData.password.$touch"
-            :error="v$.formData.password.$error"
-            placeholder="Enter your password"
-            @keyup.enter="fuSubmitLoginDetails(formData)"
-            type="password"
-            label="Password"
-            outlined
-            rounded
-            bg-color="white"
-          >
-            <template v-slot:prepend>
-              <q-icon name="lock" color="grey-7" />
-            </template>
-          </q-input>
-
-          <div class="row items-center justify-between q-mt-sm">
-            <q-checkbox v-model="formData.rememberPassword" color="primary" label="Remember me" class="text-grey-8" />
-            <q-btn
-              flat
-              no-caps
-              padding="none"
-              color="primary"
-              class="text-weight-medium"
-              @click="fnShowForgetPasswordModal"
-            >
-              Forgot password?
-            </q-btn>
+      <!-- Right Login Panel -->
+      <div class="col-12 col-md-7 login-panel flex flex-center">
+        <div class="login-container q-pa-lg">
+          <!-- Mobile Logo -->
+          <div class="lt-md text-center q-mb-xl">
+            <img src="~assets/images/logo.png" class="mobile-logo" />
           </div>
 
-          <q-btn
-            class="full-width q-py-md q-mt-lg submit-btn"
-            no-caps
-            color="primary"
-            unelevated
-            type="submit"
-            label="Sign In"
-          />
-        </q-form>
-      </q-card>
+          <div class="login-header q-mb-xl">
+            <h1 class="text-h4 text-weight-bold q-mb-sm text-primary">Welcome Back</h1>
+            <p class="text-subtitle1 text-grey-7">Please enter your credentials to access your account.</p>
+          </div>
 
-      <div class="text-center q-mt-lg">
-        <p class="text-grey-6 text-caption">© {{ new Date().getFullYear() }} Bijlipay. All rights reserved.</p>
+          <q-form @submit="fuSubmitLoginDetails(formData)" class="q-gutter-y-lg">
+            <div class="input-group">
+              <label class="text-subtitle2 text-weight-bold text-grey-8 q-mb-xs block">Email Address</label>
+              <q-input
+                v-model.trim="formData.email"
+                @blur="v$.formData.email.$touch"
+                :error="v$.formData.email.$error"
+                outlined
+                bg-color="grey-1"
+                placeholder="e.g. name@company.com"
+                @keyup.enter="fuSubmitLoginDetails(formData)"
+                class="premium-input"
+              >
+                <template v-slot:prepend>
+                  <q-icon name="o_email" color="primary" />
+                </template>
+              </q-input>
+            </div>
+
+            <div class="input-group">
+              <label class="text-subtitle2 text-weight-bold text-grey-8 q-mb-xs block">Password</label>
+              <q-input
+                v-model="formData.password"
+                @blur="v$.formData.password.$touch"
+                :error="v$.formData.password.$error"
+                placeholder="Enter your password"
+                @keyup.enter="fuSubmitLoginDetails(formData)"
+                :type="showPassword ? 'text' : 'password'"
+                outlined
+                bg-color="grey-1"
+                class="premium-input"
+              >
+                <template v-slot:prepend>
+                  <q-icon name="o_lock" color="primary" />
+                </template>
+                <template v-slot:append>
+                  <q-icon
+                    :name="showPassword ? 'o_visibility' : 'o_visibility_off'"
+                    class="cursor-pointer"
+                    @click="showPassword = !showPassword"
+                    color="grey-6"
+                  />
+                </template>
+              </q-input>
+            </div>
+
+            <div class="row items-center justify-between q-mt-md">
+              <q-checkbox
+                v-model="formData.rememberPassword"
+                color="primary"
+                label="Remember me"
+                class="text-grey-8 font-medium"
+              />
+              <q-btn
+                flat
+                no-caps
+                padding="none"
+                color="primary"
+                class="text-weight-bold hover-underline"
+                @click="fnShowForgetPasswordModal"
+              >
+                Forgot password?
+              </q-btn>
+            </div>
+
+            <q-btn
+              class="full-width q-py-md q-mt-xl submit-btn shadow-premium"
+              no-caps
+              color="primary"
+              unelevated
+              type="submit"
+              label="Sign In"
+            />
+          </q-form>
+
+          <div class="text-center q-mt-xl footer-info">
+            <p class="text-grey-6 text-caption">
+              By signing in, you agree to our
+              <span class="text-primary cursor-pointer">Terms of Service</span> and
+              <span class="text-primary cursor-pointer">Privacy Policy</span>.
+            </p>
+            <p class="text-grey-5 text-caption q-mt-sm font-medium">
+              © {{ new Date().getFullYear() }} Bijlipay. All rights reserved.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
 
     <showForgetPasswordComp
-      v-if="showForgetPassword"
       :propShowForgetPassword="showForgetPassword"
       @emitfnShowForgetPasswordModal="fnShowForgetPasswordModal"
     ></showForgetPasswordComp>
@@ -124,6 +170,7 @@ export default {
   data() {
     return {
       showForgetPassword: false,
+      showPassword: false,
       formData: {
         email: "",
         password: "",
@@ -166,7 +213,11 @@ export default {
     fuSubmitLoginDetails(request) {
       this.v$.formData.$touch();
       if (this.v$.formData.$error) {
-        this.$q.notify("Please review fields again.");
+        this.$q.notify({
+          message: "Please review the fields.",
+          color: "warning",
+          icon: "warning"
+        });
       } else {
         let iv = CryptoJS.lib.WordArray.random(128 / 8).toString(
           CryptoJS.enc.Hex
@@ -213,7 +264,7 @@ export default {
                     message: "Successfully Logged In",
                     icon: "thumb_up",
                   });
-                  this.fnNavigate("BijlipaySat", "/sat/master/BijlipaySat");
+                  this.fnNavigate("satDashboard", "/sat/dashboard");
                 } else if (menuArr.includes(this.$ROLE_BIJLIPAY_MANAGER)) {
                   this.$q.notify({
                     color: "positive",
@@ -341,35 +392,86 @@ export default {
 
 <style lang="scss" scoped>
 .login-page {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  min-height: 100vh;
+  background-color: #ffffff;
+  overflow: hidden;
 }
 
-.login-card-container {
+.branding-panel {
+  background: linear-gradient(135deg, #61116a 0%, #300835 100%);
+  color: white;
+
+  .branding-overlay {
+    background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+    background-size: 32px 32px;
+    opacity: 0.5;
+  }
+
+  .branding-logo {
+    width: 240px;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+  }
+
+  .hover-scale {
+    transition: transform 0.3s ease;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.login-panel {
+  background-color: #fff;
+}
+
+.login-container {
   width: 100%;
-  max-width: 450px;
-  padding: 20px;
+  max-width: 480px;
 }
 
-.login-card {
-  border-radius: 24px !important;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+.mobile-logo {
+  height: 40px;
 }
 
-.login-logo {
-  height: 50px;
-  margin-bottom: 8px;
+.premium-input {
+  :deep(.q-field__control) {
+    border-radius: 12px !important;
+    transition: all 0.3s ease;
+    border: 1.5px solid #f1f5f9;
+
+    &:before {
+      border: none !important;
+    }
+
+    &:after {
+      border-color: var(--q-primary) !important;
+      border-width: 1.5px !important;
+    }
+
+    &:hover {
+      background-color: #fff !important;
+      border-color: #cbd5e1;
+    }
+  }
+
+  &.q-field--focused {
+    :deep(.q-field__control) {
+      background-color: #fff !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+  }
 }
 
 .submit-btn {
+  height: 56px;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
   border-radius: 12px !important;
-  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(97, 17, 106, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px -5px rgba(97, 17, 106, 0.4) !important;
   }
 
   &:active {
@@ -377,12 +479,46 @@ export default {
   }
 }
 
-::v-deep(.q-field--outlined.q-field--rounded .q-field__control) {
-  border-radius: 12px !important;
-  background-color: #f8fafc;
+.shadow-premium {
+  box-shadow: 0 4px 15px rgba(97, 17, 106, 0.2);
+}
 
-  &:hover {
-    background-color: #fff;
+.decor-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+  z-index: 1;
+}
+
+.circle-1 {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -100px;
+}
+
+.circle-2 {
+  width: 300px;
+  height: 300px;
+  bottom: -50px;
+  left: -50px;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.hover-underline:hover {
+  text-decoration: underline;
+}
+
+.block {
+  display: block;
+}
+
+@media (max-width: $breakpoint-sm-max) {
+  .login-container {
+    max-width: 400px;
   }
 }
 </style>

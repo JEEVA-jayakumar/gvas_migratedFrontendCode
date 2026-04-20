@@ -33,7 +33,6 @@ import equitasSoundboxOnboarding from '../pages/sat/equitasSoundboxOnboarding.vu
 import aggregatorLeadValidation from "../pages/sat/aggregatorLeadValidation.vue";
 import Changemanagement from "../pages/sat/changemanagement.vue";
 import Changemanagementterminal from "../pages/sat/changemanagementterminal.vue";
-import BijlipaySat from "../pages/sat/BijlipaySat.vue";
 import deactivelist from "../pages/sat/DeactiveList"
 import AggregatorSat from "../pages/sat/AggregatorSat.vue";
 import ChangemanagementEditData from "../pages/sat/changemanagementeditdata.vue";
@@ -44,7 +43,6 @@ import ChangemanagementEditDatarejectfinance from "../pages/sat/changemanagement
 import deviceDeployementEditData from "../pages/sat/devicedeployement.vue";
 import TestingRecovery from "../pages/sat/TestingRecovery.vue";
 import PhonepeSparePartsSoPodList from "../pages/sat/PhonepeSparePartsSoPodList.vue";
-import Other from "../pages/sat/Other.vue";
 import ShortLead from "../pages/sat/shortLead.vue";
 import qrShortLead from '../pages/sat/QrShortLead.vue'
 import AppShortLead from "../pages/sat/appshortlead.vue"
@@ -359,11 +357,6 @@ const routes = [
       path: "additionalTid",
       component: additionalTid,
       //props: true
-    },
-    {
-      name: "BijlipaySat",
-      path: "master/BijlipaySat",
-      component: BijlipaySat,
     },
     {
       name: "AggregatorSat",
@@ -1204,11 +1197,6 @@ const routes = [
       name: "Others",
       path: "master/Others",
       component: Others,
-    },
-    {
-      name: "Other",
-      path: "master/Other",
-      component: Other,
     },
     {
       name: "serialnumberupdate ",
