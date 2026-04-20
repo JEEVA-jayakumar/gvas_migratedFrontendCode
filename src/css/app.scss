@@ -38,6 +38,14 @@ body {
   background: linear-gradient(135deg, #61116a 0%, #8e24aa 100%) !important;
 }
 
+.bg-custom-light-grey {
+  background: #f8f7f7 !important;
+}
+
+.bottom-border {
+  border-bottom: 1px solid #cccccc !important;
+}
+
 // Overriding legacy classes for better look
 .bg-purple-9 {
   background: linear-gradient(135deg, #61116a 0%, #8e24aa 100%) !important;

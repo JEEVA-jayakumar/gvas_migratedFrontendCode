@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh Lpr lFf">
-    <q-header class="bg-white" flat>
+    <q-header class="bg-custom-light-grey" flat>
       <customHeader
         :leftDrawerOpen="leftDrawerOpen"
         @fnToggleSideMenu="fnMainToggleSideMenu"
