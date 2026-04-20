@@ -99,7 +99,7 @@ export default {
         sat: [
           {
             id: 1,
-            to: "/sat/master/BijlipaySat",
+            to: "/sat/dashboard",
             name: "Bijlipay",
             subItems: [
               {
@@ -240,7 +240,7 @@ export default {
 
           {
             id: 28,
-            to: "/sat/master/Other",
+            to: "/sat/dashboardPhonepe",
             name: "Other",
             subItems: [
               {
