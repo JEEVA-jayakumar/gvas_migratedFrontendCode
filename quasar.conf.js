@@ -4,7 +4,7 @@ module.exports = configure(function (ctx) {
   return {
     boot: ['i18n', 'axios', 'GlobalVariables', 'vuelidate', 'moment', 'image-viewer', 'chartjs', 'vue-resource', 'barcode-scanner', 'json-excel', 'stubs'],
     css: ['app.scss'],
-    extras: ['roboto-font', 'material-icons', 'fontawesome-v5'],
+    extras: ['roboto-font', 'material-icons', 'material-icons-outlined', 'fontawesome-v5'],
     build: {
       vueRouterMode: 'hash',
       publicPath: '',
