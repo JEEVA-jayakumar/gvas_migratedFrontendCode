@@ -120,7 +120,6 @@
     </div>
 
     <showForgetPasswordComp
-      v-if="showForgetPassword"
       :propShowForgetPassword="showForgetPassword"
       @emitfnShowForgetPasswordModal="fnShowForgetPasswordModal"
     ></showForgetPasswordComp>
@@ -434,7 +433,7 @@ export default {
 }
 
 .premium-input {
-  ::v-deep(.q-field__control) {
+  :deep(.q-field__control) {
     border-radius: 12px !important;
     transition: all 0.3s ease;
     border: 1.5px solid #f1f5f9;
