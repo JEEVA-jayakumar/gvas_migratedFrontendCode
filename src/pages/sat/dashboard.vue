@@ -298,9 +298,25 @@ export default {
         this.$q.loading.hide();
       }).catch(() => this.$q.loading.hide());
     },
-    fetchServiceRequestCounts() {
-      this.FETCH_SERVICE_REQUEST_COUNT_DETAILS().then(() => { this.serviceRequestCount = this.getserviceRequestCountDatas; });
-      this.FETCH_PHONEPE_SERVICE_REQUEST_COUNT_DETAILS().then(() => { this.serviceRequestCount = this.getserviceRequestPhonepeCountDatas; });
+    async fetchServiceRequestCounts() {
+      try {
+        const [internalRes, externalRes] = await Promise.all([
+          this.FETCH_SERVICE_REQUEST_COUNT_DETAILS(),
+          this.FETCH_PHONEPE_SERVICE_REQUEST_COUNT_DETAILS()
+        ]);
+        const internal = this.getserviceRequestCountDatas;
+        const external = this.getserviceRequestPhonepeCountDatas;
+
+        this.serviceRequestCount = {
+          internal: internal,
+          external: external,
+          intTotal: internal.total || 0,
+          extTotal: external.total || 0,
+          total: (internal.total || 0) + (external.total || 0)
+        };
+      } catch (error) {
+        console.error("Error fetching service request counts:", error);
+      }
     },
     changeMerchantTrackerData(value) {
       this.renderMerchantGraph = false;
@@ -312,6 +328,9 @@ export default {
       if (props && props.length > 0) {
         this.rowDetails = props;
         this.dashboardAgingTrackerLeads = true;
+      } else if (props === undefined || props === null) {
+        // Handle close event from leadList component
+        this.dashboardAgingTrackerLeads = false;
       } else {
         this.$q.notify({ color: "amber-9", position: "bottom", message: "No lead available", icon: "info" });
       }

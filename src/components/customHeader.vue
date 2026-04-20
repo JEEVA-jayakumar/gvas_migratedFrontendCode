@@ -1,5 +1,5 @@
 <template>
-  <q-toolbar class="bg-custom-light-grey bottom-border" color="grey-9" flat inverted>
+  <q-toolbar class="bg-white bottom-border" color="grey-9" flat inverted>
     <q-btn
       flat
       dense
