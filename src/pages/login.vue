@@ -10,11 +10,6 @@
           </div>
           <div class="branding-text text-white">
             <h2 class="text-h3 text-weight-bolder q-mb-md">Bijlipay</h2>
-            <div class="divider q-mx-auto q-mb-lg"></div>
-            <p class="text-h5 text-weight-light opacity-80 line-height-1-5">
-              India's Most Trusted<br />
-              <span class="text-weight-bold">Payment Solution Partner</span>
-            </p>
           </div>
         </div>
         <!-- Decorative Elements -->
@@ -423,17 +418,6 @@ export default {
       transform: scale(1.05);
     }
   }
-
-  .divider {
-    width: 60px;
-    height: 4px;
-    background: white;
-    border-radius: 2px;
-  }
-
-  .line-height-1-5 {
-    line-height: 1.5;
-  }
 }
 
 .login-panel {
@@ -519,10 +503,6 @@ export default {
   height: 300px;
   bottom: -50px;
   left: -50px;
-}
-
-.opacity-80 {
-  opacity: 0.8;
 }
 
 .font-medium {
