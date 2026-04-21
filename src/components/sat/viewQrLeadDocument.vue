@@ -673,11 +673,11 @@
                         "
                       />
                     </template>
+                  <template v-for="(subDocument,
+                    subIndex) in propLeadDocumentInformation"
+                    :key="subIndex">
                     <div
                       class="row items-center full-width"
-                      v-for="(subDocument,
-                      subIndex) in propLeadDocumentInformation"
-                      :key="subIndex"
                     >
                       <div class="col-md-12 q-body-1">
                         <q-expansion-item
@@ -814,6 +814,7 @@
                         </q-expansion-item>
                       </div>
                     </div>
+                  </template>
                   </q-expansion-item>
                 </div>
               </div>
@@ -844,16 +845,16 @@
                         'Individuals'
                   "
                 >
+                  <template v-for="(singleDocument,
+                    singleDocumentIndex) in documents.forSingleDocument"
+                    :key="singleDocumentIndex">
                   <q-list
                     class="no-padding"
                     dense
-                    v-for="(singleDocument,
-                    singleDocumentIndex) in documents.forSingleDocument"
                     v-if="
                       getQrShortLeadInfoDocumentTypes &&
                         singleDocument.isQr != 0
                     "
-                    :key="singleDocumentIndex"
                   >
                     <div
                       v-for="(document,
@@ -1005,13 +1006,14 @@
                       </div>
                     </div>
                   </q-list>
+                  </template>
 
                   <div>
+                    <template v-for="multipleDocument in documents.forMutipleDocument"
+                      :key="multipleDocument.id">
                     <q-list
                       class="no-padding"
                       dense
-                      v-for="multipleDocument in documents.forMutipleDocument"
-                      :key="multipleDocument.id"
                       v-if="
                         getQrShortLeadInfoDocumentTypes &&
                           multipleDocument.isQr != 0
@@ -1192,20 +1194,21 @@
                         </div>
                       </div>
                     </q-list>
+                    </template>
                   </div>
                 </div>
 
                 <div class="group" v-else>
+                  <template v-for="(singleDocument,
+                    singleDocumentIndex) in documents.forSingleDocument"
+                    :key="singleDocumentIndex">
                   <q-list
                     class="no-padding"
                     dense
-                    v-for="(singleDocument,
-                    singleDocumentIndex) in documents.forSingleDocument"
                     v-if="
                       getQrShortLeadInfoDocumentTypes &&
                         singleDocument.isQr != 1
                     "
-                    :key="singleDocumentIndex"
                   >
                     <div
                       v-for="(document,
@@ -1361,12 +1364,13 @@
                       </div>
                     </div>
                   </q-list>
+                  </template>
                   <div>
+                    <template v-for="multipleDocument in documents.forMutipleDocument"
+                      :key="multipleDocument.id">
                     <q-list
                       class="no-padding"
                       dense
-                      v-for="multipleDocument in documents.forMutipleDocument"
-                      :key="multipleDocument.id"
                       v-if="
                         getQrShortLeadInfoDocumentTypes &&
                           multipleDocument.isQr != 1
@@ -1548,6 +1552,7 @@
                         </div>
                       </div>
                     </q-list>
+                    </template>
                   </div>
                 </div>
               </div>

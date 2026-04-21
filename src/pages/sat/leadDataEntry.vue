@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <div class="q-ma-md">
+    <div class="q-ma-md" v-if="formData && formData.shortLead">
       <!-- Merchant details -->
       <div class="flex items-stretch q-ma-xs">
         <div class="col-12 col-lg-3">
@@ -49,7 +49,7 @@
                 <q-card class="border-1 q-custom-class" flat>
                   <q-card-section class="q-pa-sm items-center bottom-border-dark bg-grey-4">
                     <div class="row items-center">
-                      <div class="col q-caption text-weight-medium">
+                      <div class="col q-caption text-weight-medium" v-if="formData.shortLead.device">
                         Device -
                         {{formData.shortLead.deviceCount}}
                         {{formData.shortLead.device.deviceName}}
@@ -59,7 +59,7 @@
                   <q-separator />
                   <q-card-section class="q-pa-sm text-grey-9">
                     <q-list separator no-border class="no-padding">
-                      <q-item>
+                      <q-item v-if="formData.shortLead.plan">
                         <q-item-section class="q-caption">
                           <q-item-label>Plan</q-item-label>
                         </q-item-section>
@@ -83,7 +83,7 @@
                           <q-item-label>Rs. {{formData.shortLead.recurringFees}}</q-item-label>
                         </q-item-section>
                       </q-item>
-                      <q-item>
+                      <q-item v-if="formData.shortLead.merchantCategory">
                         <q-item-section class="q-caption">
                           <q-item-label>Merchant Category</q-item-label>
                         </q-item-section>
@@ -404,7 +404,7 @@ export default {
       thumbnailsHorizontal: false,
 
       formData: {
-        shortLead: ""
+        shortLead: null
       }
     };
   },

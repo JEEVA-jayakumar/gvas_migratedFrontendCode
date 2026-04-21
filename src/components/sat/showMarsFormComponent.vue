@@ -11638,6 +11638,10 @@ import { useVuelidate } from '@vuelidate/core';
     },
 
     beforeMount() {
+      if (!this.propLeadDeatils || !this.propLeadDeatils.leadSource) {
+        console.warn('showMarsForm: propLeadDeatils or leadSource is missing');
+        return;
+      }
       // >>View binding
       this.viewBinding = {
         sharingModelCode: [

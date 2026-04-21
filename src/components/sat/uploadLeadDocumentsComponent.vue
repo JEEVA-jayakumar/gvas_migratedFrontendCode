@@ -112,12 +112,12 @@
 
     <!-- START >> Handover to SAT, document upload -->
     <div v-else class="group">
+      <template v-for="(singleDocument,singleDocumentIndex) in getShortLeadInfoDocumentTypes.uploadedDocuments.forSingleDocument"
+        :key="singleDocumentIndex">
       <q-list
         class="no-padding"
         dense
-        v-for="(singleDocument,singleDocumentIndex) in getShortLeadInfoDocumentTypes.uploadedDocuments.forSingleDocument"
         v-if="getShortLeadInfoDocumentTypes && singleDocument.isQr != 1"
-        :key="singleDocumentIndex"
       >
         <div
           v-for="(document,documentIndex) in singleDocument.documents"
@@ -226,13 +226,13 @@
           </div>
         </div>
       </q-list>
+      </template>
       <div>
+      <template v-for="multipleDocument in getShortLeadInfoDocumentTypes.uploadedDocuments.forMutipleDocument"
+        :key="multipleDocument.id">
       <q-list
         class="no-padding"
         dense
-      
-        v-for="multipleDocument in getShortLeadInfoDocumentTypes.uploadedDocuments.forMutipleDocument"
-        :key="multipleDocument.id"
         v-if="getShortLeadInfoDocumentTypes &&  multipleDocument.documentType.isQr != 1"
       >   
         <q-item-label header v-if="multipleDocument.isQr != 1" class="q-mb-sm bg-grey-4">{{multipleDocument.documentType}}
@@ -351,6 +351,7 @@
           
         </div>
       </q-list>
+      </template>
     </div>
     </div>
     <!-- END >> Handover to SAT, document upload -->
