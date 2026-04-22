@@ -836,7 +836,7 @@
                   " color="grey-9" v-model="merchant.companyInformation.registeredCityName"
                   @update:model-value="(val) => { fninputTyping(val, 1); registeredCitySelected(val); }" label="Registered city (type min 3 characters)*"
                   placeholder="Start typing ..*"
-                  :options="cityOptionsFiltered" @filter="residentCitySearch" />
+                  :options="cityOptionsFiltered" @filter="residentCitySearch"></q-select>
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation
                       .registeredCityRefCode.alert
@@ -885,7 +885,7 @@
                   " color="grey-9" v-model="merchant.companyInformation.registeredStateName"
                   @update:model-value="(val) => { fninputTyping(val, 2); registeredStateSelected(val); }" label="Registered state (type min 3 characters)*"
                   placeholder="Start typing ..*"
-                  :options="stateOptionsFiltered" @filter="residentStateSearch" />
+                  :options="stateOptionsFiltered" @filter="residentStateSearch"></q-select>
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation
                       .registeredStateRefCode.alert
@@ -1238,7 +1238,7 @@
                   :error="v$.merchant.companyInformation.contactName.$error"
                   onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
                   color="grey-9" v-model="merchant.companyInformation.contactName" label="Contact Name*"
-                  placeholder="Contact Name*" />
+                  placeholder="Contact Name*"></q-input>
                 <div class="text-negative" v-if="
                     error.field.merchant.companyInformation.contactName.alert
                   ">
@@ -1578,7 +1578,7 @@
                 <q-select use-input fill-input hide-selected :error="autoCompleteError(v.cityRefLabel, v.cityRefCode)" color="grey-9"
                   v-model="v.$model.cityRefLabel" label="City (type min 3 characters)*"
                   placeholder="Start typing ..*"
-                  :options="partnerCityOptions" @filter="partnerCitySearchFilter" @update:model-value="(obj) => partnerCitySelected(obj, index)" />
+                  :options="partnerCityOptions" @filter="partnerCitySearchFilter" @update:model-value="(obj) => partnerCitySelected(obj, index)"></q-select>
                 <div class="text-negative" v-if="
                     error.field.merchant.partnerInformation[index].cityRefCode
                       .alert
@@ -1596,7 +1596,7 @@
                 <q-select use-input fill-input hide-selected :error="autoCompleteError(v.stateRefLabel, v.stateRefCode)" @blur="v.stateRefLabel.$touch()"
                   color="grey-9" v-model="v.$model.stateRefLabel" label="State (type min 3 characters)*"
                   placeholder="Start typing ..*"
-                  :options="partnerStateOptions" @filter="partnerStateSearchFilter" @update:model-value="(obj) => partnerStateSelected(obj, index)" />
+                  :options="partnerStateOptions" @filter="partnerStateSearchFilter" @update:model-value="(obj) => partnerStateSelected(obj, index)"></q-select>
                 <div class="text-negative" v-if="
                     error.field.merchant.partnerInformation[index].stateRefCode
                       .alert
@@ -5941,7 +5941,7 @@
           " />
       </div>
     </div>
-  </div>
+</div>
 </template>
 
 <script>
@@ -12881,22 +12881,22 @@ import { useVuelidate } from '@vuelidate/core';
         const has = val => updated.includes(val);
         const had = val => this.tmpVasMapping.includes(val); // previously selected
 
-        // === Case 1: Unselecting EMI → remove Bank EMI + Brand EMI
+        // === Case 1: Unselecting EMI  remove Bank EMI + Brand EMI
         if (had("EMI") && !has("EMI")) {
           updated = updated.filter(v => v !== "Bank EMI" && v !== "Brand EMI");
         }
 
-        // === Case 2: Selecting EMI → ensure Bank EMI is selected
+        // === Case 2: Selecting EMI  ensure Bank EMI is selected
         if (has("EMI") && !has("Bank EMI")) {
           updated.push("Bank EMI");
         }
 
-        // === Case 3: Selecting Bank EMI → ensure EMI is selected
+        // === Case 3: Selecting Bank EMI  ensure EMI is selected
         if (has("Bank EMI") && !has("EMI")) {
           updated.push("EMI");
         }
 
-        // === Case 4: Selecting Brand EMI → ensure EMI is selected (not Bank EMI)
+        // === Case 4: Selecting Brand EMI  ensure EMI is selected (not Bank EMI)
         if (has("Brand EMI") && !has("EMI")) {
           updated.push("EMI");
         }
@@ -12944,8 +12944,8 @@ import { useVuelidate } from '@vuelidate/core';
               //   const upiExists = this.vasBasedOnInstance.some(opt => opt.value === 'UPI QR');
               //   if (upiExists) {
               //     this.tmpVasMapping = ['UPI QR'];
-              //     this.vasKey++; // ✅ Force re-render
-              //     console.log('✅ Auto-selected VAS:', this.tmpVasMapping);
+              //     this.vasKey++; //  Force re-render
+              //     console.log(' Auto-selected VAS:', this.tmpVasMapping);
               //   }
               // });
               if (this.propLeadDeatils.leadSource.sourceName === "LS_TOHANDS") {
@@ -12962,8 +12962,8 @@ import { useVuelidate } from '@vuelidate/core';
                   );
                   if (upiExists) {
                     this.tmpVasMapping = ["UPI QR"];
-                    this.vasKey++; // ✅ Force re-render
-                    console.log("✅ Auto-selected VAS:", this.tmpVasMapping);
+                    this.vasKey++; //  Force re-render
+                    console.log(" Auto-selected VAS:", this.tmpVasMapping);
                   }
                 });
               } else {
@@ -12977,7 +12977,7 @@ import { useVuelidate } from '@vuelidate/core';
 
               //   this.vasBasedOnInstance = vasArr;
 
-              //   // ✅ Important: Apply selection after options render
+              //   //  Important: Apply selection after options render
               //   this.$nextTick(() => {
               //     const upiExists = this.vasBasedOnInstance.some(opt => opt.value === 'UPI QR');
               //     if (upiExists) {
@@ -12999,7 +12999,7 @@ import { useVuelidate } from '@vuelidate/core';
 
               //   this.vasBasedOnInstance = vasArr;
 
-              //   // 🛠️ Use $nextTick to ensure UI is updated before assigning selection
+              //   //  Use $nextTick to ensure UI is updated before assigning selection
               //   this.$nextTick(() => {
               //     // Double check if 'UPI QR' is actually present in the options
               //     const isUpiPresent = vasArr.some(opt => opt.value === 'UPI QR');
