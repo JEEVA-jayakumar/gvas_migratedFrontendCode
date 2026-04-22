@@ -37,14 +37,14 @@
         <div class="col-md-6">
           <div class="row">
             <!-- Device -->
-            <div class="col-12" v-if="formData && formData.shortLead && formData.shortLead.device">
+            <div class="col-12" v-if="formData && formData.shortLead">
               <q-card class="q-ma-xs border-1 q-custom-class" flat>
                 <q-card-section class="q-pa-sm bottom-border title-bg">
                   <div class="row items-center">
                     <div class="col q-body-1 text-weight-medium">
                       Device -
                       {{formData.shortLead.deviceCount}}
-                      {{formData.shortLead.device.deviceName}}
+                      {{formData.shortLead.device ? formData.shortLead.device.deviceName : 'NA'}}
                     </div>
                   </div>
                 </q-card-section>
@@ -584,7 +584,7 @@ export default {
 
       leadRejectReason: "",
       formData: {
-        shortLead: {},
+        shortLead: null,
         documentType: []
       }
       //Template porperties

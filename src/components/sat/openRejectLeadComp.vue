@@ -147,7 +147,9 @@ export default {
   },
  beforeMount(){
     //  this.propsRowDetails = JSON.stringify(this.getShortLeadInfo);
+    if (this.getShortLeadInfo && this.getShortLeadInfo.device) {
        this.formData.device =this.getShortLeadInfo.device.deviceName;
+    }
  },
   computed: {
     ...mapGetters("SA_Devices", ["getAllDevicesInfo"]),

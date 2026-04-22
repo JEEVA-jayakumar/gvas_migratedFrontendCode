@@ -850,7 +850,7 @@
                     v-for="(singleDocument,
                     singleDocumentIndex) in documents.forSingleDocument"
                     v-if="
-                      getQrShortLeadInfoDocumentTypes &&
+                      getQrShortLeadInfoDocumentTypes && singleDocument &&
                         singleDocument.isQr != 0
                     "
                     :key="singleDocumentIndex"
@@ -1013,15 +1013,15 @@
                       v-for="multipleDocument in documents.forMutipleDocument"
                       :key="multipleDocument.id"
                       v-if="
-                        getQrShortLeadInfoDocumentTypes &&
-                          multipleDocument.isQr != 0
+                        getQrShortLeadInfoDocumentTypes && multipleDocument &&
+                          (multipleDocument.documentType && multipleDocument.documentType.isQr != 0)
                       "
                     >
                       <q-item-label header
                         v-if="multipleDocument.isQr != 0"
                         class="q-mb-sm bg-grey-4"
                         >{{ multipleDocument.documentType }}
-                      </q-item-label header>
+                      </q-item-label>
                       <div>
                         <q-item separator dense class="q-body-1 q-pa-sm">
                           <q-item-section>
@@ -1044,7 +1044,7 @@
                                 v-for="type in multipleDocument.documents"
                                 :key="type.id"
                                 :value="type"
-                                v-if="type.isQr != 0"
+                                v-if="type && type.isQr != 0"
                                 >{{ type.subDocumentType }}
                               </option>
                             </select>
@@ -1202,7 +1202,7 @@
                     v-for="(singleDocument,
                     singleDocumentIndex) in documents.forSingleDocument"
                     v-if="
-                      getQrShortLeadInfoDocumentTypes &&
+                      getQrShortLeadInfoDocumentTypes && singleDocument &&
                         singleDocument.isQr != 1
                     "
                     :key="singleDocumentIndex"
@@ -1368,8 +1368,8 @@
                       v-for="multipleDocument in documents.forMutipleDocument"
                       :key="multipleDocument.id"
                       v-if="
-                        getQrShortLeadInfoDocumentTypes &&
-                          multipleDocument.isQr != 1
+                        getQrShortLeadInfoDocumentTypes && multipleDocument &&
+                          (multipleDocument.documentType && multipleDocument.documentType.isQr != 1)
                       "
                     >
                       <q-item-label header
@@ -1377,7 +1377,7 @@
                         v-if="multipleDocument.isQr != 1"
                       >
                         {{ multipleDocument.documentType }}
-                      </q-item-label header>
+                      </q-item-label>
                       <div>
                         <q-item separator dense class="q-body-1 q-pa-sm">
                           <q-item-section>
@@ -1399,7 +1399,7 @@
                                 v-for="type in multipleDocument.documents"
                                 :key="type.id"
                                 :value="type"
-                                v-if="type.isQr != 1"
+                                v-if="type && type.isQr != 1"
                               >
                                 {{ type.subDocumentType }}
                               </option>

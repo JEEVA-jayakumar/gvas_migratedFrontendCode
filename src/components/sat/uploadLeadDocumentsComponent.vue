@@ -116,7 +116,7 @@
         class="no-padding"
         dense
         v-for="(singleDocument,singleDocumentIndex) in getShortLeadInfoDocumentTypes.uploadedDocuments.forSingleDocument"
-        v-if="getShortLeadInfoDocumentTypes && singleDocument.isQr != 1"
+        v-if="getShortLeadInfoDocumentTypes && singleDocument && singleDocument.isQr != 1"
         :key="singleDocumentIndex"
       >
         <div
@@ -233,11 +233,11 @@
       
         v-for="multipleDocument in getShortLeadInfoDocumentTypes.uploadedDocuments.forMutipleDocument"
         :key="multipleDocument.id"
-        v-if="getShortLeadInfoDocumentTypes &&  multipleDocument.documentType.isQr != 1"
+        v-if="getShortLeadInfoDocumentTypes && multipleDocument && (multipleDocument.documentType && multipleDocument.documentType.isQr != 1)"
       >   
         <q-item-label header v-if="multipleDocument.isQr != 1" class="q-mb-sm bg-grey-4">{{multipleDocument.documentType}}
          
-        </q-item-label header>
+        </q-item-label>
          
         <div>
           <q-item separator dense class="q-body-1 q-pa-sm">
@@ -254,7 +254,7 @@
                   v-for="type in multipleDocument.documents"
                   :key="type.id"
                   :value="type"
-                  v-if= "type.isQr!= 1"
+                  v-if= "type && type.isQr!= 1"
                 >{{type.subDocumentType}}</option>
 
               </select>

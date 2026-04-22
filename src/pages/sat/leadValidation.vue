@@ -303,7 +303,15 @@
       },
       openRejectLead(exceptionDetails) {
         this.showRejectLeadModel = !this.showRejectLeadModel;
-        this.propsRejectLeadAppend = exceptionDetails;
+        if (exceptionDetails) {
+          this.propsRejectLeadAppend = exceptionDetails;
+        } else {
+          // If called without details, it likely means the modal was closed (e.g. after success)
+          this.ajaxLoadAllLeadInfo({
+            pagination: this.paginationControl,
+            filter: this.filter
+          });
+        }
       },
       PullToRefresh(done) {
         this.ajaxLoadAllLeadInfo({

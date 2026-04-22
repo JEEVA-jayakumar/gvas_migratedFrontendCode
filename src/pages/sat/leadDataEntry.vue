@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <div class="q-ma-md">
+    <div class="q-ma-md" v-if="formData && formData.shortLead">
       <!-- Merchant details -->
       <div class="flex items-stretch q-ma-xs">
         <div class="col-12 col-lg-3">
@@ -52,7 +52,7 @@
                       <div class="col q-caption text-weight-medium">
                         Device -
                         {{formData.shortLead.deviceCount}}
-                        {{formData.shortLead.device.deviceName}}
+                        {{formData.shortLead.device ? formData.shortLead.device.deviceName : 'NA'}}
                       </div>
                     </div>
                   </q-card-section>
@@ -64,7 +64,7 @@
                           <q-item-label>Plan</q-item-label>
                         </q-item-section>
                         <q-item-section class="q-caption" align="center">
-                          <q-item-label>{{formData.shortLead.plan.planName}}</q-item-label>
+                          <q-item-label>{{formData.shortLead.plan ? formData.shortLead.plan.planName : 'NA'}}</q-item-label>
                         </q-item-section>
                       </q-item>
                       <q-item>
@@ -88,7 +88,7 @@
                           <q-item-label>Merchant Category</q-item-label>
                         </q-item-section>
                         <q-item-section class="q-caption" align="center">
-                          <q-item-label>{{formData.shortLead.merchantCategory.merchantCategoryName}}</q-item-label>
+                          <q-item-label>{{formData.shortLead.merchantCategory ? formData.shortLead.merchantCategory.merchantCategoryName : 'NA'}}</q-item-label>
                         </q-item-section>
                       </q-item>
                     </q-list>
@@ -404,7 +404,7 @@ export default {
       thumbnailsHorizontal: false,
 
       formData: {
-        shortLead: ""
+        shortLead: null
       }
     };
   },
