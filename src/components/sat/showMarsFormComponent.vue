@@ -9,7 +9,7 @@
       </div>
       <!-- Document related form -->
       <div id="rightSidePane" class="col-md-7 q-pa-xs block relative merchant">
-        <q-stepper color="purple-9" ref="stepper" contractable text alternative-labels>
+        <q-stepper color="purple-9" ref="stepper" v-model="step" contractable text alternative-labels>
           <q-step error-icon="warning" :error="error.tab.salesInformation" name="first" title="Sales" subtitle="Info">
             <!-- {{this.merchant.paymentDetails.amountCollected}} -->
             <div class="row q-col-gutter-sm">
@@ -6116,6 +6116,7 @@ import { useVuelidate } from '@vuelidate/core';
     props: ["propLeadDeatils"],
     data() {
       return {
+        step: "first",
         propTogglemultiTidComponentDetails: false,
         subTidListConfs: {},
         today,
@@ -11784,46 +11785,46 @@ import { useVuelidate } from '@vuelidate/core';
       // this.merchant.salesInformation.applicationNumber = new Date().getTime();
       console.log("PROPS DETAILS------------>", this.propLeadDeatils);
 
-      this.subventionBankFeeData = this.propLeadDeatils.bankFee;
+      this.subventionBankFeeData = this.propLeadDeatils?.bankFee;
       this.merchant.companyInformation.constitution =
-        this.propLeadDeatils.merchantType.marsMappingId;
+        this.propLeadDeatils?.merchantType?.marsMappingId;
 
-      this.merchant.companyInformation.dbaName = this.propLeadDeatils.leadName;
+      this.merchant.companyInformation.dbaName = this.propLeadDeatils?.leadName;
       //  console.log("PROPS DETAILS------------>", this.propLeadDeatils);
       console.log(
         "this.getShortLeadInfo.vasInstanceMapping --->",
-        this.getShortLeadInfo.vasInstanceMapping
+        this.getShortLeadInfo?.vasInstanceMapping
       );
-      this.soSelectedVas = this.getShortLeadInfo.vasInstanceMapping
+      this.soSelectedVas = (this.getShortLeadInfo?.vasInstanceMapping || "")
         .replaceAll('"', "")
         .replace("[", "")
         .replace("]", "");
       this.revParamAndLeadInfo.bijlipaySwitch =
-        this.propLeadDeatils.bijlipaySwitch;
+        this.propLeadDeatils?.bijlipaySwitch;
       this.merchant.companyInformation.contactMobile =
-        this.propLeadDeatils.contactNumber;
+        this.propLeadDeatils?.contactNumber;
       this.merchant.companyInformation.contactName =
-        this.propLeadDeatils.contactName;
+        this.propLeadDeatils?.contactName;
       this.merchant.companyInformation.registeredAddress =
-        this.propLeadDeatils.leadAddress;
+        this.propLeadDeatils?.leadAddress;
       this.merchant.companyInformation.registeredPin =
-        this.propLeadDeatils.pincode;
+        this.propLeadDeatils?.pincode;
       this.merchant.companyInformation.contactName =
-        this.propLeadDeatils.contactName;
+        this.propLeadDeatils?.contactName;
       this.merchant.companyInformation.contactMobile =
-        this.propLeadDeatils.contactNumber;
+        this.propLeadDeatils?.contactNumber;
       this.merchant.paymentDetails.numberOfTerminals =
-        this.propLeadDeatils.deviceCount;
-      this.merchant.salesInformation.categoryType = this.soSelectedVas.includes(
+        this.propLeadDeatils?.deviceCount;
+      this.merchant.salesInformation.categoryType = (this.soSelectedVas || "").includes(
         "Small merchant"
       )
         ? "S"
         : "O";
       //recurring fees is plan based amount selected by wip lead
       this.merchant.paymentDetails.recurringFees =
-        this.propLeadDeatils.recurringFees;
-      this.propLeadDeatils.recurringFees;
-      this.bankFee = this.propLeadDeatils.recurringFees / 1.18;
+        this.propLeadDeatils?.recurringFees;
+      this.propLeadDeatils?.recurringFees;
+      this.bankFee = (this.propLeadDeatils?.recurringFees || 0) / 1.18;
       // this.propLeadDeatils.recurringFees * 0.18;
       const PercentageReduceData = this.bankFee;
       this.originalBankFeeData = PercentageReduceData;
@@ -11834,11 +11835,11 @@ import { useVuelidate } from '@vuelidate/core';
       // // this.bankFee = this.bankFee - this.subventionBankFee()
       // // console.log("Result",this.bankFee)
       // }
-      if (this.propLeadDeatils.device.deviceName == "Q161_PRO_DQR" || this.propLeadDeatils.device.deviceName == "Q161_PRO_SQR") {
+      if (this.propLeadDeatils?.device?.deviceName == "Q161_PRO_DQR" || this.propLeadDeatils?.device?.deviceName == "Q161_PRO_SQR") {
         this.merchant.salesInformation.institutionCode = 104
       }
 
-      if (this.propLeadDeatils.leadSource.sourceName == "LS_TOHANDS") {
+      if (this.propLeadDeatils?.leadSource?.sourceName == "LS_TOHANDS") {
         this.merchant.salesInformation.institutionCode = 104;
 
         this.merchant.bankInformation.bankDetails.accountType = "C";
@@ -11847,29 +11848,29 @@ import { useVuelidate } from '@vuelidate/core';
         this.merchant.bankInformation.bankDetails.accountType = "S";
       }
       // setup fee amount
-      this.devicePrice = this.propLeadDeatils.setupFees;
-      this.leadSourceApp = this.propLeadDeatils.leadSource;
+      this.devicePrice = this.propLeadDeatils?.setupFees;
+      this.leadSourceApp = this.propLeadDeatils?.leadSource;
       // this.multiTidEnabled = this.this.propLeadDeatils.leadSource.multiTidEnabled;
-      this.deviceTypeApp = this.propLeadDeatils.device;
-      this.salesPerson = this.propLeadDeatils.createdBy.name;
-      this.salesCode = this.propLeadDeatils.createdBy.employeeID;
+      this.deviceTypeApp = this.propLeadDeatils?.device;
+      this.salesPerson = this.propLeadDeatils?.createdBy?.name;
+      this.salesCode = this.propLeadDeatils?.createdBy?.employeeID;
       this.merchant.salesInformation.salesPersonName =
-        this.salesPerson + "-" + this.salesCode;
-      this.salesPersonName = this.salesPerson + "-" + this.salesCode;
+        (this.salesPerson || "") + "-" + (this.salesCode || "");
+      this.salesPersonName = (this.salesPerson || "") + "-" + (this.salesCode || "");
       this.merchant.mdrPlan.domesticDebitUpTo2000.percentage =
-        this.getShortLeadInfo.debitLessthanAmount;
+        this.getShortLeadInfo?.debitLessthanAmount;
       this.merchant.mdrPlan.domesticDebitAbove2000.percentage =
-        this.getShortLeadInfo.debitGreaterthanAmount;
+        this.getShortLeadInfo?.debitGreaterthanAmount;
       this.merchant.mdrPlan.upiUpto2000.percentage =
-        this.getShortLeadInfo.upiDebitCardUpTo2000;
+        this.getShortLeadInfo?.upiDebitCardUpTo2000;
       this.merchant.mdrPlan.upiAbove2000.percentage =
-        this.getShortLeadInfo.upiDebitCardAbove2000;
+        this.getShortLeadInfo?.upiDebitCardAbove2000;
       this.merchant.mdrPlan.upiCreditUpto2000.percentage =
-        this.getShortLeadInfo.upiPrepaidCreditCardsUpTo2000;
+        this.getShortLeadInfo?.upiPrepaidCreditCardsUpTo2000;
       this.merchant.mdrPlan.upiCreditAbove2000.percentage =
-        this.getShortLeadInfo.upiPrepaidCreditCardsAbove2000;
+        this.getShortLeadInfo?.upiPrepaidCreditCardsAbove2000;
 
-      this.plan = this.getShortLeadInfo.vasInstanceMapping
+      this.plan = (this.getShortLeadInfo?.vasInstanceMapping || "")
         .replaceAll('"', "")
         .replace("[", "")
         .replace("]", "");
@@ -11878,7 +11879,7 @@ import { useVuelidate } from '@vuelidate/core';
 
       /* Populating values from FOS */
       this.fetchAndCookDocuments();
-      this.plan = this.getShortLeadInfo.vasInstanceMapping
+      this.plan = (this.getShortLeadInfo?.vasInstanceMapping || "")
         .replaceAll('"', "")
         .replace("[", "")
         .replace("]", "");
@@ -11887,33 +11888,33 @@ import { useVuelidate } from '@vuelidate/core';
       //   .replaceAll('"', "")
       //   .replace("[", "")
       //   .replace("]", "");
-      this.incentive1 = this.getShortLeadInfo.mAtmOnboardingPlan;
+      this.incentive1 = this.getShortLeadInfo?.mAtmOnboardingPlan;
       this.merchant.mdrPlan.incentive.percentage =
-        this.incentive1.incentivePercentage;
-      this.merchant.mdrPlan.incentive.minimum = this.incentive1.maxIncPerTxn;
+        this.incentive1?.incentivePercentage;
+      this.merchant.mdrPlan.incentive.minimum = this.incentive1?.maxIncPerTxn;
       // this.merchant.mdrPlan.incentive.minimumTxnValue = this.incentive1.minTxnVal;
-      this.merchant.mdrPlan.incentive.minimumTxnValue = this.incentive1.minTxnVal;
+      this.merchant.mdrPlan.incentive.minimumTxnValue = this.incentive1?.minTxnVal;
 
       this.merchant.mdrPlan.amexDomestic.percentage =
-        this.getShortLeadInfo.amexDomestic;
+        this.getShortLeadInfo?.amexDomestic;
       this.merchant.mdrPlan.amexInternational.percentage =
-        this.getShortLeadInfo.amexInternational;
+        this.getShortLeadInfo?.amexInternational;
 
       this.merchant.bankInformation.collectionDetails.upiLink =
-        this.propLeadDeatils.paymentOption == 4
-          ? this.propLeadDeatils.referenceNumber
+        this.propLeadDeatils?.paymentOption == 4
+          ? this.propLeadDeatils?.referenceNumber
           : this.merchant.bankInformation.collectionDetails.upiLink == "";
 
       this.merchant.mdrPlan.standardOrClassic.percentage =
-        this.getShortLeadInfo.stdCC;
+        this.getShortLeadInfo?.stdCC;
       this.merchant.mdrPlan.premiumOrPlatinum.percentage =
-        this.getShortLeadInfo.premiumCC;
+        this.getShortLeadInfo?.premiumCC;
       this.merchant.mdrPlan.superPremiumOrSignature.percentage =
-        this.getShortLeadInfo.superPremiumlCC;
+        this.getShortLeadInfo?.superPremiumlCC;
       this.merchant.mdrPlan.commercialOrCorporate.percentage =
-        this.getShortLeadInfo.corpCC;
+        this.getShortLeadInfo?.corpCC;
       this.merchant.mdrPlan.internationalCreditCard.percentage =
-        this.getShortLeadInfo.intlCC;
+        this.getShortLeadInfo?.intlCC;
     },
     watch: {
       "merchant.businessInformation.currentPosName": function (newVal) {
@@ -12084,8 +12085,8 @@ import { useVuelidate } from '@vuelidate/core';
               color: "negative",
               position: "bottom",
               message:
-                error.body != null
-                  ? error.body.message
+                error.data != null
+                  ? error.data.message
                   : "Base TID creation failed!",
               icon: "clear",
             });
@@ -12136,8 +12137,8 @@ import { useVuelidate } from '@vuelidate/core';
               color: "negative",
               position: "bottom",
               message:
-                error.body != null
-                  ? error.body.message
+                error.data != null
+                  ? error.data.message
                   : "Base TID creation failed!",
               icon: "clear",
             });
@@ -12203,8 +12204,8 @@ import { useVuelidate } from '@vuelidate/core';
                     color: "negative",
                     position: "bottom",
                     message:
-                      error.body != null
-                        ? error.body.message
+                      error.data != null
+                        ? error.data.message
                         : "Sub TID creation failed!",
                     icon: "clear",
                   });
@@ -12216,8 +12217,8 @@ import { useVuelidate } from '@vuelidate/core';
               color: "negative",
               position: "bottom",
               message:
-                error.body != null
-                  ? error.body.message
+                error.data != null
+                  ? error.data.message
                   : "Sub TID generation failed!",
               icon: "clear",
             });
@@ -12249,8 +12250,8 @@ import { useVuelidate } from '@vuelidate/core';
               color: "negative",
               position: "bottom",
               message:
-                error.body != null
-                  ? error.body.message
+                error.data != null
+                  ? error.data.message
                   : "Lead Information status update failed!",
               icon: "clear",
             });
@@ -13526,15 +13527,15 @@ import { useVuelidate } from '@vuelidate/core';
 
       varaneekInstance() {
         if (
-          this.propLeadDeatils.leadSource.id == 81 &&
-          this.propLeadDeatils.device.id == 6
+          this.propLeadDeatils?.leadSource?.id == 81 &&
+          this.propLeadDeatils?.device?.id == 6
         ) {
           this.merchant.salesInformation.institutionCode = 106;
         }
         if (
-          this.propLeadDeatils.leadSource.id == 81 &&
-          this.propLeadDeatils.device.id == 6 &&
-          this.propLeadDeatils.merchantCategory.merchantCategoryName == "Retail"
+          this.propLeadDeatils?.leadSource?.id == 81 &&
+          this.propLeadDeatils?.device?.id == 6 &&
+          this.propLeadDeatils?.merchantCategory?.merchantCategoryName == "Retail"
         ) {
           this.merchant.salesInformation.institutionCode = 104;
         }
@@ -13542,34 +13543,38 @@ import { useVuelidate } from '@vuelidate/core';
       // Restructure documents as per mars requirement
       fetchAndCookDocuments() {
         let self = this;
-        self.merchant.kyc.documents.push({
-          documentName: "Agreement",
-          documentType: this.propLeadDeatils.merchantType.marsAgreementId,
-          documentImage: [
-            this.GLOBAL_FILE_FETCH_URL +
-            "/" +
-            this.propLeadDeatils.applicationFile,
-          ],
-        });
-
-        Object.keys(this.propLeadDeatils.leadDocuments).forEach(function (
-          key,
-          index
-        ) {
-          _.map(self.propLeadDeatils.leadDocuments[key], function (oo) {
-            if (oo.uploadedDocuments.length > 0) {
-              let assumeArr = [];
-              _.map(oo.uploadedDocuments, function (doc) {
-                assumeArr.push(self.GLOBAL_FILE_FETCH_URL + "/" + doc.fileName);
-              });
-              self.merchant.kyc.documents.push({
-                documentName: oo.subDocumentType,
-                documentType: oo.marsDocumentId,
-                documentImage: assumeArr,
-              });
-            }
+        if (this.propLeadDeatils?.merchantType) {
+          self.merchant.kyc.documents.push({
+            documentName: "Agreement",
+            documentType: this.propLeadDeatils.merchantType.marsAgreementId,
+            documentImage: [
+              this.GLOBAL_FILE_FETCH_URL +
+              "/" +
+              this.propLeadDeatils.applicationFile,
+            ],
           });
-        });
+        }
+
+        if (this.propLeadDeatils?.leadDocuments) {
+          Object.keys(this.propLeadDeatils.leadDocuments).forEach(function (
+            key,
+            index
+          ) {
+            _.map(self.propLeadDeatils.leadDocuments[key], function (oo) {
+              if (oo.uploadedDocuments && oo.uploadedDocuments.length > 0) {
+                let assumeArr = [];
+                _.map(oo.uploadedDocuments, function (doc) {
+                  assumeArr.push(self.GLOBAL_FILE_FETCH_URL + "/" + doc.fileName);
+                });
+                self.merchant.kyc.documents.push({
+                  documentName: oo.subDocumentType,
+                  documentType: oo.marsDocumentId,
+                  documentImage: assumeArr,
+                });
+              }
+            });
+          });
+        }
       },
       lsVasMappingController() {
         if (this.tmpVasMapping.length > 0) {
@@ -13790,12 +13795,12 @@ import { useVuelidate } from '@vuelidate/core';
             contactEmail: finalRequest.merchant.companyInformation.contactName,
             contactMobile: finalRequest.merchant.companyInformation.contactMobile,
             contactName: finalRequest.merchant.companyInformation.contactName,
-            dob: moment(finalRequest.merchant.partnerInformation[0].dob).format(
+            dob: this.$moment(finalRequest.merchant.partnerInformation[0].dob).format(
               "DD/MM/YYYY"
             ),
             contactPhone: finalRequest.merchant.companyInformation.contactMobile,
             dbaName: finalRequest.merchant.companyInformation.dbaName,
-            establishYear: moment(
+            establishYear: this.$moment(
               finalRequest.merchant.companyInformation.establishYear
             ).format("DD/MM/YYYY"),
             legalName: finalRequest.merchant.companyInformation.legalName,
@@ -14152,7 +14157,7 @@ import { useVuelidate } from '@vuelidate/core';
                   .catch(error => {
                     self.$q.loading.hide();
                     if (
-                      error.body.name == "INVALID APPLICATION NUMBER" &&
+                      error.data?.name == "INVALID APPLICATION NUMBER" &&
                       error.status == 404
                     ) {
                       self.$q.loading.show({
@@ -14439,7 +14444,7 @@ import { useVuelidate } from '@vuelidate/core';
         ) {
           return null;
         } else {
-          return moment(selectedDate).format("DD/MM/YYYY");
+          return this.$moment(selectedDate).format("DD/MM/YYYY");
 
           //         if(selectedDate instanceof number){
           //         return moment(selectedDate).format("DD/MM/YYYY");
@@ -14459,7 +14464,7 @@ import { useVuelidate } from '@vuelidate/core';
         ) {
           return null;
         } else {
-          return moment(selectedDate).format("YYYY-MM-DD");
+          return this.$moment(selectedDate).format("YYYY-MM-DD");
         }
       },
       //Common function for data format
@@ -14471,7 +14476,7 @@ import { useVuelidate } from '@vuelidate/core';
         ) {
           return null;
         } else {
-          return moment(selectedDate, "DD/MM/YYYY").format("YYYY-MM-DD");
+          return this.$moment(selectedDate, "DD/MM/YYYY").format("YYYY-MM-DD");
         }
       },
       commonDateFormatDOB(selectedDate) {
@@ -14482,7 +14487,7 @@ import { useVuelidate } from '@vuelidate/core';
         ) {
           return null;
         } else {
-          return moment(selectedDate).format("DD-MM-YYYY");
+          return this.$moment(selectedDate).format("DD-MM-YYYY");
         }
       },
 

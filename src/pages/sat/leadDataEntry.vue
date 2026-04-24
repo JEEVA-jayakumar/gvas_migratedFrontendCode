@@ -3,32 +3,32 @@
     <div class="q-ma-md" v-if="formData && formData.shortLead">
       <!-- Merchant details -->
       <div class="flex items-stretch q-ma-xs">
-        <div class="col-12 col-lg-3">
-          <div class="q-title q-my-md capitalize">{{formData.shortLead.leadName}}</div>
+        <div class="col-12 col-lg-3" v-if="formData.shortLead">
+          <div class="q-title q-my-md capitalize">{{formData.shortLead?.leadName}}</div>
           <div
             class="text-light-blue cursor-pointer"
             @click="toggleLeadInformation(formData.shortLead)"
-          ># {{formData.shortLead.leadNumber}}</div>
+          ># {{formData.shortLead?.leadNumber}}</div>
         </div>
-        <div class="col-12 col-lg-3">
+        <div class="col-12 col-lg-3" v-if="formData.shortLead">
           <div class="q-title q-my-md">Contact</div>
-          <p class="no-margin">{{formData.shortLead.contactNumber}}</p>
-          <p>{{formData.shortLead.alternateContactNumber}}</p>
+          <p class="no-margin">{{formData.shortLead?.contactNumber}}</p>
+          <p>{{formData.shortLead?.alternateContactNumber}}</p>
         </div>
-        <div class="col-12 col-lg-3">
+        <div class="col-12 col-lg-3" v-if="formData.shortLead">
           <div class="q-title q-my-md">Address</div>
           <p
-            v-if="formData.shortLead.leadAddress != null"
+            v-if="formData.shortLead?.leadAddress != null"
             class="capitalize no-margin"
-          >{{formData.shortLead.leadAddress}}</p>
-          <p class="capitalize no-margin">{{formData.shortLead.city}}, {{formData.shortLead.state}}</p>
+          >{{formData.shortLead?.leadAddress}}</p>
+          <p class="capitalize no-margin">{{formData.shortLead?.city}}, {{formData.shortLead?.state}}</p>
         </div>
-        <div class="col-12 col-lg-3">
+        <div class="col-12 col-lg-3" v-if="formData.shortLead">
           <div class="q-title q-my-md">Remarks</div>
           <div
             class="capitalize no-margin text-negative"
-            v-if="formData.shortLead.marsReason != null"
-          >{{formData.shortLead.marsReason}}</div>
+            v-if="formData.shortLead?.marsReason != null"
+          >{{formData.shortLead?.marsReason}}</div>
           <div v-else>No Remarks</div>
         </div>
       </div>
@@ -49,46 +49,46 @@
                 <q-card class="border-1 q-custom-class" flat>
                   <q-card-section class="q-pa-sm items-center bottom-border-dark bg-grey-4">
                     <div class="row items-center">
-                      <div class="col q-caption text-weight-medium" v-if="formData.shortLead.device">
+                      <div class="col q-caption text-weight-medium" v-if="formData.shortLead?.device">
                         Device -
-                        {{formData.shortLead.deviceCount}}
-                        {{formData.shortLead.device.deviceName}}
+                        {{formData.shortLead?.deviceCount}}
+                        {{formData.shortLead?.device?.deviceName}}
                       </div>
                     </div>
                   </q-card-section>
                   <q-separator />
                   <q-card-section class="q-pa-sm text-grey-9">
                     <q-list separator no-border class="no-padding">
-                      <q-item v-if="formData.shortLead.plan">
+                      <q-item v-if="formData.shortLead?.plan">
                         <q-item-section class="q-caption">
                           <q-item-label>Plan</q-item-label>
                         </q-item-section>
                         <q-item-section class="q-caption" align="center">
-                          <q-item-label>{{formData.shortLead.plan.planName}}</q-item-label>
+                          <q-item-label>{{formData.shortLead?.plan?.planName}}</q-item-label>
                         </q-item-section>
                       </q-item>
-                      <q-item>
+                      <q-item v-if="formData.shortLead">
                         <q-item-section class="q-caption">
                           <q-item-label>Setup Fees</q-item-label>
                         </q-item-section>
                         <q-item-section class="q-caption" align="center">
-                          <q-item-label>Rs. {{formData.shortLead.setupFees}}</q-item-label>
+                          <q-item-label>Rs. {{formData.shortLead?.setupFees}}</q-item-label>
                         </q-item-section>
                       </q-item>
-                      <q-item>
+                      <q-item v-if="formData.shortLead">
                         <q-item-section class="q-caption">
                           <q-item-label>Recurring Fees</q-item-label>
                         </q-item-section>
                         <q-item-section class="q-caption" align="center">
-                          <q-item-label>Rs. {{formData.shortLead.recurringFees}}</q-item-label>
+                          <q-item-label>Rs. {{formData.shortLead?.recurringFees}}</q-item-label>
                         </q-item-section>
                       </q-item>
-                      <q-item v-if="formData.shortLead.merchantCategory">
+                      <q-item v-if="formData.shortLead?.merchantCategory">
                         <q-item-section class="q-caption">
                           <q-item-label>Merchant Category</q-item-label>
                         </q-item-section>
                         <q-item-section class="q-caption" align="center">
-                          <q-item-label>{{formData.shortLead.merchantCategory.merchantCategoryName}}</q-item-label>
+                          <q-item-label>{{formData.shortLead?.merchantCategory?.merchantCategoryName}}</q-item-label>
                         </q-item-section>
                       </q-item>
                     </q-list>
@@ -97,9 +97,9 @@
               </div>
 
               <!-- Exception -->
-              <div v-if="formData.shortLead.leadCategory == 2" class="col">
+              <div v-if="formData.shortLead?.leadCategory == 2" class="col">
                 <div class="group">
-                  <q-card v-if="formData.shortLead.kyc" class="border-1" flat>
+                  <q-card v-if="formData.shortLead?.kyc" class="border-1" flat>
                     <q-card-section class="q-pa-sm bottom-border-dark bg-grey-4">
                       <div class="row items-center">
                         <div class="col-auto q-caption text-weight-medium">Exception KYC</div>
@@ -114,16 +114,16 @@
                         <div class="col-md-9 col-sm-12 col-xs-12">
                           <span
                             class="q-caption text-faded"
-                            v-if="formData.shortLead.reason == null"
+                            v-if="formData.shortLead?.reason == null"
                           >Reason not specified</span>
-                          <span class="q-caption text-faded" v-else>{{formData.shortLead.reason}}</span>
+                          <span class="q-caption text-faded" v-else>{{formData.shortLead?.reason}}</span>
                         </div>
                       </div>
                     </q-card-section>
                   </q-card>
                 </div>
                 <div class="group">
-                  <q-card class="border-1" flat v-if=" formData.shortLead.bankSubvention">
+                  <q-card class="border-1" flat v-if=" formData.shortLead?.bankSubvention">
                     <q-card-section class="q-pa-sm bottom-border-dark bg-grey-4">
                       <div class="row items-center">
                         <div class="col-auto q-caption text-weight-medium">Exception Bank Subvention</div>
@@ -138,16 +138,16 @@
                         <div class="col-md-9 col-sm-12 col-xs-12">
                           <div
                             class="q-caption text-faded"
-                            v-if="formData.shortLead.reason == null"
+                            v-if="formData.shortLead?.reason == null"
                           >Reason not specified</div>
-                          <div class="q-caption text-faded" v-else>{{formData.shortLead.reason}}</div>
+                          <div class="q-caption text-faded" v-else>{{formData.shortLead?.reason}}</div>
                         </div>
                       </div>
                     </q-card-section>
                   </q-card>
                 </div>
                 <div class="group">
-                  <q-card v-if="formData.shortLead.pricing" class="q-ma-xs border-1" flat>
+                  <q-card v-if="formData.shortLead?.pricing" class="q-ma-xs border-1" flat>
                     <q-card-section class="q-pa-sm bottom-border-dark bg-grey-4">
                       <div class="row items-center">
                         <div class="col-auto q-caption text-weight-medium">Exception Pricing</div>
@@ -160,7 +160,7 @@
                           <div class="q-caption text-faded">Reason</div>
                         </div>
                         <div class="col-md-9 col-sm-12 col-xs-12">
-                          <div class="q-caption text-faded">{{formData.shortLead.reason}}</div>
+                          <div class="q-caption text-faded">{{formData.shortLead?.reason}}</div>
                         </div>
                       </div>
                     </q-card-section>
@@ -177,26 +177,26 @@
                   <q-separator />
                   <q-card-section class="q-pa-sm text-grey-9">
                     <q-list dense no-border class="no-padding">
-                      <q-item class="q-pa-sm">
+                      <q-item class="q-pa-sm" v-if="formData.shortLead">
                         <q-item-section class="q-caption">Payment mode:</q-item-section>
                         <q-item-section class="q-caption" align="center">
-                          <span v-if="formData.shortLead.paymentOption == 1">IMPS/NEFT</span>
-                          <span v-else-if="formData.shortLead.paymentOption == 2">Cheque</span>
-                          <span v-else-if="formData.shortLead.paymentOption == 3">Swipe</span>
-                           <span v-else-if="formData.shortLead.paymentOption == 4">UPI Link</span>
+                          <span v-if="formData.shortLead?.paymentOption == 1">IMPS/NEFT</span>
+                          <span v-else-if="formData.shortLead?.paymentOption == 2">Cheque</span>
+                          <span v-else-if="formData.shortLead?.paymentOption == 3">Swipe</span>
+                           <span v-else-if="formData.shortLead?.paymentOption == 4">UPI Link</span>
                         </q-item-section>
                       </q-item>
-                      <q-item class="q-pa-sm">
+                      <q-item class="q-pa-sm" v-if="formData.shortLead">
                         <q-item-section class="q-caption">Reference:</q-item-section>
                         <q-item-section
                           class="q-caption"
                           align="center"
-                        >{{formData.shortLead.referenceNumber == ''?'NA':formData.shortLead.referenceNumber}}</q-item-section>
+                        >{{formData.shortLead?.referenceNumber == ''?'NA':formData.shortLead?.referenceNumber}}</q-item-section>
                       </q-item>
                     </q-list>
-                    <q-item v-if="formData.shortLead.paymentOption == 2">
+                    <q-item v-if="formData.shortLead?.paymentOption == 2">
                       <div
-                        v-if="formData.shortLead.paymentDocumentMimeType != null && formData.shortLead.paymentDocumentMimeType.includes('pdf')"
+                        v-if="formData.shortLead?.paymentDocumentMimeType != null && formData.shortLead?.paymentDocumentMimeType.includes('pdf')"
                       >
                         <q-btn
                           size="sm"
@@ -204,11 +204,11 @@
                           color="dark"
                           label="View Document"
                           icon="attach_file"
-                          @click="fnPDFViewModal(formData.shortLead.paymentDocumentFile,'CHEQUE')"
+                          @click="fnPDFViewModal(formData.shortLead?.paymentDocumentFile,'CHEQUE')"
                         ></q-btn>
                       </div>
                       <div
-                        v-else-if="formData.shortLead.paymentDocumentMimeType != null && formData.shortLead.paymentDocumentMimeType.includes('image')"
+                        v-else-if="formData.shortLead?.paymentDocumentMimeType != null && formData.shortLead?.paymentDocumentMimeType.includes('image')"
                       >
                         <q-btn
                           :outline="!showOpenPaymentChequeInfo"
@@ -216,20 +216,20 @@
                           color="dark"
                           label="View Document"
                           icon="attach_file"
-                          @click="fnOpenPaymentChequeInfo(formData.shortLead.paymentDocumentFile)"
+                          @click="fnOpenPaymentChequeInfo(formData.shortLead?.paymentDocumentFile)"
                         />
                       </div>
                       <div v-else class="text-grey-9">
                         <q-icon name="clear" color="negative" />No document attached
                       </div>
                     </q-item>
-                    <q-item v-if="showOpenPaymentChequeInfo">
+                    <q-item v-if="showOpenPaymentChequeInfo && formData.shortLead">
                       <viewer
                         class="cursor-pointer"
-                        :images="[GLOBAL_FILE_FETCH_URL+ '/'+formData.shortLead.paymentDocumentFile]"
+                        :images="[GLOBAL_FILE_FETCH_URL+ '/'+formData.shortLead?.paymentDocumentFile]"
                       >
                         <img
-                          :src="GLOBAL_FILE_FETCH_URL+ '/'+formData.shortLead.paymentDocumentFile"
+                          :src="GLOBAL_FILE_FETCH_URL+ '/'+formData.shortLead?.paymentDocumentFile"
                           style="max-width:100%"
                         />
                       </viewer>
@@ -247,81 +247,81 @@
                   <q-separator />
                   <q-card-section class="q-pa-sm text-grey-9">
                     <q-list separator dense no-border class="no-padding">
-                      <q-item>
+                      <q-item v-if="formData.shortLead">
                         <q-item-section class="q-caption">Debit &lt;= 2000</q-item-section>
                         <q-item-section
                           class="q-caption"
                           align="center"
-                        >{{formData.shortLead.debitLessthanAmount}}%</q-item-section>
+                        >{{formData.shortLead?.debitLessthanAmount}}%</q-item-section>
                       </q-item>
-                      <q-item>
+                      <q-item v-if="formData.shortLead">
                         <q-item-section class="q-caption">
                           <q-item-label class="q-caption">Debit > 2000</q-item-label>
                         </q-item-section>
                         <q-item-section
                           class="q-caption"
                           align="center"
-                        >{{formData.shortLead.debitGreaterthanAmount}}%</q-item-section>
+                        >{{formData.shortLead?.debitGreaterthanAmount}}%</q-item-section>
                       </q-item>
-                      <q-item>
+                      <q-item v-if="formData.shortLead">
                         <q-item-section>
                           <q-item-label class="q-caption">Std CC</q-item-label>
                         </q-item-section>
                         <q-item-section class="q-caption" align="center">
-                          <q-item-label class="q-caption">{{formData.shortLead.stdCC}}%</q-item-label>
+                          <q-item-label class="q-caption">{{formData.shortLead?.stdCC}}%</q-item-label>
                         </q-item-section>
                       </q-item>
-                      <q-item>
+                      <q-item v-if="formData.shortLead">
                         <q-item-section>
                           <q-item-label class="q-caption">Premium CC</q-item-label>
                         </q-item-section>
                         <q-item-section class="q-caption" align="center">
                           <q-item-label class="q-caption">
-                            <div class="q-caption">{{formData.shortLead.premiumCC}}%</div>
+                            <div class="q-caption">{{formData.shortLead?.premiumCC}}%</div>
                           </q-item-label>
                         </q-item-section>
                       </q-item>
-                      <q-item>
+                      <q-item v-if="formData.shortLead">
                         <q-item-section>
                           <q-item-label class="q-caption">Corp Pre CC</q-item-label>
                         </q-item-section>
                         <q-item-section class="q-caption" align="center">
-                          <q-item-label class="q-caption">{{formData.shortLead.corpCC}}%</q-item-label>
+                          <q-item-label class="q-caption">{{formData.shortLead?.corpCC}}%</q-item-label>
                         </q-item-section>
                       </q-item>
-                      <q-item>
+                      <q-item v-if="formData.shortLead">
                         <q-item-section>
                           <q-item-label class="q-caption">Intl Pre CC</q-item-label>
                         </q-item-section>
                         <q-item-section class="q-caption" align="center">
-                          <q-item-label class="q-caption">{{formData.shortLead.intlCC}}%</q-item-label>
+                          <q-item-label class="q-caption">{{formData.shortLead?.intlCC}}%</q-item-label>
                         </q-item-section>
                       </q-item>
-                      <q-item>
+                      <q-item v-if="formData.shortLead">
                         <q-item-section>
                           <q-item-label class="q-caption">Super Pre CC</q-item-label>
                         </q-item-section>
                         <q-item-section class="q-caption" align="center">
-                          <q-item-label class="q-caption">{{formData.shortLead.superPremiumlCC}}%</q-item-label>
+                          <q-item-label class="q-caption">{{formData.shortLead?.superPremiumlCC}}%</q-item-label>
                         </q-item-section>
                       </q-item>
-                      <q-item>
+                      <q-item v-if="formData.shortLead">
                         <q-item-section>
                           <q-item-label class="q-caption">Amex Domestic</q-item-label>
                         </q-item-section>
                         <q-item-section class="q-caption" align="center">
-                          <q-item-label class="q-caption">{{formData.shortLead.amexDomestic}}%</q-item-label>
+                          <q-item-label class="q-caption">{{formData.shortLead?.amexDomestic}}%</q-item-label>
                         </q-item-section>
                       </q-item>
-                      <q-item>
+                      <q-item v-if="formData.shortLead">
                         <q-item-section>
                           <q-item-label class="q-caption">Amex International</q-item-label>
                         </q-item-section>
                         <q-item-section class="q-caption" align="center">
-                          <q-item-label class="q-caption">{{formData.shortLead.amexInternational}}%</q-item-label>
+                          <q-item-label class="q-caption">{{formData.shortLead?.amexInternational}}%</q-item-label>
                         </q-item-section>
                       </q-item>
-                      <q-item class="q-pa-sm" v-if="formData.shortLead.posEnable">
+                      <q-item class="q-pa-sm" v-if="formData.shortLead?.posEnable">
                         <q-checkbox
                           v-model="formData.shortLead.posEnable"
                           disable
