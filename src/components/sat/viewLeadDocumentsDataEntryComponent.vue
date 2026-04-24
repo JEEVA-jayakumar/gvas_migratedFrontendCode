@@ -12,21 +12,21 @@
         icon="attach_file"
         label="Application form"
       >
-        <q-item v-if="showDocumentPreview" separator class="q-body-1">
-          <q-item-section v-if="propGetShortInfo.applicationFileMimeType.includes('pdf')">
-            <div @click="fnDocumentUrl(propGetShortInfo.applicationFile)" class="ellipsis">
+        <q-item v-if="showDocumentPreview && propGetShortInfo" separator class="q-body-1">
+          <q-item-section v-if="propGetShortInfo?.applicationFileMimeType?.includes('pdf')">
+            <div @click="fnDocumentUrl(propGetShortInfo?.applicationFile)" class="ellipsis">
               <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" />
-              &nbsp;{{propGetShortInfo.applicationFile}}
+              &nbsp;{{propGetShortInfo?.applicationFile}}
             </div>
           </q-item-section>
-          <q-item-section v-if="propGetShortInfo.applicationFileMimeType.includes('image')">
+          <q-item-section v-if="propGetShortInfo?.applicationFileMimeType?.includes('image')">
             <!-- START >>If document type is image format -->
             <div
               class="images"
               v-viewer="{minWidth:0,minHeight:0,inline:true,scalable:true,button:true,movable:true}"
             >
               <img
-                :src="GLOBAL_FILE_FETCH_URL+'/'+propGetShortInfo.applicationFile"
+                :src="GLOBAL_FILE_FETCH_URL+'/'+propGetShortInfo?.applicationFile"
                 alt="Picture"
                 style="max-width:100%"
               />
@@ -40,7 +40,7 @@
       <!-- START >> (Not Mandatory) Other attached documents  -->
       <q-item
         class="no-padding"
-        v-if="Object.keys(propLeadDocumentInformation).length > 0 && showDocumentPreview"
+        v-if="propLeadDocumentInformation && Object.keys(propLeadDocumentInformation).length > 0 && showDocumentPreview"
       >
         <q-item-section>
           <div v-for="(documents,index) in propLeadDocumentInformation" :key="index">
@@ -108,13 +108,13 @@
                     >
                       <q-item-section
                         @click="fnDocumentUrl(item.fileName)"
-                        v-if="item.mimeType.includes('application')"
+                        v-if="item?.mimeType?.includes('application')"
                         class="ellipsis"
                       >
                         <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" />
-                        &nbsp;{{propGetShortInfo.applicationFile}}
+                        &nbsp;{{propGetShortInfo?.applicationFile}}
                       </q-item-section>
-                      <q-item-section v-else-if="item.mimeType.includes('image')">
+                      <q-item-section v-else-if="item?.mimeType?.includes('image')">
                         <!-- START >>If document type is image format -->
                         <div
                           class="images"
@@ -232,13 +232,13 @@
                           >
                             <q-item-section
                               @click="fnDocumentUrl(item.fileName)"
-                              v-if="item.mimeType.includes('application')"
+                              v-if="item?.mimeType?.includes('application')"
                               class="ellipsis"
                             >
                               <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" />
                               &nbsp;{{item.fileName}}
                             </q-item-section>
-                            <q-item-section v-else-if="item.mimeType.includes('image')">
+                            <q-item-section v-else-if="item?.mimeType?.includes('image')">
                               <!-- START >>If document type is image format -->
                               <div
                                 class="images"
@@ -387,9 +387,10 @@ export default {
     },
 
     fnToggleVerificationButtonStatus(document) {
+      if (!document) return false;
       let assumeArr = _.filter(document, function(value) {
         // >> 2 is document verification pending
-        return value.kycException === true && value.documentVerifiedStatus == 2;
+        return value?.kycException === true && value?.documentVerifiedStatus == 2;
       });
       if (assumeArr.length > 0) {
         return true;
@@ -398,9 +399,10 @@ export default {
       }
     },
     fnToggleVerificationButtonStatusAfterAction(document) {
+      if (!document) return false;
       let assumeArr = _.filter(document, function(value) {
         // >> 1 is document verification approved
-        return value.kycException === true && value.documentVerifiedStatus == 1;
+        return value?.kycException === true && value?.documentVerifiedStatus == 1;
       });
       if (assumeArr.length > 0) {
         return true;
@@ -409,9 +411,10 @@ export default {
       }
     },
     fnToggleVerificationButtonStatusAfterActionRejection(document) {
+      if (!document) return false;
       let assumeArr = _.filter(document, function(value) {
         // >> 3 is document verification approved
-        return value.kycException === true && value.documentVerifiedStatus == 3;
+        return value?.kycException === true && value?.documentVerifiedStatus == 3;
       });
       if (assumeArr.length > 0) {
         return true;
