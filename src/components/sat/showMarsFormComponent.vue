@@ -1548,8 +1548,7 @@
                     </span>
                   </div>
                   <div class="col-auto" v-if="
-                      Object.keys(v$.viewBinding.partnersArr.$each)
-                        .length > 1
+                      Object.keys(v$.viewBinding.partnersArr.$each).length > 1
                     ">
                     <q-btn round icon="delete" @click="removePartnerFromArr(v, index)" color="negative" />
                   </div>
