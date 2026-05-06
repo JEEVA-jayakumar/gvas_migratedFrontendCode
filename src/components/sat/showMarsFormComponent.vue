@@ -11775,9 +11775,6 @@ import { useVuelidate } from '@vuelidate/core';
  ],
  };
  //<< View binding
- this.fetchAllDropdownValuesFromMARSapi(
- this.merchant.salesInformation.institutionCode
- );
  this.varaneekInstance();
  /* Populating values from FOS */
  // this.tmpVasMapping = this.VasSelected();
@@ -11858,6 +11855,10 @@ import { useVuelidate } from '@vuelidate/core';
  if (this.propLeadDeatils?.device?.deviceName == "Q161_PRO_DQR" || this.propLeadDeatils?.device?.deviceName == "Q161_PRO_SQR") {
  this.merchant.salesInformation.institutionCode = 104
  }
+
+      this.fetchAllDropdownValuesFromMARSapi(
+        this.merchant.salesInformation.institutionCode
+      );
 
  if (this.propLeadDeatils?.leadSource?.sourceName == "LS_TOHANDS") {
  this.merchant.salesInformation.institutionCode = 104;
@@ -13189,6 +13190,9 @@ import { useVuelidate } from '@vuelidate/core';
  },
 
  fetchAllDropdownValuesFromMARSapi(institutionCode) {
+      if (institutionCode) {
+        localStorage.setItem("aa_t", institutionCode);
+      }
  this.$q.loading.show({
  delay: 0, // ms
  spinnerColor: "purple-9",
@@ -13427,7 +13431,12 @@ import { useVuelidate } from '@vuelidate/core';
  .salesPersonCode;
  if (!this.merchant) this.merchant = {};
             if (!this.merchant.salesInformation) this.merchant.salesInformation = {};
-            if (this.marsSavedDataFromInternal.salesInformation) { this.merchant.salesInformation = _.merge({}, this.merchant.salesInformation, this.marsSavedDataFromInternal.salesInformation); }
+            if (this.marsSavedDataFromInternal.salesInformation) {
+              this.merchant.salesInformation = _.merge({}, this.merchant.salesInformation, this.marsSavedDataFromInternal.salesInformation);
+              if (this.merchant.salesInformation.institutionCode) {
+                localStorage.setItem("aa_t", this.merchant.salesInformation.institutionCode);
+              }
+            }
  if (this.merchant.paymentDetails.rentalMode == "SB") {
  if (
  this.marsSavedDataFromInternal &&
