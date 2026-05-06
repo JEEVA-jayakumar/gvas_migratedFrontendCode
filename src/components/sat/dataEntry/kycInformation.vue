@@ -3,7 +3,7 @@
     <div class="row items-center">
       <div
         class="col-12 bottom-border q-py-md"
-        v-for="(key,index) in Object.keys(propLeadDeatils.leadDocuments)"
+        v-for="(key,index) in Object.keys(propLeadDeatils.leadDocuments || {})"
         :key="index"
       >
         <div class="row group items-center">
@@ -124,7 +124,7 @@ export default {
         ]
       });
 
-      Object.keys(this.propLeadDeatils.leadDocuments).forEach(function(
+      Object.keys(this.propLeadDeatils.leadDocuments || {}).forEach(function(
         key,
         index
       ) {

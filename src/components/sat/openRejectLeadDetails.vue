@@ -40,7 +40,7 @@
           label="Others"
         />
         <div class="text-negative q-py-xs group q-caption" v-if="v$.formData.leadVerificationStatus.reasonType.$error">
-          <div v-if="v$.formData.leadVerificationStatus.reasonType.$params.required">
+          <div v-if="v$.formData.leadVerificationStatus.reasonType.$params.required.$invalid">
             <q-icon color="negative" name="warning" />&nbsp;Required
           </div>
         </div>

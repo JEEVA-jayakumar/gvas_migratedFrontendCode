@@ -8,15 +8,15 @@
               <div class="q-title text-grey-9">Aggregator Add New Device - Bulk Upload</div>
             </div>
             <!-- <div class="col-md-8 q-py-md" align="left">
-              <q-select color="grey-9" v-model="formData.aggregator" label="Select Aggregator" radio
+              <q-select map-options emit-value color="grey-9" v-model="formData.aggregator" label="Select Aggregator" radio
                 :options="dropdDown.aggregatorOptions" @update:model-value="getaggregator" />
             </div> -->
             <div class="col-md-8 q-py-md" align="left">
-              <q-select color="grey-9" v-model="formData.deviceType" label="Select Device Type" radio
+              <q-select map-options emit-value color="grey-9" v-model="formData.deviceType" label="Select Device Type" radio
                 :options="deviceOption" />
             </div>
             <div class="col-md-8 q-py-md" align="left">
-              <q-select color="grey-9" :disabled="formData.deviceType == ''" v-model="action" label="Select Device Status" radio
+              <q-select map-options emit-value color="grey-9" :disabled="formData.deviceType == ''" v-model="action" label="Select Device Status" radio
                 :options="actionOption" />
             </div>
             <div class="col-md-8" align="left">

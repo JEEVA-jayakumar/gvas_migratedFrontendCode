@@ -11,7 +11,7 @@
                 class="no-margin"
                 label="Serial Number"
               />
-              <!-- @input="planSelected" -->
+              <!-- @update:model-value="planSelected" -->
             </div>
             <div class="col-xs-12 col-sm-6">
               <q-input type="date"
@@ -20,7 +20,7 @@
                 class="no-margin"
                 label="Installation Date"
               />
-              <!-- @input="planSelected" -->
+              <!-- @update:model-value="planSelected" -->
             </div>
             <div class="col-xs-12 col-sm-6">
               <q-input type="date"
@@ -29,7 +29,7 @@
                 class="no-margin"
                 label="DeInstallation Date"
               />
-              <!-- @input="planSelected" -->
+              <!-- @update:model-value="planSelected" -->
             </div>
           </div>
         </div>

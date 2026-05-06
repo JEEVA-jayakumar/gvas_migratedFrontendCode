@@ -2,7 +2,7 @@
   <div>
     <div class="row q-col-gutter-sm">
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           @blur="v$.merchant.salesInformation.institutionCode.$touch"
           :error="v$.merchant.salesInformation.institutionCode.$error"
           placeholder="Choose from the below"
@@ -16,7 +16,7 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           @blur="v$.merchant.salesInformation.applicationType.$touch"
           :error="v$.merchant.salesInformation.applicationType.$error"
           placeholder="Choose from the below*"
@@ -61,7 +61,7 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           @blur="v$.merchant.salesInformation.merchantType.$touch"
           :error="v$.merchant.salesInformation.merchantType.$error"
           placeholder="Choose from the below*"
@@ -72,7 +72,7 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           @blur="v$.merchant.salesInformation.categoryType.$touch"
           :error="v$.merchant.salesInformation.categoryType.$error"
           placeholder="Choose from the below*"
@@ -83,7 +83,7 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           placeholder="Choose from the below*"
           color="grey-9"
           @blur="v$.merchant.salesInformation.salesPersonCode.$touch"
@@ -94,7 +94,7 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           placeholder="Choose from the below*"
           color="grey-9"
           @blur="v$.merchant.salesInformation.region.$touch"
@@ -105,7 +105,7 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           placeholder="Choose from the below*"
           color="grey-9"
           @blur="v$.merchant.salesInformation.leadFrom.$touch"
@@ -130,7 +130,7 @@
     <!-- T => Transaction value model -->
     <div v-show="merchant.salesInformation.sharingModelCode == 'T'" class="row gutter-sm q-my-xs">
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           @blur="v$.merchant.salesInformation.sharingPartnerCode.$touch"
           :error="v$.merchant.salesInformation.sharingPartnerCode.$error"
           placeholder="Choose from the below*"
@@ -227,7 +227,7 @@
     <!-- M => MDR/cash@pos/rent -->
     <div v-show="merchant.salesInformation.sharingModelCode == 'M'" class="row gutter-sm q-my-xs">
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           @blur="v$.merchant.salesInformation.sharingPartnerCode.$touch"
           :error="v$.merchant.salesInformation.sharingPartnerCode.$error"
           placeholder="Choose from the below*"

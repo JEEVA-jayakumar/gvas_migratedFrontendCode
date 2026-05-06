@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-select
+    <q-select map-options emit-value
       placeholder="Choose from the below*"
       color="grey-9"
       @blur="v$.merchant.salesInformation.salesPersonCode.$touch"

@@ -10,7 +10,7 @@
       <div class="row bottom-border group q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <!--START: table title -->
         <div class="col-md-4">
-          <q-select
+          <q-select map-options emit-value
             :disabled="formData.device_type != ''"
             :class="[formData.device_type != '' ? 'no-pointer-events' : '']"
             v-model="formData.region"
@@ -22,7 +22,7 @@
           />
         </div>
         <div class="col-md-3">
-          <q-select
+          <q-select map-options emit-value
             filter 
             clearable
             v-model="formData.so"
@@ -33,7 +33,7 @@
           />
         </div>
         <div class="col-md-4">
-          <q-select
+          <q-select map-options emit-value
             clearable
             :disable="formData.region == ''"
             @clear="fnClearingDeviceTypeSelection"

@@ -46,7 +46,7 @@
         <div class="gutter-xs">
           <q-card style="width: 100%">
             <div class="col-md-6 col-sm-12 col-xs-12">
-              <q-select
+              <q-select map-options emit-value
                 placeholder="Choose from the below"
                 color="grey-9"
                 v-model="formdata.paymentMode"
@@ -64,7 +64,7 @@
         <div class="gutter-xs">
           <q-card style="width: 100%">
             <div class="col-md-6 col-sm-12 col-xs-12">
-              <q-select
+              <q-select map-options emit-value
                 placeholder="Choose from the below"
                 color="grey-9"
                 v-model="formdata.combinedSettlementFlag"
@@ -82,7 +82,7 @@
         <div class="gutter-xs">
           <q-card style="width: 100%">
             <div class="col-md-6 col-sm-12 col-xs-12">
-              <q-select
+              <q-select map-options emit-value
                 placeholder="Choose from the below"
                 color="grey-9"
                 v-model="formdata.ONBOARDING_REQD"

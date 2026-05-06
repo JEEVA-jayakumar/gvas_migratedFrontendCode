@@ -24,7 +24,7 @@
       <div class="row bottom-border group q-px-md q-py-md items-center text-weight-regular text-grey-9">
           <!--START: table title -->
             <div class="col-md-3">
-                <q-select
+                <q-select map-options emit-value
                   @update:model-value="fnSetDevicesByDeviceId"
                   v-model="formData.device_type"
                   label="Select Device Type"

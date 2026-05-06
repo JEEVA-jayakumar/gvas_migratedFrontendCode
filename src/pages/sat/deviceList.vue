@@ -67,7 +67,7 @@
           <!--END: table search -->
           <!--START: table search -->
           <div class="col-md-5">
-            <q-select
+            <q-select map-options emit-value
               v-model="filter_values"
               label="So Name"
               class="q-mr-lg q-py-sm"

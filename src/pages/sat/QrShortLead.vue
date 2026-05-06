@@ -302,7 +302,7 @@
                         >
                           Pincode
                         </span>
-                        <q-select
+                        <q-select map-options emit-value
                           use-input
                           fill-input
                           hide-selected
@@ -350,7 +350,7 @@
                         >
                           State
                         </span>
-                        <q-select
+                        <q-select map-options emit-value
                           use-input
                           fill-input
                           hide-selected
@@ -386,7 +386,7 @@
                         >
                           City
                         </span>
-                        <q-select
+                        <q-select map-options emit-value
                           use-input
                           fill-input
                           hide-selected
@@ -447,7 +447,7 @@
                     </q-item>
                     <q-item class="q-pa-sm q-body-1">
                       <q-item-section>Merchant Industry - MCC</q-item-section>
-                      <q-select
+                      <q-select map-options emit-value
                         use-input
                         fill-input
                         hide-selected
@@ -687,7 +687,7 @@
                         >
                           City
                         </span>
-                        <q-select
+                        <q-select map-options emit-value
                           use-input
                           fill-input
                           hide-selected
@@ -725,7 +725,7 @@
                         >
                           State
                         </span>
-                        <q-select
+                        <q-select map-options emit-value
                           use-input
                           fill-input
                           hide-selected
@@ -762,7 +762,7 @@
                         >
                           PIN
                         </span>
-                        <q-select
+                        <q-select map-options emit-value
                           use-input
                           fill-input
                           hide-selected

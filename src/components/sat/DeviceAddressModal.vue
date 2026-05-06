@@ -18,7 +18,7 @@
             placeholder="Address"
           />
 
-          <q-select
+          <q-select map-options emit-value
             use-input
             fill-input
             hide-selected

@@ -32,12 +32,12 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           use-input
           fill-input
           hide-selected
           @blur="v$.merchant.companyInformation.registeredCityRefCode.$touch"
-          :error="v$.merchant.companyInformation.registeredCityRefCode.$anyError|| v$.merchant.companyInformation.registeredCityName.$anyError"
+          :error="v$.merchant.companyInformation.registeredCityRefCode.$error|| v$.merchant.companyInformation.registeredCityName.$error"
           color="grey-9"
           v-model="merchant.companyInformation.registeredCityName"
           label="Registered city (type min 3 characters)*"
@@ -48,12 +48,12 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           use-input
           fill-input
           hide-selected
           @blur="v$.merchant.companyInformation.registeredStateRefCode.$touch"
-          :error="v$.merchant.companyInformation.registeredStateRefCode.$anyError|| v$.merchant.companyInformation.registeredStateName.$anyError"
+          :error="v$.merchant.companyInformation.registeredStateRefCode.$error|| v$.merchant.companyInformation.registeredStateName.$error"
           color="grey-9"
           v-model="merchant.companyInformation.registeredStateName"
           label="Registered state (type min 3 characters)*"
@@ -146,7 +146,7 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           placeholder="Choose from the below*"
           color="grey-9"
           v-model="merchant.companyInformation.businessType"
@@ -155,7 +155,7 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           use-input
           fill-input
           hide-selected
@@ -192,12 +192,12 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           use-input
           fill-input
           hide-selected
           @blur="v$.merchant.companyInformation.residentialCityRefCode.$touch"
-          :error="v$.merchant.companyInformation.residentialCityRefCode.$anyError|| v$.merchant.companyInformation.residentCityName.$anyError"
+          :error="v$.merchant.companyInformation.residentialCityRefCode.$error|| v$.merchant.companyInformation.residentCityName.$error"
           color="grey-9"
           v-model="merchant.companyInformation.residentCityName"
           label="City (type min 3 characters)*"
@@ -208,12 +208,12 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           use-input
           fill-input
           hide-selected
           @blur="v$.merchant.companyInformation.residentialStateRefCode.$touch"
-          :error="v$.merchant.companyInformation.residentialStateRefCode.$anyError|| v$.merchant.companyInformation.residentStateName.$anyError"
+          :error="v$.merchant.companyInformation.residentialStateRefCode.$error|| v$.merchant.companyInformation.residentStateName.$error"
           color="grey-9"
           v-model="merchant.companyInformation.residentStateName"
           label="State (type min 3 characters)*"

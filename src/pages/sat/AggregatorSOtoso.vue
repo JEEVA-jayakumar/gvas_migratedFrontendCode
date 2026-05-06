@@ -3,7 +3,7 @@
     <div>
       <div class="row bottom-border group q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-md-2">
-          <q-select filter clearable  v-model="formData.so" label="Select SO" radio color="grey-9"
+          <q-select map-options emit-value filter clearable  v-model="formData.so" label="Select SO" radio color="grey-9"
             :options="assignToOptions" @update:model-value="SelectedSo" />
         </div>
         <div class="col-12 col-lg-4 group" align="right">

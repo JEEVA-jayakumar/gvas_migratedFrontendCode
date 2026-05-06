@@ -91,26 +91,26 @@
           </div>
           <div class="col-md-12">Merchant Tier Mapping</div>
           <div class="col-md-12">
-            <q-select color="grey-9" v-model="formData.merchantState" :error="v$.formData.merchantState.$error"
+            <q-select map-options emit-value color="grey-9" v-model="formData.merchantState" :error="v$.formData.merchantState.$error"
               :options="dropDown.merchantState" label="Select Merchant State*" @update:model-value="getdistrict" />
           </div>
           <!--  @blur="fnClrPin"  @search="searchingDistrict" :options="dropDown.merchantDistrict" :options="getMerchantTierMappingDistrictDetails" -->
           <div class="col-md-12">
-            <q-select :error="v$.formData.district.$error" color="grey-9" v-model="formData.district"
+            <q-select map-options emit-value :error="v$.formData.district.$error" color="grey-9" v-model="formData.district"
               label="Select Merchant District*" placeholder="Select Merchant District*"
               :options="dropDown.merchantDistrict" @update:model-value="getSubDistrict">
             </q-select>
           </div>
           <!--:options="getMerchantTierMappingSubDistrictDetails" -->
           <div class="col-md-12">
-            <q-select :error="v$.formData.subDistrict.$error" color="grey-9" v-model="formData.subDistrict"
+            <q-select map-options emit-value :error="v$.formData.subDistrict.$error" color="grey-9" v-model="formData.subDistrict"
               label="Select Merchant Sub District*" placeholder="Select Merchant Sub District*"
               :options="dropDown.merchantSubDistrict" @update:model-value="getTownOrVillage">
             </q-select>
           </div>
           <!--:options="getMerchantTierMappingTownOrVillageDetails"-->
           <div class="col-md-12">
-            <q-select type="text" :error="v$.formData.village.$error" color="grey-9" v-model="formData.village"
+            <q-select map-options emit-value type="text" :error="v$.formData.village.$error" color="grey-9" v-model="formData.village"
               label="Select Merchant Town/Village*" placeholder="Select Merchant Town/Village*"
               :options="dropDown.merchantTownOrVillageDetails" @update:model-value="getVillageTier">
             </q-select>
@@ -124,12 +124,12 @@
             <q-input v-model="formData.leadCategory" label="Lead Category" />
           </div>-->
           <div class="col-md-12">
-            <q-select color="grey-9" v-model="formData.leadSource" :error="v$.formData.leadSource.$error"
+            <q-select map-options emit-value color="grey-9" v-model="formData.leadSource" :error="v$.formData.leadSource.$error"
               :options="dropDown.leadSourceOptions" label="Select lead source" @update:model-value="fnleadSource" />
           </div>
           <!-- {{formData.leadSource}} -->
           <div class="col-md-12">
-            <q-select color="grey-9" v-model="formData.device" :error="v$.formData.device.$error"
+            <q-select map-options emit-value color="grey-9" v-model="formData.device" :error="v$.formData.device.$error"
               :options="dropDown.deviceOptions" label="Select device" @update:model-value="fnDevice" />
           </div>
           <div class="col-md-12">
@@ -138,7 +138,7 @@
           </div>
           <div v-if="this.plan == 'mATM'">
             <div class="col-md-12">
-              <q-select color="grey-9" v-model="formData.mAtmOnboardingPlan" :options="dropDown.planNameOptions"
+              <q-select map-options emit-value color="grey-9" v-model="formData.mAtmOnboardingPlan" :options="dropDown.planNameOptions"
                 label="Select MATM Plans" @update:model-value="fnPlanName" />
             </div>
             <div class="col-md-12">
@@ -157,12 +157,12 @@
           </div>
 
           <div class="col-md-12">
-            <q-select color="grey-9" v-model="formData.merchantCategory" :error="v$.formData.merchantCategory.$error"
+            <q-select map-options emit-value color="grey-9" v-model="formData.merchantCategory" :error="v$.formData.merchantCategory.$error"
               :options="dropDown.merchantCategory" label="Select merchant category type"
               @update:model-value="fnMerchantCategory" />
           </div>
            <div class="col-md-12">
-            <q-select color="grey-9" 
+            <q-select map-options emit-value color="grey-9"
             v-model="mdrPlan"
               :options="dropDown.mdrOptions" label="Select MDR Plan"
               @update:model-value="fnFillMdr(mdrPlan)" />
@@ -231,7 +231,7 @@
               placeholder="upiPrepaidCreditCardsAbove2000" />
           </div>
           <div class="col-md-12">
-            <q-select color="grey-9" v-model="formData.plan" :error="v$.formData.plan.$error"
+            <q-select map-options emit-value color="grey-9" v-model="formData.plan" :error="v$.formData.plan.$error"
               :options="getLeadSourceRental" label="Select plan" placeholder="Plan" @update:model-value="fnPlan" />
           </div>
 
@@ -263,7 +263,7 @@
           </div>
           <div class="col-md-12">Payement Type</div>
           <div class="col-md-12">
-            <q-select color="grey-9" v-model="formData.paymentOption" :error="v$.formData.paymentOption.$error"
+            <q-select map-options emit-value color="grey-9" v-model="formData.paymentOption" :error="v$.formData.paymentOption.$error"
               :options="paymentType" label="paymentType" placeholder="paymentType" />
           </div>
           <div class="col-md-12" v-if="formData.paymentOption == 1">
@@ -294,7 +294,7 @@
               placeholder="Enter the SWIPE Number" />
           </div>
           <div class="col-md-12">
-            <q-select color="grey-9" v-model="formData.merchantType" :error="v$.formData.merchantType.$error"
+            <q-select map-options emit-value color="grey-9" v-model="formData.merchantType" :error="v$.formData.merchantType.$error"
               :options="dropDown.merchantType" label="Select merchant type" />
           </div>
 

@@ -59,7 +59,7 @@
                             color="grey-9" label="*Merchant Address" placeholder="Merchant Address" />
                         </div>
                         <div class="col-md-6">
-                          <q-select
+                          <q-select map-options emit-value
                             :error="v$.formData.pincodeTemp.$error"
                             @blur="fnClrPin"
                             clearable

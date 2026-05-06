@@ -29,7 +29,7 @@
 
                     </div>
                     <div class="col-md-8">
-                        <q-select v-model="FormData.gender" label="Select Gender" placeholder="Select Gender"
+                        <q-select map-options emit-value v-model="FormData.gender" label="Select Gender" placeholder="Select Gender"
                             @blur="v$.FormData.gender.$touch" :error="v$.FormData.gender.$error"
                             :options="selectGender" />
 

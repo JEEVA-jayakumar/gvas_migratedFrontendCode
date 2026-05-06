@@ -26,7 +26,7 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           placeholder="Choose from the below"
           color="grey-9"
           v-model="merchant.bankInformation.bankDetails.feeType"
@@ -68,7 +68,7 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           placeholder="Choose from the below"
           color="grey-9"
           v-model="merchant.bankInformation.bankDetails.paymentMode"
@@ -77,13 +77,13 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           use-input
           fill-input
           hide-selected
           color="grey-9"
           @blur="v$.merchant.bankInformation.bankDetails.bankCityRefCode.$touch"
-          :error="v$.merchant.bankInformation.bankDetails.bankCityName.$anyError ||v$.merchant.bankInformation.bankDetails.bankCityRefCode.$anyError"
+          :error="v$.merchant.bankInformation.bankDetails.bankCityName.$error ||v$.merchant.bankInformation.bankDetails.bankCityRefCode.$error"
           v-model="merchant.bankInformation.bankDetails.bankCityName"
           label="City (type min 3 characters)*"
           placeholder="Start typing ..*"
@@ -93,13 +93,13 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           use-input
           fill-input
           hide-selected
           color="grey-9"
           @blur="v$.merchant.bankInformation.bankDetails.bankCityRefCode.$touch"
-          :error="v$.merchant.bankInformation.bankDetails.bankStateName.$anyError || v$.merchant.bankInformation.bankDetails.bankCityRefCode.$anyError"
+          :error="v$.merchant.bankInformation.bankDetails.bankStateName.$error || v$.merchant.bankInformation.bankDetails.bankCityRefCode.$error"
           v-model="merchant.bankInformation.bankDetails.bankStateName"
           label="State (type min 3 characters)*"
           placeholder="Start typing ..*"
@@ -109,7 +109,7 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           placeholder="Choose from the below"
           color="grey-9"
           v-model="merchant.bankInformation.bankDetails.accountType"
@@ -250,7 +250,7 @@
         </div>
       </div>
       <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           clearable
           placeholder="Choose from the below"
           color="grey-9"
