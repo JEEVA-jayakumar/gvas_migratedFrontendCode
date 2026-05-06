@@ -11,7 +11,7 @@
             <!-- START >>If document type is PDF format -->
             <div
               class="cursor-pointer"
-              v-if="propGetShortInfo.applicationFileMimeType.includes('pdf')"
+              v-if="propGetShortInfo && propGetShortInfo.applicationFileMimeType && propGetShortInfo.applicationFileMimeType.includes('pdf')"
             >
               <div @click="fnPDFViewModal(propGetShortInfo.applicationFile)">
                 <q-btn round size="sm" icon="fas fa-file-pdf" color="primary"/>
@@ -22,7 +22,7 @@
             <!-- START >>If document type is image format -->
             <div
               class="cursor-pointer"
-              v-else-if="propGetShortInfo.applicationFileMimeType.includes('image')"
+              v-else-if="propGetShortInfo && propGetShortInfo.applicationFileMimeType && propGetShortInfo.applicationFileMimeType.includes('image')"
             >
               <viewer
                 :images="[GLOBAL_FILE_FETCH_URL+ '/'+propGetShortInfo.applicationFile]"
@@ -49,7 +49,7 @@
       <!-- END >> (Mandatory) Application form  -->
       <!-- START >>Loop through cooked(in store) array for documents -->
       <!-- START >> (Not Mandatory) Other attached documents  -->
-      <q-item class="no-padding" v-if="Object.keys(propLeadDocumentInformation).length > 0">
+      <q-item class="no-padding" v-if="propLeadDocumentInformation && Object.keys(propLeadDocumentInformation).length > 0">
         <q-item-section>
           <!-- {{propLeadDocumentInformation}} -->
           <div v-for="(documents,index) in propLeadDocumentInformation" :key="index">

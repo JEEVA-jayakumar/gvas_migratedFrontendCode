@@ -61,16 +61,9 @@
                   class="full-width"
                 >
                   <template v-slot:header>
-                    <q-item-section
-                      :color="documents[0].kycException?'amber-9':''"
-                      :icon="documents[0].kycException? 'warning' :'attach_file'"
-                    />
-                    <q-item-section
-                      class="q-body-1"
-                      :caption="documents[0].uploadedDocuments.length + 'Document(s)'"
-                      :label="index"
-                    />
-                    <q-item-section v-if="documents[0].documentVerifiedStatus == 2" right>
+                    <q-item-section side  ><q-icon :color="documents[0].kycException?'amber-9':''" :name="documents[0].kycException? 'warning' :'attach_file'" /></q-item-section>
+                    <q-item-section class="q-body-1"><q-item-label>{{ index }}</q-item-label><q-item-label caption>{{ documents[0].uploadedDocuments.length + 'Document(s)' }}</q-item-label></q-item-section>
+                    <q-item-section v-if="documents[0].documentVerifiedStatus == 2" side>
                       <q-btn
                         round
                         size="xs"
@@ -88,7 +81,7 @@
                         @click="fnDocumentRejectModal(documents[0])"
                       />
                     </q-item-section>
-                    <q-item-section v-else right>
+                    <q-item-section v-else side>
                       <span
                         v-if="documents[0].documentVerifiedStatus == 1"
                         class="q-body-1 text-weight-medium text-positive"
@@ -112,7 +105,7 @@
                         class="ellipsis"
                       >
                         <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" />
-                        &nbsp;{{propGetShortInfo?.applicationFile}}
+                        &nbsp;{{item.fileName}}
                       </q-item-section>
                       <q-item-section v-else-if="item?.mimeType?.includes('image')">
                         <!-- START >>If document type is image format -->
@@ -141,13 +134,9 @@
               <div class="col-md-12 q-body-1">
                 <q-expansion-item separator opened :group="toggleCollapsible" class="full-width">
                   <template v-slot:header>
-                    <q-item-section icon="apps" />
-                    <q-item-section
-                      class="q-body-1"
-                      :caption="documents.length + 'Type(s)'"
-                      :label="index"
-                    />
-                    <q-item-section v-if="fnToggleVerificationButtonStatus(documents)" right>
+                    <q-item-section side ><q-icon name="apps" /></q-item-section>
+                    <q-item-section class="q-body-1"><q-item-label>{{ index }}</q-item-label><q-item-label caption>{{ documents.length + 'Type(s)' }}</q-item-label></q-item-section>
+                    <q-item-section v-if="fnToggleVerificationButtonStatus(documents)" side>
                       <q-btn
                         round
                         size="xs"
@@ -165,7 +154,7 @@
                         @click="fnDocumentRejectModal(documents[0])"
                       />
                     </q-item-section>
-                    <q-item-section v-else right>
+                    <q-item-section v-else side>
                       <span
                         v-if="fnToggleVerificationButtonStatusAfterAction(documents)"
                         class="q-body-1 text-weight-medium text-positive"
@@ -185,16 +174,9 @@
                     <div class="col-md-12 q-body-1">
                       <q-expansion-item separator opened multiline class="full-width">
                         <template v-slot:header>
-                          <q-item-section
-                            :color="subDocument.kycException?'amber-9':''"
-                            :icon="subDocument.kycException? 'warning' :'attach_file'"
-                          />
-                          <q-item-section
-                            class="q-body-1"
-                            :caption="subDocument.uploadedDocuments.length + 'Document(s)'"
-                            :label="subDocument.subDocumentType"
-                          />
-                          <q-item-section v-if="subDocument.documentVerifiedStatus == 2" right>
+                          <q-item-section side  ><q-icon :color="subDocument.kycException?'amber-9':''" :name="subDocument.kycException? 'warning' :'attach_file'" /></q-item-section>
+                          <q-item-section class="q-body-1"><q-item-label>{{ subDocument.subDocumentType }}</q-item-label><q-item-label caption>{{ subDocument.uploadedDocuments.length + 'Document(s)' }}</q-item-label></q-item-section>
+                          <q-item-section v-if="subDocument.documentVerifiedStatus == 2" side>
                             <q-btn
                               round
                               size="xs"
