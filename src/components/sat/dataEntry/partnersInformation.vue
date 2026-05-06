@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-for="(v,index) in v$.partnersArr.$each"
+      v-for="(v,index) in v$.partnersArr.$each.$response.$data"
       :key="index"
       class="row q-my-xs gutter-sm"
       ref="parentElement"
@@ -14,14 +14,14 @@
               Partner 0{{parseInt(index)+1}}
             </span>
           </div>
-          <div class="col-auto" v-if="Object.keys(v$.partnersArr.$each).length > 1">
+          <div class="col-auto" v-if="Object.keys(v$.partnersArr.$each.$response.$data || {}).length > 1">
             <q-btn round icon="delete" @click="removePartnerFromArr(v,index)" color="negative"/>
           </div>
         </div>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          :error="v.name.$anyError"
+          :error="v.name.$error"
           @blur="v.name.$touch()"
           color="grey-9"
           v-model="v.$model.name"
@@ -32,7 +32,7 @@
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
           upper-case
-          :error="v.pan.$anyError"
+          :error="v.pan.$error"
           @blur="v.pan.$touch()"
           color="grey-9"
           v-model="v.$model.pan"
@@ -42,7 +42,7 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          :error="v.address.$anyError"
+          :error="v.address.$error"
           @blur="v.address.$touch()"
           color="grey-9"
           v-model="v.$model.address"
@@ -52,7 +52,7 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          :error="v.pin.$anyError"
+          :error="v.pin.$error"
           @blur="v.pin.$touch()"
           color="grey-9"
           type="number"
@@ -62,11 +62,11 @@
         />
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           use-input
           fill-input
           hide-selected
-          :error="v.cityRefLabel.$anyError || v.cityRefCode.$anyError"
+          :error="v.cityRefLabel.$error || v.cityRefCode.$error"
           @blur="v.cityRefCode.$touch()"
           color="grey-9"
           v-model="v.$model.cityRefLabel"
@@ -78,11 +78,11 @@
         ></q-select>
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <q-select
+        <q-select map-options emit-value
           use-input
           fill-input
           hide-selected
-          :error="v.stateRefLabel.$anyError || v.stateRefCode.$anyError"
+          :error="v.stateRefLabel.$error || v.stateRefCode.$error"
           @blur="v.stateRefCode.$touch()"
           color="grey-9"
           v-model="v.$model.stateRefLabel"
@@ -95,7 +95,7 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          :error="v.contactMobile.$anyError"
+          :error="v.contactMobile.$error"
           @blur="v.contactMobile.$touch()"
           color="grey-9"
           type="tel"
@@ -106,7 +106,7 @@
       </div>
       <div class="col-md-6 col-sm-12 col-xs-12">
         <q-input
-          :error="v.contactEmail.$anyError"
+          :error="v.contactEmail.$error"
           @blur="v.contactEmail.$touch()"
           color="grey-9"
           type="email"

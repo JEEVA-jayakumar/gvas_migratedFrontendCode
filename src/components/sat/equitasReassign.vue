@@ -16,11 +16,11 @@
                         <q-card-section>
                             <q-list no-border>
                                 <div class="col-md-12">
-                                    <q-select filter clearable color="grey-9" v-model="formData.so" :options="assignToOptions"
+                                    <q-select map-options emit-value filter clearable color="grey-9" v-model="formData.so" :options="assignToOptions"
                                         label="Select SO*" />
                                 </div>
                                 <div class="col-md-12">
-                                    <q-select color="grey-9" v-model="formData.Reassign" :options="ReasonListOptions"
+                                    <q-select map-options emit-value color="grey-9" v-model="formData.Reassign" :options="ReasonListOptions"
                                         label="Select Reason List*" />
                                 </div>
                                 <!-- {{formData.Reassign}} -->

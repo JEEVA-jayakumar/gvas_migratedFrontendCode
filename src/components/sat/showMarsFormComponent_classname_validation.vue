@@ -22,7 +22,7 @@
           >
             <div class="row q-col-gutter-sm">
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   class="institutionCode"
                   @blur="v$.merchant.salesInformation.institutionCode.$touch"
                   :error="v$.merchant.salesInformation.institutionCode.$error"
@@ -35,7 +35,7 @@
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   class="applicationType"
                   @blur="v$.merchant.salesInformation.applicationType.$touch"
                   :error="v$.merchant.salesInformation.applicationType.$error"
@@ -86,7 +86,7 @@
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   class="merchantType"
                   @blur="v$.merchant.salesInformation.merchantType.$touch"
                   :error="v$.merchant.salesInformation.merchantType.$error"
@@ -98,7 +98,7 @@
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   class="categoryType"
                   @blur="v$.merchant.salesInformation.categoryType.$touch"
                   :error="v$.merchant.salesInformation.categoryType.$error"
@@ -110,7 +110,7 @@
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   class="salesPersonCode"
                   placeholder="Choose from the below*"
                   color="grey-9"
@@ -122,7 +122,7 @@
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   class="region"
                   placeholder="Choose from the below*"
                   color="grey-9"
@@ -134,7 +134,7 @@
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   class="leadFrom"
                   placeholder="Choose from the below*"
                   color="grey-9"
@@ -167,7 +167,7 @@
               class="row gutter-sm q-my-xs"
             >
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   class="sharingPartnerCode"
                   @blur="v$.merchant.salesInformation.sharingPartnerCode.$touch"
                   :error="v$.merchant.salesInformation.sharingPartnerCode.$error"
@@ -273,7 +273,7 @@
               class="row gutter-sm q-my-xs"
             >
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   class="sharingPartnerCode"
                   @blur="v$.merchant.salesInformation.sharingPartnerCode.$touch"
                   :error="v$.merchant.salesInformation.sharingPartnerCode.$error"
@@ -497,7 +497,7 @@
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   placeholder="Choose from the below*"
                   class="businessType"
                   color="grey-9"
@@ -749,8 +749,8 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
                   class="name"
-                  :error="v.name.$anyError"
-                  @blur="() => v.name.$anyError"
+                  :error="v.name.$error"
+                  @blur="() => v.name.$error"
                   color="grey-9"
                   v-model="v.$model.name"
                   label="Name*"
@@ -761,8 +761,8 @@
                 <q-input
                   upper-case
                   class="pan"
-                  :error="v.pan.$anyError"
-                  @blur="() => v.pan.$anyError"
+                  :error="v.pan.$error"
+                  @blur="() => v.pan.$error"
                   color="grey-9"
                   v-model="v.$model.pan"
                   label="Pan*"
@@ -772,8 +772,8 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
                   class="address"
-                  :error="v.address.$anyError"
-                  @blur="() => v.address.$anyError"
+                  :error="v.address.$error"
+                  @blur="() => v.address.$error"
                   color="grey-9"
                   v-model="v.$model.address"
                   label="Address* (max 120 characters)"
@@ -783,8 +783,8 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
                   class="pin"
-                  :error="v.pin.$anyError"
-                  @blur="() => v.pin.$anyError"
+                  :error="v.pin.$error"
+                  @blur="() => v.pin.$error"
                   color="grey-9"
                   type="number"
                   v-model="v.$model.pin"
@@ -833,8 +833,8 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
                   class="contactMobile"
-                  :error="v.contactMobile.$anyError"
-                  @blur="() => v.contactMobile.$anyError"
+                  :error="v.contactMobile.$error"
+                  @blur="() => v.contactMobile.$error"
                   color="grey-9"
                   type="tel"
                   v-model="v.$model.contactMobile"
@@ -845,8 +845,8 @@
               <div class="col-md-6 col-sm-12 col-xs-12">
                 <q-input
                   class="contactEmail"
-                  :error="v.contactEmail.$anyError"
-                  @blur="() => v.contactEmail.$anyError"
+                  :error="v.contactEmail.$error"
+                  @blur="() => v.contactEmail.$error"
                   color="grey-9"
                   type="email"
                   v-model="v.$model.contactEmail"
@@ -1109,7 +1109,7 @@
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   placeholder="Choose from the below"
                   color="grey-9"
                   class="terminalModeCode"
@@ -1150,7 +1150,7 @@
                 </div>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   placeholder="Choose from the below*"
                   color="grey-9"
                   class="rentalPlanCode"
@@ -1160,7 +1160,7 @@
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   placeholder="Choose from the below*"
                   color="grey-9"
                   class="rentalMode"
@@ -1170,7 +1170,7 @@
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   placeholder="Choose from the below*"
                   color="grey-9"
                   class="serviceProvider"
@@ -1182,7 +1182,7 @@
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   placeholder="Choose from the below*"
                   color="grey-9"
                   class="networkPreferred"
@@ -2361,7 +2361,7 @@
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   placeholder="Choose from the below"
                   color="grey-9"
                   class="feeType"
@@ -2408,7 +2408,7 @@
                 />
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   class="paymentMode"
                   placeholder="Choose from the below"
                   color="grey-9"
@@ -2456,7 +2456,7 @@
                 </q-input>
               </div>
               <div class="col-md-6 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   class="accountType"
                   placeholder="Choose from the below"
                   color="grey-9"
@@ -2609,7 +2609,7 @@
                 </div>
               </div>
               <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                <q-select
+                <q-select map-options emit-value
                   clearable
                   class="acquirerBank"
                   placeholder="Choose from the below"
@@ -5421,7 +5421,7 @@ export default {
     autoCompleteError(val1, val2) {
       val1.$touch();
       val2.$touch();
-      if (val1.$anyError || val2.$anyError) {
+      if (val1.$error || val2.$error) {
         return true;
       } else {
         return false;

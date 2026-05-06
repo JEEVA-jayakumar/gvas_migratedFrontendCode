@@ -104,7 +104,7 @@
                   </div>
 
                   <div class="col-md-6">
-                    <q-select
+                    <q-select map-options emit-value
                       v-model="formData.addUserDetails.state.id"
                       label="*State"
                       radio

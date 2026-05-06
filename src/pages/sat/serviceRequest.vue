@@ -54,7 +54,7 @@
           <!-- </div> -->
           <!-- <div v-if="formData.requestMode == 1">
             <div class="col-md-3 col-sm-6 col-xs-6">
-              <q-select
+              <q-select map-options emit-value
                 v-model="formData.assignTo"
                 class="text-weight-regular text-grey-8"
                 color="grey-9"

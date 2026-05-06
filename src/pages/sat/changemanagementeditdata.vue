@@ -137,7 +137,7 @@
               />
             </div>
             <!-- <div class="col-xs-12 col-sm-6">
-              <q-select clearable
+              <q-select map-options emit-value clearable
                @blur="v$.formdata.paymentOption.$touch"
               :error="v$.formdata.paymentOption.$error"
               v-model="formdata.paymentOption"
@@ -472,7 +472,7 @@
             />
           </div>
           <div class="col-xs-12 col-sm-6">
-            <q-select
+            <q-select map-options emit-value
               color="grey-9"
               v-model="merchant.companyinformation.registeredCityName"
               label="City (type min 3 characters)*"
@@ -487,7 +487,7 @@
             />
           </div>
           <div class="col-xs-12 col-sm-6">
-            <q-select
+            <q-select map-options emit-value
               color="grey-9"
               v-model="merchant.companyinformation.registeredStateName"
               label="state (type min 3 characters)*"
@@ -566,7 +566,7 @@
                 <q-icon color="negative" name="warning" />&nbsp;Required -
                 Provide valid PAN Number
               </div>
-              <div v-if="v$.merchant.companyinformation.pan.$params.minLength">
+              <div v-if="v$.merchant.companyinformation.pan.$params.minLength.$invalid">
                 <q-icon color="negative" name="warning" />
                 &nbsp;Length should be between
                 {{ v$.merchant.companyinformation.pan.$params.minLength.min }}
@@ -603,7 +603,7 @@
                 Provide valid GST Number
               </div>
               <div
-                v-if="v$.merchant.businessInformation.gstId.$params.minLength"
+                v-if="v$.merchant.businessInformation.gstId.$params.minLength.$invalid"
               >
                 <q-icon color="negative" name="warning" />
                 &nbsp;Length should be between
@@ -651,7 +651,7 @@
             />
           </div>
           <!-- <div class="col-xs-12 col-sm-6">
-              <q-select
+              <q-select map-options emit-value
                   placeholder="Choose from the below*"
                   color="grey-9"
                   v-model="merchant.paymentDetails.rentalPlanCode"

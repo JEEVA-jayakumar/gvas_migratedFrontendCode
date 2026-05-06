@@ -48,7 +48,7 @@
               </div>
               <!-- Right side Q-Select -->
               <div class="col-auto">
-                <q-select
+                <q-select map-options emit-value
                   style="width: 300px"
                   filter
                   clearable

@@ -22,7 +22,7 @@
               />
             </div> -->
           <div class="col-xs-12 col-sm-6">
-              <q-select disable
+              <q-select map-options emit-value disable
                 v-model="formdata.plan"
                 class="no-margin"
                 label="Select Rental Plan"
@@ -32,7 +32,7 @@
            <!-- @update:model-value="planSelected" -->
           </div>
             <div class="col-xs-12 col-sm-6">
-              <q-select clearable
+              <q-select map-options emit-value clearable
              :disable="((formdata.plan != this.getImplementedQueue.leadInformation.plan.id)||(this.getImplementedQueue.leadInformation.cmsLeadStatus ==15)||(this.getImplementedQueue.leadInformation.cmsLeadStatus==21))?false:true"
                @blur="v$.formdata.paymentOption.$touch"
               :error="v$.formdata.paymentOption.$error"
@@ -77,7 +77,7 @@
               />
             </div> -->
           <div class="col-xs-12 col-sm-6">
-              <q-select
+              <q-select map-options emit-value
                 v-model="formdata1.plan"
                 class="no-margin"
                 label="Select Rental Plan"
@@ -86,7 +86,7 @@
          />
           </div>
             <!-- <div class="col-xs-12 col-sm-6">
-              <q-select clearable
+              <q-select map-options emit-value clearable
                @blur="v$.formdata.paymentOption.$touch"
               :error="v$.formdata.paymentOption.$error"
               v-model="formdata.paymentOption"
@@ -302,7 +302,7 @@
                   <div>
                     <q-icon color="negative" name="warning" />&nbsp;Required - Provide valid PAN Number
                   </div>
-                  <div v-if="v$.merchant.companyinformation.pan.$params.minLength">
+                  <div v-if="v$.merchant.companyinformation.pan.$params.minLength.$invalid">
                     <q-icon color="negative" name="warning" />
                     &nbsp;Length should be between {{v$.merchant.companyinformation.pan.$params.minLength.min}} and {{ v$.merchant.companyinformation.pan.$params.maxLength.max }}
                   </div>
@@ -326,7 +326,7 @@
                   <div>
                     <q-icon color="negative" name="warning" />&nbsp;Required - Provide valid GST Number
                   </div>
-                  <div v-if="v$.merchant.businessInformation.gstId.$params.minLength">
+                  <div v-if="v$.merchant.businessInformation.gstId.$params.minLength.$invalid">
                     <q-icon color="negative" name="warning" />
                     &nbsp;Length should be between {{v$.merchant.businessInformation.gstId.$params.minLength.min}} and {{ v$.merchant.businessInformation.gstId.$params.maxLength.max }}
                   </div>
@@ -356,7 +356,7 @@
                 />
             </div>
              <div class="col-xs-12 col-sm-6">
-                <q-select
+                <q-select map-options emit-value
                   placeholder="Choose from the below"
                   color="grey-9"
                   v-model="merchant.bankInformation.bankDetails.paymentMode"
@@ -365,7 +365,7 @@
                 />
              </div>
               <div class="col-xs-12 col-sm-6">
-                <q-select
+                <q-select map-options emit-value
                   placeholder="Choose from the below"
                   color="grey-9"
                   v-model="merchant.bankInformation.bankDetails.accountType"
@@ -383,7 +383,7 @@
               <q-input v-model="merchant.companyinformation.registeredAddress" class="no-margin" label="Address" />
             </div>
             <div class="col-xs-12 col-sm-6">     
-                <q-select
+                <q-select map-options emit-value
                   color="grey-9"
                   v-model="merchant.companyinformation.registeredCityName"
                   label="City (type min 3 characters)*"
@@ -398,7 +398,7 @@
                 />
             </div>
             <div class="col-xs-12 col-sm-6">
-                <q-select
+                <q-select map-options emit-value
                   color="grey-9"
                   v-model="merchant.companyinformation.registeredStateName"
                   label="state (type min 3 characters)*"

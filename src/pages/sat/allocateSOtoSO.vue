@@ -9,7 +9,7 @@
       </div>
       <div class="row bottom-border group q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-md-3">
-          <q-select
+          <q-select map-options emit-value
             filter
             clearable
             v-model="formData.so"

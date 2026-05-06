@@ -48,14 +48,14 @@
                                     " label="Pincode*" />
                                 </div>
                                 <div class="col-md-5">
-                                    <q-select use-input fill-input hide-selected @blur="fnClrCity" color="grey-9"
+                                    <q-select map-options emit-value use-input fill-input hide-selected @blur="fnClrCity" color="grey-9"
                                         v-model="additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel"
                                         @update:model-value="fninputTyping($event, 1)" label="City (type min 3 characters)*"
                                         placeholder="Start typing ..*"
                                         :options="cityOptionsFiltered" @filter="marsCitySearch" @update:model-value="partnerCitySelected" />
                                 </div>
                                 <div class="col-md-5">
-                                    <q-select use-input fill-input hide-selected @blur="fnClrState" color="black-9"
+                                    <q-select map-options emit-value use-input fill-input hide-selected @blur="fnClrState" color="black-9"
                                         v-model="additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel"
                                         @update:model-value="fninputTyping($event, 2)" label="state (type min 3 characters)*"
                                         placeholder="Start typing ..*"
@@ -113,14 +113,14 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <q-select use-input fill-input hide-selected @blur="fnClrCity" color="grey-9"
+                                    <q-select map-options emit-value use-input fill-input hide-selected @blur="fnClrCity" color="grey-9"
                                         v-model="additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel"
                                         @update:model-value="fninputTyping($event, 1)" label="City (type min 3 characters)*"
                                         placeholder="Start typing ..*"
                                         :options="cityOptionsFiltered" @filter="marsCitySearch" @update:model-value="partnerCitySelected" />
                                 </div>
                                 <div class="col-md-6">
-                                    <q-select use-input fill-input hide-selected @blur="fnClrState" color="black-9"
+                                    <q-select map-options emit-value use-input fill-input hide-selected @blur="fnClrState" color="black-9"
                                         v-model="additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel"
                                         @update:model-value="fninputTyping($event, 2)" label="state (type min 3 characters)*"
                                         placeholder="Start typing ..*"

@@ -27,7 +27,7 @@
         "
       >
         <div class="col-md-3">
-          <q-select
+          <q-select map-options emit-value
             filter 
             clearable
             v-model="formData.allocate_so"

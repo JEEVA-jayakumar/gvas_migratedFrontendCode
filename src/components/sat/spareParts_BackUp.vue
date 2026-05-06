@@ -23,7 +23,7 @@
             >/ selected
           </div>
           <div class="col-md-3 col-sm-6 col-xs-6">
-            <q-select
+            <q-select map-options emit-value
               filter
               clearable
               v-model="formData.assignTo"

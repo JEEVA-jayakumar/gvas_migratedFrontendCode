@@ -118,7 +118,7 @@
                     <q-step default name="first" title="Sales" subtitle="Info">
                         <div class="row q-col-gutter-sm">
                             <div class="col-md-6 col-sm-12">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="onBoardDetails.merchant.salesInfo.institutionCode"
                                 label="Application Type"
@@ -127,7 +127,7 @@
                                 />
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="onBoardDetails.merchant.salesInfo.applicationType"
                                 label="Application Type"
@@ -150,7 +150,7 @@
           </q-input>
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="select"
                                 label="Merchant Type"
@@ -159,7 +159,7 @@
                                 />
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="select"
                                 label="Sales Person"
@@ -168,7 +168,7 @@
                                 />
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="select"
                                 label="Region"
@@ -177,7 +177,7 @@
                                 />
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="select"
                                 label="Lead From"
@@ -226,7 +226,7 @@
                                 <q-input color="grey-9" type="number" v-model="onBoardDetails.companyInfo.registeredPin" label="PIN" placeholder="PIN" />
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="onBoardDetails.companyInfo.registeredCityRefCode"
                                 label="City"
@@ -236,7 +236,7 @@
                                 />
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="onBoardDetails.companyInfo.registeredStateRefCode"
                                 label="State"
@@ -246,7 +246,7 @@
                                 />
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="select"
                                 label="Type of Business Entity"
@@ -255,7 +255,7 @@
                                 />
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="select"
                                 label="Year of Establishment"
@@ -306,7 +306,7 @@
                                 <q-input color="grey-9" type="number" v-model="text" label="PIN" placeholder="PIN" />
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="select"
                                 label="City"
@@ -315,7 +315,7 @@
                                 />
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="select"
                                 label="State"
@@ -376,7 +376,7 @@
                                 <q-input color="grey-9" type="number" v-model="text" label="PIN" placeholder="PIN" />
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="select"
                                 label="City"
@@ -385,7 +385,7 @@
                                 />
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="select"
                                 label="State"
@@ -488,7 +488,7 @@
                                 <q-input color="grey-9" type="number" v-model="text" label="Installation Fee" placeholder="Installation Fee" />
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="select"
                                 label="Terminal Model"
@@ -505,7 +505,7 @@
                                 <q-radio color="grey-9" v-model="option" val="opt2" label="No" />
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="select"
                                 label="Rental Plan"
@@ -514,7 +514,7 @@
                                 />
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="select"
                                 label="Rental Mode"
@@ -561,7 +561,7 @@
                                 <q-input color="grey-9" v-model="text" label="Branch Name" placeholder="Branch Name" />
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="select"
                                 label="City"
@@ -570,7 +570,7 @@
                                 />
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="select"
                                 label="State"
@@ -579,7 +579,7 @@
                                 />
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="select"
                                 label="Account Type"
@@ -619,7 +619,7 @@
                                 <q-input color="grey-9" v-model="text" label="Cheque/UTR No" placeholder="Cheque/UTR No" />
                             </div>
                             <div class="col-md-6">
-                                <q-select
+                                <q-select map-options emit-value
                                 color="grey-9"
                                 v-model="select"
                                 label="Bank Name"

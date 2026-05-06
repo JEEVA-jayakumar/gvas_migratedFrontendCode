@@ -7,16 +7,16 @@
       <div class="row bottom-border group q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <!--START: table title -->
         <div class="col-md-2">
-          <q-select :disable="formData.device_type != ''"
+          <q-select map-options emit-value :disable="formData.device_type != ''"
             :class="[formData.device_type != '' ? 'no-pointer-events' : '']" v-model="formData.region"
             label="Select Region" radio color="grey-9" :options="regionOptions" @update:model-value="regionBasedSO" />
         </div>
         <div class="col-md-2">
-          <q-select filter clearable :disable="formData.region == ''" v-model="formData.so" label="Select SO" radio color="grey-9"
+          <q-select map-options emit-value filter clearable :disable="formData.region == ''" v-model="formData.so" label="Select SO" radio color="grey-9"
             :options="regionBasedSo" @update:model-value="SelectedSo" />
         </div>
         <div class="col-md-2">
-          <q-select clearable :disable="formData.so == ''" @clear="fnClearingDeviceTypeSelection"
+          <q-select map-options emit-value clearable :disable="formData.so == ''" @clear="fnClearingDeviceTypeSelection"
             @update:model-value="fnSetDevicesByDeviceId" v-model="formData.device_type" label="Select Device Type" radio
             color="grey-9" :options="deviceOptions" />
         </div>

@@ -9,11 +9,11 @@
       </div>
       <div class="row bottom-border q-px-md q-py-md items-center text-weight-regular text-grey-9">
         <div class="col-md-4">
-          <q-select v-model="formData.device.id" label="Select Device Type" radio color="grey-9"
+          <q-select map-options emit-value v-model="formData.device.id" label="Select Device Type" radio color="grey-9"
             :options="deviceOptions" />
         </div>
         <div class="col-md-4">
-          <q-select :disabled="formData.device.id == ''" v-model="action" label="Select Device Status" radio
+          <q-select map-options emit-value :disabled="formData.device.id == ''" v-model="action" label="Select Device Status" radio
             color="grey-9" :options="actionOptions" @update:model-value="fnDisableDeviceTypeSelection" />
         </div>
         <!-- Final upload button toggle -->

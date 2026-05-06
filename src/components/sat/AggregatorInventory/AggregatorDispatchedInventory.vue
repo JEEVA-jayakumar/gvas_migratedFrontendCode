@@ -8,7 +8,7 @@
                         <q-chip color="purple-9">Step -1</q-chip>&nbsp; Select Aggregator
                     </div>
                     <div class="col">
-                        <q-select color="grey-9" v-model="aggregator" label="Select Aggregator" radio
+                        <q-select map-options emit-value color="grey-9" v-model="aggregator" label="Select Aggregator" radio
                             :options="aggregatorOptions" />
 
                     </div>

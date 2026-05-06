@@ -7,7 +7,7 @@
     <form>
       <div class="col-md-5 col-sm-4 col-xs-12 q-pa-sm">
         <div class="col-sm-5">
-          <q-select
+          <q-select map-options emit-value
             color="grey-9"
             v-model="formData.allocate_region"
             :options="regionOptions"
@@ -16,7 +16,7 @@
           />
         </div>
         <div class="col-md-5">
-          <q-select
+          <q-select map-options emit-value
             v-model="formData.allocate_so"
             label="Select SO"
             radio

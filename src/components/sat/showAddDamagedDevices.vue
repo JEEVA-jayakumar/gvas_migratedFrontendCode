@@ -3,7 +3,7 @@
     <div class="row">
       <!--START: table title -->
       <div class="col">
-        <q-select
+        <q-select map-options emit-value
           clearable
           :disable="formData.region == ''"
           @clear="fnClearingDeviceTypeSelection"

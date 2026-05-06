@@ -12,13 +12,13 @@
                     <q-step default name="first" title="Sales" subtitle="Info">
                         <div class="row q-col-gutter-sm">
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-select 
+                            <q-select map-options emit-value
                             @blur="v$.merchant.salesInformation.institutionCode.$touch"
                             :error="v$.merchant.salesInformation.institutionCode.$error"
                             placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.institutionCode" label="Institution Code" :options="institutionCodeOptions" @update:model-value="fetchAllDropdownValuesFromMARSapi"/>
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-select 
+                            <q-select map-options emit-value
                             @blur="v$.merchant.salesInformation.applicationType.$touch"
                             :error="v$.merchant.salesInformation.applicationType.$error"
                             placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.applicationType" label="Application Type" :options="applicationTypeOptions" />
@@ -52,20 +52,20 @@
           </q-input>
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-select 
+                            <q-select map-options emit-value
                             @blur="v$.merchant.salesInformation.merchantType.$touch"
                             :error="v$.merchant.salesInformation.merchantType.$error"
                             placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.merchantType" label="Merchant Type" :options="merchantTypeOptions" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-select 
+                            <q-select map-options emit-value
                             placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.salesPersonCode" label="Sales Person" :options="salesPersonOptions" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.region" label="Region" :options="regionOptions" />
+                            <q-select map-options emit-value placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.region" label="Region" :options="regionOptions" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.leadFrom" label="Lead From" :options="leadFromOptions" />
+                            <q-select map-options emit-value placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.leadFrom" label="Lead From" :options="leadFromOptions" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <p class="q-caption">Subvention Type</p>
@@ -84,7 +84,7 @@
                         <div v-if="merchant.salesInformation.sharingModelCode == 'T'"
                         class="row gutter-sm q-my-xs">
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-select 
+                            <q-select map-options emit-value
                             @blur="v$.merchant.salesInformation.sharingPartnerCode.$touch"
                             :error="v$.merchant.salesInformation.sharingPartnerCode.$error"
                             placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.sharingPartnerCode" label="Sharing partner" :options="sharingPartnerOptions" />
@@ -146,7 +146,7 @@
                         <div v-if="merchant.salesInformation.sharingModelCode == 'M'"
                         class="row gutter-sm q-my-xs">
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-select
+                            <q-select map-options emit-value
                             @blur="v$.merchant.salesInformation.sharingPartnerCode.$touch"
                             :error="v$.merchant.salesInformation.sharingPartnerCode.$error"
                             placeholder="Choose from the below" color="grey-9" v-model="merchant.salesInformation.sharingPartnerCode" label="Sharing partner" :options="sharingPartnerOptions" />
@@ -223,7 +223,7 @@
                             color="grey-9" type="number" v-model="merchant.companyInformation.registeredPin" label="PIN" placeholder="PIN" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-select 
+                            <q-select map-options emit-value
                             @blur="v$.merchant.companyInformation.constitution.$touch"
                             :error="v$.merchant.companyInformation.constitution.$error"
                             placeholder="Choose from the below" color="grey-9" v-model="merchant.companyInformation.constitution" label="Type of business entity" :options="constitutionOptions" />
@@ -258,7 +258,7 @@
                             <q-input color="grey-9" v-model="merchant.companyInformation.businessNature" label="Nature of Business" placeholder="Nature of Business" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
-                            <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.companyInformation.businessType" label="Type of Business" :options="businessTypeOptions" />
+                            <q-select map-options emit-value placeholder="Choose from the below" color="grey-9" v-model="merchant.companyInformation.businessType" label="Type of Business" :options="businessTypeOptions" />
                           </div>
                           <div class="col-md-6 col-sm-12 col-xs-12">
                             <q-input 
@@ -503,7 +503,7 @@
                           />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.paymentDetails.terminalModeCode" label="Terminal Model" :options="terminalModelSet" />
+                          <q-select map-options emit-value placeholder="Choose from the below" color="grey-9" v-model="merchant.paymentDetails.terminalModeCode" label="Terminal Model" :options="terminalModelSet" />
                         </div>
                         <div class="col-md-6 col-sm-12">
                           <q-input color="grey-9" type="number" v-model="merchant.paymentDetails.numberOfTerminals" label="No of Terminals" placeholder="No of Terminals" />
@@ -519,10 +519,10 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.paymentDetails.rentalPlanCode" label="Rental Plan" :options="rentalPlanSet" />
+                          <q-select map-options emit-value placeholder="Choose from the below" color="grey-9" v-model="merchant.paymentDetails.rentalPlanCode" label="Rental Plan" :options="rentalPlanSet" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.paymentDetails.rentalModeCode" label="Rental Mode" :options="rentalModeOptions" />
+                          <q-select map-options emit-value placeholder="Choose from the below" color="grey-9" v-model="merchant.paymentDetails.rentalModeCode" label="Rental Mode" :options="rentalModeOptions" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
                             <p class="q-caption">Rental Type</p>
@@ -975,7 +975,7 @@
                           <q-input color="grey-9" v-model="merchant.bankInformation.bankDetails.branchName" label="Branch Name" placeholder="IFSC Code" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.bankInformation.bankDetails.feeType" label="Fee Type" :options="feeTypeOptions" />
+                          <q-select map-options emit-value placeholder="Choose from the below" color="grey-9" v-model="merchant.bankInformation.bankDetails.feeType" label="Fee Type" :options="feeTypeOptions" />
                         </div>
                         <div v-if="merchant.bankInformation.bankDetails.feeType == 'N' || merchant.bankInformation.bankDetails.feeType == 'S'" class="col-md-6 col-sm-12 col-xs-12">
                           <q-input color="grey-9" 
@@ -991,7 +991,7 @@
                           <q-input color="grey-9" v-model="merchant.bankInformation.bankDetails.bankName" label="Bank Name" placeholder="Bank Name" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.bankInformation.bankDetails.payment_mode" label="Payment mode" :options="paymnentModeOptions" />
+                          <q-select map-options emit-value placeholder="Choose from the below" color="grey-9" v-model="merchant.bankInformation.bankDetails.payment_mode" label="Payment mode" :options="paymnentModeOptions" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
                           <q-input color="grey-9" v-model="merchant.bankInformation.bankDetails.bankCityName" label="City" placeholder="City">
@@ -1014,7 +1014,7 @@
                           </q-input>
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.bankInformation.bankDetails.accountType" label="Account Type" :options="accountTypeOptions" />
+                          <q-select map-options emit-value placeholder="Choose from the below" color="grey-9" v-model="merchant.bankInformation.bankDetails.accountType" label="Account Type" :options="accountTypeOptions" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
                           <q-input color="grey-9" type="number" v-model="merchant.bankInformation.bankDetails.accountNumber" label="Bank A/c Number" placeholder="Bank A/c Number" />
@@ -1048,7 +1048,7 @@
                           <q-input color="grey-9" v-model="merchant.bankInformation.collectionDetails.chequeNumber" label="Cheque/UTR No" placeholder="Cheque/UTR No" />
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                          <q-select placeholder="Choose from the below" color="grey-9" v-model="merchant.bankInformation.collectionDetails.acquirerBank" label="Bank Name" :options="selectOptions" />
+                          <q-select map-options emit-value placeholder="Choose from the below" color="grey-9" v-model="merchant.bankInformation.collectionDetails.acquirerBank" label="Bank Name" :options="selectOptions" />
                         </div>
                       </div>
                       <q-stepper-navigation>

@@ -37,7 +37,7 @@
             <strong>Select Region</strong>
           </div>
           <div class="col-sm-6">
-            <q-select
+            <q-select map-options emit-value
               class="text-weight-regular text-grey-8"
               color="grey-9"
               v-model="formData.region"

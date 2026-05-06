@@ -71,7 +71,7 @@
                         </div>
 
                         <div class="col-md-6">
-                          <q-select
+                          <q-select map-options emit-value
                             @blur="fnClrCity"
                             color="grey-9"
                             v-model="additionalTerminal.AdditionalTerminalDetails.citySerNumberLabel"
@@ -87,7 +87,7 @@
                           />
                         </div>
                         <div class="col-md-6">
-                          <q-select
+                          <q-select map-options emit-value
                             @blur="fnClrState"
                             color="black-9"
                             v-model="additionalTerminal.AdditionalTerminalDetails.stateSerNumberLabel"
