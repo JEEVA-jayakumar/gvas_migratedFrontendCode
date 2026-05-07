@@ -104,8 +104,10 @@
                         v-if="item?.mimeType?.includes('application')"
                         class="ellipsis"
                       >
-                        <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" />
-                        &nbsp;{{item.fileName}}
+                        <div class="row items-center">
+                          <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" />
+                          &nbsp;{{item.fileName}}
+                        </div>
                       </q-item-section>
                       <q-item-section v-else-if="item?.mimeType?.includes('image')">
                         <!-- START >>If document type is image format -->
@@ -217,8 +219,10 @@
                               v-if="item?.mimeType?.includes('application')"
                               class="ellipsis"
                             >
-                              <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" />
-                              &nbsp;{{item.fileName}}
+                              <div class="row items-center">
+                                <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" />
+                                &nbsp;{{item.fileName}}
+                              </div>
                             </q-item-section>
                             <q-item-section v-else-if="item?.mimeType?.includes('image')">
                               <!-- START >>If document type is image format -->

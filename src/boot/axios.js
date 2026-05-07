@@ -28,15 +28,12 @@ export default boot(({ app, router }) => {
     config.headers["Access-Control-Allow-Origin"] = "*";
     config.headers["X-Frame-Options"] = "SAMEORIGIN";
 
-    if (
-      !config.url.includes("authorization/login") &&
-      !config.url.includes("authorization/password")
-    ) {
+    const isAuthEndpoint = config.url.includes("authorization/login") || config.url.includes("authorization/password");
+
+    if (!isAuthEndpoint) {
       const nii = localStorage.getItem("aa_t");
       if (nii) {
         config.headers["NII"] = nii;
-      } else {
-        delete config.headers["NII"];
       }
 
       const token = localStorage.getItem("auth_token");
