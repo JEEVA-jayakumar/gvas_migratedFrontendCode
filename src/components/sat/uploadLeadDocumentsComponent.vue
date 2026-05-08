@@ -28,10 +28,10 @@
     </q-item>
     <q-item separator class="q-body-1">
       <q-item-section>
-        <div class="full-width">
+        <div class="full-width" v-if="getShortLeadInfo">
           <div
             class="cursor-pointer"
-            v-if="getShortLeadInfo.applicationFileMimeType.includes('pdf')"
+            v-if="getShortLeadInfo.applicationFileMimeType && getShortLeadInfo.applicationFileMimeType.includes('pdf')"
           >
             <div @click="fnPDFViewModal(getShortLeadInfo.applicationFile)" class="ellipsis">
               <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" />
@@ -40,7 +40,7 @@
           </div>
           <div
             class="cursor-pointer"
-            v-else-if="getShortLeadInfo.applicationFileMimeType.includes('image')"
+            v-else-if="getShortLeadInfo.applicationFileMimeType && getShortLeadInfo.applicationFileMimeType.includes('image')"
           >
             <viewer
               :images="[GLOBAL_FILE_FETCH_URL+ '/'+getShortLeadInfo.applicationFile]"
@@ -57,25 +57,26 @@
               &nbsp;{{getShortLeadInfo.applicationFile}}
             </div>
           </div>
-          <div v-else>Invalid document type/ No document available</div>
+          <div v-else-if="!getShortLeadInfo.applicationFileMimeType">No document available</div>
+          <div v-else>Invalid document type</div>
         </div>
       </q-item-section>
     </q-item>
     <!-- END >> (Mandatory) Application form  -->
     <!-- START >> (Optional) payment document file == bank subvention  -->
     <q-item
-      v-if="getShortLeadInfo.paymentDocumentFile != ''"
+      v-if="getShortLeadInfo && getShortLeadInfo.paymentDocumentFile && getShortLeadInfo.paymentDocumentFile != ''"
       separator
       class="q-body-1 text-dark bg-grey-4 text-weight-medium"
     >
       <q-item-section>Bank Letter</q-item-section>
     </q-item>
-    <q-item v-if="getShortLeadInfo.paymentDocumentFile != ''" separator class="q-body-1">
+    <q-item v-if="getShortLeadInfo && getShortLeadInfo.paymentDocumentFile && getShortLeadInfo.paymentDocumentFile != ''" separator class="q-body-1">
       <q-item-section>
         <div class="full-width">
           <div
             class="cursor-pointer"
-            v-if="getShortLeadInfo.paymentDocumentMimeType.includes('pdf')"
+            v-if="getShortLeadInfo.paymentDocumentMimeType && getShortLeadInfo.paymentDocumentMimeType.includes('pdf')"
           >
             <div @click="fnPDFViewModal(getShortLeadInfo.paymentDocumentFile)" class="ellipsis">
               <q-btn round size="sm" icon="fas fa-file-pdf" color="primary" />
@@ -84,7 +85,7 @@
           </div>
           <div
             class="cursor-pointer"
-            v-else-if="getShortLeadInfo.paymentDocumentMimeType.includes('image')"
+            v-else-if="getShortLeadInfo.paymentDocumentMimeType && getShortLeadInfo.paymentDocumentMimeType.includes('image')"
           >
             <viewer
               :images="[GLOBAL_FILE_FETCH_URL+ '/'+getShortLeadInfo.paymentDocumentFile]"
@@ -111,17 +112,19 @@
     </div>
 
     <!-- START >> Handover to SAT, document upload -->
-    <div v-else class="group">
-      <template v-for="(singleDocument,singleDocumentIndex) in getShortLeadInfoDocumentTypes.uploadedDocuments.forSingleDocument"
+    <div v-else-if="uploadedDocuments" class="group">
+      <template v-for="(singleDocument,singleDocumentIndex) in uploadedDocuments.forSingleDocument"
         :key="singleDocumentIndex">
       <q-list
         class="no-padding"
         dense
-        v-if="getShortLeadInfoDocumentTypes && singleDocument.isQr != 1"
+        v-if="singleDocument && singleDocument.isQr != 1"
       >
-        <div
+        <template
           v-for="(document,documentIndex) in singleDocument.documents"
           :key="documentIndex"
+        >
+        <div
           class="border-bottom"
         >
         <!-- <p>Document Type: {{ document.documentType }}</p> -->
@@ -150,27 +153,24 @@
               </label>
             </q-item-section>
           </q-item>
-<!-- 
-            {{getShortLeadInfo.leadDocuments}} -->
-          <div
-            v-if="displayAttachedFileIndex == document.documentType"
-            v-for="
-          (displayAttachedFile,displayAttachedFileIndex) in getShortLeadInfo.leadDocuments"
+
+          <template
+            v-for="(displayAttachedFile, displayAttachedFileIndex) in (getShortLeadInfo && getShortLeadInfo.leadDocuments)"
             :key="displayAttachedFileIndex"
           >
-            <div
-              v-if="attachedSubFile.subDocumentType == document.subDocumentType"
-              v-for="
-            attachedSubFile in displayAttachedFile"
-              :key="attachedSubFile.id"
-            >
-              <q-item
-                dense
-                v-for="(filesAttachedEarlier,filesAttachedEarlierIndex) in attachedSubFile.uploadedDocuments"
-                :key="filesAttachedEarlierIndex"
-                class="q-body-1"
-                separator
+            <div v-if="document && displayAttachedFileIndex == document.documentType">
+              <template
+                v-for="attachedSubFile in displayAttachedFile"
+                :key="attachedSubFile.id"
               >
+                <div v-if="attachedSubFile.subDocumentType == document.subDocumentType">
+                  <q-item
+                    dense
+                    v-for="(filesAttachedEarlier,filesAttachedEarlierIndex) in attachedSubFile.uploadedDocuments"
+                    :key="filesAttachedEarlierIndex"
+                    class="q-body-1"
+                    separator
+                  >
                 <q-item-section>
                   <q-item-label class="q-body-1">
                     <div
@@ -221,23 +221,25 @@
                     label="Remove"
                   />
                 </q-item-section>
-              </q-item>
+                  </q-item>
+                </div>
+              </template>
             </div>
-          </div>
+          </template>
         </div>
+        </template>
       </q-list>
       </template>
       <div>
-      <template v-for="multipleDocument in getShortLeadInfoDocumentTypes.uploadedDocuments.forMutipleDocument"
+      <template v-for="multipleDocument in uploadedDocuments.forMutipleDocument"
         :key="multipleDocument.id">
       <q-list
         class="no-padding"
         dense
-        v-if="getShortLeadInfoDocumentTypes &&  multipleDocument.documentType.isQr != 1"
+        v-if="multipleDocument && multipleDocument.isQr != 1"
       >   
         <q-item-label header v-if="multipleDocument.isQr != 1" class="q-mb-sm bg-grey-4">{{multipleDocument.documentType}}
-         
-        </q-item-label header>
+        </q-item-label>
          
         <div>
           <q-item separator dense class="q-body-1 q-pa-sm">
@@ -250,12 +252,12 @@
                 @change="fnGetSubDocuments(multipleDocument.subDocumentTypeSelection)"
               >
                 <option disabled value="0">Choose from below</option>
-               <option
-                  v-for="type in multipleDocument.documents"
-                  :key="type.id"
-                  :value="type"
-                  v-if= "type.isQr!= 1"
-                >{{type.subDocumentType}}</option>
+               <template v-for="type in multipleDocument.documents" :key="type.id">
+                <option
+                    v-if= "type.isQr!= 1"
+                    :value="type"
+                  >{{type.subDocumentType}}</option>
+               </template>
 
               </select>
               
@@ -281,17 +283,16 @@
       
         <q-separator />
         
-        <div
-          v-if="displayAttachedFileIndex == multipleDocument.documentType"
-          v-for="
-            (displayAttachedFile,displayAttachedFileIndex) in getShortLeadInfo.leadDocuments"
-          :key="displayAttachedFileIndex"
-        >
-          <div
-            v-for="
-            attachedSubFile in displayAttachedFile"
+        <template
+            v-for="(displayAttachedFile, displayAttachedFileIndex) in (getShortLeadInfo && getShortLeadInfo.leadDocuments)"
+            :key="displayAttachedFileIndex"
+          >
+        <div v-if="multipleDocument && displayAttachedFileIndex == multipleDocument.documentType">
+          <template
+            v-for="attachedSubFile in displayAttachedFile"
             :key="attachedSubFile.id"
           >
+          <div>
             <q-item
               v-for="(filesAttachedEarlier,filesAttachedEarlierIndex) in attachedSubFile.uploadedDocuments"
               :key="filesAttachedEarlierIndex"
@@ -348,8 +349,9 @@
             </q-item>
             <q-separator />
           </div>
-          
+          </template>
         </div>
+        </template>
       </q-list>
       </template>
     </div>
@@ -386,9 +388,9 @@ export default {
         shortLead: this.propMerchantTypeFromSO,
         documentType: []
       },
-      merchantTypeSelection: this.propMerchantTypeFromSO.merchantType
-        .merchantTypeName,
-      subDocumentTypeSelection: 0
+      merchantTypeSelection: this.propMerchantTypeFromSO && this.propMerchantTypeFromSO.merchantType ? this.propMerchantTypeFromSO.merchantType.merchantTypeName : '',
+      subDocumentTypeSelection: 0,
+      uploadedDocuments: null
     };
   },
   computed: {
@@ -444,38 +446,44 @@ export default {
     },
 
     fnGetMerchantTypeValue(inputValue) {
+      if (!this.getShortLeadInfoDocumentTypes) return;
       let merchantDocumentCategory = _.find(
         this.getShortLeadInfoDocumentTypes,
         o => o.merchantType === inputValue
       );
-      // console.log("TEST");
+      if (!merchantDocumentCategory || !merchantDocumentCategory.documentsApplicable) return;
+
       let arr = {
         forSingleDocument: [],
         forMutipleDocument: []
       };
       let innerSelf = this;
-      let leadDocuments = innerSelf.getShortLeadInfo.leadDocuments;
-      // console.log("LEAD DOCUMENTSSSS",JSON.stringify(innerSelf.getShortLeadInfo));
-      merchantDocumentCategory.documentsApplicable.map(function(value, index) {
+      let leadDocuments = innerSelf.getShortLeadInfo ? innerSelf.getShortLeadInfo.leadDocuments : {};
+
+      merchantDocumentCategory.documentsApplicable.forEach(function(value) {
         if (value.viewType == 1) {
           arr.forSingleDocument.push(value);
         } else {
-          if (value.documentType in leadDocuments) {
+          if (leadDocuments && leadDocuments[value.documentType]) {
             let assumeArr = _.find(value.documents, function(oo) {
-              if (
-                leadDocuments.hasOwnProperty(oo.documentType) &&
-                (oo.subDocumentType ==
-                  leadDocuments[oo.documentType][0].subDocumentType ||
-                  leadDocuments[oo.documentType][0].documentType ==
-                    leadDocuments[oo.documentType][0].subDocumentType)
-              ) {
-                return oo.documentType;
+              const leadDocsForType = leadDocuments[oo.documentType];
+              if (leadDocsForType && leadDocsForType.length > 0) {
+                const firstDoc = leadDocsForType[0];
+                if (oo.subDocumentType == firstDoc.subDocumentType ||
+                    firstDoc.documentType == firstDoc.subDocumentType) {
+                  return true;
+                }
               }
+              return false;
             });
             if (assumeArr == undefined) {
               value["subDocumentTypeSelection"] = 0;
             } else {
               value["subDocumentTypeSelection"] = assumeArr;
+              // Ensure selectedSubDocumentType is set so Attach button appears
+              if (!assumeArr.selectedSubDocumentType) {
+                assumeArr.selectedSubDocumentType = assumeArr.subDocumentType;
+              }
             }
           } else {
             value["subDocumentTypeSelection"] = 0;
@@ -483,8 +491,8 @@ export default {
           arr.forMutipleDocument.push(value);
         }
       });
-      this.getShortLeadInfoDocumentTypes["uploadedDocuments"] = arr;
-      console.log("POS CHECK",JSON.stringify(arr))
+      this.uploadedDocuments = arr;
+      console.log("POS CHECK", JSON.stringify(arr));
     },
 
     fnGetSubDocuments(documentDetails) {
