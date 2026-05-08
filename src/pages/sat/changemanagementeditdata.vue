@@ -48,8 +48,8 @@
                     15 ||
                   this.getImplementedQueue.leadInformation.cmsLeadStatus == 21
                 "
-                @blur="v$.formdata.paymentOption.$touch"
-                :error="v$.formdata.paymentOption.$error"
+                @blur="v$.formdata?.paymentOption?.$touch"
+                :error="v$.formdata?.paymentOption?.$error"
                 v-model="formdata.paymentOption"
                 class="no-margin"
                 label="select Payment"
@@ -76,8 +76,8 @@
             </div>
             <div class="col-xs-12 col-sm-6">
               <q-select
-                @blur="v$.formdata.cmsCategoryType.$touch"
-                :error="v$.formdata.cmsCategoryType.$error"
+                @blur="v$.formdata?.cmsCategoryType?.$touch"
+                :error="v$.formdata?.cmsCategoryType?.$error"
                 placeholder="Choose from the below*"
                 color="grey-9"
                 v-model="formdata.cmsCategoryType"
@@ -138,8 +138,8 @@
             </div>
             <!-- <div class="col-xs-12 col-sm-6">
               <q-select clearable
-               @blur="v$.formdata.paymentOption.$touch"
-              :error="v$.formdata.paymentOption.$error"
+               @blur="v$.formdata?.paymentOption?.$touch"
+              :error="v$.formdata?.paymentOption?.$error"
               v-model="formdata.paymentOption"
                 class="no-margin"
                 label="select Payment"
@@ -206,8 +206,8 @@
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input
-              @blur="v$.formdata.paymentMadeon.$touch"
-              :error="v$.formdata.paymentMadeon.$error"
+              @blur="v$.formdata?.paymentMadeon?.$touch"
+              :error="v$.formdata?.paymentMadeon?.$error"
               v-model="formdata.paymentMadeon"
               class="text-weight-regular text-grey-8"
               color="grey-9"
@@ -229,8 +229,8 @@
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input
-              @blur="v$.formdata.referenceNumber.$touch"
-              :error="v$.formdata.referenceNumber.$error"
+              @blur="v$.formdata?.referenceNumber?.$touch"
+              :error="v$.formdata?.referenceNumber?.$error"
               v-model="formdata.referenceNumber"
               class="text-weight-regular text-grey-8"
               color="grey-9"
@@ -244,8 +244,8 @@
         >
           <div class="col-xs-12 col-sm-6">
             <q-input
-              @blur="v$.formdata.referenceNumber.$touch"
-              :error="v$.formdata.referenceNumber.$error"
+              @blur="v$.formdata?.referenceNumber?.$touch"
+              :error="v$.formdata?.referenceNumber?.$error"
               v-model="formdata.referenceNumber"
               class="text-weight-regular text-grey-8"
               color="grey-9"
@@ -254,8 +254,8 @@
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input
-              @blur="v$.formdata.paymentMadeon.$touch"
-              :error="v$.formdata.paymentMadeon.$error"
+              @blur="v$.formdata?.paymentMadeon?.$touch"
+              :error="v$.formdata?.paymentMadeon?.$error"
               v-model="formdata.paymentMadeon"
               class="text-weight-regular text-grey-8"
               color="grey-9"
@@ -281,8 +281,8 @@
         >
           <div class="col-xs-12 col-sm-6">
             <q-input
-              @blur="v$.formdata.referenceNumber.$touch"
-              :error="v$.formdata.referenceNumber.$error"
+              @blur="v$.formdata?.referenceNumber?.$touch"
+              :error="v$.formdata?.referenceNumber?.$error"
               v-model="formdata.referenceNumber"
               class="text-weight-regular text-grey-8"
               color="grey-9"
@@ -291,8 +291,8 @@
           </div>
           <div class="col-xs-12 col-sm-6">
             <q-input
-              @blur="v$.formdata.paymentMadeon.$touch"
-              :error="v$.formdata.paymentMadeon.$error"
+              @blur="v$.formdata?.paymentMadeon?.$touch"
+              :error="v$.formdata?.paymentMadeon?.$error"
               v-model="formdata.paymentMadeon"
               class="text-weight-regular text-grey-8"
               color="grey-9"
@@ -476,7 +476,7 @@
               color="grey-9"
               v-model="merchant.companyinformation.registeredCityName"
               label="City (type min 3 characters)*"
-              placeholder="Start typing ..*"
+              placeholder="Start typing .*"
               use-input
               hide-selected
               fill-input
@@ -491,7 +491,7 @@
               color="grey-9"
               v-model="merchant.companyinformation.registeredStateName"
               label="state (type min 3 characters)*"
-              placeholder="Start typing ..*"
+              placeholder="Start typing .*"
               use-input
               hide-selected
               fill-input
@@ -544,8 +544,8 @@
             <q-input
               upper-case
               color="grey-9"
-              @blur="v$.merchant.companyinformation.pan.$touch"
-              :error="v$.merchant.companyinformation.pan.$error"
+              @blur="v$.merchant?.companyinformation?.pan?.$touch"
+              :error="v$.merchant?.companyinformation?.pan?.$error"
               v-model="merchant.companyinformation.pan"
               class="no-margin"
               label="Pan Number"
@@ -560,18 +560,18 @@
             </div>
             <div
               class="text-negative q-py-xs group q-caption"
-              v-if="v$.merchant.companyinformation.pan.$error"
+              v-if="v$.merchant?.companyinformation?.pan?.$error"
             >
               <div>
                 <q-icon color="negative" name="warning" />&nbsp;Required -
                 Provide valid PAN Number
               </div>
-              <div v-if="v$.merchant.companyinformation.pan.$params.minLength">
+              <div v-if="v$.merchant?.companyinformation?.pan?.minLength?.$params">
                 <q-icon color="negative" name="warning" />
                 &nbsp;Length should be between
-                {{ v$.merchant.companyinformation.pan.$params.minLength.min }}
+                {{ v$.merchant?.companyinformation?.pan?.minLength?.$params?.min }}
                 and
-                {{ v$.merchant.companyinformation.pan.$params.maxLength.max }}
+                {{ v$.merchant?.companyinformation?.pan?.maxLength?.$params?.max }}
               </div>
             </div>
           </div>
@@ -579,8 +579,8 @@
             <q-input
               upper-case
               color="grey-9"
-              @blur="v$.merchant.businessInformation.gstId.$touch"
-              :error="v$.merchant.businessInformation.gstId.$error"
+              @blur="v$.merchant?.businessInformation?.gstId?.$touch"
+              :error="v$.merchant?.businessInformation?.gstId?.$error"
               v-model="merchant.businessInformation.gstId"
               class="no-margin"
               label="Gst Number"
@@ -596,23 +596,23 @@
 
             <div
               class="text-negative q-py-xs group q-caption"
-              v-if="v$.merchant.businessInformation.gstId.$error"
+              v-if="v$.merchant?.businessInformation?.gstId?.$error"
             >
               <div>
                 <q-icon color="negative" name="warning" />&nbsp;Required -
                 Provide valid GST Number
               </div>
               <div
-                v-if="v$.merchant.businessInformation.gstId.$params.minLength"
+                v-if="v$.merchant?.businessInformation?.gstId?.minLength?.$params"
               >
                 <q-icon color="negative" name="warning" />
                 &nbsp;Length should be between
                 {{
-                  v$.merchant.businessInformation.gstId.$params.minLength.min
+                  v$.merchant?.businessInformation?.gstId?.minLength?.$params?.min
                 }}
                 and
                 {{
-                  v$.merchant.businessInformation.gstId.$params.maxLength.max
+                  v$.merchant?.businessInformation?.gstId?.maxLength?.$params?.max
                 }}
               </div>
             </div>
@@ -1827,7 +1827,7 @@
               class="no-margin"
               label="Amount Collected"
             />
-            <!--   :error="v$.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata?.leadSource?.$error" -->
           </div>
         </div>
         <br />
@@ -1847,7 +1847,7 @@
               class="no-margin"
               label="Recurring Fees"
             />
-            <!--   :error="v$.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata?.leadSource?.$error" -->
           </div>
         </div>
         <br />
@@ -1871,7 +1871,7 @@
               emit-value
               map-options
             />
-            <!-- :error="v$.formdata.count.$error" -->
+            <!-- :error="v$.formdata?.count?.$error" -->
           </div>
         </div>
         <div class="row items-center q-col-gutter-md">
@@ -1892,7 +1892,7 @@
               :val="item.value"
               :label="item.label"
             />
-            <!--   :error="v$.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata?.leadSource?.$error" -->
           </div>
         </div>
         <br />
@@ -1914,7 +1914,7 @@
               :val="item.value"
               :label="item.label"
             />
-            <!--   :error="v$.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata?.leadSource?.$error" -->
           </div>
         </div>
         <br />
@@ -1936,7 +1936,7 @@
               :val="item.value"
               :label="item.label"
             />
-            <!--   :error="v$.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata?.leadSource?.$error" -->
           </div>
         </div>
         <br />
@@ -1958,7 +1958,7 @@
               :val="item.value"
               :label="item.label"
             />
-            <!--   :error="v$.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata?.leadSource?.$error" -->
           </div>
         </div>
         <br />
@@ -1980,7 +1980,7 @@
               :val="item.value"
               :label="item.label"
             />
-            <!--   :error="v$.formdata.leadSource.$error" -->
+            <!--   :error="v$.formdata?.leadSource?.$error" -->
           </div>
         </div>
         <br />
@@ -2030,8 +2030,8 @@ import {
 } from "@vuelidate/validators";
 import { mapGetters, mapActions } from "vuex";
 
-import MarsErrorResponse from "../../components/MarsErrorResponseHandler.vue";
-import showPdfModalComponent from "../../components/sat/showPdfModalComponent.vue";
+import MarsErrorResponse from "././components/MarsErrorResponseHandler.vue";
+import showPdfModalComponent from "././components/sat/showPdfModalComponent.vue";
 
 import { helpers } from "@vuelidate/validators";
 const panCard = helpers.regex(
@@ -2286,25 +2286,25 @@ export default {
   },
 
   computed: {
-    ...mapGetters("SatLeadValidation", [
+    .mapGetters("SatLeadValidation", [
       "getShortLeadInfo",
       "getDeviceVerificationStatus",
       "getShortLeadInfoDocumentTypes",
     ]),
-    ...mapGetters("mars_rentalPlans", ["rentalPlanFromMars"]),
-    ...mapGetters("categoryBasedRental", ["categoryBasedRental"]),
-    ...mapGetters("GlobalVariables", ["GLOBAL_FILE_FETCH_URL"]),
-    ...mapGetters("SA_Devices", ["getAllDevicesInfo"]),
-    ...mapGetters("leadSource", ["getActiveLeadSource"]),
-    ...mapGetters("plan", ["getActivePlan"]),
-    ...mapGetters("GetMarsData", [
+    .mapGetters("mars_rentalPlans", ["rentalPlanFromMars"]),
+    .mapGetters("categoryBasedRental", ["categoryBasedRental"]),
+    .mapGetters("GlobalVariables", ["GLOBAL_FILE_FETCH_URL"]),
+    .mapGetters("SA_Devices", ["getAllDevicesInfo"]),
+    .mapGetters("leadSource", ["getActiveLeadSource"]),
+    .mapGetters("plan", ["getActivePlan"]),
+    .mapGetters("GetMarsData", [
       "getAllMarsData",
       "getImplementedQueue",
       "getMidBasedList",
     ]),
-    ...mapGetters("mars_city", ["cityFromMars"]),
-    ...mapGetters("mars_state", ["stateFromMars"]),
-    ...mapGetters("mars_ifsc", ["ifscFromMars"]),
+    .mapGetters("mars_city", ["cityFromMars"]),
+    .mapGetters("mars_state", ["stateFromMars"]),
+    .mapGetters("mars_ifsc", ["ifscFromMars"]),
     getRsmReason() {
       return _.find(
         this.getImplementedQueue.leadInformation.leadVerificationStatus,
@@ -2346,24 +2346,24 @@ export default {
     },
   },
   methods: {
-    ...mapActions("mars_rentalPlans", ["RENTAL_PLAN_FROM_MARS"]),
-    ...mapActions("categoryBasedRental", ["CATEGORY_BASED_RENTAL_PLAN1"]),
-    ...mapActions("mars_city", ["CITY_FROM_MARS"]),
-    ...mapActions("mars_state", ["STATE_FROM_MARS"]),
-    ...mapActions("mars_ifsc", ["IFSC_FROM_MARS"]),
-    ...mapActions("SA_Devices", ["FETCH_DEVICES_DATA"]),
-    ...mapActions("GetMarsData", [
+    .mapActions("mars_rentalPlans", ["RENTAL_PLAN_FROM_MARS"]),
+    .mapActions("categoryBasedRental", ["CATEGORY_BASED_RENTAL_PLAN1"]),
+    .mapActions("mars_city", ["CITY_FROM_MARS"]),
+    .mapActions("mars_state", ["STATE_FROM_MARS"]),
+    .mapActions("mars_ifsc", ["IFSC_FROM_MARS"]),
+    .mapActions("SA_Devices", ["FETCH_DEVICES_DATA"]),
+    .mapActions("GetMarsData", [
       "FETCH_MARS_DATA",
       "IMPLEMENTED_QUEUE",
       "MIDBASEDLIST",
     ]),
-    ...mapActions("leadSource", ["LEAD_SOURCE_ACTIVE_LIST"]),
-    ...mapActions("CategoryBasedMdr", [
+    .mapActions("leadSource", ["LEAD_SOURCE_ACTIVE_LIST"]),
+    .mapActions("CategoryBasedMdr", [
       "CATEGORY_BASED_MDR_PLAN",
       "EDIT_MDR_PLAN",
     ]),
-    ...mapActions("mars_final_submit_internal", ["MARS_FINAL_SUBMIT_INTERNAL"]),
-    ...mapActions("SatLeadValidation", [
+    .mapActions("mars_final_submit_internal", ["MARS_FINAL_SUBMIT_INTERNAL"]),
+    .mapActions("SatLeadValidation", [
       "FEED_HAND_OVER_TO_SAT_DOCUMENT",
       "FEED_CHEQUE_FORM",
       "FEED_FULL_APPLICATION_FORM",
@@ -2372,9 +2372,9 @@ export default {
       "FETCH_SHORT_LEAD_DATA",
       "MOVE_BACK_DOCUMENT_VERIFICATION_STAGE",
     ]),
-    ...mapActions("SendTORSMCMS", ["SEND_TO_RSM_CMS"]),
-    ...mapActions("plan", ["PLAN_ACTIVE_LIST"]),
-    ...mapActions("CMS_EDIT_MDR", [
+    .mapActions("SendTORSMCMS", ["SEND_TO_RSM_CMS"]),
+    .mapActions("plan", ["PLAN_ACTIVE_LIST"]),
+    .mapActions("CMS_EDIT_MDR", [
       "CMS_EDIT_MDR",
       "CMS_EDIT_MERCHANT",
       "CMS_EDIT_KYC",
@@ -2383,8 +2383,8 @@ export default {
     ]),
 
     sendtoFinance(request) {
-      this.v$.formdata.$touch();
-      if (this.v$.formdata.$error) {
+      this.v$.formdata?.$touch();
+      if (this.v$.formdata?.$error) {
         this.$q.notify("Please review fields again.");
       } else if (
         this.formdata.paymentOption == 2 &&
@@ -2580,7 +2580,7 @@ export default {
     },
     fnVerificationDocumentUpload(event, documentDetails) {
       this.merchant.kyc.documents = [];
-      this.$q.loading.show({ spinnerColor: "purple-9", message: "Uploading file .." });
+      this.$q.loading.show({ spinnerColor: "purple-9", message: "Uploading file ." });
       let formData = new FormData();
       formData.append("file", event.target.files[0]);
 
@@ -2615,7 +2615,7 @@ export default {
       });
     },
     ajaxLoadMarsData() {
-      this.$q.loading.show({ spinnerColor: "purple-9", message: "Fetching data .." });
+      this.$q.loading.show({ spinnerColor: "purple-9", message: "Fetching data ." });
       this.IMPLEMENTED_QUEUE(this.$route.params.id)
         .then(() => {
           this.FETCH_SHORT_LEAD_DATA(this.getImplementedQueue.leadInformation.id);
@@ -2689,7 +2689,7 @@ export default {
         .catch(() => { this.$q.loading.hide(); });
     },
     fnUploadApplicationForm(event) {
-      this.$q.loading.show({ spinnerColor: "purple-9", message: "Uploading file .." });
+      this.$q.loading.show({ spinnerColor: "purple-9", message: "Uploading file ." });
       let formData = new FormData();
       formData.append("file", event.target.files[0]);
       formData.append("fileNameOriginal", "Cheque");
@@ -2707,7 +2707,7 @@ export default {
         });
     },
     ajaxLoadShortLeadInfoForDocumentTypes() {
-      this.$q.loading.show({ spinnerColor: "purple-9", message: "Fetching files .." });
+      this.$q.loading.show({ spinnerColor: "purple-9", message: "Fetching files ." });
       this.FETCH_LEAD_DOCUMENT_TYPE_DATA()
         .then(() => {
           return this.fnGetMerchantTypeValue(this.getImplementedQueue.leadInformation.merchantType.merchantTypeName);
@@ -2719,7 +2719,7 @@ export default {
         .catch(() => { this.$q.loading.hide(); });
     },
     fnUploadApplicationForm1(event) {
-      this.$q.loading.show({ spinnerColor: "purple-9", message: "Uploading file .." });
+      this.$q.loading.show({ spinnerColor: "purple-9", message: "Uploading file ." });
       let formData = new FormData();
       formData.append("file", event.target.files[0]);
       this.merchant.kyc.documents = [];
@@ -2781,7 +2781,7 @@ export default {
           ok: "Continue",
           cancel: "Cancel",
         }).onOk(() => {
-          this.$q.loading.show({ spinnerColor: "purple-9", message: "Processing .." });
+          this.$q.loading.show({ spinnerColor: "purple-9", message: "Processing ." });
           this.DELETE_DOCUMENT_FROM_BY_SAT(documentDetails)
             .then(() => {
               this.shortLeadInfo();
@@ -2797,7 +2797,7 @@ export default {
       this.$refs.multiAttachedImageViewer.click();
     },
     fnVerificationDocumentUploadSingleUpload(event, documentDetails) {
-      this.$q.loading.show({ spinnerColor: "purple-9", message: "Uploading file .." });
+      this.$q.loading.show({ spinnerColor: "purple-9", message: "Uploading file ." });
       let formData = new FormData();
       formData.append("file", event.target.files[0]);
       this.merchant.kyc.documents = [];
@@ -2912,7 +2912,7 @@ export default {
         params: {
           merchant: {
             companyInformation: request.companyinformation,
-            businessInformation: { ...request.businessInformation, gstId: this.merchant.businessInformation.gstId },
+            businessInformation: { .request.businessInformation, gstId: this.merchant.businessInformation.gstId },
             paymentDetails: request.paymentDetails,
             bankInformation: request.bankInformation,
             mdrPlan: request.mdrPlan,
@@ -2984,7 +2984,7 @@ export default {
       });
     },
     marsInfo() {
-      this.$q.loading.show({ spinnerColor: "purple-9", message: "Fetching data .." });
+      this.$q.loading.show({ spinnerColor: "purple-9", message: "Fetching data ." });
       this.FETCH_MARS_DATA(this.getImplementedQueue.leadInformation.id)
         .then(() => {
           this.shortLeadInfo();
@@ -3042,7 +3042,7 @@ export default {
       this.MidBasedList();
     },
     MidBasedList() {
-      this.$q.loading.show({ spinnerColor: "purple-9", message: "Fetching data .." });
+      this.$q.loading.show({ spinnerColor: "purple-9", message: "Fetching data ." });
       this.MIDBASEDLIST(this.getImplementedQueue.mid)
         .then(() => {
           this.formdata.mid = this.getMidBasedList.tids;
@@ -3112,7 +3112,7 @@ export default {
           this.$q.loading.show({
             delay: 0, // ms
             spinnerColor: "purple-9",
-            message: "Processing ..",
+            message: "Processing .",
           });
           this.MOVE_BACK_DOCUMENT_VERIFICATION_STAGE(formData).then(() => {
             this.$router.push("/sat/lead/validation/" + this.$route.params.id);
@@ -3124,8 +3124,8 @@ export default {
       this.$refs.stepper.next();
     },
     next() {
-      this.v$.merchant.$touch();
-      if (this.v$.merchant.$error) {
+      this.v$.merchant?.$touch();
+      if (this.v$.merchant?.$error) {
         this.$q.notify("Please review the KYC information fields again.");
       } else {
         if (
