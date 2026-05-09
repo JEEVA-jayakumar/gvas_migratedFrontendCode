@@ -347,7 +347,11 @@
           caption="Related documents"
           inset-separator
         >
-          <showMarsForm :propLeadDeatils="formData.shortLead"></showMarsForm>
+          <showMarsForm
+            :propLeadDeatils="formData.shortLead"
+            @emitTriggerComponentHotLoad="ajaxLoadLeadDataEntryInfo"
+            @emitAjaxLoadShortLeadInfo="ajaxLoadLeadDataEntryInfo"
+          ></showMarsForm>
         </q-expansion-item>
       </q-list>
       <!-- START >> COMPONENT: View PDF  -->

@@ -21,20 +21,19 @@ export default boot(({ app, router }) => {
       // Allow Axios to set the correct Content-Type with boundary for FormData
       delete config.headers["Content-Type"];
     } else {
-      config.headers["Content-Type"] = "application/json;charset=UTF-8";
+      config.headers["Content-Type"] = "application/json";
     }
     config.headers["Accept"] = "application/json, text/plain, */*";
     config.headers["X-Requested-With"] = "XMLHttpRequest";
+    config.headers["Access-Control-Allow-Origin"] = "*";
+    config.headers["X-Frame-Options"] = "SAMEORIGIN";
 
-    if (
-      !config.url.includes("authorization/login") &&
-      !config.url.includes("authorization/password")
-    ) {
+    const isAuthEndpoint = config.url.includes("authorization/login") || config.url.includes("authorization/password");
+
+    if (!isAuthEndpoint) {
       const nii = localStorage.getItem("aa_t");
       if (nii) {
         config.headers["NII"] = nii;
-      } else {
-        delete config.headers["NII"];
       }
 
       const token = localStorage.getItem("auth_token");

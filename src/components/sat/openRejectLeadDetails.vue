@@ -24,31 +24,31 @@
           Reason Type
         </div>
         <q-radio
-          @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
-          :error="v$.formData.leadVerificationStatus.reasonType.$error"
+          @blur="v$.formData?.leadVerificationStatus?.reasonType?.$touch"
+          :error="v$.formData?.leadVerificationStatus?.reasonType?.$error"
           v-model="formData.leadVerificationStatus.reasonType"
           val="Wrong Device Type"
           color="grey-9"
           label="Wrong Device Type"
         />
         <q-radio
-          @blur="v$.formData.leadVerificationStatus.reasonType.$touch"
-          :error="v$.formData.leadVerificationStatus.reasonType.$error"
+          @blur="v$.formData?.leadVerificationStatus?.reasonType?.$touch"
+          :error="v$.formData?.leadVerificationStatus?.reasonType?.$error"
           v-model="formData.leadVerificationStatus.reasonType"
           val="Others"
           color="grey-9"
           label="Others"
         />
-        <div class="text-negative q-py-xs group q-caption" v-if="v$.formData.leadVerificationStatus.reasonType.$error">
-          <div v-if="v$.formData.leadVerificationStatus.reasonType.$params.required">
+        <div class="text-negative q-py-xs group q-caption" v-if="v$.formData?.leadVerificationStatus?.reasonType?.$error">
+          <div v-if="v$.formData?.leadVerificationStatus?.reasonType?.required?.$params">
             <q-icon color="negative" name="warning" />&nbsp;Required
           </div>
         </div>
         <q-input
           type="textarea"
-          placeholder="Type Your Reason Here...."
-          @blur="v$.formData.leadVerificationStatus.reason.$touch"
-          :error="v$.formData.leadVerificationStatus.reason.$error"
+          placeholder="Type Your Reason Here."
+          @blur="v$.formData?.leadVerificationStatus?.reason?.$touch"
+          :error="v$.formData?.leadVerificationStatus?.reason?.$error"
           class="q-my-md"
           color="grey-9"
           align="left"
@@ -126,21 +126,21 @@ export default {
     this.formData.leadInformation.verifiedFinanceStatus = this.propShowRejectLeadDetailsComponent.leadInformation.verifiedFinanceStatus;
   },
   computed: {
-    ...mapGetters("SA_Devices", ["getAllDevicesInfo"]),
-    ...mapGetters("SatLeadValidation", ["getShortLeadInfo"])
+    .mapGetters("SA_Devices", ["getAllDevicesInfo"]),
+    .mapGetters("SatLeadValidation", ["getShortLeadInfo"])
   },
   methods: {
-    ...mapActions("Finance", ["REJECT_LEAD_EXCEPTION"]),
-    ...mapActions("commonLoader", ["TOGGLE_COMMON_LOADER"]),
-    ...mapActions("SA_Devices", ["FETCH_DEVICES_DATA"]),
-    ...mapActions("SatLeadValidation", ["FETCH_SHORT_LEAD_DATA"]),
+    .mapActions("Finance", ["REJECT_LEAD_EXCEPTION"]),
+    .mapActions("commonLoader", ["TOGGLE_COMMON_LOADER"]),
+    .mapActions("SA_Devices", ["FETCH_DEVICES_DATA"]),
+    .mapActions("SatLeadValidation", ["FETCH_SHORT_LEAD_DATA"]),
     emitToggleReject(showRejectLeadDetailsModel) {
       this.$emit("closeRejectLeadDetailsModel", "closeReject");
     },
     leadRejectSubmit(formData) {
       // let
-      this.v$.formData.$touch();
-      if (this.v$.formData.$error) {
+      this.v$.formData?.$touch();
+      if (this.v$.formData?.$error) {
         this.$q.notify("Please review fields again.");
       } else {
         this.$q
@@ -153,7 +153,7 @@ export default {
             this.$q.loading.show({
               delay: 0, // ms
               spinnerColor: "purple-9",
-              message: "Processing .."
+              message: "Processing ."
             });
             this.REJECT_LEAD_EXCEPTION(formData)
               .then(() => {
