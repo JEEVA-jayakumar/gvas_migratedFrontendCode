@@ -40,7 +40,7 @@
           label="Others"
         />
         <div class="text-negative q-py-xs group q-caption" v-if="v$.formData?.leadVerificationStatus?.reasonType?.$error">
-          <div v-if="v$.formData?.leadVerificationStatus?.reasonType?.required?.$params">
+          <div v-if="v$.formData?.leadVerificationStatus?.reasonType?.required?.$invalid">
             <q-icon color="negative" name="warning" />&nbsp;Required
           </div>
         </div>
@@ -68,6 +68,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import { useVuelidate } from '@vuelidate/core';
 
@@ -126,14 +127,14 @@ export default {
     this.formData.leadInformation.verifiedFinanceStatus = this.propShowRejectLeadDetailsComponent.leadInformation.verifiedFinanceStatus;
   },
   computed: {
-    .mapGetters("SA_Devices", ["getAllDevicesInfo"]),
-    .mapGetters("SatLeadValidation", ["getShortLeadInfo"])
+    ...mapGetters("SA_Devices", ["getAllDevicesInfo"]),
+    ...mapGetters("SatLeadValidation", ["getShortLeadInfo"])
   },
   methods: {
-    .mapActions("Finance", ["REJECT_LEAD_EXCEPTION"]),
-    .mapActions("commonLoader", ["TOGGLE_COMMON_LOADER"]),
-    .mapActions("SA_Devices", ["FETCH_DEVICES_DATA"]),
-    .mapActions("SatLeadValidation", ["FETCH_SHORT_LEAD_DATA"]),
+    ...mapActions("Finance", ["REJECT_LEAD_EXCEPTION"]),
+    ...mapActions("commonLoader", ["TOGGLE_COMMON_LOADER"]),
+    ...mapActions("SA_Devices", ["FETCH_DEVICES_DATA"]),
+    ...mapActions("SatLeadValidation", ["FETCH_SHORT_LEAD_DATA"]),
     emitToggleReject(showRejectLeadDetailsModel) {
       this.$emit("closeRejectLeadDetailsModel", "closeReject");
     },
