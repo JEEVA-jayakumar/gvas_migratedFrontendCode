@@ -217,9 +217,9 @@
                   <div>
                     <q-icon color="negative" name="warning" />&nbsp;Required - Provide valid PAN Number
                   </div>
-                  <div v-if="v$.merchant?.companyinformation?.pan?.minLength?.$params">
+                  <div v-if="v$.merchant?.companyinformation?.pan?.minLength?.$invalid">
                     <q-icon color="negative" name="warning" />
-                    &nbsp;Length should be between {{v$.merchant?.companyinformation?.pan?.minLength?.$params?.min}} and {{ v$.merchant?.companyinformation?.pan?.maxLength?.$params?.max }}
+                    &nbsp;Length should be between {{v$.merchant?.companyinformation?.pan?.minLength?.$invalid?.min}} and {{ v$.merchant?.companyinformation?.pan?.maxLength?.$invalid?.max }}
                   </div>
                 </div>
             </div>
@@ -241,9 +241,9 @@
                   <div>
                     <q-icon color="negative" name="warning" />&nbsp;Required - Provide valid GST Number
                   </div>
-                  <div v-if="v$.merchant?.businessInformation?.gstId?.minLength?.$params">
+                  <div v-if="v$.merchant?.businessInformation?.gstId?.minLength?.$invalid">
                     <q-icon color="negative" name="warning" />
-                    &nbsp;Length should be between {{v$.merchant?.businessInformation?.gstId?.minLength?.$params?.min}} and {{ v$.merchant?.businessInformation?.gstId?.maxLength?.$params?.max }}
+                    &nbsp;Length should be between {{v$.merchant?.businessInformation?.gstId?.minLength?.$invalid?.min}} and {{ v$.merchant?.businessInformation?.gstId?.maxLength?.$invalid?.max }}
                   </div>
                 </div> 
             </div>
@@ -1340,8 +1340,8 @@ import moment from "moment";
 import { mapGetters, mapActions } from "vuex";
 import { uid } from "quasar";
 
-import MarsErrorResponse from "././components/MarsErrorResponseHandler.vue";
-import showPdfModalComponent from "././components/sat/showPdfModalComponent.vue";
+import MarsErrorResponse from "../../components/MarsErrorResponseHandler.vue";
+import showPdfModalComponent from "../../components/sat/showPdfModalComponent.vue";
 
 import { helpers } from "@vuelidate/validators";
 const panCard = helpers.regex(
@@ -1717,26 +1717,26 @@ export default {
  
 
     computed: {
-    .mapGetters("SatLeadValidation", [
+    ...mapGetters("SatLeadValidation", [
       "getShortLeadInfo",
       "getDeviceVerificationStatus"
     ]),
-    .mapGetters("categoryBasedRental", ["categoryBasedRental"]),
-    .mapGetters("GlobalVariables", ["GLOBAL_FILE_FETCH_URL"]),
-    .mapGetters("SA_Devices", ["getAllDevicesInfo"]),
-    .mapGetters("leadSource", ["getActiveLeadSource"]),
-    .mapGetters("plan", ["getActivePlan"]),
-    .mapGetters("CategoryBasedMdr", ["categoryBasedMdr"]),
-    // .mapGetters("GetMarsData", ["getAllMarsData"]),
-     .mapGetters("GetMarsData", ["getAllMarsData", "getImplementedQueue"]),
-        .mapGetters("SatLeadValidation", [
+    ...mapGetters("categoryBasedRental", ["categoryBasedRental"]),
+    ...mapGetters("GlobalVariables", ["GLOBAL_FILE_FETCH_URL"]),
+    ...mapGetters("SA_Devices", ["getAllDevicesInfo"]),
+    ...mapGetters("leadSource", ["getActiveLeadSource"]),
+    ...mapGetters("plan", ["getActivePlan"]),
+    ...mapGetters("CategoryBasedMdr", ["categoryBasedMdr"]),
+    // ...mapGetters("GetMarsData", ["getAllMarsData"]),
+     ...mapGetters("GetMarsData", ["getAllMarsData", "getImplementedQueue"]),
+        ...mapGetters("SatLeadValidation", [
       "getShortLeadInfo",
       "getDeviceVerificationStatus",
       "getShortLeadInfoDocumentTypes"
     ]),
-      .mapGetters("mars_city", ["cityFromMars"]),
-      .mapGetters("mars_state", ["stateFromMars"]),
-        .mapGetters("mars_ifsc", ["ifscFromMars"]),
+      ...mapGetters("mars_city", ["cityFromMars"]),
+      ...mapGetters("mars_state", ["stateFromMars"]),
+        ...mapGetters("mars_ifsc", ["ifscFromMars"]),
                          getRsmReason() {
       return _.find(this.getImplementedQueue.leadInformation.leadVerificationStatus, function(oo) {
         return oo.verificationType == 4 && oo.status == false && oo.role.role=="RSM";
@@ -1790,24 +1790,24 @@ export default {
        }
     },
     methods: {
-    .mapActions("SatLeadValidation", [
+    ...mapActions("SatLeadValidation", [
       "FETCH_SHORT_LEAD_DATA",
       "VERIFY_DEVICE_FULL_LEAD"
     ]),
-        .mapActions("categoryBasedRental", ["CATEGORY_BASED_RENTAL_PLAN1"]),
-    .mapActions("mars_city", ["CITY_FROM_MARS"]),
-     .mapActions("mars_state", ["STATE_FROM_MARS"]),
-       .mapActions("mars_ifsc", ["IFSC_FROM_MARS"]),
-    .mapActions("SA_Devices", ["FETCH_DEVICES_DATA"]),
-    // .mapActions("GetMarsData", ["FETCH_MARS_DATA"]),
-     .mapActions("GetMarsData", ["FETCH_MARS_DATA", "IMPLEMENTED_QUEUE"]),
-    .mapActions("leadSource", ["LEAD_SOURCE_ACTIVE_LIST"]),
-    .mapActions("MdrPlan", ["MDR_PLAN"]),
-    .mapActions("CategoryBasedMdr", [
+        ...mapActions("categoryBasedRental", ["CATEGORY_BASED_RENTAL_PLAN1"]),
+    ...mapActions("mars_city", ["CITY_FROM_MARS"]),
+     ...mapActions("mars_state", ["STATE_FROM_MARS"]),
+       ...mapActions("mars_ifsc", ["IFSC_FROM_MARS"]),
+    ...mapActions("SA_Devices", ["FETCH_DEVICES_DATA"]),
+    // ...mapActions("GetMarsData", ["FETCH_MARS_DATA"]),
+     ...mapActions("GetMarsData", ["FETCH_MARS_DATA", "IMPLEMENTED_QUEUE"]),
+    ...mapActions("leadSource", ["LEAD_SOURCE_ACTIVE_LIST"]),
+    ...mapActions("MdrPlan", ["MDR_PLAN"]),
+    ...mapActions("CategoryBasedMdr", [
       "CATEGORY_BASED_MDR_PLAN",
       "EDIT_MDR_PLAN"
     ]),
-        .mapActions("SatLeadValidation", [
+        ...mapActions("SatLeadValidation", [
       "FEED_HAND_OVER_TO_SAT_DOCUMENT",
       "FEED_CHEQUE_FORM",
       "FEED_FULL_APPLICATION_FORM",
@@ -1815,13 +1815,13 @@ export default {
       "FETCH_LEAD_DOCUMENT_TYPE_DATA",
       "FETCH_SHORT_LEAD_DATA"
     ]),
-    .mapActions("SatLeadValidation", [
+    ...mapActions("SatLeadValidation", [
       "MOVE_BACK_DOCUMENT_VERIFICATION_STAGE"
     ]),
-    .mapActions("SendTORSMCMS", [
+    ...mapActions("SendTORSMCMS", [
       "SEND_TO_RSM_CMS"]),
-    .mapActions("plan", ["PLAN_ACTIVE_LIST"]),
-    .mapActions("CMS_EDIT_MDR", ["CMS_EDIT_MDR","CMS_EDIT_MERCHANT","CMS_EDIT_KYC","CMS_EDIT_TERMINAL","CMS_STATUS_CHANGE"]),
+    ...mapActions("plan", ["PLAN_ACTIVE_LIST"]),
+    ...mapActions("CMS_EDIT_MDR", ["CMS_EDIT_MDR","CMS_EDIT_MERCHANT","CMS_EDIT_KYC","CMS_EDIT_TERMINAL","CMS_STATUS_CHANGE"]),
     
      
     
