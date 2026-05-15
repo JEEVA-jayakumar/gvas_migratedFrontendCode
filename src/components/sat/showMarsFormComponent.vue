@@ -818,7 +818,7 @@
  </div>
 
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value use-input fill-input hide-selected @blur="fnClrRegisteredCity" :error="
+ <q-select map-options use-input fill-input hide-selected @blur="fnClrRegisteredCity" :error="
  autoCompleteError(
  v$.merchant?.companyInformation?.registeredCityRefCode,
  v$.merchant?.companyInformation?.registeredCityName
@@ -867,7 +867,7 @@
  </div>
 
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value use-input fill-input hide-selected @blur="fnClrRegisteredState" :error="
+ <q-select map-options use-input fill-input hide-selected @blur="fnClrRegisteredState" :error="
  autoCompleteError(
  v$.merchant?.companyInformation?.registeredStateRefCode,
  v$.merchant?.companyInformation?.registeredStateName
@@ -930,11 +930,11 @@
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value @blur="v$.merchant.companyInformation?.constitutionName?.$touch" :error="
+ <q-select map-options @blur="v$.merchant.companyInformation?.constitutionName?.$touch" :error="
  v$.merchant?.companyInformation?.constitutionName?.$error
  " placeholder="Choose from the below*" color="grey-9"
  v-model.trim="merchant.companyInformation.constitutionName" label="Type of Business Entity*"
- :options="merchantOptions" />
+ :options="merchantOptions" @update:model-value="val => { merchant.companyInformation.constitution = val.value; merchant.companyInformation.constitutionName = val.label; }" />
 
  <div class="text-negative" v-if="
  error.field.merchant?.companyInformation?.constitutionName
@@ -1110,7 +1110,7 @@
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value use-input fill-input hide-selected @blur="v$.merchant.companyInformation?.mcc?.$touch" :error="
+ <q-select map-options use-input fill-input hide-selected @blur="v$.merchant.companyInformation?.mcc?.$touch" :error="
  autoCompleteError(
  v$.merchant?.companyInformation?.mcc,
  v$.merchant?.companyInformation?.mccname
@@ -1161,7 +1161,7 @@
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value use-input fill-input hide-selected @blur="
+ <q-select map-options use-input fill-input hide-selected @blur="
  v$.merchant?.companyInformation?.residentialCityRefCode?.$touch
  " :error="
  autoCompleteError(
@@ -1192,7 +1192,7 @@
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value use-input fill-input hide-selected @blur="
+ <q-select map-options use-input fill-input hide-selected @blur="
  v$.merchant?.companyInformation?.residentialStateRefCode
  .$touch;
  " :error="
@@ -5718,7 +5718,7 @@
  class="text-weight-regular text-grey-8" color="grey-9" :options="vasBasedOnInstance" /> -->
  <!-- <q-option-group :key="vasKey" inline type="checkbox" v-model.trim="tmpVasMapping"
  :options="vasBasedOnInstance" color="grey-9" class="text-weight-regular text-grey-8" /> -->
- <q-option-group inline type="checkbox" @update:model-value="handleVasChange" :value="tmpVasMapping"
+ <q-option-group inline type="checkbox" @update:model-value="handleVasChange" v-model="tmpVasMapping"
  class="text-weight-regular text-grey-8" color="grey-9" :disable="vasDisableFlag"
  :options="vasBasedOnInstance" />
  <!-- <q-select map-options emit-value multiple checked type ="checkbox" v-model.trim="tmpVasMapping" :options="vasBasedOnInstance" class="text-weight-regular text-grey-8"
