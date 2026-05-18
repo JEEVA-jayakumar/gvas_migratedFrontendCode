@@ -662,74 +662,61 @@
  <q-step error-icon="warning" name="second" :error="error.tab.companyInformation" title="Details">
  <div class="row q-col-gutter-sm">
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-input type="text" @blur="v$.merchant?.companyInformation?.legalName?.$touch"
+ <q-input type="text" @blur="v$.merchant.companyInformation?.legalName?.$touch"
  :error="v$.merchant.companyInformation?.legalName?.$error" color="grey-9"
  v-model.trim="merchant.companyInformation.legalName" label="Legal Name*"
  placeholder="Legal Name*" />
- <div class="text-negative" v-if="error.field.merchant?.companyInformation?.legalName?.alert">
- <MarsErrorResponse :error="error.field.merchant?.companyInformation?.legalName" />
+ <div class="text-negative" v-if="error.field.merchant.companyInformation.legalName?.alert">
+ <MarsErrorResponse :error="error.field.merchant.companyInformation.legalName" />
  </div>
  <div class="text-negative q-py-xs group q-caption"
- v-if="v$.merchant?.companyInformation?.legalName?.$error">
- <!-- <div
- v-if="
- v$.merchant?.companyInformation?.legalName?.required?.$invalid
- "
- >
- <q-icon color="negative" name="warning" />&nbsp;Required -
- Only digits and alphabets are allowed
- </div> -->
- <!-- <div v-if="!/^[a-zA-Z\s]*$/.test(merchant?.companyInformation?.legalName)"> -->
+ v-if="v$.merchant.companyInformation.legalName?.$error">
  <div v-if="
- !/^[a-zA-Z0-9\s]*$/.test(
- merchant?.companyInformation?.legalName
- )
+ v$.merchant.companyInformation.legalName?.required?.$invalid
  ">
- <q-icon color="negative" name="warning" />&nbsp;Only
- AlphaNumeric and spaces are allowed.
+ <q-icon color="negative" name="warning" />&nbsp;Required
  </div>
  <div v-if="
- v$.merchant?.companyInformation?.legalName?.minLength?.$invalid ||
- v$.merchant?.companyInformation?.legalName?.maxLength?.$invalid
+ v$.merchant.companyInformation.legalName?.minLength?.$invalid ||
+ v$.merchant.companyInformation.legalName?.maxLength?.$invalid
  ">
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant?.companyInformation?.legalName?.minLength?.$invalid?.min
+ v$.merchant.companyInformation.legalName?.minLength?.$invalid?.min
  }}
  and
  {{
- v$.merchant?.companyInformation?.legalName?.maxLength?.$invalid?.max
+ v$.merchant.companyInformation.legalName?.maxLength?.$invalid?.max
  }}
  </div>
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-input @blur="v$.merchant?.companyInformation?.dbaName?.$touch"
+ <q-input @blur="v$.merchant.companyInformation?.dbaName?.$touch"
  :error="v$.merchant.companyInformation?.dbaName?.$error" color="grey-9"
  v-model.trim="merchant.companyInformation.dbaName" label="DBA Name*" placeholder="DBA Name*" />
- <div class="text-negative" v-if="error.field.merchant?.companyInformation?.dbaName?.alert">
- <MarsErrorResponse :error="error.field.merchant?.companyInformation?.dbaName" />
+ <div class="text-negative" v-if="error.field.merchant.companyInformation.dbaName?.alert">
+ <MarsErrorResponse :error="error.field.merchant.companyInformation.dbaName" />
  </div>
- <div class="text-negative q-py-xs group q-caption" v-if="v$.merchant?.companyInformation?.dbaName?.$error">
+ <div class="text-negative q-py-xs group q-caption" v-if="v$.merchant.companyInformation.dbaName?.$error">
  <div v-if="
- v$.merchant?.companyInformation?.dbaName?.required?.$invalid
+ v$.merchant.companyInformation.dbaName?.required?.$invalid
  ">
- <q-icon color="negative" name="warning" />&nbsp;Required -
- Only digits and alphabets are allowed
+ <q-icon color="negative" name="warning" />&nbsp;Required
  </div>
  <div v-if="
- v$.merchant?.companyInformation?.dbaName?.minLength?.$invalid ||
- v$.merchant?.companyInformation?.dbaName?.maxLength?.$invalid
+ v$.merchant.companyInformation.dbaName?.minLength?.$invalid ||
+ v$.merchant.companyInformation.dbaName?.maxLength?.$invalid
  ">
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant?.companyInformation?.dbaName?.minLength?.$invalid?.min
+ v$.merchant.companyInformation.dbaName?.minLength?.$invalid?.min
  }}
  and
  {{
- v$.merchant?.companyInformation?.dbaName?.maxLength?.$invalid?.max
+ v$.merchant.companyInformation.dbaName?.maxLength?.$invalid?.max
  }}
  </div>
  </div>
@@ -792,25 +779,25 @@
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-input color="grey-9" type="text" @blur="v$.merchant?.companyInformation?.cityzone?.$touch"
- :error="v$.merchant?.companyInformation?.cityzone?.$error"
+ <q-input color="grey-9" type="text" @blur="v$.merchant.companyInformation.cityzone?.$touch"
+ :error="v$.merchant.companyInformation.cityzone?.$error"
  v-model.trim="merchant.companyInformation.cityzone" label="Merchant City Zone"
  placeholder="Merchant City Zone" />
- <div class="text-negative" v-if="error.field.merchant?.companyInformation?.cityzone?.alert">
- <MarsErrorResponse :error="error.field.merchant?.companyInformation?.cityzone" />
+ <div class="text-negative" v-if="error.field.merchant.companyInformation.cityzone?.alert">
+ <MarsErrorResponse :error="error.field.merchant.companyInformation.cityzone" />
  </div>
  <div class="text-negative q-py-xs group q-caption"
- v-if="v$.merchant?.companyInformation?.cityzone?.$error">
+ v-if="v$.merchant.companyInformation.cityzone?.$error">
  <div v-if="
  !/^[a-zA-Z\s]*$/.test(
- merchant?.companyInformation?.cityzone
+ merchant.companyInformation.cityzone
  )
  ">
  <q-icon color="negative" name="warning" />&nbsp;Only
  Alphabets and spaces are allowed.
  </div>
  <div v-if="
- v$.merchant?.companyInformation?.cityzone?.required?.$invalid
+ v$.merchant.companyInformation.cityzone?.required?.$invalid
  ">
  <q-icon color="negative" name="warning" />&nbsp;Required
  </div>
@@ -818,13 +805,14 @@
  </div>
 
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value use-input fill-input hide-selected @blur="fnClrRegisteredCity" :error="
+ <q-select map-options use-input fill-input hide-selected @blur="fnClrRegisteredCity" :error="
  autoCompleteError(
  v$.merchant?.companyInformation?.registeredCityRefCode,
  v$.merchant?.companyInformation?.registeredCityName
  )
- " color="grey-9" v-model.trim="merchant.companyInformation.registeredCityName"
- @update:model-value="(val) => { fninputTyping(val, 1); registeredCitySelected(val); }" label="Registered city (type min 3 characters)*"
+ " color="grey-9" :model-value="merchant.companyInformation.registeredCityName"
+ @input-value="val => { merchant.companyInformation.registeredCityName = val; fninputTyping(val, 1); }"
+ @update:model-value="val => registeredCitySelected(val)" label="Registered city (type min 3 characters)*"
  placeholder="Start typing .*"
  :options="cityOptionsFiltered" @filter="residentCitySearch" />
  <div class="text-negative" v-if="
@@ -867,13 +855,14 @@
  </div>
 
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value use-input fill-input hide-selected @blur="fnClrRegisteredState" :error="
+ <q-select map-options use-input fill-input hide-selected @blur="fnClrRegisteredState" :error="
  autoCompleteError(
  v$.merchant?.companyInformation?.registeredStateRefCode,
  v$.merchant?.companyInformation?.registeredStateName
  )
- " color="grey-9" v-model.trim="merchant.companyInformation.registeredStateName"
- @update:model-value="(val) => { fninputTyping(val, 2); registeredStateSelected(val); }" label="Registered state (type min 3 characters)*"
+ " color="grey-9" :model-value="merchant.companyInformation.registeredStateName"
+ @input-value="val => { merchant.companyInformation.registeredStateName = val; fninputTyping(val, 2); }"
+ @update:model-value="val => registeredStateSelected(val)" label="Registered state (type min 3 characters)*"
  placeholder="Start typing .*"
  :options="stateOptionsFiltered" @filter="residentStateSearch" />
  <div class="text-negative" v-if="
@@ -930,11 +919,11 @@
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value @blur="v$.merchant.companyInformation?.constitutionName?.$touch" :error="
+ <q-select map-options @blur="v$.merchant.companyInformation?.constitutionName?.$touch" :error="
  v$.merchant?.companyInformation?.constitutionName?.$error
  " placeholder="Choose from the below*" color="grey-9"
- v-model.trim="merchant.companyInformation.constitutionName" label="Type of Business Entity*"
- :options="merchantOptions" />
+ v-model="merchant.companyInformation.constitutionName" label="Type of Business Entity*"
+ :options="merchantOptions" @update:model-value="val => { if (val) { merchant.companyInformation.constitution = val.value; merchant.companyInformation.constitutionName = val.label; } else { merchant.companyInformation.constitution = ''; merchant.companyInformation.constitutionName = ''; } }" />
 
  <div class="text-negative" v-if="
  error.field.merchant?.companyInformation?.constitutionName
@@ -1036,7 +1025,7 @@
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-input upper-case @blur="v$.merchant?.companyInformation?.pan?.$touch"
+ <q-input @update:model-value="val => { merchant.companyInformation.pan = val.toUpperCase(); }" @blur="v$.merchant.companyInformation?.pan?.$touch"
  :error="v$.merchant.companyInformation?.pan?.$error" color="grey-9"
  v-model.trim="merchant.companyInformation.pan" label="Company PAN*"
  placeholder="Company PAN*" />
@@ -1062,7 +1051,7 @@
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-input upper-case @blur="v$.merchant?.companyInformation?.tan?.$touch"
+ <q-input @update:model-value="val => { merchant.companyInformation.tan = val.toUpperCase(); }" @blur="v$.merchant.companyInformation?.tan?.$touch"
  :error="v$.merchant.companyInformation?.tan?.$error" color="grey-9"
  v-model.trim="merchant.companyInformation.tan" label="TAN" placeholder="TAN" />
  <div class="text-negative" v-if="error.field.merchant?.companyInformation?.tan?.alert">
@@ -1110,14 +1099,16 @@
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value use-input fill-input hide-selected @blur="v$.merchant.companyInformation?.mcc?.$touch" :error="
+ <q-select map-options use-input fill-input hide-selected @blur="v$.merchant.companyInformation?.mcc?.$touch" :error="
  autoCompleteError(
  v$.merchant?.companyInformation?.mcc,
  v$.merchant?.companyInformation?.mccname
  )
- " color="grey-9" v-model.trim="merchant.companyInformation.mccname"
+ " color="grey-9" :model-value="merchant.companyInformation.mccname"
+ @input-value="val => { merchant.companyInformation.mccname = val; }"
+ @update:model-value="val => mccSelected(val)"
  label="MCC (type min 3 characters)" placeholder="Start typing .*"
- :options="mccOptions" @filter="mccSearchFilter" @update:model-value="mccSelected" />
+ :options="mccOptions" @filter="mccSearch" />
  <div class="text-negative" v-if="error.field.merchant?.companyInformation?.mcc?.alert">
  <MarsErrorResponse :error="error.field.merchant?.companyInformation?.mcc" />
  </div>
@@ -1161,16 +1152,18 @@
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value use-input fill-input hide-selected @blur="
+ <q-select map-options use-input fill-input hide-selected @blur="
  v$.merchant?.companyInformation?.residentialCityRefCode?.$touch
  " :error="
  autoCompleteError(
  v$.merchant?.companyInformation?.residentialCityRefCode,
  v$.merchant?.companyInformation?.residentCityName
  )
- " color="grey-9" v-model.trim="merchant.companyInformation.residentCityName"
+ " color="grey-9" :model-value="merchant.companyInformation.residentCityName"
+ @input-value="val => { merchant.companyInformation.residentCityName = val; }"
+ @update:model-value="val => residentCitySelected(val)"
  label="City (type min 3 characters)*" placeholder="Start typing .*"
- :options="residentCityOptionsFiltered" @filter="residentCitySearchFilter" @update:model-value="residentCitySelected" />
+ :options="residentCityOptionsFiltered" @filter="residentCitySearchFilter" />
  <div class="text-negative" v-if="
  error.field.merchant?.companyInformation
  .residentialCityRefCode.alert
@@ -1192,7 +1185,7 @@
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value use-input fill-input hide-selected @blur="
+ <q-select map-options use-input fill-input hide-selected @blur="
  v$.merchant?.companyInformation?.residentialStateRefCode
  .$touch;
  " :error="
@@ -1200,9 +1193,11 @@
  v$.merchant?.companyInformation?.residentialStateRefCode,
  v$.merchant?.companyInformation?.residentStateName
  )
- " color="grey-9" v-model.trim="merchant.companyInformation.residentStateName"
+ " color="grey-9" :model-value="merchant.companyInformation.residentStateName"
+ @input-value="val => { merchant.companyInformation.residentStateName = val; }"
+ @update:model-value="val => residentStateSelected(val)"
  label="State (type min 3 characters)*" placeholder="Start typing .*"
- :options="residentStateOptionsFiltered" @filter="residentStateSearchFilter" @update:model-value="residentStateSelected" />
+ :options="residentStateOptionsFiltered" @filter="residentStateSearchFilter" />
  <div class="text-negative" v-if="
  error.field.merchant?.companyInformation
  .residentialStateRefCode.alert
@@ -1224,9 +1219,9 @@
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-input @blur="v$.merchant?.companyInformation?.contactName?.$touch"
- :error="v$.merchant?.companyInformation?.contactName?.$error"
- onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
+ <q-input @blur="v$.merchant.companyInformation?.contactName?.$touch"
+ :error="v$.merchant.companyInformation?.contactName?.$error"
+ @keypress="event => { if (!/^[a-zA-Z ]*$/.test(event.key) && event.key !== 'Backspace' && event.key !== 'Tab') event.preventDefault(); }"
  color="grey-9" v-model.trim="merchant.companyInformation.contactName" label="Contact Name*"
  placeholder="Contact Name*" />
  <div class="text-negative" v-if="
@@ -1497,18 +1492,18 @@
  </div>
  </div>
  <!-- <div class="col-md-6 col-sm-12 col-xs-12">
- <q-input @blur="v$.merchant?.salesInformation?.applicationDate?.$touch"
- :error="v$.merchant.salesInformation?.applicationDate?.$error" color="grey-9" format="DD/MM/YYYY"
- format-model="number" modal v-model.trim="merchant.salesInformation.applicationDate"
+ <q-input type="date" @blur="v$.merchant?.salesInformation?.applicationDate?.$touch"
+ :error="v$.merchant.salesInformation?.applicationDate?.$error" color="grey-9"
+   v-model.trim="merchant.salesInformation.applicationDate"
  label="Application Date*" placeholder="Application Date*" />
  </div> -->
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-input :min="past" :max="future" format="DD/MM/YYYY" format-model="number" modal
+ <q-input type="date" :min="past" :max="future"
  :error="v.dob.$anyError" @blur="v.dob.$touch()" color="grey-9" v-model.trim="v.$model.dob"
  label="PAN DOB *" placeholder="PAN DOB *" />
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-input upper-case :error="v.pan.$anyError" @blur="v.pan.$touch()" color="grey-9"
+ <q-input @update:model-value="val => { v.$model.pan = val.toUpperCase(); }" :error="v.pan.$anyError" @blur="v.pan.$touch()" color="grey-9"
  v-model.trim="v.$model.pan" label="Pan*" placeholder="Pan*" />
  <div class="textf-negative" v-if="
  error.field.merchant?.partnerInformation[index].pan.alert
@@ -1560,7 +1555,7 @@
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value use-input fill-input hide-selected :error="autoCompleteError(v.cityRefLabel, v.cityRefCode)" color="grey-9"
+ <q-select map-options  use-input fill-input hide-selected :error="autoCompleteError(v.cityRefLabel, v.cityRefCode)" color="grey-9"
  v-model.trim="v.$model.cityRefLabel" label="City (type min 3 characters)*"
  placeholder="Start typing .*"
  :options="partnerCityOptions" @filter="partnerCitySearchFilter" @update:model-value="(obj) => partnerCitySelected(obj, index)" />
@@ -1578,7 +1573,7 @@
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value use-input fill-input hide-selected :error="autoCompleteError(v.stateRefLabel, v.stateRefCode)" @blur="v.stateRefLabel.$touch()"
+ <q-select map-options  use-input fill-input hide-selected :error="autoCompleteError(v.stateRefLabel, v.stateRefCode)" @blur="v.stateRefLabel.$touch()"
  color="grey-9" v-model.trim="v.$model.stateRefLabel" label="State (type min 3 characters)*"
  placeholder="Start typing .*"
  :options="partnerStateOptions" @filter="partnerStateSearchFilter" @update:model-value="(obj) => partnerStateSelected(obj, index)" />
@@ -1901,9 +1896,9 @@
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-input upper-case color="grey-9" @blur="v$.merchant?.businessInformation?.gstId?.$touch"
+ <q-input color="grey-9" @blur="v$.merchant.businessInformation?.gstId?.$touch"
  :error="v$.merchant?.businessInformation?.gstId?.$error"
- v-model.trim="merchant.businessInformation.gstId" @change="marsRequiredFormattingofGST"
+ v-model.trim="merchant.businessInformation.gstId" @update:model-value="val => { merchant.businessInformation.gstId = val.toUpperCase(); }"
  label="GST ID" placeholder="GST ID" />
  <div class="text-negative" v-if="error.field.merchant?.businessInformation?.gstId?.alert">
  <MarsErrorResponse :error="error.field.merchant?.businessInformation?.gstId" />
@@ -2112,7 +2107,7 @@
  </div>
 
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-input format="DD/MM/YYYY" format-model="number" color="grey-9" modal
+ <q-input type="date"   color="grey-9"
    v-model.trim="merchant.additionalInfo.ownerDOB" label="Date Of Birth*"
  placeholder="Date Of Birth*" />
  </div>
@@ -2434,9 +2429,9 @@
  </div>
  </div>
  <div v-if="merchant.paymentDetails?.rentalType == 'E'" class="col-md-6 col-sm-12 col-xs-12">
- <q-input format="DD/MM/YYYY" format-model="number"
+ <q-input type="date"
  @blur="v$.merchant?.paymentDetails?.emiStartDate?.$touch"
- :error="v$.merchant.paymentDetails?.emiStartDate?.$error" color="grey-9" modal
+ :error="v$.merchant.paymentDetails?.emiStartDate?.$error" color="grey-9"
  v-model.trim="merchant.paymentDetails.emiStartDate" label="Emi Start Date*"
  placeholder="Emi Start Date*" />
  <div class="text-negative" v-if="error.field.merchant?.paymentDetails?.emiStartDate?.alert">
@@ -5036,7 +5031,7 @@
  <div class="q-title">Merchant Bank Details</div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-input upper-case color="grey-9" :error="v$.merchant?.bankInformation?.bankDetails?.ifsc?.$error"
+ <q-input @update:model-value="val => { merchant.bankInformation.bankDetails.ifsc = val.toUpperCase(); }" color="grey-9" :error="v$.merchant?.bankInformation?.bankDetails?.ifsc?.$error"
  @blur="populateBankDetails" v-model.trim="merchant.bankInformation.bankDetails.ifsc"
  label="IFSC Code*" placeholder="Enter IFSC*" />
  <div class="text-negative" v-if="
@@ -5219,7 +5214,7 @@
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value use-input fill-input hide-selected @blur="
+ <q-select map-options  use-input fill-input hide-selected @blur="
  v$.merchant?.bankInformation?.bankDetails?.bankStateRefCode
  .$touch
  " :error="
@@ -5486,7 +5481,7 @@
  </div>
  </div>
  <div class="col-md-4 col-sm-12">
- <q-input format="DD/MM/YYYY" format-model="number" color="grey-9" modal @blur="
+ <q-input type="date"   color="grey-9"  @blur="
  v$.merchant?.bankInformation?.collectionDetails
  .collectedDate.$touch;
  " :error="
@@ -5574,7 +5569,7 @@
  </div>
  </div>
  <div class="col-md-3 col-sm-12">
- <q-input format="DD/MM/YYYY" format-model="number" color="grey-9" modal @blur="
+ <q-input type="date"   color="grey-9"  @blur="
  v$.merchant?.bankInformation?.collectionDetails?.chequeDate
  .$touch;
  " :error="
@@ -5602,7 +5597,7 @@
  </div>
  </div>
  <div class="col-md-3 col-sm-12 col-xs-12">
- <q-input format="DD/MM/YYYY" format-model="number" color="grey-9" modal @blur="
+ <q-input type="date"   color="grey-9"  @blur="
  v$.merchant?.bankInformation?.collectionDetails
  .chequeDepositedDate.$touch;
  " :error="
@@ -5703,7 +5698,7 @@
  <div class="row q-col-gutter-sm">
  <div class="col-md-6 col-sm-12 col-xs-12">
  <p class="caption">Merchant Requested Vas</p>
- <li v-for="sVas in soSelectedVas.split(',')" :key="sVas">
+ <li v-for="sVas in (soSelectedVas && typeof soSelectedVas === 'string' ? soSelectedVas.split(',') : (Array.isArray(soSelectedVas) ? soSelectedVas : []))" :key="sVas">
  {{ sVas }}
  </li>
  </div>
@@ -5718,7 +5713,7 @@
  class="text-weight-regular text-grey-8" color="grey-9" :options="vasBasedOnInstance" /> -->
  <!-- <q-option-group :key="vasKey" inline type="checkbox" v-model.trim="tmpVasMapping"
  :options="vasBasedOnInstance" color="grey-9" class="text-weight-regular text-grey-8" /> -->
- <q-option-group inline type="checkbox" @update:model-value="handleVasChange" :value="tmpVasMapping"
+ <q-option-group inline type="checkbox" @update:model-value="handleVasChange" v-model="tmpVasMapping"
  class="text-weight-regular text-grey-8" color="grey-9" :disable="vasDisableFlag"
  :options="vasBasedOnInstance" />
  <!-- <q-select map-options emit-value multiple checked type ="checkbox" v-model.trim="tmpVasMapping" :options="vasBasedOnInstance" class="text-weight-regular text-grey-8"
@@ -12291,7 +12286,7 @@ import { useVuelidate } from '@vuelidate/core';
  /* MCC search result */
 
  /* MCC search result */
- mccSearchFilter(terms, update, abort) {
+ mccSearch(terms, update, abort) {
  update(() => {
  this.mccOptions = this.COMMON_FILTER_FUNCTION(this.mccSearchSet, terms);
  });
@@ -12483,12 +12478,15 @@ import { useVuelidate } from '@vuelidate/core';
  this.merchant.companyInformation.registeredCityName = "";
  },
  fninputTyping(event, type) {
+ if (typeof event !== "string") return;
  let flag = event.split("");
  switch (type) {
  case 1:
  this.companyRegisteredCitySelected = false;
+ break;
  case 2:
  this.companyRegisteredStateSelected = false;
+ break;
  }
  if (this.cityOptions.length <= 0 || this.stateOptions.length <= 0) {
  this.fetchmarsCity(
@@ -12679,13 +12677,8 @@ import { useVuelidate } from '@vuelidate/core';
  this.$q.notify("Please review company information fields again.");
  } else {
  this.error.companyInformation = false;
- if (this.getPartnersVisiblity) {
  this.saveCurrentChanges();
  this.$refs.stepper.next();
- } else {
- this.saveCurrentChanges();
- this.$refs.stepper.goTo("fourth");
- }
  }
  } else if (step == "partners") {
  this.v$.viewBinding?.partnersArr?.$touch();
