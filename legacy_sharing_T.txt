@@ -1,0 +1,177 @@
+            <div v-if="merchant.salesInformation.sharingModelCode == 'T'" class="row gutter-sm q-my-xs">
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <q-select @blur="$v.merchant.salesInformation.sharingPartnerCode.$touch" :error="
+                    $v.merchant.salesInformation.sharingPartnerCode.$error
+                  " placeholder="Choose from the below*" color="grey-9"
+                  v-model.trim="merchant.salesInformation.sharingPartnerCode" float-label="Sharing partner*"
+                  :options="sharingPartnerCode" />
+                <div class="text-negative" v-if="
+                    error.field.merchant.salesInformation.sharingPartnerCode.alert
+                  ">
+                  <MarsErrorResponse :error="
+                      error.field.merchant.salesInformation.sharingPartnerCode
+                    " />
+                </div>
+                <div class="text-negative q-py-xs group q-caption"
+                  v-if="$v.merchant.salesInformation.sharingPartnerCode.$error">
+                  <div v-if="
+                      $v.merchant.salesInformation.sharingPartnerCode.$params
+                        .required
+                    ">
+                    <q-icon color="negative" name="warning" />&nbsp;Required
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <q-input @blur="$v.merchant.salesInformation.dailyFixedAmount.$touch"
+                  :error="$v.merchant.salesInformation.dailyFixedAmount.$error" color="grey-9"
+                  v-model.trim="merchant.salesInformation.dailyFixedAmount" float-label="Daily fixed amount*"
+                  type="number" placeholder="Daily fixed amount*" />
+                <div class="text-negative" v-if="
+                    error.field.merchant.salesInformation.dailyFixedAmount.alert
+                  ">
+                  <MarsErrorResponse :error="
+                      error.field.merchant.salesInformation.dailyFixedAmount
+                    " />
+                </div>
+                <div class="text-negative q-py-xs group q-caption"
+                  v-if="$v.merchant.salesInformation.dailyFixedAmount.$error">
+                  <div v-if="
+                      $v.merchant.salesInformation.dailyFixedAmount.$params
+                        .required
+                    ">
+                    <q-icon color="negative" name="warning" />&nbsp;Required
+                  </div>
+                  <div v-if="
+                      $v.merchant.salesInformation.dailyFixedAmount.$params
+                        .minValue ||
+                      $v.merchant.salesInformation.dailyFixedAmount.$params
+                        .maxValue
+                    ">
+                    <q-icon color="negative" name="warning" />
+                    &nbsp;Value should be between
+                    {{
+                    $v.merchant.salesInformation.dailyFixedAmount.$params
+                    .minValue.min
+                    }}
+                    and
+                    {{
+                    $v.merchant.salesInformation.dailyFixedAmount.$params
+                    .maxValue.max
+                    }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <q-input @blur="
+                    $v.merchant.salesInformation.loanDisbursementPercentage
+                      .$touch;
+                  " :error="
+                    $v.merchant.salesInformation.loanDisbursementPercentage
+                      .$error
+                  " color="grey-9" v-model.trim="
+                    merchant.salesInformation.loanDisbursementPercentage
+                  " float-label="Percentage*" type="number" placeholder="Percentage*" />
+                <div class="text-negative" v-if="
+                    error.field.merchant.salesInformation
+                      .loanDisbursementPercentage.alert
+                  ">
+                  <MarsErrorResponse :error="
+                      error.field.merchant.salesInformation
+                        .loanDisbursementPercentage
+                    " />
+                </div>
+                <div class="text-negative q-py-xs group q-caption" v-if="
+                    $v.merchant.salesInformation.loanDisbursementPercentage
+                      .$error
+                  ">
+                  <div v-if="
+                      $v.merchant.salesInformation.loanDisbursementPercentage
+                        .$params.required
+                    ">
+                    <q-icon color="negative" name="warning" />&nbsp;Required
+                  </div>
+                  <div v-if="
+                      $v.merchant.salesInformation.loanDisbursementPercentage
+                        .$params.minValue ||
+                      $v.merchant.salesInformation.loanDisbursementPercentage
+                        .$params.maxValue
+                    ">
+                    <q-icon color="negative" name="warning" />
+                    &nbsp;Value should be between
+                    {{
+                    $v.merchant.salesInformation.loanDisbursementPercentage
+                    .$params.minValue.min
+                    }}
+                    and
+                    {{
+                    $v.merchant.salesInformation.loanDisbursementPercentage
+                    .$params.maxValue.max
+                    }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <q-input @blur="
+                    $v.merchant.salesInformation.loanDisbursementAmount.$touch
+                  " :error="
+                    $v.merchant.salesInformation.loanDisbursementAmount.$error
+                  " color="grey-9" v-model.trim="
+                    merchant.salesInformation.loanDisbursementAmount
+                  " float-label="Loan disbursement value*" type="number" placeholder="Loan disbursement value*" />
+                <div class="text-negative" v-if="
+                    error.field.merchant.salesInformation.loanDisbursementAmount
+                      .alert
+                  ">
+                  <MarsErrorResponse :error="
+                      error.field.merchant.salesInformation
+                        .loanDisbursementAmount
+                    " />
+                </div>
+                <div class="text-negative q-py-xs group q-caption" v-if="
+                    $v.merchant.salesInformation.loanDisbursementAmount.$error
+                  ">
+                  <div v-if="
+                      $v.merchant.salesInformation.loanDisbursementAmount
+                        .$params.required
+                    ">
+                    <q-icon color="negative" name="warning" />&nbsp;Required
+                  </div>
+                  <div v-if="
+                      $v.merchant.salesInformation.loanDisbursementAmount
+                        .$params.minValue ||
+                      $v.merchant.salesInformation.loanDisbursementAmount
+                        .$params.maxValue
+                    ">
+                    <q-icon color="negative" name="warning" />
+                    &nbsp;Value should be between
+                    {{
+                    $v.merchant.salesInformation.loanDisbursementAmount
+                    .$params.minValue.min
+                    }}
+                    and
+                    {{
+                    $v.merchant.salesInformation.loanDisbursementAmount
+                    .$params.maxValue.max
+                    }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <q-datetime format="DD/MM/YYYY" format-model="number" @blur="
+                    $v.merchant.salesInformation.loanDisbursementDate.$touch
+                  " :error="
+                    $v.merchant.salesInformation.loanDisbursementDate.$error
+                  " color="grey-9" modal v-model.trim="merchant.salesInformation.loanDisbursementDate"
+                  float-label="Disbursement Date*" placeholder="Disbursement Date*" />
+                <div class="text-negative" v-if="
+                    error.field.merchant.salesInformation.loanDisbursementDate
+                      .alert
+                  ">
+                  <MarsErrorResponse :error="
+                      error.field.merchant.salesInformation.loanDisbursementDate
+                    " />
+                </div>
+                <div class="text-negative q-py-xs group q-caption" v-if="
+                    $v.merchant.salesInformation.loanDisbursementDate.$error
+                  ">

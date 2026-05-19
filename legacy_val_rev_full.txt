@@ -1,0 +1,62 @@
+        revParameters: {
+          // basedInstance:{
+          //   required,
+          // },
+          // matmEnabled:{
+          //  required,
+          // },
+          // bijlipaySwitch:{
+          // required,
+          // },
+          cashAtPosEnabled: {
+            required,
+          },
+          settlementType: {
+            required,
+          },
+          preAuth: {
+            required,
+          },
+          tipEnabled: {
+            required,
+          },
+          notificationRecipient: {
+            required,
+          },
+          saleFlag: {
+            required,
+          },
+          // saleEnabled:{
+          //   required,
+          // },
+          // basedInstance:{
+          //   required,
+          // },
+          // txnEmiAllowed:{
+          // //  required,
+          // },
+          // sodexoEnabled:{
+          //      //  required,
+          // },
+          // amexEnabled:{
+          //    //  required,
+          // },
+          // intlCardACardAcceptance:{
+          //   //  required,
+          // },
+          // bqrEnabled:{
+          //   //  required,
+          // },
+          // upiFlag:{
+          //    //  required,
+          // },
+          // linkpaymentFlag:{
+          //  //  required,
+          // },
+          // matmEnabled:{
+          //   //  required,
+          // },
+          // upichargeslipEnabled:{
+          //      //  required,
+          // },
+        },

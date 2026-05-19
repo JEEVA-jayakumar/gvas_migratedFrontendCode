@@ -13654,12 +13654,12 @@ import { useVuelidate } from '@vuelidate/core';
  contactEmail: finalRequest.merchant.companyInformation.contactName,
  contactMobile: finalRequest.merchant.companyInformation.contactMobile,
  contactName: finalRequest.merchant.companyInformation.contactName,
- dob: moment(finalRequest.merchant.partnerInformation[0].dob).format(
+ dob: this.$moment(finalRequest.merchant.partnerInformation[0].dob).format(
  "DD/MM/YYYY"
  ),
  contactPhone: finalRequest.merchant.companyInformation.contactMobile,
  dbaName: finalRequest.merchant.companyInformation.dbaName,
- establishYear: moment(
+ establishYear: this.$moment(
  finalRequest.merchant.companyInformation.establishYear
  ).format("DD/MM/YYYY"),
  legalName: finalRequest.merchant.companyInformation.legalName,

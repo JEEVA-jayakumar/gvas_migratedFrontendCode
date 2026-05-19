@@ -1,6 +1,4 @@
- // }
- // },
- finalFormSubmit(request) {
+finalFormSubmit(request) {
  this.v$.merchant?.$touch();
  if (this.v$.merchant?.$error) {
  this.$q.notify({
@@ -51,12 +49,12 @@
  contactEmail: finalRequest.merchant.companyInformation.contactName,
  contactMobile: finalRequest.merchant.companyInformation.contactMobile,
  contactName: finalRequest.merchant.companyInformation.contactName,
- dob: this.$moment(finalRequest.merchant.partnerInformation[0].dob).format(
+ dob: moment(finalRequest.merchant.partnerInformation[0].dob).format(
  "DD/MM/YYYY"
  ),
  contactPhone: finalRequest.merchant.companyInformation.contactMobile,
  dbaName: finalRequest.merchant.companyInformation.dbaName,
- establishYear: this.$moment(
+ establishYear: moment(
  finalRequest.merchant.companyInformation.establishYear
  ).format("DD/MM/YYYY"),
  legalName: finalRequest.merchant.companyInformation.legalName,
@@ -114,7 +112,7 @@
  finalRequest.merchant.revParameters.upichargeslipEnabled,
  upiFlag: finalRequest.merchant.revParameters.upiFlag,
  cardAcceptance: finalRequest.merchant.paymentDetails.cardAcceptance,
- deviceType: this.propLeadDeatils.device.deviceName,
+ deviceType: this.propLeadDeatils?.device?.deviceName,
  smallMerchant: finalRequest.merchant.salesInformation.categoryType,
  gstNumber: finalRequest.merchant.businessInformation.gstId,
  };
@@ -140,7 +138,7 @@
  });
  let key = this.merchant.salesInformation.institutionCode;
  this.$q.localStorage.set("aa_t", key);
- if (this.propLeadDeatils.leadStatus == "102") {
+ if (this.propLeadDeatils?.leadStatus == "102") {
  // let key = this.merchant.salesInformation.institutionCode;
  // this.$q.localStorage.set("aa_t", key);
  delete this.merchant.customIncentiveRates[0].add;
@@ -154,11 +152,11 @@
  delete finalRequest.merchant.holdPayment;
  delete finalRequest.merchant.SharingDiscountFee;
 
- if (this.propLeadDeatils.mAtmOnboardingPlan != null) {
+ if (this.propLeadDeatils?.mAtmOnboardingPlan != null) {
  if (
- this.propLeadDeatils.mAtmOnboardingPlan.leadSource
+ this.propLeadDeatils?.mAtmOnboardingPlan?.leadSource
  .sourceName == "ATM" &&
- this.propLeadDeatils.mAtmOnboardingPlan.planName ==
+ this.propLeadDeatils?.mAtmOnboardingPlan?.planName ==
  "Kannor ATM Plan"
  ) {
  finalRequest.merchant.mdrPlan.incentive.fixed =
@@ -208,7 +206,7 @@
  if (
  finalRequest.merchant.salesInformation.institutionCode ==
  "104" &&
- this.propLeadDeatils.device.id == "31"
+ this.propLeadDeatils?.device?.id == "31"
  ) {
  // alert("AXIS INSTANCE AND ME31 DEVICE CALLING")
  finalRequest.merchant.paymentDetails.terminalModeCode = "34";
@@ -225,14 +223,14 @@
  self
  .MARS_DATA_SUBMIT_EXTERNAL({
  params: finalRequest,
- leadStatus: this.propLeadDeatils.leadStatus,
- refNumber: this.propLeadDeatils.merchantRefCode,
+ leadStatus: this.propLeadDeatils?.leadStatus,
+ refNumber: this.propLeadDeatils?.merchantRefCode,
  }).then((response) => {
  let feed_paramaters;
  if (response.status == 204) {
  feed_paramaters = {
- applicationNumber: this.propLeadDeatils.applicationNumber,
- merchantRefCode: this.propLeadDeatils.merchantRefCode,
+ applicationNumber: this.propLeadDeatils?.applicationNumber,
+ merchantRefCode: this.propLeadDeatils?.merchantRefCode,
  };
  } else {
  feed_paramaters = response.data;
@@ -282,7 +280,7 @@
  })
  .catch((error) => {
  this.merchant.companyInformation.constitutionName =
- this.propLeadDeatils.merchantType.merchantTypeName;
+ this.propLeadDeatils?.merchantType?.merchantTypeName;
  finalRequest.merchant.salesInformation["applicationDate"] = this.commonDateFormatInvalidMARSformat(
  finalRequest.merchant.salesInformation.applicationDate
  );
@@ -433,11 +431,11 @@
  delete finalRequest.merchant.holdPayment;
  delete finalRequest.merchant.SharingDiscountFee;
 
- if (this.propLeadDeatils.mAtmOnboardingPlan != null) {
+ if (this.propLeadDeatils?.mAtmOnboardingPlan != null) {
  if (
- this.propLeadDeatils.mAtmOnboardingPlan.leadSource
+ this.propLeadDeatils?.mAtmOnboardingPlan?.leadSource
  .sourceName == "ATM" &&
- this.propLeadDeatils.mAtmOnboardingPlan.planName ==
+ this.propLeadDeatils?.mAtmOnboardingPlan?.planName ==
  "Kannor ATM Plan"
  ) {
  finalRequest.merchant.mdrPlan.incentive.fixed =
@@ -493,7 +491,7 @@
  if (
  finalRequest.merchant.salesInformation.institutionCode ==
  "104" &&
- this.propLeadDeatils.device.id == "31"
+ this.propLeadDeatils?.device?.id == "31"
  ) {
  // alert("AXIS INSTANCE AND ME31 DEVICE CALLING")
  finalRequest.merchant.paymentDetails.terminalModeCode =
@@ -512,8 +510,8 @@
  self
  .MARS_DATA_SUBMIT_EXTERNAL({
  params: finalRequest,
- leadStatus: this.propLeadDeatils.leadStatus,
- refNumber: this.propLeadDeatils.merchantRefCode
+ leadStatus: this.propLeadDeatils?.leadStatus,
+ refNumber: this.propLeadDeatils?.merchantRefCode
  }).then(response => {
  let feed_paramaters;
  if (response.status == 204) {
@@ -570,7 +568,7 @@
  });
  })
  .catch(error => {
- this.merchant.companyInformation.constitutionName = this.propLeadDeatils.merchantType.merchantTypeName;
+ this.merchant.companyInformation.constitutionName = this.propLeadDeatils?.merchantType?.merchantTypeName;
  finalRequest.merchant.salesInformation["applicationDate"] = this.commonDateFormatInvalidMARSformat(
  finalRequest.merchant.salesInformation
  .applicationDate
@@ -659,3 +657,35 @@
 
  let generateErrorMessage = eval(
  `OThis.error.field.${splitted.join(".")}`
+ );
+ generateErrorMessage.alert = true;
+ generateErrorMessage.issue = actual.issue;
+ generateErrorMessage.value = actual.value;
+ }
+ });
+ this.$q.notify({
+ color: "negative",
+ position: "bottom",
+ message: `${error.data.message}`,
+ icon: "thumb_down"
+ });
+ } else {
+ this.$q.notify({
+ color: "negative",
+ position: "bottom",
+ message: `${error.data.message}`,
+ icon: "thumb_down"
+ });
+ }
+ self.$q.loading.hide();
+ });
+ } else {
+ }
+ });
+ }
+ })
+ .catch(() => {
+ self.$q.loading.hide();
+ });
+ }
+ }

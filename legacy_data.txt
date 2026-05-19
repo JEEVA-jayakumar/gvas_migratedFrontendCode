@@ -1,0 +1,71 @@
+    data() {
+      return {
+        propTogglemultiTidComponentDetails: false,
+        subTidListConfs: {},
+        today,
+        // selectedSecond: [
+        // vasBasedOnInstance : {}
+        // ],
+        past: subtractFromDate(today, { days: 76500 }),
+        future: addToDate(today, { days: 0 }),
+        check: "",
+        showPartnerstab: false,
+        vasDisableFlag: false,
+        showAxistab: false,
+        ifscErrFlag: false,
+        // vasDisable: false,
+        salesInformationError: false,
+        companyInformationError: false,
+        revParametersError: false,
+        businessInformationError: false,
+        partnerInformationError: false,
+        paymentDetailsError: false,
+        ptCitySelected: false,
+        companyRegisteredCitySelected: false,
+        companyRegisteredStateSelected: false,
+
+        bankInformationError: false,
+        file: "",
+        subventionBankFeeData: "",
+        originalBankFeeData: 0,
+        baseTidFlag: true,
+        SubTidField: false,
+        genSubTidFlag: false,
+        //  VasTerminalType:"",
+        viewBinding: {},
+        incentive1: {},
+        plan: [],
+        //start >> Actual dropdown options values
+        dob: {
+          from: null,
+          to: null,
+        },
+        baseAndSubTidList: [],
+        listAllSubTidDetails: [],
+        disabledListAllSubTidDetails: [],
+        addtnmultiTidComponentDetails: {
+          merchant: {},
+          propLeadDeatils: {},
+          leadId: "",
+          diners: {},
+          holdPayment: "",
+        },
+        columns: [
+          {
+            name: "tid",
+            required: true,
+            label: "Tid",
+            align: "left",
+            field: (row) => {
+              return row.tid == null ? "NA" : row.tid;
+            },
+            sortable: true,
+          },
+          {
+            name: "mid",
+            required: true,
+            label: "Mid",
+            align: "left",
+            field: (row) => {
+              return row.mid == null ? "NA" : row.mid;
+            },

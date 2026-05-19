@@ -1,0 +1,352 @@
+ fetchAllDropdownValuesFromMARSapi(institutionCode) {
+      if (institutionCode) {
+        localStorage.setItem("aa_t", institutionCode);
+      }
+ this.$q.loading.show({
+ delay: 0, // ms
+ spinnerColor: "purple-9",
+ message: "Setting data .",
+ });
+ let self = this;
+ /* API call to fetch regions */
+ self
+ .REGION_FROM_MARS(institutionCode)
+ .then(() => {
+ self.regionOptions = [];
+ return self.regionsFromMars.items.map((oo) => {
+ self.regionOptions.push({ label: oo.name, value: oo.code });
+ });
+ }).then(() => {
+ /* API call to fetch sharing partner */
+ return self.LEAD_FROM_FROM_MARS(institutionCode).then((response) => {
+ self.leadFromOptions = [];
+ if (
+ JSON.parse(localStorage.getItem("u_i")).region.regionAreaName ==
+ "VARANEEK"
+ ) {
+ self.leadFromInfoFromMars.items.map((oo) => {
+ if (oo.name == "VARANEEK") {
+ self.leadFromOptions.push({ label: oo.name, value: oo.name });
+ }
+ });
+ } else {
+ self.leadFromInfoFromMars.items.map((oo) => {
+ self.leadFromOptions.push({ label: oo.name, value: oo.name });
+ });
+ }
+ self.merchant.salesInformation.leadFrom =
+ this.propLeadDeatils?.leadSource?.sourceName;
+ });
+ }).then(() => {
+ /* API call to fetch sales person */
+ return self
+ .SALES_PERSON_FROM_MARS(institutionCode)
+ .then((response) => {
+ self.salesPersonOptions = [
+ {
+ label: this.salesPerson + "-" + this.salesCode,
+ value: this.salesPerson + "-" + this.salesCode,
+ },
+ ];
+ self.salesPersonFromMars.items.map((oo) => {
+ self.salesPersonOptions.push({
+ label: oo.name + " - " + oo.empCode,
+ value: oo.name + " - " + oo.empCode,
+ });
+ });
+
+ // self.salesPersonOptions = salesPerson;
+ });
+ }).then(() => {
+ /* API call to fetch city */
+ return self.CITY_FROM_MARS().then((response) => {
+ self.cityOptions = [];
+ self.cityFromMars.items.map((oo) => {
+ self.cityOptions.push({ label: oo.name, value: oo.code });
+ });
+ // self.cityOptions = city;
+ });
+ }).then(() => {
+ /* API call to fetch state */
+ return self.STATE_FROM_MARS().then((response) => {
+ self.stateOptions = [];
+ self.stateFromMars.items.map((oo) => {
+ self.stateOptions.push({ label: oo.name, value: oo.code });
+ });
+ // self.stateOptions = stateArr;
+ });
+ }).then(() => {
+ /* API call to fetch state */
+ return self.MCC_FROM_MARS().then((response) => {
+ self.mccSearchSet = [];
+ self.mccFromMars.items.map((oo) => {
+ self.mccSearchSet.push({
+ label: oo.code + "-" + oo.name,
+ value: oo.code,
+ });
+ // if(oo.code == "5812" || oo.code == "5813" || oo.code == "5814" ||oo.code == "7011" || oo.code == "5541" || oo.code == "5529"
+ // ) {
+ // this.merchant.companyInformation.autoormanual == "A";
+ // this.merchant.companyInformation.tipFacility == "Y";
+ // } else if(oo.code == "") {
+ // this.merchant.companyInformation.autoormanual == "M";
+ // this.merchant.companyInformation.tipFacility == "N";
+ // }
+ });
+ // self.mccSearchSet = mccSubArr;
+ });
+ }).then(() => {
+ /* API call to fetch rental plan */
+ return self
+ .RENTAL_PLAN_FROM_MARS(institutionCode)
+ .then((response) => {
+ self.rentalPlanSet = [];
+ self.rentalPlanFromMars.items.map((oo) => {
+ self.rentalPlanSet.push({ label: oo.name, value: oo.code });
+ });
+ // self.rentalPlanSet = rentalPlan;
+ });
+ }).then(() => {
+ /* API call to fetch bank list */
+ return self.BANK_LIST_FROM_MARS(institutionCode).then((response) => {
+ // let bankList = [];
+ self.bankListFromMars.bankNames.map((oo) => {
+ self.bankListSet.push({ label: oo, value: oo });
+ });
+ // self.bankListSet = bankList;
+ });
+ return true;
+ }).then(() => {
+ /* API call to fetch bank list */
+ return self.NETWORK_PROVIDER(institutionCode).then((response) => {
+ // let bankList = [];
+ self.networkProviderFromMars.items.map((oo) => {
+ self.networkProviderListSet.push({
+ label: oo.name,
+ value: oo.code,
+ });
+ });
+ // self.networkProviderListSet = bankList;
+ });
+ return true;
+ }).then(() => {
+ /* API call to fetch bank list */
+ return self.SERVICE_PROVIDER(institutionCode).then((response) => {
+ // let bankList = [];
+ self.serviceProviderFromMars.items.map((oo) => {
+ self.serviceProviderListSet.push({
+ label: oo.name,
+ value: oo.code,
+ });
+ });
+ // self.bankListSet = bankList;
+ });
+ return true;
+ }).then(() => {
+ if (
+ this.propLeadDeatils?.marsFormSubmitAction == 1 ||
+ this.propLeadDeatils?.marsFormSubmitAction == 2
+ ) {
+ return this.FETCH_SAVED_DATA_FROM_OWN_DB({
+ leadId: this.$route.params.id,
+ }).then(() => {
+
+
+            let additionalInfoParsed = {};
+            try {
+              additionalInfoParsed = JSON.parse(this.marsSavedDataFromInternal.additionalInfo || "{}");
+            } catch (e) {
+              console.error("Error parsing additionalInfo", e);
+            }
+
+            if (!this.merchant.additionalInfo) this.merchant.additionalInfo = {};
+            this.merchant.additionalInfo.branchZone = additionalInfoParsed.branchZone || "";
+            this.fnFetchZone();
+            this.merchant.additionalInfo.iaDistrict = additionalInfoParsed.iaDistrict || "";
+            this.fnFetchBranchName();
+            this.merchant.additionalInfo.raDistrict = additionalInfoParsed.raDistrict || "";
+            this.merchant.additionalInfo.od1District = additionalInfoParsed.od1District || "";
+            this.merchant.additionalInfo.od2District = additionalInfoParsed.od2District || "";
+            this.merchant.additionalInfo.installationBranchCode = additionalInfoParsed.installationBranchCode || "";
+            this.merchant.additionalInfo.lorState = additionalInfoParsed.lorState || "";
+            this.merchant.additionalInfo.pin = additionalInfoParsed.pin || "";
+            this.pincodeBasedDistrict();
+            this.merchant.additionalInfo.state = additionalInfoParsed.state || "";
+            this.pincodeandDistrictBasedCity();
+            this.merchant.additionalInfo.city = additionalInfoParsed.city || "";
+            this.citybasedlocation();
+            this.merchant.additionalInfo.iaLocation = additionalInfoParsed.iaLocation || "";
+            this.merchant.additionalInfo.iaSalutation = additionalInfoParsed.iaSalutation || "";
+            this.merchant.additionalInfo.iaGender = additionalInfoParsed.iaGender || "";
+            this.merchant.additionalInfo.od1Salutation = additionalInfoParsed.od1Salutation || "";
+            this.merchant.additionalInfo.od1Gender = additionalInfoParsed.od1Gender || "";
+            this.merchant.additionalInfo.od2Salutation = additionalInfoParsed.od2Salutation || "";
+            this.merchant.additionalInfo.od2Gender = additionalInfoParsed.od2Gender || "";
+ //Date formatting for MARS
+ return (this.marsSavedDataFromInternal.salesInformation["applicationDate"] = this.commonDateFormat(
+ this.marsSavedDataFromInternal.salesInformation
+ .applicationDate
+ ));
+ }).then(() => {
+ return (this.marsSavedDataFromInternal.salesInformation["aggreementDate"] = this.commonDateFormat(
+ this.marsSavedDataFromInternal.salesInformation
+ .aggreementDate
+ ));
+ }).then(() => {
+ return (this.marsSavedDataFromInternal.salesInformation["loanDisbursementDate"] = this.commonDateFormat(
+ this.marsSavedDataFromInternal.salesInformation
+ .loanDisbursementDate
+ ));
+ }).then(() => {
+ return (this.marsSavedDataFromInternal.salesInformation["tenureStartDate"] = this.commonDateFormat(
+ this.marsSavedDataFromInternal.salesInformation
+ .tenureStartDate
+ ));
+ }).then(() => {
+ return (this.marsSavedDataFromInternal.companyInformation["establishYear"] = this.commonDateFormat(
+ this.marsSavedDataFromInternal.companyInformation
+ .establishYear
+ ));
+ }).then(() => {
+ return (this.marsSavedDataFromInternal.bankInformation
+ .collectionDetails["chequeDepositedDate"] = this.commonDateFormat(
+ this.marsSavedDataFromInternal.bankInformation
+ .collectionDetails.chequeDepositedDate
+ ));
+ }).then(() => {
+ return (this.marsSavedDataFromInternal.bankInformation
+ .collectionDetails["collectedDate"] = this.commonDateFormat(
+ this.marsSavedDataFromInternal.bankInformation
+ .collectionDetails.collectedDate
+ ));
+ }).then(() => {
+ return (this.marsSavedDataFromInternal.bankInformation
+ .collectionDetails["chequeDate"] = this.commonDateFormat(
+ this.marsSavedDataFromInternal.bankInformation
+ .collectionDetails.chequeDate
+ ));
+ }).then(() => {
+ return (this.marsSavedDataFromInternal.businessInformation["memberSince"] = this.commonDateFormat(
+ this.marsSavedDataFromInternal.businessInformation
+ .memberSince
+ ));
+ }).then(() => {
+ return (this.marsSavedDataFromInternal.businessInformation["lastTurnoverYear"] = this.commonDateFormat(
+ this.marsSavedDataFromInternal.businessInformation
+ .lastTurnoverYear
+ ));
+ }).then(() => {
+ delete this.marsSavedDataFromInternal.salesInformation
+ .salesPersonCode;
+ if (!this.merchant) this.merchant = {};
+            if (!this.merchant.salesInformation) this.merchant.salesInformation = {};
+            if (this.marsSavedDataFromInternal.salesInformation) {
+              this.merchant.salesInformation = _.merge({}, this.merchant.salesInformation, this.marsSavedDataFromInternal.salesInformation);
+              if (this.merchant.salesInformation.institutionCode) {
+                localStorage.setItem("aa_t", this.merchant.salesInformation.institutionCode);
+              }
+            }
+ if (this.merchant.paymentDetails.rentalMode == "SB") {
+ if (
+ this.marsSavedDataFromInternal &&
+ this.marsSavedDataFromInternal.paymentDetails &&
+ "bankFee" in this.marsSavedDataFromInternal.paymentDetails
+ ) {
+ this.subventionBankFeeData =
+ this.marsSavedDataFromInternal.paymentDetails.bankFee;
+ this.bankFee = this.bankFee - this.subventionBankFeeData;
+ }
+ }
+
+ console.log("INSIDE PercentageReduceData ", this.bankFee);
+
+ // this.merchant.salesInformation.salesPersonName = this.merchant.salesInformation.salesPersonName;
+ // this.merchant.salesInformation.salesPersonName = this.salesPerson + "-" + this.salesCode,
+ if (
+ this.merchant.salesInformation.salesPersonName !=
+ this.salesPerson + "-" + this.salesCode
+ ) {
+ this.merchant.salesInformation.salesPersonName =
+ this.merchant.salesInformation.salesPersonName;
+ } else {
+ this.merchant.salesInformation.salesPersonName =
+ this.salesPerson + "-" + this.salesCode;
+ }
+
+ if (this.marsSavedDataFromInternal.companyInformation) { this.merchant.companyInformation = _.merge({}, this.merchant.companyInformation, this.marsSavedDataFromInternal.companyInformation); }
+ if (this.marsSavedDataFromInternal.businessInformation) { this.merchant.businessInformation = _.merge({}, this.merchant.businessInformation, this.marsSavedDataFromInternal.businessInformation); }
+ this.viewBinding.partnersArr =
+ this.marsSavedDataFromInternal.partnerInformation;
+ let errorThis = this;
+ let errorObj = {
+ name: {
+ alert: false,
+ issue: "",
+ value: "",
+ },
+ address: {
+ alert: false,
+ issue: "",
+ value: "",
+ },
+ pan: {
+ alert: false,
+ issue: "",
+ value: "",
+ },
+ pin: {
+ alert: false,
+ issue: "",
+ value: "",
+ },
+ stateRefCode: {
+ alert: false,
+ issue: "",
+ value: "",
+ },
+ cityRefCode: {
+ alert: false,
+ issue: "",
+ value: "",
+ },
+ contactMobile: {
+ alert: false,
+ issue: "",
+ value: "",
+ },
+ contactEmail: {
+ alert: false,
+ issue: "",
+ value: "",
+ },
+ };
+ errorThis.error.field.merchant.partnerInformation = [];
+ this.viewBinding.partnersArr.map(() => {
+ errorThis.error.field.merchant.partnerInformation.push(
+ errorObj
+ );
+ });
+ if (this.marsSavedDataFromInternal.paymentDetails) { this.merchant.paymentDetails = _.merge({}, this.merchant.paymentDetails, this.marsSavedDataFromInternal.paymentDetails); }
+ if (this.marsSavedDataFromInternal.bankInformation) { this.merchant.bankInformation = _.merge({}, this.merchant.bankInformation, this.marsSavedDataFromInternal.bankInformation); }
+ if (this.marsSavedDataFromInternal.mdrPlan) { this.merchant.mdrPlan = _.merge({}, this.merchant.mdrPlan, this.marsSavedDataFromInternal.mdrPlan); }
+ if (this.marsSavedDataFromInternal.SharingDiscountFee != null) {
+ this.merchant.SharingDiscountFee =
+ this.marsSavedDataFromInternal.sharingDiscountFee;
+ }
+ this.merchant.companyInformation.constitution =
+ this.propLeadDeatils?.merchantType?.marsMappingId;
+ });
+ } else {
+ return true;
+ }
+ }).then(() => {
+ this.merchant.paymentDetails.cashAtPosEnabled = this.propLeadDeatils
+ .posEnable
+ ? "Y"
+ : "N";
+ this.$q.loading.hide();
+ })
+ .catch(() => {
+ this.$q.loading.hide();
+ });
+ },
