@@ -12683,32 +12683,29 @@ import { useVuelidate } from '@vuelidate/core';
  this.saveCurrentChanges();
  this.$refs.stepper.next();
  }
- } else if (step == "businessInformation") {
- this.v$.merchant?.businessInformation?.$touch();
- if (this.v$.merchant?.businessInformation?.$error) {
- this.$q.notify("Please review business information fields again.");
- } else if (this.v$.merchant.businessInformation.gstId.$model == null) {
- this.$q
- .dialog({
- title: "Confirm",
- message: "Are you sure GSTID is not available?",
- ok: "Yes",
- cancel: "No",
- }).onOk(() => {
- this.saveCurrentChanges();
- this.fetchMarsDeviceDetails();
- this.$refs.stepper.next();
- // }
- }).onCancel(() => { });
-    } else {
-      this.saveCurrentChanges();
-      this.fetchMarsDeviceDetails();
-      this..stepper.next();
-    } else {
- this.saveCurrentChanges();
- this.fetchMarsDeviceDetails();
- this.$refs.stepper.next();
- }
+    } else if (step == "businessInformation") {
+      this.v$.merchant?.businessInformation?.$touch();
+      if (this.v$.merchant?.businessInformation?.$error) {
+        this.$q.notify("Please review business information fields again.");
+      } else if (this.v$.merchant.businessInformation.gstId.$model == null) {
+        this.$q
+          .dialog({
+            title: "Confirm",
+            message: "Are you sure GSTID is not available?",
+            ok: "Yes",
+            cancel: "No",
+          })
+          .onOk(() => {
+            this.saveCurrentChanges();
+            this.fetchMarsDeviceDetails();
+            this.$refs.stepper.next();
+          })
+          .onCancel(() => {});
+      } else {
+        this.saveCurrentChanges();
+        this.fetchMarsDeviceDetails();
+        this.$refs.stepper.next();
+      }
  } else if (step == "mdr") {
  this.v$.merchant?.mdrPlan?.$touch();
  if (this.v$.merchant?.mdrPlan?.$error) {
