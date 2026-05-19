@@ -1,20 +1,3 @@
- <q-step error-icon="warning" name="fifth" :error="error.tab.paymentDetails" title="Payment"
- subtitle="Details">
- <div class="row q-col-gutter-sm">
- <div class="col-md-6 col-sm-12 col-xs-12">
- <p class="q-caption">Device Owned By</p>
- <div class="group">
- <q-radio @blur="v$.merchant?.paymentDetails?.deviceOwnedBy?.$touch"
- :error="v$.merchant?.paymentDetails?.deviceOwnedBy?.$error"
- v-for="(item, index) in deviceOwnedByOptions" :key="index" color="grey-9"
- v-model.trim="merchant.paymentDetails.deviceOwnedBy" :val="item.value" :label="item.label" />
- <div class="text-negative" v-if="
- error.field.merchant?.paymentDetails?.deviceOwnedBy?.alert
- ">
- <MarsErrorResponse :error="error.field.merchant?.paymentDetails?.deviceOwnedBy" />
- </div>
- </div>
- </div>
 
  <div class="col-md-6 col-sm-12 col-xs-12">
  <q-select map-options emit-value @blur="VasSelected" placeholder="Choose from the below" color="grey-9"
@@ -92,7 +75,7 @@
  </div>
 
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-input format="DD/MM/YYYY" format-model="number" color="grey-9" modal
+ <q-input type="date"   color="grey-9"
    v-model.trim="merchant.additionalInfo.ownerDOB" label="Date Of Birth*"
  placeholder="Date Of Birth*" />
  </div>
@@ -414,9 +397,9 @@
  </div>
  </div>
  <div v-if="merchant.paymentDetails?.rentalType == 'E'" class="col-md-6 col-sm-12 col-xs-12">
- <q-input format="DD/MM/YYYY" format-model="number"
+ <q-input type="date"
  @blur="v$.merchant?.paymentDetails?.emiStartDate?.$touch"
- :error="v$.merchant.paymentDetails?.emiStartDate?.$error" color="grey-9" modal
+ :error="v$.merchant.paymentDetails?.emiStartDate?.$error" color="grey-9"
  v-model.trim="merchant.paymentDetails.emiStartDate" label="Emi Start Date*"
  placeholder="Emi Start Date*" />
  <div class="text-negative" v-if="error.field.merchant?.paymentDetails?.emiStartDate?.alert">
@@ -623,3 +606,24 @@
  <MarsErrorResponse :error="
  error.field.merchant?.paymentDetails?.networkPreferred
  " />
+ </div>
+ </div>
+ </div>
+ <q-stepper-navigation>
+ <q-btn color="primary" class="q-ma-xs" icon="check" @click="validatebeforeNavigate('paymentDetails')"
+ label="Continue" />
+ <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="previousClicked()" label="Previous" />
+ <q-btn color="amber-10" class="q-ma-xs" icon="inbox" label="Save Partial" @click="saveCurrentChanges()" />
+ <q-btn color="negative" class="q-ma-xs" icon="backspace" label="Back to document validation"
+ @click="goBackToDocumentVerificationStage()" />
+ </q-stepper-navigation>
+ </q-step>
+ <q-step error-icon="warning" :error="error.tab.mdrPlan || error.SharingDiscountFee" name="sixth"
+ title="Discount" subtitle="Rate">
+ <div class="row group items-center">
+ <div v-if="v$.merchant.mdrPlan?.$anyError" class="col-md-12 text-negative">
+ <q-icon color="negative" name="warning" />&nbsp; Error in MDR
+ plan fields, kindly check it.
+ </div>
+ <div v-if="v$.merchant.SharingDiscountFee?.$anyError" class="col-md-12 text-negative">
+ <q-icon color="negative" name="warning" />&nbsp; Error in

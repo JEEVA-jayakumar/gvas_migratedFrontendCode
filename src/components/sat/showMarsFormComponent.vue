@@ -1,28 +1,28 @@
 <template>
  <div>
- <!-- Documents -->
+
  <div id="mainContainer" class="row">
- <!-- Documents proof -->
+
  <div id="leftSidePane" class="col-md-5 q-pa-xs largeCont" v-if="showDocumentPreview">
- <viewLeadDocumentsDataEntryComponent :propLeadDocumentInformation="propLeadDeatils.leadDocuments"
+ <viewLeadDocumentsDataEntryComponent :propLeadDocumentInformation="propLeadDeatils?.leadDocuments"
  :propGetShortInfo="propLeadDeatils" />
  </div>
- <!-- Document related form -->
+
  <div id="rightSidePane" class="col-md-7 q-pa-xs block relative merchant">
  <q-stepper color="purple-9" ref="stepper" v-model.trim="step" contractable text alternative-labels>
  <q-step error-icon="warning" :error="error.tab.salesInformation" name="first" title="Sales" subtitle="Info">
- <!-- {{this.merchant.paymentDetails.amountCollected}} -->
+
  <div class="row q-col-gutter-sm">
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-input color="grey-9" disable v-model.trim="leadSourceApp.sourceName" label="Lead Source*" />
+ <q-input color="grey-9" disable :model-value="leadSourceApp?.sourceName" label="Lead Source*" />
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-input color="grey-9" disable v-model.trim="deviceTypeApp.deviceName" label="Device Type*" />
+ <q-input color="grey-9" disable :model-value="deviceTypeApp?.deviceName" label="Device Type*" />
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
  <q-select map-options emit-value :class="{
- 'readonly-select': propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'
- }" :disabled="this.propLeadDeatils.leadStatus == 102 || this.propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'"
+ 'readonly-select': propLeadDeatils?.leadSource?.sourceName === 'LS_TOHANDS'
+ }" :disabled="this.propLeadDeatils?.leadStatus == 102 || this.propLeadDeatils?.leadSource?.sourceName === 'LS_TOHANDS'"
  :error="v$.merchant.salesInformation?.institutionCode?.$error" placeholder="Choose from the below"
  color="grey-9" v-model.trim="merchant.salesInformation.institutionCode"
  label="Institution Code*" :options="getinstitutionCode"
@@ -304,8 +304,8 @@
  @blur="v$.merchant?.salesInformation?.leadFrom?.$touch"
  :error="v$.merchant?.salesInformation?.leadFrom?.$error"
  v-model.trim="merchant.salesInformation.leadFrom" label="Lead From*" :options="leadFromOptions"
- :disabled="this.propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'" :class="{
- 'readonly-select': propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'
+ :disabled="this.propLeadDeatils?.leadSource?.sourceName === 'LS_TOHANDS'" :class="{
+ 'readonly-select': propLeadDeatils?.leadSource?.sourceName === 'LS_TOHANDS'
  }" />
  <div class="text-negative" v-if="error.field.merchant?.salesInformation?.leadFrom?.alert">
  <MarsErrorResponse :error="error.field.merchant?.salesInformation?.leadFrom" />
@@ -334,7 +334,7 @@
  </div>
  </div>
  </div>
- <!-- T => Transaction value model -->
+
  <div v-if="merchant && merchant.salesInformation?.sharingModelCode == 'T'" class="row gutter-sm q-my-xs">
  <div class="col-md-6 col-sm-12 col-xs-12">
  <q-select map-options emit-value @blur="v$.merchant.salesInformation?.sharingPartnerCode?.$touch" :error="
@@ -559,7 +559,7 @@
  </div>
  </div>
  </div>
- <!-- M => MDR/cash@pos/rent -->
+
  <div v-if="merchant && merchant.salesInformation?.sharingModelCode == 'M'" class="row gutter-sm q-my-xs">
  <div class="col-md-6 col-sm-12 col-xs-12">
  <q-select map-options emit-value @blur="v$.merchant.salesInformation?.sharingPartnerCode?.$touch" :error="
@@ -650,7 +650,7 @@
  </div>
  </div>
  </div>
- <!-- Navigation for this step at the end of QStep-->
+
  <q-stepper-navigation>
  <q-btn color="primary" class="q-ma-xs" icon="check" @click="validatebeforeNavigate('salesInformation')"
  label="Continue" />
@@ -1459,7 +1459,7 @@
  @click="goBackToDocumentVerificationStage()" />
  </q-stepper-navigation>
  </q-step>
- <q-step v-if="getPartnersVisiblity" error-icon="warning" name="third" :error="error.tab.partnerInformation" title="Partners">
+ <q-step error-icon="warning" name="third" :error="error.tab.partnerInformation" title="Partners">
  <div v-for="(v, index) in v$.viewBinding.partnersArr?.$each" :key="index" class="row q-my-xs gutter-sm"
  ref="parentElement">
  <div class="col-md-12 col-sm-12 col-xs-12">
@@ -1491,12 +1491,7 @@
  </div>
  </div>
  </div>
- <!-- <div class="col-md-6 col-sm-12 col-xs-12">
- <q-input type="date" @blur="v$.merchant?.salesInformation?.applicationDate?.$touch"
- :error="v$.merchant.salesInformation?.applicationDate?.$error" color="grey-9"
-   v-model.trim="merchant.salesInformation.applicationDate"
- label="Application Date*" placeholder="Application Date*" />
- </div> -->
+
  <div class="col-md-6 col-sm-12 col-xs-12">
  <q-input type="date" :min="past" :max="future"
  :error="v.dob.$anyError" @blur="v.dob.$touch()" color="grey-9" v-model.trim="v.$model.dob"
@@ -1718,9 +1713,7 @@
  </div>
  </div>
  </div>
- <!--<div class="col-md-6 col-sm-12 col-xs-12">
- <q-input color="grey-9" type="number" v-model.trim="merchant.businessInformation.weekdayStartHour" label="Business Income" placeholder="Business Income" />
- </div>-->
+
 
  <div class="col-md-6 col-sm-12 col-xs-12 col-xs-12">
  <q-input color="grey-9" @blur="
@@ -2036,7 +2029,7 @@
  :error="v$.merchant?.paymentDetails?.terminalModeCode?.$error"
  v-model.trim="merchant.paymentDetails.terminalModeCode" :options="terminalModelSet"
  label="Terminal Model*" />
- <!-- @update:model-value="mccbasedSelect" -->
+
  <div class="text-negative" v-if="
  error.field.merchant?.paymentDetails?.terminalModeCode?.alert
  ">
@@ -2052,22 +2045,20 @@
  </div>
  </div>
  <div v-if="
- merchant.salesInformation.institutionCode == 109 ||
- merchant.salesInformation.institutionCode == 104
- " class="col-md-6 col-sm-12 col-xs-12">
- <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value placeholder="Choose from the below*" color="grey-9"
- v-model.trim="merchant.paymentDetails.cardAcceptance" label="Card Acceptance"
- :options="cardAcceptanceOptions" />
- </div>
- </div>
+                  merchant.salesInformation.institutionCode == 109 ||
+                  merchant.salesInformation.institutionCode == 104
+                " class="col-md-6 col-sm-12 col-xs-12">
+                <q-select map-options emit-value placeholder="Choose from the below*" color="grey-9"
+                  v-model.trim="merchant.paymentDetails.cardAcceptance" label="Card Acceptance"
+                  :options="cardAcceptanceOptions" />
+              </div>
 
  <div class="col-md-6 col-sm-12 col-xs-12">
  <q-select map-options emit-value @blur="v$.merchant?.paymentDetails?.terminalType?.$touch"
  :error="v$.merchant.paymentDetails?.terminalType?.$error" placeholder="Choose from the below*"
  color="grey-9" v-model.trim="merchant.paymentDetails.terminalType" label="Terminal Type*"
  :options="terminalTypeOptions" />
- <!-- @update:model-value="terminalBased" -->
+
  <div class="text-negative" v-if="error.field.merchant?.paymentDetails?.terminalType?.alert">
  <MarsErrorResponse :error="error.field.merchant?.paymentDetails?.terminalType" />
  </div>
@@ -2381,7 +2372,7 @@
  type="text" @update:model-value="handleInput" />
 
  <div class="text-negative" v-if="
- subventionBankFeeData > propLeadDeatils.recurringFees / 1.18
+ subventionBankFeeData > propLeadDeatils?.recurringFees / 1.18
  ">
  {{ "Bank Rental should be lesser than rental amount" }}
  </div>
@@ -5280,8 +5271,8 @@
 
  <div class="col-md-6 col-sm-12 col-xs-12">
  <q-select map-options emit-value :class="{
- 'readonly-select': propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'
- }" :disabled="this.propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'" placeholder="Choose from the below"
+ 'readonly-select': propLeadDeatils?.leadSource?.sourceName === 'LS_TOHANDS'
+ }" :disabled="this.propLeadDeatils?.leadSource?.sourceName === 'LS_TOHANDS'" placeholder="Choose from the below"
  color="grey-9" v-model.trim="
  merchant.bankInformation.bankDetails.accountType
  " label="Account Type" :options="accountTypeOptions" />
@@ -5357,7 +5348,7 @@
  <div class="col-md-12">
  <div class="q-title">Payment Collection Details</div>
  </div>
- <div v-show="propLeadDeatils.paymentOption == 1" class="col-md-12">
+ <div v-show="propLeadDeatils?.paymentOption == 1" class="col-md-12">
  <div class="row">
  <div class="col-md-6 col-sm-12 col-xs-12">
  <q-input color="grey-9" @blur="
@@ -5403,7 +5394,7 @@
  </div>
  </div>
  </div>
- <div v-show="propLeadDeatils.paymentOption == 4" class="col-md-12">
+ <div v-show="propLeadDeatils?.paymentOption == 4" class="col-md-12">
  <div class="row">
  <div class="col-md-6 col-sm-12 col-xs-12">
  <q-input color="grey-9" @blur="
@@ -5449,7 +5440,7 @@
  </div>
  </div>
  </div>
- <div v-show="propLeadDeatils.paymentOption == 3" class="col-md-12">
+ <div v-show="propLeadDeatils?.paymentOption == 3" class="col-md-12">
  <div class="row">
  <div class="col-md-4 col-sm-12 col-xs-12">
  <q-input color="grey-9" @blur="
@@ -5538,7 +5529,7 @@
  </div>
  </div>
  </div>
- <div v-show="propLeadDeatils.paymentOption == 2" class="col-md-12">
+ <div v-show="propLeadDeatils?.paymentOption == 2" class="col-md-12">
  <div class="row">
  <div class="col-md-3 col-sm-12 col-xs-12">
  <q-input color="grey-9" @blur="
@@ -5702,41 +5693,17 @@
  {{ sVas }}
  </li>
  </div>
- <!-- <div class="col-md-6 col-sm-12 col-xs-12">
- <p class="caption">Vas Based Instance*</p>
- <q-option-group inline type="checkbox" v-model.trim="tmpVasMapping"
- class="text-weight-regular text-grey-8" color="grey-9" :options="vasBasedOnInstance" />
- </div> -->
+
  <div class="col-md-6 col-sm-12 col-xs-12">
  <p class="caption">Vas Based Instance*</p>
- <!-- <q-option-group inline type="checkbox" v-model.trim="tmpVasMapping"
- class="text-weight-regular text-grey-8" color="grey-9" :options="vasBasedOnInstance" /> -->
- <!-- <q-option-group :key="vasKey" inline type="checkbox" v-model.trim="tmpVasMapping"
- :options="vasBasedOnInstance" color="grey-9" class="text-weight-regular text-grey-8" /> -->
+
+
  <q-option-group inline type="checkbox" @update:model-value="handleVasChange" v-model="tmpVasMapping"
  class="text-weight-regular text-grey-8" color="grey-9" :disable="vasDisableFlag"
  :options="vasBasedOnInstance" />
- <!-- <q-select map-options emit-value multiple checked type ="checkbox" v-model.trim="tmpVasMapping" :options="vasBasedOnInstance" class="text-weight-regular text-grey-8"
- color="grey-9" /> // v-model.trim="tmpVasMapping" :disabled="this.vasDisable = true"-->
+
  </div>
- <!-- <div class="col-md-6 col-sm-12 col-xs-12">
- <p class="q-caption">SMS Enable or Disable?</p>
- <div class="group">
- <q-radio @blur="v$.merchant?.companyInformation?.smsFlag?.$touch"
- :error="v$.merchant.companyInformation?.smsFlag?.$error" v-for="(item, index) in smsFlagOptions"
- :key="index" color="grey-9" v-model.trim="merchant.companyInformation.smsFlag" :val="item.value"
- :label="item.label" />
- <div class="text-negative" v-if="error.field.merchant?.companyInformation?.smsFlag?.alert">
- <MarsErrorResponse :error="error.field.merchant?.companyInformation?.smsFlag" />
- </div>
- <div class="text-negative q-py-xs group q-caption"
- v-if="v$.merchant?.companyInformation?.smsFlag?.$error">
- <div>
- <q-icon color="negative" name="warning" />&nbsp;Required
- </div>
- </div>
- </div>
- </div> -->
+
  <div class="col-md-6 col-sm-12 col-xs-12">
  <p class="q-caption">Notification Recipient Enabled?</p>
  <div class="group">
@@ -5828,7 +5795,7 @@
  <q-step error-icon="warning" name="eight" title="KYC" subtitle="Details">
  <div class="row items-center">
  <div class="col-12 bottom-border q-py-md" v-for="(key, index) in Object.keys(
- propLeadDeatils.leadDocuments
+ propLeadDeatils?.leadDocuments
  )" :key="index">
  <div class="row group items-center">
  <div class="col-auto">
@@ -5837,7 +5804,7 @@
  <div class="col-auto">
  <span class="text-purple-9 text-weight-bold border-1 q-pa-sm">{{ index + 1 }}</span>
  </div>
- <div class="col-10" v-for="(item, subIndex) in propLeadDeatils.leadDocuments[
+ <div class="col-10" v-for="(item, subIndex) in propLeadDeatils?.leadDocuments[
  key
  ]" :key="subIndex">
  <div class="row">
@@ -5887,7 +5854,7 @@
  </div>
  </div>
  <q-stepper-navigation>
- <!-- <q-btn /> -->
+
  <q-btn v-if="this.leadSourceApp.multiTidEnabled != true" color="primary" class="q-ma-xs" icon="check"
  @click="finalFormSubmit()" label="Submit" />
  <q-btn v-if="this.leadSourceApp.multiTidEnabled == true" color="primary" class="q-ma-xs" icon="check"
@@ -6060,7 +6027,7 @@ import { useVuelidate } from '@vuelidate/core';
  propLeadDeatils: {},
  leadId: "",
  diners: {},
- holdPayment: "",
+ holdPayment: 0,
  },
  columns: [
  {
@@ -7388,7 +7355,7 @@ import { useVuelidate } from '@vuelidate/core';
  od2Gender: "",
  // ownerFirstName: "",
  // ownerLastName: "",
- // ownerDOB: this.commonDateFormatDOB(this.propLeadDeatils.ownerDOB),
+ // ownerDOB: this.commonDateFormatDOB(this.propLeadDeatils?.ownerDOB),
  state: "",
  city: "",
  fillingType: "",
@@ -7407,7 +7374,7 @@ import { useVuelidate } from '@vuelidate/core';
  registeredCityRefCode: "",
  registeredStateRefCode: "",
  constitution: "",
- // constitutionName:JSON.stringify(this.propLeadDeatils.merchantType.merchantTypeName),
+ // constitutionName:JSON.stringify(this.propLeadDeatils?.merchantType?.merchantTypeName),
  constitutionName: "",
  constitutionDescription: "",
  establishYear: "",
@@ -9677,16 +9644,16 @@ import { useVuelidate } from '@vuelidate/core';
  ;
  },
  chequeNumberValidation() {
- return this.propLeadDeatils.paymentOption == 2 ? 6 : 25;
+ return this.propLeadDeatils?.paymentOption == 2 ? 6 : 25;
  },
  bankInfoSwipePayment() {
- return this.propLeadDeatils.paymentOption == 3 ;
+ return this.propLeadDeatils?.paymentOption == 3 ;
  },
  bankInfoChequePayment() {
- return this.propLeadDeatils.paymentOption == 2 ;
+ return this.propLeadDeatils?.paymentOption == 2 ;
  },
  bankInfoUpiLink() {
- return this.propLeadDeatils.paymentOption == 4 ;
+ return this.propLeadDeatils?.paymentOption == 4 ;
  },
  getStatementType() {
  return this.merchant.companyInformation.statementType == "E"
@@ -9704,7 +9671,7 @@ import { useVuelidate } from '@vuelidate/core';
  : false;
  },
  getInstitutionBank() {
- return (this.propLeadDeatils.device.deviceName == "Q161_PRO_DQR" || this.propLeadDeatils.device?.deviceName == "Q161_PRO_SQR")
+ return (this.propLeadDeatils?.device?.deviceName === "Q161_PRO_DQR" || this.propLeadDeatils?.device?.deviceName == "Q161_PRO_SQR")
  ? false
  : true;
  },
@@ -11535,7 +11502,7 @@ import { useVuelidate } from '@vuelidate/core';
  },
 
  beforeMount() {
- if (!this.propLeadDeatils || !this.propLeadDeatils.leadSource) {
+ if (!this.propLeadDeatils || !this.propLeadDeatils?.leadSource || !this.propLeadDeatils?.device) {
  console.warn('showMarsForm: propLeadDeatils or leadSource is missing');
  return;
  }
@@ -11658,20 +11625,20 @@ import { useVuelidate } from '@vuelidate/core';
  },
  ],
  };
- //<< View binding
+ //// View binding
  this.varaneekInstance();
  /* Populating values from FOS */
  // this.tmpVasMapping = this.VasSelected();
- // this.leadId = $route.propLeadDeatils.id;
+ // this.leadId = $route.propLeadDeatils?.id;
 
- if (this.propLeadDeatils.leadSource.sourceName === "LS_TOHANDS") {
+ if (this.propLeadDeatils?.leadSource?.sourceName === "LS_TOHANDS") {
  console.log("LEAD SOURCE INSIDE TO HANDS")
- let leadid = this.propLeadDeatils.id;
+ let leadid = this.propLeadDeatils?.id;
  this.applicationNumberFromToHands(leadid);
  }
  else {
  this.merchant.salesInformation.applicationNumber = new Date().getTime();
- // let leadid1 = this.propLeadDeatils.id;
+ // let leadid1 = this.propLeadDeatils?.id;
  console.log("LEAD SOURCE INSIDE THIS")
  // console.log("LEAD ID",leadid1)
  }
@@ -11688,18 +11655,14 @@ import { useVuelidate } from '@vuelidate/core';
  "this.getShortLeadInfo.vasInstanceMapping --->",
  this.getShortLeadInfo?.vasInstanceMapping
  );
- if (Array.isArray(this.getShortLeadInfo?.vasInstanceMapping)) {
-
-   this.soSelectedVas = this.getShortLeadInfo.vasInstanceMapping.join(",");
-
- } else {
-
-   this.soSelectedVas = (this.getShortLeadInfo?.vasInstanceMapping || "")
- .replaceAll('"', "")
- .replace("[", "")
- .replace("]", "");
-
- }
+      if (Array.isArray(this.getShortLeadInfo?.vasInstanceMapping)) {
+        this.soSelectedVas = this.getShortLeadInfo.vasInstanceMapping.join(",");
+      } else {
+        this.soSelectedVas = (this.getShortLeadInfo?.vasInstanceMapping || "")
+          .replaceAll('"', "")
+          .replace("[", "")
+          .replace("]", "");
+      }
  this.revParamAndLeadInfo.bijlipaySwitch =
  this.propLeadDeatils?.bijlipaySwitch;
  this.merchant.companyInformation.contactMobile =
@@ -11726,17 +11689,17 @@ import { useVuelidate } from '@vuelidate/core';
  this.propLeadDeatils?.recurringFees;
  this.propLeadDeatils?.recurringFees;
  this.bankFee = (this.propLeadDeatils?.recurringFees || 0) / 1.18;
- // this.propLeadDeatils.recurringFees * 0.18;
+ // this.propLeadDeatils?.recurringFees * 0.18;
  const PercentageReduceData = this.bankFee;
  this.originalBankFeeData = PercentageReduceData;
  this.bankFee = this.originalBankFeeData;
  // if(this.merchant.paymentDetails.rentalMode == 'SB'){
  console.log("INSIDE PercentageReduceData ", this.bankFee);
- // this.subventionBankFeeData = this.propLeadDeatils.bankFee
+ // this.subventionBankFeeData = this.propLeadDeatils?.bankFee
  // // this.bankFee = this.bankFee - this.subventionBankFee()
  // // console.log("Result",this.bankFee)
  // }
- if (this.propLeadDeatils.device.deviceName == "Q161_PRO_DQR" || this.propLeadDeatils.device?.deviceName == "Q161_PRO_SQR") {
+ if (this.propLeadDeatils?.device && (this.propLeadDeatils?.device?.deviceName === "Q161_PRO_DQR" || this.propLeadDeatils?.device?.deviceName === "Q161_PRO_SQR")) {
  this.merchant.salesInformation.institutionCode = 104
  }
 
@@ -11744,7 +11707,7 @@ import { useVuelidate } from '@vuelidate/core';
         this.merchant.salesInformation.institutionCode
       );
 
- if (this.propLeadDeatils.leadSource.sourceName == "LS_TOHANDS") {
+ if (this.propLeadDeatils?.leadSource?.sourceName == "LS_TOHANDS") {
  this.merchant.salesInformation.institutionCode = 104;
 
  this.merchant.bankInformation.bankDetails.accountType = "C";
@@ -11754,9 +11717,9 @@ import { useVuelidate } from '@vuelidate/core';
  }
  // setup fee amount
  this.devicePrice = this.propLeadDeatils?.setupFees;
- this.leadSourceApp = this.propLeadDeatils?.leadSource;
- // this.multiTidEnabled = this.this.propLeadDeatils.leadSource.multiTidEnabled;
- this.deviceTypeApp = this.propLeadDeatils?.device;
+ this.leadSourceApp = this.propLeadDeatils?.leadSource || {};
+ // this.multiTidEnabled = this.this.propLeadDeatils?.leadSource?.multiTidEnabled;
+ this.deviceTypeApp = this.propLeadDeatils?.device || {};
  this.salesPerson = this.propLeadDeatils?.createdBy?.name;
  this.salesCode = this.propLeadDeatils?.createdBy?.employeeID;
  this.merchant.salesInformation.salesPersonName =
@@ -11809,7 +11772,7 @@ import { useVuelidate } from '@vuelidate/core';
 
  }
 
- // this.tmpVasMapping = this.propLeadDeatils.vasInstanceMapping
+ // this.tmpVasMapping = this.propLeadDeatils?.vasInstanceMapping
  // .replaceAll('"', "")
  // .replace("[", "")
  // .replace("]", "");
@@ -11826,7 +11789,7 @@ import { useVuelidate } from '@vuelidate/core';
  this.getShortLeadInfo?.amexInternational;
 
  this.merchant.bankInformation.collectionDetails.upiLink =
- this.propLeadDeatils.paymentOption == 4
+ this.propLeadDeatils?.paymentOption == 4
  ? this.propLeadDeatils?.referenceNumber
  : this.merchant.bankInformation.collectionDetails.upiLink == "";
 
@@ -11847,7 +11810,7 @@ import { useVuelidate } from '@vuelidate/core';
  },
  tmpVasMapping(val) {
  if (
- this.propLeadDeatils.leadSource.sourceName === "LS_TOHANDS" &&
+ this.propLeadDeatils?.leadSource?.sourceName === "LS_TOHANDS" &&
  !val.includes("UPI QR")
  ) {
  this.tmpVasMapping = ["UPI QR"];
@@ -11860,7 +11823,7 @@ import { useVuelidate } from '@vuelidate/core';
  //LEAD_STATUS_BASE_TID_PENDING 103
  //this.genSubTidFlag == true
  this.merchant.leadId = this.$route.params.id;
- // if (this.propLeadDeatils.leadStatus == 104 || this.propLeadDeatils.leadStatus == 103) {
+ // if (this.propLeadDeatils?.leadStatus == 104 || this.propLeadDeatils?.leadStatus == 103) {
  // this.OpenMultiTidToggle();
  // }
  },
@@ -11964,8 +11927,8 @@ import { useVuelidate } from '@vuelidate/core';
  },
  handleInputrentalMode() {
  if (this.merchant.paymentDetails.rentalMode == "IB") {
- this.bankFee = this.propLeadDeatils.recurringFees / 1.18;
- // this.propLeadDeatils.recurringFees * 0.18;
+ this.bankFee = this.propLeadDeatils?.recurringFees / 1.18;
+ // this.propLeadDeatils?.recurringFees * 0.18;
  console.log("RENTAL MODE", this.subventionBankFeeData);
  } else if (this.merchant.paymentDetails.rentalMode == "SB") {
  if (this.subventionBankFeeData > 0) {
@@ -12689,28 +12652,29 @@ import { useVuelidate } from '@vuelidate/core';
  this.saveCurrentChanges();
  this.$refs.stepper.next();
  }
- } else if (step == "businessInformation") {
- this.v$.merchant?.businessInformation?.$touch();
- if (this.v$.merchant?.businessInformation?.$error) {
- this.$q.notify("Please review business information fields again.");
- } else if (this.v$.merchant.businessInformation.gstId.$model == null) {
- this.$q
- .dialog({
- title: "Confirm",
- message: "Are you sure GSTID is not available?",
- ok: "Yes",
- cancel: "No",
- }).onOk(() => {
- this.saveCurrentChanges();
- this.fetchMarsDeviceDetails();
- this.$refs.stepper.next();
- // }
- }).onCancel(() => { });
- } else {
- this.saveCurrentChanges();
- this.fetchMarsDeviceDetails();
- this.$refs.stepper.next();
- }
+    } else if (step == "businessInformation") {
+      this.v$.merchant?.businessInformation?.$touch();
+      if (this.v$.merchant?.businessInformation?.$error) {
+        this.$q.notify("Please review business information fields again.");
+      } else if (this.v$.merchant.businessInformation.gstId.$model == null) {
+        this.$q
+          .dialog({
+            title: "Confirm",
+            message: "Are you sure GSTID is not available?",
+            ok: "Yes",
+            cancel: "No",
+          })
+          .onOk(() => {
+            this.saveCurrentChanges();
+            this.fetchMarsDeviceDetails();
+            this.$refs.stepper.next();
+          })
+          .onCancel(() => {});
+      } else {
+        this.saveCurrentChanges();
+        this.fetchMarsDeviceDetails();
+        this.$refs.stepper.next();
+      }
  } else if (step == "mdr") {
  this.v$.merchant?.mdrPlan?.$touch();
  if (this.v$.merchant?.mdrPlan?.$error) {
@@ -12726,12 +12690,12 @@ import { useVuelidate } from '@vuelidate/core';
  // this.merchant.SharingDiscountFee.diners.fixed = this.merchant.SharingDiscountFee.mVisa.fixed;
  // this.merchant.SharingDiscountFee.diners.percentage = this.merchant.SharingDiscountFee.mVisa.percentage;
  // this.merchant.SharingDiscountFee.diners.minimum = this.merchant.SharingDiscountFee.mVisa.minimum;
- this.merchant.SharingDiscountFee.diners.fixed =
- this.merchant.mdrPlan.diners.fixed;
- this.merchant.SharingDiscountFee.diners.percentage =
- this.merchant.mdrPlan.diners.percentage;
- this.merchant.SharingDiscountFee.diners.minimum =
- this.merchant.mdrPlan.diners.minimum;
+            this.merchant.SharingDiscountFee.diners.fixed =
+              this.merchant.mdrPlan.diners.fixed;
+            this.merchant.SharingDiscountFee.diners.percentage =
+              this.merchant.mdrPlan.diners.percentage;
+            this.merchant.SharingDiscountFee.diners.minimum =
+              this.merchant.mdrPlan.diners.minimum;
  // if(this.plan == 'mATM'){
  // this.merchant.incentive.percentage = this.merchant.incentive.percentage;
  // this.merchant.incentive.minimum = this.merchant.incentive.minimum;
@@ -12784,7 +12748,7 @@ import { useVuelidate } from '@vuelidate/core';
  );
  } else if (
  this.subventionBankFeeData >
- this.propLeadDeatils.recurringFees / 1.18
+ this.propLeadDeatils?.recurringFees / 1.18
  ) {
  this.$q.notify("Bank Rental should be lesser than rental amount");
  } else if (
@@ -12865,22 +12829,22 @@ import { useVuelidate } from '@vuelidate/core';
  const has = val => updated.includes(val);
  const had = val => this.tmpVasMapping.includes(val); // previously selected
 
- // === Case 1: Unselecting EMI → remove Bank EMI + Brand EMI
+ // === Case 1: Unselecting EMI     remove Bank EMI + Brand EMI
  if (had("EMI") && !has("EMI")) {
  updated = updated.filter(v => v !== "Bank EMI" && v !== "Brand EMI");
  }
 
- // === Case 2: Selecting EMI → ensure Bank EMI is selected
+ // === Case 2: Selecting EMI     ensure Bank EMI is selected
  if (has("EMI") && !has("Bank EMI")) {
  updated.push("Bank EMI");
  }
 
- // === Case 3: Selecting Bank EMI → ensure EMI is selected
+ // === Case 3: Selecting Bank EMI     ensure EMI is selected
  if (has("Bank EMI") && !has("EMI")) {
  updated.push("EMI");
  }
 
- // === Case 4: Selecting Brand EMI → ensure EMI is selected (not Bank EMI)
+ // === Case 4: Selecting Brand EMI     ensure EMI is selected (not Bank EMI)
  if (has("Brand EMI") && !has("EMI")) {
  updated.push("EMI");
  }
@@ -12895,10 +12859,10 @@ import { useVuelidate } from '@vuelidate/core';
  let self = this;
  let vasArr = [];
  let data = new Object();
- if (this.propLeadDeatils.leadSource.multiTidEnabled == true) {
+ if (this.propLeadDeatils?.leadSource?.multiTidEnabled == true) {
  let params1 = {
- leadSource: this.propLeadDeatils.leadSource.id,
- device: this.propLeadDeatils.device.id,
+ leadSource: this.propLeadDeatils?.leadSource?.id,
+ device: this.propLeadDeatils?.device?.id,
  };
  self.GET_LS_AND_DEVICE_BASED_VAS_DETAILS(params1).then((response) => {
  // if (response.status == 200) {
@@ -12922,21 +12886,21 @@ import { useVuelidate } from '@vuelidate/core';
 
  // this.vasBasedOnInstance = vasArr.map((opt) => ({
  // .opt,
- // disable: this.propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS' && opt.value !== 'UPI QR'
+ // disable: this.propLeadDeatils?.leadSource?.sourceName === 'LS_TOHANDS' && opt.value !== 'UPI QR'
  // }));
  // this.$nextTick(() => {
  // const upiExists = this.vasBasedOnInstance.some(opt => opt.value === 'UPI QR');
  // if (upiExists) {
  // this.tmpVasMapping = ['UPI QR'];
- // this.vasKey++; // ✅ Force re-render
- // console.log('✅ Auto-selected VAS:', this.tmpVasMapping);
+ // this.vasKey++; //     Force re-render
+ // console.log('    Auto-selected VAS:', this.tmpVasMapping);
  // }
  // });
- if (this.propLeadDeatils.leadSource.sourceName === "LS_TOHANDS") {
+ if (this.propLeadDeatils?.leadSource?.sourceName === "LS_TOHANDS") {
  this.vasBasedOnInstance = vasArr;
  this.vasBasedOnInstance = vasArr.map((opt) => ({ ...opt,
  disable:
- this.propLeadDeatils.leadSource.sourceName === "LS_TOHANDS" &&
+ this.propLeadDeatils?.leadSource?.sourceName === "LS_TOHANDS" &&
  opt.value !== "UPI QR",
  }));
  this.$nextTick(() => {
@@ -12945,14 +12909,14 @@ import { useVuelidate } from '@vuelidate/core';
  );
  if (upiExists) {
  this.tmpVasMapping = ["UPI QR"];
- this.vasKey++; // ✅ Force re-render
- console.log("✅ Auto-selected VAS:", this.tmpVasMapping);
+ this.vasKey++; //     Force re-render
+ console.log("    Auto-selected VAS:", this.tmpVasMapping);
  }
  });
  } else {
  this.vasBasedOnInstance = vasArr;
  }
- // if (this.propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS') {
+ // if (this.propLeadDeatils?.leadSource?.sourceName === 'LS_TOHANDS') {
  // // Disable all except UPI QR
  // vasArr.forEach(option => {
  // option.disable = option.value !== 'UPI QR';
@@ -12960,7 +12924,7 @@ import { useVuelidate } from '@vuelidate/core';
 
  // this.vasBasedOnInstance = vasArr;
 
- // // ✅ Important: Apply selection after options render
+ // //     Important: Apply selection after options render
  // this.$nextTick(() => {
  // const upiExists = this.vasBasedOnInstance.some(opt => opt.value === 'UPI QR');
  // if (upiExists) {
@@ -12975,14 +12939,14 @@ import { useVuelidate } from '@vuelidate/core';
  // // Normal flow without disabling
  // this.vasBasedOnInstance = vasArr;
  // }
- // if (this.propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS') {
+ // if (this.propLeadDeatils?.leadSource?.sourceName === 'LS_TOHANDS') {
  // vasArr.forEach(option => {
  // option.disable = option.value !== 'UPI QR';
  // });
 
  // this.vasBasedOnInstance = vasArr;
 
- // // 🛠️ Use $nextTick to ensure UI is updated before assigning selection
+ // //         Use $nextTick to ensure UI is updated before assigning selection
  // this.$nextTick(() => {
  // // Double check if 'UPI QR' is actually present in the options
  // const isUpiPresent = vasArr.some(opt => opt.value === 'UPI QR');
@@ -13107,7 +13071,7 @@ import { useVuelidate } from '@vuelidate/core';
  });
  }
  self.merchant.salesInformation.leadFrom =
- this.propLeadDeatils.leadSource.sourceName;
+ this.propLeadDeatils?.leadSource?.sourceName;
  });
  }).then(() => {
  /* API call to fetch sales person */
@@ -13216,8 +13180,8 @@ import { useVuelidate } from '@vuelidate/core';
  return true;
  }).then(() => {
  if (
- this.propLeadDeatils.marsFormSubmitAction == 1 ||
- this.propLeadDeatils.marsFormSubmitAction == 2
+ this.propLeadDeatils?.marsFormSubmitAction == 1 ||
+ this.propLeadDeatils?.marsFormSubmitAction == 2
  ) {
  return this.FETCH_SAVED_DATA_FROM_OWN_DB({
  leadId: this.$route.params.id,
@@ -13406,7 +13370,7 @@ import { useVuelidate } from '@vuelidate/core';
  this.marsSavedDataFromInternal.sharingDiscountFee;
  }
  this.merchant.companyInformation.constitution =
- this.propLeadDeatils.merchantType.marsMappingId;
+ this.propLeadDeatils?.merchantType?.marsMappingId;
  });
  } else {
  return true;
@@ -13425,15 +13389,15 @@ import { useVuelidate } from '@vuelidate/core';
 
  varaneekInstance() {
  if (
- this.propLeadDeatils.leadSource.id == 81 &&
- this.propLeadDeatils.device.id == 6
+ this.propLeadDeatils?.leadSource?.id == 81 &&
+ this.propLeadDeatils?.device?.id == 6
  ) {
  this.merchant.salesInformation.institutionCode = 106;
  }
  if (
- this.propLeadDeatils.leadSource.id == 81 &&
- this.propLeadDeatils.device.id == 6 &&
- this.propLeadDeatils.merchantCategory.merchantCategoryName == "Retail"
+ this.propLeadDeatils?.leadSource?.id == 81 &&
+ this.propLeadDeatils?.device?.id == 6 &&
+ this.propLeadDeatils?.merchantCategory?.merchantCategoryName == "Retail"
  ) {
  this.merchant.salesInformation.institutionCode = 104;
  }
@@ -13444,21 +13408,21 @@ import { useVuelidate } from '@vuelidate/core';
  if (this.propLeadDeatils?.merchantType) {
  self.merchant.kyc.documents.push({
  documentName: "Agreement",
- documentType: this.propLeadDeatils.merchantType.marsAgreementId,
+ documentType: this.propLeadDeatils?.merchantType?.marsAgreementId,
  documentImage: [
  this.GLOBAL_FILE_FETCH_URL +
  "/" +
- this.propLeadDeatils.applicationFile,
+ this.propLeadDeatils?.applicationFile,
  ],
  });
  }
 
  if (this.propLeadDeatils?.leadDocuments) {
- Object.keys(this.propLeadDeatils.leadDocuments).forEach(function (
+ Object.keys(this.propLeadDeatils?.leadDocuments).forEach(function (
  key,
  index
  ) {
- _.map(self.propLeadDeatils.leadDocuments[key], function (oo) {
+ _.map(self.propLeadDeatils?.leadDocuments[key], function (oo) {
  if (oo.uploadedDocuments && oo.uploadedDocuments.length > 0) {
  let assumeArr = [];
  _.map(oo.uploadedDocuments, function (doc) {
@@ -13478,7 +13442,7 @@ import { useVuelidate } from '@vuelidate/core';
  if (this.tmpVasMapping.length > 0) {
  let params = {
  leadInformation: {
- id: this.propLeadDeatils.id,
+ id: this.propLeadDeatils?.id,
  },
  vasList: this.tmpVasMapping.map((vas) => JSON.parse(vas)),
  };
@@ -13511,7 +13475,7 @@ import { useVuelidate } from '@vuelidate/core';
  },
  getlsVasMappingController() {
  let params = {
- id: this.propLeadDeatils.id,
+ id: this.propLeadDeatils?.id,
  };
  this.GET_LEAD_INFORMATION_VAS_MAPPING_DERTAILS(params)
  .then((response) => {
@@ -13613,7 +13577,7 @@ import { useVuelidate } from '@vuelidate/core';
  return i;
  });
  this.tmpVasMapping = items;
- if (this.propLeadDeatils.device.deviceName == "Q161_PRO_DQR") {
+ if (this.propLeadDeatils?.device && this.propLeadDeatils?.device?.deviceName === "Q161_PRO_DQR") {
  const upiOption = this.vasBasedOnInstance.find(opt => opt.label === "UPI QR");
  this.vasDisableFlag = true
  if (upiOption) {
@@ -13690,12 +13654,12 @@ import { useVuelidate } from '@vuelidate/core';
  contactEmail: finalRequest.merchant.companyInformation.contactName,
  contactMobile: finalRequest.merchant.companyInformation.contactMobile,
  contactName: finalRequest.merchant.companyInformation.contactName,
- dob: this.$moment(finalRequest.merchant.partnerInformation[0].dob).format(
+ dob: moment(finalRequest.merchant.partnerInformation[0].dob).format(
  "DD/MM/YYYY"
  ),
  contactPhone: finalRequest.merchant.companyInformation.contactMobile,
  dbaName: finalRequest.merchant.companyInformation.dbaName,
- establishYear: this.$moment(
+ establishYear: moment(
  finalRequest.merchant.companyInformation.establishYear
  ).format("DD/MM/YYYY"),
  legalName: finalRequest.merchant.companyInformation.legalName,
@@ -13753,7 +13717,7 @@ import { useVuelidate } from '@vuelidate/core';
  finalRequest.merchant.revParameters.upichargeslipEnabled,
  upiFlag: finalRequest.merchant.revParameters.upiFlag,
  cardAcceptance: finalRequest.merchant.paymentDetails.cardAcceptance,
- deviceType: this.propLeadDeatils.device.deviceName,
+ deviceType: this.propLeadDeatils?.device?.deviceName,
  smallMerchant: finalRequest.merchant.salesInformation.categoryType,
  gstNumber: finalRequest.merchant.businessInformation.gstId,
  };
@@ -13779,7 +13743,7 @@ import { useVuelidate } from '@vuelidate/core';
  });
  let key = this.merchant.salesInformation.institutionCode;
  this.$q.localStorage.set("aa_t", key);
- if (this.propLeadDeatils.leadStatus == "102") {
+ if (this.propLeadDeatils?.leadStatus == "102") {
  // let key = this.merchant.salesInformation.institutionCode;
  // this.$q.localStorage.set("aa_t", key);
  delete this.merchant.customIncentiveRates[0].add;
@@ -13793,11 +13757,11 @@ import { useVuelidate } from '@vuelidate/core';
  delete finalRequest.merchant.holdPayment;
  delete finalRequest.merchant.SharingDiscountFee;
 
- if (this.propLeadDeatils.mAtmOnboardingPlan != null) {
+ if (this.propLeadDeatils?.mAtmOnboardingPlan != null) {
  if (
- this.propLeadDeatils.mAtmOnboardingPlan.leadSource
+ this.propLeadDeatils?.mAtmOnboardingPlan?.leadSource
  .sourceName == "ATM" &&
- this.propLeadDeatils.mAtmOnboardingPlan.planName ==
+ this.propLeadDeatils?.mAtmOnboardingPlan?.planName ==
  "Kannor ATM Plan"
  ) {
  finalRequest.merchant.mdrPlan.incentive.fixed =
@@ -13847,7 +13811,7 @@ import { useVuelidate } from '@vuelidate/core';
  if (
  finalRequest.merchant.salesInformation.institutionCode ==
  "104" &&
- this.propLeadDeatils.device.id == "31"
+ this.propLeadDeatils?.device?.id == "31"
  ) {
  // alert("AXIS INSTANCE AND ME31 DEVICE CALLING")
  finalRequest.merchant.paymentDetails.terminalModeCode = "34";
@@ -13864,14 +13828,14 @@ import { useVuelidate } from '@vuelidate/core';
  self
  .MARS_DATA_SUBMIT_EXTERNAL({
  params: finalRequest,
- leadStatus: this.propLeadDeatils.leadStatus,
- refNumber: this.propLeadDeatils.merchantRefCode,
+ leadStatus: this.propLeadDeatils?.leadStatus,
+ refNumber: this.propLeadDeatils?.merchantRefCode,
  }).then((response) => {
  let feed_paramaters;
  if (response.status == 204) {
  feed_paramaters = {
- applicationNumber: this.propLeadDeatils.applicationNumber,
- merchantRefCode: this.propLeadDeatils.merchantRefCode,
+ applicationNumber: this.propLeadDeatils?.applicationNumber,
+ merchantRefCode: this.propLeadDeatils?.merchantRefCode,
  };
  } else {
  feed_paramaters = response.data;
@@ -13921,7 +13885,7 @@ import { useVuelidate } from '@vuelidate/core';
  })
  .catch((error) => {
  this.merchant.companyInformation.constitutionName =
- this.propLeadDeatils.merchantType.merchantTypeName;
+ this.propLeadDeatils?.merchantType?.merchantTypeName;
  finalRequest.merchant.salesInformation["applicationDate"] = this.commonDateFormatInvalidMARSformat(
  finalRequest.merchant.salesInformation.applicationDate
  );
@@ -14072,11 +14036,11 @@ import { useVuelidate } from '@vuelidate/core';
  delete finalRequest.merchant.holdPayment;
  delete finalRequest.merchant.SharingDiscountFee;
 
- if (this.propLeadDeatils.mAtmOnboardingPlan != null) {
+ if (this.propLeadDeatils?.mAtmOnboardingPlan != null) {
  if (
- this.propLeadDeatils.mAtmOnboardingPlan.leadSource
+ this.propLeadDeatils?.mAtmOnboardingPlan?.leadSource
  .sourceName == "ATM" &&
- this.propLeadDeatils.mAtmOnboardingPlan.planName ==
+ this.propLeadDeatils?.mAtmOnboardingPlan?.planName ==
  "Kannor ATM Plan"
  ) {
  finalRequest.merchant.mdrPlan.incentive.fixed =
@@ -14132,7 +14096,7 @@ import { useVuelidate } from '@vuelidate/core';
  if (
  finalRequest.merchant.salesInformation.institutionCode ==
  "104" &&
- this.propLeadDeatils.device.id == "31"
+ this.propLeadDeatils?.device?.id == "31"
  ) {
  // alert("AXIS INSTANCE AND ME31 DEVICE CALLING")
  finalRequest.merchant.paymentDetails.terminalModeCode =
@@ -14151,8 +14115,8 @@ import { useVuelidate } from '@vuelidate/core';
  self
  .MARS_DATA_SUBMIT_EXTERNAL({
  params: finalRequest,
- leadStatus: this.propLeadDeatils.leadStatus,
- refNumber: this.propLeadDeatils.merchantRefCode
+ leadStatus: this.propLeadDeatils?.leadStatus,
+ refNumber: this.propLeadDeatils?.merchantRefCode
  }).then(response => {
  let feed_paramaters;
  if (response.status == 204) {
@@ -14209,7 +14173,7 @@ import { useVuelidate } from '@vuelidate/core';
  });
  })
  .catch(error => {
- this.merchant.companyInformation.constitutionName = this.propLeadDeatils.merchantType.merchantTypeName;
+ this.merchant.companyInformation.constitutionName = this.propLeadDeatils?.merchantType?.merchantTypeName;
  finalRequest.merchant.salesInformation["applicationDate"] = this.commonDateFormatInvalidMARSformat(
  finalRequest.merchant.salesInformation
  .applicationDate

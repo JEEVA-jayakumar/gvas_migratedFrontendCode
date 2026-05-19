@@ -638,3 +638,6 @@
                       error.field.merchant.paymentDetails.networkPreferred
                     " />
                 </div>
+              </div>
+            </div>
+            <q-stepper-navigation>
