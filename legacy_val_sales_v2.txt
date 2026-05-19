@@ -1,0 +1,192 @@
+        salesInformation: {
+          institutionCode: {
+            required: requiredIf(function () {
+              return this.getInstitutionBank === true;
+            }),
+          },
+          applicationType: {
+            required,
+          },
+          applicationNumber: {
+            required,
+            alphaNum,
+          },
+          applicationDate: {
+            required,
+          },
+          aggreementDate: {
+            required,
+          },
+          salesPersonName: {
+            required,
+          },
+          region: {
+            required,
+          },
+          merchantType: {
+            required,
+          },
+          categoryType: {
+            required,
+          },
+
+          // leadFrom: {
+          //   required
+          // },
+          leadFrom: {
+            required: requiredIf(function () {
+              return this.getAxisBank === true;
+            }),
+          },
+          // installationBranchCode: {
+          //   required: requiredIf(function() {
+          //     return this.getAxisBank === true;
+          //   })
+          // },
+          // iaDistrict: {
+          //   required: requiredIf(function() {
+          //     return this.getAxisBank === true;
+          //   })
+          // },
+          // iaLocation: {
+          //   required: requiredIf(function() {
+          //     return this.getAxisBank === true;
+          //   })
+          // },
+          // raDistrict: {
+          //   required: requiredIf(function() {
+          //     return this.getAxisBank === true;
+          //   })
+          // },
+          // od1District: {
+          //   required: requiredIf(function() {
+          //     return this.getAxisBank === true;
+          //   })
+          // },
+          // od2District: {
+          //   required: requiredIf(function() {
+          //     return this.getAxisBank === true;
+          //   })
+          // },
+          // lorState: {
+          //   required: requiredIf(function() {
+          //     return this.getAxisBank === true;
+          //   })
+          // },
+          // iaSalutation: {
+          //   required: requiredIf(function() {
+          //     return this.getAxisBank === true;
+          //   })
+          // },
+          // iaGender: {
+          //   required: requiredIf(function() {
+          //     return this.getAxisBank === true;
+          //   })
+          // },
+          // od1Salutation: {
+          //   required: requiredIf(function() {
+          //     return this.getAxisBank === true;
+          //   })
+          // },
+          // od1Gender: {
+          //   required: requiredIf(function() {
+          //     return this.getAxisBank === true;
+          //   })
+          // },
+          // od1Salutation: {
+          //   required: requiredIf(function() {
+          //     return this.getAxisBank === true;
+          //   })
+          // },
+          // od2Gender: {
+          //   required: requiredIf(function() {
+          //     return this.getAxisBank === true;
+          //   })
+          // },
+          // od2Salutation: {
+          //   required: requiredIf(function() {
+          //     return this.getAxisBank === true;
+          //   })
+          // },
+          // od1Gender: {
+          //   required: requiredIf(function() {
+          //     return this.getAxisBank === true;
+          //   })
+          // },
+
+          sharingPartnerCode: {
+            required: requiredIf(function () {
+              return (
+                this.getTransctionValueModel === true ||
+                this.getCashAtPos === true
+              );
+            }),
+          },
+          dailyFixedAmount: {
+            required: requiredIf(function () {
+              return this.getTransctionValueModel === true;
+            }),
+            decimal,
+            minValue: minValue(0),
+            maxValue: maxValue(99999.99),
+            minLength: minLength(1),
+            maxLength: maxLength(7),
+          },
+          loanDisbursementPercentage: {
+            required: requiredIf(function () {
+              return this.getTransctionValueModel === true;
+            }),
+            decimal,
+            minValue: minValue(0),
+            maxValue: maxValue(100),
+          },
+          loanDisbursementAmount: {
+            required: requiredIf(function () {
+              return this.getTransctionValueModel === true;
+            }),
+            decimal,
+            minValue: minValue(0),
+            maxValue: maxValue(99999999.99),
+            maxLength: maxLength(10),
+            minLength: minLength(2),
+          },
+          loanDisbursementDate: {
+            required: requiredIf(function () {
+              return this.getTransctionValueModel === true;
+            }),
+          },
+          tenureMonth: {
+            required: requiredIf(function () {
+              return this.getTransctionValueModel === true;
+            }),
+            integer,
+            minValue: minValue(0),
+          },
+          tenureDay: {
+            required: requiredIf(function () {
+              return this.getTransctionValueModel === true;
+            }),
+            integer,
+            minValue: minValue(0),
+          },
+          tenureStartDate: {
+            required: requiredIf(function () {
+              return this.getTransctionValueModel === true;
+            }),
+          },
+          rentPercentage: {
+            required: requiredIf(function () {
+              return this.getCashAtPos === true;
+            }),
+            maxValue: maxValue(100),
+            decimal,
+            minValue: minValue(0),
+          },
+          rentFixed: {
+            required: requiredIf(function () {
+              return this.getCashAtPos === true;
+            }),
+            decimal,
+            minValue: minValue(0),
+          },
+        },

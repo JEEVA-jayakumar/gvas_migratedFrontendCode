@@ -1,10 +1,27 @@
+ <q-step error-icon="warning" name="fifth" :error="error.tab.paymentDetails" title="Payment"
+ subtitle="Details">
+ <div class="row q-col-gutter-sm">
+ <div class="col-md-6 col-sm-12 col-xs-12">
+ <p class="q-caption">Device Owned By</p>
+ <div class="group">
+ <q-radio @blur="v$.merchant?.paymentDetails?.deviceOwnedBy?.$touch"
+ :error="v$.merchant?.paymentDetails?.deviceOwnedBy?.$error"
+ v-for="(item, index) in deviceOwnedByOptions" :key="index" color="grey-9"
+ v-model.trim="merchant.paymentDetails.deviceOwnedBy" :val="item.value" :label="item.label" />
+ <div class="text-negative" v-if="
+ error.field.merchant?.paymentDetails?.deviceOwnedBy?.alert
+ ">
+ <MarsErrorResponse :error="error.field.merchant?.paymentDetails?.deviceOwnedBy" />
+ </div>
+ </div>
+ </div>
 
  <div class="col-md-6 col-sm-12 col-xs-12">
  <q-select map-options emit-value @blur="VasSelected" placeholder="Choose from the below" color="grey-9"
  :error="v$.merchant?.paymentDetails?.terminalModeCode?.$error"
  v-model.trim="merchant.paymentDetails.terminalModeCode" :options="terminalModelSet"
  label="Terminal Model*" />
- <!-- @update:model-value="mccbasedSelect" -->
+
  <div class="text-negative" v-if="
  error.field.merchant?.paymentDetails?.terminalModeCode?.alert
  ">
@@ -20,22 +37,20 @@
  </div>
  </div>
  <div v-if="
- merchant.salesInformation.institutionCode == 109 ||
- merchant.salesInformation.institutionCode == 104
- " class="col-md-6 col-sm-12 col-xs-12">
- <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value placeholder="Choose from the below*" color="grey-9"
- v-model.trim="merchant.paymentDetails.cardAcceptance" label="Card Acceptance"
- :options="cardAcceptanceOptions" />
- </div>
- </div>
+                  merchant.salesInformation.institutionCode == 109 ||
+                  merchant.salesInformation.institutionCode == 104
+                " class="col-md-6 col-sm-12 col-xs-12">
+                <q-select map-options emit-value placeholder="Choose from the below*" color="grey-9"
+                  v-model.trim="merchant.paymentDetails.cardAcceptance" label="Card Acceptance"
+                  :options="cardAcceptanceOptions" />
+              </div>
 
  <div class="col-md-6 col-sm-12 col-xs-12">
  <q-select map-options emit-value @blur="v$.merchant?.paymentDetails?.terminalType?.$touch"
  :error="v$.merchant.paymentDetails?.terminalType?.$error" placeholder="Choose from the below*"
  color="grey-9" v-model.trim="merchant.paymentDetails.terminalType" label="Terminal Type*"
  :options="terminalTypeOptions" />
- <!-- @update:model-value="terminalBased" -->
+
  <div class="text-negative" v-if="error.field.merchant?.paymentDetails?.terminalType?.alert">
  <MarsErrorResponse :error="error.field.merchant?.paymentDetails?.terminalType" />
  </div>
@@ -349,7 +364,7 @@
  type="text" @update:model-value="handleInput" />
 
  <div class="text-negative" v-if="
- subventionBankFeeData > propLeadDeatils.recurringFees / 1.18
+ subventionBankFeeData > propLeadDeatils?.recurringFees / 1.18
  ">
  {{ "Bank Rental should be lesser than rental amount" }}
  </div>
@@ -618,12 +633,3 @@
  @click="goBackToDocumentVerificationStage()" />
  </q-stepper-navigation>
  </q-step>
- <q-step error-icon="warning" :error="error.tab.mdrPlan || error.SharingDiscountFee" name="sixth"
- title="Discount" subtitle="Rate">
- <div class="row group items-center">
- <div v-if="v$.merchant.mdrPlan?.$anyError" class="col-md-12 text-negative">
- <q-icon color="negative" name="warning" />&nbsp; Error in MDR
- plan fields, kindly check it.
- </div>
- <div v-if="v$.merchant.SharingDiscountFee?.$anyError" class="col-md-12 text-negative">
- <q-icon color="negative" name="warning" />&nbsp; Error in

@@ -2363,3 +2363,11 @@
  </div>
  </div>
  <q-stepper-navigation>
+ <q-btn color="primary" class="q-ma-xs" icon="check" @click="validatebeforeNavigate('mdr')"
+ label="Continue" />
+ <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="previousClicked()" label="Previous" />
+ <q-btn color="amber-10" class="q-ma-xs" icon="inbox" label="Save Partial" @click="saveCurrentChanges()" />
+ <q-btn color="negative" class="q-ma-xs" icon="backspace" label="Back to document validation"
+ @click="goBackToDocumentVerificationStage()" />
+ </q-stepper-navigation>
+ </q-step>

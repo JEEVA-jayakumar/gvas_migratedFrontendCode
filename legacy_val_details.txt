@@ -1,0 +1,176 @@
+        companyInformation: {
+          legalName: {
+            required,
+            minLength: minLength(0),
+            maxLength: maxLength(60),
+            alpha,
+            // alphaNumericSpecialValidate
+          },
+          dbaName: {
+            required,
+            minLength: minLength(0),
+            maxLength: maxLength(60),
+            alphaNumericSpecialValidate,
+          },
+          smsFlag: {
+            required,
+          },
+
+          registeredAddress: {
+            required,
+            minLength: minLength(1),
+            maxLength: maxLength(120),
+          },
+          registeredPin: {
+            required,
+            minLength: minLength(6),
+            maxLength: maxLength(6),
+          },
+          registeredCityRefCode: {
+            required,
+            integer,
+          },
+          registeredCityName: {
+            required,
+          },
+          registeredStateRefCode: {
+            required,
+            integer,
+          },
+          registeredStateName: {
+            required,
+          },
+          statezone: {
+            required,
+          },
+          cityzone: {
+            required: false,
+            alpha,
+          },
+          // mcccode:{
+          //     required,
+          // },
+          constitution: {
+            required,
+          },
+          establishYear: {
+            required,
+          },
+          constitutionName: {
+            required,
+          },
+          registerNumber: {
+            required,
+            alphaNum,
+            minLength: minLength(1),
+            maxLength: maxLength(20),
+          },
+
+          mccname: {
+            required,
+          },
+          mcc: {
+            required,
+          },
+          // internationalCardAcceptance: {
+          //   required
+          // },
+          // autoormanual: {
+          //   required
+          // },
+          // tipFacility: {
+          //   required
+          // },
+          // preauthFacility: {
+          //   required
+          // },
+          // creditCardBlock: {
+          //   required
+          // },
+          // acquiringBank: {
+          //   required
+          // },
+          residentialAddress: {
+            required,
+            minLength: minLength(1),
+            maxLength: maxLength(120),
+          },
+          residentialPin: {
+            required,
+            integer,
+            minLength: minLength(6),
+            maxLength: maxLength(6),
+          },
+          residentCityName: {
+            required,
+          },
+          residentialCityRefCode: {
+            required,
+            integer,
+          },
+          residentStateName: {
+            required,
+          },
+          residentialStateRefCode: {
+            required,
+            integer,
+          },
+          pan: {
+            required,
+            panCard,
+            maxLength: maxLength(10),
+            minLength: minLength(10),
+          },
+          tin: {
+            required: false,
+            integer,
+            minLength: minLength(9),
+            maxLength: maxLength(12),
+          },
+          tan: {
+            required: false,
+            maxLength: maxLength(10),
+            minLength: minLength(10),
+            tanValidate,
+          },
+          contactName: {
+            required,
+            minLength: minLength(0),
+            maxLength: maxLength(30),
+            alphaNumericValidate,
+          },
+          contactMobile: {
+            numeric,
+            required,
+            minLength: minLength(10),
+            maxLength: maxLength(10),
+          },
+          contactAlternateMobile: {
+            numeric,
+            minLength: minLength(10),
+            maxLength: maxLength(10),
+          },
+          contactPhone: {
+            numeric,
+            required,
+            minLength: minLength(12),
+            maxLength: maxLength(12),
+          },
+          contactEmail: {
+            required,
+            email,
+          },
+          statementEmail: {
+            required,
+            //  requiredIf(function() {
+            //   return this.getStatementType === true;
+            // }),
+            email,
+          },
+          statementType: {
+            required,
+          },
+          statementFrequency: {
+            required,
+          },
+        },

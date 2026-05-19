@@ -1,9 +1,4 @@
-      //   // });
-      //     }else{
-      //       return false;
-      //     }
-      //   },
-      finalFormSubmit(request) {
+finalFormSubmit(request) {
         this.$v.merchant.$touch();
         if (this.$v.merchant.$error) {
           this.$q.notify({
@@ -699,3 +694,87 @@
                           );
 
                           this.$set(
+                            finalRequest.merchant.businessInformation,
+                            "memberSince",
+                            this.commonDateFormatInvalidMARSformat(
+                              finalRequest.merchant.businessInformation
+                                .memberSince
+                            )
+                          );
+                          this.$set(
+                            finalRequest.merchant.businessInformation,
+                            "lastTurnoverYear",
+                            this.commonDateFormatInvalidMARSformat(
+                              finalRequest.merchant.businessInformation
+                                .lastTurnoverYear
+                            )
+                          );
+
+                          if (error.data.hasOwnProperty("errorDetails")) {
+                            let OThis = this;
+                            _.map(error.data.errorDetails, actual => {
+                              let splitted = actual.field.split("/");
+                              if (
+                                splitted[1].slice(0, 18) == "partnerInformation"
+                              ) {
+                                let findPartnersErrorIndex = actual.field
+                                  .split("partnerInformation")[1]
+                                  .slice(1, 2);
+                                let computeSplitted =
+                                  splitted[splitted.length - 1];
+                                let fieldErrorFound = eval(`
+          OThis.$v.viewBinding.partnersArr.$each.$iter[
+            ${findPartnersErrorIndex}
+          ].${computeSplitted}`);
+                                fieldErrorFound.$model = "";
+                                OThis.error.tab.partnerInformation = true;
+
+                                let generateErrorMessage = eval(`
+          OThis.error.field.merchant.partnerInformation[
+            ${findPartnersErrorIndex}
+          ]`);
+                                generateErrorMessage.alert = true;
+                                generateErrorMessage.issue = actual.issue;
+                                generateErrorMessage.value = actual.value;
+                              } else {
+                                let splittingErrorField = `OThis.$v.${splitted.join(
+                                  "."
+                                )}`;
+                                let fieldErrorFound = eval(splittingErrorField);
+                                fieldErrorFound.$model = "";
+                                OThis.$set(OThis.error.tab, splitted[1], true);
+
+                                let generateErrorMessage = eval(
+                                  `OThis.error.field.${splitted.join(".")}`
+                                );
+                                generateErrorMessage.alert = true;
+                                generateErrorMessage.issue = actual.issue;
+                                generateErrorMessage.value = actual.value;
+                              }
+                            });
+                            this.$q.notify({
+                              color: "negative",
+                              position: "bottom",
+                              message: `${error.data.message}`,
+                              icon: "thumb_down"
+                            });
+                          } else {
+                            this.$q.notify({
+                              color: "negative",
+                              position: "bottom",
+                              message: `${error.data.message}`,
+                              icon: "thumb_down"
+                            });
+                          }
+                          self.$q.loading.hide();
+                        });
+                    } else {
+                    }
+                  });
+              }
+            })
+            .catch(() => {
+              self.$q.loading.hide();
+            });
+        }
+      }

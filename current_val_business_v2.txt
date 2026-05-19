@@ -1,0 +1,87 @@
+ businessInformation: {
+ gstId: {
+ // required,
+ gstn,
+ minLength: minLength(15),
+ maxLength: maxLength(15),
+ },
+ weekendEndHour: {
+ // timeValidate,
+ required,
+ },
+ weekendStartHour: {
+ // timeValidate,
+ required,
+ },
+ weekdayEndHour: {
+ // timeValidate,
+ required,
+ },
+ weekdayStartHour: {
+ // timeValidate,
+ required,
+ },
+ // BusinessHour:{
+ // required,
+ // },
+ memberSince: {
+ // Removing the validation as per client request
+ required,
+ },
+ // member:{
+ // required,
+ // },
+ currentPosName: {
+ required,
+ },
+ // debitCardMdr: {
+ // decimal,
+ // minValue: minValue(0),
+ // maxValue: maxValue(99.99)
+ // },
+ debitCardMdr: {
+ required: requiredIf(function () {
+ return this.getmpose === true;
+ }),
+ minValue: minValue(0),
+ maxValue: maxValue(99.99),
+ },
+ creditCardMdr: {
+ required: requiredIf(function () {
+ return this.getmpose === true;
+ }),
+ minValue: minValue(0),
+ maxValue: maxValue(99.99),
+ },
+ expectedCardBusiness: {
+ decimal,
+ required,
+ minValue: minValue(0),
+ maxValue: maxValue(9999999999.99),
+ },
+ averageBillAmount: {
+ decimal,
+ minValue: minValue(0),
+ maxValue: maxValue(9999999999.99),
+ },
+ lastTurnoverAmount: {
+ decimal,
+ minValue: minValue(0),
+ maxValue: maxValue(9999999999.99),
+ },
+ lastTurnoverYear: {
+ required: false,
+ },
+ maximumMonthlyUsage: {
+ decimal,
+ required,
+ minValue: minValue(0),
+ maxValue: maxValue(9999999999.99),
+ },
+ merchantTypeCode: {
+ required,
+ },
+ // currentPos:{
+ // required,
+ // },
+ },

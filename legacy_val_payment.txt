@@ -1,0 +1,185 @@
+        paymentDetails: {
+          installationFee: {
+            required: requiredIf(function () {
+              return this.getRentalTypeVisibilityForRental === true;
+            }),
+            decimal,
+            minValue: minValue(0),
+            maxValue: maxValue(999999.99),
+            minLength: minLength(1),
+            maxLength: maxLength(12),
+          },
+          rentalPlanCode: {
+            required,
+          },
+          emiStartDate: {
+            required: requiredIf(function () {
+              return this.getRentalTypeVisibilityForEmi === true;
+            }),
+          },
+          // txnEmiAllowed:{
+          // //  required,
+          // },
+          // sodexoEnabled:{
+          //      //  required,
+          // },
+          // amexEnabled:{
+          //    //  required,
+          // },
+          // intlCardACardAcceptance:{
+          //   //  required,
+          // },
+          // bqrEnabled:{
+          //   //  required,
+          // },
+          // upiFlag:{
+          //    //  required,
+          // },
+          // linkpaymentFlag:{
+          //  //  required,
+          // },
+          // matmEnabled:{
+          //   //  required,
+          // },
+          // upichargeslipEnabled:{
+          //      //  required,
+          // },
+          serviceProvider: {
+            required: true,
+          },
+          networkPreferred: {
+            required: true,
+          },
+          terminalModeCode: {
+            required,
+          },
+          terminalType: {
+            required: requiredIf(function () {
+              return this.getMpos === true;
+            }),
+          },
+
+          // devicePrice: {
+          //   decimal,
+          //   minValue: minValue(0),
+          //   maxValue: maxValue(999999.99),
+          //   minLength: minLength(1),
+          //   maxLength: maxLength(8),
+          // },
+          otherCharges: {
+            decimal,
+            minValue: minValue(0),
+            maxValue: maxValue(999999),
+            minLength: minLength(1),
+            maxLength: maxLength(8),
+          },
+          totalAmountPaid: {
+            decimal,
+            minValue: minValue(0),
+            maxValue: maxValue(999999),
+            minLength: minLength(1),
+            maxLength: maxLength(12),
+          },
+          // city: {
+          //     required: requiredIf(function() {
+          //     return this.getMpos === true;
+          //   })
+          // },
+          // states: {
+          //     required: requiredIf(function() {
+          //     return this.getMpos === true;
+          //   })
+          // },
+          // fillingTypes: {
+          //     required: requiredIf(function() {
+          //     return this.getMpos === true;
+          //   })
+          // },
+          // category: {
+          //     required: requiredIf(function() {
+          //     return this.getMpos === true;
+          //   })
+          // },
+          // subCategory:{
+          //     required: requiredIf(function() {
+          //     return this.getMpos === true;
+          //   })
+
+          // },
+
+          numberOfTerminals: {
+            numeric,
+            minValue: minValue(1),
+            maxValue: maxValue(100),
+          },
+          deviceOwnedBy: {
+            required,
+          },
+          // cashAtPosEnabled: {
+          //   required,
+          // },
+          omcEnabled: {
+            required,
+          },
+          intlCardAcceptance: {
+            required,
+          },
+          // settlementType: {
+          //   required,
+          // },
+          // tipEnabled: {
+          //   required,
+          // },
+          // preAuth: {
+          //   required,
+          // },
+          creditCardBlock: {
+            required,
+          },
+          rentalType: {
+            required,
+          },
+          advanceRentCollected: {
+            required: requiredIf(function () {
+              return this.getRentalTypeVisibilityForAdvanced === true;
+            }),
+            decimal,
+            minValue: minValue(0),
+            maxValue: maxValue(999999),
+            minLength: minLength(1),
+            maxLength: maxLength(8),
+          },
+          advanceRentMode: {
+            required: requiredIf(function () {
+              return this.getRentalTypeVisibilityForAdvanced === true;
+            }),
+          },
+          noOfMonthRentPaidInAdvance: {
+            required: requiredIf(function () {
+              return this.getRentalTypeVisibilityForAdvanced === true;
+            }),
+            minValue: minValue(0),
+            maxValue: maxValue(999999),
+            minLength: minLength(1),
+            maxLength: maxLength(8),
+          },
+          gracePeriod: {
+            required: requiredIf(function () {
+              return this.getRentalTypeVisibilityForRental === true;
+            }),
+            minValue: minValue(0),
+            maxValue: maxValue(999999),
+            minLength: minLength(1),
+            maxLength: maxLength(8),
+          },
+          totalEmiAmount: {
+            required: requiredIf(function () {
+              return this.getRentalTypeVisibilityForEmi === true;
+            }),
+          },
+          emiTenure: {
+            required: requiredIf(function () {
+              return this.getRentalTypeVisibilityForEmi === true;
+            }),
+          },
+        },

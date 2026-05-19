@@ -254,8 +254,8 @@
 
  <div class="col-md-6 col-sm-12 col-xs-12">
  <q-select map-options emit-value :class="{
- 'readonly-select': propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'
- }" :disabled="this.propLeadDeatils.leadSource.sourceName === 'LS_TOHANDS'" placeholder="Choose from the below"
+ 'readonly-select': propLeadDeatils?.leadSource?.sourceName === 'LS_TOHANDS'
+ }" :disabled="this.propLeadDeatils?.leadSource?.sourceName === 'LS_TOHANDS'" placeholder="Choose from the below"
  color="grey-9" v-model.trim="
  merchant.bankInformation.bankDetails.accountType
  " label="Account Type" :options="accountTypeOptions" />
@@ -331,7 +331,7 @@
  <div class="col-md-12">
  <div class="q-title">Payment Collection Details</div>
  </div>
- <div v-show="propLeadDeatils.paymentOption == 1" class="col-md-12">
+ <div v-show="propLeadDeatils?.paymentOption == 1" class="col-md-12">
  <div class="row">
  <div class="col-md-6 col-sm-12 col-xs-12">
  <q-input color="grey-9" @blur="
@@ -377,7 +377,7 @@
  </div>
  </div>
  </div>
- <div v-show="propLeadDeatils.paymentOption == 4" class="col-md-12">
+ <div v-show="propLeadDeatils?.paymentOption == 4" class="col-md-12">
  <div class="row">
  <div class="col-md-6 col-sm-12 col-xs-12">
  <q-input color="grey-9" @blur="
@@ -423,7 +423,7 @@
  </div>
  </div>
  </div>
- <div v-show="propLeadDeatils.paymentOption == 3" class="col-md-12">
+ <div v-show="propLeadDeatils?.paymentOption == 3" class="col-md-12">
  <div class="row">
  <div class="col-md-4 col-sm-12 col-xs-12">
  <q-input color="grey-9" @blur="
@@ -512,7 +512,7 @@
  </div>
  </div>
  </div>
- <div v-show="propLeadDeatils.paymentOption == 2" class="col-md-12">
+ <div v-show="propLeadDeatils?.paymentOption == 2" class="col-md-12">
  <div class="row">
  <div class="col-md-3 col-sm-12 col-xs-12">
  <q-input color="grey-9" @blur="
@@ -667,21 +667,3 @@
  @click="goBackToDocumentVerificationStage()" />
  </q-stepper-navigation>
  </q-step>
- <q-step error-icon="warning" :error="error.tab.revParameters" name="ten" title="Rev Param & Lead"
- subtitle="Info">
- <div class="row q-col-gutter-sm">
- <div class="col-md-6 col-sm-12 col-xs-12">
- <p class="caption">Merchant Requested Vas</p>
- <li v-for="sVas in (soSelectedVas && typeof soSelectedVas === 'string' ? soSelectedVas.split(',') : (Array.isArray(soSelectedVas) ? soSelectedVas : []))" :key="sVas">
- {{ sVas }}
- </li>
- </div>
- <!-- <div class="col-md-6 col-sm-12 col-xs-12">
- <p class="caption">Vas Based Instance*</p>
- <q-option-group inline type="checkbox" v-model.trim="tmpVasMapping"
- class="text-weight-regular text-grey-8" color="grey-9" :options="vasBasedOnInstance" />
- </div> -->
- <div class="col-md-6 col-sm-12 col-xs-12">
- <p class="caption">Vas Based Instance*</p>
- <!-- <q-option-group inline type="checkbox" v-model.trim="tmpVasMapping"
- class="text-weight-regular text-grey-8" color="grey-9" :options="vasBasedOnInstance" /> -->

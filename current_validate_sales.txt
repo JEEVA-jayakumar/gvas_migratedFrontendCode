@@ -1,0 +1,55 @@
+ validatebeforeNavigate(step) {
+ if (step == "salesInformation") {
+ this.v$.merchant?.salesInformation?.$touch();
+ if (this.v$.merchant?.salesInformation?.$error) {
+ this.$q.notify("Please review sales information fields again.");
+ } else {
+ // // TODO 1 => IOB
+ // // else 2 => AB
+ // if (this.merchant.salesInformation.institutionCode == 3) {
+ // // TODO S => Small
+ // // else O => others
+ // if (this.merchant.salesInformation.categoryType == "S") {
+ // this.merchant.mdrPlan.code = 44;
+ // } else {
+ // this.merchant.mdrPlan.code = 45;
+ // }
+ // } else {
+ // // TODO S => Small
+ // // else O => others
+ // if (this.merchant.salesInformation.categoryType == "S") {
+ // this.merchant.mdrPlan.code = 40;
+ // } else {
+ // this.merchant.mdrPlan.code = 41;
+ // }
+ // }
+ // 3 => GPRS
+ if (this.merchant.salesInformation.categoryType == "O") {
+ //for UAT
+ this.merchant.mdrPlan.code = 9;
+ // for production
+ // this.merchant.mdrPlan.code = 6;
+ } else {
+ // for UAT
+ this.merchant.mdrPlan.code = 8;
+ // for production
+ // this.merchant.mdrPlan.code = 7;
+ }
+ this.error.salesInformation = false;
+ this.saveCurrentChanges();
+ this.$refs.stepper.next();
+ }
+ } else if (step == "companyInformation") {
+ this.v$.merchant?.companyInformation?.$touch();
+ if (this.v$.merchant?.companyInformation?.$error) {
+ this.$q.notify("Please review company information fields again.");
+ } else {
+ this.error.companyInformation = false;
+ this.saveCurrentChanges();
+ this.$refs.stepper.next();
+ }
+ } else if (step == "partners") {
+ this.v$.viewBinding?.partnersArr?.$touch();
+ if (this.v$.viewBinding?.partnersArr?.$error) {
+ this.$q.notify("Please review partners fields again.");
+ } else {

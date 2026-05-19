@@ -1,0 +1,115 @@
+ bankInformation: {
+ bankDetails: {
+ ifsc: {
+ required,
+ alphaNum,
+ maxLength: maxLength(11),
+ },
+ micr: {
+ required,
+ numeric,
+ minLength: minLength(9),
+ maxLength: maxLength(9),
+ },
+ branchName: {
+ required,
+ },
+ // branchCode: {
+ // required
+ // },
+ // branchZone: {
+ // required
+ // },
+ bankName: {
+ required,
+ },
+ bankCityName: {
+ required,
+ },
+ bankCityRefCode: {
+ required,
+ numeric,
+ },
+ accountNumber: {
+ required,
+ alphaNum,
+ minLength: minLength(6),
+ maxLength: maxLength(19),
+ },
+ bankStateName: {
+ required,
+ },
+ bankStateRefCode: {
+ required,
+ numeric,
+ },
+ paymentMode: {
+ required,
+ },
+ accountType: {
+ required,
+ },
+ accountdetails: {
+ required,
+ },
+ settlementOrNeftFee: {
+ required: requiredIf(function () {
+ return this.getfeeTypeForSettlementVisibility === true;
+ }),
+ integer,
+ maxValue: maxValue(999),
+ minValue: minValue(0),
+ },
+ },
+ collectionDetails: {
+ collectedDate: {
+ required: requiredIf(function () {
+ return this.bankInfoSwipePayment === true;
+ }),
+ },
+ swipeAmount: {
+ decimal,
+ required: requiredIf(function () {
+ return this.bankInfoSwipePayment === true;
+ }),
+ minValue: minValue(0),
+ },
+ swipeTerminal: {
+ required: requiredIf(function () {
+ return this.bankInfoSwipePayment === true;
+ }),
+ },
+ chequeAmount: {
+ decimal,
+ required: requiredIf(function () {
+ return this.bankInfoChequePayment === true;
+ }),
+ minValue: minValue(0),
+ },
+ chequeNumber: {
+ alphaNum,
+ // required,
+ required: requiredIf(function () {
+ return this.bankInfoChequePayment === true;
+ }),
+ minLength: minLength(6),
+ maxLength: maxLength(25),
+ },
+ upiLink: {
+ required,
+ required: requiredIf(function () {
+ return this.bankInfoUpiLink === true;
+ }),
+ },
+ chequeDate: {
+ required: requiredIf(function () {
+ return this.bankInfoChequePayment === true;
+ }),
+ },
+ chequeDepositedDate: {
+ required: requiredIf(function () {
+ return this.bankInfoChequePayment === true;
+ }),
+ },
+ },
+ },

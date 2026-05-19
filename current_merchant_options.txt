@@ -1,0 +1,44 @@
+ {
+ label: "Individual",
+ value: "90",
+ },
+ {
+ label: "Proprietor",
+ value: "80",
+ },
+ {
+ label: "Pvt Ltd",
+ value: "70",
+ },
+ {
+ label: "Public Ltd",
+ value: "60",
+ },
+ {
+ label: "Partnership",
+ value: "61",
+ },
+ {
+ label: "Trust",
+ value: "50",
+ },
+ {
+ label: "Government",
+ value: "30",
+ },
+ {
+ label: "Society",
+ value: "40",
+ },
+ ],
+
+ merchantTypeOptions: [
+ {
+ label: "POS Merchant",
+ value: "P",
+ },
+ {
+ label: "HERMES Merchant",
+ value: "H",
+ },
+ // {
