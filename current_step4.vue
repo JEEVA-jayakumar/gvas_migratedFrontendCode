@@ -1,20 +1,3 @@
- <q-step error-icon="warning" name="fourth" :error="error.tab.businessInformation" title="Business"
- subtitle="Info">
- <div class="row q-col-gutter-sm">
- <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value color="grey-9" @blur="
- v$.merchant?.businessInformation?.weekdayStartHour?.$touch
- " :error="
- v$.merchant?.businessInformation?.weekdayStartHour?.$error
- " v-model.trim="merchant.businessInformation.weekdayStartHour"
- label="Weekday start hour (00.00)*" :options="BusinessHourFromOptions"
- placeholder="Weekday start hour" />
- <div class="text-negative" v-if="
- error.field.merchant?.businessInformation?.weekdayStartHour
- .alert
- ">
- <MarsErrorResponse :error="
- error.field.merchant?.businessInformation?.weekdayStartHour
  " />
  </div>
  </div>
@@ -255,7 +238,7 @@
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-input @update:model-value="val => { merchant.businessInformation.gstId = val.toUpperCase(); }" color="grey-9" @blur="v$.merchant.businessInformation?.gstId?.$touch"
+ <q-input color="grey-9" @blur="v$.merchant.businessInformation?.gstId?.$touch"
  :error="v$.merchant?.businessInformation?.gstId?.$error"
  v-model.trim="merchant.businessInformation.gstId" @update:model-value="val => { merchant.businessInformation.gstId = val.toUpperCase(); }"
  label="GST ID" placeholder="GST ID" />
@@ -367,3 +350,17 @@
  <q-btn color="primary" class="q-ma-xs" icon="check" @click="validatebeforeNavigate('businessInformation')"
  label="Continue" />
  <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="previousClicked()" label="Previous" />
+ <q-btn color="amber-10" class="q-ma-xs" icon="inbox" label="Save Partial" @click="saveCurrentChanges()" />
+ <q-btn color="negative" class="q-ma-xs" icon="backspace" label="Back to document validation"
+ @click="goBackToDocumentVerificationStage()" />
+ </q-stepper-navigation>
+ </q-step>
+ <q-step error-icon="warning" name="fifth" :error="error.tab.paymentDetails" title="Payment"
+ subtitle="Details">
+ <div class="row q-col-gutter-sm">
+ <div class="col-md-6 col-sm-12 col-xs-12">
+ <p class="q-caption">Device Owned By</p>
+ <div class="group">
+ <q-radio @blur="v$.merchant?.paymentDetails?.deviceOwnedBy?.$touch"
+ :error="v$.merchant?.paymentDetails?.deviceOwnedBy?.$error"
+ v-for="(item, index) in deviceOwnedByOptions" :key="index" color="grey-9"

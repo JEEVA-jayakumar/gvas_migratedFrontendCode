@@ -1,0 +1,501 @@
+ validations: {
+ revParamAndLeadInfo: {
+ bijlipaySwitch: {
+ required,
+ },
+ },
+ // terminalModel: {
+ // required
+ // },
+ merchant: {
+ salesInformation: {
+ institutionCode: {
+ required: requiredIf(function () {
+ return this.getInstitutionBank === true;
+ }),
+ },
+ applicationType: {
+ required,
+ },
+ applicationNumber: {
+ required,
+ alphaNum,
+ },
+ applicationDate: {
+ required,
+ },
+ aggreementDate: {
+ required,
+ },
+ salesPersonName: {
+ required,
+ },
+ region: {
+ required,
+ },
+ merchantType: {
+ required,
+ },
+ categoryType: {
+ required,
+ },
+
+ // leadFrom: {
+ // required
+ // },
+ leadFrom: {
+ required: requiredIf(function () {
+ return this.getAxisBank === true;
+ }),
+ },
+ // installationBranchCode: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // iaDistrict: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // iaLocation: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // raDistrict: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // od1District: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // od2District: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // lorState: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // iaSalutation: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // iaGender: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // od1Salutation: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // od1Gender: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // od1Salutation: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // od2Gender: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // od2Salutation: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // od1Gender: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+
+ sharingPartnerCode: {
+ required: requiredIf(function () {
+ return (
+ this.getTransctionValueModel === true ||
+ this.getCashAtPos === true
+ );
+ }),
+ },
+ dailyFixedAmount: {
+ required: requiredIf(function () {
+ return this.getTransctionValueModel === true;
+ }),
+ decimal,
+ minValue: minValue(0),
+ maxValue: maxValue(99999.99),
+ minLength: minLength(1),
+ maxLength: maxLength(7),
+ },
+ loanDisbursementPercentage: {
+ required: requiredIf(function () {
+ return this.getTransctionValueModel === true;
+ }),
+ decimal,
+ minValue: minValue(0),
+ maxValue: maxValue(100),
+ },
+ loanDisbursementAmount: {
+ required: requiredIf(function () {
+ return this.getTransctionValueModel === true;
+ }),
+ decimal,
+ minValue: minValue(0),
+ maxValue: maxValue(99999999.99),
+ maxLength: maxLength(10),
+ minLength: minLength(2),
+ },
+ loanDisbursementDate: {
+ required: requiredIf(function () {
+ return this.getTransctionValueModel === true;
+ }),
+ },
+ tenureMonth: {
+ required: requiredIf(function () {
+ return this.getTransctionValueModel === true;
+ }),
+ integer,
+ minValue: minValue(0),
+ },
+ tenureDay: {
+ required: requiredIf(function () {
+ return this.getTransctionValueModel === true;
+ }),
+ integer,
+ minValue: minValue(0),
+ },
+ tenureStartDate: {
+ required: requiredIf(function () {
+ return this.getTransctionValueModel === true;
+ }),
+ },
+ rentPercentage: {
+ required: requiredIf(function () {
+ return this.getCashAtPos === true;
+ }),
+ maxValue: maxValue(100),
+ decimal,
+ minValue: minValue(0),
+ },
+ rentFixed: {
+ required: requiredIf(function () {
+ return this.getCashAtPos === true;
+ }),
+ decimal,
+ minValue: minValue(0),
+ },
+ },
+ // additionalInfo: {
+ // installationBranchCode: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // iaLocation: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // iaDistrict: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // branchZone: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // raDistrict: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // od1District: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // od2District: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+
+ // ownerDOB:{
+ // required
+ // },
+ // lorState: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // iaSalutation: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // iaGender: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // od1Salutation: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // od1Gender: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // od1Salutation: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // od2Gender: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // od2Salutation: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // od1Gender: {
+ // required: requiredIf(function() {
+ // return this.getAxisBank === true;
+ // })
+ // },
+ // state:{
+ // required: requiredIf(function() {
+ // return this.getMpos === true;
+ // })
+ // },
+ // city:{
+ // required: requiredIf(function() {
+ // return this.getMpos === true;
+ // })
+
+ // },
+ // fillingType:{
+ // required: requiredIf(function() {
+ // return this.getMpos === true;
+ // })
+
+ // },
+ // category:{
+ // required: requiredIf(function() {
+ // return this.getMpos === true;
+ // })
+ // },
+ // subCategory:{
+ // required: requiredIf(function() {
+ // return this.getMpos === true;
+ // })
+
+ // }
+ // },
+ companyInformation: {
+ legalName: {
+ required,
+ minLength: minLength(0),
+ maxLength: maxLength(60),
+ alpha,
+ // alphaNumericSpecialValidate
+ },
+ dbaName: {
+ required,
+ minLength: minLength(0),
+ maxLength: maxLength(60),
+ alphaNumericSpecialValidate,
+ },
+ smsFlag: {
+ required,
+ },
+
+ registeredAddress: {
+ required,
+ minLength: minLength(1),
+ maxLength: maxLength(120),
+ },
+ registeredPin: {
+ required,
+ minLength: minLength(6),
+ maxLength: maxLength(6),
+ },
+ registeredCityRefCode: {
+ required,
+ integer,
+ },
+ registeredCityName: {
+ required,
+ },
+ registeredStateRefCode: {
+ required,
+ integer,
+ },
+ registeredStateName: {
+ required,
+ },
+ statezone: {
+ required,
+ },
+ cityzone: {
+ required: false,
+ alpha,
+ },
+ // mcccode:{
+ // required,
+ // },
+ constitution: {
+ required,
+ },
+ establishYear: {
+ required,
+ },
+ constitutionName: {
+ required,
+ },
+ registerNumber: {
+ required,
+ alphaNum,
+ minLength: minLength(1),
+ maxLength: maxLength(20),
+ },
+
+ mccname: {
+ required,
+ },
+ mcc: {
+ required,
+ },
+ // internationalCardAcceptance: {
+ // required
+ // },
+ // autoormanual: {
+ // required
+ // },
+ // tipFacility: {
+ // required
+ // },
+ // preauthFacility: {
+ // required
+ // },
+ // creditCardBlock: {
+ // required
+ // },
+ // acquiringBank: {
+ // required
+ // },
+ residentialAddress: {
+ required,
+ minLength: minLength(1),
+ maxLength: maxLength(120),
+ },
+ residentialPin: {
+ required,
+ integer,
+ minLength: minLength(6),
+ maxLength: maxLength(6),
+ },
+ residentCityName: {
+ required,
+ },
+ residentialCityRefCode: {
+ required,
+ integer,
+ },
+ residentStateName: {
+ required,
+ },
+ residentialStateRefCode: {
+ required,
+ integer,
+ },
+ pan: {
+ required,
+ panCard,
+ maxLength: maxLength(10),
+ minLength: minLength(10),
+ },
+ tin: {
+ required: false,
+ integer,
+ minLength: minLength(9),
+ maxLength: maxLength(12),
+ },
+ tan: {
+ required: false,
+ maxLength: maxLength(10),
+ minLength: minLength(10),
+ tanValidate,
+ },
+ contactName: {
+ required,
+ minLength: minLength(0),
+ maxLength: maxLength(30),
+ alphaNumericValidate,
+ },
+ contactMobile: {
+ numeric,
+ required,
+ minLength: minLength(10),
+ maxLength: maxLength(10),
+ },
+ contactAlternateMobile: {
+ numeric,
+ minLength: minLength(10),
+ maxLength: maxLength(10),
+ },
+ contactPhone: {
+ numeric,
+ required,
+ minLength: minLength(12),
+ maxLength: maxLength(12),
+ },
+ contactEmail: {
+ required,
+ email,
+ },
+ statementEmail: {
+ required,
+ // requiredIf(function() {
+ // return this.getStatementType === true;
+ // }),
+ email,
+ },
+ statementType: {
+ required,
+ },
+ statementFrequency: {
+ required,
+ },
+ },
+ businessInformation: {
+ gstId: {
+ // required,
+ gstn,
+ minLength: minLength(15),
+ maxLength: maxLength(15),
+ },
+ weekendEndHour: {
+ // timeValidate,

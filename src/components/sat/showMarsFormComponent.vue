@@ -1459,7 +1459,7 @@
  @click="goBackToDocumentVerificationStage()" />
  </q-stepper-navigation>
  </q-step>
- <q-step v-if="getPartnersVisiblity" error-icon="warning" name="third" :error="error.tab.partnerInformation" title="Partners">
+ <q-step error-icon="warning" name="third" :error="error.tab.partnerInformation" title="Partners">
  <div v-for="(v, index) in v$.viewBinding.partnersArr?.$each" :key="index" class="row q-my-xs gutter-sm"
  ref="parentElement">
  <div class="col-md-12 col-sm-12 col-xs-12">
@@ -2052,15 +2052,13 @@
  </div>
  </div>
  <div v-if="
- merchant.salesInformation.institutionCode == 109 ||
- merchant.salesInformation.institutionCode == 104
- " class="col-md-6 col-sm-12 col-xs-12">
- <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options emit-value placeholder="Choose from the below*" color="grey-9"
- v-model.trim="merchant.paymentDetails.cardAcceptance" label="Card Acceptance"
- :options="cardAcceptanceOptions" />
- </div>
- </div>
+                  merchant.salesInformation.institutionCode == 109 ||
+                  merchant.salesInformation.institutionCode == 104
+                " class="col-md-6 col-sm-12 col-xs-12">
+                <q-select map-options emit-value placeholder="Choose from the below*" color="grey-9"
+                  v-model.trim="merchant.paymentDetails.cardAcceptance" label="Card Acceptance"
+                  :options="cardAcceptanceOptions" />
+              </div>
 
  <div class="col-md-6 col-sm-12 col-xs-12">
  <q-select map-options emit-value @blur="v$.merchant?.paymentDetails?.terminalType?.$touch"
@@ -6060,7 +6058,7 @@ import { useVuelidate } from '@vuelidate/core';
  propLeadDeatils: {},
  leadId: "",
  diners: {},
- holdPayment: "",
+ holdPayment: 0,
  },
  columns: [
  {
@@ -11688,18 +11686,14 @@ import { useVuelidate } from '@vuelidate/core';
  "this.getShortLeadInfo.vasInstanceMapping --->",
  this.getShortLeadInfo?.vasInstanceMapping
  );
- if (Array.isArray(this.getShortLeadInfo?.vasInstanceMapping)) {
-
-   this.soSelectedVas = this.getShortLeadInfo.vasInstanceMapping.join(",");
-
- } else {
-
-   this.soSelectedVas = (this.getShortLeadInfo?.vasInstanceMapping || "")
- .replaceAll('"', "")
- .replace("[", "")
- .replace("]", "");
-
- }
+      if (Array.isArray(this.getShortLeadInfo?.vasInstanceMapping)) {
+        this.soSelectedVas = this.getShortLeadInfo.vasInstanceMapping.join(",");
+      } else {
+        this.soSelectedVas = (this.getShortLeadInfo?.vasInstanceMapping || "")
+          .replaceAll('"', "")
+          .replace("[", "")
+          .replace("]", "");
+      }
  this.revParamAndLeadInfo.bijlipaySwitch =
  this.propLeadDeatils?.bijlipaySwitch;
  this.merchant.companyInformation.contactMobile =
@@ -12706,7 +12700,11 @@ import { useVuelidate } from '@vuelidate/core';
  this.$refs.stepper.next();
  // }
  }).onCancel(() => { });
- } else {
+    } else {
+      this.saveCurrentChanges();
+      this.fetchMarsDeviceDetails();
+      this..stepper.next();
+    } else {
  this.saveCurrentChanges();
  this.fetchMarsDeviceDetails();
  this.$refs.stepper.next();
@@ -12726,12 +12724,12 @@ import { useVuelidate } from '@vuelidate/core';
  // this.merchant.SharingDiscountFee.diners.fixed = this.merchant.SharingDiscountFee.mVisa.fixed;
  // this.merchant.SharingDiscountFee.diners.percentage = this.merchant.SharingDiscountFee.mVisa.percentage;
  // this.merchant.SharingDiscountFee.diners.minimum = this.merchant.SharingDiscountFee.mVisa.minimum;
- this.merchant.SharingDiscountFee.diners.fixed =
- this.merchant.mdrPlan.diners.fixed;
- this.merchant.SharingDiscountFee.diners.percentage =
- this.merchant.mdrPlan.diners.percentage;
- this.merchant.SharingDiscountFee.diners.minimum =
- this.merchant.mdrPlan.diners.minimum;
+            this.merchant.SharingDiscountFee.diners.fixed =
+              this.merchant.mdrPlan.diners.fixed;
+            this.merchant.SharingDiscountFee.diners.percentage =
+              this.merchant.mdrPlan.diners.percentage;
+            this.merchant.SharingDiscountFee.diners.minimum =
+              this.merchant.mdrPlan.diners.minimum;
  // if(this.plan == 'mATM'){
  // this.merchant.incentive.percentage = this.merchant.incentive.percentage;
  // this.merchant.incentive.minimum = this.merchant.incentive.minimum;
@@ -13690,12 +13688,12 @@ import { useVuelidate } from '@vuelidate/core';
  contactEmail: finalRequest.merchant.companyInformation.contactName,
  contactMobile: finalRequest.merchant.companyInformation.contactMobile,
  contactName: finalRequest.merchant.companyInformation.contactName,
- dob: this.$moment(finalRequest.merchant.partnerInformation[0].dob).format(
+ dob: moment(finalRequest.merchant.partnerInformation[0].dob).format(
  "DD/MM/YYYY"
  ),
  contactPhone: finalRequest.merchant.companyInformation.contactMobile,
  dbaName: finalRequest.merchant.companyInformation.dbaName,
- establishYear: this.$moment(
+ establishYear: moment(
  finalRequest.merchant.companyInformation.establishYear
  ).format("DD/MM/YYYY"),
  legalName: finalRequest.merchant.companyInformation.legalName,
