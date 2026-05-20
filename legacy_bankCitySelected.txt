@@ -1,0 +1,9 @@
+      bankCitySelected(item) {
+        this.merchant.bankInformation.bankDetails.bankCityName = item.label;
+        this.merchant.bankInformation.bankDetails.bankCityRefCode = item.value;
+      },
+      /* Registered City search result */
+
+      /* Registered State search result */
+      bankStateSelected(item) {
+        this.merchant.bankInformation.bankDetails.bankStateName = item.label;

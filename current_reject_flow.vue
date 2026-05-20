@@ -1,4 +1,4 @@
-fnToggleRejectLeadComp(leadInfo) {
+    fnToggleRejectLeadComp(leadInfo) {
       this.$q.loading.show({
         delay: 0, // ms
         spinnerColor: "purple-9",
@@ -41,6 +41,3 @@ fnToggleRejectLeadComp(leadInfo) {
               ]
             });
             this.$q.loading.hide();
-          });
-      }
-    }

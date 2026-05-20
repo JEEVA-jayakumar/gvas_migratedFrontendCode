@@ -1,4 +1,4 @@
-fnApproveLeadData(leadInfo) {
+    fnApproveLeadData(leadInfo) {
       let formData = {
         leadInformation: {
           fieldName: "Full Lead Information",
@@ -61,28 +61,3 @@ fnApproveLeadData(leadInfo) {
                 });
               } else {
                 delete error.data.data.toBeVerifiedDocuments;
-                for (var key in error.data.data) {
-                  let arrayMessage = "";
-                  _.map(error.data.data[key], oo => {
-                    arrayMessage += `${oo}, `;
-                  });
-                  this.$q.notify({
-                    color: "amber-9",
-                    position: "bottom-left",
-                    message: `${error.data.message} for key`,
-                    detail: arrayMessage,
-                    timeout: 8000,
-                    icon: "warning",
-                    actions: [
-                      {
-                        icon: "clear", // optional
-                        noDismiss: false // optional, v0.15.11+
-                      }
-                    ]
-                  });
-                }
-              }
-              this.$q.loading.hide();
-            });
-        });
-    }

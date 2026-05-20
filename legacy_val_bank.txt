@@ -97,19 +97,3 @@
             },
             upiLink: {
               required,
-              required: requiredIf(function () {
-                return this.bankInfoUpiLink === true;
-              }),
-            },
-            chequeDate: {
-              required: requiredIf(function () {
-                return this.bankInfoChequePayment === true;
-              }),
-            },
-            chequeDepositedDate: {
-              required: requiredIf(function () {
-                return this.bankInfoChequePayment === true;
-              }),
-            },
-          },
-        },

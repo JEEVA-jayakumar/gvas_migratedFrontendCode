@@ -1,0 +1,17 @@
+ bankInfoSwipePayment() {
+ return this.propLeadDeatils?.paymentOption == 3 ;
+ },
+ bankInfoChequePayment() {
+ return this.propLeadDeatils?.paymentOption == 2 ;
+ },
+ bankInfoUpiLink() {
+ return this.propLeadDeatils?.paymentOption == 4 ;
+ },
+ getStatementType() {
+ return this.merchant.companyInformation.statementType == "E"
+ ;
+ },
+ getmpose() {
+ return this.merchant.businessInformation.currentPosName == "Y"
+ ;
+ },
