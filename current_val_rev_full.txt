@@ -1,62 +1,201 @@
- revParameters: {
- // basedInstance:{
+ mdrPlan: {
+ domesticDebitUpTo2000: {
+ fixed: {
+ minValue: minValue(0),
+ decimal,
+ // required
+ },
+ percentage: {
+ minValue: minValue(0),
  // required,
- // },
- // matmEnabled:{
+ maxValue: maxValue(100),
+ },
+ minimum: {
+ minValue: minValue(0),
+ decimal,
+ // required
+ },
+ },
+ // incentive: {
+ // percentage: {
+ // minValue: minValue(0),
  // required,
+ // maxValue: maxValue(100)
  // },
- // bijlipaySwitch:{
+ // minimum: {
+ // minValue: minValue(0),
  // required,
+ // maxValue: maxValue(100)
  // },
- cashAtPosEnabled: {
- required,
- },
- settlementType: {
- required,
- },
- preAuth: {
- required,
- },
- tipEnabled: {
- required,
- },
- notificationRecipient: {
- required,
- },
- saleFlag: {
- required,
- },
- // saleEnabled:{
+ // minimumTxnValue: {
+ // minValue: minValue(0),
  // required,
+ // maxValue: maxValue(100)
  // },
- // basedInstance:{
- // required,
+
  // },
- // txnEmiAllowed:{
- // // required,
- // },
- // sodexoEnabled:{
- // // required,
- // },
- // amexEnabled:{
- // // required,
- // },
- // intlCardACardAcceptance:{
- // // required,
- // },
- // bqrEnabled:{
- // // required,
- // },
- // upiFlag:{
- // // required,
- // },
- // linkpaymentFlag:{
- // // required,
- // },
- // matmEnabled:{
- // // required,
- // },
- // upichargeslipEnabled:{
- // // required,
- // },
+ domesticDebitAbove2000: {
+ fixed: {
+ minValue: minValue(0),
+ decimal,
+ // required
  },
+ percentage: {
+ minValue: minValue(0),
+ maxValue: maxValue(100),
+ decimal,
+ // required
+ },
+ minimum: {
+ minValue: minValue(0),
+ decimal,
+ // required
+ },
+ },
+ upiUpto2000: {
+ fixed: {
+ minValue: minValue(0),
+ decimal,
+ // required
+ },
+ percentage: {
+ minValue: minValue(0),
+ maxValue: maxValue(100),
+ decimal,
+ // required
+ },
+ minimum: {
+ minValue: minValue(0),
+ decimal,
+ // required
+ },
+ },
+ standardOrClassic: {
+ fixed: {
+ minValue: minValue(0),
+ decimal,
+ required,
+ },
+ percentage: {
+ minValue: minValue(0),
+ maxValue: maxValue(100),
+ decimal,
+ required,
+ },
+ minimum: {
+ minValue: minValue(0),
+ decimal,
+ required,
+ },
+ },
+ premiumOrPlatinum: {
+ fixed: {
+ minValue: minValue(0),
+ decimal,
+ required,
+ },
+ percentage: {
+ minValue: minValue(0),
+ maxValue: maxValue(100),
+ decimal,
+ required,
+ },
+ minimum: {
+ minValue: minValue(0),
+ decimal,
+ required,
+ },
+ },
+ superPremiumOrSignature: {
+ fixed: {
+ minValue: minValue(0),
+ decimal,
+ required,
+ },
+ percentage: {
+ minValue: minValue(0),
+ maxValue: maxValue(100),
+ decimal,
+ required,
+ },
+ minimum: {
+ minValue: minValue(0),
+ decimal,
+ required,
+ },
+ },
+ commercialOrCorporate: {
+ fixed: {
+ minValue: minValue(0),
+ decimal,
+ required,
+ },
+ percentage: {
+ minValue: minValue(0),
+ maxValue: maxValue(100),
+ decimal,
+ required,
+ },
+ minimum: {
+ minValue: minValue(0),
+ decimal,
+ required,
+ },
+ },
+ internationalDebitCard: {
+ fixed: {
+ minValue: minValue(0),
+ decimal,
+ required,
+ },
+ percentage: {
+ minValue: minValue(0),
+ maxValue: maxValue(100),
+ decimal,
+ required,
+ },
+ minimum: {
+ minValue: minValue(0),
+ decimal,
+ required,
+ },
+ },
+ internationalCreditCard: {
+ fixed: {
+ minValue: minValue(0),
+ decimal,
+ required,
+ },
+ percentage: {
+ minValue: minValue(0),
+ maxValue: maxValue(100),
+ decimal,
+ required,
+ },
+ minimum: {
+ minValue: minValue(0),
+ decimal,
+ required,
+ },
+ },
+ onus: {
+ fixed: {
+ minValue: minValue(0),
+ decimal,
+ required,
+ },
+ percentage: {
+ minValue: minValue(0),
+ maxValue: maxValue(100),
+ decimal,
+ required,
+ },
+ minimum: {
+ minValue: minValue(0),
+ decimal,
+ required,
+ },
+ },
+ mVisa: {
+ fixed: {
+ minValue: minValue(0),

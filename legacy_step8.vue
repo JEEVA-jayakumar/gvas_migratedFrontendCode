@@ -1,131 +1,115 @@
-          <q-step error-icon="warning" :error="error.tab.revParameters" name="ten" title="Rev Param & Lead"
-            subtitle="Info">
-            <div class="row gutter-sm">
-              <div class="col-md-6 col-sm-12 col-xs-12">
-                <p class="caption">Merchant Requested Vas</p>
-                <li v-for="sVas in soSelectedVas.split(',')" :key="sVas">
-                  {{ sVas }}
-                </li>
-              </div>
-              <!-- <div class="col-md-6 col-sm-12 col-xs-12">
-                <p class="caption">Vas Based Instance*</p>
-                <q-option-group inline type="checkbox" v-model.trim="tmpVasMapping"
-                  class="text-weight-regular text-grey-8" color="grey-9" :options="vasBasedOnInstance" />
-              </div> -->
-              <div class="col-md-6 col-sm-12 col-xs-12">
-                <p class="caption">Vas Based Instance*</p>
-                <!-- <q-option-group inline type="checkbox" v-model.trim="tmpVasMapping"
-                  class="text-weight-regular text-grey-8" color="grey-9" :options="vasBasedOnInstance" /> -->
-                <!-- <q-option-group :key="vasKey" inline type="checkbox" v-model="tmpVasMapping"
-                  :options="vasBasedOnInstance" color="grey-9" class="text-weight-regular text-grey-8" /> -->
-                <q-option-group inline type="checkbox" @input="handleVasChange" :value="tmpVasMapping"
-                  class="text-weight-regular text-grey-8" color="grey-9" :disable="vasDisableFlag"
-                  :options="vasBasedOnInstance" />
-                <!-- <q-select multiple checked type ="checkbox" v-model.trim="tmpVasMapping" :options="vasBasedOnInstance" class="text-weight-regular text-grey-8"
-              color="grey-9"  />   // v-model.trim="tmpVasMapping"   :disabled="this.vasDisable = true"-->
-              </div>
-              <!-- <div class="col-md-6 col-sm-12 col-xs-12">
-                <p class="q-caption">SMS Enable or Disable?</p>
-                <div class="group">
-                  <q-radio @blur="$v.merchant.companyInformation.smsFlag.$touch"
-                    :error="$v.merchant.companyInformation.smsFlag.$error" v-for="(item, index) in smsFlagOptions"
-                    :key="index" color="grey-9" v-model.trim="merchant.companyInformation.smsFlag" :val="item.value"
-                    :label="item.label" />
-                  <div class="text-negative" v-if="error.field.merchant.companyInformation.smsFlag.alert">
-                    <MarsErrorResponse :error="error.field.merchant.companyInformation.smsFlag" />
+          <q-step error-icon="warning" name="eight" title="KYC" subtitle="Details">
+            <div class="row items-center">
+              <div class="col-12 bottom-border q-py-md" v-for="(key, index) in Object.keys(
+                  propLeadDeatils.leadDocuments
+                )" :key="index">
+                <div class="row group items-center">
+                  <div class="col-auto">
+                    <span>{{ propLeadDeatils.revParameters }}</span>
                   </div>
-                  <div class="text-negative q-py-xs group q-caption"
-                    v-if="$v.merchant.companyInformation.smsFlag.$error">
-                    <div>
-                      <q-icon color="negative" name="warning" />&nbsp;Required
+                  <div class="col-auto">
+                    <span class="text-purple-9 text-weight-bold border-1 q-pa-sm">{{ index + 1 }}</span>
+                  </div>
+                  <div class="col-10" v-for="(item, subIndex) in propLeadDeatils.leadDocuments[
+                      key
+                    ]" :key="subIndex">
+                    <div class="row">
+                      <div class="col-4 q-body-1">Document</div>
+                      <div class="col-8 q-body-1 text-weight-bold text-negative" v-if="item.documentType == ''">
+                        NA
+                      </div>
+                      <div class="col-8 q-body-1" v-else>
+                        {{ item.documentType }}
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </div> -->
-              <div class="col-md-6 col-sm-12 col-xs-12">
-                <p class="q-caption">Notification Recipient Enabled?</p>
-                <div class="group">
-                  <q-radio @blur="
-                      $v.merchant.revParameters.notificationRecipient.$touch
-                    " :error="
-                      $v.merchant.revParameters.notificationRecipient.$error
-                    " v-for="(item, index) in edcOptions" :key="index" color="grey-9"
-                    v-model.trim="merchant.revParameters.notificationRecipient" :val="item.value" :label="item.label" />
-                  <div class="text-negative" v-if="
-                      error.field.merchant.revParameters.notificationRecipient
-                        .alert
-                    ">
-                    <MarsErrorResponse :error="
-                        error.field.merchant.revParameters.notificationRecipient
-                      " />
-                  </div>
-                  <div class="text-negative q-py-xs group q-caption" v-if="
-                      $v.merchant.revParameters.notificationRecipient.$error
-                    ">
-                    <div>
-                      <q-icon color="negative" name="warning" />&nbsp;Required
+                    <div class="row">
+                      <div class="col-4 q-body-1">Sub document</div>
+                      <div class="col-8 q-body-1 text-weight-bold text-negative" v-if="item.subDocumentType == ''">
+                        NA
+                      </div>
+                      <div class="col-8 q-body-1 text-weight-bold text-positive" v-else>
+                        {{ item.subDocumentType }}
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-12 col-xs-12">
-                <p class="q-caption">Bijlipay Switch</p>
-                <div class="group">
-                  <q-radio @blur="$v.revParamAndLeadInfo.bijlipaySwitch.$touch"
-                    :error="$v.revParamAndLeadInfo.bijlipaySwitch.$error" v-for="(item, index) in bijlipaySwitchOptions"
-                    :key="index" color="grey-9" v-model.trim="revParamAndLeadInfo.bijlipaySwitch" :val="item.value"
-                    :label="item.label" />
-                  <div class="text-negative" v-if="error.field.revParamAndLeadInfo.bijlipaySwitch.alert">
-                    <MarsErrorResponse :error="error.field.revParamAndLeadInfo.bijlipaySwitch" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-12 col-xs-12">
-                <p class="q-caption">Sale Enabled?</p>
-                <div class="group">
-                  <q-radio @blur="$v.merchant.revParameters.saleFlag.$touch"
-                    :error="$v.merchant.revParameters.saleFlag.$error" v-for="(item, index) in saleFlagOptions"
-                    :key="index" color="grey-9" v-model.trim="merchant.revParameters.saleFlag" :val="item.value"
-                    :label="item.label" />
-                  <div class="text-negative" v-if="error.field.merchant.revParameters.saleFlag.alert">
-                    <MarsErrorResponse :error="error.field.merchant.revParameters.saleFlag" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-12 col-xs-12">
-                <p class="q-caption">Tip FacilityAcceptance Enabled?</p>
-                <div class="group">
-                  <q-radio @blur="$v.merchant.revParameters.tipEnabled.$touch"
-                    :error="$v.merchant.revParameters.tipEnabled.$error" v-for="(item, index) in tipFaclityOptions"
-                    :key="index" color="grey-9" v-model.trim="merchant.revParameters.tipEnabled" :val="item.value"
-                    :label="item.label" />
-                  <div class="text-negative" v-if="error.field.merchant.revParameters.tipEnabled.alert">
-                    <MarsErrorResponse :error="error.field.merchant.revParameters.tipEnabled" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-12 col-xs-12">
-                <p class="q-caption">Auto or Manual Settlement?</p>
-                <div class="group">
-                  <q-radio @blur="$v.merchant.revParameters.settlementType.$touch"
-                    :error="$v.merchant.revParameters.settlementType.$error"
-                    v-for="(item, index) in autoormanualOptions" :key="index" color="grey-9"
-                    v-model.trim="merchant.revParameters.settlementType" :val="item.value" :label="item.label" />
-                  <div class="text-negative" v-if="
-                      error.field.merchant.revParameters.settlementType.alert
-                    ">
-                    <MarsErrorResponse :error="error.field.merchant.revParameters.settlementType" />
+                    <div class="row">
+                      <div class="col-12" v-show="item.uploadedDocuments.length > 0">
+                        <div class="q-caption" v-for="(
+                            document, documentIndex
+                          ) in item.uploadedDocuments" :key="documentIndex">
+                          {{ document.fileName }}
+                        </div>
+                      </div>
+                      <div class="q-caption" v-show="item.uploadedDocuments.length == 0">
+                        <div class="text-weight-bold text-negative">
+                          No document available
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-
+            <div class="row group q-py-md items-center">
+              <div class="col-6">
+                <q-input color="grey-9" v-model.trim="merchant.remarks" float-label="Remarks" placeholder="Remarks" />
+              </div>
+              <div class="col-6">
+                <p class="q-ma-0">Hold payment?</p>
+                <q-radio color="grey-9" v-model.trim="holdPayment" :val="1" label="Yes" />
+                <q-radio color="grey-9" v-model.trim="holdPayment" :val="0" label="No" />
+              </div>
+            </div>
             <q-stepper-navigation>
-              <q-btn color="primary" class="q-ma-xs" icon="check" @click="validatebeforeNavigate('revParameters')"
-                label="Continue" />
+              <!-- <q-btn  /> -->
+              <q-btn v-if="this.leadSourceApp.multiTidEnabled != true" color="primary" class="q-ma-xs" icon="check"
+                @click="finalFormSubmit()" label="Submit" />
+              <q-btn v-if="this.leadSourceApp.multiTidEnabled == true" color="primary" class="q-ma-xs" icon="check"
+                @click="OpenMultiTidToggle()" label="Create Base TID" />
               <q-btn color="grey-7" class="q-ma-xs" icon="block" @click="previousClicked()" label="Previous" />
               <q-btn color="amber-10" class="q-ma-xs" icon="inbox" label="Save Partial" @click="saveCurrentChanges()" />
               <q-btn color="negative" class="q-ma-xs" icon="backspace" label="Back to document validation"
                 @click="goBackToDocumentVerificationStage()" />
             </q-stepper-navigation>
           </q-step>
+        </q-stepper>
+        <multiTidComponents v-if="propTogglemultiTidComponentDetails"
+          :multiTidComponentDetails="addtnmultiTidComponentDetails" :propTogglemultiTidComponentDetails="
+            propTogglemultiTidComponentDetails
+          " />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import Vuelidate from "vuelidate";
+  import { easing } from "quasar";
+  import { LocalStorage } from "quasar";
+  import multiTidComponents from "./multiTidComponents.vue";
+  global.jQuery = require("jquery");
+  var $ = global.jQuery;
+  window.$ = $;
+
+  import {
+    required,
+    requiredIf,
+    alphaNum,
+    integer,
+    numeric,
+    minLength,
+    maxLength,
+    email,
+    maxValue,
+    minValue,
+    decimal,
+  } from "vuelidate/lib/validators";
+  Vue.use(Vuelidate);
+  import { date } from "quasar";
+  import moment from "moment";
+  import { ref } from "vue";
+  import { mapGetters, mapActions } from "vuex";
+  import { uid, filter } from "quasar";
+  import Vue from "vue";
+
+  import viewLeadDocumentsDataEntryComponent from "./viewLeadDocumentsDataEntryComponent.vue";
+  import MarsErrorResponse from "../MarsErrorResponseHandler.vue";

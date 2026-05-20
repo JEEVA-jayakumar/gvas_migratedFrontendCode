@@ -59,4 +59,3 @@
           // upichargeslipEnabled:{
           //      //  required,
           // },
-        },

@@ -666,4 +666,3 @@
  <q-btn color="negative" class="q-ma-xs" icon="backspace" label="Back to document validation"
  @click="goBackToDocumentVerificationStage()" />
  </q-stepper-navigation>
- </q-step>

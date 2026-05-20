@@ -1,0 +1,9 @@
+ bankCitySelected(item) {
+ if (item && item.label) {
+ this.merchant.bankInformation.bankDetails.bankCityName = item.label;
+ this.merchant.bankInformation.bankDetails.bankCityRefCode = item.value;
+ } else if (item && typeof item === 'string') {
+ const found = this.cityOptions.find(o => o.label === item || o.value === item);
+ if (found) {
+ this.merchant.bankInformation.bankDetails.bankCityName = found.label;
+ this.merchant.bankInformation.bankDetails.bankCityRefCode = found.value;

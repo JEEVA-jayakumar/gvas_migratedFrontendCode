@@ -1,4 +1,4 @@
-fnToggleRejectLeadComp(leadInfo) {
+    fnToggleRejectLeadComp(leadInfo) {
       this.$q.loading.show({
         delay: 0, // ms
         spinnerColor: "purple-9",
@@ -43,4 +43,10 @@ fnToggleRejectLeadComp(leadInfo) {
             this.$q.loading.hide();
           });
       }
-    }
+    },
+
+    //Function to get approved by user for payment information
+    fnGetVerifiedPerson() {
+      let sortedArr = _.orderBy(
+        this.getShortLeadInfo.leadVerificationStatus,
+        ["id"],
