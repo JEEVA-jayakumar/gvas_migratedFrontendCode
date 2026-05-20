@@ -384,11 +384,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Value should be between
  {{
- v$.merchant?.salesInformation?.dailyFixedAmount?.minValue?.$invalid?.min
+ v$.merchant?.salesInformation?.dailyFixedAmount?.minValue?.$params?.min
  }}
  and
  {{
- v$.merchant?.salesInformation?.dailyFixedAmount?.maxValue?.$invalid?.max
+ v$.merchant?.salesInformation?.dailyFixedAmount?.maxValue?.$params?.max
  }}
  </div>
  </div>
@@ -428,11 +428,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Value should be between
  {{
- v$.merchant?.salesInformation?.loanDisbursementPercentage?.minValue?.$invalid?.min
+ v$.merchant?.salesInformation?.loanDisbursementPercentage?.minValue?.$params?.min
  }}
  and
  {{
- v$.merchant?.salesInformation?.loanDisbursementPercentage?.maxValue?.$invalid?.max
+ v$.merchant?.salesInformation?.loanDisbursementPercentage?.maxValue?.$params?.max
  }}
  </div>
  </div>
@@ -469,11 +469,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Value should be between
  {{
- v$.merchant?.salesInformation?.loanDisbursementAmount?.minValue?.$invalid?.min
+ v$.merchant?.salesInformation?.loanDisbursementAmount?.minValue?.$params?.min
  }}
  and
  {{
- v$.merchant?.salesInformation?.loanDisbursementAmount?.maxValue?.$invalid?.max
+ v$.merchant?.salesInformation?.loanDisbursementAmount?.maxValue?.$params?.max
  }}
  </div>
  </div>
@@ -610,11 +610,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Value should be between
  {{
- v$.merchant?.salesInformation?.rentPercentage?.minValue?.$invalid?.min
+ v$.merchant?.salesInformation?.rentPercentage?.minValue?.$params?.min
  }}
  and
  {{
- v$.merchant?.salesInformation?.rentPercentage?.maxValue?.$invalid?.max
+ v$.merchant?.salesInformation?.rentPercentage?.maxValue?.$params?.max
  }}
  </div>
  </div>
@@ -640,11 +640,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Value should be between
  {{
- v$.merchant?.salesInformation?.rentFixed?.minValue?.$invalid?.min
+ v$.merchant?.salesInformation?.rentFixed?.minValue?.$params?.min
  }}
  and
  {{
- v$.merchant?.salesInformation?.rentFixed?.maxValue?.$invalid?.max
+ v$.merchant?.salesInformation?.rentFixed?.maxValue?.$params?.max
  }}
  </div>
  </div>
@@ -672,6 +672,14 @@
  <div class="text-negative q-py-xs group q-caption"
  v-if="v$.merchant.companyInformation.legalName?.$error">
  <div v-if="
+ !/^[a-zA-Z0-9\s]*$/.test(
+ merchant.companyInformation.legalName
+ )
+ ">
+ <q-icon color="negative" name="warning" />&nbsp;Only
+ AlphaNumeric and spaces are allowed.
+ </div>
+ <div v-if="
  v$.merchant.companyInformation.legalName?.required?.$invalid
  ">
  <q-icon color="negative" name="warning" />&nbsp;Required
@@ -683,11 +691,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant.companyInformation.legalName?.minLength?.$invalid?.min
+ v$.merchant.companyInformation.legalName?.minLength?.$params?.min
  }}
  and
  {{
- v$.merchant.companyInformation.legalName?.maxLength?.$invalid?.max
+ v$.merchant.companyInformation.legalName?.maxLength?.$params?.max
  }}
  </div>
  </div>
@@ -703,7 +711,8 @@
  <div v-if="
  v$.merchant.companyInformation.dbaName?.required?.$invalid
  ">
- <q-icon color="negative" name="warning" />&nbsp;Required
+ <q-icon color="negative" name="warning" />&nbsp;Required -
+ Only digits and alphabets are allowed
  </div>
  <div v-if="
  v$.merchant.companyInformation.dbaName?.minLength?.$invalid ||
@@ -712,11 +721,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant.companyInformation.dbaName?.minLength?.$invalid?.min
+ v$.merchant.companyInformation.dbaName?.minLength?.$params?.min
  }}
  and
  {{
- v$.merchant.companyInformation.dbaName?.maxLength?.$invalid?.max
+ v$.merchant.companyInformation.dbaName?.maxLength?.$params?.max
  }}
  </div>
  </div>
@@ -769,11 +778,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant?.companyInformation?.registeredAddress?.minLength?.$invalid?.min
+ v$.merchant?.companyInformation?.registeredAddress?.minLength?.$params?.min
  }}
  and
  {{
- v$.merchant?.companyInformation?.registeredAddress?.maxLength?.$invalid?.max
+ v$.merchant?.companyInformation?.registeredAddress?.maxLength?.$params?.max
  }}
  </div>
  </div>
@@ -909,21 +918,21 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant?.companyInformation?.registeredPin?.minLength?.$invalid?.min
+ v$.merchant?.companyInformation?.registeredPin?.minLength?.$params?.min
  }}
  and
  {{
- v$.merchant?.companyInformation?.registeredPin?.maxLength?.$invalid?.max
+ v$.merchant?.companyInformation?.registeredPin?.maxLength?.$params?.max
  }}
  </div>
  </div>
  </div>
  <div class="col-md-6 col-sm-12 col-xs-12">
- <q-select map-options @blur="v$.merchant.companyInformation?.constitutionName?.$touch" :error="
+ <q-select map-options emit-value @blur="v$.merchant.companyInformation?.constitutionName?.$touch" :error="
  v$.merchant?.companyInformation?.constitutionName?.$error
  " placeholder="Choose from the below*" color="grey-9"
- v-model="merchant.companyInformation.constitutionName" label="Type of Business Entity*"
- :options="merchantOptions" @update:model-value="val => { if (val) { merchant.companyInformation.constitution = val.value; merchant.companyInformation.constitutionName = val.label; } else { merchant.companyInformation.constitution = ''; merchant.companyInformation.constitutionName = ''; } }" />
+ v-model="merchant.companyInformation.constitution" label="Type of Business Entity*"
+ :options="merchantOptions" @update:model-value="val => { if (val) { merchant.companyInformation.constitution = val; const opt = merchantOptions.find(o => o.value === val); merchant.companyInformation.constitutionName = opt ? opt.label : ''; } else { merchant.companyInformation.constitution = ''; merchant.companyInformation.constitutionName = ''; } }" />
 
  <div class="text-negative" v-if="
  error.field.merchant?.companyInformation?.constitutionName
@@ -990,11 +999,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant?.companyInformation?.registerNumber?.minLength?.$invalid?.min
+ v$.merchant?.companyInformation?.registerNumber?.minLength?.$params?.min
  }}
  and
  {{
- v$.merchant?.companyInformation?.registerNumber?.maxLength?.$invalid?.max
+ v$.merchant?.companyInformation?.registerNumber?.maxLength?.$params?.max
  }}
  </div>
  </div>
@@ -1015,11 +1024,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant?.companyInformation?.tin?.minLength?.$invalid?.min
+ v$.merchant?.companyInformation?.tin?.minLength?.$params?.min
  }}
  and
  {{
- v$.merchant?.companyInformation?.tin?.maxLength?.$invalid?.max
+ v$.merchant?.companyInformation?.tin?.maxLength?.$params?.max
  }}
  </div>
  </div>
@@ -1041,11 +1050,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant?.companyInformation?.pan?.minLength?.$invalid?.min
+ v$.merchant?.companyInformation?.pan?.minLength?.$params?.min
  }}
  and
  {{
- v$.merchant?.companyInformation?.pan?.maxLength?.$invalid?.max
+ v$.merchant?.companyInformation?.pan?.maxLength?.$params?.max
  }}
  </div>
  </div>
@@ -1066,11 +1075,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant?.companyInformation?.tan?.minLength?.$invalid?.min
+ v$.merchant?.companyInformation?.tan?.minLength?.$params?.min
  }}
  and
  {{
- v$.merchant?.companyInformation?.tan?.maxLength?.$invalid?.max
+ v$.merchant?.companyInformation?.tan?.maxLength?.$params?.max
  }}
  </div>
  </div>
@@ -1221,7 +1230,7 @@
  <div class="col-md-6 col-sm-12 col-xs-12">
  <q-input @blur="v$.merchant.companyInformation?.contactName?.$touch"
  :error="v$.merchant.companyInformation?.contactName?.$error"
- @keypress="event => { if (!/^[a-zA-Z ]*$/.test(event.key) && event.key !== 'Backspace' && event.key !== 'Tab') event.preventDefault(); }"
+ @keypress="event => { if (!/^[a-zA-Z]*$/.test(event.key) && event.key !== 'Backspace' && event.key !== 'Tab') event.preventDefault(); }"
  color="grey-9" v-model.trim="merchant.companyInformation.contactName" label="Contact Name*"
  placeholder="Contact Name*" />
  <div class="text-negative" v-if="
@@ -1242,11 +1251,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant?.companyInformation?.contactName?.minLength?.$invalid?.min
+ v$.merchant?.companyInformation?.contactName?.minLength?.$params?.min
  }}
  and
  {{
- v$.merchant?.companyInformation?.contactName?.maxLength?.$invalid?.max
+ v$.merchant?.companyInformation?.contactName?.maxLength?.$params?.max
  }}
  </div>
  </div>
@@ -1276,11 +1285,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant?.companyInformation?.contactMobile?.minLength?.$invalid?.min
+ v$.merchant?.companyInformation?.contactMobile?.minLength?.$params?.min
  }}
  and
  {{
- v$.merchant?.companyInformation?.contactMobile?.maxLength?.$invalid?.max
+ v$.merchant?.companyInformation?.contactMobile?.maxLength?.$params?.max
  }}
  </div>
  </div>
@@ -1316,11 +1325,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant?.companyInformation?.contactAlternateMobile?.minLength?.$invalid?.min
+ v$.merchant?.companyInformation?.contactAlternateMobile?.minLength?.$params?.min
  }}
  and
  {{
- v$.merchant?.companyInformation?.contactAlternateMobile?.maxLength?.$invalid?.max
+ v$.merchant?.companyInformation?.contactAlternateMobile?.maxLength?.$params?.max
  }}
  </div>
  </div>
@@ -1350,11 +1359,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant?.companyInformation?.contactPhone?.minLength?.$invalid?.min
+ v$.merchant?.companyInformation?.contactPhone?.minLength?.$params?.min
  }}
  and
  {{
- v$.merchant?.companyInformation?.contactPhone?.maxLength?.$invalid?.max
+ v$.merchant?.companyInformation?.contactPhone?.maxLength?.$params?.max
  }}
  </div>
  </div>
@@ -1809,11 +1818,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Value should be between
  {{
- v$.merchant?.businessInformation?.lastTurnoverAmount?.minValue?.$invalid?.min
+ v$.merchant?.businessInformation?.lastTurnoverAmount?.minValue?.$params?.min
  }}
  and
  {{
- v$.merchant?.businessInformation?.lastTurnoverAmount?.maxValue?.$invalid?.max
+ v$.merchant?.businessInformation?.lastTurnoverAmount?.maxValue?.$params?.max
  }}
  </div>
  </div>
@@ -1845,11 +1854,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Value should be between
  {{
- v$.merchant?.businessInformation?.expectedCardBusiness?.minValue?.$invalid?.min
+ v$.merchant?.businessInformation?.expectedCardBusiness?.minValue?.$params?.min
  }}
  and
  {{
- v$.merchant?.businessInformation?.expectedCardBusiness?.maxValue?.$invalid?.max
+ v$.merchant?.businessInformation?.expectedCardBusiness?.maxValue?.$params?.max
  }}
  </div>
  </div>
@@ -1879,11 +1888,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Value should be between
  {{
- v$.merchant?.businessInformation?.averageBillAmount?.minValue?.$invalid?.min
+ v$.merchant?.businessInformation?.averageBillAmount?.minValue?.$params?.min
  }}
  and
  {{
- v$.merchant?.businessInformation?.averageBillAmount?.maxValue?.$invalid?.max
+ v$.merchant?.businessInformation?.averageBillAmount?.maxValue?.$params?.max
  }}
  </div>
  </div>
@@ -1907,11 +1916,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant?.businessInformation?.gstId?.minLength?.$invalid?.min
+ v$.merchant?.businessInformation?.gstId?.minLength?.$params?.min
  }}
  and
  {{
- v$.merchant?.businessInformation?.gstId?.maxLength?.$invalid?.max
+ v$.merchant?.businessInformation?.gstId?.maxLength?.$params?.max
  }}
  </div>
  </div>
@@ -1943,11 +1952,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Value should be between
  {{
- v$.merchant?.businessInformation?.debitCardMdr?.minValue?.$invalid?.min
+ v$.merchant?.businessInformation?.debitCardMdr?.minValue?.$params?.min
  }}
  and
  {{
- v$.merchant?.businessInformation?.debitCardMdr?.maxValue?.$invalid?.max
+ v$.merchant?.businessInformation?.debitCardMdr?.maxValue?.$params?.max
  }}
  </div>
  </div>
@@ -1973,11 +1982,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Value should be between
  {{
- v$.merchant?.businessInformation?.creditCardMdr?.minValue?.$invalid?.min
+ v$.merchant?.businessInformation?.creditCardMdr?.minValue?.$params?.min
  }}
  and
  {{
- v$.merchant?.businessInformation?.creditCardMdr?.maxValue?.$invalid?.max
+ v$.merchant?.businessInformation?.creditCardMdr?.maxValue?.$params?.max
  }}
  </div>
  </div>
@@ -2245,11 +2254,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Value should be between
  {{
- v$.merchant?.paymentDetails?.numberOfTerminals?.minValue?.$invalid?.min
+ v$.merchant?.paymentDetails?.numberOfTerminals?.minValue?.$params?.min
  }}
  and
  {{
- v$.merchant?.paymentDetails?.numberOfTerminals?.maxValue?.$invalid?.max
+ v$.merchant?.paymentDetails?.numberOfTerminals?.maxValue?.$params?.max
  }}
  </div>
  </div>
@@ -2322,11 +2331,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Value should be between
  {{
- v$.merchant?.paymentDetails?.installationFee?.minValue?.$invalid?.min
+ v$.merchant?.paymentDetails?.installationFee?.minValue?.$params?.min
  }}
  and
  {{
- v$.merchant?.paymentDetails?.installationFee?.maxValue?.$invalid?.max
+ v$.merchant?.paymentDetails?.installationFee?.maxValue?.$params?.max
  }}
  </div>
  </div>
@@ -2453,11 +2462,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Value should be between
  {{
- v$.merchant?.paymentDetails?.gracePeriod?.minValue?.$invalid?.min
+ v$.merchant?.paymentDetails?.gracePeriod?.minValue?.$params?.min
  }}
  and
  {{
- v$.merchant?.paymentDetails?.gracePeriod?.maxValue?.$invalid?.max
+ v$.merchant?.paymentDetails?.gracePeriod?.maxValue?.$params?.max
  }}
  </div>
  </div>
@@ -2485,11 +2494,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Value should be between
  {{
- v$.merchant?.paymentDetails?.advanceRentCollected?.minValue?.$invalid?.min
+ v$.merchant?.paymentDetails?.advanceRentCollected?.minValue?.$params?.min
  }}
  and
  {{
- v$.merchant?.paymentDetails?.advanceRentCollected?.maxValue?.$invalid?.max
+ v$.merchant?.paymentDetails?.advanceRentCollected?.maxValue?.$params?.max
  }}
  </div>
  </div>
@@ -2522,11 +2531,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Value should be between
  {{
- v$.merchant?.paymentDetails?.noOfMonthRentPaidInAdvance?.minValue?.$invalid?.min
+ v$.merchant?.paymentDetails?.noOfMonthRentPaidInAdvance?.minValue?.$params?.min
  }}
  and
  {{
- v$.merchant?.paymentDetails?.noOfMonthRentPaidInAdvance?.maxValue?.$invalid?.max
+ v$.merchant?.paymentDetails?.noOfMonthRentPaidInAdvance?.maxValue?.$params?.max
  }}
  </div>
  </div>
@@ -2568,11 +2577,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Value should be between
  {{
- v$.merchant?.paymentDetails?.otherCharges?.minValue?.$invalid?.min
+ v$.merchant?.paymentDetails?.otherCharges?.minValue?.$params?.min
  }}
  and
  {{
- v$.merchant?.paymentDetails?.otherCharges?.maxValue?.$invalid?.max
+ v$.merchant?.paymentDetails?.otherCharges?.maxValue?.$params?.max
  }}
  </div>
  </div>
@@ -2596,11 +2605,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Value should be between
  {{
- v$.merchant?.paymentDetails?.totalAmountPaid?.minValue?.$invalid?.min
+ v$.merchant?.paymentDetails?.totalAmountPaid?.minValue?.$params?.min
  }}
  and
  {{
- v$.merchant?.paymentDetails?.totalAmountPaid?.maxValue?.$invalid?.max
+ v$.merchant?.paymentDetails?.totalAmountPaid?.maxValue?.$params?.max
  }}
  </div>
  </div>
@@ -5317,11 +5326,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant?.bankInformation?.bankDetails?.accountNumber?.minLength?.$invalid?.min
+ v$.merchant?.bankInformation?.bankDetails?.accountNumber?.minLength?.$params?.min
  }}
  and
  {{
- v$.merchant?.bankInformation?.bankDetails?.accountNumber?.maxLength?.$invalid?.max
+ v$.merchant?.bankInformation?.bankDetails?.accountNumber?.maxLength?.$params?.max
  }}
  </div>
  </div>
@@ -5383,11 +5392,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant?.bankInformation?.collectionDetails?.chequeNumber?.minLength?.$invalid?.min
+ v$.merchant?.bankInformation?.collectionDetails?.chequeNumber?.minLength?.$params?.min
  }}
  and
  {{
- v$.merchant?.bankInformation?.collectionDetails?.chequeNumber?.maxLength?.$invalid?.max
+ v$.merchant?.bankInformation?.collectionDetails?.chequeNumber?.maxLength?.$params?.max
  }}
  </div>
  </div>
@@ -5429,11 +5438,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant?.bankInformation?.collectionDetails?.upiLink?.minLength?.$invalid?.min
+ v$.merchant?.bankInformation?.collectionDetails?.upiLink?.minLength?.$params?.min
  }}
  and
  {{
- v$.merchant?.bankInformation?.collectionDetails?.upiLink?.maxLength?.$invalid?.max
+ v$.merchant?.bankInformation?.collectionDetails?.upiLink?.maxLength?.$params?.max
  }}
  </div>
  </div>
@@ -5649,11 +5658,11 @@
  <q-icon color="negative" name="warning" />
  &nbsp;Length should be between
  {{
- v$.merchant?.bankInformation?.collectionDetails?.chequeNumber?.minLength?.$invalid?.min
+ v$.merchant?.bankInformation?.collectionDetails?.chequeNumber?.minLength?.$params?.min
  }}
  and
  {{
- v$.merchant?.bankInformation?.collectionDetails?.chequeNumber?.maxLength?.$invalid?.max
+ v$.merchant?.bankInformation?.collectionDetails?.chequeNumber?.maxLength?.$params?.max
  }}
  </div>
  </div>
@@ -12225,11 +12234,24 @@ import { useVuelidate } from '@vuelidate/core';
  });
  },
  partnerCitySelected(item, index) {
+ if (item && item.label) {
  this.ptCitySelected = true;
  this.v$.viewBinding.partnersArr.$each[index].cityRefCode.$model =
  item.value;
  this.v$.viewBinding.partnersArr.$each[index].cityRefLabel.$model =
  item.label;
+ } else if (item && typeof item === "string") {
+ const found = this.cityOptions.find(
+ (o) => o.label === item || o.value === item
+ );
+ if (found) {
+ this.ptCitySelected = true;
+ this.v$.viewBinding.partnersArr.$each[index].cityRefCode.$model =
+ found.value;
+ this.v$.viewBinding.partnersArr.$each[index].cityRefLabel.$model =
+ found.label;
+ }
+ }
  },
  partnerClearCity() {
  if (!this.ptCitySelected) this.cityRefLabel = "";
@@ -12241,10 +12263,22 @@ import { useVuelidate } from '@vuelidate/core';
  });
  },
  partnerStateSelected(item, index) {
+ if (item && item.label) {
  this.v$.viewBinding.partnersArr.$each[index].stateRefCode.$model =
  item.value;
  this.v$.viewBinding.partnersArr.$each[index].stateRefLabel.$model =
  item.label;
+ } else if (item && typeof item === "string") {
+ const found = this.stateOptions.find(
+ (o) => o.label === item || o.value === item
+ );
+ if (found) {
+ this.v$.viewBinding.partnersArr.$each[index].stateRefCode.$model =
+ found.value;
+ this.v$.viewBinding.partnersArr.$each[index].stateRefLabel.$model =
+ found.label;
+ }
+ }
  },
  /* MCC search result */
 
@@ -12268,8 +12302,18 @@ import { useVuelidate } from '@vuelidate/core';
  // }
  // },
  mccSelected(item) {
+ if (item && item.label) {
  this.merchant.companyInformation.mccname = item.label;
  this.merchant.companyInformation.mcc = item.value;
+ } else if (item && typeof item === "string") {
+ const found = this.mccSearchSet.find(
+ (o) => o.label === item || o.value === item
+ );
+ if (found) {
+ this.merchant.companyInformation.mccname = found.label;
+ this.merchant.companyInformation.mcc = found.value;
+ }
+ }
  // let formData = {
  // mcc_code: this.merchant.companyInformation.mcc,
  // leadsource: this.merchant.salesInformation.leadFrom
@@ -12431,14 +12475,40 @@ import { useVuelidate } from '@vuelidate/core';
 
  /* Registered City search result */
  registeredCitySelected(item) {
+ if (item && item.label) {
  this.companyRegisteredCitySelected = true;
  this.merchant.companyInformation.registeredCityName = item.label;
  this.merchant.companyInformation.registeredCityRefCode = item.value;
+ } else if (item && typeof item === "string") {
+ const found = this.cityOptions.find(
+ (o) => o.label === item || o.value === item
+ );
+ if (found) {
+ this.companyRegisteredCitySelected = true;
+ this.merchant.companyInformation.registeredCityName = found.label;
+ this.merchant.companyInformation.registeredCityRefCode = found.value;
+ }
+ }
  },
  /* Registered City search result */
  fnClrRegisteredCity() {
  if (!this.companyRegisteredCitySelected)
  this.merchant.companyInformation.registeredCityName = "";
+ },
+ fetchmarsCity(cityLabel, stateLabel) {
+ let self = this;
+ self.CITY_FROM_MARS().then(() => {
+ self.cityOptions = [];
+ self.cityFromMars.items.map((oo) => {
+ self.cityOptions.push({ label: oo.name, value: oo.code });
+ });
+ });
+ self.STATE_FROM_MARS().then(() => {
+ self.stateOptions = [];
+ self.stateFromMars.items.map((oo) => {
+ self.stateOptions.push({ label: oo.name, value: oo.code });
+ });
+ });
  },
  fninputTyping(event, type) {
  if (typeof event !== "string") return;
@@ -12461,9 +12531,20 @@ import { useVuelidate } from '@vuelidate/core';
 
  /* Registered State search result */
  registeredStateSelected(item) {
+ if (item && item.label) {
  this.companyRegisteredStateSelected = true;
  this.merchant.companyInformation.registeredStateName = item.label;
  this.merchant.companyInformation.registeredStateRefCode = item.value;
+ } else if (item && typeof item === "string") {
+ const found = this.stateOptions.find(
+ (o) => o.label === item || o.value === item
+ );
+ if (found) {
+ this.companyRegisteredStateSelected = true;
+ this.merchant.companyInformation.registeredStateName = found.label;
+ this.merchant.companyInformation.registeredStateRefCode = found.value;
+ }
+ }
  },
  /* Registered State search result */
  fnClrRegisteredState() {
@@ -13622,7 +13703,7 @@ import { useVuelidate } from '@vuelidate/core';
  const finalRequest = { action: 2, merchant: self.merchant };
 
  finalRequest.merchant.leadId = self.$route.params.id;
- finalRequest.merchant.holdPayment = finalRequest.holdPayment;
+ finalRequest.merchant.holdPayment = self.holdPayment;
  let a = { ...finalRequest.merchant.mdrPlan,
  };
  // finalRequest.merchant.mdrPlan = { ...a, diners: this.formdata};
@@ -13654,12 +13735,12 @@ import { useVuelidate } from '@vuelidate/core';
  contactEmail: finalRequest.merchant.companyInformation.contactName,
  contactMobile: finalRequest.merchant.companyInformation.contactMobile,
  contactName: finalRequest.merchant.companyInformation.contactName,
- dob: moment(finalRequest.merchant.partnerInformation[0].dob).format(
+ dob: this.$moment(finalRequest.merchant.partnerInformation[0].dob).format(
  "DD/MM/YYYY"
  ),
  contactPhone: finalRequest.merchant.companyInformation.contactMobile,
  dbaName: finalRequest.merchant.companyInformation.dbaName,
- establishYear: moment(
+ establishYear: this.$moment(
  finalRequest.merchant.companyInformation.establishYear
  ).format("DD/MM/YYYY"),
  legalName: finalRequest.merchant.companyInformation.legalName,
@@ -14306,7 +14387,7 @@ import { useVuelidate } from '@vuelidate/core';
  return this.$moment(selectedDate).format("DD/MM/YYYY");
 
  // if(selectedDate instanceof number){
- // return moment(selectedDate).format("DD/MM/YYYY");
+ // return this.$moment(selectedDate).format("DD/MM/YYYY");
  // }
  // else{
  // return selectedDate;
